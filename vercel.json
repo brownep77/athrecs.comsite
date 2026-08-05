@@ -3,5 +3,7 @@
   "framework": null,
   "installCommand": "npm install",
   "buildCommand": "npm run build",
-  "regions": ["lhr1"]
+  "regions": [
+    "lhr1"
+  ]
 }
