@@ -15,8 +15,13 @@ dist
 /tmp-build
 *.log
 .pglite
-data
+# local/ephemeral only — do NOT ignore src/data (catalogue lives there)
+/data
 screenshots
 artifacts
 .grok
 vendor
+athrecs-github-ready.tar.gz
+.node_modules.lock
+.project_id
+attachments
