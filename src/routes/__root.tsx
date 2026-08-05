@@ -17,11 +17,11 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
-      { title: "Athrecs — Norfolk events, athletes & clubs" },
+      { title: "ATHRECS.com — Holding · Norfolk pilot" },
       {
         name: "description",
         content:
-          "Norfolk endurance & athletics directory: running, track & field, cycling, swimming, multi-sport, rowing and OCR — plus athletes and clubs.",
+          "ATHRECS.com holding site: Norfolk pilot for endurance events, athletes, clubs and published race results. Growing toward a wider UK directory.",
       },
       { name: "theme-color", content: "#f4f7f7" },
     ],

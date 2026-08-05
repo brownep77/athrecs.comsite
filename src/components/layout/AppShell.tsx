@@ -76,9 +76,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           >
             <BrandLogo priority className="h-9" />
             <span className="hidden border-l border-border pl-3 text-[11px] leading-tight text-subtle lg:block">
-              Norfolk
+              Holding
               <br />
-              Events · Athletes · Clubs
+              Norfolk pilot
             </span>
           </Link>
           <nav className="flex items-center gap-0.5">
