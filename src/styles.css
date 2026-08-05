@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Palette aligned to ATHRECS.com wordmark: charcoal + teal on clean white */
+@theme {
+  --color-bg: #f4f7f7;
+  --color-surface: #ffffff;
+  --color-elevated: #e8eef0;
+  --color-fg: #2d3439;
+  --color-muted: #5a6369;
+  --color-subtle: #8a9499;
+  --color-border: #d5dde0;
+  --color-border-strong: #b3bec4;
+  --color-primary: #0cab95;
+  --color-primary-fg: #ffffff;
+  --color-accent: #0cab95;
+  --color-accent-soft: #d4f3ed;
+  --color-warning: #b45309;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --shadow-card: 0 1px 2px rgb(45 52 57 / 0.04), 0 4px 16px rgb(45 52 57 / 0.06);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    line-height: 1.5;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility safe-pt {
+  padding-top: env(safe-area-inset-top, 0);
+}
+@utility safe-pb {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+@utility shadow-card {
+  box-shadow: var(--shadow-card);
+}
