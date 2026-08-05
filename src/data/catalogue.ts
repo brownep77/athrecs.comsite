@@ -220,6 +220,28 @@ export const clubs: ClubSeed[] = [
     sports: ["Running"],
     summary: "Waveney valley club racing across Norfolk and Suffolk.",
   },
+
+  {
+    slug: "reepham-runners",
+    name: "Reepham Runners",
+    city: "Reepham",
+    sports: ["Running"],
+    summary: "Mid-Norfolk club — Reepham Summer 10K and local road races.",
+  },
+  {
+    slug: "runners-next-the-sea",
+    name: "Runners-Next-the-Sea",
+    city: "Wells-next-the-Sea",
+    sports: ["Running"],
+    summary: "North Norfolk coastal club.",
+  },
+  {
+    slug: "dereham-runners",
+    name: "Dereham Runners AC",
+    city: "Dereham",
+    sports: ["Running"],
+    summary: "Mid-Norfolk road running club.",
+  },
 ];
 
 export type ResultSeed = {
@@ -270,6 +292,25 @@ export const athletes: AthleteSeed[] = [
   { slug: "violet-brooke", display_name: "Violet Brooke", gender: "F", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — Norfolk XC U17 women winner 2026." },
   { slug: "esme-jonas", display_name: "Esme Jonas", gender: "F", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — Norfolk XC U20 women winner 2026." },
   { slug: "jo-andrews", display_name: "Jo Andrews", gender: "F", club_slug: "bungay-black-dog", city: "Bungay", bio: "Bungay Black Dog RC — Wroxham 5K 2026 (TRT)." },
+
+  { slug: "joe-skipper", display_name: "Joe Skipper", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "Pro triathlete — Worstead 5 2026 2nd (TRT). Club listing may vary by race." },
+  { slug: "michael-eccles", display_name: "Michael Eccles", gender: "M", club_slug: "bure-valley-harriers", city: "Aylsham", bio: "Bure Valley Harriers M45 — Worstead 5 2026 (TRT)." },
+  { slug: "james-jarmy", display_name: "James Jarmy", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — Worstead 5 & Wymondham 20 2026 (TRT)." },
+  { slug: "laurence-rouse", display_name: "Laurence Rouse", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — Holt 10K & EPIC Aylsham 2026 (TRT)." },
+  { slug: "corben-reynolds", display_name: "Corben Reynolds", gender: "M", club_slug: "great-yarmouth-ac", city: "Great Yarmouth", bio: "Great Yarmouth & District AC — GY Prom 5, Holt 10K, Wymondham 20 (TRT)." },
+  { slug: "daniel-smith", display_name: "Daniel Smith", gender: "M", club_slug: "coltishall-jaguars", city: "Coltishall", bio: "Coltishall Jaguars RC M40 — Aylsham 10K, Holt 10K, Wymondham 20 (TRT)." },
+  { slug: "harry-allcock", display_name: "Harry Allcock", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — Reepham Summer 10K 2026 winner (TRT)." },
+  { slug: "steven-cannell", display_name: "Steven Cannell", gender: "M", club_slug: "norwich-road-runners", city: "Norwich", bio: "Norwich Road Runners — Reepham 10K, Trowse 10K, Worstead 5 (TRT)." },
+  { slug: "alex-griffiths", display_name: "Alex Griffiths", gender: "M", club_slug: "norwich-road-runners", city: "Norwich", bio: "Norwich Road Runners — Worstead 5 & Reepham Summer 10K 2026." },
+  { slug: "billy-life", display_name: "Billy Life", gender: "M", club_slug: "coltishall-jaguars", city: "Coltishall", bio: "Coltishall Jaguars — Aylsham 10K & EPIC Aylsham 5K 2026." },
+  { slug: "jonah-life", display_name: "Jonah Life", gender: "M", club_slug: "north-norfolk-harriers", city: "Cromer", bio: "North Norfolk Harriers — Aylsham 10K & EPIC Aylsham 2026." },
+  { slug: "louise-mcdonnell", display_name: "Louise McDonnell", gender: "F", club_slug: "wymondham-ac", city: "Wymondham", bio: "Wymondham AC — Worstead 5 & Holt 10K 2026 (TRT)." },
+  { slug: "dawn-robinson", display_name: "Dawn Robinson", gender: "F", club_slug: "ryston-runners", city: "Downham Market", bio: "Ryston Runners — first woman Wymondham AC 20 2026 (TRT)." },
+  { slug: "heidi-bacon", display_name: "Heidi Bacon", gender: "F", club_slug: "tri-anglia", city: "Norwich", bio: "Tri-Anglia — first woman Mike Groves 10K 2026 (TRT)." },
+  { slug: "art-tonge", display_name: "Art Tonge", gender: "M", club_slug: "norwich-road-runners", city: "Norwich", bio: "Norwich Road Runners — Holt 10K & Trowse 10K 2026." },
+  { slug: "ashley-gilbert", display_name: "Ashley Gilbert", gender: "M", club_slug: "dereham-runners", city: "Dereham", bio: "Dereham Runners — Norfolk Marathon 2026 4th (TRT)." },
+  { slug: "tim-mardall", display_name: "Tim Mardall", gender: "M", club_slug: "runners-next-the-sea", city: "Wells-next-the-Sea", bio: "Runners-Next-the-Sea M55 — Aylsham 10K & Wymondham 20 2026." },
+  { slug: "dominic-blake", display_name: "Dominic Blake", gender: "M", club_slug: "reepham-runners", city: "Reepham", bio: "Reepham Runners — Worstead 5 2026 (TRT)." },
 ];
 
 /** Verified finish lines from Total Race Timing public result pages. */
@@ -331,12 +372,122 @@ export const results: ResultSeed[] = [
   { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "steven-bacon", place: 6, time: "34:00.9", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/654" },
   { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "neil-adams", place: 7, time: "34:09.8", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/654" },
   { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "jack-stuttle", place: 13, time: "36:15.9", category: "M35-39", source: "https://totalracetiming.co.uk/raceresults/654" },
-  // Juniors same day (recorded as XC distance)
+
+  // Worstead 5 — 24 Jul 2026 — https://totalracetiming.co.uk/raceresults/698
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "danny-adams", place: 1, time: "25:20.3", category: "MO", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "joe-skipper", place: 2, time: "25:52.5", category: "MO", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "james-senior", place: 3, time: "26:11.0", category: "MO", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "michael-eccles", place: 5, time: "27:27.9", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "dominic-blake", place: 6, time: "27:29.2", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "steven-cannell", place: 7, time: "27:32.9", category: "MO", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "james-jarmy", place: 8, time: "27:36.3", category: "MO", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "oliver-boyce", place: 9, time: "27:41.1", category: "MU18", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "john-hudson", place: 10, time: "28:01.2", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "alex-griffiths", place: 12, time: "28:06.3", category: "MO", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "leanne-finch", place: 20, time: "29:39.5", category: "FO", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "harriet-carr", place: 35, time: "31:14.8", category: "F40-44", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { eventSlug: "worstead-5", date: "2026-07-24", distance: "5mi", athleteSlug: "louise-mcdonnell", place: 40, time: "31:45.4", category: "F45-49", source: "https://totalracetiming.co.uk/raceresults/698" },
+
+  // NNBR Holt 10K — 24 May 2026 — https://totalracetiming.co.uk/raceresults/675
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "logan-smith", place: 1, time: "32:44.4", category: "MO", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "laurence-rouse", place: 2, time: "34:58.3", category: "MO", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "neil-adams", place: 3, time: "35:02.5", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "corben-reynolds", place: 4, time: "35:17.6", category: "MO", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "john-hudson", place: 5, time: "36:09.1", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "george-howard", place: 7, time: "37:02.4", category: "MJ", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "simon-cook", place: 8, time: "37:16.4", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "daniel-smith", place: 11, time: "37:30.0", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "art-tonge", place: 12, time: "37:38.3", category: "MO", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "louise-mcdonnell", place: 43, time: "41:51.3", category: "F45-49", source: "https://totalracetiming.co.uk/raceresults/675" },
+
+  // Aylsham 10K — 10 May 2026 — https://totalracetiming.co.uk/raceresults/658
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "oliver-boyce", place: 1, time: "33:58.0", category: "MO", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "george-howard", place: 2, time: "34:23.7", category: "MO", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "kyle-brooks", place: 4, time: "35:04.1", category: "MO", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "daniel-smith", place: 5, time: "35:21.2", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "jonah-life", place: 6, time: "35:48.7", category: "MO", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "tim-mardall", place: 7, time: "35:50.6", category: "M55-59", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "simon-cook", place: 8, time: "35:58.7", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "billy-life", place: 9, time: "36:11.2", category: "MO", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { eventSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", athleteSlug: "grace-buchanan", place: 20, time: "37:27.1", category: "FO", source: "https://totalracetiming.co.uk/raceresults/658" },
+
+  // Wymondham AC 20 — 22 Mar 2026 — https://totalracetiming.co.uk/raceresults/661
+  { eventSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", athleteSlug: "martyn-bath", place: 1, time: "1:50:15.4", category: "MS", source: "https://totalracetiming.co.uk/raceresults/661" },
+  { eventSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", athleteSlug: "james-senior", place: 3, time: "1:51:56.0", category: "MS", source: "https://totalracetiming.co.uk/raceresults/661" },
+  { eventSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", athleteSlug: "kyle-brooks", place: 4, time: "1:53:27.6", category: "MS", source: "https://totalracetiming.co.uk/raceresults/661" },
+  { eventSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", athleteSlug: "tim-mardall", place: 7, time: "1:59:22.0", category: "M55-59", source: "https://totalracetiming.co.uk/raceresults/661" },
+  { eventSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", athleteSlug: "daniel-smith", place: 8, time: "1:59:27.1", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/661" },
+  { eventSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", athleteSlug: "james-jarmy", place: 10, time: "2:01:58.3", category: "MS", source: "https://totalracetiming.co.uk/raceresults/661" },
+  { eventSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", athleteSlug: "corben-reynolds", place: 12, time: "2:02:45.9", category: "MS", source: "https://totalracetiming.co.uk/raceresults/661" },
+  { eventSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", athleteSlug: "dawn-robinson", place: 50, time: "2:16:05.0", category: "FS", source: "https://totalracetiming.co.uk/raceresults/661" },
+
+  // Mike Groves 10K — 8 Mar 2026 — https://totalracetiming.co.uk/raceresults/662
+  { eventSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", athleteSlug: "william-cork", place: 1, time: "31:56.7", category: "M18-39", source: "https://totalracetiming.co.uk/raceresults/662" },
+  { eventSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", athleteSlug: "james-senior", place: 2, time: "32:13.5", category: "M18-39", source: "https://totalracetiming.co.uk/raceresults/662" },
+  { eventSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", athleteSlug: "kyle-brooks", place: 3, time: "32:40.9", category: "M18-39", source: "https://totalracetiming.co.uk/raceresults/662" },
+  { eventSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", athleteSlug: "laurence-rouse", place: 5, time: "33:58.0", category: "M18-39", source: "https://totalracetiming.co.uk/raceresults/662" },
+  { eventSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", athleteSlug: "neil-adams", place: 7, time: "34:36.1", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/662" },
+  { eventSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", athleteSlug: "john-hudson", place: 8, time: "34:45.3", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/662" },
+  { eventSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", athleteSlug: "heidi-bacon", place: 80, time: "43:11.0", category: "F40-44", source: "https://totalracetiming.co.uk/raceresults/662" },
+
+  // EPIC Aylsham 5K — 5 Jun 2026 — https://totalracetiming.co.uk/raceresults/665
+  { eventSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", athleteSlug: "william-cork", place: 1, time: "15:17.7", category: "MO", source: "https://totalracetiming.co.uk/raceresults/665" },
+  { eventSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", athleteSlug: "george-gay", place: 2, time: "16:01.0", category: "MO", source: "https://totalracetiming.co.uk/raceresults/665" },
+  { eventSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", athleteSlug: "oliver-boyce", place: 3, time: "16:18.3", category: "MO", source: "https://totalracetiming.co.uk/raceresults/665" },
+  { eventSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", athleteSlug: "laurence-rouse", place: 4, time: "16:26.3", category: "MO", source: "https://totalracetiming.co.uk/raceresults/665" },
+  { eventSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", athleteSlug: "jonah-life", place: 7, time: "16:48.2", category: "MO", source: "https://totalracetiming.co.uk/raceresults/665" },
+  { eventSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", athleteSlug: "jack-stuttle", place: 8, time: "16:50.1", category: "MO", source: "https://totalracetiming.co.uk/raceresults/665" },
+  { eventSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", athleteSlug: "billy-life", place: 10, time: "17:12.1", category: "MO", source: "https://totalracetiming.co.uk/raceresults/665" },
+  { eventSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", athleteSlug: "grace-buchanan", place: 25, time: "18:19.3", category: "FO", source: "https://totalracetiming.co.uk/raceresults/665" },
+
+  // Reepham Summer 10K — 17 Jul 2026 — https://totalracetiming.co.uk/raceresults/697
+  { eventSlug: "reepham-summer-10k", date: "2026-07-17", distance: "10K", athleteSlug: "harry-allcock", place: 1, time: "32:37.5", category: "MO", source: "https://totalracetiming.co.uk/raceresults/697" },
+  { eventSlug: "reepham-summer-10k", date: "2026-07-17", distance: "10K", athleteSlug: "steven-cannell", place: 2, time: "35:01.7", category: "MO", source: "https://totalracetiming.co.uk/raceresults/697" },
+  { eventSlug: "reepham-summer-10k", date: "2026-07-17", distance: "10K", athleteSlug: "alex-griffiths", place: 4, time: "35:50.0", category: "MO", source: "https://totalracetiming.co.uk/raceresults/697" },
+  { eventSlug: "reepham-summer-10k", date: "2026-07-17", distance: "10K", athleteSlug: "leanne-finch", place: 8, time: "37:27.5", category: "FO", source: "https://totalracetiming.co.uk/raceresults/697" },
+
+  // Trowse 10K — 15 Mar 2026 — https://totalracetiming.co.uk/raceresults/663
+  { eventSlug: "trowse-10k", date: "2026-03-15", distance: "10K", athleteSlug: "steven-cannell", place: 3, time: "34:27.0", category: "MO", source: "https://totalracetiming.co.uk/raceresults/663" },
+  { eventSlug: "trowse-10k", date: "2026-03-15", distance: "10K", athleteSlug: "art-tonge", place: 6, time: "36:07.2", category: "MO", source: "https://totalracetiming.co.uk/raceresults/663" },
+  { eventSlug: "trowse-10k", date: "2026-03-15", distance: "10K", athleteSlug: "leanne-finch", place: 11, time: "36:44.8", category: "FO", source: "https://totalracetiming.co.uk/raceresults/663" },
+
+  // Norfolk Marathon — 19 Apr 2026 — https://totalracetiming.co.uk/raceresults/645
+  { eventSlug: "norfolk-marathon-half", date: "2026-04-19", distance: "Marathon", athleteSlug: "john-hudson", place: 2, time: "2:47:44.2", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/645" },
+  { eventSlug: "norfolk-marathon-half", date: "2026-04-19", distance: "Marathon", athleteSlug: "ashley-gilbert", place: 4, time: "2:51:44.8", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/645" },
 ];
 
 
 export const seriesList: Series[] = [
   // —— Running ——
+  {
+    slug: "trowse-10k",
+    name: "Trowse 10K",
+    sport: "Running",
+    city: "Trowse",
+    area: "South Norwich",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Popular Norwich-area 10K on closed/quiet roads around Trowse.",
+    description: "Chip-timed 10K. Results: Total Race Timing.",
+    organiser: "Local / TRT",
+    website: "https://totalracetiming.co.uk/raceresults/663",
+    featured: false,
+  },
+  {
+    slug: "reepham-summer-10k",
+    name: "Reepham Summer 10K",
+    sport: "Running",
+    city: "Reepham",
+    area: "Mid Norfolk",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Mid-summer 10K in Reepham — local club favourite.",
+    description: "Results published by Total Race Timing.",
+    organiser: "Reepham Runners",
+    website: "https://totalracetiming.co.uk/raceresults/697",
+    featured: false,
+  },
+
   {
     slug: "larking-gowen-norwich-half",
     name: "Larking Gowen Norwich Half Marathon",
@@ -1593,17 +1744,21 @@ export const seriesList: Series[] = [
 
 /** Real-world-aligned editions (Sportlink GP, BT, NCE, VC Norwich, EPIC, Outlaw, etc.). */
 export const editions: Edition[] = [
+  { seriesSlug: "trowse-10k", date: "2026-03-15", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/663" },
+  { seriesSlug: "reepham-summer-10k", date: "2026-07-17", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/697" },
+  { seriesSlug: "epic-aylsham-5k", date: "2026-06-05", distance: "5K", distanceKm: 5, status: "Finished", startTime: "19:00", source: "https://totalracetiming.co.uk/raceresults/665" },
+  { seriesSlug: "spring-blickling-half", date: "2026-03-29", distance: "Half", distanceKm: 21.1, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/653" },
   // —— Sportlink Grand Prix 2026 (https://www.sportlinkgp.run/sportlink-grand-prix-series-2026) ——
   { seriesSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", distanceKm: 16.1, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/643" },
-  { seriesSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/race/662" },
-  { seriesSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", distanceKm: 32.2, status: "Finished", source: "https://totalracetiming.co.uk/race/661" },
+  { seriesSlug: "mike-groves-10k", date: "2026-03-08", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/662" },
+  { seriesSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", distanceKm: 32.2, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/661" },
   { seriesSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", distanceKm: 8.05, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/681" },
   { seriesSlug: "breckland-10k", date: "2026-05-04", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/674" },
-  { seriesSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/race/658" },
+  { seriesSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/658" },
   { seriesSlug: "fighter-5k", date: "2026-05-17", distance: "5K", distanceKm: 5, status: "Finished", source: "https://totalracetiming.co.uk/race/644" },
-  { seriesSlug: "holt-10k", date: "2026-05-24", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/race/675" },
+  { seriesSlug: "holt-10k", date: "2026-05-24", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/675" },
   { seriesSlug: "humpty-dumpty-10k", date: "2026-06-07", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/race/676" },
-  { seriesSlug: "worstead-5", date: "2026-07-24", distance: "5mi", distanceKm: 8.05, status: "Finished", source: "https://totalracetiming.co.uk/race/698" },
+  { seriesSlug: "worstead-5", date: "2026-07-24", distance: "5mi", distanceKm: 8.05, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/698" },
   { seriesSlug: "great-yarmouth-half", date: "2026-08-09", distance: "Half", distanceKm: 21.1, status: "Closed", startTime: "09:30", entryUrl: "https://totalracetiming.co.uk/race/699", source: "https://www.sportlinkgp.run/sportlink-grand-prix-series-2026" },
   { seriesSlug: "dereham-10-mile", date: "2026-08-23", distance: "10mi", distanceKm: 16.1, status: "Open", startTime: "09:30", entryUrl: "https://totalracetiming.co.uk/race/685", source: "https://www.sportlinkgp.run/sportlink-grand-prix-series-2026" },
 
@@ -1613,8 +1768,8 @@ export const editions: Edition[] = [
   { seriesSlug: "larking-gowen-norwich-half", date: "2027-04-04", distance: "Half", distanceKm: 21.1, status: "Open", startTime: "10:00", entryUrl: "https://www.norwichhalfmarathon.co.uk/norwich-half-marathon", source: "https://www.norwichhalfmarathon.co.uk/norwich-half-marathon" },
   { seriesSlug: "holkham-half-10k", date: "2027-03-15", distance: "Half", distanceKm: 21.1, status: "TBC", source: "https://epicnorfolk.com/" },
   { seriesSlug: "holkham-half-10k", date: "2027-03-15", distance: "10K", distanceKm: 10, status: "TBC", source: "https://epicnorfolk.com/" },
-  { seriesSlug: "norfolk-marathon-half", date: "2026-04-19", distance: "Half", distanceKm: 21.1, status: "Finished", source: "https://epicnorfolk.com/" },
-  { seriesSlug: "norfolk-marathon-half", date: "2026-04-19", distance: "Marathon", distanceKm: 42.2, status: "Finished", source: "https://epicnorfolk.com/" },
+  { seriesSlug: "norfolk-marathon-half", date: "2026-04-19", distance: "Half", distanceKm: 21.1, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/645" },
+  { seriesSlug: "norfolk-marathon-half", date: "2026-04-19", distance: "Marathon", distanceKm: 42.2, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/645" },
   { seriesSlug: "norfolk-marathon-half", date: "2027-11-21", distance: "Half", distanceKm: 21.1, status: "TBC", source: "https://epicnorfolk.com/" },
   { seriesSlug: "run-snetterton", date: "2026-07-29", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/race" },
   { seriesSlug: "run-snetterton", date: "2026-07-29", distance: "5K", distanceKm: 5, status: "Finished", source: "https://totalracetiming.co.uk/race" },
