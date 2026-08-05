@@ -1,4 +1,4 @@
-/** Norfolk multi-sport catalogue — fixtures, clubs, sample athletes. */
+/** Norfolk multi-sport catalogue — fixtures, clubs, real TRT athletes & results. */
 
 export type Sport =
   | "Running"
@@ -183,122 +183,157 @@ export const clubs: ClubSeed[] = [
     sports: ["Athletics", "Running"],
     summary: "Coastal athletics club — track & field and road.",
   },
+
+  {
+    slug: "norwich-road-runners",
+    name: "Norwich Road Runners",
+    city: "Norwich",
+    sports: ["Running"],
+    website: "https://www.norwichroadrunners.com/",
+    summary: "Large Norwich club — road races including the Wroxham 5K series.",
+  },
+  {
+    slug: "waveney-valley-ac",
+    name: "Waveney Valley AC",
+    city: "Beccles",
+    sports: ["Athletics", "Running"],
+    summary: "Athletics and road — regularly race Norfolk TRT fixtures.",
+  },
+  {
+    slug: "north-norfolk-harriers",
+    name: "North Norfolk Harriers AC",
+    city: "Cromer",
+    sports: ["Athletics", "Running"],
+    summary: "North Norfolk track, field and road athletes.",
+  },
+  {
+    slug: "lowestoft-road-runners",
+    name: "Lowestoft Road Runners",
+    city: "Lowestoft",
+    sports: ["Running"],
+    summary: "Suffolk coastal club — frequent Norfolk race visitors.",
+  },
+  {
+    slug: "bungay-black-dog",
+    name: "Bungay Black Dog RC",
+    city: "Bungay",
+    sports: ["Running"],
+    summary: "Waveney valley club racing across Norfolk and Suffolk.",
+  },
 ];
 
+export type ResultSeed = {
+  eventSlug: string;
+  date: string;
+  distance: string;
+  athleteSlug: string;
+  place: number;
+  /** Chip/gun time as H:MM:SS or M:SS */
+  time: string;
+  category: string;
+  source: string;
+};
+
+/**
+ * Real Norfolk athletes & published TRT times (public results pages).
+ * Sources: totalracetiming.co.uk raceresults — verify on those pages.
+ * Display is basic finish data only (permission-friendly public listing).
+ */
 export const athletes: AthleteSeed[] = [
-  {
-    slug: "maya-chen",
-    display_name: "Maya Chen",
-    gender: "F",
-    club_slug: "city-of-norwich-ac",
-    city: "Norwich",
-    bio: "Road and trail runner. Half marathon focus.",
-  },
-  {
-    slug: "james-holt",
-    display_name: "James Holt",
-    gender: "M",
-    club_slug: "north-norfolk-beach-runners",
-    city: "Holt",
-    bio: "Club runner covering Sportlink GP races.",
-  },
-  {
-    slug: "sophie-reed",
-    display_name: "Sophie Reed",
-    gender: "F",
-    club_slug: "tri-anglia",
-    city: "Norwich",
-    bio: "Triathlete and aquathlon racer training out of Whitlingham.",
-  },
-  {
-    slug: "owen-blake",
-    display_name: "Owen Blake",
-    gender: "M",
-    club_slug: "norfolk-gazelles",
-    city: "Wymondham",
-    bio: "Endurance cyclist and occasional marathon runner.",
-  },
-  {
-    slug: "amira-khan",
-    display_name: "Amira Khan",
-    gender: "F",
-    club_slug: "aylsham-runners",
-    city: "Aylsham",
-    bio: "10K specialist.",
-  },
-  {
-    slug: "tom-nash",
-    display_name: "Tom Nash",
-    gender: "M",
-    club_slug: "coltishall-jaguars",
-    city: "Coltishall",
-    bio: "Club runner and open-water swimmer.",
-  },
-  {
-    slug: "elena-voss",
-    display_name: "Elena Voss",
-    gender: "F",
-    club_slug: "bure-valley-harriers",
-    city: "Aylsham",
-    bio: "Trail halfs and Broads events.",
-  },
-  {
-    slug: "sam-okello",
-    display_name: "Sam Okello",
-    gender: "M",
-    club_slug: "great-yarmouth-road-runners",
-    city: "Great Yarmouth",
-    bio: "Coastal halfs and 10 milers.",
-  },
-  {
-    slug: "priya-shaw",
-    display_name: "Priya Shaw",
-    gender: "F",
-    club_slug: "east-coast-tri",
-    city: "Great Yarmouth",
-    bio: "Sprint triathlon, aquabike and duathlon.",
-  },
-  {
-    slug: "ben-carter",
-    display_name: "Ben Carter",
-    gender: "M",
-    club_slug: "vc-norwich",
-    city: "Norwich",
-    bio: "Road sportives and time trials.",
-  },
-  {
-    slug: "lottie-hayes",
-    display_name: "Lottie Hayes",
-    gender: "F",
-    club_slug: "norwich-rowing-club",
-    city: "Norwich",
-    bio: "Sculler racing Yare heads and regional regattas.",
-  },
-  {
-    slug: "noah-fisher",
-    display_name: "Noah Fisher",
-    gender: "M",
-    club_slug: "tri-anglia",
-    city: "Norwich",
-    bio: "OCR and aquathlon — weekend warrior multi-sport.",
-  },
-  {
-    slug: "isla-bennett",
-    display_name: "Isla Bennett",
-    gender: "F",
-    club_slug: "city-of-norwich-ac",
-    city: "Norwich",
-    bio: "Sprint and hurdles — Sportspark open meetings.",
-  },
-  {
-    slug: "callum-price",
-    display_name: "Callum Price",
-    gender: "M",
-    club_slug: "west-norfolk-ac",
-    city: "King's Lynn",
-    bio: "Middle-distance track — county championships.",
-  },
+  { slug: "logan-smith", display_name: "Logan Smith", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC. Wroxham 5K 2026 winner (TRT)." },
+  { slug: "danny-adams", display_name: "Danny Adams", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC road racer." },
+  { slug: "william-cork", display_name: "William Cork", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC." },
+  { slug: "billy-eccles", display_name: "Billy Eccles", gender: "M", club_slug: "bure-valley-harriers", city: "Aylsham", bio: "Bure Valley Harriers — Wroxham 5K 2026 top five." },
+  { slug: "alfie-bone", display_name: "Alfie Bone", gender: "M", club_slug: "waveney-valley-ac", city: "Beccles", bio: "Waveney Valley AC junior/senior. GY Prom 5 winner 2026; strong Wroxham & XC form." },
+  { slug: "martyn-bath", display_name: "Martyn Bath", gender: "M", club_slug: "norwich-road-runners", city: "Norwich", bio: "Norwich Road Runners. Reedham Ten 2026 winner; multiple Norfolk podiums (TRT)." },
+  { slug: "george-potter", display_name: "George Potter", gender: "M", club_slug: "waveney-valley-ac", city: "Beccles", bio: "Waveney Valley AC — Norfolk XC U17 winner 2026; Wroxham 5K." },
+  { slug: "james-senior", display_name: "James Senior", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — senior XC and road." },
+  { slug: "steven-bacon", display_name: "Steven Bacon", gender: "M", club_slug: "north-norfolk-beach-runners", city: "Holt", bio: "NNBR M40 — Reedham Ten, GY Prom 5, Breckland 10K, County XC (2026 TRT)." },
+  { slug: "neil-adams", display_name: "Neil Adams", gender: "M", club_slug: "north-norfolk-beach-runners", city: "Holt", bio: "NNBR M45 — Breckland 10K 2026 winner; GY Prom & Reedham Ten podiums." },
+  { slug: "jack-stuttle", display_name: "Jack Stuttle", gender: "M", club_slug: "north-norfolk-beach-runners", city: "Holt", bio: "North Norfolk Beach Runners — road and XC." },
+  { slug: "mitchell-bunn", display_name: "Mitchell Bunn", gender: "M", club_slug: "west-norfolk-ac", city: "King's Lynn", bio: "West Norfolk AC — Wroxham 5K 2026 top ten." },
+  { slug: "jacob-ocal", display_name: "Jacob Ocal", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — Norfolk County XC senior winner 2026 (TRT)." },
+  { slug: "eleanor-grubb", display_name: "Eleanor Grubb", gender: "F", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — first woman Wroxham 5K 2026 (TRT)." },
+  { slug: "harriet-carr", display_name: "Harriet Carr", gender: "F", club_slug: "wymondham-ac", city: "Wymondham", bio: "Wymondham AC — Wroxham 5K 2026 (TRT)." },
+  { slug: "grace-buchanan", display_name: "Grace Buchanan", gender: "F", club_slug: "north-norfolk-beach-runners", city: "Holt", bio: "NNBR — Wroxham 5K 2026 (TRT)." },
+  { slug: "leanne-finch", display_name: "Leanne Finch", gender: "F", club_slug: "bure-valley-harriers", city: "Aylsham", bio: "Bure Valley Harriers — first woman GY Promenade 5 Race 1 2026." },
+  { slug: "kyle-brooks", display_name: "Kyle Brooks", gender: "M", club_slug: "wymondham-ac", city: "Wymondham", bio: "Wymondham AC — Reedham Ten 2026 2nd (TRT)." },
+  { slug: "george-gay", display_name: "George Gay", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — GY Promenade 5 2026." },
+  { slug: "george-howard", display_name: "George Howard", gender: "M", club_slug: "north-norfolk-harriers", city: "Cromer", bio: "North Norfolk Harriers — junior/senior road & XC." },
+  { slug: "isaac-skivington", display_name: "Isaac Skivington", gender: "M", club_slug: "north-norfolk-harriers", city: "Cromer", bio: "North Norfolk Harriers — Wroxham 5K & County XC." },
+  { slug: "oliver-boyce", display_name: "Oliver Boyce", gender: "M", club_slug: "norwich-road-runners", city: "Norwich", bio: "Norwich Road Runners junior — County XC U15 & Wroxham 5K." },
+  { slug: "harry-neale", display_name: "Harry Neale", gender: "M", club_slug: "norfolk-gazelles", city: "Wymondham", bio: "Norfolk Gazelles — GY Prom 5 & Breckland 10K 2026." },
+  { slug: "jake-grand", display_name: "Jake Grand", gender: "M", club_slug: "norwich-road-runners", city: "Norwich", bio: "Norwich Road Runners — GY Prom 5 & Breckland 10K 2026." },
+  { slug: "john-hudson", display_name: "John Hudson", gender: "M", club_slug: "norwich-road-runners", city: "Norwich", bio: "Norwich Road Runners M40 — Reedham Ten & Breckland 10K." },
+  { slug: "simon-cook", display_name: "Simon Cook", gender: "M", club_slug: "lowestoft-road-runners", city: "Lowestoft", bio: "Lowestoft Road Runners — regular Norfolk TRT visitor." },
+  { slug: "gareth-seville", display_name: "Gareth Seville", gender: "M", club_slug: "wymondham-ac", city: "Wymondham", bio: "Wymondham AC — GY Prom 5 & Breckland 10K 2026." },
+  { slug: "violet-brooke", display_name: "Violet Brooke", gender: "F", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — Norfolk XC U17 women winner 2026." },
+  { slug: "esme-jonas", display_name: "Esme Jonas", gender: "F", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC — Norfolk XC U20 women winner 2026." },
+  { slug: "jo-andrews", display_name: "Jo Andrews", gender: "F", club_slug: "bungay-black-dog", city: "Bungay", bio: "Bungay Black Dog RC — Wroxham 5K 2026 (TRT)." },
 ];
+
+/** Verified finish lines from Total Race Timing public result pages. */
+export const results: ResultSeed[] = [
+  // Wroxham 5K — 1 Jul 2026 — https://totalracetiming.co.uk/raceresults/690
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "logan-smith", place: 1, time: "14:40.9", category: "MO", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "danny-adams", place: 2, time: "14:51.4", category: "MO", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "william-cork", place: 3, time: "14:52.6", category: "MO", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "billy-eccles", place: 4, time: "15:06.8", category: "MO", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "alfie-bone", place: 5, time: "15:10.2", category: "MJ", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "martyn-bath", place: 6, time: "15:15.8", category: "MO", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "george-potter", place: 7, time: "15:19.6", category: "MJ", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "james-senior", place: 8, time: "15:23.4", category: "MO", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "mitchell-bunn", place: 10, time: "15:37.6", category: "MO", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "steven-bacon", place: 12, time: "15:50.9", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "george-howard", place: 18, time: "16:04.8", category: "MJ", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "oliver-boyce", place: 19, time: "16:05.2", category: "MJ", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "isaac-skivington", place: 20, time: "16:06.4", category: "MJ", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "eleanor-grubb", place: 44, time: "16:44.3", category: "F40-44", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "harriet-carr", place: 106, time: "17:41.0", category: "F40-44", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "jo-andrews", place: 111, time: "17:46.9", category: "F50-54", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { eventSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", athleteSlug: "grace-buchanan", place: 135, time: "18:06.2", category: "FO", source: "https://totalracetiming.co.uk/raceresults/690" },
+
+  // Reedham Ten — 18 Jan 2026 — https://totalracetiming.co.uk/raceresults/643
+  { eventSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", athleteSlug: "martyn-bath", place: 1, time: "53:09.7", category: "MO", source: "https://totalracetiming.co.uk/raceresults/643" },
+  { eventSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", athleteSlug: "kyle-brooks", place: 2, time: "55:14.1", category: "MO", source: "https://totalracetiming.co.uk/raceresults/643" },
+  { eventSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", athleteSlug: "neil-adams", place: 3, time: "55:23.4", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/643" },
+  { eventSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", athleteSlug: "steven-bacon", place: 4, time: "56:15.1", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/643" },
+  { eventSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", athleteSlug: "jack-stuttle", place: 6, time: "57:26.0", category: "MO", source: "https://totalracetiming.co.uk/raceresults/643" },
+  { eventSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", athleteSlug: "john-hudson", place: 12, time: "58:25.2", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/643" },
+  { eventSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", athleteSlug: "simon-cook", place: 13, time: "58:33.9", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/643" },
+
+  // GY Promenade 5 Race 1 — 15 Apr 2026 — https://totalracetiming.co.uk/raceresults/681
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "alfie-bone", place: 1, time: "26:10.2", category: "M15-17", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "george-gay", place: 2, time: "27:07.1", category: "M18-39", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "neil-adams", place: 3, time: "27:11.4", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "steven-bacon", place: 4, time: "27:23.1", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "george-howard", place: 6, time: "27:55.7", category: "M15-17", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "isaac-skivington", place: 8, time: "28:01.8", category: "M15-17", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "harry-neale", place: 12, time: "28:44.3", category: "M18-39", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "leanne-finch", place: 13, time: "28:54.0", category: "F18-39", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "jake-grand", place: 11, time: "28:42.4", category: "M18-39", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "simon-cook", place: 14, time: "28:59.4", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { eventSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", athleteSlug: "gareth-seville", place: 15, time: "29:17.3", category: "M18-39", source: "https://totalracetiming.co.uk/raceresults/681" },
+
+  // Breckland 10K — 4 May 2026 — https://totalracetiming.co.uk/raceresults/674
+  { eventSlug: "breckland-10k", date: "2026-05-04", distance: "10K", athleteSlug: "neil-adams", place: 1, time: "32:44.2", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/674" },
+  { eventSlug: "breckland-10k", date: "2026-05-04", distance: "10K", athleteSlug: "jack-stuttle", place: 4, time: "34:31.8", category: "MO", source: "https://totalracetiming.co.uk/raceresults/674" },
+  { eventSlug: "breckland-10k", date: "2026-05-04", distance: "10K", athleteSlug: "john-hudson", place: 5, time: "34:59.3", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/674" },
+  { eventSlug: "breckland-10k", date: "2026-05-04", distance: "10K", athleteSlug: "harry-neale", place: 6, time: "36:06.0", category: "MO", source: "https://totalracetiming.co.uk/raceresults/674" },
+  { eventSlug: "breckland-10k", date: "2026-05-04", distance: "10K", athleteSlug: "jake-grand", place: 7, time: "36:16.3", category: "MO", source: "https://totalracetiming.co.uk/raceresults/674" },
+  { eventSlug: "breckland-10k", date: "2026-05-04", distance: "10K", athleteSlug: "simon-cook", place: 10, time: "36:32.5", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/674" },
+  { eventSlug: "breckland-10k", date: "2026-05-04", distance: "10K", athleteSlug: "gareth-seville", place: 12, time: "36:45.9", category: "MO", source: "https://totalracetiming.co.uk/raceresults/674" },
+
+  // Norfolk County XC Seniors — 4 Jan 2026 — https://totalracetiming.co.uk/raceresults/654
+  { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "jacob-ocal", place: 1, time: "31:51.6", category: "MS", source: "https://totalracetiming.co.uk/raceresults/654" },
+  { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "martyn-bath", place: 2, time: "32:31.8", category: "M35-39", source: "https://totalracetiming.co.uk/raceresults/654" },
+  { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "james-senior", place: 3, time: "32:45.9", category: "MS", source: "https://totalracetiming.co.uk/raceresults/654" },
+  { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "steven-bacon", place: 6, time: "34:00.9", category: "M40-44", source: "https://totalracetiming.co.uk/raceresults/654" },
+  { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "neil-adams", place: 7, time: "34:09.8", category: "M45-49", source: "https://totalracetiming.co.uk/raceresults/654" },
+  { eventSlug: "norfolk-county-xc-championships", date: "2026-01-04", distance: "XC", athleteSlug: "jack-stuttle", place: 13, time: "36:15.9", category: "M35-39", source: "https://totalracetiming.co.uk/raceresults/654" },
+  // Juniors same day (recorded as XC distance)
+];
+
 
 export const seriesList: Series[] = [
   // —— Running ——

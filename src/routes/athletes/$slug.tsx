@@ -74,6 +74,9 @@ function AthletePage() {
         <h2 className="font-display text-lg font-semibold text-fg">
           Results history
         </h2>
+        <p className="text-xs text-subtle">
+          Published finish times (e.g. Total Race Timing). Confirm on the official timer site.
+        </p>
         {results.length === 0 ? (
           <p className="text-sm text-muted">No results yet.</p>
         ) : (

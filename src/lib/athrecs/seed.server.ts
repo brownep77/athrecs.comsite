@@ -3,13 +3,29 @@ import {
   athletes as athleteSeeds,
   clubs as clubSeeds,
   editions as editionSeeds,
+  results as resultSeeds,
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-admin-import-v9";
-
+const SEED_VERSION = "athrecs-real-trt-results-v11";
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
+
+function parseTimeToSeconds(raw: string): number {
+  const t = raw.trim().replace(",", ".");
+  const parts = t.split(":");
+  if (parts.length === 3) {
+    const [h, m, s] = parts;
+    return Math.round(
+      Number(h) * 3600 + Number(m) * 60 + Number(s),
+    );
+  }
+  if (parts.length === 2) {
+    const [m, s] = parts;
+    return Math.round(Number(m) * 60 + Number(s));
+  }
+  return Math.round(Number(t));
+}
 
 async function ensureSchema(sql: Sql) {
   const statements = [
@@ -99,8 +115,8 @@ export async function ensureAthrecsSeeded(): Promise<void> {
   `;
   if (meta[0]?.value === SEED_VERSION) return;
 
-  // Never wipe editions/results — preserves CSV/Grok imports after seed updates.
-  // Catalogue only upserts series + missing edition keys.
+  // Never wipe all editions — preserve CSV/Grok imports.
+  // Catalogue upserts series + missing edition keys; results re-seed for TRT keys only.
 
   for (const c of clubSeeds) {
     await sql`
@@ -146,7 +162,6 @@ export async function ensureAthrecsSeeded(): Promise<void> {
       `;
       eventId = ins[0].id;
     }
-    await sql`delete from event_distances where event_id = ${eventId}`;
     for (const d of s.distances) {
       await sql`
         insert into event_distances (event_id, distance_code)
@@ -155,20 +170,18 @@ export async function ensureAthrecsSeeded(): Promise<void> {
     }
   }
 
-  for (const e of editionSeeds) {
+  for (const ed of editionSeeds) {
     const ev = await sql<{ id: number }>`
-      select id from events where slug = ${e.seriesSlug} limit 1
+      select id from events where slug = ${ed.seriesSlug} limit 1
     `;
     if (!ev[0]) continue;
-    const series = seriesList.find((s) => s.slug === e.seriesSlug);
-    const start = e.startTime ?? series?.defaultStartTime ?? null;
     await sql`
       insert into editions (
         event_id, event_date, distance_code, distance_km, status,
         entry_url, source_url, start_time
       ) values (
-        ${ev[0].id}, ${e.date}::date, ${e.distance}, ${e.distanceKm}, ${e.status},
-        ${e.entryUrl ?? null}, ${e.source}, ${start}
+        ${ev[0].id}, ${ed.date}::date, ${ed.distance}, ${ed.distanceKm},
+        ${ed.status}, ${ed.entryUrl ?? null}, ${ed.source}, ${ed.startTime ?? null}
       )
       on conflict (event_id, event_date, distance_code) do update set
         distance_km = excluded.distance_km,
@@ -198,32 +211,64 @@ export async function ensureAthrecsSeeded(): Promise<void> {
     `;
   }
 
-  const worstead = await sql<{ id: number }>`
-    select ed.id from editions ed
-    join events e on e.id = ed.event_id
-    where e.slug = 'worstead-5' and ed.event_date = '2026-07-24' limit 1
-  `;
-  if (worstead[0]) {
-    await sql`delete from results where edition_id = ${worstead[0].id}`;
-    const lines: Array<[string, number, number, string]> = [
-      ["james-holt", 1, 27 * 60 + 12, "MSEN"],
-      ["sam-okello", 2, 28 * 60 + 4, "MSEN"],
-      ["tom-nash", 3, 28 * 60 + 41, "MV40"],
-      ["maya-chen", 4, 30 * 60 + 18, "FSEN"],
-      ["amira-khan", 5, 31 * 60 + 2, "FSEN"],
-      ["elena-voss", 6, 32 * 60 + 55, "FV35"],
-    ];
-    for (const [slug, place, secs, cat] of lines) {
-      const ath = await sql<{ id: number }>`
-        select id from athletes where slug = ${slug} limit 1
-      `;
-      if (!ath[0]) continue;
-      await sql`
-        insert into results (edition_id, athlete_id, status, finish_time_seconds, overall_place, category)
-        values (${worstead[0].id}, ${ath[0].id}, 'finished', ${secs}, ${place}, ${cat})
-        on conflict do nothing
-      `;
+  // Drop legacy demo athletes not in the verified TRT set.
+  const keepSlugs = athleteSeeds.map((a) => a.slug);
+  if (keepSlugs.length > 0) {
+    // parameterized IN list
+    const placeholders = keepSlugs.map((_, i) => `$${i + 1}`).join(", ");
+    await sql.query(
+      `delete from results where athlete_id in (
+         select id from athletes where slug not in (${placeholders})
+       )`,
+      keepSlugs,
+    );
+    await sql.query(
+      `delete from athletes where slug not in (${placeholders})`,
+      keepSlugs,
+    );
+  }
+
+  // Re-seed catalogue results for known TRT editions (basic public finish data).
+  const editionKeys = new Set(
+    resultSeeds.map((r) => `${r.eventSlug}|${r.date}|${r.distance}`),
+  );
+  for (const key of editionKeys) {
+    const [eventSlug, date, distance] = key.split("|");
+    const ed = await sql<{ id: number }>`
+      select ed.id from editions ed
+      join events e on e.id = ed.event_id
+      where e.slug = ${eventSlug}
+        and ed.event_date = ${date}::date
+        and ed.distance_code = ${distance}
+      limit 1
+    `;
+    if (ed[0]) {
+      await sql`delete from results where edition_id = ${ed[0].id}`;
     }
+  }
+
+  for (const r of resultSeeds) {
+    const ed = await sql<{ id: number }>`
+      select ed.id from editions ed
+      join events e on e.id = ed.event_id
+      where e.slug = ${r.eventSlug}
+        and ed.event_date = ${r.date}::date
+        and ed.distance_code = ${r.distance}
+      limit 1
+    `;
+    const ath = await sql<{ id: number }>`
+      select id from athletes where slug = ${r.athleteSlug} limit 1
+    `;
+    if (!ed[0] || !ath[0]) continue;
+    const secs = parseTimeToSeconds(r.time);
+    await sql`
+      insert into results (edition_id, athlete_id, status, finish_time_seconds, overall_place, category)
+      values (${ed[0].id}, ${ath[0].id}, 'finished', ${secs}, ${r.place}, ${r.category})
+      on conflict (edition_id, athlete_id) do update set
+        finish_time_seconds = excluded.finish_time_seconds,
+        overall_place = excluded.overall_place,
+        category = excluded.category
+    `;
   }
 
   await sql`

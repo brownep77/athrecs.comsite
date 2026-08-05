@@ -102,6 +102,10 @@ function RacePage() {
           {results.length === 0 ? (
             <p className="text-sm text-muted">No results for this edition.</p>
           ) : (
+            <>
+            <p className="mb-2 text-xs text-subtle">
+              Basic public finish data. Confirm full results on the official timer site.
+            </p>
             <div className="overflow-x-auto rounded-xl border border-border bg-surface shadow-card">
               <table className="w-full min-w-[28rem] text-left text-sm">
                 <thead className="border-b border-border bg-elevated/60 text-[11px] uppercase tracking-wider text-subtle">
@@ -138,6 +142,7 @@ function RacePage() {
                 </tbody>
               </table>
             </div>
+            </>
           )}
         </section>
       )}
