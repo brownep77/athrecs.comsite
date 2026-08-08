@@ -1,0 +1,26 @@
+import type { Edition } from "./types";
+
+export const editions: Edition[] = [
+  { seriesSlug: "run-norwich", date: "2015-08-30", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "run-norwich", date: "2016-08-07", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "run-norwich", date: "2017-08-06", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "run-norwich", date: "2018-08-05", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "run-norwich", date: "2019-07-21", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "run-norwich", date: "2022-10-23", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "run-norwich", date: "2023-07-16", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "run-norwich", date: "2024-09-08", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "run-norwich", date: "2025-09-07", distance: "10K", distanceKm: 10, status: "Finished", source: "https://www.runnorwich.co.uk/event-info/results/" },
+  { seriesSlug: "trowse-10k", date: "2026-03-15", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/663" },
+  { seriesSlug: "wroxham-5k", date: "2026-07-01", distance: "5K", distanceKm: 5, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/690" },
+  { seriesSlug: "reepham-summer-10k", date: "2026-07-17", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/697" },
+  { seriesSlug: "reedham-ten", date: "2026-01-18", distance: "10mi", distanceKm: 16.1, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/643" },
+  { seriesSlug: "wymondham-20", date: "2026-03-22", distance: "20mi", distanceKm: 32.2, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/661" },
+  { seriesSlug: "great-yarmouth-promenade-5m", date: "2026-04-15", distance: "5mi", distanceKm: 8.05, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/681" },
+  { seriesSlug: "great-yarmouth-promenade-5m", date: "2026-04-29", distance: "5mi", distanceKm: 8.05, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/682" },
+  { seriesSlug: "great-yarmouth-promenade-5m", date: "2026-05-13", distance: "5mi", distanceKm: 8.05, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/683" },
+  { seriesSlug: "flying-5k", date: "2026-07-19", distance: "5K", distanceKm: 5, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/696" },
+  { seriesSlug: "worstead-5", date: "2026-07-24", distance: "5mi", distanceKm: 8.05, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/698" },
+  { seriesSlug: "holt-10k", date: "2026-05-24", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/675" },
+  { seriesSlug: "aylsham-10k", date: "2026-05-10", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/658" },
+  { seriesSlug: "breckland-10k", date: "2026-05-04", distance: "10K", distanceKm: 10, status: "Finished", source: "https://totalracetiming.co.uk/raceresults/674" },
+];
