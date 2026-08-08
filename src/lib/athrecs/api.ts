@@ -186,7 +186,7 @@ export const getEditionResults = createServerFn({ method: "GET" })
       join athletes a on a.id = r.athlete_id
       left join clubs c on c.id = a.club_id
       where r.edition_id = ${editionId}
-      order by r.overall_place nulls last
+      order by r.finish_time_seconds asc nulls last, a.display_name asc
     `;
   });
 
@@ -387,7 +387,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" }).handler(
   },
 );
 
-// —— Admin / Grok-assisted imports ——
+// -- Admin / Grok-assisted imports --
 export const importFromCsv = createServerFn({ method: "POST" })
   .validator((input: { csv: string }) => input)
   .handler(async ({ data }) => {
@@ -404,7 +404,7 @@ export const importFromJson = createServerFn({ method: "POST" })
     try {
       bundle = JSON.parse(data.json) as ImportBundle;
     } catch {
-      throw new Error("Invalid JSON — paste a Grok export with events[] and/or editions[]");
+      throw new Error("Invalid JSON - paste a Grok export with events[] and/or editions[]");
     }
     return applyImportBundle(bundle);
   });

@@ -75,7 +75,7 @@ function AthletePage() {
           Results history
         </h2>
         <p className="text-xs text-subtle">
-          Published finish times (e.g. Total Race Timing). Confirm on the official timer site.
+          Published finish times only - no composite ratings. Confirm on the official timer site.
         </p>
         {results.length === 0 ? (
           <p className="text-sm text-muted">No results yet.</p>
@@ -91,8 +91,8 @@ function AthletePage() {
                 <div>
                   <div className="mb-1 flex flex-wrap gap-1.5">
                     <Badge variant="outline">{r.distance_code}</Badge>
-                    {r.overall_place != null && (
-                      <Badge variant="default">P{r.overall_place}</Badge>
+                    {r.category && (
+                      <Badge variant="outline">{r.category}</Badge>
                     )}
                   </div>
                   <p className="font-medium text-fg">{r.event_name}</p>

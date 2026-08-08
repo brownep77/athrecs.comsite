@@ -23,9 +23,9 @@ export const Route = createFileRoute("/races/$slug")({
   component: RacePage,
   notFoundComponent: () => (
     <div className="space-y-4 py-10 text-center">
-      <h1 className="text-xl font-semibold">Event not found</h1>
+      <h1 className="text-xl font-semibold">Race not found</h1>
       <Button asChild variant="secondary">
-        <Link to="/races">Back to events</Link>
+        <Link to="/races">Back to races</Link>
       </Button>
     </div>
   ),
@@ -33,13 +33,11 @@ export const Route = createFileRoute("/races/$slug")({
 
 function RacePage() {
   const { event, distances, upcoming, past } = Route.useLoaderData();
-  const [resultsId, setResultsId] = useState<number | null>(
-    () => past.find((p) => p.result_count > 0)?.id ?? null,
-  );
-  const { data: results = [] } = useQuery({
-    queryKey: ["results", resultsId],
-    queryFn: () => getEditionResults({ data: resultsId! }),
-    enabled: resultsId != null,
+  const [resultsEditionId, setResultsEditionId] = useState<number | null>(null);
+  const { data: results = [], isFetching } = useQuery({
+    queryKey: ["edition-results", resultsEditionId],
+    queryFn: () => getEditionResults({ data: resultsEditionId! }),
+    enabled: resultsEditionId != null,
   });
 
   return (
@@ -49,11 +47,11 @@ function RacePage() {
         className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
       >
         <ArrowLeft className="h-4 w-4" />
-        Events
+        Races
       </Link>
 
-      <section className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
-        <div className="flex flex-wrap gap-2">
+      <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
+        <div className="flex flex-wrap gap-1.5">
           <Badge variant="accent">{event.sport}</Badge>
           <Badge variant="outline">{event.surface}</Badge>
           <Badge variant="outline">{event.county}</Badge>
@@ -63,48 +61,61 @@ function RacePage() {
             </Badge>
           ))}
         </div>
-        <h1 className="font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl">
-          {event.name}
-        </h1>
+        <h1 className="font-display text-2xl font-semibold text-fg">{event.name}</h1>
         <p className="flex items-center gap-1.5 text-sm text-muted">
           <MapPin className="h-4 w-4 text-subtle" />
-          {event.city} · {event.area}
+          {[event.city, event.area, event.county].filter(Boolean).join(" · ")}
         </p>
-        <p className="text-xs text-subtle">Organised by {event.organiser}</p>
-        <p className="max-w-prose text-sm leading-relaxed text-muted">
-          {event.description}
-        </p>
-        {event.website && (
-          <Button asChild variant="secondary" className="w-full sm:w-auto">
-            <a href={event.website} target="_blank" rel="noreferrer">
-              Organiser site
-              <ExternalLink className="h-4 w-4" />
-            </a>
-          </Button>
+        {event.summary && (
+          <p className="max-w-prose text-sm text-muted">{event.summary}</p>
         )}
+        {event.description && event.description !== event.summary && (
+          <p className="max-w-prose text-sm text-muted">{event.description}</p>
+        )}
+        <div className="flex flex-wrap gap-2 pt-1">
+          {event.website && (
+            <Button asChild variant="secondary" size="sm">
+              <a href={event.website} target="_blank" rel="noreferrer">
+                Official site
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </Button>
+          )}
+          {event.organiser && (
+            <span className="text-xs text-subtle self-center">
+              Organiser: {event.organiser}
+            </span>
+          )}
+        </div>
       </section>
 
-      <EditionList title="Future editions" items={upcoming} />
+      <EditionList title="Upcoming" items={upcoming} />
       <EditionList
         title="Past editions"
         items={past}
-        onResults={(id) => setResultsId(id)}
+        onResults={(id) => setResultsEditionId(id)}
       />
 
-      {resultsId != null && (
+      {resultsEditionId != null && (
         <section className="space-y-3">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2">
             <h2 className="font-display text-lg font-semibold text-fg">Results</h2>
-            <Button type="button" size="sm" variant="ghost" onClick={() => setResultsId(null)}>
-              Hide
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setResultsEditionId(null)}
+            >
+              Close
             </Button>
           </div>
-          {results.length === 0 ? (
+          {isFetching ? (
+            <p className="text-sm text-muted">Loading…</p>
+          ) : results.length === 0 ? (
             <p className="text-sm text-muted">No results for this edition.</p>
           ) : (
             <>
             <p className="mb-2 text-xs text-subtle">
-              Basic public finish data. Confirm full results on the official timer site.
+              Ranked by finish time only. Confirm full results on the official timer site.
             </p>
             <div className="overflow-x-auto rounded-xl border border-border bg-surface shadow-card">
               <table className="w-full min-w-[28rem] text-left text-sm">
@@ -118,10 +129,10 @@ function RacePage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {results.map((r) => (
+                  {results.map((r, i) => (
                     <tr key={r.id} className="border-b border-border/70 last:border-0">
                       <td className="px-3 py-2.5 tabular text-muted">
-                        {r.overall_place ?? "—"}
+                        {r.finish_time_seconds != null ? i + 1 : "—"}
                       </td>
                       <td className="px-3 py-2.5">
                         <Link
@@ -220,9 +231,9 @@ function EditionList({
                       href={ed.entry_url}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex h-9 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium text-fg no-underline"
+                      className="inline-flex h-9 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium no-underline text-fg"
                     >
-                      Entry
+                      Enter
                     </a>
                   )}
                 </div>
