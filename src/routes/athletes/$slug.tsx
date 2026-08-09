@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, MapPin } from "lucide-react";
 import { getAthleteBySlug } from "@/lib/athrecs/api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { athletes as athleteCatalogue } from "@/data/athletes";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -9,7 +10,20 @@ export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
     const data = await getAthleteBySlug({ data: params.slug });
     if (!data) throw notFound();
-    return data;
+    const seed = athleteCatalogue.find((a) => a.slug === params.slug);
+    return {
+      ...data,
+      athlete: {
+        ...data.athlete,
+        aliases: seed?.aliases ?? [],
+        date_of_birth: seed?.date_of_birth ?? null,
+        place_of_birth: seed?.place_of_birth ?? null,
+        country_of_birth: seed?.country_of_birth ?? null,
+        address: seed?.address ?? null,
+        nationality: seed?.nationality ?? null,
+        notes: seed?.notes ?? null,
+      },
+    };
   },
   component: AthletePage,
   notFoundComponent: () => (
