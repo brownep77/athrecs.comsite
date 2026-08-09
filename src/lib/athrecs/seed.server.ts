@@ -7,7 +7,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-trt-results-v15";
+const SEED_VERSION = "athrecs-trt-results-v18";
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
 
@@ -113,7 +113,18 @@ export async function ensureAthrecsSeeded(): Promise<void> {
   const meta = await sql<{ value: string }>`
     select value from app_meta where key = 'seed_version' limit 1
   `;
-  if (meta[0]?.value === SEED_VERSION) return;
+  const athleteCount = await sql<{ n: number }>`
+    select count(*)::int as n from athletes
+  `;
+  // Reseed when version changes OR when the DB has fewer athletes than the catalogue
+  // (guards against stuck partial seeds after emergency minimal restores).
+  const dbAthletes = athleteCount[0]?.n ?? 0;
+  if (
+    meta[0]?.value === SEED_VERSION &&
+    dbAthletes >= athleteSeeds.length
+  ) {
+    return;
+  }
 
   for (const c of clubSeeds) {
     await sql`
