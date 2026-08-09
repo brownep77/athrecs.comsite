@@ -22,8 +22,36 @@ export const Route = createFileRoute("/athletes/$slug")({
   ),
 });
 
+function formatDob(iso: string | null | undefined): string | null {
+  if (!iso) return null;
+  const d = new Date(`${iso}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 function AthletePage() {
   const { athlete, results } = Route.useLoaderData();
+  const aliases = athlete.aliases ?? [];
+  const dob = formatDob(athlete.date_of_birth);
+  const detailRows: { label: string; value: string }[] = [];
+  if (dob) detailRows.push({ label: "Date of birth", value: dob });
+  if (athlete.place_of_birth)
+    detailRows.push({ label: "Place of birth", value: athlete.place_of_birth });
+  if (athlete.country_of_birth)
+    detailRows.push({
+      label: "Country of birth",
+      value: athlete.country_of_birth,
+    });
+  if (athlete.nationality)
+    detailRows.push({ label: "Nationality", value: athlete.nationality });
+  if (athlete.address)
+    detailRows.push({ label: "Address", value: athlete.address });
+  if (athlete.notes) detailRows.push({ label: "Notes", value: athlete.notes });
 
   return (
     <div className="space-y-8">
@@ -57,7 +85,9 @@ function AthletePage() {
         )}
         <p className="flex items-center gap-1.5 text-xs text-subtle">
           <MapPin className="h-3.5 w-3.5" />
-          {[athlete.city, athlete.county, athlete.country].filter(Boolean).join(" · ")}
+          {[athlete.city, athlete.county, athlete.country]
+            .filter(Boolean)
+            .join(" · ")}
         </p>
         <div className="flex flex-wrap gap-2">
           <Badge variant="outline">
@@ -68,13 +98,13 @@ function AthletePage() {
         {athlete.bio && (
           <p className="max-w-prose text-sm text-muted">{athlete.bio}</p>
         )}
-        {(athlete.aliases ?? []).length > 0 && (
+        {aliases.length > 0 && (
           <div className="space-y-1.5 border-t border-border pt-3">
             <p className="text-xs font-medium uppercase tracking-wider text-subtle">
               Other names raced under
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {(athlete.aliases ?? []).map((name: string) => (
+              {aliases.map((name: string) => (
                 <Badge key={name} variant="outline">
                   {name}
                 </Badge>
@@ -84,12 +114,31 @@ function AthletePage() {
         )}
       </section>
 
+      {detailRows.length > 0 && (
+        <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
+          <h2 className="font-display text-lg font-semibold text-fg">
+            Personal details
+          </h2>
+          <dl className="grid gap-3 sm:grid-cols-2">
+            {detailRows.map((row) => (
+              <div key={row.label} className="space-y-0.5">
+                <dt className="text-xs font-medium uppercase tracking-wider text-subtle">
+                  {row.label}
+                </dt>
+                <dd className="text-sm text-fg">{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
       <section className="space-y-3">
         <h2 className="font-display text-lg font-semibold text-fg">
           Results history
         </h2>
         <p className="text-xs text-subtle">
-          Published finish times only - no composite ratings. Confirm on the official timer site.
+          Published finish times only - no composite ratings. Confirm on the
+          official timer site.
         </p>
         {results.length === 0 ? (
           <p className="text-sm text-muted">No results yet.</p>

@@ -57,6 +57,15 @@ export type AthleteSeed = {
   bio: string;
   /** Other names this athlete has appeared under on result sheets. */
   aliases?: string[];
+  /** ISO date YYYY-MM-DD */
+  date_of_birth?: string;
+  place_of_birth?: string;
+  country_of_birth?: string;
+  /** Current / residential address (free text). */
+  address?: string;
+  nationality?: string;
+  /** Any other useful profile notes (coach, category, IDs, etc.). */
+  notes?: string;
 };
 
 export type ResultSeed = {
