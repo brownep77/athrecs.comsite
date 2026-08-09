@@ -7,7 +7,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-trt-results-v22";
+const SEED_VERSION = "athrecs-trt-results-v23";
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
 

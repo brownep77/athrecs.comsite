@@ -1,2 +1,26 @@
-export type { ClubSeed } from "./catalogue";
-export { clubs } from "./catalogue";
+import type { ClubSeed } from "./types";
+
+export const clubs: ClubSeed[] = [
+  { slug: "city-of-norwich-ac", name: "City of Norwich AC", city: "Norwich", sports: ["Athletics", "Running", "Track"], website: "https://www.conac.org.uk/", summary: "Norwich multi-discipline athletics club." },
+  { slug: "north-norfolk-beach-runners", name: "North Norfolk Beach Runners", city: "Holt", sports: ["Running"], website: "https://nnbr.org.uk/", summary: "Coastal club covering North Norfolk road races." },
+  { slug: "tri-anglia", name: "Tri-Anglia", city: "Norwich", sports: ["Triathlon", "Duathlon", "Aquathlon", "Aquabike", "Swimming"], website: "https://www.tri-anglia.co.uk/", summary: "Multi-sport club around Norwich." },
+  { slug: "norfolk-gazelles", name: "Norfolk Gazelles", city: "Wymondham", sports: ["Running", "Cycling"], summary: "Endurance club around Wymondham." },
+  { slug: "aylsham-runners", name: "Aylsham Runners", city: "Aylsham", sports: ["Running"], summary: "Local club; Aylsham 10K." },
+  { slug: "coltishall-jaguars", name: "Coltishall Jaguars RC", city: "Coltishall", sports: ["Running", "Swimming"], summary: "Broads area runners and swimmers." },
+  { slug: "bure-valley-harriers", name: "Bure Valley Harriers", city: "Aylsham", sports: ["Running"], summary: "Trail and road in the Bure valley." },
+  { slug: "great-yarmouth-road-runners", name: "Great Yarmouth Road Runners", city: "Great Yarmouth", sports: ["Running"], summary: "Coastal club; promenade series." },
+  { slug: "wymondham-ac", name: "Wymondham AC", city: "Wymondham", sports: ["Running"], website: "https://www.wymondhamac.org.uk/", summary: "Hosts the Wymondham 20." },
+  { slug: "norwich-road-runners", name: "Norwich Road Runners", city: "Norwich", sports: ["Running"], summary: "City road running club." },
+  { slug: "waveney-valley-ac", name: "Waveney Valley AC", city: "Beccles", sports: ["Athletics", "Running"], summary: "Beccles athletics and road." },
+  { slug: "north-norfolk-harriers", name: "North Norfolk Harriers AC", city: "Cromer", sports: ["Athletics", "Running"], summary: "North Norfolk track and road." },
+  { slug: "lowestoft-road-runners", name: "Lowestoft Road Runners", city: "Lowestoft", sports: ["Running"], summary: "Suffolk coastal club." },
+  { slug: "bungay-black-dog", name: "Bungay Black Dog RC", city: "Bungay", sports: ["Running"], summary: "Waveney valley club." },
+  { slug: "reepham-runners", name: "Reepham Runners", city: "Reepham", sports: ["Running"], summary: "Reepham Summer 10K club." },
+  { slug: "runners-next-the-sea", name: "Runners-Next-the-Sea", city: "Wells-next-the-Sea", sports: ["Running"], summary: "North Norfolk coastal club." },
+  { slug: "dereham-runners", name: "Dereham Runners AC", city: "Dereham", sports: ["Running"], summary: "Mid-Norfolk road running." },
+  { slug: "cambridge-and-coleridge-ac", name: "Cambridge & Coleridge AC", city: "Cambridge", sports: ["Athletics", "Running"], website: "https://www.cambridgeandcoleridge.org.uk/", summary: "Cambridgeshire multi-discipline club." },
+  { slug: "ashford-ac", name: "Ashford AC", city: "Ashford", sports: ["Athletics", "Running"], summary: "Kent athletics club." },
+  { slug: "swansea-harriers", name: "Swansea Harriers", city: "Swansea", sports: ["Athletics", "Running"], summary: "Welsh athletics club." },
+  { slug: "thames-valley-harriers", name: "Thames Valley Harriers", city: "London", sports: ["Athletics", "Running"], website: "https://www.thamesvalleyharriers.com/", summary: "London athletics club." },
+  { slug: "unattached", name: "Unattached", city: "Norfolk", sports: ["Running"], summary: "Independent / non-club athletes." },
+];

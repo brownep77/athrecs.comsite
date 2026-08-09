@@ -1,4 +1,4 @@
-/** Norfolk multi-sport catalogue — fixtures, clubs, real TRT athletes & results. */
+/** Norfolk multi-sport catalogue - fixtures, clubs, real TRT athletes & results. */
 
 export type {
   Sport,
