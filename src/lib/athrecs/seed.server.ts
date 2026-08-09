@@ -7,7 +7,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-trt-results-v19";
+const SEED_VERSION = "athrecs-trt-results-v22";
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
 
@@ -16,9 +16,7 @@ function parseTimeToSeconds(raw: string): number {
   const parts = t.split(":");
   if (parts.length === 3) {
     const [h, m, s] = parts;
-    return Math.round(
-      Number(h) * 3600 + Number(m) * 60 + Number(s),
-    );
+    return Math.round(Number(h) * 3600 + Number(m) * 60 + Number(s));
   }
   if (parts.length === 2) {
     const [m, s] = parts;
@@ -116,13 +114,8 @@ export async function ensureAthrecsSeeded(): Promise<void> {
   const athleteCount = await sql<{ n: number }>`
     select count(*)::int as n from athletes
   `;
-  // Reseed when version changes OR when the DB has fewer athletes than the catalogue
-  // (guards against stuck partial seeds after emergency minimal restores).
   const dbAthletes = athleteCount[0]?.n ?? 0;
-  if (
-    meta[0]?.value === SEED_VERSION &&
-    dbAthletes >= athleteSeeds.length
-  ) {
+  if (meta[0]?.value === SEED_VERSION && dbAthletes >= athleteSeeds.length) {
     return;
   }
 

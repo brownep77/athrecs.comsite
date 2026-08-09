@@ -1,5 +1,2 @@
-import type { Edition } from "./types";
-import { editionsA } from "./editions-a";
-import { editionsB } from "./editions-b";
-
-export const editions: Edition[] = [...editionsA, ...editionsB];
+export type { Edition } from "./catalogue";
+export { editions } from "./catalogue";
