@@ -68,6 +68,20 @@ function AthletePage() {
         {athlete.bio && (
           <p className="max-w-prose text-sm text-muted">{athlete.bio}</p>
         )}
+        {(athlete.aliases ?? []).length > 0 && (
+          <div className="space-y-1.5 border-t border-border pt-3">
+            <p className="text-xs font-medium uppercase tracking-wider text-subtle">
+              Other names raced under
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {(athlete.aliases ?? []).map((name: string) => (
+                <Badge key={name} variant="outline">
+                  {name}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="space-y-3">
