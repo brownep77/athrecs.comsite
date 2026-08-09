@@ -55,6 +55,8 @@ export type AthleteSeed = {
   club_slug: string;
   city: string;
   bio: string;
+  /** Other names this athlete has appeared under on result sheets. */
+  aliases?: string[];
 };
 
 export type ResultSeed = {
