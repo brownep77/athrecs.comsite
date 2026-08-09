@@ -60,4 +60,6 @@ export const resultsB: ResultSeed[] = [
   { eventSlug: "banham-zoo-5k", date: "2026-05-09", distance: "5K", athleteSlug: "shaun-mann", place: 5, time: "17:55", category: "M50", source: "https://totalracetiming.co.uk/raceresults/671" },
   { eventSlug: "lotus-5k", date: "2026-06-12", distance: "5K", athleteSlug: "shaun-mann", place: 4, time: "17:30", category: "M50", source: "https://totalracetiming.co.uk/raceresults/707" },
   { eventSlug: "holt-10k", date: "2026-05-24", distance: "10K", athleteSlug: "daniel-smith", place: 5, time: "35:30", category: "M40", source: "https://totalracetiming.co.uk/raceresults/675" },
+  // Östersund Marathon 2007 — Paul Browne 37th overall
+  { eventSlug: "ostersund-marathon", date: "2007-07-21", distance: "Marathon", athleteSlug: "paul-browne", place: 37, time: "3:29:49", category: "MSEN", source: "https://privat.bahnhof.se/wb410921/hemlingbylk/resultat_ostersund_marathon_2007.htm" },
 ];
