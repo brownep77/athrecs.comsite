@@ -10,7 +10,7 @@ export const athletes: AthleteSeed[] = [
   { slug: "james-senior", display_name: "James Senior", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC." },
   { slug: "eleanor-grubb", display_name: "Eleanor Grubb", gender: "F", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "City of Norwich AC." },
   { slug: "holly-archer", display_name: "Holly Archer", gender: "F", club_slug: "cambridge-and-coleridge-ac", city: "Cambridge", bio: "Cambridge & Coleridge AC. Run Norwich 2024 CR." },
-  { slug: "paul-browne", display_name: "Paul Browne", gender: "M", club_slug: "unattached", city: "Norfolk", bio: "Unattached. Norfolk road races and Östersund Marathon 2007." },
+  { slug: "paul-browne", display_name: "Paul Browne", gender: "M", club_slug: "unattached", city: "Norfolk", bio: "Unattached. Norfolk road races and Östersund Marathon 2007.", date_of_birth: "1978-05-20", country_of_birth: "England", nationality: "English", notes: "Athrecs profile; Norfolk road races and endurance events." },
   { slug: "nick-earl", display_name: "Nick Earl", gender: "M", club_slug: "city-of-norwich-ac", city: "Norwich", bio: "Run Norwich multiple winner." },
   { slug: "tracy-barlow", display_name: "Tracy Barlow", gender: "F", club_slug: "unattached", city: "Norfolk", bio: "Run Norwich multiple winner." },
   { slug: "luke-alden", display_name: "Luke Alden", gender: "M", club_slug: "unattached", city: "Norfolk", bio: "Run Norwich podium." },
