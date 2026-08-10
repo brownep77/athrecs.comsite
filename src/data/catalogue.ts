@@ -10,7 +10,9 @@ export type {
 } from "./types";
 
 export { clubs } from "./clubs";
-export { athletes } from "./athletes";
+import { athletes as athletesBase } from "./athletes";
+import { athletesRn2025B1 } from "./athletes-rn2025-b1";
+export const athletes = [...athletesBase, ...athletesRn2025B1];
 export { results } from "./results";
 export { seriesList } from "./series";
 export { editions } from "./editions";
