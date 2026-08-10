@@ -1,89 +1,61 @@
-name: Run Norwich batch 3 catalogue snapshot
+name: Run Norwich batch 3 verification
 
 on:
   pull_request:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  snapshot:
+  verify-and-commit:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
 
-      - name: Install catalogue dependencies
+      - name: Install dependencies
         run: npm ci --ignore-scripts
 
-      - name: Export current catalogue keys
+      - name: Generate batch 3 files
+        run: python3 scripts/generate-rn2025-b3.py
+
+      - name: Check generated diff
+        run: git diff --check
+
+      - name: Verify catalogue
+        run: npm run verify:catalogue
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Commit verified batch files to the PR branch
         shell: bash
         run: |
           set -euo pipefail
-          node --input-type=module <<'NODE'
-          import fs from "node:fs";
-          import { createServer } from "vite";
+          paths=(
+            src/data/athletes-rn2025-b3.ts
+            src/data/results-rn2025-b3.ts
+            src/data/catalogue.ts
+            src/data/results.ts
+            src/data/catalogue-metadata.ts
+            scripts/verify-catalogue.mjs
+            src/lib/athrecs/seed.server.ts
+          )
 
-          const vite = await createServer({
-            configFile: false,
-            root: process.cwd(),
-            appType: "custom",
-            logLevel: "error",
-            server: { middlewareMode: true },
-          });
+          if [[ -z "$(git status --porcelain -- "${paths[@]}")" ]]; then
+            echo "Batch files are already committed."
+            exit 0
+          fi
 
-          try {
-            const { athletes, results, catalogueMetadata } =
-              await vite.ssrLoadModule("/src/data/catalogue.ts");
-
-            const seedText = fs.readFileSync("./src/lib/athrecs/seed.server.ts", "utf8");
-            const seedVersion = seedText.match(/const SEED_VERSION = "([^"]+)"/)?.[1] ?? null;
-            const runNorwich2025 = results
-              .filter(
-                (result) =>
-                  result.eventSlug === "run-norwich" &&
-                  result.date === "2025-09-07" &&
-                  result.distance === "10K",
-              )
-              .map((result) => ({
-                athleteSlug: result.athleteSlug,
-                place: result.place,
-                time: result.time,
-                bib: result.bib ?? null,
-                category: result.category ?? null,
-              }))
-              .sort((a, b) => (a.place ?? Number.MAX_SAFE_INTEGER) - (b.place ?? Number.MAX_SAFE_INTEGER));
-
-            const snapshot = {
-              metadata: catalogueMetadata.merged_counts,
-              seedVersion,
-              athleteSlugs: athletes.map((athlete) => athlete.slug).sort(),
-              athleteNames: athletes.map((athlete) => ({
-                slug: athlete.slug,
-                displayName: athlete.display_name,
-              })),
-              runNorwich2025,
-            };
-
-            fs.writeFileSync(
-              "catalogue-snapshot-b3.json",
-              `${JSON.stringify(snapshot, null, 2)}\n`,
-            );
-            console.log(JSON.stringify({
-              athletes: snapshot.athleteSlugs.length,
-              runNorwich2025: snapshot.runNorwich2025.length,
-              seedVersion,
-              metadata: snapshot.metadata,
-            }, null, 2));
-          } finally {
-            await vite.close();
-          }
-          NODE
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: rn2025-b3-catalogue-snapshot
-          path: catalogue-snapshot-b3.json
-          if-no-files-found: error
-          retention-days: 1
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "${paths[@]}"
+          git commit -m "Complete Run Norwich 2025 batch 3"
+          git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
