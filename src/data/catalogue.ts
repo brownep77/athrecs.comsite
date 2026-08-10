@@ -13,7 +13,13 @@ export { clubs } from "./clubs";
 import { athletes as athletesBase } from "./athletes";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
 import { athletesRn2025B2 } from "./athletes-rn2025-b2";
-export const athletes = [...athletesBase, ...athletesRn2025B1, ...athletesRn2025B2];
+import { athletesRn2025B3 } from "./athletes-rn2025-b3";
+export const athletes = [
+  ...athletesBase,
+  ...athletesRn2025B1,
+  ...athletesRn2025B2,
+  ...athletesRn2025B3,
+];
 export { results } from "./results";
 export { seriesList } from "./series";
 export { editions } from "./editions";

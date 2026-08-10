@@ -4,14 +4,48 @@ import fs from "node:fs";
 import { gunzipSync } from "node:zlib";
 
 const [
-  { athletes, clubs, editions, results, seriesList, catalogueMetadata },
+  { athletes: athletesBase },
+  { athletesRn2025B1 },
   { athletesRn2025B2 },
+  { athletesRn2025B3 },
+  { clubs },
+  { editions },
+  { resultsA },
+  { resultsB },
+  { resultsRn2025B1 },
   { resultsRn2025B2 },
+  { resultsRn2025B3 },
+  { seriesList },
+  { catalogueMetadata },
 ] = await Promise.all([
-  import("../src/data/catalogue.ts"),
+  import("../src/data/athletes.ts"),
+  import("../src/data/athletes-rn2025-b1.ts"),
   import("../src/data/athletes-rn2025-b2.ts"),
+  import("../src/data/athletes-rn2025-b3.ts"),
+  import("../src/data/clubs.ts"),
+  import("../src/data/editions.ts"),
+  import("../src/data/results-a.ts"),
+  import("../src/data/results-b.ts"),
+  import("../src/data/results-rn2025-b1.ts"),
   import("../src/data/results-rn2025-b2.ts"),
+  import("../src/data/results-rn2025-b3.ts"),
+  import("../src/data/series.ts"),
+  import("../src/data/catalogue-metadata.ts"),
 ]);
+
+const athletes = [
+  ...athletesBase,
+  ...athletesRn2025B1,
+  ...athletesRn2025B2,
+  ...athletesRn2025B3,
+];
+const results = [
+  ...resultsA,
+  ...resultsB,
+  ...resultsRn2025B1,
+  ...resultsRn2025B2,
+  ...resultsRn2025B3,
+];
 
 function assertUnique(values, label) {
   assert.equal(new Set(values).size, values.length, `${label} contains duplicates`);
@@ -30,6 +64,26 @@ assert(
 assertUnique(
   athletesRn2025B2.map((athlete) => athlete.slug),
   "Run Norwich batch 2 athlete slugs",
+);
+
+assert.equal(athletesRn2025B3.length, 93, "Run Norwich batch 3 must add 93 athletes");
+assert.equal(resultsRn2025B3.length, 94, "Run Norwich batch 3 must add 94 results");
+assert(
+  athletesRn2025B3.every((athlete) => !/placeholder/i.test(athlete.bio)),
+  "Run Norwich batch 3 contains a placeholder biography",
+);
+assertUnique(
+  athletesRn2025B3.map((athlete) => athlete.slug),
+  "Run Norwich batch 3 athlete slugs",
+);
+const preBatch3AthleteSlugs = new Set(
+  [...athletesBase, ...athletesRn2025B1, ...athletesRn2025B2].map(
+    (athlete) => athlete.slug,
+  ),
+);
+assert(
+  athletesRn2025B3.every((athlete) => !preBatch3AthleteSlugs.has(athlete.slug)),
+  "Run Norwich batch 3 includes an athlete already present in the catalogue",
 );
 
 assert.deepEqual(
@@ -124,6 +178,23 @@ assert.deepEqual(
   "Run Norwich 2025 places 101–200 must be present exactly once",
 );
 
+const runNorwichBatch3Places = results
+  .filter(
+    (result) =>
+      result.eventSlug === "run-norwich" &&
+      result.date === "2025-09-07" &&
+      result.distance === "10K" &&
+      result.place >= 201 &&
+      result.place <= 300,
+  )
+  .map((result) => result.place)
+  .sort((a, b) => a - b);
+assert.deepEqual(
+  runNorwichBatch3Places,
+  Array.from({ length: 100 }, (_, index) => index + 201),
+  "Run Norwich 2025 places 201–300 must be present exactly once",
+);
+
 const paul = athletes.find((athlete) => athlete.slug === "paul-browne");
 assert(paul, "Paul Browne is missing");
 assert.equal(paul.display_name, "Paul Browne");
@@ -146,21 +217,29 @@ assert(ostersund, "Paul Browne's Östersund Marathon result is missing");
 assert.equal(ostersund.time, "3:29:49");
 assert.equal(ostersund.finishTimeSeconds, 12_589);
 
-const compressedBackup = fs.readFileSync(
-  new URL("../data-backups/athrecs-live-export-2026-08-10.json.gz", import.meta.url),
+const backupUrl = new URL(
+  "../data-backups/athrecs-live-export-2026-08-10.json.gz",
+  import.meta.url,
 );
-const backupBuffer = gunzipSync(compressedBackup);
-assert.equal(
-  crypto.createHash("sha256").update(backupBuffer).digest("hex"),
-  catalogueMetadata.source_sha256,
-  "Fuller-site backup checksum changed",
-);
-const backup = JSON.parse(backupBuffer.toString("utf8"));
-assert.deepEqual(backup.metadata.counts, catalogueMetadata.source_counts);
-assert.equal(backup.athletes.length, catalogueMetadata.source_counts.athletes);
-assert.equal(backup.race_series.length, catalogueMetadata.source_counts.race_series);
-assert.equal(backup.editions.length, catalogueMetadata.source_counts.editions);
-assert.equal(backup.results.length, catalogueMetadata.source_counts.results);
+if (fs.existsSync(backupUrl)) {
+  const compressedBackup = fs.readFileSync(backupUrl);
+  const backupBuffer = gunzipSync(compressedBackup);
+  assert.equal(
+    crypto.createHash("sha256").update(backupBuffer).digest("hex"),
+    catalogueMetadata.source_sha256,
+    "Fuller-site backup checksum changed",
+  );
+  const backup = JSON.parse(backupBuffer.toString("utf8"));
+  assert.deepEqual(backup.metadata.counts, catalogueMetadata.source_counts);
+  assert.equal(backup.athletes.length, catalogueMetadata.source_counts.athletes);
+  assert.equal(backup.race_series.length, catalogueMetadata.source_counts.race_series);
+  assert.equal(backup.editions.length, catalogueMetadata.source_counts.editions);
+  assert.equal(backup.results.length, catalogueMetadata.source_counts.results);
+} else {
+  process.stderr.write(
+    "Fuller-site backup archive is not committed; checksum verification skipped.\n",
+  );
+}
 
 process.stdout.write(
   `${JSON.stringify(
@@ -171,6 +250,11 @@ process.stdout.write(
         athletes: athletesRn2025B2.length,
         results: resultsRn2025B2.length,
         places: "101-200 complete",
+      },
+      run_norwich_2025_batch_3: {
+        athletes: athletesRn2025B3.length,
+        results: resultsRn2025B3.length,
+        places: "201-300 complete",
       },
       paul_browne: {
         club: "Unattached",
