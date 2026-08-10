@@ -3,23 +3,34 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import { gunzipSync } from "node:zlib";
 
-const [{ athletes }, { clubs }, { editions }, { resultsA }, { resultsB }, { seriesList }, metadataModule] =
-  await Promise.all([
-    import("../src/data/athletes.ts"),
-    import("../src/data/clubs.ts"),
-    import("../src/data/editions.ts"),
-    import("../src/data/results-a.ts"),
-    import("../src/data/results-b.ts"),
-    import("../src/data/series.ts"),
-    import("../src/data/catalogue-metadata.ts"),
-  ]);
-
-const { catalogueMetadata } = metadataModule;
-const results = [...resultsA, ...resultsB];
+const [
+  { athletes, clubs, editions, results, seriesList, catalogueMetadata },
+  { athletesRn2025B2 },
+  { resultsRn2025B2 },
+] = await Promise.all([
+  import("../src/data/catalogue.ts"),
+  import("../src/data/athletes-rn2025-b2.ts"),
+  import("../src/data/results-rn2025-b2.ts"),
+]);
 
 function assertUnique(values, label) {
   assert.equal(new Set(values).size, values.length, `${label} contains duplicates`);
 }
+
+assert.equal(athletesRn2025B2.length, 90, "Run Norwich batch 2 must add 90 athletes");
+assert.equal(resultsRn2025B2.length, 93, "Run Norwich batch 2 must add 93 results");
+assert(
+  athletesRn2025B2.every((athlete) => !/placeholder/i.test(athlete.bio)),
+  "Run Norwich batch 2 contains a placeholder biography",
+);
+assert(
+  athletesRn2025B2.every((athlete) => athlete.slug !== "tom-lamb"),
+  "Run Norwich batch 2 must not duplicate the existing tom-lamb slug",
+);
+assertUnique(
+  athletesRn2025B2.map((athlete) => athlete.slug),
+  "Run Norwich batch 2 athlete slugs",
+);
 
 assert.deepEqual(
   {
@@ -96,6 +107,23 @@ for (const result of results) {
   );
 }
 
+const runNorwichPlaces = results
+  .filter(
+    (result) =>
+      result.eventSlug === "run-norwich" &&
+      result.date === "2025-09-07" &&
+      result.distance === "10K" &&
+      result.place >= 101 &&
+      result.place <= 200,
+  )
+  .map((result) => result.place)
+  .sort((a, b) => a - b);
+assert.deepEqual(
+  runNorwichPlaces,
+  Array.from({ length: 100 }, (_, index) => index + 101),
+  "Run Norwich 2025 places 101–200 must be present exactly once",
+);
+
 const paul = athletes.find((athlete) => athlete.slug === "paul-browne");
 assert(paul, "Paul Browne is missing");
 assert.equal(paul.display_name, "Paul Browne");
@@ -139,6 +167,11 @@ process.stdout.write(
     {
       source_counts: catalogueMetadata.source_counts,
       merged_counts: catalogueMetadata.merged_counts,
+      run_norwich_2025_batch_2: {
+        athletes: athletesRn2025B2.length,
+        results: resultsRn2025B2.length,
+        places: "101-200 complete",
+      },
       paul_browne: {
         club: "Unattached",
         date_of_birth: paul.date_of_birth,
