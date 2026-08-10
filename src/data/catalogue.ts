@@ -12,7 +12,8 @@ export type {
 export { clubs } from "./clubs";
 import { athletes as athletesBase } from "./athletes";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
-export const athletes = [...athletesBase, ...athletesRn2025B1];
+import { athletesRn2025B2 } from "./athletes-rn2025-b2";
+export const athletes = [...athletesBase, ...athletesRn2025B1, ...athletesRn2025B2];
 export { results } from "./results";
 export { seriesList } from "./series";
 export { editions } from "./editions";
