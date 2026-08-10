@@ -2,11 +2,12 @@ import { Link } from "@tanstack/react-router";
 import { MapPin, Users } from "lucide-react";
 import type { ClubListItem } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
+import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge";
 
 export function ClubCard({ club }: { club: ClubListItem }) {
   return (
     <article className="rounded-xl border border-border bg-surface p-4 shadow-card transition-colors hover:border-border-strong">
-      <div className="mb-2 flex flex-wrap gap-1.5">
+      <div className="mb-2 flex flex-wrap items-center gap-1.5">
         {club.sports.slice(0, 4).map((s) => (
           <Badge key={s} variant="accent">
             {s}
@@ -16,6 +17,13 @@ export function ClubCard({ club }: { club: ClubListItem }) {
           <Users className="h-3 w-3" />
           {club.member_count}
         </Badge>
+        <ClubVerificationBadge
+          slug={club.slug}
+          website={club.website}
+          member_count={club.member_count}
+          name={club.name}
+          variant="button"
+        />
       </div>
       <Link
         to="/clubs/$slug"
