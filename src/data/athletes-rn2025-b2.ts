@@ -1,8 +1,163 @@
 import type { AthleteSeed } from "./types";
 
-/** Run Norwich 2025 batch 2 — places 101–200 (official chiptime PDF). */
-export const athletesRn2025B2: AthleteSeed[] = [
-  {"slug":"troy-douglas-collow","display_name":"Troy Douglas-collow","given_name":"Troy","family_name":"Douglas-collow","gender":"M","club_slug":"unattached","source_club_name":"Unattached","city":"Norfolk","county":"Norfolk","country":"England","bio":"Run Norwich 10K 2025 — place 101, 38:50."},
-  {"slug":"chris-fryer","display_name":"Chris Fryer","given_name":"Chris","family_name":"Fryer","gender":"M","club_slug":"unattached","source_club_name":"Unattached","city":"Norfolk","county":"Norfolk","country":"England","bio":"Run Norwich 10K 2025 — place 102, 38:52."},
-  {"slug":"tom-lamb","display_name":"Tom Lamb","given_name":"Tom","family_name":"Lamb","gender":"M","club_slug":"unattached","source_club_name":"Unattached","city":"Norfolk","county":"Norfolk","country":"England","bio":"PLACEHOLDER"},
+const SOURCE =
+  "https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf";
+
+type AthleteRow = readonly [
+  place: number,
+  bib: string,
+  givenName: string,
+  familyName: string,
+  gender: "M" | "F",
+  category: string,
+  chipTime: string,
+  clubSlug: string,
+  sourceClubName: string,
+  city: string,
+  county?: string,
+  country?: string,
 ];
+
+/** Run Norwich 2025 batch 2 — 90 new profiles from official places 101–200. */
+const rows: AthleteRow[] = [
+  [101,"265","Troy","Douglas-collow","M","MO","38:56","unattached","Unattached","Not supplied"],
+  [102,"156","Chris","Fryer","M","MO","38:53","great-yarmouth-road-runners","Great Yarmouth Road Runners","Great Yarmouth","Norfolk","England"],
+  [104,"115","Shane","Morgan","M","MO","38:49","unattached","Unattached","Not supplied"],
+  [105,"89","Oli","Rix","M","MO","39:05","city-of-norwich-ac","City Of Norwich AC","Norwich","Norfolk","England"],
+  [106,"145","Paul","Suggitt","M","M40","39:05","unattached","Unattached","Not supplied"],
+  [108,"282","Chris","Vernon","M","MO","39:01","unattached","Unattached","Not supplied"],
+  [109,"227","Mark","Banfield","M","M50","39:06","wymondham-ac","Wymondham AC","Wymondham","Norfolk","England"],
+  [112,"129","Lance","Escobar","M","MO","39:12","unattached","Diss and District AC","Not supplied"],
+  [113,"270","Louis","Prangnell","M","M40","39:07","unattached","Unattached","Not supplied"],
+  [114,"124","Jordan","Humm","M","MO","39:16","unattached","Unattached","Not supplied"],
+  [115,"183","Daniel","Cable","M","MO","39:09","unattached","Unattached","Not supplied"],
+  [116,"750","Barry","Lynn","M","MO","39:04","unattached","Unattached","Not supplied"],
+  [117,"96","Michael","Steward","M","M55","39:19","unattached","Unattached","Not supplied"],
+  [118,"472","Daniel","Luedke","M","MO","39:14","unattached","Unattached","Not supplied"],
+  [119,"512","Max","Emerson","M","MO","38:56","unattached","Unattached","Not supplied"],
+  [120,"127","Oliver","Foxwell","M","MO","39:17","west-norfolk-ac","West Norfolk AC","King's Lynn","Norfolk","England"],
+  [121,"347","Ronnie","Mount","M","M45","39:23","norwich-road-runners","Norwich Road Runners","Norwich","Norfolk","England"],
+  [122,"192","James","Roy","M","M40","39:28","unattached","Unattached","Not supplied"],
+  [123,"193","Filip","Schubert","M","MO","38:47","unattached","Unattached","Not supplied"],
+  [124,"169","Torben","Jessen","M","M60","39:27","unattached","Folkestone Running & Athletics Club","Not supplied"],
+  [125,"210","James","Porter","M","MO","39:23","unattached","BRJ Run and Tri","Not supplied"],
+  [126,"95","Billy","Wheeler","M","M50","39:31","wymondham-ac","Wymondham AC","Wymondham","Norfolk","England"],
+  [127,"269","Jack","Foord","M","MO","39:02","unattached","Unattached","Not supplied"],
+  [128,"756","Robert","Duncan","M","M40","39:27","unattached","Unattached","Not supplied"],
+  [129,"182","Ian","Bray","M","M40","39:34","norwich-road-runners","Norwich Road Runners","Norwich","Norfolk","England"],
+  [131,"262","Jason","Mountain","M","M40","39:26","unattached","Unattached","Not supplied"],
+  [132,"355","Maria","Marsh","F","FO","39:28","unattached","Unattached","Not supplied"],
+  [133,"230","Ashley","Granados","M","MO","39:33","unattached","Unattached","Not supplied"],
+  [134,"106","Simon","Bales","M","M45","39:42","bure-valley-harriers","Bure Valley Harriers","Aylsham","Norfolk","England"],
+  [135,"696","Joseph","Mayes","M","MO","39:34","norwich-road-runners","Norwich Road Runners","Norwich","Norfolk","England"],
+  [136,"224","Mark","Armstrong","M","M40","39:43","wymondham-ac","Wymondham AC","Wymondham","Norfolk","England"],
+  [137,"468","Phil","Whiting","M","M50","39:37","norfolk-gazelles","Norfolk Gazelles AC","Wymondham","Norfolk","England"],
+  [138,"209","Joe","Carter","M","MO","39:43","unattached","Saint Edmund Pacers","Not supplied"],
+  [139,"445","Stephen","Crockett","M","MO","39:46","unattached","Unattached","Not supplied"],
+  [140,"421","Henry","Levell","M","MO","39:37","unattached","Unattached","Not supplied"],
+  [141,"333","Jonathan","Cordle","M","M60","39:45","norwich-road-runners","Norwich Road Runners","Norwich","Norfolk","England"],
+  [142,"306","William","Humphrey","M","MO","39:51","unattached","Unattached","Not supplied"],
+  [143,"190","Andrew","Horton","M","M40","39:43","unattached","Unattached","Not supplied"],
+  [144,"204","Stephen","Wilson","M","MO","39:50","unattached","Unattached","Not supplied"],
+  [145,"327","Tom","Downs","M","M40","39:32","unattached","Unattached","Not supplied"],
+  [146,"83","Robert","Wapshott","M","M45","39:50","hallamshire-harriers-sheffield","Hallamshire Harriers Sheffield","Sheffield","South Yorkshire","England"],
+  [147,"61","Samuel","Beardmore","M","MO","39:43","unattached","Unattached","Not supplied"],
+  [148,"357","Ryan","Pack","M","MO","39:48","unattached","Unattached","Not supplied"],
+  [149,"738","Clive","Cartner","M","M45","39:49","norfolk-gazelles","Norfolk Gazelles AC","Wymondham","Norfolk","England"],
+  [150,"1202","Bertie","Pinching","M","MO","39:34","unattached","Unattached","Not supplied"],
+  [151,"345","Shay","Walpole","M","MO","40:04","norwich-road-runners","Norwich Road Runners","Norwich","Norfolk","England"],
+  [152,"170","Josh","Booth","M","MO","40:07","unattached","New Levels Run Club","Not supplied"],
+  [153,"1712","Becky","Hills","F","FO","39:50","unattached","Unattached","Not supplied"],
+  [154,"336","Sebastian","Lambert","M","MO","40:00","unattached","Unattached","Not supplied"],
+  [155,"10","Cat","Cummings","F","F45","40:10","city-of-norwich-ac","City Of Norwich AC","Norwich","Norfolk","England"],
+  [156,"366","Ethan","Wells","M","MO","40:04","unattached","Unattached","Not supplied"],
+  [157,"195","Lorimar","Hipperson","M","MO","40:09","unattached","Unattached","Not supplied"],
+  [158,"205","Tony","Gowing","M","M40","40:09","unattached","Unattached","Not supplied"],
+  [159,"279","Adam","Leech","M","MO","39:44","unattached","Unattached","Not supplied"],
+  [160,"186","Allen","Westoby","M","MO","40:10","unattached","Winchester Fit Club RC","Not supplied"],
+  [161,"309","Jonathan","Brasnett","M","M40","40:08","unattached","Unattached","Not supplied"],
+  [162,"423","Luis","Tibbles","M","MO","39:45","unattached","Unattached","Not supplied"],
+  [164,"688","David","Bailey","M","MO","39:50","unattached","Unattached","Not supplied"],
+  [165,"249","Shaun","Aldous","M","M50","40:21","bungay-black-dog-rc","Bungay Black Dog RC","Bungay","Suffolk","England"],
+  [166,"176","Patrick","Matthews","M","MO","40:19","unattached","Unattached","Not supplied"],
+  [167,"487","Alexander","Wigney","M","MO","40:08","unattached","Unattached","Not supplied"],
+  [168,"272","Thomas","Hill","M","M45","40:24","unattached","Unattached","Not supplied"],
+  [169,"810","Alex","Hamblin","M","MO","39:44","unattached","Unattached","Not supplied"],
+  [170,"510","Chris","Chaplen","M","MO","40:06","unattached","Unattached","Not supplied"],
+  [171,"263","Matthew","Sutton","M","MO","40:08","unattached","Unattached","Not supplied"],
+  [172,"406","Nathan","Capps Jenner","M","MO","40:20","waveney-valley-ac","Waveney Valley AC","Beccles","Suffolk","England"],
+  [173,"459","Jamie","Sheehan","M","MO","40:25","unattached","Unattached","Not supplied"],
+  [174,"222","Aston","Martin","M","MO","40:15","norwich-road-runners","Norwich Road Runners","Norwich","Norfolk","England"],
+  [178,"293","Brandon","Pickess","M","MO","40:25","unattached","Unattached","Not supplied"],
+  [179,"131","Laurynas","Misevicius","M","MO","40:10","ryston-runners","Ryston Runners","King's Lynn","Norfolk","England"],
+  [180,"612","Alan","Duncan","M","M45","40:31","unattached","Unattached","Not supplied"],
+  [182,"113","Oliver","Gutteridge","M","MO","40:42","unattached","Unattached","Not supplied"],
+  [183,"325","Garry","Smith","M","M40","40:37","unattached","Unattached","Not supplied"],
+  [184,"218","Scott","Breakenridge","M","MO","40:15","unattached","Unattached","Not supplied"],
+  [185,"1843","Ross","Shaw","M","MO","40:34","colchester-harriers-ac","Colchester Harriers AC","Colchester","Essex","England"],
+  [186,"1149","Samuel","Groves","M","MO","40:19","unattached","Unattached","Not supplied"],
+  [187,"295","Rob","Harlow","M","MO","40:22","unattached","Unattached","Not supplied"],
+  [188,"314","Megan","Platten","F","FO","40:33","unattached","Unattached","Not supplied"],
+  [189,"223","Matthew","Pontifex","M","MO","40:16","unattached","Unattached","Not supplied"],
+  [190,"362","Shaun","Long","M","MO","40:47","unattached","Unattached","Not supplied"],
+  [191,"291","James","Fullam","M","M40","40:49","unattached","Unattached","Not supplied"],
+  [192,"458","Andrew","Carrier","M","MO","40:15","unattached","Unattached","Not supplied"],
+  [193,"803","Joseph","Jones","M","MO","40:42","unattached","Unattached","Not supplied"],
+  [194,"180","Lee","Devlin","M","M40","40:43","unattached","Unattached","Not supplied"],
+  [195,"443","Ben","Jones","M","MO","40:31","unattached","Unattached","Not supplied"],
+  [196,"393","Nick","Kent","M","MO","40:16","unattached","Diss and District AC","Not supplied"],
+  [197,"316","Matthew","Brown","M","M45","40:56","unattached","Unattached","Not supplied"],
+  [198,"497","Sam","Burrows","M","MO","40:47","wymondham-ac","Wymondham AC","Wymondham","Norfolk","England"],
+  [199,"1065","Alexander","Clemmett","M","MO","40:26","unattached","Zoom Tri Club Bournemouth","Not supplied"],
+  [200,"626","Jack","Shreeve","M","MO","40:52","unattached","Unattached","Not supplied"],
+];
+
+export const athletesRn2025B2: AthleteSeed[] = rows.map(
+  ([
+    place,
+    bib,
+    givenName,
+    familyName,
+    gender,
+    category,
+    chipTime,
+    clubSlug,
+    sourceClubName,
+    city,
+    county,
+    country,
+  ]) => {
+    const displayName = `${givenName} ${familyName}`;
+    const clubText =
+      sourceClubName === "Unattached" ? "" : `, representing ${sourceClubName}`;
+
+    return {
+      slug:
+        displayName === "Thomas Hill"
+          ? "thomas-hill-272"
+          : displayName
+              .normalize("NFKD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, "-")
+              .replace(/^-|-$/g, ""),
+      display_name: displayName,
+      given_name: givenName,
+      family_name: familyName,
+      gender,
+      club_slug: clubSlug,
+      source_club_name: sourceClubName,
+      city,
+      ...(county ? { county } : {}),
+      ...(country ? { country } : {}),
+      bio: `${displayName} finished in place ${place} at Run Norwich 10K on 7 September 2025, recording an official chip time of ${chipTime}${clubText}.`,
+      race_entry_name: displayName,
+      default_category: category,
+      default_bib: bib,
+      preferred_distance: "10K",
+      athrecs_id: `RN25-${bib}`,
+      notes: `Run Norwich 2025: place ${place}; category ${category}; bib ${bib}; official chip time ${chipTime}.`,
+      source_url: SOURCE,
+    };
+  },
+);
