@@ -10,57 +10,75 @@ permissions:
 jobs:
   snapshot:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install catalogue dependencies
+        run: npm ci --ignore-scripts
 
       - name: Export current catalogue keys
         shell: bash
         run: |
           set -euo pipefail
-          node --experimental-strip-types --input-type=module <<'NODE'
+          node --input-type=module <<'NODE'
           import fs from "node:fs";
-          import { athletes, results, catalogueMetadata } from "./src/data/catalogue.ts";
+          import { createServer } from "vite";
 
-          const seedText = fs.readFileSync("./src/lib/athrecs/seed.server.ts", "utf8");
-          const seedVersion = seedText.match(/const SEED_VERSION = "([^"]+)"/)?.[1] ?? null;
-          const runNorwich2025 = results
-            .filter(
-              (result) =>
-                result.eventSlug === "run-norwich" &&
-                result.date === "2025-09-07" &&
-                result.distance === "10K",
-            )
-            .map((result) => ({
-              athleteSlug: result.athleteSlug,
-              place: result.place,
-              time: result.time,
-              bib: result.bib ?? null,
-              category: result.category ?? null,
-            }))
-            .sort((a, b) => (a.place ?? Number.MAX_SAFE_INTEGER) - (b.place ?? Number.MAX_SAFE_INTEGER));
+          const vite = await createServer({
+            configFile: false,
+            root: process.cwd(),
+            appType: "custom",
+            logLevel: "error",
+            server: { middlewareMode: true },
+          });
 
-          const snapshot = {
-            metadata: catalogueMetadata.merged_counts,
-            seedVersion,
-            athleteSlugs: athletes.map((athlete) => athlete.slug).sort(),
-            athleteNames: athletes.map((athlete) => ({
-              slug: athlete.slug,
-              displayName: athlete.display_name,
-            })),
-            runNorwich2025,
-          };
+          try {
+            const { athletes, results, catalogueMetadata } =
+              await vite.ssrLoadModule("/src/data/catalogue.ts");
 
-          fs.writeFileSync(
-            "catalogue-snapshot-b3.json",
-            `${JSON.stringify(snapshot, null, 2)}\n`,
-          );
-          console.log(JSON.stringify({
-            athletes: snapshot.athleteSlugs.length,
-            runNorwich2025: snapshot.runNorwich2025.length,
-            seedVersion,
-            metadata: snapshot.metadata,
-          }, null, 2));
+            const seedText = fs.readFileSync("./src/lib/athrecs/seed.server.ts", "utf8");
+            const seedVersion = seedText.match(/const SEED_VERSION = "([^"]+)"/)?.[1] ?? null;
+            const runNorwich2025 = results
+              .filter(
+                (result) =>
+                  result.eventSlug === "run-norwich" &&
+                  result.date === "2025-09-07" &&
+                  result.distance === "10K",
+              )
+              .map((result) => ({
+                athleteSlug: result.athleteSlug,
+                place: result.place,
+                time: result.time,
+                bib: result.bib ?? null,
+                category: result.category ?? null,
+              }))
+              .sort((a, b) => (a.place ?? Number.MAX_SAFE_INTEGER) - (b.place ?? Number.MAX_SAFE_INTEGER));
+
+            const snapshot = {
+              metadata: catalogueMetadata.merged_counts,
+              seedVersion,
+              athleteSlugs: athletes.map((athlete) => athlete.slug).sort(),
+              athleteNames: athletes.map((athlete) => ({
+                slug: athlete.slug,
+                displayName: athlete.display_name,
+              })),
+              runNorwich2025,
+            };
+
+            fs.writeFileSync(
+              "catalogue-snapshot-b3.json",
+              `${JSON.stringify(snapshot, null, 2)}\n`,
+            );
+            console.log(JSON.stringify({
+              athletes: snapshot.athleteSlugs.length,
+              runNorwich2025: snapshot.runNorwich2025.length,
+              seedVersion,
+              metadata: snapshot.metadata,
+            }, null, 2));
+          } finally {
+            await vite.close();
+          }
           NODE
 
       - uses: actions/upload-artifact@v4
