@@ -3,5 +3,12 @@ import { resultsA } from "./results-a";
 import { resultsB } from "./results-b";
 import { resultsRn2025B1 } from "./results-rn2025-b1";
 import { resultsRn2025B2 } from "./results-rn2025-b2";
+import { resultsRn2025B3 } from "./results-rn2025-b3";
 
-export const results: ResultSeed[] = [...resultsA, ...resultsB, ...resultsRn2025B1, ...resultsRn2025B2];
+export const results: ResultSeed[] = [
+  ...resultsA,
+  ...resultsB,
+  ...resultsRn2025B1,
+  ...resultsRn2025B2,
+  ...resultsRn2025B3,
+];
