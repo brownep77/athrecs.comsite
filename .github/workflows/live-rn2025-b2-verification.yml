@@ -1,0 +1,113 @@
+name: Live Run Norwich batch 2 verification
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-production:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check production endpoints and content
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          base="https://athrecs-comsite.vercel.app"
+          work="${RUNNER_TEMP}/athrecs-live"
+          mkdir -p "$work"
+
+          fetch_page() {
+            local label="$1"
+            local path="$2"
+            local output="$work/${label}.html"
+            local code
+
+            code="$(curl \
+              --location \
+              --silent \
+              --show-error \
+              --retry 4 \
+              --retry-delay 5 \
+              --retry-all-errors \
+              --connect-timeout 20 \
+              --max-time 180 \
+              --output "$output" \
+              --write-out '%{http_code}' \
+              "${base}${path}")"
+
+            bytes="$(wc -c < "$output" | tr -d ' ')"
+            printf '%s\t%s\t%s bytes\t%s%s\n' "$label" "$code" "$bytes" "$base" "$path"
+            test "$code" = "200"
+            test "$bytes" -gt 500
+          }
+
+          fetch_page home "/"
+          fetch_page athletes "/athletes"
+          fetch_page troy "/athletes/troy-douglas-collow"
+          fetch_page maria "/athletes/maria-marsh"
+          fetch_page jack "/athletes/jack-shreeve"
+          fetch_page thomas "/athletes/thomas-hill-272"
+
+          python3 - "$work" <<'PY'
+          import html
+          import json
+          import pathlib
+          import re
+          import sys
+
+          work = pathlib.Path(sys.argv[1])
+
+          def read(name: str) -> tuple[str, str]:
+              raw = (work / f"{name}.html").read_text(encoding="utf-8", errors="replace")
+              visible = html.unescape(re.sub(r"<[^>]+>", " ", raw))
+              visible = re.sub(r"\s+", " ", visible)
+              return raw, visible
+
+          athletes_raw, athletes_text = read("athletes")
+          if not re.search(r"(?<!\d)372(?!\d)", athletes_raw):
+              raise AssertionError(
+                  "The live /athletes response does not contain the expected catalogue count 372"
+              )
+
+          samples = {
+              "troy": ("Troy Douglas-collow", "38:56"),
+              "maria": ("Maria Marsh", "39:28"),
+              "jack": ("Jack Shreeve", "40:52"),
+              "thomas": ("Thomas Hill", "40:24"),
+          }
+          for filename, (name, time) in samples.items():
+              raw, visible = read(filename)
+              if name.casefold() not in visible.casefold() and name.casefold() not in raw.casefold():
+                  raise AssertionError(f"{name} is missing from the live profile response")
+              if time not in raw and time not in visible:
+                  raise AssertionError(f"Official Run Norwich time {time} is missing from {name}'s live profile")
+
+          result = {
+              "base_url": "https://athrecs-comsite.vercel.app",
+              "home_status": 200,
+              "athletes_status": 200,
+              "athlete_count": 372,
+              "sample_profiles": {
+                  "troy-douglas-collow": {"status": 200, "time": "38:56"},
+                  "maria-marsh": {"status": 200, "time": "39:28"},
+                  "jack-shreeve": {"status": 200, "time": "40:52"},
+                  "thomas-hill-272": {"status": 200, "time": "40:24"},
+              },
+          }
+          output = work / "live-verification.json"
+          output.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+          print(output.read_text(encoding="utf-8"))
+          PY
+
+      - name: Upload verification report
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-rn2025-b2-verification
+          path: ${{ runner.temp }}/athrecs-live/live-verification.json
+          if-no-files-found: error
+          retention-days: 1
