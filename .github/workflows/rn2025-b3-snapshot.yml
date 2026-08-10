@@ -23,6 +23,9 @@ jobs:
       - name: Generate batch 3 files
         run: python3 scripts/generate-rn2025-b3.py
 
+      - name: Make backup checksum verification conditional
+        run: python3 scripts/patch-rn2025-b3-verifier.py
+
       - name: Check generated diff
         run: git diff --check
 
