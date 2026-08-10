@@ -17,6 +17,7 @@ dist
 .pglite
 # local/ephemeral only — do NOT ignore src/data (catalogue lives there)
 /data
+/data-backups/*.json.gz
 screenshots
 artifacts
 .grok

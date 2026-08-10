@@ -4,6 +4,8 @@ import type { EntryStatus, Sport } from "./types";
 const SPORTS: Sport[] = [
   "Running",
   "Athletics",
+  "Parkrun",
+  "TrackAndField",
   "Cycling",
   "Swimming",
   "Triathlon",

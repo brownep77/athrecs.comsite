@@ -31,7 +31,9 @@ function SportIcon({ sport }: { sport: Sport }) {
   if (sport === "Aquabike") return <Bike className="h-3.5 w-3.5" />;
   if (sport === "Rowing") return <Ship className="h-3.5 w-3.5" />;
   if (sport === "OCR") return <Mountain className="h-3.5 w-3.5" />;
-  if (sport === "Athletics") return <Medal className="h-3.5 w-3.5" />;
+  if (sport === "Athletics" || sport === "TrackAndField") {
+    return <Medal className="h-3.5 w-3.5" />;
+  }
   return <Footprints className="h-3.5 w-3.5" />;
 }
 

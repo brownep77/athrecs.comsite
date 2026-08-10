@@ -14,3 +14,4 @@ export { athletes } from "./athletes";
 export { results } from "./results";
 export { seriesList } from "./series";
 export { editions } from "./editions";
+export { catalogueMetadata } from "./catalogue-metadata";

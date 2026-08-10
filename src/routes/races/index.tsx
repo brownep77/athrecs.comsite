@@ -10,6 +10,8 @@ const SPORTS = [
   "All",
   "Running",
   "Athletics",
+  "Parkrun",
+  "TrackAndField",
   "Cycling",
   "Swimming",
   "Triathlon",

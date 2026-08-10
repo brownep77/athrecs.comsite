@@ -50,7 +50,7 @@ Return ONLY valid JSON (no markdown) in this shape:
 }
 
 Rules:
-- sport must be one of: Running, Athletics, Cycling, Swimming, Triathlon, Duathlon, Aquathlon, Aquabike, Rowing, OCR
+- sport must be one of: Running, Athletics, Parkrun, TrackAndField, Cycling, Swimming, Triathlon, Duathlon, Aquathlon, Aquabike, Rowing, OCR
 - status one of: Open, ClosingSoon, Closed, Finished, TBC
 - dates must be YYYY-MM-DD
 - Norfolk UK only unless clearly a border race runners attend
