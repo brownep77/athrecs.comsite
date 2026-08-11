@@ -16,9 +16,12 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-      - name: Install PDF tools
-        run: sudo apt-get update -qq && sudo apt-get install -y poppler-utils
-      - name: Download official PDF and extract places 301-400
+      - name: Install dependencies and PDF tools
+        run: |
+          npm ci --ignore-scripts
+          sudo apt-get update -qq
+          sudo apt-get install -y poppler-utils
+      - name: Extract official places 301-400
         shell: bash
         run: |
           set -euo pipefail
@@ -36,11 +39,44 @@ jobs:
           if len(out)!=100:
               raise SystemExit(f'Expected 100 rows, got {len(out)}')
           Path('/tmp/b4.txt').write_text('\n'.join(out)+'\n')
-          print('\n'.join(out))
           PY
-      - name: Upload extracted rows
-        uses: actions/upload-artifact@v4
+      - name: Audit existing athletes and results
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import { createServer } from 'vite';
+          const vite = await createServer({ server: { middlewareMode: true }, appType: 'custom', logLevel: 'error' });
+          const mod = await vite.ssrLoadModule('/src/data/catalogue.ts');
+          const lines = fs.readFileSync('/tmp/b4.txt','utf8').trim().split('\n');
+          const parsed = lines.map(line => {
+            const parts=line.trim().split(/\s{2,}/);
+            const place=Number(parts[0]); const bib=parts[1]; const given=parts[2]; const family=parts[3];
+            const gender=parts[4]==='Female'?'F':'M'; const category=parts[6];
+            const hasClub=parts.length===11; const club=hasClub?parts[8]:'Unattached'; const time=(hasClub?parts[9]:parts[8]).slice(-5);
+            return {place,bib,given,family,displayName:`${given} ${family}`,gender,category,club,time};
+          });
+          const byName = new Map();
+          for (const a of mod.athletes) {
+            const k=a.display_name.toLowerCase();
+            if (!byName.has(k)) byName.set(k,[]);
+            byName.get(k).push({slug:a.slug,gender:a.gender,default_category:a.default_category??null,default_bib:a.default_bib??null});
+          }
+          const rn = mod.results.filter(r=>r.eventSlug==='run-norwich'&&r.date==='2025-09-07'&&r.distance==='10K');
+          const resultPlaces = new Set(rn.map(r=>r.place));
+          const report={
+            currentCounts:mod.catalogueMetadata.merged_counts,
+            existingNameMatches:parsed.filter(r=>byName.has(r.displayName.toLowerCase())).map(r=>({...r,matches:byName.get(r.displayName.toLowerCase())})),
+            existingResultPlaces:parsed.filter(r=>resultPlaces.has(r.place)).map(r=>r.place),
+            rows:parsed
+          };
+          fs.writeFileSync('/tmp/b4-audit.json',JSON.stringify(report,null,2)+'\n');
+          console.log(JSON.stringify({currentCounts:report.currentCounts,existingNameMatches:report.existingNameMatches,existingResultPlaces:report.existingResultPlaces},null,2));
+          await vite.close();
+          NODE
+      - uses: actions/upload-artifact@v4
         with:
-          name: rn2025-b4-official-rows
-          path: /tmp/b4.txt
+          name: rn2025-b4-audit
+          path: /tmp/b4-audit.json
           retention-days: 1
