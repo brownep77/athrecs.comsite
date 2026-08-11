@@ -16,7 +16,7 @@ const rows: AthleteRow[] = [
 [888,"1380","Alexander","Mcclelland","M","MO","46:51","unattached","Unattached","Not supplied",null,null,"alexander-mcclelland"],
 [889,"1694","Andrew","Charge","M","M50","47:15","great-yarmouth-road-runners","Great Yarmouth Road Runners","Norfolk","Norfolk","England","andrew-charge"],
 [890,"1810","Christopher","Hamlin","M","M45","46:46","tri-anglia","Tri-Anglia Triathlon Club","Norfolk","Norfolk","England","christopher-hamlin"],
-[891,"561,"Robbie","Starling","M","M55","47:44","wymondham-ac","Wymondham AC","Norfolk","Norfolk","England","robbie-starling"],
+[891,"561","Robbie","Starling","M","M55","47:44","wymondham-ac","Wymondham AC","Norfolk","Norfolk","England","robbie-starling"],
 [892,"845","Philip","Caley","M","M45","46:51","norfolk-gazelles","Norfolk Gazelles AC","Norfolk","Norfolk","England","philip-caley"],
 [893,"1510","Tony","Demetriou","M","M45","46:32","unattached","Unattached","Not supplied",null,null,"tony-demetriou"],
 [894,"828","Thomas","English","M","M40","47:03","unattached","Unattached","Not supplied",null,null,"thomas-english"],
