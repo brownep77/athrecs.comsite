@@ -1,7 +1,7 @@
 export const catalogueMetadata = {
   "source": "https://www.athrecs.com",
-  "exported_at": "2026-08-10T06:48:20.507Z",
-  "export_method": "Public TanStack server-function API",
+  "exported_at": "2026-08-11T06:15:00.000Z",
+  "export_method": "live main + Aug–Sep parkrun calendar",
   "source_sha256": "b182a63ec45365fd2eba89c76f05c1afd4e3884641a840a7eaa9a83e8feee893",
   "source_counts": {
     "athletes": 254,
@@ -14,7 +14,7 @@ export const catalogueMetadata = {
     "clubs": 40,
     "athletes": 685,
     "race_series": 131,
-    "editions": 549,
+    "editions": 624,
     "results": 1933
   }
 } as const;
