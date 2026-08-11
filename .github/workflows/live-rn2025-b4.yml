@@ -1,0 +1,26 @@
+name: Live Run Norwich batch 4 verification
+on:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify production
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=https://athrecs-comsite.vercel.app
+          check(){ code=$(curl -L -sS --retry 5 --retry-delay 5 -o "/tmp/$1" -w '%{http_code}' "$base$2"); echo "$1 $code"; test "$code" = 200; }
+          check home /
+          check athletes /athletes
+          check alex /athletes/alex-bird
+          check mark /athletes/mark-robinson-511
+          check andrew /athletes/andrew-douglas
+          grep -q '563' /tmp/athletes
+          grep -qi 'Alex Bird' /tmp/alex && grep -q '42:18' /tmp/alex
+          grep -qi 'Mark Robinson' /tmp/mark && grep -q '42:43' /tmp/mark
+          grep -qi 'Andrew Douglas' /tmp/andrew && grep -q '43:08' /tmp/andrew
+          echo 'Live batch 4 verification passed: 563 athletes; sample profiles and official times present.'
