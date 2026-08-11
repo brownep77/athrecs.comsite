@@ -56,7 +56,6 @@ const rows = [
   [595,"1821","james-byrne","44:11","MO"],
   [596,"1013","james-boulton","44:53","MO"],
   [597,"160","max-fisher","45:09","MO"],
-  [598,"683","adam-brown","44:47","MO"],
   [599,"904","josh-bloyce","45:10","MO"],
   [600,"798","thomas-galer","43:56","MO"],
 ] as const;
