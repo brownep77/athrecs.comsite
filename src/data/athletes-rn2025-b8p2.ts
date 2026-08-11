@@ -1,0 +1,61 @@
+import type { AthleteSeed } from "./types";
+
+const SOURCE = "https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf";
+type AthleteRow = readonly [number,string,string,string,"M"|"F",string,string,string,string,string,string|null,string|null,string];
+const rows: AthleteRow[] = [
+[951,"578","Philip","Brockington","M","M50","47:06","unattached","Unattached","Not supplied",null,null,"philip-brockington"],
+[952,"399","Eva","Eccles","F","FO","48:25","bure-valley-harriers","Bure Valley Harriers","Norfolk","Norfolk","England","eva-eccles"],
+[953,"911","Dominic","Jarvis","M","MO","47:38","unattached","Unattached","Not supplied",null,null,"dominic-jarvis"],
+[954,"1933","Clark","Hindle","M","MO","47:49","unattached","Unattached","Not supplied",null,null,"clark-hindle"],
+[955,"1489","Ruth","Chadwick","F","F55","48:18","ryston-runners","Ryston Runners","Norfolk","Norfolk","England","ruth-chadwick"],
+[956,"582","Tilly","Meyrick","F","FO","48:20","unattached","Unattached","Not supplied",null,null,"tilly-meyrick"],
+[957,"900","Jonathan","Dingle","M","M40","47:15","unattached","Unattached","Not supplied",null,null,"jonathan-dingle"],
+[958,"906","Jake","Gorrod","M","MO","47:33","unattached","Unattached","Not supplied",null,null,"jake-gorrod"],
+[959,"1725","Lloyd","Cossey","M","MO","47:54","unattached","Unattached","Not supplied",null,null,"lloyd-cossey"],
+[960,"1817","James","Ames","M","MO","48:00","unattached","Unattached","Not supplied",null,null,"james-ames"],
+[961,"243","Leon","Neeve","M","M45","48:11","waveney-valley-ac","Waveney Valley AC","Norfolk","Norfolk","England","leon-neeve"],
+[962,"701","Maud","Bissey","F","FO","47:20","unattached","Unattached","Not supplied",null,null,"maud-bissey"],
+[963,"760","Sarah","Raynsford","F","F45","48:12","waveney-valley-ac","Waveney Valley AC","Norfolk","Norfolk","England","sarah-raynsford"],
+[964,"1439","Dean","Johnson","M","MO","47:51","unattached","Unattached","Not supplied",null,null,"dean-johnson"],
+[965,"1047","Richard","Crewe","M","M50","48:04","thetford-ac","Thetford AC","Norfolk","Norfolk","England","richard-crewe"],
+[966,"1501","Matthew","Taylor","M","M40","48:00","unattached","Unattached","Not supplied",null,null,"matthew-taylor"],
+[967,"1611","Kirsty","Wheeler","F","FO","48:16","lowestoft-road-runners","Lowestoft Road Runners","Norfolk","Norfolk","England","kirsty-wheeler"],
+[968,"1527","Joseph","Gilman","M","M40","47:24","unattached","Unattached","Not supplied",null,null,"joseph-gilman"],
+[969,"1640","Josh","Bothe","M","MO","47:13","unattached","Unattached","Not supplied",null,null,"josh-bothe"],
+[970,"1645","Dave","Robinson","M","M50","47:19","unattached","Unattached","Not supplied",null,null,"dave-robinson"],
+[971,"639","Callum","Mcveigh","M","MO","47:53","unattached","Unattached","Not supplied",null,null,"callum-mcveigh"],
+[972,"1250","Ian","Chapman","M","M50","47:12","unattached","Unattached","Not supplied",null,null,"ian-chapman"],
+[973,"817","Warren","Bryant","M","MO","48:34","unattached","Unattached","Not supplied",null,null,"warren-bryant"],
+[974,"3191","Jefferson","Creed","M","M55","44:48","unattached","Unattached","Not supplied",null,null,"jefferson-creed"],
+[975,"1651","Megan","Wright","F","FO","47:36","unattached","Unattached","Not supplied",null,null,"megan-wright"],
+[976,"1838","Mike","Mead","M","MO","47:51","unattached","Unattached","Not supplied",null,null,"mike-mead"],
+[977,"985","Lewis","Kelly","M","MO","47:35","unattached","Unattached","Not supplied",null,null,"lewis-kelly"],
+[978,"865","Kieron","Wardrope","M","MO","47:00","unattached","Unattached","Not supplied",null,null,"kieron-wardrope"],
+[979,"1191","Matthew","Rogers","M","MO","47:53","unattached","Unattached","Not supplied",null,null,"matthew-rogers"],
+[980,"705","Jonathan","Hawes","M","M50","47:34","unattached","Unattached","Not supplied",null,null,"jonathan-hawes"],
+[981,"1246","Lewis","Gray","M","MO","47:22","unattached","Unattached","Not supplied",null,null,"lewis-gray"],
+[982,"1680","Nikki","Watson","F","FO","47:57","unattached","Unattached","Not supplied",null,null,"nikki-watson"],
+[983,"864","Grant","King","M","M45","47:37","dereham-runners","Dereham Runners AC","Norfolk","Norfolk","England","grant-king"],
+[984,"557","James","Cooper","M","M40","48:16","unattached","Unattached","Not supplied",null,null,"james-cooper"],
+[985,"188","Ross","Orrick","M","MO","48:06","unattached","Unattached","Not supplied",null,null,"ross-orrick"],
+[986,"1799","Freddy","Lowe","M","MO","47:21","unattached","Unattached","Not supplied",null,null,"freddy-lowe"],
+[987,"949","James","Burnett","M","MO","47:08","unattached","Unattached","Not supplied",null,null,"james-burnett"],
+[988,"741","Martin","Herrmann","M","M45","47:15","unattached","Unattached","Not supplied",null,null,"martin-herrmann"],
+[989,"3078","Reuben","Noller","M","MO","47:05","unattached","Unattached","Not supplied",null,null,"reuben-noller"],
+[990,"501","James","Barnes","M","MO","47:49","unattached","Unattached","Not supplied",null,null,"james-barnes"],
+[991,"620","Tom","Messenger","M","MO","47:07","unattached","Unattached","Not supplied",null,null,"tom-messenger"],
+[992,"1695","James","Hall","M","MO","47:28","unattached","Unattached","Not supplied",null,null,"james-hall"],
+[993,"1245","Edward","Wales","M","M40","47:52","unattached","Unattached","Not supplied",null,null,"edward-wales"],
+[994,"1349","Simon","Willis","M","MO","47:26","unattached","Unattached","Not supplied",null,null,"simon-willis"],
+[995,"1935","Thomas","Butler","M","MO","44:22","unattached","Unattached","Not supplied",null,null,"thomas-butler"],
+[996,"2227","Andrew","Hubbard","M","M40","45:36","unattached","Unattached","Not supplied",null,null,"andrew-hubbard"],
+[997,"1052","Marcus","Pead","M","M40","47:57","unattached","Unattached","Not supplied",null,null,"marcus-pead"],
+[998,"836","Ross","Browne","M","MO","48:16","unattached","Unattached","Not supplied",null,null,"ross-browne"],
+[999,"979","Sam","Thorpe","M","MO","47:11","unattached","Unattached","Not supplied",null,null,"sam-thorpe"],
+[1000,"179","Spencer","Gray","M","MO","47:47","unattached","Unattached","Not supplied",null,null,"spencer-gray"],
+];
+export const athletesRn2025B8P2: AthleteSeed[] = rows.map(([place,bib,given_name,family_name,gender,default_category,chipTime,club_slug,source_club_name,city,county,country,slug]) => {
+  const display_name=`${given_name} ${family_name}`;
+  const clubText=source_club_name==="Unattached"?"":`, representing ${source_club_name}`;
+  return {slug,display_name,given_name,family_name,gender,club_slug,source_club_name,city,...(county?{county}:{}),...(country?{country}:{}),bio:`${display_name} finished in place ${place} at Run Norwich 10K on 7 September 2025, recording an official chip time of ${chipTime}${clubText}.`,race_entry_name:display_name,default_category,default_bib:bib,preferred_distance:"10K",athrecs_id:`RN25-${bib}`,notes:`Run Norwich 2025: place ${place}; category ${default_category}; bib ${bib}; official chip time ${chipTime}.`,source_url:SOURCE};
+});
