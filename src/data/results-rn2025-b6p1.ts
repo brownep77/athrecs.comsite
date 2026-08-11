@@ -54,7 +54,7 @@ const rows = [
   [544,"493","elliot-rose","44:12","MO"],
   [545,"438","jason-hurst","44:30","M50"],
   [546,"555","paul-thorpe","44:54","M45"],
-  [547,"978,"oscar-bond","44:34","MO"],
+  [547,"978","oscar-bond","44:34","MO"],
   [548,"884","christopher-reeve","44:20","MO"],
   [549,"630","joshua-landles","44:06","MO"],
   [550,"815","lydia-randles","43:40","FO"],
