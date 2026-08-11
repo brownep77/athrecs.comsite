@@ -1,8 +1,8 @@
 export const catalogueMetadata = {
   "source": "https://www.athrecs.com",
-  "exported_at": "2026-08-11T07:50:00.000Z",
-  "export_method": "live main + full Jan–Dec 2026 Norfolk parkrun calendar",
-  "source_sha256": "b182a63ec45365fd2eba89c76f05c1afd4e3884641a840a7eaa9a83e8feee893",
+  "exported_at": "2026-08-11T08:00:00.000Z",
+  "export_method": "TRT fixture sync + full 2026 Norfolk parkrun calendar",
+  "source_sha256": "trt-sync-2026-08-11",
   "source_counts": {
     "athletes": 254,
     "race_series": 129,
@@ -13,8 +13,8 @@ export const catalogueMetadata = {
   "merged_counts": {
     "clubs": 40,
     "athletes": 685,
-    "race_series": 131,
-    "editions": 1699,
+    "race_series": 144,
+    "editions": 1831,
     "results": 1933
   }
 } as const;
