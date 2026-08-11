@@ -1,8 +1,8 @@
 export const catalogueMetadata = {
   "source": "https://www.athrecs.com",
-  "exported_at": "2026-08-11T08:00:00.000Z",
-  "export_method": "TRT fixture sync + full 2026 Norfolk parkrun calendar",
-  "source_sha256": "trt-sync-2026-08-11",
+  "exported_at": "2026-08-11T08:10:00.000Z",
+  "export_method": "TRT fixture sync + Run Norwich year editions + parkrun calendar",
+  "source_sha256": "run-norwich-editions-2026-08-11",
   "source_counts": {
     "athletes": 254,
     "race_series": 129,
@@ -14,7 +14,7 @@ export const catalogueMetadata = {
     "clubs": 40,
     "athletes": 685,
     "race_series": 144,
-    "editions": 1831,
+    "editions": 1826,
     "results": 1933
   }
 } as const;
