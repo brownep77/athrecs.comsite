@@ -1,0 +1,47 @@
+name: Run Norwich batch 4 generate
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Download official PDF and extract places 301-400
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -L --fail --retry 4 -o /tmp/rn25.pdf 'https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf'
+          pdftotext -layout /tmp/rn25.pdf /tmp/rn25.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          text=Path('/tmp/rn25.txt').read_text(errors='replace')
+          lines=text.splitlines()
+          out=[]
+          for line in lines:
+              m=re.match(r'^\s*(\d+)\s+', line)
+              if m and 301 <= int(m.group(1)) <= 400:
+                  out.append(line.rstrip())
+          if len(out)!=100:
+              raise SystemExit(f'Expected 100 rows, got {len(out)}')
+          Path('/tmp/b4.txt').write_text('\n'.join(out)+'\n')
+          print('\n'.join(out))
+          PY
+      - name: Upload extracted rows
+        uses: actions/upload-artifact@v4
+        with:
+          name: rn2025-b4-official-rows
+          path: /tmp/b4.txt
+          retention-days: 1
