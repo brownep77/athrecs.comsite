@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-rn2025-batch4-v37-parkrun-may-jun";
+const SEED_VERSION = "athrecs-rn2025-batch4-v38-parkrun-jul-aug";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;

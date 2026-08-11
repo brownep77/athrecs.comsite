@@ -1,7 +1,7 @@
 export const catalogueMetadata = {
   "source": "https://www.athrecs.com",
-  "exported_at": "2026-08-11T07:40:00.000Z",
-  "export_method": "live main + Jan–Jun + Aug–Sep 2026 parkrun calendar",
+  "exported_at": "2026-08-11T07:45:00.000Z",
+  "export_method": "live main + full Jan–Sep 2026 Norfolk parkrun calendar",
   "source_sha256": "b182a63ec45365fd2eba89c76f05c1afd4e3884641a840a7eaa9a83e8feee893",
   "source_counts": {
     "athletes": 254,
@@ -14,7 +14,7 @@ export const catalogueMetadata = {
     "clubs": 40,
     "athletes": 685,
     "race_series": 131,
-    "editions": 1274,
+    "editions": 1374,
     "results": 1933
   }
 } as const;
