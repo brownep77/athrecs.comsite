@@ -1,4 +1,4 @@
-name: Run Norwich batch 4 generate
+name: Run Norwich batch 4 verification
 
 on:
   pull_request:
@@ -8,7 +8,7 @@ permissions:
   contents: write
 
 jobs:
-  generate:
+  verify:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -16,67 +16,54 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-      - name: Install dependencies and PDF tools
-        run: |
-          npm ci --ignore-scripts
-          sudo apt-get update -qq
-          sudo apt-get install -y poppler-utils
-      - name: Extract official places 301-400
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -L --fail --retry 4 -o /tmp/rn25.pdf 'https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf'
-          pdftotext -layout /tmp/rn25.pdf /tmp/rn25.txt
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          text=Path('/tmp/rn25.txt').read_text(errors='replace')
-          out=[]
-          for line in text.splitlines():
-              m=re.match(r'^\s*(\d+)\s+', line)
-              if m and 301 <= int(m.group(1)) <= 400:
-                  out.append(line.rstrip())
-          if len(out)!=100:
-              raise SystemExit(f'Expected 100 rows, got {len(out)}')
-          Path('/tmp/b4.txt').write_text('\n'.join(out)+'\n')
-          PY
-      - name: Audit existing athletes and results
+      - run: npm ci --ignore-scripts
+      - name: Verify catalogue and batch 4
         shell: bash
         run: |
           set -euo pipefail
           node --input-type=module <<'NODE'
-          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
           import { createServer } from 'vite';
-          const vite = await createServer({ server: { middlewareMode: true }, appType: 'custom', logLevel: 'error' });
-          const mod = await vite.ssrLoadModule('/src/data/catalogue.ts');
-          const lines = fs.readFileSync('/tmp/b4.txt','utf8').trim().split('\n');
-          const parsed = lines.map(line => {
-            const parts=line.trim().split(/\s{2,}/);
-            const place=Number(parts[0]); const bib=parts[1]; const given=parts[2]; const family=parts[3];
-            const gender=parts[4]==='Female'?'F':'M'; const category=parts[6];
-            const hasClub=parts.length===11; const club=hasClub?parts[8]:'Unattached'; const time=(hasClub?parts[9]:parts[8]).slice(-5);
-            return {place,bib,given,family,displayName:`${given} ${family}`,gender,category,club,time};
-          });
-          const byName = new Map();
-          for (const a of mod.athletes) {
-            const k=a.display_name.toLowerCase();
-            if (!byName.has(k)) byName.set(k,[]);
-            byName.get(k).push({slug:a.slug,gender:a.gender,default_category:a.default_category??null,default_bib:a.default_bib??null});
-          }
-          const rn = mod.results.filter(r=>r.eventSlug==='run-norwich'&&r.date==='2025-09-07'&&r.distance==='10K');
-          const resultPlaces = new Set(rn.map(r=>r.place));
-          const report={
-            currentCounts:mod.catalogueMetadata.merged_counts,
-            existingNameMatches:parsed.filter(r=>byName.has(r.displayName.toLowerCase())).map(r=>({...r,matches:byName.get(r.displayName.toLowerCase())})),
-            existingResultPlaces:parsed.filter(r=>resultPlaces.has(r.place)).map(r=>r.place),
-            rows:parsed
-          };
-          fs.writeFileSync('/tmp/b4-audit.json',JSON.stringify(report,null,2)+'\n');
-          console.log(JSON.stringify({currentCounts:report.currentCounts,existingNameMatches:report.existingNameMatches,existingResultPlaces:report.existingResultPlaces},null,2));
+          const vite=await createServer({server:{middlewareMode:true},appType:'custom',logLevel:'error'});
+          const m=await vite.ssrLoadModule('/src/data/catalogue.ts');
+          assert.equal(m.athletes.length,563);
+          assert.equal(m.results.length,1835);
+          assert.equal(new Set(m.athletes.map(a=>a.slug)).size,m.athletes.length,'duplicate athlete slugs');
+          const slugs=new Set(m.athletes.map(a=>a.slug));
+          for(const r of m.results) assert(slugs.has(r.athleteSlug),`missing athlete ${r.athleteSlug}`);
+          const batch=m.results.filter(r=>r.eventSlug==='run-norwich'&&r.date==='2025-09-07'&&r.distance==='10K'&&r.place>=301&&r.place<=400);
+          assert.equal(batch.length,100);
+          assert.deepEqual(batch.map(r=>r.place).sort((a,b)=>a-b),Array.from({length:100},(_,i)=>301+i));
+          const b4=await vite.ssrLoadModule('/src/data/athletes-rn2025-b4.ts');
+          assert.equal(b4.athletesRn2025B4.length,98);
+          assert(b4.athletesRn2025B4.every(a=>!/placeholder/i.test(a.bio)));
+          assert(slugs.has('simon-wright')&&slugs.has('perry-payne')&&slugs.has('mark-robinson-511'));
+          const mark=batch.find(r=>r.place===376); assert.equal(mark.athleteSlug,'mark-robinson-511');
+          console.log(JSON.stringify({athletes:m.athletes.length,results:m.results.length,batch4Athletes:b4.athletesRn2025B4.length,batch4Results:batch.length,places:'301-400 complete'},null,2));
           await vite.close();
           NODE
-      - uses: actions/upload-artifact@v4
-        with:
-          name: rn2025-b4-audit
-          path: /tmp/b4-audit.json
-          retention-days: 1
+      - name: Build
+        run: npm run build
+      - name: Bump seed version after verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('src/lib/athrecs/seed.server.ts')
+          text=p.read_text()
+          old='const SEED_VERSION = "athrecs-rn2025-batch3-v32";'
+          new='const SEED_VERSION = "athrecs-rn2025-batch4-v33";'
+          if new not in text:
+              if old not in text: raise SystemExit('Expected seed version not found')
+              text=text.replace(old,new,1)
+              p.write_text(text)
+          PY
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if ! git diff --quiet -- src/lib/athrecs/seed.server.ts; then
+            git add src/lib/athrecs/seed.server.ts
+            git commit -m 'Bump seed version for Run Norwich batch 4'
+            git push origin "HEAD:${{ github.event.pull_request.head.ref }}"
+          fi
