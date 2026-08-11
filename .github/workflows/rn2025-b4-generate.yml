@@ -16,25 +16,24 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
-      - name: Install PDF parser
-        run: pip install --quiet pypdf
+      - name: Install PDF tools
+        run: sudo apt-get update -qq && sudo apt-get install -y poppler-utils
       - name: Download official PDF and extract places 301-400
         shell: bash
         run: |
           set -euo pipefail
           curl -L --fail --retry 4 -o /tmp/rn25.pdf 'https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf'
+          pdftotext -layout /tmp/rn25.pdf /tmp/rn25.txt
           python3 - <<'PY'
           from pathlib import Path
-          from pypdf import PdfReader
           import re
-          text='\n'.join((p.extract_text() or '') for p in PdfReader('/tmp/rn25.pdf').pages)
+          text=Path('/tmp/rn25.txt').read_text(errors='replace')
           out=[]
           for line in text.splitlines():
               m=re.match(r'^\s*(\d+)\s+', line)
               if m and 301 <= int(m.group(1)) <= 400:
                   out.append(line.rstrip())
           if len(out)!=100:
-              Path('/tmp/all.txt').write_text(text)
               raise SystemExit(f'Expected 100 rows, got {len(out)}')
           Path('/tmp/b4.txt').write_text('\n'.join(out)+'\n')
           print('\n'.join(out))
@@ -42,7 +41,6 @@ jobs:
       - name: Upload extracted rows
         uses: actions/upload-artifact@v4
         with:
-          name: rn2025-b4-official-lines
+          name: rn2025-b4-official-rows
           path: /tmp/b4.txt
-          if-no-files-found: error
           retention-days: 1
