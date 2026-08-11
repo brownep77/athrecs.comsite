@@ -1,0 +1,61 @@
+import type { AthleteSeed } from "./types";
+
+const SOURCE = "https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf";
+type AthleteRow = readonly [number,string,string,string,"M"|"F",string,string,string,string,string,string|null,string|null,string];
+const rows: AthleteRow[] = [
+[901,"1768","Lyndon","Ward","M","MO","46:57","unattached","Unattached","Not supplied",null,null,"lyndon-ward"],
+[902,"1332","Louise","Hudson","F","F45","47:01","dereham-runners","Dereham Runners AC","Norfolk","Norfolk","England","louise-hudson"],
+[903,"1291","Corbin","Griffen","M","MO","47:24","unattached","Unattached","Not supplied",null,null,"corbin-griffen"],
+[904,"2079","Rebecca","Willis","F","FO","46:34","unattached","Unattached","Not supplied",null,null,"rebecca-willis"],
+[905,"494","James","Warren","M","MO","47:42","unattached","Unattached","Not supplied",null,null,"james-warren"],
+[906,"320","Connor","Woodhouse","M","MO","47:05","unattached","Unattached","Not supplied",null,null,"connor-woodhouse"],
+[907,"299","Andrew","Anthony","M","M50","48:04","unattached","Unattached","Not supplied",null,null,"andrew-anthony"],
+[908,"1123","Darrell","Oldman","M","M60","47:50","bungay-black-dog-rc","Bungay Black Dog RC","Norfolk","Norfolk","England","darrell-oldman"],
+[909,"1836","Finlay","Page","M","MO","48:17","unattached","Unattached","Not supplied",null,null,"finlay-page"],
+[910,"969","Tom","Hepburn","M","MO","47:05","unattached","Unattached","Not supplied",null,null,"tom-hepburn"],
+[911,"2176","Nathaniel","Tolmie","M","MO","44:51","unattached","Unattached","Not supplied",null,null,"nathaniel-tolmie"],
+[912,"1419","Leo","Blyth","M","M45","47:21","unattached","Unattached","Not supplied",null,null,"leo-blyth"],
+[913,"1393","Fraser","Steggles","M","MO","47:05","unattached","Unattached","Not supplied",null,null,"fraser-steggles"],
+[914,"955","Marc","Gridley","M","M45","47:13","unattached","Unattached","Not supplied",null,null,"marc-gridley"],
+[915,"1132","Frances","Cooke","F","F40","47:20","bure-valley-harriers","Bure Valley Harriers","Norfolk","Norfolk","England","frances-cooke"],
+[916,"1726","Luke","Townshend","M","M45","47:35","unattached","Unattached","Not supplied",null,null,"luke-townshend"],
+[917,"404","George","Brockhouse","M","MO","46:46","unattached","Unattached","Not supplied",null,null,"george-brockhouse"],
+[918,"1600","Chris","Ramshaw","M","MO","47:04","unattached","Unattached","Not supplied",null,null,"chris-ramshaw"],
+[919,"771","Joey","Clements","M","M40","47:13","unattached","Unattached","Not supplied",null,null,"joey-clements"],
+[920,"1665","Lashaun","Naurayan","M","MO","48:20","unattached","Unattached","Not supplied",null,null,"lashaun-naurayan"],
+[921,"1426","James","Bates","M","M40","47:15","unattached","Unattached","Not supplied",null,null,"james-bates"],
+[922,"674","Paul","Price","M","M60","47:35","city-of-norwich-ac","City Of Norwich AC","Norfolk","Norfolk","England","paul-price"],
+[923,"1732","Michael","Webster","M","M60","47:41","unattached","Unattached","Not supplied",null,null,"michael-webster"],
+[924,"1307","Matt","Frary","M","M55","47:01","unattached","Unattached","Not supplied",null,null,"matt-frary"],
+[925,"1831","Jack","Riggall","M","MO","48:03","unattached","Unattached","Not supplied",null,null,"jack-riggall"],
+[926,"1601","Kieran","Macdonald","M","MO","47:53","unattached","Unattached","Not supplied",null,null,"kieran-macdonald"],
+[927,"1080","Olivia","Smith","F","FO","47:54","unattached","Unattached","Not supplied",null,null,"olivia-smith"],
+[928,"1770","Ben","Steed","M","M40","47:59","unattached","Unattached","Not supplied",null,null,"ben-steed"],
+[929,"1181","Owen","Rhodes","M","MO","47:26","unattached","Unattached","Not supplied",null,null,"owen-rhodes"],
+[930,"1404","Charlie","Blandy","M","MO","47:42","unattached","Unattached","Not supplied",null,null,"charlie-blandy"],
+[931,"757","Stephen","Ramm","M","M45","47:40","tri-anglia","Tri-Anglia Triathlon Club","Norfolk","Norfolk","England","stephen-ramm"],
+[932,"653","Andy","Palmer","M","M60","47:17","norwich-road-runners","Norwich Road Runners","Norfolk","Norfolk","England","andy-palmer"],
+[933,"613","Claire","Brown","F","F60","47:45","wymondham-ac","Wymondham AC","Norfolk","Norfolk","England","claire-brown"],
+[934,"652","Stacey","Harper","F","F45","47:18","norwich-road-runners","Norwich Road Runners","Norfolk","Norfolk","England","stacey-harper"],
+[935,"1283","Richard","Moore","M","M40","47:41","norwich-road-runners","Norwich Road Runners","Norfolk","Norfolk","England","richard-moore"],
+[936,"1351","Duncan","Smith","M","M65","48:20","reepham-runners","Reepham Runners","Norfolk","Norfolk","England","duncan-smith"],
+[937,"1533","Ian","Minns","M","M45","47:07","unattached","Unattached","Not supplied",null,null,"ian-minns"],
+[938,"1049","Paul","Freestone","M","M50","46:56","unattached","Unattached","Not supplied",null,null,"paul-freestone"],
+[939,"1204","Rob","Oleary","M","MO","46:52","unattached","1ZER01 Athletes","Not supplied",null,null,"rob-o-leary"],
+[940,"1231","Cat","Wardell","F","F50","47:46","unattached","Unattached","Not supplied",null,null,"cat-wardell"],
+[941,"761","Jonny","Ray","M","M40","47:53","unattached","Unattached","Not supplied",null,null,"jonny-ray"],
+[942,"871","Georgia","Gittins","F","FO","46:45","unattached","Unattached","Not supplied",null,null,"georgia-gittins"],
+[943,"1374","Oliver","Gardiner","M","MO","46:46","unattached","Unattached","Not supplied",null,null,"oliver-gardiner"],
+[944,"670","Ceri","Theobald","M","M50","48:08","norfolk-gazelles","Norfolk Gazelles AC","Norfolk","Norfolk","England","ceri-theobald"],
+[945,"1083","Brian","Bannon","M","MO","48:17","unattached","Unattached","Not supplied",null,null,"brian-bannon"],
+[946,"1775","Craig","Edwards","M","M40","46:52","unattached","Unattached","Not supplied",null,null,"craig-edwards"],
+[947,"1569","Eve","Dewsnap","F","F45","47:29","tri-anglia","Tri-Anglia Triathlon Club","Norfolk","Norfolk","England","eve-dewsnap"],
+[948,"1169","Edward","Brisley","M","MO","47:37","unattached","Unattached","Not supplied",null,null,"edward-brisley"],
+[949,"827","Laura","Parry","F","FO","47:46","city-of-norwich-ac","City Of Norwich AC","Norfolk","Norfolk","England","laura-parry"],
+[950,"1112","Chris","Chorley","M","M60","47:40","bungay-black-dog-rc","Bungay Black Dog RC","Norfolk","Norfolk","England","chris-chorley"],
+];
+export const athletesRn2025B8P1: AthleteSeed[] = rows.map(([place,bib,given_name,family_name,gender,default_category,chipTime,club_slug,source_club_name,city,county,country,slug]) => {
+  const display_name=`${given_name} ${family_name}`;
+  const clubText=source_club_name==="Unattached"?"":`, representing ${source_club_name}`;
+  return {slug,display_name,given_name,family_name,gender,club_slug,source_club_name,city,...(county?{county}:{}),...(country?{country}:{}),bio:`${display_name} finished in place ${place} at Run Norwich 10K on 7 September 2025, recording an official chip time of ${chipTime}${clubText}.`,race_entry_name:display_name,default_category,default_bib:bib,preferred_distance:"10K",athrecs_id:`RN25-${bib}`,notes:`Run Norwich 2025: place ${place}; category ${default_category}; bib ${bib}; official chip time ${chipTime}.`,source_url:SOURCE};
+});
