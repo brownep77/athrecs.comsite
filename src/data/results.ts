@@ -8,6 +8,7 @@ import { resultsRn2025B4 } from "./results-rn2025-b4";
 import { resultsRn2025B5 } from "./results-rn2025-b5";
 import { resultsRn2025B6 } from "./results-rn2025-b6";
 import { resultsRn2025B7 } from "./results-rn2025-b7";
+import { resultsRn2025B8 } from "./results-rn2025-b8";
 
 export const results: ResultSeed[] = [
   ...resultsA,
@@ -19,4 +20,5 @@ export const results: ResultSeed[] = [
   ...resultsRn2025B5,
   ...resultsRn2025B6,
   ...resultsRn2025B7,
+  ...resultsRn2025B8,
 ];

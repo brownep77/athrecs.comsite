@@ -12,9 +12,9 @@ export const catalogueMetadata = {
   },
   "merged_counts": {
     "clubs": 40,
-    "athletes": 1054,
+    "athletes": 1254,
     "race_series": 144,
     "editions": 1826,
-    "results": 2328
+    "results": 2528
   }
 } as const;
