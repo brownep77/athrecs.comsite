@@ -41,7 +41,6 @@ const rows = [
   [730,"672","nicola-hill","46:21","F50"],
   [731,"675","jessica-smith","45:22","F40"],
   [732,"1022","simon-farrow","45:05","M50"],
-  [733,"1004","lee-johnson","44:51","MO"],
   [734,"866","leon-edwards","45:32","M40"],
   [735,"854","neil-boyce","46:08","M50"],
   [736,"669","dillon-alexander","45:11","MO"],
