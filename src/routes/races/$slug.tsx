@@ -17,6 +17,7 @@ import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
+import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 
 export const Route = createFileRoute("/races/$slug")({
   loader: async ({ params }) => {
@@ -71,7 +72,7 @@ function RacePage() {
           <Badge variant="outline">{event.county}</Badge>
           {shownDistances.map((d) => (
             <Badge key={d} variant="outline">
-              {d}
+              {formatDistanceWithUnits(d)}
             </Badge>
           ))}
         </div>
@@ -216,7 +217,9 @@ function EditionList({
               >
                 <div className="space-y-1">
                   <div className="flex flex-wrap gap-1.5">
-                    <Badge variant="accent">{ed.distance_code}</Badge>
+                    <Badge variant="accent">
+                      {formatDistanceWithUnits(ed.distance_code, ed.distance_km)}
+                    </Badge>
                     <Badge variant={st === "Finished" ? "default" : "solid"}>
                       {statusLabel(st)}
                     </Badge>

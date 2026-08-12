@@ -14,6 +14,7 @@ import { NationBadge, NationFlag } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { FilterChips } from "@/components/races/FilterChips";
 import { DISTANCE_FILTERS, TERRAIN_FILTERS, sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
+import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import type { VenueDetails } from "@/data/venue-details";
 
 const REGIONS: { value: string; label: string; kind?: "UnitedKingdom" | "Ireland" }[] = [
@@ -227,7 +228,7 @@ function EventCard({ ed }: { ed: CardModel }) {
             {ed.surface ? <Badge variant="outline">{ed.surface}</Badge> : null}
             {distances.map((code) => (
               <Badge key={code} variant="outline">
-                {code}
+                {formatDistanceWithUnits(code)}
               </Badge>
             ))}
             <Badge variant={st === "Finished" ? "default" : "solid"}>

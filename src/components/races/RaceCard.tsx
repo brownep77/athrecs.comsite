@@ -20,6 +20,7 @@ import {
 } from "@/lib/athrecs/format";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
+import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { Badge } from "@/components/ui/badge";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
@@ -87,7 +88,7 @@ export function RaceCard({ race }: { race: EventListItem }) {
             <Badge variant="outline">{race.surface}</Badge>
             {distances.slice(0, 4).map((d) => (
               <Badge key={d} variant="outline">
-                {d}
+                {formatDistanceWithUnits(d)}
               </Badge>
             ))}
             {focusStatus && (
@@ -111,7 +112,9 @@ export function RaceCard({ race }: { race: EventListItem }) {
               ) : (
                 <span className="text-subtle"> · Start time TBC</span>
               )}
-              {race.next_distance ? ` · ${race.next_distance}` : ""}
+              {race.next_distance
+                ? ` · ${formatDistanceWithUnits(race.next_distance)}`
+                : ""}
             </p>
           ) : (
             <p className="mt-1 text-xs text-subtle">
