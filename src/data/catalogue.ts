@@ -26,6 +26,7 @@ export { results } from "./results";
 import { seriesList as coreSeries } from "./series";
 import { editions as coreEditions } from "./editions";
 import { runabcEditions, runabcSeries } from "./runabc";
+import { multiSportEditions, multiSportSeries } from "./multisport";
 import type { Edition, Series } from "./types";
 
 function normName(name: string): string {
@@ -33,10 +34,15 @@ function normName(name: string): string {
 }
 
 const coreNameKeys = new Set(coreSeries.map((series) => normName(series.name)));
-const coreSlugs = new Set(coreSeries.map((series) => series.slug));
-const extraSeries = (runabcSeries as Series[]).filter(
-  (series) => !coreSlugs.has(series.slug) && !coreNameKeys.has(normName(series.name)),
-);
+const usedSlugs = new Set(coreSeries.map((series) => series.slug));
+const extraSeries: Series[] = [];
+for (const series of [...(runabcSeries as Series[]), ...(multiSportSeries as Series[])]) {
+  const key = normName(series.name);
+  if (usedSlugs.has(series.slug) || coreNameKeys.has(key)) continue;
+  usedSlugs.add(series.slug);
+  coreNameKeys.add(key);
+  extraSeries.push(series);
+}
 const extraSlugs = new Set(extraSeries.map((series) => series.slug));
 
 export const seriesList: Series[] = [...coreSeries, ...extraSeries];
@@ -44,6 +50,7 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries];
 const mergedEditions = [
   ...(coreEditions as Edition[]),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
 ];
 
 export const editions: Edition[] = (() => {
