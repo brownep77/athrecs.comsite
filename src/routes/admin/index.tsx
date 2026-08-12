@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  getDbStatus,
   importFromCsv,
   importFromJson,
   importResults,
@@ -77,6 +78,12 @@ function AdminPage() {
     queryFn: () => listAdminEventCards(),
   });
 
+  const dbStatus = useQuery({
+    queryKey: ["admin-db-status"],
+    queryFn: () => getDbStatus(),
+    refetchInterval: 15_000,
+  });
+
   const preview = useQuery({
     queryKey: ["admin-preview-events"],
     queryFn: () => listEvents({ data: {} }),
@@ -144,6 +151,60 @@ function AdminPage() {
           Live listings use the same Race cards as the public Events page.
         </p>
       </div>
+
+      <section
+        className={`space-y-3 rounded-xl border p-5 shadow-card ${
+          dbStatus.data && !dbStatus.data.persistent
+            ? "border-amber-500/50 bg-amber-50/80"
+            : "border-border bg-surface"
+        }`}
+      >
+        <h2 className="font-display text-lg font-semibold text-fg">
+          Database status
+        </h2>
+        {dbStatus.isLoading && (
+          <p className="text-sm text-muted">Checking database…</p>
+        )}
+        {dbStatus.data && (
+          <div className="space-y-2 text-sm">
+            <p>
+              Backend:{" "}
+              <strong className="text-fg">
+                {dbStatus.data.backend === "neon"
+                  ? "Neon Postgres (persistent)"
+                  : "PGLite (ephemeral — data can reset on cold start)"}
+              </strong>
+            </p>
+            <p className="text-muted">
+              Counts — athletes {dbStatus.data.athletes.toLocaleString()}, results{" "}
+              {dbStatus.data.results.toLocaleString()}, clubs{" "}
+              {dbStatus.data.clubs.toLocaleString()}, events{" "}
+              {dbStatus.data.events.toLocaleString()}, editions{" "}
+              {dbStatus.data.editions.toLocaleString()}
+            </p>
+            {dbStatus.data.seedVersion && (
+              <p className="text-xs text-subtle">
+                Seed marker: {dbStatus.data.seedVersion}
+              </p>
+            )}
+            {!dbStatus.data.persistent && (
+              <p className="rounded-lg border border-amber-500/40 bg-amber-100/80 px-3 py-2 text-amber-950">
+                <strong>Action needed:</strong> set{" "}
+                <code className="rounded bg-white/80 px-1 text-xs">DATABASE_URL</code>{" "}
+                to your Neon connection string on the deployment (Publish / Vercel
+                env), then Publish again. Until then, multi-year imports will not
+                stick.
+              </p>
+            )}
+            {dbStatus.data.persistent && dbStatus.data.athletes < 2000 && (
+              <p className="text-muted">
+                Neon is connected. Re-run results import to load full Run Norwich
+                history (target ~50k+ results).
+              </p>
+            )}
+          </div>
+        )}
+      </section>
 
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
         <h2 className="font-display text-lg font-semibold text-fg">

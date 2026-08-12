@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getSql } from "@/lib/db";
+import { getSql, dbSource } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
 import type {
@@ -357,6 +357,37 @@ export const getHomeStats = createServerFn({ method: "GET" }).handler(
     };
   },
 );
+
+/** Live DB backend + row counts for admin diagnosis (Neon vs ephemeral PGLite). */
+export const getDbStatus = createServerFn({ method: "GET" }).handler(async () => {
+  const sql = await ready();
+  const row = await sql<{
+    clubs: number;
+    athletes: number;
+    events: number;
+    editions: number;
+    results: number;
+  }>`select
+    (select count(*)::int from clubs) as clubs,
+    (select count(*)::int from athletes) as athletes,
+    (select count(*)::int from events) as events,
+    (select count(*)::int from editions) as editions,
+    (select count(*)::int from results) as results`;
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'seed_version' limit 1
+  `;
+  const r = row[0];
+  return {
+    backend: dbSource,
+    persistent: dbSource === "neon",
+    seedVersion: meta[0]?.value ?? null,
+    clubs: r?.clubs ?? 0,
+    athletes: r?.athletes ?? 0,
+    events: r?.events ?? 0,
+    editions: r?.editions ?? 0,
+    results: r?.results ?? 0,
+  };
+});
 
 export const listCalendarEditions = createServerFn({ method: "GET" }).handler(
   async () => {
