@@ -9,27 +9,24 @@ import {
   Users,
   UsersRound,
 } from "lucide-react";
-import { getHomeStats, listAthletes, listCalendarEditions, listClubs, listEvents } from "@/lib/athrecs/api";
+import { getHomeStats, listAthletes, listClubs, listEvents } from "@/lib/athrecs/api";
 import { RaceCard } from "@/components/races/RaceCard";
 import { ClubCard } from "@/components/clubs/ClubCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NationBadge } from "@/components/flags/NationFlag";
-import type { EventListItem } from "@/lib/athrecs/types";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    const [stats, events, clubs, athletes, upcoming] = await Promise.all([
+    const [stats, events, clubs, athletes] = await Promise.all([
       getHomeStats(),
       listEvents({ data: { upcomingOnly: true, limit: 8 } }),
       listClubs({ data: {} }),
       listAthletes({ data: {} }),
-      listCalendarEditions({ data: { upcomingOnly: true, limit: 8 } }),
     ]);
     return {
       stats,
       featured: events,
-      upcoming,
       clubs: clubs.slice(0, 4),
       athletes: athletes
         .filter((a) => a.result_count > 0)
@@ -41,7 +38,7 @@ export const Route = createFileRoute("/")({
 });
 
 function HoldingHomePage() {
-  const { stats, featured, upcoming, clubs, athletes } = Route.useLoaderData();
+  const { stats, featured, clubs, athletes } = Route.useLoaderData();
 
   return (
     <div className="space-y-10 pb-4">
@@ -234,55 +231,6 @@ function HoldingHomePage() {
             </p>
           </li>
         </ol>
-      </section>
-
-      {/* Live data from pilot */}
-      <section className="space-y-3">
-        <div className="flex items-end justify-between gap-2">
-          <div>
-            <h2 className="font-display text-lg font-semibold text-fg">
-              Calendar days
-            </h2>
-            <p className="text-xs text-subtle">
-              Next race days from the UK calendar — same flags and travel notes.
-            </p>
-          </div>
-          <Link
-            to="/calendar"
-            className="shrink-0 text-sm font-medium text-accent no-underline hover:underline"
-          >
-            Full calendar
-          </Link>
-        </div>
-        <div className="grid gap-2">
-          {upcoming.slice(0, 6).map((ed) => (
-            <RaceCard
-              key={ed.id}
-              race={{
-                id: ed.id,
-                slug: ed.event_slug,
-                name: ed.event_name,
-                sport: ed.sport as EventListItem["sport"],
-                country: ed.country,
-                county: ed.county,
-                city: ed.city,
-                area: ed.area,
-                surface: "Road",
-                summary: "",
-                organiser: "",
-                website: "",
-                distances: [ed.distance_code],
-                next_date: ed.event_date,
-                next_distance: ed.distance_code,
-                next_status: ed.status as EventListItem["next_status"],
-                next_start_time: ed.start_time,
-                upcoming_count: 1,
-                past_count: 0,
-                edition_count: 1,
-              }}
-            />
-          ))}
-        </div>
       </section>
 
       <section className="space-y-3">

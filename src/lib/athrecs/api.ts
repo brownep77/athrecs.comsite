@@ -37,6 +37,7 @@ export const listEvents = createServerFn({ method: "GET" })
     const today = todayIso();
     const upcomingOnly = data.upcomingOnly === true;
     const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
+    const fetchLimit = Math.min(limit * 2, 120);
 
     const rows = await sql<
       EventListItem & { distances_csv: string | null }
@@ -105,14 +106,17 @@ export const listEvents = createServerFn({ method: "GET" })
           where ed.event_id = e.id and ed.event_date >= ${today}::date
         ) asc nulls last,
         e.name asc
-      limit ${limit}
+      limit ${fetchLimit}
     `;
 
-    return rows.map((r) => ({
-      ...r,
-      distances: r.distances_csv ? r.distances_csv.split(",") : [],
-      next_status: (r.next_status as EntryStatus) ?? null,
-    }));
+    const { collapseSameNameDate } = await import("@/lib/athrecs/dedupe");
+    return collapseSameNameDate(
+      rows.map((r) => ({
+        ...r,
+        distances: r.distances_csv ? r.distances_csv.split(",") : [],
+        next_status: (r.next_status as EntryStatus) ?? null,
+      })),
+    ).slice(0, limit);
   });
 
 export const getEventBySlug = createServerFn({ method: "GET" })
@@ -420,6 +424,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const today = todayIso();
     const upcomingOnly = data.upcomingOnly !== false;
     const limit = Math.min(Math.max(data.limit ?? 24, 1), 80);
+    const fetchLimit = Math.min(limit * 3, 120);
     const rows = await sql<{
       id: number;
       event_date: string;
@@ -467,10 +472,11 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           or e.county = ${region}
         )
       order by ed.event_date asc, e.name
-      limit ${limit}
+      limit ${fetchLimit}
     `;
     const { venueForEvent } = await import("@/lib/athrecs/venue");
-    const mapped = rows.map((row) => {
+    const { collapseSameEventDate } = await import("@/lib/athrecs/dedupe");
+    const mapped = collapseSameEventDate(rows).map((row) => {
       const venue = venueForEvent({
         slug: row.event_slug,
         city: row.city,
@@ -480,14 +486,16 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       });
       return { ...row, venue };
     });
-    if (!region) return mapped;
+    if (!region) return mapped.slice(0, limit);
     if (region === "Northern Ireland" || region === "Ireland") {
-      return mapped.filter((row) => row.venue.nation === region);
+      return mapped.filter((row) => row.venue.nation === region).slice(0, limit);
     }
-    return mapped.filter((row) => {
-      if (row.venue.nation === region) return true;
-      return row.country === region || row.county === region;
-    });
+    return mapped
+      .filter((row) => {
+        if (row.venue.nation === region) return true;
+        return row.country === region || row.county === region;
+      })
+      .slice(0, limit);
   });
 
 

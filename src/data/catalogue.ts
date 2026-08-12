@@ -28,13 +28,34 @@ import { editions as coreEditions } from "./editions";
 import { runabcEditions, runabcSeries } from "./runabc";
 import type { Edition, Series } from "./types";
 
-export const seriesList: Series[] = [
-  ...coreSeries,
-  ...(runabcSeries as Series[]),
-];
-export const editions: Edition[] = [
+function normName(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+const coreNameKeys = new Set(coreSeries.map((series) => normName(series.name)));
+const coreSlugs = new Set(coreSeries.map((series) => series.slug));
+const extraSeries = (runabcSeries as Series[]).filter(
+  (series) => !coreSlugs.has(series.slug) && !coreNameKeys.has(normName(series.name)),
+);
+const extraSlugs = new Set(extraSeries.map((series) => series.slug));
+
+export const seriesList: Series[] = [...coreSeries, ...extraSeries];
+
+const mergedEditions = [
   ...(coreEditions as Edition[]),
-  ...(runabcEditions as Edition[]),
+  ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
 ];
+
+export const editions: Edition[] = (() => {
+  const seen = new Set<string>();
+  const unique: Edition[] = [];
+  for (const edition of mergedEditions) {
+    const key = `${edition.seriesSlug}|${edition.date}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(edition);
+  }
+  return unique;
+})();
 
 export { catalogueMetadata } from "./catalogue-metadata";
