@@ -1,3 +1,4 @@
+// Results-import UI (section 4) — force Vercel rebuild 2026-08-12T05:11:23.244467Z
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
