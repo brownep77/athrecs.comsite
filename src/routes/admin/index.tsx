@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   importFromCsv,
   importFromJson,
+  importResults,
   listAdminEventCards,
 } from "@/lib/athrecs/api";
 import { Badge } from "@/components/ui/badge";
@@ -68,6 +69,7 @@ function AdminPage() {
   const [json, setJson] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [resultsJson, setResultsJson] = useState("");
 
   const cards = useQuery({
     queryKey: ["admin-events"],
@@ -97,6 +99,18 @@ function AdminPage() {
       setMessage(
         `Grok JSON import: ${r.eventsUpserted} events, ${r.editionsUpserted} editions` +
           (r.errors.length ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}` : ""),
+      );
+      void qc.invalidateQueries();
+    },
+    onError: (e) => setMessage(e instanceof Error ? e.message : String(e)),
+  });
+
+  const resultsMut = useMutation({
+    mutationFn: () => importResults({ data: { json: resultsJson } }),
+    onSuccess: (r) => {
+      setMessage(
+        `Results import: ${r.athletesUpserted} athletes, ${r.resultsUpserted} results` +
+          (r.errors?.length ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}` : ""),
       );
       void qc.invalidateQueries();
     },
@@ -201,6 +215,31 @@ function AdminPage() {
           onClick={() => csvMut.mutate()}
         >
           {csvMut.isPending ? "Importing…" : "Import CSV"}
+        </Button>
+      </section>
+
+
+      <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
+        <h2 className="font-display text-lg font-semibold text-fg">
+          4. Results import (append-only)
+        </h2>
+        <p className="text-sm text-muted">
+          Paste {"{ results: [...] }"} JSON. Creates athletes/clubs as needed and
+          upserts finish times against an existing edition. Does not wipe the seed.
+        </p>
+        <textarea
+          value={resultsJson}
+          onChange={(e) => setResultsJson(e.target.value)}
+          rows={10}
+          placeholder='{"results":[{"eventSlug":"run-norwich","date":"2025-09-07","distance":"10K","athleteName":"Example Runner","gender":"M","time":"49:30","place":1101}]}'
+          className="w-full rounded-lg border border-border bg-bg px-3 py-2 font-mono text-xs text-fg outline-none focus:ring-2 focus:ring-accent/30"
+        />
+        <Button
+          type="button"
+          disabled={!resultsJson.trim() || resultsMut.isPending}
+          onClick={() => resultsMut.mutate()}
+        >
+          {resultsMut.isPending ? "Importing results…" : "Import results JSON"}
         </Button>
       </section>
 
