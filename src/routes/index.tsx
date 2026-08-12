@@ -136,7 +136,8 @@ function HoldingHomePage() {
           <Feature
             icon={UsersRound}
             title="Clubs"
-            body="Local clubs beside athletes — CONAC, NNBR, NRR, Gazelles and more."
+            body="England Athletics clubs with sports and websites — beside athletes on ATHRECS."
+
             to="/clubs"
             cta="View clubs"
           />

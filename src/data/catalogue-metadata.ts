@@ -11,10 +11,11 @@ export const catalogueMetadata = {
     "raw_club_names": 42
   },
   "merged_counts": {
-    "clubs": 40,
+    "clubs": 1456,
     "athletes": 1254,
     "race_series": 144,
     "editions": 1826,
     "results": 2528
-  }
+  },
+  "clubs_source": "England Athletics Find a Club (types=club) + prior ATHRECS catalogue"
 } as const;

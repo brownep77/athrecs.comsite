@@ -8,8 +8,9 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-import-api-v47-never-wipe";
+const SEED_VERSION = "athrecs-import-api-v48-ea-clubs";
 const EXPECTED = catalogueMetadata.merged_counts;
+
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
 type GlobalSeedState = typeof globalThis & {
@@ -321,28 +322,15 @@ async function alreadySeeded(sql: Sql): Promise<boolean> {
   return aboveFloor;
 }
 
-async function seed(): Promise<void> {
-  const sql = await getSql();
-  await ensureSchema(sql);
-  if (await alreadySeeded(sql)) return;
-
-  // NEVER wipe a non-empty database. Full catalogue seed only runs on empty DBs.
-  // Imports (multi-year Run Norwich etc.) must survive deploys and cold starts.
-  const guard = await sql<{ athletes: number; results: number; clubs: number }>`
-    select
-      (select count(*)::int from athletes) as athletes,
-      (select count(*)::int from results) as results,
-      (select count(*)::int from clubs) as clubs`;
-  const g = guard[0];
-  if (g && (g.athletes > 0 || g.results > 0 || g.clubs > 0)) {
-    await sql`
-      insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
-      on conflict (key) do update set value = excluded.value
-    `;
+async function upsertCatalogueClubs(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'clubs_catalogue_version' limit 1
+  `;
+  const count = await sql<{ n: number }>`select count(*)::int as n from clubs`;
+  const targetVersion = SEED_VERSION;
+  if (meta[0]?.value === targetVersion && (count[0]?.n ?? 0) >= EXPECTED.clubs) {
     return;
   }
-
-  // Empty DB only — full catalogue seed (no deletes needed on empty tables).
   await insertRows(
     sql,
     "clubs",
@@ -367,8 +355,41 @@ async function seed(): Promise<void> {
       website = excluded.website,
       summary = excluded.summary,
       source_names = excluded.source_names`,
+    80,
   );
+  await sql`
+    insert into app_meta (key, value) values ('clubs_catalogue_version', ${targetVersion})
+    on conflict (key) do update set value = excluded.value
+  `;
+}
 
+async function seed(): Promise<void> {
+  const sql = await getSql();
+  await ensureSchema(sql);
+
+  // Always upsert England Athletics / catalogue clubs (append-only, no deletes).
+  // Safe on Neon + PGLite so new club catalogue rows appear without wiping results.
+  await upsertCatalogueClubs(sql);
+
+  if (await alreadySeeded(sql)) return;
+
+  // NEVER wipe a non-empty database. Full catalogue seed only runs on empty DBs.
+  // Imports (multi-year Run Norwich etc.) must survive deploys and cold starts.
+  const guard = await sql<{ athletes: number; results: number; clubs: number }>`
+    select
+      (select count(*)::int from athletes) as athletes,
+      (select count(*)::int from results) as results,
+      (select count(*)::int from clubs) as clubs`;
+  const g = guard[0];
+  if (g && (g.athletes > 0 || g.results > 0)) {
+    await sql`
+      insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+      on conflict (key) do update set value = excluded.value
+    `;
+    return;
+  }
+
+  // Empty DB only — full catalogue seed (clubs already upserted above).
   await insertRows(
     sql,
     "events",

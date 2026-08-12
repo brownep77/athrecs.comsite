@@ -36,8 +36,9 @@ function ClubsPage() {
           </Link>
         </div>
         <p className="text-sm text-muted">
-          Norfolk running, cycling, swim and multi-sport clubs — next to athletes
-          in the app.
+          England Athletics affiliated running & athletics clubs across England,
+          with sports, websites and discipline tags — plus local multi-sport clubs
+          already linked to ATHRECS athletes.
         </p>
       </header>
 
