@@ -24,13 +24,19 @@ async function ready() {
 
 export const listEvents = createServerFn({ method: "GET" })
   .validator(
-    (input: { sport?: Sport | "All"; q?: string } | undefined) => input ?? {},
+    (
+      input:
+        | { sport?: Sport | "All"; q?: string; upcomingOnly?: boolean; limit?: number }
+        | undefined,
+    ) => input ?? {},
   )
   .handler(async ({ data }) => {
     const sql = await ready();
     const sport = data.sport && data.sport !== "All" ? data.sport : null;
     const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
     const today = todayIso();
+    const upcomingOnly = data.upcomingOnly === true;
+    const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
 
     const rows = await sql<
       EventListItem & { distances_csv: string | null }
@@ -79,6 +85,15 @@ export const listEvents = createServerFn({ method: "GET" })
           or lower(e.name) like ${q}
           or lower(e.city) like ${q}
           or lower(e.sport) like ${q}
+          or lower(e.county) like ${q}
+          or lower(e.country) like ${q}
+        )
+        and (
+          ${upcomingOnly}::boolean is false
+          or exists (
+            select 1 from editions ed
+            where ed.event_id = e.id and ed.event_date >= ${today}::date
+          )
         )
       order by
         case when (
@@ -90,6 +105,7 @@ export const listEvents = createServerFn({ method: "GET" })
           where ed.event_id = e.id and ed.event_date >= ${today}::date
         ) asc nulls last,
         e.name asc
+      limit ${limit}
     `;
 
     return rows.map((r) => ({

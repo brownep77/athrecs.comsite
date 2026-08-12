@@ -9,27 +9,27 @@ import {
   Users,
   UsersRound,
 } from "lucide-react";
-import { getHomeStats, listAthletes, listClubs, listEvents } from "@/lib/athrecs/api";
+import { getHomeStats, listAthletes, listCalendarEditions, listClubs, listEvents } from "@/lib/athrecs/api";
 import { RaceCard } from "@/components/races/RaceCard";
 import { ClubCard } from "@/components/clubs/ClubCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NationBadge } from "@/components/flags/NationFlag";
+import type { EventListItem } from "@/lib/athrecs/types";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    const [stats, events, clubs, athletes] = await Promise.all([
+    const [stats, events, clubs, athletes, upcoming] = await Promise.all([
       getHomeStats(),
-      listEvents({ data: {} }),
+      listEvents({ data: { upcomingOnly: true, limit: 8 } }),
       listClubs({ data: {} }),
       listAthletes({ data: {} }),
+      listCalendarEditions({ data: { upcomingOnly: true, limit: 8 } }),
     ]);
     return {
       stats,
-      featured: events.filter((e) => e.upcoming_count > 0).slice(0, 5),
-      pastWithResults: events
-        .filter((e) => e.past_count > 0)
-        .slice(0, 3),
+      featured: events,
+      upcoming,
       clubs: clubs.slice(0, 4),
       athletes: athletes
         .filter((a) => a.result_count > 0)
@@ -41,10 +41,46 @@ export const Route = createFileRoute("/")({
 });
 
 function HoldingHomePage() {
-  const { stats, featured, clubs, athletes } = Route.useLoaderData();
+  const { stats, featured, upcoming, clubs, athletes } = Route.useLoaderData();
 
   return (
     <div className="space-y-10 pb-4">
+      <section className="space-y-3">
+        <div className="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 className="font-display text-lg font-semibold text-fg">
+              Upcoming races
+            </h2>
+            <p className="text-sm text-muted">
+              Flag, start time, address, parking and nearest station on each
+              card.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <NationBadge kind="UnitedKingdom" />
+            <NationBadge kind="Ireland" />
+          </div>
+        </div>
+        <div className="grid gap-2">
+          {featured.length === 0 ? (
+            <p className="text-sm text-muted">No upcoming editions right now.</p>
+          ) : (
+            featured.map((r) => <RaceCard key={r.id} race={r} />)
+          )}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <Button asChild>
+            <Link to="/calendar">
+              Full calendar
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
+          <Button asChild variant="secondary">
+            <Link to="/races">All events</Link>
+          </Button>
+        </div>
+      </section>
+
       {/* Holding hero */}
       <section className="relative overflow-hidden rounded-xl border border-border bg-surface shadow-card">
         <div
@@ -110,45 +146,6 @@ function HoldingHomePage() {
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div>
-            <h2 className="font-display text-lg font-semibold text-fg">
-              Calendar flags
-            </h2>
-            <p className="text-sm text-muted">
-              Union Jack for United Kingdom races. Irish flag for Ireland.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <NationBadge kind="UnitedKingdom" />
-            <NationBadge kind="Ireland" />
-          </div>
-        </div>
-        <div className="grid gap-2 md:grid-cols-2">
-          <FlagExample
-            kind="UnitedKingdom"
-            name="AJ Bell Great North Run"
-            meta="Sun 13 Sep 2026 · Starts 10:40"
-            address="Newcastle Quayside, Newcastle upon Tyne"
-            train="Newcastle station (0.8 km)"
-          />
-          <FlagExample
-            kind="Ireland"
-            name="Dublin Marathon"
-            meta="Sun 25 Oct 2026 · Starts 09:00"
-            address="Leeson Street Lower, Dublin 2"
-            train="Dublin Pearse / Connolly"
-          />
-        </div>
-        <Button asChild>
-          <Link to="/calendar">
-            See full calendar
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        </Button>
       </section>
 
       {/* What's live on this holding site */}
@@ -244,25 +241,47 @@ function HoldingHomePage() {
         <div className="flex items-end justify-between gap-2">
           <div>
             <h2 className="font-display text-lg font-semibold text-fg">
-              Live on the pilot — upcoming
+              Calendar days
             </h2>
             <p className="text-xs text-subtle">
-              Real Norfolk fixtures from the catalogue (confirm entry on organiser sites).
+              Next race days from the UK calendar — same flags and travel notes.
             </p>
           </div>
           <Link
-            to="/races"
+            to="/calendar"
             className="shrink-0 text-sm font-medium text-accent no-underline hover:underline"
           >
-            All events
+            Full calendar
           </Link>
         </div>
         <div className="grid gap-2">
-          {featured.length === 0 ? (
-            <p className="text-sm text-muted">No upcoming editions right now — check past races.</p>
-          ) : (
-            featured.map((r) => <RaceCard key={r.id} race={r} />)
-          )}
+          {upcoming.slice(0, 6).map((ed) => (
+            <RaceCard
+              key={ed.id}
+              race={{
+                id: ed.id,
+                slug: ed.event_slug,
+                name: ed.event_name,
+                sport: ed.sport as EventListItem["sport"],
+                country: ed.country,
+                county: ed.county,
+                city: ed.city,
+                area: ed.area,
+                surface: "Road",
+                summary: "",
+                organiser: "",
+                website: "",
+                distances: [ed.distance_code],
+                next_date: ed.event_date,
+                next_distance: ed.distance_code,
+                next_status: ed.status as EventListItem["next_status"],
+                next_start_time: ed.start_time,
+                upcoming_count: 1,
+                past_count: 0,
+                edition_count: 1,
+              }}
+            />
+          ))}
         </div>
       </section>
 
@@ -349,30 +368,6 @@ function Stat({ label, value }: { label: string; value: string }) {
         {label}
       </dt>
       <dd className="font-display text-xl font-semibold tabular text-fg">{value}</dd>
-    </div>
-  );
-}
-
-function FlagExample({
-  kind,
-  name,
-  meta,
-  address,
-  train,
-}: {
-  kind: "UnitedKingdom" | "Ireland";
-  name: string;
-  meta: string;
-  address: string;
-  train: string;
-}) {
-  return (
-    <div className="min-w-0 space-y-1 rounded-xl border border-border bg-elevated p-3">
-      <NationBadge kind={kind} />
-      <p className="font-display font-semibold leading-snug text-fg">{name}</p>
-      <p className="text-sm font-medium text-accent">{meta}</p>
-      <p className="text-xs text-muted">{address}</p>
-      <p className="text-xs text-muted">Train · {train}</p>
     </div>
   );
 }

@@ -23,7 +23,7 @@ const SPORTS = [
 ] as const;
 
 export const Route = createFileRoute("/races/")({
-  loader: () => listEvents({ data: {} }),
+  loader: () => listEvents({ data: { upcomingOnly: true, limit: 40 } }),
   component: EventsPage,
 });
 
@@ -35,7 +35,10 @@ function EventsPage() {
   const unfiltered = sport === "All" && !q;
   const { data = initial } = useQuery({
     queryKey: ["events", sport, q],
-    queryFn: () => listEvents({ data: { sport, q: q || undefined } }),
+    queryFn: () =>
+      listEvents({
+        data: { sport, q: q || undefined, upcomingOnly: true, limit: 40 },
+      }),
     initialData: unfiltered ? initial : undefined,
     placeholderData: (prev) => prev ?? (unfiltered ? initial : undefined),
     staleTime: 30_000,
@@ -49,8 +52,8 @@ function EventsPage() {
           Events
         </h1>
         <p className="text-sm text-muted">
-          UK fixtures from runABC plus Norfolk & Suffolk races — road, trail,
-          fell, track and more. Search by name, city or region.
+          UK fixtures with flag, start time, address and travel notes. Showing
+          the next 40 upcoming events — search by name, city or region.
         </p>
       </header>
 
@@ -71,7 +74,7 @@ function EventsPage() {
         />
       </label>
 
-      <p className="text-sm text-subtle">{data.length} events</p>
+      <p className="text-sm text-subtle">{data.length} upcoming events shown</p>
 
       <div className="grid gap-2">
         {data.map((r) => (

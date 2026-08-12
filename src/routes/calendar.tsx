@@ -1,7 +1,6 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Bus, Clock3, MapPin, CircleParking, TrainFront } from "lucide-react";
 import { listCalendarEditions } from "@/lib/athrecs/api";
 import {
   effectiveStatus,
@@ -12,6 +11,7 @@ import {
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { NationBadge, NationFlag } from "@/components/flags/NationFlag";
+import { TravelFacts } from "@/components/races/TravelFacts";
 import type { VenueDetails } from "@/data/venue-details";
 
 const REGIONS: { value: string; label: string; kind?: "UnitedKingdom" | "Ireland" }[] = [
@@ -78,29 +78,6 @@ export const Route = createFileRoute("/calendar")({
   loader: () => listCalendarEditions({ data: { upcomingOnly: true, limit: 24 } }),
   component: CalendarPage,
 });
-
-function Detail({
-  icon,
-  label,
-  value,
-}: {
-  icon: ReactNode;
-  label: string;
-  value?: string | null;
-}) {
-  if (!value) return null;
-  return (
-    <div className="flex gap-2 text-xs leading-snug text-muted">
-      <span className="mt-0.5 shrink-0 text-subtle">{icon}</span>
-      <div className="min-w-0">
-        <p className="text-xs font-semibold uppercase tracking-wide text-subtle">
-          {label}
-        </p>
-        <p className="text-fg">{value}</p>
-      </div>
-    </div>
-  );
-}
 
 function CalendarPage() {
   const initial = Route.useLoaderData();
@@ -240,25 +217,7 @@ function EventCard({ ed }: { ed: CardModel }) {
               <span className="text-subtle"> · Start time TBC</span>
             )}
           </p>
-          <div className="grid gap-2 sm:grid-cols-2">
-            <Detail
-              icon={<Clock3 className="h-3.5 w-3.5" />}
-              label="Race time"
-              value={start ? `${start} start` : "Confirm on event page"}
-            />
-            <Detail icon={<MapPin className="h-3.5 w-3.5" />} label="Address" value={venue.address} />
-            <Detail
-              icon={<TrainFront className="h-3.5 w-3.5" />}
-              label="Nearest train"
-              value={venue.trainStation}
-            />
-            <Detail icon={<Bus className="h-3.5 w-3.5" />} label="Nearest bus" value={venue.busStop} />
-            <Detail
-              icon={<CircleParking className="h-3.5 w-3.5" />}
-              label="Parking"
-              value={venue.parking}
-            />
-          </div>
+          <TravelFacts venue={venue} startTime={start} />
         </div>
     </Link>
   );

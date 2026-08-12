@@ -13,6 +13,9 @@ import {
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { NationBadge } from "@/components/flags/NationFlag";
+import { TravelFacts } from "@/components/races/TravelFacts";
+import { venueForEvent } from "@/lib/athrecs/venue";
 
 export const Route = createFileRoute("/races/$slug")({
   loader: async ({ params }) => {
@@ -33,6 +36,14 @@ export const Route = createFileRoute("/races/$slug")({
 
 function RacePage() {
   const { event, distances, upcoming, past } = Route.useLoaderData();
+  const venue = venueForEvent({
+    slug: event.slug,
+    city: event.city,
+    county: event.county,
+    country: event.country,
+    area: event.area,
+  });
+  const nextStart = formatStartTime(upcoming[0]?.start_time);
   const [resultsEditionId, setResultsEditionId] = useState<number | null>(null);
   const { data: results = [], isFetching } = useQuery({
     queryKey: ["edition-results", resultsEditionId],
@@ -52,6 +63,7 @@ function RacePage() {
 
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
         <div className="flex flex-wrap gap-1.5">
+          <NationBadge nation={venue.nation} />
           <Badge variant="accent">{event.sport}</Badge>
           <Badge variant="outline">{event.surface}</Badge>
           <Badge variant="outline">{event.county}</Badge>
@@ -66,6 +78,7 @@ function RacePage() {
           <MapPin className="h-4 w-4 text-subtle" />
           {[event.city, event.area, event.county].filter(Boolean).join(" · ")}
         </p>
+        <TravelFacts venue={venue} startTime={nextStart} />
         {event.summary && (
           <p className="max-w-prose text-sm text-muted">{event.summary}</p>
         )}
