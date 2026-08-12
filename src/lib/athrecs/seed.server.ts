@@ -297,19 +297,22 @@ async function alreadySeeded(sql: Sql): Promise<boolean> {
     ) as ok`,
   ]);
   const row = counts[0];
-  // Soft floor: once catalogue baseline is met (and Paul Browne identity holds),
-  // never force a destructive reseed — athletes/results grow via importResults.
-  // Accept any seed_version marker so version bumps don't wipe Neon data.
-  const aboveFloor = Boolean(
+  // Soft floor: once catalogue baseline is met, never force a destructive reseed.
+  // athletes/results grow via importResults. Do not require exact seed_version.
+  // Paul Browne check is best-effort — if data volume is already large, skip wipe
+  // even if the identity query fails (avoids Neon import wipes on edge cases).
+  const countsOk = Boolean(
     (row?.clubs ?? 0) >= EXPECTED.clubs &&
       (row?.athletes ?? 0) >= EXPECTED.athletes &&
       (row?.race_series ?? 0) >= EXPECTED.race_series &&
       (row?.editions ?? 0) >= EXPECTED.editions &&
-      (row?.results ?? 0) >= EXPECTED.results &&
-      paul[0]?.ok,
+      (row?.results ?? 0) >= EXPECTED.results,
   );
+  const largeImport =
+    (row?.athletes ?? 0) >= EXPECTED.athletes + 100 ||
+    (row?.results ?? 0) >= EXPECTED.results + 100;
+  const aboveFloor = countsOk && (Boolean(paul[0]?.ok) || largeImport);
   if (aboveFloor && meta[0]?.value !== SEED_VERSION) {
-    // Bump marker only — do not wipe imported rows.
     await sql`
       insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
       on conflict (key) do update set value = excluded.value
@@ -322,6 +325,21 @@ async function seed(): Promise<void> {
   const sql = await getSql();
   await ensureSchema(sql);
   if (await alreadySeeded(sql)) return;
+
+  // Safety: never wipe a database that already holds real import volume.
+  const guard = await sql<{ athletes: number; results: number }>`
+    select
+      (select count(*)::int from athletes) as athletes,
+      (select count(*)::int from results) as results`;
+  const g = guard[0];
+  if (g && (g.athletes > EXPECTED.athletes || g.results > EXPECTED.results)) {
+    // Mark seeded and bail — preserve Neon imports.
+    await sql`
+      insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+      on conflict (key) do update set value = excluded.value
+    `;
+    return;
+  }
 
   await sql.query("update events set source_id = null");
   await sql.query(
