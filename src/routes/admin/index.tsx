@@ -188,18 +188,69 @@ function AdminPage() {
               </p>
             )}
             {!dbStatus.data.persistent && (
-              <p className="rounded-lg border border-amber-500/40 bg-amber-100/80 px-3 py-2 text-amber-950">
-                <strong>Action needed:</strong> set{" "}
-                <code className="rounded bg-white/80 px-1 text-xs">DATABASE_URL</code>{" "}
-                to your Neon connection string on the deployment (Publish / Vercel
-                env), then Publish again. Until then, multi-year imports will not
-                stick.
-              </p>
+              <div className="space-y-2 rounded-lg border border-amber-500/40 bg-amber-100/80 px-3 py-3 text-amber-950">
+                <p>
+                  <strong>Data will not stick until Neon is connected.</strong>{" "}
+                  This live site is still on in-memory PGLite — every cold start
+                  can wipe imports.
+                </p>
+                <ol className="list-decimal space-y-1 pl-5 text-sm">
+                  <li>
+                    Open{" "}
+                    <a
+                      className="font-medium underline"
+                      href="https://console.neon.tech"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      console.neon.tech
+                    </a>{" "}
+                    → your project → <strong>Connect</strong>
+                  </li>
+                  <li>
+                    Copy the <strong>pooled</strong> connection string
+                    (starts with <code className="rounded bg-white/80 px-1 text-xs">postgresql://</code>)
+                  </li>
+                  <li>
+                    In{" "}
+                    <a
+                      className="font-medium underline"
+                      href="https://vercel.com/dashboard"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Vercel
+                    </a>{" "}
+                    → project for athrecs.com →{" "}
+                    <strong>Settings → Environment Variables</strong>
+                  </li>
+                  <li>
+                    Add{" "}
+                    <code className="rounded bg-white/80 px-1 text-xs">DATABASE_URL</code>{" "}
+                    = that string · Environment: <strong>Production</strong>{" "}
+                    (and Preview if you want)
+                  </li>
+                  <li>
+                    <strong>Redeploy</strong> (or Publish again from Grok), then
+                    refresh this page — Backend should say{" "}
+                    <em>Neon Postgres (persistent)</em>
+                  </li>
+                </ol>
+                <p className="text-sm">
+                  Or paste the connection string in chat and ask me to walk you
+                  through the check — I cannot set Vercel env vars from here
+                  without your Vercel access.
+                </p>
+              </div>
             )}
-            {dbStatus.data.persistent && dbStatus.data.athletes < 2000 && (
-              <p className="text-muted">
-                Neon is connected. Re-run results import to load full Run Norwich
-                history (target ~50k+ results).
+            {dbStatus.data.persistent && (
+              <p className="rounded-lg border border-emerald-500/40 bg-emerald-50 px-3 py-2 text-emerald-950">
+                <strong>Neon connected.</strong> Imports will persist. Athletes:{" "}
+                {dbStatus.data.athletes.toLocaleString()} · Results:{" "}
+                {dbStatus.data.results.toLocaleString()}
+                {dbStatus.data.results < 10000
+                  ? " — reply “go” in chat to load full Run Norwich history."
+                  : " — multi-year data looks loaded."}
               </p>
             )}
           </div>
