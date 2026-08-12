@@ -297,17 +297,25 @@ async function alreadySeeded(sql: Sql): Promise<boolean> {
     ) as ok`,
   ]);
   const row = counts[0];
-  // Soft floor: athletes/results may grow via append-only importResults without reseed.
-  // Clubs/series/editions use >= so minor drift or extra fixtures don't force a wipe.
-  return Boolean(
-    meta[0]?.value === SEED_VERSION &&
-      (row?.clubs ?? 0) >= EXPECTED.clubs &&
+  // Soft floor: once catalogue baseline is met (and Paul Browne identity holds),
+  // never force a destructive reseed — athletes/results grow via importResults.
+  // Accept any seed_version marker so version bumps don't wipe Neon data.
+  const aboveFloor = Boolean(
+    (row?.clubs ?? 0) >= EXPECTED.clubs &&
       (row?.athletes ?? 0) >= EXPECTED.athletes &&
       (row?.race_series ?? 0) >= EXPECTED.race_series &&
       (row?.editions ?? 0) >= EXPECTED.editions &&
       (row?.results ?? 0) >= EXPECTED.results &&
       paul[0]?.ok,
   );
+  if (aboveFloor && meta[0]?.value !== SEED_VERSION) {
+    // Bump marker only — do not wipe imported rows.
+    await sql`
+      insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+      on conflict (key) do update set value = excluded.value
+    `;
+  }
+  return aboveFloor;
 }
 
 async function seed(): Promise<void> {
