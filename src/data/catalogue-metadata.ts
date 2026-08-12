@@ -15,6 +15,6 @@ export const catalogueMetadata = {
     "athletes": 1254,
     "race_series": 144,
     "editions": 1826,
-    "results": 2528
+    "results": 2529
   }
 } as const;
