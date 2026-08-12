@@ -23,6 +23,18 @@ export const athletes = [
   ...athletesRn2025B8,
 ];
 export { results } from "./results";
-export { seriesList } from "./series";
-export { editions } from "./editions";
+import { seriesList as coreSeries } from "./series";
+import { editions as coreEditions } from "./editions";
+import { runabcEditions, runabcSeries } from "./runabc";
+import type { Edition, Series } from "./types";
+
+export const seriesList: Series[] = [
+  ...coreSeries,
+  ...(runabcSeries as Series[]),
+];
+export const editions: Edition[] = [
+  ...(coreEditions as Edition[]),
+  ...(runabcEditions as Edition[]),
+];
+
 export { catalogueMetadata } from "./catalogue-metadata";

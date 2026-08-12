@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { listCalendarEditions } from "@/lib/athrecs/api";
 import {
   effectiveStatus,
@@ -9,13 +11,35 @@ import {
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 
+const REGIONS = [
+  { value: "", label: "All UK" },
+  { value: "England", label: "England" },
+  { value: "Scotland", label: "Scotland" },
+  { value: "Wales", label: "Wales" },
+  { value: "Norfolk", label: "Norfolk" },
+  { value: "Suffolk", label: "Suffolk" },
+] as const;
+
 export const Route = createFileRoute("/calendar")({
-  loader: () => listCalendarEditions(),
+  loader: () => listCalendarEditions({ data: { upcomingOnly: true } }),
   component: CalendarPage,
 });
 
 function CalendarPage() {
-  const editions = Route.useLoaderData();
+  const initial = Route.useLoaderData();
+  const [q, setQ] = useState("");
+  const [region, setRegion] = useState("");
+  const { data = initial } = useQuery({
+    queryKey: ["calendar", q, region],
+    queryFn: () =>
+      listCalendarEditions({
+        data: { q: q || undefined, region: region || undefined, upcomingOnly: true },
+      }),
+    initialData: !q && !region ? initial : undefined,
+    placeholderData: (prev) => prev ?? (!q && !region ? initial : undefined),
+    staleTime: 30_000,
+    refetchOnMount: false,
+  });
 
   return (
     <div className="space-y-5">
@@ -24,14 +48,45 @@ function CalendarPage() {
           Calendar
         </h1>
         <p className="text-sm text-muted">
-          All listed Norfolk race days by date.
+          Upcoming UK race days from runABC (Scotland, North, Midlands, South)
+          plus Norfolk & Suffolk fixtures. Confirm entry on the event page.
         </p>
       </header>
 
+      <div className="flex flex-wrap gap-1.5">
+        {REGIONS.map((r) => (
+          <button
+            key={r.label}
+            type="button"
+            onClick={() => setRegion(r.value)}
+            className={`rounded-full border px-3 py-1.5 text-xs font-medium ${
+              region === r.value
+                ? "border-accent bg-accent/10 text-accent"
+                : "border-border bg-surface text-muted hover:border-border-strong"
+            }`}
+          >
+            {r.label}
+          </button>
+        ))}
+      </div>
+
+      <label className="block max-w-md space-y-1.5 text-xs font-medium text-muted">
+        Search
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Race, city, county…"
+          className="h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+        />
+      </label>
+
+      <p className="text-sm text-subtle">{data.length} upcoming race days</p>
+
       <div className="grid gap-2">
-        {editions.map((ed) => {
+        {data.map((ed) => {
           const st = effectiveStatus(ed.event_date, ed.status as EntryStatus);
           const start = formatStartTime(ed.start_time);
+          const place = [ed.city, ed.county].filter(Boolean).join(" · ");
           return (
             <Link
               key={ed.id}
@@ -50,7 +105,7 @@ function CalendarPage() {
                 <p className="font-semibold text-fg">{ed.event_name}</p>
                 <p className="text-xs text-muted">
                   {formatRaceDateShort(ed.event_date)}
-                  {start ? ` · ${start}` : ""} · {ed.city}
+                  {start ? ` · ${start}` : ""} · {place}
                 </p>
               </div>
             </Link>

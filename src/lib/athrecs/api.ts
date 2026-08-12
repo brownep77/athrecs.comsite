@@ -389,9 +389,17 @@ export const getDbStatus = createServerFn({ method: "GET" }).handler(async () =>
   };
 });
 
-export const listCalendarEditions = createServerFn({ method: "GET" }).handler(
-  async () => {
+export const listCalendarEditions = createServerFn({ method: "GET" })
+  .validator(
+    (input: { q?: string; region?: string; upcomingOnly?: boolean } | undefined) =>
+      input ?? {},
+  )
+  .handler(async ({ data }) => {
     const sql = await ready();
+    const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
+    const region = data.region?.trim() || null;
+    const today = todayIso();
+    const upcomingOnly = data.upcomingOnly !== false;
     return sql<{
       id: number;
       event_date: string;
@@ -402,6 +410,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" }).handler(
       event_name: string;
       sport: string;
       city: string;
+      county: string;
+      country: string;
     }>`
       select
         ed.id,
@@ -412,13 +422,29 @@ export const listCalendarEditions = createServerFn({ method: "GET" }).handler(
         e.slug as event_slug,
         e.name as event_name,
         e.sport,
-        e.city
+        e.city,
+        e.county,
+        e.country
       from editions ed
       join events e on e.id = ed.event_id
+      where
+        (${upcomingOnly}::boolean is false or ed.event_date >= ${today}::date)
+        and (
+          ${q}::text is null
+          or lower(e.name) like ${q}
+          or lower(e.city) like ${q}
+          or lower(e.county) like ${q}
+          or lower(e.country) like ${q}
+        )
+        and (
+          ${region}::text is null
+          or e.country = ${region}
+          or e.county = ${region}
+        )
       order by ed.event_date asc, e.name
     `;
-  },
-);
+  });
+
 
 // -- Admin / Grok-assisted imports --
 export const importFromCsv = createServerFn({ method: "POST" })

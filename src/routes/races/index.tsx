@@ -49,8 +49,8 @@ function EventsPage() {
           Events
         </h1>
         <p className="text-sm text-muted">
-          Norfolk fixtures — road running, track & field athletics, cycling,
-          swimming, multi-sport, rowing and OCR.
+          UK fixtures from runABC plus Norfolk & Suffolk races — road, trail,
+          fell, track and more. Search by name, city or region.
         </p>
       </header>
 
