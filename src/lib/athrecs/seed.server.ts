@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-import-api-v48-ea-clubs";
+const SEED_VERSION = "athrecs-fixtures-ns-calendar-v49";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 
@@ -311,7 +311,8 @@ async function alreadySeeded(sql: Sql): Promise<boolean> {
   );
   const largeImport =
     (row?.athletes ?? 0) >= EXPECTED.athletes + 100 ||
-    (row?.results ?? 0) >= EXPECTED.results + 100;
+    (row?.results ?? 0) >= EXPECTED.results + 100 ||
+    (row?.editions ?? 0) >= EXPECTED.editions + 20;
   const aboveFloor = countsOk && (Boolean(paul[0]?.ok) || largeImport);
   if (aboveFloor && meta[0]?.value !== SEED_VERSION) {
     await sql`
@@ -363,6 +364,131 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
   `;
 }
 
+
+async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'fixtures_catalogue_version' limit 1
+  `;
+  if (meta[0]?.value === SEED_VERSION) return;
+
+  await insertRows(
+    sql,
+    "events",
+    [
+      "source_id", "slug", "name", "sport", "country", "county", "city", "area",
+      "surface", "summary", "description", "organiser", "website", "featured", "source_url",
+    ],
+    seriesList.map((series) => [
+      series.source_id ?? null,
+      series.slug,
+      series.name,
+      series.sport,
+      series.country,
+      series.county,
+      series.city,
+      series.area,
+      series.surface,
+      series.summary,
+      series.description,
+      series.organiser,
+      series.website,
+      series.featured ?? false,
+      series.source_url ?? null,
+    ]),
+    `on conflict (slug) do update set
+      source_id = excluded.source_id,
+      name = excluded.name,
+      sport = excluded.sport,
+      country = excluded.country,
+      county = excluded.county,
+      city = excluded.city,
+      area = excluded.area,
+      surface = excluded.surface,
+      summary = excluded.summary,
+      description = excluded.description,
+      organiser = excluded.organiser,
+      website = excluded.website,
+      featured = excluded.featured,
+      source_url = excluded.source_url`,
+    80,
+  );
+
+  const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
+  const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
+
+  const distanceRows = seriesList.flatMap((series) =>
+    [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
+  );
+  await insertRows(
+    sql,
+    "event_distances",
+    ["event_id", "distance_code"],
+    distanceRows,
+    "on conflict (event_id, distance_code) do nothing",
+    100,
+  );
+
+  await insertRows(
+    sql,
+    "editions",
+    [
+      "source_id", "event_id", "event_date", "distance_code", "distance_km", "status",
+      "entry_url", "source_url", "start_time", "notes", "results_permission",
+      "results_hosting", "results_official_url", "results_permission_note",
+      "results_permission_at", "results_permission_by", "results_rights_requested_at",
+      "public_result_count", "partner_result_count", "athlete_result_count", "results_access",
+    ],
+    editionSeeds.map((edition) => [
+      edition.source_id ?? null,
+      eventIds.get(edition.seriesSlug),
+      edition.date,
+      edition.distance,
+      edition.distanceKm,
+      edition.status,
+      edition.entryUrl ?? null,
+      edition.source,
+      edition.startTime ?? null,
+      edition.notes ?? null,
+      edition.resultsPermission ?? null,
+      edition.resultsHosting ?? null,
+      edition.resultsOfficialUrl ?? null,
+      edition.resultsPermissionNote ?? null,
+      edition.resultsPermissionAt ?? null,
+      edition.resultsPermissionBy ?? null,
+      (edition as { resultsRightsRequestedAt?: string | null }).resultsRightsRequestedAt ?? null,
+      edition.publicResultCount ?? null,
+      edition.partnerResultCount ?? null,
+      edition.athleteResultCount ?? null,
+      edition.resultsAccess ?? null,
+    ]),
+    `on conflict (event_id, event_date, distance_code) do update set
+      source_id = excluded.source_id,
+      distance_km = excluded.distance_km,
+      status = excluded.status,
+      entry_url = excluded.entry_url,
+      source_url = excluded.source_url,
+      start_time = excluded.start_time,
+      notes = excluded.notes,
+      results_permission = excluded.results_permission,
+      results_hosting = excluded.results_hosting,
+      results_official_url = excluded.results_official_url,
+      results_permission_note = excluded.results_permission_note,
+      results_permission_at = excluded.results_permission_at,
+      results_permission_by = excluded.results_permission_by,
+      results_rights_requested_at = excluded.results_rights_requested_at,
+      public_result_count = excluded.public_result_count,
+      partner_result_count = excluded.partner_result_count,
+      athlete_result_count = excluded.athlete_result_count,
+      results_access = excluded.results_access`,
+    75,
+  );
+
+  await sql`
+    insert into app_meta (key, value) values ('fixtures_catalogue_version', ${SEED_VERSION})
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
 async function seed(): Promise<void> {
   const sql = await getSql();
   await ensureSchema(sql);
@@ -370,6 +496,9 @@ async function seed(): Promise<void> {
   // Always upsert England Athletics / catalogue clubs (append-only, no deletes).
   // Safe on Neon + PGLite so new club catalogue rows appear without wiping results.
   await upsertCatalogueClubs(sql);
+
+  // Always refresh race calendar fixtures (events + editions) without wiping results.
+  await upsertCatalogueFixtures(sql);
 
   if (await alreadySeeded(sql)) return;
 

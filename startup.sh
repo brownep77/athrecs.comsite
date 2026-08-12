@@ -2,6 +2,7 @@
 set -eu
 cd /workspace
 
+# Hard guard — only the live ATHRECS.com Holding site may run here
 if ! grep -q '"name": "athrecs"' package.json 2>/dev/null; then
   echo "REFUSING TO START: package.json is not athrecs (wrong codebase)." >&2
   exit 1
