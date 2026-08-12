@@ -1,4 +1,4 @@
-import { getSql, dbSource } from "@/lib/db";
+import { getSql } from "@/lib/db";
 import {
   athletes as athleteSeeds,
   catalogueMetadata,
@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-import-api-v46-neon-no-wipe";
+const SEED_VERSION = "athrecs-import-api-v47-never-wipe";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -326,46 +326,23 @@ async function seed(): Promise<void> {
   await ensureSchema(sql);
   if (await alreadySeeded(sql)) return;
 
-  // CRITICAL: on Neon, never wipe once any real data exists. Imports (Run Norwich
-  // multi-year etc.) must survive deploys and seed_version bumps.
-  if (dbSource === "neon") {
-    const guard = await sql<{ athletes: number; results: number }>`
-      select
-        (select count(*)::int from athletes) as athletes,
-        (select count(*)::int from results) as results`;
-    const g = guard[0];
-    if (g && (g.athletes > 0 || g.results > 0)) {
-      await sql`
-        insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
-        on conflict (key) do update set value = excluded.value
-      `;
-      return;
-    }
-  } else {
-    // PGLite: still protect oversized local DBs from accidental wipe
-    const guard = await sql<{ athletes: number; results: number }>`
-      select
-        (select count(*)::int from athletes) as athletes,
-        (select count(*)::int from results) as results`;
-    const g = guard[0];
-    if (g && (g.athletes > EXPECTED.athletes || g.results > EXPECTED.results)) {
-      await sql`
-        insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
-        on conflict (key) do update set value = excluded.value
-      `;
-      return;
-    }
+  // NEVER wipe a non-empty database. Full catalogue seed only runs on empty DBs.
+  // Imports (multi-year Run Norwich etc.) must survive deploys and cold starts.
+  const guard = await sql<{ athletes: number; results: number; clubs: number }>`
+    select
+      (select count(*)::int from athletes) as athletes,
+      (select count(*)::int from results) as results,
+      (select count(*)::int from clubs) as clubs`;
+  const g = guard[0];
+  if (g && (g.athletes > 0 || g.results > 0 || g.clubs > 0)) {
+    await sql`
+      insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+      on conflict (key) do update set value = excluded.value
+    `;
+    return;
   }
 
-  await sql.query("update events set source_id = null");
-  await sql.query(
-    "update athletes set source_id = null, athrecs_id = null, parent_athlete_id = null",
-  );
-  await sql.query("delete from results");
-  await sql.query("delete from athlete_clubs");
-  await sql.query("delete from editions");
-  await sql.query("delete from event_distances");
-
+  // Empty DB only — full catalogue seed (no deletes needed on empty tables).
   await insertRows(
     sql,
     "clubs",
