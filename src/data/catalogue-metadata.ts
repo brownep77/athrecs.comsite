@@ -13,8 +13,8 @@ export const catalogueMetadata = {
   "merged_counts": {
     "clubs": 40,
     "athletes": 685,
-    "race_series": 136,
-    "editions": 631,
+    "race_series": 140,
+    "editions": 1800,
     "results": 1933
   },
   "clubs_source": "England Athletics Find a Club (types=club) + prior ATHRECS catalogue"

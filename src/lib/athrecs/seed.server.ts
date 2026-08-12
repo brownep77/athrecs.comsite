@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-fixtures-ns-calendar-v49";
+const SEED_VERSION = "athrecs-fixtures-ns-calendar-v50";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 
