@@ -549,7 +549,7 @@ async function seed(): Promise<void> {
       edition.resultsPermissionNote ?? null,
       edition.resultsPermissionAt ?? null,
       edition.resultsPermissionBy ?? null,
-      edition.resultsRightsRequestedAt ?? null,
+      (edition as { resultsRightsRequestedAt?: string | null }).resultsRightsRequestedAt ?? null,
       edition.publicResultCount ?? null,
       edition.partnerResultCount ?? null,
       edition.athleteResultCount ?? null,

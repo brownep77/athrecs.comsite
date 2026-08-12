@@ -1,6 +1,13 @@
 import { getSql } from "@/lib/db";
 import type { EntryStatus, Sport } from "./types";
 
+// Append-only results import (athletes + finish times)
+export {
+  applyResultsImport,
+  type ResultsImportBundle,
+  type ImportResultRow,
+} from "./results-import.server";
+
 const SPORTS: Sport[] = [
   "Running",
   "Athletics",

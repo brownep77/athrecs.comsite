@@ -72,7 +72,7 @@ export function ClubVerificationBadge({
 
   return (
     <Link
-      to="/clubs/verification"
+      to="/clubs"
       className={cn(
         "group inline-flex max-w-full items-center gap-1.5 no-underline",
         className,
