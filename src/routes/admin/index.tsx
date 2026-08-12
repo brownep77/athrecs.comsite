@@ -218,7 +218,6 @@ function AdminPage() {
         </Button>
       </section>
 
-
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
         <h2 className="font-display text-lg font-semibold text-fg">
           4. Results import (append-only)
