@@ -12,6 +12,8 @@ import type { EntryStatus } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { NationBadge, NationFlag } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
+import { FilterChips } from "@/components/races/FilterChips";
+import { DISTANCE_FILTERS, TERRAIN_FILTERS, splitDistanceLabels } from "@/lib/athrecs/filters";
 import type { VenueDetails } from "@/data/venue-details";
 
 const REGIONS: { value: string; label: string; kind?: "UnitedKingdom" | "Ireland" }[] = [
@@ -34,6 +36,7 @@ type CardModel = {
   status: EntryStatus;
   start_time: string | null;
   sport: string;
+  surface?: string;
   venue: VenueDetails;
 };
 
@@ -83,18 +86,22 @@ function CalendarPage() {
   const initial = Route.useLoaderData();
   const [q, setQ] = useState("");
   const [region, setRegion] = useState("");
+  const [distance, setDistance] = useState("All");
+  const [surface, setSurface] = useState("All");
   const { data = initial, isFetching } = useQuery({
-    queryKey: ["calendar", q, region],
+    queryKey: ["calendar", q, region, distance, surface],
     queryFn: () =>
       listCalendarEditions({
         data: {
           q: q || undefined,
           region: region || undefined,
+          distance: distance === "All" ? undefined : distance,
+          surface: surface === "All" ? undefined : surface,
           upcomingOnly: true,
           limit: 24,
         },
       }),
-    initialData: !q && !region ? initial : undefined,
+    initialData: !q && !region && distance === "All" && surface === "All" ? initial : undefined,
     staleTime: 30_000,
     refetchOnMount: false,
   });
@@ -106,8 +113,9 @@ function CalendarPage() {
           Calendar
         </h1>
         <p className="text-sm text-muted">
-          Union Jack for United Kingdom races, Irish flag for Ireland. Next 24 upcoming
-          race days below — search or filter for more.
+          Union Jack for United Kingdom races, Irish flag for Ireland. Filter
+          by region, distance or terrain — multi-distance days show a label
+          for each.
         </p>
       </header>
 
@@ -149,12 +157,25 @@ function CalendarPage() {
         ))}
       </div>
 
+      <FilterChips
+        label="Distance"
+        options={[...DISTANCE_FILTERS]}
+        value={distance}
+        onChange={setDistance}
+      />
+      <FilterChips
+        label="Terrain"
+        options={[...TERRAIN_FILTERS]}
+        value={surface}
+        onChange={setSurface}
+      />
+
       <label className="block max-w-md space-y-1.5 text-xs font-medium text-muted">
         Search
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Race, city, county…"
+          placeholder="Race, city, 10K, trail…"
           className="h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
         />
       </label>
@@ -176,6 +197,7 @@ function CalendarPage() {
               status: ed.status as EntryStatus,
               start_time: ed.start_time,
               sport: ed.sport,
+              surface: ed.surface,
               venue: ed.venue,
             }}
           />
@@ -190,6 +212,7 @@ function EventCard({ ed }: { ed: CardModel }) {
   const start = formatStartTime(ed.start_time);
   const venue = ed.venue;
   const nation = venue.nation;
+  const distances = splitDistanceLabels(ed.distance_code);
 
   return (
     <Link
@@ -201,7 +224,12 @@ function EventCard({ ed }: { ed: CardModel }) {
           <div className="flex flex-wrap items-center gap-1.5">
             <NationBadge nation={nation} />
             <Badge variant="accent">{ed.sport}</Badge>
-            <Badge variant="outline">{ed.distance_code}</Badge>
+            {ed.surface ? <Badge variant="outline">{ed.surface}</Badge> : null}
+            {distances.map((code) => (
+              <Badge key={code} variant="outline">
+                {code}
+              </Badge>
+            ))}
             <Badge variant={st === "Finished" ? "default" : "solid"}>
               {statusLabel(st)}
             </Badge>

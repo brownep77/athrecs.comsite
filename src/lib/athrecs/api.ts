@@ -26,7 +26,14 @@ export const listEvents = createServerFn({ method: "GET" })
   .validator(
     (
       input:
-        | { sport?: Sport | "All"; q?: string; upcomingOnly?: boolean; limit?: number }
+        | {
+            sport?: Sport | "All";
+            q?: string;
+            upcomingOnly?: boolean;
+            limit?: number;
+            distance?: string;
+            surface?: string;
+          }
         | undefined,
     ) => input ?? {},
   )
@@ -38,6 +45,8 @@ export const listEvents = createServerFn({ method: "GET" })
     const upcomingOnly = data.upcomingOnly === true;
     const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
     const fetchLimit = Math.min(limit * 2, 120);
+    const distance = data.distance?.trim() || null;
+    const surface = data.surface?.trim() || null;
 
     const rows = await sql<
       EventListItem & { distances_csv: string | null }
@@ -88,6 +97,19 @@ export const listEvents = createServerFn({ method: "GET" })
           or lower(e.sport) like ${q}
           or lower(e.county) like ${q}
           or lower(e.country) like ${q}
+          or lower(e.surface) like ${q}
+          or exists (
+            select 1 from event_distances d
+            where d.event_id = e.id and lower(d.distance_code) like ${q}
+          )
+        )
+        and (${surface}::text is null or e.surface = ${surface})
+        and (
+          ${distance}::text is null
+          or exists (
+            select 1 from event_distances d
+            where d.event_id = e.id and d.distance_code = ${distance}
+          )
         )
         and (
           ${upcomingOnly}::boolean is false
@@ -413,7 +435,14 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
   .validator(
     (
       input:
-        | { q?: string; region?: string; upcomingOnly?: boolean; limit?: number }
+        | {
+            q?: string;
+            region?: string;
+            upcomingOnly?: boolean;
+            limit?: number;
+            distance?: string;
+            surface?: string;
+          }
         | undefined,
     ) => input ?? {},
   )
@@ -425,6 +454,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const upcomingOnly = data.upcomingOnly !== false;
     const limit = Math.min(Math.max(data.limit ?? 24, 1), 80);
     const fetchLimit = Math.min(limit * 3, 120);
+    const distance = data.distance?.trim() || null;
+    const surface = data.surface?.trim() || null;
     const rows = await sql<{
       id: number;
       event_date: string;
@@ -438,6 +469,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       county: string;
       country: string;
       area: string;
+      surface: string;
     }>`
       select
         ed.id,
@@ -451,7 +483,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         e.city,
         e.county,
         e.country,
-        e.area
+        e.area,
+        e.surface
       from editions ed
       join events e on e.id = ed.event_id
       where
@@ -463,6 +496,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           or lower(e.county) like ${q}
           or lower(e.country) like ${q}
           or lower(e.area) like ${q}
+          or lower(e.surface) like ${q}
+          or lower(ed.distance_code) like ${q}
         )
         and (
           ${region}::text is null
@@ -470,6 +505,16 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           or ${region} = 'Ireland'
           or e.country = ${region}
           or e.county = ${region}
+        )
+        and (${surface}::text is null or e.surface = ${surface})
+        and (
+          ${distance}::text is null
+          or exists (
+            select 1 from editions x
+            where x.event_id = ed.event_id
+              and x.event_date = ed.event_date
+              and x.distance_code = ${distance}
+          )
         )
       order by ed.event_date asc, e.name
       limit ${fetchLimit}
