@@ -1,0 +1,61 @@
+import type { AthleteSeed } from "./types";
+
+const SOURCE = "https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf";
+type AthleteRow = readonly [number,string,string,string,"M"|"F",string,string,string,string,string,string|null,string|null,string];
+const rows: AthleteRow[] = [
+[1051,"1122","Peter","Aldred","M","M50","49:12","unattached","Unattached","Not supplied",null,null,"peter-aldred"],
+[1052,"1172","Rachel","Lambert","F","FO","48:59","unattached","Dunblane Runners","Not supplied",null,null,"rachel-lambert"],
+[1053,"1357","Martin","Scothern","M","M60","47:51","dereham-runners","Dereham Runners AC","Norfolk","Norfolk","England","martin-scothern"],
+[1054,"1085","Jimmy","Seymour","M","MO","48:18","unattached","Unattached","Not supplied",null,null,"jimmy-seymour"],
+[1055,"1166","Phil","Beecher","M","MO","45:50","tri-anglia","Tri-Anglia Triathlon Club","Norfolk","Norfolk","England","phil-beecher"],
+[1056,"1469","Paula","Carr","F","F60","48:44","great-yarmouth-road-runners","Great Yarmouth Road Runners","Norfolk","Norfolk","England","paula-carr"],
+[1057,"843","Dale","Hurren","M","M65","48:49","unattached","Unattached","Not supplied",null,null,"dale-hurren"],
+[1058,"1434","Ryan","Sadler","M","MO","47:54","unattached","Unattached","Not supplied",null,null,"ryan-sadler"],
+[1059,"1759","George","Couzens","M","MO","48:03","unattached","Unattached","Not supplied",null,null,"george-couzens"],
+[1060,"1707","Sam","Loaker","M","MO","48:16","unattached","Unattached","Not supplied",null,null,"sam-loaker"],
+[1061,"1177","David","Gough","M","M50","48:18","unattached","Unattached","Not supplied",null,null,"david-gough"],
+[1062,"244","Elin","Anderson","F","FO","48:13","city-of-norwich-ac","City Of Norwich AC","Norfolk","Norfolk","England","elin-anderson"],
+[1063,"746","Archie","Campbell","M","M40","48:55","unattached","Unattached","Not supplied",null,null,"archie-campbell"],
+[1064,"1102","Greg","Ward","M","M55","48:39","norwich-road-runners","Norwich Road Runners","Norfolk","Norfolk","England","greg-ward"],
+[1065,"1124","Brian","Jack","M","M60","48:42","unattached","Dub Running Club","Not supplied",null,null,"brian-jack"],
+[1066,"433","Sundee","Denton-chandler","F","FO","49:19","unattached","Unattached","Not supplied",null,null,"sundee-denton-chandler"],
+[1067,"396","Terry","Hubbard","M","M50","45:26","great-yarmouth-road-runners","Great Yarmouth Road Runners","Norfolk","Norfolk","England","terry-hubbard"],
+[1068,"1700","Matthew","Webb","M","MO","48:10","city-of-norwich-ac","City Of Norwich AC","Norfolk","Norfolk","England","matthew-webb"],
+[1069,"1310","Rebecca","Bond","F","FO","48:47","unattached","Unattached","Not supplied",null,null,"rebecca-bond"],
+[1070,"1913","Matthew","Quick","M","MO","45:30","unattached","Unattached","Not supplied",null,null,"matthew-quick"],
+[1071,"1220","Emily","Chatten","F","FO","48:14","unattached","Unattached","Not supplied",null,null,"emily-chatten"],
+[1072,"1672","Tom","Hutt","M","MO","48:57","unattached","Unattached","Not supplied",null,null,"tom-hutt"],
+[1073,"1302","Michael","Turner","M","MO","48:20","unattached","Unattached","Not supplied",null,null,"michael-turner"],
+[1074,"754","Lee","Cook","M","M40","48:12","unattached","Unattached","Not supplied",null,null,"lee-cook"],
+[1075,"1605","Iain","Hill","M","M45","46:19","unattached","Unattached","Not supplied",null,null,"iain-hill"],
+[1076,"1119","Shane","Kelly","M","M45","47:53","unattached","Unattached","Not supplied",null,null,"shane-kelly"],
+[1077,"1667","Daniel","Halifax","M","M40","48:57","norwich-road-runners","Norwich Road Runners","Norfolk","Norfolk","England","daniel-halifax"],
+[1078,"2413","Oliver","Baxter","M","MO","46:21","norwich-road-runners","Norwich Road Runners","Norfolk","Norfolk","England","oliver-baxter"],
+[1079,"1073","Simon","Wardale","M","M60","48:01","unattached","Unattached","Not supplied",null,null,"simon-wardale"],
+[1080,"1391","Steven","Newson","M","M50","48:30","norfolk-gazelles","Norfolk Gazelles AC","Norfolk","Norfolk","England","steven-newson"],
+[1081,"1147","William","Stoner","M","MO","49:08","unattached","Unattached","Not supplied",null,null,"william-stoner"],
+[1082,"1631","Oliver","Smith","M","MO","49:19","norwich-road-runners","Norwich Road Runners","Norfolk","Norfolk","England","oliver-smith"],
+[1083,"1054","Richard","Manington","M","MO","49:00","unattached","Unattached","Not supplied",null,null,"richard-manington"],
+[1084,"1959","Tommy","Router","M","MO","46:00","unattached","Unattached","Not supplied",null,null,"tommy-router"],
+[1085,"1042","Stuart","Harper","M","M45","49:09","unattached","Unattached","Not supplied",null,null,"stuart-harper"],
+[1086,"1633","Sean","Cockrell","M","M55","48:50","unattached","Unattached","Not supplied",null,null,"sean-cockrell"],
+[1087,"1346","Melissa","Goodall","F","FO","48:17","norwich-road-runners","Norwich Road Runners","Norfolk","Norfolk","England","melissa-goodall"],
+[1088,"986","Toby","Wellard","M","MO","48:37","unattached","Unattached","Not supplied",null,null,"toby-wellard"],
+[1089,"548","Tyrone","Young","M","M40","48:33","unattached","Unattached","Not supplied",null,null,"tyrone-young"],
+[1090,"294","James","Crickmore","M","MO","49:17","unattached","Unattached","Not supplied",null,null,"james-crickmore"],
+[1091,"3024","David","Thomas","M","M40","45:53","unattached","Unattached","Not supplied",null,null,"david-thomas"],
+[1092,"1116","Sean","Lambert","M","MO","49:06","unattached","Unattached","Not supplied",null,null,"sean-lambert"],
+[1093,"930","Paul","Tripp","M","M50","48:44","unattached","Unattached","Not supplied",null,null,"paul-tripp"],
+[1094,"1731","Justin","Fox","M","M45","48:12","unattached","Unattached","Not supplied",null,null,"justin-fox"],
+[1095,"724","Tristan","Langley","M","MO","49:03","ryston-runners","Ryston Runners","Norfolk","Norfolk","England","tristan-langley"],
+[1096,"736","Corin","Thoday","M","M50","48:16","reepham-runners","Reepham Runners","Norfolk","Norfolk","England","corin-thoday"],
+[1097,"1267","Samuel","Lambert","M","MO","48:55","unattached","Unattached","Not supplied",null,null,"samuel-lambert"],
+[1098,"625","Jason","Cole","M","M40","48:14","unattached","Unattached","Not supplied",null,null,"jason-cole"],
+[1099,"1576","Andrew","Piff","M","MO","48:00","unattached","Unattached","Not supplied",null,null,"andrew-piff"],
+[1100,"1763","Victoria","Lynskey","F","FO","48:55","unattached","Unattached","Not supplied",null,null,"victoria-lynskey"],
+];
+export const athletesRn2025B8P4: AthleteSeed[] = rows.map(([place,bib,given_name,family_name,gender,default_category,chipTime,club_slug,source_club_name,city,county,country,slug]) => {
+  const display_name=`${given_name} ${family_name}`;
+  const clubText=source_club_name==="Unattached"?"":`, representing ${source_club_name}`;
+  return {slug,display_name,given_name,family_name,gender,club_slug,source_club_name,city,...(county?{county}:{}),...(country?{country}:{}),bio:`${display_name} finished in place ${place} at Run Norwich 10K on 7 September 2025, recording an official chip time of ${chipTime}${clubText}.`,race_entry_name:display_name,default_category,default_bib:bib,preferred_distance:"10K",athrecs_id:`RN25-${bib}`,notes:`Run Norwich 2025: place ${place}; category ${default_category}; bib ${bib}; official chip time ${chipTime}.`,source_url:SOURCE};
+});
