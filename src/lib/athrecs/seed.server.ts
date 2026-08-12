@@ -1,4 +1,4 @@
-import { getSql } from "@/lib/db";
+import { getSql, dbSource } from "@/lib/db";
 import {
   athletes as athleteSeeds,
   catalogueMetadata,
@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-import-api-v45-softfloor";
+const SEED_VERSION = "athrecs-import-api-v46-neon-no-wipe";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -326,19 +326,35 @@ async function seed(): Promise<void> {
   await ensureSchema(sql);
   if (await alreadySeeded(sql)) return;
 
-  // Safety: never wipe a database that already holds real import volume.
-  const guard = await sql<{ athletes: number; results: number }>`
-    select
-      (select count(*)::int from athletes) as athletes,
-      (select count(*)::int from results) as results`;
-  const g = guard[0];
-  if (g && (g.athletes > EXPECTED.athletes || g.results > EXPECTED.results)) {
-    // Mark seeded and bail — preserve Neon imports.
-    await sql`
-      insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
-      on conflict (key) do update set value = excluded.value
-    `;
-    return;
+  // CRITICAL: on Neon, never wipe once any real data exists. Imports (Run Norwich
+  // multi-year etc.) must survive deploys and seed_version bumps.
+  if (dbSource === "neon") {
+    const guard = await sql<{ athletes: number; results: number }>`
+      select
+        (select count(*)::int from athletes) as athletes,
+        (select count(*)::int from results) as results`;
+    const g = guard[0];
+    if (g && (g.athletes > 0 || g.results > 0)) {
+      await sql`
+        insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+        on conflict (key) do update set value = excluded.value
+      `;
+      return;
+    }
+  } else {
+    // PGLite: still protect oversized local DBs from accidental wipe
+    const guard = await sql<{ athletes: number; results: number }>`
+      select
+        (select count(*)::int from athletes) as athletes,
+        (select count(*)::int from results) as results`;
+    const g = guard[0];
+    if (g && (g.athletes > EXPECTED.athletes || g.results > EXPECTED.results)) {
+      await sql`
+        insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+        on conflict (key) do update set value = excluded.value
+      `;
+      return;
+    }
   }
 
   await sql.query("update events set source_id = null");
