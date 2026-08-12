@@ -1,5 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getSql, dbSource } from "@/lib/db";
+import { authMiddleware } from "@/lib/auth/middleware";
+import { requirePlatformRole } from "./access.server";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
 import type {
@@ -587,16 +589,28 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
 
 // -- Admin / Grok-assisted imports --
 export const importFromCsv = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
   .validator((input: { csv: string }) => input)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await requirePlatformRole(context.userId, [
+      "super_admin",
+      "admin",
+      "data_steward",
+    ]);
     await ready();
     const parsed = parseEventsCsv(data.csv);
     return applyImportBundle(parsed);
   });
 
 export const importFromJson = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
   .validator((input: { json: string }) => input)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await requirePlatformRole(context.userId, [
+      "super_admin",
+      "admin",
+      "data_steward",
+    ]);
     await ready();
     let bundle: ImportBundle;
     try {
@@ -608,8 +622,14 @@ export const importFromJson = createServerFn({ method: "POST" })
   });
 
 export const importResults = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
   .validator((input: { json: string }) => input)
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
+    await requirePlatformRole(context.userId, [
+      "super_admin",
+      "admin",
+      "data_steward",
+    ]);
     await ready();
     let bundle: ResultsImportBundle;
     try {

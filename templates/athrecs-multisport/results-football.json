@@ -1,0 +1,50 @@
+{
+  "organisationId": 1,
+  "competitionId": 202,
+  "originalFilename": "match-result.json",
+  "uploadFormat": "json",
+  "sourceUrl": "https://example.org/fixtures/match-202",
+  "declaredOfficial": true,
+  "isFinalResults": true,
+  "evidence": [
+    {
+      "evidenceType": "website",
+      "sourceUrl": "https://example.org/fixtures/match-202",
+      "description": "Official fixture page",
+      "isOfficialSource": true
+    }
+  ],
+  "rows": [
+    {
+      "externalEntryKey": "fixture-202-home",
+      "participantKind": "team",
+      "teamName": "Norwich Athletic",
+      "resultStatus": "finished",
+      "scoreFor": 3,
+      "scoreAgainst": 1,
+      "outcome": "win",
+      "metrics": [
+        {
+          "code": "possession",
+          "name": "Possession",
+          "valueNumeric": 56,
+          "unit": "percent",
+          "sequenceNo": 1,
+          "isPrimary": false,
+          "customData": {}
+        }
+      ],
+      "customData": { "homeAway": "home" }
+    },
+    {
+      "externalEntryKey": "fixture-202-away",
+      "participantKind": "team",
+      "teamName": "Ipswich Athletic",
+      "resultStatus": "finished",
+      "scoreFor": 1,
+      "scoreAgainst": 3,
+      "outcome": "loss",
+      "customData": { "homeAway": "away" }
+    }
+  ]
+}
