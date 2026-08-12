@@ -14,7 +14,7 @@ import { RaceCard } from "@/components/races/RaceCard";
 import { ClubCard } from "@/components/clubs/ClubCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { NationBadge, NationFlag } from "@/components/flags/NationFlag";
+import { NationBadge } from "@/components/flags/NationFlag";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -119,17 +119,17 @@ function HoldingHomePage() {
               Calendar flags
             </h2>
             <p className="text-sm text-muted">
-              Union Jack for British races. Irish flag for Ireland.
+              Union Jack for United Kingdom races. Irish flag for Ireland.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
-            <NationBadge kind="Britain" />
+            <NationBadge kind="UnitedKingdom" />
             <NationBadge kind="Ireland" />
           </div>
         </div>
         <div className="grid gap-2 md:grid-cols-2">
           <FlagExample
-            kind="Britain"
+            kind="UnitedKingdom"
             name="AJ Bell Great North Run"
             meta="Sun 13 Sep 2026 · Starts 10:40"
             address="Newcastle Quayside, Newcastle upon Tyne"
@@ -360,22 +360,19 @@ function FlagExample({
   address,
   train,
 }: {
-  kind: "Britain" | "Ireland";
+  kind: "UnitedKingdom" | "Ireland";
   name: string;
   meta: string;
   address: string;
   train: string;
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-border bg-elevated p-3">
-      <NationFlag kind={kind} className="mt-0.5 h-8 w-12" />
-      <div className="min-w-0 space-y-1">
-        <NationBadge kind={kind} />
-        <p className="font-display font-semibold leading-snug text-fg">{name}</p>
-        <p className="text-sm font-medium text-accent">{meta}</p>
-        <p className="text-xs text-muted">{address}</p>
-        <p className="text-xs text-muted">Train · {train}</p>
-      </div>
+    <div className="min-w-0 space-y-1 rounded-xl border border-border bg-elevated p-3">
+      <NationBadge kind={kind} />
+      <p className="font-display font-semibold leading-snug text-fg">{name}</p>
+      <p className="text-sm font-medium text-accent">{meta}</p>
+      <p className="text-xs text-muted">{address}</p>
+      <p className="text-xs text-muted">Train · {train}</p>
     </div>
   );
 }

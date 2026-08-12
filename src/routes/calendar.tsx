@@ -14,15 +14,15 @@ import { Badge } from "@/components/ui/badge";
 import { NationBadge, NationFlag } from "@/components/flags/NationFlag";
 import type { VenueDetails } from "@/data/venue-details";
 
-const REGIONS: { value: string; label: string; kind?: "Britain" | "Ireland" }[] = [
+const REGIONS: { value: string; label: string; kind?: "UnitedKingdom" | "Ireland" }[] = [
   { value: "", label: "All UK & Ireland" },
-  { value: "England", label: "England", kind: "Britain" },
-  { value: "Scotland", label: "Scotland", kind: "Britain" },
-  { value: "Wales", label: "Wales", kind: "Britain" },
-  { value: "Northern Ireland", label: "N. Ireland", kind: "Britain" },
+  { value: "England", label: "England", kind: "UnitedKingdom" },
+  { value: "Scotland", label: "Scotland", kind: "UnitedKingdom" },
+  { value: "Wales", label: "Wales", kind: "UnitedKingdom" },
+  { value: "Northern Ireland", label: "N. Ireland", kind: "UnitedKingdom" },
   { value: "Ireland", label: "Ireland", kind: "Ireland" },
-  { value: "Norfolk", label: "Norfolk", kind: "Britain" },
-  { value: "Suffolk", label: "Suffolk", kind: "Britain" },
+  { value: "Norfolk", label: "Norfolk", kind: "UnitedKingdom" },
+  { value: "Suffolk", label: "Suffolk", kind: "UnitedKingdom" },
 ];
 
 type CardModel = {
@@ -129,7 +129,7 @@ function CalendarPage() {
           Calendar
         </h1>
         <p className="text-sm text-muted">
-          Union Jack for British races, Irish flag for Ireland. Next 24 upcoming
+          Union Jack for United Kingdom races, Irish flag for Ireland. Next 24 upcoming
           race days below — search or filter for more.
         </p>
       </header>
@@ -140,12 +140,11 @@ function CalendarPage() {
             Flag & travel preview
           </p>
           <p className="text-sm text-muted">
-            Union Jack for Britain, Irish tricolour for Ireland. This is the
-            card style before publish.
+            Union Jack for the United Kingdom, Irish tricolour for Ireland.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <NationBadge kind="Britain" />
+          <NationBadge kind="UnitedKingdom" />
           <NationBadge kind="Ireland" />
         </div>
         <div className="grid gap-2">
@@ -221,9 +220,7 @@ function EventCard({ ed }: { ed: CardModel }) {
       params={{ slug: ed.event_slug }}
       className="block rounded-xl border border-border bg-surface p-3.5 no-underline shadow-card hover:border-border-strong"
     >
-      <div className="flex items-start gap-3">
-        <NationFlag nation={nation} className="mt-0.5 h-8 w-12" />
-        <div className="min-w-0 flex-1 space-y-2">
+      <div className="min-w-0 flex-1 space-y-2">
           <div className="flex flex-wrap items-center gap-1.5">
             <NationBadge nation={nation} />
             <Badge variant="accent">{ed.sport}</Badge>
@@ -263,7 +260,6 @@ function EventCard({ ed }: { ed: CardModel }) {
             />
           </div>
         </div>
-      </div>
     </Link>
   );
 }

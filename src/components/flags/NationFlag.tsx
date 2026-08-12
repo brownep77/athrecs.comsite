@@ -1,10 +1,14 @@
 import type { VenueNation } from "@/data/venue-details";
 import { cn } from "@/lib/utils";
 
-export type FlagKind = "Britain" | "Ireland";
+export type FlagKind = "UnitedKingdom" | "Ireland";
 
 export function flagKind(nation: VenueNation | string | undefined): FlagKind {
-  return nation === "Ireland" ? "Ireland" : "Britain";
+  return nation === "Ireland" ? "Ireland" : "UnitedKingdom";
+}
+
+function flagLabel(kind: FlagKind): string {
+  return kind === "Ireland" ? "Ireland" : "United Kingdom";
 }
 
 function UnionJack() {
@@ -42,14 +46,15 @@ export function NationFlag({
   className?: string;
 }) {
   const resolved = kind ?? flagKind(nation);
+  const label = flagLabel(resolved);
   return (
     <span
       className={cn(
         "inline-flex h-7 w-11 shrink-0 overflow-hidden rounded-sm border-2 border-fg/20 bg-elevated shadow-sm",
         className,
       )}
-      title={resolved === "Ireland" ? "Ireland" : "Britain"}
-      aria-label={resolved === "Ireland" ? "Ireland" : "Britain"}
+      title={label}
+      aria-label={label}
     >
       {resolved === "Ireland" ? <IrishTricolour /> : <UnionJack />}
     </span>
@@ -66,7 +71,7 @@ export function NationBadge({
   className?: string;
 }) {
   const resolved = kind ?? flagKind(nation);
-  const label = resolved === "Ireland" ? "Ireland" : "Britain";
+  const label = flagLabel(resolved);
   return (
     <span
       className={cn(
