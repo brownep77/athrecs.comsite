@@ -40,7 +40,8 @@ export const listEvents = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const sql = await ready();
     const sport = data.sport && data.sport !== "All" ? data.sport : null;
-    const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
+    const rawQ = data.q?.trim() ?? "";
+    const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
     const today = todayIso();
     const upcomingOnly = data.upcomingOnly === true;
     const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
@@ -132,13 +133,32 @@ export const listEvents = createServerFn({ method: "GET" })
     `;
 
     const { collapseSameNameDate } = await import("@/lib/athrecs/dedupe");
+    const {
+      matchesDistanceFilter,
+      nameHasFullMarathon,
+      sanitizeDistances,
+      searchLooksLikeMarathon,
+    } = await import("@/lib/athrecs/filters");
     return collapseSameNameDate(
-      rows.map((r) => ({
-        ...r,
-        distances: r.distances_csv ? r.distances_csv.split(",") : [],
-        next_status: (r.next_status as EntryStatus) ?? null,
-      })),
-    ).slice(0, limit);
+      rows.map((r) => {
+        const distances = sanitizeDistances(
+          r.name,
+          r.distances_csv ? r.distances_csv.split(",") : [],
+        );
+        return {
+          ...r,
+          distances,
+          next_status: (r.next_status as EntryStatus) ?? null,
+          next_distance:
+            r.next_distance === "Marathon" && !distances.includes("Marathon")
+              ? distances[0] ?? r.next_distance
+              : r.next_distance,
+        };
+      }),
+    )
+      .filter((row) => matchesDistanceFilter(row.name, row.distances, distance))
+      .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.name))
+      .slice(0, limit);
   });
 
 export const getEventBySlug = createServerFn({ method: "GET" })
@@ -448,7 +468,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const sql = await ready();
-    const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
+    const rawQ = data.q?.trim() ?? "";
+    const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
     const region = data.region?.trim() || null;
     const today = todayIso();
     const upcomingOnly = data.upcomingOnly !== false;
@@ -521,7 +542,22 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     `;
     const { venueForEvent } = await import("@/lib/athrecs/venue");
     const { collapseSameEventDate } = await import("@/lib/athrecs/dedupe");
-    const mapped = collapseSameEventDate(rows).map((row) => {
+    const {
+      matchesDistanceFilter,
+      nameHasFullMarathon,
+      sanitizeDistances,
+      searchLooksLikeMarathon,
+      splitDistanceLabels,
+    } = await import("@/lib/athrecs/filters");
+    const cleaned = rows.map((row) => {
+      const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
+      const distanceCode = labels[0] ?? row.distance_code;
+      return {
+        ...row,
+        distance_code: labels.join(" · ") || distanceCode,
+      };
+    });
+    const mapped = collapseSameEventDate(cleaned).map((row) => {
       const venue = venueForEvent({
         slug: row.event_slug,
         city: row.city,
@@ -531,11 +567,16 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       });
       return { ...row, venue };
     });
-    if (!region) return mapped.slice(0, limit);
+    const filtered = mapped
+      .filter((row) =>
+        matchesDistanceFilter(row.event_name, splitDistanceLabels(row.distance_code), distance),
+      )
+      .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.event_name));
+    if (!region) return filtered.slice(0, limit);
     if (region === "Northern Ireland" || region === "Ireland") {
-      return mapped.filter((row) => row.venue.nation === region).slice(0, limit);
+      return filtered.filter((row) => row.venue.nation === region).slice(0, limit);
     }
-    return mapped
+    return filtered
       .filter((row) => {
         if (row.venue.nation === region) return true;
         return row.country === region || row.county === region;

@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import { NationBadge, NationFlag } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { FilterChips } from "@/components/races/FilterChips";
-import { DISTANCE_FILTERS, TERRAIN_FILTERS, splitDistanceLabels } from "@/lib/athrecs/filters";
+import { DISTANCE_FILTERS, TERRAIN_FILTERS, sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
 import type { VenueDetails } from "@/data/venue-details";
 
 const REGIONS: { value: string; label: string; kind?: "UnitedKingdom" | "Ireland" }[] = [
@@ -212,7 +212,7 @@ function EventCard({ ed }: { ed: CardModel }) {
   const start = formatStartTime(ed.start_time);
   const venue = ed.venue;
   const nation = venue.nation;
-  const distances = splitDistanceLabels(ed.distance_code);
+  const distances = sanitizeDistances(ed.event_name, splitDistanceLabels(ed.distance_code));
 
   return (
     <Link

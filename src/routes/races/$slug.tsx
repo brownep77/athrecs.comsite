@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { venueForEvent } from "@/lib/athrecs/venue";
+import { sanitizeDistances } from "@/lib/athrecs/filters";
 
 export const Route = createFileRoute("/races/$slug")({
   loader: async ({ params }) => {
@@ -36,6 +37,7 @@ export const Route = createFileRoute("/races/$slug")({
 
 function RacePage() {
   const { event, distances, upcoming, past } = Route.useLoaderData();
+  const shownDistances = sanitizeDistances(event.name, distances);
   const venue = venueForEvent({
     slug: event.slug,
     city: event.city,
@@ -67,7 +69,7 @@ function RacePage() {
           <Badge variant="accent">{event.sport}</Badge>
           <Badge variant="outline">{event.surface}</Badge>
           <Badge variant="outline">{event.county}</Badge>
-          {distances.map((d) => (
+          {shownDistances.map((d) => (
             <Badge key={d} variant="outline">
               {d}
             </Badge>

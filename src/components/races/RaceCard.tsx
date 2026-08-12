@@ -19,6 +19,7 @@ import {
   statusLabel,
 } from "@/lib/athrecs/format";
 import { venueForEvent } from "@/lib/athrecs/venue";
+import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { Badge } from "@/components/ui/badge";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
@@ -45,6 +46,7 @@ export function RaceCard({ race }: { race: EventListItem }) {
       ? effectiveStatus(race.next_date, race.next_status)
       : null;
   const startLabel = formatStartTime(race.next_start_time);
+  const distances = sanitizeDistances(race.name, race.distances);
   const venue = venueForEvent({
     slug: race.slug,
     city: race.city,
@@ -83,7 +85,7 @@ export function RaceCard({ race }: { race: EventListItem }) {
               {race.sport}
             </Badge>
             <Badge variant="outline">{race.surface}</Badge>
-            {race.distances.slice(0, 3).map((d) => (
+            {distances.slice(0, 4).map((d) => (
               <Badge key={d} variant="outline">
                 {d}
               </Badge>
