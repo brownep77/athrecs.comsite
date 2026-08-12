@@ -391,8 +391,11 @@ export const getDbStatus = createServerFn({ method: "GET" }).handler(async () =>
 
 export const listCalendarEditions = createServerFn({ method: "GET" })
   .validator(
-    (input: { q?: string; region?: string; upcomingOnly?: boolean } | undefined) =>
-      input ?? {},
+    (
+      input:
+        | { q?: string; region?: string; upcomingOnly?: boolean; limit?: number }
+        | undefined,
+    ) => input ?? {},
   )
   .handler(async ({ data }) => {
     const sql = await ready();
@@ -400,7 +403,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const region = data.region?.trim() || null;
     const today = todayIso();
     const upcomingOnly = data.upcomingOnly !== false;
-    return sql<{
+    const limit = Math.min(Math.max(data.limit ?? 24, 1), 80);
+    const rows = await sql<{
       id: number;
       event_date: string;
       distance_code: string;
@@ -412,6 +416,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       city: string;
       county: string;
       country: string;
+      area: string;
     }>`
       select
         ed.id,
@@ -424,7 +429,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         e.sport,
         e.city,
         e.county,
-        e.country
+        e.country,
+        e.area
       from editions ed
       join events e on e.id = ed.event_id
       where
@@ -435,14 +441,37 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           or lower(e.city) like ${q}
           or lower(e.county) like ${q}
           or lower(e.country) like ${q}
+          or lower(e.area) like ${q}
         )
         and (
           ${region}::text is null
+          or ${region} = 'Northern Ireland'
+          or ${region} = 'Ireland'
           or e.country = ${region}
           or e.county = ${region}
         )
       order by ed.event_date asc, e.name
+      limit ${limit}
     `;
+    const { venueForEvent } = await import("@/lib/athrecs/venue");
+    const mapped = rows.map((row) => {
+      const venue = venueForEvent({
+        slug: row.event_slug,
+        city: row.city,
+        county: row.county,
+        country: row.country,
+        area: row.area,
+      });
+      return { ...row, venue };
+    });
+    if (!region) return mapped;
+    if (region === "Northern Ireland" || region === "Ireland") {
+      return mapped.filter((row) => row.venue.nation === region);
+    }
+    return mapped.filter((row) => {
+      if (row.venue.nation === region) return true;
+      return row.country === region || row.county === region;
+    });
   });
 
 

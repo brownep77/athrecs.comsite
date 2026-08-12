@@ -14,6 +14,7 @@ import { RaceCard } from "@/components/races/RaceCard";
 import { ClubCard } from "@/components/clubs/ClubCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { NationBadge, NationFlag } from "@/components/flags/NationFlag";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
@@ -79,21 +80,19 @@ function HoldingHomePage() {
           </p>
           <div className="flex flex-wrap gap-2 pt-1">
             <Button asChild>
-              <Link to="/races">
-                Explore Norfolk events
+              <Link to="/calendar">
+                <CalendarDays className="h-4 w-4" />
+                Open calendar
                 <ArrowRight className="h-4 w-4" />
               </Link>
+            </Button>
+            <Button asChild variant="secondary">
+              <Link to="/races">Explore Norfolk events</Link>
             </Button>
             <Button asChild variant="secondary">
               <Link to="/athletes">
                 <Users className="h-4 w-4" />
                 Athletes & results
-              </Link>
-            </Button>
-            <Button asChild variant="secondary">
-              <Link to="/calendar">
-                <CalendarDays className="h-4 w-4" />
-                Calendar
               </Link>
             </Button>
           </div>
@@ -111,6 +110,45 @@ function HoldingHomePage() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <h2 className="font-display text-lg font-semibold text-fg">
+              Calendar flags
+            </h2>
+            <p className="text-sm text-muted">
+              Union Jack for British races. Irish flag for Ireland.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <NationBadge kind="Britain" />
+            <NationBadge kind="Ireland" />
+          </div>
+        </div>
+        <div className="grid gap-2 md:grid-cols-2">
+          <FlagExample
+            kind="Britain"
+            name="AJ Bell Great North Run"
+            meta="Sun 13 Sep 2026 · Starts 10:40"
+            address="Newcastle Quayside, Newcastle upon Tyne"
+            train="Newcastle station (0.8 km)"
+          />
+          <FlagExample
+            kind="Ireland"
+            name="Dublin Marathon"
+            meta="Sun 25 Oct 2026 · Starts 09:00"
+            address="Leeson Street Lower, Dublin 2"
+            train="Dublin Pearse / Connolly"
+          />
+        </div>
+        <Button asChild>
+          <Link to="/calendar">
+            See full calendar
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </Button>
       </section>
 
       {/* What's live on this holding site */}
@@ -311,6 +349,33 @@ function Stat({ label, value }: { label: string; value: string }) {
         {label}
       </dt>
       <dd className="font-display text-xl font-semibold tabular text-fg">{value}</dd>
+    </div>
+  );
+}
+
+function FlagExample({
+  kind,
+  name,
+  meta,
+  address,
+  train,
+}: {
+  kind: "Britain" | "Ireland";
+  name: string;
+  meta: string;
+  address: string;
+  train: string;
+}) {
+  return (
+    <div className="flex items-start gap-3 rounded-xl border border-border bg-elevated p-3">
+      <NationFlag kind={kind} className="mt-0.5 h-8 w-12" />
+      <div className="min-w-0 space-y-1">
+        <NationBadge kind={kind} />
+        <p className="font-display font-semibold leading-snug text-fg">{name}</p>
+        <p className="text-sm font-medium text-accent">{meta}</p>
+        <p className="text-xs text-muted">{address}</p>
+        <p className="text-xs text-muted">Train · {train}</p>
+      </div>
     </div>
   );
 }
