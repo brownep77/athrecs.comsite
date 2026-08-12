@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-rn2025-batch7-v43-restore";
+const SEED_VERSION = "athrecs-import-api-v45-softfloor";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -297,13 +297,15 @@ async function alreadySeeded(sql: Sql): Promise<boolean> {
     ) as ok`,
   ]);
   const row = counts[0];
+  // Soft floor: athletes/results may grow via append-only importResults without reseed.
+  // Clubs/series/editions use >= so minor drift or extra fixtures don't force a wipe.
   return Boolean(
     meta[0]?.value === SEED_VERSION &&
-      row?.clubs === EXPECTED.clubs &&
-      row?.athletes === EXPECTED.athletes &&
-      row?.race_series === EXPECTED.race_series &&
-      row?.editions === EXPECTED.editions &&
-      row?.results === EXPECTED.results &&
+      (row?.clubs ?? 0) >= EXPECTED.clubs &&
+      (row?.athletes ?? 0) >= EXPECTED.athletes &&
+      (row?.race_series ?? 0) >= EXPECTED.race_series &&
+      (row?.editions ?? 0) >= EXPECTED.editions &&
+      (row?.results ?? 0) >= EXPECTED.results &&
       paul[0]?.ok,
   );
 }
@@ -655,13 +657,14 @@ async function seed(): Promise<void> {
     (select count(*)::int from editions) as editions,
     (select count(*)::int from results) as results`;
   const row = counts[0];
+  // Soft floor after seed: allow counts at or above the catalogue baseline.
   if (
     !row ||
-    row.clubs !== EXPECTED.clubs ||
-    row.athletes !== EXPECTED.athletes ||
-    row.race_series !== EXPECTED.race_series ||
-    row.editions !== EXPECTED.editions ||
-    row.results !== EXPECTED.results
+    row.clubs < EXPECTED.clubs ||
+    row.athletes < EXPECTED.athletes ||
+    row.race_series < EXPECTED.race_series ||
+    row.editions < EXPECTED.editions ||
+    row.results < EXPECTED.results
   ) {
     throw new Error(`Catalogue seed count mismatch: ${JSON.stringify(row)}`);
   }
