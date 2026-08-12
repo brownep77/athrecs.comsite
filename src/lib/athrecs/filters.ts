@@ -21,14 +21,22 @@ export const TERRAIN_FILTERS = [
 ] as const;
 
 const HALF_MARATHON = /half[\s-]*marathons?/i;
+const ULTRA_MARATHON = /ultra[\s-]*marathons?/i;
 
 export function nameHasFullMarathon(name: string): boolean {
-  const stripped = name.toLowerCase().replace(/half[\s-]*marathons?/gi, " ");
+  const stripped = name
+    .toLowerCase()
+    .replace(/half[\s-]*marathons?/gi, " ")
+    .replace(/ultra[\s-]*marathons?/gi, " ");
   return /\bmarathon\b/.test(stripped);
 }
 
 export function nameHasHalf(name: string): boolean {
   return HALF_MARATHON.test(name) || /\bhalf\b/i.test(name);
+}
+
+export function nameHasUltra(name: string): boolean {
+  return ULTRA_MARATHON.test(name) || /\bultra\b/i.test(name);
 }
 
 export function searchLooksLikeMarathon(raw?: string | null): boolean {
@@ -45,7 +53,7 @@ export function splitDistanceLabels(raw?: string | null): string[] {
   return [...new Set(parts)];
 }
 
-/** Drop a Marathon label when the race is only a half marathon. */
+/** Drop a Marathon label when the race is only a half or ultra marathon. */
 export function sanitizeDistances(name: string, distances: string[]): string[] {
   const codes = [...new Set(distances.filter(Boolean))];
   if (nameHasFullMarathon(name)) return codes;
@@ -61,5 +69,6 @@ export function matchesDistanceFilter(
   const codes = sanitizeDistances(name, distances);
   if (filter === "Marathon") return codes.includes("Marathon");
   if (filter === "Half") return codes.includes("Half") || nameHasHalf(name);
+  if (filter === "Ultra") return codes.includes("Ultra") || nameHasUltra(name);
   return codes.includes(filter);
 }
