@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-world-flags-v53";
+const SEED_VERSION = "athrecs-parkrun-uk-ie-2027-v54";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 
@@ -365,6 +365,52 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
 }
 
 
+async function expandParkrunEditions(sql: Sql): Promise<void> {
+  // Weekly 5K Saturdays and junior 2K Sundays through the end of 2027.
+  await sql`
+    insert into editions (
+      event_id, event_date, distance_code, distance_km, status,
+      entry_url, source_url, start_time, notes
+    )
+    select
+      e.id,
+      d::date,
+      '5K',
+      5,
+      'Open',
+      e.website,
+      e.website,
+      '09:00',
+      'Weekly parkrun 5K — Saturday 09:00. Confirm cancellations on the parkrun event page.'
+    from events e
+    cross join generate_series(date '2026-08-15', date '2027-12-25', interval '7 days') as d
+    where e.sport = 'Parkrun'
+      and e.name not ilike '%junior%'
+    on conflict (event_id, event_date, distance_code) do nothing
+  `;
+  await sql`
+    insert into editions (
+      event_id, event_date, distance_code, distance_km, status,
+      entry_url, source_url, start_time, notes
+    )
+    select
+      e.id,
+      d::date,
+      '2K',
+      2,
+      'Open',
+      e.website,
+      e.website,
+      '09:00',
+      'Weekly junior parkrun 2K — Sunday 09:00. Confirm cancellations on the parkrun event page.'
+    from events e
+    cross join generate_series(date '2026-08-16', date '2027-12-26', interval '7 days') as d
+    where e.sport = 'Parkrun'
+      and e.name ilike '%junior%'
+    on conflict (event_id, event_date, distance_code) do nothing
+  `;
+}
+
 async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const meta = await sql<{ value: string }>`
     select value from app_meta where key = 'fixtures_catalogue_version' limit 1
@@ -482,6 +528,8 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       results_access = excluded.results_access`,
     75,
   );
+
+  await expandParkrunEditions(sql);
 
   await sql`
     insert into app_meta (key, value) values ('fixtures_catalogue_version', ${SEED_VERSION})

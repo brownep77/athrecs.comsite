@@ -27,6 +27,7 @@ import { seriesList as coreSeries } from "./series";
 import { editions as coreEditions } from "./editions";
 import { runabcEditions, runabcSeries } from "./runabc";
 import { multiSportEditions, multiSportSeries } from "./multisport";
+import { parkrunSeries } from "./parkrun-uk";
 import type { Edition, Series } from "./types";
 
 function normName(name: string): string {
@@ -36,7 +37,11 @@ function normName(name: string): string {
 const coreNameKeys = new Set(coreSeries.map((series) => normName(series.name)));
 const usedSlugs = new Set(coreSeries.map((series) => series.slug));
 const extraSeries: Series[] = [];
-for (const series of [...(runabcSeries as Series[]), ...(multiSportSeries as Series[])]) {
+for (const series of [
+  ...(runabcSeries as Series[]),
+  ...(multiSportSeries as Series[]),
+  ...(parkrunSeries as Series[]),
+]) {
   const key = normName(series.name);
   if (usedSlugs.has(series.slug) || coreNameKeys.has(key)) continue;
   usedSlugs.add(series.slug);

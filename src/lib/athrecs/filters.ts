@@ -1,5 +1,6 @@
 export const DISTANCE_FILTERS = [
   "All",
+  "2K",
   "5K",
   "10K",
   "5mi",
