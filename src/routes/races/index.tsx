@@ -4,24 +4,13 @@ import { useQuery } from "@tanstack/react-query";
 import { listEvents } from "@/lib/athrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
 import { RaceCard } from "@/components/races/RaceCard";
-import { FilterChips } from "@/components/races/FilterChips";
-import { DISTANCE_FILTERS, TERRAIN_FILTERS } from "@/lib/athrecs/filters";
-
-const SPORTS = [
-  "All",
-  "Running",
-  "Athletics",
-  "Parkrun",
-  "TrackAndField",
-  "Cycling",
-  "Swimming",
-  "Triathlon",
-  "Duathlon",
-  "Aquathlon",
-  "Aquabike",
-  "Rowing",
-  "OCR",
-] as const;
+import {
+  EMPTY_SEARCH,
+  EventSearch,
+  isEmptySearch,
+  searchToApi,
+  type EventSearchValues,
+} from "@/components/races/EventSearch";
 
 export const Route = createFileRoute("/races/")({
   loader: () => listEvents({ data: { upcomingOnly: true, limit: 40 } }),
@@ -30,27 +19,22 @@ export const Route = createFileRoute("/races/")({
 
 function EventsPage() {
   const initial = Route.useLoaderData();
-  const [sport, setSport] = useState<Sport | "All">("All");
-  const [distance, setDistance] = useState("All");
-  const [surface, setSurface] = useState("All");
-  const [q, setQ] = useState("");
+  const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
+  const empty = isEmptySearch(filters);
 
-  const unfiltered = sport === "All" && distance === "All" && surface === "All" && !q;
   const { data = initial } = useQuery({
-    queryKey: ["events", sport, distance, surface, q],
+    queryKey: ["events", filters],
     queryFn: () =>
       listEvents({
         data: {
-          sport,
-          q: q || undefined,
-          distance: distance === "All" ? undefined : distance,
-          surface: surface === "All" ? undefined : surface,
-          upcomingOnly: true,
-          limit: 40,
+          ...searchToApi(filters),
+          sport: (searchToApi(filters).sport as Sport | undefined) ?? undefined,
+          upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
+          limit: 60,
         },
       }),
-    initialData: unfiltered ? initial : undefined,
-    placeholderData: (prev) => prev ?? (unfiltered ? initial : undefined),
+    initialData: empty ? initial : undefined,
+    placeholderData: (prev) => prev ?? (empty ? initial : undefined),
     staleTime: 30_000,
     refetchOnMount: false,
   });
@@ -62,46 +46,23 @@ function EventsPage() {
           Events
         </h1>
         <p className="text-sm text-muted">
-          Filter by sport, distance or terrain. Multi-distance races show a
-          label for each distance so you can search 5K, 10K, Half and more.
+          Search by country, county, city, postcode, month or date range.
+          Each sport shows its own filters — running has distance and surface.
         </p>
       </header>
 
-      <FilterChips
-        label="Sport"
-        options={[...SPORTS]}
-        value={sport}
-        onChange={(v) => setSport(v as Sport | "All")}
-      />
-      <FilterChips
-        label="Distance"
-        options={[...DISTANCE_FILTERS]}
-        value={distance}
-        onChange={setDistance}
-      />
-      <FilterChips
-        label="Terrain"
-        options={[...TERRAIN_FILTERS]}
-        value={surface}
-        onChange={setSurface}
-      />
+      <EventSearch value={filters} onChange={setFilters} />
 
-      <label className="block max-w-md space-y-1.5 text-xs font-medium text-muted">
-        Search
-        <input
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Name, city, 10K, trail…"
-          className="h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
-        />
-      </label>
-
-      <p className="text-sm text-subtle">{data.length} upcoming events shown</p>
+      <p className="text-sm text-subtle">{data.length} events shown</p>
 
       <div className="grid gap-2">
-        {data.map((r) => (
-          <RaceCard key={r.id} race={r} />
-        ))}
+        {data.length === 0 ? (
+          <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
+            No events match those filters.
+          </p>
+        ) : (
+          data.map((r) => <RaceCard key={r.id} race={r} />)
+        )}
       </div>
     </div>
   );

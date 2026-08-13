@@ -10,23 +10,18 @@ import {
 } from "@/lib/athrecs/format";
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
-import { NationBadge, NationFlag } from "@/components/flags/NationFlag";
+import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
-import { FilterChips } from "@/components/races/FilterChips";
-import { DISTANCE_FILTERS, TERRAIN_FILTERS, sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
+import { sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import type { VenueDetails } from "@/data/venue-details";
-
-const REGIONS: { value: string; label: string; kind?: "UnitedKingdom" | "Ireland" }[] = [
-  { value: "", label: "All UK & Ireland" },
-  { value: "England", label: "England", kind: "UnitedKingdom" },
-  { value: "Scotland", label: "Scotland", kind: "UnitedKingdom" },
-  { value: "Wales", label: "Wales", kind: "UnitedKingdom" },
-  { value: "Northern Ireland", label: "N. Ireland", kind: "UnitedKingdom" },
-  { value: "Ireland", label: "Ireland", kind: "Ireland" },
-  { value: "Norfolk", label: "Norfolk", kind: "UnitedKingdom" },
-  { value: "Suffolk", label: "Suffolk", kind: "UnitedKingdom" },
-];
+import {
+  EMPTY_SEARCH,
+  EventSearch,
+  isEmptySearch,
+  searchToApi,
+  type EventSearchValues,
+} from "@/components/races/EventSearch";
 
 type CardModel = {
   id: string;
@@ -85,24 +80,19 @@ export const Route = createFileRoute("/calendar")({
 
 function CalendarPage() {
   const initial = Route.useLoaderData();
-  const [q, setQ] = useState("");
-  const [region, setRegion] = useState("");
-  const [distance, setDistance] = useState("All");
-  const [surface, setSurface] = useState("All");
+  const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
+  const empty = isEmptySearch(filters);
   const { data = initial, isFetching } = useQuery({
-    queryKey: ["calendar", q, region, distance, surface],
+    queryKey: ["calendar", filters],
     queryFn: () =>
       listCalendarEditions({
         data: {
-          q: q || undefined,
-          region: region || undefined,
-          distance: distance === "All" ? undefined : distance,
-          surface: surface === "All" ? undefined : surface,
-          upcomingOnly: true,
-          limit: 24,
+          ...searchToApi(filters),
+          upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
+          limit: 40,
         },
       }),
-    initialData: !q && !region && distance === "All" && surface === "All" ? initial : undefined,
+    initialData: empty ? initial : undefined,
     staleTime: 30_000,
     refetchOnMount: false,
   });
@@ -114,9 +104,8 @@ function CalendarPage() {
           Calendar
         </h1>
         <p className="text-sm text-muted">
-          Union Jack for United Kingdom races, Irish flag for Ireland. Filter
-          by region, distance or terrain — multi-distance days show a label
-          for each.
+          Search by country, county, city, postcode, month or date range.
+          Pick a sport to see its filters — running has distance and surface.
         </p>
       </header>
 
@@ -140,46 +129,7 @@ function CalendarPage() {
         </div>
       </section>
 
-      <div className="flex flex-wrap gap-1.5">
-        {REGIONS.map((r) => (
-          <button
-            key={r.label}
-            type="button"
-            onClick={() => setRegion(r.value)}
-            className={`inline-flex min-h-11 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium ${
-              region === r.value
-                ? "border-accent bg-accent-soft text-fg"
-                : "border-border bg-surface text-muted hover:border-border-strong"
-            }`}
-          >
-            {r.kind ? <NationFlag kind={r.kind} className="h-3.5 w-5" /> : null}
-            {r.label}
-          </button>
-        ))}
-      </div>
-
-      <FilterChips
-        label="Distance"
-        options={[...DISTANCE_FILTERS]}
-        value={distance}
-        onChange={setDistance}
-      />
-      <FilterChips
-        label="Terrain"
-        options={[...TERRAIN_FILTERS]}
-        value={surface}
-        onChange={setSurface}
-      />
-
-      <label className="block max-w-md space-y-1.5 text-xs font-medium text-muted">
-        Search
-        <input
-          value={q}
-          onChange={(e) => setQ(e.target.value)}
-          placeholder="Race, city, 10K, trail…"
-          className="h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
-        />
-      </label>
+      <EventSearch value={filters} onChange={setFilters} />
 
       <p className="text-sm text-subtle">
         {isFetching ? "Loading…" : `${data.length} upcoming race days shown`}

@@ -33,6 +33,14 @@ export const listEvents = createServerFn({ method: "GET" })
             limit?: number;
             distance?: string;
             surface?: string;
+            country?: string;
+            county?: string;
+            city?: string;
+            postcode?: string;
+            month?: string;
+            dateFrom?: string;
+            dateTo?: string;
+            format?: string;
           }
         | undefined,
     ) => input ?? {},
@@ -45,9 +53,18 @@ export const listEvents = createServerFn({ method: "GET" })
     const today = todayIso();
     const upcomingOnly = data.upcomingOnly === true;
     const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
-    const fetchLimit = Math.min(limit * 2, 120);
+    const fetchLimit = Math.min(limit * 3, 160);
     const distance = data.distance?.trim() || null;
     const surface = data.surface?.trim() || null;
+    const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
+    const county = data.county?.trim() ? `%${data.county.trim().toLowerCase()}%` : null;
+    const city = data.city?.trim() ? `%${data.city.trim().toLowerCase()}%` : null;
+    const postcode = data.postcode?.trim() || null;
+    const format = data.format?.trim() || null;
+    const { monthToRange } = await import("@/lib/athrecs/filters");
+    const monthRange = data.month ? monthToRange(data.month) : null;
+    const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
+    const dateTo = data.dateTo?.trim() || monthRange?.to || null;
 
     const rows = await sql<
       EventListItem & { distances_csv: string | null }
@@ -105,11 +122,28 @@ export const listEvents = createServerFn({ method: "GET" })
           )
         )
         and (${surface}::text is null or e.surface = ${surface})
+        and (${country}::text is null or e.country = ${country} or e.county = ${country})
+        and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
+        and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city} or lower(e.county) like ${city})
+        and (
+          ${postcode}::text is null
+          or lower(e.area) like ${"%" + (postcode ?? "").toLowerCase() + "%"}
+          or lower(e.city) like ${"%" + (postcode ?? "").toLowerCase() + "%"}
+        )
         and (
           ${distance}::text is null
           or exists (
             select 1 from event_distances d
             where d.event_id = e.id and d.distance_code = ${distance}
+          )
+        )
+        and (
+          ${dateFrom}::date is null and ${dateTo}::date is null
+          or exists (
+            select 1 from editions ed
+            where ed.event_id = e.id
+              and (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
+              and (${dateTo}::date is null or ed.event_date <= ${dateTo}::date)
           )
         )
         and (
@@ -135,10 +169,12 @@ export const listEvents = createServerFn({ method: "GET" })
     const { collapseSameNameDate } = await import("@/lib/athrecs/dedupe");
     const {
       matchesDistanceFilter,
+      matchesFormatFilter,
       nameHasFullMarathon,
       sanitizeDistances,
       searchLooksLikeMarathon,
     } = await import("@/lib/athrecs/filters");
+    const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     return collapseSameNameDate(
       rows.map((r) => {
         const distances = sanitizeDistances(
@@ -157,6 +193,14 @@ export const listEvents = createServerFn({ method: "GET" })
       }),
     )
       .filter((row) => matchesDistanceFilter(row.name, row.distances, distance))
+      .filter((row) => matchesFormatFilter(row.name, format))
+      .filter((row) =>
+        matchesPostcodeQuery(postcode, {
+          slug: row.slug,
+          area: row.area,
+          city: row.city,
+        }),
+      )
       .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.name))
       .slice(0, limit);
   });
@@ -462,6 +506,15 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             limit?: number;
             distance?: string;
             surface?: string;
+            sport?: string;
+            country?: string;
+            county?: string;
+            city?: string;
+            postcode?: string;
+            month?: string;
+            dateFrom?: string;
+            dateTo?: string;
+            format?: string;
           }
         | undefined,
     ) => input ?? {},
@@ -477,6 +530,16 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const fetchLimit = Math.min(limit * 3, 120);
     const distance = data.distance?.trim() || null;
     const surface = data.surface?.trim() || null;
+    const sport = data.sport?.trim() && data.sport !== "All" ? data.sport.trim() : null;
+    const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
+    const county = data.county?.trim() ? `%${data.county.trim().toLowerCase()}%` : null;
+    const city = data.city?.trim() ? `%${data.city.trim().toLowerCase()}%` : null;
+    const postcode = data.postcode?.trim() || null;
+    const format = data.format?.trim() || null;
+    const { monthToRange } = await import("@/lib/athrecs/filters");
+    const monthRange = data.month ? monthToRange(data.month) : null;
+    const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
+    const dateTo = data.dateTo?.trim() || monthRange?.to || null;
     const rows = await sql<{
       id: number;
       event_date: string;
@@ -528,6 +591,16 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           or e.county = ${region}
         )
         and (${surface}::text is null or e.surface = ${surface})
+        and (${sport}::text is null or e.sport = ${sport})
+        and (${country}::text is null or e.country = ${country} or e.county = ${country})
+        and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
+        and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city})
+        and (
+          ${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date
+        )
+        and (
+          ${dateTo}::date is null or ed.event_date <= ${dateTo}::date
+        )
         and (
           ${distance}::text is null
           or exists (
@@ -544,11 +617,13 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const { collapseSameEventDate } = await import("@/lib/athrecs/dedupe");
     const {
       matchesDistanceFilter,
+      matchesFormatFilter,
       nameHasFullMarathon,
       sanitizeDistances,
       searchLooksLikeMarathon,
       splitDistanceLabels,
     } = await import("@/lib/athrecs/filters");
+    const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const cleaned = rows.map((row) => {
       const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
       const distanceCode = labels[0] ?? row.distance_code;
@@ -570,6 +645,15 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const filtered = mapped
       .filter((row) =>
         matchesDistanceFilter(row.event_name, splitDistanceLabels(row.distance_code), distance),
+      )
+      .filter((row) => matchesFormatFilter(row.event_name, format))
+      .filter((row) =>
+        matchesPostcodeQuery(postcode, {
+          slug: row.event_slug,
+          area: row.area,
+          city: row.city,
+          address: row.venue.address,
+        }),
       )
       .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.event_name));
     if (!region) return filtered.slice(0, limit);

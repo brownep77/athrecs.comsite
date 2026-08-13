@@ -71,3 +71,20 @@ export function venueForEvent(input: {
     trainStation: stored?.trainStation ?? null,
   };
 }
+
+export function matchesPostcodeQuery(
+  query: string | null | undefined,
+  input: { slug?: string; area?: string | null; city?: string | null; address?: string | null },
+): boolean {
+  const raw = query?.trim();
+  if (!raw) return true;
+  const needle = raw.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (needle.length < 2) return true;
+  const stored = input.slug ? venueDetails[input.slug] : undefined;
+  const hay = [stored?.postcode, stored?.address, input.area, input.city, input.address]
+    .filter(Boolean)
+    .join(" ")
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, "");
+  return hay.includes(needle);
+}
