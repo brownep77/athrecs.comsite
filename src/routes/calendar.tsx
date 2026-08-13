@@ -71,6 +71,23 @@ const FLAG_EXAMPLES: CardModel[] = [
       trainStation: "Dublin Pearse / Connolly",
     },
   },
+  {
+    id: "ex-france",
+    event_slug: "medoc-marathon",
+    event_name: "Médoc Marathon",
+    event_date: "2026-09-05",
+    distance_code: "Marathon",
+    status: "Open",
+    start_time: "09:30",
+    sport: "Running",
+    venue: {
+      nation: "France",
+      address: "Pauillac, Médoc, Gironde, France",
+      parking: "Pauillac town and château parking — confirm race instructions",
+      busStop: "Local buses to Pauillac — check TransGironde",
+      trainStation: "Pauillac station",
+    },
+  },
 ];
 
 export const Route = createFileRoute("/calendar")({
@@ -115,12 +132,15 @@ function CalendarPage() {
             Flag & travel preview
           </p>
           <p className="text-sm text-muted">
-            Union Jack for the United Kingdom, Irish tricolour for Ireland.
+            Union Jack for the United Kingdom, Irish tricolour for Ireland,
+            and the correct national flag for every other country.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
           <NationBadge kind="UnitedKingdom" />
           <NationBadge kind="Ireland" />
+          <NationBadge nation="France" />
+          <NationBadge kind="World" />
         </div>
         <div className="grid gap-2">
           {FLAG_EXAMPLES.map((ed) => (

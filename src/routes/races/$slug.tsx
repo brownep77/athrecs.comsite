@@ -41,6 +41,7 @@ function RacePage() {
   const shownDistances = sanitizeDistances(event.name, distances);
   const venue = venueForEvent({
     slug: event.slug,
+    name: event.name,
     city: event.city,
     county: event.county,
     country: event.country,

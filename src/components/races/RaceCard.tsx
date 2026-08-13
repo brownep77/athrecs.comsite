@@ -50,6 +50,7 @@ export function RaceCard({ race }: { race: EventListItem }) {
   const distances = sanitizeDistances(race.name, race.distances);
   const venue = venueForEvent({
     slug: race.slug,
+    name: race.name,
     city: race.city,
     county: race.county,
     country: race.country,

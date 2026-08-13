@@ -56,6 +56,8 @@ function HoldingHomePage() {
           <div className="flex flex-wrap items-center gap-2">
             <NationBadge kind="UnitedKingdom" />
             <NationBadge kind="Ireland" />
+            <NationBadge nation="France" />
+            <NationBadge kind="World" />
           </div>
         </div>
         <div className="grid gap-2">

@@ -20,14 +20,7 @@ export const TERRAIN_FILTERS = [
   "XC",
 ] as const;
 
-export const COUNTRY_FILTERS = [
-  "All",
-  "England",
-  "Scotland",
-  "Wales",
-  "Northern Ireland",
-  "Ireland",
-] as const;
+export { COUNTRY_FILTERS } from "./countries";
 
 export const SWIM_DISTANCE_FILTERS = [
   "All",

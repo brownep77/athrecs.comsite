@@ -175,6 +175,7 @@ export const listEvents = createServerFn({ method: "GET" })
       searchLooksLikeMarathon,
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
+    const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
     return collapseSameNameDate(
       rows.map((r) => {
         const distances = sanitizeDistances(
@@ -200,6 +201,19 @@ export const listEvents = createServerFn({ method: "GET" })
           area: row.area,
           city: row.city,
         }),
+      )
+      .filter((row) =>
+        countryMatchesFilter(
+          resolveCountry({
+            slug: row.slug,
+            name: row.name,
+            country: row.country,
+            county: row.county,
+            city: row.city,
+            area: row.area,
+          }),
+          country,
+        ),
       )
       .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.name))
       .slice(0, limit);
@@ -624,6 +638,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       splitDistanceLabels,
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
+    const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
     const cleaned = rows.map((row) => {
       const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
       const distanceCode = labels[0] ?? row.distance_code;
@@ -635,6 +650,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const mapped = collapseSameEventDate(cleaned).map((row) => {
       const venue = venueForEvent({
         slug: row.event_slug,
+        name: row.event_name,
         city: row.city,
         county: row.county,
         country: row.country,
@@ -655,17 +671,22 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           address: row.venue.address,
         }),
       )
-      .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.event_name));
-    if (!region) return filtered.slice(0, limit);
-    if (region === "Northern Ireland" || region === "Ireland") {
-      return filtered.filter((row) => row.venue.nation === region).slice(0, limit);
-    }
-    return filtered
-      .filter((row) => {
-        if (row.venue.nation === region) return true;
-        return row.country === region || row.county === region;
-      })
-      .slice(0, limit);
+      .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.event_name))
+      .filter((row) =>
+        countryMatchesFilter(
+          resolveCountry({
+            slug: row.event_slug,
+            name: row.event_name,
+            country: row.country,
+            county: row.county,
+            city: row.city,
+            area: row.area,
+            address: row.venue.address,
+          }),
+          country || region,
+        ),
+      );
+    return filtered.slice(0, limit);
   });
 
 

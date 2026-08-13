@@ -1,11 +1,5 @@
-import { venueDetails, type VenueDetails, type VenueNation } from "@/data/venue-details";
-
-const NI_HINT =
-  /\b(belfast|antrim|lisburn|derry|londonderry|newry|omagh|enniskillen|coleraine|northern ireland|\bBT\d)/i;
-const IE_HINT = /\b(dublin|cork|galway|limerick|waterford|ireland)\b/i;
-const SC_HINT =
-  /\b(scotland|glasgow|edinburgh|aberdeen|dundee|inverness|perth|stirling|fife|highlands?)\b/i;
-const WA_HINT = /\b(wales|cymru|cardiff|swansea|newport|wrexham|bangor|aberystwyth)\b/i;
+import { venueDetails, type VenueDetails } from "@/data/venue-details";
+import { displayCountryName, resolveCountry } from "@/lib/athrecs/countries";
 
 const REGION_LABELS = new Set([
   "scotland",
@@ -18,27 +12,29 @@ const REGION_LABELS = new Set([
 
 export function resolveNation(input: {
   slug?: string;
+  name?: string | null;
   country?: string | null;
   county?: string | null;
   city?: string | null;
   address?: string | null;
-}): VenueNation {
+  area?: string | null;
+}): string {
   const stored = input.slug ? venueDetails[input.slug] : undefined;
-  if (stored?.nation) return stored.nation;
-  const blob = [input.country, input.county, input.city, input.address]
-    .filter(Boolean)
-    .join(" ");
-  if (NI_HINT.test(blob)) return "Northern Ireland";
-  if (IE_HINT.test(blob) && !/northern/i.test(blob)) return "Ireland";
-  if (SC_HINT.test(blob) && !/\b(newcastle|manchester|liverpool|leeds)\b/i.test(blob)) {
-    return "Scotland";
-  }
-  if (WA_HINT.test(blob)) return "Wales";
-  return "England";
+  const info = resolveCountry({
+    slug: input.slug,
+    name: input.name,
+    country: input.country,
+    county: input.county,
+    city: input.city,
+    area: input.area,
+    address: input.address || stored?.address,
+  });
+  return displayCountryName(info);
 }
 
 export function venueForEvent(input: {
   slug: string;
+  name?: string | null;
   city?: string | null;
   county?: string | null;
   country?: string | null;
@@ -57,6 +53,9 @@ export function venueForEvent(input: {
       const lower = p.toLowerCase();
       if (REGION_LABELS.has(lower)) return false;
       if (lower === "united kingdom" || lower === "uk") return false;
+      if (nation !== "United Kingdom" && (lower === "scotland" || lower === "england" || lower === "wales")) {
+        return false;
+      }
       return true;
     });
   const address = parts.join(", ") || input.city || "Venue TBC";
