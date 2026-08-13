@@ -46,7 +46,11 @@ export function RaceCard({ race }: { race: EventListItem }) {
     race.next_date && race.next_status
       ? effectiveStatus(race.next_date, race.next_status)
       : null;
-  const startLabel = formatStartTime(race.next_start_time);
+  const startLabel = formatStartTime(race.next_start_time, {
+    country: race.country,
+    county: race.county,
+    date: race.next_date,
+  });
   const distances = sanitizeDistances(race.name, race.distances);
   const venue = venueForEvent({
     slug: race.slug,

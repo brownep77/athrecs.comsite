@@ -47,7 +47,11 @@ function RacePage() {
     country: event.country,
     area: event.area,
   });
-  const nextStart = formatStartTime(upcoming[0]?.start_time);
+  const nextStart = formatStartTime(upcoming[0]?.start_time, {
+    country: event.country,
+    county: event.county,
+    date: upcoming[0]?.event_date,
+  });
   const [resultsEditionId, setResultsEditionId] = useState<number | null>(null);
   const { data: results = [], isFetching } = useQuery({
     queryKey: ["edition-results", resultsEditionId],
@@ -113,11 +117,15 @@ function RacePage() {
             : "Upcoming"
         }
         items={upcoming}
+        country={event.country}
+        county={event.county}
       />
       <EditionList
         title="Past editions"
         items={past}
         onResults={(id) => setResultsEditionId(id)}
+        country={event.country}
+        county={event.county}
       />
 
       {resultsEditionId != null && (
@@ -189,6 +197,8 @@ function EditionList({
   title,
   items,
   onResults,
+  country,
+  county,
 }: {
   title: string;
   items: Array<{
@@ -202,6 +212,8 @@ function EditionList({
     result_count: number;
   }>;
   onResults?: (id: number) => void;
+  country?: string;
+  county?: string;
 }) {
   return (
     <section className="space-y-3">
@@ -217,7 +229,11 @@ function EditionList({
               ed.event_date,
               ed.status as EntryStatus,
             );
-            const start = formatStartTime(ed.start_time);
+            const start = formatStartTime(ed.start_time, {
+              country,
+              county,
+              date: ed.event_date,
+            });
             return (
               <div
                 key={ed.id}

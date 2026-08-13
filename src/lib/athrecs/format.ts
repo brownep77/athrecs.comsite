@@ -1,25 +1,29 @@
 import type { EntryStatus } from "./types";
+import { formatLocalClock, type PlaceTime } from "./timezone";
 
 export function formatRaceDateShort(iso: string): string {
-  return new Date(iso + "T12:00:00").toLocaleDateString("en-GB", {
+  return new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", {
     weekday: "short",
     day: "numeric",
     month: "short",
     year: "numeric",
+    timeZone: "UTC",
   });
 }
 
 export function formatRaceWeekday(iso: string): string {
-  return new Date(iso + "T12:00:00").toLocaleDateString("en-GB", {
+  return new Date(iso + "T12:00:00Z").toLocaleDateString("en-GB", {
     weekday: "short",
+    timeZone: "UTC",
   });
 }
 
-export function formatStartTime(raw: string | null | undefined): string | null {
-  if (!raw) return null;
-  const m = raw.trim().match(/^(\d{1,2}):(\d{2})$/);
-  if (!m) return raw.trim();
-  return `${String(Number(m[1])).padStart(2, "0")}:${m[2]}`;
+/** Clock time with the venue zone, e.g. 09:00 BST or 08:00 AEST. */
+export function formatStartTime(
+  raw: string | null | undefined,
+  place?: PlaceTime | null,
+): string | null {
+  return formatLocalClock(raw, place);
 }
 
 /** Calendar date in Europe/London (Norfolk fixtures) — stable for SSR + client. */

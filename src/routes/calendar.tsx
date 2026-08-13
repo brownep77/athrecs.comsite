@@ -34,6 +34,8 @@ type CardModel = {
   sport: string;
   surface?: string;
   venue: VenueDetails;
+  country?: string;
+  county?: string;
 };
 
 const FLAG_EXAMPLES: CardModel[] = [
@@ -170,6 +172,8 @@ function CalendarPage() {
               sport: ed.sport,
               surface: ed.surface,
               venue: ed.venue,
+              country: ed.country,
+              county: ed.county,
             }}
           />
         ))}
@@ -180,7 +184,12 @@ function CalendarPage() {
 
 function EventCard({ ed }: { ed: CardModel }) {
   const st = effectiveStatus(ed.event_date, ed.status);
-  const start = formatStartTime(ed.start_time);
+  const start = formatStartTime(ed.start_time, {
+    country: ed.country,
+    county: ed.county,
+    nation: ed.venue.nation,
+    date: ed.event_date,
+  });
   const venue = ed.venue;
   const nation = venue.nation;
   const distances = sanitizeDistances(ed.event_name, splitDistanceLabels(ed.distance_code));

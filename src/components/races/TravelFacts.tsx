@@ -36,7 +36,7 @@ export function TravelFacts({
     <div className="mt-2 grid gap-2 sm:grid-cols-2">
       <Row
         icon={<Clock3 className="h-3.5 w-3.5" />}
-        label="Race time"
+        label="Local start"
         value={startTime ? `${startTime} start` : "Confirm on event page"}
       />
       <Row icon={<MapPin className="h-3.5 w-3.5" />} label="Address" value={venue.address} />
