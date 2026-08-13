@@ -139,6 +139,7 @@ export const listEvents = createServerFn({ method: "GET" })
         )
         and (
           ${dateFrom}::date is null and ${dateTo}::date is null
+          or e.sport = 'Parkrun'
           or exists (
             select 1 from editions ed
             where ed.event_id = e.id
@@ -148,6 +149,7 @@ export const listEvents = createServerFn({ method: "GET" })
         )
         and (
           ${upcomingOnly}::boolean is false
+          or e.sport = 'Parkrun'
           or exists (
             select 1 from editions ed
             where ed.event_id = e.id and ed.event_date >= ${today}::date
@@ -176,23 +178,43 @@ export const listEvents = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    return collapseSameNameDate(
-      rows.map((r) => {
+    const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } = await import("@/lib/athrecs/parkrun-dates");
+    const mapped = rows
+      .map((r) => {
         const distances = sanitizeDistances(
           r.name,
           r.distances_csv ? r.distances_csv.split(",") : [],
         );
+        if (r.sport === "Parkrun" && (dateFrom || dateTo)) {
+          if (parkrunDates(r.name, dateFrom ?? today, dateTo ?? "2027-12-26").length === 0) {
+            return null;
+          }
+        }
+        const nextDate =
+          r.sport === "Parkrun"
+            ? nextParkrunDate(r.name, dateFrom && dateFrom > today ? dateFrom : today)
+            : r.next_date;
         return {
           ...r,
           distances,
-          next_status: (r.next_status as EntryStatus) ?? null,
+          next_date: nextDate,
+          upcoming_count:
+            r.sport === "Parkrun" ? remainingParkrunCount(r.name, today) : r.upcoming_count,
+          next_start_time:
+            r.sport === "Parkrun" ? parkrunStartTime(r.country, /junior/i.test(r.name)) : r.next_start_time,
+          next_status: (r.next_status as EntryStatus) ?? (r.sport === "Parkrun" ? "Open" : null),
           next_distance:
-            r.next_distance === "Marathon" && !distances.includes("Marathon")
-              ? distances[0] ?? r.next_distance
-              : r.next_distance,
+            r.sport === "Parkrun"
+              ? /junior/i.test(r.name)
+                ? "2K"
+                : "5K"
+              : r.next_distance === "Marathon" && !distances.includes("Marathon")
+                ? distances[0] ?? r.next_distance
+                : r.next_distance,
         };
-      }),
-    )
+      })
+      .filter((row): row is NonNullable<typeof row> => row !== null);
+    return collapseSameNameDate(mapped)
       .filter((row) => matchesDistanceFilter(row.name, row.distances, distance))
       .filter((row) => matchesFormatFilter(row.name, format))
       .filter((row) =>
@@ -246,6 +268,8 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       | undefined;
     if (!event) return null;
 
+    const { parkrunDates, parkrunDistance, parkrunStartTime } = await import("@/lib/athrecs/parkrun-dates");
+
     const distances = await sql<{ distance_code: string }>`
       select distance_code from event_distances where event_id = ${event.id}
     `;
@@ -275,10 +299,34 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       order by ed.event_date desc
     `;
 
+    const storedUpcoming = editions.filter((e) => e.event_date >= today);
+    const storedDates = new Set(storedUpcoming.map((e) => e.event_date));
+    const generated =
+      event.sport === "Parkrun"
+        ? parkrunDates(event.name, today).map((event_date, index) => {
+            const dist = parkrunDistance(event.name);
+            return {
+              id: -1000 - index,
+              event_date,
+              distance_code: dist.code,
+              distance_km: dist.km,
+              status: "Open",
+              entry_url: event.website,
+              source_url: event.website,
+              start_time: parkrunStartTime(event.country, /junior/i.test(event.name)),
+              result_count: 0,
+            };
+          })
+        : [];
+    const upcoming = [
+      ...storedUpcoming,
+      ...generated.filter((row) => !storedDates.has(row.event_date)),
+    ].sort((a, b) => a.event_date.localeCompare(b.event_date));
+
     return {
       event,
       distances: distances.map((d) => d.distance_code),
-      upcoming: editions.filter((e) => e.event_date >= today).reverse(),
+      upcoming,
       past: editions.filter((e) => e.event_date < today),
     };
   });
@@ -627,6 +675,68 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       order by ed.event_date asc, e.name
       limit ${fetchLimit}
     `;
+    const { parkrunDates, parkrunDistance, parkrunStartTime } = await import("@/lib/athrecs/parkrun-dates");
+    const wantParkrun = !sport || sport === "Parkrun";
+    let generatedRows: typeof rows = [];
+    if (wantParkrun) {
+      const windowFrom = dateFrom && dateFrom > today ? dateFrom : today;
+      const windowTo = dateTo || (dateFrom ? "2027-12-26" : null);
+      const venues = await sql<{
+        id: number;
+        slug: string;
+        name: string;
+        sport: string;
+        city: string;
+        county: string;
+        country: string;
+        area: string;
+        surface: string;
+        website: string | null;
+      }>`
+        select e.id, e.slug, e.name, e.sport, e.city, e.county, e.country, e.area, e.surface, e.website
+        from events e
+        where e.sport = 'Parkrun'
+          and (${q}::text is null
+            or lower(e.name) like ${q}
+            or lower(e.city) like ${q}
+            or lower(e.county) like ${q}
+            or lower(e.country) like ${q}
+            or lower(e.area) like ${q})
+          and (${country}::text is null or e.country = ${country} or e.county = ${country})
+          and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
+          and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city})
+          and (${surface}::text is null or e.surface = ${surface})
+        order by e.name
+        limit 400
+      `;
+      const seen = new Set(rows.map((row) => `${row.event_slug}|${row.event_date}`));
+      for (const venue of venues) {
+        const dates = parkrunDates(venue.name, windowFrom, windowTo ?? undefined);
+        const cap = windowTo ? dates : dates.slice(0, 4);
+        const dist = parkrunDistance(venue.name);
+        for (const eventDate of cap) {
+          const key = `${venue.slug}|${eventDate}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          generatedRows.push({
+            id: -venue.id,
+            event_date: eventDate,
+            distance_code: dist.code,
+            status: "Open",
+            start_time: parkrunStartTime(venue.country, /junior/i.test(venue.name)),
+            event_slug: venue.slug,
+            event_name: venue.name,
+            sport: venue.sport,
+            city: venue.city,
+            county: venue.county,
+            country: venue.country,
+            area: venue.area,
+            surface: venue.surface,
+          });
+        }
+      }
+    }
+    const combined = [...rows, ...generatedRows];
     const { venueForEvent } = await import("@/lib/athrecs/venue");
     const { collapseSameEventDate } = await import("@/lib/athrecs/dedupe");
     const {
@@ -639,7 +749,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const cleaned = rows.map((row) => {
+    const cleaned = combined.map((row) => {
       const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
       const distanceCode = labels[0] ?? row.distance_code;
       return {
@@ -685,7 +795,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           }),
           country || region,
         ),
-      );
+      )
+      .sort((a, b) => a.event_date.localeCompare(b.event_date) || a.event_name.localeCompare(b.event_name));
     return filtered.slice(0, limit);
   });
 

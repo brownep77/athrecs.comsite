@@ -106,7 +106,14 @@ function RacePage() {
         </div>
       </section>
 
-      <EditionList title="Upcoming" items={upcoming} />
+      <EditionList
+        title={
+          event.sport === "Parkrun"
+            ? "Upcoming — every week through 25 December 2027"
+            : "Upcoming"
+        }
+        items={upcoming}
+      />
       <EditionList
         title="Past editions"
         items={past}

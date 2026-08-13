@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-parkrun-world-2027-v55";
+const SEED_VERSION = "athrecs-parkrun-world-2027-v56";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 
@@ -365,6 +365,18 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
 }
 
 
+async function ensureParkrunCalendar(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'parkrun_through' limit 1
+  `;
+  if (meta[0]?.value === "2027-12-26") return;
+  await expandParkrunEditions(sql);
+  await sql`
+    insert into app_meta (key, value) values ('parkrun_through', '2027-12-26')
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
 async function expandParkrunEditions(sql: Sql): Promise<void> {
   // Weekly 5K Saturdays and junior 2K Sundays through the end of 2027.
   await sql`
@@ -553,6 +565,7 @@ async function seed(): Promise<void> {
 
   // Always refresh race calendar fixtures (events + editions) without wiping results.
   await upsertCatalogueFixtures(sql);
+  await ensureParkrunCalendar(sql);
 
   if (await alreadySeeded(sql)) return;
 

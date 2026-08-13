@@ -40,7 +40,7 @@ export const EMPTY_SEARCH: EventSearchValues = {
   format: "All",
 };
 
-const MONTHS = upcomingMonths(14);
+const MONTHS = upcomingMonths(17);
 const fieldClass =
   "h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30";
 

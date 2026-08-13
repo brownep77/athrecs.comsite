@@ -107,7 +107,7 @@ export function subfiltersForSport(sport: string): SubfilterDef[] {
   ];
 }
 
-export function upcomingMonths(count = 14): { value: string; label: string }[] {
+export function upcomingMonths(count = 17): { value: string; label: string }[] {
   const now = new Date();
   const items: { value: string; label: string }[] = [{ value: "", label: "Any month" }];
   for (let i = 0; i < count; i += 1) {
