@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-parkrun-uk-ie-2027-v54";
+const SEED_VERSION = "athrecs-parkrun-world-2027-v55";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 
@@ -380,8 +380,14 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
       'Open',
       e.website,
       e.website,
-      '09:00',
-      'Weekly parkrun 5K — Saturday 09:00. Confirm cancellations on the parkrun event page.'
+      case
+        when e.country in (
+          'Australia', 'New Zealand', 'South Africa', 'Namibia',
+          'Eswatini', 'Singapore', 'Malaysia', 'Japan'
+        ) then '08:00'
+        else '09:00'
+      end,
+      'Weekly parkrun 5K — Saturday morning local time. Confirm cancellations on the parkrun event page.'
     from events e
     cross join generate_series(date '2026-08-15', date '2027-12-25', interval '7 days') as d
     where e.sport = 'Parkrun'
