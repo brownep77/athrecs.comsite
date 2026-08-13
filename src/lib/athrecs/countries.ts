@@ -139,6 +139,10 @@ const ALIAS: Record<string, string> = {
   "south korea": "KR",
   qatar: "QA",
   "united arab emirates": "AE",
+  uae: "AE",
+  "the united arab emirates": "AE",
+  turkiye: "TR",
+  "türkiye": "TR",
   egypt: "EG",
   ukraine: "UA",
   romania: "RO",
@@ -303,7 +307,7 @@ export const COUNTRY_GROUPS: { label: string; options: string[] }[] = [
   { label: "Americas", options: ["United States", "Canada", "Brazil", "Chile"] },
   {
     label: "Asia-Pacific",
-    options: ["Australia", "New Zealand", "Japan", "Singapore", "Malaysia", "China", "Hong Kong", "Qatar"],
+    options: ["Australia", "New Zealand", "Japan", "Singapore", "Malaysia", "China", "Hong Kong", "Qatar", "United Arab Emirates"],
   },
   { label: "Other", options: ["World"] },
 ];

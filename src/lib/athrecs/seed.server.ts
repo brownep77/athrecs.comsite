@@ -8,7 +8,7 @@ import {
   seriesList,
 } from "@/data/catalogue";
 
-const SEED_VERSION = "athrecs-world-athletics-v57";
+const SEED_VERSION = "athrecs-world-triathlon-v58";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 
