@@ -1,12 +1,14 @@
 import type { ReactNode } from "react";
 import { FilterChips } from "@/components/races/FilterChips";
 import {
-  COUNTRY_FILTERS,
+  COUNTRY_GROUPS,
+  PARKRUN_COUNTRY_SHORTCUTS,
   SPORTS,
   subfiltersForSport,
   upcomingMonths,
   type SubfilterKey,
 } from "@/lib/athrecs/filters";
+import { flagForCountryFilter } from "@/lib/athrecs/countries";
 
 export type EventSearchValues = {
   q: string;
@@ -101,13 +103,35 @@ export function EventSearch({
             className={fieldClass}
           />
         </Field>
+        <Field label="Country">
+          <select
+            value={value.country}
+            onChange={(e) => set("country", e.target.value)}
+            className={fieldClass}
+          >
+            <option value="All">All countries</option>
+            {COUNTRY_GROUPS.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.options.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {flagForCountryFilter(opt)} {opt}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+        </Field>
       </div>
+      <p className="-mt-1 text-xs text-subtle">
+        Parkrun is in 22 countries — open Country and pick Australia, South Africa, Japan, the USA and more.
+      </p>
 
       <FilterChips
-        label="Country"
-        options={[...COUNTRY_FILTERS]}
+        label={value.sport === "Parkrun" ? "Parkrun countries" : "Quick country"}
+        options={[...PARKRUN_COUNTRY_SHORTCUTS]}
         value={value.country}
         onChange={(v) => set("country", v)}
+        wrap
       />
       <FilterChips
         label="Sport"

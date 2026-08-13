@@ -21,7 +21,7 @@ export const TERRAIN_FILTERS = [
   "XC",
 ] as const;
 
-export { COUNTRY_FILTERS } from "./countries";
+export { COUNTRY_FILTERS, COUNTRY_GROUPS, PARKRUN_COUNTRY_SHORTCUTS } from "./countries";
 
 export const SWIM_DISTANCE_FILTERS = [
   "All",

@@ -241,6 +241,68 @@ export const COUNTRY_FILTERS = [
   "World",
 ] as const;
 
+export const COUNTRY_GROUPS: { label: string; options: string[] }[] = [
+  {
+    label: "United Kingdom & Ireland",
+    options: [
+      "England",
+      "Scotland",
+      "Wales",
+      "Northern Ireland",
+      "Ireland",
+      "Jersey",
+      "Guernsey",
+      "Isle of Man",
+      "Gibraltar",
+      "Falkland Islands",
+      "Saint Helena",
+    ],
+  },
+  {
+    label: "Europe",
+    options: [
+      "France",
+      "Germany",
+      "Spain",
+      "Italy",
+      "Netherlands",
+      "Portugal",
+      "Greece",
+      "Cyprus",
+      "Poland",
+      "Austria",
+      "Denmark",
+      "Finland",
+      "Norway",
+      "Sweden",
+      "Lithuania",
+      "Iceland",
+      "Czechia",
+    ],
+  },
+  { label: "Africa", options: ["South Africa", "Namibia", "Eswatini"] },
+  { label: "Americas", options: ["United States", "Canada"] },
+  {
+    label: "Asia-Pacific",
+    options: ["Australia", "New Zealand", "Japan", "Singapore", "Malaysia"],
+  },
+  { label: "Other", options: ["World"] },
+];
+
+export const PARKRUN_COUNTRY_SHORTCUTS = [
+  "All",
+  "England",
+  "Ireland",
+  "Australia",
+  "New Zealand",
+  "South Africa",
+  "United States",
+  "Canada",
+  "Germany",
+  "Poland",
+  "Japan",
+] as const;
+
 export function isoToFlagEmoji(iso: string): string {
   if (iso === "WORLD") return "🌐";
   const code = iso === "GB" ? "GB" : iso.toUpperCase();
@@ -328,4 +390,11 @@ export function countryMatchesFilter(info: CountryInfo, filter?: string | null):
     return info.iso === "GB" && info.ukNation === filter;
   }
   return info.name === filter || info.iso === filter;
+}
+
+export function flagForCountryFilter(name: string): string {
+  if (!name || name === "All") return "";
+  if (name === "World") return "🌐";
+  const info = resolveCountry({ country: name, name });
+  return isoToFlagEmoji(info.iso);
 }

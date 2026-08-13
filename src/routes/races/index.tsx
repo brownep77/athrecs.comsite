@@ -30,7 +30,7 @@ function EventsPage() {
           ...searchToApi(filters),
           sport: (searchToApi(filters).sport as Sport | undefined) ?? undefined,
           upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
-          limit: 60,
+          limit: 80,
         },
       }),
     initialData: empty ? initial : undefined,
@@ -47,7 +47,7 @@ function EventsPage() {
         </h1>
         <p className="text-sm text-muted">
           Search by country, county, city, postcode, month or date range.
-          Each sport shows its own filters — running has distance and surface.
+          Use the Country menu for Australia, South Africa, Japan, the USA and every other parkrun nation.
         </p>
       </header>
 

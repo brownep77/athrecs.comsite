@@ -5,18 +5,26 @@ export function FilterChips({
   options,
   value,
   onChange,
+  wrap = false,
 }: {
   label: string;
   options: readonly string[];
   value: string;
   onChange: (v: string) => void;
+  wrap?: boolean;
 }) {
   return (
     <div className="min-w-0 max-w-full space-y-1.5">
       <p className="text-[11px] font-medium uppercase tracking-wider text-subtle">
         {label}
       </p>
-      <div className="flex max-w-full gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div
+        className={
+          wrap
+            ? "flex max-w-full flex-wrap gap-2"
+            : "flex max-w-full gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        }
+      >
         {options.map((opt) => {
           const active = value === opt;
           return (
