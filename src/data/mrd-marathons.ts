@@ -1,17 +1,8 @@
-/** Marathon Runners Diary — UK, Europe and international full marathons. */
+/** Marathon Runners Diary — UK, Europe and international full marathons.
+ * Public calendar facts only. Confirm entry on the official race site.
+ * Source: http://www.marathonrunnersdiary.com/
+ */
 import type { Edition, Series } from "./types";
-import { mrdUkMarathonEditions, mrdUkMarathonSeries } from "./mrd-marathons-uk";
-import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
-import { mrdIntlMarathonEditions, mrdIntlMarathonSeries } from "./mrd-marathons-intl";
 
-export const mrdMarathonSeries: Series[] = [
-  ...mrdUkMarathonSeries,
-  ...mrdEuMarathonSeries,
-  ...mrdIntlMarathonSeries,
-];
-
-export const mrdMarathonEditions: Edition[] = [
-  ...mrdUkMarathonEditions,
-  ...mrdEuMarathonEditions,
-  ...mrdIntlMarathonEditions,
-];
+export const mrdMarathonSeries: Series[] = [];
+export const mrdMarathonEditions: Edition[] = [];
