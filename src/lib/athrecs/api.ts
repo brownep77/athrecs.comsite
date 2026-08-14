@@ -282,6 +282,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       entry_url: string | null;
       source_url: string | null;
       start_time: string | null;
+      notes: string | null;
       result_count: number;
     }>`
       select
@@ -293,6 +294,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ed.entry_url,
         ed.source_url,
         ed.start_time,
+        ed.notes,
         (select count(*)::int from results r where r.edition_id = ed.id) as result_count
       from editions ed
       where ed.event_id = ${event.id}
@@ -314,6 +316,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
               entry_url: event.website,
               source_url: event.website,
               start_time: parkrunStartTime(event.country, /junior/i.test(event.name)),
+              notes: null,
               result_count: 0,
             };
           })
@@ -323,11 +326,73 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       ...generated.filter((row) => !storedDates.has(row.event_date)),
     ].sort((a, b) => a.event_date.localeCompare(b.event_date));
 
+    const relatedRows = await sql<
+      EventListItem & { distances_csv: string | null }
+    >`
+      select
+        e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
+        e.surface, e.summary, e.organiser, e.website,
+        (
+          select string_agg(d.distance_code, ',' order by d.distance_code)
+          from event_distances d where d.event_id = e.id
+        ) as distances_csv,
+        (
+          select ed.event_date::text from editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          order by ed.event_date asc limit 1
+        ) as next_date,
+        (
+          select ed.distance_code from editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          order by ed.event_date asc limit 1
+        ) as next_distance,
+        (
+          select ed.status from editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          order by ed.event_date asc limit 1
+        ) as next_status,
+        (
+          select ed.start_time from editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          order by ed.event_date asc limit 1
+        ) as next_start_time,
+        (
+          select count(*)::int from editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date
+        ) as upcoming_count,
+        (
+          select count(*)::int from editions ed
+          where ed.event_id = e.id and ed.event_date < ${today}::date
+        ) as past_count,
+        (select count(*)::int from editions ed where ed.event_id = e.id) as edition_count
+      from events e
+      where e.id <> ${event.id}
+        and e.sport = ${event.sport}
+        and (
+          lower(coalesce(e.city, '')) = lower(${event.city})
+          or e.country = ${event.country}
+        )
+      order by
+        case when lower(coalesce(e.city, '')) = lower(${event.city}) then 0 else 1 end,
+        (
+          select min(ed.event_date) from editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date
+        ) asc nulls last
+      limit 8
+    `;
+    const { sanitizeDistances } = await import("@/lib/athrecs/filters");
+    const related = relatedRows.map((row) => ({
+      ...row,
+      distances: sanitizeDistances(row.name, row.distances_csv ? row.distances_csv.split(",") : []),
+      next_status: (row.next_status as EntryStatus) ?? null,
+    }));
+
     return {
       event,
       distances: distances.map((d) => d.distance_code),
       upcoming,
       past: editions.filter((e) => e.event_date < today),
+      related,
     };
   });
 
