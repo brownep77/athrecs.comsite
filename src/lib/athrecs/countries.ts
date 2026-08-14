@@ -78,6 +78,58 @@ const NAME_BY_ISO: Record<string, string> = {
   FK: "Falkland Islands",
   SH: "Saint Helena",
   EG: "Egypt",
+  MD: "Moldova",
+  PE: "Peru",
+  DZ: "Algeria",
+  SA: "Saudi Arabia",
+  PY: "Paraguay",
+  RU: "Russia",
+  ZM: "Zambia",
+  BW: "Botswana",
+  BO: "Bolivia",
+  SV: "El Salvador",
+  MK: "North Macedonia",
+  LK: "Sri Lanka",
+  AM: "Armenia",
+  IL: "Israel",
+  JO: "Jordan",
+  FM: "Micronesia",
+  PR: "Puerto Rico",
+  SN: "Senegal",
+  TN: "Tunisia",
+  UY: "Uruguay",
+  UZ: "Uzbekistan",
+  EC: "Ecuador",
+  XK: "Kosovo",
+  MO: "Macau",
+  LB: "Lebanon",
+  PF: "French Polynesia",
+  BS: "Bahamas",
+  BY: "Belarus",
+  BJ: "Benin",
+  BM: "Bermuda",
+  BN: "Brunei",
+  TD: "Chad",
+  CO: "Colombia",
+  CR: "Costa Rica",
+  DO: "Dominican Republic",
+  GT: "Guatemala",
+  IR: "Iran",
+  KZ: "Kazakhstan",
+  KG: "Kyrgyzstan",
+  MH: "Marshall Islands",
+  MZ: "Mozambique",
+  NP: "Nepal",
+  NI: "Nicaragua",
+  NG: "Nigeria",
+  TJ: "Tajikistan",
+  TV: "Tuvalu",
+  UG: "Uganda",
+  VE: "Venezuela",
+  SB: "Solomon Islands",
+  OM: "Oman",
+  PK: "Pakistan",
+  MM: "Myanmar",
   WORLD: "World",
 };
 
@@ -166,6 +218,87 @@ const ALIAS: Record<string, string> = {
   "st helena": "SH",
   world: "WORLD",
   international: "WORLD",
+  moldova: "MD",
+  "republic of moldova": "MD",
+  chisinau: "MD",
+  "chișinău": "MD",
+  peru: "PE",
+  algeria: "DZ",
+  "saudi arabia": "SA",
+  ksa: "SA",
+  paraguay: "PY",
+  russia: "RU",
+  "russian federation": "RU",
+  zambia: "ZM",
+  botswana: "BW",
+  bolivia: "BO",
+  "el salvador": "SV",
+  "north macedonia": "MK",
+  macedonia: "MK",
+  "sri lanka": "LK",
+  armenia: "AM",
+  israel: "IL",
+  jordan: "JO",
+  micronesia: "FM",
+  "puerto rico": "PR",
+  senegal: "SN",
+  tunisia: "TN",
+  uruguay: "UY",
+  uzbekistan: "UZ",
+  ecuador: "EC",
+  kosovo: "XK",
+  kos: "XK",
+  macau: "MO",
+  macao: "MO",
+  mac: "MO",
+  lebanon: "LB",
+  lbn: "LB",
+  tahiti: "PF",
+  "french polynesia": "PF",
+  pyf: "PF",
+  bahamas: "BS",
+  belarus: "BY",
+  benin: "BJ",
+  bermuda: "BM",
+  brunei: "BN",
+  chad: "TD",
+  colombia: "CO",
+  "costa rica": "CR",
+  "dominican republic": "DO",
+  guatemala: "GT",
+  iran: "IR",
+  kazakhstan: "KZ",
+  kyrgyzstan: "KG",
+  "marshall islands": "MH",
+  mozambique: "MZ",
+  nepal: "NP",
+  nicaragua: "NI",
+  nigeria: "NG",
+  tajikistan: "TJ",
+  tuvalu: "TV",
+  uganda: "UG",
+  venezuela: "VE",
+  "solomon islands": "SB",
+  oman: "OM",
+  pakistan: "PK",
+  myanmar: "MM",
+  burma: "MM",
+  taiwan: "TW",
+  "chinese taipei": "TW",
+  "hong kong china": "HK",
+  "republic of korea": "KR",
+  "the republic of korea": "KR",
+  "the united states": "US",
+  "the netherlands": "NL",
+  "the philippines": "PH",
+  "the czech republic": "CZ",
+  eur: "WORLD",
+  und: "WORLD",
+  philippines: "PH",
+  monaco: "MC",
+  luxembourg: "LU",
+  indonesia: "ID",
+  gibraltar: "GI",
 };
 
 type Hint = { iso: string; re: RegExp; ukNation?: CountryInfo["ukNation"] };
@@ -205,6 +338,22 @@ const PLACE_HINTS: Hint[] = [
   { iso: "BR", re: /\b(rio de janeiro|s[aã]o paulo|brazil)\b/i },
   { iso: "MX", re: /\b(mexico city|cancun|mexico)\b/i },
   { iso: "TR", re: /\b(istanbul|ankara|turkey|t[uü]rkiye)\b/i },
+  { iso: "MD", re: /\b(chi[sș]in[aă]u|moldova)\b/i },
+  { iso: "PE", re: /\b(lima|arequipa|cusco|peru)\b/i },
+  { iso: "DZ", re: /\b(algiers|oran|algeria)\b/i },
+  { iso: "SA", re: /\b(riyadh|jeddah|saudi arabia)\b/i },
+  { iso: "TN", re: /\b(tunis|sousse|tunisia)\b/i },
+  { iso: "SN", re: /\b(dakar|senegal)\b/i },
+  { iso: "MZ", re: /\b(maputo|mozambique)\b/i },
+  { iso: "IR", re: /\b(tehran|tabriz|iran)\b/i },
+  { iso: "JO", re: /\b(amman|jordan)\b/i },
+  { iso: "VE", re: /\b(caracas|venezuela)\b/i },
+  { iso: "CR", re: /\b(san jos[eé]|costa rica)\b/i },
+  { iso: "PF", re: /\b(tahiti|papeete|french polynesia)\b/i },
+  { iso: "BM", re: /\b(bermuda)\b/i },
+  { iso: "UY", re: /\b(montevideo|uruguay)\b/i },
+  { iso: "KG", re: /\b(bishkek|kyrgyzstan)\b/i },
+  { iso: "BJ", re: /\b(cotonou|porto-novo|benin)\b/i },
   { iso: "IE", re: /\b(dublin|cork|galway|limerick|waterford|ireland|eire)\b/i },
   { iso: "GB", re: /\b(belfast|antrim|lisburn|derry|londonderry|newry|omagh|enniskillen|coleraine|northern ireland|\bbt\d)/i, ukNation: "Northern Ireland" },
   { iso: "GB", re: /\b(scotland|glasgow|edinburgh|aberdeen|dundee|inverness|perth|stirling|fife|highlands?|aberfeldy|kenmore|lossiemouth|moray)\b/i, ukNation: "Scotland" },
@@ -301,13 +450,63 @@ export const COUNTRY_GROUPS: { label: string; options: string[] }[] = [
       "Hungary",
       "Croatia",
       "Slovenia",
+      "Moldova",
+      "Latvia",
+      "Malta",
     ],
   },
-  { label: "Africa", options: ["South Africa", "Namibia", "Eswatini", "Kenya", "Ethiopia", "Egypt"] },
-  { label: "Americas", options: ["United States", "Canada", "Brazil", "Chile"] },
+  {
+    label: "Africa",
+    options: [
+      "South Africa",
+      "Namibia",
+      "Eswatini",
+      "Kenya",
+      "Ethiopia",
+      "Egypt",
+      "Algeria",
+      "Morocco",
+      "Tunisia",
+      "Senegal",
+      "Mozambique",
+      "Benin",
+    ],
+  },
+  {
+    label: "Americas",
+    options: [
+      "United States",
+      "Canada",
+      "Brazil",
+      "Chile",
+      "Peru",
+      "Argentina",
+      "Uruguay",
+      "Venezuela",
+      "Costa Rica",
+      "Bermuda",
+    ],
+  },
   {
     label: "Asia-Pacific",
-    options: ["Australia", "New Zealand", "Japan", "Singapore", "Malaysia", "China", "Hong Kong", "Qatar", "United Arab Emirates"],
+    options: [
+      "Australia",
+      "New Zealand",
+      "Japan",
+      "Singapore",
+      "Malaysia",
+      "China",
+      "Hong Kong",
+      "Taiwan",
+      "South Korea",
+      "Qatar",
+      "United Arab Emirates",
+      "Saudi Arabia",
+      "Iran",
+      "Jordan",
+      "Kyrgyzstan",
+      "French Polynesia",
+    ],
   },
   { label: "Other", options: ["World"] },
 ];
@@ -349,6 +548,15 @@ export function isWorldEvent(name?: string | null): boolean {
   return !!name && WORLD_HINT.test(name);
 }
 
+function normCountryKey(value?: string | null): string {
+  return (value || "")
+    .normalize("NFKC")
+    .replace(/\u00a0/g, " ")
+    .replace(/^the\s+/i, "")
+    .trim()
+    .toLowerCase();
+}
+
 export function resolveCountry(input: {
   slug?: string | null;
   name?: string | null;
@@ -358,11 +566,31 @@ export function resolveCountry(input: {
   area?: string | null;
   address?: string | null;
 }): CountryInfo {
+  const countryKey = normCountryKey(input.country);
+  const alias = ALIAS[countryKey] || ALIAS[(input.country || "").trim().toLowerCase()];
+
+  // Stored country wins so Chișinău / Moldova is never guessed as the UK.
+  if (alias === "GB") {
+    const nation = /scotland/i.test(input.country || "")
+      ? "Scotland"
+      : /wales/i.test(input.country || "")
+        ? "Wales"
+        : /northern/i.test(input.country || "")
+          ? "Northern Ireland"
+          : "England";
+    return countryFromIso("GB", nation);
+  }
+  if (alias) return countryFromIso(alias);
+
+  const rawCountry = (input.country || "").trim();
+  if (/^[A-Z]{2}$/.test(rawCountry) && rawCountry !== "GB") {
+    return countryFromIso(rawCountry);
+  }
+
   const blob = [input.name, input.area, input.city, input.county, input.country, input.address, input.slug]
     .filter(Boolean)
     .join(" ");
 
-  // UK Lincolnshire Boston must win over US Boston.
   if (/\bboston\b/i.test(blob) && /\b(lincolnshire|santa run|terrier|uk boston)\b/i.test(blob)) {
     return countryFromIso("GB", "England");
   }
@@ -377,21 +605,13 @@ export function resolveCountry(input: {
     }
   }
 
-  const alias = ALIAS[(input.country || "").trim().toLowerCase()];
-  if (alias === "GB") {
-    const nation = /scotland/i.test(input.country || "")
-      ? "Scotland"
-      : /wales/i.test(input.country || "")
-        ? "Wales"
-        : /northern/i.test(input.country || "")
-          ? "Northern Ireland"
-          : "England";
-    return countryFromIso("GB", nation);
-  }
-  if (alias) return countryFromIso(alias);
-
   if (UK_ENGLAND_HINT.test(blob)) return countryFromIso("GB", "England");
   if (isWorldEvent(input.name)) return countryFromIso("WORLD");
+
+  if (countryKey && countryKey !== "england") {
+    const titled = rawCountry.replace(/^the\s+/i, "").replace(/\u00a0/g, " ").trim();
+    return { iso: "UN", name: titled || rawCountry, world: false };
+  }
   return countryFromIso("GB", "England");
 }
 
