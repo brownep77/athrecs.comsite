@@ -3,6 +3,7 @@ import { MapPin, Users } from "lucide-react";
 import type { ClubListItem } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge";
+import { NationFlag } from "@/components/flags/NationFlag";
 
 export function ClubCard({ club }: { club: ClubListItem }) {
   return (
@@ -28,9 +29,10 @@ export function ClubCard({ club }: { club: ClubListItem }) {
       <Link
         to="/clubs/$slug"
         params={{ slug: club.slug }}
-        className="block font-semibold text-fg no-underline hover:text-accent"
+        className="flex items-center gap-2 font-semibold text-fg no-underline hover:text-accent"
       >
-        {club.name}
+        <NationFlag nation={club.country} className="h-5 w-8 border" />
+        <span>{club.name}</span>
       </Link>
       <p className="mt-1 flex items-center gap-1.5 text-xs text-muted">
         <MapPin className="h-3.5 w-3.5 text-subtle" />
