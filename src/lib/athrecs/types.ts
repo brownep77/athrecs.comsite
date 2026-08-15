@@ -5,7 +5,6 @@ export type Sport =
   | "Triathlon"
   | "Duathlon"
   | "Parkrun"
-  | "TrackAndField"
   | "Aquathlon"
   | "Aquabike"
   | "Rowing"
