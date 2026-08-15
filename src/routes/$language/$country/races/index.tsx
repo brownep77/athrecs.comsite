@@ -30,7 +30,10 @@ type CountryRaceSearch = {
   sport?: Sport;
   distance?: string;
   surface?: string;
+  page?: number;
 };
+
+const PAGE_SIZE = 40;
 
 function optionalText(value: unknown): string | undefined {
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
@@ -43,6 +46,12 @@ export const Route = createFileRoute("/$language/$country/races/")({
       sport: sport && SPORTS.has(sport as Sport) ? (sport as Sport) : undefined,
       distance: optionalText(search.distance),
       surface: optionalText(search.surface),
+      page:
+        typeof search.page === "number" && Number.isInteger(search.page) && search.page > 1
+          ? search.page
+          : typeof search.page === "string" && /^\d+$/.test(search.page) && Number(search.page) > 1
+            ? Number(search.page)
+            : undefined,
     };
   },
   loaderDeps: ({ search }) => search,
@@ -56,7 +65,8 @@ export const Route = createFileRoute("/$language/$country/races/")({
         distance: deps.distance,
         surface: deps.surface,
         upcomingOnly: true,
-        limit: 80,
+        limit: PAGE_SIZE + 1,
+        offset: ((deps.page ?? 1) - 1) * PAGE_SIZE,
       },
     });
     return { site, language: params.language, races };
@@ -91,6 +101,11 @@ function CountryRacesPage() {
   const search = Route.useSearch();
   const copy = copyForLanguage(language);
   const country = displayCountryForLanguage(site, language);
+  const page = search.page ?? 1;
+  const visibleRaces = races.slice(0, PAGE_SIZE);
+  const hasNextPage = races.length > PAGE_SIZE;
+  const firstEventNumber = visibleRaces.length ? (page - 1) * PAGE_SIZE + 1 : 0;
+  const lastEventNumber = (page - 1) * PAGE_SIZE + visibleRaces.length;
 
   return (
     <div className="space-y-6 pb-10">
@@ -163,10 +178,16 @@ function CountryRacesPage() {
         />
       </div>
 
-      <p className="text-sm text-subtle">{races.length} events shown</p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-sm text-subtle">
+          {visibleRaces.length ? `${firstEventNumber}–${lastEventNumber}` : "0"}{" "}
+          {copy.events.toLowerCase()}
+        </p>
+        {page > 1 || hasNextPage ? <p className="text-xs font-medium text-muted">{page}</p> : null}
+      </div>
       <div className="grid gap-2">
-        {races.length ? (
-          races.map((race) => (
+        {visibleRaces.length ? (
+          visibleRaces.map((race) => (
             <RaceCard key={race.id} race={race} localized={{ language, country: site.slug }} />
           ))
         ) : (
@@ -175,6 +196,47 @@ function CountryRacesPage() {
           </p>
         )}
       </div>
+
+      {page > 1 || hasNextPage ? (
+        <nav
+          aria-label="Event pages"
+          className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3 shadow-card"
+        >
+          {page > 1 ? (
+            <Button asChild variant="secondary">
+              <Link
+                to="/$language/$country/races"
+                params={{ language, country: site.slug }}
+                search={{ ...search, page: page > 2 ? page - 1 : undefined }}
+                aria-label="Previous page"
+              >
+                ←
+              </Link>
+            </Button>
+          ) : (
+            <Button variant="secondary" disabled aria-label="Previous page">
+              ←
+            </Button>
+          )}
+          <span className="text-sm text-subtle">{page}</span>
+          {hasNextPage ? (
+            <Button asChild>
+              <Link
+                to="/$language/$country/races"
+                params={{ language, country: site.slug }}
+                search={{ ...search, page: page + 1 }}
+                aria-label="Next page"
+              >
+                →
+              </Link>
+            </Button>
+          ) : (
+            <Button disabled aria-label="Next page">
+              →
+            </Button>
+          )}
+        </nav>
+      ) : null}
     </div>
   );
 }

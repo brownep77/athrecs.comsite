@@ -41,6 +41,7 @@ export const listEvents = createServerFn({ method: "GET" })
             dateFrom?: string;
             dateTo?: string;
             format?: string;
+            offset?: number;
           }
         | undefined,
     ) => input ?? {},
@@ -53,6 +54,7 @@ export const listEvents = createServerFn({ method: "GET" })
     const today = todayIso();
     const upcomingOnly = data.upcomingOnly === true;
     const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
+    const offset = Math.min(Math.max(Math.floor(data.offset ?? 0), 0), 10_000);
     const fetchLimit = Math.min(limit * 3, 160);
     const distance = data.distance?.trim() || null;
     const surface = data.surface?.trim() || null;
@@ -166,6 +168,7 @@ export const listEvents = createServerFn({ method: "GET" })
         ) asc nulls last,
         e.name asc
       limit ${fetchLimit}
+      offset ${offset}
     `;
 
     const { collapseSameNameDate } = await import("@/lib/athrecs/dedupe");
@@ -742,7 +745,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     `;
     const { parkrunDates, parkrunDistance, parkrunStartTime } = await import("@/lib/athrecs/parkrun-dates");
     const wantParkrun = !sport || sport === "Parkrun";
-    let generatedRows: typeof rows = [];
+    const generatedRows: typeof rows = [];
     if (wantParkrun) {
       const windowFrom = dateFrom && dateFrom > today ? dateFrom : today;
       const windowTo = dateTo || (dateFrom ? "2027-12-26" : null);
