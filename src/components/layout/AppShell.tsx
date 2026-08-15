@@ -1,41 +1,46 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import { CalendarDays, Home, List, Settings2, Users, UsersRound } from "lucide-react";
 import {
-  CalendarDays,
-  Home,
-  List,
-  Settings2,
-  Users,
-  UsersRound,
-} from "lucide-react";
+  copyForLanguage,
+  countrySiteFromSlug,
+  isSiteLanguage,
+  type CountrySite,
+  type SiteLanguage,
+} from "@/lib/athrecs/country-sites";
 import { cn } from "@/lib/utils";
 
 const nav = [
-  { to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
+  { key: "home", to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
   {
+    key: "events",
     to: "/races",
     label: "Events",
     icon: List,
     match: (p: string) => p.startsWith("/races"),
   },
   {
+    key: "athletes",
     to: "/athletes",
     label: "Athletes",
     icon: Users,
     match: (p: string) => p.startsWith("/athletes"),
   },
   {
+    key: "clubs",
     to: "/clubs",
     label: "Clubs",
     icon: UsersRound,
     match: (p: string) => p.startsWith("/clubs"),
   },
   {
+    key: "calendar",
     to: "/calendar",
     label: "Calendar",
     icon: CalendarDays,
     match: (p: string) => p.startsWith("/calendar"),
   },
   {
+    key: "update",
     to: "/admin",
     label: "Update",
     icon: Settings2,
@@ -43,13 +48,7 @@ const nav = [
   },
 ] as const;
 
-function BrandLogo({
-  className,
-  priority,
-}: {
-  className?: string;
-  priority?: boolean;
-}) {
+function BrandLogo({ className, priority }: { className?: string; priority?: boolean }) {
   return (
     <img
       src="/athrecs-logo-header.png"
@@ -64,30 +63,48 @@ function BrandLogo({
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathSegments = pathname.split("/").filter(Boolean);
+  const pathLanguage = pathSegments[0] ?? "";
+  const pathCountry = pathSegments[1] ?? "";
+  const localized =
+    isSiteLanguage(pathLanguage) && countrySiteFromSlug(pathCountry)
+      ? {
+          language: pathLanguage,
+          site: countrySiteFromSlug(pathCountry)!,
+        }
+      : undefined;
+  const copy = localized ? copyForLanguage(localized.language) : undefined;
+  const localizedLabels: Partial<Record<(typeof nav)[number]["key"], string>> = copy
+    ? {
+        home: copy.home,
+        events: copy.events,
+        athletes: copy.athletes,
+        clubs: copy.clubs,
+        calendar: copy.calendar,
+      }
+    : {};
+
+  const isActive = (item: (typeof nav)[number]) => {
+    if (!localized) return item.match(pathname);
+    const base = `/${localized.language}/${localized.site.slug}`;
+    if (item.key === "home") return pathname === base || pathname === `${base}/`;
+    if (item.key === "events") return pathname.startsWith(`${base}/races`);
+    return item.match(pathname);
+  };
 
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col overflow-x-hidden bg-bg">
       <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md md:block">
         <div className="flex h-16 items-center justify-between gap-4 px-6">
-          <Link
-            to="/"
-            className="flex min-w-0 items-center gap-3 no-underline"
-            aria-label="ATHRECS.com home"
-          >
-            <BrandLogo priority className="h-9" />
-            <span className="hidden border-l border-border pl-3 text-[11px] leading-tight text-subtle lg:block">
-              Holding
-              <br />
-              Norfolk pilot
-            </span>
-          </Link>
+          <BrandLink localized={localized} desktop />
           <nav className="flex items-center gap-0.5">
             {nav.map((item) => {
-              const active = item.match(pathname);
+              const active = isActive(item);
               return (
-                <Link
+                <ShellLink
                   key={item.to}
-                  to={item.to}
+                  item={item}
+                  localized={localized}
                   className={cn(
                     "inline-flex h-10 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium no-underline transition-colors",
                     active
@@ -96,8 +113,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   )}
                 >
                   <item.icon className="h-4 w-4" strokeWidth={1.75} />
-                  {item.label}
-                </Link>
+                  {localizedLabels[item.key] ?? item.label}
+                </ShellLink>
               );
             })}
           </nav>
@@ -106,9 +123,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
       <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md md:hidden">
         <div className="flex h-12 items-center justify-between gap-2 px-4">
-          <Link to="/" className="min-w-0 no-underline" aria-label="ATHRECS.com home">
-            <BrandLogo className="h-7 max-w-[160px]" />
-          </Link>
+          <BrandLink localized={localized} />
           <Link
             to="/calendar"
             className="inline-flex h-10 items-center gap-1.5 rounded-md bg-accent-soft px-3 text-sm font-semibold text-fg no-underline"
@@ -119,9 +134,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <main className="min-w-0 flex-1 px-4 pb-24 pt-4 md:px-6 md:pb-10 md:pt-8">
-        {children}
-      </main>
+      <main className="min-w-0 flex-1 px-4 pb-24 pt-4 md:px-6 md:pb-10 md:pt-8">{children}</main>
 
       <nav
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md md:hidden"
@@ -129,27 +142,106 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       >
         <ul className="mx-auto grid max-w-lg grid-cols-6 px-0.5 pt-1">
           {nav.map((item) => {
-            const active = item.match(pathname);
+            const active = isActive(item);
             return (
               <li key={item.to} className="min-w-0">
-                <Link
-                  to={item.to}
+                <ShellLink
+                  item={item}
+                  localized={localized}
                   className={cn(
                     "flex min-h-12 flex-col items-center justify-center gap-0.5 rounded-lg px-0.5 py-1.5 text-[10px] font-medium no-underline",
                     active ? "text-fg" : "text-subtle",
                   )}
                 >
-                  <item.icon
-                    className="h-5 w-5"
-                    strokeWidth={active ? 2 : 1.6}
-                  />
-                  <span className="truncate">{item.label}</span>
-                </Link>
+                  <item.icon className="h-5 w-5" strokeWidth={active ? 2 : 1.6} />
+                  <span className="truncate">{localizedLabels[item.key] ?? item.label}</span>
+                </ShellLink>
               </li>
             );
           })}
         </ul>
       </nav>
     </div>
+  );
+}
+
+type LocalizedShell = { language: SiteLanguage; site: CountrySite } | undefined;
+
+function BrandLink({
+  localized,
+  desktop = false,
+}: {
+  localized: LocalizedShell;
+  desktop?: boolean;
+}) {
+  const content = (
+    <>
+      <BrandLogo priority={desktop} className={desktop ? "h-9" : "h-7 max-w-[160px]"} />
+      {desktop ? (
+        <span className="hidden border-l border-border pl-3 text-[11px] leading-tight text-subtle lg:block">
+          Races
+          <br />
+          Results · Athletes
+        </span>
+      ) : null}
+    </>
+  );
+  const className = desktop
+    ? "flex min-w-0 items-center gap-3 no-underline"
+    : "min-w-0 no-underline";
+
+  return localized ? (
+    <Link
+      to="/$language/$country"
+      params={{ language: localized.language, country: localized.site.slug }}
+      className={className}
+      aria-label="ATHRECS.com country home"
+    >
+      {content}
+    </Link>
+  ) : (
+    <Link to="/" className={className} aria-label="ATHRECS.com home">
+      {content}
+    </Link>
+  );
+}
+
+function ShellLink({
+  item,
+  localized,
+  className,
+  children,
+}: {
+  item: (typeof nav)[number];
+  localized: LocalizedShell;
+  className: string;
+  children: React.ReactNode;
+}) {
+  if (localized && item.key === "home") {
+    return (
+      <Link
+        to="/$language/$country"
+        params={{ language: localized.language, country: localized.site.slug }}
+        className={className}
+      >
+        {children}
+      </Link>
+    );
+  }
+  if (localized && item.key === "events") {
+    return (
+      <Link
+        to="/$language/$country/races"
+        params={{ language: localized.language, country: localized.site.slug }}
+        className={className}
+      >
+        {children}
+      </Link>
+    );
+  }
+  return (
+    <Link to={item.to} className={className}>
+      {children}
+    </Link>
   );
 }

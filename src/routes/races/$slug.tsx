@@ -33,10 +33,7 @@ import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { resolveCountry, displayCountryName } from "@/lib/athrecs/countries";
 import { timeZoneAbbr, timeZoneForPlace } from "@/lib/athrecs/timezone";
-import {
-  buildRaceBriefing,
-  sportLabel,
-} from "@/lib/athrecs/race-briefing";
+import { buildRaceBriefing, sportLabel } from "@/lib/athrecs/race-briefing";
 
 type EditionRow = {
   id: number;
@@ -82,7 +79,17 @@ export const Route = createFileRoute("/races/$slug")({
 });
 
 function RacePage() {
-  const { event, distances, upcoming, past, related } = Route.useLoaderData();
+  return <RacePageContent data={Route.useLoaderData()} />;
+}
+
+export function RacePageContent({
+  data,
+  localized,
+}: {
+  data: NonNullable<Awaited<ReturnType<typeof getEventBySlug>>>;
+  localized?: { language: string; country: string };
+}) {
+  const { event, distances, upcoming, past, related } = data;
   const shownDistances = sanitizeDistances(event.name, distances);
   const country = resolveCountry({
     slug: event.slug,
@@ -134,25 +141,33 @@ function RacePage() {
     enabled: resultsEditionId != null,
   });
 
-  const nextStatus = next
-    ? effectiveStatus(next.event_date, next.status as EntryStatus)
-    : null;
+  const nextStatus = next ? effectiveStatus(next.event_date, next.status as EntryStatus) : null;
   const pastWithResults = past.filter((ed) => ed.result_count > 0);
-  const upcomingPreview =
-    event.sport === "Parkrun" ? upcoming.slice(0, 6) : upcoming.slice(0, 12);
+  const upcomingPreview = event.sport === "Parkrun" ? upcoming.slice(0, 6) : upcoming.slice(0, 12);
   const upcomingHidden = upcoming.length - upcomingPreview.length;
   const pastPreview = past.slice(0, 12);
   const pastHidden = past.length - pastPreview.length;
 
   return (
     <div className="space-y-8 pb-10">
-      <Link
-        to="/races"
-        className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Events
-      </Link>
+      {localized ? (
+        <Link
+          to="/$language/$country/races"
+          params={localized}
+          className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Events
+        </Link>
+      ) : (
+        <Link
+          to="/races"
+          className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Events
+        </Link>
+      )}
 
       <header className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
         <div className="h-1.5 bg-primary" />
@@ -184,7 +199,10 @@ function RacePage() {
                     .filter((part, i, arr) => {
                       const key = part.toLowerCase();
                       if (arr.findIndex((p) => p.toLowerCase() === key) !== i) return false;
-                      if (key === "united kingdom" && arr.some((p) => /^(england|scotland|wales|northern ireland)$/i.test(p))) {
+                      if (
+                        key === "united kingdom" &&
+                        arr.some((p) => /^(england|scotland|wales|northern ireland)$/i.test(p))
+                      ) {
                         return false;
                       }
                       return true;
@@ -244,7 +262,10 @@ function RacePage() {
           Key facts
         </h2>
         <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          <Fact label="Date" value={next ? formatRaceDateShort(next.event_date) : "No future date"} />
+          <Fact
+            label="Date"
+            value={next ? formatRaceDateShort(next.event_date) : "No future date"}
+          />
           <Fact
             label="Local start"
             value={nextStart ?? "Confirm officially"}
@@ -263,15 +284,16 @@ function RacePage() {
           <Fact label="Surface" value={event.surface || "TBC"} />
           <Fact label="Sport" value={sportLabel(event.sport)} />
           <Fact label="Organiser" value={event.organiser || "See official page"} />
-          <Fact
-            label="Entry"
-            value={nextStatus ? statusLabel(nextStatus) : "See official page"}
-          />
+          <Fact label="Entry" value={nextStatus ? statusLabel(nextStatus) : "See official page"} />
           <Fact label="Listed from" value={briefing.source.label} />
           <Fact label="Past races on ATHRECS" value={String(past.length)} />
           <Fact
             label="Results held"
-            value={pastWithResults.length ? `${pastWithResults.length} edition${pastWithResults.length === 1 ? "" : "s"}` : "None yet"}
+            value={
+              pastWithResults.length
+                ? `${pastWithResults.length} edition${pastWithResults.length === 1 ? "" : "s"}`
+                : "None yet"
+            }
           />
         </dl>
       </section>
@@ -333,7 +355,9 @@ function RacePage() {
         onResults={(id) => {
           setResultsEditionId(id);
           requestAnimationFrame(() => {
-            document.getElementById("edition-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+            document
+              .getElementById("edition-results")
+              ?.scrollIntoView({ behavior: "smooth", block: "start" });
           });
         }}
         country={event.country}
@@ -360,8 +384,8 @@ function RacePage() {
           ) : (
             <>
               <p className="text-xs text-subtle">
-                Ranked here by finish time only. Official places, DQ notes and age-grades live
-                on the timer site.
+                Ranked here by finish time only. Official places, DQ notes and age-grades live on
+                the timer site.
               </p>
               <div className="overflow-x-auto rounded-xl border border-border bg-surface shadow-card">
                 <table className="w-full min-w-[28rem] text-left text-sm">
@@ -414,7 +438,7 @@ function RacePage() {
           </div>
           <div className="grid gap-3 md:grid-cols-2">
             {related.map((race: EventListItem) => (
-              <RaceCard key={race.slug} race={race} />
+              <RaceCard key={race.slug} race={race} localized={localized} />
             ))}
           </div>
         </section>
@@ -423,13 +447,18 @@ function RacePage() {
       <aside className="rounded-xl border border-dashed border-border px-4 py-4 text-xs leading-relaxed text-subtle">
         This page is an ATHRECS briefing written from public listing facts (name, date, venue,
         sport, distances). We do not copy official athlete guides, course maps, start lists or
-        marketing copy. parkrun, World Athletics, World Triathlon and other names are trademarks
-        of their owners. Always confirm entry, rules and the course on the official page
+        marketing copy. parkrun, World Athletics, World Triathlon and other names are trademarks of
+        their owners. Always confirm entry, rules and the course on the official page
         {briefing.source.url ? (
           <>
             {" "}
             (
-            <a href={briefing.source.url} className="text-muted underline" target="_blank" rel="noreferrer">
+            <a
+              href={briefing.source.url}
+              className="text-muted underline"
+              target="_blank"
+              rel="noreferrer"
+            >
               {briefing.source.label}
             </a>
             )
@@ -442,15 +471,7 @@ function RacePage() {
   );
 }
 
-function Fact({
-  label,
-  value,
-  hint,
-}: {
-  label: string;
-  value: string;
-  hint?: string;
-}) {
+function Fact({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
     <div className="bg-surface px-4 py-3">
       <dt className="text-[11px] font-semibold uppercase tracking-wider text-subtle">{label}</dt>

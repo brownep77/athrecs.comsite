@@ -1,309 +1,323 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
+  Activity,
   ArrowRight,
+  Bike,
   CalendarDays,
-  Flag,
-  ListChecks,
+  ChevronRight,
+  Footprints,
+  Gauge,
   MapPin,
-  Shield,
+  Route as RouteIcon,
+  Timer,
+  Trophy,
   Users,
-  UsersRound,
+  Waves,
 } from "lucide-react";
-import { getHomeStats, listAthletes, listClubs, listEvents } from "@/lib/athrecs/api";
+import { getHomeStats, listEvents } from "@/lib/athrecs/api";
+import { flagForCountryFilter } from "@/lib/athrecs/countries";
+import { countrySiteFromName } from "@/lib/athrecs/country-sites";
+import { COUNTRY_GROUPS } from "@/lib/athrecs/filters";
 import { RaceCard } from "@/components/races/RaceCard";
-import { ClubCard } from "@/components/clubs/ClubCard";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { NationBadge } from "@/components/flags/NationFlag";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    const [stats, events, clubs, athletes] = await Promise.all([
+    const [stats, running] = await Promise.all([
       getHomeStats(),
-      listEvents({ data: { upcomingOnly: true, limit: 8 } }),
-      listClubs({ data: {} }),
-      listAthletes({ data: {} }),
+      listEvents({
+        data: { sport: "Running", upcomingOnly: true, limit: 4 },
+      }),
     ]);
-    return {
-      stats,
-      featured: events,
-      clubs: clubs.slice(0, 4),
-      athletes: athletes
-        .filter((a) => a.result_count > 0)
-        .sort((a, b) => b.result_count - a.result_count)
-        .slice(0, 6),
-    };
+    return { stats, running };
   },
-  component: HoldingHomePage,
+  component: HomePage,
 });
 
-function HoldingHomePage() {
-  const { stats, featured, clubs, athletes } = Route.useLoaderData();
+const distances = [
+  {
+    label: "parkrun",
+    detail: "Free, weekly 5K",
+    sport: "Parkrun" as const,
+    icon: Footprints,
+    accent: "bg-[#d9f5ef] text-[#087e6e]",
+  },
+  {
+    label: "5K",
+    detail: "Fast and accessible",
+    sport: "Running" as const,
+    distance: "5K",
+    icon: Timer,
+    accent: "bg-[#e7f2ff] text-[#2563a5]",
+  },
+  {
+    label: "10K",
+    detail: "The classic road race",
+    sport: "Running" as const,
+    distance: "10K",
+    icon: Gauge,
+    accent: "bg-[#fff0dc] text-[#a85d0b]",
+  },
+  {
+    label: "Half marathon",
+    detail: "13.1 miles",
+    sport: "Running" as const,
+    distance: "Half",
+    icon: RouteIcon,
+    accent: "bg-[#eee9ff] text-[#6547b8]",
+  },
+  {
+    label: "Marathon",
+    detail: "26.2 miles",
+    sport: "Running" as const,
+    distance: "Marathon",
+    icon: Trophy,
+    accent: "bg-[#ffe5e0] text-[#ae4937]",
+  },
+] as const;
+
+function HomePage() {
+  const { stats, running } = Route.useLoaderData();
+  const navigate = useNavigate();
+  const [country, setCountry] = useState("All");
+  const countFor = (sport: string) => stats.bySport.find((item) => item.sport === sport)?.n ?? 0;
+
+  const browseCountry = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (country === "All") {
+      void navigate({ to: "/races" });
+      return;
+    }
+    const site = countrySiteFromName(country);
+    if (!site) return;
+    void navigate({
+      to: "/$language/$country",
+      params: { language: site.defaultLanguage, country: site.slug },
+    });
+  };
 
   return (
-    <div className="space-y-10 pb-4">
-      <section className="space-y-3">
-        <div className="flex flex-wrap items-end justify-between gap-2">
-          <div>
-            <h2 className="font-display text-lg font-semibold text-fg">
-              Upcoming races
-            </h2>
-            <p className="text-sm text-muted">
-              Flag, start time, address, parking and nearest station on each
-              card.
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <NationBadge kind="UnitedKingdom" />
-            <NationBadge kind="Ireland" />
-            <NationBadge nation="France" />
-            <NationBadge kind="World" />
-          </div>
-        </div>
-        <div className="grid gap-2">
-          {featured.length === 0 ? (
-            <p className="text-sm text-muted">No upcoming editions right now.</p>
-          ) : (
-            featured.map((r) => <RaceCard key={r.id} race={r} />)
-          )}
-        </div>
-        <div className="flex flex-wrap gap-2">
-          <Button asChild>
-            <Link to="/calendar">
-              Full calendar
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Button>
-          <Button asChild variant="secondary">
-            <Link to="/races">All events</Link>
-          </Button>
-        </div>
-      </section>
-
-      {/* Holding hero */}
-      <section className="relative overflow-hidden rounded-xl border border-border bg-surface shadow-card">
+    <div className="space-y-12 pb-8 md:space-y-16">
+      <section className="relative isolate overflow-hidden rounded-[1.75rem] border border-border bg-surface text-fg shadow-[0_24px_70px_rgba(45,52,57,0.10)]">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.07]"
+          className="pointer-events-none absolute inset-0 opacity-90"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 12% 20%, var(--color-primary) 0%, transparent 42%), radial-gradient(circle at 88% 0%, var(--color-primary) 0%, transparent 36%)",
+            background:
+              "radial-gradient(circle at 84% 18%, rgba(12,171,149,0.20), transparent 30%), radial-gradient(circle at 62% 115%, rgba(12,171,149,0.12), transparent 38%)",
           }}
           aria-hidden
         />
-        <div className="relative space-y-5 p-6 md:p-10">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="accent">ATHRECS.com holding</Badge>
-            <Badge variant="outline">Norfolk pilot · live</Badge>
-          </div>
-          <img
-            src="/athrecs-logo.png"
-            alt="ATHRECS.com"
-            width={320}
-            height={65}
-            className="h-11 w-auto max-w-full object-contain object-left md:h-14"
-            decoding="async"
-          />
-          <h1 className="max-w-2xl font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl lg:text-[2.65rem] lg:leading-tight">
-            A home for race fixtures, athletes, clubs and results
-          </h1>
-          <p className="max-w-2xl text-sm leading-relaxed text-muted md:text-base">
-            ATHRECS is being built as the place to find endurance and multi-sport
-            events, follow athletes and clubs, and browse published finish times.
-            This holding site is the <strong className="font-medium text-fg">live
-            Norfolk pilot</strong> — real fixtures and verified Total Race Timing
-            results, growing toward a wider UK and world directory.
-          </p>
-          <div className="flex flex-wrap gap-2 pt-1">
-            <Button asChild>
-              <Link to="/calendar">
-                <CalendarDays className="h-4 w-4" />
-                Open calendar
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild variant="secondary">
-              <Link to="/races">Explore Norfolk events</Link>
-            </Button>
-            <Button asChild variant="secondary">
-              <Link to="/athletes">
-                <Users className="h-4 w-4" />
-                Athletes & results
-              </Link>
-            </Button>
-          </div>
-          <dl className="grid grid-cols-2 gap-2 pt-2 sm:grid-cols-4">
-            <Stat label="Events" value={String(stats.events)} />
-            <Stat label="Upcoming" value={String(stats.upcoming)} />
-            <Stat label="Athletes" value={String(stats.athletes)} />
-            <Stat label="Clubs" value={String(stats.clubs)} />
-          </dl>
-          <div className="flex flex-wrap gap-1.5">
-            {stats.bySport.map((s) => (
-              <Badge key={s.sport} variant="outline">
-                {s.sport} · {s.n}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      </section>
+        <div className="pointer-events-none absolute -right-16 top-8 h-72 w-72 rounded-full border border-primary/15" />
+        <div className="pointer-events-none absolute -right-3 top-21 h-48 w-48 rounded-full border border-primary/15" />
 
-      {/* What's live on this holding site */}
-      <section className="space-y-3">
-        <h2 className="font-display text-lg font-semibold text-fg">
-          What's live on this holding site
-        </h2>
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          <Feature
-            icon={Flag}
-            title="Race directory"
-            body="Road, trail, track, multi-sport, swimming, rowing and more — Norfolk fixtures with terrain, start times and how to enter."
-            to="/races"
-            cta="Browse events"
-          />
-          <Feature
-            icon={Users}
-            title="Athletes & times"
-            body="Profiles linked to published TRT finish times — place, category, club and chip/gun style results."
-            to="/athletes"
-            cta="View athletes"
-          />
-          <Feature
-            icon={UsersRound}
-            title="Clubs"
-            body="England Athletics clubs with sports and websites — beside athletes on ATHRECS."
-
-            to="/clubs"
-            cta="View clubs"
-          />
-          <Feature
-            icon={CalendarDays}
-            title="Calendar"
-            body="Date-aware list of open, closing and finished editions."
-            to="/calendar"
-            cta="Open calendar"
-          />
-          <Feature
-            icon={ListChecks}
-            title="Admin update tools"
-            body="CSV bulk import and Grok JSON paste to keep fixtures current."
-            to="/admin"
-            cta="Update data"
-          />
-          <Feature
-            icon={Shield}
-            title="Results approach"
-            body="Basic public finish data with source links. Rights requests and richer stats planned next."
-            to="/races"
-            cta="See a race"
-          />
-        </div>
-      </section>
-
-      {/* Roadmap holding strip */}
-      <section className="rounded-xl border border-border bg-elevated/50 p-5 md:p-6">
-        <div className="mb-4 flex flex-wrap items-center gap-2">
-          <MapPin className="h-4 w-4 text-accent" />
-          <h2 className="font-display text-lg font-semibold text-fg">
-            Roadmap from this holding page
-          </h2>
-        </div>
-        <ol className="grid gap-3 text-sm md:grid-cols-3">
-          <li className="rounded-lg border border-border bg-surface p-3.5 shadow-card">
-            <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-accent">
-              Now · Norfolk
-            </div>
-            <p className="text-muted">
-              Fixtures, clubs, athletes and verified TRT results for the county pilot.
-            </p>
-          </li>
-          <li className="rounded-lg border border-border bg-surface p-3.5 shadow-card">
-            <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-subtle">
-              Next
-            </div>
-            <p className="text-muted">
-              Results permissions, Suffolk / Cambridgeshire, rankings and age-grade ratings.
-            </p>
-          </li>
-          <li className="rounded-lg border border-border bg-surface p-3.5 shadow-card">
-            <div className="mb-1 text-[11px] font-semibold uppercase tracking-wider text-subtle">
-              Later
-            </div>
-            <p className="text-muted">
-              UK nations, Commonwealth scopes, freemium detailed stats, parkrun-style ranking hooks.
-            </p>
-          </li>
-        </ol>
-      </section>
-
-      <section className="space-y-3">
-        <div className="flex items-end justify-between gap-2">
+        <div className="relative grid gap-9 px-6 py-9 sm:px-9 md:px-12 md:py-14 lg:grid-cols-[1.35fr_0.65fr] lg:items-end lg:gap-14">
           <div>
-            <h2 className="font-display text-lg font-semibold text-fg">
-              Athletes with verified results
-            </h2>
-            <p className="text-xs text-subtle">
-              Times from public Total Race Timing pages — confirm on the timer site.
+            <div className="mb-6 flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-subtle">
+              <span className="rounded-full border border-primary/20 bg-accent-soft px-3 py-1.5 text-accent">
+                Running first
+              </span>
+              <span>Triathlon</span>
+              <span className="h-1 w-1 rounded-full bg-border-strong" />
+              <span>Cycling</span>
+            </div>
+            <h1 className="max-w-3xl font-display text-[2.7rem] font-semibold leading-[0.98] tracking-[-0.04em] sm:text-6xl md:text-7xl">
+              Find your next
+              <span className="block text-accent">start line.</span>
+            </h1>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+              Discover running events from local parkruns and 5Ks to European marathons, then
+              explore triathlon and cycling across one growing race directory.
             </p>
-          </div>
-          <Link
-            to="/athletes"
-            className="shrink-0 text-sm font-medium text-accent no-underline hover:underline"
-          >
-            All athletes
-          </Link>
-        </div>
-        <div className="grid gap-2 sm:grid-cols-2">
-          {athletes.map((a) => (
-            <Link
-              key={a.id}
-              to="/athletes/$slug"
-              params={{ slug: a.slug }}
-              className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface px-3.5 py-3 no-underline shadow-card hover:border-border-strong"
+            <form
+              onSubmit={browseCountry}
+              className="mt-7 grid max-w-xl gap-2 rounded-2xl border border-border bg-elevated/80 p-3 sm:grid-cols-[1fr_auto] sm:items-end"
             >
-              <div className="min-w-0">
-                <div className="truncate font-medium text-fg">{a.display_name}</div>
-                <div className="truncate text-xs text-muted">
-                  {a.club ?? "Unattached"} · {a.city ?? "Norfolk"}
-                </div>
+              <label className="grid gap-1.5 text-xs font-semibold text-muted">
+                Select your country
+                <select
+                  value={country}
+                  onChange={(event) => setCountry(event.target.value)}
+                  className="h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                >
+                  <option value="All">All countries</option>
+                  <option value="United Kingdom">🇬🇧 United Kingdom</option>
+                  {COUNTRY_GROUPS.map((group) => (
+                    <optgroup key={group.label} label={group.label}>
+                      {group.options.map((option) => (
+                        <option key={option} value={option}>
+                          {flagForCountryFilter(option)} {option}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+              </label>
+              <Button
+                type="submit"
+                size="lg"
+                className="h-11 bg-primary text-white hover:bg-[#0a9a86]"
+              >
+                Open country homepage
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </form>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg" className="bg-primary text-white hover:bg-[#0a9a86]">
+                <Link to="/races" search={{ sport: "Running" }}>
+                  Explore running
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="lg"
+                variant="secondary"
+                className="border-border bg-elevated text-fg hover:bg-accent-soft"
+              >
+                <Link to="/calendar">
+                  <CalendarDays className="h-4 w-4" />
+                  Race calendar
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 rounded-2xl border border-border bg-elevated/75 p-3 backdrop-blur-sm">
+            <HeroStat value={stats.events.toLocaleString()} label="Events" />
+            <HeroStat value={stats.clubs.toLocaleString()} label="Clubs" />
+            <HeroStat value={stats.athletes.toLocaleString()} label="Athletes" />
+            <HeroStat value="One place" label="To find your race" />
+            <div className="col-span-2 flex items-center gap-3 rounded-xl bg-accent-soft px-4 py-3">
+              <MapPin className="h-5 w-5 shrink-0 text-accent" />
+              <p className="text-xs leading-relaxed text-muted">
+                Norfolk roots. UK, Ireland, Europe and world events.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="space-y-5">
+        <SectionHeading
+          eyebrow="Running"
+          title="Choose your distance"
+          body="Start with the race you know — or find the next challenge to work towards."
+          action={
+            <Link
+              to="/races"
+              search={{ sport: "Running" }}
+              className="inline-flex items-center gap-1 text-sm font-semibold text-accent no-underline hover:underline"
+            >
+              All running events <ArrowRight className="h-4 w-4" />
+            </Link>
+          }
+        />
+
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {distances.map((item, index) => (
+            <Link
+              key={item.label}
+              to="/races"
+              search={{
+                sport: item.sport,
+                distance: "distance" in item ? item.distance : undefined,
+              }}
+              className={`group relative min-h-44 overflow-hidden rounded-2xl border border-border bg-surface p-5 no-underline shadow-card transition duration-200 hover:-translate-y-1 hover:border-border-strong hover:shadow-lg ${
+                index === 0 ? "sm:col-span-2 lg:col-span-1" : ""
+              }`}
+            >
+              <div
+                className={`flex h-11 w-11 items-center justify-center rounded-xl ${item.accent}`}
+              >
+                <item.icon className="h-5 w-5" strokeWidth={1.8} />
               </div>
-              <Badge variant="accent">{a.result_count}</Badge>
+              <h3 className="mt-7 font-display text-xl font-semibold tracking-tight text-fg">
+                {item.label}
+              </h3>
+              <p className="mt-1 text-sm text-muted">{item.detail}</p>
+              <ChevronRight className="absolute bottom-5 right-5 h-5 w-5 text-subtle transition-transform group-hover:translate-x-1 group-hover:text-accent" />
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="space-y-3">
-        <div className="flex items-end justify-between gap-2">
-          <h2 className="font-display text-lg font-semibold text-fg">Clubs</h2>
-          <Link
-            to="/clubs"
-            className="text-sm font-medium text-accent no-underline hover:underline"
-          >
-            All clubs
-          </Link>
-        </div>
-        <div className="grid gap-2 sm:grid-cols-2">
-          {clubs.map((c) => (
-            <ClubCard key={c.id} club={c} />
+      <section className="grid gap-4 lg:grid-cols-2">
+        <SportPanel
+          icon={Activity}
+          kicker="Swim · Bike · Run"
+          title="Triathlon"
+          body="Find sprint, standard, middle-distance and full-distance events — with duathlon and aquathlon nearby."
+          count={countFor("Triathlon")}
+          search={{ sport: "Triathlon" }}
+          links={[
+            { label: "Sprint", search: { sport: "Triathlon", format: "Sprint" } },
+            { label: "Standard", search: { sport: "Triathlon", format: "Standard" } },
+            { label: "Middle", search: { sport: "Triathlon", format: "Middle" } },
+          ]}
+          decoration={<Waves className="h-28 w-28" strokeWidth={1} />}
+        />
+        <SportPanel
+          icon={Bike}
+          kicker="Road · Trail · Track"
+          title="Cycling"
+          body="Browse rides and races by discipline, from road events to trails, tracks and mixed terrain."
+          count={countFor("Cycling")}
+          search={{ sport: "Cycling" }}
+          links={[
+            { label: "Road", search: { sport: "Cycling", surface: "Road" } },
+            { label: "Trail", search: { sport: "Cycling", surface: "Trail" } },
+            { label: "Track", search: { sport: "Cycling", surface: "Track" } },
+          ]}
+          decoration={<Bike className="h-28 w-28" strokeWidth={1} />}
+        />
+      </section>
+
+      <section className="space-y-5">
+        <SectionHeading
+          eyebrow="Coming up"
+          title="Upcoming running events"
+          body="Real races from the ATHRECS calendar, ready to explore."
+          action={
+            <Link
+              to="/calendar"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-accent no-underline hover:underline"
+            >
+              Full calendar <ArrowRight className="h-4 w-4" />
+            </Link>
+          }
+        />
+        <div className="grid gap-2">
+          {running.map((race) => (
+            <RaceCard key={race.id} race={race} />
           ))}
         </div>
       </section>
 
-      <section className="rounded-xl border border-dashed border-border-strong bg-surface px-5 py-6 text-center md:px-8">
-        <p className="font-display text-lg font-semibold text-fg">
-          ATHRECS.com — holding site
-        </p>
-        <p className="mx-auto mt-2 max-w-lg text-sm text-muted">
-          This is the public holding experience for the product: branding, pilot data
-          and tools in one place. Point your production domain here when Vercel is
-          public (Deployment Protection off).
-        </p>
-        <div className="mt-4 flex flex-wrap justify-center gap-2">
-          <Button asChild size="sm">
-            <Link to="/races">Enter the directory</Link>
-          </Button>
-          <Button asChild size="sm" variant="secondary">
-            <Link to="/admin">Update fixtures</Link>
+      <section className="overflow-hidden rounded-2xl border border-border bg-[#e3f5f1]">
+        <div className="grid gap-6 px-6 py-8 sm:px-8 md:grid-cols-[1fr_auto] md:items-center md:py-10">
+          <div className="flex gap-4">
+            <div className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white text-accent shadow-card sm:flex">
+              <Users className="h-5 w-5" />
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#087e6e]">
+                More than a race list
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl">
+                Events, athletes, clubs and results — connected.
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted">
+                Find a start line today, then follow the people, performances and communities that
+                make sport matter.
+              </p>
+            </div>
+          </div>
+          <Button asChild variant="secondary" className="bg-white">
+            <Link to="/athletes">
+              Explore athletes
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </Button>
         </div>
       </section>
@@ -311,43 +325,104 @@ function HoldingHomePage() {
   );
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function HeroStat({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-lg border border-border bg-elevated/60 px-3 py-2.5">
-      <dt className="text-[11px] font-medium uppercase tracking-wider text-subtle">
-        {label}
-      </dt>
-      <dd className="font-display text-xl font-semibold tabular text-fg">{value}</dd>
+    <div className="rounded-xl border border-border bg-surface px-4 py-3.5 shadow-card">
+      <p className="font-display text-2xl font-semibold tracking-tight text-fg">{value}</p>
+      <p className="mt-0.5 text-[11px] font-medium uppercase tracking-wider text-subtle">{label}</p>
     </div>
   );
 }
 
-function Feature({
-  icon: Icon,
+function SectionHeading({
+  eyebrow,
   title,
   body,
-  to,
-  cta,
+  action,
 }: {
-  icon: React.ComponentType<{ className?: string }>;
+  eyebrow: string;
   title: string;
   body: string;
-  to: "/races" | "/athletes" | "/clubs" | "/calendar" | "/admin";
-  cta: string;
+  action: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col rounded-xl border border-border bg-surface p-4 shadow-card">
-      <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-lg bg-accent-soft text-accent">
-        <Icon className="h-4 w-4" />
+    <div className="flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">{eyebrow}</p>
+        <h2 className="mt-1 font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl">
+          {title}
+        </h2>
+        <p className="mt-1 max-w-2xl text-sm text-muted">{body}</p>
       </div>
-      <h3 className="font-medium text-fg">{title}</h3>
-      <p className="mt-1 flex-1 text-sm leading-relaxed text-muted">{body}</p>
-      <Link
-        to={to}
-        className="mt-3 text-sm font-medium text-accent no-underline hover:underline"
-      >
-        {cta} →
-      </Link>
+      {action}
     </div>
+  );
+}
+
+type SportSearch = {
+  sport: "Triathlon" | "Cycling";
+  format?: string;
+  surface?: string;
+};
+
+function SportPanel({
+  icon: Icon,
+  kicker,
+  title,
+  body,
+  count,
+  search,
+  links,
+  decoration,
+}: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  kicker: string;
+  title: string;
+  body: string;
+  count: number;
+  search: SportSearch;
+  links: { label: string; search: SportSearch }[];
+  decoration: React.ReactNode;
+}) {
+  return (
+    <article className="group relative isolate min-h-72 overflow-hidden rounded-2xl border border-border bg-surface p-6 shadow-card md:p-7">
+      <div className="pointer-events-none absolute -bottom-7 -right-5 -z-10 text-elevated transition-transform duration-300 group-hover:-translate-x-2 group-hover:-translate-y-2">
+        {decoration}
+      </div>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#263238] text-[#48d2bd]">
+          <Icon className="h-5 w-5" strokeWidth={1.8} />
+        </div>
+        {count > 0 ? (
+          <span className="rounded-full bg-elevated px-3 py-1 text-xs font-medium text-muted">
+            {count.toLocaleString()} events
+          </span>
+        ) : null}
+      </div>
+      <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+        {kicker}
+      </p>
+      <h2 className="mt-1 font-display text-3xl font-semibold tracking-tight text-fg">{title}</h2>
+      <p className="mt-2 max-w-md text-sm leading-relaxed text-muted">{body}</p>
+      <div className="mt-5 flex flex-wrap gap-2">
+        {links.map((link) => (
+          <Link
+            key={link.label}
+            to="/races"
+            search={link.search}
+            className="rounded-full border border-border bg-bg px-3 py-1.5 text-xs font-medium text-muted no-underline hover:border-border-strong hover:text-fg"
+          >
+            {link.label}
+          </Link>
+        ))}
+      </div>
+      <Link
+        to="/races"
+        search={search}
+        className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-accent no-underline hover:underline"
+      >
+        Explore {title.toLowerCase()} <ArrowRight className="h-4 w-4" />
+      </Link>
+    </article>
   );
 }
