@@ -1,0 +1,15 @@
+{
+  "organisationId": 1,
+  "eventId": 123,
+  "relationship": "organiser",
+  "reason": "We are the named organiser and control the official event website.",
+  "sourceUrl": "https://example.org/official-event",
+  "evidence": [
+    {
+      "evidenceType": "website",
+      "sourceUrl": "https://example.org/official-event",
+      "description": "Official event site naming our organisation",
+      "isOfficialSource": true
+    }
+  ]
+}

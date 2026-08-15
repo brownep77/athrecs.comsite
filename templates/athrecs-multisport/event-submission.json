@@ -1,0 +1,98 @@
+{
+  "organisationId": 1,
+  "name": "Norfolk Endurance Festival",
+  "slug": "norfolk-endurance-festival",
+  "sportCode": "running",
+  "eventType": "festival",
+  "summary": "A multi-distance road-running festival in Norwich.",
+  "description": "The annual Norfolk Endurance Festival includes 5K, 10K and half-marathon competitions.",
+  "website": "https://example.org/norfolk-endurance-festival",
+  "governingBody": "Example Governing Body",
+  "permitNumber": "PERMIT-2027-001",
+  "rulesUrl": "https://example.org/event-rules",
+  "sourceUrl": "https://example.org/norfolk-endurance-festival",
+  "occurrence": {
+    "slug": "2027",
+    "name": "Norfolk Endurance Festival 2027",
+    "season": "2027",
+    "startAt": "2027-05-16T09:00:00+01:00",
+    "endAt": "2027-05-16T16:00:00+01:00",
+    "timezone": "Europe/London",
+    "entryStatus": "open",
+    "entryUrl": "https://example.org/enter",
+    "venue": {
+      "name": "Norwich City Centre",
+      "city": "Norwich",
+      "county": "Norfolk",
+      "region": "East of England",
+      "nation": "England",
+      "countryCode": "GB",
+      "postcode": "NR1",
+      "timezone": "Europe/London",
+      "accessibility": {},
+      "transport": {},
+      "facilities": {}
+    },
+    "countryCode": "GB",
+    "nation": "England",
+    "region": "East of England",
+    "county": "Norfolk",
+    "city": "Norwich",
+    "postcode": "NR1",
+    "sourceUrl": "https://example.org/norfolk-endurance-festival/2027",
+    "competitions": [
+      {
+        "code": "5k",
+        "name": "5K",
+        "sportCode": "running",
+        "disciplineCode": "road-running",
+        "surfaceCode": "road",
+        "participantKind": "individual",
+        "resultModel": "time",
+        "distanceValue": 5,
+        "distanceUnit": "km",
+        "startAt": "2027-05-16T09:00:00+01:00",
+        "entryStatus": "open",
+        "entryUrl": "https://example.org/enter/5k",
+        "entryFee": 20,
+        "currency": "GBP",
+        "capacity": 1000,
+        "allowsTies": false,
+        "customData": {}
+      },
+      {
+        "code": "10k",
+        "name": "10K",
+        "sportCode": "running",
+        "disciplineCode": "road-running",
+        "surfaceCode": "road",
+        "participantKind": "individual",
+        "resultModel": "time",
+        "distanceValue": 10,
+        "distanceUnit": "km",
+        "startAt": "2027-05-16T10:00:00+01:00",
+        "entryStatus": "open",
+        "entryUrl": "https://example.org/enter/10k",
+        "entryFee": 30,
+        "currency": "GBP",
+        "capacity": 2000,
+        "allowsTies": false,
+        "customData": {}
+      }
+    ],
+    "customData": {}
+  },
+  "evidence": [
+    {
+      "evidenceType": "website",
+      "sourceUrl": "https://example.org/norfolk-endurance-festival",
+      "description": "Official event website",
+      "isOfficialSource": true
+    },
+    {
+      "evidenceType": "organiser_document",
+      "description": "Event permit details supplied to Athrecs",
+      "isOfficialSource": true
+    }
+  ]
+}

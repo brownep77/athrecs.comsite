@@ -24,12 +24,22 @@ export const dbSource: DbSource = databaseUrl ? "neon" : "pglite";
  *   const rows = await sql`select * from todos where id = ${id}`; // parameterized
  *   const rows2 = await sql.query("select * from todos where id = $1", [id]);
  */
+export type SqlJsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | SqlJsonValue[]
+  | { [key: string]: SqlJsonValue };
+
+export type SqlRow = Record<string, SqlJsonValue>;
+
 export interface Sql {
-  <T = Record<string, unknown>>(
+  <T = SqlRow>(
     strings: TemplateStringsArray,
     ...values: unknown[]
   ): Promise<T[]>;
-  query<T = Record<string, unknown>>(
+  query<T = SqlRow>(
     text: string,
     params?: unknown[],
   ): Promise<T[]>;
@@ -69,7 +79,7 @@ type Run = <T>(text: string, params: unknown[]) => Promise<T[]>;
 
 /** Wrap a query runner in the tagged-template + `.query()` `Sql` surface. */
 function toSql(run: Run): Sql {
-  const sql = (async <T = Record<string, unknown>>(
+  const sql = (async <T = SqlRow>(
     strings: TemplateStringsArray,
     ...values: unknown[]
   ): Promise<T[]> => {
@@ -78,7 +88,7 @@ function toSql(run: Run): Sql {
     for (let i = 0; i < values.length; i += 1) text += `$${i + 1}${strings[i + 1]}`;
     return run<T>(text, values);
   }) as unknown as Sql;
-  sql.query = <T = Record<string, unknown>>(text: string, params: unknown[] = []) =>
+  sql.query = <T = SqlRow>(text: string, params: unknown[] = []) =>
     run<T>(text, params);
   return sql;
 }

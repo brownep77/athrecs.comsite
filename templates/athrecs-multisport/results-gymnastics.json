@@ -1,0 +1,81 @@
+{
+  "organisationId": 1,
+  "competitionId": 404,
+  "originalFilename": "womens-artistic-final.json",
+  "uploadFormat": "json",
+  "sourceUrl": "https://example.org/gymnastics/results",
+  "declaredOfficial": true,
+  "isFinalResults": true,
+  "evidence": [],
+  "rows": [
+    {
+      "externalEntryKey": "gym-final-athlete-14",
+      "participantKind": "individual",
+      "athleteExternalId": "GYM-14",
+      "displayName": "Sam Taylor",
+      "resultStatus": "finished",
+      "rankOverall": 1,
+      "points": 54.75,
+      "performanceDisplay": "54.750",
+      "metrics": [
+        {
+          "code": "difficulty-total",
+          "name": "Difficulty total",
+          "valueNumeric": 22.4,
+          "unit": "points",
+          "sequenceNo": 1,
+          "isPrimary": false,
+          "customData": {}
+        },
+        {
+          "code": "execution-total",
+          "name": "Execution total",
+          "valueNumeric": 32.35,
+          "unit": "points",
+          "sequenceNo": 2,
+          "isPrimary": false,
+          "customData": {}
+        }
+      ],
+      "segments": [
+        {
+          "type": "apparatus",
+          "code": "vault",
+          "name": "Vault",
+          "sequenceNo": 1,
+          "valueNumeric": 14.1,
+          "unit": "points",
+          "customData": {}
+        },
+        {
+          "type": "apparatus",
+          "code": "bars",
+          "name": "Uneven bars",
+          "sequenceNo": 2,
+          "valueNumeric": 13.55,
+          "unit": "points",
+          "customData": {}
+        },
+        {
+          "type": "apparatus",
+          "code": "beam",
+          "name": "Balance beam",
+          "sequenceNo": 3,
+          "valueNumeric": 13.4,
+          "unit": "points",
+          "customData": {}
+        },
+        {
+          "type": "apparatus",
+          "code": "floor",
+          "name": "Floor",
+          "sequenceNo": 4,
+          "valueNumeric": 13.7,
+          "unit": "points",
+          "customData": {}
+        }
+      ],
+      "customData": {}
+    }
+  ]
+}

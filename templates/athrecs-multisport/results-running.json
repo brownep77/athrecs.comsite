@@ -1,0 +1,62 @@
+{
+  "organisationId": 1,
+  "competitionId": 101,
+  "originalFilename": "official-10k-results.json",
+  "uploadFormat": "json",
+  "mimeType": "application/json",
+  "sourceUrl": "https://example.org/events/10k/results",
+  "declaredOfficial": true,
+  "isFinalResults": true,
+  "uploaderNote": "Final chip-timed results supplied by the organiser.",
+  "evidence": [
+    {
+      "evidenceType": "official_results",
+      "sourceUrl": "https://example.org/events/10k/results",
+      "description": "Official organiser results page",
+      "isOfficialSource": true
+    }
+  ],
+  "rows": [
+    {
+      "externalEntryKey": "timer-entry-000001",
+      "participantKind": "individual",
+      "athleteExternalId": "EA-123456",
+      "displayName": "Alex Morgan",
+      "bib": "101",
+      "categoryCode": "M40",
+      "categoryName": "Men 40-44",
+      "clubName": "Norwich Road Runners",
+      "countryCode": "GBR",
+      "resultStatus": "finished",
+      "rankOverall": 1,
+      "rankCategory": 1,
+      "rankGender": 1,
+      "performanceValue": 2345,
+      "performanceUnit": "seconds",
+      "performanceDisplay": "00:39:05",
+      "metrics": [
+        {
+          "code": "age-grade",
+          "name": "Age grade",
+          "valueNumeric": 78.4,
+          "unit": "percent",
+          "sequenceNo": 1,
+          "isPrimary": false,
+          "customData": {}
+        }
+      ],
+      "segments": [
+        {
+          "type": "split",
+          "code": "5k",
+          "name": "5K",
+          "sequenceNo": 1,
+          "valueNumeric": 1160,
+          "unit": "seconds",
+          "customData": {}
+        }
+      ],
+      "customData": {}
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "athleteId": 123,
+  "relationship": "self",
+  "requestedRole": "owner",
+  "note": "I am claiming my existing Athrecs profile and results.",
+  "evidence": [
+    {
+      "evidenceType": "official_results",
+      "sourceUrl": "https://example.org/results/athlete-123",
+      "description": "Official result matching my athlete profile"
+    }
+  ]
+}

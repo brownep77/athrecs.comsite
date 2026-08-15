@@ -1,0 +1,37 @@
+{
+  "organisationId": 1,
+  "competitionId": 303,
+  "originalFilename": "100m-freestyle-heat-1.json",
+  "uploadFormat": "json",
+  "sourceUrl": "https://example.org/swimming/results",
+  "declaredOfficial": true,
+  "isFinalResults": false,
+  "evidence": [],
+  "rows": [
+    {
+      "externalEntryKey": "meet-303-swimmer-88",
+      "participantKind": "individual",
+      "athleteExternalId": "SWIM-88",
+      "displayName": "Jordan Lee",
+      "lane": "4",
+      "categoryCode": "OPEN",
+      "resultStatus": "finished",
+      "rankOverall": 1,
+      "performanceValue": 52.41,
+      "performanceUnit": "seconds",
+      "performanceDisplay": "52.41",
+      "segments": [
+        {
+          "type": "split",
+          "code": "50m",
+          "name": "50 metres",
+          "sequenceNo": 1,
+          "valueNumeric": 25.32,
+          "unit": "seconds",
+          "customData": {}
+        }
+      ],
+      "customData": { "reactionTime": 0.63 }
+    }
+  ]
+}
