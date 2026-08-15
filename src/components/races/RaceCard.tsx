@@ -1,15 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import {
-  Bike,
-  Droplets,
-  Footprints,
-  Medal,
-  Mountain,
-  Ship,
-  Timer,
-  Waves,
-  Zap,
-} from "lucide-react";
+import { Bike, Droplets, Footprints, Medal, Mountain, Ship, Timer, Waves, Zap } from "lucide-react";
 import type { EventListItem, Sport } from "@/lib/athrecs/types";
 import {
   effectiveStatus,
@@ -40,12 +30,16 @@ function SportIcon({ sport }: { sport: Sport }) {
   return <Footprints className="h-3.5 w-3.5" />;
 }
 
-export function RaceCard({ race }: { race: EventListItem }) {
+export function RaceCard({
+  race,
+  localized,
+}: {
+  race: EventListItem;
+  localized?: { language: string; country: string };
+}) {
   const focusDate = race.next_date;
   const focusStatus =
-    race.next_date && race.next_status
-      ? effectiveStatus(race.next_date, race.next_status)
-      : null;
+    race.next_date && race.next_status ? effectiveStatus(race.next_date, race.next_status) : null;
   const startLabel = formatStartTime(race.next_start_time, {
     country: race.country,
     county: race.county,
@@ -102,13 +96,23 @@ export function RaceCard({ race }: { race: EventListItem }) {
               </Badge>
             )}
           </div>
-          <Link
-            to="/races/$slug"
-            params={{ slug: race.slug }}
-            className="block font-semibold text-fg no-underline hover:text-accent"
-          >
-            {race.name}
-          </Link>
+          {localized ? (
+            <Link
+              to="/$language/$country/races/$slug"
+              params={{ ...localized, slug: race.slug }}
+              className="block font-semibold text-fg no-underline hover:text-accent"
+            >
+              {race.name}
+            </Link>
+          ) : (
+            <Link
+              to="/races/$slug"
+              params={{ slug: race.slug }}
+              className="block font-semibold text-fg no-underline hover:text-accent"
+            >
+              {race.name}
+            </Link>
+          )}
           {focusDate ? (
             <p className="mt-1 text-sm font-medium text-fg">
               {formatRaceDateShort(focusDate)}
@@ -117,9 +121,7 @@ export function RaceCard({ race }: { race: EventListItem }) {
               ) : (
                 <span className="text-subtle"> · Start time TBC</span>
               )}
-              {race.next_distance
-                ? ` · ${formatDistanceWithUnits(race.next_distance)}`
-                : ""}
+              {race.next_distance ? ` · ${formatDistanceWithUnits(race.next_distance)}` : ""}
             </p>
           ) : (
             <p className="mt-1 text-xs text-subtle">
