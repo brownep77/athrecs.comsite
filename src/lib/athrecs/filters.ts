@@ -45,7 +45,6 @@ export const SPORTS = [
   "Running",
   "Athletics",
   "Parkrun",
-  "TrackAndField",
   "Cycling",
   "Swimming",
   "Triathlon",
@@ -96,9 +95,6 @@ export function subfiltersForSport(sport: string): SubfilterDef[] {
   }
   if (sport === "OCR") {
     return [{ key: "surface", label: "Terrain", options: TERRAIN_FILTERS }];
-  }
-  if (sport === "TrackAndField") {
-    return [{ key: "surface", label: "Surface", options: ["All", "Track", "Mixed", "Road"] }];
   }
   if (sport === "Rowing") return [];
   return [
