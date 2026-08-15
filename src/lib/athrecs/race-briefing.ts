@@ -38,7 +38,6 @@ export function eventSourceOf(input: {
 }
 
 export function sportLabel(sport: Sport): string {
-  if (sport === "TrackAndField") return "Track & field";
   if (sport === "Parkrun") return "parkrun";
   if (sport === "OCR") return "Obstacle course";
   return sport;
@@ -64,7 +63,6 @@ function sportWhat(sport: Sport, name: string): string {
         ? "Junior parkrun is a free, timed 2 km run for children, held on Sundays. A parent or guardian needs to register the child once and bring the barcode."
         : "parkrun is a free, weekly, timed 5 km community run. Register once on parkrun.com, bring your barcode, and volunteer when you can.";
     case "Athletics":
-    case "TrackAndField":
       return "This is a track and field meeting: sprints, hurdles, jumps, throws and sometimes a road or race-walk event on the same programme. The timetable, not a mass start, is what you need.";
     case "Cycling":
       return "A mass-start ride or race on the road or mixed surface. Confirm whether it is a sportive, a closed-road race or a time trial — the rules and support are different.";
@@ -103,7 +101,6 @@ function athleteChecklist(sport: Sport): string[] {
         "Volunteer rota if you can give a week back",
       ];
     case "Athletics":
-    case "TrackAndField":
       return [
         ...common,
         "Your event's call-room or warm-up time — not just the first gun",

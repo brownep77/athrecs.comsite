@@ -7,8 +7,9 @@ import {
   results as resultSeeds,
   seriesList,
 } from "@/data/catalogue";
+import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-europe-marathons-v60";
+const SEED_VERSION = "athrecs-athletics-taxonomy-v61";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 
@@ -558,6 +559,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
 async function seed(): Promise<void> {
   const sql = await getSql();
   await ensureSchema(sql);
+  await ensureAthleticsTaxonomy(sql);
 
   // Always upsert England Athletics / catalogue clubs (append-only, no deletes).
   // Safe on Neon + PGLite so new club catalogue rows appear without wiping results.

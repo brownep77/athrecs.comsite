@@ -16,7 +16,6 @@ const SPORTS = new Set<Sport>([
   "Running",
   "Athletics",
   "Parkrun",
-  "TrackAndField",
   "Cycling",
   "Swimming",
   "Triathlon",

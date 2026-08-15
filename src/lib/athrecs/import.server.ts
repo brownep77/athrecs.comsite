@@ -12,7 +12,6 @@ const SPORTS: Sport[] = [
   "Running",
   "Athletics",
   "Parkrun",
-  "TrackAndField",
   "Cycling",
   "Swimming",
   "Triathlon",
@@ -43,6 +42,9 @@ export function slugify(input: string): string {
 
 function parseSport(raw: string): Sport {
   const t = raw.trim();
+  if (/^track\s*(?:&|and)?\s*field$/i.test(t) || /^trackandfield$/i.test(t)) {
+    return "Athletics";
+  }
   const hit = SPORTS.find((s) => s.toLowerCase() === t.toLowerCase());
   if (!hit) throw new Error(`Unknown sport "${raw}". Use: ${SPORTS.join(", ")}`);
   return hit;

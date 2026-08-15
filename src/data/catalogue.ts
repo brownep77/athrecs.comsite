@@ -1,7 +1,7 @@
 /** Norfolk multi-sport catalogue - fixtures, clubs, real TRT athletes & results. */
 
 export type { Sport, Series, Edition, ClubSeed, AthleteSeed, ResultSeed } from "./types";
-export { clubs } from "./clubs";
+import { clubs as rawClubs } from "./clubs";
 import { athletes as athletesBase } from "./athletes";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
 import { athletesRn2025B2 } from "./athletes-rn2025-b2";
@@ -32,7 +32,18 @@ import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics"
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
-import type { Edition, Series } from "./types";
+import type { ClubSeed, Edition, Series } from "./types";
+
+function canonicalClubSport(sport: string): string {
+  return /^(?:trackandfield|track\s*(?:&|and)\s*field)$/i.test(sport.trim())
+    ? "Athletics"
+    : sport;
+}
+
+export const clubs: ClubSeed[] = rawClubs.map((club) => ({
+  ...club,
+  sports: [...new Set(club.sports.map(canonicalClubSport))],
+}));
 
 function normName(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "");
