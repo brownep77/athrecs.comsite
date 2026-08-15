@@ -31,6 +31,7 @@ import { parkrunSeries } from "./parkrun-uk";
 import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics";
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
+import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
 import type { Edition, Series } from "./types";
 
 function normName(name: string): string {
@@ -47,6 +48,7 @@ for (const series of [
   ...(worldAthleticsSeries as Series[]),
   ...(worldTriathlonSeries as Series[]),
   ...(mrdMarathonSeries as Series[]),
+  ...(mrdEuMarathonSeries as Series[]),
 ]) {
   const key = normName(series.name);
   if (usedSlugs.has(series.slug) || coreNameKeys.has(key)) continue;
@@ -65,6 +67,7 @@ const mergedEditions = [
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldTriathlonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(mrdMarathonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(mrdEuMarathonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
 ];
 
 export const editions: Edition[] = (() => {
