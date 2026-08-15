@@ -12,16 +12,71 @@ import {
   type EventSearchValues,
 } from "@/components/races/EventSearch";
 
+const SPORT_VALUES = new Set<Sport>([
+  "Running",
+  "Athletics",
+  "Parkrun",
+  "TrackAndField",
+  "Cycling",
+  "Swimming",
+  "Triathlon",
+  "Duathlon",
+  "Aquathlon",
+  "Aquabike",
+  "Rowing",
+  "OCR",
+]);
+
+type RaceSearchParams = {
+  sport?: Sport;
+  country?: string;
+  distance?: string;
+  format?: string;
+  surface?: string;
+};
+
+function optionalText(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
 export const Route = createFileRoute("/races/")({
-  loader: () => listEvents({ data: { upcomingOnly: true, limit: 40 } }),
+  validateSearch: (search: Record<string, unknown>): RaceSearchParams => {
+    const sport = optionalText(search.sport);
+    return {
+      sport: sport && SPORT_VALUES.has(sport as Sport) ? (sport as Sport) : undefined,
+      country: optionalText(search.country),
+      distance: optionalText(search.distance),
+      format: optionalText(search.format),
+      surface: optionalText(search.surface),
+    };
+  },
+  loaderDeps: ({ search }) => search,
+  loader: ({ deps }) =>
+    listEvents({
+      data: {
+        ...deps,
+        upcomingOnly: true,
+        limit: 40,
+      },
+    }),
   component: EventsPage,
 });
 
 function EventsPage() {
   const initial = Route.useLoaderData();
-  const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
+  const routeSearch = Route.useSearch();
+  const initialFilters: EventSearchValues = {
+    ...EMPTY_SEARCH,
+    sport: routeSearch.sport ?? "All",
+    country: routeSearch.country ?? "All",
+    distance: routeSearch.distance ?? "All",
+    format: routeSearch.format ?? "All",
+    surface: routeSearch.surface ?? "All",
+  };
+  const [filters, setFilters] = useState<EventSearchValues>(() => initialFilters);
   const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
+  const matchesInitial = JSON.stringify(filters) === JSON.stringify(initialFilters);
 
   const { data = initial } = useQuery({
     queryKey: ["events", filters],
@@ -34,7 +89,7 @@ function EventsPage() {
           limit: 80,
         },
       }),
-    initialData: empty ? initial : undefined,
+    initialData: matchesInitial ? initial : undefined,
     placeholderData: (prev) => prev ?? (empty ? initial : undefined),
     staleTime: 30_000,
     refetchOnMount: false,
@@ -44,12 +99,10 @@ function EventsPage() {
     <div className="space-y-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">
-            Events
-          </h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Events</h1>
           <p className="max-w-2xl text-sm text-muted">
-            Search by country, county, city, postcode, month or date range.
-            Use the sidebar filters for sport, distance and surface.
+            Search by country, county, city, postcode, month or date range. Use the sidebar filters
+            for sport, distance and surface.
           </p>
         </div>
         <button
