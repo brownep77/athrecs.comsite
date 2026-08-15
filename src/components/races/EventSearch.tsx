@@ -42,14 +42,17 @@ export const EMPTY_SEARCH: EventSearchValues = {
 
 const MONTHS = upcomingMonths(17);
 const fieldClass =
-  "h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30";
+  "h-10 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30";
 
 export function EventSearch({
   value,
   onChange,
+  variant = "sidebar",
 }: {
   value: EventSearchValues;
   onChange: (next: EventSearchValues) => void;
+  /** sidebar = vertical stack for left column; panel = wider grid (legacy) */
+  variant?: "sidebar" | "panel";
 }) {
   const set = <K extends keyof EventSearchValues>(key: K, next: EventSearchValues[K]) => {
     const updated = { ...value, [key]: next };
@@ -66,15 +69,73 @@ export function EventSearch({
   };
 
   const subs = subfiltersForSport(value.sport);
+  const clear = () => onChange({ ...EMPTY_SEARCH });
+  const hasFilters = JSON.stringify(value) !== JSON.stringify(EMPTY_SEARCH);
 
   return (
-    <div className="space-y-4 rounded-xl border border-border bg-surface p-3.5 shadow-card">
-      <div className="grid gap-3 md:grid-cols-2">
-        <Field label="Search">
+    <aside
+      className={
+        variant === "sidebar"
+          ? "space-y-4 rounded-xl border border-border bg-surface p-3.5 shadow-card"
+          : "space-y-4 rounded-xl border border-border bg-surface p-3.5 shadow-card"
+      }
+      aria-label="Search races"
+    >
+      <div className="flex items-center justify-between gap-2">
+        <p className="font-display text-base font-semibold text-fg">Search races</p>
+        {hasFilters ? (
+          <button
+            type="button"
+            onClick={clear}
+            className="text-xs font-medium text-accent hover:underline"
+          >
+            Clear all
+          </button>
+        ) : null}
+      </div>
+
+      <Field label="Keywords">
+        <input
+          value={value.q}
+          onChange={(e) => set("q", e.target.value)}
+          placeholder="Name, 10K, trail…"
+          className={fieldClass}
+        />
+      </Field>
+
+      <Field label="Country">
+        <select
+          value={value.country}
+          onChange={(e) => set("country", e.target.value)}
+          className={fieldClass}
+        >
+          <option value="All">All countries</option>
+          {COUNTRY_GROUPS.map((group) => (
+            <optgroup key={group.label} label={group.label}>
+              {group.options.map((opt) => (
+                <option key={opt} value={opt}>
+                  {flagForCountryFilter(opt)} {opt}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+        </select>
+      </Field>
+
+      <div className={variant === "sidebar" ? "grid gap-3" : "grid gap-3 md:grid-cols-2"}>
+        <Field label="County">
           <input
-            value={value.q}
-            onChange={(e) => set("q", e.target.value)}
-            placeholder="Name, 10K, trail…"
+            value={value.county}
+            onChange={(e) => set("county", e.target.value)}
+            placeholder="Norfolk"
+            className={fieldClass}
+          />
+        </Field>
+        <Field label="City">
+          <input
+            value={value.city}
+            onChange={(e) => set("city", e.target.value)}
+            placeholder="Norwich"
             className={fieldClass}
           />
         </Field>
@@ -87,44 +148,7 @@ export function EventSearch({
             className={fieldClass}
           />
         </Field>
-        <Field label="City">
-          <input
-            value={value.city}
-            onChange={(e) => set("city", e.target.value)}
-            placeholder="Norwich"
-            className={fieldClass}
-          />
-        </Field>
-        <Field label="County">
-          <input
-            value={value.county}
-            onChange={(e) => set("county", e.target.value)}
-            placeholder="Norfolk"
-            className={fieldClass}
-          />
-        </Field>
-        <Field label="Country">
-          <select
-            value={value.country}
-            onChange={(e) => set("country", e.target.value)}
-            className={fieldClass}
-          >
-            <option value="All">All countries</option>
-            {COUNTRY_GROUPS.map((group) => (
-              <optgroup key={group.label} label={group.label}>
-                {group.options.map((opt) => (
-                  <option key={opt} value={opt}>
-                    {flagForCountryFilter(opt)} {opt}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
-          </select>
-        </Field>
       </div>
-      <p className="-mt-1 text-xs text-subtle">
-        Parkrun is in 22 countries — open Country and pick Australia, South Africa, Japan, the USA and more.
-      </p>
 
       <FilterChips
         label={value.sport === "Parkrun" ? "Parkrun countries" : "Quick country"}
@@ -133,11 +157,13 @@ export function EventSearch({
         onChange={(v) => set("country", v)}
         wrap
       />
+
       <FilterChips
         label="Sport"
         options={[...SPORTS]}
         value={value.sport}
         onChange={(v) => set("sport", v)}
+        wrap
       />
 
       {subs.map((sub) => (
@@ -147,6 +173,7 @@ export function EventSearch({
           options={[...sub.options]}
           value={value[sub.key as SubfilterKey]}
           onChange={(v) => set(sub.key, v)}
+          wrap
         />
       ))}
 
@@ -154,7 +181,7 @@ export function EventSearch({
         <p className="mb-1.5 text-[11px] font-medium uppercase tracking-wider text-subtle">
           Month
         </p>
-        <div className="flex max-w-full gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex max-h-36 flex-wrap gap-2 overflow-y-auto">
           {MONTHS.map((m) => {
             const active = value.month === m.value;
             return (
@@ -162,7 +189,7 @@ export function EventSearch({
                 key={m.value || "any"}
                 type="button"
                 onClick={() => set("month", m.value)}
-                className={`inline-flex h-10 shrink-0 items-center rounded-full border px-3.5 text-sm font-medium ${
+                className={`inline-flex h-9 shrink-0 items-center rounded-full border px-3 text-xs font-medium ${
                   active
                     ? "border-primary bg-primary text-primary-fg"
                     : "border-border bg-surface text-muted hover:border-border-strong hover:text-fg"
@@ -175,7 +202,7 @@ export function EventSearch({
         </div>
       </div>
 
-      <div className="grid gap-3 sm:grid-cols-2">
+      <div className="grid gap-3">
         <Field label="From date">
           <input
             type="date"
@@ -193,7 +220,11 @@ export function EventSearch({
           />
         </Field>
       </div>
-    </div>
+
+      <p className="text-[11px] leading-snug text-subtle">
+        Filter by country, county, city, postcode, sport, distance, surface and date.
+      </p>
+    </aside>
   );
 }
 

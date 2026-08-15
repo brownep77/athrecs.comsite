@@ -100,6 +100,7 @@ export const Route = createFileRoute("/calendar")({
 function CalendarPage() {
   const initial = Route.useLoaderData();
   const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
   const { data = initial, isFetching } = useQuery({
     queryKey: ["calendar", filters],
@@ -118,17 +119,31 @@ function CalendarPage() {
 
   return (
     <div className="space-y-5">
-      <header className="space-y-2">
-        <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">
-          Calendar
-        </h1>
-        <p className="text-sm text-muted">
-          Search by country, county, city, postcode, month or date range.
-          Pick a sport to see its filters — running has distance and surface.
-        </p>
+      <header className="flex flex-wrap items-end justify-between gap-3">
+        <div className="space-y-2">
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">
+            Calendar
+          </h1>
+          <p className="max-w-2xl text-sm text-muted">
+            Search by country, county, city, postcode, month or date range.
+            Pick a sport in the sidebar to see distance and surface filters.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setMobileOpen((o) => !o)}
+          className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg lg:hidden"
+        >
+          {mobileOpen ? "Hide filters" : "Show filters"}
+          {!empty ? (
+            <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-fg">
+              On
+            </span>
+          ) : null}
+        </button>
       </header>
 
-      <section className="space-y-3 rounded-xl border border-border bg-elevated p-3">
+      <section className="space-y-3 rounded-xl border border-border bg-elevated p-3 lg:col-span-2">
         <div>
           <p className="font-display text-lg font-semibold text-fg">
             Flag & travel preview
@@ -151,32 +166,44 @@ function CalendarPage() {
         </div>
       </section>
 
-      <EventSearch value={filters} onChange={setFilters} />
+      <div className="grid gap-5 lg:grid-cols-[minmax(260px,300px)_1fr] lg:items-start">
+        <div
+          className={
+            mobileOpen
+              ? "block lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto"
+              : "hidden lg:block lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto"
+          }
+        >
+          <EventSearch value={filters} onChange={setFilters} variant="sidebar" />
+        </div>
 
-      <p className="text-sm text-subtle">
-        {isFetching ? "Loading…" : `${data.length} upcoming race days shown`}
-      </p>
+        <div className="min-w-0 space-y-3">
+          <p className="text-sm text-subtle">
+            {isFetching ? "Loading…" : `${data.length} upcoming race days shown`}
+          </p>
 
-      <div className="grid gap-2">
-        {data.map((ed) => (
-          <EventCard
-            key={ed.id}
-            ed={{
-              id: String(ed.id),
-              event_slug: ed.event_slug,
-              event_name: ed.event_name,
-              event_date: ed.event_date,
-              distance_code: ed.distance_code,
-              status: ed.status as EntryStatus,
-              start_time: ed.start_time,
-              sport: ed.sport,
-              surface: ed.surface,
-              venue: ed.venue,
-              country: ed.country,
-              county: ed.county,
-            }}
-          />
-        ))}
+          <div className="grid gap-2">
+            {data.map((ed) => (
+              <EventCard
+                key={ed.id}
+                ed={{
+                  id: String(ed.id),
+                  event_slug: ed.event_slug,
+                  event_name: ed.event_name,
+                  event_date: ed.event_date,
+                  distance_code: ed.distance_code,
+                  status: ed.status as EntryStatus,
+                  start_time: ed.start_time,
+                  sport: ed.sport,
+                  surface: ed.surface,
+                  venue: ed.venue,
+                  country: ed.country,
+                  county: ed.county,
+                }}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -201,32 +228,32 @@ function EventCard({ ed }: { ed: CardModel }) {
       className="block rounded-xl border border-border bg-surface p-3.5 no-underline shadow-card hover:border-border-strong"
     >
       <div className="min-w-0 flex-1 space-y-2">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <NationBadge nation={nation} />
-            <Badge variant="accent">{ed.sport}</Badge>
-            {ed.surface ? <Badge variant="outline">{ed.surface}</Badge> : null}
-            {distances.map((code) => (
-              <Badge key={code} variant="outline">
-                {formatDistanceWithUnits(code)}
-              </Badge>
-            ))}
-            <Badge variant={st === "Finished" ? "default" : "solid"}>
-              {statusLabel(st)}
+        <div className="flex flex-wrap items-center gap-1.5">
+          <NationBadge nation={nation} />
+          <Badge variant="accent">{ed.sport}</Badge>
+          {ed.surface ? <Badge variant="outline">{ed.surface}</Badge> : null}
+          {distances.map((code) => (
+            <Badge key={code} variant="outline">
+              {formatDistanceWithUnits(code)}
             </Badge>
-          </div>
-          <p className="font-display text-base font-semibold leading-snug text-fg">
-            {ed.event_name}
-          </p>
-          <p className="text-sm font-medium text-fg">
-            {formatRaceDateShort(ed.event_date)}
-            {start ? (
-              <span className="text-accent"> · Starts {start}</span>
-            ) : (
-              <span className="text-subtle"> · Start time TBC</span>
-            )}
-          </p>
-          <TravelFacts venue={venue} startTime={start} />
+          ))}
+          <Badge variant={st === "Finished" ? "default" : "solid"}>
+            {statusLabel(st)}
+          </Badge>
         </div>
+        <p className="font-display text-base font-semibold leading-snug text-fg">
+          {ed.event_name}
+        </p>
+        <p className="text-sm font-medium text-fg">
+          {formatRaceDateShort(ed.event_date)}
+          {start ? (
+            <span className="text-accent"> · Starts {start}</span>
+          ) : (
+            <span className="text-subtle"> · Start time TBC</span>
+          )}
+        </p>
+        <TravelFacts venue={venue} startTime={start} />
+      </div>
     </Link>
   );
 }
