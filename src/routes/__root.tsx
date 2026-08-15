@@ -1,6 +1,13 @@
-import { HeadContent, Outlet, Scripts, createRootRoute } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Outlet,
+  Scripts,
+  createRootRoute,
+  useRouterState,
+} from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppShell } from "@/components/layout/AppShell";
+import { isSiteLanguage } from "@/lib/athrecs/country-sites";
 import appCss from "@/styles.css?url";
 
 const queryClient = new QueryClient({
@@ -17,11 +24,11 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
-      { title: "ATHRECS.com — Holding · Norfolk pilot" },
+      { title: "ATHRECS.com — Find races, results and athletes" },
       {
         name: "description",
         content:
-          "ATHRECS.com holding site: Norfolk pilot for endurance events, athletes, clubs and published race results. Growing toward a wider UK directory.",
+          "Find running, triathlon and cycling events — from parkruns and 5Ks to half marathons and marathons — with athletes, clubs and results on ATHRECS.com.",
       },
       { name: "theme-color", content: "#f4f7f7" },
     ],
@@ -39,8 +46,12 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const languageSegment = pathname.split("/").filter(Boolean)[0] ?? "en";
+  const pageLanguage = isSiteLanguage(languageSegment) ? languageSegment : "en";
+
   return (
-    <html lang="en">
+    <html lang={pageLanguage}>
       <head>
         <HeadContent />
       </head>
