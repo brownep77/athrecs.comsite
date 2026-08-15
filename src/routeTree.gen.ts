@@ -18,7 +18,10 @@ import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
 import { Route as ClubsSlugRouteImport } from './routes/clubs/$slug'
 import { Route as RacesIndexRouteImport } from './routes/races/index'
 import { Route as RacesSlugRouteImport } from './routes/races/$slug'
+import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$country/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as LanguageCountryRacesIndexRouteImport } from './routes/$language/$country/races/index'
+import { Route as LanguageCountryRacesSlugRouteImport } from './routes/$language/$country/races/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -65,11 +68,28 @@ const RacesSlugRoute = RacesSlugRouteImport.update({
   path: '/races/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LanguageCountryIndexRoute = LanguageCountryIndexRouteImport.update({
+  id: '/$language/$country/',
+  path: '/$language/$country/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LanguageCountryRacesIndexRoute =
+  LanguageCountryRacesIndexRouteImport.update({
+    id: '/$language/$country/races/',
+    path: '/$language/$country/races/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const LanguageCountryRacesSlugRoute =
+  LanguageCountryRacesSlugRouteImport.update({
+    id: '/$language/$country/races/$slug',
+    path: '/$language/$country/races/$slug',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +102,9 @@ export interface FileRoutesByFullPath {
   '/clubs/': typeof ClubsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/$language/$country/': typeof LanguageCountryIndexRoute
+  '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
+  '/$language/$country/races/': typeof LanguageCountryRacesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +117,9 @@ export interface FileRoutesByTo {
   '/clubs': typeof ClubsIndexRoute
   '/races': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/$language/$country': typeof LanguageCountryIndexRoute
+  '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
+  '/$language/$country/races': typeof LanguageCountryRacesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +133,9 @@ export interface FileRoutesById {
   '/clubs/': typeof ClubsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/$language/$country/': typeof LanguageCountryIndexRoute
+  '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
+  '/$language/$country/races/': typeof LanguageCountryRacesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +150,9 @@ export interface FileRouteTypes {
     | '/clubs/'
     | '/races/'
     | '/api/auth/$'
+    | '/$language/$country/'
+    | '/$language/$country/races/$slug'
+    | '/$language/$country/races/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +165,9 @@ export interface FileRouteTypes {
     | '/clubs'
     | '/races'
     | '/api/auth/$'
+    | '/$language/$country'
+    | '/$language/$country/races/$slug'
+    | '/$language/$country/races'
   id:
     | '__root__'
     | '/'
@@ -145,6 +180,9 @@ export interface FileRouteTypes {
     | '/clubs/'
     | '/races/'
     | '/api/auth/$'
+    | '/$language/$country/'
+    | '/$language/$country/races/$slug'
+    | '/$language/$country/races/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +196,9 @@ export interface RootRouteChildren {
   ClubsIndexRoute: typeof ClubsIndexRoute
   RacesIndexRoute: typeof RacesIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  LanguageCountryIndexRoute: typeof LanguageCountryIndexRoute
+  LanguageCountryRacesSlugRoute: typeof LanguageCountryRacesSlugRoute
+  LanguageCountryRacesIndexRoute: typeof LanguageCountryRacesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -225,11 +266,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RacesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$language/$country/': {
+      id: '/$language/$country/'
+      path: '/$language/$country'
+      fullPath: '/$language/$country/'
+      preLoaderRoute: typeof LanguageCountryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
       fullPath: '/api/auth/$'
       preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$language/$country/races/': {
+      id: '/$language/$country/races/'
+      path: '/$language/$country/races'
+      fullPath: '/$language/$country/races/'
+      preLoaderRoute: typeof LanguageCountryRacesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$language/$country/races/$slug': {
+      id: '/$language/$country/races/$slug'
+      path: '/$language/$country/races/$slug'
+      fullPath: '/$language/$country/races/$slug'
+      preLoaderRoute: typeof LanguageCountryRacesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -246,6 +308,9 @@ const rootRouteChildren: RootRouteChildren = {
   ClubsIndexRoute: ClubsIndexRoute,
   RacesIndexRoute: RacesIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  LanguageCountryIndexRoute: LanguageCountryIndexRoute,
+  LanguageCountryRacesSlugRoute: LanguageCountryRacesSlugRoute,
+  LanguageCountryRacesIndexRoute: LanguageCountryRacesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
