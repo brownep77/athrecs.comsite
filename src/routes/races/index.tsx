@@ -12,6 +12,8 @@ import {
   type EventSearchValues,
 } from "@/components/races/EventSearch";
 
+const PAGE_SIZE = 40;
+
 const SPORT_VALUES = new Set<Sport>([
   "Running",
   "Athletics",
@@ -55,7 +57,7 @@ export const Route = createFileRoute("/races/")({
       data: {
         ...deps,
         upcomingOnly: true,
-        limit: 40,
+        limit: PAGE_SIZE + 1,
       },
     }),
   component: EventsPage,
@@ -73,26 +75,37 @@ function EventsPage() {
     surface: routeSearch.surface ?? "All",
   };
   const [filters, setFilters] = useState<EventSearchValues>(() => initialFilters);
+  const [page, setPage] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
   const matchesInitial = JSON.stringify(filters) === JSON.stringify(initialFilters);
 
-  const { data = initial } = useQuery({
-    queryKey: ["events", filters],
+  const { data = initial, isFetching } = useQuery({
+    queryKey: ["events", filters, page],
     queryFn: () =>
       listEvents({
         data: {
           ...searchToApi(filters),
           sport: (searchToApi(filters).sport as Sport | undefined) ?? undefined,
           upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
-          limit: 80,
+          limit: PAGE_SIZE + 1,
+          offset: page * PAGE_SIZE,
         },
       }),
-    initialData: matchesInitial ? initial : undefined,
-    placeholderData: (prev) => prev ?? (empty ? initial : undefined),
+    initialData: matchesInitial && page === 0 ? initial : undefined,
+    placeholderData: (prev) => prev,
     staleTime: 30_000,
     refetchOnMount: false,
   });
+  const visibleEvents = data.slice(0, PAGE_SIZE);
+  const hasNextPage = data.length > PAGE_SIZE;
+  const firstEventNumber = visibleEvents.length ? page * PAGE_SIZE + 1 : 0;
+  const lastEventNumber = page * PAGE_SIZE + visibleEvents.length;
+
+  const updateFilters = (next: EventSearchValues) => {
+    setFilters(next);
+    setPage(0);
+  };
 
   return (
     <div className="space-y-5">
@@ -127,21 +140,56 @@ function EventsPage() {
               : "hidden lg:block lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto"
           }
         >
-          <EventSearch value={filters} onChange={setFilters} variant="sidebar" />
+          <EventSearch value={filters} onChange={updateFilters} variant="sidebar" />
         </div>
 
         <div className="min-w-0 space-y-3">
-          <p className="text-sm text-subtle">{data.length} events shown</p>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-sm text-subtle">
+              {visibleEvents.length
+                ? `Events ${firstEventNumber}–${lastEventNumber}`
+                : "0 events shown"}
+              {isFetching ? " · Updating…" : ""}
+            </p>
+            {page > 0 || hasNextPage ? (
+              <p className="text-xs font-medium text-muted">Page {page + 1}</p>
+            ) : null}
+          </div>
 
           <div className="grid gap-2">
-            {data.length === 0 ? (
+            {visibleEvents.length === 0 ? (
               <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
                 No events match those filters. Try clearing search or widening the date range.
               </p>
             ) : (
-              data.map((r) => <RaceCard key={r.id} race={r} />)
+              visibleEvents.map((r) => <RaceCard key={r.id} race={r} />)
             )}
           </div>
+
+          {page > 0 || hasNextPage ? (
+            <nav
+              aria-label="Event pages"
+              className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3 shadow-card"
+            >
+              <button
+                type="button"
+                onClick={() => setPage((current) => Math.max(0, current - 1))}
+                disabled={page === 0 || isFetching}
+                className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Previous
+              </button>
+              <span className="text-sm text-subtle">Page {page + 1}</span>
+              <button
+                type="button"
+                onClick={() => setPage((current) => current + 1)}
+                disabled={!hasNextPage || isFetching}
+                className="inline-flex h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Next
+              </button>
+            </nav>
+          ) : null}
         </div>
       </div>
     </div>
