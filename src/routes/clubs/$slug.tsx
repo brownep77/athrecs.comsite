@@ -3,6 +3,7 @@ import { ArrowLeft, ExternalLink, MapPin, Users } from "lucide-react";
 import { getClubBySlug } from "@/lib/athrecs/api";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { NationFlag } from "@/components/flags/NationFlag";
 
 export const Route = createFileRoute("/clubs/$slug")({
   loader: async ({ params }) => {
@@ -46,9 +47,12 @@ function ClubPage() {
             {members.length} on Athrecs
           </Badge>
         </div>
-        <h1 className="font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl">
-          {club.name}
-        </h1>
+        <div className="flex items-center gap-3">
+          <NationFlag nation={club.country} />
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl">
+            {club.name}
+          </h1>
+        </div>
         <p className="flex items-center gap-1.5 text-sm text-muted">
           <MapPin className="h-4 w-4 text-subtle" />
           {club.city} · {club.county} · {club.country}
