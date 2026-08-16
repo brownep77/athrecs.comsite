@@ -5,6 +5,7 @@ import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
 import { belfastClubs } from "./clubs-belfast";
 import { triathlonIrelandClubs } from "./clubs-triathlon-ireland";
+import { welshAthleticsClubs } from "./clubs-welsh-athletics";
 import { athletes as athletesBase } from "./athletes";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
 import { athletesRn2025B2 } from "./athletes-rn2025-b2";
@@ -46,6 +47,7 @@ export const clubs: ClubSeed[] = [
   ...athleticsIrelandClubs,
   ...belfastClubs,
   ...triathlonIrelandClubs,
+  ...welshAthleticsClubs,
 ].map((club) => ({
   ...club,
   sports: [...new Set(club.sports.map(canonicalClubSport))],
