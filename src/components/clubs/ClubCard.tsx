@@ -25,6 +25,7 @@ export function ClubCard({ club }: { club: ClubListItem }) {
         <ClubVerificationBadge
           slug={club.slug}
           website={club.website}
+          official_source={club.official_source}
           member_count={club.member_count}
           name={club.name}
           variant="button"

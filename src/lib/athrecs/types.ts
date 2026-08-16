@@ -45,8 +45,21 @@ export type ClubListItem = {
   country: string;
   sports: string[];
   website: string | null;
+  official_source: string | null;
   summary: string;
   member_count: number;
+};
+
+export type ClubContactInfo = {
+  role: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+};
+
+export type ClubSocialInfo = {
+  platform: "Facebook" | "Instagram" | "X" | "YouTube" | "LinkedIn";
+  url: string;
 };
 
 export type AthleteListItem = {

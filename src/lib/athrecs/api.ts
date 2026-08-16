@@ -4,7 +4,9 @@ import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
 import type {
   AthleteListItem,
+  ClubContactInfo,
   ClubListItem,
+  ClubSocialInfo,
   EntryStatus,
   EventListItem,
   Sport,
@@ -68,9 +70,7 @@ export const listEvents = createServerFn({ method: "GET" })
     const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
     const dateTo = data.dateTo?.trim() || monthRange?.to || null;
 
-    const rows = await sql<
-      EventListItem & { distances_csv: string | null }
-    >`
+    const rows = await sql<EventListItem & { distances_csv: string | null }>`
       select
         e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
@@ -181,7 +181,8 @@ export const listEvents = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } = await import("@/lib/athrecs/parkrun-dates");
+    const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } =
+      await import("@/lib/athrecs/parkrun-dates");
     const mapped = rows
       .map((r) => {
         const distances = sanitizeDistances(
@@ -204,7 +205,9 @@ export const listEvents = createServerFn({ method: "GET" })
           upcoming_count:
             r.sport === "Parkrun" ? remainingParkrunCount(r.name, today) : r.upcoming_count,
           next_start_time:
-            r.sport === "Parkrun" ? parkrunStartTime(r.country, /junior/i.test(r.name)) : r.next_start_time,
+            r.sport === "Parkrun"
+              ? parkrunStartTime(r.country, /junior/i.test(r.name))
+              : r.next_start_time,
           next_status: (r.next_status as EntryStatus) ?? (r.sport === "Parkrun" ? "Open" : null),
           next_distance:
             r.sport === "Parkrun"
@@ -212,7 +215,7 @@ export const listEvents = createServerFn({ method: "GET" })
                 ? "2K"
                 : "5K"
               : r.next_distance === "Marathon" && !distances.includes("Marathon")
-                ? distances[0] ?? r.next_distance
+                ? (distances[0] ?? r.next_distance)
                 : r.next_distance,
         };
       })
@@ -271,7 +274,8 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       | undefined;
     if (!event) return null;
 
-    const { parkrunDates, parkrunDistance, parkrunStartTime } = await import("@/lib/athrecs/parkrun-dates");
+    const { parkrunDates, parkrunDistance, parkrunStartTime } =
+      await import("@/lib/athrecs/parkrun-dates");
 
     const distances = await sql<{ distance_code: string }>`
       select distance_code from event_distances where event_id = ${event.id}
@@ -329,9 +333,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       ...generated.filter((row) => !storedDates.has(row.event_date)),
     ].sort((a, b) => a.event_date.localeCompare(b.event_date));
 
-    const relatedRows = await sql<
-      EventListItem & { distances_csv: string | null }
-    >`
+    const relatedRows = await sql<EventListItem & { distances_csv: string | null }>`
       select
         e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
@@ -512,7 +514,7 @@ export const listClubs = createServerFn({ method: "GET" })
       select
         c.id, c.slug, c.name, c.city, c.county, c.country,
         c.sports as sports_csv,
-        c.website, c.summary,
+        c.website, c.official_source, c.summary,
         (select count(*)::int from athletes a where a.club_id = c.id) as member_count
       from clubs c
       where
@@ -542,6 +544,16 @@ export const getClubBySlug = createServerFn({ method: "GET" })
       sports: string;
       website: string | null;
       summary: string;
+      address: string | null;
+      postcode: string | null;
+      region: string | null;
+      official_source: string | null;
+      source_url: string | null;
+      checked_at: string | null;
+      location_precision: string;
+      contact_url: string | null;
+      contacts_json: string;
+      socials_json: string;
     }>`
       select * from clubs where slug = ${slug} limit 1
     `;
@@ -566,33 +578,33 @@ export const getClubBySlug = createServerFn({ method: "GET" })
       club: {
         ...club,
         sports: club.sports ? club.sports.split(",").filter(Boolean) : [],
+        contacts: JSON.parse(club.contacts_json || "[]") as ClubContactInfo[],
+        socials: JSON.parse(club.socials_json || "[]") as ClubSocialInfo[],
       },
       members,
     };
   });
 
-export const getHomeStats = createServerFn({ method: "GET" }).handler(
-  async () => {
-    const sql = await ready();
-    const today = todayIso();
-    const events = await sql<{ n: number }>`select count(*)::int as n from events`;
-    const clubs = await sql<{ n: number }>`select count(*)::int as n from clubs`;
-    const athletes = await sql<{ n: number }>`select count(*)::int as n from athletes`;
-    const upcoming = await sql<{ n: number }>`
+export const getHomeStats = createServerFn({ method: "GET" }).handler(async () => {
+  const sql = await ready();
+  const today = todayIso();
+  const events = await sql<{ n: number }>`select count(*)::int as n from events`;
+  const clubs = await sql<{ n: number }>`select count(*)::int as n from clubs`;
+  const athletes = await sql<{ n: number }>`select count(*)::int as n from athletes`;
+  const upcoming = await sql<{ n: number }>`
       select count(*)::int as n from editions where event_date >= ${today}::date
     `;
-    const bySport = await sql<{ sport: string; n: number }>`
+  const bySport = await sql<{ sport: string; n: number }>`
       select sport, count(*)::int as n from events group by sport order by sport
     `;
-    return {
-      events: events[0]?.n ?? 0,
-      clubs: clubs[0]?.n ?? 0,
-      athletes: athletes[0]?.n ?? 0,
-      upcoming: upcoming[0]?.n ?? 0,
-      bySport,
-    };
-  },
-);
+  return {
+    events: events[0]?.n ?? 0,
+    clubs: clubs[0]?.n ?? 0,
+    athletes: athletes[0]?.n ?? 0,
+    upcoming: upcoming[0]?.n ?? 0,
+    bySport,
+  };
+});
 
 /** Live DB backend + row counts for admin diagnosis (Neon vs ephemeral PGLite). */
 export const getDbStatus = createServerFn({ method: "GET" }).handler(async () => {
@@ -743,7 +755,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       order by ed.event_date asc, e.name
       limit ${fetchLimit}
     `;
-    const { parkrunDates, parkrunDistance, parkrunStartTime } = await import("@/lib/athrecs/parkrun-dates");
+    const { parkrunDates, parkrunDistance, parkrunStartTime } =
+      await import("@/lib/athrecs/parkrun-dates");
     const wantParkrun = !sport || sport === "Parkrun";
     const generatedRows: typeof rows = [];
     if (wantParkrun) {
@@ -864,10 +877,12 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           country || region,
         ),
       )
-      .sort((a, b) => a.event_date.localeCompare(b.event_date) || a.event_name.localeCompare(b.event_name));
+      .sort(
+        (a, b) =>
+          a.event_date.localeCompare(b.event_date) || a.event_name.localeCompare(b.event_name),
+      );
     return filtered.slice(0, limit);
   });
-
 
 // -- Admin / Grok-assisted imports --
 export const importFromCsv = createServerFn({ method: "POST" })
@@ -898,7 +913,11 @@ export const importResults = createServerFn({ method: "POST" })
     let bundle: ResultsImportBundle;
     try {
       const parsed = JSON.parse(data.json) as ResultsImportBundle | { results?: unknown };
-      if (!parsed || typeof parsed !== "object" || !Array.isArray((parsed as ResultsImportBundle).results)) {
+      if (
+        !parsed ||
+        typeof parsed !== "object" ||
+        !Array.isArray((parsed as ResultsImportBundle).results)
+      ) {
         throw new Error('JSON must be { "results": [ ... ] }');
       }
       bundle = parsed as ResultsImportBundle;
@@ -909,18 +928,17 @@ export const importResults = createServerFn({ method: "POST" })
     return applyResultsImport(bundle);
   });
 
-export const listAdminEventCards = createServerFn({ method: "GET" }).handler(
-  async () => {
-    const sql = await ready();
-    return sql<{
-      id: number;
-      slug: string;
-      name: string;
-      sport: string;
-      city: string;
-      edition_count: number;
-      next_date: string | null;
-    }>`
+export const listAdminEventCards = createServerFn({ method: "GET" }).handler(async () => {
+  const sql = await ready();
+  return sql<{
+    id: number;
+    slug: string;
+    name: string;
+    sport: string;
+    city: string;
+    edition_count: number;
+    next_date: string | null;
+  }>`
       select
         e.id, e.slug, e.name, e.sport, e.city,
         (select count(*)::int from editions ed where ed.event_id = e.id) as edition_count,
@@ -932,5 +950,4 @@ export const listAdminEventCards = createServerFn({ method: "GET" }).handler(
       from events e
       order by e.name
     `;
-  },
-);
+});
