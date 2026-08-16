@@ -6,6 +6,10 @@ import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge"
 import { NationFlag } from "@/components/flags/NationFlag";
 
 export function ClubCard({ club }: { club: ClubListItem }) {
+  const location = [...new Set([club.city, club.county].map((part) => part.trim()))]
+    .filter(Boolean)
+    .join(", ");
+
   return (
     <article className="rounded-xl border border-border bg-surface p-4 shadow-card transition-colors hover:border-border-strong">
       <div className="mb-2 flex flex-wrap items-center gap-1.5">
@@ -36,11 +40,9 @@ export function ClubCard({ club }: { club: ClubListItem }) {
       </Link>
       <p className="mt-1 flex items-center gap-1.5 text-xs text-muted">
         <MapPin className="h-3.5 w-3.5 text-subtle" />
-        {club.city}, {club.county}
+        {location}
       </p>
-      <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-subtle">
-        {club.summary}
-      </p>
+      <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-subtle">{club.summary}</p>
     </article>
   );
 }

@@ -9,9 +9,8 @@ import {
 } from "@/data/catalogue";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-athletics-taxonomy-v61";
+const SEED_VERSION = "athrecs-athletics-taxonomy-v62";
 const EXPECTED = catalogueMetadata.merged_counts;
-
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
 type GlobalSeedState = typeof globalThis & {
@@ -65,11 +64,7 @@ async function insertRows(
   }
 }
 
-async function deleteRowsOutsideCatalogue(
-  sql: Sql,
-  table: string,
-  slugs: string[],
-): Promise<void> {
+async function deleteRowsOutsideCatalogue(sql: Sql, table: string, slugs: string[]): Promise<void> {
   const placeholders = slugs.map((_, index) => `$${index + 1}`).join(", ");
   await sql.query(`delete from ${table} where slug not in (${placeholders})`, slugs);
 }
@@ -305,10 +300,10 @@ async function alreadySeeded(sql: Sql): Promise<boolean> {
   // even if the identity query fails (avoids Neon import wipes on edge cases).
   const countsOk = Boolean(
     (row?.clubs ?? 0) >= EXPECTED.clubs &&
-      (row?.athletes ?? 0) >= EXPECTED.athletes &&
-      (row?.race_series ?? 0) >= EXPECTED.race_series &&
-      (row?.editions ?? 0) >= EXPECTED.editions &&
-      (row?.results ?? 0) >= EXPECTED.results,
+    (row?.athletes ?? 0) >= EXPECTED.athletes &&
+    (row?.race_series ?? 0) >= EXPECTED.race_series &&
+    (row?.editions ?? 0) >= EXPECTED.editions &&
+    (row?.results ?? 0) >= EXPECTED.results,
   );
   const largeImport =
     (row?.athletes ?? 0) >= EXPECTED.athletes + 100 ||
@@ -364,7 +359,6 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
     on conflict (key) do update set value = excluded.value
   `;
 }
-
 
 async function ensureParkrunCalendar(sql: Sql): Promise<void> {
   const meta = await sql<{ value: string }>`
@@ -440,8 +434,21 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     sql,
     "events",
     [
-      "source_id", "slug", "name", "sport", "country", "county", "city", "area",
-      "surface", "summary", "description", "organiser", "website", "featured", "source_url",
+      "source_id",
+      "slug",
+      "name",
+      "sport",
+      "country",
+      "county",
+      "city",
+      "area",
+      "surface",
+      "summary",
+      "description",
+      "organiser",
+      "website",
+      "featured",
+      "source_url",
     ],
     seriesList.map((series) => [
       series.source_id ?? null,
@@ -497,11 +504,27 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     sql,
     "editions",
     [
-      "source_id", "event_id", "event_date", "distance_code", "distance_km", "status",
-      "entry_url", "source_url", "start_time", "notes", "results_permission",
-      "results_hosting", "results_official_url", "results_permission_note",
-      "results_permission_at", "results_permission_by", "results_rights_requested_at",
-      "public_result_count", "partner_result_count", "athlete_result_count", "results_access",
+      "source_id",
+      "event_id",
+      "event_date",
+      "distance_code",
+      "distance_km",
+      "status",
+      "entry_url",
+      "source_url",
+      "start_time",
+      "notes",
+      "results_permission",
+      "results_hosting",
+      "results_official_url",
+      "results_permission_note",
+      "results_permission_at",
+      "results_permission_by",
+      "results_rights_requested_at",
+      "public_result_count",
+      "partner_result_count",
+      "athlete_result_count",
+      "results_access",
     ],
     editionSeeds.map((edition) => [
       edition.source_id ?? null,
@@ -592,8 +615,21 @@ async function seed(): Promise<void> {
     sql,
     "events",
     [
-      "source_id", "slug", "name", "sport", "country", "county", "city", "area",
-      "surface", "summary", "description", "organiser", "website", "featured", "source_url",
+      "source_id",
+      "slug",
+      "name",
+      "sport",
+      "country",
+      "county",
+      "city",
+      "area",
+      "surface",
+      "summary",
+      "description",
+      "organiser",
+      "website",
+      "featured",
+      "source_url",
     ],
     seriesList.map((series) => [
       series.source_id ?? null,
@@ -635,11 +671,33 @@ async function seed(): Promise<void> {
     sql,
     "athletes",
     [
-      "source_id", "slug", "display_name", "given_name", "family_name", "gender",
-      "club_id", "second_club_id", "source_club_name", "source_second_club_name",
-      "city", "county", "country", "bio", "date_of_birth", "nation", "continent",
-      "commonwealth", "race_entry_name", "default_category", "default_bib",
-      "preferred_distance", "ea_number", "athrecs_id", "parent_athlete_id", "avatar_url", "source_url",
+      "source_id",
+      "slug",
+      "display_name",
+      "given_name",
+      "family_name",
+      "gender",
+      "club_id",
+      "second_club_id",
+      "source_club_name",
+      "source_second_club_name",
+      "city",
+      "county",
+      "country",
+      "bio",
+      "date_of_birth",
+      "nation",
+      "continent",
+      "commonwealth",
+      "race_entry_name",
+      "default_category",
+      "default_bib",
+      "preferred_distance",
+      "ea_number",
+      "athrecs_id",
+      "parent_athlete_id",
+      "avatar_url",
+      "source_url",
     ],
     athleteSeeds.map((athlete) => [
       athlete.source_id ?? null,
@@ -649,7 +707,7 @@ async function seed(): Promise<void> {
       athlete.family_name ?? null,
       athlete.gender,
       clubIds.get(athlete.club_slug) ?? null,
-      athlete.second_club_slug ? clubIds.get(athlete.second_club_slug) ?? null : null,
+      athlete.second_club_slug ? (clubIds.get(athlete.second_club_slug) ?? null) : null,
       athlete.source_club_name ?? null,
       athlete.source_second_club_name ?? null,
       athlete.city,
@@ -700,9 +758,21 @@ async function seed(): Promise<void> {
     50,
   );
 
-  await deleteRowsOutsideCatalogue(sql, "athletes", athleteSeeds.map((athlete) => athlete.slug));
-  await deleteRowsOutsideCatalogue(sql, "events", seriesList.map((series) => series.slug));
-  await deleteRowsOutsideCatalogue(sql, "clubs", clubSeeds.map((club) => club.slug));
+  await deleteRowsOutsideCatalogue(
+    sql,
+    "athletes",
+    athleteSeeds.map((athlete) => athlete.slug),
+  );
+  await deleteRowsOutsideCatalogue(
+    sql,
+    "events",
+    seriesList.map((series) => series.slug),
+  );
+  await deleteRowsOutsideCatalogue(
+    sql,
+    "clubs",
+    clubSeeds.map((club) => club.slug),
+  );
 
   const [eventRows, athleteRows] = await Promise.all([
     sql<{ id: number; slug: string }>`select id, slug from events`,
@@ -724,12 +794,7 @@ async function seed(): Promise<void> {
     const athleteId = athleteIds.get(athlete.slug);
     const primaryClubId = clubIds.get(athlete.club_slug);
     if (athleteId && primaryClubId) {
-      athleteClubRows.push([
-        athleteId,
-        primaryClubId,
-        "primary",
-        athlete.source_club_name ?? null,
-      ]);
+      athleteClubRows.push([athleteId, primaryClubId, "primary", athlete.source_club_name ?? null]);
     }
     const secondaryClubId = athlete.second_club_slug
       ? clubIds.get(athlete.second_club_slug)
@@ -766,11 +831,27 @@ async function seed(): Promise<void> {
     sql,
     "editions",
     [
-      "source_id", "event_id", "event_date", "distance_code", "distance_km", "status",
-      "entry_url", "source_url", "start_time", "notes", "results_permission",
-      "results_hosting", "results_official_url", "results_permission_note",
-      "results_permission_at", "results_permission_by", "results_rights_requested_at",
-      "public_result_count", "partner_result_count", "athlete_result_count", "results_access",
+      "source_id",
+      "event_id",
+      "event_date",
+      "distance_code",
+      "distance_km",
+      "status",
+      "entry_url",
+      "source_url",
+      "start_time",
+      "notes",
+      "results_permission",
+      "results_hosting",
+      "results_official_url",
+      "results_permission_note",
+      "results_permission_at",
+      "results_permission_by",
+      "results_rights_requested_at",
+      "public_result_count",
+      "partner_result_count",
+      "athlete_result_count",
+      "results_access",
     ],
     editionSeeds.map((edition) => [
       edition.source_id ?? null,
@@ -825,20 +906,31 @@ async function seed(): Promise<void> {
   }>`select ed.id, e.slug as event_slug, ed.event_date::text as event_date, ed.distance_code
       from editions ed join events e on e.id = ed.event_id`;
   const editionIds = new Map(
-    editionRows.map((row) => [
-      `${row.event_slug}|${row.event_date}|${row.distance_code}`,
-      row.id,
-    ]),
+    editionRows.map((row) => [`${row.event_slug}|${row.event_date}|${row.distance_code}`, row.id]),
   );
 
   await insertRows(
     sql,
     "results",
     [
-      "source_id", "edition_id", "athlete_id", "status", "finish_time_seconds",
-      "chip_time_seconds", "gun_time_seconds", "bib", "overall_place", "gender_place",
-      "category", "category_place", "age_on_day", "age_grade_pct", "open_rating",
-      "age_grade_rating", "result_source", "source_url",
+      "source_id",
+      "edition_id",
+      "athlete_id",
+      "status",
+      "finish_time_seconds",
+      "chip_time_seconds",
+      "gun_time_seconds",
+      "bib",
+      "overall_place",
+      "gender_place",
+      "category",
+      "category_place",
+      "age_on_day",
+      "age_grade_pct",
+      "open_rating",
+      "age_grade_rating",
+      "result_source",
+      "source_url",
     ],
     resultSeeds
       .map((result) => [
