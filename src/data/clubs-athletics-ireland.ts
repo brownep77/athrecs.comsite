@@ -459,14 +459,14 @@ export const athleticsIrelandClubs: ClubSeed[] = [
   {
     slug: "athletics-ireland-beechmount-harriers-a-c",
     name: "Beechmount Harriers A.C.",
-    city: "Antrim",
+    city: "Belfast",
     county: "Antrim",
     country: "Northern Ireland",
     sports: ["Athletics", "Running"],
     website: "https://membership.athleticsireland.ie/clubpage/Beechmount_Harriers_A.C.",
     summary:
-      "Athletics Ireland affiliated mixed-age club based in Antrim (Ulster, Northern Ireland).",
-    source_names: ["Beechmount Harriers A.C."],
+      "Athletics Ireland affiliated mixed-age running and athletics club based in west Belfast (Ulster, Northern Ireland).",
+    source_names: ["Beechmount Harriers A.C.", "Beechmount Harriers"],
   },
   {
     slug: "athletics-ireland-belgooly-a-c",

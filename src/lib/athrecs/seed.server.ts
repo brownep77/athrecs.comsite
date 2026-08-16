@@ -9,7 +9,7 @@ import {
 } from "@/data/catalogue";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-athletics-taxonomy-v63";
+const SEED_VERSION = "athrecs-athletics-taxonomy-v64";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;

@@ -34,8 +34,9 @@ function ClubsPage() {
           </Link>
         </div>
         <p className="text-sm text-muted">
-          Affiliated running, athletics and multi-sport clubs from England Athletics, Athletics
-          Ireland and Triathlon Ireland, with country flags, websites and discipline tags.
+          Running, athletics and multi-sport clubs from England Athletics, Athletics Ireland,
+          Athletics Northern Ireland, Triathlon Ireland and Special Olympics Ireland, with country
+          flags, websites and discipline tags.
         </p>
       </header>
 
