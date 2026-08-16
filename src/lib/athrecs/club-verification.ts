@@ -29,7 +29,7 @@ export const CLUB_VERIFICATION_CRITERIA = {
       name: "Confirmed affiliated",
       badge: "Verified",
       criteria:
-        "England Athletics / UK Athletics (or clear official club site) matches the name and town, and the club appears on timed results under a stable name.",
+        "A recognised governing-body directory (or clear official club site) matches the name and location, and the club has a stable identity.",
       treatAs: "Full club page, filters, verified badge.",
     },
     {
@@ -60,26 +60,23 @@ export const CLUB_VERIFICATION_CRITERIA = {
       tier: "V5" as const,
       name: "Disputed / merge candidate",
       badge: "Needs review",
-      criteria:
-        "Conflicting names, two slugs for one club, or an impossible location.",
+      criteria: "Conflicting names, two slugs for one club, or an impossible location.",
       treatAs: "Not used for stats until resolved.",
     },
   ],
   clubTypes: [
     {
-      name: "EA-affiliated athletics / running club",
+      name: "Governing-body affiliated athletics / running club",
       description:
-        "Formal club, usually England Athletics affiliated; road, track, XC, or mixed.",
+        "Formal club affiliated to its national or regional athletics governing body; road, track, XC, or mixed.",
     },
     {
       name: "Road running club (affiliated)",
-      description:
-        "Same formal structure, mainly road and endurance racing.",
+      description: "Same formal structure, mainly road and endurance racing.",
     },
     {
       name: "Unofficial / social run group",
-      description:
-        "Regular meet-ups without EA affiliation; rarely a stable chip-timed club name.",
+      description: "Regular meet-ups without EA affiliation; rarely a stable chip-timed club name.",
     },
     {
       name: "Shop / brand / gym run club",
@@ -110,7 +107,7 @@ export const CLUB_VERIFICATION_CRITERIA = {
   minimumBar: [
     {
       entity: "Club",
-      bar: "Official or EA listing, or the same club name on ≥2 independent timed race results in the region.",
+      bar: "Official governing-body listing, or the same club name on ≥2 independent timed race results in the region.",
     },
     {
       entity: "Race series",
@@ -142,7 +139,7 @@ export const CLUB_VERIFICATION_CRITERIA = {
     "Trust the club string on a result when it matches a verified club",
     "Compare club standings among verified clubs only",
     "A join or contact path when an official website exists",
-    "EA-affiliated (V1) clubs operate under affiliation rules — not a quality rating, but an organisational bar",
+    "Affiliated (V1) clubs operate under governing-body rules — not a quality rating, but an organisational bar",
   ],
   policy:
     "Verified badge only for V1 or V2. Everyone else stays listed as unverified or as a group/team name from results until sources appear. Aliases merge into one verified club where possible.",
@@ -161,7 +158,7 @@ const MERGE_CANDIDATES = new Set([
 ]);
 
 /**
- * Curated V1 (affiliated / official site known) for common Norfolk & nearby clubs.
+ * Curated V1 (affiliated / official identity known) clubs.
  * Expand over time as EA/official checks are completed.
  */
 const TIER_OVERRIDES: Record<string, ClubVerificationTier> = {
@@ -188,6 +185,23 @@ const TIER_OVERRIDES: Record<string, ClubVerificationTier> = {
   "cambridge-and-coleridge-ac": "V1",
   "cambridge-coleridge-ac": "V5",
   "bungay-black-dog": "V5",
+  "athletics-ireland-beechmount-harriers-a-c": "V1",
+  "athletics-ni-albertville-harriers": "V1",
+  "athletics-ni-annadale-striders": "V1",
+  "athletics-ni-barf-ni": "V1",
+  "athletics-ni-belfast-running-club": "V1",
+  "athletics-ni-dub-running-club": "V1",
+  "athletics-ni-lagan-valley-ac": "V1",
+  "athletics-ni-mallusk-harriers": "V1",
+  "athletics-ni-north-belfast-harriers": "V1",
+  "athletics-ni-orangegrove-ac": "V1",
+  "athletics-ni-queens-university-ac": "V1",
+  "athletics-ni-st-annes-ac": "V1",
+  "athletics-ni-st-malachys-ac": "V1",
+  "athletics-ni-victoria-park-and-connswater-ac": "V1",
+  "athletics-ni-west-belfast-coolers": "V1",
+  "athletics-ni-willowfield-harriers": "V1",
+  "special-olympics-newtownabbey-racers": "V1",
 };
 
 const TIER_META: Record<
