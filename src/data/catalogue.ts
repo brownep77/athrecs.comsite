@@ -3,6 +3,7 @@
 export type { Sport, Series, Edition, ClubSeed, AthleteSeed, ResultSeed } from "./types";
 import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
+import { belfastClubs } from "./clubs-belfast";
 import { triathlonIrelandClubs } from "./clubs-triathlon-ireland";
 import { athletes as athletesBase } from "./athletes";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
@@ -43,6 +44,7 @@ function canonicalClubSport(sport: string): string {
 export const clubs: ClubSeed[] = [
   ...rawClubs,
   ...athleticsIrelandClubs,
+  ...belfastClubs,
   ...triathlonIrelandClubs,
 ].map((club) => ({
   ...club,
