@@ -9,7 +9,7 @@ import {
 } from "@/data/catalogue";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-athletics-taxonomy-v64";
+const SEED_VERSION = "athrecs-athletics-taxonomy-v65";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -584,7 +584,7 @@ async function seed(): Promise<void> {
   await ensureSchema(sql);
   await ensureAthleticsTaxonomy(sql);
 
-  // Always upsert England Athletics / catalogue clubs (append-only, no deletes).
+  // Always upsert governing-body / catalogue clubs (append-only, no deletes).
   // Safe on Neon + PGLite so new club catalogue rows appear without wiping results.
   await upsertCatalogueClubs(sql);
 
