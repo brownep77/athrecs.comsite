@@ -2,6 +2,7 @@
 
 export type { Sport, Series, Edition, ClubSeed, AthleteSeed, ResultSeed } from "./types";
 import { clubs as rawClubs } from "./clubs";
+import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
 import { triathlonIrelandClubs } from "./clubs-triathlon-ireland";
 import { athletes as athletesBase } from "./athletes";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
@@ -39,7 +40,11 @@ function canonicalClubSport(sport: string): string {
   return /^(?:trackandfield|track\s*(?:&|and)\s*field)$/i.test(sport.trim()) ? "Athletics" : sport;
 }
 
-export const clubs: ClubSeed[] = [...rawClubs, ...triathlonIrelandClubs].map((club) => ({
+export const clubs: ClubSeed[] = [
+  ...rawClubs,
+  ...athleticsIrelandClubs,
+  ...triathlonIrelandClubs,
+].map((club) => ({
   ...club,
   sports: [...new Set(club.sports.map(canonicalClubSport))],
 }));
