@@ -11,12 +11,12 @@ export const catalogueMetadata = {
     raw_club_names: 42,
   },
   merged_counts: {
-    clubs: 1548,
+    clubs: 1622,
     athletes: 685,
     race_series: 140,
     editions: 1800,
     results: 1933,
   },
   clubs_source:
-    "England Athletics Find a Club (types=club) + Triathlon Ireland public club directory + prior ATHRECS catalogue",
+    "England Athletics Find a Club (types=club) + Athletics Ireland Find a Club (pages 1–5) + Triathlon Ireland public club directory + prior ATHRECS catalogue",
 } as const;
