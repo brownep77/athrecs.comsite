@@ -6,10 +6,11 @@ import {
   editions as editionSeeds,
   results as resultSeeds,
   seriesList,
+  clubSlugAliases,
 } from "@/data/catalogue";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-athletics-taxonomy-v65";
+const SEED_VERSION = "athrecs-club-audit-v66";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -82,6 +83,16 @@ async function ensureSchema(sql: Sql): Promise<void> {
       website text,
       summary text not null default '',
       source_names text not null default '',
+      address text,
+      postcode text,
+      region text,
+      official_source text,
+      source_url text,
+      checked_at date,
+      location_precision text not null default 'unverified',
+      contact_url text,
+      contacts_json text not null default '[]',
+      socials_json text not null default '[]',
       created_at timestamptz not null default now()
     )`,
     `create table if not exists events (
@@ -198,6 +209,16 @@ async function ensureSchema(sql: Sql): Promise<void> {
       value text not null
     )`,
     `alter table clubs add column if not exists source_names text not null default ''`,
+    `alter table clubs add column if not exists address text`,
+    `alter table clubs add column if not exists postcode text`,
+    `alter table clubs add column if not exists region text`,
+    `alter table clubs add column if not exists official_source text`,
+    `alter table clubs add column if not exists source_url text`,
+    `alter table clubs add column if not exists checked_at date`,
+    `alter table clubs add column if not exists location_precision text not null default 'unverified'`,
+    `alter table clubs add column if not exists contact_url text`,
+    `alter table clubs add column if not exists contacts_json text not null default '[]'`,
+    `alter table clubs add column if not exists socials_json text not null default '[]'`,
     `alter table events add column if not exists source_id int`,
     `alter table events add column if not exists source_url text`,
     `alter table editions add column if not exists source_id int`,
@@ -331,7 +352,27 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
   await insertRows(
     sql,
     "clubs",
-    ["slug", "name", "city", "county", "country", "sports", "website", "summary", "source_names"],
+    [
+      "slug",
+      "name",
+      "city",
+      "county",
+      "country",
+      "sports",
+      "website",
+      "summary",
+      "source_names",
+      "address",
+      "postcode",
+      "region",
+      "official_source",
+      "source_url",
+      "checked_at",
+      "location_precision",
+      "contact_url",
+      "contacts_json",
+      "socials_json",
+    ],
     clubSeeds.map((club) => [
       club.slug,
       club.name,
@@ -342,6 +383,16 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
       club.website ?? null,
       club.summary,
       (club.source_names ?? []).join("|"),
+      club.address ?? null,
+      club.postcode ?? null,
+      club.region ?? null,
+      club.official_source ?? null,
+      club.source_url ?? null,
+      club.checked_at ?? null,
+      club.location_precision ?? "unverified",
+      club.contact_url ?? null,
+      JSON.stringify(club.contacts ?? []),
+      JSON.stringify(club.socials ?? []),
     ]),
     `on conflict (slug) do update set
       name = excluded.name,
@@ -351,13 +402,46 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
       sports = excluded.sports,
       website = excluded.website,
       summary = excluded.summary,
-      source_names = excluded.source_names`,
+      source_names = excluded.source_names,
+      address = excluded.address,
+      postcode = excluded.postcode,
+      region = excluded.region,
+      official_source = excluded.official_source,
+      source_url = excluded.source_url,
+      checked_at = excluded.checked_at,
+      location_precision = excluded.location_precision,
+      contact_url = excluded.contact_url,
+      contacts_json = excluded.contacts_json,
+      socials_json = excluded.socials_json`,
     80,
   );
+  await mergeCatalogueClubAliases(sql);
   await sql`
     insert into app_meta (key, value) values ('clubs_catalogue_version', ${targetVersion})
     on conflict (key) do update set value = excluded.value
   `;
+}
+
+async function mergeCatalogueClubAliases(sql: Sql): Promise<void> {
+  for (const [aliasSlug, canonicalSlug] of Object.entries(clubSlugAliases)) {
+    const rows = await sql<{ id: number; slug: string }>`
+      select id, slug from clubs where slug in (${aliasSlug}, ${canonicalSlug})
+    `;
+    const alias = rows.find((row) => row.slug === aliasSlug);
+    const canonical = rows.find((row) => row.slug === canonicalSlug);
+    if (!alias || !canonical) continue;
+    await sql`update athletes set club_id = ${canonical.id} where club_id = ${alias.id}`;
+    await sql`update athletes set second_club_id = ${canonical.id} where second_club_id = ${alias.id}`;
+    await sql`
+      insert into athlete_clubs (athlete_id, club_id, relationship, source_name)
+      select athlete_id, ${canonical.id}, relationship, source_name
+      from athlete_clubs
+      where club_id = ${alias.id}
+      on conflict (athlete_id, club_id, relationship) do nothing
+    `;
+    await sql`delete from athlete_clubs where club_id = ${alias.id}`;
+    await sql`delete from clubs where id = ${alias.id}`;
+  }
 }
 
 async function ensureParkrunCalendar(sql: Sql): Promise<void> {

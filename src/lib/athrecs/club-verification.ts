@@ -358,6 +358,7 @@ const TIER_META: Record<
 export function resolveClubVerification(input: {
   slug: string;
   website?: string | null;
+  official_source?: string | null;
   member_count?: number;
   name?: string;
 }): ClubVerificationInfo {
@@ -365,6 +366,10 @@ export function resolveClubVerification(input: {
 
   if (slug === "unattached") {
     return { tier: "NA", ...TIER_META.NA };
+  }
+
+  if (input.official_source && input.official_source !== "Prior ATHRECS catalogue") {
+    return { tier: "V1", ...TIER_META.V1 };
   }
 
   const overridden = TIER_OVERRIDES[slug];

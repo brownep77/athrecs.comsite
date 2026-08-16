@@ -14,6 +14,7 @@
     "preview": "vite preview --host 0.0.0.0 --port 8080",
     "typecheck": "tsc --noEmit",
     "verify:catalogue": "node --experimental-strip-types scripts/verify-catalogue.mjs",
+    "verify:clubs": "node --experimental-strip-types scripts/verify-club-audit.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

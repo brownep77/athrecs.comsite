@@ -31,6 +31,7 @@ function TierIcon({ tier }: { tier: ClubVerificationTier }) {
 type Props = {
   slug: string;
   website?: string | null;
+  official_source?: string | null;
   member_count?: number;
   name?: string;
   /** compact = small chip; button = chip + criteria link affordance */
@@ -45,12 +46,19 @@ type Props = {
 export function ClubVerificationBadge({
   slug,
   website,
+  official_source,
   member_count,
   name,
   variant = "button",
   className,
 }: Props) {
-  const info = resolveClubVerification({ slug, website, member_count, name });
+  const info = resolveClubVerification({
+    slug,
+    website,
+    official_source,
+    member_count,
+    name,
+  });
 
   const chip = (
     <span
@@ -73,10 +81,7 @@ export function ClubVerificationBadge({
   return (
     <Link
       to="/clubs"
-      className={cn(
-        "group inline-flex max-w-full items-center gap-1.5 no-underline",
-        className,
-      )}
+      className={cn("group inline-flex max-w-full items-center gap-1.5 no-underline", className)}
       title={`${info.reason} — view verification criteria`}
       aria-label={`${info.label}: ${info.reason}. View club verification criteria.`}
     >

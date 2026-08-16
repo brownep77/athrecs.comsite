@@ -6,6 +6,7 @@ import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
 import { belfastClubs } from "./clubs-belfast";
 import { triathlonIrelandClubs } from "./clubs-triathlon-ireland";
 import { welshAthleticsClubs } from "./clubs-welsh-athletics";
+import { auditedClubAdditions, clubEnrichment, clubSlugAliases } from "./club-enrichment";
 import { athletes as athletesBase } from "./athletes";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
 import { athletesRn2025B2 } from "./athletes-rn2025-b2";
@@ -15,7 +16,7 @@ import { athletesRn2025B5 } from "./athletes-rn2025-b5";
 import { athletesRn2025B6 } from "./athletes-rn2025-b6";
 import { athletesRn2025B7 } from "./athletes-rn2025-b7";
 import { athletesRn2025B8 } from "./athletes-rn2025-b8";
-export const athletes = [
+const rawAthletes = [
   ...athletesBase,
   ...athletesRn2025B1,
   ...athletesRn2025B2,
@@ -26,6 +27,13 @@ export const athletes = [
   ...athletesRn2025B7,
   ...athletesRn2025B8,
 ];
+export const athletes = rawAthletes.map((athlete) => ({
+  ...athlete,
+  club_slug: clubSlugAliases[athlete.club_slug] ?? athlete.club_slug,
+  second_club_slug: athlete.second_club_slug
+    ? (clubSlugAliases[athlete.second_club_slug] ?? athlete.second_club_slug)
+    : undefined,
+}));
 export { results } from "./results";
 import { seriesList as coreSeries } from "./series";
 import { editions as coreEditions } from "./editions";
@@ -42,16 +50,49 @@ function canonicalClubSport(sport: string): string {
   return /^(?:trackandfield|track\s*(?:&|and)\s*field)$/i.test(sport.trim()) ? "Athletics" : sport;
 }
 
-export const clubs: ClubSeed[] = [
+const rawClubSeeds: ClubSeed[] = [
   ...rawClubs,
   ...athleticsIrelandClubs,
   ...belfastClubs,
   ...triathlonIrelandClubs,
   ...welshAthleticsClubs,
-].map((club) => ({
-  ...club,
-  sports: [...new Set(club.sports.map(canonicalClubSport))],
-}));
+  ...auditedClubAdditions,
+];
+
+const mergedClubs = new Map<string, ClubSeed>();
+for (const sourceClub of rawClubSeeds) {
+  const canonicalSlug = clubSlugAliases[sourceClub.slug] ?? sourceClub.slug;
+  const enrichment = clubEnrichment[sourceClub.slug];
+  const existing = mergedClubs.get(canonicalSlug);
+  const candidate: ClubSeed = {
+    ...sourceClub,
+    ...enrichment,
+    slug: canonicalSlug,
+    sports: [...new Set(sourceClub.sports.map(canonicalClubSport))],
+  };
+  if (!existing) {
+    mergedClubs.set(canonicalSlug, candidate);
+    continue;
+  }
+  mergedClubs.set(canonicalSlug, {
+    ...existing,
+    ...(enrichment?.official_source ? { summary: sourceClub.summary } : {}),
+    ...enrichment,
+    slug: canonicalSlug,
+    sports: [...new Set([...existing.sports, ...candidate.sports])],
+    source_names: [
+      ...new Set([
+        ...(existing.source_names ?? []),
+        ...(candidate.source_names ?? []),
+        sourceClub.name,
+      ]),
+    ],
+    website: enrichment?.website ?? existing.website ?? candidate.website,
+  });
+}
+
+export const clubs: ClubSeed[] = [...mergedClubs.values()];
+export { clubSlugAliases };
 
 function normName(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "");

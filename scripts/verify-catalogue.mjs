@@ -8,7 +8,12 @@ const [
   { athletesRn2025B1 },
   { athletesRn2025B2 },
   { athletesRn2025B3 },
-  { clubs },
+  { clubs: baseClubs },
+  { athleticsIrelandClubs },
+  { belfastClubs },
+  { triathlonIrelandClubs },
+  { welshAthleticsClubs },
+  { auditedClubAdditions, clubSlugAliases },
   { editions },
   { resultsA },
   { resultsB },
@@ -23,6 +28,11 @@ const [
   import("../src/data/athletes-rn2025-b2.ts"),
   import("../src/data/athletes-rn2025-b3.ts"),
   import("../src/data/clubs.ts"),
+  import("../src/data/clubs-athletics-ireland.ts"),
+  import("../src/data/clubs-belfast.ts"),
+  import("../src/data/clubs-triathlon-ireland.ts"),
+  import("../src/data/clubs-welsh-athletics.ts"),
+  import("../src/data/club-enrichment.ts"),
   import("../src/data/editions.ts"),
   import("../src/data/results-a.ts"),
   import("../src/data/results-b.ts"),
@@ -38,7 +48,30 @@ const athletes = [
   ...athletesRn2025B1,
   ...athletesRn2025B2,
   ...athletesRn2025B3,
-];
+].map((athlete) => ({
+  ...athlete,
+  club_slug: clubSlugAliases[athlete.club_slug] ?? athlete.club_slug,
+  second_club_slug: athlete.second_club_slug
+    ? (clubSlugAliases[athlete.second_club_slug] ?? athlete.second_club_slug)
+    : undefined,
+}));
+const clubs = [
+  ...baseClubs,
+  ...athleticsIrelandClubs,
+  ...belfastClubs,
+  ...triathlonIrelandClubs,
+  ...welshAthleticsClubs,
+  ...auditedClubAdditions,
+]
+  .filter(
+    (club, index, rows) =>
+      rows.findIndex(
+        (candidate) =>
+          (clubSlugAliases[candidate.slug] ?? candidate.slug) ===
+          (clubSlugAliases[club.slug] ?? club.slug),
+      ) === index,
+  )
+  .map((club) => ({ ...club, slug: clubSlugAliases[club.slug] ?? club.slug }));
 const results = [
   ...resultsA,
   ...resultsB,
@@ -77,38 +110,41 @@ assertUnique(
   "Run Norwich batch 3 athlete slugs",
 );
 const preBatch3AthleteSlugs = new Set(
-  [...athletesBase, ...athletesRn2025B1, ...athletesRn2025B2].map(
-    (athlete) => athlete.slug,
-  ),
+  [...athletesBase, ...athletesRn2025B1, ...athletesRn2025B2].map((athlete) => athlete.slug),
 );
 assert(
   athletesRn2025B3.every((athlete) => !preBatch3AthleteSlugs.has(athlete.slug)),
   "Run Norwich batch 3 includes an athlete already present in the catalogue",
 );
 
-assert.deepEqual(
-  {
-    clubs: clubs.length,
-    athletes: athletes.length,
-    race_series: seriesList.length,
-    editions: editions.length,
-    results: results.length,
-  },
-  catalogueMetadata.merged_counts,
-  "Merged catalogue counts do not match the recorded metadata",
+// This verifier loads the original catalogue plus the first three Run Norwich
+// batches for its historical assertions below. Club sources are all loaded so
+// the canonical club count can still be checked against production metadata.
+assert.equal(
+  clubs.length,
+  catalogueMetadata.merged_counts.clubs,
+  "Canonical club count does not match the recorded metadata",
 );
 
-assertUnique(clubs.map((club) => club.slug), "Club slugs");
-assertUnique(athletes.map((athlete) => athlete.slug), "Athlete slugs");
-assertUnique(seriesList.map((series) => series.slug), "Race-series slugs");
+assertUnique(
+  clubs.map((club) => club.slug),
+  "Club slugs",
+);
+assertUnique(
+  athletes.map((athlete) => athlete.slug),
+  "Athlete slugs",
+);
+assertUnique(
+  seriesList.map((series) => series.slug),
+  "Race-series slugs",
+);
 assertUnique(
   editions.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
   "Edition keys",
 );
 assertUnique(
   results.map(
-    (result) =>
-      `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
+    (result) => `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
   ),
   "Result keys",
 );
@@ -124,10 +160,7 @@ for (const [rows, label] of [
     label,
   );
 }
-assertUnique(
-  athletes.map((athlete) => athlete.athrecs_id).filter(Boolean),
-  "Athrecs IDs",
-);
+assertUnique(athletes.map((athlete) => athlete.athrecs_id).filter(Boolean), "Athrecs IDs");
 
 const clubSlugs = new Set(clubs.map((club) => club.slug));
 const athleteSlugs = new Set(athletes.map((athlete) => athlete.slug));

@@ -59,6 +59,20 @@ export type Edition = {
   resultsAccess?: string;
 };
 
+export type ClubContactSeed = {
+  role: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+};
+
+export type ClubSocialSeed = {
+  platform: "Facebook" | "Instagram" | "X" | "YouTube" | "LinkedIn";
+  url: string;
+};
+
+export type ClubLocationPrecision = "postcode" | "official-directory" | "area-only" | "unverified";
+
 export type ClubSeed = {
   slug: string;
   name: string;
@@ -70,6 +84,20 @@ export type ClubSeed = {
   summary: string;
   /** Raw names used by the source before canonical club-name deduplication. */
   source_names?: string[];
+  /** Public venue or correspondence address published by an official source. */
+  address?: string;
+  postcode?: string;
+  /** Governing-body or geographic region; deliberately separate from county/area. */
+  region?: string;
+  /** Official directory record used to check affiliation and location. */
+  official_source?: string;
+  source_url?: string;
+  /** ISO date on which the public source was last checked. */
+  checked_at?: string;
+  location_precision?: ClubLocationPrecision;
+  contact_url?: string;
+  contacts?: ClubContactSeed[];
+  socials?: ClubSocialSeed[];
 };
 
 export type AthleteSeed = {
