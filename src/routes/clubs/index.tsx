@@ -25,9 +25,7 @@ function ClubsPage() {
     <div className="space-y-5">
       <header className="space-y-2">
         <div className="flex flex-wrap items-center gap-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">
-            Clubs
-          </h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Clubs</h1>
           <Link
             to="/athletes"
             className="text-sm font-medium text-accent no-underline hover:underline"
@@ -36,9 +34,8 @@ function ClubsPage() {
           </Link>
         </div>
         <p className="text-sm text-muted">
-          England Athletics affiliated running & athletics clubs across England,
-          with sports, websites and discipline tags — plus local multi-sport clubs
-          already linked to ATHRECS athletes.
+          Affiliated running, athletics and multi-sport clubs from England Athletics and Triathlon
+          Ireland, with country flags, websites and discipline tags.
         </p>
       </header>
 

@@ -24,6 +24,9 @@ export const Route = createFileRoute("/clubs/$slug")({
 
 function ClubPage() {
   const { club, members } = Route.useLoaderData();
+  const location = [...new Set([club.city, club.county, club.country].map((part) => part.trim()))]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <div className="space-y-8">
@@ -55,11 +58,9 @@ function ClubPage() {
         </div>
         <p className="flex items-center gap-1.5 text-sm text-muted">
           <MapPin className="h-4 w-4 text-subtle" />
-          {club.city} · {club.county} · {club.country}
+          {location}
         </p>
-        <p className="max-w-prose text-sm leading-relaxed text-muted">
-          {club.summary}
-        </p>
+        <p className="max-w-prose text-sm leading-relaxed text-muted">{club.summary}</p>
         <div className="flex flex-wrap gap-2">
           {club.website && (
             <Button asChild variant="secondary">
@@ -76,9 +77,7 @@ function ClubPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="font-display text-lg font-semibold text-fg">
-          Athletes at this club
-        </h2>
+        <h2 className="font-display text-lg font-semibold text-fg">Athletes at this club</h2>
         {members.length === 0 ? (
           <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
             No athletes linked yet.
