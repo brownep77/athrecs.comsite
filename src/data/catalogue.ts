@@ -1,6 +1,16 @@
 /** Norfolk multi-sport catalogue - fixtures, clubs, real TRT athletes & results. */
 
-export type { Sport, Series, Edition, ClubSeed, AthleteSeed, ResultSeed } from "./types";
+export type {
+  Sport,
+  Series,
+  Edition,
+  ClubSeed,
+  AthleteSeed,
+  ResultSeed,
+  RaceGroupCode,
+  RaceGroupDefinition,
+  RaceGroupMembershipSeed,
+} from "./types";
 import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
 import { belfastClubs } from "./clubs-belfast";
@@ -44,6 +54,12 @@ import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics"
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
+import {
+  raceCollectionEditions,
+  raceCollectionSeries,
+  raceGroupDefinitions,
+  raceGroupMemberships,
+} from "./race-collections";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -102,6 +118,7 @@ const coreNameKeys = new Set(coreSeries.map((series) => normName(series.name)));
 const usedSlugs = new Set(coreSeries.map((series) => series.slug));
 const extraSeries: Series[] = [];
 for (const series of [
+  ...(raceCollectionSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
@@ -122,6 +139,7 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries];
 
 const mergedEditions = [
   ...(coreEditions as Edition[]),
+  ...(raceCollectionEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
@@ -141,5 +159,7 @@ export const editions: Edition[] = (() => {
   }
   return unique;
 })();
+
+export { raceGroupDefinitions, raceGroupMemberships };
 
 export { catalogueMetadata } from "./catalogue-metadata";

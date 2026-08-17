@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { listEvents } from "@/lib/athrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
@@ -34,6 +34,7 @@ type RaceSearchParams = {
   distance?: string;
   format?: string;
   surface?: string;
+  group?: string;
 };
 
 function optionalText(value: unknown): string | undefined {
@@ -49,6 +50,7 @@ export const Route = createFileRoute("/races/")({
       distance: optionalText(search.distance),
       format: optionalText(search.format),
       surface: optionalText(search.surface),
+      group: optionalText(search.group),
     };
   },
   loaderDeps: ({ search }) => search,
@@ -73,6 +75,7 @@ function EventsPage() {
     distance: routeSearch.distance ?? "All",
     format: routeSearch.format ?? "All",
     surface: routeSearch.surface ?? "All",
+    group: routeSearch.group ?? "All",
   };
   const [filters, setFilters] = useState<EventSearchValues>(() => initialFilters);
   const [page, setPage] = useState(0);
@@ -117,18 +120,26 @@ function EventsPage() {
             for sport, distance and surface.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setMobileOpen((o) => !o)}
-          className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg lg:hidden"
-        >
-          {mobileOpen ? "Hide filters" : "Show filters"}
-          {!empty ? (
-            <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-fg">
-              On
-            </span>
-          ) : null}
-        </button>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            to="/race-series"
+            className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg no-underline hover:border-border-strong"
+          >
+            Race series
+          </Link>
+          <button
+            type="button"
+            onClick={() => setMobileOpen((o) => !o)}
+            className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg lg:hidden"
+          >
+            {mobileOpen ? "Hide filters" : "Show filters"}
+            {!empty ? (
+              <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-fg">
+                On
+              </span>
+            ) : null}
+          </button>
+        </div>
       </header>
 
       <div className="grid gap-5 lg:grid-cols-[minmax(260px,300px)_1fr] lg:items-start">

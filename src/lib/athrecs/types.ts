@@ -13,6 +13,20 @@ export type Sport =
 
 export type EntryStatus = "Open" | "ClosingSoon" | "Closed" | "Finished" | "TBC";
 
+export type RaceGroupCode =
+  | "world-marathon-majors"
+  | "utmb-world-series"
+  | "utmb-index";
+
+export type RaceGroupInfo = {
+  code: RaceGroupCode;
+  label: string;
+  level: "major" | "final" | "event" | "index";
+  source_url: string;
+  checked_at: string;
+  note: string;
+};
+
 export type EventListItem = {
   id: number;
   slug: string;
@@ -34,6 +48,7 @@ export type EventListItem = {
   upcoming_count: number;
   past_count: number;
   edition_count: number;
+  groups: RaceGroupInfo[];
 };
 
 export type ClubListItem = {

@@ -34,6 +34,32 @@ export type Series = {
   source_url?: string;
 };
 
+export type RaceGroupCode =
+  | "world-marathon-majors"
+  | "utmb-world-series"
+  | "utmb-index";
+
+export type RaceGroupLevel = "major" | "final" | "event" | "index";
+
+export type RaceGroupMembershipSeed = {
+  seriesSlug: string;
+  groupCode: RaceGroupCode;
+  label: string;
+  level: RaceGroupLevel;
+  sourceUrl: string;
+  checkedAt: string;
+  note: string;
+};
+
+export type RaceGroupDefinition = {
+  code: RaceGroupCode;
+  name: string;
+  shortName: string;
+  description: string;
+  qualificationNote: string;
+  sourceUrl: string;
+};
+
 export type Edition = {
   /** Stable ID from the fuller production catalogue, when one exists. */
   source_id?: number;

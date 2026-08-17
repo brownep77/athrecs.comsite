@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit",
     "verify:catalogue": "node --experimental-strip-types scripts/verify-catalogue.mjs",
     "verify:clubs": "node --experimental-strip-types scripts/verify-club-audit.mjs",
+    "verify:race-groups": "node --experimental-strip-types scripts/verify-race-groups.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

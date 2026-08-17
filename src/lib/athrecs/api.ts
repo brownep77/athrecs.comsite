@@ -9,6 +9,7 @@ import type {
   ClubSocialInfo,
   EntryStatus,
   EventListItem,
+  RaceGroupInfo,
   Sport,
 } from "./types";
 import {
@@ -22,6 +23,18 @@ import {
 async function ready() {
   await ensureAthrecsSeeded();
   return getSql();
+}
+
+function parseRaceGroups(value: unknown): RaceGroupInfo[] {
+  if (!value) return [];
+  if (Array.isArray(value)) return value as RaceGroupInfo[];
+  if (typeof value !== "string") return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? (parsed as RaceGroupInfo[]) : [];
+  } catch {
+    return [];
+  }
 }
 
 export const listEvents = createServerFn({ method: "GET" })
@@ -43,6 +56,7 @@ export const listEvents = createServerFn({ method: "GET" })
             dateFrom?: string;
             dateTo?: string;
             format?: string;
+            group?: string;
             offset?: number;
           }
         | undefined,
@@ -65,12 +79,18 @@ export const listEvents = createServerFn({ method: "GET" })
     const city = data.city?.trim() ? `%${data.city.trim().toLowerCase()}%` : null;
     const postcode = data.postcode?.trim() || null;
     const format = data.format?.trim() || null;
+    const group = data.group?.trim() || null;
     const { monthToRange } = await import("@/lib/athrecs/filters");
     const monthRange = data.month ? monthToRange(data.month) : null;
     const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
     const dateTo = data.dateTo?.trim() || monthRange?.to || null;
 
-    const rows = await sql<EventListItem & { distances_csv: string | null }>`
+    const rows = await sql<
+      Omit<EventListItem, "groups"> & {
+        distances_csv: string | null;
+        groups_json: string | RaceGroupInfo[] | null;
+      }
+    >`
       select
         e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
@@ -78,6 +98,20 @@ export const listEvents = createServerFn({ method: "GET" })
           select string_agg(d.distance_code, ',' order by d.distance_code)
           from event_distances d where d.event_id = e.id
         ) as distances_csv,
+        (
+          select coalesce(
+            json_agg(json_build_object(
+              'code', g.group_code,
+              'label', g.label,
+              'level', g.level,
+              'source_url', g.source_url,
+              'checked_at', g.checked_at::text,
+              'note', g.note
+            ) order by g.group_code)::text,
+            '[]'
+          )
+          from event_groups g where g.event_id = e.id
+        ) as groups_json,
         (
           select ed.event_date::text from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
@@ -124,6 +158,13 @@ export const listEvents = createServerFn({ method: "GET" })
           )
         )
         and (${surface}::text is null or e.surface = ${surface})
+        and (
+          ${group}::text is null
+          or exists (
+            select 1 from event_groups g
+            where g.event_id = e.id and g.group_code = ${group}
+          )
+        )
         and (${country}::text is null or e.country = ${country} or e.county = ${country})
         and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
         and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city} or lower(e.county) like ${city})
@@ -184,7 +225,8 @@ export const listEvents = createServerFn({ method: "GET" })
     const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } =
       await import("@/lib/athrecs/parkrun-dates");
     const mapped = rows
-      .map((r) => {
+      .map((rawRow) => {
+        const { groups_json, ...r } = rawRow;
         const distances = sanitizeDistances(
           r.name,
           r.distances_csv ? r.distances_csv.split(",") : [],
@@ -201,6 +243,7 @@ export const listEvents = createServerFn({ method: "GET" })
         return {
           ...r,
           distances,
+          groups: parseRaceGroups(groups_json),
           next_date: nextDate,
           upcoming_count:
             r.sport === "Parkrun" ? remainingParkrunCount(r.name, today) : r.upcoming_count,
@@ -280,6 +323,20 @@ export const getEventBySlug = createServerFn({ method: "GET" })
     const distances = await sql<{ distance_code: string }>`
       select distance_code from event_distances where event_id = ${event.id}
     `;
+    const groups = await sql<RaceGroupInfo>`
+      select
+        group_code as code,
+        label,
+        level,
+        source_url,
+        checked_at::text as checked_at,
+        note
+      from event_groups
+      where event_id = ${event.id}
+      order by
+        case level when 'final' then 0 when 'major' then 1 when 'event' then 2 else 3 end,
+        label
+    `;
     const editions = await sql<{
       id: number;
       event_date: string;
@@ -333,7 +390,12 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       ...generated.filter((row) => !storedDates.has(row.event_date)),
     ].sort((a, b) => a.event_date.localeCompare(b.event_date));
 
-    const relatedRows = await sql<EventListItem & { distances_csv: string | null }>`
+    const relatedRows = await sql<
+      Omit<EventListItem, "groups"> & {
+        distances_csv: string | null;
+        groups_json: string | RaceGroupInfo[] | null;
+      }
+    >`
       select
         e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
@@ -341,6 +403,20 @@ export const getEventBySlug = createServerFn({ method: "GET" })
           select string_agg(d.distance_code, ',' order by d.distance_code)
           from event_distances d where d.event_id = e.id
         ) as distances_csv,
+        (
+          select coalesce(
+            json_agg(json_build_object(
+              'code', g.group_code,
+              'label', g.label,
+              'level', g.level,
+              'source_url', g.source_url,
+              'checked_at', g.checked_at::text,
+              'note', g.note
+            ) order by g.group_code)::text,
+            '[]'
+          )
+          from event_groups g where g.event_id = e.id
+        ) as groups_json,
         (
           select ed.event_date::text from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
@@ -386,14 +462,22 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       limit 8
     `;
     const { sanitizeDistances } = await import("@/lib/athrecs/filters");
-    const related = relatedRows.map((row) => ({
-      ...row,
-      distances: sanitizeDistances(row.name, row.distances_csv ? row.distances_csv.split(",") : []),
-      next_status: (row.next_status as EntryStatus) ?? null,
-    }));
+    const related = relatedRows.map((rawRow) => {
+      const { groups_json, ...row } = rawRow;
+      return {
+        ...row,
+        distances: sanitizeDistances(
+          row.name,
+          row.distances_csv ? row.distances_csv.split(",") : [],
+        ),
+        groups: parseRaceGroups(groups_json),
+        next_status: (row.next_status as EntryStatus) ?? null,
+      };
+    });
 
     return {
       event,
+      groups,
       distances: distances.map((d) => d.distance_code),
       upcoming,
       past: editions.filter((e) => e.event_date < today),
@@ -657,6 +741,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             dateFrom?: string;
             dateTo?: string;
             format?: string;
+            group?: string;
           }
         | undefined,
     ) => input ?? {},
@@ -678,6 +763,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const city = data.city?.trim() ? `%${data.city.trim().toLowerCase()}%` : null;
     const postcode = data.postcode?.trim() || null;
     const format = data.format?.trim() || null;
+    const group = data.group?.trim() || null;
     const { monthToRange } = await import("@/lib/athrecs/filters");
     const monthRange = data.month ? monthToRange(data.month) : null;
     const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
@@ -734,6 +820,13 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         )
         and (${surface}::text is null or e.surface = ${surface})
         and (${sport}::text is null or e.sport = ${sport})
+        and (
+          ${group}::text is null
+          or exists (
+            select 1 from event_groups g
+            where g.event_id = e.id and g.group_code = ${group}
+          )
+        )
         and (${country}::text is null or e.country = ${country} or e.county = ${country})
         and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
         and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city})
@@ -777,6 +870,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         select e.id, e.slug, e.name, e.sport, e.city, e.county, e.country, e.area, e.surface, e.website
         from events e
         where e.sport = 'Parkrun'
+          and ${group}::text is null
           and (${q}::text is null
             or lower(e.name) like ${q}
             or lower(e.city) like ${q}
