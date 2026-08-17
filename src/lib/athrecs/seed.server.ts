@@ -12,7 +12,7 @@ import {
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-eight-v94";
+const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-nine-v95";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -858,12 +858,33 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
   );
   const editionIds = new Map(editionRows.map((row) => [row.edition_key, row.id]));
 
+  const explicitOptionsWithoutOfficialIds = targetEditions
+    .filter(
+      (edition) =>
+        Boolean(edition.entryOptions?.length) &&
+        !edition.entryOptions?.some((option) => option.providerCode === "official"),
+    )
+    .map((edition) => editionIds.get(`${edition.seriesSlug}|${edition.date}|${edition.distance}`))
+    .filter((editionId): editionId is number => editionId != null);
+  if (explicitOptionsWithoutOfficialIds.length) {
+    const placeholders = explicitOptionsWithoutOfficialIds
+      .map((_, index) => `$${index + 1}`)
+      .join(", ");
+    await sql.query(
+      `delete from edition_entry_options
+       where edition_id in (${placeholders})
+         and provider_code = 'official'
+         and not is_verified`,
+      explicitOptionsWithoutOfficialIds,
+    );
+  }
+
   const rows = targetEditions.flatMap((edition) => {
     const editionId = editionIds.get(`${edition.seriesSlug}|${edition.date}|${edition.distance}`);
     if (!editionId) return [];
 
     const options = [...(edition.entryOptions ?? [])];
-    if (edition.entryUrl && !options.some((option) => option.providerCode === "official")) {
+    if (edition.entryUrl && options.length === 0) {
       options.unshift({
         providerCode: "official",
         providerName: "Official race entry",
