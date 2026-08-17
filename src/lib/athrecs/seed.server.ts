@@ -12,7 +12,7 @@ import {
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-ten-hotfix-v97";
+const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-ten-hotfix-v98";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -328,10 +328,19 @@ async function ensureSchema(sql: Sql): Promise<void> {
       now(),
       coalesce(nullif(ed.source_url, ''), ed.entry_url),
       false,
-      true
+      false
     from editions ed
     where nullif(trim(ed.entry_url), '') is not null
     on conflict (edition_id, provider_code) do nothing`,
+    `update edition_entry_options option
+      set is_primary = true, updated_at = now()
+      where option.provider_code = 'official'
+        and not exists (
+          select 1
+          from edition_entry_options existing_primary
+          where existing_primary.edition_id = option.edition_id
+            and existing_primary.is_primary
+        )`,
   ];
   for (const statement of statements) await sql.query(statement);
 }
