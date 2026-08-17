@@ -103,6 +103,34 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     fromDate: "2026-10-10",
     toDate: "2026-10-11",
   },
+  {
+    seriesSlug: "dorney-lake-half-marathon-10k-5k-november",
+    distance: "10K",
+    fromDate: "2026-11-08",
+    toDate: "2026-11-08",
+    toDistance: "Half",
+  },
+  {
+    seriesSlug: "holyrood-park-5k-10k-half-marathon-november",
+    distance: "10K",
+    fromDate: "2026-11-08",
+    toDate: "2026-11-08",
+    toDistance: "Half",
+  },
+  {
+    seriesSlug: "strathclyde-park-5k-10k-half-marathon-november",
+    distance: "10K",
+    fromDate: "2026-11-08",
+    toDate: "2026-11-08",
+    toDistance: "Half",
+  },
+  {
+    seriesSlug: "windsor-trail-run-half-marathon-10k-november",
+    distance: "10K",
+    fromDate: "2026-11-08",
+    toDate: "2026-11-08",
+    toDistance: "Half",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -334,6 +362,48 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
   "dirt-half-challenge|2026-11-07|Half": {
     startTime: "10:00",
     source: "https://dirtrunning.org.uk/dirt-half/",
+  },
+  "dorney-lake-half-marathon-10k-5k-november|2026-11-08|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:10",
+    source: "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+  },
+  "dorney-lake-half-marathon-10k-5k-november|2026-11-08|Half": {
+    startTime: "09:10",
+    source: "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+  },
+  "holyrood-park-5k-10k-half-marathon-november|2026-11-08|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:30",
+    source: "https://www.letsdothis.com/gb/e/holyrood-park-5k10khalf-marathon-november-2026-261976",
+  },
+  "holyrood-park-5k-10k-half-marathon-november|2026-11-08|Half": {
+    startTime: "09:30",
+    source: "https://www.letsdothis.com/gb/e/holyrood-park-5k10khalf-marathon-november-2026-261976",
+  },
+  "strathclyde-park-5k-10k-half-marathon-november|2026-11-08|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:45",
+    source:
+      "https://www.letsdothis.com/gb/e/strathclyde-park-5k10khalf-marathon-november-2026-264235",
+  },
+  "strathclyde-park-5k-10k-half-marathon-november|2026-11-08|Half": {
+    startTime: "09:45",
+    source:
+      "https://www.letsdothis.com/gb/e/strathclyde-park-5k10khalf-marathon-november-2026-264235",
+  },
+  "windsor-trail-run-half-marathon-10k-november|2026-11-08|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:20",
+    source: "https://www.runthrough.co.uk/event/windsor-trail-run-november-2026",
+  },
+  "windsor-trail-run-half-marathon-10k-november|2026-11-08|Half": {
+    startTime: "09:20",
+    source: "https://www.runthrough.co.uk/event/windsor-trail-run-november-2026",
   },
 };
 
@@ -853,10 +923,64 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "Dirt Running",
     website: "https://dirtrunning.org.uk/dirt-half/",
   },
+  "dorney-lake-half-marathon-10k-5k-november": {
+    name: "Run Dorney Lake Half Marathon, 10K & 5K — November",
+    city: "Dorney",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Dorney Lake, Court Lane",
+    surface: "Road",
+    summary: "Run Dorney Lake Half Marathon — Dorney Lake, Buckinghamshire.",
+    description:
+      "A flat, multi-lap road half marathon around the London 2012 rowing lake at Dorney, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+  },
+  "holyrood-park-5k-10k-half-marathon-november": {
+    name: "Holyrood Park 5K, 10K & Half Marathon — November",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "Holyrood Park and Arthur's Seat",
+    surface: "Road",
+    summary: "Holyrood Park Half Marathon — Edinburgh, Scotland.",
+    description:
+      "A four-lap road half marathon in Holyrood Park beneath Arthur's Seat, organised by Up and Running Events.",
+    organiser: "Up and Running Events",
+    website: "https://www.upandrunningevents.co.uk/",
+  },
+  "strathclyde-park-5k-10k-half-marathon-november": {
+    name: "Strathclyde Park 5K, 10K & Half Marathon — November",
+    city: "Motherwell",
+    county: "North Lanarkshire",
+    country: "Scotland",
+    area: "Strathclyde Country Park and Strathclyde Loch",
+    surface: "Road",
+    summary: "Strathclyde Park Half Marathon — Motherwell, North Lanarkshire.",
+    description:
+      "A flat road half marathon on the paths around Strathclyde Loch, organised by Up and Running Events.",
+    organiser: "Up and Running Events",
+    website:
+      "https://www.upandrunningevents.co.uk/event-details/strathclyde-park-5k-10k-half-marathon-3",
+  },
+  "windsor-trail-run-half-marathon-10k-november": {
+    name: "Windsor Trail Run Half Marathon & 10K — November",
+    city: "Windsor",
+    county: "Berkshire",
+    country: "England",
+    area: "Alexandra Gardens, Windsor Great Park and the Long Walk",
+    surface: "Trail",
+    summary: "Windsor Trail Run Half Marathon — Windsor, Berkshire.",
+    description:
+      "A flat off-road half marathon from Alexandra Gardens into Windsor Great Park and along the Long Walk, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/windsor-trail-run-november-2026",
+  },
 };
 
 /**
- * Entry routes checked on 17 August 2026.
+ * Entry routes checked on 17–18 August 2026.
  *
  * A provider is included only when the exact destination offered registration
  * for the listed 2026 edition. Listing-only and "Notify me" pages are excluded.
@@ -2273,6 +2397,146 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       priceCurrency: "GBP",
       checkedAt: "2026-08-17T23:59:00+01:00",
       sourceUrl: "https://www.timeoutdoors.com/events/dirt-half-challenge",
+      isVerified: true,
+    },
+  ],
+  "dorney-lake-half-marathon-10k-5k-november|2026-11-08|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-november-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/run-dorney-lake-half-marathon-10k-5k-november-2026-192346",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/run-dorney-lake-half-marathon-10k-5k-november-2026-192346",
+      isVerified: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/run-dorney-5k-10k-half-marathon/8th-november-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36.04,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/run-dorney-5k-10k-half-marathon/8th-november-2026",
+      isVerified: true,
+    },
+  ],
+  "holyrood-park-5k-10k-half-marathon-november|2026-11-08|Half": [
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl: "https://findarace.com/events/holyrood-park-5k-10k-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/holyrood-park-5k-10k-half-marathon",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/holyrood-park-5k10khalf-marathon-november-2026-261976",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 27.9,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/holyrood-park-5k10khalf-marathon-november-2026-261976",
+      isVerified: true,
+    },
+  ],
+  "strathclyde-park-5k-10k-half-marathon-november|2026-11-08|Half": [
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl: "https://findarace.com/events/strathclyde-park-5k-10k-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 27.9,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/strathclyde-park-5k-10k-half-marathon",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/strathclyde-park-5k10khalf-marathon-november-2026-264235",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 27.9,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/strathclyde-park-5k10khalf-marathon-november-2026-264235",
+      isVerified: true,
+    },
+  ],
+  "windsor-trail-run-half-marathon-10k-november|2026-11-08|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/windsor-trail-run-november-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/windsor-trail-run-november-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl: "https://www.letsdothis.com/gb/e/windsor-trail-run-november-2026-252309",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/windsor-trail-run-november-2026-252309",
+      isVerified: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/windsor-trail-run/8th-november-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 44,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T00:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/windsor-trail-run/8th-november-2026",
       isVerified: true,
     },
   ],
