@@ -9,9 +9,10 @@ import {
   seriesList,
   clubSlugAliases,
 } from "@/data/catalogue";
+import { ukMarathonEditionReplacements } from "@/data/entry-options-uk-marathons";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-marathon-entry-batch-three-v72";
+const SEED_VERSION = "athrecs-uk-marathon-entry-batch-four-v73";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -632,6 +633,46 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
 
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
   const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
+
+  for (const replacement of ukMarathonEditionReplacements) {
+    const eventId = eventIds.get(replacement.seriesSlug);
+    if (!eventId) continue;
+    await sql.query(
+      `update editions old_edition
+       set event_date = $4::date
+       where old_edition.event_id = $1::int
+         and old_edition.event_date = $2::date
+         and old_edition.distance_code = $3::text
+         and not exists (
+           select 1 from results where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1
+           from editions corrected_edition
+           where corrected_edition.event_id = old_edition.event_id
+             and corrected_edition.event_date = $4::date
+             and corrected_edition.distance_code = old_edition.distance_code
+         )`,
+      [eventId, replacement.fromDate, replacement.distance, replacement.toDate],
+    );
+    await sql.query(
+      `delete from editions old_edition
+       where old_edition.event_id = $1::int
+         and old_edition.event_date = $2::date
+         and old_edition.distance_code = $3::text
+         and not exists (
+           select 1 from results where edition_id = old_edition.id
+         )
+         and exists (
+           select 1
+           from editions corrected_edition
+           where corrected_edition.event_id = old_edition.event_id
+             and corrected_edition.event_date = $4::date
+             and corrected_edition.distance_code = old_edition.distance_code
+         )`,
+      [eventId, replacement.fromDate, replacement.distance, replacement.toDate],
+    );
+  }
 
   const groupRows = raceGroupMemberships
     .map((membership) => [
