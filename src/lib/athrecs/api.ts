@@ -7,6 +7,7 @@ import type {
   ClubContactInfo,
   ClubListItem,
   ClubSocialInfo,
+  EditionEntryOption,
   EntryStatus,
   EventListItem,
   RaceGroupInfo,
@@ -32,6 +33,18 @@ function parseRaceGroups(value: unknown): RaceGroupInfo[] {
   try {
     const parsed = JSON.parse(value);
     return Array.isArray(parsed) ? (parsed as RaceGroupInfo[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function parseEntryOptions(value: unknown): EditionEntryOption[] {
+  if (!value) return [];
+  if (Array.isArray(value)) return value as EditionEntryOption[];
+  if (typeof value !== "string") return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? (parsed as EditionEntryOption[]) : [];
   } catch {
     return [];
   }
@@ -337,7 +350,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         case level when 'final' then 0 when 'major' then 1 when 'event' then 2 else 3 end,
         label
     `;
-    const editions = await sql<{
+    const editionRows = await sql<{
       id: number;
       event_date: string;
       distance_code: string;
@@ -348,6 +361,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       start_time: string | null;
       notes: string | null;
       result_count: number;
+      entry_options_json: string | EditionEntryOption[] | null;
     }>`
       select
         ed.id,
@@ -359,11 +373,41 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ed.source_url,
         ed.start_time,
         ed.notes,
-        (select count(*)::int from results r where r.edition_id = ed.id) as result_count
+        (select count(*)::int from results r where r.edition_id = ed.id) as result_count,
+        (
+          select coalesce(
+            json_agg(json_build_object(
+              'id', option.id,
+              'provider_code', option.provider_code,
+              'provider_name', option.provider_name,
+              'entry_url', option.entry_url,
+              'entry_type', option.entry_type,
+              'status', option.status,
+              'price_amount', option.price_amount,
+              'price_currency', option.price_currency,
+              'opens_at', option.opens_at::text,
+              'closes_at', option.closes_at::text,
+              'checked_at', option.checked_at::text,
+              'source_url', option.source_url,
+              'is_verified', option.is_verified,
+              'is_primary', option.is_primary
+            ) order by
+              option.is_primary desc,
+              case option.entry_type when 'official' then 0 else 1 end,
+              option.provider_name)::text,
+            '[]'
+          )
+          from edition_entry_options option
+          where option.edition_id = ed.id
+        ) as entry_options_json
       from editions ed
       where ed.event_id = ${event.id}
       order by ed.event_date desc
     `;
+    const editions = editionRows.map(({ entry_options_json, ...edition }) => ({
+      ...edition,
+      entry_options: parseEntryOptions(entry_options_json),
+    }));
 
     const storedUpcoming = editions.filter((e) => e.event_date >= today);
     const storedDates = new Set(storedUpcoming.map((e) => e.event_date));
@@ -382,6 +426,26 @@ export const getEventBySlug = createServerFn({ method: "GET" })
               start_time: parkrunStartTime(event.country, /junior/i.test(event.name)),
               notes: null,
               result_count: 0,
+              entry_options: event.website
+                ? [
+                    {
+                      id: -1000 - index,
+                      provider_code: "official",
+                      provider_name: "Official parkrun page",
+                      entry_url: event.website,
+                      entry_type: "official" as const,
+                      status: "open" as const,
+                      price_amount: null,
+                      price_currency: null,
+                      opens_at: null,
+                      closes_at: null,
+                      checked_at: today,
+                      source_url: event.website,
+                      is_verified: true,
+                      is_primary: true,
+                    },
+                  ]
+                : [],
             };
           })
         : [];
@@ -698,12 +762,14 @@ export const getDbStatus = createServerFn({ method: "GET" }).handler(async () =>
     athletes: number;
     events: number;
     editions: number;
+    entry_options: number;
     results: number;
   }>`select
     (select count(*)::int from clubs) as clubs,
     (select count(*)::int from athletes) as athletes,
     (select count(*)::int from events) as events,
     (select count(*)::int from editions) as editions,
+    (select count(*)::int from edition_entry_options) as entry_options,
     (select count(*)::int from results) as results`;
   const meta = await sql<{ value: string }>`
     select value from app_meta where key = 'seed_version' limit 1
@@ -717,6 +783,7 @@ export const getDbStatus = createServerFn({ method: "GET" }).handler(async () =>
     athletes: r?.athletes ?? 0,
     events: r?.events ?? 0,
     editions: r?.editions ?? 0,
+    entryOptions: r?.entry_options ?? 0,
     results: r?.results ?? 0,
   };
 });

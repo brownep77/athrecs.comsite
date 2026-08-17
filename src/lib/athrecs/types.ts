@@ -13,10 +13,29 @@ export type Sport =
 
 export type EntryStatus = "Open" | "ClosingSoon" | "Closed" | "Finished" | "TBC";
 
-export type RaceGroupCode =
-  | "world-marathon-majors"
-  | "utmb-world-series"
-  | "utmb-index";
+export type EntryOptionType = "official" | "third_party" | "charity" | "tour_operator";
+
+export type EntryOptionStatus =
+  "open" | "closing_soon" | "ballot" | "waitlist" | "sold_out" | "closed" | "unknown";
+
+export type EditionEntryOption = {
+  id: number;
+  provider_code: string;
+  provider_name: string;
+  entry_url: string;
+  entry_type: EntryOptionType;
+  status: EntryOptionStatus;
+  price_amount: number | string | null;
+  price_currency: string | null;
+  opens_at: string | null;
+  closes_at: string | null;
+  checked_at: string;
+  source_url: string | null;
+  is_verified: boolean;
+  is_primary: boolean;
+};
+
+export type RaceGroupCode = "world-marathon-majors" | "utmb-world-series" | "utmb-index";
 
 export type RaceGroupInfo = {
   code: RaceGroupCode;
