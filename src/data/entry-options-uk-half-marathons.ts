@@ -56,6 +56,13 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     toDate: "2026-10-11",
   },
   {
+    seriesSlug: "great-eastern-run",
+    distance: "5K",
+    fromDate: "2026-10-11",
+    toDate: "2026-10-11",
+    toDistance: "Half",
+  },
+  {
     seriesSlug: "royal-parks-foundation-half-marathon",
     distance: "Half",
     fromDate: "2026-10-10",
@@ -146,6 +153,12 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     source: "https://runleicester.co.uk/event-info/",
   },
   "great-eastern-run|2026-10-11|Half": {
+    startTime: "10:30",
+    source: "https://www.greateastern.run/",
+  },
+  "great-eastern-run|2026-10-11|5K": {
+    distance: "Half",
+    distanceKm: 21.1,
     startTime: "10:30",
     source: "https://www.greateastern.run/",
   },
