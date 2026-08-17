@@ -12,7 +12,7 @@ import {
 import { ukMarathonEditionReplacements } from "@/data/entry-options-uk-marathons";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-marathon-entry-batch-eight-hotfix-v78";
+const SEED_VERSION = "athrecs-uk-marathon-entry-batch-eight-hotfix-v79";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -637,9 +637,11 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   for (const replacement of ukMarathonEditionReplacements) {
     const eventId = eventIds.get(replacement.seriesSlug);
     if (!eventId) continue;
+    const targetDistance = replacement.toDistance ?? replacement.distance;
     await sql.query(
       `update editions old_edition
-       set event_date = $4::date
+       set event_date = $4::date,
+           distance_code = $5::text
        where old_edition.event_id = $1::int
          and old_edition.event_date = $2::date
          and old_edition.distance_code = $3::text
@@ -651,9 +653,9 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
            from editions corrected_edition
            where corrected_edition.event_id = old_edition.event_id
              and corrected_edition.event_date = $4::date
-             and corrected_edition.distance_code = old_edition.distance_code
+             and corrected_edition.distance_code = $5::text
          )`,
-      [eventId, replacement.fromDate, replacement.distance, replacement.toDate],
+      [eventId, replacement.fromDate, replacement.distance, replacement.toDate, targetDistance],
     );
     await sql.query(
       `delete from editions old_edition
@@ -668,9 +670,9 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
            from editions corrected_edition
            where corrected_edition.event_id = old_edition.event_id
              and corrected_edition.event_date = $4::date
-             and corrected_edition.distance_code = old_edition.distance_code
+             and corrected_edition.distance_code = $5::text
          )`,
-      [eventId, replacement.fromDate, replacement.distance, replacement.toDate],
+      [eventId, replacement.fromDate, replacement.distance, replacement.toDate, targetDistance],
     );
   }
 
