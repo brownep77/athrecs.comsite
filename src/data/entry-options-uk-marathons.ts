@@ -197,6 +197,12 @@ export const ukMarathonEditionOverrides: Record<string, Partial<Edition>> = {
     startTime: "09:00",
     source: "https://www.nice-work.org.uk/e/chelmsford-marathon-and-half-marathon-9483",
   },
+  "the-chelmsford-marathon|2026-10-11|Half": {
+    distance: "Marathon",
+    distanceKm: 42.2,
+    startTime: "09:00",
+    source: "https://www.nice-work.org.uk/e/chelmsford-marathon-and-half-marathon-9483",
+  },
 };
 
 /** Correct source metadata for marathon records whose imported region was mistaken for a country. */
