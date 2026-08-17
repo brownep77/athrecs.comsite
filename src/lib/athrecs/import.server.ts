@@ -1,5 +1,5 @@
 import { getSql } from "@/lib/db";
-import type { EntryStatus, Sport } from "./types";
+import type { EntryOptionStatus, EntryOptionType, EntryStatus, Sport } from "./types";
 
 // Append-only results import (athletes + finish times)
 export {
@@ -22,12 +22,23 @@ const SPORTS: Sport[] = [
   "OCR",
 ];
 
-const STATUSES: EntryStatus[] = [
-  "Open",
-  "ClosingSoon",
-  "Closed",
-  "Finished",
-  "TBC",
+const STATUSES: EntryStatus[] = ["Open", "ClosingSoon", "Closed", "Finished", "TBC"];
+
+const ENTRY_OPTION_TYPES: EntryOptionType[] = [
+  "official",
+  "third_party",
+  "charity",
+  "tour_operator",
+];
+
+const ENTRY_OPTION_STATUSES: EntryOptionStatus[] = [
+  "open",
+  "closing_soon",
+  "ballot",
+  "waitlist",
+  "sold_out",
+  "closed",
+  "unknown",
 ];
 
 export function slugify(input: string): string {
@@ -58,9 +69,76 @@ function parseStatus(raw: string | undefined): EntryStatus {
   return hit;
 }
 
+function normalizedEnum(raw: string): string {
+  return raw
+    .trim()
+    .toLowerCase()
+    .replace(/[\s-]+/g, "_");
+}
+
+function parseEntryOptionType(
+  raw: string | undefined,
+  fallback: EntryOptionType = "official",
+): EntryOptionType {
+  const normalized = normalizedEnum(raw || fallback);
+  const hit = ENTRY_OPTION_TYPES.find((value) => value === normalized);
+  if (!hit) throw new Error(`Unknown entry type "${raw}"`);
+  return hit;
+}
+
+function parseEntryOptionStatus(raw: string | undefined): EntryOptionStatus {
+  const normalized = normalizedEnum(raw || "unknown");
+  const hit = ENTRY_OPTION_STATUSES.find((value) => value === normalized);
+  if (!hit) throw new Error(`Unknown entry option status "${raw}"`);
+  return hit;
+}
+
+function entryOptionStatusForEdition(raw: string | undefined): EntryOptionStatus {
+  switch (parseStatus(raw)) {
+    case "Open":
+      return "open";
+    case "ClosingSoon":
+      return "closing_soon";
+    case "Closed":
+    case "Finished":
+      return "closed";
+    default:
+      return "unknown";
+  }
+}
+
+function httpUrl(raw: string, label: string): string {
+  let url: URL;
+  try {
+    url = new URL(raw);
+  } catch {
+    throw new Error(`${label} must be a complete http(s) URL`);
+  }
+  if (url.protocol !== "http:" && url.protocol !== "https:") {
+    throw new Error(`${label} must use http or https`);
+  }
+  return url.toString();
+}
+
+function optionalDate(raw: string | undefined, label: string): string | null {
+  if (!raw?.trim()) return null;
+  const value = raw.trim().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    throw new Error(`${label} must use YYYY-MM-DD`);
+  }
+  return value;
+}
+
+function csvBoolean(raw: string): boolean | undefined {
+  if (!raw.trim()) return undefined;
+  return /^(?:1|true|yes|y)$/i.test(raw.trim());
+}
+
 export type ImportEventInput = {
   name: string;
   sport: string;
+  country?: string;
+  county?: string;
   city?: string;
   area?: string;
   surface?: string;
@@ -81,7 +159,24 @@ export type ImportEditionInput = {
   status?: string;
   startTime?: string;
   entryUrl?: string;
+  entryOptions?: ImportEntryOptionInput[];
   source?: string;
+};
+
+export type ImportEntryOptionInput = {
+  providerCode?: string;
+  providerName: string;
+  entryUrl: string;
+  entryType?: string;
+  status?: string;
+  priceAmount?: number;
+  priceCurrency?: string;
+  opensAt?: string;
+  closesAt?: string;
+  checkedAt?: string;
+  sourceUrl?: string;
+  isVerified?: boolean;
+  isPrimary?: boolean;
 };
 
 export type ImportBundle = {
@@ -113,7 +208,13 @@ function parseCsvLine(line: string): string[] {
   return out;
 }
 
-/** CSV columns: name,sport,city,date,distance,distance_km,status,start_time,website,organiser,surface,entry_url */
+/**
+ * CSV supports the legacy official `entry_url` plus one provider option per row:
+ * provider_name,provider_code,provider_entry_url,provider_type,provider_status,
+ * provider_price,provider_currency,provider_opens,provider_closes,
+ * provider_checked_at,provider_source_url,provider_verified,provider_primary.
+ * Repeat an edition row to add another provider.
+ */
 export function parseEventsCsv(csv: string): {
   events: ImportEventInput[];
   editions: ImportEditionInput[];
@@ -134,7 +235,7 @@ export function parseEventsCsv(csv: string): {
     const cols = parseCsvLine(line);
     const get = (name: string) => {
       const i = idx(name);
-      return i >= 0 ? cols[i] ?? "" : "";
+      return i >= 0 ? (cols[i] ?? "") : "";
     };
     const name = get("name") || get("event") || get("event_name");
     if (!name) continue;
@@ -146,6 +247,8 @@ export function parseEventsCsv(csv: string): {
         slug,
         name,
         sport,
+        country: get("country") || "England",
+        county: get("county") || "Norfolk",
         city,
         area: get("area") || "",
         surface: get("surface") || "Road",
@@ -163,6 +266,27 @@ export function parseEventsCsv(csv: string): {
     }
     const date = get("date") || get("event_date");
     if (date) {
+      const providerEntryUrl = get("provider_entry_url");
+      const providerType = get("provider_type") || "third_party";
+      const entryOptions: ImportEntryOptionInput[] | undefined = providerEntryUrl
+        ? [
+            {
+              providerCode: get("provider_code") || undefined,
+              providerName: get("provider_name") || "Entry provider",
+              entryUrl: providerEntryUrl,
+              entryType: providerType,
+              status: get("provider_status") || "unknown",
+              priceAmount: get("provider_price") ? Number(get("provider_price")) : undefined,
+              priceCurrency: get("provider_currency") || undefined,
+              opensAt: get("provider_opens") || undefined,
+              closesAt: get("provider_closes") || undefined,
+              checkedAt: get("provider_checked_at") || undefined,
+              sourceUrl: get("provider_source_url") || providerEntryUrl,
+              isVerified: csvBoolean(get("provider_verified")),
+              isPrimary: csvBoolean(get("provider_primary")),
+            },
+          ]
+        : undefined;
       editions.push({
         eventSlug: slug,
         eventName: name,
@@ -172,6 +296,7 @@ export function parseEventsCsv(csv: string): {
         status: get("status") || "TBC",
         startTime: get("start_time") || get("start") || undefined,
         entryUrl: get("entry_url") || undefined,
+        entryOptions,
         source: get("source") || get("website") || undefined,
       });
     }
@@ -183,11 +308,13 @@ export function parseEventsCsv(csv: string): {
 export async function applyImportBundle(bundle: ImportBundle): Promise<{
   eventsUpserted: number;
   editionsUpserted: number;
+  entryOptionsUpserted: number;
   errors: string[];
 }> {
   const sql = await getSql();
   let eventsUpserted = 0;
   let editionsUpserted = 0;
+  let entryOptionsUpserted = 0;
   const errors: string[] = [];
 
   for (const raw of bundle.events ?? []) {
@@ -205,6 +332,8 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
           update events set
             name = ${raw.name},
             sport = ${sport},
+            country = ${raw.country ?? "England"},
+            county = ${raw.county ?? "Norfolk"},
             city = ${raw.city ?? ""},
             area = ${raw.area ?? ""},
             surface = ${raw.surface ?? "Road"},
@@ -220,7 +349,8 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
             slug, name, sport, country, county, city, area, surface,
             summary, description, organiser, website, featured
           ) values (
-            ${slug}, ${raw.name}, ${sport}, ${"England"}, ${"Norfolk"},
+            ${slug}, ${raw.name}, ${sport}, ${raw.country ?? "England"},
+            ${raw.county ?? "Norfolk"},
             ${raw.city ?? ""}, ${raw.area ?? ""}, ${raw.surface ?? "Road"},
             ${raw.summary ?? ""}, ${raw.description ?? ""},
             ${raw.organiser ?? ""}, ${raw.website ?? ""}, ${false}
@@ -270,7 +400,7 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
       `;
       if (!again[0]) throw new Error(`Could not resolve event ${slug}`);
       const status = parseStatus(raw.status);
-      await sql`
+      const editionRows = await sql<{ id: number }>`
         insert into editions (
           event_id, event_date, distance_code, distance_km, status,
           entry_url, source_url, start_time
@@ -282,15 +412,130 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
         on conflict (event_id, event_date, distance_code) do update set
           distance_km = excluded.distance_km,
           status = excluded.status,
-          entry_url = excluded.entry_url,
-          source_url = excluded.source_url,
+          entry_url = coalesce(excluded.entry_url, editions.entry_url),
+          source_url = coalesce(excluded.source_url, editions.source_url),
           start_time = excluded.start_time
+        returning id
       `;
+      const editionId = editionRows[0]?.id;
+      if (!editionId) throw new Error(`Could not upsert edition ${slug} ${raw.date}`);
+
+      const options = [...(raw.entryOptions ?? [])];
+      if (
+        raw.entryUrl &&
+        !options.some((option) => {
+          const code = slugify(option.providerCode || option.providerName);
+          return (
+            code === "official" ||
+            (option.entryType != null && parseEntryOptionType(option.entryType) === "official")
+          );
+        })
+      ) {
+        options.unshift({
+          providerCode: "official",
+          providerName: "Official race entry",
+          entryUrl: raw.entryUrl,
+          entryType: "official",
+          status: entryOptionStatusForEdition(raw.status),
+          checkedAt: new Date().toISOString(),
+          sourceUrl: raw.source || raw.entryUrl,
+          isVerified: false,
+          isPrimary: true,
+        });
+      }
+
+      const normalizedOptions = options.map((option) => {
+        const providerName = option.providerName?.trim();
+        if (!providerName) throw new Error("Entry provider needs providerName");
+        const providerCode = slugify(option.providerCode || providerName);
+        if (!providerCode) throw new Error(`Could not create provider code for ${providerName}`);
+        const entryType = parseEntryOptionType(
+          option.entryType,
+          providerCode === "official" ? "official" : "third_party",
+        );
+        const priceAmount = option.priceAmount == null ? null : Number(option.priceAmount);
+        if (priceAmount != null && (!Number.isFinite(priceAmount) || priceAmount < 0)) {
+          throw new Error(`Bad entry price for ${providerName}`);
+        }
+        const priceCurrency = option.priceCurrency?.trim().toUpperCase() || null;
+        if (priceCurrency && !/^[A-Z]{3}$/.test(priceCurrency)) {
+          throw new Error(`Entry currency for ${providerName} must be a three-letter code`);
+        }
+        const checkedAt = option.checkedAt?.trim() || new Date().toISOString();
+        if (Number.isNaN(Date.parse(checkedAt))) {
+          throw new Error(`Bad checkedAt date for ${providerName}`);
+        }
+        return {
+          providerCode,
+          providerName,
+          entryUrl: httpUrl(option.entryUrl, `Entry URL for ${providerName}`),
+          entryType,
+          status: parseEntryOptionStatus(option.status),
+          priceAmount,
+          priceCurrency,
+          opensAt: optionalDate(option.opensAt, `opensAt for ${providerName}`),
+          closesAt: optionalDate(option.closesAt, `closesAt for ${providerName}`),
+          checkedAt,
+          sourceUrl: option.sourceUrl
+            ? httpUrl(option.sourceUrl, `Source URL for ${providerName}`)
+            : httpUrl(option.entryUrl, `Entry URL for ${providerName}`),
+          isVerified: option.isVerified === true,
+          isPrimary: option.isPrimary === true,
+        };
+      });
+
+      const explicitPrimary = normalizedOptions.findIndex((option) => option.isPrimary);
+      const officialPrimary = normalizedOptions.findIndex(
+        (option) => option.entryType === "official",
+      );
+      const primaryIndex = explicitPrimary >= 0 ? explicitPrimary : officialPrimary;
+      if (primaryIndex >= 0) {
+        await sql`
+          update edition_entry_options
+          set is_primary = false, updated_at = now()
+          where edition_id = ${editionId} and is_primary
+        `;
+      }
+      for (const [index, option] of normalizedOptions.entries()) {
+        const isPrimary = index === primaryIndex;
+        await sql`
+          insert into edition_entry_options (
+            edition_id, provider_code, provider_name, entry_url, entry_type,
+            status, price_amount, price_currency, opens_at, closes_at,
+            checked_at, source_url, is_verified, is_primary, updated_at
+          ) values (
+            ${editionId}, ${option.providerCode}, ${option.providerName},
+            ${option.entryUrl}, ${option.entryType}, ${option.status},
+            ${option.priceAmount}, ${option.priceCurrency},
+            ${option.opensAt}::date, ${option.closesAt}::date,
+            ${option.checkedAt}::timestamptz, ${option.sourceUrl},
+            ${option.isVerified}, ${isPrimary}, now()
+          )
+          on conflict (edition_id, provider_code) do update set
+            provider_name = excluded.provider_name,
+            entry_url = excluded.entry_url,
+            entry_type = excluded.entry_type,
+            status = excluded.status,
+            price_amount = excluded.price_amount,
+            price_currency = excluded.price_currency,
+            opens_at = excluded.opens_at,
+            closes_at = excluded.closes_at,
+            checked_at = excluded.checked_at,
+            source_url = excluded.source_url,
+            is_verified = excluded.is_verified,
+            is_primary = excluded.is_primary,
+            updated_at = now()
+        `;
+        entryOptionsUpserted += 1;
+        if (isPrimary) {
+          await sql`update editions set entry_url = ${option.entryUrl} where id = ${editionId}`;
+        }
+      }
       editionsUpserted += 1;
     } catch (e) {
       errors.push(e instanceof Error ? e.message : String(e));
     }
   }
 
-  return { eventsUpserted, editionsUpserted, errors };
+  return { eventsUpserted, editionsUpserted, entryOptionsUpserted, errors };
 }

@@ -11,7 +11,7 @@ import {
 } from "@/data/catalogue";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-race-groups-v67";
+const SEED_VERSION = "athrecs-entry-options-v68";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -155,6 +155,29 @@ async function ensureSchema(sql: Sql): Promise<void> {
       results_access text,
       unique (event_id, event_date, distance_code)
     )`,
+    `create table if not exists edition_entry_options (
+      id serial primary key,
+      edition_id int not null references editions(id) on delete cascade,
+      provider_code text not null,
+      provider_name text not null,
+      entry_url text not null,
+      entry_type text not null default 'official'
+        check (entry_type in ('official', 'third_party', 'charity', 'tour_operator')),
+      status text not null default 'unknown'
+        check (status in ('open', 'closing_soon', 'ballot', 'waitlist', 'sold_out', 'closed', 'unknown')),
+      price_amount numeric(12, 2)
+        check (price_amount is null or price_amount >= 0),
+      price_currency text,
+      opens_at date,
+      closes_at date,
+      checked_at timestamptz not null default now(),
+      source_url text,
+      is_verified boolean not null default false,
+      is_primary boolean not null default false,
+      created_at timestamptz not null default now(),
+      updated_at timestamptz not null default now(),
+      unique (edition_id, provider_code)
+    )`,
     `create table if not exists athletes (
       id serial primary key,
       source_id int,
@@ -281,6 +304,33 @@ async function ensureSchema(sql: Sql): Promise<void> {
     `create unique index if not exists athletes_source_id_idx on athletes(source_id) where source_id is not null`,
     `create unique index if not exists athletes_athrecs_id_idx on athletes(athrecs_id) where athrecs_id is not null`,
     `create unique index if not exists results_source_id_idx on results(source_id) where source_id is not null`,
+    `create index if not exists edition_entry_options_edition_idx on edition_entry_options(edition_id)`,
+    `create unique index if not exists edition_entry_options_one_primary_idx
+      on edition_entry_options(edition_id) where is_primary`,
+    `insert into edition_entry_options (
+      edition_id, provider_code, provider_name, entry_url, entry_type, status,
+      checked_at, source_url, is_verified, is_primary
+    )
+    select
+      ed.id,
+      'official',
+      'Official race entry',
+      ed.entry_url,
+      'official',
+      case ed.status
+        when 'Open' then 'open'
+        when 'ClosingSoon' then 'closing_soon'
+        when 'Closed' then 'closed'
+        when 'Finished' then 'closed'
+        else 'unknown'
+      end,
+      now(),
+      coalesce(nullif(ed.source_url, ''), ed.entry_url),
+      false,
+      true
+    from editions ed
+    where nullif(trim(ed.entry_url), '') is not null
+    on conflict (edition_id, provider_code) do nothing`,
   ];
   for (const statement of statements) await sql.query(statement);
 }
@@ -701,12 +751,142 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     75,
   );
 
+  await upsertCatalogueEntryOptions(sql, eventIds);
+
   await expandParkrunEditions(sql);
 
   await sql`
     insert into app_meta (key, value) values ('fixtures_catalogue_version', ${SEED_VERSION})
     on conflict (key) do update set value = excluded.value
   `;
+}
+
+async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, number>): Promise<void> {
+  const targetEditions = editionSeeds.filter(
+    (edition) =>
+      eventIds.has(edition.seriesSlug) &&
+      (Boolean(edition.entryUrl) || Boolean(edition.entryOptions?.length)),
+  );
+  if (!targetEditions.length) return;
+
+  const params: unknown[] = [];
+  const values = targetEditions.map((edition) => {
+    const key = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+    const valuesForRow = [eventIds.get(edition.seriesSlug), edition.date, edition.distance, key];
+    const placeholders = valuesForRow.map((value, index) => {
+      params.push(value);
+      const position = params.length;
+      return `$${position}${index === 0 ? "::int" : index === 1 ? "::date" : "::text"}`;
+    });
+    return `(${placeholders.join(", ")})`;
+  });
+  const editionRows = await sql.query<{ id: number; edition_key: string }>(
+    `select ed.id, target.edition_key
+     from (values ${values.join(", ")}) as target (
+       event_id, event_date, distance_code, edition_key
+     )
+     join editions ed
+       on ed.event_id = target.event_id
+      and ed.event_date = target.event_date
+      and ed.distance_code = target.distance_code`,
+    params,
+  );
+  const editionIds = new Map(editionRows.map((row) => [row.edition_key, row.id]));
+
+  const rows = targetEditions.flatMap((edition) => {
+    const editionId = editionIds.get(`${edition.seriesSlug}|${edition.date}|${edition.distance}`);
+    if (!editionId) return [];
+
+    const options = [...(edition.entryOptions ?? [])];
+    if (edition.entryUrl && !options.some((option) => option.providerCode === "official")) {
+      options.unshift({
+        providerCode: "official",
+        providerName: "Official race entry",
+        entryUrl: edition.entryUrl,
+        entryType: "official" as const,
+        status:
+          edition.status === "Open"
+            ? ("open" as const)
+            : edition.status === "ClosingSoon"
+              ? ("closing_soon" as const)
+              : edition.status === "Closed" || edition.status === "Finished"
+                ? ("closed" as const)
+                : ("unknown" as const),
+        checkedAt: new Date().toISOString(),
+        sourceUrl: edition.source,
+        isVerified: false,
+        isPrimary: true,
+      });
+    }
+
+    const explicitPrimary = options.findIndex((option) => option.isPrimary);
+    const officialPrimary = options.findIndex((option) => option.entryType === "official");
+    const primaryIndex = explicitPrimary >= 0 ? explicitPrimary : officialPrimary;
+
+    return options.map((option, index) => [
+      editionId,
+      option.providerCode,
+      option.providerName,
+      option.entryUrl,
+      option.entryType,
+      option.status ?? "unknown",
+      option.priceAmount ?? null,
+      option.priceCurrency?.toUpperCase() ?? null,
+      option.opensAt ?? null,
+      option.closesAt ?? null,
+      option.checkedAt,
+      option.sourceUrl ?? option.entryUrl,
+      option.isVerified ?? false,
+      index === primaryIndex,
+    ]);
+  });
+
+  if (!rows.length) return;
+  const primaryEditionIds = [...new Set(rows.filter((row) => row[13]).map((row) => row[0]))];
+  if (primaryEditionIds.length) {
+    const placeholders = primaryEditionIds.map((_, index) => `$${index + 1}`).join(", ");
+    await sql.query(
+      `update edition_entry_options set is_primary = false, updated_at = now()
+       where edition_id in (${placeholders}) and is_primary`,
+      primaryEditionIds,
+    );
+  }
+  await insertRows(
+    sql,
+    "edition_entry_options",
+    [
+      "edition_id",
+      "provider_code",
+      "provider_name",
+      "entry_url",
+      "entry_type",
+      "status",
+      "price_amount",
+      "price_currency",
+      "opens_at",
+      "closes_at",
+      "checked_at",
+      "source_url",
+      "is_verified",
+      "is_primary",
+    ],
+    rows,
+    `on conflict (edition_id, provider_code) do update set
+      provider_name = excluded.provider_name,
+      entry_url = excluded.entry_url,
+      entry_type = excluded.entry_type,
+      status = excluded.status,
+      price_amount = excluded.price_amount,
+      price_currency = excluded.price_currency,
+      opens_at = excluded.opens_at,
+      closes_at = excluded.closes_at,
+      checked_at = excluded.checked_at,
+      source_url = excluded.source_url,
+      is_verified = excluded.is_verified,
+      is_primary = excluded.is_primary,
+      updated_at = now()`,
+    75,
+  );
 }
 
 async function seed(): Promise<void> {

@@ -10,6 +10,9 @@ export type {
   RaceGroupCode,
   RaceGroupDefinition,
   RaceGroupMembershipSeed,
+  EntryOptionSeed,
+  EntryOptionStatus,
+  EntryOptionType,
 } from "./types";
 import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";

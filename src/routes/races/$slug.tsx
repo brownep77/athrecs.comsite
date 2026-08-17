@@ -22,16 +22,14 @@ import {
   formatStartTime,
   statusLabel,
 } from "@/lib/athrecs/format";
-import type { EntryStatus, EventListItem } from "@/lib/athrecs/types";
+import type { EditionEntryOption, EntryStatus, EventListItem } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { RaceCard } from "@/components/races/RaceCard";
-import {
-  RaceGroupBadges,
-  RaceGroupDetails,
-} from "@/components/races/RaceGroupBadges";
+import { EntryOptions } from "@/components/races/EntryOptions";
+import { RaceGroupBadges, RaceGroupDetails } from "@/components/races/RaceGroupBadges";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
@@ -46,6 +44,7 @@ type EditionRow = {
   distance_km: number;
   status: string;
   entry_url: string | null;
+  entry_options: EditionEntryOption[];
   start_time: string | null;
   notes?: string | null;
   result_count: number;
@@ -146,6 +145,10 @@ export function RacePageContent({
   });
 
   const nextStatus = next ? effectiveStatus(next.event_date, next.status as EntryStatus) : null;
+  const primaryEntry =
+    next?.entry_options.find((option) => option.is_primary) ??
+    next?.entry_options.find((option) => option.entry_type === "official") ??
+    next?.entry_options[0];
   const pastWithResults = past.filter((ed) => ed.result_count > 0);
   const upcomingPreview = event.sport === "Parkrun" ? upcoming.slice(0, 6) : upcoming.slice(0, 12);
   const upcomingHidden = upcoming.length - upcomingPreview.length;
@@ -244,10 +247,12 @@ export function RacePageContent({
                 </a>
               </Button>
             )}
-            {next?.entry_url && nextStatus !== "Finished" && (
+            {primaryEntry && nextStatus !== "Finished" && (
               <Button asChild variant="secondary">
-                <a href={next.entry_url} target="_blank" rel="noreferrer">
-                  Entry
+                <a href={primaryEntry.entry_url} target="_blank" rel="noreferrer sponsored">
+                  {primaryEntry.entry_type === "official"
+                    ? "Official entry"
+                    : `Enter via ${primaryEntry.provider_name}`}
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
               </Button>
@@ -263,6 +268,12 @@ export function RacePageContent({
       </header>
 
       <RaceGroupDetails groups={groups} />
+
+      <EntryOptions
+        options={next?.entry_options ?? []}
+        editionDate={next?.event_date}
+        officialWebsite={event.website}
+      />
 
       <section aria-labelledby="key-facts-heading">
         <h2 id="key-facts-heading" className="mb-3 font-display text-lg font-semibold text-fg">
@@ -555,16 +566,18 @@ function EditionList({
                       View results
                     </button>
                   )}
-                  {ed.entry_url && st !== "Finished" && (
-                    <a
-                      href={ed.entry_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex h-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium text-fg no-underline"
-                    >
-                      Official
-                    </a>
-                  )}
+                  {st !== "Finished" &&
+                    ed.entry_options.slice(0, 3).map((option) => (
+                      <a
+                        key={`${ed.id}-${option.provider_code}`}
+                        href={option.entry_url}
+                        target="_blank"
+                        rel="noreferrer sponsored"
+                        className="inline-flex h-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium text-fg no-underline"
+                      >
+                        {option.entry_type === "official" ? "Official entry" : option.provider_name}
+                      </a>
+                    ))}
                 </div>
               </div>
             );

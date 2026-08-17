@@ -18,7 +18,7 @@ export const Route = createFileRoute("/admin/")({
   component: AdminPage,
 });
 
-const GROK_PROMPT = `You are helping update ATHRECS.com (Norfolk endurance race directory).
+const GROK_PROMPT = `You are helping update ATHRECS.com (endurance race directory, UK and Ireland first).
 
 From the race page URL or pasted fixture text below, extract events and editions.
 
@@ -28,6 +28,8 @@ Return ONLY valid JSON (no markdown) in this shape:
     {
       "name": "Example 10K",
       "sport": "Running",
+      "country": "England",
+      "county": "Norfolk",
       "city": "Norwich",
       "area": "City centre",
       "surface": "Road",
@@ -47,6 +49,32 @@ Return ONLY valid JSON (no markdown) in this shape:
       "status": "Open",
       "startTime": "09:30",
       "entryUrl": "https://…",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Official race entry",
+          "entryUrl": "https://…",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-08-17T12:00:00Z",
+          "sourceUrl": "https://…",
+          "isVerified": true,
+          "isPrimary": true
+        },
+        {
+          "providerCode": "worlds-marathons",
+          "providerName": "World's Marathons",
+          "entryUrl": "https://worldsmarathons.com/marathon/…",
+          "entryType": "third_party",
+          "status": "open",
+          "priceAmount": 35,
+          "priceCurrency": "GBP",
+          "checkedAt": "2026-08-17T12:00:00Z",
+          "sourceUrl": "https://worldsmarathons.com/marathon/…",
+          "isVerified": true,
+          "isPrimary": false
+        }
+      ],
       "source": "https://…"
     }
   ]
@@ -55,15 +83,19 @@ Return ONLY valid JSON (no markdown) in this shape:
 Rules:
 - sport must be one of: Running, Athletics, Parkrun, Cycling, Swimming, Triathlon, Duathlon, Aquathlon, Aquabike, Rowing, OCR
 - status one of: Open, ClosingSoon, Closed, Finished, TBC
+- entryType one of: official, third_party, charity, tour_operator
+- entry option status one of: open, closing_soon, ballot, waitlist, sold_out, closed, unknown
 - dates must be YYYY-MM-DD
-- Norfolk UK only unless clearly a border race runners attend
-- Prefer official organiser/TRT dates
+- Prefer the official organiser for canonical race facts and the primary entry link
+- Only mark an entry option verified after opening its exact URL
+- "Notify me" is not an open entry route; use status unknown or closed
+- Do not copy descriptions, photographs, reviews or maps from aggregators
 
 Source:
 `;
 
-const SAMPLE_CSV = `name,sport,city,date,distance,distance_km,status,start_time,website,organiser,surface,entry_url
-Example Fun Run,Running,Norwich,2026-12-01,5K,5,Open,10:00,https://example.com,Local RC,Road,https://example.com/enter`;
+const SAMPLE_CSV = `name,sport,country,county,city,date,distance,distance_km,status,start_time,website,organiser,surface,entry_url,provider_name,provider_code,provider_entry_url,provider_type,provider_status,provider_price,provider_currency,provider_checked_at,provider_source_url,provider_verified,provider_primary
+Example Fun Run,Running,England,Norfolk,Norwich,2026-12-01,5K,5,Open,10:00,https://example.com,Local RC,Road,https://example.com/enter,World's Marathons,worlds-marathons,https://worldsmarathons.com/marathon/example,third_party,open,35,GBP,2026-08-17T12:00:00Z,https://worldsmarathons.com/marathon/example,true,false`;
 
 function AdminPage() {
   const qc = useQueryClient();
@@ -93,8 +125,10 @@ function AdminPage() {
     mutationFn: () => importFromCsv({ data: { csv } }),
     onSuccess: (r) => {
       setMessage(
-        `CSV import: ${r.eventsUpserted} events, ${r.editionsUpserted} editions` +
-          (r.errors.length ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}` : ""),
+        `CSV import: ${r.eventsUpserted} events, ${r.editionsUpserted} editions, ${r.entryOptionsUpserted} entry options` +
+          (r.errors.length
+            ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}`
+            : ""),
       );
       void qc.invalidateQueries();
     },
@@ -105,8 +139,10 @@ function AdminPage() {
     mutationFn: () => importFromJson({ data: { json } }),
     onSuccess: (r) => {
       setMessage(
-        `Grok JSON import: ${r.eventsUpserted} events, ${r.editionsUpserted} editions` +
-          (r.errors.length ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}` : ""),
+        `Grok JSON import: ${r.eventsUpserted} events, ${r.editionsUpserted} editions, ${r.entryOptionsUpserted} entry options` +
+          (r.errors.length
+            ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}`
+            : ""),
       );
       void qc.invalidateQueries();
     },
@@ -118,17 +154,16 @@ function AdminPage() {
     onSuccess: (r) => {
       setMessage(
         `Results import: ${r.athletesUpserted} athletes, ${r.resultsUpserted} results` +
-          (r.errors?.length ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}` : ""),
+          (r.errors?.length
+            ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}`
+            : ""),
       );
       void qc.invalidateQueries();
     },
     onError: (e) => setMessage(e instanceof Error ? e.message : String(e)),
   });
 
-  const previewCards = useMemo(
-    () => (preview.data ?? []).slice(0, 6),
-    [preview.data],
-  );
+  const previewCards = useMemo(() => (preview.data ?? []).slice(0, 6), [preview.data]);
 
   async function copyPrompt() {
     await navigator.clipboard.writeText(GROK_PROMPT);
@@ -139,16 +174,14 @@ function AdminPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-2">
-        <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-          Site tools
-        </p>
+        <p className="text-xs font-medium uppercase tracking-wider text-subtle">Site tools</p>
         <h1 className="font-display text-2xl font-semibold text-fg md:text-3xl">
           Update ATHRECS with Grok
         </h1>
         <p className="max-w-2xl text-sm text-muted">
-          Publish the site from the Grok App Builder, then keep fixtures fresh
-          here: ask Grok to extract races, paste the JSON, or bulk-load a CSV.
-          Live listings use the same Race cards as the public Events page.
+          Publish the site from the Grok App Builder, then keep fixtures fresh here: ask Grok to
+          extract races, paste the JSON, or bulk-load a CSV. Live listings use the same Race cards
+          as the public Events page.
         </p>
       </div>
 
@@ -159,12 +192,8 @@ function AdminPage() {
             : "border-border bg-surface"
         }`}
       >
-        <h2 className="font-display text-lg font-semibold text-fg">
-          Database status
-        </h2>
-        {dbStatus.isLoading && (
-          <p className="text-sm text-muted">Checking database…</p>
-        )}
+        <h2 className="font-display text-lg font-semibold text-fg">Database status</h2>
+        {dbStatus.isLoading && <p className="text-sm text-muted">Checking database…</p>}
         {dbStatus.data && (
           <div className="space-y-2 text-sm">
             <p>
@@ -177,22 +206,19 @@ function AdminPage() {
             </p>
             <p className="text-muted">
               Counts — athletes {dbStatus.data.athletes.toLocaleString()}, results{" "}
-              {dbStatus.data.results.toLocaleString()}, clubs{" "}
-              {dbStatus.data.clubs.toLocaleString()}, events{" "}
-              {dbStatus.data.events.toLocaleString()}, editions{" "}
-              {dbStatus.data.editions.toLocaleString()}
+              {dbStatus.data.results.toLocaleString()}, clubs {dbStatus.data.clubs.toLocaleString()}
+              , events {dbStatus.data.events.toLocaleString()}, editions{" "}
+              {dbStatus.data.editions.toLocaleString()}, entry options{" "}
+              {dbStatus.data.entryOptions.toLocaleString()}
             </p>
             {dbStatus.data.seedVersion && (
-              <p className="text-xs text-subtle">
-                Seed marker: {dbStatus.data.seedVersion}
-              </p>
+              <p className="text-xs text-subtle">Seed marker: {dbStatus.data.seedVersion}</p>
             )}
             {!dbStatus.data.persistent && (
               <div className="space-y-2 rounded-lg border border-amber-500/40 bg-amber-100/80 px-3 py-3 text-amber-950">
                 <p>
-                  <strong>Data will not stick until Neon is connected.</strong>{" "}
-                  This live site is still on in-memory PGLite — every cold start
-                  can wipe imports.
+                  <strong>Data will not stick until Neon is connected.</strong> This live site is
+                  still on in-memory PGLite — every cold start can wipe imports.
                 </p>
                 <ol className="list-decimal space-y-1 pl-5 text-sm">
                   <li>
@@ -208,8 +234,8 @@ function AdminPage() {
                     → your project → <strong>Connect</strong>
                   </li>
                   <li>
-                    Copy the <strong>pooled</strong> connection string
-                    (starts with <code className="rounded bg-white/80 px-1 text-xs">postgresql://</code>)
+                    Copy the <strong>pooled</strong> connection string (starts with{" "}
+                    <code className="rounded bg-white/80 px-1 text-xs">postgresql://</code>)
                   </li>
                   <li>
                     In{" "}
@@ -221,25 +247,20 @@ function AdminPage() {
                     >
                       Vercel
                     </a>{" "}
-                    → project for athrecs.com →{" "}
-                    <strong>Settings → Environment Variables</strong>
+                    → project for athrecs.com → <strong>Settings → Environment Variables</strong>
                   </li>
                   <li>
-                    Add{" "}
-                    <code className="rounded bg-white/80 px-1 text-xs">DATABASE_URL</code>{" "}
-                    = that string · Environment: <strong>Production</strong>{" "}
-                    (and Preview if you want)
+                    Add <code className="rounded bg-white/80 px-1 text-xs">DATABASE_URL</code> =
+                    that string · Environment: <strong>Production</strong> (and Preview if you want)
                   </li>
                   <li>
-                    <strong>Redeploy</strong> (or Publish again from Grok), then
-                    refresh this page — Backend should say{" "}
-                    <em>Neon Postgres (persistent)</em>
+                    <strong>Redeploy</strong> (or Publish again from Grok), then refresh this page —
+                    Backend should say <em>Neon Postgres (persistent)</em>
                   </li>
                 </ol>
                 <p className="text-sm">
-                  Or paste the connection string in chat and ask me to walk you
-                  through the check — I cannot set Vercel env vars from here
-                  without your Vercel access.
+                  Or paste the connection string in chat and ask me to walk you through the check —
+                  I cannot set Vercel env vars from here without your Vercel access.
                 </p>
               </div>
             )}
@@ -258,23 +279,21 @@ function AdminPage() {
       </section>
 
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
-        <h2 className="font-display text-lg font-semibold text-fg">
-          1. Go live (publish)
-        </h2>
+        <h2 className="font-display text-lg font-semibold text-fg">1. Go live (publish)</h2>
         <ol className="list-decimal space-y-2 pl-5 text-sm text-muted">
           <li>
-            In this Grok chat, use <strong className="text-fg">Publish</strong>{" "}
-            so the app deploys to a public URL (Vercel).
+            In this Grok chat, use <strong className="text-fg">Publish</strong> so the app deploys
+            to a public URL (Vercel).
           </li>
           <li>
-            Optional: attach your domain (e.g. athrecs.com) in the host’s domain
-            settings after the first successful publish.
+            Optional: attach your domain (e.g. athrecs.com) in the host’s domain settings after the
+            first successful publish.
           </li>
           <li>
             For lasting multi-user data, set a Postgres{" "}
-            <code className="rounded bg-elevated px-1 text-xs">DATABASE_URL</code>{" "}
-            (Neon) on the deployment — otherwise each serverless cold start can
-            reset to the built-in seed + this session’s imports.
+            <code className="rounded bg-elevated px-1 text-xs">DATABASE_URL</code> (Neon) on the
+            deployment — otherwise each serverless cold start can reset to the built-in seed + this
+            session’s imports.
           </li>
         </ol>
       </section>
@@ -289,8 +308,8 @@ function AdminPage() {
           </Button>
         </div>
         <p className="text-sm text-muted">
-          Open a new Grok chat, paste the prompt, add a race URL or fixture
-          list, then paste Grok’s JSON below and import.
+          Open a new Grok chat, paste the prompt, add a race URL or fixture list, then paste Grok’s
+          JSON below and import.
         </p>
         <textarea
           value={json}
@@ -309,12 +328,10 @@ function AdminPage() {
       </section>
 
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
-        <h2 className="font-display text-lg font-semibold text-fg">
-          3. CSV bulk import
-        </h2>
+        <h2 className="font-display text-lg font-semibold text-fg">3. CSV bulk import</h2>
         <p className="text-sm text-muted">
-          Header row required. One row per race-day (distance). Same event name
-          groups into one series with multiple editions.
+          Header row required. One row per race-day (distance). Same event name groups into one
+          series with multiple editions.
         </p>
         <textarea
           value={csv}
@@ -336,8 +353,8 @@ function AdminPage() {
           4. Results import (append-only)
         </h2>
         <p className="text-sm text-muted">
-          Paste {"{ results: [...] }"} JSON. Creates athletes/clubs as needed and
-          upserts finish times against an existing edition. Does not wipe the seed.
+          Paste {"{ results: [...] }"} JSON. Creates athletes/clubs as needed and upserts finish
+          times against an existing edition. Does not wipe the seed.
         </p>
         <textarea
           value={resultsJson}
@@ -401,9 +418,7 @@ function AdminPage() {
                   </td>
                   <td className="px-3 py-2 text-muted">{e.city}</td>
                   <td className="px-3 py-2 tabular text-muted">{e.edition_count}</td>
-                  <td className="px-3 py-2 tabular text-muted">
-                    {e.next_date ?? "—"}
-                  </td>
+                  <td className="px-3 py-2 tabular text-muted">{e.next_date ?? "—"}</td>
                 </tr>
               ))}
             </tbody>
@@ -412,9 +427,7 @@ function AdminPage() {
       </section>
 
       <section className="space-y-3">
-        <h2 className="font-display text-lg font-semibold text-fg">
-          Public listing preview
-        </h2>
+        <h2 className="font-display text-lg font-semibold text-fg">Public listing preview</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {previewCards.map((race) => (
             <RaceCard key={race.id} race={race} />
