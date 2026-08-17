@@ -5,6 +5,7 @@ export type UkMarathonEditionReplacement = {
   distance: string;
   fromDate: string;
   toDate: string;
+  toDistance?: string;
 };
 
 /** Date corrections that also need a safe in-place database migration. */
@@ -26,6 +27,13 @@ export const ukMarathonEditionReplacements: UkMarathonEditionReplacement[] = [
     distance: "Marathon",
     fromDate: "2026-10-03",
     toDate: "2026-10-04",
+  },
+  {
+    seriesSlug: "clarendon-marathon",
+    distance: "5mi",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+    toDistance: "Marathon",
   },
   {
     seriesSlug: "thames-meander-marathon-november",
@@ -165,6 +173,20 @@ export const ukMarathonEditionOverrides: Record<string, Partial<Edition>> = {
   },
   "clarendon-marathon|2026-10-03|Marathon": {
     date: "2026-10-04",
+    startTime: "10:30",
+    source: "https://form.clarendon-marathon.co.uk/form/clarendon-marathon-registration",
+  },
+  "clarendon-marathon|2026-10-03|5mi": {
+    date: "2026-10-04",
+    distance: "Marathon",
+    distanceKm: 42.2,
+    startTime: "10:30",
+    source: "https://form.clarendon-marathon.co.uk/form/clarendon-marathon-registration",
+  },
+  "clarendon-marathon|2026-10-03|Half": {
+    date: "2026-10-04",
+    distance: "Marathon",
+    distanceKm: 42.2,
     startTime: "10:30",
     source: "https://form.clarendon-marathon.co.uk/form/clarendon-marathon-registration",
   },
