@@ -12,7 +12,7 @@ import {
 import { editionReplacements } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-great-eastern-half-distance-fix-v89";
+const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-four-v90";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
