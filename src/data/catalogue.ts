@@ -57,7 +57,7 @@ import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics"
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
-import { editionOverrides, entryOptions, seriesOverrides } from "./entry-options";
+import { editionOverrides, entryOptions, eventSlugAliases, seriesOverrides } from "./entry-options";
 import {
   raceCollectionEditions,
   raceCollectionSeries,
@@ -131,6 +131,7 @@ for (const series of [
   ...(mrdMarathonSeries as Series[]),
   ...(mrdEuMarathonSeries as Series[]),
 ]) {
+  if (eventSlugAliases[series.slug]) continue;
   const key = normName(seriesOverrides[series.slug]?.name ?? series.name);
   if (usedSlugs.has(series.slug) || coreNameKeys.has(key)) continue;
   usedSlugs.add(series.slug);

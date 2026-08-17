@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getSql, dbSource } from "@/lib/db";
+import { canonicalEventSlug } from "@/data/entry-options";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
 import type {
@@ -308,8 +309,9 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data: slug }) => {
     const sql = await ready();
     const today = todayIso();
+    const canonicalSlug = canonicalEventSlug(slug);
     const events = await sql`
-      select * from events where slug = ${slug} limit 1
+      select * from events where slug = ${canonicalSlug} limit 1
     `;
     const event = events[0] as
       | {

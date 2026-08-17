@@ -331,6 +331,10 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     startTime: "09:30",
     source: "https://www.onerace.events/grand-union-canal-half-marathon-trail-november",
   },
+  "dirt-half-challenge|2026-11-07|Half": {
+    startTime: "10:00",
+    source: "https://dirtrunning.org.uk/dirt-half/",
+  },
 };
 
 /** Correct source metadata for half-marathon records imported from regional listings. */
@@ -836,6 +840,18 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
       "A point-to-point trail half marathon from Cowley Recreation Ground in Uxbridge to Cassiobury Park in Watford, following the Grand Union Canal.",
     organiser: "OneRace Events",
     website: "https://www.onerace.events/grand-union-canal-half-marathon-trail-november",
+  },
+  "dirt-half-challenge": {
+    city: "Leighton Buzzard",
+    county: "Bedfordshire",
+    country: "England",
+    area: "Cedars Upper School, Tiddenfoot Waterside Park and the Grand Union Canal",
+    surface: "Trail",
+    summary: "Dirt Half Challenge — Leighton Buzzard, Bedfordshire.",
+    description:
+      "An off-road half marathon from Leighton Buzzard along the Grand Union Canal towpath, through Rushmere Country Park and across the Greensand Ridge.",
+    organiser: "Dirt Running",
+    website: "https://dirtrunning.org.uk/dirt-half/",
   },
 };
 
@@ -2229,6 +2245,34 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       priceCurrency: "GBP",
       checkedAt: "2026-08-17T23:59:00+01:00",
       sourceUrl: "https://findarace.com/events/one-by-the-canal-grand-union-november",
+      isVerified: true,
+    },
+  ],
+  "dirt-half-challenge|2026-11-07|Half": [
+    {
+      providerCode: "official",
+      providerName: "Eventrac (official entry)",
+      entryUrl: "https://dirtrunning.eventrac.co.uk/e/dirt-half-challenge-10552",
+      entryType: "official",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      closesAt: "2026-11-03T23:59:00Z",
+      checkedAt: "2026-08-17T23:59:00+01:00",
+      sourceUrl: "https://dirtrunning.org.uk/dirt-half/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/dirt-half-challenge",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 33,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-17T23:59:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/dirt-half-challenge",
       isVerified: true,
     },
   ],

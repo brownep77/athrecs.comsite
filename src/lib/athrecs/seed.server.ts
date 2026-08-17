@@ -9,10 +9,10 @@ import {
   seriesList,
   clubSlugAliases,
 } from "@/data/catalogue";
-import { editionReplacements } from "@/data/entry-options";
+import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-seven-v93";
+const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-eight-v94";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -630,6 +630,28 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       source_url = excluded.source_url`,
     80,
   );
+
+  for (const [aliasSlug, canonicalSlug] of Object.entries(eventSlugAliases)) {
+    const matches = await sql<{ id: number; slug: string }>`
+      select id, slug from events where slug in (${aliasSlug}, ${canonicalSlug})
+    `;
+    const alias = matches.find((event) => event.slug === aliasSlug);
+    if (!alias) continue;
+    const canonical = matches.find((event) => event.slug === canonicalSlug);
+    if (!canonical) {
+      throw new Error(`Cannot retire event alias ${aliasSlug}: canonical event is missing`);
+    }
+    const resultCounts = await sql<{ count: number }>`
+      select count(*)::int as count
+      from results r
+      join editions ed on ed.id = r.edition_id
+      where ed.event_id = ${alias.id}
+    `;
+    if ((resultCounts[0]?.count ?? 0) > 0) {
+      throw new Error(`Cannot retire event alias ${aliasSlug}: it has stored results`);
+    }
+    await sql`delete from events where id = ${alias.id}`;
+  }
 
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
   const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
