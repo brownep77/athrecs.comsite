@@ -21,7 +21,7 @@ export const ukMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       isPrimary: true,
     },
     {
-      providerCode: "official-ballot",
+      providerCode: "official",
       providerName: "TCS London Marathon ballot",
       entryUrl: "https://www.londonmarathonevents.co.uk/ballot",
       entryType: "official",
@@ -101,7 +101,7 @@ export const ukMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       isPrimary: true,
     },
     {
-      providerCode: "official-general",
+      providerCode: "official",
       providerName: "Loch Ness Marathon general entry",
       entryUrl: "https://lochnessmarathon.com/event/loch-ness-marathon/",
       entryType: "official",
