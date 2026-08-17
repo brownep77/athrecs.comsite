@@ -135,7 +135,7 @@ for (const series of [
   ...(mrdMarathonSeries as Series[]),
   ...(mrdEuMarathonSeries as Series[]),
 ]) {
-  const key = normName(series.name);
+  const key = normName(ukMarathonSeriesOverrides[series.slug]?.name ?? series.name);
   if (usedSlugs.has(series.slug) || coreNameKeys.has(key)) continue;
   usedSlugs.add(series.slug);
   coreNameKeys.add(key);
