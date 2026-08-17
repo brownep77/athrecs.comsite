@@ -5,12 +5,13 @@ import {
   clubs as clubSeeds,
   editions as editionSeeds,
   results as resultSeeds,
+  raceGroupMemberships,
   seriesList,
   clubSlugAliases,
 } from "@/data/catalogue";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-club-audit-v66";
+const SEED_VERSION = "athrecs-race-groups-v67";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -118,6 +119,16 @@ async function ensureSchema(sql: Sql): Promise<void> {
       event_id int not null references events(id) on delete cascade,
       distance_code text not null,
       primary key (event_id, distance_code)
+    )`,
+    `create table if not exists event_groups (
+      event_id int not null references events(id) on delete cascade,
+      group_code text not null,
+      label text not null,
+      level text not null,
+      source_url text not null,
+      checked_at date not null,
+      note text not null default '',
+      primary key (event_id, group_code)
     )`,
     `create table if not exists editions (
       id serial primary key,
@@ -571,6 +582,41 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
 
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
   const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
+
+  const groupRows = raceGroupMemberships
+    .map((membership) => [
+      eventIds.get(membership.seriesSlug),
+      membership.groupCode,
+      membership.label,
+      membership.level,
+      membership.sourceUrl,
+      membership.checkedAt,
+      membership.note,
+    ])
+    .filter((row) => row[0] != null);
+  if (groupRows.length !== raceGroupMemberships.length) {
+    const missing = raceGroupMemberships
+      .filter((membership) => !eventIds.has(membership.seriesSlug))
+      .map((membership) => membership.seriesSlug);
+    throw new Error(`Race group membership references missing events: ${missing.join(", ")}`);
+  }
+  await sql`
+    delete from event_groups
+    where group_code in ('world-marathon-majors', 'utmb-world-series', 'utmb-index')
+  `;
+  await insertRows(
+    sql,
+    "event_groups",
+    ["event_id", "group_code", "label", "level", "source_url", "checked_at", "note"],
+    groupRows,
+    `on conflict (event_id, group_code) do update set
+      label = excluded.label,
+      level = excluded.level,
+      source_url = excluded.source_url,
+      checked_at = excluded.checked_at,
+      note = excluded.note`,
+    100,
+  );
 
   const distanceRows = seriesList.flatMap((series) =>
     [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),

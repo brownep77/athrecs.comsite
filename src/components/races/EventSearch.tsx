@@ -23,6 +23,7 @@ export type EventSearchValues = {
   distance: string;
   surface: string;
   format: string;
+  group: string;
 };
 
 export const EMPTY_SEARCH: EventSearchValues = {
@@ -38,6 +39,7 @@ export const EMPTY_SEARCH: EventSearchValues = {
   distance: "All",
   surface: "All",
   format: "All",
+  group: "All",
 };
 
 const MONTHS = upcomingMonths(17);
@@ -119,6 +121,19 @@ export function EventSearch({
               ))}
             </optgroup>
           ))}
+        </select>
+      </Field>
+
+      <Field label="Series & qualification">
+        <select
+          value={value.group}
+          onChange={(e) => set("group", e.target.value)}
+          className={fieldClass}
+        >
+          <option value="All">All race series</option>
+          <option value="world-marathon-majors">World Marathon Majors</option>
+          <option value="utmb-world-series">UTMB World Series</option>
+          <option value="utmb-index">UTMB Index races</option>
         </select>
       </Field>
 
@@ -222,7 +237,7 @@ export function EventSearch({
       </div>
 
       <p className="text-[11px] leading-snug text-subtle">
-        Filter by country, county, city, postcode, sport, distance, surface and date.
+        Filter by series, country, county, city, postcode, sport, distance, surface and date.
       </p>
     </aside>
   );
@@ -251,6 +266,7 @@ export function searchToApi(value: EventSearchValues) {
     distance: value.distance === "All" ? undefined : value.distance,
     surface: value.surface === "All" ? undefined : value.surface,
     format: value.format === "All" ? undefined : value.format,
+    group: value.group === "All" ? undefined : value.group,
   };
 }
 

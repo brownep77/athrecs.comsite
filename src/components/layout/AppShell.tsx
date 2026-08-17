@@ -16,7 +16,7 @@ const nav = [
     to: "/races",
     label: "Events",
     icon: List,
-    match: (p: string) => p.startsWith("/races"),
+    match: (p: string) => p.startsWith("/races") || p.startsWith("/race-series"),
   },
   {
     key: "athletes",

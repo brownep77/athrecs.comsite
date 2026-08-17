@@ -28,6 +28,10 @@ import { Button } from "@/components/ui/button";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { RaceCard } from "@/components/races/RaceCard";
+import {
+  RaceGroupBadges,
+  RaceGroupDetails,
+} from "@/components/races/RaceGroupBadges";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
@@ -89,7 +93,7 @@ export function RacePageContent({
   data: NonNullable<Awaited<ReturnType<typeof getEventBySlug>>>;
   localized?: { language: string; country: string };
 }) {
-  const { event, distances, upcoming, past, related } = data;
+  const { event, groups, distances, upcoming, past, related } = data;
   const shownDistances = sanitizeDistances(event.name, distances);
   const country = resolveCountry({
     slug: event.slug,
@@ -183,6 +187,7 @@ export function RacePageContent({
                 {formatDistanceWithUnits(d)}
               </Badge>
             ))}
+            <RaceGroupBadges groups={groups} />
           </div>
 
           <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -256,6 +261,8 @@ export function RacePageContent({
           </div>
         </div>
       </header>
+
+      <RaceGroupDetails groups={groups} />
 
       <section aria-labelledby="key-facts-heading">
         <h2 id="key-facts-heading" className="mb-3 font-display text-lg font-semibold text-fg">

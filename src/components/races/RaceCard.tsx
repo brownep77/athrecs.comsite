@@ -14,6 +14,7 @@ import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { Badge } from "@/components/ui/badge";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
+import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 
 function SportIcon({ sport }: { sport: Sport }) {
   if (sport === "Cycling") return <Bike className="h-3.5 w-3.5" />;
@@ -95,6 +96,7 @@ export function RaceCard({
                 {statusLabel(focusStatus)}
               </Badge>
             )}
+            <RaceGroupBadges groups={race.groups} />
           </div>
           {localized ? (
             <Link
