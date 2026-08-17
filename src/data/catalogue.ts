@@ -58,6 +58,7 @@ import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon"
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
 import {
+  ukMarathonEditionOverrides,
   ukMarathonEntryOptions,
   ukMarathonSeriesOverrides,
 } from "./entry-options-uk-marathons";
@@ -161,7 +162,12 @@ const mergedEditions = [
 export const editions: Edition[] = (() => {
   const seen = new Set<string>();
   const unique: Edition[] = [];
-  for (const edition of mergedEditions) {
+  for (const sourceEdition of mergedEditions) {
+    const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
+    const edition = {
+      ...sourceEdition,
+      ...ukMarathonEditionOverrides[sourceKey],
+    };
     const key = `${edition.seriesSlug}|${edition.date}`;
     if (seen.has(key)) continue;
     seen.add(key);

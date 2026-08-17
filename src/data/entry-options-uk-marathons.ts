@@ -1,4 +1,58 @@
-import type { EntryOptionSeed, Series } from "./types";
+import type { Edition, EntryOptionSeed, Series } from "./types";
+
+export type UkMarathonEditionReplacement = {
+  seriesSlug: string;
+  distance: string;
+  fromDate: string;
+  toDate: string;
+};
+
+/** Date corrections that also need a safe in-place database migration. */
+export const ukMarathonEditionReplacements: UkMarathonEditionReplacement[] = [
+  {
+    seriesSlug: "purbeck-running-festival",
+    distance: "Marathon",
+    fromDate: "2026-09-19",
+    toDate: "2026-09-20",
+  },
+];
+
+/** Verified corrections applied before entry options are matched to an edition. */
+export const ukMarathonEditionOverrides: Record<string, Partial<Edition>> = {
+  "purbeck-running-festival|2026-09-19|Marathon": {
+    date: "2026-09-20",
+    startTime: "09:00",
+    source: "https://thepurbeckmarathon.co.uk/",
+  },
+  "islay-marathon|2026-09-12|Marathon": {
+    startTime: "10:30",
+    source: "https://www.entrycentral.com/festival/4401",
+  },
+  "standard-chartered-jersey-marathon-2016|2026-10-04|Marathon": {
+    startTime: "09:00",
+    source: "https://www.jersey-marathon.com/enter-now/marathon/",
+  },
+  "runuk-windsor-dorney-lakeside-marathon|2026-10-18|Marathon": {
+    startTime: "08:30",
+    source: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-marathon-8019",
+  },
+  "bigmud-meon-valley-marathon|2027-02-21|Marathon": {
+    startTime: "08:30",
+    source: "https://bigfeatevents.eventrac.co.uk/e/bigmud-trails-earth-12348",
+  },
+  "dartmoor-marathon|2027-04-11|Marathon": {
+    startTime: "09:00",
+    source: "https://www.dartmoormarathon.co.uk/e/the-dartmoor-marathon-12659",
+  },
+  "women-can-marathon|2027-04-18|Marathon": {
+    startTime: "09:00",
+    source: "https://www.sientries.co.uk/event/women-can-marathon-2027",
+  },
+  "tissington-trail-marathon|2027-04-25|Marathon": {
+    startTime: "09:00",
+    source: "https://www.nice-work.org.uk/e/tissington-trail-marathon-and-half-marathon-9140",
+  },
+};
 
 /** Correct source metadata for marathon records whose imported region was mistaken for a country. */
 export const ukMarathonSeriesOverrides: Record<string, Partial<Series>> = {
@@ -100,6 +154,109 @@ export const ukMarathonSeriesOverrides: Record<string, Partial<Series>> = {
       "The Windermere Marathon is a hilly road marathon around Lake Windermere, starting at Waterhead near Ambleside and finishing at Brockhole. Confirm current details and entry with the organiser.",
     organiser: "The Great Run Company",
     website: "https://www.windermeremarathon.co.uk/",
+  },
+  "purbeck-running-festival": {
+    name: "The Purbeck Marathon",
+    city: "Swanage",
+    county: "Dorset",
+    country: "England",
+    area: "Jurassic Coast",
+    surface: "Trail",
+    distances: ["Marathon"],
+    summary: "The Purbeck Marathon — Swanage and the Jurassic Coast, Dorset.",
+    description:
+      "The Purbeck Marathon is a volunteer-run trail marathon from Swanage across the Jurassic Coast and Purbeck hills. Confirm current details and entry with the organiser.",
+    organiser: "The Purbeck Marathon",
+    website: "https://thepurbeckmarathon.co.uk/",
+  },
+  "islay-marathon": {
+    city: "Bruichladdich",
+    county: "Argyll and Bute",
+    country: "Scotland",
+    area: "Isle of Islay",
+    surface: "Road",
+    summary: "Islay Marathon — Bruichladdich to Port Ellen, Isle of Islay.",
+    description:
+      "The Islay Marathon runs from Bruichladdich to Port Ellen via Bowmore and the Three Distilleries Path. Confirm current details and entry with the organiser.",
+    organiser: "Islay Marathon Committee",
+    website: "https://www.entrycentral.com/festival/4401",
+  },
+  "standard-chartered-jersey-marathon-2016": {
+    name: "Standard Chartered Jersey Marathon",
+    city: "St Helier",
+    county: "Jersey",
+    country: "Jersey",
+    area: "Weighbridge Place",
+    surface: "Road",
+    summary: "Standard Chartered Jersey Marathon — St Helier, Jersey.",
+    description:
+      "The Standard Chartered Jersey Marathon starts at the Weighbridge in St Helier and follows a measured road course around Jersey. Confirm current details and entry with the organiser.",
+    organiser: "Jersey Marathon",
+    website: "https://www.jersey-marathon.com/",
+  },
+  "runuk-windsor-dorney-lakeside-marathon": {
+    name: "Windsor Dorney Lakeside Marathon",
+    city: "Dorney",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Dorney Lake",
+    surface: "Road",
+    summary: "Windsor Dorney Lakeside Marathon — Dorney Lake, Buckinghamshire.",
+    description:
+      "The Windsor Dorney Lakeside Marathon is a flat, traffic-free road marathon inside the London 2012 rowing venue at Dorney Lake. Confirm current details and entry with the organiser.",
+    organiser: "RunUK",
+    website: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-marathon-8019",
+  },
+  "bigmud-meon-valley-marathon": {
+    name: "BigMud Trails (EARTH)",
+    city: "Horndean",
+    county: "Hampshire",
+    country: "England",
+    area: "Queen Elizabeth Country Park",
+    surface: "Trail",
+    distances: ["Marathon", "50K"],
+    summary: "BigMud Trails (EARTH) — Meon Valley, Hampshire.",
+    description:
+      "BigMud Trails (EARTH) offers challenging single-lap trail races from Queen Elizabeth Country Park through the Meon Valley and South Downs. Confirm current details and entry with the organiser.",
+    organiser: "BigFeat Events",
+    website: "https://bigfeatevents.com/",
+  },
+  "dartmoor-marathon": {
+    city: "Tavistock",
+    county: "Devon",
+    country: "England",
+    area: "Dartmoor National Park",
+    surface: "Road",
+    summary: "Dartmoor Marathon — Tavistock and Dartmoor National Park, Devon.",
+    description:
+      "The Dartmoor Marathon is a challenging single-loop road race from Tavistock through Dartmoor National Park. Confirm current details and entry with the organiser.",
+    organiser: "Dartmoor Marathon",
+    website: "https://www.dartmoormarathon.co.uk/",
+  },
+  "women-can-marathon": {
+    name: "Women Can Marathon",
+    city: "Exmouth",
+    county: "Devon",
+    country: "England",
+    area: "Sideshore, Queen's Drive",
+    surface: "Trail",
+    summary: "Women Can Marathon — Exmouth and East Devon.",
+    description:
+      "The women-only Women Can Marathon follows predominantly off-road paths from Sideshore in Exmouth through East Devon. Confirm current details and entry with the organiser.",
+    organiser: "Women Can Marathon",
+    website: "https://womencanmarathon.co.uk/",
+  },
+  "tissington-trail-marathon": {
+    city: "Ashbourne",
+    county: "Derbyshire",
+    country: "England",
+    area: "Tissington Trail",
+    surface: "Trail",
+    summary: "Tissington Trail Marathon — Ashbourne, Derbyshire.",
+    description:
+      "The Tissington Trail Marathon is a traffic-free out-and-back race from Ashbourne along the former railway trail through the Peak District. Confirm current details and entry with the organiser.",
+    organiser: "Nice Work",
+    website: "https://www.nice-work.org.uk/e/tissington-trail-marathon-and-half-marathon-9140",
   },
 };
 
@@ -481,6 +638,199 @@ export const ukMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       sourceUrl: "https://aberdeenmarathon.org/",
       isVerified: true,
       isPrimary: true,
+    },
+  ],
+  "purbeck-running-festival|2026-09-20|Marathon": [
+    {
+      providerCode: "official",
+      providerName: "The Purbeck Marathon official entry",
+      entryUrl: "https://thepurbeckmarathon.co.uk/registration-form/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 50,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-13",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://thepurbeckmarathon.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+    },
+  ],
+  "islay-marathon|2026-09-12|Marathon": [
+    {
+      providerCode: "official",
+      providerName: "EntryCentral (official Islay entry)",
+      entryUrl: "https://www.entrycentral.com/festival/4401",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      closesAt: "2026-08-28T23:59:00+01:00",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/festival/4401",
+      isVerified: true,
+      isPrimary: true,
+    },
+  ],
+  "standard-chartered-jersey-marathon-2016|2026-10-04|Marathon": [
+    {
+      providerCode: "official",
+      providerName: "RaceNation (official Jersey entry)",
+      entryUrl:
+        "https://race-nation.co.uk/register/the-jersey-marathon/standard-chartered-jersey-marathon-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 70,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://www.jersey-marathon.com/enter-now/marathon/",
+      isVerified: true,
+      isPrimary: true,
+    },
+  ],
+  "runuk-windsor-dorney-lakeside-marathon|2026-10-18|Marathon": [
+    {
+      providerCode: "official",
+      providerName: "RunUK official entry",
+      entryUrl: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-marathon-8019",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-marathon-8019",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl: "https://www.letsdothis.com/gb/e/windsor-dorney-lakeside-marathon-266424",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 37,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/windsor-dorney-lakeside-marathon-266424",
+      isVerified: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/windsor-dorney-lakeside-marathon-2",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 41.51,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://findarace.com/events/windsor-dorney-lakeside-marathon-2",
+      isVerified: true,
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl: "https://worldsmarathons.com/marathon/windsor-dorney-lakeside-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 46,
+      priceCurrency: "EUR",
+      closesAt: "2026-10-16",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://worldsmarathons.com/marathon/windsor-dorney-lakeside-marathon",
+      isVerified: true,
+    },
+  ],
+  "bigmud-meon-valley-marathon|2027-02-21|Marathon": [
+    {
+      providerCode: "official",
+      providerName: "Eventrac (official BigMud entry)",
+      entryUrl: "https://bigfeatevents.eventrac.co.uk/e/bigmud-trails-earth-12348",
+      entryType: "official",
+      status: "open",
+      priceAmount: 58,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://bigfeatevents.eventrac.co.uk/e/bigmud-trails-earth-12348",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl: "https://worldsmarathons.com/marathon/bigmud-trails-earth",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 68,
+      priceCurrency: "EUR",
+      closesAt: "2027-02-17",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://worldsmarathons.com/marathon/bigmud-trails-earth",
+      isVerified: true,
+    },
+  ],
+  "dartmoor-marathon|2027-04-11|Marathon": [
+    {
+      providerCode: "official",
+      providerName: "Dartmoor Marathon official entry",
+      entryUrl: "https://www.dartmoormarathon.co.uk/e/the-dartmoor-marathon-12659",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://www.dartmoormarathon.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/the-dartmoor-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 45,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/the-dartmoor-marathon",
+      isVerified: true,
+    },
+  ],
+  "women-can-marathon|2027-04-18|Marathon": [
+    {
+      providerCode: "official",
+      providerName: "SiEntries (official Women Can entry)",
+      entryUrl: "https://www.sientries.co.uk/event/women-can-marathon-2027",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      closesAt: "2027-04-10",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://www.sientries.co.uk/event/women-can-marathon-2027",
+      isVerified: true,
+      isPrimary: true,
+    },
+  ],
+  "tissington-trail-marathon|2027-04-25|Marathon": [
+    {
+      providerCode: "official",
+      providerName: "Nice Work official entry",
+      entryUrl: "https://www.nice-work.org.uk/e/tissington-trail-marathon-and-half-marathon-9140",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://www.nice-work.org.uk/e/tissington-trail-marathon-and-half-marathon-9140",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl: "https://worldsmarathons.com/marathon/tissington-trail-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 50,
+      priceCurrency: "EUR",
+      closesAt: "2027-04-23",
+      checkedAt: "2026-08-17T19:15:00+01:00",
+      sourceUrl: "https://worldsmarathons.com/marathon/tissington-trail-marathon",
+      isVerified: true,
     },
   ],
 };
