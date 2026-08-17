@@ -57,6 +57,7 @@ import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics"
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
+import { ukMarathonEntryOptions } from "./entry-options-uk-marathons";
 import {
   raceCollectionEditions,
   raceCollectionSeries,
@@ -158,7 +159,18 @@ export const editions: Edition[] = (() => {
     const key = `${edition.seriesSlug}|${edition.date}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    unique.push(edition);
+    const entryOptions =
+      ukMarathonEntryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];
+    if (!entryOptions) {
+      unique.push(edition);
+      continue;
+    }
+    const primary = entryOptions.find((option) => option.isPrimary) ?? entryOptions[0];
+    unique.push({
+      ...edition,
+      entryUrl: primary.entryUrl,
+      entryOptions,
+    });
   }
   return unique;
 })();
