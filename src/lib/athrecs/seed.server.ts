@@ -9,10 +9,10 @@ import {
   seriesList,
   clubSlugAliases,
 } from "@/data/catalogue";
-import { ukMarathonEditionReplacements } from "@/data/entry-options-uk-marathons";
+import { editionReplacements } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-marathon-entry-batch-fourteen-v85";
+const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-one-v86";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -634,7 +634,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
   const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
 
-  for (const replacement of ukMarathonEditionReplacements) {
+  for (const replacement of editionReplacements) {
     const eventId = eventIds.get(replacement.seriesSlug);
     if (!eventId) continue;
     const targetDistance = replacement.toDistance ?? replacement.distance;
