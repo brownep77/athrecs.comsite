@@ -12,7 +12,7 @@ import {
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-ten-v96";
+const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-ten-hotfix-v97";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -928,7 +928,10 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
   });
 
   if (!rows.length) return;
-  const primaryEditionIds = [...new Set(rows.filter((row) => row[13]).map((row) => row[0]))];
+  const primaryRows = rows
+    .filter((row) => row[13])
+    .map((row) => [row[0] as number, row[1] as string] as const);
+  const primaryEditionIds = [...new Set(primaryRows.map((row) => row[0]))];
   if (primaryEditionIds.length) {
     const placeholders = primaryEditionIds.map((_, index) => `$${index + 1}`).join(", ");
     await sql.query(
@@ -937,6 +940,7 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       primaryEditionIds,
     );
   }
+  const nonPrimaryRows = rows.map((row) => [...row.slice(0, 13), false]);
   await insertRows(
     sql,
     "edition_entry_options",
@@ -956,7 +960,7 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       "is_verified",
       "is_primary",
     ],
-    rows,
+    nonPrimaryRows,
     `on conflict (edition_id, provider_code) do update set
       provider_name = excluded.provider_name,
       entry_url = excluded.entry_url,
@@ -973,6 +977,21 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       updated_at = now()`,
     75,
   );
+  if (primaryRows.length) {
+    const params: unknown[] = [];
+    const values = primaryRows.map(([editionId, providerCode]) => {
+      params.push(editionId, providerCode);
+      return `($${params.length - 1}::int, $${params.length}::text)`;
+    });
+    await sql.query(
+      `update edition_entry_options option
+       set is_primary = true, updated_at = now()
+       from (values ${values.join(", ")}) as target (edition_id, provider_code)
+       where option.edition_id = target.edition_id
+         and option.provider_code = target.provider_code`,
+      params,
+    );
+  }
 }
 
 async function seed(): Promise<void> {
