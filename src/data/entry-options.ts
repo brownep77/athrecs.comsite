@@ -15,6 +15,7 @@ import {
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const eventSlugAliases: Readonly<Record<string, string>> = {
   "rb-dirt-half-challenge": "dirt-half-challenge",
+  "rb-glentress-winter-half-marathon-10k-trail-races": "glentress-winter-trail-races",
 };
 
 export function canonicalEventSlug(slug: string): string {
