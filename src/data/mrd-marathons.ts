@@ -40,7 +40,7 @@ export const mrdMarathonEditions: Edition[] = [
   { seriesSlug: "loch-ness-marathon", date: "2026-09-27", distance: "Marathon", distanceKm: 42.195, status: "Open", source: "marathonrunnersdiary" },
   { seriesSlug: "amsterdam-marathon", date: "2026-10-18", distance: "Marathon", distanceKm: 42.195, status: "Open", source: "marathonrunnersdiary" },
   { seriesSlug: "dublin-marathon", date: "2026-10-25", distance: "Marathon", distanceKm: 42.195, status: "Open", source: "marathonrunnersdiary" },
-  { seriesSlug: "brighton-marathon", date: "2027-04-11", distance: "Marathon", distanceKm: 42.195, status: "Open", source: "marathonrunnersdiary" },
+  { seriesSlug: "brighton-marathon", date: "2027-04-04", distance: "Marathon", distanceKm: 42.195, status: "Open", source: "https://www.londonmarathonevents.co.uk/brighton-marathon-weekend/brighton-marathon" },
   { seriesSlug: "belfast-marathon", date: "2027-05-02", distance: "Marathon", distanceKm: 42.195, status: "Open", source: "marathonrunnersdiary" },
   { seriesSlug: "sydney-marathon", date: "2026-08-30", distance: "Marathon", distanceKm: 42.195, status: "Open", source: "marathonrunnersdiary" },
   { seriesSlug: "barcelona-marathon", date: "2027-03-15", distance: "Marathon", distanceKm: 42.195, status: "Open", source: "marathonrunnersdiary" },

@@ -11,7 +11,7 @@ import {
 } from "@/data/catalogue";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-entry-options-v68";
+const SEED_VERSION = "athrecs-uk-marathon-entry-pilot-v69";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
