@@ -57,11 +57,7 @@ import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics"
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
-import {
-  ukMarathonEditionOverrides,
-  ukMarathonEntryOptions,
-  ukMarathonSeriesOverrides,
-} from "./entry-options-uk-marathons";
+import { editionOverrides, entryOptions, seriesOverrides } from "./entry-options";
 import {
   raceCollectionEditions,
   raceCollectionSeries,
@@ -135,7 +131,7 @@ for (const series of [
   ...(mrdMarathonSeries as Series[]),
   ...(mrdEuMarathonSeries as Series[]),
 ]) {
-  const key = normName(ukMarathonSeriesOverrides[series.slug]?.name ?? series.name);
+  const key = normName(seriesOverrides[series.slug]?.name ?? series.name);
   if (usedSlugs.has(series.slug) || coreNameKeys.has(key)) continue;
   usedSlugs.add(series.slug);
   coreNameKeys.add(key);
@@ -145,7 +141,7 @@ const extraSlugs = new Set(extraSeries.map((series) => series.slug));
 
 export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series) => ({
   ...series,
-  ...ukMarathonSeriesOverrides[series.slug],
+  ...seriesOverrides[series.slug],
 }));
 
 const mergedEditions = [
@@ -166,22 +162,23 @@ export const editions: Edition[] = (() => {
     const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
     const edition = {
       ...sourceEdition,
-      ...ukMarathonEditionOverrides[sourceKey],
+      ...editionOverrides[sourceKey],
     };
     const key = `${edition.seriesSlug}|${edition.date}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    const entryOptions =
-      ukMarathonEntryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];
-    if (!entryOptions) {
+    const matchingEntryOptions =
+      entryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];
+    if (!matchingEntryOptions) {
       unique.push(edition);
       continue;
     }
-    const primary = entryOptions.find((option) => option.isPrimary) ?? entryOptions[0];
+    const primary =
+      matchingEntryOptions.find((option) => option.isPrimary) ?? matchingEntryOptions[0];
     unique.push({
       ...edition,
       entryUrl: primary.entryUrl,
-      entryOptions,
+      entryOptions: matchingEntryOptions,
     });
   }
   return unique;
