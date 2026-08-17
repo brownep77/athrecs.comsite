@@ -12,7 +12,7 @@ import {
 import { ukMarathonEditionReplacements } from "@/data/entry-options-uk-marathons";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-marathon-entry-batch-seven-v76";
+const SEED_VERSION = "athrecs-uk-marathon-entry-batch-eight-v77";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
