@@ -57,7 +57,10 @@ import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics"
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
-import { ukMarathonEntryOptions } from "./entry-options-uk-marathons";
+import {
+  ukMarathonEntryOptions,
+  ukMarathonSeriesOverrides,
+} from "./entry-options-uk-marathons";
 import {
   raceCollectionEditions,
   raceCollectionSeries,
@@ -139,7 +142,10 @@ for (const series of [
 }
 const extraSlugs = new Set(extraSeries.map((series) => series.slug));
 
-export const seriesList: Series[] = [...coreSeries, ...extraSeries];
+export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series) => ({
+  ...series,
+  ...ukMarathonSeriesOverrides[series.slug],
+}));
 
 const mergedEditions = [
   ...(coreEditions as Edition[]),
