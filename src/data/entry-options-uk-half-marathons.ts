@@ -884,6 +884,33 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     entryUrl: "https://www.edinburghmarathon.com/",
     source: "https://www.edinburghmarathon.com/",
   },
+  "pooley-bridge-trail-runs|2027-06-05|Half": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.wilddeerevents.co.uk/e/pooley-bridge-wild-trail-runs-2026-10km-and-half-marathon-14500",
+    source:
+      "https://www.wilddeerevents.co.uk/e/pooley-bridge-wild-trail-runs-2026-10km-and-half-marathon-14500",
+  },
+  "blair-castle-trail-weekender-sunday|2027-06-06|Half": {
+    startTime: "10:00",
+    entryUrl:
+      "https://outsiderevents.eventrac.co.uk/e/blair-castle-trail-weekender-9131",
+    source: "https://www.outsiderevents.com/atholltrailhalmarathon",
+  },
+  "leamington-spa-half-marathon|2027-06-06|Half": {
+    startTime: "08:00",
+    entryUrl:
+      "https://racewaysevents.eventrac.co.uk/e/leamington-spa-half-marathon-8852",
+    source:
+      "https://racewaysevents.eventrac.co.uk/e/leamington-spa-half-marathon-8852",
+  },
+  "valley-of-the-owls|2027-06-06|Half": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.evententry.co.uk/zigzag-2027-the-valley-of-the-owls-run",
+    source:
+      "https://www.evententry.co.uk/zigzag-2027-the-valley-of-the-owls-run",
+  },
 };
 
 /** Correct source metadata for half-marathon records imported from regional listings. */
@@ -2193,6 +2220,65 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
       "A fast, flat point-to-point road half marathon from central Edinburgh to the East Lothian coast at Musselburgh.",
     organiser: "GSi Events",
     website: "https://www.edinburghmarathon.com/",
+  },
+  "pooley-bridge-trail-runs": {
+    name: "Pooley Bridge Trail Runs",
+    city: "Pooley Bridge",
+    county: "Cumbria",
+    country: "England",
+    area: "Waterside Farm Campsite, Ullswater",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    summary: "Pooley Bridge Trail Runs — Waterside Farm, Ullswater.",
+    description:
+      "A scenic trail half marathon from Pooley Bridge beside Ullswater, organised by Wild Deer Events.",
+    organiser: "Wild Deer Events",
+    website:
+      "https://www.wilddeerevents.co.uk/e/pooley-bridge-wild-trail-runs-2026-10km-and-half-marathon-14500",
+  },
+  "blair-castle-trail-weekender-sunday": {
+    name: "Atholl Trail Half Marathon",
+    city: "Blair Atholl",
+    county: "Perth and Kinross",
+    country: "Scotland",
+    area: "Blair Castle Estate",
+    surface: "Trail",
+    distances: ["Half"],
+    summary: "Atholl Trail Half Marathon — Blair Castle Estate, Perthshire.",
+    description:
+      "A 21.1 km trail half marathon with about 400 metres of climbing through the Blair Castle Estate, part of the Blair Castle Trail Weekender.",
+    organiser: "Outsider Events",
+    website: "https://www.outsiderevents.com/atholltrailhalmarathon",
+  },
+  "leamington-spa-half-marathon": {
+    name: "Leamington Spa Half Marathon",
+    city: "Leamington Spa",
+    county: "Warwickshire",
+    country: "England",
+    area: "Royal Pump Room Gardens",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Leamington Spa Half Marathon — Royal Pump Room Gardens, Warwickshire.",
+    description:
+      "A closed-road half marathon starting and finishing at the Royal Pump Room Gardens in Leamington Spa.",
+    organiser: "Raceways Events CIC",
+    website:
+      "https://racewaysevents.eventrac.co.uk/e/leamington-spa-half-marathon-8852",
+  },
+  "valley-of-the-owls": {
+    name: "The Valley of the Owls Run",
+    city: "Bury St Edmunds",
+    county: "Suffolk",
+    country: "England",
+    area: "Suffolk Running Centre",
+    surface: "Mixed",
+    distances: ["Half", "Marathon", "Ultra", "10K", "5K"],
+    summary: "The Valley of the Owls Run — Suffolk Running Centre, Bury St Edmunds.",
+    description:
+      "A flexible-distance, multi-lap run from the Suffolk Running Centre on road, path and trail, organised by Zig Zag Running.",
+    organiser: "Zig Zag Running",
+    website:
+      "https://www.evententry.co.uk/zigzag-2027-the-valley-of-the-owls-run",
   },
 };
 
@@ -10604,6 +10690,88 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
         "https://www.macmillan.org.uk/fundraise/charity-runs/edinburgh-half-marathon",
       isVerified: true,
       notes: "Charity entry is £25 with a £300 fundraising pledge.",
+    },
+  ],
+  "pooley-bridge-trail-runs|2027-06-05|Half": [
+    {
+      providerCode: "official-wild-deer-events",
+      providerName: "Wild Deer Events official entry",
+      entryUrl:
+        "https://www.wilddeerevents.co.uk/e/pooley-bridge-wild-trail-runs-2026-10km-and-half-marathon-14500",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T16:50:00+01:00",
+      sourceUrl:
+        "https://www.wilddeerevents.co.uk/e/pooley-bridge-wild-trail-runs-2026-10km-and-half-marathon-14500",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The live entry page lists the 2027 half-marathon start at 09:30.",
+    },
+  ],
+  "blair-castle-trail-weekender-sunday|2027-06-06|Half": [
+    {
+      providerCode: "official-outsider-events",
+      providerName: "Outsider Events official entry",
+      entryUrl:
+        "https://outsiderevents.eventrac.co.uk/e/blair-castle-trail-weekender-9131",
+      entryType: "official",
+      status: "open",
+      priceAmount: 52,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:50:00+01:00",
+      sourceUrl: "https://www.outsiderevents.com/atholltrailhalmarathon",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The organiser lists £52 plus a 4% Eventrac booking fee.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/blair-castle-trail-weekender",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 50,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:50:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/blair-castle-trail-weekender",
+      isVerified: true,
+      notes: "The exact event page lists the Atholl Trail Half at 10:00 on 6 June 2027.",
+    },
+  ],
+  "leamington-spa-half-marathon|2027-06-06|Half": [
+    {
+      providerCode: "official-raceways-events",
+      providerName: "Raceways Events official entry",
+      entryUrl:
+        "https://racewaysevents.eventrac.co.uk/e/leamington-spa-half-marathon-8852",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:50:00+01:00",
+      sourceUrl:
+        "https://racewaysevents.eventrac.co.uk/e/leamington-spa-half-marathon-8852",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The live half-marathon entry range is £40–£42.",
+    },
+  ],
+  "valley-of-the-owls|2027-06-06|Half": [
+    {
+      providerCode: "official-evententry",
+      providerName: "Zig Zag Running official entry",
+      entryUrl:
+        "https://www.evententry.co.uk/zigzag-2027-the-valley-of-the-owls-run",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:50:00+01:00",
+      sourceUrl:
+        "https://www.evententry.co.uk/zigzag-2027-the-valley-of-the-owls-run",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Half-marathon entry is £29–£36 depending on affiliation and medal choice.",
     },
   ],
 };
