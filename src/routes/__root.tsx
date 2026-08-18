@@ -29,10 +29,7 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       {
         name: "viewport",
-        content: "width=device-device-width, initial-scale=1, viewport-fit=cover".replace(
-          "device-device",
-          "device",
-        ),
+        content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
       { name: "theme-color", content: "#f4f7f7" },
       {
