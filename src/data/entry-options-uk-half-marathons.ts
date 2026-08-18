@@ -226,6 +226,13 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     toDate: "2027-04-11",
     toDistance: "Half",
   },
+  {
+    seriesSlug: "sir-titus-march-mayhem",
+    distance: "10K",
+    fromDate: "2027-04-17",
+    toDate: "2027-04-18",
+    toDistance: "Half",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -736,6 +743,30 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     startTime: "09:00",
     source:
       "https://zigzagrunning.eventrac.co.uk/e/haughley-festival-of-running-11149",
+  },
+  "podplus-kent-spring-marathon-half-marathon|2027-04-18|Half": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/kent-spring-marathon-and-half-marathon-9124",
+    source:
+      "https://www.nice-work.org.uk/e/kent-spring-marathon-and-half-marathon-9124",
+  },
+  "podplus-kent-spring-marathon-half-marathon|2027-04-18|Marathon": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/kent-spring-marathon-and-half-marathon-9124",
+    source:
+      "https://www.nice-work.org.uk/e/kent-spring-marathon-and-half-marathon-9124",
+  },
+  "sir-titus-march-mayhem|2027-04-17|10K": {
+    date: "2027-04-18",
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:00",
+    entryUrl:
+      "https://www.itsgrimupnorthrunning.co.uk/e/sir-titus-march-mayhem-11655",
+    source:
+      "https://www.itsgrimupnorthrunning.co.uk/e/sir-titus-march-mayhem-11655",
   },
 };
 
@@ -1816,13 +1847,43 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     website:
       "https://zigzagrunning.eventrac.co.uk/e/haughley-festival-of-running-11149",
   },
+  "podplus-kent-spring-marathon-half-marathon": {
+    name: "Kent Spring Marathon & Half Marathon",
+    city: "Woodchurch",
+    county: "Kent",
+    country: "England",
+    area: "Woodchurch Green and quiet country lanes around Woodchurch",
+    surface: "Road",
+    distances: ["Marathon", "Half"],
+    summary: "Kent Spring Marathon & Half Marathon — Woodchurch, Kent.",
+    description:
+      "An undulating road marathon and half marathon on tarmac country lanes from Woodchurch Green, organised by Nice Work.",
+    organiser: "Nice Work",
+    website:
+      "https://www.nice-work.org.uk/e/kent-spring-marathon-and-half-marathon-9124",
+  },
+  "sir-titus-march-mayhem": {
+    name: "Sir Titus March Mayhem",
+    city: "Saltaire",
+    county: "West Yorkshire",
+    country: "England",
+    area: "The Boathouse Inn and the Leeds & Liverpool Canal at Saltaire",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "20M", "10M", "10K"],
+    summary: "Sir Titus March Mayhem — Saltaire, West Yorkshire.",
+    description:
+      "A flat, traffic-free canal-towpath race from Saltaire beside the Leeds & Liverpool Canal, organised by It's Grim Up North Running.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/sir-titus-march-mayhem-11655",
+  },
 };
 
 /**
  * Entry routes checked on 17–18 August 2026.
  *
  * A provider is included only when the exact destination offered registration
- * for the listed 2026 edition. Listing-only and "Notify me" pages are excluded.
+ * for the listed edition. Listing-only and "Notify me" pages are excluded.
  */
 export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
   "nottingham-running-festival|2026-08-30|Half": [
@@ -9420,6 +9481,223 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
         "https://www.letsdothis.com/gb/e/haughley-festival-of-running-268227",
       isVerified: true,
       notes: "The displayed half-marathon entry range is £29–£36.",
+    },
+  ],
+  "pink-moon-ladies-trail-half-marathon-2027|2027-04-17|Half": [
+    {
+      providerCode: "official-si-entries",
+      providerName: "SI Entries official entry",
+      entryUrl:
+        "https://www.sientries.co.uk/event/pink-moon-ladies-trail-half-marathon-2027",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.sientries.co.uk/event/pink-moon-ladies-trail-half-marathon-2027",
+      isVerified: true,
+      isPrimary: true,
+      notes: "UK Athletics members pay £28; non-members pay £30.",
+    },
+  ],
+  "yorkshire-weekend-saunter-series-in-leeds-2027|2027-04-17|Half": [
+    {
+      providerCode: "official-grim-up-north",
+      providerName: "It's Grim Up North official entry",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-leeds-15598",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-leeds-15598",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/yorkshire-weekend-saunter-series-in-leeds",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 31,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/yorkshire-weekend-saunter-series-in-leeds",
+      isVerified: true,
+    },
+  ],
+  "podplus-kent-spring-marathon-half-marathon|2027-04-18|Half": [
+    {
+      providerCode: "official-nice-work",
+      providerName: "Nice Work official entry",
+      entryUrl:
+        "https://www.nice-work.org.uk/e/kent-spring-marathon-and-half-marathon-9124",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.nice-work.org.uk/e/kent-spring-marathon-and-half-marathon-9124",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The organiser lists £35 for half-marathon entry on the day, subject to availability.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/kent-spring-marathon-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 26.78,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/kent-spring-marathon-half-marathon",
+      isVerified: true,
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl:
+        "https://worldsmarathons.com/marathon/kent-spring-marathon-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 31,
+      priceCurrency: "EUR",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://worldsmarathons.com/marathon/kent-spring-marathon-half-marathon",
+      isVerified: true,
+    },
+  ],
+  "derby-derwent-trail-run-2027|2027-04-18|Half": [
+    {
+      providerCode: "official-uk-running-events",
+      providerName: "UK Running Events official entry",
+      entryUrl:
+        "https://www.ukrunningevents.co.uk/events/trail-runs/derby-derwent-trail-run-2027",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.ukrunningevents.co.uk/events/trail-runs/derby-derwent-trail-run-2027",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/derby-derwent-trail-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 44.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/derby-derwent-trail-run",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/derby-derwent-trail-run-268334",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 44.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/derby-derwent-trail-run-268334",
+      isVerified: true,
+    },
+  ],
+  "sir-titus-march-mayhem|2027-04-18|Half": [
+    {
+      providerCode: "official-grim-up-north",
+      providerName: "It's Grim Up North official entry",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/sir-titus-march-mayhem-11655",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/sir-titus-march-mayhem-11655",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/sir-titus-march-mayhem-2",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 31,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/sir-titus-march-mayhem-2",
+      isVerified: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/sir-tit-march-mayhem/half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/sir-tit-march-mayhem/half-marathon",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £29–£31.",
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl:
+        "https://worldsmarathons.com/marathon/sir-titus-march-mayhem",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://worldsmarathons.com/marathon/sir-titus-march-mayhem",
+      isVerified: true,
+    },
+  ],
+  "abp-newport-marathon-festival-2027|2027-04-18|Half": [
+    {
+      providerCode: "official-run-4-wales",
+      providerName: "Run 4 Wales official entry",
+      entryUrl: "https://newportwalesmarathon.co.uk/register-half-marathon/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 43,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl: "https://newportwalesmarathon.co.uk/register-half-marathon/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Early-bird half-marathon entry is £43; general entry is £49 and affiliated entry is £47.",
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/2027-abp-newport-marathon-festival-244911",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 10,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T22:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/2027-abp-newport-marathon-festival-244911",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £10–£47, including charity entry.",
     },
   ],
 };
