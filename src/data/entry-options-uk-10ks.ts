@@ -181,6 +181,12 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-19",
     toDate: "2026-09-20",
   },
+  {
+    seriesSlug: "yorkshire-weekend-saunter-series-knaresborough",
+    distance: "10K",
+    fromDate: "2026-09-19",
+    toDate: "2026-09-20",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -1446,6 +1452,53 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     startTime: undefined,
     entryUrl: "https://srac.org.uk/",
     source: "https://srac.org.uk/",
+  },
+  "yorkshire-weekend-saunter-series-knaresborough|2026-09-19|10K": {
+    date: "2026-09-20",
+    startTime: "09:00",
+    entryUrl:
+      "https://www.itsgrimupnorthrunning.co.uk/e/the-yorkshire-weekend-saunter-seriesin-knaresborough-14220",
+    source:
+      "https://www.itsgrimupnorthrunning.co.uk/e/the-yorkshire-weekend-saunter-seriesin-knaresborough-14220",
+    notes:
+      "Corrected from Saturday 19 September. The organiser confirms the Knaresborough race is on Sunday 20 September, with 10K registration from 08:00 and the start at 09:00.",
+  },
+  "abp-humber-coastal-half-marathon-5k|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://tape2tape.co.uk/event/abp-humber-coastal-half-marathon-10k-family-fun-run-2026/",
+    source:
+      "https://tape2tape.co.uk/event/abp-humber-coastal-half-marathon-10k-family-fun-run-2026/",
+    notes:
+      "The 10K starts at 10:00 on Kings Road near Cleethorpes Leisure Centre and finishes on the central promenade. The 2026 race marks the event's tenth year with ABP.",
+  },
+  "asda-foundation-bury-10k|2026-09-20|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.runforall.com/events/10k/bury-10k/",
+    source: "https://www.runforall.com/events/10k/bury-10k/",
+    notes:
+      "The Run For All timetable confirms a 09:30 start outside The Rock. The traffic-managed route heads through Bury and onto the Kirklees Trail before returning to the town centre.",
+  },
+  "brewood-10k|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.avtiming.com/brewood10k",
+    source: "https://www.avtiming.com/brewood10k",
+    notes:
+      "Race HQ opens at 08:00 at St Mary and St Chad First School. The chip-timed multi-terrain 10K starts at 10:00 and finishes in Brewood village square.",
+  },
+  "cannock-chase-trail-runs|2026-09-20|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.wilddeerevents.co.uk/e/cannock-chase-wild-trail-10km-14697",
+    source: "https://www.wilddeerevents.co.uk/e/cannock-chase-wild-trail-10km-14697",
+    notes:
+      "The organiser confirms the 10K starts at 09:30, correcting the later imported time. The signed route uses forest paths, open heathland and gravel trails at Cannock Chase Forest.",
+  },
+  "east-neuk-10k|2026-09-20|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/?raceID=100073",
+    source: "https://runabc.co.uk/east-neuk-10k",
+    notes:
+      "The 10K starts at 11:00 from Waid Academy, with the fun run following at 12:00. EntryCentral lists the 2026 edition as open and closing on 13 September.",
   },
 };
 
@@ -3834,6 +3887,97 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Westside Runners' local event traditionally combines a Shawbost-to-Bragar 10K with a shorter loop beside Loch a Bhaile, based at Ionad na Seann Sgoil on the Isle of Lewis.",
     organiser: "Westside Runners Running / Fitness Club",
     website: "https://srac.org.uk/",
+  },
+  "yorkshire-weekend-saunter-series-knaresborough": {
+    name: "Yorkshire Weekend Saunter Series — Knaresborough",
+    city: "Knaresborough",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Harrogate Road and Knaresborough countryside",
+    surface: "Mixed",
+    distances: ["10K", "Half"],
+    summary:
+      "Yorkshire Weekend Saunter Series — relaxed 10K and half-marathon routes around Knaresborough.",
+    description:
+      "It's Grim Up North Running's inclusive weekend event welcomes runners, joggers and walkers, with scenic routes, flexible pacing, a jumble medal, hot food and a post-race drink.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/the-yorkshire-weekend-saunter-seriesin-knaresborough-14220",
+  },
+  "abp-humber-coastal-half-marathon-5k": {
+    name: "ABP Humber Coastal Half Marathon & 10K",
+    city: "Cleethorpes",
+    county: "North East Lincolnshire",
+    country: "England",
+    area: "Kings Road and Cleethorpes central promenade",
+    surface: "Road",
+    distances: ["10K", "Half", "1mi"],
+    summary:
+      "ABP Humber Coastal Half Marathon & 10K — flat seaside races finishing on Cleethorpes promenade.",
+    description:
+      "Tape2Tape's tenth-anniversary festival combines a flat, fast 10K on roads, coastal footpath and promenade with a half marathon and family fun run, chip timing and closed-road sections.",
+    organiser: "Tape2Tape",
+    website:
+      "https://tape2tape.co.uk/event/abp-humber-coastal-half-marathon-10k-family-fun-run-2026/",
+  },
+  "asda-foundation-bury-10k": {
+    name: "Bury BID Bury 10K",
+    city: "Bury",
+    county: "Greater Manchester",
+    country: "England",
+    area: "The Rock and Kirklees Trail",
+    surface: "Mixed",
+    distances: ["10K", "Junior"],
+    summary:
+      "Bury BID Bury 10K — a welcoming town-centre race incorporating the scenic Kirklees Trail.",
+    description:
+      "Run For All stages this chip-timed community race with Bury Council and Bury BID, starting and finishing outside The Rock and welcoming runners of all abilities.",
+    organiser: "Jane Tomlinson's Run For All",
+    website: "https://www.runforall.com/events/10k/bury-10k/",
+  },
+  "brewood-10k": {
+    name: "Brewood Woggle 10K",
+    city: "Brewood",
+    county: "Staffordshire",
+    country: "England",
+    area: "Brewood village and South Staffordshire countryside",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Brewood Woggle 10K — a friendly multi-terrain village race with a Brewood Square finish.",
+    description:
+      "This relatively flat, chip-timed community race crosses gently undulating South Staffordshire terrain before finishing in Brewood village square, with a bespoke medal, homemade cakes and free race photos.",
+    organiser: "Brewood 10K / Gator Events",
+    website: "https://www.avtiming.com/brewood10k",
+  },
+  "cannock-chase-trail-runs": {
+    name: "Cannock Chase Wild Trail 5K & 10K",
+    city: "Rugeley",
+    county: "Staffordshire",
+    country: "England",
+    area: "Cannock Chase Forest, Birches Valley",
+    surface: "Trail",
+    distances: ["10K", "5K"],
+    summary:
+      "Cannock Chase Wild Trail 5K & 10K — signed forest races across heathland and gravel trails.",
+    description:
+      "Wild Deer Events' trail races explore Cannock Chase Forest on well-signed paths through pine forest, open heathland and gravel terrain, with live chip timing and an event medal.",
+    organiser: "Wild Deer Events",
+    website: "https://www.wilddeerevents.co.uk/e/cannock-chase-wild-trail-10km-14697",
+  },
+  "east-neuk-10k": {
+    name: "East Neuk 10K",
+    city: "Anstruther",
+    county: "Fife",
+    country: "Scotland",
+    area: "Waid Academy and the East Neuk of Fife",
+    surface: "Mixed",
+    distances: ["10K", "Fun Run"],
+    summary: "East Neuk 10K — a fast out-and-back race from Waid Academy in Anstruther.",
+    description:
+      "Anster Haddies Running Club's annual 10K starts from Waid Academy and is followed by a noon fun run, with the 2026 entry hosted by EntryCentral.",
+    organiser: "Anster Haddies Running Club",
+    website: "https://www.entrycentral.com/?raceID=100073",
   },
 };
 
@@ -8267,6 +8411,203 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC currently lists 19 September in its Highlands calendar, but its detailed page still shows the 2025 edition. Await organiser confirmation.",
+    },
+  ],
+  "yorkshire-weekend-saunter-series-knaresborough|2026-09-20|10K": [
+    {
+      providerCode: "official-grim-up-north",
+      providerName: "It's Grim Up North official entry",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/the-yorkshire-weekend-saunter-seriesin-knaresborough-14220",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/the-yorkshire-weekend-saunter-seriesin-knaresborough-14220",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists the 10K as open at £23-£25, with pay-on-the-day entry advertised at £17 subject to places remaining.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/the-yorkshire-weekend-saunter-series-in-knaresborough",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/the-yorkshire-weekend-saunter-series-in-knaresborough",
+      isVerified: true,
+      notes:
+        "Find a Race is an official booking partner and offers Quick Book for the exact 20 September 10K at £25, with £2 UKA or TRA discount.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event entry",
+      entryUrl: "https://runabc.co.uk/yorkshire-weekend-saunter-series-knaresborough",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/yorkshire-weekend-saunter-series-knaresborough",
+      isVerified: true,
+      notes:
+        "runABC offers an entry route for the Sunday race; its original imported calendar date was one day early.",
+    },
+  ],
+  "abp-humber-coastal-half-marathon-5k|2026-09-20|10K": [
+    {
+      providerCode: "official-tape2tape",
+      providerName: "Tape2Tape official entry",
+      entryUrl:
+        "https://tape2tape.co.uk/event/abp-humber-coastal-half-marathon-10k-family-fun-run-2026/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-16T23:59:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://tape2tape.co.uk/event/abp-humber-coastal-half-marathon-10k-family-fun-run-2026/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Current standard 10K entry is £26 UKA-affiliated or £28 unaffiliated through 7 September; late entry is £29-£31 through 16 September.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/abp-humber-coastal-half-marathon-and-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/abp-humber-coastal-half-marathon-and-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors lists open online entry for the 10K across the organiser's £22-£31 tiered price range.",
+    },
+  ],
+  "asda-foundation-bury-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-run-for-all",
+      providerName: "Run For All official entry",
+      entryUrl: "https://www.runforall.com/events/10k/bury-10k/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.runforall.com/events/10k/bury-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official page links to open entry; the current event-only fee is £26 affiliated or £28 unaffiliated, with optional finisher-shirt packages.",
+    },
+    {
+      providerCode: "active",
+      providerName: "ACTIVE checkout",
+      entryUrl: "https://www.active.com/bury/running/distance-running-races/bury-bid-10k-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.active.com/bury/running/distance-running-races/bury-bid-10k-2026",
+      isVerified: true,
+      notes:
+        "ACTIVE is the linked checkout and currently lists £26 UKA-member or £28 general event-only entry before the next price rise.",
+    },
+  ],
+  "brewood-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-av-timing",
+      providerName: "Brewood 10K official entry",
+      entryUrl: "https://www.avtiming.com/brewood10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 27.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.avtiming.com/brewood10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "AV Timing lists open entry at £27.50 for affiliated runners or £30 standard, plus a £1.75 service fee.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/brewood-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/brewood-10k",
+      isVerified: true,
+      notes:
+        "runABC confirms the Sunday date, 10:00 start, race HQ and organiser information, linking through to entry.",
+    },
+  ],
+  "cannock-chase-trail-runs|2026-09-20|10K": [
+    {
+      providerCode: "official-wild-deer",
+      providerName: "Wild Deer Events official entry",
+      entryUrl: "https://www.wilddeerevents.co.uk/e/cannock-chase-wild-trail-10km-14697",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.wilddeerevents.co.uk/e/cannock-chase-wild-trail-10km-14697",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists open 10K entry at £26, a 09:30 start, live chip timing and an optional £14 event T-shirt.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/cannock-chase-trail-runs",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/cannock-chase-trail-runs",
+      isVerified: true,
+      notes:
+        "runABC links to entry but shows a conflicting later start; the official Wild Deer page confirms 09:30.",
+    },
+  ],
+  "east-neuk-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-east-neuk-entrycentral",
+      providerName: "East Neuk 10K EntryCentral entry",
+      entryUrl: "https://www.entrycentral.com/?raceID=100073",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/?raceID=100073",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists the 20 September 2026 race as open, with online entries closing on 13 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/east-neuk-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/east-neuk-10k",
+      isVerified: true,
+      notes:
+        "runABC confirms the 11:00 start from Waid Academy and links through to the event entry route.",
     },
   ],
 };
