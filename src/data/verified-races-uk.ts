@@ -1228,6 +1228,82 @@ export const verifiedUkSeries: Series[] = [
     source_url:
       "https://www.saturnrunning.co.uk/e/st-davids-day-dragon-run-2027-14939",
   },
+  {
+    slug: "north-lincolnshire-half-marathon",
+    name: "North Lincolnshire Half Marathon & 10K",
+    sport: "Running",
+    country: "England",
+    county: "North Lincolnshire",
+    city: "Scunthorpe",
+    area: "Quibell Park Stadium and the Lincolnshire countryside",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary: "North Lincolnshire Half Marathon — Scunthorpe, North Lincolnshire.",
+    description:
+      "A flat, fast and fully road-closed single-lap half marathon from Quibell Park Stadium through the Lincolnshire countryside.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/north-lincolnshire-half-marathon-10k-march-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/north-lincolnshire-half-marathon-10k-march-2027",
+  },
+  {
+    slug: "middlesbrough-half-marathon-juniors-march",
+    name: "Middlesbrough Half Marathon Presented by Science in Sport",
+    sport: "Running",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Middlesbrough",
+    area: "Centre Square, Albert Park, Riverside Stadium and Middlesbrough docks",
+    surface: "Road",
+    distances: ["Half", "1K"],
+    summary: "Middlesbrough Half Marathon — Middlesbrough, North Yorkshire.",
+    description:
+      "A fast, flat and fully road-closed city half marathon from Centre Square through Albert Park, past Riverside Stadium and around the historic docks.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/middlesbrough-half-marathon-presented-by-science-in-sport-march-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/middlesbrough-half-marathon-presented-by-science-in-sport-march-2027",
+  },
+  {
+    slug: "eastbourne-half-marathon-2027",
+    name: "Eastbourne Half Marathon 2027",
+    sport: "Running",
+    country: "England",
+    county: "East Sussex",
+    city: "Eastbourne",
+    area: "Princes Park and Eastbourne seafront",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Eastbourne Half Marathon — Eastbourne, East Sussex.",
+    description:
+      "A largely flat, road-closed half marathon starting and finishing in Princes Park and following Eastbourne's seafront and promenades.",
+    organiser: "Eastbourne Runs",
+    website: "https://www.eastbourneruns.co.uk/eastbourne-half-marathon",
+    featured: false,
+    source_url: "https://www.eastbourneruns.co.uk/eastbourne-half-marathon",
+  },
+  {
+    slug: "pitsford-water-trail-races",
+    name: "Pitsford Water Trail Races",
+    sport: "Running",
+    country: "England",
+    county: "Northamptonshire",
+    city: "Brixworth",
+    area: "Brixworth Country Park and Pitsford Water",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    summary: "Pitsford Water Trail Races — Brixworth, Northamptonshire.",
+    description:
+      "A fully marked and marshalled trail half marathon from Brixworth Country Park around Pitsford Water and through Holcot, Hannington, Walgrave, Old and Scaldwell.",
+    organiser: "Race Harborough",
+    website: "https://raceharborough.co.uk/pitsfordwatertrails/",
+    featured: false,
+    source_url: "https://raceharborough.co.uk/pitsfordwatertrails/",
+  },
 ];
 
 export const verifiedUkEditions: Edition[] = [
@@ -1960,5 +2036,50 @@ export const verifiedUkEditions: Edition[] = [
     entryUrl: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-10421",
     startTime: "10:30",
     source: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-10421",
+  },
+  {
+    seriesSlug: "north-lincolnshire-half-marathon",
+    date: "2027-03-07",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/north-lincolnshire-half-marathon-10k-march-2027",
+    startTime: "09:30",
+    source:
+      "https://www.runthrough.co.uk/event/north-lincolnshire-half-marathon-10k-march-2027",
+  },
+  {
+    seriesSlug: "middlesbrough-half-marathon-juniors-march",
+    date: "2027-03-07",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/middlesbrough-half-marathon-presented-by-science-in-sport-march-2027",
+    startTime: "09:00",
+    source:
+      "https://www.runthrough.co.uk/event/middlesbrough-half-marathon-presented-by-science-in-sport-march-2027",
+  },
+  {
+    seriesSlug: "eastbourne-half-marathon-2027",
+    date: "2027-03-07",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://register.enthuse.com/ps/event/EastbourneHalfMarathon2027",
+    startTime: "09:30",
+    source: "https://www.eastbourneruns.co.uk/eastbourne-half-marathon",
+  },
+  {
+    seriesSlug: "pitsford-water-trail-races",
+    date: "2027-03-07",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://raceharborough.eventrac.co.uk/e/pitsford-water-trail-races-13967",
+    startTime: "09:00",
+    source: "https://raceharborough.co.uk/pitsfordwatertrails/",
   },
 ];
