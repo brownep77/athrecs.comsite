@@ -404,7 +404,25 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ) as entry_options_json
       from editions ed
       where ed.event_id = ${event.id}
-      order by ed.event_date desc
+      order by
+        ed.event_date desc,
+        exists (
+          select 1 from edition_entry_options option
+          where option.edition_id = ed.id and option.is_verified
+        ) desc,
+        exists (
+          select 1 from edition_entry_options option
+          where option.edition_id = ed.id
+        ) desc,
+        case ed.distance_code
+          when 'Half' then 0
+          when 'Marathon' then 1
+          when 'Ultra' then 2
+          when '10K' then 3
+          when '5K' then 4
+          else 5
+        end,
+        ed.id desc
     `;
     const editions = editionRows.map(({ entry_options_json, ...edition }) => ({
       ...edition,
