@@ -212,6 +212,20 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     fromDate: "2027-04-02",
     toDate: "2027-04-03",
   },
+  {
+    seriesSlug: "monsal-trail-half-marathon-satuday",
+    distance: "10K",
+    fromDate: "2027-04-10",
+    toDate: "2027-04-10",
+    toDistance: "Half",
+  },
+  {
+    seriesSlug: "monsal-trail-half-marathon-sunday",
+    distance: "10K",
+    fromDate: "2027-04-11",
+    toDate: "2027-04-11",
+    toDistance: "Half",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -689,6 +703,39 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     startTime: "09:00",
     source:
       "https://www.itsgrimupnorthrunning.co.uk/e/lets-motor-along-the-towpath-rodley-11657",
+  },
+  "monsal-trail-half-marathon-satuday|2027-04-10|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "10:00",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+  },
+  "monsal-trail-half-marathon-satuday|2027-04-10|Half": {
+    startTime: "10:00",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+  },
+  "monsal-trail-half-marathon-sunday|2027-04-11|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "10:00",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+  },
+  "monsal-trail-half-marathon-sunday|2027-04-11|Half": {
+    startTime: "10:00",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+  },
+  "tewkesbury-half-marathon|2027-04-11|Half": {
+    startTime: "09:00",
+    source: "https://futuresportsevents.com/tewkesbury-half-marathon-10k/",
+  },
+  "haughley-festival-of-running|2027-04-11|Half": {
+    startTime: "09:00",
+    source:
+      "https://zigzagrunning.eventrac.co.uk/e/haughley-festival-of-running-11149",
   },
 };
 
@@ -1709,6 +1756,65 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
       "A fast, mainly flat half marathon on fully closed tarmac roads from Norfolk Showground through the surrounding Norfolk countryside.",
     organiser: "Good Running Events",
     website: "https://www.norwichhalfmarathon.co.uk/",
+  },
+  "monsal-trail-half-marathon-satuday": {
+    name: "Monsal Trail April Half Marathon & 10K — Saturday",
+    city: "Bakewell",
+    county: "Derbyshire",
+    country: "England",
+    area: "Bakewell Station and the Monsal Trail",
+    surface: "Mixed",
+    distances: ["Half", "10K"],
+    summary: "Monsal Trail April Half Marathon — Saturday, Bakewell.",
+    description:
+      "A traffic-free half marathon on the former Midland Railway line through four tunnels and across Monsal Viaduct, organised by Nice Work.",
+    organiser: "Nice Work",
+    website:
+      "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+  },
+  "monsal-trail-half-marathon-sunday": {
+    name: "Monsal Trail April Half Marathon & 10K — Sunday",
+    city: "Bakewell",
+    county: "Derbyshire",
+    country: "England",
+    area: "Bakewell Station and the Monsal Trail",
+    surface: "Mixed",
+    distances: ["Half", "10K"],
+    summary: "Monsal Trail April Half Marathon — Sunday, Bakewell.",
+    description:
+      "A traffic-free half marathon on the former Midland Railway line through four tunnels and across Monsal Viaduct, organised by Nice Work.",
+    organiser: "Nice Work",
+    website:
+      "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+  },
+  "tewkesbury-half-marathon": {
+    name: "Tewkesbury Half Marathon",
+    city: "Tewkesbury",
+    county: "Gloucestershire",
+    country: "England",
+    area: "Tewkesbury High Street, Tewkesbury Abbey and riverside paths",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Tewkesbury Half Marathon — Tewkesbury, Gloucestershire.",
+    description:
+      "A closed-road half marathon through Tewkesbury's historic town centre and surrounding countryside, organised by Future Sports Events.",
+    organiser: "Future Sports Events",
+    website: "https://futuresportsevents.com/tewkesbury-half-marathon-10k/",
+  },
+  "haughley-festival-of-running": {
+    name: "Haughley Festival of Running",
+    city: "Stowmarket",
+    county: "Suffolk",
+    country: "England",
+    area: "Haughley Park",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "Ultra", "15K", "10K", "5K"],
+    summary: "Haughley Festival of Running — Haughley Park, Suffolk.",
+    description:
+      "A flexible-distance, multi-lap trail festival through Haughley Park's pathways and woodland, organised by Zig Zag Running.",
+    organiser: "Zig Zag Running",
+    website:
+      "https://zigzagrunning.eventrac.co.uk/e/haughley-festival-of-running-11149",
   },
 };
 
@@ -8960,7 +9066,7 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
     },
     {
       providerCode: "bhf-charity",
-      providerName: "British Heart Foundation charity place",
+      providerName: "British Heart Foundation charity place (£300 fundraising target)",
       entryUrl: "https://www.bhf.org.uk/how-you-can-help/events/runs/kew-half-marathon",
       entryType: "charity",
       status: "open",
@@ -8973,7 +9079,7 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
     },
     {
       providerCode: "findarace-missing-people-charity",
-      providerName: "Find a Race / Missing People charity place",
+      providerName: "Find a Race / Missing People charity place (£350 minimum pledge)",
       entryUrl: "https://findarace.com/events/kew-gardens-half-marathon",
       entryType: "charity",
       status: "open",
@@ -9034,6 +9140,286 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       checkedAt: "2026-08-18T20:00:00+01:00",
       sourceUrl: "https://worldsmarathons.com/marathon/putney-fulham-half-marathon",
       isVerified: true,
+    },
+  ],
+  "henley-river-half-marathon-april-2027|2027-04-10|Half": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-april-2027",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-april-2027",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/henley-river-10k-half-marathon/10th-april-2027",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 37,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/henley-river-10k-half-marathon/10th-april-2027",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/henley-river-half-marathon-10k-junior-race-april-2027-237248",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/henley-river-half-marathon-10k-junior-race-april-2027-237248",
+      isVerified: true,
+    },
+  ],
+  "magna-carta-spring-2027|2027-04-10|Half": [
+    {
+      providerCode: "official-hermes-running",
+      providerName: "Hermes Running official entry",
+      entryUrl: "https://www.hermesrunning.com/magna-carta/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.hermesrunning.com/magna-carta/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/magna-carta-spring-1",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 45,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/magna-carta-spring-1",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £45–£47.",
+    },
+  ],
+  "monsal-trail-half-marathon-satuday|2027-04-10|Half": [
+    {
+      providerCode: "official-nice-work",
+      providerName: "Nice Work official entry",
+      entryUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/monsal-trail-april-half-marathon-10k-weekend",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 38.36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/monsal-trail-april-half-marathon-10k-weekend",
+      isVerified: true,
+      notes: "Choose the Saturday half marathon on 10 April 2027.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/monsal-trail-april-half-marathon-10k-saturday",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/monsal-trail-april-half-marathon-10k-saturday",
+      isVerified: true,
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl: "https://worldsmarathons.com/marathon/monsal-trail-half-marathon-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "EUR",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://worldsmarathons.com/marathon/monsal-trail-half-marathon-10k",
+      isVerified: true,
+      notes: "Choose the Saturday half marathon on 10 April 2027.",
+    },
+  ],
+  "monsal-trail-half-marathon-sunday|2027-04-11|Half": [
+    {
+      providerCode: "official-nice-work",
+      providerName: "Nice Work official entry",
+      entryUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-april-half-marathon-and-10k-weekend-9016",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/monsal-trail-april-half-marathon-10k-weekend",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 38.36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/monsal-trail-april-half-marathon-10k-weekend",
+      isVerified: true,
+      notes: "Choose the Sunday half marathon on 11 April 2027.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/monsal-trail-april-half-marathon-10k-sunday",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/monsal-trail-april-half-marathon-10k-sunday",
+      isVerified: true,
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl: "https://worldsmarathons.com/marathon/monsal-trail-half-marathon-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "EUR",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://worldsmarathons.com/marathon/monsal-trail-half-marathon-10k",
+      isVerified: true,
+      notes: "Choose the Sunday half marathon on 11 April 2027.",
+    },
+  ],
+  "tewkesbury-half-marathon|2027-04-11|Half": [
+    {
+      providerCode: "official-future-sports-events",
+      providerName: "Future Sports Events official entry",
+      entryUrl: "https://futuresportsevents.com/tewkesbury-half-marathon-10k/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://futuresportsevents.com/tewkesbury-half-marathon-10k/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/tewkesbury-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 47.04,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/tewkesbury-half-marathon",
+      isVerified: true,
+      notes: "UK Athletics-affiliated runners save £2.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/tewkesbury-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42.99,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/tewkesbury-half-marathon",
+      isVerified: true,
+      notes: "The displayed entry range is £42.99–£44.99.",
+    },
+  ],
+  "haughley-festival-of-running|2027-04-11|Half": [
+    {
+      providerCode: "official-zig-zag-running",
+      providerName: "Zig Zag Running official entry",
+      entryUrl:
+        "https://zigzagrunning.eventrac.co.uk/e/haughley-festival-of-running-11149",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://zigzagrunning.eventrac.co.uk/e/haughley-festival-of-running-11149",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/haughley-festival-of-running-5k-10k-half-marathon-full-or-ultra-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 31,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/haughley-festival-of-running-5k-10k-half-marathon-full-or-ultra-marathon",
+      isVerified: true,
+      notes: "Lucky-dip half is £31; bespoke-medal half is £36. Affiliated runners save £2.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/haughley-festival-of-running",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/haughley-festival-of-running",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £29–£36.",
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/haughley-festival-of-running-268227",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/haughley-festival-of-running-268227",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £29–£36.",
     },
   ],
 };

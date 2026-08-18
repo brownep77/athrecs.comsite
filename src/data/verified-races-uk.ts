@@ -1974,6 +1974,44 @@ export const verifiedUkSeries: Series[] = [
     featured: false,
     source_url: "https://www.runuk.co.uk/e/putney-and-fulham-half-marathon-9929",
   },
+  {
+    slug: "henley-river-half-marathon-april-2027",
+    name: "Henley River Half Marathon, 10K & Junior Race — April 2027",
+    sport: "Running",
+    country: "England",
+    county: "Oxfordshire",
+    city: "Henley-on-Thames",
+    area: "Remenham Farm, Temple Island Meadows and the River Thames",
+    surface: "Mixed",
+    distances: ["Half", "10K"],
+    summary: "Henley River Half Marathon — Henley-on-Thames, Oxfordshire.",
+    description:
+      "An undulating riverside half marathon from Remenham Farm beside the River Thames, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-april-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-april-2027",
+  },
+  {
+    slug: "magna-carta-spring-2027",
+    name: "Magna Carta Spring 2027",
+    sport: "Running",
+    country: "England",
+    county: "Surrey",
+    city: "Egham",
+    area: "Wraysbury Skiff & Punting Club, Runnymede and the Thames Path",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "10K"],
+    summary: "Magna Carta Spring Half Marathon — Runnymede, Surrey.",
+    description:
+      "A flat, fast Thames Path race from Wraysbury Skiff & Punting Club past historic Runnymede towards Old Windsor Lock, organised by Hermes Running.",
+    organiser: "Hermes Running",
+    website: "https://www.hermesrunning.com/magna-carta/",
+    featured: false,
+    source_url: "https://www.hermesrunning.com/magna-carta/",
+  },
 ];
 
 export const verifiedUkEditions: Edition[] = [
@@ -3179,5 +3217,27 @@ export const verifiedUkEditions: Edition[] = [
     entryUrl: "https://www.runuk.co.uk/e/putney-and-fulham-half-marathon-9929",
     startTime: "09:00",
     source: "https://www.runuk.co.uk/e/putney-and-fulham-half-marathon-9929",
+  },
+  {
+    seriesSlug: "henley-river-half-marathon-april-2027",
+    date: "2027-04-10",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-april-2027",
+    startTime: "10:00",
+    source:
+      "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-april-2027",
+  },
+  {
+    seriesSlug: "magna-carta-spring-2027",
+    date: "2027-04-10",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://www.hermesrunning.com/magna-carta/",
+    startTime: "09:00",
+    source: "https://www.hermesrunning.com/magna-carta/",
   },
 ];
