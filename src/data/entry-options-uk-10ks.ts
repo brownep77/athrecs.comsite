@@ -1500,6 +1500,68 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "The 10K starts at 11:00 from Waid Academy, with the fun run following at 12:00. EntryCentral lists the 2026 edition as open and closing on 13 September.",
   },
+  "half-braemarathon-and-10k|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+    source: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+    notes:
+      "The 10K, 10-mile and half-marathon races start together at 10:00 from Braemar Stadium. The 10K follows the opening 5K of the River Dee route before turning back to the stadium.",
+  },
+  "half-braemarathon-and-10k|2026-09-20|10mi": {
+    startTime: "10:00",
+    entryUrl: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+    source: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+  },
+  "half-braemarathon-and-10k|2026-09-20|Half": {
+    startTime: "10:00",
+    entryUrl: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+    source: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+  },
+  "hyndburn-10k|2026-09-20|10K": {
+    startTime: "11:00",
+    entryUrl: "https://bookitzone.com/lee_passco/mLjFFX",
+    source: "https://www.runningspecevents.com/",
+    notes:
+      "RunningSpec Events confirms an 11:00 start. The two-lap mixed-terrain course begins and finishes at the Britannia Tap & Grill and uses roads and tracks around Oswaldtwistle.",
+  },
+  "maggies-5k-10k-chase|2026-09-20|10K": {
+    startTime: "09:10",
+    entryUrl: "https://www.entrycentral.com/MaggiesChase5K10K",
+    source: "https://www.entrycentral.com/MaggiesChase5K10K",
+    notes:
+      "The official timetable confirms a 09:10 10K start, ten minutes after the 5K. The two-loop mixed-surface route uses woodland paths, tarmac and the lochside around Maggie's Forth Valley.",
+  },
+  "maggies-5k-10k-chase|2026-09-20|5K": {
+    startTime: "09:00",
+    entryUrl: "https://www.entrycentral.com/MaggiesChase5K10K",
+    source: "https://www.entrycentral.com/MaggiesChase5K10K",
+  },
+  "mawdesley-10k-trail-run|2026-09-20|10K": {
+    startTime: "11:00",
+    entryUrl: "https://bookitzone.com/SBH/ScEFFX",
+    source: "https://bookitzone.com/SBH/ScEFFX",
+    notes:
+      "Registration opens at 09:00 at the Red Lion and the ARC-rules multi-terrain 10K starts at 11:00. All proceeds support Mawdesley Millennium Green.",
+  },
+  "mctf-run-the-track-5k-10k-exeter|2026-09-20|10K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/1cEFFX",
+    source: "https://www.mactuffevents.com/rtt",
+    notes:
+      "The Exeter programme runs from 14:30 to 17:30. Ten-kilometre entrants select a sub-42, sub-50 or sub-70-minute heat; the organiser will confirm the precise heat time in final instructions.",
+  },
+  "mctf-run-the-track-5k-10k-exeter|2026-09-20|5K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/1cEFFX",
+    source: "https://www.mactuffevents.com/rtt",
+  },
+  "mens-10k-edinburgh|2026-09-20|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.mens10k.com/edinburgh",
+    source: "https://www.mens10k.com/edinburgh",
+    notes:
+      "The official event starts at 09:30 on Lawnmarket in Edinburgh's Old Town and follows a city-centre road route to the finish inside Murrayfield Stadium.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -3978,6 +4040,95 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Anster Haddies Running Club's annual 10K starts from Waid Academy and is followed by a noon fun run, with the 2026 entry hosted by EntryCentral.",
     organiser: "Anster Haddies Running Club",
     website: "https://www.entrycentral.com/?raceID=100073",
+  },
+  "half-braemarathon-and-10k": {
+    name: "Half BraemarAthon, 10K & 10 Mile",
+    city: "Braemar",
+    county: "Aberdeenshire",
+    country: "Scotland",
+    area: "Braemar Stadium and the River Dee",
+    surface: "Road",
+    distances: ["10K", "10mi", "Half"],
+    summary:
+      "Half BraemarAthon, 10K & 10 Mile — undulating out-and-back races beside the River Dee.",
+    description:
+      "Three chip-timed distances share a scenic undulating route from Braemar Stadium towards Linn of Dee, with medals, goodie bags, water stations and category prizes.",
+    organiser: "Eventfull Management",
+    website: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+  },
+  "hyndburn-10k": {
+    name: "Hyndburn 10K Road & Trail Race",
+    city: "Oswaldtwistle",
+    county: "Lancashire",
+    country: "England",
+    area: "Britannia Tap & Grill and Oswaldtwistle",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary: "Hyndburn 10K — two mixed-terrain laps on roads and tracks around Oswaldtwistle.",
+    description:
+      "RunningSpec Events' UK Athletics-rules race starts and finishes at the Britannia Tap & Grill, combining local roads and tracks over a two-lap course.",
+    organiser: "RunningSpec Events",
+    website: "https://www.runningspecevents.com/",
+  },
+  "maggies-5k-10k-chase": {
+    name: "Maggie's 5K & 10K Chase",
+    city: "Larbert",
+    county: "Falkirk",
+    country: "Scotland",
+    area: "Maggie's Forth Valley and Larbert Woods",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary:
+      "Maggie's 5K & 10K Chase — charity woodland and lochside races from Maggie's Forth Valley.",
+    description:
+      "Everyrunner Events' fundraiser follows forest paths, tarmac sections and gentle gradients around Maggie's Pond, starting and finishing at the Maggie's Centre beside Forth Valley Royal Hospital.",
+    organiser: "Everyrunner Events",
+    website: "https://www.entrycentral.com/MaggiesChase5K10K",
+  },
+  "mawdesley-10k-trail-run": {
+    name: "Mawdesley Trail 10K",
+    city: "Mawdesley",
+    county: "Lancashire",
+    country: "England",
+    area: "The Red Lion and Mawdesley countryside",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Mawdesley Trail 10K — a community multi-terrain race supporting the Millennium Green.",
+    description:
+      "This ARC-rules 6.2-mile trail race starts from the Red Lion and raises all proceeds for Mawdesley Millennium Green, a registered local charity.",
+    organiser: "Mawdesley Millennium Green",
+    website: "https://bookitzone.com/SBH/ScEFFX",
+  },
+  "mctf-run-the-track-5k-10k-exeter": {
+    name: "MCT Run The Track 5K & 10K — Exeter",
+    city: "Exeter",
+    county: "Devon",
+    country: "England",
+    area: "Exeter Arena Athletics Track",
+    surface: "Track",
+    distances: ["10K", "5K"],
+    summary:
+      "MCT Run The Track Exeter — accurately measured 5K and 10K heats on an athletics track.",
+    description:
+      "MacTuff Events groups entrants by expected finishing time for a small-field track race with personal lap splits, chip timing and a bespoke series medal.",
+    organiser: "MacTuff Events",
+    website: "https://www.mactuffevents.com/rtt",
+  },
+  "mens-10k-edinburgh": {
+    name: "Men's 10K Edinburgh",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "Lawnmarket to Murrayfield Stadium",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Men's 10K Edinburgh — a city-centre road race from the Royal Mile to Murrayfield Stadium.",
+    description:
+      "MyRunning's point-to-point 10K begins on Lawnmarket, passes through central Edinburgh and finishes inside Murrayfield Stadium, with chip timing, a technical shirt and finisher medal.",
+    organiser: "MyRunning / GSi Events",
+    website: "https://www.mens10k.com/edinburgh",
   },
 };
 
@@ -8608,6 +8759,186 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC confirms the 11:00 start from Waid Academy and links through to the event entry route.",
+    },
+  ],
+  "half-braemarathon-and-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-eventfull-braemar",
+      providerName: "BraemarAthon official entry",
+      entryUrl: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://eventfull.biz/sporting-events/half-braemarathon-10km-10-miles-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser page lists the 10K at £15, with all three distances starting at 10:00 and a shared capacity of 400.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/half-braemarathon-and-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/half-braemarathon-and-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary route to the event. The organiser's live page is authoritative for the corrected 10:00 start and current availability.",
+    },
+  ],
+  "hyndburn-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-hyndburn-bookitzone",
+      providerName: "RunningSpec official BookitZone entry",
+      entryUrl: "https://bookitzone.com/lee_passco/mLjFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 8.44,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-18T12:00:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.runningspecevents.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Online entry costs £8.44 affiliated or £10.44 unaffiliated and closes at noon on 18 September. The organiser also advertises £10/£12 entry on the day.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/hyndburn-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/hyndburn-10k",
+      isVerified: true,
+      notes:
+        "runABC confirms the 11:00 start, venue and two-lap road-and-trail course and links through to entry.",
+    },
+  ],
+  "maggies-5k-10k-chase|2026-09-20|10K": [
+    {
+      providerCode: "official-maggies-entrycentral",
+      providerName: "Maggie's Chase official EntryCentral entry",
+      entryUrl: "https://www.entrycentral.com/MaggiesChase5K10K",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-12T23:59:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/MaggiesChase5K10K",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The 10K costs £24 plus EntryCentral's 4% service fee, is limited to 250 places and closes at 23:59 on 12 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/maggies-5k-10k-chase",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/maggies-5k-10k-chase",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route; the official EntryCentral page confirms the new Larbert venue and 09:10 10K start.",
+    },
+  ],
+  "mawdesley-10k-trail-run|2026-09-20|10K": [
+    {
+      providerCode: "official-mawdesley-bookitzone",
+      providerName: "Mawdesley Trail 10K official entry",
+      entryUrl: "https://bookitzone.com/SBH/ScEFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 10.44,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-18T21:00:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://bookitzone.com/SBH/ScEFFX",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "BookitZone lists £10.44 affiliated or £12.68 unattached entry, a 400-place limit and a 21:00 closing time on 18 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/mawdesley-10k-trail-run",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/mawdesley-10k-trail-run",
+      isVerified: true,
+      notes:
+        "runABC offers another route to the race; the live BookitZone page confirms the 11:00 start and current entry prices.",
+    },
+  ],
+  "mctf-run-the-track-5k-10k-exeter|2026-09-20|10K": [
+    {
+      providerCode: "official-mctf-bookitzone",
+      providerName: "MacTuff official BookitZone checkout",
+      entryUrl: "https://bookitzone.com/dean_ogrady_1/1cEFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25.64,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-18T23:59:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.mactuffevents.com/rtt",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Affiliated 10K heat entry is £25.64 and unaffiliated entry is £28.12. Entrants choose a sub-42, sub-50 or sub-70-minute heat before checkout.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/mctf-run-the-track-5k-10k-exeter",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/mctf-run-the-track-5k-10k-exeter",
+      isVerified: true,
+      notes:
+        "runABC links to the Exeter race; the exact BookitZone checkout confirms the 14:30-17:30 programme and live heat prices.",
+    },
+  ],
+  "mens-10k-edinburgh|2026-09-20|10K": [
+    {
+      providerCode: "official-myrunning-mens10k",
+      providerName: "Men's 10K Edinburgh official entry",
+      entryUrl: "https://www.mens10k.com/edinburgh",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30.25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.mens10k.com/edinburgh/event-information",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official event page lists standard entry from £30.25 and charity places from £0, with the race starting at 09:30.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/edinburgh-mens-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 30.25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://findarace.com/events/edinburgh-mens-10k",
+      isVerified: true,
+      notes:
+        "Find a Race lists open Quick Book entry from £30.25 for the exact 20 September 2026 edition.",
     },
   ],
 };
