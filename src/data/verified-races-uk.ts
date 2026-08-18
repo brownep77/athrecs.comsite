@@ -500,6 +500,82 @@ export const verifiedUkSeries: Series[] = [
     featured: false,
     source_url: "https://www.saturnrunning.co.uk/e/the-winter-lucky-dip-run-15752",
   },
+  {
+    slug: "queen-elizabeth-off-road-half-marathon-march",
+    name: "Queen Elizabeth Country Park Trail Run 2027",
+    sport: "Running",
+    country: "England",
+    county: "Hampshire",
+    city: "Horndean",
+    area: "Queen Elizabeth Country Park and the South Downs Way",
+    surface: "Trail",
+    distances: ["Half"],
+    summary: "Queen Elizabeth Country Park Trail Run — Horndean, Hampshire.",
+    description:
+      "A 21.6 km half-marathon trail race through the hard-packed paths, woodland and South Downs Way around Queen Elizabeth Country Park, organised by UK Running Events.",
+    organiser: "UK Running Events",
+    website:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/queen-elizabeth-country-park-trail-run-qecp-2027",
+    featured: false,
+    source_url:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/queen-elizabeth-country-park-trail-run-qecp-2027",
+  },
+  {
+    slug: "runthrough-crystal-palace-5k-10k-half-marathon-january",
+    name: "Crystal Palace 5K, 10K, Half Marathon & Juniors — January 2027",
+    sport: "Running",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Crystal Palace Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary: "Crystal Palace Half Marathon — Crystal Palace Park, London.",
+    description:
+      "An undulating multi-lap half marathon on the paths of Crystal Palace Park, passing the park's famous dinosaurs, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-january-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-january-2027",
+  },
+  {
+    slug: "runuk-battersea-park-half-marathon-winter",
+    name: "RUN Battersea Park Half Marathon Winter 2027",
+    sport: "Running",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Battersea Park",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "RUN Battersea Park Half Marathon Winter — London.",
+    description:
+      "A flat, fast multi-lap half marathon on the well-paved paths of Battersea Park, with River Thames views, organised by RunUK.",
+    organiser: "RunUK",
+    website: "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-winter-14235",
+    featured: false,
+    source_url: "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-winter-14235",
+  },
+  {
+    slug: "warwick-half-marathon",
+    name: "Warwick Half Marathon presented by Moore & Tibbits 2027",
+    sport: "Running",
+    country: "England",
+    county: "Warwickshire",
+    city: "Warwick",
+    area: "Warwick Racecourse and Warwickshire countryside",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Warwick Half Marathon — Warwick Racecourse, Warwickshire.",
+    description:
+      "A fully road-closed, undulating half marathon from Warwick Racecourse through the Warwickshire countryside, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website: "https://www.warwickhalf.com/",
+    featured: false,
+    source_url: "https://www.warwickhalf.com/",
+  },
 ];
 
 export const verifiedUkEditions: Edition[] = [
@@ -784,5 +860,49 @@ export const verifiedUkEditions: Edition[] = [
     entryUrl: "https://www.saturnrunning.co.uk/e/the-winter-lucky-dip-run-15752",
     startTime: "09:00",
     source: "https://www.saturnrunning.co.uk/e/the-winter-lucky-dip-run-15752",
+  },
+  {
+    seriesSlug: "queen-elizabeth-off-road-half-marathon-march",
+    date: "2027-01-30",
+    distance: "Half",
+    distanceKm: 21.6,
+    status: "Open",
+    entryUrl:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/queen-elizabeth-country-park-trail-run-qecp-2027",
+    startTime: "09:30",
+    source:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/queen-elizabeth-country-park-trail-run-qecp-2027",
+  },
+  {
+    seriesSlug: "runthrough-crystal-palace-5k-10k-half-marathon-january",
+    date: "2027-01-31",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-january-2027",
+    startTime: "10:00",
+    source:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-january-2027",
+  },
+  {
+    seriesSlug: "runuk-battersea-park-half-marathon-winter",
+    date: "2027-01-31",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-winter-14235",
+    startTime: "10:30",
+    source: "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-winter-14235",
+  },
+  {
+    seriesSlug: "warwick-half-marathon",
+    date: "2027-01-31",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://www.warwickhalf.com/",
+    startTime: "09:00",
+    source: "https://www.warwickhalf.com/",
   },
 ];
