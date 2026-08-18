@@ -2090,6 +2090,102 @@ export const verifiedUkSeries: Series[] = [
     featured: false,
     source_url: "https://newportwalesmarathon.co.uk/register-half-marathon/",
   },
+  {
+    slug: "phoenix-west-sussex-not-london-marathon-2027",
+    name: "Phoenix West Sussex — Not the London Marathon 2027",
+    sport: "Running",
+    country: "England",
+    county: "West Sussex",
+    city: "Crawley",
+    area: "Tilgate Park and the Downs Link",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "Ultra", "10K", "5K"],
+    summary: "Phoenix West Sussex Not the London Marathon — Crawley.",
+    description:
+      "A seven-hour flexible-distance trail event on a compact out-and-back course through Tilgate Park, organised by Phoenix Running West Sussex.",
+    organiser: "Phoenix Running West Sussex",
+    website:
+      "https://www.phoenixrunning.co.uk/events/west-sussex-not-the-london-marathon",
+    featured: false,
+    source_url:
+      "https://www.evententry.co.uk/phoenix-west-sussex-not-the-london-marathon",
+  },
+  {
+    slug: "phoenix-warwickshire-not-london-marathon-2027",
+    name: "Phoenix Warwickshire — Not the London Marathon 2027",
+    sport: "Running",
+    country: "England",
+    county: "Warwickshire",
+    city: "Nuneaton",
+    area: "The Pingles Stadium and Riversley Park",
+    surface: "Mixed",
+    distances: ["Half", "Marathon", "10K", "5K"],
+    summary: "Phoenix Warwickshire Not the London Marathon — Nuneaton.",
+    description:
+      "A flat, traffic-free multi-lap race on grass and concrete paths through Riversley Park, finishing in the Pingles Arena Stadium.",
+    organiser: "Phoenix Running Warwickshire",
+    website:
+      "https://www.evententry.co.uk/phoenix-warwickshire-not-the-london-marathon",
+    featured: false,
+    source_url:
+      "https://www.evententry.co.uk/phoenix-warwickshire-not-the-london-marathon",
+  },
+  {
+    slug: "phoenix-manchester-not-london-or-manchester-marathon-2027",
+    name: "Phoenix Manchester — Not the London or Manchester Marathon 2027",
+    sport: "Running",
+    country: "England",
+    county: "Greater Manchester",
+    city: "Manchester",
+    area: "Hardy Farm, Chorlton Water Park and the River Mersey",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "Ultra", "10K", "5K"],
+    summary: "Phoenix Not the London or Manchester Marathon — Manchester.",
+    description:
+      "A flat seven-hour flexible-distance trail event beside the River Mersey and Chorlton Water Park, organised by Phoenix Running Manchester.",
+    organiser: "Phoenix Running Manchester",
+    website:
+      "https://www.phoenixrunning.co.uk/events/manchester-not-the-london-or-manchester-marathon-run",
+    featured: false,
+    source_url:
+      "https://www.evententry.co.uk/phoenix-manchester-not-the-london-or-manchester-marathon-run",
+  },
+  {
+    slug: "lee-valley-velo-park-april-2027",
+    name: "Lee Valley VeloPark — April 2027",
+    sport: "Running",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Lee Valley VeloPark, Queen Elizabeth Olympic Park",
+    surface: "Road",
+    distances: ["Half", "10M", "10K", "5K", "1M"],
+    summary: "Lee Valley VeloPark Half Marathon — Queen Elizabeth Olympic Park.",
+    description:
+      "A chip-timed half marathon over 13 laps of the one-mile tarmac road circuit at Lee Valley VeloPark, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/lee-valley-velo-park-april-2027",
+    featured: false,
+    source_url: "https://www.runthrough.co.uk/event/lee-valley-velo-park-april-2027",
+  },
+  {
+    slug: "blackpool-festival-of-running-2027",
+    name: "Blackpool Festival of Running 2027",
+    sport: "Running",
+    country: "England",
+    county: "Lancashire",
+    city: "Blackpool",
+    area: "North Promenade and Blackpool seafront",
+    surface: "Road",
+    distances: ["Half", "Marathon", "10K", "5K", "2K"],
+    summary: "Blackpool Festival Half Marathon — Blackpool Promenade.",
+    description:
+      "A fast, flat, traffic-free seaside half marathon along Blackpool Promenade, organised by Fylde Coast Runners.",
+    organiser: "Fylde Coast Runners",
+    website: "https://www.runblackpoolfestival.com/half-marathon.html",
+    featured: false,
+    source_url: "https://www.runblackpoolfestival.com/half-marathon.html",
+  },
 ];
 
 export const verifiedUkEditions: Edition[] = [
@@ -3363,5 +3459,62 @@ export const verifiedUkEditions: Edition[] = [
     entryUrl: "https://newportwalesmarathon.co.uk/register-half-marathon/",
     startTime: "09:00",
     source: "https://newportwalesmarathon.co.uk/register-half-marathon/",
+  },
+  {
+    seriesSlug: "phoenix-west-sussex-not-london-marathon-2027",
+    date: "2027-04-24",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.evententry.co.uk/phoenix-west-sussex-not-the-london-marathon",
+    startTime: "08:00",
+    source:
+      "https://www.phoenixrunning.co.uk/events/west-sussex-not-the-london-marathon",
+  },
+  {
+    seriesSlug: "phoenix-warwickshire-not-london-marathon-2027",
+    date: "2027-04-24",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.evententry.co.uk/phoenix-warwickshire-not-the-london-marathon",
+    startTime: "08:00",
+    source:
+      "https://www.evententry.co.uk/phoenix-warwickshire-not-the-london-marathon",
+  },
+  {
+    seriesSlug: "phoenix-manchester-not-london-or-manchester-marathon-2027",
+    date: "2027-04-24",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.evententry.co.uk/phoenix-manchester-not-the-london-or-manchester-marathon-run",
+    startTime: "08:30",
+    source:
+      "https://www.phoenixrunning.co.uk/events/manchester-not-the-london-or-manchester-marathon-run",
+  },
+  {
+    seriesSlug: "lee-valley-velo-park-april-2027",
+    date: "2027-04-24",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://www.runthrough.co.uk/event/lee-valley-velo-park-april-2027",
+    startTime: "09:30",
+    source: "https://www.runthrough.co.uk/event/lee-valley-velo-park-april-2027",
+  },
+  {
+    seriesSlug: "blackpool-festival-of-running-2027",
+    date: "2027-04-25",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.cognitoforms.com/FyldeCoastRunners/BlackpoolFestivalOfRunning2027",
+    startTime: "09:00",
+    source: "https://www.runblackpoolfestival.com/half-marathon.html",
   },
 ];
