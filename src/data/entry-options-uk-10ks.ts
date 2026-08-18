@@ -40,6 +40,35 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source:
       "https://www.upandrunningevents.co.uk/event-details/bellahouston-park-5k-10k-half-marathon-9",
   },
+  "birchwood-10k|2026-08-23|10K": {
+    startTime: "10:00",
+    entryUrl: "https://spectrumstriders.niftyentries.com/Birchwood-10K-2026",
+    source: "https://10k.spectrumstriders.org.uk/",
+  },
+  "guernsey-mind-investec-10k|2026-08-23|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.guernseymind.org.gg/10k-run-challenge/",
+    source: "https://www.guernseymind.org.gg/10k-run-challenge/",
+  },
+  "mctf-run-the-track-5k-10k-portsmouth|2026-08-23|10K": {
+    startTime: "14:00",
+    entryUrl: "https://racesignup.co.uk/entry/login.php?eventid=6398",
+    source: "https://www.mactuffevents.com/rtt",
+  },
+  "polesden-lacey-10k-august|2026-08-23|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+    source:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+  },
+  "stourhead-trust-10k-august|2026-08-23|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+    source:
+      "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -114,6 +143,78 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "Up and Running Events",
     website:
       "https://www.upandrunningevents.co.uk/event-details/bellahouston-park-5k-10k-half-marathon-9",
+  },
+  "birchwood-10k": {
+    name: "Birchwood 10K",
+    city: "Warrington",
+    county: "Cheshire",
+    country: "England",
+    area: "Birchwood Shopping Centre, local roads and Croft",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Birchwood 10K — Birchwood, Warrington.",
+    description:
+      "A long-established road 10K from Birchwood Shopping Centre through local roads and Croft, organised by Spectrum Striders Running Club.",
+    organiser: "Spectrum Striders Running Club",
+    website: "https://10k.spectrumstriders.org.uk/",
+  },
+  "guernsey-mind-investec-10k": {
+    name: "Guernsey Mind Investec 10K Challenge",
+    city: "Torteval",
+    county: "Guernsey",
+    country: "Guernsey",
+    area: "Imperial Hotel to Grandes Rocques via the west coast",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Guernsey Mind Investec 10K Challenge — Guernsey's west coast.",
+    description:
+      "An inclusive road 10K from the Imperial Hotel to Grandes Rocques, raising funds for Guernsey Mind with support from Guernsey Athletics.",
+    organiser: "Guernsey Mind",
+    website: "https://www.guernseymind.org.gg/10k-run-challenge/",
+  },
+  "mctf-run-the-track-5k-10k-portsmouth": {
+    name: "MCTF Run The Track 5K & 10K Portsmouth",
+    city: "Portsmouth",
+    county: "Hampshire",
+    country: "England",
+    area: "Mountbatten Centre Athletics Track",
+    surface: "Track",
+    distances: ["10K", "5K"],
+    summary: "MCTF Run The Track 5K & 10K — Mountbatten Centre, Portsmouth.",
+    description:
+      "Pace-seeded afternoon 5K and 10K track races with lap splits and chip timing, organised by MacTuff Events.",
+    organiser: "MacTuff Events",
+    website: "https://www.mactuffevents.com/rtt",
+  },
+  "polesden-lacey-10k-august": {
+    name: "Polesden Lacey Trust 10K",
+    city: "Dorking",
+    county: "Surrey",
+    country: "England",
+    area: "Polesden Lacey estate and Ranmore Common",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Polesden Lacey Trust 10K — Polesden Lacey, Surrey.",
+    description:
+      "A free, informal trail 10K on the Polesden Lacey estate and Ranmore Common, organised by the National Trust.",
+    organiser: "National Trust",
+    website:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+  },
+  "stourhead-trust-10k-august": {
+    name: "Stourhead Trust 10K",
+    city: "Mere",
+    county: "Wiltshire",
+    country: "England",
+    area: "Stourhead estate and King Alfred's Tower",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary: "Stourhead Trust 10K — Stourhead, Wiltshire.",
+    description:
+      "A free, informal mixed-terrain 10K around the Stourhead estate towards King Alfred's Tower, organised by the National Trust.",
+    organiser: "National Trust",
+    website:
+      "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
   },
 };
 
@@ -280,6 +381,120 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
         "https://findarace.com/events/bellahouston-park-5k-10k-half-marathon/22nd-august-2026",
       isVerified: true,
       notes: "The exact 22 August 2026 10K is available through Quick Book at £24.90.",
+    },
+  ],
+  "birchwood-10k|2026-08-23|10K": [
+    {
+      providerCode: "official-spectrum-striders",
+      providerName: "Spectrum Striders official entry",
+      entryUrl: "https://spectrumstriders.niftyentries.com/Birchwood-10K-2026",
+      entryType: "official",
+      status: "closing_soon",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:00:00+01:00",
+      sourceUrl: "https://10k.spectrumstriders.org.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Official entry is open until noon on 22 August, priced £24 affiliated or £26 unaffiliated plus a £1 administration fee.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/run-the-birchwood-10k",
+      entryType: "third_party",
+      status: "closing_soon",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/run-the-birchwood-10k",
+      isVerified: true,
+      notes: "The exact 23 August 2026 10K lists £24–£26 entry and a 10:00 start.",
+    },
+  ],
+  "guernsey-mind-investec-10k|2026-08-23|10K": [
+    {
+      providerCode: "official-guernsey-mind",
+      providerName: "Guernsey Mind official entry",
+      entryUrl: "https://www.guernseymind.org.gg/10k-run-challenge/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:00:00+01:00",
+      sourceUrl: "https://www.guernseymind.org.gg/10k-run-challenge/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The official 2026 page has a live booking route and lists the entry fee as £20.",
+    },
+  ],
+  "mctf-run-the-track-5k-10k-portsmouth|2026-08-23|10K": [
+    {
+      providerCode: "official-racesignup",
+      providerName: "MacTuff official entry",
+      entryUrl: "https://racesignup.co.uk/entry/login.php?eventid=6398",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:00:00+01:00",
+      sourceUrl: "https://www.mactuffevents.com/rtt",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser links to this live RaceSignup route; 10K early entry starts at £23 and the runner's heat is assigned by expected finish time.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/mctf-run-the-track-5km-10km",
+      entryType: "third_party",
+      status: "closing_soon",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/mctf-run-the-track-5km-10km",
+      isVerified: true,
+      notes:
+        "The exact Portsmouth event lists 10K entry from £23, with afternoon pace-seeded heats.",
+    },
+  ],
+  "polesden-lacey-10k-august|2026-08-23|10K": [
+    {
+      providerCode: "official-national-trust",
+      providerName: "National Trust — no booking needed",
+      entryUrl:
+        "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+      entryType: "official",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:00:00+01:00",
+      sourceUrl:
+        "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The official listing says the 09:00–11:00 event is free and booking is not needed.",
+    },
+  ],
+  "stourhead-trust-10k-august|2026-08-23|10K": [
+    {
+      providerCode: "official-national-trust",
+      providerName: "National Trust — no booking needed",
+      entryUrl:
+        "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+      entryType: "official",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:00:00+01:00",
+      sourceUrl:
+        "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official listing says registration is from 08:30, the run starts at 09:00, and the event is free with no booking required; normal property admission may apply separately.",
     },
   ],
 };
