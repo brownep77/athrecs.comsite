@@ -9,7 +9,32 @@ export type UkTenKEditionReplacement = {
 };
 
 /** Safe in-place database migrations for verified 10K corrections. */
-export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [];
+export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
+  {
+    seriesSlug: "insane-terrain-running",
+    distance: "10K",
+    fromDate: "2026-08-24",
+    toDate: "2026-08-23",
+  },
+  {
+    seriesSlug: "run-dorney-evening-5k-10k-august",
+    distance: "10K",
+    fromDate: "2026-08-25",
+    toDate: "2026-08-26",
+  },
+  {
+    seriesSlug: "run-dorney-evening-5k-10k-august",
+    distance: "5K",
+    fromDate: "2026-08-25",
+    toDate: "2026-08-26",
+  },
+  {
+    seriesSlug: "garendon-gallop-10k",
+    distance: "10K",
+    fromDate: "2026-08-26",
+    toDate: "2026-07-26",
+  },
+];
 
 /** Verified corrections applied before entry options are matched to an edition. */
 export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
@@ -68,6 +93,48 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
       "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
     source:
       "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+  },
+  "insane-terrain-running|2026-08-24|10K": {
+    date: "2026-08-23",
+    startTime: "08:30",
+    entryUrl:
+      "https://www.insaneterrainevents.com/event-details-registration/insane-terrain-running-23rd-august-2026",
+    source:
+      "https://www.insaneterrainevents.com/event-details-registration/insane-terrain-running-23rd-august-2026",
+  },
+  "lyme-park-midsummer-trail-10k|2026-08-25|10K": {
+    startTime: "19:00",
+    entryUrl: "https://run-northwest.niftyentries.com/Lyme-Midsummer-Trail-10K-2026",
+    source: "https://www.runnorthwest.co.uk/pages/lyme-midsummer-trail-10k-2026",
+  },
+  "run-dorney-evening-5k-10k-august|2026-08-25|10K": {
+    date: "2026-08-26",
+    startTime: "19:00",
+    entryUrl: "https://www.dorneylakeevents.com/event/run-dorney-evening-5k-10k-august-2026/",
+    source: "https://www.dorneylakeevents.com/event/run-dorney-evening-5k-10k-august-2026/",
+  },
+  "run-dorney-evening-5k-10k-august|2026-08-25|5K": {
+    date: "2026-08-26",
+    startTime: "19:00",
+    entryUrl: "https://www.dorneylakeevents.com/event/run-dorney-evening-5k-10k-august-2026/",
+    source: "https://www.dorneylakeevents.com/event/run-dorney-evening-5k-10k-august-2026/",
+  },
+  "garendon-gallop-10k|2026-08-26|10K": {
+    date: "2026-07-26",
+    status: "Finished",
+    startTime: "10:30",
+    entryUrl: "https://www.evententry.co.uk/the-garendon-gallop-10k-2026",
+    source: "https://www.evententry.co.uk/the-garendon-gallop-10k-2026",
+  },
+  "rock-up-n-run-kirkstall-august|2026-08-27|10K": {
+    startTime: "18:45",
+    entryUrl: "https://www.itsgrimupnorthrunning.co.uk/",
+    source: "https://www.itsgrimupnorthrunning.co.uk/",
+  },
+  "run-mediacity-5k-10k-august|2026-08-27|10K": {
+    startTime: "19:00",
+    entryUrl: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-august-2026",
+    source: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-august-2026",
   },
 };
 
@@ -215,6 +282,91 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "National Trust",
     website:
       "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+  },
+  "insane-terrain-running": {
+    name: "Insane Terrain Running",
+    city: "Doddington",
+    county: "Cambridgeshire",
+    country: "England",
+    area: "Washbrook Farm Motocross, Benwick Road",
+    surface: "Obstacle",
+    distances: ["10K", "5K", "3K"],
+    summary: "Insane Terrain Running — Doddington, Cambridgeshire.",
+    description:
+      "An off-road obstacle event at Washbrook Farm where participants choose 3K, 5K or a second lap for 10K, organised by Insane Terrain Running.",
+    organiser: "Insane Terrain Running",
+    website:
+      "https://www.insaneterrainevents.com/event-details-registration/insane-terrain-running-23rd-august-2026",
+  },
+  "lyme-park-midsummer-trail-10k": {
+    name: "Lyme Midsummer Trail 10K",
+    city: "Disley",
+    county: "Cheshire",
+    country: "England",
+    area: "National Trust Lyme",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Lyme Midsummer Trail 10K — National Trust Lyme, Disley.",
+    description:
+      "A hilly, one-lap evening trail 10K through the National Trust Lyme estate, organised by Run North West.",
+    organiser: "Run North West",
+    website: "https://www.runnorthwest.co.uk/pages/lyme-midsummer-trail-10k-2026",
+  },
+  "run-dorney-evening-5k-10k-august": {
+    name: "Run Dorney Evening 5K & 10K",
+    city: "Windsor",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Dorney Lake",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Run Dorney Evening 5K & 10K — Dorney Lake, Windsor.",
+    description:
+      "Flat, chip-timed evening 5K and 10K races beside the London 2012 rowing lake, organised by Dorney Lake Events and RunThrough.",
+    organiser: "Dorney Lake Events / RunThrough",
+    website: "https://www.dorneylakeevents.com/event/run-dorney-evening-5k-10k-august-2026/",
+  },
+  "garendon-gallop-10k": {
+    name: "Garendon Gallop 10K",
+    city: "Loughborough",
+    county: "Leicestershire",
+    country: "England",
+    area: "Charnwood College and Garendon Park",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Garendon Gallop 10K — Garendon Park, Loughborough.",
+    description:
+      "A single-lap undulating trail 10K through Garendon Park, organised by Start2Finish Race Events.",
+    organiser: "Start2Finish Race Events",
+    website: "https://www.evententry.co.uk/the-garendon-gallop-10k-2026",
+  },
+  "rock-up-n-run-kirkstall-august": {
+    name: "Kirkstall Rock Up 'n' Run",
+    city: "Leeds",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Leeds & Liverpool Canal at Wyther Lane, Kirkstall",
+    surface: "Trail",
+    distances: ["10K", "5K"],
+    summary: "Kirkstall Rock Up 'n' Run — Kirkstall, Leeds.",
+    description:
+      "A relaxed evening 5K and 10K on the Leeds & Liverpool Canal towpath, organised by It's Grim Up North Running.",
+    organiser: "It's Grim Up North Running",
+    website: "https://www.itsgrimupnorthrunning.co.uk/",
+  },
+  "run-mediacity-5k-10k-august": {
+    name: "Run MediaCity 5K & 10K",
+    city: "Salford",
+    county: "Greater Manchester",
+    country: "England",
+    area: "MediaCity and Salford Quays",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Run MediaCity 5K & 10K — Salford Quays.",
+    description:
+      "Flat evening 5K and 10K races on a 2.5K loop around MediaCity and Salford Quays, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-august-2026",
   },
 };
 
@@ -495,6 +647,148 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isPrimary: true,
       notes:
         "The official listing says registration is from 08:30, the run starts at 09:00, and the event is free with no booking required; normal property admission may apply separately.",
+    },
+  ],
+  "insane-terrain-running|2026-08-23|10K": [
+    {
+      providerCode: "official-insane-terrain",
+      providerName: "Insane Terrain official entry",
+      entryUrl:
+        "https://www.insaneterrainevents.com/event-details-registration/insane-terrain-running-23rd-august-2026",
+      entryType: "official",
+      status: "closing_soon",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl:
+        "https://www.insaneterrainevents.com/event-details-registration/insane-terrain-running-23rd-august-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live official checkout lists adult entry at £35 plus an £0.88 service fee; available waves begin at 08:30 and the 10K is completed as two laps.",
+    },
+  ],
+  "lyme-park-midsummer-trail-10k|2026-08-25|10K": [
+    {
+      providerCode: "official-run-north-west",
+      providerName: "Run North West official entry",
+      entryUrl: "https://run-northwest.niftyentries.com/Lyme-Midsummer-Trail-10K-2026",
+      entryType: "official",
+      status: "closing_soon",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://run-northwest.niftyentries.com/Lyme-Midsummer-Trail-10K-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live official entry page lists places available at £28 affiliated or £30 unattached plus a £1 booking fee, with a 19:00 start.",
+    },
+  ],
+  "run-dorney-evening-5k-10k-august|2026-08-26|10K": [
+    {
+      providerCode: "official-dorney-lake-events",
+      providerName: "Dorney Lake Events official entry",
+      entryUrl: "https://www.dorneylakeevents.com/event/run-dorney-evening-5k-10k-august-2026/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.dorneylakeevents.com/event/run-dorney-evening-5k-10k-august-2026/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The live official page lists 10K entry at £30 and all distances starting at 19:00.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/run-dorney-evening-5k-10k",
+      entryType: "third_party",
+      status: "closing_soon",
+      priceAmount: 31.8,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/run-dorney-evening-5k-10k",
+      isVerified: true,
+      notes: "The exact 26 August event offers the 10K through Quick Book at £31.80.",
+    },
+  ],
+  "garendon-gallop-10k|2026-07-26|10K": [
+    {
+      providerCode: "official-evententry",
+      providerName: "EventEntry official listing",
+      entryUrl: "https://www.evententry.co.uk/the-garendon-gallop-10k-2026",
+      entryType: "official",
+      status: "closed",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.evententry.co.uk/the-garendon-gallop-10k-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The verified 2026 race took place on 26 July, not 26 August; the official page now confirms entries and transfers are closed.",
+    },
+  ],
+  "rock-up-n-run-kirkstall-august|2026-08-27|10K": [
+    {
+      providerCode: "official-on-day",
+      providerName: "Official on-the-day entry",
+      entryUrl: "https://www.itsgrimupnorthrunning.co.uk/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.itsgrimupnorthrunning.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Online routes are closed, but the organiser confirms no booking is required: register from 18:00 and pay £15 for the 18:45 10K on the evening.",
+    },
+  ],
+  "run-mediacity-5k-10k-august|2026-08-27|10K": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-august-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-august-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The official page lists 10K entry at £30 and a 19:00 start.",
+    },
+    {
+      providerCode: "challenge-chasers",
+      providerName: "Challenge Chasers",
+      entryUrl: "https://www.challengechasers.com/events/40742f2a-ac9f-4e9b-b3ff-384d98e45091",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.challengechasers.com/events/40742f2a-ac9f-4e9b-b3ff-384d98e45091",
+      isVerified: true,
+      notes: "The exact event page lists the 10K open at £32 with a live booking route.",
+    },
+    {
+      providerCode: "charity-francis-house",
+      providerName: "Francis House Children's Hospice",
+      entryUrl: "https://www.francishouse.org.uk/get-involved/events/run-media-city/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T21:00:00+01:00",
+      sourceUrl: "https://www.francishouse.org.uk/get-involved/events/run-media-city/",
+      isVerified: true,
+      notes:
+        "Francis House offers a £15 charity place with a £50 sponsorship target for the same 27 August 2026 event.",
     },
   ],
 };
