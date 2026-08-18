@@ -8,6 +8,13 @@ import {
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AppShell } from "@/components/layout/AppShell";
 import { isSiteLanguage } from "@/lib/athrecs/country-sites";
+import {
+  DEFAULT_DESCRIPTION,
+  SITE_NAME,
+  SITE_URL,
+  organizationJsonLd,
+  siteGraphMeta,
+} from "@/lib/athrecs/seo";
 import appCss from "@/styles.css?url";
 
 const queryClient = new QueryClient({
@@ -22,15 +29,22 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       {
         name: "viewport",
-        content: "width=device-width, initial-scale=1, viewport-fit=cover",
-      },
-      { title: "ATHRECS.com — Find races, results and athletes" },
-      {
-        name: "description",
-        content:
-          "Find running, triathlon and cycling events — from parkruns and 5Ks to half marathons and marathons — with athletes, clubs and results on ATHRECS.com.",
+        content: "width=device-device-width, initial-scale=1, viewport-fit=cover".replace(
+          "device-device",
+          "device",
+        ),
       },
       { name: "theme-color", content: "#f4f7f7" },
+      {
+        name: "keywords",
+        content:
+          "running races, marathon calendar, parkrun, 5K, 10K, half marathon, triathlon, cycling events, race results, athletics clubs, ATHRECS",
+      },
+      ...siteGraphMeta({
+        title: `${SITE_NAME} — Find races, results and athletes`,
+        description: DEFAULT_DESCRIPTION,
+        url: SITE_URL,
+      }),
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -40,6 +54,14 @@ export const Route = createRootRoute({
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "apple-touch-icon", href: "/athrecs-icon-192.png" },
+      { rel: "canonical", href: SITE_URL },
+      { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(organizationJsonLd()),
+      },
     ],
   }),
   component: RootComponent,

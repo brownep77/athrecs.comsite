@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Prefer public discovery pages; admin is for operators
+Disallow: /admin
+Disallow: /api/
+
+Sitemap: https://www.athrecs.com/sitemap.xml
