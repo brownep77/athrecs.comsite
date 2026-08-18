@@ -1001,6 +1001,19 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       params,
     );
   }
+
+  await sql.query(
+    `delete from edition_entry_options fallback
+     where fallback.provider_code = 'official'
+       and not fallback.is_verified
+       and exists (
+         select 1
+         from edition_entry_options verified_official
+         where verified_official.edition_id = fallback.edition_id
+           and verified_official.entry_type = 'official'
+           and verified_official.is_verified
+       )`,
+  );
 }
 
 async function seed(): Promise<void> {
