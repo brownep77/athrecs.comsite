@@ -239,6 +239,12 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     fromDate: "2027-04-24",
     toDate: "2027-04-25",
   },
+  {
+    seriesSlug: "saunter-in-saltaire",
+    distance: "Half",
+    fromDate: "2027-05-15",
+    toDate: "2027-05-16",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -809,6 +815,36 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
       "https://www.evententry.co.uk/zigzag-2027-zig-zag-marathon-half-marathon",
     source:
       "https://www.evententry.co.uk/zigzag-2027-zig-zag-marathon-half-marathon",
+  },
+  "saunter-in-saltaire|2027-05-15|Half": {
+    date: "2027-05-16",
+    startTime: "08:30",
+    entryUrl:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-saltaire-14149",
+    source:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-saltaire-14149",
+  },
+  "the-birthday-run|2027-05-16|Half": {
+    startTime: "09:00",
+    entryUrl: "https://zigzagrunning.eventrac.co.uk/e/the-birthday-run-11142",
+    source: "https://zigzagrunning.eventrac.co.uk/e/the-birthday-run-11142",
+  },
+  "the-chislehurst-half-marathon|2027-05-16|Half": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/the-maypole-project-chislehurst-half-marathon-12399",
+    source:
+      "https://www.nice-work.org.uk/e/the-maypole-project-chislehurst-half-marathon-12399",
+  },
+  "bupa-great-manchester-run|2027-05-23|Half": {
+    startTime: "08:00",
+    entryUrl: "https://www.greatrun.org/events/great-manchester-run/",
+    source: "https://www.greatrun.org/events/great-manchester-run/",
+  },
+  "hartlepool-half-marathon|2027-05-23|Half": {
+    startTime: "08:30",
+    entryUrl: "https://www.wilddeerevents.co.uk/e/hartlepool-half-marathon-14522",
+    source: "https://www.wilddeerevents.co.uk/e/hartlepool-half-marathon-14522",
   },
 };
 
@@ -2004,6 +2040,78 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "Zig Zag Running",
     website:
       "https://www.evententry.co.uk/zigzag-2027-zig-zag-marathon-half-marathon",
+  },
+  "saunter-in-saltaire": {
+    name: "Yorkshire Weekend Saunter in Saltaire",
+    city: "Saltaire",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Leeds & Liverpool Canal by the Boathouse Inn",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary: "Yorkshire Weekend Saunter in Saltaire — Saltaire, West Yorkshire.",
+    description:
+      "A flat, traffic-free half marathon along the Leeds & Liverpool Canal towpath from Saltaire, organised by It's Grim Up North Running.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-saltaire-14149",
+  },
+  "the-birthday-run": {
+    name: "The Birthday Run",
+    city: "Brandon",
+    county: "Suffolk",
+    country: "England",
+    area: "Brandon Country Park, Thetford Forest",
+    surface: "Mixed",
+    distances: ["Half", "Marathon", "Ultra", "15K", "10K", "5K"],
+    summary: "The Birthday Run — Brandon Country Park, Suffolk.",
+    description:
+      "A flexible-distance, multi-lap run on gravel paths and grass through Brandon Country Park, celebrating Zig Zag Running's anniversary.",
+    organiser: "Zig Zag Running",
+    website: "https://zigzagrunning.eventrac.co.uk/e/the-birthday-run-11142",
+  },
+  "the-chislehurst-half-marathon": {
+    name: "The Maypole Project Chislehurst Half Marathon",
+    city: "Chislehurst",
+    county: "Greater London",
+    country: "England",
+    area: "Glebe Football Club and Chislehurst's parks and commons",
+    surface: "Mixed",
+    distances: ["Half"],
+    summary: "The Maypole Project Chislehurst Half Marathon — Chislehurst, London.",
+    description:
+      "An undulating, predominantly trail half marathon through Chislehurst's parks and commons, raising funds for The Maypole Project.",
+    organiser: "The Maypole Project / Nice Work",
+    website:
+      "https://www.nice-work.org.uk/e/the-maypole-project-chislehurst-half-marathon-12399",
+  },
+  "bupa-great-manchester-run": {
+    name: "AJ Bell Great Manchester Run",
+    city: "Manchester",
+    county: "Greater Manchester",
+    country: "England",
+    area: "Portland Street, Manchester city centre",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary: "AJ Bell Great Manchester Run — Manchester city centre.",
+    description:
+      "A closed-road city half marathon from Portland Street through Manchester's landmark districts, organised by the Great Run Company.",
+    organiser: "The Great Run Company",
+    website: "https://www.greatrun.org/events/great-manchester-run/",
+  },
+  "hartlepool-half-marathon": {
+    name: "Hartlepool Half Marathon",
+    city: "Hartlepool",
+    county: "County Durham",
+    country: "England",
+    area: "The Highlight, Hartlepool Marina",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Hartlepool Half Marathon — Hartlepool Marina, County Durham.",
+    description:
+      "A flat, fast coastal road half marathon from Hartlepool Marina, organised by Wild Deer Events.",
+    organiser: "Wild Deer Events",
+    website: "https://www.wilddeerevents.co.uk/e/hartlepool-half-marathon-14522",
   },
 };
 
@@ -10167,6 +10275,141 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
         "https://www.timeoutdoors.com/events/zig-zag-marathon-and-half/half-marathon",
       isVerified: true,
       notes: "The displayed half-marathon entry range is £29–£34.",
+    },
+  ],
+  "saunter-in-saltaire|2027-05-16|Half": [
+    {
+      providerCode: "official-grim-up-north",
+      providerName: "It's Grim Up North official entry",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-saltaire-14149",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-saltaire-14149",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The organiser's event page confirms the next race is Sunday 16 May 2027.",
+    },
+  ],
+  "the-birthday-run|2027-05-16|Half": [
+    {
+      providerCode: "official-zig-zag-running",
+      providerName: "Zig Zag Running official entry",
+      entryUrl: "https://zigzagrunning.eventrac.co.uk/e/the-birthday-run-11142",
+      entryType: "official",
+      status: "open",
+      priceAmount: 33,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl: "https://zigzagrunning.eventrac.co.uk/e/the-birthday-run-11142",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Entry ranges from £33–£38 depending on medal choice and affiliation.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/the-birthday-run-5k-10k-half-full-ultra-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/the-birthday-run-5k-10k-half-full-ultra-marathon",
+      isVerified: true,
+      notes: "The displayed entry range is £35–£38; affiliated runners save £2.",
+    },
+  ],
+  "the-chislehurst-half-marathon|2027-05-16|Half": [
+    {
+      providerCode: "official-nice-work",
+      providerName: "Nice Work official entry",
+      entryUrl:
+        "https://www.nice-work.org.uk/e/the-maypole-project-chislehurst-half-marathon-12399",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl:
+        "https://www.nice-work.org.uk/e/the-maypole-project-chislehurst-half-marathon-12399",
+      isVerified: true,
+      isPrimary: true,
+      notes: "On-the-day entry is £35 subject to availability; check the live form for the current online price.",
+    },
+  ],
+  "bupa-great-manchester-run|2027-05-23|Half": [
+    {
+      providerCode: "official-great-run",
+      providerName: "Great Run official entry",
+      entryUrl: "https://www.greatrun.org/events/great-manchester-run/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 54,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl: "https://www.greatrun.org/events/great-manchester-run/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The organiser lists a £54 saver price and £59 final-entry price for the half marathon.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/great-manchester-run-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 49,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/great-manchester-run-half-marathon",
+      isVerified: true,
+      notes: "The displayed entry range is £49–£59.",
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/aj-bell-great-manchester-run-2027-248323",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/aj-bell-great-manchester-run-2027-248323",
+      isVerified: true,
+    },
+    {
+      providerCode: "macmillan",
+      providerName: "Macmillan Cancer Support charity place",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/great-manchester-run-half-marathon/macmillan-cancer-support",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/great-manchester-run-half-marathon/macmillan-cancer-support",
+      isVerified: true,
+      notes: "Charity entry is £25; fundraising commitments apply on the provider page.",
+    },
+  ],
+  "hartlepool-half-marathon|2027-05-23|Half": [
+    {
+      providerCode: "official-wild-deer-events",
+      providerName: "Wild Deer Events official entry",
+      entryUrl: "https://www.wilddeerevents.co.uk/e/hartlepool-half-marathon-14522",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T16:15:00+01:00",
+      sourceUrl: "https://www.wilddeerevents.co.uk/e/hartlepool-half-marathon-14522",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The live Eventrac entry list gives an 08:30 start; final race instructions take precedence.",
     },
   ],
 };
