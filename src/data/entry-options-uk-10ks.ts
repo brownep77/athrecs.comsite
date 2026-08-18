@@ -662,6 +662,80 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://www.wilne.co.uk/enter-2026/",
     notes: "The organiser confirms that the 2026 race has sold out and has no race-day entry.",
   },
+  "wimbledon-common-half-marathon-10k-september|2026-09-06|10K": {
+    startTime: "09:50",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2026",
+  },
+  "wimbledon-common-half-marathon-10k-september|2026-09-06|Half": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2026",
+  },
+  "wolverhampton-half-marathon|2026-09-06|10K": {
+    startTime: "08:50",
+    entryUrl:
+      "https://thewolverhamptonhalfmarathon.eventrac.co.uk/e/the-wolverhampton-half-marathon-and-10k-15361",
+    source: "https://www.wolveshm.com/",
+    notes:
+      "The organiser's provisional timetable lists an 08:50 start; the booking page currently displays 08:30, so confirm the final race booklet before travelling.",
+  },
+  "wolverhampton-half-marathon|2026-09-06|Half": {
+    startTime: "08:50",
+    entryUrl:
+      "https://thewolverhamptonhalfmarathon.eventrac.co.uk/e/the-wolverhampton-half-marathon-and-10k-15361",
+    source: "https://www.wolveshm.com/",
+    notes:
+      "The organiser's provisional timetable lists an 08:50 start; the booking page currently displays 08:30, so confirm the final race booklet before travelling.",
+  },
+  "run-the-river-teach-first|2026-09-08|10K": {
+    status: "Closed",
+    entryUrl: "https://www.teachfirst.org.uk/run-the-river",
+    source: "https://www.teachfirst.org.uk/run-the-river",
+    notes:
+      "Teach First confirms that Run the River 2026 has been cancelled and entrants will be refunded.",
+  },
+  "silent-pool-10k|2026-09-08|10K": {
+    startTime: "19:00",
+    entryUrl: "https://www.runningadventures.uk/silentpool.html",
+    source: "https://www.runningadventures.uk/silentpool.html",
+  },
+  "chase-the-sun-battersea-5k-10k-september|2026-09-09|10K": {
+    startTime: "19:00",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/chase-the-sun-battersea-park-5k-10k-september--2026",
+    source:
+      "https://www.runthrough.co.uk/event/chase-the-sun-battersea-park-5k-10k-september--2026",
+  },
+  "chase-the-sun-battersea-5k-10k-september|2026-09-09|5K": {
+    startTime: "19:00",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/chase-the-sun-battersea-park-5k-10k-september--2026",
+    source:
+      "https://www.runthrough.co.uk/event/chase-the-sun-battersea-park-5k-10k-september--2026",
+  },
+  "morecambe-record-5k-10k-supper-run|2026-09-09|10K": {
+    startTime: "18:00",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/cLjFFX",
+    source: "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-music-5k-10k/",
+  },
+  "morecambe-record-5k-10k-supper-run|2026-09-09|5K": {
+    startTime: "18:00",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/cLjFFX",
+    source: "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-music-5k-10k/",
+  },
+  "landaid-north-west-10k-5k|2026-09-10|10K": {
+    startTime: "18:00",
+    entryUrl: "https://join.landaid.org/register/race-for-landaid-nw-2026/register",
+    source: "https://landaid.org/event/race-for-landaid-north-west/",
+  },
+  "landaid-north-west-10k-5k|2026-09-10|5K": {
+    startTime: "18:00",
+    entryUrl: "https://join.landaid.org/register/race-for-landaid-nw-2026/register",
+    source: "https://landaid.org/event/race-for-landaid-north-west/",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -1947,6 +2021,106 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "A chip-timed road 10K on a scenic and traffic-free course near Draycott, with a technical finisher shirt and an extensive prize structure.",
     organiser: "Wilne 10K / RunDerby",
     website: "https://www.wilne.co.uk/",
+  },
+  "wimbledon-common-half-marathon-10k-september": {
+    name: "Wimbledon Common Trail Half Marathon & 10K",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Richard Evans Memorial Playing Fields and Wimbledon Common",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    summary:
+      "Wimbledon Common Trail Half Marathon & 10K — marked trail races in south-west London.",
+    description:
+      "A picturesque RunThrough half marathon and 10K on marked trails through Wimbledon Common, with chip timing, kilometre or mile markers and free official race photos.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2026",
+  },
+  "wolverhampton-half-marathon": {
+    name: "Wolverhampton Half Marathon & 10K",
+    city: "Wolverhampton",
+    county: "West Midlands",
+    country: "England",
+    area: "North Street and Wolverhampton city centre",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary: "Wolverhampton Half Marathon & 10K — closed-road city races from North Street.",
+    description:
+      "Accurately measured, chip-timed city-centre races passing Wolverhampton landmarks and parks, with closed roads, finisher medals, shirts and free photo downloads.",
+    organiser: "Wulfrun Racing",
+    website: "https://www.wolveshm.com/",
+  },
+  "run-the-river-teach-first": {
+    name: "Run the River — Teach First",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Potters Fields Park and the River Thames",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Run the River — Teach First's Thames-side charity run, cancelled for 2026.",
+    description:
+      "Teach First's evening 5K and 10K charity run beside the Thames. The organiser has cancelled the 2026 event following a strategic review and is arranging refunds for entrants.",
+    organiser: "Teach First",
+    website: "https://www.teachfirst.org.uk/run-the-river",
+  },
+  "silent-pool-10k": {
+    name: "Silent Pool 10K Guided Trail Run",
+    city: "Albury",
+    county: "Surrey",
+    country: "England",
+    area: "Silent Pool, the North Downs Way and Netley Heath",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Silent Pool 10K — a guided sunset trail run through the Surrey Hills.",
+    description:
+      "A social, guided 10K trail outing from Silent Pool through Netley Heath and sections of the North Downs Way, led by Running Adventures at a regrouped pace.",
+    organiser: "Running Adventures",
+    website: "https://www.runningadventures.uk/silentpool.html",
+  },
+  "chase-the-sun-battersea-5k-10k-september": {
+    name: "Chase the Sun Battersea Park 5K & 10K — September",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Battersea Park Bandstand",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Chase the Sun Battersea Park — flat evening 5K and 10K races in London.",
+    description:
+      "Flat, chip-timed and accurately marked lapped races on Battersea Park's roads and paths, starting and finishing at the Bandstand.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/chase-the-sun-battersea-park-5k-10k-september--2026",
+  },
+  "morecambe-record-5k-10k-supper-run": {
+    name: "Morecambe Record 5K & 10K Supper Run",
+    city: "Morecambe",
+    county: "Lancashire",
+    country: "England",
+    area: "Morecambe Academy and the promenade",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Morecambe Record Supper Run — promenade 5K and 10K races with a vinyl-record medal.",
+    description:
+      "Out-and-back seaside races along Morecambe promenade, organised by Lancaster Race Series with a vinyl-record medal, chip butty, tea and biscuits for finishers.",
+    organiser: "Lancaster Race Series",
+    website: "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-music-5k-10k/",
+  },
+  "landaid-north-west-10k-5k": {
+    name: "Race for LandAid North West 5K & 10K",
+    city: "Salford",
+    county: "Greater Manchester",
+    country: "England",
+    area: "MediaCity and Salford Quays",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Race for LandAid North West — evening 5K and 10K charity runs at MediaCity.",
+    description:
+      "A professionally supported evening 5K and 10K through MediaCity and Salford Quays, bringing the property industry together to raise funds to end youth homelessness.",
+    organiser: "LandAid",
+    website: "https://landaid.org/event/race-for-landaid-north-west/",
   },
 };
 
@@ -4320,6 +4494,210 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isPrimary: true,
       notes:
         "The organiser confirms that all 2026 places have sold out and that there will be no race-day entries.",
+    },
+  ],
+  "wimbledon-common-half-marathon-10k-september|2026-09-06|10K": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The official page lists the trail 10K at £32 with a 09:50 start.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/wimbledon-10k-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://findarace.com/events/wimbledon-10k-half-marathon",
+      isVerified: true,
+      notes: "The exact 2026 event offers Quick Book for the 10K at £34.",
+    },
+  ],
+  "wolverhampton-half-marathon|2026-09-06|10K": [
+    {
+      providerCode: "official-eventrac",
+      providerName: "Wolverhampton official entry",
+      entryUrl:
+        "https://thewolverhamptonhalfmarathon.eventrac.co.uk/e/the-wolverhampton-half-marathon-and-10k-15361",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-03T12:00:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.wolveshm.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live checkout lists the 10K at £30–£32. The organiser timetable says 08:50, while the checkout says 08:30; confirm the final race booklet.",
+    },
+    {
+      providerCode: "official-stuweb",
+      providerName: "StuWeb entry",
+      entryUrl: "https://www.stuweb.co.uk/events/2026/09/6/4583/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-03T12:00:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.stuweb.co.uk/events/2026/09/6/4583/",
+      isVerified: true,
+      notes: "StuWeb lists 10K entry at £32 plus a £1.50 fee, closing at noon on 3 September.",
+    },
+  ],
+  "run-the-river-teach-first|2026-09-08|10K": [
+    {
+      providerCode: "official-teach-first",
+      providerName: "Teach First official update",
+      entryUrl: "https://www.teachfirst.org.uk/run-the-river",
+      entryType: "official",
+      status: "closed",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.teachfirst.org.uk/run-the-river",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Teach First confirms that Run the River 2026 will no longer go ahead and says registered participants will receive refund instructions.",
+    },
+  ],
+  "silent-pool-10k|2026-09-08|10K": [
+    {
+      providerCode: "official-running-adventures",
+      providerName: "Running Adventures official entry",
+      entryUrl: "https://www.runningadventures.uk/silentpool.html",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.runningadventures.uk/silentpool.html",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists the 19:00 guided 10K trail run at £22; it is a social group outing rather than a timed race.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/silent-pool-10k-3",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/silent-pool-10k-3",
+      isVerified: true,
+      notes: "The exact 8 September 2026 listing provides online entry at £22.",
+    },
+  ],
+  "chase-the-sun-battersea-5k-10k-september|2026-09-09|10K": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/chase-the-sun-battersea-park-5k-10k-september--2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/chase-the-sun-battersea-park-5k-10k-september--2026",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The live official page lists the 19:00 10K at £32.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/runthrough-chase-the-sun-battersea-park-5k-10k/9th-september-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/runthrough-chase-the-sun-battersea-park-5k-10k/9th-september-2026",
+      isVerified: true,
+      notes: "The exact 9 September event offers Quick Book for the 10K at £34.",
+    },
+  ],
+  "morecambe-record-5k-10k-supper-run|2026-09-09|10K": [
+    {
+      providerCode: "official-bookitzone",
+      providerName: "Lancaster Race Series official entry",
+      entryUrl: "https://bookitzone.com/helen_mcgregor_2/cLjFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26.64,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-07T18:00:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-music-5k-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "BookitZone lists £26.64 club or £28.12 non-club entry, plus a £21.04 Lancaster Runners option, closing at 18:00 on 7 September.",
+    },
+    {
+      providerCode: "letsdothis",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/morecambe-academy-presents-record-5k-10k-supper-run-240395",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/morecambe-academy-presents-record-5k-10k-supper-run-240395",
+      isVerified: true,
+      notes: "The organiser-linked event page lists live 10K registration at £19–£25.",
+    },
+  ],
+  "landaid-north-west-10k-5k|2026-09-10|10K": [
+    {
+      providerCode: "official-landaid",
+      providerName: "LandAid official entry",
+      entryUrl: "https://join.landaid.org/register/race-for-landaid-nw-2026/register",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://landaid.org/event/race-for-landaid-north-west/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "LandAid confirms that registration is open at £40 for the 18:00 MediaCity 5K or 10K.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/race-for-landaid-north-west-1/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/race-for-landaid-north-west-1/10k",
+      isVerified: true,
+      notes: "The exact 10K listing provides online entry at £40.",
     },
   ],
 };
