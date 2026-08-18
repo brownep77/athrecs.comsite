@@ -652,6 +652,11 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     source:
       "https://www.runthrough.co.uk/event/birmingham-running-festival-december-2026",
   },
+  "saunter-in-bingley|2027-01-31|Half": {
+    startTime: "08:30",
+    notes: "Cash-only pay-on-the-day entry; the organiser states online entries are full.",
+    source: "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-bingley-14150",
+  },
 };
 
 /** Correct source metadata for half-marathon records imported from regional listings. */
@@ -1599,6 +1604,21 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "RunThrough Events",
     website:
       "https://www.runthrough.co.uk/event/birmingham-running-festival-december-2026",
+  },
+  "saunter-in-bingley": {
+    name: "Yorkshire Weekend Saunter Series in Bingley",
+    city: "Bingley",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Leeds and Liverpool Canal by The Fisherman's Inn, Wagon Lane",
+    surface: "Trail",
+    distances: ["Half", "10K", "5K"],
+    summary: "Yorkshire Weekend Saunter Half Marathon — Bingley, West Yorkshire.",
+    description:
+      "A flat out-and-back half marathon along the Leeds and Liverpool Canal towpath, organised by It's Grim Up North Running.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-bingley-14150",
   },
 };
 
@@ -5536,6 +5556,107 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       status: "open",
       checkedAt: "2026-08-18T03:30:00+01:00",
       sourceUrl: "https://findarace.com/events/warwick-half-marathon",
+      isVerified: true,
+    },
+  ],
+  "lee-valley-velo-park-january-2027|2027-01-30|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/lee-valley-velo-park-january-2027",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T04:15:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/lee-valley-velo-park-january-2027",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl: "https://www.letsdothis.com/gb/e/lee-valley-velo-park-january-2027-63575",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T04:15:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/lee-valley-velo-park-january-2027-63575",
+      isVerified: true,
+    },
+  ],
+  "windsor-trail-run-january-2027|2027-01-31|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/windsor-trail-run-january-2027",
+      entryType: "official",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T04:15:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/windsor-trail-run-january-2027",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/windsor-trail-run-january-2027-252308?occurrenceId=21111177690",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T04:15:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/windsor-trail-run-january-2027-252308?occurrenceId=21111177690",
+      isVerified: true,
+    },
+  ],
+  "saunter-in-bingley|2027-01-31|Half": [
+    {
+      providerCode: "official-pay-on-day",
+      providerName: "Official cash pay-on-the-day information",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-bingley-14150",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T04:15:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-bingley-14150",
+      isVerified: true,
+      isPrimary: true,
+    },
+  ],
+  "running-tribe-races-january-2027|2027-01-31|Half": [
+    {
+      providerCode: "official-eventrac",
+      providerName: "Running Tribe / Eventrac official entry",
+      entryUrl: "https://runningtribe.eventrac.co.uk/e/running-tribe-races-7915",
+      entryType: "official",
+      status: "open",
+      priceAmount: 37.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T04:15:00+01:00",
+      sourceUrl:
+        "https://runningtribe.co.uk/races/chalfont-st-peter-course-12-31-january-2027/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/running-tribe-races/31st-january-2027",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 38.69,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T04:15:00+01:00",
+      sourceUrl: "https://findarace.com/events/running-tribe-races/31st-january-2027",
       isVerified: true,
     },
   ],
