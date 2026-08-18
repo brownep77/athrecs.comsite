@@ -36,9 +36,9 @@ export const verifiedUkSeries: Series[] = [
     description:
       "A traffic-free, pancake-flat half marathon on a certified tarmac course around the National Water Sports Centre regatta lake, organised by ATW Events.",
     organiser: "ATW Events",
-    website: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-8892",
+    website: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-10421",
     featured: false,
-    source_url: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-8892",
+    source_url: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-10421",
   },
   {
     slug: "year-end-time-turner",
@@ -1150,6 +1150,84 @@ export const verifiedUkSeries: Series[] = [
     source_url:
       "https://runningtribe.co.uk/races/old-amersham-course-8-21-february-2027/",
   },
+  {
+    slug: "leicestershire-half-marathon-2027",
+    name: "Leicestershire Half Marathon 2027",
+    sport: "Running",
+    country: "England",
+    county: "Leicestershire",
+    city: "Loughborough",
+    area: "Charnwood College, Shepshed, Belton and Hathern",
+    surface: "Mixed",
+    distances: ["Half"],
+    summary: "Leicestershire Half Marathon — Loughborough, Leicestershire.",
+    description:
+      "An undulating, fully road-closed half marathon from Charnwood College through the Leicestershire countryside, mainly on tarmac with short grass sections.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/leicestershire-half-marathon-february-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/leicestershire-half-marathon-february-2027",
+  },
+  {
+    slug: "taunton-half-marathon-2027",
+    name: "Taunton Half Marathon 2027",
+    sport: "Running",
+    country: "England",
+    county: "Somerset",
+    city: "Taunton",
+    area: "Taunton town centre, North Street and Market House",
+    surface: "Road",
+    distances: ["Half", "1K"],
+    summary: "Taunton Half Marathon — Taunton, Somerset.",
+    description:
+      "The 41st edition of this established road half marathon, with a closed town-centre start and a spectator-friendly finish by Market House on North Street.",
+    organiser: "Active South West",
+    website:
+      "https://www.activesouthwest.co.uk/e/taunton-half-marathon-and-kids-kilometre-fun-run-12032",
+    featured: false,
+    source_url:
+      "https://www.activesouthwest.co.uk/e/taunton-half-marathon-and-kids-kilometre-fun-run-12032",
+  },
+  {
+    slug: "wrexham-half-marathon-2027",
+    name: "Wrexham Half Marathon 2027",
+    sport: "Running",
+    country: "Wales",
+    county: "Wrexham County Borough",
+    city: "Wrexham",
+    area: "Queensway Athletics Stadium and the Wrexham countryside",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Wrexham Half Marathon — Wrexham, Wales.",
+    description:
+      "The inaugural road-closed Wrexham Half Marathon, starting and finishing at Queensway Athletics Stadium before reaching the surrounding Welsh countryside.",
+    organiser: "Active Leisure Events",
+    website: "https://www.activeleisureevents.co.uk/wrexham-half-marathon",
+    featured: false,
+    source_url: "https://ale.niftyentries.com/2027-Wrexham-Half-Marathon",
+  },
+  {
+    slug: "st-davids-day-dragon-run-2027",
+    name: "St David's Day Dragon Run 2027",
+    sport: "Running",
+    country: "Wales",
+    county: "Rhondda Cynon Taf",
+    city: "Aberdare",
+    area: "Dare Valley Country Park",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "Ultra", "10K", "5K"],
+    summary: "St David's Day Dragon Run — Aberdare, Wales.",
+    description:
+      "A seven-hour flexible-distance trail challenge on maintained country-park paths, with three full laps completing the half-marathon option.",
+    organiser: "Saturn Too / Saturn Running",
+    website:
+      "https://www.saturnrunning.co.uk/e/st-davids-day-dragon-run-2027-14939",
+    featured: false,
+    source_url:
+      "https://www.saturnrunning.co.uk/e/st-davids-day-dragon-run-2027-14939",
+  },
 ];
 
 export const verifiedUkEditions: Edition[] = [
@@ -1824,5 +1902,63 @@ export const verifiedUkEditions: Edition[] = [
     startTime: "09:00",
     source:
       "https://runningtribe.co.uk/races/old-amersham-course-8-21-february-2027/",
+  },
+  {
+    seriesSlug: "leicestershire-half-marathon-2027",
+    date: "2027-02-28",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/leicestershire-half-marathon-february-2027",
+    startTime: "09:00",
+    source:
+      "https://www.runthrough.co.uk/event/leicestershire-half-marathon-february-2027",
+  },
+  {
+    seriesSlug: "taunton-half-marathon-2027",
+    date: "2027-02-28",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.activesouthwest.co.uk/e/taunton-half-marathon-and-kids-kilometre-fun-run-12032",
+    startTime: "10:00",
+    source:
+      "https://www.activesouthwest.co.uk/e/taunton-half-marathon-and-kids-kilometre-fun-run-12032",
+  },
+  {
+    seriesSlug: "wrexham-half-marathon-2027",
+    date: "2027-02-28",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://ale.niftyentries.com/2027-Wrexham-Half-Marathon",
+    startTime: "09:00",
+    source: "https://ale.niftyentries.com/2027-Wrexham-Half-Marathon",
+  },
+  {
+    seriesSlug: "st-davids-day-dragon-run-2027",
+    date: "2027-02-28",
+    distance: "Half",
+    distanceKm: 21,
+    status: "Open",
+    entryUrl:
+      "https://www.saturnrunning.co.uk/e/st-davids-day-dragon-run-2027-14939",
+    startTime: "09:00",
+    source:
+      "https://www.saturnrunning.co.uk/e/st-davids-day-dragon-run-2027-14939",
+    notes:
+      "The organiser defines the half as three 7 km laps; the full-lap course may change to 3.28 miles if conditions require it.",
+  },
+  {
+    seriesSlug: "atw-nottingham-holme-run",
+    date: "2027-02-28",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-10421",
+    startTime: "10:30",
+    source: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-10421",
   },
 ];
