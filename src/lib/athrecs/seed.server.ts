@@ -12,7 +12,7 @@ import {
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-10k-entry-batch-twenty-four-v168";
+const SEED_VERSION = "athrecs-uk-10k-entry-batch-twenty-four-reconcile-v169";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -844,6 +844,33 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       results_access = excluded.results_access`,
     75,
   );
+
+  // Run the duplicate side of edition migrations again after the catalogue
+  // upsert. An older deployment can recreate an imported source row while a
+  // newer deployment is seeding; this final pass makes the corrected target
+  // authoritative without touching editions that hold results.
+  for (const replacement of editionReplacements) {
+    const eventId = eventIds.get(replacement.seriesSlug);
+    if (!eventId) continue;
+    const targetDistance = replacement.toDistance ?? replacement.distance;
+    await sql.query(
+      `delete from editions old_edition
+       where old_edition.event_id = $1::int
+         and old_edition.event_date = $2::date
+         and old_edition.distance_code = $3::text
+         and not exists (
+           select 1 from results where edition_id = old_edition.id
+         )
+         and exists (
+           select 1
+           from editions corrected_edition
+           where corrected_edition.event_id = old_edition.event_id
+             and corrected_edition.event_date = $4::date
+             and corrected_edition.distance_code = $5::text
+         )`,
+      [eventId, replacement.fromDate, replacement.distance, replacement.toDate, targetDistance],
+    );
+  }
 
   await upsertCatalogueEntryOptions(sql, eventIds);
 
