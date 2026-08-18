@@ -41,14 +41,26 @@ function parseRaceGroups(value: unknown): RaceGroupInfo[] {
 
 function parseEntryOptions(value: unknown): EditionEntryOption[] {
   if (!value) return [];
-  if (Array.isArray(value)) return value as EditionEntryOption[];
-  if (typeof value !== "string") return [];
-  try {
-    const parsed = JSON.parse(value);
-    return Array.isArray(parsed) ? (parsed as EditionEntryOption[]) : [];
-  } catch {
-    return [];
+  let options: EditionEntryOption[] = [];
+  if (Array.isArray(value)) {
+    options = value as EditionEntryOption[];
+  } else if (typeof value === "string") {
+    try {
+      const parsed = JSON.parse(value);
+      options = Array.isArray(parsed) ? (parsed as EditionEntryOption[]) : [];
+    } catch {
+      return [];
+    }
   }
+
+  const hasVerifiedOfficial = options.some(
+    (option) => option.entry_type === "official" && option.is_verified,
+  );
+  if (!hasVerifiedOfficial) return options;
+
+  return options.filter(
+    (option) => !(option.provider_code === "official" && !option.is_verified),
+  );
 }
 
 export const listEvents = createServerFn({ method: "GET" })
