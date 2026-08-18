@@ -7543,4 +7543,182 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
     },
   ],
+  "runuk-battersea-park-half-marathon-spring|2027-03-14|Half": [
+    {
+      providerCode: "official-runuk",
+      providerName: "RunUK official entry",
+      entryUrl:
+        "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-spring-14th-march-2027-15584",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl:
+        "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-spring-14th-march-2027-15584",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/run-battersea-park-half-marathon/14th-march-2027",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 41.6,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/run-battersea-park-half-marathon/14th-march-2027",
+      isVerified: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/run-battersea-park-half-marathon-spring",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 39,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/run-battersea-park-half-marathon-spring",
+      isVerified: true,
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl:
+        "https://worldsmarathons.com/marathon/run-battersea-park-half-marathon-spring-1",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl:
+        "https://worldsmarathons.com/marathon/run-battersea-park-half-marathon-spring-1",
+      isVerified: true,
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC entry",
+      entryUrl: "https://runabc.co.uk/runuk-battersea-park-half-marathon-spring",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/runuk-battersea-park-half-marathon-spring",
+      isVerified: true,
+    },
+  ],
+  "inverness-half-marathon-5k|2027-03-14|Half": [
+    {
+      providerCode: "official-organiser",
+      providerName: "Inverness Half Marathon official entry",
+      entryUrl: "https://invernesshalfmarathon.co.uk/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl: "https://invernesshalfmarathon.co.uk/event-info/faqs/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/2027-inverness-half-marathon-5k-248564",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/2027-inverness-half-marathon-5k-248564",
+      isVerified: true,
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC entry",
+      entryUrl: "https://runabc.co.uk/inverness-half-marathon-5k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/inverness-half-marathon-5k",
+      isVerified: true,
+    },
+  ],
+  "lambert-foster-paddock-wood-half-marathon|2027-03-14|Half": [
+    {
+      providerCode: "official-enthuse",
+      providerName: "Paddock Wood Half Marathon / Enthuse official entry",
+      entryUrl: "https://register.enthuse.com/ps/event/PaddockWoodHalfMarathon2027",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl: "https://www.paddockwoodhalfmarathon.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "official-organiser",
+      providerName: "Paddock Wood Half Marathon official event page",
+      entryUrl: "https://www.paddockwoodhalfmarathon.co.uk/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl: "https://www.paddockwoodhalfmarathon.co.uk/",
+      isVerified: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/lambert-foster-paddock-wood-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 37,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/lambert-foster-paddock-wood-half-marathon",
+      isVerified: true,
+    },
+  ],
+  "liverpool-half-marathon-10-miler|2027-03-14|Half": [
+    {
+      providerCode: "official-active",
+      providerName: "BTR Liverpool / ACTIVE official entry",
+      entryUrl:
+        "https://endurancecui.active.com/event-reg/select-race?e=96803721",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl:
+        "https://www.btrliverpool.com/events/liverpool-half-marathon-and-10-mile/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "official-organiser",
+      providerName: "BTR Liverpool official event page",
+      entryUrl:
+        "https://www.btrliverpool.com/events/liverpool-half-marathon-and-10-mile/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl:
+        "https://www.btrliverpool.com/events/liverpool-half-marathon-and-10-mile/",
+      isVerified: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/liverpool-half-marathon-10-miler",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T12:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/liverpool-half-marathon-10-miler",
+      isVerified: true,
+    },
+  ],
 };

@@ -1417,6 +1417,82 @@ export const verifiedUkSeries: Series[] = [
     featured: false,
     source_url: "https://runsouthlondon.com/",
   },
+  {
+    slug: "runuk-battersea-park-half-marathon-spring",
+    name: "RUN Battersea Park Half Marathon Spring",
+    sport: "Running",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Battersea Park, next to the Bandstand",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "RUN Battersea Park Half Marathon Spring — London.",
+    description:
+      "A flat, fast half marathon on repeated loops of Battersea Park's paved paths, with views of its gardens and the River Thames.",
+    organiser: "RunUK",
+    website:
+      "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-spring-14th-march-2027-15584",
+    featured: false,
+    source_url:
+      "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-spring-14th-march-2027-15584",
+  },
+  {
+    slug: "inverness-half-marathon-5k",
+    name: "Inverness Half Marathon & 5K",
+    sport: "Running",
+    country: "Scotland",
+    county: "Highland",
+    city: "Inverness",
+    area: "Bught Park, Inverness city centre and the River Ness",
+    surface: "Road",
+    distances: ["Half", "5K"],
+    summary: "Inverness Half Marathon — Inverness, Highland.",
+    description:
+      "A fast, flat and scenic road half marathon through the Highland capital, following the River Ness and passing many of Inverness's landmarks.",
+    organiser: "Caledonian Concepts",
+    website: "https://invernesshalfmarathon.co.uk/",
+    featured: false,
+    source_url: "https://invernesshalfmarathon.co.uk/event-info/faqs/",
+  },
+  {
+    slug: "lambert-foster-paddock-wood-half-marathon",
+    name: "Lambert & Foster Paddock Wood Half Marathon",
+    sport: "Running",
+    country: "England",
+    county: "Kent",
+    city: "Paddock Wood",
+    area: "Eldon Way and the hop fields and orchards around Paddock Wood",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Paddock Wood Half Marathon — Paddock Wood, Kent.",
+    description:
+      "A fast, flat and accurately measured road half marathon through the hop fields and orchards of Kent, organised by Paddock Wood Athletic Club.",
+    organiser: "Paddock Wood Athletic Club",
+    website: "https://www.paddockwoodhalfmarathon.co.uk/",
+    featured: false,
+    source_url: "https://www.paddockwoodhalfmarathon.co.uk/",
+  },
+  {
+    slug: "liverpool-half-marathon-10-miler",
+    name: "Liverpool Half Marathon & 10 Miler",
+    sport: "Running",
+    country: "England",
+    county: "Merseyside",
+    city: "Liverpool",
+    area: "Hill Dickinson Stadium, Sefton Park and Royal Albert Dock",
+    surface: "Road",
+    distances: ["Half", "10M"],
+    summary: "Liverpool Half Marathon — Liverpool, Merseyside.",
+    description:
+      "A UKA-certified city half marathon from Hill Dickinson Stadium through Liverpool and Sefton Park to a waterfront finish at Royal Albert Dock.",
+    organiser: "BTR Liverpool",
+    website:
+      "https://www.btrliverpool.com/events/liverpool-half-marathon-and-10-mile/",
+    featured: false,
+    source_url:
+      "https://www.btrliverpool.com/events/liverpool-half-marathon-and-10-mile/",
+  },
 ];
 
 export const verifiedUkEditions: Edition[] = [
@@ -2258,5 +2334,50 @@ export const verifiedUkEditions: Edition[] = [
     status: "Open",
     entryUrl: "https://runsouthlondon.com/",
     source: "https://runsouthlondon.com/",
+  },
+  {
+    seriesSlug: "runuk-battersea-park-half-marathon-spring",
+    date: "2027-03-14",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-spring-14th-march-2027-15584",
+    startTime: "10:30",
+    source:
+      "https://www.runuk.co.uk/e/run-battersea-park-half-marathon-spring-14th-march-2027-15584",
+  },
+  {
+    seriesSlug: "inverness-half-marathon-5k",
+    date: "2027-03-14",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/2027-inverness-half-marathon-5k-248564",
+    startTime: "11:30",
+    source: "https://invernesshalfmarathon.co.uk/event-info/faqs/",
+  },
+  {
+    seriesSlug: "lambert-foster-paddock-wood-half-marathon",
+    date: "2027-03-14",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://register.enthuse.com/ps/event/PaddockWoodHalfMarathon2027",
+    startTime: "09:00",
+    source: "https://www.paddockwoodhalfmarathon.co.uk/",
+  },
+  {
+    seriesSlug: "liverpool-half-marathon-10-miler",
+    date: "2027-03-14",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://endurancecui.active.com/event-reg/select-race?e=96803721",
+    startTime: "09:30",
+    source:
+      "https://www.btrliverpool.com/events/liverpool-half-marathon-and-10-mile/",
   },
 ];
