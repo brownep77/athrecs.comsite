@@ -76,6 +76,7 @@ export type EntryOptionSeed = {
   sourceUrl?: string;
   isVerified?: boolean;
   isPrimary?: boolean;
+  notes?: string;
 };
 
 export type Edition = {

@@ -404,7 +404,8 @@ export const getEventBySlug = createServerFn({ method: "GET" })
               'checked_at', option.checked_at::text,
               'source_url', option.source_url,
               'is_verified', option.is_verified,
-              'is_primary', option.is_primary
+              'is_primary', option.is_primary,
+              'notes', option.notes
             ) order by
               option.is_primary desc,
               case option.entry_type when 'official' then 0 else 1 end,

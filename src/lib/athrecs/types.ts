@@ -33,6 +33,7 @@ export type EditionEntryOption = {
   source_url: string | null;
   is_verified: boolean;
   is_primary: boolean;
+  notes?: string | null;
 };
 
 export type RaceGroupCode = "world-marathon-majors" | "utmb-world-series" | "utmb-index";

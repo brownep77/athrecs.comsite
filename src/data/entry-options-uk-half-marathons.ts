@@ -787,6 +787,29 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     entryUrl: "https://racesignup.co.uk/barry-buddon-fast-half-marathon-2027",
     source: "https://racesignup.co.uk/barry-buddon-fast-half-marathon-2027",
   },
+  "great-birmingham-run|2027-05-02|Half": {
+    startTime: "08:30",
+    entryUrl: "https://www.greatrun.org/events/great-birmingham-run/",
+    source: "https://www.greatrun.org/events/great-birmingham-run/",
+  },
+  "mkm-half-marathon|2027-05-03|Half": {
+    startTime: "09:00",
+    entryUrl: "https://mkmarathon.com/registration-info/",
+    source: "https://mkmarathon.com/registration-info/",
+  },
+  "collingbourne-races|2027-05-08|Half": {
+    startTime: "08:30",
+    entryUrl:
+      "https://andovertrailrunning.eventrac.co.uk/e/collingbourne-races-10907",
+    source: "https://www.and-overtrailevents.com/collingbourne",
+  },
+  "zig-zag-marathon-half-marathon|2027-05-09|Half": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.evententry.co.uk/zigzag-2027-zig-zag-marathon-half-marathon",
+    source:
+      "https://www.evententry.co.uk/zigzag-2027-zig-zag-marathon-half-marathon",
+  },
 };
 
 /** Correct source metadata for half-marathon records imported from regional listings. */
@@ -1924,6 +1947,63 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
       "A flat, single-lap half marathon entirely on private, traffic-free roads at Barry Buddon Training Camp, organised by MacTuff Events.",
     organiser: "MacTuff Events",
     website: "https://racesignup.co.uk/barry-buddon-fast-half-marathon-2027",
+  },
+  "great-birmingham-run": {
+    name: "AJ Bell Great Birmingham Run",
+    city: "Birmingham",
+    county: "West Midlands",
+    country: "England",
+    area: "Birmingham city centre",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary: "AJ Bell Great Birmingham Run — Birmingham city centre.",
+    description:
+      "A closed-road city half marathon past Birmingham landmarks and through the city's southern districts, organised by the Great Run Company.",
+    organiser: "The Great Run Company",
+    website: "https://www.greatrun.org/events/great-birmingham-run/",
+  },
+  "mkm-half-marathon": {
+    name: "MK Half Marathon",
+    city: "Milton Keynes",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Stadium MK and Milton Keynes",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "MK Half Marathon — Stadium MK, Milton Keynes.",
+    description:
+      "A fast road half marathon through Milton Keynes, its parks and villages, finishing inside Stadium MK as part of MK Marathon Weekend.",
+    organiser: "MK Marathon Weekend",
+    website: "https://mkmarathon.com/registration-info/",
+  },
+  "collingbourne-races": {
+    name: "Collingbourne Half Marathon",
+    city: "Ludgershall",
+    county: "Wiltshire",
+    country: "England",
+    area: "Crawlboys Farm and Collingbourne Woods",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    summary: "Collingbourne Half Marathon — Ludgershall, Wiltshire.",
+    description:
+      "A technical off-road half marathon on bridleways, woodland tracks and single-track trails through Collingbourne Woods, organised by And-Over Trail Events.",
+    organiser: "And-Over Trail Events",
+    website: "https://www.and-overtrailevents.com/collingbourne",
+  },
+  "zig-zag-marathon-half-marathon": {
+    name: "Zig Zag Marathon & Half Marathon",
+    city: "Bury St Edmunds",
+    county: "Suffolk",
+    country: "England",
+    area: "Suffolk Running Centre, Barrow",
+    surface: "Road",
+    distances: ["Half", "Marathon"],
+    summary: "Zig Zag Marathon & Half Marathon — Barrow, Suffolk.",
+    description:
+      "An officially measured road half marathon on the scenic Windmill Route from Suffolk Running Centre, organised by Zig Zag Running.",
+    organiser: "Zig Zag Running",
+    website:
+      "https://www.evententry.co.uk/zigzag-2027-zig-zag-marathon-half-marathon",
   },
 };
 
@@ -9950,6 +10030,143 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
         "https://www.letsdothis.com/gb/e/barry-buddon-fast-half-marathon-2027-193711",
       isVerified: true,
       notes: "The displayed entry range is £29.50–£31.50.",
+    },
+  ],
+  "great-birmingham-run|2027-05-02|Half": [
+    {
+      providerCode: "official-great-run",
+      providerName: "Great Run official entry",
+      entryUrl: "https://www.greatrun.org/events/great-birmingham-run/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 45,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl: "https://www.greatrun.org/events/great-birmingham-run/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Saver half-marathon entry is £45; the final price is £51.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/great-birmingham-run-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 45,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/great-birmingham-run-half-marathon",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £45–£51.",
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/aj-bell-great-birmingham-run-2027-247540",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 45,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/aj-bell-great-birmingham-run-2027-247540",
+      isVerified: true,
+    },
+  ],
+  "mkm-half-marathon|2027-05-03|Half": [
+    {
+      providerCode: "official-mk-marathon",
+      providerName: "MK Marathon official entry",
+      entryUrl: "https://mkmarathon.com/registration-info/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl: "https://mkmarathon.com/registration-info/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The organiser confirms 2027 registration is open; a 4.68% booking fee applies.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/mk-marathon-weekend/mk-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/mk-marathon-weekend/mk-half-marathon",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £42–£44.",
+    },
+  ],
+  "collingbourne-races|2027-05-08|Half": [
+    {
+      providerCode: "official-andover-trail-events",
+      providerName: "And-Over Trail Events official entry",
+      entryUrl:
+        "https://andovertrailrunning.eventrac.co.uk/e/collingbourne-races-10907",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl: "https://www.and-overtrailevents.com/collingbourne",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/collingbourne-races/half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/collingbourne-races/half-marathon",
+      isVerified: true,
+    },
+  ],
+  "zig-zag-marathon-half-marathon|2027-05-09|Half": [
+    {
+      providerCode: "official-zig-zag-running",
+      providerName: "Zig Zag Running official entry",
+      entryUrl:
+        "https://www.evententry.co.uk/zigzag-2027-zig-zag-marathon-half-marathon",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.evententry.co.uk/zigzag-2027-zig-zag-marathon-half-marathon",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The displayed half-marathon entry range is £29–£34.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/zig-zag-marathon-and-half/half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/zig-zag-marathon-and-half/half-marathon",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £29–£34.",
     },
   ],
 };
