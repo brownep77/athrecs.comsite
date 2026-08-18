@@ -205,6 +205,60 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-25",
     toDate: "2027-03-14",
   },
+  {
+    seriesSlug: "hospice-run-10k-5k",
+    distance: "10K",
+    fromDate: "2026-09-25",
+    toDate: "2026-09-20",
+  },
+  {
+    seriesSlug: "spartan-south-east",
+    distance: "10K",
+    fromDate: "2026-09-25",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "barns-green-half-marathon",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "barns-green-half-marathon",
+    distance: "5K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "barns-green-half-marathon",
+    distance: "Half",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "barnstaple-marathon-and-half-marathon",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "barnstaple-marathon-and-half-marathon",
+    distance: "Half",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "barnstaple-marathon-and-half-marathon",
+    distance: "Marathon",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "bournville-leafy-10k",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -1803,6 +1857,86 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://www.highnamcourtrun.co.uk/Runnersinfo",
     notes:
       "The organiser's live site has replaced the superseded September 2026 listing with Sunday 14 March 2027. The two-lap mixed-terrain 10K starts at approximately 11:00 from Church Field at Highnam Court Cricket Ground.",
+  },
+  "hospice-run-10k-5k|2026-09-25|10K": {
+    date: "2026-09-20",
+    startTime: "10:00",
+    entryUrl: "https://www.eventrac.co.uk/e/hospice-run-9902",
+    source: "https://www.hospiceintheweald.org.uk/events/hospice-run-2026/",
+    notes:
+      "Hospice Run takes place on Sunday 20 September, not Friday 25 September. The closed-road, chip-timed 10K starts at 10:00 from Lower Common Cricket Ground, after the half marathon and before the 5K.",
+  },
+  "spartan-south-east|2026-09-25|10K": {
+    date: "2026-09-27",
+    startTime: undefined,
+    entryUrl: "https://www.spartan.com/en/race/detail/10025/overview",
+    source: "https://www.spartan.com/en/race/detail/10025/overview",
+    notes:
+      "The London South East Spartan Super 10K is on Sunday 27 September at Pippingford Park. Entrants select or receive a start wave rather than one universal start time; the obstacle course includes rolling hills, wet terrain and 25 obstacles.",
+  },
+  "315-national-fitness-5k|2026-09-26|10K": {
+    startTime: "14:00",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/190329?preferred=true&eventId=190329&occurrenceId=21111174359&utm_source=website&utm_medium=organic&utm_campaign=general-event-page&utm_organiser_id=27763",
+    source:
+      "https://www.lancaster-race-series.co.uk/enter-our-races/national-fitness-10km-5k-fun-run/",
+    notes:
+      "The UKA-licensed 10K and 5K start together at 14:00 from the 3-1-5 Health Club. The fast, flat course follows riverside paths beside the River Lune.",
+  },
+  "315-national-fitness-5k|2026-09-26|5K": {
+    startTime: "14:00",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/190329?preferred=true&eventId=190329&occurrenceId=21111174359&utm_source=website&utm_medium=organic&utm_campaign=general-event-page&utm_organiser_id=27763",
+    source:
+      "https://www.lancaster-race-series.co.uk/enter-our-races/national-fitness-10km-5k-fun-run/",
+  },
+  "barns-green-half-marathon|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "10:25",
+    entryUrl: "https://runbarnsgreen.org.uk/sign-up/",
+    source: "https://runbarnsgreen.org.uk/event-information/10k/",
+    notes:
+      "The 10K is on Sunday 27 September and starts at 10:25 from Barns Green Village Hall. The scenic West Sussex road course is managed by the volunteer Barns Green Half Marathon committee and raises funds for local charities.",
+  },
+  "barns-green-half-marathon|2026-09-26|5K": {
+    date: "2026-09-27",
+    startTime: "09:55",
+    entryUrl: "https://runbarnsgreen.org.uk/sign-up/",
+    source: "https://runbarnsgreen.org.uk/",
+  },
+  "barns-green-half-marathon|2026-09-26|Half": {
+    date: "2026-09-27",
+    startTime: "10:05",
+    entryUrl: "https://runbarnsgreen.org.uk/sign-up/",
+    source: "https://runbarnsgreen.org.uk/",
+  },
+  "barnstaple-marathon-and-half-marathon|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "11:00",
+    entryUrl: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+    source: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+    notes:
+      "Run Barnstaple is on Sunday 27 September. The 10K starts at 11:00 in Rock Park and follows a flat, fast, accurately measured route using closed roads and the Tarka Trail, with a short shared-traffic section.",
+  },
+  "barnstaple-marathon-and-half-marathon|2026-09-26|Half": {
+    date: "2026-09-27",
+    startTime: "10:00",
+    entryUrl: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+    source: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+  },
+  "barnstaple-marathon-and-half-marathon|2026-09-26|Marathon": {
+    date: "2026-09-27",
+    startTime: "09:00",
+    entryUrl: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+    source: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+  },
+  "bournville-leafy-10k|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "10:00",
+    entryUrl: "https://www.entrycentral.com/the-bournville-leafy-10k",
+    source: "https://bournvilleharriers.org.uk/the-leafy-10k",
+    notes:
+      "The Bournville Leafy 10K is on Sunday 27 September and starts at 10:00 from Rowheath Pavilion. Its two-lap multi-terrain course combines grass, woodland, paved paths and roads with several hills.",
   },
 };
 
@@ -4724,6 +4858,97 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Highnam Court Cricket Club's community event follows grass, field, garden and woodland paths around the historic estate, with one lap for 5K and two laps for 10K.",
     organiser: "Highnam Court Cricket Club",
     website: "https://www.highnamcourtrun.co.uk/",
+  },
+  "hospice-run-10k-5k": {
+    name: "Hospice Run 10K, 5K & Half Marathon",
+    city: "Royal Tunbridge Wells",
+    county: "Kent",
+    country: "England",
+    area: "Tunbridge Wells Common",
+    surface: "Road",
+    distances: ["10K", "5K", "Half"],
+    summary:
+      "Hospice Run — closed-road 5K, 10K and half marathon races supporting Hospice in the Weald.",
+    description:
+      "A chip-timed community race day from Lower Common Cricket Ground, with an undulating closed-road route, event village and finisher medal while raising funds for local hospice care.",
+    organiser: "Hospice in the Weald",
+    website: "https://www.hospiceintheweald.org.uk/events/hospice-run-2026/",
+  },
+  "spartan-south-east": {
+    name: "London South East Spartan Weekend",
+    city: "Nutley",
+    county: "East Sussex",
+    country: "England",
+    area: "Pippingford Park",
+    surface: "Obstacle",
+    distances: ["5K", "10K", "Half", "Ultra"],
+    summary:
+      "London South East Spartan Weekend — Sprint, Super, Beast and Ultra obstacle races at Pippingford Park.",
+    description:
+      "Spartan's South East weekend uses the estate's rolling hills, water and technical terrain. The Sunday Super covers approximately 10K with 25 obstacles and wave-based starts.",
+    organiser: "Spartan Race",
+    website: "https://www.spartan.com/en/race/detail/10025/overview",
+  },
+  "315-national-fitness-5k": {
+    name: "3-1-5 National Fitness 10K & 5K",
+    city: "Lancaster",
+    county: "Lancashire",
+    country: "England",
+    area: "3-1-5 Health Club and River Lune",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary:
+      "3-1-5 National Fitness 10K & 5K — flat riverside races from Lancaster's 3-1-5 Health Club.",
+    description:
+      "Lancaster Race Series' UKA-licensed event offers 5K and 10K races on a fast, flat course beside the River Lune, plus a family fun run.",
+    organiser: "Lancaster Race Series",
+    website:
+      "https://www.lancaster-race-series.co.uk/enter-our-races/national-fitness-10km-5k-fun-run/",
+  },
+  "barns-green-half-marathon": {
+    name: "Barns Green Half Marathon, 10K & 5K",
+    city: "Barns Green",
+    county: "West Sussex",
+    country: "England",
+    area: "Barns Green Village Hall",
+    surface: "Road",
+    distances: ["10K", "5K", "Half"],
+    summary:
+      "Barns Green Half Marathon, 10K & 5K — volunteer-led road races through the West Sussex countryside.",
+    description:
+      "The long-running Barns Green community event offers professionally organised country-road races from the village hall and distributes proceeds to local charities and community groups.",
+    organiser: "Barns Green Half Marathon Committee",
+    website: "https://runbarnsgreen.org.uk/",
+  },
+  "barnstaple-marathon-and-half-marathon": {
+    name: "Run Barnstaple Marathon, Half Marathon & 10K",
+    city: "Barnstaple",
+    county: "Devon",
+    country: "England",
+    area: "Rock Park and the Tarka Trail",
+    surface: "Road",
+    distances: ["10K", "Half", "Marathon"],
+    summary:
+      "Run Barnstaple — flat marathon, half marathon and 10K races supporting Children's Hospice South West.",
+    description:
+      "The accurately measured races start in Rock Park and use closed roads and the traffic-free Tarka Trail around Barnstaple, with a small shared-traffic section.",
+    organiser: "Children's Hospice South West",
+    website: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+  },
+  "bournville-leafy-10k": {
+    name: "Bournville Leafy 10K",
+    city: "Birmingham",
+    county: "West Midlands",
+    country: "England",
+    area: "Rowheath Pavilion and Bournville",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Bournville Leafy 10K — a hilly two-lap multi-terrain race through leafy south Birmingham.",
+    description:
+      "Bournville Harriers' 300-place race starts at Rowheath Pavilion and mixes grass, woodland, paths and local roads on an undulating two-lap course.",
+    organiser: "Bournville Harriers",
+    website: "https://bournvilleharriers.org.uk/the-leafy-10k",
   },
 };
 
@@ -10264,6 +10489,185 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "The official ticket list provides a second access point for the 10K, 5K and canicross categories. No independent booking provider is currently offered.",
+    },
+  ],
+  "hospice-run-10k-5k|2026-09-20|10K": [
+    {
+      providerCode: "official-hospice-eventrac",
+      providerName: "Hospice Run official Eventrac entry",
+      entryUrl: "https://www.eventrac.co.uk/e/hospice-run-9902",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.eventrac.co.uk/e/hospice-run-9902",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Eventrac lists adult 10K entry at £30 and child 10K entry at £20. The organiser asks participants to aim for £100 fundraising for Hospice in the Weald.",
+    },
+    {
+      providerCode: "hospice-in-the-weald",
+      providerName: "Hospice in the Weald event page",
+      entryUrl: "https://www.hospiceintheweald.org.uk/events/hospice-run-2026/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.hospiceintheweald.org.uk/events/hospice-run-2026/",
+      isVerified: true,
+      notes:
+        "The charity's official event page provides a second registration route and confirms the closed-road 10K, event village and Sunday 20 September date.",
+    },
+  ],
+  "spartan-south-east|2026-09-27|10K": [
+    {
+      providerCode: "official-spartan",
+      providerName: "Spartan official entry",
+      entryUrl: "https://www.spartan.com/en/race/detail/10025/overview",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.spartan.com/en/race/detail/10025/overview",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official checkout is authoritative for current wave availability and locale-dependent pricing. The Super 10K is on Sunday and start times are allocated by wave.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/spartan-south-east",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/spartan-south-east",
+      isVerified: true,
+      notes:
+        "runABC offers a secondary event route. Check the linked Spartan page for the corrected Sunday Super date, live wave availability, fees and final instructions.",
+    },
+  ],
+  "315-national-fitness-5k|2026-09-26|10K": [
+    {
+      providerCode: "official-315-letsdothis",
+      providerName: "3-1-5 official Let's Do This entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/190329?preferred=true&eventId=190329&occurrenceId=21111174359&utm_source=website&utm_medium=organic&utm_campaign=general-event-page&utm_organiser_id=27763",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl:
+        "https://www.lancaster-race-series.co.uk/enter-our-races/national-fitness-10km-5k-fun-run/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists 10K entry at £24 affiliated, £25 unaffiliated or £19 for Lancaster Runners Club members and links to this booking page.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/315-national-fitness-5k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/315-national-fitness-5k",
+      isVerified: true,
+      notes:
+        "runABC supplies a secondary route for the event; the Lancaster Race Series page is authoritative for the corrected 14:00 start and category prices.",
+    },
+  ],
+  "barns-green-half-marathon|2026-09-27|10K": [
+    {
+      providerCode: "official-barns-green",
+      providerName: "Barns Green official sign-up",
+      entryUrl: "https://runbarnsgreen.org.uk/sign-up/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://runbarnsgreen.org.uk/event-information/10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official sign-up hub links to the Sports Systems registration flow. The organiser's FAQ lists 10K entry at £22 affiliated or £25 unaffiliated.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/run-barns-green/10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/run-barns-green/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors provides an alternative 10K entry route. The organiser's own sign-up page and FAQ remain authoritative for the live category price and capacity.",
+    },
+  ],
+  "barnstaple-marathon-and-half-marathon|2026-09-27|10K": [
+    {
+      providerCode: "official-chsw-barnstaple",
+      providerName: "Children's Hospice South West entry",
+      entryUrl: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.chsw.org.uk/event/run-barnstaple-10k-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official charity page lists 10K entry at £24 affiliated or £26 unaffiliated. Fundraising is encouraged but not required for standard public entry.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/run-barnstaple/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/run-barnstaple/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors offers an alternative booking route and lists the same £24–£26 10K price range and 11:00 start.",
+    },
+  ],
+  "bournville-leafy-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-bournville-entrycentral",
+      providerName: "Bournville Harriers EntryCentral checkout",
+      entryUrl: "https://www.entrycentral.com/the-bournville-leafy-10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 27,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-20T23:59:00+01:00",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/the-bournville-leafy-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists standard entry at £27 affiliated or £29 unaffiliated, a 300-place limit and a 20 September closing time, unless capacity is reached first.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/bournville-leafy-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/bournville-leafy-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route and confirms Rowheath Pavilion as race HQ; EntryCentral is authoritative for live capacity and pricing.",
     },
   ],
 };
