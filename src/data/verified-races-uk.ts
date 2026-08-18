@@ -3517,4 +3517,14 @@ export const verifiedUkEditions: Edition[] = [
     startTime: "09:00",
     source: "https://www.runblackpoolfestival.com/half-marathon.html",
   },
+  {
+    seriesSlug: "surrey-hills-half-marathon-march-2027",
+    date: "2027-05-26",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://www.runningadventures.uk/surreyhillshalf.html",
+    startTime: "19:00",
+    source: "https://www.runningadventures.uk/surreyhillshalf.html",
+  },
 ];

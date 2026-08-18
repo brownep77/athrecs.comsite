@@ -252,6 +252,12 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     fromDate: "2027-05-15",
     toDate: "2027-05-16",
   },
+  {
+    seriesSlug: "woohoo-its-hornsea",
+    distance: "Half",
+    fromDate: "2027-05-29",
+    toDate: "2027-05-30",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -859,6 +865,24 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     startTime: "08:30",
     entryUrl: "https://www.wilddeerevents.co.uk/e/hartlepool-half-marathon-14522",
     source: "https://www.wilddeerevents.co.uk/e/hartlepool-half-marathon-14522",
+  },
+  "surrey-hills-half-marathon-march-2027|2027-05-26|Half": {
+    startTime: "19:00",
+    entryUrl: "https://www.runningadventures.uk/surreyhillshalf.html",
+    source: "https://www.runningadventures.uk/surreyhillshalf.html",
+  },
+  "woohoo-its-hornsea|2027-05-29|Half": {
+    date: "2027-05-30",
+    startTime: "09:30",
+    entryUrl:
+      "https://www.itsgrimupnorthrunning.co.uk/e/get-the-hull-out-of-here-13714",
+    source:
+      "https://www.itsgrimupnorthrunning.co.uk/e/get-the-hull-out-of-here-13714",
+  },
+  "edinburgh-marathon-festival-half-marathon|2027-05-30|Half": {
+    startTime: "08:00",
+    entryUrl: "https://www.edinburghmarathon.com/",
+    source: "https://www.edinburghmarathon.com/",
   },
 };
 
@@ -2126,6 +2150,49 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
       "A flat, fast coastal road half marathon from Hartlepool Marina, organised by Wild Deer Events.",
     organiser: "Wild Deer Events",
     website: "https://www.wilddeerevents.co.uk/e/hartlepool-half-marathon-14522",
+  },
+  "surrey-hills-half-marathon-march-2027": {
+    name: "Surrey Hills Half Marathon",
+    city: "Guildford",
+    county: "Surrey",
+    country: "England",
+    area: "St Martha's Hill and the North Downs Way",
+    surface: "Trail",
+    distances: ["Half"],
+    summary: "Surrey Hills Half Marathon — St Martha's Hill, Guildford.",
+    description:
+      "A guided 13-mile trail run through the Surrey Hills, including St Martha's Church, Shere, Newlands Corner and sections of the North Downs Way.",
+    organiser: "Running Adventures",
+    website: "https://www.runningadventures.uk/surreyhillshalf.html",
+  },
+  "woohoo-its-hornsea": {
+    name: "Get the Hull out of Here",
+    city: "Kingston upon Hull",
+    county: "East Riding of Yorkshire",
+    country: "England",
+    area: "Pelican Park and the Hornsea Rail Trail",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "20M", "10M", "10K", "5K"],
+    summary: "Get the Hull out of Here — Pelican Park, Kingston upon Hull.",
+    description:
+      "A flat, multi-distance trail event following the TransPennine Trail and Hornsea Rail Trail from East Hull into the surrounding countryside.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/get-the-hull-out-of-here-13714",
+  },
+  "edinburgh-marathon-festival-half-marathon": {
+    name: "Edinburgh Marathon Festival Half Marathon",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "Dynamic Earth, Edinburgh to Musselburgh",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Edinburgh Marathon Festival Half Marathon — Edinburgh to Musselburgh.",
+    description:
+      "A fast, flat point-to-point road half marathon from central Edinburgh to the East Lothian coast at Musselburgh.",
+    organiser: "GSi Events",
+    website: "https://www.edinburghmarathon.com/",
   },
 };
 
@@ -10424,6 +10491,119 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       isPrimary: true,
       notes: "The live Eventrac entry list gives an 08:30 start; final race instructions take precedence.",
+    },
+  ],
+  "surrey-hills-half-marathon-march-2027|2027-05-26|Half": [
+    {
+      providerCode: "official-running-adventures",
+      providerName: "Running Adventures official entry",
+      entryUrl: "https://www.runningadventures.uk/surreyhillshalf.html",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:35:00+01:00",
+      sourceUrl: "https://www.runningadventures.uk/surreyhillshalf.html",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The organiser's Register Now flow lists the 26 May 2027 evening run at £29.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/surrey-hills-half-marathon-1",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:35:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/surrey-hills-half-marathon-1",
+      isVerified: true,
+    },
+  ],
+  "woohoo-its-hornsea|2027-05-30|Half": [
+    {
+      providerCode: "official-grim-up-north",
+      providerName: "It's Grim Up North official entry",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/get-the-hull-out-of-here-13714",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T16:35:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/get-the-hull-out-of-here-13714",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "worlds-marathons",
+      providerName: "World's Marathons",
+      entryUrl: "https://worldsmarathons.com/marathon/get-the-hull-out-of-here",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 37,
+      priceCurrency: "EUR",
+      checkedAt: "2026-08-18T16:35:00+01:00",
+      sourceUrl: "https://worldsmarathons.com/marathon/get-the-hull-out-of-here",
+      isVerified: true,
+      notes: "The live provider lists the half marathon at €37; currency conversion and fees may vary.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/get-the-hull-out-of-here/half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:35:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/get-the-hull-out-of-here/half-marathon",
+      isVerified: true,
+      notes: "The displayed half-marathon entry range is £30–£32.",
+    },
+  ],
+  "edinburgh-marathon-festival-half-marathon|2027-05-30|Half": [
+    {
+      providerCode: "official-edinburgh-marathon-festival",
+      providerName: "Edinburgh Marathon Festival official entry",
+      entryUrl: "https://www.edinburghmarathon.com/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T16:35:00+01:00",
+      sourceUrl: "https://www.edinburghmarathon.com/",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/edinburgh-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 47.75,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:35:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/edinburgh-half-marathon",
+      isVerified: true,
+    },
+    {
+      providerCode: "macmillan",
+      providerName: "Macmillan Cancer Support charity place",
+      entryUrl:
+        "https://www.macmillan.org.uk/fundraise/charity-runs/edinburgh-half-marathon",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T16:35:00+01:00",
+      sourceUrl:
+        "https://www.macmillan.org.uk/fundraise/charity-runs/edinburgh-half-marathon",
+      isVerified: true,
+      notes: "Charity entry is £25 with a £300 fundraising pledge.",
     },
   ],
 };
