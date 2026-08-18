@@ -115,6 +115,12 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-12",
     toDate: "2026-09-13",
   },
+  {
+    seriesSlug: "the-terry-fox-run-uk",
+    distance: "10K",
+    fromDate: "2026-09-12",
+    toDate: "2026-09-13",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -928,6 +934,66 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     entryUrl: "https://runabc.co.uk/newmacher-10k",
     source: "https://runabc.co.uk/newmacher-10k",
     notes: "The 2026 race has been postponed; organisers hope the event will return in 2027.",
+  },
+  "richmond-runfest-10k|2026-09-12|10K": {
+    status: "ClosingSoon",
+    startTime: "08:30",
+    entryUrl: "https://run-fest.com/events/air-run-10k/",
+    source: "https://run-fest.com/events/air-run-10k/",
+    notes:
+      "General entry is sold out, but selected charities still advertise fundraising places for the 2026 race.",
+  },
+  "runthrough-battersea-park-5k-10k-september|2026-09-12|10K": {
+    startTime: "11:15",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-12th-september-2026",
+    source:
+      "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-12th-september-2026",
+  },
+  "runthrough-battersea-park-5k-10k-september|2026-09-12|Half": {
+    startTime: "10:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-12th-september-2026",
+    source:
+      "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-12th-september-2026",
+  },
+  "shere-42k|2026-09-12|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.surreytrekandrun.co.uk/events/shere-42k/",
+    source: "https://www.surreytrekandrun.co.uk/events/shere-42k/",
+  },
+  "shere-42k|2026-09-12|Half": {
+    distance: "21K",
+    distanceKm: 21,
+    startTime: "09:30",
+    entryUrl: "https://www.surreytrekandrun.co.uk/events/shere-42k/",
+    source: "https://www.surreytrekandrun.co.uk/events/shere-42k/",
+  },
+  "tatton-10k-september|2026-09-12|10K": {
+    startTime: "08:45",
+    entryUrl: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-september-2026",
+  },
+  "tatton-10k-september|2026-09-12|5K": {
+    startTime: "09:05",
+    entryUrl: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-september-2026",
+  },
+  "the-terry-fox-run-uk|2026-09-12|10K": {
+    date: "2026-09-13",
+    startTime: "11:00",
+    entryUrl: "https://terryfoxrunuk.org/events/london2026",
+    source: "https://terryfoxrunuk.org/events/london2026",
+    notes:
+      "Registration opens from 09:30 for the 11:00 start. The event is free, non-competitive and supports cancer research.",
+  },
+  "trident-10k|2026-09-12|10K": {
+    status: "TBC",
+    startTime: undefined,
+    entryUrl: "https://www.helensburghaac.com/event/trident-10km-trail-race/",
+    source: "https://www.helensburghaac.com/event/trident-10km-trail-race/",
+    notes:
+      "No official 2026 event or checkout could be verified. The club page still describes the 13 September 2025 edition, so confirm whether a 2026 race will go ahead.",
   },
 };
 
@@ -2541,6 +2607,92 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "A mainly road-based village 10K from Charles Gordon Park. The 2026 edition has been postponed, with organisers hoping the event can return in 2027.",
     organiser: "Newmacher 10K organisers",
     website: "https://runabc.co.uk/newmacher-10k",
+  },
+  "richmond-runfest-10k": {
+    name: "Richmond RUN-FEST 10K",
+    city: "Richmond",
+    county: "Greater London",
+    country: "England",
+    area: "Royal Botanic Gardens, Kew",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Richmond RUN-FEST 10K — a flat, fully closed race inside Kew Gardens.",
+    description:
+      "A certified 10K starting and finishing beside the Orangery in Royal Botanic Gardens, Kew, with chip timing, course entertainment, a technical shirt and spectator garden entry.",
+    organiser: "RUN-FEST",
+    website: "https://run-fest.com/events/air-run-10k/",
+  },
+  "runthrough-battersea-park-5k-10k-september": {
+    name: "Battersea Park 5K, 10K & Half Marathon",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Battersea Park Bandstand",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary: "Battersea Park 5K, 10K & Half Marathon — flat park races designed for fast times.",
+    description:
+      "Chip-timed races on smooth, traffic-free paths inside Battersea Park, with accurately marked kilometres, free event photos, a themed medal and post-race refreshments.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-12th-september-2026",
+  },
+  "shere-42k": {
+    name: "Shere 42K, 21K & 10K Trail Races",
+    city: "Shere",
+    county: "Surrey",
+    country: "England",
+    area: "Shere Recreation Ground and the Surrey Hills",
+    surface: "Trail",
+    distances: ["42K", "21K", "10K"],
+    summary: "Shere Trail Races — 10K, 21K and 42K routes through the Surrey Hills.",
+    description:
+      "Chip-timed, well-marked trail races from Shere Recreation Ground, ranging from a wooded 10K to a demanding 42K across the North Downs and Surrey Hills viewpoints.",
+    organiser: "Surrey Trek and Run",
+    website: "https://www.surreytrekandrun.co.uk/events/shere-42k/",
+  },
+  "tatton-10k-september": {
+    name: "Tatton Park 5K & 10K September",
+    city: "Knutsford",
+    county: "Cheshire",
+    country: "England",
+    area: "Tatton Park",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Tatton Park 5K & 10K — accurately measured road-closed races in the historic estate.",
+    description:
+      "Undulating 5K and 10K races on roads inside Tatton Park, with chip timing, a themed medal, free official photos and support for The Christie Charity.",
+    organiser: "RunThrough",
+    website: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-september-2026",
+  },
+  "the-terry-fox-run-uk": {
+    name: "Terry Fox Run London",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Battersea Park Bandstand",
+    surface: "Road",
+    distances: ["10K", "7.5K", "5K", "2.5K"],
+    summary: "Terry Fox Run London — a free, inclusive run, walk or ride for cancer research.",
+    description:
+      "A non-competitive, open-to-all fundraiser on a flat 2.5K Battersea Park loop, allowing participants to run, walk, roll or ride up to four laps in Terry Fox's memory.",
+    organiser: "Terry Fox Run UK",
+    website: "https://terryfoxrunuk.org/events/london2026",
+  },
+  "trident-10k": {
+    name: "Trident 10K Trail Race",
+    city: "Helensburgh",
+    county: "Argyll and Bute",
+    country: "Scotland",
+    area: "Helensburgh Rugby Club, Duchess Wood and the forest tracks",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Trident 10K — a steep trail loop above Helensburgh; the 2026 edition is not yet verified.",
+    description:
+      "A challenging club-organised trail race climbing from Helensburgh Rugby Club through Duchess Wood to forest tracks with Clyde, Loch Lomond and Arrochar Alps views. No official 2026 listing is currently confirmed.",
+    organiser: "Helensburgh Amateur Athletic Club",
+    website: "https://www.helensburghaac.com/event/trident-10km-trail-race/",
   },
 };
 
@@ -5485,6 +5637,191 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       isPrimary: true,
       notes: "The 2026 race has been postponed; organisers hope it can return in 2027.",
+    },
+  ],
+  "richmond-runfest-10k|2026-09-12|10K": [
+    {
+      providerCode: "official-runfest-richmond",
+      providerName: "RUN-FEST general entry update",
+      entryUrl: "https://run-fest.com/events/air-run-10k/",
+      entryType: "official",
+      status: "sold_out",
+      priceAmount: 44.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://run-fest.com/events/air-run-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "General 2026 entry is sold out. The organiser's standard non-club price was £44.50 including the transaction fee; selected charities still have places.",
+    },
+    {
+      providerCode: "charity-leukaemia-care",
+      providerName: "Leukaemia Care charity place",
+      entryUrl:
+        "https://www.leukaemiacare.org.uk/get-involved/fundraise-for-leukaemia-care/events/richmond-10k-2026/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 10,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.leukaemiacare.org.uk/get-involved/fundraise-for-leukaemia-care/events/richmond-10k-2026/",
+      isVerified: true,
+      notes: "Leukaemia Care lists a £10 charity place with a £200 minimum fundraising target.",
+    },
+    {
+      providerCode: "charity-mind",
+      providerName: "Mind charity place",
+      entryUrl:
+        "https://www.mind.org.uk/get-involved/donate-or-fundraise/take-on-an-active-challenge/run-for-mind/richmond-run-fest-10k-2026/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.mind.org.uk/get-involved/donate-or-fundraise/take-on-an-active-challenge/run-for-mind/richmond-run-fest-10k-2026/",
+      isVerified: true,
+      notes: "Mind lists a £20 charity place with a £250 minimum fundraising target.",
+    },
+  ],
+  "runthrough-battersea-park-5k-10k-september|2026-09-12|10K": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-12th-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-12th-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The live official page lists the 11:15 10K at £34.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/run-series-battersea-ten",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://findarace.com/events/run-series-battersea-ten",
+      isVerified: true,
+      notes:
+        "RunThrough's official booking partner offers Quick Book for the exact 2026 10K at £36.",
+    },
+  ],
+  "shere-42k|2026-09-12|10K": [
+    {
+      providerCode: "official-surrey-trek-run",
+      providerName: "Surrey Trek and Run official entry",
+      entryUrl: "https://www.surreytrekandrun.co.uk/events/shere-42k/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.surreytrekandrun.co.uk/events/shere-42k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists 10K entry at £25 for the 10:00 start; cash entry may also be available on the day, but late entrants are not guaranteed a medal.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/the-shere-42k-half-marathon-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 27.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://findarace.com/events/the-shere-42k-half-marathon-10k",
+      isVerified: true,
+      notes: "The exact 2026 event offers Quick Book for the 10K at £27.50.",
+    },
+  ],
+  "tatton-10k-september|2026-09-12|10K": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The official page lists the road-closed 10K at £30 with an 08:45 start.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/tatton-park-5k-10k/12th-september-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://findarace.com/events/tatton-park-5k-10k/12th-september-2026",
+      isVerified: true,
+      notes: "RunThrough's official booking partner offers Quick Book for the exact 10K at £32.",
+    },
+    {
+      providerCode: "charity-christie",
+      providerName: "The Christie charity place",
+      entryUrl:
+        "https://www.christie.nhs.uk/the-christie-charity/get-involved/fundraise/events/events-calendar/tatton-10k-september",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.christie.nhs.uk/the-christie-charity/get-involved/fundraise/events/events-calendar/tatton-10k-september",
+      isVerified: true,
+      notes: "The Christie offers a free place with a £150 minimum fundraising target.",
+    },
+  ],
+  "the-terry-fox-run-uk|2026-09-13|10K": [
+    {
+      providerCode: "official-terry-fox-uk",
+      providerName: "Terry Fox Run UK registration",
+      entryUrl: "https://terryfoxrunuk.org/events/london2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://terryfoxrunuk.org/events/london2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Registration is free with no minimum fundraising requirement. Check-in opens at 09:30 and the London event starts at 11:00 on Sunday 13 September.",
+    },
+  ],
+  "trident-10k|2026-09-12|10K": [
+    {
+      providerCode: "official-haac-update",
+      providerName: "Helensburgh AAC event update",
+      entryUrl: "https://www.helensburghaac.com/event/trident-10km-trail-race/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.helensburghaac.com/event/trident-10km-trail-race/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official club page still describes the 13 September 2025 race. No confirmed 2026 event or checkout could be verified, so do not travel or pay elsewhere without checking with the club.",
     },
   ],
 };
