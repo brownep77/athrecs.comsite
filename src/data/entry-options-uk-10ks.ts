@@ -169,6 +169,18 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-19",
     toDate: "2026-09-20",
   },
+  {
+    seriesSlug: "stewarts-law-moor-park-10k",
+    distance: "10K",
+    fromDate: "2026-09-19",
+    toDate: "2026-09-20",
+  },
+  {
+    seriesSlug: "warhorse-10k",
+    distance: "10K",
+    fromDate: "2026-09-19",
+    toDate: "2026-09-20",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -1370,6 +1382,70 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://www.priderun10k.org/10krace",
     notes:
       "The not-for-profit race follows three flat laps of Victoria Park. Race-pack collection opens at 10:00 and the 10K starts at 11:00.",
+  },
+  "marriotts-way-10k|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://totalracetiming.co.uk/race/706",
+    source: "https://www.southnorfolkandbroadland.gov.uk/leisure/marriotts-way-10k",
+    notes:
+      "The runABC listing was indexed one day early. The council and checkout confirm Sunday 20 September, with five waves leaving Aylsham at ten-minute intervals from 10:00 to 10:40 before following the flat former railway line to Reepham Market Place.",
+  },
+  "runthrough-olympic-park-5k-10k-september|2026-09-19|10K": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/queen-elizabeth-olympic-park-5k-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/queen-elizabeth-olympic-park-5k-10k-september-2026",
+    notes:
+      "The 5K and 10K start together at 09:30. The flat 10K uses four tarmac laps in Queen Elizabeth Olympic Park and the race closes at 11:00.",
+  },
+  "runthrough-olympic-park-5k-10k-september|2026-09-19|5K": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/queen-elizabeth-olympic-park-5k-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/queen-elizabeth-olympic-park-5k-10k-september-2026",
+  },
+  "snape-10k|2026-09-19|10K": {
+    startTime: "11:00",
+    entryUrl: "https://snapeinstitute.co.uk/projects/funrun/funrun-entryform/",
+    source: "https://snapeinstitute.co.uk/event/snape-fun-run-2/",
+    notes:
+      "The 10K and 5K start at 11:00. The 10K is a mixed-terrain community route on rural roads, tracks and paths around Snape and Bedale.",
+  },
+  "snape-10k|2026-09-19|5K": {
+    startTime: "11:00",
+    entryUrl: "https://snapeinstitute.co.uk/projects/funrun/funrun-entryform/",
+    source: "https://snapeinstitute.co.uk/event/snape-fun-run-2/",
+  },
+  "stewarts-law-moor-park-10k|2026-09-19|10K": {
+    date: "2026-09-20",
+    startTime: "15:00",
+    entryUrl: "https://www.atwevents.co.uk/e/moor-park-10-and-more-9152",
+    source: "https://www.enhhcharity.org.uk/moorpark26",
+    notes:
+      "Corrected from 19 September. The 25th-anniversary closed-road 10K starts at 15:00 after the junior fun runs and the March for Mount Vernon walk.",
+  },
+  "warhorse-10k|2026-09-19|10K": {
+    date: "2026-09-20",
+    status: "ClosingSoon",
+    startTime: "11:00",
+    entryUrl: "https://www.webscorer.com/register?raceid=427844",
+    source: "https://www.webscorer.com/register?raceid=427844",
+    notes:
+      "Corrected from 19 September. The organiser's 250-place registration is full and the official checkout is operating a waitlist; numbers are collected from race HQ between 09:00 and 10:40.",
+  },
+  "westside-runners-10k-5k-fun-run|2026-09-19|10K": {
+    status: "TBC",
+    startTime: undefined,
+    entryUrl: "https://srac.org.uk/",
+    source: "https://srac.org.uk/",
+    notes:
+      "runABC lists a Westside 10K and 5K in Shawbost on 19 September, but the organiser has not yet published a 2026 entry form, price or start time on its official site. Confirm before travel.",
+  },
+  "westside-runners-10k-5k-fun-run|2026-09-19|5K": {
+    status: "TBC",
+    startTime: undefined,
+    entryUrl: "https://srac.org.uk/",
+    source: "https://srac.org.uk/",
   },
 };
 
@@ -3672,6 +3748,92 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "London Frontrunners volunteers organise this welcoming annual event for runners of all backgrounds, raising funds for LGBT+ charities on a flat park course.",
     organiser: "Pride Run 10K and London Frontrunners",
     website: "https://www.priderun10k.org/",
+  },
+  "marriotts-way-10k": {
+    name: "Marriott's Way 10K",
+    city: "Aylsham",
+    county: "Norfolk",
+    country: "England",
+    area: "Marriott's Way from Aylsham to Reepham",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Marriott's Way 10K — a flat point-to-point trail race from Aylsham to Reepham.",
+    description:
+      "Broadland District Council's wave-start race follows the softer surface of a former railway line through Norfolk countryside, finishing in Reepham Market Place with a complimentary shuttle service.",
+    organiser: "Broadland District Council",
+    website: "https://www.southnorfolkandbroadland.gov.uk/leisure/marriotts-way-10k",
+  },
+  "runthrough-olympic-park-5k-10k-september": {
+    name: "Queen Elizabeth Olympic Park 5K & 10K",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Queen Elizabeth Olympic Park, North Park",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Queen Elizabeth Olympic Park 5K & 10K — flat, fast, chip-timed park laps.",
+    description:
+      "RunThrough Events' low-elevation tarmac course supports Special Olympics Great Britain, with marked kilometres, marshals, race photos, a themed medal and post-race goodies.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/queen-elizabeth-olympic-park-5k-10k-september-2026",
+  },
+  "snape-10k": {
+    name: "Snape 10K & 5K Fun Run",
+    city: "Snape",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Snape Institute and surrounding countryside",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary:
+      "Snape 10K & 5K — long-running community races across village and countryside terrain.",
+    description:
+      "Snape Institute's 37th annual event combines a mixed-terrain 10K with a family 5K on footpaths and fields, supporting the charitable village hall and offering medals to all finishers.",
+    organiser: "Snape Institute",
+    website: "https://snapeinstitute.co.uk/event/snape-fun-run-2/",
+  },
+  "stewarts-law-moor-park-10k": {
+    name: "Moor Park 10 & More",
+    city: "Rickmansworth",
+    county: "Hertfordshire",
+    country: "England",
+    area: "Merchant Taylors' School and Moor Park estate",
+    surface: "Road",
+    distances: ["10K", "5K Walk", "Junior"],
+    summary: "Moor Park 10 & More — a closed-road charity 10K, 5K walk and junior races.",
+    description:
+      "East & North Herts Hospitals' Charity's 25th-anniversary event raises funds for Mount Vernon Cancer Centre with a UKA, chip-timed 10K through school, golf-course and estate grounds.",
+    organiser: "East & North Herts Hospitals' Charity",
+    website: "https://www.enhhcharity.org.uk/moorpark26",
+  },
+  "warhorse-10k": {
+    name: "Warhorse 10K",
+    city: "Iddesleigh",
+    county: "Devon",
+    country: "England",
+    area: "Warhorse Valley near Winkleigh",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary: "Warhorse 10K — a scenic rural race with Dartmoor views from Iddesleigh.",
+    description:
+      "This ARC-licensed community race is approximately 10K, mainly on roads with an 800-metre private off-road section, raising funds for Farms for City Children and Devon Air Ambulance.",
+    organiser: "Warhorse 10K",
+    website: "https://www.webscorer.com/WarHorse",
+  },
+  "westside-runners-10k-5k-fun-run": {
+    name: "Westside Runners 10K & 5K",
+    city: "Shawbost",
+    county: "Na h-Eileanan Siar",
+    country: "Scotland",
+    area: "Shawbost, Isle of Lewis",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary: "Westside Runners 10K & 5K — community road and shore-track races in Shawbost.",
+    description:
+      "Westside Runners' local event traditionally combines a Shawbost-to-Bragar 10K with a shorter loop beside Loch a Bhaile, based at Ionad na Seann Sgoil on the Isle of Lewis.",
+    organiser: "Westside Runners Running / Fitness Club",
+    website: "https://srac.org.uk/",
   },
 };
 
@@ -7939,6 +8101,172 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Find a Race is an official booking partner, offering the 2026 10K at £32 with a £2 UKA discount.",
+    },
+  ],
+  "marriotts-way-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-marriotts-way-total-race-timing",
+      providerName: "Marriott's Way official checkout",
+      entryUrl: "https://totalracetiming.co.uk/race/706",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.southnorfolkandbroadland.gov.uk/leisure/marriotts-way-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Entry is £19 affiliated or £21 unaffiliated. Wave one is full, while later 10:10-10:40 waves still have places at the time checked.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/marriotts-way-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/marriotts-way-10k",
+      isVerified: true,
+      notes:
+        "runABC offers another entry route but indexes the event one day early; the council and checkout confirm Sunday 20 September.",
+    },
+  ],
+  "runthrough-olympic-park-5k-10k-september|2026-09-19|10K": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/queen-elizabeth-olympic-park-5k-10k-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/queen-elizabeth-olympic-park-5k-10k-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes: "RunThrough lists direct 10K entry at £30 for the 09:30 start.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/runthrough-queen-elizabeth-olympic-park-5k-10k/19th-september-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/runthrough-queen-elizabeth-olympic-park-5k-10k/19th-september-2026",
+      isVerified: true,
+      notes: "Find a Race offers Quick Book for the exact 2026 10K at £32.",
+    },
+    {
+      providerCode: "challenge-chasers",
+      providerName: "Challenge Chasers",
+      entryUrl: "https://www.challengechasers.com/events/70f1a582-b552-4f2d-8048-8d42ddf62c6d",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.challengechasers.com/events/70f1a582-b552-4f2d-8048-8d42ddf62c6d",
+      isVerified: true,
+      notes: "Challenge Chasers lists the same 09:30 10K with open entry at £32.",
+    },
+  ],
+  "snape-10k|2026-09-19|10K": [
+    {
+      providerCode: "official-snape-institute",
+      providerName: "Snape Institute official entry",
+      entryUrl: "https://snapeinstitute.co.uk/projects/funrun/funrun-entryform/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://snapeinstitute.co.uk/event/snape-fun-run-2/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists £15 adult entry and £7.50 for children aged 16 and under; the 10K minimum age is 15.",
+    },
+  ],
+  "stewarts-law-moor-park-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-moor-park-atw",
+      providerName: "Moor Park 10 & More official entry",
+      entryUrl: "https://www.atwevents.co.uk/e/moor-park-10-and-more-9152",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.enhhcharity.org.uk/moorpark26",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Standard 10K entry is £23-£25. A free charity-place option is also listed for runners who choose to fundraise for Mount Vernon Cancer Centre.",
+    },
+  ],
+  "warhorse-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-warhorse-webscorer",
+      providerName: "Warhorse official waitlist",
+      entryUrl: "https://www.webscorer.com/register?raceid=427844",
+      entryType: "official",
+      status: "waitlist",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-14T19:00:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.webscorer.com/register?raceid=427844",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The £20, 250-place race is full and Webscorer is accepting free waitlist registrations. Registration closes 14 September at 19:00.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/warhorse-10k",
+      entryType: "third_party",
+      status: "waitlist",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/warhorse-10k",
+      isVerified: true,
+      notes:
+        "runABC lists the event, but its imported date was one day early; use the official Webscorer page for the corrected date and current waitlist.",
+    },
+  ],
+  "westside-runners-10k-5k-fun-run|2026-09-19|10K": [
+    {
+      providerCode: "official-westside-srac",
+      providerName: "Westside Runners organiser site",
+      entryUrl: "https://srac.org.uk/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://srac.org.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser site has not yet published a 2026 entry form, fee or start time. Confirm the event directly before making travel plans.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/westside-runners-10k-5k-fun-run",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/westside-runners-10k-5k-fun-run",
+      isVerified: true,
+      notes:
+        "runABC currently lists 19 September in its Highlands calendar, but its detailed page still shows the 2025 edition. Await organiser confirmation.",
     },
   ],
 };
