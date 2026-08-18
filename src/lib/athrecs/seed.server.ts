@@ -12,7 +12,7 @@ import {
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-10k-entry-batch-sixteen-hotfix-v158";
+const SEED_VERSION = "athrecs-uk-10k-entry-batch-sixteen-hotfix-v159";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -706,6 +706,23 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
              and corrected_edition.distance_code = $5::text
          )`,
       [eventId, replacement.fromDate, replacement.distance, replacement.toDate, targetDistance],
+    );
+  }
+
+  // Bacchus arrived with a duplicate companion Half row on the importer's incorrect
+  // Saturday date. The catalogue intentionally keeps one canonical race-day edition,
+  // so retire that result-free legacy row after the generic correction pass.
+  const bacchusEventId = eventIds.get("bacchus-marathon");
+  if (bacchusEventId) {
+    await sql.query(
+      `delete from editions stale_edition
+       where stale_edition.event_id = $1::int
+         and stale_edition.event_date = '2026-09-12'::date
+         and stale_edition.distance_code = 'Half'
+         and not exists (
+           select 1 from results where edition_id = stale_edition.id
+         )`,
+      [bacchusEventId],
     );
   }
 
