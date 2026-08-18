@@ -258,6 +258,19 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     fromDate: "2027-05-29",
     toDate: "2027-05-30",
   },
+  {
+    seriesSlug: "breezy-in-brighouse",
+    distance: "Half",
+    fromDate: "2027-06-19",
+    toDate: "2027-06-20",
+  },
+  {
+    seriesSlug: "ramathon-ram-5-mile",
+    distance: "5mi",
+    fromDate: "2027-06-13",
+    toDate: "2027-06-13",
+    toDistance: "Half",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -910,6 +923,38 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
       "https://www.evententry.co.uk/zigzag-2027-the-valley-of-the-owls-run",
     source:
       "https://www.evententry.co.uk/zigzag-2027-the-valley-of-the-owls-run",
+  },
+  "ramathon-ram-5-mile|2027-06-13|Half": {
+    startTime: "09:15",
+    entryUrl: "https://www.runforall.com/events/half-marathon/ramathon/",
+    source: "https://www.runforall.com/events/half-marathon/ramathon/",
+  },
+  "ramathon-ram-5-mile|2027-06-13|5mi": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:15",
+    entryUrl: "https://www.runforall.com/events/half-marathon/ramathon/",
+    source: "https://www.runforall.com/events/half-marathon/ramathon/",
+  },
+  "run-jersey-half-marathon-and-road-race-festival|2027-06-13|Half": {
+    startTime: "08:00",
+    entryUrl: "https://race-nation.co.uk/register/run-jersey-events",
+    source: "https://www.runjersey.co.uk/pipes",
+  },
+  "breezy-in-brighouse|2027-06-19|Half": {
+    date: "2027-06-20",
+    startTime: "08:30",
+    entryUrl:
+      "https://www.itsgrimupnorthrunning.co.uk/e/breezy-in-brighouse-and-special-solstice-run-13665",
+    source:
+      "https://www.itsgrimupnorthrunning.co.uk/e/breezy-in-brighouse-and-special-solstice-run-13665",
+  },
+  "west-yorkshire-trail-run|2027-06-20|Half": {
+    startTime: "08:30",
+    entryUrl:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/west-yorkshire-trail-run-2027",
+    source:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/west-yorkshire-trail-run-2027",
   },
 };
 
@@ -2279,6 +2324,64 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "Zig Zag Running",
     website:
       "https://www.evententry.co.uk/zigzag-2027-the-valley-of-the-owls-run",
+  },
+  "ramathon-ram-5-mile": {
+    name: "Ramathon",
+    city: "Derby",
+    county: "Derbyshire",
+    country: "England",
+    area: "Silk Mill Park and Cathedral Green",
+    surface: "Road",
+    distances: ["Half", "5mi"],
+    summary: "Ramathon — Derby city centre and Elvaston Castle Country Park.",
+    description:
+      "A fast, flat road half marathon from Silk Mill Park through Derby city centre, Pride Park and Elvaston Castle Country Park.",
+    organiser: "Run For All",
+    website: "https://www.runforall.com/events/half-marathon/ramathon/",
+  },
+  "run-jersey-half-marathon-and-road-race-festival": {
+    name: "Jersey Half Marathon",
+    city: "St Brelade",
+    county: "Jersey",
+    country: "Jersey",
+    area: "Les Quennevais Sports Centre and Jersey's west coast",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Jersey Half Marathon — Les Quennevais Sports Centre, St Brelade.",
+    description:
+      "A coastal road half marathon from Les Quennevais Sports Centre through St Ouen's lanes and along Jersey's west coast.",
+    organiser: "Run Jersey Events",
+    website: "https://www.runjersey.co.uk/pipes",
+  },
+  "breezy-in-brighouse": {
+    name: "Breezy in Brighouse & Special Solstice Run",
+    city: "Brighouse",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Brookfoot Footbridge and the Calder & Hebble Navigation",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "10K", "5K"],
+    summary: "Breezy in Brighouse & Special Solstice Run — Brighouse, West Yorkshire.",
+    description:
+      "A flat, out-and-back canal towpath event from Brookfoot Footbridge, with a two-lap half marathon and several shorter and longer distances.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/breezy-in-brighouse-and-special-solstice-run-13665",
+  },
+  "west-yorkshire-trail-run": {
+    name: "West Yorkshire Trail Run",
+    city: "Harewood",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Harewood House Estate",
+    surface: "Trail",
+    distances: ["Half", "13K", "8K"],
+    summary: "West Yorkshire Trail Run — Harewood House Estate.",
+    description:
+      "A 22 km trail half marathon through Harewood House's parkland, woodland and estate trails, including views towards Eccup Reservoir.",
+    organiser: "UK Running Events / Run Rebel",
+    website:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/west-yorkshire-trail-run-2027",
   },
 };
 
@@ -10772,6 +10875,101 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       isPrimary: true,
       notes: "Half-marathon entry is £29–£36 depending on affiliation and medal choice.",
+    },
+  ],
+  "ramathon-ram-5-mile|2027-06-13|Half": [
+    {
+      providerCode: "official-run-for-all",
+      providerName: "Run For All official entry",
+      entryUrl: "https://www.runforall.com/events/half-marathon/ramathon/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T17:05:00+01:00",
+      sourceUrl: "https://www.runforall.com/events/half-marathon/ramathon/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The official page links to the live 2027 Active registration flow.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/derbion-ramathon-ram-5-mile/half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 35.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:05:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/derbion-ramathon-ram-5-mile/half-marathon",
+      isVerified: true,
+      notes: "The live provider lists a £35.50–£47.50 entry range.",
+    },
+    {
+      providerCode: "run-for-charity",
+      providerName: "Run for Charity place",
+      entryUrl: "https://runforcharity.com/event/teenage-cancer-trust/ramathon",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 39,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:05:00+01:00",
+      sourceUrl: "https://runforcharity.com/event/teenage-cancer-trust/ramathon",
+      isVerified: true,
+      notes: "Charity entry is £39; fundraising commitments apply on the provider page.",
+    },
+  ],
+  "run-jersey-half-marathon-and-road-race-festival|2027-06-13|Half": [
+    {
+      providerCode: "official-race-nation",
+      providerName: "RaceNation official Jersey entry",
+      entryUrl: "https://race-nation.co.uk/register/run-jersey-events",
+      entryType: "official",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:05:00+01:00",
+      sourceUrl:
+        "https://www.jersey.com/things-to-do/events/listings/jersey-half-marathon/",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Run Jersey's Enter Now button opens RaceNation; Visit Jersey lists £35–£45.",
+    },
+  ],
+  "breezy-in-brighouse|2027-06-20|Half": [
+    {
+      providerCode: "official-grim-up-north",
+      providerName: "It's Grim Up North official entry",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/breezy-in-brighouse-and-special-solstice-run-13665",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:05:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/breezy-in-brighouse-and-special-solstice-run-13665",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The live 2027 half-marathon entry range is £30–£32.",
+    },
+  ],
+  "west-yorkshire-trail-run|2027-06-20|Half": [
+    {
+      providerCode: "official-uk-running-events",
+      providerName: "UK Running Events official entry",
+      entryUrl:
+        "https://www.ukrunningevents.co.uk/events/trail-runs/west-yorkshire-trail-run-2027",
+      entryType: "official",
+      status: "open",
+      priceAmount: 44.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:05:00+01:00",
+      sourceUrl:
+        "https://www.ukrunningevents.co.uk/events/trail-runs/west-yorkshire-trail-run-2027",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The live Book Now route lists the 22 km half-marathon entry at £44.50.",
     },
   ],
 };
