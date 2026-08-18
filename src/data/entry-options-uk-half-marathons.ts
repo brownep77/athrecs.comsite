@@ -271,6 +271,13 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     toDate: "2027-06-13",
     toDistance: "Half",
   },
+  {
+    seriesSlug: "the-wales-run",
+    distance: "10K",
+    fromDate: "2027-07-03",
+    toDate: "2027-07-04",
+    toDistance: "Half",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -955,6 +962,37 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
       "https://www.ukrunningevents.co.uk/events/trail-runs/west-yorkshire-trail-run-2027",
     source:
       "https://www.ukrunningevents.co.uk/events/trail-runs/west-yorkshire-trail-run-2027",
+  },
+  "cock-a-doodle-dawdle|2027-06-26|Half": {
+    startTime: "09:00",
+    entryUrl:
+      "https://zigzagrunning.eventrac.co.uk/e/cock-a-doodle-dawdle-11158",
+    source:
+      "https://zigzagrunning.eventrac.co.uk/e/cock-a-doodle-dawdle-11158",
+  },
+  "the-wales-run|2027-07-03|10K": {
+    date: "2027-07-04",
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "12:00",
+    entryUrl:
+      "https://www.activitywalesevents.com/events/run/the-wales-half-marathon",
+    source:
+      "https://www.activitywalesevents.com/events/run/the-wales-half-marathon",
+  },
+  "the-wales-run|2027-07-03|Half": {
+    date: "2027-07-04",
+    startTime: "12:00",
+    entryUrl:
+      "https://www.activitywalesevents.com/events/run/the-wales-half-marathon",
+    source:
+      "https://www.activitywalesevents.com/events/run/the-wales-half-marathon",
+  },
+  "the-wales-run|2027-07-03|5K": {
+    date: "2027-07-04",
+  },
+  "the-wales-run|2027-07-03|Marathon": {
+    date: "2027-07-04",
   },
 };
 
@@ -2382,6 +2420,36 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "UK Running Events / Run Rebel",
     website:
       "https://www.ukrunningevents.co.uk/events/trail-runs/west-yorkshire-trail-run-2027",
+  },
+  "cock-a-doodle-dawdle": {
+    name: "Cock-a-doodle Dawdle",
+    city: "Buntingford",
+    county: "Hertfordshire",
+    country: "England",
+    area: "Hyde Hall Farm",
+    surface: "Mixed",
+    distances: ["Half", "Ultra", "Marathon", "15K", "10K", "5K"],
+    summary: "Cock-a-doodle Dawdle — Hyde Hall Farm, Buntingford.",
+    description:
+      "A multi-lap mixed-terrain run on tarmac paths, grassland and trails within Hyde Hall Farm, organised by Zig Zag Running.",
+    organiser: "Zig Zag Running",
+    website:
+      "https://zigzagrunning.eventrac.co.uk/e/cock-a-doodle-dawdle-11158",
+  },
+  "the-wales-run": {
+    name: "The Wales Half Marathon",
+    city: "Pembroke",
+    county: "Pembrokeshire",
+    country: "Wales",
+    area: "Pembroke to Tenby along the Pembrokeshire coast",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "The Wales Half Marathon — Pembroke to Tenby, Pembrokeshire.",
+    description:
+      "A point-to-point closed-road half marathon from Pembroke to a red-carpet finish in Tenby, part of Long Course Weekend Wales.",
+    organiser: "Activity Wales Events",
+    website:
+      "https://www.activitywalesevents.com/events/run/the-wales-half-marathon",
   },
 };
 
@@ -10970,6 +11038,42 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       isPrimary: true,
       notes: "The live Book Now route lists the 22 km half-marathon entry at £44.50.",
+    },
+  ],
+  "cock-a-doodle-dawdle|2027-06-26|Half": [
+    {
+      providerCode: "official-zig-zag-eventrac",
+      providerName: "Zig Zag Running official entry",
+      entryUrl:
+        "https://zigzagrunning.eventrac.co.uk/e/cock-a-doodle-dawdle-11158",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:20:00+01:00",
+      sourceUrl:
+        "https://zigzagrunning.eventrac.co.uk/e/cock-a-doodle-dawdle-11158",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Half-marathon entry is £29–£36 depending on affiliation and medal choice.",
+    },
+  ],
+  "the-wales-run|2027-07-04|Half": [
+    {
+      providerCode: "official-activity-wales-events",
+      providerName: "Activity Wales Events official entry",
+      entryUrl:
+        "https://www.activitywalesevents.com/events/run/the-wales-half-marathon",
+      entryType: "official",
+      status: "open",
+      priceAmount: 45,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:20:00+01:00",
+      sourceUrl:
+        "https://www.activitywalesevents.com/events/run/the-wales-half-marathon",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The organiser lists 4 July 2027 and £45 general entry; the published start is 12:00.",
     },
   ],
 };
