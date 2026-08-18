@@ -1562,6 +1562,58 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "The official event starts at 09:30 on Lawnmarket in Edinburgh's Old Town and follows a city-centre road route to the finish inside Murrayfield Stadium.",
   },
+  "morecambe-marathon|2026-09-20|10K": {
+    startTime: "11:00",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/LNjFFX",
+    source: "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-marathon-half-10k/",
+    notes:
+      "The marathon, half marathon and 10K all start at 11:00 near Bare Methodist Church. The 10K follows the shared promenade route for its opening section before returning to the race-day finish.",
+  },
+  "morecambe-marathon|2026-09-20|Half": {
+    startTime: "11:00",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/LNjFFX",
+    source: "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-marathon-half-10k/",
+  },
+  "morecambe-marathon|2026-09-20|Marathon": {
+    startTime: "11:00",
+    entryUrl: "https://bookitzone.com/helen_mcgregor_2/LNjFFX",
+    source: "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-marathon-half-10k/",
+  },
+  "outruncancer|2026-09-20|10K": {
+    startTime: "08:30",
+    entryUrl: "https://cancerunited.eventrac.co.uk/e/outruncancer-angmering-2026-15064",
+    source: "https://cancerunited.eventrac.co.uk/e/outruncancer-angmering-2026-15064",
+    notes:
+      "Registration opens at 07:30 and the 5K, 10K and canicross choices start at 08:30 from The World's End. Ten-kilometre walkers must finish within two hours.",
+  },
+  "raby-castle-trail-runs|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-2026-14580",
+    source: "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-2026-14580",
+    notes:
+      "The official ticket panel confirms the 10K starts at 10:00. The new trail route uses firm paths, woodland trails and grass through Raby Castle's parkland, with canicross permitted.",
+  },
+  "rotherham-10k-and-fun-run|2026-09-20|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.racesource.run/product/rotherham-10k/",
+    source: "https://www.rotherham10k.com/",
+    notes:
+      "The one-lap, road-closed 10K starts at 09:30 in front of Wentworth Woodhouse and returns to the estate after passing through Wentworth village and Nether Haugh.",
+  },
+  "run-mawnan|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.sientries.co.uk/event.php?event_id=17414",
+    source: "https://runmawnan.org.uk/",
+    notes:
+      "The 10K and 5K start together at 10:00 from Carwinion Playing Field. Registration runs from 08:30 to 09:30 before the road route explores Mawnan Smith and the North Helford countryside.",
+  },
+  "run-northumberland-matfen-10k5k|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://runnation.co.uk/r/Run-Northumberland-Matfen-10k-2026",
+    source: "https://runnation.co.uk/r/Run-Northumberland-Matfen-10k-2026",
+    notes:
+      "Registration is at Matfen Village Hall from 08:00 to 09:30 and the accurately measured, chip-timed road race starts at 10:00 before finishing near Matfen Hall.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -4129,6 +4181,93 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "MyRunning's point-to-point 10K begins on Lawnmarket, passes through central Edinburgh and finishes inside Murrayfield Stadium, with chip timing, a technical shirt and finisher medal.",
     organiser: "MyRunning / GSi Events",
     website: "https://www.mens10k.com/edinburgh",
+  },
+  "morecambe-marathon": {
+    name: "Morecambe Marathon, Half Marathon & 10K",
+    city: "Morecambe",
+    county: "Lancashire",
+    country: "England",
+    area: "Bare Methodist Church and Morecambe promenade",
+    surface: "Road",
+    distances: ["10K", "Half", "Marathon"],
+    summary:
+      "Morecambe Marathon, Half Marathon & 10K — flat coastal road races along Morecambe Bay.",
+    description:
+      "Lancaster Race Series stages three UK Athletics road distances from Bare Methodist Church, using the promenade, Heysham coast and Morecambe Bay shoreline; the marathon is a London good-for-age qualifier.",
+    organiser: "Lancaster Race Series",
+    website: "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-marathon-half-10k/",
+  },
+  outruncancer: {
+    name: "OUTRUNCANCER Angmering",
+    city: "Patching",
+    county: "West Sussex",
+    country: "England",
+    area: "The World's End and Angmering countryside",
+    surface: "Trail",
+    distances: ["10K", "5K", "Canicross"],
+    summary:
+      "OUTRUNCANCER Angmering — inclusive trail runs, walks and canicross supporting Cancer United.",
+    description:
+      "Cancer United's community fundraiser offers 5K and 10K run, walk and canicross choices from The World's End, with every entry supporting fitness and emotional-wellbeing services for people affected by cancer.",
+    organiser: "Cancer United",
+    website: "https://cancerunited.eventrac.co.uk/e/outruncancer-angmering-2026-15064",
+  },
+  "raby-castle-trail-runs": {
+    name: "Raby Castle Trail Runs",
+    city: "Staindrop",
+    county: "County Durham",
+    country: "England",
+    area: "Raby Castle, Park and Gardens",
+    surface: "Trail",
+    distances: ["10K", "5K", "Half"],
+    summary:
+      "Raby Castle Trail Runs — woodland, grass and parkland routes through a historic deer estate.",
+    description:
+      "Wild Deer Events' new 2026 routes cross 200 acres of ornamental lakes, woodland and open grass around Raby Castle, with live chip timing, canicross entry and finisher merchandise.",
+    organiser: "Wild Deer Events",
+    website: "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-2026-14580",
+  },
+  "rotherham-10k-and-fun-run": {
+    name: "Rotherham 10K",
+    city: "Wentworth",
+    county: "South Yorkshire",
+    country: "England",
+    area: "Wentworth Woodhouse and Wentworth village",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Rotherham 10K — a scenic closed-road loop from Wentworth Woodhouse.",
+    description:
+      "This one-lap community road race starts and finishes in front of Wentworth Woodhouse, combining faster flat sections with gentle inclines through the village and estate roads.",
+    organiser: "Rotherham 10K / Time My Race",
+    website: "https://www.rotherham10k.com/",
+  },
+  "run-mawnan": {
+    name: "Run Mawnan 10K & 5K",
+    city: "Mawnan Smith",
+    county: "Cornwall",
+    country: "England",
+    area: "Carwinion Playing Field and Mawnan Smith",
+    surface: "Road",
+    distances: ["10K", "5K", "1mi"],
+    summary: "Run Mawnan — family-friendly charity road races through a Cornish coastal village.",
+    description:
+      "Falmouth Rotary Club's annual fundraiser combines 10K and 5K road races with a children's mile, passing village landmarks and North Helford river views before a community finish festival.",
+    organiser: "Falmouth Rotary Club",
+    website: "https://runmawnan.org.uk/",
+  },
+  "run-northumberland-matfen-10k5k": {
+    name: "Run Northumberland Matfen 10K",
+    city: "Matfen",
+    county: "Northumberland",
+    country: "England",
+    area: "Matfen village and Matfen Hall",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Run Northumberland Matfen 10K — an undulating traffic-free village road race.",
+    description:
+      "Run Nation's accurately measured, chip-timed course loops through Matfen's country roads and finishes near Matfen Hall, with kilometre markers, a halfway water station and finisher medal.",
+    organiser: "Run Nation",
+    website: "https://runnation.co.uk/r/Run-Northumberland-Matfen-10k-2026",
   },
 };
 
@@ -8939,6 +9078,189 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Find a Race lists open Quick Book entry from £30.25 for the exact 20 September 2026 edition.",
+    },
+  ],
+  "morecambe-marathon|2026-09-20|10K": [
+    {
+      providerCode: "official-morecambe-bookitzone",
+      providerName: "Lancaster Race Series official entry",
+      entryUrl: "https://bookitzone.com/helen_mcgregor_2/LNjFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26.64,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-17T12:00:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl:
+        "https://www.lancaster-race-series.co.uk/enter-our-races/morecambe-marathon-half-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live checkout lists 10K entry at £26.64 affiliated, £28.12 non-club or £21.04 for Lancaster Runners, closing at noon on 17 September.",
+    },
+    {
+      providerCode: "letsdothis",
+      providerName: "Let's Do This",
+      entryUrl: "https://www.letsdothis.com/ph/e/morecambe-marathon-half-marathon-10k-161732",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/ph/e/morecambe-marathon-half-marathon-10k-161732",
+      isVerified: true,
+      notes:
+        "Let's Do This lists 10K booking across the organiser's £19-£25 base-fee range. Confirm the live category price and booking charge before payment.",
+    },
+  ],
+  "outruncancer|2026-09-20|10K": [
+    {
+      providerCode: "official-cancer-united-eventrac",
+      providerName: "Cancer United official entry",
+      entryUrl: "https://cancerunited.eventrac.co.uk/e/outruncancer-angmering-2026-15064",
+      entryType: "official",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://cancerunited.eventrac.co.uk/e/outruncancer-angmering-2026-15064",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser ticket panel offers the 10K run, walk and canicross choices at £18 each; under-18 entry is discounted to £14 during sign-up.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event entry",
+      entryUrl: "https://runabc.co.uk/enter/outruncancer",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/outruncancer",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary booking route for the exact 20 September race and confirms the new World's End venue and 08:30 start.",
+    },
+  ],
+  "raby-castle-trail-runs|2026-09-20|10K": [
+    {
+      providerCode: "official-wild-deer-raby",
+      providerName: "Wild Deer Events official entry",
+      entryUrl: "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-2026-14580",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.wilddeerevents.co.uk/e/raby-castle-trail-runs-2026-14580",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live official panel lists 10K entry at £25-£27 and a 10:00 start; an optional bespoke event T-shirt costs £14.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/raby-castle-trail-runs",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/raby-castle-trail-runs",
+      isVerified: true,
+      notes:
+        "runABC links to entry and confirms the Raby Castle venue; the Wild Deer checkout is authoritative for the corrected 10:00 start and price.",
+    },
+  ],
+  "rotherham-10k-and-fun-run|2026-09-20|10K": [
+    {
+      providerCode: "official-rotherham-racesource",
+      providerName: "Rotherham 10K official checkout",
+      entryUrl: "https://www.racesource.run/product/rotherham-10k/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-06T23:59:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.rotherham10k.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Entry is £20 with the UK Athletics discount or £25 standard, with a 1,000-runner limit and online entries closing on 6 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/rotherham-10k-and-fun-run",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/rotherham-10k-and-fun-run",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary route to the event; the official race and timing pages confirm the 09:30 start, price and closing date.",
+    },
+  ],
+  "run-mawnan|2026-09-20|10K": [
+    {
+      providerCode: "official-run-mawnan-sientries",
+      providerName: "Run Mawnan official SiEntries checkout",
+      entryUrl: "https://www.sientries.co.uk/event.php?event_id=17414",
+      entryType: "official",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-13T23:59:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runmawnan.org.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Online 10K entry is £18, with a £4 NUS reduction. Entry closes on 13 September; race-day entry may be available with a £2 surcharge.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/run-mawnan",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/run-mawnan",
+      isVerified: true,
+      notes:
+        "runABC offers another route to the family event; the linked official site and SiEntries checkout confirm the 10:00 10K start.",
+    },
+  ],
+  "run-northumberland-matfen-10k5k|2026-09-20|10K": [
+    {
+      providerCode: "official-run-nation-matfen",
+      providerName: "Run Nation official entry",
+      entryUrl: "https://runnation.co.uk/r/Run-Northumberland-Matfen-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-14T23:59:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runnation.co.uk/r/Run-Northumberland-Matfen-10k-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Run Nation lists £24 affiliated or £26 unaffiliated entry, a 300-runner limit and online closing on 14 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event entry",
+      entryUrl: "https://runabc.co.uk/run-northumberland-matfen-10k5k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/run-northumberland-matfen-10k5k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary entry route and confirms the Matfen Village Hall race HQ; Run Nation is authoritative for price and the corrected 10:00 start.",
     },
   ],
 };
