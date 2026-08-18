@@ -11,6 +11,12 @@ import {
   ukHalfMarathonEntryOptions,
   ukHalfMarathonSeriesOverrides,
 } from "./entry-options-uk-half-marathons";
+import {
+  ukTenKEditionOverrides,
+  ukTenKEditionReplacements,
+  ukTenKEntryOptions,
+  ukTenKSeriesOverrides,
+} from "./entry-options-uk-10ks";
 
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const eventSlugAliases: Readonly<Record<string, string>> = {
@@ -27,22 +33,26 @@ export function canonicalEventSlug(slug: string): string {
 export const editionReplacements = [
   ...ukMarathonEditionReplacements,
   ...ukHalfMarathonEditionReplacements,
+  ...ukTenKEditionReplacements,
 ];
 
 /** Verified edition corrections across every entry-options research pass. */
 export const editionOverrides: Record<string, Partial<Edition>> = {
   ...ukMarathonEditionOverrides,
   ...ukHalfMarathonEditionOverrides,
+  ...ukTenKEditionOverrides,
 };
 
 /** Verified event metadata corrections across every entry-options research pass. */
 export const seriesOverrides: Record<string, Partial<Series>> = {
   ...ukMarathonSeriesOverrides,
   ...ukHalfMarathonSeriesOverrides,
+  ...ukTenKSeriesOverrides,
 };
 
 /** Verified entry providers keyed by series, date and distance. */
 export const entryOptions: Record<string, EntryOptionSeed[]> = {
   ...ukMarathonEntryOptions,
   ...ukHalfMarathonEntryOptions,
+  ...ukTenKEntryOptions,
 };
