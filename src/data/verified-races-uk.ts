@@ -220,6 +220,64 @@ export const verifiedUkSeries: Series[] = [
     featured: false,
     source_url: "https://www.phoenixrunning.co.uk/events/manchester-the-one-that-got-away",
   },
+  {
+    slug: "run-aintree-half-marathon-january-2027",
+    name: "Run Aintree Half Marathon, 10K & 5K — January 2027",
+    sport: "Running",
+    country: "England",
+    county: "Merseyside",
+    city: "Liverpool",
+    area: "Aintree Racecourse",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary: "Run Aintree Half Marathon — Aintree Racecourse, Liverpool.",
+    description:
+      "A flat, fast four-lap half marathon on the smooth roads and paths inside Aintree Racecourse, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-january-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-january-2027",
+  },
+  {
+    slug: "central-lancashire-new-year-half-marathon-2027",
+    name: "Central Lancashire New Year Half Marathon 2027",
+    sport: "Running",
+    country: "England",
+    county: "Lancashire",
+    city: "Preston",
+    area: "Marriotts Hotel, Broughton",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Central Lancashire New Year Half Marathon — Broughton, Preston.",
+    description:
+      "A chip-timed, flat-to-gently-undulating rural road half marathon through Lancashire countryside and villages, organised by Fylde Coast Runners.",
+    organiser: "Fylde Coast Runners",
+    website:
+      "https://www.fyldecoastrunners.com/central-lancashire-new-years-half-marathon.html",
+    featured: false,
+    source_url:
+      "https://www.challengechasers.com/events/e78d82cb-9d2b-44d1-a026-aba8c74f1aac",
+  },
+  {
+    slug: "winter-canal-canter-2027",
+    name: "Winter Canal Canter 2027",
+    sport: "Running",
+    country: "England",
+    county: "West Yorkshire",
+    city: "Leeds",
+    area: "Leeds and Liverpool Canal, Wyther Lane, Kirkstall",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "Ultra", "10K"],
+    summary: "Winter Canal Canter — Kirkstall, Leeds.",
+    description:
+      "A flat, out-and-back canal towpath half marathon with signed and marshalled multi-distance routes, organised by It's Grim Up North Running.",
+    organiser: "It's Grim Up North Running",
+    website: "https://www.itsgrimupnorthrunning.co.uk/e/winter-canal-canter-15419",
+    featured: false,
+    source_url: "https://www.itsgrimupnorthrunning.co.uk/e/winter-canal-canter-15419",
+  },
 ];
 
 export const verifiedUkEditions: Edition[] = [
@@ -344,5 +402,39 @@ export const verifiedUkEditions: Edition[] = [
     entryUrl: "https://www.phoenixrunning.co.uk/events/manchester-the-one-that-got-away",
     startTime: "08:30",
     source: "https://www.phoenixrunning.co.uk/events/manchester-the-one-that-got-away",
+  },
+  {
+    seriesSlug: "run-aintree-half-marathon-january-2027",
+    date: "2027-01-03",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-january-2027",
+    startTime: "10:00",
+    source:
+      "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-january-2027",
+  },
+  {
+    seriesSlug: "central-lancashire-new-year-half-marathon-2027",
+    date: "2027-01-10",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.challengechasers.com/events/e78d82cb-9d2b-44d1-a026-aba8c74f1aac",
+    startTime: "10:00",
+    source:
+      "https://www.challengechasers.com/events/e78d82cb-9d2b-44d1-a026-aba8c74f1aac",
+  },
+  {
+    seriesSlug: "winter-canal-canter-2027",
+    date: "2027-01-16",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://www.itsgrimupnorthrunning.co.uk/e/winter-canal-canter-15419",
+    startTime: "09:00",
+    source: "https://www.itsgrimupnorthrunning.co.uk/e/winter-canal-canter-15419",
   },
 ];
