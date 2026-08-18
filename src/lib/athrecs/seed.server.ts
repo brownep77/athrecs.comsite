@@ -12,7 +12,7 @@ import {
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-10k-entry-batch-eighteen-v162";
+const SEED_VERSION = "athrecs-uk-10k-entry-batch-nineteen-v163";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -764,6 +764,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const distanceRows = seriesList.flatMap((series) =>
     [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
   );
+  await sql`delete from event_distances`;
   await insertRows(
     sql,
     "event_distances",
@@ -1278,6 +1279,7 @@ async function seed(): Promise<void> {
   const distanceRows = seriesList.flatMap((series) =>
     [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
   );
+  await sql`delete from event_distances`;
   await insertRows(
     sql,
     "event_distances",
