@@ -1,1 +1,1459 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éí×½}Õ:-jZ.¶›­–)Ş³V–×÷'B²vWE7ÂÒg&öÒ$öÆ–"öF"#°¦–×÷'B°¢F†ÆWFW22F†ÆWFU6VVG2À¢6FÆöwVTÖWFFFÀ¢6ÇV'226ÇV%6VVG2À¢VF—F–öç22VF—F–öå6VVG2À¢&W7VÇG22&W7VÇE6VVG2À¢&6Tw&÷WÖVÖ&W'6†—2À¢6W&–W4Æ—7BÀ¢6ÇV%6ÇVtÆ–6W2À§Òg&öÒ$öFFö6FÆöwVR#°¦–×÷'B²VF—F–öå&WÆ6VÖVçG2ÂWfVçE6ÇVtÆ–6W2Òg&öÒ$öFFöVçG'’Ö÷F–öç2#°¦–×÷'B²Vç7W&TF†ÆWF–75F†öæö×’Òg&öÒ"âöF†ÆWF–72×F†öæö×’ç6W'fW"#° ¦6öç7B4TTEõdU%4”ôâÒ&F‡&V72Öf—6†wV&BÖ†ÆbÖÖ&F†öâÖ†÷Ff—‚×cC#°¦6öç7BU…T5DTBÒ6FÆöwVTÖWFFFæÖW&vVEö6÷VçG3° §G—R7ÂÒv—FVCÅ&WGW&åG—SÇG—VöbvWE7Ããã°§G—RvÆö&Å6VVE7FFRÒG—VöbvÆö&ÅF†—2b°¢õöF‡&V74gVÆÅ6VVE&öÖ—6Uõóó¢&öÖ—6SÇfö–Cã°§Ó° ¦6öç7BvÆö&Å6VVE7FFRÒvÆö&ÅF†—22vÆö&Å6VVE7FFS° ¦gVæ7F–öâ'6UF–ÖUFõ6V6öæG2‡&s¢7G&–ær“¢çVÖ&W"°¢6öç7B'G2Ò&rçG&–Ò‚’ç&WÆ6R‚"Â"Â"â"’ç7Æ—B‚#¢"’æÖ„çVÖ&W"“°¢–b‡'G2æÆVæwF‚ÓÓÒ2’°¢&WGW&âÖF‚ç&÷VæB‡'G5³Ò¢3c²'G5³Ò¢c²'G5³%Ò“°¢Ğ¢–b‡'G2æÆVæwF‚ÓÓÒ"’°¢&WGW&âÖF‚ç&÷VæB‡'G5³Ò¢c²'G5³Ò“°¢Ğ¢&WGW&âÖF‚ç&÷VæB‡'G5³Ò“°§Ğ ¦gVæ7F–öâ6‡Væ·3ÅCâ‡&÷w3¢EµÒÂ6—¦S¢çVÖ&W"“¢EµÕµÒ°¢6öç7B÷WGWC¢EµÕµÒÒµÓ°¢f÷"†ÆWB–æFW‚Ò²–æFW‚Â&÷w2æÆVæwFƒ²–æFW‚³Ò6—¦R’°¢÷WGWBçW6‚‡&÷w2ç6Æ–6R†–æFW‚Â–æFW‚²6—¦R’“°¢Ğ¢&WGW&â÷WGWC°§Ğ ¦7–æ2gVæ7F–öâ–ç6W'E&÷w2€¢7Ã¢7ÂÀ¢F&ÆS¢7G&–ærÀ¢6öÇVÖç3¢7G&–æuµÒÀ¢&÷w3¢Væ¶æ÷våµÕµÒÀ¢6öæfÆ–7D6ÆW6S¢7G&–ærÀ¢6‡Væµ6—¦RÒÀ¢“¢&öÖ—6SÇfö–Câ°¢f÷"†6öç7B&F6‚öb6‡Væ·2‡&÷w2Â6‡Væµ6—¦R’’°¢6öç7B&×3¢Væ¶æ÷våµÒÒµÓ°¢6öç7BfÇVW2Ò&F6€¢æÖ‚‡&÷r’Óâ°¢6öç7BÆ6V†öÆFW'2Ò&÷ræÖ‚‡fÇVR’Óâ°¢&×2çW6‚‡fÇVR“°¢&WGW&âBG·&×2æÆVæwF‡Ö°¢Ò“°¢&WGW&â‚G·Æ6V†öÆFW'2æ¦ö–â‚"Â"—Ò–°¢Ò¢æ¦ö–â‚"Â"“°¢v—B7ÂçVW'’€¢–ç6W'B–çFòG·F&ÆWÒ‚G¶6öÇVÖç2æ¦ö–â‚"Â"—Ò’fÇVW2G·fÇVW7ÒG¶6öæfÆ–7D6ÆW6WÖÀ¢&×2À¢“°¢Ğ§Ğ ¦7–æ2gVæ7F–öâFVÆWFU&÷w4÷WG6–FT6FÆöwVR‡7Ã¢7ÂÂF&ÆS¢7G&–ærÂ6ÇVw3¢7G&–æuµÒ“¢&öÖ—6SÇfö–Câ°¢6öç7BÆ6V†öÆFW'2Ò6ÇVw2æÖ‚…òÂ–æFW‚’ÓâBG¶–æFW‚²Ö’æ¦ö–â‚"Â"“°¢v—B7ÂçVW'’†FVÆWFRg&öÒG·F&ÆWÒv†W&R6ÇVræ÷B–â‚G·Æ6V†öÆFW'7Ò–Â6ÇVw2“°§Ğ ¦7–æ2gVæ7F–öâVç7W&U66†VÖ‡7Ã¢7Â“¢&öÖ—6SÇfö–Câ°¢6öç7B7FFVÖVçG2Ò°¢7&VFRF&ÆR–bæ÷BW†—7G26ÇV'2€¢–B6W&–Â&–Ö'’¶W’À¢6ÇVrFW‡Bæ÷BçVÆÂVæ—VRÀ¢æÖRFW‡Bæ÷BçVÆÂÀ¢6—G’FW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢6÷VçG’FW‡Bæ÷BçVÆÂFVfVÇBtæ÷&föÆ²rÀ¢6÷VçG'’FW‡Bæ÷BçVÆÂFVfVÇBtVævÆæBrÀ¢7÷'G2FW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢vV'6—FRFW‡BÀ¢7VÖÖ'’FW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢6÷W&6UöæÖW2FW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢FG&W72FW‡BÀ¢÷7F6öFRFW‡BÀ¢&Vv–öâFW‡BÀ¢öff–6–Å÷6÷W&6RFW‡BÀ¢6÷W&6U÷W&ÂFW‡BÀ¢6†V6¶VEöBFFRÀ¢Æö6F–öå÷&V6—6–öâFW‡Bæ÷BçVÆÂFVfVÇBwVçfW&–f–VBrÀ¢6öçF7E÷W&ÂFW‡BÀ¢6öçF7G5ö§6öâFW‡Bæ÷BçVÆÂFVfVÇBuµÒrÀ¢6ö6–Ç5ö§6öâFW‡Bæ÷BçVÆÂFVfVÇBuµÒrÀ¢7&VFVEöBF–ÖW7F×G¢æ÷BçVÆÂFVfVÇBæ÷r‚¢–À¢7&VFRF&ÆR–bæ÷BW†—7G2WfVçG2€¢–B6W&–Â&–Ö'’¶W’À¢6÷W&6Uö–B–çBÀ¢6ÇVrFW‡Bæ÷BçVÆÂVæ—VRÀ¢æÖRFW‡Bæ÷BçVÆÂÀ¢7÷'BFW‡Bæ÷BçVÆÂÀ¢6÷VçG'’FW‡Bæ÷BçVÆÂFVfVÇBtVævÆæBrÀ¢6÷VçG’FW‡Bæ÷BçVÆÂFVfVÇBtæ÷&föÆ²rÀ¢6—G’FW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢&VFW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢7W&f6RFW‡Bæ÷BçVÆÂFVfVÇBu&öBrÀ¢7VÖÖ'’FW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢FW67&—F–öâFW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢÷&væ—6W"FW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢vV'6—FRFW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢fVGW&VB&ööÆVâæ÷BçVÆÂFVfVÇBfÇ6RÀ¢6÷W&6U÷W&ÂFW‡BÀ¢7&VFVEöBF–ÖW7F×G¢æ÷BçVÆÂFVfVÇBæ÷r‚¢–À¢7&VFRF&ÆR–bæ÷BW†—7G2WfVçEöF—7Fæ6W2€¢WfVçEö–B–çBæ÷BçVÆÂ&VfW&Væ6W2WfVçG2†–B’öâFVÆWFR666FRÀ¢F—7Fæ6Uö6öFRFW‡Bæ÷BçVÆÂÀ¢&–Ö'’¶W’†WfVçEö–BÂF—7Fæ6Uö6öFR¢–À¢7&VFRF&ÆR–bæ÷BW†—7G2WfVçEöw&÷W2€¢WfVçEö–B–çBæ÷BçVÆÂ&VfW&Væ6W2WfVçG2†–B’öâFVÆWFR666FRÀ¢w&÷Wö6öFRFW‡Bæ÷BçVÆÂÀ¢Æ&VÂFW‡Bæ÷BçVÆÂÀ¢ÆWfVÂFW‡Bæ÷BçVÆÂÀ¢6÷W&6U÷W&ÂFW‡Bæ÷BçVÆÂÀ¢6†V6¶VEöBFFRæ÷BçVÆÂÀ¢æ÷FRFW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢&–Ö'’¶W’†WfVçEö–BÂw&÷Wö6öFR¢–À¢7&VFRF&ÆR–bæ÷BW†—7G2VF—F–öç2€¢–B6W&–Â&–Ö'’¶W’À¢6÷W&6Uö–B–çBÀ¢WfVçEö–B–çBæ÷BçVÆÂ&VfW&Væ6W2WfVçG2†–B’öâFVÆWFR666FRÀ¢WfVçEöFFRFFRæ÷BçVÆÂÀ¢F—7Fæ6Uö6öFRFW‡Bæ÷BçVÆÂÀ¢F—7Fæ6Uö¶ÒF÷V&ÆR&V6—6–öâæ÷BçVÆÂFVfVÇBÀ¢7FGW2FW‡Bæ÷BçVÆÂFVfVÇBuD$2rÀ¢VçG'•÷W&ÂFW‡BÀ¢6÷W&6U÷W&ÂFW‡BÀ¢7F'E÷F–ÖRFW‡BÀ¢æ÷FW2FW‡BÀ¢&W7VÇG5÷W&Ö—76–öâFW‡BÀ¢&W7VÇG5ö†÷7F–ærFW‡BÀ¢&W7VÇG5ööff–6–Å÷W&ÂFW‡BÀ¢&W7VÇG5÷W&Ö—76–öåöæ÷FRFW‡BÀ¢&W7VÇG5÷W&Ö—76–öåöBF–ÖW7F×G¢À¢&W7VÇG5÷W&Ö—76–öåö'’FW‡BÀ¢&W7VÇG5÷&–v‡G5÷&WVW7FVEöBF–ÖW7F×G¢À¢V&Æ–5÷&W7VÇEö6÷VçB–çBÀ¢'FæW%÷&W7VÇEö6÷VçB–çBÀ¢F†ÆWFU÷&W7VÇEö6÷VçB–çBÀ¢&W7VÇG5ö66W72FW‡BÀ¢Væ—VR†WfVçEö–BÂWfVçEöFFRÂF—7Fæ6Uö6öFR¢–À¢7&VFRF&ÆR–bæ÷BW†—7G2VF—F–öåöVçG'•ö÷F–öç2€¢–B6W&–Â&–Ö'’¶W’À¢VF—F–öåö–B–çBæ÷BçVÆÂ&VfW&Væ6W2VF—F–öç2†–B’öâFVÆWFR666FRÀ¢&÷f–FW%ö6öFRFW‡Bæ÷BçVÆÂÀ¢&÷f–FW%öæÖRFW‡Bæ÷BçVÆÂÀ¢VçG'•÷W&ÂFW‡Bæ÷BçVÆÂÀ¢VçG'•÷G—RFW‡Bæ÷BçVÆÂFVfVÇBvöff–6–Âp¢6†V6²†VçG'•÷G—R–â‚vöff–6–ÂrÂwF†—&E÷'G’rÂv6†&—G’rÂwF÷W%ö÷W&F÷"r’’À¢7FGW2FW‡Bæ÷BçVÆÂFVfVÇBwVæ¶æ÷vâp¢6†V6²‡7FGW2–â‚v÷VârÂv6Æ÷6–æu÷6ööârÂv&ÆÆ÷BrÂwv—FÆ—7BrÂw6öÆEö÷WBrÂv6Æ÷6VBrÂwVæ¶æ÷vâr’’À¢&–6UöÖ÷VçBçVÖW&–2ƒ"Â"¢6†V6²‡&–6UöÖ÷VçB—2çVÆÂ÷"&–6UöÖ÷VçBãÒ’À¢&–6Uö7W'&Væ7’FW‡BÀ¢÷Vç5öBFFRÀ¢6Æ÷6W5öBFFRÀ¢6†V6¶VEöBF–ÖW7F×G¢æ÷BçVÆÂFVfVÇBæ÷r‚’À¢6÷W&6U÷W&ÂFW‡BÀ¢—5÷fW&–f–VB&ööÆVâæ÷BçVÆÂFVfVÇBfÇ6RÀ¢—5÷&–Ö'’&ööÆVâæ÷BçVÆÂFVfVÇBfÇ6RÀ¢æ÷FW2FW‡BÀ¢7&VFVEöBF–ÖW7F×G¢æ÷BçVÆÂFVfVÇBæ÷r‚’À¢WFFVEöBF–ÖW7F×G¢æ÷BçVÆÂFVfVÇBæ÷r‚’À¢Væ—VR†VF—F–öåö–BÂ&÷f–FW%ö6öFR¢–À¢7&VFRF&ÆR–bæ÷BW†—7G2F†ÆWFW2€¢–B6W&–Â&–Ö'’¶W’À¢6÷W&6Uö–B–çBÀ¢6ÇVrFW‡Bæ÷BçVÆÂVæ—VRÀ¢F—7Æ•öæÖRFW‡Bæ÷BçVÆÂÀ¢v—fVåöæÖRFW‡BÀ¢fÖ–Ç•öæÖRFW‡BÀ¢vVæFW"FW‡Bæ÷BçVÆÂFVfVÇBuRrÀ¢6ÇV%ö–B–çB&VfW&Væ6W26ÇV'2†–B’öâFVÆWFR6WBçVÆÂÀ¢6V6öæEö6ÇV%ö–B–çB&VfW&Væ6W26ÇV'2†–B’öâFVÆWFR6WBçVÆÂÀ¢6÷W&6Uö6ÇV%öæÖRFW‡BÀ¢6÷W&6U÷6V6öæEö6ÇV%öæÖRFW‡BÀ¢6—G’FW‡BÀ¢6÷VçG’FW‡Bæ÷BçVÆÂFVfVÇBtæ÷&föÆ²rÀ¢6÷VçG'’FW‡Bæ÷BçVÆÂFVfVÇBtVævÆæBrÀ¢&–òFW‡Bæ÷BçVÆÂFVfVÇBrrÀ¢FFUööeö&—'F‚FFRÀ¢æF–öâFW‡BÀ¢6öçF–æVçBFW‡BÀ¢6öÖÖöçvVÇF‚&ööÆVâÀ¢&6UöVçG'•öæÖRFW‡BÀ¢FVfVÇEö6FVv÷'’FW‡BÀ¢FVfVÇEö&–"FW‡BÀ¢&VfW'&VEöF—7Fæ6RFW‡BÀ¢VöçVÖ&W"FW‡BÀ¢F‡&V75ö–BFW‡BÀ¢&VçEöF†ÆWFUö–B–çB&VfW&Væ6W2F†ÆWFW2†–B’öâFVÆWFR6WBçVÆÂÀ¢fF%÷W&ÂFW‡BÀ¢6÷W&6U÷W&ÂFW‡BÀ¢7&VFVEöBF–ÖW7F×G¢æ÷BçVÆÂFVfVÇBæ÷r‚¢–À¢7&VFRF&ÆR–bæ÷BW†—7G2F†ÆWFUö6ÇV'2€¢F†ÆWFUö–B–çBæ÷BçVÆÂ&VfW&Væ6W2F†ÆWFW2†–B’öâFVÆWFR666FRÀ¢6ÇV%ö–B–çBæ÷BçVÆÂ&VfW&Væ6W26ÇV'2†–B’öâFVÆWFR666FRÀ¢&VÆF–öç6†—FW‡Bæ÷BçVÆÂÀ¢6÷W&6UöæÖRFW‡BÀ¢&–Ö'’¶W’†F†ÆWFUö–BÂ6ÇV%ö–BÂ&VÆF–öç6†—¢–À¢7&VF]v×İm¢G§²ÚîÆ­yÒĞ ¢6öç7BF†ÆWFT6ÇV%&÷w3¢Væ¶æ÷våµÕµÒÒµÓ°¢f÷"†6öç7BF†ÆWFRöbF†ÆWFU6VVG2’°¢6öç7BF†ÆWFT–BÒF†ÆWFT–G2ævWB†F†ÆWFRç6ÇVr“°¢6öç7B&–Ö'”6ÇV$–BÒ6ÇV$–G2ævWB†F†ÆWFRæ6ÇV%÷6ÇVr“°¢–b†F†ÆWFT–Bbb&–Ö'”6ÇV$–B’°¢F†ÆWFT6ÇV%&÷w2çW6‚…¶F†ÆWFT–BÂ&–Ö'”6ÇV$–BÂ'&–Ö'’"ÂF†ÆWFRç6÷W&6Uö6ÇV%öæÖRóòçVÆÅÒ“°¢Ğ¢6öç7B6V6öæF'”6ÇV$–BÒF†ÆWFRç6V6öæEö6ÇV%÷6ÇVp¢ò6ÇV$–G2ævWB†F†ÆWFRç6V6öæEö6ÇV%÷6ÇVr¢¢VæFVf–æVC°¢–b†F†ÆWFT–Bbb6V6öæF'”6ÇV$–Bbb6V6öæF'”6ÇV$–BÓÒ&–Ö'”6ÇV$–B’°¢F†ÆWFT6ÇV%&÷w2çW6‚…°¢F†ÆWFT–BÀ¢6V6öæF'”6ÇV$–BÀ¢'6V6öæF'’"À¢F†ÆWFRç6÷W&6U÷6V6öæEö6ÇV%öæÖRóòçVÆÂÀ¢Ò“°¢Ğ¢Ğ¢v—B–ç6W'E&÷w2€¢7ÂÀ¢&F†ÆWFUö6ÇV'2"À¢²&F†ÆWFUö–B"Â&6ÇV%ö–B"Â'&VÆF–öç6†—"Â'6÷W&6UöæÖR%ÒÀ¢F†ÆWFT6ÇV%&÷w2À¢&öâ6öæfÆ–7B†F†ÆWFUö–BÂ6ÇV%ö–BÂ&VÆF–öç6†—’FòWFFR6WB6÷W&6UöæÖRÒW†6ÇVFVBç6÷W&6UöæÖR"À¢“° ¢6öç7BF—7Fæ6U&÷w2Ò6W&–W4Æ—7BæfÆDÖ‚‡6W&–W2’Óà¢²ââææWr6WB‡6W&–W2æF—7Fæ6W2•ÒæÖ‚†F—7Fæ6R’Óâ¶WfVçD–G2ævWB‡6W&–W2ç6ÇVr’ÂF—7Fæ6UÒ’À¢“°¢v—B–ç6W'E&÷w2€¢7ÂÀ¢&WfVçEöF—7Fæ6W2"À¢²&WfVçEö–B"Â&F—7Fæ6Uö6öFR%ÒÀ¢F—7Fæ6U&÷w2À¢&öâ6öæfÆ–7B†WfVçEö–BÂF—7Fæ6Uö6öFR’Fòæ÷F†–ær"À¢“° ¢v—B–ç6W'E&÷w2€¢7ÂÀ¢&VF—F–öç2"À¢°¢'6÷W&6Uö–B"À¢&WfVçEö–B"À¢&WfVçEöFFR"À¢&F—7Fæ6Uö6öFR"À¢&F—7Fæ6Uö¶Ò"À¢'7FGW2"À¢&VçG'•÷W&Â"À¢'6÷W&6U÷W&Â"À¢'7F'E÷F–ÖR"À¢&æ÷FW2"À¢'&W7VÇG5÷W&Ö—76–öâ"À¢'&W7VÇG5ö†÷7F–ær"À¢'&W7VÇG5ööff–6–Å÷W&Â"À¢'&W7VÇG5÷W&Ö—76–öåöæ÷FR"À¢'&W7VÇG5÷W&Ö—76–öåöB"À¢'&W7VÇG5÷W&Ö—76–öåö'’"À¢'&W7VÇG5÷&–v‡G5÷&WVW7FVEöB"À¢'V&Æ–5÷&W7VÇEö6÷VçB"À¢''FæW%÷&W7VÇEö6÷VçB"À¢&F†ÆWFU÷&W7VÇEö6÷VçB"À¢'&W7VÇG5ö66W72"À¢ÒÀ¢VF—F–öå6VVG2æÖ‚†VF—F–öâ’Óâ°¢VF—F–öâç6÷W&6Uö–BóòçVÆÂÀ¢WfVçD–G2ævWB†VF—F–öâç6W&–W56ÇVr’À¢VF—F–öâæFFRÀ¢VF—F–öâæF—7Fæ6RÀ¢VF—F–öâæF—7Fæ6T¶ÒÀ¢VF—F–öâç7FGW2À¢VF—F–öâæVçG'•W&ÂóòçVÆÂÀ¢VF—F–öâç6÷W&6RÀ¢VF—F–öâç7F'EF–ÖRóòçVÆÂÀ¢VF—F–öâææ÷FW2óòçVÆÂÀ¢VF—F–öâç&W7VÇG5W&Ö—76–öâóòçVÆÂÀ¢VF—F–öâç&W7VÇG4†÷7F–æróòçVÆÂÀ¢VF—F–öâç&W7VÇG4öff–6–ÅW&ÂóòçVÆÂÀ¢VF—F–öâç&W7VÇG5W&Ö—76–öäæ÷FRóòçVÆÂÀ¢VF—F–öâç&W7VÇG5W&Ö—76–öäBóòçVÆÂÀ¢VF—F–öâç&W7VÇG5W&Ö—76–öä'’óòçVÆÂÀ¢†VF—F–öâ2²&W7VÇG5&–v‡G5&WVW7FVDCó¢7G&–ærÂçVÆÂÒ’ç&W7VÇG5&–v‡G5&WVW7FVDBóòçVÆÂÀ¢VF—F–öâçV&Æ–5&W7VÇD6÷VçBóòçVÆÂÀ¢VF—F–öâç'FæW%&W7VÇD6÷VçBóòçVÆÂÀ¢VF—F–öâæF†ÆWFU&W7VÇD6÷VçBóòçVÆÂÀ¢VF—F–öâç&W7VÇG466W72óòçVÆÂÀ¢Ò’À¢öâ6öæfÆ–7B†WfVçEö–BÂWfVçEöFFRÂF—7Fæ6Uö6öFR’FòWFFR6W@¢6÷W&6Uö–BÒW†6ÇVFVBç6÷W&6Uö–BÀ¢F—7Fæ6Uö¶ÒÒW†6ÇVFVBæF—7Fæ6Uö¶ÒÀ¢7FGW2ÒW†6ÇVFVBç7FGW2À¢VçG'•÷W&ÂÒW†6ÇVFVBæVçG'•÷W&ÂÀ¢6÷W&6U÷W&ÂÒW†6ÇVFVBç6÷W&6U÷W&ÂÀ¢7F'E÷F–ÖRÒW†6ÇVFVBç7F'E÷F–ÖRÀ¢æ÷FW2ÒW†6ÇVFVBææ÷FW2À¢&W7VÇG5÷W&Ö—76–öâÒW†6ÇVFVBç&W7VÇG5÷W&Ö—76–öâÀ¢&W7VÇG5ö†÷7F–ærÒW†6ÇVFVBç&W7VÇG5ö†÷7F–ærÀ¢&W7VÇG5ööff–6–Å÷W&ÂÒW†6ÇVFVBç&W7VÇG5ööff–6–Å÷W&ÂÀ¢&W7VÇG5÷W&Ö—76–öåöæ÷FRÒW†6ÇVFVBç&W7VÇG5÷W&Ö—76–öåöæ÷FRÀ¢&W7VÇG5÷W&Ö—76–öåöBÒW†6ÇVFVBç&W7VÇG5÷W&Ö—76–öåöBÀ¢&W7VÇG5÷W&Ö—76–öåö'’ÒW†6ÇVFVBç&W7VÇG5÷W&Ö—76–öåö'’À¢&W7VÇG5÷&–v‡G5÷&WVW7FVEöBÒW†6ÇVFVBç&W7VÇG5÷&–v‡G5÷&WVW7FVEöBÀ¢V&Æ–5÷&W7VÇEö6÷VçBÒW†6ÇVFVBçV&Æ–5÷&W7VÇEö6÷VçBÀ¢'FæW%÷&W7VÇEö6÷VçBÒW†6ÇVFVBç'FæW%÷&W7VÇEö6÷VçBÀ¢F†ÆWFU÷&W7VÇEö6÷VçBÒW†6ÇVFVBæF†ÆWFU÷&W7VÇEö6÷VçBÀ¢&W7VÇG5ö66W72ÒW†6ÇVFVBç&W7VÇG5ö66W76À¢sRÀ¢“° ¢6öç7BVF—F–öå&÷w2Òv—B7ÃÇ°¢–C¢çVÖ&W#°¢WfVçE÷6ÇVs¢7G&–æs°¢WfVçEöFFS¢7G&–æs°¢F—7Fæ6Uö6öFS¢7G&–æs°¢Óæ6VÆV7BVBæ–BÂRç6ÇVr2WfVçE÷6ÇVrÂVBæWfVçEöFFS£§FW‡B2WfVçEöFFRÂVBæF—7Fæ6Uö6öFP¢g&öÒVF—F–öç2VB¦ö–âWfVçG2RöâRæ–BÒVBæWfVçEö–F°¢6öç7BVF—F–öä–G2ÒæWrÖ€¢VF—F–öå&÷w2æÖ‚‡&÷r’Óâ¶G·&÷ræWfVçE÷6ÇVw×ÂG·&÷ræWfVçEöFFW×ÂG·&÷ræF—7Fæ6Uö6öFWÖÂ&÷ræ–EÒ’À¢“° ¢v—B–ç6W'E&÷w2€¢7ÂÀ¢'&W7VÇG2"À¢°¢'6÷W&6Uö–B"À¢&VF—F–öåö–B"À¢&F†ÆWFUö–B"À¢'7FGW2"À¢&f–æ—6…÷F–ÖU÷6V6öæG2"À¢&6†—÷F–ÖU÷6V6öæG2"À¢&wVå÷F–ÖU÷6V6öæG2"À¢&&–""À¢&÷fW&ÆÅ÷Æ6R"À¢&vVæFW%÷Æ6R"À¢&6FVv÷'’"À¢&6FVv÷'•÷Æ6R"À¢&vUööåöF’"À¢&vUöw&FU÷7B"À¢&÷Vå÷&F–ær"À¢&vUöw&FU÷&F–ær"À¢'&W7VÇE÷6÷W&6R"À¢'6÷W&6U÷W&Â"À¢ÒÀ¢&W7VÇE6VVG0¢æÖ‚‡&W7VÇB’Óâ°¢&W7VÇBç6÷W&6Uö–BóòçVÆÂÀ¢VF—F–öä–G2ævWB†G·&W7VÇBæWfVçE6ÇVw×ÂG·&W7VÇBæFFW×ÂG·&W7VÇBæF—7Fæ6WÖ’À¢F†ÆWFT–G2ævWB‡&W7VÇBæF†ÆWFU6ÇVr’À¢&W7VÇBç7FGW2óò&f–æ—6†VB"À¢&W7VÇBæf–æ—6…F–ÖU6V6öæG2óò'6UF–ÖUFõ6V6öæG2‡&W7VÇBçF–ÖR’À¢&W7VÇBæ6†—F–ÖU6V6öæG2óòçVÆÂÀ¢&W7VÇBæwVåF–ÖU6V6öæG2óòçVÆÂÀ¢&W7VÇBæ&–"óòçVÆÂÀ¢&W7VÇBçÆ6RÀ¢&W7VÇBævVæFW%Æ6RóòçVÆÂÀ¢&W7VÇBæ6FVv÷'’óòçVÆÂÀ¢&W7VÇBæ6FVv÷'•Æ6RóòçVÆÂÀ¢&W7VÇBævTöäF’óòçVÆÂÀ¢&W7VÇBævTw&FU7BóòçVÆÂÀ¢&W7VÇBæ÷Vå&F–æróòçVÆÂÀ¢&W7VÇBævTw&FU&F–æróòçVÆÂÀ¢&W7VÇBç&W7VÇE6÷W&6RóòçVÆÂÀ¢&W7VÇBç6÷W&6RÀ¢Ò¢æf–ÇFW"‚‡&÷r’Óâ&÷u³ÒÒçVÆÂbb&÷u³%ÒÒçVÆÂ’À¢öâ6öæfÆ–7B†VF—F–öåö–BÂF†ÆWFUö–B’FòWFFR6W@¢6÷W&6Uö–BÒW†6ÇVFVBç6÷W&6Uö–BÀ¢7FGW2ÒW†6ÇVFVBç7FGW2À¢f–æ—6…÷F–ÖU÷6V6öæG2ÒW†6ÇVFVBæf–æ—6…÷F–ÖU÷6V6öæG2À¢6†—÷F–ÖU÷6V6öæG2ÒW†6ÇVFVBæ6†—÷F–ÖU÷6V6öæG2À¢wVå÷F–ÖU÷6V6öæG2ÒW†6ÇVFVBæwVå÷F–ÖU÷6V6öæG2À¢&–"ÒW†6ÇVFVBæ&–"À¢÷fW&ÆÅ÷Æ6RÒW†6ÇVFVBæ÷fW&ÆÅ÷Æ6RÀ¢vVæFW%÷Æ6RÒW†6ÇVFVBævVæFW%÷Æ6RÀ¢6FVv÷'’ÒW†6ÇVFVBæ6FVv÷'’À¢6FVv÷'•÷Æ6RÒW†6ÇVFVBæ6FVv÷'•÷Æ6RÀ¢vUööåöF’ÒW†6ÇVFVBævUööåöF’À¢vUöw&FU÷7BÒW†6ÇVFVBævUöw&FU÷7BÀ¢÷Vå÷&F–ærÒW†6ÇVFVBæ÷Vå÷&F–ærÀ¢vUöw&FU÷&F–ærÒW†6ÇVFVBævUöw&FU÷&F–ærÀ¢&W7VÇE÷6÷W&6RÒW†6ÇVFVBç&W7VÇE÷6÷W&6RÀ¢6÷W&6U÷W&ÂÒW†6ÇVFVBç6÷W&6U÷W&ÆÀ¢À¢“° ¢6öç7B6÷VçG2Òv—B7ÃÇ°¢6ÇV'3¢çVÖ&W#°¢F†ÆWFW3¢çVÖ&W#°¢&6U÷6W&–W3¢çVÖ&W#°¢VF—F–öç3¢çVÖ&W#°¢&W7VÇG3¢çVÖ&W#°¢Óæ6VÆV7@¢‡6VÆV7B6÷VçB‚¢“£¦–çBg&öÒ6ÇV'2’26ÇV'2À¢‡6VÆV7B6÷VçB‚¢“£¦–çBg&öÒF†ÆWFW2’2F†ÆWFW2À¢‡6VÆV7B6÷VçB‚¢“£¦–çBg&öÒWfVçG2’2&6U÷6W&–W2À¢‡6VÆV7B6÷VçB‚¢“£¦–çBg&öÒVF—F–öç2’2VF—F–öç2À¢‡6VÆV7B6÷VçB‚¢“£¦–çBg&öÒ&W7VÇG2’2&W7VÇG6°¢6öç7B&÷rÒ6÷VçG5³Ó°¢òò6ögBfÆö÷"gFW"6VVC¢ÆÆ÷r6÷VçG2B÷"&÷fRF†R6FÆöwVR&6VÆ–æRà¢–b€¢&÷rÇÀ¢&÷ræ6ÇV'2ÂU…T5DTBæ6ÇV'2ÇÀ¢&÷ræF†ÆWFW2ÂU…T5DTBæF†ÆWFW2ÇÀ¢&÷rç&6U÷6W&–W2ÂU…T5DTBç&6U÷6W&–W2ÇÀ¢&÷ræVF—F–öç2ÂU…T5DTBæVF—F–öç2ÇÀ¢&÷rç&W7VÇG2ÂU…T5DTBç&W7VÇG0¢’°¢F‡&÷ræWrW'&÷"†6FÆöwVR6VVB6÷VçBÖ—6ÖF6ƒ¢G´¥4ôâç7G&–æv–g’‡&÷r—Ö“°¢Ğ ¢v—B7Æ ¢–ç6W'B–çFòöÖWF†¶W’ÂfÇVR’fÇVW2‚w6VVE÷fW'6–öârÂGµ4TTEõdU%4”ôçÒ¢öâ6öæfÆ–7B†¶W’’FòWFFR6WBfÇVRÒW†6ÇVFVBçfÇVP¢°¢–b‚†v—BÇ&VG•6VVFVB‡7Â’’’°¢F‡&÷ræWrW'&÷"‚$6FÆöwVR6VVBfW&–f–6F–öâf–ÆVBgFW"w&—F–ærF†R6VVBÖ&¶W""“°¢Ğ§Ğ ¦W‡÷'BgVæ7F–öâVç7W&TF‡&V756VVFVB‚“¢&öÖ—6SÇfö–Câ°¢vÆö&Å6VVE7FFRåõöF‡&V74gVÆÅ6VVE&öÖ—6UõòóóÒ6VVB‚’æ6F6‚‚†W'&÷"’Óâ°¢vÆö&Å6VVE7FFRåõöF‡&V74gVÆÅ6VVE&öÖ—6UõòÒVæFVf–æVC°¢F‡&÷rW'&÷#°¢Ò“°¢&WGW&âvÆö&Å6VVE7FFRåõöF‡&V74gVÆÅ6VVE&öÖ—6Uõó°§Ğ 
+import { getSql } from "@/lib/db";
+import {
+  athletes as athleteSeeds,
+  catalogueMetadata,
+  clubs as clubSeeds,
+  editions as editionSeeds,
+  results as resultSeeds,
+  raceGroupMemberships,
+  seriesList,
+  clubSlugAliases,
+} from "@/data/catalogue";
+import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
+import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
+
+const SEED_VERSION = "athrecs-fishguard-half-marathon-hotfix-v141";
+const EXPECTED = catalogueMetadata.merged_counts;
+
+type Sql = Awaited<ReturnType<typeof getSql>>;
+type GlobalSeedState = typeof globalThis & {
+  __athrecsFullSeedPromise__?: Promise<void>;
+};
+
+const globalSeedState = globalThis as GlobalSeedState;
+
+function parseTimeToSeconds(raw: string): number {
+  const parts = raw.trim().replace(",", ".").split(":").map(Number);
+  if (parts.length === 3) {
+    return Math.round(parts[0] * 3600 + parts[1] * 60 + parts[2]);
+  }
+  if (parts.length === 2) {
+    return Math.round(parts[0] * 60 + parts[1]);
+  }
+  return Math.round(parts[0]);
+}
+
+function chunks<T>(rows: T[], size: number): T[][] {
+  const output: T[][] = [];
+  for (let index = 0; index < rows.length; index += size) {
+    output.push(rows.slice(index, index + size));
+  }
+  return output;
+}
+
+async function insertRows(
+  sql: Sql,
+  table: string,
+  columns: string[],
+  rows: unknown[][],
+  conflictClause: string,
+  chunkSize = 100,
+): Promise<void> {
+  for (const batch of chunks(rows, chunkSize)) {
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const placeholders = row.map((value) => {
+          params.push(value);
+          return `$${params.length}`;
+        });
+        return `(${placeholders.join(", ")})`;
+      })
+      .join(", ");
+    await sql.query(
+      `insert into ${table} (${columns.join(", ")}) values ${values} ${conflictClause}`,
+      params,
+    );
+  }
+}
+
+async function deleteRowsOutsideCatalogue(sql: Sql, table: string, slugs: string[]): Promise<void> {
+  const placeholders = slugs.map((_, index) => `$${index + 1}`).join(", ");
+  await sql.query(`delete from ${table} where slug not in (${placeholders})`, slugs);
+}
+
+async function ensureSchema(sql: Sql): Promise<void> {
+  const statements = [
+    `create table if not exists clubs (
+      id serial primary key,
+      slug text not null unique,
+      name text not null,
+      city text not null default '',
+      county text not null default 'Norfolk',
+      country text not null default 'England',
+      sports text not null default '',
+      website text,
+      summary text not null default '',
+      source_names text not null default '',
+      address text,
+      postcode text,
+      region text,
+      official_source text,
+      source_url text,
+      checked_at date,
+      location_precision text not null default 'unverified',
+      contact_url text,
+      contacts_json text not null default '[]',
+      socials_json text not null default '[]',
+      created_at timestamptz not null default now()
+    )`,
+    `create table if not exists events (
+      id serial primary key,
+      source_id int,
+      slug text not null unique,
+      name text not null,
+      sport text not null,
+      country text not null default 'England',
+      county text not null default 'Norfolk',
+      city text not null default '',
+      area text not null default '',
+      surface text not null default 'Road',
+      summary text not null default '',
+      description text not null default '',
+      organiser text not null default '',
+      website text not null default '',
+      featured boolean not null default false,
+      source_url text,
+      created_at timestamptz not null default now()
+    )`,
+    `create table if not exists event_distances (
+      event_id int not null references events(id) on delete cascade,
+      distance_code text not null,
+      primary key (event_id, distance_code)
+    )`,
+    `create table if not exists event_groups (
+      event_id int not null references events(id) on delete cascade,
+      group_code text not null,
+      label text not null,
+      level text not null,
+      source_url text not null,
+      checked_at date not null,
+      note text not null default '',
+      primary key (event_id, group_code)
+    )`,
+    `create table if not exists editions (
+      id serial primary key,
+      source_id int,
+      event_id int not null references events(id) on delete cascade,
+      event_date date not null,
+      distance_code text not null,
+      distance_km double precision not null default 0,
+      status text not null default 'TBC',
+      entry_url text,
+      source_url text,
+      start_time text,
+      notes text,
+      results_permission text,
+      results_hosting text,
+      results_official_url text,
+      results_permission_note text,
+      results_permission_at timestamptz,
+      results_permission_by text,
+      results_rights_requested_at timestamptz,
+      public_result_count int,
+      partner_result_count int,
+      athlete_result_count int,
+      results_access text,
+      unique (event_id, event_date, distance_code)
+    )`,
+    `create table if not exists edition_entry_options (
+      id serial primary key,
+      edition_id int not null references editions(id) on delete cascade,
+      provider_code text not null,
+      provider_name text not null,
+      entry_url text not null,
+      entry_type text not null default 'official'
+        check (entry_type in ('official', 'third_party', 'charity', 'tour_operator')),
+      status text not null default 'unknown'
+        check (status in ('open', 'closing_soon', 'ballot', 'waitlist', 'sold_out', 'closed', 'unknown')),
+      price_amount numeric(12, 2)
+        check (price_amount is null or price_amount >= 0),
+      price_currency text,
+      opens_at date,
+      closes_at date,
+      checked_at timestamptz not null default now(),
+      source_url text,
+      is_verified boolean not null default false,
+      is_primary boolean not null default false,
+      notes text,
+      created_at timestamptz not null default now(),
+      updated_at timestamptz not null default now(),
+      unique (edition_id, provider_code)
+    )`,
+    `create table if not exists athletes (
+      id serial primary key,
+      source_id int,
+      slug text not null unique,
+      display_name text not null,
+      given_name text,
+      family_name text,
+      gender text not null default 'U',
+      club_id int references clubs(id) on delete set null,
+      second_club_id int references clubs(id) on delete set null,
+      source_club_name text,
+      source_second_club_name text,
+      city text,
+      county text not null default 'Norfolk',
+      country text not null default 'England',
+      bio text not null default '',
+      date_of_birth date,
+      nation text,
+      continent text,
+      commonwealth boolean,
+      race_entry_name text,
+      default_category text,
+      default_bib text,
+      preferred_distance text,
+      ea_number text,
+      athrecs_id text,
+      parent_athlete_id int references athletes(id) on delete set null,
+      avatar_url text,
+      source_url text,
+      created_at timestamptz not null default now()
+    )`,
+    `create table if not exists athlete_clubs (
+      athlete_id int not null references athletes(id) on delete cascade,
+      club_id int not null references clubs(id) on delete cascade,
+      relationship text not null,
+      source_name text,
+      primary key (athlete_id, club_id, relationship)
+    )`,
+    `create table if not exists results (
+      id serial primary key,
+      source_id int,
+      edition_id int not null references editions(id) on delete cascade,
+      athlete_id int not null references athletes(id) on delete cascade,
+      status text not null default 'finished',
+      finish_time_seconds int,
+      chip_time_seconds int,
+      gun_time_seconds int,
+      bib text,
+      overall_place int,
+      gender_place int,
+      category text,
+      category_place int,
+      age_on_day int,
+      age_grade_pct double precision,
+      open_rating int,
+      age_grade_rating int,
+      result_source text,
+      source_url text,
+      unique (edition_id, athlete_id)
+    )`,
+    `create table if not exists app_meta (
+      key text primary key,
+      value text not null
+    )`,
+    `alter table clubs add column if not exists source_names text not null default ''`,
+    `alter table clubs add column if not exists address text`,
+    `alter table clubs add column if not exists postcode text`,
+    `alter table clubs add column if not exists region text`,
+    `alter table clubs add column if not exists official_source text`,
+    `alter table clubs add column if not exists source_url text`,
+    `alter table clubs add column if not exists checked_at date`,
+    `alter table clubs add column if not exists location_precision text not null default 'unverified'`,
+    `alter table clubs add column if not exists contact_url text`,
+    `alter table clubs add column if not exists contacts_json text not null default '[]'`,
+    `alter table clubs add column if not exists socials_json text not null default '[]'`,
+    `alter table events add column if not exists source_id int`,
+    `alter table events add column if not exists source_url text`,
+    `alter table editions add column if not exists source_id int`,
+    `alter table editions add column if not exists notes text`,
+    `alter table editions add column if not exists results_permission text`,
+    `alter table editions add column if not exists results_hosting text`,
+    `alter table editions add column if not exists results_official_url text`,
+    `alter table editions add column if not exists results_permission_note text`,
+    `alter table editions add column if not exists results_permission_at timestamptz`,
+    `alter table editions add column if not exists results_permission_by text`,
+    `alter table editions add column if not exists results_rights_requested_at timestamptz`,
+    `alter table editions add column if not exists public_result_count int`,
+    `alter table editions add column if not exists partner_result_count int`,
+    `alter table editions add column if not exists athlete_result_count int`,
+    `alter table editions add column if not exists results_access text`,
+    `alter table athletes add column if not exists source_id int`,
+    `alter table athletes add column if not exists given_name text`,
+    `alter table athletes add column if not exists family_name text`,
+    `alter table athletes add column if not exists second_club_id int references clubs(id) on delete set null`,
+    `alter table athletes add column if not exists source_club_name text`,
+    `alter table athletes add column if not exists source_second_club_name text`,
+    `alter table athletes add column if not exists date_of_birth date`,
+    `alter table athletes add column if not exists nation text`,
+    `alter table athletes add column if not exists continent text`,
+    `alter table athletes add column if not exists commonwealth boolean`,
+    `alter table athletes add column if not exists race_entry_name text`,
+    `alter table athletes add column if not exists default_category text`,
+    `alter table athletes add column if not exists default_bib text`,
+    `alter table athletes add column if not exists preferred_distance text`,
+    `alter table athletes add column if not exists ea_number text`,
+    `alter table athletes add column if not exists athrecs_id text`,
+    `alter table athletes add column if not exists parent_athlete_id int references athletes(id) on delete set null`,
+    `alter table athletes add column if not exists avatar_url text`,
+    `alter table athletes add column if not exists source_url text`,
+    `alter table results add column if not exists source_id int`,
+    `alter table results add column if not exists chip_time_seconds int`,
+    `alter table results add column if not exists gun_time_seconds int`,
+    `alter table results add column if not exists bib text`,
+    `alter table results add column if not exists gender_place int`,
+    `alter table results add column if not exists category_place int`,
+    `alter table results add column if not exists age_on_day int`,
+    `alter table results add column if not exists age_grade_pct double precision`,
+    `alter table results add column if not exists open_rating int`,
+    `alter table results add column if not exists age_grade_rating int`,
+    `alter table results add column if not exists result_source text`,
+    `alter table results add column if not exists source_url text`,
+    `create unique index if not exists events_source_id_idx on events(source_id) where source_id is not null`,
+    `create unique index if not exists editions_source_id_idx on editions(source_id) where source_id is not null`,
+    `create unique index if not exists athletes_source_id_idx on athletes(source_id) where source_id is not null`,
+    `create unique index if not exists athletes_athrecs_id_idx on athletes(athrecs_id) where athrecs_id is not null`,
+    `create unique index if not exists results_source_id_idx on results(source_id) where source_id is not null`,
+    `create index if not exists edition_entry_options_edition_idx on edition_entry_options(edition_id)`,
+    `create unique index if not exists edition_entry_options_one_primary_idx
+      on edition_entry_options(edition_id) where is_primary`,
+    `alter table edition_entry_options add column if not exists notes text`,
+    `insert into edition_entry_options (
+      edition_id, provider_code, provider_name, entry_url, entry_type, status,
+      checked_at, source_url, is_verified, is_primary
+    )
+    select
+      ed.id,
+      'official',
+      'Official race entry',
+      ed.entry_url,
+      'official',
+      case ed.status
+        when 'Open' then 'open'
+        when 'ClosingSoon' then 'closing_soon'
+        when 'Closed' then 'closed'
+        when 'Finished' then 'closed'
+        else 'unknown'
+      end,
+      now(),
+      coalesce(nullif(ed.source_url, ''), ed.entry_url),
+      false,
+      false
+    from editions ed
+    where nullif(trim(ed.entry_url), '') is not null
+    on conflict (edition_id, provider_code) do nothing`,
+    `update edition_entry_options option
+      set is_primary = true, updated_at = now()
+      where option.provider_code = 'official'
+        and not exists (
+          select 1
+          from edition_entry_options existing_primary
+          where existing_primary.edition_id = option.edition_id
+            and existing_primary.is_primary
+        )`,
+  ];
+  for (const statement of statements) await sql.query(statement);
+}
+
+async function alreadySeeded(sql: Sql): Promise<boolean> {
+  const [meta, counts, paul] = await Promise.all([
+    sql<{ value: string }>`select value from app_meta where key = 'seed_version' limit 1`,
+    sql<{
+      clubs: number;
+      athletes: number;
+      race_series: number;
+      editions: number;
+      results: number;
+    }>`select
+      (select count(*)::int from clubs) as clubs,
+      (select count(*)::int from athletes) as athletes,
+      (select count(*)::int from events) as race_series,
+      (select count(*)::int from editions) as editions,
+      (select count(*)::int from results) as results`,
+    sql<{ ok: boolean }>`select exists (
+      select 1
+      from athletes a
+      left join clubs primary_club on primary_club.id = a.club_id
+      left join clubs secondary_club on secondary_club.id = a.second_club_id
+      where a.slug = 'paul-browne'
+        and primary_club.slug = 'unattached'
+        and secondary_club.id is null
+        and a.date_of_birth = '1978-05-20'::date
+        and not exists (
+          select 1 from athlete_clubs ac
+          join clubs c on c.id = ac.club_id
+          where ac.athlete_id = a.id and lower(c.name) like '%norfolk gazelles%'
+        )
+        and exists (
+          select 1 from results r
+          join editions ed on ed.id = r.edition_id
+          join events e on e.id = ed.event_id
+          where r.athlete_id = a.id
+            and e.slug = 'ostersund-marathon'
+            and ed.event_date = '2007-07-21'::date
+            and r.finish_time_seconds = 12589
+        )
+    ) as ok`,
+  ]);
+  const row = counts[0];
+  // Soft floor: once catalogue baseline is met, never force a destructive reseed.
+  // athletes/results grow via importResults. Do not require exact seed_version.
+  // Paul Browne check is best-effort â€” if data volume is already large, skip wipe
+  // even if the identity query fails (avoids Neon import wipes on edge cases).
+  const countsOk = Boolean(
+    (row?.clubs ?? 0) >= EXPECTED.clubs &&
+    (row?.athletes ?? 0) >= EXPECTED.athletes &&
+    (row?.race_series ?? 0) >= EXPECTED.race_series &&
+    (row?.editions ?? 0) >= EXPECTED.editions &&
+    (row?.results ?? 0) >= EXPECTED.results,
+  );
+  const largeImport =
+    (row?.athletes ?? 0) >= EXPECTED.athletes + 100 ||
+    (row?.results ?? 0) >= EXPECTED.results + 100 ||
+    (row?.editions ?? 0) >= EXPECTED.editions + 20;
+  const aboveFloor = countsOk && (Boolean(paul[0]?.ok) || largeImport);
+  if (aboveFloor && meta[0]?.value !== SEED_VERSION) {
+    await sql`
+      insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+      on conflict (key) do update set value = excluded.value
+    `;
+  }
+  return aboveFloor;
+}
+
+async function upsertCatalogueClubs(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'clubs_catalogue_version' limit 1
+  `;
+  const count = await sql<{ n: number }>`select count(*)::int as n from clubs`;
+  const targetVersion = SEED_VERSION;
+  if (meta[0]?.value === targetVersion && (count[0]?.n ?? 0) >= EXPECTED.clubs) {
+    return;
+  }
+  await insertRows(
+    sql,
+    "clubs",
+    [
+      "slug",
+      "name",
+      "city",
+      "county",
+      "country",
+      "sports",
+      "website",
+      "summary",
+      "source_names",
+      "address",
+      "postcode",
+      "region",
+      "official_source",
+      "source_url",
+      "checked_at",
+      "location_precision",
+      "contact_url",
+      "contacts_json",
+      "socials_json",
+    ],
+    clubSeeds.map((club) => [
+      club.slug,
+      club.name,
+      club.city,
+      club.county ?? "Norfolk",
+      club.country ?? "England",
+      club.sports.join(","),
+      club.website ?? null,
+      club.summary,
+      (club.source_names ?? []).join("|"),
+      club.address ?? null,
+      club.postcode ?? null,
+      club.region ?? null,
+      club.official_source ?? null,
+      club.source_url ?? null,
+      club.checked_at ?? null,
+      club.location_precision ?? "unverified",
+      club.contact_url ?? null,
+      JSON.stringify(club.contacts ?? []),
+      JSON.stringify(club.socials ?? []),
+    ]),
+    `on conflict (slug) do update set
+      name = excluded.name,
+      city = excluded.city,
+      county = excluded.county,
+      country = excluded.country,
+      sports = excluded.sports,
+      website = excluded.website,
+      summary = excluded.summary,
+      source_names = excluded.source_names,
+      address = excluded.address,
+      postcode = excluded.postcode,
+      region = excluded.region,
+      official_source = excluded.official_source,
+      source_url = excluded.source_url,
+      checked_at = excluded.checked_at,
+      location_precision = excluded.location_precision,
+      contact_url = excluded.contact_url,
+      contacts_json = excluded.contacts_json,
+      socials_json = excluded.socials_json`,
+    80,
+  );
+  await mergeCatalogueClubAliases(sql);
+  await sql`
+    insert into app_meta (key, value) values ('clubs_catalogue_version', ${targetVersion})
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
+async function mergeCatalogueClubAliases(sql: Sql): Promise<void> {
+  for (const [aliasSlug, canonicalSlug] of Object.entries(clubSlugAliases)) {
+    const rows = await sql<{ id: number; slug: string }>`
+      select id, slug from clubs where slug in (${aliasSlug}, ${canonicalSlug})
+    `;
+    const alias = rows.find((row) => row.slug === aliasSlug);
+    const canonical = rows.find((row) => row.slug === canonicalSlug);
+    if (!alias || !canonical) continue;
+    await sql`update athletes set club_id = ${canonical.id} where club_id = ${alias.id}`;
+    await sql`update athletes set second_club_id = ${canonical.id} where second_club_id = ${alias.id}`;
+    await sql`
+      insert into athlete_clubs (athlete_id, club_id, relationship, source_name)
+      select athlete_id, ${canonical.id}, relationship, source_name
+      from athlete_clubs
+      where club_id = ${alias.id}
+      on conflict (athlete_id, club_id, relationship) do nothing
+    `;
+    await sql`delete from athlete_clubs where club_id = ${alias.id}`;
+    await sql`delete from clubs where id = ${alias.id}`;
+  }
+}
+
+async function ensureParkrunCalendar(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'parkrun_through' limit 1
+  `;
+  if (meta[0]?.value === "2027-12-26") return;
+  await expandParkrunEditions(sql);
+  await sql`
+    insert into app_meta (key, value) values ('parkrun_through', '2027-12-26')
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
+async function expandParkrunEditions(sql: Sql): Promise<void> {
+  // Weekly 5K Saturdays and junior 2K Sundays through the end of 2027.
+  await sql`
+    insert into editions (
+      event_id, event_date, distance_code, distance_km, status,
+      entry_url, source_url, start_time, notes
+    )
+    select
+      e.id,
+      d::date,
+      '5K',
+      5,
+      'Open',
+      e.website,
+      e.website,
+      case
+        when e.country in (
+          'Australia', 'New Zealand', 'South Africa', 'Namibia',
+          'Eswatini', 'Singapore', 'Malaysia', 'Japan'
+        ) then '08:00'
+        else '09:00'
+      end,
+      'Weekly parkrun 5K â€” Saturday morning local time. Confirm cancellations on the parkrun event page.'
+    from events e
+    cross join generate_series(date '2026-08-15', date '2027-12-25', interval '7 days') as d
+    where e.sport = 'Parkrun'
+      and e.name not ilike '%junior%'
+    on conflict (event_id, event_date, distance_code) do nothing
+  `;
+  await sql`
+    insert into editions (
+      event_id, event_date, distance_code, distance_km, status,
+      entry_url, source_url, start_time, notes
+    )
+    select
+      e.id,
+      d::date,
+      '2K',
+      2,
+      'Open',
+      e.website,
+      e.website,
+      '09:00',
+      'Weekly junior parkrun 2K â€” Sunday 09:00. Confirm cancellations on the parkrun event page.'
+    from events e
+    cross join generate_series(date '2026-08-16', date '2027-12-26', interval '7 days') as d
+    where e.sport = 'Parkrun'
+      and e.name ilike '%junior%'
+    on conflict (event_id, event_date, distance_code) do nothing
+  `;
+}
+
+async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'fixtures_catalogue_version' limit 1
+  `;
+  if (meta[0]?.value === SEED_VERSION) return;
+
+  await insertRows(
+    sql,
+    "events",
+    [
+      "source_id",
+      "slug",
+      "name",
+      "sport",
+      "country",
+      "county",
+      "city",
+      "area",
+      "surface",
+      "summary",
+      "description",
+      "organiser",
+      "website",
+      "featured",
+      "source_url",
+    ],
+    seriesList.map((series) => [
+      series.source_id ?? null,
+      series.slug,
+      series.name,
+      series.sport,
+      series.country,
+      series.county,
+      series.city,
+      series.area,
+      series.surface,
+      series.summary,
+      series.description,
+      series.organiser,
+      series.website,
+      series.featured ?? false,
+      series.source_url ?? null,
+    ]),
+    `on conflict (slug) do update set
+      source_id = excluded.source_id,
+      name = excluded.name,
+      sport = excluded.sport,
+      country = excluded.country,
+      county = excluded.county,
+      city = excluded.city,
+      area = excluded.area,
+      surface = excluded.surface,
+      summary = excluded.summary,
+      description = excluded.description,
+      organiser = excluded.organiser,
+      website = excluded.website,
+      featured = excluded.featured,
+      source_url = excluded.source_url`,
+    80,
+  );
+
+  for (const [aliasSlug, canonicalSlug] of Object.entries(eventSlugAliases)) {
+    const matches = await sql<{ id: number; slug: string }>`
+      select id, slug from events where slug in (${aliasSlug}, ${canonicalSlug})
+    `;
+    const alias = matches.find((event) => event.slug === aliasSlug);
+    if (!alias) continue;
+    const canonical = matches.find((event) => event.slug === canonicalSlug);
+    if (!canonical) {
+      throw new Error(`Cannot retire event alias ${aliasSlug}: canonical event is missing`);
+    }
+    const resultCounts = await sql<{ count: number }>`
+      select count(*)::int as count
+      from results r
+      join editions ed on ed.id = r.edition_id
+      where ed.event_id = ${alias.id}
+    `;
+    if ((resultCounts[0]?.count ?? 0) > 0) {
+      throw new Error(`Cannot retire event alias ${aliasSlug}: it has stored results`);
+    }
+    await sql`delete from events where id = ${alias.id}`;
+  }
+
+  const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
+  const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
+
+  for (const replacement of editionReplacements) {
+    const eventId = eventIds.get(replacement.seriesSlug);
+    if (!eventId) continue;
+    const targetDistance = replacement.toDistance ?? replacement.distance;
+    await sql.query(
+      `update editions old_edition
+       set event_date = $4::date,
+           distance_code = $5::text
+       where old_edition.event_id = $1::int
+         and old_edition.event_date = $2::date
+         and old_edition.distance_code = $3::text
+         and not exists (
+           select 1 from results where edition_id = old_edition.id
+         )
+         and not exists (
+           select 1
+           from editions corrected_edition
+           where corrected_edition.event_id = old_edition.event_id
+             and corrected_edition.event_date = $4::date
+             and corrected_edition.distance_code = $5::text
+         )`,
+      [eventId, replacement.fromDate, replacement.distance, replacement.toDate, targetDistance],
+    );
+    await sql.query(
+      `delete from editions old_edition
+       where old_edition.event_id = $1::int
+         and old_edition.event_date = $2::date
+         and old_edition.distance_code = $3::text
+         and not exists (
+           select 1 from results where edition_id = old_edition.id
+         )
+         and exists (
+           select 1
+           from editions corrected_edition
+           where corrected_edition.event_id = old_edition.event_id
+             and corrected_edition.event_date = $4::date
+             and corrected_edition.distance_code = $5::text
+         )`,
+      [eventId, replacement.fromDate, replacement.distance, replacement.toDate, targetDistance],
+    );
+  }
+
+  const groupRows = raceGroupMemberships
+    .map((membership) => [
+      eventIds.get(membership.seriesSlug),
+      membership.groupCode,
+      membership.label,
+      membership.level,
+      membership.sourceUrl,
+      membership.checkedAt,
+      membership.note,
+    ])
+    .filter((row) => row[0] != null);
+  if (groupRows.length !== raceGroupMemberships.length) {
+    const missing = raceGroupMemberships
+      .filter((membership) => !eventIds.has(membership.seriesSlug))
+      .map((membership) => membership.seriesSlug);
+    throw new Error(`Race group membership references missing events: ${missing.join(", ")}`);
+  }
+  await sql`
+    delete from event_groups
+    where group_code in ('world-marathon-majors', 'utmb-world-series', 'utmb-index')
+  `;
+  await insertRows(
+    sql,
+    "event_groups",
+    ["event_id", "group_code", "label", "level", "source_url", "checked_at", "note"],
+    groupRows,
+    `on conflict (event_id, group_code) do update set
+      label = excluded.label,
+      level = excluded.level,
+      source_url = excluded.source_url,
+      checked_at = excluded.checked_at,
+      note = excluded.note`,
+    100,
+  );
+
+  const distanceRows = seriesList.flatMap((series) =>
+    [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
+  );
+  await insertRows(
+    sql,
+    "event_distances",
+    ["event_id", "distance_code"],
+    distanceRows,
+    "on conflict (event_id, distance_code) do nothing",
+    100,
+  );
+
+  await insertRows(
+    sql,
+    "editions",
+    [
+      "source_id",
+      "event_id",
+      "event_date",
+      "distance_code",
+      "distance_km",
+      "status",
+      "entry_url",
+      "source_url",
+      "start_time",
+      "notes",
+      "results_permission",
+      "results_hosting",
+      "results_official_url",
+      "results_permission_note",
+      "results_permission_at",
+      "results_permission_by",
+      "results_rights_requested_at",
+      "public_result_count",
+      "partner_result_count",
+      "athlete_result_count",
+      "results_access",
+    ],
+    editionSeeds.map((edition) => [
+      edition.source_id ?? null,
+      eventIds.get(edition.seriesSlug),
+      edition.date,
+      edition.distance,
+      edition.distanceKm,
+      edition.status,
+      edition.entryUrl ?? null,
+      edition.source,
+      edition.startTime ?? null,
+      edition.notes ?? null,
+      edition.resultsPermission ?? null,
+      edition.resultsHosting ?? null,
+      edition.resultsOfficialUrl ?? null,
+      edition.resultsPermissionNote ?? null,
+      edition.resultsPermissionAt ?? null,
+      edition.resultsPermissionBy ?? null,
+      (edition as { resultsRightsRequestedAt?: string | null }).resultsRightsRequestedAt ?? null,
+      edition.publicResultCount ?? null,
+      edition.partnerResultCount ?? null,
+      edition.athleteResultCount ?? null,
+      edition.resultsAccess ?? null,
+    ]),
+    `on conflict (event_id, event_date, distance_code) do update set
+      source_id = excluded.source_id,
+      distance_km = excluded.distance_km,
+      status = excluded.status,
+      entry_url = excluded.entry_url,
+      source_url = excluded.source_url,
+      start_time = excluded.start_time,
+      notes = excluded.notes,
+      results_permission = excluded.results_permission,
+      results_hosting = excluded.results_hosting,
+      results_official_url = excluded.results_official_url,
+      results_permission_note = excluded.results_permission_note,
+      results_permission_at = excluded.results_permission_at,
+      results_permission_by = excluded.results_permission_by,
+      results_rights_requested_at = excluded.results_rights_requested_at,
+      public_result_count = excluded.public_result_count,
+      partner_result_count = excluded.partner_result_count,
+      athlete_result_count = excluded.athlete_result_count,
+      results_access = excluded.results_access`,
+    75,
+  );
+
+  await upsertCatalogueEntryOptions(sql, eventIds);
+
+  await expandParkrunEditions(sql);
+
+  await sql`
+    insert into app_meta (key, value) values ('fixtures_catalogue_version', ${SEED_VERSION})
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
+async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, number>): Promise<void> {
+  const targetEditions = editionSeeds.filter(
+    (edition) =>
+      eventIds.has(edition.seriesSlug) &&
+      (Boolean(edition.entryUrl) || Boolean(edition.entryOptions?.length)),
+  );
+  if (!targetEditions.length) return;
+
+  const params: unknown[] = [];
+  const values = targetEditions.map((edition) => {
+    const key = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+    const valuesForRow = [eventIds.get(edition.seriesSlug), edition.date, edition.distance, key];
+    const placeholders = valuesForRow.map((value, index) => {
+      params.push(value);
+      const position = params.length;
+      return `$${position}${index === 0 ? "::int" : index === 1 ? "::date" : "::text"}`;
+    });
+    return `(${placeholders.join(", ")})`;
+  });
+  const editionRows = await sql.query<{ id: number; edition_key: string }>(
+    `select ed.id, target.edition_key
+     from (values ${values.join(", ")}) as target (
+       event_id, event_date, distance_code, edition_key
+     )
+     join editions ed
+       on ed.event_id = target.event_id
+      and ed.event_date = target.event_date
+      and ed.distance_code = target.distance_code`,
+    params,
+  );
+  const editionIds = new Map(editionRows.map((row) => [row.edition_key, row.id]));
+
+  const explicitOptionsWithoutOfficialIds = targetEditions
+    .filter(
+      (edition) =>
+        Boolean(edition.entryOptions?.length) &&
+        !edition.entryOptions?.some((option) => option.providerCode === "official"),
+    )
+    .map((edition) => editionIds.get(`${edition.seriesSlug}|${edition.date}|${edition.distance}`))
+    .filter((editionId): editionId is number => editionId != null);
+  if (explicitOptionsWithoutOfficialIds.length) {
+    const placeholders = explicitOptionsWithoutOfficialIds
+      .map((_, index) => `$${index + 1}`)
+      .join(", ");
+    await sql.query(
+      `delete from edition_entry_options
+       where edition_id in (${placeholders})
+         and provider_code = 'official'
+         and not is_verified`,
+      explicitOptionsWithoutOfficialIds,
+    );
+  }
+
+  const rows = targetEditions.flatMap((edition) => {
+    const editionId = editionIds.get(`${edition.seriesSlug}|${edition.date}|${edition.distance}`);
+    if (!editionId) return [];
+
+    const options = [...(edition.entryOptions ?? [])];
+    if (edition.entryUrl && options.length === 0) {
+      options.unshift({
+        providerCode: "official",
+        providerName: "Official race entry",
+        entryUrl: edition.entryUrl,
+        entryType: "official" as const,
+        status:
+          edition.status === "Open"
+            ? ("open" as const)
+            : edition.status === "ClosingSoon"
+              ? ("closing_soon" as const)
+              : edition.status === "Closed" || edition.status === "Finished"
+                ? ("closed" as const)
+                : ("unknown" as const),
+        checkedAt: new Date().toISOString(),
+        sourceUrl: edition.source,
+        isVerified: false,
+        isPrimary: true,
+      });
+    }
+
+    const explicitPrimary = options.findIndex((option) => option.isPrimary);
+    const officialPrimary = options.findIndex((option) => option.entryType === "official");
+    const primaryIndex = explicitPrimary >= 0 ? explicitPrimary : officialPrimary;
+
+    return options.map((option, index) => [
+      editionId,
+      option.providerCode,
+      option.providerName,
+      option.entryUrl,
+      option.entryType,
+      option.status ?? "unknown",
+      option.priceAmount ?? null,
+      option.priceCurrency?.toUpperCase() ?? null,
+      option.opensAt ?? null,
+      option.closesAt ?? null,
+      option.checkedAt,
+      option.sourceUrl ?? option.entryUrl,
+      option.isVerified ?? false,
+      index === primaryIndex,
+      option.notes ?? null,
+    ]);
+  });
+
+  if (!rows.length) return;
+  const primaryRows = rows
+    .filter((row) => row[13])
+    .map((row) => [row[0] as number, row[1] as string] as const);
+  const primaryEditionIds = [...new Set(primaryRows.map((row) => row[0]))];
+  if (primaryEditionIds.length) {
+    const placeholders = primaryEditionIds.map((_, index) => `$${index + 1}`).join(", ");
+    await sql.query(
+      `update edition_entry_options set is_primary = false, updated_at = now()
+       where edition_id in (${placeholders}) and is_primary`,
+      primaryEditionIds,
+    );
+  }
+  const nonPrimaryRows = rows.map((row) => [...row.slice(0, 13), false, row[14]]);
+  await insertRows(
+    sql,
+    "edition_entry_options",
+    [
+      "edition_id",
+      "provider_code",
+      "provider_name",
+      "entry_url",
+      "entry_type",
+      "status",
+      "price_amount",
+      "price_currency",
+      "opens_at",
+      "closes_at",
+      "checked_at",
+      "source_url",
+      "is_verified",
+      "is_primary",
+      "notes",
+    ],
+    nonPrimaryRows,
+    `on conflict (edition_id, provider_code) do update set
+      provider_name = excluded.provider_name,
+      entry_url = excluded.entry_url,
+      entry_type = excluded.entry_type,
+      status = excluded.status,
+      price_amount = excluded.price_amount,
+      price_currency = excluded.price_currency,
+      opens_at = excluded.opens_at,
+      closes_at = excluded.closes_at,
+      checked_at = excluded.checked_at,
+      source_url = excluded.source_url,
+      is_verified = excluded.is_verified,
+      is_primary = excluded.is_primary,
+      notes = excluded.notes,
+      updated_at = now()`,
+    75,
+  );
+  if (primaryRows.length) {
+    const params: unknown[] = [];
+    const values = primaryRows.map(([editionId, providerCode]) => {
+      params.push(editionId, providerCode);
+      return `($${params.length - 1}::int, $${params.length}::text)`;
+    });
+    await sql.query(
+      `update edition_entry_options option
+       set is_primary = true, updated_at = now()
+       from (values ${values.join(", ")}) as target (edition_id, provider_code)
+       where option.edition_id = target.edition_id
+         and option.provider_code = target.provider_code`,
+      params,
+    );
+  }
+
+  await sql.query(
+    `delete from edition_entry_options fallback
+     where fallback.provider_code = 'official'
+       and not fallback.is_verified
+       and exists (
+         select 1
+         from edition_entry_options verified_official
+         where verified_official.edition_id = fallback.edition_id
+           and verified_official.entry_type = 'official'
+           and verified_official.is_verified
+       )`,
+  );
+}
+
+async function seed(): Promise<void> {
+  const sql = await getSql();
+  await ensureSchema(sql);
+  await ensureAthleticsTaxonomy(sql);
+
+  // Always upsert governing-body / catalogue clubs (append-only, no deletes).
+  // Safe on Neon + PGLite so new club catalogue rows appear without wiping results.
+  await upsertCatalogueClubs(sql);
+
+  // Always refresh race calendar fixtures (events + editions) without wiping results.
+  await upsertCatalogueFixtures(sql);
+  await ensureParkrunCalendar(sql);
+
+  if (await alreadySeeded(sql)) return;
+
+  // NEVER wipe a non-empty database. Full catalogue seed only runs on empty DBs.
+  // Imports (multi-year Run Norwich etc.) must survive deploys and cold starts.
+  const guard = await sql<{ athletes: number; results: number; clubs: number }>`
+    select
+      (select count(*)::int from athletes) as athletes,
+      (select count(*)::int from results) as results,
+      (select count(*)::int from clubs) as clubs`;
+  const g = guard[0];
+  if (g && (g.athletes > 0 || g.results > 0)) {
+    await sql`
+      insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+      on conflict (key) do update set value = excluded.value
+    `;
+    return;
+  }
+
+  // Empty DB only â€” full catalogue seed (clubs already upserted above).
+  await insertRows(
+    sql,
+    "events",
+    [
+      "source_id",
+      "slug",
+      "name",
+      "sport",
+      "country",
+      "county",
+      "city",
+      "area",
+      "surface",
+      "summary",
+      "description",
+      "organiser",
+      "website",
+      "featured",
+      "source_url",
+    ],
+    seriesList.map((series) => [
+      series.source_id ?? null,
+      series.slug,
+      series.name,
+      series.sport,
+      series.country,
+      series.county,
+      series.city,
+      series.area,
+      series.surface,
+      series.summary,
+      series.description,
+      series.organiser,
+      series.website,
+      series.featured ?? false,
+      series.source_url ?? null,
+    ]),
+    `on conflict (slug) do update set
+      source_id = excluded.source_id,
+      name = excluded.name,
+      sport = excluded.sport,
+      country = excluded.country,
+      county = excluded.county,
+      city = excluded.city,
+      area = excluded.area,
+      surface = excluded.surface,
+      summary = excluded.summary,
+      description = excluded.description,
+      organiser = excluded.organiser,
+      website = excluded.website,
+      featured = excluded.featured,
+      source_url = excluded.source_url`,
+  );
+
+  const clubRows = await sql<{ id: number; slug: string }>`select id, slug from clubs`;
+  const clubIds = new Map(clubRows.map((row) => [row.slug, row.id]));
+  await insertRows(
+    sql,
+    "athletes",
+    [
+      "source_id",
+      "slug",
+      "display_name",
+      "given_name",
+      "family_name",
+      "gender",
+      "club_id",
+      "second_club_id",
+      "source_club_name",
+      "source_second_club_name",
+      "city",
+      "county",
+      "country",
+      "bio",
+      "date_of_birth",
+      "nation",
+      "continent",
+      "commonwealth",
+      "race_entry_name",
+      "default_category",
+      "default_bib",
+      "preferred_distance",
+      "ea_number",
+      "athrecs_id",
+      "parent_athlete_id",
+      "avatar_url",
+      "source_url",
+    ],
+    athleteSeeds.map((athlete) => [
+      athlete.source_id ?? null,
+      athlete.slug,
+      athlete.display_name,
+      athlete.given_name ?? null,
+      athlete.family_name ?? null,
+      athlete.gender,
+      clubIds.get(athlete.club_slug) ?? null,
+      athlete.second_club_slug ? (clubIds.get(athlete.second_club_slug) ?? null) : null,
+      athlete.source_club_name ?? null,
+      athlete.source_second_club_name ?? null,
+      athlete.city,
+      athlete.county ?? "Norfolk",
+      athlete.country ?? "England",
+      athlete.bio,
+      athlete.date_of_birth ?? null,
+      athlete.nation ?? null,
+      athlete.continent ?? null,
+      athlete.commonwealth ?? null,
+      athlete.race_entry_name ?? null,
+      athlete.default_category ?? null,
+      athlete.default_bib ?? null,
+      athlete.preferred_distance ?? null,
+      athlete.ea_number ?? null,
+      athlete.athrecs_id ?? null,
+      null,
+      athlete.avatar_url ?? null,
+      athlete.source_url ?? null,
+    ]),
+    `on conflict (slug) do update set
+      source_id = excluded.source_id,
+      display_name = excluded.display_name,
+      given_name = excluded.given_name,
+      family_name = excluded.family_name,
+      gender = excluded.gender,
+      club_id = excluded.club_id,
+      second_club_id = excluded.second_club_id,
+      source_club_name = excluded.source_club_name,
+      source_second_club_name = excluded.source_second_club_name,
+      city = excluded.city,
+      county = excluded.county,
+      country = excluded.country,
+      bio = excluded.bio,
+      date_of_birth = excluded.date_of_birth,
+      nation = excluded.nation,
+      continent = excluded.continent,
+      commonwealth = excluded.commonwealth,
+      race_entry_name = excluded.race_entry_name,
+      default_category = excluded.default_category,
+      default_bib = excluded.default_bib,
+      preferred_distance = excluded.preferred_distance,
+      ea_number = excluded.ea_number,
+      athrecs_id = excluded.athrecs_id,
+      parent_athlete_id = excluded.parent_athlete_id,
+      avatar_url = excluded.avatar_url,
+      source_url = excluded.source_url`,
+    50,
+  );
+
+  await deleteRowsOutsideCatalogue(
+    sql,
+    "athletes",
+    athleteSeeds.map((athlete) => athlete.slug),
+  );
+  await deleteRowsOutsideCatalogue(
+    sql,
+    "events",
+    seriesList.map((series) => series.slug),
+  );
+  await deleteRowsOutsideCatalogue(
+    sql,
+    "clubs",
+    clubSeeds.map((club) => club.slug),
+  );
+
+  const [eventRows, athleteRows] = await Promise.all([
+    sql<{ id: number; slug: string }>`select id, slug from events`,
+    sql<{ id: number; slug: string }>`select id, slug from athletes`,
+  ]);
+  const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
+  const athleteIds = new Map(athleteRows.map((row) => [row.slug, row.id]));
+
+  const parentLinks = athleteSeeds.filter((athlete) => athlete.parent_athlete_slug);
+  for (const athlete of parentLinks) {
+    await sql.query("update athletes set parent_athlete_id = $1 where id = $2", [
+      athleteIds.get(athlete.parent_athlete_slug as string) ?? null,
+      athleteIds.get(athlete.slug),
+    ]);
+  }
+
+  const athleteClubRows: unknown[][] = [];
+  for (const athlete of athleteSeeds) {
+    const athleteId = athleteIds.get(athlete.slug);
+    const primaryClubId = clubIds.get(athlete.club_slug);
+    if (athleteId && primaryClubId) {
+      athleteClubRows.push([athleteId, primaryClubId, "primary", athlete.source_club_name ?? null]);
+    }
+    const secondaryClubId = athlete.second_club_slug
+      ? clubIds.get(athlete.second_club_slug)
+      : undefined;
+    if (athleteId && secondaryClubId && secondaryClubId !== primaryClubId) {
+      athleteClubRows.push([
+        athleteId,
+        secondaryClubId,
+        "secondary",
+        athlete.source_second_club_name ?? null,
+      ]);
+    }
+  }
+  await insertRows(
+    sql,
+    "athlete_clubs",
+    ["athlete_id", "club_id", "relationship", "source_name"],
+    athleteClubRows,
+    "on conflict (athlete_id, club_id, relationship) do update set source_name = excluded.source_name",
+  );
+
+  const distanceRows = seriesList.flatMap((series) =>
+    [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
+  );
+  await insertRows(
+    sql,
+    "event_distances",
+    ["event_id", "distance_code"],
+    distanceRows,
+    "on conflict (event_id, distance_code) do nothing",
+  );
+
+  await insertRows(
+    sql,
+    "editions",
+    [
+      "source_id",
+      "event_id",
+      "event_date",
+      "distance_code",
+      "distance_km",
+      "status",
+      "entry_url",
+      "source_url",
+      "start_time",
+      "notes",
+      "results_permission",
+      "results_hosting",
+      "results_official_url",
+      "results_permission_note",
+      "results_permission_at",
+      "results_permission_by",
+      "results_rights_requested_at",
+      "public_result_count",
+      "partner_result_count",
+      "athlete_result_count",
+      "results_access",
+    ],
+    editionSeeds.map((edition) => [
+      edition.source_id ?? null,
+      eventIds.get(edition.seriesSlug),
+      edition.date,
+      edition.distance,
+      edition.distanceKm,
+      edition.status,
+      edition.entryUrl ?? null,
+      edition.source,
+      edition.startTime ?? null,
+      edition.notes ?? null,
+      edition.resultsPermission ?? null,
+      edition.resultsHosting ?? null,
+      edition.resultsOfficialUrl ?? null,
+      edition.resultsPermissionNote ?? null,
+      edition.resultsPermissionAt ?? null,
+      edition.resultsPermissionBy ?? null,
+      (edition as { resultsRightsRequestedAt?: string | null }).resultsRightsRequestedAt ?? null,
+      edition.publicResultCount ?? null,
+      edition.partnerResultCount ?? null,
+      edition.athleteResultCount ?? null,
+      edition.resultsAccess ?? null,
+    ]),
+    `on conflict (event_id, event_date, distance_code) do update set
+      source_id = excluded.source_id,
+      distance_km = excluded.distance_km,
+      status = excluded.status,
+      entry_url = excluded.entry_url,
+      source_url = excluded.source_url,
+      start_time = excluded.start_time,
+      notes = excluded.notes,
+      results_permission = excluded.results_permission,
+      results_hosting = excluded.results_hosting,
+      results_official_url = excluded.results_official_url,
+      results_permission_note = excluded.results_permission_note,
+      results_permission_at = excluded.results_permission_at,
+      results_permission_by = excluded.results_permission_by,
+      results_rights_requested_at = excluded.results_rights_requested_at,
+      public_result_count = excluded.public_result_count,
+      partner_result_count = excluded.partner_result_count,
+      athlete_result_count = excluded.athlete_result_count,
+      results_access = excluded.results_access`,
+    75,
+  );
+
+  const editionRows = await sql<{
+    id: number;
+    event_slug: string;
+    event_date: string;
+    distance_code: string;
+  }>`select ed.id, e.slug as event_slug, ed.event_date::text as event_date, ed.distance_code
+      from editions ed join events e on e.id = ed.event_id`;
+  const editionIds = new Map(
+    editionRows.map((row) => [`${row.event_slug}|${row.event_date}|${row.distance_code}`, row.id]),
+  );
+
+  await insertRows(
+    sql,
+    "results",
+    [
+      "source_id",
+      "edition_id",
+      "athlete_id",
+      "status",
+      "finish_time_seconds",
+      "chip_time_seconds",
+      "gun_time_seconds",
+      "bib",
+      "overall_place",
+      "gender_place",
+      "category",
+      "category_place",
+      "age_on_day",
+      "age_grade_pct",
+      "open_rating",
+      "age_grade_rating",
+      "result_source",
+      "source_url",
+    ],
+    resultSeeds
+      .map((result) => [
+        result.source_id ?? null,
+        editionIds.get(`${result.eventSlug}|${result.date}|${result.distance}`),
+        athleteIds.get(result.athleteSlug),
+        result.status ?? "finished",
+        result.finishTimeSeconds ?? parseTimeToSeconds(result.time),
+        result.chipTimeSeconds ?? null,
+        result.gunTimeSeconds ?? null,
+        result.bib ?? null,
+        result.place,
+        result.genderPlace ?? null,
+        result.category ?? null,
+        result.categoryPlace ?? null,
+        result.ageOnDay ?? null,
+        result.ageGradePct ?? null,
+        result.openRating ?? null,
+        result.ageGradeRating ?? null,
+        result.resultSource ?? null,
+        result.source,
+      ])
+      .filter((row) => row[1] != null && row[2] != null),
+    `on conflict (edition_id, athlete_id) do update set
+      source_id = excluded.source_id,
+      status = excluded.status,
+      finish_time_seconds = excluded.finish_time_seconds,
+      chip_time_seconds = excluded.chip_time_seconds,
+      gun_time_seconds = excluded.gun_time_seconds,
+      bib = excluded.bib,
+      overall_place = excluded.overall_place,
+      gender_place = excluded.gender_place,
+      category = excluded.category,
+      category_place = excluded.category_place,
+      age_on_day = excluded.age_on_day,
+      age_grade_pct = excluded.age_grade_pct,
+      open_rating = excluded.open_rating,
+      age_grade_rating = excluded.age_grade_rating,
+      result_source = excluded.result_source,
+      source_url = excluded.source_url`,
+    100,
+  );
+
+  const counts = await sql<{
+    clubs: number;
+    athletes: number;
+    race_series: number;
+    editions: number;
+    results: number;
+  }>`select
+    (select count(*)::int from clubs) as clubs,
+    (select count(*)::int from athletes) as athletes,
+    (select count(*)::int from events) as race_series,
+    (select count(*)::int from editions) as editions,
+    (select count(*)::int from results) as results`;
+  const row = counts[0];
+  // Soft floor after seed: allow counts at or above the catalogue baseline.
+  if (
+    !row ||
+    row.clubs < EXPECTED.clubs ||
+    row.athletes < EXPECTED.athletes ||
+    row.race_series < EXPECTED.race_series ||
+    row.editions < EXPECTED.editions ||
+    row.results < EXPECTED.results
+  ) {
+    throw new Error(`Catalogue seed count mismatch: ${JSON.stringify(row)}`);
+  }
+
+  await sql`
+    insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
+    on conflict (key) do update set value = excluded.value
+  `;
+  if (!(await alreadySeeded(sql))) {
+    throw new Error("Catalogue seed verification failed after writing the seed marker");
+  }
+}
+
+export function ensureAthrecsSeeded(): Promise<void> {
+  globalSeedState.__athrecsFullSeedPromise__ ??= seed().catch((error) => {
+    globalSeedState.__athrecsFullSeedPromise__ = undefined;
+    throw error;
+  });
+  return globalSeedState.__athrecsFullSeedPromise__;
+}
