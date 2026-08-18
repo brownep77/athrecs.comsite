@@ -278,6 +278,13 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     toDate: "2027-07-04",
     toDistance: "Half",
   },
+  {
+    seriesSlug: "the-fishguard-5k-10k-half-marathon",
+    distance: "10K",
+    fromDate: "2027-06-05",
+    toDate: "2027-06-05",
+    toDistance: "Half",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -969,6 +976,22 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
       "https://zigzagrunning.eventrac.co.uk/e/cock-a-doodle-dawdle-11158",
     source:
       "https://zigzagrunning.eventrac.co.uk/e/cock-a-doodle-dawdle-11158",
+  },
+  "the-fishguard-5k-10k-half-marathon|2027-06-05|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: undefined,
+    entryUrl:
+      "https://www.activitywalesevents.com/events/run/fishguard-half-marathon",
+    source:
+      "https://www.activitywalesevents.com/events/run/fishguard-half-marathon",
+  },
+  "the-fishguard-5k-10k-half-marathon|2027-06-05|Half": {
+    startTime: undefined,
+    entryUrl:
+      "https://www.activitywalesevents.com/events/run/fishguard-half-marathon",
+    source:
+      "https://www.activitywalesevents.com/events/run/fishguard-half-marathon",
   },
   "the-wales-run|2027-07-03|10K": {
     date: "2027-07-04",
@@ -2435,6 +2458,21 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "Zig Zag Running",
     website:
       "https://zigzagrunning.eventrac.co.uk/e/cock-a-doodle-dawdle-11158",
+  },
+  "the-fishguard-5k-10k-half-marathon": {
+    name: "Fishguard Half Marathon",
+    city: "Fishguard",
+    county: "Pembrokeshire",
+    country: "Wales",
+    area: "Goodwick and Fishguard coast",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Fishguard Half Marathon — Goodwick and Fishguard, Pembrokeshire.",
+    description:
+      "A four-lap coastal half marathon around Goodwick and Fishguard with views across the Pembrokeshire coast.",
+    organiser: "Activity Wales Events",
+    website:
+      "https://www.activitywalesevents.com/events/run/fishguard-half-marathon",
   },
   "the-wales-run": {
     name: "The Wales Half Marathon",
@@ -11056,6 +11094,25 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       isPrimary: true,
       notes: "Half-marathon entry is £29–£36 depending on affiliation and medal choice.",
+    },
+  ],
+  "the-fishguard-5k-10k-half-marathon|2027-06-05|Half": [
+    {
+      providerCode: "official-activity-wales-events",
+      providerName: "Activity Wales Events official entry",
+      entryUrl:
+        "https://www.activitywalesevents.com/events/run/fishguard-half-marathon",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:35:00+01:00",
+      sourceUrl:
+        "https://www.activitywalesevents.com/events/run/fishguard-half-marathon",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists 5 June 2027 and £40 entry; the 2027 start time is not yet published.",
     },
   ],
   "the-wales-run|2027-07-04|Half": [
