@@ -4190,4 +4190,74 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
     },
   ],
+  "victoria-park-half-marathon-december|2026-12-12|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/victoria-park-5k-10k-half-marathon/12th-december-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 38,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/victoria-park-5k-10k-half-marathon/12th-december-2026",
+      isVerified: true,
+    },
+  ],
+  "atw-nottingham-holme-run|2026-12-20|Half": [
+    {
+      providerCode: "official",
+      providerName: "ATW official entry",
+      entryUrl: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-8892",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T20:30:00+01:00",
+      sourceUrl: "https://www.atwevents.co.uk/e/atw-nottingham-holme-run-8892",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl: "https://findarace.com/events/atw-nottingham-holme-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 43.46,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:30:00+01:00",
+      sourceUrl: "https://findarace.com/events/atw-nottingham-holme-run",
+      isVerified: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/atw-nottingham-holme-run/half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 39,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T20:30:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/atw-nottingham-holme-run/half-marathon",
+      isVerified: true,
+    },
+  ],
 };
