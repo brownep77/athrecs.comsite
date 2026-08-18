@@ -1614,6 +1614,50 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Registration is at Matfen Village Hall from 08:00 to 09:30 and the accurately measured, chip-timed road race starts at 10:00 before finishing near Matfen Hall.",
   },
+  "runthrough-trails-hamsterley-forest-10k-half-marathon-september|2026-09-20|10K": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/runthrough-trails-hamsterley-forest-10k-half-marathon-september-2026",
+    source:
+      "https://www.runthrough.co.uk/event/runthrough-trails-hamsterley-forest-10k-half-marathon-september-2026",
+    notes:
+      "The 10K starts at 09:30, after the 09:00 half marathon and 09:15 5K. The undulating, marked trail route uses forest tracks and winding paths through Hamsterley Forest.",
+  },
+  "sedgefield-serpentine-trail-race|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://englandathletics.sport80.com/public/wizard/e/30356",
+    source: "https://sedgefieldharriers.co.uk/sedgefield-serpentine/",
+    notes:
+      "The approximately 10K trail race starts and finishes at Hardwick Park Visitors Centre at 10:00, following a scenic route through the park and surrounding countryside towards Bishop Middleham.",
+  },
+  "shepley-10k|2026-09-20|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/shepley10k",
+    source: "https://www.entrycentral.com/shepley10k",
+    notes:
+      "The certified 10K road race starts at 11:00 from Shepley Cricket Club. Its anti-clockwise country-lane course has a quick opening and finish around a notably hilly middle section.",
+  },
+  "something-to-talk-about|2026-09-20|10K": {
+    startTime: "09:00",
+    entryUrl: "https://findarace.com/events/something-to-talk-about",
+    source: "https://findarace.com/events/something-to-talk-about",
+    notes:
+      "Flexible starts run from 09:00 to 10:30. Entrants complete one or more roughly 5.3K forest loops and choose their final distance on the day, with all runners required to finish by 16:00.",
+  },
+  "sport-in-action-10k|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://sportinaction.co.uk/sport-in-action/",
+    source: "https://sportinaction.co.uk/sport-in-action/",
+    notes:
+      "Registration runs from 08:40 to 09:40 inside Sheepmount Athletics Stadium, followed by the 09:50 briefing and 10:00 start. The certified course uses Bitts Park paths and quiet country roads.",
+  },
+  "stafford-10k|2026-09-20|10K": {
+    startTime: "10:30",
+    entryUrl: "https://www.active.com/stafford/running/distance-running/stafford-10k-2026",
+    source: "https://www.freedom-leisure.co.uk/stafford-10k/",
+    notes:
+      "The race starts at 10:30 on Victoria Road beside Victoria Park. The accurately measured town-centre road course finishes in the park, with chip timing and a medal for every finisher.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -4268,6 +4312,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Run Nation's accurately measured, chip-timed course loops through Matfen's country roads and finishes near Matfen Hall, with kilometre markers, a halfway water station and finisher medal.",
     organiser: "Run Nation",
     website: "https://runnation.co.uk/r/Run-Northumberland-Matfen-10k-2026",
+  },
+  "runthrough-trails-hamsterley-forest-10k-half-marathon-september": {
+    name: "Hamsterley Forest Trail Half Marathon, 10K & 5K",
+    city: "Redford",
+    county: "County Durham",
+    country: "England",
+    area: "Hamsterley Forest",
+    surface: "Trail",
+    distances: ["10K", "5K", "Half"],
+    summary:
+      "Hamsterley Forest Trail Races — marked woodland routes across undulating forest tracks and paths.",
+    description:
+      "RunThrough's 5K, 10K and half marathon explore Hamsterley Forest on chip-timed, marshalled trails, with a themed medal, free race photos and post-race refreshments.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/runthrough-trails-hamsterley-forest-10k-half-marathon-september-2026",
+  },
+  "sedgefield-serpentine-trail-race": {
+    name: "Sedgefield Serpentine 10K",
+    city: "Sedgefield",
+    county: "County Durham",
+    country: "England",
+    area: "Hardwick Park and the Bishop Middleham countryside",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Sedgefield Serpentine — a scenic memorial trail race through Hardwick Park and nearby countryside.",
+    description:
+      "Held in memory of Gail Bell, Sedgefield Harriers' approximately 10K trail route starts and finishes at Hardwick Park Visitors Centre and heads towards Bishop Middleham.",
+    organiser: "Sedgefield Harriers",
+    website: "https://sedgefieldharriers.co.uk/sedgefield-serpentine/",
+  },
+  "shepley-10k": {
+    name: "Shepley 10K",
+    city: "Shepley",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Shepley Cricket Club and surrounding country lanes",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Shepley 10K — a certified hilly road race on country lanes near Huddersfield.",
+    description:
+      "The Huddersfield Road Series race follows an accurately measured anti-clockwise route from Shepley Cricket Club, combining fast opening and finishing sections with a challenging middle climb.",
+    organiser: "Huddersfield Road Series",
+    website: "https://www.entrycentral.com/shepley10k",
+  },
+  "something-to-talk-about": {
+    name: "Something To Talk About",
+    city: "Bransgore",
+    county: "Hampshire",
+    country: "England",
+    area: "Avon Tyrrell Outdoor Activity Centre, New Forest",
+    surface: "Trail",
+    distances: ["5K", "10K", "10mi", "Half", "Marathon", "Ultra"],
+    summary:
+      "Something To Talk About — choose-your-distance trail loops through New Forest woodland and lakes.",
+    description:
+      "Long Player Running's inclusive event uses technical woodland loops with boardwalks and lakeside paths from Avon Tyrrell, supported by a staffed aid station, showers, changing facilities and on-site camping.",
+    organiser: "Long Player Running",
+    website: "https://findarace.com/events/something-to-talk-about",
+  },
+  "sport-in-action-10k": {
+    name: "Sport In Action 10K",
+    city: "Carlisle",
+    county: "Cumbria",
+    country: "England",
+    area: "Sheepmount Athletics Stadium and Bitts Park",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Sport In Action 10K — a certified Carlisle course across park paths and quiet country roads.",
+    description:
+      "Sport In Action's fully chip-timed race starts near Sheepmount Athletics Stadium and follows a generally flat or gently undulating measured route through Bitts Park and nearby country roads.",
+    organiser: "Sport In Action",
+    website: "https://sportinaction.co.uk/sport-in-action/",
+  },
+  "stafford-10k": {
+    name: "Freedom Leisure Stafford 10K",
+    city: "Stafford",
+    county: "Staffordshire",
+    country: "England",
+    area: "Victoria Park and Stafford town centre",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Stafford 10K — a community town-centre road race starting and finishing beside Victoria Park.",
+    description:
+      "Freedom Leisure's accurately measured, chip-timed 10K follows a traffic-managed route through Stafford, with a Victoria Park race village, community support and medals for finishers.",
+    organiser: "Freedom Leisure",
+    website: "https://www.freedom-leisure.co.uk/stafford-10k/",
   },
 };
 
@@ -9261,6 +9395,187 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC provides a secondary entry route and confirms the Matfen Village Hall race HQ; Run Nation is authoritative for price and the corrected 10:00 start.",
+    },
+  ],
+  "runthrough-trails-hamsterley-forest-10k-half-marathon-september|2026-09-20|10K": [
+    {
+      providerCode: "official-runthrough-hamsterley",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/runthrough-trails-hamsterley-forest-10k-half-marathon-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/runthrough-trails-hamsterley-forest-10k-half-marathon-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live official page lists 10K entry at £35 and confirms the 09:30 start at Hamsterley Forest Visitors Centre.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event entry",
+      entryUrl:
+        "https://runabc.co.uk/enter/runthrough-trails-hamsterley-forest-10k-half-marathon-september",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl:
+        "https://runabc.co.uk/runthrough-trails-hamsterley-forest-10k-half-marathon-september",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary booking route for the exact 20 September race; RunThrough is authoritative for the £35 price and 09:30 10K start.",
+    },
+  ],
+  "sedgefield-serpentine-trail-race|2026-09-20|10K": [
+    {
+      providerCode: "official-sedgefield-sport80",
+      providerName: "Sedgefield Harriers official entry",
+      entryUrl: "https://englandathletics.sport80.com/public/wizard/e/30356",
+      entryType: "official",
+      status: "open",
+      closesAt: "2026-09-11T00:00:00+01:00",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://sedgefieldharriers.co.uk/sedgefield-serpentine/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Sedgefield Harriers links directly to England Athletics' live Sport:80 entry wizard for the 20 September 2026 race.",
+    },
+    {
+      providerCode: "racecalendar",
+      providerName: "Race Calendar",
+      entryUrl: "https://racecalendar.co.uk/sep26/sedgefield-serpentine-2026",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://racecalendar.co.uk/sep26/sedgefield-serpentine-2026",
+      isVerified: true,
+      notes:
+        "Race Calendar lists the exact 2026 edition and links to both the official entry wizard and Sedgefield Harriers' race-information page.",
+    },
+  ],
+  "shepley-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-shepley-entrycentral",
+      providerName: "Shepley 10K official EntryCentral checkout",
+      entryUrl: "https://www.entrycentral.com/shepley10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 14,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-16T23:59:00+01:00",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/shepley10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists £14 affiliated or £16 standard advance entry, with entry closing at 23:59 on 16 September. On-the-day entry is £18 if places remain.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/shepley-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/shepley-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary route to the event; EntryCentral confirms the live prices, 200-place limit and corrected 11:00 start.",
+    },
+  ],
+  "something-to-talk-about|2026-09-20|10K": [
+    {
+      providerCode: "findarace-official-partner",
+      providerName: "Find a Race — official booking partner",
+      entryUrl: "https://findarace.com/events/something-to-talk-about",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42.13,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://findarace.com/events/something-to-talk-about",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Find a Race is Long Player Running's stated official booking partner and lists open entry at £42.13, with £2 UKA or TRA member discounts.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/something-to-talk-about",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/something-to-talk-about",
+      isVerified: true,
+      notes:
+        "runABC supplies another event-information route; the organiser's official Find a Race checkout is authoritative for current entry and flexible start times.",
+    },
+  ],
+  "sport-in-action-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-sport-in-action",
+      providerName: "Sport In Action official entry",
+      entryUrl: "https://sportinaction.co.uk/sport-in-action/",
+      entryType: "official",
+      status: "open",
+      closesAt: "2026-09-19T23:59:00+01:00",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://sportinaction.co.uk/sport-in-action/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live page confirms the certified, chip-timed 2026 race, 08:40-09:40 registration and 10:00 start.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event entry",
+      entryUrl: "https://runabc.co.uk/enter/sport-in-action-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 21,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/sport-in-action-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary booking route and lists the exact 20 September 2026 Carlisle race; current partner listings show entry from £21.",
+    },
+  ],
+  "stafford-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-stafford-active",
+      providerName: "Freedom Leisure official ACTIVE checkout",
+      entryUrl: "https://www.active.com/stafford/running/distance-running/stafford-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://www.freedom-leisure.co.uk/stafford-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The linked ACTIVE checkout lists £28 affiliated or £30 unaffiliated entry. Freedom Leisure confirms the 10:30 start and Victoria Park race base.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/stafford-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T00:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/stafford-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary route to the community race; Freedom Leisure and ACTIVE are authoritative for the corrected 10:30 start and live categories.",
     },
   ],
 };
