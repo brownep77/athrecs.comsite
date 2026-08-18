@@ -11,6 +11,13 @@ export type UkHalfMarathonEditionReplacement = {
 /** Date corrections that also need a safe in-place database migration. */
 export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement[] = [
   {
+    seriesSlug: "bupa-great-manchester-run",
+    distance: "10K",
+    fromDate: "2027-05-23",
+    toDate: "2027-05-23",
+    toDistance: "Half",
+  },
+  {
     seriesSlug: "run-sandringham-half-marathon",
     distance: "Half",
     fromDate: "2026-09-26",
@@ -837,6 +844,13 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
       "https://www.nice-work.org.uk/e/the-maypole-project-chislehurst-half-marathon-12399",
   },
   "bupa-great-manchester-run|2027-05-23|Half": {
+    startTime: "08:00",
+    entryUrl: "https://www.greatrun.org/events/great-manchester-run/",
+    source: "https://www.greatrun.org/events/great-manchester-run/",
+  },
+  "bupa-great-manchester-run|2027-05-23|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
     startTime: "08:00",
     entryUrl: "https://www.greatrun.org/events/great-manchester-run/",
     source: "https://www.greatrun.org/events/great-manchester-run/",
