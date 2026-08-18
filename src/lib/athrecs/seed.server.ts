@@ -12,7 +12,7 @@ import {
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-forty-four-v133";
+const SEED_VERSION = "athrecs-uk-half-marathon-entry-batch-forty-five-v134";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -175,6 +175,7 @@ async function ensureSchema(sql: Sql): Promise<void> {
       source_url text,
       is_verified boolean not null default false,
       is_primary boolean not null default false,
+      notes text,
       created_at timestamptz not null default now(),
       updated_at timestamptz not null default now(),
       unique (edition_id, provider_code)
@@ -308,6 +309,7 @@ async function ensureSchema(sql: Sql): Promise<void> {
     `create index if not exists edition_entry_options_edition_idx on edition_entry_options(edition_id)`,
     `create unique index if not exists edition_entry_options_one_primary_idx
       on edition_entry_options(edition_id) where is_primary`,
+    `alter table edition_entry_options add column if not exists notes text`,
     `insert into edition_entry_options (
       edition_id, provider_code, provider_name, entry_url, entry_type, status,
       checked_at, source_url, is_verified, is_primary
@@ -933,6 +935,7 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       option.sourceUrl ?? option.entryUrl,
       option.isVerified ?? false,
       index === primaryIndex,
+      option.notes ?? null,
     ]);
   });
 
@@ -949,7 +952,7 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       primaryEditionIds,
     );
   }
-  const nonPrimaryRows = rows.map((row) => [...row.slice(0, 13), false]);
+  const nonPrimaryRows = rows.map((row) => [...row.slice(0, 13), false, row[14]]);
   await insertRows(
     sql,
     "edition_entry_options",
@@ -968,6 +971,7 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       "source_url",
       "is_verified",
       "is_primary",
+      "notes",
     ],
     nonPrimaryRows,
     `on conflict (edition_id, provider_code) do update set
@@ -983,6 +987,7 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       source_url = excluded.source_url,
       is_verified = excluded.is_verified,
       is_primary = excluded.is_primary,
+      notes = excluded.notes,
       updated_at = now()`,
     75,
   );

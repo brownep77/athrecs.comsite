@@ -126,6 +126,8 @@ export function EntryOptions({
                   <span>{checkedLabel(option)}</span>
                 </div>
 
+                {option.notes ? <p className="text-xs leading-relaxed text-muted">{option.notes}</p> : null}
+
                 <Button asChild variant={option.is_primary ? "default" : "secondary"}>
                   <a href={option.entry_url} target="_blank" rel="noreferrer sponsored">
                     {unavailable
