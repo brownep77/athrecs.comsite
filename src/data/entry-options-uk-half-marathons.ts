@@ -233,6 +233,12 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     toDate: "2027-04-18",
     toDistance: "Half",
   },
+  {
+    seriesSlug: "tempting-at-tempsey",
+    distance: "Half",
+    fromDate: "2027-04-24",
+    toDate: "2027-04-25",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -767,6 +773,19 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
       "https://www.itsgrimupnorthrunning.co.uk/e/sir-titus-march-mayhem-11655",
     source:
       "https://www.itsgrimupnorthrunning.co.uk/e/sir-titus-march-mayhem-11655",
+  },
+  "tempting-at-tempsey|2027-04-24|Half": {
+    date: "2027-04-25",
+    startTime: "09:00",
+    entryUrl:
+      "https://www.itsgrimupnorthrunning.co.uk/e/bluebell-bash-at-temple-newsam-not-london-13715",
+    source:
+      "https://www.itsgrimupnorthrunning.co.uk/e/bluebell-bash-at-temple-newsam-not-london-13715",
+  },
+  "barry-buddon-fast-half-marathon|2027-04-25|Half": {
+    startTime: "11:00",
+    entryUrl: "https://racesignup.co.uk/barry-buddon-fast-half-marathon-2027",
+    source: "https://racesignup.co.uk/barry-buddon-fast-half-marathon-2027",
   },
 };
 
@@ -1876,6 +1895,35 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "It's Grim Up North Running",
     website:
       "https://www.itsgrimupnorthrunning.co.uk/e/sir-titus-march-mayhem-11655",
+  },
+  "tempting-at-tempsey": {
+    name: "Bluebell Bash at Temple Newsam — Not London",
+    city: "Leeds",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Temple Newsam House, parkland, gardens and woodland",
+    surface: "Trail",
+    distances: ["Half", "Marathon", "20M", "6.7M"],
+    summary: "Bluebell Bash at Temple Newsam — Leeds, West Yorkshire.",
+    description:
+      "An undulating two-loop trail half marathon through the open country, gardens and woodland of Temple Newsam, organised by It's Grim Up North Running.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/bluebell-bash-at-temple-newsam-not-london-13715",
+  },
+  "barry-buddon-fast-half-marathon": {
+    name: "Barry Buddon FAST Half Marathon 2027",
+    city: "Carnoustie",
+    county: "Angus",
+    country: "Scotland",
+    area: "Barry Buddon Training Camp and coastal roads",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Barry Buddon FAST Half Marathon — Carnoustie, Angus.",
+    description:
+      "A flat, single-lap half marathon entirely on private, traffic-free roads at Barry Buddon Training Camp, organised by MacTuff Events.",
+    organiser: "MacTuff Events",
+    website: "https://racesignup.co.uk/barry-buddon-fast-half-marathon-2027",
   },
 };
 
@@ -9698,6 +9746,210 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
         "https://www.letsdothis.com/gb/e/2027-abp-newport-marathon-festival-244911",
       isVerified: true,
       notes: "The displayed half-marathon entry range is £10–£47, including charity entry.",
+    },
+  ],
+  "phoenix-west-sussex-not-london-marathon-2027|2027-04-24|Half": [
+    {
+      providerCode: "official-phoenix-west-sussex",
+      providerName: "Phoenix West Sussex official entry",
+      entryUrl:
+        "https://www.evententry.co.uk/phoenix-west-sussex-not-the-london-marathon",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.phoenixrunning.co.uk/events/west-sussex-not-the-london-marathon",
+      isVerified: true,
+      isPrimary: true,
+      notes: "No-medal entry is £20 affiliated or £22 unattached; with-medal entry is £37.95–£39.95.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/phoenix-west-sussex-not-london-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/phoenix-west-sussex-not-london-marathon",
+      isVerified: true,
+      notes: "The displayed entry range is £22–£39.95; UK Athletics members save £2.",
+    },
+  ],
+  "phoenix-warwickshire-not-london-marathon-2027|2027-04-24|Half": [
+    {
+      providerCode: "official-phoenix-warwickshire",
+      providerName: "Phoenix Warwickshire official entry",
+      entryUrl:
+        "https://www.evententry.co.uk/phoenix-warwickshire-not-the-london-marathon",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.evententry.co.uk/phoenix-warwickshire-not-the-london-marathon",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Half-marathon entry is £28 affiliated or £30 unattached.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/phoenix-warwickshire-not-the-london-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/phoenix-warwickshire-not-the-london-marathon",
+      isVerified: true,
+      notes: "UK Athletics-affiliated runners save £2 on the half marathon.",
+    },
+  ],
+  "phoenix-manchester-not-london-or-manchester-marathon-2027|2027-04-24|Half": [
+    {
+      providerCode: "official-phoenix-manchester",
+      providerName: "Phoenix Manchester official entry",
+      entryUrl:
+        "https://www.evententry.co.uk/phoenix-manchester-not-the-london-or-manchester-marathon-run",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.phoenixrunning.co.uk/events/manchester-not-the-london-or-manchester-marathon-run",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Entry is £40 affiliated or £42 unattached.",
+    },
+  ],
+  "lee-valley-velo-park-april-2027|2027-04-24|Half": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/lee-valley-velo-park-april-2027",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/lee-valley-velo-park-april-2027",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/lee-valley-velo-park-april-2027-63575?occurrenceId=21111177089",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/lee-valley-velo-park-april-2027-63575?occurrenceId=21111177089",
+      isVerified: true,
+    },
+  ],
+  "blackpool-festival-of-running-2027|2027-04-25|Half": [
+    {
+      providerCode: "official-fylde-coast-runners",
+      providerName: "Blackpool Festival official entry",
+      entryUrl:
+        "https://www.cognitoforms.com/FyldeCoastRunners/BlackpoolFestivalOfRunning2027",
+      entryType: "official",
+      status: "open",
+      priceAmount: 33,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl: "https://www.runblackpoolfestival.com/registration.html",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Half-marathon entry is £33 for UK Athletics club members or £35 standard.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/blackpool-festival-of-running",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/blackpool-festival-of-running",
+      isVerified: true,
+      notes: "UK Athletics and Association of Running Clubs members save £2.",
+    },
+  ],
+  "tempting-at-tempsey|2027-04-25|Half": [
+    {
+      providerCode: "official-grim-up-north",
+      providerName: "It's Grim Up North official entry",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/bluebell-bash-at-temple-newsam-not-london-13715",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/bluebell-bash-at-temple-newsam-not-london-13715",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl:
+        "https://findarace.com/events/bluebell-bash-at-temple-newsam-not-london",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/bluebell-bash-at-temple-newsam-not-london",
+      isVerified: true,
+      notes: "UK Athletics-affiliated runners save £2 on the half marathon.",
+    },
+  ],
+  "barry-buddon-fast-half-marathon|2027-04-25|Half": [
+    {
+      providerCode: "official-mactuff",
+      providerName: "MacTuff official entry",
+      entryUrl: "https://racesignup.co.uk/barry-buddon-fast-half-marathon-2027",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl: "https://racesignup.co.uk/barry-buddon-fast-half-marathon-2027",
+      isVerified: true,
+      isPrimary: true,
+      notes: "The displayed entry range is £29.50–£31.50.",
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/barry-buddon-fast-half-marathon-2027-193711",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/barry-buddon-fast-half-marathon-2027-193711",
+      isVerified: true,
+      notes: "The displayed entry range is £29.50–£31.50.",
     },
   ],
 };
