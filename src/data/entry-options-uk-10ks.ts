@@ -1658,6 +1658,78 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "The race starts at 10:30 on Victoria Road beside Victoria Park. The accurately measured town-centre road course finishes in the park, with chip timing and a medal for every finisher.",
   },
+  "steps-for-change-childrens-challenge-5k-or-10k|2026-09-20|10K": {
+    startTime: "09:45",
+    entryUrl: "https://www.ablechild.org.uk/sfc/",
+    source: "https://www.ablechild.org.uk/sfc/",
+    notes:
+      "Registration opens at 09:00 and the accessible riverside challenge begins at 09:45. Participants can walk, run, roll or use a stroller on the flat Thames-side course, choosing either 5K or 10K.",
+  },
+  "steps-for-change-childrens-challenge-5k-or-10k|2026-09-20|5K": {
+    startTime: "09:45",
+    entryUrl: "https://www.ablechild.org.uk/sfc/",
+    source: "https://www.ablechild.org.uk/sfc/",
+  },
+  "tetsworth-10k|2026-09-20|10K": {
+    startTime: "10:30",
+    entryUrl: "https://www.entrycentral.com/Tetsworth2026",
+    source: "https://www.entrycentral.com/Tetsworth2026",
+    notes:
+      "Bib collection runs from 09:00 to 10:00 at Tetsworth Sports and Social Club before the 10:30 start. The chip-timed course follows undulating rural roads around the Oxfordshire village.",
+  },
+  "the-intersport-run-reigate-half-marathon|2026-09-20|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-reigate-5k-10k-half-marathon-kids-race-september-2026",
+    source: "https://www.runseries.co.uk/run-reigate-2026/",
+    notes:
+      "The closed-road 10K starts at 09:00 from Priory Park, followed by the half marathon at 09:15 and 5K at 09:20. The event includes chip timing, an event village and support for The Brain Tumour Charity.",
+  },
+  "the-intersport-run-reigate-half-marathon|2026-09-20|5K": {
+    startTime: "09:20",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-reigate-5k-10k-half-marathon-kids-race-september-2026",
+    source: "https://www.runseries.co.uk/run-reigate-2026/",
+  },
+  "the-intersport-run-reigate-half-marathon|2026-09-20|Half": {
+    startTime: "09:15",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-reigate-5k-10k-half-marathon-kids-race-september-2026",
+    source: "https://www.runseries.co.uk/run-reigate-2026/",
+  },
+  "toms-cairn-10k-trail-race|2026-09-20|10K": {
+    startTime: "14:30",
+    entryUrl: "https://www.sientries.co.uk/event.php?event_id=18091",
+    source: "https://www.sientries.co.uk/list.php?event_id=18091",
+    notes:
+      "The 10K and 5K trail races start at 14:30 beside Birse and Feughside Church. The 10.1K route climbs approximately 239 metres on rural trails around Finzean and raises funds for the local school and nursery.",
+  },
+  "toms-cairn-10k-trail-race|2026-09-20|5K": {
+    startTime: "14:30",
+    entryUrl: "https://www.sientries.co.uk/event.php?event_id=18091",
+    source: "https://www.sientries.co.uk/list.php?event_id=18091",
+  },
+  "torbay-half-marathon|2026-09-20|10K": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/torbay-half-marathon-10k-255736/race-selection?eventId=255736&occurrenceId=21111163423&preferred=true&utm_organiser_id=178932",
+    source: "https://www.torbayhalfmarathon.co.uk/event-information-10k",
+    notes:
+      "The 10K starts at 09:30 from Paignton Green, 15 minutes after the half marathon. The traffic-managed coastal course is supported by a race village, water stations and finisher rewards.",
+  },
+  "torbay-half-marathon|2026-09-20|Half": {
+    startTime: "09:15",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/torbay-half-marathon-10k-255736/race-selection?eventId=255736&occurrenceId=21111163423&preferred=true&utm_organiser_id=178932",
+    source: "https://www.torbayhalfmarathon.co.uk/",
+  },
+  "watermore-10k|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.watermoreptfa.co.uk/events",
+    source: "https://www.watermoreptfa.co.uk/events",
+    notes:
+      "Registration opens at 09:00 and the Watermore RunFest 10K and 5K start at 10:00. The community course mixes local roads and paths before returning to Watermore Primary School for refreshments and the Rainbow Run.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -4402,6 +4474,92 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Freedom Leisure's accurately measured, chip-timed 10K follows a traffic-managed route through Stafford, with a Victoria Park race village, community support and medals for finishers.",
     organiser: "Freedom Leisure",
     website: "https://www.freedom-leisure.co.uk/stafford-10k/",
+  },
+  "steps-for-change-childrens-challenge-5k-or-10k": {
+    name: "Steps for Change Children's Challenge 5K or 10K",
+    city: "Kingston upon Thames",
+    county: "Greater London",
+    country: "England",
+    area: "Barge Walk and the Thames riverside",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary:
+      "Steps for Change — an accessible family 5K or 10K challenge beside the Thames in Kingston.",
+    description:
+      "Able Child's inclusive fundraiser welcomes walkers, runners, wheelchair users and families with strollers to a flat riverside course from Kingston Bridge, raising support for children with movement disorders.",
+    organiser: "Able Child",
+    website: "https://www.ablechild.org.uk/sfc/",
+  },
+  "tetsworth-10k": {
+    name: "Tetsworth 10K",
+    city: "Tetsworth",
+    county: "Oxfordshire",
+    country: "England",
+    area: "Tetsworth Sports and Social Club and surrounding lanes",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Tetsworth 10K — a chip-timed rural road race through an Oxfordshire village.",
+    description:
+      "The community race starts at Tetsworth Sports and Social Club and follows an undulating country-road route, with a 200-runner limit, changing facilities and a junior race programme.",
+    organiser: "Tetsworth 10K",
+    website: "https://www.entrycentral.com/Tetsworth2026",
+  },
+  "the-intersport-run-reigate-half-marathon": {
+    name: "Run Reigate Half Marathon, 10K & 5K",
+    city: "Reigate",
+    county: "Surrey",
+    country: "England",
+    area: "Priory Park and Reigate's closed roads",
+    surface: "Road",
+    distances: ["10K", "5K", "Half"],
+    summary: "Run Reigate — closed-road half marathon, 10K and 5K races from Priory Park.",
+    description:
+      "Run Series and RunThrough stage a traffic-free programme from Reigate's Priory Park, combining chip-timed road races, a children's event, race village and charity partnership with The Brain Tumour Charity.",
+    organiser: "Run Series / RunThrough",
+    website: "https://www.runseries.co.uk/run-reigate-2026/",
+  },
+  "toms-cairn-10k-trail-race": {
+    name: "Tom's Cairn 10K & 5K Trail Races",
+    city: "Finzean",
+    county: "Aberdeenshire",
+    country: "Scotland",
+    area: "Birse and Feughside Church and the Finzean trails",
+    surface: "Trail",
+    distances: ["10K", "5K"],
+    summary:
+      "Tom's Cairn — scenic 10K and 5K trail races across the hills and tracks around Finzean.",
+    description:
+      "The local school fundraiser offers a 10.1K trail challenge with about 239 metres of ascent and a shorter 5K route, both starting beside Birse and Feughside Church.",
+    organiser: "Finzean School Parent Council",
+    website: "https://www.sientries.co.uk/list.php?event_id=18091",
+  },
+  "torbay-half-marathon": {
+    name: "Torbay Half Marathon & 10K",
+    city: "Paignton",
+    county: "Devon",
+    country: "England",
+    area: "Paignton Green and the English Riviera coast",
+    surface: "Road",
+    distances: ["10K", "Half"],
+    summary: "Torbay Half Marathon & 10K — traffic-managed coastal road races from Paignton Green.",
+    description:
+      "The English Riviera event combines half marathon and 10K races along Torbay's seafront, supported by a Paignton Green race village, water stations and local charity partners.",
+    organiser: "Torbay Half Marathon",
+    website: "https://www.torbayhalfmarathon.co.uk/",
+  },
+  "watermore-10k": {
+    name: "Watermore RunFest 10K & 5K",
+    city: "Frampton Cotterell",
+    county: "South Gloucestershire",
+    country: "England",
+    area: "Watermore Primary School and Frampton Cotterell",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary: "Watermore RunFest — community 10K and 5K races from Watermore Primary School.",
+    description:
+      "Watermore PTFA's fundraiser follows local roads and paths around Frampton Cotterell, with a school-based event village, food, family activities and a post-race Rainbow Run.",
+    organiser: "Watermore Primary School PTFA",
+    website: "https://www.watermoreptfa.co.uk/events",
   },
 };
 
@@ -9576,6 +9734,186 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC provides a secondary route to the community race; Freedom Leisure and ACTIVE are authoritative for the corrected 10:30 start and live categories.",
+    },
+  ],
+  "steps-for-change-childrens-challenge-5k-or-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-able-child",
+      providerName: "Able Child official registration",
+      entryUrl: "https://www.ablechild.org.uk/sfc/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 10,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://www.ablechild.org.uk/sfc/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's page lists £10 registration per participating child or adult; supervising adults are free. Participants are encouraged to raise £200 for Able Child.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/steps-for-change-childrens-challenge-5k-or-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 10,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/steps-for-change-childrens-challenge-5k-or-10k",
+      isVerified: true,
+      notes:
+        "runABC confirms the exact Kingston event, KT1 4AA start and corrected 09:45 start time; Able Child remains the authoritative registration route.",
+    },
+  ],
+  "tetsworth-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-tetsworth-entrycentral",
+      providerName: "Tetsworth 10K official EntryCentral checkout",
+      entryUrl: "https://www.entrycentral.com/Tetsworth2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-17T23:59:00+01:00",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/Tetsworth2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists £18 affiliated or £20 unattached entry, a 200-runner limit and a 10:30 start. Online entry closes at 23:59 on 17 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/tetsworth-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/tetsworth-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary route to the exact race; EntryCentral is authoritative for current prices, closing time and the corrected 10:30 start.",
+    },
+  ],
+  "the-intersport-run-reigate-half-marathon|2026-09-20|10K": [
+    {
+      providerCode: "official-runthrough-reigate",
+      providerName: "Run Reigate official RunThrough entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-reigate-5k-10k-half-marathon-kids-race-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 37,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://www.runseries.co.uk/run-reigate-2026/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official booking page lists 10K entry at £37 and confirms the 09:00 start from Priory Park on a fully closed-road course.",
+    },
+    {
+      providerCode: "run-for-charity",
+      providerName: "Run for Charity",
+      entryUrl: "https://runforcharity.com/event/run-reigate-10k",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 37,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://runforcharity.com/event/run-reigate-10k",
+      isVerified: true,
+      notes:
+        "Run for Charity offers entry to the exact 2026 10K with good availability, letting runners choose a charity alongside the direct official route.",
+    },
+  ],
+  "toms-cairn-10k-trail-race|2026-09-20|10K": [
+    {
+      providerCode: "official-toms-cairn-sientries",
+      providerName: "Tom's Cairn official SIEntries checkout",
+      entryUrl: "https://www.sientries.co.uk/event.php?event_id=18091",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://www.sientries.co.uk/list.php?event_id=18091",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "SIEntries lists open entry for the exact 20 September 2026 10K and 5K trail-race programme in Finzean.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/toms-cairn-10k-trail-race",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/toms-cairn-10k-trail-race",
+      isVerified: true,
+      notes:
+        "runABC provides a second route to the exact race and confirms the AB31 6PB venue and corrected 14:30 start; SIEntries is the direct checkout.",
+    },
+  ],
+  "torbay-half-marathon|2026-09-20|10K": [
+    {
+      providerCode: "official-torbay-lets-do-this",
+      providerName: "Torbay official Let's Do This checkout",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/torbay-half-marathon-10k-255736/race-selection?eventId=255736&occurrenceId=21111163423&preferred=true&utm_organiser_id=178932",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://www.torbayhalfmarathon.co.uk/event-information-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser links to this live race-selection checkout. The 10K is listed at £29 and starts at 09:30 from Paignton Green.",
+    },
+    {
+      providerCode: "torbay-nhs-charity",
+      providerName: "Torbay and South Devon NHS Charity entry",
+      entryUrl: "https://charity.torbayandsouthdevon.nhs.uk/events/torbay-half-marathon-and-10k/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://charity.torbayandsouthdevon.nhs.uk/events/torbay-half-marathon-and-10k/",
+      isVerified: true,
+      notes:
+        "The NHS charity offers subsidised 10K entry at £20 in return for a £100 fundraising pledge, as an alternative to standard official entry.",
+    },
+  ],
+  "watermore-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-watermore-ptfa",
+      providerName: "Watermore PTFA official entry",
+      entryUrl: "https://www.watermoreptfa.co.uk/events",
+      entryType: "official",
+      status: "open",
+      closesAt: "2026-08-31T23:59:00+01:00",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://www.watermoreptfa.co.uk/events",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official RunFest page links to registration and states that final entries close on 31 August; the 10K and new 5K start at 10:00.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/watermore-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T02:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/watermore-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary route and confirms the BS36 2LE venue and corrected 10:00 start; the PTFA page is authoritative for registration deadlines.",
     },
   ],
 };
