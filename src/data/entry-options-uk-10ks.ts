@@ -157,6 +157,18 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-19",
     toDate: "2026-09-20",
   },
+  {
+    seriesSlug: "dounby-10k",
+    distance: "10K",
+    fromDate: "2026-09-19",
+    toDate: "2026-09-20",
+  },
+  {
+    seriesSlug: "longworth-10k",
+    distance: "10K",
+    fromDate: "2026-09-19",
+    toDate: "2026-09-20",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -1290,6 +1302,74 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://beckbusters10k.co.uk/",
     notes:
       "Corrected from 19 September. The 2K fun run starts at 10:00 before the 11:00 10K; a medal is an optional add-on for entries made by 15 August.",
+  },
+  "dounby-10k|2026-09-19|10K": {
+    date: "2026-09-20",
+    status: "TBC",
+    startTime: undefined,
+    entryUrl: "https://www.orkneyarc.org.uk/events/event/dounby-10k/",
+    source: "https://www.orkneyarc.org.uk/events/",
+    notes:
+      "Corrected from 19 September. Orkney Athletic and Running Club lists the Dounby Pharmacy 10K for Sunday 20 September; the start time and entry window are not yet published, so confirm them with the organiser.",
+  },
+  "greenwich-park-5k-10k-juniors-september|2026-09-19|10K": {
+    startTime: "09:35",
+    entryUrl: "https://www.runthrough.co.uk/event/greenwich-park-5k-10k-juniors-september-2026",
+    source: "https://www.runthrough.co.uk/event/greenwich-park-5k-10k-juniors-september-2026",
+    notes:
+      "The 5K starts at 09:30, the 10K at 09:35 and the junior race at 11:00. The 10K follows three marked laps through Greenwich Park.",
+  },
+  "greenwich-park-5k-10k-juniors-september|2026-09-19|5K": {
+    startTime: "09:30",
+    entryUrl: "https://www.runthrough.co.uk/event/greenwich-park-5k-10k-juniors-september-2026",
+    source: "https://www.runthrough.co.uk/event/greenwich-park-5k-10k-juniors-september-2026",
+  },
+  "kinneil-estate-5k-10k-half-marathon|2026-09-19|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.letsdothis.com/gb/checkout/ticket?eventId=268051&occurrenceId=21111176607&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=156202&utm_source=website",
+    source: "https://www.upandrunningevents.co.uk/events",
+    notes:
+      "The organiser lists a 10:00-14:00 event window. Individual wave times are not yet published, so runners should confirm the final 10K start in their race pack.",
+  },
+  "kinneil-estate-5k-10k-half-marathon|2026-09-19|5K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.letsdothis.com/gb/checkout/ticket?eventId=268051&occurrenceId=21111176607&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=156202&utm_source=website",
+    source: "https://www.upandrunningevents.co.uk/events",
+  },
+  "kinneil-estate-5k-10k-half-marathon|2026-09-19|Half": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.letsdothis.com/gb/checkout/ticket?eventId=268051&occurrenceId=21111176607&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=156202&utm_source=website",
+    source: "https://www.upandrunningevents.co.uk/events",
+  },
+  "longworth-10k|2026-09-19|10K": {
+    date: "2026-09-20",
+    startTime: "11:00",
+    entryUrl: "https://www.evententry.co.uk/longworth-10k-2026",
+    source: "https://www.longworthprimaryschool.uk/longworth-10k",
+    notes:
+      "Corrected from 19 September. Registration and bag drop are at Longworth Village Hall; the multi-terrain race starts at 11:00 and finishes outside Longworth Manor.",
+  },
+  "mctf-run-the-track-5k-10k-watford|2026-09-19|10K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/UcEFFX",
+    source: "https://www.mactuffevents.com/rtt",
+    notes:
+      "Seeded track heats group 10K runners by expected sub-42, sub-50 or sub-70-minute finish time. The organiser says its afternoon programmes begin at 14:00 or 14:30; confirm the assigned heat in final instructions.",
+  },
+  "mctf-run-the-track-5k-10k-watford|2026-09-19|5K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/UcEFFX",
+    source: "https://www.mactuffevents.com/rtt",
+  },
+  "pride-run-10k|2026-09-19|10K": {
+    startTime: "11:00",
+    entryUrl: "https://racesignup.co.uk/pride-run-10k-2026",
+    source: "https://www.priderun10k.org/10krace",
+    notes:
+      "The not-for-profit race follows three flat laps of Victoria Park. Race-pack collection opens at 10:00 and the 10K starts at 11:00.",
   },
 };
 
@@ -3507,6 +3587,91 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Friends of Bishop Monkton Primary School organise a road, footpath and trail race through Littlethorpe and beside the River Ure and Ripon Canal, plus a junior fun run.",
     organiser: "Friends of Bishop Monkton Primary School",
     website: "https://beckbusters10k.co.uk/",
+  },
+  "dounby-10k": {
+    name: "Dounby Pharmacy 10K",
+    city: "Dounby",
+    county: "Orkney Islands",
+    country: "Scotland",
+    area: "Dounby Community School",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Dounby Pharmacy 10K — a community road race in Orkney's West Mainland.",
+    description:
+      "Orkney Athletic and Running Club's annual Dounby race follows a comparatively flat road course from the community school, with final 2026 instructions published closer to race day.",
+    organiser: "Orkney Athletic and Running Club",
+    website: "https://www.orkneyarc.org.uk/events/event/dounby-10k/",
+  },
+  "greenwich-park-5k-10k-juniors-september": {
+    name: "Greenwich Park 5K, 10K & Junior Race",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Greenwich Park Bandstand",
+    surface: "Road",
+    distances: ["10K", "5K", "Junior"],
+    summary: "Greenwich Park 5K, 10K & Juniors — scenic, chip-timed laps in historic parkland.",
+    description:
+      "RunThrough Events' marked course combines tree-lined park paths, open views, gentle climbs and descents, with a medal, chip timing, race photos and post-race goodies.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/greenwich-park-5k-10k-juniors-september-2026",
+  },
+  "kinneil-estate-5k-10k-half-marathon": {
+    name: "Kinneil Estate 5K, 10K & Half Marathon",
+    city: "Bo'ness",
+    county: "Falkirk",
+    country: "Scotland",
+    area: "Kinneil Estate",
+    surface: "Trail",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Kinneil Estate — trail races through historic woodland and rolling parkland near Bo'ness.",
+    description:
+      "Up and Running Events' inclusive, chip-timed races use marked off-road routes through Kinneil Estate, with a finisher medal, race photos, hydration and post-race goodies.",
+    organiser: "Up and Running Events",
+    website: "https://www.upandrunningevents.co.uk/events",
+  },
+  "longworth-10k": {
+    name: "Longworth 10K",
+    city: "Longworth",
+    county: "Oxfordshire",
+    country: "England",
+    area: "Longworth Village and the Thames Path",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary: "Longworth 10K — a friendly village race on fields, tracks and the Thames Path.",
+    description:
+      "Longworth Runners' annual community race has been held since 1998. Its varied course includes uneven grass, gravel, farm tracks and bridleways before finishing outside Longworth Manor.",
+    organiser: "Longworth Runners",
+    website: "https://www.longworthprimaryschool.uk/longworth-10k",
+  },
+  "mctf-run-the-track-5k-10k-watford": {
+    name: "MCTF Run The Track Watford 5K & 10K",
+    city: "Watford",
+    county: "Hertfordshire",
+    country: "England",
+    area: "Woodside Stadium Athletics Track",
+    surface: "Track",
+    distances: ["10K", "5K"],
+    summary: "MCTF Run The Track Watford — small, pace-seeded 5K and 10K track races.",
+    description:
+      "MacTuff's traffic-free track races use limited fields and seeded heats, with split-lap chip timing for every lap and a bespoke series medal for finishers.",
+    organiser: "MacTuff Events",
+    website: "https://www.mactuffevents.com/rtt",
+  },
+  "pride-run-10k": {
+    name: "Pride Run 10K",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Victoria Park, Cadogan Terrace",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Pride Run 10K — an inclusive, not-for-profit three-lap race in Victoria Park.",
+    description:
+      "London Frontrunners volunteers organise this welcoming annual event for runners of all backgrounds, raising funds for LGBT+ charities on a flat park course.",
+    organiser: "Pride Run 10K and London Frontrunners",
+    website: "https://www.priderun10k.org/",
   },
 };
 
@@ -7612,6 +7777,168 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC lists the event, but its indexed date is one day early; use the official checkout for the corrected Sunday 20 September date.",
+    },
+  ],
+  "dounby-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-oarc-dounby",
+      providerName: "Orkney Athletic and Running Club",
+      entryUrl: "https://www.orkneyarc.org.uk/events/event/dounby-10k/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.orkneyarc.org.uk/events/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official OARC calendar confirms Sunday 20 September. OARC normally opens entries three to six weeks before its events, but the Dounby start time, price and entry form are not yet published.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/dounby-10k",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/dounby-10k",
+      isVerified: true,
+      notes:
+        "runABC lists the venue and road course but shows the date one day early; use the OARC calendar for the corrected Sunday date and final entry instructions.",
+    },
+  ],
+  "greenwich-park-5k-10k-juniors-september|2026-09-19|10K": [
+    {
+      providerCode: "official-runthrough",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/greenwich-park-5k-10k-juniors-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/greenwich-park-5k-10k-juniors-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes: "RunThrough lists direct 10K entry at £30 for the 09:35 start.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/runthrough-greenwich-park-5k-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://findarace.com/events/runthrough-greenwich-park-5k-10k",
+      isVerified: true,
+      notes: "Find a Race is an official booking partner and lists Quick Book 10K entry at £32.",
+    },
+  ],
+  "kinneil-estate-5k-10k-half-marathon|2026-09-19|10K": [
+    {
+      providerCode: "official-up-and-running-events",
+      providerName: "Up and Running Events official listing",
+      entryUrl: "https://www.upandrunningevents.co.uk/events",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.upandrunningevents.co.uk/events",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser confirms the Kinneil Estate races on 19 September and directs entrants to its booking partner.",
+    },
+    {
+      providerCode: "letsdothis",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/checkout/ticket?eventId=268051&occurrenceId=21111176607&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=156202&utm_source=website",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.upandrunningevents.co.uk/events",
+      isVerified: true,
+      notes:
+        "This is the exact checkout linked by Up and Running Events. The indexed event price range is £22.90-£25.90 across the 5K, 10K and half marathon; confirm the selected 10K price at checkout.",
+    },
+  ],
+  "longworth-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-longworth-evententry",
+      providerName: "Longworth Runners official checkout",
+      entryUrl: "https://www.evententry.co.uk/longworth-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.evententry.co.uk/longworth-10k-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The exact 2026 checkout lists adult entry at £20 and junior entry at £15, with a race limit of 200.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/longworth-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://runabc.co.uk/longworth-10k",
+      isVerified: true,
+      notes:
+        "runABC provides another route to the event but indexes it one day early; the organiser and checkout confirm Sunday 20 September.",
+    },
+  ],
+  "mctf-run-the-track-5k-10k-watford|2026-09-19|10K": [
+    {
+      providerCode: "official-mctf-bookitzone",
+      providerName: "MacTuff official BookitZone checkout",
+      entryUrl: "https://bookitzone.com/dean_ogrady_1/UcEFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://www.mactuffevents.com/rtt",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "MacTuff advertises early 10K places from £23. BookitZone offers affiliated and unaffiliated sub-42, sub-50 and sub-70-minute heats, so the final price and start depend on the chosen option.",
+    },
+  ],
+  "pride-run-10k|2026-09-19|10K": [
+    {
+      providerCode: "official-pride-racesignup",
+      providerName: "Pride Run official entry",
+      entryUrl: "https://racesignup.co.uk/pride-run-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-18T22:00:00+01:00",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://racesignup.co.uk/pride-run-10k-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RaceSignup lists £30 UKA-affiliated or £32 standard entry, plus a 5% booking fee, closing at 22:00 on 18 September.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race",
+      entryUrl: "https://findarace.com/events/pride-run-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T23:59:00+01:00",
+      sourceUrl: "https://findarace.com/events/pride-run-10k",
+      isVerified: true,
+      notes:
+        "Find a Race is an official booking partner, offering the 2026 10K at £32 with a £2 UKA discount.",
     },
   ],
 };
