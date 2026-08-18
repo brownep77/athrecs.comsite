@@ -2012,6 +2012,84 @@ export const verifiedUkSeries: Series[] = [
     featured: false,
     source_url: "https://www.hermesrunning.com/magna-carta/",
   },
+  {
+    slug: "pink-moon-ladies-trail-half-marathon-2027",
+    name: "Pink Moon Ladies Trail Half Marathon 2027",
+    sport: "Running",
+    country: "England",
+    county: "Derbyshire",
+    city: "Chesterfield",
+    area: "Rock Lane, Sutton Scarsdale, Five Pits Trail and Sutton Springs Wood",
+    surface: "Trail",
+    distances: ["Half"],
+    summary: "Pink Moon Ladies Trail Half Marathon — Sutton Scarsdale, Derbyshire.",
+    description:
+      "An evening women-only trail half marathon from Sutton Scarsdale through Sutton Springs Wood and along the Five Pits Trail, organised by First Light Adventure.",
+    organiser: "First Light Adventure",
+    website:
+      "https://www.sientries.co.uk/event/pink-moon-ladies-trail-half-marathon-2027",
+    featured: false,
+    source_url:
+      "https://www.sientries.co.uk/event/pink-moon-ladies-trail-half-marathon-2027",
+  },
+  {
+    slug: "yorkshire-weekend-saunter-series-in-leeds-2027",
+    name: "Yorkshire Weekend Saunter Series in Leeds 2027",
+    sport: "Running",
+    country: "England",
+    county: "West Yorkshire",
+    city: "Leeds",
+    area: "Granary Wharf and the Leeds & Liverpool Canal through Kirkstall",
+    surface: "Trail",
+    distances: ["Half", "10K", "5K"],
+    summary: "Yorkshire Weekend Saunter Series — Granary Wharf, Leeds.",
+    description:
+      "A flat, traffic-free canal-towpath event from Granary Wharf through Kirkstall, organised by It's Grim Up North Running.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-leeds-15598",
+    featured: false,
+    source_url:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-leeds-15598",
+  },
+  {
+    slug: "derby-derwent-trail-run-2027",
+    name: "Derby Derwent Trail Run 2027",
+    sport: "Running",
+    country: "England",
+    county: "Derbyshire",
+    city: "Elvaston",
+    area: "Elvaston Castle Country Park and the River Derwent",
+    surface: "Trail",
+    distances: ["Half", "15K", "10K"],
+    summary: "Derby Derwent Trail Run — Elvaston Castle Country Park.",
+    description:
+      "A riverside trail race from Elvaston Castle Country Park beside the River Derwent, organised by UK Running Events.",
+    organiser: "UK Running Events",
+    website:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/derby-derwent-trail-run-2027",
+    featured: false,
+    source_url:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/derby-derwent-trail-run-2027",
+  },
+  {
+    slug: "abp-newport-marathon-festival-2027",
+    name: "ABP Newport Marathon Festival 2027",
+    sport: "Running",
+    country: "Wales",
+    county: "Newport",
+    city: "Newport",
+    area: "Usk Way, Newport city centre and the Gwent Levels",
+    surface: "Road",
+    distances: ["Half", "Marathon", "10K", "1M"],
+    summary: "ABP Newport Half Marathon — Newport, Wales.",
+    description:
+      "A fast, flat road half marathon from Newport's riverfront through the city and surrounding Gwent Levels, organised by Run 4 Wales.",
+    organiser: "Run 4 Wales",
+    website: "https://newportwalesmarathon.co.uk/register-half-marathon/",
+    featured: false,
+    source_url: "https://newportwalesmarathon.co.uk/register-half-marathon/",
+  },
 ];
 
 export const verifiedUkEditions: Edition[] = [
@@ -3239,5 +3317,51 @@ export const verifiedUkEditions: Edition[] = [
     entryUrl: "https://www.hermesrunning.com/magna-carta/",
     startTime: "09:00",
     source: "https://www.hermesrunning.com/magna-carta/",
+  },
+  {
+    seriesSlug: "pink-moon-ladies-trail-half-marathon-2027",
+    date: "2027-04-17",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.sientries.co.uk/event/pink-moon-ladies-trail-half-marathon-2027",
+    startTime: "17:00",
+    source:
+      "https://www.sientries.co.uk/event/pink-moon-ladies-trail-half-marathon-2027",
+  },
+  {
+    seriesSlug: "yorkshire-weekend-saunter-series-in-leeds-2027",
+    date: "2027-04-17",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-leeds-15598",
+    startTime: "08:30",
+    source:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-series-in-leeds-15598",
+  },
+  {
+    seriesSlug: "derby-derwent-trail-run-2027",
+    date: "2027-04-18",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/derby-derwent-trail-run-2027",
+    startTime: "08:30",
+    source:
+      "https://www.ukrunningevents.co.uk/events/trail-runs/derby-derwent-trail-run-2027",
+  },
+  {
+    seriesSlug: "abp-newport-marathon-festival-2027",
+    date: "2027-04-18",
+    distance: "Half",
+    distanceKm: 21.1,
+    status: "Open",
+    entryUrl: "https://newportwalesmarathon.co.uk/register-half-marathon/",
+    startTime: "09:00",
+    source: "https://newportwalesmarathon.co.uk/register-half-marathon/",
   },
 ];
