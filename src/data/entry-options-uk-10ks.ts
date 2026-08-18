@@ -818,6 +818,15 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "General entry for the 2026 10K is sold out. The organiser's remaining charity places are for the half marathon only.",
   },
+  "bacchus-marathon|2026-09-12|Half": {
+    date: "2026-09-13",
+    status: "ClosingSoon",
+    startTime: "09:30",
+    entryUrl: "https://www.run-bacchus.com/",
+    source: "https://www.run-bacchus.com/",
+    notes:
+      "General half-marathon entry is sold out; the organiser lists only a small number of charity places.",
+  },
   "beast-race-banchory|2026-09-12|10K": {
     status: "ClosingSoon",
     startTime: "09:00",
