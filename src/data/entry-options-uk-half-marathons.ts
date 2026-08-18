@@ -186,6 +186,20 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     toDate: "2026-12-05",
     toDistance: "Half",
   },
+  {
+    seriesSlug: "dorney-lake-half-marathon-10k-5k-december",
+    distance: "10K",
+    fromDate: "2026-12-12",
+    toDate: "2026-12-12",
+    toDistance: "Half",
+  },
+  {
+    seriesSlug: "run-aintree-5k-10-half-marathon-december",
+    distance: "10K",
+    fromDate: "2026-12-13",
+    toDate: "2026-12-13",
+    toDistance: "Half",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -597,6 +611,33 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
   "darlington-half-marathon-december|2026-12-06|Half": {
     startTime: "09:00",
     source: "https://www.runthrough.co.uk/event/darlington-half-marathon-december-2026",
+  },
+  "dorney-lake-half-marathon-10k-5k-december|2026-12-12|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:10",
+    source:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-december-2026",
+  },
+  "mince-pi-run|2026-12-13|Half": {
+    startTime: "09:00",
+    source: "https://www.entrycentral.com/mince-pi-run",
+  },
+  "richmond-park-half-december|2026-12-13|Half": {
+    startTime: "09:30",
+    source:
+      "https://www.runthrough.co.uk/event/richmond-park-half-marathon-december-2026",
+  },
+  "run-aintree-5k-10-half-marathon-december|2026-12-13|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "10:00",
+    source:
+      "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-december-2026",
+  },
+  "twas-the-run-before-christmas|2026-12-13|Half": {
+    startTime: "09:00",
+    source: "https://zigzagrunning.eventrac.co.uk/e/twas-the-run-before-christmas-11101",
   },
 };
 
@@ -1437,6 +1478,74 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
       "A flat, fully road-closed half marathon from Darlington town centre onto rural County Durham roads and back to a High Street finish, organised by RunThrough Events.",
     organiser: "RunThrough Events",
     website: "https://www.darlingtonhalfmarathon.com/",
+  },
+  "dorney-lake-half-marathon-10k-5k-december": {
+    name: "Run Dorney Lake Half Marathon, 10K & 5K — December",
+    city: "Windsor",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Dorney Lake",
+    surface: "Road",
+    summary: "Run Dorney Lake Half Marathon — Windsor, Buckinghamshire.",
+    description:
+      "A flat, four-lap road half marathon beside the London 2012 rowing lake, organised by Dorney Lake Events and RunThrough Events.",
+    organiser: "Dorney Lake Events / RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-december-2026",
+  },
+  "mince-pi-run": {
+    name: "Mince Pi Run — Races of 2 Decimal Places",
+    city: "Guildford",
+    county: "Surrey",
+    country: "England",
+    area: "Shalford Park",
+    surface: "Trail",
+    summary: "Mince Pi Run Half Marathon — Shalford Park, Guildford.",
+    description:
+      "A flexible-distance, mostly flat off-road event on a waterside 3.14-mile loop at Shalford Park, organised by Wacky Events.",
+    organiser: "Wacky Events",
+    website: "https://www.entrycentral.com/mince-pi-run",
+  },
+  "richmond-park-half-december": {
+    name: "Richmond Park Half Marathon — December",
+    city: "Richmond",
+    county: "Greater London",
+    country: "England",
+    area: "Sheen Gate and Richmond Park",
+    surface: "Mixed",
+    summary: "Richmond Park Half Marathon — Richmond, London.",
+    description:
+      "A four-lap half marathon on the roads and paths of Richmond Park, starting near Sheen Gate and organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/richmond-park-half-marathon-december-2026",
+  },
+  "run-aintree-5k-10-half-marathon-december": {
+    name: "Run Aintree Half Marathon, 10K & 5K — December",
+    city: "Liverpool",
+    county: "Merseyside",
+    country: "England",
+    area: "Aintree Racecourse",
+    surface: "Road",
+    summary: "Run Aintree Half Marathon — Aintree Racecourse, Liverpool.",
+    description:
+      "A flat, fast half marathon on the roads and paths of Aintree Racecourse, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-december-2026",
+  },
+  "twas-the-run-before-christmas": {
+    name: "'Twas The Run Before Christmas",
+    city: "Brandon",
+    county: "Suffolk",
+    country: "England",
+    area: "High Lodge, Thetford Forest",
+    surface: "Trail",
+    summary: "'Twas The Run Before Christmas Half Marathon — Brandon, Suffolk.",
+    description:
+      "A festive, flexible-distance trail event on a 5.3 km loop through Thetford Forest, organised by Zig Zag Running.",
+    organiser: "Zig Zag Running",
+    website: "https://zigzagrunning.eventrac.co.uk/e/twas-the-run-before-christmas-11101",
   },
 };
 
@@ -3706,6 +3815,210 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       checkedAt: "2026-08-18T17:30:00+01:00",
       sourceUrl:
         "https://www.letsdothis.com/gb/e/darlington-half-marathon-december-2026-268015",
+      isVerified: true,
+    },
+  ],
+  "dorney-lake-half-marathon-10k-5k-december|2026-12-12|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/run-dorney-5k-10k-half-marathon/12th-december-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36.04,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/run-dorney-5k-10k-half-marathon/12th-december-2026",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/run-dorney-lake-half-marathon-10k-5k-december-2026-192345",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/run-dorney-lake-half-marathon-10k-5k-december-2026-192345",
+      isVerified: true,
+    },
+  ],
+  "mince-pi-run|2026-12-13|Half": [
+    {
+      providerCode: "official",
+      providerName: "EntryCentral (official entry)",
+      entryUrl: "https://www.entrycentral.com/mince-pi-run",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23.5,
+      priceCurrency: "GBP",
+      closesAt: "2026-12-10T23:59:00Z",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/mince-pi-run",
+      isVerified: true,
+      isPrimary: true,
+    },
+  ],
+  "richmond-park-half-december|2026-12-13|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/richmond-park-half-marathon-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 38,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/richmond-park-half-marathon-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/runthrough-richmond-park-half-marathon/13th-december-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/runthrough-richmond-park-half-marathon/13th-december-2026",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/runthrough-richmond-park-half-marathon-december-2026-256544?occurrenceId=21111172069",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 38,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/runthrough-richmond-park-half-marathon-december-2026-256544?occurrenceId=21111172069",
+      isVerified: true,
+    },
+  ],
+  "run-aintree-5k-10-half-marathon-december|2026-12-13|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/run-aintree-5k-10k-half-marathon/13th-december-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/run-aintree-5k-10k-half-marathon/13th-december-2026",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/run-aintree-half-marathon-10k-5k-december-2026-189610",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/run-aintree-half-marathon-10k-5k-december-2026-189610",
+      isVerified: true,
+    },
+  ],
+  "twas-the-run-before-christmas|2026-12-13|Half": [
+    {
+      providerCode: "official",
+      providerName: "Eventrac (official Zig Zag Running entry)",
+      entryUrl:
+        "https://zigzagrunning.eventrac.co.uk/e/twas-the-run-before-christmas-11101",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://zigzagrunning.eventrac.co.uk/e/twas-the-run-before-christmas-11101",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/twas-the-run-before-christmas-5k-10k-half-marathon-full-marathon-ultra-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 31,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/twas-the-run-before-christmas-5k-10k-half-marathon-full-marathon-ultra-marathon",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/twas-the-run-before-christmas-2026-263692",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/twas-the-run-before-christmas-2026-263692",
+      isVerified: true,
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors",
+      entryUrl: "https://www.timeoutdoors.com/events/twas-the-run-before-christmas-1",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-18T18:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/twas-the-run-before-christmas-1",
       isVerified: true,
     },
   ],
