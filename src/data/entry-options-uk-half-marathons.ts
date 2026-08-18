@@ -165,6 +165,27 @@ export const ukHalfMarathonEditionReplacements: UkHalfMarathonEditionReplacement
     toDate: "2026-11-22",
     toDistance: "Half",
   },
+  {
+    seriesSlug: "crystal-palce-5k-10k-half-marathon-juniors-december",
+    distance: "10K",
+    fromDate: "2026-12-06",
+    toDate: "2026-11-29",
+    toDistance: "Half",
+  },
+  {
+    seriesSlug: "run-heaton-5k-10k-half-marathon-november",
+    distance: "10K",
+    fromDate: "2026-11-29",
+    toDate: "2026-11-29",
+    toDistance: "Half",
+  },
+  {
+    seriesSlug: "carsington-water-10k-half-marathon-december",
+    distance: "10K",
+    fromDate: "2026-12-05",
+    toDate: "2026-12-05",
+    toDistance: "Half",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -533,6 +554,49 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     startTime: "09:15",
     source:
       "https://www.ukrunningevents.co.uk/events/trail-runs/sussex-downs-trail-run-2026",
+  },
+  "run-heaton-5k-10k-half-marathon-november|2026-11-29|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:30",
+    source:
+      "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-november-2026",
+  },
+  "crystal-palce-5k-10k-half-marathon-juniors-december|2026-12-06|10K": {
+    date: "2026-11-29",
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "10:00",
+    source:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2026",
+  },
+  "crystal-palce-5k-10k-half-marathon-juniors-december|2026-12-06|5K": {
+    date: "2026-11-29",
+    startTime: "10:00",
+    source:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2026",
+  },
+  "crystal-palce-5k-10k-half-marathon-juniors-december|2026-12-06|Half": {
+    date: "2026-11-29",
+    startTime: "10:00",
+    source:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2026",
+  },
+  "battersea-park-half-marathon-december|2026-12-05|Half": {
+    startTime: "10:30",
+    source:
+      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-december-2026",
+  },
+  "carsington-water-10k-half-marathon-december|2026-12-05|10K": {
+    distance: "Half",
+    distanceKm: 21.1,
+    startTime: "09:30",
+    source:
+      "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2026",
+  },
+  "darlington-half-marathon-december|2026-12-06|Half": {
+    startTime: "09:00",
+    source: "https://www.runthrough.co.uk/event/darlington-half-marathon-december-2026",
   },
 };
 
@@ -1304,6 +1368,75 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "UK Running Events (Run Rebel)",
     website:
       "https://www.ukrunningevents.co.uk/events/trail-runs/sussex-downs-trail-run-2026",
+  },
+  "run-heaton-5k-10k-half-marathon-november": {
+    name: "Run Heaton Park 5K, 10K & Half Marathon",
+    city: "Manchester",
+    county: "Greater Manchester",
+    country: "England",
+    area: "Heaton Park",
+    surface: "Road",
+    summary: "Run Heaton Park Half Marathon — Manchester, Greater Manchester.",
+    description:
+      "A hilly, multi-lap half marathon on paved paths within Heaton Park, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-november-2026",
+  },
+  "crystal-palce-5k-10k-half-marathon-juniors-december": {
+    name: "Crystal Palace Park 5K, 10K & Half Marathon",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Crystal Palace Park",
+    surface: "Road",
+    summary: "Crystal Palace Park Half Marathon — London.",
+    description:
+      "An undulating half marathon on paved paths in Crystal Palace Park, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2026",
+  },
+  "battersea-park-half-marathon-december": {
+    name: "Battersea Park 5K, 10K & Half Marathon — December",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Battersea Park",
+    surface: "Road",
+    summary: "Battersea Park Half Marathon — London.",
+    description:
+      "A flat, multi-lap half marathon on paved paths in Battersea Park, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-december-2026",
+  },
+  "carsington-water-10k-half-marathon-december": {
+    name: "Carsington Water Trail Half Marathon & 10K — December",
+    city: "Ashbourne",
+    county: "Derbyshire",
+    country: "England",
+    area: "Carsington Water",
+    surface: "Trail",
+    summary: "Carsington Water Trail Half Marathon — Derbyshire.",
+    description:
+      "An undulating trail half marathon around Carsington Water, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2026",
+  },
+  "darlington-half-marathon-december": {
+    name: "Darlington Half Marathon",
+    city: "Darlington",
+    county: "County Durham",
+    country: "England",
+    area: "High Row and surrounding rural roads",
+    surface: "Road",
+    summary: "Darlington Half Marathon — County Durham.",
+    description:
+      "A flat, fully road-closed half marathon from Darlington town centre onto rural County Durham roads and back to a High Street finish, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website: "https://www.darlingtonhalfmarathon.com/",
   },
 };
 
@@ -3376,6 +3509,203 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       closesAt: "2026-11-28T00:00:00Z",
       checkedAt: "2026-08-18T16:00:00+01:00",
       sourceUrl: "https://worldsmarathons.com/marathon/sussex-downs-trail",
+      isVerified: true,
+    },
+  ],
+  "run-heaton-5k-10k-half-marathon-november|2026-11-29|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-november-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-november-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/run-heaton-park-5k-10k-half-marathon-junior-race/29th-november-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/run-heaton-park-5k-10k-half-marathon-junior-race/29th-november-2026",
+      isVerified: true,
+    },
+  ],
+  "crystal-palce-5k-10k-half-marathon-juniors-december|2026-11-29|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/runthrough-crystal-palace-5k-10k-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 37,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/runthrough-crystal-palace-5k-10k-half-marathon",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/runthrough-crystal-palace-park-5k-10k-and-half-marathon-november-2026-256569",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/runthrough-crystal-palace-park-5k-10k-and-half-marathon-november-2026-256569",
+      isVerified: true,
+    },
+  ],
+  "battersea-park-half-marathon-december|2026-12-05|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/battersea-park-half-marathon-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/battersea-park-half-marathon-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/battersea-park-half-marathon/5th-december-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/battersea-park-half-marathon/5th-december-2026",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/battersea-park-5k-10k-half-marathon-december-2026-259036",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/battersea-park-5k-10k-half-marathon-december-2026-259036",
+      isVerified: true,
+    },
+  ],
+  "carsington-water-10k-half-marathon-december|2026-12-05|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/carsington-water-10k-half-marathon/5th-december-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/carsington-water-10k-half-marathon/5th-december-2026",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/runthrough-carsington-water-half-marathon-10k-december-2026-256551",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/runthrough-carsington-water-half-marathon-10k-december-2026-256551",
+      isVerified: true,
+    },
+  ],
+  "darlington-half-marathon-december|2026-12-06|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/darlington-half-marathon-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/darlington-half-marathon-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/darlington-half-marathon-december-2026-268015",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T17:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/darlington-half-marathon-december-2026-268015",
       isVerified: true,
     },
   ],
