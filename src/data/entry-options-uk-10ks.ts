@@ -78,6 +78,13 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-12",
     toDate: "2026-09-13",
   },
+  {
+    seriesSlug: "bacchus-marathon",
+    distance: "Half",
+    fromDate: "2026-09-12",
+    toDate: "2026-09-13",
+    toDistance: "10K",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
