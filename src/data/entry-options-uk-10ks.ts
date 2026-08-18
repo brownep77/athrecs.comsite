@@ -187,6 +187,24 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-19",
     toDate: "2026-09-20",
   },
+  {
+    seriesSlug: "battersea-park-10k-half-marathon-september",
+    distance: "10K",
+    fromDate: "2026-09-25",
+    toDate: "2026-09-26",
+  },
+  {
+    seriesSlug: "battersea-park-10k-half-marathon-september",
+    distance: "Half",
+    fromDate: "2026-09-25",
+    toDate: "2026-09-26",
+  },
+  {
+    seriesSlug: "great-highnam-court-run",
+    distance: "10K",
+    fromDate: "2026-09-25",
+    toDate: "2027-03-14",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -1729,6 +1747,62 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://www.watermoreptfa.co.uk/events",
     notes:
       "Registration opens at 09:00 and the Watermore RunFest 10K and 5K start at 10:00. The community course mixes local roads and paths before returning to Watermore Primary School for refreshments and the Rainbow Run.",
+  },
+  "womens-10k-edinburgh|2026-09-20|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.womens10k.co.uk/edinburgh/",
+    source: "https://www.womens10k.co.uk/edinburgh/event-information",
+    notes:
+      "The 10K starts at 11:00 on Lawnmarket at the top of the Royal Mile. Its traffic-free city route passes Edinburgh landmarks before a grandstand finish inside Scottish Gas Murrayfield Stadium.",
+  },
+  "woodbury-common-trail-10k|2026-09-20|10K": {
+    status: "TBC",
+    startTime: "10:00",
+    entryUrl: "https://www.budleighlions.com/10ktrailrun",
+    source: "https://www.budleighlions.com/10ktrailrun",
+    notes:
+      "Registration opens at 08:30 and the single-loop trail race starts at 10:00. The organiser confirms the 20 September event and £20 price, but says online booking will become available nearer race day.",
+  },
+  "yorkshire-run-for-wateraid|2026-09-20|10K": {
+    startTime: "10:00",
+    entryUrl: "https://racebest.com/races/5q6rw",
+    source: "https://racebest.com/races/5q6rw",
+    notes:
+      "The UKA-licensed 5K and 10K start at 10:00 from Swinsty Moor Car Park. The 10K makes two mainly flat mixed-terrain laps of Swinsty Reservoir and raises funds for WaterAid.",
+  },
+  "run-mediacity-5k-10k-september|2026-09-24|10K": {
+    startTime: "19:00",
+    entryUrl: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-september-2026",
+    notes:
+      "The 5K and 10K start together at 19:00 from MediaCity Piazza. The fast 2.5K circuit crosses Millennium Bridge and passes the Imperial War Museum and the BBC and ITV studios.",
+  },
+  "run-mediacity-5k-10k-september|2026-09-24|5K": {
+    startTime: "19:00",
+    entryUrl: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-september-2026",
+  },
+  "battersea-park-10k-half-marathon-september|2026-09-25|10K": {
+    date: "2026-09-26",
+    startTime: "11:15",
+    entryUrl: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-september-2026",
+    notes:
+      "The official event is on Saturday 26 September, not Friday 25 September. The half marathon starts at 10:30, the 5K at 11:11 and the flat, lapped 10K at 11:15 from the park bandstand.",
+  },
+  "battersea-park-10k-half-marathon-september|2026-09-25|Half": {
+    date: "2026-09-26",
+    startTime: "10:30",
+    entryUrl: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-september-2026",
+  },
+  "great-highnam-court-run|2026-09-25|10K": {
+    date: "2027-03-14",
+    startTime: "11:00",
+    entryUrl: "https://www.highnamcourtrun.co.uk/event-details/10k",
+    source: "https://www.highnamcourtrun.co.uk/Runnersinfo",
+    notes:
+      "The organiser's live site has replaced the superseded September 2026 listing with Sunday 14 March 2027. The two-lap mixed-terrain 10K starts at approximately 11:00 from Church Field at Highnam Court Cricket Ground.",
   },
 };
 
@@ -4560,6 +4634,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Watermore PTFA's fundraiser follows local roads and paths around Frampton Cotterell, with a school-based event village, food, family activities and a post-race Rainbow Run.",
     organiser: "Watermore Primary School PTFA",
     website: "https://www.watermoreptfa.co.uk/events",
+  },
+  "womens-10k-edinburgh": {
+    name: "Women's 10K Edinburgh",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "Lawnmarket, Royal Mile to Scottish Gas Murrayfield Stadium",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Women's 10K Edinburgh — a traffic-free city-centre race from the Royal Mile to Murrayfield.",
+    description:
+      "GSi Events' inclusive women-only 10K passes Edinburgh Castle, Princes Street Gardens, Holyrood Park and the Grassmarket before finishing inside Scottish Gas Murrayfield Stadium.",
+    organiser: "GSi Events",
+    website: "https://www.womens10k.co.uk/edinburgh/",
+  },
+  "woodbury-common-trail-10k": {
+    name: "Budleigh Lions Woodbury Common Trail 10K",
+    city: "Exmouth",
+    county: "Devon",
+    country: "England",
+    area: "Withycombe Raleigh Common and Woodbury Common",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Woodbury Common Trail 10K — a single-loop East Devon trail race with climbs and stream crossings.",
+    description:
+      "Budleigh Salterton Lions' fundraiser starts at the Withycombe Raleigh football pitches and follows varied paths across Woodbury Common, with sea views, muddy sections and a medal for every finisher.",
+    organiser: "Budleigh Salterton Lions Club",
+    website: "https://www.budleighlions.com/10ktrailrun",
+  },
+  "yorkshire-run-for-wateraid": {
+    name: "Tilbury Douglas Yorkshire Run for WaterAid",
+    city: "Fewston",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Swinsty Reservoir",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary:
+      "Yorkshire Run for WaterAid — licensed 5K and 10K reservoir races in the Washburn Valley.",
+    description:
+      "WaterAid in Yorkshire's UKA-licensed fundraiser uses mainly flat surfaced paths, short road sections and dirt track around Swinsty Reservoir, with the 10K completing two laps.",
+    organiser: "WaterAid in Yorkshire",
+    website: "https://racebest.com/races/5q6rw",
+  },
+  "run-mediacity-5k-10k-september": {
+    name: "Run MediaCity 5K & 10K September",
+    city: "Salford",
+    county: "Greater Manchester",
+    country: "England",
+    area: "MediaCity Piazza and Salford Quays",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary:
+      "Run MediaCity — fast evening 5K and 10K circuits around Salford's waterfront media district.",
+    description:
+      "RunThrough's chip-timed races use a 2.5K circuit around MediaCity, crossing Millennium Bridge and passing the Imperial War Museum, BBC and ITV studios before a Piazza finish.",
+    organiser: "RunThrough",
+    website: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-september-2026",
+  },
+  "battersea-park-10k-half-marathon-september": {
+    name: "Battersea Park Half Marathon, 10K & 5K September",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Battersea Park Bandstand",
+    surface: "Road",
+    distances: ["10K", "5K", "Half"],
+    summary:
+      "Battersea Park September races — flat, fast 5K, 10K and half marathon laps from the bandstand.",
+    description:
+      "RunThrough's traffic-free park programme offers chip timing, free race photos and marked, spectator-friendly laps around the lake and tree-lined paths of Battersea Park.",
+    organiser: "RunThrough",
+    website: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-september-2026",
+  },
+  "great-highnam-court-run": {
+    name: "The Great Highnam Court Run",
+    city: "Highnam",
+    county: "Gloucestershire",
+    country: "England",
+    area: "Highnam Court Cricket Ground and estate",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary:
+      "The Great Highnam Court Run — 5K, 10K and canicross races through private estate grounds.",
+    description:
+      "Highnam Court Cricket Club's community event follows grass, field, garden and woodland paths around the historic estate, with one lap for 5K and two laps for 10K.",
+    organiser: "Highnam Court Cricket Club",
+    website: "https://www.highnamcourtrun.co.uk/",
   },
 };
 
@@ -9914,6 +10078,192 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC provides a secondary route and confirms the BS36 2LE venue and corrected 10:00 start; the PTFA page is authoritative for registration deadlines.",
+    },
+  ],
+  "womens-10k-edinburgh|2026-09-20|10K": [
+    {
+      providerCode: "official-womens-10k-edinburgh",
+      providerName: "Women's 10K official entry",
+      entryUrl: "https://www.womens10k.co.uk/edinburgh/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30.25,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-17T23:59:00+01:00",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.womens10k.co.uk/edinburgh/event-information",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official site lists standard entry from £30.25 and the 11:00 start. Advance entry is advertised through 17 September, subject to capacity.",
+    },
+    {
+      providerCode: "scottish-spca-charity",
+      providerName: "Scottish SPCA charity entry",
+      entryUrl: "https://www.scottishspca.org/events/edinburgh-womens-10k/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 10,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.scottishspca.org/events/edinburgh-womens-10k/",
+      isVerified: true,
+      notes:
+        "The Scottish SPCA offers a discounted £10 charity place with a £150 minimum fundraising target and a charity running top.",
+    },
+  ],
+  "woodbury-common-trail-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-budleigh-lions",
+      providerName: "Budleigh Lions official race page",
+      entryUrl: "https://www.budleighlions.com/10ktrailrun",
+      entryType: "official",
+      status: "unknown",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.budleighlions.com/10ktrailrun",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser confirms the £20 race and 10:00 start but currently says booking will be available nearer the date; no live checkout is linked yet.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/woodbury-common-trail-10k",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/woodbury-common-trail-10k",
+      isVerified: true,
+      notes:
+        "runABC confirms the exact 20 September edition, EX8 5EE venue and 10:00 start; use the organiser page to watch for booking opening.",
+    },
+  ],
+  "yorkshire-run-for-wateraid|2026-09-20|10K": [
+    {
+      providerCode: "official-yorkshire-wateraid-racebest",
+      providerName: "Yorkshire Run official RaceBest checkout",
+      entryUrl: "https://racebest.com/races/5q6rw",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://racebest.com/races/5q6rw",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RaceBest lists £20 standard 10K entry, £17 car-share or England Athletics categories, a 300-place limit and UKA licence 31100.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/yorkshire-run-for-wateraid",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/yorkshire-run-for-wateraid",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route; RaceBest is authoritative for live capacity, prices and the corrected 10:00 start.",
+    },
+  ],
+  "run-mediacity-5k-10k-september|2026-09-24|10K": [
+    {
+      providerCode: "official-runthrough-mediacity",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/run-media-city-5k-10k-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live official page lists both 10K and 5K entry at £30 and confirms the corrected 19:00 evening start.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event entry",
+      entryUrl: "https://runabc.co.uk/run-mediacity-5k-10k-september",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/run-mediacity-5k-10k-september",
+      isVerified: true,
+      notes:
+        "runABC supplies a secondary booking route for the exact 24 September race and confirms the M50 2EQ Piazza start.",
+    },
+  ],
+  "battersea-park-10k-half-marathon-september|2026-09-26|10K": [
+    {
+      providerCode: "official-runthrough-battersea-september",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official page lists 10K entry at £34 and confirms Saturday 26 September with an 11:15 start from Battersea Park Bandstand.",
+    },
+    {
+      providerCode: "maudsley-charity",
+      providerName: "Maudsley Charity 10K entry",
+      entryUrl: "https://maudsleycharity.org/events/battersea-park/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 17.5,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-17T23:59:00+01:00",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://maudsleycharity.org/events/battersea-park/",
+      isVerified: true,
+      notes:
+        "Maudsley Charity offers a £17.50 10K place with a £200 fundraising target; its registration deadline is 17 September.",
+    },
+  ],
+  "great-highnam-court-run|2027-03-14|10K": [
+    {
+      providerCode: "official-highnam-10k",
+      providerName: "Great Highnam Court 10K checkout",
+      entryUrl: "https://www.highnamcourtrun.co.uk/event-details/10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.highnamcourtrun.co.uk/event-details/10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's current checkout lists the rescheduled Sunday 14 March 2027 10K at £30, starting at 11:00 from Highnam Court Cricket Club.",
+    },
+    {
+      providerCode: "official-highnam-tickets",
+      providerName: "Great Highnam Court ticket list",
+      entryUrl: "https://www.highnamcourtrun.co.uk/tickets",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.highnamcourtrun.co.uk/tickets",
+      isVerified: true,
+      notes:
+        "The official ticket list provides a second access point for the 10K, 5K and canicross categories. No independent booking provider is currently offered.",
     },
   ],
 };
