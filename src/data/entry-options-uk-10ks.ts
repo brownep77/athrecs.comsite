@@ -259,6 +259,36 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-26",
     toDate: "2026-09-27",
   },
+  {
+    seriesSlug: "brackley-10k-chicken-run",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "bupa-london-10000",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "credenhill-canter",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "farm-run-10k",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "floors-castle-trail-race",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -1937,6 +1967,60 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://bournvilleharriers.org.uk/the-leafy-10k",
     notes:
       "The Bournville Leafy 10K is on Sunday 27 September and starts at 10:00 from Rowheath Pavilion. Its two-lap multi-terrain course combines grass, woodland, paved paths and roads with several hills.",
+  },
+  "brackley-10k-chicken-run|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "10:30",
+    entryUrl: "https://englandathletics.sport80.com/public/wizard/e/31582/home",
+    source: "https://brackleyrunningclub.co.uk/brackley-10km-chicken-run/",
+    notes:
+      "The 15th-anniversary Chicken Run is on Sunday 27 September, not Saturday 26 September, and starts at 10:30 in Brackley Town Park. Its undulating single lap mixes roads, grass paths and trails around Turweston Airfield.",
+  },
+  "bupa-london-10000|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: undefined,
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/2026-vitality-london-10000-233210/race-selection?eventId=233210&occurrenceId=21111161658&preferred=true&utm_organiser_id=29443",
+    source: "https://www.londonmarathonevents.co.uk/london-10000",
+    notes:
+      "The Vitality London 10,000 is on Sunday 27 September, not Saturday 26 September. The fast, flat closed-road route starts on The Mall, passes major central-London landmarks and finishes outside Buckingham Palace; individual start information is supplied to entrants.",
+  },
+  "credenhill-canter|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/credenhillcanter26",
+    source: "https://www.wyevalleyrunners.co.uk/news",
+    notes:
+      "The Credenhill Canter is on Sunday 27 September and starts at 11:00 by the village church, finishing at Credenhill Social and Sports Club. The multi-terrain 10K uses country lanes and woodland and raises funds for Herefordshire Special Care Baby Unit.",
+  },
+  "farm-run-10k|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "10:00",
+    entryUrl: "https://etchrock.com/challenge/buy-ticket/farm-run-10k-2026",
+    source: "https://farmrun.co.uk/event-information",
+    notes:
+      "The Farm Run 10K is on Sunday 27 September and starts at 10:00 from Bishop Burton College. The chip-timed, England Athletics-licensed course uses closed local roads and village lanes rather than fields.",
+  },
+  "floors-castle-trail-race|2026-09-26|10K": {
+    date: "2026-09-27",
+    status: "TBC",
+    startTime: "10:00",
+    entryUrl: "https://www.tri-works.co.uk/floorscastletrail",
+    source: "https://www.tri-works.co.uk/floorscastletrail",
+    notes:
+      "The third Floors Castle Trail Race is listed for Sunday 27 September. The organiser's current timetable places the two-lap 10K at 10:00, but the page is still collecting interest for 2026 and says entrants will be told when booking opens.",
+  },
+  "hyde-park-5k-10k-september|2026-09-26|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
+    notes:
+      "The 5K and 10K start together at 09:30 on Saturday 26 September from Hyde Park Bandstand. The flat, chip-timed 10K follows four marked laps on park paths, with a 90-minute cut-off.",
+  },
+  "hyde-park-5k-10k-september|2026-09-26|5K": {
+    startTime: "09:30",
+    entryUrl: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
+    source: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
   },
 };
 
@@ -4949,6 +5033,95 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Bournville Harriers' 300-place race starts at Rowheath Pavilion and mixes grass, woodland, paths and local roads on an undulating two-lap course.",
     organiser: "Bournville Harriers",
     website: "https://bournvilleharriers.org.uk/the-leafy-10k",
+  },
+  "brackley-10k-chicken-run": {
+    name: "Brackley Chicken Run 10K",
+    city: "Brackley",
+    county: "Northamptonshire",
+    country: "England",
+    area: "Brackley Town Park and Turweston",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Brackley Chicken Run — a scenic single-lap multi-terrain 10K around Brackley and Turweston.",
+    description:
+      "Brackley & District Running Club's chip-timed race starts and finishes in Town Park before following roads, grass paths and trails around Turweston Airfield.",
+    organiser: "Brackley & District Running Club",
+    website: "https://brackleyrunningclub.co.uk/brackley-10km-chicken-run/",
+  },
+  "bupa-london-10000": {
+    name: "Vitality London 10,000",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "The Mall, the City of London and Buckingham Palace",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Vitality London 10,000 — a closed-road central-London 10K finishing outside Buckingham Palace.",
+    description:
+      "London Marathon Events' mass-participation 10K starts on The Mall and follows a flat sightseeing route past landmarks including St Paul's Cathedral, Big Ben and Westminster Abbey.",
+    organiser: "London Marathon Events",
+    website: "https://www.londonmarathonevents.co.uk/london-10000",
+  },
+  "credenhill-canter": {
+    name: "Credenhill Canter",
+    city: "Credenhill",
+    county: "Herefordshire",
+    country: "England",
+    area: "Credenhill village and Credenhill Park Wood",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Credenhill Canter — a multi-terrain 10K through Herefordshire country lanes and woodland.",
+    description:
+      "Wye Valley Runners' 200-place, chip-timed fundraiser starts near the village church and finishes at Credenhill Social and Sports Club, with proceeds supporting the local special-care baby unit.",
+    organiser: "Wye Valley Runners",
+    website: "https://www.entrycentral.com/credenhillcanter26",
+  },
+  "farm-run-10k": {
+    name: "Fitmums & Friends Farm Run 10K",
+    city: "Bishop Burton",
+    county: "East Riding of Yorkshire",
+    country: "England",
+    area: "Bishop Burton College and surrounding villages",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Farm Run 10K — a closed-road agricultural-themed race from Bishop Burton College.",
+    description:
+      "Curly's Athletes and Fitmums & Friends stage this friendly chip-timed, England Athletics-licensed 10K on roads around Bishop Burton College and nearby East Yorkshire villages.",
+    organiser: "Curly's Athletes and Fitmums & Friends",
+    website: "https://farmrun.co.uk/",
+  },
+  "floors-castle-trail-race": {
+    name: "Floors Castle Trail Race",
+    city: "Kelso",
+    county: "Scottish Borders",
+    country: "Scotland",
+    area: "Floors Castle estate",
+    surface: "Trail",
+    distances: ["10K", "5K", "3K"],
+    summary:
+      "Floors Castle Trail Race — 10K, 5K and junior trail races in the castle's gardens and woodland.",
+    description:
+      "TriWorks' event uses hard-packed gravel trails around the Floors Castle estate. The undulating, spectator-friendly 10K completes two laps and finishes on the castle lawn.",
+    organiser: "TriWorks Edinburgh",
+    website: "https://www.tri-works.co.uk/floorscastletrail",
+  },
+  "hyde-park-5k-10k-september": {
+    name: "RunThrough Hyde Park 5K & 10K September",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Hyde Park Bandstand",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary:
+      "RunThrough Hyde Park — flat, chip-timed 5K and 10K laps in central London's largest Royal Park.",
+    description:
+      "RunThrough's September event starts and finishes at Hyde Park Bandstand, with marked flat laps, chip timing, free race photography and a themed medal.",
+    organiser: "RunThrough",
+    website: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
   },
 };
 
@@ -10668,6 +10841,181 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC provides a secondary event route and confirms Rowheath Pavilion as race HQ; EntryCentral is authoritative for live capacity and pricing.",
+    },
+  ],
+  "brackley-10k-chicken-run|2026-09-27|10K": [
+    {
+      providerCode: "official-brackley-sport80",
+      providerName: "Brackley Chicken Run official entry",
+      entryUrl: "https://englandathletics.sport80.com/public/wizard/e/31582/home",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://brackleyrunningclub.co.uk/brackley-10km-chicken-run/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The running club's current 2026 page links directly to this England Athletics Sport:80 registration flow and confirms the 10:30 start and over-16 entry rule.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/brackley-10k-chicken-run",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/brackley-10k-chicken-run",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route; the Brackley & District Running Club page is authoritative for the corrected Sunday date and live entry details.",
+    },
+  ],
+  "bupa-london-10000|2026-09-27|10K": [
+    {
+      providerCode: "official-vitality-london-letsdothis",
+      providerName: "Vitality London 10,000 official entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/2026-vitality-london-10000-233210/race-selection?eventId=233210&occurrenceId=21111161658&preferred=true&utm_organiser_id=29443",
+      entryType: "official",
+      status: "closing_soon",
+      priceAmount: 49.99,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://www.londonmarathonevents.co.uk/london-10000",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "London Marathon Events links to this Let's Do This checkout, which lists £49.99 entry. The organiser says limited places remain, so availability can change quickly.",
+    },
+    {
+      providerCode: "rainbow-trust-charity",
+      providerName: "Rainbow Trust charity entry",
+      entryUrl: "https://www.rainbowtrust.org.uk/events/vitality-london-10km",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://www.rainbowtrust.org.uk/events/vitality-london-10km",
+      isVerified: true,
+      notes:
+        "Rainbow Trust offers a guaranteed charity place for £20 with a £200 fundraising target, plus a charity running vest and fundraising support.",
+    },
+  ],
+  "credenhill-canter|2026-09-27|10K": [
+    {
+      providerCode: "official-credenhill-entrycentral",
+      providerName: "Credenhill Canter EntryCentral checkout",
+      entryUrl: "https://www.entrycentral.com/credenhillcanter26",
+      entryType: "official",
+      status: "open",
+      priceAmount: 16,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-25T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/credenhillcanter26",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists £16 affiliated or £18 unaffiliated entry, a 200-place limit and no race-day entries. Online registration closes on 25 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/credenhill-canter",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/credenhill-canter",
+      isVerified: true,
+      notes:
+        "runABC offers a secondary event route; EntryCentral and Wye Valley Runners are authoritative for the corrected Sunday date, price and capacity.",
+    },
+  ],
+  "farm-run-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-farm-run-etchrock",
+      providerName: "Farm Run official EtchRock entry",
+      entryUrl: "https://etchrock.com/challenge/buy-ticket/farm-run-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://farmrun.co.uk/event-information",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser links to this live EtchRock checkout and lists entry at £24–£26. The race has an 800-person capacity and more than 400 entries were reported by March.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/farm-run-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/farm-run-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route; the dedicated Farm Run site is authoritative for the corrected Sunday date, current capacity and entry price.",
+    },
+  ],
+  "floors-castle-trail-race|2026-09-27|10K": [
+    {
+      providerCode: "official-triworks-floors",
+      providerName: "TriWorks official race page",
+      entryUrl: "https://www.tri-works.co.uk/floorscastletrail",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://www.tri-works.co.uk/floorscastletrail",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser confirms the third 2026 race but is currently collecting interest and says subscribers will be told when entries open. Its linked EntryCentral checkout still shows the closed 2025 edition.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/floors-castle-trail-race",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/floors-castle-trail-race",
+      isVerified: true,
+      notes:
+        "runABC confirms Sunday 27 September and the 10K, 5K and junior races. Use the TriWorks page to register interest and check for the 2026 checkout opening.",
+    },
+  ],
+  "hyde-park-5k-10k-september|2026-09-26|10K": [
+    {
+      providerCode: "official-runthrough-hyde-park",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser page lists both 10K and 5K entry at £34 and confirms the 09:30 start from Hyde Park Bandstand.",
+    },
+    {
+      providerCode: "letsdothis",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/runthrough-hyde-park-5k-10k-september-2026-256352",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/runthrough-hyde-park-5k-10k-september-2026-256352",
+      isVerified: true,
+      notes:
+        "Let's Do This provides an alternative booking route and confirms the Bandstand venue, 09:30 start, four-lap 10K and limited parking.",
     },
   ],
 };
