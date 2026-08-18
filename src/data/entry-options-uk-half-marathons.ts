@@ -639,6 +639,19 @@ export const ukHalfMarathonEditionOverrides: Record<string, Partial<Edition>> = 
     startTime: "09:00",
     source: "https://zigzagrunning.eventrac.co.uk/e/twas-the-run-before-christmas-11101",
   },
+  "christmas-party-run|2026-12-19|Half": {
+    startTime: "08:00",
+    source: "https://www.evententry.co.uk/phoenix-hampshire-christmas-party-run",
+  },
+  "runthrough-lee-valley-velopark-series-december|2026-12-19|Half": {
+    startTime: "09:30",
+    source: "https://www.runthrough.co.uk/event/lee-valley-velo-park-december-2026",
+  },
+  "birmingham-running-festival-december|2026-12-20|Half": {
+    startTime: "09:30",
+    source:
+      "https://www.runthrough.co.uk/event/birmingham-running-festival-december-2026",
+  },
 };
 
 /** Correct source metadata for half-marathon records imported from regional listings. */
@@ -1546,6 +1559,46 @@ export const ukHalfMarathonSeriesOverrides: Record<string, Partial<Series>> = {
       "A festive, flexible-distance trail event on a 5.3 km loop through Thetford Forest, organised by Zig Zag Running.",
     organiser: "Zig Zag Running",
     website: "https://zigzagrunning.eventrac.co.uk/e/twas-the-run-before-christmas-11101",
+  },
+  "christmas-party-run": {
+    name: "Phoenix Hampshire Christmas Party Run",
+    city: "Winchester",
+    county: "Hampshire",
+    country: "England",
+    area: "Garnier Road and the Itchen Way",
+    surface: "Road",
+    summary: "Phoenix Hampshire Christmas Party Run — Winchester, Hampshire.",
+    description:
+      "A flexible seven-hour event on a mostly flat 2.62-mile out-and-back route along the Itchen Way and over Hockley Viaduct, organised by Phoenix Running Hampshire.",
+    organiser: "Phoenix Running Hampshire",
+    website: "https://www.evententry.co.uk/phoenix-hampshire-christmas-party-run",
+  },
+  "runthrough-lee-valley-velopark-series-december": {
+    name: "Lee Valley VeloPark Half Marathon — December",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Lee Valley VeloPark, Queen Elizabeth Olympic Park",
+    surface: "Road",
+    summary: "Lee Valley VeloPark Half Marathon — Queen Elizabeth Olympic Park, London.",
+    description:
+      "A 13-lap half marathon on the gently undulating, traffic-free one-mile road circuit at Lee Valley VeloPark, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/lee-valley-velo-park-december-2026",
+  },
+  "birmingham-running-festival-december": {
+    name: "Birmingham Running Festival — December",
+    city: "Sutton Coldfield",
+    county: "West Midlands",
+    country: "England",
+    area: "Sutton Park",
+    surface: "Mixed",
+    summary: "Birmingham Running Festival Half Marathon — Sutton Park, Sutton Coldfield.",
+    description:
+      "An undulating half marathon on the historic roads and gravel paths of Sutton Park, organised by RunThrough Events.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/birmingham-running-festival-december-2026",
   },
 };
 
@@ -4019,6 +4072,121 @@ export const ukHalfMarathonEntryOptions: Record<string, EntryOptionSeed[]> = {
       status: "open",
       checkedAt: "2026-08-18T18:30:00+01:00",
       sourceUrl: "https://www.timeoutdoors.com/events/twas-the-run-before-christmas-1",
+      isVerified: true,
+    },
+  ],
+  "christmas-party-run|2026-12-19|Half": [
+    {
+      providerCode: "official",
+      providerName: "EventEntry (official Phoenix Hampshire entry)",
+      entryUrl: "https://www.evententry.co.uk/phoenix-hampshire-christmas-party-run",
+      entryType: "official",
+      status: "open",
+      priceAmount: 33.95,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T19:30:00+01:00",
+      sourceUrl: "https://www.evententry.co.uk/phoenix-hampshire-christmas-party-run",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl: "https://findarace.com/events/phoenix-hampshire-christmas-party-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 33.95,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T19:30:00+01:00",
+      sourceUrl: "https://findarace.com/events/phoenix-hampshire-christmas-party-run",
+      isVerified: true,
+    },
+  ],
+  "runthrough-lee-valley-velopark-series-december|2026-12-19|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/lee-valley-velo-park-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T19:30:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/lee-valley-velo-park-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/lee-valley-velopark-1-mile-5k-10k-10-mile-half-marathon/19th-december-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T19:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/lee-valley-velopark-1-mile-5k-10k-10-mile-half-marathon/19th-december-2026",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/lee-valley-velo-park-december-2026-188049",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T19:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/lee-valley-velo-park-december-2026-188049",
+      isVerified: true,
+    },
+  ],
+  "birmingham-running-festival-december|2026-12-20|Half": [
+    {
+      providerCode: "official",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/birmingham-running-festival-december-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T19:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/birmingham-running-festival-december-2026",
+      isVerified: true,
+      isPrimary: true,
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race (official booking partner)",
+      entryUrl:
+        "https://findarace.com/events/birmingham-running-festival/20th-december-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T19:30:00+01:00",
+      sourceUrl:
+        "https://findarace.com/events/birmingham-running-festival/20th-december-2026",
+      isVerified: true,
+    },
+    {
+      providerCode: "lets-do-this",
+      providerName: "Let's Do This",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/birmingham-running-festival-december-2026-248561",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-18T19:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/birmingham-running-festival-december-2026-248561",
       isVerified: true,
     },
   ],
