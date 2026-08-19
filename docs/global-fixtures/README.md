@@ -33,3 +33,15 @@ Three further Ireland road-running events were discovered through the approved J
 - South Kilkenny Run — Running — 23 August 2026
 
 The source remains `in_progress`. BK5K and South Kilkenny retain their official registration routes; Kildare AC is still listed as a fixture but its online sales deadline has passed, so ATHRECS marks entry as closed.
+
+## Checkpoint global-003
+
+Three future running events extend the verified fixture programme into three new country labels:
+
+- Camperdown Park 5K/10K/Half Marathon — Scotland — 6 September 2026
+- Manchester Running Festival — England — 20 September 2026
+- RunThrough Trails Engelberg — Switzerland — 22 August 2026
+
+The two UK fixtures were discovered through the approved Up and Running organiser sitemap and checked against its current booking partner. Engelberg was discovered through RunThrough's organiser calendar, checked against the live RunThrough Trails page and corroborated by Switzerland Tourism. Manchester remains a valid fixture but is marked closed because all listed distances are sold out.
+
+The RunThrough source scope is now recorded as `UK & Europe`, with the RunThrough Trails domain and Switzerland explicitly included. Up and Running's discovered country focus is recorded as England, Scotland and Wales. Both discovery sources remain `in_progress` so subsequent checkpoints can keep adding verified countries without implying complete calendar coverage.

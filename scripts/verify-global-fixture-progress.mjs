@@ -88,6 +88,7 @@ assert.equal(progress.participant_result_rows, "excluded");
 
 const checkpoints = new Set();
 const checkpointSlugs = [];
+const verifiedAtBySlug = new Map();
 for (const checkpoint of progress.checkpoints) {
   assert(!checkpoints.has(checkpoint.id), `Duplicate checkpoint ID: ${checkpoint.id}`);
   checkpoints.add(checkpoint.id);
@@ -95,6 +96,9 @@ for (const checkpoint of progress.checkpoints) {
   assert.equal(checkpoint.editions_imported, 3, `${checkpoint.id} has an edition count mismatch`);
   for (const sourceId of checkpoint.source_ids) {
     assert(sourceIds.has(sourceId), `${checkpoint.id} references an unknown source: ${sourceId}`);
+  }
+  for (const slug of checkpoint.series_slugs) {
+    verifiedAtBySlug.set(slug, checkpoint.verified_at);
   }
   checkpointSlugs.push(...checkpoint.series_slugs);
 }
@@ -144,7 +148,11 @@ for (const edition of verifiedGlobalEditions) {
     true,
     `${edition.seriesSlug} entry is unverified`,
   );
-  assert.equal(edition.entryOptions[0].checkedAt, progress.checked_at);
+  assert.equal(
+    edition.entryOptions[0].checkedAt,
+    verifiedAtBySlug.get(edition.seriesSlug),
+    `${edition.seriesSlug} entry check date does not match its checkpoint`,
+  );
 }
 
 process.stdout.write(
