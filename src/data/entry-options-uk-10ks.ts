@@ -2842,6 +2842,50 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Leaping Deer Events confirms that the race was postponed to Sunday 4 October and starts at 09:00, correcting the imported 08:00 time. The beginner-friendly, off-road out-and-back follows the River Wye from Ross-on-Wye Bandstand and costs £14.99 online.",
   },
+  "tonbridge-half-marathon|2026-10-04|10K": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-kent-tonbridge-half-marathon-10k-5k-october-2026",
+    source:
+      "https://www.runthrough.co.uk/event/run-kent-tonbridge-half-marathon-10k-5k-october-2026",
+    notes:
+      "RunThrough confirms that the 10K starts at 09:30 on Sunday 4 October, correcting the imported 08:00 time. The fully closed-road, single-loop course leaves The Judd School for the Kent countryside and has a 90-minute cut-off.",
+  },
+  "run-yorkshire-half-marathon-10k-5k|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://runnation.co.uk/r/roundhay10K-october-2026",
+    source: "https://runnation.co.uk/r/roundhay10K-october-2026",
+    notes:
+      "Run Nation confirms a 10:00 start on Sunday 4 October, correcting the imported 08:30 time. The traffic-free, multi-terrain 10K completes two undulating laps of Roundhay Park, including the lake and a climb to Mansion House.",
+  },
+  "siren-craft-brew-10k|2026-10-04|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.barnesfitness.co.uk/e/siren-craft-brew-10km-12657",
+    source: "https://www.barnesfitness.co.uk/e/siren-craft-brew-10km-12657",
+    notes:
+      "Barnes Fitness and the current TimeOutdoors entry both confirm Sunday 4 October, while TimeOutdoors gives the 11:00 start, correcting the imported 10:00 time. The multi-terrain race starts and finishes at Siren Craft Brew Tap Yard and includes a beer or alcohol-free drink, glass and medal.",
+  },
+  "sittingbourne-chas-ryman-memorial-10-mile-race|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://bookitzone.com/NiceWork/ERjFFX",
+    source: "https://sittingbournestriders.co.uk/10-mile-race/",
+    notes:
+      "Sittingbourne Striders and the live BookitZone checkout confirm a 10:00 start on Sunday 4 October, correcting the imported 09:00 time. The 10K shares Kent Science Park race HQ with the club's 10-mile road race and has free event parking.",
+  },
+  "sonning-common-10k|2026-10-04|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.riderhq.com/events/p/cpyq31ln/f/sonning-common-10k-2026",
+    source: "https://www.soco10k.co.uk/faq",
+    notes:
+      "The organiser confirms a 09:30 start on Sunday 4 October, correcting the imported 08:30 time. The chip-timed charity race starts at Sonning Common Primary School and follows village streets and quieter South Oxfordshire lanes, with a short loose-gravel section.",
+  },
+  "southend-10k-classic|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://in.njuko.com/southend-10k-20261776160612912",
+    source: "https://www.southend10k.com/home/race-information/",
+    notes:
+      "City of Southend AC confirms a 10:00 start on Sunday 4 October, correcting the imported 09:00 time. The flat, traffic-free out-and-back starts on Lifstan Way and follows Southend seafront and the wide footpaths of Gunners Park.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -7071,6 +7115,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Leaping Deer Events' off-road out-and-back follows the banks of the River Wye from the town bandstand, combining accessible running with riverside scenery and wildlife before a medal finish.",
     organiser: "Leaping Deer Events",
     website: "https://leapingdeerevents.x10.bz/Rossriver10k.html",
+  },
+  "tonbridge-half-marathon": {
+    name: "Run Kent Tonbridge Half Marathon, 10K & 5K",
+    city: "Tonbridge",
+    county: "Kent",
+    country: "England",
+    area: "The Judd School and the Kent countryside",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Run Kent Tonbridge — closed-road half marathon, 10K and 5K races from The Judd School.",
+    description:
+      "RunThrough's single-loop, chip-timed courses leave Tonbridge for closed roads through the Kent countryside, with local music, spectator support and proceeds supporting Demelza children's hospice.",
+    organiser: "RunThrough Events / Tonbridge Rotary Club / Tonbridge Lions",
+    website:
+      "https://www.runthrough.co.uk/event/run-kent-tonbridge-half-marathon-10k-5k-october-2026",
+  },
+  "run-yorkshire-half-marathon-10k-5k": {
+    name: "Run Yorkshire Roundhay Half Marathon, 10K & 5K",
+    city: "Leeds",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Roundhay Park, the lake and Mansion House",
+    surface: "Mixed",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Run Yorkshire Roundhay — undulating, traffic-free races through one of Europe's largest city parks.",
+    description:
+      "Run Nation's multi-terrain races circle Roundhay Park's lake and climb towards Mansion House, with the 10K completing two laps and chip timing provided by Timing4Sport.",
+    organiser: "Run Nation",
+    website: "https://runnation.co.uk/r/roundhay10K-october-2026",
+  },
+  "siren-craft-brew-10k": {
+    name: "Siren Craft Brew 10K",
+    city: "Finchampstead",
+    county: "Berkshire",
+    country: "England",
+    area: "Siren Craft Brew Tap Yard and surrounding countryside",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Siren Craft Brew 10K — a friendly mixed-terrain race with a brewery finish in Finchampstead.",
+    description:
+      "Barnes Fitness's chip-timed course starts and finishes at Siren Craft Brew Tap Yard, returning to live music, food vendors and a complimentary beer or alcohol-free drink, glass and medal.",
+    organiser: "Barnes Fitness",
+    website: "https://www.barnesfitness.co.uk/e/siren-craft-brew-10km-12657",
+  },
+  "sittingbourne-chas-ryman-memorial-10-mile-race": {
+    name: "Sittingbourne Striders 10 Mile & 10K Road Race",
+    city: "Sittingbourne",
+    county: "Kent",
+    country: "England",
+    area: "Kent Science Park and surrounding country lanes",
+    surface: "Road",
+    distances: ["10M", "10K"],
+    summary: "Sittingbourne Striders 10 Mile & 10K — community road races from Kent Science Park.",
+    description:
+      "Nice Work and Sittingbourne Striders co-host undulating country-lane races from Kent Science Park, with chip timing, free parking, photographs, medals and complimentary post-race massage.",
+    organiser: "Sittingbourne Striders / Nice Work",
+    website: "https://sittingbournestriders.co.uk/10-mile-race/",
+  },
+  "sonning-common-10k": {
+    name: "Sonning Common 10K",
+    city: "Sonning Common",
+    county: "Oxfordshire",
+    country: "England",
+    area: "Sonning Common Primary School and South Oxfordshire lanes",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Sonning Common 10K — a chip-timed village and country-lane fundraiser for the local primary school.",
+    description:
+      "Volunteer organisers stage an undulating 10K from Sonning Common Primary School through the village and quiet South Oxfordshire lanes, raising funds for an all-weather school athletics track.",
+    organiser: "Sonning Common School PTA",
+    website: "https://www.soco10k.co.uk/",
+  },
+  "southend-10k-classic": {
+    name: "City of Southend AC Annual 10K",
+    city: "Southend-on-Sea",
+    county: "Essex",
+    country: "England",
+    area: "Southchurch Park East, Southend seafront and Gunners Park",
+    surface: "Road",
+    distances: ["10K", "3K"],
+    summary:
+      "Southend 10K — a flat, traffic-free seafront race incorporating the Essex County Championship.",
+    description:
+      "City of Southend AC's chip-timed out-and-back starts on Lifstan Way, follows the seafront and Gunners Park footpaths, and is accompanied by a returning 3K race for 11-to-15-year-olds.",
+    organiser: "City of Southend Athletic Club",
+    website: "https://www.southend10k.com/",
   },
 };
 
@@ -15266,6 +15400,196 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC independently confirms the revised 4 October date, 09:00 start, Ross-on-Wye Bandstand venue and organiser Nathan Poolton; official checkout remains through Leaping Deer Events.",
+    },
+  ],
+  "tonbridge-half-marathon|2026-10-04|10K": [
+    {
+      providerCode: "runthrough-run-kent-tonbridge-2026",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-kent-tonbridge-half-marathon-10k-5k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/run-kent-tonbridge-half-marathon-10k-5k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser page offers 10K entry at £34 and confirms the 09:30 start, single-loop closed-road course and The Judd School event village.",
+    },
+    {
+      providerCode: "letsdothis-run-kent-tonbridge-2026",
+      providerName: "Let's Do This entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/run-kent-half-marathon-10k-and-5k-october-2026-260472",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/run-kent-half-marathon-10k-and-5k-october-2026-260472",
+      isVerified: true,
+      notes:
+        "Let's Do This provides a secondary £34 registration route and confirms the 09:30 10K start, The Judd School venue and 90-minute cut-off.",
+    },
+  ],
+  "run-yorkshire-half-marathon-10k-5k|2026-10-04|10K": [
+    {
+      providerCode: "run-nation-roundhay-10k-october-2026",
+      providerName: "Run Nation official entry",
+      entryUrl: "https://runnation.co.uk/r/roundhay10K-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-28T23:59:00+01:00",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://runnation.co.uk/r/roundhay10K-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser page lists £22 affiliated and £24 unaffiliated entry, a 700-runner limit and online closing on 28 September.",
+    },
+    {
+      providerCode: "letsdothis-roundhay-october-2026",
+      providerName: "Let's Do This entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/run-yorkshire-roundhay-half-marathon-10k-5k-october-268190",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 21,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/run-yorkshire-roundhay-half-marathon-10k-5k-october-268190",
+      isVerified: true,
+      notes:
+        "Let's Do This currently advertises 10K booking at £21 to £23 and confirms the 10:00 start and two-lap Roundhay Park course; confirm the final total at checkout.",
+    },
+  ],
+  "siren-craft-brew-10k|2026-10-04|10K": [
+    {
+      providerCode: "barnes-fitness-siren-october-2026",
+      providerName: "Barnes Fitness official entry",
+      entryUrl: "https://www.barnesfitness.co.uk/e/siren-craft-brew-10km-12657",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.barnesfitness.co.uk/e/siren-craft-brew-10km-12657",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser page has an Enter Now route for 4 October and describes limited places, chip timing, beer or alcohol-free refreshment, a glass and medal. The current public entry price is £30.",
+    },
+    {
+      providerCode: "timeoutdoors-siren-october-2026",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/siren-craft-brew-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/siren-craft-brew-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors offers a secondary £30 booking route and confirms the 11:00 start, age-18 minimum and Siren Craft Brew Tap Yard venue.",
+    },
+  ],
+  "sittingbourne-chas-ryman-memorial-10-mile-race|2026-10-04|10K": [
+    {
+      providerCode: "bookitzone-sittingbourne-2026",
+      providerName: "BookitZone official checkout",
+      entryUrl: "https://bookitzone.com/NiceWork/ERjFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25.76,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://bookitzone.com/NiceWork/ERjFFX",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live fee-inclusive checkout lists the affiliated 10K at £25.76 and unaffiliated entry at £28.24, with a 10:00 start and minimum age of 15.",
+    },
+    {
+      providerCode: "sittingbourne-striders-race-2026",
+      providerName: "Sittingbourne Striders official information",
+      entryUrl: "https://sittingbournestriders.co.uk/10-mile-race/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://sittingbournestriders.co.uk/10-mile-race/",
+      isVerified: true,
+      notes:
+        "The organising club lists base 10K fees of £23 affiliated and £25 unaffiliated, confirms free parking and links onward to current registration; booking fees apply at checkout.",
+    },
+  ],
+  "sonning-common-10k|2026-10-04|10K": [
+    {
+      providerCode: "riderhq-sonning-common-2026",
+      providerName: "RiderHQ official checkout",
+      entryUrl: "https://www.riderhq.com/events/p/cpyq31ln/f/sonning-common-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-02T23:59:00+01:00",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.soco10k.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's Register Here action opens this RiderHQ checkout. Official fees are £22 affiliated and £24 unaffiliated, and the published closing date is 2 October.",
+    },
+    {
+      providerCode: "official-soco10k-2026",
+      providerName: "SoCo 10K official information",
+      entryUrl: "https://www.soco10k.co.uk/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.soco10k.co.uk/faq",
+      isVerified: true,
+      notes:
+        "The official charity site confirms the 09:30 start, £22 to £24 fees, school fundraiser and RiderHQ registration route.",
+    },
+  ],
+  "southend-10k-classic|2026-10-04|10K": [
+    {
+      providerCode: "njuko-southend-10k-2026",
+      providerName: "Njuko official checkout",
+      entryUrl: "https://in.njuko.com/southend-10k-20261776160612912",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.southend10k.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live Enter Now button opens this Njuko checkout. Entries are explicitly marked open; confirm the current affiliated or unaffiliated total inside checkout.",
+    },
+    {
+      providerCode: "official-southend-10k-2026",
+      providerName: "Southend 10K official information",
+      entryUrl: "https://www.southend10k.com/home/race-information/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T05:00:00+01:00",
+      sourceUrl: "https://www.southend10k.com/home/race-information/",
+      isVerified: true,
+      notes:
+        "The current race page confirms entries open, the 10:00 Lifstan Way start, Southchurch Park East race HQ, traffic-free seafront course and Essex County Championship eligibility rules.",
     },
   ],
 };
