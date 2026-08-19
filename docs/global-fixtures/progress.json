@@ -14,7 +14,6 @@
     "North America",
     "Oceania",
     "UK",
-    "UK & Europe",
     "UK & Ireland",
     "USA"
   ],
@@ -87,6 +86,21 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-20"
+    },
+    {
+      "id": "global-006",
+      "status": "verified",
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Global", "UK"],
+      "countries": ["France", "United States", "England"],
+      "series_slugs": [
+        "runthrough-trails-morzine-avoriaz",
+        "long-beach-5k-10k-half-marathon",
+        "royal-windsor-triathlon"
+      ],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-20"
     }
   ],
   "source_progress": [
@@ -105,8 +119,8 @@
     {
       "source_id": "runthrough_uk",
       "status": "in_progress",
-      "events_imported": 4,
-      "last_checkpoint": "global-005"
+      "events_imported": 7,
+      "last_checkpoint": "global-006"
     },
     {
       "source_id": "te_sports_timing_upcoming",

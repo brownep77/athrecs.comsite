@@ -281,6 +281,63 @@ export const verifiedGlobalSeries: Series[] = [
     featured: false,
     source_url: "https://www.runthrough.co.uk/event/runthrough-trails-girona-april-2027",
   },
+  {
+    slug: "runthrough-trails-morzine-avoriaz",
+    name: "RunThrough Trails Morzine-Avoriaz",
+    sport: "Running",
+    country: "France",
+    county: "Auvergne-Rhône-Alpes",
+    city: "Morzine",
+    area: "Morzine-Avoriaz and the Portes du Soleil",
+    surface: "Trail / Mountain",
+    distances: ["100K", "50K", "25K"],
+    summary: "Alpine trail races over 100K, 50K and 25K in the Morzine Valley.",
+    description:
+      "A RunThrough Trails Global Series event crossing forest paths, high Alpine terrain and established trails around Morzine, Avoriaz and the Portes du Soleil.",
+    organiser: "RunThrough Trails",
+    website: "https://www.runthroughtrails.com/morzine-avoriaz",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/runthrough-trails-morzine-avoriaz-june-2027",
+  },
+  {
+    slug: "long-beach-5k-10k-half-marathon",
+    name: "Long Beach 5K, 10K & Half Marathon",
+    sport: "Running",
+    country: "United States",
+    county: "California",
+    city: "Long Beach",
+    area: "Shoreline Aquatic Park and the Long Beach waterfront",
+    surface: "Paved Path",
+    distances: ["Half", "10K", "5K"],
+    summary: "A waterfront 5K, 10K and half marathon from Shoreline Aquatic Park.",
+    description:
+      "A RunThrough USA race programme on paved waterfront paths in Long Beach, with half-marathon, 10K and 5K distances starting from Shoreline Aquatic Park.",
+    organiser: "RunThrough USA",
+    website:
+      "https://www.runthrough.co.uk/event/long-beach-5k-10k-half-marathon-april-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/long-beach-5k-10k-half-marathon-april-2027",
+  },
+  {
+    slug: "royal-windsor-triathlon",
+    name: "Royal Windsor Triathlon",
+    sport: "Triathlon",
+    country: "England",
+    county: "Berkshire",
+    city: "Windsor",
+    area: "Alexandra Gardens, the River Thames and Windsor Great Park",
+    surface: "Open Water / Road",
+    distances: ["Standard Triathlon", "Sprint Triathlon", "Relay"],
+    summary: "Sprint, standard and relay triathlons through Windsor and Windsor Great Park.",
+    description:
+      "An award-winning open-water triathlon beginning in the River Thames, cycling through Windsor and finishing with a road run into Windsor Great Park.",
+    organiser: "Royal Windsor Triathlon / RunThrough",
+    website: "https://www.runthrough.co.uk/event/royal-windsor-triathlon-june-2027",
+    featured: false,
+    source_url: "https://www.runthrough.co.uk/event/royal-windsor-triathlon-june-2027",
+  },
 ];
 
 export const verifiedGlobalEditions: Edition[] = [
@@ -707,5 +764,100 @@ export const verifiedGlobalEditions: Edition[] = [
     startTime: "08:15",
     source: "https://www.runthrough.co.uk/event/runthrough-trails-girona-april-2027",
     notes: "The 50K starts at 08:15; the 28K and 15K start at 10:00.",
+  },
+  {
+    seriesSlug: "runthrough-trails-morzine-avoriaz",
+    date: "2027-06-19",
+    distance: "100K",
+    distanceKm: 100,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/runthrough-trails-morzine-avoriaz-june-2027",
+    entryOptions: [
+      {
+        providerCode: "runthrough-global",
+        providerName: "RunThrough Global",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/runthrough-trails-morzine-avoriaz-june-2027",
+        entryType: "official",
+        status: "open",
+        priceAmount: 160,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl: "https://www.runthroughtrails.com/morzine-avoriaz",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The live organiser entry page lists open 100K, 50K and 25K registration, current prices and the Morzine venue.",
+      },
+    ],
+    startTime: "06:00",
+    source:
+      "https://www.runthrough.co.uk/event/runthrough-trails-morzine-avoriaz-june-2027",
+    notes:
+      "The entry page confirms the main races on Saturday 19 June 2027; the Trails series page also presents the preceding Friday as part of the event weekend.",
+  },
+  {
+    seriesSlug: "long-beach-5k-10k-half-marathon",
+    date: "2027-04-03",
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/long-beach-5k-10k-half-marathon-april-2027",
+    entryOptions: [
+      {
+        providerCode: "runthrough-usa",
+        providerName: "RunThrough USA",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/long-beach-5k-10k-half-marathon-april-2027",
+        entryType: "official",
+        status: "open",
+        priceAmount: 57,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/long-beach-5k-10k-half-marathon-april-2027",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The live organiser page lists open half-marathon, 10K and 5K entry with current prices.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.runthrough.co.uk/event/long-beach-5k-10k-half-marathon-april-2027",
+    notes:
+      "The half marathon starts at 08:00, the 10K at 08:30 and the 5K at 08:45 from Shoreline Aquatic Park.",
+  },
+  {
+    seriesSlug: "royal-windsor-triathlon",
+    date: "2027-06-13",
+    distance: "Standard Triathlon",
+    distanceKm: 51.5,
+    status: "Open",
+    entryUrl: "https://www.runthrough.co.uk/event/royal-windsor-triathlon-june-2027",
+    entryOptions: [
+      {
+        providerCode: "runthrough-triathlon",
+        providerName: "Royal Windsor Triathlon / RunThrough",
+        entryUrl: "https://www.runthrough.co.uk/event/royal-windsor-triathlon-june-2027",
+        entryType: "official",
+        status: "open",
+        priceAmount: 99,
+        priceCurrency: "GBP",
+        closesAt: "2027-05-16T23:59:00+01:00",
+        checkedAt: "2026-08-20",
+        sourceUrl: "https://www.runthrough.co.uk/event/royal-windsor-triathlon-june-2027",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The live organiser page lists open standard, sprint and relay entry and notes that the BTF race-day pass is purchased separately.",
+      },
+    ],
+    startTime: "07:00",
+    source: "https://www.runthrough.co.uk/event/royal-windsor-triathlon-june-2027",
+    notes:
+      "The standard race is a 1.5K swim, 40K bike and 10K run; the sprint starts at 06:00 and the standard at 07:00.",
   },
 ];

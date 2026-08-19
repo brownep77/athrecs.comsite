@@ -65,3 +65,13 @@ Three verified RunThrough Trails fixtures introduce three more European countrie
 - RunThrough Trails Girona — Spain — 3 April 2027
 
 Each event was discovered through the enabled RunThrough UK & Europe source and checked against a current organiser page and live entry route. The 5Laghi race date is also corroborated by the local organiser and Turismo Torino because one RunThrough Trails calendar card shows the preceding event-weekend date. The RunThrough country focus now records Germany, Italy, Spain, Switzerland and the United Kingdom, and the source remains `in_progress` for further European checkpoints.
+
+## Checkpoint global-006
+
+Three further organiser-verified fixtures extend the programme into France and the United States while adding another triathlon fixture in England:
+
+- RunThrough Trails Morzine-Avoriaz — Running — France — 19 June 2027
+- Long Beach 5K, 10K & Half Marathon — Running — United States — 3 April 2027
+- Royal Windsor Triathlon — Triathlon — England — 13 June 2027
+
+All three use current RunThrough organiser entry pages with open registration, published prices, dates and locations. The RunThrough registry record is now global rather than UK-and-Europe-only and records France and the United States in its verified country focus. The source remains `in_progress`; additional global fixtures and disciplines are still queued for later checkpoints.
