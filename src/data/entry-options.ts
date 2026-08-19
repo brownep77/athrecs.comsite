@@ -23,6 +23,7 @@ export const eventSlugAliases: Readonly<Record<string, string>> = {
   "rb-dirt-half-challenge": "dirt-half-challenge",
   "rb-glentress-winter-half-marathon-10k-trail-races": "glentress-winter-trail-races",
   "round-the-lakes-summer-special": "round-the-lakes",
+  "thompson-millennium-green-10k-5k": "thompson-millennium-green",
   "well-run-10k": "far-peak-10k-half-marathon",
 };
 
