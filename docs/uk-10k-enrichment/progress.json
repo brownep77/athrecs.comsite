@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-19T13:35:00+01:00",
+  "updatedAt": "2026-08-19T14:25:00+01:00",
   "activeRelease": 63,
-  "releaseStatus": "tested",
+  "releaseStatus": "hotfix_tested",
   "checkpoints": {
     "63A": {
       "status": "checkpoint_saved",
@@ -27,7 +27,7 @@
         "clock-change-challenge-october|2026-10-24|10K": "clock-change-challenge-october|2026-10-25|10K",
         "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|10K": "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K"
       },
-      "notes": "Official sources corrected all three imported dates and 23:00 placeholders; entry routes, availability and venue details passed the workflow, TypeScript, catalogue and diff checks and are saved on the Release 63 checkpoint branch."
+      "notes": "Official sources corrected all three imported dates and 23:00 placeholders. Live verification exposed source-keyed overrides that had not updated persistent Neon rows; v209 fixes those mappings and adds a regression assertion. The complete workflow, TypeScript, catalogue, clubs, race-groups, build and diff suite passed."
     },
     "63C": {
       "status": "checkpoint_saved",
