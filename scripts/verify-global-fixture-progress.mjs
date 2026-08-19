@@ -110,8 +110,24 @@ for (const source of progress.source_progress) {
 
 const globalSlugs = verifiedGlobalSeries.map((series) => series.slug).sort();
 assert.deepEqual([...checkpointSlugs].sort(), globalSlugs, "Checkpoint series do not match data");
-assert.equal(verifiedGlobalSeries.length, 3, "Global checkpoint must contain three events");
-assert.equal(verifiedGlobalEditions.length, 3, "Global checkpoint must contain three editions");
+const checkpointEventCount = progress.checkpoints.reduce(
+  (total, checkpoint) => total + checkpoint.events_imported,
+  0,
+);
+const checkpointEditionCount = progress.checkpoints.reduce(
+  (total, checkpoint) => total + checkpoint.editions_imported,
+  0,
+);
+assert.equal(
+  verifiedGlobalSeries.length,
+  checkpointEventCount,
+  "Global event total does not match checkpoints",
+);
+assert.equal(
+  verifiedGlobalEditions.length,
+  checkpointEditionCount,
+  "Global edition total does not match checkpoints",
+);
 
 const seriesBySlug = new Map(verifiedGlobalSeries.map((series) => [series.slug, series]));
 for (const edition of verifiedGlobalEditions) {
