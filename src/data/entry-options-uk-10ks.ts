@@ -3548,6 +3548,67 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Shipston Home Nursing confirms registration from 08:45 and a 10:00 start on Sunday 18 October, correcting the imported 09:00 time. The annual run or walk leaves Walton Hall, crosses mixed cross-country and road sections through nearby woods and Walton village, and returns for electronic timing and a bacon or vegetarian roll.",
   },
+  "bedgebury-forest-half-marathon-10k|2026-10-18|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.nice-work.org.uk/e/bedgebury-forest-half-marathon-and-10k-9257",
+    source:
+      "https://www.forestryengland.uk/forest-event/events-bedgebury/bedgebury-forest-half-marathon-and-10k",
+    notes:
+      "Forestry England and Nice Work confirm a 09:00 start, correcting the imported 08:00 placeholder. The traffic-free trail race uses narrow, undulating woodland paths through Bedgebury National Pinetum and includes a bespoke medal, free photographs and limited free event parking.",
+  },
+  "bedgebury-forest-half-marathon-10k|2026-10-18|Half": {
+    startTime: "09:00",
+    entryUrl: "https://www.nice-work.org.uk/e/bedgebury-forest-half-marathon-and-10k-9257",
+    source:
+      "https://www.forestryengland.uk/forest-event/events-bedgebury/bedgebury-forest-half-marathon-and-10k",
+  },
+  "henley-half-marathon|2026-10-18|10K": {
+    startTime: "09:30",
+    entryUrl: "https://events.kronosports.uk/event/1937",
+    source: "https://henleyhalf.co.uk/event/10k/",
+    notes:
+      "The organiser confirms the 10K starts at 09:30, correcting the imported 08:30 placeholder. The single road loop leaves Henley Rugby Club, runs through the town and tackles the event's mile-long Heartbreak Hill before a fast descent and flat finish.",
+  },
+  "henley-half-marathon|2026-10-18|Half": {
+    startTime: "09:30",
+    entryUrl: "https://events.kronosports.uk/event/1937",
+    source: "https://henleyhalf.co.uk/",
+  },
+  "strathcarron-hospice-10k-road-race-fun-run|2026-10-18|10K": {
+    startTime: "11:00",
+    entryUrl: "https://register.enthuse.com/ps/event/StrathcarronHospice10K2026",
+    source: "https://www.strathcarronhospice.net/event/strathcarron-hospice-10k-2026",
+    notes:
+      "Strathcarron Hospice confirms an 11:00 start, correcting the imported 10:00 time. The road route starts at Denny High School and travels around Denny and Bonnybridge, with an optional £100 fundraising target supporting hospice care.",
+  },
+  "tamworth-10k|2026-10-18|10K": {
+    startTime: "10:30",
+    entryUrl: "https://www.race-space.com/gb/kp-tamworth/tamworth-10k-2026",
+    source: "https://tamworth10k.co.uk/",
+    notes:
+      "KP Tamworth confirms a 10:30 start, correcting the imported 09:30 time. The chip-timed course starts and finishes in Tamworth Castle Pleasure Grounds and follows a flat route through parks, canal paths and the town centre.",
+  },
+  "tempo-10k-winter-1|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.tempoevents.co.uk/events/winter-series/",
+    source: "https://www.tempoevents.co.uk/events/winter-series/",
+    notes:
+      "Tempo Events confirms every 2026-27 Winter Series race starts at 10:00, correcting the imported 09:30 time. Race 1 runs the hilly 10.13K Ilmington course counter-clockwise and uses chip timing.",
+  },
+  "turnpike-trot|2026-10-18|10K": {
+    status: "TBC",
+    startTime: undefined,
+    entryUrl: "https://www.hardmoors110.org.uk/other-races/",
+    source: "https://www.runningcalendar.co.uk/event/turnpike-trot-10k-rabbit-run-5k/",
+    notes:
+      "A current listing manually checked on 10 August now says the next event date is to be confirmed, so the imported 18 October date and 10:00 time are shown as provisional rather than open. The trail race is planned from Danby Lodge with Hardmoors and the North York Moors National Park.",
+  },
+  "turnpike-trot|2026-10-18|5K": {
+    status: "TBC",
+    startTime: undefined,
+    entryUrl: "https://www.hardmoors110.org.uk/other-races/",
+    source: "https://www.runningcalendar.co.uk/event/turnpike-trot-10k-rabbit-run-5k/",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -9013,6 +9074,93 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Shipston Home Nursing's annual fundraiser starts and finishes at Walton Hall and follows a mixed cross-country and road route through nearby woods and Walton village. Electronic timing is provided for runners, and entrants receive a bacon or vegetarian roll at the finish.",
     organiser: "Shipston Home Nursing",
     website: "https://shipstonhomenursing.co.uk/event/walton-hall-10k-run-and-walk/",
+  },
+  "bedgebury-forest-half-marathon-10k": {
+    name: "Bedgebury Forest Half Marathon & 10K",
+    city: "Goudhurst",
+    county: "Kent",
+    country: "England",
+    area: "Bedgebury National Pinetum and Forest",
+    surface: "Trail",
+    distances: ["10K", "Half"],
+    summary:
+      "Bedgebury Forest Half Marathon & 10K — challenging traffic-free woodland trail races.",
+    description:
+      "Nice Work's autumn races wind along narrow, undulating trails beneath Bedgebury's forest canopy. The event welcomes new and experienced trail runners and includes chip timing, medals, free race photographs and limited free parking.",
+    organiser: "Nice Work",
+    website: "https://www.nice-work.org.uk/e/bedgebury-forest-half-marathon-and-10k-9257",
+  },
+  "henley-half-marathon": {
+    name: "Henley Half Marathon, 10K & 5K",
+    city: "Henley-on-Thames",
+    county: "Oxfordshire",
+    country: "England",
+    area: "Henley Rugby Club, town centre and Thames Valley",
+    surface: "Road",
+    distances: ["5K", "10K", "Half", "Fun Run"],
+    summary: "Henley running festival — scenic road races through the town and Thames Valley.",
+    description:
+      "Henley's established community event combines a half marathon, 10K, 5K and fun run. The 10K uses a single road loop from the rugby club through town and over the event's famous Heartbreak Hill.",
+    organiser: "Henley Half Marathon",
+    website: "https://henleyhalf.co.uk/",
+  },
+  "strathcarron-hospice-10k-road-race-fun-run": {
+    name: "Strathcarron Hospice 10K",
+    city: "Denny",
+    county: "Falkirk",
+    country: "Scotland",
+    area: "Denny High School, Denny and Bonnybridge",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Strathcarron Hospice 10K — a major community fundraiser around Denny and Bonnybridge.",
+    description:
+      "Strathcarron Hospice's inclusive road race welcomes runners aged 15 and over from Denny High School, with an in-person and virtual option and fundraising that supports local patients and families.",
+    organiser: "Strathcarron Hospice",
+    website: "https://www.strathcarronhospice.net/event/strathcarron-hospice-10k-2026",
+  },
+  "tamworth-10k": {
+    name: "Tamworth 10K",
+    city: "Tamworth",
+    county: "Staffordshire",
+    country: "England",
+    area: "Tamworth Castle Pleasure Grounds, canal and town centre",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Tamworth 10K — a fast, flat and chip-timed town race from the Castle Grounds.",
+    description:
+      "KP Tamworth's race starts and finishes beside Tamworth Castle and follows a scenic, flat course through the pleasure grounds, alongside the canal at Fazeley and through the town centre.",
+    organiser: "KP Tamworth",
+    website: "https://tamworth10k.co.uk/",
+  },
+  "tempo-10k-winter-1": {
+    name: "Tempo Winter 10K Series — Race 1",
+    city: "Ilmington",
+    county: "Warwickshire",
+    country: "England",
+    area: "Ilmington Multi Sports Facility and Larkstoke Hill",
+    surface: "Road",
+    distances: ["10.13K"],
+    summary: "Tempo Winter Series Race 1 — a hilly chip-timed road race through Ilmington.",
+    description:
+      "The opening race of Tempo Events' five-round winter series follows a 10.13K counter-clockwise course with the major Larkstoke ascent. Entrants can book individual rounds or the full series.",
+    organiser: "Tempo Events",
+    website: "https://www.tempoevents.co.uk/events/winter-series/",
+  },
+  "turnpike-trot": {
+    name: "Turnpike Trot 10K & Rabbit Run 5K",
+    city: "Danby",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Danby Lodge and North York Moors trails",
+    surface: "Trail",
+    distances: ["5K", "10K"],
+    summary:
+      "Turnpike Trot & Rabbit Run — North York Moors trail races with the next date to be confirmed.",
+    description:
+      "Hardmoors and the North York Moors National Park stage marked and marshalled trail loops from Danby Lodge. A recent calendar check now marks the next edition TBC, so entrants should await a confirmed date before booking travel.",
+    organiser: "Hardmoors with North York Moors National Park",
+    website: "https://www.hardmoors110.org.uk/other-races/",
   },
 };
 
@@ -19776,6 +19924,185 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Running Calendar manually checked this exact 2026 edition in March and provides a Register Now route. Use the charity page as the authoritative source for final terms and event updates.",
+    },
+  ],
+  "bedgebury-forest-half-marathon-10k|2026-10-18|10K": [
+    {
+      providerCode: "nice-work-bedgebury-2026",
+      providerName: "Nice Work official entry",
+      entryUrl: "https://www.nice-work.org.uk/e/bedgebury-forest-half-marathon-and-10k-9257",
+      entryType: "official",
+      status: "open",
+      priceAmount: 27,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl:
+        "https://www.forestryengland.uk/forest-event/events-bedgebury/bedgebury-forest-half-marathon-and-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Forestry England lists advance 10K entry at £27 and race-day entry at £30 if places remain. The Nice Work event page is the organiser's live entry route.",
+    },
+    {
+      providerCode: "timeoutdoors-bedgebury-2026",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/bedgebury-forest-half-marathon-10k/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 27,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/bedgebury-forest-half-marathon-10k/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms the exact 2026 10K, 09:00 start, £27 price and included event parking, then routes runners to entry.",
+    },
+  ],
+  "henley-half-marathon|2026-10-18|10K": [
+    {
+      providerCode: "official-henley-kronosports-2026",
+      providerName: "Henley official Kronosports checkout",
+      entryUrl: "https://events.kronosports.uk/event/1937",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://henleyhalf.co.uk/event/10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists the 10K at £30 and links this exact Kronosports event for booking. Select 10K rather than the half marathon, 5K or fun run.",
+    },
+    {
+      providerCode: "official-henley-information-2026",
+      providerName: "Henley event information",
+      entryUrl: "https://henleyhalf.co.uk/event/10k/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://henleyhalf.co.uk/event/10k/",
+      isVerified: true,
+      notes:
+        "The official 10K page confirms the 18 October date, 09:30 start, Henley Rugby Club venue and £30 price before directing entrants to Kronosports.",
+    },
+  ],
+  "strathcarron-hospice-10k-road-race-fun-run|2026-10-18|10K": [
+    {
+      providerCode: "official-strathcarron-enthuse-2026",
+      providerName: "Strathcarron Hospice official entry",
+      entryUrl: "https://register.enthuse.com/ps/event/StrathcarronHospice10K2026",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://www.strathcarronhospice.net/event/strathcarron-hospice-10k-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "This is the Enthuse registration linked directly by Strathcarron Hospice. Confirm the displayed registration fee before submitting; the suggested fundraising target is £100.",
+    },
+    {
+      providerCode: "official-strathcarron-information-2026",
+      providerName: "Strathcarron Hospice event information",
+      entryUrl: "https://www.strathcarronhospice.net/event/strathcarron-hospice-10k-2026",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://www.strathcarronhospice.net/event/strathcarron-hospice-10k-2026",
+      isVerified: true,
+      notes:
+        "The hospice confirms the date, 11:00 start, Denny High School venue, age 15 minimum, virtual option and official Enthuse booking link.",
+    },
+  ],
+  "tamworth-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-kp-racespace-tamworth-2026",
+      providerName: "KP Tamworth official Race Space entry",
+      entryUrl: "https://www.race-space.com/gb/kp-tamworth/tamworth-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://tamworth10k.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Race Space lists £24 club-affiliated or £26 standard entry before booking fees and confirms the exact 18 October race and 10:30 start.",
+    },
+    {
+      providerCode: "official-tamworth-information-2026",
+      providerName: "Tamworth 10K organiser information",
+      entryUrl: "https://tamworth10k.co.uk/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://tamworth10k.co.uk/",
+      isVerified: true,
+      notes:
+        "The official event website confirms the date, 10:30 start and Castle Grounds course and directs entrants to the Race Space checkout.",
+    },
+  ],
+  "tempo-10k-winter-1|2026-10-18|10K": [
+    {
+      providerCode: "official-tempo-winter-series-2026",
+      providerName: "Tempo Events official entry",
+      entryUrl: "https://www.tempoevents.co.uk/events/winter-series/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://www.tempoevents.co.uk/events/winter-series/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Tempo lists individual early entry at £20 affiliated or £22 unaffiliated, full-series entry at £87/£97 and race-day entry at £32 if capacity remains.",
+    },
+    {
+      providerCode: "timeoutdoors-tempo-race1-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/tempo-winter-series-10k-race-1",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/tempo-winter-series-10k-race-1",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms open online and race-day entry across the £20-£32 range, the 10:00 start and Ilmington venue.",
+    },
+  ],
+  "turnpike-trot|2026-10-18|10K": [
+    {
+      providerCode: "official-hardmoors-turnpike-tbc",
+      providerName: "Hardmoors official event page",
+      entryUrl: "https://www.hardmoors110.org.uk/other-races/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://www.hardmoors110.org.uk/other-races/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The current event date has not been reconfirmed. Do not register against an older checkout or arrange travel until Hardmoors publishes the next Turnpike Trot date.",
+    },
+    {
+      providerCode: "runningcalendar-turnpike-tbc",
+      providerName: "Running Calendar status guide",
+      entryUrl: "https://www.runningcalendar.co.uk/event/turnpike-trot-10k-rabbit-run-5k/",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T08:30:00+01:00",
+      sourceUrl: "https://www.runningcalendar.co.uk/event/turnpike-trot-10k-rabbit-run-5k/",
+      isVerified: true,
+      notes:
+        "This listing was manually checked on 10 August 2026 and now states that the next date is TBC. Recheck the Hardmoors site before entry.",
     },
   ],
 };
