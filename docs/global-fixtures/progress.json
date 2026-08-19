@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-08-19",
+  "registry_source_count": 266,
+  "enabled_source_count": 31,
+  "rights_or_technical_review_queue": 235,
+  "regions_in_scope": [
+    "Africa",
+    "Asia",
+    "Europe",
+    "Global",
+    "Ireland",
+    "Latin America",
+    "Middle East",
+    "North America",
+    "Oceania",
+    "UK",
+    "UK & Ireland",
+    "USA"
+  ],
+  "country_focus_labels_in_scope": 63,
+  "participant_result_rows": "excluded",
+  "checkpoints": [
+    {
+      "id": "global-001",
+      "status": "verified",
+      "source_ids": ["justruns_upcoming_ireland"],
+      "regions": ["Ireland"],
+      "countries": ["Ireland"],
+      "series_slugs": ["hardman-killarney", "run-brave-for-yourself", "hardman-run-ballinskelligs"],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-19"
+    }
+  ],
+  "source_progress": [
+    {
+      "source_id": "justruns_upcoming_ireland",
+      "status": "in_progress",
+      "events_imported": 3,
+      "last_checkpoint": "global-001"
+    }
+  ]
+}
