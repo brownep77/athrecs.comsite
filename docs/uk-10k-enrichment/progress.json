@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-19T13:20:00+01:00",
+  "updatedAt": "2026-08-19T13:35:00+01:00",
   "activeRelease": 63,
-  "releaseStatus": "assembling",
+  "releaseStatus": "tested",
   "checkpoints": {
     "63A": {
       "status": "checkpoint_saved",
