@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-19T13:35:00+01:00",
+  "activeRelease": 63,
+  "releaseStatus": "tested",
+  "checkpoints": {
+    "63A": {
+      "status": "checkpoint_saved",
+      "updatedAt": "2026-08-19T10:45:00+01:00",
+      "races": [
+        "runabc-west-acre-wild-10k|2026-10-18|10K",
+        "wellington-10k|2026-10-18|10K",
+        "wigton-road-runners-10k|2026-10-18|10K"
+      ],
+      "notes": "Official or governing-body-backed routes, corrected start times, entry status and venue details passed the workflow, TypeScript, catalogue and diff checks and are saved on the Release 63 checkpoint branch."
+    },
+    "63B": {
+      "status": "checkpoint_saved",
+      "updatedAt": "2026-08-19T11:30:00+01:00",
+      "races": [
+        "beachy-head-marathon|2026-10-23|10K",
+        "clock-change-challenge-october|2026-10-24|10K",
+        "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|10K"
+      ],
+      "resolvedKeys": {
+        "beachy-head-marathon|2026-10-23|10K": "beachy-head-marathon|2026-10-24|10K",
+        "clock-change-challenge-october|2026-10-24|10K": "clock-change-challenge-october|2026-10-25|10K",
+        "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|10K": "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K"
+      },
+      "notes": "Official sources corrected all three imported dates and 23:00 placeholders; entry routes, availability and venue details passed the workflow, TypeScript, catalogue and diff checks and are saved on the Release 63 checkpoint branch."
+    },
+    "63C": {
+      "status": "checkpoint_saved",
+      "updatedAt": "2026-08-19T12:30:00+01:00",
+      "races": [
+        "monsal-trail-half-marathon-autumn-saturday|2026-10-24|10K",
+        "newton-road-races|2026-10-24|10K",
+        "brigg-10k|2026-10-25|10K"
+      ],
+      "notes": "Monsal and Brigg have current official entry routes; Newton is retained as TBC because no club or governing-body source confirms the imported 2026 edition. The checkpoint passed the workflow, TypeScript, catalogue and diff checks and is saved on the Release 63 branch."
+    },
+    "63D": {
+      "status": "checkpoint_saved",
+      "updatedAt": "2026-08-19T13:20:00+01:00",
+      "races": [
+        "cramond-promenade-5k-10k-half-marathon-october|2026-10-25|10K",
+        "crewe-10k|2026-10-25|10K",
+        "dh-river-run|2026-10-25|10K"
+      ],
+      "notes": "Cramond and DH have current organiser-backed entry routes; Crewe has a direct RunThrough entry plus a distinct YMCA Cheshire charity place. The checkpoint passed the workflow, TypeScript, catalogue and diff checks and is ready to be saved on the Release 63 branch."
+    }
+  }
+}

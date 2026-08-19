@@ -499,6 +499,42 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-17",
     toDate: "2026-10-18",
   },
+  {
+    seriesSlug: "beachy-head-marathon",
+    distance: "10K",
+    fromDate: "2026-10-23",
+    toDate: "2026-10-24",
+  },
+  {
+    seriesSlug: "beachy-head-marathon",
+    distance: "Marathon",
+    fromDate: "2026-10-23",
+    toDate: "2026-10-24",
+  },
+  {
+    seriesSlug: "beachy-head-marathon",
+    distance: "Ultra",
+    fromDate: "2026-10-23",
+    toDate: "2026-10-24",
+  },
+  {
+    seriesSlug: "clock-change-challenge-october",
+    distance: "10K",
+    fromDate: "2026-10-24",
+    toDate: "2026-10-25",
+  },
+  {
+    seriesSlug: "imperial-war-museum-duxford-dash-5k-10k",
+    distance: "10K",
+    fromDate: "2026-10-24",
+    toDate: "2026-10-25",
+  },
+  {
+    seriesSlug: "imperial-war-museum-duxford-dash-5k-10k",
+    distance: "5K",
+    fromDate: "2026-10-24",
+    toDate: "2026-10-25",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -3608,6 +3644,118 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     startTime: undefined,
     entryUrl: "https://www.hardmoors110.org.uk/other-races/",
     source: "https://www.runningcalendar.co.uk/event/turnpike-trot-10k-rabbit-run-5k/",
+  },
+  "runabc-west-acre-wild-10k|2026-10-18|10K": {
+    startTime: "10:30",
+    status: "Closed",
+    entryUrl: "https://totalracetiming.co.uk/race/668",
+    source: "https://totalracetiming.co.uk/race/668",
+    notes:
+      "Total Race Timing confirms a 10:30 start on Sunday 18 October, correcting the imported 09:30 placeholder. The off-road course follows undulating Norfolk bridleways, farm paths and woodland tracks from The Stag and includes optional obstacles and a ford crossing. The field is full and only the waiting list is currently available.",
+  },
+  "wellington-10k|2026-10-18|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.tickettailor.com/events/runthedistance/1915196",
+    source: "https://www.runthedistance.co.uk/wellington-10k",
+    notes:
+      "Run The Distance confirms a 09:30 start on Sunday 18 October, correcting the imported 08:30 placeholder. The measured out-and-back road course starts and finishes at Dothill Playing Field and runs through Dothill Nature Reserve, along Silkin Way and towards Wrockwardine.",
+  },
+  "wigton-road-runners-10k|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.eventsupnorth.co.uk/event/2221",
+    source: "https://clubspark.englandathletics.org/WigtonRoadRunners",
+    notes:
+      "Wigton Road Runners' England Athletics-hosted club page confirms the Sunday 18 October charity race and its official Events Up North booking route. The current race listing confirms a 10:00 start, correcting the imported 09:00 placeholder, from Barton Laws on a measured loop of paths and quiet undulating country roads.",
+  },
+  "beachy-head-marathon|2026-10-24|10K": {
+    startTime: "09:15",
+    entryUrl: "https://www.visiteastbourne.com/marathon/enter/10k",
+    source: "https://www.visiteastbourne.com/marathon/enter/faqs",
+    notes:
+      "Eastbourne Borough Council confirms the Beachy Head 10K is on Saturday 24 October at 09:15, correcting both the imported 23 October date and 23:00 placeholder. The two-hour trail race starts on Dukes Drive, loops over the South Downs to Belle Tout Lighthouse and returns along the coast.",
+  },
+  "beachy-head-marathon|2026-10-24|Marathon": {
+    startTime: "08:45",
+    entryUrl: "https://www.visiteastbourne.com/marathon/enter/marathon",
+    source: "https://www.visiteastbourne.com/marathon/enter/faqs",
+  },
+  "beachy-head-marathon|2026-10-24|Ultra": {
+    startTime: "07:40",
+    entryUrl: "https://www.visiteastbourne.com/marathon/enter/ultramarathon",
+    source: "https://www.visiteastbourne.com/marathon/enter/faqs",
+  },
+  "clock-change-challenge-october|2026-10-25|10K": {
+    startTime: "11:00",
+    entryUrl: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+    source: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+    notes:
+      "Wiltshire Council's Eventrac page confirms the 10K is on Sunday 25 October at 11:00, correcting the imported Saturday date and 23:00 placeholder. The accurately measured out-and-back follows quiet country lanes and is Race 8 of the 2026 Wiltshire Road Race League.",
+  },
+  "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K": {
+    startTime: "09:30",
+    status: "Closed",
+    entryUrl: "https://totalracetiming.co.uk/race/708",
+    source: "https://www.goodrunningevents.co.uk/duxford-dash",
+    notes:
+      "Good Running Events and Total Race Timing confirm Sunday 25 October at 09:30, correcting the imported Saturday date and 23:00 placeholder. The two-lap runway 10K is full, but its free waiting list remains available. Entry includes event parking and IWM Duxford museum admission.",
+  },
+  "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|5K": {
+    startTime: "09:30",
+    status: "Closed",
+    entryUrl: "https://totalracetiming.co.uk/race/708",
+    source: "https://www.goodrunningevents.co.uk/duxford-dash",
+  },
+  "monsal-trail-half-marathon-autumn-saturday|2026-10-24|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    notes:
+      "Nice Work confirms both Saturday distances start at 10:00, correcting the imported 09:00 placeholder. The traffic-free out-and-back follows the former Midland Railway from Bakewell Station; 10K runners turn inside the first tunnel and return over mixed tarmac and hard trail.",
+  },
+  "monsal-trail-half-marathon-autumn-saturday|2026-10-24|Half": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+  },
+  "newton-road-races|2026-10-24|10K": {
+    startTime: undefined,
+    status: "TBC",
+    entryUrl: "https://www.newton-roadrunners.com/",
+    source: "https://www.newton-roadrunners.com/",
+    notes:
+      "No current Newton Road Runners or Scottish Athletics source confirms the imported 24 October 2026 edition. The latest verified race was on 8 November 2025 at noon from Westburn Hall. This record is retained as TBC, with no start time or open-entry claim, until the club publishes a 2026 event.",
+  },
+  "brigg-10k|2026-10-25|10K": {
+    startTime: "09:30",
+    entryUrl: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+    source: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+    notes:
+      "Curly's Athletes confirms the standard 10K starts at 09:30 on Sunday 25 October, with the Military Challenge following at 09:45. The officially measured, UKA-licensed road race starts and finishes in Brigg Market Place and follows flat, closed country roads.",
+  },
+  "cramond-promenade-5k-10k-half-marathon-october|2026-10-25|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.upandrunningevents.co.uk/events",
+    source: "https://www.upandrunningevents.co.uk/events",
+    notes:
+      "Up and Running Events confirms the October Cramond Promenade programme is on Sunday 25 October from 09:30 to 13:30 and links to its live booking partner. The 10K starts at 10:00 and follows a flat, chip-timed coastal route beside the Firth of Forth.",
+  },
+  "crewe-10k|2026-10-25|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+    source: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+    notes:
+      "RunThrough confirms a 09:00 start on Sunday 25 October from the Royal Arcade in Crewe town centre. The fully closed-road 10K is flat and chip timed, with 52 metres of elevation, free race photos and a 90-minute cut-off.",
+  },
+  "dh-river-run|2026-10-25|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.eventsupnorth.co.uk/event/2377",
+    source: "https://dhrunners.org/",
+    notes:
+      "DH Runners confirms its 2026 River Run is open and links directly to the official Events Up North checkout. The 10:00 race follows a fast out-and-back 10K beside the river from Denton Street, with registration and post-race facilities at Denton Holme WMCC.",
   },
 };
 
@@ -9161,6 +9309,178 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Hardmoors and the North York Moors National Park stage marked and marshalled trail loops from Danby Lodge. A recent calendar check now marks the next edition TBC, so entrants should await a confirmed date before booking travel.",
     organiser: "Hardmoors with North York Moors National Park",
     website: "https://www.hardmoors110.org.uk/other-races/",
+  },
+  "runabc-west-acre-wild-10k": {
+    name: "West Acre Wild 10K Challenge",
+    city: "West Acre",
+    county: "Norfolk",
+    country: "England",
+    area: "The Stag and West Acre woodland tracks",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "West Acre Wild 10K — an off-road charity challenge through rural Norfolk.",
+    description:
+      "This charitable 10K leaves The Stag and follows undulating bridleways, farm paths and woodland tracks around West Acre. Runners may tackle optional obstacles and the ford near the finish, with a narrow walkway available as an alternative. The event includes chip timing, a bespoke medal and finish refreshments.",
+    organiser: "West Acre Wild with Total Race Timing",
+    website: "https://totalracetiming.co.uk/race/668",
+  },
+  "wellington-10k": {
+    name: "Q Financial Wellington 10K",
+    city: "Wellington",
+    county: "Shropshire",
+    country: "England",
+    area: "Dothill Playing Field, Dothill Nature Reserve and Silkin Way",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Wellington 10K — a measured, fast out-and-back race through Dothill.",
+    description:
+      "Run The Distance's Wellington 10K starts and finishes at Dothill Playing Field and follows a measured out-and-back route through Dothill Nature Reserve, along Silkin Way and towards Wrockwardine. The event includes chip timing, water stations, a bespoke medal and free photographs.",
+    organiser: "Run The Distance",
+    website: "https://www.runthedistance.co.uk/wellington-10k",
+  },
+  "wigton-road-runners-10k": {
+    name: "Wigton Road Runners Charity 10K",
+    city: "Wigton",
+    county: "Cumbria",
+    country: "England",
+    area: "Barton Laws, country roads and Phoenix Park",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Wigton Road Runners 10K — a measured charity race on quiet Cumbrian roads.",
+    description:
+      "Wigton Road Runners' charity 10K starts near Barton Laws and follows a single measured loop over footpaths and quiet, undulating country roads before finishing in Phoenix Park. The event provides chip timing, a mid-course water point and a medal, with proceeds supporting local charities.",
+    organiser: "Wigton Road Runners",
+    website: "https://clubspark.englandathletics.org/WigtonRoadRunners",
+  },
+  "beachy-head-marathon": {
+    name: "Beachy Head Marathon, Ultra, Half & 10K",
+    city: "Eastbourne",
+    county: "East Sussex",
+    country: "England",
+    area: "Dukes Drive, South Downs and Beachy Head coast",
+    surface: "Trail",
+    distances: ["10K", "Half", "Marathon", "Ultra"],
+    summary: "Beachy Head races — challenging coastal trails over the South Downs from Eastbourne.",
+    description:
+      "Eastbourne Borough Council's Beachy Head weekend includes a 10K, half marathon, marathon and 52.6K ultra. The shorter race loops from Dukes Drive towards Belle Tout Lighthouse, while the longer courses cross the South Downs and Seven Sisters before returning along the coast.",
+    organiser: "Eastbourne Borough Council Events Team",
+    website: "https://www.visiteastbourne.com/marathon",
+  },
+  "clock-change-challenge-october": {
+    name: "Clock Change Challenge Autumn",
+    city: "Calne",
+    county: "Wiltshire",
+    country: "England",
+    area: "Calne Community Campus and quiet country lanes",
+    surface: "Road",
+    distances: ["5K", "10K", "1.5K Fun Run"],
+    summary: "Clock Change Challenge — measured autumn road races from Calne Community Campus.",
+    description:
+      "Wiltshire Council's autumn programme combines accurately measured 5K and 10K road races with a 1.5K fun run. The flat out-and-back courses use quiet country lanes, include chip timing and medals, and the 10K closes the 2026 Wiltshire Road Race League.",
+    organiser: "Wiltshire Council",
+    website: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+  },
+  "imperial-war-museum-duxford-dash-5k-10k": {
+    name: "Duxford Dash 5K, 10K & Family Mile",
+    city: "Duxford",
+    county: "Cambridgeshire",
+    country: "England",
+    area: "IWM Duxford airfield runway",
+    surface: "Road",
+    distances: ["5K", "10K", "1mi Family"],
+    summary: "Duxford Dash — fast runway races around the historic IWM airfield.",
+    description:
+      "Imperial War Museums and Good Running Events stage one-lap 5K and two-lap 10K races on Duxford's live airfield runway, closed to aircraft for the event. Places include chip timing, free parking, museum admission, photography and a themed finisher medal.",
+    organiser: "Imperial War Museums with Good Running Events",
+    website: "https://www.goodrunningevents.co.uk/duxford-dash",
+  },
+  "monsal-trail-half-marathon-autumn-saturday": {
+    name: "Monsal Trail October Half Marathon & 10K — Saturday",
+    city: "Bakewell",
+    county: "Derbyshire",
+    country: "England",
+    area: "Bakewell Station and Monsal Trail",
+    surface: "Trail",
+    distances: ["10K", "Half"],
+    summary:
+      "Monsal Trail Saturday races — traffic-free autumn running through Peak District tunnels.",
+    description:
+      "Nice Work's Saturday 10K and half marathon start at Bakewell Station and follow the former Midland Railway through Peak District countryside, tunnels and across Monsal Viaduct. The shared trail is predominantly flat, traffic-free and surfaced with tarmac and hard track.",
+    organiser: "Nice Work",
+    website:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+  },
+  "newton-road-races": {
+    name: "Newton Road Races 3K & 10K",
+    city: "Cambuslang",
+    county: "South Lanarkshire",
+    country: "Scotland",
+    area: "Westburn Hall and Clyde walkway",
+    surface: "Road",
+    distances: ["3K", "10K"],
+    summary:
+      "Newton Road Races — a measured memorial event beside the Clyde, with its next date TBC.",
+    description:
+      "Newton Road Runners created the 3K and 10K in memory of club member Cat Gaskell. The latest verified edition used a fast out-and-back on the Clyde path from Westburn Hall, with chip timing and a Scottish Athletics licence; the imported 2026 date has not yet been confirmed by the club.",
+    organiser: "Newton Road Runners",
+    website: "https://www.newton-roadrunners.com/",
+  },
+  "brigg-10k": {
+    name: "Brigg Poppy 10K & Military Challenge",
+    city: "Brigg",
+    county: "North Lincolnshire",
+    country: "England",
+    area: "Brigg Market Place and closed country roads",
+    surface: "Road",
+    distances: ["10K", "10K Military Challenge", "Virtual 10K"],
+    summary: "Brigg Poppy 10K — a fast town-centre race and weighted military challenge.",
+    description:
+      "Curly's Athletes stages an officially measured and UKA-licensed 10K from Brigg Market Place over flat, closed country roads. A separate Military Challenge uses the same course with weighted packs, and the event supports the Royal British Legion Poppy Appeal.",
+    organiser: "Curly's Athletes",
+    website: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+  },
+  "cramond-promenade-5k-10k-half-marathon-october": {
+    name: "Cramond Promenade 5K, 10K & Half Marathon October",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "Cramond Promenade",
+    surface: "Road",
+    distances: ["5K", "10K", "Half"],
+    summary:
+      "Cramond Promenade October — flat, chip-timed coastal races beside the Firth of Forth.",
+    description:
+      "Up and Running Events stages 5K, 10K and half-marathon races on Cramond's flat waterfront paths. The programme includes chip timing, a finisher medal, race photography, hydration and a fully marked and marshalled route.",
+    organiser: "Up and Running Events",
+    website: "https://www.upandrunningevents.co.uk/events",
+  },
+  "crewe-10k": {
+    name: "Crewe 10K",
+    city: "Crewe",
+    county: "Cheshire",
+    country: "England",
+    area: "Royal Arcade and Crewe town centre",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Crewe 10K — a flat, closed-road town-centre race from the Royal Arcade.",
+    description:
+      "RunThrough's chip-timed 10K starts and finishes at the Royal Arcade and follows a fast, flat, fully closed-road course through Crewe. Entry includes a themed medal, free photographs and post-race refreshments.",
+    organiser: "RunThrough Events in support of YMCA Cheshire",
+    website: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+  },
+  "dh-river-run": {
+    name: "DH River Run 10K",
+    city: "Carlisle",
+    county: "Cumbria",
+    country: "England",
+    area: "Denton Holme and the Carlisle-to-Dalston river path",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "DH River Run — a fast riverside out-and-back 10K from Denton Holme.",
+    description:
+      "DH Runners' 10K starts and finishes on Denton Street and follows the traffic-free river path towards Dalston. Race facilities are at Denton Holme WMCC, and the event includes a water station, prizes, photographs and a post-race buffet.",
+    organiser: "DH Runners",
+    website: "https://dhrunners.org/",
   },
 };
 
@@ -20103,6 +20423,352 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "This listing was manually checked on 10 August 2026 and now states that the next date is TBC. Recheck the Hardmoors site before entry.",
+    },
+  ],
+  "runabc-west-acre-wild-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-total-race-timing-west-acre-2026",
+      providerName: "Total Race Timing official waiting list",
+      entryUrl: "https://totalracetiming.co.uk/race/668",
+      entryType: "official",
+      status: "waitlist",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://totalracetiming.co.uk/race/668",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The 10K field is at its limit. Total Race Timing currently offers only a free waiting-list place; the sold-out race prices were £24 standard and £20 for under-15s.",
+    },
+    {
+      providerCode: "running-life-west-acre-2026",
+      providerName: "Running.life availability guide",
+      entryUrl: "https://running.life/en/event/west-acre-wild-10k-challenge",
+      entryType: "third_party",
+      status: "waitlist",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://running.life/en/event/west-acre-wild-10k-challenge",
+      isVerified: true,
+      notes:
+        "Running.life confirms the exact 18 October 2026 edition and points runners to the organiser. Use Total Race Timing for the authoritative waiting-list status.",
+    },
+  ],
+  "wellington-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-ticket-tailor-wellington-2026",
+      providerName: "Run The Distance official entry",
+      entryUrl: "https://www.tickettailor.com/events/runthedistance/1915196",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://www.runthedistance.co.uk/wellington-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's Wellington page links directly to this Ticket Tailor checkout and confirms the 18 October date and 09:30 start. Confirm the selected affiliated, standard or T-shirt ticket total before payment.",
+    },
+    {
+      providerCode: "timeoutdoors-wellington-2026",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/wellington-10k-1",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/wellington-10k-1",
+      isVerified: true,
+      notes:
+        "TimeOutdoors currently lists online entry across an £18-£34 range, depending on ticket and optional T-shirt. Compare the final total with the organiser's direct checkout.",
+    },
+  ],
+  "wigton-road-runners-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-events-up-north-wigton-2026",
+      providerName: "Wigton Road Runners official entry",
+      entryUrl: "https://www.eventsupnorth.co.uk/event/2221",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://clubspark.englandathletics.org/WigtonRoadRunners",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The club's England Athletics-hosted page links this exact Events Up North booking route for its 18 October 2026 charity race. Confirm the displayed affiliated or standard fee before paying.",
+    },
+    {
+      providerCode: "runabc-wigton-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/wigton-road-runners-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/wigton-road-runners-10k",
+      isVerified: true,
+      notes:
+        "runABC confirms the 18 October date, 10:00 start, Barton Laws race HQ and CA7 9QY postcode and provides an entry route. Prefer the club-linked Events Up North checkout.",
+    },
+  ],
+  "beachy-head-marathon|2026-10-24|10K": [
+    {
+      providerCode: "official-eastbourne-beachy-head-10k-2026",
+      providerName: "Beachy Head official entry",
+      entryUrl: "https://www.visiteastbourne.com/marathon/enter/10k",
+      entryType: "official",
+      status: "open",
+      closesAt: "2026-10-23T12:00:00+01:00",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.visiteastbourne.com/marathon/enter/10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Eastbourne Borough Council's official 10K page contains the live entry route. Entries close at capacity or at noon on 23 October, and there is no race-day entry.",
+    },
+    {
+      providerCode: "runabc-beachy-head-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/beachy-head-marathon",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/beachy-head-marathon",
+      isVerified: true,
+      notes:
+        "runABC provides an alternative event guide. Use the council's official page for the corrected Saturday date, 09:15 start and final entry terms.",
+    },
+  ],
+  "clock-change-challenge-october|2026-10-25|10K": [
+    {
+      providerCode: "official-eventrac-clock-change-autumn-2026",
+      providerName: "Wiltshire Council official entry",
+      entryUrl: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The council's live Eventrac page is accepting entries for the 25 October programme and confirms the 11:00 10K start. Day entries are possible only if the 400-runner limit has not been reached.",
+    },
+    {
+      providerCode: "runabc-clock-change-autumn-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/clock-change-challenge-october",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/clock-change-challenge-october",
+      isVerified: true,
+      notes:
+        "runABC confirms the Calne venue and provides an entry route. Use Wiltshire Council's Eventrac page for the corrected date, start time and current capacity.",
+    },
+  ],
+  "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-total-race-timing-duxford-2026",
+      providerName: "Duxford Dash official waiting list",
+      entryUrl: "https://totalracetiming.co.uk/race/708",
+      entryType: "official",
+      status: "waitlist",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://totalracetiming.co.uk/race/708",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The 10K has reached its limit and Total Race Timing now offers a free waiting list. The sold-out individual 10K price was £28.50 including its £1.20 administration fee.",
+    },
+    {
+      providerCode: "official-good-running-duxford-2026",
+      providerName: "Good Running Events information",
+      entryUrl: "https://www.goodrunningevents.co.uk/duxford-dash",
+      entryType: "official",
+      status: "waitlist",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.goodrunningevents.co.uk/duxford-dash",
+      isVerified: true,
+      notes:
+        "The organiser confirms the 25 October date, two-lap 10K format, included parking and museum admission and links to Total Race Timing. Join the official waiting list rather than attempting an older checkout.",
+    },
+  ],
+  "monsal-trail-half-marathon-autumn-saturday|2026-10-24|10K": [
+    {
+      providerCode: "official-nice-work-monsal-saturday-2026",
+      providerName: "Nice Work official entry",
+      entryUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Nice Work lists the Saturday 10K as open from £28, with on-the-day entry at £30 only if space remains. Select Saturday 24 October rather than the Sunday race.",
+    },
+    {
+      providerCode: "worldsmarathons-monsal-saturday-2026",
+      providerName: "World's Marathons entry",
+      entryUrl:
+        "https://worldsmarathons.com/marathon/monsal-trail-october-half-marathon-10k-weekend",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 33,
+      priceCurrency: "EUR",
+      closesAt: "2026-10-23T23:59:00+01:00",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl:
+        "https://worldsmarathons.com/marathon/monsal-trail-october-half-marathon-10k-weekend",
+      isVerified: true,
+      notes:
+        "World's Marathons offers a separate Saturday 10K booking route at €33 and lists 23 October as its close date. Compare the final currency conversion and fees with Nice Work.",
+    },
+  ],
+  "newton-road-races|2026-10-24|10K": [
+    {
+      providerCode: "official-newton-road-runners-tbc",
+      providerName: "Newton Road Runners official site",
+      entryUrl: "https://www.newton-roadrunners.com/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl: "https://www.newton-roadrunners.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The club has not published a 2026 Newton Road Races entry page. Do not use an older checkout or arrange travel against the imported 24 October date.",
+    },
+    {
+      providerCode: "runabc-newton-road-races-tbc",
+      providerName: "runABC status guide",
+      entryUrl: "https://runabc.co.uk/newton-road-races",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/newton-road-races",
+      isVerified: true,
+      notes:
+        "runABC's latest detailed event page is for 8 November 2025, not the imported 2026 date. Await confirmation from Newton Road Runners.",
+    },
+  ],
+  "brigg-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-curlys-brigg-poppy-2026",
+      providerName: "Curly's Athletes official entry",
+      entryUrl: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Curly's lists standard 10K and Military Challenge entry at £26, with a £2 discount for UKA members and armed-forces entrants, and links its live EtchRock checkout.",
+    },
+    {
+      providerCode: "runabc-brigg-poppy-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/brigg-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/brigg-10k",
+      isVerified: true,
+      notes:
+        "runABC provides an alternative event guide. Use Curly's official page to choose between the standard 10K, Military Challenge and virtual event.",
+    },
+  ],
+  "cramond-promenade-5k-10k-half-marathon-october|2026-10-25|10K": [
+    {
+      providerCode: "official-up-and-running-cramond-october-2026",
+      providerName: "Up and Running Events official entry",
+      entryUrl: "https://www.upandrunningevents.co.uk/events",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.upandrunningevents.co.uk/events",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists the exact 25 October Cramond programme and routes entrants to its live Let's Do This checkout. Select the October 10K rather than the separate September edition.",
+    },
+    {
+      providerCode: "runabc-cramond-october-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/cramond-promenade-5k-10k-half-marathon-october",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/cramond-promenade-5k-10k-half-marathon-october",
+      isVerified: true,
+      notes:
+        "runABC provides a second event and entry route for the exact October edition. Use the organiser's page as the primary source for live booking availability.",
+    },
+  ],
+  "crewe-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-runthrough-crewe-2026",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough's live page lists standard 10K entry at £32 for the 09:00 race on Sunday 25 October.",
+    },
+    {
+      providerCode: "charity-ymca-cheshire-crewe-2026",
+      providerName: "YMCA Cheshire charity place",
+      entryUrl: "https://ymcacheshire.org.uk/events/crewe-10k-2026/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://ymcacheshire.org.uk/events/crewe-10k-2026/",
+      isVerified: true,
+      notes:
+        "YMCA Cheshire offers a £20 charity place with a £150 minimum sponsorship commitment, including its running vest and fundraising support.",
+    },
+  ],
+  "dh-river-run|2026-10-25|10K": [
+    {
+      providerCode: "official-events-up-north-dh-river-run-2026",
+      providerName: "DH Runners official entry",
+      entryUrl: "https://www.eventsupnorth.co.uk/event/2377",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://dhrunners.org/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "DH Runners' official site links directly to this Events Up North checkout. Entry starts at £19 for affiliated runners and is £21 for unaffiliated runners.",
+    },
+    {
+      providerCode: "running-life-dh-river-run-2026",
+      providerName: "running.life event guide",
+      entryUrl: "https://running.life/en/event/dh-river-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://running.life/en/event/dh-river-run",
+      isVerified: true,
+      notes:
+        "The event guide confirms 230 places, £19 affiliated and £21 unaffiliated entry, the Denton Holme facilities and Rome Street parking. Complete the purchase through DH Runners' official link.",
     },
   ],
 };

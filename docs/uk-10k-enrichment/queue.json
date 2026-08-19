@@ -1,0 +1,2655 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-19T09:30:00+01:00",
+  "generatedFrom": "src/data/runabc.ts",
+  "createdAgainstSeed": "athrecs-uk-10k-entry-batch-sixty-two-v207",
+  "firstQueueKey": "runabc-west-acre-wild-10k|2026-10-18|10K",
+  "checkpointSize": 3,
+  "releaseSize": 12,
+  "firstRelease": 63,
+  "totalRaces": 264,
+  "totalCheckpoints": 88,
+  "totalReleases": 22,
+  "races": [
+    {
+      "position": 1,
+      "release": 63,
+      "checkpoint": "63A",
+      "key": "runabc-west-acre-wild-10k|2026-10-18|10K",
+      "slug": "runabc-west-acre-wild-10k",
+      "sourceDate": "2026-10-18",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/west-acre-wild-10k"
+    },
+    {
+      "position": 2,
+      "release": 63,
+      "checkpoint": "63A",
+      "key": "wellington-10k|2026-10-18|10K",
+      "slug": "wellington-10k",
+      "sourceDate": "2026-10-18",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wellington-10k"
+    },
+    {
+      "position": 3,
+      "release": 63,
+      "checkpoint": "63A",
+      "key": "wigton-road-runners-10k|2026-10-18|10K",
+      "slug": "wigton-road-runners-10k",
+      "sourceDate": "2026-10-18",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wigton-road-runners-10k"
+    },
+    {
+      "position": 4,
+      "release": 63,
+      "checkpoint": "63B",
+      "key": "beachy-head-marathon|2026-10-23|10K",
+      "slug": "beachy-head-marathon",
+      "sourceDate": "2026-10-23",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/beachy-head-marathon"
+    },
+    {
+      "position": 5,
+      "release": 63,
+      "checkpoint": "63B",
+      "key": "clock-change-challenge-october|2026-10-24|10K",
+      "slug": "clock-change-challenge-october",
+      "sourceDate": "2026-10-24",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/clock-change-challenge-october"
+    },
+    {
+      "position": 6,
+      "release": 63,
+      "checkpoint": "63B",
+      "key": "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|10K",
+      "slug": "imperial-war-museum-duxford-dash-5k-10k",
+      "sourceDate": "2026-10-24",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/imperial-war-museum-duxford-dash-5k-10k"
+    },
+    {
+      "position": 7,
+      "release": 63,
+      "checkpoint": "63C",
+      "key": "monsal-trail-half-marathon-autumn-saturday|2026-10-24|10K",
+      "slug": "monsal-trail-half-marathon-autumn-saturday",
+      "sourceDate": "2026-10-24",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/monsal-trail-half-marathon-autumn-saturday"
+    },
+    {
+      "position": 8,
+      "release": 63,
+      "checkpoint": "63C",
+      "key": "newton-road-races|2026-10-24|10K",
+      "slug": "newton-road-races",
+      "sourceDate": "2026-10-24",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/newton-road-races"
+    },
+    {
+      "position": 9,
+      "release": 63,
+      "checkpoint": "63C",
+      "key": "brigg-10k|2026-10-25|10K",
+      "slug": "brigg-10k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/brigg-10k"
+    },
+    {
+      "position": 10,
+      "release": 63,
+      "checkpoint": "63D",
+      "key": "cramond-promenade-5k-10k-half-marathon-october|2026-10-25|10K",
+      "slug": "cramond-promenade-5k-10k-half-marathon-october",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/cramond-promenade-5k-10k-half-marathon-october"
+    },
+    {
+      "position": 11,
+      "release": 63,
+      "checkpoint": "63D",
+      "key": "crewe-10k|2026-10-25|10K",
+      "slug": "crewe-10k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/crewe-10k"
+    },
+    {
+      "position": 12,
+      "release": 63,
+      "checkpoint": "63D",
+      "key": "dh-river-run|2026-10-25|10K",
+      "slug": "dh-river-run",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dh-river-run"
+    },
+    {
+      "position": 13,
+      "release": 64,
+      "checkpoint": "64A",
+      "key": "fleet-10k5k-peter-driver-memorial|2026-10-25|10K",
+      "slug": "fleet-10k5k-peter-driver-memorial",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/fleet-10k5k-peter-driver-memorial"
+    },
+    {
+      "position": 14,
+      "release": 64,
+      "checkpoint": "64A",
+      "key": "haltemprice-10k|2026-10-25|10K",
+      "slug": "haltemprice-10k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/haltemprice-10k"
+    },
+    {
+      "position": 15,
+      "release": 64,
+      "checkpoint": "64A",
+      "key": "jedburgh-half-marathon|2026-10-25|10K",
+      "slug": "jedburgh-half-marathon",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/jedburgh-half-marathon"
+    },
+    {
+      "position": 16,
+      "release": 64,
+      "checkpoint": "64B",
+      "key": "kernow-killer-october|2026-10-25|10K",
+      "slug": "kernow-killer-october",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/kernow-killer-october"
+    },
+    {
+      "position": 17,
+      "release": 64,
+      "checkpoint": "64B",
+      "key": "monsal-trail-half-marathon-autumn-sunday|2026-10-25|10K",
+      "slug": "monsal-trail-half-marathon-autumn-sunday",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/monsal-trail-half-marathon-autumn-sunday"
+    },
+    {
+      "position": 18,
+      "release": 64,
+      "checkpoint": "64B",
+      "key": "polesden-lacey-10k|2026-10-25|10K",
+      "slug": "polesden-lacey-10k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/polesden-lacey-10k"
+    },
+    {
+      "position": 19,
+      "release": 64,
+      "checkpoint": "64C",
+      "key": "regents-park-5k-10k-october|2026-10-25|10K",
+      "slug": "regents-park-5k-10k-october",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/regents-park-5k-10k-october"
+    },
+    {
+      "position": 20,
+      "release": 64,
+      "checkpoint": "64C",
+      "key": "rosemullion-10k|2026-10-25|10K",
+      "slug": "rosemullion-10k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/rosemullion-10k"
+    },
+    {
+      "position": 21,
+      "release": 64,
+      "checkpoint": "64C",
+      "key": "running-tribe-races-october|2026-10-25|10K",
+      "slug": "running-tribe-races-october",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/running-tribe-races-october"
+    },
+    {
+      "position": 22,
+      "release": 64,
+      "checkpoint": "64D",
+      "key": "stroud-half-marathon|2026-10-25|10K",
+      "slug": "stroud-half-marathon",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/stroud-half-marathon"
+    },
+    {
+      "position": 23,
+      "release": 64,
+      "checkpoint": "64D",
+      "key": "the-one-in-the-park-greenwich-park-10k-5k|2026-10-25|10K",
+      "slug": "the-one-in-the-park-greenwich-park-10k-5k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-one-in-the-park-greenwich-park-10k-5k"
+    },
+    {
+      "position": 24,
+      "release": 64,
+      "checkpoint": "64D",
+      "key": "the-pumpkin-plod|2026-10-25|10K",
+      "slug": "the-pumpkin-plod",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-pumpkin-plod"
+    },
+    {
+      "position": 25,
+      "release": 65,
+      "checkpoint": "65A",
+      "key": "tonbridge-10k|2026-10-25|10K",
+      "slug": "tonbridge-10k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/tonbridge-10k"
+    },
+    {
+      "position": 26,
+      "release": 65,
+      "checkpoint": "65A",
+      "key": "whixley-5k-10k|2026-10-25|10K",
+      "slug": "whixley-5k-10k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/whixley-5k-10k"
+    },
+    {
+      "position": 27,
+      "release": 65,
+      "checkpoint": "65A",
+      "key": "wight-lines|2026-10-25|10K",
+      "slug": "wight-lines",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wight-lines"
+    },
+    {
+      "position": 28,
+      "release": 65,
+      "checkpoint": "65B",
+      "key": "worthing-seafront-10k|2026-10-25|10K",
+      "slug": "worthing-seafront-10k",
+      "sourceDate": "2026-10-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/worthing-seafront-10k"
+    },
+    {
+      "position": 29,
+      "release": 65,
+      "checkpoint": "65B",
+      "key": "chase-the-moon-olympic-park-5k-10k-halloween|2026-10-28|10K",
+      "slug": "chase-the-moon-olympic-park-5k-10k-halloween",
+      "sourceDate": "2026-10-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/chase-the-moon-olympic-park-5k-10k-halloween"
+    },
+    {
+      "position": 30,
+      "release": 65,
+      "checkpoint": "65B",
+      "key": "chase-the-moon-olympic-park-5k-10k-october|2026-10-28|10K",
+      "slug": "chase-the-moon-olympic-park-5k-10k-october",
+      "sourceDate": "2026-10-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/chase-the-moon-olympic-park-5k-10k-october"
+    },
+    {
+      "position": 31,
+      "release": 65,
+      "checkpoint": "65C",
+      "key": "piglove-by-the-river-5k-10k-october|2026-10-28|10K",
+      "slug": "piglove-by-the-river-5k-10k-october",
+      "sourceDate": "2026-10-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/piglove-by-the-river-5k-10k-october"
+    },
+    {
+      "position": 32,
+      "release": 65,
+      "checkpoint": "65C",
+      "key": "cattle-creepy-10k|2026-10-29|10K",
+      "slug": "cattle-creepy-10k",
+      "sourceDate": "2026-10-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/cattle-creepy-10k"
+    },
+    {
+      "position": 33,
+      "release": 65,
+      "checkpoint": "65C",
+      "key": "haldon-halloween-twilight-run|2026-10-30|10K",
+      "slug": "haldon-halloween-twilight-run",
+      "sourceDate": "2026-10-30",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/haldon-halloween-twilight-run"
+    },
+    {
+      "position": 34,
+      "release": 65,
+      "checkpoint": "65D",
+      "key": "selworthy-stargazer|2026-10-30|10K",
+      "slug": "selworthy-stargazer",
+      "sourceDate": "2026-10-30",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/selworthy-stargazer"
+    },
+    {
+      "position": 35,
+      "release": 65,
+      "checkpoint": "65D",
+      "key": "auchterarder-chilli-trail-race|2026-10-31|10K",
+      "slug": "auchterarder-chilli-trail-race",
+      "sourceDate": "2026-10-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/auchterarder-chilli-trail-race"
+    },
+    {
+      "position": 36,
+      "release": 65,
+      "checkpoint": "65D",
+      "key": "devon-trail-10k|2026-10-31|10K",
+      "slug": "devon-trail-10k",
+      "sourceDate": "2026-10-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/devon-trail-10k"
+    },
+    {
+      "position": 37,
+      "release": 66,
+      "checkpoint": "66A",
+      "key": "helvellyn-trail-run-10k|2026-10-31|10K",
+      "slug": "helvellyn-trail-run-10k",
+      "sourceDate": "2026-10-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/helvellyn-trail-run-10k"
+    },
+    {
+      "position": 38,
+      "release": 66,
+      "checkpoint": "66A",
+      "key": "inverleith-park-5k-10k-october|2026-10-31|10K",
+      "slug": "inverleith-park-5k-10k-october",
+      "sourceDate": "2026-10-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/inverleith-park-5k-10k-october"
+    },
+    {
+      "position": 39,
+      "release": 66,
+      "checkpoint": "66A",
+      "key": "porth-eirias-halloween-10k-fun-run|2026-10-31|10K",
+      "slug": "porth-eirias-halloween-10k-fun-run",
+      "sourceDate": "2026-10-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/porth-eirias-halloween-10k-fun-run"
+    },
+    {
+      "position": 40,
+      "release": 66,
+      "checkpoint": "66B",
+      "key": "the-petzl-night-runner-delamere|2026-10-31|10K",
+      "slug": "the-petzl-night-runner-delamere",
+      "sourceDate": "2026-10-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-petzl-night-runner-delamere"
+    },
+    {
+      "position": 41,
+      "release": 66,
+      "checkpoint": "66B",
+      "key": "anglesey-trail-half-marathon|2026-11-01|10K",
+      "slug": "anglesey-trail-half-marathon",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/anglesey-trail-half-marathon"
+    },
+    {
+      "position": 42,
+      "release": 66,
+      "checkpoint": "66B",
+      "key": "bridge-of-orchy-10k|2026-11-01|10K",
+      "slug": "bridge-of-orchy-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bridge-of-orchy-10k"
+    },
+    {
+      "position": 43,
+      "release": 66,
+      "checkpoint": "66C",
+      "key": "crowborough-10k|2026-11-01|10K",
+      "slug": "crowborough-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/crowborough-10k"
+    },
+    {
+      "position": 44,
+      "release": 66,
+      "checkpoint": "66C",
+      "key": "deepdale-dash-10k|2026-11-01|10K",
+      "slug": "deepdale-dash-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/deepdale-dash-10k"
+    },
+    {
+      "position": 45,
+      "release": 66,
+      "checkpoint": "66C",
+      "key": "excalibur-winter-trail-races-10km-and-17km|2026-11-01|10K",
+      "slug": "excalibur-winter-trail-races-10km-and-17km",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/excalibur-winter-trail-races-10km-and-17km"
+    },
+    {
+      "position": 46,
+      "release": 66,
+      "checkpoint": "66D",
+      "key": "gainsborough-and-morton-10k|2026-11-01|10K",
+      "slug": "gainsborough-and-morton-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/gainsborough-and-morton-10k"
+    },
+    {
+      "position": 47,
+      "release": 66,
+      "checkpoint": "66D",
+      "key": "hertfordshire-half-marathon|2026-11-01|10K",
+      "slug": "hertfordshire-half-marathon",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/hertfordshire-half-marathon"
+    },
+    {
+      "position": 48,
+      "release": 66,
+      "checkpoint": "66D",
+      "key": "lancing-10k|2026-11-01|10K",
+      "slug": "lancing-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/lancing-10k"
+    },
+    {
+      "position": 49,
+      "release": 67,
+      "checkpoint": "67A",
+      "key": "mornington-chasers-winter-10k-november|2026-11-01|10K",
+      "slug": "mornington-chasers-winter-10k-november",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/mornington-chasers-winter-10k-november"
+    },
+    {
+      "position": 50,
+      "release": 67,
+      "checkpoint": "67A",
+      "key": "pendle-witches-10k|2026-11-01|10K",
+      "slug": "pendle-witches-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/pendle-witches-10k"
+    },
+    {
+      "position": 51,
+      "release": 67,
+      "checkpoint": "67A",
+      "key": "peterhead-10k-road-race|2026-11-01|10K",
+      "slug": "peterhead-10k-road-race",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/peterhead-10k-road-race"
+    },
+    {
+      "position": 52,
+      "release": 67,
+      "checkpoint": "67B",
+      "key": "pollok-park-5k-10k|2026-11-01|10K",
+      "slug": "pollok-park-5k-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/pollok-park-5k-10k"
+    },
+    {
+      "position": 53,
+      "release": 67,
+      "checkpoint": "67B",
+      "key": "runthrough-greenwich-park-5k-10k-november|2026-11-01|10K",
+      "slug": "runthrough-greenwich-park-5k-10k-november",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runthrough-greenwich-park-5k-10k-november"
+    },
+    {
+      "position": 54,
+      "release": 67,
+      "checkpoint": "67B",
+      "key": "scorrier-house-halloween-twilight-run|2026-11-01|10K",
+      "slug": "scorrier-house-halloween-twilight-run",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/scorrier-house-halloween-twilight-run"
+    },
+    {
+      "position": 55,
+      "release": 67,
+      "checkpoint": "67C",
+      "key": "sidmouth-10k|2026-11-01|10K",
+      "slug": "sidmouth-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/sidmouth-10k"
+    },
+    {
+      "position": 56,
+      "release": 67,
+      "checkpoint": "67C",
+      "key": "strathaven-striders-run-with-the-wind-10k|2026-11-01|10K",
+      "slug": "strathaven-striders-run-with-the-wind-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/strathaven-striders-run-with-the-wind-10k"
+    },
+    {
+      "position": 57,
+      "release": 67,
+      "checkpoint": "67C",
+      "key": "the-tommy-10k|2026-11-01|10K",
+      "slug": "the-tommy-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-tommy-10k"
+    },
+    {
+      "position": 58,
+      "release": 67,
+      "checkpoint": "67D",
+      "key": "ullswater-trail-run-10k|2026-11-01|10K",
+      "slug": "ullswater-trail-run-10k",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/ullswater-trail-run-10k"
+    },
+    {
+      "position": 59,
+      "release": 67,
+      "checkpoint": "67D",
+      "key": "wacky-run-series-may-2026-27-aqf|2026-11-01|10K",
+      "slug": "wacky-run-series-may-2026-27-aqf",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wacky-run-series-may-2026-27-aqf"
+    },
+    {
+      "position": 60,
+      "release": 67,
+      "checkpoint": "67D",
+      "key": "wendover-trail-marathon|2026-11-01|10K",
+      "slug": "wendover-trail-marathon",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wendover-trail-marathon"
+    },
+    {
+      "position": 61,
+      "release": 68,
+      "checkpoint": "68A",
+      "key": "west-wittering-beach-run|2026-11-01|10K",
+      "slug": "west-wittering-beach-run",
+      "sourceDate": "2026-11-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/west-wittering-beach-run"
+    },
+    {
+      "position": 62,
+      "release": 68,
+      "checkpoint": "68A",
+      "key": "10k-morun-wollaton-park|2026-11-07|10K",
+      "slug": "10k-morun-wollaton-park",
+      "sourceDate": "2026-11-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/10k-morun-wollaton-park"
+    },
+    {
+      "position": 63,
+      "release": 68,
+      "checkpoint": "68A",
+      "key": "dark-dorset-10|2026-11-07|10K",
+      "slug": "dark-dorset-10",
+      "sourceDate": "2026-11-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dark-dorset-10"
+    },
+    {
+      "position": 64,
+      "release": 68,
+      "checkpoint": "68B",
+      "key": "run-tatton-5k-10k-november|2026-11-07|10K",
+      "slug": "run-tatton-5k-10k-november",
+      "sourceDate": "2026-11-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/run-tatton-5k-10k-november"
+    },
+    {
+      "position": 65,
+      "release": 68,
+      "checkpoint": "68B",
+      "key": "swinsty-fewston-lakeside-dash|2026-11-07|10K",
+      "slug": "swinsty-fewston-lakeside-dash",
+      "sourceDate": "2026-11-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/swinsty-fewston-lakeside-dash"
+    },
+    {
+      "position": 66,
+      "release": 68,
+      "checkpoint": "68B",
+      "key": "up-and-running-events-bellahouston-park-5k-10k-half-marathon-november|2026-11-07|10K",
+      "slug": "up-and-running-events-bellahouston-park-5k-10k-half-marathon-november",
+      "sourceDate": "2026-11-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/up-and-running-events-bellahouston-park-5k-10k-half-marathon-november"
+    },
+    {
+      "position": 67,
+      "release": 68,
+      "checkpoint": "68C",
+      "key": "dalby-dash-10k|2026-11-08|10K",
+      "slug": "dalby-dash-10k",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dalby-dash-10k"
+    },
+    {
+      "position": 68,
+      "release": 68,
+      "checkpoint": "68C",
+      "key": "dorney-lake-half-marathon-10k-5k-november|2026-11-08|10K",
+      "slug": "dorney-lake-half-marathon-10k-5k-november",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dorney-lake-half-marathon-10k-5k-november"
+    },
+    {
+      "position": 69,
+      "release": 68,
+      "checkpoint": "68C",
+      "key": "holyrood-park-5k-10k-half-marathon-november|2026-11-08|10K",
+      "slug": "holyrood-park-5k-10k-half-marathon-november",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/holyrood-park-5k-10k-half-marathon-november"
+    },
+    {
+      "position": 70,
+      "release": 68,
+      "checkpoint": "68D",
+      "key": "jimmy-irvine-achilles-heel-bella-10k|2026-11-08|10K",
+      "slug": "jimmy-irvine-achilles-heel-bella-10k",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/jimmy-irvine-achilles-heel-bella-10k"
+    },
+    {
+      "position": 71,
+      "release": 68,
+      "checkpoint": "68D",
+      "key": "mallard-cake-dash|2026-11-08|10K",
+      "slug": "mallard-cake-dash",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/mallard-cake-dash"
+    },
+    {
+      "position": 72,
+      "release": 68,
+      "checkpoint": "68D",
+      "key": "regents-park-10k-november|2026-11-08|10K",
+      "slug": "regents-park-10k-november",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/regents-park-10k-november"
+    },
+    {
+      "position": 73,
+      "release": 69,
+      "checkpoint": "69A",
+      "key": "rother-valley-remembrance-day-trail-runs|2026-11-08|10K",
+      "slug": "rother-valley-remembrance-day-trail-runs",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/rother-valley-remembrance-day-trail-runs"
+    },
+    {
+      "position": 74,
+      "release": 69,
+      "checkpoint": "69A",
+      "key": "strathclyde-park-5k-10k-half-marathon-november|2026-11-08|10K",
+      "slug": "strathclyde-park-5k-10k-half-marathon-november",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/strathclyde-park-5k-10k-half-marathon-november"
+    },
+    {
+      "position": 75,
+      "release": 69,
+      "checkpoint": "69A",
+      "key": "windsor-trail-run-half-marathon-10k-november|2026-11-08|10K",
+      "slug": "windsor-trail-run-half-marathon-10k-november",
+      "sourceDate": "2026-11-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/windsor-trail-run-half-marathon-10k-november"
+    },
+    {
+      "position": 76,
+      "release": 69,
+      "checkpoint": "69B",
+      "key": "dirtrun-in-the-dark-race-1-4x6-lzg|2026-11-11|10K",
+      "slug": "dirtrun-in-the-dark-race-1-4x6-lzg",
+      "sourceDate": "2026-11-11",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dirtrun-in-the-dark-race-1-4x6-lzg"
+    },
+    {
+      "position": 77,
+      "release": 69,
+      "checkpoint": "69B",
+      "key": "afan-forest-trail-half-marathon-10k|2026-11-14|10K",
+      "slug": "afan-forest-trail-half-marathon-10k",
+      "sourceDate": "2026-11-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/afan-forest-trail-half-marathon-10k"
+    },
+    {
+      "position": 78,
+      "release": 69,
+      "checkpoint": "69B",
+      "key": "moonlit-meadow-run-rescheduled|2026-11-14|10K",
+      "slug": "moonlit-meadow-run-rescheduled",
+      "sourceDate": "2026-11-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/moonlit-meadow-run-rescheduled"
+    },
+    {
+      "position": 79,
+      "release": 69,
+      "checkpoint": "69C",
+      "key": "yorkshire-weekend-saunter-series-kirkstall-november|2026-11-14|10K",
+      "slug": "yorkshire-weekend-saunter-series-kirkstall-november",
+      "sourceDate": "2026-11-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/yorkshire-weekend-saunter-series-kirkstall-november"
+    },
+    {
+      "position": 80,
+      "release": 69,
+      "checkpoint": "69C",
+      "key": "beckbury-trail|2026-11-15|10K",
+      "slug": "beckbury-trail",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/beckbury-trail"
+    },
+    {
+      "position": 81,
+      "release": 69,
+      "checkpoint": "69C",
+      "key": "breckland-forest-10k|2026-11-15|10K",
+      "slug": "breckland-forest-10k",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/breckland-forest-10k"
+    },
+    {
+      "position": 82,
+      "release": 69,
+      "checkpoint": "69D",
+      "key": "coastbuster-10-mile-10k|2026-11-15|10K",
+      "slug": "coastbuster-10-mile-10k",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/coastbuster-10-mile-10k"
+    },
+    {
+      "position": 83,
+      "release": 69,
+      "checkpoint": "69D",
+      "key": "coventry-10k|2026-11-15|10K",
+      "slug": "coventry-10k",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/coventry-10k"
+    },
+    {
+      "position": 84,
+      "release": 69,
+      "checkpoint": "69D",
+      "key": "run-henham|2026-11-15|10K",
+      "slug": "run-henham",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/run-henham"
+    },
+    {
+      "position": 85,
+      "release": 70,
+      "checkpoint": "70A",
+      "key": "runbase-brighton-10k|2026-11-15|10K",
+      "slug": "runbase-brighton-10k",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runbase-brighton-10k"
+    },
+    {
+      "position": 86,
+      "release": 70,
+      "checkpoint": "70A",
+      "key": "runuk-battersea-park-10k|2026-11-15|10K",
+      "slug": "runuk-battersea-park-10k",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runuk-battersea-park-10k"
+    },
+    {
+      "position": 87,
+      "release": 70,
+      "checkpoint": "70A",
+      "key": "slaley-hall-half-marathon|2026-11-15|10K",
+      "slug": "slaley-hall-half-marathon",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/slaley-hall-half-marathon"
+    },
+    {
+      "position": 88,
+      "release": 70,
+      "checkpoint": "70B",
+      "key": "tempo-10k-winter-road-race-2|2026-11-15|10K",
+      "slug": "tempo-10k-winter-road-race-2",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/tempo-10k-winter-road-race-2"
+    },
+    {
+      "position": 89,
+      "release": 70,
+      "checkpoint": "70B",
+      "key": "vogrie-country-park-november|2026-11-15|10K",
+      "slug": "vogrie-country-park-november",
+      "sourceDate": "2026-11-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/vogrie-country-park-november"
+    },
+    {
+      "position": 90,
+      "release": 70,
+      "checkpoint": "70B",
+      "key": "benidorm-marathon-half-running-crazy-10k|2026-11-21|10K",
+      "slug": "benidorm-marathon-half-running-crazy-10k",
+      "sourceDate": "2026-11-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/benidorm-marathon-half-running-crazy-10k"
+    },
+    {
+      "position": 91,
+      "release": 70,
+      "checkpoint": "70C",
+      "key": "dark-dart-dash|2026-11-21|10K",
+      "slug": "dark-dart-dash",
+      "sourceDate": "2026-11-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dark-dart-dash"
+    },
+    {
+      "position": 92,
+      "release": 70,
+      "checkpoint": "70C",
+      "key": "beddington-park-10k|2026-11-22|10K",
+      "slug": "beddington-park-10k",
+      "sourceDate": "2026-11-22",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/beddington-park-10k"
+    },
+    {
+      "position": 93,
+      "release": 70,
+      "checkpoint": "70C",
+      "key": "delamere-trails-half-marathon-marathon-november|2026-11-22|10K",
+      "slug": "delamere-trails-half-marathon-marathon-november",
+      "sourceDate": "2026-11-22",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/delamere-trails-half-marathon-marathon-november"
+    },
+    {
+      "position": 94,
+      "release": 70,
+      "checkpoint": "70D",
+      "key": "far-peak-10k-half-marathon|2026-11-22|10K",
+      "slug": "far-peak-10k-half-marathon",
+      "sourceDate": "2026-11-22",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/far-peak-10k-half-marathon"
+    },
+    {
+      "position": 95,
+      "release": 70,
+      "checkpoint": "70D",
+      "key": "hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run|2026-11-22|10K",
+      "slug": "hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run",
+      "sourceDate": "2026-11-22",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run"
+    },
+    {
+      "position": 96,
+      "release": 70,
+      "checkpoint": "70D",
+      "key": "hot-chocolate-5k-10k-edinburgh|2026-11-22|10K",
+      "slug": "hot-chocolate-5k-10k-edinburgh",
+      "sourceDate": "2026-11-22",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/hot-chocolate-5k-10k-edinburgh"
+    },
+    {
+      "position": 97,
+      "release": 71,
+      "checkpoint": "71A",
+      "key": "kingston-10k-december|2026-11-22|10K",
+      "slug": "kingston-10k-december",
+      "sourceDate": "2026-11-22",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/kingston-10k-december"
+    },
+    {
+      "position": 98,
+      "release": 71,
+      "checkpoint": "71A",
+      "key": "well-run-10k|2026-11-22|10K",
+      "slug": "well-run-10k",
+      "sourceDate": "2026-11-22",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/well-run-10k"
+    },
+    {
+      "position": 99,
+      "release": 71,
+      "checkpoint": "71A",
+      "key": "chase-the-moon-battersea-5k-10k-november|2026-11-25|10K",
+      "slug": "chase-the-moon-battersea-5k-10k-november",
+      "sourceDate": "2026-11-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-november"
+    },
+    {
+      "position": 100,
+      "release": 71,
+      "checkpoint": "71B",
+      "key": "dirtrun-in-the-dark-race-1-4x6|2026-11-25|10K",
+      "slug": "dirtrun-in-the-dark-race-1-4x6",
+      "sourceDate": "2026-11-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dirtrun-in-the-dark-race-1-4x6"
+    },
+    {
+      "position": 101,
+      "release": 71,
+      "checkpoint": "71B",
+      "key": "edinburgh-morun-10k|2026-11-28|10K",
+      "slug": "edinburgh-morun-10k",
+      "sourceDate": "2026-11-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/edinburgh-morun-10k"
+    },
+    {
+      "position": 102,
+      "release": 71,
+      "checkpoint": "71B",
+      "key": "huntingdon-turkey-trot|2026-11-28|10K",
+      "slug": "huntingdon-turkey-trot",
+      "sourceDate": "2026-11-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/huntingdon-turkey-trot"
+    },
+    {
+      "position": 103,
+      "release": 71,
+      "checkpoint": "71C",
+      "key": "regentrsquos-park-5k-10k-december|2026-11-28|10K",
+      "slug": "regentrsquos-park-5k-10k-december",
+      "sourceDate": "2026-11-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/regentrsquos-park-5k-10k-december"
+    },
+    {
+      "position": 104,
+      "release": 71,
+      "checkpoint": "71C",
+      "key": "running-tribe-races-november|2026-11-28|10K",
+      "slug": "running-tribe-races-november",
+      "sourceDate": "2026-11-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/running-tribe-races-november"
+    },
+    {
+      "position": 105,
+      "release": 71,
+      "checkpoint": "71C",
+      "key": "ashford-district-christmas-10k|2026-11-29|10K",
+      "slug": "ashford-district-christmas-10k",
+      "sourceDate": "2026-11-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/ashford-district-christmas-10k"
+    },
+    {
+      "position": 106,
+      "release": 71,
+      "checkpoint": "71D",
+      "key": "glasgow-morun-10k|2026-11-29|10K",
+      "slug": "glasgow-morun-10k",
+      "sourceDate": "2026-11-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/glasgow-morun-10k"
+    },
+    {
+      "position": 107,
+      "release": 71,
+      "checkpoint": "71D",
+      "key": "leeds-abbey-dash|2026-11-29|10K",
+      "slug": "leeds-abbey-dash",
+      "sourceDate": "2026-11-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/leeds-abbey-dash"
+    },
+    {
+      "position": 108,
+      "release": 71,
+      "checkpoint": "71D",
+      "key": "newport-10k-november|2026-11-29|10K",
+      "slug": "newport-10k-november",
+      "sourceDate": "2026-11-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/newport-10k-november"
+    },
+    {
+      "position": 109,
+      "release": 72,
+      "checkpoint": "72A",
+      "key": "rtt-afan-forest-trail-10k-5k|2026-11-29|10K",
+      "slug": "rtt-afan-forest-trail-10k-5k",
+      "sourceDate": "2026-11-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k"
+    },
+    {
+      "position": 110,
+      "release": 72,
+      "checkpoint": "72A",
+      "key": "run-heaton-5k-10k-half-marathon-november|2026-11-29|10K",
+      "slug": "run-heaton-5k-10k-half-marathon-november",
+      "sourceDate": "2026-11-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/run-heaton-5k-10k-half-marathon-november"
+    },
+    {
+      "position": 111,
+      "release": 72,
+      "checkpoint": "72A",
+      "key": "stanwick-lakes-santa-run|2026-11-29|10K",
+      "slug": "stanwick-lakes-santa-run",
+      "sourceDate": "2026-11-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/stanwick-lakes-santa-run"
+    },
+    {
+      "position": 112,
+      "release": 72,
+      "checkpoint": "72B",
+      "key": "the-one-in-the-park-richmond-november|2026-11-29|10K",
+      "slug": "the-one-in-the-park-richmond-november",
+      "sourceDate": "2026-11-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-one-in-the-park-richmond-november"
+    },
+    {
+      "position": 113,
+      "release": 72,
+      "checkpoint": "72B",
+      "key": "bournemouth-coastal-ten|2026-12-05|10K",
+      "slug": "bournemouth-coastal-ten",
+      "sourceDate": "2026-12-05",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bournemouth-coastal-ten"
+    },
+    {
+      "position": 114,
+      "release": 72,
+      "checkpoint": "72B",
+      "key": "carsington-water-10k-half-marathon-december|2026-12-05|10K",
+      "slug": "carsington-water-10k-half-marathon-december",
+      "sourceDate": "2026-12-05",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/carsington-water-10k-half-marathon-december"
+    },
+    {
+      "position": 115,
+      "release": 72,
+      "checkpoint": "72C",
+      "key": "bauble-bimble|2026-12-06|10K",
+      "slug": "bauble-bimble",
+      "sourceDate": "2026-12-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bauble-bimble"
+    },
+    {
+      "position": 116,
+      "release": 72,
+      "checkpoint": "72C",
+      "key": "blackburn-10k|2026-12-06|10K",
+      "slug": "blackburn-10k",
+      "sourceDate": "2026-12-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/blackburn-10k"
+    },
+    {
+      "position": 117,
+      "release": 72,
+      "checkpoint": "72C",
+      "key": "crystal-palce-5k-10k-half-marathon-juniors-december|2026-12-06|10K",
+      "slug": "crystal-palce-5k-10k-half-marathon-juniors-december",
+      "sourceDate": "2026-12-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/crystal-palce-5k-10k-half-marathon-juniors-december"
+    },
+    {
+      "position": 118,
+      "release": 72,
+      "checkpoint": "72D",
+      "key": "edinburgh-christmas-run-5k-10k|2026-12-06|10K",
+      "slug": "edinburgh-christmas-run-5k-10k",
+      "sourceDate": "2026-12-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/edinburgh-christmas-run-5k-10k"
+    },
+    {
+      "position": 119,
+      "release": 72,
+      "checkpoint": "72D",
+      "key": "great-christmas-fun-run|2026-12-06|10K",
+      "slug": "great-christmas-fun-run",
+      "sourceDate": "2026-12-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/great-christmas-fun-run"
+    },
+    {
+      "position": 120,
+      "release": 72,
+      "checkpoint": "72D",
+      "key": "queens-park-5k-10k-october|2026-12-06|10K",
+      "slug": "queens-park-5k-10k-october",
+      "sourceDate": "2026-12-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/queens-park-5k-10k-october"
+    },
+    {
+      "position": 121,
+      "release": 73,
+      "checkpoint": "73A",
+      "key": "queens-park-5k-10k-october-4ho|2026-12-06|10K",
+      "slug": "queens-park-5k-10k-october-4ho",
+      "sourceDate": "2026-12-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/queens-park-5k-10k-october-4ho"
+    },
+    {
+      "position": 122,
+      "release": 73,
+      "checkpoint": "73A",
+      "key": "wacky-run-series-may-2026-27-y4j|2026-12-06|10K",
+      "slug": "wacky-run-series-may-2026-27-y4j",
+      "sourceDate": "2026-12-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wacky-run-series-may-2026-27-y4j"
+    },
+    {
+      "position": 123,
+      "release": 73,
+      "checkpoint": "73A",
+      "key": "runthrough-chase-the-moon-olympic-park-december|2026-12-09|10K",
+      "slug": "runthrough-chase-the-moon-olympic-park-december",
+      "sourceDate": "2026-12-09",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runthrough-chase-the-moon-olympic-park-december"
+    },
+    {
+      "position": 124,
+      "release": 73,
+      "checkpoint": "73B",
+      "key": "dorney-lake-half-marathon-10k-5k-december|2026-12-12|10K",
+      "slug": "dorney-lake-half-marathon-10k-5k-december",
+      "sourceDate": "2026-12-12",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dorney-lake-half-marathon-10k-5k-december"
+    },
+    {
+      "position": 125,
+      "release": 73,
+      "checkpoint": "73B",
+      "key": "running-tribe-races-december|2026-12-12|10K",
+      "slug": "running-tribe-races-december",
+      "sourceDate": "2026-12-12",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/running-tribe-races-december"
+    },
+    {
+      "position": 126,
+      "release": 73,
+      "checkpoint": "73B",
+      "key": "tatton-10k-december|2026-12-12|10K",
+      "slug": "tatton-10k-december",
+      "sourceDate": "2026-12-12",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/tatton-10k-december"
+    },
+    {
+      "position": 127,
+      "release": 73,
+      "checkpoint": "73C",
+      "key": "run-aintree-5k-10-half-marathon-december|2026-12-13|10K",
+      "slug": "run-aintree-5k-10-half-marathon-december",
+      "sourceDate": "2026-12-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/run-aintree-5k-10-half-marathon-december"
+    },
+    {
+      "position": 128,
+      "release": 73,
+      "checkpoint": "73C",
+      "key": "step-into-christmas|2026-12-13|10K",
+      "slug": "step-into-christmas",
+      "sourceDate": "2026-12-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/step-into-christmas"
+    },
+    {
+      "position": 129,
+      "release": 73,
+      "checkpoint": "73C",
+      "key": "telford-10k|2026-12-13|10K",
+      "slug": "telford-10k",
+      "sourceDate": "2026-12-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/telford-10k"
+    },
+    {
+      "position": 130,
+      "release": 73,
+      "checkpoint": "73D",
+      "key": "the-one-in-the-park-battersea-december|2026-12-13|10K",
+      "slug": "the-one-in-the-park-battersea-december",
+      "sourceDate": "2026-12-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-one-in-the-park-battersea-december"
+    },
+    {
+      "position": 131,
+      "release": 73,
+      "checkpoint": "73D",
+      "key": "the-one-in-the-park-regents-december|2026-12-13|10K",
+      "slug": "the-one-in-the-park-regents-december",
+      "sourceDate": "2026-12-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-one-in-the-park-regents-december"
+    },
+    {
+      "position": 132,
+      "release": 73,
+      "checkpoint": "73D",
+      "key": "chase-the-moon-battersea-5k-10k-december|2026-12-16|10K",
+      "slug": "chase-the-moon-battersea-5k-10k-december",
+      "sourceDate": "2026-12-16",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-december"
+    },
+    {
+      "position": 133,
+      "release": 74,
+      "checkpoint": "74A",
+      "key": "regents-park-5k-10k-december|2026-12-19|10K",
+      "slug": "regents-park-5k-10k-december",
+      "sourceDate": "2026-12-19",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/regents-park-5k-10k-december"
+    },
+    {
+      "position": 134,
+      "release": 74,
+      "checkpoint": "74A",
+      "key": "suffolk-christmas-canter|2026-12-19|10K",
+      "slug": "suffolk-christmas-canter",
+      "sourceDate": "2026-12-19",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/suffolk-christmas-canter"
+    },
+    {
+      "position": 135,
+      "release": 74,
+      "checkpoint": "74A",
+      "key": "bingley-christmas-canal-race|2026-12-20|10K",
+      "slug": "bingley-christmas-canal-race",
+      "sourceDate": "2026-12-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bingley-christmas-canal-race"
+    },
+    {
+      "position": 136,
+      "release": 74,
+      "checkpoint": "74B",
+      "key": "tempo-10k-winter-road-race-3|2026-12-20|10K",
+      "slug": "tempo-10k-winter-road-race-3",
+      "sourceDate": "2026-12-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/tempo-10k-winter-road-race-3"
+    },
+    {
+      "position": 137,
+      "release": 74,
+      "checkpoint": "74B",
+      "key": "town-moor-exhibition-park-5k-10k-december|2026-12-20|10K",
+      "slug": "town-moor-exhibition-park-5k-10k-december",
+      "sourceDate": "2026-12-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/town-moor-exhibition-park-5k-10k-december"
+    },
+    {
+      "position": 138,
+      "release": 74,
+      "checkpoint": "74B",
+      "key": "christmas-cracker-glasgow|2026-12-27|10K",
+      "slug": "christmas-cracker-glasgow",
+      "sourceDate": "2026-12-27",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/christmas-cracker-glasgow"
+    },
+    {
+      "position": 139,
+      "release": 74,
+      "checkpoint": "74C",
+      "key": "final-countdown-10k|2026-12-31|10K",
+      "slug": "final-countdown-10k",
+      "sourceDate": "2026-12-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/final-countdown-10k"
+    },
+    {
+      "position": 140,
+      "release": 74,
+      "checkpoint": "74C",
+      "key": "lakeland-paws-grizedale-forest-february|2027-01-03|10K",
+      "slug": "lakeland-paws-grizedale-forest-february",
+      "sourceDate": "2027-01-03",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/lakeland-paws-grizedale-forest-february"
+    },
+    {
+      "position": 141,
+      "release": 74,
+      "checkpoint": "74C",
+      "key": "the-great-january-jog-off-2027|2027-01-03|10K",
+      "slug": "the-great-january-jog-off-2027",
+      "sourceDate": "2027-01-03",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-great-january-jog-off-2027"
+    },
+    {
+      "position": 142,
+      "release": 74,
+      "checkpoint": "74D",
+      "key": "runthrough-battersea-park-5k-10k-january|2027-01-09|10K",
+      "slug": "runthrough-battersea-park-5k-10k-january",
+      "sourceDate": "2027-01-09",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runthrough-battersea-park-5k-10k-january"
+    },
+    {
+      "position": 143,
+      "release": 74,
+      "checkpoint": "74D",
+      "key": "ashington-10k-trail-run|2027-01-10|10K",
+      "slug": "ashington-10k-trail-run",
+      "sourceDate": "2027-01-10",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/ashington-10k-trail-run"
+    },
+    {
+      "position": 144,
+      "release": 74,
+      "checkpoint": "74D",
+      "key": "northampton-10k|2027-01-10|10K",
+      "slug": "northampton-10k",
+      "sourceDate": "2027-01-10",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/northampton-10k"
+    },
+    {
+      "position": 145,
+      "release": 75,
+      "checkpoint": "75A",
+      "key": "victoria-park-5k-10k-half-marathon-january|2027-01-10|10K",
+      "slug": "victoria-park-5k-10k-half-marathon-january",
+      "sourceDate": "2027-01-10",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/victoria-park-5k-10k-half-marathon-january"
+    },
+    {
+      "position": 146,
+      "release": 75,
+      "checkpoint": "75A",
+      "key": "foxtrail-5k-series-race-3|2027-01-16|10K",
+      "slug": "foxtrail-5k-series-race-3",
+      "sourceDate": "2027-01-16",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/foxtrail-5k-series-race-3"
+    },
+    {
+      "position": 147,
+      "release": 75,
+      "checkpoint": "75A",
+      "key": "haldon-night-run|2027-01-16|10K",
+      "slug": "haldon-night-run",
+      "sourceDate": "2027-01-16",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/haldon-night-run"
+    },
+    {
+      "position": 148,
+      "release": 75,
+      "checkpoint": "75B",
+      "key": "storm-the-fort|2027-01-16|10K",
+      "slug": "storm-the-fort",
+      "sourceDate": "2027-01-16",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/storm-the-fort"
+    },
+    {
+      "position": 149,
+      "release": 75,
+      "checkpoint": "75B",
+      "key": "brighten|2027-01-17|10K",
+      "slug": "brighten",
+      "sourceDate": "2027-01-17",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/brighten"
+    },
+    {
+      "position": 150,
+      "release": 75,
+      "checkpoint": "75B",
+      "key": "newhaven-10k|2027-01-17|10K",
+      "slug": "newhaven-10k",
+      "sourceDate": "2027-01-17",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/newhaven-10k"
+    },
+    {
+      "position": 151,
+      "release": 75,
+      "checkpoint": "75C",
+      "key": "run-heaton-5k-10k-half-marathon-january|2027-01-17|10K",
+      "slug": "run-heaton-5k-10k-half-marathon-january",
+      "sourceDate": "2027-01-17",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/run-heaton-5k-10k-half-marathon-january"
+    },
+    {
+      "position": 152,
+      "release": 75,
+      "checkpoint": "75C",
+      "key": "swindon-10k|2027-01-17|10K",
+      "slug": "swindon-10k",
+      "sourceDate": "2027-01-17",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/swindon-10k"
+    },
+    {
+      "position": 153,
+      "release": 75,
+      "checkpoint": "75C",
+      "key": "tempo-10k-winter-road-race-4|2027-01-17|10K",
+      "slug": "tempo-10k-winter-road-race-4",
+      "sourceDate": "2027-01-17",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/tempo-10k-winter-road-race-4"
+    },
+    {
+      "position": 154,
+      "release": 75,
+      "checkpoint": "75D",
+      "key": "kirkstall-calverley-cutter|2027-01-23|10K",
+      "slug": "kirkstall-calverley-cutter",
+      "sourceDate": "2027-01-23",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/kirkstall-calverley-cutter"
+    },
+    {
+      "position": 155,
+      "release": 75,
+      "checkpoint": "75D",
+      "key": "druridge-bay-beach-trail-runs|2027-01-24|10K",
+      "slug": "druridge-bay-beach-trail-runs",
+      "sourceDate": "2027-01-24",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/druridge-bay-beach-trail-runs"
+    },
+    {
+      "position": 156,
+      "release": 75,
+      "checkpoint": "75D",
+      "key": "finsbury-park-5k-10k-half-marathon-january|2027-01-24|10K",
+      "slug": "finsbury-park-5k-10k-half-marathon-january",
+      "sourceDate": "2027-01-24",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/finsbury-park-5k-10k-half-marathon-january"
+    },
+    {
+      "position": 157,
+      "release": 76,
+      "checkpoint": "76A",
+      "key": "liverpool-south-10k|2027-01-24|10K",
+      "slug": "liverpool-south-10k",
+      "sourceDate": "2027-01-24",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/liverpool-south-10k"
+    },
+    {
+      "position": 158,
+      "release": 76,
+      "checkpoint": "76A",
+      "key": "chase-the-moon-battersea-5k-10k-january|2027-01-27|10K",
+      "slug": "chase-the-moon-battersea-5k-10k-january",
+      "sourceDate": "2027-01-27",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-january"
+    },
+    {
+      "position": 159,
+      "release": 76,
+      "checkpoint": "76A",
+      "key": "bromley-10k|2027-01-31|10K",
+      "slug": "bromley-10k",
+      "sourceDate": "2027-01-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bromley-10k"
+    },
+    {
+      "position": 160,
+      "release": 76,
+      "checkpoint": "76B",
+      "key": "fountains-abbey-wild-trail-runs|2027-01-31|10K",
+      "slug": "fountains-abbey-wild-trail-runs",
+      "sourceDate": "2027-01-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/fountains-abbey-wild-trail-runs"
+    },
+    {
+      "position": 161,
+      "release": 76,
+      "checkpoint": "76B",
+      "key": "runthrough-crystal-palace-5k-10k-half-marathon-january|2027-01-31|10K",
+      "slug": "runthrough-crystal-palace-5k-10k-half-marathon-january",
+      "sourceDate": "2027-01-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runthrough-crystal-palace-5k-10k-half-marathon-january"
+    },
+    {
+      "position": 162,
+      "release": 76,
+      "checkpoint": "76B",
+      "key": "runuk-battersea-park-10k-winter|2027-01-31|10K",
+      "slug": "runuk-battersea-park-10k-winter",
+      "sourceDate": "2027-01-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runuk-battersea-park-10k-winter"
+    },
+    {
+      "position": 163,
+      "release": 76,
+      "checkpoint": "76C",
+      "key": "xborder-challenge-10k-scotland-to-england|2027-01-31|10K",
+      "slug": "xborder-challenge-10k-scotland-to-england",
+      "sourceDate": "2027-01-31",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/xborder-challenge-10k-scotland-to-england"
+    },
+    {
+      "position": 164,
+      "release": 76,
+      "checkpoint": "76C",
+      "key": "moonlit-meadow-run|2027-02-06|10K",
+      "slug": "moonlit-meadow-run",
+      "sourceDate": "2027-02-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/moonlit-meadow-run"
+    },
+    {
+      "position": 165,
+      "release": 76,
+      "checkpoint": "76C",
+      "key": "bexley-10k|2027-02-07|10K",
+      "slug": "bexley-10k",
+      "sourceDate": "2027-02-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bexley-10k"
+    },
+    {
+      "position": 166,
+      "release": 76,
+      "checkpoint": "76D",
+      "key": "cirencester-10k|2027-02-07|10K",
+      "slug": "cirencester-10k",
+      "sourceDate": "2027-02-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/cirencester-10k"
+    },
+    {
+      "position": 167,
+      "release": 76,
+      "checkpoint": "76D",
+      "key": "lakeland-paws-whinlatter-tails-february|2027-02-07|10K",
+      "slug": "lakeland-paws-whinlatter-tails-february",
+      "sourceDate": "2027-02-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/lakeland-paws-whinlatter-tails-february"
+    },
+    {
+      "position": 168,
+      "release": 76,
+      "checkpoint": "76D",
+      "key": "brighten-marina|2027-02-13|10K",
+      "slug": "brighten-marina",
+      "sourceDate": "2027-02-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/brighten-marina"
+    },
+    {
+      "position": 169,
+      "release": 77,
+      "checkpoint": "77A",
+      "key": "dymchurch-10k|2027-02-14|10K",
+      "slug": "dymchurch-10k",
+      "sourceDate": "2027-02-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dymchurch-10k"
+    },
+    {
+      "position": 170,
+      "release": 77,
+      "checkpoint": "77A",
+      "key": "my-funny-valentine|2027-02-14|10K",
+      "slug": "my-funny-valentine",
+      "sourceDate": "2027-02-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/my-funny-valentine"
+    },
+    {
+      "position": 171,
+      "release": 77,
+      "checkpoint": "77A",
+      "key": "alnwick-castle-half-marathon-10k|2027-02-21|10K",
+      "slug": "alnwick-castle-half-marathon-10k",
+      "sourceDate": "2027-02-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/alnwick-castle-half-marathon-10k"
+    },
+    {
+      "position": 172,
+      "release": 77,
+      "checkpoint": "77B",
+      "key": "cancer-research-uk-london-winter-run|2027-02-21|10K",
+      "slug": "cancer-research-uk-london-winter-run",
+      "sourceDate": "2027-02-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/cancer-research-uk-london-winter-run"
+    },
+    {
+      "position": 173,
+      "release": 77,
+      "checkpoint": "77B",
+      "key": "ipswich-town-10k-charity-fun-run|2027-02-21|10K",
+      "slug": "ipswich-town-10k-charity-fun-run",
+      "sourceDate": "2027-02-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/ipswich-town-10k-charity-fun-run"
+    },
+    {
+      "position": 174,
+      "release": 77,
+      "checkpoint": "77B",
+      "key": "tempo-10k-winter-road-race-5|2027-02-21|10K",
+      "slug": "tempo-10k-winter-road-race-5",
+      "sourceDate": "2027-02-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/tempo-10k-winter-road-race-5"
+    },
+    {
+      "position": 175,
+      "release": 77,
+      "checkpoint": "77C",
+      "key": "chase-the-moon-battersea-5k-10k-february|2027-02-24|10K",
+      "slug": "chase-the-moon-battersea-5k-10k-february",
+      "sourceDate": "2027-02-24",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-february"
+    },
+    {
+      "position": 176,
+      "release": 77,
+      "checkpoint": "77C",
+      "key": "runthrough-victoria-park-5k-10k-half-marathon-february|2027-02-27|10K",
+      "slug": "runthrough-victoria-park-5k-10k-half-marathon-february",
+      "sourceDate": "2027-02-27",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runthrough-victoria-park-5k-10k-half-marathon-february"
+    },
+    {
+      "position": 177,
+      "release": 77,
+      "checkpoint": "77C",
+      "key": "exeter-city-10k|2027-02-28|10K",
+      "slug": "exeter-city-10k",
+      "sourceDate": "2027-02-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/exeter-city-10k"
+    },
+    {
+      "position": 178,
+      "release": 77,
+      "checkpoint": "77D",
+      "key": "tatton-park-wild-trail-runs|2027-03-06|10K",
+      "slug": "tatton-park-wild-trail-runs",
+      "sourceDate": "2027-03-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/tatton-park-wild-trail-runs"
+    },
+    {
+      "position": 179,
+      "release": 77,
+      "checkpoint": "77D",
+      "key": "breckland-forest-marathon|2027-03-07|10K",
+      "slug": "breckland-forest-marathon",
+      "sourceDate": "2027-03-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/breckland-forest-marathon"
+    },
+    {
+      "position": 180,
+      "release": 77,
+      "checkpoint": "77D",
+      "key": "culzean-castle-trail-runs|2027-03-07|10K",
+      "slug": "culzean-castle-trail-runs",
+      "sourceDate": "2027-03-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/culzean-castle-trail-runs"
+    },
+    {
+      "position": 181,
+      "release": 78,
+      "checkpoint": "78A",
+      "key": "north-lincolnshire-half-marathon|2027-03-07|10K",
+      "slug": "north-lincolnshire-half-marathon",
+      "sourceDate": "2027-03-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/north-lincolnshire-half-marathon"
+    },
+    {
+      "position": 182,
+      "release": 78,
+      "checkpoint": "78A",
+      "key": "the-liversedge-half-marathon|2027-03-07|10K",
+      "slug": "the-liversedge-half-marathon",
+      "sourceDate": "2027-03-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-liversedge-half-marathon"
+    },
+    {
+      "position": 183,
+      "release": 78,
+      "checkpoint": "78A",
+      "key": "weymouth-bay-10k|2027-03-07|10K",
+      "slug": "weymouth-bay-10k",
+      "sourceDate": "2027-03-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/weymouth-bay-10k"
+    },
+    {
+      "position": 184,
+      "release": 78,
+      "checkpoint": "78B",
+      "key": "wight-riot|2027-03-07|10K",
+      "slug": "wight-riot",
+      "sourceDate": "2027-03-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wight-riot"
+    },
+    {
+      "position": 185,
+      "release": 78,
+      "checkpoint": "78B",
+      "key": "nantwich-10k|2027-03-14|10K",
+      "slug": "nantwich-10k",
+      "sourceDate": "2027-03-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/nantwich-10k"
+    },
+    {
+      "position": 186,
+      "release": 78,
+      "checkpoint": "78B",
+      "key": "new-forest-half-marathon-10k|2027-03-14|10K",
+      "slug": "new-forest-half-marathon-10k",
+      "sourceDate": "2027-03-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/new-forest-half-marathon-10k"
+    },
+    {
+      "position": 187,
+      "release": 78,
+      "checkpoint": "78C",
+      "key": "runuk-battersea-park-10k-spring|2027-03-14|10K",
+      "slug": "runuk-battersea-park-10k-spring",
+      "sourceDate": "2027-03-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runuk-battersea-park-10k-spring"
+    },
+    {
+      "position": 188,
+      "release": 78,
+      "checkpoint": "78C",
+      "key": "sherwood-pines-half-10k|2027-03-14|10K",
+      "slug": "sherwood-pines-half-10k",
+      "sourceDate": "2027-03-14",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/sherwood-pines-half-10k"
+    },
+    {
+      "position": 189,
+      "release": 78,
+      "checkpoint": "78C",
+      "key": "exeter-trail-races|2027-03-20|10K",
+      "slug": "exeter-trail-races",
+      "sourceDate": "2027-03-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/exeter-trail-races"
+    },
+    {
+      "position": 190,
+      "release": 78,
+      "checkpoint": "78D",
+      "key": "grasmere-10k-trail-run|2027-03-20|10K",
+      "slug": "grasmere-10k-trail-run",
+      "sourceDate": "2027-03-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/grasmere-10k-trail-run"
+    },
+    {
+      "position": 191,
+      "release": 78,
+      "checkpoint": "78D",
+      "key": "mendip-aurora|2027-03-20|10K",
+      "slug": "mendip-aurora",
+      "sourceDate": "2027-03-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/mendip-aurora"
+    },
+    {
+      "position": 192,
+      "release": 78,
+      "checkpoint": "78D",
+      "key": "spring-canal-canter-day-1|2027-03-20|10K",
+      "slug": "spring-canal-canter-day-1",
+      "sourceDate": "2027-03-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/spring-canal-canter-day-1"
+    },
+    {
+      "position": 193,
+      "release": 79,
+      "checkpoint": "79A",
+      "key": "southampton-common-10k|2027-03-21|10K",
+      "slug": "southampton-common-10k",
+      "sourceDate": "2027-03-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/southampton-common-10k"
+    },
+    {
+      "position": 194,
+      "release": 79,
+      "checkpoint": "79A",
+      "key": "the-brave-5k-10k|2027-03-21|10K",
+      "slug": "the-brave-5k-10k",
+      "sourceDate": "2027-03-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-brave-5k-10k"
+    },
+    {
+      "position": 195,
+      "release": 79,
+      "checkpoint": "79A",
+      "key": "yorkshire-weekend-saunter-series-in-slawit|2027-03-21|10K",
+      "slug": "yorkshire-weekend-saunter-series-in-slawit",
+      "sourceDate": "2027-03-21",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/yorkshire-weekend-saunter-series-in-slawit"
+    },
+    {
+      "position": 196,
+      "release": 79,
+      "checkpoint": "79B",
+      "key": "runthrough-chase-the-sun-victoria-park-5k-10k|2027-03-26|10K",
+      "slug": "runthrough-chase-the-sun-victoria-park-5k-10k",
+      "sourceDate": "2027-03-26",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runthrough-chase-the-sun-victoria-park-5k-10k"
+    },
+    {
+      "position": 197,
+      "release": 79,
+      "checkpoint": "79B",
+      "key": "intergalactic|2027-03-27|10K",
+      "slug": "intergalactic",
+      "sourceDate": "2027-03-27",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/intergalactic"
+    },
+    {
+      "position": 198,
+      "release": 79,
+      "checkpoint": "79B",
+      "key": "chasewater-easter-egg-10k|2027-03-28|10K",
+      "slug": "chasewater-easter-egg-10k",
+      "sourceDate": "2027-03-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/chasewater-easter-egg-10k"
+    },
+    {
+      "position": 199,
+      "release": 79,
+      "checkpoint": "79C",
+      "key": "clock-change-challenge-spring|2027-03-28|10K",
+      "slug": "clock-change-challenge-spring",
+      "sourceDate": "2027-03-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/clock-change-challenge-spring"
+    },
+    {
+      "position": 200,
+      "release": 79,
+      "checkpoint": "79C",
+      "key": "run-heaton-5k-10k-half-marathon-march|2027-03-28|10K",
+      "slug": "run-heaton-5k-10k-half-marathon-march",
+      "sourceDate": "2027-03-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/run-heaton-5k-10k-half-marathon-march"
+    },
+    {
+      "position": 201,
+      "release": 79,
+      "checkpoint": "79C",
+      "key": "runuk-battersea-park-10k-march|2027-03-28|10K",
+      "slug": "runuk-battersea-park-10k-march",
+      "sourceDate": "2027-03-28",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/runuk-battersea-park-10k-march"
+    },
+    {
+      "position": 202,
+      "release": 79,
+      "checkpoint": "79D",
+      "key": "brabazon-half-marathon-10k|2027-04-03|10K",
+      "slug": "brabazon-half-marathon-10k",
+      "sourceDate": "2027-04-03",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/brabazon-half-marathon-10k"
+    },
+    {
+      "position": 203,
+      "release": 79,
+      "checkpoint": "79D",
+      "key": "bramham-park-trail-runs|2027-04-04|10K",
+      "slug": "bramham-park-trail-runs",
+      "sourceDate": "2027-04-04",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bramham-park-trail-runs"
+    },
+    {
+      "position": 204,
+      "release": 79,
+      "checkpoint": "79D",
+      "key": "finsbury-park-half-marathon-5k-10k-half-marathon-april|2027-04-04|10K",
+      "slug": "finsbury-park-half-marathon-5k-10k-half-marathon-april",
+      "sourceDate": "2027-04-04",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/finsbury-park-half-marathon-5k-10k-half-marathon-april"
+    },
+    {
+      "position": 205,
+      "release": 80,
+      "checkpoint": "80A",
+      "key": "regency-10k|2027-04-04|10K",
+      "slug": "regency-10k",
+      "sourceDate": "2027-04-04",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/regency-10k"
+    },
+    {
+      "position": 206,
+      "release": 80,
+      "checkpoint": "80A",
+      "key": "london-easter-10k|2027-04-05|10K",
+      "slug": "london-easter-10k",
+      "sourceDate": "2027-04-05",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/london-easter-10k"
+    },
+    {
+      "position": 207,
+      "release": 80,
+      "checkpoint": "80A",
+      "key": "big-moose-ultra-fun-run|2027-04-10|10K",
+      "slug": "big-moose-ultra-fun-run",
+      "sourceDate": "2027-04-10",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/big-moose-ultra-fun-run"
+    },
+    {
+      "position": 208,
+      "release": 80,
+      "checkpoint": "80B",
+      "key": "monsal-trail-half-marathon-satuday|2027-04-10|10K",
+      "slug": "monsal-trail-half-marathon-satuday",
+      "sourceDate": "2027-04-10",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/monsal-trail-half-marathon-satuday"
+    },
+    {
+      "position": 209,
+      "release": 80,
+      "checkpoint": "80B",
+      "key": "high-lodge-wild-trail-runs|2027-04-11|10K",
+      "slug": "high-lodge-wild-trail-runs",
+      "sourceDate": "2027-04-11",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/high-lodge-wild-trail-runs"
+    },
+    {
+      "position": 210,
+      "release": 80,
+      "checkpoint": "80B",
+      "key": "jurassic-trail-10k-16k|2027-04-11|10K",
+      "slug": "jurassic-trail-10k-16k",
+      "sourceDate": "2027-04-11",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/jurassic-trail-10k-16k"
+    },
+    {
+      "position": 211,
+      "release": 80,
+      "checkpoint": "80C",
+      "key": "monsal-trail-half-marathon-sunday|2027-04-11|10K",
+      "slug": "monsal-trail-half-marathon-sunday",
+      "sourceDate": "2027-04-11",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/monsal-trail-half-marathon-sunday"
+    },
+    {
+      "position": 212,
+      "release": 80,
+      "checkpoint": "80C",
+      "key": "tewkesbury-10k|2027-04-11|10K",
+      "slug": "tewkesbury-10k",
+      "sourceDate": "2027-04-11",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/tewkesbury-10k"
+    },
+    {
+      "position": 213,
+      "release": 80,
+      "checkpoint": "80C",
+      "key": "sir-titus-march-mayhem|2027-04-17|10K",
+      "slug": "sir-titus-march-mayhem",
+      "sourceDate": "2027-04-17",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/sir-titus-march-mayhem"
+    },
+    {
+      "position": 214,
+      "release": 80,
+      "checkpoint": "80D",
+      "key": "beacon-to-beach|2027-04-18|10K",
+      "slug": "beacon-to-beach",
+      "sourceDate": "2027-04-18",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/beacon-to-beach"
+    },
+    {
+      "position": 215,
+      "release": 80,
+      "checkpoint": "80D",
+      "key": "eridge-park-half-marathon-10k|2027-04-18|10K",
+      "slug": "eridge-park-half-marathon-10k",
+      "sourceDate": "2027-04-18",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/eridge-park-half-marathon-10k"
+    },
+    {
+      "position": 216,
+      "release": 80,
+      "checkpoint": "80D",
+      "key": "leominster-runners-5k|2027-04-25|10K",
+      "slug": "leominster-runners-5k",
+      "sourceDate": "2027-04-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/leominster-runners-5k"
+    },
+    {
+      "position": 217,
+      "release": 81,
+      "checkpoint": "81A",
+      "key": "london-calling|2027-04-25|10K",
+      "slug": "london-calling",
+      "sourceDate": "2027-04-25",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/london-calling"
+    },
+    {
+      "position": 218,
+      "release": 81,
+      "checkpoint": "81A",
+      "key": "lake-district-fell-running-and-yoga-weekend|2027-04-29|10K",
+      "slug": "lake-district-fell-running-and-yoga-weekend",
+      "sourceDate": "2027-04-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/lake-district-fell-running-and-yoga-weekend"
+    },
+    {
+      "position": 219,
+      "release": 81,
+      "checkpoint": "81A",
+      "key": "ormsary-10k|2027-05-01|10K",
+      "slug": "ormsary-10k",
+      "sourceDate": "2027-05-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/ormsary-10k"
+    },
+    {
+      "position": 220,
+      "release": 81,
+      "checkpoint": "81B",
+      "key": "whinlatter-forest-half-marathon-10k|2027-05-02|10K",
+      "slug": "whinlatter-forest-half-marathon-10k",
+      "sourceDate": "2027-05-02",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/whinlatter-forest-half-marathon-10k"
+    },
+    {
+      "position": 221,
+      "release": 81,
+      "checkpoint": "81B",
+      "key": "mid-sussex-burgess-hill-10k|2027-05-03|10K",
+      "slug": "mid-sussex-burgess-hill-10k",
+      "sourceDate": "2027-05-03",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/mid-sussex-burgess-hill-10k"
+    },
+    {
+      "position": 222,
+      "release": 81,
+      "checkpoint": "81B",
+      "key": "gibside-national-trust-trail-10k|2027-05-05|10K",
+      "slug": "gibside-national-trust-trail-10k",
+      "sourceDate": "2027-05-05",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/gibside-national-trust-trail-10k"
+    },
+    {
+      "position": 223,
+      "release": 81,
+      "checkpoint": "81C",
+      "key": "rock-up-n-run-5a|2027-05-06|10K",
+      "slug": "rock-up-n-run-5a",
+      "sourceDate": "2027-05-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/rock-up-n-run-5a"
+    },
+    {
+      "position": 224,
+      "release": 81,
+      "checkpoint": "81C",
+      "key": "rye-summer-classic-series-5k-may|2027-05-07|10K",
+      "slug": "rye-summer-classic-series-5k-may",
+      "sourceDate": "2027-05-07",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/rye-summer-classic-series-5k-may"
+    },
+    {
+      "position": 225,
+      "release": 81,
+      "checkpoint": "81C",
+      "key": "bristol-10k|2027-05-08|10K",
+      "slug": "bristol-10k",
+      "sourceDate": "2027-05-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bristol-10k"
+    },
+    {
+      "position": 226,
+      "release": 81,
+      "checkpoint": "81D",
+      "key": "dorset-half-marathon-10k|2027-05-08|10K",
+      "slug": "dorset-half-marathon-10k",
+      "sourceDate": "2027-05-08",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dorset-half-marathon-10k"
+    },
+    {
+      "position": 227,
+      "release": 81,
+      "checkpoint": "81D",
+      "key": "colchester-10k|2027-05-09|10K",
+      "slug": "colchester-10k",
+      "sourceDate": "2027-05-09",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/colchester-10k"
+    },
+    {
+      "position": 228,
+      "release": 81,
+      "checkpoint": "81D",
+      "key": "northants-ultra-35-shires-and-spires|2027-05-09|10K",
+      "slug": "northants-ultra-35-shires-and-spires",
+      "sourceDate": "2027-05-09",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/northants-ultra-35-shires-and-spires"
+    },
+    {
+      "position": 229,
+      "release": 82,
+      "checkpoint": "82A",
+      "key": "seaford-10k|2027-05-09|10K",
+      "slug": "seaford-10k",
+      "sourceDate": "2027-05-09",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/seaford-10k"
+    },
+    {
+      "position": 230,
+      "release": 82,
+      "checkpoint": "82A",
+      "key": "rock-up-n-run-2a|2027-05-13|10K",
+      "slug": "rock-up-n-run-2a",
+      "sourceDate": "2027-05-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/rock-up-n-run-2a"
+    },
+    {
+      "position": 231,
+      "release": 82,
+      "checkpoint": "82A",
+      "key": "roadford-lake-trail-races|2027-05-15|10K",
+      "slug": "roadford-lake-trail-races",
+      "sourceDate": "2027-05-15",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/roadford-lake-trail-races"
+    },
+    {
+      "position": 232,
+      "release": 82,
+      "checkpoint": "82B",
+      "key": "burton-leonard-10k|2027-05-16|10K",
+      "slug": "burton-leonard-10k",
+      "sourceDate": "2027-05-16",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/burton-leonard-10k"
+    },
+    {
+      "position": 233,
+      "release": 82,
+      "checkpoint": "82B",
+      "key": "bupa-great-manchester-run|2027-05-23|10K",
+      "slug": "bupa-great-manchester-run",
+      "sourceDate": "2027-05-23",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bupa-great-manchester-run"
+    },
+    {
+      "position": 234,
+      "release": 82,
+      "checkpoint": "82B",
+      "key": "bushy-park-10k-march|2027-05-23|10K",
+      "slug": "bushy-park-10k-march",
+      "sourceDate": "2027-05-23",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/bushy-park-10k-march"
+    },
+    {
+      "position": 235,
+      "release": 82,
+      "checkpoint": "82C",
+      "key": "margam-wild-trail-runs|2027-05-23|10K",
+      "slug": "margam-wild-trail-runs",
+      "sourceDate": "2027-05-23",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/margam-wild-trail-runs"
+    },
+    {
+      "position": 236,
+      "release": 82,
+      "checkpoint": "82C",
+      "key": "sandwell-valley-10k|2027-05-23|10K",
+      "slug": "sandwell-valley-10k",
+      "sourceDate": "2027-05-23",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/sandwell-valley-10k"
+    },
+    {
+      "position": 237,
+      "release": 82,
+      "checkpoint": "82C",
+      "key": "rock-up-n-run-1a|2027-05-27|10K",
+      "slug": "rock-up-n-run-1a",
+      "sourceDate": "2027-05-27",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/rock-up-n-run-1a"
+    },
+    {
+      "position": 238,
+      "release": 82,
+      "checkpoint": "82D",
+      "key": "burrator-10k|2027-05-29|10K",
+      "slug": "burrator-10k",
+      "sourceDate": "2027-05-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/burrator-10k"
+    },
+    {
+      "position": 239,
+      "release": 82,
+      "checkpoint": "82D",
+      "key": "edinburgh-marathon-festival-10k|2027-05-29|10K",
+      "slug": "edinburgh-marathon-festival-10k",
+      "sourceDate": "2027-05-29",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/edinburgh-marathon-festival-10k"
+    },
+    {
+      "position": 240,
+      "release": 82,
+      "checkpoint": "82D",
+      "key": "folkestone-coastal-10k|2027-05-30|10K",
+      "slug": "folkestone-coastal-10k",
+      "sourceDate": "2027-05-30",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/folkestone-coastal-10k"
+    },
+    {
+      "position": 241,
+      "release": 83,
+      "checkpoint": "83A",
+      "key": "the-fishguard-5k-10k-half-marathon|2027-06-05|10K",
+      "slug": "the-fishguard-5k-10k-half-marathon",
+      "sourceDate": "2027-06-05",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-fishguard-5k-10k-half-marathon"
+    },
+    {
+      "position": 242,
+      "release": 83,
+      "checkpoint": "83A",
+      "key": "night-run-bolton-uk|2027-06-06|10K",
+      "slug": "night-run-bolton-uk",
+      "sourceDate": "2027-06-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/night-run-bolton-uk"
+    },
+    {
+      "position": 243,
+      "release": 83,
+      "checkpoint": "83A",
+      "key": "top-of-the-wolds-10km-challenge|2027-06-06|10K",
+      "slug": "top-of-the-wolds-10km-challenge",
+      "sourceDate": "2027-06-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/top-of-the-wolds-10km-challenge"
+    },
+    {
+      "position": 244,
+      "release": 83,
+      "checkpoint": "83B",
+      "key": "weald-country-park-10k|2027-06-06|10K",
+      "slug": "weald-country-park-10k",
+      "sourceDate": "2027-06-06",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/weald-country-park-10k"
+    },
+    {
+      "position": 245,
+      "release": 83,
+      "checkpoint": "83B",
+      "key": "barmouth-10k|2027-06-12|10K",
+      "slug": "barmouth-10k",
+      "sourceDate": "2027-06-12",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/barmouth-10k"
+    },
+    {
+      "position": 246,
+      "release": 83,
+      "checkpoint": "83B",
+      "key": "asda-foundation-leeds-10k-2|2027-06-13|10K",
+      "slug": "asda-foundation-leeds-10k-2",
+      "sourceDate": "2027-06-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/asda-foundation-leeds-10k-2"
+    },
+    {
+      "position": 247,
+      "release": 83,
+      "checkpoint": "83C",
+      "key": "nonsuch-park-10k|2027-06-13|10K",
+      "slug": "nonsuch-park-10k",
+      "sourceDate": "2027-06-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/nonsuch-park-10k"
+    },
+    {
+      "position": 248,
+      "release": 83,
+      "checkpoint": "83C",
+      "key": "wythall-and-hollywood-10k|2027-06-13|10K",
+      "slug": "wythall-and-hollywood-10k",
+      "sourceDate": "2027-06-13",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wythall-and-hollywood-10k"
+    },
+    {
+      "position": 249,
+      "release": 83,
+      "checkpoint": "83C",
+      "key": "wentworth-castle-trail-runs|2027-06-16|10K",
+      "slug": "wentworth-castle-trail-runs",
+      "sourceDate": "2027-06-16",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/wentworth-castle-trail-runs"
+    },
+    {
+      "position": 250,
+      "release": 83,
+      "checkpoint": "83D",
+      "key": "the-descent-2|2027-06-18|10K",
+      "slug": "the-descent-2",
+      "sourceDate": "2027-06-18",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-descent-2"
+    },
+    {
+      "position": 251,
+      "release": 83,
+      "checkpoint": "83D",
+      "key": "eastbourne-10k|2027-06-20|10K",
+      "slug": "eastbourne-10k",
+      "sourceDate": "2027-06-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/eastbourne-10k"
+    },
+    {
+      "position": 252,
+      "release": 83,
+      "checkpoint": "83D",
+      "key": "high-easter-10k-road-race|2027-06-20|10K",
+      "slug": "high-easter-10k-road-race",
+      "sourceDate": "2027-06-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/high-easter-10k-road-race"
+    },
+    {
+      "position": 253,
+      "release": 84,
+      "checkpoint": "84A",
+      "key": "mens-10k-glasgow|2027-06-20|10K",
+      "slug": "mens-10k-glasgow",
+      "sourceDate": "2027-06-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/mens-10k-glasgow"
+    },
+    {
+      "position": 254,
+      "release": 84,
+      "checkpoint": "84A",
+      "key": "stow-on-the-wold-10k|2027-06-20|10K",
+      "slug": "stow-on-the-wold-10k",
+      "sourceDate": "2027-06-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/stow-on-the-wold-10k"
+    },
+    {
+      "position": 255,
+      "release": 84,
+      "checkpoint": "84A",
+      "key": "womens-10k-glasgow|2027-06-20|10K",
+      "slug": "womens-10k-glasgow",
+      "sourceDate": "2027-06-20",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/womens-10k-glasgow"
+    },
+    {
+      "position": 256,
+      "release": 84,
+      "checkpoint": "84B",
+      "key": "dornafield-ladies-10k|2027-06-27|10K",
+      "slug": "dornafield-ladies-10k",
+      "sourceDate": "2027-06-27",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/dornafield-ladies-10k"
+    },
+    {
+      "position": 257,
+      "release": 84,
+      "checkpoint": "84B",
+      "key": "gloucester-10k|2027-06-27|10K",
+      "slug": "gloucester-10k",
+      "sourceDate": "2027-06-27",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/gloucester-10k"
+    },
+    {
+      "position": 258,
+      "release": 84,
+      "checkpoint": "84B",
+      "key": "man-vs-moor|2027-06-27|10K",
+      "slug": "man-vs-moor",
+      "sourceDate": "2027-06-27",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/man-vs-moor"
+    },
+    {
+      "position": 259,
+      "release": 84,
+      "checkpoint": "84C",
+      "key": "the-wales-run|2027-07-03|10K",
+      "slug": "the-wales-run",
+      "sourceDate": "2027-07-03",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-wales-run"
+    },
+    {
+      "position": 260,
+      "release": 84,
+      "checkpoint": "84C",
+      "key": "felsted-10k|2027-07-04|10K",
+      "slug": "felsted-10k",
+      "sourceDate": "2027-07-04",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/felsted-10k"
+    },
+    {
+      "position": 261,
+      "release": 84,
+      "checkpoint": "84C",
+      "key": "great-north-10k|2027-07-04|10K",
+      "slug": "great-north-10k",
+      "sourceDate": "2027-07-04",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/great-north-10k"
+    },
+    {
+      "position": 262,
+      "release": 84,
+      "checkpoint": "84D",
+      "key": "the-london-10k|2027-07-11|10K",
+      "slug": "the-london-10k",
+      "sourceDate": "2027-07-11",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/the-london-10k"
+    },
+    {
+      "position": 263,
+      "release": 84,
+      "checkpoint": "84D",
+      "key": "revesby-running-festival|2027-07-18|10K",
+      "slug": "revesby-running-festival",
+      "sourceDate": "2027-07-18",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/revesby-running-festival"
+    },
+    {
+      "position": 264,
+      "release": 84,
+      "checkpoint": "84D",
+      "key": "jane-tomlinsons-run-for-all-york-10k|2027-08-01|10K",
+      "slug": "jane-tomlinsons-run-for-all-york-10k",
+      "sourceDate": "2027-08-01",
+      "distance": "10K",
+      "sourceUrl": "https://runabc.co.uk/jane-tomlinsons-run-for-all-york-10k"
+    }
+  ]
+}
