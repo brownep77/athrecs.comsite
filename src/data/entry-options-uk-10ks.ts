@@ -2268,6 +2268,61 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Shardeloes 10K starts at 09:30 on Sunday 27 September from Amersham Cricket Club. Chiltern Harriers' scenic mixed-terrain race follows trails and tracks through the Chiltern hills and awards a wooden finisher medal.",
   },
+  "hopton-10k|2026-09-27|10K": {
+    startTime: "10:00",
+    entryUrl: "https://racebest.com/races/3rtkr",
+    source: "https://hopton10k.run/",
+    notes:
+      "Hopton 10K starts at 10:00 on Sunday 27 September from Hopton Primary School. The volunteer-run, chip-timed course mixes woodland trails, bridleways, footpaths and quiet roads, with all proceeds supporting the school.",
+  },
+  "knutsford-10k|2026-09-27|10K": {
+    startTime: "09:30",
+    entryUrl: "https://run-northwest.niftyentries.com/Barclays-Knutsford-10K-2026",
+    source: "https://www.runnorthwest.co.uk/pages/barclays-knutsford-10k-2026",
+    notes:
+      "Barclays Knutsford 10K starts at 09:30 on Sunday 27 September from the Radbroke campus. The UK Athletics-licensed, chip-timed course uses fully closed country lanes and has only 77 feet of elevation.",
+  },
+  "linlithgow-10k-fun-run|2026-09-27|10K": {
+    startTime: "14:30",
+    entryUrl: "https://www.entrycentral.com/Linlithgow-10k",
+    source: "https://linlithgowathlet.spond.club/our_events",
+    notes:
+      "The 33rd Linlithgow 10K starts at 14:30 on Sunday 27 September from the High Street and finishes in Linlithgow Palace Peel. The licensed, chip-timed road race follows an undulating route around the loch and Bonnytoun Farm loop.",
+  },
+  "marwell-10k|2026-09-27|10K": {
+    status: "Closed",
+    startTime: "09:00",
+    entryUrl: "https://www.marwell.org.uk/support-us/marwell-10k/",
+    source: "https://www.marwell.org.uk/support-us/marwell-10k/",
+    notes:
+      "Marwell 10K starts at 09:00 on Sunday 27 September at Marwell Zoo. The UK Athletics-licensed road race is fully booked and its waiting list is closed; runners should not use third-party listings that still imply availability.",
+  },
+  "polesden-lacey-10k-september|2026-09-27|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+    source:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+    notes:
+      "Polesden Lacey Trust 10K is a free, informal run at 09:00 on Sunday 27 September. Booking is not required; participants meet in the main visitor car park and follow the permanent trail route through the estate and Ranmore Common.",
+  },
+  "run-aintree-5k-10k-and-half-marathon-september|2026-09-27|10K": {
+    startTime: "10:45",
+    entryUrl: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
+    source: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
+    notes:
+      "Run Aintree's 10K starts at 10:45 on Sunday 27 September. The flat, chip-timed two-lap route is staged on the roads and paths of Aintree Racecourse and includes free photos, a themed medal and post-race goodies.",
+  },
+  "run-aintree-5k-10k-and-half-marathon-september|2026-09-27|5K": {
+    startTime: "10:55",
+    entryUrl: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
+    source: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
+  },
+  "run-aintree-5k-10k-and-half-marathon-september|2026-09-27|Half": {
+    startTime: "10:00",
+    entryUrl: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
+    source: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -5636,6 +5691,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Chiltern Harriers AC stages this undulating 10K on trails and tracks around Shardeloes, with race timing and a wooden medal for finishers.",
     organiser: "Chiltern Harriers AC",
     website: "https://www.chilternharriers.com/shardeloes-10k.html",
+  },
+  "hopton-10k": {
+    name: "Hopton 10K",
+    city: "Mirfield",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Hopton Primary School and Lower Hopton woodland",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Hopton 10K — a community-run woodland and country-lane race supporting Hopton Primary School.",
+    description:
+      "This volunteer-organised, chip-timed 10K combines woodland trails, bridleways, footpaths and quiet roads around Hopton, with challenging climbs, Calder Valley views and all proceeds going to the primary school.",
+    organiser: "Hopton 10K community team",
+    website: "https://hopton10k.run/",
+  },
+  "knutsford-10k": {
+    name: "Barclays Knutsford 10K",
+    city: "Knutsford",
+    county: "Cheshire",
+    country: "England",
+    area: "Barclays Radbroke Campus and surrounding country lanes",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Barclays Knutsford 10K — a fast, fully closed-road race from the Radbroke campus.",
+    description:
+      "Run North West's UK Athletics-licensed race follows exceptionally flat, chip-timed country lanes through Over Peover, Snelson and Peover Heath before returning to Radbroke Hall.",
+    organiser: "Run North West",
+    website: "https://www.runnorthwest.co.uk/pages/barclays-knutsford-10k-2026",
+  },
+  "linlithgow-10k-fun-run": {
+    name: "Linlithgow 10K & Junior Fun Run",
+    city: "Linlithgow",
+    county: "West Lothian",
+    country: "Scotland",
+    area: "Linlithgow High Street, loch and Palace Peel",
+    surface: "Road",
+    distances: ["10K", "Junior"],
+    summary:
+      "Linlithgow 10K — a long-running community road race around the loch and historic town.",
+    description:
+      "Linlithgow Athletic Club's Scottish Athletics-licensed event follows an undulating town, loch and farm-loop route, with chip timing, pacers and a Palace Peel finish, alongside a junior fun run.",
+    organiser: "Linlithgow Athletic Club",
+    website: "https://linlithgowathlet.spond.club/our_events",
+  },
+  "marwell-10k": {
+    name: "Marwell 10K",
+    city: "Winchester",
+    county: "Hampshire",
+    country: "England",
+    area: "Marwell Zoo and Owslebury countryside",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Marwell 10K — an undulating zoo-and-countryside road race supporting tiger conservation.",
+    description:
+      "Running Mania and Hedge End Running Club stage this UK Athletics-licensed race from Marwell Zoo through Owslebury and back for a zoo finish, raising funds for Marwell Wildlife's tiger conservation work.",
+    organiser: "Running Mania with Hedge End Running Club and Marwell Wildlife",
+    website: "https://www.marwell.org.uk/support-us/marwell-10k/",
+  },
+  "polesden-lacey-10k-september": {
+    name: "Polesden Lacey Trust 10K September",
+    city: "Great Bookham",
+    county: "Surrey",
+    country: "England",
+    area: "Polesden Lacey estate and Ranmore Common",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Polesden Lacey Trust 10K — a free, informal waymarked trail run through the National Trust estate.",
+    description:
+      "This un-marshalled monthly Trust 10K follows a permanent circular trail over mud, gravel and uneven ground through Polesden Lacey and Ranmore Common; booking is not required and dogs on leads are welcome.",
+    organiser: "National Trust — Polesden Lacey",
+    website:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+  },
+  "run-aintree-5k-10k-and-half-marathon-september": {
+    name: "Run Aintree 5K, 10K & Half Marathon September",
+    city: "Liverpool",
+    county: "Merseyside",
+    country: "England",
+    area: "Aintree Racecourse",
+    surface: "Road",
+    distances: ["5K", "10K", "Half"],
+    summary:
+      "Run Aintree September — flat, chip-timed 5K, 10K and half-marathon races at Aintree Racecourse.",
+    description:
+      "RunThrough stages flat, fast laps on the roads and paths of the famous Grand National venue, with chip timing, free race photos, accurately marked distances, themed medals and post-race goodies.",
+    organiser: "RunThrough",
+    website: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
   },
 };
 
@@ -12069,6 +12214,193 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC supplies a secondary route to the event; the Chiltern Harriers page is authoritative for live entry, final instructions and pricing.",
+    },
+  ],
+  "hopton-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-hopton-racebest",
+      providerName: "Hopton 10K official RaceBest entry",
+      entryUrl: "https://racebest.com/races/3rtkr",
+      entryType: "official",
+      status: "open",
+      priceAmount: 21,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://hopton10k.run/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official site links to RaceBest, which lists adult entry from £21 affiliated or £23 unaffiliated. Entries close the day before; race-day entry costs more if places remain.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/hopton-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 21,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/hopton-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors provides an alternative entry route, advertising £21 to £25 and confirming the 10:00 start, mixed terrain and free parking options.",
+    },
+  ],
+  "knutsford-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-run-north-west-knutsford",
+      providerName: "Run North West official entry",
+      entryUrl: "https://run-northwest.niftyentries.com/Barclays-Knutsford-10K-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://www.runnorthwest.co.uk/pages/barclays-knutsford-10k-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser checkout lists £28 for club runners and £30 for non-club runners, with an optional technical finisher shirt, and confirms the 09:30 start.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/barclays-knutsford-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/barclays-knutsford-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors supplies an alternative booking route at £28 to £30 and confirms the flat closed-road course and Radbroke campus venue.",
+    },
+  ],
+  "linlithgow-10k-fun-run|2026-09-27|10K": [
+    {
+      providerCode: "official-linlithgow-entrycentral",
+      providerName: "Linlithgow AC official EntryCentral entry",
+      entryUrl: "https://www.entrycentral.com/Linlithgow-10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-20T23:00:00+01:00",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/Linlithgow-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral's current price table lists £28 discounted or £30 standard, before its stated service fee, and closes at 23:00 on 20 September or when the 1,200-place field fills.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/linlithgow-10k-fun-run",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/linlithgow-10k-fun-run",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route and confirms the Sunday date and 14:30 start; EntryCentral is authoritative for live pricing and capacity.",
+    },
+  ],
+  "marwell-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-marwell-wildlife",
+      providerName: "Marwell Wildlife official race page",
+      entryUrl: "https://www.marwell.org.uk/support-us/marwell-10k/",
+      entryType: "official",
+      status: "sold_out",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://www.marwell.org.uk/support-us/marwell-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Marwell Wildlife states that the 2026 race is fully booked and the waiting list is closed. Original entry was £32 club or £34 standard, plus a £1.75 booking fee.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/marwell-10k",
+      entryType: "third_party",
+      status: "sold_out",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/marwell-10k",
+      isVerified: true,
+      notes:
+        "runABC is retained as a secondary reference, but no 2026 place can currently be booked. The official Marwell page is authoritative for the sold-out status.",
+    },
+  ],
+  "polesden-lacey-10k-september|2026-09-27|10K": [
+    {
+      providerCode: "official-national-trust-polesden",
+      providerName: "National Trust official event page",
+      entryUrl:
+        "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+      entryType: "official",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl:
+        "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The National Trust confirms a free 09:00 run on 27 September with no booking required. Meet in the main visitor car park and check the page for access updates.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/polesden-lacey-10k-september",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/polesden-lacey-10k-september",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route. There is no paid checkout: the National Trust event page is authoritative and says booking is not needed.",
+    },
+  ],
+  "run-aintree-5k-10k-and-half-marathon-september|2026-09-27|10K": [
+    {
+      providerCode: "official-runthrough-aintree-september",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live RunThrough page lists 10K entry at £32 and confirms the corrected 10:45 start, with the half marathon at 10:00 and 5K at 10:55.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race Quick Book",
+      entryUrl: "https://findarace.com/events/run-aintree-5k-10k-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T14:30:00+01:00",
+      sourceUrl: "https://findarace.com/events/run-aintree-5k-10k-half-marathon",
+      isVerified: true,
+      notes:
+        "Find a Race offers a secondary Quick Book route for the 10K at £34 and confirms the two-lap course and 10:45 start.",
     },
   ],
 };
