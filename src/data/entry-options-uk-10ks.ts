@@ -2755,6 +2755,51 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "RunThrough confirms a 09:30 start on Sunday 4 October, correcting the imported 08:30 time. The flat, closed-road 10K starts and finishes at Everton FC's Hill Dickinson Stadium and passes central Liverpool waterfront landmarks.",
   },
+  "fadmoor-run|2026-10-04|10K": {
+    startTime: "12:00",
+    status: "TBC",
+    entryUrl: "https://northeastraces.com/",
+    source: "https://northeastraces.com/",
+    notes:
+      "North East Races and runABC's current North Yorkshire calendar both list Sunday 4 October, while North East Races gives a 12:00 start from Fadmoor Village Hall, correcting the imported 11:00 time. No organiser-controlled 2026 page or live checkout was found, so the edition and entry status remain TBC.",
+  },
+  "greenham-common-half-marathon-10k|2026-10-04|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.eventbrite.com/e/greenham-common-half-marathon-and-10km-tickets-1982071956578",
+    source: "https://www.greenhamcommonhalfmarathon.com/faq",
+    notes:
+      "The organiser's FAQ confirms a 09:00 10K start on Sunday 4 October, correcting the imported 08:30 time. The trail race starts and finishes at Greenham Control Tower, with a £25 10K price, race-number collection on the morning and reusable ankle-tag chip timing.",
+  },
+  "hastings-seafront-10k|2026-10-04|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.runningandriding.co.uk/hastings-10k",
+    source: "https://www.runningandriding.co.uk/hastings-10k",
+    notes:
+      "Running & Riding confirms a 09:00 start on Sunday 4 October, correcting the imported 08:00 time. Race HQ is the Beach Retreat beside Hastings & St Leonards Angling Association on Marine Parade, and the flat out-and-back course follows the seafront promenade.",
+  },
+  "heron-way-10k-trail-run-fun-run|2026-10-04|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.pta-events.co.uk/heronway/",
+    source: "https://www.heronwaypta.org.uk/event/heron-way-10k/",
+    notes:
+      "Heron Way PTA confirms that the 10K trail race starts at 11:00 on Sunday 4 October, correcting the imported 10:00 time, which belongs to the children's colour run. The mainly off-road route starts at Heron Way Primary School and climbs through St Leonard's Forest.",
+  },
+  "mctf-run-the-track-5k-10k-west-midlands|2026-10-04|10K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/dcEFFX",
+    source: "https://bookitzone.com/dean_ogrady_1/dcEFFX",
+    notes:
+      "The live MCTF checkout confirms a 14:30 event start on Sunday 4 October, correcting the imported 13:30 time. The 10K uses pace-seeded heats on Dell Stadium's athletics track, with small fields, lap-by-lap chip timing and a minimum age of 16.",
+  },
+  "middlesex-10k|2026-10-04|10K": {
+    startTime: "10:30",
+    status: "TBC",
+    entryUrl: "https://middlesexaa.org.uk/results/",
+    source: "https://middlesexaa.org.uk/results/",
+    notes:
+      "runABC provisionally lists Sunday 4 October and a 10:30 start at Victoria Park, but Middlesex County AA's current 2026 page still says the 10K date is TBC in September and exposes no 2026 checkout. The race is therefore retained as TBC until the county association publishes final details.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -6812,6 +6857,91 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "RunThrough's chip-timed race starts and finishes at Everton's waterfront stadium, passing landmarks including the Royal Liver Building and Beatles Statue while supporting Everton in the Community.",
     organiser: "RunThrough Events",
     website: "https://www.everton10k.com/",
+  },
+  "fadmoor-run": {
+    name: "Fadmoor Run",
+    city: "Fadmoor",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Fadmoor Village Hall, Faddell Rigg and the North York Moors",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary: "Fadmoor Run — a community mixed-terrain race in the North York Moors.",
+    description:
+      "A village race from Fadmoor Hall using local roads, field paths and moorland tracks around Bransdale and Sleightholmdale. The current 2026 fixture is listed by regional calendars but awaits organiser confirmation and an entry route.",
+    organiser: "Fadmoor community organisers",
+    website: "https://northeastraces.com/",
+  },
+  "greenham-common-half-marathon-10k": {
+    name: "Greenham Common Half Marathon & 10K",
+    city: "Greenham",
+    county: "West Berkshire",
+    country: "England",
+    area: "Greenham Control Tower and Greenham Common",
+    surface: "Trail",
+    distances: ["Half", "10K", "Children's race"],
+    summary:
+      "Greenham Common Half Marathon & 10K — traffic-free charity trail races around the historic common.",
+    description:
+      "RunForestRun's flat gravel and woodland routes start and finish at Greenham Control Tower, with reusable chip-timing tags, free parking and a children's race supporting New Life Special Care Babies.",
+    organiser: "RunForestRun / New Life Special Care Babies",
+    website: "https://www.greenhamcommonhalfmarathon.com/",
+  },
+  "hastings-seafront-10k": {
+    name: "Hastings Seafront 10K",
+    city: "Hastings",
+    county: "East Sussex",
+    country: "England",
+    area: "Marine Parade and Hastings seafront promenade",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Hastings Seafront 10K — a fast, flat out-and-back promenade race.",
+    description:
+      "Running & Riding's traffic-free 10K starts beside the Beach Retreat on Marine Parade, follows the seaside promenade towards Bexhill and returns to the Hastings finish with chip timing and a bespoke medal.",
+    organiser: "Running & Riding",
+    website: "https://www.runningandriding.co.uk/hastings-10k",
+  },
+  "heron-way-10k-trail-run-fun-run": {
+    name: "Heron Way PTA 10K Trail Run & Colour Run",
+    city: "Horsham",
+    county: "West Sussex",
+    country: "England",
+    area: "Heron Way Primary School and St Leonard's Forest",
+    surface: "Trail",
+    distances: ["10K", "Children's colour run"],
+    summary: "Heron Way 10K — a school fundraiser on woodland trails through St Leonard's Forest.",
+    description:
+      "Heron Way PTA's mainly off-road 10K climbs from the primary school into St Leonard's Forest, with professional chip timing and a separate children's colour run earlier in the morning.",
+    organiser: "Heron Way Primary School PTA",
+    website: "https://www.heronwaypta.org.uk/event/heron-way-10k/",
+  },
+  "mctf-run-the-track-5k-10k-west-midlands": {
+    name: "MCTF Run The Track 5K & 10K — West Midlands",
+    city: "Brierley Hill",
+    county: "West Midlands",
+    country: "England",
+    area: "Dell Stadium Athletics Track",
+    surface: "Track",
+    distances: ["10K", "5K"],
+    summary: "MCTF Run The Track — pace-seeded 5K and 10K races on Dell Stadium's athletics track.",
+    description:
+      "MacTuff Events returns road runners to a precisely measured track, grouping small fields by expected finish time and recording every lap with chip timing before awarding a bespoke series medal.",
+    organiser: "MacTuff Events",
+    website: "https://www.mactuffevents.com/rtt",
+  },
+  "middlesex-10k": {
+    name: "Middlesex 10K Championship",
+    city: "Hackney",
+    county: "Greater London",
+    country: "England",
+    area: "Victoria Park and Victoria Park Harriers clubhouse",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Middlesex 10K — a flat, traffic-free county championship race in Victoria Park.",
+    description:
+      "Middlesex County AA's traditional three-lap 10K uses traffic-free park footpaths in association with Victoria Park Harriers & Tower Hamlets AC. The 2026 date and entry route remain awaiting official confirmation.",
+    organiser: "Middlesex County Athletics Association",
+    website: "https://middlesexaa.org.uk/",
   },
 };
 
@@ -14646,6 +14776,186 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Findarace identifies itself as RunThrough's official booking partner and offers Quick Book at £42 for the same 09:30 road-closed race.",
+    },
+  ],
+  "fadmoor-run|2026-10-04|10K": [
+    {
+      providerCode: "northeast-races-fadmoor-2026",
+      providerName: "North East Races fixture information",
+      entryUrl: "https://northeastraces.com/",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://northeastraces.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The current regional calendar lists Fadmoor Village Hall, YO62 7HD, at 12:00 on 4 October 2026, but it does not provide an organiser-controlled checkout. Confirm the race and entry instructions before travelling.",
+    },
+    {
+      providerCode: "runabc-fadmoor-calendar",
+      providerName: "runABC North Yorkshire calendar",
+      entryUrl: "https://runabc.co.uk/north-yorkshire",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/north-yorkshire",
+      isVerified: true,
+      notes:
+        "runABC's current county calendar also lists the 4 October fixture. Its dedicated event page still describes the 2025 race, so this option is informational and is not represented as live entry.",
+    },
+  ],
+  "greenham-common-half-marathon-10k|2026-10-04|10K": [
+    {
+      providerCode: "eventbrite-greenham-common-2026",
+      providerName: "Eventbrite official checkout",
+      entryUrl:
+        "https://www.eventbrite.com/e/greenham-common-half-marathon-and-10km-tickets-1982071956578",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://www.greenhamcommonhalfmarathon.com/faq",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's Book Now action opens this 4 October Eventbrite checkout. The official FAQ gives the 10K price as £25 and confirms that same-day registration may be available if capacity remains.",
+    },
+    {
+      providerCode: "official-greenham-common",
+      providerName: "Greenham Common official information",
+      entryUrl: "https://www.greenhamcommonhalfmarathon.com/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://www.greenhamcommonhalfmarathon.com/faq",
+      isVerified: true,
+      notes:
+        "The organiser confirms the 09:00 10K start, £25 price, Greenham Control Tower start and finish, free parking and New Life Special Care Babies beneficiary, with onward booking through Eventbrite.",
+    },
+  ],
+  "hastings-seafront-10k|2026-10-04|10K": [
+    {
+      providerCode: "official-running-riding-hastings",
+      providerName: "Running & Riding official entry",
+      entryUrl: "https://www.runningandriding.co.uk/hastings-10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://www.runningandriding.co.uk/hastings-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists live entry at £20 affiliated or £22 unaffiliated, with £25 cash entry on the day if places remain. Online entry closes at 20:00 on the preceding Thursday.",
+    },
+    {
+      providerCode: "letsdothis-hastings-seafront",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/hastings-seafront-10k-189203",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/hastings-seafront-10k-189203",
+      isVerified: true,
+      notes:
+        "Let's Do This offers a secondary booking route at £20 to £22 and confirms the 09:00 Marine Parade start and flat seaside course.",
+    },
+  ],
+  "heron-way-10k-trail-run-fun-run|2026-10-04|10K": [
+    {
+      providerCode: "pta-events-heron-way-2026",
+      providerName: "PTA Events official checkout",
+      entryUrl: "https://www.pta-events.co.uk/heronway/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://www.heronwaypta.org.uk/event/heron-way-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Heron Way PTA links to its PTA Events shop for booking. The standard 10K tier is £25 from 7 August to 18 September; the children's event is separately priced.",
+    },
+    {
+      providerCode: "official-heron-way-pta",
+      providerName: "Heron Way PTA official information",
+      entryUrl: "https://www.heronwaypta.org.uk/event/heron-way-10k/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://www.heronwaypta.org.uk/event/heron-way-10k/",
+      isVerified: true,
+      notes:
+        "The school charity page confirms the 11:00 10K start, standard £25 tier, Horsham venue and separate 10:00 colour run, linking onward to the official checkout.",
+    },
+  ],
+  "mctf-run-the-track-5k-10k-west-midlands|2026-10-04|10K": [
+    {
+      providerCode: "bookitzone-mctf-west-midlands-2026",
+      providerName: "BookitZone official checkout",
+      entryUrl: "https://bookitzone.com/dean_ogrady_1/dcEFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25.64,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-02T23:59:00+01:00",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://bookitzone.com/dean_ogrady_1/dcEFFX",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live checkout offers affiliated 10K heats at £25.64 and unaffiliated heats at £28.12, grouped for sub-42, sub-50 and sub-70-minute runners. Online entry is scheduled to close at 23:59 on 2 October.",
+    },
+    {
+      providerCode: "official-mactuff-run-the-track",
+      providerName: "MacTuff Events official series page",
+      entryUrl: "https://www.mactuffevents.com/rtt",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://www.mactuffevents.com/rtt",
+      isVerified: true,
+      notes:
+        "The organiser describes the Run The Track format and promotes early 10K places from £23, while the live BookitZone page supplies the current fee-inclusive prices and venue-specific checkout.",
+    },
+  ],
+  "middlesex-10k|2026-10-04|10K": [
+    {
+      providerCode: "middlesex-aa-2026-status",
+      providerName: "Middlesex County AA status page",
+      entryUrl: "https://middlesexaa.org.uk/results/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://middlesexaa.org.uk/results/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The county association currently says its 2026 10K is TBC in September and has not published a 2026 checkout. This official status source takes precedence over provisional directory information.",
+    },
+    {
+      providerCode: "runabc-middlesex-2026-provisional",
+      providerName: "runABC provisional listing",
+      entryUrl: "https://runabc.co.uk/middlesex-10k",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/middlesex-10k",
+      isVerified: true,
+      notes:
+        "runABC lists 4 October at 10:30 in Victoria Park and labels an entry route, but the organiser has not confirmed those 2026 details. Use this only as provisional information, not evidence that entries are open.",
     },
   ],
 };
