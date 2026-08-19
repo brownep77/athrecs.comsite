@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-08-19",
+  "checked_at": "2026-08-20",
   "registry_source_count": 266,
   "enabled_source_count": 31,
   "rights_or_technical_review_queue": 235,
@@ -14,6 +14,7 @@
     "North America",
     "Oceania",
     "UK",
+    "UK & Europe",
     "UK & Ireland",
     "USA"
   ],
@@ -41,6 +42,21 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-19"
+    },
+    {
+      "id": "global-003",
+      "status": "verified",
+      "source_ids": ["up_running_scotland", "runthrough_uk"],
+      "regions": ["UK", "UK & Europe"],
+      "countries": ["Scotland", "England", "Switzerland"],
+      "series_slugs": [
+        "camperdown-park-5k-10k-half-marathon",
+        "manchester-running-festival",
+        "runthrough-trails-engelberg"
+      ],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-20"
     }
   ],
   "source_progress": [
@@ -49,6 +65,18 @@
       "status": "in_progress",
       "events_imported": 6,
       "last_checkpoint": "global-002"
+    },
+    {
+      "source_id": "up_running_scotland",
+      "status": "in_progress",
+      "events_imported": 2,
+      "last_checkpoint": "global-003"
+    },
+    {
+      "source_id": "runthrough_uk",
+      "status": "in_progress",
+      "events_imported": 1,
+      "last_checkpoint": "global-003"
     }
   ]
 }
