@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-19T22:00:00+01:00",
+  "updatedAt": "2026-08-20T21:30:00+01:00",
   "activeRelease": 64,
   "releaseStatus": "in_progress",
   "checkpoints": {
@@ -58,6 +58,16 @@
         "jedburgh-half-marathon|2026-10-25|10K"
       ],
       "notes": "Fleet, Haltemprice and Jedburgh have current organiser-backed dates, times and direct entry routes. Haltemprice also has a distinct official-partner checkout; all three passed the focused workflow and production-build checks and are saved for Release 64 review."
+    },
+    "64B": {
+      "status": "checkpoint_saved",
+      "updatedAt": "2026-08-20T21:30:00+01:00",
+      "races": [
+        "kernow-killer-october|2026-10-25|10K",
+        "monsal-trail-half-marathon-autumn-sunday|2026-10-25|10K",
+        "polesden-lacey-10k|2026-10-25|10K"
+      ],
+      "notes": "Kernow Killer and Monsal Sunday have open organiser-backed entry; Polesden Lacey is correctly represented as a free National Trust run requiring no booking. All three passed the focused workflow and production-build checks and are saved for Release 64 review."
     }
   }
 }
