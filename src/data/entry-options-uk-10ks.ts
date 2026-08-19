@@ -433,6 +433,30 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-10",
     toDate: "2026-10-11",
   },
+  {
+    seriesSlug: "love-luton-half-marathon-10k",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
+  {
+    seriesSlug: "nottingham-goose-fair-gallop-10k",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
+  {
+    seriesSlug: "petts-wood-10k",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
+  {
+    seriesSlug: "run-leicester-half-marathon",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -2995,6 +3019,54 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://ldnx.co.uk/",
     notes:
       "The organiser confirms Sunday 11 October, correcting the imported Saturday date and 23:00 placeholder. TimeOutdoors lists a 09:00 start, while Wembley Park says waves are expected from around 09:00 but remain subject to final confirmation. The fully closed-road route starts indoors at Wembley and finishes on Olympic Way.",
+  },
+  "loch-rannoch-10k|2026-10-10|10K": {
+    startTime: "10:00",
+    entryUrl: "https://runnation.co.uk/r/run-scotland-loch-rannoch-10k-2026",
+    source: "https://runnation.co.uk/r/run-scotland-loch-rannoch-10k-2026",
+    notes:
+      "Run Nation confirms a 10:00 start on Saturday 10 October, correcting the imported 09:00 time. The accurately measured, chip-timed out-and-back follows a flat, traffic-free shoreline road from Weller Poley Park and is held the day before the marathon and half marathon.",
+  },
+  "love-luton-half-marathon-10k|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "09:00",
+    entryUrl: "https://www.atwevents.co.uk/e/love-luton-runfest-5k-10k-and-half-marathon-9296",
+    source: "https://loveluton.org.uk/runfest/",
+    notes:
+      "Love Luton and ATW confirm Sunday 11 October and a 09:00 10K start, correcting the imported Saturday date and 23:00 placeholder. The chip-timed, traffic-free course starts and finishes in St George's Square and visits Luton's award-winning parks.",
+  },
+  "nottingham-goose-fair-gallop-10k|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "10:00",
+    status: "Closed",
+    entryUrl: "https://www.entrycentral.com/goosefairgallop",
+    source: "https://goosefairgallop.weebly.com/",
+    notes:
+      "Kimberley & District Striders and EntryCentral confirm Sunday 11 October and a 10:00 mass start, correcting the imported Saturday date and 23:00 placeholder. All 350 places are sold out, but the official waiting list remains available. The mixed route uses the Erewash Valley, canal paths and Bennerley Viaduct.",
+  },
+  "petts-wood-10k|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "10:30",
+    entryUrl: "https://englandathletics.sport80.com/public/wizard/e/31408/home",
+    source: "https://www.pettswoodrunners.org/petts-wood-10k.html",
+    notes:
+      "Petts Wood Runners and the England Athletics listing confirm Sunday 11 October and a 10:30 start, correcting the imported Saturday date and 23:00 placeholder. The charity-focused multi-terrain course starts at Willett Recreation Ground and crosses local streets and National Trust woodland trails.",
+  },
+  "run-leicester-half-marathon|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "09:15",
+    entryUrl: "https://www.resultsbase.net/cpm8d13",
+    source: "https://runleicester.co.uk/event-info/",
+    notes:
+      "Run Leicester confirms Sunday 11 October and a 09:15 start for both the 10K and half marathon, correcting the imported Saturday date and 23:00 placeholder. The road-closed 10K leaves Victoria Park for the Golden Mile, National Space Centre, Abbey Park and city centre before climbing New Walk.",
+  },
+  "skylark-run|2026-10-10|10K": {
+    startTime: "11:00",
+    status: "TBC",
+    entryUrl: "https://runabc.co.uk/skylark-run",
+    source: "https://runabc.co.uk/skylark-run",
+    notes:
+      "The imported 2026 row implies an 11:00 BST start on Saturday 10 October, but available organiser pages do not currently announce a 2026 Skylark Run or expose a matching checkout. The most recent verified race information is for October 2025, so all 2026 details remain TBC and must be reconfirmed.",
   },
 };
 
@@ -7491,6 +7563,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "A.S.O. UK's traffic-free route gives up to 10,000 runners an indoor Wembley start, music and entertainment, a circuit around the stadium and a finish on Olympic Way before the BOXPARK after-party.",
     organiser: "A.S.O. UK",
     website: "https://ldnx.co.uk/",
+  },
+  "loch-rannoch-10k": {
+    name: "Run Scotland Loch Rannoch 10K",
+    city: "Kinloch Rannoch",
+    county: "Perth and Kinross",
+    country: "Scotland",
+    area: "Weller Poley Park and Loch Rannoch's south-shore road",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Loch Rannoch 10K — a flat, traffic-free shoreline out-and-back in Highland Perthshire.",
+    description:
+      "Run Nation's accurately measured and chip-timed race follows the loch shore from Weller Poley Park, with kilometre markers, a 5K water station, on-site facilities and a bespoke medal.",
+    organiser: "Run Nation",
+    website: "https://runnation.co.uk/r/run-scotland-loch-rannoch-10k-2026",
+  },
+  "love-luton-half-marathon-10k": {
+    name: "Love Luton RunFest 5K, 10K & Half Marathon",
+    city: "Luton",
+    county: "Bedfordshire",
+    country: "England",
+    area: "St George's Square and Luton's parks",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Love Luton RunFest — three traffic-free town-centre races with a community festival atmosphere.",
+    description:
+      "Love Luton and ATW stage chip-timed 5K, 10K and half-marathon routes from St George's Square through the town's parks and closed roads, with medals, prizes and local charity partners.",
+    organiser: "Love Luton CIC / ATW Events",
+    website: "https://loveluton.org.uk/runfest/",
+  },
+  "nottingham-goose-fair-gallop-10k": {
+    name: "Goose Fair Gallop 10K",
+    city: "Awsworth",
+    county: "Nottinghamshire",
+    country: "England",
+    area: "Bennerley Viaduct, the Erewash Canal and surrounding trails",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Goose Fair Gallop — a friendly club 10K over Bennerley Viaduct and Erewash Valley trails.",
+    description:
+      "Kimberley & District Striders' chip-timed race combines canal towpaths, gravel, unmade trails and pavement with a crossing of the Iron Giant. The limited 350-place event is organised by club volunteers.",
+    organiser: "Kimberley & District Striders",
+    website: "https://goosefairgallop.weebly.com/",
+  },
+  "petts-wood-10k": {
+    name: "Petts Wood 10K",
+    city: "Petts Wood",
+    county: "Greater London",
+    country: "England",
+    area: "Willett Recreation Ground and Petts Wood woodland trails",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Petts Wood 10K — a popular non-profit multi-terrain race through streets, parks and woodland.",
+    description:
+      "Petts Wood Runners' undulating community race starts at Willett Recreation Ground and combines paved roads with scenic National Trust trails, enthusiastic marshals, a medal and local charity fundraising.",
+    organiser: "Petts Wood Runners",
+    website: "https://www.pettswoodrunners.org/petts-wood-10k.html",
+  },
+  "run-leicester-half-marathon": {
+    name: "Run Leicester Half Marathon & 10K",
+    city: "Leicester",
+    county: "Leicestershire",
+    country: "England",
+    area: "Victoria Park, the Golden Mile and Leicester city centre",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary:
+      "Run Leicester — road-closed 10K and half marathon routes celebrating the city and its parks.",
+    description:
+      "The not-for-profit festival starts and finishes in Victoria Park, with chip timing, entertainment and a 10K route through the Golden Mile, Abbey Park and city centre. Event proceeds support LOROS Hospice.",
+    organiser: "Run Leicester",
+    website: "https://runleicester.co.uk/",
+  },
+  "skylark-run": {
+    name: "Skylark Run",
+    city: "Wimblington",
+    county: "Cambridgeshire",
+    country: "England",
+    area: "Skylark Lakes near March",
+    surface: "Mixed",
+    distances: ["10K", "5K", "1mi"],
+    summary:
+      "Skylark Run — a provisional family running event around fenland fishing lakes near March.",
+    description:
+      "The most recently verified edition offered chip-timed 10K, 5K and one-mile routes around three usually private lakes, with medals, free parking and fundraising for Cancer Research UK. A 2026 organiser announcement has not yet been found.",
+    organiser: "Skylark Lakes / local volunteer organisers",
+    website: "https://runabc.co.uk/skylark-run",
   },
 };
 
@@ -16259,6 +16421,186 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "The official charity partner offers a £25 charity place with a £125 minimum sponsorship commitment. This is distinct from a general-entry ticket.",
+    },
+  ],
+  "loch-rannoch-10k|2026-10-10|10K": [
+    {
+      providerCode: "runnation-loch-rannoch-10k-2026",
+      providerName: "Run Nation official entry",
+      entryUrl: "https://runnation.co.uk/r/run-scotland-loch-rannoch-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-05T23:59:00+01:00",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://runnation.co.uk/r/run-scotland-loch-rannoch-10k-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser page offers £22 affiliated or £24 unaffiliated entry and closes online registration on 5 October.",
+    },
+    {
+      providerCode: "letsdothis-loch-rannoch-10k-2026",
+      providerName: "Let's Do This entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/run-scotland-rannoch-10k-half-marathon-marathon-189570",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/run-scotland-rannoch-10k-half-marathon-marathon-189570",
+      isVerified: true,
+      notes:
+        "Let's Do This provides secondary 10K registration at £22 to £24 and confirms the Saturday 10:00 start. Compare the final checkout total before payment.",
+    },
+  ],
+  "love-luton-half-marathon-10k|2026-10-11|10K": [
+    {
+      providerCode: "atw-love-luton-runfest-2026",
+      providerName: "ATW official entry",
+      entryUrl: "https://www.atwevents.co.uk/e/love-luton-runfest-5k-10k-and-half-marathon-9296",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://loveluton.org.uk/runfest/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Love Luton's Sign-up Now action opens this live ATW/Eventrac event page. Select the 10K ticket and confirm the current total at checkout.",
+    },
+    {
+      providerCode: "timeoutdoors-love-luton-10k-2026",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/love-luton-runfest/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/love-luton-runfest/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors offers secondary 10K entry at £28 to £30 and confirms the 09:00 start, age-15 minimum and St George's Square event HQ.",
+    },
+  ],
+  "nottingham-goose-fair-gallop-10k|2026-10-11|10K": [
+    {
+      providerCode: "entrycentral-goose-fair-gallop-2026",
+      providerName: "EntryCentral official waiting list",
+      entryUrl: "https://www.entrycentral.com/goosefairgallop",
+      entryType: "official",
+      status: "waitlist",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/goosefairgallop",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The 350-place race is full, but EntryCentral is accepting waiting-list sign-ups. If offered a place, affiliated entry is £23 and standard entry £25 plus service fee.",
+    },
+    {
+      providerCode: "official-goose-fair-gallop-2026",
+      providerName: "Goose Fair Gallop official information",
+      entryUrl: "https://goosefairgallop.weebly.com/",
+      entryType: "official",
+      status: "waitlist",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://goosefairgallop.weebly.com/",
+      isVerified: true,
+      notes:
+        "The organiser confirms that 2026 entries are sold out and directs runners to the EntryCentral waiting list, while also publishing the current route and race guidance.",
+    },
+  ],
+  "petts-wood-10k|2026-10-11|10K": [
+    {
+      providerCode: "england-athletics-petts-wood-2026",
+      providerName: "England Athletics official checkout",
+      entryUrl: "https://englandathletics.sport80.com/public/wizard/e/31408/home",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.pettswoodrunners.org/petts-wood-10k.html",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Petts Wood Runners' Enter Here button opens this England Athletics registration wizard. Current club calendar information lists £22 plus fees.",
+    },
+    {
+      providerCode: "official-petts-wood-runners-2026",
+      providerName: "Petts Wood Runners official information",
+      entryUrl: "https://www.pettswoodrunners.org/petts-wood-10k.html",
+      entryType: "charity",
+      status: "open",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.pettswoodrunners.org/petts-wood-10k.html",
+      isVerified: true,
+      notes:
+        "The organising club confirms the 11 October race, Willett Recreation Ground venue, multi-terrain charity course and direct England Athletics entry route.",
+    },
+  ],
+  "run-leicester-half-marathon|2026-10-11|10K": [
+    {
+      providerCode: "resultsbase-run-leicester-2026",
+      providerName: "Results Base official checkout",
+      entryUrl: "https://www.resultsbase.net/cpm8d13",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-07T23:59:00+01:00",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://runleicester.co.uk/event-info/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Run Leicester's Register buttons point to this Results Base checkout. Current 10K entry is advertised from £22 to £24, with registration due to close on 7 October unless sold out first.",
+    },
+    {
+      providerCode: "letsdothis-run-leicester-2026",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/leicester-marathon-half-marathon-16888",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/leicester-marathon-half-marathon-16888",
+      isVerified: true,
+      notes:
+        "Let's Do This supplies secondary £22 to £24 10K booking and confirms the 09:15 start, Victoria Park venue and city-centre route.",
+    },
+  ],
+  "skylark-run|2026-10-10|10K": [
+    {
+      providerCode: "official-skylark-events-2026",
+      providerName: "Skylark Events venue information",
+      entryUrl: "https://skylark-events.co.uk/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://skylark-events.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The venue's current 2026 site does not list a Skylark Run or race checkout. Use it only for venue updates; no 2026 race entry is confirmed.",
+    },
+    {
+      providerCode: "runabc-skylark-provisional-2026",
+      providerName: "runABC provisional listing",
+      entryUrl: "https://runabc.co.uk/skylark-run",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://runabc.co.uk/skylark-run",
+      isVerified: true,
+      notes:
+        "runABC's public event page still describes the 4 October 2025 edition. The imported 2026 row is retained as TBC, not as proof that registration is open.",
     },
   ],
 };
