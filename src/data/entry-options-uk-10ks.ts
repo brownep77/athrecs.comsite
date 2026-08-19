@@ -415,6 +415,24 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-03",
     toDate: "2026-10-04",
   },
+  {
+    seriesSlug: "bath-bristol-railway-races-october",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
+  {
+    seriesSlug: "fife-running-festival",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
+  {
+    seriesSlug: "ldnx",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -2928,6 +2946,55 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://www.runthedistance.co.uk/wem-10k",
     notes:
       "Run The Distance and the live Ticket Tailor checkout confirm a 10:00 start on Sunday 4 October, correcting the imported 09:00 time. The accurately measured, closed-road course leaves Thomas Adams School for Wem town centre and the surrounding Shropshire countryside.",
+  },
+  "west-pinchbeck-10k|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://tridentsportsevents.eventrac.co.uk/e/west-pinchbeck-10k-14523",
+    source: "https://tridentsportsevents.eventrac.co.uk/e/west-pinchbeck-10k-14523",
+    notes:
+      "Trident Sports Events and the live Eventrac checkout confirm a 10:00 start on Sunday 4 October, correcting the imported 09:00 time. The flat, fast fenland road race starts from St Bartholomew's School and welcomes runners and walkers with no cut-off.",
+  },
+  "westbury-lions-10k-2|2026-10-04|10K": {
+    startTime: "10:00",
+    status: "TBC",
+    entryUrl: "https://westburylions10k.org/",
+    source: "https://runabc.co.uk/westbury-lions-10k-2",
+    notes:
+      "runABC lists the 2026 race for Sunday 4 October and its imported 09:00 time corresponds to the event's traditional 10:00 BST start. The organiser site still shows the 2025 edition and no live 2026 checkout was found, so the date, time and entry status must be reconfirmed before booking.",
+  },
+  "chase-the-moon-battersea-5k-10k-october|2026-10-07|10K": {
+    startTime: "19:00",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/chase-the-moon-battersea-park-5k-10k-october-2026",
+    source: "https://www.runthrough.co.uk/event/chase-the-moon-battersea-park-5k-10k-october-2026",
+    notes:
+      "RunThrough confirms that both the 5K and 10K start at 19:00 on Wednesday 7 October, correcting the imported 18:00 time. The flat, chip-timed 10K completes four laps of Battersea Park's roads and paths from the bandstand.",
+  },
+  "bath-bristol-railway-races-october|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "09:30",
+    entryUrl: "https://www.relishrunningraces.com/register-bath-bristol-railway-races.php",
+    source: "https://www.relishrunningraces.com/bath-bristol-railway-running-races.php",
+    notes:
+      "Relish Running Races confirms Sunday 11 October and a 09:30 10K start, correcting the imported Saturday date and 23:00 placeholder. The flat out-and-back follows the paved Bath-to-Bristol railway path from Green Park Station with only about six metres of elevation change.",
+  },
+  "fife-running-festival|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "09:30",
+    entryUrl:
+      "https://www.letsdothis.com/gb/checkout/ticket?eventId=268534&occurrenceId=21111177565&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=156202&utm_source=website",
+    source:
+      "https://www.upandrunningevents.co.uk/event-details/fife-running-festival-lochore-meadows",
+    notes:
+      "Up and Running Events confirms Sunday 11 October and a 09:30 event start, correcting the imported Saturday date and 23:00 placeholder. The inclusive, accurately measured 5K and 10K races at Lochore Meadows are chip timed, fully marked and marshalled.",
+  },
+  "ldnx|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "09:00",
+    entryUrl: "https://www.timeoutdoors.com/events/asics-ldnx-10k",
+    source: "https://ldnx.co.uk/",
+    notes:
+      "The organiser confirms Sunday 11 October, correcting the imported Saturday date and 23:00 placeholder. TimeOutdoors lists a 09:00 start, while Wembley Park says waves are expected from around 09:00 but remain subject to final confirmation. The fully closed-road route starts indoors at Wembley and finishes on Olympic Way.",
   },
 };
 
@@ -7337,6 +7404,93 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Run The Distance's accurately measured route crosses Wem town centre and nearby Shropshire countryside, with professional chip timing, free photographs and a bespoke finisher medal.",
     organiser: "Run The Distance / Run UKAC",
     website: "https://www.runthedistance.co.uk/wem-10k",
+  },
+  "west-pinchbeck-10k": {
+    name: "West Pinchbeck 10K",
+    city: "West Pinchbeck",
+    county: "Lincolnshire",
+    country: "England",
+    area: "St Bartholomew's School and the fenland roads around West Pinchbeck",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "West Pinchbeck 10K — a flat fenland road race for runners and walkers.",
+    description:
+      "Trident Sports Events stages a fast, flat and fully marshalled road 10K from St Bartholomew's School, with professional timing, distance markers, a finisher medal and no cut-off.",
+    organiser: "Trident Sports Events",
+    website: "https://tridentsportsevents.eventrac.co.uk/e/west-pinchbeck-10k-14523",
+  },
+  "westbury-lions-10k-2": {
+    name: "Westbury Lions 10K",
+    city: "Westbury",
+    county: "Wiltshire",
+    country: "England",
+    area: "White Horse Country Park, Bratton and Capps Lane",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary: "Westbury Lions 10K — a community race from White Horse Country Park.",
+    description:
+      "Westbury Lions Club's established charity race loops the country park before heading through Bratton and Capps Lane, with proceeds supporting local causes. The organiser has not yet published a 2026 entry checkout.",
+    organiser: "Westbury Lions Club",
+    website: "https://westburylions10k.org/",
+  },
+  "chase-the-moon-battersea-5k-10k-october": {
+    name: "Chase the Moon Battersea Park 5K & 10K",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Battersea Park Bandstand",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Chase the Moon Battersea Park — flat evening 5K and 10K races under the lights.",
+    description:
+      "RunThrough's chip-timed evening event uses flat, traffic-free park roads, with two laps for the 5K and four for the 10K, kilometre markers, marshals and a bandstand finish.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/chase-the-moon-battersea-park-5k-10k-october-2026",
+  },
+  "bath-bristol-railway-races-october": {
+    name: "Bath & Bristol Railway Races",
+    city: "Bath",
+    county: "Somerset",
+    country: "England",
+    area: "Green Park Station and the Bath-to-Bristol railway path",
+    surface: "Road",
+    distances: ["50K", "Marathon", "25K", "Half", "10K", "5K"],
+    summary:
+      "Bath & Bristol Railway Races — flat out-and-back distances on the paved railway path from Bath.",
+    description:
+      "Relish Running Races stages traffic-free out-and-backs from Green Park Station on the shared Bath-to-Bristol railway path. The 10K turns near Kelston Park and gains only about six metres, while the path remains open to other users.",
+    organiser: "Relish Running Races",
+    website: "https://www.relishrunningraces.com/bath-bristol-railway-running-races.php",
+  },
+  "fife-running-festival": {
+    name: "Fife Running Festival at Lochore Meadows",
+    city: "Lochgelly",
+    county: "Fife",
+    country: "Scotland",
+    area: "Lochore Meadows Country Park",
+    surface: "Trail",
+    distances: ["10K", "5K"],
+    summary: "Fife Running Festival — inclusive chip-timed 5K and 10K races at Lochore Meadows.",
+    description:
+      "Up and Running Events offers accurately measured, chip-timed 5K and 10K routes around Lochore Meadows, with marshals, kilometre markers, hydration, free photographs, a medal and post-race goodies.",
+    organiser: "Up and Running Events",
+    website:
+      "https://www.upandrunningevents.co.uk/event-details/fife-running-festival-lochore-meadows",
+  },
+  ldnx: {
+    name: "ASICS LDNX 10K",
+    city: "Wembley",
+    county: "Greater London",
+    country: "England",
+    area: "Wembley Stadium, Fryent Country Park and Olympic Way",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "ASICS LDNX 10K — a large closed-road Wembley race finishing beneath the stadium arch.",
+    description:
+      "A.S.O. UK's traffic-free route gives up to 10,000 runners an indoor Wembley start, music and entertainment, a circuit around the stadium and a finish on Olympic Way before the BOXPARK after-party.",
+    organiser: "A.S.O. UK",
+    website: "https://ldnx.co.uk/",
   },
 };
 
@@ -15906,6 +16060,205 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Let's Do This offers a secondary registration route from £18 to £26 and confirms the 10:00 start, closed-road course and Thomas Adams School venue.",
+    },
+  ],
+  "west-pinchbeck-10k|2026-10-04|10K": [
+    {
+      providerCode: "eventrac-west-pinchbeck-2026",
+      providerName: "Eventrac official checkout",
+      entryUrl: "https://tridentsportsevents.eventrac.co.uk/e/west-pinchbeck-10k-14523",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://tridentsportsevents.eventrac.co.uk/e/west-pinchbeck-10k-14523",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser checkout lists £25 entry, a 10:00 start and places available for the 4 October race.",
+    },
+    {
+      providerCode: "runabc-west-pinchbeck-2026",
+      providerName: "runABC event information",
+      entryUrl: "https://runabc.co.uk/west-pinchbeck-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://runabc.co.uk/west-pinchbeck-10k",
+      isVerified: true,
+      notes:
+        "runABC independently confirms Sunday 4 October, the 10:00 start, £25 fee and St Bartholomew's School venue; registration remains through Eventrac.",
+    },
+  ],
+  "westbury-lions-10k-2|2026-10-04|10K": [
+    {
+      providerCode: "official-westbury-lions-2026",
+      providerName: "Westbury Lions official information",
+      entryUrl: "https://westburylions10k.org/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://westburylions10k.org/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The club site still displays the 2025 edition and its former entry route. No live 2026 checkout was found, so use this page only to monitor organiser updates.",
+    },
+    {
+      providerCode: "runabc-westbury-lions-2026",
+      providerName: "runABC provisional listing",
+      entryUrl: "https://runabc.co.uk/westbury-lions-10k-2",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://runabc.co.uk/westbury-lions-10k-2",
+      isVerified: true,
+      notes:
+        "runABC lists Sunday 4 October 2026, but the organiser has not yet published matching 2026 registration. Treat the listing as provisional and reconfirm before travel or payment.",
+    },
+  ],
+  "chase-the-moon-battersea-5k-10k-october|2026-10-07|10K": [
+    {
+      providerCode: "runthrough-chase-moon-battersea-october-2026",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/chase-the-moon-battersea-park-5k-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/chase-the-moon-battersea-park-5k-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser page offers 10K entry at £32 and confirms the 19:00 start and four-lap Battersea Park course.",
+    },
+    {
+      providerCode: "letsdothis-chase-moon-battersea-october-2026",
+      providerName: "Let's Do This entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/chase-the-moon-battersea-park-5k-10k-october-2026-259137",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/chase-the-moon-battersea-park-5k-10k-october-2026-259137",
+      isVerified: true,
+      notes:
+        "Let's Do This provides a secondary 10K booking route from £30 and confirms the Wednesday evening event. Compare the final total at checkout.",
+    },
+  ],
+  "bath-bristol-railway-races-october|2026-10-11|10K": [
+    {
+      providerCode: "relish-bath-bristol-october-2026",
+      providerName: "Relish Running Races official entry",
+      entryUrl: "https://www.relishrunningraces.com/register-bath-bristol-railway-races.php",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://www.relishrunningraces.com/bath-bristol-railway-running-races.php",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live registration page lists the 11 October races and a £32 10K place, with booking handled through the official Relish route.",
+    },
+    {
+      providerCode: "letsdothis-bath-bristol-october-2026",
+      providerName: "Let's Do This entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/bath-bristol-railway-race-10km-half-25km-marathon-and-50km-autumn-2026-251610",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/bath-bristol-railway-race-10km-half-25km-marathon-and-50km-autumn-2026-251610",
+      isVerified: true,
+      notes:
+        "Let's Do This supplies secondary £32 booking and confirms the 09:30 10K start at Green Park Station on Sunday 11 October.",
+    },
+  ],
+  "fife-running-festival|2026-10-11|10K": [
+    {
+      providerCode: "letsdothis-fife-running-festival-2026",
+      providerName: "Let's Do This official booking partner",
+      entryUrl:
+        "https://www.letsdothis.com/gb/checkout/ticket?eventId=268534&occurrenceId=21111177565&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=156202&utm_source=website",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://www.upandrunningevents.co.uk/events",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Up and Running Events' Buy Tickets button opens this live Let's Do This checkout for Sunday 11 October. Confirm the selected 10K price before payment.",
+    },
+    {
+      providerCode: "official-up-running-fife-2026",
+      providerName: "Up and Running Events official information",
+      entryUrl:
+        "https://www.upandrunningevents.co.uk/event-details/fife-running-festival-lochore-meadows",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl:
+        "https://www.upandrunningevents.co.uk/event-details/fife-running-festival-lochore-meadows",
+      isVerified: true,
+      notes:
+        "The official event page confirms 11 October, the 09:30–13:30 event window and Lochore Meadows postcode, while the organiser's events page supplies the booking link.",
+    },
+  ],
+  "ldnx|2026-10-11|10K": [
+    {
+      providerCode: "timeoutdoors-ldnx-2026",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/asics-ldnx-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/asics-ldnx-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "TimeOutdoors currently offers entry from £29 to £84, including individual, team and merchandise tiers, and lists entries open for Sunday 11 October.",
+    },
+    {
+      providerCode: "official-ldnx-final-release-2026",
+      providerName: "LDNX official final-release updates",
+      entryUrl: "https://ldnx.co.uk/2026-updates/",
+      entryType: "official",
+      status: "waitlist",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://ldnx.co.uk/2026-updates/",
+      isVerified: true,
+      notes:
+        "The official site is collecting details for its final public release rather than exposing standard public tickets today. Use it for the organiser's next-release notification and current event updates.",
+    },
+    {
+      providerCode: "alzheimers-research-uk-ldnx-2026",
+      providerName: "Alzheimer's Research UK charity place",
+      entryUrl: "https://www.alzheimersresearchuk.org/activities/asics-ldnx-10k/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:20:00+01:00",
+      sourceUrl: "https://www.alzheimersresearchuk.org/activities/asics-ldnx-10k/",
+      isVerified: true,
+      notes:
+        "The official charity partner offers a £25 charity place with a £125 minimum sponsorship commitment. This is distinct from a general-entry ticket.",
     },
   ],
 };
