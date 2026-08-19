@@ -87,9 +87,10 @@ for (const [checkpoint, detail] of Object.entries(progress.checkpoints)) {
 
   if ((checkpointRank.get(detail.status) ?? -1) >= checkpointRank.get("coded")) {
     for (const key of expectedKeys) {
+      const resolvedKey = detail.resolvedKeys?.[key] ?? key;
       assert(
-        options.includes(`"${key}": [`),
-        `${checkpoint} is coded but has no entry options for ${key}`,
+        options.includes(`"${resolvedKey}": [`),
+        `${checkpoint} is coded but has no entry options for ${resolvedKey}`,
       );
     }
   }
@@ -103,15 +104,28 @@ assert(
   "duplicate edition keys exist in UK 10K entry options",
 );
 
+const resolvedQueueKeys = new Map();
+for (const detail of Object.values(progress.checkpoints)) {
+  for (const [sourceKey, resolvedKey] of Object.entries(detail.resolvedKeys ?? {})) {
+    assert(keys.has(sourceKey), `resolved key references unknown queue race: ${sourceKey}`);
+    assert(
+      typeof resolvedKey === "string" && resolvedKey.split("|").length === 3,
+      `invalid resolved key for ${sourceKey}`,
+    );
+    resolvedQueueKeys.set(sourceKey, resolvedKey);
+  }
+}
+
 for (const race of queue.races) {
-  if (!options.includes(`"${race.key}": [`)) continue;
-  const start = options.indexOf(`"${race.key}": [`);
-  const next = options.indexOf('\n  "', start + race.key.length + 5);
+  const optionKey = resolvedQueueKeys.get(race.key) ?? race.key;
+  if (!options.includes(`"${optionKey}": [`)) continue;
+  const start = options.indexOf(`"${optionKey}": [`);
+  const next = options.indexOf('\n  "', start + optionKey.length + 5);
   const block = options.slice(start, next < 0 ? options.length : next);
   const primaryCount = (block.match(/isPrimary:\s*true/g) ?? []).length;
   const verifiedCount = (block.match(/isVerified:\s*true/g) ?? []).length;
-  assert(primaryCount === 1, `${race.key} must have exactly one primary provider`);
-  assert(verifiedCount >= 1, `${race.key} must have at least one verified provider`);
+  assert(primaryCount === 1, `${optionKey} must have exactly one primary provider`);
+  assert(verifiedCount >= 1, `${optionKey} must have at least one verified provider`);
 }
 
 if (failures.length) {
