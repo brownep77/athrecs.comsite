@@ -16,6 +16,7 @@
     "verify:catalogue": "node --experimental-strip-types scripts/verify-catalogue.mjs",
     "verify:clubs": "node --experimental-strip-types scripts/verify-club-audit.mjs",
     "verify:race-groups": "node --experimental-strip-types scripts/verify-race-groups.mjs",
+    "verify:sources": "node scripts/verify-source-registry.mjs",
     "verify:uk-10k-workflow": "node scripts/verify-uk-10k-workflow.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
