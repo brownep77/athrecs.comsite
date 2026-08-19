@@ -3421,6 +3421,48 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Fylde Coast Runners confirms a 10:00 start on Sunday 18 October, correcting the imported 09:00 time. The accurately measured, flat course completes two laps of Stanley Park's maintained paths, starting and finishing inside the park.",
   },
+  "blackdown-hills-trail-run|2026-10-18|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.sientries.co.uk/event/blackdown-hill-challenge-2026",
+    source: "https://www.midhurstmilers.org/backdown-hill-challenge-trail-race",
+    notes:
+      "Midhurst Milers and SI Entries confirm the Blackdown Hill Challenge on Sunday 18 October, with online entry open for the 10K. The organiser's public event page does not publish a start time; the current runABC listing gives 09:00, correcting the imported 08:00 placeholder, but final entrant instructions will control. The trail course climbs about 866 feet to the Temple of the Winds and returns to Fernhurst.",
+  },
+  "blackpit-10km|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.riderhq.com/events/p/c4cirbz2/f/blackpit-10km--5km-2026",
+    source: "https://www.racinglinerunning.co.uk/blackpit-10km",
+    notes:
+      "Racing Line Running confirms a 10:00 start on Sunday 18 October, correcting the imported 09:00 event placeholder. The mixed-terrain 10K begins and finishes at Blackpit Brewery, follows quiet lanes and estate trails around Stowe and includes chip timing, a medal, a reusable pint cup and a post-race drink.",
+  },
+  "brewers-10k|2026-10-18|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.runthrough.co.uk/event/brewers-10k-5k-october-2026",
+    source: "https://www.runthrough.co.uk/event/brewers-10k-5k-october-2026",
+    notes:
+      "RunThrough confirms the Brewers 10K starts at 09:00 on Sunday 18 October, correcting the imported 08:00 placeholder; the accompanying 5K starts at 09:15. The closed-road route starts and finishes outside Burton Albion's Pirelli Stadium and runs through Stretton and Rolleston, with chip timing, kilometre markers, a themed medal and free race photos.",
+  },
+  "bridgnorth-10k|2026-10-18|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.stuweb.co.uk/events/2026/10/18/4631/",
+    source: "https://www.stuweb.co.uk/events/2026/10/18/4631/",
+    notes:
+      "The live StuWeb entry page confirms an 11:00 start on Sunday 18 October, correcting the imported 10:00 time. Bridgnorth Running Club's undulating road race starts beneath the Town Hall, crosses the River Severn and finishes in the High Street, with chip timing, a medal and finisher T-shirt.",
+  },
+  "costorphine-hill-5k-10k-15k-20k|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.letsdothis.com/gb/e/corstorphine-hill-5k10k15k20k-268357",
+    source: "https://www.upandrunningevents.co.uk/event-details/corstorphine-hill-5k-10k-15k-20k",
+    notes:
+      "Up and Running Events and Let's Do This confirm every distance starts at 10:00 on Sunday 18 October, correcting the imported 09:00 time and the source slug's 'Costorphine' misspelling. The 10K follows marked woodland trails over Corstorphine Hill and includes chip timing, marshals, hydration, free photos and a bespoke medal.",
+  },
+  "forres-harriers-brodie-castle-10k|2026-10-18|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/brodiecastle2026",
+    source: "https://www.entrycentral.com/brodiecastle2026",
+    notes:
+      "EntryCentral's current 2026 listing confirms an 11:00 start on Sunday 18 October, correcting the imported 10:00 time. Forres Harriers' chip-timed road race starts and finishes in the grounds of Brodie Castle, has a 90-minute support limit and includes a finisher medal or memento. The current EntryCentral listing controls over older club-calendar text.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -8627,6 +8669,94 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Fylde Coast Runners' spectator-friendly route starts and finishes inside Stanley Park and completes two laps on maintained paths. Entry includes timing and a commemorative medal, with optional technical shirts available.",
     organiser: "Fylde Coast Runners",
     website: "https://www.fyldecoastrunners.com/autumn-breaker-10k.html",
+  },
+  "blackdown-hills-trail-run": {
+    name: "Blackdown Hill Challenge — 10K, 4.5K & Junior Races",
+    city: "Fernhurst",
+    county: "West Sussex",
+    country: "England",
+    area: "Fernhurst Recreation Ground and Blackdown Hill",
+    surface: "Trail",
+    distances: ["10K", "4.5K", "Junior"],
+    summary:
+      "Blackdown Hill Challenge — a demanding trail climb from Fernhurst to the Temple of the Winds.",
+    description:
+      "Midhurst Milers' Trail Running Association event climbs from Fernhurst Recreation Ground onto Blackdown Hill and returns after about 866 feet of ascent. The programme also includes a 4.5K adult race and junior races; all entries are online in advance.",
+    organiser: "Midhurst Milers",
+    website: "https://www.midhurstmilers.org/backdown-hill-challenge-trail-race",
+  },
+  "blackpit-10km": {
+    name: "Blackpit 10K & 5K",
+    city: "Stowe",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Blackpit Brewery and the Stowe estate",
+    surface: "Trail",
+    distances: ["10K", "5K"],
+    summary: "Blackpit 10K & 5K — mixed-terrain autumn races based at a Buckinghamshire brewery.",
+    description:
+      "Racing Line Running's marked routes start and finish at Blackpit Brewery and combine quiet country lanes with trails around the Stowe estate. The 10K has a two-hour cut-off, free event parking and a finisher package including chip timing, a medal, reusable pint cup and drink.",
+    organiser: "Racing Line Running",
+    website: "https://www.racinglinerunning.co.uk/blackpit-10km",
+  },
+  "brewers-10k": {
+    name: "Brewers 10K & 5K",
+    city: "Burton upon Trent",
+    county: "Staffordshire",
+    country: "England",
+    area: "Pirelli Stadium, Stretton and Rolleston",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary:
+      "Brewers 10K & 5K — closed-road races starting and finishing at Burton Albion's stadium.",
+    description:
+      "RunThrough's closed-road races begin outside the Pirelli Stadium and follow a fast route through Stretton and Rolleston. The 10K starts at 09:00 and the 5K at 09:15, with chip timing, kilometre markers, marshals, free photographs, a themed medal and finish-line refreshments.",
+    organiser: "RunThrough",
+    website: "https://www.runthrough.co.uk/event/brewers-10k-5k-october-2026",
+  },
+  "bridgnorth-10k": {
+    name: "Bridgnorth 10K",
+    city: "Bridgnorth",
+    county: "Shropshire",
+    country: "England",
+    area: "High Street, River Severn and Bridgnorth country lanes",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Bridgnorth 10K — an undulating town-and-country road race organised by the local running club.",
+    description:
+      "Bridgnorth Running Club's established 10K starts beneath the Town Hall, crosses the River Severn and follows an undulating road route before a High Street finish. Entry includes chip timing, a medal and finisher T-shirt.",
+    organiser: "Bridgnorth Running Club",
+    website: "https://bridgnorthrunningclub.weebly.com/bridgnorth-10k.html",
+  },
+  "costorphine-hill-5k-10k-15k-20k": {
+    name: "Corstorphine Hill 5K, 10K, 15K & 20K",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "Corstorphine Hill woodland trails",
+    surface: "Trail",
+    distances: ["5K", "10K", "15K", "20K"],
+    summary:
+      "Corstorphine Hill autumn trail races — four chip-timed distances through Edinburgh woodland.",
+    description:
+      "Up and Running Events' marked woodland courses offer 5K, 10K, 15K and 20K distances, all starting at 10:00. Entry includes chip timing, route marshals, hydration, free race photography, finish goodies and a bespoke medal.",
+    organiser: "Up and Running Events",
+    website: "https://www.upandrunningevents.co.uk/event-details/corstorphine-hill-5k-10k-15k-20k",
+  },
+  "forres-harriers-brodie-castle-10k": {
+    name: "Forres Harriers Brodie Castle 10K",
+    city: "Forres",
+    county: "Moray",
+    country: "Scotland",
+    area: "Brodie Castle and surrounding public roads",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Brodie Castle 10K — a chip-timed road race from the historic Moray estate.",
+    description:
+      "Forres Harriers' 10K starts and finishes in the grounds of Brodie Castle and follows open public roads through the surrounding countryside. The race has a 90-minute support limit, chip timing and a finisher medal or memento.",
+    organiser: "Forres Harriers",
+    website: "https://www.entrycentral.com/brodiecastle2026",
   },
 };
 
@@ -18853,6 +18983,191 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Find a Race is an official booking partner and offers a second £25 Quick Book route. Compare the final total and member discount with the organiser before payment.",
+    },
+  ],
+  "blackdown-hills-trail-run|2026-10-18|10K": [
+    {
+      providerCode: "sientries-blackdown-hill-challenge-2026",
+      providerName: "SI Entries official checkout",
+      entryUrl: "https://www.sientries.co.uk/event/blackdown-hill-challenge-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-16T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.sientries.co.uk/event/blackdown-hill-challenge-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "SI Entries lists the affiliated 10K at £19 and the unaffiliated ticket at £21. Online entry closes on 16 October; the organiser states there are no race-day entries.",
+    },
+    {
+      providerCode: "official-midhurst-milers-blackdown-2026",
+      providerName: "Midhurst Milers official information",
+      entryUrl: "https://www.midhurstmilers.org/backdown-hill-challenge-trail-race",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.midhurstmilers.org/backdown-hill-challenge-trail-race",
+      isVerified: true,
+      notes:
+        "The organiser confirms the 18 October 10K, Fernhurst venue, Trail Running Association permit and online-only entry. Check final entrant instructions for the start time because it is not shown on the organiser page.",
+    },
+  ],
+  "blackpit-10km|2026-10-18|10K": [
+    {
+      providerCode: "riderhq-blackpit-2026",
+      providerName: "RiderHQ official checkout",
+      entryUrl: "https://www.riderhq.com/events/p/c4cirbz2/f/blackpit-10km--5km-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-15T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.racinglinerunning.co.uk/blackpit-10km",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RiderHQ is the organiser-linked checkout. Racing Line lists the 10K from £30, rising to £32 by entry band, with entries closing on 15 October unless capacity is reached first.",
+    },
+    {
+      providerCode: "official-racing-line-blackpit-2026",
+      providerName: "Racing Line official information",
+      entryUrl: "https://www.racinglinerunning.co.uk/blackpit-10km",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-15T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.racinglinerunning.co.uk/blackpit-10km",
+      isVerified: true,
+      notes:
+        "The organiser confirms the 10:00 start, £30 to £32 10K price range, free parking and two-hour cut-off, and links runners to RiderHQ for payment.",
+    },
+  ],
+  "brewers-10k|2026-10-18|10K": [
+    {
+      providerCode: "runthrough-brewers-october-2026",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/brewers-10k-5k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/brewers-10k-5k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists standard 10K entry at £34 and VIP entry at £39. Select the 10K rather than the 09:15 5K ticket.",
+    },
+    {
+      providerCode: "findarace-brewers-october-2026",
+      providerName: "Find a Race entry",
+      entryUrl: "https://findarace.com/events/brewers-5k-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 36,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://findarace.com/events/brewers-5k-10k",
+      isVerified: true,
+      notes:
+        "Find a Race offers a second 10K booking route at £36, or £41 for VIP entry. Compare its final checkout total with RunThrough before payment.",
+    },
+  ],
+  "bridgnorth-10k|2026-10-18|10K": [
+    {
+      providerCode: "stuweb-bridgnorth-10k-2026",
+      providerName: "StuWeb official checkout",
+      entryUrl: "https://www.stuweb.co.uk/events/2026/10/18/4631/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-14T11:00:00+01:00",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.stuweb.co.uk/events/2026/10/18/4631/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "StuWeb lists entry at £29 plus its displayed booking fee, with a £2 UKA-affiliation discount. Online entry closes at 11:00 on 14 October unless the field fills first.",
+    },
+    {
+      providerCode: "official-bridgnorth-running-club-10k",
+      providerName: "Bridgnorth Running Club information",
+      entryUrl: "https://bridgnorthrunningclub.weebly.com/bridgnorth-10k.html",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://bridgnorthrunningclub.weebly.com/bridgnorth-10k.html",
+      isVerified: true,
+      notes:
+        "The club page explains the established route, registration and parking pattern but still carries older edition text. Use StuWeb's dated 2026 checkout for current entry terms and timing.",
+    },
+  ],
+  "costorphine-hill-5k-10k-15k-20k|2026-10-18|10K": [
+    {
+      providerCode: "letsdothis-corstorphine-hill-october-2026",
+      providerName: "Let's Do This official checkout",
+      entryUrl: "https://www.letsdothis.com/gb/e/corstorphine-hill-5k10k15k20k-268357",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/corstorphine-hill-5k10k15k20k-268357",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Let's Do This lists the exact 18 October 10K at £22. Select the 10K ticket rather than the £20 5K, £24 15K or £26 20K.",
+    },
+    {
+      providerCode: "official-up-running-corstorphine-october-2026",
+      providerName: "Up and Running Events information",
+      entryUrl:
+        "https://www.upandrunningevents.co.uk/event-details/corstorphine-hill-5k-10k-15k-20k",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl:
+        "https://www.upandrunningevents.co.uk/event-details/corstorphine-hill-5k-10k-15k-20k",
+      isVerified: true,
+      notes:
+        "The organiser confirms the date, 10:00 start and four distances, and directs entrants to the Let's Do This checkout for the current ticket terms.",
+    },
+  ],
+  "forres-harriers-brodie-castle-10k|2026-10-18|10K": [
+    {
+      providerCode: "entrycentral-brodie-castle-2026",
+      providerName: "EntryCentral official checkout",
+      entryUrl: "https://www.entrycentral.com/brodiecastle2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-15T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/brodiecastle2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists affiliated entry at £23 and standard entry at £26, plus its displayed 4% fee. The event description says entries close at midnight on 15 October unless the 400-place limit is reached first.",
+    },
+    {
+      providerCode: "official-forres-harriers-information",
+      providerName: "Forres Harriers organiser information",
+      entryUrl: "https://www.forresharriers.com/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:20:00+01:00",
+      sourceUrl: "https://www.forresharriers.com/",
+      isVerified: true,
+      notes:
+        "Forres Harriers is the race organiser. Its club calendar may lag, so use EntryCentral's dated 2026 page as the authoritative source for the 18 October event, time, prices and entry status.",
     },
   ],
 };
