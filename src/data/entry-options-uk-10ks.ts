@@ -475,6 +475,12 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-10",
     toDate: "2026-10-11",
   },
+  {
+    seriesSlug: "felbrigg-trail-run",
+    distance: "10K",
+    fromDate: "2026-10-25",
+    toDate: "2026-10-11",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -3130,6 +3136,49 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://www.alcester10k.com/",
     notes:
       "Raceways confirms a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. The chip-timed single loop leaves Alcester High Street for Warwickshire country lanes, with two drinks stations, a finisher medal and T-shirt, post-race snacks and a free children's run.",
+  },
+  "bc-10k|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.runningmonktrailevents.com/event-details/bc-autumn-10k",
+    source: "https://www.timeoutdoors.com/events/bc10k-autumn-edition",
+    notes:
+      "The current TimeOutdoors listing and its organiser checkout confirm a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. This novice-friendly but hilly trail 10K crosses muddy paths, streams and stiles around Bishop's Castle, with chip timing and no formal cut-off.",
+  },
+  "blaze-the-biblins|2026-10-11|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/Blazethebiblins",
+    source: "https://www.entrycentral.com/Blazethebiblins",
+    notes:
+      "EntryCentral's current event index and exact case-sensitive checkout confirm Sunday 11 October and an 11:00 race start, correcting the imported 10:00 time. The demanding trail route explores woodland, old ironworks and riverside paths around the Biblins before climbing the 'Demon' hill. A separate lower-case EntryCentral URL displays a conflicting 18 October record, so runners should use this exact official link and verify 11 October before payment.",
+  },
+  "buckingham-10k|2026-10-11|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.entrycentral.com/Buckingham10k",
+    source: "https://www.entrycentral.com/Buckingham10k",
+    notes:
+      "EntryCentral confirms a 09:00 start on Sunday 11 October, correcting the imported 08:00 time. The traffic-free multi-terrain course leaves Buckingham town centre for Stowe Avenue, National Trust gardens and surrounding farmland, with kilometre markers, two water stations and chip timing.",
+  },
+  "burnham-on-crouch-10k|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.eventrac.co.uk/e/burnham-on-crouch-10k-9183",
+    source: "https://www.eventrac.co.uk/e/burnham-on-crouch-10k-9183",
+    notes:
+      "The organiser's live Eventrac page confirms a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. The flat single loop combines sea-wall and coastal paths, countryside trails and town streets from Dengie Hundred Sports Centre, with free parking, changing facilities and post-race refreshments.",
+  },
+  "denmead-10k|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl: "https://racesignup.co.uk/denmead10k",
+    source: "https://www.timeoutdoors.com/events/denmead-10k",
+    notes:
+      "The current TimeOutdoors listing and linked RaceSignup checkout confirm a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. Denmead Striders' undulating road race follows quiet country lanes north of the village, climbing on the outward leg before a faster return from the water station.",
+  },
+  "felbrigg-trail-run|2026-10-25|10K": {
+    date: "2026-10-11",
+    startTime: "10:00",
+    entryUrl: "https://entries.sublimetiming.com/race/89",
+    source: "https://entries.sublimetiming.com/race/89",
+    notes:
+      "Sublime Timing confirms a 10:00 start on Sunday 11 October, correcting the imported 09:00 time and the venue spelling to Felbrigg. The two-lap 10K crosses lawns, woodland, grazing land and estate paths around Felbrigg Hall, with chip timing and proceeds supporting North Norfolk Surf Life Saving Club.",
   },
 };
 
@@ -7804,6 +7853,94 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Raceways' chip-timed single loop starts and finishes on Alcester High Street, with two drinks stations, local support, a medal and T-shirt, post-race snacks and a free medal-winning 1K children's fun run.",
     organiser: "Raceways Events CIC",
     website: "https://www.alcester10k.com/",
+  },
+  "bc-10k": {
+    name: "BC Autumn 10K",
+    city: "Bishop's Castle",
+    county: "Shropshire",
+    country: "England",
+    area: "Church Barn and the countryside around Bishop's Castle",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "BC Autumn 10K — a friendly, hilly trail race through the Shropshire countryside.",
+    description:
+      "Running Monk Trail Events' chip-timed race welcomes newer trail runners to a fully marked route with mud, streams, stiles and hills, followed by a finisher memento and doughnut at Church Barn.",
+    organiser: "Running Monk Trail Events",
+    website: "https://www.runningmonktrailevents.com/event-details/bc-autumn-10k",
+  },
+  "blaze-the-biblins": {
+    name: "Blaze the Biblins",
+    city: "Ross-on-Wye",
+    county: "Herefordshire",
+    country: "England",
+    area: "Biblins Youth Campsite, the Doward and River Wye",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Blaze the Biblins — a challenging woodland and riverside trail race in the Wye Valley.",
+    description:
+      "Monross Trailblazers' marked and marshalled course uses hard trails, single track and rough ground through woodland and old ironworks beside the River Wye, finishing after the event's signature 'Demon' climb.",
+    organiser: "Monross Trailblazers",
+    website: "https://www.entrycentral.com/Blazethebiblins",
+  },
+  "buckingham-10k": {
+    name: "Buckingham 10K",
+    city: "Buckingham",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "The Old Town Hall, Stowe Avenue and Stowe Gardens",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Buckingham 10K — an undulating town-and-country race through Stowe's historic landscape.",
+    description:
+      "Run for the Sky's multi-terrain 10K starts at the Old Town Hall, crosses Stowe Avenue, National Trust gardens and farmland, then returns to Buckingham with chip timing, water stations and a finisher medal.",
+    organiser: "Run for the Sky",
+    website: "https://www.entrycentral.com/Buckingham10k",
+  },
+  "burnham-on-crouch-10k": {
+    name: "Burnham-on-Crouch 10K",
+    city: "Burnham-on-Crouch",
+    county: "Essex",
+    country: "England",
+    area: "Dengie Hundred Sports Centre, sea wall and coastal countryside",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Burnham-on-Crouch 10K — a flat coastal race on sea-wall paths, trails and town streets.",
+    description:
+      "The Rotary Club's scenic single loop begins at Dengie Hundred Sports Centre and combines the Crouch sea wall, countryside tracks and road sections, with chip timing and post-race food and drink.",
+    organiser: "Rotary Club of Burnham-on-Crouch & Dengie Hundred",
+    website: "https://www.eventrac.co.uk/e/burnham-on-crouch-10k-9183",
+  },
+  "denmead-10k": {
+    name: "Denmead 10K",
+    city: "Denmead",
+    county: "Hampshire",
+    country: "England",
+    area: "Kidmore Lane and the country lanes north of Denmead",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Denmead 10K — an undulating road race on quiet Hampshire country lanes.",
+    description:
+      "Denmead Striders' long-running road 10K climbs through the rural lanes north of the village before a quicker return from the water station, with chip timing and a 350-runner limit.",
+    organiser: "Denmead Striders",
+    website: "https://denmeadstriders.org.uk/race-history/",
+  },
+  "felbrigg-trail-run": {
+    name: "Felbrigg Trail Run",
+    city: "Felbrigg",
+    county: "Norfolk",
+    country: "England",
+    area: "Felbrigg Hall, Gardens and Estate",
+    surface: "Mixed",
+    distances: ["10K", "5K", "2.5K"],
+    summary:
+      "Felbrigg Trail Run — chip-timed estate races supporting North Norfolk Surf Life Saving Club.",
+    description:
+      "The 10K completes two varied laps across Felbrigg Hall's south lawns, woodland, lake, grazing land and estate paths. Shorter 5K and 2.5K choices share the charity event programme.",
+    organiser: "North Norfolk Surf Life Saving Club",
+    website: "https://entries.sublimetiming.com/race/89",
   },
 };
 
@@ -16935,6 +17072,194 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Find a Race provides an alternative Quick Book route at £34.17, with a £2 UK Athletics saving shown for eligible entrants. Compare the final checkout total before payment.",
+    },
+  ],
+  "bc-10k|2026-10-11|10K": [
+    {
+      providerCode: "running-monk-bc-autumn-10k-2026",
+      providerName: "Running Monk official entry",
+      entryUrl: "https://www.runningmonktrailevents.com/event-details/bc-autumn-10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 18.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/bc10k-autumn-edition",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "TimeOutdoors' Enter Now action points to this organiser checkout. Current entry is £18.50 for the Sunday 11 October trail race.",
+    },
+    {
+      providerCode: "timeoutdoors-bc-autumn-10k-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/bc10k-autumn-edition",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 18.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/bc10k-autumn-edition",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms the £18.50 price, 10:00 start, age-15 minimum and Church Barn venue, then routes entry to Running Monk.",
+    },
+  ],
+  "blaze-the-biblins|2026-10-11|10K": [
+    {
+      providerCode: "entrycentral-blaze-biblins-2026",
+      providerName: "EntryCentral official checkout",
+      entryUrl: "https://www.entrycentral.com/Blazethebiblins",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-04T20:59:00+01:00",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/Blazethebiblins",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "This exact case-sensitive EntryCentral page lists Sunday 11 October, with £15 affiliated or £17 unaffiliated entry and a 200-place limit. A different lower-case URL shows a conflicting 18 October record; verify that checkout still says 11 October before paying.",
+    },
+    {
+      providerCode: "gotrail-blaze-biblins-2026",
+      providerName: "GoTrail race guide",
+      entryUrl: "https://gotrail.run/en/race/monross-trailblazers-blaze-the-biblins",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://gotrail.run/en/race/monross-trailblazers-blaze-the-biblins",
+      isVerified: true,
+      notes:
+        "GoTrail independently confirms the 11 October trail race, Biblins venue and £15 starting price. Use the exact official EntryCentral route to book.",
+    },
+  ],
+  "buckingham-10k|2026-10-11|10K": [
+    {
+      providerCode: "entrycentral-buckingham-10k-2026",
+      providerName: "EntryCentral official checkout",
+      entryUrl: "https://www.entrycentral.com/Buckingham10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-08T23:59:00+01:00",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/Buckingham10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral offers £23 affiliated or £25 unaffiliated entry, with a 250-place limit and online registration scheduled to close on 8 October.",
+    },
+    {
+      providerCode: "gotrail-buckingham-10k-2026",
+      providerName: "GoTrail race guide",
+      entryUrl: "https://gotrail.run/en/event/buckingham-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://gotrail.run/en/event/buckingham-10k",
+      isVerified: true,
+      notes:
+        "GoTrail supplies a secondary event guide for the 11 October multi-terrain race. Complete payment through the official EntryCentral checkout.",
+    },
+  ],
+  "burnham-on-crouch-10k|2026-10-11|10K": [
+    {
+      providerCode: "eventrac-burnham-crouch-10k-2026",
+      providerName: "Eventrac official checkout",
+      entryUrl: "https://www.eventrac.co.uk/e/burnham-on-crouch-10k-9183",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://www.eventrac.co.uk/e/burnham-on-crouch-10k-9183",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live Eventrac page offers £20 entry for the 10:00 race and confirms an age-15 minimum, free parking and venue registration from 08:00.",
+    },
+    {
+      providerCode: "running-life-burnham-crouch-10k-2026",
+      providerName: "Running Life race guide",
+      entryUrl: "https://running.life/en/event/burnham-on-crouch-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://running.life/en/event/burnham-on-crouch-10k",
+      isVerified: true,
+      notes:
+        "Running Life confirms the 11 October edition and provides a secondary race guide. Use Eventrac for the current official checkout and final price.",
+    },
+  ],
+  "denmead-10k|2026-10-11|10K": [
+    {
+      providerCode: "racesignup-denmead-10k-2026",
+      providerName: "RaceSignup official checkout",
+      entryUrl: "https://racesignup.co.uk/denmead10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-08T23:59:00+01:00",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/denmead-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "TimeOutdoors' Enter Now action opens this RaceSignup checkout. Affiliated entry starts at £20, standard entry at £22, plus a £1.50 booking fee; transfers and online entry close on 8 October.",
+    },
+    {
+      providerCode: "timeoutdoors-denmead-10k-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/denmead-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/denmead-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms the £20 to £22 range, 10:00 start, age-17 minimum and 350-place limit, then routes registration to RaceSignup.",
+    },
+  ],
+  "felbrigg-trail-run|2026-10-11|10K": [
+    {
+      providerCode: "sublime-felbrigg-trail-run-2026",
+      providerName: "Sublime Timing official checkout",
+      entryUrl: "https://entries.sublimetiming.com/race/89",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19.15,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-08T23:59:00+01:00",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://entries.sublimetiming.com/race/89",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Sublime Timing lists £19.15 10K entry, a 400-runner field and transfers through 8 October. Select the 10K option before checkout.",
+    },
+    {
+      providerCode: "official-nnslsc-felbrigg-2026",
+      providerName: "North Norfolk Surf Life Saving Club information",
+      entryUrl: "https://nnslsc.org.uk/",
+      entryType: "charity",
+      status: "open",
+      checkedAt: "2026-08-19T05:15:00+01:00",
+      sourceUrl: "https://nnslsc.org.uk/",
+      isVerified: true,
+      notes:
+        "The organising charity's official site explains the lifesaving club supported by the event. Use Sublime Timing for race-specific registration and prices.",
     },
   ],
 };
