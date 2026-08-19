@@ -2208,6 +2208,66 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "The Black Nore 10K starts at 10:00 on Sunday 27 September from Portishead Open Air Pool. Portishead Running Club's chip-timed coastal route mixes grass, mud, rocks and tarmac and passes Black Nore Lighthouse and Redcliffe Bay.",
   },
+  "bradleys-autumn-exmouth-10k|2026-09-27|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.lmevents.org.uk/e/bradleys-exmouth-5km-and-10km-autumn-10493",
+    source: "https://www.lmevents.org.uk/e/bradleys-exmouth-5km-and-10km-autumn-10493",
+    notes:
+      "Bradley's Autumn Exmouth 10K starts at 09:00 on Sunday 27 September from Sideshore on Exmouth seafront. The flat, measured and chip-timed two-lap route follows hard-surface paths to Orcombe Point and back.",
+  },
+  "bradleys-autumn-exmouth-10k|2026-09-27|5K": {
+    startTime: "09:00",
+    entryUrl: "https://www.lmevents.org.uk/e/bradleys-exmouth-5km-and-10km-autumn-10493",
+    source: "https://www.lmevents.org.uk/e/bradleys-exmouth-5km-and-10km-autumn-10493",
+  },
+  "cramond-promenade-5k-10k-half-marathon-may-s7i|2026-09-27|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/cramond-promenade-5k10khalf-marathon-september-2026-268220",
+    source: "https://www.upandrunningevents.co.uk/",
+    notes:
+      "The September Cramond Promenade 10K starts at 10:00 on Sunday 27 September. It uses two flat, fast 5K laps beside the Firth of Forth, with chip timing, a finisher medal and event photography.",
+  },
+  "cramond-promenade-5k-10k-half-marathon-may-s7i|2026-09-27|5K": {
+    startTime: "10:10",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/cramond-promenade-5k10khalf-marathon-september-2026-268220",
+    source: "https://www.upandrunningevents.co.uk/",
+  },
+  "cramond-promenade-5k-10k-half-marathon-may-s7i|2026-09-27|Half": {
+    startTime: "09:30",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/cramond-promenade-5k10khalf-marathon-september-2026-268220",
+    source: "https://www.upandrunningevents.co.uk/",
+  },
+  "devizes-10k|2026-09-27|10K": {
+    startTime: "10:00",
+    entryUrl: "https://lpsevents.co.uk/devizes-10km/",
+    source: "https://lpsevents.co.uk/devizes-10km/",
+    notes:
+      "Devizes 10K starts at 10:00 on Sunday 27 September near Jacksons Close and finishes on The Green. The chip-timed road route passes through the historic market town and surrounding villages, with a midway water station and finisher medal.",
+  },
+  "faversham-10k|2026-09-27|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.sportingeventsuk.com/e/faversham-10k-11467",
+    source: "https://www.sportingeventsuk.com/e/faversham-10k-11467",
+    notes:
+      "Faversham 10K starts at 10:00 on Sunday 27 September from The Abbey School. The chip-timed road race follows scenic, lightly trafficked country lanes with some climbs and has an event village, refreshments and a finisher medal.",
+  },
+  "grantchester-charity|2026-09-27|10K": {
+    startTime: "10:30",
+    entryUrl: "https://grantchester-charity-runs.eventrac.co.uk/e/grantchester-charity-runs-12180",
+    source: "https://grantchester-charity-runs.eventrac.co.uk/e/grantchester-charity-runs-12180",
+    notes:
+      "Grantchester Charity 10K starts at 10:30 on Sunday 27 September from Mill Way. The flat, chip-timed mixed-terrain route crosses farmland without road crossings and raises funds for Maggie's Cambridge and Addenbrooke's Charitable Trust.",
+  },
+  "shardeloes-10k|2026-09-27|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.chilternharriers.com/shardeloes-10k.html",
+    source: "https://www.chilternharriers.com/shardeloes-10k.html",
+    notes:
+      "Shardeloes 10K starts at 09:30 on Sunday 27 September from Amersham Cricket Club. Chiltern Harriers' scenic mixed-terrain race follows trails and tracks through the Chiltern hills and awards a wooden finisher medal.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -5488,6 +5548,94 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Portishead Running Club's chip-timed 350-place race follows grass, mud, rocks, tarmac and coastal paths past Black Nore Lighthouse, supporting Weston Hospicecare.",
     organiser: "Portishead Running Club",
     website: "https://portisheadrunningclub.com/",
+  },
+  "bradleys-autumn-exmouth-10k": {
+    name: "Bradley's Autumn Exmouth 5K & 10K",
+    city: "Exmouth",
+    county: "Devon",
+    country: "England",
+    area: "Sideshore and Exmouth seafront",
+    surface: "Road",
+    distances: ["5K", "10K"],
+    summary: "Bradley's Autumn Exmouth 5K & 10K — flat, fast seafront races from Sideshore.",
+    description:
+      "LMEvents stages measured, chip-timed 5K and 10K races on hard-surface paths between Exmouth seafront and Orcombe Point, with the 10K completing two laps.",
+    organiser: "LMEvents",
+    website: "https://www.lmevents.org.uk/e/bradleys-exmouth-5km-and-10km-autumn-10493",
+  },
+  "cramond-promenade-5k-10k-half-marathon-may-s7i": {
+    name: "Cramond Promenade 5K, 10K & Half Marathon September",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "Cramond Promenade",
+    surface: "Road",
+    distances: ["5K", "10K", "Half"],
+    summary: "Cramond Promenade September — flat, fast coastal 5K, 10K and half-marathon races.",
+    description:
+      "Up and Running Events stages chip-timed races on a flat 5K promenade loop beside the Firth of Forth, with medals, event photography and separate starts for each distance.",
+    organiser: "Up and Running Events",
+    website: "https://www.upandrunningevents.co.uk/",
+  },
+  "devizes-10k": {
+    name: "Devizes 10K",
+    city: "Devizes",
+    county: "Wiltshire",
+    country: "England",
+    area: "The Green and surrounding villages",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Devizes 10K — a chip-timed town-and-country road race starting and finishing near The Green.",
+    description:
+      "LPS Events and Devizes Running Club take runners from the historic market town into surrounding villages and back to The Green, with a midway water station, medal, photo and post-race refreshments.",
+    organiser: "LPS Events and Devizes Running Club",
+    website: "https://lpsevents.co.uk/devizes-10km/",
+  },
+  "faversham-10k": {
+    name: "Faversham 10K",
+    city: "Faversham",
+    county: "Kent",
+    country: "England",
+    area: "The Abbey School and surrounding country lanes",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Faversham 10K — a scenic, chip-timed road race on quiet country lanes from The Abbey School.",
+    description:
+      "Sporting Events UK stages this undulating 10K from The Abbey School, with some challenging climbs, an event village, refreshments, free parking and a finisher medal.",
+    organiser: "Sporting Events UK",
+    website: "https://www.sportingeventsuk.com/e/faversham-10k-11467",
+  },
+  "grantchester-charity": {
+    name: "Grantchester Charity Runs",
+    city: "Grantchester",
+    county: "Cambridgeshire",
+    country: "England",
+    area: "Mill Way and Grantchester farmland",
+    surface: "Mixed",
+    distances: ["10K", "3K"],
+    summary:
+      "Grantchester Charity Runs — flat 10K and 3K routes across farmland outside Cambridge.",
+    description:
+      "This volunteer-run, chip-timed event uses traffic-free tracks and farmland around Grantchester while raising funds for Maggie's Cambridge and Addenbrooke's Charitable Trust.",
+    organiser: "Grantchester Charity Runs",
+    website: "https://grantchester-charity-runs.eventrac.co.uk/e/grantchester-charity-runs-12180",
+  },
+  "shardeloes-10k": {
+    name: "Shardeloes 10K",
+    city: "Amersham",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Amersham Cricket Club and the Chiltern hills",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Shardeloes 10K — a scenic mixed-terrain race through the Chiltern hills from Amersham Cricket Club.",
+    description:
+      "Chiltern Harriers AC stages this undulating 10K on trails and tracks around Shardeloes, with race timing and a wooden medal for finishers.",
+    organiser: "Chiltern Harriers AC",
+    website: "https://www.chilternharriers.com/shardeloes-10k.html",
   },
 };
 
@@ -11744,6 +11892,183 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "TimeOutdoors provides an alternative entry route with prices from £14 and confirms the 10:00 start, Portishead Open Air Pool venue and mixed coastal terrain.",
+    },
+  ],
+  "bradleys-autumn-exmouth-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-lmevents-bradleys-exmouth",
+      providerName: "LMEvents official entry",
+      entryUrl: "https://www.lmevents.org.uk/e/bradleys-exmouth-5km-and-10km-autumn-10493",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.lmevents.org.uk/e/bradleys-exmouth-5km-and-10km-autumn-10493",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live event page confirms Sunday 27 September at 09:00, online entry and the measured, two-lap 10K from Sideshore. Check the checkout for the current total fee.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/bradleys-exmouth-autumn/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 21,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/bradleys-exmouth-autumn/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors provides an alternative booking route with 10K prices advertised from £21 to £24 and confirms the flat Exmouth seafront course.",
+    },
+  ],
+  "cramond-promenade-5k-10k-half-marathon-may-s7i|2026-09-27|10K": [
+    {
+      providerCode: "official-upandrunning-letsdothis-cramond-september",
+      providerName: "Up and Running Events entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/cramond-promenade-5k10khalf-marathon-september-2026-268220",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.upandrunningevents.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's booking route lists 10K entry at £24 and confirms Sunday 27 September at 10:00, with the half marathon at 09:30 and 5K at 10:10.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race Quick Book",
+      entryUrl: "https://findarace.com/events/cramond-promenade-5k-10k-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 24.9,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/cramond-promenade-5k-10k-half-marathon",
+      isVerified: true,
+      notes:
+        "Find a Race offers a secondary Quick Book route for the September event and advertises the 10K at £24.90.",
+    },
+  ],
+  "devizes-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-lps-devizes",
+      providerName: "LPS Events official entry",
+      entryUrl: "https://lpsevents.co.uk/devizes-10km/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://lpsevents.co.uk/devizes-10km/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's current Devizes 10K page is the authoritative event and entry route. It confirms Sunday 27 September at 10:00; consult the live checkout for the 2026 fee.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/devizes-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/devizes-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route and points through to LPS Events. Use the official page for current availability and pricing.",
+    },
+  ],
+  "faversham-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-sporting-events-uk-faversham",
+      providerName: "Sporting Events UK official entry",
+      entryUrl: "https://www.sportingeventsuk.com/e/faversham-10k-11467",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.sportingeventsuk.com/e/faversham-10k-11467",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser page lists advance entry at £24 affiliated or £26 unaffiliated. Race-day entry is £30 if places remain and closes at 09:30 before the 10:00 start.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/faversham-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/faversham-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors supplies an alternative booking route and advertises entry from £24 to £30 for the Sunday race at The Abbey School.",
+    },
+  ],
+  "grantchester-charity|2026-09-27|10K": [
+    {
+      providerCode: "official-grantchester-eventrac",
+      providerName: "Grantchester Charity Runs official entry",
+      entryUrl:
+        "https://grantchester-charity-runs.eventrac.co.uk/e/grantchester-charity-runs-12180",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl:
+        "https://grantchester-charity-runs.eventrac.co.uk/e/grantchester-charity-runs-12180",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live Eventrac page is the official booking route and confirms the 10K at 10:30 and 3K at 10:35 on Sunday 27 September. Check the checkout for the current total fee.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race Quick Book",
+      entryUrl: "https://findarace.com/events/grantchester-charity-runs",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 24.62,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/grantchester-charity-runs",
+      isVerified: true,
+      notes:
+        "Find a Race offers a secondary Quick Book route and advertises the 10K option at £24.62; lower displayed prices apply to the shorter event.",
+    },
+  ],
+  "shardeloes-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-chiltern-harriers-shardeloes",
+      providerName: "Chiltern Harriers official entry",
+      entryUrl: "https://www.chilternharriers.com/shardeloes-10k.html",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.chilternharriers.com/shardeloes-10k.html",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The club's live race page confirms Sunday 27 September at 09:30 and provides the official entry route. Check the checkout for the current fee because the displayed affiliated and unaffiliated labels appear inconsistent.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/shardeloes-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/shardeloes-10k",
+      isVerified: true,
+      notes:
+        "runABC supplies a secondary route to the event; the Chiltern Harriers page is authoritative for live entry, final instructions and pricing.",
     },
   ],
 };
