@@ -289,6 +289,42 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-26",
     toDate: "2026-09-27",
   },
+  {
+    seriesSlug: "larkfield-ac-10k",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-20",
+  },
+  {
+    seriesSlug: "manuden-fun-run-10k",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "manuden-fun-run-10k",
+    distance: "5K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "runthrough-clapham-common-5k-10k-august",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "runthrough-clapham-common-5k-10k-august",
+    distance: "5K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "runthrough-clapham-common-5k-10k-august",
+    distance: "Half",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -2021,6 +2057,100 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     startTime: "09:30",
     entryUrl: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
     source: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
+  },
+  "larkfield-ac-10k|2026-09-26|10K": {
+    date: "2026-09-20",
+    startTime: "09:30",
+    entryUrl: "https://englandathletics.sport80.com/public/wizard/e/31243",
+    source: "https://www.larkfieldac.co.uk/larkfield-10k",
+    notes:
+      "Larkfield AC's race is on Sunday 20 September, not Saturday 26 September, and starts at 09:30 from NIAB at East Malling. The accurately measured road 10K is part of the Kent Grand Prix and incorporates the Kent short-course championship.",
+  },
+  "manuden-fun-run-10k|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "11:15",
+    entryUrl: "https://www.entrycentral.com/manudenrun",
+    source: "https://www.manuden.org.uk/funrunInfo.asp",
+    notes:
+      "The Manuden 10K is on Sunday 27 September, not Saturday 26 September, and starts at 11:15 from Rickling Road. The mostly off-road route uses village fields, bridleways and footpaths and supports Sands, St Clare Hospice and local organisations.",
+  },
+  "manuden-fun-run-10k|2026-09-26|5K": {
+    date: "2026-09-27",
+    startTime: "11:25",
+    entryUrl: "https://www.entrycentral.com/manudenrun",
+    source: "https://www.manuden.org.uk/funrunInfo.asp",
+  },
+  "mctf-run-the-track-5k-10k-swansea|2026-09-26|10K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/pcEFFX",
+    source: "http://www.mactuffevents.com/rtt",
+    notes:
+      "Run the Track takes place on Saturday 26 September at Neath Sports Centre. The event window begins at 14:30 and runners are allocated track heats by expected finish time, with personal split-lap chip timing and all racing scheduled to finish by 17:30.",
+  },
+  "mctf-run-the-track-5k-10k-swansea|2026-09-26|5K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/pcEFFX",
+    source: "http://www.mactuffevents.com/rtt",
+  },
+  "oxford-greenbelt-10k|2026-09-26|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/oxford-greenbelt-runs",
+    source: "https://www.entrycentral.com/oxford-greenbelt-runs",
+    notes:
+      "The Oxford Greenbelt 10K starts at 11:00 on Saturday 26 September from Harcourt Hill. The undulating, mostly off-road route follows part of the Oxford Greenbelt Way and raises funds for the 4th Oxford Scout Group.",
+  },
+  "run-dorney-5k-10k-half-marathon-aug|2026-09-26|10K": {
+    startTime: "09:10",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+    source:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+    notes:
+      "Run Dorney's September 10K starts at 09:10 on Saturday 26 September. The flat, traffic-free two-lap race uses the roads and paths around the Olympic rowing lake and includes chip timing, free photos and a finisher medal.",
+  },
+  "run-dorney-5k-10k-half-marathon-aug|2026-09-26|5K": {
+    startTime: "09:10",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+    source:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+  },
+  "run-dorney-5k-10k-half-marathon-aug|2026-09-26|Half": {
+    startTime: "09:10",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+    source:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+  },
+  "run-dorney-5k-10k-half-marathon-aug|2026-09-26|Marathon": {
+    startTime: "09:10",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+    source:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+  },
+  "runthrough-clapham-common-5k-10k-august|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "09:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+    source: "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+    notes:
+      "This listing now points to RunThrough's current Clapham Common September event, on Sunday 27 September. The flat, chip-timed 10K starts at 09:30 on park paths from Windmill Drive.",
+  },
+  "runthrough-clapham-common-5k-10k-august|2026-09-26|5K": {
+    date: "2026-09-27",
+    startTime: "09:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+    source: "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+  },
+  "runthrough-clapham-common-5k-10k-august|2026-09-26|Half": {
+    date: "2026-09-27",
+    startTime: "09:00",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+    source: "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
   },
 };
 
@@ -5122,6 +5252,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "RunThrough's September event starts and finishes at Hyde Park Bandstand, with marked flat laps, chip timing, free race photography and a themed medal.",
     organiser: "RunThrough",
     website: "https://www.runthrough.co.uk/event/hyde-park-5k-10k-september-2026",
+  },
+  "larkfield-ac-10k": {
+    name: "Larkfield AC 10K",
+    city: "East Malling",
+    county: "Kent",
+    country: "England",
+    area: "NIAB at East Malling",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Larkfield AC 10K — an accurately measured Kent Grand Prix road race from East Malling.",
+    description:
+      "Larkfield Athletics Club's licensed 10K starts at NIAB and forms part of the Kent Grand Prix, incorporating the county short-course road championship.",
+    organiser: "Larkfield Athletics Club",
+    website: "https://www.larkfieldac.co.uk/larkfield-10k",
+  },
+  "manuden-fun-run-10k": {
+    name: "Manuden 10K & 5K Fun Run",
+    city: "Manuden",
+    county: "Essex",
+    country: "England",
+    area: "Manuden village and Rickling Road",
+    surface: "Mixed",
+    distances: ["10K", "5K", "1K"],
+    summary: "Manuden Fun Run — friendly 10K, 5K and junior routes through the Essex countryside.",
+    description:
+      "A community-run event using fields, bridleways, footpaths and quiet lanes around Manuden, with proceeds supporting Sands, St Clare Hospice and village organisations.",
+    organiser: "Manuden Fun Run Committee",
+    website: "https://www.manuden.org.uk/funrunInfo.asp",
+  },
+  "mctf-run-the-track-5k-10k-swansea": {
+    name: "MCT Run the Track 5K & 10K",
+    city: "Neath",
+    county: "Neath Port Talbot",
+    country: "Wales",
+    area: "Neath Sports Centre athletics track",
+    surface: "Track",
+    distances: ["10K", "5K"],
+    summary:
+      "MCT Run the Track — chip-timed 5K and 10K track races in graded afternoon heats at Neath.",
+    description:
+      "MacTuff Events places runners into heats based on expected finish time for a supportive track race with personal split-lap chip timing and a 300-runner capacity.",
+    organiser: "MacTuff Events",
+    website: "http://www.mactuffevents.com/rtt",
+  },
+  "oxford-greenbelt-10k": {
+    name: "Oxford Greenbelt 10K",
+    city: "Oxford",
+    county: "Oxfordshire",
+    country: "England",
+    area: "Harcourt Hill and the Oxford Greenbelt Way",
+    surface: "Trail",
+    distances: ["10K", "3K", "1K"],
+    summary:
+      "Oxford Greenbelt 10K — an undulating, mostly off-road fundraiser with views over Oxford.",
+    description:
+      "The 4th Oxford Scout Group's race follows paths and trails around Harcourt Hill and part of the Oxford Greenbelt Way, with shorter community races alongside it.",
+    organiser: "4th Oxford Scout Group",
+    website: "https://www.entrycentral.com/oxford-greenbelt-runs",
+  },
+  "run-dorney-5k-10k-half-marathon-aug": {
+    name: "Run Dorney Lake September",
+    city: "Windsor",
+    county: "Berkshire",
+    country: "England",
+    area: "Dorney Lake",
+    surface: "Road",
+    distances: ["5K", "10K", "Half", "Marathon"],
+    summary:
+      "Run Dorney Lake — flat, traffic-free races beside the Olympic rowing lake near Windsor.",
+    description:
+      "RunThrough's September event offers chip-timed 5K, 10K, half-marathon and marathon distances on fast, flat laps around Dorney Lake, with free race photography and medals.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+  },
+  "runthrough-clapham-common-5k-10k-august": {
+    name: "Clapham Common 5K, 10K & Half Marathon September",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Clapham Common and Windmill Drive",
+    surface: "Road",
+    distances: ["5K", "10K", "Half"],
+    summary: "RunThrough Clapham Common — flat, chip-timed 5K, 10K and half-marathon park races.",
+    description:
+      "RunThrough's current September event uses marked laps on Clapham Common's paths, with chip timing, free race photography, refreshments and a themed medal.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
   },
 };
 
@@ -11016,6 +11236,187 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Let's Do This provides an alternative booking route and confirms the Bandstand venue, 09:30 start, four-lap 10K and limited parking.",
+    },
+  ],
+  "larkfield-ac-10k|2026-09-20|10K": [
+    {
+      providerCode: "official-larkfield-sport80",
+      providerName: "Larkfield AC official Sport:80 entry",
+      entryUrl: "https://englandathletics.sport80.com/public/wizard/e/31243",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://www.larkfieldac.co.uk/larkfield-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Larkfield AC links directly to this England Athletics Sport:80 registration flow and confirms Sunday 20 September at 09:30. Check the checkout for the current entry fee.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/larkfield-ac-10k",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/larkfield-ac-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route, but Larkfield AC and Sport:80 are authoritative for the corrected 20 September date and live availability.",
+    },
+  ],
+  "manuden-fun-run-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-manuden-entrycentral",
+      providerName: "Manuden Fun Run EntryCentral checkout",
+      entryUrl: "https://www.entrycentral.com/manudenrun",
+      entryType: "official",
+      status: "open",
+      priceAmount: 12,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-25T23:59:00+01:00",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/manudenrun",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists 10K entry at £12 affiliated or £14 standard, a 350-place limit and online closing at 23:59 on 25 September, unless capacity is reached earlier.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/manuden-fun-run-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/manuden-fun-run-10k",
+      isVerified: true,
+      notes:
+        "runABC offers a secondary event route; the Manuden organiser page and EntryCentral are authoritative for the corrected Sunday date, timetable and live capacity.",
+    },
+  ],
+  "mctf-run-the-track-5k-10k-swansea|2026-09-26|10K": [
+    {
+      providerCode: "official-mct-bookitzone",
+      providerName: "MCT Run the Track BookitZone entry",
+      entryUrl: "https://bookitzone.com/dean_ogrady_1/pcEFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25.64,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-24T23:59:00+01:00",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://bookitzone.com/dean_ogrady_1/pcEFFX",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live checkout lists total 10K prices from £25.64 affiliated (£28.12 unaffiliated), a 300-runner event capacity and closing at 23:59 on 24 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/mctf-run-the-track-5k-10k-swansea",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/mctf-run-the-track-5k-10k-swansea",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route; BookitZone is authoritative for live pricing and the organiser allocates exact heat times by expected finish.",
+    },
+  ],
+  "oxford-greenbelt-10k|2026-09-26|10K": [
+    {
+      providerCode: "official-oxford-greenbelt-entrycentral",
+      providerName: "Oxford Greenbelt EntryCentral checkout",
+      entryUrl: "https://www.entrycentral.com/oxford-greenbelt-runs",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-19T23:59:00+01:00",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/oxford-greenbelt-runs",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists the early 10K price at £15 through 31 August, rising to £20, with a 250-place limit and online closing at 23:59 on 19 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/oxford-greenbelt-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/oxford-greenbelt-10k",
+      isVerified: true,
+      notes:
+        "runABC supplies a secondary route to the event; EntryCentral is authoritative for current pricing, capacity and the corrected 11:00 start.",
+    },
+  ],
+  "run-dorney-5k-10k-half-marathon-aug|2026-09-26|10K": [
+    {
+      providerCode: "official-runthrough-dorney-september",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live September page lists the 10K at £30 and confirms the shared 09:10 start, flat two-lap route and free event parking.",
+    },
+    {
+      providerCode: "letsdothis",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/run-dorney-5k-10k-and-half-marathon-191819",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/run-dorney-5k-10k-and-half-marathon-191819",
+      isVerified: true,
+      notes:
+        "Let's Do This provides an alternative booking route for the Dorney race. RunThrough remains authoritative for the current September edition and final instructions.",
+    },
+  ],
+  "runthrough-clapham-common-5k-10k-august|2026-09-27|10K": [
+    {
+      providerCode: "official-runthrough-clapham-september",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The current official September page lists 10K entry at £30 and confirms Sunday 27 September at 09:30, replacing the stale August-labelled listing.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/runthrough-clapham-common-5k-10k-august",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T09:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/runthrough-clapham-common-5k-10k-august",
+      isVerified: true,
+      notes:
+        "runABC is retained as a secondary reference for the earlier listing. Use RunThrough's September page for the current date, price and live availability.",
     },
   ],
 };
