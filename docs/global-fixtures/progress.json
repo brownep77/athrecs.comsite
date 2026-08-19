@@ -30,14 +30,25 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-19"
+    },
+    {
+      "id": "global-002",
+      "status": "verified",
+      "source_ids": ["justruns_upcoming_ireland"],
+      "regions": ["Ireland"],
+      "countries": ["Ireland"],
+      "series_slugs": ["bk5k", "kildare-ac-70th-anniversary-road-races", "south-kilkenny-run"],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-19"
     }
   ],
   "source_progress": [
     {
       "source_id": "justruns_upcoming_ireland",
       "status": "in_progress",
-      "events_imported": 3,
-      "last_checkpoint": "global-001"
+      "events_imported": 6,
+      "last_checkpoint": "global-002"
     }
   ]
 }

@@ -23,3 +23,13 @@ Three Ireland events were discovered through the approved JustRuns source and co
 - Run Ballinskelligs — Running — 25 October 2026
 
 The source remains `in_progress`; its other listed events are still pending, so the programme cannot accidentally mark it complete after one checkpoint.
+
+## Checkpoint global-002
+
+Three further Ireland road-running events were discovered through the approved JustRuns source and corroborated against organiser, governing-body or organiser-linked entry pages:
+
+- BK5K — Running — 22 August 2026
+- Kildare AC 70th Anniversary Road Races — Running — 23 August 2026
+- South Kilkenny Run — Running — 23 August 2026
+
+The source remains `in_progress`. BK5K and South Kilkenny retain their official registration routes; Kildare AC is still listed as a fixture but its online sales deadline has passed, so ATHRECS marks entry as closed.
