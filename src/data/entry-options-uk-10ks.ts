@@ -3463,6 +3463,48 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "EntryCentral's current 2026 listing confirms an 11:00 start on Sunday 18 October, correcting the imported 10:00 time. Forres Harriers' chip-timed road race starts and finishes in the grounds of Brodie Castle, has a 90-minute support limit and includes a finisher medal or memento. The current EntryCentral listing controls over older club-calendar text.",
   },
+  "guildford-10k|2026-10-18|10K": {
+    startTime: "08:00",
+    entryUrl: "https://www.runthrough.co.uk/event/guildford-5k-10k-juniors-october-2026",
+    source: "https://www.guildford10k.com/",
+    notes:
+      "RunThrough and the event website confirm an 08:00 start on Sunday 18 October, correcting the imported 07:00 placeholder. The fully closed-road out-and-back starts and finishes on Guildford High Street, heads towards Clandon along Epsom Road and has a 90-minute cut-off; the junior race follows at 08:10.",
+  },
+  "hole-park-estate-10k|2026-10-18|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.britishlandmarkseries.co.uk/e/hole-park-estate-10k-15226",
+    source: "https://www.britishlandmarkseries.co.uk/e/hole-park-estate-10k-15226",
+    notes:
+      "British Landmark Events confirms the Sunday 18 October race, while its official booking partners list a 09:00 start, correcting the imported 08:00 placeholder. The traffic-free 10K winds through Hole Park's private parkland, woodland paths and countryside, with chip timing, a bespoke medal and official photography.",
+  },
+  "hove-prom-10k|2026-10-18|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.nice-work.org.uk/e/hove-prom-10k-9600",
+    source: "https://www.nice-work.org.uk/e/hove-prom-10k-9600",
+    notes:
+      "Nice Work and Arena 80 AC confirm a 09:00 start on Sunday 18 October, correcting the imported 08:00 time. The accurately measured, pancake-flat course completes two laps of Hove Promenade from Hove Lagoon, with pacers and Sussex Grand Prix status; the finisher medal is an optional extra.",
+  },
+  "jarrow-10k|2026-10-18|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.runthrough.co.uk/event/jarrow-10k-junior-race-october-2026",
+    source: "https://www.jarrow10k.com/",
+    notes:
+      "RunThrough confirms the sub-40-minute A race starts at 09:00 and the B race at 09:15 on Sunday 18 October, correcting the imported 08:00 placeholder. The fast, two-lap closed-road course starts and finishes on Monkton Athletics Track and has a 90-minute cut-off, chip timing, free photos and a themed medal.",
+  },
+  "lightning-bolt-fast-10k-race5|2026-10-18|10K": {
+    startTime: "10:30",
+    entryUrl: "https://www.icompete.co.uk/events/lightningbolt10k2026race5",
+    source: "https://www.icompete.co.uk/events/lightningbolt10k2026race5",
+    notes:
+      "i-Compete confirms a 10:30 start on Sunday 18 October, correcting the imported 09:30 time. Race 5 uses an officially measured rural road course with only 14 metres of elevation, includes pacers from 35 to 75 minutes and hosts the South West Club and Team Championships; the time limit is 75 minutes.",
+  },
+  "lilliesleaf-scottish-borders-10k|2026-10-18|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/HarrisTrust-Lilliesleaf10k",
+    source: "https://www.entrycentral.com/HarrisTrust-Lilliesleaf10k",
+    notes:
+      "EntryCentral's current calendar confirms the 18 October 2026 race is open, and Scottish Hill Runners lists an 11:00 start. The 10.2K hilly, off-road route crosses fields and tracks on the Riddell Estate, with about 210 metres of climb and views of the Eildon and Cheviot Hills. Entry is a pay-what-you-can donation supporting Harris Trust.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -8757,6 +8799,92 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Forres Harriers' 10K starts and finishes in the grounds of Brodie Castle and follows open public roads through the surrounding countryside. The race has a 90-minute support limit, chip timing and a finisher medal or memento.",
     organiser: "Forres Harriers",
     website: "https://www.entrycentral.com/brodiecastle2026",
+  },
+  "guildford-10k": {
+    name: "Guildford 10K & Junior Race",
+    city: "Guildford",
+    county: "Surrey",
+    country: "England",
+    area: "Guildford High Street and Epsom Road towards Clandon",
+    surface: "Road",
+    distances: ["10K", "2K Junior"],
+    summary: "Guildford 10K — a major closed-road town-centre race with a separate junior event.",
+    description:
+      "RunThrough's UKA-measured out-and-back starts and finishes on Guildford's cobbled High Street and follows fully closed roads towards Clandon. The 10K includes chip timing, pacers, kilometre markers, free photographs, post-race goodies and a 90-minute road-closure cut-off.",
+    organiser: "RunThrough",
+    website: "https://www.guildford10k.com/",
+  },
+  "hole-park-estate-10k": {
+    name: "Hole Park Estate 10K",
+    city: "Rolvenden",
+    county: "Kent",
+    country: "England",
+    area: "Hole Park Estate parkland and woodland",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Hole Park Estate 10K — a traffic-free heritage trail race through private Kent grounds.",
+    description:
+      "British Landmark Events opens Hole Park's private estate to a scenic 10K through parkland, woodland paths, tree-lined avenues and open countryside. The professionally delivered race includes chip timing, a well-marked route, a bespoke medal, venue admission and official photography.",
+    organiser: "British Landmark Events / Invicta Events",
+    website: "https://www.britishlandmarkseries.co.uk/e/hole-park-estate-10k-15226",
+  },
+  "hove-prom-10k": {
+    name: "Hove Prom 10K",
+    city: "Hove",
+    county: "East Sussex",
+    country: "England",
+    area: "Hove Lagoon and seafront promenade",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Hove Prom 10K — a flat, accurately measured two-lap seafront race.",
+    description:
+      "Arena 80 AC's long-running Sussex Grand Prix race completes two flat laps of Hove Promenade from Hove Lagoon. Pacers support a wide range of targets, podium and category awards are offered, proceeds support Amaze Sussex and entrants can add an optional finisher medal.",
+    organiser: "Arena 80 AC with Nice Work",
+    website: "https://www.nice-work.org.uk/e/hove-prom-10k-9600",
+  },
+  "jarrow-10k": {
+    name: "Jarrow 10K & Junior Race",
+    city: "Jarrow",
+    county: "Tyne and Wear",
+    country: "England",
+    area: "Monkton Stadium and closed roads around Jarrow",
+    surface: "Road",
+    distances: ["10K", "Junior"],
+    summary:
+      "Jarrow 10K — a fast, two-wave closed-road race starting and finishing on the athletics track.",
+    description:
+      "RunThrough and Jarrow & Hebburn AC stage two 10K waves on a flat, measured two-lap road course from Monkton Athletics Track. The race is part of the Top Flight Series and includes chip timing, kilometre markers, free photographs, a themed medal and post-race goodies.",
+    organiser: "RunThrough with Jarrow & Hebburn Athletic Club",
+    website: "https://www.jarrow10k.com/",
+  },
+  "lightning-bolt-fast-10k-race5": {
+    name: "Lightning Bolt Fast 10K — Race 5",
+    city: "Langley Burrell",
+    county: "Wiltshire",
+    country: "England",
+    area: "Rural roads north of Chippenham",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Lightning Bolt Race 5 — an exceptionally flat, measured rural 10K near Chippenham.",
+    description:
+      "i-Compete's fifth 2026 Lightning Bolt uses a UKA/Run Britain-registered rural course with only 14 metres of elevation. The race has chip timing, mile markers, optional medals, pacers from 35 to 75 minutes and incorporates the South West Club and Team Championships.",
+    organiser: "i-Compete Events",
+    website: "https://www.icompete.co.uk/events/lightningbolt10k2026race5",
+  },
+  "lilliesleaf-scottish-borders-10k": {
+    name: "Lilliesleaf 10K Run for Harris Trust",
+    city: "Lilliesleaf",
+    county: "Scottish Borders",
+    country: "Scotland",
+    area: "Leaf Green and Riddell Estate fields and tracks",
+    surface: "Trail",
+    distances: ["10.2K"],
+    summary: "Lilliesleaf 10K — a hilly community trail fundraiser through the Riddell Estate.",
+    description:
+      "Harris Trust's inclusive, pay-what-you-can fundraiser follows a 10.2K off-road route with roughly 210 metres of climb and views across the Eildon and Cheviot Hills. Walkers and dogs on leads are welcome, under-16s need an accompanying adult and the field is limited to 200.",
+    organiser: "Harris Trust",
+    website: "https://www.entrycentral.com/HarrisTrust-Lilliesleaf10k",
   },
 };
 
@@ -19168,6 +19296,189 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Forres Harriers is the race organiser. Its club calendar may lag, so use EntryCentral's dated 2026 page as the authoritative source for the 18 October event, time, prices and entry status.",
+    },
+  ],
+  "guildford-10k|2026-10-18|10K": [
+    {
+      providerCode: "runthrough-guildford-october-2026",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/guildford-5k-10k-juniors-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 38,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/guildford-5k-10k-juniors-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists standard 10K entry at £38 and confirms the 08:00 start. A six-place group option is also advertised; check eligibility and the final per-runner total at checkout.",
+    },
+    {
+      providerCode: "letsdothis-guildford-october-2026",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/guildford-10k-juniors-october-2026-240724",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 38,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/guildford-10k-juniors-october-2026-240724",
+      isVerified: true,
+      notes:
+        "Let's Do This offers a second £38 10K booking route and independently confirms the date, 08:00 start, High Street venue and 90-minute cut-off.",
+    },
+  ],
+  "hole-park-estate-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-british-landmark-hole-park-2026",
+      providerName: "British Landmark Events entry",
+      entryUrl: "https://www.britishlandmarkseries.co.uk/e/hole-park-estate-10k-15226",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.britishlandmarkseries.co.uk/e/hole-park-estate-10k-15226",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official event page confirms the exact 2026 edition and opens its live entry flow. The organiser's current listing partner advertises early-bird entry from £25.",
+    },
+    {
+      providerCode: "findarace-hole-park-2026",
+      providerName: "Find a Race entry",
+      entryUrl: "https://findarace.com/events/hole-park-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 26.74,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://findarace.com/events/hole-park-10k",
+      isVerified: true,
+      notes:
+        "Find a Race identifies itself as Invicta Events' official booking partner and offers Quick Book at £26.74. Compare the final total with the organiser's direct route.",
+    },
+  ],
+  "hove-prom-10k|2026-10-18|10K": [
+    {
+      providerCode: "nice-work-hove-prom-2026",
+      providerName: "Nice Work official entry",
+      entryUrl: "https://www.nice-work.org.uk/e/hove-prom-10k-9600",
+      entryType: "official",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.nice-work.org.uk/e/hove-prom-10k-9600",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Nice Work manages the organiser's live entry flow. Current listings show advance entry at £18 to £20; subject to availability, race-day entry is £25 and the medal costs an additional £4.",
+    },
+    {
+      providerCode: "timeoutdoors-hove-prom-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/hove-prom-10k-1",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/hove-prom-10k-1",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms open entry at £18 to £20, the 09:00 start and Hove Lagoon venue, then routes runners to the active booking flow.",
+    },
+  ],
+  "jarrow-10k|2026-10-18|10K": [
+    {
+      providerCode: "runthrough-jarrow-october-2026",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/jarrow-10k-junior-race-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/jarrow-10k-junior-race-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists both the sub-40 A race at 09:00 and the 40-minute-plus B race at 09:15 for £32. Choose the appropriate wave during entry.",
+    },
+    {
+      providerCode: "runforcharity-jarrow-2026",
+      providerName: "Run for Charity entry",
+      entryUrl: "https://runforcharity.com/event/jarrow-10k",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://runforcharity.com/event/jarrow-10k",
+      isVerified: true,
+      notes:
+        "Run for Charity reports good availability and a £32 registration fee for its 10K route. Review the selected charity and any fundraising terms before registering.",
+    },
+  ],
+  "lightning-bolt-fast-10k-race5|2026-10-18|10K": [
+    {
+      providerCode: "official-icompete-lightning-bolt-race5-2026",
+      providerName: "i-Compete official entry",
+      entryUrl: "https://www.icompete.co.uk/events/lightningbolt10k2026race5",
+      entryType: "official",
+      status: "open",
+      priceAmount: 17,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.icompete.co.uk/events/lightningbolt10k2026race5",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "i-Compete lists online entry at £17 affiliated or £19 unaffiliated. Cash race-day entry is £20 or £22 from 09:00 to 10:10 if places remain; medals are optional.",
+    },
+    {
+      providerCode: "timeoutdoors-lightning-bolt-race5-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/lightning-bolt-10k-race-5",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 17,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/lightning-bolt-10k-race-5",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms open online and race-day entry at £17 to £22 and the 10:30 start, then routes runners to the organiser's checkout.",
+    },
+  ],
+  "lilliesleaf-scottish-borders-10k|2026-10-18|10K": [
+    {
+      providerCode: "entrycentral-lilliesleaf-harris-trust-2026",
+      providerName: "EntryCentral official checkout",
+      entryUrl: "https://www.entrycentral.com/HarrisTrust-Lilliesleaf10k",
+      entryType: "official",
+      status: "open",
+      closesAt: "2026-10-17T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/HarrisTrust-Lilliesleaf10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Entry is a pay-what-you-can donation plus EntryCentral's stated service fee. The current EntryCentral calendar marks the 18 October race open and lists 17 October as the closing date.",
+    },
+    {
+      providerCode: "gotrail-lilliesleaf-harris-trust-2026",
+      providerName: "GoTrail current race guide",
+      entryUrl: "https://gotrail.run/en/race/lilliesleaf-10k-run-for-harris-trust",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:45:00+01:00",
+      sourceUrl: "https://gotrail.run/en/race/lilliesleaf-10k-run-for-harris-trust",
+      isVerified: true,
+      notes:
+        "GoTrail confirms the current 18 October edition, donation entry, 200-runner limit, family and dog rules, Currie Memorial Hall registration and Riddell Estate route. Complete payment through EntryCentral.",
     },
   ],
 };
