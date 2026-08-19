@@ -373,6 +373,48 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-03",
     toDate: "2026-10-04",
   },
+  {
+    seriesSlug: "aviemore-10k",
+    distance: "10K",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
+  {
+    seriesSlug: "penshaw-half-marathon",
+    distance: "10K",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
+  {
+    seriesSlug: "penshaw-half-marathon",
+    distance: "Half",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
+  {
+    seriesSlug: "the-east-coast-chuffer",
+    distance: "10K",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
+  {
+    seriesSlug: "the-albert-goodman-weston-super-half",
+    distance: "10K",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
+  {
+    seriesSlug: "the-albert-goodman-weston-super-half",
+    distance: "Half",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
+  {
+    seriesSlug: "yorkshire-coast-trail-races",
+    distance: "10K",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -2608,6 +2650,67 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://www.trurorunningclub.org.uk/trc-events/tywarnhayle-10k/",
     notes:
       "Tywarnhayle 10K starts at 10:00 on Sunday 4 October, correcting the imported 3 October date. Truro Running Club and SiEntries now mark the 230-place technical coast-path race sold out; SiEntries retains transfers until 2 October.",
+  },
+  "aviemore-10k|2026-10-03|10K": {
+    date: "2026-10-04",
+    status: "Closed",
+    startTime: undefined,
+    entryUrl: "https://badaguish.org/event/2026-aviemore-half-marathon-10k-postponement/",
+    source: "https://badaguish.org/event/2026-aviemore-half-marathon-10k-postponement/",
+    notes:
+      "Badaguish and the Speyside Trust have postponed the Aviemore Half Marathon and 10K for all of 2026 and plan to stage the event every two years, with a 2027 date still to be announced. The 4 October placeholder is retained only as a closed cancellation record.",
+  },
+  "penshaw-half-marathon|2026-10-03|10K": {
+    date: "2026-10-04",
+    startTime: "10:15",
+    entryUrl: "https://trailoutlaws.eventrac.co.uk/e/urban-trail-series-8010",
+    source: "https://urbantrails.co.uk/penshaw-10k",
+    notes:
+      "Penshaw 10K is on Sunday 4 October, correcting the imported 3 October date. The official schedule gives a 10:10 safety briefing and 10:15 start for the steep, fully marked trail race around Penshaw Monument and the River Wear.",
+  },
+  "penshaw-half-marathon|2026-10-03|Half": {
+    date: "2026-10-04",
+    startTime: "10:00",
+    entryUrl: "https://trailoutlaws.eventrac.co.uk/e/urban-trail-series-8010",
+    source: "https://urbantrails.co.uk/penshaw-hm",
+  },
+  "the-east-coast-chuffer|2026-10-03|10K": {
+    date: "2026-10-04",
+    startTime: "09:00",
+    entryUrl: "https://www.itsgrimupnorthrunning.co.uk/e/the-east-coast-chuffer-12380",
+    source: "https://www.itsgrimupnorthrunning.co.uk/e/the-east-coast-chuffer-12380",
+    notes:
+      "The organiser confirms Sunday 4 October, correcting the imported 3 October date. The 10K starts at 09:00 from Peasholm Park and follows firm, off-road sections of the historic Cinder Track with coastal and woodland views.",
+  },
+  "the-albert-goodman-weston-super-half|2026-10-03|10K": {
+    date: "2026-10-04",
+    startTime: "08:15",
+    entryUrl: "https://www.letsdothis.com/gb/e/2026-weston-super-half-259029",
+    source: "https://westonsuperhalf.co.uk/",
+    notes:
+      "The current organiser page and official checkout now include a 10K on Sunday 4 October, correcting the imported 3 October date and superseding older half-only pages. Let's Do This lists the 10K start at 08:15 and direct entry at £42.",
+  },
+  "the-albert-goodman-weston-super-half|2026-10-03|Half": {
+    date: "2026-10-04",
+    startTime: "09:00",
+    entryUrl: "https://www.letsdothis.com/gb/e/2026-weston-super-half-259029",
+    source: "https://westonsuperhalf.co.uk/",
+  },
+  "yorkshire-coast-trail-races|2026-10-03|10K": {
+    date: "2026-10-04",
+    startTime: "09:30",
+    entryUrl:
+      "https://theentrypoint.co.uk/events/yorkshire-coast-trail-race-series-10km-race-2026-Gjvok4rjkb4QVMr",
+    source: "https://yorkshirecoasttrail.co.uk/",
+    notes:
+      "The Yorkshire Coast 10K Trail Race starts at 09:30 on Sunday 4 October, correcting the imported 3 October date. The out-and-back coastal trail runs from Bridlington's Beaconsfield Prom towards Sewerby and Danes Dyke and has a 2.5-hour limit.",
+  },
+  "abington-festival-of-running|2026-10-04|10K": {
+    startTime: "10:30",
+    entryUrl: "https://www.abingtonrunfest.co.uk/",
+    source: "https://www.abingtonrunfest.co.uk/",
+    notes:
+      "Abington Festival of Running starts its UKA-licensed 10K and 5K at 10:30 on Sunday 4 October. The fast, mainly flat 10K leaves Granta Park for Great and Little Abington before returning to the science park finish.",
   },
 };
 
@@ -6491,6 +6594,93 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Truro Running Club's limited-entry race follows coast path around Chapel Porth and Porthtowan before looping Tywarnhayle Mine, with technical descents, mud, river running and a children's field race.",
     organiser: "Truro Running Club",
     website: "https://www.trurorunningclub.org.uk/trc-events/tywarnhayle-10k/",
+  },
+  "aviemore-10k": {
+    name: "Aviemore Half Marathon & 10K for All",
+    city: "Aviemore",
+    county: "Highland",
+    country: "Scotland",
+    area: "Badaguish Outdoor Centre and Glenmore Forest Park",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    summary: "Aviemore Half Marathon & 10K for All — officially postponed for 2026.",
+    description:
+      "The scenic Badaguish races use forest tracks around Glenmore Forest Park. The Speyside Trust has paused the event for 2026 and plans a two-year cycle, with the next date to be announced for 2027.",
+    organiser: "Badaguish / The Speyside Trust",
+    website: "https://badaguish.org/event/2026-aviemore-half-marathon-10k-postponement/",
+  },
+  "penshaw-half-marathon": {
+    name: "Penshaw 10K & Half Marathon",
+    city: "Penshaw",
+    county: "Tyne and Wear",
+    country: "England",
+    area: "Herrington Country Park, Penshaw Monument and the River Wear",
+    surface: "Trail",
+    distances: ["10K", "Half"],
+    summary:
+      "Penshaw 10K & Half Marathon — challenging Urban Trail Series races around Penshaw Monument.",
+    description:
+      "Trail Outlaws stages two fully marked, marshalled races on the steep trails surrounding Penshaw Monument and both sides of the River Wear, with free event parking, chip timing and digital photography.",
+    organiser: "Trail Outlaws",
+    website: "https://urbantrails.co.uk/penshaw-10k",
+  },
+  "the-east-coast-chuffer": {
+    name: "The East Coast Chuffer",
+    city: "Scarborough",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Peasholm Park and the Cinder Track",
+    surface: "Trail",
+    distances: ["5K", "10K", "Half", "20M", "Marathon"],
+    summary:
+      "The East Coast Chuffer — multi-distance coastal trail races from Scarborough's Peasholm Park.",
+    description:
+      "It's Grim Up North Running uses the firm former-railway Cinder Track for an easy-to-follow off-road course with coastal and woodland views, aid stations and a medal for every finisher.",
+    organiser: "It's Grim Up North Running",
+    website: "https://www.itsgrimupnorthrunning.co.uk/e/the-east-coast-chuffer-12380",
+  },
+  "the-albert-goodman-weston-super-half": {
+    name: "Weston Super Half & 10K",
+    city: "Weston-super-Mare",
+    county: "North Somerset",
+    country: "England",
+    area: "Marine Parade, Weston coastline and the Grand Pier",
+    surface: "Road",
+    distances: ["10K", "Half", "1M"],
+    summary: "Weston Super Half & 10K — closed-road coastal races with a Grand Pier finish.",
+    description:
+      "The current Weston Super Half programme includes a 10K, half marathon and community mile. The main coastal event combines closed roads, seafront, beach and nature-reserve sections with a showpiece pier finish.",
+    organiser: "WMP Creative / Weston Super Half",
+    website: "https://westonsuperhalf.co.uk/",
+  },
+  "yorkshire-coast-trail-races": {
+    name: "Yorkshire Coast Trail Race Series",
+    city: "Bridlington",
+    county: "East Riding of Yorkshire",
+    country: "England",
+    area: "Beaconsfield Prom, Sewerby and Danes Dyke",
+    surface: "Trail",
+    distances: ["22K", "10K", "5K", "1M"],
+    summary: "Yorkshire Coast Trail Race Series — coastal races from Bridlington's north bay.",
+    description:
+      "Bridlington Road Runners stages 22K and 10K Trail Running Association races towards Sewerby, Danes Dyke and Flamborough, plus a traffic-free 5K and family mile on the seafront.",
+    organiser: "Bridlington Road Runners",
+    website: "https://yorkshirecoasttrail.co.uk/",
+  },
+  "abington-festival-of-running": {
+    name: "Abington Festival of Running",
+    city: "Great Abington",
+    county: "Cambridgeshire",
+    country: "England",
+    area: "Granta Park, Great Abington and Little Abington",
+    surface: "Road",
+    distances: ["10K", "5K", "2K"],
+    summary:
+      "Abington Festival of Running — fast community road races supporting Great Abington Primary School.",
+    description:
+      "The school PTFA's UKA-licensed festival offers a mainly flat 10K through Great and Little Abington, a Granta Park 5K and a traffic-free family 2K, with chip timing and free parking.",
+    organiser: "Great Abington Primary School PTFA",
+    website: "https://www.abingtonrunfest.co.uk/",
   },
 };
 
@@ -13964,6 +14154,179 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "SiEntries reports the event full at 231 participants. Its retained information shows £16 affiliated and £18 unaffiliated fees; existing runners can transfer an entry until 2 October.",
+    },
+  ],
+  "aviemore-10k|2026-10-04|10K": [
+    {
+      providerCode: "official-badaguish-postponement",
+      providerName: "Badaguish official postponement notice",
+      entryUrl: "https://badaguish.org/event/2026-aviemore-half-marathon-10k-postponement/",
+      entryType: "official",
+      status: "closed",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://badaguish.org/event/2026-aviemore-half-marathon-10k-postponement/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The Speyside Trust's venue notice confirms there will be no Aviemore Half Marathon or 10K in 2026. The event is moving to a two-year cycle and a 2027 date has not yet been announced.",
+    },
+    {
+      providerCode: "runabc-highlands-aviemore",
+      providerName: "runABC Highlands postponement listing",
+      entryUrl: "https://runabc.co.uk/highlands",
+      entryType: "third_party",
+      status: "closed",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://runabc.co.uk/highlands",
+      isVerified: true,
+      notes:
+        "runABC also marks the 2026 Aviemore Half and 10K postponed. There is no active entry route to present for this year.",
+    },
+  ],
+  "penshaw-half-marathon|2026-10-04|10K": [
+    {
+      providerCode: "official-trail-outlaws-penshaw",
+      providerName: "Trail Outlaws official entry",
+      entryUrl: "https://trailoutlaws.eventrac.co.uk/e/urban-trail-series-8010",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://urbantrails.co.uk/penshaw-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Trail Outlaws links this Eventrac checkout from the official 10K page and confirms a 10:15 start, two-hour cut-off, free event parking and fully marked route.",
+    },
+    {
+      providerCode: "findarace-penshaw",
+      providerName: "Findarace official booking partner",
+      entryUrl: "https://findarace.com/events/urban-trail-series/4th-october-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29.43,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://findarace.com/events/urban-trail-series/4th-october-2026",
+      isVerified: true,
+      notes:
+        "Findarace identifies itself as Trail Outlaws' official booking partner and lists 10K entry at £29.43. Its generic 10:00 event time is superseded by the organiser's distance-specific 10:15 schedule.",
+    },
+  ],
+  "the-east-coast-chuffer|2026-10-04|10K": [
+    {
+      providerCode: "official-grim-up-north-chuffer",
+      providerName: "It's Grim Up North official entry",
+      entryUrl: "https://www.itsgrimupnorthrunning.co.uk/e/the-east-coast-chuffer-12380",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://www.itsgrimupnorthrunning.co.uk/e/the-east-coast-chuffer-12380",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser-branded Eventrac page confirms the corrected 4 October date, 09:00 10K start, Peasholm Park HQ and live entry availability.",
+    },
+    {
+      providerCode: "findarace-east-coast-chuffer",
+      providerName: "Findarace entry",
+      entryUrl: "https://findarace.com/events/the-east-coast-chuffer",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://findarace.com/events/the-east-coast-chuffer",
+      isVerified: true,
+      notes:
+        "Findarace offers a secondary booking route for the 4 October event and lists the overall distance range from £27 to £42. Confirm the 10K-specific total during checkout.",
+    },
+  ],
+  "the-albert-goodman-weston-super-half|2026-10-04|10K": [
+    {
+      providerCode: "letsdothis-weston-super-10k",
+      providerName: "Let's Do This official booking route",
+      entryUrl: "https://www.letsdothis.com/gb/e/2026-weston-super-half-259029",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/2026-weston-super-half-259029",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's Enter button links to this preferred Let's Do This occurrence. Its current event summary lists 10K entry at £42 and an 08:15 start on 4 October.",
+    },
+    {
+      providerCode: "official-weston-super-half",
+      providerName: "Weston Super Half official website",
+      entryUrl: "https://westonsuperhalf.co.uk/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://westonsuperhalf.co.uk/",
+      isVerified: true,
+      notes:
+        "The current official homepage now names the half marathon, 10K and community mile. Older cached organiser pages that omit the 10K have been superseded by this live page and its checkout.",
+    },
+  ],
+  "yorkshire-coast-trail-races|2026-10-04|10K": [
+    {
+      providerCode: "entrypoint-yorkshire-coast-10k",
+      providerName: "The Entry Point official checkout",
+      entryUrl:
+        "https://theentrypoint.co.uk/events/yorkshire-coast-trail-race-series-10km-race-2026-Gjvok4rjkb4QVMr",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-22T00:00:00+01:00",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl:
+        "https://theentrypoint.co.uk/events/yorkshire-coast-trail-race-series-10km-race-2026-Gjvok4rjkb4QVMr",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Bridlington Road Runners links directly to this checkout. It lists £20 affiliated or £22 unaffiliated entry, a 150-runner limit and closing date of 22 September.",
+    },
+    {
+      providerCode: "official-yorkshire-coast-trail",
+      providerName: "Yorkshire Coast Trail official website",
+      entryUrl: "https://yorkshirecoasttrail.co.uk/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://yorkshirecoasttrail.co.uk/",
+      isVerified: true,
+      notes:
+        "The official series page confirms the 4 October date, 09:30 start and directs runners to the verified Entry Point checkout.",
+    },
+  ],
+  "abington-festival-of-running|2026-10-04|10K": [
+    {
+      providerCode: "official-abington-run-fest",
+      providerName: "Abington Festival official entry",
+      entryUrl: "https://www.abingtonrunfest.co.uk/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://www.abingtonrunfest.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official festival site lists 10K entry from £23 to £25, the 4 October date, 10:30 race start and UKA licence 31593.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC entry route",
+      entryUrl: "https://runabc.co.uk/abington-festival-of-running",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T23:45:00+01:00",
+      sourceUrl: "https://runabc.co.uk/abington-festival-of-running",
+      isVerified: true,
+      notes:
+        "runABC supplies a secondary entry route and confirms the 10:30 start, Granta Park venue and Great Abington Primary School PTFA organiser.",
     },
   ],
 };
