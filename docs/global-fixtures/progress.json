@@ -72,6 +72,21 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-20"
+    },
+    {
+      "id": "global-005",
+      "status": "verified",
+      "source_ids": ["runthrough_uk"],
+      "regions": ["UK & Europe"],
+      "countries": ["Italy", "Germany", "Spain"],
+      "series_slugs": [
+        "5laghi-ivrea",
+        "runthrough-trails-berchtesgaden",
+        "runthrough-trails-girona"
+      ],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-20"
     }
   ],
   "source_progress": [
@@ -90,8 +105,8 @@
     {
       "source_id": "runthrough_uk",
       "status": "in_progress",
-      "events_imported": 1,
-      "last_checkpoint": "global-003"
+      "events_imported": 4,
+      "last_checkpoint": "global-005"
     },
     {
       "source_id": "te_sports_timing_upcoming",

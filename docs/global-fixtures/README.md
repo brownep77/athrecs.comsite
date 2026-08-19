@@ -55,3 +55,13 @@ Three more future running fixtures add Wales to the countries represented by the
 - Morgan's Army BRISCO Gorseinon 10K — Wales — 4 April 2027
 
 The Welsh fixtures were discovered through the enabled TE Sports Timing calendar and checked against the organiser and live event pages. Cuningar Loop was discovered through the approved Up and Running organiser source and checked against its active booking partner. All three were checked against the existing ATHRECS catalogue before import; similar club and parkrun records were not treated as duplicate fixtures. Both sources remain `in_progress` for later checkpoints.
+
+## Checkpoint global-005
+
+Three verified RunThrough Trails fixtures introduce three more European countries to the programme:
+
+- 5Laghi Ivrea — Italy — 6 September 2026
+- RunThrough Trails Berchtesgaden — Germany — 17 October 2026
+- RunThrough Trails Girona — Spain — 3 April 2027
+
+Each event was discovered through the enabled RunThrough UK & Europe source and checked against a current organiser page and live entry route. The 5Laghi race date is also corroborated by the local organiser and Turismo Torino because one RunThrough Trails calendar card shows the preceding event-weekend date. The RunThrough country focus now records Germany, Italy, Spain, Switzerland and the United Kingdom, and the source remains `in_progress` for further European checkpoints.
