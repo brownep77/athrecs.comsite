@@ -3763,6 +3763,37 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "DH Runners confirms its 2026 River Run is open and links directly to the official Events Up North checkout. The 10:00 race follows a fast out-and-back 10K beside the river from Denton Street, with registration and post-race facilities at Denton Holme WMCC.",
   },
+  "fleet-10k5k-peter-driver-memorial|2026-10-25|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.fleet10k.co.uk/",
+    source: "https://www.fleet10k.co.uk/",
+    notes:
+      "Fleet & Crookham Athletic Club confirms open entry for Sunday 25 October at 09:30 from The Harlington Centre. The well-marshalled town-centre road course has very little elevation and is designed for fast autumn racing.",
+  },
+  "fleet-10k5k-peter-driver-memorial|2026-10-25|5K": {
+    startTime: "09:30",
+    entryUrl: "https://www.fleet10k.co.uk/",
+    source: "https://www.fleet10k.co.uk/",
+  },
+  "haltemprice-10k|2026-10-25|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+    source: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+    notes:
+      "RunThrough confirms open entry for Sunday 25 October at 09:00. The closed-road course starts and finishes on South Ella Way, climbs gradually through West Ella and around Swanland, then rewards runners with a downhill return; a 90-minute cut-off applies.",
+  },
+  "jedburgh-half-marathon|2026-10-25|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/festival/18",
+    source: "https://www.entrycentral.com/festival/18",
+    notes:
+      "The official EntryCentral festival page confirms the 13th Jedburgh 10K on Sunday 25 October at 11:00. The road race starts at Abbey Place, follows the A68 and A698 through the Jed valley, turns at 5K and returns to a riverside finish; entries close 21 October or earlier if the limit is reached.",
+  },
+  "jedburgh-half-marathon|2026-10-25|Half": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/festival/18",
+    source: "https://www.entrycentral.com/festival/18",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -9487,6 +9518,48 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "DH Runners' 10K starts and finishes on Denton Street and follows the traffic-free river path towards Dalston. Race facilities are at Denton Holme WMCC, and the event includes a water station, prizes, photographs and a post-race buffet.",
     organiser: "DH Runners",
     website: "https://dhrunners.org/",
+  },
+  "fleet-10k5k-peter-driver-memorial": {
+    name: "Fleet 5K & 10K — Peter Driver Memorial",
+    city: "Fleet",
+    county: "Hampshire",
+    country: "England",
+    area: "The Harlington Centre and Fleet town-centre roads",
+    surface: "Road",
+    distances: ["5K", "10K"],
+    summary: "Fleet 5K & 10K — fast, low-elevation town-centre races organised by runners.",
+    description:
+      "Fleet & Crookham Athletic Club stages the Peter Driver Memorial 5K and 10K from The Harlington Centre. Both races use well-marshalled road routes through Fleet, with the 10K offering a quick, low-elevation autumn course.",
+    organiser: "Fleet & Crookham Athletic Club",
+    website: "https://www.fleet10k.co.uk/",
+  },
+  "haltemprice-10k": {
+    name: "Haltemprice 10K",
+    city: "Kirk Ella",
+    county: "East Riding of Yorkshire",
+    country: "England",
+    area: "South Ella Way, West Ella and Swanland",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Haltemprice 10K — a long-established closed-road race through East Yorkshire villages.",
+    description:
+      "Established in 1987, the Haltemprice 10K starts and finishes on South Ella Way in Kirk Ella. Its closed-road route climbs through West Ella, loops around Swanland and returns downhill, with chip timing, photographs and the traditional finisher mug.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+  },
+  "jedburgh-half-marathon": {
+    name: "Jedburgh Running Festival Half Marathon & 10K",
+    city: "Jedburgh",
+    county: "Scottish Borders",
+    country: "Scotland",
+    area: "Jedburgh Abbey, Jed valley and A698",
+    surface: "Road",
+    distances: ["10K", "Half"],
+    summary: "Jedburgh Running Festival — 10K and half-marathon road races through the Borders.",
+    description:
+      "The festival's 10K and half marathon start by Jedburgh Abbey and follow rural and closed roads through the Jed valley. The 10K turns at 5K on the A698 before returning to the riverside finish; race facilities are based beside Lothian Car Park.",
+    organiser: "Jedburgh Running Festival",
+    website: "https://www.jedburghrunningfestival.co.uk/",
   },
 };
 
@@ -20775,6 +20848,96 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "The event guide confirms 230 places, £19 affiliated and £21 unaffiliated entry, the Denton Holme facilities and Rome Street parking. Complete the purchase through DH Runners' official link.",
+    },
+  ],
+  "fleet-10k5k-peter-driver-memorial|2026-10-25|10K": [
+    {
+      providerCode: "official-fleet-10k-2026",
+      providerName: "Fleet 5K & 10K official entry",
+      entryUrl: "https://www.fleet10k.co.uk/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://www.fleet10k.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser confirms entries are open and lists 10K entry from £19, rising by £1 after 1 September. Use the 10K button rather than the separate 5K option.",
+    },
+    {
+      providerCode: "runabc-fleet-10k-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/fleet-10k5k-peter-driver-memorial",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/fleet-10k5k-peter-driver-memorial",
+      isVerified: true,
+      notes:
+        "runABC lists the exact 2026 race and offers a secondary entry route; Fleet & Crookham AC remains authoritative for live prices and availability.",
+    },
+  ],
+  "haltemprice-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-runthrough-haltemprice-2026",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists live £32 entry for the 09:00 race and confirms Haltemprice Leisure Centre as the event base.",
+    },
+    {
+      providerCode: "findarace-haltemprice-2026",
+      providerName: "Find a Race — official booking partner",
+      entryUrl: "https://findarace.com/events/haltemprice-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/haltemprice-10k",
+      isVerified: true,
+      notes:
+        "Find a Race identifies itself as an official booking partner and currently lists a £34 checkout. Compare the final total with RunThrough's direct route.",
+    },
+  ],
+  "jedburgh-half-marathon|2026-10-25|10K": [
+    {
+      providerCode: "official-entrycentral-jedburgh-10k-2026",
+      providerName: "Jedburgh Running Festival official entry",
+      entryUrl: "https://www.entrycentral.com/festival/18",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-21T23:59:00+01:00",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/festival/18",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists £24 standard or £22 Scottish Athletics member entry for the 10K, closing on 21 October or earlier if the limit is reached.",
+    },
+    {
+      providerCode: "runabc-jedburgh-10k-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/jedburgh-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/jedburgh-half-marathon",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary entry route for the exact festival. Use EntryCentral to select the 10K rather than the half marathon.",
     },
   ],
 };
