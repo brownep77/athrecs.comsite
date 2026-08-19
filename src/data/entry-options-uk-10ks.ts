@@ -3667,31 +3667,36 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Wigton Road Runners' England Athletics-hosted club page confirms the Sunday 18 October charity race and its official Events Up North booking route. The current race listing confirms a 10:00 start, correcting the imported 09:00 placeholder, from Barton Laws on a measured loop of paths and quiet undulating country roads.",
   },
-  "beachy-head-marathon|2026-10-24|10K": {
+  "beachy-head-marathon|2026-10-23|10K": {
+    date: "2026-10-24",
     startTime: "09:15",
     entryUrl: "https://www.visiteastbourne.com/marathon/enter/10k",
     source: "https://www.visiteastbourne.com/marathon/enter/faqs",
     notes:
       "Eastbourne Borough Council confirms the Beachy Head 10K is on Saturday 24 October at 09:15, correcting both the imported 23 October date and 23:00 placeholder. The two-hour trail race starts on Dukes Drive, loops over the South Downs to Belle Tout Lighthouse and returns along the coast.",
   },
-  "beachy-head-marathon|2026-10-24|Marathon": {
+  "beachy-head-marathon|2026-10-23|Marathon": {
+    date: "2026-10-24",
     startTime: "08:45",
     entryUrl: "https://www.visiteastbourne.com/marathon/enter/marathon",
     source: "https://www.visiteastbourne.com/marathon/enter/faqs",
   },
-  "beachy-head-marathon|2026-10-24|Ultra": {
+  "beachy-head-marathon|2026-10-23|Ultra": {
+    date: "2026-10-24",
     startTime: "07:40",
     entryUrl: "https://www.visiteastbourne.com/marathon/enter/ultramarathon",
     source: "https://www.visiteastbourne.com/marathon/enter/faqs",
   },
-  "clock-change-challenge-october|2026-10-25|10K": {
+  "clock-change-challenge-october|2026-10-24|10K": {
+    date: "2026-10-25",
     startTime: "11:00",
     entryUrl: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
     source: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
     notes:
       "Wiltshire Council's Eventrac page confirms the 10K is on Sunday 25 October at 11:00, correcting the imported Saturday date and 23:00 placeholder. The accurately measured out-and-back follows quiet country lanes and is Race 8 of the 2026 Wiltshire Road Race League.",
   },
-  "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K": {
+  "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|10K": {
+    date: "2026-10-25",
     startTime: "09:30",
     status: "Closed",
     entryUrl: "https://totalracetiming.co.uk/race/708",
@@ -3699,7 +3704,8 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Good Running Events and Total Race Timing confirm Sunday 25 October at 09:30, correcting the imported Saturday date and 23:00 placeholder. The two-lap runway 10K is full, but its free waiting list remains available. Entry includes event parking and IWM Duxford museum admission.",
   },
-  "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|5K": {
+  "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|5K": {
+    date: "2026-10-25",
     startTime: "09:30",
     status: "Closed",
     entryUrl: "https://totalracetiming.co.uk/race/708",
