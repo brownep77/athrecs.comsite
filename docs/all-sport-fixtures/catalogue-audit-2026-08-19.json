@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-08-19",
+  "supported_sports": 11,
+  "sports_with_future_fixtures": 11,
+  "future_fixture_counts": {
+    "Running": 1962,
+    "Cycling": 19,
+    "Swimming": 39,
+    "Triathlon": 176,
+    "Duathlon": 19,
+    "Parkrun": 210160,
+    "Aquathlon": 7,
+    "Aquabike": 3,
+    "Rowing": 3,
+    "OCR": 9,
+    "Athletics": 1592
+  },
+  "total_future_fixtures": 213989,
+  "duplicate_audit": {
+    "same_date_near_name_candidates_reviewed": 107,
+    "duplicate_series_retired": 9,
+    "incorrect_second_day_dates_corrected": 2,
+    "high_confidence_duplicates_remaining": 0
+  },
+  "scope": "All future catalogue fixtures currently present in the approved source modules, including generated weekly parkrun editions through 2027-12-26.",
+  "participant_result_rows": "excluded"
+}
