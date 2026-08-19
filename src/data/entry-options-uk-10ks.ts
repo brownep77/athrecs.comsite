@@ -3267,6 +3267,50 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "The organisers confirm a 10:30 start on Sunday 11 October, correcting the imported 09:30 time. The flat mixed-terrain 10K begins on Aldershot's Polo Fields, follows the Basingstoke Canal and Wellesley Woodlands, and finishes inside the athletics stadium with chip timing.",
   },
+  "sheffield-city-10k|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.mccpromotions.com/e/sheffield-city-10k-3732",
+    source: "https://www.mccpromotions.com/e/sheffield-city-10k-3732",
+    notes:
+      "MCC Promotions confirms a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. The accurately measured two-lap course follows traffic-free paths around Rother Valley Country Park's lakes, rolling parkland and woodland, with water, marshals and chip-timed results.",
+  },
+  "sheldon-striders-10k|2026-10-11|10K": {
+    startTime: "09:30",
+    entryUrl: "https://sheltonstriders.org.uk/our-annual-10k-race/",
+    source: "https://sheltonstriders.org.uk/our-annual-10k-race/",
+    notes:
+      "Shelton Striders confirms a 09:30 start on Sunday 11 October, correcting the imported 08:30 time and the source listing's 'Sheldon' typo. The flat, fast route starts and finishes beside Boulton Lane Park Community Centre and uses canal path, pavements, roads and footpaths around Infinity Way.",
+  },
+  "skedaddle-speyside-10k|2026-10-11|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/Skedaddle-Speyside-10k",
+    source: "https://www.entrycentral.com/Skedaddle-Speyside-10k",
+    notes:
+      "EntryCentral confirms an 11:00 start on Sunday 11 October, correcting the imported 10:00 time. The point-to-point trail climbs from Archiestown through Elchies woods, crosses undulating and sometimes muddy tracks with views of Ben Rinnes, then descends past Cardhu reservoir to Cardhu Distillery.",
+  },
+  "stilton-stumble|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl: "https://in.njuko.com/stilton-stumble-2026",
+    source: "https://stiltonstumble.com/",
+    notes:
+      "The organiser confirms a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. The UK Athletics-certified road route starts and finishes at Cropwell Bishop Memorial Hall and loops through the Nottinghamshire countryside and Stilton-producing village of Colston Bassett.",
+  },
+  "titsey-trail-10k|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.nice-work.org.uk/e/titsey-trail-10k-9481",
+    source: "https://oxtedrunners.org.uk/titsey-trail-10k/",
+    notes:
+      "Oxted Runners and Nice Work confirm a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. The single-lap woodland trail uses tracks, footpaths and bridleways across Limpsfield Common and the High Chart, with moderate climbs followed by a mostly downhill return.",
+  },
+  "town-moor-exhibition-park-5k-10k-october|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-october-2026",
+    source:
+      "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-october-2026",
+    notes:
+      "RunThrough confirms a 10:00 10K start on Sunday 11 October, correcting the imported 09:00 event placeholder. The fast, flat course links Exhibition Park and Newcastle Town Moor on closed park paths, with marked kilometres, marshals, chip timing and views towards the city skyline and St James' Park.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -8205,6 +8249,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Blackwater Valley Runners and the Greater Rushmoor Nepali Community stage a wide-start, chip-timed 10K on Polo Fields, canal towpath and woodland paths, finishing in the Army Athletics Stadium with a bespoke medal.",
     organiser: "Blackwater Valley Runners & Greater Rushmoor Nepali Community",
     website: "https://rushmoor10k.co.uk/",
+  },
+  "sheffield-city-10k": {
+    name: "Sheffield City 10K",
+    city: "Sheffield",
+    county: "South Yorkshire",
+    country: "England",
+    area: "Rother Valley Country Park lakes and woodland paths",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Sheffield City 10K — a beginner-friendly, traffic-free two-lap race at Rother Valley Country Park.",
+    description:
+      "MCC Promotions' accurately measured course follows park pathways around the lakes, rolling green space and woodland. The event provides marshals, water stations, chip-timed results, prizes and a bespoke medal.",
+    organiser: "MCC Promotions",
+    website: "https://www.mccpromotions.com/e/sheffield-city-10k-3732",
+  },
+  "sheldon-striders-10k": {
+    name: "Zone 2 Apparel Shelton Striders 10K & Fun Run",
+    city: "Derby",
+    county: "Derbyshire",
+    country: "England",
+    area: "Boulton Lane Park, canal path and Infinity Way, Alvaston",
+    surface: "Mixed",
+    distances: ["10K", "2mi"],
+    summary: "Shelton Striders 10K — a flat, fast Derby race with a separate family fun run.",
+    description:
+      "Shelton Striders' PB-friendly 10K starts and finishes near Boulton Lane Park Community Centre and combines canal path, pavement, road and footpath sections around Infinity Way. At least £1 from each 10K entry supports the club's nominated charity.",
+    organiser: "Shelton Striders Running Club",
+    website: "https://sheltonstriders.org.uk/our-annual-10k-race/",
+  },
+  "skedaddle-speyside-10k": {
+    name: "Skedaddle Speyside Trail 10K",
+    city: "Archiestown",
+    county: "Moray",
+    country: "Scotland",
+    area: "Archiestown, Elchies woods, Cardhu reservoir and Cardhu Distillery",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Skedaddle Speyside — a scenic point-to-point trail from Archiestown to Cardhu Distillery.",
+    description:
+      "Skedaddle North's route climbs on forest fire tracks before narrowing onto undulating and muddy trail with views of Ben Rinnes and the Cairngorms. It then descends across the B9102 and around Cardhu reservoir to the distillery finish.",
+    organiser: "Skedaddle North",
+    website: "https://www.entrycentral.com/Skedaddle-Speyside-10k",
+  },
+  "stilton-stumble": {
+    name: "Stilton Stumble 10K",
+    city: "Cropwell Bishop",
+    county: "Nottinghamshire",
+    country: "England",
+    area: "Cropwell Bishop, Colston Bassett and Nottinghamshire country lanes",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Stilton Stumble — a charitable, certified 10K through Nottinghamshire's Stilton villages.",
+    description:
+      "The community race starts and finishes at Cropwell Bishop Memorial Hall, passes the Lime Kiln and loops through Colston Bassett on quiet country lanes. Proceeds support Cropwell Bishop Friends of the School and the village Scout group.",
+    organiser: "Stilton Stumble community organisers",
+    website: "https://stiltonstumble.com/",
+  },
+  "titsey-trail-10k": {
+    name: "Titsey Trail 10K",
+    city: "Oxted",
+    county: "Surrey",
+    country: "England",
+    area: "Limpsfield Common and the High Chart woodlands",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Titsey Trail 10K — an autumn woodland race on runnable trails around Limpsfield and Oxted.",
+    description:
+      "Oxted Runners' single-lap community race is almost entirely off-road on tracks, footpaths and bridleways. It climbs moderately through Limpsfield Common and the High Chart before a largely downhill return, raising funds for local causes.",
+    organiser: "Oxted Runners",
+    website: "https://oxtedrunners.org.uk/titsey-trail-10k/",
+  },
+  "town-moor-exhibition-park-5k-10k-october": {
+    name: "Newcastle Town Moor Half Marathon, 10K, 5K & Junior Race — October",
+    city: "Newcastle upon Tyne",
+    county: "Tyne and Wear",
+    country: "England",
+    area: "Exhibition Park and Newcastle Town Moor",
+    surface: "Mixed",
+    distances: ["Half", "10K", "5K", "Junior"],
+    summary:
+      "Newcastle Town Moor — fast, flat multi-distance races across Exhibition Park and the Town Moor.",
+    description:
+      "RunThrough's closed parkland courses link Exhibition Park with the open Town Moor on smooth paths, with city and St James' Park views. Entries include chip timing, marked kilometres, free photographs, a themed medal and finish goodies.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-october-2026",
   },
 };
 
@@ -17878,6 +18012,183 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "TimeOutdoors confirms the £19 to £25 range, 10:30 start, age-16 minimum, flat trail course, free parking and secure bag storage.",
+    },
+  ],
+  "sheffield-city-10k|2026-10-11|10K": [
+    {
+      providerCode: "mcc-sheffield-city-10k-2026",
+      providerName: "MCC Promotions official entry",
+      entryUrl: "https://www.mccpromotions.com/e/sheffield-city-10k-3732",
+      entryType: "official",
+      status: "open",
+      priceAmount: 16,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://www.mccpromotions.com/e/sheffield-city-10k-3732",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "MCC Promotions lists the exact 11 October 10K as open at £16, with a 10:00 start and on-day registration information.",
+    },
+    {
+      providerCode: "findarace-sheffield-city-2026",
+      providerName: "Find a Race entry",
+      entryUrl: "https://findarace.com/events/sheffield-city-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 18.24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://findarace.com/events/sheffield-city-10k",
+      isVerified: true,
+      notes:
+        "Find a Race offers a second Quick Book route at £18.24 and confirms the 10:00 start and Rother Valley venue. Compare final checkout totals before payment.",
+    },
+  ],
+  "sheldon-striders-10k|2026-10-11|10K": [
+    {
+      providerCode: "official-shelton-striders-2026",
+      providerName: "Shelton Striders official entry",
+      entryUrl: "https://sheltonstriders.org.uk/our-annual-10k-race/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://sheltonstriders.org.uk/our-annual-10k-race/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The club confirms online entry is open at £15 affiliated or £17 unaffiliated, with no 10K entry on race day. Its Enter the Race action supplies the current checkout.",
+    },
+    {
+      providerCode: "running-calendar-shelton-striders-2026",
+      providerName: "Running Calendar race guide",
+      entryUrl: "https://www.runningcalendar.co.uk/event/shelton-striders-10k/",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://www.runningcalendar.co.uk/event/shelton-striders-10k/",
+      isVerified: true,
+      notes:
+        "Running Calendar independently confirms the 11 October date, Alvaston venue, flat mixed-surface course and RunDerby series. Complete payment through the club's official route.",
+    },
+  ],
+  "skedaddle-speyside-10k|2026-10-11|10K": [
+    {
+      providerCode: "entrycentral-skedaddle-speyside-2026",
+      providerName: "EntryCentral official checkout",
+      entryUrl: "https://www.entrycentral.com/Skedaddle-Speyside-10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-09T23:59:00+01:00",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/Skedaddle-Speyside-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists the individual 10K at £15, open for 150 runners, with no on-the-day entry and an advertised 9 October deadline.",
+    },
+    {
+      providerCode: "gotrail-skedaddle-speyside-2026",
+      providerName: "GoTrail race guide",
+      entryUrl: "https://gotrail.run/en/race/skedaddle-speyside-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://gotrail.run/en/race/skedaddle-speyside-10k",
+      isVerified: true,
+      notes:
+        "GoTrail confirms the date, point-to-point route, shuttle and Cardhu finish, and links runners to the organiser's registration. Use EntryCentral for payment.",
+    },
+  ],
+  "stilton-stumble|2026-10-11|10K": [
+    {
+      providerCode: "njuko-stilton-stumble-2026",
+      providerName: "Njuko official checkout",
+      entryUrl: "https://in.njuko.com/stilton-stumble-2026",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://stiltonstumble.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser identifies this exact Njuko page as the 2026 registration partner. Confirm the current ticket price and terms in the checkout before payment.",
+    },
+    {
+      providerCode: "official-stilton-stumble-2026",
+      providerName: "Stilton Stumble official information",
+      entryUrl: "https://stiltonstumble.com/",
+      entryType: "charity",
+      status: "open",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://stiltonstumble.com/",
+      isVerified: true,
+      notes:
+        "The official site confirms the 11 October edition, 10:00 start, certified course, beneficiary groups and direct Njuko registration route.",
+    },
+  ],
+  "titsey-trail-10k|2026-10-11|10K": [
+    {
+      providerCode: "nice-work-titsey-trail-2026",
+      providerName: "Nice Work official checkout",
+      entryUrl: "https://www.nice-work.org.uk/e/titsey-trail-10k-9481",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://www.nice-work.org.uk/e/titsey-trail-10k-9481",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Nice Work supplies the live 2026 checkout and confirms the 10:00 start, ARC permit and venue. Subject to capacity, card-only race-day entry is advertised at £28.",
+    },
+    {
+      providerCode: "official-oxted-titsey-trail-2026",
+      providerName: "Oxted Runners official information",
+      entryUrl: "https://oxtedrunners.org.uk/titsey-trail-10k/",
+      entryType: "charity",
+      status: "open",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://oxtedrunners.org.uk/titsey-trail-10k/",
+      isVerified: true,
+      notes:
+        "The organising club confirms the 11 October edition, charity purpose and Nice Work registration link. Use Nice Work for the current ticket and final total.",
+    },
+  ],
+  "town-moor-exhibition-park-5k-10k-october|2026-10-11|10K": [
+    {
+      providerCode: "runthrough-town-moor-october-2026",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists the 10K at £32 and confirms its 10:00 start. Select the 10K rather than the half marathon, 5K or junior ticket at checkout.",
+    },
+    {
+      providerCode: "findarace-town-moor-october-2026",
+      providerName: "Find a Race entry",
+      entryUrl: "https://findarace.com/events/runthrough-town-moor-exhibition-park-5k-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:35:00+01:00",
+      sourceUrl: "https://findarace.com/events/runthrough-town-moor-exhibition-park-5k-10k",
+      isVerified: true,
+      notes:
+        "Find a Race offers a second 10K Quick Book route at £34 and confirms transport and parking details. Compare the final total with RunThrough before payment.",
     },
   ],
 };
