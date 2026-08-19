@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-19T09:30:00+01:00",
+  "updatedAt": "2026-08-19T13:20:00+01:00",
   "activeRelease": 63,
   "releaseStatus": "assembling",
   "checkpoints": {
@@ -38,6 +38,16 @@
         "brigg-10k|2026-10-25|10K"
       ],
       "notes": "Monsal and Brigg have current official entry routes; Newton is retained as TBC because no club or governing-body source confirms the imported 2026 edition. The checkpoint passed the workflow, TypeScript, catalogue and diff checks and is saved on the Release 63 branch."
+    },
+    "63D": {
+      "status": "checkpoint_saved",
+      "updatedAt": "2026-08-19T13:20:00+01:00",
+      "races": [
+        "cramond-promenade-5k-10k-half-marathon-october|2026-10-25|10K",
+        "crewe-10k|2026-10-25|10K",
+        "dh-river-run|2026-10-25|10K"
+      ],
+      "notes": "Cramond and DH have current organiser-backed entry routes; Crewe has a direct RunThrough entry plus a distinct YMCA Cheshire charity place. The checkpoint passed the workflow, TypeScript, catalogue and diff checks and is ready to be saved on the Release 63 branch."
     }
   }
 }
