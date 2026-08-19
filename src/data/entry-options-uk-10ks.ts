@@ -2712,6 +2712,49 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Abington Festival of Running starts its UKA-licensed 10K and 5K at 10:30 on Sunday 4 October. The fast, mainly flat 10K leaves Granta Park for Great and Little Abington before returning to the science park finish.",
   },
+  "accrington-10k|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://bookitzone.com/accrington_roadrunners/OXjFFX",
+    source: "https://accrington-road-runners.co.uk/events/accrington-10k/",
+    notes:
+      "Accrington Road Runners confirms a 10:00 start on Sunday 4 October from the Walton Arms at Altham Industrial Estate, correcting the imported 09:00 time. The undulating road course has a long finishing descent and a 450-runner limit.",
+  },
+  "bangor-half-marathon|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.runwales.com/e/bangor-city-10k-and-half-marathon-8597",
+    source: "https://www.runwales.com/e/bangor-city-10k-and-half-marathon-8597",
+    notes:
+      "Run Wales confirms that both the Bangor City 10K and half marathon start at 10:00 on Sunday 4 October, correcting the imported 09:00 time. Race HQ opens at 08:00 beside Deiniol Shopping Centre and the route includes Garth Pier, coastline and woodland paths.",
+  },
+  "bidwells-cambridge-10k|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://in.townandgown10k.co.uk/bidwells-cambridge-10k-2026",
+    source: "https://www.musculardystrophyuk.org/get-involved/events/bidwells-cambridge-10k-2026/",
+    notes:
+      "Muscular Dystrophy UK gives a 10:00 start on Sunday 4 October, correcting the imported 09:00 time. The closed-road Cambridge Town & Gown route starts near Midsummer Common and passes colleges, city landmarks and the River Cam.",
+  },
+  "dorchester-half-marathon-10k|2026-10-04|10K": {
+    startTime: "09:15",
+    entryUrl:
+      "https://www.tickettailor.com/checkout/new-session/id/8236258/chk/7160/?show_event_filter=false",
+    source: "https://inertiaevents.co.uk/dorchester.html",
+    notes:
+      "Inertia Events confirms that both Dorchester distances start at 09:15 on Sunday 4 October, correcting the imported 08:00 time and superseding the 09:00 regional listing. The current official venue is Dorchester Cricket Club, replacing the stale rugby-club location.",
+  },
+  "east-grinstead-10k|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://register.enthuse.com/ps/event/TheEastGrinstead10k26",
+    source: "https://www.eastgrinsteadrunners.co.uk/eg10k",
+    notes:
+      "East Grinstead Runners confirms a 10:00 start on Sunday 4 October at Imberhorne School, correcting the imported 09:00 time. The mainly flat mixed-terrain course uses bridleways for its first 7K and residential roads for its final 3K.",
+  },
+  "everton-10k|2026-10-04|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.runthrough.co.uk/event/everton-10k-october-2026",
+    source: "https://www.runthrough.co.uk/event/everton-10k-october-2026",
+    notes:
+      "RunThrough confirms a 09:30 start on Sunday 4 October, correcting the imported 08:30 time. The flat, closed-road 10K starts and finishes at Everton FC's Hill Dickinson Stadium and passes central Liverpool waterfront landmarks.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -6681,6 +6724,94 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "The school PTFA's UKA-licensed festival offers a mainly flat 10K through Great and Little Abington, a Granta Park 5K and a traffic-free family 2K, with chip timing and free parking.",
     organiser: "Great Abington Primary School PTFA",
     website: "https://www.abingtonrunfest.co.uk/",
+  },
+  "accrington-10k": {
+    name: "Accrington 10K",
+    city: "Altham",
+    county: "Lancashire",
+    country: "England",
+    area: "Walton Arms and Altham Industrial Estate",
+    surface: "Road",
+    distances: ["10K", "2K"],
+    summary: "Accrington 10K — an undulating road race from Altham with a long finishing descent.",
+    description:
+      "Accrington Road Runners stages this popular, heavily marshalled 10K over rural and urban roads, with traffic management, a 1.5-mile grandstand descent, ample parking and a separate junior race.",
+    organiser: "Accrington Road Runners",
+    website: "https://accrington-road-runners.co.uk/events/accrington-10k/",
+  },
+  "bangor-half-marathon": {
+    name: "Bangor City 10K & Half Marathon",
+    city: "Bangor",
+    county: "Gwynedd",
+    country: "Wales",
+    area: "Deiniol Shopping Centre, Garth Pier and the Bangor coastline",
+    surface: "Road",
+    distances: ["10K", "Half"],
+    summary:
+      "Bangor City 10K & Half Marathon — coastal city races forming part of the Four Castles Series.",
+    description:
+      "Run Wales stages the two city-centre races past the coast and Garth Pier, with Menai Strait, Anglesey and Eryri views before woodland paths and a return to the Bangor finish.",
+    organiser: "Run Wales",
+    website: "https://www.runwales.com/e/bangor-city-10k-and-half-marathon-8597",
+  },
+  "bidwells-cambridge-10k": {
+    name: "Bidwells Cambridge Town & Gown 10K",
+    city: "Cambridge",
+    county: "Cambridgeshire",
+    country: "England",
+    area: "Midsummer Common, Cambridge city centre and the River Cam",
+    surface: "Road",
+    distances: ["10K", "3K"],
+    summary:
+      "Bidwells Cambridge Town & Gown 10K — a closed-road city fundraiser for Muscular Dystrophy UK.",
+    description:
+      "This established charity event follows closed Cambridge streets past historic colleges, landmarks and the River Cam, with an event village on Midsummer Common and a separate junior 3K.",
+    organiser: "Muscular Dystrophy UK",
+    website: "https://www.musculardystrophyuk.org/get-involved/events/bidwells-cambridge-10k-2026/",
+  },
+  "dorchester-half-marathon-10k": {
+    name: "Dorchester Half Marathon & 10K",
+    city: "Dorchester",
+    county: "Dorset",
+    country: "England",
+    area: "Dorchester Cricket Club and the Dorset countryside",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary: "Dorchester Half Marathon & 10K — friendly road races from Dorchester Cricket Club.",
+    description:
+      "Inertia Events stages inclusive 10K and half-marathon routes from Dorchester Cricket Club over pavements, cycle paths and quiet urban and countryside roads, with stocked aid stations and no formal cut-off.",
+    organiser: "Inertia Events",
+    website: "https://inertiaevents.co.uk/dorchester.html",
+  },
+  "east-grinstead-10k": {
+    name: "East Grinstead 10K — Andy Ripley Memorial Run",
+    city: "East Grinstead",
+    county: "West Sussex",
+    country: "England",
+    area: "Imberhorne School and East Grinstead bridleways",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "East Grinstead 10K — a community mixed-terrain memorial race supporting local charities.",
+    description:
+      "East Grinstead Runners organises this UK Athletics-licensed community race from Imberhorne School, using well-maintained bridleways and residential roads with chip timing and a 5K water station.",
+    organiser: "East Grinstead Runners",
+    website: "https://www.eastgrinsteadrunners.co.uk/eg10k",
+  },
+  "everton-10k": {
+    name: "Everton 10K",
+    city: "Liverpool",
+    county: "Merseyside",
+    country: "England",
+    area: "Hill Dickinson Stadium and central Liverpool waterfront",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Everton 10K — a flat, closed-road city race from Everton FC's Hill Dickinson Stadium.",
+    description:
+      "RunThrough's chip-timed race starts and finishes at Everton's waterfront stadium, passing landmarks including the Royal Liver Building and Beatles Statue while supporting Everton in the Community.",
+    organiser: "RunThrough Events",
+    website: "https://www.everton10k.com/",
   },
 };
 
@@ -14327,6 +14458,194 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC supplies a secondary entry route and confirms the 10:30 start, Granta Park venue and Great Abington Primary School PTFA organiser.",
+    },
+  ],
+  "accrington-10k|2026-10-04|10K": [
+    {
+      providerCode: "bookitzone-accrington-2026",
+      providerName: "BookitZone official checkout",
+      entryUrl: "https://bookitzone.com/accrington_roadrunners/OXjFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28.12,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://bookitzone.com/accrington_roadrunners/OXjFFX",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The Accrington Road Runners checkout is live for 450 places. It lists £28.12 affiliated and £30.12 unaffiliated totals, a 10:00 start and no race-day entries.",
+    },
+    {
+      providerCode: "official-accrington-road-runners",
+      providerName: "Accrington Road Runners official information",
+      entryUrl: "https://accrington-road-runners.co.uk/events/accrington-10k/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 27,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://accrington-road-runners.co.uk/events/accrington-10k/",
+      isVerified: true,
+      notes:
+        "The organising club lists a £27 base price, the Altham venue, ample parking and the corrected 10:00 start, linking runners onward to BookitZone for checkout fees and completion.",
+    },
+  ],
+  "bangor-half-marathon|2026-10-04|10K": [
+    {
+      providerCode: "official-run-wales-bangor",
+      providerName: "Run Wales official entry",
+      entryUrl: "https://www.runwales.com/e/bangor-city-10k-and-half-marathon-8597",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.runwales.com/e/bangor-city-10k-and-half-marathon-8597",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Run Wales exposes a live Enter Now route and confirms the 4 October date, 10:00 start, Deiniol Shopping Centre race HQ and Four Castles Series event information.",
+    },
+    {
+      providerCode: "timeoutdoors-bangor-10k",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/bangor-city-10k-half-marathon/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/bangor-city-10k-half-marathon/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors lists secondary 10K entry from £32 to £34 and confirms the 10:00 start, age 15 minimum and approximately 436 feet of ascent.",
+    },
+  ],
+  "bidwells-cambridge-10k|2026-10-04|10K": [
+    {
+      providerCode: "official-town-and-gown-cambridge",
+      providerName: "Town & Gown official checkout",
+      entryUrl: "https://in.townandgown10k.co.uk/bidwells-cambridge-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl:
+        "https://www.musculardystrophyuk.org/get-involved/events/bidwells-cambridge-10k-2026/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Muscular Dystrophy UK's official Enter Now action opens this dedicated checkout. The charity lists the current standard entry at £35 and a later £37 tier.",
+    },
+    {
+      providerCode: "official-mduk-cambridge-info",
+      providerName: "Muscular Dystrophy UK event page",
+      entryUrl:
+        "https://www.musculardystrophyuk.org/get-involved/events/bidwells-cambridge-10k-2026/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 35,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl:
+        "https://www.musculardystrophyuk.org/get-involved/events/bidwells-cambridge-10k-2026/",
+      isVerified: true,
+      notes:
+        "The organising charity provides the authoritative pricing, 10:00 start, Midsummer Common venue, race-pack deadlines, accessibility contact and travel guidance.",
+    },
+  ],
+  "dorchester-half-marathon-10k|2026-10-04|10K": [
+    {
+      providerCode: "tickettailor-dorchester-2026",
+      providerName: "Ticket Tailor official checkout",
+      entryUrl:
+        "https://www.tickettailor.com/checkout/new-session/id/8236258/chk/7160/?show_event_filter=false",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://inertiaevents.co.uk/dorchester.html",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Inertia Events embeds this Ticket Tailor checkout on the official page. The 10K is listed from £22.50, while on-the-day entry for any route is £45 if capacity remains.",
+    },
+    {
+      providerCode: "official-inertia-dorchester",
+      providerName: "Inertia Events official page",
+      entryUrl: "https://inertiaevents.co.uk/dorchester.html",
+      entryType: "official",
+      status: "open",
+      priceAmount: 22.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://inertiaevents.co.uk/dorchester.html",
+      isVerified: true,
+      notes:
+        "The organiser confirms the current Dorchester Cricket Club venue, 09:15 start, optional medal, Fairfield parking and direct booking widget.",
+    },
+  ],
+  "east-grinstead-10k|2026-10-04|10K": [
+    {
+      providerCode: "enthuse-east-grinstead-2026",
+      providerName: "Enthuse official checkout",
+      entryUrl: "https://register.enthuse.com/ps/event/TheEastGrinstead10k26",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.eastgrinsteadrunners.co.uk/eg10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "East Grinstead Runners links directly to this Enthuse registration page and states that entries are open for the 10:00 memorial race.",
+    },
+    {
+      providerCode: "timeoutdoors-east-grinstead",
+      providerName: "TimeOutdoors entry",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/the-east-grinstead-10k-andy-ripley-memorial-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/the-east-grinstead-10k-andy-ripley-memorial-run",
+      isVerified: true,
+      notes:
+        "TimeOutdoors offers secondary entry from £22 to £24 and confirms the 10:00 start, Imberhorne School venue, chip timing and UK Athletics rules.",
+    },
+  ],
+  "everton-10k|2026-10-04|10K": [
+    {
+      providerCode: "official-runthrough-everton-october",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/everton-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/everton-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists live 10K entry at £40 and confirms the corrected 09:30 start at Hill Dickinson Stadium, with chip timing, free photos and post-race goodies.",
+    },
+    {
+      providerCode: "findarace-everton-october",
+      providerName: "Findarace official booking partner",
+      entryUrl: "https://findarace.com/events/everton-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 42,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T03:30:00+01:00",
+      sourceUrl: "https://findarace.com/events/everton-10k",
+      isVerified: true,
+      notes:
+        "Findarace identifies itself as RunThrough's official booking partner and offers Quick Book at £42 for the same 09:30 road-closed race.",
     },
   ],
 };
