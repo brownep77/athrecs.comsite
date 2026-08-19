@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-19T09:30:00+01:00",
+  "activeRelease": 63,
+  "releaseStatus": "assembling",
+  "checkpoints": {
+    "63A": {
+      "status": "tested",
+      "updatedAt": "2026-08-19T10:30:00+01:00",
+      "races": [
+        "runabc-west-acre-wild-10k|2026-10-18|10K",
+        "wellington-10k|2026-10-18|10K",
+        "wigton-road-runners-10k|2026-10-18|10K"
+      ],
+      "notes": "Official or governing-body-backed routes, corrected start times, entry status and venue details passed the workflow, TypeScript, catalogue and diff checks."
+    },
+    "63B": {
+      "status": "researched",
+      "updatedAt": "2026-08-19T09:30:00+01:00",
+      "races": [
+        "beachy-head-marathon|2026-10-23|10K",
+        "clock-change-challenge-october|2026-10-24|10K",
+        "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|10K"
+      ],
+      "notes": "Research identified incorrect imported dates/times; no production data changes until the checkpoint is coded and tested."
+    }
+  }
+}
