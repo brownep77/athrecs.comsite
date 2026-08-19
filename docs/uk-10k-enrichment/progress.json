@@ -5,14 +5,14 @@
   "releaseStatus": "assembling",
   "checkpoints": {
     "63A": {
-      "status": "tested",
-      "updatedAt": "2026-08-19T10:30:00+01:00",
+      "status": "checkpoint_saved",
+      "updatedAt": "2026-08-19T10:45:00+01:00",
       "races": [
         "runabc-west-acre-wild-10k|2026-10-18|10K",
         "wellington-10k|2026-10-18|10K",
         "wigton-road-runners-10k|2026-10-18|10K"
       ],
-      "notes": "Official or governing-body-backed routes, corrected start times, entry status and venue details passed the workflow, TypeScript, catalogue and diff checks."
+      "notes": "Official or governing-body-backed routes, corrected start times, entry status and venue details passed the workflow, TypeScript, catalogue and diff checks and are saved on the Release 63 checkpoint branch."
     },
     "63B": {
       "status": "researched",
