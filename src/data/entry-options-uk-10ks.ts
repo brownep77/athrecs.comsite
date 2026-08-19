@@ -2375,6 +2375,52 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "The One in the Park Hyde Park 10K starts at 09:30 on Sunday 27 September from the Bandstand. The traffic-free course completes two smooth 5K laps beside the Serpentine and park landmarks, with chip timing, refreshments and a medal.",
   },
+  "round-the-lakes|2026-09-27|10K": {
+    startTime: "09:00",
+    entryUrl: "https://racesignup.co.uk/round-the-lakes-10k",
+    source: "https://pooleac.co.uk/club-events/round-the-lakes/",
+    notes:
+      "Round the Lakes 10K starts at 09:00 on Sunday 27 September from Poole Park Pavilion. Poole Athletic Club's chip-timed, flat park course has been adjusted and remeasured for 2026 with fast racing and PBs in mind.",
+  },
+  "rrf-half|2026-09-27|10K": {
+    startTime: "09:10",
+    entryUrl: "https://www.entrycentral.com/redcar_running_festival",
+    source: "https://www.entrycentral.com/redcar_running_festival",
+    notes:
+      "The Zetland 10K starts at 09:10 on Sunday 27 September from Zetland Park as part of Redcar Running Festival. New Marske Harriers' certified, closed-road race is chip timed and includes a finisher medal and T-shirt.",
+  },
+  "stourhead-trust-10k-september|2026-09-27|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+    source:
+      "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+    notes:
+      "Stourhead Trust 10K is a free, informal trail run starting at 09:00 on Sunday 27 September after registration from 08:30 at Stourhead House. The rough mixed-terrain route explores pasture, woodland and the wider estate.",
+  },
+  "the-sutton-park-10k|2026-09-27|10K": {
+    startTime: "11:00",
+    entryUrl: "https://bookitzone.com/matthew_graham_1/krjFFX",
+    source: "https://www.sutton10k.org/",
+    notes:
+      "Sutton Park 10K starts at 11:00 on Sunday 27 September from Sutton-on-the-Forest Playing Field. The chip-timed rural route combines parkland and forest tracks, quiet roads and a former airfield.",
+  },
+  "wild-deer-trail-runs-dalkeith|2026-09-27|10K": {
+    startTime: "09:45",
+    entryUrl:
+      "https://www.wilddeerevents.co.uk/e/wild-deer-scottish-trail-running-festival-2026-14625",
+    source:
+      "https://www.wilddeerevents.co.uk/e/wild-deer-scottish-trail-running-festival-2026-14625",
+    notes:
+      "The Wild Deer Scottish Trail Running Festival 10K is scheduled for 09:45 on Sunday 27 September at Dalkeith Country Park. The chip-timed route mixes woodland trails, firm paths, grass and rugged terrain and welcomes canicross runners.",
+  },
+  "willow-10k-run|2026-09-27|10K": {
+    startTime: "11:00",
+    entryUrl: "https://register.enthuse.com/ps/event/Willow10K2026",
+    source: "https://www.willowfoundation.org.uk/events/willow10k/",
+    notes:
+      "Willow 10K starts at 11:00 on Sunday 27 September in the grounds of Hatfield House. Runners and walkers have two hours to complete the scenic fundraising course, with a medal for every finisher.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -5921,6 +5967,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "OneRace Events stages a smooth 5K park loop past lakeside scenery, monuments and gardens, completed twice for the 10K, with chip timing, refreshments and a finisher medal.",
     organiser: "OneRace Events",
     website: "https://www.onerace.events/london-5k-10k-hyde-park-september",
+  },
+  "round-the-lakes": {
+    name: "Round the Lakes 10K",
+    city: "Poole",
+    county: "Dorset",
+    country: "England",
+    area: "Poole Park Pavilion and lakes",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Round the Lakes 10K — a flat, fast and chip-timed race around Poole Park.",
+    description:
+      "Poole Athletic Club's September race starts and finishes at the park pavilion on a revised, remeasured course designed for fast running, with overall, age-category and team prizes.",
+    organiser: "Poole Athletic Club",
+    website: "https://pooleac.co.uk/club-events/round-the-lakes/",
+  },
+  "rrf-half": {
+    name: "Redcar Running Festival",
+    city: "Redcar",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Zetland Park and Redcar seafront",
+    surface: "Road",
+    distances: ["Half", "10K", "3K"],
+    summary:
+      "Redcar Running Festival — certified closed-road half marathon, Zetland 10K and 3K races.",
+    description:
+      "New Marske Harriers stages certified, chip-timed road races from Zetland Park, with the Zetland 10K starting at 09:10, the 3K at 09:15 and the half marathon at 10:00.",
+    organiser: "New Marske Harriers AC",
+    website: "https://www.nmhraces.net/",
+  },
+  "stourhead-trust-10k-september": {
+    name: "Stourhead Trust 10K September",
+    city: "Mere",
+    county: "Wiltshire",
+    country: "England",
+    area: "Stourhead House and wider estate",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Stourhead Trust 10K — a free, informal mixed-terrain trail run through the National Trust estate.",
+    description:
+      "This untimed monthly Trust 10 follows rough and uneven trails through pasture, woodland and the wider Stourhead estate; runners register at the house and should bring their own timing device if needed.",
+    organiser: "National Trust — Stourhead",
+    website:
+      "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+  },
+  "the-sutton-park-10k": {
+    name: "Sutton Park 10K",
+    city: "Sutton-on-the-Forest",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Village playing field, Sutton Park and forest",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Sutton Park 10K — a flat rural race over parkland tracks, quiet roads and a former airfield.",
+    description:
+      "This volunteer-organised, chip-timed 10K starts and finishes on the village playing field and passes through Sutton Park and forest, with free off-road parking, toilets and refreshments.",
+    organiser: "Sutton Park 10K team",
+    website: "https://www.sutton10k.org/",
+  },
+  "wild-deer-trail-runs-dalkeith": {
+    name: "Wild Deer Scottish Trail Running Festival",
+    city: "Dalkeith",
+    county: "Midlothian",
+    country: "Scotland",
+    area: "Dalkeith Country Park",
+    surface: "Trail",
+    distances: ["1mi", "5K", "10K", "Half", "Marathon", "Ultra"],
+    summary:
+      "Wild Deer Scottish Trail Running Festival — six trail distances through Dalkeith Country Park.",
+    description:
+      "Wild Deer Events offers family mile through ultra distances on woodland, estate, grass and rugged trails, with live chip timing, canicross entry, finisher medals, merchandise and an event village.",
+    organiser: "Wild Deer Events",
+    website:
+      "https://www.wilddeerevents.co.uk/e/wild-deer-scottish-trail-running-festival-2026-14625",
+  },
+  "willow-10k-run": {
+    name: "Willow 10K, 5K & Family Fun Run",
+    city: "Hatfield",
+    county: "Hertfordshire",
+    country: "England",
+    area: "Hatfield House and Hatfield Park",
+    surface: "Mixed",
+    distances: ["10K", "5K", "1.8K"],
+    summary: "Willow 10K — scenic 10K, 5K and family events supporting seriously ill young adults.",
+    description:
+      "The Willow Foundation welcomes runners and walkers into the private grounds of Hatfield House for its annual fundraiser, with a 10K and 5K at 11:00 and a 1.8K family fun run at 10:00.",
+    organiser: "Willow Foundation",
+    website: "https://www.willowfoundation.org.uk/events/willow10k/",
   },
 };
 
@@ -12720,6 +12856,186 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Find a Race is an official booking partner and offers 10K Quick Book at £27.75 including its £1.75 fee.",
+    },
+  ],
+  "round-the-lakes|2026-09-27|10K": [
+    {
+      providerCode: "official-racesignup-round-lakes",
+      providerName: "RaceSignup official entry",
+      entryUrl: "https://racesignup.co.uk/round-the-lakes-10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://pooleac.co.uk/club-events/round-the-lakes/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Poole Athletic Club lists £20 affiliated or £22 unaffiliated online entry and directs entrants to RaceSignup. On-the-day entry is £2 extra if the race has not sold out.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/round-the-lakes",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/round-the-lakes",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary entry route and confirms the 27 September date and 09:00 start. The Poole AC page is authoritative for current pricing and availability.",
+    },
+  ],
+  "rrf-half|2026-09-27|10K": [
+    {
+      providerCode: "official-entrycentral-redcar",
+      providerName: "EntryCentral official entry",
+      entryUrl: "https://www.entrycentral.com/redcar_running_festival",
+      entryType: "official",
+      status: "open",
+      priceAmount: 21,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-20T13:59:00+01:00",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/redcar_running_festival",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists the Zetland 10K at £21 discounted or £24 standard until 31 August, then £27 or £30. Entry closes at 13:59 on 20 September or when the 450-place field fills.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/rrf-half",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/rrf-half",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary festival listing. EntryCentral is authoritative for the Zetland 10K's corrected 09:10 start, live prices and capacity.",
+    },
+  ],
+  "stourhead-trust-10k-september|2026-09-27|10K": [
+    {
+      providerCode: "official-national-trust-stourhead",
+      providerName: "National Trust official event page",
+      entryUrl:
+        "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+      entryType: "official",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl:
+        "https://www.nationaltrust.org.uk/visit/wiltshire/stourhead/events/bd14c234-7f1e-4e49-be95-287d391d2a41",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The National Trust confirms a free 09:00 Trust 10 on 27 September, with registration from 08:30 in front of Stourhead House. No paid checkout is required.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/stourhead-trust-10k-september",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/stourhead-trust-10k-september",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary reference for the free event and confirms the route and 09:00 start. Check the National Trust page for any access changes.",
+    },
+  ],
+  "the-sutton-park-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-bookitzone-sutton",
+      providerName: "BookitZone official entry",
+      entryUrl: "https://bookitzone.com/matthew_graham_1/krjFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 16.28,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-25T23:59:00+01:00",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://www.sutton10k.org/how-to-enter/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "BookitZone lists £16.28 affiliated or £18.34 non-club total prices and an 11:00 start. Online entry closes on 25 September; £20 race-day entry may be available if the field has not filled.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/the-sutton-park-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/the-sutton-park-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route and confirms the 11:00 start. Sutton10K.org and BookitZone are authoritative for entry availability.",
+    },
+  ],
+  "wild-deer-trail-runs-dalkeith|2026-09-27|10K": [
+    {
+      providerCode: "official-wild-deer-dalkeith",
+      providerName: "Wild Deer Events official entry",
+      entryUrl:
+        "https://www.wilddeerevents.co.uk/e/wild-deer-scottish-trail-running-festival-2026-14625",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl:
+        "https://www.wilddeerevents.co.uk/e/wild-deer-scottish-trail-running-festival-2026-14625",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live Wild Deer Eventrac page is accepting entries and currently schedules both 5K and 10K races for 09:45; timings remain subject to the final participant email.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/wild-deer-trail-runs-dalkeith",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/wild-deer-trail-runs-dalkeith",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary festival listing. Wild Deer Events is authoritative for the revised 09:45 10K start and live availability.",
+    },
+  ],
+  "willow-10k-run|2026-09-27|10K": [
+    {
+      providerCode: "official-enthuse-willow",
+      providerName: "Enthuse official entry",
+      entryUrl: "https://register.enthuse.com/ps/event/Willow10K2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://www.willowfoundation.org.uk/events/willow10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Willow links directly to Enthuse registration. Hatfield House lists 10K entry at £25 and a £50 minimum sponsorship pledge; the 10K starts at 11:00.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/willow-10k-run",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T17:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/willow-10k-run",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route. Willow's official page and Enthuse are authoritative for entry and the corrected 11:00 start.",
     },
   ],
 };

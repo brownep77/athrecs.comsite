@@ -22,6 +22,7 @@ import {
 export const eventSlugAliases: Readonly<Record<string, string>> = {
   "rb-dirt-half-challenge": "dirt-half-challenge",
   "rb-glentress-winter-half-marathon-10k-trail-races": "glentress-winter-trail-races",
+  "round-the-lakes-summer-special": "round-the-lakes",
   "well-run-10k": "far-peak-10k-half-marathon",
 };
 
