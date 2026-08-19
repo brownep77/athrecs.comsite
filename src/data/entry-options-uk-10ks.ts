@@ -2800,6 +2800,48 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "runABC provisionally lists Sunday 4 October and a 10:30 start at Victoria Park, but Middlesex County AA's current 2026 page still says the 10K date is TBC in September and exposes no 2026 checkout. The race is therefore retained as TBC until the county association publishes final details.",
   },
+  "morley-10k|2026-10-04|10K": {
+    startTime: "09:00",
+    entryUrl: "https://racebest.com/races/4te96",
+    source: "https://www.morleyrunningclub.com/morley10km",
+    notes:
+      "Morley Running Club and the live RaceBest checkout confirm a 09:00 start on Sunday 4 October, correcting the imported 08:00 time. The fifth Mighty Morley 10K uses a UKA-licensed, fully closed-road course around Morley town centre with an entry limit of 1,555.",
+  },
+  "mornington-chasers-regents-park-10k-october|2026-10-04|10K": {
+    startTime: "09:00",
+    entryUrl: "https://events.kronosports.uk/cpdkivn",
+    source: "https://www.regentsparkraces.co.uk/",
+    notes:
+      "The official Regent's Park race calendar confirms the Mornington Chasers Winter Series opener at 09:00 on Sunday 4 October, correcting the imported 08:00 time. The chip-timed, accurately measured course uses three mostly flat laps wholly within the park.",
+  },
+  "mother-tuckers-10k|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.somerac.org.uk/runtuckers",
+    source: "https://www.somerac.org.uk/runtuckers",
+    notes:
+      "Somer AC and the Somerset Series confirm a 10:00 start on Sunday 4 October, correcting the imported 09:00 time. The challenging, predominantly off-road route starts at Tucker's Grave Inn and crosses countryside around Hassage and Wellow; a separate junior race precedes it.",
+  },
+  "portsmouth-rnli-10k|2026-10-04|10K": {
+    startTime: "09:30",
+    entryUrl: "https://fitprorob.enthuse.com/ps/event/PiecesOfEight2026andBayside10k",
+    source: "https://runabc.co.uk/portsmouth-rnli-10k",
+    notes:
+      "The current organiser-linked page and TimeOutdoors confirm a 09:30 start on Sunday 4 October, correcting the imported 08:30 time. The Bayside 10K shares a coastal event from Bayside Cabin with the Pieces of Eight trail race and Mini Mile Pirate Run.",
+  },
+  "raynford-10k|2026-10-04|10K": {
+    startTime: "10:30",
+    entryUrl: "https://www.webscorer.com/register?pid=1&raceid=405290",
+    source: "https://www.therainford10k.co.uk/",
+    notes:
+      "Rainford Runners & Multisport confirms a 10:30 start on Sunday 4 October, correcting the imported 09:30 time. The UKA-certified 10K starts and finishes at Rainford High School and uses closed roads, the linear park and local trails, after a 09:45 fun run.",
+  },
+  "ross-river-10k|2026-10-04|10K": {
+    startTime: "09:00",
+    entryUrl: "https://leapingdeerevents.x10.bz/Rossenter.html",
+    source: "https://leapingdeerevents.x10.bz/Rossriver10k.html",
+    notes:
+      "Leaping Deer Events confirms that the race was postponed to Sunday 4 October and starts at 09:00, correcting the imported 08:00 time. The beginner-friendly, off-road out-and-back follows the River Wye from Ross-on-Wye Bandstand and costs £14.99 online.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -6942,6 +6984,93 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Middlesex County AA's traditional three-lap 10K uses traffic-free park footpaths in association with Victoria Park Harriers & Tower Hamlets AC. The 2026 date and entry route remain awaiting official confirmation.",
     organiser: "Middlesex County Athletics Association",
     website: "https://middlesexaa.org.uk/",
+  },
+  "morley-10k": {
+    name: "Mighty Morley 10K",
+    city: "Morley",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Morley town centre, Wide Lane and Morley Bottoms",
+    surface: "Road",
+    distances: ["10K", "2 x 5K relay"],
+    summary: "Mighty Morley 10K — an undulating closed-road community race around Morley.",
+    description:
+      "Morley Running Club and Morley Town Council stage a not-for-profit town-centre race with two out-and-back sections, a distinctive three-way crossover at Morley Bottoms, chip timing, pacers and sustainable finisher medals.",
+    organiser: "Morley Running Club / Morley Town Council",
+    website: "https://www.morleyrunningclub.com/morley10km",
+  },
+  "mornington-chasers-regents-park-10k-october": {
+    name: "Mornington Chasers Regent's Park 10K — October",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Chester Road and Regent's Park",
+    surface: "Road",
+    distances: ["10K", "3-person relay"],
+    summary:
+      "Mornington Chasers Regent's Park 10K — the opening race of London's long-running winter series.",
+    description:
+      "The chip-timed, accurately measured race uses three traffic-free laps wholly within Regent's Park, with kilometre markers, a water station, baggage area and an optional three-person relay format.",
+    organiser: "Mornington Chasers / Krono Sports",
+    website: "https://www.regentsparkraces.co.uk/",
+  },
+  "mother-tuckers-10k": {
+    name: "Mother Tuckers 10K & Little Tuckers 3K",
+    city: "Faulkland",
+    county: "Somerset",
+    country: "England",
+    area: "Tucker's Grave Inn, Hassage and Wellow countryside",
+    surface: "Trail",
+    distances: ["10K", "3K"],
+    summary: "Mother Tuckers 10K — a challenging multi-terrain race from a historic Somerset inn.",
+    description:
+      "Somer AC's predominantly off-road course crosses scenic countryside around Hassage and Wellow, linked by short sections of quiet lane, with a separate Little Tuckers junior race before the main event.",
+    organiser: "Somer Athletic Club",
+    website: "https://www.somerac.org.uk/runtuckers",
+  },
+  "portsmouth-rnli-10k": {
+    name: "Pieces of Eight & Bayside 10K",
+    city: "Alverstoke",
+    county: "Hampshire",
+    country: "England",
+    area: "Bayside Cabin, Stokes Bay and Gosport waterfront",
+    surface: "Mixed",
+    distances: ["10K", "8M", "1M"],
+    summary:
+      "Pieces of Eight & Bayside 10K — pirate-themed coastal races from Stokes Bay in Gosport.",
+    description:
+      "Fit Pro Rob's event combines a beginner-friendly Bayside 10K, the eight-mile Pieces of Eight trail and a Mini Mile on coastal paths and promenade sections with Solent and harbour views.",
+    organiser: "Fit Pro Rob / Robert Piggott",
+    website: "https://fitprorob.enthuse.com/ps/event/PiecesOfEight2026andBayside10k",
+  },
+  "raynford-10k": {
+    name: "Rainford 10K & Fun Run",
+    city: "Rainford",
+    county: "Merseyside",
+    country: "England",
+    area: "Rainford High School, Rainford Linear Park and village trails",
+    surface: "Mixed",
+    distances: ["10K", "1K"],
+    summary:
+      "Rainford 10K — a closed-road and trail community race supporting charities in memory of George Faulkner.",
+    description:
+      "Rainford Runners & Multisport stages a chip-timed, UKA-certified route from the high school through the linear park and village trails, with a school-ground fun run before the main 10K.",
+    organiser: "Rainford Runners & Multisport / BeUrBest",
+    website: "https://www.therainford10k.co.uk/",
+  },
+  "ross-river-10k": {
+    name: "Ross River 10K",
+    city: "Ross-on-Wye",
+    county: "Herefordshire",
+    country: "England",
+    area: "Ross-on-Wye Bandstand and River Wye banks",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Ross River 10K — a beginner-friendly riverside trail race from Ross-on-Wye.",
+    description:
+      "Leaping Deer Events' off-road out-and-back follows the banks of the River Wye from the town bandstand, combining accessible running with riverside scenery and wildlife before a medal finish.",
+    organiser: "Leaping Deer Events",
+    website: "https://leapingdeerevents.x10.bz/Rossriver10k.html",
   },
 };
 
@@ -14956,6 +15085,187 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC lists 4 October at 10:30 in Victoria Park and labels an entry route, but the organiser has not confirmed those 2026 details. Use this only as provisional information, not evidence that entries are open.",
+    },
+  ],
+  "morley-10k|2026-10-04|10K": [
+    {
+      providerCode: "racebest-mighty-morley-2026",
+      providerName: "RaceBest official checkout",
+      entryUrl: "https://racebest.com/races/4te96",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-02T18:00:00+01:00",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://racebest.com/races/4te96",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live checkout lists £19 affiliated and £21 unaffiliated entry, or £31.50 to £33.50 with the optional T-shirt and buff. It reports places available and no entry on the day.",
+    },
+    {
+      providerCode: "official-morley-running-club",
+      providerName: "Morley Running Club official page",
+      entryUrl: "https://www.morleyrunningclub.com/morley10km",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://www.morleyrunningclub.com/morley10km",
+      isVerified: true,
+      notes:
+        "The organising club confirms the 4 October date, closed-road town course and UKA licence and links directly to the current RaceBest checkout.",
+    },
+  ],
+  "mornington-chasers-regents-park-10k-october|2026-10-04|10K": [
+    {
+      providerCode: "krono-mornington-october-2026",
+      providerName: "Krono Sports official checkout",
+      entryUrl: "https://events.kronosports.uk/cpdkivn",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://www.regentsparkraces.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official race calendar's Buy Tickets action opens this Krono Sports checkout for the 4 October Winter Series opener. The organiser lists a £26 base fee plus administration.",
+    },
+    {
+      providerCode: "letsdothis-mornington-october",
+      providerName: "Let's Do This entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/regents-park-10k-by-mornington-chasers-october-193770",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/regents-park-10k-by-mornington-chasers-october-193770",
+      isVerified: true,
+      notes:
+        "Let's Do This offers secondary registration from £26 to £28 and confirms the 09:00 start, three-lap park course and minimum age of 15.",
+    },
+  ],
+  "mother-tuckers-10k|2026-10-04|10K": [
+    {
+      providerCode: "official-somer-ac-mother-tuckers",
+      providerName: "Somer AC official event page",
+      entryUrl: "https://www.somerac.org.uk/runtuckers",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://www.somerac.org.uk/runtuckers",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Somer AC confirms the 2026 race and links to RaceNation, but the linked checkout still exposes the closed 2025 ticket set. This is therefore event information, not a claim that 2026 entry is open.",
+    },
+    {
+      providerCode: "somerset-series-mother-tuckers",
+      providerName: "Somerset Series event information",
+      entryUrl: "https://www.somersetseries.com/mother-tucker-10k",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://www.somersetseries.com/mother-tucker-10k",
+      isVerified: true,
+      notes:
+        "The series page confirms 4 October, 10:00 and Tucker's Grave Inn but says 2026 online-entry details will be added when available. Check again before attempting to book.",
+    },
+  ],
+  "portsmouth-rnli-10k|2026-10-04|10K": [
+    {
+      providerCode: "enthuse-pieces-eight-bayside-2026",
+      providerName: "Enthuse official checkout",
+      entryUrl: "https://fitprorob.enthuse.com/ps/event/PiecesOfEight2026andBayside10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/portsmouth-rnli-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "runABC links this organiser-controlled Enthuse page as the event website. The 10K is listed from £15 to £25 across current providers; confirm the selected ticket total at checkout.",
+    },
+    {
+      providerCode: "timeoutdoors-bayside-10k",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/pieces-of-eight-and-bayside-10k/bayside-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/pieces-of-eight-and-bayside-10k/bayside-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors offers secondary 10K booking from £15 to £25 and confirms the 09:30 start, Bayside Cabin venue, age 15 minimum and chip timing.",
+    },
+  ],
+  "raynford-10k|2026-10-04|10K": [
+    {
+      providerCode: "webscorer-rainford-2026",
+      providerName: "Webscorer official checkout",
+      entryUrl: "https://www.webscorer.com/register?pid=1&raceid=405290",
+      entryType: "official",
+      status: "open",
+      priceAmount: 21,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://www.therainford10k.co.uk/registration",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The event's registration route points to this Webscorer race. Current organiser information lists early-bird entry at £21 for affiliated runners and £23 for non-club runners.",
+    },
+    {
+      providerCode: "timeoutdoors-rainford-10k",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/rainford-10k-fun-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/rainford-10k-fun-run",
+      isVerified: true,
+      notes:
+        "TimeOutdoors supplies a secondary Enter Now route and lists the 10K at £19 to £21, with a 10:30 start, age 16 minimum and separate 09:45 fun run.",
+    },
+  ],
+  "ross-river-10k|2026-10-04|10K": [
+    {
+      providerCode: "official-leaping-deer-ross-entry",
+      providerName: "Leaping Deer Events official entry",
+      entryUrl: "https://leapingdeerevents.x10.bz/Rossenter.html",
+      entryType: "official",
+      status: "open",
+      priceAmount: 14.99,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://leapingdeerevents.x10.bz/Rossriver10k.html",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's current event page links to this PayPal entry form, lists £14.99 online entry and confirms that the race was postponed to 4 October with a 09:00 start.",
+    },
+    {
+      providerCode: "runabc-ross-river-2026",
+      providerName: "runABC event information",
+      entryUrl: "https://runabc.co.uk/ross-river-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T04:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/ross-river-10k",
+      isVerified: true,
+      notes:
+        "runABC independently confirms the revised 4 October date, 09:00 start, Ross-on-Wye Bandstand venue and organiser Nathan Poolton; official checkout remains through Leaping Deer Events.",
     },
   ],
 };
