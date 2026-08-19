@@ -3705,6 +3705,37 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     entryUrl: "https://totalracetiming.co.uk/race/708",
     source: "https://www.goodrunningevents.co.uk/duxford-dash",
   },
+  "monsal-trail-half-marathon-autumn-saturday|2026-10-24|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    notes:
+      "Nice Work confirms both Saturday distances start at 10:00, correcting the imported 09:00 placeholder. The traffic-free out-and-back follows the former Midland Railway from Bakewell Station; 10K runners turn inside the first tunnel and return over mixed tarmac and hard trail.",
+  },
+  "monsal-trail-half-marathon-autumn-saturday|2026-10-24|Half": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+  },
+  "newton-road-races|2026-10-24|10K": {
+    startTime: undefined,
+    status: "TBC",
+    entryUrl: "https://www.newton-roadrunners.com/",
+    source: "https://www.newton-roadrunners.com/",
+    notes:
+      "No current Newton Road Runners or Scottish Athletics source confirms the imported 24 October 2026 edition. The latest verified race was on 8 November 2025 at noon from Westburn Hall. This record is retained as TBC, with no start time or open-entry claim, until the club publishes a 2026 event.",
+  },
+  "brigg-10k|2026-10-25|10K": {
+    startTime: "09:30",
+    entryUrl: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+    source: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+    notes:
+      "Curly's Athletes confirms the standard 10K starts at 09:30 on Sunday 25 October, with the Military Challenge following at 09:45. The officially measured, UKA-licensed road race starts and finishes in Brigg Market Place and follows flat, closed country roads.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -9341,6 +9372,51 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Imperial War Museums and Good Running Events stage one-lap 5K and two-lap 10K races on Duxford's live airfield runway, closed to aircraft for the event. Places include chip timing, free parking, museum admission, photography and a themed finisher medal.",
     organiser: "Imperial War Museums with Good Running Events",
     website: "https://www.goodrunningevents.co.uk/duxford-dash",
+  },
+  "monsal-trail-half-marathon-autumn-saturday": {
+    name: "Monsal Trail October Half Marathon & 10K — Saturday",
+    city: "Bakewell",
+    county: "Derbyshire",
+    country: "England",
+    area: "Bakewell Station and Monsal Trail",
+    surface: "Trail",
+    distances: ["10K", "Half"],
+    summary:
+      "Monsal Trail Saturday races — traffic-free autumn running through Peak District tunnels.",
+    description:
+      "Nice Work's Saturday 10K and half marathon start at Bakewell Station and follow the former Midland Railway through Peak District countryside, tunnels and across Monsal Viaduct. The shared trail is predominantly flat, traffic-free and surfaced with tarmac and hard track.",
+    organiser: "Nice Work",
+    website:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+  },
+  "newton-road-races": {
+    name: "Newton Road Races 3K & 10K",
+    city: "Cambuslang",
+    county: "South Lanarkshire",
+    country: "Scotland",
+    area: "Westburn Hall and Clyde walkway",
+    surface: "Road",
+    distances: ["3K", "10K"],
+    summary:
+      "Newton Road Races — a measured memorial event beside the Clyde, with its next date TBC.",
+    description:
+      "Newton Road Runners created the 3K and 10K in memory of club member Cat Gaskell. The latest verified edition used a fast out-and-back on the Clyde path from Westburn Hall, with chip timing and a Scottish Athletics licence; the imported 2026 date has not yet been confirmed by the club.",
+    organiser: "Newton Road Runners",
+    website: "https://www.newton-roadrunners.com/",
+  },
+  "brigg-10k": {
+    name: "Brigg Poppy 10K & Military Challenge",
+    city: "Brigg",
+    county: "North Lincolnshire",
+    country: "England",
+    area: "Brigg Market Place and closed country roads",
+    surface: "Road",
+    distances: ["10K", "10K Military Challenge", "Virtual 10K"],
+    summary: "Brigg Poppy 10K — a fast town-centre race and weighted military challenge.",
+    description:
+      "Curly's Athletes stages an officially measured and UKA-licensed 10K from Brigg Market Place over flat, closed country roads. A separate Military Challenge uses the same course with weighted packs, and the event supports the Royal British Legion Poppy Appeal.",
+    organiser: "Curly's Athletes",
+    website: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
   },
 };
 
@@ -20448,6 +20524,98 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "The organiser confirms the 25 October date, two-lap 10K format, included parking and museum admission and links to Total Race Timing. Join the official waiting list rather than attempting an older checkout.",
+    },
+  ],
+  "monsal-trail-half-marathon-autumn-saturday|2026-10-24|10K": [
+    {
+      providerCode: "official-nice-work-monsal-saturday-2026",
+      providerName: "Nice Work official entry",
+      entryUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Nice Work lists the Saturday 10K as open from £28, with on-the-day entry at £30 only if space remains. Select Saturday 24 October rather than the Sunday race.",
+    },
+    {
+      providerCode: "worldsmarathons-monsal-saturday-2026",
+      providerName: "World's Marathons entry",
+      entryUrl:
+        "https://worldsmarathons.com/marathon/monsal-trail-october-half-marathon-10k-weekend",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 33,
+      priceCurrency: "EUR",
+      closesAt: "2026-10-23T23:59:00+01:00",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl:
+        "https://worldsmarathons.com/marathon/monsal-trail-october-half-marathon-10k-weekend",
+      isVerified: true,
+      notes:
+        "World's Marathons offers a separate Saturday 10K booking route at €33 and lists 23 October as its close date. Compare the final currency conversion and fees with Nice Work.",
+    },
+  ],
+  "newton-road-races|2026-10-24|10K": [
+    {
+      providerCode: "official-newton-road-runners-tbc",
+      providerName: "Newton Road Runners official site",
+      entryUrl: "https://www.newton-roadrunners.com/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl: "https://www.newton-roadrunners.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The club has not published a 2026 Newton Road Races entry page. Do not use an older checkout or arrange travel against the imported 24 October date.",
+    },
+    {
+      providerCode: "runabc-newton-road-races-tbc",
+      providerName: "runABC status guide",
+      entryUrl: "https://runabc.co.uk/newton-road-races",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/newton-road-races",
+      isVerified: true,
+      notes:
+        "runABC's latest detailed event page is for 8 November 2025, not the imported 2026 date. Await confirmation from Newton Road Runners.",
+    },
+  ],
+  "brigg-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-curlys-brigg-poppy-2026",
+      providerName: "Curly's Athletes official entry",
+      entryUrl: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Curly's lists standard 10K and Military Challenge entry at £26, with a £2 discount for UKA members and armed-forces entrants, and links its live EtchRock checkout.",
+    },
+    {
+      providerCode: "runabc-brigg-poppy-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/brigg-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T12:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/brigg-10k",
+      isVerified: true,
+      notes:
+        "runABC provides an alternative event guide. Use Curly's official page to choose between the standard 10K, Military Challenge and virtual event.",
     },
   ],
 };
