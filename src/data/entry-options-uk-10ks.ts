@@ -499,6 +499,42 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-17",
     toDate: "2026-10-18",
   },
+  {
+    seriesSlug: "beachy-head-marathon",
+    distance: "10K",
+    fromDate: "2026-10-23",
+    toDate: "2026-10-24",
+  },
+  {
+    seriesSlug: "beachy-head-marathon",
+    distance: "Marathon",
+    fromDate: "2026-10-23",
+    toDate: "2026-10-24",
+  },
+  {
+    seriesSlug: "beachy-head-marathon",
+    distance: "Ultra",
+    fromDate: "2026-10-23",
+    toDate: "2026-10-24",
+  },
+  {
+    seriesSlug: "clock-change-challenge-october",
+    distance: "10K",
+    fromDate: "2026-10-24",
+    toDate: "2026-10-25",
+  },
+  {
+    seriesSlug: "imperial-war-museum-duxford-dash-5k-10k",
+    distance: "10K",
+    fromDate: "2026-10-24",
+    toDate: "2026-10-25",
+  },
+  {
+    seriesSlug: "imperial-war-museum-duxford-dash-5k-10k",
+    distance: "5K",
+    fromDate: "2026-10-24",
+    toDate: "2026-10-25",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -3611,6 +3647,7 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
   },
   "runabc-west-acre-wild-10k|2026-10-18|10K": {
     startTime: "10:30",
+    status: "Closed",
     entryUrl: "https://totalracetiming.co.uk/race/668",
     source: "https://totalracetiming.co.uk/race/668",
     notes:
@@ -3629,6 +3666,44 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://clubspark.englandathletics.org/WigtonRoadRunners",
     notes:
       "Wigton Road Runners' England Athletics-hosted club page confirms the Sunday 18 October charity race and its official Events Up North booking route. The current race listing confirms a 10:00 start, correcting the imported 09:00 placeholder, from Barton Laws on a measured loop of paths and quiet undulating country roads.",
+  },
+  "beachy-head-marathon|2026-10-24|10K": {
+    startTime: "09:15",
+    entryUrl: "https://www.visiteastbourne.com/marathon/enter/10k",
+    source: "https://www.visiteastbourne.com/marathon/enter/faqs",
+    notes:
+      "Eastbourne Borough Council confirms the Beachy Head 10K is on Saturday 24 October at 09:15, correcting both the imported 23 October date and 23:00 placeholder. The two-hour trail race starts on Dukes Drive, loops over the South Downs to Belle Tout Lighthouse and returns along the coast.",
+  },
+  "beachy-head-marathon|2026-10-24|Marathon": {
+    startTime: "08:45",
+    entryUrl: "https://www.visiteastbourne.com/marathon/enter/marathon",
+    source: "https://www.visiteastbourne.com/marathon/enter/faqs",
+  },
+  "beachy-head-marathon|2026-10-24|Ultra": {
+    startTime: "07:40",
+    entryUrl: "https://www.visiteastbourne.com/marathon/enter/ultramarathon",
+    source: "https://www.visiteastbourne.com/marathon/enter/faqs",
+  },
+  "clock-change-challenge-october|2026-10-25|10K": {
+    startTime: "11:00",
+    entryUrl: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+    source: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+    notes:
+      "Wiltshire Council's Eventrac page confirms the 10K is on Sunday 25 October at 11:00, correcting the imported Saturday date and 23:00 placeholder. The accurately measured out-and-back follows quiet country lanes and is Race 8 of the 2026 Wiltshire Road Race League.",
+  },
+  "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K": {
+    startTime: "09:30",
+    status: "Closed",
+    entryUrl: "https://totalracetiming.co.uk/race/708",
+    source: "https://www.goodrunningevents.co.uk/duxford-dash",
+    notes:
+      "Good Running Events and Total Race Timing confirm Sunday 25 October at 09:30, correcting the imported Saturday date and 23:00 placeholder. The two-lap runway 10K is full, but its free waiting list remains available. Entry includes event parking and IWM Duxford museum admission.",
+  },
+  "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|5K": {
+    startTime: "09:30",
+    status: "Closed",
+    entryUrl: "https://totalracetiming.co.uk/race/708",
+    source: "https://www.goodrunningevents.co.uk/duxford-dash",
   },
 };
 
@@ -9224,6 +9299,48 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Wigton Road Runners' charity 10K starts near Barton Laws and follows a single measured loop over footpaths and quiet, undulating country roads before finishing in Phoenix Park. The event provides chip timing, a mid-course water point and a medal, with proceeds supporting local charities.",
     organiser: "Wigton Road Runners",
     website: "https://clubspark.englandathletics.org/WigtonRoadRunners",
+  },
+  "beachy-head-marathon": {
+    name: "Beachy Head Marathon, Ultra, Half & 10K",
+    city: "Eastbourne",
+    county: "East Sussex",
+    country: "England",
+    area: "Dukes Drive, South Downs and Beachy Head coast",
+    surface: "Trail",
+    distances: ["10K", "Half", "Marathon", "Ultra"],
+    summary: "Beachy Head races — challenging coastal trails over the South Downs from Eastbourne.",
+    description:
+      "Eastbourne Borough Council's Beachy Head weekend includes a 10K, half marathon, marathon and 52.6K ultra. The shorter race loops from Dukes Drive towards Belle Tout Lighthouse, while the longer courses cross the South Downs and Seven Sisters before returning along the coast.",
+    organiser: "Eastbourne Borough Council Events Team",
+    website: "https://www.visiteastbourne.com/marathon",
+  },
+  "clock-change-challenge-october": {
+    name: "Clock Change Challenge Autumn",
+    city: "Calne",
+    county: "Wiltshire",
+    country: "England",
+    area: "Calne Community Campus and quiet country lanes",
+    surface: "Road",
+    distances: ["5K", "10K", "1.5K Fun Run"],
+    summary: "Clock Change Challenge — measured autumn road races from Calne Community Campus.",
+    description:
+      "Wiltshire Council's autumn programme combines accurately measured 5K and 10K road races with a 1.5K fun run. The flat out-and-back courses use quiet country lanes, include chip timing and medals, and the 10K closes the 2026 Wiltshire Road Race League.",
+    organiser: "Wiltshire Council",
+    website: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+  },
+  "imperial-war-museum-duxford-dash-5k-10k": {
+    name: "Duxford Dash 5K, 10K & Family Mile",
+    city: "Duxford",
+    county: "Cambridgeshire",
+    country: "England",
+    area: "IWM Duxford airfield runway",
+    surface: "Road",
+    distances: ["5K", "10K", "1mi Family"],
+    summary: "Duxford Dash — fast runway races around the historic IWM airfield.",
+    description:
+      "Imperial War Museums and Good Running Events stage one-lap 5K and two-lap 10K races on Duxford's live airfield runway, closed to aircraft for the event. Places include chip timing, free parking, museum admission, photography and a themed finisher medal.",
+    organiser: "Imperial War Museums with Good Running Events",
+    website: "https://www.goodrunningevents.co.uk/duxford-dash",
   },
 };
 
@@ -20249,6 +20366,88 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC confirms the 18 October date, 10:00 start, Barton Laws race HQ and CA7 9QY postcode and provides an entry route. Prefer the club-linked Events Up North checkout.",
+    },
+  ],
+  "beachy-head-marathon|2026-10-24|10K": [
+    {
+      providerCode: "official-eastbourne-beachy-head-10k-2026",
+      providerName: "Beachy Head official entry",
+      entryUrl: "https://www.visiteastbourne.com/marathon/enter/10k",
+      entryType: "official",
+      status: "open",
+      closesAt: "2026-10-23T12:00:00+01:00",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.visiteastbourne.com/marathon/enter/10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Eastbourne Borough Council's official 10K page contains the live entry route. Entries close at capacity or at noon on 23 October, and there is no race-day entry.",
+    },
+    {
+      providerCode: "runabc-beachy-head-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/beachy-head-marathon",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/beachy-head-marathon",
+      isVerified: true,
+      notes:
+        "runABC provides an alternative event guide. Use the council's official page for the corrected Saturday date, 09:15 start and final entry terms.",
+    },
+  ],
+  "clock-change-challenge-october|2026-10-25|10K": [
+    {
+      providerCode: "official-eventrac-clock-change-autumn-2026",
+      providerName: "Wiltshire Council official entry",
+      entryUrl: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://wiltshirecouncil.eventrac.co.uk/e/autumn-clock-change-challenge-10454",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The council's live Eventrac page is accepting entries for the 25 October programme and confirms the 11:00 10K start. Day entries are possible only if the 400-runner limit has not been reached.",
+    },
+    {
+      providerCode: "runabc-clock-change-autumn-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/clock-change-challenge-october",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/clock-change-challenge-october",
+      isVerified: true,
+      notes:
+        "runABC confirms the Calne venue and provides an entry route. Use Wiltshire Council's Eventrac page for the corrected date, start time and current capacity.",
+    },
+  ],
+  "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-total-race-timing-duxford-2026",
+      providerName: "Duxford Dash official waiting list",
+      entryUrl: "https://totalracetiming.co.uk/race/708",
+      entryType: "official",
+      status: "waitlist",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://totalracetiming.co.uk/race/708",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The 10K has reached its limit and Total Race Timing now offers a free waiting list. The sold-out individual 10K price was £28.50 including its £1.20 administration fee.",
+    },
+    {
+      providerCode: "official-good-running-duxford-2026",
+      providerName: "Good Running Events information",
+      entryUrl: "https://www.goodrunningevents.co.uk/duxford-dash",
+      entryType: "official",
+      status: "waitlist",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.goodrunningevents.co.uk/duxford-dash",
+      isVerified: true,
+      notes:
+        "The organiser confirms the 25 October date, two-lap 10K format, included parking and museum admission and links to Total Race Timing. Join the official waiting list rather than attempting an older checkout.",
     },
   ],
 };
