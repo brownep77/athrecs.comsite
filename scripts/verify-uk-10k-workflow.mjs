@@ -112,6 +112,26 @@ for (const detail of Object.values(progress.checkpoints)) {
       typeof resolvedKey === "string" && resolvedKey.split("|").length === 3,
       `invalid resolved key for ${sourceKey}`,
     );
+    const [, sourceDate] = sourceKey.split("|");
+    const [, resolvedDate] = resolvedKey.split("|");
+    if (sourceDate !== resolvedDate) {
+      const overrideStart = options.indexOf(`  "${sourceKey}": {`);
+      assert(
+        overrideStart >= 0,
+        `date-corrected queue race has no source-key edition override: ${sourceKey}`,
+      );
+      if (overrideStart >= 0) {
+        const nextOverride = options.indexOf('\n  "', overrideStart + sourceKey.length + 7);
+        const overrideBlock = options.slice(
+          overrideStart,
+          nextOverride < 0 ? options.length : nextOverride,
+        );
+        assert(
+          overrideBlock.includes(`date: "${resolvedDate}"`),
+          `${sourceKey} override does not set corrected date ${resolvedDate}`,
+        );
+      }
+    }
     resolvedQueueKeys.set(sourceKey, resolvedKey);
   }
 }
