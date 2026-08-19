@@ -2421,6 +2421,58 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Willow 10K starts at 11:00 on Sunday 27 September in the grounds of Hatfield House. Runners and walkers have two hours to complete the scenic fundraising course, with a medal for every finisher.",
   },
+  "markfield-10k|2026-09-27|10K": {
+    status: "TBC",
+    startTime: "09:00",
+    entryUrl: "https://www.beaumontrc.co.uk/markfield10k/",
+    source: "https://www.beaumontrc.co.uk/markfield10k/",
+    notes:
+      "Markfield 10K starts at 09:00 on Sunday 27 September from South Charnwood High School. Beaumont Running Club confirms this is a closed Leicestershire Road Running League race for members of affiliated LRRL clubs; check with the club for the entry process.",
+  },
+  "mctf-run-the-track-5k-10k-wimbledon|2026-09-27|10K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/ocEFFX",
+    source: "https://bookitzone.com/dean_ogrady_1/ocEFFX",
+    notes:
+      "MCT Run The Track Wimbledon starts at 14:30 on Sunday 27 September. The chip-timed 10K uses 25 precisely measured laps of Wimbledon Park Athletics Track, with separate pace bands and a bespoke medal.",
+  },
+  "mctf-run-the-track-5k-10k-wimbledon|2026-09-27|5K": {
+    startTime: "14:30",
+    entryUrl: "https://bookitzone.com/dean_ogrady_1/ocEFFX",
+    source: "https://bookitzone.com/dean_ogrady_1/ocEFFX",
+  },
+  "stop-me|2026-09-27|10K": {
+    startTime: "08:00",
+    entryUrl:
+      "https://www.timeoutdoors.com/events/sobo-series-volume-4-stop-me-if-you-think-youve-heard-this-one-before",
+    source:
+      "https://www.timeoutdoors.com/events/sobo-series-volume-4-stop-me-if-you-think-youve-heard-this-one-before",
+    notes:
+      "Stop Me is a seven-hour choose-your-distance event starting at 08:00 on Sunday 27 September on Southbourne's traffic-free promenade. Runners complete flat 5.3K out-and-back laps and may finish from 5K through ultra distance.",
+  },
+  "tadley-runners-10|2026-09-27|10K": {
+    status: "Closed",
+    startTime: "10:00",
+    entryUrl: "https://tadleytens.uk/",
+    source: "https://tadleytens.uk/",
+    notes:
+      "Tadley Runners has announced that the Tadley Tens will not take place in 2026 because of busier roads and increased safety requirements. The organiser's cancellation notice overrides stale entry copy elsewhere on the same page.",
+  },
+  "the-race-on-the-chase|2026-09-27|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.timeoutdoors.com/events/race-on-the-chase/10k",
+    source: "https://www.timeoutdoors.com/events/race-on-the-chase/10k",
+    notes:
+      "Race on the Chase 10K starts at 10:00 on Sunday 27 September from Salisbury Racecourse. The undulating trail race climbs about 440 feet through downland, ancient tracks, woodland paths and nature reserve countryside.",
+  },
+  "the-river-run-2024|2026-09-27|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/266363?preferred=true&eventId=266363&occurrenceId=21111174857",
+    source: "https://runhappyrunhealthy.co.uk/event/the-river-run-2026-river-darent-kent/",
+    notes:
+      "The River Run starts at 09:00 on Sunday 27 September in Dartford Central Park. Its point-to-point 10K follows the River Darent to Eynsford, with a return shuttle, finisher medal, snack and water.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -6057,6 +6109,92 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "The Willow Foundation welcomes runners and walkers into the private grounds of Hatfield House for its annual fundraiser, with a 10K and 5K at 11:00 and a 1.8K family fun run at 10:00.",
     organiser: "Willow Foundation",
     website: "https://www.willowfoundation.org.uk/events/willow10k/",
+  },
+  "markfield-10k": {
+    name: "Markfield 10K",
+    city: "Markfield",
+    county: "Leicestershire",
+    country: "England",
+    area: "South Charnwood High School, Markfield and Thornton",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Markfield 10K — an LRRL road race through Markfield and Thornton for member clubs.",
+    description:
+      "Beaumont Running Club hosts this undulating single-lap road race past Thornton Reservoir. Entry is restricted to members of clubs affiliated to the Leicestershire Road Running League.",
+    organiser: "Beaumont Running Club",
+    website: "https://www.beaumontrc.co.uk/markfield10k/",
+  },
+  "mctf-run-the-track-5k-10k-wimbledon": {
+    name: "MCT Run The Track 5K & 10K Wimbledon",
+    city: "Wimbledon",
+    county: "Greater London",
+    country: "England",
+    area: "Wimbledon Park Athletics Track",
+    surface: "Track",
+    distances: ["5K", "10K"],
+    summary: "MCT Run The Track Wimbledon — measured 5K and 10K track races with pace-band waves.",
+    description:
+      "MCTF stages traffic-free 5K and 10K races on Wimbledon Park's athletics track, with per-lap chip splits, overall timing, pace-group choices and a bespoke series medal.",
+    organiser: "MCTF Run The Track",
+    website: "https://bookitzone.com/dean_ogrady_1/ocEFFX",
+  },
+  "stop-me": {
+    name: "SoBo Series Volume 4 — Stop Me",
+    city: "Bournemouth",
+    county: "Dorset",
+    country: "England",
+    area: "Southbourne Beach promenade",
+    surface: "Road",
+    distances: ["5K", "10K", "Half", "Marathon", "Ultra"],
+    summary: "Stop Me — a seven-hour, choose-your-distance promenade run at Southbourne Beach.",
+    description:
+      "Long Player Running's fourth SoBo Series event uses flat, traffic-free 5.3K out-and-back laps on the Southbourne promenade, allowing participants to choose a distance from 5K to ultra.",
+    organiser: "Long Player Running",
+    website:
+      "https://www.timeoutdoors.com/events/sobo-series-volume-4-stop-me-if-you-think-youve-heard-this-one-before",
+  },
+  "tadley-runners-10": {
+    name: "Tadley Tens",
+    city: "Tadley",
+    county: "Hampshire",
+    country: "England",
+    area: "Hurst Community College, Baughurst",
+    surface: "Road",
+    distances: ["10K", "10mi"],
+    summary: "Tadley Tens — the 2026 10K and 10-mile road races have been cancelled.",
+    description:
+      "Tadley Runners has announced that the 2026 event will not take place while the club considers how to meet increased road-safety requirements on the Hampshire–Berkshire border routes.",
+    organiser: "Tadley Runners",
+    website: "https://tadleytens.uk/",
+  },
+  "the-race-on-the-chase": {
+    name: "Race on the Chase",
+    city: "Salisbury",
+    county: "Wiltshire",
+    country: "England",
+    area: "Salisbury Racecourse and Cranborne Chase",
+    surface: "Trail",
+    distances: ["10K", "Half", "Marathon"],
+    summary:
+      "Race on the Chase — scenic trail races over the downland and ancient tracks of Cranborne Chase.",
+    description:
+      "Tricounties Trail Running stages 10K, half-marathon and marathon routes from Salisbury Racecourse through undulating countryside, woodland paths and nature reserve trails.",
+    organiser: "Tricounties Trail Running",
+    website: "https://www.timeoutdoors.com/events/race-on-the-chase/10k",
+  },
+  "the-river-run-2024": {
+    name: "The River Run 2026",
+    city: "Dartford",
+    county: "Kent",
+    country: "England",
+    area: "Dartford Central Park and the River Darent",
+    surface: "Trail",
+    distances: ["5K", "10K", "18K"],
+    summary: "The River Run — point-to-point 5K, 10K and 18K routes following the River Darent.",
+    description:
+      "RunHappyRunHealthy's community event starts in Dartford Central Park and follows the River Darent to separate finishes in South Darenth, Eynsford and Otford, with return shuttle transport.",
+    organiser: "RunHappyRunHealthy",
+    website: "https://runhappyrunhealthy.co.uk/event/the-river-run-2026-river-darent-kent/",
   },
 };
 
@@ -13036,6 +13174,181 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC provides a secondary event route. Willow's official page and Enthuse are authoritative for entry and the corrected 11:00 start.",
+    },
+  ],
+  "markfield-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-beaumont-markfield",
+      providerName: "Beaumont Running Club official information",
+      entryUrl: "https://www.beaumontrc.co.uk/markfield10k/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://www.beaumontrc.co.uk/markfield10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser confirms the 09:00 race but restricts entry to members of LRRL-affiliated Leicestershire clubs. No public checkout is currently shown; eligible runners should follow club instructions.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/markfield-10k",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/markfield-10k",
+      isVerified: true,
+      notes:
+        "runABC supplies a secondary event route. Beaumont Running Club is authoritative for eligibility and any club-managed entry process.",
+    },
+  ],
+  "mctf-run-the-track-5k-10k-wimbledon|2026-09-27|10K": [
+    {
+      providerCode: "official-bookitzone-mct-wimbledon",
+      providerName: "BookitZone official entry",
+      entryUrl: "https://bookitzone.com/dean_ogrady_1/ocEFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25.64,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://bookitzone.com/dean_ogrady_1/ocEFFX",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "BookitZone is accepting entries for three 10K pace bands at £25.64 affiliated or £28.12 unaffiliated, including fees. The 300-place event starts at 14:30.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/mctf-run-the-track-5k-10k-wimbledon",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/mctf-run-the-track-5k-10k-wimbledon",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary route. BookitZone is authoritative for the corrected 14:30 start, live prices, capacity and pace-band selection.",
+    },
+  ],
+  "stop-me|2026-09-27|10K": [
+    {
+      providerCode: "timeoutdoors-stop-me",
+      providerName: "TimeOutdoors entry",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/sobo-series-volume-4-stop-me-if-you-think-youve-heard-this-one-before",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 37.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/sobo-series-volume-4-stop-me-if-you-think-youve-heard-this-one-before",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "TimeOutdoors lists live entry at £37.50–£39.50 for Long Player Running's seven-hour event, with an 08:00 start and a choice of distance from 5K to ultra.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/stop-me",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/stop-me",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary entry route and lists the event under 10K. Participants actually choose their finish distance from repeated 5.3K promenade laps.",
+    },
+  ],
+  "tadley-runners-10|2026-09-27|10K": [
+    {
+      providerCode: "official-tadley-cancellation",
+      providerName: "Tadley Tens official notice",
+      entryUrl: "https://tadleytens.uk/",
+      entryType: "official",
+      status: "closed",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://tadleytens.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's prominent announcement says the Tadley Tens will not take place this year. Entry is closed; stale 'entries opening soon' copy lower on the page should be disregarded.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC cancellation listing",
+      entryUrl: "https://runabc.co.uk/tadley-runners-10",
+      entryType: "third_party",
+      status: "closed",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/tadley-runners-10",
+      isVerified: true,
+      notes:
+        "runABC independently marks the event postponed with no race this year, corroborating the organiser's cancellation notice.",
+    },
+  ],
+  "the-race-on-the-chase|2026-09-27|10K": [
+    {
+      providerCode: "timeoutdoors-race-on-chase",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/race-on-the-chase/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/race-on-the-chase/10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "TimeOutdoors lists the Tricounties Trail Running 10K open at £26, with a 10:00 start, minimum age 16 and roughly 440 feet of ascent.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/the-race-on-the-chase",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/the-race-on-the-chase",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route. TimeOutdoors is authoritative for the corrected 10:00 start, current price and availability.",
+    },
+  ],
+  "the-river-run-2024|2026-09-27|10K": [
+    {
+      providerCode: "official-runhappy-river",
+      providerName: "RunHappyRunHealthy official event page",
+      entryUrl: "https://runhappyrunhealthy.co.uk/event/the-river-run-2026-river-darent-kent/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://runhappyrunhealthy.co.uk/event/the-river-run-2026-river-darent-kent/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser confirms the 09:00 race and directs entry to its preferred Let's Do This occurrence. The 10K costs £28 and finishes in Eynsford before the return shuttle.",
+    },
+    {
+      providerCode: "letsdothis-river-darent",
+      providerName: "Let's Do This official booking route",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/266363?preferred=true&eventId=266363&occurrenceId=21111174857",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T19:00:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/the-river-run-2026-river-darent-kent-266363",
+      isVerified: true,
+      notes:
+        "RunHappyRunHealthy links directly to this preferred occurrence. Let's Do This currently shows the 5K, 10K and 18K registration choices at £28.",
     },
   ],
 };
