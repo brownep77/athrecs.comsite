@@ -3736,6 +3736,27 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Curly's Athletes confirms the standard 10K starts at 09:30 on Sunday 25 October, with the Military Challenge following at 09:45. The officially measured, UKA-licensed road race starts and finishes in Brigg Market Place and follows flat, closed country roads.",
   },
+  "cramond-promenade-5k-10k-half-marathon-october|2026-10-25|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.upandrunningevents.co.uk/events",
+    source: "https://www.upandrunningevents.co.uk/events",
+    notes:
+      "Up and Running Events confirms the October Cramond Promenade programme is on Sunday 25 October from 09:30 to 13:30 and links to its live booking partner. The 10K starts at 10:00 and follows a flat, chip-timed coastal route beside the Firth of Forth.",
+  },
+  "crewe-10k|2026-10-25|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+    source: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+    notes:
+      "RunThrough confirms a 09:00 start on Sunday 25 October from the Royal Arcade in Crewe town centre. The fully closed-road 10K is flat and chip timed, with 52 metres of elevation, free race photos and a 90-minute cut-off.",
+  },
+  "dh-river-run|2026-10-25|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.eventsupnorth.co.uk/event/2377",
+    source: "https://dhrunners.org/",
+    notes:
+      "DH Runners confirms its 2026 River Run is open and links directly to the official Events Up North checkout. The 10:00 race follows a fast out-and-back 10K beside the river from Denton Street, with registration and post-race facilities at Denton Holme WMCC.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -9417,6 +9438,49 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Curly's Athletes stages an officially measured and UKA-licensed 10K from Brigg Market Place over flat, closed country roads. A separate Military Challenge uses the same course with weighted packs, and the event supports the Royal British Legion Poppy Appeal.",
     organiser: "Curly's Athletes",
     website: "https://curlysathletes.co.uk/brigg-10k-poppy-race",
+  },
+  "cramond-promenade-5k-10k-half-marathon-october": {
+    name: "Cramond Promenade 5K, 10K & Half Marathon October",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "Cramond Promenade",
+    surface: "Road",
+    distances: ["5K", "10K", "Half"],
+    summary:
+      "Cramond Promenade October — flat, chip-timed coastal races beside the Firth of Forth.",
+    description:
+      "Up and Running Events stages 5K, 10K and half-marathon races on Cramond's flat waterfront paths. The programme includes chip timing, a finisher medal, race photography, hydration and a fully marked and marshalled route.",
+    organiser: "Up and Running Events",
+    website: "https://www.upandrunningevents.co.uk/events",
+  },
+  "crewe-10k": {
+    name: "Crewe 10K",
+    city: "Crewe",
+    county: "Cheshire",
+    country: "England",
+    area: "Royal Arcade and Crewe town centre",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Crewe 10K — a flat, closed-road town-centre race from the Royal Arcade.",
+    description:
+      "RunThrough's chip-timed 10K starts and finishes at the Royal Arcade and follows a fast, flat, fully closed-road course through Crewe. Entry includes a themed medal, free photographs and post-race refreshments.",
+    organiser: "RunThrough Events in support of YMCA Cheshire",
+    website: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+  },
+  "dh-river-run": {
+    name: "DH River Run 10K",
+    city: "Carlisle",
+    county: "Cumbria",
+    country: "England",
+    area: "Denton Holme and the Carlisle-to-Dalston river path",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "DH River Run — a fast riverside out-and-back 10K from Denton Holme.",
+    description:
+      "DH Runners' 10K starts and finishes on Denton Street and follows the traffic-free river path towards Dalston. Race facilities are at Denton Holme WMCC, and the event includes a water station, prizes, photographs and a post-race buffet.",
+    organiser: "DH Runners",
+    website: "https://dhrunners.org/",
   },
 };
 
@@ -20616,6 +20680,95 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC provides an alternative event guide. Use Curly's official page to choose between the standard 10K, Military Challenge and virtual event.",
+    },
+  ],
+  "cramond-promenade-5k-10k-half-marathon-october|2026-10-25|10K": [
+    {
+      providerCode: "official-up-and-running-cramond-october-2026",
+      providerName: "Up and Running Events official entry",
+      entryUrl: "https://www.upandrunningevents.co.uk/events",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.upandrunningevents.co.uk/events",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists the exact 25 October Cramond programme and routes entrants to its live Let's Do This checkout. Select the October 10K rather than the separate September edition.",
+    },
+    {
+      providerCode: "runabc-cramond-october-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/cramond-promenade-5k-10k-half-marathon-october",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/cramond-promenade-5k-10k-half-marathon-october",
+      isVerified: true,
+      notes:
+        "runABC provides a second event and entry route for the exact October edition. Use the organiser's page as the primary source for live booking availability.",
+    },
+  ],
+  "crewe-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-runthrough-crewe-2026",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/crewe-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough's live page lists standard 10K entry at £32 for the 09:00 race on Sunday 25 October.",
+    },
+    {
+      providerCode: "charity-ymca-cheshire-crewe-2026",
+      providerName: "YMCA Cheshire charity place",
+      entryUrl: "https://ymcacheshire.org.uk/events/crewe-10k-2026/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://ymcacheshire.org.uk/events/crewe-10k-2026/",
+      isVerified: true,
+      notes:
+        "YMCA Cheshire offers a £20 charity place with a £150 minimum sponsorship commitment, including its running vest and fundraising support.",
+    },
+  ],
+  "dh-river-run|2026-10-25|10K": [
+    {
+      providerCode: "official-events-up-north-dh-river-run-2026",
+      providerName: "DH Runners official entry",
+      entryUrl: "https://www.eventsupnorth.co.uk/event/2377",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://dhrunners.org/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "DH Runners' official site links directly to this Events Up North checkout. Entry starts at £19 for affiliated runners and is £21 for unaffiliated runners.",
+    },
+    {
+      providerCode: "running-life-dh-river-run-2026",
+      providerName: "running.life event guide",
+      entryUrl: "https://running.life/en/event/dh-river-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T13:00:00+01:00",
+      sourceUrl: "https://running.life/en/event/dh-river-run",
+      isVerified: true,
+      notes:
+        "The event guide confirms 230 places, £19 affiliated and £21 unaffiliated entry, the Denton Holme facilities and Rome Street parking. Complete the purchase through DH Runners' official link.",
     },
   ],
 };
