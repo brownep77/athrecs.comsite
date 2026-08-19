@@ -2323,6 +2323,58 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     entryUrl: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
     source: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
   },
+  "marazion-10k|2026-09-27|10K": {
+    startTime: "15:30",
+    entryUrl: "https://www.sientries.co.uk/event/marazion-10k-2026?elid=Y",
+    source: "https://www.sientries.co.uk/event/marazion-10k-2026?elid=Y",
+    notes:
+      "Marazion 10K starts at 15:30 on Sunday 27 September near Trevenna Square. Hayle Runners' chip-timed, UK Athletics-licensed road race is a one-loop course with 131 metres of elevation and an uphill finish.",
+  },
+  "preston-half-marathon-10k|2026-09-27|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.resultsbase.net/event/7810",
+    source: "https://epicevents.co.uk/preston-half-marathon-10k/",
+    notes:
+      "The inaugural XMiles Preston 10K starts at 09:00 on Sunday 27 September from Winckley Square. Its certified, closed-road city loop passes Fishergate, Avenham and Miller Parks and the River Ribble, with electronic timing and free race photos.",
+  },
+  "preston-half-marathon-10k|2026-09-27|Half": {
+    startTime: "09:00",
+    entryUrl: "https://www.resultsbase.net/event/7810",
+    source: "https://epicevents.co.uk/preston-half-marathon-10k/",
+  },
+  "rising-sun-country-park-trail-run|2026-09-27|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.resultsbase.net/event/7534",
+    source: "https://vo2maxracingevents.co.uk/events/8",
+    notes:
+      "Rising Sun Country Park 10K Trail Run starts at 09:30 on Sunday 27 September. VO2 Max Racing's mixed trail crosses grassland, woodland and nature reserve paths, with steep, wet or muddy sections and a canicross option.",
+  },
+  "rtt-margam-trail-10k-5k|2026-09-27|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.aspirexevents.com/e/rtt-margam-trail-10k-and-5k-13879",
+    source: "https://www.aspirexevents.com/e/rtt-margam-trail-10k-and-5k-13879",
+    notes:
+      "RTT Margam Trail 10K starts at 11:00 on Sunday 27 September near East Lodge in Margam Country Park. The route repeats a scenic 5K woodland and parkland lap and includes chip timing, a medal, water and participant parking.",
+  },
+  "rtt-margam-trail-10k-5k|2026-09-27|5K": {
+    startTime: "11:00",
+    entryUrl: "https://www.aspirexevents.com/e/rtt-margam-trail-10k-and-5k-13879",
+    source: "https://www.aspirexevents.com/e/rtt-margam-trail-10k-and-5k-13879",
+  },
+  "taunton-10k|2026-09-27|10K": {
+    startTime: "11:00",
+    entryUrl: "https://tauntonmarathon.fullonsport.com/event/taunton-10k-2026/profile",
+    source: "https://taunton10k.uk/",
+    notes:
+      "The 39th Taunton 10K starts at 11:00 on Sunday 27 September from Blackbrook Pavilion. The measured, gently undulating road loop runs through Holway, Stoke St Mary and Haydon and has a 90-minute cut-off.",
+  },
+  "the-one-in-the-park-hyde-park-10k-5k|2026-09-27|10K": {
+    startTime: "09:30",
+    entryUrl: "https://enter.onerace.events/register/onerace-events/one-in-the-park-hyde-september",
+    source: "https://www.onerace.events/london-5k-10k-hyde-park-september",
+    notes:
+      "The One in the Park Hyde Park 10K starts at 09:30 on Sunday 27 September from the Bandstand. The traffic-free course completes two smooth 5K laps beside the Serpentine and park landmarks, with chip timing, refreshments and a medal.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -5782,9 +5834,97 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "RunThrough",
     website: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-september-2026",
   },
+  "marazion-10k": {
+    name: "Marazion 10K",
+    city: "Marazion",
+    county: "Cornwall",
+    country: "England",
+    area: "Trevenna Square and Marazion Community Hall",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Marazion 10K — a one-loop Cornish Grand Prix road race with an uphill finish.",
+    description:
+      "Hayle Runners stages this chip-timed, UK Athletics-licensed all-road race from Trevenna Square, with 131 metres of elevation, an uphill finish, changing facilities and prizes.",
+    organiser: "Hayle Runners",
+    website: "https://www.haylerunners.com/",
+  },
+  "preston-half-marathon-10k": {
+    name: "XMiles Preston Half Marathon & 10K",
+    city: "Preston",
+    county: "Lancashire",
+    country: "England",
+    area: "Winckley Square, city centre and River Ribble",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary:
+      "XMiles Preston Half Marathon & 10K — certified closed-road city races from Winckley Square.",
+    description:
+      "Epic Events' inaugural Preston race follows a certified city-and-riverside loop through Fishergate, Avenham and Miller Parks and over the Ribble, with the half marathon completing two laps.",
+    organiser: "Epic Events / XMiles",
+    website: "https://epicevents.co.uk/preston-half-marathon-10k/",
+  },
+  "rising-sun-country-park-trail-run": {
+    name: "Rising Sun Country Park 10K Trail Run",
+    city: "Newcastle upon Tyne",
+    county: "Tyne and Wear",
+    country: "England",
+    area: "Rising Sun Country Park, Benton",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Rising Sun Country Park 10K — a chip-timed grassland, woodland and nature-reserve trail run.",
+    description:
+      "VO2 Max Racing's marked and marshalled course explores mixed trails across the North Tyneside country park, with steep inclines, wet and muddy sections, live timing, photography and a canicross option.",
+    organiser: "VO2 Max Racing Events",
+    website: "https://vo2maxracingevents.co.uk/events/8",
+  },
+  "rtt-margam-trail-10k-5k": {
+    name: "RTT Margam Trail 10K & 5K",
+    city: "Port Talbot",
+    county: "Neath Port Talbot",
+    country: "Wales",
+    area: "Margam Country Park",
+    surface: "Trail",
+    distances: ["10K", "5K"],
+    summary:
+      "RTT Margam Trail 10K & 5K — scenic woodland and parkland races from Margam Country Park.",
+    description:
+      "AspireX Events stages a marked and marshalled 5K trail lap near East Lodge, repeated for the 10K, with chip timing, medals, water stations and participant parking included.",
+    organiser: "AspireX Events",
+    website: "https://www.aspirexevents.com/e/rtt-margam-trail-10k-and-5k-13879",
+  },
+  "taunton-10k": {
+    name: "Taunton 10K",
+    city: "Taunton",
+    county: "Somerset",
+    country: "England",
+    area: "Blackbrook Pavilion, Holway and Stoke St Mary",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Taunton 10K — a measured, gently undulating road loop from Blackbrook Pavilion.",
+    description:
+      "Taunton and District Carnival Committee's long-running race heads through Holway into the lanes around Stoke St Mary and Haydon before returning to Blackbrook, with medals and a 90-minute cut-off.",
+    organiser: "Taunton and District Carnival Committee",
+    website: "https://taunton10k.uk/",
+  },
+  "the-one-in-the-park-hyde-park-10k-5k": {
+    name: "The One in the Park Hyde Park 10K & 5K",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Hyde Park Bandstand and the Serpentine",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary:
+      "The One in the Park Hyde Park — flat, traffic-free 10K and 5K races beside the Serpentine.",
+    description:
+      "OneRace Events stages a smooth 5K park loop past lakeside scenery, monuments and gardens, completed twice for the 10K, with chip timing, refreshments and a finisher medal.",
+    organiser: "OneRace Events",
+    website: "https://www.onerace.events/london-5k-10k-hyde-park-september",
+  },
 };
 
-/** Entry routes checked on 18 August 2026. */
+/** Entry routes checked through 19 August 2026. */
 export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
   "chase-the-sun-battersea-5k-10k-august|2026-08-19|10K": [
     {
@@ -12401,6 +12541,185 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Find a Race offers a secondary Quick Book route for the 10K at £34 and confirms the two-lap course and 10:45 start.",
+    },
+  ],
+  "marazion-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-sientries-marazion",
+      providerName: "SiEntries official entry",
+      entryUrl: "https://www.sientries.co.uk/event/marazion-10k-2026?elid=Y",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-26T12:00:00+01:00",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://www.sientries.co.uk/event/marazion-10k-2026?elid=Y",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "SiEntries lists £25 UKA-member or £27 non-member entry with a hoodie until 13 September. Later entries without a hoodie are £20 or £22; online entry closes at noon on 26 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/marazion-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/marazion-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route and confirms the Sunday date. SiEntries is authoritative for the 15:30 start, current prices and capacity.",
+    },
+  ],
+  "preston-half-marathon-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-resultsbase-preston",
+      providerName: "Results Base official entry",
+      entryUrl: "https://www.resultsbase.net/event/7810",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-25T12:00:00+01:00",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://epicevents.co.uk/preston-half-marathon-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Epic Events directs entrants to Results Base and lists the 10K at £30 affiliated or £32 unaffiliated. Entries close at noon on 25 September or earlier if full.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/preston-half-marathon-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/preston-half-marathon-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary listing. Epic Events and Results Base are authoritative for the corrected 09:00 start, prices and availability.",
+    },
+  ],
+  "rising-sun-country-park-trail-run|2026-09-27|10K": [
+    {
+      providerCode: "official-resultsbase-rising-sun",
+      providerName: "Results Base official entry",
+      entryUrl: "https://www.resultsbase.net/event/7534",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://vo2maxracingevents.co.uk/events/8",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "VO2 Max Racing's live event page confirms the 27 September date and 09:30 start and sends registration to Results Base.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/rising-sun-country-park-10k-trail-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 27,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/rising-sun-country-park-10k-trail-run",
+      isVerified: true,
+      notes:
+        "TimeOutdoors offers a second entry route at £27 and confirms entries are open for the chip-timed 09:30 trail race.",
+    },
+  ],
+  "rtt-margam-trail-10k-5k|2026-09-27|10K": [
+    {
+      providerCode: "official-aspirex-margam",
+      providerName: "AspireX Events official entry",
+      entryUrl: "https://www.aspirexevents.com/e/rtt-margam-trail-10k-and-5k-13879",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://www.aspirexevents.com/e/rtt-margam-trail-10k-and-5k-13879",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official AspireX Eventrac page is accepting entries and confirms the 11:00 joint start, course and included participant parking.",
+    },
+    {
+      providerCode: "letsdothis",
+      providerName: "Let's Do This",
+      entryUrl: "https://www.letsdothis.com/gb/e/rtt-margam-10k-237759",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29.99,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/rtt-margam-10k-237759",
+      isVerified: true,
+      notes:
+        "Let's Do This provides a secondary registration route at £29.99 for the 10K and also lists the 5K at £24.99.",
+    },
+  ],
+  "taunton-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-fullonsport-taunton",
+      providerName: "Full On Sport official entry",
+      entryUrl: "https://tauntonmarathon.fullonsport.com/event/taunton-10k-2026/profile",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://taunton10k.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official site links to Full On Sport, which lists £19 affiliated or £21 unaffiliated entry plus its processing fee. Entries close on 22 September; there are no race-day entries.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/taunton-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/taunton-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route. The official site and Full On Sport are authoritative for the corrected 11:00 start, prices and entry limit.",
+    },
+  ],
+  "the-one-in-the-park-hyde-park-10k-5k|2026-09-27|10K": [
+    {
+      providerCode: "official-onerace-hyde-september",
+      providerName: "OneRace official entry",
+      entryUrl:
+        "https://enter.onerace.events/register/onerace-events/one-in-the-park-hyde-september",
+      entryType: "official",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://www.onerace.events/london-5k-10k-hyde-park-september",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "OneRace lists both the 10K and 5K at £26 and directs booking to its RaceNation checkout. Both distances start at 09:30.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race Quick Book",
+      entryUrl: "https://findarace.com/events/one-in-the-park-hyde-september",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 27.75,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T16:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/one-in-the-park-hyde-september",
+      isVerified: true,
+      notes:
+        "Find a Race is an official booking partner and offers 10K Quick Book at £27.75 including its £1.75 fee.",
     },
   ],
 };
