@@ -45,3 +45,13 @@ Three future running events extend the verified fixture programme into three new
 The two UK fixtures were discovered through the approved Up and Running organiser sitemap and checked against its current booking partner. Engelberg was discovered through RunThrough's organiser calendar, checked against the live RunThrough Trails page and corroborated by Switzerland Tourism. Manchester remains a valid fixture but is marked closed because all listed distances are sold out.
 
 The RunThrough source scope is now recorded as `UK & Europe`, with the RunThrough Trails domain and Switzerland explicitly included. Up and Running's discovered country focus is recorded as England, Scotland and Wales. Both discovery sources remain `in_progress` so subsequent checkpoints can keep adding verified countries without implying complete calendar coverage.
+
+## Checkpoint global-004
+
+Three more future running fixtures add Wales to the countries represented by the verified programme and extend Scotland's coverage:
+
+- Run4All Neath 5K Summer Series — Wales — 2 September 2026
+- Cuningar Loop 5K/10K — Scotland — 25 October 2026
+- Morgan's Army BRISCO Gorseinon 10K — Wales — 4 April 2027
+
+The Welsh fixtures were discovered through the enabled TE Sports Timing calendar and checked against the organiser and live event pages. Cuningar Loop was discovered through the approved Up and Running organiser source and checked against its active booking partner. All three were checked against the existing ATHRECS catalogue before import; similar club and parkrun records were not treated as duplicate fixtures. Both sources remain `in_progress` for later checkpoints.
