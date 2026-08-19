@@ -17,15 +17,16 @@ import {
   ukTenKEntryOptions,
   ukTenKSeriesOverrides,
 } from "./entry-options-uk-10ks";
+import {
+  allFixtureAliases,
+  verifiedFixtureEditionOverrides,
+  verifiedFixtureEditionReplacements,
+  verifiedFixtureSeriesOverrides,
+} from "./fixture-deduplication";
 
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const eventSlugAliases: Readonly<Record<string, string>> = {
-  "rb-dirt-half-challenge": "dirt-half-challenge",
-  "rb-glentress-winter-half-marathon-10k-trail-races": "glentress-winter-trail-races",
-  "fellbrigg-trail-run": "felbrigg-trail-run",
-  "round-the-lakes-summer-special": "round-the-lakes",
-  "thompson-millennium-green-10k-5k": "thompson-millennium-green",
-  "well-run-10k": "far-peak-10k-half-marathon",
+  ...allFixtureAliases,
 };
 
 export function canonicalEventSlug(slug: string): string {
@@ -37,6 +38,7 @@ export const editionReplacements = [
   ...ukMarathonEditionReplacements,
   ...ukHalfMarathonEditionReplacements,
   ...ukTenKEditionReplacements,
+  ...verifiedFixtureEditionReplacements,
 ];
 
 /** Verified edition corrections across every entry-options research pass. */
@@ -44,6 +46,7 @@ export const editionOverrides: Record<string, Partial<Edition>> = {
   ...ukMarathonEditionOverrides,
   ...ukHalfMarathonEditionOverrides,
   ...ukTenKEditionOverrides,
+  ...verifiedFixtureEditionOverrides,
 };
 
 /** Verified event metadata corrections across every entry-options research pass. */
@@ -51,6 +54,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...ukMarathonSeriesOverrides,
   ...ukHalfMarathonSeriesOverrides,
   ...ukTenKSeriesOverrides,
+  ...verifiedFixtureSeriesOverrides,
 };
 
 /** Verified entry providers keyed by series, date and distance. */

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs/promises";
 
 const [
   { seriesList: coreSeries },
@@ -13,6 +14,11 @@ const [
   { mrdMarathonEditions, mrdMarathonSeries },
   { mrdEuMarathonEditions, mrdEuMarathonSeries },
   { verifiedAllSportEditions, verifiedAllSportSeries },
+  marathonOptions,
+  halfMarathonOptions,
+  tenKOptions,
+  { allFixtureAliases, verifiedFixtureEditionOverrides, verifiedFixtureSeriesOverrides },
+  { parkrunDates },
 ] = await Promise.all([
   import("../src/data/series.ts"),
   import("../src/data/editions.ts"),
@@ -26,10 +32,34 @@ const [
   import("../src/data/mrd-marathons.ts"),
   import("../src/data/mrd-marathons-eu.ts"),
   import("../src/data/verified-all-sport.ts"),
+  import("../src/data/entry-options-uk-marathons.ts"),
+  import("../src/data/entry-options-uk-half-marathons.ts"),
+  import("../src/data/entry-options-uk-10ks.ts"),
+  import("../src/data/fixture-deduplication.ts"),
+  import("../src/lib/athrecs/parkrun-dates.ts"),
 ]);
 
-const seriesList = [
-  ...coreSeries,
+const editionOverrides = {
+  ...marathonOptions.ukMarathonEditionOverrides,
+  ...halfMarathonOptions.ukHalfMarathonEditionOverrides,
+  ...tenKOptions.ukTenKEditionOverrides,
+  ...verifiedFixtureEditionOverrides,
+};
+const seriesOverrides = {
+  ...marathonOptions.ukMarathonSeriesOverrides,
+  ...halfMarathonOptions.ukHalfMarathonSeriesOverrides,
+  ...tenKOptions.ukTenKSeriesOverrides,
+  ...verifiedFixtureSeriesOverrides,
+};
+
+function normalisedName(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+const coreNames = new Set(coreSeries.map((series) => normalisedName(series.name)));
+const usedSlugs = new Set(coreSeries.map((series) => series.slug));
+const extraSeries = [];
+for (const series of [
   ...raceCollectionSeries,
   ...verifiedAllSportSeries,
   ...verifiedUkSeries,
@@ -40,19 +70,43 @@ const seriesList = [
   ...worldTriathlonSeries,
   ...mrdMarathonSeries,
   ...mrdEuMarathonSeries,
-];
-const editions = [
+]) {
+  if (allFixtureAliases[series.slug]) continue;
+  const name = seriesOverrides[series.slug]?.name ?? series.name;
+  const nameKey = normalisedName(name);
+  if (usedSlugs.has(series.slug) || coreNames.has(nameKey)) continue;
+  usedSlugs.add(series.slug);
+  coreNames.add(nameKey);
+  extraSeries.push(series);
+}
+
+const seriesList = [...coreSeries, ...extraSeries].map((series) => ({
+  ...series,
+  ...seriesOverrides[series.slug],
+}));
+const extraSlugs = new Set(extraSeries.map((series) => series.slug));
+const editionSources = [
   ...coreEditions,
-  ...raceCollectionEditions,
-  ...verifiedAllSportEditions,
-  ...verifiedUkEditions,
-  ...runabcEditions,
-  ...multiSportEditions,
-  ...worldAthleticsEditions,
-  ...worldTriathlonEditions,
-  ...mrdMarathonEditions,
-  ...mrdEuMarathonEditions,
+  ...raceCollectionEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...verifiedAllSportEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...verifiedUkEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...runabcEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...multiSportEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...worldAthleticsEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...worldTriathlonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...mrdMarathonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...mrdEuMarathonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
 ];
+const seenEditions = new Set();
+const editions = [];
+for (const sourceEdition of editionSources) {
+  const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
+  const edition = { ...sourceEdition, ...editionOverrides[sourceKey] };
+  const editionKey = `${edition.seriesSlug}|${edition.date}`;
+  if (seenEditions.has(editionKey)) continue;
+  seenEditions.add(editionKey);
+  editions.push(edition);
+}
 
 const supportedSports = [
   "Running",
@@ -69,6 +123,12 @@ const supportedSports = [
 ];
 const checkpointSports = ["Aquabike", "Rowing", "OCR"];
 const today = "2026-08-19";
+const coverageSnapshot = JSON.parse(
+  await fs.readFile(
+    new URL("../docs/all-sport-fixtures/catalogue-audit-2026-08-19.json", import.meta.url),
+    "utf8",
+  ),
+);
 
 assert.equal(verifiedAllSportSeries.length, 3, "Checkpoint must contain three verified series");
 assert.equal(verifiedAllSportEditions.length, 3, "Checkpoint must contain three verified editions");
@@ -107,12 +167,18 @@ for (const edition of editions) {
 }
 
 // Parkrun editions are generated weekly by the database seed rather than held
-// as static edition rows. Each configured venue therefore contributes a
-// current recurring fixture to this coverage check.
-catalogueFutureCounts.Parkrun = parkrunSeries.length;
+// as static edition rows. Count every scheduled Saturday 5K and Sunday junior
+// 2K remaining in the configured calendar window.
+catalogueFutureCounts.Parkrun = seriesList
+  .filter((series) => series.sport === "Parkrun")
+  .reduce((count, series) => count + parkrunDates(series.name, today).length, 0);
 
 for (const sport of supportedSports) {
   assert(catalogueFutureCounts[sport] > 0, `${sport} has no current or future fixture`);
+  assert(
+    catalogueFutureCounts[sport] >= coverageSnapshot.future_fixture_counts[sport],
+    `${sport} lost fixtures from the saved all-sport checkpoint`,
+  );
 }
 
 process.stdout.write(
