@@ -3180,6 +3180,49 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "Sublime Timing confirms a 10:00 start on Sunday 11 October, correcting the imported 09:00 time and the venue spelling to Felbrigg. The two-lap 10K crosses lawns, woodland, grazing land and estate paths around Felbrigg Hall, with chip timing and proceeds supporting North Norfolk Surf Life Saving Club.",
   },
+  "frieth-hilly-10k5k|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl: "https://frieth-hilly.eventrac.co.uk/e/frieth-hilly-5km-and-10km-12312",
+    source: "https://www.friethhilly.co.uk/",
+    notes:
+      "The current Eventrac calendar and ARC permit confirm a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. The challenging mixed-terrain 10K crosses country roads, woodland paths and Chiltern fields, with a steep second-half return through Parmoor to Frieth.",
+  },
+  "givaudan-ashford-10k|2026-10-11|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.sportingeventsuk.com/e/givaudan-ashford-10k-8297",
+    source: "https://www.ashfordac.org.uk/show/Ashford-10k",
+    notes:
+      "Ashford AC and Sporting Events UK confirm a 09:30 start on Sunday 11 October, correcting the imported 08:30 time. The fully closed-road, fairly flat route starts and finishes on the Julie Rose Stadium track and crosses Ashford town before a grandstand finish.",
+  },
+  "grittleton-10k|2026-10-11|10K": {
+    startTime: "10:30",
+    entryUrl: "https://www.icompete.co.uk/events/grittleton10k2026",
+    source: "https://www.icompete.co.uk/events/grittleton10k2026",
+    notes:
+      "iCompete confirms a 10:30 start on Sunday 11 October, correcting the imported 09:30 time. The chip-timed single-lap road course is predominantly fast and flat, with its main incline at about 7.5K, kilometre markers and pace-team support.",
+  },
+  "kinord-10k|2026-10-11|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.timeoutdoors.com/events/loch-kinord-10k",
+    source: "https://runabc.co.uk/kinord-10k",
+    notes:
+      "Current October 2026 calendars confirm Sunday 11 October and an 11:00 start, correcting the imported 10:00 time. The fairly flat trail route circles Loch Kinord on forest tracks, narrow paths and grass through the Muir of Dinnet National Nature Reserve; the organiser's direct page has not yet published a dedicated 2026 checkout, so runners should verify the selected edition before payment.",
+  },
+  "mccain-yorkshire-coast-10k-fun-run|2026-10-11|10K": {
+    startTime: "09:45",
+    status: "Closed",
+    entryUrl: "https://www.runforall.com/events/10k/yorkshire-coast-10k/",
+    source: "https://www.runforall.com/events/10k/yorkshire-coast-10k/",
+    notes:
+      "Run For All confirms a 09:45 start on Sunday 11 October, correcting the imported 08:45 time, and marks general entry sold out. The flat coastal course starts and finishes at Scarborough Spa, passing South Bay, the harbour, North Bay and the Open Air Theatre. A separate NHS charity-place route remains available with its own sponsorship commitment.",
+  },
+  "mctf-run-the-track-5k-10k-swindon|2026-10-11|10K": {
+    startTime: "14:00",
+    entryUrl: "https://bookitzone.com/",
+    source: "https://www.mactuffevents.com/rtt",
+    notes:
+      "MacTuff and the current BookitZone listing confirm afternoon racing from 14:00 on Sunday 11 October, correcting the imported 13:30 placeholder. The 10K is run in small pace-seeded heats on the County Ground athletics track, with personal lap splits and chip timing; entrants receive their assigned heat in final instructions.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -7941,6 +7984,93 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "The 10K completes two varied laps across Felbrigg Hall's south lawns, woodland, lake, grazing land and estate paths. Shorter 5K and 2.5K choices share the charity event programme.",
     organiser: "North Norfolk Surf Life Saving Club",
     website: "https://entries.sublimetiming.com/race/89",
+  },
+  "frieth-hilly-10k5k": {
+    name: "Frieth Hilly 10K & 5K",
+    city: "Frieth",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Frieth Primary School and the Hambleden Valley",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary: "Frieth Hilly 10K & 5K — welcoming mixed-terrain races through the Chiltern Hills.",
+    description:
+      "This school fundraiser combines country roads, woodland paths and fields between Frieth, Fingest and Skirmett. The hillier 10K climbs back through Parmoor, while the shorter 5K offers a gentler introduction to the event.",
+    organiser: "Frieth CEC School parents and Frieth Hilly",
+    website: "https://www.friethhilly.co.uk/",
+  },
+  "givaudan-ashford-10k": {
+    name: "Givaudan Ashford 10K",
+    city: "Ashford",
+    county: "Kent",
+    country: "England",
+    area: "Julie Rose Stadium and closed roads through Ashford",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Givaudan Ashford 10K — a closed-road town race with an athletics-stadium start and finish.",
+    description:
+      "Sporting Events UK and Ashford AC stage this fairly flat, beginner-friendly 10K from the Julie Rose Stadium track through Ashford town and back to a grandstand finishing straight, with music, commentary and a bespoke medal.",
+    organiser: "Sporting Events UK with Ashford AC",
+    website: "https://www.ashfordac.org.uk/show/Ashford-10k",
+  },
+  "grittleton-10k": {
+    name: "Grittleton 10K",
+    city: "Grittleton",
+    county: "Wiltshire",
+    country: "England",
+    area: "Grittleton Village Hall and surrounding country roads",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Grittleton 10K — a fast, predominantly flat single-lap road race near Chippenham.",
+    description:
+      "iCompete's chip-timed village race follows a quick one-lap circuit with its principal incline at about 7.5K, kilometre markers, a pace team, finisher medals and race-day number collection.",
+    organiser: "iCompete Events",
+    website: "https://www.icompete.co.uk/events/grittleton10k2026",
+  },
+  "kinord-10k": {
+    name: "Loch Kinord 10K",
+    city: "Dinnet",
+    county: "Aberdeenshire",
+    country: "Scotland",
+    area: "Kinord Hall and Muir of Dinnet National Nature Reserve",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Loch Kinord 10K — a scenic, runnable trail circuit through the Muir of Dinnet reserve.",
+    description:
+      "Deeside Runners' fairly flat course circles Loch Kinord on forest tracks, narrow paths and grass. The route is fast in dry weather but some reserve sections can become muddy or slippery after rain.",
+    organiser: "Deeside Runners",
+    website: "https://www.deesiderunners.com/races/",
+  },
+  "mccain-yorkshire-coast-10k-fun-run": {
+    name: "McCain Yorkshire Coast 10K",
+    city: "Scarborough",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Scarborough Spa, South Bay, harbour and North Bay",
+    surface: "Road",
+    distances: ["10K", "5K", "Fun Run"],
+    summary:
+      "McCain Yorkshire Coast 10K — a flat, inclusive road race along Scarborough's seafront.",
+    description:
+      "Run For All's coastal route starts and finishes at the Spa, passing South Bay, the harbour, headland, North Bay and Open Air Theatre. Finishers receive a sustainable slate medal and a tree is planted for each entrant.",
+    organiser: "Jane Tomlinson's Run For All",
+    website: "https://www.runforall.com/events/10k/yorkshire-coast-10k/",
+  },
+  "mctf-run-the-track-5k-10k-swindon": {
+    name: "MCTF Run The Track 5K & 10K — Swindon",
+    city: "Swindon",
+    county: "Wiltshire",
+    country: "England",
+    area: "County Ground Athletics Track",
+    surface: "Track",
+    distances: ["10K", "5K"],
+    summary: "MCTF Run The Track Swindon — small-field, pace-seeded 5K and 10K track races.",
+    description:
+      "MacTuff Events groups runners by expected finish time for relaxed afternoon track heats, with personal lap splits, overall chip timing and a limited field designed to give every runner clear racing space.",
+    organiser: "MacTuff Events",
+    website: "https://www.mactuffevents.com/rtt",
   },
 };
 
@@ -17260,6 +17390,179 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "The organising charity's official site explains the lifesaving club supported by the event. Use Sublime Timing for race-specific registration and prices.",
+    },
+  ],
+  "frieth-hilly-10k5k|2026-10-11|10K": [
+    {
+      providerCode: "eventrac-frieth-hilly-2026",
+      providerName: "Eventrac official entry",
+      entryUrl: "https://frieth-hilly.eventrac.co.uk/e/frieth-hilly-5km-and-10km-12312",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://frieth-hilly.eventrac.co.uk/e/frieth-hilly-5km-and-10km-12312",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Eventrac's current calendar marks the 2026 10K open and confirms the 10:00 start. Select the 10K ticket and verify the final total at checkout.",
+    },
+    {
+      providerCode: "official-frieth-hilly-2026",
+      providerName: "Frieth Hilly official information",
+      entryUrl: "https://www.friethhilly.co.uk/",
+      entryType: "charity",
+      status: "open",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.friethhilly.co.uk/",
+      isVerified: true,
+      notes:
+        "The organiser describes the route and school fundraiser but still labels the date TBC. Eventrac and the 2026 ARC permit now support 11 October; check final instructions before travel.",
+    },
+  ],
+  "givaudan-ashford-10k|2026-10-11|10K": [
+    {
+      providerCode: "sporting-events-ashford-10k-2026",
+      providerName: "Sporting Events UK official entry",
+      entryUrl: "https://www.sportingeventsuk.com/e/givaudan-ashford-10k-8297",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.ashfordac.org.uk/show/Ashford-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official event page offers £24 affiliated or £26 unaffiliated advance entry. There is no on-the-day registration.",
+    },
+    {
+      providerCode: "timeoutdoors-ashford-10k-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/givaudan-ashford-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/givaudan-ashford-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms the £24 to £26 range, 09:30 start, road-closed course and age-15 minimum, then routes runners to the official entry provider.",
+    },
+  ],
+  "grittleton-10k|2026-10-11|10K": [
+    {
+      providerCode: "icompete-grittleton-10k-2026",
+      providerName: "iCompete official entry",
+      entryUrl: "https://www.icompete.co.uk/events/grittleton10k2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.icompete.co.uk/events/grittleton10k2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "iCompete advertises £25 early-bird affiliated or £27 unaffiliated entry for the chip-timed 11 October race.",
+    },
+    {
+      providerCode: "running-calendar-grittleton-2026",
+      providerName: "Running Calendar race guide",
+      entryUrl: "https://www.runningcalendar.co.uk/event/grittleton-10k-road-race/",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.runningcalendar.co.uk/event/grittleton-10k-road-race/",
+      isVerified: true,
+      notes:
+        "Running Calendar independently confirms the date, venue, single-lap road course and organiser. Complete payment through iCompete.",
+    },
+  ],
+  "kinord-10k|2026-10-11|10K": [
+    {
+      providerCode: "timeoutdoors-loch-kinord-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/loch-kinord-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 16,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/10k-runs/north-east-scotland",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "TimeOutdoors' current regional calendar lists the 11 October race at £16, but its direct detail page can display an older edition. Confirm that the checkout shows 2026 before paying.",
+    },
+    {
+      providerCode: "runabc-loch-kinord-2026",
+      providerName: "runABC current race guide",
+      entryUrl: "https://runabc.co.uk/kinord-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://runabc.co.uk/kinord-10k",
+      isVerified: true,
+      notes:
+        "runABC confirms Sunday 11 October, the 11:00 start, Kinord Hall and organiser details. A dedicated 2026 organiser checkout is not yet publicly indexed.",
+    },
+  ],
+  "mccain-yorkshire-coast-10k-fun-run|2026-10-11|10K": [
+    {
+      providerCode: "runforall-yorkshire-coast-10k-2026",
+      providerName: "Run For All official entry",
+      entryUrl: "https://www.runforall.com/events/10k/yorkshire-coast-10k/",
+      entryType: "official",
+      status: "sold_out",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.runforall.com/events/10k/yorkshire-coast-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Run For All marks general 10K entry sold out. Use this page for official race instructions and any organiser updates; do not expect a standard place today.",
+    },
+    {
+      providerCode: "york-hospitals-charity-yorkshire-coast-2026",
+      providerName: "York & Scarborough Hospitals Charity place",
+      entryUrl: "https://www.yshospitalscharity.org/support-us/yorkshire-coast-10k",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 10,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.yshospitalscharity.org/support-us/yorkshire-coast-10k",
+      isVerified: true,
+      notes:
+        "The local NHS charity offers a £10 charity place with a £60 minimum sponsorship commitment. This is separate from sold-out general entry.",
+    },
+  ],
+  "mctf-run-the-track-5k-10k-swindon|2026-10-11|10K": [
+    {
+      providerCode: "bookitzone-mctf-swindon-2026",
+      providerName: "BookitZone official checkout",
+      entryUrl: "https://bookitzone.com/",
+      entryType: "official",
+      status: "open",
+      closesAt: "2026-10-09T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://bookitzone.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "BookitZone's current events list exposes separate affiliated and unaffiliated 10K tickets for sub-42, sub-50 and sub-70-minute heats. Search for the exact Swindon event and select the appropriate heat; online entry closes on 9 October.",
+    },
+    {
+      providerCode: "official-mactuff-rtt-swindon-2026",
+      providerName: "MacTuff official information",
+      entryUrl: "https://www.mactuffevents.com/rtt",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:15:00+01:00",
+      sourceUrl: "https://www.mactuffevents.com/rtt",
+      isVerified: true,
+      notes:
+        "MacTuff explains the pace-seeded track format, personal lap splits and afternoon schedule. Use BookitZone for the Swindon-specific ticket.",
     },
   ],
 };
