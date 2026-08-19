@@ -65,6 +65,7 @@ import {
   raceGroupMemberships,
 } from "./race-collections";
 import { verifiedUkEditions, verifiedUkSeries } from "./verified-races-uk";
+import { verifiedAllSportEditions, verifiedAllSportSeries } from "./verified-all-sport";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -124,6 +125,7 @@ const usedSlugs = new Set(coreSeries.map((series) => series.slug));
 const extraSeries: Series[] = [];
 for (const series of [
   ...(raceCollectionSeries as Series[]),
+  ...(verifiedAllSportSeries as Series[]),
   ...(verifiedUkSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(multiSportSeries as Series[]),
@@ -150,6 +152,9 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
 const mergedEditions = [
   ...(coreEditions as Edition[]),
   ...(raceCollectionEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(verifiedAllSportEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
   ...(verifiedUkEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),

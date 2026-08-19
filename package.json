@@ -14,6 +14,7 @@
     "preview": "vite preview --host 0.0.0.0 --port 8080",
     "typecheck": "tsc --noEmit",
     "verify:catalogue": "node --experimental-strip-types scripts/verify-catalogue.mjs",
+    "verify:all-sport-fixtures": "node --experimental-strip-types scripts/verify-all-sport-fixtures.mjs",
     "verify:clubs": "node --experimental-strip-types scripts/verify-club-audit.mjs",
     "verify:race-groups": "node --experimental-strip-types scripts/verify-race-groups.mjs",
     "verify:sources": "node scripts/verify-source-registry.mjs",
