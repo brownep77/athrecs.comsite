@@ -15,14 +15,19 @@
       "notes": "Official or governing-body-backed routes, corrected start times, entry status and venue details passed the workflow, TypeScript, catalogue and diff checks and are saved on the Release 63 checkpoint branch."
     },
     "63B": {
-      "status": "researched",
-      "updatedAt": "2026-08-19T09:30:00+01:00",
+      "status": "checkpoint_saved",
+      "updatedAt": "2026-08-19T11:30:00+01:00",
       "races": [
         "beachy-head-marathon|2026-10-23|10K",
         "clock-change-challenge-october|2026-10-24|10K",
         "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|10K"
       ],
-      "notes": "Research identified incorrect imported dates/times; no production data changes until the checkpoint is coded and tested."
+      "resolvedKeys": {
+        "beachy-head-marathon|2026-10-23|10K": "beachy-head-marathon|2026-10-24|10K",
+        "clock-change-challenge-october|2026-10-24|10K": "clock-change-challenge-october|2026-10-25|10K",
+        "imperial-war-museum-duxford-dash-5k-10k|2026-10-24|10K": "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K"
+      },
+      "notes": "Official sources corrected all three imported dates and 23:00 placeholders; entry routes, availability and venue details passed the workflow, TypeScript, catalogue and diff checks and are saved on the Release 63 checkpoint branch."
     }
   }
 }
