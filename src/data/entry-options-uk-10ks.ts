@@ -3505,6 +3505,49 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "EntryCentral's current calendar confirms the 18 October 2026 race is open, and Scottish Hill Runners lists an 11:00 start. The 10.2K hilly, off-road route crosses fields and tracks on the Riddell Estate, with about 210 metres of climb and views of the Eildon and Cheviot Hills. Entry is a pay-what-you-can donation supporting Harris Trust.",
   },
+  "lullingstone-10k|2026-10-18|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.netiming.co.uk/events/lullingstone-10k-2",
+    source: "https://eynsfordrunningclub.com/lullingstone-10k/",
+    notes:
+      "Eynsford Running Club confirms a new 09:00 start on Sunday 18 October, correcting the imported 08:00 placeholder. The demanding two-lap multi-terrain course leaves Lullingstone Country Park's main meadow, climbs through woodland and the golf course and passes towards Lullingstone Castle.",
+  },
+  "reading-rivermead-10k|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.mccpromotions.com/e/reading-town-10k-charity-fun-run-3742",
+    source: "https://www.mccpromotions.com/e/reading-town-10k-charity-fun-run-3742",
+    notes:
+      "MCC Promotions confirms a 10:00 start on Sunday 18 October, correcting the imported 09:00 time. The charity 10K completes four laps around King's Meadow on approximately 70% pathway and 30% field, with chip timing, a medal, prizes and water stations supporting Sport in Mind.",
+  },
+  "rtt-gower-trail-half-marathon-10k|2026-10-18|10K": {
+    startTime: "09:30",
+    status: "TBC",
+    entryUrl: "https://www.aspirexevents.com/e/rtt-gower-trail-half-marathon-and-10k-13910",
+    source: "https://www.aspirexevents.com/e/rtt-gower-trail-half-marathon-and-10k-13910",
+    notes:
+      "Aspire X Events currently marks this event postponed with a new date to follow. The imported 18 October date and 09:30 published schedule are therefore provisional and the edition is shown as TBC, not open. If reconfirmed, the marked 10K route will use coastal paths, woodland and dunes from Oxwich Bay.",
+  },
+  "run-breckland-sapiston|2026-10-18|10K": {
+    startTime: "12:00",
+    entryUrl: "https://runabc.co.uk/run-breckland-sapiston",
+    source: "https://runabc.co.uk/run-breckland-sapiston",
+    notes:
+      "The current organiser-supplied listing confirms a 12:00 mass start on Sunday 18 October, correcting the imported 11:00 time. Run Breckland's undulating 5K and 10K loops from Honington and Sapiston Village Hall use footpaths, byways, woodland, grass, fields, stony sections and short quiet-road links through the Black Bourn Valley.",
+  },
+  "runuk-windsor-dorney-lakeside-10k|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-10k-2852",
+    source: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-10k-2852",
+    notes:
+      "RunUK's live event page and active booking calendars confirm a 10:00 start on Sunday 18 October, correcting the imported 08:30 placeholder. The chip-timed, traffic-free 10K follows a flat tarmac course around the London 2012 rowing venue and includes a medal, finish refreshments, baggage drop and free event parking.",
+  },
+  "shipston-home-nursing-10k-walton-hall|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://shipstonhomenursing.co.uk/event/walton-hall-10k-run-and-walk/",
+    source: "https://shipstonhomenursing.co.uk/event/walton-hall-10k-run-and-walk/",
+    notes:
+      "Shipston Home Nursing confirms registration from 08:45 and a 10:00 start on Sunday 18 October, correcting the imported 09:00 time. The annual run or walk leaves Walton Hall, crosses mixed cross-country and road sections through nearby woods and Walton village, and returns for electronic timing and a bacon or vegetarian roll.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -8885,6 +8928,91 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Harris Trust's inclusive, pay-what-you-can fundraiser follows a 10.2K off-road route with roughly 210 metres of climb and views across the Eildon and Cheviot Hills. Walkers and dogs on leads are welcome, under-16s need an accompanying adult and the field is limited to 200.",
     organiser: "Harris Trust",
     website: "https://www.entrycentral.com/HarrisTrust-Lilliesleaf10k",
+  },
+  "lullingstone-10k": {
+    name: "Lullingstone 10K",
+    city: "Eynsford",
+    county: "Kent",
+    country: "England",
+    area: "Lullingstone Country Park woodland, golf course and castle grounds",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Lullingstone 10K — a challenging two-lap multi-terrain race in the Darent Valley.",
+    description:
+      "Eynsford Running Club's established 10K starts in Lullingstone Country Park's main meadow and climbs through woodland, the golf course and towards the castle. The undulating two-lap route is primarily trail and rewards runners with broad Kent countryside views.",
+    organiser: "Eynsford Running Club",
+    website: "https://eynsfordrunningclub.com/lullingstone-10k/",
+  },
+  "reading-rivermead-10k": {
+    name: "Reading Town 10K Charity Fun Run",
+    city: "Reading",
+    county: "Berkshire",
+    country: "England",
+    area: "King's Meadow Playing Fields and riverside paths",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary: "Reading Town 10K — a friendly four-lap charity race supporting Sport in Mind.",
+    description:
+      "MCC Promotions' England Athletics-registered charity event completes four laps around King's Meadow on roughly 70% pathway and 30% field. The accessible race includes chip timing, a finisher medal, prizes and water stations, with proceeds supporting Sport in Mind.",
+    organiser: "MCC Promotions",
+    website: "https://www.mccpromotions.com/e/reading-town-10k-charity-fun-run-3742",
+  },
+  "rtt-gower-trail-half-marathon-10k": {
+    name: "RTT Gower Trail Half Marathon, 10K & 5K",
+    city: "Oxwich",
+    county: "Swansea",
+    country: "Wales",
+    area: "Oxwich Bay, Gower coast, woodland and dunes",
+    surface: "Trail",
+    distances: ["5K", "10K", "Half"],
+    summary:
+      "Gower Trail races — currently postponed, with a replacement date still to be announced.",
+    description:
+      "Aspire X Events' coastal trail programme starts from Oxwich Bay and uses coast paths, woodland and dunes across the Gower Peninsula. The organiser currently marks the event postponed, so the replacement date and final schedule must be confirmed before travel or entry.",
+    organiser: "Aspire X Events",
+    website: "https://www.aspirexevents.com/e/rtt-gower-trail-half-marathon-and-10k-13910",
+  },
+  "run-breckland-sapiston": {
+    name: "Sapiston 5K & 10K Trail Runs",
+    city: "Sapiston",
+    county: "Suffolk",
+    country: "England",
+    area: "Black Bourn Valley around Sapiston and Honington",
+    surface: "Trail",
+    distances: ["5K", "10K"],
+    summary: "Sapiston trail runs — mixed-terrain loops through Suffolk's Black Bourn Valley.",
+    description:
+      "Run Breckland's undulating 5K and 10K loops start at Honington and Sapiston Village Hall and combine footpaths, byways, woodland tracks, grass, fields, stones and short tarmac links. Volunteer marshals support the scenic rural route through the Black Bourn Valley.",
+    organiser: "Run Breckland",
+    website: "https://runabc.co.uk/run-breckland-sapiston",
+  },
+  "runuk-windsor-dorney-lakeside-10k": {
+    name: "Windsor Dorney Lakeside 10K",
+    city: "Windsor",
+    county: "Berkshire",
+    country: "England",
+    area: "Dorney Lake Olympic rowing venue",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Windsor Dorney Lakeside 10K — a flat, traffic-free race at the London 2012 venue.",
+    description:
+      "RunUK's chip-timed 10K follows smooth, traffic-free tarmac around Dorney Lake, the London 2012 Olympic rowing venue. The flat course is suited to first-time runners and personal-best attempts and includes a medal, finish refreshments, baggage drop and free event parking.",
+    organiser: "RunUK",
+    website: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-10k-2852",
+  },
+  "shipston-home-nursing-10k-walton-hall": {
+    name: "Walton Hall 10K Run & Walk",
+    city: "Walton",
+    county: "Warwickshire",
+    country: "England",
+    area: "Walton Hall grounds, woodland and Walton village",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary: "Walton Hall 10K — a countryside run or walk supporting Shipston Home Nursing.",
+    description:
+      "Shipston Home Nursing's annual fundraiser starts and finishes at Walton Hall and follows a mixed cross-country and road route through nearby woods and Walton village. Electronic timing is provided for runners, and entrants receive a bacon or vegetarian roll at the finish.",
+    organiser: "Shipston Home Nursing",
+    website: "https://shipstonhomenursing.co.uk/event/walton-hall-10k-run-and-walk/",
   },
 };
 
@@ -19479,6 +19607,175 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "GoTrail confirms the current 18 October edition, donation entry, 200-runner limit, family and dog rules, Currie Memorial Hall registration and Riddell Estate route. Complete payment through EntryCentral.",
+    },
+  ],
+  "lullingstone-10k|2026-10-18|10K": [
+    {
+      providerCode: "netiming-lullingstone-2026",
+      providerName: "NE Timing official checkout",
+      entryUrl: "https://www.netiming.co.uk/events/lullingstone-10k-2",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://eynsfordrunningclub.com/lullingstone-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Eynsford Running Club links directly to this NE Timing checkout for the 18 October race. Confirm the final price and any service fee before payment.",
+    },
+    {
+      providerCode: "official-eynsford-lullingstone-2026",
+      providerName: "Eynsford Running Club information",
+      entryUrl: "https://eynsfordrunningclub.com/lullingstone-10k/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://eynsfordrunningclub.com/lullingstone-10k/",
+      isVerified: true,
+      notes:
+        "The organiser confirms the 18 October date, new 09:00 start and current entry link. Use the NE Timing route to complete registration.",
+    },
+  ],
+  "reading-rivermead-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-mcc-reading-town-2026",
+      providerName: "MCC Promotions official entry",
+      entryUrl: "https://www.mccpromotions.com/e/reading-town-10k-charity-fun-run-3742",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://www.mccpromotions.com/e/reading-town-10k-charity-fun-run-3742",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "MCC Promotions' current event page offers entry for the exact 18 October race. Check the final checkout total and any affiliation terms before payment.",
+    },
+    {
+      providerCode: "timeoutdoors-reading-town-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/reading-rivermead-10k-charity-fun-run",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 16,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/reading-rivermead-10k-charity-fun-run",
+      isVerified: true,
+      notes:
+        "TimeOutdoors lists open entry at £16 and confirms the 10:00 start and King's Meadow venue, then routes runners to the active booking flow.",
+    },
+  ],
+  "rtt-gower-trail-half-marathon-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-aspirex-gower-postponed-2026",
+      providerName: "Aspire X Events status page",
+      entryUrl: "https://www.aspirexevents.com/e/rtt-gower-trail-half-marathon-and-10k-13910",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://www.aspirexevents.com/e/rtt-gower-trail-half-marathon-and-10k-13910",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official page says the event is postponed and a new date is coming soon. Do not enter or arrange travel against the provisional 18 October listing until the organiser publishes the replacement date.",
+    },
+    {
+      providerCode: "gotrail-gower-postponed-2026",
+      providerName: "GoTrail postponement guide",
+      entryUrl: "https://gotrail.run/en/event/run-the-trails-series-gower",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://gotrail.run/en/event/run-the-trails-series-gower",
+      isVerified: true,
+      notes:
+        "GoTrail independently reflects the postponement. Recheck the official Aspire X page for the replacement date and reopened entry before registering.",
+    },
+  ],
+  "run-breckland-sapiston|2026-10-18|10K": [
+    {
+      providerCode: "runabc-sapiston-2026",
+      providerName: "runABC entry route",
+      entryUrl: "https://runabc.co.uk/run-breckland-sapiston",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://runabc.co.uk/run-breckland-sapiston",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "runABC's current 2026 listing provides its Enter Now route and confirms the 18 October date, noon start and Run Breckland organiser. Review the destination checkout before payment.",
+    },
+    {
+      providerCode: "runningcalendar-sapiston-2026",
+      providerName: "Running Calendar entry guide",
+      entryUrl: "https://www.runningcalendar.co.uk/event/run-breckland-sapiston-5k-10k-trail-run/",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://www.runningcalendar.co.uk/event/run-breckland-sapiston-5k-10k-trail-run/",
+      isVerified: true,
+      notes:
+        "Running Calendar manually checked the listing in June 2026 and provides a Register Now route. Confirm that the linked checkout still names the 18 October 2026 edition before paying.",
+    },
+  ],
+  "runuk-windsor-dorney-lakeside-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-runuk-windsor-dorney-2026",
+      providerName: "RunUK official entry",
+      entryUrl: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-10k-2852",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-10k-2852",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunUK's live event page is accepting entries for the 18 October race. Current partner listings show direct entry from £24 to £26; confirm the selected ticket and final total at checkout.",
+    },
+    {
+      providerCode: "worldsmarathons-windsor-dorney-2026",
+      providerName: "World's Marathons entry",
+      entryUrl: "https://worldsmarathons.com/marathon/windsor-dorney-lakeside-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 31,
+      priceCurrency: "EUR",
+      closesAt: "2026-10-16T23:59:00+01:00",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://worldsmarathons.com/marathon/windsor-dorney-lakeside-10k",
+      isVerified: true,
+      notes:
+        "World's Marathons offers a separate registration route at €31 and currently lists 16 October as the close date. Compare currency conversion and final fees with RunUK before booking.",
+    },
+  ],
+  "shipston-home-nursing-10k-walton-hall|2026-10-18|10K": [
+    {
+      providerCode: "official-shipston-walton-hall-2026",
+      providerName: "Shipston Home Nursing official entry",
+      entryUrl: "https://shipstonhomenursing.co.uk/event/walton-hall-10k-run-and-walk/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://shipstonhomenursing.co.uk/event/walton-hall-10k-run-and-walk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The charity's current page invites discounted pre-registration for the 18 October run or walk. Follow its registration control and confirm the final donation or entry total before submitting.",
+    },
+    {
+      providerCode: "runningcalendar-walton-hall-2026",
+      providerName: "Running Calendar entry guide",
+      entryUrl: "https://www.runningcalendar.co.uk/event/walton-hall-10k-run-walk/",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T07:15:00+01:00",
+      sourceUrl: "https://www.runningcalendar.co.uk/event/walton-hall-10k-run-walk/",
+      isVerified: true,
+      notes:
+        "Running Calendar manually checked this exact 2026 edition in March and provides a Register Now route. Use the charity page as the authoritative source for final terms and event updates.",
     },
   ],
 };
