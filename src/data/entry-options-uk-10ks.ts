@@ -457,6 +457,24 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-10",
     toDate: "2026-10-11",
   },
+  {
+    seriesSlug: "sub4-werrington-10k",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
+  {
+    seriesSlug: "the-holmfirth-10k",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
+  {
+    seriesSlug: "the-sheffield-tententen-10k-endcliffe-park",
+    distance: "10K",
+    fromDate: "2026-10-10",
+    toDate: "2026-10-11",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -3067,6 +3085,51 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://runabc.co.uk/skylark-run",
     notes:
       "The imported 2026 row implies an 11:00 BST start on Saturday 10 October, but available organiser pages do not currently announce a 2026 Skylark Run or expose a matching checkout. The most recent verified race information is for October 2025, so all 2026 details remain TBC and must be reconfirmed.",
+  },
+  "sub4-werrington-10k|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "10:00",
+    entryUrl: "https://www.entryhub.co.uk/sub-4-werrington-10k-2026",
+    source: "https://www.trenthamrunningclub.co.uk/Werrington10k",
+    notes:
+      "Trentham Running Club and EntryHub confirm Sunday 11 October and a 10:00 start, correcting the imported Saturday date and 23:00 placeholder. The chip-timed country-lane race offers optional-medal entry and reduces waste with paper cups and no plastic water bottles.",
+  },
+  "tatton-10k-october|2026-10-10|10K": {
+    startTime: "08:45",
+    entryUrl: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-october-2026",
+    source: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-october-2026",
+    notes:
+      "RunThrough confirms an 08:45 10K start on Saturday 10 October, correcting the imported 07:45 time. The accurately measured, chip-timed and road-closed course uses the undulating internal roads of Tatton Park, with a medal, refreshments and free event photos included.",
+  },
+  "the-holmfirth-10k|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "09:30",
+    entryUrl: "https://racebest.com/races/holmfirth10k",
+    source: "https://www.holmfirthharriers.com/event/holmfirth-10k/",
+    notes:
+      "Holmfirth Harriers and RaceBest confirm Sunday 11 October and a 09:30 start, correcting the imported Saturday date and 23:00 placeholder. The challenging single-lap road course climbs around Hade Edge and Winscar Reservoir, with 350 places and optional technical T-shirt entry.",
+  },
+  "the-meadows-5k-10-october|2026-10-10|10K": {
+    startTime: "10:00",
+    entryUrl: "https://findarace.com/events/the-meadows-5k-10k/10th-october-2026",
+    source: "https://findarace.com/events/the-meadows-5k-10k/10th-october-2026",
+    notes:
+      "The organiser-authorised booking page confirms a 10:00 start on Saturday 10 October, correcting the imported 09:00 time. The flat, fast and chip-timed 10K uses four laps of the Meadows' smooth park paths, with a medal, race photography and on-course support.",
+  },
+  "the-sheffield-tententen-10k-endcliffe-park|2026-10-10|10K": {
+    date: "2026-10-11",
+    startTime: "10:00",
+    entryUrl: "https://www.sientries.co.uk/event/sheffield-tententen-2026",
+    source: "https://www.sheffield10k.com/",
+    notes:
+      "Kandoo Events and SiEntries confirm Sunday 11 October and a 10:00 10K start, correcting the imported Saturday date and 23:00 placeholder. The 15th and final Endcliffe Park edition combines grass, road, paved paths and woodland trails in an inclusive multi-terrain race.",
+  },
+  "alcester-10k|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl: "https://racewaysevents.eventrac.co.uk/e/alcester-10k-8511",
+    source: "https://www.alcester10k.com/",
+    notes:
+      "Raceways confirms a 10:00 start on Sunday 11 October, correcting the imported 09:00 time. The chip-timed single loop leaves Alcester High Street for Warwickshire country lanes, with two drinks stations, a finisher medal and T-shirt, post-race snacks and a free children's run.",
   },
 };
 
@@ -7654,6 +7717,94 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "Skylark Lakes / local volunteer organisers",
     website: "https://runabc.co.uk/skylark-run",
   },
+  "sub4-werrington-10k": {
+    name: "Sub-4 Werrington 10K",
+    city: "Werrington",
+    county: "Staffordshire",
+    country: "England",
+    area: "Moorside High School and Werrington country lanes",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Sub-4 Werrington 10K — a chip-timed Staffordshire country-lane race with lower-waste entry choices.",
+    description:
+      "Trentham Running Club's annual road race starts at Moorside High School and follows the country lanes around Werrington. Entrants can choose a no-frills or medal place, while the event uses paper cups, avoids plastic water bottles and provides bananas at the finish.",
+    organiser: "Trentham Running Club",
+    website: "https://www.trenthamrunningclub.co.uk/Werrington10k",
+  },
+  "tatton-10k-october": {
+    name: "Tatton Park 5K & 10K — October",
+    city: "Knutsford",
+    county: "Cheshire",
+    country: "England",
+    area: "Tatton Park Gardens and the park's closed internal roads",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "Tatton Park 5K & 10K — accurately measured, chip-timed races on closed park roads.",
+    description:
+      "RunThrough's undulating races start, loop and finish within Tatton Park. The road-closed event includes chip timing, marshals, a refreshment station, medal, post-race goodies, free photographs and event-village parking.",
+    organiser: "RunThrough",
+    website: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-october-2026",
+  },
+  "the-holmfirth-10k": {
+    name: "Holmfirth 10K",
+    city: "Holmfirth",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Hade Edge, Winscar Reservoir and the Holme Valley",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Holmfirth 10K — a scenic and challenging road race through the hills above the Holme Valley.",
+    description:
+      "Holmfirth Harriers' undulating single-lap race starts on Dunford Road, climbs through Hade Edge and Winscar, then returns past reservoir and moorland views for a fast final descent and recreation-ground finish.",
+    organiser: "Holmfirth Harriers AC",
+    website: "https://www.holmfirthharriers.com/event/holmfirth-10k/",
+  },
+  "the-meadows-5k-10-october": {
+    name: "The Meadows 5K & 10K — October",
+    city: "Edinburgh",
+    county: "City of Edinburgh",
+    country: "Scotland",
+    area: "The Meadows and its tree-lined park paths",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary: "The Meadows 5K & 10K — flat, fast, chip-timed park races in central Edinburgh.",
+    description:
+      "Up and Running Events' friendly Edinburgh race uses a clearly marked 2.5K loop around the Meadows. The 10K completes four laps and includes chip timing, marshals, medical cover, hydration, a medal and professional race photography.",
+    organiser: "Up and Running Events",
+    website: "https://findarace.com/events/the-meadows-5k-10k/10th-october-2026",
+  },
+  "the-sheffield-tententen-10k-endcliffe-park": {
+    name: "Sheffield Tententen 10K",
+    city: "Sheffield",
+    county: "South Yorkshire",
+    country: "England",
+    area: "Endcliffe Park and its surrounding woodland trails",
+    surface: "Mixed",
+    distances: ["10K", "2.5K"],
+    summary:
+      "Sheffield Tententen — an inclusive multi-terrain 10K returning for its 15th and final edition.",
+    description:
+      "Kandoo Events' creative Endcliffe Park course mixes grass, road, paved paths and flowing woodland trails, with twists, turns and manageable bumps. The final edition also includes a 2.5K fun run for ages 4 to 14.",
+    organiser: "Kandoo Events",
+    website: "https://www.sheffield10k.com/",
+  },
+  "alcester-10k": {
+    name: "Alcester 10K",
+    city: "Alcester",
+    county: "Warwickshire",
+    country: "England",
+    area: "Alcester High Street and Warwickshire country lanes",
+    surface: "Road",
+    distances: ["10K", "1K"],
+    summary:
+      "Alcester 10K — a community road race from the market-town centre into the Warwickshire countryside.",
+    description:
+      "Raceways' chip-timed single loop starts and finishes on Alcester High Street, with two drinks stations, local support, a medal and T-shirt, post-race snacks and a free medal-winning 1K children's fun run.",
+    organiser: "Raceways Events CIC",
+    website: "https://www.alcester10k.com/",
+  },
 };
 
 /** Entry routes checked through 19 August 2026. */
@@ -8538,7 +8689,7 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       entryUrl: "https://www.letsdothis.com/gb/e/run-winchcombe-2026-248571",
       entryType: "third_party",
       status: "open",
-      priceAmount: 16,
+      priceAmount: 18,
       priceCurrency: "GBP",
       checkedAt: "2026-08-18T23:30:00+01:00",
       sourceUrl: "https://www.letsdothis.com/gb/e/run-winchcombe-2026-248571",
@@ -16601,6 +16752,189 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC's public event page still describes the 4 October 2025 edition. The imported 2026 row is retained as TBC, not as proof that registration is open.",
+    },
+  ],
+  "sub4-werrington-10k|2026-10-11|10K": [
+    {
+      providerCode: "entryhub-werrington-10k-2026",
+      providerName: "EntryHub official checkout",
+      entryUrl: "https://www.entryhub.co.uk/sub-4-werrington-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 16,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.trenthamrunningclub.co.uk/Werrington10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Trentham Running Club's Enter Here action opens this EntryHub checkout. The visible checkout lists £18 no-frills or £22 with a medal; the club page also advertises affiliated options from £16, plus an administration fee.",
+    },
+    {
+      providerCode: "timeoutdoors-werrington-10k-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/werrington-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 16,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/werrington-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms the £16 to £22 range, 10:00 start, optional-medal format and sustainability details, then routes registration to EntryHub.",
+    },
+  ],
+  "tatton-10k-october|2026-10-10|10K": [
+    {
+      providerCode: "runthrough-tatton-october-2026",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/tatton-park-5k-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live page offers £30 10K entry and confirms the Saturday 08:45 start, road-closed course, free parking, medal and official photographs.",
+    },
+    {
+      providerCode: "letsdothis-tatton-october-2026",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/runthrough-tatton-10k-5k-october-2026-244922",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/runthrough-tatton-10k-5k-october-2026-244922",
+      isVerified: true,
+      notes:
+        "Let's Do This provides a secondary £30 booking route and confirms the 08:45 10K start at Tatton Park Gardens. Compare the final checkout total before payment.",
+    },
+  ],
+  "the-holmfirth-10k|2026-10-11|10K": [
+    {
+      providerCode: "racebest-holmfirth-10k-2026",
+      providerName: "RaceBest official checkout",
+      entryUrl: "https://racebest.com/races/holmfirth10k",
+      entryType: "official",
+      status: "open",
+      priceAmount: 17,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.holmfirthharriers.com/event/holmfirth-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Holmfirth Harriers' Event Entry action opens RaceBest. Race-only places cost £17 affiliated or £19 unaffiliated; optional technical T-shirt packages cost £26 to £28, with no hidden checkout fees.",
+    },
+    {
+      providerCode: "official-holmfirth-harriers-10k-2026",
+      providerName: "Holmfirth Harriers official information",
+      entryUrl: "https://www.holmfirthharriers.com/event/holmfirth-10k/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 17,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.holmfirthharriers.com/event/holmfirth-10k/",
+      isVerified: true,
+      notes:
+        "The organising club publishes the current route, parking, prizes and charity details and links directly to RaceBest. The optional T-shirt order closes on 27 September.",
+    },
+  ],
+  "the-meadows-5k-10-october|2026-10-10|10K": [
+    {
+      providerCode: "findarace-meadows-october-2026",
+      providerName: "Find a Race official partner checkout",
+      entryUrl: "https://findarace.com/events/the-meadows-5k-10k/10th-october-2026",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 24.9,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://findarace.com/events/the-meadows-5k-10k/10th-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Find a Race identifies itself as Up and Running Events' official booking partner and currently offers Quick Book 10K entry for £24.90.",
+    },
+    {
+      providerCode: "challenge-chasers-meadows-october-2026",
+      providerName: "Challenge Chasers entry",
+      entryUrl: "https://www.challengechasers.com/events/33dcfa56-bae2-46ce-bd8e-f58a347e9439",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 24.9,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.challengechasers.com/events/33dcfa56-bae2-46ce-bd8e-f58a347e9439",
+      isVerified: true,
+      notes:
+        "Challenge Chasers supplies a second live Book Now route for the 10 October edition at £24.90 and confirms the 10:00 start and Meadows venue. Compare the final checkout total before payment.",
+    },
+  ],
+  "the-sheffield-tententen-10k-endcliffe-park|2026-10-11|10K": [
+    {
+      providerCode: "sientries-sheffield-tententen-2026",
+      providerName: "SiEntries official checkout",
+      entryUrl: "https://www.sientries.co.uk/event/sheffield-tententen-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-08T23:59:00+01:00",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.sheffield10k.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's Enter action opens SiEntries. Main-event entry costs £29 and online registration is scheduled to close on 8 October unless the event fills first.",
+    },
+    {
+      providerCode: "official-sheffield-tententen-2026",
+      providerName: "Sheffield Tententen official information",
+      entryUrl: "https://www.sheffield10k.com/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.sheffield10k.com/",
+      isVerified: true,
+      notes:
+        "Kandoo Events confirms the 15th and final edition, Endcliffe Park venue and mixed-surface course, and links directly to SiEntries for registration.",
+    },
+  ],
+  "alcester-10k|2026-10-11|10K": [
+    {
+      providerCode: "eventrac-alcester-10k-2026",
+      providerName: "Eventrac official checkout",
+      entryUrl: "https://racewaysevents.eventrac.co.uk/e/alcester-10k-8511",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://www.alcester10k.com/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Alcester 10K's Enter Now action opens the live Raceways Eventrac event. Advance entry is required and the organiser warns that the race typically sells out early.",
+    },
+    {
+      providerCode: "findarace-alcester-10k-2026",
+      providerName: "Find a Race entry",
+      entryUrl: "https://findarace.com/events/alcester-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34.17,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:50:00+01:00",
+      sourceUrl: "https://findarace.com/events/alcester-10k",
+      isVerified: true,
+      notes:
+        "Find a Race provides an alternative Quick Book route at £34.17, with a £2 UK Athletics saving shown for eligible entrants. Compare the final checkout total before payment.",
     },
   ],
 };
