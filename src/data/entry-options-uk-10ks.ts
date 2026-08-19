@@ -2886,6 +2886,49 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "City of Southend AC confirms a 10:00 start on Sunday 4 October, correcting the imported 09:00 time. The flat, traffic-free out-and-back starts on Lifstan Way and follows Southend seafront and the wide footpaths of Gunners Park.",
   },
+  "penrith-rotary-10k-trail-run|2026-10-04|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.sientries.co.uk/event/dalemain-10km-trail-run-33k-fun-run-2026",
+    source: "https://www.sientries.co.uk/event/dalemain-10km-trail-run-33k-fun-run-2026",
+    notes:
+      "The live SiEntries page confirms an 11:00 start on Sunday 4 October, correcting the imported 10:00 time and the source's incorrect Scotland classification. The scenic trail 10K completes two laps of the Dalemain Mansion Estate and raises money for Jigsaw Children's Hospice and Penrith Rotary causes.",
+  },
+  "standalone-10k|2026-10-04|10K": {
+    startTime: "09:30",
+    entryUrl: "https://my.raceresult.com/366736/",
+    source: "https://www.nhrr.org.uk/2026-runners-information.html",
+    notes:
+      "North Herts Road Runners confirms a 09:30 start on Sunday 4 October, correcting the imported 08:30 time. The 39th Standalone 10K is chip timed on accurately measured, fully closed roads from Standalone Farm and hosts the 2026 Hertfordshire veterans' championships.",
+  },
+  "sutton-park-challenge|2026-10-04|10K": {
+    startTime: "10:30",
+    entryUrl:
+      "https://www.letsdothis.com/us/checkout/ticket?eventId=268198&occurrenceId=21111176943&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=180614&utm_source=website",
+    source: "https://midlandmencap.org.uk/get-involved/sutton-park-challenge/",
+    notes:
+      "Midland Mencap confirms that the inclusive 5K and 10K challenges start at 10:30 on Sunday 4 October, correcting the imported 09:30 time. Participants may run, walk or wheel the hilly Sutton Park course, with no time limit and free entry for a pre-arranged disability supporter or carer.",
+  },
+  "thompson-millennium-green|2026-10-04|10K": {
+    startTime: "11:00",
+    entryUrl: "https://totalracetiming.co.uk/race/678",
+    source: "https://totalracetiming.co.uk/race/678",
+    notes:
+      "Total Race Timing confirms that the 10K starts at 11:00 on Sunday 4 October, correcting the duplicate runABC record's 10:00 time. The non-chip-timed multi-terrain route uses pathways, lanes and bridleways around Thompson and raises funds for the Millennium Green Charitable Trust.",
+  },
+  "welwyn-half-marathon|2026-10-04|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.atwevents.co.uk/e/atw-welwyn-half-marathon-8927",
+    source: "https://www.atwevents.co.uk/e/atw-welwyn-half-marathon-8927",
+    notes:
+      "ATW confirms that the 10K and half marathon start at 09:30 on Sunday 4 October, correcting the imported 08:30 time. The multi-terrain 10K starts and finishes on Gosling Sports Park's 400-metre athletics track and shares its opening 5K with the half marathon.",
+  },
+  "wem-10k|2026-10-04|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.tickettailor.com/events/runthedistance/1895728",
+    source: "https://www.runthedistance.co.uk/wem-10k",
+    notes:
+      "Run The Distance and the live Ticket Tailor checkout confirm a 10:00 start on Sunday 4 October, correcting the imported 09:00 time. The accurately measured, closed-road course leaves Thomas Adams School for Wem town centre and the surrounding Shropshire countryside.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -7205,6 +7248,95 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "City of Southend AC's chip-timed out-and-back starts on Lifstan Way, follows the seafront and Gunners Park footpaths, and is accompanied by a returning 3K race for 11-to-15-year-olds.",
     organiser: "City of Southend Athletic Club",
     website: "https://www.southend10k.com/",
+  },
+  "penrith-rotary-10k-trail-run": {
+    name: "Dalemain 10K Trail Run & Children's Fun Runs",
+    city: "Penrith",
+    county: "Cumbria",
+    country: "England",
+    area: "Dalemain Mansion Estate",
+    surface: "Trail",
+    distances: ["10K", "3.3K", "2.3K"],
+    summary:
+      "Dalemain 10K Trail Run — a two-lap estate race supporting Jigsaw Children's Hospice and local causes.",
+    description:
+      "Penrith Rotary Club's scenic trail event circles the Dalemain Mansion Estate twice, with clearly marked and marshalled routes, on-site medical cover and separate children's fun runs.",
+    organiser: "Rotary Club of Penrith",
+    website: "https://www.sientries.co.uk/event/dalemain-10km-trail-run-33k-fun-run-2026",
+  },
+  "standalone-10k": {
+    name: "Standalone 10K",
+    city: "Letchworth Garden City",
+    county: "Hertfordshire",
+    country: "England",
+    area: "Standalone Farm and surrounding closed roads",
+    surface: "Road",
+    distances: ["10K", "800m"],
+    summary:
+      "Standalone 10K — a long-running, volunteer-led closed-road race from Standalone Farm in Letchworth.",
+    description:
+      "North Herts Road Runners stages this accurately measured, chip-timed community race on fully closed roads, with live music, free photographs, charity fundraising and a free children's fun run.",
+    organiser: "North Herts Road Runners",
+    website: "https://www.nhrr.org.uk/standalone-10k.html",
+  },
+  "sutton-park-challenge": {
+    name: "Midland Mencap Sutton Park Challenge",
+    city: "Sutton Coldfield",
+    county: "West Midlands",
+    country: "England",
+    area: "Sutton Park and Town Gate",
+    surface: "Trail",
+    distances: ["10K", "5K", "1K"],
+    summary:
+      "Sutton Park Challenge — inclusive run, walk and wheel distances supporting Midland Mencap.",
+    description:
+      "Midland Mencap's accessible community challenge offers hilly but wheelchair- and pushchair-suitable 1K, 5K and 10K routes with signage, marshals, medical support, medals and no finishing time limit.",
+    organiser: "Midland Mencap",
+    website: "https://midlandmencap.org.uk/get-involved/sutton-park-challenge/",
+  },
+  "thompson-millennium-green": {
+    name: "Thompson Millennium Green 10K & 5K",
+    city: "Thompson",
+    county: "Norfolk",
+    country: "England",
+    area: "Thompson Millennium Green and village bridleways",
+    surface: "Mixed",
+    distances: ["10K", "5K"],
+    summary:
+      "Thompson Millennium Green 10K & 5K — community multi-terrain races through rural Norfolk.",
+    description:
+      "The non-chip-timed charity races use pathways, lanes and bridleways around Thompson, with friendly marshals, bespoke medals and proceeds supporting the preservation of Thompson Millennium Green.",
+    organiser: "Thompson Millennium Green Charitable Trust / Total Race Timing",
+    website: "https://totalracetiming.co.uk/race/678",
+  },
+  "welwyn-half-marathon": {
+    name: "ATW Welwyn Half Marathon & 10K",
+    city: "Welwyn Garden City",
+    county: "Hertfordshire",
+    country: "England",
+    area: "Gosling Sports Park and Cole Green Way",
+    surface: "Mixed",
+    distances: ["Half", "10K", "400m"],
+    summary:
+      "ATW Welwyn Half Marathon & 10K — autumn races starting and finishing on Gosling's athletics track.",
+    description:
+      "ATW's UKA-licensed, chip-timed races begin together on Gosling Sports Park's 400-metre track before the multi-terrain 10K branches onto its own loop and returns for a stadium finish.",
+    organiser: "ATW Events",
+    website: "https://www.atwevents.co.uk/e/atw-welwyn-half-marathon-8927",
+  },
+  "wem-10k": {
+    name: "Wem 10K",
+    city: "Wem",
+    county: "Shropshire",
+    country: "England",
+    area: "Thomas Adams School, Wem town centre and surrounding countryside",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Wem 10K — a fast, closed-road town-and-country race from Thomas Adams School.",
+    description:
+      "Run The Distance's accurately measured route crosses Wem town centre and nearby Shropshire countryside, with professional chip timing, free photographs and a bespoke finisher medal.",
+    organiser: "Run The Distance / Run UKAC",
+    website: "https://www.runthedistance.co.uk/wem-10k",
   },
 };
 
@@ -15590,6 +15722,190 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "The current race page confirms entries open, the 10:00 Lifstan Way start, Southchurch Park East race HQ, traffic-free seafront course and Essex County Championship eligibility rules.",
+    },
+  ],
+  "penrith-rotary-10k-trail-run|2026-10-04|10K": [
+    {
+      providerCode: "sientries-dalemain-2026",
+      providerName: "SiEntries official checkout",
+      entryUrl: "https://www.sientries.co.uk/event/dalemain-10km-trail-run-33k-fun-run-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-03T12:00:00+01:00",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://www.sientries.co.uk/event/dalemain-10km-trail-run-33k-fun-run-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live checkout lists £20 entry, an 11:00 start, minimum age 15 and online closing at noon on 3 October. It reports places available.",
+    },
+    {
+      providerCode: "gotrail-dalemain-2026",
+      providerName: "GoTrail event information",
+      entryUrl: "https://gotrail.run/en/race/penrith-rotary-10k-trail",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://gotrail.run/en/race/penrith-rotary-10k-trail",
+      isVerified: true,
+      notes:
+        "GoTrail independently lists the 4 October estate race, £20 fee, free parking and SiEntries registration route; booking remains with the official checkout.",
+    },
+  ],
+  "standalone-10k|2026-10-04|10K": [
+    {
+      providerCode: "raceresult-standalone-2026",
+      providerName: "Race Result official checkout",
+      entryUrl: "https://my.raceresult.com/366736/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://www.nhrr.org.uk/standalone-10k.html",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organising club's Click Here to Enter action opens this 2026 Race Result registration. Published entry is £20 affiliated or £22 unaffiliated, with optional T-shirt tiers.",
+    },
+    {
+      providerCode: "official-nhrr-standalone-2026",
+      providerName: "North Herts Road Runners official information",
+      entryUrl: "https://www.nhrr.org.uk/standalone-10k.html",
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://www.nhrr.org.uk/2026-runners-information.html",
+      isVerified: true,
+      notes:
+        "The club confirms tickets available, the 09:30 start, UKA licence 30401, closed roads, free official parking and the linked Race Result checkout.",
+    },
+  ],
+  "sutton-park-challenge|2026-10-04|10K": [
+    {
+      providerCode: "letsdothis-sutton-park-challenge-2026",
+      providerName: "Let's Do This official checkout",
+      entryUrl:
+        "https://www.letsdothis.com/us/checkout/ticket?eventId=268198&occurrenceId=21111176943&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=180614&utm_source=website",
+      entryType: "charity",
+      status: "open",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://midlandmencap.org.uk/get-involved/sutton-park-challenge/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Midland Mencap's Sign Up Today action opens this Let's Do This checkout. Online entry is live; confirm the selected distance price at checkout, with on-the-day entry costing £2 more if available.",
+    },
+    {
+      providerCode: "official-midland-mencap-sutton-2026",
+      providerName: "Midland Mencap official information",
+      entryUrl: "https://midlandmencap.org.uk/get-involved/sutton-park-challenge/",
+      entryType: "charity",
+      status: "open",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://midlandmencap.org.uk/get-involved/sutton-park-challenge/",
+      isVerified: true,
+      notes:
+        "The charity page confirms the inclusive 10:30 5K/10K start, Town Gate parking, no time limit and free participation for a disabled runner's pre-arranged supporter or carer.",
+    },
+  ],
+  "thompson-millennium-green|2026-10-04|10K": [
+    {
+      providerCode: "total-race-timing-thompson-2026",
+      providerName: "Total Race Timing official checkout",
+      entryUrl: "https://totalracetiming.co.uk/race/678",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19.1,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-28T23:59:00+01:00",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://totalracetiming.co.uk/race/678",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live checkout shows places available at £19.10 affiliated or £21.10 unaffiliated including the admin fee. Transfers close at midnight on 28 September.",
+    },
+    {
+      providerCode: "running-calendar-thompson-2026",
+      providerName: "Running Calendar event information",
+      entryUrl: "https://www.runningcalendar.co.uk/event/thompson-millennium-green-10k-5k/",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://www.runningcalendar.co.uk/event/thompson-millennium-green-10k-5k/",
+      isVerified: true,
+      notes:
+        "Running Calendar independently confirms the 4 October multi-terrain event and links to the Total Race Timing registration page; use the official checkout for current fees and availability.",
+    },
+  ],
+  "welwyn-half-marathon|2026-10-04|10K": [
+    {
+      providerCode: "atw-welwyn-10k-2026",
+      providerName: "ATW official entry",
+      entryUrl: "https://www.atwevents.co.uk/e/atw-welwyn-half-marathon-8927",
+      entryType: "official",
+      status: "open",
+      priceAmount: 31,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://www.atwevents.co.uk/e/atw-welwyn-half-marathon-8927",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live Enter Now route offers the 10K from £31 to £33 and confirms the 09:30 start, Gosling Sports Park venue and age-16 minimum.",
+    },
+    {
+      providerCode: "worldsmarathons-welwyn-10k-2026",
+      providerName: "World's Marathons entry",
+      entryUrl: "https://worldsmarathons.com/marathon/welwyn-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 38,
+      priceCurrency: "EUR",
+      closesAt: "2026-10-03T23:59:00+01:00",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://worldsmarathons.com/marathon/welwyn-half-marathon",
+      isVerified: true,
+      notes:
+        "World's Marathons provides a secondary 10K booking route at €38 and lists registration closing on 3 October. Compare the final checkout total and currency with ATW before purchasing.",
+    },
+  ],
+  "wem-10k|2026-10-04|10K": [
+    {
+      providerCode: "ticket-tailor-wem-2026",
+      providerName: "Ticket Tailor official checkout",
+      entryUrl: "https://www.tickettailor.com/events/runthedistance/1895728",
+      entryType: "official",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://www.runthedistance.co.uk/wem-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live checkout offers limited £18 early-bird places, then £21 affiliated or £23 unaffiliated entry, with a £2 service fee. T-shirt bundles are also available.",
+    },
+    {
+      providerCode: "letsdothis-wem-2026",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/wem-10k-257912",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T04:10:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/wem-10k-257912",
+      isVerified: true,
+      notes:
+        "Let's Do This offers a secondary registration route from £18 to £26 and confirms the 10:00 start, closed-road course and Thomas Adams School venue.",
     },
   ],
 };
