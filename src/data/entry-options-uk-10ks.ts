@@ -337,6 +337,12 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-26",
     toDate: "2026-09-27",
   },
+  {
+    seriesSlug: "badlesmere-10k",
+    distance: "10K",
+    fromDate: "2026-09-27",
+    toDate: "2027-05-16",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -2472,6 +2478,45 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://runhappyrunhealthy.co.uk/event/the-river-run-2026-river-darent-kent/",
     notes:
       "The River Run starts at 09:00 on Sunday 27 September in Dartford Central Park. Its point-to-point 10K follows the River Darent to Eynsford, with a return shuttle, finisher medal, snack and water.",
+  },
+  "badlesmere-10k|2026-09-27|10K": {
+    date: "2027-05-16",
+    startTime: "10:00",
+    entryUrl: "https://badlesmere10k.eventrac.co.uk/e/badlesmere-10k-10236",
+    source: "https://badlesmere10k.eventrac.co.uk/e/badlesmere-10k-10236",
+    notes:
+      "The organiser's live Eventrac page now gives Sunday 16 May 2027 as the next Badlesmere 10K, replacing the superseded 27 September 2026 listing. The testing North Downs route starts at 10:00 from Badlesmere Village Hall and supports the community charity.",
+  },
+  "highclere-castle-10k|2026-09-27|10K": {
+    status: "TBC",
+    startTime: undefined,
+    entryUrl: "https://www.newburyac.org.uk/road-running/highclere-10k",
+    source: "https://www.newburyac.org.uk/road-running/highclere-10k",
+    notes:
+      "A 27 September 2026 date appears in current regional calendars, but Newbury Athletic Club's official page still publishes only 2025 results and no 2026 entry route or start time. Treat the 2026 fixture and entry as unconfirmed until the organiser updates its page.",
+  },
+  "st-nicholas-hospice-care-10k-run|2026-09-27|10K": {
+    status: "TBC",
+    startTime: "10:00",
+    entryUrl: "https://stnicholashospice.org.uk/fundraising-events/st-nicholas-hospice-care-10k/",
+    source: "https://stnicholashospice.org.uk/fundraising-events/st-nicholas-hospice-care-10k/",
+    notes:
+      "St Nicholas Hospice Care confirms its 10K for 10:00 on Sunday 27 September from Angel Hill in Bury St Edmunds. Public registration is not yet open; the current official action is early-access signup.",
+  },
+  "the-pumpkin-run|2026-09-27|10K": {
+    status: "Closed",
+    startTime: "09:30",
+    entryUrl: "https://runabc.co.uk/the-pumpkin-run",
+    source: "https://runabc.co.uk/the-pumpkin-run",
+    notes:
+      "The Pumpkin Run at Bullbanks Farm is marked cancelled for Sunday 27 September. An older booking page still says entries are coming soon, but runners should not attempt to book unless the organiser publishes a new announcement.",
+  },
+  "wacky-run-series-may-2026-27-oay|2026-09-27|10K": {
+    startTime: "08:00",
+    entryUrl: "https://runabc.co.uk/wacky-run-series-may-2026-27-oay",
+    source: "https://runabc.co.uk/wacky-run-series-may-2026-27-oay",
+    notes:
+      "Wacky Run Series September begins at 08:00 on Sunday 27 September from John's Cafe on Hayling Island. The six-hour lap event lets runners choose a distance from 5K through ultra, with only 100 places across the event.",
   },
 };
 
@@ -6195,6 +6240,78 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "RunHappyRunHealthy's community event starts in Dartford Central Park and follows the River Darent to separate finishes in South Darenth, Eynsford and Otford, with return shuttle transport.",
     organiser: "RunHappyRunHealthy",
     website: "https://runhappyrunhealthy.co.uk/event/the-river-run-2026-river-darent-kent/",
+  },
+  "badlesmere-10k": {
+    name: "Badlesmere 10K",
+    city: "Badlesmere",
+    county: "Kent",
+    country: "England",
+    area: "Badlesmere Village Hall and the Kent Downs",
+    surface: "Mixed",
+    distances: ["10K", "Junior"],
+    summary: "Badlesmere 10K — a challenging community race through the Kent Downs countryside.",
+    description:
+      "This community-run 10K welcomes runners and walkers to a testing North Downs route, with three water stations, free parking, a children's race and all profits supporting the village hall and lees charity.",
+    organiser: "Badlesmere 10K community team",
+    website: "https://badlesmere10k.eventrac.co.uk/e/badlesmere-10k-10236",
+  },
+  "highclere-castle-10k": {
+    name: "Highclere Castle 10K",
+    city: "Highclere",
+    county: "Hampshire",
+    country: "England",
+    area: "Highclere Park",
+    surface: "Mixed",
+    distances: ["10K", "Junior"],
+    summary:
+      "Highclere Castle 10K — an undulating mixed-terrain estate race whose 2026 entry is awaiting organiser confirmation.",
+    description:
+      "Newbury Athletic Club's established charity race uses tarmac, gravel tracks, fields and a short public-road section in the Highclere Castle estate, but its official page has not yet published 2026 registration details.",
+    organiser: "Newbury Athletic Club",
+    website: "https://www.newburyac.org.uk/road-running/highclere-10k",
+  },
+  "st-nicholas-hospice-care-10k-run": {
+    name: "St Nicholas Hospice Care 10K",
+    city: "Bury St Edmunds",
+    county: "Suffolk",
+    country: "England",
+    area: "Angel Hill, Abbey Gardens and Moreton Hall",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "St Nicholas Hospice Care 10K — a community fundraiser through central Bury St Edmunds.",
+    description:
+      "The hospice's chip-timed 10K starts and finishes on Angel Hill, passing through Abbey Gate and Abbey Gardens before using partly closed roads and footpaths towards Moreton Hall.",
+    organiser: "St Nicholas Hospice Care",
+    website: "https://stnicholashospice.org.uk/fundraising-events/st-nicholas-hospice-care-10k/",
+  },
+  "the-pumpkin-run": {
+    name: "The Pumpkin Run",
+    city: "Eight Ash Green",
+    county: "Essex",
+    country: "England",
+    area: "Bullbanks Farm and The Pumpkin Patch",
+    surface: "Trail",
+    distances: ["10K", "5K", "1K"],
+    summary: "The Pumpkin Run — the 2026 farm-trail 10K, 5K and family run have been cancelled.",
+    description:
+      "The planned traffic-free races used flat farm tracks through fields, a pumpkin patch and corn maze near Colchester. Current listings mark the 27 September 2026 event cancelled.",
+    organiser: "The Pumpkin Run team",
+    website: "https://runabc.co.uk/the-pumpkin-run",
+  },
+  "wacky-run-series-may-2026-27-oay": {
+    name: "Wacky Run Series September",
+    city: "Hayling Island",
+    county: "Hampshire",
+    country: "England",
+    area: "John's Cafe and Hayling Island seafront",
+    surface: "Mixed",
+    distances: ["5K", "10K", "Half", "Marathon", "Ultra"],
+    summary: "Wacky Run Series September — a six-hour, choose-your-distance coastal lap event.",
+    description:
+      "Believe & Achieve Events offers a friendly 100-place lap challenge on Hayling Island, where participants choose a finish distance from 5K through ultra within the six-hour limit.",
+    organiser: "Believe & Achieve Events — Run Pompey",
+    website: "https://www.fitprorob.biz/",
   },
 };
 
@@ -13349,6 +13466,134 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "RunHappyRunHealthy links directly to this preferred occurrence. Let's Do This currently shows the 5K, 10K and 18K registration choices at £28.",
+    },
+  ],
+  "badlesmere-10k|2027-05-16|10K": [
+    {
+      providerCode: "official-eventrac-badlesmere",
+      providerName: "Badlesmere Eventrac official entry",
+      entryUrl: "https://badlesmere10k.eventrac.co.uk/e/badlesmere-10k-10236",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl: "https://badlesmere10k.eventrac.co.uk/e/badlesmere-10k-10236",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser-branded Eventrac page names 16 May 2027 as the next race and lists £24 affiliated or £25 non-affiliated entry plus booking fees. This replaces the outdated September 2026 fixture.",
+    },
+  ],
+  "highclere-castle-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-newbury-highclere",
+      providerName: "Newbury AC official information",
+      entryUrl: "https://www.newburyac.org.uk/road-running/highclere-10k",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl: "https://www.newburyac.org.uk/road-running/highclere-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Newbury AC describes the established event but currently shows only 2025 results, with no 2026 checkout, price or start time. Check the official page before planning travel.",
+    },
+    {
+      providerCode: "runabc-regional-highclere",
+      providerName: "runABC Berkshire calendar",
+      entryUrl: "https://runabc.co.uk/berkshire",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/berkshire",
+      isVerified: true,
+      notes:
+        "runABC's current Berkshire calendar lists Highclere on 27 September 2026, but its event detail page remains on 2025. The date is retained as TBC pending organiser confirmation.",
+    },
+  ],
+  "st-nicholas-hospice-care-10k-run|2026-09-27|10K": [
+    {
+      providerCode: "official-st-nicholas-early-access",
+      providerName: "St Nicholas Hospice official early access",
+      entryUrl: "https://stnicholashospice.org.uk/fundraising-events/st-nicholas-hospice-care-10k/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl:
+        "https://stnicholashospice.org.uk/fundraising-events/st-nicholas-hospice-care-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The hospice confirms the 27 September date and 10:00 start but currently offers early-access signup rather than general registration. Availability and price remain TBC.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/st-nicholas-hospice-care-10k-run",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/st-nicholas-hospice-care-10k-run",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event route. The hospice's official page is authoritative and has not yet opened general registration.",
+    },
+  ],
+  "the-pumpkin-run|2026-09-27|10K": [
+    {
+      providerCode: "runabc-pumpkin-cancellation",
+      providerName: "runABC cancellation notice",
+      entryUrl: "https://runabc.co.uk/the-pumpkin-run",
+      entryType: "third_party",
+      status: "closed",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/the-pumpkin-run",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "runABC's current event page marks the 27 September 2026 Pumpkin Run cancelled. Entry should be treated as closed.",
+    },
+    {
+      providerCode: "letsdothis-pumpkin",
+      providerName: "Let's Do This inactive listing",
+      entryUrl: "https://www.letsdothis.com/gb/e/the-pumpkin-run-2025-251033",
+      entryType: "third_party",
+      status: "closed",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/the-pumpkin-run-2025-251033",
+      isVerified: true,
+      notes:
+        "This older listing still shows £40 and 'coming soon', not a live checkout. The newer cancellation notice takes precedence, so this route is shown closed rather than bookable.",
+    },
+  ],
+  "wacky-run-series-may-2026-27-oay|2026-09-27|10K": [
+    {
+      providerCode: "runabc-wacky-september",
+      providerName: "runABC live entry route",
+      entryUrl: "https://runabc.co.uk/wacky-run-series-may-2026-27-oay",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/wacky-run-series-may-2026-27-oay",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "runABC currently exposes the September event's entry route and confirms the corrected 08:00 start, Hayling Island venue and flexible distances.",
+    },
+    {
+      providerCode: "official-believe-achieve",
+      providerName: "Believe & Achieve organiser website",
+      entryUrl: "https://www.fitprorob.biz/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T20:30:00+01:00",
+      sourceUrl: "https://www.fitprorob.biz/",
+      isVerified: true,
+      notes:
+        "This is the organiser's official website, but it did not expose a separately verifiable September checkout during this review. Use the live runABC route for current booking.",
     },
   ],
 };
