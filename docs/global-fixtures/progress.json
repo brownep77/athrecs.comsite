@@ -57,6 +57,21 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-20"
+    },
+    {
+      "id": "global-004",
+      "status": "verified",
+      "source_ids": ["te_sports_timing_upcoming", "up_running_scotland"],
+      "regions": ["UK"],
+      "countries": ["Wales", "Scotland"],
+      "series_slugs": [
+        "run4all-neath-5k-summer-series",
+        "cuningar-loop-5k-10k",
+        "morgans-army-brisco-gorseinon-10k"
+      ],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-20"
     }
   ],
   "source_progress": [
@@ -69,14 +84,20 @@
     {
       "source_id": "up_running_scotland",
       "status": "in_progress",
-      "events_imported": 2,
-      "last_checkpoint": "global-003"
+      "events_imported": 3,
+      "last_checkpoint": "global-004"
     },
     {
       "source_id": "runthrough_uk",
       "status": "in_progress",
       "events_imported": 1,
       "last_checkpoint": "global-003"
+    },
+    {
+      "source_id": "te_sports_timing_upcoming",
+      "status": "in_progress",
+      "events_imported": 2,
+      "last_checkpoint": "global-004"
     }
   ]
 }
