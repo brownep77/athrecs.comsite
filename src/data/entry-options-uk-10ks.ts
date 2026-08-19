@@ -3223,6 +3223,50 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "MacTuff and the current BookitZone listing confirm afternoon racing from 14:00 on Sunday 11 October, correcting the imported 13:30 placeholder. The 10K is run in small pace-seeded heats on the County Ground athletics track, with personal lap splits and chip timing; entrants receive their assigned heat in final instructions.",
   },
+  "owestry-10k|2026-10-11|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.adrenalinesportingevents.co.uk/oswestry-10k-run-running-event/",
+    source: "https://www.adrenalinesportingevents.co.uk/oswestry-10k-run-running-event/",
+    notes:
+      "Adrenaline Sporting Events confirms a 09:00 start on Sunday 11 October, correcting the imported 08:00 time. The fully closed-road, single-lap town race starts and finishes in central Oswestry, with an undulating route, scenic final section, chip timing and a 90-minute cut-off.",
+  },
+  "richmond-autumn-riverside-10k|2026-10-11|10K": {
+    startTime: "09:30",
+    entryUrl: "https://thefixevents.com/the-richmond-autumn-riverside-10k-and-half-marathon-run",
+    source: "https://thefixevents.com/the-richmond-autumn-riverside-10k-and-half-marathon-run",
+    notes:
+      "The Fix Events confirms Sunday 11 October, and the distance-specific event listing gives a 09:30 10K start after the 09:00 half marathon, correcting the imported 08:00 event placeholder. The flat out-and-back follows riverside paths from Ham Street towards Kingston and Richmond.",
+  },
+  "richmond-castle-10k|2026-10-11|10K": {
+    startTime: "11:00",
+    entryUrl: "https://bookitzone.com/richmondcastle10k/BrjFFX",
+    source: "https://www.swaledalerunners.co.uk/richmond-castle-10k",
+    notes:
+      "Swaledale Runners and BookitZone confirm an 11:00 start on Sunday 11 October, correcting the imported 10:00 time. The measured road course starts and finishes at The Batts, passes the River Swale waterfalls, climbs Sleegill, loops through Catterick Garrison and circles the castle before a fast descent.",
+  },
+  "run-heaton-5k-10k-half-marathon-october|2026-10-11|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-october-2026",
+    source: "https://www.runheaton.com/",
+    notes:
+      "RunThrough confirms a 10:00 10K start on Sunday 11 October, correcting the imported 08:30 event placeholder. The chip-timed race stays on Heaton Park's concrete paths, with kilometre markers, marshals, free photographs, a themed medal and post-race goodies.",
+  },
+  "run-the-river-10k|2026-10-11|10K": {
+    startTime: "10:30",
+    status: "Closed",
+    entryUrl: "https://www.edmontonrc.co.uk/contents/1652-run-the-river-10k",
+    source: "https://www.edmontonrc.co.uk/contents/1652-run-the-river-10k",
+    notes:
+      "Edmonton Running Club confirms a 10:30 start on Sunday 11 October, correcting the imported 09:30 time, and states that the 2026 race is sold out. The fast, measured multi-terrain route starts and finishes at Lee Valley Athletics Centre and follows the River Lee and Tottenham Marshes before a track finish.",
+  },
+  "rushmoor-wellesley-10k|2026-10-11|10K": {
+    startTime: "10:30",
+    entryUrl: "https://rushmoor10k.co.uk/10kinfo/",
+    source: "https://rushmoor10k.co.uk/10kinfo/",
+    notes:
+      "The organisers confirm a 10:30 start on Sunday 11 October, correcting the imported 09:30 time. The flat mixed-terrain 10K begins on Aldershot's Polo Fields, follows the Basingstoke Canal and Wellesley Woodlands, and finishes inside the athletics stadium with chip timing.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -8071,6 +8115,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "MacTuff Events groups runners by expected finish time for relaxed afternoon track heats, with personal lap splits, overall chip timing and a limited field designed to give every runner clear racing space.",
     organiser: "MacTuff Events",
     website: "https://www.mactuffevents.com/rtt",
+  },
+  "owestry-10k": {
+    name: "Oswestry 10K",
+    city: "Oswestry",
+    county: "Shropshire",
+    country: "England",
+    area: "Smithfield Street, Church Street and Oswestry town roads",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Oswestry 10K — an undulating, closed-road town race for first-timers and competitive runners.",
+    description:
+      "Adrenaline Sporting Events' chip-timed single lap starts and finishes in central Oswestry, uses fully closed roads and adds a scenic final section before the medal finish, with a 90-minute cut-off.",
+    organiser: "Adrenaline Sporting Events",
+    website: "https://www.adrenalinesportingevents.co.uk/oswestry-10k-run-running-event/",
+  },
+  "richmond-autumn-riverside-10k": {
+    name: "Richmond Autumn Riverside 10K & Half Marathon",
+    city: "Richmond upon Thames",
+    county: "Greater London",
+    country: "England",
+    area: "Ham Street Riverside and the Thames towpath towards Kingston",
+    surface: "Mixed",
+    distances: ["10K", "Half"],
+    summary:
+      "Richmond Autumn Riverside — flat, fast 10K and half-marathon routes beside the Thames.",
+    description:
+      "The Fix Events' chip-timed races start near Ham House and follow riverside paths towards Kingston and Richmond. The 10K completes one out-and-back while the half marathon covers the route twice.",
+    organiser: "The Fix Events",
+    website: "https://thefixevents.com/the-richmond-autumn-riverside-10k-and-half-marathon-run",
+  },
+  "richmond-castle-10k": {
+    name: "Richmond Castle 10K",
+    city: "Richmond",
+    county: "North Yorkshire",
+    country: "England",
+    area: "The Batts, River Swale, Sleegill and Richmond Castle",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Richmond Castle 10K — a measured road race with riverside, castle and Yorkshire views.",
+    description:
+      "Swaledale Runners' UK Athletics race leaves The Batts for the River Swale waterfalls and Sleegill climb, loops through Catterick Garrison, then circles the castle and descends quickly to the riverside finish.",
+    organiser: "Swaledale Runners",
+    website: "https://www.swaledalerunners.co.uk/richmond-castle-10k",
+  },
+  "run-heaton-5k-10k-half-marathon-october": {
+    name: "Run Heaton Park 5K, 10K & Half Marathon — October",
+    city: "Manchester",
+    county: "Greater Manchester",
+    country: "England",
+    area: "Heaton Park and Heaton Hall grounds",
+    surface: "Road",
+    distances: ["10K", "5K", "Half", "Junior"],
+    summary: "Run Heaton Park — chip-timed races on park paths around Manchester's largest park.",
+    description:
+      "RunThrough's October programme offers 5K, 10K, half-marathon and junior races on Heaton Park's concrete paths, with marked kilometres, marshals, free photographs, medals and post-race refreshments.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-october-2026",
+  },
+  "run-the-river-10k": {
+    name: "Run the River 10K",
+    city: "Edmonton",
+    county: "Greater London",
+    country: "England",
+    area: "Lee Valley Athletics Centre, River Lee and Tottenham Marshes",
+    surface: "Mixed",
+    distances: ["10K", "1mi"],
+    summary:
+      "Run the River 10K — a fast, beginner-friendly river and marsh route with a track finish.",
+    description:
+      "Edmonton Running Club's measured out-and-back is mostly towpath, with short road, grass and track sections beside the River Lee and through Tottenham Marshes. Finishers receive a medal, technical T-shirt and goody bag.",
+    organiser: "Edmonton Running Club",
+    website: "https://www.edmontonrc.co.uk/contents/1652-run-the-river-10k",
+  },
+  "rushmoor-wellesley-10k": {
+    name: "Rushmoor Wellesley 10K, 5K & Fun Run",
+    city: "Aldershot",
+    county: "Hampshire",
+    country: "England",
+    area: "Polo Fields, Basingstoke Canal, Wellesley Woodlands and Army Athletics Stadium",
+    surface: "Mixed",
+    distances: ["10K", "5K", "2K"],
+    summary:
+      "Rushmoor Wellesley — flat mixed-terrain community races finishing on the athletics track.",
+    description:
+      "Blackwater Valley Runners and the Greater Rushmoor Nepali Community stage a wide-start, chip-timed 10K on Polo Fields, canal towpath and woodland paths, finishing in the Army Athletics Stadium with a bespoke medal.",
+    organiser: "Blackwater Valley Runners & Greater Rushmoor Nepali Community",
+    website: "https://rushmoor10k.co.uk/",
   },
 };
 
@@ -17563,6 +17697,187 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "MacTuff explains the pace-seeded track format, personal lap splits and afternoon schedule. Use BookitZone for the Swindon-specific ticket.",
+    },
+  ],
+  "owestry-10k|2026-10-11|10K": [
+    {
+      providerCode: "adrenaline-oswestry-10k-2026",
+      providerName: "Adrenaline Sporting Events official entry",
+      entryUrl: "https://www.adrenalinesportingevents.co.uk/oswestry-10k-run-running-event/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25.99,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://www.adrenalinesportingevents.co.uk/oswestry-10k-run-running-event/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's Enter Now action supplies current registration. Standard options are advertised from £25.99 to £27.99 before booking fees.",
+    },
+    {
+      providerCode: "letsdothis-oswestry-10k-2026",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/oswestry-10k-2026-189754",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 25.99,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/oswestry-10k-2026-189754",
+      isVerified: true,
+      notes:
+        "Let's Do This offers a second £25.99 to £27.99 registration route and confirms the 09:00 start, parking and 90-minute cut-off. Compare the final checkout total before payment.",
+    },
+  ],
+  "richmond-autumn-riverside-10k|2026-10-11|10K": [
+    {
+      providerCode: "fix-events-richmond-autumn-2026",
+      providerName: "The Fix Events official entry",
+      entryUrl: "https://thefixevents.com/the-richmond-autumn-riverside-10k-and-half-marathon-run",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-06T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://thefixevents.com/the-richmond-autumn-riverside-10k-and-half-marathon-run",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser offers £25 10K entry including VAT and no added admin fee, with 300 places and registration due to close on 6 October unless sold out first.",
+    },
+    {
+      providerCode: "ahotu-richmond-autumn-2026",
+      providerName: "Ahotu entry guide",
+      entryUrl: "https://www.ahotu.com/event/richmond-autumn-riverside-10k-and-half-marathon-run",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://www.ahotu.com/event/richmond-autumn-riverside-10k-and-half-marathon-run",
+      isVerified: true,
+      notes:
+        "Ahotu confirms the distance-specific 09:30 10K start and mixed riverside surface. Use The Fix Events for the official GBP checkout and final terms.",
+    },
+  ],
+  "richmond-castle-10k|2026-10-11|10K": [
+    {
+      providerCode: "bookitzone-richmond-castle-2026",
+      providerName: "BookitZone official checkout",
+      entryUrl: "https://bookitzone.com/richmondcastle10k/BrjFFX",
+      entryType: "official",
+      status: "open",
+      priceAmount: 17.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://www.swaledalerunners.co.uk/richmond-castle-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "BookitZone offers £17.50 affiliated or £20 unaffiliated online entry for the measured and chip-timed race.",
+    },
+    {
+      providerCode: "official-swaledale-richmond-castle-2026",
+      providerName: "Swaledale Runners official information",
+      entryUrl: "https://www.swaledalerunners.co.uk/richmond-castle-10k",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://www.swaledalerunners.co.uk/richmond-castle-10k",
+      isVerified: true,
+      notes:
+        "The organising club confirms the 11 October race, The Batts start and finish, course description and direct BookitZone route.",
+    },
+  ],
+  "run-heaton-5k-10k-half-marathon-october|2026-10-11|10K": [
+    {
+      providerCode: "runthrough-heaton-october-2026",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-october-2026",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough's live event page supplies the official 10K registration. Select the 10K ticket and confirm the current price before payment.",
+    },
+    {
+      providerCode: "letsdothis-heaton-october-2026",
+      providerName: "Let's Do This entry",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/run-heaton-park-5k-10k-half-marathon-october-2026-188064",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/run-heaton-park-5k-10k-half-marathon-october-2026-188064",
+      isVerified: true,
+      notes:
+        "Let's Do This provides secondary registration and confirms the 10:00 10K start, transport, parking, age minimum and race-day number collection.",
+    },
+  ],
+  "run-the-river-10k|2026-10-11|10K": [
+    {
+      providerCode: "official-edmonton-run-river-2026",
+      providerName: "Edmonton Running Club official information",
+      entryUrl: "https://www.edmontonrc.co.uk/contents/1652-run-the-river-10k",
+      entryType: "official",
+      status: "sold_out",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://www.edmontonrc.co.uk/contents/1652-run-the-river-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organising club states that 2026 is sold out. Original entry was £28 affiliated or £30 unaffiliated; use this page for participant updates only.",
+    },
+    {
+      providerCode: "england-athletics-run-river-2026",
+      providerName: "England Athletics closed checkout",
+      entryUrl: "https://englandathletics.sport80.com/public/wizard/e/30609",
+      entryType: "official",
+      status: "sold_out",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://results.canterburyharriers.org/event-details/22287",
+      isVerified: true,
+      notes:
+        "The licensed-event listing identifies this England Athletics registration wizard, but the organiser confirms that no 2026 places remain.",
+    },
+  ],
+  "rushmoor-wellesley-10k|2026-10-11|10K": [
+    {
+      providerCode: "official-rushmoor-wellesley-2026",
+      providerName: "Rushmoor Wellesley official entry",
+      entryUrl: "https://rushmoor10k.co.uk/10kinfo/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://rushmoor10k.co.uk/10kinfo/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organising clubs' Enter link supplies the current checkout. Entry is advertised from £19 to £25 depending on affiliation and optional T-shirt.",
+    },
+    {
+      providerCode: "timeoutdoors-rushmoor-wellesley-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/rushmoor-wellesley-10k/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:40:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/rushmoor-wellesley-10k/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms the £19 to £25 range, 10:30 start, age-16 minimum, flat trail course, free parking and secure bag storage.",
     },
   ],
 };
