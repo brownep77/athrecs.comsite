@@ -3609,6 +3609,27 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     entryUrl: "https://www.hardmoors110.org.uk/other-races/",
     source: "https://www.runningcalendar.co.uk/event/turnpike-trot-10k-rabbit-run-5k/",
   },
+  "runabc-west-acre-wild-10k|2026-10-18|10K": {
+    startTime: "10:30",
+    entryUrl: "https://totalracetiming.co.uk/race/668",
+    source: "https://totalracetiming.co.uk/race/668",
+    notes:
+      "Total Race Timing confirms a 10:30 start on Sunday 18 October, correcting the imported 09:30 placeholder. The off-road course follows undulating Norfolk bridleways, farm paths and woodland tracks from The Stag and includes optional obstacles and a ford crossing. The field is full and only the waiting list is currently available.",
+  },
+  "wellington-10k|2026-10-18|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.tickettailor.com/events/runthedistance/1915196",
+    source: "https://www.runthedistance.co.uk/wellington-10k",
+    notes:
+      "Run The Distance confirms a 09:30 start on Sunday 18 October, correcting the imported 08:30 placeholder. The measured out-and-back road course starts and finishes at Dothill Playing Field and runs through Dothill Nature Reserve, along Silkin Way and towards Wrockwardine.",
+  },
+  "wigton-road-runners-10k|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.eventsupnorth.co.uk/event/2221",
+    source: "https://clubspark.englandathletics.org/WigtonRoadRunners",
+    notes:
+      "Wigton Road Runners' England Athletics-hosted club page confirms the Sunday 18 October charity race and its official Events Up North booking route. The current race listing confirms a 10:00 start, correcting the imported 09:00 placeholder, from Barton Laws on a measured loop of paths and quiet undulating country roads.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -9161,6 +9182,48 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Hardmoors and the North York Moors National Park stage marked and marshalled trail loops from Danby Lodge. A recent calendar check now marks the next edition TBC, so entrants should await a confirmed date before booking travel.",
     organiser: "Hardmoors with North York Moors National Park",
     website: "https://www.hardmoors110.org.uk/other-races/",
+  },
+  "runabc-west-acre-wild-10k": {
+    name: "West Acre Wild 10K Challenge",
+    city: "West Acre",
+    county: "Norfolk",
+    country: "England",
+    area: "The Stag and West Acre woodland tracks",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "West Acre Wild 10K — an off-road charity challenge through rural Norfolk.",
+    description:
+      "This charitable 10K leaves The Stag and follows undulating bridleways, farm paths and woodland tracks around West Acre. Runners may tackle optional obstacles and the ford near the finish, with a narrow walkway available as an alternative. The event includes chip timing, a bespoke medal and finish refreshments.",
+    organiser: "West Acre Wild with Total Race Timing",
+    website: "https://totalracetiming.co.uk/race/668",
+  },
+  "wellington-10k": {
+    name: "Q Financial Wellington 10K",
+    city: "Wellington",
+    county: "Shropshire",
+    country: "England",
+    area: "Dothill Playing Field, Dothill Nature Reserve and Silkin Way",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Wellington 10K — a measured, fast out-and-back race through Dothill.",
+    description:
+      "Run The Distance's Wellington 10K starts and finishes at Dothill Playing Field and follows a measured out-and-back route through Dothill Nature Reserve, along Silkin Way and towards Wrockwardine. The event includes chip timing, water stations, a bespoke medal and free photographs.",
+    organiser: "Run The Distance",
+    website: "https://www.runthedistance.co.uk/wellington-10k",
+  },
+  "wigton-road-runners-10k": {
+    name: "Wigton Road Runners Charity 10K",
+    city: "Wigton",
+    county: "Cumbria",
+    country: "England",
+    area: "Barton Laws, country roads and Phoenix Park",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Wigton Road Runners 10K — a measured charity race on quiet Cumbrian roads.",
+    description:
+      "Wigton Road Runners' charity 10K starts near Barton Laws and follows a single measured loop over footpaths and quiet, undulating country roads before finishing in Phoenix Park. The event provides chip timing, a mid-course water point and a medal, with proceeds supporting local charities.",
+    organiser: "Wigton Road Runners",
+    website: "https://clubspark.englandathletics.org/WigtonRoadRunners",
   },
 };
 
@@ -20103,6 +20166,89 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "This listing was manually checked on 10 August 2026 and now states that the next date is TBC. Recheck the Hardmoors site before entry.",
+    },
+  ],
+  "runabc-west-acre-wild-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-total-race-timing-west-acre-2026",
+      providerName: "Total Race Timing official waiting list",
+      entryUrl: "https://totalracetiming.co.uk/race/668",
+      entryType: "official",
+      status: "waitlist",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://totalracetiming.co.uk/race/668",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The 10K field is at its limit. Total Race Timing currently offers only a free waiting-list place; the sold-out race prices were £24 standard and £20 for under-15s.",
+    },
+    {
+      providerCode: "running-life-west-acre-2026",
+      providerName: "Running.life availability guide",
+      entryUrl: "https://running.life/en/event/west-acre-wild-10k-challenge",
+      entryType: "third_party",
+      status: "waitlist",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://running.life/en/event/west-acre-wild-10k-challenge",
+      isVerified: true,
+      notes:
+        "Running.life confirms the exact 18 October 2026 edition and points runners to the organiser. Use Total Race Timing for the authoritative waiting-list status.",
+    },
+  ],
+  "wellington-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-ticket-tailor-wellington-2026",
+      providerName: "Run The Distance official entry",
+      entryUrl: "https://www.tickettailor.com/events/runthedistance/1915196",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://www.runthedistance.co.uk/wellington-10k",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's Wellington page links directly to this Ticket Tailor checkout and confirms the 18 October date and 09:30 start. Confirm the selected affiliated, standard or T-shirt ticket total before payment.",
+    },
+    {
+      providerCode: "timeoutdoors-wellington-2026",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/wellington-10k-1",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 18,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/wellington-10k-1",
+      isVerified: true,
+      notes:
+        "TimeOutdoors currently lists online entry across an £18-£34 range, depending on ticket and optional T-shirt. Compare the final total with the organiser's direct checkout.",
+    },
+  ],
+  "wigton-road-runners-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-events-up-north-wigton-2026",
+      providerName: "Wigton Road Runners official entry",
+      entryUrl: "https://www.eventsupnorth.co.uk/event/2221",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://clubspark.englandathletics.org/WigtonRoadRunners",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The club's England Athletics-hosted page links this exact Events Up North booking route for its 18 October 2026 charity race. Confirm the displayed affiliated or standard fee before paying.",
+    },
+    {
+      providerCode: "runabc-wigton-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/wigton-road-runners-10k",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T10:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/wigton-road-runners-10k",
+      isVerified: true,
+      notes:
+        "runABC confirms the 18 October date, 10:00 start, Barton Laws race HQ and CA7 9QY postcode and provides an entry route. Prefer the club-linked Events Up North checkout.",
     },
   ],
 };
