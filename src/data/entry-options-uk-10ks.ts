@@ -493,6 +493,12 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-17",
     toDate: "2026-10-18",
   },
+  {
+    seriesSlug: "napton-10k",
+    distance: "10K",
+    fromDate: "2026-10-17",
+    toDate: "2026-10-18",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -3369,6 +3375,51 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://www.upandrunningevents.co.uk/",
     notes:
       "Up and Running Events and Let's Do This confirm a 10:00 start on Saturday 17 October, correcting the imported 09:00 time and the source title's 'Ocotber' typo. The multi-distance trail event uses woodland, parkland and riverside paths in Chatelherault Country Park near Hamilton, with chip timing, hydration and finisher medals.",
+  },
+  "glamis-castle-glow-run|2026-10-17|10K": {
+    startTime: "19:15",
+    entryUrl: "https://in.njuko.com/glamis-glow-run-26",
+    source: "https://glamisglowrun.co.uk/",
+    notes:
+      "Wee Run Events confirms the third Glamis Glow Run on Saturday 17 October. The 5K starts at 19:00 and the 10K at 19:15, correcting the imported 18:00 event placeholder. A head or chest torch is required for the marked night trail through the castle grounds.",
+  },
+  "napton-10k|2026-10-17|10K": {
+    date: "2026-10-18",
+    startTime: "10:00",
+    entryUrl: "https://fienta.com/napton10k-152622",
+    source: "https://fienta.com/napton10k-152622",
+    notes:
+      "The official St Lawrence School PTA checkout confirms Sunday 18 October at 10:00, correcting the imported Saturday 17 October date and 23:00 placeholder. The chip-timed village road race starts and finishes at Napton Victory Club, with a separate 2.5K family fun run.",
+  },
+  "up-and-running-events-alexandra-park-5k-10k-january-osv|2026-10-17|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.letsdothis.com/gb/e/alexandra-park-5k10k-october-2026-268248",
+    source: "https://www.upandrunningevents.co.uk/",
+    notes:
+      "Up and Running Events confirms both the 5K and 10K start at 10:00 on Saturday 17 October, correcting the imported 09:00 time. The 10K completes four laps of the marked 2.5K Alexandra Park circuit and includes chip timing, a medal and finish goodies.",
+  },
+  "yorkshire-weekend-saunter-series-brighouse|2026-10-17|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-brighouse-14216",
+    source:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-brighouse-14216",
+    notes:
+      "It's Grim Up North confirms Saturday 17 October and a 09:00 10K start, correcting the imported 07:30 event placeholder. Online entry is closed, but the organiser explicitly keeps £17 pay-on-the-day places open; the final Brighouse race HQ remains TBC.",
+  },
+  "acronyms-tamar-10k|2026-10-18|10K": {
+    startTime: "08:30",
+    entryUrl: "https://runplymouth.co.uk/acronyms-tamar-10k/",
+    source: "https://runplymouth.co.uk/acronyms-tamar-10k/",
+    notes:
+      "Run Plymouth confirms an approximately 08:30 start on Sunday 18 October, correcting the imported 07:30 time. The point-to-point, traffic-free race starts at Marine Academy Plymouth, crosses the Tamar Bridge and finishes at the Kawasaki event village.",
+  },
+  "autumn-breaker-10k|2026-10-18|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.fyldecoastrunners.com/autumn-breaker-10k.html",
+    source: "https://www.fyldecoastrunners.com/autumn-breaker-10k.html",
+    notes:
+      "Fylde Coast Runners confirms a 10:00 start on Sunday 18 October, correcting the imported 09:00 time. The accurately measured, flat course completes two laps of Stanley Park's maintained paths, starting and finishing inside the park.",
   },
 };
 
@@ -8487,6 +8538,95 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Up and Running Events' chip-timed loops use woodland, parkland and riverside paths in Chatelherault Country Park. Every distance starts at 10:00 and includes a timing chip, on-course hydration, post-race refreshments and a finisher medal.",
     organiser: "Up and Running Events",
     website: "https://www.upandrunningevents.co.uk/",
+  },
+  "glamis-castle-glow-run": {
+    name: "Glamis Glow Run 5K & 10K",
+    city: "Forfar",
+    county: "Angus",
+    country: "Scotland",
+    area: "Glamis Castle grounds",
+    surface: "Trail",
+    distances: ["5K", "10K"],
+    summary: "Glamis Glow Run — an illuminated 5K and 10K night trail around the castle grounds.",
+    description:
+      "Wee Run Events' marked and marshalled routes start in front of Glamis Castle and circle its grounds after dark. Runners need a head or chest torch; entry includes chip timing, a finisher medal, course water and finish refreshments.",
+    organiser: "Wee Run Events",
+    website: "https://glamisglowrun.co.uk/",
+  },
+  "napton-10k": {
+    name: "Napton 10K & 2.5K Fun Run",
+    city: "Napton-on-the-Hill",
+    county: "Warwickshire",
+    country: "England",
+    area: "Napton village and surrounding country roads",
+    surface: "Road",
+    distances: ["10K", "2.5K Fun Run"],
+    summary: "Napton 10K — a community road race through the Warwickshire village and countryside.",
+    description:
+      "The St Lawrence School PTA's chip-timed 10K starts and finishes at Napton Victory Club, climbs briefly in the opening kilometre and continues onto flatter country roads. A separate chip-timed 2.5K family fun run is also offered.",
+    organiser: "St Lawrence School PTA",
+    website: "https://fienta.com/napton10k-152622",
+  },
+  "up-and-running-events-alexandra-park-5k-10k-january-osv": {
+    name: "Alexandra Park 5K & 10K — October",
+    city: "Glasgow",
+    county: "Glasgow City",
+    country: "Scotland",
+    area: "Alexandra Park paths around the Saracen Fountain",
+    surface: "Road",
+    distances: ["5K", "10K"],
+    summary:
+      "Alexandra Park October 5K & 10K — friendly, chip-timed park races in Glasgow's East End.",
+    description:
+      "Up and Running Events uses a fully marked 2.5K loop through Alexandra Park. The 5K completes two laps and the 10K four, with marshals, kilometre markers, hydration, a bespoke medal and finish goodies.",
+    organiser: "Up and Running Events",
+    website: "https://www.upandrunningevents.co.uk/",
+  },
+  "yorkshire-weekend-saunter-series-brighouse": {
+    name: "Yorkshire Weekend Saunter in Brighouse",
+    city: "Brighouse",
+    county: "West Yorkshire",
+    country: "England",
+    area: "Brighouse canal and trail routes; final race HQ TBC",
+    surface: "Trail",
+    distances: ["5K", "10K", "Half"],
+    summary:
+      "Yorkshire Weekend Saunter Brighouse — relaxed 5K, 10K and half-marathon trail options.",
+    description:
+      "It's Grim Up North's inclusive saunter format lets entrants run, jog or walk their chosen distance. Finishers receive a jumble medal, hot food and a drink; the organiser says pay-on-the-day places remain available while final venue details are confirmed.",
+    organiser: "It's Grim Up North Running",
+    website:
+      "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-brighouse-14216",
+  },
+  "acronyms-tamar-10k": {
+    name: "Acronyms Tamar 10K",
+    city: "Plymouth",
+    county: "Devon",
+    country: "England",
+    area: "Marine Academy Plymouth, Tamar Bridge and Kawasaki Precision Machinery",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Acronyms Tamar 10K — a traffic-free point-to-point race crossing the landmark Tamar Bridge.",
+    description:
+      "Run Plymouth's measured route starts at Marine Academy Plymouth, crosses the Tamar Bridge and finishes at the Kawasaki event village. The field is capped at about 1,000 and finishers receive a medal and technical T-shirt.",
+    organiser: "Taurus Events trading as Run Plymouth",
+    website: "https://runplymouth.co.uk/acronyms-tamar-10k/",
+  },
+  "autumn-breaker-10k": {
+    name: "Autumn Breaker 10K",
+    city: "Blackpool",
+    county: "Lancashire",
+    country: "England",
+    area: "Stanley Park paths",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Autumn Breaker 10K — a flat, accurately measured two-lap race in Blackpool's Stanley Park.",
+    description:
+      "Fylde Coast Runners' spectator-friendly route starts and finishes inside Stanley Park and completes two laps on maintained paths. Entry includes timing and a commemorative medal, with optional technical shirts available.",
+    organiser: "Fylde Coast Runners",
+    website: "https://www.fyldecoastrunners.com/autumn-breaker-10k.html",
   },
 };
 
@@ -18522,6 +18662,197 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "The organiser's current calendar confirms the 17 October event and links directly to the Let's Do This checkout. Use the distance page for current ticket terms.",
+    },
+  ],
+  "glamis-castle-glow-run|2026-10-17|10K": [
+    {
+      providerCode: "njuko-glamis-glow-run-2026",
+      providerName: "Njuko official checkout",
+      entryUrl: "https://in.njuko.com/glamis-glow-run-26",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://glamisglowrun.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's 2026 page links directly to this open Njuko checkout. Select the £25 10K rather than the £20 5K ticket.",
+    },
+    {
+      providerCode: "timeoutdoors-glamis-glow-run-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/glamis-glow-run/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/glamis-glow-run/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms the £25 10K, 19:15 start and open-entry state, then routes entrants to the organiser's checkout.",
+    },
+  ],
+  "napton-10k|2026-10-18|10K": [
+    {
+      providerCode: "fienta-napton-10k-2026",
+      providerName: "Fienta official checkout",
+      entryUrl: "https://fienta.com/napton10k-152622",
+      entryType: "official",
+      status: "open",
+      priceAmount: 17,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-11T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://fienta.com/napton10k-152622",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "St Lawrence School PTA's live checkout lists adult 10K entry at £17, junior 10K entry at £14 and child 10K entry at £12. Entries close at midnight on 11 October.",
+    },
+    {
+      providerCode: "findarace-napton-10k-2026",
+      providerName: "Find a Race entry",
+      entryUrl: "https://findarace.com/events/napton-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 17,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-11T23:59:00+01:00",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/napton-10k",
+      isVerified: true,
+      notes:
+        "Find a Race supplies a second Quick Book route for the £17 adult 10K and confirms the corrected Sunday date, 10:00 start and CV47 8LT venue.",
+    },
+  ],
+  "up-and-running-events-alexandra-park-5k-10k-january-osv|2026-10-17|10K": [
+    {
+      providerCode: "letsdothis-alexandra-park-october-2026",
+      providerName: "Let's Do This official checkout",
+      entryUrl: "https://www.letsdothis.com/gb/e/alexandra-park-5k10k-october-2026-268248",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/alexandra-park-5k10k-october-2026-268248",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Let's Do This lists the exact October 10K at £24 and confirms both distances start at 10:00. Select the 10K ticket before checkout.",
+    },
+    {
+      providerCode: "findarace-alexandra-park-october-2026",
+      providerName: "Find a Race entry",
+      entryUrl: "https://findarace.com/events/alexandra-park-5k-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 24.9,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/alexandra-park-5k-10k",
+      isVerified: true,
+      notes:
+        "Find a Race is an official booking partner and offers the 10K at £24.90. Compare its final total with the £24 Let's Do This route.",
+    },
+  ],
+  "yorkshire-weekend-saunter-series-brighouse|2026-10-17|10K": [
+    {
+      providerCode: "official-brighouse-pay-on-day-2026",
+      providerName: "Organiser pay-on-the-day entry",
+      entryUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-brighouse-14216",
+      entryType: "official",
+      status: "open",
+      priceAmount: 17,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl:
+        "https://www.itsgrimupnorthrunning.co.uk/e/yorkshire-weekend-saunter-in-brighouse-14216",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Online entry is closed, but the organiser explicitly says 10K runners can turn up and pay £17 on the morning. Registration opens at 08:00 for a 09:00 start; check the page for the final HQ first.",
+    },
+    {
+      providerCode: "findarace-brighouse-saunter-2026",
+      providerName: "Find a Race online entry",
+      entryUrl: "https://findarace.com/events/yorkshire-weekend-saunter-in-brighouse",
+      entryType: "third_party",
+      status: "closed",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/yorkshire-weekend-saunter-in-brighouse",
+      isVerified: true,
+      notes:
+        "Find a Race marks its £26 10K online ticket closed. It remains useful for event details, but the organiser's separate £17 pay-on-the-day route is currently the available option.",
+    },
+  ],
+  "acronyms-tamar-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-run-plymouth-tamar-2026",
+      providerName: "Run Plymouth official entry",
+      entryUrl: "https://runplymouth.co.uk/acronyms-tamar-10k/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://runplymouth.co.uk/acronyms-tamar-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser states 2026 entries are open and confirms the 08:30 start, Marine Academy start line and Kawasaki finish. Its entry action routes to the current booking flow.",
+    },
+    {
+      providerCode: "letsdothis-tamar-10k-2026",
+      providerName: "Let's Do This entry",
+      entryUrl: "https://www.letsdothis.com/gb/e/acronyms-tamar-10k-257929",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 29,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://www.letsdothis.com/gb/e/acronyms-tamar-10k-257929",
+      isVerified: true,
+      notes:
+        "Let's Do This offers the 10K at £29 and independently confirms the date and 08:30 start. Check the final checkout total and terms before payment.",
+    },
+  ],
+  "autumn-breaker-10k|2026-10-18|10K": [
+    {
+      providerCode: "official-fylde-coast-autumn-breaker-2026",
+      providerName: "Fylde Coast Runners official entry",
+      entryUrl: "https://www.fyldecoastrunners.com/autumn-breaker-10k.html",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-14T18:00:00+01:00",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://www.fyldecoastrunners.com/autumn-breaker-10k.html",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live page lists £25 standard entry or £23 for UKA club members. Online entry closes at 18:00 on 14 October unless the 300-runner limit is reached first.",
+    },
+    {
+      providerCode: "findarace-autumn-breaker-2026",
+      providerName: "Find a Race entry",
+      entryUrl: "https://findarace.com/events/autumn-breaker-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T06:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/autumn-breaker-10k",
+      isVerified: true,
+      notes:
+        "Find a Race is an official booking partner and offers a second £25 Quick Book route. Compare the final total and member discount with the organiser before payment.",
     },
   ],
 };
