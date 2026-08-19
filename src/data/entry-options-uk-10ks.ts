@@ -481,6 +481,18 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-10-25",
     toDate: "2026-10-11",
   },
+  {
+    seriesSlug: "the-dramathon",
+    distance: "10K",
+    fromDate: "2026-10-16",
+    toDate: "2026-10-17",
+  },
+  {
+    seriesSlug: "abergele-10k",
+    distance: "10K",
+    fromDate: "2026-10-17",
+    toDate: "2026-10-18",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -3310,6 +3322,53 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
       "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-october-2026",
     notes:
       "RunThrough confirms a 10:00 10K start on Sunday 11 October, correcting the imported 09:00 event placeholder. The fast, flat course links Exhibition Park and Newcastle Town Moor on closed park paths, with marked kilometres, marshals, chip timing and views towards the city skyline and St James' Park.",
+  },
+  "wirral-10k|2026-10-11|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.nwas.nhs.uk/events/wirral-10k/",
+    source: "https://www.btrliverpool.com/events/wirral-10k/",
+    notes:
+      "BTR Liverpool confirms a 09:30 start on Sunday 11 October, correcting the imported 08:30 time. The flat out-and-back begins and finishes on Coastal Drive by Ian Fraser Walk, follows the New Brighton waterfront towards Seacombe Ferry Terminal and returns with Liverpool skyline views. Standard entry is currently closed, but a verified charity-place route remains open.",
+  },
+  "autumn-handicap|2026-10-15|10K": {
+    startTime: "18:20",
+    status: "TBC",
+    entryUrl: "https://iomathletics.com/competitions/fixtures/",
+    source: "https://iomathletics.com/competitions/fixtures/",
+    notes:
+      "The Isle of Man Athletics Association confirms the Hansard Global Autumn Handicap 5K walk and 10K run at the National Sports Centre on Thursday 15 October. IOMVAC is the organiser, but a race-specific 2026 entry form and final run start time have not yet been published, so the imported 18:20 time and entry status remain TBC.",
+  },
+  "the-dramathon|2026-10-16|10K": {
+    date: "2026-10-17",
+    startTime: "13:15",
+    status: "Closed",
+    entryUrl: "https://www.entrycentral.com/thedramathon",
+    source: "https://www.thedramathon.com/the-event/the-wee-dram/",
+    notes:
+      "The Dramathon and EntryCentral confirm that the Wee Dram 10K is on Saturday 17 October, correcting the imported Friday 16 October date and 23:00 placeholder. The latest entry listing gives a 13:15 start, while the overview rounds this to 13:00; the athlete briefing will control. The route follows the Speyside Way from Aberlour to Glenfiddich and 10K entry is closed.",
+  },
+  "abergele-10k|2026-10-17|10K": {
+    date: "2026-10-18",
+    startTime: "11:00",
+    entryUrl: "https://www.runwales.com/e/abergele-5k-and-10k-9607",
+    source: "https://www.runwales.com/e/abergele-5k-and-10k-9607",
+    notes:
+      "Run Wales confirms an 11:00 10K start on Sunday 18 October, correcting the imported Saturday 17 October date and 23:00 placeholder. The flat, fast coastal course starts and finishes on Abergele/Pensarn Promenade, with chip timing, technical finisher T-shirt, medal and free adjacent parking.",
+  },
+  "carsington-water-10k-half-marathon-october|2026-10-17|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-october-2026",
+    source: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-october-2026",
+    notes:
+      "RunThrough confirms a 10:00 10K start on Saturday 17 October, correcting the imported 08:30 event placeholder, which precedes even the 09:30 half marathon. The undulating trail route makes almost one complete circuit of Carsington Water on marked reservoir paths with marshals, a themed medal, water and finish goodies.",
+  },
+  "chatelherault-5k-10-15k-trail-race-ocotber|2026-10-17|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/chatelherault-country-park-6k10k16k-trail-event-257763",
+    source: "https://www.upandrunningevents.co.uk/",
+    notes:
+      "Up and Running Events and Let's Do This confirm a 10:00 start on Saturday 17 October, correcting the imported 09:00 time and the source title's 'Ocotber' typo. The multi-distance trail event uses woodland, parkland and riverside paths in Chatelherault Country Park near Hamilton, with chip timing, hydration and finisher medals.",
   },
 };
 
@@ -8339,6 +8398,95 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "RunThrough",
     website:
       "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-october-2026",
+  },
+  "wirral-10k": {
+    name: "BTR Wirral 10K",
+    city: "New Brighton",
+    county: "Merseyside",
+    country: "England",
+    area: "Ian Fraser Walk, Coastal Drive and the New Brighton waterfront",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "BTR Wirral 10K — a flat, fast coastal out-and-back with Liverpool skyline views.",
+    description:
+      "BTR Liverpool's chip-timed course starts and finishes on Coastal Drive by Ian Fraser Walk, follows the waterfront towards Seacombe Ferry Terminal and turns back to New Brighton. The accessible profile is suited to first-timers and PB attempts.",
+    organiser: "BTR Liverpool",
+    website: "https://www.btrliverpool.com/events/wirral-10k/",
+  },
+  "autumn-handicap": {
+    name: "Hansard Global Autumn Handicap 5K Walk & 10K Run",
+    city: "Douglas",
+    county: "Isle of Man",
+    country: "Isle of Man",
+    area: "National Sports Centre perimeter road",
+    surface: "Road",
+    distances: ["10K", "5K Walk"],
+    summary:
+      "Hansard Global Autumn Handicap — an evening 10K run and 5K walk at the NSC in Douglas.",
+    description:
+      "The Isle of Man Veteran Athletes' Club stages age-handicapped running and walking races on the National Sports Centre perimeter road. The Isle of Man Athletics Association confirms the 2026 date; final entry and timing details remain due from IOMVAC.",
+    organiser: "Isle of Man Veteran Athletes' Club",
+    website: "https://www.iomvac.co.uk/",
+  },
+  "the-dramathon": {
+    name: "The Dramathon — Wee Dram 10K, Half Marathon, Marathon & Relay",
+    city: "Dufftown",
+    county: "Moray",
+    country: "Scotland",
+    area: "Speyside Way from Glenfarclas, Tamdhu and Aberlour to Glenfiddich Distillery",
+    surface: "Trail",
+    distances: ["10K", "Half", "Marathon", "Relay"],
+    summary:
+      "The Dramathon — whisky-themed Speyside trail races finishing at Glenfiddich Distillery.",
+    description:
+      "The Wee Dram follows the River Spey from Aberlour to Craigellachie and climbs gradually up the Fiddich valley to Glenfiddich. Longer distances begin at other Speyside distilleries, with mandatory coach transport to start lines and whisky-themed finish rewards.",
+    organiser: "The Dramathon",
+    website: "https://www.thedramathon.com/",
+  },
+  "abergele-10k": {
+    name: "Abergele 5K & 10K",
+    city: "Abergele",
+    county: "Conwy",
+    country: "Wales",
+    area: "Abergele and Pensarn Promenade on the North Wales coast",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary:
+      "Abergele 5K & 10K — flat, fast coastal races designed for first-timers and PB attempts.",
+    description:
+      "Run Wales' chip-timed races start and finish on Abergele/Pensarn Promenade. The 10K follows the flat North Wales coastline, with marshals, drinks, a technical finisher T-shirt, bespoke medal and an option to run both distances.",
+    organiser: "Run Wales",
+    website: "https://www.runwales.com/e/abergele-5k-and-10k-9607",
+  },
+  "carsington-water-10k-half-marathon-october": {
+    name: "Carsington Water Trail Half Marathon & 10K — October",
+    city: "Ashbourne",
+    county: "Derbyshire",
+    country: "England",
+    area: "Carsington Water reservoir paths",
+    surface: "Trail",
+    distances: ["10K", "Half"],
+    summary:
+      "Carsington Water — undulating 10K and half-marathon trail races around the reservoir.",
+    description:
+      "RunThrough's marked trail routes use the rolling paths around Carsington Water. The 10K makes almost one full reservoir circuit, while the half marathon adds an out-and-back, with marshals, kilometre markers, medals and post-race goodies.",
+    organiser: "RunThrough",
+    website: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-october-2026",
+  },
+  "chatelherault-5k-10-15k-trail-race-ocotber": {
+    name: "Chatelherault Country Park 5K, 10K, 15K & 20K — October",
+    city: "Hamilton",
+    county: "South Lanarkshire",
+    country: "Scotland",
+    area: "Chatelherault Country Park woodland and River Avon trails",
+    surface: "Trail",
+    distances: ["5K", "10K", "15K", "20K"],
+    summary:
+      "Chatelherault October trail races — four distances through South Lanarkshire parkland and woodland.",
+    description:
+      "Up and Running Events' chip-timed loops use woodland, parkland and riverside paths in Chatelherault Country Park. Every distance starts at 10:00 and includes a timing chip, on-course hydration, post-race refreshments and a finisher medal.",
+    organiser: "Up and Running Events",
+    website: "https://www.upandrunningevents.co.uk/",
   },
 };
 
@@ -18189,6 +18337,191 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "Find a Race offers a second 10K Quick Book route at £34 and confirms transport and parking details. Compare the final total with RunThrough before payment.",
+    },
+  ],
+  "wirral-10k|2026-10-11|10K": [
+    {
+      providerCode: "nwas-charity-wirral-10k-2026",
+      providerName: "North West Ambulance Charity place",
+      entryUrl: "https://www.nwas.nhs.uk/events/wirral-10k/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://www.nwas.nhs.uk/events/wirral-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "North West Ambulance Charity offers a £20 charity place with a £100 minimum fundraising target and confirms the 09:30 start. This remains available separately from closed standard entry.",
+    },
+    {
+      providerCode: "eventrac-btr-wirral-10k-2026",
+      providerName: "BTR Liverpool standard entry",
+      entryUrl: "https://www.eventrac.co.uk/e/wirral-10km-971",
+      entryType: "official",
+      status: "closed",
+      priceAmount: 27,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://www.eventrac.co.uk/e/wirral-10km-971",
+      isVerified: true,
+      notes:
+        "The official Eventrac page lists the £27 to £29 standard ticket as closed. Use it for organiser updates; the separate ambulance-charity route remains open.",
+    },
+  ],
+  "autumn-handicap|2026-10-15|10K": [
+    {
+      providerCode: "iom-athletics-autumn-handicap-2026",
+      providerName: "Isle of Man Athletics fixture",
+      entryUrl: "https://iomathletics.com/competitions/fixtures/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://iomathletics.com/competitions/fixtures/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The governing association confirms Thursday 15 October, the NSC venue and IOMVAC as organiser. It does not yet publish a 2026 checkout or final run start time.",
+    },
+    {
+      providerCode: "iomvac-autumn-handicap-2026",
+      providerName: "IOMVAC official information",
+      entryUrl: "https://www.iomvac.co.uk/",
+      entryType: "official",
+      status: "unknown",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://www.iomvac.co.uk/",
+      isVerified: true,
+      notes:
+        "The organising club is the authoritative source for the forthcoming entry form. Registration has not yet been published, so do not treat this link as an open checkout.",
+    },
+  ],
+  "the-dramathon|2026-10-17|10K": [
+    {
+      providerCode: "entrycentral-wee-dram-2026",
+      providerName: "EntryCentral official checkout",
+      entryUrl: "https://www.entrycentral.com/thedramathon",
+      entryType: "official",
+      status: "closed",
+      priceAmount: 38,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-26T18:00:00+01:00",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/thedramathon",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral marks the £38 Wee Dram 10K closed. Use this page for status changes and participant information rather than expecting a standard place today.",
+    },
+    {
+      providerCode: "official-wee-dram-2026",
+      providerName: "The Dramathon official information",
+      entryUrl: "https://www.thedramathon.com/the-event/the-wee-dram/",
+      entryType: "official",
+      status: "closed",
+      priceAmount: 38,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://www.thedramathon.com/the-event/the-wee-dram/",
+      isVerified: true,
+      notes:
+        "The official distance page confirms the corrected Saturday date, route, mandatory coach, £38 base price and included finish rewards. EntryCentral controls current availability.",
+    },
+  ],
+  "abergele-10k|2026-10-18|10K": [
+    {
+      providerCode: "run-wales-abergele-10k-2026",
+      providerName: "Run Wales official entry",
+      entryUrl: "https://www.runwales.com/e/abergele-5k-and-10k-9607",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://www.runwales.com/e/abergele-5k-and-10k-9607",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Run Wales supplies the live 2026 checkout. Standard 10K entry is advertised from £32 to £34; select the 10K rather than the earlier 5K or double ticket.",
+    },
+    {
+      providerCode: "timeoutdoors-abergele-10k-2026",
+      providerName: "TimeOutdoors entry guide",
+      entryUrl: "https://www.timeoutdoors.com/events/abergele-5k-10k/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/abergele-5k-10k/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors confirms the corrected 18 October date, 11:00 start and £32 to £34 range, then routes runners to the official entry provider.",
+    },
+  ],
+  "carsington-water-10k-half-marathon-october|2026-10-17|10K": [
+    {
+      providerCode: "runthrough-carsington-october-2026",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists the 10K at £30 and confirms its 10:00 start. Select the 10K rather than the 09:30 half-marathon ticket.",
+    },
+    {
+      providerCode: "lonely-goat-carsington-october-2026",
+      providerName: "Lonely Goat member entry",
+      entryUrl: "https://lonelygoat.com/events/carsington-water-half-marathon-10k-october-2026/",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 26,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://lonelygoat.com/events/carsington-water-half-marathon-10k-october-2026/",
+      isVerified: true,
+      notes:
+        "Lonely Goat advertises a member route from £26 to £28 plus its stated discount. Check membership eligibility and the final checkout total against RunThrough.",
+    },
+  ],
+  "chatelherault-5k-10-15k-trail-race-ocotber|2026-10-17|10K": [
+    {
+      providerCode: "letsdothis-chatelherault-october-2026",
+      providerName: "Let's Do This official checkout",
+      entryUrl:
+        "https://www.letsdothis.com/gb/e/chatelherault-country-park-6k10k16k-trail-event-257763",
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl:
+        "https://www.letsdothis.com/gb/e/chatelherault-country-park-6k10k16k-trail-event-257763",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Let's Do This lists the exact 17 October 10K at £25 and confirms all four race starts at 10:00. Select the 10K ticket before checkout.",
+    },
+    {
+      providerCode: "official-up-running-chatelherault-2026",
+      providerName: "Up and Running Events information",
+      entryUrl: "https://www.upandrunningevents.co.uk/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T05:50:00+01:00",
+      sourceUrl: "https://www.upandrunningevents.co.uk/",
+      isVerified: true,
+      notes:
+        "The organiser's current calendar confirms the 17 October event and links directly to the Let's Do This checkout. Use the distance page for current ticket terms.",
     },
   ],
 };
