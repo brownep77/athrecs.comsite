@@ -343,6 +343,36 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-27",
     toDate: "2027-05-16",
   },
+  {
+    seriesSlug: "runthrough-victoria-park-5k-10k-half-marathon-october",
+    distance: "10K",
+    fromDate: "2026-10-02",
+    toDate: "2026-10-03",
+  },
+  {
+    seriesSlug: "runthrough-victoria-park-5k-10k-half-marathon-october",
+    distance: "5K",
+    fromDate: "2026-10-02",
+    toDate: "2026-10-03",
+  },
+  {
+    seriesSlug: "runthrough-victoria-park-5k-10k-half-marathon-october",
+    distance: "Half",
+    fromDate: "2026-10-02",
+    toDate: "2026-10-03",
+  },
+  {
+    seriesSlug: "southampton-10k",
+    distance: "10K",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
+  {
+    seriesSlug: "tywarnhayle-10k",
+    distance: "10K",
+    fromDate: "2026-10-03",
+    toDate: "2026-10-04",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -2517,6 +2547,67 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     source: "https://runabc.co.uk/wacky-run-series-may-2026-27-oay",
     notes:
       "Wacky Run Series September begins at 08:00 on Sunday 27 September from John's Cafe on Hayling Island. The six-hour lap event lets runners choose a distance from 5K through ultra, with only 100 places across the event.",
+  },
+  "petzl-night-trails-10k-coombe-abbey|2026-09-30|10K": {
+    startTime: "19:00",
+    entryUrl: "https://my.bigbearevents.net/e/petzl-night-trails-10k-coombe-abbey-12988",
+    source: "https://bigbearevents.net/events",
+    notes:
+      "Petzl Night Trails 10K starts at 19:00 on Wednesday 30 September at Coombe Abbey Park. A head or chest torch is mandatory for the undulating woodland, meadow and grass-field route, which has an effective two-hour cut-off.",
+  },
+  "runthrough-victoria-park-5k-10k-half-marathon-october|2026-10-02|10K": {
+    date: "2026-10-03",
+    startTime: "10:00",
+    entryUrl: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+    source: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+    notes:
+      "The official RunThrough fixture is Saturday 3 October, correcting the imported 2 October date. The 10K starts at 10:00 and uses three laps of Victoria Park's smooth tarmac paths.",
+  },
+  "runthrough-victoria-park-5k-10k-half-marathon-october|2026-10-02|5K": {
+    date: "2026-10-03",
+    startTime: "11:15",
+    entryUrl: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+    source: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+  },
+  "runthrough-victoria-park-5k-10k-half-marathon-october|2026-10-02|Half": {
+    date: "2026-10-03",
+    startTime: "09:30",
+    entryUrl: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+    source: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+  },
+  "dorney-5k-10k-half-marathon-october|2026-10-03|10K": {
+    startTime: "09:10",
+    entryUrl:
+      "https://www.dorneylakeevents.com/event/run-dorney-5k-10k-half-marathon-3rd-october-2026/",
+    source:
+      "https://www.dorneylakeevents.com/event/run-dorney-5k-10k-half-marathon-3rd-october-2026/",
+    notes:
+      "Run Dorney Lake starts all three distances at 09:10 on Saturday 3 October. The traffic-free 10K completes two laps of the flat paved course at the London 2012 rowing venue.",
+  },
+  "kielder-10k|2026-10-03|10K": {
+    startTime: "13:00",
+    entryUrl: "https://in.njuko.com/altra-kielder-marathon?currentPage=select-competition",
+    source: "https://kieldermarathon.com/event-item/10k/",
+    notes:
+      "The Altra Kielder 10K starts at 13:00 on Saturday 3 October from Kielder Waterside. Its scenic off-road route circles the Bull Crag peninsula, with a 2.5-hour cut-off and free runner park-and-ride shuttles.",
+  },
+  "southampton-10k|2026-10-03|10K": {
+    date: "2026-10-04",
+    startTime: "09:30",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/southampton-half-marathon-10k--junior-october-2026",
+    source: "https://www.runsouthampton.co.uk/",
+    notes:
+      "The organiser confirms Sunday 4 October, correcting the imported 3 October date. The closed-road 10K starts pitchside at St Mary's Stadium at 09:30, crosses Northam Bridge and returns through Ocean Village to finish inside the stadium.",
+  },
+  "tywarnhayle-10k|2026-10-03|10K": {
+    date: "2026-10-04",
+    status: "Closed",
+    startTime: "10:00",
+    entryUrl: "https://www.sientries.co.uk/event/tywarnhayle-10k-2026-2026?elid=Y",
+    source: "https://www.trurorunningclub.org.uk/trc-events/tywarnhayle-10k/",
+    notes:
+      "Tywarnhayle 10K starts at 10:00 on Sunday 4 October, correcting the imported 3 October date. Truro Running Club and SiEntries now mark the 230-place technical coast-path race sold out; SiEntries retains transfers until 2 October.",
   },
 };
 
@@ -6312,6 +6403,94 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "Believe & Achieve Events offers a friendly 100-place lap challenge on Hayling Island, where participants choose a finish distance from 5K through ultra within the six-hour limit.",
     organiser: "Believe & Achieve Events — Run Pompey",
     website: "https://www.fitprorob.biz/",
+  },
+  "petzl-night-trails-10k-coombe-abbey": {
+    name: "Petzl Night Trails 10K — Coombe Abbey",
+    city: "Coventry",
+    county: "Warwickshire",
+    country: "England",
+    area: "Coombe Abbey Park",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Petzl Night Trails 10K — a head-torch trail race through Coombe Abbey Park.",
+    description:
+      "Big Bear Events stages this welcoming night race through woodland, meadow and grass fields, with natural roots, uneven surfaces and gates on an undulating traffic-free route.",
+    organiser: "Big Bear Events",
+    website: "https://bigbearevents.net/events",
+  },
+  "runthrough-victoria-park-5k-10k-half-marathon-october": {
+    name: "Victoria Park Half Marathon, 10K & 5K — October",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "St Marks Gate, Victoria Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary: "Victoria Park Half Marathon, 10K & 5K — flat, chip-timed park races in East London.",
+    description:
+      "RunThrough's October event uses Victoria Park's wide tarmac paths, with accurately marked laps, chip timing, free race photos and separate starts for the half marathon, 10K and 5K.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+  },
+  "dorney-5k-10k-half-marathon-october": {
+    name: "Run Dorney Lake Half Marathon, 10K & 5K — October",
+    city: "Dorney",
+    county: "Buckinghamshire",
+    country: "England",
+    area: "Dorney Lake",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary: "Run Dorney Lake — flat 5K, 10K and half-marathon races at the Olympic rowing venue.",
+    description:
+      "RunThrough's traffic-free, chip-timed races use the flat paved roads around Dorney Lake, the London 2012 rowing venue, with all distances starting together.",
+    organiser: "Dorney Lake Events / RunThrough Events",
+    website:
+      "https://www.dorneylakeevents.com/event/run-dorney-5k-10k-half-marathon-3rd-october-2026/",
+  },
+  "kielder-10k": {
+    name: "Altra Kielder 10K",
+    city: "Kielder",
+    county: "Northumberland",
+    country: "England",
+    area: "Kielder Waterside and Bull Crag peninsula",
+    surface: "Trail",
+    distances: ["10K"],
+    summary:
+      "Altra Kielder 10K — a scenic off-road lap of the Bull Crag peninsula at Kielder Water.",
+    description:
+      "Events of the North opens the Kielder Marathon Weekend with a beautiful 10K on lakeside paths around the Bull Crag peninsula, supported by a runner park-and-ride system.",
+    organiser: "Events of the North",
+    website: "https://kieldermarathon.com/event-item/10k/",
+  },
+  "southampton-10k": {
+    name: "Southampton Half Marathon & 10K",
+    city: "Southampton",
+    county: "Hampshire",
+    country: "England",
+    area: "St Mary's Stadium and Southampton city centre",
+    surface: "Road",
+    distances: ["Half", "10K", "Junior"],
+    summary:
+      "Southampton Half Marathon & 10K — closed-road city races starting and finishing at St Mary's Stadium.",
+    description:
+      "RunThrough's city event starts pitchside, crosses Northam Bridge and passes beneath Itchen Bridge and through Ocean Village before a stadium finish, with a junior race after the main distances.",
+    organiser: "RunThrough Events",
+    website: "https://www.runsouthampton.co.uk/",
+  },
+  "tywarnhayle-10k": {
+    name: "Tywarnhayle 10K",
+    city: "Mount Hawke",
+    county: "Cornwall",
+    country: "England",
+    area: "Mount Hawke Cricket Club, Chapel Porth and Tywarnhayle Mine",
+    surface: "Trail",
+    distances: ["10K", "Junior"],
+    summary:
+      "Tywarnhayle 10K — a technical Cornish coast-path race in the Multi-Terrain Race Series.",
+    description:
+      "Truro Running Club's limited-entry race follows coast path around Chapel Porth and Porthtowan before looping Tywarnhayle Mine, with technical descents, mud, river running and a children's field race.",
+    organiser: "Truro Running Club",
+    website: "https://www.trurorunningclub.org.uk/trc-events/tywarnhayle-10k/",
   },
 };
 
@@ -13594,6 +13773,197 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "This is the organiser's official website, but it did not expose a separately verifiable September checkout during this review. Use the live runABC route for current booking.",
+    },
+  ],
+  "petzl-night-trails-10k-coombe-abbey|2026-09-30|10K": [
+    {
+      providerCode: "official-big-bear-petzl-coombe",
+      providerName: "Big Bear Events official entry",
+      entryUrl: "https://my.bigbearevents.net/e/petzl-night-trails-10k-coombe-abbey-12988",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl: "https://bigbearevents.net/events",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Big Bear's live calendar and organiser-branded entry page confirm the 30 September 2026 race, 19:00 start and mandatory head or chest torch. The checkout is open, but its displayed tier copy was not used as a definitive current price.",
+    },
+    {
+      providerCode: "timeoutdoors-petzl-coombe",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/petzl-night-trails-10k-coombe-abbey",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 14.4,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/petzl-night-trails-10k-coombe-abbey",
+      isVerified: true,
+      notes:
+        "TimeOutdoors lists live entry from £14.40 to £18, with a 19:00 start, minimum age 16 and 151 feet of ascent. Confirm the final tier during checkout.",
+    },
+  ],
+  "runthrough-victoria-park-5k-10k-half-marathon-october|2026-10-03|10K": [
+    {
+      providerCode: "official-runthrough-victoria-october",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official page lists the 10K at £32 and 10:00 on Saturday 3 October, with three tarmac laps, chip timing, medal, free photos and post-race goodies.",
+    },
+    {
+      providerCode: "challenge-chasers-victoria-october",
+      providerName: "Challenge Chasers entry",
+      entryUrl: "https://www.challengechasers.com/events/908ca59c-efae-4b96-9ee6-122bf9dff84e",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl: "https://www.challengechasers.com/events/908ca59c-efae-4b96-9ee6-122bf9dff84e",
+      isVerified: true,
+      notes:
+        "Challenge Chasers offers the same 10K at £34 and confirms the corrected date and 10:00 distance start. Its price is higher than direct organiser entry.",
+    },
+  ],
+  "dorney-5k-10k-half-marathon-october|2026-10-03|10K": [
+    {
+      providerCode: "official-dorney-lake-october",
+      providerName: "Dorney Lake Events official entry",
+      entryUrl:
+        "https://www.dorneylakeevents.com/event/run-dorney-5k-10k-half-marathon-3rd-october-2026/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl:
+        "https://www.dorneylakeevents.com/event/run-dorney-5k-10k-half-marathon-3rd-october-2026/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official listing shows 10K entry at £30, all distances starting at 09:10 and a 600-person overall event limit.",
+    },
+    {
+      providerCode: "challenge-chasers-dorney-october",
+      providerName: "Challenge Chasers entry",
+      entryUrl: "https://www.challengechasers.com/events/4266d044-f512-4224-94d0-9dfe0520dc55",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 31.8,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl: "https://www.challengechasers.com/events/4266d044-f512-4224-94d0-9dfe0520dc55",
+      isVerified: true,
+      notes:
+        "Challenge Chasers lists the 10K open at £31.80 and confirms the 09:10 start, two-lap paved course and free signposted event parking.",
+    },
+  ],
+  "kielder-10k|2026-10-03|10K": [
+    {
+      providerCode: "official-kielder-njuko",
+      providerName: "Altra Kielder official entry",
+      entryUrl: "https://in.njuko.com/altra-kielder-marathon?currentPage=select-competition",
+      entryType: "official",
+      status: "open",
+      priceAmount: 27.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl: "https://kieldermarathon.com/event-item/10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's 10K page links directly to this NJUKO registration form for the 3 October fixture. The current 10K price is £27.50; recheck the final event instructions because a separate organiser FAQ shows a five-minute provisional timing variation.",
+    },
+    {
+      providerCode: "challenge-chasers-kielder-weekend",
+      providerName: "Challenge Chasers entry",
+      entryUrl: "https://www.challengechasers.com/events/9c5d7268-b156-48bd-881e-216c7ace6c7b",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 27.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl: "https://www.challengechasers.com/events/9c5d7268-b156-48bd-881e-216c7ace6c7b",
+      isVerified: true,
+      notes:
+        "Challenge Chasers lists the Kielder 10K open at £27.50 and supplies the marathon-weekend travel, shuttle and parking guidance.",
+    },
+  ],
+  "southampton-10k|2026-10-04|10K": [
+    {
+      providerCode: "official-runthrough-southampton",
+      providerName: "RunThrough official entry",
+      entryUrl:
+        "https://www.runthrough.co.uk/event/southampton-half-marathon-10k--junior-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl:
+        "https://www.runthrough.co.uk/event/southampton-half-marathon-10k--junior-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists the 10K at £32 with a 09:30 start on Sunday 4 October. Entry includes chip timing, medal, free race photos and post-race goodies.",
+    },
+    {
+      providerCode: "charity-southampton-hospitals",
+      providerName: "Southampton Hospitals Charity entry offer",
+      entryUrl:
+        "https://southamptonhospitalscharity.org/charity-events/runthrough-10k-half-marathon-2026/",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 22,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl:
+        "https://southamptonhospitalscharity.org/charity-events/runthrough-10k-half-marathon-2026/",
+      isVerified: true,
+      notes:
+        "The charity offers a £10 discount from the £32 direct 10K price, plus a branded top and fundraising support. It asks runners to aim for a £100 fundraising target and still completes registration through RunThrough.",
+    },
+  ],
+  "tywarnhayle-10k|2026-10-04|10K": [
+    {
+      providerCode: "official-truro-tywarnhayle",
+      providerName: "Truro Running Club official information",
+      entryUrl: "https://www.trurorunningclub.org.uk/trc-events/tywarnhayle-10k/",
+      entryType: "official",
+      status: "sold_out",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl: "https://www.trurorunningclub.org.uk/trc-events/tywarnhayle-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Truro Running Club marks the 4 October race sold out. The official page confirms the 10:00 start, 230-runner limit, technical coast-path route and ARC/26/0754 permit.",
+    },
+    {
+      providerCode: "sientries-tywarnhayle",
+      providerName: "SiEntries official booking route",
+      entryUrl: "https://www.sientries.co.uk/event/tywarnhayle-10k-2026-2026?elid=Y",
+      entryType: "third_party",
+      status: "sold_out",
+      priceAmount: 16,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-03T10:00:00+01:00",
+      checkedAt: "2026-08-19T22:30:00+01:00",
+      sourceUrl: "https://www.sientries.co.uk/event/tywarnhayle-10k-2026-2026?elid=Y",
+      isVerified: true,
+      notes:
+        "SiEntries reports the event full at 231 participants. Its retained information shows £16 affiliated and £18 unaffiliated fees; existing runners can transfer an entry until 2 October.",
     },
   ],
 };
