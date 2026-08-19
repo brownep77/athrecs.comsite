@@ -325,6 +325,18 @@ export const ukTenKEditionReplacements: UkTenKEditionReplacement[] = [
     fromDate: "2026-09-26",
     toDate: "2026-09-27",
   },
+  {
+    seriesSlug: "shnestone-10k",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
+  {
+    seriesSlug: "the-target-ovarian-walk-run",
+    distance: "10K",
+    fromDate: "2026-09-26",
+    toDate: "2026-09-27",
+  },
 ];
 
 /** Verified corrections applied before entry options are matched to an edition. */
@@ -2151,6 +2163,50 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     entryUrl:
       "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
     source: "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+  },
+  "shnestone-10k|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "10:00",
+    entryUrl: "https://www.avtiming.com/shenstone",
+    source: "https://www.avtiming.com/shenstone",
+    notes:
+      "The Shenstone 10K is on Sunday 27 September, not Saturday 26 September, and starts at 10:00 from Shenstone Playing Fields. The tracked road race has a two-hour cut-off and a 500-runner capacity, with profits supporting Greysbrooke Primary School and local causes.",
+  },
+  "the-target-ovarian-walk-run|2026-09-26|10K": {
+    date: "2026-09-27",
+    startTime: "11:00",
+    entryUrl: "https://join.targetovariancancer.org.uk/event/ovar-dressed-london-2026/home",
+    source: "https://join.targetovariancancer.org.uk/event/ovar-dressed-london-2026/home",
+    notes:
+      "Ovar-Dressed London is on Sunday 27 September, not Saturday 26 September, and starts at 11:00 from Chester Gate in Regent's Park. Participants can walk, run or race 5K or 10K in this untimed Target Ovarian Cancer fundraiser.",
+  },
+  "windsor-womens-10k|2026-09-26|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.entryhub.co.uk/windsor-womens-10k-2026",
+    source: "https://windsorwomens10k.com/",
+    notes:
+      "The Windsor Women's 10K starts at 10:00 on Saturday 26 September along the Long Walk in Windsor Great Park. The women-only, UK Athletics-rules race follows an undulating course past royal landmarks before a downhill finish facing Windsor Castle.",
+  },
+  "amport-trail-run|2026-09-27|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.webscorer.com/register?raceid=425532",
+    source: "https://www.muddyrunners.org.uk/amport-trail-runs",
+    notes:
+      "Amport Trail Run's main waves begin at 10:00 on Sunday 27 September after the 09:45 canicross start. The undulating 10K mixes trail, tarmac, dirt and single track through the Hampshire countryside, with no race-day entry.",
+  },
+  "asda-foundation-sheffield-10k|2026-09-27|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.runforall.com/events/10k/sheffield-10k/",
+    source: "https://www.runforall.com/events/10k/sheffield-10k/",
+    notes:
+      "The Sheffield Mutual Sheffield 10K starts at 09:30 on Sunday 27 September from Arundel Gate. The chip-timed city road race is staged by Jane Tomlinson's Run For All with Sheffield City Council and includes a medal and finisher goody bag.",
+  },
+  "black-nore-10k|2026-09-27|10K": {
+    startTime: "10:00",
+    entryUrl: "https://www.fullonsport.com/event/black-nore-10km-2026/profile",
+    source: "https://portisheadrunningclub.com/",
+    notes:
+      "The Black Nore 10K starts at 10:00 on Sunday 27 September from Portishead Open Air Pool. Portishead Running Club's chip-timed coastal route mixes grass, mud, rocks and tarmac and passes Black Nore Lighthouse and Redcliffe Bay.",
   },
 };
 
@@ -5342,6 +5398,96 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
     organiser: "RunThrough",
     website:
       "https://www.runthrough.co.uk/event/clapham-common-5k-10k-half-marathon-september-2026",
+  },
+  "shnestone-10k": {
+    name: "Shenstone 10K",
+    city: "Shenstone",
+    county: "Staffordshire",
+    country: "England",
+    area: "Shenstone Playing Fields",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Shenstone 10K — a community road race from the village playing fields near Lichfield.",
+    description:
+      "FROGS, the Greysbrooke Primary School PTA, stages this tracked 10K from Shenstone Playing Fields, with village entertainment and all profits supporting the school and local children's causes.",
+    organiser: "FROGS — Greysbrooke Primary School PTA",
+    website: "https://www.avtiming.com/shenstone",
+  },
+  "the-target-ovarian-walk-run": {
+    name: "Ovar-Dressed London",
+    city: "London",
+    county: "Greater London",
+    country: "England",
+    area: "Regent's Park, Chester Gate",
+    surface: "Road",
+    distances: ["10K", "5K"],
+    summary:
+      "Ovar-Dressed London — an inclusive 5K or 10K walk, run or race for Target Ovarian Cancer.",
+    description:
+      "Target Ovarian Cancer invites participants of all ages to complete an accessible, untimed Regent's Park route in fun dress while raising awareness and funds for earlier diagnosis, treatment and support.",
+    organiser: "Target Ovarian Cancer",
+    website: "https://join.targetovariancancer.org.uk/event/ovar-dressed-london-2026/home",
+  },
+  "windsor-womens-10k": {
+    name: "Windsor Women's 10K",
+    city: "Windsor",
+    county: "Berkshire",
+    country: "England",
+    area: "The Long Walk, Windsor Great Park",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Windsor Women's 10K — an undulating women-only road race with a Windsor Castle finish.",
+    description:
+      "Running4Women's long-established UK Athletics-rules event starts and finishes along the Long Walk, passing royal residences and landmarks before a fast downhill final section towards Windsor Castle.",
+    organiser: "Running4Women",
+    website: "https://windsorwomens10k.com/",
+  },
+  "amport-trail-run": {
+    name: "Amport Trail Run",
+    city: "Amport",
+    county: "Hampshire",
+    country: "England",
+    area: "Amport Cricket Club and surrounding countryside",
+    surface: "Trail",
+    distances: ["10K", "5K", "10mi"],
+    summary:
+      "Amport Trail Run — hilly multi-terrain races through the Hampshire countryside near Andover.",
+    description:
+      "Muddy Runners hosts 5K, 10K, 10-mile and canicross waves from Amport Cricket Club on a challenging mix of trail, tarmac, dirt and single track.",
+    organiser: "Muddy Runners for Amport Cricket Club",
+    website: "https://www.muddyrunners.org.uk/amport-trail-runs",
+  },
+  "asda-foundation-sheffield-10k": {
+    name: "Sheffield Mutual Sheffield 10K",
+    city: "Sheffield",
+    county: "South Yorkshire",
+    country: "England",
+    area: "Arundel Gate and Sheffield city centre",
+    surface: "Road",
+    distances: ["10K"],
+    summary:
+      "Sheffield Mutual Sheffield 10K — a mass-participation city-centre road race from Arundel Gate.",
+    description:
+      "Jane Tomlinson's Run For All stages this chip-timed 10K with Sheffield City Council, combining a lively city-centre atmosphere with a route through the Steel City.",
+    organiser: "Jane Tomlinson's Run For All",
+    website: "https://www.runforall.com/events/10k/sheffield-10k/",
+  },
+  "black-nore-10k": {
+    name: "Black Nore 10K",
+    city: "Portishead",
+    county: "North Somerset",
+    country: "England",
+    area: "Portishead Lake Grounds and North Somerset coast",
+    surface: "Mixed",
+    distances: ["10K"],
+    summary:
+      "Black Nore 10K — an undulating mixed-terrain coastal race from Portishead Open Air Pool.",
+    description:
+      "Portishead Running Club's chip-timed 350-place race follows grass, mud, rocks, tarmac and coastal paths past Black Nore Lighthouse, supporting Weston Hospicecare.",
+    organiser: "Portishead Running Club",
+    website: "https://portisheadrunningclub.com/",
   },
 };
 
@@ -11417,6 +11563,187 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "runABC is retained as a secondary reference for the earlier listing. Use RunThrough's September page for the current date, price and live availability.",
+    },
+  ],
+  "shnestone-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-shenstone-avtiming",
+      providerName: "Shenstone 10K official entry",
+      entryUrl: "https://www.avtiming.com/shenstone",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.avtiming.com/shenstone",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live organiser and timing page lists £30 entry, Sunday 27 September at 10:00, a 500-runner capacity and online registration until the race sells out.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/shnestone-10k",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/shnestone-10k",
+      isVerified: true,
+      notes:
+        "runABC is retained as a secondary reference, but its indexed page still describes the 2025 edition. The AV Timing organiser page is authoritative for the 2026 date and availability.",
+    },
+  ],
+  "the-target-ovarian-walk-run|2026-09-27|10K": [
+    {
+      providerCode: "official-target-ovarian",
+      providerName: "Target Ovarian Cancer registration",
+      entryUrl: "https://join.targetovariancancer.org.uk/event/ovar-dressed-london-2026/home",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://join.targetovariancancer.org.uk/event/ovar-dressed-london-2026/home",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The charity's live registration page lists adult entry at £15, child entry at £7.50 and on-the-day registration subject to availability. The 5K and 10K event is untimed.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/the-target-ovarian-walk-run",
+      entryType: "third_party",
+      status: "unknown",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/the-target-ovarian-walk-run",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary listing, but Target Ovarian Cancer is authoritative for the corrected Sunday date, Ovar-Dressed name, pricing and live registration.",
+    },
+  ],
+  "windsor-womens-10k|2026-09-26|10K": [
+    {
+      providerCode: "official-windsor-women-entryhub",
+      providerName: "Windsor Women's 10K official entry",
+      entryUrl: "https://www.entryhub.co.uk/windsor-womens-10k-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30.5,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-25T23:59:00+01:00",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://windsorwomens10k.com/enter/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The official EntryHub checkout lists £30.50 for affiliated runners or £32.50 standard, Saturday 26 September at 10:00, and online entry closing on 25 September.",
+    },
+    {
+      providerCode: "findarace",
+      providerName: "Find a Race Quick Book",
+      entryUrl: "https://findarace.com/events/windsor-womens-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 32.5,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/windsor-womens-10k",
+      isVerified: true,
+      notes:
+        "Find a Race offers a secondary Quick Book route at £32.50 and confirms the 10:00 start, women-only field and Windsor Great Park course.",
+    },
+  ],
+  "amport-trail-run|2026-09-27|10K": [
+    {
+      providerCode: "official-amport-webscorer",
+      providerName: "Amport Trail Run official entry",
+      entryUrl: "https://www.webscorer.com/register?raceid=425532",
+      entryType: "official",
+      status: "open",
+      priceAmount: 15,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-26T22:00:00+01:00",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.muddyrunners.org.uk/amport-trail-runs",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Muddy Runners links directly to this Webscorer registration. Early 10K entry is £15 until two weeks before the race, then £20; pre-entry closes at 22:00 on 26 September.",
+    },
+    {
+      providerCode: "runabc",
+      providerName: "runABC event listing",
+      entryUrl: "https://runabc.co.uk/amport-trail-run",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/amport-trail-run",
+      isVerified: true,
+      notes:
+        "runABC supplies a secondary event route; the Muddy Runners page and Webscorer are authoritative for current pricing, closing time and wave instructions.",
+    },
+  ],
+  "asda-foundation-sheffield-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-run-for-all-sheffield",
+      providerName: "Run For All official entry",
+      entryUrl: "https://www.runforall.com/events/10k/sheffield-10k/",
+      entryType: "official",
+      status: "open",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.runforall.com/events/10k/sheffield-10k/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser's live 2026 page confirms Sunday 27 September at 09:30 from Arundel Gate and links to the current individual-entry checkout.",
+    },
+    {
+      providerCode: "bluebell-wood-charity",
+      providerName: "Bluebell Wood charity entry",
+      entryUrl: "https://www.bluebellwood.org/Event/sheffield-10k-2026",
+      entryType: "charity",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.bluebellwood.org/Event/sheffield-10k-2026",
+      isVerified: true,
+      notes:
+        "Bluebell Wood Children's Hospice offers a discounted guaranteed place for £25 with a £150 minimum fundraising pledge and charity-team support.",
+    },
+  ],
+  "black-nore-10k|2026-09-27|10K": [
+    {
+      providerCode: "official-black-nore-fullonsport",
+      providerName: "Black Nore official Full On Sport entry",
+      entryUrl: "https://www.fullonsport.com/event/black-nore-10km-2026/profile",
+      entryType: "official",
+      status: "open",
+      priceAmount: 14,
+      priceCurrency: "GBP",
+      closesAt: "2026-09-24T23:59:00+01:00",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.fullonsport.com/event/black-nore-10km-2026/profile",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The live race checkout lists £14 affiliated or £16 unaffiliated entry, a 350-person limit and advance registration through 24 September; race-day entry may be available if space remains.",
+    },
+    {
+      providerCode: "timeoutdoors",
+      providerName: "TimeOutdoors entry",
+      entryUrl: "https://www.timeoutdoors.com/events/black-nore-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 14,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T11:00:00+01:00",
+      sourceUrl: "https://www.timeoutdoors.com/events/black-nore-10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors provides an alternative entry route with prices from £14 and confirms the 10:00 start, Portishead Open Air Pool venue and mixed coastal terrain.",
     },
   ],
 };
