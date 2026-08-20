@@ -57,6 +57,7 @@ import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics"
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
+import { mrdIntlMarathonEditions, mrdIntlMarathonSeries } from "./mrd-marathons-intl";
 import { editionOverrides, entryOptions, eventSlugAliases, seriesOverrides } from "./entry-options";
 import {
   raceCollectionEditions,
@@ -136,6 +137,7 @@ for (const series of [
   ...(worldTriathlonSeries as Series[]),
   ...(mrdMarathonSeries as Series[]),
   ...(mrdEuMarathonSeries as Series[]),
+  ...(mrdIntlMarathonSeries as Series[]),
 ]) {
   if (eventSlugAliases[series.slug]) continue;
   const key = normName(seriesOverrides[series.slug]?.name ?? series.name);
@@ -165,6 +167,7 @@ const mergedEditions = [
   ...(worldTriathlonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(mrdMarathonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(mrdEuMarathonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(mrdIntlMarathonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
 ];
 
 export const editions: Edition[] = (() => {
