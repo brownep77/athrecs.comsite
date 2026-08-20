@@ -12,8 +12,12 @@ const vite = await createServer({
 
 try {
   const { ensureAthrecsSeeded } = await vite.ssrLoadModule("/src/lib/athrecs/seed.server.ts");
-  const { stageScraperWorkbookSnapshot, publishEligibleScraperWorkbookBatch } =
-    await vite.ssrLoadModule("/src/lib/athrecs/scraper-workbook-import.server.ts");
+  const {
+    getFixtureReviewQueue,
+    releaseFixtureReviewCandidates,
+    stageScraperWorkbookSnapshot,
+    publishEligibleScraperWorkbookBatch,
+  } = await vite.ssrLoadModule("/src/lib/athrecs/scraper-workbook-import.server.ts");
 
   await ensureAthrecsSeeded();
   const staged = await stageScraperWorkbookSnapshot();
@@ -28,12 +32,43 @@ try {
   );
   assert(staged.counts.eligible <= 74, "Catalogue dedupe cannot increase the 74-row quality gate");
 
+  const reviewQueue = await getFixtureReviewQueue({ reviewStatus: "releasable", limit: 1 });
+  assert(reviewQueue, "The staged batch must have a review queue");
+  assert(reviewQueue.rows.length === 1, "The safe historical review queue must be populated");
+  assert.equal(
+    reviewQueue.counts.releasable + reviewQueue.counts.pending,
+    staged.counts.blocked,
+    "Every blocked candidate must have an explicit review disposition",
+  );
+  const reviewed = await releaseFixtureReviewCandidates({
+    batchId: staged.batchId,
+    candidateIds: [reviewQueue.rows[0].id],
+    reviewerUserId: "fixture-review-verifier",
+    note: "Automated review workflow verification",
+  });
+  assert.equal(reviewed.approved, 1);
+  assert.equal(reviewed.publication?.publishedCandidates, 1);
+  assert.equal(
+    reviewed.publication?.counts.eligible,
+    staged.counts.eligible,
+    "A selected release must not publish unrelated eligible candidates",
+  );
+  const queueAfterReview = await getFixtureReviewQueue({ reviewStatus: "releasable", limit: 1 });
+  assert.equal(queueAfterReview.counts.approved, 1, "The approved state must remain auditable");
+  assert.equal(queueAfterReview.counts.actions, 2, "Approval and release actions must be logged");
+
   const first = await publishEligibleScraperWorkbookBatch(staged.batchId);
   assert.equal(first.publishedCandidates, staged.counts.eligible);
   assert.equal(first.counts.eligible, 0);
   assert.equal(first.counts.staged, 5315);
 
   const stagedAgain = await stageScraperWorkbookSnapshot();
+  const queueAfterRestage = await getFixtureReviewQueue({ reviewStatus: "releasable", limit: 1 });
+  assert.equal(
+    queueAfterRestage.counts.approved,
+    1,
+    "Refreshing the staged snapshot must preserve completed review decisions",
+  );
   const second = await publishEligibleScraperWorkbookBatch(stagedAgain.batchId);
   assert.equal(second.publishedEvents, 0, "A repeated upload must not create events");
   assert.equal(second.publishedEditions, 0, "A repeated upload must not create editions");
@@ -47,6 +82,9 @@ try {
         eligible_after_catalogue_dedupe: staged.counts.eligible,
         first_run_events_added: first.publishedEvents,
         first_run_edition_distances_added: first.publishedEditions,
+        reviewed_candidates_released: reviewed.approved,
+        reviewed_events_added: reviewed.publication?.publishedEvents ?? 0,
+        reviewed_edition_distances_added: reviewed.publication?.publishedEditions ?? 0,
         held_for_review: first.counts.blocked,
         duplicate_candidates: first.counts.duplicates,
         repeat_run_events_added: second.publishedEvents,

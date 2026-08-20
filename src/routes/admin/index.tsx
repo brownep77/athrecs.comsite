@@ -426,15 +426,20 @@ function AdminPage() {
               fields and no open high-priority review issues.
             </p>
           </div>
-          <Button
-            type="button"
-            disabled={dbStatus.data?.persistent !== true || workbookImportMut.isPending}
-            onClick={() => workbookImportMut.mutate()}
-          >
-            {workbookImportMut.isPending
-              ? "Uploading and checking…"
-              : "Upload collected events now"}
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button asChild type="button" variant="secondary">
+              <Link to="/admin/fixture-review">Review pending fixtures</Link>
+            </Button>
+            <Button
+              type="button"
+              disabled={dbStatus.data?.persistent !== true || workbookImportMut.isPending}
+              onClick={() => workbookImportMut.mutate()}
+            >
+              {workbookImportMut.isPending
+                ? "Uploading and checking…"
+                : "Upload collected events now"}
+            </Button>
+          </div>
         </div>
 
         {workbookImport.isLoading && <p className="text-sm text-muted">Loading import status…</p>}

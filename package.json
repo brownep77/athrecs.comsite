@@ -23,6 +23,7 @@
     "verify:bulk-source-run": "node --experimental-strip-types scripts/verify-bulk-source-run.mjs",
     "verify:workbook-overrides": "node scripts/verify-workbook-event-overrides.mjs",
     "verify:scraper-workbook-import": "node scripts/verify-scraper-workbook-import.mjs",
+    "verify:fixture-review": "node --experimental-strip-types scripts/verify-fixture-review.mjs",
     "verify:results-links": "node --experimental-strip-types scripts/verify-results-links.mjs",
     "verify:uk-10k-workflow": "node scripts/verify-uk-10k-workflow.mjs",
     "lint": "eslint .",
