@@ -101,6 +101,21 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-20"
+    },
+    {
+      "id": "global-007",
+      "status": "verified",
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Global", "UK"],
+      "countries": ["England"],
+      "series_slugs": [
+        "ride-reigate",
+        "goodwood-motor-circuit-running-gp-duathlons",
+        "lake-district-running-festival"
+      ],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-20"
     }
   ],
   "source_progress": [
@@ -119,8 +134,8 @@
     {
       "source_id": "runthrough_uk",
       "status": "in_progress",
-      "events_imported": 7,
-      "last_checkpoint": "global-006"
+      "events_imported": 10,
+      "last_checkpoint": "global-007"
     },
     {
       "source_id": "te_sports_timing_upcoming",

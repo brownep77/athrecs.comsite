@@ -75,3 +75,13 @@ Three further organiser-verified fixtures extend the programme into France and t
 - Royal Windsor Triathlon — Triathlon — England — 13 June 2027
 
 All three use current RunThrough organiser entry pages with open registration, published prices, dates and locations. The RunThrough registry record is now global rather than UK-and-Europe-only and records France and the United States in its verified country focus. The source remains `in_progress`; additional global fixtures and disciplines are still queued for later checkpoints.
+
+## Checkpoint global-007
+
+Three organiser-verified fixtures broaden the discipline mix while keeping the checkpoint deliberately small for fast publication:
+
+- Ride Reigate — Cycling — England — 11 July 2027
+- Goodwood Motor Circuit Running GP & Duathlons — Duathlon — England — 25 July 2027
+- Lake District Running Festival — Running — England — 10 April 2027
+
+All three are listed on current RunThrough organiser pages with open registration, published dates, locations and prices. Ride Reigate introduces a dedicated cycling sportive to the global programme, Goodwood adds a mixed running-and-duathlon race day under the Duathlon taxonomy, and the Lake District fixture adds two long-distance mountain-trail options. Each was checked against the full ATHRECS catalogue before import, and the source remains `in_progress`.
