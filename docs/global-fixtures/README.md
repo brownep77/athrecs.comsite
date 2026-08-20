@@ -85,3 +85,13 @@ Three organiser-verified fixtures broaden the discipline mix while keeping the c
 - Lake District Running Festival — Running — England — 10 April 2027
 
 All three are listed on current RunThrough organiser pages with open registration, published dates, locations and prices. Ride Reigate introduces a dedicated cycling sportive to the global programme, Goodwood adds a mixed running-and-duathlon race day under the Duathlon taxonomy, and the Lake District fixture adds two long-distance mountain-trail options. Each was checked against the full ATHRECS catalogue before import, and the source remains `in_progress`.
+
+## Checkpoint global-008
+
+Three organiser-verified road and park fixtures extend United States coverage and introduce Northern Ireland to the verified checkpoint programme:
+
+- Philadelphia Labor Day 5K, 10K & 10 Mile — Running — United States — 7 September 2026
+- Washington DC 5K & 10K at Anacostia Park — Running — United States — 13 September 2026
+- Hillsborough Castle & Gardens Running Festival — Running — Northern Ireland — 25 July 2027
+
+All three have current RunThrough organiser pages with open registration, published prices, dates, start times and locations. The two US fixtures add distinct city races in Philadelphia and Washington DC; Hillsborough adds a new country label and two distances in the castle grounds. Each canonical name, location and date was checked against the full ATHRECS catalogue before import. The source remains `in_progress` so further countries can be added in later three-event checkpoints.

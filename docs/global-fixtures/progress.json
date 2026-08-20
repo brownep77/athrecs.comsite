@@ -116,6 +116,21 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-20"
+    },
+    {
+      "id": "global-008",
+      "status": "verified",
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Global", "UK"],
+      "countries": ["United States", "Northern Ireland"],
+      "series_slugs": [
+        "philadelphia-labor-day-5k-10k-10-mile",
+        "washington-dc-anacostia-park-5k-10k",
+        "hillsborough-castle-gardens-running-festival"
+      ],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-20"
     }
   ],
   "source_progress": [
@@ -134,8 +149,8 @@
     {
       "source_id": "runthrough_uk",
       "status": "in_progress",
-      "events_imported": 10,
-      "last_checkpoint": "global-007"
+      "events_imported": 13,
+      "last_checkpoint": "global-008"
     },
     {
       "source_id": "te_sports_timing_upcoming",
