@@ -511,6 +511,63 @@ export const verifiedGlobalSeries: Series[] = [
     source_url:
       "https://www.runthrough.co.uk/event/runthrough-new-york-flushing-meadows-corona-park-5k-10k-november-2026",
   },
+  {
+    slug: "runthrough-trails-ascona-locarno",
+    name: "RunThrough Trails Ascona-Locarno",
+    sport: "Running",
+    country: "Switzerland",
+    county: "Ticino",
+    city: "Locarno",
+    area: "Ascona-Locarno, Piazza Grande and Pizzo Leone",
+    surface: "Trail / Mountain",
+    distances: ["42K", "24K", "2K"],
+    summary: "Mountain trail races over 42K and 24K above Lake Maggiore, with a junior race.",
+    description:
+      "A RunThrough Trails event beginning in Locarno and climbing from the lakeside through forest and mountain trails towards Pizzo Leone, with 42K, 24K and junior distances.",
+    organiser: "RunThrough Trails",
+    website: "https://www.runthroughtrails.com/ascona-locarno",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/runthrough-trails-ascona-locarno-2026",
+  },
+  {
+    slug: "runthrough-ultra-orsieres",
+    name: "RunThrough Ultra Orsières",
+    sport: "Running",
+    country: "Switzerland",
+    county: "Valais",
+    city: "Orsières",
+    area: "Orsières, Champex-Lac and Sembrancher",
+    surface: "Trail / Mountain",
+    distances: ["50K", "25K", "15K"],
+    summary: "Three Alpine trail races through Orsières, Champex-Lac and Sembrancher.",
+    description:
+      "A mountain-trail event in the Valais Alps, following forest paths, technical terrain and sections of the Tour du Mont Blanc landscape over 50K, 25K and 15K routes.",
+    organiser: "RunThrough Trails",
+    website: "https://www.runthroughtrails.com/ultra-dorsieres",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/runthrough-ultra-trail-dorsires-october-2026",
+  },
+  {
+    slug: "the-fox-trail",
+    name: "The Fox Trail",
+    sport: "Running",
+    country: "England",
+    county: "Surrey",
+    city: "Godalming",
+    area: "The Burys Field and the Fox Way",
+    surface: "Trail / Mixed Terrain",
+    distances: ["62K", "41K", "20K", "Relay"],
+    summary: "Point-to-point trail races over 62K, 41K and 20K through the Surrey countryside.",
+    description:
+      "A marked point-to-point trail event following the Fox Way through Surrey, with solo 62K, 41K and 20K races plus relay options finishing in Godalming.",
+    organiser: "RunThrough Trails",
+    website: "https://www.runthroughtrails.com/the-fox",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/the-fox-trail-62k-41k-20k-may-2027",
+  },
 ];
 
 export const verifiedGlobalEditions: Edition[] = [
@@ -1319,5 +1376,104 @@ export const verifiedGlobalEditions: Edition[] = [
       "https://www.runthrough.co.uk/event/runthrough-new-york-flushing-meadows-corona-park-5k-10k-november-2026",
     notes:
       "The half marathon starts at 08:00 and the 10K and 5K at 08:45. The organiser's route section confirms Flushing, NY 11355; its top summary contains an erroneous Michigan postcode that is not retained here.",
+  },
+  {
+    seriesSlug: "runthrough-trails-ascona-locarno",
+    date: "2026-10-24",
+    distance: "42K",
+    distanceKm: 42,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/runthrough-trails-ascona-locarno-2026",
+    entryOptions: [
+      {
+        providerCode: "runthrough-europe",
+        providerName: "RunThrough Europe",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/runthrough-trails-ascona-locarno-2026",
+        entryType: "official",
+        status: "open",
+        priceAmount: 72,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/runthrough-trails-ascona-locarno-2026",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The organiser's live entry page lists open 42K, 24K and junior registration with current prices.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.runthrough.co.uk/event/runthrough-trails-ascona-locarno-2026",
+    notes:
+      "The 42K starts at 08:00 and the 24K at 10:00 from the Ascona-Locarno event base; the junior race starts at 14:00.",
+  },
+  {
+    seriesSlug: "runthrough-ultra-orsieres",
+    date: "2026-10-03",
+    distance: "50K",
+    distanceKm: 50,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/runthrough-ultra-trail-dorsires-october-2026",
+    entryOptions: [
+      {
+        providerCode: "runthrough-europe",
+        providerName: "RunThrough Europe",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/runthrough-ultra-trail-dorsires-october-2026",
+        entryType: "official",
+        status: "open",
+        priceAmount: 99,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/runthrough-ultra-trail-dorsires-october-2026",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The organiser's live entry page lists open 50K, 25K and 15K registration with current prices.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.runthrough.co.uk/event/runthrough-ultra-trail-dorsires-october-2026",
+    notes:
+      "The organiser confirms the 3 October 2026 race date and an 08:00 event start from Orsières in Valais.",
+  },
+  {
+    seriesSlug: "the-fox-trail",
+    date: "2027-05-22",
+    distance: "62K",
+    distanceKm: 62,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/the-fox-trail-62k-41k-20k-may-2027",
+    entryOptions: [
+      {
+        providerCode: "runthrough-uk",
+        providerName: "RunThrough UK",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/the-fox-trail-62k-41k-20k-may-2027",
+        entryType: "official",
+        status: "open",
+        priceAmount: 86,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/the-fox-trail-62k-41k-20k-may-2027",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The organiser's live entry page lists open 62K, 41K, 20K and relay registration with current prices.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.runthrough.co.uk/event/the-fox-trail-62k-41k-20k-may-2027",
+    notes:
+      "The 62K starts at 08:00, the 41K at 09:30 and the 20K at 11:00 on the point-to-point Fox Way route.",
   },
 ];

@@ -146,6 +146,21 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-20"
+    },
+    {
+      "id": "global-010",
+      "status": "verified",
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Europe", "UK"],
+      "countries": ["Switzerland", "England"],
+      "series_slugs": [
+        "runthrough-trails-ascona-locarno",
+        "runthrough-ultra-orsieres",
+        "the-fox-trail"
+      ],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-20"
     }
   ],
   "source_progress": [
@@ -164,8 +179,8 @@
     {
       "source_id": "runthrough_uk",
       "status": "in_progress",
-      "events_imported": 16,
-      "last_checkpoint": "global-009"
+      "events_imported": 19,
+      "last_checkpoint": "global-010"
     },
     {
       "source_id": "te_sports_timing_upcoming",

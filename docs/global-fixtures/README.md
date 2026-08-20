@@ -105,3 +105,13 @@ Three further organiser-verified United States fixtures expand New York and New 
 - New York 5K, 10K & Half Marathon at Flushing Meadows — Running — United States — 15 November 2026
 
 All three have current RunThrough organiser pages with open registration, published prices and start times. The Flushing Meadows page's route-information section confirms the Queens address; an erroneous Michigan postcode in its top summary is documented but not imported. Australia remains queued because its organiser currently offers only 2027 interest registration without confirmed dates. Each fixture was checked against the full ATHRECS catalogue before import, and the source remains `in_progress`.
+
+## Checkpoint global-010
+
+Three organiser-verified trail fixtures add two Swiss cantons and a distinct Surrey point-to-point event:
+
+- RunThrough Trails Ascona-Locarno — Running — Switzerland — 24 October 2026
+- RunThrough Ultra Orsières — Running — Switzerland — 3 October 2026
+- The Fox Trail — Running — England — 22 May 2027
+
+The Swiss fixtures extend regional coverage into Ticino and Valais, while The Fox adds a multi-distance trail ultra across Surrey. Each official RunThrough page has open registration, published prices, dates, locations and start times. The three canonical names, locations and dates were checked against the full ATHRECS catalogue; similarly located parkruns and unrelated Interlaken or Ladybower records were not treated as matches. No participant result rows were collected, and the source remains `in_progress`.
