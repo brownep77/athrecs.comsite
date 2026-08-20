@@ -453,6 +453,64 @@ export const verifiedGlobalSeries: Series[] = [
     source_url:
       "https://www.runthrough.co.uk/event/hillsborough-castle-gardens-running-festival-july-2027",
   },
+  {
+    slug: "staten-island-freshkills-park-5k-10k-half-marathon",
+    name: "Staten Island 5K, 10K & Half Marathon at Freshkills Park",
+    sport: "Running",
+    country: "United States",
+    county: "New York",
+    city: "Staten Island",
+    area: "Freshkills Park",
+    surface: "Park / Paved Path",
+    distances: ["Half", "10K", "5K"],
+    summary: "Half-marathon, 10K and 5K racing across the open landscapes of Freshkills Park.",
+    description:
+      "Three flat road and paved-path distances through Freshkills Park, with wide-open views and a traffic-free New York City race setting.",
+    organiser: "RunThrough USA",
+    website:
+      "https://www.runthrough.co.uk/event/staten-island-5k-10k-half-marathon-at-freshkills-park",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/staten-island-5k-10k-half-marathon-at-freshkills-park",
+  },
+  {
+    slug: "hoboken-5k-10k",
+    name: "Hoboken 5K & 10K",
+    sport: "Running",
+    country: "United States",
+    county: "New Jersey",
+    city: "Hoboken",
+    area: "Pier A Park and the Hudson River waterfront",
+    surface: "Road / Paved Path",
+    distances: ["10K", "5K"],
+    summary: "A waterfront 5K and 10K with views of the Manhattan skyline.",
+    description:
+      "A flat, road-closed 5K and 10K from Pier A Park along Hoboken's Hudson River waterfront, overlooking Manhattan.",
+    organiser: "RunThrough USA",
+    website: "https://www.runthrough.co.uk/event/hoboken-5k--10k-october-2026",
+    featured: false,
+    source_url: "https://www.runthrough.co.uk/event/hoboken-5k--10k-october-2026",
+  },
+  {
+    slug: "new-york-flushing-meadows-5k-10k-half-marathon",
+    name: "New York 5K, 10K & Half Marathon at Flushing Meadows",
+    sport: "Running",
+    country: "United States",
+    county: "New York",
+    city: "Queens",
+    area: "Flushing Meadows Corona Park",
+    surface: "Park / Paved Path",
+    distances: ["Half", "10K", "5K"],
+    summary: "Half-marathon, 10K and 5K racing around Flushing Meadows Corona Park.",
+    description:
+      "Three flat, pace-friendly race distances on the broad paths of Flushing Meadows Corona Park in Queens, passing the park's Unisphere.",
+    organiser: "RunThrough USA",
+    website:
+      "https://www.runthrough.co.uk/event/runthrough-new-york-flushing-meadows-corona-park-5k-10k-november-2026",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/runthrough-new-york-flushing-meadows-corona-park-5k-10k-november-2026",
+  },
 ];
 
 export const verifiedGlobalEditions: Edition[] = [
@@ -1167,5 +1225,99 @@ export const verifiedGlobalEditions: Edition[] = [
       "https://www.runthrough.co.uk/event/hillsborough-castle-gardens-running-festival-july-2027",
     notes:
       "The half marathon starts at 09:00 and the 10K at 09:40 in Hillsborough Castle and Gardens.",
+  },
+  {
+    seriesSlug: "staten-island-freshkills-park-5k-10k-half-marathon",
+    date: "2026-09-27",
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/staten-island-5k-10k-half-marathon-at-freshkills-park",
+    entryOptions: [
+      {
+        providerCode: "runthrough-usa",
+        providerName: "RunThrough USA",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/staten-island-5k-10k-half-marathon-at-freshkills-park",
+        entryType: "official",
+        status: "open",
+        priceAmount: 55,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/staten-island-5k-10k-half-marathon-at-freshkills-park",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The live organiser page lists open half-marathon, 10K and 5K entry with current prices.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.runthrough.co.uk/event/staten-island-5k-10k-half-marathon-at-freshkills-park",
+    notes:
+      "The half marathon starts at 08:00, the 10K at 08:30 and the 5K at 08:45 in Freshkills Park.",
+  },
+  {
+    seriesSlug: "hoboken-5k-10k",
+    date: "2026-10-17",
+    distance: "10K",
+    distanceKm: 10,
+    status: "Open",
+    entryUrl: "https://www.runthrough.co.uk/event/hoboken-5k--10k-october-2026",
+    entryOptions: [
+      {
+        providerCode: "runthrough-usa",
+        providerName: "RunThrough USA",
+        entryUrl: "https://www.runthrough.co.uk/event/hoboken-5k--10k-october-2026",
+        entryType: "official",
+        status: "open",
+        priceAmount: 40,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl: "https://www.runthrough.co.uk/event/hoboken-5k--10k-october-2026",
+        isVerified: true,
+        isPrimary: true,
+        notes: "The live organiser page lists open 10K and 5K entry with current prices.",
+      },
+    ],
+    startTime: "08:00",
+    source: "https://www.runthrough.co.uk/event/hoboken-5k--10k-october-2026",
+    notes:
+      "The 10K starts at 08:00 and the 5K at 08:10 from Pier A Park on the Hoboken waterfront.",
+  },
+  {
+    seriesSlug: "new-york-flushing-meadows-5k-10k-half-marathon",
+    date: "2026-11-15",
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/runthrough-new-york-flushing-meadows-corona-park-5k-10k-november-2026",
+    entryOptions: [
+      {
+        providerCode: "runthrough-usa",
+        providerName: "RunThrough USA",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/runthrough-new-york-flushing-meadows-corona-park-5k-10k-november-2026",
+        entryType: "official",
+        status: "open",
+        priceAmount: 45,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/runthrough-new-york-flushing-meadows-corona-park-5k-10k-november-2026",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The live organiser page lists open half-marathon, 10K and 5K entry with current prices.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.runthrough.co.uk/event/runthrough-new-york-flushing-meadows-corona-park-5k-10k-november-2026",
+    notes:
+      "The half marathon starts at 08:00 and the 10K and 5K at 08:45. The organiser's route section confirms Flushing, NY 11355; its top summary contains an erroneous Michigan postcode that is not retained here.",
   },
 ];
