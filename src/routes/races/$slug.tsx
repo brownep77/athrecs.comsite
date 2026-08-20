@@ -44,6 +44,8 @@ type EditionRow = {
   distance_km: number;
   status: string;
   entry_url: string | null;
+  source_url: string | null;
+  results_official_url: string | null;
   entry_options: EditionEntryOption[];
   start_time: string | null;
   notes?: string | null;
@@ -149,7 +151,10 @@ export function RacePageContent({
     next?.entry_options.find((option) => option.is_primary) ??
     next?.entry_options.find((option) => option.entry_type === "official") ??
     next?.entry_options[0];
-  const pastWithResults = past.filter((ed) => ed.result_count > 0);
+  const pastWithResults = past.filter(
+    (ed) =>
+      ed.result_count > 0 || Boolean(ed.results_official_url?.trim()) || isRunAbcUrl(ed.source_url),
+  );
   const upcomingPreview = event.sport === "Parkrun" ? upcoming.slice(0, 6) : upcoming.slice(0, 12);
   const upcomingHidden = upcoming.length - upcomingPreview.length;
   const pastPreview = past.slice(0, 12);
@@ -306,7 +311,7 @@ export function RacePageContent({
           <Fact label="Listed from" value={briefing.source.label} />
           <Fact label="Past races on ATHRECS" value={String(past.length)} />
           <Fact
-            label="Results held"
+            label="Results listed"
             value={
               pastWithResults.length
                 ? `${pastWithResults.length} edition${pastWithResults.length === 1 ? "" : "s"}`
@@ -366,11 +371,9 @@ export function RacePageContent({
         county={event.county}
       />
 
-      <EditionList
-        title="Past races"
-        items={pastPreview}
-        hidden={pastHidden}
-        onResults={(id) => {
+      <EditionResultsLinks
+        items={pastWithResults}
+        onAthrecsResults={(id) => {
           setResultsEditionId(id);
           requestAnimationFrame(() => {
             document
@@ -378,8 +381,6 @@ export function RacePageContent({
               ?.scrollIntoView({ behavior: "smooth", block: "start" });
           });
         }}
-        country={event.country}
-        county={event.county}
       />
 
       {resultsEditionId != null && (
@@ -387,7 +388,7 @@ export function RacePageContent({
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <Medal className="h-4 w-4 text-accent" />
-              <h2 className="font-display text-lg font-semibold text-fg">Results</h2>
+              <h2 className="font-display text-lg font-semibold text-fg">ATHRECS finishers</h2>
             </div>
             <Button variant="ghost" size="sm" onClick={() => setResultsEditionId(null)}>
               Close
@@ -446,6 +447,22 @@ export function RacePageContent({
         </section>
       )}
 
+      <EditionList
+        title="Past races"
+        items={pastPreview}
+        hidden={pastHidden}
+        onResults={(id) => {
+          setResultsEditionId(id);
+          requestAnimationFrame(() => {
+            document
+              .getElementById("edition-results")
+              ?.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        }}
+        country={event.country}
+        county={event.county}
+      />
+
       {related.length > 0 && (
         <section className="space-y-3">
           <div className="flex items-center gap-2">
@@ -486,6 +503,177 @@ export function RacePageContent({
         )}
       </aside>
     </div>
+  );
+}
+
+function resultProvider(url: string): string {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
+    const labels: Record<string, string> = {
+      "chiptiming.co.uk": "Chip Timing UK",
+      "results.frsys.uk": "FR Systems",
+      "runabc.co.uk": "runABC",
+      "totalracetiming.co.uk": "Total Race Timing",
+      "results.sporthive.com": "Sporthive",
+      "sportmaniacs.com": "Sportmaniacs",
+      "my.raceresult.com": "Race Result",
+      "parkrun.org.uk": "parkrun",
+    };
+    return labels[host] ?? host;
+  } catch {
+    return "Official provider";
+  }
+}
+
+function canonicalResultUrl(url: string): string {
+  try {
+    const parsed = new URL(url);
+    parsed.hash = "";
+    parsed.hostname = parsed.hostname.toLowerCase();
+    parsed.pathname = parsed.pathname.replace(/\/+$/, "") || "/";
+    return parsed.toString();
+  } catch {
+    return url.trim();
+  }
+}
+
+function isRunAbcUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "").toLowerCase();
+    return host === "runabc.co.uk";
+  } catch {
+    return false;
+  }
+}
+
+function EditionResultsLinks({
+  items,
+  onAthrecsResults,
+}: {
+  items: EditionRow[];
+  onAthrecsResults: (id: number) => void;
+}) {
+  const [showAll, setShowAll] = useState(false);
+  const grouped = useMemo(() => {
+    const byDate = new Map<string, EditionRow[]>();
+    for (const item of items) {
+      const group = byDate.get(item.event_date) ?? [];
+      group.push(item);
+      byDate.set(item.event_date, group);
+    }
+    return [...byDate.entries()]
+      .sort(([left], [right]) => right.localeCompare(left))
+      .map(([date, editions]) => ({ date, editions }));
+  }, [items]);
+  const shown = showAll ? grouped : grouped.slice(0, 12);
+
+  return (
+    <section aria-labelledby="results-heading" className="space-y-3">
+      <div className="flex flex-wrap items-end justify-between gap-2">
+        <div>
+          <div className="flex items-center gap-2">
+            <Medal className="h-4 w-4 text-accent" />
+            <h2 id="results-heading" className="font-display text-lg font-semibold text-fg">
+              Results
+            </h2>
+          </div>
+          <p className="mt-1 text-xs text-subtle">
+            ATHRECS finishers, official timing links and stored runABC result directories.
+          </p>
+        </div>
+        {grouped.length > 0 ? (
+          <Badge variant="outline">
+            {grouped.length} edition{grouped.length === 1 ? "" : "s"}
+          </Badge>
+        ) : null}
+      </div>
+
+      {shown.length === 0 ? (
+        <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
+          No verified results links have been added yet.
+        </p>
+      ) : (
+        <div className="grid gap-2">
+          {shown.map(({ date, editions }) => {
+            const externalLinks = new Map<string, { label: string; url: string }>();
+            for (const edition of editions) {
+              const officialUrl = edition.results_official_url?.trim();
+              if (officialUrl) {
+                const canonical = canonicalResultUrl(officialUrl);
+                if (!externalLinks.has(canonical)) {
+                  externalLinks.set(canonical, {
+                    label: `Results · ${resultProvider(officialUrl)}`,
+                    url: officialUrl,
+                  });
+                }
+                continue;
+              }
+              if (isRunAbcUrl(edition.source_url)) {
+                const runAbcUrl = edition.source_url!.trim();
+                const canonical = canonicalResultUrl(runAbcUrl);
+                if (!externalLinks.has(canonical)) {
+                  externalLinks.set(canonical, {
+                    label: "Find results · runABC",
+                    url: runAbcUrl,
+                  });
+                }
+              }
+            }
+            return (
+              <div
+                key={date}
+                className="flex flex-col gap-3 rounded-xl border border-border bg-surface px-3.5 py-3 shadow-card sm:flex-row sm:items-center sm:justify-between"
+              >
+                <div className="space-y-1.5">
+                  <p className="text-sm font-semibold text-fg">{formatRaceDateShort(date)}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {editions.map((edition) => (
+                      <Badge key={edition.id} variant="accent">
+                        {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {editions
+                    .filter((edition) => edition.result_count > 0)
+                    .map((edition) => (
+                      <button
+                        key={`athrecs-${edition.id}`}
+                        type="button"
+                        onClick={() => onAthrecsResults(edition.id)}
+                        className="inline-flex h-11 min-w-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium"
+                      >
+                        ATHRECS ·{" "}
+                        {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
+                      </button>
+                    ))}
+                  {[...externalLinks.values()].map((link) => (
+                    <a
+                      key={canonicalResultUrl(link.url)}
+                      href={link.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-11 items-center gap-1.5 rounded-md border border-border bg-elevated px-3 text-xs font-medium text-fg no-underline hover:border-accent hover:text-accent"
+                    >
+                      {link.label}
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {grouped.length > 12 ? (
+        <Button variant="secondary" size="sm" onClick={() => setShowAll((value) => !value)}>
+          {showAll ? "Show latest 12" : `Show all ${grouped.length} editions`}
+        </Button>
+      ) : null}
+    </section>
   );
 }
 
@@ -543,7 +731,9 @@ function EditionList({
                     <Badge variant={st === "Finished" ? "default" : "solid"}>
                       {statusLabel(st)}
                     </Badge>
-                    {ed.result_count > 0 && <Badge variant="outline">Results</Badge>}
+                    {(ed.result_count > 0 ||
+                      ed.results_official_url ||
+                      isRunAbcUrl(ed.source_url)) && <Badge variant="outline">Results</Badge>}
                   </div>
                   <p className="text-sm font-semibold text-fg">
                     {formatRaceDateShort(ed.event_date)}

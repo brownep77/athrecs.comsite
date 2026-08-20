@@ -374,6 +374,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       status: string;
       entry_url: string | null;
       source_url: string | null;
+      results_official_url: string | null;
       start_time: string | null;
       notes: string | null;
       result_count: number;
@@ -387,6 +388,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ed.status,
         ed.entry_url,
         ed.source_url,
+        ed.results_official_url,
         ed.start_time,
         ed.notes,
         (select count(*)::int from results r where r.edition_id = ed.id) as result_count,
@@ -458,6 +460,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
               status: "Open",
               entry_url: event.website,
               source_url: event.website,
+              results_official_url: null,
               start_time: parkrunStartTime(event.country, /junior/i.test(event.name)),
               notes: null,
               result_count: 0,
