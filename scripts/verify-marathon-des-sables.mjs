@@ -3,6 +3,7 @@ import {
   marathonDesSablesEditions,
   marathonDesSablesSeries,
 } from "../src/data/marathon-des-sables.ts";
+import { raceFormatGuideFor } from "../src/data/race-format-guides.ts";
 
 assert.equal(marathonDesSablesSeries.length, 12, "Expected all 12 current MDS race pages");
 assert.equal(marathonDesSablesEditions.length, 10, "Expected ten exactly dated MDS editions");
@@ -40,6 +41,24 @@ assert(
   "MDS 120 Jordan must remain date-TBC until an exact official date is published",
 );
 
+const legendaryGuide = raceFormatGuideFor("mds-legendary-morocco");
+assert(legendaryGuide, "MDS Legendary must have a detailed race-format guide");
+assert.equal(legendaryGuide.stages.length, 6, "MDS Legendary must list all six stages");
+assert(
+  legendaryGuide.facts.some(
+    (fact) => fact.label === "Total distance" && fact.value.includes("250 km"),
+  ),
+  "MDS Legendary must show its approximate 250 km total distance",
+);
+assert(
+  legendaryGuide.stageNote.includes("change each year"),
+  "MDS Legendary stage distances must be labelled as variable",
+);
+assert(
+  legendaryGuide.sourceUrl.startsWith("https://marathondessables.com/"),
+  "MDS Legendary format details must use the official organiser source",
+);
+
 console.log(
-  `Marathon des Sables verified: ${marathonDesSablesSeries.length} pages, ${marathonDesSablesEditions.length} sourced editions, no invented Peru or Jordan fixture.`,
+  `Marathon des Sables verified: ${marathonDesSablesSeries.length} pages, ${marathonDesSablesEditions.length} sourced editions, six Legendary stages, no invented Peru or Jordan fixture.`,
 );
