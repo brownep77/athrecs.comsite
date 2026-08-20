@@ -22,7 +22,12 @@ import {
   formatStartTime,
   statusLabel,
 } from "@/lib/athrecs/format";
-import type { EditionEntryOption, EntryStatus, EventListItem } from "@/lib/athrecs/types";
+import type {
+  EditionEntryOption,
+  EditionResultLink,
+  EntryStatus,
+  EventListItem,
+} from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NationBadge } from "@/components/flags/NationFlag";
@@ -46,6 +51,7 @@ type EditionRow = {
   entry_url: string | null;
   source_url: string | null;
   results_official_url: string | null;
+  result_links: EditionResultLink[];
   entry_options: EditionEntryOption[];
   start_time: string | null;
   notes?: string | null;
@@ -153,7 +159,10 @@ export function RacePageContent({
     next?.entry_options[0];
   const pastWithResults = past.filter(
     (ed) =>
-      ed.result_count > 0 || Boolean(ed.results_official_url?.trim()) || isRunAbcUrl(ed.source_url),
+      ed.result_count > 0 ||
+      ed.result_links.length > 0 ||
+      Boolean(ed.results_official_url?.trim()) ||
+      isRunAbcUrl(ed.source_url),
   );
   const upcomingPreview = event.sport === "Parkrun" ? upcoming.slice(0, 6) : upcoming.slice(0, 12);
   const upcomingHidden = upcoming.length - upcomingPreview.length;
@@ -579,7 +588,7 @@ function EditionResultsLinks({
             </h2>
           </div>
           <p className="mt-1 text-xs text-subtle">
-            ATHRECS finishers, official timing links and stored runABC result directories.
+            ATHRECS finishers and verified timing or organiser result links.
           </p>
         </div>
         {grouped.length > 0 ? (
@@ -598,6 +607,17 @@ function EditionResultsLinks({
           {shown.map(({ date, editions }) => {
             const externalLinks = new Map<string, { label: string; url: string }>();
             for (const edition of editions) {
+              let editionHasDirectLink = false;
+              for (const resultLink of edition.result_links) {
+                const canonical = canonicalResultUrl(resultLink.results_url);
+                if (!externalLinks.has(canonical)) {
+                  externalLinks.set(canonical, {
+                    label: `Results · ${resultLink.provider_name}`,
+                    url: resultLink.results_url,
+                  });
+                }
+                editionHasDirectLink = true;
+              }
               const officialUrl = edition.results_official_url?.trim();
               if (officialUrl) {
                 const canonical = canonicalResultUrl(officialUrl);
@@ -607,9 +627,9 @@ function EditionResultsLinks({
                     url: officialUrl,
                   });
                 }
-                continue;
+                editionHasDirectLink = true;
               }
-              if (isRunAbcUrl(edition.source_url)) {
+              if (!editionHasDirectLink && isRunAbcUrl(edition.source_url)) {
                 const runAbcUrl = edition.source_url!.trim();
                 const canonical = canonicalResultUrl(runAbcUrl);
                 if (!externalLinks.has(canonical)) {
@@ -732,6 +752,7 @@ function EditionList({
                       {statusLabel(st)}
                     </Badge>
                     {(ed.result_count > 0 ||
+                      ed.result_links.length > 0 ||
                       ed.results_official_url ||
                       isRunAbcUrl(ed.source_url)) && <Badge variant="outline">Results</Badge>}
                   </div>

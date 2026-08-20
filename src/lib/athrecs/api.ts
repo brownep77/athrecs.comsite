@@ -9,6 +9,7 @@ import type {
   ClubListItem,
   ClubSocialInfo,
   EditionEntryOption,
+  EditionResultLink,
   EntryStatus,
   EventListItem,
   RaceGroupInfo,
@@ -63,6 +64,18 @@ function parseEntryOptions(value: unknown): EditionEntryOption[] {
   if (!hasVerifiedOfficial) return options;
 
   return options.filter((option) => !(option.provider_code === "official" && !option.is_verified));
+}
+
+function parseResultLinks(value: unknown): EditionResultLink[] {
+  if (!value) return [];
+  if (Array.isArray(value)) return value as EditionResultLink[];
+  if (typeof value !== "string") return [];
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed) ? (parsed as EditionResultLink[]) : [];
+  } catch {
+    return [];
+  }
 }
 
 export const listEvents = createServerFn({ method: "GET" })
@@ -379,6 +392,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       notes: string | null;
       result_count: number;
       entry_options_json: string | EditionEntryOption[] | null;
+      result_links_json: string | EditionResultLink[] | null;
     }>`
       select
         ed.id,
@@ -419,6 +433,24 @@ export const getEventBySlug = createServerFn({ method: "GET" })
           from edition_entry_options option
           where option.edition_id = ed.id
         ) as entry_options_json
+        , (
+          select coalesce(
+            json_agg(json_build_object(
+              'id', link.id,
+              'provider_code', link.provider_code,
+              'provider_name', link.provider_name,
+              'results_url', link.results_url,
+              'source_url', link.source_url,
+              'is_verified', link.is_verified,
+              'checked_at', link.checked_at::text
+            ) order by link.provider_name, link.id)::text,
+            '[]'
+          )
+          from edition_result_links link
+          where link.edition_id = ed.id
+            and link.status = 'approved'
+            and link.is_verified
+        ) as result_links_json
       from editions ed
       where ed.event_id = ${event.id}
       order by
@@ -441,9 +473,10 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         end,
         ed.id desc
     `;
-    const editions = editionRows.map(({ entry_options_json, ...edition }) => ({
+    const editions = editionRows.map(({ entry_options_json, result_links_json, ...edition }) => ({
       ...edition,
       entry_options: parseEntryOptions(entry_options_json),
+      result_links: parseResultLinks(result_links_json),
     }));
 
     const storedUpcoming = editions.filter((e) => e.event_date >= today);
@@ -464,6 +497,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
               start_time: parkrunStartTime(event.country, /junior/i.test(event.name)),
               notes: null,
               result_count: 0,
+              result_links: [],
               entry_options: event.website
                 ? [
                     {
@@ -801,6 +835,7 @@ export const getDbStatus = createServerFn({ method: "GET" }).handler(async () =>
     events: number;
     editions: number;
     entry_options: number;
+    result_links: number;
     results: number;
   }>`select
     (select count(*)::int from clubs) as clubs,
@@ -808,6 +843,7 @@ export const getDbStatus = createServerFn({ method: "GET" }).handler(async () =>
     (select count(*)::int from events) as events,
     (select count(*)::int from editions) as editions,
     (select count(*)::int from edition_entry_options) as entry_options,
+    (select count(*)::int from edition_result_links where status = 'approved') as result_links,
     (select count(*)::int from results) as results`;
   const meta = await sql<{ value: string }>`
     select value from app_meta where key = 'seed_version' limit 1
@@ -822,6 +858,7 @@ export const getDbStatus = createServerFn({ method: "GET" }).handler(async () =>
     events: r?.events ?? 0,
     editions: r?.editions ?? 0,
     entryOptions: r?.entry_options ?? 0,
+    resultLinks: r?.result_links ?? 0,
     results: r?.results ?? 0,
   };
 });

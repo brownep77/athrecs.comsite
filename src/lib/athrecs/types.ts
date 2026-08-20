@@ -36,6 +36,16 @@ export type EditionEntryOption = {
   notes?: string | null;
 };
 
+export type EditionResultLink = {
+  id: number;
+  provider_code: string;
+  provider_name: string;
+  results_url: string;
+  source_url: string | null;
+  is_verified: boolean;
+  checked_at: string;
+};
+
 export type RaceGroupCode = "world-marathon-majors" | "utmb-world-series" | "utmb-index";
 
 export type RaceGroupInfo = {

@@ -252,7 +252,8 @@ function AdminPage() {
               {dbStatus.data.results.toLocaleString()}, clubs {dbStatus.data.clubs.toLocaleString()}
               , events {dbStatus.data.events.toLocaleString()}, editions{" "}
               {dbStatus.data.editions.toLocaleString()}, entry options{" "}
-              {dbStatus.data.entryOptions.toLocaleString()}
+              {dbStatus.data.entryOptions.toLocaleString()}, result links{" "}
+              {dbStatus.data.resultLinks.toLocaleString()}
             </p>
             {dbStatus.data.seedVersion && (
               <p className="text-xs text-subtle">Seed marker: {dbStatus.data.seedVersion}</p>
@@ -333,9 +334,14 @@ function AdminPage() {
               publish.
             </p>
           </div>
-          <Button asChild type="button" variant="secondary">
-            <Link to="/admin/sources">View and review sources</Link>
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button asChild type="button" variant="secondary">
+              <Link to="/admin/result-links">Import results links</Link>
+            </Button>
+            <Button asChild type="button" variant="secondary">
+              <Link to="/admin/sources">View and review sources</Link>
+            </Button>
+          </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
