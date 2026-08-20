@@ -43,6 +43,12 @@ type SnapshotPayload = {
     priority: string;
     sourceUrl: string;
   }>;
+  enrichment?: {
+    checkedAt: string;
+    evidenceUrl: string;
+    resolvedIssueFields: string[];
+    note: string;
+  } | null;
 };
 
 type SnapshotCandidate = {

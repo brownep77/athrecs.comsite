@@ -27,6 +27,7 @@ from openpyxl.utils.datetime import from_excel
 
 ROOT = Path(__file__).resolve().parents[1]
 REGISTRY_PATH = ROOT / "docs/source-registry/fixture-result-sources.csv"
+OVERRIDES_PATH = ROOT / "docs/source-registry/workbook-event-overrides.json"
 OUTPUT_PATH = ROOT / "src/lib/athrecs/scraper-workbook-snapshot.server.generated.ts"
 PARTS_PATH = ROOT / "src/lib/athrecs/scraper-workbook-snapshot-parts.server.generated"
 PART_SIZE = 60_000
@@ -134,6 +135,9 @@ def main() -> None:
         for source_id, row in registry.items()
         if text(row.get("enabled")).lower() in {"1", "true", "yes"}
     }
+    override_document = json.loads(OVERRIDES_PATH.read_text(encoding="utf-8"))
+    overrides = override_document.get("overrides", {})
+    applied_overrides = set()
 
     races = {text(row["Race ID"]): row for row in sheet_records(workbook, "Races")}
     courses = defaultdict(list)
@@ -172,9 +176,24 @@ def main() -> None:
         event_date = iso_date(edition["Start Date"])
         source_url = text(edition["Source URL"])
         source_hash = text(edition["Source Row Hash"])
+        override = overrides.get(edition_id)
+        if override:
+            if text(override.get("sourceId")) != source_id:
+                raise ValueError(f"Override source mismatch for {edition_id}")
+            if text(override.get("eventName")) != event_name:
+                raise ValueError(f"Override event name mismatch for {edition_id}")
+            if text(override.get("eventDate")) != event_date:
+                raise ValueError(f"Override event date mismatch for {edition_id}")
+            applied_overrides.add(edition_id)
+        override_fields = override.get("fields", {}) if override else {}
+        resolved_issue_fields = set(override.get("resolvedIssueFields", [])) if override else set()
         edition_issues = issues[("Edition", edition_id)]
         race_issues = issues[("Race", race_id)]
-        all_issues = race_issues + edition_issues
+        all_issues = [
+            issue
+            for issue in race_issues + edition_issues
+            if issue["field"] not in resolved_issue_fields
+        ]
         high_issues = [issue for issue in all_issues if issue["priority"] == "High"]
 
         distances = []
@@ -207,9 +226,14 @@ def main() -> None:
                 seen_distance_codes.add(key)
                 deduped_distances.append(distance)
 
-        country = text(edition["Country"] or race.get("Country"))
+        if "distances" in override_fields:
+            deduped_distances = override_fields["distances"]
+
+        country = text(override_fields.get("country") or edition["Country"] or race.get("Country"))
         official_website = text(
-            edition["Official Website URL"] or race.get("Official Website URL")
+            override_fields.get("website")
+            or edition["Official Website URL"]
+            or race.get("Official Website URL")
         )
         edition_status = text(edition["Status"])
         entry_status = text(edition["Entry Status"])
@@ -269,16 +293,21 @@ def main() -> None:
                 "stateProvince": text(
                     edition["State Province"] or race.get("State Province")
                 ),
-                "city": text(edition["City"] or race.get("City")),
-                "venue": text(edition["Venue Name"] or race.get("Venue Name")),
+                "city": text(override_fields.get("city") or edition["City"] or race.get("City")),
+                "venue": text(
+                    override_fields.get("venue")
+                    or edition["Venue Name"]
+                    or race.get("Venue Name")
+                ),
                 "surface": text(edition["Surface"] or race.get("Primary Surface")) or "Road",
                 "organiser": text(race.get("Organiser Name")),
                 "website": official_website,
                 "date": event_date,
                 "startTime": iso_time(edition["Start Time Local"]),
-                "status": mapped_status(edition_status, entry_status),
+                "status": text(override_fields.get("status"))
+                or mapped_status(edition_status, entry_status),
                 "editionStatus": edition_status,
-                "entryStatus": entry_status,
+                "entryStatus": text(override_fields.get("entryStatus")) or entry_status,
                 "entryUrl": text(edition["Entry URL"]),
                 "sourceId": source_id,
                 "sourceUrl": source_url,
@@ -287,9 +316,23 @@ def main() -> None:
                 "qualityScore": number(race.get("Quality Score")) or 0,
                 "distances": deduped_distances,
                 "issues": all_issues,
+                "enrichment": (
+                    {
+                        "checkedAt": text(override_document.get("checkedAt")),
+                        "evidenceUrl": text(override.get("evidenceUrl")),
+                        "resolvedIssueFields": sorted(resolved_issue_fields),
+                        "note": text(override.get("note")),
+                    }
+                    if override
+                    else None
+                ),
             },
         }
         candidates.append(candidate)
+
+    unused_overrides = sorted(set(overrides) - applied_overrides)
+    if unused_overrides:
+        raise ValueError(f"Workbook overrides did not match an edition: {unused_overrides}")
 
     payload = {
         "snapshotId": snapshot_id,

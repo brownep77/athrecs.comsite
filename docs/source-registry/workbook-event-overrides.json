@@ -1,0 +1,230 @@
+{
+  "checkedAt": "2026-08-20",
+  "scope": "Public event-level metadata only; no participant or result-table data",
+  "overrides": {
+    "edition_9365631d32bb2a": {
+      "sourceId": "runthrough_uk",
+      "eventName": "RunThrough Trails Engelberg August",
+      "eventDate": "2026-08-22",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/runthrough-trails-engelberg-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Engelberg, Switzerland and 25K, 59K and 100K races.",
+      "fields": {
+        "city": "Engelberg",
+        "country": "Switzerland",
+        "venue": "Klosterhof",
+        "distances": [
+          {
+            "code": "25 km",
+            "km": 25,
+            "surface": "Trail",
+            "sourceUrl": "https://www.runthrough.co.uk/event/runthrough-trails-engelberg-august-2026"
+          },
+          {
+            "code": "59 km",
+            "km": 59,
+            "surface": "Trail",
+            "sourceUrl": "https://www.runthrough.co.uk/event/runthrough-trails-engelberg-august-2026"
+          },
+          {
+            "code": "100 km",
+            "km": 100,
+            "surface": "Trail",
+            "sourceUrl": "https://www.runthrough.co.uk/event/runthrough-trails-engelberg-august-2026"
+          }
+        ]
+      }
+    },
+    "edition_4678ab5995229d": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Carsington Water Trail Half Marathon & 10k August",
+      "eventDate": "2026-08-22",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Carsington Water near Ashbourne.",
+      "fields": { "city": "Ashbourne", "venue": "Carsington Water" }
+    },
+    "edition_3ffda67642e2b4": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Wendover Woods Trail Half Marathon, 10k & 5k August",
+      "eventDate": "2026-08-22",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/wendover-woods-running-festival-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Wendover Woods at Aston Clinton.",
+      "fields": { "city": "Aston Clinton", "venue": "Wendover Woods" }
+    },
+    "edition_c7ca14a19202a8": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Beverley Half Marathon August",
+      "eventDate": "2026-08-23",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/beverley-half-marathon-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Saturday Market in Beverley.",
+      "fields": { "city": "Beverley", "venue": "Saturday Market" }
+    },
+    "edition_fc425e69317303": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Run Dorney Lake Evening Runs 10k & 5k August",
+      "eventDate": "2026-08-26",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/run-dorney-lake-evening-runs-10k-5k-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Dorney Lake, Windsor.",
+      "fields": { "city": "Windsor", "venue": "Dorney Lake" }
+    },
+    "edition_053b93d388955d": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Run Media City 5k & 10k August",
+      "eventDate": "2026-08-27",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/run-media-city-5k-10k-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms MediaCity UK in Salford.",
+      "fields": { "city": "Salford", "venue": "MediaCity UK" }
+    },
+    "edition_fca60ab6227bcc": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Regent's Park 5k & 10k August",
+      "eventDate": "2026-08-29",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/regents-park-5k-10k-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms The Broad Walk in Regent's Park, London.",
+      "fields": { "city": "London", "venue": "Regent's Park" }
+    },
+    "edition_f238f68d4e2b4d": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Dulwich Park 1 Mile, 5k, 10k, 10 Mile & Half Marathon August",
+      "eventDate": "2026-08-30",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/dulwich-park-5k-10k-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Dulwich Park in London.",
+      "fields": { "city": "London", "venue": "Dulwich Park" }
+    },
+    "edition_727600e73eeba3": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Leeds Running Festival August",
+      "eventDate": "2026-08-30",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/leeds-running-festival-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Roundhay Park and the three adult distances.",
+      "fields": {
+        "city": "Leeds",
+        "venue": "Roundhay Park",
+        "distances": [
+          {
+            "code": "5 km",
+            "km": 5,
+            "surface": "Mixed Terrain",
+            "sourceUrl": "https://www.runthrough.co.uk/event/leeds-running-festival-august-2026"
+          },
+          {
+            "code": "10 km",
+            "km": 10,
+            "surface": "Mixed Terrain",
+            "sourceUrl": "https://www.runthrough.co.uk/event/leeds-running-festival-august-2026"
+          },
+          {
+            "code": "Half Marathon",
+            "km": 21.0975,
+            "surface": "Mixed Terrain",
+            "sourceUrl": "https://www.runthrough.co.uk/event/leeds-running-festival-august-2026"
+          }
+        ]
+      }
+    },
+    "edition_a25eba7eaeeb1f": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Nottingham Running Festival August",
+      "eventDate": "2026-08-30",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Nottingham Racecourse and the three adult distances.",
+      "fields": {
+        "city": "Nottingham",
+        "venue": "Nottingham Racecourse",
+        "distances": [
+          {
+            "code": "5 km",
+            "km": 5,
+            "surface": "Road",
+            "sourceUrl": "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2026"
+          },
+          {
+            "code": "10 km",
+            "km": 10,
+            "surface": "Road",
+            "sourceUrl": "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2026"
+          },
+          {
+            "code": "Half Marathon",
+            "km": 21.0975,
+            "surface": "Road",
+            "sourceUrl": "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2026"
+          }
+        ]
+      }
+    },
+    "edition_e71f899909468f": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Run Dorney Lake Half Marathon, 10k & 5k 30th August",
+      "eventDate": "2026-08-30",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-30-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Dorney Lake, Windsor.",
+      "fields": { "city": "Windsor", "venue": "Dorney Lake" }
+    },
+    "edition_8e6aa67dc727d7": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Windsor Trail Half Marathon & 10k August",
+      "eventDate": "2026-08-30",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/windsor-trail-run-august-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Alexandra Gardens in Windsor.",
+      "fields": { "city": "Windsor", "venue": "Alexandra Gardens" }
+    },
+    "edition_11078f0d418e57": {
+      "sourceId": "runthrough_uk",
+      "eventName": "Chase The Sun Tatton Park 5k & 10k September",
+      "eventDate": "2026-09-02",
+      "evidenceUrl": "https://www.runthrough.co.uk/event/chase-the-sun-tatton-park-5k-10k-september-2026",
+      "resolvedIssueFields": ["city"],
+      "note": "Official organiser page confirms Tatton Park in Knutsford.",
+      "fields": { "city": "Knutsford", "venue": "Tatton Park" }
+    },
+    "edition_902dfe36d1aa17": {
+      "sourceId": "racebest_upcoming",
+      "eventName": "Borrowdale Trail Half Marathon",
+      "eventDate": "2026-08-23",
+      "evidenceUrl": "https://www.fellsideevents.co.uk/borrowdale-trail-run",
+      "resolvedIssueFields": ["official_website_url"],
+      "note": "Official organiser page confirms the 23 August 2026 date, Keswick location and 21 km distance.",
+      "fields": {
+        "website": "https://www.fellsideevents.co.uk/borrowdale-trail-run",
+        "entryStatus": "Open",
+        "status": "Open",
+        "venue": "Crow Park"
+      }
+    },
+    "edition_e077235b63fb80": {
+      "sourceId": "racebest_upcoming",
+      "eventName": "Denby Dash",
+      "eventDate": "2026-08-31",
+      "evidenceUrl": "https://www.denbyvillage.co.uk/denby-dash",
+      "resolvedIssueFields": ["official_website_url"],
+      "note": "Official organiser page confirms the 31 August 2026 date, Upper Denby venue and 5.6 mile course; RaceBest reports the race full.",
+      "fields": {
+        "website": "https://www.denbyvillage.co.uk/denby-dash",
+        "entryStatus": "Sold Out",
+        "status": "Closed",
+        "venue": "The George Inn"
+      }
+    },
+    "edition_9d1698045b3182": {
+      "sourceId": "core_timing_ireland",
+      "eventName": "Mayo Ac 5K Series Rd2- Westport",
+      "eventDate": "2026-05-19",
+      "evidenceUrl": "https://coretiming.ie/events/mayo-ac-5k-series-rd2-westport/",
+      "resolvedIssueFields": ["city"],
+      "note": "Public timing-provider event page confirms Westport, 19 May 2026 and 5K.",
+      "fields": { "city": "Westport", "venue": "Westport" }
+    }
+  }
+}
