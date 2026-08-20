@@ -16,6 +16,7 @@
     "verify:catalogue": "node --experimental-strip-types scripts/verify-catalogue.mjs",
     "verify:all-sport-fixtures": "node --experimental-strip-types scripts/verify-all-sport-fixtures.mjs",
     "verify:fixture-duplicates": "node --experimental-strip-types scripts/verify-fixture-duplicates.mjs",
+    "verify:mrd-marathons": "node --experimental-strip-types scripts/verify-mrd-marathons.mjs",
     "verify:global-fixture-progress": "node --experimental-strip-types scripts/verify-global-fixture-progress.mjs",
     "verify:clubs": "node --experimental-strip-types scripts/verify-club-audit.mjs",
     "verify:race-groups": "node --experimental-strip-types scripts/verify-race-groups.mjs",

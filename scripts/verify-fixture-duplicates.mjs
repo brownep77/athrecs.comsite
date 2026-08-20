@@ -11,7 +11,8 @@ const [
   { worldAthleticsEditions, worldAthleticsSeries },
   { worldTriathlonEditions, worldTriathlonSeries },
   { mrdMarathonEditions, mrdMarathonSeries },
-  { mrdEuMarathonEditions, mrdEuMarathonSeries },
+  { mrdEuMarathonEditions, mrdEuMarathonSeries, mrdEuMarathonSourceRows },
+  { mrdIntlMarathonEditions, mrdIntlMarathonSeries, mrdIntlMarathonSourceRows },
   { verifiedAllSportEditions, verifiedAllSportSeries },
   { verifiedGlobalEditions, verifiedGlobalSeries },
   marathonOptions,
@@ -36,6 +37,7 @@ const [
   import("../src/data/world-triathlon.ts"),
   import("../src/data/mrd-marathons.ts"),
   import("../src/data/mrd-marathons-eu.ts"),
+  import("../src/data/mrd-marathons-intl.ts"),
   import("../src/data/verified-all-sport.ts"),
   import("../src/data/verified-global-fixtures.ts"),
   import("../src/data/entry-options-uk-marathons.ts"),
@@ -57,7 +59,7 @@ const seriesOverrides = {
   ...tenKOptions.ukTenKSeriesOverrides,
   ...verifiedFixtureSeriesOverrides,
 };
-const today = "2026-08-19";
+const today = "2026-08-20";
 
 function exactName(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
@@ -103,6 +105,7 @@ for (const series of [
   ...worldTriathlonSeries,
   ...mrdMarathonSeries,
   ...mrdEuMarathonSeries,
+  ...mrdIntlMarathonSeries,
 ]) {
   if (aliases[series.slug]) continue;
   const key = exactName(seriesOverrides[series.slug]?.name ?? series.name);
@@ -129,6 +132,7 @@ const editionSources = [
   ...worldTriathlonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...mrdMarathonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...mrdEuMarathonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...mrdIntlMarathonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
 ];
 
 const seenEditions = new Set();
@@ -214,6 +218,74 @@ assert.deepEqual(
   "High-confidence fixture duplicates remain after canonicalisation",
 );
 
+const mrdCanonicalSlugs = new Set(
+  [...mrdEuMarathonSourceRows, ...mrdIntlMarathonSourceRows].map(([slug]) => aliases[slug] ?? slug),
+);
+const editionsByLocation = new Map();
+for (const edition of editions) {
+  if (edition.date < today || !["Marathon", "Other"].includes(edition.distance)) continue;
+  const series = seriesBySlug.get(edition.seriesSlug);
+  if (!series) continue;
+  const key = [compact(series.country), compact(series.city)].join("|");
+  const rows = editionsByLocation.get(key) ?? [];
+  rows.push({ edition, series });
+  editionsByLocation.set(key, rows);
+}
+
+const nearbyMrdDuplicates = [];
+const nearbyPairs = new Set();
+for (const rows of editionsByLocation.values()) {
+  for (const left of rows) {
+    if (!mrdCanonicalSlugs.has(left.series.slug)) continue;
+    for (const right of rows) {
+      if (left.edition === right.edition) continue;
+      const pair = [
+        `${left.series.slug}|${left.edition.date}`,
+        `${right.series.slug}|${right.edition.date}`,
+      ].sort();
+      const pairKey = pair.join("::");
+      if (nearbyPairs.has(pairKey)) continue;
+      nearbyPairs.add(pairKey);
+      const days = Math.abs(
+        (Date.parse(left.edition.date) - Date.parse(right.edition.date)) / 86_400_000,
+      );
+      if (days === 0 || days > 14) continue;
+      const score = similarity(left.series.name, right.series.name);
+      const leftName = compact(left.series.name);
+      const rightName = compact(right.series.name);
+      const sameSeries = left.series.slug === right.series.slug;
+      const explicitShortDistance = /\b(?:half|(?:5|10)\s*k(?:m)?)\b/i;
+      if (
+        !sameSeries &&
+        (explicitShortDistance.test(left.series.name) ||
+          explicitShortDistance.test(right.series.name))
+      ) {
+        continue;
+      }
+      if (
+        !sameSeries &&
+        score < 0.75 &&
+        !leftName.includes(rightName) &&
+        !rightName.includes(leftName)
+      ) {
+        continue;
+      }
+      nearbyMrdDuplicates.push({
+        left: pair[0],
+        right: pair[1],
+        days,
+        score,
+      });
+    }
+  }
+}
+
+assert.deepEqual(
+  nearbyMrdDuplicates,
+  [],
+  "Same or similar MRD marathon records remain on nearby dates",
+);
+
 process.stdout.write(
   JSON.stringify(
     {
@@ -225,6 +297,7 @@ process.stdout.write(
       duplicate_series_retired: Object.keys(verifiedFixtureAliases).length,
       incorrect_second_day_dates_corrected: verifiedFixtureEditionReplacements.length,
       high_confidence_duplicates_remaining: highConfidenceDuplicates.length,
+      nearby_mrd_duplicates_remaining: nearbyMrdDuplicates.length,
     },
     null,
     2,
