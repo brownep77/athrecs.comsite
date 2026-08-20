@@ -338,6 +338,65 @@ export const verifiedGlobalSeries: Series[] = [
     featured: false,
     source_url: "https://www.runthrough.co.uk/event/royal-windsor-triathlon-june-2027",
   },
+  {
+    slug: "ride-reigate",
+    name: "Ride Reigate",
+    sport: "Cycling",
+    country: "England",
+    county: "Surrey",
+    city: "Reigate",
+    area: "Reigate College and the Surrey and Sussex countryside",
+    surface: "Road",
+    distances: ["100K", "50K", "25K", "Junior"],
+    summary: "A three-distance cycling sportive from Reigate College.",
+    description:
+      "A supported road-cycling sportive through the Surrey and Sussex countryside, with 100K, 50K and 25K routes plus junior racing.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/ride-reigate-100k-50-25k--junior-races-july-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/ride-reigate-100k-50-25k--junior-races-july-2027",
+  },
+  {
+    slug: "goodwood-motor-circuit-running-gp-duathlons",
+    name: "Goodwood Motor Circuit Running GP & Duathlons",
+    sport: "Duathlon",
+    country: "England",
+    county: "West Sussex",
+    city: "Chichester",
+    area: "Goodwood Motor Circuit",
+    surface: "Closed Circuit / Tarmac",
+    distances: ["Standard Duathlon", "Sprint Duathlon", "Half", "10K", "5K"],
+    summary: "Sprint and standard duathlons with supporting road races at Goodwood.",
+    description:
+      "A traffic-free multisport programme on the historic Goodwood Motor Circuit, pairing sprint and standard duathlons with half-marathon, 10K and 5K races.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-races-duathlons-july-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-races-duathlons-july-2027",
+  },
+  {
+    slug: "lake-district-running-festival",
+    name: "Lake District Running Festival",
+    sport: "Running",
+    country: "England",
+    county: "Cumbria",
+    city: "Keswick",
+    area: "Keswick School, Derwent Water, High Spy and Catbells",
+    surface: "Trail / Mountain",
+    distances: ["53K", "23K"],
+    summary: "A 53K ultra and 23K trail race from Keswick into the Lake District fells.",
+    description:
+      "A two-distance trail-running festival from Keswick, with routes around Derwent Water and across the Lake District fells, including High Spy and Catbells.",
+    organiser: "RunThrough Trails",
+    website: "https://www.runthroughtrails.com/lake-district",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/runthrough-lake-district-running-festival-2027",
+  },
 ];
 
 export const verifiedGlobalEditions: Edition[] = [
@@ -859,5 +918,103 @@ export const verifiedGlobalEditions: Edition[] = [
     source: "https://www.runthrough.co.uk/event/royal-windsor-triathlon-june-2027",
     notes:
       "The standard race is a 1.5K swim, 40K bike and 10K run; the sprint starts at 06:00 and the standard at 07:00.",
+  },
+  {
+    seriesSlug: "ride-reigate",
+    date: "2027-07-11",
+    distance: "100K",
+    distanceKm: 100,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/ride-reigate-100k-50-25k--junior-races-july-2027",
+    entryOptions: [
+      {
+        providerCode: "runthrough-cycling",
+        providerName: "RunThrough Ride Reigate",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/ride-reigate-100k-50-25k--junior-races-july-2027",
+        entryType: "official",
+        status: "open",
+        priceAmount: 40,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/ride-reigate-100k-50-25k--junior-races-july-2027",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The current organiser page lists open 100K, 50K, 25K and junior entries with published prices.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.runthrough.co.uk/event/ride-reigate-100k-50-25k--junior-races-july-2027",
+    notes:
+      "The official event page confirms Sunday 11 July 2027, Reigate College and an 08:00-16:00 event window.",
+  },
+  {
+    seriesSlug: "goodwood-motor-circuit-running-gp-duathlons",
+    date: "2027-07-25",
+    distance: "Standard Duathlon",
+    distanceKm: 0,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-races-duathlons-july-2027",
+    entryOptions: [
+      {
+        providerCode: "runthrough-duathlon",
+        providerName: "RunThrough Goodwood",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-races-duathlons-july-2027",
+        entryType: "official",
+        status: "open",
+        priceAmount: 50,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-races-duathlons-july-2027",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The organiser lists open standard and sprint duathlon entry alongside half-marathon, 10K and 5K races.",
+      },
+    ],
+    startTime: "13:00",
+    source:
+      "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-races-duathlons-july-2027",
+    notes:
+      "Both duathlon distances start at 13:00; the page publishes lap counts rather than an exact combined distance.",
+  },
+  {
+    seriesSlug: "lake-district-running-festival",
+    date: "2027-04-10",
+    distance: "53K",
+    distanceKm: 53,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/runthrough-lake-district-running-festival-2027",
+    entryOptions: [
+      {
+        providerCode: "runthrough-trails",
+        providerName: "RunThrough Trails",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/runthrough-lake-district-running-festival-2027",
+        entryType: "official",
+        status: "open",
+        priceAmount: 86,
+        priceCurrency: "GBP",
+        closesAt: "2027-03-07T23:59:00+00:00",
+        checkedAt: "2026-08-20",
+        sourceUrl: "https://www.runthroughtrails.com/lake-district",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The live organiser page lists open 53K and 23K entry, current prices and a published standard-entry deadline.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.runthrough.co.uk/event/runthrough-lake-district-running-festival-2027",
+    notes: "The 53K starts at 08:00 and the 23K starts at 10:00 from Keswick School.",
   },
 ];
