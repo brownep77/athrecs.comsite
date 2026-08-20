@@ -1,7 +1,13 @@
 import { gunzipSync } from "node:zlib";
 import { getSql, type Sql } from "@/lib/db";
 import { normalizeEventName } from "./dedupe";
+import { todayIso } from "./format";
+import {
+  evaluateHistoricalFixtureReview,
+  type FixtureReviewPolicyResult,
+} from "./fixture-review-policy";
 import { slugify } from "./import.server";
+import { getBulkSourceJobManifest } from "./source-registry.server";
 
 type SnapshotDistance = {
   code: string;
@@ -99,6 +105,7 @@ type ClassifiedCandidate = SnapshotCandidate & {
   status: "blocked" | "duplicate" | "eligible";
   publishEligible: boolean;
   catalogueEventId: number | null;
+  review: FixtureReviewPolicyResult;
 };
 
 type CandidateStatusRow = {
@@ -235,8 +242,19 @@ async function classifyCandidates(
   }
 
   const seenFingerprints = new Set<string>();
+  const currentSources = new Map(
+    getBulkSourceJobManifest().map((source) => [source.source_id, source]),
+  );
   return candidates.map((candidate) => {
-    const blockReasons = [...candidate.blockReasons];
+    const blockReasons = candidate.blockReasons.filter(
+      (reason) => reason !== "source_disabled" && reason !== "source_not_in_current_registry",
+    );
+    const currentSource = currentSources.get(candidate.sourceId);
+    if (!currentSource) {
+      addReason(blockReasons, "source_not_in_current_registry");
+    } else if (currentSource.queue_status !== "queued") {
+      addReason(blockReasons, "source_disabled");
+    }
     const match = chooseCatalogueEvent(candidate, bySlug, byName, byNameDate, eventsById);
     if (match.reason) addReason(blockReasons, match.reason);
     const hasBlockingReason = blockReasons.length > 0;
@@ -258,12 +276,34 @@ async function classifyCandidates(
       : exactDuplicate || workbookDuplicate
         ? "duplicate"
         : "eligible";
+    const review =
+      status === "blocked"
+        ? evaluateHistoricalFixtureReview(
+            {
+              eventName: candidate.eventName,
+              eventDate: candidate.eventDate,
+              sport: candidate.payload.sport,
+              country: candidate.payload.country,
+              sourceUrl: candidate.sourceUrl,
+              distances: candidate.payload.distances,
+              issues: candidate.payload.issues,
+              blockReasons,
+            },
+            todayIso(),
+          )
+        : {
+            status: "not_applicable" as const,
+            policyCode: null,
+            remainingBlockReasons: blockReasons,
+            warnings: [],
+          };
     return {
       ...candidate,
       blockReasons,
       catalogueEventId: match.eventId,
       status,
       publishEligible: status === "eligible",
+      review,
     };
   });
 }
@@ -288,6 +328,9 @@ function candidateRecord(candidate: ClassifiedCandidate, batchId: string) {
     status: candidate.status,
     block_reasons: candidate.blockReasons,
     catalogue_event_id: candidate.catalogueEventId,
+    review_status: candidate.review.status,
+    review_policy: candidate.review.policyCode,
+    review_warnings: candidate.review.warnings,
   };
 }
 
@@ -302,20 +345,23 @@ async function insertCandidateChunk(
       id, batch_id, source_race_id, source_edition_id, source_id, source_url,
       source_row_hash, fingerprint, event_name, event_slug, event_date, payload,
       review_item_count, high_issue_count, publish_eligible, status,
-      block_reasons, catalogue_event_id
+      block_reasons, catalogue_event_id, review_status, review_policy,
+      review_warnings
     )
     select
       x.id, x.batch_id, x.source_race_id, x.source_edition_id, x.source_id,
       x.source_url, x.source_row_hash, x.fingerprint, x.event_name,
       x.event_slug, x.event_date, x.payload, x.review_item_count,
       x.high_issue_count, x.publish_eligible, x.status, x.block_reasons,
-      x.catalogue_event_id
+      x.catalogue_event_id, x.review_status, x.review_policy,
+      x.review_warnings
     from jsonb_to_recordset($1::jsonb) as x(
       id text, batch_id text, source_race_id text, source_edition_id text,
       source_id text, source_url text, source_row_hash text, fingerprint text,
       event_name text, event_slug text, event_date text, payload jsonb,
       review_item_count int, high_issue_count int, publish_eligible boolean,
-      status text, block_reasons jsonb, catalogue_event_id int
+      status text, block_reasons jsonb, catalogue_event_id int,
+      review_status text, review_policy text, review_warnings jsonb
     )
     on conflict (batch_id, source_edition_id) do update set
       source_race_id = excluded.source_race_id,
@@ -344,7 +390,43 @@ async function insertCandidateChunk(
       catalogue_event_id = coalesce(
         fixture_candidates.catalogue_event_id,
         excluded.catalogue_event_id
-      )`,
+      ),
+      review_status = case
+        when fixture_candidates.status = 'published'
+          or fixture_candidates.review_status = 'rejected'
+        then fixture_candidates.review_status
+        else excluded.review_status
+      end,
+      review_policy = case
+        when fixture_candidates.status = 'published'
+          or fixture_candidates.review_status = 'rejected'
+        then fixture_candidates.review_policy
+        else excluded.review_policy
+      end,
+      review_warnings = case
+        when fixture_candidates.status = 'published'
+          or fixture_candidates.review_status = 'rejected'
+        then fixture_candidates.review_warnings
+        else excluded.review_warnings
+      end,
+      reviewed_at = case
+        when fixture_candidates.status = 'published'
+          or fixture_candidates.review_status = 'rejected'
+        then fixture_candidates.reviewed_at
+        else null
+      end,
+      reviewed_by = case
+        when fixture_candidates.status = 'published'
+          or fixture_candidates.review_status = 'rejected'
+        then fixture_candidates.reviewed_by
+        else null
+      end,
+      review_note = case
+        when fixture_candidates.status = 'published'
+          or fixture_candidates.review_status = 'rejected'
+        then fixture_candidates.review_note
+        else null
+      end`,
     [JSON.stringify(records)],
   );
 }
@@ -493,20 +575,33 @@ async function fillEmptyEventFields(sql: Sql, eventId: number, payload: Snapshot
   `;
 }
 
-export async function publishEligibleScraperWorkbookBatch(batchId: string) {
+export async function publishEligibleScraperWorkbookBatch(
+  batchId: string,
+  candidateIds?: string[],
+) {
   const sql = await getSql();
   return sql.transaction(async (tx) => {
     await tx`
       update fixture_import_batches set status = 'publishing'
       where id = ${batchId}
     `;
-    const candidates = await tx<StagedRow>`
-      select id, source_race_id, payload, catalogue_event_id
-      from fixture_candidates
-      where batch_id = ${batchId} and status = 'eligible' and publish_eligible
-      order by source_race_id, id
-      for update
-    `;
+    const candidates = candidateIds
+      ? await tx.query<StagedRow>(
+          `select id, source_race_id, payload, catalogue_event_id
+           from fixture_candidates
+           where batch_id = $1 and id = any($2::text[])
+             and status = 'eligible' and publish_eligible
+           order by source_race_id, id
+           for update`,
+          [batchId, candidateIds],
+        )
+      : await tx<StagedRow>`
+          select id, source_race_id, payload, catalogue_event_id
+          from fixture_candidates
+          where batch_id = ${batchId} and status = 'eligible' and publish_eligible
+          order by source_race_id, id
+          for update
+        `;
 
     const eventBySourceRace = new Map<string, number>();
     let publishedCandidates = 0;
@@ -601,6 +696,299 @@ export async function uploadScraperWorkbookSnapshotNow() {
   const staged = await stageScraperWorkbookSnapshot();
   const publication = await publishEligibleScraperWorkbookBatch(staged.batchId);
   return { staged, publication };
+}
+
+type FixtureReviewStatus = "releasable" | "pending" | "approved" | "rejected";
+
+export type FixtureReviewQueueInput = {
+  reviewStatus?: FixtureReviewStatus | "all";
+  sourceId?: string;
+  blockReason?: string;
+  limit?: number;
+  offset?: number;
+};
+
+type ReviewQueueDbRow = {
+  id: string;
+  batch_id: string;
+  source_id: string;
+  source_url: string;
+  event_name: string;
+  event_slug: string;
+  event_date: string;
+  payload: SnapshotPayload | string;
+  block_reasons: string[] | string;
+  review_status: string;
+  review_policy: string | null;
+  review_warnings: string[] | string;
+};
+
+function stringArray(value: string[] | string): string[] {
+  if (Array.isArray(value)) return value;
+  try {
+    const parsed = JSON.parse(value);
+    return Array.isArray(parsed)
+      ? parsed.filter((item): item is string => typeof item === "string")
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function getFixtureReviewQueue(input: FixtureReviewQueueInput = {}) {
+  const sql = await getSql();
+  const batches = await sql<{ id: string; status: string; snapshot_id: string }>`
+    select id, status, snapshot_id
+    from fixture_import_batches
+    order by created_at desc
+    limit 1
+  `;
+  const batch = batches[0];
+  if (!batch) return null;
+
+  const reviewStatus =
+    input.reviewStatus && input.reviewStatus !== "all" ? input.reviewStatus : null;
+  const sourceId = input.sourceId?.trim() || null;
+  const blockReason = input.blockReason?.trim() || null;
+  const limit = Math.min(Math.max(Math.floor(input.limit ?? 100), 1), 200);
+  const offset = Math.min(Math.max(Math.floor(input.offset ?? 0), 0), 20_000);
+
+  const [rows, filteredCounts, reviewCounts, sourceCounts, reasonRows, actionCounts] =
+    await Promise.all([
+      sql<ReviewQueueDbRow>`
+        select
+          id, batch_id, source_id, source_url, event_name, event_slug,
+          event_date, payload, block_reasons, review_status, review_policy,
+          review_warnings
+        from fixture_candidates
+        where batch_id = ${batch.id}
+          and status = 'blocked'
+          and (${reviewStatus}::text is null or review_status = ${reviewStatus})
+          and (${sourceId}::text is null or source_id = ${sourceId})
+          and (${blockReason}::text is null or block_reasons ? ${blockReason})
+        order by source_id, event_date desc, event_name, id
+        limit ${limit} offset ${offset}
+      `,
+      sql<{ count: number }>`
+        select count(*)::int as count
+        from fixture_candidates
+        where batch_id = ${batch.id}
+          and status = 'blocked'
+          and (${reviewStatus}::text is null or review_status = ${reviewStatus})
+          and (${sourceId}::text is null or source_id = ${sourceId})
+          and (${blockReason}::text is null or block_reasons ? ${blockReason})
+      `,
+      sql<{ review_status: string; count: number }>`
+        select review_status, count(*)::int as count
+        from fixture_candidates
+        where batch_id = ${batch.id}
+        group by review_status
+        order by review_status
+      `,
+      sql<{
+        source_id: string;
+        total: number;
+        releasable: number;
+        pending: number;
+      }>`
+        select
+          source_id,
+          count(*)::int as total,
+          count(*) filter (where review_status = 'releasable')::int as releasable,
+          count(*) filter (where review_status = 'pending')::int as pending
+        from fixture_candidates
+        where batch_id = ${batch.id} and status = 'blocked'
+        group by source_id
+        order by releasable desc, total desc, source_id
+      `,
+      sql<{ reason: string; count: number }>`
+        select reason, count(*)::int as count
+        from fixture_candidates candidate,
+          lateral jsonb_array_elements_text(candidate.block_reasons) reason
+        where candidate.batch_id = ${batch.id} and candidate.status = 'blocked'
+        group by reason
+        order by count desc, reason
+      `,
+      sql<{ count: number }>`
+        select count(*)::int as count
+        from fixture_review_actions
+        where batch_id = ${batch.id}
+      `,
+    ]);
+
+  const counts = Object.fromEntries(
+    reviewCounts.map((row) => [row.review_status, row.count]),
+  ) as Record<string, number>;
+  return {
+    batch,
+    counts: {
+      releasable: counts.releasable ?? 0,
+      pending: counts.pending ?? 0,
+      approved: counts.approved ?? 0,
+      rejected: counts.rejected ?? 0,
+      filtered: filteredCounts[0]?.count ?? 0,
+      actions: actionCounts[0]?.count ?? 0,
+    },
+    sources: sourceCounts,
+    reasons: reasonRows,
+    limit,
+    offset,
+    rows: rows.map((row) => {
+      const payload = parsedPayload(row.payload);
+      return {
+        id: row.id,
+        batchId: row.batch_id,
+        sourceId: row.source_id,
+        sourceUrl: row.source_url,
+        eventName: row.event_name,
+        eventSlug: row.event_slug,
+        eventDate: row.event_date,
+        sport: payload.sport,
+        country: payload.country,
+        city: payload.city,
+        distances: payload.distances.map((distance) => distance.code),
+        reviewStatus: row.review_status,
+        reviewPolicy: row.review_policy,
+        blockReasons: stringArray(row.block_reasons),
+        warnings: stringArray(row.review_warnings),
+      };
+    }),
+  };
+}
+
+type ReviewReleaseDbRow = ReviewQueueDbRow & {
+  source_race_id: string;
+  source_edition_id: string;
+  source_row_hash: string;
+  fingerprint: string;
+  review_item_count: number;
+  high_issue_count: number;
+};
+
+export async function releaseFixtureReviewCandidates(input: {
+  batchId: string;
+  candidateIds: string[];
+  reviewerUserId: string;
+  note?: string;
+}) {
+  const candidateIds = [...new Set(input.candidateIds.map((id) => id.trim()).filter(Boolean))];
+  if (candidateIds.length === 0) throw new Error("Select at least one releasable candidate");
+  if (candidateIds.length > 250) throw new Error("Release batches are limited to 250 candidates");
+  const note = input.note?.trim().slice(0, 500) || null;
+  const sql = await getSql();
+
+  const approval = await sql.transaction(async (tx) => {
+    const placeholders = candidateIds.map((_, index) => `$${index + 2}`).join(", ");
+    const selected = await tx.query<ReviewReleaseDbRow>(
+      `select
+        id, batch_id, source_race_id, source_edition_id, source_id, source_url,
+        source_row_hash, fingerprint, event_name, event_slug, event_date,
+        payload, review_item_count, high_issue_count, block_reasons,
+        review_status, review_policy, review_warnings
+      from fixture_candidates
+      where batch_id = $1 and id in (${placeholders})
+      for update`,
+      [input.batchId, ...candidateIds],
+    );
+    if (selected.length !== candidateIds.length) {
+      throw new Error("One or more selected candidates are no longer in this review batch");
+    }
+
+    const snapshots: SnapshotCandidate[] = selected.map((row) => ({
+      id: row.id,
+      sourceRaceId: row.source_race_id,
+      sourceEditionId: row.source_edition_id,
+      sourceId: row.source_id,
+      sourceUrl: row.source_url,
+      sourceRowHash: row.source_row_hash,
+      fingerprint: row.fingerprint,
+      eventName: row.event_name,
+      eventSlug: row.event_slug,
+      eventDate: row.event_date,
+      reviewItemCount: row.review_item_count,
+      highIssueCount: row.high_issue_count,
+      blockReasons: stringArray(row.block_reasons),
+      payload: parsedPayload(row.payload),
+    }));
+    const reclassified = await classifyCandidates(tx, snapshots);
+    const byId = new Map(reclassified.map((candidate) => [candidate.id, candidate]));
+    const approved: string[] = [];
+    const held: Array<{ id: string; reasons: string[] }> = [];
+
+    for (const row of selected) {
+      const candidate = byId.get(row.id);
+      if (!candidate || candidate.review.status !== "releasable") {
+        const reasons = candidate?.review.remainingBlockReasons ?? ["review_policy_failed"];
+        held.push({ id: row.id, reasons });
+        await tx`
+          update fixture_candidates set
+            review_status = 'pending',
+            review_policy = ${candidate?.review.policyCode ?? null},
+            review_warnings = ${JSON.stringify(candidate?.review.warnings ?? [])}::jsonb,
+            block_reasons = ${JSON.stringify(reasons)}::jsonb
+          where id = ${row.id}
+        `;
+        continue;
+      }
+
+      approved.push(row.id);
+      await tx`
+        update fixture_candidates set
+          status = 'eligible',
+          publish_eligible = true,
+          block_reasons = ${JSON.stringify(candidate.review.remainingBlockReasons)}::jsonb,
+          review_status = 'approved',
+          review_policy = ${candidate.review.policyCode},
+          review_warnings = ${JSON.stringify(candidate.review.warnings)}::jsonb,
+          reviewed_at = now(),
+          reviewed_by = ${input.reviewerUserId},
+          review_note = ${note}
+        where id = ${row.id}
+      `;
+      await tx`
+        insert into fixture_review_actions (
+          candidate_id, batch_id, action, policy_code, previous_status,
+          previous_block_reasons, remaining_block_reasons, warnings,
+          reviewer_user_id, note
+        ) values (
+          ${row.id}, ${input.batchId}, 'approved', ${candidate.review.policyCode},
+          ${row.review_status}, ${JSON.stringify(stringArray(row.block_reasons))}::jsonb,
+          ${JSON.stringify(candidate.review.remainingBlockReasons)}::jsonb,
+          ${JSON.stringify(candidate.review.warnings)}::jsonb,
+          ${input.reviewerUserId}, ${note}
+        )
+      `;
+    }
+    return { approved, held };
+  });
+
+  const publication =
+    approval.approved.length > 0
+      ? await publishEligibleScraperWorkbookBatch(input.batchId, approval.approved)
+      : null;
+
+  if (publication && approval.approved.length > 0) {
+    await sql.query(
+      `insert into fixture_review_actions (
+        candidate_id, batch_id, action, policy_code, previous_status,
+        previous_block_reasons, remaining_block_reasons, warnings,
+        reviewer_user_id, note
+      )
+      select
+        candidate.id, candidate.batch_id, 'released', candidate.review_policy,
+        'approved', '[]'::jsonb, candidate.block_reasons,
+        candidate.review_warnings, $1, $2
+      from fixture_candidates candidate
+      where candidate.id = any($3::text[]) and candidate.status = 'published'`,
+      [input.reviewerUserId, note, approval.approved],
+    );
+  }
+
+  return {
+    approved: approval.approved.length,
+    held: approval.held,
+    publication,
+  };
 }
 
 export async function getScraperWorkbookImportDashboard() {

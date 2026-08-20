@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
@@ -44,6 +45,11 @@ const RaceSeriesRoute = RaceSeriesRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminFixtureReviewRoute = AdminFixtureReviewRouteImport.update({
+  id: '/admin/fixture-review',
+  path: '/admin/fixture-review',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminResultLinksRoute = AdminResultLinksRouteImport.update({
@@ -113,6 +119,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/athletes/$slug': typeof AthletesSlugRoute
@@ -131,6 +138,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/athletes/$slug': typeof AthletesSlugRoute
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/athletes/$slug': typeof AthletesSlugRoute
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/fixture-review'
     | '/admin/result-links'
     | '/admin/sources'
     | '/athletes/$slug'
@@ -188,6 +198,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/fixture-review'
     | '/admin/result-links'
     | '/admin/sources'
     | '/athletes/$slug'
@@ -206,6 +217,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/fixture-review'
     | '/admin/result-links'
     | '/admin/sources'
     | '/athletes/$slug'
@@ -225,6 +237,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalendarRoute: typeof CalendarRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
+  AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
@@ -268,6 +281,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/fixture-review': {
+      id: '/admin/fixture-review'
+      path: '/admin/fixture-review'
+      fullPath: '/admin/fixture-review'
+      preLoaderRoute: typeof AdminFixtureReviewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/result-links': {
@@ -361,6 +381,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalendarRoute: CalendarRoute,
   RaceSeriesRoute: RaceSeriesRoute,
+  AdminFixtureReviewRoute: AdminFixtureReviewRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
   AthletesSlugRoute: AthletesSlugRoute,
