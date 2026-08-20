@@ -9,6 +9,7 @@ import {
   Footprints,
   Gauge,
   MapPin,
+  Mountain,
   Route as RouteIcon,
   Timer,
   Trophy,
@@ -74,6 +75,14 @@ const distances = [
     distance: "Marathon",
     icon: Trophy,
     accent: "bg-[#ffe5e0] text-[#ae4937]",
+  },
+  {
+    label: "Ultra marathon",
+    detail: "Beyond 26.2 miles",
+    sport: "Running" as const,
+    distance: "Ultra",
+    icon: Mountain,
+    accent: "bg-[#e3f5e8] text-[#2f7d45]",
   },
 ] as const;
 
@@ -214,7 +223,7 @@ function HomePage() {
           }
         />
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {distances.map((item, index) => (
             <Link
               key={item.label}
