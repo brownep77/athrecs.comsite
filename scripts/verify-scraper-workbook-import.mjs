@@ -26,7 +26,7 @@ try {
     5315,
     "Every staged edition must have exactly one classification",
   );
-  assert(staged.counts.eligible <= 48, "Catalogue dedupe cannot increase the 48-row quality gate");
+  assert(staged.counts.eligible <= 64, "Catalogue dedupe cannot increase the 64-row quality gate");
 
   const first = await publishEligibleScraperWorkbookBatch(staged.batchId);
   assert.equal(first.publishedCandidates, staged.counts.eligible);

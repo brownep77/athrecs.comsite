@@ -5,6 +5,14 @@ The canonical machine-readable file is:
 
 - docs/source-registry/fixture-result-sources.csv
 
+Independently verified corrections to staged workbook editions are recorded in:
+
+- docs/source-registry/workbook-event-overrides.json
+
+Each override is pinned to a source ID, edition ID, event name and date, retains the
+exact public evidence URL and checked date, and clears only the named review fields.
+Unresolved review issues continue to block publication.
+
 The registry contains 266 unique sources. Only 31 are enabled; the other 235 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
@@ -52,6 +60,8 @@ race/edition duplicate review before publication.
 
 ## Verification
 
-Run `npm run verify:sources` and `npm run verify:bulk-source-run`. The verifiers check the schema, row count, source IDs, URLs,
+Run `npm run verify:sources`, `npm run verify:bulk-source-run` and
+`npm run verify:workbook-overrides`. The verifiers check the schema, row count, source IDs, URLs,
 domain allow-lists, limits, coverage years, regular expressions, rights status and the
-participant-level exclusion rule, plus complete one-job-per-source bulk-run coverage.
+participant-level exclusion rule, complete one-job-per-source bulk-run coverage, and the
+audit metadata for every event-level enrichment.
