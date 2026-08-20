@@ -42,6 +42,7 @@ import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { resolveCountry, displayCountryName } from "@/lib/athrecs/countries";
 import { timeZoneAbbr, timeZoneForPlace } from "@/lib/athrecs/timezone";
 import { buildRaceBriefing, sportLabel } from "@/lib/athrecs/race-briefing";
+import { raceFormatGuideFor } from "@/data/race-format-guides";
 import { raceQualifications, type RaceQualification } from "@/data/race-qualifications";
 
 type EditionRow = {
@@ -148,6 +149,7 @@ export function RacePageContent({
       }),
     [event, country, next],
   );
+  const formatGuide = raceFormatGuideFor(event.slug);
   const [resultsEditionId, setResultsEditionId] = useState<number | null>(null);
   const { data: results = [], isFetching } = useQuery({
     queryKey: ["edition-results", resultsEditionId],
@@ -334,6 +336,89 @@ export function RacePageContent({
           />
         </dl>
       </section>
+
+      {formatGuide && (
+        <section
+          aria-labelledby="race-format-heading"
+          className="space-y-5 rounded-xl border border-border bg-surface p-5 shadow-card md:p-6"
+        >
+          <div className="space-y-2">
+            <div className="flex items-center gap-2">
+              <RouteIcon className="h-4 w-4 text-accent" />
+              <h2 id="race-format-heading" className="font-display text-lg font-semibold text-fg">
+                {formatGuide.title}
+              </h2>
+            </div>
+            <p className="max-w-4xl text-sm leading-relaxed text-muted">
+              {formatGuide.overview}
+            </p>
+          </div>
+
+          <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {formatGuide.facts.map((fact) => (
+              <div key={fact.label} className="rounded-lg border border-border bg-elevated p-3">
+                <dt className="text-[11px] font-semibold uppercase tracking-wider text-subtle">
+                  {fact.label}
+                </dt>
+                <dd className="mt-1 text-sm font-semibold leading-snug text-fg">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="space-y-3">
+            <h3 className="font-display text-base font-semibold text-fg">
+              {formatGuide.stageTitle}
+            </h3>
+            <div className="overflow-x-auto rounded-lg border border-border">
+              <table className="w-full min-w-[34rem] text-left text-sm">
+                <thead className="border-b border-border bg-elevated/60 text-[11px] uppercase tracking-wider text-subtle">
+                  <tr>
+                    <th className="px-3 py-2.5">Stage</th>
+                    <th className="px-3 py-2.5">Distance</th>
+                    <th className="px-3 py-2.5">Format</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {formatGuide.stages.map((stage) => (
+                    <tr key={stage.stage} className="border-b border-border/70 last:border-0">
+                      <th scope="row" className="px-3 py-2.5 font-semibold text-fg">
+                        {stage.stage}
+                      </th>
+                      <td className="px-3 py-2.5 font-medium tabular text-fg">
+                        {stage.distance}
+                      </td>
+                      <td className="px-3 py-2.5 text-muted">{stage.detail}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs leading-relaxed text-subtle">{formatGuide.stageNote}</p>
+          </div>
+
+          <div className="space-y-3">
+            <h3 className="font-display text-base font-semibold text-fg">What the format means</h3>
+            <ul className="grid gap-2 md:grid-cols-2">
+              {formatGuide.essentials.map((item) => (
+                <li key={item} className="flex gap-2 text-sm leading-relaxed text-muted">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <a
+            href={formatGuide.sourceUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-accent no-underline hover:underline"
+          >
+            {formatGuide.sourceLabel}
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </section>
+      )}
 
       <section className="grid gap-4 lg:grid-cols-5">
         <div className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card lg:col-span-3">
@@ -813,98 +898,3 @@ function Fact({ label, value, hint }: { label: string; value: string; hint?: str
 
 function EditionList({
   title,
-  items,
-  hidden = 0,
-  onResults,
-  country,
-  county,
-}: {
-  title: string;
-  items: EditionRow[];
-  hidden?: number;
-  onResults?: (id: number) => void;
-  country?: string;
-  county?: string;
-}) {
-  return (
-    <section className="space-y-3">
-      <h2 className="font-display text-lg font-semibold text-fg">{title}</h2>
-      {items.length === 0 ? (
-        <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
-          None listed yet.
-        </p>
-      ) : (
-        <div className="grid gap-2">
-          {items.map((ed) => {
-            const st = effectiveStatus(ed.event_date, ed.status as EntryStatus);
-            const start = formatStartTime(ed.start_time, {
-              country,
-              county,
-              date: ed.event_date,
-            });
-            return (
-              <div
-                key={`${ed.id}-${ed.event_date}`}
-                className="flex flex-col gap-2 rounded-xl border border-border bg-surface px-3.5 py-3 shadow-card sm:flex-row sm:items-center sm:justify-between"
-              >
-                <div className="space-y-1">
-                  <div className="flex flex-wrap gap-1.5">
-                    <Badge variant="accent">
-                      {formatDistanceWithUnits(ed.distance_code, ed.distance_km)}
-                    </Badge>
-                    <Badge variant={st === "Finished" ? "default" : "solid"}>
-                      {statusLabel(st)}
-                    </Badge>
-                    {(ed.result_count > 0 ||
-                      ed.result_links.length > 0 ||
-                      ed.results_official_url ||
-                      isRunAbcUrl(ed.source_url)) && <Badge variant="outline">Results</Badge>}
-                  </div>
-                  <p className="text-sm font-semibold text-fg">
-                    {formatRaceDateShort(ed.event_date)}
-                    {start ? (
-                      <span className="ml-2 font-medium text-muted">
-                        <Clock3 className="mr-1 inline h-3.5 w-3.5" />
-                        {start}
-                      </span>
-                    ) : null}
-                  </p>
-                  {ed.notes ? <p className="text-xs text-subtle">{ed.notes}</p> : null}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {ed.result_count > 0 && onResults && (
-                    <button
-                      type="button"
-                      onClick={() => onResults(ed.id)}
-                      className="inline-flex h-11 min-w-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium"
-                    >
-                      View results
-                    </button>
-                  )}
-                  {st !== "Finished" &&
-                    ed.entry_options.slice(0, 3).map((option) => (
-                      <a
-                        key={`${ed.id}-${option.provider_code}`}
-                        href={option.entry_url}
-                        target="_blank"
-                        rel="noreferrer sponsored"
-                        className="inline-flex h-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium text-fg no-underline"
-                      >
-                        {option.entry_type === "official" ? "Official entry" : option.provider_name}
-                      </a>
-                    ))}
-                </div>
-              </div>
-            );
-          })}
-          {hidden > 0 ? (
-            <p className="px-1 text-xs text-subtle">
-              {hidden} more date{hidden === 1 ? "" : "s"} on the listing — open the official page
-              for the full timetable.
-            </p>
-          ) : null}
-        </div>
-      )}
-    </section>
-  );
-}
