@@ -13,6 +13,7 @@ import {
   MapPin,
   Medal,
   Route as RouteIcon,
+  ShieldCheck,
 } from "lucide-react";
 import { getEditionResults, getEventBySlug } from "@/lib/athrecs/api";
 import {
@@ -41,6 +42,7 @@ import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { resolveCountry, displayCountryName } from "@/lib/athrecs/countries";
 import { timeZoneAbbr, timeZoneForPlace } from "@/lib/athrecs/timezone";
 import { buildRaceBriefing, sportLabel } from "@/lib/athrecs/race-briefing";
+import { raceQualifications, type RaceQualification } from "@/data/race-qualifications";
 
 type EditionRow = {
   id: number;
@@ -101,6 +103,7 @@ export function RacePageContent({
   localized?: { language: string; country: string };
 }) {
   const { event, groups, distances, upcoming, past, related } = data;
+  const qualification = raceQualifications[event.slug];
   const shownDistances = sanitizeDistances(event.name, distances);
   const country = resolveCountry({
     slug: event.slug,
@@ -282,6 +285,8 @@ export function RacePageContent({
       </header>
 
       <RaceGroupDetails groups={groups} />
+
+      {qualification && <QualificationDetails qualification={qualification} />}
 
       <EntryOptions
         options={next?.entry_options ?? []}
@@ -512,6 +517,105 @@ export function RacePageContent({
         )}
       </aside>
     </div>
+  );
+}
+
+function QualificationDetails({ qualification }: { qualification: RaceQualification }) {
+  return (
+    <section
+      aria-labelledby="race-qualification-heading"
+      className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card"
+    >
+      <div className="space-y-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <ShieldCheck className="h-4 w-4 text-accent" />
+          <h2
+            id="race-qualification-heading"
+            className="font-display text-lg font-semibold text-fg"
+          >
+            {qualification.heading}
+          </h2>
+          <span className="text-xs text-subtle">Checked {qualification.checkedAt}</span>
+        </div>
+        <p className="max-w-4xl text-sm leading-relaxed text-muted">{qualification.summary}</p>
+        {qualification.window && (
+          <p className="text-sm font-medium text-fg">{qualification.window}</p>
+        )}
+      </div>
+
+      <ul className="grid gap-2 md:grid-cols-3">
+        {qualification.requirements.map((requirement) => (
+          <li
+            key={requirement}
+            className="flex gap-2 rounded-lg border border-border bg-elevated p-3 text-sm leading-relaxed text-muted"
+          >
+            <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+            <span>{requirement}</span>
+          </li>
+        ))}
+      </ul>
+
+      {qualification.tables?.map((table) => (
+        <div key={table.caption} className="overflow-x-auto rounded-lg border border-border">
+          <table className="w-full min-w-[28rem] text-left text-sm">
+            <caption className="bg-elevated px-3 py-2 text-left font-semibold text-fg">
+              {table.caption}
+            </caption>
+            <thead className="border-y border-border bg-elevated/60 text-xs uppercase tracking-wide text-subtle">
+              <tr>
+                {table.headers.map((header) => (
+                  <th key={header} className="px-3 py-2">
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {table.rows.map((row) => (
+                <tr key={row.join("|")} className="border-b border-border/70 last:border-0">
+                  {row.map((cell, index) => (
+                    <td
+                      key={`${index}-${cell}`}
+                      className={`px-3 py-2 ${index === 0 ? "font-medium text-fg" : "tabular text-muted"}`}
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
+
+      {qualification.note && (
+        <p className="rounded-lg border border-amber-300/70 bg-amber-50 p-3 text-sm leading-relaxed text-amber-950">
+          {qualification.note}
+        </p>
+      )}
+
+      <div className="flex flex-wrap gap-x-4 gap-y-1">
+        <a
+          href={qualification.sourceUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="inline-flex min-h-10 items-center gap-1 text-sm font-medium text-accent no-underline hover:underline"
+        >
+          Official qualification rules <ExternalLink className="h-3.5 w-3.5" />
+        </a>
+        {qualification.additionalLinks?.map((link) => (
+          <a
+            key={link.url}
+            href={link.url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-10 items-center gap-1 text-sm font-medium text-muted no-underline hover:text-fg hover:underline"
+          >
+            {link.label} <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        ))}
+      </div>
+    </section>
   );
 }
 

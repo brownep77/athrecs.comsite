@@ -13,6 +13,8 @@ const [
   { mrdMarathonEditions, mrdMarathonSeries },
   { mrdEuMarathonEditions, mrdEuMarathonSeries, mrdEuMarathonSourceRows },
   { mrdIntlMarathonEditions, mrdIntlMarathonSeries, mrdIntlMarathonSourceRows },
+  { comradesEditions, comradesSeries },
+  { twoOceansEditions, twoOceansSeries },
   { verifiedAllSportEditions, verifiedAllSportSeries },
   { verifiedGlobalEditions, verifiedGlobalSeries },
   marathonOptions,
@@ -38,6 +40,8 @@ const [
   import("../src/data/mrd-marathons.ts"),
   import("../src/data/mrd-marathons-eu.ts"),
   import("../src/data/mrd-marathons-intl.ts"),
+  import("../src/data/comrades.ts"),
+  import("../src/data/two-oceans.ts"),
   import("../src/data/verified-all-sport.ts"),
   import("../src/data/verified-global-fixtures.ts"),
   import("../src/data/entry-options-uk-marathons.ts"),
@@ -106,6 +110,8 @@ for (const series of [
   ...mrdMarathonSeries,
   ...mrdEuMarathonSeries,
   ...mrdIntlMarathonSeries,
+  ...comradesSeries,
+  ...twoOceansSeries,
 ]) {
   if (aliases[series.slug]) continue;
   const key = exactName(seriesOverrides[series.slug]?.name ?? series.name);
@@ -133,6 +139,8 @@ const editionSources = [
   ...mrdMarathonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...mrdEuMarathonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...mrdIntlMarathonEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...comradesEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...twoOceansEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
 ];
 
 const seenEditions = new Set();

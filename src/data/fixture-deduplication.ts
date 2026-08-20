@@ -142,6 +142,12 @@ export const verifiedFixtureEditionReplacements: VerifiedEditionReplacement[] = 
     fromDate: "2027-05-22",
     toDate: "2027-05-23",
   },
+  {
+    seriesSlug: "boston-marathon",
+    distance: "Marathon",
+    fromDate: "2027-04-11",
+    toDate: "2027-04-19",
+  },
 ];
 
 export const verifiedFixtureEditionOverrides: Record<string, Partial<Edition>> = {
@@ -257,10 +263,37 @@ export const verifiedFixtureEditionOverrides: Record<string, Partial<Edition>> =
       "http://www.marathonrunnersdiary.com/races/international-marathons/cape-town-marathon.php",
     notes: "The live Marathon Runners Diary listing places the 2027 marathon on 23 May.",
   },
+  "boston-marathon|2027-04-11|Marathon": {
+    date: "2027-04-19",
+    distanceKm: 42.195,
+    status: "Open",
+    entryUrl: "https://www.baa.org/races/boston-marathon/qualify/",
+    startTime: undefined,
+    source:
+      "https://www.baa.org/news/registration-updates-and-information-announced-for-2027-boston-marathon-presented-by-bank-of-america/",
+    notes:
+      "The B.A.A. confirms the 131st Boston Marathon for Monday 19 April 2027; the supplied directory date of 11 April is retired.",
+  },
 };
 
 /** Official organiser metadata for canonical records retained after a merge. */
 export const verifiedFixtureSeriesOverrides: Record<string, Partial<Series>> = {
+  "boston-marathon": {
+    name: "Boston Marathon",
+    country: "United States",
+    county: "Massachusetts",
+    city: "Boston",
+    area: "Hopkinton to Boston",
+    surface: "Road",
+    distances: ["Marathon"],
+    summary:
+      "Boston Marathon is a point-to-point certified road marathon from Hopkinton to Boston.",
+    description:
+      "The Boston Athletic Association stages the Boston Marathon on its certified point-to-point course from Hopkinton to Boston. Entry through the open field requires a verified qualifying performance and remains subject to field limits.",
+    organiser: "Boston Athletic Association",
+    website: "https://www.baa.org/races/boston-marathon",
+    source_url: "https://www.baa.org/races/boston-marathon",
+  },
   "rb-the-cowman-triathlon": {
     name: "Cowman Triathlon",
     country: "England",

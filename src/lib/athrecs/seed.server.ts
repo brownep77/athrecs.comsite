@@ -12,7 +12,7 @@ import {
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-mrd-marathons-v221";
+const SEED_VERSION = "athrecs-comrades-two-oceans-qualifiers-v223";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
