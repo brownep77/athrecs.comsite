@@ -95,3 +95,13 @@ Three organiser-verified road and park fixtures extend United States coverage an
 - Hillsborough Castle & Gardens Running Festival — Running — Northern Ireland — 25 July 2027
 
 All three have current RunThrough organiser pages with open registration, published prices, dates, start times and locations. The two US fixtures add distinct city races in Philadelphia and Washington DC; Hillsborough adds a new country label and two distances in the castle grounds. Each canonical name, location and date was checked against the full ATHRECS catalogue before import. The source remains `in_progress` so further countries can be added in later three-event checkpoints.
+
+## Checkpoint global-009
+
+Three further organiser-verified United States fixtures expand New York and New Jersey coverage:
+
+- Staten Island 5K, 10K & Half Marathon at Freshkills Park — Running — United States — 27 September 2026
+- Hoboken 5K & 10K — Running — United States — 17 October 2026
+- New York 5K, 10K & Half Marathon at Flushing Meadows — Running — United States — 15 November 2026
+
+All three have current RunThrough organiser pages with open registration, published prices and start times. The Flushing Meadows page's route-information section confirms the Queens address; an erroneous Michigan postcode in its top summary is documented but not imported. Australia remains queued because its organiser currently offers only 2027 interest registration without confirmed dates. Each fixture was checked against the full ATHRECS catalogue before import, and the source remains `in_progress`.
