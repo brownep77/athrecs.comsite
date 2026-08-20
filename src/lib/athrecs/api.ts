@@ -828,6 +828,17 @@ export const getBulkSourceRun = createServerFn({ method: "GET" }).handler(async 
   return getFixtureSourceBulkRunDashboard();
 });
 
+/** Configuration-level source inventory for the admin review screen. */
+export const listFixtureSources = createServerFn({ method: "GET" }).handler(async () => {
+  const { getBulkSourceJobManifest, getFixtureSourceRegistrySummary } =
+    await import("./source-registry.server");
+  const { registryHash: _registryHash, ...registry } = getFixtureSourceRegistrySummary();
+  return {
+    registry,
+    sources: getBulkSourceJobManifest(),
+  };
+});
+
 export const queueBulkSourceRun = createServerFn({ method: "POST" }).handler(async () => {
   await ready();
   return queueFixtureSourceBulkRun();

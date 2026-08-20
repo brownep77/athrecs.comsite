@@ -333,6 +333,12 @@ function AdminPage() {
               publish.
             </p>
           </div>
+          <Button asChild type="button" variant="secondary">
+            <Link to="/admin/sources">View and review sources</Link>
+          </Button>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3">
           <Button
             type="button"
             disabled={dbStatus.data?.persistent !== true || bulkRunMut.isPending}
@@ -340,6 +346,10 @@ function AdminPage() {
           >
             {bulkRunMut.isPending ? "Preparing run…" : "Add all websites to bulk run"}
           </Button>
+          <p className="text-xs text-subtle">
+            Review held sources before enabling them. Creating a run never bypasses rights or
+            technical checks.
+          </p>
         </div>
 
         {bulkRun.isLoading && <p className="text-sm text-muted">Loading source registry…</p>}

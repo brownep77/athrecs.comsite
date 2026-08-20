@@ -16,7 +16,7 @@ assert.match(
 );
 
 const entries = Object.entries(document.overrides ?? {});
-assert.equal(entries.length, 16, "Expected the 16 independently verified enrichments");
+assert.equal(entries.length, 26, "Expected the 26 independently verified enrichments");
 
 for (const [editionId, override] of entries) {
   const label = `Override ${editionId}`;
