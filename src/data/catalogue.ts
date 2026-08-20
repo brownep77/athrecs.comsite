@@ -60,6 +60,10 @@ import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
 import { mrdIntlMarathonEditions, mrdIntlMarathonSeries } from "./mrd-marathons-intl";
 import { comradesEditions, comradesSeries } from "./comrades";
 import { twoOceansEditions, twoOceansSeries } from "./two-oceans";
+import {
+  marathonDesSablesEditions,
+  marathonDesSablesSeries,
+} from "./marathon-des-sables";
 import { editionOverrides, entryOptions, eventSlugAliases, seriesOverrides } from "./entry-options";
 import {
   raceCollectionEditions,
@@ -129,6 +133,7 @@ const usedSlugs = new Set(coreSeries.map((series) => series.slug));
 const extraSeries: Series[] = [];
 for (const series of [
   ...(raceCollectionSeries as Series[]),
+  ...(marathonDesSablesSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
   ...(verifiedGlobalSeries as Series[]),
   ...(verifiedUkSeries as Series[]),
@@ -160,6 +165,9 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
 const mergedEditions = [
   ...(coreEditions as Edition[]),
   ...(raceCollectionEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(marathonDesSablesEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
   ...(verifiedAllSportEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),

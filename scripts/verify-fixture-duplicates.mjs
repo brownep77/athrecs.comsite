@@ -4,6 +4,7 @@ const [
   { seriesList: coreSeries },
   { editions: coreEditions },
   { raceCollectionEditions, raceCollectionSeries },
+  { marathonDesSablesEditions, marathonDesSablesSeries },
   { verifiedUkEditions, verifiedUkSeries },
   { runabcEditions, runabcSeries },
   { multiSportEditions, multiSportSeries },
@@ -31,6 +32,7 @@ const [
   import("../src/data/series.ts"),
   import("../src/data/editions.ts"),
   import("../src/data/race-collections.ts"),
+  import("../src/data/marathon-des-sables.ts"),
   import("../src/data/verified-races-uk.ts"),
   import("../src/data/runabc.ts"),
   import("../src/data/multisport.ts"),
@@ -99,6 +101,7 @@ const usedSlugs = new Set(coreSeries.map((series) => series.slug));
 const extraSeries = [];
 for (const series of [
   ...raceCollectionSeries,
+  ...marathonDesSablesSeries,
   ...verifiedAllSportSeries,
   ...verifiedGlobalSeries,
   ...verifiedUkSeries,
@@ -129,6 +132,7 @@ const extraSlugs = new Set(extraSeries.map((series) => series.slug));
 const editionSources = [
   ...coreEditions,
   ...raceCollectionEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...marathonDesSablesEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...verifiedAllSportEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...verifiedGlobalEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...verifiedUkEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
