@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { getSql, dbSource } from "@/lib/db";
+import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { canonicalEventSlug } from "@/data/entry-options";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
@@ -827,77 +828,89 @@ export const getHomeStats = createServerFn({ method: "GET" }).handler(async () =
 });
 
 /** Live DB backend + row counts for admin diagnosis (Neon vs ephemeral PGLite). */
-export const getDbStatus = createServerFn({ method: "GET" }).handler(async () => {
-  const sql = await ready();
-  const row = await sql<{
-    clubs: number;
-    athletes: number;
-    events: number;
-    editions: number;
-    entry_options: number;
-    result_links: number;
-    results: number;
-  }>`select
-    (select count(*)::int from clubs) as clubs,
-    (select count(*)::int from athletes) as athletes,
-    (select count(*)::int from events) as events,
-    (select count(*)::int from editions) as editions,
-    (select count(*)::int from edition_entry_options) as entry_options,
-    (select count(*)::int from edition_result_links where status = 'approved') as result_links,
-    (select count(*)::int from results) as results`;
-  const meta = await sql<{ value: string }>`
-    select value from app_meta where key = 'seed_version' limit 1
-  `;
-  const r = row[0];
-  return {
-    backend: dbSource,
-    persistent: dbSource === "neon",
-    seedVersion: meta[0]?.value ?? null,
-    clubs: r?.clubs ?? 0,
-    athletes: r?.athletes ?? 0,
-    events: r?.events ?? 0,
-    editions: r?.editions ?? 0,
-    entryOptions: r?.entry_options ?? 0,
-    resultLinks: r?.result_links ?? 0,
-    results: r?.results ?? 0,
-  };
-});
+export const getDbStatus = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    const sql = await ready();
+    const row = await sql<{
+      clubs: number;
+      athletes: number;
+      events: number;
+      editions: number;
+      entry_options: number;
+      result_links: number;
+      results: number;
+    }>`select
+      (select count(*)::int from clubs) as clubs,
+      (select count(*)::int from athletes) as athletes,
+      (select count(*)::int from events) as events,
+      (select count(*)::int from editions) as editions,
+      (select count(*)::int from edition_entry_options) as entry_options,
+      (select count(*)::int from edition_result_links where status = 'approved') as result_links,
+      (select count(*)::int from results) as results`;
+    const meta = await sql<{ value: string }>`
+      select value from app_meta where key = 'seed_version' limit 1
+    `;
+    const r = row[0];
+    return {
+      backend: dbSource,
+      persistent: dbSource === "neon",
+      seedVersion: meta[0]?.value ?? null,
+      clubs: r?.clubs ?? 0,
+      athletes: r?.athletes ?? 0,
+      events: r?.events ?? 0,
+      editions: r?.editions ?? 0,
+      entryOptions: r?.entry_options ?? 0,
+      resultLinks: r?.result_links ?? 0,
+      results: r?.results ?? 0,
+    };
+  });
 
-export const getBulkSourceRun = createServerFn({ method: "GET" }).handler(async () => {
-  await ready();
-  return getFixtureSourceBulkRunDashboard();
-});
+export const getBulkSourceRun = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    await ready();
+    return getFixtureSourceBulkRunDashboard();
+  });
 
 /** Configuration-level source inventory for the admin review screen. */
-export const listFixtureSources = createServerFn({ method: "GET" }).handler(async () => {
-  const { getBulkSourceJobManifest, getFixtureSourceRegistrySummary } =
-    await import("./source-registry.server");
-  const { registryHash: _registryHash, ...registry } = getFixtureSourceRegistrySummary();
-  return {
-    registry,
-    sources: getBulkSourceJobManifest(),
-  };
-});
+export const listFixtureSources = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    const { getBulkSourceJobManifest, getFixtureSourceRegistrySummary } =
+      await import("./source-registry.server");
+    const { registryHash: _registryHash, ...registry } = getFixtureSourceRegistrySummary();
+    return {
+      registry,
+      sources: getBulkSourceJobManifest(),
+    };
+  });
 
-export const queueBulkSourceRun = createServerFn({ method: "POST" }).handler(async () => {
-  await ready();
-  return queueFixtureSourceBulkRun();
-});
+export const queueBulkSourceRun = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    await ready();
+    return queueFixtureSourceBulkRun();
+  });
 
-export const getScraperWorkbookImport = createServerFn({ method: "GET" }).handler(async () => {
-  await ready();
-  const { getScraperWorkbookImportDashboard } = await import("./scraper-workbook-import.server");
-  return getScraperWorkbookImportDashboard();
-});
+export const getScraperWorkbookImport = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    await ready();
+    const { getScraperWorkbookImportDashboard } = await import("./scraper-workbook-import.server");
+    return getScraperWorkbookImportDashboard();
+  });
 
-export const uploadScraperWorkbookNow = createServerFn({ method: "POST" }).handler(async () => {
-  await ready();
-  if (dbSource !== "neon") {
-    throw new Error("Connect the persistent Neon database before uploading the scraper workbook");
-  }
-  const { uploadScraperWorkbookSnapshotNow } = await import("./scraper-workbook-import.server");
-  return uploadScraperWorkbookSnapshotNow();
-});
+export const uploadScraperWorkbookNow = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    await ready();
+    if (dbSource !== "neon") {
+      throw new Error("Connect the persistent Neon database before uploading the scraper workbook");
+    }
+    const { uploadScraperWorkbookSnapshotNow } = await import("./scraper-workbook-import.server");
+    return uploadScraperWorkbookSnapshotNow();
+  });
 
 export const listCalendarEditions = createServerFn({ method: "GET" })
   .validator(
@@ -1158,6 +1171,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
 
 // -- Admin / Grok-assisted imports --
 export const importFromCsv = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
   .validator((input: { csv: string }) => input)
   .handler(async ({ data }) => {
     await ready();
@@ -1166,6 +1180,7 @@ export const importFromCsv = createServerFn({ method: "POST" })
   });
 
 export const importFromJson = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
   .validator((input: { json: string }) => input)
   .handler(async ({ data }) => {
     await ready();
@@ -1179,6 +1194,7 @@ export const importFromJson = createServerFn({ method: "POST" })
   });
 
 export const importResults = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
   .validator((input: { json: string }) => input)
   .handler(async ({ data }) => {
     await ready();
@@ -1200,17 +1216,19 @@ export const importResults = createServerFn({ method: "POST" })
     return applyResultsImport(bundle);
   });
 
-export const listAdminEventCards = createServerFn({ method: "GET" }).handler(async () => {
-  const sql = await ready();
-  return sql<{
-    id: number;
-    slug: string;
-    name: string;
-    sport: string;
-    city: string;
-    edition_count: number;
-    next_date: string | null;
-  }>`
+export const listAdminEventCards = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    const sql = await ready();
+    return sql<{
+      id: number;
+      slug: string;
+      name: string;
+      sport: string;
+      city: string;
+      edition_count: number;
+      next_date: string | null;
+    }>`
       select
         e.id, e.slug, e.name, e.sport, e.city,
         (select count(*)::int from editions ed where ed.event_id = e.id) as edition_count,
@@ -1222,4 +1240,4 @@ export const listAdminEventCards = createServerFn({ method: "GET" }).handler(asy
       from events e
       order by e.name
     `;
-});
+  });

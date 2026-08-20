@@ -3,6 +3,34 @@
   "framework": null,
   "installCommand": "npm ci --no-audit --no-fund",
   "buildCommand": "npm run build",
+  "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "update.athrecs.com"
+        }
+      ],
+      "destination": "/admin",
+      "permanent": false
+    }
+  ],
+  "headers": [
+    {
+      "source": "/admin/:path*",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
+      ]
+    }
+  ],
   "regions": [
     "lhr1"
   ]
