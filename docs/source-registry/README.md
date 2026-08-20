@@ -34,8 +34,24 @@ running profile.
 The CSV is a controlled source inventory, not a scraper, a results licence or evidence
 that every listed site may be crawled.
 
+## One-click bulk run
+
+The admin bulk-run control snapshots every registry row into a durable Neon run:
+
+- all 266 sources create exactly one source job;
+- the 31 enabled and rights-approved sources are queued;
+- the other 235 sources are retained as blocked jobs with their reason;
+- changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
+  changing application code;
+- a unique `(run_id, source_id)` constraint prevents the same website source from being
+  added twice to one run.
+
+Creating the run does not publish races. Source workers must still respect each job's
+domain, page and rate limits, then send candidates through staging, provenance and
+race/edition duplicate review before publication.
+
 ## Verification
 
-Run npm run verify:sources. The verifier checks the schema, row count, source IDs, URLs,
+Run `npm run verify:sources` and `npm run verify:bulk-source-run`. The verifiers check the schema, row count, source IDs, URLs,
 domain allow-lists, limits, coverage years, regular expressions, rights status and the
-participant-level exclusion rule.
+participant-level exclusion rule, plus complete one-job-per-source bulk-run coverage.

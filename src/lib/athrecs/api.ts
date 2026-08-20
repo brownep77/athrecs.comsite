@@ -21,6 +21,10 @@ import {
   type ImportBundle,
   type ResultsImportBundle,
 } from "./import.server";
+import {
+  getFixtureSourceBulkRunDashboard,
+  queueFixtureSourceBulkRun,
+} from "./bulk-source-run.server";
 
 async function ready() {
   await ensureAthrecsSeeded();
@@ -58,9 +62,7 @@ function parseEntryOptions(value: unknown): EditionEntryOption[] {
   );
   if (!hasVerifiedOfficial) return options;
 
-  return options.filter(
-    (option) => !(option.provider_code === "official" && !option.is_verified),
-  );
+  return options.filter((option) => !(option.provider_code === "official" && !option.is_verified));
 }
 
 export const listEvents = createServerFn({ method: "GET" })
@@ -819,6 +821,31 @@ export const getDbStatus = createServerFn({ method: "GET" }).handler(async () =>
     entryOptions: r?.entry_options ?? 0,
     results: r?.results ?? 0,
   };
+});
+
+export const getBulkSourceRun = createServerFn({ method: "GET" }).handler(async () => {
+  await ready();
+  return getFixtureSourceBulkRunDashboard();
+});
+
+export const queueBulkSourceRun = createServerFn({ method: "POST" }).handler(async () => {
+  await ready();
+  return queueFixtureSourceBulkRun();
+});
+
+export const getScraperWorkbookImport = createServerFn({ method: "GET" }).handler(async () => {
+  await ready();
+  const { getScraperWorkbookImportDashboard } = await import("./scraper-workbook-import.server");
+  return getScraperWorkbookImportDashboard();
+});
+
+export const uploadScraperWorkbookNow = createServerFn({ method: "POST" }).handler(async () => {
+  await ready();
+  if (dbSource !== "neon") {
+    throw new Error("Connect the persistent Neon database before uploading the scraper workbook");
+  }
+  const { uploadScraperWorkbookSnapshotNow } = await import("./scraper-workbook-import.server");
+  return uploadScraperWorkbookSnapshotNow();
 });
 
 export const listCalendarEditions = createServerFn({ method: "GET" })
