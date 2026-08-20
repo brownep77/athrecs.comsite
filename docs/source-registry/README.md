@@ -42,6 +42,13 @@ running profile.
 The CSV is a controlled source inventory, not a scraper, a results licence or evidence
 that every listed site may be crawled.
 
+## Admin review screen
+
+The live admin source inventory at `/admin/sources` exposes every registered source with
+search, runnable/held status filters, country and region filters, the current review reason,
+published crawl-information link where available, and configured page/rate limits. The
+screen is read-only: viewing or filtering a held source cannot enable it or bypass review.
+
 ## One-click bulk run
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:

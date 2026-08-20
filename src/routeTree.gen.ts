@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
@@ -42,6 +43,11 @@ const RaceSeriesRoute = RaceSeriesRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSourcesRoute = AdminSourcesRouteImport.update({
+  id: '/admin/sources',
+  path: '/admin/sources',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AthletesIndexRoute = AthletesIndexRouteImport.update({
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/sources': typeof AdminSourcesRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -117,6 +124,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/sources': typeof AdminSourcesRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -134,6 +142,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/sources': typeof AdminSourcesRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -152,6 +161,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/sources'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/sources'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -184,6 +195,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/sources'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -201,6 +213,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalendarRoute: typeof CalendarRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
+  AdminSourcesRoute: typeof AdminSourcesRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
@@ -242,6 +255,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/sources': {
+      id: '/admin/sources'
+      path: '/admin/sources'
+      fullPath: '/admin/sources'
+      preLoaderRoute: typeof AdminSourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/athletes/': {
@@ -321,6 +341,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalendarRoute: CalendarRoute,
   RaceSeriesRoute: RaceSeriesRoute,
+  AdminSourcesRoute: AdminSourcesRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   ClubsSlugRoute: ClubsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,

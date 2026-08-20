@@ -225,6 +225,174 @@
       "resolvedIssueFields": ["city"],
       "note": "Public timing-provider event page confirms Westport, 19 May 2026 and 5K.",
       "fields": { "city": "Westport", "venue": "Westport" }
+    },
+    "edition_70aae788cf4531": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Bellahouston Park 5k/10k/Half Marathon",
+      "eventDate": "2026-08-22",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/bellahouston-park-5k-10k-half-marathon-9",
+      "resolvedIssueFields": [
+        "city",
+        "description",
+        "image_url",
+        "official_website_url",
+        "venue_name"
+      ],
+      "note": "Official organiser page confirms Bellahouston Park in Glasgow, 22 August 2026 and the 5K, 10K and half marathon races. Copied promotional imagery and description are not required for publication.",
+      "fields": {
+        "city": "Glasgow",
+        "venue": "Bellahouston Park",
+        "website": "https://www.upandrunningevents.co.uk/event-details/bellahouston-park-5k-10k-half-marathon-9",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_86b998e26d84d9": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Inverleith Park 5k/10k",
+      "eventDate": "2026-08-29",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/inverleith-park-5k-10k-2",
+      "resolvedIssueFields": ["image_url", "official_website_url"],
+      "note": "Official organiser calendar confirms Inverleith Park in Edinburgh, 29 August 2026 and the 5K and 10K races. Copied promotional imagery is not required for publication.",
+      "fields": {
+        "city": "Edinburgh",
+        "venue": "Inverleith Park",
+        "website": "https://www.upandrunningevents.co.uk/event-details/inverleith-park-5k-10k-2",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_8b7b50bb909269": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Meadows 5k/10k",
+      "eventDate": "2026-09-05",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/the-meadows-5k-10k-1",
+      "resolvedIssueFields": ["image_url", "official_website_url"],
+      "note": "Official organiser page confirms The Meadows in Edinburgh, 5 September 2026 and the 5K and 10K races. Copied promotional imagery is not required for publication.",
+      "fields": {
+        "city": "Edinburgh",
+        "venue": "The Meadows",
+        "website": "https://www.upandrunningevents.co.uk/event-details/the-meadows-5k-10k-1",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_86957b3820f553": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Duthie Park 5k/10k",
+      "eventDate": "2026-09-12",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/duthie-park-5k-10k-2",
+      "resolvedIssueFields": ["city", "image_url", "official_website_url", "venue_name"],
+      "note": "Official organiser page confirms Duthie Park in Aberdeen, 12 September 2026 and the 5K and 10K races. Copied promotional imagery is not required for publication.",
+      "fields": {
+        "city": "Aberdeen",
+        "venue": "Duthie Park",
+        "website": "https://www.upandrunningevents.co.uk/event-details/duthie-park-5k-10k-2",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_27bd1d02ecbe3d": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Kelvingrove Park 5k/10k",
+      "eventDate": "2026-09-13",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/kelvingrove-park-5k-10k-7",
+      "resolvedIssueFields": [
+        "city",
+        "description",
+        "image_url",
+        "official_website_url",
+        "venue_name"
+      ],
+      "note": "Official organiser calendar confirms Kelvingrove Park in Glasgow, 13 September 2026 and the 5K and 10K races. Copied promotional imagery and description are not required for publication.",
+      "fields": {
+        "city": "Glasgow",
+        "venue": "Kelvingrove Park",
+        "website": "https://www.upandrunningevents.co.uk/event-details/kelvingrove-park-5k-10k-7",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_aa5fc4be8bc53a": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Cramond Promenade 5k/10k/Half Marathon",
+      "eventDate": "2026-09-27",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/cramond-promenade-5k-10k-half-marathon-3",
+      "resolvedIssueFields": ["image_url", "official_website_url"],
+      "note": "Official organiser calendar confirms Cramond Promenade in Edinburgh, 27 September 2026 and the 5K, 10K and half marathon races. Copied promotional imagery is not required for publication.",
+      "fields": {
+        "city": "Edinburgh",
+        "venue": "Cramond Promenade",
+        "website": "https://www.upandrunningevents.co.uk/event-details/cramond-promenade-5k-10k-half-marathon-3",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_1c557ef1fdffef": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Alexandra Park 5k/10k",
+      "eventDate": "2026-10-17",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/alexandra-park-5k-10k-6",
+      "resolvedIssueFields": [
+        "city",
+        "description",
+        "image_url",
+        "official_website_url",
+        "venue_name"
+      ],
+      "note": "Official organiser page confirms Alexandra Park in Glasgow, 17 October 2026 and the 5K and 10K races. Copied promotional imagery and description are not required for publication.",
+      "fields": {
+        "city": "Glasgow",
+        "venue": "Alexandra Park",
+        "website": "https://www.upandrunningevents.co.uk/event-details/alexandra-park-5k-10k-6",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_b48661bf139336": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Balloch Castle Country Park 5k/10k/Half Marathon",
+      "eventDate": "2026-10-24",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/balloch-castle-country-park-5k-10k-half-marathon-1",
+      "resolvedIssueFields": ["city", "image_url", "official_website_url", "venue_name"],
+      "note": "Official organiser page confirms Balloch Castle Country Park in Balloch, 24 October 2026 and the 5K, 10K and half marathon races. Copied promotional imagery is not required for publication.",
+      "fields": {
+        "city": "Balloch",
+        "venue": "Balloch Castle Country Park",
+        "website": "https://www.upandrunningevents.co.uk/event-details/balloch-castle-country-park-5k-10k-half-marathon-1",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_8e340bf671148e": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Duthie Park 5k/10k",
+      "eventDate": "2026-11-07",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/duthie-park-5k-10k-3",
+      "resolvedIssueFields": ["city", "image_url", "official_website_url", "venue_name"],
+      "note": "Official organiser page confirms Duthie Park in Aberdeen, 7 November 2026 and the 5K and 10K races. Copied promotional imagery is not required for publication.",
+      "fields": {
+        "city": "Aberdeen",
+        "venue": "Duthie Park",
+        "website": "https://www.upandrunningevents.co.uk/event-details/duthie-park-5k-10k-3",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
+    },
+    "edition_5b48de892e5b13": {
+      "sourceId": "up_running_scotland",
+      "eventName": "Strathclyde Park 5k/10k/Half Marathon",
+      "eventDate": "2026-11-08",
+      "evidenceUrl": "https://www.upandrunningevents.co.uk/event-details/strathclyde-park-5k-10k-half-marathon-3",
+      "resolvedIssueFields": ["city", "image_url", "official_website_url", "venue_name"],
+      "note": "Official organiser page confirms Strathclyde Country Park in Motherwell, 8 November 2026 and the 5K, 10K and half marathon races. Copied promotional imagery is not required for publication.",
+      "fields": {
+        "city": "Motherwell",
+        "venue": "Strathclyde Country Park",
+        "website": "https://www.upandrunningevents.co.uk/event-details/strathclyde-park-5k-10k-half-marathon-3",
+        "entryStatus": "Open",
+        "status": "Open"
+      }
     }
   }
 }
