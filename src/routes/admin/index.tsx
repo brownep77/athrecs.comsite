@@ -3,11 +3,15 @@ import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  getBulkSourceRun,
   getDbStatus,
+  getScraperWorkbookImport,
   importFromCsv,
   importFromJson,
   importResults,
   listAdminEventCards,
+  queueBulkSourceRun,
+  uploadScraperWorkbookNow,
 } from "@/lib/athrecs/api";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -116,6 +120,18 @@ function AdminPage() {
     refetchInterval: 15_000,
   });
 
+  const bulkRun = useQuery({
+    queryKey: ["admin-bulk-source-run"],
+    queryFn: () => getBulkSourceRun(),
+    refetchInterval: 15_000,
+  });
+
+  const workbookImport = useQuery({
+    queryKey: ["admin-scraper-workbook-import"],
+    queryFn: () => getScraperWorkbookImport(),
+    refetchInterval: 15_000,
+  });
+
   const preview = useQuery({
     queryKey: ["admin-preview-events"],
     queryFn: () => listEvents({ data: {} }),
@@ -157,6 +173,33 @@ function AdminPage() {
           (r.errors?.length
             ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}`
             : ""),
+      );
+      void qc.invalidateQueries();
+    },
+    onError: (e) => setMessage(e instanceof Error ? e.message : String(e)),
+  });
+
+  const bulkRunMut = useMutation({
+    mutationFn: () => queueBulkSourceRun(),
+    onSuccess: (result) => {
+      const latest = result.latestRun;
+      setMessage(
+        latest
+          ? `${result.created ? "Bulk run created" : "Existing bulk run updated"}: ${latest.totalJobs} source jobs · ${latest.runnableSourceCount} runnable · ${latest.blockedSourceCount} held for approval`
+          : "Bulk run could not be loaded",
+      );
+      void qc.invalidateQueries({ queryKey: ["admin-bulk-source-run"] });
+    },
+    onError: (e) => setMessage(e instanceof Error ? e.message : String(e)),
+  });
+
+  const workbookImportMut = useMutation({
+    mutationFn: () => uploadScraperWorkbookNow(),
+    onSuccess: (result) => {
+      const published = result.publication;
+      const counts = published.counts;
+      setMessage(
+        `Workbook upload complete: ${result.staged.counts.staged.toLocaleString()} source editions staged · ${published.publishedEvents.toLocaleString()} new events · ${published.publishedEditions.toLocaleString()} new edition distances · ${counts.duplicates.toLocaleString()} duplicates · ${counts.blocked.toLocaleString()} held for review`,
       );
       void qc.invalidateQueries();
     },
@@ -276,6 +319,142 @@ function AdminPage() {
             )}
           </div>
         )}
+      </section>
+
+      <section className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="space-y-1">
+            <h2 className="font-display text-lg font-semibold text-fg">
+              All-source fixture bulk run
+            </h2>
+            <p className="max-w-2xl text-sm text-muted">
+              Add every registered website to one resumable run. Approved sources enter the crawler
+              queue; sources awaiting rights or technical review remain visible but cannot run or
+              publish.
+            </p>
+          </div>
+          <Button
+            type="button"
+            disabled={dbStatus.data?.persistent !== true || bulkRunMut.isPending}
+            onClick={() => bulkRunMut.mutate()}
+          >
+            {bulkRunMut.isPending ? "Preparing run…" : "Add all websites to bulk run"}
+          </Button>
+        </div>
+
+        {bulkRun.isLoading && <p className="text-sm text-muted">Loading source registry…</p>}
+        {bulkRun.data && (
+          <div className="space-y-3">
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div className="rounded-lg border border-border bg-elevated p-3">
+                <p className="text-xs uppercase tracking-wide text-subtle">Registered</p>
+                <p className="mt-1 text-2xl font-semibold tabular text-fg">
+                  {bulkRun.data.registry.sources.toLocaleString()}
+                </p>
+              </div>
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-50 p-3">
+                <p className="text-xs uppercase tracking-wide text-emerald-800">Runnable now</p>
+                <p className="mt-1 text-2xl font-semibold tabular text-emerald-950">
+                  {bulkRun.data.registry.runnable.toLocaleString()}
+                </p>
+              </div>
+              <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-3">
+                <p className="text-xs uppercase tracking-wide text-amber-800">Held for review</p>
+                <p className="mt-1 text-2xl font-semibold tabular text-amber-950">
+                  {bulkRun.data.registry.blocked.toLocaleString()}
+                </p>
+              </div>
+            </div>
+
+            {bulkRun.data.latestRun && (
+              <div className="rounded-lg border border-border bg-bg px-3 py-3 text-sm">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <p className="font-medium text-fg">Latest run</p>
+                  <Badge variant="accent">{bulkRun.data.latestRun.status}</Badge>
+                </div>
+                <p className="mt-1 text-muted">
+                  {bulkRun.data.latestRun.totalJobs.toLocaleString()} unique source jobs ·{" "}
+                  {(bulkRun.data.latestRun.jobsByStatus.queued ?? 0).toLocaleString()} queued ·{" "}
+                  {(bulkRun.data.latestRun.jobsByStatus.blocked ?? 0).toLocaleString()} blocked
+                </p>
+                <p className="mt-1 text-xs text-subtle">
+                  Requested {new Date(bulkRun.data.latestRun.requestedAt).toLocaleString()}
+                </p>
+              </div>
+            )}
+
+            <p className="text-xs text-subtle">
+              Covers {bulkRun.data.registry.countries.length.toLocaleString()} country or territory
+              labels across {bulkRun.data.registry.regions.length.toLocaleString()} regional scopes.
+              Duplicate source IDs are prevented by the database. Race candidates must still pass
+              staging, provenance and race/edition duplicate checks before publication.
+            </p>
+          </div>
+        )}
+        {dbStatus.data && !dbStatus.data.persistent && (
+          <p className="text-sm text-amber-900">
+            Connect Neon before creating a bulk run so its queue survives server restarts.
+          </p>
+        )}
+      </section>
+
+      <section className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="space-y-1">
+            <h2 className="font-display text-lg font-semibold text-fg">
+              Collected fixture workbook
+            </h2>
+            <p className="max-w-2xl text-sm text-muted">
+              Stage all 5,315 collected editions in one audited batch, check the live catalogue for
+              duplicates, then atomically publish only candidates with approved sources, required
+              fields and no open high-priority review issues.
+            </p>
+          </div>
+          <Button
+            type="button"
+            disabled={dbStatus.data?.persistent !== true || workbookImportMut.isPending}
+            onClick={() => workbookImportMut.mutate()}
+          >
+            {workbookImportMut.isPending
+              ? "Uploading and checking…"
+              : "Upload collected events now"}
+          </Button>
+        </div>
+
+        {workbookImport.isLoading && <p className="text-sm text-muted">Loading import status…</p>}
+        {workbookImport.data && (
+          <div className="grid gap-3 sm:grid-cols-4">
+            <div className="rounded-lg border border-border bg-elevated p-3">
+              <p className="text-xs uppercase tracking-wide text-subtle">Staged</p>
+              <p className="mt-1 text-2xl font-semibold tabular text-fg">
+                {workbookImport.data.stagedCount.toLocaleString()}
+              </p>
+            </div>
+            <div className="rounded-lg border border-emerald-500/30 bg-emerald-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-emerald-800">Published events</p>
+              <p className="mt-1 text-2xl font-semibold tabular text-emerald-950">
+                {workbookImport.data.publishedEventCount.toLocaleString()}
+              </p>
+            </div>
+            <div className="rounded-lg border border-sky-500/30 bg-sky-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-sky-800">Duplicates</p>
+              <p className="mt-1 text-2xl font-semibold tabular text-sky-950">
+                {workbookImport.data.duplicateCount.toLocaleString()}
+              </p>
+            </div>
+            <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-3">
+              <p className="text-xs uppercase tracking-wide text-amber-800">Held for review</p>
+              <p className="mt-1 text-2xl font-semibold tabular text-amber-950">
+                {workbookImport.data.blockedCount.toLocaleString()}
+              </p>
+            </div>
+          </div>
+        )}
+        <p className="text-xs text-subtle">
+          Re-running is safe: published rows are retained and exact catalogue matches are classified
+          as duplicates instead of inserted again. The workbook payload is server-only and is not
+          downloaded by public visitors.
+        </p>
       </section>
 
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
