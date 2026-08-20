@@ -397,6 +397,62 @@ export const verifiedGlobalSeries: Series[] = [
     source_url:
       "https://www.runthrough.co.uk/event/runthrough-lake-district-running-festival-2027",
   },
+  {
+    slug: "philadelphia-labor-day-5k-10k-10-mile",
+    name: "Philadelphia Labor Day 5K, 10K & 10 Mile",
+    sport: "Running",
+    country: "United States",
+    county: "Pennsylvania",
+    city: "Philadelphia",
+    area: "Philadelphia Museum of Art, Fairmount Park and the Schuylkill River",
+    surface: "Road / Paved Path",
+    distances: ["10 Mile", "10K", "5K"],
+    summary: "Labor Day 5K, 10K and 10-mile races from Philadelphia's Rocky Steps.",
+    description:
+      "Three road-race distances starting in front of the Philadelphia Museum of Art, with routes through Fairmount Park and beside the Schuylkill River.",
+    organiser: "RunThrough USA",
+    website: "https://www.runthrough.co.uk/event/philadelphia-labor-day-10k-5k-2026",
+    featured: false,
+    source_url: "https://www.runthrough.co.uk/event/philadelphia-labor-day-10k-5k-2026",
+  },
+  {
+    slug: "washington-dc-anacostia-park-5k-10k",
+    name: "Washington DC 5K & 10K at Anacostia Park",
+    sport: "Running",
+    country: "United States",
+    county: "District of Columbia",
+    city: "Washington",
+    area: "Anacostia Park and Anacostia Drive",
+    surface: "Road / Paved Path",
+    distances: ["10K", "5K"],
+    summary: "Flat 5K and 10K road races beside the Anacostia River in Washington DC.",
+    description:
+      "A traffic-free out-and-back 5K and 10K on Anacostia Drive, following a flat paved route beside the Anacostia River.",
+    organiser: "RunThrough USA",
+    website: "https://www.runthrough.co.uk/event/runthrough-anacostia-park-5k-10k-2026",
+    featured: false,
+    source_url: "https://www.runthrough.co.uk/event/runthrough-anacostia-park-5k-10k-2026",
+  },
+  {
+    slug: "hillsborough-castle-gardens-running-festival",
+    name: "Hillsborough Castle & Gardens Running Festival",
+    sport: "Running",
+    country: "Northern Ireland",
+    county: "County Down",
+    city: "Hillsborough",
+    area: "Hillsborough Castle and Gardens",
+    surface: "Park / Mixed Terrain",
+    distances: ["Half", "10K"],
+    summary: "Half-marathon and 10K racing in the grounds of Hillsborough Castle.",
+    description:
+      "A half marathon and 10K through the grounds of Hillsborough Castle and Gardens, supporting Northern Ireland Hospice.",
+    organiser: "RunThrough",
+    website:
+      "https://www.runthrough.co.uk/event/hillsborough-castle-gardens-running-festival-july-2027",
+    featured: false,
+    source_url:
+      "https://www.runthrough.co.uk/event/hillsborough-castle-gardens-running-festival-july-2027",
+  },
 ];
 
 export const verifiedGlobalEditions: Edition[] = [
@@ -1016,5 +1072,100 @@ export const verifiedGlobalEditions: Edition[] = [
     source:
       "https://www.runthrough.co.uk/event/runthrough-lake-district-running-festival-2027",
     notes: "The 53K starts at 08:00 and the 23K starts at 10:00 from Keswick School.",
+  },
+  {
+    seriesSlug: "philadelphia-labor-day-5k-10k-10-mile",
+    date: "2026-09-07",
+    distance: "10 Mile",
+    distanceKm: 16.0934,
+    status: "Open",
+    entryUrl: "https://www.runthrough.co.uk/event/philadelphia-labor-day-10k-5k-2026",
+    entryOptions: [
+      {
+        providerCode: "runthrough-usa",
+        providerName: "RunThrough USA",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/philadelphia-labor-day-10k-5k-2026",
+        entryType: "official",
+        status: "open",
+        priceAmount: 60,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/philadelphia-labor-day-10k-5k-2026",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The live organiser page lists open 10-mile, 10K and 5K entry with published prices.",
+      },
+    ],
+    startTime: "07:00",
+    source: "https://www.runthrough.co.uk/event/philadelphia-labor-day-10k-5k-2026",
+    notes:
+      "The 10-mile race starts at 07:00 and the 10K and 5K start at 07:30 from the Philadelphia Museum of Art.",
+  },
+  {
+    seriesSlug: "washington-dc-anacostia-park-5k-10k",
+    date: "2026-09-13",
+    distance: "10K",
+    distanceKm: 10,
+    status: "Open",
+    entryUrl: "https://www.runthrough.co.uk/event/runthrough-anacostia-park-5k-10k-2026",
+    entryOptions: [
+      {
+        providerCode: "runthrough-usa",
+        providerName: "RunThrough USA",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/runthrough-anacostia-park-5k-10k-2026",
+        entryType: "official",
+        status: "open",
+        priceAmount: 44,
+        priceCurrency: "GBP",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/runthrough-anacostia-park-5k-10k-2026",
+        isVerified: true,
+        isPrimary: true,
+        notes: "The live organiser page lists open 10K and 5K entry with published prices.",
+      },
+    ],
+    startTime: "08:00",
+    source: "https://www.runthrough.co.uk/event/runthrough-anacostia-park-5k-10k-2026",
+    notes:
+      "Both distances start at 08:00 on the road-closed Anacostia Drive course beside the river.",
+  },
+  {
+    seriesSlug: "hillsborough-castle-gardens-running-festival",
+    date: "2027-07-25",
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl:
+      "https://www.runthrough.co.uk/event/hillsborough-castle-gardens-running-festival-july-2027",
+    entryOptions: [
+      {
+        providerCode: "runthrough-uk",
+        providerName: "RunThrough",
+        entryUrl:
+          "https://www.runthrough.co.uk/event/hillsborough-castle-gardens-running-festival-july-2027",
+        entryType: "official",
+        status: "open",
+        priceAmount: 36,
+        priceCurrency: "GBP",
+        closesAt: "2027-06-27T23:59:00+01:00",
+        checkedAt: "2026-08-20",
+        sourceUrl:
+          "https://www.runthrough.co.uk/event/hillsborough-castle-gardens-running-festival-july-2027",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "The organiser page lists open half-marathon and 10K entry, current prices and the standard-entry deadline.",
+      },
+    ],
+    startTime: "09:00",
+    source:
+      "https://www.runthrough.co.uk/event/hillsborough-castle-gardens-running-festival-july-2027",
+    notes:
+      "The half marathon starts at 09:00 and the 10K at 09:40 in Hillsborough Castle and Gardens.",
   },
 ];
