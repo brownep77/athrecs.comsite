@@ -1,11 +1,11 @@
 import { createServerFn } from "@tanstack/react-start";
-import { authMiddleware } from "@/lib/auth/middleware";
+import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { dbSource } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import type { FixtureReviewQueueInput } from "./scraper-workbook-import.server";
 
 export const getPendingFixtureReview = createServerFn({ method: "GET" })
-  .middleware([authMiddleware])
+  .middleware([staffMiddleware])
   .validator((input: FixtureReviewQueueInput | undefined) => input ?? {})
   .handler(async ({ data }) => {
     await ensureAthrecsSeeded();
@@ -14,7 +14,7 @@ export const getPendingFixtureReview = createServerFn({ method: "GET" })
   });
 
 export const refreshPendingFixtureReview = createServerFn({ method: "POST" })
-  .middleware([authMiddleware])
+  .middleware([staffMiddleware])
   .handler(async () => {
     await ensureAthrecsSeeded();
     const { stageScraperWorkbookSnapshot } = await import("./scraper-workbook-import.server");
@@ -22,7 +22,7 @@ export const refreshPendingFixtureReview = createServerFn({ method: "POST" })
   });
 
 export const releasePendingFixtures = createServerFn({ method: "POST" })
-  .middleware([authMiddleware])
+  .middleware([staffMiddleware])
   .validator((input: { batchId: string; candidateIds: string[]; note?: string }) => input)
   .handler(async ({ data, context }) => {
     await ensureAthrecsSeeded();

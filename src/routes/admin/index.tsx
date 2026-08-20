@@ -19,6 +19,12 @@ import { RaceCard } from "@/components/races/RaceCard";
 import { listEvents } from "@/lib/athrecs/api";
 
 export const Route = createFileRoute("/admin/")({
+  head: () => ({
+    meta: [
+      { title: "ATHRECS Staff" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+    ],
+  }),
   component: AdminPage,
 });
 

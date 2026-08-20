@@ -7,6 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin/sources")({
+  head: () => ({
+    meta: [
+      { title: "Sources — ATHRECS Staff" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+    ],
+  }),
   component: AdminSourcesPage,
 });
 

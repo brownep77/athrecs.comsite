@@ -12,6 +12,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin/fixture-review")({
+  head: () => ({
+    meta: [
+      { title: "Fixture review — ATHRECS Staff" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+    ],
+  }),
   component: PendingFixtureReviewPage,
 });
 

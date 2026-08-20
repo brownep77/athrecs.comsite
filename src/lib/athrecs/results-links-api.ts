@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { authMiddleware } from "@/lib/auth/middleware";
+import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { ensureAthrecsSeeded } from "./seed.server";
 import {
   previewResultLinksCsv as previewResultLinksCsvServer,
@@ -7,6 +7,7 @@ import {
 } from "./results-links-import.server";
 
 export const previewResultLinksCsv = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
   .validator((input: { csv: string }) => input)
   .handler(async ({ data }) => {
     await ensureAthrecsSeeded();
@@ -14,7 +15,7 @@ export const previewResultLinksCsv = createServerFn({ method: "POST" })
   });
 
 export const publishResultLinksCsv = createServerFn({ method: "POST" })
-  .middleware([authMiddleware])
+  .middleware([staffMiddleware])
   .validator((input: { csv: string }) => input)
   .handler(async ({ data }) => {
     await ensureAthrecsSeeded();

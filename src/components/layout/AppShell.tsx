@@ -1,5 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { CalendarDays, Home, List, Settings2, Users, UsersRound } from "lucide-react";
+import { CalendarDays, Home, List, Users, UsersRound } from "lucide-react";
+import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import {
   copyForLanguage,
   countrySiteFromSlug,
@@ -39,13 +40,6 @@ const nav = [
     icon: CalendarDays,
     match: (p: string) => p.startsWith("/calendar"),
   },
-  {
-    key: "update",
-    to: "/admin",
-    label: "Update",
-    icon: Settings2,
-    match: (p: string) => p.startsWith("/admin"),
-  },
 ] as const;
 
 function BrandLogo({ className, priority }: { className?: string; priority?: boolean }) {
@@ -63,6 +57,10 @@ function BrandLogo({ className, priority }: { className?: string; priority?: boo
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  if (pathname.startsWith("/admin")) {
+    return <StaffMicrositeShell>{children}</StaffMicrositeShell>;
+  }
+
   const pathSegments = pathname.split("/").filter(Boolean);
   const pathLanguage = pathSegments[0] ?? "";
   const pathCountry = pathSegments[1] ?? "";
@@ -140,7 +138,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md md:hidden"
         aria-label="Primary"
       >
-        <ul className="mx-auto grid max-w-lg grid-cols-6 px-0.5 pt-1">
+        <ul className="mx-auto grid max-w-lg grid-cols-5 px-0.5 pt-1">
           {nav.map((item) => {
             const active = isActive(item);
             return (
