@@ -27,6 +27,7 @@ import {
   getFixtureSourceBulkRunDashboard,
   queueFixtureSourceBulkRun,
 } from "./bulk-source-run.server";
+import type { HomeSportUpdate } from "./home-updates";
 
 async function ready() {
   await ensureAthrecsSeeded();
@@ -815,8 +816,21 @@ export const getHomeStats = createServerFn({ method: "GET" }).handler(async () =
   const upcoming = await sql<{ n: number }>`
       select count(*)::int as n from editions where event_date >= ${today}::date
     `;
-  const bySport = await sql<{ sport: string; n: number }>`
-      select sport, count(*)::int as n from events group by sport order by sport
+  const bySport = await sql<{ sport: string; n: number; upcoming: number }>`
+      select
+        event.sport,
+        count(*)::int as n,
+        count(*) filter (
+          where exists (
+            select 1
+            from editions edition
+            where edition.event_id = event.id
+              and edition.event_date >= ${today}::date
+          )
+        )::int as upcoming
+      from events event
+      group by event.sport
+      order by event.sport
     `;
   return {
     events: events[0]?.n ?? 0,
@@ -825,6 +839,166 @@ export const getHomeStats = createServerFn({ method: "GET" }).handler(async () =
     upcoming: upcoming[0]?.n ?? 0,
     bySport,
   };
+});
+
+/**
+ * Copyright-safe homepage updates generated only from ATHRECS fixture metadata
+ * and verified result links. No external article copy or imagery is ingested.
+ */
+export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(async () => {
+  const sql = await ready();
+  const today = todayIso();
+  const rows = await sql<{
+    id: string;
+    kind: "fixture" | "results";
+    sport: Sport;
+    event_slug: string;
+    event_name: string;
+    country: string;
+    county: string;
+    city: string;
+    event_date: string;
+    distance: string;
+    status: string;
+    provider_name: string | null;
+    published_at: string;
+  }>`
+    with upcoming_editions as (
+      select
+        event.id as event_id,
+        event.slug as event_slug,
+        event.name as event_name,
+        event.sport,
+        event.country,
+        event.county,
+        event.city,
+        edition.event_date,
+        edition.distance_code,
+        edition.status,
+        row_number() over (
+          partition by event.id
+          order by edition.event_date, edition.distance_code
+        ) as event_rank
+      from events event
+      join editions edition on edition.event_id = event.id
+      where edition.event_date >= ${today}::date
+    ),
+    fixture_updates as (
+      select
+        ('fixture-' || event_id::text) as id,
+        'fixture'::text as kind,
+        sport,
+        event_slug,
+        event_name,
+        country,
+        county,
+        city,
+        event_date,
+        distance_code,
+        status,
+        null::text as provider_name,
+        event_date::timestamptz as published_at,
+        row_number() over (
+          partition by sport
+          order by event_date, event_name
+        ) as sport_rank
+      from upcoming_editions
+      where event_rank = 1
+    ),
+    verified_result_links as (
+      select
+        link.id,
+        link.provider_name,
+        link.checked_at,
+        event.slug as event_slug,
+        event.name as event_name,
+        event.sport,
+        event.country,
+        event.county,
+        event.city,
+        edition.id as edition_id,
+        edition.event_date,
+        edition.distance_code,
+        row_number() over (
+          partition by edition.id
+          order by link.is_verified desc, link.checked_at desc, link.id desc
+        ) as provider_rank
+      from edition_result_links link
+      join editions edition on edition.id = link.edition_id
+      join events event on event.id = edition.event_id
+      where link.status = 'approved'
+        and link.is_verified = true
+    ),
+    result_updates as (
+      select
+        ('results-' || id::text) as id,
+        'results'::text as kind,
+        sport,
+        event_slug,
+        event_name,
+        country,
+        county,
+        city,
+        event_date,
+        distance_code,
+        'Finished'::text as status,
+        provider_name,
+        checked_at as published_at,
+        row_number() over (
+          partition by sport
+          order by checked_at desc, event_date desc, event_name
+        ) as sport_rank
+      from verified_result_links
+      where provider_rank = 1
+    )
+    select
+      id,
+      kind,
+      sport,
+      event_slug,
+      event_name,
+      country,
+      county,
+      city,
+      event_date::text as event_date,
+      distance_code as distance,
+      status,
+      provider_name,
+      published_at::text as published_at
+    from (
+      select * from fixture_updates where sport_rank <= 8
+      union all
+      select * from result_updates where sport_rank <= 5
+    ) updates
+    order by
+      case sport
+        when 'Running' then 0
+        when 'Athletics' then 1
+        when 'Triathlon' then 2
+        when 'Cycling' then 3
+        else 4
+      end,
+      kind,
+      published_at desc
+  `;
+
+  return rows.map(
+    (row): HomeSportUpdate => ({
+      id: row.id,
+      kind: row.kind,
+      sport: row.sport,
+      eventSlug: row.event_slug,
+      eventName: row.event_name,
+      country: row.country,
+      county: row.county,
+      city: row.city,
+      eventDate: row.event_date,
+      distance: row.distance,
+      status: row.status,
+      providerName: row.provider_name,
+      publishedAt: row.published_at,
+    }),
+  );
 });
 
 /** Live DB backend + row counts for admin diagnosis (Neon vs ephemeral PGLite). */
