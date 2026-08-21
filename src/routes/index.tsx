@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
   Activity,
@@ -6,32 +6,47 @@ import {
   Bike,
   CalendarDays,
   ChevronRight,
+  Droplets,
   Footprints,
   Gauge,
   MapPin,
+  Medal,
   Mountain,
+  Newspaper,
   Route as RouteIcon,
+  Ship,
   Timer,
   Trophy,
   Users,
   Waves,
+  Zap,
 } from "lucide-react";
-import { getHomeStats, listEvents } from "@/lib/athrecs/api";
+import { getHomeSportUpdates, getHomeStats, listEvents } from "@/lib/athrecs/api";
 import { flagForCountryFilter } from "@/lib/athrecs/countries";
 import { countrySiteFromName } from "@/lib/athrecs/country-sites";
-import { COUNTRY_GROUPS } from "@/lib/athrecs/filters";
+import { COUNTRY_GROUPS, SPORTS } from "@/lib/athrecs/filters";
+import { formatRaceDateShort } from "@/lib/athrecs/format";
+import {
+  homeRegionLabel,
+  PRIORITY_HOME_SPORTS,
+  selectBalancedHomeUpdates,
+  type HomeSportUpdate,
+} from "@/lib/athrecs/home-updates";
+import type { Sport } from "@/lib/athrecs/types";
 import { RaceCard } from "@/components/races/RaceCard";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   loader: async () => {
-    const [stats, running] = await Promise.all([
+    const [stats, running, updates] = await Promise.all([
       getHomeStats(),
       listEvents({
         data: { sport: "Running", upcomingOnly: true, limit: 4 },
       }),
+      getHomeSportUpdates(),
     ]);
-    return { stats, running };
+    return { stats, running, updates };
   },
   component: HomePage,
 });
@@ -87,10 +102,25 @@ const distances = [
 ] as const;
 
 function HomePage() {
-  const { stats, running } = Route.useLoaderData();
+  const { stats, running, updates } = Route.useLoaderData();
   const navigate = useNavigate();
   const [country, setCountry] = useState("All");
-  const countFor = (sport: string) => stats.bySport.find((item) => item.sport === sport)?.n ?? 0;
+  const [newsSport, setNewsSport] = useState<Sport | "All">("All");
+  const [newsRegion, setNewsRegion] = useState("All");
+  const sportStats = (sport: string) =>
+    stats.bySport.find((item) => item.sport === sport) ?? { sport, n: 0, upcoming: 0 };
+  const countFor = (sport: string) => sportStats(sport).n;
+  const newsRegions = useMemo(
+    () => [...new Set(updates.map(homeRegionLabel))].sort((a, b) => a.localeCompare(b)),
+    [updates],
+  );
+  const visibleUpdates = useMemo(
+    () => selectBalancedHomeUpdates(updates, newsSport, newsRegion),
+    [newsRegion, newsSport, updates],
+  );
+  const otherSports = SPORTS.filter(
+    (sport): sport is Sport => sport !== "All" && !PRIORITY_HOME_SPORTS.includes(sport),
+  );
 
   const browseCountry = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -209,6 +239,46 @@ function HomePage() {
 
       <section className="space-y-5">
         <SectionHeading
+          eyebrow="The whole calendar"
+          title="Every sport, counted"
+          body="Running, athletics, triathlon and cycling lead the homepage, with live event and upcoming-fixture counts across every sport in ATHRECS."
+          action={
+            <Link
+              to="/races"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-accent no-underline hover:underline"
+            >
+              Browse all sports <ArrowRight className="h-4 w-4" />
+            </Link>
+          }
+        />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {PRIORITY_HOME_SPORTS.map((sport) => (
+            <SportCountCard key={sport} sport={sport} stats={sportStats(sport)} priority />
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2 rounded-2xl border border-border bg-surface p-3 shadow-card">
+          {otherSports.map((sport) => {
+            const sportCount = sportStats(sport);
+            return (
+              <Link
+                key={sport}
+                to="/races"
+                search={{ sport }}
+                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-border bg-bg px-3 text-sm font-medium text-muted no-underline transition-colors hover:border-accent hover:text-fg"
+              >
+                <SportGlyph sport={sport} className="h-4 w-4 text-accent" />
+                {sport}
+                <span className="rounded-full bg-elevated px-2 py-0.5 text-xs tabular text-subtle">
+                  {sportCount.n.toLocaleString()}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="space-y-5">
+        <SectionHeading
           eyebrow="Running"
           title="Choose your distance"
           body="Start with the race you know — or find the next challenge to work towards."
@@ -284,6 +354,82 @@ function HomePage() {
 
       <section className="space-y-5">
         <SectionHeading
+          eyebrow="News by sport and place"
+          title="Sport news & regional updates"
+          body="Original ATHRECS updates generated from verified fixtures, entry status and result links—without copying publishers’ article text or images."
+          action={
+            <Link
+              to="/calendar"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-accent no-underline hover:underline"
+            >
+              Open the calendar <ArrowRight className="h-4 w-4" />
+            </Link>
+          }
+        />
+
+        <div className="grid gap-3 rounded-2xl border border-border bg-surface p-4 shadow-card md:grid-cols-[1fr_15rem] md:items-end">
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-subtle">
+              Choose a sport
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {SPORTS.map((sport) => (
+                <button
+                  key={sport}
+                  type="button"
+                  onClick={() => setNewsSport(sport)}
+                  className={`min-h-10 rounded-full border px-3 text-sm font-medium transition-colors ${
+                    newsSport === sport
+                      ? "border-accent bg-accent text-white"
+                      : "border-border bg-bg text-muted hover:border-border-strong hover:text-fg"
+                  }`}
+                >
+                  {sport === "All" ? "All sports" : sport}
+                </button>
+              ))}
+            </div>
+          </div>
+          <label className="grid gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-subtle">
+            Region
+            <select
+              value={newsRegion}
+              onChange={(event) => setNewsRegion(event.target.value)}
+              className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm font-medium normal-case tracking-normal text-fg outline-none focus:ring-2 focus:ring-accent/30"
+            >
+              <option value="All">All regions</option>
+              {newsRegions.map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        {visibleUpdates.length ? (
+          <div className="grid gap-3 md:grid-cols-2">
+            {visibleUpdates.map((update) => (
+              <HomeUpdateCard key={update.id} update={update} />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-2xl border border-dashed border-border bg-surface px-6 py-10 text-center">
+            <Newspaper className="mx-auto h-7 w-7 text-subtle" aria-hidden="true" />
+            <p className="mt-3 font-semibold text-fg">No matching updates yet</p>
+            <p className="mt-1 text-sm text-muted">
+              New verified fixtures and results will appear here automatically.
+            </p>
+          </div>
+        )}
+
+        <p className="text-xs leading-relaxed text-subtle">
+          ATHRECS updates use our own database facts and wording. External reporting can be added
+          only from an approved licensed source with attribution.
+        </p>
+      </section>
+
+      <section className="space-y-5">
+        <SectionHeading
           eyebrow="Coming up"
           title="Upcoming running events"
           body="Real races from the ATHRECS calendar, ready to explore."
@@ -331,6 +477,103 @@ function HomePage() {
         </div>
       </section>
     </div>
+  );
+}
+
+function SportGlyph({
+  sport,
+  className,
+}: {
+  sport: Sport;
+  className?: string;
+}) {
+  if (sport === "Cycling" || sport === "Aquabike") return <Bike className={className} />;
+  if (sport === "Swimming") return <Droplets className={className} />;
+  if (sport === "Triathlon") return <Timer className={className} />;
+  if (sport === "Duathlon") return <Zap className={className} />;
+  if (sport === "Aquathlon") return <Waves className={className} />;
+  if (sport === "Rowing") return <Ship className={className} />;
+  if (sport === "OCR") return <Mountain className={className} />;
+  if (sport === "Athletics") return <Medal className={className} />;
+  return <Footprints className={className} />;
+}
+
+function SportCountCard({
+  sport,
+  stats,
+  priority = false,
+}: {
+  sport: Sport;
+  stats: { n: number; upcoming: number };
+  priority?: boolean;
+}) {
+  return (
+    <Link
+      to="/races"
+      search={{ sport }}
+      className={`group rounded-2xl border p-5 no-underline shadow-card transition duration-200 hover:-translate-y-0.5 hover:border-border-strong ${
+        priority ? "border-primary/20 bg-[#e3f5f1]" : "border-border bg-surface"
+      }`}
+    >
+      <div className="flex items-start justify-between gap-3">
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-900 text-cyan-300">
+          <SportGlyph sport={sport} className="h-5 w-5" />
+        </span>
+        <ArrowRight className="h-4 w-4 text-subtle transition-transform group-hover:translate-x-1 group-hover:text-accent" />
+      </div>
+      <p className="mt-5 font-display text-3xl font-semibold tabular tracking-tight text-fg">
+        {stats.n.toLocaleString()}
+      </p>
+      <h3 className="mt-0.5 font-semibold text-fg">{sport} events</h3>
+      <p className="mt-2 text-xs text-muted">
+        {stats.upcoming.toLocaleString()} with upcoming fixtures
+      </p>
+    </Link>
+  );
+}
+
+function HomeUpdateCard({ update }: { update: HomeSportUpdate }) {
+  const isResults = update.kind === "results";
+  const status = update.status.toLowerCase();
+  const isOpen = status === "open" || status === "closingsoon";
+  const title = isResults
+    ? `${update.eventName} results are available`
+    : isOpen
+      ? `${update.eventName}: entries ${status === "closingsoon" ? "closing soon" : "open"}`
+      : `Next up: ${update.eventName}`;
+  const place = [update.city, homeRegionLabel(update)].filter(Boolean).join(" · ");
+
+  return (
+    <article className="flex min-h-56 flex-col rounded-2xl border border-border bg-surface p-5 shadow-card">
+      <div className="flex flex-wrap items-center gap-2">
+        <Badge variant="accent" className="gap-1">
+          <SportGlyph sport={update.sport} className="h-3.5 w-3.5" />
+          {update.sport}
+        </Badge>
+        <Badge variant={isResults ? "solid" : "outline"}>
+          {isResults ? "Results update" : "Fixture update"}
+        </Badge>
+      </div>
+      <h3 className="mt-4 font-display text-xl font-semibold tracking-tight text-fg">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted">
+        {update.distance} · {formatRaceDateShort(update.eventDate)}
+        {place ? ` · ${place}` : ""}.
+        {isResults && update.providerName ? ` Verified link from ${update.providerName}.` : ""}
+      </p>
+      <div className="mt-auto flex items-center justify-between gap-3 pt-5">
+        <span className="inline-flex min-w-0 items-center gap-1.5 text-xs text-subtle">
+          <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          <span className="truncate">{homeRegionLabel(update)}</span>
+        </span>
+        <Link
+          to="/races/$slug"
+          params={{ slug: update.eventSlug }}
+          className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-accent no-underline hover:underline"
+        >
+          Race page <ArrowRight className="h-4 w-4" />
+        </Link>
+      </div>
+    </article>
   );
 }
 
