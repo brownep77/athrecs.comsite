@@ -5,6 +5,14 @@ import {
   richRollEditions,
   richRollSeries,
 } from "./rich-roll.ts";
+import {
+  publicFigureWave2Batch1Athletes,
+  publicFigureWave2Batch2Athletes,
+  publicFigureWave2Batch3Athletes,
+  publicFigureWave2Editions,
+  publicFigureWave2Results,
+  publicFigureWave2Series,
+} from "./public-figures-wave-2.ts";
 
 const CHECKED_AT = "2026-08-22";
 
@@ -386,19 +394,25 @@ const highTractionPublicFigureResults: ResultSeed[] = [
 export const publicFigureAthletes: AthleteSeed[] = [
   ...richRollAthletes,
   ...highTractionPublicFigureAthletes,
+  ...publicFigureWave2Batch1Athletes,
+  ...publicFigureWave2Batch2Athletes,
+  ...publicFigureWave2Batch3Athletes,
 ];
 
 export const publicFigureSeries: Series[] = [
   ...(richRollSeries as Series[]),
   ...highTractionPublicFigureSeries,
+  ...publicFigureWave2Series,
 ];
 
 export const publicFigureEditions: Edition[] = [
   ...(richRollEditions as Edition[]),
   ...highTractionPublicFigureEditions,
+  ...publicFigureWave2Editions,
 ];
 
 export const publicFigureResults: ResultSeed[] = [
   ...richRollResults,
   ...highTractionPublicFigureResults,
+  ...publicFigureWave2Results,
 ];
