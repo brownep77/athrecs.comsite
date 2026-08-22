@@ -19,7 +19,7 @@ import {
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 const SEED_VERSION = "athrecs-uk-ireland-5k-very-pink-v241";
-const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-2-v1";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v2";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
