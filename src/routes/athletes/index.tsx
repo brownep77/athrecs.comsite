@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { listAthletes } from "@/lib/athrecs/api";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/athletes/")({
   loader: () => listAthletes({ data: {} }),
@@ -30,14 +31,21 @@ function AthletesPage() {
   return (
     <div className="space-y-5">
       <header className="space-y-2">
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Athletes</h1>
-          <Link
-            to="/clubs"
-            className="text-sm font-medium text-accent no-underline hover:underline"
-          >
-            Clubs →
-          </Link>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Athletes</h1>
+            <Link
+              to="/clubs"
+              className="text-sm font-medium text-accent no-underline hover:underline"
+            >
+              Clubs →
+            </Link>
+          </div>
+          <Button asChild variant="secondary">
+            <Link to="/claim-results" search={{ resultId: undefined }}>
+              Claim my results
+            </Link>
+          </Button>
         </div>
         <p className="text-sm text-muted">
           Athlete profiles linked to clubs and source-checked race results.

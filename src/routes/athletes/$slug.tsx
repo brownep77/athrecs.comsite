@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, MapPin } from "lucide-react";
+import { ArrowLeft, BadgeCheck, MapPin } from "lucide-react";
 import { getAthleteBySlug } from "@/lib/athrecs/api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { athletes as athleteCatalogue } from "@/data/athletes";
@@ -153,6 +153,12 @@ function AthletePage() {
           {locationLabel}
         </p>
         <div className="flex flex-wrap gap-2">
+          {athlete.is_claimed ? (
+            <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
+              <BadgeCheck className="mr-1 size-3.5" aria-hidden="true" />
+              Verified athlete
+            </Badge>
+          ) : null}
           {isPublicFigure && <Badge variant="accent">Public figure</Badge>}
           <Badge variant="outline">
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
@@ -293,18 +299,25 @@ function AthletePage() {
                     {formatDuration(r.finish_time_seconds)}
                   </p>
                 </Link>
-                {r.source_url && (
-                  <a
-                    href={r.source_url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-1 inline-flex min-h-11 items-center text-xs font-medium text-accent no-underline hover:underline"
-                  >
-                    {r.result_source === "official" || r.result_source === "official organiser"
-                      ? "Official result ↗"
-                      : "Source-checked result ↗"}
-                  </a>
-                )}
+                <div className="mt-1 flex flex-wrap items-center gap-2">
+                  {r.source_url && (
+                    <a
+                      href={r.source_url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex min-h-11 items-center text-xs font-medium text-accent no-underline hover:underline"
+                    >
+                      {r.result_source === "official" || r.result_source === "official organiser"
+                        ? "Official result ↗"
+                        : "Source-checked result ↗"}
+                    </a>
+                  )}
+                  <Button asChild size="sm" variant="secondary">
+                    <Link to="/claim-results" search={{ resultId: r.id }}>
+                      Claim this result
+                    </Link>
+                  </Button>
+                </div>
               </div>
             ))}
           </div>

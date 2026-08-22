@@ -693,11 +693,19 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       profile_type: string;
       profile_roles: string;
       profile_source_checked_at: string | null;
+      is_claimed: boolean;
       club: string | null;
       club_slug: string | null;
     }>`
       select
-        a.*, c.name as club, c.slug as club_slug
+        a.*,
+        c.name as club,
+        c.slug as club_slug,
+        exists (
+          select 1
+          from athlete_account_links account_link
+          where account_link.athlete_id = a.id and account_link.status = 'active'
+        ) as is_claimed
       from athletes a
       left join clubs c on c.id = a.club_id
       where a.slug = ${slug}

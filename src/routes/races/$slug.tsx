@@ -514,6 +514,7 @@ export function RacePageContent({
                       <th className="px-3 py-2.5">Club</th>
                       <th className="px-3 py-2.5">Cat</th>
                       <th className="px-3 py-2.5">Time</th>
+                      <th className="px-3 py-2.5">Claim</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -535,6 +536,15 @@ export function RacePageContent({
                         <td className="px-3 py-2.5 text-muted">{r.category ?? "—"}</td>
                         <td className="px-3 py-2.5 font-medium tabular">
                           {formatDuration(r.finish_time_seconds)}
+                        </td>
+                        <td className="px-3 py-2.5">
+                          <Link
+                            to="/claim-results"
+                            search={{ resultId: r.id }}
+                            className="inline-flex min-h-10 items-center text-xs font-medium text-accent no-underline hover:underline"
+                          >
+                            Claim
+                          </Link>
                         </td>
                       </tr>
                     ))}
