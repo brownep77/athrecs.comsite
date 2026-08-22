@@ -1,10 +1,11 @@
 import { Fragment } from "react";
-import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { CalendarDays, Home, List, Users, UsersRound } from "lucide-react";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import {
   COUNTRY_SITES,
   copyForLanguage,
+  countryHomePath,
   countrySiteFromSlug,
   isSiteLanguage,
   type CountrySite,
@@ -182,8 +183,6 @@ function CountrySelector({
   localized: LocalizedShell;
   compact?: boolean;
 }) {
-  const navigate = useNavigate();
-
   return (
     <select
       aria-label="Select your country"
@@ -191,13 +190,10 @@ function CountrySelector({
       onChange={(event) => {
         const nextSite = countrySiteFromSlug(event.target.value);
         if (!nextSite) {
-          void navigate({ to: "/" });
+          window.location.assign("/");
           return;
         }
-        void navigate({
-          to: "/$language/$country",
-          params: { language: nextSite.defaultLanguage, country: nextSite.slug },
-        });
+        window.location.assign(countryHomePath(nextSite));
       }}
       className={cn(
         "rounded-md border border-border bg-surface font-medium text-fg outline-none focus:ring-2 focus:ring-accent/30",
