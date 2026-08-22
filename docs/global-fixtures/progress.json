@@ -191,6 +191,49 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-22"
+    },
+    {
+      "id": "global-013",
+      "status": "verified",
+      "source_ids": [
+        "us_road_running"
+      ],
+      "regions": [
+        "USA"
+      ],
+      "countries": [
+        "United States"
+      ],
+      "series_slugs": [
+        "medal-madness-vancouver-wa",
+        "medal-madness-midlothian-va",
+        "medal-madness-bettendorf-ia",
+        "medal-madness-katy-tx",
+        "medal-madness-panama-city-beach-fl",
+        "medal-madness-melbourne-fl",
+        "medal-madness-york-pa",
+        "medal-madness-kansas-city-mo",
+        "medal-madness-jackson-tn",
+        "medal-madness-concord-nc",
+        "medal-madness-plant-city-fl",
+        "medal-madness-deer-park-tx",
+        "medal-madness-raleigh-nc",
+        "medal-madness-montgomery-al",
+        "medal-madness-danville-ky",
+        "medal-madness-bowling-green-ky",
+        "medal-madness-slidell-la",
+        "medal-madness-debary-fl",
+        "medal-madness-longview-tx",
+        "medal-madness-naples-fl",
+        "medal-madness-charlotte-nc",
+        "medal-madness-beaumont-tx",
+        "medal-madness-biglerville-pa",
+        "medal-madness-bel-air-md",
+        "medal-madness-hickory-nc"
+      ],
+      "events_imported": 25,
+      "editions_imported": 25,
+      "verified_at": "2026-08-22"
     }
   ],
   "source_progress": [
@@ -223,6 +266,12 @@
       "status": "in_progress",
       "events_imported": 6,
       "last_checkpoint": "global-012"
+    },
+    {
+      "source_id": "us_road_running",
+      "status": "manual_only",
+      "events_imported": 25,
+      "last_checkpoint": "global-013"
     }
   ]
 }

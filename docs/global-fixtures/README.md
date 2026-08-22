@@ -146,3 +146,20 @@ checkout pages for the road races and the organiser-linked MileSplit registratio
 Wingfoot. All three canonical names, locations and dates were checked against the full
 ATHRECS catalogue before import; no matching series or edition was found. Participant
 result rows remain excluded and the source remains `in_progress`.
+
+## Checkpoint global-013
+
+Twenty-five organiser-verified Medal Madness fixtures add broad United States coverage across
+Alabama, Florida, Iowa, Kentucky, Louisiana, Maryland, Missouri, North Carolina,
+Pennsylvania, Tennessee, Texas, Virginia and Washington. The races take place on 29 August
+and 5 September 2026, with 5K, 10K and half-marathon combinations at local parks and
+paved trails.
+
+Each edition uses its official US Road Running event page for the published date, start
+time, venue and distances, and a direct matching RunSignup registration route as the
+primary entry URL. Entry is currently published from $30 plus signup fee. All 25
+city-specific canonical names and slugs were checked against the full ATHRECS catalogue;
+no matching series or edition was found. One postponed candidate was excluded before
+import. Only factual fixture metadata is retained: no organiser prose, media or participant
+result rows are copied. The existing US Road Running registry row remains held for
+automated crawling, so this checkpoint is recorded as manual-only verification.
