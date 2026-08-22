@@ -21,7 +21,7 @@ import { triathlonIrelandClubs } from "./clubs-triathlon-ireland";
 import { welshAthleticsClubs } from "./clubs-welsh-athletics";
 import { auditedClubAdditions, clubEnrichment, clubSlugAliases } from "./club-enrichment";
 import { athletes as athletesBase } from "./athletes";
-import { publicFigureAthletes, richRollEditions, richRollSeries } from "./rich-roll";
+import { publicFigureAthletes, publicFigureEditions, publicFigureSeries } from "./public-figures";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
 import { athletesRn2025B2 } from "./athletes-rn2025-b2";
 import { athletesRn2025B3 } from "./athletes-rn2025-b3";
@@ -90,6 +90,10 @@ import {
   verifiedHalfToTwentyMileEditions,
   verifiedHalfToTwentyMileSeries,
 } from "./half-to-20-mile-races-uk-ireland";
+import {
+  dailyHalfTenMileEditions,
+  dailyHalfTenMileSeries,
+} from "./half-ten-mile-races-uk-ireland-daily-followup";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -161,6 +165,7 @@ for (const series of [
   ...(verifiedTenMileSeries as Series[]),
   ...(verifiedHalfMarathonFollowupSeries as Series[]),
   ...(verifiedHalfToTwentyMileSeries as Series[]),
+  ...(dailyHalfTenMileSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
@@ -171,7 +176,7 @@ for (const series of [
   ...(mrdIntlMarathonSeries as Series[]),
   ...(comradesSeries as Series[]),
   ...(twoOceansSeries as Series[]),
-  ...(richRollSeries as Series[]),
+  ...(publicFigureSeries as Series[]),
 ]) {
   if (eventSlugAliases[series.slug]) continue;
   const key = normName(seriesOverrides[series.slug]?.name ?? series.name);
@@ -210,6 +215,9 @@ const mergedEditions = [
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(verifiedHalfToTwentyMileEditions as Edition[]),
+  ...(dailyHalfTenMileEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
@@ -219,7 +227,7 @@ const mergedEditions = [
   ...(mrdIntlMarathonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(comradesEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(twoOceansEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
-  ...(richRollEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(publicFigureEditions as Edition[]),
 ];
 
 export const editions: Edition[] = (() => {

@@ -14,6 +14,7 @@
     "preview": "vite preview --host 0.0.0.0 --port 8080",
     "typecheck": "tsc --noEmit",
     "verify:catalogue": "node --experimental-strip-types scripts/verify-catalogue.mjs",
+    "verify:public-figures": "node --experimental-strip-types scripts/verify-public-figures.mjs",
     "verify:all-sport-fixtures": "node --experimental-strip-types scripts/verify-all-sport-fixtures.mjs",
     "verify:fixture-duplicates": "node --experimental-strip-types scripts/verify-fixture-duplicates.mjs",
     "verify:mrd-marathons": "node --experimental-strip-types scripts/verify-mrd-marathons.mjs",
@@ -40,6 +41,7 @@
     "verify:uk-ireland-5k-daily": "node --experimental-strip-types scripts/verify-uk-ireland-5k-daily.mjs",
     "verify:uk-ireland-5-mile-workflow": "node --experimental-strip-types scripts/verify-uk-ireland-5-mile-workflow.mjs",
     "verify:uk-ireland-10-mile-workflow": "node --experimental-strip-types scripts/verify-uk-ireland-10-mile-workflow.mjs",
+    "verify:uk-ireland-half-ten-mile-daily": "node --experimental-strip-types scripts/verify-uk-ireland-half-ten-mile-daily-followup.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
   },

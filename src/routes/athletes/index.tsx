@@ -20,6 +20,12 @@ function AthletesPage() {
     staleTime: 30_000,
     refetchOnMount: false,
   });
+  const publicFigures = !q
+    ? data.filter((athlete) => athlete.profile_type === "Public figure")
+    : [];
+  const listedAthletes = publicFigures.length
+    ? data.filter((athlete) => athlete.profile_type !== "Public figure")
+    : data;
 
   return (
     <div className="space-y-5">
@@ -48,10 +54,39 @@ function AthletesPage() {
         />
       </label>
 
+      {publicFigures.length > 0 && (
+        <section className="space-y-3">
+          <div>
+            <h2 className="font-display text-lg font-semibold text-fg">Public figures</h2>
+            <p className="text-xs text-muted">
+              Source-checked race records for well-known runners and endurance participants.
+            </p>
+          </div>
+          <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">
+            {publicFigures.map((athlete) => (
+              <Link
+                key={athlete.id}
+                to="/athletes/$slug"
+                params={{ slug: athlete.slug }}
+                className="rounded-xl border border-accent/30 bg-surface px-3.5 py-3 no-underline shadow-card hover:border-accent"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-semibold text-fg">{athlete.display_name}</p>
+                    <p className="mt-0.5 text-xs text-muted">{athlete.profile_roles}</p>
+                  </div>
+                  <Badge variant="accent">{athlete.result_count} results</Badge>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <p className="text-sm text-subtle">{data.length} athletes</p>
 
       <div className="grid gap-2">
-        {data.map((a) => (
+        {listedAthletes.map((a) => (
           <Link
             key={a.id}
             to="/athletes/$slug"

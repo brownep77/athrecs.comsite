@@ -10,10 +10,10 @@ import {
   clubSlugAliases,
 } from "@/data/catalogue";
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
-import { publicFigureAthletes, publicFigureResults } from "@/data/rich-roll";
+import { publicFigureAthletes, publicFigureResults } from "@/data/public-figures";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v234";
+const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v236";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -1065,9 +1065,7 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       profile_source_checked_at = excluded.profile_source_checked_at`,
   );
 
-  const athleteRows = await sql<{ id: number; slug: string }>`
-    select id, slug from athletes where slug = 'rich-roll'
-  `;
+  const athleteRows = await sql<{ id: number; slug: string }>`select id, slug from athletes`;
   const athleteIds = new Map(athleteRows.map((row) => [row.slug, row.id]));
   const editionRows = await sql<{
     id: number;
@@ -1078,7 +1076,6 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
     select ed.id, e.slug as event_slug, ed.event_date::text as event_date, ed.distance_code
     from editions ed
     join events e on e.id = ed.event_id
-    where e.slug in ('ultraman-world-championship', 'otillo-swimrun-world-championship')
   `;
   const editionIds = new Map(
     editionRows.map((row) => [`${row.event_slug}|${row.event_date}|${row.distance_code}`, row.id]),
