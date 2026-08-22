@@ -6,12 +6,12 @@ import {
   effectiveStatus,
   formatRaceDateShort,
   formatStartTime,
-  statusLabel,
 } from "@/lib/athrecs/format";
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
+import { ListingEntry } from "@/components/races/ListingEntry";
 import { sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import type { VenueDetails } from "@/data/venue-details";
@@ -31,6 +31,8 @@ type CardModel = {
   distance_code: string;
   status: EntryStatus;
   start_time: string | null;
+  entry_url?: string | null;
+  event_website?: string | null;
   sport: string;
   surface?: string;
   venue: VenueDetails;
@@ -47,6 +49,8 @@ const FLAG_EXAMPLES: CardModel[] = [
     distance_code: "Half",
     status: "Open",
     start_time: "10:40",
+    entry_url: "https://runabc.co.uk/great-north-run",
+    event_website: "https://runabc.co.uk/great-north-run",
     sport: "Running",
     venue: {
       nation: "England",
@@ -54,6 +58,7 @@ const FLAG_EXAMPLES: CardModel[] = [
       parking: "Town Moor / Quayside public car parks — confirm race-day closures",
       busStop: "Central Station / Quayside buses — check Nexus",
       trainStation: "Newcastle station (0.8 km, NCL)",
+      airport: "Newcastle International Airport",
     },
   },
   {
@@ -64,6 +69,8 @@ const FLAG_EXAMPLES: CardModel[] = [
     distance_code: "Marathon",
     status: "Open",
     start_time: "09:00",
+    entry_url: "https://www.dublinmarathon.ie/",
+    event_website: "https://www.dublinmarathon.ie/",
     sport: "Running",
     venue: {
       nation: "Ireland",
@@ -71,6 +78,7 @@ const FLAG_EXAMPLES: CardModel[] = [
       parking: "City-centre car parks — expect closures on race morning",
       busStop: "Dublin Bus / Luas to St Stephen’s Green",
       trainStation: "Dublin Pearse / Connolly",
+      airport: "Dublin Airport",
     },
   },
   {
@@ -81,6 +89,8 @@ const FLAG_EXAMPLES: CardModel[] = [
     distance_code: "Marathon",
     status: "Open",
     start_time: "09:30",
+    entry_url: "https://runabc.co.uk/medoc-marathon",
+    event_website: "https://runabc.co.uk/medoc-marathon",
     sport: "Running",
     venue: {
       nation: "France",
@@ -88,6 +98,7 @@ const FLAG_EXAMPLES: CardModel[] = [
       parking: "Pauillac town and château parking — confirm race instructions",
       busStop: "Local buses to Pauillac — check TransGironde",
       trainStation: "Pauillac station",
+      airport: "Bordeaux–Mérignac Airport",
     },
   },
 ];
@@ -193,6 +204,8 @@ function CalendarPage() {
                   distance_code: ed.distance_code,
                   status: ed.status as EntryStatus,
                   start_time: ed.start_time,
+                  entry_url: ed.entry_url,
+                  event_website: ed.event_website,
                   sport: ed.sport,
                   surface: ed.surface,
                   venue: ed.venue,
@@ -256,6 +269,8 @@ function CalendarPage() {
                   distance_code: ed.distance_code,
                   status: ed.status as EntryStatus,
                   start_time: ed.start_time,
+                  entry_url: ed.entry_url,
+                  event_website: ed.event_website,
                   sport: ed.sport,
                   surface: ed.surface,
                   venue: ed.venue,
@@ -284,11 +299,7 @@ function EventCard({ ed }: { ed: CardModel }) {
   const distances = sanitizeDistances(ed.event_name, splitDistanceLabels(ed.distance_code));
 
   return (
-    <Link
-      to="/races/$slug"
-      params={{ slug: ed.event_slug }}
-      className="block rounded-xl border border-border bg-surface p-3.5 no-underline shadow-card hover:border-border-strong"
-    >
+    <article className="rounded-xl border border-border bg-surface p-3.5 shadow-card transition-colors hover:border-border-strong">
       <div className="min-w-0 flex-1 space-y-2">
         <div className="flex flex-wrap items-center gap-1.5">
           <NationBadge nation={nation} />
@@ -299,13 +310,14 @@ function EventCard({ ed }: { ed: CardModel }) {
               {formatDistanceWithUnits(code)}
             </Badge>
           ))}
-          <Badge variant={st === "Finished" ? "default" : "solid"}>
-            {statusLabel(st)}
-          </Badge>
         </div>
-        <p className="font-display text-base font-semibold leading-snug text-fg">
+        <Link
+          to="/races/$slug"
+          params={{ slug: ed.event_slug }}
+          className="block font-display text-base font-semibold leading-snug text-fg no-underline hover:text-accent"
+        >
           {ed.event_name}
-        </p>
+        </Link>
         <p className="text-sm font-medium text-fg">
           {formatRaceDateShort(ed.event_date)}
           {start ? (
@@ -314,8 +326,9 @@ function EventCard({ ed }: { ed: CardModel }) {
             <span className="text-subtle"> · Start time TBC</span>
           )}
         </p>
+        <ListingEntry status={st} entryUrl={ed.entry_url} officialWebsite={ed.event_website} />
         <TravelFacts venue={venue} startTime={start} />
       </div>
-    </Link>
+    </article>
   );
 }

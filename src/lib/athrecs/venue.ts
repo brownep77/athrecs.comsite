@@ -68,6 +68,7 @@ export function venueForEvent(input: {
       stored?.busStop ??
       (input.city ? `Local buses serving ${input.city} — check Traveline` : null),
     trainStation: stored?.trainStation ?? null,
+    airport: stored?.airport ?? null,
   };
 }
 

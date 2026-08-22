@@ -6,7 +6,6 @@ import {
   formatRaceDateShort,
   formatRaceWeekday,
   formatStartTime,
-  statusLabel,
 } from "@/lib/athrecs/format";
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
@@ -14,6 +13,7 @@ import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { Badge } from "@/components/ui/badge";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
+import { ListingEntry } from "@/components/races/ListingEntry";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 
 function SportIcon({ sport }: { sport: Sport }) {
@@ -91,11 +91,6 @@ export function RaceCard({
                 {formatDistanceWithUnits(d)}
               </Badge>
             ))}
-            {focusStatus && (
-              <Badge variant={focusStatus === "Finished" ? "default" : "solid"}>
-                {statusLabel(focusStatus)}
-              </Badge>
-            )}
             <RaceGroupBadges groups={race.groups} />
           </div>
           {localized ? (
@@ -132,6 +127,11 @@ export function RaceCard({
                 : "No editions yet"}
             </p>
           )}
+          <ListingEntry
+            status={focusStatus}
+            entryUrl={race.next_entry_url}
+            officialWebsite={race.website}
+          />
           <TravelFacts venue={venue} startTime={startLabel} />
         </div>
       </div>
