@@ -8,7 +8,7 @@ import {
   parseStaffEmails,
 } from "./staff-config";
 
-const GOOGLE_PROVIDER_ID = "grok-google";
+const GOOGLE_PROVIDER_IDS = ["google", "grok-google"] as const;
 
 export type StaffAccessStatus = {
   allowedHost: boolean;
@@ -63,10 +63,13 @@ async function hasGoogleIdentity(user: VerifiedUser): Promise<boolean> {
     select "providerId" as provider_id
     from "account"
     where "userId" = ${user.id}
-      and "providerId" = ${GOOGLE_PROVIDER_ID}
+      and (
+        "providerId" = ${GOOGLE_PROVIDER_IDS[0]}
+        or "providerId" = ${GOOGLE_PROVIDER_IDS[1]}
+      )
     limit 1
   `;
-  return rows[0]?.provider_id === GOOGLE_PROVIDER_ID;
+  return GOOGLE_PROVIDER_IDS.some((providerId) => providerId === rows[0]?.provider_id);
 }
 
 /** Safe, non-throwing access state for the staff login screen. */

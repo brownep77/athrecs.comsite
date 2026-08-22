@@ -1,19 +1,19 @@
 /**
  * Self-hosted Better Auth for THIS app (server-only).
  *
- * Pre-wired for live preview + deploy — do not rewrite this file. To enable
- * local email/password, flip the flag in `./email-password` only (see auth skill).
+ * Pre-wired for live preview + deploy. To enable local email/password, flip the
+ * flag in `./email-password` only (see auth skill).
  *
  * The app runs its own Better Auth at `/api/auth/*`, so the session cookie stays
- * on this app's own origin. Sign-in federates to the shared **Grok auth broker**
- * (`GROK_AUTH_ISSUER`) via the `genericOAuth` plugin — the broker brokers the
- * upstream sign-in methods (Google, X, …) and holds their shared secrets; this
- * app only holds its own client id/secret and names the upstream it wants via
- * each provider's `idp` hint.
+ * on this app's own origin. Permanent deployments use Better Auth's direct
+ * Google provider. Sandbox previews federate through the shared **Grok auth
+ * broker** (`GROK_AUTH_ISSUER`) because its preview client is deliberately
+ * restricted to `*.grok-sandbox.com` callbacks.
  *
  * Tri-mode:
- *   - Deployed: the deployer injects a per-app `GROK_AUTH_*` + `BETTER_AUTH_URL`
- *     + `DATABASE_URL`, so real federated auth is persisted in Postgres.
+ *   - Deployed: the deployer injects `GOOGLE_CLIENT_ID`,
+ *     `GOOGLE_CLIENT_SECRET`, `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET` and
+ *     `DATABASE_URL`, so Google auth is persisted in Postgres.
  *   - Sandbox live preview: no injection -> falls back to the shared **preview
  *     client** (`./preview`) and derives the preview's `https://*.grok-sandbox.com`
  *     origin from the request, so real sign-in works (no demo users). Sessions
@@ -72,24 +72,41 @@ const env = (key: string): string | undefined => {
 // provisions auth; set it to "false" to force auth off everywhere (dev user).
 const authDisabled = env("VITE_AUTH_ENABLED") === "false";
 
+// A permanent deployment owns its Google OAuth client and callback. Do not use
+// the baked preview broker client there: it only permits grok-sandbox callbacks
+// and its authorization server correctly rejects Vercel/custom-domain URIs.
+const googleClientId = env("GOOGLE_CLIENT_ID");
+const googleClientSecret = env("GOOGLE_CLIENT_SECRET");
+const directGoogleConfigured =
+  !authDisabled && Boolean(googleClientId && googleClientSecret);
+
+// This app's own Better Auth origin. When deployed the deployer injects the
+// public URL. In the sandbox live preview there's no fixed URL (each preview gets
+// a dynamic `*.grok-sandbox.com` host), so we hand Better Auth a dynamic baseURL.
+const explicitBaseURL = env("BETTER_AUTH_URL");
+
 // Broker federation creds: the deployer injects a per-app client when deployed;
 // otherwise fall back to the shared live-preview client, which the broker accepts
 // for any `*.grok-sandbox.com` callback (see `./preview`).
 const grokIssuer = env("GROK_AUTH_ISSUER") ?? GROK_ISSUER_DEFAULT;
-const grokClientId = env("GROK_AUTH_CLIENT_ID") ?? PREVIEW_CLIENT_ID;
-const grokClientSecret = env("GROK_AUTH_CLIENT_SECRET") ?? PREVIEW_CLIENT_SECRET;
+const configuredGrokClientId = env("GROK_AUTH_CLIENT_ID");
+const configuredGrokClientSecret = env("GROK_AUTH_CLIENT_SECRET");
+const grokClientId = configuredGrokClientId ?? PREVIEW_CLIENT_ID;
+const grokClientSecret = configuredGrokClientSecret ?? PREVIEW_CLIENT_SECRET;
+const brokerConfigured =
+  !authDisabled &&
+  ((!explicitBaseURL && Boolean(grokClientId && grokClientSecret)) ||
+    Boolean(configuredGrokClientId && configuredGrokClientSecret));
 
 /** True when federated sign-in is active (real auth is enforced). */
 export const authConfigured =
-  !authDisabled && Boolean(grokClientId && grokClientSecret);
+  directGoogleConfigured || brokerConfigured;
 
-// This app's own Better Auth origin. When deployed the deployer injects the
-// public URL. In the sandbox live preview there's no fixed URL (each preview gets
-// a dynamic `*.grok-sandbox.com` host), so we hand Better Auth a dynamic baseURL:
+// In the sandbox live preview there's no fixed URL (each preview gets a dynamic
+// `*.grok-sandbox.com` host), so we hand Better Auth a dynamic baseURL:
 // it derives the origin per-request from the (proxied) host, validated against the
 // preview allowlist, which makes the OAuth `redirect_uri` the concrete preview URL
 // the broker's preview client accepts.
-const explicitBaseURL = env("BETTER_AUTH_URL");
 // Explicit `string[]` (not a readonly tuple) — Better Auth's DynamicBaseURLConfig
 // requires a mutable `allowedHosts: string[]`.
 const previewAllowedHosts: string[] = [...PREVIEW_ALLOWED_HOSTS];
@@ -147,7 +164,7 @@ export const SESSION_TOKEN_COOKIE = "__Host-grok-auth.session_token";
 
 // Built separately so the `betterAuth({...})` call stays easy to edit without
 // breaking brackets (models often trip on the conditional plugin spread).
-const grokOAuthPlugin = authConfigured
+const grokOAuthPlugin = brokerConfigured
   ? genericOAuth({
       config: GROK_PROVIDERS.map(({ providerId, idp }) => ({
         providerId,
@@ -181,6 +198,20 @@ export const auth = betterAuth({
   // local loopback variants, or clients get "Invalid origin".
   trustedOrigins,
 
+  // Direct Google OAuth for permanent deployments. With BETTER_AUTH_URL set to
+  // the public origin, Better Auth uses `/api/auth/callback/google` on that host.
+  ...(directGoogleConfigured
+    ? {
+        socialProviders: {
+          google: {
+            clientId: googleClientId as string,
+            clientSecret: googleClientSecret as string,
+            prompt: "select_account",
+          },
+        },
+      }
+    : {}),
+
   // Encrypt broker-issued OAuth tokens at rest, and treat the broker's upstreams
   // as trusted first-party identities. The broker owns identity and X emails are
   // synthetic/unverified, so WITHOUT this a login can fail with
@@ -191,7 +222,7 @@ export const auth = betterAuth({
     encryptOAuthTokens: true,
     accountLinking: {
       enabled: true,
-      trustedProviders: GROK_PROVIDERS.map((p) => p.providerId),
+      trustedProviders: ["google", ...GROK_PROVIDERS.map((p) => p.providerId)],
       // X's synthetic email is never "verified", so don't gate linking on the
       // local user's email-verified state.
       requireLocalEmailVerified: false,
