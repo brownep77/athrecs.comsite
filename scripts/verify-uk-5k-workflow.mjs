@@ -1,13 +1,19 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 
-const [fiveKData, { parkrunSeries }, { runabcSeries }, { worldAthleticsSeries }] =
-  await Promise.all([
-    import("../src/data/uk-5k-races.ts"),
-    import("../src/data/parkrun-uk.ts"),
-    import("../src/data/runabc.ts"),
-    import("../src/data/world-athletics.ts"),
-  ]);
+const [
+  fiveKData,
+  continuedFiveKData,
+  { parkrunSeries },
+  { runabcSeries },
+  { worldAthleticsSeries },
+] = await Promise.all([
+  import("../src/data/uk-5k-races.ts"),
+  import("../src/data/five-k-races-uk-ireland-next.ts"),
+  import("../src/data/parkrun-uk.ts"),
+  import("../src/data/runabc.ts"),
+  import("../src/data/world-athletics.ts"),
+]);
 
 const {
   ukFiveKEditions,
@@ -16,27 +22,47 @@ const {
   ukFiveKSeries,
   ukFiveKSeriesOverrides,
 } = fiveKData;
+const { continuedFiveKEditions, continuedFiveKResearchQueue, continuedFiveKSeries } =
+  continuedFiveKData;
+
+const allFiveKSeries = [...ukFiveKSeries, ...continuedFiveKSeries];
+const allFiveKEditions = [...ukFiveKEditions, ...continuedFiveKEditions];
+const allFiveKResearchQueue = [...ukFiveKResearchQueue, ...continuedFiveKResearchQueue];
 
 const TODAY = "2026-08-22";
-const HORIZON = "2027-09-30";
-const UK_COUNTRIES = new Set(["England", "Northern Ireland", "Scotland", "Wales"]);
+const HORIZON = "2027-12-31";
+const COVERED_COUNTRIES = new Set(["England", "Ireland", "Northern Ireland", "Scotland", "Wales"]);
 const existingSeriesEditionSlugs = new Set(["wendover-woods-running-festival-august"]);
 
 assert(ukFiveKSeries.length >= 55, "The verified UK 5K release is unexpectedly small");
 assert(ukFiveKEditions.length > ukFiveKSeries.length, "Series with multiple dates were lost");
+assert.equal(continuedFiveKSeries.length, 55, "The continued UK and Ireland release is incomplete");
+assert.equal(
+  continuedFiveKEditions.length,
+  continuedFiveKSeries.length,
+  "Each continued-release series must have one dated 5K edition",
+);
+assert.deepEqual(
+  new Set(continuedFiveKSeries.map((series) => series.surface)),
+  new Set(["Road", "Track", "Mixed", "Beach"]),
+  "The continued release lost one of its verified surface types",
+);
 
 const slugs = new Set();
-for (const series of ukFiveKSeries) {
+for (const series of allFiveKSeries) {
   assert(!slugs.has(series.slug), `Duplicate UK 5K slug: ${series.slug}`);
   slugs.add(series.slug);
   assert(series.distances.includes("5K"), `${series.slug} does not advertise a 5K distance`);
-  assert(UK_COUNTRIES.has(series.country), `${series.slug} has non-UK country ${series.country}`);
+  assert(
+    COVERED_COUNTRIES.has(series.country),
+    `${series.slug} has an out-of-scope country ${series.country}`,
+  );
   assert.match(series.website, /^https:\/\//, `${series.slug} website must use HTTPS`);
   assert.match(series.source_url ?? "", /^https:\/\//, `${series.slug} source must use HTTPS`);
 }
 
 const editionKeys = new Set();
-for (const edition of ukFiveKEditions) {
+for (const edition of allFiveKEditions) {
   const key = `${edition.seriesSlug}|${edition.date}`;
   assert(!editionKeys.has(key), `Duplicate UK 5K edition: ${key}`);
   editionKeys.add(key);
@@ -85,12 +111,24 @@ assert(
   "The UK 5K dataset is not imported by the catalogue",
 );
 assert(
+  catalogueSource.includes('from "./five-k-races-uk-ireland-next"'),
+  "The continued UK and Ireland 5K dataset is not imported by the catalogue",
+);
+assert(
   catalogueSource.includes("...(ukFiveKSeries as Series[])"),
   "The UK 5K series are not merged into the catalogue",
 );
 assert(
+  catalogueSource.includes("...(continuedFiveKSeries as Series[])"),
+  "The continued UK and Ireland 5K series are not merged into the catalogue",
+);
+assert(
   catalogueSource.includes("...(ukFiveKEditions as Edition[])"),
   "The UK 5K editions are not merged into the catalogue",
+);
+assert(
+  catalogueSource.includes("...(continuedFiveKEditions as Edition[]).filter"),
+  "The continued UK and Ireland 5K editions are not merged into the catalogue",
 );
 assert(
   entryOptionsSource.includes("...ukFiveKEditionOverrides") &&
@@ -98,8 +136,8 @@ assert(
   "The UK 5K corrections are not merged into entry options",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-5k-v225"'),
-  "The persistent catalogue seed version was not advanced for the UK 5K release",
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-v226"'),
+  "The persistent catalogue seed version was not advanced for the continued 5K release",
 );
 
 const existingSourceSlugs = new Set(
@@ -120,6 +158,13 @@ const sentinels = [
   "evensplits-leeds-5k-series-2026",
   "runthrough-victoria-park-may-2027",
   "runthrough-chepstow-august-2027",
+  "jerry-kiernan-5k-2026",
+  "dune-run-bundoran-5k-2026",
+  "rock-the-lough-5k-2026",
+  "tom-brennan-memorial-5k-2027",
+  "brandon-bay-run-5k-2027",
+  "runthrough-goodwood-running-gp-october-2027",
+  "runthrough-aintree-december-2027",
 ];
 for (const slug of sentinels) {
   assert(slugs.has(slug), `Coverage sentinel is missing: ${slug}`);
@@ -140,7 +185,7 @@ assert.equal(
 );
 
 const queuedSlugs = new Set();
-for (const candidate of ukFiveKResearchQueue) {
+for (const candidate of allFiveKResearchQueue) {
   assert(!queuedSlugs.has(candidate.slug), `Duplicate research candidate: ${candidate.slug}`);
   queuedSlugs.add(candidate.slug);
   assert(!slugs.has(candidate.slug), `${candidate.slug} is queued and must not be published`);
@@ -156,5 +201,5 @@ assert(
 );
 
 console.log(
-  `UK 5K workflow verified: ${ukFiveKSeries.length} new series, ${ukFiveKEditions.length} editions, ${ukFiveKResearchQueue.length} held candidates, ${weeklyParkruns.length} weekly 5K parkruns preserved.`,
+  `UK and Ireland 5K workflow verified: ${allFiveKSeries.length} audited series, ${allFiveKEditions.length} editions, ${allFiveKResearchQueue.length} held candidates, ${weeklyParkruns.length} weekly 5K parkruns preserved.`,
 );
