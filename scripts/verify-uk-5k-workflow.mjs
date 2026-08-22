@@ -136,7 +136,7 @@ assert(
   "The UK 5K corrections are not merged into entry options",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-10k-followup-v229"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-marathons-v230"'),
   "The persistent catalogue seed version was not advanced for the continued 5K release",
 );
 
