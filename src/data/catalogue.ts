@@ -60,10 +60,7 @@ import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
 import { mrdIntlMarathonEditions, mrdIntlMarathonSeries } from "./mrd-marathons-intl";
 import { comradesEditions, comradesSeries } from "./comrades";
 import { twoOceansEditions, twoOceansSeries } from "./two-oceans";
-import {
-  marathonDesSablesEditions,
-  marathonDesSablesSeries,
-} from "./marathon-des-sables";
+import { marathonDesSablesEditions, marathonDesSablesSeries } from "./marathon-des-sables";
 import { editionOverrides, entryOptions, eventSlugAliases, seriesOverrides } from "./entry-options";
 import {
   raceCollectionEditions,
@@ -77,6 +74,10 @@ import { verifiedGlobalEditions, verifiedGlobalSeries } from "./verified-global-
 import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races";
 import { continuedFiveKEditions, continuedFiveKSeries } from "./five-k-races-uk-ireland-next";
 import { verifiedFiveMileEditions, verifiedFiveMileSeries } from "./five-mile-races-uk-ireland";
+import {
+  verifiedTenKFollowupEditions,
+  verifiedTenKFollowupSeries,
+} from "./ten-k-races-uk-ireland-followup";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -143,6 +144,7 @@ for (const series of [
   ...(ukFiveKSeries as Series[]),
   ...(continuedFiveKSeries as Series[]),
   ...(verifiedFiveMileSeries as Series[]),
+  ...(verifiedTenKFollowupSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
@@ -182,6 +184,9 @@ const mergedEditions = [
   ...(ukFiveKEditions as Edition[]),
   ...(continuedFiveKEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(verifiedFiveMileEditions as Edition[]),
+  ...(verifiedTenKFollowupEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
