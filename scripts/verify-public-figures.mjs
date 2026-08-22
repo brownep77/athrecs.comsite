@@ -62,8 +62,16 @@ assert(
 );
 
 const catalogueSource = readFileSync(new URL("../src/data/catalogue.ts", import.meta.url), "utf8");
+const seedSource = readFileSync(
+  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
+  "utf8",
+);
 assert.match(catalogueSource, /\.\.\.\(publicFigureSeries as Series\[\]\)/);
 assert.match(catalogueSource, /\.\.\.\(publicFigureEditions as Edition\[\]\)/);
+assert.match(seedSource, /const PUBLIC_FIGURE_SEED_VERSION =/);
+assert.match(seedSource, /public_figures_catalogue_version/);
+assert.match(seedSource, /publicFigureSeries\.map/);
+assert.match(seedSource, /publicFigureEditions\.map/);
 
 const rootRouteSource = readFileSync(new URL("../src/routes/__root.tsx", import.meta.url), "utf8");
 const homeRouteSource = readFileSync(new URL("../src/routes/index.tsx", import.meta.url), "utf8");
