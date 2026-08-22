@@ -10,9 +10,10 @@ import {
   clubSlugAliases,
 } from "@/data/catalogue";
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
+import { publicFigureAthletes, publicFigureResults } from "@/data/rich-roll";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-uk-ireland-half-to-20-mile-v232";
+const SEED_VERSION = "athrecs-rich-roll-public-figure-v233";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -226,6 +227,9 @@ async function ensureSchema(sql: Sql): Promise<void> {
       parent_athlete_id int references athletes(id) on delete set null,
       avatar_url text,
       source_url text,
+      profile_type text not null default 'Athlete',
+      profile_roles text not null default '',
+      profile_source_checked_at date,
       created_at timestamptz not null default now()
     )`,
     `create table if not exists athlete_clubs (
@@ -306,6 +310,9 @@ async function ensureSchema(sql: Sql): Promise<void> {
     `alter table athletes add column if not exists parent_athlete_id int references athletes(id) on delete set null`,
     `alter table athletes add column if not exists avatar_url text`,
     `alter table athletes add column if not exists source_url text`,
+    `alter table athletes add column if not exists profile_type text not null default 'Athlete'`,
+    `alter table athletes add column if not exists profile_roles text not null default ''`,
+    `alter table athletes add column if not exists profile_source_checked_at date`,
     `alter table results add column if not exists source_id int`,
     `alter table results add column if not exists chip_time_seconds int`,
     `alter table results add column if not exists gun_time_seconds int`,
@@ -902,6 +909,141 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   `;
 }
 
+async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
+  const clubRows = await sql<{ id: number; slug: string }>`
+    select id, slug from clubs where slug in ('unattached')
+  `;
+  const clubIds = new Map(clubRows.map((row) => [row.slug, row.id]));
+
+  await insertRows(
+    sql,
+    "athletes",
+    [
+      "slug",
+      "display_name",
+      "given_name",
+      "family_name",
+      "gender",
+      "club_id",
+      "source_club_name",
+      "city",
+      "county",
+      "country",
+      "bio",
+      "nation",
+      "continent",
+      "race_entry_name",
+      "preferred_distance",
+      "athrecs_id",
+      "source_url",
+      "profile_type",
+      "profile_roles",
+      "profile_source_checked_at",
+    ],
+    publicFigureAthletes.map((athlete) => [
+      athlete.slug,
+      athlete.display_name,
+      athlete.given_name ?? null,
+      athlete.family_name ?? null,
+      athlete.gender,
+      clubIds.get(athlete.club_slug) ?? null,
+      athlete.source_club_name ?? null,
+      athlete.city,
+      athlete.county ?? null,
+      athlete.country ?? null,
+      athlete.bio,
+      athlete.nation ?? null,
+      athlete.continent ?? null,
+      athlete.race_entry_name ?? null,
+      athlete.preferred_distance ?? null,
+      athlete.athrecs_id ?? null,
+      athlete.source_url ?? null,
+      athlete.profile_type ?? "Athlete",
+      (athlete.profile_roles ?? []).join(","),
+      athlete.profile_source_checked_at ?? null,
+    ]),
+    `on conflict (slug) do update set
+      display_name = excluded.display_name,
+      given_name = excluded.given_name,
+      family_name = excluded.family_name,
+      gender = excluded.gender,
+      club_id = excluded.club_id,
+      source_club_name = excluded.source_club_name,
+      city = excluded.city,
+      county = excluded.county,
+      country = excluded.country,
+      bio = excluded.bio,
+      nation = excluded.nation,
+      continent = excluded.continent,
+      race_entry_name = excluded.race_entry_name,
+      preferred_distance = excluded.preferred_distance,
+      athrecs_id = excluded.athrecs_id,
+      source_url = excluded.source_url,
+      profile_type = excluded.profile_type,
+      profile_roles = excluded.profile_roles,
+      profile_source_checked_at = excluded.profile_source_checked_at`,
+  );
+
+  const athleteRows = await sql<{ id: number; slug: string }>`
+    select id, slug from athletes where slug = 'rich-roll'
+  `;
+  const athleteIds = new Map(athleteRows.map((row) => [row.slug, row.id]));
+  const editionRows = await sql<{
+    id: number;
+    event_slug: string;
+    event_date: string;
+    distance_code: string;
+  }>`
+    select ed.id, e.slug as event_slug, ed.event_date::text as event_date, ed.distance_code
+    from editions ed
+    join events e on e.id = ed.event_id
+    where e.slug in ('ultraman-world-championship', 'otillo-swimrun-world-championship')
+  `;
+  const editionIds = new Map(
+    editionRows.map((row) => [`${row.event_slug}|${row.event_date}|${row.distance_code}`, row.id]),
+  );
+  const rows = publicFigureResults
+    .map((result) => [
+      editionIds.get(`${result.eventSlug}|${result.date}|${result.distance}`),
+      athleteIds.get(result.athleteSlug),
+      result.status ?? "finished",
+      result.finishTimeSeconds ?? parseTimeToSeconds(result.time),
+      result.place,
+      result.category ?? null,
+      result.ageOnDay ?? null,
+      result.resultSource ?? "official",
+      result.source,
+    ])
+    .filter((row) => row[0] != null && row[1] != null);
+  if (rows.length !== publicFigureResults.length) {
+    throw new Error("Public figure results reference a missing athlete or edition");
+  }
+  await insertRows(
+    sql,
+    "results",
+    [
+      "edition_id",
+      "athlete_id",
+      "status",
+      "finish_time_seconds",
+      "overall_place",
+      "category",
+      "age_on_day",
+      "result_source",
+      "source_url",
+    ],
+    rows,
+    `on conflict (edition_id, athlete_id) do update set
+      status = excluded.status,
+      finish_time_seconds = excluded.finish_time_seconds,
+      overall_place = excluded.overall_place,
+      category = excluded.category,
+      age_on_day = excluded.age_on_day,
+      result_source = excluded.result_source,
+      source_url = excluded.source_url`,
+  );
+}
+
 async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, number>): Promise<void> {
   const targetEditions = editionSeeds.filter(
     (edition) =>
@@ -1099,7 +1241,10 @@ async function seed(): Promise<void> {
   await upsertCatalogueFixtures(sql);
   await ensureParkrunCalendar(sql);
 
-  if (await alreadySeeded(sql)) return;
+  if (await alreadySeeded(sql)) {
+    await upsertPublicFigureProfiles(sql);
+    return;
+  }
 
   // NEVER wipe a non-empty database. Full catalogue seed only runs on empty DBs.
   // Imports (multi-year Run Norwich etc.) must survive deploys and cold starts.
@@ -1110,6 +1255,7 @@ async function seed(): Promise<void> {
       (select count(*)::int from clubs) as clubs`;
   const g = guard[0];
   if (g && (g.athletes > 0 || g.results > 0)) {
+    await upsertPublicFigureProfiles(sql);
     await sql`
       insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
       on conflict (key) do update set value = excluded.value
@@ -1205,6 +1351,9 @@ async function seed(): Promise<void> {
       "parent_athlete_id",
       "avatar_url",
       "source_url",
+      "profile_type",
+      "profile_roles",
+      "profile_source_checked_at",
     ],
     athleteSeeds.map((athlete) => [
       athlete.source_id ?? null,
@@ -1234,6 +1383,9 @@ async function seed(): Promise<void> {
       null,
       athlete.avatar_url ?? null,
       athlete.source_url ?? null,
+      athlete.profile_type ?? "Athlete",
+      (athlete.profile_roles ?? []).join(","),
+      athlete.profile_source_checked_at ?? null,
     ]),
     `on conflict (slug) do update set
       source_id = excluded.source_id,
@@ -1261,7 +1413,10 @@ async function seed(): Promise<void> {
       athrecs_id = excluded.athrecs_id,
       parent_athlete_id = excluded.parent_athlete_id,
       avatar_url = excluded.avatar_url,
-      source_url = excluded.source_url`,
+      source_url = excluded.source_url,
+      profile_type = excluded.profile_type,
+      profile_roles = excluded.profile_roles,
+      profile_source_checked_at = excluded.profile_source_checked_at`,
     50,
   );
 

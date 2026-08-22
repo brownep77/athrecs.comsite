@@ -12,10 +12,10 @@ export const catalogueMetadata = {
   },
   merged_counts: {
     clubs: 1737,
-    athletes: 685,
-    race_series: 6995,
-    editions: 218981,
-    results: 1933,
+    athletes: 1255,
+    race_series: 7158,
+    editions: 218869,
+    results: 2506,
   },
   clubs_source:
     "England Athletics Find a Club (types=club) + Welsh Athletics All Clubs + Athletics Ireland Find a Club (pages 1–5) + Athletics Northern Ireland Find A Club + Belfast Running club directory + Special Olympics Ireland club finder + Triathlon Ireland public club directory + prior ATHRECS catalogue",

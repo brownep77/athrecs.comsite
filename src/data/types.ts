@@ -146,6 +146,20 @@ export type ClubSeed = {
   socials?: ClubSocialSeed[];
 };
 
+export type AthleteProfileType = "Athlete" | "Public figure";
+
+export type AthleteProfileLinkSeed = {
+  label: string;
+  url: string;
+};
+
+export type AthleteAchievementSeed = {
+  year: number;
+  title: string;
+  detail: string;
+  source_url: string;
+};
+
 export type AthleteSeed = {
   /** Stable ID from the fuller production catalogue, when one exists. */
   source_id?: number;
@@ -185,6 +199,14 @@ export type AthleteSeed = {
   parent_athlete_slug?: string;
   avatar_url?: string;
   source_url?: string;
+  /** Public-facing profile classification; independent of account ownership/claim status. */
+  profile_type?: AthleteProfileType;
+  /** Descriptive public roles, such as Podcaster or Author. */
+  profile_roles?: string[];
+  /** Date on which the cited public profile sources were last checked. */
+  profile_source_checked_at?: string;
+  profile_links?: AthleteProfileLinkSeed[];
+  notable_achievements?: AthleteAchievementSeed[];
 };
 
 export type ResultSeed = {
