@@ -176,6 +176,25 @@ export const listEvents = createServerFn({ method: "GET" })
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
+          select coalesce(
+            (
+              select option.entry_url
+              from edition_entry_options option
+              where option.edition_id = ed.id and option.is_verified
+              order by
+                option.is_primary desc,
+                case option.entry_type when 'official' then 0 else 1 end,
+                option.provider_name
+              limit 1
+            ),
+            nullif(ed.entry_url, '')
+          )
+          from editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          order by ed.event_date asc, ed.id asc
+          limit 1
+        ) as next_entry_url,
+        (
           select count(*)::int from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
         ) as upcoming_count,
@@ -575,6 +594,25 @@ export const getEventBySlug = createServerFn({ method: "GET" })
           where ed.event_id = e.id and ed.event_date >= ${today}::date
           order by ed.event_date asc limit 1
         ) as next_start_time,
+        (
+          select coalesce(
+            (
+              select option.entry_url
+              from edition_entry_options option
+              where option.edition_id = ed.id and option.is_verified
+              order by
+                option.is_primary desc,
+                case option.entry_type when 'official' then 0 else 1 end,
+                option.provider_name
+              limit 1
+            ),
+            nullif(ed.entry_url, '')
+          )
+          from editions ed
+          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          order by ed.event_date asc, ed.id asc
+          limit 1
+        ) as next_entry_url,
         (
           select count(*)::int from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
@@ -1139,6 +1177,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       distance_code: string;
       status: string;
       start_time: string | null;
+      entry_url: string | null;
+      event_website: string | null;
       event_slug: string;
       event_name: string;
       sport: string;
@@ -1154,6 +1194,20 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         ed.distance_code,
         ed.status,
         ed.start_time,
+        coalesce(
+          (
+            select option.entry_url
+            from edition_entry_options option
+            where option.edition_id = ed.id and option.is_verified
+            order by
+              option.is_primary desc,
+              case option.entry_type when 'official' then 0 else 1 end,
+              option.provider_name
+            limit 1
+          ),
+          nullif(ed.entry_url, '')
+        ) as entry_url,
+        nullif(e.website, '') as event_website,
         e.slug as event_slug,
         e.name as event_name,
         e.sport,
@@ -1264,6 +1318,8 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             distance_code: dist.code,
             status: "Open",
             start_time: parkrunStartTime(venue.country, /junior/i.test(venue.name)),
+            entry_url: venue.website,
+            event_website: venue.website,
             event_slug: venue.slug,
             event_name: venue.name,
             sport: venue.sport,
