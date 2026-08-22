@@ -96,8 +96,8 @@ assert(
   "The five-mile editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-10-mile-v231"'),
-  "The persistent catalogue seed version was not advanced",
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-to-20-mile-v232"'),
+  "The persistent catalogue seed version is behind the five-mile workflow",
 );
 
 const upstreamSlugs = new Set(runabcSeries.map((series) => series.slug));
