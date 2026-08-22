@@ -36,6 +36,22 @@ const dailySeeds: DailyFiveKSeed[] = [
       "Multiple pace-based 5K track heats; Athletics Ireland permit 25/611 was approved when checked.",
   },
   {
+    slug: "very-pink-run-dublin-5k-2026",
+    name: "Very Pink Run Dublin 5K 2026",
+    date: "2026-08-29",
+    startTime: "12:00",
+    country: "Ireland",
+    county: "County Dublin",
+    city: "Dublin",
+    area: "Leopardstown Racecourse",
+    surface: "Road",
+    distances: ["5K", "10K"],
+    organiser: "Breast Cancer Ireland",
+    url: "https://eventmaster.ie/custom/event/VeryPinkRun2026",
+    notes:
+      "The 5K and 10K start at 12:00; Athletics Ireland permit 26/258 was approved when checked. This is an untimed in-person family event.",
+  },
+  {
     slug: "seamie-weldon-5k-10k-2026",
     name: "Seamie Weldon 5K & 10K Road Race 2026",
     date: "2026-09-05",
@@ -49,6 +65,22 @@ const dailySeeds: DailyFiveKSeed[] = [
     organiser: "Ardee & District Athletic Club",
     url: "https://eventmaster.ie/event/kVM2TK2TA2",
     notes: "Athletics Ireland permit 26/318 was approved when checked.",
+  },
+  {
+    slug: "very-pink-run-cork-5k-2026",
+    name: "Very Pink Run Cork 5K 2026",
+    date: "2026-09-06",
+    startTime: "12:20",
+    country: "Ireland",
+    county: "County Cork",
+    city: "Cork",
+    area: "The Arena, MTU, Bishopstown",
+    surface: "Road",
+    distances: ["5K", "10K"],
+    organiser: "Breast Cancer Ireland",
+    url: "https://eventmaster.ie/custom/event/VeryPinkRun2026",
+    notes:
+      "The 5K starts at 12:20 on the paved MTU campus route. This is an untimed in-person family event.",
   },
   {
     slug: "horsted-keynes-fun-run-5k-2026",
@@ -239,5 +271,13 @@ export const dailyFiveKResearchQueue = [
     reason:
       "The previously indexed direct-registration URL no longer resolves to a stable event page.",
     sourceUrl: "https://eventmaster.ie/event/nq9bUplH0v",
+  },
+  {
+    slug: "very-pink-run-kilkenny-2026",
+    date: "2026-08-30",
+    country: "Ireland",
+    reason:
+      "Athletics Ireland and Eventmaster advertise 5K/10K, but the organiser's venue-specific FAQ gives 4K/8K. Hold until the distance conflict is corrected or clarified.",
+    sourceUrl: "https://www.verypinkrun.ie/faqs/",
   },
 ] as const;

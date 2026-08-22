@@ -60,14 +60,16 @@ park or wildlife-park courses whose official descriptions are not solely road ar
 
 ## Daily-scan baseline release
 
-The first daily-scan baseline publishes **10 additional dated races** after checking their
+The daily-scan release publishes **12 additional dated races** after checking their
 organiser or direct-registration pages and comparing names, slugs, dates and sources with the
 existing catalogue:
 
 | Date        | Race                             | Country | Surface       |
 | ----------- | -------------------------------- | ------- | ------------- |
 | 27 Aug 2026 | Dunboyne Track 5K                | Ireland | Track         |
+| 29 Aug 2026 | Very Pink Run Dublin 5K          | Ireland | Road          |
 | 5 Sep 2026  | Seamie Weldon 5K & 10K Road Race | Ireland | Road          |
+| 6 Sep 2026  | Very Pink Run Cork 5K            | Ireland | Road          |
 | 19 Sep 2026 | Horsted Keynes Fun Run 5K        | England | Trail         |
 | 20 Oct 2026 | Savills Sandymount Night Run 5K  | Ireland | Road          |
 | 29 Nov 2026 | Skipton Santa Fun Run 5K         | England | Mixed         |
@@ -79,7 +81,9 @@ existing catalogue:
 
 The scan excludes any separate virtual entry. Portmarnock AC Beach 5K remains unpublished while
 its Athletics Ireland permit is pending, and St Luke's 5K Run to Remember remains held because
-its previously indexed registration page is no longer stable.
+its previously indexed registration page is no longer stable. Very Pink Run Kilkenny also remains
+held: Athletics Ireland and Eventmaster advertise 5K/10K, but the organiser's venue FAQ gives
+4K/8K.
 
 ## Existing records retained and enriched
 
