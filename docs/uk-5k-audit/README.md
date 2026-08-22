@@ -36,6 +36,14 @@ The implementation lives in `src/data/uk-5k-races.ts` and
 `src/data/five-k-races-uk-ireland-next.ts`. Run
 `npm run verify:uk-5k-workflow` after future changes.
 
+## Follow-up release
+
+A further **17 dated 5K fixtures** were source-checked and published across road, trail and
+mixed surfaces. The batch includes missing Scurry Events and ACORN Trails fixtures in Scotland,
+Race Dunvegan on **20 March 2027**, Run Balmoral, Cardiff Race for Victory, and five additional
+RunThrough fixtures through September 2027. Existing source slugs are reused where appropriate,
+so their 5K distance is exposed without creating lookalike duplicate events.
+
 ## Continuation release
 
 The new public batch contains **55 series and 55 dated 5K editions**:
