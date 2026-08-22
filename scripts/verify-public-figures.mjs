@@ -38,6 +38,36 @@ const expectedProfiles = [
   "adele-roberts",
   "pippa-middleton",
   "casey-neistat",
+  "aaron-ramsey",
+  "tony-adams",
+  "lee-grant",
+  "darren-randolph",
+  "kevin-kilbane",
+  "muzzy-izzet",
+  "dwight-yorke",
+  "gary-speed",
+  "sebastian-vettel",
+  "cynthia-erivo",
+  "alastair-cook",
+  "harry-judd",
+  "alexandra-burke",
+  "james-norton",
+  "jack-oconnell",
+  "joe-wicks",
+  "laura-kenny",
+  "ben-ainslie",
+  "ap-mccoy",
+  "tilly-ramsay",
+  "romesh-ranganathan",
+  "jonny-lee-miller",
+  "amanda-holden",
+  "pamela-anderson",
+  "flea",
+  "mario-lopez",
+  "christy-turlington",
+  "jenson-button",
+  "james-cracknell",
+  "nell-mcandrew",
 ];
 
 assert.deepEqual(
@@ -60,6 +90,15 @@ assert(
   ),
   "Every public figure needs a checked HTTPS source and must not use an unlicensed image",
 );
+
+const sitemapSource = readFileSync(new URL("../public/sitemap.xml", import.meta.url), "utf8");
+for (const slug of expectedProfiles) {
+  assert.match(
+    sitemapSource,
+    new RegExp(`<loc>https://www\\.athrecs\\.com/athletes/${slug}</loc>`),
+    `Public-figure profile ${slug} must be included in the sitemap`,
+  );
+}
 
 const catalogueSource = readFileSync(new URL("../src/data/catalogue.ts", import.meta.url), "utf8");
 const seedSource = readFileSync(
