@@ -28,6 +28,7 @@ import {
   verifiedFiveMileEditionOverrides,
   verifiedFiveMileSeriesOverrides,
 } from "./five-mile-races-uk-ireland";
+import { verifiedTenKFollowupSeriesOverrides } from "./ten-k-races-uk-ireland-followup";
 
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const eventSlugAliases: Readonly<Record<string, string>> = {
@@ -64,6 +65,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...verifiedFixtureSeriesOverrides,
   ...ukFiveKSeriesOverrides,
   ...verifiedFiveMileSeriesOverrides,
+  ...verifiedTenKFollowupSeriesOverrides,
 };
 
 /** Verified entry providers keyed by series, date and distance. */
