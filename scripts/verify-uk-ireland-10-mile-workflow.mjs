@@ -183,7 +183,7 @@ assert(
   "The existing-series 10-mile corrections are not merged",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-daily-v234"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v240"'),
   "The persistent catalogue seed version was not advanced for the 10-mile release",
 );
 assert(

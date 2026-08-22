@@ -4,12 +4,14 @@ import fs from "node:fs/promises";
 const [
   fiveKData,
   continuedFiveKData,
+  dailyFiveKData,
   { parkrunSeries },
   { runabcSeries },
   { worldAthleticsSeries },
 ] = await Promise.all([
   import("../src/data/uk-5k-races.ts"),
   import("../src/data/five-k-races-uk-ireland-next.ts"),
+  import("../src/data/five-k-races-uk-ireland-daily.ts"),
   import("../src/data/parkrun-uk.ts"),
   import("../src/data/runabc.ts"),
   import("../src/data/world-athletics.ts"),
@@ -24,10 +26,15 @@ const {
 } = fiveKData;
 const { continuedFiveKEditions, continuedFiveKResearchQueue, continuedFiveKSeries } =
   continuedFiveKData;
+const { dailyFiveKEditions, dailyFiveKResearchQueue, dailyFiveKSeries } = dailyFiveKData;
 
-const allFiveKSeries = [...ukFiveKSeries, ...continuedFiveKSeries];
-const allFiveKEditions = [...ukFiveKEditions, ...continuedFiveKEditions];
-const allFiveKResearchQueue = [...ukFiveKResearchQueue, ...continuedFiveKResearchQueue];
+const allFiveKSeries = [...ukFiveKSeries, ...continuedFiveKSeries, ...dailyFiveKSeries];
+const allFiveKEditions = [...ukFiveKEditions, ...continuedFiveKEditions, ...dailyFiveKEditions];
+const allFiveKResearchQueue = [
+  ...ukFiveKResearchQueue,
+  ...continuedFiveKResearchQueue,
+  ...dailyFiveKResearchQueue,
+];
 
 const TODAY = "2026-08-22";
 const HORIZON = "2027-12-31";
@@ -46,6 +53,12 @@ assert.deepEqual(
   new Set(continuedFiveKSeries.map((series) => series.surface)),
   new Set(["Road", "Track", "Mixed", "Beach"]),
   "The continued release lost one of its verified surface types",
+);
+assert.equal(dailyFiveKSeries.length, 10, "The daily-scan release is incomplete");
+assert.equal(
+  dailyFiveKEditions.length,
+  dailyFiveKSeries.length,
+  "Each daily-scan series must have one dated 5K edition",
 );
 
 const slugs = new Set();
@@ -115,12 +128,20 @@ assert(
   "The continued UK and Ireland 5K dataset is not imported by the catalogue",
 );
 assert(
+  catalogueSource.includes('from "./five-k-races-uk-ireland-daily"'),
+  "The daily UK and Ireland 5K dataset is not imported by the catalogue",
+);
+assert(
   catalogueSource.includes("...(ukFiveKSeries as Series[])"),
   "The UK 5K series are not merged into the catalogue",
 );
 assert(
   catalogueSource.includes("...(continuedFiveKSeries as Series[])"),
   "The continued UK and Ireland 5K series are not merged into the catalogue",
+);
+assert(
+  catalogueSource.includes("...(dailyFiveKSeries as Series[])"),
+  "The daily UK and Ireland 5K series are not merged into the catalogue",
 );
 assert(
   catalogueSource.includes("...(ukFiveKEditions as Edition[])"),
@@ -131,13 +152,17 @@ assert(
   "The continued UK and Ireland 5K editions are not merged into the catalogue",
 );
 assert(
+  catalogueSource.includes("...(dailyFiveKEditions as Edition[]).filter"),
+  "The daily UK and Ireland 5K editions are not merged into the catalogue",
+);
+assert(
   entryOptionsSource.includes("...ukFiveKEditionOverrides") &&
     entryOptionsSource.includes("...ukFiveKSeriesOverrides"),
   "The UK 5K corrections are not merged into entry options",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-to-20-mile-v232"'),
-  "The persistent catalogue seed version is behind the continued 5K release",
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v240"'),
+  "The persistent catalogue seed version is behind the daily 5K release",
 );
 
 const existingSourceSlugs = new Set(
@@ -169,6 +194,16 @@ const sentinels = [
   "run-balmoral-harbour-energy-5k-2027",
   "cardiff-5k-race-for-victory-2027",
   "runthrough-tatton-park-september-2027",
+  "dunboyne-track-5k-2026",
+  "seamie-weldon-5k-10k-2026",
+  "horsted-keynes-fun-run-5k-2026",
+  "savills-sandymount-night-run-5k-october-2026",
+  "skipton-santa-fun-run-5k-2026",
+  "bedale-santa-run-5k-2026",
+  "winter-solstice-strider-5k-2026",
+  "keighley-10k-5k-2027",
+  "wakefield-hospice-5k-2027",
+  "paintrush-5k-2027",
 ];
 for (const slug of sentinels) {
   assert(slugs.has(slug), `Coverage sentinel is missing: ${slug}`);

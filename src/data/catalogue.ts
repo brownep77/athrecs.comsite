@@ -75,6 +75,7 @@ import { verifiedAllSportEditions, verifiedAllSportSeries } from "./verified-all
 import { verifiedGlobalEditions, verifiedGlobalSeries } from "./verified-global-fixtures";
 import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races";
 import { continuedFiveKEditions, continuedFiveKSeries } from "./five-k-races-uk-ireland-next";
+import { dailyFiveKEditions, dailyFiveKSeries } from "./five-k-races-uk-ireland-daily";
 import { verifiedFiveMileEditions, verifiedFiveMileSeries } from "./five-mile-races-uk-ireland";
 import {
   verifiedTenKFollowupEditions,
@@ -158,6 +159,7 @@ for (const series of [
   ...(verifiedUkSeries as Series[]),
   ...(ukFiveKSeries as Series[]),
   ...(continuedFiveKSeries as Series[]),
+  ...(dailyFiveKSeries as Series[]),
   ...(verifiedFiveMileSeries as Series[]),
   ...(verifiedTenKFollowupSeries as Series[]),
   ...(verifiedTenMileSeries as Series[]),
@@ -203,6 +205,7 @@ const mergedEditions = [
   ...(verifiedUkEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(ukFiveKEditions as Edition[]),
   ...(continuedFiveKEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(dailyFiveKEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(verifiedFiveMileEditions as Edition[]),
   ...(verifiedTenKFollowupEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
