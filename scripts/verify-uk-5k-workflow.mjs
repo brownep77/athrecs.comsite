@@ -54,7 +54,7 @@ assert.deepEqual(
   new Set(["Road", "Track", "Mixed", "Beach"]),
   "The continued release lost one of its verified surface types",
 );
-assert.equal(dailyFiveKSeries.length, 10, "The daily-scan release is incomplete");
+assert.equal(dailyFiveKSeries.length, 12, "The daily-scan release is incomplete");
 assert.equal(
   dailyFiveKEditions.length,
   dailyFiveKSeries.length,
@@ -161,7 +161,7 @@ assert(
   "The UK 5K corrections are not merged into entry options",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v240"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-very-pink-v241"'),
   "The persistent catalogue seed version is behind the daily 5K release",
 );
 
@@ -195,7 +195,9 @@ const sentinels = [
   "cardiff-5k-race-for-victory-2027",
   "runthrough-tatton-park-september-2027",
   "dunboyne-track-5k-2026",
+  "very-pink-run-dublin-5k-2026",
   "seamie-weldon-5k-10k-2026",
+  "very-pink-run-cork-5k-2026",
   "horsted-keynes-fun-run-5k-2026",
   "savills-sandymount-night-run-5k-october-2026",
   "skipton-santa-fun-run-5k-2026",

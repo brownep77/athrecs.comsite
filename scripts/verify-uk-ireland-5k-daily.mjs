@@ -25,8 +25,8 @@ function normalizedName(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
 }
 
-assert.equal(dailyFiveKSeries.length, 10, "Expected ten newly verified 5K series");
-assert.equal(dailyFiveKEditions.length, 10, "Expected ten newly verified 5K editions");
+assert.equal(dailyFiveKSeries.length, 12, "Expected twelve newly verified 5K series");
+assert.equal(dailyFiveKEditions.length, 12, "Expected twelve newly verified 5K editions");
 assert.deepEqual(
   new Set(dailyFiveKSeries.map((series) => series.surface)),
   EXPECTED_SURFACES,
@@ -89,6 +89,12 @@ assert(
   ),
   "The unstable St Luke's registration listing must remain held",
 );
+assert(
+  dailyFiveKResearchQueue.some(
+    (candidate) => candidate.slug === "very-pink-run-kilkenny-2026",
+  ),
+  "Very Pink Run Kilkenny must remain held while its advertised distances conflict",
+);
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
@@ -111,7 +117,7 @@ assert(
   "The daily 5K editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v240"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-very-pink-v241"'),
   "The persistent seed version is behind the daily 5K release",
 );
 
