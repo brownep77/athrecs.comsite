@@ -23,6 +23,7 @@ import {
   verifiedFixtureEditionReplacements,
   verifiedFixtureSeriesOverrides,
 } from "./fixture-deduplication";
+import { ukFiveKEditionOverrides, ukFiveKSeriesOverrides } from "./uk-5k-races";
 
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const eventSlugAliases: Readonly<Record<string, string>> = {
@@ -47,6 +48,7 @@ export const editionOverrides: Record<string, Partial<Edition>> = {
   ...ukHalfMarathonEditionOverrides,
   ...ukTenKEditionOverrides,
   ...verifiedFixtureEditionOverrides,
+  ...ukFiveKEditionOverrides,
 };
 
 /** Verified event metadata corrections across every entry-options research pass. */
@@ -55,6 +57,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...ukHalfMarathonSeriesOverrides,
   ...ukTenKSeriesOverrides,
   ...verifiedFixtureSeriesOverrides,
+  ...ukFiveKSeriesOverrides,
 };
 
 /** Verified entry providers keyed by series, date and distance. */
