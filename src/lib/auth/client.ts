@@ -76,8 +76,9 @@ function inLivePreview(): boolean {
 type PopupMessage = { source: "grok-auth-popup"; token: string | null; error?: string };
 
 /**
- * Start sign-in with one upstream provider (`providerId` from `GROK_PROVIDERS`),
- * federating through the Grok auth broker.
+ * Start sign-in with one upstream provider (`providerId` from `GROK_PROVIDERS`).
+ * Permanent deployments use Better Auth's direct Google provider; sandbox
+ * previews keep using the Grok broker's preview-only client.
  *
  * - **Live preview** (`*.grok-sandbox.com` iframe): opens a POPUP to
  *   `/auth/popup`, served by the template Vite plugin (see `vite.config.ts` +
@@ -134,6 +135,18 @@ export async function signIn(
         window.location.href = callbackURL;
       }
     }
+    return;
+  }
+
+  if (providerId === "grok-google") {
+    const { data, error } = await authClient.signIn.social({
+      provider: "google",
+      callbackURL,
+      errorCallbackURL,
+      disableRedirect: true,
+    });
+    if (error) throw new Error(error.message ?? "Google sign-in failed");
+    if (data?.url) window.location.href = data.url;
     return;
   }
 

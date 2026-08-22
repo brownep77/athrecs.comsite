@@ -25,6 +25,21 @@ const appShell = await readFile(resolve(root, "src/components/layout/AppShell.ts
 assert.doesNotMatch(appShell, /label:\s*["']Update["']/);
 assert.match(appShell, /StaffMicrositeShell/);
 
+const authServer = await readFile(resolve(root, "src/lib/auth/server.ts"), "utf8");
+assert.match(authServer, /GOOGLE_CLIENT_ID/);
+assert.match(authServer, /GOOGLE_CLIENT_SECRET/);
+assert.match(authServer, /socialProviders:\s*\{/);
+assert.match(authServer, /google:\s*\{/);
+assert.match(authServer, /brokerConfigured/);
+
+const authClient = await readFile(resolve(root, "src/lib/auth/client.ts"), "utf8");
+assert.match(authClient, /signIn\.social\(\{/);
+assert.match(authClient, /provider:\s*["']google["']/);
+
+const staffAuth = await readFile(resolve(root, "src/lib/auth/staff.server.ts"), "utf8");
+assert.match(staffAuth, /["']google["']/);
+assert.match(staffAuth, /["']grok-google["']/);
+
 const adminApi = await readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8");
 for (const functionName of [
   "getDbStatus",
