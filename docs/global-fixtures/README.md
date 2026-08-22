@@ -130,3 +130,19 @@ directory. The 10 Miler, Thanksgiving half marathon and Atlanta marathon were ea
 checked against the full ATHRECS catalogue before import; no matching series or edition
 was found. Only fixture-level facts are retained and participant result rows remain
 excluded. The official organiser source remains `in_progress` for later US checkpoints.
+
+## Checkpoint global-012
+
+Three more organiser-verified Atlanta-area races extend the official United States
+checkpoint:
+
+- Firefighter 5K — Atlanta, Georgia — 12 September 2026
+- Wingfoot XC Classic — Cartersville, Georgia — 19 September 2026
+- Mercedes-Benz Stadium Move with MADD 5K — Atlanta, Georgia — 7 November 2026
+
+Atlanta Track Club's official pages confirm the dates, locations, distances, prices and
+registration cut-offs. The primary entry routes are the organiser-linked Let's Do This
+checkout pages for the road races and the organiser-linked MileSplit registration for
+Wingfoot. All three canonical names, locations and dates were checked against the full
+ATHRECS catalogue before import; no matching series or edition was found. Participant
+result rows remain excluded and the source remains `in_progress`.

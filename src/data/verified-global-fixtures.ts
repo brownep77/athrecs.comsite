@@ -624,6 +624,62 @@ export const verifiedGlobalSeries: Series[] = [
     featured: false,
     source_url: "https://www.atlantatrackclub.org/2027-atlanta-marathon-weekend",
   },
+  {
+    slug: "firefighter-5k-atlanta",
+    name: "Firefighter 5K",
+    sport: "Running",
+    country: "United States",
+    county: "Georgia",
+    city: "Atlanta",
+    area: "Atlanta Fire Rescue Station 1",
+    surface: "Road",
+    distances: ["5K"],
+    summary: "A downtown Atlanta 5K supporting the Atlanta Fire Rescue Foundation.",
+    description:
+      "A family-friendly road 5K hosted by Atlanta's Bravest, starting and finishing at Atlanta Fire Rescue Station 1 and raising funds for the Atlanta Fire Rescue Foundation.",
+    organiser: "Atlanta Track Club and Atlanta's Bravest",
+    website: "https://www.atlantatrackclub.org/2026-firefighter-5k",
+    featured: false,
+    source_url: "https://www.atlantatrackclub.org/2026-firefighter-5k",
+  },
+  {
+    slug: "wingfoot-xc-classic",
+    name: "Wingfoot XC Classic",
+    sport: "Running",
+    country: "United States",
+    county: "Georgia",
+    city: "Cartersville",
+    area: "Sam Smith Park",
+    surface: "Cross Country",
+    distances: ["5K", "3K"],
+    summary: "Youth and high-school cross-country races at Sam Smith Park.",
+    description:
+      "Atlanta Track Club's annual cross-country classic features 3K youth and middle-school races plus 5K high-school races across morning and evening sessions.",
+    organiser: "Atlanta Track Club",
+    website: "https://www.atlantatrackclub.org/2026-wingfoot-xc-classic",
+    featured: false,
+    source_url: "https://www.atlantatrackclub.org/2026-wingfoot-xc-classic",
+  },
+  {
+    slug: "mercedes-benz-stadium-move-with-madd-5k",
+    name: "Mercedes-Benz Stadium Move with MADD 5K",
+    sport: "Running",
+    country: "United States",
+    county: "Georgia",
+    city: "Atlanta",
+    area: "Mercedes-Benz Stadium",
+    surface: "Road",
+    distances: ["5K", "1 Mile", "Dash"],
+    summary: "A stadium-based Atlanta 5K, mile and dash supporting MADD Georgia.",
+    description:
+      "A 5K, mile and youth dash produced with Mercedes-Benz Stadium, Atlanta's professional football clubs, MADD Georgia and Atlanta Track Club to raise awareness and funds against impaired driving.",
+    organiser: "Atlanta Track Club, Mercedes-Benz Stadium and MADD Georgia",
+    website:
+      "https://www.atlantatrackclub.org/2026-mercedes-benz-stadium-move-with-madd-5k",
+    featured: false,
+    source_url:
+      "https://www.atlantatrackclub.org/2026-mercedes-benz-stadium-move-with-madd-5k",
+  },
 ];
 
 export const verifiedGlobalEditions: Edition[] = [
@@ -1625,5 +1681,99 @@ export const verifiedGlobalEditions: Edition[] = [
     source: "https://www.atlantatrackclub.org/2027-atlanta-marathon-weekend",
     notes:
       "The official organiser page confirms the 5K and youth events on 6 March 2027 and the marathon and half marathon on 7 March; start times are not yet published.",
+  },
+  {
+    seriesSlug: "firefighter-5k-atlanta",
+    date: "2026-09-12",
+    distance: "5K",
+    distanceKm: 5,
+    status: "Open",
+    entryUrl:
+      "https://www.letsdothis.com/us/o/102981/checkout/ticket?eventId=219919&occurrenceId=21111170569&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=102981&utm_source=website",
+    entryOptions: [
+      {
+        providerCode: "atlanta-track-club-lets-do-this",
+        providerName: "Atlanta Track Club / Let's Do This",
+        entryUrl:
+          "https://www.letsdothis.com/us/o/102981/checkout/ticket?eventId=219919&occurrenceId=21111170569&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=102981&utm_source=website",
+        entryType: "official",
+        status: "open",
+        priceAmount: 55,
+        priceCurrency: "USD",
+        closesAt: "2026-09-11T21:00:00-04:00",
+        checkedAt: "2026-08-22",
+        sourceUrl: "https://www.atlantatrackclub.org/2026-firefighter-5k",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "Atlanta Track Club links directly to this checkout route; the current online 5K price is $55 through 11 September.",
+      },
+    ],
+    startTime: "08:00",
+    source: "https://www.atlantatrackclub.org/2026-firefighter-5k",
+    notes:
+      "The official organiser page confirms an 08:00 start and finish at Atlanta Fire Rescue Station 1.",
+  },
+  {
+    seriesSlug: "wingfoot-xc-classic",
+    date: "2026-09-19",
+    distance: "5K",
+    distanceKm: 5,
+    status: "Open",
+    entryUrl: "https://ga.milesplit.com/meets/741372/registration",
+    entryOptions: [
+      {
+        providerCode: "atlanta-track-club-milesplit",
+        providerName: "Atlanta Track Club / MileSplit",
+        entryUrl: "https://ga.milesplit.com/meets/741372/registration",
+        entryType: "official",
+        status: "open",
+        priceAmount: 15,
+        priceCurrency: "USD",
+        closesAt: "2026-09-13T23:59:00-04:00",
+        checkedAt: "2026-08-22",
+        sourceUrl: "https://www.atlantatrackclub.org/2026-wingfoot-xc-classic",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "Atlanta Track Club links directly to MileSplit registration; individual entry is $15 and athlete entries close on 13 September.",
+      },
+    ],
+    source: "https://www.atlantatrackclub.org/2026-wingfoot-xc-classic",
+    notes:
+      "The official page confirms 3K youth and middle-school races and 5K high-school races in morning and evening sessions at Sam Smith Park.",
+  },
+  {
+    seriesSlug: "mercedes-benz-stadium-move-with-madd-5k",
+    date: "2026-11-07",
+    distance: "5K",
+    distanceKm: 5,
+    status: "Open",
+    entryUrl:
+      "https://www.letsdothis.com/us/o/102981/checkout/ticket?eventId=193823&occurrenceId=21111170570&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=102981&utm_source=website",
+    entryOptions: [
+      {
+        providerCode: "atlanta-track-club-lets-do-this",
+        providerName: "Atlanta Track Club / Let's Do This",
+        entryUrl:
+          "https://www.letsdothis.com/us/o/102981/checkout/ticket?eventId=193823&occurrenceId=21111170570&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=102981&utm_source=website",
+        entryType: "official",
+        status: "open",
+        priceAmount: 40,
+        priceCurrency: "USD",
+        checkedAt: "2026-08-22",
+        sourceUrl:
+          "https://www.atlantatrackclub.org/2026-mercedes-benz-stadium-move-with-madd-5k",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "Atlanta Track Club links directly to this checkout route; the current 5K price is $40 through 31 August.",
+      },
+    ],
+    startTime: "08:00",
+    source:
+      "https://www.atlantatrackclub.org/2026-mercedes-benz-stadium-move-with-madd-5k",
+    notes:
+      "The official organiser page confirms the 08:00 start, 5K, mile and youth dash at Mercedes-Benz Stadium.",
   },
 ];
