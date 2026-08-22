@@ -23,8 +23,8 @@ uses the catalogue's canonical `5mi` / 8.05 km representation.
 
 ## Public release
 
-The audited dataset contains **21 series records and 23 dated five-mile editions**. Two records
-reuse existing catalogue series, leaving 19 net-new public series.
+The audited dataset now contains **22 series records and 24 dated five-mile editions**. Two
+records reuse existing catalogue series, leaving 20 net-new public series.
 
 - Northern Ireland: Portrush and the Heath Graham Ards 5 Mile.
 - Wales: three 2026 editions of the measured Severn Bridge 5 Night Race.
@@ -33,7 +33,10 @@ reuse existing catalogue series, leaving 19 net-new public series.
 - Republic of Ireland: four permit-approved Beara A.C. races, Lucan Harriers and the approved
   2027 Tommy Ryan Memorial Carrigaline race.
 - England: Southend Rudolph Run plus 2027 road, trail and mixed-terrain races from ATW, Nice Work,
-  Pendle Trail Running Club and Stort10.
+  Pendle Trail Running Club and Stort10, plus the dated St Agnes 5 Miler.
+
+The follow-up also corrects the existing M10 Swansea record to the organiser's official
+**28 February 2027** date and exposes both its 5-mile and 10-mile distances.
 
 The reused series are Girlings Ashford & District RRC and Cannock Chase Forest. RAM 5 Mile was
 already dated in the wider catalogue and is retained without a duplicate record.
