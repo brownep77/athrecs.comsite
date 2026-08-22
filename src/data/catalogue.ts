@@ -75,6 +75,7 @@ import { verifiedUkEditions, verifiedUkSeries } from "./verified-races-uk";
 import { verifiedAllSportEditions, verifiedAllSportSeries } from "./verified-all-sport";
 import { verifiedGlobalEditions, verifiedGlobalSeries } from "./verified-global-fixtures";
 import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races";
+import { continuedFiveKEditions, continuedFiveKSeries } from "./five-k-races-uk-ireland-next";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -139,6 +140,7 @@ for (const series of [
   ...(verifiedGlobalSeries as Series[]),
   ...(verifiedUkSeries as Series[]),
   ...(ukFiveKSeries as Series[]),
+  ...(continuedFiveKSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
@@ -176,6 +178,7 @@ const mergedEditions = [
   ...(verifiedGlobalEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(verifiedUkEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(ukFiveKEditions as Edition[]),
+  ...(continuedFiveKEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),

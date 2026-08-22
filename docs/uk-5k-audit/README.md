@@ -1,12 +1,13 @@
-# UK 5K catalogue audit
+# UK and Ireland 5K catalogue audit
 
 Checked: **22 August 2026**
 
-Public fixture horizon: **22 August 2026 to 30 September 2027**
+Public fixture horizon: **22 August 2026 to 31 December 2027**
 
-This release adds missing, dated United Kingdom 5K races from official organiser, event,
-governing-body, or direct registration pages. It also corrects country and distance metadata
-discovered while reconciling the existing catalogue.
+The original release added missing, dated United Kingdom 5K races. The continuation adds 55
+more dated fixtures across the United Kingdom and Republic of Ireland from official organiser,
+event, governing-body, or direct registration pages. It also extends the public horizon through
+the end of 2027 and records each race's actual surface rather than treating every 5K as road.
 
 ## Publication rules
 
@@ -19,6 +20,8 @@ discovered while reconciling the existing catalogue.
 - A series may offer other distances, but the edition added by this audit represents the 5K
   race so that it is discoverable in the 5K catalogue workflow.
 - Weekly adult parkruns remain in the dedicated parkrun source and are not duplicated here.
+- Athletics Ireland fixtures labelled `permit pending` remain in the research queue until the
+  permit is approved, even when their registration provider has published a date.
 
 ## Sources covered
 
@@ -26,9 +29,25 @@ discovered while reconciling the existing catalogue.
 - Great Run, Run Nation, Nice Work, ATW Events, EvenSplits and Danum Harriers
 - Up and Running Events in Scotland
 - RunThrough's published 2027 event calendar
+- Pop Up Races and Eventmaster direct event-registration pages
+- Athletics Ireland permit states exposed by Eventmaster
 
-The implementation lives in `src/data/uk-5k-races.ts`. Run
+The implementation lives in `src/data/uk-5k-races.ts` and
+`src/data/five-k-races-uk-ireland-next.ts`. Run
 `npm run verify:uk-5k-workflow` after future changes.
+
+## Continuation release
+
+The new public batch contains **55 series and 55 dated 5K editions**:
+
+- 27 England fixtures, including the previously uncovered January-April 2027 window and
+  RunThrough's October-December 2027 calendar;
+- 21 Republic of Ireland / Northern Ireland fixtures from August-December 2026;
+- 7 approved, dated Republic of Ireland fixtures in 2027.
+
+The surface mix is **Road, Track, Mixed and Beach**. Debden Airfield, Goodwood Motor Circuit and
+Lee Valley VeloPark are tagged `Track`; Dune Run Bundoran and Brandon Bay are tagged `Beach`;
+park or wildlife-park courses whose official descriptions are not solely road are tagged `Mixed`.
 
 ## Existing records retained and enriched
 
@@ -50,6 +69,8 @@ evidence gap is resolved:
 - the 2027 Scottish 5K Championships, pending a confirmed host and date;
 - Cancer Research UK Race for Life 5K events, which need a structured venue-level official-feed
   import rather than an unsafe bulk copy of search listings.
+- RunClare Quin 5K, Long Woman's 5K and South East Greenway 5K Stride, whose 2027 Eventmaster
+  pages explicitly showed their Athletics Ireland permits as pending when checked.
 
 This is a verified release, not a claim that every informal, private, representative, or newly
-announced UK 5K has already been published.
+announced UK or Irish 5K has already been published.
