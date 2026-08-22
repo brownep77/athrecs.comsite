@@ -294,6 +294,13 @@ function HomePage() {
             Explore athletes <ArrowRight className="h-4 w-4 text-accent" />
           </Link>
           <Link
+            to="/claim-results"
+            search={{ resultId: undefined }}
+            className="flex min-h-11 items-center justify-between rounded-xl border border-accent/30 bg-accent-soft px-4 text-sm font-semibold text-fg no-underline shadow-card hover:border-accent"
+          >
+            Claim race results <ArrowRight className="h-4 w-4 text-accent" />
+          </Link>
+          <Link
             to="/clubs"
             className="flex min-h-11 items-center justify-between rounded-xl border border-border bg-surface px-4 text-sm font-semibold text-fg no-underline shadow-card hover:border-accent"
           >

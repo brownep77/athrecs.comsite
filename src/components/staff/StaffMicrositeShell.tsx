@@ -4,6 +4,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import {
   AlertTriangle,
   BarChart3,
+  BadgeCheck,
   CalendarCheck,
   Database,
   ExternalLink,
@@ -51,6 +52,12 @@ const staffNav = [
     label: "Results",
     icon: Link2,
     match: (path: string) => path.startsWith("/admin/result-links"),
+  },
+  {
+    to: "/admin/result-claims",
+    label: "Claims",
+    icon: BadgeCheck,
+    match: (path: string) => path.startsWith("/admin/result-claims"),
   },
   {
     to: "/admin/sources",
