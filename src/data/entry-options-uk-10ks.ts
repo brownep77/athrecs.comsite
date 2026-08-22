@@ -3763,6 +3763,69 @@ export const ukTenKEditionOverrides: Record<string, Partial<Edition>> = {
     notes:
       "DH Runners confirms its 2026 River Run is open and links directly to the official Events Up North checkout. The 10:00 race follows a fast out-and-back 10K beside the river from Denton Street, with registration and post-race facilities at Denton Holme WMCC.",
   },
+  "fleet-10k5k-peter-driver-memorial|2026-10-25|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.fleet10k.co.uk/",
+    source: "https://www.fleet10k.co.uk/",
+    notes:
+      "Fleet & Crookham Athletic Club confirms open entry for Sunday 25 October at 09:30 from The Harlington Centre. The well-marshalled town-centre road course has very little elevation and is designed for fast autumn racing.",
+  },
+  "fleet-10k5k-peter-driver-memorial|2026-10-25|5K": {
+    startTime: "09:30",
+    entryUrl: "https://www.fleet10k.co.uk/",
+    source: "https://www.fleet10k.co.uk/",
+  },
+  "haltemprice-10k|2026-10-25|10K": {
+    startTime: "09:00",
+    entryUrl: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+    source: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+    notes:
+      "RunThrough confirms open entry for Sunday 25 October at 09:00. The closed-road course starts and finishes on South Ella Way, climbs gradually through West Ella and around Swanland, then rewards runners with a downhill return; a 90-minute cut-off applies.",
+  },
+  "jedburgh-half-marathon|2026-10-25|10K": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/festival/18",
+    source: "https://www.entrycentral.com/festival/18",
+    notes:
+      "The official EntryCentral festival page confirms the 13th Jedburgh 10K on Sunday 25 October at 11:00. The road race starts at Abbey Place, follows the A68 and A698 through the Jed valley, turns at 5K and returns to a riverside finish; entries close 21 October or earlier if the limit is reached.",
+  },
+  "jedburgh-half-marathon|2026-10-25|Half": {
+    startTime: "11:00",
+    entryUrl: "https://www.entrycentral.com/festival/18",
+    source: "https://www.entrycentral.com/festival/18",
+  },
+  "kernow-killer-october|2026-10-25|10K": {
+    startTime: "09:30",
+    entryUrl: "https://www.kernowkiller.uk/",
+    source: "https://www.kernowkiller.uk/",
+    notes:
+      "Kernow Killer confirms its 10K obstacle challenge starts at 09:30 on Sunday 25 October at Scorrier House Estate. The untimed teamwork-focused course crosses rugged Cornish terrain and includes 30 mud, water, climbing and crawling obstacles; entries close at midnight on 21 October.",
+  },
+  "monsal-trail-half-marathon-autumn-sunday|2026-10-25|10K": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    notes:
+      "Nice Work confirms the Sunday 10K starts at 10:00 from Bakewell Station. The traffic-free out-and-back follows the former Midland Railway over mixed tarmac and hard trail, with 10K runners turning inside the first tunnel at 5K.",
+  },
+  "monsal-trail-half-marathon-autumn-sunday|2026-10-25|Half": {
+    startTime: "10:00",
+    entryUrl:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+    source:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+  },
+  "polesden-lacey-10k|2026-10-25|10K": {
+    startTime: "09:00",
+    entryUrl:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+    source:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+    notes:
+      "The National Trust confirms a free, informal Trust 10K on Sunday 25 October from 09:00 to 11:00. Booking is not required; runners meet in the main visitor car park and follow a circular trail through the Polesden Lacey Estate and Ranmore Common.",
+  },
 };
 
 /** Correct source metadata for UK 10K records imported from regional listings. */
@@ -9487,6 +9550,92 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
       "DH Runners' 10K starts and finishes on Denton Street and follows the traffic-free river path towards Dalston. Race facilities are at Denton Holme WMCC, and the event includes a water station, prizes, photographs and a post-race buffet.",
     organiser: "DH Runners",
     website: "https://dhrunners.org/",
+  },
+  "fleet-10k5k-peter-driver-memorial": {
+    name: "Fleet 5K & 10K — Peter Driver Memorial",
+    city: "Fleet",
+    county: "Hampshire",
+    country: "England",
+    area: "The Harlington Centre and Fleet town-centre roads",
+    surface: "Road",
+    distances: ["5K", "10K"],
+    summary: "Fleet 5K & 10K — fast, low-elevation town-centre races organised by runners.",
+    description:
+      "Fleet & Crookham Athletic Club stages the Peter Driver Memorial 5K and 10K from The Harlington Centre. Both races use well-marshalled road routes through Fleet, with the 10K offering a quick, low-elevation autumn course.",
+    organiser: "Fleet & Crookham Athletic Club",
+    website: "https://www.fleet10k.co.uk/",
+  },
+  "haltemprice-10k": {
+    name: "Haltemprice 10K",
+    city: "Kirk Ella",
+    county: "East Riding of Yorkshire",
+    country: "England",
+    area: "South Ella Way, West Ella and Swanland",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "Haltemprice 10K — a long-established closed-road race through East Yorkshire villages.",
+    description:
+      "Established in 1987, the Haltemprice 10K starts and finishes on South Ella Way in Kirk Ella. Its closed-road route climbs through West Ella, loops around Swanland and returns downhill, with chip timing, photographs and the traditional finisher mug.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+  },
+  "jedburgh-half-marathon": {
+    name: "Jedburgh Running Festival Half Marathon & 10K",
+    city: "Jedburgh",
+    county: "Scottish Borders",
+    country: "Scotland",
+    area: "Jedburgh Abbey, Jed valley and A698",
+    surface: "Road",
+    distances: ["10K", "Half"],
+    summary: "Jedburgh Running Festival — 10K and half-marathon road races through the Borders.",
+    description:
+      "The festival's 10K and half marathon start by Jedburgh Abbey and follow rural and closed roads through the Jed valley. The 10K turns at 5K on the A698 before returning to the riverside finish; race facilities are based beside Lothian Car Park.",
+    organiser: "Jedburgh Running Festival",
+    website: "https://www.jedburghrunningfestival.co.uk/",
+  },
+  "kernow-killer-october": {
+    name: "Kernow Killer October",
+    city: "Redruth",
+    county: "Cornwall",
+    country: "England",
+    area: "Scorrier House Estate",
+    surface: "Obstacle",
+    distances: ["2.5K", "5K", "10K"],
+    summary: "Kernow Killer — a teamwork-focused Cornish obstacle challenge over three distances.",
+    description:
+      "Kernow Killer crosses the Scorrier House Estate over rugged fields, woodland, water and mud. Its 10K course includes 30 obstacles, alongside shorter 5K and 2.5K options; the challenge prioritises teamwork and completing the course together rather than race timing.",
+    organiser: "Kernow Killer",
+    website: "https://www.kernowkiller.uk/",
+  },
+  "monsal-trail-half-marathon-autumn-sunday": {
+    name: "Monsal Trail October Half Marathon & 10K — Sunday",
+    city: "Bakewell",
+    county: "Derbyshire",
+    country: "England",
+    area: "Bakewell Station and Monsal Trail",
+    surface: "Trail",
+    distances: ["10K", "Half"],
+    summary: "Monsal Trail Sunday races — traffic-free autumn running from Bakewell Station.",
+    description:
+      "Nice Work's Sunday 10K and half marathon follow the former Midland Railway from Bakewell Station through Peak District countryside. Both use a predominantly flat, traffic-free mix of tarmac and hard trail, with the 10K turning inside the first tunnel.",
+    organiser: "Nice Work",
+    website:
+      "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+  },
+  "polesden-lacey-10k": {
+    name: "Polesden Lacey Trust 10K",
+    city: "Great Bookham",
+    county: "Surrey",
+    country: "England",
+    area: "Polesden Lacey Estate and Ranmore Common",
+    surface: "Trail",
+    distances: ["10K"],
+    summary: "Polesden Lacey Trust 10K — a free monthly trail run through the National Trust estate.",
+    description:
+      "The National Trust's informal 10K follows a circular trail through the Polesden Lacey Estate and Ranmore Common. The free fourth-Sunday run welcomes a range of abilities, requires no booking and starts from the main visitor car park.",
+    organiser: "National Trust — Polesden Lacey",
+    website:
+      "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
   },
 };
 
@@ -20775,6 +20924,194 @@ export const ukTenKEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       notes:
         "The event guide confirms 230 places, £19 affiliated and £21 unaffiliated entry, the Denton Holme facilities and Rome Street parking. Complete the purchase through DH Runners' official link.",
+    },
+  ],
+  "fleet-10k5k-peter-driver-memorial|2026-10-25|10K": [
+    {
+      providerCode: "official-fleet-10k-2026",
+      providerName: "Fleet 5K & 10K official entry",
+      entryUrl: "https://www.fleet10k.co.uk/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://www.fleet10k.co.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser confirms entries are open and lists 10K entry from £19, rising by £1 after 1 September. Use the 10K button rather than the separate 5K option.",
+    },
+    {
+      providerCode: "runabc-fleet-10k-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/fleet-10k5k-peter-driver-memorial",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/fleet-10k5k-peter-driver-memorial",
+      isVerified: true,
+      notes:
+        "runABC lists the exact 2026 race and offers a secondary entry route; Fleet & Crookham AC remains authoritative for live prices and availability.",
+    },
+  ],
+  "haltemprice-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-runthrough-haltemprice-2026",
+      providerName: "RunThrough official entry",
+      entryUrl: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+      entryType: "official",
+      status: "open",
+      priceAmount: 32,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "RunThrough lists live £32 entry for the 09:00 race and confirms Haltemprice Leisure Centre as the event base.",
+    },
+    {
+      providerCode: "findarace-haltemprice-2026",
+      providerName: "Find a Race — official booking partner",
+      entryUrl: "https://findarace.com/events/haltemprice-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 34,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://findarace.com/events/haltemprice-10k",
+      isVerified: true,
+      notes:
+        "Find a Race identifies itself as an official booking partner and currently lists a £34 checkout. Compare the final total with RunThrough's direct route.",
+    },
+  ],
+  "jedburgh-half-marathon|2026-10-25|10K": [
+    {
+      providerCode: "official-entrycentral-jedburgh-10k-2026",
+      providerName: "Jedburgh Running Festival official entry",
+      entryUrl: "https://www.entrycentral.com/festival/18",
+      entryType: "official",
+      status: "open",
+      priceAmount: 24,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-21T23:59:00+01:00",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://www.entrycentral.com/festival/18",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "EntryCentral lists £24 standard or £22 Scottish Athletics member entry for the 10K, closing on 21 October or earlier if the limit is reached.",
+    },
+    {
+      providerCode: "runabc-jedburgh-10k-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/jedburgh-half-marathon",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-19T22:00:00+01:00",
+      sourceUrl: "https://runabc.co.uk/jedburgh-half-marathon",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary entry route for the exact festival. Use EntryCentral to select the 10K rather than the half marathon.",
+    },
+  ],
+  "kernow-killer-october|2026-10-25|10K": [
+    {
+      providerCode: "official-kernow-killer-2026",
+      providerName: "Kernow Killer official entry",
+      entryUrl: "https://www.kernowkiller.uk/",
+      entryType: "official",
+      status: "open",
+      priceAmount: 75,
+      priceCurrency: "GBP",
+      closesAt: "2026-10-21T23:59:00+01:00",
+      checkedAt: "2026-08-20T21:30:00+01:00",
+      sourceUrl: "https://www.kernowkiller.uk/",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "The organiser lists adult 10K entry at £75, with separate under-16 and family categories. Entry closes at midnight on Wednesday 21 October.",
+    },
+    {
+      providerCode: "runabc-kernow-killer-2026",
+      providerName: "runABC entry guide",
+      entryUrl: "https://runabc.co.uk/kernow-killer-october",
+      entryType: "third_party",
+      status: "open",
+      checkedAt: "2026-08-20T21:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/kernow-killer-october",
+      isVerified: true,
+      notes:
+        "runABC supplies a secondary route to the exact October challenge; use Kernow Killer's official page to choose adult, child or family entry.",
+    },
+  ],
+  "monsal-trail-half-marathon-autumn-sunday|2026-10-25|10K": [
+    {
+      providerCode: "official-nice-work-monsal-sunday-2026",
+      providerName: "Nice Work official Sunday entry",
+      entryUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+      entryType: "official",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-20T21:30:00+01:00",
+      sourceUrl:
+        "https://www.nice-work.org.uk/e/monsal-trail-october-half-marathon-and-10k-weekend-10050",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "Nice Work lists open Sunday 10K entry at up to £28. Select the Sunday 25 October 10K rather than Saturday or either half-marathon option.",
+    },
+    {
+      providerCode: "timeoutdoors-monsal-sunday-2026",
+      providerName: "TimeOutdoors entry route",
+      entryUrl:
+        "https://www.timeoutdoors.com/events/monsal-trail-october-half-marathon-10k-sunday/10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 28,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-20T21:30:00+01:00",
+      sourceUrl:
+        "https://www.timeoutdoors.com/events/monsal-trail-october-half-marathon-10k-sunday/10k",
+      isVerified: true,
+      notes:
+        "TimeOutdoors lists the exact Sunday 10K at £28 and routes entrants onward; Nice Work remains authoritative for live availability.",
+    },
+  ],
+  "polesden-lacey-10k|2026-10-25|10K": [
+    {
+      providerCode: "official-national-trust-polesden-october-2026",
+      providerName: "National Trust event information",
+      entryUrl:
+        "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+      entryType: "official",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-20T21:30:00+01:00",
+      sourceUrl:
+        "https://www.nationaltrust.org.uk/visit/surrey/polesden-lacey/events/6ae7564c-7591-4e38-a056-0bea88be8062",
+      isVerified: true,
+      isPrimary: true,
+      notes:
+        "This is a free informal run and booking is not required. Check the National Trust page before travel and meet in the main visitor car park for 09:00.",
+    },
+    {
+      providerCode: "runabc-polesden-lacey-october-2026",
+      providerName: "runABC event guide",
+      entryUrl: "https://runabc.co.uk/polesden-lacey-10k",
+      entryType: "third_party",
+      status: "open",
+      priceAmount: 0,
+      priceCurrency: "GBP",
+      checkedAt: "2026-08-20T21:30:00+01:00",
+      sourceUrl: "https://runabc.co.uk/polesden-lacey-10k",
+      isVerified: true,
+      notes:
+        "runABC provides a secondary event listing; no paid checkout is needed because the National Trust confirms free participation without booking.",
     },
   ],
 };
