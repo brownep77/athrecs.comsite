@@ -149,7 +149,7 @@ assert(
   "The daily follow-up editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v236"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v240"'),
   "The persistent catalogue seed version was not advanced",
 );
 assert(
