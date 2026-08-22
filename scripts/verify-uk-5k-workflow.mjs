@@ -1,0 +1,152 @@
+import assert from "node:assert/strict";
+import fs from "node:fs/promises";
+
+const [fiveKData, { parkrunSeries }, { runabcSeries }, { worldAthleticsSeries }] =
+  await Promise.all([
+    import("../src/data/uk-5k-races.ts"),
+    import("../src/data/parkrun-uk.ts"),
+    import("../src/data/runabc.ts"),
+    import("../src/data/world-athletics.ts"),
+  ]);
+
+const {
+  ukFiveKEditions,
+  ukFiveKEditionOverrides,
+  ukFiveKResearchQueue,
+  ukFiveKSeries,
+  ukFiveKSeriesOverrides,
+} = fiveKData;
+
+const TODAY = "2026-08-22";
+const HORIZON = "2027-09-30";
+const UK_COUNTRIES = new Set(["England", "Northern Ireland", "Scotland", "Wales"]);
+const existingSeriesEditionSlugs = new Set(["wendover-woods-running-festival-august"]);
+
+assert(ukFiveKSeries.length >= 55, "The verified UK 5K release is unexpectedly small");
+assert(ukFiveKEditions.length > ukFiveKSeries.length, "Series with multiple dates were lost");
+
+const slugs = new Set();
+for (const series of ukFiveKSeries) {
+  assert(!slugs.has(series.slug), `Duplicate UK 5K slug: ${series.slug}`);
+  slugs.add(series.slug);
+  assert(series.distances.includes("5K"), `${series.slug} does not advertise a 5K distance`);
+  assert(UK_COUNTRIES.has(series.country), `${series.slug} has non-UK country ${series.country}`);
+  assert.match(series.website, /^https:\/\//, `${series.slug} website must use HTTPS`);
+  assert.match(series.source_url ?? "", /^https:\/\//, `${series.slug} source must use HTTPS`);
+}
+
+const editionKeys = new Set();
+for (const edition of ukFiveKEditions) {
+  const key = `${edition.seriesSlug}|${edition.date}`;
+  assert(!editionKeys.has(key), `Duplicate UK 5K edition: ${key}`);
+  editionKeys.add(key);
+  assert(
+    slugs.has(edition.seriesSlug) || existingSeriesEditionSlugs.has(edition.seriesSlug),
+    `${edition.seriesSlug} has no new or explicitly reused series`,
+  );
+  assert.match(edition.date, /^\d{4}-\d{2}-\d{2}$/, `${key} has an invalid ISO date`);
+  assert(edition.date >= TODAY && edition.date <= HORIZON, `${key} is outside the audit horizon`);
+  assert.equal(edition.distance, "5K", `${key} is not represented as a 5K edition`);
+  assert.equal(edition.distanceKm, 5, `${key} does not have a 5 km metric distance`);
+  assert.match(edition.source, /^https:\/\//, `${key} source must use HTTPS`);
+
+  if (edition.status === "Open") {
+    assert(edition.entryOptions?.length, `${key} needs a verified entry option`);
+  }
+  if (edition.status === "Closed" && !edition.entryOptions?.length) {
+    assert.match(
+      edition.notes ?? "",
+      /representative/i,
+      `${key} needs either a status option or a representative-race note`,
+    );
+  }
+  for (const option of edition.entryOptions ?? []) {
+    assert.equal(option.checkedAt, TODAY, `${key} has a stale entry check date`);
+    assert.equal(option.isVerified, true, `${key} has an unverified entry provider`);
+    assert.equal(option.isPrimary, true, `${key} primary entry provider is not marked`);
+    assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
+  }
+}
+
+const catalogueSource = await fs.readFile(
+  new URL("../src/data/catalogue.ts", import.meta.url),
+  "utf8",
+);
+const entryOptionsSource = await fs.readFile(
+  new URL("../src/data/entry-options.ts", import.meta.url),
+  "utf8",
+);
+assert(
+  catalogueSource.includes('import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races"'),
+  "The UK 5K dataset is not imported by the catalogue",
+);
+assert(
+  catalogueSource.includes("...(ukFiveKSeries as Series[])"),
+  "The UK 5K series are not merged into the catalogue",
+);
+assert(
+  catalogueSource.includes("...(ukFiveKEditions as Edition[])"),
+  "The UK 5K editions are not merged into the catalogue",
+);
+assert(
+  entryOptionsSource.includes("...ukFiveKEditionOverrides") &&
+    entryOptionsSource.includes("...ukFiveKSeriesOverrides"),
+  "The UK 5K corrections are not merged into entry options",
+);
+
+const existingSourceSlugs = new Set(
+  [...runabcSeries, ...worldAthleticsSeries].map((series) => series.slug),
+);
+for (const reusedSlug of existingSeriesEditionSlugs) {
+  assert(existingSourceSlugs.has(reusedSlug), `Reused series is missing upstream: ${reusedSlug}`);
+}
+
+const sentinels = [
+  "grc-coastal-5k-2026",
+  "llantwit-major-10k-5k-2026",
+  "aj-bell-great-south-5k-2026",
+  "run-london-victoria-park-5k-november-2026",
+  "howletts-cheetah-5k-2026",
+  "atw-neon-run-5k-10k-2026",
+  "duthie-park-5k-10k-2026",
+  "evensplits-leeds-5k-series-2026",
+  "runthrough-victoria-park-may-2027",
+  "runthrough-chepstow-august-2027",
+];
+for (const slug of sentinels) {
+  assert(slugs.has(slug), `Coverage sentinel is missing: ${slug}`);
+}
+
+for (const slug of ["ruthin-evening-5k", "the-bay-5k-series-race-3"]) {
+  assert.equal(ukFiveKSeriesOverrides[slug]?.country, "Wales", `${slug} was not moved to Wales`);
+}
+assert.equal(
+  ukFiveKSeriesOverrides["wa-antrim-coast-5k-7238722"]?.country,
+  "Northern Ireland",
+  "Antrim Coast 5K was not moved to Northern Ireland",
+);
+assert.equal(
+  ukFiveKEditionOverrides["wa-antrim-coast-5k-7238722|2026-08-23|Other"]?.distance,
+  "5K",
+  "Antrim Coast distance correction is missing",
+);
+
+const queuedSlugs = new Set();
+for (const candidate of ukFiveKResearchQueue) {
+  assert(!queuedSlugs.has(candidate.slug), `Duplicate research candidate: ${candidate.slug}`);
+  queuedSlugs.add(candidate.slug);
+  assert(!slugs.has(candidate.slug), `${candidate.slug} is queued and must not be published`);
+  assert.match(candidate.sourceUrl, /^https:\/\//, `${candidate.slug} queue source must use HTTPS`);
+}
+
+const weeklyParkruns = parkrunSeries.filter(
+  (series) => series.sport === "Parkrun" && series.distances.includes("5K"),
+);
+assert(
+  weeklyParkruns.length >= 800,
+  "Weekly adult parkruns must remain a separate catalogue stream",
+);
+
+console.log(
+  `UK 5K workflow verified: ${ukFiveKSeries.length} new series, ${ukFiveKEditions.length} editions, ${ukFiveKResearchQueue.length} held candidates, ${weeklyParkruns.length} weekly 5K parkruns preserved.`,
+);
