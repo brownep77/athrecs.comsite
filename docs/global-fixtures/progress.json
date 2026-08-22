@@ -234,6 +234,49 @@
       "events_imported": 25,
       "editions_imported": 25,
       "verified_at": "2026-08-22"
+    },
+    {
+      "id": "global-014",
+      "status": "verified",
+      "source_ids": [
+        "us_road_running"
+      ],
+      "regions": [
+        "USA"
+      ],
+      "countries": [
+        "United States"
+      ],
+      "series_slugs": [
+        "medal-madness-williamsburg-va",
+        "medal-madness-temple-tx",
+        "medal-madness-jacksonville-fl",
+        "medal-madness-rocky-mount-nc",
+        "medal-madness-holiday-fl",
+        "medal-madness-ocala-fl",
+        "medal-madness-pompano-beach-fl",
+        "medal-madness-panama-city-fl",
+        "medal-madness-tallahassee-fl",
+        "medal-madness-beavercreek-oh",
+        "medal-madness-stillwater-ok",
+        "medal-madness-columbus-ga",
+        "medal-madness-savannah-ga",
+        "medal-madness-springdale-ar",
+        "medal-madness-everett-wa",
+        "medal-madness-knoxville-tn",
+        "medal-madness-mobile-al",
+        "medal-madness-fort-smith-ar",
+        "medal-madness-piedmont-al",
+        "medal-madness-new-cumberland-pa",
+        "medal-madness-grand-ledge-mi",
+        "medal-madness-hattiesburg-ms",
+        "medal-madness-highland-ut",
+        "medal-madness-richmond-ky",
+        "medal-madness-des-moines-ia"
+      ],
+      "events_imported": 25,
+      "editions_imported": 25,
+      "verified_at": "2026-08-22"
     }
   ],
   "source_progress": [
@@ -270,8 +313,8 @@
     {
       "source_id": "us_road_running",
       "status": "manual_only",
-      "events_imported": 25,
-      "last_checkpoint": "global-013"
+      "events_imported": 50,
+      "last_checkpoint": "global-014"
     }
   ]
 }

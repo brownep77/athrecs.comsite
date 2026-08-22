@@ -163,3 +163,19 @@ no matching series or edition was found. One postponed candidate was excluded be
 import. Only factual fixture metadata is retained: no organiser prose, media or participant
 result rows are copied. The existing US Road Running registry row remains held for
 automated crawling, so this checkpoint is recorded as manual-only verification.
+
+## Checkpoint global-014
+
+Twenty-five further organiser-verified Medal Madness fixtures expand United States
+coverage across Alabama, Arkansas, Florida, Georgia, Iowa, Kentucky, Michigan,
+Mississippi, North Carolina, Ohio, Oklahoma, Pennsylvania, Tennessee, Texas, Utah,
+Virginia and Washington. Twenty-one take place on 5 September 2026, with the remaining
+four on 12, 19 and 26 September.
+
+Each edition retains the official US Road Running event page for date, start time, venue
+and distances and uses a direct matching RunSignup registration route as its primary
+entry URL. The batch adds 5K, 10K, half-marathon and marathon options; current adult entry
+is published from $30 plus signup fee. All 25 city-specific canonical names and slugs were
+checked against the current main catalogue and the preceding US checkpoints before
+insertion, with no match found. No organiser prose, media or participant result rows are
+copied, and the source remains manual-only for this checkpoint.
