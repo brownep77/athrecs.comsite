@@ -10,10 +10,16 @@ import {
   clubSlugAliases,
 } from "@/data/catalogue";
 import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
-import { publicFigureAthletes, publicFigureResults } from "@/data/public-figures";
+import {
+  publicFigureAthletes,
+  publicFigureEditions,
+  publicFigureResults,
+  publicFigureSeries,
+} from "@/data/public-figures";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-public-figures-wave-2-v241";
+const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v240";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-2-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -991,6 +997,148 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
 }
 
 async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'public_figures_catalogue_version' limit 1
+  `;
+  if (meta[0]?.value === PUBLIC_FIGURE_SEED_VERSION) return;
+
+  await insertRows(
+    sql,
+    "events",
+    [
+      "source_id",
+      "slug",
+      "name",
+      "sport",
+      "country",
+      "county",
+      "city",
+      "area",
+      "surface",
+      "summary",
+      "description",
+      "organiser",
+      "website",
+      "featured",
+      "source_url",
+    ],
+    publicFigureSeries.map((series) => [
+      series.source_id ?? null,
+      series.slug,
+      series.name,
+      series.sport,
+      series.country,
+      series.county,
+      series.city,
+      series.area,
+      series.surface,
+      series.summary,
+      series.description,
+      series.organiser,
+      series.website,
+      series.featured ?? false,
+      series.source_url ?? null,
+    ]),
+    `on conflict (slug) do update set
+      source_id = excluded.source_id,
+      name = excluded.name,
+      sport = excluded.sport,
+      country = excluded.country,
+      county = excluded.county,
+      city = excluded.city,
+      area = excluded.area,
+      surface = excluded.surface,
+      summary = excluded.summary,
+      description = excluded.description,
+      organiser = excluded.organiser,
+      website = excluded.website,
+      featured = excluded.featured,
+      source_url = excluded.source_url`,
+  );
+
+  const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
+  const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
+  const distanceRows = publicFigureSeries.flatMap((series) =>
+    [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
+  );
+  await insertRows(
+    sql,
+    "event_distances",
+    ["event_id", "distance_code"],
+    distanceRows,
+    "on conflict (event_id, distance_code) do nothing",
+  );
+
+  await insertRows(
+    sql,
+    "editions",
+    [
+      "source_id",
+      "event_id",
+      "event_date",
+      "distance_code",
+      "distance_km",
+      "status",
+      "entry_url",
+      "source_url",
+      "start_time",
+      "notes",
+      "results_permission",
+      "results_hosting",
+      "results_official_url",
+      "results_permission_note",
+      "results_permission_at",
+      "results_permission_by",
+      "results_rights_requested_at",
+      "public_result_count",
+      "partner_result_count",
+      "athlete_result_count",
+      "results_access",
+    ],
+    publicFigureEditions.map((edition) => [
+      edition.source_id ?? null,
+      eventIds.get(edition.seriesSlug),
+      edition.date,
+      edition.distance,
+      edition.distanceKm,
+      edition.status,
+      edition.entryUrl ?? null,
+      edition.source,
+      edition.startTime ?? null,
+      edition.notes ?? null,
+      edition.resultsPermission ?? null,
+      edition.resultsHosting ?? null,
+      edition.resultsOfficialUrl ?? null,
+      edition.resultsPermissionNote ?? null,
+      edition.resultsPermissionAt ?? null,
+      edition.resultsPermissionBy ?? null,
+      edition.resultsRightsRequestedAt ?? null,
+      edition.publicResultCount ?? null,
+      edition.partnerResultCount ?? null,
+      edition.athleteResultCount ?? null,
+      edition.resultsAccess ?? null,
+    ]),
+    `on conflict (event_id, event_date, distance_code) do update set
+      source_id = excluded.source_id,
+      distance_km = excluded.distance_km,
+      status = excluded.status,
+      entry_url = excluded.entry_url,
+      source_url = excluded.source_url,
+      start_time = excluded.start_time,
+      notes = excluded.notes,
+      results_permission = excluded.results_permission,
+      results_hosting = excluded.results_hosting,
+      results_official_url = excluded.results_official_url,
+      results_permission_note = excluded.results_permission_note,
+      results_permission_at = excluded.results_permission_at,
+      results_permission_by = excluded.results_permission_by,
+      results_rights_requested_at = excluded.results_rights_requested_at,
+      public_result_count = excluded.public_result_count,
+      partner_result_count = excluded.partner_result_count,
+      athlete_result_count = excluded.athlete_result_count,
+      results_access = excluded.results_access`,
+  );
+
   const clubRows = await sql<{ id: number; slug: string }>`
     select id, slug from clubs where slug in ('unattached')
   `;
@@ -1120,6 +1268,11 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       result_source = excluded.result_source,
       source_url = excluded.source_url`,
   );
+  await sql`
+    insert into app_meta (key, value)
+    values ('public_figures_catalogue_version', ${PUBLIC_FIGURE_SEED_VERSION})
+    on conflict (key) do update set value = excluded.value
+  `;
 }
 
 async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, number>): Promise<void> {
