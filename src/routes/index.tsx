@@ -22,9 +22,13 @@ import {
   selectBalancedHomeUpdates,
   type HomeSportUpdate,
 } from "@/lib/athrecs/home-updates";
+import { SITE_URL } from "@/lib/athrecs/seo";
 import type { EventListItem, Sport } from "@/lib/athrecs/types";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    links: [{ rel: "canonical", href: SITE_URL }],
+  }),
   loader: async () => {
     const [stats, running, updates] = await Promise.all([
       getHomeStats(),

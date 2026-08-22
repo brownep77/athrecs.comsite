@@ -41,6 +41,19 @@ const catalogueSource = readFileSync(new URL("../src/data/catalogue.ts", import.
 assert.match(catalogueSource, /\.\.\.\(publicFigureSeries as Series\[\]\)/);
 assert.match(catalogueSource, /\.\.\.\(publicFigureEditions as Edition\[\]\)/);
 
+const rootRouteSource = readFileSync(new URL("../src/routes/__root.tsx", import.meta.url), "utf8");
+const homeRouteSource = readFileSync(new URL("../src/routes/index.tsx", import.meta.url), "utf8");
+assert.doesNotMatch(
+  rootRouteSource,
+  /\{ rel: "canonical", href: SITE_URL \}/,
+  "The root route must not add the homepage canonical to every page",
+);
+assert.match(
+  homeRouteSource,
+  /links: \[\{ rel: "canonical", href: SITE_URL \}\]/,
+  "The homepage must retain its own canonical URL",
+);
+
 const publicFigureEditionKeys = new Set(
   publicFigureEditions.map(
     (edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`,
