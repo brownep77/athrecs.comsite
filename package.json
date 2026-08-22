@@ -33,6 +33,7 @@
     "verify:home-sports-news": "node --experimental-strip-types scripts/verify-home-sports-news.mjs",
     "verify:uk-10k-workflow": "node scripts/verify-uk-10k-workflow.mjs",
     "verify:uk-5k-workflow": "node --experimental-strip-types scripts/verify-uk-5k-workflow.mjs",
+    "verify:uk-ireland-5-mile-workflow": "node --experimental-strip-types scripts/verify-uk-ireland-5-mile-workflow.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
