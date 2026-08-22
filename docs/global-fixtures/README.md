@@ -179,3 +179,19 @@ is published from $30 plus signup fee. All 25 city-specific canonical names and 
 checked against the current main catalogue and the preceding US checkpoints before
 insertion, with no match found. No organiser prose, media or participant result rows are
 copied, and the source remains manual-only for this checkpoint.
+
+
+## Checkpoint global-015
+
+Twenty-five additional organiser-verified Medal Madness fixtures extend United States
+coverage across Alabama, Arkansas, Florida, Georgia, Kentucky, Maryland, Missouri,
+Oklahoma, Pennsylvania, Texas, Virginia and Washington. Seventeen races take place on
+12 September 2026, with four on 19 September and four on 26 September.
+
+Each edition keeps its official US Road Running event page for the published date, start
+time, venue and distances, and uses the direct matching RunSignup registration route as
+its primary entry URL. The checkpoint adds 5K, 10K and half-marathon combinations; adult
+entry is currently published from $30 plus signup fee. All 25 city-specific canonical
+names and slugs were checked against the current catalogue and earlier US checkpoints
+before insertion, with no match found. No organiser prose, media or participant result
+rows are copied, and the source remains manual-only for this checkpoint.
