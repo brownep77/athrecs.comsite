@@ -23,20 +23,10 @@
     {
       "id": "global-001",
       "status": "verified",
-      "source_ids": [
-        "justruns_upcoming_ireland"
-      ],
-      "regions": [
-        "Ireland"
-      ],
-      "countries": [
-        "Ireland"
-      ],
-      "series_slugs": [
-        "hardman-killarney",
-        "run-brave-for-yourself",
-        "hardman-run-ballinskelligs"
-      ],
+      "source_ids": ["justruns_upcoming_ireland"],
+      "regions": ["Ireland"],
+      "countries": ["Ireland"],
+      "series_slugs": ["hardman-killarney", "run-brave-for-yourself", "hardman-run-ballinskelligs"],
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-19"
@@ -44,20 +34,10 @@
     {
       "id": "global-002",
       "status": "verified",
-      "source_ids": [
-        "justruns_upcoming_ireland"
-      ],
-      "regions": [
-        "Ireland"
-      ],
-      "countries": [
-        "Ireland"
-      ],
-      "series_slugs": [
-        "bk5k",
-        "kildare-ac-70th-anniversary-road-races",
-        "south-kilkenny-run"
-      ],
+      "source_ids": ["justruns_upcoming_ireland"],
+      "regions": ["Ireland"],
+      "countries": ["Ireland"],
+      "series_slugs": ["bk5k", "kildare-ac-70th-anniversary-road-races", "south-kilkenny-run"],
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-19"
@@ -65,19 +45,9 @@
     {
       "id": "global-003",
       "status": "verified",
-      "source_ids": [
-        "up_running_scotland",
-        "runthrough_uk"
-      ],
-      "regions": [
-        "UK",
-        "UK & Europe"
-      ],
-      "countries": [
-        "Scotland",
-        "England",
-        "Switzerland"
-      ],
+      "source_ids": ["up_running_scotland", "runthrough_uk"],
+      "regions": ["UK", "UK & Europe"],
+      "countries": ["Scotland", "England", "Switzerland"],
       "series_slugs": [
         "camperdown-park-5k-10k-half-marathon",
         "manchester-running-festival",
@@ -90,17 +60,9 @@
     {
       "id": "global-004",
       "status": "verified",
-      "source_ids": [
-        "te_sports_timing_upcoming",
-        "up_running_scotland"
-      ],
-      "regions": [
-        "UK"
-      ],
-      "countries": [
-        "Wales",
-        "Scotland"
-      ],
+      "source_ids": ["te_sports_timing_upcoming", "up_running_scotland"],
+      "regions": ["UK"],
+      "countries": ["Wales", "Scotland"],
       "series_slugs": [
         "run4all-neath-5k-summer-series",
         "cuningar-loop-5k-10k",
@@ -113,17 +75,9 @@
     {
       "id": "global-005",
       "status": "verified",
-      "source_ids": [
-        "runthrough_uk"
-      ],
-      "regions": [
-        "UK & Europe"
-      ],
-      "countries": [
-        "Italy",
-        "Germany",
-        "Spain"
-      ],
+      "source_ids": ["runthrough_uk"],
+      "regions": ["UK & Europe"],
+      "countries": ["Italy", "Germany", "Spain"],
       "series_slugs": [
         "5laghi-ivrea",
         "runthrough-trails-berchtesgaden",
@@ -136,18 +90,9 @@
     {
       "id": "global-006",
       "status": "verified",
-      "source_ids": [
-        "runthrough_uk"
-      ],
-      "regions": [
-        "Global",
-        "UK"
-      ],
-      "countries": [
-        "France",
-        "United States",
-        "England"
-      ],
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Global", "UK"],
+      "countries": ["France", "United States", "England"],
       "series_slugs": [
         "runthrough-trails-morzine-avoriaz",
         "long-beach-5k-10k-half-marathon",
@@ -160,16 +105,9 @@
     {
       "id": "global-007",
       "status": "verified",
-      "source_ids": [
-        "runthrough_uk"
-      ],
-      "regions": [
-        "Global",
-        "UK"
-      ],
-      "countries": [
-        "England"
-      ],
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Global", "UK"],
+      "countries": ["England"],
       "series_slugs": [
         "ride-reigate",
         "goodwood-motor-circuit-running-gp-duathlons",
@@ -182,17 +120,9 @@
     {
       "id": "global-008",
       "status": "verified",
-      "source_ids": [
-        "runthrough_uk"
-      ],
-      "regions": [
-        "Global",
-        "UK"
-      ],
-      "countries": [
-        "United States",
-        "Northern Ireland"
-      ],
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Global", "UK"],
+      "countries": ["United States", "Northern Ireland"],
       "series_slugs": [
         "philadelphia-labor-day-5k-10k-10-mile",
         "washington-dc-anacostia-park-5k-10k",
@@ -205,15 +135,9 @@
     {
       "id": "global-009",
       "status": "verified",
-      "source_ids": [
-        "runthrough_uk"
-      ],
-      "regions": [
-        "Global"
-      ],
-      "countries": [
-        "United States"
-      ],
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Global"],
+      "countries": ["United States"],
       "series_slugs": [
         "staten-island-freshkills-park-5k-10k-half-marathon",
         "hoboken-5k-10k",
@@ -226,17 +150,9 @@
     {
       "id": "global-010",
       "status": "verified",
-      "source_ids": [
-        "runthrough_uk"
-      ],
-      "regions": [
-        "Europe",
-        "UK"
-      ],
-      "countries": [
-        "Switzerland",
-        "England"
-      ],
+      "source_ids": ["runthrough_uk"],
+      "regions": ["Europe", "UK"],
+      "countries": ["Switzerland", "England"],
       "series_slugs": [
         "runthrough-trails-ascona-locarno",
         "runthrough-ultra-orsieres",
@@ -249,15 +165,9 @@
     {
       "id": "global-011",
       "status": "verified",
-      "source_ids": [
-        "atlanta_track_club"
-      ],
-      "regions": [
-        "USA"
-      ],
-      "countries": [
-        "United States"
-      ],
+      "source_ids": ["atlanta_track_club"],
+      "regions": ["USA"],
+      "countries": ["United States"],
       "series_slugs": [
         "pnc-atlanta-10-miler-5k",
         "invesco-qqq-thanksgiving-day-half-marathon",
@@ -270,15 +180,9 @@
     {
       "id": "global-012",
       "status": "verified",
-      "source_ids": [
-        "atlanta_track_club"
-      ],
-      "regions": [
-        "USA"
-      ],
-      "countries": [
-        "United States"
-      ],
+      "source_ids": ["atlanta_track_club"],
+      "regions": ["USA"],
+      "countries": ["United States"],
       "series_slugs": [
         "firefighter-5k-atlanta",
         "wingfoot-xc-classic",
