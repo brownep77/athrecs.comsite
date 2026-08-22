@@ -33,7 +33,8 @@ the end of 2027 and records each race's actual surface rather than treating ever
 - Athletics Ireland permit states exposed by Eventmaster
 
 The implementation lives in `src/data/uk-5k-races.ts` and
-`src/data/five-k-races-uk-ireland-next.ts`. Run
+`src/data/five-k-races-uk-ireland-next.ts`, with new monitoring additions in
+`src/data/five-k-races-uk-ireland-daily.ts`. Run
 `npm run verify:uk-5k-workflow` after future changes.
 
 ## Follow-up release
@@ -56,6 +57,29 @@ The new public batch contains **55 series and 55 dated 5K editions**:
 The surface mix is **Road, Track, Mixed and Beach**. Debden Airfield, Goodwood Motor Circuit and
 Lee Valley VeloPark are tagged `Track`; Dune Run Bundoran and Brandon Bay are tagged `Beach`;
 park or wildlife-park courses whose official descriptions are not solely road are tagged `Mixed`.
+
+## Daily-scan baseline release
+
+The first daily-scan baseline publishes **10 additional dated races** after checking their
+organiser or direct-registration pages and comparing names, slugs, dates and sources with the
+existing catalogue:
+
+| Date        | Race                             | Country | Surface       |
+| ----------- | -------------------------------- | ------- | ------------- |
+| 27 Aug 2026 | Dunboyne Track 5K                | Ireland | Track         |
+| 5 Sep 2026  | Seamie Weldon 5K & 10K Road Race | Ireland | Road          |
+| 19 Sep 2026 | Horsted Keynes Fun Run 5K        | England | Trail         |
+| 20 Oct 2026 | Savills Sandymount Night Run 5K  | Ireland | Road          |
+| 29 Nov 2026 | Skipton Santa Fun Run 5K         | England | Mixed         |
+| 13 Dec 2026 | Bedale Santa Run 5K              | England | Mixed         |
+| 21 Dec 2026 | Winter Solstice Strider 5K       | England | Trail         |
+| 7 Mar 2027  | Keighley 10K & 5K                | England | Mixed         |
+| 14 Mar 2027 | Wakefield Hospice 5K             | England | Road          |
+| 13 Jun 2027 | PaintRush 5K                     | England | Cross Country |
+
+The scan excludes any separate virtual entry. Portmarnock AC Beach 5K remains unpublished while
+its Athletics Ireland permit is pending, and St Luke's 5K Run to Remember remains held because
+its previously indexed registration page is no longer stable.
 
 ## Existing records retained and enriched
 

@@ -13,7 +13,7 @@ import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
 import { publicFigureAthletes, publicFigureResults } from "@/data/rich-roll";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-rich-roll-public-figure-v233";
+const SEED_VERSION = "athrecs-uk-ireland-5k-daily-v234";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;

@@ -36,6 +36,7 @@
     "verify:uk-ireland-half-marathons": "node --experimental-strip-types scripts/verify-uk-ireland-half-marathons.mjs",
     "verify:uk-ireland-half-to-20-mile": "node --experimental-strip-types scripts/verify-uk-ireland-half-to-20-mile.mjs",
     "verify:uk-5k-workflow": "node --experimental-strip-types scripts/verify-uk-5k-workflow.mjs",
+    "verify:uk-ireland-5k-daily": "node --experimental-strip-types scripts/verify-uk-ireland-5k-daily.mjs",
     "verify:uk-ireland-5-mile-workflow": "node --experimental-strip-types scripts/verify-uk-ireland-5-mile-workflow.mjs",
     "verify:uk-ireland-10-mile-workflow": "node --experimental-strip-types scripts/verify-uk-ireland-10-mile-workflow.mjs",
     "lint": "eslint .",
