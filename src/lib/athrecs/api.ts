@@ -660,6 +660,7 @@ export const listAthletes = createServerFn({ method: "GET" })
     return sql<AthleteListItem>`
       select
         a.id, a.slug, a.display_name, a.gender, a.city, a.county, a.country,
+        a.profile_type, a.profile_roles,
         c.name as club,
         c.slug as club_slug,
         (select count(*)::int from results r where r.athlete_id = a.id) as result_count
@@ -670,6 +671,8 @@ export const listAthletes = createServerFn({ method: "GET" })
         or lower(a.display_name) like ${q}
         or lower(coalesce(c.name, '')) like ${q}
         or lower(coalesce(a.city, '')) like ${q}
+        or lower(coalesce(a.profile_type, '')) like ${q}
+        or lower(coalesce(a.profile_roles, '')) like ${q}
       order by a.display_name
     `;
   });
@@ -687,6 +690,9 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       county: string;
       country: string;
       bio: string;
+      profile_type: string;
+      profile_roles: string;
+      profile_source_checked_at: string | null;
       club: string | null;
       club_slug: string | null;
     }>`
@@ -708,6 +714,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       overall_place: number | null;
       finish_time_seconds: number | null;
       category: string | null;
+      source_url: string | null;
     }>`
       select
         r.id,
@@ -717,7 +724,8 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
         ed.distance_code,
         r.overall_place,
         r.finish_time_seconds,
-        r.category
+        r.category,
+        r.source_url
       from results r
       join editions ed on ed.id = r.edition_id
       join events e on e.id = ed.event_id
@@ -982,23 +990,21 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       published_at desc
   `;
 
-  return rows.map(
-    (row): HomeSportUpdate => ({
-      id: row.id,
-      kind: row.kind,
-      sport: row.sport,
-      eventSlug: row.event_slug,
-      eventName: row.event_name,
-      country: row.country,
-      county: row.county,
-      city: row.city,
-      eventDate: row.event_date,
-      distance: row.distance,
-      status: row.status,
-      providerName: row.provider_name,
-      publishedAt: row.published_at,
-    }),
-  );
+  return rows.map((row): HomeSportUpdate => ({
+    id: row.id,
+    kind: row.kind,
+    sport: row.sport,
+    eventSlug: row.event_slug,
+    eventName: row.event_name,
+    country: row.country,
+    county: row.county,
+    city: row.city,
+    eventDate: row.event_date,
+    distance: row.distance,
+    status: row.status,
+    providerName: row.provider_name,
+    publishedAt: row.published_at,
+  }));
 });
 
 /** Live DB backend + row counts for admin diagnosis (Neon vs ephemeral PGLite). */
