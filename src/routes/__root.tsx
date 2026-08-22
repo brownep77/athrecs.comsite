@@ -52,7 +52,6 @@ export const Route = createRootRoute({
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
       { rel: "apple-touch-icon", href: "/athrecs-icon-192.png" },
-      { rel: "canonical", href: SITE_URL },
       { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
     ],
     scripts: [
