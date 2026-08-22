@@ -51,9 +51,11 @@ assert.deepEqual(
 );
 
 const homepage = await readFile(resolve(root, "src/routes/index.tsx"), "utf8");
-assert.match(homepage, /Every sport, counted/);
-assert.match(homepage, /Sport news & regional updates/);
-assert.match(homepage, /SPORTS\.map/);
+assert.match(homepage, /Race board/);
+assert.match(homepage, /boardView === "results"/);
+assert.match(homepage, /regional\.map/);
+assert.match(homepage, /HOME_SPORTS\.map/);
+assert.match(homepage, /Ultra marathon/);
 assert.doesNotMatch(homepage, /dangerouslySetInnerHTML/);
 
 const api = await readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8");
