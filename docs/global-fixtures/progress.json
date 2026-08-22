@@ -416,6 +416,43 @@
       "events_imported": 25,
       "editions_imported": 25,
       "verified_at": "2026-08-22"
+    },
+    {
+      "id": "global-016",
+      "status": "verified",
+      "source_ids": [
+        "us_road_running"
+      ],
+      "regions": [
+        "USA"
+      ],
+      "countries": [
+        "United States"
+      ],
+      "series_slugs": [
+        "medal-madness-byron-ga",
+        "medal-madness-tyler-tx",
+        "medal-madness-cypress-tx",
+        "haunted-iowa-city-ia",
+        "medal-madness-oklahoma-city-ok",
+        "medal-madness-lansing-mi",
+        "medal-madness-homestead-fl",
+        "medal-madness-deltona-fl",
+        "medal-madness-boone-nc",
+        "medal-madness-winston-salem-nc",
+        "medal-madness-hudson-fl",
+        "medal-madness-venice-fl",
+        "haunted-pooler-ga",
+        "haunted-athens-ga",
+        "medal-madness-fort-pierce-fl",
+        "medal-madness-tucson-az",
+        "medal-madness-shreveport-la",
+        "medal-madness-corunna-mi",
+        "haunted-dacula-ga"
+      ],
+      "events_imported": 19,
+      "editions_imported": 19,
+      "verified_at": "2026-08-22"
     }
   ],
   "source_progress": [
@@ -452,8 +489,8 @@
     {
       "source_id": "us_road_running",
       "status": "manual_only",
-      "events_imported": 75,
-      "last_checkpoint": "global-015"
+      "events_imported": 94,
+      "last_checkpoint": "global-016"
     }
   ]
 }

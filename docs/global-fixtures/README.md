@@ -186,7 +186,7 @@ copied, and the source remains manual-only for this checkpoint.
 Twenty-five additional organiser-verified Medal Madness fixtures extend United States
 coverage across Alabama, Arkansas, Florida, Georgia, Kentucky, Maryland, Missouri,
 Oklahoma, Pennsylvania, Texas, Virginia and Washington. Seventeen races take place on
-12 September 2026, with four on 19 September and four on 26 September.
+12 September 2026, with five on 19 September and three on 26 September.
 
 Each edition keeps its official US Road Running event page for the published date, start
 time, venue and distances, and uses the direct matching RunSignup registration route as
@@ -195,3 +195,19 @@ entry is currently published from $30 plus signup fee. All 25 city-specific cano
 names and slugs were checked against the current catalogue and earlier US checkpoints
 before insertion, with no match found. No organiser prose, media or participant result
 rows are copied, and the source remains manual-only for this checkpoint.
+
+
+## Checkpoint global-016
+
+Nineteen final organiser-verified fixtures bring this review batch to its 100-race cap.
+They add new city series across Arizona, Florida, Georgia, Iowa, Louisiana, Michigan,
+North Carolina, Oklahoma and Texas. One race takes place on 5 September 2026, five on
+19 September, nine on 26 September, two on 3 October and one each on 10 and 17 October.
+
+Each edition uses its official US Road Running event page for the published date, start
+time, venue and distances, plus the direct matching RunSignup registration route as its
+primary entry URL. The checkpoint includes Medal Madness and Haunted themes with 5K,
+10K, half-marathon and marathon options. All 19 canonical series slugs were checked
+against the current catalogue and checkpoints global-011 through global-015 before
+insertion. Only factual fixture metadata is retained; organiser prose, media and
+participant result rows are excluded.
