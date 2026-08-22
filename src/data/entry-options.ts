@@ -29,6 +29,7 @@ import {
   verifiedFiveMileSeriesOverrides,
 } from "./five-mile-races-uk-ireland";
 import { verifiedTenKFollowupSeriesOverrides } from "./ten-k-races-uk-ireland-followup";
+import { verifiedTenMileSeriesOverrides } from "./ten-mile-races-uk-ireland";
 import {
   verifiedHalfMarathonFollowupEditionOverrides,
   verifiedHalfMarathonFollowupEntryOptions,
@@ -72,6 +73,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...ukFiveKSeriesOverrides,
   ...verifiedFiveMileSeriesOverrides,
   ...verifiedTenKFollowupSeriesOverrides,
+  ...verifiedTenMileSeriesOverrides,
   ...verifiedHalfMarathonFollowupSeriesOverrides,
 };
 

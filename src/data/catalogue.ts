@@ -78,6 +78,7 @@ import {
   verifiedTenKFollowupEditions,
   verifiedTenKFollowupSeries,
 } from "./ten-k-races-uk-ireland-followup";
+import { verifiedTenMileEditions, verifiedTenMileSeries } from "./ten-mile-races-uk-ireland";
 import {
   verifiedHalfMarathonFollowupEditions,
   verifiedHalfMarathonFollowupSeries,
@@ -149,6 +150,7 @@ for (const series of [
   ...(continuedFiveKSeries as Series[]),
   ...(verifiedFiveMileSeries as Series[]),
   ...(verifiedTenKFollowupSeries as Series[]),
+  ...(verifiedTenMileSeries as Series[]),
   ...(verifiedHalfMarathonFollowupSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(multiSportSeries as Series[]),
@@ -192,6 +194,7 @@ const mergedEditions = [
   ...(verifiedTenKFollowupEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
+  ...(verifiedTenMileEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(verifiedHalfMarathonFollowupEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
