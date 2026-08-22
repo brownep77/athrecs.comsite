@@ -568,6 +568,62 @@ export const verifiedGlobalSeries: Series[] = [
     source_url:
       "https://www.runthrough.co.uk/event/the-fox-trail-62k-41k-20k-may-2027",
   },
+  {
+    slug: "pnc-atlanta-10-miler-5k",
+    name: "PNC Atlanta 10 Miler & 5K",
+    sport: "Running",
+    country: "United States",
+    county: "Georgia",
+    city: "Atlanta",
+    area: "Atlantic Station and Buckhead",
+    surface: "Road",
+    distances: ["10 Mile", "5K", "1 Mile", "Dash"],
+    summary: "A 10-mile and 5K road-race weekend based at Atlantic Station.",
+    description:
+      "Atlanta Track Club's autumn race weekend sends the 10-mile and 5K fields from Atlantic Station through Atlanta's Buckhead neighbourhood, with youth races on the preceding day.",
+    organiser: "Atlanta Track Club",
+    website: "https://www.atlantatrackclub.org/2026-pnc-atlanta-10-miler-5k",
+    featured: false,
+    source_url: "https://www.atlantatrackclub.org/2026-pnc-atlanta-10-miler-5k",
+  },
+  {
+    slug: "invesco-qqq-thanksgiving-day-half-marathon",
+    name: "Invesco QQQ Thanksgiving Day Half Marathon, 5K, Mile & Dash",
+    sport: "Running",
+    country: "United States",
+    county: "Georgia",
+    city: "Atlanta",
+    area: "Center Parc Stadium, Summerhill and Grant Park",
+    surface: "Road",
+    distances: ["Half", "5K", "1 Mile", "Dash"],
+    summary: "Atlanta's Thanksgiving Day half marathon and family race programme.",
+    description:
+      "A Thanksgiving morning road-race programme starting and finishing outside Center Parc Stadium, with half-marathon, 5K, mile and dash events.",
+    organiser: "Atlanta Track Club",
+    website:
+      "https://www.atlantatrackclub.org/2026-invesco-qqq-thanksgiving-day-half-marathon-5k-mile-dash",
+    featured: false,
+    source_url:
+      "https://www.atlantatrackclub.org/2026-invesco-qqq-thanksgiving-day-half-marathon-5k-mile-dash",
+  },
+  {
+    slug: "atlanta-marathon-weekend",
+    name: "Atlanta Marathon Weekend",
+    sport: "Running",
+    country: "United States",
+    county: "Georgia",
+    city: "Atlanta",
+    area: "Downtown Atlanta and The Home Depot Backyard",
+    surface: "Road",
+    distances: ["Marathon", "Half", "5K", "3K", "50m Dash"],
+    summary: "Atlanta's marathon, half marathon, 5K and youth race weekend.",
+    description:
+      "A two-day Atlanta Track Club race programme, with the 5K and youth races on Saturday followed by the marathon and half marathon on Sunday.",
+    organiser: "Atlanta Track Club",
+    website: "https://www.atlantatrackclub.org/2027-atlanta-marathon-weekend",
+    featured: false,
+    source_url: "https://www.atlantatrackclub.org/2027-atlanta-marathon-weekend",
+  },
 ];
 
 export const verifiedGlobalEditions: Edition[] = [
@@ -1475,5 +1531,99 @@ export const verifiedGlobalEditions: Edition[] = [
       "https://www.runthrough.co.uk/event/the-fox-trail-62k-41k-20k-may-2027",
     notes:
       "The 62K starts at 08:00, the 41K at 09:30 and the 20K at 11:00 on the point-to-point Fox Way route.",
+  },
+  {
+    seriesSlug: "pnc-atlanta-10-miler-5k",
+    date: "2026-10-25",
+    distance: "10 Mile",
+    distanceKm: 16.0934,
+    status: "Open",
+    entryUrl:
+      "https://www.letsdothis.com/us/e/2026-pnc-atlanta-10-miler-5k-mile-dash-234973/race-selection?eventId=234973&occurrenceId=21111164286&preferred=true&utm_organiser_id=102981",
+    entryOptions: [
+      {
+        providerCode: "atlanta-track-club-lets-do-this",
+        providerName: "Atlanta Track Club / Let's Do This",
+        entryUrl:
+          "https://www.letsdothis.com/us/e/2026-pnc-atlanta-10-miler-5k-mile-dash-234973/race-selection?eventId=234973&occurrenceId=21111164286&preferred=true&utm_organiser_id=102981",
+        entryType: "official",
+        status: "open",
+        priceAmount: 90,
+        priceCurrency: "USD",
+        checkedAt: "2026-08-22",
+        sourceUrl: "https://www.atlantatrackclub.org/2026-pnc-atlanta-10-miler-5k",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "Atlanta Track Club links directly to this registration route; the current 10-mile entry tier is $90 and the 5K is $45.",
+      },
+    ],
+    source: "https://www.atlantatrackclub.org/2026-pnc-atlanta-10-miler-5k",
+    notes:
+      "The official organiser page confirms the main 10-mile and 5K races on 25 October 2026, with youth mile and dash events on 24 October.",
+  },
+  {
+    seriesSlug: "invesco-qqq-thanksgiving-day-half-marathon",
+    date: "2026-11-26",
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl:
+      "https://www.letsdothis.com/us/e/2026-invesco-qqq-thanksgiving-day-half-marathon-5k-mile-dash-234981/race-selection?eventId=234981&occurrenceId=21111168092&preferred=true&utm_organiser_id=102981",
+    entryOptions: [
+      {
+        providerCode: "atlanta-track-club-lets-do-this",
+        providerName: "Atlanta Track Club / Let's Do This",
+        entryUrl:
+          "https://www.letsdothis.com/us/e/2026-invesco-qqq-thanksgiving-day-half-marathon-5k-mile-dash-234981/race-selection?eventId=234981&occurrenceId=21111168092&preferred=true&utm_organiser_id=102981",
+        entryType: "official",
+        status: "open",
+        priceAmount: 125,
+        priceCurrency: "USD",
+        closesAt: "2026-11-20T23:59:00-05:00",
+        checkedAt: "2026-08-22",
+        sourceUrl:
+          "https://www.atlantatrackclub.org/2026-invesco-qqq-thanksgiving-day-half-marathon-5k-mile-dash",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "Atlanta Track Club links directly to this registration route; current half-marathon entry is $125 and the 5K is $50.",
+      },
+    ],
+    startTime: "07:45",
+    source:
+      "https://www.atlantatrackclub.org/2026-invesco-qqq-thanksgiving-day-half-marathon-5k-mile-dash",
+    notes:
+      "The half marathon starts at 07:45 and the 5K at 08:15 outside Center Parc Stadium on Thanksgiving Day.",
+  },
+  {
+    seriesSlug: "atlanta-marathon-weekend",
+    date: "2027-03-07",
+    distance: "Marathon",
+    distanceKm: 42.195,
+    status: "Open",
+    entryUrl:
+      "https://www.letsdothis.com/us/o/102981/checkout/ticket?eventId=243579&occurrenceId=21111173218&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=102981&utm_source=website",
+    entryOptions: [
+      {
+        providerCode: "atlanta-track-club-lets-do-this",
+        providerName: "Atlanta Track Club / Let's Do This",
+        entryUrl:
+          "https://www.letsdothis.com/us/o/102981/checkout/ticket?eventId=243579&occurrenceId=21111173218&preferred=true&utm_campaign=general-ticket-selection&utm_medium=organic&utm_organiser_id=102981&utm_source=website",
+        entryType: "official",
+        status: "open",
+        priceAmount: 170,
+        priceCurrency: "USD",
+        checkedAt: "2026-08-22",
+        sourceUrl: "https://www.atlantatrackclub.org/2027-atlanta-marathon-weekend",
+        isVerified: true,
+        isPrimary: true,
+        notes:
+          "Atlanta Track Club links directly to this registration route; current marathon entry is $170, half-marathon entry $120 and 5K entry $40.",
+      },
+    ],
+    source: "https://www.atlantatrackclub.org/2027-atlanta-marathon-weekend",
+    notes:
+      "The official organiser page confirms the 5K and youth events on 6 March 2027 and the marathon and half marathon on 7 March; start times are not yet published.",
   },
 ];

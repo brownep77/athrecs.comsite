@@ -104,7 +104,7 @@ const rows = parsed.slice(1).map((values, index) => {
   return Object.fromEntries(expectedHeaders.map((header, column) => [header, values[column]]));
 });
 
-assert.equal(rows.length, 266, "Source registry row count changed unexpectedly");
+assert.equal(rows.length, 267, "Source registry row count changed unexpectedly");
 assert.equal(
   new Set(rows.map((row) => row.source_id)).size,
   rows.length,
@@ -187,7 +187,7 @@ const runningOnlyRows = enabledRows.filter((row) =>
   /road|trail|fell|cross country|track|mixed terrain|beach/i.test(row.surface_scope),
 );
 
-assert.equal(enabledRows.length, 31, "Enabled source count changed unexpectedly");
+assert.equal(enabledRows.length, 32, "Enabled source count changed unexpectedly");
 assert.equal(
   runningOnlyRows.length,
   enabledRows.length,

@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-08-20",
-  "registry_source_count": 266,
-  "enabled_source_count": 31,
+  "checked_at": "2026-08-22",
+  "registry_source_count": 267,
+  "enabled_source_count": 32,
   "rights_or_technical_review_queue": 235,
   "regions_in_scope": [
     "Africa",
@@ -161,6 +161,21 @@
       "events_imported": 3,
       "editions_imported": 3,
       "verified_at": "2026-08-20"
+    },
+    {
+      "id": "global-011",
+      "status": "verified",
+      "source_ids": ["atlanta_track_club"],
+      "regions": ["USA"],
+      "countries": ["United States"],
+      "series_slugs": [
+        "pnc-atlanta-10-miler-5k",
+        "invesco-qqq-thanksgiving-day-half-marathon",
+        "atlanta-marathon-weekend"
+      ],
+      "events_imported": 3,
+      "editions_imported": 3,
+      "verified_at": "2026-08-22"
     }
   ],
   "source_progress": [
@@ -187,6 +202,12 @@
       "status": "in_progress",
       "events_imported": 2,
       "last_checkpoint": "global-004"
+    },
+    {
+      "source_id": "atlanta_track_club",
+      "status": "in_progress",
+      "events_imported": 3,
+      "last_checkpoint": "global-011"
     }
   ]
 }

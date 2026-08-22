@@ -115,3 +115,18 @@ Three organiser-verified trail fixtures add two Swiss cantons and a distinct Sur
 - The Fox Trail — Running — England — 22 May 2027
 
 The Swiss fixtures extend regional coverage into Ticino and Valais, while The Fox adds a multi-distance trail ultra across Surrey. Each official RunThrough page has open registration, published prices, dates, locations and start times. The three canonical names, locations and dates were checked against the full ATHRECS catalogue; similarly located parkruns and unrelated Interlaken or Ladybower records were not treated as matches. No participant result rows were collected, and the source remains `in_progress`.
+## Checkpoint global-011
+
+Three future Atlanta road-race weekends start the official-organiser-only United States
+expansion:
+
+- PNC Atlanta 10 Miler & 5K — 25 October 2026
+- Invesco QQQ Thanksgiving Day Half Marathon, 5K, Mile & Dash — 26 November 2026
+- Atlanta Marathon Weekend — 6–7 March 2027
+
+All three were verified on current Atlanta Track Club event pages. Their primary entry
+routes are the registration pages linked directly by Atlanta Track Club, not a race
+directory. The 10 Miler, Thanksgiving half marathon and Atlanta marathon were each
+checked against the full ATHRECS catalogue before import; no matching series or edition
+was found. Only fixture-level facts are retained and participant result rows remain
+excluded. The official organiser source remains `in_progress` for later US checkpoints.
