@@ -6,8 +6,13 @@ const [{ runabcSeries }, fiveMileData] = await Promise.all([
   import("../src/data/five-mile-races-uk-ireland.ts"),
 ]);
 
-const { verifiedFiveMileEditions, verifiedFiveMileResearchQueue, verifiedFiveMileSeries } =
-  fiveMileData;
+const {
+  verifiedFiveMileEditionOverrides,
+  verifiedFiveMileEditions,
+  verifiedFiveMileResearchQueue,
+  verifiedFiveMileSeries,
+  verifiedFiveMileSeriesOverrides,
+} = fiveMileData;
 
 const TODAY = "2026-08-22";
 const HORIZON = "2027-12-31";
@@ -17,8 +22,8 @@ const REUSED_SERIES_SLUGS = new Set([
   "cannock-chase-10-5-mile",
 ]);
 
-assert.equal(verifiedFiveMileSeries.length, 21, "The five-mile release is incomplete");
-assert.equal(verifiedFiveMileEditions.length, 23, "The five-mile edition release is incomplete");
+assert.equal(verifiedFiveMileSeries.length, 22, "The five-mile release is incomplete");
+assert.equal(verifiedFiveMileEditions.length, 24, "The five-mile edition release is incomplete");
 assert.equal(verifiedFiveMileResearchQueue.length, 7, "The held-candidate audit is incomplete");
 assert.deepEqual(
   new Set(verifiedFiveMileSeries.map((series) => series.country)),
@@ -91,7 +96,7 @@ assert(
   "The five-mile editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5-mile-v227"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-short-races-v228"'),
   "The persistent catalogue seed version was not advanced",
 );
 
@@ -111,10 +116,27 @@ const sentinels = [
   "atw-bedford-5-and-10-2027",
   "pendle-5-mile-trail-race-2027",
   "stort10-5-mile-trail-race-2027",
+  "st-agnes-5-miler-2027",
 ];
 for (const slug of sentinels) {
   assert(slugs.has(slug), `Coverage sentinel is missing: ${slug}`);
 }
+
+assert.deepEqual(
+  verifiedFiveMileSeriesOverrides["m10-swansea"]?.distances,
+  ["5mi", "10mi"],
+  "M10 Swansea must advertise its official 5-mile and 10-mile distances",
+);
+assert.deepEqual(
+  verifiedFiveMileEditionOverrides["m10-swansea|2027-03-21|10mi"],
+  {
+    ...verifiedFiveMileEditionOverrides["m10-swansea|2027-03-21|10mi"],
+    date: "2027-02-28",
+    distance: "5mi",
+    distanceKm: 8.05,
+  },
+  "M10 Swansea's imported edition must be corrected to the official 5-mile date",
+);
 
 const queuedSlugs = new Set();
 for (const candidate of verifiedFiveMileResearchQueue) {
