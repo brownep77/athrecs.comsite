@@ -177,46 +177,6 @@ function HomePage() {
 
       <section className="space-y-5">
         <SectionHeading
-          eyebrow="The whole calendar"
-          title="Every sport, counted"
-          body="Running, athletics, triathlon and cycling lead the homepage, with live event and upcoming-fixture counts across every sport in ATHRECS."
-          action={
-            <Link
-              to="/races"
-              className="inline-flex items-center gap-1 text-sm font-semibold text-accent no-underline hover:underline"
-            >
-              Browse all sports <ArrowRight className="h-4 w-4" />
-            </Link>
-          }
-        />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {PRIORITY_HOME_SPORTS.map((sport) => (
-            <SportCountCard key={sport} sport={sport} stats={sportStats(sport)} priority />
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-2 rounded-2xl border border-border bg-surface p-3 shadow-card">
-          {otherSports.map((sport) => {
-            const sportCount = sportStats(sport);
-            return (
-              <Link
-                key={sport}
-                to="/races"
-                search={{ sport }}
-                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-border bg-bg px-3 text-sm font-medium text-muted no-underline transition-colors hover:border-accent hover:text-fg"
-              >
-                <SportGlyph sport={sport} className="h-4 w-4 text-accent" />
-                {sport}
-                <span className="rounded-full bg-elevated px-2 py-0.5 text-xs tabular text-subtle">
-                  {sportCount.n.toLocaleString()}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="space-y-5">
-        <SectionHeading
           eyebrow="Running"
           title="Choose your distance"
           body="Start with the race you know — or find the next challenge to work towards."
@@ -256,6 +216,46 @@ function HomePage() {
               <ChevronRight className="absolute bottom-5 right-5 h-5 w-5 text-subtle transition-transform group-hover:translate-x-1 group-hover:text-accent" />
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="space-y-5">
+        <SectionHeading
+          eyebrow="The whole calendar"
+          title="Every sport, counted"
+          body="Running, athletics, triathlon and cycling lead the homepage, with live event and upcoming-fixture counts across every sport in ATHRECS."
+          action={
+            <Link
+              to="/races"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-accent no-underline hover:underline"
+            >
+              Browse all sports <ArrowRight className="h-4 w-4" />
+            </Link>
+          }
+        />
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {PRIORITY_HOME_SPORTS.map((sport) => (
+            <SportCountCard key={sport} sport={sport} stats={sportStats(sport)} priority />
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2 rounded-2xl border border-border bg-surface p-3 shadow-card">
+          {otherSports.map((sport) => {
+            const sportCount = sportStats(sport);
+            return (
+              <Link
+                key={sport}
+                to="/races"
+                search={{ sport }}
+                className="inline-flex min-h-10 items-center gap-2 rounded-full border border-border bg-bg px-3 text-sm font-medium text-muted no-underline transition-colors hover:border-accent hover:text-fg"
+              >
+                <SportGlyph sport={sport} className="h-4 w-4 text-accent" />
+                {sport}
+                <span className="rounded-full bg-elevated px-2 py-0.5 text-xs tabular text-subtle">
+                  {sportCount.n.toLocaleString()}
+                </span>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
