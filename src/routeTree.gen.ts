@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
@@ -45,6 +46,11 @@ const RaceSeriesRoute = RaceSeriesRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
+  id: '/admin/data-intelligence',
+  path: '/admin/data-intelligence',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminFixtureReviewRoute = AdminFixtureReviewRouteImport.update({
@@ -119,6 +125,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -138,6 +145,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/calendar': typeof CalendarRoute
   '/race-series': typeof RaceSeriesRoute
+  '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -179,6 +188,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/result-links'
     | '/admin/sources'
@@ -198,6 +208,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/result-links'
     | '/admin/sources'
@@ -217,6 +228,7 @@ export interface FileRouteTypes {
     | '/'
     | '/calendar'
     | '/race-series'
+    | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/result-links'
     | '/admin/sources'
@@ -237,6 +249,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalendarRoute: typeof CalendarRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
+  AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
@@ -281,6 +294,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/data-intelligence': {
+      id: '/admin/data-intelligence'
+      path: '/admin/data-intelligence'
+      fullPath: '/admin/data-intelligence'
+      preLoaderRoute: typeof AdminDataIntelligenceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/fixture-review': {
@@ -381,6 +401,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalendarRoute: CalendarRoute,
   RaceSeriesRoute: RaceSeriesRoute,
+  AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
