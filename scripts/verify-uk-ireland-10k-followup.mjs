@@ -174,8 +174,8 @@ assert(
   "The UK and Ireland 10K follow-up series corrections are not merged",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-marathons-v230"'),
-  "The persistent catalogue seed version is older than the UK and Ireland half-marathon batch",
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-non-standard-distances-v231"'),
+  "The persistent catalogue seed version was not advanced for the non-standard-distance batch",
 );
 
 console.log(
