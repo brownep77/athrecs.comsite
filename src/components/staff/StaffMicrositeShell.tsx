@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   AlertTriangle,
+  BarChart3,
   CalendarCheck,
   Database,
   ExternalLink,
@@ -27,7 +28,18 @@ const staffSiteUrl =
 const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
-  { to: "/admin", label: "Dashboard", icon: ShieldCheck, match: (path: string) => path === "/admin" },
+  {
+    to: "/admin",
+    label: "Dashboard",
+    icon: ShieldCheck,
+    match: (path: string) => path === "/admin",
+  },
+  {
+    to: "/admin/data-intelligence",
+    label: "Data & analytics",
+    icon: BarChart3,
+    match: (path: string) => path.startsWith("/admin/data-intelligence"),
+  },
   {
     to: "/admin/fixture-review",
     label: "Fixtures",
