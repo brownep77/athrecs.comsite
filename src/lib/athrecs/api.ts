@@ -714,6 +714,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       overall_place: number | null;
       finish_time_seconds: number | null;
       category: string | null;
+      result_source: string | null;
       source_url: string | null;
     }>`
       select
@@ -725,6 +726,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
         r.overall_place,
         r.finish_time_seconds,
         r.category,
+        r.result_source,
         r.source_url
       from results r
       join editions ed on ed.id = r.edition_id

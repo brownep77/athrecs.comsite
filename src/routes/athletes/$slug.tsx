@@ -3,7 +3,8 @@ import { ArrowLeft, MapPin } from "lucide-react";
 import { getAthleteBySlug } from "@/lib/athrecs/api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { athletes as athleteCatalogue } from "@/data/athletes";
-import { publicFigureAthletes } from "@/data/rich-roll";
+import { publicFigureAthletes } from "@/data/public-figures";
+import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
@@ -38,6 +39,42 @@ export const Route = createFileRoute("/athletes/$slug")({
       },
     };
   },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const { athlete, results } = loaderData;
+    const isPublicFigure = athlete.profile_type === "Public figure";
+    const resultKind = athlete.profile_roles.some((role: string) =>
+      role.toLowerCase().includes("marathon"),
+    )
+      ? "marathon results and times"
+      : "race results and finish times";
+    const title = isPublicFigure
+      ? `${athlete.display_name} ${resultKind} | ${SITE_NAME}`
+      : `${athlete.display_name} athlete profile | ${SITE_NAME}`;
+    const description = isPublicFigure
+      ? `${athlete.display_name}'s source-checked race results, finish times and endurance achievements on ATHRECS. ${results.length} verified result${results.length === 1 ? "" : "s"} listed.`
+      : `${athlete.display_name}'s athlete profile, club and race results on ATHRECS.`;
+    const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
+
+    return {
+      meta: siteGraphMeta({ title, description, url: canonical, type: "profile" }),
+      links: [{ rel: "canonical", href: canonical }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: athlete.display_name,
+            url: canonical,
+            description: athlete.bio || description,
+            nationality: athlete.nationality || athlete.country || undefined,
+            knowsAbout: athlete.profile_roles,
+          }),
+        },
+      ],
+    };
+  },
   component: AthletePage,
   notFoundComponent: () => (
     <div className="space-y-4 py-10 text-center">
@@ -67,6 +104,9 @@ function AthletePage() {
   const dob = formatDob(athlete.date_of_birth);
   const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
   const isPublicFigure = athlete.profile_type === "Public figure";
+  const locationLabel = isPublicFigure
+    ? (athlete.nationality ?? athlete.country)
+    : [athlete.city, athlete.county, athlete.country].filter(Boolean).join(" · ");
   const detailRows: { label: string; value: string }[] = [];
   if (dob) detailRows.push({ label: "Date of birth", value: dob });
   if (athlete.place_of_birth)
@@ -110,7 +150,7 @@ function AthletePage() {
         )}
         <p className="flex items-center gap-1.5 text-xs text-subtle">
           <MapPin className="h-3.5 w-3.5" />
-          {[athlete.city, athlete.county, athlete.country].filter(Boolean).join(" · ")}
+          {locationLabel}
         </p>
         <div className="flex flex-wrap gap-2">
           {isPublicFigure && <Badge variant="accent">Public figure</Badge>}
@@ -260,7 +300,9 @@ function AthletePage() {
                     rel="noreferrer"
                     className="mt-1 inline-flex min-h-11 items-center text-xs font-medium text-accent no-underline hover:underline"
                   >
-                    Official result ↗
+                    {r.result_source === "official" || r.result_source === "official organiser"
+                      ? "Official result ↗"
+                      : "Source-checked result ↗"}
                   </a>
                 )}
               </div>
