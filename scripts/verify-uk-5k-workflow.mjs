@@ -136,7 +136,7 @@ assert(
   "The UK 5K corrections are not merged into entry options",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-5k-v226"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-short-races-v228"'),
   "The persistent catalogue seed version was not advanced for the continued 5K release",
 );
 
@@ -165,10 +165,20 @@ const sentinels = [
   "brandon-bay-run-5k-2027",
   "runthrough-goodwood-running-gp-october-2027",
   "runthrough-aintree-december-2027",
+  "race-dunvegan-5k-2027",
+  "run-balmoral-harbour-energy-5k-2027",
+  "cardiff-5k-race-for-victory-2027",
+  "runthrough-tatton-park-september-2027",
 ];
 for (const slug of sentinels) {
   assert(slugs.has(slug), `Coverage sentinel is missing: ${slug}`);
 }
+assert(
+  allFiveKEditions.some(
+    (edition) => edition.seriesSlug === "race-dunvegan-5k-2027" && edition.date === "2027-03-20",
+  ),
+  "Race Dunvegan 5K must be published on 20 March 2027",
+);
 
 for (const slug of ["ruthin-evening-5k", "the-bay-5k-series-race-3"]) {
   assert.equal(ukFiveKSeriesOverrides[slug]?.country, "Wales", `${slug} was not moved to Wales`);

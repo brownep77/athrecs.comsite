@@ -375,6 +375,26 @@ const seeds: FiveMileSeed[] = [
     ],
     notes: "The route combines tarmac, track and traffic-free paths.",
   },
+  {
+    slug: "st-agnes-5-miler-2027",
+    name: "St Agnes 5 Miler 2027",
+    country: "England",
+    county: "Cornwall",
+    city: "St Agnes",
+    area: "St Agnes Beacon",
+    surface: "Road",
+    organiser: "Cornwall Road Running Grand Prix / Truro Running Club",
+    url: "https://cornwallrunning.co.uk/",
+    dates: [
+      {
+        date: "2027-06-23",
+        status: "TBC",
+        hasEntry: false,
+        notes:
+          "The official Cornwall Grand Prix diary confirms Wednesday 23 June 2027; entry details are not yet published.",
+      },
+    ],
+  },
 ];
 
 function entryOptionsFor(
@@ -437,6 +457,49 @@ export const verifiedFiveMileEditions: Edition[] = seeds.flatMap((seed) =>
     };
   }),
 );
+
+/** Official corrections for five-mile races already present in another catalogue source. */
+export const verifiedFiveMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "m10-swansea": {
+    name: "M10 Swansea 5 & 10 Mile 2027",
+    country: "Wales",
+    county: "Swansea",
+    city: "Swansea",
+    area: "Brynmill and Swansea Bay Promenade",
+    surface: "Road",
+    distances: ["5mi", "10mi"],
+    organiser: "Aspire X Events",
+    website: "https://www.aspirexevents.com/e/m10-swansea-14119",
+    source_url: "https://www.aspirexevents.com/e/m10-swansea-14119",
+    defaultStartTime: "09:15",
+  },
+};
+
+export const verifiedFiveMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "m10-swansea|2027-03-21|10mi": {
+    date: "2027-02-28",
+    distance: "5mi",
+    distanceKm: 8.05,
+    startTime: "09:15",
+    entryUrl: "https://www.aspirexevents.com/e/m10-swansea-14119",
+    entryOptions: [
+      {
+        providerCode: "official-m10-swansea-2027-02-28",
+        providerName: "Aspire X Events",
+        entryUrl: "https://www.aspirexevents.com/e/m10-swansea-14119",
+        entryType: "official",
+        status: "open",
+        checkedAt: CHECKED_AT,
+        sourceUrl: "https://www.aspirexevents.com/e/m10-swansea-14119",
+        isVerified: true,
+        isPrimary: true,
+        notes: "Official organiser entry page.",
+      },
+    ],
+    source: "https://www.aspirexevents.com/e/m10-swansea-14119",
+    notes: "The official organiser confirms the 5-mile race on 28 February 2027.",
+  },
+};
 
 /** Candidates kept out of the public catalogue until their permit or date is confirmed. */
 export const verifiedFiveMileResearchQueue = [
