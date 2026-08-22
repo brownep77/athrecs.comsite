@@ -115,3 +115,99 @@ Three organiser-verified trail fixtures add two Swiss cantons and a distinct Sur
 - The Fox Trail — Running — England — 22 May 2027
 
 The Swiss fixtures extend regional coverage into Ticino and Valais, while The Fox adds a multi-distance trail ultra across Surrey. Each official RunThrough page has open registration, published prices, dates, locations and start times. The three canonical names, locations and dates were checked against the full ATHRECS catalogue; similarly located parkruns and unrelated Interlaken or Ladybower records were not treated as matches. No participant result rows were collected, and the source remains `in_progress`.
+## Checkpoint global-011
+
+Three future Atlanta road-race weekends start the official-organiser-only United States
+expansion:
+
+- PNC Atlanta 10 Miler & 5K — 25 October 2026
+- Invesco QQQ Thanksgiving Day Half Marathon, 5K, Mile & Dash — 26 November 2026
+- Atlanta Marathon Weekend — 6–7 March 2027
+
+All three were verified on current Atlanta Track Club event pages. Their primary entry
+routes are the registration pages linked directly by Atlanta Track Club, not a race
+directory. The 10 Miler, Thanksgiving half marathon and Atlanta marathon were each
+checked against the full ATHRECS catalogue before import; no matching series or edition
+was found. Only fixture-level facts are retained and participant result rows remain
+excluded. The official organiser source remains `in_progress` for later US checkpoints.
+
+## Checkpoint global-012
+
+Three more organiser-verified Atlanta-area races extend the official United States
+checkpoint:
+
+- Firefighter 5K — Atlanta, Georgia — 12 September 2026
+- Wingfoot XC Classic — Cartersville, Georgia — 19 September 2026
+- Mercedes-Benz Stadium Move with MADD 5K — Atlanta, Georgia — 7 November 2026
+
+Atlanta Track Club's official pages confirm the dates, locations, distances, prices and
+registration cut-offs. The primary entry routes are the organiser-linked Let's Do This
+checkout pages for the road races and the organiser-linked MileSplit registration for
+Wingfoot. All three canonical names, locations and dates were checked against the full
+ATHRECS catalogue before import; no matching series or edition was found. Participant
+result rows remain excluded and the source remains `in_progress`.
+
+## Checkpoint global-013
+
+Twenty-five organiser-verified Medal Madness fixtures add broad United States coverage across
+Alabama, Florida, Iowa, Kentucky, Louisiana, Maryland, Missouri, North Carolina,
+Pennsylvania, Tennessee, Texas, Virginia and Washington. The races take place on 29 August
+and 5 September 2026, with 5K, 10K and half-marathon combinations at local parks and
+paved trails.
+
+Each edition uses its official US Road Running event page for the published date, start
+time, venue and distances, and a direct matching RunSignup registration route as the
+primary entry URL. Entry is currently published from $30 plus signup fee. All 25
+city-specific canonical names and slugs were checked against the full ATHRECS catalogue;
+no matching series or edition was found. One postponed candidate was excluded before
+import. Only factual fixture metadata is retained: no organiser prose, media or participant
+result rows are copied. The existing US Road Running registry row remains held for
+automated crawling, so this checkpoint is recorded as manual-only verification.
+
+## Checkpoint global-014
+
+Twenty-five further organiser-verified Medal Madness fixtures expand United States
+coverage across Alabama, Arkansas, Florida, Georgia, Iowa, Kentucky, Michigan,
+Mississippi, North Carolina, Ohio, Oklahoma, Pennsylvania, Tennessee, Texas, Utah,
+Virginia and Washington. Twenty-one take place on 5 September 2026, with the remaining
+four on 12, 19 and 26 September.
+
+Each edition retains the official US Road Running event page for date, start time, venue
+and distances and uses a direct matching RunSignup registration route as its primary
+entry URL. The batch adds 5K, 10K, half-marathon and marathon options; current adult entry
+is published from $30 plus signup fee. All 25 city-specific canonical names and slugs were
+checked against the current main catalogue and the preceding US checkpoints before
+insertion, with no match found. No organiser prose, media or participant result rows are
+copied, and the source remains manual-only for this checkpoint.
+
+
+## Checkpoint global-015
+
+Twenty-five additional organiser-verified Medal Madness fixtures extend United States
+coverage across Alabama, Arkansas, Florida, Georgia, Kentucky, Maryland, Missouri,
+Oklahoma, Pennsylvania, Texas, Virginia and Washington. Seventeen races take place on
+12 September 2026, with five on 19 September and three on 26 September.
+
+Each edition keeps its official US Road Running event page for the published date, start
+time, venue and distances, and uses the direct matching RunSignup registration route as
+its primary entry URL. The checkpoint adds 5K, 10K and half-marathon combinations; adult
+entry is currently published from $30 plus signup fee. All 25 city-specific canonical
+names and slugs were checked against the current catalogue and earlier US checkpoints
+before insertion, with no match found. No organiser prose, media or participant result
+rows are copied, and the source remains manual-only for this checkpoint.
+
+
+## Checkpoint global-016
+
+Nineteen final organiser-verified fixtures bring this review batch to its 100-race cap.
+They add new city series across Arizona, Florida, Georgia, Iowa, Louisiana, Michigan,
+North Carolina, Oklahoma and Texas. One race takes place on 5 September 2026, five on
+19 September, nine on 26 September, two on 3 October and one each on 10 and 17 October.
+
+Each edition uses its official US Road Running event page for the published date, start
+time, venue and distances, plus the direct matching RunSignup registration route as its
+primary entry URL. The checkpoint includes Medal Madness and Haunted themes with 5K,
+10K, half-marathon and marathon options. All 19 canonical series slugs were checked
+against the current catalogue and checkpoints global-011 through global-015 before
+insertion. Only factual fixture metadata is retained; organiser prose, media and
+participant result rows are excluded.
