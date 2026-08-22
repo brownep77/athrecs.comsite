@@ -1,7 +1,9 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Fragment } from "react";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { CalendarDays, Home, List, Users, UsersRound } from "lucide-react";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import {
+  COUNTRY_SITES,
   copyForLanguage,
   countrySiteFromSlug,
   isSiteLanguage,
@@ -99,20 +101,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             {nav.map((item) => {
               const active = isActive(item);
               return (
-                <ShellLink
-                  key={item.to}
-                  item={item}
-                  localized={localized}
-                  className={cn(
-                    "inline-flex h-10 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium no-underline transition-colors",
-                    active
-                      ? "bg-elevated text-fg"
-                      : "text-muted hover:bg-elevated/60 hover:text-fg",
-                  )}
-                >
-                  <item.icon className="h-4 w-4" strokeWidth={1.75} />
-                  {localizedLabels[item.key] ?? item.label}
-                </ShellLink>
+                <Fragment key={item.to}>
+                  <ShellLink
+                    item={item}
+                    localized={localized}
+                    className={cn(
+                      "inline-flex h-10 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium no-underline transition-colors",
+                      active
+                        ? "bg-elevated text-fg"
+                        : "text-muted hover:bg-elevated/60 hover:text-fg",
+                    )}
+                  >
+                    <item.icon className="h-4 w-4" strokeWidth={1.75} />
+                    {localizedLabels[item.key] ?? item.label}
+                  </ShellLink>
+                  {item.key === "calendar" ? (
+                    <CountrySelector localized={localized} />
+                  ) : null}
+                </Fragment>
               );
             })}
           </nav>
@@ -122,13 +128,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md md:hidden">
         <div className="flex h-12 items-center justify-between gap-2 px-4">
           <BrandLink localized={localized} />
-          <Link
-            to="/calendar"
-            className="inline-flex h-10 items-center gap-1.5 rounded-md bg-accent-soft px-3 text-sm font-semibold text-fg no-underline"
-          >
-            <CalendarDays className="h-4 w-4" strokeWidth={2} />
-            Calendar
-          </Link>
+          <div className="flex items-center gap-1">
+            <Link
+              to="/calendar"
+              className="inline-flex h-9 items-center gap-1.5 rounded-md bg-accent-soft px-2.5 text-sm font-semibold text-fg no-underline"
+              aria-label="Calendar"
+            >
+              <CalendarDays className="h-4 w-4" strokeWidth={2} />
+              <span className="hidden sm:inline">Calendar</span>
+            </Link>
+            <CountrySelector localized={localized} compact />
+          </div>
         </div>
       </header>
 
@@ -164,6 +174,45 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 }
 
 type LocalizedShell = { language: SiteLanguage; site: CountrySite } | undefined;
+
+function CountrySelector({
+  localized,
+  compact = false,
+}: {
+  localized: LocalizedShell;
+  compact?: boolean;
+}) {
+  const navigate = useNavigate();
+
+  return (
+    <select
+      aria-label="Select your country"
+      value={localized?.site.slug ?? ""}
+      onChange={(event) => {
+        const nextSite = countrySiteFromSlug(event.target.value);
+        if (!nextSite) {
+          void navigate({ to: "/" });
+          return;
+        }
+        void navigate({
+          to: "/$language/$country",
+          params: { language: nextSite.defaultLanguage, country: nextSite.slug },
+        });
+      }}
+      className={cn(
+        "rounded-md border border-border bg-surface font-medium text-fg outline-none focus:ring-2 focus:ring-accent/30",
+        compact ? "h-9 w-36 px-2 text-xs" : "h-10 max-w-44 px-2 text-sm",
+      )}
+    >
+      <option value="">🌍 Select your country</option>
+      {COUNTRY_SITES.map((option) => (
+        <option key={option.slug} value={option.slug}>
+          {option.flag} {option.country}
+        </option>
+      ))}
+    </select>
+  );
+}
 
 function BrandLink({
   localized,

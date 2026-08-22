@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { listEvents } from "@/lib/athrecs/api";
 import {
-  COUNTRY_SITES,
   SITE_LANGUAGES,
   copyForLanguage,
   countrySiteFromSlug,
@@ -103,28 +102,7 @@ function CountryHomePage() {
 
   return (
     <div className="space-y-12 pb-8 md:space-y-16">
-      <div className="flex flex-wrap items-end justify-between gap-3 rounded-xl border border-border bg-surface p-3 shadow-card">
-        <label className="grid min-w-52 flex-1 gap-1.5 text-xs font-semibold text-muted">
-          {copy.country}
-          <select
-            value={site.slug}
-            onChange={(event) => {
-              const nextSite = countrySiteFromSlug(event.target.value);
-              if (!nextSite) return;
-              void navigate({
-                to: "/$language/$country",
-                params: { language: nextSite.defaultLanguage, country: nextSite.slug },
-              });
-            }}
-            className="h-10 rounded-lg border border-border bg-bg px-3 text-sm font-medium text-fg outline-none focus:ring-2 focus:ring-accent/30"
-          >
-            {COUNTRY_SITES.map((option) => (
-              <option key={option.slug} value={option.slug}>
-                {option.flag} {option.country}
-              </option>
-            ))}
-          </select>
-        </label>
+      <div className="flex justify-end rounded-xl border border-border bg-surface p-3 shadow-card">
         <label className="grid min-w-44 gap-1.5 text-xs font-semibold text-muted">
           {copy.language}
           <select

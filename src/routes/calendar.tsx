@@ -92,13 +92,34 @@ const FLAG_EXAMPLES: CardModel[] = [
   },
 ];
 
+const HIGHLIGHTED_RACE_QUERIES = ["Comrades", "Two Oceans", "Boston Marathon"] as const;
+
 export const Route = createFileRoute("/calendar")({
-  loader: () => listCalendarEditions({ data: { upcomingOnly: true, limit: 24 } }),
+  loader: async () => {
+    const [initial, ...highlightSets] = await Promise.all([
+      listCalendarEditions({ data: { upcomingOnly: true, limit: 24 } }),
+      ...HIGHLIGHTED_RACE_QUERIES.map((q) =>
+        listCalendarEditions({ data: { q, upcomingOnly: true, limit: 8 } }),
+      ),
+    ]);
+    const highlighted = highlightSets
+      .flat()
+      .filter(
+        (edition, index, editions) =>
+          editions.findIndex((candidate) => candidate.id === edition.id) === index,
+      )
+      .sort(
+        (left, right) =>
+          left.event_date.localeCompare(right.event_date) ||
+          left.event_name.localeCompare(right.event_name),
+      );
+    return { initial, highlighted };
+  },
   component: CalendarPage,
 });
 
 function CalendarPage() {
-  const initial = Route.useLoaderData();
+  const { initial, highlighted } = Route.useLoaderData();
   const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
   const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
@@ -142,6 +163,47 @@ function CalendarPage() {
           ) : null}
         </button>
       </header>
+
+      {highlighted.length > 0 ? (
+        <section
+          aria-labelledby="recently-added-races-heading"
+          className="space-y-3 rounded-xl border border-accent/40 bg-surface p-4 shadow-card"
+        >
+          <div className="space-y-1">
+            <h2
+              id="recently-added-races-heading"
+              className="font-display text-lg font-semibold text-fg"
+            >
+              Recently added international races
+            </h2>
+            <p className="text-sm text-muted">
+              Comrades, Two Oceans and Boston are now in the Athrecs calendar with their latest
+              official dates and qualification guidance.
+            </p>
+          </div>
+          <div className="grid gap-2 lg:grid-cols-2">
+            {highlighted.map((ed) => (
+              <EventCard
+                key={`highlight-${ed.id}`}
+                ed={{
+                  id: String(ed.id),
+                  event_slug: ed.event_slug,
+                  event_name: ed.event_name,
+                  event_date: ed.event_date,
+                  distance_code: ed.distance_code,
+                  status: ed.status as EntryStatus,
+                  start_time: ed.start_time,
+                  sport: ed.sport,
+                  surface: ed.surface,
+                  venue: ed.venue,
+                  country: ed.country,
+                  county: ed.county,
+                }}
+              />
+            ))}
+          </div>
+        </section>
+      ) : null}
 
       <section className="space-y-3 rounded-xl border border-border bg-elevated p-3 lg:col-span-2">
         <div>
