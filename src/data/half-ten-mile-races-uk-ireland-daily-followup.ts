@@ -1,0 +1,347 @@
+import type { Edition, EntryOptionSeed, EntryOptionStatus, Series } from "./types";
+
+const CHECKED_AT = "2026-08-22";
+
+type RaceDistance = "Half" | "10mi";
+type RaceCountry = "England" | "Scotland" | "Wales";
+
+type RaceSeed = {
+  slug: string;
+  name: string;
+  date: string;
+  distance: RaceDistance;
+  startTime?: string;
+  country: RaceCountry;
+  county: string;
+  city: string;
+  area: string;
+  surface: "Road" | "Trail" | "Mixed";
+  distances?: string[];
+  organiser: string;
+  url: string;
+  status?: Edition["status"];
+  entryStatus?: EntryOptionStatus;
+  hasEntry?: boolean;
+  priceAmount?: number;
+  notes: string;
+};
+
+const seeds: RaceSeed[] = [
+  {
+    slug: "cambridge-half-marathon-2027",
+    name: "Cambridge Half Marathon 2027",
+    date: "2027-03-14",
+    distance: "Half",
+    country: "England",
+    county: "Cambridgeshire",
+    city: "Cambridge",
+    area: "Cambridge city centre and university colleges",
+    surface: "Road",
+    organiser: "THE TEAM",
+    url: "https://cambridgehalfmarathon.com/event-news-updates/cambridge-half-marathon-is-coming-back-and-2027-is-going-to-be-unmissable",
+    status: "TBC",
+    hasEntry: false,
+    notes:
+      "The organiser confirms 14 March 2027; general entry details have not yet been released, so no live checkout is asserted.",
+  },
+  {
+    slug: "london-landmarks-half-marathon-2027",
+    name: "London Landmarks Half Marathon 2027",
+    date: "2027-04-04",
+    distance: "Half",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Westminster and the City of London",
+    surface: "Road",
+    organiser: "London Landmarks Half Marathon",
+    url: "https://llhm.co.uk/",
+    notes:
+      "The official event page confirms the date and currently offers access through charity places.",
+  },
+  {
+    slug: "deal-half-marathon-2027",
+    name: "Deal Half Marathon 2027",
+    date: "2027-02-21",
+    distance: "Half",
+    startTime: "10:30",
+    country: "England",
+    county: "Kent",
+    city: "Deal",
+    area: "Betteshanger Park and the rural villages around Deal",
+    surface: "Road",
+    organiser: "Deal Tri",
+    url: "https://www.dealtri.co.uk/event/deal-half-marathon-2027-2/",
+    priceAmount: 20,
+    notes:
+      "The organising club confirms the UK Athletics race, online entry route, date and start time.",
+  },
+  {
+    slug: "lossiemouth-half-marathon-2027",
+    name: "Lossiemouth Half Marathon 2027",
+    date: "2027-02-14",
+    distance: "Half",
+    startTime: "10:00",
+    country: "Scotland",
+    county: "Moray",
+    city: "Lossiemouth",
+    area: "Lossiemouth Sports and Community Centre and coastal roads",
+    surface: "Road",
+    organiser: "Chilled Running",
+    url: "https://www.entrycentral.com/lossiehalfmarathon",
+    notes:
+      "The direct entry page confirms a Scottish Athletics-approved event, date, start time and open entry.",
+  },
+  {
+    slug: "skye-half-marathon-2027",
+    name: "Skye Half Marathon & 10K 2027",
+    date: "2027-06-12",
+    distance: "Half",
+    country: "Scotland",
+    county: "Highland",
+    city: "Portree",
+    area: "Portree and closed roads across the Isle of Skye",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    organiser: "Skye Events",
+    url: "https://www.skye-events.co.uk/events/skye-half-marathon",
+    notes:
+      "The official event header confirms 12 June 2027 and open registration; the detailed timetable is retained as unconfirmed because it still contains prior-year weekday labels.",
+  },
+  {
+    slug: "anglesey-half-marathon-10k-2027",
+    name: "Jones o Gymru Anglesey Half Marathon & 10K 2027",
+    date: "2027-05-23",
+    distance: "Half",
+    country: "Wales",
+    county: "Isle of Anglesey",
+    city: "Mona",
+    area: "Mona Showground and closed roads across Anglesey",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    organiser: "Always Aim High Events",
+    url: "https://alwaysaimhighevents.com/events/anglesey-half-marathon-and-10k",
+    notes: "The organiser confirms the date, both closed-road distances and a live entry route.",
+  },
+  {
+    slug: "dydd-gwyl-dewi-half-marathon-2027",
+    name: "Dydd Gŵyl Dewi Half Marathon 2027",
+    date: "2027-02-28",
+    distance: "Half",
+    country: "Wales",
+    county: "Gwynedd",
+    city: "Aberdaron",
+    area: "Llŷn Peninsula from Tudweiliog to Aberdaron",
+    surface: "Mixed",
+    organiser: "Black Sheep Events",
+    url: "https://penllyn.niftyentries.com/North-Wales-Pilgrims-Half-Marathon",
+    priceAmount: 29.95,
+    notes:
+      "The direct registration page confirms the point-to-point mixed-surface route, date and open entry.",
+  },
+  {
+    slug: "run-series-battersea-ten-november-2026",
+    name: "Run Series Battersea TEN — November 2026",
+    date: "2026-11-21",
+    distance: "10mi",
+    startTime: "10:30",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Battersea Park",
+    surface: "Road",
+    distances: ["10mi", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/run-series-battersea-ten-november-2026",
+    priceAmount: 38,
+    notes: "The organiser confirms the 10-mile and 10K options, date, start times and live entry.",
+  },
+  {
+    slug: "croft-running-festival-november-2026",
+    name: "Croft Running Festival — November 2026",
+    date: "2026-11-01",
+    distance: "10mi",
+    startTime: "10:00",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Dalton-on-Tees",
+    area: "Croft Motor Circuit",
+    surface: "Road",
+    distances: ["5K", "10K", "10mi", "Half", "20M", "Marathon"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/croft-running-festival-november-2026",
+    priceAmount: 30,
+    notes:
+      "The organiser confirms the traffic-free motor-circuit 10-mile option, date, start time and live entry.",
+  },
+  {
+    slug: "hereford-10-mile-race-2027",
+    name: "Hereford 10 Mile Race 2027",
+    date: "2027-02-14",
+    distance: "10mi",
+    startTime: "09:00",
+    country: "England",
+    county: "Herefordshire",
+    city: "Hereford",
+    area: "Hereford Rugby Club and surrounding country lanes",
+    surface: "Road",
+    organiser: "Ready Set Go Timing",
+    url: "https://www.entrycentral.com/Hereford10Mile2027",
+    priceAmount: 25,
+    notes:
+      "The direct entry page confirms the full UK Athletics licence, date, start time and open entry.",
+  },
+  {
+    slug: "wiltshire-10-mile-2027",
+    name: "Wiltshire 10 Mile 2027",
+    date: "2027-02-14",
+    distance: "10mi",
+    startTime: "10:00",
+    country: "England",
+    county: "Wiltshire",
+    city: "Melksham",
+    area: "King George V Playing Field and Lacock",
+    surface: "Road",
+    organiser: "Redfish Events",
+    url: "https://www.entrycentral.com/event/129228",
+    priceAmount: 27,
+    notes: "The direct entry page confirms a UKA-measured course, date, start time and open entry.",
+  },
+  {
+    slug: "thirsk-10-mile-road-race-2027",
+    name: "Thirsk 10 Mile Road Race 2027",
+    date: "2027-03-14",
+    distance: "10mi",
+    startTime: "10:00",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Thirsk",
+    area: "Thirsk Racecourse and surrounding roads",
+    surface: "Road",
+    organiser: "Thirsk and Sowerby Harriers",
+    url: "https://tasharriers.club/thirsk10/",
+    priceAmount: 26,
+    notes:
+      "The organising club confirms the date, measured road course, start time and Racebest entry route.",
+  },
+  {
+    slug: "nene-valley-trail-run-2027",
+    name: "Nene Valley Trail Run 10 Mile & 10K 2027",
+    date: "2027-06-12",
+    distance: "10mi",
+    country: "England",
+    county: "Northamptonshire",
+    city: "Kings Cliffe",
+    area: "KC Active and the Nene Valley countryside",
+    surface: "Trail",
+    distances: ["10mi", "10K"],
+    organiser: "Nene Valley Races",
+    url: "https://www.sientries.co.uk/event/nene-valley-trail-run-2027",
+    priceAmount: 33,
+    notes:
+      "The direct entry page confirms the new 2027 venue and distances, date and open registration.",
+  },
+  {
+    slug: "brighton-ten-june-2027",
+    name: "Brighton TEN — June 2027",
+    date: "2027-06-27",
+    distance: "10mi",
+    startTime: "09:00",
+    country: "England",
+    county: "East Sussex",
+    city: "Brighton and Hove",
+    area: "Hove Lawns and Brighton seafront",
+    surface: "Road",
+    distances: ["10mi", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/brighton-ten-june-2027",
+    priceAmount: 38,
+    notes:
+      "The organiser confirms the seafront 10-mile and 10K races, date, start times and live entry.",
+  },
+  {
+    slug: "west-cheshire-ten-july-2027",
+    name: "West Cheshire TEN — July 2027",
+    date: "2027-07-25",
+    distance: "10mi",
+    startTime: "09:00",
+    country: "England",
+    county: "Cheshire",
+    city: "Chester",
+    area: "Cheshire County Sports Club and surrounding countryside",
+    surface: "Road",
+    distances: ["10mi", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/west-cheshire-ten-july-2027",
+    priceAmount: 38,
+    notes:
+      "The organiser confirms the road-closed 10-mile and 10K races, date, start times and live entry.",
+  },
+];
+
+function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
+  const status = seed.status ?? "Open";
+  const hasEntry = seed.hasEntry ?? status !== "TBC";
+  if (!hasEntry) return undefined;
+
+  return [
+    {
+      providerCode: `official-${seed.slug}`,
+      providerName: seed.organiser,
+      entryUrl: seed.url,
+      entryType: "official",
+      status: seed.entryStatus ?? (status === "Closed" ? "closed" : "open"),
+      ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
+      priceCurrency: "GBP",
+      checkedAt: CHECKED_AT,
+      sourceUrl: seed.url,
+      isVerified: true,
+      isPrimary: true,
+      notes: "Official organiser, club or direct event-registration page.",
+    },
+  ];
+}
+
+export const dailyHalfTenMileSeries: Series[] = seeds.map((seed) => ({
+  slug: seed.slug,
+  name: seed.name,
+  sport: "Running",
+  country: seed.country,
+  county: seed.county,
+  city: seed.city,
+  area: seed.area,
+  surface: seed.surface,
+  distances: seed.distances ?? [seed.distance],
+  summary: `${seed.name} — an officially published ${seed.distance === "Half" ? "half-marathon" : "10-mile"} fixture at ${seed.area}.`,
+  description: `${seed.name} is listed by ${seed.organiser}. Its date, distance, surface and entry provenance were checked against the linked official event or registration page on ${CHECKED_AT}.`,
+  organiser: seed.organiser,
+  website: seed.url,
+  source_url: seed.url,
+  ...(seed.startTime ? { defaultStartTime: seed.startTime } : {}),
+}));
+
+export const dailyHalfTenMileEditions: Edition[] = seeds.map((seed) => {
+  const entryOptions = entryOptionsFor(seed);
+  return {
+    seriesSlug: seed.slug,
+    date: seed.date,
+    distance: seed.distance,
+    distanceKm: seed.distance === "Half" ? 21.0975 : 16.09,
+    status: seed.status ?? "Open",
+    ...(entryOptions ? { entryUrl: seed.url, entryOptions } : {}),
+    ...(seed.startTime ? { startTime: seed.startTime } : {}),
+    source: seed.url,
+    notes: seed.notes,
+  };
+});
+
+/** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
+export const dailyHalfTenMileResearchQueue = [
+  {
+    slug: "chippenham-spring-10-mile-2027",
+    date: "2027-03-07",
+    country: "England",
+    reason: "The organiser page still labels the 2027 race permit number as TBC.",
+    sourceUrl: "https://www.icompete.co.uk/events/chippenhamspring10mile2027",
+  },
+] as const;
