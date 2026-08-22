@@ -76,6 +76,10 @@ const entryOptionsSource = await fs.readFile(
   new URL("../src/data/entry-options.ts", import.meta.url),
   "utf8",
 );
+const seedSource = await fs.readFile(
+  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
+  "utf8",
+);
 assert(
   catalogueSource.includes('import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races"'),
   "The UK 5K dataset is not imported by the catalogue",
@@ -92,6 +96,10 @@ assert(
   entryOptionsSource.includes("...ukFiveKEditionOverrides") &&
     entryOptionsSource.includes("...ukFiveKSeriesOverrides"),
   "The UK 5K corrections are not merged into entry options",
+);
+assert(
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-5k-v225"'),
+  "The persistent catalogue seed version was not advanced for the UK 5K release",
 );
 
 const existingSourceSlugs = new Set(
