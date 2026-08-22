@@ -82,6 +82,10 @@ import {
   verifiedHalfMarathonFollowupEditions,
   verifiedHalfMarathonFollowupSeries,
 } from "./half-marathons-uk-ireland-followup";
+import {
+  verifiedNonStandardDistanceEditions,
+  verifiedNonStandardDistanceSeries,
+} from "./non-standard-races-uk-ireland";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -150,6 +154,7 @@ for (const series of [
   ...(verifiedFiveMileSeries as Series[]),
   ...(verifiedTenKFollowupSeries as Series[]),
   ...(verifiedHalfMarathonFollowupSeries as Series[]),
+  ...(verifiedNonStandardDistanceSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
@@ -193,6 +198,9 @@ const mergedEditions = [
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(verifiedHalfMarathonFollowupEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(verifiedNonStandardDistanceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),

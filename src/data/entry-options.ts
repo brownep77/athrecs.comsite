@@ -34,10 +34,17 @@ import {
   verifiedHalfMarathonFollowupEntryOptions,
   verifiedHalfMarathonFollowupSeriesOverrides,
 } from "./half-marathons-uk-ireland-followup";
+import {
+  nonStandardDistanceEditionOverrides,
+  nonStandardDistanceEditionReplacements,
+  nonStandardDistanceSeriesOverrides,
+  nonStandardDistanceSlugAliases,
+} from "./non-standard-races-uk-ireland";
 
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const eventSlugAliases: Readonly<Record<string, string>> = {
   ...allFixtureAliases,
+  ...nonStandardDistanceSlugAliases,
 };
 
 export function canonicalEventSlug(slug: string): string {
@@ -50,6 +57,7 @@ export const editionReplacements = [
   ...ukHalfMarathonEditionReplacements,
   ...ukTenKEditionReplacements,
   ...verifiedFixtureEditionReplacements,
+  ...nonStandardDistanceEditionReplacements,
 ];
 
 /** Verified edition corrections across every entry-options research pass. */
@@ -61,6 +69,7 @@ export const editionOverrides: Record<string, Partial<Edition>> = {
   ...ukFiveKEditionOverrides,
   ...verifiedFiveMileEditionOverrides,
   ...verifiedHalfMarathonFollowupEditionOverrides,
+  ...nonStandardDistanceEditionOverrides,
 };
 
 /** Verified event metadata corrections across every entry-options research pass. */
@@ -73,6 +82,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...verifiedFiveMileSeriesOverrides,
   ...verifiedTenKFollowupSeriesOverrides,
   ...verifiedHalfMarathonFollowupSeriesOverrides,
+  ...nonStandardDistanceSeriesOverrides,
 };
 
 /** Verified entry providers keyed by series, date and distance. */

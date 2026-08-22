@@ -17,6 +17,7 @@ const CODE_KM: Record<string, number> = {
   "5mi": 8.047,
   "10mi": 16.093,
   "20mi": 32.187,
+  Quarter: 10.54875,
   Half: 21.0975,
   Marathon: 42.195,
   Ultra: 50,
