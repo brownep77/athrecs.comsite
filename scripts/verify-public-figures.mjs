@@ -14,6 +14,30 @@ const expectedProfiles = [
   "kevin-hart",
   "colin-farrell",
   "jennifer-connelly",
+  "arjen-robben",
+  "kaka",
+  "raul-gonzalez",
+  "luis-enrique",
+  "john-terry",
+  "michael-owen",
+  "ryan-reynolds",
+  "ashton-kutcher",
+  "alicia-keys",
+  "natalie-dormer",
+  "pavel-nedved",
+  "leonardo-bonucci",
+  "jack-wilshere",
+  "edwin-van-der-sar",
+  "christian-dailly",
+  "danny-mills",
+  "oprah-winfrey",
+  "will-ferrell",
+  "edward-norton",
+  "george-w-bush",
+  "katie-holmes",
+  "adele-roberts",
+  "pippa-middleton",
+  "casey-neistat",
 ];
 
 assert.deepEqual(
@@ -65,6 +89,14 @@ assert(
 );
 
 const athleteSlugs = new Set(publicFigureAthletes.map((athlete) => athlete.slug));
+const resultKeys = publicFigureResults.map(
+  (result) => `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
+);
+assert.equal(
+  new Set(resultKeys).size,
+  resultKeys.length,
+  "Public-figure results must not contain duplicate athlete-edition rows",
+);
 assert(
   publicFigureResults.every(
     (result) =>
@@ -74,6 +106,13 @@ assert(
       result.source.startsWith("https://"),
   ),
   "Every public-figure result needs an athlete, catalogue edition, time and HTTPS source",
+);
+assert(
+  publicFigureResults.every((result) => {
+    const [hours, minutes, seconds] = result.time.split(":").map(Number);
+    return result.finishTimeSeconds === hours * 3600 + minutes * 60 + seconds;
+  }),
+  "Every displayed time must match its finishTimeSeconds value",
 );
 
 console.log(
