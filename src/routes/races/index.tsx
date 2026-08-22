@@ -29,6 +29,7 @@ const SPORT_VALUES = new Set<Sport>([
 ]);
 
 type RaceSearchParams = {
+  q?: string;
   sport?: Sport;
   country?: string;
   distance?: string;
@@ -45,6 +46,7 @@ export const Route = createFileRoute("/races/")({
   validateSearch: (search: Record<string, unknown>): RaceSearchParams => {
     const sport = optionalText(search.sport);
     return {
+      q: optionalText(search.q),
       sport: sport && SPORT_VALUES.has(sport as Sport) ? (sport as Sport) : undefined,
       country: optionalText(search.country),
       distance: optionalText(search.distance),
@@ -70,6 +72,7 @@ function EventsPage() {
   const routeSearch = Route.useSearch();
   const initialFilters: EventSearchValues = {
     ...EMPTY_SEARCH,
+    q: routeSearch.q ?? "",
     sport: routeSearch.sport ?? "All",
     country: routeSearch.country ?? "All",
     distance: routeSearch.distance ?? "All",
