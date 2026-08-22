@@ -21,6 +21,7 @@ import { triathlonIrelandClubs } from "./clubs-triathlon-ireland";
 import { welshAthleticsClubs } from "./clubs-welsh-athletics";
 import { auditedClubAdditions, clubEnrichment, clubSlugAliases } from "./club-enrichment";
 import { athletes as athletesBase } from "./athletes";
+import { publicFigureAthletes, richRollEditions, richRollSeries } from "./rich-roll";
 import { athletesRn2025B1 } from "./athletes-rn2025-b1";
 import { athletesRn2025B2 } from "./athletes-rn2025-b2";
 import { athletesRn2025B3 } from "./athletes-rn2025-b3";
@@ -39,6 +40,7 @@ const rawAthletes = [
   ...athletesRn2025B6,
   ...athletesRn2025B7,
   ...athletesRn2025B8,
+  ...publicFigureAthletes,
 ];
 export const athletes = rawAthletes.map((athlete) => ({
   ...athlete,
@@ -167,6 +169,7 @@ for (const series of [
   ...(mrdIntlMarathonSeries as Series[]),
   ...(comradesSeries as Series[]),
   ...(twoOceansSeries as Series[]),
+  ...(richRollSeries as Series[]),
 ]) {
   if (eventSlugAliases[series.slug]) continue;
   const key = normName(seriesOverrides[series.slug]?.name ?? series.name);
@@ -213,6 +216,7 @@ const mergedEditions = [
   ...(mrdIntlMarathonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(comradesEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(twoOceansEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(richRollEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
 ];
 
 export const editions: Edition[] = (() => {

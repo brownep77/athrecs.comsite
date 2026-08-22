@@ -117,5 +117,7 @@ export type AthleteListItem = {
   city: string | null;
   county: string;
   country: string;
+  profile_type: string;
+  profile_roles: string;
   result_count: number;
 };

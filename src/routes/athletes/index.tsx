@@ -25,9 +25,7 @@ function AthletesPage() {
     <div className="space-y-5">
       <header className="space-y-2">
         <div className="flex flex-wrap items-center gap-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">
-            Athletes
-          </h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Athletes</h1>
           <Link
             to="/clubs"
             className="text-sm font-medium text-accent no-underline hover:underline"
@@ -36,7 +34,7 @@ function AthletesPage() {
           </Link>
         </div>
         <p className="text-sm text-muted">
-          Norfolk athlete profiles linked to clubs and results.
+          Athlete profiles linked to clubs and source-checked race results.
         </p>
       </header>
 
@@ -69,15 +67,18 @@ function AthletesPage() {
                     {a.city ? ` · ${a.city}` : ""}
                   </>
                 ) : (
-                  a.city ?? "Unattached"
+                  (a.city ?? "Unattached")
                 )}
               </p>
             </div>
             <div className="flex flex-wrap gap-1.5">
+              {a.profile_type === "Public figure" && <Badge variant="accent">Public figure</Badge>}
               <Badge variant="outline">
                 {a.gender === "F" ? "Female" : a.gender === "M" ? "Male" : a.gender}
               </Badge>
-              <Badge variant="accent">{a.result_count} results</Badge>
+              <Badge variant={a.profile_type === "Public figure" ? "outline" : "accent"}>
+                {a.result_count} results
+              </Badge>
             </div>
           </Link>
         ))}
