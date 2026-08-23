@@ -1,9 +1,19 @@
 import { Link } from "@tanstack/react-router";
-import { Bike, Droplets, Footprints, Medal, Mountain, Ship, Timer, Waves, Zap } from "lucide-react";
+import {
+  Bike,
+  Droplets,
+  Footprints,
+  Medal,
+  Mountain,
+  Ship,
+  TicketCheck,
+  Timer,
+  Waves,
+  Zap,
+} from "lucide-react";
 import type { EventListItem, Sport } from "@/lib/athrecs/types";
 import {
   effectiveStatus,
-  formatRaceDateShort,
   formatRaceWeekday,
   formatStartTime,
   statusLabel,
@@ -12,6 +22,7 @@ import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
@@ -41,6 +52,7 @@ export function RaceCard({
   const focusDate = race.next_date;
   const focusStatus =
     race.next_date && race.next_status ? effectiveStatus(race.next_date, race.next_status) : null;
+  const visibleStatus = focusStatus === "TBC" ? null : focusStatus;
   const startLabel = formatStartTime(race.next_start_time, {
     country: race.country,
     county: race.county,
@@ -55,23 +67,30 @@ export function RaceCard({
     country: race.country,
     area: race.area,
   });
+  const entryUrl =
+    focusDate && race.website && focusStatus !== "Finished" && focusStatus !== "Closed"
+      ? race.website
+      : null;
 
   return (
-    <article className="relative min-w-0 rounded-xl border border-border bg-surface p-3.5 shadow-card transition-colors hover:border-border-strong">
-      <div className="flex min-w-0 gap-3">
-        <div className="flex w-12 shrink-0 flex-col items-center justify-center rounded-lg border border-border bg-elevated px-1 py-1.5 text-center">
+    <article className="relative min-w-0 rounded-xl border border-border bg-surface p-3 shadow-card transition-colors hover:border-border-strong">
+      <div className="flex min-w-0 gap-2.5">
+        <div className="flex w-11 shrink-0 flex-col items-center justify-center rounded-lg border border-border bg-elevated px-1 py-1 text-center">
           {focusDate ? (
             <>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-accent">
+              <span className="text-[9px] font-semibold uppercase tracking-wider text-accent">
                 {formatRaceWeekday(focusDate)}
               </span>
               <span className="font-display text-lg font-semibold tabular leading-none text-fg">
                 {new Date(focusDate + "T12:00:00").getDate()}
               </span>
-              <span className="text-[10px] font-medium uppercase tracking-wider text-subtle">
+              <span className="text-[9px] font-medium uppercase tracking-wider text-subtle">
                 {new Date(focusDate + "T12:00:00").toLocaleDateString("en-GB", {
                   month: "short",
                 })}
+              </span>
+              <span className="text-[9px] font-medium leading-none text-subtle">
+                {new Date(focusDate + "T12:00:00").getFullYear()}
               </span>
             </>
           ) : (
@@ -79,7 +98,7 @@ export function RaceCard({
           )}
         </div>
         <div className="min-w-0 flex-1">
-          <div className="mb-1.5 flex flex-wrap items-center gap-1.5">
+          <div className="mb-1 flex flex-wrap items-center gap-1">
             <NationBadge nation={venue.nation} />
             <Badge variant="accent" className="gap-1">
               <SportIcon sport={race.sport} />
@@ -91,9 +110,13 @@ export function RaceCard({
                 {formatDistanceWithUnits(d)}
               </Badge>
             ))}
-            {focusStatus && (
-              <Badge variant={focusStatus === "Finished" ? "default" : "solid"}>
-                {statusLabel(focusStatus)}
+            {visibleStatus && (
+              <Badge
+                variant={
+                  visibleStatus === "Finished" || visibleStatus === "Closed" ? "default" : "solid"
+                }
+              >
+                {statusLabel(visibleStatus)}
               </Badge>
             )}
             <RaceGroupBadges groups={race.groups} />
@@ -102,7 +125,7 @@ export function RaceCard({
             <Link
               to="/$language/$country/races/$slug"
               params={{ ...localized, slug: race.slug }}
-              className="block font-semibold text-fg no-underline hover:text-accent"
+              className="block text-[15px] font-semibold leading-snug text-fg no-underline hover:text-accent"
             >
               {race.name}
             </Link>
@@ -110,29 +133,39 @@ export function RaceCard({
             <Link
               to="/races/$slug"
               params={{ slug: race.slug }}
-              className="block font-semibold text-fg no-underline hover:text-accent"
+              className="block text-[15px] font-semibold leading-snug text-fg no-underline hover:text-accent"
             >
               {race.name}
             </Link>
           )}
-          {focusDate ? (
-            <p className="mt-1 text-sm font-medium text-fg">
-              {formatRaceDateShort(focusDate)}
-              {startLabel ? (
-                <span className="text-accent"> · Starts {startLabel}</span>
-              ) : (
-                <span className="text-subtle"> · Start time TBC</span>
-              )}
-              {race.next_distance ? ` · ${formatDistanceWithUnits(race.next_distance)}` : ""}
-            </p>
-          ) : (
-            <p className="mt-1 text-xs text-subtle">
+          {!focusDate && (
+            <p className="mt-0.5 text-xs text-subtle">
               {race.past_count > 0
                 ? `${race.past_count} past edition${race.past_count === 1 ? "" : "s"}`
                 : "No editions yet"}
             </p>
           )}
-          <TravelFacts venue={venue} startTime={startLabel} />
+          <div className="mt-1.5 flex min-w-0 flex-wrap items-center justify-between gap-2">
+            <TravelFacts venue={venue} startTime={startLabel} />
+            {entryUrl && (
+              <Button
+                asChild
+                size="sm"
+                className="h-8 min-h-8 shrink-0 gap-1.5 px-2.5"
+              >
+                <a
+                  href={entryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open entry page for ${race.name}`}
+                  title="Open entry page"
+                >
+                  <TicketCheck className="h-3.5 w-3.5" />
+                  Entry
+                </a>
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </article>

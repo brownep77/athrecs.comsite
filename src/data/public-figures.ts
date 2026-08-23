@@ -5,6 +5,22 @@ import {
   richRollEditions,
   richRollSeries,
 } from "./rich-roll.ts";
+import {
+  publicFigureWave2Batch1Athletes,
+  publicFigureWave2Batch2Athletes,
+  publicFigureWave2Batch3Athletes,
+  publicFigureWave2Editions,
+  publicFigureWave2Results,
+  publicFigureWave2Series,
+} from "./public-figures-wave-2.ts";
+import {
+  publicFigureWave3Batch4Athletes,
+  publicFigureWave3Batch5Athletes,
+  publicFigureWave3Batch6Athletes,
+  publicFigureWave3Editions,
+  publicFigureWave3Results,
+  publicFigureWave3Series,
+} from "./public-figures-wave-3.ts";
 
 const CHECKED_AT = "2026-08-22";
 
@@ -386,19 +402,31 @@ const highTractionPublicFigureResults: ResultSeed[] = [
 export const publicFigureAthletes: AthleteSeed[] = [
   ...richRollAthletes,
   ...highTractionPublicFigureAthletes,
+  ...publicFigureWave2Batch1Athletes,
+  ...publicFigureWave2Batch2Athletes,
+  ...publicFigureWave2Batch3Athletes,
+  ...publicFigureWave3Batch4Athletes,
+  ...publicFigureWave3Batch5Athletes,
+  ...publicFigureWave3Batch6Athletes,
 ];
 
 export const publicFigureSeries: Series[] = [
   ...(richRollSeries as Series[]),
   ...highTractionPublicFigureSeries,
+  ...publicFigureWave2Series,
+  ...publicFigureWave3Series,
 ];
 
 export const publicFigureEditions: Edition[] = [
   ...(richRollEditions as Edition[]),
   ...highTractionPublicFigureEditions,
+  ...publicFigureWave2Editions,
+  ...publicFigureWave3Editions,
 ];
 
 export const publicFigureResults: ResultSeed[] = [
   ...richRollResults,
   ...highTractionPublicFigureResults,
+  ...publicFigureWave2Results,
+  ...publicFigureWave3Results,
 ];
