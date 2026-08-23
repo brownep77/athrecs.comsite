@@ -1,9 +1,10 @@
 import type { Edition, EntryOptionSeed, EntryOptionStatus, Series } from "./types";
 
 const CHECKED_AT = "2026-08-22";
+const LATEST_CHECKED_AT = "2026-08-23";
 
 type RaceDistance = "Half" | "10mi";
-type RaceCountry = "England" | "Scotland" | "Wales";
+type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
 
 type RaceSeed = {
   slug: string;
@@ -23,6 +24,8 @@ type RaceSeed = {
   entryStatus?: EntryOptionStatus;
   hasEntry?: boolean;
   priceAmount?: number;
+  priceCurrency?: string;
+  checkedAt?: string;
   notes: string;
 };
 
@@ -277,6 +280,169 @@ const seeds: RaceSeed[] = [
     notes:
       "The organiser confirms the road-closed 10-mile and 10K races, date, start times and live entry.",
   },
+  {
+    slug: "john-treacy-dungarvan-10-mile-2027",
+    name: "John Treacy Dungarvan 10 Mile 2027",
+    date: "2027-01-31",
+    distance: "10mi",
+    startTime: "11:00",
+    country: "Ireland",
+    county: "County Waterford",
+    city: "Dungarvan",
+    area: "Youghal Road and Dungarvan town",
+    surface: "Road",
+    organiser: "West Waterford Athletic Club",
+    url: "https://www.westwaterfordathletics.org/dungarvan-10-mile/",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The organising club confirms the permitted A.A.I. race, date and start time. Entry is due to open to A.A.I. club members on 1 December 2026 and to remaining runners on 8 December, so no live checkout is asserted yet.",
+  },
+  {
+    slug: "the-duergar-nightcrawler-2027",
+    name: "The Duergar Nightcrawler 2027",
+    date: "2027-02-06",
+    distance: "10mi",
+    country: "England",
+    county: "Northumberland",
+    city: "Rothbury",
+    area: "Rothbury and the Simonside Hills",
+    surface: "Trail",
+    organiser: "Cold Brew Events",
+    url: "https://www.sientries.co.uk/event/the-duergar-nightcrawler-2027",
+    priceAmount: 25,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the 10-mile winter night trail race, date, open entry and TRA/UKA rules.",
+  },
+  {
+    slug: "beast-of-the-blacks-10-20-40-mile-2027",
+    name: "Beast of the Blacks 10, 20 & 40 Mile 2027",
+    date: "2027-03-06",
+    distance: "10mi",
+    country: "Wales",
+    county: "Powys",
+    city: "Crickhowell",
+    area: "Crickhowell and the Black Mountains",
+    surface: "Trail",
+    distances: ["10mi", "20M", "40mi"],
+    organiser: "Limitless Trails",
+    url: "https://www.sientries.co.uk/event/beast-of-the-blacks-102040-mile-ultra-2027",
+    priceAmount: 48,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the 10-, 20- and 40-mile trail options, Crickhowell venue, date and open entry.",
+  },
+  {
+    slug: "punk-panther-welcome-way-2027",
+    name: "Punk Panther Welcome Way 2027",
+    date: "2027-03-13",
+    distance: "Half",
+    startTime: "07:30",
+    country: "England",
+    county: "West Yorkshire",
+    city: "Otley",
+    area: "Otley and the Welcome Way",
+    surface: "Trail",
+    distances: ["Half", "20M", "34mi", "50mi"],
+    organiser: "Punk Panther Ultra Marathons",
+    url: "https://www.sientries.co.uk/event/punk-panther-welcome-way-2027",
+    priceAmount: 30,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the half-marathon and longer trail options, date, half-marathon start time and open entry.",
+  },
+  {
+    slug: "canalathon-ultra-running-festival-2027",
+    name: "Canalathon-Ultra Running Festival 2027",
+    date: "2027-04-04",
+    distance: "Half",
+    country: "England",
+    county: "West Yorkshire",
+    city: "Sowerby Bridge",
+    area: "Rochdale Canal from Todmorden to Sowerby Bridge",
+    surface: "Mixed",
+    distances: ["Half", "10K", "50K", "100K"],
+    organiser: "Canalathon-Ultra",
+    url: "https://www.sientries.co.uk/event/canalathon-ultra-running-festival-2027",
+    priceAmount: 47.9,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the chip-timed half-marathon and other footraces, date and open entry.",
+  },
+  {
+    slug: "hardmoors-white-horse-2027",
+    name: "Hardmoors 26.2 White Horse 2027",
+    date: "2027-05-09",
+    distance: "Half",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Sutton Bank",
+    area: "Sutton Bank Visitor Centre near Thirsk",
+    surface: "Trail",
+    distances: ["Half", "10K", "Marathon"],
+    organiser: "Hardmoors",
+    url: "https://www.sientries.co.uk/event/hardmoors-262-white-horse-2027",
+    priceAmount: 39,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the half-marathon, marathon and 10K trail options, date and open entry.",
+  },
+  {
+    slug: "bowland-trail-half-2027",
+    name: "Bowland Trail Half 2027",
+    date: "2027-01-09",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "Lancashire",
+    city: "Slaidburn",
+    area: "Slaidburn and the Forest of Bowland",
+    surface: "Mixed",
+    organiser: "Bowland Ultra",
+    url: "https://www.sientries.co.uk/event/bowland-trail-half-2027-2027",
+    priceAmount: 34,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the roughly 13-mile mixed-surface race, date, start time and open entry.",
+  },
+  {
+    slug: "pagan-midwinter-half-marathon-2027",
+    name: "Pagan Midwinter Half Marathon 2027",
+    date: "2027-01-23",
+    distance: "Half",
+    startTime: "11:00",
+    country: "England",
+    county: "Devon",
+    city: "Chagford",
+    area: "Chagford and north Dartmoor",
+    surface: "Trail",
+    organiser: "OuterEdge Events",
+    url: "https://www.sientries.co.uk/event.php?elid=Y&event_id=17305",
+    priceAmount: 48,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The dedicated direct-registration record confirms the 2027 half-marathon date, start time, Chagford venue and open entry.",
+  },
+  {
+    slug: "silverbacktrails-wades-revenge-2027",
+    name: "SilverBackTrails Wade’s Revenge 2027",
+    date: "2027-02-21",
+    distance: "Half",
+    startTime: "08:45",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Levisham",
+    area: "Levisham and the North York Moors",
+    surface: "Trail",
+    organiser: "SilverBack Trails",
+    url: "https://www.sientries.co.uk/event/silverbacktrails-wades-revenge-2027",
+    priceAmount: 23,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the trail half-marathon, date, start time and open entry.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -292,8 +458,8 @@ function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
       entryType: "official",
       status: seed.entryStatus ?? (status === "Closed" ? "closed" : "open"),
       ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
-      priceCurrency: "GBP",
-      checkedAt: CHECKED_AT,
+      priceCurrency: seed.priceCurrency ?? "GBP",
+      checkedAt: seed.checkedAt ?? CHECKED_AT,
       sourceUrl: seed.url,
       isVerified: true,
       isPrimary: true,
@@ -313,7 +479,7 @@ export const dailyHalfTenMileSeries: Series[] = seeds.map((seed) => ({
   surface: seed.surface,
   distances: seed.distances ?? [seed.distance],
   summary: `${seed.name} — an officially published ${seed.distance === "Half" ? "half-marathon" : "10-mile"} fixture at ${seed.area}.`,
-  description: `${seed.name} is listed by ${seed.organiser}. Its date, distance, surface and entry provenance were checked against the linked official event or registration page on ${CHECKED_AT}.`,
+  description: `${seed.name} is listed by ${seed.organiser}. Its date, distance, surface and entry provenance were checked against the linked official event or registration page on ${seed.checkedAt ?? CHECKED_AT}.`,
   organiser: seed.organiser,
   website: seed.url,
   source_url: seed.url,
@@ -344,4 +510,79 @@ export const dailyHalfTenMileResearchQueue = [
     reason: "The organiser page still labels the 2027 race permit number as TBC.",
     sourceUrl: "https://www.icompete.co.uk/events/chippenhamspring10mile2027",
   },
+  {
+    slug: "salisbury-10-mile-2027",
+    date: "2027-04-11",
+    country: "England",
+    reason:
+      "The organising club page states 11 April 2027 but also labels the next race date TBC, so the date is internally conflicted.",
+    sourceUrl: "https://www.salisbury-arc.org/salisbury-10",
+  },
+  {
+    slug: "ripon-10-mile-2027",
+    date: "2027-05-09",
+    country: "England",
+    reason: "The direct entry page is live but still marks the race licence as pending.",
+    sourceUrl: "https://racebest.com/races/63vtr",
+  },
+  {
+    slug: "corvedale-cake-walk-2027",
+    date: "2027-04-24",
+    country: "England",
+    reason:
+      "The LDWA event welcomes runners but is presented as a challenge walk; confirm that it is a timed running race before publication.",
+    sourceUrl: "https://www.sientries.co.uk/event/corvedale-cake-walk-2027",
+  },
 ] as const;
+
+const BRIGHTEN_MARINA_URL =
+  "https://www.ukrunningevents.co.uk/events/trail-runs/brighten-brighton-marina-run-2027";
+
+/** Existing runABC card enriched from the organiser rather than duplicated. */
+export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "brighten-marina": {
+    name: "BrighTEN (Brighton) Marina Run 2027",
+    county: "East Sussex",
+    area: "Brighton Marina",
+    surface: "Trail",
+    distances: ["10mi", "10K"],
+    summary:
+      "BrighTEN (Brighton) Marina Run 2027 — official 10-mile and 10K races at Brighton Marina.",
+    description:
+      "UK Running Events confirms the 10-mile and 10K distances, 13 February 2027 date and live entry; the existing card is enriched instead of duplicated.",
+    organiser: "UK Running Events / Run Rebel",
+    website: BRIGHTEN_MARINA_URL,
+    source_url: BRIGHTEN_MARINA_URL,
+    defaultStartTime: "09:00",
+  },
+};
+
+export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "brighten-marina|2027-02-13|10K": {
+    distance: "10mi",
+    distanceKm: 16.09,
+    status: "Open",
+    entryUrl: BRIGHTEN_MARINA_URL,
+    startTime: "09:00",
+    source: BRIGHTEN_MARINA_URL,
+    notes:
+      "The organiser confirms the 10-mile start at 09:00 and the companion 10K start at 09:25.",
+  },
+};
+
+export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
+  "brighten-marina|2027-02-13|10mi": [
+    {
+      providerCode: "official-brighten-marina-2027",
+      providerName: "UK Running Events",
+      entryUrl: BRIGHTEN_MARINA_URL,
+      entryType: "official",
+      status: "open",
+      checkedAt: LATEST_CHECKED_AT,
+      sourceUrl: BRIGHTEN_MARINA_URL,
+      isVerified: true,
+      isPrimary: true,
+      notes: "Official organiser event and checkout page.",
+    },
+  ],
+};
