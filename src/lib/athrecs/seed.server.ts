@@ -19,6 +19,7 @@ import {
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 const SEED_VERSION = "athrecs-uk-ireland-5k-very-pink-v241";
+export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v2";
 const EXPECTED = catalogueMetadata.merged_counts;
 
@@ -699,7 +700,23 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const meta = await sql<{ value: string }>`
     select value from app_meta where key = 'fixtures_catalogue_version' limit 1
   `;
-  if (meta[0]?.value === SEED_VERSION) return;
+  if (meta[0]?.value === SEED_VERSION) {
+    const counts = await sql<{ events: number; editions: number }>`select
+      (select count(*)::int from events) as events,
+      (select count(*)::int from editions) as editions
+    `;
+    const row = counts[0];
+    if ((row?.events ?? 0) < seriesList.length || (row?.editions ?? 0) < editionSeeds.length) {
+      console.error("[catalogue-seed] Fixture marker/count mismatch; staff recovery required", {
+        marker: meta[0]?.value,
+        currentEvents: row?.events ?? 0,
+        targetEvents: seriesList.length,
+        currentEditions: row?.editions ?? 0,
+        targetExplicitEditions: editionSeeds.length,
+      });
+    }
+    return;
+  }
 
   await insertRows(
     sql,

@@ -34,6 +34,7 @@
     "verify:athlete-accounts": "node scripts/verify-athlete-accounts.mjs",
     "verify:staff-microsite": "node --experimental-strip-types scripts/verify-staff-microsite.mjs",
     "verify:data-intelligence": "node scripts/verify-data-intelligence.mjs",
+    "verify:catalogue-recovery": "node scripts/verify-catalogue-recovery.mjs",
     "verify:home-sports-news": "node --experimental-strip-types scripts/verify-home-sports-news.mjs",
     "verify:uk-10k-workflow": "node scripts/verify-uk-10k-workflow.mjs",
     "verify:uk-ireland-10k-followup": "node --experimental-strip-types scripts/verify-uk-ireland-10k-followup.mjs",

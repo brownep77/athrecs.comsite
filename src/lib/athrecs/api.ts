@@ -1056,6 +1056,25 @@ export const getDbStatus = createServerFn({ method: "GET" })
     };
   });
 
+export const getCatalogueRecovery = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    await ready();
+    const { getCatalogueRecoveryStatus } = await import("./catalogue-recovery.server");
+    return getCatalogueRecoveryStatus();
+  });
+
+export const recoverCatalogueBatch = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .handler(async () => {
+    await ready();
+    if (dbSource !== "neon") {
+      throw new Error("Connect the persistent Neon database before recovering the catalogue");
+    }
+    const { runCatalogueRecoveryBatch } = await import("./catalogue-recovery.server");
+    return runCatalogueRecoveryBatch();
+  });
+
 export const getBulkSourceRun = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .handler(async () => {
