@@ -29,11 +29,13 @@ jobs:
           set -o pipefail
           {
             cp scripts/apply-stability-upgrade.mjs /tmp/apply-stability-upgrade.mjs
+            cp scripts/repair-stability-output.mjs /tmp/repair-stability-output.mjs
             cp -R scripts/.stability-payload /tmp/stability-payload
             git fetch origin main
             git checkout -B codex/athrecs-stability-and-slugs origin/main
             mkdir -p scripts/.stability-payload
             cp /tmp/apply-stability-upgrade.mjs scripts/apply-stability-upgrade.mjs
+            cp /tmp/repair-stability-output.mjs scripts/repair-stability-output.mjs
             cp -R /tmp/stability-payload/. scripts/.stability-payload/
           } 2>&1 | tee /tmp/stability-prepare.log
 
@@ -104,6 +106,7 @@ jobs:
           set -o pipefail
           {
             node scripts/apply-stability-upgrade.mjs stage3
+            node scripts/repair-stability-output.mjs
             npx prettier --write \
               src/lib/athrecs/import.server.ts \
               src/lib/athrecs/catalogue-publishing.server.ts \
@@ -132,6 +135,7 @@ jobs:
           {
             rm -rf scripts/.stability-payload
             rm scripts/apply-stability-upgrade.mjs
+            rm scripts/repair-stability-output.mjs
             git add -- \
               migrations/0016_catalogue_publishing.sql \
               src/lib/athrecs/import.server.ts \
