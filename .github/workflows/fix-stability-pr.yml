@@ -1,0 +1,63 @@
+name: Fix Athrecs stability PR lint
+
+on:
+  push:
+    branches:
+      - codex/athrecs-stability-bootstrap
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.event.head_commit.message == 'Apply PR lint fixes'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: codex/athrecs-stability-and-slugs
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Apply the two verified lint fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              Path("src/routes/$language/$country/races/$slug.tsx"): (
+                  "    let data = await getEventBySlug({ data: params.slug });",
+                  "    const data = await getEventBySlug({ data: params.slug });",
+              ),
+              Path("src/routes/races/$slug.tsx"): (
+                  "    const { event, upcoming, distances } = loaderData;",
+                  "    const { event, upcoming } = loaderData;",
+              ),
+          }
+
+          for path, (old, new) in replacements.items():
+              text = path.read_text()
+              if text.count(old) != 1:
+                  raise SystemExit(f"Expected exactly one match in {path}")
+              path.write_text(text.replace(old, new))
+          PY
+
+      - name: Verify the corrected pull request
+        run: |
+          npm ci
+          npm run ci:verify
+
+      - name: Commit and push only the corrected routes
+        run: |
+          git config user.name "Athrecs Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          git add -- \
+            'src/routes/$language/$country/races/$slug.tsx' \
+            'src/routes/races/$slug.tsx'
+          git commit -m "Fix quality-gate route lint"
+          git push origin HEAD:codex/athrecs-stability-and-slugs
