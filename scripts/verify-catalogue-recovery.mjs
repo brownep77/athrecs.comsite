@@ -13,6 +13,8 @@ assert.match(recoverySource, /on conflict \(event_id, event_date, distance_code\
 assert.match(recoverySource, /sql\.transaction/);
 assert.match(recoverySource, /verifyCompleteness/);
 assert.match(recoverySource, /fixtures_catalogue_version/);
+assert.match(recoverySource, /existingPrimaryRows/);
+assert.match(recoverySource, /row\[13\] = false/);
 assert.doesNotMatch(
   recoverySource,
   /delete from (?:events|editions|results|athletes|athlete_accounts)/i,
