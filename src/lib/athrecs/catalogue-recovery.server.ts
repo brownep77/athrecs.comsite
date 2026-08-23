@@ -835,6 +835,14 @@ export async function runCatalogueRecoveryBatch(): Promise<CatalogueRecoveryStat
     let progress = parseProgress(await readMeta(tx, PROGRESS_KEY));
     if (progress.phase === "complete") progress = { ...DEFAULT_PROGRESS };
 
+    if (progress.phase === "parkrun" && progress.cursor === 0) {
+      if ((await missingExplicitEditionCount(tx)) > 0) {
+        progress = { ...progress, phase: "editions", cursor: 0 };
+      } else if ((await recoveredParkrunEditionCount(tx)) >= TARGET.parkrunEditions) {
+        progress = { ...progress, phase: "groups", cursor: 0 };
+      }
+    }
+
     if (progress.phase === "events") {
       const batch = seriesList.slice(progress.cursor, progress.cursor + EVENT_BATCH_SIZE);
       await recoverEvents(tx, batch);
