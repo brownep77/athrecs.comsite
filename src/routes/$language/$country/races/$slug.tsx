@@ -11,7 +11,7 @@ export const Route = createFileRoute("/$language/$country/races/$slug")({
     const site = countrySiteFromSlug(params.country);
     if (!site || !isSiteLanguage(params.language)) throw notFound();
 
-    let data = await getEventBySlug({ data: params.slug });
+    const data = await getEventBySlug({ data: params.slug });
     if (!data) {
       const currentSlug = await resolveSlugRedirect({
         data: { entityType: "event", slug: params.slug },

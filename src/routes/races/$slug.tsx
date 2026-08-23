@@ -91,7 +91,7 @@ export const Route = createFileRoute("/races/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const { event, upcoming, distances } = loaderData;
+    const { event, upcoming } = loaderData;
     const canonical = `${SITE_URL}/races/${event.slug}`;
     const title = event.city
       ? `${event.name} — ${event.city} | ${SITE_NAME}`
