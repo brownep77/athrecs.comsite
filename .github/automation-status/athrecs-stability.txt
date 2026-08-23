@@ -1,8 +1,8 @@
 status=failure
-run_id=32634593828
+run_id=32634911268
 attempt=1
-trigger_sha=532939b089ec1dc92f50c3ddf969ada6c71e3d06
-recorded_at=2026-08-23T10:45:10Z
+trigger_sha=449a819883d6e5e2dfe0671f42005f353f72662f
+recorded_at=2026-08-23T10:52:27Z
 
 ===== /tmp/stability-install.log =====
 npm warn EBADENGINE Unsupported engine {
@@ -12,7 +12,7 @@ npm warn EBADENGINE   current: { node: 'v24.19.0', npm: '11.17.0' }
 npm warn EBADENGINE }
 npm warn deprecated recharts@2.15.4: 1.x and 2.x branches are no longer active. Bump to Recharts v3 to receive latest features and bugfixes. See https://github.com/recharts/recharts/wiki/3.0-migration-guide
 
-added 430 packages in 9s
+added 430 packages in 11s
 
 ===== /tmp/stability-prepare.log =====
 From https://github.com/brownep77/athrecs.comsite
@@ -21,23 +21,295 @@ Switched to a new branch 'codex/athrecs-stability-and-slugs'
 branch 'codex/athrecs-stability-and-slugs' set up to track 'origin/main'.
 
 ===== /tmp/stability-stage1.log =====
-node:internal/modules/run_main:107
-    triggerUncaughtException(
-    ^
+Applied stage1 of the ordered Athrecs stability upgrade.
+[90msrc/routes/races/index.tsx[39m 138ms (unchanged)
+[90msrc/routes/index.tsx[39m 77ms (unchanged)
+src/routes/races/$slug.tsx 121ms
+[90msrc/routes/athletes/$slug.tsx[39m 41ms (unchanged)
+src/routes/clubs/$slug.tsx 30ms
+[90msrc/routes/$language/$country/races/$slug.tsx[39m 7ms (unchanged)
+[90msrc/lib/athrecs/slug-redirects.ts[39m 6ms (unchanged)
+[codex/athrecs-stability-and-slugs 7a12f9b] Make page URLs durable and shareable
+ 8 files changed, 423 insertions(+), 85 deletions(-)
+ create mode 100644 migrations/0015_slug_redirects.sql
+ create mode 100644 src/lib/athrecs/slug-redirects.ts
 
-Error: unexpected end of file
-    at genericNodeError (node:internal/errors:985:15)
-    at wrappedFn (node:internal/errors:539:14)
-    at Zlib.zlibOnError [as onerror] (node:zlib:191:17)
-    at processChunkSync (node:zlib:436:12)
-    at zlibBufferSync (node:zlib:180:12)
-    at syncBufferWrapper (node:zlib:809:14)
-    at file:///home/runner/work/athrecs.comsite/athrecs.comsite/scripts/apply-stability-upgrade.mjs:12:16
-    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
-    at async node:internal/modules/esm/loader:643:26
-    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
-  errno: -5,
-  code: 'Z_BUF_ERROR'
-}
+===== /tmp/stability-stage2.log =====
+Applied stage2 of the ordered Athrecs stability upgrade.
 
-Node.js v24.19.0
+up to date in 553ms
+[90mpackage.json[39m 25ms (unchanged)
+scripts/browser-smoke.mjs 40ms
+[90mscripts/verify-slug-stability.mjs[39m 12ms (unchanged)
+[90mscripts/verify-catalogue-publishing.mjs[39m 6ms (unchanged)
+[90m.github/workflows/quality-gate.yml[39m 15ms (unchanged)
+[90m.github/pull_request_template.md[39m 38ms (unchanged)
+[90mdocs/release-safety.md[39m 12ms (unchanged)
+[codex/athrecs-stability-and-slugs 6b29f7b] Add deployment quality gates
+ 9 files changed, 254 insertions(+), 90 deletions(-)
+ create mode 100644 .github/pull_request_template.md
+ create mode 100644 .github/workflows/quality-gate.yml
+ create mode 100644 docs/release-safety.md
+ create mode 100644 scripts/verify-catalogue-publishing.mjs
+ create mode 100644 scripts/verify-slug-stability.mjs
+
+===== /tmp/stability-stage3.log =====
+Applied stage3 of the ordered Athrecs stability upgrade.
+[90msrc/lib/athrecs/import.server.ts[39m 163ms (unchanged)
+src/lib/athrecs/catalogue-publishing.server.ts 84ms
+src/lib/athrecs/catalogue-publishing-api.ts 17ms
+src/routes/admin/catalogue-publishing.tsx 50ms
+[90msrc/routes/admin/index.tsx[39m 83ms (unchanged)
+[90mdocs/catalogue-publishing/README.md[39m 32ms (unchanged)
+
+===== /tmp/stability-verify.log =====
+node_modules/.nitro/vite/services/ssr/assets/EventSearch-CXddbnlQ.js                                      8.93 kB │ gzip:     2.44 kB
+node_modules/.nitro/vite/services/ssr/assets/calendar-CHkvvRm5.js                                         9.78 kB │ gzip:     3.07 kB
+node_modules/.nitro/vite/services/ssr/assets/format-CfnS1p0-.js                                          10.76 kB │ gzip:     3.56 kB
+node_modules/.nitro/vite/services/ssr/assets/_country-Da5UMBC5.js                                        10.94 kB │ gzip:     2.77 kB
+node_modules/.nitro/vite/services/ssr/assets/ClubVerificationBadge-DW3xbT9j.js                           11.01 kB │ gzip:     3.13 kB
+node_modules/.nitro/vite/services/ssr/assets/_slug-CXxeRoPj.js                                           11.13 kB │ gzip:     2.68 kB
+node_modules/.nitro/vite/services/ssr/assets/_slug-osF_047S.js                                           11.40 kB │ gzip:     2.57 kB
+node_modules/.nitro/vite/services/ssr/assets/athlete-accounts-Dd9-hUah.js                                11.77 kB │ gzip:     2.96 kB
+node_modules/.nitro/vite/services/ssr/assets/athlete-account-api-B5MEiHYq.js                             12.84 kB │ gzip:     3.79 kB
+node_modules/.nitro/vite/services/ssr/assets/results-links-api-C-hATbE6.js                               13.89 kB │ gzip:     4.14 kB
+node_modules/.nitro/vite/services/ssr/assets/sources-Cve1zyC5.js                                         14.08 kB │ gzip:     3.20 kB
+node_modules/.nitro/vite/services/ssr/assets/country-sites-sXIpnEZn.js                                   14.37 kB │ gzip:     4.60 kB
+node_modules/.nitro/vite/services/ssr/assets/result-links-CgamfWH6.js                                    14.52 kB │ gzip:     3.97 kB
+node_modules/.nitro/vite/services/ssr/assets/import.server-BT0UVL4m.js                                   14.76 kB │ gzip:     4.31 kB
+node_modules/.nitro/vite/services/ssr/assets/countries-8JbKhJUO.js                                       15.53 kB │ gzip:     5.99 kB
+node_modules/.nitro/vite/services/ssr/assets/url-CBX8wGYU.js                                             15.82 kB │ gzip:     4.94 kB
+node_modules/.nitro/vite/services/ssr/assets/catalogue-publishing-BjST4kmB.js                            16.38 kB │ gzip:     4.43 kB
+node_modules/.nitro/vite/services/ssr/assets/result-claims-D6HfNIf2.js                                   16.71 kB │ gzip:     4.11 kB
+node_modules/.nitro/vite/services/ssr/assets/result-claims-api-MpvJqyt0.js                               17.91 kB │ gzip:     4.33 kB
+node_modules/.nitro/vite/services/ssr/assets/routes-BgXMm83T.js                                          18.89 kB │ gzip:     4.74 kB
+node_modules/.nitro/vite/services/ssr/assets/claim-results-DZvYFDDE.js                                   20.13 kB │ gzip:     5.03 kB
+node_modules/.nitro/vite/services/ssr/assets/race-qualifications-4fI0Z5s5.js                             20.31 kB │ gzip:     6.94 kB
+node_modules/.nitro/vite/services/ssr/assets/fixture-review-NLThwmhF.js                                  21.08 kB │ gzip:     4.89 kB
+node_modules/.nitro/vite/services/ssr/assets/data-intelligence-api-DTH8Simw.js                           21.27 kB │ gzip:     5.17 kB
+node_modules/.nitro/vite/services/ssr/assets/catalogue-publishing.server-DGxP_gha.js                     23.40 kB │ gzip:     5.81 kB
+node_modules/.nitro/vite/services/ssr/assets/catalogue-recovery.server-CzfWtgQZ.js                       23.86 kB │ gzip:     5.95 kB
+node_modules/.nitro/vite/services/ssr/assets/athlete-account-api-DpjFPfvf.js                             28.96 kB │ gzip:     6.68 kB
+node_modules/.nitro/vite/services/ssr/assets/client-Bf1XtmrE.js                                          31.12 kB │ gzip:     9.33 kB
+node_modules/.nitro/vite/services/ssr/assets/scraper-workbook-import.server-BIi4qSln.js                  32.19 kB │ gzip:     7.79 kB
+node_modules/.nitro/vite/services/ssr/assets/router-CLQGVQCw.js                                          38.16 kB │ gzip:     9.27 kB
+node_modules/.nitro/vite/services/ssr/assets/_slug-9by0QqwD.js                                           38.57 kB │ gzip:     7.86 kB
+node_modules/.nitro/vite/services/ssr/assets/_slug-CfQY5Gff2.js                                          38.85 kB │ gzip:     7.91 kB
+node_modules/.nitro/vite/services/ssr/assets/admin-ZHf0jXoL.js                                           38.88 kB │ gzip:     8.00 kB
+node_modules/.nitro/vite/services/ssr/assets/data-intelligence-V6y3g8sA.js                               40.11 kB │ gzip:     7.78 kB
+node_modules/.nitro/vite/services/ssr/assets/_slug-CNqPVbZT.js                                           40.58 kB │ gzip:     8.48 kB
+node_modules/.nitro/vite/services/ssr/assets/athlete-account-BIrh_MlI.js                                 41.36 kB │ gzip:     9.27 kB
+node_modules/.nitro/vite/services/ssr/assets/db-DUbKDeES.js                                              51.42 kB │ gzip:    11.97 kB
+node_modules/.nitro/vite/services/ssr/assets/api-CF9mmGR-.js                                             59.51 kB │ gzip:    12.86 kB
+node_modules/.nitro/vite/services/ssr/index.js                                                           72.95 kB │ gzip:    19.56 kB
+node_modules/.nitro/vite/services/ssr/assets/race-collections-BbZZavwy.js                               115.67 kB │ gzip:     9.95 kB
+node_modules/.nitro/vite/services/ssr/assets/source-registry.server-DG6mdT66.js                         126.50 kB │ gzip:    19.67 kB
+node_modules/.nitro/vite/services/ssr/assets/public-figures-C0hRz-Ap.js                                 230.89 kB │ gzip:    28.89 kB
+node_modules/.nitro/vite/services/ssr/assets/server-Du_raRP-.js                                         331.71 kB │ gzip:    77.03 kB
+node_modules/.nitro/vite/services/ssr/assets/venue-95Ok1ZDs.js                                          657.19 kB │ gzip:    98.99 kB
+node_modules/.nitro/vite/services/ssr/assets/scraper-workbook-snapshot.server.generated-B03qXuXO.js   1,634.98 kB │ gzip: 1,229.77 kB
+node_modules/.nitro/vite/services/ssr/assets/seed.server-CL0Ip_bc.js                                 13,016.60 kB │ gzip: 1,273.53 kB
+
+[32m✓ built in 2.74s[39m
+[start] [nitro] Building [[35mNitro[39m] [2m(preset: `vercel`, compatibility: `2026-08-23`)[22m
+[success] [nitro] Generated public [36m.vercel/output/static[39m
+[36mvite v8.2.0 [32mbuilding nitro environment for production...[36m[39m
+[2Ktransforming...✓ 3153 modules transformed.
+[info] Tracing dependencies:
+- `tslib` (2.8.1)
+[success] Traced 1 dependencies (4 files) in 54ms.
+[info] Ensure your production environment matches the builder OS and architecture (`linux-x64`) to avoid native module issues.
+rendering chunks...
+computing gzip size...
+.vercel/output/functions/__server.func/_ssr/start-5Z2QO8AU.mjs                                            0.14 kB │ gzip:     0.13 kB
+.vercel/output/functions/__server.func/_ssr/kysely-adapter-Cj_QZw5p.mjs                                   0.15 kB │ gzip:     0.12 kB
+.vercel/output/functions/__server.func/_ssr/empty-plugin-adapters-D9UWiqvJ.mjs                            0.23 kB │ gzip:     0.16 kB
+.vercel/output/functions/__server.func/_chunks/core.mjs                                                   0.25 kB │ gzip:     0.18 kB
+.vercel/output/functions/__server.func/_ssr/utils-C_uf36nf.mjs                                            0.29 kB │ gzip:     0.21 kB
+.vercel/output/functions/__server.func/_libs/zod.mjs                                                      0.36 kB │ gzip:     0.22 kB
+.vercel/output/functions/__server.func/_ssr/createServerRpc-CN-evIEF.mjs                                  0.38 kB │ gzip:     0.26 kB
+.vercel/output/functions/__server.func/_ssr/rolldown-runtime-D7D4PA-g.mjs                                 0.41 kB │ gzip:     0.29 kB
+.vercel/output/functions/__server.func/_ssr/clubs-DNVhwuXx.mjs                                            0.49 kB │ gzip:     0.31 kB
+.vercel/output/functions/__server.func/_ssr/athletes-CZMyzBb6.mjs                                         0.50 kB │ gzip:     0.31 kB
+.vercel/output/functions/__server.func/_ssr/createSsrRpc-D75-wYbG.mjs                                     0.52 kB │ gzip:     0.33 kB
+.vercel/output/functions/__server.func/_slug-B-XB4pW4.mjs                                                 0.60 kB │ gzip:     0.36 kB
+.vercel/output/functions/__server.func/_chunks/ssr-renderer.mjs                                           0.60 kB │ gzip:     0.36 kB
+.vercel/output/functions/__server.func/_ssr/slug-redirects-CIVWF2og.mjs                                   0.79 kB │ gzip:     0.51 kB
+.vercel/output/functions/__server.func/_ssr/badge-B6soYjtC.mjs                                            0.81 kB │ gzip:     0.48 kB
+.vercel/output/functions/__server.func/_slug-FuybDmKw.mjs                                                 0.88 kB │ gzip:     0.45 kB
+.vercel/output/functions/__server.func/_slug-BQzl59AQ.mjs                                                 0.88 kB │ gzip:     0.45 kB
+.vercel/output/functions/__server.func/_ssr/staff-access-BSbTOcZM.mjs                                     0.89 kB │ gzip:     0.47 kB
+.vercel/output/functions/__server.func/_ssr/claim-results-8HhNfdLs.mjs                                    0.90 kB │ gzip:     0.52 kB
+.vercel/output/functions/__server.func/_country-5T6_GMgB.mjs                                              0.92 kB │ gzip:     0.48 kB
+.vercel/output/functions/__server.func/_libs/@radix-ui/react-id+[...].mjs                                 0.99 kB │ gzip:     0.52 kB
+.vercel/output/functions/__server.func/_ssr/race-series-DdBw1j-Q.mjs                                      1.00 kB │ gzip:     0.58 kB
+.vercel/output/functions/__server.func/_ssr/calendar-lgUaOWJf.mjs                                         1.13 kB │ gzip:     0.61 kB
+.vercel/output/functions/__server.func/_ssr/data-intelligence-api-BxL3Hcv3.mjs                            1.27 kB │ gzip:     0.68 kB
+.vercel/output/functions/__server.func/_ssr/button-CLScDNR5.mjs                                           1.39 kB │ gzip:     0.68 kB
+.vercel/output/functions/__server.func/_slug-CzViWGQV.mjs                                                 1.40 kB │ gzip:     0.63 kB
+.vercel/output/functions/__server.func/_libs/defu.mjs                                                     1.41 kB │ gzip:     0.58 kB
+.vercel/output/functions/__server.func/_ssr/staff-middleware-BftytkRR.mjs                                 1.42 kB │ gzip:     0.59 kB
+.vercel/output/functions/__server.func/_ssr/staff-config-DU2S7A8Z.mjs                                     1.43 kB │ gzip:     0.73 kB
+.vercel/output/functions/__server.func/_ssr/slug-redirects-Hie6z3tq.mjs                                   1.44 kB │ gzip:     0.74 kB
+.vercel/output/functions/__server.func/_libs/radix-ui__react-focus-guards.mjs                             1.54 kB │ gzip:     0.70 kB
+.vercel/output/functions/__server.func/_ssr/distance-CVE9Q7Fv.mjs                                         1.54 kB │ gzip:     0.72 kB
+.vercel/output/functions/__server.func/_ssr/routes-B4bhpQa4.mjs                                           1.56 kB │ gzip:     0.82 kB
+.vercel/output/functions/__server.func/_libs/react-is.mjs                                                 1.67 kB │ gzip:     0.65 kB
+.vercel/output/functions/__server.func/_ssr/use-current-user-CFOZUwFc.mjs                                 1.67 kB │ gzip:     0.85 kB
+.vercel/output/functions/__server.func/_libs/radix-ui__primitive.mjs                                      1.83 kB │ gzip:     0.72 kB
+.vercel/output/functions/__server.func/_ssr/middleware-BmNRond2.mjs                                       1.85 kB │ gzip:     0.95 kB
+.vercel/output/functions/__server.func/_runtime.mjs                                                       1.92 kB │ gzip:     0.87 kB
+.vercel/output/functions/__server.func/_ssr/isolation.server-DdaYS3Bg.mjs                                 2.06 kB │ gzip:     1.09 kB
+.vercel/output/functions/__server.func/_ssr/parkrun-dates-C3n8S3tj.mjs                                    2.09 kB │ gzip:     0.89 kB
+.vercel/output/functions/__server.func/_country-DcRCBYbC.mjs                                              2.25 kB │ gzip:     0.93 kB
+.vercel/output/functions/__server.func/_libs/prop-types.mjs                                               2.27 kB │ gzip:     0.84 kB
+.vercel/output/functions/__server.func/_ssr/races-BasTzmYb.mjs                                            2.29 kB │ gzip:     1.04 kB
+.vercel/output/functions/__server.func/_ssr/dedupe-CkqHUBJS.mjs                                           2.35 kB │ gzip:     0.88 kB
+.vercel/output/functions/__server.func/_slug-BXWuITPZ.mjs                                                 2.37 kB │ gzip:     1.02 kB
+.vercel/output/functions/__server.func/_slug-BWd4dhoW.mjs                                                 2.51 kB │ gzip:     1.01 kB
+.vercel/output/functions/__server.func/_ssr/fixture-review-api-D6Tmj9kV.mjs                               2.72 kB │ gzip:     0.89 kB
+.vercel/output/functions/__server.func/_ssr/races-BcH0LsT9.mjs                                            2.73 kB │ gzip:     1.12 kB
+.vercel/output/functions/__server.func/_ssr/server-CjldIDVK.mjs                                           3.16 kB │ gzip:     1.20 kB
+.vercel/output/functions/__server.func/_libs/class-variance-authority+clsx.mjs                            3.17 kB │ gzip:     1.24 kB
+.vercel/output/functions/__server.func/_ssr/TravelFacts-DRw-SzVI.mjs                                      3.18 kB │ gzip:     1.11 kB
+.vercel/output/functions/__server.func/_ssr/staff.server-Df-QXzqI.mjs                                     3.23 kB │ gzip:     1.17 kB
+.vercel/output/functions/__server.func/_libs/d3-path.mjs                                                  3.25 kB │ gzip:     1.16 kB
+.vercel/output/functions/__server.func/_ssr/seo-snJkQcNa.mjs                                              3.51 kB │ gzip:     1.32 kB
+.vercel/output/functions/__server.func/_ssr/verify.server-Ckep-ILe.mjs                                    3.52 kB │ gzip:     1.57 kB
+.vercel/output/functions/__server.func/_ssr/RaceGroupBadges-DWRy-J_Q.mjs                                  3.65 kB │ gzip:     1.18 kB
+.vercel/output/functions/__server.func/_libs/better-auth__utils.mjs                                       3.75 kB │ gzip:     1.31 kB
+.vercel/output/functions/__server.func/_slug-9bfvQvUt.mjs                                                 3.80 kB │ gzip:     1.43 kB
+.vercel/output/functions/__server.func/_ssr/result-claims-api-DbhYDVYx.mjs                                4.05 kB │ gzip:     1.50 kB
+.vercel/output/functions/__server.func/_ssr/catalogue-publishing-api-DHwg2lac.mjs                         4.13 kB │ gzip:     1.05 kB
+.vercel/output/functions/__server.func/_libs/radix-ui__react-context.mjs                                  4.46 kB │ gzip:     1.20 kB
+.vercel/output/functions/__server.func/_libs/nanostores.mjs                                               4.74 kB │ gzip:     1.51 kB
+.vercel/output/functions/__server.func/_libs/d3-interpolate.mjs                                           5.02 kB │ gzip:     1.61 kB
+.vercel/output/functions/__server.func/_ssr/api-TTsOossh.mjs                                              5.06 kB │ gzip:     1.82 kB
+.vercel/output/functions/__server.func/_ssr/NationFlag-BG0m9g7H.mjs                                       5.13 kB │ gzip:     1.24 kB
+.vercel/output/functions/__server.func/_ssr/clubs-BlIVDkpN.mjs                                            5.20 kB │ gzip:     1.74 kB
+.vercel/output/functions/__server.func/_ssr/filters-BbZzIkkF.mjs                                          5.77 kB │ gzip:     1.86 kB
+.vercel/output/functions/__server.func/_ssr/race-series-BXZ1kEKX.mjs                                      6.51 kB │ gzip:     1.83 kB
+.vercel/output/functions/__server.func/_ssr/athletes-BE4DU5EN.mjs                                         6.64 kB │ gzip:     1.80 kB
+.vercel/output/functions/__server.func/_ssr/races-BPEjnQ0D.mjs                                            6.72 kB │ gzip:     2.02 kB
+.vercel/output/functions/__server.func/_tanstack-start-manifest_v-iWOGMimu.mjs                            7.18 kB │ gzip:     1.49 kB
+.vercel/output/functions/__server.func/index.mjs                                                          7.27 kB │ gzip:     2.60 kB
+.vercel/output/functions/__server.func/_ssr/races-C79Zy20h.mjs                                            7.30 kB │ gzip:     1.85 kB
+.vercel/output/functions/__server.func/_libs/tanstack__react-query.mjs                                    7.35 kB │ gzip:     1.94 kB
+.vercel/output/functions/__server.func/_ssr/privacy-D-anpWy2.mjs                                          7.53 kB │ gzip:     2.23 kB
+.vercel/output/functions/__server.func/_ssr/RaceCard-CJFQp-tP.mjs                                         7.61 kB │ gzip:     2.06 kB
+.vercel/output/functions/__server.func/_libs/d3-array.mjs                                                 8.05 kB │ gzip:     2.25 kB
+.vercel/output/functions/__server.func/_libs/eventemitter3.mjs                                            8.31 kB │ gzip:     2.05 kB
+.vercel/output/functions/__server.func/_libs/radix-ui__react-focus-scope.mjs                              8.40 kB │ gzip:     2.49 kB
+.vercel/output/functions/__server.func/_ssr/EventSearch-CXddbnlQ.mjs                                     10.00 kB │ gzip:     2.53 kB
+.vercel/output/functions/__server.func/_libs/@radix-ui/react-arrow+[...].mjs                             10.06 kB │ gzip:     3.02 kB
+.vercel/output/functions/__server.func/_libs/d3-color.mjs                                                10.38 kB │ gzip:     3.57 kB
+.vercel/output/functions/__server.func/_libs/d3-format.mjs                                               10.56 kB │ gzip:     3.02 kB
+.vercel/output/functions/__server.func/_ssr/format-CfnS1p0-.mjs                                          10.75 kB │ gzip:     3.58 kB
+.vercel/output/functions/__server.func/_ssr/calendar-CHkvvRm5.mjs                                        11.19 kB │ gzip:     3.22 kB
+.vercel/output/functions/__server.func/_ssr/ClubVerificationBadge-DW3xbT9j.mjs                           11.32 kB │ gzip:     3.20 kB
+.vercel/output/functions/__server.func/_libs/tanstack__history.mjs                                       12.09 kB │ gzip:     3.48 kB
+.vercel/output/functions/__server.func/_country-Da5UMBC5.mjs                                             12.48 kB │ gzip:     2.89 kB
+.vercel/output/functions/__server.func/_slug-CXxeRoPj.mjs                                                12.79 kB │ gzip:     2.78 kB
+.vercel/output/functions/__server.func/_ssr/athlete-account-api-B5MEiHYq.mjs                             12.88 kB │ gzip:     3.82 kB
+.vercel/output/functions/__server.func/_libs/@radix-ui/react-dismissable-layer+[...].mjs                 13.09 kB │ gzip:     2.87 kB
+.vercel/output/functions/__server.func/_slug-osF_047S.mjs                                                13.50 kB │ gzip:     2.69 kB
+.vercel/output/functions/__server.func/_ssr/athlete-accounts-Dd9-hUah.mjs                                13.71 kB │ gzip:     3.09 kB
+.vercel/output/functions/__server.func/_ssr/results-links-api-C-hATbE6.mjs                               13.78 kB │ gzip:     4.15 kB
+.vercel/output/functions/__server.func/_libs/fast-equals.mjs                                             14.37 kB │ gzip:     3.62 kB
+.vercel/output/functions/__server.func/_ssr/country-sites-sXIpnEZn.mjs                                   14.41 kB │ gzip:     4.63 kB
+.vercel/output/functions/__server.func/_libs/better-auth__memory-adapter.mjs                             14.71 kB │ gzip:     4.12 kB
+.vercel/output/functions/__server.func/_ssr/import.server-BT0UVL4m.mjs                                   14.80 kB │ gzip:     4.34 kB
+.vercel/output/functions/__server.func/_ssr/url-CBX8wGYU.mjs                                             15.54 kB │ gzip:     4.93 kB
+.vercel/output/functions/__server.func/_ssr/countries-8JbKhJUO.mjs                                       15.94 kB │ gzip:     6.09 kB
+.vercel/output/functions/__server.func/_ssr/sources-Cve1zyC5.mjs                                         16.32 kB │ gzip:     3.35 kB
+.vercel/output/functions/__server.func/_ssr/result-links-CgamfWH6.mjs                                    16.60 kB │ gzip:     4.11 kB
+.vercel/output/functions/__server.func/_libs/@better-auth/telemetry+[...].mjs                            17.23 kB │ gzip:     4.83 kB
+.vercel/output/functions/__server.func/_ssr/result-claims-api-MpvJqyt0.mjs                               17.93 kB │ gzip:     4.36 kB
+.vercel/output/functions/__server.func/_ssr/catalogue-publishing-BjST4kmB.mjs                            18.43 kB │ gzip:     4.57 kB
+.vercel/output/functions/__server.func/_ssr/result-claims-D6HfNIf2.mjs                                   19.13 kB │ gzip:     4.30 kB
+.vercel/output/functions/__server.func/_ssr/race-qualifications-4fI0Z5s5.mjs                             21.12 kB │ gzip:     7.02 kB
+.vercel/output/functions/__server.func/_ssr/data-intelligence-api-DTH8Simw.mjs                           21.29 kB │ gzip:     5.20 kB
+.vercel/output/functions/__server.func/_ssr/routes-BgXMm83T.mjs                                          21.47 kB │ gzip:     4.91 kB
+.vercel/output/functions/__server.func/_libs/noble__hashes.mjs                                           22.29 kB │ gzip:     7.44 kB
+.vercel/output/functions/__server.func/_ssr/claim-results-DZvYFDDE.mjs                                   23.05 kB │ gzip:     5.24 kB
+.vercel/output/functions/__server.func/_libs/decimal.js-light.mjs                                        23.31 kB │ gzip:     6.89 kB
+.vercel/output/functions/__server.func/_ssr/catalogue-publishing.server-DGxP_gha.mjs                     23.44 kB │ gzip:     5.84 kB
+.vercel/output/functions/__server.func/_ssr/fixture-review-NLThwmhF.mjs                                  23.72 kB │ gzip:     5.05 kB
+.vercel/output/functions/__server.func/_ssr/catalogue-recovery.server-CzfWtgQZ.mjs                       23.90 kB │ gzip:     5.98 kB
+.vercel/output/functions/__server.func/_libs/d3-shape.mjs                                                24.56 kB │ gzip:     5.02 kB
+.vercel/output/functions/__server.func/_libs/@floating-ui/dom+[...].mjs                                  25.38 kB │ gzip:     6.57 kB
+.vercel/output/functions/__server.func/_libs/@floating-ui/core+[...].mjs                                 25.55 kB │ gzip:     6.32 kB
+.vercel/output/functions/__server.func/_libs/h3-v2+rou3+srvx.mjs                                         25.97 kB │ gzip:     7.07 kB
+.vercel/output/functions/__server.func/_libs/h3+rou3+srvx.mjs                                            26.42 kB │ gzip:     6.94 kB
+.vercel/output/functions/__server.func/_ssr/athlete-account-api-DpjFPfvf.mjs                             28.98 kB │ gzip:     6.71 kB
+.vercel/output/functions/__server.func/_ssr/client-Bf1XtmrE.mjs                                          30.28 kB │ gzip:     9.30 kB
+.vercel/output/functions/__server.func/_libs/@floating-ui/react-dom+[...].mjs                            31.24 kB │ gzip:     7.96 kB
+.vercel/output/functions/__server.func/_ssr/scraper-workbook-import.server-BIi4qSln.mjs                  32.17 kB │ gzip:     7.81 kB
+.vercel/output/functions/__server.func/_libs/react-smooth.mjs                                            37.83 kB │ gzip:     8.15 kB
+.vercel/output/functions/__server.func/_libs/jose.mjs                                                    38.38 kB │ gzip:     8.56 kB
+.vercel/output/functions/__server.func/_ssr/router-CLQGVQCw.mjs                                          40.83 kB │ gzip:     9.41 kB
+.vercel/output/functions/__server.func/_libs/lucide-react.mjs                                            41.02 kB │ gzip:     8.06 kB
+.vercel/output/functions/__server.func/_ssr/admin-ZHf0jXoL.mjs                                           43.56 kB │ gzip:     8.20 kB
+.vercel/output/functions/__server.func/_slug-9by0QqwD.mjs                                                44.37 kB │ gzip:     8.15 kB
+.vercel/output/functions/__server.func/_slug-CfQY5Gff2.mjs                                               44.72 kB │ gzip:     8.21 kB
+.vercel/output/functions/__server.func/_ssr/athlete-account-BIrh_MlI.mjs                                 46.13 kB │ gzip:     9.53 kB
+.vercel/output/functions/__server.func/_slug-CNqPVbZT.mjs                                                46.41 kB │ gzip:     8.80 kB
+.vercel/output/functions/__server.func/_libs/noble__ciphers.mjs                                          46.99 kB │ gzip:    13.99 kB
+.vercel/output/functions/__server.func/_ssr/data-intelligence-V6y3g8sA.mjs                               47.18 kB │ gzip:     8.08 kB
+.vercel/output/functions/__server.func/_ssr/db-DUbKDeES.mjs                                              50.45 kB │ gzip:    11.92 kB
+.vercel/output/functions/__server.func/_libs/d3-scale+[...].mjs                                          58.22 kB │ gzip:    12.11 kB
+.vercel/output/functions/__server.func/_ssr/api-CF9mmGR-.mjs                                             59.59 kB │ gzip:    12.88 kB
+.vercel/output/functions/__server.func/_libs/@radix-ui/react-popover+[...].mjs                           61.40 kB │ gzip:    15.32 kB
+.vercel/output/functions/__server.func/_libs/tanstack__query-core.mjs                                    66.00 kB │ gzip:    13.94 kB
+.vercel/output/functions/__server.func/_ssr/ssr.mjs                                                      71.04 kB │ gzip:    19.50 kB
+.vercel/output/functions/__server.func/_libs/tailwind-merge.mjs                                          88.13 kB │ gzip:    15.66 kB
+.vercel/output/functions/__server.func/_ssr/race-collections-BbZZavwy.mjs                               115.71 kB │ gzip:     9.99 kB
+.vercel/output/functions/__server.func/_libs/@tanstack/router-core+[...].mjs                            120.97 kB │ gzip:    25.41 kB
+.vercel/output/functions/__server.func/_ssr/source-registry.server-DG6mdT66.mjs                         126.41 kB │ gzip:    19.67 kB
+.vercel/output/functions/__server.func/_libs/pg.mjs                                                     144.79 kB │ gzip:    33.73 kB
+.vercel/output/functions/__server.func/_libs/lodash.mjs                                                 161.63 kB │ gzip:    29.39 kB
+.vercel/output/functions/__server.func/_ssr/public-figures-C0hRz-Ap.mjs                                 230.73 kB │ gzip:    28.86 kB
+.vercel/output/functions/__server.func/_ssr/server-Du_raRP-.mjs                                         326.58 kB │ gzip:    76.47 kB
+.vercel/output/functions/__server.func/_libs/@better-auth/kysely-adapter+[...].mjs                      472.99 kB │ gzip:    78.51 kB
+.vercel/output/functions/__server.func/_libs/recharts+[...].mjs                                         515.74 kB │ gzip:    96.82 kB
+.vercel/output/functions/__server.func/_libs/@tanstack/react-router+[...].mjs                           651.52 kB │ gzip:   136.51 kB
+.vercel/output/functions/__server.func/_ssr/venue-95Ok1ZDs.mjs                                          657.36 kB │ gzip:    99.09 kB
+.vercel/output/functions/__server.func/_libs/electric-sql__pglite.mjs                                   750.17 kB │ gzip:   152.96 kB
+.vercel/output/functions/__server.func/_libs/@better-auth/core+[...].mjs                                753.62 kB │ gzip:   143.69 kB
+.vercel/output/functions/__server.func/_ssr/scraper-workbook-snapshot.server.generated-B03qXuXO.mjs   1,635.01 kB │ gzip: 1,229.80 kB
+.vercel/output/functions/__server.func/_ssr/seed.server-CL0Ip_bc.mjs                                 13,011.45 kB │ gzip: 1,272.51 kB
+
+[32m✓ built in 1.50s[39m
+[info] Generated [36m.vercel/output/nitro.json[39m
+[success] [nitro] You can preview this build using `npx vite preview`
+[success] [nitro] You can deploy this build using `npx nitro deploy --prebuilt`
+[copy-pglite-assets] copied 9 asset(s)
+
+> typecheck
+> tsc --noEmit
+
+src/lib/athrecs/catalogue-publishing-api.ts(21,12): error TS2345: Argument of type '() => Promise<{ backend: DbSource; persistent: boolean; currentRevisionId: number | null; batches: { id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; ... 7 more ...; counts: { ...; }; }[]; revisions: { ...; }[]; }>' is not assignable to parameter of type 'ServerFn<Register, "GET", readonly [FunctionMiddlewareAfterServer<{}, unknown, undefined, { userId: string; staffEmail: string; }, { bearerToken: string | undefined; }, undefined, undefined>], undefined, Promise<...>, true>'.
+  Type 'Promise<{ backend: DbSource; persistent: boolean; currentRevisionId: number | null; batches: { id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; ... 7 more ...; counts: { ...; }; }[]; revisions: { ...; }[]; }>' is not assignable to type 'Promise<ValidateSerializableMapped<{ backend: DbSource; persistent: boolean; currentRevisionId: number | null; batches: { id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; ... 7 more ...; counts: { ...; }; }[]; revisions: { ...; }[]; }, RegisteredSerializableInput<...>>>'.
+    Type '{ backend: DbSource; persistent: boolean; currentRevisionId: number | null; batches: { id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; ... 7 more ...; counts: { ...; }; }[]; revisions: { ...; }[]; }' is not assignable to type 'ValidateSerializableMapped<{ backend: DbSource; persistent: boolean; currentRevisionId: number | null; batches: { id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; ... 7 more ...; counts: { ...; }; }[]; revisions: { ...; }[]; }, RegisteredSerializableInput<...>>'.
+      Types of property 'batches' are incompatible.
+        Type '{ id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; submittedBy: string; submittedAt: string; validatedAt: string | null; publishedAt: string | null; validationSummary: Record<...> | null; publishSummary: Record<...> | null; error: string | null; counts: { ...; }; }[]' is not assignable to type 'ValidateSerializableMapped<{ id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; submittedBy: string; submittedAt: string; validatedAt: string | null; publishedAt: string | null; validationSummary: Record<...> | null; publishSummary: Record<...> | null; error: string | null;...'.
+          Type '{ id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; submittedBy: string; submittedAt: string; validatedAt: string | null; publishedAt: string | null; validationSummary: Record<...> | null; publishSummary: Record<...> | null; error: string | null; counts: { ...; }; }' is not assignable to type 'ValidateSerializableMapped<{ id: string; sourceKey: string; sourceUrl: string | null; payloadHash: string; status: string; submittedBy: string; submittedAt: string; validatedAt: string | null; publishedAt: string | null; validationSummary: Record<...> | null; publishSummary: Record<...> | null; error: string | null;...'.
+            Types of property 'validationSummary' are incompatible.
+              Type 'Record<string, unknown> | null' is not assignable to type 'ValidateSerializableMapped<Record<string, unknown>, RegisteredSerializableInput<Register>> | null'.
+                Type 'Record<string, unknown>' is not assignable to type 'ValidateSerializableMapped<Record<string, unknown>, RegisteredSerializableInput<Register>>'.
+                  'string' index signatures are incompatible.
+                    Type 'unknown' is not assignable to type 'SerializationError<"Type may not be serializable">'.
+src/lib/athrecs/catalogue-publishing.server.ts(637,44): error TS2345: Argument of type 'string | EventSnapshot | EditionSnapshot' is not assignable to parameter of type 'string | EditionSnapshot | null'.
+  Type 'EventSnapshot' is not assignable to type 'string | EditionSnapshot | null'.
+    Property 'entryOptions' is missing in type 'EventSnapshot' but required in type 'EditionSnapshot'.
+src/lib/athrecs/catalogue-publishing.server.ts(656,45): error TS2345: Argument of type 'string | EventSnapshot | EditionSnapshot | null' is not assignable to parameter of type 'string | EditionSnapshot | null'.
+  Type 'EventSnapshot' is not assignable to type 'string | EditionSnapshot | null'.
+    Property 'entryOptions' is missing in type 'EventSnapshot' but required in type 'EditionSnapshot'.
+src/lib/athrecs/catalogue-publishing.server.ts(680,42): error TS2345: Argument of type 'string | EventSnapshot | EditionSnapshot' is not assignable to parameter of type 'string | EventSnapshot | null'.
+  Type 'EditionSnapshot' is not assignable to type 'string | EventSnapshot | null'.
+    Property 'distances' is missing in type 'EditionSnapshot' but required in type 'EventSnapshot'.
+src/lib/athrecs/catalogue-publishing.server.ts(699,43): error TS2345: Argument of type 'string | EventSnapshot | EditionSnapshot | null' is not assignable to parameter of type 'string | EventSnapshot | null'.
+  Type 'EditionSnapshot' is not assignable to type 'string | EventSnapshot | null'.
+    Property 'distances' is missing in type 'EditionSnapshot' but required in type 'EventSnapshot'.
+src/lib/athrecs/import.server.ts(408,16): error TS2448: Block-scoped variable 'options' used before its declaration.
+src/lib/athrecs/import.server.ts(408,16): error TS2454: Variable 'options' is used before being assigned.
