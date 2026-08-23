@@ -718,16 +718,21 @@ function AthleteTab({ data }: { data: Dashboard }) {
               active performance-insights consent contributes to these aggregates.
             </p>
           </div>
-          <Badge className="border-emerald-300 bg-emerald-50 text-emerald-900">
-            Aggregated only
-          </Badge>
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge className="border-emerald-300 bg-emerald-50 text-emerald-900">
+              Aggregated only
+            </Badge>
+            <Button asChild variant="secondary">
+              <Link to="/admin/athlete-accounts">Manage athlete accounts</Link>
+            </Button>
+          </div>
         </div>
         {habits.responses === 0 ? (
           <div className="mt-5">
             <EmptyState
               icon={UserRoundSearch}
               title="No consented habit responses yet"
-              text="The schema is ready for athlete-claimed profiles and future opt-in questionnaires; no habits are inferred or invented."
+              text="Athlete Account responses appear here only after the athlete links a profile and grants performance-insights consent; no habits are inferred or invented."
             />
           </div>
         ) : (

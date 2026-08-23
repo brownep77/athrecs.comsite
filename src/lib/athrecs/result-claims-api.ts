@@ -2,6 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { getSql } from "@/lib/db";
+import { syncAthleteAccountAfterClaim } from "./athlete-account-api";
 import { ensureAthrecsSeeded } from "./seed.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
@@ -439,7 +440,7 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
     }
 
     const sql = await ready();
-    return sql.transaction(async (tx) => {
+    const result = await sql.transaction(async (tx) => {
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
@@ -522,8 +523,12 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
         `;
       }
 
-      return { claimId: claim.id, status: nextStatus };
+      return { claimId: claim.id, status: nextStatus, claimantUserId: claim.claimant_user_id };
     });
+    if (result.status === "approved") {
+      await syncAthleteAccountAfterClaim(result.claimantUserId);
+    }
+    return { claimId: result.claimId, status: result.status };
   });
 
 export const revokeAthleteOwnership = createServerFn({ method: "POST" })

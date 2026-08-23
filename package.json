@@ -31,6 +31,7 @@
     "verify:fixture-review": "node --experimental-strip-types scripts/verify-fixture-review.mjs",
     "verify:results-links": "node --experimental-strip-types scripts/verify-results-links.mjs",
     "verify:result-claims": "node scripts/verify-result-claims.mjs",
+    "verify:athlete-accounts": "node scripts/verify-athlete-accounts.mjs",
     "verify:staff-microsite": "node --experimental-strip-types scripts/verify-staff-microsite.mjs",
     "verify:data-intelligence": "node scripts/verify-data-intelligence.mjs",
     "verify:home-sports-news": "node --experimental-strip-types scripts/verify-home-sports-news.mjs",

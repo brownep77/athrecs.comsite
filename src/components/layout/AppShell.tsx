@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { CalendarDays, Home, List, Users, UsersRound } from "lucide-react";
+import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import {
   COUNTRY_SITES,
@@ -116,12 +117,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     <item.icon className="h-4 w-4" strokeWidth={1.75} />
                     {localizedLabels[item.key] ?? item.label}
                   </ShellLink>
-                  {item.key === "calendar" ? (
-                    <CountrySelector localized={localized} />
-                  ) : null}
+                  {item.key === "calendar" ? <CountrySelector localized={localized} /> : null}
                 </Fragment>
               );
             })}
+            <AthleteAccountAccess />
           </nav>
         </div>
       </header>
@@ -132,13 +132,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="flex items-center gap-1">
             <Link
               to="/calendar"
-              className="inline-flex h-9 items-center gap-1.5 rounded-md bg-accent-soft px-2.5 text-sm font-semibold text-fg no-underline"
+              className="hidden h-9 items-center gap-1.5 rounded-md bg-accent-soft px-2.5 text-sm font-semibold text-fg no-underline min-[360px]:inline-flex"
               aria-label="Calendar"
             >
               <CalendarDays className="h-4 w-4" strokeWidth={2} />
               <span className="hidden sm:inline">Calendar</span>
             </Link>
             <CountrySelector localized={localized} compact />
+            <AthleteAccountAccess compact />
           </div>
         </div>
       </header>
@@ -197,7 +198,7 @@ function CountrySelector({
       }}
       className={cn(
         "rounded-md border border-border bg-surface font-medium text-fg outline-none focus:ring-2 focus:ring-accent/30",
-        compact ? "h-9 w-36 px-2 text-xs" : "h-10 max-w-44 px-2 text-sm",
+        compact ? "h-9 w-28 px-1.5 text-xs sm:w-36 sm:px-2" : "h-10 max-w-44 px-2 text-sm",
       )}
     >
       <option value="">🌍 Select your country</option>
