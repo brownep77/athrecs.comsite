@@ -1,8 +1,17 @@
 status=failure
-run_id=32635312903
+run_id=32635439663
 attempt=1
-trigger_sha=a384ecc38ab486d645be3b134bc55766b5a3538d
-recorded_at=2026-08-23T11:01:21Z
+trigger_sha=7e015a098fb326334b493b6fa40805d7726f85a2
+recorded_at=2026-08-23T11:03:48Z
+
+===== /tmp/stability-commit.log =====
+[codex/athrecs-stability-and-slugs 07afc1e] Add staged catalogue publishing
+ 8 files changed, 1543 insertions(+), 32 deletions(-)
+ create mode 100644 docs/catalogue-publishing/README.md
+ create mode 100644 migrations/0016_catalogue_publishing.sql
+ create mode 100644 src/lib/athrecs/catalogue-publishing-api.ts
+ create mode 100644 src/lib/athrecs/catalogue-publishing.server.ts
+ create mode 100644 src/routes/admin/catalogue-publishing.tsx
 
 ===== /tmp/stability-install.log =====
 npm warn EBADENGINE Unsupported engine {
@@ -12,7 +21,7 @@ npm warn EBADENGINE   current: { node: 'v24.19.0', npm: '11.17.0' }
 npm warn EBADENGINE }
 npm warn deprecated recharts@2.15.4: 1.x and 2.x branches are no longer active. Bump to Recharts v3 to receive latest features and bugfixes. See https://github.com/recharts/recharts/wiki/3.0-migration-guide
 
-added 430 packages in 12s
+added 430 packages in 9s
 
 ===== /tmp/stability-prepare.log =====
 From https://github.com/brownep77/athrecs.comsite
@@ -20,16 +29,21 @@ From https://github.com/brownep77/athrecs.comsite
 Switched to a new branch 'codex/athrecs-stability-and-slugs'
 branch 'codex/athrecs-stability-and-slugs' set up to track 'origin/main'.
 
+===== /tmp/stability-push.log =====
+To https://github.com/brownep77/athrecs.comsite
+ ! [remote rejected] HEAD -> codex/athrecs-stability-and-slugs (refusing to allow a GitHub App to create or update workflow `.github/workflows/quality-gate.yml` without `workflows` permission)
+error: failed to push some refs to 'https://github.com/brownep77/athrecs.comsite'
+
 ===== /tmp/stability-stage1.log =====
 Applied stage1 of the ordered Athrecs stability upgrade.
-[90msrc/routes/races/index.tsx[39m 175ms (unchanged)
-[90msrc/routes/index.tsx[39m 93ms (unchanged)
-src/routes/races/$slug.tsx 160ms
-[90msrc/routes/athletes/$slug.tsx[39m 59ms (unchanged)
-src/routes/clubs/$slug.tsx 35ms
-[90msrc/routes/$language/$country/races/$slug.tsx[39m 11ms (unchanged)
-[90msrc/lib/athrecs/slug-redirects.ts[39m 7ms (unchanged)
-[codex/athrecs-stability-and-slugs fa944bd] Make page URLs durable and shareable
+[90msrc/routes/races/index.tsx[39m 134ms (unchanged)
+[90msrc/routes/index.tsx[39m 83ms (unchanged)
+src/routes/races/$slug.tsx 135ms
+[90msrc/routes/athletes/$slug.tsx[39m 42ms (unchanged)
+src/routes/clubs/$slug.tsx 24ms
+[90msrc/routes/$language/$country/races/$slug.tsx[39m 9ms (unchanged)
+[90msrc/lib/athrecs/slug-redirects.ts[39m 6ms (unchanged)
+[codex/athrecs-stability-and-slugs ae245a5] Make page URLs durable and shareable
  8 files changed, 423 insertions(+), 85 deletions(-)
  create mode 100644 migrations/0015_slug_redirects.sql
  create mode 100644 src/lib/athrecs/slug-redirects.ts
@@ -37,15 +51,15 @@ src/routes/clubs/$slug.tsx 35ms
 ===== /tmp/stability-stage2.log =====
 Applied stage2 of the ordered Athrecs stability upgrade.
 
-up to date in 625ms
-[90mpackage.json[39m 30ms (unchanged)
-scripts/browser-smoke.mjs 46ms
-[90mscripts/verify-slug-stability.mjs[39m 13ms (unchanged)
-[90mscripts/verify-catalogue-publishing.mjs[39m 7ms (unchanged)
-[90m.github/workflows/quality-gate.yml[39m 20ms (unchanged)
-[90m.github/pull_request_template.md[39m 44ms (unchanged)
-[90mdocs/release-safety.md[39m 12ms (unchanged)
-[codex/athrecs-stability-and-slugs 03bfffd] Add deployment quality gates
+up to date in 485ms
+[90mpackage.json[39m 25ms (unchanged)
+scripts/browser-smoke.mjs 37ms
+[90mscripts/verify-slug-stability.mjs[39m 10ms (unchanged)
+[90mscripts/verify-catalogue-publishing.mjs[39m 5ms (unchanged)
+[90m.github/workflows/quality-gate.yml[39m 15ms (unchanged)
+[90m.github/pull_request_template.md[39m 37ms (unchanged)
+[90mdocs/release-safety.md[39m 10ms (unchanged)
+[codex/athrecs-stability-and-slugs 22590ff] Add deployment quality gates
  9 files changed, 254 insertions(+), 90 deletions(-)
  create mode 100644 .github/pull_request_template.md
  create mode 100644 .github/workflows/quality-gate.yml
@@ -55,82 +69,15 @@ scripts/browser-smoke.mjs 46ms
 
 ===== /tmp/stability-stage3.log =====
 Applied stage3 of the ordered Athrecs stability upgrade.
-Applied generated-output TypeScript repairs.
-[90msrc/lib/athrecs/import.server.ts[39m 181ms (unchanged)
-src/lib/athrecs/catalogue-publishing.server.ts 89ms
-src/lib/athrecs/catalogue-publishing-api.ts 20ms
-src/routes/admin/catalogue-publishing.tsx 48ms
-[90msrc/routes/admin/index.tsx[39m 90ms (unchanged)
-[90mdocs/catalogue-publishing/README.md[39m 32ms (unchanged)
+Applied generated-output TypeScript and lint repairs.
+[90msrc/lib/athrecs/import.server.ts[39m 151ms (unchanged)
+src/lib/athrecs/catalogue-publishing.server.ts 91ms
+src/lib/athrecs/catalogue-publishing-api.ts 14ms
+src/routes/admin/catalogue-publishing.tsx 49ms
+[90msrc/routes/admin/index.tsx[39m 72ms (unchanged)
+[90mdocs/catalogue-publishing/README.md[39m 29ms (unchanged)
 
 ===== /tmp/stability-verify.log =====
-node_modules/.nitro/vite/services/ssr/assets/_country-Da5UMBC5.js                                        10.94 kB │ gzip:     2.77 kB
-node_modules/.nitro/vite/services/ssr/assets/ClubVerificationBadge-DW3xbT9j.js                           11.01 kB │ gzip:     3.13 kB
-node_modules/.nitro/vite/services/ssr/assets/_slug-CXxeRoPj.js                                           11.13 kB │ gzip:     2.68 kB
-node_modules/.nitro/vite/services/ssr/assets/_slug-osF_047S.js                                           11.40 kB │ gzip:     2.57 kB
-node_modules/.nitro/vite/services/ssr/assets/athlete-accounts-Dd9-hUah.js                                11.77 kB │ gzip:     2.96 kB
-node_modules/.nitro/vite/services/ssr/assets/athlete-account-api-B5MEiHYq.js                             12.84 kB │ gzip:     3.79 kB
-node_modules/.nitro/vite/services/ssr/assets/results-links-api-C-hATbE6.js                               13.89 kB │ gzip:     4.14 kB
-node_modules/.nitro/vite/services/ssr/assets/sources-Cve1zyC5.js                                         14.08 kB │ gzip:     3.20 kB
-node_modules/.nitro/vite/services/ssr/assets/country-sites-sXIpnEZn.js                                   14.37 kB │ gzip:     4.60 kB
-node_modules/.nitro/vite/services/ssr/assets/result-links-CgamfWH6.js                                    14.52 kB │ gzip:     3.97 kB
-node_modules/.nitro/vite/services/ssr/assets/import.server-DFzTJkIP.js                                   14.79 kB │ gzip:     4.31 kB
-node_modules/.nitro/vite/services/ssr/assets/countries-8JbKhJUO.js                                       15.53 kB │ gzip:     5.99 kB
-node_modules/.nitro/vite/services/ssr/assets/url-CBX8wGYU.js                                             15.82 kB │ gzip:     4.94 kB
-node_modules/.nitro/vite/services/ssr/assets/catalogue-publishing-BjST4kmB.js                            16.38 kB │ gzip:     4.43 kB
-node_modules/.nitro/vite/services/ssr/assets/result-claims-D6HfNIf2.js                                   16.71 kB │ gzip:     4.11 kB
-node_modules/.nitro/vite/services/ssr/assets/result-claims-api-MpvJqyt0.js                               17.91 kB │ gzip:     4.33 kB
-node_modules/.nitro/vite/services/ssr/assets/routes-BgXMm83T.js                                          18.89 kB │ gzip:     4.74 kB
-node_modules/.nitro/vite/services/ssr/assets/claim-results-DZvYFDDE.js                                   20.13 kB │ gzip:     5.03 kB
-node_modules/.nitro/vite/services/ssr/assets/race-qualifications-4fI0Z5s5.js                             20.31 kB │ gzip:     6.94 kB
-node_modules/.nitro/vite/services/ssr/assets/fixture-review-NLThwmhF.js                                  21.08 kB │ gzip:     4.89 kB
-node_modules/.nitro/vite/services/ssr/assets/data-intelligence-api-DTH8Simw.js                           21.27 kB │ gzip:     5.17 kB
-node_modules/.nitro/vite/services/ssr/assets/catalogue-publishing.server-CoR3FCpx.js                     23.40 kB │ gzip:     5.81 kB
-node_modules/.nitro/vite/services/ssr/assets/catalogue-recovery.server-CzfWtgQZ.js                       23.86 kB │ gzip:     5.95 kB
-node_modules/.nitro/vite/services/ssr/assets/athlete-account-api-DpjFPfvf.js                             28.96 kB │ gzip:     6.68 kB
-node_modules/.nitro/vite/services/ssr/assets/client-Bf1XtmrE.js                                          31.12 kB │ gzip:     9.33 kB
-node_modules/.nitro/vite/services/ssr/assets/scraper-workbook-import.server-DMw_pLiW.js                  32.19 kB │ gzip:     7.79 kB
-node_modules/.nitro/vite/services/ssr/assets/router-CLQGVQCw.js                                          38.16 kB │ gzip:     9.27 kB
-node_modules/.nitro/vite/services/ssr/assets/_slug-9by0QqwD.js                                           38.57 kB │ gzip:     7.86 kB
-node_modules/.nitro/vite/services/ssr/assets/_slug-CfQY5Gff2.js                                          38.85 kB │ gzip:     7.91 kB
-node_modules/.nitro/vite/services/ssr/assets/admin-ZHf0jXoL.js                                           38.88 kB │ gzip:     8.00 kB
-node_modules/.nitro/vite/services/ssr/assets/data-intelligence-V6y3g8sA.js                               40.11 kB │ gzip:     7.78 kB
-node_modules/.nitro/vite/services/ssr/assets/_slug-CNqPVbZT.js                                           40.58 kB │ gzip:     8.48 kB
-node_modules/.nitro/vite/services/ssr/assets/athlete-account-BIrh_MlI.js                                 41.36 kB │ gzip:     9.27 kB
-node_modules/.nitro/vite/services/ssr/assets/db-DUbKDeES.js                                              51.42 kB │ gzip:    11.97 kB
-node_modules/.nitro/vite/services/ssr/assets/api-Bl7PgH-2.js                                             59.51 kB │ gzip:    12.86 kB
-node_modules/.nitro/vite/services/ssr/index.js                                                           72.95 kB │ gzip:    19.56 kB
-node_modules/.nitro/vite/services/ssr/assets/race-collections-BbZZavwy.js                               115.67 kB │ gzip:     9.95 kB
-node_modules/.nitro/vite/services/ssr/assets/source-registry.server-DG6mdT66.js                         126.50 kB │ gzip:    19.67 kB
-node_modules/.nitro/vite/services/ssr/assets/public-figures-C0hRz-Ap.js                                 230.89 kB │ gzip:    28.89 kB
-node_modules/.nitro/vite/services/ssr/assets/server-Du_raRP-.js                                         331.71 kB │ gzip:    77.03 kB
-node_modules/.nitro/vite/services/ssr/assets/venue-95Ok1ZDs.js                                          657.19 kB │ gzip:    98.99 kB
-node_modules/.nitro/vite/services/ssr/assets/scraper-workbook-snapshot.server.generated-B03qXuXO.js   1,634.98 kB │ gzip: 1,229.77 kB
-node_modules/.nitro/vite/services/ssr/assets/seed.server-CL0Ip_bc.js                                 13,016.60 kB │ gzip: 1,273.53 kB
-
-[32m✓ built in 2.91s[39m
-[start] [nitro] Building [[35mNitro[39m] [2m(preset: `vercel`, compatibility: `2026-08-23`)[22m
-[success] [nitro] Generated public [36m.vercel/output/static[39m
-[36mvite v8.2.0 [32mbuilding nitro environment for production...[36m[39m
-[2Ktransforming...✓ 3153 modules transformed.
-[info] Tracing dependencies:
-- `tslib` (2.8.1)
-[success] Traced 1 dependencies (4 files) in 58ms.
-[info] Ensure your production environment matches the builder OS and architecture (`linux-x64`) to avoid native module issues.
-rendering chunks...
-computing gzip size...
-.vercel/output/functions/__server.func/_ssr/start-5Z2QO8AU.mjs                                            0.14 kB │ gzip:     0.13 kB
-.vercel/output/functions/__server.func/_ssr/kysely-adapter-Cj_QZw5p.mjs                                   0.15 kB │ gzip:     0.12 kB
-.vercel/output/functions/__server.func/_ssr/empty-plugin-adapters-D9UWiqvJ.mjs                            0.23 kB │ gzip:     0.16 kB
-.vercel/output/functions/__server.func/_chunks/core.mjs                                                   0.25 kB │ gzip:     0.18 kB
-.vercel/output/functions/__server.func/_ssr/utils-C_uf36nf.mjs                                            0.29 kB │ gzip:     0.21 kB
-.vercel/output/functions/__server.func/_libs/zod.mjs                                                      0.36 kB │ gzip:     0.22 kB
-.vercel/output/functions/__server.func/_ssr/createServerRpc-CN-evIEF.mjs                                  0.38 kB │ gzip:     0.26 kB
-.vercel/output/functions/__server.func/_ssr/rolldown-runtime-D7D4PA-g.mjs                                 0.41 kB │ gzip:     0.29 kB
-.vercel/output/functions/__server.func/_ssr/clubs-DNVhwuXx.mjs                                            0.49 kB │ gzip:     0.31 kB
-.vercel/output/functions/__server.func/_ssr/athletes-CZMyzBb6.mjs                                         0.50 kB │ gzip:     0.31 kB
-.vercel/output/functions/__server.func/_ssr/createSsrRpc-D75-wYbG.mjs                                     0.52 kB │ gzip:     0.33 kB
-.vercel/output/functions/__server.func/_slug-B-XB4pW4.mjs                                                 0.60 kB │ gzip:     0.36 kB
 .vercel/output/functions/__server.func/_chunks/ssr-renderer.mjs                                           0.60 kB │ gzip:     0.36 kB
 .vercel/output/functions/__server.func/_ssr/slug-redirects-CIVWF2og.mjs                                   0.79 kB │ gzip:     0.51 kB
 .vercel/output/functions/__server.func/_ssr/badge-B6soYjtC.mjs                                            0.81 kB │ gzip:     0.48 kB
@@ -144,7 +91,7 @@ computing gzip size...
 .vercel/output/functions/__server.func/_ssr/calendar-lgUaOWJf.mjs                                         1.13 kB │ gzip:     0.61 kB
 .vercel/output/functions/__server.func/_ssr/data-intelligence-api-BxL3Hcv3.mjs                            1.27 kB │ gzip:     0.68 kB
 .vercel/output/functions/__server.func/_ssr/button-CLScDNR5.mjs                                           1.39 kB │ gzip:     0.68 kB
-.vercel/output/functions/__server.func/_slug-CzViWGQV.mjs                                                 1.40 kB │ gzip:     0.63 kB
+.vercel/output/functions/__server.func/_slug-BAUqcdS8.mjs                                                 1.40 kB │ gzip:     0.63 kB
 .vercel/output/functions/__server.func/_libs/defu.mjs                                                     1.41 kB │ gzip:     0.58 kB
 .vercel/output/functions/__server.func/_ssr/staff-middleware-BftytkRR.mjs                                 1.42 kB │ gzip:     0.59 kB
 .vercel/output/functions/__server.func/_ssr/staff-config-DU2S7A8Z.mjs                                     1.43 kB │ gzip:     0.73 kB
@@ -164,7 +111,7 @@ computing gzip size...
 .vercel/output/functions/__server.func/_ssr/races-BasTzmYb.mjs                                            2.29 kB │ gzip:     1.04 kB
 .vercel/output/functions/__server.func/_ssr/dedupe-CkqHUBJS.mjs                                           2.35 kB │ gzip:     0.88 kB
 .vercel/output/functions/__server.func/_slug-BXWuITPZ.mjs                                                 2.37 kB │ gzip:     1.02 kB
-.vercel/output/functions/__server.func/_slug-BWd4dhoW.mjs                                                 2.51 kB │ gzip:     1.01 kB
+.vercel/output/functions/__server.func/_slug-PlIpbcnX.mjs                                                 2.51 kB │ gzip:     1.00 kB
 .vercel/output/functions/__server.func/_ssr/fixture-review-api-Cv4OwprQ.mjs                               2.72 kB │ gzip:     0.89 kB
 .vercel/output/functions/__server.func/_ssr/races-BcH0LsT9.mjs                                            2.73 kB │ gzip:     1.12 kB
 .vercel/output/functions/__server.func/_ssr/server-CjldIDVK.mjs                                           3.16 kB │ gzip:     1.20 kB
@@ -189,7 +136,7 @@ computing gzip size...
 .vercel/output/functions/__server.func/_ssr/race-series-BXZ1kEKX.mjs                                      6.51 kB │ gzip:     1.83 kB
 .vercel/output/functions/__server.func/_ssr/athletes-BE4DU5EN.mjs                                         6.64 kB │ gzip:     1.80 kB
 .vercel/output/functions/__server.func/_ssr/races-BPEjnQ0D.mjs                                            6.72 kB │ gzip:     2.02 kB
-.vercel/output/functions/__server.func/_tanstack-start-manifest_v-iWOGMimu.mjs                            7.18 kB │ gzip:     1.49 kB
+.vercel/output/functions/__server.func/_tanstack-start-manifest_v-DG_1pGNe.mjs                            7.18 kB │ gzip:     1.49 kB
 .vercel/output/functions/__server.func/index.mjs                                                          7.27 kB │ gzip:     2.60 kB
 .vercel/output/functions/__server.func/_ssr/races-C79Zy20h.mjs                                            7.30 kB │ gzip:     1.85 kB
 .vercel/output/functions/__server.func/_libs/tanstack__react-query.mjs                                    7.35 kB │ gzip:     1.94 kB
@@ -245,13 +192,13 @@ computing gzip size...
 .vercel/output/functions/__server.func/_ssr/scraper-workbook-import.server-DMw_pLiW.mjs                  32.17 kB │ gzip:     7.81 kB
 .vercel/output/functions/__server.func/_libs/react-smooth.mjs                                            37.83 kB │ gzip:     8.15 kB
 .vercel/output/functions/__server.func/_libs/jose.mjs                                                    38.38 kB │ gzip:     8.56 kB
-.vercel/output/functions/__server.func/_ssr/router-CLQGVQCw.mjs                                          40.83 kB │ gzip:     9.41 kB
+.vercel/output/functions/__server.func/_ssr/router-C2mkG8Ha.mjs                                          40.83 kB │ gzip:     9.40 kB
 .vercel/output/functions/__server.func/_libs/lucide-react.mjs                                            41.02 kB │ gzip:     8.06 kB
 .vercel/output/functions/__server.func/_ssr/admin-ZHf0jXoL.mjs                                           43.56 kB │ gzip:     8.20 kB
-.vercel/output/functions/__server.func/_slug-9by0QqwD.mjs                                                44.37 kB │ gzip:     8.15 kB
+.vercel/output/functions/__server.func/_slug-DNDK-292.mjs                                                44.37 kB │ gzip:     8.15 kB
 .vercel/output/functions/__server.func/_slug-CfQY5Gff2.mjs                                               44.72 kB │ gzip:     8.21 kB
 .vercel/output/functions/__server.func/_ssr/athlete-account-BIrh_MlI.mjs                                 46.13 kB │ gzip:     9.53 kB
-.vercel/output/functions/__server.func/_slug-CNqPVbZT.mjs                                                46.41 kB │ gzip:     8.80 kB
+.vercel/output/functions/__server.func/_slug-DmUNaro_.mjs                                                46.40 kB │ gzip:     8.80 kB
 .vercel/output/functions/__server.func/_libs/noble__ciphers.mjs                                          46.99 kB │ gzip:    13.99 kB
 .vercel/output/functions/__server.func/_ssr/data-intelligence-V6y3g8sA.mjs                               47.18 kB │ gzip:     8.08 kB
 .vercel/output/functions/__server.func/_ssr/db-DUbKDeES.mjs                                              50.45 kB │ gzip:    11.92 kB
@@ -277,7 +224,7 @@ computing gzip size...
 .vercel/output/functions/__server.func/_ssr/scraper-workbook-snapshot.server.generated-B03qXuXO.mjs   1,635.01 kB │ gzip: 1,229.80 kB
 .vercel/output/functions/__server.func/_ssr/seed.server-CL0Ip_bc.mjs                                 13,011.45 kB │ gzip: 1,272.51 kB
 
-[32m✓ built in 1.57s[39m
+[32m✓ built in 1.47s[39m
 [info] Generated [36m.vercel/output/nitro.json[39m
 [success] [nitro] You can preview this build using `npx vite preview`
 [success] [nitro] You can deploy this build using `npx nitro deploy --prebuilt`
@@ -305,12 +252,79 @@ computing gzip size...
 /home/runner/work/athrecs.comsite/athrecs.comsite/src/lib/auth/use-current-user.ts
   59:3  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/rules-of-hooks')
 
-/home/runner/work/athrecs.comsite/athrecs.comsite/src/routes/$language/$country/races/$slug.tsx
-  14:9  error  'data' is never reassigned. Use 'const' instead  prefer-const
+✖ 6 problems (0 errors, 6 warnings)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
 
-/home/runner/work/athrecs.comsite/athrecs.comsite/src/routes/races/$slug.tsx
-  94:30  warning  'distances' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
 
-✖ 8 problems (1 error, 7 warnings)
-  1 error and 1 warning potentially fixable with the `--fix` option.
+> verify:catalogue
+> node --experimental-strip-types scripts/verify-catalogue.mjs
 
+Fuller-site backup archive is not committed; checksum verification skipped.
+{
+  "source_counts": {
+    "athletes": 254,
+    "race_series": 129,
+    "editions": 531,
+    "results": 1469,
+    "raw_club_names": 42
+  },
+  "merged_counts": {
+    "clubs": 1737,
+    "athletes": 1255,
+    "race_series": 7258,
+    "editions": 218969,
+    "results": 2506
+  },
+  "run_norwich_2025_batch_2": {
+    "athletes": 90,
+    "results": 93,
+    "places": "101-200 complete"
+  },
+  "run_norwich_2025_batch_3": {
+    "athletes": 93,
+    "results": 94,
+    "places": "201-300 complete"
+  },
+  "paul_browne": {
+    "club": "Unattached",
+    "date_of_birth": "1978-05-20",
+    "ostersund_marathon": "3:29:49"
+  }
+}
+
+> verify:fixture-duplicates
+> node --experimental-strip-types scripts/verify-fixture-duplicates.mjs
+
+{
+  "checked_at": "2026-08-20",
+  "sports_checked": [
+    "Aquabike",
+    "Aquathlon",
+    "Athletics",
+    "Cycling",
+    "Duathlon",
+    "OCR",
+    "Parkrun",
+    "Rowing",
+    "Running",
+    "Swimming",
+    "Triathlon"
+  ],
+  "merged_series_checked": 7033,
+  "static_editions_checked": 6110,
+  "same_date_near_name_candidates_reviewed": 108,
+  "duplicate_series_retired": 34,
+  "incorrect_second_day_dates_corrected": 13,
+  "high_confidence_duplicates_remaining": 0,
+  "nearby_mrd_duplicates_remaining": 0
+}
+
+> verify:slug-stability
+> node --experimental-strip-types scripts/verify-slug-stability.mjs
+
+Slug stability verification passed.
+
+> verify:catalogue-publishing
+> node --experimental-strip-types scripts/verify-catalogue-publishing.mjs
+
+Catalogue publishing verification passed.
