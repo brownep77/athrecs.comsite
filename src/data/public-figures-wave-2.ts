@@ -884,7 +884,7 @@ export const publicFigureWave2Editions: Edition[] = [
     resultsAccess: "public",
   },
   {
-    seriesSlug: "marine-corps-marathon",
+    seriesSlug: "marine-corps-marathon-10k",
     date: "1994-10-23",
     distance: "Marathon",
     distanceKm: 42.195,
@@ -940,7 +940,7 @@ export const publicFigureWave2Editions: Edition[] = [
     resultsAccess: "public",
   },
   {
-    seriesSlug: "great-wall-marathon-china",
+    seriesSlug: "great-wall-marathon",
     date: "2016-05-21",
     distance: "Marathon",
     distanceKm: 42.195,
@@ -1199,7 +1199,7 @@ export const publicFigureWave2Results: ResultSeed[] = [
     source: SOURCES.dannyMills,
   },
   {
-    eventSlug: "marine-corps-marathon",
+    eventSlug: "marine-corps-marathon-10k",
     date: "1994-10-23",
     distance: "Marathon",
     athleteSlug: "oprah-winfrey",
@@ -1277,7 +1277,7 @@ export const publicFigureWave2Results: ResultSeed[] = [
     source: SOURCES.adeleRoberts,
   },
   {
-    eventSlug: "great-wall-marathon-china",
+    eventSlug: "great-wall-marathon",
     date: "2016-05-21",
     distance: "Marathon",
     athleteSlug: "pippa-middleton",

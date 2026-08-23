@@ -108,11 +108,30 @@ function isJuniorParkrun(series: Series): boolean {
 }
 
 const parkrunSeries = seriesList.filter((series) => series.sport === "Parkrun");
+const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
 const adultParkrunCount = parkrunSeries.filter((series) => !isJuniorParkrun(series)).length;
 const juniorParkrunCount = parkrunSeries.length - adultParkrunCount;
 const targetParkrunEditions =
   adultParkrunCount * weeklyOccurrences(PARKRUN_5K_START, PARKRUN_5K_END) +
   juniorParkrunCount * weeklyOccurrences(PARKRUN_2K_START, PARKRUN_2K_END);
+
+function isGeneratedParkrunEdition(edition: Edition): boolean {
+  const series = seriesBySlug.get(edition.seriesSlug);
+  if (!series || series.sport !== "Parkrun") return false;
+  const junior = isJuniorParkrun(series);
+  const start = junior ? PARKRUN_2K_START : PARKRUN_5K_START;
+  const end = junior ? PARKRUN_2K_END : PARKRUN_5K_END;
+  const expectedDay = junior ? 0 : 6;
+  const expectedDistance = junior ? "2K" : "5K";
+  return (
+    edition.distance === expectedDistance &&
+    edition.date >= start &&
+    edition.date <= end &&
+    new Date(`${edition.date}T00:00:00Z`).getUTCDay() === expectedDay
+  );
+}
+
+const explicitParkrunOverlapCount = editionSeeds.filter(isGeneratedParkrunEdition).length;
 
 function optionsForEdition(edition: EditionWithEntryOptions): CatalogueEntryOption[] {
   if (edition.entryOptions?.length) return edition.entryOptions;
@@ -162,7 +181,7 @@ const TARGET = {
   events: seriesList.length,
   explicitEditions: editionSeeds.length,
   parkrunEditions: targetParkrunEditions,
-  editions: editionSeeds.length + targetParkrunEditions,
+  editions: editionSeeds.length + targetParkrunEditions - explicitParkrunOverlapCount,
   entryOptions: targetEntryOptionKeys.length,
   groups: raceGroupMemberships.length,
 };
