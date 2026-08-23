@@ -26,6 +26,11 @@ replaceOnce(
   "function jsonValue<T>(value: T | string | null): T | null {",
   "function jsonValue<T>(value: unknown): T | null {",
 );
+replaceOnce(
+  "src/lib/athrecs/catalogue-publishing.server.ts",
+  '  return typeof value === "string" ? (JSON.parse(value) as T) : value;',
+  '  return typeof value === "string" ? (JSON.parse(value) as T) : (value as T);',
+);
 
 replaceOnce(
   "src/lib/athrecs/import.server.ts",
@@ -46,6 +51,22 @@ replaceOnce(
   "src/lib/athrecs/import.server.ts",
   "          { ...options, sqlOverride: sql },",
   "          { ...importOptions, sqlOverride: sql },",
+);
+
+replaceOnce(
+  "src/routes/admin/catalogue-publishing.tsx",
+  'import { Button } from "@/components/ui/button";\n\nexport const Route',
+  `import { Button } from "@/components/ui/button";\n\ntype CatalogueBatchRow = {\n  id: string;\n  sourceKey: string;\n  status: string;\n  error: string | null;\n  counts: { events: number; editions: number };\n  validationSummary: { errors?: unknown[] } | null;\n};\n\ntype CatalogueRevisionRow = {\n  id: number;\n  batchId: string;\n  publishedAt: string;\n  status: string;\n};\n\nexport const Route`,
+);
+replaceOnce(
+  "src/routes/admin/catalogue-publishing.tsx",
+  "  const batches = dashboard.data?.batches ?? [];",
+  "  const batches = (dashboard.data?.batches ?? []) as CatalogueBatchRow[];",
+);
+replaceOnce(
+  "src/routes/admin/catalogue-publishing.tsx",
+  "  const revisions = dashboard.data?.revisions ?? [];",
+  "  const revisions = (dashboard.data?.revisions ?? []) as CatalogueRevisionRow[];",
 );
 
 console.log("Applied generated-output TypeScript repairs.");
