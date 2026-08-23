@@ -109,6 +109,12 @@ assert.match(catalogueSource, /\.\.\.\(publicFigureSeries as Series\[\]\)/);
 assert.match(catalogueSource, /\.\.\.\(publicFigureEditions as Edition\[\]\)/);
 assert.match(seedSource, /const PUBLIC_FIGURE_SEED_VERSION =/);
 assert.match(seedSource, /public_figures_catalogue_version/);
+assert.match(seedSource, /async function publicFigureRowsComplete/);
+assert.match(
+  seedSource,
+  /meta\[0\]\?\.value === PUBLIC_FIGURE_SEED_VERSION[\s\S]*await publicFigureRowsComplete\(sql\)/,
+  "The public-figure seed marker must be backed by exact athlete and result checks",
+);
 assert.match(seedSource, /publicFigureSeries\.map/);
 assert.match(seedSource, /publicFigureEditions\.map/);
 
