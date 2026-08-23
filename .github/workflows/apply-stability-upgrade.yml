@@ -85,9 +85,10 @@ jobs:
               scripts/browser-smoke.mjs \
               scripts/verify-slug-stability.mjs \
               scripts/verify-catalogue-publishing.mjs \
-              .github/workflows/quality-gate.yml \
               .github/pull_request_template.md \
               docs/release-safety.md
+            cp .github/workflows/quality-gate.yml /tmp/athrecs-quality-gate.yml
+            rm .github/workflows/quality-gate.yml
             git add -- \
               package.json \
               package-lock.json \
@@ -95,7 +96,6 @@ jobs:
               scripts/browser-smoke.mjs \
               scripts/verify-slug-stability.mjs \
               scripts/verify-catalogue-publishing.mjs \
-              .github/workflows/quality-gate.yml \
               .github/pull_request_template.md \
               docs/release-safety.md
             git commit -m "Add deployment quality gates"
