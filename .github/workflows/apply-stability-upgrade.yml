@@ -26,16 +26,21 @@ jobs:
 
       - name: Prepare a clean target branch
         run: |
-          cp scripts/apply-stability-upgrade.mjs /tmp/apply-stability-upgrade.mjs
-          cp -R scripts/.stability-payload /tmp/stability-payload
-          git fetch origin main
-          git checkout -B codex/athrecs-stability-and-slugs origin/main
-          mkdir -p scripts/.stability-payload
-          cp /tmp/apply-stability-upgrade.mjs scripts/apply-stability-upgrade.mjs
-          cp -R /tmp/stability-payload/. scripts/.stability-payload/
+          set -o pipefail
+          {
+            cp scripts/apply-stability-upgrade.mjs /tmp/apply-stability-upgrade.mjs
+            cp -R scripts/.stability-payload /tmp/stability-payload
+            git fetch origin main
+            git checkout -B codex/athrecs-stability-and-slugs origin/main
+            mkdir -p scripts/.stability-payload
+            cp /tmp/apply-stability-upgrade.mjs scripts/apply-stability-upgrade.mjs
+            cp -R /tmp/stability-payload/. scripts/.stability-payload/
+          } 2>&1 | tee /tmp/stability-prepare.log
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          set -o pipefail
+          npm ci 2>&1 | tee /tmp/stability-install.log
 
       - name: Configure commit identity
         run: |
@@ -44,85 +49,138 @@ jobs:
 
       - name: Stage 1 — durable URLs and slugs
         run: |
-          node scripts/apply-stability-upgrade.mjs stage1
-          npx prettier --write \
-            src/routes/races/index.tsx \
-            src/routes/index.tsx \
-            'src/routes/races/$slug.tsx' \
-            'src/routes/athletes/$slug.tsx' \
-            'src/routes/clubs/$slug.tsx' \
-            'src/routes/$language/$country/races/$slug.tsx' \
-            src/lib/athrecs/slug-redirects.ts
-          git add -- \
-            src/routes/races/index.tsx \
-            src/routes/index.tsx \
-            'src/routes/races/$slug.tsx' \
-            'src/routes/athletes/$slug.tsx' \
-            'src/routes/clubs/$slug.tsx' \
-            'src/routes/$language/$country/races/$slug.tsx' \
-            src/lib/athrecs/slug-redirects.ts \
-            migrations/0015_slug_redirects.sql
-          git commit -m "Make page URLs durable and shareable"
+          set -o pipefail
+          {
+            node scripts/apply-stability-upgrade.mjs stage1
+            npx prettier --write \
+              src/routes/races/index.tsx \
+              src/routes/index.tsx \
+              'src/routes/races/$slug.tsx' \
+              'src/routes/athletes/$slug.tsx' \
+              'src/routes/clubs/$slug.tsx' \
+              'src/routes/$language/$country/races/$slug.tsx' \
+              src/lib/athrecs/slug-redirects.ts
+            git add -- \
+              src/routes/races/index.tsx \
+              src/routes/index.tsx \
+              'src/routes/races/$slug.tsx' \
+              'src/routes/athletes/$slug.tsx' \
+              'src/routes/clubs/$slug.tsx' \
+              'src/routes/$language/$country/races/$slug.tsx' \
+              src/lib/athrecs/slug-redirects.ts \
+              migrations/0015_slug_redirects.sql
+            git commit -m "Make page URLs durable and shareable"
+          } 2>&1 | tee /tmp/stability-stage1.log
 
       - name: Stage 2 — deployment safeguards
         run: |
-          node scripts/apply-stability-upgrade.mjs stage2
-          npm install --package-lock-only --ignore-scripts
-          npx prettier --write \
-            package.json \
-            scripts/browser-smoke.mjs \
-            scripts/verify-slug-stability.mjs \
-            scripts/verify-catalogue-publishing.mjs \
-            .github/workflows/quality-gate.yml \
-            .github/pull_request_template.md \
-            docs/release-safety.md
-          git add -- \
-            package.json \
-            package-lock.json \
-            .nvmrc \
-            scripts/browser-smoke.mjs \
-            scripts/verify-slug-stability.mjs \
-            scripts/verify-catalogue-publishing.mjs \
-            .github/workflows/quality-gate.yml \
-            .github/pull_request_template.md \
-            docs/release-safety.md
-          git commit -m "Add deployment quality gates"
+          set -o pipefail
+          {
+            node scripts/apply-stability-upgrade.mjs stage2
+            npm install --package-lock-only --ignore-scripts
+            npx prettier --write \
+              package.json \
+              scripts/browser-smoke.mjs \
+              scripts/verify-slug-stability.mjs \
+              scripts/verify-catalogue-publishing.mjs \
+              .github/workflows/quality-gate.yml \
+              .github/pull_request_template.md \
+              docs/release-safety.md
+            git add -- \
+              package.json \
+              package-lock.json \
+              .nvmrc \
+              scripts/browser-smoke.mjs \
+              scripts/verify-slug-stability.mjs \
+              scripts/verify-catalogue-publishing.mjs \
+              .github/workflows/quality-gate.yml \
+              .github/pull_request_template.md \
+              docs/release-safety.md
+            git commit -m "Add deployment quality gates"
+          } 2>&1 | tee /tmp/stability-stage2.log
 
       - name: Stage 3 — transactional catalogue publishing
         run: |
-          node scripts/apply-stability-upgrade.mjs stage3
-          npx prettier --write \
-            src/lib/athrecs/import.server.ts \
-            src/lib/athrecs/catalogue-publishing.server.ts \
-            src/lib/athrecs/catalogue-publishing-api.ts \
-            src/routes/admin/catalogue-publishing.tsx \
-            src/routes/admin/index.tsx \
-            docs/catalogue-publishing/README.md
+          set -o pipefail
+          {
+            node scripts/apply-stability-upgrade.mjs stage3
+            npx prettier --write \
+              src/lib/athrecs/import.server.ts \
+              src/lib/athrecs/catalogue-publishing.server.ts \
+              src/lib/athrecs/catalogue-publishing-api.ts \
+              src/routes/admin/catalogue-publishing.tsx \
+              src/routes/admin/index.tsx \
+              docs/catalogue-publishing/README.md
+          } 2>&1 | tee /tmp/stability-stage3.log
 
       - name: Verify the completed upgrade
         run: |
-          npm run build
-          npm run typecheck
-          npm run lint
-          npm run verify:catalogue
-          npm run verify:fixture-duplicates
-          npm run verify:slug-stability
-          npm run verify:catalogue-publishing
+          set -o pipefail
+          {
+            npm run build
+            npm run typecheck
+            npm run lint
+            npm run verify:catalogue
+            npm run verify:fixture-duplicates
+            npm run verify:slug-stability
+            npm run verify:catalogue-publishing
+          } 2>&1 | tee /tmp/stability-verify.log
 
       - name: Commit the publishing system
         run: |
-          rm -rf scripts/.stability-payload
-          rm scripts/apply-stability-upgrade.mjs
-          git add -- \
-            migrations/0016_catalogue_publishing.sql \
-            src/lib/athrecs/import.server.ts \
-            src/lib/athrecs/catalogue-publishing.server.ts \
-            src/lib/athrecs/catalogue-publishing-api.ts \
-            src/routes/admin/catalogue-publishing.tsx \
-            src/routes/admin/index.tsx \
-            src/routeTree.gen.ts \
-            docs/catalogue-publishing/README.md
-          git commit -m "Add staged catalogue publishing"
+          set -o pipefail
+          {
+            rm -rf scripts/.stability-payload
+            rm scripts/apply-stability-upgrade.mjs
+            git add -- \
+              migrations/0016_catalogue_publishing.sql \
+              src/lib/athrecs/import.server.ts \
+              src/lib/athrecs/catalogue-publishing.server.ts \
+              src/lib/athrecs/catalogue-publishing-api.ts \
+              src/routes/admin/catalogue-publishing.tsx \
+              src/routes/admin/index.tsx \
+              src/routeTree.gen.ts \
+              docs/catalogue-publishing/README.md
+            git commit -m "Add staged catalogue publishing"
+          } 2>&1 | tee /tmp/stability-commit.log
 
       - name: Push the clean ordered branch
-        run: git push --force-with-lease origin HEAD:codex/athrecs-stability-and-slugs
+        run: |
+          set -o pipefail
+          git push --force-with-lease origin HEAD:codex/athrecs-stability-and-slugs \
+            2>&1 | tee /tmp/stability-push.log
+
+      - name: Record automation outcome
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          set +e
+          {
+            echo "status=${JOB_STATUS}"
+            echo "run_id=${RUN_ID}"
+            echo "attempt=${RUN_ATTEMPT}"
+            echo "trigger_sha=${HEAD_SHA}"
+            echo "recorded_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            for file in /tmp/stability-*.log; do
+              [ -f "$file" ] || continue
+              echo
+              echo "===== ${file} ====="
+              tail -n 250 "$file"
+            done
+          } > /tmp/athrecs-stability-status.txt
+
+          git config user.name "Athrecs Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          git fetch origin codex/athrecs-stability-bootstrap
+          git reset --hard
+          git clean -fd
+          git checkout -B codex/athrecs-stability-bootstrap origin/codex/athrecs-stability-bootstrap
+          mkdir -p .github/automation-status
+          cp /tmp/athrecs-stability-status.txt .github/automation-status/athrecs-stability.txt
+          git add -- .github/automation-status/athrecs-stability.txt
+          git commit -m "Record stability upgrade status: ${JOB_STATUS}" || exit 0
+          git push origin HEAD:codex/athrecs-stability-bootstrap
