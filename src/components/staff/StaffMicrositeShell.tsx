@@ -13,6 +13,7 @@ import {
   LockKeyhole,
   LogOut,
   ShieldCheck,
+  UserRoundCog,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getStaffAccess } from "@/lib/auth/staff-access";
@@ -58,6 +59,12 @@ const staffNav = [
     label: "Claims",
     icon: BadgeCheck,
     match: (path: string) => path.startsWith("/admin/result-claims"),
+  },
+  {
+    to: "/admin/athlete-accounts",
+    label: "Athlete accounts",
+    icon: UserRoundCog,
+    match: (path: string) => path.startsWith("/admin/athlete-accounts"),
   },
   {
     to: "/admin/sources",
