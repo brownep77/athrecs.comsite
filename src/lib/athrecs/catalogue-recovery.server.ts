@@ -344,6 +344,27 @@ async function recoverEntryOptions(
       option.notes ?? null,
     ]);
   });
+
+  const proposedPrimaryEditionIds = [
+    ...new Set(rows.filter((row) => row[13] === true).map((row) => Number(row[0]))),
+  ];
+  if (proposedPrimaryEditionIds.length) {
+    const placeholders = proposedPrimaryEditionIds.map((_, index) => `$${index + 1}`).join(", ");
+    const existingPrimaryRows = await sql.query<{ edition_id: number }>(
+      `select edition_id
+       from edition_entry_options
+       where is_primary
+         and edition_id in (${placeholders})`,
+      proposedPrimaryEditionIds,
+    );
+    const editionsWithPrimary = new Set(existingPrimaryRows.map((row) => Number(row.edition_id)));
+    for (const row of rows) {
+      if (row[13] === true && editionsWithPrimary.has(Number(row[0]))) {
+        row[13] = false;
+      }
+    }
+  }
+
   await insertRows(
     sql,
     "edition_entry_options",
