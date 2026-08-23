@@ -1,0 +1,43 @@
+status=failure
+run_id=32634593828
+attempt=1
+trigger_sha=532939b089ec1dc92f50c3ddf969ada6c71e3d06
+recorded_at=2026-08-23T10:45:10Z
+
+===== /tmp/stability-install.log =====
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: undefined,
+npm warn EBADENGINE   required: { node: '22.x' },
+npm warn EBADENGINE   current: { node: 'v24.19.0', npm: '11.17.0' }
+npm warn EBADENGINE }
+npm warn deprecated recharts@2.15.4: 1.x and 2.x branches are no longer active. Bump to Recharts v3 to receive latest features and bugfixes. See https://github.com/recharts/recharts/wiki/3.0-migration-guide
+
+added 430 packages in 9s
+
+===== /tmp/stability-prepare.log =====
+From https://github.com/brownep77/athrecs.comsite
+ * branch            main       -> FETCH_HEAD
+Switched to a new branch 'codex/athrecs-stability-and-slugs'
+branch 'codex/athrecs-stability-and-slugs' set up to track 'origin/main'.
+
+===== /tmp/stability-stage1.log =====
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+Error: unexpected end of file
+    at genericNodeError (node:internal/errors:985:15)
+    at wrappedFn (node:internal/errors:539:14)
+    at Zlib.zlibOnError [as onerror] (node:zlib:191:17)
+    at processChunkSync (node:zlib:436:12)
+    at zlibBufferSync (node:zlib:180:12)
+    at syncBufferWrapper (node:zlib:809:14)
+    at file:///home/runner/work/athrecs.comsite/athrecs.comsite/scripts/apply-stability-upgrade.mjs:12:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -5,
+  code: 'Z_BUF_ERROR'
+}
+
+Node.js v24.19.0
