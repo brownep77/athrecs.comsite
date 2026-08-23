@@ -30,6 +30,7 @@ import { Route as RacesIndexRouteImport } from './routes/races/index'
 import { Route as RacesSlugRouteImport } from './routes/races/$slug'
 import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$country/index'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiMaintenanceCatalogueRecoveryRouteImport } from './routes/api/maintenance/catalogue-recovery'
 import { Route as LanguageCountryRacesIndexRouteImport } from './routes/$language/$country/races/index'
 import { Route as LanguageCountryRacesSlugRouteImport } from './routes/$language/$country/races/$slug'
 
@@ -138,6 +139,12 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiMaintenanceCatalogueRecoveryRoute =
+  ApiMaintenanceCatalogueRecoveryRouteImport.update({
+    id: '/api/maintenance/catalogue-recovery',
+    path: '/api/maintenance/catalogue-recovery',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LanguageCountryRacesIndexRoute =
   LanguageCountryRacesIndexRouteImport.update({
     id: '/$language/$country/races/',
@@ -172,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/clubs/': typeof ClubsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/maintenance/catalogue-recovery': typeof ApiMaintenanceCatalogueRecoveryRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
   '/$language/$country/races/': typeof LanguageCountryRacesIndexRoute
@@ -197,6 +205,7 @@ export interface FileRoutesByTo {
   '/clubs': typeof ClubsIndexRoute
   '/races': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/maintenance/catalogue-recovery': typeof ApiMaintenanceCatalogueRecoveryRoute
   '/$language/$country': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
   '/$language/$country/races': typeof LanguageCountryRacesIndexRoute
@@ -223,6 +232,7 @@ export interface FileRoutesById {
   '/clubs/': typeof ClubsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/maintenance/catalogue-recovery': typeof ApiMaintenanceCatalogueRecoveryRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
   '/$language/$country/races/': typeof LanguageCountryRacesIndexRoute
@@ -250,6 +260,7 @@ export interface FileRouteTypes {
     | '/clubs/'
     | '/races/'
     | '/api/auth/$'
+    | '/api/maintenance/catalogue-recovery'
     | '/$language/$country/'
     | '/$language/$country/races/$slug'
     | '/$language/$country/races/'
@@ -275,6 +286,7 @@ export interface FileRouteTypes {
     | '/clubs'
     | '/races'
     | '/api/auth/$'
+    | '/api/maintenance/catalogue-recovery'
     | '/$language/$country'
     | '/$language/$country/races/$slug'
     | '/$language/$country/races'
@@ -300,6 +312,7 @@ export interface FileRouteTypes {
     | '/clubs/'
     | '/races/'
     | '/api/auth/$'
+    | '/api/maintenance/catalogue-recovery'
     | '/$language/$country/'
     | '/$language/$country/races/$slug'
     | '/$language/$country/races/'
@@ -326,6 +339,7 @@ export interface RootRouteChildren {
   ClubsIndexRoute: typeof ClubsIndexRoute
   RacesIndexRoute: typeof RacesIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiMaintenanceCatalogueRecoveryRoute: typeof ApiMaintenanceCatalogueRecoveryRoute
   LanguageCountryIndexRoute: typeof LanguageCountryIndexRoute
   LanguageCountryRacesSlugRoute: typeof LanguageCountryRacesSlugRoute
   LanguageCountryRacesIndexRoute: typeof LanguageCountryRacesIndexRoute
@@ -480,6 +494,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/maintenance/catalogue-recovery': {
+      id: '/api/maintenance/catalogue-recovery'
+      path: '/api/maintenance/catalogue-recovery'
+      fullPath: '/api/maintenance/catalogue-recovery'
+      preLoaderRoute: typeof ApiMaintenanceCatalogueRecoveryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$language/$country/races/': {
       id: '/$language/$country/races/'
       path: '/$language/$country/races'
@@ -518,6 +539,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClubsIndexRoute: ClubsIndexRoute,
   RacesIndexRoute: RacesIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiMaintenanceCatalogueRecoveryRoute: ApiMaintenanceCatalogueRecoveryRoute,
   LanguageCountryIndexRoute: LanguageCountryIndexRoute,
   LanguageCountryRacesSlugRoute: LanguageCountryRacesSlugRoute,
   LanguageCountryRacesIndexRoute: LanguageCountryRacesIndexRoute,
