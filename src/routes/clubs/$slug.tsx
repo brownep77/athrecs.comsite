@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import {
   ArrowLeft,
   CalendarDays,
@@ -16,12 +16,65 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NationFlag } from "@/components/flags/NationFlag";
 import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge";
+import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
+import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 
 export const Route = createFileRoute("/clubs/$slug")({
   loader: async ({ params }) => {
     const data = await getClubBySlug({ data: params.slug });
-    if (!data) throw notFound();
+    if (!data) {
+      const currentSlug = await resolveSlugRedirect({
+        data: { entityType: "club", slug: params.slug },
+      });
+      if (currentSlug && currentSlug !== params.slug) {
+        throw redirect({
+          to: "/clubs/$slug",
+          params: { slug: currentSlug },
+          statusCode: 301,
+        });
+      }
+      throw notFound();
+    }
+    if (data.club.slug !== params.slug) {
+      throw redirect({
+        to: "/clubs/$slug",
+        params: { slug: data.club.slug },
+        statusCode: 301,
+      });
+    }
     return data;
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const { club } = loaderData;
+    const canonical = `${SITE_URL}/clubs/${club.slug}`;
+    const title = `${club.name} club profile | ${SITE_NAME}`;
+    const description =
+      club.summary || `${club.name} club profile, location, official links and ATHRECS athletes.`;
+    return {
+      meta: siteGraphMeta({ title, description, url: canonical }),
+      links: [{ rel: "canonical", href: canonical }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SportsOrganization",
+            name: club.name,
+            url: canonical,
+            description,
+            sport: club.sports,
+            sameAs: club.website ? [club.website] : undefined,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: club.city || undefined,
+              addressRegion: club.county || undefined,
+              addressCountry: club.country || undefined,
+            },
+          }),
+        },
+      ],
+    };
   },
   component: ClubPage,
   notFoundComponent: () => (
