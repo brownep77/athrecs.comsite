@@ -1,8 +1,8 @@
 status=failure
-run_id=32635151179
+run_id=32635312903
 attempt=1
-trigger_sha=94d4310a71998b2648d8ada4bcc09e29ed432f8d
-recorded_at=2026-08-23T10:57:31Z
+trigger_sha=a384ecc38ab486d645be3b134bc55766b5a3538d
+recorded_at=2026-08-23T11:01:21Z
 
 ===== /tmp/stability-install.log =====
 npm warn EBADENGINE Unsupported engine {
@@ -12,7 +12,7 @@ npm warn EBADENGINE   current: { node: 'v24.19.0', npm: '11.17.0' }
 npm warn EBADENGINE }
 npm warn deprecated recharts@2.15.4: 1.x and 2.x branches are no longer active. Bump to Recharts v3 to receive latest features and bugfixes. See https://github.com/recharts/recharts/wiki/3.0-migration-guide
 
-added 430 packages in 9s
+added 430 packages in 12s
 
 ===== /tmp/stability-prepare.log =====
 From https://github.com/brownep77/athrecs.comsite
@@ -22,14 +22,14 @@ branch 'codex/athrecs-stability-and-slugs' set up to track 'origin/main'.
 
 ===== /tmp/stability-stage1.log =====
 Applied stage1 of the ordered Athrecs stability upgrade.
-[90msrc/routes/races/index.tsx[39m 94ms (unchanged)
-[90msrc/routes/index.tsx[39m 43ms (unchanged)
-src/routes/races/$slug.tsx 74ms
-[90msrc/routes/athletes/$slug.tsx[39m 28ms (unchanged)
-src/routes/clubs/$slug.tsx 17ms
-[90msrc/routes/$language/$country/races/$slug.tsx[39m 7ms (unchanged)
-[90msrc/lib/athrecs/slug-redirects.ts[39m 5ms (unchanged)
-[codex/athrecs-stability-and-slugs f3ebdbf] Make page URLs durable and shareable
+[90msrc/routes/races/index.tsx[39m 175ms (unchanged)
+[90msrc/routes/index.tsx[39m 93ms (unchanged)
+src/routes/races/$slug.tsx 160ms
+[90msrc/routes/athletes/$slug.tsx[39m 59ms (unchanged)
+src/routes/clubs/$slug.tsx 35ms
+[90msrc/routes/$language/$country/races/$slug.tsx[39m 11ms (unchanged)
+[90msrc/lib/athrecs/slug-redirects.ts[39m 7ms (unchanged)
+[codex/athrecs-stability-and-slugs fa944bd] Make page URLs durable and shareable
  8 files changed, 423 insertions(+), 85 deletions(-)
  create mode 100644 migrations/0015_slug_redirects.sql
  create mode 100644 src/lib/athrecs/slug-redirects.ts
@@ -37,15 +37,15 @@ src/routes/clubs/$slug.tsx 17ms
 ===== /tmp/stability-stage2.log =====
 Applied stage2 of the ordered Athrecs stability upgrade.
 
-up to date in 314ms
-[90mpackage.json[39m 18ms (unchanged)
-scripts/browser-smoke.mjs 25ms
-[90mscripts/verify-slug-stability.mjs[39m 7ms (unchanged)
-[90mscripts/verify-catalogue-publishing.mjs[39m 4ms (unchanged)
-[90m.github/workflows/quality-gate.yml[39m 10ms (unchanged)
-[90m.github/pull_request_template.md[39m 25ms (unchanged)
-[90mdocs/release-safety.md[39m 7ms (unchanged)
-[codex/athrecs-stability-and-slugs 66d2791] Add deployment quality gates
+up to date in 625ms
+[90mpackage.json[39m 30ms (unchanged)
+scripts/browser-smoke.mjs 46ms
+[90mscripts/verify-slug-stability.mjs[39m 13ms (unchanged)
+[90mscripts/verify-catalogue-publishing.mjs[39m 7ms (unchanged)
+[90m.github/workflows/quality-gate.yml[39m 20ms (unchanged)
+[90m.github/pull_request_template.md[39m 44ms (unchanged)
+[90mdocs/release-safety.md[39m 12ms (unchanged)
+[codex/athrecs-stability-and-slugs 03bfffd] Add deployment quality gates
  9 files changed, 254 insertions(+), 90 deletions(-)
  create mode 100644 .github/pull_request_template.md
  create mode 100644 .github/workflows/quality-gate.yml
@@ -56,37 +56,14 @@ scripts/browser-smoke.mjs 25ms
 ===== /tmp/stability-stage3.log =====
 Applied stage3 of the ordered Athrecs stability upgrade.
 Applied generated-output TypeScript repairs.
-[90msrc/lib/athrecs/import.server.ts[39m 106ms (unchanged)
-src/lib/athrecs/catalogue-publishing.server.ts 58ms
-src/lib/athrecs/catalogue-publishing-api.ts 8ms
-src/routes/admin/catalogue-publishing.tsx 32ms
-[90msrc/routes/admin/index.tsx[39m 52ms (unchanged)
-[90mdocs/catalogue-publishing/README.md[39m 21ms (unchanged)
+[90msrc/lib/athrecs/import.server.ts[39m 181ms (unchanged)
+src/lib/athrecs/catalogue-publishing.server.ts 89ms
+src/lib/athrecs/catalogue-publishing-api.ts 20ms
+src/routes/admin/catalogue-publishing.tsx 48ms
+[90msrc/routes/admin/index.tsx[39m 90ms (unchanged)
+[90mdocs/catalogue-publishing/README.md[39m 32ms (unchanged)
 
 ===== /tmp/stability-verify.log =====
-node_modules/.nitro/vite/services/ssr/assets/races-BcH0LsT9.js                                            2.72 kB │ gzip:     1.10 kB
-node_modules/.nitro/vite/services/ssr/assets/server-CjldIDVK.js                                           2.98 kB │ gzip:     1.13 kB
-node_modules/.nitro/vite/services/ssr/assets/RaceGroupBadges-DWRy-J_Q.js                                  3.09 kB │ gzip:     1.09 kB
-node_modules/.nitro/vite/services/ssr/assets/staff.server-Df-QXzqI.js                                     3.19 kB │ gzip:     1.14 kB
-node_modules/.nitro/vite/services/ssr/assets/seo-snJkQcNa.js                                              3.48 kB │ gzip:     1.29 kB
-node_modules/.nitro/vite/services/ssr/assets/verify.server-Ckep-ILe.js                                    3.48 kB │ gzip:     1.54 kB
-node_modules/.nitro/vite/services/ssr/assets/_slug-9bfvQvUt.js                                            3.70 kB │ gzip:     1.37 kB
-node_modules/.nitro/vite/services/ssr/assets/result-claims-api-DbhYDVYx.js                                4.01 kB │ gzip:     1.48 kB
-node_modules/.nitro/vite/services/ssr/assets/catalogue-publishing-api-B-mgp8Vh.js                         4.14 kB │ gzip:     1.04 kB
-node_modules/.nitro/vite/services/ssr/assets/NationFlag-BG0m9g7H.js                                       4.33 kB │ gzip:     1.16 kB
-node_modules/.nitro/vite/services/ssr/assets/clubs-BlIVDkpN.js                                            4.36 kB │ gzip:     1.60 kB
-node_modules/.nitro/vite/services/ssr/assets/api-TTsOossh.js                                              5.02 kB │ gzip:     1.79 kB
-node_modules/.nitro/vite/services/ssr/assets/filters-BbZzIkkF.js                                          5.44 kB │ gzip:     1.77 kB
-node_modules/.nitro/vite/services/ssr/assets/athletes-BE4DU5EN.js                                         5.54 kB │ gzip:     1.67 kB
-node_modules/.nitro/vite/services/ssr/assets/race-series-BXZ1kEKX.js                                      5.61 kB │ gzip:     1.75 kB
-node_modules/.nitro/vite/services/ssr/assets/races-BPEjnQ0D.js                                            5.87 kB │ gzip:     1.89 kB
-node_modules/.nitro/vite/services/ssr/assets/privacy-D-anpWy2.js                                          6.45 kB │ gzip:     2.14 kB
-node_modules/.nitro/vite/services/ssr/assets/races-C79Zy20h.js                                            6.46 kB │ gzip:     1.77 kB
-node_modules/.nitro/vite/services/ssr/assets/RaceCard-CJFQp-tP.js                                         6.52 kB │ gzip:     1.94 kB
-node_modules/.nitro/vite/services/ssr/assets/_tanstack-start-manifest_v-iWOGMimu.js                       7.13 kB │ gzip:     1.45 kB
-node_modules/.nitro/vite/services/ssr/assets/EventSearch-CXddbnlQ.js                                      8.93 kB │ gzip:     2.44 kB
-node_modules/.nitro/vite/services/ssr/assets/calendar-CHkvvRm5.js                                         9.78 kB │ gzip:     3.07 kB
-node_modules/.nitro/vite/services/ssr/assets/format-CfnS1p0-.js                                          10.76 kB │ gzip:     3.56 kB
 node_modules/.nitro/vite/services/ssr/assets/_country-Da5UMBC5.js                                        10.94 kB │ gzip:     2.77 kB
 node_modules/.nitro/vite/services/ssr/assets/ClubVerificationBadge-DW3xbT9j.js                           11.01 kB │ gzip:     3.13 kB
 node_modules/.nitro/vite/services/ssr/assets/_slug-CXxeRoPj.js                                           11.13 kB │ gzip:     2.68 kB
@@ -131,14 +108,14 @@ node_modules/.nitro/vite/services/ssr/assets/venue-95Ok1ZDs.js                  
 node_modules/.nitro/vite/services/ssr/assets/scraper-workbook-snapshot.server.generated-B03qXuXO.js   1,634.98 kB │ gzip: 1,229.77 kB
 node_modules/.nitro/vite/services/ssr/assets/seed.server-CL0Ip_bc.js                                 13,016.60 kB │ gzip: 1,273.53 kB
 
-[32m✓ built in 2.01s[39m
+[32m✓ built in 2.91s[39m
 [start] [nitro] Building [[35mNitro[39m] [2m(preset: `vercel`, compatibility: `2026-08-23`)[22m
 [success] [nitro] Generated public [36m.vercel/output/static[39m
 [36mvite v8.2.0 [32mbuilding nitro environment for production...[36m[39m
 [2Ktransforming...✓ 3153 modules transformed.
 [info] Tracing dependencies:
 - `tslib` (2.8.1)
-[success] Traced 1 dependencies (4 files) in 30ms.
+[success] Traced 1 dependencies (4 files) in 58ms.
 [info] Ensure your production environment matches the builder OS and architecture (`linux-x64`) to avoid native module issues.
 rendering chunks...
 computing gzip size...
@@ -300,7 +277,7 @@ computing gzip size...
 .vercel/output/functions/__server.func/_ssr/scraper-workbook-snapshot.server.generated-B03qXuXO.mjs   1,635.01 kB │ gzip: 1,229.80 kB
 .vercel/output/functions/__server.func/_ssr/seed.server-CL0Ip_bc.mjs                                 13,011.45 kB │ gzip: 1,272.51 kB
 
-[32m✓ built in 1.14s[39m
+[32m✓ built in 1.57s[39m
 [info] Generated [36m.vercel/output/nitro.json[39m
 [success] [nitro] You can preview this build using `npx vite preview`
 [success] [nitro] You can deploy this build using `npx nitro deploy --prebuilt`
@@ -309,8 +286,31 @@ computing gzip size...
 > typecheck
 > tsc --noEmit
 
-src/lib/athrecs/catalogue-publishing.server.ts(81,65): error TS2322: Type '{}' is not assignable to type 'T'.
-  'T' could be instantiated with an arbitrary type which could be unrelated to '{}'.
-src/routes/admin/catalogue-publishing.tsx(243,25): error TS7006: Parameter 'batch' implicitly has an 'any' type.
-src/routes/admin/catalogue-publishing.tsx(264,72): error TS7006: Parameter 'error' implicitly has an 'any' type.
-src/routes/admin/catalogue-publishing.tsx(326,31): error TS7006: Parameter 'revision' implicitly has an 'any' type.
+
+> lint
+> eslint .
+
+
+/home/runner/work/athrecs.comsite/athrecs.comsite/src/components/flags/NationFlag.tsx
+  11:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/home/runner/work/athrecs.comsite/athrecs.comsite/src/components/races/EventSearch.tsx
+   29:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  255:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  273:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+/home/runner/work/athrecs.comsite/athrecs.comsite/src/lib/athrecs/venue.ts
+  61:9  warning  'address' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/home/runner/work/athrecs.comsite/athrecs.comsite/src/lib/auth/use-current-user.ts
+  59:3  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/rules-of-hooks')
+
+/home/runner/work/athrecs.comsite/athrecs.comsite/src/routes/$language/$country/races/$slug.tsx
+  14:9  error  'data' is never reassigned. Use 'const' instead  prefer-const
+
+/home/runner/work/athrecs.comsite/athrecs.comsite/src/routes/races/$slug.tsx
+  94:30  warning  'distances' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+✖ 8 problems (1 error, 7 warnings)
+  1 error and 1 warning potentially fixable with the `--fix` option.
+
