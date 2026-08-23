@@ -19,6 +19,7 @@ assert.match(recoverySource, /row\[13\] = false/);
 assert.match(recoverySource, /reservedSourceIds/);
 assert.match(recoverySource, /row\[0\] = null/);
 assert.match(recoverySource, /explicitParkrunOverlapCount/);
+assert.match(recoverySource, /progress\.phase === "parkrun" && progress\.cursor === 0/);
 assert.doesNotMatch(
   recoverySource,
   /delete from (?:events|editions|results|athletes|athlete_accounts)/i,
