@@ -1,0 +1,128 @@
+name: Apply ordered Athrecs stability upgrade
+
+on:
+  push:
+    branches:
+      - codex/athrecs-stability-bootstrap
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.head_commit.message == 'Bootstrap ordered stability upgrade'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: codex/athrecs-stability-bootstrap
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Prepare a clean target branch
+        run: |
+          cp scripts/apply-stability-upgrade.mjs /tmp/apply-stability-upgrade.mjs
+          cp -R scripts/.stability-payload /tmp/stability-payload
+          git fetch origin main
+          git checkout -B codex/athrecs-stability-and-slugs origin/main
+          mkdir -p scripts/.stability-payload
+          cp /tmp/apply-stability-upgrade.mjs scripts/apply-stability-upgrade.mjs
+          cp -R /tmp/stability-payload/. scripts/.stability-payload/
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure commit identity
+        run: |
+          git config user.name "Athrecs Automation"
+          git config user.email "paultwbrowne@gmail.com"
+
+      - name: Stage 1 — durable URLs and slugs
+        run: |
+          node scripts/apply-stability-upgrade.mjs stage1
+          npx prettier --write \
+            src/routes/races/index.tsx \
+            src/routes/index.tsx \
+            'src/routes/races/$slug.tsx' \
+            'src/routes/athletes/$slug.tsx' \
+            'src/routes/clubs/$slug.tsx' \
+            'src/routes/$language/$country/races/$slug.tsx' \
+            src/lib/athrecs/slug-redirects.ts
+          git add -- \
+            src/routes/races/index.tsx \
+            src/routes/index.tsx \
+            'src/routes/races/$slug.tsx' \
+            'src/routes/athletes/$slug.tsx' \
+            'src/routes/clubs/$slug.tsx' \
+            'src/routes/$language/$country/races/$slug.tsx' \
+            src/lib/athrecs/slug-redirects.ts \
+            migrations/0015_slug_redirects.sql
+          git commit -m "Make page URLs durable and shareable"
+
+      - name: Stage 2 — deployment safeguards
+        run: |
+          node scripts/apply-stability-upgrade.mjs stage2
+          npm install --package-lock-only --ignore-scripts
+          npx prettier --write \
+            package.json \
+            scripts/browser-smoke.mjs \
+            scripts/verify-slug-stability.mjs \
+            scripts/verify-catalogue-publishing.mjs \
+            .github/workflows/quality-gate.yml \
+            .github/pull_request_template.md \
+            docs/release-safety.md
+          git add -- \
+            package.json \
+            package-lock.json \
+            .nvmrc \
+            scripts/browser-smoke.mjs \
+            scripts/verify-slug-stability.mjs \
+            scripts/verify-catalogue-publishing.mjs \
+            .github/workflows/quality-gate.yml \
+            .github/pull_request_template.md \
+            docs/release-safety.md
+          git commit -m "Add deployment quality gates"
+
+      - name: Stage 3 — transactional catalogue publishing
+        run: |
+          node scripts/apply-stability-upgrade.mjs stage3
+          npx prettier --write \
+            src/lib/athrecs/import.server.ts \
+            src/lib/athrecs/catalogue-publishing.server.ts \
+            src/lib/athrecs/catalogue-publishing-api.ts \
+            src/routes/admin/catalogue-publishing.tsx \
+            src/routes/admin/index.tsx \
+            docs/catalogue-publishing/README.md
+
+      - name: Verify the completed upgrade
+        run: |
+          npm run build
+          npm run typecheck
+          npm run lint
+          npm run verify:catalogue
+          npm run verify:fixture-duplicates
+          npm run verify:slug-stability
+          npm run verify:catalogue-publishing
+
+      - name: Commit the publishing system
+        run: |
+          rm -rf scripts/.stability-payload
+          rm scripts/apply-stability-upgrade.mjs
+          git add -- \
+            migrations/0016_catalogue_publishing.sql \
+            src/lib/athrecs/import.server.ts \
+            src/lib/athrecs/catalogue-publishing.server.ts \
+            src/lib/athrecs/catalogue-publishing-api.ts \
+            src/routes/admin/catalogue-publishing.tsx \
+            src/routes/admin/index.tsx \
+            src/routeTree.gen.ts \
+            docs/catalogue-publishing/README.md
+          git commit -m "Add staged catalogue publishing"
+
+      - name: Push the clean ordered branch
+        run: git push --force-with-lease origin HEAD:codex/athrecs-stability-and-slugs
