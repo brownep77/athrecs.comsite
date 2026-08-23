@@ -80,9 +80,9 @@ const googleClientSecret = env("GOOGLE_CLIENT_SECRET");
 const directGoogleConfigured =
   !authDisabled && Boolean(googleClientId && googleClientSecret);
 
-// This app's own Better Auth origin. When deployed the deployer injects the
-// public URL. In the sandbox live preview there's no fixed URL (each preview gets
-// a dynamic `*.grok-sandbox.com` host), so we hand Better Auth a dynamic baseURL.
+// BETTER_AUTH_URL is the deployed fallback/canonical origin. Athrecs is served
+// from several first-party hostnames, so deployed auth still resolves the actual
+// approved request host per request instead of pinning every browser to one host.
 const explicitBaseURL = env("BETTER_AUTH_URL");
 
 // Broker federation creds: the deployer injects a per-app client when deployed;
@@ -110,6 +110,39 @@ export const authConfigured =
 // Explicit `string[]` (not a readonly tuple) — Better Auth's DynamicBaseURLConfig
 // requires a mutable `allowedHosts: string[]`.
 const previewAllowedHosts: string[] = [...PREVIEW_ALLOWED_HOSTS];
+
+// Public Athlete Accounts and the private staff microsite share one deployment
+// but keep host-only sessions. Each approved hostname therefore needs its own
+// request-specific OAuth callback URL and origin validation.
+const ATHRECS_DEPLOYED_AUTH_HOSTS: string[] = [
+  "www.athrecs.com",
+  "athrecs.com",
+  "update.athrecs.com",
+];
+
+function parseAbsoluteURL(value: string | undefined): URL | null {
+  if (!value) return null;
+  try {
+    return new URL(value);
+  } catch {
+    return null;
+  }
+}
+
+function unique(values: string[]): string[] {
+  return values.filter((value, index) => values.indexOf(value) === index);
+}
+
+const explicitBase = parseAbsoluteURL(explicitBaseURL);
+const deployedAllowedHosts = unique([
+  ...ATHRECS_DEPLOYED_AUTH_HOSTS,
+  ...(explicitBase ? [explicitBase.host] : []),
+]);
+const deployedTrustedOrigins = unique([
+  ...ATHRECS_DEPLOYED_AUTH_HOSTS.map((host) => `https://${host}`),
+  ...(explicitBase ? [explicitBase.origin] : []),
+]);
+
 // Local `npm run dev` (port 8080 contract). Browsers may send Origin as any of
 // these for the same server — trusting only `localhost` rejects `127.0.0.1` and
 // breaks email/password with "Invalid origin".
@@ -118,20 +151,29 @@ const LOCAL_DEV_ORIGINS: string[] = [
   "http://127.0.0.1:8080",
   "http://[::1]:8080",
 ];
-const baseURL = explicitBaseURL ?? {
-  // Include loopback hosts so dynamic baseURL resolves for local email/password
-  // (not only the preview wildcard).
-  allowedHosts: [...previewAllowedHosts, "localhost", "127.0.0.1", "[::1]"],
-  // `auto` → trust both http:// and https:// expansions of allowedHosts
-  // (preview is https; local dev is http).
-  protocol: "auto" as const,
-  fallback: "http://localhost:8080",
-};
+const baseURL = explicitBaseURL
+  ? {
+      // Resolve the active first-party hostname per request. This makes Google
+      // return to www.athrecs.com for public accounts and update.athrecs.com for
+      // staff, while retaining BETTER_AUTH_URL as a safe fallback.
+      allowedHosts: deployedAllowedHosts,
+      protocol: "auto" as const,
+      fallback: explicitBase?.origin ?? explicitBaseURL,
+    }
+  : {
+      // Include loopback hosts so dynamic baseURL resolves for local email/password
+      // (not only the preview wildcard).
+      allowedHosts: [...previewAllowedHosts, "localhost", "127.0.0.1", "[::1]"],
+      // `auto` → trust both http:// and https:// expansions of allowedHosts
+      // (preview is https; local dev is http).
+      protocol: "auto" as const,
+      fallback: "http://localhost:8080",
+    };
 
 // Origins Better Auth accepts on credentialed POSTs (sign-up/sign-in, etc.).
 // Missing entries here surface as FORBIDDEN "Invalid origin".
 const trustedOrigins: string[] = explicitBaseURL
-  ? [explicitBaseURL, ...LOCAL_DEV_ORIGINS]
+  ? deployedTrustedOrigins
   : [
       // Host wildcards (matched against Origin's host)
       ...previewAllowedHosts,
@@ -194,12 +236,13 @@ export const auth = betterAuth({
   database,
 
   // CSRF / origin check for credentialed auth POSTs (email sign-up/sign-in, …).
-  // See `trustedOrigins` construction above — must cover live preview hosts AND
-  // local loopback variants, or clients get "Invalid origin".
+  // See `trustedOrigins` construction above — it covers each approved deployed
+  // Athrecs hostname, live preview hosts and local loopback variants.
   trustedOrigins,
 
-  // Direct Google OAuth for permanent deployments. With BETTER_AUTH_URL set to
-  // the public origin, Better Auth uses `/api/auth/callback/google` on that host.
+  // Direct Google OAuth for permanent deployments. The dynamic baseURL resolves
+  // `/api/auth/callback/google` against whichever approved Athrecs host initiated
+  // the sign-in.
   ...(directGoogleConfigured
     ? {
         socialProviders: {
