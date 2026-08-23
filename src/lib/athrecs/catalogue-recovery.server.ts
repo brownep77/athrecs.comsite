@@ -423,6 +423,35 @@ async function recoverEditions(sql: Sql, batch: EditionWithEntryOptions[]): Prom
       ];
     })
     .filter((row): row is (string | number | null)[] => row != null);
+
+  const proposedSourceIds = [
+    ...new Set(
+      rows
+        .map((row) => row[0])
+        .filter((sourceId): sourceId is number => typeof sourceId === "number"),
+    ),
+  ];
+  const reservedSourceIds = new Set<number>();
+  if (proposedSourceIds.length) {
+    const placeholders = proposedSourceIds.map((_, index) => `$${index + 1}`).join(", ");
+    const existingSourceRows = await sql.query<{ source_id: number }>(
+      `select source_id
+       from editions
+       where source_id in (${placeholders})`,
+      proposedSourceIds,
+    );
+    for (const row of existingSourceRows) reservedSourceIds.add(Number(row.source_id));
+  }
+  for (const row of rows) {
+    const sourceId = row[0];
+    if (typeof sourceId !== "number") continue;
+    if (reservedSourceIds.has(sourceId)) {
+      row[0] = null;
+    } else {
+      reservedSourceIds.add(sourceId);
+    }
+  }
+
   await insertRows(
     sql,
     "editions",

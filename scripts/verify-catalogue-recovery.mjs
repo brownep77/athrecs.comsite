@@ -15,6 +15,8 @@ assert.match(recoverySource, /verifyCompleteness/);
 assert.match(recoverySource, /fixtures_catalogue_version/);
 assert.match(recoverySource, /existingPrimaryRows/);
 assert.match(recoverySource, /row\[13\] = false/);
+assert.match(recoverySource, /reservedSourceIds/);
+assert.match(recoverySource, /row\[0\] = null/);
 assert.doesNotMatch(
   recoverySource,
   /delete from (?:events|editions|results|athletes|athlete_accounts)/i,
