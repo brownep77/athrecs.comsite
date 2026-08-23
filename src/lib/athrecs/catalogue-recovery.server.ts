@@ -763,6 +763,13 @@ async function verifyCompleteness(sql: Sql): Promise<{
   };
 }
 
+export async function getCatalogueRecoveryVerification(): Promise<
+  Awaited<ReturnType<typeof verifyCompleteness>>
+> {
+  const sql = await getSql();
+  return verifyCompleteness(sql);
+}
+
 function retryProgress(
   verification: Awaited<ReturnType<typeof verifyCompleteness>>,
 ): RecoveryProgress {

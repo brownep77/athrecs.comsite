@@ -2,7 +2,10 @@ import { createHash, timingSafeEqual } from "node:crypto";
 import { createFileRoute } from "@tanstack/react-router";
 import { dbSource } from "@/lib/db";
 import { ensureAthrecsSeeded } from "@/lib/athrecs/seed.server";
-import { runCatalogueRecoveryBatch } from "@/lib/athrecs/catalogue-recovery.server";
+import {
+  getCatalogueRecoveryVerification,
+  runCatalogueRecoveryBatch,
+} from "@/lib/athrecs/catalogue-recovery.server";
 
 const TOKEN_HASH = "d9688555b979fa9463376a8fe46bcd3ca39e7a2fe825ab9fe37e1ebd35d76ec8";
 const STAFF_HOST = "update.athrecs.com";
@@ -39,6 +42,9 @@ export const Route = createFileRoute("/api/maintenance/catalogue-recovery")({
         }
 
         await ensureAthrecsSeeded();
+        if (new URL(request.url).searchParams.get("verify") === "1") {
+          return json(await getCatalogueRecoveryVerification());
+        }
         const status = await runCatalogueRecoveryBatch();
         return json(status);
       },
