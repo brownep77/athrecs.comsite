@@ -69,4 +69,15 @@ replaceOnce(
   "  const revisions = (dashboard.data?.revisions ?? []) as CatalogueRevisionRow[];",
 );
 
-console.log("Applied generated-output TypeScript repairs.");
+replaceOnce(
+  "src/routes/$language/$country/races/$slug.tsx",
+  "    let data = await getEventBySlug({ data: params.slug });",
+  "    const data = await getEventBySlug({ data: params.slug });",
+);
+replaceOnce(
+  "src/routes/races/$slug.tsx",
+  "    const { event, upcoming, distances } = loaderData;",
+  "    const { event, upcoming } = loaderData;",
+);
+
+console.log("Applied generated-output TypeScript and lint repairs.");
