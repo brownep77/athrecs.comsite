@@ -9,6 +9,7 @@ import {
   Loader2,
   LogIn,
   ShieldCheck,
+  UserRound,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -183,6 +184,35 @@ function ClaimResultsPage() {
             detail="ATHRECS checks conflicts and approves or requests more information."
           />
         </div>
+      </section>
+
+      <section className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-accent/30 bg-accent-soft p-4">
+        <div>
+          <h2 className="font-display text-lg font-semibold text-fg">Your Athlete Account</h2>
+          <p className="mt-1 text-sm text-muted">
+            {user
+              ? "You are signed in. Complete your private Entry Passport or continue with the claim below."
+              : "Create your secure account before claiming. Your verified Google email is attached to the claim."}
+          </p>
+        </div>
+        {sessionPending ? (
+          <Loader2 className="size-5 animate-spin text-accent" aria-label="Checking account" />
+        ) : user ? (
+          <Button asChild variant="secondary">
+            <Link to="/athlete-account">
+              <UserRound className="size-4" aria-hidden="true" /> My Athlete Account
+            </Link>
+          </Button>
+        ) : (
+          <Button type="button" disabled={signingIn} onClick={() => void startSignIn()}>
+            {signingIn ? (
+              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+            ) : (
+              <LogIn className="size-4" aria-hidden="true" />
+            )}
+            {signingIn ? "Opening Google…" : "Sign in or create account"}
+          </Button>
+        )}
       </section>
 
       {!resultId ? (
