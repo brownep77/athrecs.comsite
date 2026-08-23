@@ -1,11 +1,11 @@
-status=failure
-run_id=32635439663
+status=success
+run_id=32635617752
 attempt=1
-trigger_sha=7e015a098fb326334b493b6fa40805d7726f85a2
-recorded_at=2026-08-23T11:03:48Z
+trigger_sha=9059b9204edf4c968e74b83f80fbbe1e37d5c61b
+recorded_at=2026-08-23T11:07:29Z
 
 ===== /tmp/stability-commit.log =====
-[codex/athrecs-stability-and-slugs 07afc1e] Add staged catalogue publishing
+[codex/athrecs-stability-and-slugs aef667a] Add staged catalogue publishing
  8 files changed, 1543 insertions(+), 32 deletions(-)
  create mode 100644 docs/catalogue-publishing/README.md
  create mode 100644 migrations/0016_catalogue_publishing.sql
@@ -21,7 +21,7 @@ npm warn EBADENGINE   current: { node: 'v24.19.0', npm: '11.17.0' }
 npm warn EBADENGINE }
 npm warn deprecated recharts@2.15.4: 1.x and 2.x branches are no longer active. Bump to Recharts v3 to receive latest features and bugfixes. See https://github.com/recharts/recharts/wiki/3.0-migration-guide
 
-added 430 packages in 9s
+added 430 packages in 8s
 
 ===== /tmp/stability-prepare.log =====
 From https://github.com/brownep77/athrecs.comsite
@@ -31,19 +31,18 @@ branch 'codex/athrecs-stability-and-slugs' set up to track 'origin/main'.
 
 ===== /tmp/stability-push.log =====
 To https://github.com/brownep77/athrecs.comsite
- ! [remote rejected] HEAD -> codex/athrecs-stability-and-slugs (refusing to allow a GitHub App to create or update workflow `.github/workflows/quality-gate.yml` without `workflows` permission)
-error: failed to push some refs to 'https://github.com/brownep77/athrecs.comsite'
+   5569de3..aef667a  HEAD -> codex/athrecs-stability-and-slugs
 
 ===== /tmp/stability-stage1.log =====
 Applied stage1 of the ordered Athrecs stability upgrade.
-[90msrc/routes/races/index.tsx[39m 134ms (unchanged)
-[90msrc/routes/index.tsx[39m 83ms (unchanged)
-src/routes/races/$slug.tsx 135ms
-[90msrc/routes/athletes/$slug.tsx[39m 42ms (unchanged)
-src/routes/clubs/$slug.tsx 24ms
-[90msrc/routes/$language/$country/races/$slug.tsx[39m 9ms (unchanged)
+[90msrc/routes/races/index.tsx[39m 110ms (unchanged)
+[90msrc/routes/index.tsx[39m 53ms (unchanged)
+src/routes/races/$slug.tsx 97ms
+[90msrc/routes/athletes/$slug.tsx[39m 31ms (unchanged)
+src/routes/clubs/$slug.tsx 21ms
+[90msrc/routes/$language/$country/races/$slug.tsx[39m 7ms (unchanged)
 [90msrc/lib/athrecs/slug-redirects.ts[39m 6ms (unchanged)
-[codex/athrecs-stability-and-slugs ae245a5] Make page URLs durable and shareable
+[codex/athrecs-stability-and-slugs de9d6f1] Make page URLs durable and shareable
  8 files changed, 423 insertions(+), 85 deletions(-)
  create mode 100644 migrations/0015_slug_redirects.sql
  create mode 100644 src/lib/athrecs/slug-redirects.ts
@@ -51,18 +50,16 @@ src/routes/clubs/$slug.tsx 24ms
 ===== /tmp/stability-stage2.log =====
 Applied stage2 of the ordered Athrecs stability upgrade.
 
-up to date in 485ms
-[90mpackage.json[39m 25ms (unchanged)
-scripts/browser-smoke.mjs 37ms
-[90mscripts/verify-slug-stability.mjs[39m 10ms (unchanged)
+up to date in 373ms
+[90mpackage.json[39m 21ms (unchanged)
+scripts/browser-smoke.mjs 30ms
+[90mscripts/verify-slug-stability.mjs[39m 9ms (unchanged)
 [90mscripts/verify-catalogue-publishing.mjs[39m 5ms (unchanged)
-[90m.github/workflows/quality-gate.yml[39m 15ms (unchanged)
-[90m.github/pull_request_template.md[39m 37ms (unchanged)
-[90mdocs/release-safety.md[39m 10ms (unchanged)
-[codex/athrecs-stability-and-slugs 22590ff] Add deployment quality gates
- 9 files changed, 254 insertions(+), 90 deletions(-)
+[90m.github/pull_request_template.md[39m 31ms (unchanged)
+[90mdocs/release-safety.md[39m 9ms (unchanged)
+[codex/athrecs-stability-and-slugs 7127df1] Add deployment quality gates
+ 8 files changed, 191 insertions(+), 90 deletions(-)
  create mode 100644 .github/pull_request_template.md
- create mode 100644 .github/workflows/quality-gate.yml
  create mode 100644 docs/release-safety.md
  create mode 100644 scripts/verify-catalogue-publishing.mjs
  create mode 100644 scripts/verify-slug-stability.mjs
@@ -70,12 +67,12 @@ scripts/browser-smoke.mjs 37ms
 ===== /tmp/stability-stage3.log =====
 Applied stage3 of the ordered Athrecs stability upgrade.
 Applied generated-output TypeScript and lint repairs.
-[90msrc/lib/athrecs/import.server.ts[39m 151ms (unchanged)
-src/lib/athrecs/catalogue-publishing.server.ts 91ms
-src/lib/athrecs/catalogue-publishing-api.ts 14ms
-src/routes/admin/catalogue-publishing.tsx 49ms
-[90msrc/routes/admin/index.tsx[39m 72ms (unchanged)
-[90mdocs/catalogue-publishing/README.md[39m 29ms (unchanged)
+[90msrc/lib/athrecs/import.server.ts[39m 126ms (unchanged)
+src/lib/athrecs/catalogue-publishing.server.ts 65ms
+src/lib/athrecs/catalogue-publishing-api.ts 9ms
+src/routes/admin/catalogue-publishing.tsx 38ms
+[90msrc/routes/admin/index.tsx[39m 60ms (unchanged)
+[90mdocs/catalogue-publishing/README.md[39m 24ms (unchanged)
 
 ===== /tmp/stability-verify.log =====
 .vercel/output/functions/__server.func/_chunks/ssr-renderer.mjs                                           0.60 kB │ gzip:     0.36 kB
@@ -224,7 +221,7 @@ src/routes/admin/catalogue-publishing.tsx 49ms
 .vercel/output/functions/__server.func/_ssr/scraper-workbook-snapshot.server.generated-B03qXuXO.mjs   1,635.01 kB │ gzip: 1,229.80 kB
 .vercel/output/functions/__server.func/_ssr/seed.server-CL0Ip_bc.mjs                                 13,011.45 kB │ gzip: 1,272.51 kB
 
-[32m✓ built in 1.47s[39m
+[32m✓ built in 1.35s[39m
 [info] Generated [36m.vercel/output/nitro.json[39m
 [success] [nitro] You can preview this build using `npx vite preview`
 [success] [nitro] You can deploy this build using `npx nitro deploy --prebuilt`
