@@ -12,6 +12,10 @@ const URLS = {
   tirana: "https://www.tiranamarathon.com/en",
   berat: "https://beratgreenhalfmarathon.com/",
   enkelana: "https://marathonenkelana.run/",
+  shkodra: "https://shkodramarathon.com/?lang=en",
+  shkodraRace: "https://shkodramarathon.com/gara?lang=en",
+  shkodraEntry: "https://shkodramarathon.com/regjistrim?lang=en",
+  raceForCure: "https://www.raceforthecure.eu/en/Races",
   migrantOfficial: "https://migranttrailrace.run/",
   migrantSecondary:
     "https://ultraracecalendar.com/events/3927/migrant-trail-race-fushe-arrez/",
@@ -192,6 +196,44 @@ export const albaniaRaceSeries: Series[] = [
     source_url: URLS.enkelana,
   },
   {
+    slug: "shkodra-mini-marathon",
+    name: "Shkodra Mini Marathon",
+    sport: "Running",
+    country: "Albania",
+    county: "Shkodër County",
+    city: "Shkodër",
+    area: "Isa Boletini Square and central Shkodër",
+    surface: "Road",
+    distances: ["10K", "5K", "2.5K"],
+    summary:
+      "A city-centre road event offering 10 km and 5 km races plus youth 2.5 km categories.",
+    description:
+      "Shkodra Mini Marathon is organised by Vllaznia Atletike with support from the Municipality of Shkodër and the Athletics Federation of Albania. The programme includes open 10 km and 5 km races and separate 2.5 km youth categories for ages 10–15 and 16–18.",
+    organiser: "Vllaznia Atletike",
+    website: URLS.shkodra,
+    featured: false,
+    source_url: URLS.shkodraRace,
+  },
+  {
+    slug: "race-for-the-cure-tirana",
+    name: "Race for the Cure Tirana",
+    sport: "Running",
+    country: "Albania",
+    county: "Tirana County",
+    city: "Tirana",
+    area: "Tirana",
+    surface: "Road",
+    distances: ["5K"],
+    summary:
+      "A 5 km charity run in Tirana supporting the European breast-cancer community.",
+    description:
+      "Race for the Cure Tirana is part of Think Pink Europe's annual series. The competitive programme is a 5 km run, accompanied by a non-competitive 3 km walk.",
+    organiser: "Think Pink Europe",
+    website: URLS.raceForCure,
+    featured: false,
+    source_url: URLS.raceForCure,
+  },
+  {
     slug: "migrant-trail-race-fushe-arrez",
     name: "Migrant Trail Race — Fushë-Arrëz",
     sport: "Running",
@@ -273,6 +315,43 @@ export const albaniaRaceEditions: Edition[] = [
     source: URLS.skampa,
     notes:
       "Race day is Sunday 4 October 2026. The organiser advertises 5 km, 10 km and half-marathon races; published schedule pages vary between 08:30 and 09:00, so the start time should be reconfirmed.",
+  },
+  {
+    seriesSlug: "shkodra-mini-marathon",
+    date: "2026-10-04",
+    distance: "10K",
+    distanceKm: 10,
+    status: "Open",
+    entryUrl: URLS.shkodraEntry,
+    entryOptions: [
+      entryOption(
+        "shkodra-mini-marathon",
+        "Shkodra Mini Marathon",
+        URLS.shkodraEntry,
+      ),
+    ],
+    source: URLS.shkodraRace,
+    notes:
+      "The official programme includes 10 km and 5 km races for adults and free 2.5 km youth races in two age groups. The youth races begin at 09:30; bib and race-pack collection runs from 08:00 to 09:00.",
+  },
+  {
+    seriesSlug: "race-for-the-cure-tirana",
+    date: "2026-10-10",
+    distance: "5K",
+    distanceKm: 5,
+    status: "Open",
+    entryUrl: URLS.raceForCure,
+    entryOptions: [
+      entryOption(
+        "think-pink-europe",
+        "Think Pink Europe",
+        URLS.raceForCure,
+        "charity",
+      ),
+    ],
+    source: URLS.raceForCure,
+    notes:
+      "Think Pink Europe's official race calendar lists the Tirana event for Saturday 10 October 2026. The competitive distance is 5 km; the programme also includes a non-competitive 3 km walk.",
   },
   {
     seriesSlug: "vjosa-wild-river-ultra-trail",
