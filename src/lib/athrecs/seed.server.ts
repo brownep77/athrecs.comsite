@@ -20,7 +20,7 @@ import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 const SEED_VERSION = "athrecs-uk-ireland-5k-very-pink-v241";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
-const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v2";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v3";
 const EXPECTED = catalogueMetadata.merged_counts;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
@@ -1013,11 +1013,52 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   `;
 }
 
+async function publicFigureRowsComplete(sql: Sql): Promise<boolean> {
+  const athleteSlugs = publicFigureAthletes.map((athlete) => athlete.slug);
+  const athletePlaceholders = athleteSlugs.map((_, index) => `$${index + 1}`).join(", ");
+  const athleteRows = await sql.query<{ count: number }>(
+    `select count(*)::int as count
+     from athletes
+     where profile_type = 'Public figure'
+       and slug in (${athletePlaceholders})`,
+    athleteSlugs,
+  );
+  if ((athleteRows[0]?.count ?? 0) !== athleteSlugs.length) return false;
+
+  const params: unknown[] = [];
+  const targets = publicFigureResults.map((result) => {
+    params.push(result.athleteSlug, result.eventSlug, result.date, result.distance);
+    return `($${params.length - 3}::text, $${params.length - 2}::text, $${params.length - 1}::date, $${params.length}::text)`;
+  });
+  const resultRows = await sql.query<{ count: number }>(
+    `select count(*)::int as count
+     from (values ${targets.join(", ")}) as target (
+       athlete_slug, event_slug, event_date, distance_code
+     )
+     join athletes athlete on athlete.slug = target.athlete_slug
+     join events event on event.slug = target.event_slug
+     join editions edition
+       on edition.event_id = event.id
+      and edition.event_date = target.event_date
+      and edition.distance_code = target.distance_code
+     join results result
+       on result.edition_id = edition.id
+      and result.athlete_id = athlete.id`,
+    params,
+  );
+  return (resultRows[0]?.count ?? 0) === publicFigureResults.length;
+}
+
 async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
   const meta = await sql<{ value: string }>`
     select value from app_meta where key = 'public_figures_catalogue_version' limit 1
   `;
-  if (meta[0]?.value === PUBLIC_FIGURE_SEED_VERSION) return;
+  if (
+    meta[0]?.value === PUBLIC_FIGURE_SEED_VERSION &&
+    (await publicFigureRowsComplete(sql))
+  ) {
+    return;
+  }
 
   await insertRows(
     sql,
@@ -1040,7 +1081,7 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       "source_url",
     ],
     publicFigureSeries.map((series) => [
-      series.source_id ?? null,
+      null,
       series.slug,
       series.name,
       series.sport,
@@ -1057,7 +1098,6 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       series.source_url ?? null,
     ]),
     `on conflict (slug) do update set
-      source_id = excluded.source_id,
       name = excluded.name,
       sport = excluded.sport,
       country = excluded.country,
@@ -1113,7 +1153,7 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       "results_access",
     ],
     publicFigureEditions.map((edition) => [
-      edition.source_id ?? null,
+      null,
       eventIds.get(edition.seriesSlug),
       edition.date,
       edition.distance,
@@ -1136,7 +1176,6 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       edition.resultsAccess ?? null,
     ]),
     `on conflict (event_id, event_date, distance_code) do update set
-      source_id = excluded.source_id,
       distance_km = excluded.distance_km,
       status = excluded.status,
       entry_url = excluded.entry_url,
