@@ -255,9 +255,24 @@ function AdminPage() {
           Update ATHRECS with Grok
         </h1>
         <p className="max-w-2xl text-sm text-muted">
-          Publish the site from the Grok App Builder, then keep fixtures fresh here: ask Grok to
-          extract races, paste the JSON, or bulk-load a CSV. Live listings use the same Race cards
-          as the public Events page.
+          Keep fixtures fresh through the staged Neon publishing flow. Proposed rows are stored,
+          validated and published atomically before they appear on the public site.
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-3 rounded-xl border border-accent/30 bg-accent-soft p-4">
+          <div className="min-w-0 flex-1">
+            <p className="font-semibold text-fg">Recommended update route</p>
+            <p className="mt-1 text-sm text-muted">
+              Use staged catalogue publishing for new races, editions and entry links. The legacy
+              direct import forms below remain available temporarily for compatibility.
+            </p>
+          </div>
+          <Button asChild>
+            <Link to="/admin/catalogue-publishing">Open staged publishing</Link>
+          </Button>
+        </div>
+        <p className="mt-4 max-w-2xl text-sm text-muted">
+          Legacy tools: extract races, paste JSON, or bulk-load a CSV. Live listings use the same
+          Race cards as the public Events page.
         </p>
       </div>
 

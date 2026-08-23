@@ -17,6 +17,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
+import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
@@ -73,6 +74,12 @@ const AdminAthleteAccountsRoute = AdminAthleteAccountsRouteImport.update({
   path: '/admin/athlete-accounts',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminCataloguePublishingRoute =
+  AdminCataloguePublishingRouteImport.update({
+    id: '/admin/catalogue-publishing',
+    path: '/admin/catalogue-publishing',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
   id: '/admin/data-intelligence',
   path: '/admin/data-intelligence',
@@ -159,6 +166,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
+  '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
@@ -184,6 +192,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
+  '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
@@ -210,6 +219,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
+  '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
@@ -237,6 +247,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/admin/athlete-accounts'
+    | '/admin/catalogue-publishing'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/result-claims'
@@ -262,6 +273,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/admin/athlete-accounts'
+    | '/admin/catalogue-publishing'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/result-claims'
@@ -287,6 +299,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/admin/athlete-accounts'
+    | '/admin/catalogue-publishing'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/result-claims'
@@ -313,6 +326,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
+  AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
@@ -387,6 +401,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/athlete-accounts'
       fullPath: '/admin/athlete-accounts'
       preLoaderRoute: typeof AdminAthleteAccountsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/catalogue-publishing': {
+      id: '/admin/catalogue-publishing'
+      path: '/admin/catalogue-publishing'
+      fullPath: '/admin/catalogue-publishing'
+      preLoaderRoute: typeof AdminCataloguePublishingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/data-intelligence': {
@@ -505,6 +526,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
+  AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
   AdminResultClaimsRoute: AdminResultClaimsRoute,

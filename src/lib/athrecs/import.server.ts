@@ -1,4 +1,4 @@
-import { getSql } from "@/lib/db";
+import { getSql, type Sql } from "@/lib/db";
 import type { EntryOptionStatus, EntryOptionType, EntryStatus, Sport } from "./types";
 
 // Append-only results import (athletes + finish times)
@@ -305,13 +305,21 @@ export function parseEventsCsv(csv: string): {
   return { events: [...eventsMap.values()], editions };
 }
 
-export async function applyImportBundle(bundle: ImportBundle): Promise<{
+export type ApplyImportOptions = {
+  sqlOverride?: Sql;
+  preserveExistingEvents?: boolean;
+};
+
+export async function applyImportBundle(
+  bundle: ImportBundle,
+  importOptions: ApplyImportOptions = {},
+): Promise<{
   eventsUpserted: number;
   editionsUpserted: number;
   entryOptionsUpserted: number;
   errors: string[];
 }> {
-  const sql = await getSql();
+  const sql = importOptions.sqlOverride ?? (await getSql());
   let eventsUpserted = 0;
   let editionsUpserted = 0;
   let entryOptionsUpserted = 0;
@@ -328,21 +336,23 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
       let eventId: number;
       if (existing[0]) {
         eventId = existing[0].id;
-        await sql`
-          update events set
-            name = ${raw.name},
-            sport = ${sport},
-            country = ${raw.country ?? "England"},
-            county = ${raw.county ?? "Norfolk"},
-            city = ${raw.city ?? ""},
-            area = ${raw.area ?? ""},
-            surface = ${raw.surface ?? "Road"},
-            summary = ${raw.summary ?? ""},
-            description = ${raw.description ?? ""},
-            organiser = ${raw.organiser ?? ""},
-            website = ${raw.website ?? ""}
-          where id = ${eventId}
-        `;
+        if (!importOptions.preserveExistingEvents) {
+          await sql`
+            update events set
+              name = ${raw.name},
+              sport = ${sport},
+              country = ${raw.country ?? "England"},
+              county = ${raw.county ?? "Norfolk"},
+              city = ${raw.city ?? ""},
+              area = ${raw.area ?? ""},
+              surface = ${raw.surface ?? "Road"},
+              summary = ${raw.summary ?? ""},
+              description = ${raw.description ?? ""},
+              organiser = ${raw.organiser ?? ""},
+              website = ${raw.website ?? ""}
+            where id = ${eventId}
+          `;
+        }
       } else {
         const ins = await sql<{ id: number }>`
           insert into events (
@@ -383,17 +393,20 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
       if (!ev[0]) {
         // create minimal event from edition
         if (!raw.eventName) throw new Error(`No event for slug ${slug}`);
-        await applyImportBundle({
-          events: [
-            {
-              name: raw.eventName,
-              sport: "Running",
-              slug,
-              city: "Norfolk",
-              distances: [raw.distance],
-            },
-          ],
-        });
+        await applyImportBundle(
+          {
+            events: [
+              {
+                name: raw.eventName,
+                sport: "Running",
+                slug,
+                city: "Norfolk",
+                distances: [raw.distance],
+              },
+            ],
+          },
+          { ...importOptions, sqlOverride: sql },
+        );
       }
       const again = await sql<{ id: number }>`
         select id from events where slug = ${slug} limit 1
