@@ -1,9 +1,10 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { getEventBySlug } from "@/lib/athrecs/api";
 import { countryMatchesFilter, resolveCountry } from "@/lib/athrecs/countries";
 import { countrySiteFromSlug, isSiteLanguage } from "@/lib/athrecs/country-sites";
 import { Button } from "@/components/ui/button";
 import { RacePageContent } from "@/routes/races/$slug";
+import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 
 export const Route = createFileRoute("/$language/$country/races/$slug")({
   loader: async ({ params }) => {
@@ -11,7 +12,26 @@ export const Route = createFileRoute("/$language/$country/races/$slug")({
     if (!site || !isSiteLanguage(params.language)) throw notFound();
 
     const data = await getEventBySlug({ data: params.slug });
-    if (!data) throw notFound();
+    if (!data) {
+      const currentSlug = await resolveSlugRedirect({
+        data: { entityType: "event", slug: params.slug },
+      });
+      if (currentSlug && currentSlug !== params.slug) {
+        throw redirect({
+          to: "/$language/$country/races/$slug",
+          params: { ...params, slug: currentSlug },
+          statusCode: 301,
+        });
+      }
+      throw notFound();
+    }
+    if (data.event.slug !== params.slug) {
+      throw redirect({
+        to: "/$language/$country/races/$slug",
+        params: { ...params, slug: data.event.slug },
+        statusCode: 301,
+      });
+    }
 
     const eventCountry = resolveCountry({
       slug: data.event.slug,

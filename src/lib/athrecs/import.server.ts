@@ -1,4 +1,4 @@
-import { getSql } from "@/lib/db";
+import { getSql, type Sql } from "@/lib/db";
 import type { EntryOptionStatus, EntryOptionType, EntryStatus, Sport } from "./types";
 
 // Append-only results import (athletes + finish times)
@@ -48,7 +48,8 @@ export function slugify(input: string): string {
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
-    .slice(0, 80);
+    .slice(0, 80)
+    .replace(/-+$/g, "");
 }
 
 function parseSport(raw: string): Sport {
@@ -305,13 +306,22 @@ export function parseEventsCsv(csv: string): {
   return { events: [...eventsMap.values()], editions };
 }
 
-export async function applyImportBundle(bundle: ImportBundle): Promise<{
+export type ApplyImportOptions = {
+  sqlOverride?: Sql;
+  preserveExistingEvents?: boolean;
+  preserveExistingPrimaryEntry?: boolean;
+};
+
+export async function applyImportBundle(
+  bundle: ImportBundle,
+  importOptions: ApplyImportOptions = {},
+): Promise<{
   eventsUpserted: number;
   editionsUpserted: number;
   entryOptionsUpserted: number;
   errors: string[];
 }> {
-  const sql = await getSql();
+  const sql = importOptions.sqlOverride ?? (await getSql());
   let eventsUpserted = 0;
   let editionsUpserted = 0;
   let entryOptionsUpserted = 0;
@@ -328,21 +338,23 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
       let eventId: number;
       if (existing[0]) {
         eventId = existing[0].id;
-        await sql`
-          update events set
-            name = ${raw.name},
-            sport = ${sport},
-            country = ${raw.country ?? "England"},
-            county = ${raw.county ?? "Norfolk"},
-            city = ${raw.city ?? ""},
-            area = ${raw.area ?? ""},
-            surface = ${raw.surface ?? "Road"},
-            summary = ${raw.summary ?? ""},
-            description = ${raw.description ?? ""},
-            organiser = ${raw.organiser ?? ""},
-            website = ${raw.website ?? ""}
-          where id = ${eventId}
-        `;
+        if (!importOptions.preserveExistingEvents) {
+          await sql`
+            update events set
+              name = ${raw.name},
+              sport = ${sport},
+              country = ${raw.country ?? "England"},
+              county = ${raw.county ?? "Norfolk"},
+              city = ${raw.city ?? ""},
+              area = ${raw.area ?? ""},
+              surface = ${raw.surface ?? "Road"},
+              summary = ${raw.summary ?? ""},
+              description = ${raw.description ?? ""},
+              organiser = ${raw.organiser ?? ""},
+              website = ${raw.website ?? ""}
+            where id = ${eventId}
+          `;
+        }
       } else {
         const ins = await sql<{ id: number }>`
           insert into events (
@@ -383,23 +395,31 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
       if (!ev[0]) {
         // create minimal event from edition
         if (!raw.eventName) throw new Error(`No event for slug ${slug}`);
-        await applyImportBundle({
-          events: [
-            {
-              name: raw.eventName,
-              sport: "Running",
-              slug,
-              city: "Norfolk",
-              distances: [raw.distance],
-            },
-          ],
-        });
+        await applyImportBundle(
+          {
+            events: [
+              {
+                name: raw.eventName,
+                sport: "Running",
+                slug,
+                city: "Norfolk",
+                distances: [raw.distance],
+              },
+            ],
+          },
+          { ...importOptions, sqlOverride: sql },
+        );
       }
       const again = await sql<{ id: number }>`
         select id from events where slug = ${slug} limit 1
       `;
       if (!again[0]) throw new Error(`Could not resolve event ${slug}`);
       const status = parseStatus(raw.status);
+      const hasExplicitPrimary = (raw.entryOptions ?? []).some(
+        (option) => option.isPrimary === true,
+      );
+      const preserveCurrentPrimary =
+        importOptions.preserveExistingPrimaryEntry === true && !hasExplicitPrimary;
       const editionRows = await sql<{ id: number }>`
         insert into editions (
           event_id, event_date, distance_code, distance_km, status,
@@ -412,7 +432,17 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
         on conflict (event_id, event_date, distance_code) do update set
           distance_km = excluded.distance_km,
           status = excluded.status,
-          entry_url = coalesce(excluded.entry_url, editions.entry_url),
+          entry_url = case
+            when ${preserveCurrentPrimary}
+              and exists (
+                select 1
+                from edition_entry_options current_option
+                where current_option.edition_id = editions.id
+                  and current_option.is_primary
+              )
+            then editions.entry_url
+            else coalesce(excluded.entry_url, editions.entry_url)
+          end,
           source_url = coalesce(excluded.source_url, editions.source_url),
           start_time = excluded.start_time
         returning id
@@ -444,11 +474,16 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
         });
       }
 
+      const seenProviderCodes = new Set<string>();
       const normalizedOptions = options.map((option) => {
         const providerName = option.providerName?.trim();
         if (!providerName) throw new Error("Entry provider needs providerName");
         const providerCode = slugify(option.providerCode || providerName);
         if (!providerCode) throw new Error(`Could not create provider code for ${providerName}`);
+        if (seenProviderCodes.has(providerCode)) {
+          throw new Error(`Duplicate entry provider code for this edition: ${providerCode}`);
+        }
+        seenProviderCodes.add(providerCode);
         const entryType = parseEntryOptionType(
           option.entryType,
           providerCode === "official" ? "official" : "third_party",
@@ -484,12 +519,34 @@ export async function applyImportBundle(bundle: ImportBundle): Promise<{
         };
       });
 
-      const explicitPrimary = normalizedOptions.findIndex((option) => option.isPrimary);
+      const currentPrimaryRows = preserveCurrentPrimary
+        ? await sql<{ provider_code: string }>`
+            select provider_code
+            from edition_entry_options
+            where edition_id = ${editionId} and is_primary
+            limit 1
+          `
+        : [];
+      const currentPrimaryCode = currentPrimaryRows[0]?.provider_code ?? null;
+      const explicitPrimary = hasExplicitPrimary
+        ? normalizedOptions.findIndex((option) => option.isPrimary)
+        : -1;
+      const currentPrimaryIndex = currentPrimaryCode
+        ? normalizedOptions.findIndex((option) => option.providerCode === currentPrimaryCode)
+        : -1;
       const officialPrimary = normalizedOptions.findIndex(
         (option) => option.entryType === "official",
       );
-      const primaryIndex = explicitPrimary >= 0 ? explicitPrimary : officialPrimary;
-      if (primaryIndex >= 0) {
+      const primaryIndex =
+        explicitPrimary >= 0
+          ? explicitPrimary
+          : currentPrimaryIndex >= 0
+            ? currentPrimaryIndex
+            : currentPrimaryCode
+              ? -1
+              : officialPrimary;
+      const replacePrimary = explicitPrimary >= 0 || (!currentPrimaryCode && primaryIndex >= 0);
+      if (replacePrimary) {
         await sql`
           update edition_entry_options
           set is_primary = false, updated_at = now()

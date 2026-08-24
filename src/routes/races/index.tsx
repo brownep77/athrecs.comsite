@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { listEvents } from "@/lib/athrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
+import { SITE_URL } from "@/lib/athrecs/seo";
 import { RaceCard } from "@/components/races/RaceCard";
 import {
   EMPTY_SEARCH,
@@ -13,6 +13,7 @@ import {
 } from "@/components/races/EventSearch";
 
 const PAGE_SIZE = 40;
+const MAX_PAGE = 250;
 
 const SPORT_VALUES = new Set<Sport>([
   "Running",
@@ -32,14 +33,66 @@ type RaceSearchParams = {
   q?: string;
   sport?: Sport;
   country?: string;
+  county?: string;
+  city?: string;
+  postcode?: string;
+  month?: string;
+  dateFrom?: string;
+  dateTo?: string;
   distance?: string;
   format?: string;
   surface?: string;
   group?: string;
+  page?: number;
 };
 
 function optionalText(value: unknown): string | undefined {
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+function optionalPage(value: unknown): number | undefined {
+  const parsed =
+    typeof value === "number" ? value : typeof value === "string" ? Number(value) : Number.NaN;
+  if (!Number.isInteger(parsed) || parsed <= 1) return undefined;
+  return Math.min(parsed, MAX_PAGE);
+}
+
+function filtersFromSearch(search: RaceSearchParams): EventSearchValues {
+  return {
+    ...EMPTY_SEARCH,
+    q: search.q ?? "",
+    sport: search.sport ?? "All",
+    country: search.country ?? "All",
+    county: search.county ?? "",
+    city: search.city ?? "",
+    postcode: search.postcode ?? "",
+    month: search.month ?? "",
+    dateFrom: search.dateFrom ?? "",
+    dateTo: search.dateTo ?? "",
+    distance: search.distance ?? "All",
+    format: search.format ?? "All",
+    surface: search.surface ?? "All",
+    group: search.group ?? "All",
+  };
+}
+
+function searchFromFilters(filters: EventSearchValues): RaceSearchParams {
+  const api = searchToApi(filters);
+  return {
+    q: api.q,
+    sport: api.sport as Sport | undefined,
+    country: api.country,
+    county: api.county,
+    city: api.city,
+    postcode: api.postcode,
+    month: api.month,
+    dateFrom: api.dateFrom,
+    dateTo: api.dateTo,
+    distance: api.distance,
+    format: api.format,
+    surface: api.surface,
+    group: api.group,
+  };
 }
 
 export const Route = createFileRoute("/races/")({
@@ -49,68 +102,73 @@ export const Route = createFileRoute("/races/")({
       q: optionalText(search.q),
       sport: sport && SPORT_VALUES.has(sport as Sport) ? (sport as Sport) : undefined,
       country: optionalText(search.country),
+      county: optionalText(search.county),
+      city: optionalText(search.city),
+      postcode: optionalText(search.postcode),
+      month: optionalText(search.month),
+      dateFrom: optionalText(search.dateFrom),
+      dateTo: optionalText(search.dateTo),
       distance: optionalText(search.distance),
       format: optionalText(search.format),
       surface: optionalText(search.surface),
       group: optionalText(search.group),
+      page: optionalPage(search.page),
     };
   },
+  head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/races` }],
+  }),
   loaderDeps: ({ search }) => search,
-  loader: ({ deps }) =>
-    listEvents({
+  loader: ({ deps }) => {
+    const filters = filtersFromSearch(deps);
+    const api = searchToApi(filters);
+    const page = deps.page ?? 1;
+    return listEvents({
       data: {
-        ...deps,
-        upcomingOnly: true,
+        ...api,
+        sport: api.sport as Sport | undefined,
+        upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
         limit: PAGE_SIZE + 1,
+        offset: (page - 1) * PAGE_SIZE,
       },
-    }),
+    });
+  },
   component: EventsPage,
 });
 
 function EventsPage() {
-  const initial = Route.useLoaderData();
+  const data = Route.useLoaderData();
   const routeSearch = Route.useSearch();
-  const initialFilters: EventSearchValues = {
-    ...EMPTY_SEARCH,
-    q: routeSearch.q ?? "",
-    sport: routeSearch.sport ?? "All",
-    country: routeSearch.country ?? "All",
-    distance: routeSearch.distance ?? "All",
-    format: routeSearch.format ?? "All",
-    surface: routeSearch.surface ?? "All",
-    group: routeSearch.group ?? "All",
-  };
-  const [filters, setFilters] = useState<EventSearchValues>(() => initialFilters);
-  const [page, setPage] = useState(0);
+  const navigate = useNavigate({ from: Route.fullPath });
   const [mobileOpen, setMobileOpen] = useState(false);
-  const empty = isEmptySearch(filters);
-  const matchesInitial = JSON.stringify(filters) === JSON.stringify(initialFilters);
 
-  const { data = initial, isFetching } = useQuery({
-    queryKey: ["events", filters, page],
-    queryFn: () =>
-      listEvents({
-        data: {
-          ...searchToApi(filters),
-          sport: (searchToApi(filters).sport as Sport | undefined) ?? undefined,
-          upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
-          limit: PAGE_SIZE + 1,
-          offset: page * PAGE_SIZE,
-        },
-      }),
-    initialData: matchesInitial && page === 0 ? initial : undefined,
-    placeholderData: (prev) => prev,
-    staleTime: 30_000,
-    refetchOnMount: false,
-  });
+  const filters = filtersFromSearch(routeSearch);
+  const page = routeSearch.page ?? 1;
+  const empty = isEmptySearch(filters);
   const visibleEvents = data.slice(0, PAGE_SIZE);
   const hasNextPage = data.length > PAGE_SIZE;
-  const firstEventNumber = visibleEvents.length ? page * PAGE_SIZE + 1 : 0;
-  const lastEventNumber = page * PAGE_SIZE + visibleEvents.length;
+  const firstEventNumber = visibleEvents.length ? (page - 1) * PAGE_SIZE + 1 : 0;
+  const lastEventNumber = (page - 1) * PAGE_SIZE + visibleEvents.length;
 
   const updateFilters = (next: EventSearchValues) => {
-    setFilters(next);
-    setPage(0);
+    void navigate({
+      to: "/races",
+      search: searchFromFilters(next),
+      replace: true,
+      resetScroll: false,
+    });
+  };
+
+  const changePage = (nextPage: number) => {
+    const safePage = Math.min(Math.max(nextPage, 1), MAX_PAGE);
+    void navigate({
+      to: "/races",
+      search: {
+        ...routeSearch,
+        page: safePage > 1 ? safePage : undefined,
+      },
+      resetScroll: true,
+    });
   };
 
   return (
@@ -119,8 +177,8 @@ function EventsPage() {
         <div className="space-y-2">
           <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Events</h1>
           <p className="max-w-2xl text-sm text-muted">
-            Search by country, county, city, postcode, month or date range. Use the sidebar filters
-            for sport, distance and surface.
+            Search by country, county, city, postcode, month or date range. Every selection is
+            reflected in the address so this view can be bookmarked or shared.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -132,7 +190,7 @@ function EventsPage() {
           </Link>
           <button
             type="button"
-            onClick={() => setMobileOpen((o) => !o)}
+            onClick={() => setMobileOpen((open) => !open)}
             className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg lg:hidden"
           >
             {mobileOpen ? "Hide filters" : "Show filters"}
@@ -146,7 +204,6 @@ function EventsPage() {
       </header>
 
       <div className="grid gap-5 lg:grid-cols-[minmax(260px,300px)_1fr] lg:items-start">
-        {/* Sidebar — always visible on lg+, collapsible on mobile */}
         <div
           className={
             mobileOpen
@@ -163,10 +220,9 @@ function EventsPage() {
               {visibleEvents.length
                 ? `Events ${firstEventNumber}–${lastEventNumber}`
                 : "0 events shown"}
-              {isFetching ? " · Updating…" : ""}
             </p>
-            {page > 0 || hasNextPage ? (
-              <p className="text-xs font-medium text-muted">Page {page + 1}</p>
+            {page > 1 || hasNextPage ? (
+              <p className="text-xs font-medium text-muted">Page {page}</p>
             ) : null}
           </div>
 
@@ -176,28 +232,28 @@ function EventsPage() {
                 No events match those filters. Try clearing search or widening the date range.
               </p>
             ) : (
-              visibleEvents.map((r) => <RaceCard key={r.id} race={r} />)
+              visibleEvents.map((race) => <RaceCard key={race.id} race={race} />)
             )}
           </div>
 
-          {page > 0 || hasNextPage ? (
+          {page > 1 || hasNextPage ? (
             <nav
               aria-label="Event pages"
               className="flex items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3 shadow-card"
             >
               <button
                 type="button"
-                onClick={() => setPage((current) => Math.max(0, current - 1))}
-                disabled={page === 0 || isFetching}
+                onClick={() => changePage(page - 1)}
+                disabled={page === 1}
                 className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-4 text-sm font-medium text-fg disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Previous
               </button>
-              <span className="text-sm text-subtle">Page {page + 1}</span>
+              <span className="text-sm text-subtle">Page {page}</span>
               <button
                 type="button"
-                onClick={() => setPage((current) => current + 1)}
-                disabled={!hasNextPage || isFetching}
+                onClick={() => changePage(page + 1)}
+                disabled={!hasNextPage || page >= MAX_PAGE}
                 className="inline-flex h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-fg disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Next

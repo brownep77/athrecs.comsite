@@ -25,7 +25,17 @@ import {
 import { SITE_URL } from "@/lib/athrecs/seo";
 import type { EventListItem, Sport } from "@/lib/athrecs/types";
 
+const BOARD_VIEWS = ["upcoming", "results", "regional"] as const;
+type BoardView = (typeof BOARD_VIEWS)[number];
+
 export const Route = createFileRoute("/")({
+  validateSearch: (search: Record<string, unknown>): { board?: BoardView } => {
+    const board =
+      typeof search.board === "string" && BOARD_VIEWS.includes(search.board as BoardView)
+        ? (search.board as BoardView)
+        : undefined;
+    return { board: board && board !== "upcoming" ? board : undefined };
+  },
   head: () => ({
     links: [{ rel: "canonical", href: SITE_URL }],
   }),
@@ -72,13 +82,12 @@ const qualifiers = [
   { name: "Two Oceans", slug: "two-oceans-marathon" },
 ] as const;
 
-type BoardView = "upcoming" | "results" | "regional";
-
 function HomePage() {
   const { stats, running, updates } = Route.useLoaderData();
   const navigate = useNavigate();
+  const routeSearch = Route.useSearch();
   const [query, setQuery] = useState("");
-  const [boardView, setBoardView] = useState<BoardView>("upcoming");
+  const boardView = routeSearch.board ?? "upcoming";
 
   const results = useMemo(
     () => updates.filter((update) => update.kind === "results").slice(0, 4),
@@ -208,7 +217,14 @@ function HomePage() {
                   role="tab"
                   aria-controls="race-board-panel"
                   aria-selected={boardView === view}
-                  onClick={() => setBoardView(view)}
+                  onClick={() => {
+                    void navigate({
+                      to: "/",
+                      search: { board: view === "upcoming" ? undefined : view },
+                      replace: true,
+                      resetScroll: false,
+                    });
+                  }}
                   className={`min-h-9 rounded-lg border px-3 text-sm font-semibold capitalize transition-colors ${
                     boardView === view
                       ? "border-primary bg-primary text-primary-fg"

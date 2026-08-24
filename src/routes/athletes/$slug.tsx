@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, BadgeCheck, MapPin } from "lucide-react";
 import { getAthleteBySlug } from "@/lib/athrecs/api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
@@ -6,13 +6,35 @@ import { athletes as athleteCatalogue } from "@/data/athletes";
 import { publicFigureAthletes } from "@/data/public-figures";
 import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
+import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
     const data = await getAthleteBySlug({ data: params.slug });
-    if (!data) throw notFound();
-    const seed = [...athleteCatalogue, ...publicFigureAthletes].find((a) => a.slug === params.slug);
+    if (!data) {
+      const currentSlug = await resolveSlugRedirect({
+        data: { entityType: "athlete", slug: params.slug },
+      });
+      if (currentSlug && currentSlug !== params.slug) {
+        throw redirect({
+          to: "/athletes/$slug",
+          params: { slug: currentSlug },
+          statusCode: 301,
+        });
+      }
+      throw notFound();
+    }
+    if (data.athlete.slug !== params.slug) {
+      throw redirect({
+        to: "/athletes/$slug",
+        params: { slug: data.athlete.slug },
+        statusCode: 301,
+      });
+    }
+    const seed = [...athleteCatalogue, ...publicFigureAthletes].find(
+      (athlete) => athlete.slug === data.athlete.slug,
+    );
     return {
       ...data,
       athlete: {

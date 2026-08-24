@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
   ArrowLeft,
@@ -44,6 +44,8 @@ import { timeZoneAbbr, timeZoneForPlace } from "@/lib/athrecs/timezone";
 import { buildRaceBriefing, sportLabel } from "@/lib/athrecs/race-briefing";
 import { raceFormatGuideFor } from "@/data/race-format-guides";
 import { raceQualifications, type RaceQualification } from "@/data/race-qualifications";
+import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
+import { SITE_NAME, SITE_URL, siteGraphMeta, sportsEventJsonLd } from "@/lib/athrecs/seo";
 
 type EditionRow = {
   id: number;
@@ -64,19 +66,65 @@ type EditionRow = {
 export const Route = createFileRoute("/races/$slug")({
   loader: async ({ params }) => {
     const data = await getEventBySlug({ data: params.slug });
-    if (!data) throw notFound();
-    return data;
+    if (data) {
+      if (data.event.slug !== params.slug) {
+        throw redirect({
+          to: "/races/$slug",
+          params: { slug: data.event.slug },
+          statusCode: 301,
+        });
+      }
+      return data;
+    }
+
+    const currentSlug = await resolveSlugRedirect({
+      data: { entityType: "event", slug: params.slug },
+    });
+    if (currentSlug && currentSlug !== params.slug) {
+      throw redirect({
+        to: "/races/$slug",
+        params: { slug: currentSlug },
+        statusCode: 301,
+      });
+    }
+    throw notFound();
   },
   head: ({ loaderData }) => {
-    const name = loaderData?.event.name ?? "Event";
-    const city = loaderData?.event.city;
-    const title = city ? `${name} — ${city} | ATHRECS` : `${name} | ATHRECS`;
+    if (!loaderData) return {};
+    const { event, upcoming } = loaderData;
+    const canonical = `${SITE_URL}/races/${event.slug}`;
+    const title = event.city
+      ? `${event.name} — ${event.city} | ${SITE_NAME}`
+      : `${event.name} | ${SITE_NAME}`;
+    const description =
+      event.summary ||
+      `ATHRECS event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`;
+    const next = upcoming[0];
+
     return {
-      meta: [
-        { title },
+      meta: siteGraphMeta({
+        title,
+        description,
+        url: canonical,
+        type: "website",
+      }),
+      links: [{ rel: "canonical", href: canonical }],
+      scripts: [
         {
-          name: "description",
-          content: `ATHRECS event page for ${name}: date, local start, venue, distances and past races. Confirm entry on the official site.`,
+          type: "application/ld+json",
+          children: JSON.stringify(
+            sportsEventJsonLd({
+              name: event.name,
+              slug: event.slug,
+              description,
+              city: event.city,
+              country: event.country,
+              startDate: next?.event_date,
+              startTime: next?.start_time,
+              sport: event.sport,
+              website: event.website,
+            }),
+          ),
         },
       ],
     };
@@ -349,9 +397,7 @@ export function RacePageContent({
                 {formatGuide.title}
               </h2>
             </div>
-            <p className="max-w-4xl text-sm leading-relaxed text-muted">
-              {formatGuide.overview}
-            </p>
+            <p className="max-w-4xl text-sm leading-relaxed text-muted">{formatGuide.overview}</p>
           </div>
 
           <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -384,9 +430,7 @@ export function RacePageContent({
                       <th scope="row" className="px-3 py-2.5 font-semibold text-fg">
                         {stage.stage}
                       </th>
-                      <td className="px-3 py-2.5 font-medium tabular text-fg">
-                        {stage.distance}
-                      </td>
+                      <td className="px-3 py-2.5 font-medium tabular text-fg">{stage.distance}</td>
                       <td className="px-3 py-2.5 text-muted">{stage.detail}</td>
                     </tr>
                   ))}
