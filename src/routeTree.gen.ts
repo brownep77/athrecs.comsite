@@ -23,6 +23,7 @@ import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-r
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
+import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
@@ -105,6 +106,11 @@ const AdminSourcesRoute = AdminSourcesRouteImport.update({
   path: '/admin/sources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCatalogueAutomationRoute = ApiCatalogueAutomationRouteImport.update({
+  id: '/api/catalogue-automation',
+  path: '/api/catalogue-automation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AthletesIndexRoute = AthletesIndexRouteImport.update({
   id: '/athletes/',
   path: '/athletes/',
@@ -172,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -198,6 +205,7 @@ export interface FileRoutesByTo {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -225,6 +233,7 @@ export interface FileRoutesById {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -253,6 +262,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -279,6 +289,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -305,6 +316,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -332,6 +344,7 @@ export interface RootRouteChildren {
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
+  ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
@@ -445,6 +458,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/catalogue-automation': {
+      id: '/api/catalogue-automation'
+      path: '/api/catalogue-automation'
+      fullPath: '/api/catalogue-automation'
+      preLoaderRoute: typeof ApiCatalogueAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/athletes/': {
       id: '/athletes/'
       path: '/athletes'
@@ -532,6 +552,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResultClaimsRoute: AdminResultClaimsRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
+  ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   ClubsSlugRoute: ClubsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,

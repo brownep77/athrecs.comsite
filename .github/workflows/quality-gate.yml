@@ -75,6 +75,26 @@ jobs:
               exit 1
             }
 
+      - name: Catalogue automation authentication smoke test
+        run: |
+          status=$(curl \
+            --silent \
+            --show-error \
+            --max-time 30 \
+            --output artifacts/catalogue-automation-unauthenticated.json \
+            --write-out '%{http_code}' \
+            --request POST \
+            --header 'content-type: application/json' \
+            --data '{"sourceKey":"athrecs-holding:delta:unauthenticated","events":[],"editions":[]}' \
+            http://127.0.0.1:8080/api/catalogue-automation)
+          if [ "$status" != "401" ]; then
+            cat artifacts/catalogue-automation-unauthenticated.json
+            echo "Expected HTTP 401, received $status"
+            exit 1
+          fi
+          grep -F "OIDC bearer token is required" \
+            artifacts/catalogue-automation-unauthenticated.json
+
       - name: Browser smoke tests
         run: |
           node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
