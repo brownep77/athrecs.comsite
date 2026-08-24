@@ -214,7 +214,7 @@ const socialProviders = {
         google: {
           clientId: googleClientId as string,
           clientSecret: googleClientSecret as string,
-          prompt: "select_account",
+          prompt: "select_account" as const,
           requireEmailVerification: true,
         },
       }
@@ -238,7 +238,7 @@ const socialProviders = {
           clientSecret: microsoftClientSecret as string,
           tenantId: microsoftTenantId,
           authority: "https://login.microsoftonline.com",
-          prompt: "select_account",
+          prompt: "select_account" as const,
         },
       }
     : {}),
