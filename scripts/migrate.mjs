@@ -13,6 +13,7 @@
  * deliberately strict: a missing or unreachable database fails the deployment,
  * leaving Vercel's previous known-good application and schema live.
  */
+import "./verify-deployment-auth-env.mjs";
 import { readdir, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
