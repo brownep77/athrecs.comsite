@@ -12,6 +12,7 @@ import {
   Loader2,
   LockKeyhole,
   LogOut,
+  RefreshCcw,
   ShieldCheck,
   UserRoundCog,
 } from "lucide-react";
@@ -35,6 +36,13 @@ const staffNav = [
     label: "Dashboard",
     icon: ShieldCheck,
     match: (path: string) => path === "/admin",
+  },
+  {
+    // The committed route tree is refreshed by the Vite build.
+    to: "/admin/catalogue-recovery-emergency" as never,
+    label: "Catalogue recovery",
+    icon: RefreshCcw,
+    match: (path: string) => path.startsWith("/admin/catalogue-recovery"),
   },
   {
     to: "/admin/data-intelligence",

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { dbSource } from "@/lib/db";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 
-const getEmergencyCatalogueRecoveryStatus = createServerFn({ method: "GET" })
+const getStaffCatalogueRecoveryStatus = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .handler(async () => {
     if (dbSource !== "neon") {
@@ -18,7 +18,7 @@ const getEmergencyCatalogueRecoveryStatus = createServerFn({ method: "GET" })
     return getCatalogueRecoveryStatus();
   });
 
-const runEmergencyCatalogueRecoveryBatch = createServerFn({ method: "POST" })
+const runStaffCatalogueRecoveryBatch = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .handler(async () => {
     if (dbSource !== "neon") {
@@ -35,36 +35,36 @@ const runEmergencyCatalogueRecoveryBatch = createServerFn({ method: "POST" })
 export const Route = createFileRoute("/admin/catalogue-recovery-emergency")({
   head: () => ({
     meta: [
-      { title: "Emergency catalogue recovery — ATHRECS" },
+      { title: "Catalogue recovery — ATHRECS Staff" },
       { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
   }),
-  component: EmergencyCatalogueRecoveryPage,
+  component: CatalogueRecoveryPage,
 });
 
 function messageFromError(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-function EmergencyCatalogueRecoveryPage() {
+function CatalogueRecoveryPage() {
   const queryClient = useQueryClient();
   const [message, setMessage] = useState<string | null>(null);
 
   const statusQuery = useQuery({
-    queryKey: ["emergency-catalogue-recovery"],
-    queryFn: () => getEmergencyCatalogueRecoveryStatus(),
+    queryKey: ["staff-catalogue-recovery"],
+    queryFn: () => getStaffCatalogueRecoveryStatus(),
     refetchInterval: 10_000,
     retry: 1,
   });
 
   const recovery = useMutation({
     mutationFn: async () => {
-      let status = await runEmergencyCatalogueRecoveryBatch();
-      queryClient.setQueryData(["emergency-catalogue-recovery"], status);
+      let status = await runStaffCatalogueRecoveryBatch();
+      queryClient.setQueryData(["staff-catalogue-recovery"], status);
 
       for (let attempt = 0; !status.complete && attempt < 200; attempt += 1) {
-        status = await runEmergencyCatalogueRecoveryBatch();
-        queryClient.setQueryData(["emergency-catalogue-recovery"], status);
+        status = await runStaffCatalogueRecoveryBatch();
+        queryClient.setQueryData(["staff-catalogue-recovery"], status);
       }
 
       if (!status.complete) {
@@ -90,13 +90,11 @@ function EmergencyCatalogueRecoveryPage() {
     <div className="mx-auto max-w-3xl space-y-6 py-6">
       <header className="space-y-2">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-          Staff recovery tool
+          System maintenance
         </p>
-        <h1 className="font-display text-3xl font-semibold text-fg">
-          Restore the production catalogue
-        </h1>
+        <h1 className="font-display text-3xl font-semibold text-fg">Catalogue recovery</h1>
         <p className="text-sm leading-6 text-muted">
-          This append-only recovery restores missing catalogue events and editions in small,
+          Monitor the production catalogue and restore missing events or editions in small,
           resumable Neon transactions. Existing results, athlete accounts, claims and organiser
           data are preserved.
         </p>
@@ -104,7 +102,7 @@ function EmergencyCatalogueRecoveryPage() {
 
       <section className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">
         {statusQuery.isLoading && (
-          <p className="text-sm text-muted">Checking the recovery state…</p>
+          <p className="text-sm text-muted">Checking the catalogue recovery state…</p>
         )}
 
         {error && (
@@ -178,7 +176,7 @@ function EmergencyCatalogueRecoveryPage() {
 
         {recovery.isPending && (
           <p className="text-sm text-muted">
-            Keep this page open. The recovery is resumable if the connection is interrupted.
+            Keep this page open. Recovery is resumable if the connection is interrupted.
           </p>
         )}
 
