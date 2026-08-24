@@ -13,6 +13,7 @@ const [
   methodsApi,
   dialog,
   header,
+  rootRoute,
   email,
   emailFlag,
   envExample,
@@ -23,6 +24,7 @@ const [
   read("src/lib/auth/auth-methods-api.ts"),
   read("src/components/auth/AthleteAuthDialog.tsx"),
   read("src/components/auth/AthleteAccountAccess.tsx"),
+  read("src/routes/__root.tsx"),
   read("src/lib/auth/email.server.ts"),
   read("src/lib/auth/email-password.ts"),
   read(".env.example"),
@@ -68,11 +70,12 @@ assert.match(dialog, /Create account with email/);
 assert.match(dialog, /requestPasswordReset/);
 assert.match(dialog, /resetPassword/);
 assert.match(dialog, /Resend verification email/);
-assert.match(header, /AthleteAuthDialog/);
+assert.doesNotMatch(header, /AthleteAuthDialog/);
+assert.match(rootRoute, /AthleteAuthDialog/);
 assert.match(email, /https:\/\/api\.resend\.com\/emails/);
 assert.match(email, /ATHRECS\.com/);
 assert.match(docs, /Strava, Garmin Connect, COROS, Instagram and TikTok/);
 
 console.log(
-  "Authentication verification passed: manual email, recovery, focused provider gating, multi-social chooser and callback safeguards are present.",
+  "Authentication verification passed: manual email, recovery, one global multi-social chooser and callback safeguards are present.",
 );

@@ -6,8 +6,9 @@ import {
   useRouterState,
 } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { AppShell } from "@/components/layout/AppShell";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
+import { AthleteAuthDialog } from "@/components/auth/AthleteAuthDialog";
+import { AppShell } from "@/components/layout/AppShell";
 import { isSiteLanguage } from "@/lib/athrecs/country-sites";
 import {
   DEFAULT_DESCRIPTION,
@@ -79,6 +80,7 @@ function RootComponent() {
           <AppShell>
             <Outlet />
           </AppShell>
+          <AthleteAuthDialog />
           <SiteAnalytics />
         </QueryClientProvider>
         <Scripts />
