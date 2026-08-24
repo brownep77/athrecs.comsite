@@ -1,0 +1,68 @@
+name: Apply PR 235 safety corrections
+
+on:
+  push:
+    branches:
+      - codex/athrecs-stability-and-slugs
+    paths:
+      - scripts/apply-pr235-safety-corrections.py
+      - .github/workflows/apply-pr235-safety.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-pr235-safety
+  cancel-in-progress: false
+
+jobs:
+  apply-and-verify:
+    if: github.repository == 'brownep77/athrecs.comsite' && github.ref == 'refs/heads/codex/athrecs-stability-and-slugs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: codex/athrecs-stability-and-slugs
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Apply reviewed corrections
+        run: python scripts/apply-pr235-safety-corrections.py --repo . --allow-different-head --verify
+
+      - name: Run complete quality gate
+        run: npm run ci:verify
+
+      - name: Verify bounded diff
+        run: |
+          git diff --check
+          git status --short
+          unexpected=$(git diff --name-only | grep -vE '^(.github/workflows/quality-gate.yml|migrations/0017_slug_insert_guards.sql|scripts/migrate.mjs|scripts/verify-catalogue-publishing.mjs|scripts/verify-slug-stability.mjs|src/lib/athrecs/catalogue-publishing.server.ts|src/lib/athrecs/import.server.ts|src/routes/admin/catalogue-publishing.tsx)$' || true)
+          if [ -n "$unexpected" ]; then
+            echo "Unexpected changed paths:"
+            echo "$unexpected"
+            exit 1
+          fi
+
+      - name: Commit verified corrections
+        run: |
+          git config user.name "Athrecs Safety Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          git add -- \
+            .github/workflows/quality-gate.yml \
+            migrations/0017_slug_insert_guards.sql \
+            scripts/migrate.mjs \
+            scripts/verify-catalogue-publishing.mjs \
+            scripts/verify-slug-stability.mjs \
+            src/lib/athrecs/catalogue-publishing.server.ts \
+            src/lib/athrecs/import.server.ts \
+            src/routes/admin/catalogue-publishing.tsx
+          git commit -m "Harden slug, migration and catalogue rollback safety"
+          git push origin HEAD:codex/athrecs-stability-and-slugs
