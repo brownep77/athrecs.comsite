@@ -50,29 +50,32 @@ try {
     .first();
   await headerSignIn.click();
 
-  const dialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
-  await dialog.waitFor({ state: "visible", timeout: timeoutMs });
+  const signInDialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
+  await signInDialog.waitFor({ state: "visible", timeout: timeoutMs });
 
   // The dialog renders immediately, then loads the list of methods through a
   // server function. Wait for that asynchronous state rather than asserting
   // during the temporary "Loading secure sign-in methods" view.
-  const googleButton = dialog.getByRole("button", { name: "Continue with Google" });
+  const googleButton = signInDialog.getByRole("button", { name: "Continue with Google" });
   await googleButton.waitFor({ state: "visible", timeout: timeoutMs });
   record("Google is offered in the chooser", true);
 
-  const createAccountTab = dialog.getByRole("tab", { name: "Create account" });
+  const createAccountTab = signInDialog.getByRole("tab", { name: "Create account" });
   await createAccountTab.waitFor({ state: "visible", timeout: timeoutMs });
   record("manual sign-up tab is offered", true);
 
   await createAccountTab.click();
-  await page
-    .getByRole("heading", { name: "Create an Athlete Account" })
-    .waitFor({ state: "visible", timeout: timeoutMs });
+  // The dialog's accessible name follows its heading, so switching tabs changes
+  // the named dialog from "Sign in to ATHRECS" to "Create an Athlete Account".
+  const signUpDialog = page.getByRole("dialog", { name: "Create an Athlete Account" });
+  await signUpDialog.waitFor({ state: "visible", timeout: timeoutMs });
 
-  const fullName = dialog.locator('input[autocomplete="name"]');
-  const email = dialog.locator('input[autocomplete="email"]');
-  const newPasswords = dialog.locator('input[autocomplete="new-password"]');
-  const createWithEmail = dialog.getByRole("button", { name: "Create account with email" });
+  const fullName = signUpDialog.locator('input[autocomplete="name"]');
+  const email = signUpDialog.locator('input[autocomplete="email"]');
+  const newPasswords = signUpDialog.locator('input[autocomplete="new-password"]');
+  const createWithEmail = signUpDialog.getByRole("button", {
+    name: "Create account with email",
+  });
   for (const field of [fullName, email, newPasswords.first(), createWithEmail]) {
     await field.waitFor({ state: "visible", timeout: timeoutMs });
   }
@@ -83,8 +86,8 @@ try {
   record("email account action is present", true);
 
   await page.screenshot({ path: outPng, fullPage: false });
-  await page.getByRole("button", { name: "Close sign-in" }).click();
-  await dialog.waitFor({ state: "hidden", timeout: timeoutMs });
+  await signUpDialog.getByRole("button", { name: "Close sign-in" }).click();
+  await signUpDialog.waitFor({ state: "hidden", timeout: timeoutMs });
 
   await page.goto(new URL("/claim-results", baseUrl).href, {
     waitUntil: "networkidle",
@@ -92,10 +95,10 @@ try {
   });
   const claimSignIn = page.getByRole("button", { name: "Sign in or create account" });
   await claimSignIn.click();
-  await page
-    .getByRole("dialog", { name: "Sign in to ATHRECS" })
-    .waitFor({ state: "visible", timeout: timeoutMs });
-  await page.getByRole("button", { name: "Close sign-in" }).click();
+  const claimDialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
+  await claimDialog.waitFor({ state: "visible", timeout: timeoutMs });
+  await claimDialog.getByRole("button", { name: "Close sign-in" }).click();
+  await claimDialog.waitFor({ state: "hidden", timeout: timeoutMs });
   record("claim sign-in button resets after chooser closes", !(await claimSignIn.isDisabled()));
 
   record("page emitted no runtime errors", pageErrors.length === 0);
