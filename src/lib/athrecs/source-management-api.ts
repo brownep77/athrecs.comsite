@@ -12,7 +12,7 @@ export const getSourceManagement = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .handler(async () => {
     const { getSourceManagementDashboard } = await import("./source-management.server");
-    return JSON.parse(JSON.stringify(await getSourceManagementDashboard()));
+    return getSourceManagementDashboard();
   });
 
 export const previewSourceImportCsv = createServerFn({ method: "POST" })
