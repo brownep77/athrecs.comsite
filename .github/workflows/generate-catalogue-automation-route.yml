@@ -9,7 +9,7 @@ on:
       - src/routes/api/catalogue-automation.ts
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   generate:
@@ -17,6 +17,9 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: codex/automated-catalogue-staging
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -30,9 +33,12 @@ jobs:
           npx vite build
           grep -F "/api/catalogue-automation" src/routeTree.gen.ts
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: catalogue-automation-route-tree
-          path: src/routeTree.gen.ts
-          if-no-files-found: error
-          retention-days: 1
+      - name: Commit generated route tree
+        run: |
+          git config user.name "Athrecs Safety Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -- src/routeTree.gen.ts
+          if ! git diff --cached --quiet; then
+            git commit -m "Register catalogue automation route"
+            git push origin HEAD:codex/automated-catalogue-staging
+          fi
