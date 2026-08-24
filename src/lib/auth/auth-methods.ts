@@ -14,8 +14,7 @@ export type DirectSocialProviderId =
   | "microsoft"
   | "facebook"
   | "twitter"
-  | "linkedin"
-  | "github";
+  | "linkedin";
 
 export type BrokerSocialProviderId = "grok-google" | "grok-x";
 export type AthleteAuthProviderId = DirectSocialProviderId | BrokerSocialProviderId;
@@ -39,7 +38,6 @@ export const DIRECT_SOCIAL_PROVIDER_LABELS: Record<DirectSocialProviderId, strin
   facebook: "Facebook",
   twitter: "X",
   linkedin: "LinkedIn",
-  github: "GitHub",
 };
 
 /** Keep all return destinations on the current Athrecs origin. */
