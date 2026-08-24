@@ -1,0 +1,60 @@
+name: Fix PR 235 slug truncation
+
+on:
+  push:
+    branches:
+      - codex/athrecs-stability-and-slugs
+    paths:
+      - .github/workflows/fix-pr235-slugify.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.repository == 'brownep77/athrecs.comsite' && github.ref == 'refs/heads/codex/athrecs-stability-and-slugs'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: codex/athrecs-stability-and-slugs
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Trim generated slugs after fixed-length truncation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('src/lib/athrecs/import.server.ts')
+          content = path.read_text(encoding='utf-8')
+          old = '''    .replace(/^-+|-+$/g, "")
+              .slice(0, 80);'''
+          new = '''    .replace(/^-+|-+$/g, "")
+              .slice(0, 80)
+              .replace(/-+$/g, "");'''
+          if content.count(old) != 1:
+              raise SystemExit(f'Expected one slugify anchor, found {content.count(old)}')
+          path.write_text(content.replace(old, new), encoding='utf-8')
+          PY
+
+      - name: Install and verify focused change
+        run: |
+          npm ci
+          npm run verify:slug-stability
+          npm run typecheck
+          npm run lint
+          git diff --check
+
+      - name: Commit focused fix
+        run: |
+          git config user.name "Athrecs Safety Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          git add -- src/lib/athrecs/import.server.ts
+          git commit -m "Trim generated slugs after length limiting"
+          git push origin HEAD:codex/athrecs-stability-and-slugs
