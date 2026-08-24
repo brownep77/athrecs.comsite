@@ -84,7 +84,10 @@ export async function signIn(
   const callbackURL = safeAuthCallback(options.callbackURL);
   if (providerId === "grok-google" && !callbackURL.startsWith("/admin")) {
     openAthleteAuth({ ...options, callbackURL });
-    return;
+    // The two legacy public buttons set a local loading state before awaiting
+    // this function and clear it in their catch handler. An empty error resets
+    // those buttons without displaying an error, while the chooser stays open.
+    throw new Error("");
   }
   await signInWithProvider(providerId as AthleteAuthProviderId, {
     ...options,
