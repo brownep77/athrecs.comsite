@@ -37,7 +37,16 @@ export const stageFixtureVerificationCandidate = createServerFn({ method: "POST"
   .handler(async ({ data, context }) => {
     requirePersistentDatabase();
     const { stageVerificationCandidate } = await import("./verification-workflow.server");
-    return stageVerificationCandidate(data, context.staffEmail);
+    const result = await stageVerificationCandidate(data, context.staffEmail);
+    return {
+      ...result,
+      duplicate: result.duplicate ?? {
+        duplicateStatus: "matched_existing" as const,
+        matchedEventId: null,
+        matchedEditionId: null,
+        duplicateNote: "An existing private candidate was reused.",
+      },
+    };
   });
 
 export const saveFixtureCandidateReview = createServerFn({ method: "POST" })
