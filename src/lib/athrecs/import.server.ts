@@ -308,6 +308,7 @@ export function parseEventsCsv(csv: string): {
 export type ApplyImportOptions = {
   sqlOverride?: Sql;
   preserveExistingEvents?: boolean;
+  preserveExistingPrimaryEntry?: boolean;
 };
 
 export async function applyImportBundle(
@@ -413,6 +414,11 @@ export async function applyImportBundle(
       `;
       if (!again[0]) throw new Error(`Could not resolve event ${slug}`);
       const status = parseStatus(raw.status);
+      const hasExplicitPrimary = (raw.entryOptions ?? []).some(
+        (option) => option.isPrimary === true,
+      );
+      const preserveCurrentPrimary =
+        importOptions.preserveExistingPrimaryEntry === true && !hasExplicitPrimary;
       const editionRows = await sql<{ id: number }>`
         insert into editions (
           event_id, event_date, distance_code, distance_km, status,
@@ -425,7 +431,17 @@ export async function applyImportBundle(
         on conflict (event_id, event_date, distance_code) do update set
           distance_km = excluded.distance_km,
           status = excluded.status,
-          entry_url = coalesce(excluded.entry_url, editions.entry_url),
+          entry_url = case
+            when ${preserveCurrentPrimary}
+              and exists (
+                select 1
+                from edition_entry_options current_option
+                where current_option.edition_id = editions.id
+                  and current_option.is_primary
+              )
+            then editions.entry_url
+            else coalesce(excluded.entry_url, editions.entry_url)
+          end,
           source_url = coalesce(excluded.source_url, editions.source_url),
           start_time = excluded.start_time
         returning id
@@ -457,11 +473,16 @@ export async function applyImportBundle(
         });
       }
 
+      const seenProviderCodes = new Set<string>();
       const normalizedOptions = options.map((option) => {
         const providerName = option.providerName?.trim();
         if (!providerName) throw new Error("Entry provider needs providerName");
         const providerCode = slugify(option.providerCode || providerName);
         if (!providerCode) throw new Error(`Could not create provider code for ${providerName}`);
+        if (seenProviderCodes.has(providerCode)) {
+          throw new Error(`Duplicate entry provider code for this edition: ${providerCode}`);
+        }
+        seenProviderCodes.add(providerCode);
         const entryType = parseEntryOptionType(
           option.entryType,
           providerCode === "official" ? "official" : "third_party",
@@ -497,12 +518,34 @@ export async function applyImportBundle(
         };
       });
 
-      const explicitPrimary = normalizedOptions.findIndex((option) => option.isPrimary);
+      const currentPrimaryRows = preserveCurrentPrimary
+        ? await sql<{ provider_code: string }>`
+            select provider_code
+            from edition_entry_options
+            where edition_id = ${editionId} and is_primary
+            limit 1
+          `
+        : [];
+      const currentPrimaryCode = currentPrimaryRows[0]?.provider_code ?? null;
+      const explicitPrimary = hasExplicitPrimary
+        ? normalizedOptions.findIndex((option) => option.isPrimary)
+        : -1;
+      const currentPrimaryIndex = currentPrimaryCode
+        ? normalizedOptions.findIndex((option) => option.providerCode === currentPrimaryCode)
+        : -1;
       const officialPrimary = normalizedOptions.findIndex(
         (option) => option.entryType === "official",
       );
-      const primaryIndex = explicitPrimary >= 0 ? explicitPrimary : officialPrimary;
-      if (primaryIndex >= 0) {
+      const primaryIndex =
+        explicitPrimary >= 0
+          ? explicitPrimary
+          : currentPrimaryIndex >= 0
+            ? currentPrimaryIndex
+            : currentPrimaryCode
+              ? -1
+              : officialPrimary;
+      const replacePrimary = explicitPrimary >= 0 || (!currentPrimaryCode && primaryIndex >= 0);
+      if (replacePrimary) {
         await sql`
           update edition_entry_options
           set is_primary = false, updated_at = now()

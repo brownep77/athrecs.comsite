@@ -14,6 +14,8 @@ const required = {
     "validateCatalogueBatch",
     "publishCatalogueBatch",
     "rollbackCatalogueRevision",
+    "assertSnapshotUnchanged",
+    "preserveExistingPrimaryEntry",
     ".transaction(",
     "for update",
   ],
@@ -29,6 +31,9 @@ const required = {
     "Validate",
     "Publish",
     "Roll back",
+    "window.prompt",
+    "PUBLISH ",
+    "ROLLBACK ",
   ],
 };
 
@@ -47,10 +52,31 @@ for (const [path, patterns] of Object.entries(required)) {
 }
 
 const importServer = await readFile("src/lib/athrecs/import.server.ts", "utf8");
-for (const pattern of ["type Sql", "sqlOverride", "preserveExistingEvents"]) {
+for (const pattern of [
+  "type Sql",
+  "sqlOverride",
+  "preserveExistingEvents",
+  "preserveExistingPrimaryEntry",
+]) {
   if (!importServer.includes(pattern)) {
     failures.push(`src/lib/athrecs/import.server.ts: missing ${pattern}`);
   }
+}
+
+const adminPage = await readFile("src/routes/admin/catalogue-publishing.tsx", "utf8");
+for (const forbidden of ["https://example.org", "Example 10K"]) {
+  if (adminPage.includes(forbidden)) {
+    failures.push(`src/routes/admin/catalogue-publishing.tsx: publishable sample remains: ${forbidden}`);
+  }
+}
+
+const migrator = await readFile("scripts/migrate.mjs", "utf8");
+for (const pattern of [
+  "strictMigrations",
+  'process.env.VERCEL_ENV === "production"',
+  "isTransientDbError(err) && !strictMigrations",
+]) {
+  if (!migrator.includes(pattern)) failures.push(`scripts/migrate.mjs: missing ${pattern}`);
 }
 
 if (failures.length) {

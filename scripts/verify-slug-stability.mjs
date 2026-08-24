@@ -13,6 +13,16 @@ const checks = [
     ],
   },
   {
+    path: "migrations/0017_slug_insert_guards.sql",
+    patterns: [
+      "before insert or update of slug on events",
+      "before insert or update of slug on athletes",
+      "before insert or update of slug on clubs",
+      "redirect.old_slug = new.slug",
+      "redirect.current_slug = new.slug",
+    ],
+  },
+  {
     path: "src/routes/races/index.tsx",
     patterns: [
       "county?: string",

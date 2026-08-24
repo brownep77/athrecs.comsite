@@ -9,17 +9,27 @@
  * No DATABASE_URL (local / preview builds) -> skip; the PGLite fallback applies
  * the same files at startup instead (see src/lib/db.ts).
  *
- * Connection/transient network failures exit 0 with a warning so the Vite
- * artifact still publishes; schema is also created at runtime via seed helpers.
- * SQL/schema errors still fail the build (exit 1).
+ * Local and preview builds may skip an unavailable database. Production is
+ * deliberately strict: a missing or unreachable database fails the deployment,
+ * leaving Vercel's previous known-good application and schema live.
  */
 import { readdir, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import pg from "pg";
 
+const strictMigrations =
+  process.env.MIGRATIONS_STRICT === "true" ||
+  process.env.MIGRATIONS_REQUIRED === "true" ||
+  process.env.VERCEL_ENV === "production";
 const databaseUrl = process.env.DATABASE_URL?.trim();
 if (!databaseUrl) {
+  if (strictMigrations) {
+    console.error(
+      "[migrate] DATABASE_URL is required for production; refusing an ephemeral deployment.",
+    );
+    process.exit(1);
+  }
   console.log(
     "[migrate] DATABASE_URL not set — skipping (the PGLite fallback migrates itself).",
   );
@@ -89,9 +99,9 @@ async function main() {
   try {
     client = await connectWithRetry(pool);
   } catch (err) {
-    if (isTransientDbError(err)) {
+    if (isTransientDbError(err) && !strictMigrations) {
       console.warn(
-        "[migrate] could not reach DATABASE_URL — skipping migrations for this build.",
+        "[migrate] could not reach DATABASE_URL — skipping migrations for this non-production build.",
       );
       console.warn(`[migrate]   ${err?.code || ""} ${err?.message || err}`);
       await pool.end().catch(() => undefined);
@@ -155,7 +165,7 @@ async function main() {
 }
 
 main().catch((err) => {
-  if (isTransientDbError(err)) {
+  if (isTransientDbError(err) && !strictMigrations) {
     console.warn(
       "[migrate] transient DB error — skipping migrations for this build.",
     );

@@ -38,53 +38,12 @@ export const Route = createFileRoute("/admin/catalogue-publishing")({
   component: CataloguePublishingPage,
 });
 
-const SAMPLE = JSON.stringify(
+const EMPTY_BATCH = JSON.stringify(
   {
-    sourceKey: "manual-official-source-2026-08-23",
-    sourceUrl: "https://example.org/races",
-    events: [
-      {
-        name: "Example 10K",
-        slug: "example-10k",
-        sport: "Running",
-        country: "England",
-        county: "Norfolk",
-        city: "Norwich",
-        area: "",
-        surface: "Road",
-        summary: "Example event for the staged publishing template.",
-        description: "",
-        organiser: "Example organiser",
-        website: "https://example.org/races/example-10k",
-        distances: ["10K"],
-      },
-    ],
-    editions: [
-      {
-        eventSlug: "example-10k",
-        eventName: "Example 10K",
-        date: "2027-05-16",
-        distance: "10K",
-        distanceKm: 10,
-        status: "Open",
-        startTime: "09:30",
-        entryUrl: "https://example.org/races/example-10k/enter",
-        source: "https://example.org/races/example-10k",
-        entryOptions: [
-          {
-            providerCode: "official",
-            providerName: "Official race entry",
-            entryUrl: "https://example.org/races/example-10k/enter",
-            entryType: "official",
-            status: "open",
-            checkedAt: "2026-08-23T10:00:00Z",
-            sourceUrl: "https://example.org/races/example-10k",
-            isVerified: true,
-            isPrimary: true,
-          },
-        ],
-      },
-    ],
+    sourceKey: "",
+    sourceUrl: "",
+    events: [],
+    editions: [],
   },
   null,
   2,
@@ -92,7 +51,7 @@ const SAMPLE = JSON.stringify(
 
 function CataloguePublishingPage() {
   const queryClient = useQueryClient();
-  const [json, setJson] = useState(SAMPLE);
+  const [json, setJson] = useState(EMPTY_BATCH);
   const [message, setMessage] = useState<string | null>(null);
 
   const dashboard = useQuery({
@@ -159,6 +118,24 @@ function CataloguePublishingPage() {
 
   function showError(error: unknown) {
     setMessage(error instanceof Error ? error.message : String(error));
+  }
+
+  function confirmPublish(batch: CatalogueBatchRow) {
+    const required = `PUBLISH ${batch.sourceKey}`;
+    const entered = window.prompt(
+      `This changes the live catalogue. Type ${required} to publish this validated batch.`,
+    );
+    if (entered === required) publishMutation.mutate(batch.id);
+    else if (entered !== null) setMessage("Publication cancelled: confirmation did not match.");
+  }
+
+  function confirmRollback(revisionId: number) {
+    const required = `ROLLBACK ${revisionId}`;
+    const entered = window.prompt(
+      `This reverses the latest catalogue revision. Type ${required} to continue.`,
+    );
+    if (entered === required) rollbackMutation.mutate(revisionId);
+    else if (entered !== null) setMessage("Rollback cancelled: confirmation did not match.");
   }
 
   const batches = (dashboard.data?.batches ?? []) as CatalogueBatchRow[];
@@ -299,7 +276,7 @@ function CataloguePublishingPage() {
                   {batch.status === "ready" ? (
                     <Button
                       type="button"
-                      onClick={() => publishMutation.mutate(batch.id)}
+                      onClick={() => confirmPublish(batch)}
                       disabled={!dashboard.data?.persistent || publishMutation.isPending}
                     >
                       Publish
@@ -358,7 +335,7 @@ function CataloguePublishingPage() {
                         size="sm"
                         variant="secondary"
                         disabled={!dashboard.data?.persistent || rollbackMutation.isPending}
-                        onClick={() => rollbackMutation.mutate(revision.id)}
+                        onClick={() => confirmRollback(revision.id)}
                       >
                         <RotateCcw className="size-4" aria-hidden="true" />
                         Roll back

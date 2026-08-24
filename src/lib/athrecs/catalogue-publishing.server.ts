@@ -184,9 +184,18 @@ function editionErrors(edition: ImportEditionInput): string[] {
   }
   const primaryCount = (edition.entryOptions ?? []).filter((option) => option.isPrimary).length;
   if (primaryCount > 1) errors.push("An edition can have only one primary entry option");
+  const providerCodes = new Set<string>();
   for (const [index, option] of (edition.entryOptions ?? []).entries()) {
     const label = `Entry option ${index + 1}`;
     if (!option.providerName?.trim()) errors.push(`${label} needs providerName`);
+    const providerCode = slugify(option.providerCode || option.providerName || "");
+    if (!providerCode) {
+      errors.push(`${label} needs a usable provider code`);
+    } else if (providerCodes.has(providerCode)) {
+      errors.push(`${label} duplicates provider code: ${providerCode}`);
+    } else {
+      providerCodes.add(providerCode);
+    }
     if (!isHttpUrl(option.entryUrl)) errors.push(`${label} entryUrl must be an http(s) URL`);
     if (option.sourceUrl && !isHttpUrl(option.sourceUrl)) {
       errors.push(`${label} sourceUrl must be an http(s) URL`);
@@ -277,6 +286,49 @@ async function insertChange(
       before ? JSON.stringify(before) : null,
       JSON.stringify(after),
     ],
+  );
+}
+
+function assertSnapshotUnchanged<T>(current: T | null, expected: T, entityKey: string): void {
+  if (current == null || JSON.stringify(current) !== JSON.stringify(expected)) {
+    throw new Error(
+      `Revision cannot be rolled back because ${entityKey} changed after publication`,
+    );
+  }
+}
+
+async function lockCurrentEventSnapshot(
+  sql: Sql,
+  eventId: number,
+  entityKey: string,
+): Promise<EventSnapshot | null> {
+  await sql`select id from events where id = ${eventId} for update`;
+  await sql`select event_id from event_distances where event_id = ${eventId} for update`;
+  return snapshotEvent(sql, entityKey);
+}
+
+async function lockCurrentEditionSnapshot(
+  sql: Sql,
+  editionId: number,
+  entityKey: string,
+): Promise<EditionSnapshot | null> {
+  await sql`select id from editions where id = ${editionId} for update`;
+  await sql`
+    select id
+    from edition_entry_options
+    where edition_id = ${editionId}
+    for update
+  `;
+  const firstSeparator = entityKey.indexOf("|");
+  const secondSeparator = entityKey.indexOf("|", firstSeparator + 1);
+  if (firstSeparator < 1 || secondSeparator < 0) {
+    throw new Error(`Invalid edition revision key: ${entityKey}`);
+  }
+  return snapshotEdition(
+    sql,
+    entityKey.slice(0, firstSeparator),
+    entityKey.slice(firstSeparator + 1, secondSeparator),
+    entityKey.slice(secondSeparator + 1),
   );
 }
 
@@ -483,6 +535,39 @@ export async function publishCatalogueBatch(batchId: string, publishedBy: string
         ).values(),
       ];
 
+      const suppliedEventSlugs = new Set(eventSlugs);
+      for (const slug of eventSlugs) {
+        await tx`select id from events where slug = ${slug} for update`;
+      }
+      for (const edition of editionInputs) {
+        const slug = editionSlug(edition);
+        if (!suppliedEventSlugs.has(slug)) {
+          const referencedEvents = await tx<{ id: number }>`
+            select id from events where slug = ${slug} for update
+          `;
+          if (!referencedEvents[0]) {
+            throw new Error(`Referenced event disappeared after validation: ${slug}`);
+          }
+        }
+        const existingEditions = await tx<{ id: number }>`
+          select edition.id
+          from editions edition
+          join events event on event.id = edition.event_id
+          where event.slug = ${slug}
+            and edition.event_date = ${edition.date}::date
+            and edition.distance_code = ${edition.distance}
+          for update of edition
+        `;
+        if (existingEditions[0]) {
+          await tx`
+            select id
+            from edition_entry_options
+            where edition_id = ${existingEditions[0].id}
+            for update
+          `;
+        }
+      }
+
       const beforeEvents = new Map<string, EventSnapshot | null>();
       for (const slug of eventSlugs) beforeEvents.set(slug, await snapshotEvent(tx, slug));
 
@@ -512,6 +597,7 @@ export async function publishCatalogueBatch(batchId: string, publishedBy: string
       const result = await applyImportBundle(payload, {
         sqlOverride: tx,
         preserveExistingEvents: true,
+        preserveExistingPrimaryEntry: true,
       });
       if (result.errors.length) {
         throw new Error(`Catalogue publication failed: ${result.errors.join("; ")}`);
@@ -637,6 +723,8 @@ async function rollbackEdition(sql: Sql, change: ChangeRow): Promise<void> {
   const after = jsonValue<EditionSnapshot>(change.after_json);
   if (!after) throw new Error(`Missing after snapshot for ${change.entity_key}`);
   const editionId = Number(after.record.id);
+  const current = await lockCurrentEditionSnapshot(sql, editionId, change.entity_key);
+  assertSnapshotUnchanged(current, after, change.entity_key);
 
   if (change.operation === "insert") {
     const dependencies = await sql<{ results: number; result_links: number }>`
@@ -680,6 +768,8 @@ async function rollbackEvent(sql: Sql, change: ChangeRow): Promise<void> {
   const after = jsonValue<EventSnapshot>(change.after_json);
   if (!after) throw new Error(`Missing after snapshot for ${change.entity_key}`);
   const eventId = Number(after.record.id);
+  const current = await lockCurrentEventSnapshot(sql, eventId, change.entity_key);
+  assertSnapshotUnchanged(current, after, change.entity_key);
 
   if (change.operation === "insert") {
     const dependencies = await sql<{ editions: number; groups: number }>`
