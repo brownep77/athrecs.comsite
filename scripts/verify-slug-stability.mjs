@@ -23,6 +23,25 @@ const checks = [
     ],
   },
   {
+    path: "migrations/0018_legacy_slug_compatibility.sql",
+    patterns: [
+      "Preserve valid legacy public URLs",
+      "repeated internal hyphens",
+      "create or replace function athrecs_preserve_entity_slug()",
+      "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+      "redirect.old_slug = new.slug",
+      "redirect.current_slug = new.slug",
+    ],
+  },
+  {
+    path: "src/lib/athrecs/slug-redirects.ts",
+    patterns: [
+      "PUBLIC_SLUG_PATTERN",
+      "/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/",
+      "repeated internal hyphens",
+    ],
+  },
+  {
     path: "src/routes/races/index.tsx",
     patterns: [
       "county?: string",
@@ -62,10 +81,23 @@ for (const check of checks) {
   }
 }
 
+const publicSlugPattern = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+const knownLegacySlug =
+  "wa-xlv-giro-podistico-citta-di-pordenone-campionato-reg-fvg-5-km-8-prova--7237453";
+
+if (!publicSlugPattern.test(knownLegacySlug)) {
+  failures.push(`legacy public slug is rejected: ${knownLegacySlug}`);
+}
+for (const invalidSlug of ["", "-leading", "trailing-", "Uppercase", "has space", "slash/path"]) {
+  if (publicSlugPattern.test(invalidSlug)) {
+    failures.push(`invalid public slug is accepted: ${invalidSlug || "<empty>"}`);
+  }
+}
+
 if (failures.length) {
   console.error("Slug stability verification failed:");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Slug stability verification passed.");
+console.log("Slug stability verification passed, including legacy public URL compatibility.");
