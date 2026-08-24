@@ -69,18 +69,17 @@ try {
     .getByRole("heading", { name: "Create an Athlete Account" })
     .waitFor({ state: "visible", timeout: timeoutMs });
 
-  const fullName = page.getByLabel("Full name");
-  const email = page.getByLabel("Email address");
-  const password = page.getByLabel("Password", { exact: true });
-  const confirmPassword = page.getByLabel("Confirm password");
-  const createWithEmail = page.getByRole("button", { name: "Create account with email" });
-  for (const field of [fullName, email, password, confirmPassword, createWithEmail]) {
+  const fullName = dialog.locator('input[autocomplete="name"]');
+  const email = dialog.locator('input[autocomplete="email"]');
+  const newPasswords = dialog.locator('input[autocomplete="new-password"]');
+  const createWithEmail = dialog.getByRole("button", { name: "Create account with email" });
+  for (const field of [fullName, email, newPasswords.first(), createWithEmail]) {
     await field.waitFor({ state: "visible", timeout: timeoutMs });
   }
   record("full name field is present", true);
   record("email field is present", true);
-  record("password field is present", true);
-  record("confirmation field is present", true);
+  record("password field is present", (await newPasswords.count()) >= 1);
+  record("confirmation field is present", (await newPasswords.count()) >= 2);
   record("email account action is present", true);
 
   await page.screenshot({ path: outPng, fullPage: false });
