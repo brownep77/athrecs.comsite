@@ -6,7 +6,6 @@ import {
   BarChart3,
   BadgeCheck,
   CalendarCheck,
-  ClipboardCheck,
   Database,
   ExternalLink,
   Link2,
@@ -58,13 +57,6 @@ const staffNav = [
     match: (path: string) => path.startsWith("/admin/fixture-review"),
   },
   {
-    // The committed route tree is refreshed by the Vite build.
-    to: "/admin/verification" as never,
-    label: "Verification",
-    icon: ClipboardCheck,
-    match: (path: string) => path.startsWith("/admin/verification"),
-  },
-  {
     to: "/admin/result-links",
     label: "Results",
     icon: Link2,
@@ -83,12 +75,10 @@ const staffNav = [
     match: (path: string) => path.startsWith("/admin/athlete-accounts"),
   },
   {
-    // Source intake is the operational landing page; the controlled registry
-    // remains linked from inside that page.
-    to: "/admin/source-intake" as never,
+    to: "/admin/sources",
     label: "Sources",
     icon: Database,
-    match: (path: string) => path.startsWith("/admin/source"),
+    match: (path: string) => path.startsWith("/admin/sources"),
   },
 ] as const;
 
