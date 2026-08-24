@@ -11,12 +11,17 @@ type ResolveSlugRedirectInput = {
 
 const ENTITY_TYPES = new Set<SlugEntityType>(["event", "athlete", "club"]);
 
+// Some established public catalogue URLs contain repeated internal hyphens.
+// New slugs are still produced by slugify() with single hyphens, but redirects
+// must continue to resolve every already-published lowercase URL.
+const PUBLIC_SLUG_PATTERN = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+
 export const resolveSlugRedirect = createServerFn({ method: "GET" })
   .validator((input: ResolveSlugRedirectInput) => {
     const entityType = input?.entityType;
     const slug = input?.slug?.trim().toLowerCase();
     if (!ENTITY_TYPES.has(entityType)) throw new Error("Unknown slug entity type");
-    if (!slug || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+    if (!slug || !PUBLIC_SLUG_PATTERN.test(slug)) {
       throw new Error("Invalid slug");
     }
     return { entityType, slug };
