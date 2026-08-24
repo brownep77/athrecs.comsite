@@ -30,11 +30,9 @@ const runEmergencyCatalogueRecoveryBatch = createServerFn({ method: "POST" })
     return runCatalogueRecoveryBatch();
   });
 
-// Vite regenerates the committed route tree during the production build. This
-// cast allows the earlier standalone TypeScript pass to recognize the new file.
-export const Route = createFileRoute(
-  "/admin/catalogue-recovery-emergency" as never,
-)({
+// The checked-in route tree is refreshed later by the Vite build.
+// @ts-expect-error The new literal route is generated during that build step.
+export const Route = createFileRoute("/admin/catalogue-recovery-emergency")({
   head: () => ({
     meta: [
       { title: "Emergency catalogue recovery — ATHRECS" },
