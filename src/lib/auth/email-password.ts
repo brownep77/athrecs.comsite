@@ -1,10 +1,8 @@
 /**
- * Local email/password sign-in (this app's Better Auth DB — not the broker).
+ * Athlete email/password authentication feature flag.
  *
- * Off by default. To enable: set `emailAndPasswordEnabled` to `true` below,
- * then build sign-up / sign-in forms with `authClient.signUp.email` /
- * `authClient.signIn.email` from `@/lib/auth/client` (see the auth skill).
- *
- * Do NOT edit `server.ts` for this — that file is frozen pre-wired config.
+ * The server still requires RESEND_API_KEY and AUTH_EMAIL_FROM before exposing
+ * credential endpoints or showing the manual sign-up form. This keeps a missing
+ * mail configuration from creating accounts that cannot verify or recover.
  */
-export const emailAndPasswordEnabled = false;
+export const emailAndPasswordEnabled = true;

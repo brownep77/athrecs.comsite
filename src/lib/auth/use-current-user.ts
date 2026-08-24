@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from "react";
 import { authClient, authEnabled } from "./client";
 
 /** Normalized user shape used across the app, auth on or off. */
@@ -33,6 +34,23 @@ export type CurrentUserState = {
   isPending: boolean;
 };
 
+const subscribeToHydration = () => () => {};
+const browserHydratedSnapshot = () => true;
+const serverHydratedSnapshot = () => false;
+
+/**
+ * False on the server and during the browser's first hydration render, then true.
+ * This keeps authenticated controls byte-for-byte consistent across SSR and the
+ * initial client render even when Better Auth restores a cached session instantly.
+ */
+function useBrowserHydrated(): boolean {
+  return useSyncExternalStore(
+    subscribeToHydration,
+    browserHydratedSnapshot,
+    serverHydratedSnapshot,
+  );
+}
+
 /**
  * Current user + loading state. Same behavior in live preview and when deployed:
  *   - Auth enabled (default) -> the real signed-in user; `user` is `null` while
@@ -51,14 +69,20 @@ export type CurrentUserState = {
  *   if (isPending) return null;              // still resolving — don't redirect yet
  *   if (!user) return <RedirectToSignIn />;  // definitely signed out
  *
- * `authEnabled` is a module-level constant fixed at load, so the guarded hook
- * call keeps a stable hook order across every render of a given component.
+ * `authEnabled` is a module-level constant fixed at load, so its branch remains
+ * stable for the lifetime of the application.
  */
 export function useCurrentUserState(): CurrentUserState {
+  const browserHydrated = useBrowserHydrated();
+  const session = authClient.useSession();
+
   if (!authEnabled) return { user: DEV_USER, isPending: false };
-  // eslint-disable-next-line react-hooks/rules-of-hooks -- authEnabled is constant for the app's lifetime
-  const { data, isPending } = authClient.useSession();
-  const user = data?.user;
+
+  // Force the same pending view on the server and on the browser's first render.
+  // Once hydration completes, expose Better Auth's actual session state.
+  if (!browserHydrated) return { user: null, isPending: true };
+
+  const user = session.data?.user;
   return {
     user: user
       ? {
@@ -69,7 +93,7 @@ export function useCurrentUserState(): CurrentUserState {
           isDevFallback: false,
         }
       : null,
-    isPending,
+    isPending: session.isPending,
   };
 }
 

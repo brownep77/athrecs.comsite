@@ -20,6 +20,10 @@ jobs:
     timeout-minutes: 35
     env:
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/athrecs_ci
+      # Enables the manual sign-up form for browser coverage. The smoke test
+      # never submits an email, and this deliberately invalid key cannot send.
+      RESEND_API_KEY: re_ci_browser_only
+      AUTH_EMAIL_FROM: "ATHRECS CI <ci@athrecs.invalid>"
     services:
       postgres:
         image: postgres:16-alpine
@@ -98,6 +102,7 @@ jobs:
       - name: Browser smoke tests
         run: |
           node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
+          node scripts/browser-auth-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/athlete-auth.png"
           node scripts/browser-smoke.mjs "http://127.0.0.1:8080/races?sport=Running&distance=10K" "$GITHUB_WORKSPACE/artifacts/races.png"
           node scripts/browser-smoke.mjs http://127.0.0.1:8080/races/boston-marathon "$GITHUB_WORKSPACE/artifacts/boston-marathon.png"
 
