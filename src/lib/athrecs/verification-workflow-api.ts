@@ -28,7 +28,7 @@ export const getVerificationWorkbench = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const { getVerificationDashboard } = await import("./verification-workflow.server");
-    return JSON.parse(JSON.stringify(await getVerificationDashboard(data)));
+    return getVerificationDashboard(data);
   });
 
 export const stageFixtureVerificationCandidate = createServerFn({ method: "POST" })
