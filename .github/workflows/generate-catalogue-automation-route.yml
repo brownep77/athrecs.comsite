@@ -1,0 +1,38 @@
+name: Generate catalogue automation route tree
+
+on:
+  push:
+    branches:
+      - codex/automated-catalogue-staging
+    paths:
+      - .github/workflows/generate-catalogue-automation-route.yml
+      - src/routes/api/catalogue-automation.ts
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Generate and verify route tree
+        run: |
+          npx vite build
+          grep -F "/api/catalogue-automation" src/routeTree.gen.ts
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalogue-automation-route-tree
+          path: src/routeTree.gen.ts
+          if-no-files-found: error
+          retention-days: 1
