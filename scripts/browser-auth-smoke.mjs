@@ -52,27 +52,36 @@ try {
 
   const dialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
   await dialog.waitFor({ state: "visible", timeout: timeoutMs });
-  record(
-    "Google is offered in the chooser",
-    await dialog.getByRole("button", { name: "Continue with Google" }).isVisible(),
-  );
-  record(
-    "manual sign-up tab is offered",
-    await dialog.getByRole("tab", { name: "Create account" }).isVisible(),
-  );
 
-  await dialog.getByRole("tab", { name: "Create account" }).click();
+  // The dialog renders immediately, then loads the list of methods through a
+  // server function. Wait for that asynchronous state rather than asserting
+  // during the temporary "Loading secure sign-in methods" view.
+  const googleButton = dialog.getByRole("button", { name: "Continue with Google" });
+  await googleButton.waitFor({ state: "visible", timeout: timeoutMs });
+  record("Google is offered in the chooser", true);
+
+  const createAccountTab = dialog.getByRole("tab", { name: "Create account" });
+  await createAccountTab.waitFor({ state: "visible", timeout: timeoutMs });
+  record("manual sign-up tab is offered", true);
+
+  await createAccountTab.click();
   await page
     .getByRole("heading", { name: "Create an Athlete Account" })
     .waitFor({ state: "visible", timeout: timeoutMs });
-  record("full name field is present", await page.getByLabel("Full name").isVisible());
-  record("email field is present", await page.getByLabel("Email address").isVisible());
-  record("password field is present", await page.getByLabel("Password", { exact: true }).isVisible());
-  record("confirmation field is present", await page.getByLabel("Confirm password").isVisible());
-  record(
-    "email account action is present",
-    await page.getByRole("button", { name: "Create account with email" }).isVisible(),
-  );
+
+  const fullName = page.getByLabel("Full name");
+  const email = page.getByLabel("Email address");
+  const password = page.getByLabel("Password", { exact: true });
+  const confirmPassword = page.getByLabel("Confirm password");
+  const createWithEmail = page.getByRole("button", { name: "Create account with email" });
+  for (const field of [fullName, email, password, confirmPassword, createWithEmail]) {
+    await field.waitFor({ state: "visible", timeout: timeoutMs });
+  }
+  record("full name field is present", true);
+  record("email field is present", true);
+  record("password field is present", true);
+  record("confirmation field is present", true);
+  record("email account action is present", true);
 
   await page.screenshot({ path: outPng, fullPage: false });
   await page.getByRole("button", { name: "Close sign-in" }).click();
