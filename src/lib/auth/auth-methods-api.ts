@@ -12,6 +12,11 @@ function configured(...values: Array<string | undefined>): boolean {
 export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler(
   async (): Promise<AvailableAuthMethods> => {
     const env = process.env;
+    const authEnabled = env.VITE_AUTH_ENABLED !== "false";
+    if (!authEnabled) {
+      return { emailPassword: false, passwordReset: false, providers: [] };
+    }
+
     const emailPassword = configured(env.RESEND_API_KEY, env.AUTH_EMAIL_FROM);
     const deployed = configured(env.BETTER_AUTH_URL);
     const brokerConfigured =
