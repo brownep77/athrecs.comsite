@@ -51,12 +51,14 @@ for (const provider of [
   "facebook",
   "twitter",
   "linkedin",
-  "github",
 ]) {
   assert.match(server, new RegExp(`${provider}:`), `${provider} server provider missing`);
   assert.match(envExample, new RegExp(`callback/${provider}`), `${provider} callback docs missing`);
 }
 
+assert.doesNotMatch(methodsApi, /providerId:\s*["']github["']/);
+assert.doesNotMatch(envExample, /callback\/github/);
+assert.doesNotMatch(docs, /\| GitHub \|/);
 assert.match(methodsApi, /RESEND_API_KEY/);
 assert.match(methodsApi, /AUTH_EMAIL_FROM/);
 assert.match(methodsApi, /Only|providers/);
@@ -72,5 +74,5 @@ assert.match(email, /ATHRECS\.com/);
 assert.match(docs, /Strava, Garmin Connect, COROS, Instagram and TikTok/);
 
 console.log(
-  "Authentication verification passed: manual email, recovery, provider gating, multi-social chooser and callback safeguards are present.",
+  "Authentication verification passed: manual email, recovery, focused provider gating, multi-social chooser and callback safeguards are present.",
 );
