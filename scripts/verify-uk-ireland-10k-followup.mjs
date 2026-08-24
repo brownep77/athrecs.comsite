@@ -174,7 +174,7 @@ assert(
   "The UK and Ireland 10K follow-up series corrections are not merged",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v242"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v243"'),
   "The persistent catalogue seed version is behind the 10K follow-up",
 );
 

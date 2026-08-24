@@ -4,6 +4,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getBulkSourceRun,
+  getCatalogueRecovery,
   getDbStatus,
   getScraperWorkbookImport,
   importFromCsv,
@@ -11,6 +12,7 @@ import {
   importResults,
   listAdminEventCards,
   queueBulkSourceRun,
+  recoverCatalogueBatch,
   uploadScraperWorkbookNow,
 } from "@/lib/athrecs/api";
 import { Badge } from "@/components/ui/badge";
@@ -20,10 +22,7 @@ import { listEvents } from "@/lib/athrecs/api";
 
 export const Route = createFileRoute("/admin/")({
   head: () => ({
-    meta: [
-      { title: "ATHRECS Staff" },
-      { name: "robots", content: "noindex, nofollow, noarchive" },
-    ],
+    meta: [{ title: "ATHRECS Staff" }, { name: "robots", content: "noindex, nofollow, noarchive" }],
   }),
   component: AdminPage,
 });
@@ -126,6 +125,12 @@ function AdminPage() {
     refetchInterval: 15_000,
   });
 
+  const catalogueRecovery = useQuery({
+    queryKey: ["admin-catalogue-recovery"],
+    queryFn: () => getCatalogueRecovery(),
+    refetchInterval: 15_000,
+  });
+
   const bulkRun = useQuery({
     queryKey: ["admin-bulk-source-run"],
     queryFn: () => getBulkSourceRun(),
@@ -206,6 +211,28 @@ function AdminPage() {
       const counts = published.counts;
       setMessage(
         `Workbook upload complete: ${result.staged.counts.staged.toLocaleString()} source editions staged · ${published.publishedEvents.toLocaleString()} new events · ${published.publishedEditions.toLocaleString()} new edition distances · ${counts.duplicates.toLocaleString()} duplicates · ${counts.blocked.toLocaleString()} held for review`,
+      );
+      void qc.invalidateQueries();
+    },
+    onError: (e) => setMessage(e instanceof Error ? e.message : String(e)),
+  });
+
+  const catalogueRecoveryMut = useMutation({
+    mutationFn: async () => {
+      let status = await recoverCatalogueBatch();
+      qc.setQueryData(["admin-catalogue-recovery"], status);
+      for (let attempt = 0; !status.complete && attempt < 160; attempt += 1) {
+        status = await recoverCatalogueBatch();
+        qc.setQueryData(["admin-catalogue-recovery"], status);
+      }
+      if (!status.complete) {
+        throw new Error("Catalogue recovery paused before verification; run it again to resume");
+      }
+      return status;
+    },
+    onSuccess: (status) => {
+      setMessage(
+        `Catalogue restored: ${status.current.events.toLocaleString()} events · ${status.current.editions.toLocaleString()} editions · ${status.current.entryOptions.toLocaleString()} entry options`,
       );
       void qc.invalidateQueries();
     },
@@ -324,6 +351,99 @@ function AdminPage() {
                   : " — multi-year data looks loaded."}
               </p>
             )}
+          </div>
+        )}
+      </section>
+
+      <section className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div className="space-y-1">
+            <h2 className="font-display text-lg font-semibold text-fg">Catalogue recovery</h2>
+            <p className="max-w-2xl text-sm text-muted">
+              Restore missing catalogue events to Neon in small, resumable batches. Existing events,
+              results, athlete accounts and claims are preserved; completion is recorded only after
+              exact catalogue verification.
+            </p>
+          </div>
+          <Button
+            type="button"
+            disabled={
+              dbStatus.data?.persistent !== true ||
+              catalogueRecoveryMut.isPending ||
+              catalogueRecovery.data?.complete === true
+            }
+            onClick={() => {
+              const confirmed = window.confirm(
+                "Append the missing production catalogue to Neon now? Existing rows will not be overwritten.",
+              );
+              if (confirmed) catalogueRecoveryMut.mutate();
+            }}
+          >
+            {catalogueRecoveryMut.isPending
+              ? `Recovering… ${catalogueRecovery.data?.progressPercent ?? 0}%`
+              : catalogueRecovery.data?.complete
+                ? "Catalogue verified"
+                : "Restore missing catalogue"}
+          </Button>
+        </div>
+
+        {catalogueRecovery.isLoading && (
+          <p className="text-sm text-muted">Checking catalogue recovery status…</p>
+        )}
+        {catalogueRecovery.data && (
+          <div className="space-y-3">
+            <div className="grid gap-3 sm:grid-cols-4">
+              <div className="rounded-lg border border-border bg-elevated p-3">
+                <p className="text-xs uppercase tracking-wide text-subtle">Live events</p>
+                <p className="mt-1 text-2xl font-semibold tabular text-fg">
+                  {catalogueRecovery.data.current.events.toLocaleString()}
+                </p>
+                <p className="text-xs text-subtle">
+                  Target {catalogueRecovery.data.target.events.toLocaleString()}
+                </p>
+              </div>
+              <div className="rounded-lg border border-border bg-elevated p-3">
+                <p className="text-xs uppercase tracking-wide text-subtle">Live editions</p>
+                <p className="mt-1 text-2xl font-semibold tabular text-fg">
+                  {catalogueRecovery.data.current.editions.toLocaleString()}
+                </p>
+                <p className="text-xs text-subtle">
+                  Target {catalogueRecovery.data.target.editions.toLocaleString()}
+                </p>
+              </div>
+              <div className="rounded-lg border border-border bg-elevated p-3">
+                <p className="text-xs uppercase tracking-wide text-subtle">Entry options</p>
+                <p className="mt-1 text-2xl font-semibold tabular text-fg">
+                  {catalogueRecovery.data.current.entryOptions.toLocaleString()}
+                </p>
+                <p className="text-xs text-subtle">
+                  Catalogue target {catalogueRecovery.data.target.entryOptions.toLocaleString()}
+                </p>
+              </div>
+              <div
+                className={`rounded-lg border p-3 ${
+                  catalogueRecovery.data.complete
+                    ? "border-emerald-500/30 bg-emerald-50"
+                    : "border-amber-500/30 bg-amber-50"
+                }`}
+              >
+                <p className="text-xs uppercase tracking-wide text-subtle">Recovery</p>
+                <p className="mt-1 text-2xl font-semibold tabular text-fg">
+                  {catalogueRecovery.data.progressPercent.toLocaleString()}%
+                </p>
+                <p className="text-xs text-subtle">
+                  {catalogueRecovery.data.complete
+                    ? "Verified complete"
+                    : `${catalogueRecovery.data.phase} · ${catalogueRecovery.data.batchesCompleted} batches`}
+                </p>
+              </div>
+            </div>
+            <div className="h-2 overflow-hidden rounded-full bg-elevated">
+              <div
+                className="h-full rounded-full bg-accent transition-[width]"
+                style={{ width: `${catalogueRecovery.data.progressPercent}%` }}
+              />
+            </div>
           </div>
         )}
       </section>

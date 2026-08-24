@@ -1,7 +1,8 @@
 import type { Edition, EntryOptionSeed, EntryOptionStatus, Series } from "./types";
 
 const CHECKED_AT = "2026-08-22";
-const LATEST_CHECKED_AT = "2026-08-23";
+const PREVIOUS_CHECKED_AT = "2026-08-23";
+const LATEST_CHECKED_AT = "2026-08-24";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
@@ -295,7 +296,7 @@ const seeds: RaceSeed[] = [
     url: "https://www.westwaterfordathletics.org/dungarvan-10-mile/",
     status: "TBC",
     hasEntry: false,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The organising club confirms the permitted A.A.I. race, date and start time. Entry is due to open to A.A.I. club members on 1 December 2026 and to remaining runners on 8 December, so no live checkout is asserted yet.",
   },
@@ -312,7 +313,7 @@ const seeds: RaceSeed[] = [
     organiser: "Cold Brew Events",
     url: "https://www.sientries.co.uk/event/the-duergar-nightcrawler-2027",
     priceAmount: 25,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The direct registration page confirms the 10-mile winter night trail race, date, open entry and TRA/UKA rules.",
   },
@@ -330,7 +331,7 @@ const seeds: RaceSeed[] = [
     organiser: "Limitless Trails",
     url: "https://www.sientries.co.uk/event/beast-of-the-blacks-102040-mile-ultra-2027",
     priceAmount: 48,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The direct registration page confirms the 10-, 20- and 40-mile trail options, Crickhowell venue, date and open entry.",
   },
@@ -349,7 +350,7 @@ const seeds: RaceSeed[] = [
     organiser: "Punk Panther Ultra Marathons",
     url: "https://www.sientries.co.uk/event/punk-panther-welcome-way-2027",
     priceAmount: 30,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The direct registration page confirms the half-marathon and longer trail options, date, half-marathon start time and open entry.",
   },
@@ -367,7 +368,7 @@ const seeds: RaceSeed[] = [
     organiser: "Canalathon-Ultra",
     url: "https://www.sientries.co.uk/event/canalathon-ultra-running-festival-2027",
     priceAmount: 47.9,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The direct registration page confirms the chip-timed half-marathon and other footraces, date and open entry.",
   },
@@ -385,7 +386,7 @@ const seeds: RaceSeed[] = [
     organiser: "Hardmoors",
     url: "https://www.sientries.co.uk/event/hardmoors-262-white-horse-2027",
     priceAmount: 39,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The direct registration page confirms the half-marathon, marathon and 10K trail options, date and open entry.",
   },
@@ -403,7 +404,7 @@ const seeds: RaceSeed[] = [
     organiser: "Bowland Ultra",
     url: "https://www.sientries.co.uk/event/bowland-trail-half-2027-2027",
     priceAmount: 34,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The direct registration page confirms the roughly 13-mile mixed-surface race, date, start time and open entry.",
   },
@@ -421,7 +422,7 @@ const seeds: RaceSeed[] = [
     organiser: "OuterEdge Events",
     url: "https://www.sientries.co.uk/event.php?elid=Y&event_id=17305",
     priceAmount: 48,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The dedicated direct-registration record confirms the 2027 half-marathon date, start time, Chagford venue and open entry.",
   },
@@ -439,9 +440,155 @@ const seeds: RaceSeed[] = [
     organiser: "SilverBack Trails",
     url: "https://www.sientries.co.uk/event/silverbacktrails-wades-revenge-2027",
     priceAmount: 23,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The direct registration page confirms the trail half-marathon, date, start time and open entry.",
+  },
+  {
+    slug: "hardmoors-saltburn-2027",
+    name: "Hardmoors 26.2 Saltburn 2027",
+    date: "2027-02-07",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Saltburn-by-the-Sea",
+    area: "Saltburn Learning Campus and the Cleveland coast",
+    surface: "Trail",
+    distances: ["Half", "10K", "Marathon"],
+    organiser: "Hardmoors",
+    url: "https://www.sientries.co.uk/event/hardmoors-262-saltburn-2027",
+    priceAmount: 39,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the half-marathon, marathon and 10K trail options, date, half-marathon start time and open entry.",
+  },
+  {
+    slug: "lakeland-paws-grizedale-half-marathon-2027",
+    name: "Lakeland Paws Grizedale Half Marathon 2027",
+    date: "2027-03-07",
+    distance: "Half",
+    country: "England",
+    county: "Cumbria",
+    city: "Hawkshead",
+    area: "Grizedale Forest",
+    surface: "Trail",
+    organiser: "Lakeland Paws",
+    url: "https://www.sientries.co.uk/event.php?elid=Y&event_id=17822",
+    priceAmount: 20,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms Lakeland Paws' first half-marathon route, Grizedale Forest venue, date and open entry.",
+  },
+  {
+    slug: "green-park-reading-half-marathon-2027",
+    name: "Green Park Reading Half Marathon 2027",
+    date: "2027-03-21",
+    distance: "Half",
+    startTime: "10:15",
+    country: "England",
+    county: "Berkshire",
+    city: "Reading",
+    area: "Green Park, Reading town centre and Reading FC Stadium",
+    surface: "Road",
+    organiser: "Goldline Events",
+    url: "https://www.readinghalfmarathon.com/products/half-marathon-non-aaa",
+    priceAmount: 48,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official event and direct checkout pages confirm the traffic-free half-marathon, date, start time and open entry.",
+  },
+  {
+    slug: "ironbridge-half-marathon-2027",
+    name: "Ironbridge Half Marathon 2027",
+    date: "2027-03-21",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "Shropshire",
+    city: "Telford",
+    area: "QEII Arena, Ironbridge Gorge and the Silkin Way",
+    surface: "Mixed",
+    organiser: "Telford Harriers",
+    url: "https://www.entrycentral.com/IronbridgeHalf2027",
+    priceAmount: 32,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The organising club's direct registration page confirms the multi-surface half-marathon, date, start time and open entry.",
+  },
+  {
+    slug: "punk-panther-spring-headtorch-half-2027",
+    name: "Punk Panther Spring Headtorch Half 2027",
+    date: "2027-03-23",
+    distance: "Half",
+    startTime: "19:00",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Fewston",
+    area: "Swinsty and Fewston reservoirs",
+    surface: "Trail",
+    distances: ["Half", "10K", "5K"],
+    organiser: "Punk Panther Ultra Marathons",
+    url: "https://www.sientries.co.uk/event.php?elid=Y&event_id=18217",
+    priceAmount: 15,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the headtorch half-marathon, 10K and 5K options, date, start time and open entry.",
+  },
+  {
+    slug: "punk-panther-skipton-skedaddle-2027",
+    name: "Punk Panther Skipton Skedaddle 2027",
+    date: "2027-04-10",
+    distance: "Half",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Skipton",
+    area: "Skipton, the Dales High Way and the Pennine Way",
+    surface: "Trail",
+    distances: ["Half", "20M", "34mi"],
+    organiser: "Punk Panther Ultra Marathons",
+    url: "https://www.sientries.co.uk/event/punk-panther-skipton-skedaddle-2027",
+    priceAmount: 30,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the half-marathon and longer trail options, date, Skipton venue and open entry.",
+  },
+  {
+    slug: "punk-panther-ripon-stinger-2027",
+    name: "Punk Panther Ripon Stinger 2027",
+    date: "2027-05-15",
+    distance: "Half",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Ripon",
+    area: "Studley Roger, Fountains Abbey and the Ripon Rowel",
+    surface: "Trail",
+    distances: ["Half", "20M", "35mi"],
+    organiser: "Punk Panther Ultra Marathons",
+    url: "https://www.sientries.co.uk/event/punk-panther-ripon-stinger-2027",
+    priceAmount: 30,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the half-marathon and longer trail options, date, Ripon-area venue and open entry.",
+  },
+  {
+    slug: "hardmoors-wainstones-2027",
+    name: "Hardmoors 26.2 Wainstones 2027",
+    date: "2027-06-20",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Chop Gate",
+    area: "Chop Gate and the North York Moors",
+    surface: "Trail",
+    distances: ["Half", "10K", "Marathon"],
+    organiser: "Hardmoors",
+    url: "https://www.sientries.co.uk/event/hardmoors-262-wainstones-2027",
+    priceAmount: 42.5,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The direct registration page confirms the half-marathon, marathon and 10K trail options, date, half-marathon start time and open entry.",
   },
 ];
 
@@ -533,6 +680,14 @@ export const dailyHalfTenMileResearchQueue = [
       "The LDWA event welcomes runners but is presented as a challenge walk; confirm that it is a timed running race before publication.",
     sourceUrl: "https://www.sientries.co.uk/event/corvedale-cake-walk-2027",
   },
+  {
+    slug: "achill-half-marathon-2027",
+    date: "2027-07-03",
+    country: "Ireland",
+    reason:
+      "The official page title announces 3 July 2027 but the registration copy still references 2025, so its year-specific entry provenance is not internally consistent.",
+    sourceUrl: "https://www.achillmarathon.com/",
+  },
 ] as const;
 
 const BRIGHTEN_MARINA_URL =
@@ -578,7 +733,7 @@ export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
       entryUrl: BRIGHTEN_MARINA_URL,
       entryType: "official",
       status: "open",
-      checkedAt: LATEST_CHECKED_AT,
+      checkedAt: PREVIOUS_CHECKED_AT,
       sourceUrl: BRIGHTEN_MARINA_URL,
       isVerified: true,
       isPrimary: true,

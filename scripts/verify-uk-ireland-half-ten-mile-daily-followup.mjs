@@ -3,9 +3,10 @@ import fs from "node:fs/promises";
 import { rolldown } from "rolldown";
 
 const CHECKED_AT = "2026-08-22";
-const LATEST_CHECKED_AT = "2026-08-23";
+const PREVIOUS_CHECKED_AT = "2026-08-23";
+const LATEST_CHECKED_AT = "2026-08-24";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 24;
+const NEW_SERIES_COUNT = 32;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -34,7 +35,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  13,
+  21,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -48,19 +49,31 @@ const normalize = (value) =>
     .toLowerCase()
     .replace(/\b20\d{2}\b/g, "")
     .replace(/[^a-z0-9]+/g, "");
-const normalizeUrl = (value) =>
-  value
-    .toLowerCase()
-    .replace(/^https?:\/\/(?:www\.)?/, "")
-    .replace(/\/$/, "");
+const normalizeUrl = (value) => {
+  const url = new URL(value);
+  const ignoredParameters = new Set(["elid", "uid"]);
+  const parameters = [...url.searchParams]
+    .filter(([key]) => !ignoredParameters.has(key.toLowerCase()) && !key.startsWith("utm_"))
+    .sort(([leftKey, leftValue], [rightKey, rightValue]) =>
+      `${leftKey}=${leftValue}`.localeCompare(`${rightKey}=${rightValue}`),
+    );
+  const query = new URLSearchParams(parameters).toString();
+  const hostname = url.hostname.toLowerCase().replace(/^www\./, "");
+  const pathname = url.pathname.toLowerCase().replace(/\/$/, "");
+  return `${hostname}${pathname}${query ? `?${query}` : ""}`;
+};
 const slugs = new Set();
 const names = new Set();
+const sourceUrls = new Set();
 for (const series of dailyHalfTenMileSeries) {
   assert(!slugs.has(series.slug), `Duplicate follow-up slug: ${series.slug}`);
   slugs.add(series.slug);
   const name = normalize(series.name);
   assert(!names.has(name), `Duplicate follow-up name: ${series.name}`);
   names.add(name);
+  const sourceUrl = normalizeUrl(series.source_url);
+  assert(!sourceUrls.has(sourceUrl), `Duplicate follow-up source URL: ${series.source_url}`);
+  sourceUrls.add(sourceUrl);
   assert.equal(series.sport, "Running", `${series.slug} is not a running event`);
   assert(
     ["England", "Scotland", "Wales", "Ireland"].includes(series.country),
@@ -110,7 +123,7 @@ for (const edition of dailyHalfTenMileEditions) {
   }
   for (const option of edition.entryOptions ?? []) {
     assert(
-      [CHECKED_AT, LATEST_CHECKED_AT].includes(option.checkedAt),
+      [CHECKED_AT, PREVIOUS_CHECKED_AT, LATEST_CHECKED_AT].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
     assert.equal(option.isVerified, true, `${key} has an unverified entry source`);
@@ -166,6 +179,10 @@ for (const candidate of dailyHalfTenMileResearchQueue) {
   );
   assert.match(candidate.sourceUrl, /^https:\/\//, `${candidate.slug} source must use HTTPS`);
 }
+assert(
+  dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "achill-half-marathon-2027"),
+  "The internally inconsistent Achill 2027 candidate must remain held",
+);
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
@@ -189,7 +206,7 @@ assert(
   "The daily follow-up editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v242"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v243"'),
   "The persistent catalogue seed version was not advanced",
 );
 assert(
@@ -198,5 +215,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (13 half marathons and 11 ten-milers), one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (21 half marathons and 11 ten-milers), one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );

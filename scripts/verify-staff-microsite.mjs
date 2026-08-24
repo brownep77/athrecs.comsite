@@ -31,6 +31,13 @@ assert.match(authServer, /GOOGLE_CLIENT_SECRET/);
 assert.match(authServer, /socialProviders:\s*\{/);
 assert.match(authServer, /google:\s*\{/);
 assert.match(authServer, /brokerConfigured/);
+assert.match(authServer, /ATHRECS_DEPLOYED_AUTH_HOSTS/);
+for (const hostname of ["www.athrecs.com", "athrecs.com", "update.athrecs.com"]) {
+  assert.match(authServer, new RegExp(hostname.replaceAll(".", "\\.")));
+}
+assert.match(authServer, /allowedHosts:\s*deployedAllowedHosts/);
+assert.match(authServer, /deployedTrustedOrigins/);
+assert.match(authServer, /fallback:\s*explicitBase\?\.origin\s*\?\?\s*explicitBaseURL/);
 
 const authClient = await readFile(resolve(root, "src/lib/auth/client.ts"), "utf8");
 assert.match(authClient, /signIn\.social\(\{/);
