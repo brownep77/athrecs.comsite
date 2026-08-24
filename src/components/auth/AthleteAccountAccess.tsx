@@ -1,6 +1,5 @@
 import { Link } from "@tanstack/react-router";
 import { Loader2, LogIn, UserRound } from "lucide-react";
-import { AthleteAuthDialog } from "@/components/auth/AthleteAuthDialog";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { cn } from "@/lib/utils";
@@ -39,25 +38,22 @@ export function AthleteAccountAccess({ compact = false }: { compact?: boolean })
   }
 
   return (
-    <>
-      <button
-        type="button"
-        onClick={() =>
-          openAthleteAuth({
-            callbackURL: "/athlete-account",
-            errorCallbackURL: "/athlete-account",
-          })
-        }
-        className={cn(
-          "inline-flex h-9 items-center justify-center gap-1.5 rounded-md bg-accent-soft px-2.5 text-sm font-semibold text-fg transition-colors hover:bg-accent/15",
-          compact && "w-9 px-0",
-        )}
-        aria-label="Sign in or create an athlete account"
-      >
-        <LogIn className="size-4" aria-hidden="true" />
-        {compact ? null : <span>Sign in</span>}
-      </button>
-      {compact ? null : <AthleteAuthDialog />}
-    </>
+    <button
+      type="button"
+      onClick={() =>
+        openAthleteAuth({
+          callbackURL: "/athlete-account",
+          errorCallbackURL: "/athlete-account",
+        })
+      }
+      className={cn(
+        "inline-flex h-9 items-center justify-center gap-1.5 rounded-md bg-accent-soft px-2.5 text-sm font-semibold text-fg transition-colors hover:bg-accent/15",
+        compact && "w-9 px-0",
+      )}
+      aria-label="Sign in or create an athlete account"
+    >
+      <LogIn className="size-4" aria-hidden="true" />
+      {compact ? null : <span>Sign in</span>}
+    </button>
   );
 }
