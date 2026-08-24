@@ -8,16 +8,22 @@ on:
       - .github/workflows/capture-production-baseline.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   capture:
+    if: github.repository == 'brownep77/athrecs.comsite' && github.ref == 'refs/heads/codex/athrecs-stability-and-slugs'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: codex/athrecs-stability-and-slugs
+
       - name: Fetch live public homepage
         run: |
-          mkdir -p artifacts
+          mkdir -p artifacts docs/release-baselines
           curl --fail --silent --show-error --location --compressed \
             --retry 4 --retry-all-errors --connect-timeout 20 --max-time 120 \
             -H 'Cache-Control: no-cache' \
@@ -26,16 +32,20 @@ jobs:
             -o artifacts/production-home.html
           test -s artifacts/production-home.html
 
-      - name: Extract public catalogue counts
+      - name: Extract and record public catalogue counts
         run: |
           python - <<'PY'
+          from datetime import datetime, timezone
+          from hashlib import sha256
           from html.parser import HTMLParser
           import json
           import re
           from pathlib import Path
 
-          path = Path('artifacts/production-home.html')
-          html = path.read_text(encoding='utf-8', errors='replace')
+          source = 'https://www.athrecs.com/'
+          html_path = Path('artifacts/production-home.html')
+          html_bytes = html_path.read_bytes()
+          html = html_bytes.decode('utf-8', errors='replace')
 
           class Text(HTMLParser):
               def __init__(self):
@@ -52,30 +62,45 @@ jobs:
 
           counts = {}
           for label in ('Events', 'Clubs', 'Athletes'):
-              patterns = (
+              for pattern in (
                   rf'{label}\s+([0-9][0-9,]*)',
                   rf'([0-9][0-9,]*)\s+{label}',
-              )
-              for pattern in patterns:
+              ):
                   match = re.search(pattern, text, re.IGNORECASE)
                   if match:
                       counts[label.lower()] = int(match.group(1).replace(',', ''))
                       break
 
-          print(json.dumps({
-              'html_bytes': len(html.encode('utf-8')),
+          record = {
+              'capturedAt': datetime.now(timezone.utc).isoformat(),
+              'source': source,
               'counts': counts,
-              'text_preview': text[:1200],
-          }, indent=2))
+              'htmlBytes': len(html_bytes),
+              'htmlSha256': sha256(html_bytes).hexdigest(),
+          }
+          print(json.dumps({**record, 'textPreview': text[:1200]}, indent=2))
 
           Path('artifacts/production-baseline.json').write_text(
-              json.dumps({'counts': counts}, indent=2) + '\n',
-              encoding='utf-8',
+              json.dumps(record, indent=2) + '\n', encoding='utf-8'
+          )
+          Path('docs/release-baselines/production-before-pr235.json').write_text(
+              json.dumps(record, indent=2) + '\n', encoding='utf-8'
           )
           if set(counts) != {'events', 'clubs', 'athletes'}:
-              print('Could not extract all three public homepage counts.')
-              raise SystemExit(1)
+              raise SystemExit('Could not extract all three public homepage counts')
           PY
+
+      - name: Commit audited baseline
+        run: |
+          git config user.name "Athrecs Release Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          git add -- docs/release-baselines/production-before-pr235.json
+          if git diff --cached --quiet; then
+            echo "Baseline record is unchanged."
+          else
+            git commit -m "Record production catalogue baseline before PR 235"
+            git push origin HEAD:codex/athrecs-stability-and-slugs
+          fi
 
       - name: Upload baseline evidence
         if: always()
