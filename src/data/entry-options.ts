@@ -39,6 +39,11 @@ import {
   verifiedHalfToTwentyMileEditionOverrides,
   verifiedHalfToTwentyMileSeriesOverrides,
 } from "./half-to-20-mile-races-uk-ireland";
+import {
+  dailyHalfTenMileEditionOverrides,
+  dailyHalfTenMileEntryOptions,
+  dailyHalfTenMileSeriesOverrides,
+} from "./half-ten-mile-races-uk-ireland-daily-followup";
 
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const eventSlugAliases: Readonly<Record<string, string>> = {
@@ -67,6 +72,7 @@ export const editionOverrides: Record<string, Partial<Edition>> = {
   ...verifiedFiveMileEditionOverrides,
   ...verifiedHalfMarathonFollowupEditionOverrides,
   ...verifiedHalfToTwentyMileEditionOverrides,
+  ...dailyHalfTenMileEditionOverrides,
 };
 
 /** Verified event metadata corrections across every entry-options research pass. */
@@ -81,6 +87,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...verifiedTenMileSeriesOverrides,
   ...verifiedHalfMarathonFollowupSeriesOverrides,
   ...verifiedHalfToTwentyMileSeriesOverrides,
+  ...dailyHalfTenMileSeriesOverrides,
 };
 
 /** Verified entry providers keyed by series, date and distance. */
@@ -89,4 +96,5 @@ export const entryOptions: Record<string, EntryOptionSeed[]> = {
   ...ukHalfMarathonEntryOptions,
   ...ukTenKEntryOptions,
   ...verifiedHalfMarathonFollowupEntryOptions,
+  ...dailyHalfTenMileEntryOptions,
 };
