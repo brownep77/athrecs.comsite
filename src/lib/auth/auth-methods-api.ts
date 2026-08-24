@@ -13,11 +13,23 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
   async (): Promise<AvailableAuthMethods> => {
     const env = process.env;
     const authEnabled = env.VITE_AUTH_ENABLED !== "false";
+    const resendApiKeyPresent = configured(env.RESEND_API_KEY);
+    const authEmailFromPresent = configured(env.AUTH_EMAIL_FROM);
+    const emailPassword = resendApiKeyPresent && authEmailFromPresent;
+
+    console.info("[auth-methods]", {
+      authEnabled,
+      resendApiKeyPresent,
+      authEmailFromPresent,
+      emailPassword: authEnabled && emailPassword,
+      environment: env.VERCEL_ENV ?? "unknown",
+      deployment: env.VERCEL_GIT_COMMIT_SHA?.slice(0, 12) ?? null,
+    });
+
     if (!authEnabled) {
       return { emailPassword: false, passwordReset: false, providers: [] };
     }
 
-    const emailPassword = configured(env.RESEND_API_KEY, env.AUTH_EMAIL_FROM);
     const deployed = configured(env.BETTER_AUTH_URL);
     const brokerConfigured =
       !deployed || configured(env.GROK_AUTH_CLIENT_ID, env.GROK_AUTH_CLIENT_SECRET);
