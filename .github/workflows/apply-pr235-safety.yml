@@ -56,7 +56,6 @@ jobs:
           git config user.name "Athrecs Safety Automation"
           git config user.email "paultwbrowne@gmail.com"
           git add -- \
-            .github/workflows/quality-gate.yml \
             migrations/0017_slug_insert_guards.sql \
             scripts/migrate.mjs \
             scripts/verify-catalogue-publishing.mjs \
