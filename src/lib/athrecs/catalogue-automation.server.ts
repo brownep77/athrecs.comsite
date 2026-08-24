@@ -4,7 +4,7 @@ import { verifyGitHubActionsOidcToken } from "./github-actions-oidc.server";
 const MAX_BODY_BYTES = 1_250_000;
 const MAX_EVENTS = 75;
 const MAX_EDITIONS = 200;
-const SOURCE_KEY_PREFIX = "athrecs-holding:delta:";
+const SOURCE_KEY_PATTERN = /^athrecs-holding:delta:[a-f0-9]{24}$/;
 
 class AutomationRequestError extends Error {
   constructor(
@@ -50,7 +50,7 @@ function validateBatch(
   const events = row.events === undefined ? [] : row.events;
   const editions = row.editions === undefined ? [] : row.editions;
 
-  if (!sourceKey.startsWith(SOURCE_KEY_PREFIX) || sourceKey.length > 160) {
+  if (!SOURCE_KEY_PATTERN.test(sourceKey)) {
     throw new AutomationRequestError("The automated sourceKey is not trusted", 422);
   }
   if (sourceUrl !== expectedSourceUrl) {
