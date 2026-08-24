@@ -1,11 +1,11 @@
 -- Preserve valid legacy public URLs while keeping slug reuse protection.
 --
 -- The historical catalogue contains a small number of lowercase slugs with
--- repeated internal hyphens. They are already public, indexed addresses and
--- must continue to seed and resolve. New application-generated slugs still use
--- the stricter single-hyphen `slugify` format; this database rule accepts the
--- legacy public superset but rejects uppercase, spaces, and leading/trailing
--- hyphens.
+-- repeated internal hyphens or a trailing hyphen left by an older fixed-length
+-- truncation. They are already public, indexed addresses and must continue to
+-- seed and resolve. New application-generated slugs are normalized and trimmed
+-- after truncation; this database rule accepts the legacy public superset but
+-- still rejects uppercase, spaces, path characters, and leading hyphens.
 
 create or replace function athrecs_preserve_entity_slug()
 returns trigger
@@ -14,7 +14,7 @@ as $$
 declare
   kind text := tg_argv[0];
 begin
-  if new.slug is null or new.slug !~ '^[a-z0-9]([a-z0-9-]*[a-z0-9])?$' then
+  if new.slug is null or new.slug !~ '^[a-z0-9][a-z0-9-]*$' then
     raise exception 'Invalid % slug: %', kind, coalesce(new.slug, '<null>');
   end if;
 
