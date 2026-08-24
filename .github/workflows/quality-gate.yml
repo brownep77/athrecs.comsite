@@ -59,7 +59,7 @@ jobs:
           echo $! > artifacts/preview.pid
 
           for attempt in $(seq 1 60); do
-            if curl --fail --silent --max-time 2 http://127.0.0.1:8080/favicon.ico > /dev/null; then
+            if curl --fail --silent --max-time 2 http://127.0.0.1:8080/favicon.png > /dev/null; then
               break
             fi
             if [ "$attempt" -eq 60 ]; then
