@@ -35,12 +35,12 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Start built preview
+      - name: Start browser smoke server
         run: |
           mkdir -p artifacts
-          nohup npm run preview > artifacts/preview.log 2>&1 &
+          nohup npm run dev > artifacts/preview.log 2>&1 &
           echo $! > artifacts/preview.pid
-          for attempt in $(seq 1 60); do
+          for attempt in $(seq 1 120); do
             if curl --fail --silent http://127.0.0.1:8080/ > /dev/null; then
               exit 0
             fi
