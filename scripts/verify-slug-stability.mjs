@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import { readFile } from "node:fs/promises";
 
+const { seriesList } = await import("../src/data/series.ts");
+
 const checks = [
   {
     path: "migrations/0015_slug_redirects.sql",
@@ -103,10 +105,27 @@ for (const invalidSlug of ["", "-leading", "Uppercase", "has space", "slash/path
   }
 }
 
+const invalidCatalogueSlugs = [
+  ...new Set(
+    seriesList
+      .map((series) => series.slug)
+      .filter((slug) => typeof slug !== "string" || !publicSlugPattern.test(slug)),
+  ),
+];
+if (invalidCatalogueSlugs.length) {
+  failures.push(
+    `race-series catalogue has ${invalidCatalogueSlugs.length} unsupported public slug(s): ${invalidCatalogueSlugs
+      .slice(0, 25)
+      .join(", ")}`,
+  );
+}
+
 if (failures.length) {
   console.error("Slug stability verification failed:");
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
-console.log("Slug stability verification passed, including legacy public URL compatibility.");
+console.log(
+  `Slug stability verification passed for ${seriesList.length.toLocaleString("en-GB")} race-series URLs, including legacy compatibility.`,
+);
