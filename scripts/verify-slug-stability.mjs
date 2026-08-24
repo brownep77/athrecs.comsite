@@ -26,9 +26,9 @@ const checks = [
     path: "migrations/0018_legacy_slug_compatibility.sql",
     patterns: [
       "Preserve valid legacy public URLs",
-      "repeated internal hyphens",
+      "repeated internal hyphens or a trailing hyphen",
       "create or replace function athrecs_preserve_entity_slug()",
-      "^[a-z0-9]([a-z0-9-]*[a-z0-9])?$",
+      "^[a-z0-9][a-z0-9-]*$",
       "redirect.old_slug = new.slug",
       "redirect.current_slug = new.slug",
     ],
@@ -37,9 +37,14 @@ const checks = [
     path: "src/lib/athrecs/slug-redirects.ts",
     patterns: [
       "PUBLIC_SLUG_PATTERN",
-      "/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/",
+      "/^[a-z0-9][a-z0-9-]*$/",
       "repeated internal hyphens",
+      "trailing hyphen",
     ],
+  },
+  {
+    path: "src/lib/athrecs/import.server.ts",
+    patterns: ['.slice(0, 80)\n    .replace(/-+$/g, "");'],
   },
   {
     path: "src/routes/races/index.tsx",
@@ -81,14 +86,18 @@ for (const check of checks) {
   }
 }
 
-const publicSlugPattern = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
-const knownLegacySlug =
-  "wa-xlv-giro-podistico-citta-di-pordenone-campionato-reg-fvg-5-km-8-prova--7237453";
+const publicSlugPattern = /^[a-z0-9][a-z0-9-]*$/;
+const knownLegacySlugs = [
+  "wa-xlv-giro-podistico-citta-di-pordenone-campionato-reg-fvg-5-km-8-prova--7237453",
+  "wt-2026-africa-duathlon-achampionships-hurghada-g-",
+];
 
-if (!publicSlugPattern.test(knownLegacySlug)) {
-  failures.push(`legacy public slug is rejected: ${knownLegacySlug}`);
+for (const legacySlug of knownLegacySlugs) {
+  if (!publicSlugPattern.test(legacySlug)) {
+    failures.push(`legacy public slug is rejected: ${legacySlug}`);
+  }
 }
-for (const invalidSlug of ["", "-leading", "trailing-", "Uppercase", "has space", "slash/path"]) {
+for (const invalidSlug of ["", "-leading", "Uppercase", "has space", "slash/path"]) {
   if (publicSlugPattern.test(invalidSlug)) {
     failures.push(`invalid public slug is accepted: ${invalidSlug || "<empty>"}`);
   }
