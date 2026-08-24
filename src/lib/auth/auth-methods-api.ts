@@ -77,12 +77,6 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
       "social",
       emailPassword && configured(env.LINKEDIN_CLIENT_ID, env.LINKEDIN_CLIENT_SECRET),
     );
-    add(
-      "github",
-      "GitHub",
-      "social",
-      emailPassword && configured(env.GITHUB_CLIENT_ID, env.GITHUB_CLIENT_SECRET),
-    );
 
     return {
       emailPassword,
