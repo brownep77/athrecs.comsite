@@ -35,8 +35,8 @@ const env = (key: string): string | undefined => {
 };
 
 const authDisabled = env("VITE_AUTH_ENABLED") === "false";
-const emailPasswordConfigured =
-  !authDisabled && emailAndPasswordEnabled && authEmailConfigured();
+const emailPasswordConfigured = !authDisabled && emailAndPasswordEnabled;
+const emailDeliveryConfigured = emailPasswordConfigured && authEmailConfigured();
 
 const googleClientId = env("GOOGLE_CLIENT_ID");
 const googleClientSecret = env("GOOGLE_CLIENT_SECRET");
@@ -56,27 +56,27 @@ const microsoftClientId = env("MICROSOFT_CLIENT_ID");
 const microsoftClientSecret = env("MICROSOFT_CLIENT_SECRET");
 const microsoftTenantId = env("MICROSOFT_TENANT_ID") ?? "common";
 const directMicrosoftConfigured =
-  emailPasswordConfigured && Boolean(microsoftClientId && microsoftClientSecret);
+  emailDeliveryConfigured && Boolean(microsoftClientId && microsoftClientSecret);
 
 const facebookClientId = env("FACEBOOK_CLIENT_ID");
 const facebookClientSecret = env("FACEBOOK_CLIENT_SECRET");
 const directFacebookConfigured =
-  emailPasswordConfigured && Boolean(facebookClientId && facebookClientSecret);
+  emailDeliveryConfigured && Boolean(facebookClientId && facebookClientSecret);
 
 const twitterClientId = env("TWITTER_CLIENT_ID");
 const twitterClientSecret = env("TWITTER_CLIENT_SECRET");
 const directTwitterConfigured =
-  emailPasswordConfigured && Boolean(twitterClientId && twitterClientSecret);
+  emailDeliveryConfigured && Boolean(twitterClientId && twitterClientSecret);
 
 const linkedinClientId = env("LINKEDIN_CLIENT_ID");
 const linkedinClientSecret = env("LINKEDIN_CLIENT_SECRET");
 const directLinkedinConfigured =
-  emailPasswordConfigured && Boolean(linkedinClientId && linkedinClientSecret);
+  emailDeliveryConfigured && Boolean(linkedinClientId && linkedinClientSecret);
 
 const githubClientId = env("GITHUB_CLIENT_ID");
 const githubClientSecret = env("GITHUB_CLIENT_SECRET");
 const directGithubConfigured =
-  emailPasswordConfigured && Boolean(githubClientId && githubClientSecret);
+  emailDeliveryConfigured && Boolean(githubClientId && githubClientSecret);
 
 // BETTER_AUTH_URL is a canonical fallback. The actual approved Athrecs hostname
 // is resolved per request so public and staff sessions remain host-only.
@@ -282,6 +282,57 @@ const socialProviders = {
     : {}),
 };
 
+const emailVerification = emailDeliveryConfigured
+  ? {
+      sendOnSignUp: true,
+      sendOnSignIn: true,
+      autoSignInAfterVerification: true,
+      sendVerificationEmail: async ({ user, url }: { user: { email: string }; url: string }) => {
+        await sendAthrecsAuthEmail({
+          to: user.email,
+          subject: "Verify your ATHRECS Athlete Account",
+          heading: "Verify your email address",
+          message:
+            "Confirm this email to finish securing your Athlete Account and use result claims, recovery and account linking.",
+          actionLabel: "Verify email",
+          actionUrl: url,
+        });
+      },
+    }
+  : undefined;
+
+const emailAndPassword = emailPasswordConfigured
+  ? {
+      enabled: true,
+      requireEmailVerification: emailDeliveryConfigured,
+      minPasswordLength: 10,
+      maxPasswordLength: 128,
+      revokeSessionsOnPasswordReset: true,
+      resetPasswordTokenExpiresIn: 60 * 60,
+      ...(emailDeliveryConfigured
+        ? {
+            sendResetPassword: async ({
+              user,
+              url,
+            }: {
+              user: { email: string };
+              url: string;
+            }) => {
+              await sendAthrecsAuthEmail({
+                to: user.email,
+                subject: "Reset your ATHRECS password",
+                heading: "Reset your password",
+                message:
+                  "Use this secure link to choose a new ATHRECS password. The link expires after one hour.",
+                actionLabel: "Reset password",
+                actionUrl: url,
+              });
+            },
+          }
+        : {}),
+    }
+  : undefined;
+
 export const auth = betterAuth({
   appName: "ATHRECS.com",
   baseURL,
@@ -289,45 +340,8 @@ export const auth = betterAuth({
   database,
   trustedOrigins,
   ...(Object.keys(socialProviders).length ? { socialProviders } : {}),
-  ...(emailPasswordConfigured
-    ? {
-        emailVerification: {
-          sendOnSignUp: true,
-          sendOnSignIn: true,
-          autoSignInAfterVerification: true,
-          sendVerificationEmail: async ({ user, url }) => {
-            await sendAthrecsAuthEmail({
-              to: user.email,
-              subject: "Verify your ATHRECS Athlete Account",
-              heading: "Verify your email address",
-              message:
-                "Confirm this email to finish securing your Athlete Account and use result claims, recovery and account linking.",
-              actionLabel: "Verify email",
-              actionUrl: url,
-            });
-          },
-        },
-        emailAndPassword: {
-          enabled: true,
-          requireEmailVerification: true,
-          minPasswordLength: 10,
-          maxPasswordLength: 128,
-          revokeSessionsOnPasswordReset: true,
-          resetPasswordTokenExpiresIn: 60 * 60,
-          sendResetPassword: async ({ user, url }) => {
-            await sendAthrecsAuthEmail({
-              to: user.email,
-              subject: "Reset your ATHRECS password",
-              heading: "Reset your password",
-              message:
-                "Use this secure link to choose a new ATHRECS password. The link expires after one hour.",
-              actionLabel: "Reset password",
-              actionUrl: url,
-            });
-          },
-        },
-      }
-    : {}),
+  ...(emailVerification ? { emailVerification } : {}),
+  ...(emailAndPassword ? { emailAndPassword } : {}),
   account: {
     encryptOAuthTokens: true,
     accountLinking: {
@@ -341,7 +355,7 @@ export const auth = betterAuth({
         "credential",
         ...GROK_PROVIDERS.map((provider) => provider.providerId),
       ],
-      requireLocalEmailVerified: false,
+      requireLocalEmailVerified: true,
       allowDifferentEmails: false,
     },
   },
