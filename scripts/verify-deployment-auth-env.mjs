@@ -13,11 +13,9 @@ const vercelProduction = process.env.VERCEL_ENV === "production";
 const authEnabled = process.env.VITE_AUTH_ENABLED !== "false";
 const resendApiKeyPresent = present(process.env.RESEND_API_KEY);
 const authEmailFromPresent = present(process.env.AUTH_EMAIL_FROM);
-const emailPasswordAvailable =
-  authEnabled &&
-  emailPasswordFeatureEnabled &&
-  resendApiKeyPresent &&
-  authEmailFromPresent;
+const emailPasswordAvailable = authEnabled && emailPasswordFeatureEnabled;
+const emailDeliveryAvailable =
+  emailPasswordAvailable && resendApiKeyPresent && authEmailFromPresent;
 
 console.log(
   "[auth-env-check]",
@@ -28,20 +26,12 @@ console.log(
     resendApiKeyPresent,
     authEmailFromPresent,
     emailPasswordAvailable,
+    emailDeliveryAvailable,
   }),
 );
 
-if (
-  vercelProduction &&
-  authEnabled &&
-  emailPasswordFeatureEnabled &&
-  !emailPasswordAvailable
-) {
-  const missing = [
-    !resendApiKeyPresent ? "RESEND_API_KEY" : null,
-    !authEmailFromPresent ? "AUTH_EMAIL_FROM" : null,
-  ].filter(Boolean);
-  throw new Error(
-    `Production email/password authentication is enabled but missing: ${missing.join(", ")}`,
+if (vercelProduction && emailPasswordAvailable && !emailDeliveryAvailable) {
+  console.warn(
+    "[auth-env-check] Email/password sign-in will remain available, but email verification and password recovery are disabled until RESEND_API_KEY and AUTH_EMAIL_FROM are present.",
   );
 }

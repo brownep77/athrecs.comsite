@@ -15,10 +15,7 @@ import {
   X as XIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  authClient,
-  signInWithProvider,
-} from "@/lib/auth/client";
+import { authClient, signInWithProvider } from "@/lib/auth/client";
 import { getAvailableAuthMethods } from "@/lib/auth/auth-methods-api";
 import {
   AUTH_DIALOG_EVENT,
@@ -80,6 +77,10 @@ export function AthleteAuthDialog() {
     retry: 1,
   });
 
+  const emailAvailable = methods.data?.emailPassword === true;
+  const passwordResetAvailable = methods.data?.passwordReset === true;
+  const socialProviders = methods.data?.providers ?? [];
+
   useEffect(() => {
     setMounted(true);
     const initial = new URL(window.location.href);
@@ -138,6 +139,16 @@ export function AthleteAuthDialog() {
     };
   }, [open, mode, busy]);
 
+  useEffect(() => {
+    if (!open || methods.isLoading || methods.isError || passwordResetAvailable) return;
+    if (mode !== "forgot" && mode !== "reset") return;
+    setMode("signin");
+    setResetToken(null);
+    setError(
+      "Password recovery is temporarily unavailable. Sign in with your existing password.",
+    );
+  }, [open, mode, methods.isLoading, methods.isError, passwordResetAvailable]);
+
   function clearStatus() {
     setMessage(null);
     setError(null);
@@ -148,6 +159,16 @@ export function AthleteAuthDialog() {
     clearStatus();
     setPassword("");
     setConfirmPassword("");
+    if (
+      (nextMode === "forgot" || nextMode === "reset") &&
+      !passwordResetAvailable
+    ) {
+      setMode("signin");
+      setError(
+        "Password recovery is temporarily unavailable. Sign in with your existing password.",
+      );
+      return;
+    }
     setMode(nextMode);
   }
 
@@ -196,6 +217,17 @@ export function AthleteAuthDialog() {
   async function submitEmail(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     clearStatus();
+
+    if (
+      (mode === "forgot" || mode === "reset") &&
+      !passwordResetAvailable
+    ) {
+      setError(
+        "Password recovery is temporarily unavailable. Sign in with your existing password.",
+      );
+      return;
+    }
+
     const validation = validateEmailFields();
     if (validation) {
       setError(validation);
@@ -213,11 +245,28 @@ export function AthleteAuthDialog() {
           callbackURL,
         });
         if (result.error) throw new Error(result.error.message ?? "Account creation failed");
-        setMessage(
-          "Check your email for the ATHRECS verification link. The account is protected until you confirm it.",
-        );
-        setPassword("");
-        setConfirmPassword("");
+
+        if (passwordResetAvailable) {
+          setMessage(
+            "Check your email for the ATHRECS verification link. The account is protected until you confirm it.",
+          );
+          setPassword("");
+          setConfirmPassword("");
+        } else {
+          const signInResult = await authClient.signIn.email({
+            email: normalizedEmail,
+            password,
+            rememberMe: true,
+            callbackURL,
+          });
+          if (signInResult.error) {
+            throw new Error(
+              signInResult.error.message ??
+                "The account was created, but ATHRECS could not sign it in.",
+            );
+          }
+          window.location.href = callbackURL;
+        }
       } else if (mode === "signin") {
         const result = await authClient.signIn.email({
           email: normalizedEmail,
@@ -227,10 +276,12 @@ export function AthleteAuthDialog() {
         });
         if (result.error) {
           const verificationRequired = result.error.status === 403;
-          setNeedsVerification(verificationRequired);
+          setNeedsVerification(verificationRequired && passwordResetAvailable);
           throw new Error(
             verificationRequired
-              ? "Verify your email before signing in. A new verification email can be sent below."
+              ? passwordResetAvailable
+                ? "Verify your email before signing in. A new verification email can be sent below."
+                : "This account still needs email verification, but verification-email delivery is temporarily unavailable."
               : result.error.message ?? "Email sign-in failed",
           );
         }
@@ -266,6 +317,10 @@ export function AthleteAuthDialog() {
   }
 
   async function resendVerification() {
+    if (!passwordResetAvailable) {
+      setError("Verification-email delivery is temporarily unavailable.");
+      return;
+    }
     const normalizedEmail = email.trim().toLowerCase();
     if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
       setError("Enter your email address first.");
@@ -289,8 +344,6 @@ export function AthleteAuthDialog() {
 
   if (!mounted || !open) return null;
 
-  const emailAvailable = methods.data?.emailPassword === true;
-  const socialProviders = methods.data?.providers ?? [];
   const formTitle =
     mode === "signup"
       ? "Create an Athlete Account"
@@ -419,6 +472,12 @@ export function AthleteAuthDialog() {
                 </div>
               ) : null}
 
+              {!passwordResetAvailable ? (
+                <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-3 text-sm leading-5 text-amber-950">
+                  Email and password accounts are available. Verification emails and password recovery are temporarily unavailable, so keep your password safe. Unverified manual accounts are not automatically linked to another sign-in provider.
+                </div>
+              ) : null}
+
               <form className="space-y-4" onSubmit={(event) => void submitEmail(event)}>
                 {mode === "signup" ? (
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
@@ -466,9 +525,7 @@ export function AthleteAuthDialog() {
                       <input
                         ref={mode === "reset" ? emailInput : undefined}
                         type={showPassword ? "text" : "password"}
-                        autoComplete={
-                          mode === "signin" ? "current-password" : "new-password"
-                        }
+                        autoComplete={mode === "signin" ? "current-password" : "new-password"}
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         minLength={10}
@@ -527,7 +584,7 @@ export function AthleteAuthDialog() {
                 </Button>
               </form>
 
-              {mode === "signin" ? (
+              {mode === "signin" && passwordResetAvailable ? (
                 <button
                   type="button"
                   onClick={() => switchMode("forgot")}
@@ -549,17 +606,23 @@ export function AthleteAuthDialog() {
           ) : null}
 
           {error ? (
-            <div className="rounded-lg border border-red-500/30 bg-red-50 p-3 text-sm text-red-900" role="alert">
+            <div
+              className="rounded-lg border border-red-500/30 bg-red-50 p-3 text-sm text-red-900"
+              role="alert"
+            >
               {error}
             </div>
           ) : null}
           {message ? (
-            <div className="flex items-start gap-2 rounded-lg border border-emerald-500/30 bg-emerald-50 p-3 text-sm text-emerald-950" role="status">
+            <div
+              className="flex items-start gap-2 rounded-lg border border-emerald-500/30 bg-emerald-50 p-3 text-sm text-emerald-950"
+              role="status"
+            >
               <CheckCircle2 className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
               {message}
             </div>
           ) : null}
-          {needsVerification ? (
+          {needsVerification && passwordResetAvailable ? (
             <Button
               type="button"
               variant="secondary"
@@ -567,7 +630,11 @@ export function AthleteAuthDialog() {
               disabled={Boolean(busy)}
               onClick={() => void resendVerification()}
             >
-              {busy === "verification" ? <Loader2 className="size-4 animate-spin" /> : <Mail className="size-4" />}
+              {busy === "verification" ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Mail className="size-4" />
+              )}
               Resend verification email
             </Button>
           ) : null}
