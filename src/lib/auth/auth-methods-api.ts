@@ -4,6 +4,7 @@ import type {
   AvailableSocialProvider,
   AthleteAuthProviderId,
 } from "./auth-methods";
+import { emailAndPasswordEnabled } from "./email-password";
 
 function configured(...values: Array<string | undefined>): boolean {
   return values.every((value) => Boolean(value?.trim()));
@@ -15,13 +16,16 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
     const authEnabled = env.VITE_AUTH_ENABLED !== "false";
     const resendApiKeyPresent = configured(env.RESEND_API_KEY);
     const authEmailFromPresent = configured(env.AUTH_EMAIL_FROM);
-    const emailPassword = resendApiKeyPresent && authEmailFromPresent;
+    const emailPassword = authEnabled && emailAndPasswordEnabled;
+    const emailDelivery = emailPassword && resendApiKeyPresent && authEmailFromPresent;
 
     console.info("[auth-methods]", {
       authEnabled,
+      emailPasswordFeatureEnabled: emailAndPasswordEnabled,
       resendApiKeyPresent,
       authEmailFromPresent,
-      emailPassword: authEnabled && emailPassword,
+      emailPassword,
+      emailDelivery,
       environment: env.VERCEL_ENV ?? "unknown",
       deployment: env.VERCEL_GIT_COMMIT_SHA?.slice(0, 12) ?? null,
     });
@@ -67,13 +71,13 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
       "microsoft",
       "Microsoft",
       "identity",
-      emailPassword && configured(env.MICROSOFT_CLIENT_ID, env.MICROSOFT_CLIENT_SECRET),
+      emailDelivery && configured(env.MICROSOFT_CLIENT_ID, env.MICROSOFT_CLIENT_SECRET),
     );
     add(
       "facebook",
       "Facebook",
       "social",
-      emailPassword && configured(env.FACEBOOK_CLIENT_ID, env.FACEBOOK_CLIENT_SECRET),
+      emailDelivery && configured(env.FACEBOOK_CLIENT_ID, env.FACEBOOK_CLIENT_SECRET),
     );
 
     const directTwitter = configured(env.TWITTER_CLIENT_ID, env.TWITTER_CLIENT_SECRET);
@@ -81,18 +85,18 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
       directTwitter ? "twitter" : "grok-x",
       "X",
       "social",
-      emailPassword && (directTwitter || brokerConfigured),
+      emailDelivery && (directTwitter || brokerConfigured),
     );
     add(
       "linkedin",
       "LinkedIn",
       "social",
-      emailPassword && configured(env.LINKEDIN_CLIENT_ID, env.LINKEDIN_CLIENT_SECRET),
+      emailDelivery && configured(env.LINKEDIN_CLIENT_ID, env.LINKEDIN_CLIENT_SECRET),
     );
 
     return {
       emailPassword,
-      passwordReset: emailPassword,
+      passwordReset: emailDelivery,
       providers,
     };
   },
