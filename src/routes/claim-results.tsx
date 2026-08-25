@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { signIn } from "@/lib/auth/client";
+import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import {
   getClaimableResult,
@@ -77,7 +77,6 @@ function ClaimResultsPage() {
   const [evidenceUrl, setEvidenceUrl] = useState("");
   const [declaration, setDeclaration] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
-  const [signingIn, setSigningIn] = useState(false);
 
   const result = useQuery({
     queryKey: ["claimable-result", resultId],
@@ -134,16 +133,14 @@ function ClaimResultsPage() {
     onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
   });
 
-  async function startSignIn() {
-    setSigningIn(true);
+  function startSignIn() {
     setMessage(null);
-    try {
-      const callbackURL = `${window.location.pathname}${window.location.search}`;
-      await signIn("grok-google", { callbackURL, errorCallbackURL: callbackURL });
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : "Google sign-in failed");
-      setSigningIn(false);
-    }
+    const callbackURL = `${window.location.pathname}${window.location.search}`;
+    openAthleteAuth({
+      mode: "signin",
+      callbackURL,
+      errorCallbackURL: callbackURL,
+    });
   }
 
   const activeClaim =
@@ -157,14 +154,14 @@ function ClaimResultsPage() {
         <div className="border-b border-border bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-6 text-white md:px-7">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
             <ShieldCheck className="size-4" aria-hidden="true" />
-            Verified athlete identity
+            Athlete identity review
           </div>
           <h1 className="mt-2 font-display text-2xl font-semibold md:text-3xl">
             Claim your race results
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-slate-300">
-            Link a result to your Google account. Every claim is checked by ATHRECS staff before
-            your athlete profile is marked as owned.
+            Link a result to your ATHRECS Athlete Account. Every claim is checked by ATHRECS staff
+            before your athlete profile is marked as owned.
           </p>
         </div>
         <div className="grid gap-4 p-5 text-sm md:grid-cols-3 md:p-7">
@@ -192,7 +189,7 @@ function ClaimResultsPage() {
           <p className="mt-1 text-sm text-muted">
             {user
               ? "You are signed in. Complete your private Entry Passport or continue with the claim below."
-              : "Create your secure account before claiming. Your verified Google email is attached to the claim."}
+              : "Create or sign in to your secure Athlete Account before claiming. Your account and private evidence are attached to the review request."}
           </p>
         </div>
         {sessionPending ? (
@@ -204,13 +201,9 @@ function ClaimResultsPage() {
             </Link>
           </Button>
         ) : (
-          <Button type="button" disabled={signingIn} onClick={() => void startSignIn()}>
-            {signingIn ? (
-              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-            ) : (
-              <LogIn className="size-4" aria-hidden="true" />
-            )}
-            {signingIn ? "Opening Google…" : "Sign in or create account"}
+          <Button type="button" onClick={startSignIn}>
+            <LogIn className="size-4" aria-hidden="true" />
+            Sign in or create account
           </Button>
         )}
       </section>
@@ -273,17 +266,13 @@ function ClaimResultsPage() {
               <div>
                 <h3 className="font-semibold text-fg">Sign in before claiming</h3>
                 <p className="mt-1 text-sm text-muted">
-                  Google confirms the email address attached to the claim. Your evidence remains
-                  private to you and ATHRECS staff.
+                  Use email and password, Google, or another available provider. Your evidence
+                  remains private to you and ATHRECS staff.
                 </p>
               </div>
-              <Button type="button" disabled={signingIn} onClick={() => void startSignIn()}>
-                {signingIn ? (
-                  <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                ) : (
-                  <LogIn className="size-4" aria-hidden="true" />
-                )}
-                {signingIn ? "Opening Google…" : "Continue with Google"}
+              <Button type="button" onClick={startSignIn}>
+                <LogIn className="size-4" aria-hidden="true" />
+                Sign in or create account
               </Button>
             </div>
           ) : activeClaim?.status === "pending" ? (

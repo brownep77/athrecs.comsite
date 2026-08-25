@@ -3,6 +3,11 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { getSql } from "@/lib/db";
 import { syncAthleteAccountAfterClaim } from "./athlete-account-api";
+import {
+  notifyResultClaimReviewed,
+  notifyResultClaimSubmitted,
+  notifyResultClaimWithdrawn,
+} from "./result-claim-email.server";
 import { ensureAthrecsSeeded } from "./seed.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
@@ -67,6 +72,16 @@ type ClaimRow = {
   source_url: string | null;
   existing_owner_email?: string | null;
   competing_claim_count?: number;
+};
+
+type ClaimEmailRow = {
+  claim_id: number;
+  result_id: number;
+  claimant_email: string;
+  athlete_name: string;
+  event_name: string;
+  event_date: string;
+  distance_code: string;
 };
 
 async function ready() {
@@ -264,17 +279,33 @@ export const submitResultClaim = createServerFn({ method: "POST" })
     }
 
     const sql = await ready();
-    return sql.transaction(async (tx) => {
+    const outcome = await sql.transaction(async (tx) => {
       const users = await tx<{ email: string }>`
         select "email" as email from "user" where "id" = ${context.userId} limit 1
       `;
       const claimantEmail = users[0]?.email?.trim().toLowerCase();
-      if (!claimantEmail) throw new Error("Your signed-in account has no verified email");
+      if (!claimantEmail) throw new Error("Your signed-in account has no email address");
 
-      const results = await tx<{ result_id: number; athlete_id: number }>`
-        select id as result_id, athlete_id
-        from results
-        where id = ${data.resultId}
+      const results = await tx<{
+        result_id: number;
+        athlete_id: number;
+        athlete_name: string;
+        event_name: string;
+        event_date: string;
+        distance_code: string;
+      }>`
+        select
+          result.id as result_id,
+          result.athlete_id,
+          athlete.display_name as athlete_name,
+          event.name as event_name,
+          edition.event_date::text as event_date,
+          edition.distance_code
+        from results result
+        join athletes athlete on athlete.id = result.athlete_id
+        join editions edition on edition.id = result.edition_id
+        join events event on event.id = edition.event_id
+        where result.id = ${data.resultId}
         limit 1
       `;
       const result = results[0];
@@ -288,7 +319,12 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       `;
       const owner = owners[0];
       if (owner?.user_id === context.userId) {
-        return { status: "approved" as const, alreadyOwned: true, claimId: null };
+        return {
+          status: "approved" as const,
+          alreadyOwned: true,
+          claimId: null,
+          email: null,
+        };
       }
       const conflictReason = owner
         ? "This athlete profile is already linked to another account. Staff identity checks are required."
@@ -302,7 +338,12 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         for update
       `;
       if (existing[0]?.status === "approved") {
-        return { status: "approved" as const, alreadyOwned: true, claimId: existing[0].id };
+        return {
+          status: "approved" as const,
+          alreadyOwned: true,
+          claimId: existing[0].id,
+          email: null,
+        };
       }
       if (existing[0]?.status === "pending") {
         throw new Error("You already have an active claim for this result");
@@ -347,8 +388,28 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         claimId = inserted[0].id;
       }
 
-      return { status: "pending" as const, alreadyOwned: false, claimId };
+      return {
+        status: "pending" as const,
+        alreadyOwned: false,
+        claimId,
+        email: {
+          claimId,
+          resultId: result.result_id,
+          claimantEmail,
+          athleteName: result.athlete_name,
+          eventName: result.event_name,
+          eventDate: result.event_date,
+          distanceCode: result.distance_code,
+        },
+      };
     });
+
+    if (outcome.email) await notifyResultClaimSubmitted(outcome.email);
+    return {
+      status: outcome.status,
+      alreadyOwned: outcome.alreadyOwned,
+      claimId: outcome.claimId,
+    };
   });
 
 export const listMyResultClaims = createServerFn({ method: "GET" })
@@ -371,15 +432,45 @@ export const withdrawResultClaim = createServerFn({ method: "POST" })
   }))
   .handler(async ({ data, context }) => {
     const sql = await ready();
-    const updated = await sql<{ id: number }>`
-      update result_claims
-      set status = 'withdrawn', updated_at = now()
-      where id = ${data.claimId}
-        and claimant_user_id = ${context.userId}
-        and status in ('pending', 'needs_info')
-      returning id
-    `;
-    if (!updated[0]) throw new Error("Only an active claim can be withdrawn");
+    const outcome = await sql.transaction(async (tx) => {
+      const rows = await tx<ClaimEmailRow>`
+        select
+          claim.id as claim_id,
+          claim.result_id,
+          claim.claimant_email,
+          athlete.display_name as athlete_name,
+          event.name as event_name,
+          edition.event_date::text as event_date,
+          edition.distance_code
+        from result_claims claim
+        join results result on result.id = claim.result_id
+        join athletes athlete on athlete.id = claim.athlete_id
+        join editions edition on edition.id = result.edition_id
+        join events event on event.id = edition.event_id
+        where claim.id = ${data.claimId}
+          and claim.claimant_user_id = ${context.userId}
+          and claim.status in ('pending', 'needs_info')
+        limit 1
+        for update
+      `;
+      const claim = rows[0];
+      if (!claim) throw new Error("Only an active claim can be withdrawn");
+      await tx`
+        update result_claims
+        set status = 'withdrawn', updated_at = now()
+        where id = ${claim.claim_id}
+      `;
+      return claim;
+    });
+    await notifyResultClaimWithdrawn({
+      claimId: outcome.claim_id,
+      resultId: outcome.result_id,
+      claimantEmail: outcome.claimant_email,
+      athleteName: outcome.athlete_name,
+      eventName: outcome.event_name,
+      eventDate: outcome.event_date,
+      distanceCode: outcome.distance_code,
+    });
     return { withdrawn: true };
   });
 
@@ -444,13 +535,32 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
+        result_id: number;
         athlete_id: number;
         claimant_user_id: string;
         claimant_email: string;
+        athlete_name: string;
+        event_name: string;
+        event_date: string;
+        distance_code: string;
       }>`
-        select id, status, athlete_id, claimant_user_id, claimant_email
-        from result_claims
-        where id = ${data.claimId}
+        select
+          claim.id,
+          claim.status,
+          claim.result_id,
+          claim.athlete_id,
+          claim.claimant_user_id,
+          claim.claimant_email,
+          athlete.display_name as athlete_name,
+          event.name as event_name,
+          edition.event_date::text as event_date,
+          edition.distance_code
+        from result_claims claim
+        join results result on result.id = claim.result_id
+        join athletes athlete on athlete.id = claim.athlete_id
+        join editions edition on edition.id = result.edition_id
+        join events event on event.id = edition.event_id
+        where claim.id = ${data.claimId}
         limit 1
         for update
       `;
@@ -523,11 +633,27 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
         `;
       }
 
-      return { claimId: claim.id, status: nextStatus, claimantUserId: claim.claimant_user_id };
+      return {
+        claimId: claim.id,
+        status: nextStatus,
+        claimantUserId: claim.claimant_user_id,
+        email: {
+          claimId: claim.id,
+          resultId: claim.result_id,
+          claimantEmail: claim.claimant_email,
+          athleteName: claim.athlete_name,
+          eventName: claim.event_name,
+          eventDate: claim.event_date,
+          distanceCode: claim.distance_code,
+          status: nextStatus,
+          staffNote: data.staffNote || null,
+        },
+      };
     });
     if (result.status === "approved") {
       await syncAthleteAccountAfterClaim(result.claimantUserId);
     }
+    await notifyResultClaimReviewed(result.email);
     return { claimId: result.claimId, status: result.status };
   });
 
@@ -541,16 +667,36 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
     if (!data.staffNote) throw new Error("Add a staff note explaining the revocation");
 
     const sql = await ready();
-    return sql.transaction(async (tx) => {
+    const outcome = await sql.transaction(async (tx) => {
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
+        result_id: number;
         athlete_id: number;
         claimant_user_id: string;
+        claimant_email: string;
+        athlete_name: string;
+        event_name: string;
+        event_date: string;
+        distance_code: string;
       }>`
-        select id, status, athlete_id, claimant_user_id
-        from result_claims
-        where id = ${data.claimId}
+        select
+          claim.id,
+          claim.status,
+          claim.result_id,
+          claim.athlete_id,
+          claim.claimant_user_id,
+          claim.claimant_email,
+          athlete.display_name as athlete_name,
+          event.name as event_name,
+          edition.event_date::text as event_date,
+          edition.distance_code
+        from result_claims claim
+        join results result on result.id = claim.result_id
+        join athletes athlete on athlete.id = claim.athlete_id
+        join editions edition on edition.id = result.edition_id
+        join events event on event.id = edition.event_id
+        where claim.id = ${data.claimId}
         limit 1
         for update
       `;
@@ -582,6 +728,27 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
         where id = ${claim.id}
       `;
 
-      return { claimId: claim.id, status: "rejected" as const, ownershipRevoked: true };
+      return {
+        claimId: claim.id,
+        status: "rejected" as const,
+        ownershipRevoked: true,
+        email: {
+          claimId: claim.id,
+          resultId: claim.result_id,
+          claimantEmail: claim.claimant_email,
+          athleteName: claim.athlete_name,
+          eventName: claim.event_name,
+          eventDate: claim.event_date,
+          distanceCode: claim.distance_code,
+          status: "revoked" as const,
+          staffNote: data.staffNote,
+        },
+      };
     });
+    await notifyResultClaimReviewed(outcome.email);
+    return {
+      claimId: outcome.claimId,
+      status: outcome.status,
+      ownershipRevoked: outcome.ownershipRevoked,
+    };
   });
