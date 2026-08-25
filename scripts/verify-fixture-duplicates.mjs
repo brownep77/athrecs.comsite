@@ -14,6 +14,7 @@ const [
   { mrdMarathonEditions, mrdMarathonSeries },
   { mrdEuMarathonEditions, mrdEuMarathonSeries, mrdEuMarathonSourceRows },
   { mrdIntlMarathonEditions, mrdIntlMarathonSeries, mrdIntlMarathonSourceRows },
+  { aimsEuropeEditions, aimsEuropeSeries, aimsEuropeSeriesOverrides },
   { comradesEditions, comradesSeries },
   { twoOceansEditions, twoOceansSeries },
   { verifiedAllSportEditions, verifiedAllSportSeries },
@@ -42,6 +43,7 @@ const [
   import("../src/data/mrd-marathons.ts"),
   import("../src/data/mrd-marathons-eu.ts"),
   import("../src/data/mrd-marathons-intl.ts"),
+  import("../src/data/aims-europe-road-races.ts"),
   import("../src/data/comrades.ts"),
   import("../src/data/two-oceans.ts"),
   import("../src/data/verified-all-sport.ts"),
@@ -64,8 +66,9 @@ const seriesOverrides = {
   ...halfMarathonOptions.ukHalfMarathonSeriesOverrides,
   ...tenKOptions.ukTenKSeriesOverrides,
   ...verifiedFixtureSeriesOverrides,
+  ...aimsEuropeSeriesOverrides,
 };
-const today = "2026-08-20";
+const today = "2026-08-25";
 
 function exactName(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
@@ -113,6 +116,7 @@ for (const series of [
   ...mrdMarathonSeries,
   ...mrdEuMarathonSeries,
   ...mrdIntlMarathonSeries,
+  ...aimsEuropeSeries,
   ...comradesSeries,
   ...twoOceansSeries,
 ]) {
@@ -130,6 +134,7 @@ const seriesList = [...coreSeries, ...extraSeries].map((series) => ({
 }));
 const extraSlugs = new Set(extraSeries.map((series) => series.slug));
 const editionSources = [
+  ...aimsEuropeEditions.filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...coreEditions,
   ...raceCollectionEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...marathonDesSablesEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),

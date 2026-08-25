@@ -96,7 +96,7 @@ assert(
   "The five-mile editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v243"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-aims-europe-road-races-v244"'),
   "The persistent catalogue seed version is behind the five-mile workflow",
 );
 
