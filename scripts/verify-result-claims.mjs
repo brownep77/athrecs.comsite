@@ -55,13 +55,33 @@ assert.match(
 );
 assert.match(
   submitDefinition,
-  /const requiresReview = Boolean\(owner\) \|\| competingClaimCount > 0/,
-  "Staff review must be limited to ownership conflicts or competing claimants",
+  /const previouslyReviewed =/,
+  "A past staff decision must be detected before automatic approval",
+);
+assert.match(
+  submitDefinition,
+  /existing\[0\]\?\.status === "needs_info"/,
+  "A needs-info resubmission must remain reviewable",
+);
+assert.match(
+  submitDefinition,
+  /existing\[0\]\?\.status === "rejected"/,
+  "A rejected resubmission must not bypass staff review",
+);
+assert.match(
+  submitDefinition,
+  /const requiresReview = Boolean\(owner\) \|\| competingClaimCount > 0 \|\| previouslyReviewed/,
+  "Review must cover ownership conflicts, competing claimants and prior staff decisions",
 );
 assert.match(
   submitDefinition,
   /const nextStatus: ResultClaimStatus = requiresReview \? "pending" : "approved"/,
-  "An uncontested claim must be approved automatically",
+  "A genuinely new uncontested claim must be approved automatically",
+);
+assert.match(
+  submitDefinition,
+  /staff_note = case when \$\{previouslyReviewed\} then staff_note else null end/,
+  "The prior staff note must survive a reviewed claim resubmission",
 );
 assert.match(
   submitDefinition,
