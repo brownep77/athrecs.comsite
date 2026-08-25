@@ -173,7 +173,7 @@ function ClaimResultsPage() {
           <ClaimStep
             number="2"
             title="Confirm ownership"
-            detail="Sign in and provide a bib number or other verification detail."
+            detail="Sign in and optionally provide a bib number or other verification detail."
           />
           <ClaimStep
             number="3"
@@ -189,7 +189,7 @@ function ClaimResultsPage() {
           <p className="mt-1 text-sm text-muted">
             {user
               ? "You are signed in. Complete your private Entry Passport or continue with the claim below."
-              : "Create or sign in to your secure Athlete Account before claiming. Your account and private evidence are attached to the review request."}
+              : "Create or sign in to your secure Athlete Account before claiming. Your account and any private evidence are attached to the review request."}
           </p>
         </div>
         {sessionPending ? (
@@ -266,8 +266,8 @@ function ClaimResultsPage() {
               <div>
                 <h3 className="font-semibold text-fg">Sign in before claiming</h3>
                 <p className="mt-1 text-sm text-muted">
-                  Use email and password, Google, or another available provider. Your evidence
-                  remains private to you and ATHRECS staff.
+                  Use email and password, Google, or another available provider. Any evidence you
+                  choose to add remains private to you and ATHRECS staff.
                 </p>
               </div>
               <Button type="button" onClick={startSignIn}>
@@ -332,7 +332,7 @@ function ClaimResultsPage() {
               </label>
 
               <label className="block space-y-1.5 text-sm font-medium text-fg">
-                Verification detail
+                Verification detail <span className="font-normal text-subtle">(optional)</span>
                 <textarea
                   value={evidenceText}
                   onChange={(event) => setEvidenceText(event.target.value)}
@@ -341,6 +341,9 @@ function ClaimResultsPage() {
                   placeholder="For example: bib 428, club name, entry name, or a short explanation staff can check."
                   className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                 />
+                <span className="block text-xs font-normal text-subtle">
+                  You may leave this blank. ATHRECS staff can request more information if needed.
+                </span>
                 <span className="block text-xs font-normal text-subtle">
                   Do not include passwords, payment details or identity-document numbers.
                 </span>
@@ -373,11 +376,7 @@ function ClaimResultsPage() {
 
               <Button
                 type="submit"
-                disabled={
-                  submitClaim.isPending ||
-                  !declaration ||
-                  (!evidenceText.trim() && !evidenceUrl.trim())
-                }
+                disabled={submitClaim.isPending || !declaration}
               >
                 {submitClaim.isPending ? (
                   <Loader2 className="size-4 animate-spin" aria-hidden="true" />
