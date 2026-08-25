@@ -329,8 +329,12 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         };
       }
 
-      const existing = await tx<{ id: number; status: ResultClaimStatus }>`
-        select id, status
+      const existing = await tx<{
+        id: number;
+        status: ResultClaimStatus;
+        reviewed_by_user_id: string | null;
+      }>`
+        select id, status, reviewed_by_user_id
         from result_claims
         where result_id = ${result.result_id} and claimant_user_id = ${context.userId}
         limit 1
@@ -357,12 +361,18 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           and status in ('pending', 'needs_info', 'approved')
       `;
       const competingClaimCount = competingClaims[0]?.count ?? 0;
-      const requiresReview = Boolean(owner) || competingClaimCount > 0;
+      const previouslyReviewed =
+        Boolean(existing[0]?.reviewed_by_user_id) ||
+        existing[0]?.status === "needs_info" ||
+        existing[0]?.status === "rejected";
+      const requiresReview = Boolean(owner) || competingClaimCount > 0 || previouslyReviewed;
       const conflictReason = owner
         ? "This athlete profile is already linked to another account. Staff identity checks are required."
         : competingClaimCount > 0
           ? "Another account has claimed this athlete profile. Staff review is required before ownership changes."
-          : null;
+          : previouslyReviewed
+            ? "This claim was previously reviewed by ATHRECS staff. A new submission requires another staff review."
+            : null;
       const nextStatus: ResultClaimStatus = requiresReview ? "pending" : "approved";
 
       let claimId: number;
@@ -378,7 +388,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             evidence_url = ${data.evidenceUrl},
             declaration_accepted = true,
             conflict_reason = ${conflictReason},
-            staff_note = null,
+            staff_note = case when ${previouslyReviewed} then staff_note else null end,
             reviewed_by_user_id = null,
             reviewed_by_email = null,
             reviewed_at = case when ${requiresReview} then null else now() end,
