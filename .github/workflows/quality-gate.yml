@@ -20,10 +20,8 @@ jobs:
     timeout-minutes: 35
     env:
       DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/athrecs_ci
-      # Enables the manual sign-up form for browser coverage. The smoke test
-      # never submits an email, and this deliberately invalid key cannot send.
-      RESEND_API_KEY: re_ci_browser_only
-      AUTH_EMAIL_FROM: "ATHRECS CI <ci@athrecs.invalid>"
+      # Deliberately omit Resend. Browser coverage must prove that account
+      # creation and email/password sign-in stay visible without mail delivery.
     services:
       postgres:
         image: postgres:16-alpine
