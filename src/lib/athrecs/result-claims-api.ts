@@ -274,9 +274,6 @@ export const submitResultClaim = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     if (!data.declarationAccepted) throw new Error("Confirm that this is your result");
-    if (!data.evidenceText && !data.evidenceUrl) {
-      throw new Error("Add a bib number, verification detail or evidence link");
-    }
 
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
