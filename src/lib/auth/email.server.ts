@@ -12,8 +12,20 @@ const text = (value: string | undefined): string | undefined => {
   return result || undefined;
 };
 
+/**
+ * The sender is public configuration, not a secret. Resend permits any sender
+ * address on a verified domain, so ATHRECS keeps a safe built-in default and
+ * leaves AUTH_EMAIL_FROM as an optional override.
+ */
+export const DEFAULT_AUTH_EMAIL_FROM = "ATHRECS Accounts <accounts@athrecs.com>";
+
+export function authEmailFrom(): string {
+  return text(process.env.AUTH_EMAIL_FROM) ?? DEFAULT_AUTH_EMAIL_FROM;
+}
+
+/** Transactional delivery is available as soon as the Resend key is present. */
 export function authEmailConfigured(): boolean {
-  return Boolean(text(process.env.RESEND_API_KEY) && text(process.env.AUTH_EMAIL_FROM));
+  return Boolean(text(process.env.RESEND_API_KEY));
 }
 
 function escapeHtml(value: string): string {
@@ -27,10 +39,10 @@ function escapeHtml(value: string): string {
 
 export async function sendAthrecsAuthEmail(email: AuthEmail): Promise<void> {
   const apiKey = text(process.env.RESEND_API_KEY);
-  const from = text(process.env.AUTH_EMAIL_FROM);
-  if (!apiKey || !from) {
+  if (!apiKey) {
     throw new Error("ATHRECS authentication email is not configured");
   }
+  const from = authEmailFrom();
 
   const safeHeading = escapeHtml(email.heading);
   const safeMessage = escapeHtml(email.message);
