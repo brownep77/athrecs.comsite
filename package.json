@@ -51,7 +51,7 @@
     "format": "prettier --write .",
     "verify:slug-stability": "node --experimental-strip-types scripts/verify-slug-stability.mjs",
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
-    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run build"
+    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-claims && npm run verify:result-matches && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run build"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
