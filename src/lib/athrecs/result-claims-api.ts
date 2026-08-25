@@ -189,7 +189,7 @@ const CLAIM_SELECT = `
     result.source_url
   from result_claims claim
   join results result on result.id = claim.result_id
-  join athletes athlete on athlete.id = claim.athlete_id
+  join athletes athlete on athlete.id = result.athlete_id
   join editions edition on edition.id = result.edition_id
   join events event on event.id = edition.event_id
 `;
@@ -308,6 +308,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       const result = results[0];
       if (!result) throw new Error("Result not found");
 
+      // Serialize all ownership decisions for the same athlete profile so two
+      // simultaneous first claims cannot both be approved automatically.
+      await tx`select id from athletes where id = ${result.athlete_id} for update`;
+
       const owners = await tx<{ user_id: string; user_email: string }>`
         select user_id, user_email
         from athlete_account_links
@@ -320,12 +324,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           status: "approved" as const,
           alreadyOwned: true,
           claimId: null,
+          autoApproved: false,
           email: null,
         };
       }
-      const conflictReason = owner
-        ? "This athlete profile is already linked to another account. Staff identity checks are required."
-        : null;
 
       const existing = await tx<{ id: number; status: ResultClaimStatus }>`
         select id, status
@@ -339,12 +341,29 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           status: "approved" as const,
           alreadyOwned: true,
           claimId: existing[0].id,
+          autoApproved: false,
           email: null,
         };
       }
       if (existing[0]?.status === "pending") {
         throw new Error("You already have an active claim for this result");
       }
+
+      const competingClaims = await tx<{ count: number }>`
+        select count(distinct claimant_user_id)::int as count
+        from result_claims
+        where athlete_id = ${result.athlete_id}
+          and claimant_user_id <> ${context.userId}
+          and status in ('pending', 'needs_info', 'approved')
+      `;
+      const competingClaimCount = competingClaims[0]?.count ?? 0;
+      const requiresReview = Boolean(owner) || competingClaimCount > 0;
+      const conflictReason = owner
+        ? "This athlete profile is already linked to another account. Staff identity checks are required."
+        : competingClaimCount > 0
+          ? "Another account has claimed this athlete profile. Staff review is required before ownership changes."
+          : null;
+      const nextStatus: ResultClaimStatus = requiresReview ? "pending" : "approved";
 
       let claimId: number;
       if (existing[0]) {
@@ -353,7 +372,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           set
             athlete_id = ${result.athlete_id},
             claimant_email = ${claimantEmail},
-            status = 'pending',
+            status = ${nextStatus},
             verification_method = ${data.verificationMethod},
             evidence_text = ${data.evidenceText},
             evidence_url = ${data.evidenceUrl},
@@ -362,7 +381,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             staff_note = null,
             reviewed_by_user_id = null,
             reviewed_by_email = null,
-            reviewed_at = null,
+            reviewed_at = case when ${requiresReview} then null else now() end,
             submitted_at = now(),
             updated_at = now()
           where id = ${existing[0].id}
@@ -372,23 +391,58 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       } else {
         const inserted = await tx<{ id: number }>`
           insert into result_claims (
-            result_id, athlete_id, claimant_user_id, claimant_email,
+            result_id, athlete_id, claimant_user_id, claimant_email, status,
             verification_method, evidence_text, evidence_url,
-            declaration_accepted, conflict_reason
+            declaration_accepted, conflict_reason, reviewed_at
           ) values (
             ${result.result_id}, ${result.athlete_id}, ${context.userId}, ${claimantEmail},
-            ${data.verificationMethod}, ${data.evidenceText}, ${data.evidenceUrl},
-            true, ${conflictReason}
+            ${nextStatus}, ${data.verificationMethod}, ${data.evidenceText}, ${data.evidenceUrl},
+            true, ${conflictReason}, case when ${requiresReview} then null else now() end
           )
           returning id
         `;
         claimId = inserted[0].id;
       }
 
+      let finalStatus = nextStatus;
+      if (!requiresReview) {
+        const linked = await tx<{ athlete_id: number }>`
+          insert into athlete_account_links (
+            athlete_id, user_id, user_email, source_claim_id, status, linked_at, updated_at
+          ) values (
+            ${result.athlete_id}, ${context.userId}, ${claimantEmail},
+            ${claimId}, 'active', now(), now()
+          )
+          on conflict (athlete_id) do update set
+            user_id = excluded.user_id,
+            user_email = excluded.user_email,
+            source_claim_id = excluded.source_claim_id,
+            status = 'active',
+            linked_at = now(),
+            updated_at = now()
+          where athlete_account_links.status = 'revoked'
+          returning athlete_id
+        `;
+        if (!linked[0]) {
+          finalStatus = "pending";
+          await tx`
+            update result_claims
+            set
+              status = 'pending',
+              conflict_reason = 'This athlete profile became linked to another account while the claim was being submitted. Staff review is required.',
+              reviewed_at = null,
+              updated_at = now()
+            where id = ${claimId}
+          `;
+        }
+      }
+
+      const autoApproved = finalStatus === "approved";
       return {
-        status: "pending" as const,
+        status: finalStatus,
         alreadyOwned: false,
         claimId,
+        autoApproved,
         email: {
           claimId,
           resultId: result.result_id,
@@ -401,7 +455,20 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       };
     });
 
-    if (outcome.email) await notifyResultClaimSubmitted(outcome.email);
+    if (outcome.autoApproved) {
+      await syncAthleteAccountAfterClaim(context.userId);
+    }
+    if (outcome.email) {
+      if (outcome.autoApproved) {
+        await notifyResultClaimReviewed({
+          ...outcome.email,
+          status: "approved",
+          staffNote: null,
+        });
+      } else {
+        await notifyResultClaimSubmitted(outcome.email);
+      }
+    }
     return {
       status: outcome.status,
       alreadyOwned: outcome.alreadyOwned,
@@ -490,10 +557,10 @@ export const listStaffResultClaims = createServerFn({ method: "GET" })
          claim_data.*,
          owner.user_email as existing_owner_email,
          (
-           select count(*)::int
+           select count(distinct competing.claimant_user_id)::int
            from result_claims competing
-           where competing.result_id = claim.result_id
-             and competing.id <> claim.id
+           where competing.athlete_id = claim.athlete_id
+             and competing.claimant_user_id <> claim.claimant_user_id
              and competing.status in ('pending', 'needs_info', 'approved')
          ) as competing_claim_count
        from (${CLAIM_SELECT}) claim_data
@@ -566,6 +633,8 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
       if (claim.status !== "pending" && claim.status !== "needs_info") {
         throw new Error("Only a pending claim can be reviewed");
       }
+
+      await tx`select id from athletes where id = ${claim.athlete_id} for update`;
 
       if (data.action === "approve") {
         const owners = await tx<{ user_id: string }>`
@@ -702,6 +771,8 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
       if (claim.status !== "approved") {
         throw new Error("Only an approved claim can have ownership revoked");
       }
+
+      await tx`select id from athletes where id = ${claim.athlete_id} for update`;
 
       const revoked = await tx<{ athlete_id: number }>`
         update athlete_account_links
