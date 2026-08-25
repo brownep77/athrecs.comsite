@@ -189,7 +189,7 @@ const CLAIM_SELECT = `
     result.source_url
   from result_claims claim
   join results result on result.id = claim.result_id
-  join athletes athlete on athlete.id = result.athlete_id
+  join athletes athlete on athlete.id = claim.athlete_id
   join editions edition on edition.id = result.edition_id
   join events event on event.id = edition.event_id
 `;
@@ -596,6 +596,16 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const result = await sql.transaction(async (tx) => {
+      const claimRefs = await tx<{ athlete_id: number }>`
+        select athlete_id
+        from result_claims
+        where id = ${data.claimId}
+        limit 1
+      `;
+      if (!claimRefs[0]) throw new Error("Claim not found");
+
+      await tx`select id from athletes where id = ${claimRefs[0].athlete_id} for update`;
+
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
@@ -633,8 +643,6 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
       if (claim.status !== "pending" && claim.status !== "needs_info") {
         throw new Error("Only a pending claim can be reviewed");
       }
-
-      await tx`select id from athletes where id = ${claim.athlete_id} for update`;
 
       if (data.action === "approve") {
         const owners = await tx<{ user_id: string }>`
@@ -734,6 +742,16 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
+      const claimRefs = await tx<{ athlete_id: number }>`
+        select athlete_id
+        from result_claims
+        where id = ${data.claimId}
+        limit 1
+      `;
+      if (!claimRefs[0]) throw new Error("Claim not found");
+
+      await tx`select id from athletes where id = ${claimRefs[0].athlete_id} for update`;
+
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
@@ -771,8 +789,6 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
       if (claim.status !== "approved") {
         throw new Error("Only an approved claim can have ownership revoked");
       }
-
-      await tx`select id from athletes where id = ${claim.athlete_id} for update`;
 
       const revoked = await tx<{ athlete_id: number }>`
         update athlete_account_links
