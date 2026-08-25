@@ -94,6 +94,7 @@ import {
 } from "./half-to-20-mile-races-uk-ireland";
 import {
   dailyHalfTenMileEditions,
+  dailyHalfTenMileExistingSeriesEditions,
   dailyHalfTenMileSeries,
 } from "./half-ten-mile-races-uk-ireland-daily-followup";
 import type { ClubSeed, Edition, Series } from "./types";
@@ -228,6 +229,7 @@ const mergedEditions = [
   ...(dailyHalfTenMileEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
+  ...(dailyHalfTenMileExistingSeriesEditions as Edition[]),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),

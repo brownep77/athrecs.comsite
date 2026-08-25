@@ -4,9 +4,11 @@ import { rolldown } from "rolldown";
 
 const CHECKED_AT = "2026-08-22";
 const PREVIOUS_CHECKED_AT = "2026-08-23";
-const LATEST_CHECKED_AT = "2026-08-24";
+const PRIOR_CHECKED_AT = "2026-08-24";
+const LATEST_CHECKED_AT = "2026-08-25";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 32;
+const NEW_SERIES_COUNT = 44;
+const EXISTING_SERIES_EDITION_COUNT = 9;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -22,6 +24,7 @@ const {
   dailyHalfTenMileEditionOverrides,
   dailyHalfTenMileEditions,
   dailyHalfTenMileEntryOptions,
+  dailyHalfTenMileExistingSeriesEditions,
   dailyHalfTenMileResearchQueue,
   dailyHalfTenMileSeries,
   dailyHalfTenMileSeriesOverrides,
@@ -35,7 +38,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  21,
+  33,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -123,7 +126,9 @@ for (const edition of dailyHalfTenMileEditions) {
   }
   for (const option of edition.entryOptions ?? []) {
     assert(
-      [CHECKED_AT, PREVIOUS_CHECKED_AT, LATEST_CHECKED_AT].includes(option.checkedAt),
+      [CHECKED_AT, PREVIOUS_CHECKED_AT, PRIOR_CHECKED_AT, LATEST_CHECKED_AT].includes(
+        option.checkedAt,
+      ),
       `${key} has a stale entry check date`,
     );
     assert.equal(option.isVerified, true, `${key} has an unverified entry source`);
@@ -136,6 +141,62 @@ for (const edition of dailyHalfTenMileEditions) {
     ).length,
     1,
     `${key} was dropped or duplicated during catalogue merge`,
+  );
+}
+
+assert.equal(
+  dailyHalfTenMileExistingSeriesEditions.length,
+  EXISTING_SERIES_EDITION_COUNT,
+  "The existing-card edition enrichment total changed unexpectedly",
+);
+const existingEditionKeys = new Set();
+const existingEditionSourceUrls = new Set();
+for (const edition of dailyHalfTenMileExistingSeriesEditions) {
+  const key = `${edition.seriesSlug}|${edition.date}`;
+  assert(!editionKeys.has(key), `Existing-card edition duplicates a new series edition: ${key}`);
+  assert(!existingEditionKeys.has(key), `Duplicate existing-card edition: ${key}`);
+  existingEditionKeys.add(key);
+  assert(
+    priorSlugs.has(edition.seriesSlug),
+    `${key} should enrich an existing series instead of creating a second card`,
+  );
+  assert(edition.date >= CHECKED_AT && edition.date <= HORIZON, `${key} is outside the horizon`);
+  assert.equal(edition.distance, "Half", `${key} uses the wrong primary distance`);
+  assert.equal(edition.distanceKm, 21.0975, `${key} has the wrong metric distance`);
+  const sourceUrl = normalizeUrl(edition.source);
+  assert(
+    !existingEditionSourceUrls.has(sourceUrl),
+    `${key} duplicates another existing-card source URL`,
+  );
+  existingEditionSourceUrls.add(sourceUrl);
+  assert.equal(edition.status, "Open", `${key} should be open`);
+  assert(edition.entryOptions?.length, `${key} needs a checked official entry option`);
+  for (const option of edition.entryOptions ?? []) {
+    assert.equal(option.checkedAt, LATEST_CHECKED_AT, `${key} has a stale entry check date`);
+    assert.equal(option.isVerified, true, `${key} has an unverified entry source`);
+    assert.equal(option.isPrimary, true, `${key} primary source is not marked`);
+    assert.equal(
+      normalizeUrl(option.entryUrl),
+      sourceUrl,
+      `${key} does not use the direct official entry URL`,
+    );
+  }
+  assert.equal(
+    catalogue.editions.filter(
+      (item) => item.seriesSlug === edition.seriesSlug && item.date === edition.date,
+    ).length,
+    1,
+    `${key} was dropped or duplicated during catalogue merge`,
+  );
+  const catalogueSeries = catalogue.seriesList.find((series) => series.slug === edition.seriesSlug);
+  assert(catalogueSeries, `${edition.seriesSlug} disappeared during catalogue merge`);
+  assert(
+    dailyHalfTenMileExistingSeriesEditions.some(
+      (candidate) =>
+        candidate.seriesSlug === edition.seriesSlug &&
+        normalizeUrl(candidate.source) === normalizeUrl(catalogueSeries.source_url),
+    ),
+    `${edition.seriesSlug} does not expose a current official organiser source`,
   );
 }
 
@@ -183,6 +244,18 @@ assert(
   dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "achill-half-marathon-2027"),
   "The internally inconsistent Achill 2027 candidate must remain held",
 );
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "carsington-water-trail-half-marathon-10k-august-2027",
+  ),
+  "The date-conflicted Carsington Water August candidate must remain held",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "battersea-park-half-marathon-december-2027",
+  ),
+  "The malformed Battersea Park December candidate must remain held",
+);
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
@@ -206,7 +279,11 @@ assert(
   "The daily follow-up editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v243"'),
+  catalogueSource.includes("...(dailyHalfTenMileExistingSeriesEditions as Edition[])"),
+  "The verified existing-card editions are not merged into the catalogue",
+);
+assert(
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v244"'),
   "The persistent catalogue seed version was not advanced",
 );
 assert(
@@ -215,5 +292,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (21 half marathons and 11 ten-milers), one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (33 half marathons and 11 ten-milers), ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );

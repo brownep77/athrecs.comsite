@@ -2,7 +2,8 @@ import type { Edition, EntryOptionSeed, EntryOptionStatus, Series } from "./type
 
 const CHECKED_AT = "2026-08-22";
 const PREVIOUS_CHECKED_AT = "2026-08-23";
-const LATEST_CHECKED_AT = "2026-08-24";
+const PRIOR_CHECKED_AT = "2026-08-24";
+const LATEST_CHECKED_AT = "2026-08-25";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
@@ -459,7 +460,7 @@ const seeds: RaceSeed[] = [
     organiser: "Hardmoors",
     url: "https://www.sientries.co.uk/event/hardmoors-262-saltburn-2027",
     priceAmount: 39,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PRIOR_CHECKED_AT,
     notes:
       "The direct registration page confirms the half-marathon, marathon and 10K trail options, date, half-marathon start time and open entry.",
   },
@@ -476,7 +477,7 @@ const seeds: RaceSeed[] = [
     organiser: "Lakeland Paws",
     url: "https://www.sientries.co.uk/event.php?elid=Y&event_id=17822",
     priceAmount: 20,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PRIOR_CHECKED_AT,
     notes:
       "The direct registration page confirms Lakeland Paws' first half-marathon route, Grizedale Forest venue, date and open entry.",
   },
@@ -494,7 +495,7 @@ const seeds: RaceSeed[] = [
     organiser: "Goldline Events",
     url: "https://www.readinghalfmarathon.com/products/half-marathon-non-aaa",
     priceAmount: 48,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PRIOR_CHECKED_AT,
     notes:
       "The official event and direct checkout pages confirm the traffic-free half-marathon, date, start time and open entry.",
   },
@@ -512,7 +513,7 @@ const seeds: RaceSeed[] = [
     organiser: "Telford Harriers",
     url: "https://www.entrycentral.com/IronbridgeHalf2027",
     priceAmount: 32,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PRIOR_CHECKED_AT,
     notes:
       "The organising club's direct registration page confirms the multi-surface half-marathon, date, start time and open entry.",
   },
@@ -531,7 +532,7 @@ const seeds: RaceSeed[] = [
     organiser: "Punk Panther Ultra Marathons",
     url: "https://www.sientries.co.uk/event.php?elid=Y&event_id=18217",
     priceAmount: 15,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PRIOR_CHECKED_AT,
     notes:
       "The direct registration page confirms the headtorch half-marathon, 10K and 5K options, date, start time and open entry.",
   },
@@ -549,7 +550,7 @@ const seeds: RaceSeed[] = [
     organiser: "Punk Panther Ultra Marathons",
     url: "https://www.sientries.co.uk/event/punk-panther-skipton-skedaddle-2027",
     priceAmount: 30,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PRIOR_CHECKED_AT,
     notes:
       "The direct registration page confirms the half-marathon and longer trail options, date, Skipton venue and open entry.",
   },
@@ -567,7 +568,7 @@ const seeds: RaceSeed[] = [
     organiser: "Punk Panther Ultra Marathons",
     url: "https://www.sientries.co.uk/event/punk-panther-ripon-stinger-2027",
     priceAmount: 30,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PRIOR_CHECKED_AT,
     notes:
       "The direct registration page confirms the half-marathon and longer trail options, date, Ripon-area venue and open entry.",
   },
@@ -586,9 +587,225 @@ const seeds: RaceSeed[] = [
     organiser: "Hardmoors",
     url: "https://www.sientries.co.uk/event/hardmoors-262-wainstones-2027",
     priceAmount: 42.5,
-    checkedAt: LATEST_CHECKED_AT,
+    checkedAt: PRIOR_CHECKED_AT,
     notes:
       "The direct registration page confirms the half-marathon, marathon and 10K trail options, date, half-marathon start time and open entry.",
+  },
+  {
+    slug: "richmond-park-half-marathon-february-2027",
+    name: "Richmond Park Half Marathon — February 2027",
+    date: "2027-02-14",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Sheen Gate, Richmond Park",
+    surface: "Mixed",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-february-2027",
+    priceAmount: 38,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon date, Sheen Gate venue, start time and open direct entry.",
+  },
+  {
+    slug: "richmond-park-half-marathon-march-2027",
+    name: "Richmond Park Half Marathon — March 2027",
+    date: "2027-03-28",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Sheen Gate, Richmond Park",
+    surface: "Mixed",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-march-2027",
+    priceAmount: 38,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon date, Sheen Gate venue, start time and open direct entry.",
+  },
+  {
+    slug: "windsor-trail-half-marathon-10k-april-2027",
+    name: "Windsor Trail Half Marathon & 10K — April 2027",
+    date: "2027-04-04",
+    distance: "Half",
+    country: "England",
+    county: "Berkshire",
+    city: "Windsor",
+    area: "Alexandra Gardens and the Thames Path",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/windsor-trail-run-april-2027",
+    priceAmount: 42,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon and 10K trail races, date and open direct entry.",
+  },
+  {
+    slug: "carsington-water-trail-half-marathon-10k-april-2027",
+    name: "Carsington Water Trail Half Marathon & 10K — April 2027",
+    date: "2027-04-10",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Derbyshire",
+    city: "Ashbourne",
+    area: "Carsington Water",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-april-2027",
+    priceAmount: 31,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the trail half-marathon and 10K, date, half-marathon start time and open direct entry.",
+  },
+  {
+    slug: "newmarket-half-marathon-may-2027",
+    name: "Newmarket Half Marathon — May 2027",
+    date: "2027-05-23",
+    distance: "Half",
+    country: "England",
+    county: "Suffolk",
+    city: "Newmarket",
+    area: "Newmarket Racecourse and surrounding closed roads",
+    surface: "Road",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/newmarket-half-marathon-may-2027",
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the closed-road half-marathon, date, Newmarket Racecourse venue and open direct entry.",
+  },
+  {
+    slug: "southampton-running-festival-may-2027",
+    name: "Southampton Running Festival — May 2027",
+    date: "2027-05-30",
+    distance: "Half",
+    country: "England",
+    county: "Hampshire",
+    city: "Southampton",
+    area: "Southampton Common",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/southampton-running-festival-may-2027",
+    priceAmount: 36,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon, 10K and 5K races, date, Southampton Common venue and open direct entry.",
+  },
+  {
+    slug: "run-redditch-half-marathon-10k-june-2027",
+    name: "Run Redditch Half Marathon & 10K — June 2027",
+    date: "2027-06-06",
+    distance: "Half",
+    country: "England",
+    county: "Worcestershire",
+    city: "Redditch",
+    area: "Arrow Valley Country Park",
+    surface: "Mixed",
+    distances: ["Half", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/run-redditch-half-marathon-10k-june-2027",
+    priceAmount: 31,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon and 10K, date, Arrow Valley venue and open direct entry.",
+  },
+  {
+    slug: "carsington-water-trail-half-marathon-10k-june-2027",
+    name: "Carsington Water Trail Half Marathon & 10K — June 2027",
+    date: "2027-06-26",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Derbyshire",
+    city: "Ashbourne",
+    area: "Carsington Water",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-june-2027",
+    priceAmount: 31,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the trail half-marathon and 10K, date, half-marathon start time and open direct entry.",
+  },
+  {
+    slug: "richmond-park-half-marathon-june-2027",
+    name: "Richmond Park Half Marathon — June 2027",
+    date: "2027-06-27",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Sheen Gate, Richmond Park",
+    surface: "Mixed",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-june-2027",
+    priceAmount: 38,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon date, Sheen Gate venue, start time and open direct entry.",
+  },
+  {
+    slug: "richmond-park-half-marathon-august-2027",
+    name: "Richmond Park Half Marathon — August 2027",
+    date: "2027-08-15",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Sheen Gate, Richmond Park",
+    surface: "Mixed",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-august-2027",
+    priceAmount: 38,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon date, Sheen Gate venue, start time and open direct entry.",
+  },
+  {
+    slug: "richmond-park-half-marathon-september-2027",
+    name: "Richmond Park Half Marathon — September 2027",
+    date: "2027-09-19",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Sheen Gate, Richmond Park",
+    surface: "Mixed",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-september-2027",
+    priceAmount: 38,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon date, Sheen Gate venue, start time and open direct entry.",
+  },
+  {
+    slug: "richmond-park-half-marathon-november-2027",
+    name: "Richmond Park Half Marathon — November 2027",
+    date: "2027-11-14",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Sheen Gate, Richmond Park",
+    surface: "Mixed",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-november-2027",
+    priceAmount: 38,
+    checkedAt: LATEST_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the half-marathon date, Sheen Gate venue, start time and open direct entry.",
   },
 ];
 
@@ -648,6 +865,135 @@ export const dailyHalfTenMileEditions: Edition[] = seeds.map((seed) => {
   };
 });
 
+type ExistingSeriesEditionSeed = {
+  seriesSlug: string;
+  date: string;
+  startTime?: string;
+  organiser: string;
+  url: string;
+  priceAmount?: number;
+  notes: string;
+};
+
+const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  {
+    seriesSlug: "tatton-half-marathon-november",
+    date: "2027-11-07",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/runtatton-half-marathon-november-2027",
+    priceAmount: 40,
+    notes: "The official organiser page confirms the 2027 date, start time and open entry.",
+  },
+  {
+    seriesSlug: "hampton-court-palace-half-marathon-october",
+    date: "2027-10-17",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/hampton-court-palace-running-festival-presented-by-voltarol-october-2027",
+    priceAmount: 41,
+    notes:
+      "The official organiser page confirms the 2027 half-marathon and 10K festival date, half-marathon start time and open entry.",
+  },
+  {
+    seriesSlug: "runthrough-richmond-park-half-marathon",
+    date: "2027-10-31",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-october-2027",
+    priceAmount: 38,
+    notes: "The official organiser page confirms the 2027 date, start time and open entry.",
+  },
+  {
+    seriesSlug: "runthrough-richmond-park-half-marathon",
+    date: "2027-12-12",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-december-2027",
+    priceAmount: 38,
+    notes: "The official organiser page confirms the 2027 date, start time and open entry.",
+  },
+  {
+    seriesSlug: "windsor-trail-run-half-marathon-10k-august",
+    date: "2027-08-29",
+    startTime: "09:20",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/windsor-trail-run-august-2027",
+    priceAmount: 42,
+    notes:
+      "The official organiser page confirms the 2027 half-marathon and 10K date, half-marathon start time and open entry.",
+  },
+  {
+    seriesSlug: "windsor-trail-run-half-marathon-10k-august",
+    date: "2027-11-28",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/windsor-trail-run-november-2027",
+    priceAmount: 42,
+    notes:
+      "The official organiser page confirms the 2027 half-marathon and 10K date and open entry; no distance-specific start time is asserted.",
+  },
+  {
+    seriesSlug: "carsington-water-10k-half-marathon-october",
+    date: "2027-10-16",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-october-2027",
+    priceAmount: 31,
+    notes:
+      "The official organiser page confirms the 2027 trail half-marathon and 10K date, half-marathon start time and open entry.",
+  },
+  {
+    seriesSlug: "carsington-water-10k-half-marathon-october",
+    date: "2027-12-04",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2027",
+    priceAmount: 31,
+    notes:
+      "The official organiser page confirms the 2027 trail half-marathon and 10K date, half-marathon start time and open entry.",
+  },
+  {
+    seriesSlug: "running-grand-prix-goodwood-5k-10k-half-marathon-october",
+    date: "2027-12-05",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-december-2027",
+    priceAmount: 36,
+    notes:
+      "The official organiser page confirms the 2027 running festival date, half-marathon distance and open entry; no distance-specific start time is asserted.",
+  },
+];
+
+/** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
+export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesEditionSeeds.map(
+  (seed) => ({
+    seriesSlug: seed.seriesSlug,
+    date: seed.date,
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl: seed.url,
+    ...(seed.startTime ? { startTime: seed.startTime } : {}),
+    source: seed.url,
+    notes: seed.notes,
+    entryOptions: [
+      {
+        providerCode: `official-${seed.seriesSlug}-${seed.date}`,
+        providerName: seed.organiser,
+        entryUrl: seed.url,
+        entryType: "official",
+        status: "open",
+        ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
+        priceCurrency: "GBP",
+        checkedAt: LATEST_CHECKED_AT,
+        sourceUrl: seed.url,
+        isVerified: true,
+        isPrimary: true,
+        notes: "Official organiser event and direct entry page.",
+      },
+    ],
+  }),
+);
+
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
   {
@@ -688,6 +1034,22 @@ export const dailyHalfTenMileResearchQueue = [
       "The official page title announces 3 July 2027 but the registration copy still references 2025, so its year-specific entry provenance is not internally consistent.",
     sourceUrl: "https://www.achillmarathon.com/",
   },
+  {
+    slug: "carsington-water-trail-half-marathon-10k-august-2027",
+    date: "2027-08-21",
+    country: "England",
+    reason:
+      "The official page header says 21 August 2027 but its race-day copy still says 26 June 2027, so the date is internally conflicted.",
+    sourceUrl: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-august-2027",
+  },
+  {
+    slug: "battersea-park-half-marathon-december-2027",
+    date: "2027-12-04",
+    country: "England",
+    reason:
+      "The official page's structured date says 4 December 2027, but its race-day heading contains a malformed conflicting day, so publication is held pending correction.",
+    sourceUrl: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-december-2027",
+  },
 ] as const;
 
 const BRIGHTEN_MARINA_URL =
@@ -709,6 +1071,46 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     website: BRIGHTEN_MARINA_URL,
     source_url: BRIGHTEN_MARINA_URL,
     defaultStartTime: "09:00",
+  },
+  "tatton-half-marathon-november": {
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/runtatton-half-marathon-november-2027",
+    source_url: "https://www.runthrough.co.uk/event/runtatton-half-marathon-november-2027",
+  },
+  "hampton-court-palace-half-marathon-october": {
+    distances: ["Half", "10K"],
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/hampton-court-palace-running-festival-presented-by-voltarol-october-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/hampton-court-palace-running-festival-presented-by-voltarol-october-2027",
+  },
+  "runthrough-richmond-park-half-marathon": {
+    surface: "Mixed",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-december-2027",
+    source_url: "https://www.runthrough.co.uk/event/richmond-park-half-marathon-december-2027",
+  },
+  "windsor-trail-run-half-marathon-10k-august": {
+    surface: "Trail",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/windsor-trail-run-november-2027",
+    source_url: "https://www.runthrough.co.uk/event/windsor-trail-run-november-2027",
+  },
+  "carsington-water-10k-half-marathon-october": {
+    surface: "Trail",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-december-2027",
+  },
+  "running-grand-prix-goodwood-5k-10k-half-marathon-october": {
+    distances: ["Half", "10K", "5K", "Marathon"],
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-december-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-december-2027",
   },
 };
 
