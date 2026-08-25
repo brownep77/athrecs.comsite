@@ -38,7 +38,7 @@ export const Route = createFileRoute("/claim-results")({
       { title: "Claim your race results | ATHRECS.com" },
       {
         name: "description",
-        content: "Sign in to claim an ATHRECS race result and track its verification status.",
+        content: "Sign in to claim an ATHRECS race result and track its ownership status.",
       },
       { name: "robots", content: "noindex, follow" },
     ],
@@ -116,7 +116,9 @@ function ClaimResultsPage() {
       setMessage(
         response.alreadyOwned
           ? "This athlete profile is already linked to your account."
-          : "Claim submitted. ATHRECS staff will check it before anything is linked.",
+          : response.status === "approved"
+            ? "Claim approved. This athlete profile is now linked to your account."
+            : "A competing claim was found. ATHRECS staff will review it before ownership changes.",
       );
       setDeclaration(false);
       void queryClient.invalidateQueries({ queryKey: ["my-result-claims"] });
@@ -154,14 +156,14 @@ function ClaimResultsPage() {
         <div className="border-b border-border bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-6 text-white md:px-7">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
             <ShieldCheck className="size-4" aria-hidden="true" />
-            Athlete identity review
+            Athlete ownership
           </div>
           <h1 className="mt-2 font-display text-2xl font-semibold md:text-3xl">
             Claim your race results
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-slate-300">
-            Link a result to your ATHRECS Athlete Account. Every claim is checked by ATHRECS staff
-            before your athlete profile is marked as owned.
+            A single uncontested claim is linked automatically. ATHRECS staff review is used only
+            when another account claims the same athlete profile.
           </p>
         </div>
         <div className="grid gap-4 p-5 text-sm md:grid-cols-3 md:p-7">
@@ -177,8 +179,8 @@ function ClaimResultsPage() {
           />
           <ClaimStep
             number="3"
-            title="Staff verification"
-            detail="ATHRECS checks conflicts and approves or requests more information."
+            title="Conflict check"
+            detail="A single claim is linked automatically. Two or more claimants go to staff review."
           />
         </div>
       </section>
@@ -189,7 +191,7 @@ function ClaimResultsPage() {
           <p className="mt-1 text-sm text-muted">
             {user
               ? "You are signed in. Complete your private Entry Passport or continue with the claim below."
-              : "Create or sign in to your secure Athlete Account before claiming. Your account and any private evidence are attached to the review request."}
+              : "Create or sign in to your secure Athlete Account before claiming. Your account and any private evidence are attached to the claim."}
           </p>
         </div>
         {sessionPending ? (
@@ -278,7 +280,7 @@ function ClaimResultsPage() {
           ) : activeClaim?.status === "pending" ? (
             <ClaimState
               status={activeClaim.status}
-              note="Your claim is in the staff review queue. Published data has not been changed."
+              note="Another account has claimed this athlete profile, so staff review is required before ownership changes."
             >
               <Button
                 type="button"
@@ -342,7 +344,8 @@ function ClaimResultsPage() {
                   className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                 />
                 <span className="block text-xs font-normal text-subtle">
-                  You may leave this blank. ATHRECS staff can request more information if needed.
+                  You may leave this blank. It can help staff if another account submits a competing
+                  claim.
                 </span>
                 <span className="block text-xs font-normal text-subtle">
                   Do not include passwords, payment details or identity-document numbers.
@@ -370,14 +373,11 @@ function ClaimResultsPage() {
                 />
                 <span>
                   I confirm this is my result and the information supplied is accurate. I understand
-                  ATHRECS may reject conflicting or unverifiable claims.
+                  ATHRECS may review or reject competing or conflicting claims.
                 </span>
               </label>
 
-              <Button
-                type="submit"
-                disabled={submitClaim.isPending || !declaration}
-              >
+              <Button type="submit" disabled={submitClaim.isPending || !declaration}>
                 {submitClaim.isPending ? (
                   <Loader2 className="size-4 animate-spin" aria-hidden="true" />
                 ) : (
@@ -387,7 +387,7 @@ function ClaimResultsPage() {
                   ? "Submitting…"
                   : currentClaim
                     ? "Resubmit claim"
-                    : "Submit for staff review"}
+                    : "Claim this result"}
               </Button>
             </form>
           )}
