@@ -62,7 +62,18 @@ try {
 
   const createAccountTab = signInDialog.getByRole("tab", { name: "Create account" });
   await createAccountTab.waitFor({ state: "visible", timeout: timeoutMs });
-  record("manual sign-up tab is offered", true);
+  record("manual sign-up tab is offered without Resend", true);
+
+  const limitedModeNotice = signInDialog.getByText(
+    "Verification emails and password recovery are temporarily unavailable",
+    { exact: false },
+  );
+  await limitedModeNotice.waitFor({ state: "visible", timeout: timeoutMs });
+  record("limited email-delivery mode is explained", true);
+  record(
+    "password recovery is hidden without email delivery",
+    (await signInDialog.getByRole("button", { name: "Forgotten your password?" }).count()) === 0,
+  );
 
   await createAccountTab.click();
   // The dialog's accessible name follows its heading, so switching tabs changes
