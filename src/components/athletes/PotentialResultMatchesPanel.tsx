@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import {
   listMyPotentialResultMatches,
   type PotentialResultClaimStatus,
@@ -81,12 +82,16 @@ function actionLabel(match: PotentialResultMatch): string {
 
 export function PotentialResultMatchesPanel() {
   const [expanded, setExpanded] = useState(false);
+  const { user, isPending: sessionPending } = useCurrentUserState();
   const matches = useQuery({
-    queryKey: ["my-potential-result-matches"],
+    queryKey: ["my-potential-result-matches", user?.id],
     queryFn: () => listMyPotentialResultMatches(),
+    enabled: Boolean(user),
     retry: false,
     staleTime: 60_000,
   });
+
+  if (sessionPending || !user) return null;
 
   if (matches.isLoading) {
     return (
@@ -204,7 +209,11 @@ export function PotentialResultMatchesPanel() {
                       : formatDuration(match.finishTimeSeconds)}
                   </p>
                   <p className="mt-1 text-xs text-subtle">
-                    {[placeText(match.overallPlace), match.category, match.bib ? `Bib ${match.bib}` : ""]
+                    {[
+                      placeText(match.overallPlace),
+                      match.category,
+                      match.bib ? `Bib ${match.bib}` : "",
+                    ]
                       .filter(Boolean)
                       .join(" · ")}
                   </p>
