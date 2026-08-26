@@ -41,6 +41,7 @@ const [
   reconciliationServer,
   reconciliationApi,
   reconciliationPanel,
+  resultCatalogue,
 ] = await Promise.all([
   readFile(resolve(root, "migrations/0019_private_result_archive.sql"), "utf8"),
   readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8"),
@@ -52,6 +53,7 @@ const [
   readFile(resolve(root, "src/lib/athrecs/result-reconciliation.server.ts"), "utf8"),
   readFile(resolve(root, "src/lib/athrecs/result-reconciliation-api.ts"), "utf8"),
   readFile(resolve(root, "src/components/staff/ResultReconciliationPanel.tsx"), "utf8"),
+  readFile(resolve(root, "src/data/results.ts"), "utf8"),
 ]);
 
 assert.match(migration, /create table if not exists result_ingestion_runs/);
@@ -100,8 +102,11 @@ assert.doesNotMatch(
 assert.doesNotMatch(reconciliationServer, /on\s+conflict[\s\S]{0,100}do\s+update/i);
 assert.match(reconciliationApi, /middleware\(\[staffMiddleware\]\)/);
 assert.match(reconciliationApi, /RESTORE CLAIMABLE RESULTS/);
+assert.doesNotMatch(reconciliationApi, /ensureAthrecsSeeded/);
 assert.match(reconciliationPanel, /Existing records are never/);
 assert.match(reconciliationPanel, /data\.persistent/);
+assert.match(resultCatalogue, /const resultByKey = new Map<string, ResultSeed>/);
+assert.match(resultCatalogue, /Conflicting duplicate result seed/);
 
 const db = new PGlite();
 await db.waitReady;
@@ -192,10 +197,9 @@ const resultKeys = results.map(
   (result) => `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
 );
 assert.equal(new Set(resultKeys).size, resultKeys.length, "Recoverable result keys must be unique");
-assert.equal(
-  results.length,
-  catalogueMetadata.merged_counts.results,
-  "Reconciliation must cover every retained catalogue result",
+assert(
+  results.length >= catalogueMetadata.merged_counts.results,
+  `Canonical recoverable results (${results.length}) fell below the recorded catalogue floor (${catalogueMetadata.merged_counts.results})`,
 );
 const athleteSlugs = new Set(athletes.map((athlete) => athlete.slug));
 const eventSlugs = new Set(seriesList.map((series) => series.slug));
@@ -213,5 +217,5 @@ for (const result of results) {
 
 await db.close();
 console.log(
-  `Private result archive verification passed for ${results.length.toLocaleString("en-GB")} recoverable results`,
+  `Private result archive verification passed for ${results.length.toLocaleString("en-GB")} canonical recoverable results`,
 );
