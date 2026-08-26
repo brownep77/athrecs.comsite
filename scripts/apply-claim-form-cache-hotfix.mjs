@@ -91,7 +91,7 @@ assert.doesNotMatch(claimRoute, /Resubmit claim/i);
 assert.doesNotMatch(claimRoute, /<textarea/);
 for (const source of ["/claim-results", "/athlete-account"]) {
   const rule = vercelConfig.headers.find((entry) => entry.source === source);
-  assert.ok(rule, \\`Missing no-store header rule for \\${source}\\`);
+  assert.ok(rule, "Missing no-store header rule for " + source);
   const cacheControl = rule.headers.find(
     (header) => header.key.toLowerCase() === "cache-control",
   );
