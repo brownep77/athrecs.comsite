@@ -16,6 +16,7 @@ const athleteRoute = await readFile(resolve(root, "src/routes/athletes/$slug.tsx
 const raceRoute = await readFile(resolve(root, "src/routes/races/$slug.tsx"), "utf8");
 const homeRoute = await readFile(resolve(root, "src/routes/index.tsx"), "utf8");
 const claimRoute = await readFile(resolve(root, "src/routes/claim-results.tsx"), "utf8");
+const vercelConfig = JSON.parse(await readFile(resolve(root, "vercel.json"), "utf8"));
 const adminClaimRoute = await readFile(
   resolve(root, "src/routes/admin/result-claims.tsx"),
   "utf8",
@@ -76,7 +77,20 @@ assert.match(claimRoute, /Evidence link 3/);
 assert.doesNotMatch(claimRoute, /Supporting detail/);
 assert.doesNotMatch(claimRoute, /Supporting information type/);
 assert.match(claimRoute, /Add result to my profile/);
-assert.match(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declaration\}/);
+assert.match(claimRoute, /Tick the confirmation box to confirm this is your result/);
+assert.match(claimRoute, /disabled=\{submitClaim\.isPending\}/);
+assert.doesNotMatch(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declaration\}/);
+assert.doesNotMatch(claimRoute, /verification detail/i);
+assert.doesNotMatch(claimRoute, /Resubmit claim/i);
+assert.doesNotMatch(claimRoute, /<textarea/);
+for (const source of ["/claim-results", "/athlete-account"]) {
+  const rule = vercelConfig.headers.find((entry) => entry.source === source);
+  assert.ok(rule, "Missing no-store header rule for " + source);
+  const cacheControl = rule.headers.find(
+    (header) => header.key.toLowerCase() === "cache-control",
+  );
+  assert.match(cacheControl?.value ?? "", /no-store/);
+}
 assert.match(adminClaimRoute, /Optional evidence links/);
 assert.match(adminClaimRoute, /Evidence is not required for an uncontested claim/);
 assert.match(api, /Another verified account was approved/);
