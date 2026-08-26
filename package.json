@@ -18,6 +18,7 @@
     "verify:all-sport-fixtures": "node --experimental-strip-types scripts/verify-all-sport-fixtures.mjs",
     "verify:fixture-duplicates": "node --experimental-strip-types scripts/verify-fixture-duplicates.mjs",
     "verify:mrd-marathons": "node --experimental-strip-types scripts/verify-mrd-marathons.mjs",
+    "verify:aims-europe-road-races": "node --experimental-strip-types scripts/verify-aims-europe-road-races.mjs",
     "verify:comrades": "node --experimental-strip-types scripts/verify-comrades.mjs",
     "verify:two-oceans": "node --experimental-strip-types scripts/verify-two-oceans.mjs",
     "verify:race-qualifications": "node --experimental-strip-types scripts/verify-race-qualifications.mjs",

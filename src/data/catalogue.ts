@@ -60,6 +60,11 @@ import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon"
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
 import { mrdIntlMarathonEditions, mrdIntlMarathonSeries } from "./mrd-marathons-intl";
+import {
+  aimsEuropeEditions,
+  aimsEuropeSeries,
+  aimsEuropeSeriesOverrides,
+} from "./aims-europe-road-races";
 import { comradesEditions, comradesSeries } from "./comrades";
 import { twoOceansEditions, twoOceansSeries } from "./two-oceans";
 import { marathonDesSablesEditions, marathonDesSablesSeries } from "./marathon-des-sables";
@@ -178,6 +183,7 @@ for (const series of [
   ...(mrdMarathonSeries as Series[]),
   ...(mrdEuMarathonSeries as Series[]),
   ...(mrdIntlMarathonSeries as Series[]),
+  ...(aimsEuropeSeries as Series[]),
   ...(comradesSeries as Series[]),
   ...(twoOceansSeries as Series[]),
   ...(publicFigureSeries as Series[]),
@@ -194,9 +200,11 @@ const extraSlugs = new Set(extraSeries.map((series) => series.slug));
 export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series) => ({
   ...series,
   ...seriesOverrides[series.slug],
+  ...aimsEuropeSeriesOverrides[series.slug],
 }));
 
 const mergedEditions = [
+  ...aimsEuropeEditions.filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...(coreEditions as Edition[]),
   ...(raceCollectionEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(marathonDesSablesEditions as Edition[]).filter((edition) =>
