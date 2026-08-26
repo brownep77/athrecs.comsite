@@ -257,7 +257,9 @@ export const editions: Edition[] = (() => {
       ...sourceEdition,
       ...editionOverrides[sourceKey],
     };
-    const key = `${edition.seriesSlug}|${edition.date}`;
+    const key = edition.publishAllDistances
+      ? `${edition.seriesSlug}|${edition.date}|${edition.distance}`
+      : `${edition.seriesSlug}|${edition.date}`;
     if (seen.has(key)) continue;
     seen.add(key);
     const matchingEntryOptions =

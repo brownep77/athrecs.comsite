@@ -117,7 +117,7 @@ assert(
   "The daily 5K editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-aims-europe-road-races-v244"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v245"'),
   "The persistent seed version is behind the daily 5K release",
 );
 

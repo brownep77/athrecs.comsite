@@ -1,6 +1,6 @@
 import type { Edition, EntryOptionSeed, Series } from "./types";
 
-const CHECKED_AT = "2026-08-23";
+const CHECKED_AT = "2026-08-26";
 
 const URLS = {
   ultra4_2026: "https://ultra4charity.com/albania-2026/",
@@ -9,17 +9,32 @@ const URLS = {
   peaksUltra: "https://farcorners.tours/albania",
   skampa: "https://marathonskampa.run/",
   vjosa: "https://vjosarace.al/",
+  vjosa100: "https://vjosarace.al/carshove/",
+  vjosa67: "https://vjosarace.al/permet/",
+  vjosa44: "https://vjosarace.al/kelcyre/",
+  vjosa26: "https://vjosarace.al/tepelene/",
+  vjosa11: "https://vjosarace.al/memaliaj/",
   tirana: "https://www.tiranamarathon.com/en",
+  tiranaEntry: "https://ticket.easypay.al/marathon/tirana",
+  tiranaRoutes: "https://www.tiranamarathon.com/itinerari",
   berat: "https://beratgreenhalfmarathon.com/",
   enkelana: "https://marathonenkelana.run/",
   shkodra: "https://shkodramarathon.com/?lang=en",
   shkodraRace: "https://shkodramarathon.com/gara?lang=en",
+  shkodraSchedule: "https://shkodramarathon.com/itinerari?lang=en",
   shkodraEntry: "https://shkodramarathon.com/regjistrim?lang=en",
   raceForCure: "https://www.raceforthecure.eu/en/Races",
   migrantOfficial: "https://migranttrailrace.run/",
-  migrantSecondary:
-    "https://ultraracecalendar.com/events/3927/migrant-trail-race-fushe-arrez/",
+  migrantSecondary: "https://ultraracecalendar.com/events/3927/migrant-trail-race-fushe-arrez/",
 } as const;
+
+type AdvertisedEditionInput = Omit<Edition, "entryOptions" | "entryUrl" | "status"> & {
+  status?: Edition["status"];
+  entryUrl?: string;
+  providerCode?: string;
+  providerName?: string;
+  entryType?: EntryOptionSeed["entryType"];
+};
 
 function entryOption(
   providerCode: string,
@@ -37,6 +52,26 @@ function entryOption(
     sourceUrl: entryUrl,
     isVerified: true,
     isPrimary: true,
+  };
+}
+
+function advertisedEdition({
+  status = "Open",
+  entryUrl,
+  providerCode,
+  providerName,
+  entryType = "official",
+  ...edition
+}: AdvertisedEditionInput): Edition {
+  if (!entryUrl || !providerCode || !providerName) {
+    return { ...edition, status, publishAllDistances: true };
+  }
+  return {
+    ...edition,
+    status,
+    publishAllDistances: true,
+    entryUrl,
+    entryOptions: [entryOption(providerCode, providerName, entryUrl, entryType)],
   };
 }
 
@@ -126,7 +161,7 @@ export const albaniaRaceSeries: Series[] = [
     city: "Tepelenë",
     area: "Vjosa River corridor from Çarshovë to Tepelenë",
     surface: "Trail",
-    distances: ["100K", "67K", "44K", "27K", "11K", "Ultra"],
+    distances: ["100K", "67K", "44K", "26K", "11K", "Ultra"],
     summary:
       "A five-distance trail festival following the Vjosa River, with routes from 11 km to 100 km.",
     description:
@@ -165,8 +200,7 @@ export const albaniaRaceSeries: Series[] = [
     area: "Bulevard Republika and Berat historic district",
     surface: "Road",
     distances: ["Half", "10K"],
-    summary:
-      "A half-marathon and 10 km road event through Albania's UNESCO-listed city of Berat.",
+    summary: "A half-marathon and 10 km road event through Albania's UNESCO-listed city of Berat.",
     description:
       "Berat Green Half Marathon combines officially measured 21.1 km and 10 km routes with views of Berat's historic neighbourhoods and surrounding landscape.",
     organiser: "Berat Green Half Marathon",
@@ -185,8 +219,7 @@ export const albaniaRaceSeries: Series[] = [
     area: "Lake Ohrid promenade from Lin to Pogradec",
     surface: "Road",
     distances: ["Half", "11.5K"],
-    summary:
-      "A lakeside night half-marathon and shorter race finishing in the centre of Pogradec.",
+    summary: "A lakeside night half-marathon and shorter race finishing in the centre of Pogradec.",
     description:
       "Enkelana's half-marathon starts in Lin and follows the paved Lake Ohrid shoreline to Pogradec. The organiser currently advertises 21 km and 11.5 km options, although one registration marketplace labels the shorter race as 10 km.",
     organiser: "Maraton Albania / Marathon Enkelana",
@@ -205,8 +238,7 @@ export const albaniaRaceSeries: Series[] = [
     area: "Isa Boletini Square and central Shkodër",
     surface: "Road",
     distances: ["10K", "5K", "2.5K"],
-    summary:
-      "A city-centre road event offering 10 km and 5 km races plus youth 2.5 km categories.",
+    summary: "A city-centre road event offering 10 km and 5 km races plus youth 2.5 km categories.",
     description:
       "Shkodra Mini Marathon is organised by Vllaznia Atletike with support from the Municipality of Shkodër and the Athletics Federation of Albania. The programme includes open 10 km and 5 km races and separate 2.5 km youth categories for ages 10–15 and 16–18.",
     organiser: "Vllaznia Atletike",
@@ -224,8 +256,7 @@ export const albaniaRaceSeries: Series[] = [
     area: "Tirana",
     surface: "Road",
     distances: ["5K"],
-    summary:
-      "A 5 km charity run in Tirana supporting the European breast-cancer community.",
+    summary: "A 5 km charity run in Tirana supporting the European breast-cancer community.",
     description:
       "Race for the Cure Tirana is part of Think Pink Europe's annual series. The competitive programme is a 5 km run, accompanied by a non-competitive 3 km walk.",
     organiser: "Think Pink Europe",
@@ -254,194 +285,209 @@ export const albaniaRaceSeries: Series[] = [
   },
 ];
 
+const ultra4_2026Notes =
+  "The official event window is 4–7 September 2026. The 100 km race starts on Saturday and continues on Sunday; the 25 km and 50 km races take place on Sunday 6 September.";
+const ultra4_2027Notes =
+  "The official event window is 2–6 September 2027. The 100 km race starts on Saturday and continues on Sunday; the 25 km and 50 km races take place on Sunday 5 September.";
+const peaksNotes =
+  "Both advertised races start in Valbonë, pass through Theth and finish across the border in Vusanje, Montenegro.";
+const skampaNotes =
+  "The organiser's official schedule places the half marathon, 10 km and 5 km races on Sunday 4 October 2026 at 09:00.";
+const tiranaNotes =
+  "The official 2026 route and regulations pages advertise the marathon, half marathon, Tirana 10K and inclusive 2.3 km We Too race.";
+const beratNotes =
+  "The 10 km and half-marathon races are scheduled for Sunday 4 April 2027 at 09:00. The organiser states that registration closes on 31 March 2027.";
+const enkelanaNotes =
+  "The organiser advertises 21 km and 11.5 km races on Saturday 24 July 2027. The organiser's distance is retained where a marketplace labels the shorter option as 10 km.";
+const migrantNotes =
+  "Provisional secondary-calendar listing for 7–8 August 2027. It advertises a dated 60 km race and describes a 40 km challenge, but the official organiser has not yet published its 2027 schedule; both remain TBC.";
+
 export const albaniaRaceEditions: Edition[] = [
-  {
-    seriesSlug: "ultra-4-albania-mountain-race",
-    date: "2026-09-05",
-    distance: "100K",
-    distanceKm: 100,
-    status: "Open",
-    entryUrl: URLS.ultra4_2026,
-    entryOptions: [
-      entryOption(
-        "ultra-4-charity",
-        "Ultra 4 Charity",
-        URLS.ultra4_2026,
-        "charity",
-      ),
-    ],
-    source: URLS.ultra4_2026,
-    notes:
-      "The event window is 4–7 September 2026. The 100 km race begins on Saturday 5 September and continues on Sunday; the 25 km and 50 km races take place on Sunday 6 September.",
-  },
-  {
+  ...[
+    { date: "2026-09-05", distance: "100K", distanceKm: 100 },
+    { date: "2026-09-06", distance: "50K", distanceKm: 50 },
+    { date: "2026-09-06", distance: "25K", distanceKm: 25 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "ultra-4-albania-mountain-race",
+      ...race,
+      entryUrl: URLS.ultra4_2026,
+      providerCode: "ultra-4-charity",
+      providerName: "Ultra 4 Charity",
+      entryType: "charity",
+      source: URLS.ultra4_2026,
+      notes: ultra4_2026Notes,
+    }),
+  ),
+  advertisedEdition({
     seriesSlug: "globallimits-peaks-of-the-balkans",
     date: "2026-09-11",
     distance: "200K",
     distanceKm: 200,
-    status: "Open",
     entryUrl: URLS.globalLimits,
-    entryOptions: [
-      entryOption("global-limits", "GlobalLimits", URLS.globalLimits),
-    ],
+    providerCode: "global-limits",
+    providerName: "GlobalLimits",
     source: URLS.globalLimits,
     notes:
       "The published event window is 11–19 September 2026. This is a 200 km, six-stage transnational race through Albania, Kosovo and Montenegro, beginning in Shkodër and finishing in Theth.",
-  },
-  {
-    seriesSlug: "the-peaks-ultra-albania",
-    date: "2026-09-26",
-    distance: "62K",
-    distanceKm: 62,
-    status: "Open",
-    entryUrl: URLS.peaksUltra,
-    entryOptions: [
-      entryOption("far-corners", "Far Corners", URLS.peaksUltra, "tour_operator"),
-    ],
-    source: URLS.peaksUltra,
-    notes:
-      "Both the 42 km and 62 km races start in Valbonë, pass through Theth and finish across the border in Vusanje, Montenegro.",
-  },
-  {
-    seriesSlug: "skampa-half-marathon-elbasan",
-    date: "2026-10-04",
-    distance: "Half",
-    distanceKm: 21.0975,
-    status: "Open",
-    entryUrl: URLS.skampa,
-    entryOptions: [
-      entryOption("marathon-skampa", "Marathon Skampa", URLS.skampa),
-    ],
-    source: URLS.skampa,
-    notes:
-      "Race day is Sunday 4 October 2026. The organiser advertises 5 km, 10 km and half-marathon races; published schedule pages vary between 08:30 and 09:00, so the start time should be reconfirmed.",
-  },
-  {
-    seriesSlug: "shkodra-mini-marathon",
-    date: "2026-10-04",
-    distance: "10K",
-    distanceKm: 10,
-    status: "Open",
-    entryUrl: URLS.shkodraEntry,
-    entryOptions: [
-      entryOption(
-        "shkodra-mini-marathon",
-        "Shkodra Mini Marathon",
-        URLS.shkodraEntry,
-      ),
-    ],
-    source: URLS.shkodraRace,
-    notes:
-      "The official programme includes 10 km and 5 km races for adults and free 2.5 km youth races in two age groups. The youth races begin at 09:30; bib and race-pack collection runs from 08:00 to 09:00.",
-  },
-  {
+  }),
+  ...[
+    { distance: "62K", distanceKm: 62 },
+    { distance: "42K", distanceKm: 42 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "the-peaks-ultra-albania",
+      date: "2026-09-26",
+      ...race,
+      entryUrl: URLS.peaksUltra,
+      providerCode: "far-corners",
+      providerName: "Far Corners",
+      entryType: "tour_operator",
+      source: URLS.peaksUltra,
+      notes: peaksNotes,
+    }),
+  ),
+  ...[
+    { distance: "Half", distanceKm: 21.0975 },
+    { distance: "10K", distanceKm: 10 },
+    { distance: "5K", distanceKm: 5 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "skampa-half-marathon-elbasan",
+      date: "2026-10-04",
+      ...race,
+      startTime: "09:00",
+      entryUrl: URLS.skampa,
+      providerCode: "marathon-skampa",
+      providerName: "Marathon Skampa",
+      source: URLS.skampa,
+      notes: skampaNotes,
+    }),
+  ),
+  ...[
+    { distance: "10K", distanceKm: 10, startTime: "11:00" },
+    { distance: "5K", distanceKm: 5, startTime: "10:00" },
+    { distance: "2.5K", distanceKm: 2.5, startTime: "09:30" },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "shkodra-mini-marathon",
+      date: "2026-10-04",
+      ...race,
+      entryUrl: URLS.shkodraEntry,
+      providerCode: "shkodra-mini-marathon",
+      providerName: "Shkodra Mini Marathon",
+      source: URLS.shkodraSchedule,
+      notes:
+        "The official programme lists separate 2.5 km youth, 5 km adult and 10 km adult starts on 4 October 2026.",
+    }),
+  ),
+  advertisedEdition({
     seriesSlug: "race-for-the-cure-tirana",
     date: "2026-10-10",
     distance: "5K",
     distanceKm: 5,
-    status: "Open",
     entryUrl: URLS.raceForCure,
-    entryOptions: [
-      entryOption(
-        "think-pink-europe",
-        "Think Pink Europe",
-        URLS.raceForCure,
-        "charity",
-      ),
-    ],
+    providerCode: "think-pink-europe",
+    providerName: "Think Pink Europe",
+    entryType: "charity",
     source: URLS.raceForCure,
     notes:
       "Think Pink Europe's official race calendar lists the Tirana event for Saturday 10 October 2026. The competitive distance is 5 km; the programme also includes a non-competitive 3 km walk.",
-  },
-  {
-    seriesSlug: "vjosa-wild-river-ultra-trail",
-    date: "2026-10-24",
-    distance: "100K",
-    distanceKm: 100,
-    status: "Open",
-    entryUrl: URLS.vjosa,
-    entryOptions: [
-      entryOption("vjosa-race", "Vjosa Wild River Ultra Trail", URLS.vjosa),
-    ],
-    source: URLS.vjosa,
-    notes:
-      "The official event window is 24–25 October 2026. Routes of 11 km, 27 km, 44 km, 67 km and 100 km start at different points along the Vjosa River.",
-  },
-  {
-    seriesSlug: "tirana-marathon",
-    date: "2026-10-25",
-    distance: "Marathon",
-    distanceKm: 42.195,
-    status: "Open",
-    entryUrl: URLS.tirana,
-    entryOptions: [
-      entryOption("tirana-marathon", "Tirana Marathon", URLS.tirana),
-    ],
-    source: URLS.tirana,
-    notes:
-      "The official 2026 programme offers marathon, half-marathon and 10 km races. A registration partner also lists a 2.3 km inclusive WeToo category.",
-  },
-  {
-    seriesSlug: "berat-green-half-marathon",
-    date: "2027-04-04",
-    distance: "Half",
-    distanceKm: 21.0975,
-    status: "Open",
-    entryUrl: URLS.berat,
-    entryOptions: [
-      entryOption(
-        "berat-green-half",
-        "Berat Green Half Marathon",
-        URLS.berat,
-      ),
-    ],
-    startTime: "09:00",
-    source: URLS.berat,
-    notes:
-      "The 10 km and half-marathon races are scheduled for Sunday 4 April 2027 at 09:00. The organiser states that registration closes on 31 March 2027.",
-  },
-  {
-    seriesSlug: "enkelana-night-half-marathon",
-    date: "2027-07-24",
-    distance: "Half",
-    distanceKm: 21,
-    status: "Open",
-    entryUrl: URLS.enkelana,
-    entryOptions: [
-      entryOption("marathon-enkelana", "Marathon Enkelana", URLS.enkelana),
-    ],
-    startTime: "19:00",
-    source: URLS.enkelana,
-    notes:
-      "The organiser advertises 21 km and 11.5 km races on Saturday 24 July 2027. A registration marketplace currently labels the shorter option as 10 km, so the organiser's 11.5 km figure is retained.",
-  },
-  {
-    seriesSlug: "migrant-trail-race-fushe-arrez",
-    date: "2027-08-07",
-    distance: "60K",
-    distanceKm: 60,
-    status: "TBC",
-    source: URLS.migrantSecondary,
-    notes:
-      "Provisional secondary-calendar listing for 7–8 August 2027 with 40 km and 60 km routes. The official organiser's website has not yet published a 2027 edition or registration link.",
-  },
-  {
-    seriesSlug: "ultra-4-albania-mountain-race",
-    date: "2027-09-04",
-    distance: "100K",
-    distanceKm: 100,
-    status: "Open",
-    entryUrl: URLS.ultra4_2027,
-    entryOptions: [
-      entryOption(
-        "ultra-4-charity",
-        "Ultra 4 Charity",
-        URLS.ultra4_2027,
-        "charity",
-      ),
-    ],
-    source: URLS.ultra4_2027,
-    notes:
-      "The event window is 2–6 September 2027. The 100 km race begins on Saturday 4 September and continues on Sunday; the 25 km and 50 km races take place on Sunday 5 September.",
-  },
+  }),
+  ...[
+    { distance: "100K", distanceKm: 100, startTime: "04:00", source: URLS.vjosa100 },
+    { distance: "67K", distanceKm: 67, startTime: "06:00", source: URLS.vjosa67 },
+    { distance: "44K", distanceKm: 44, startTime: "09:00", source: URLS.vjosa44 },
+    { distance: "26K", distanceKm: 26, startTime: "11:00", source: URLS.vjosa26 },
+    { distance: "11K", distanceKm: 11, startTime: "12:00", source: URLS.vjosa11 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "vjosa-wild-river-ultra-trail",
+      date: "2026-10-25",
+      ...race,
+      entryUrl: URLS.vjosa,
+      providerCode: "vjosa-race",
+      providerName: "Vjosa Wild River Ultra Trail",
+      notes:
+        "The official route page confirms this distance, its start time and the corrected Sunday 25 October 2026 race date.",
+    }),
+  ),
+  ...[
+    { distance: "Marathon", distanceKm: 42.195 },
+    { distance: "Half", distanceKm: 21.0975 },
+    { distance: "10K", distanceKm: 10 },
+    { distance: "2.3K", distanceKm: 2.3 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "tirana-marathon",
+      date: "2026-10-25",
+      ...race,
+      entryUrl: URLS.tiranaEntry,
+      providerCode: "tirana-marathon",
+      providerName: "Tirana Marathon",
+      source: URLS.tiranaRoutes,
+      notes: tiranaNotes,
+    }),
+  ),
+  ...[
+    { distance: "Half", distanceKm: 21.0975 },
+    { distance: "10K", distanceKm: 10 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "berat-green-half-marathon",
+      date: "2027-04-04",
+      ...race,
+      startTime: "09:00",
+      entryUrl: URLS.berat,
+      providerCode: "berat-green-half",
+      providerName: "Berat Green Half Marathon",
+      source: URLS.berat,
+      notes: beratNotes,
+    }),
+  ),
+  ...[
+    { distance: "Half", distanceKm: 21 },
+    { distance: "11.5K", distanceKm: 11.5 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "enkelana-night-half-marathon",
+      date: "2027-07-24",
+      ...race,
+      startTime: "19:00",
+      entryUrl: URLS.enkelana,
+      providerCode: "marathon-enkelana",
+      providerName: "Marathon Enkelana",
+      source: URLS.enkelana,
+      notes: enkelanaNotes,
+    }),
+  ),
+  ...[
+    { distance: "60K", distanceKm: 60 },
+    { distance: "40K", distanceKm: 40 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "migrant-trail-race-fushe-arrez",
+      date: "2027-08-07",
+      ...race,
+      status: "TBC",
+      source: URLS.migrantSecondary,
+      notes: migrantNotes,
+    }),
+  ),
+  ...[
+    { date: "2027-09-04", distance: "100K", distanceKm: 100 },
+    { date: "2027-09-05", distance: "50K", distanceKm: 50 },
+    { date: "2027-09-05", distance: "25K", distanceKm: 25 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "ultra-4-albania-mountain-race",
+      ...race,
+      entryUrl: URLS.ultra4_2027,
+      providerCode: "ultra-4-charity",
+      providerName: "Ultra 4 Charity",
+      entryType: "charity",
+      source: URLS.ultra4_2027,
+      notes: ultra4_2027Notes,
+    }),
+  ),
 ];
