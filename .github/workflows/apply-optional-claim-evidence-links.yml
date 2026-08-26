@@ -1,0 +1,75 @@
+name: Apply optional result-claim evidence links
+
+on:
+  push:
+    branches:
+      - codex/instant-result-claim-approval
+
+permissions:
+  contents: write
+
+concurrency:
+  group: optional-result-claim-evidence-links
+  cancel-in-progress: false
+
+jobs:
+  apply-and-verify:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/athrecs_ci
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: athrecs_ci
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d athrecs_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/instant-result-claim-approval
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Apply optional evidence-link changes
+        run: node scripts/apply-optional-claim-evidence-links.mjs
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Run complete quality gate
+        run: npm run ci:verify
+
+      - name: Commit verified product changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git rm -- \
+            .github/workflows/apply-optional-claim-evidence-links.yml \
+            scripts/apply-optional-claim-evidence-links.mjs
+
+          git add -- \
+            migrations/0020_result_claim_evidence_links.sql \
+            scripts/verify-result-claims.mjs \
+            src/lib/athrecs/result-claims-api.ts \
+            src/routes/admin/result-claims.tsx \
+            src/routes/claim-results.tsx
+
+          git diff --cached --check
+          git commit -m "Make result-claim evidence links optional"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
