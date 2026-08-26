@@ -8,6 +8,7 @@ export type CountryInfo = {
 };
 
 const NAME_BY_ISO: Record<string, string> = {
+  AL: "Albania",
   GB: "United Kingdom",
   IE: "Ireland",
   FR: "France",
@@ -134,6 +135,7 @@ const NAME_BY_ISO: Record<string, string> = {
 };
 
 const ALIAS: Record<string, string> = {
+  albania: "AL",
   uk: "GB",
   "united kingdom": "GB",
   "great britain": "GB",
