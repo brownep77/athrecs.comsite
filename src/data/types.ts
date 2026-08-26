@@ -103,6 +103,8 @@ export type Edition = {
   partnerResultCount?: number;
   athleteResultCount?: number;
   resultsAccess?: string;
+  /** Keep every advertised same-day distance instead of the catalogue's legacy single-row collapse. */
+  publishAllDistances?: boolean;
 };
 
 export type ClubContactSeed = {

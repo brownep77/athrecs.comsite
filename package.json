@@ -19,6 +19,7 @@
     "verify:fixture-duplicates": "node --experimental-strip-types scripts/verify-fixture-duplicates.mjs",
     "verify:mrd-marathons": "node --experimental-strip-types scripts/verify-mrd-marathons.mjs",
     "verify:aims-europe-road-races": "node --experimental-strip-types scripts/verify-aims-europe-road-races.mjs",
+    "verify:albania-running-calendar": "node --experimental-strip-types scripts/verify-albania-running-calendar.mjs",
     "verify:comrades": "node --experimental-strip-types scripts/verify-comrades.mjs",
     "verify:two-oceans": "node --experimental-strip-types scripts/verify-two-oceans.mjs",
     "verify:race-qualifications": "node --experimental-strip-types scripts/verify-race-qualifications.mjs",
@@ -52,7 +53,7 @@
     "format": "prettier --write .",
     "verify:slug-stability": "node --experimental-strip-types scripts/verify-slug-stability.mjs",
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
-    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run build"
+    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run build"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",

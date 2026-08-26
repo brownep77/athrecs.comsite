@@ -19,6 +19,7 @@ const [
   { twoOceansEditions, twoOceansSeries },
   { verifiedAllSportEditions, verifiedAllSportSeries },
   { verifiedGlobalEditions, verifiedGlobalSeries },
+  { albaniaRaceEditions, albaniaRaceSeries },
   marathonOptions,
   halfMarathonOptions,
   tenKOptions,
@@ -48,6 +49,7 @@ const [
   import("../src/data/two-oceans.ts"),
   import("../src/data/verified-all-sport.ts"),
   import("../src/data/verified-global-fixtures.ts"),
+  import("../src/data/albania-races.ts"),
   import("../src/data/entry-options-uk-marathons.ts"),
   import("../src/data/entry-options-uk-half-marathons.ts"),
   import("../src/data/entry-options-uk-10ks.ts"),
@@ -68,7 +70,7 @@ const seriesOverrides = {
   ...verifiedFixtureSeriesOverrides,
   ...aimsEuropeSeriesOverrides,
 };
-const today = "2026-08-25";
+const today = "2026-08-26";
 
 function exactName(value) {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, "");
@@ -107,6 +109,7 @@ for (const series of [
   ...marathonDesSablesSeries,
   ...verifiedAllSportSeries,
   ...verifiedGlobalSeries,
+  ...albaniaRaceSeries,
   ...verifiedUkSeries,
   ...runabcSeries,
   ...multiSportSeries,
@@ -140,6 +143,7 @@ const editionSources = [
   ...marathonDesSablesEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...verifiedAllSportEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...verifiedGlobalEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...albaniaRaceEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...verifiedUkEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...runabcEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...multiSportEditions.filter((edition) => extraSlugs.has(edition.seriesSlug)),
@@ -157,7 +161,9 @@ const editions = [];
 for (const sourceEdition of editionSources) {
   const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
   const edition = { ...sourceEdition, ...editionOverrides[sourceKey] };
-  const key = `${edition.seriesSlug}|${edition.date}`;
+  const key = edition.publishAllDistances
+    ? `${edition.seriesSlug}|${edition.date}|${edition.distance}`
+    : `${edition.seriesSlug}|${edition.date}`;
   if (seenEditions.has(key)) continue;
   seenEditions.add(key);
   editions.push(edition);
@@ -208,6 +214,7 @@ for (const [key, rows] of groups) {
     for (let rightIndex = leftIndex + 1; rightIndex < rows.length; rightIndex += 1) {
       const left = rows[leftIndex];
       const right = rows[rightIndex];
+      if (left.series.slug === right.series.slug) continue;
       const score = similarity(left.series.name, right.series.name);
       const leftName = compact(left.series.name);
       const rightName = compact(right.series.name);
