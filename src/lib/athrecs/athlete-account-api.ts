@@ -563,7 +563,9 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     ]);
   const profile = profiles[0];
   const photo = photos[0];
-  const profilePhotoUploadAvailable = Boolean(process.env.BLOB_READ_WRITE_TOKEN?.trim());
+  const profilePhotoUploadAvailable = Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN?.trim() || process.env.BLOB_STORE_ID?.trim(),
+  );
   return {
     exists: Boolean(profile),
     userId,

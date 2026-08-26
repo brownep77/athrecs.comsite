@@ -45,6 +45,10 @@ assert.match(handler, /image\/webp/);
 assert.match(handler, /fileSignatureMatches/);
 assert.match(handler, /access: "private"/);
 assert.match(handler, /BLOB_READ_WRITE_TOKEN/);
+assert.match(handler, /BLOB_STORE_ID/);
+assert.match(handler, /blobStorageConnected/);
+assert.match(handler, /blobAuthOptions/);
+assert.match(handler, /storeId/);
 assert.match(handler, /Cache-Control.*private, no-store/s);
 assert.match(handler, /delete from athlete_profile_photos where user_id/);
 assert.match(handler, /old private blob cleanup failed/);
@@ -75,6 +79,7 @@ for (const field of [
 }
 assert.match(accountApi, /from athlete_profile_photos/);
 assert.match(accountApi, /safeImageUrl/);
+assert.match(accountApi, /process\.env\.BLOB_STORE_ID/);
 assert.match(accountApi, /url\.protocol === "https:"/);
 
 assert.match(profileRoute, /ProfilePhotoUploader/);
