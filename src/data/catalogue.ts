@@ -80,6 +80,7 @@ import { verifiedAllSportEditions, verifiedAllSportSeries } from "./verified-all
 import { verifiedGlobalEditions, verifiedGlobalSeries } from "./verified-global-fixtures";
 import { afghanistanRaceEditions, afghanistanRaceSeries } from "./afghanistan-races";
 import { albaniaRaceEditions, albaniaRaceSeries } from "./albania-races";
+import { westernBalkansRaceEditions, westernBalkansRaceSeries } from "./western-balkans-races";
 import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races";
 import { continuedFiveKEditions, continuedFiveKSeries } from "./five-k-races-uk-ireland-next";
 import { dailyFiveKEditions, dailyFiveKSeries } from "./five-k-races-uk-ireland-daily";
@@ -163,6 +164,7 @@ for (const series of [
   ...(marathonDesSablesSeries as Series[]),
   ...(afghanistanRaceSeries as Series[]),
   ...(albaniaRaceSeries as Series[]),
+  ...(westernBalkansRaceSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
   ...(verifiedGlobalSeries as Series[]),
   ...(verifiedUkSeries as Series[]),
@@ -214,6 +216,9 @@ const mergedEditions = [
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(albaniaRaceEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(westernBalkansRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(verifiedAllSportEditions as Edition[]).filter((edition) =>
