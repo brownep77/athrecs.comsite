@@ -11,6 +11,7 @@ const athleteApi = await readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8
 const athleteRoute = await readFile(resolve(root, "src/routes/athletes/$slug.tsx"), "utf8");
 const raceRoute = await readFile(resolve(root, "src/routes/races/$slug.tsx"), "utf8");
 const homeRoute = await readFile(resolve(root, "src/routes/index.tsx"), "utf8");
+const claimRoute = await readFile(resolve(root, "src/routes/claim-results.tsx"), "utf8");
 const staffShell = await readFile(
   resolve(root, "src/components/staff/StaffMicrositeShell.tsx"),
   "utf8",
@@ -49,6 +50,15 @@ assert.match(raceRoute, /to="\/claim-results"/);
 assert.match(homeRoute, /Claim race results/);
 assert.match(staffShell, /\/admin\/result-claims/);
 assert.match(api, /for update/);
+assert.match(api, /const requiresReview = Boolean\(owner\) \|\| otherClaimCount > 0/);
+assert.match(api, /const nextStatus: ResultClaimStatus = requiresReview \? "pending" : "approved"/);
+assert.match(api, /Automatically approved as the first uncontested claim/);
+assert.match(api, /await syncAthleteAccountAfterClaim\(outcome\.claimantUserId\)/);
+assert.match(api, /notifyResultClaimReviewed/);
+assert.doesNotMatch(api, /Add a bib number, verification detail or evidence link/);
+assert.match(claimRoute, /Matched claims are linked to your Athlete Account immediately/);
+assert.match(claimRoute, /Add result to my profile/);
+assert.match(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declaration\}/);
 assert.match(api, /Another verified account was approved/);
 assert.match(api, /Only an approved claim can have ownership revoked/);
 assert.doesNotMatch(

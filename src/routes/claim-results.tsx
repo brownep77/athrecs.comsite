@@ -38,7 +38,7 @@ export const Route = createFileRoute("/claim-results")({
       { title: "Claim your race results | ATHRECS.com" },
       {
         name: "description",
-        content: "Sign in to claim an ATHRECS race result and track its verification status.",
+        content: "Sign in to claim a matched ATHRECS result and add it to your Athlete Account immediately.",
       },
       { name: "robots", content: "noindex, follow" },
     ],
@@ -54,7 +54,7 @@ const METHOD_LABELS: Record<ResultClaimVerificationMethod, string> = {
 };
 
 const STATUS_LABELS: Record<ResultClaimStatus, string> = {
-  pending: "Pending review",
+  pending: "Conflict review",
   needs_info: "More information needed",
   approved: "Approved",
   rejected: "Not approved",
@@ -116,7 +116,9 @@ function ClaimResultsPage() {
       setMessage(
         response.alreadyOwned
           ? "This athlete profile is already linked to your account."
-          : "Claim submitted. ATHRECS staff will check it before anything is linked.",
+          : response.status === "approved"
+            ? "Result added to your Athlete Account immediately."
+            : "Another account has claimed this athlete profile, so ATHRECS staff will review the conflict.",
       );
       setDeclaration(false);
       void queryClient.invalidateQueries({ queryKey: ["my-result-claims"] });
@@ -154,14 +156,14 @@ function ClaimResultsPage() {
         <div className="border-b border-border bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-6 text-white md:px-7">
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
             <ShieldCheck className="size-4" aria-hidden="true" />
-            Athlete identity review
+            Secure result claiming
           </div>
           <h1 className="mt-2 font-display text-2xl font-semibold md:text-3xl">
             Claim your race results
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-slate-300">
-            Link a result to your ATHRECS Athlete Account. Every claim is checked by ATHRECS staff
-            before your athlete profile is marked as owned.
+            Matched claims are linked to your Athlete Account immediately after you confirm them.
+            Only a conflicting claim from another account is held for staff review.
           </p>
         </div>
         <div className="grid gap-4 p-5 text-sm md:grid-cols-3 md:p-7">
@@ -172,13 +174,13 @@ function ClaimResultsPage() {
           />
           <ClaimStep
             number="2"
-            title="Confirm ownership"
-            detail="Sign in and provide a bib number or other verification detail."
+            title="Confirm the match"
+            detail="Confirm that the selected result is yours. Supporting details are optional."
           />
           <ClaimStep
             number="3"
-            title="Staff verification"
-            detail="ATHRECS checks conflicts and approves or requests more information."
+            title="Added immediately"
+            detail="The profile is linked straight away unless another account has already claimed it."
           />
         </div>
       </section>
@@ -189,7 +191,7 @@ function ClaimResultsPage() {
           <p className="mt-1 text-sm text-muted">
             {user
               ? "You are signed in. Complete your private Entry Passport or continue with the claim below."
-              : "Create or sign in to your secure Athlete Account before claiming. Your account and private evidence are attached to the review request."}
+              : "Create or sign in to your secure Athlete Account before claiming. Optional supporting details remain private to you and ATHRECS staff."}
           </p>
         </div>
         {sessionPending ? (
@@ -295,7 +297,7 @@ function ClaimResultsPage() {
           ) : activeClaim?.status === "pending" ? (
             <ClaimState
               status={activeClaim.status}
-              note="Your claim is in the staff review queue. Published data has not been changed."
+              note="Another account has claimed this athlete profile. The existing profile link will not change while ATHRECS reviews the conflict."
             >
               <Button
                 type="button"
@@ -332,7 +334,7 @@ function ClaimResultsPage() {
               ) : null}
 
               <label className="block space-y-1.5 text-sm font-medium text-fg">
-                How can we verify this result?
+                Supporting information type (optional)
                 <select
                   value={method}
                   onChange={(event) =>
@@ -349,7 +351,7 @@ function ClaimResultsPage() {
               </label>
 
               <label className="block space-y-1.5 text-sm font-medium text-fg">
-                Verification detail
+                Supporting detail <span className="font-normal text-subtle">(optional)</span>
                 <textarea
                   value={evidenceText}
                   onChange={(event) => setEvidenceText(event.target.value)}
@@ -359,7 +361,8 @@ function ClaimResultsPage() {
                   className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                 />
                 <span className="block text-xs font-normal text-subtle">
-                  Do not include passwords, payment details or identity-document numbers.
+                  You may add a bib number, club or entry name for the private audit trail. Do not
+                  include passwords, payment details or identity-document numbers.
                 </span>
               </label>
 
@@ -383,18 +386,14 @@ function ClaimResultsPage() {
                   className="mt-0.5 size-4 rounded border-border"
                 />
                 <span>
-                  I confirm this is my result and the information supplied is accurate. I understand
-                  ATHRECS may reject conflicting or unverifiable claims.
+                  I confirm this is my result and the information supplied is accurate. It will be
+                  added immediately unless another account has already claimed the athlete profile.
                 </span>
               </label>
 
               <Button
                 type="submit"
-                disabled={
-                  submitClaim.isPending ||
-                  !declaration ||
-                  (!evidenceText.trim() && !evidenceUrl.trim())
-                }
+                disabled={submitClaim.isPending || !declaration}
               >
                 {submitClaim.isPending ? (
                   <Loader2 className="size-4 animate-spin" aria-hidden="true" />
@@ -402,10 +401,10 @@ function ClaimResultsPage() {
                   <FileCheck2 className="size-4" aria-hidden="true" />
                 )}
                 {submitClaim.isPending
-                  ? "Submitting…"
+                  ? "Adding result…"
                   : currentClaim
-                    ? "Resubmit claim"
-                    : "Submit for staff review"}
+                    ? "Confirm and add result"
+                    : "Add result to my profile"}
               </Button>
             </form>
           )}
