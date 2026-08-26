@@ -106,6 +106,7 @@ assert.doesNotMatch(reconciliationApi, /ensureAthrecsSeeded/);
 assert.match(reconciliationPanel, /Existing records are never/);
 assert.match(reconciliationPanel, /data\.persistent/);
 assert.match(resultCatalogue, /const resultByKey = new Map<string, ResultSeed>/);
+assert.match(resultCatalogue, /mergeCompatibleResult/);
 assert.match(resultCatalogue, /Conflicting duplicate result seed/);
 
 const db = new PGlite();
@@ -197,9 +198,53 @@ const resultKeys = results.map(
   (result) => `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
 );
 assert.equal(new Set(resultKeys).size, resultKeys.length, "Recoverable result keys must be unique");
+assert.equal(results.length, 2_599, "Canonical retained result count changed unexpectedly");
 assert(
   results.length >= catalogueMetadata.merged_counts.results,
   `Canonical recoverable results (${results.length}) fell below the recorded catalogue floor (${catalogueMetadata.merged_counts.results})`,
+);
+const heidiRunNorwich = results.find(
+  (result) =>
+    result.eventSlug === "run-norwich" &&
+    result.date === "2025-09-07" &&
+    result.distance === "10K" &&
+    result.athleteSlug === "heidi-bacon",
+);
+assert(heidiRunNorwich, "Canonical Heidi Bacon Run Norwich result is missing");
+assert.deepEqual(
+  {
+    source_id: heidiRunNorwich.source_id,
+    place: heidiRunNorwich.place,
+    time: heidiRunNorwich.time,
+    finishTimeSeconds: heidiRunNorwich.finishTimeSeconds,
+    chipTimeSeconds: heidiRunNorwich.chipTimeSeconds,
+    bib: heidiRunNorwich.bib,
+    genderPlace: heidiRunNorwich.genderPlace,
+    category: heidiRunNorwich.category,
+    ageOnDay: heidiRunNorwich.ageOnDay,
+    ageGradePct: heidiRunNorwich.ageGradePct,
+    openRating: heidiRunNorwich.openRating,
+    ageGradeRating: heidiRunNorwich.ageGradeRating,
+    resultSource: heidiRunNorwich.resultSource,
+    source: heidiRunNorwich.source,
+  },
+  {
+    source_id: 7273,
+    place: 560,
+    time: "44:50",
+    finishTimeSeconds: 2690,
+    chipTimeSeconds: 2690,
+    bib: "784",
+    genderPlace: 41,
+    category: "F40",
+    ageOnDay: 40,
+    ageGradePct: 67.6,
+    openRating: 647,
+    ageGradeRating: 676,
+    resultSource: "official",
+    source:
+      "https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf",
+  },
 );
 const athleteSlugs = new Set(athletes.map((athlete) => athlete.slug));
 const eventSlugs = new Set(seriesList.map((series) => series.slug));
