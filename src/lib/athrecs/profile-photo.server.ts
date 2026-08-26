@@ -45,7 +45,8 @@ async function requireUserId(request: Request): Promise<string | null> {
 
 function privatePhotoPath(userId: string, contentType: string): string {
   const accountKey = createHash("sha256").update(userId).digest("hex").slice(0, 24);
-  const extension = contentType === "image/png" ? "png" : contentType === "image/jpeg" ? "jpg" : "webp";
+  const extension =
+    contentType === "image/png" ? "png" : contentType === "image/jpeg" ? "jpg" : "webp";
   return `athlete-profile-photos/${accountKey}/${Date.now()}-${randomUUID()}.${extension}`;
 }
 
@@ -104,7 +105,7 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
         "Content-Length": String(photo.byte_size),
         "Content-Disposition": "inline",
         "Cache-Control": "private, no-store, no-cache, max-age=0, must-revalidate",
-        "Pragma": "no-cache",
+        Pragma: "no-cache",
         "X-Content-Type-Options": "nosniff",
         "Content-Security-Policy": "default-src 'none'",
       },
@@ -139,7 +140,7 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
     await sql`delete from athlete_profile_photos where user_id = ${userId}`;
     if (previous) {
       try {
-        await del(previous.blob_pathname, { access: "private", token });
+        await del(previous.blob_pathname, { token });
       } catch (error) {
         console.warn("[profile-photo] private blob cleanup failed after account deletion", error);
       }
@@ -196,7 +197,7 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
 
     if (previous && previous.blob_pathname !== uploaded.pathname) {
       try {
-        await del(previous.blob_pathname, { access: "private", token });
+        await del(previous.blob_pathname, { token });
       } catch (error) {
         console.warn("[profile-photo] old private blob cleanup failed", error);
       }
@@ -210,7 +211,7 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
   } catch (error) {
     if (uploadedPathname) {
       try {
-        await del(uploadedPathname, { access: "private", token });
+        await del(uploadedPathname, { token });
       } catch {
         // Preserve the original failure. Unreferenced private blobs can be cleaned separately.
       }
