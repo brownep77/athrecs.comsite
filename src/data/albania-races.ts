@@ -24,8 +24,22 @@ const URLS = {
   shkodraSchedule: "https://shkodramarathon.com/itinerari?lang=en",
   shkodraEntry: "https://shkodramarathon.com/regjistrim?lang=en",
   raceForCure: "https://www.raceforthecure.eu/en/Races",
+  martyrsDay: "https://fsha.org.al/maraton-albania/",
+  kukes: "https://www.kukeshalfmarathon.com/",
+  kukesHalf: "https://www.kukeshalfmarathon.com/half%20marathon",
   migrantOfficial: "https://migranttrailrace.run/",
+  migrant100: "https://migranttrailrace.run/kreshta-e-dardhes/",
+  migrant60: "https://migranttrailrace.run/shtegu-kaprojve/",
+  migrant40: "https://migranttrailrace.run/ujvara-kryeziut/",
+  migrant21: "https://migranttrailrace.run/shtegu-pishave/",
+  migrant11: "https://migranttrailrace.run/lumi-micoj/",
   migrantSecondary: "https://ultraracecalendar.com/events/3927/migrant-trail-race-fushe-arrez/",
+  berat2026: "https://worldracecalendar.com/event/berat-green-half-marathon/",
+  vlora:
+    "https://vlora.gov.al/thirrje-per-projekt-propozime-aplikim-per-mbeshtetje-per-projekte-artistike-kulturore-17/",
+  durres: "https://durres.gov.al/",
+  durresSource:
+    "https://durreslajm.al/oraret-rruget-e-durresit-ku-qarkullimi-do-te-jete-i-bllokuar-diten-e-diel/",
 } as const;
 
 type AdvertisedEditionInput = Omit<Edition, "entryOptions" | "entryUrl" | "status"> & {
@@ -153,6 +167,43 @@ export const albaniaRaceSeries: Series[] = [
     source_url: URLS.skampa,
   },
   {
+    slug: "martyrs-day-trail-half-marathon-tirana",
+    name: "Martyrs' Day International Trail Half Marathon",
+    sport: "Running",
+    country: "Albania",
+    county: "Tirana County",
+    city: "Tirana",
+    area: "Historic memorial hills and the Erzen River corridor",
+    surface: "Trail",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "A commemorative trail half-marathon with 10 km and 5 km races in the hills beside the Erzen River.",
+    description:
+      "Maraton Albania stages this Martyrs' Day event with support from the Municipality of Tirana and the Albanian Athletics Federation. The 2026 programme included an international trail half-marathon and 10 km and 5 km mini-marathons between the historic memorial hills and the Erzen River.",
+    organiser: "Maraton Albania, Municipality of Tirana and Albanian Athletics Federation",
+    website: URLS.martyrsDay,
+    featured: false,
+    source_url: URLS.martyrsDay,
+  },
+  {
+    slug: "kukes-half-marathon",
+    name: "Kukës Half Marathon",
+    sport: "Running",
+    country: "Albania",
+    county: "Kukës County",
+    city: "Kukës",
+    area: "Kukës city centre and surrounding villages",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary: "A city-centre half-marathon and 10 km road race in mountainous north-east Albania.",
+    description:
+      "Kukës Half Marathon starts in the city centre and follows paved roads through Kukës and its surrounding landscape. The official 2026 schedule listed a 21.1 km half-marathon, a 10 km race and a separate junior start whose distance was not published.",
+    organiser: "Kukës Marathon",
+    website: URLS.kukes,
+    featured: false,
+    source_url: URLS.kukesHalf,
+  },
+  {
     slug: "vjosa-wild-river-ultra-trail",
     name: "Vjosa Wild River Ultra Trail",
     sport: "Running",
@@ -273,15 +324,52 @@ export const albaniaRaceSeries: Series[] = [
     city: "Fushë-Arrëz",
     area: "Fushë-Arrëz mountain trails",
     surface: "Mountain Trail",
-    distances: ["60K", "40K", "Ultra"],
+    distances: ["100K", "60K", "40K", "21K", "11K", "Ultra"],
     summary:
-      "A provisional 2027 mountain-trail event in northern Albania, currently listed with 40 km and 60 km routes.",
+      "A northern Albanian mountain-trail festival with routes from approximately 11 km to 100 km.",
     description:
-      "The 2027 Migrant Trail Race is currently present only on a secondary ultra calendar. The official organiser's website still displays the completed 2026 edition, so the date and distances remain TBC.",
+      "The official 2026 programme offered 100 km, 60 km, 40 km, 21 km and short-course trail races. The short course is headed as 10 km but described by the organiser as 11 km, so ATHRECS retains the detailed 11 km measurement. A secondary calendar lists a provisional 2027 event, but the organiser has not yet confirmed that schedule.",
     organiser: "Maraton Albania and Municipality of Fushë-Arrëz",
     website: URLS.migrantOfficial,
     featured: false,
     source_url: URLS.migrantSecondary,
+  },
+  {
+    slug: "vlora-half-marathon",
+    name: "Vlora Half Marathon — Vrapojmë për Pavarësinë",
+    sport: "Running",
+    country: "Albania",
+    county: "Vlorë County",
+    city: "Vlorë",
+    area: "Flag Square, central boulevards and the Lungomare waterfront",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "A recurring Independence celebrations race offering half-marathon, 10 km and 5 km routes.",
+    description:
+      "The Municipality of Vlorë staged the fifth edition on 30 November 2025 with 21 km, 10 km and 5 km races from Flag Square along the city's boulevards and waterfront. No 2026 or 2027 edition had been advertised when checked on 26 August 2026, so ATHRECS lists the series for monitoring without inventing a future date.",
+    organiser: "Municipality of Vlorë",
+    website: URLS.vlora,
+    featured: false,
+    source_url: URLS.vlora,
+  },
+  {
+    slug: "durres-marathon",
+    name: "Durrës Marathon",
+    sport: "Running",
+    country: "Albania",
+    county: "Durrës County",
+    city: "Durrës",
+    area: "Liria Square, central Durrës and the seafront",
+    surface: "Road",
+    distances: ["10K", "5K", "1K"],
+    summary: "A city road-running event launched in 2025 with 10 km, 5 km and 1 km categories.",
+    description:
+      "The inaugural Durrës Marathon took place on 2 November 2025, starting and finishing in Liria Square with 10 km, 5 km and 1 km routes. Organisers stated an intention to make it annual, but no reliable 2026 or 2027 date had been advertised when checked on 26 August 2026; the series is therefore monitored without a speculative edition.",
+    organiser: "Durrës Marathon and Municipality of Durrës",
+    website: URLS.durres,
+    featured: false,
+    source_url: URLS.durresSource,
   },
 ];
 
@@ -301,8 +389,107 @@ const enkelanaNotes =
   "The organiser advertises 21 km and 11.5 km races on Saturday 24 July 2027. The organiser's distance is retained where a marketplace labels the shorter option as 10 km.";
 const migrantNotes =
   "Provisional secondary-calendar listing for 7–8 August 2027. It advertises a dated 60 km race and describes a 40 km challenge, but the official organiser has not yet published its 2027 schedule; both remain TBC.";
+const completedNotes = {
+  berat:
+    "The completed 2026 edition offered half-marathon and 10 km races on Sunday 5 April at 09:00.",
+  martyrs:
+    "The Albanian Athletics Federation records an international trail half-marathon and 10 km and 5 km races on Martyrs' Day, 5 May 2026.",
+  kukes:
+    "The official schedule listed the half-marathon at 09:30 and the 10 km race at 09:45 on Sunday 26 April 2026. A junior start was also advertised without a published distance.",
+  enkelana:
+    "The organiser's completed 2026 programme advertised a 21 km half-marathon and an 11.5 km mini-marathon on Saturday 25 July at 19:00.",
+  migrant:
+    "The official 2026 route pages advertised 100 km, 60 km and 40 km races on 8 August and 21 km and approximately 11 km races on 9 August. The short route is headed as 10 km but described in the detailed course and schedule as 11 km.",
+} as const;
 
 export const albaniaRaceEditions: Edition[] = [
+  ...[
+    { distance: "Half", distanceKm: 21.0975 },
+    { distance: "10K", distanceKm: 10 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "berat-green-half-marathon",
+      date: "2026-04-05",
+      ...race,
+      status: "Finished",
+      startTime: "09:00",
+      source: URLS.berat2026,
+      notes: completedNotes.berat,
+    }),
+  ),
+  ...[
+    { distance: "Half", distanceKm: 21.0975 },
+    { distance: "10K", distanceKm: 10 },
+    { distance: "5K", distanceKm: 5 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "martyrs-day-trail-half-marathon-tirana",
+      date: "2026-05-05",
+      ...race,
+      status: "Finished",
+      source: URLS.martyrsDay,
+      notes: completedNotes.martyrs,
+    }),
+  ),
+  ...[
+    { distance: "Half", distanceKm: 21.0975, startTime: "09:30" },
+    { distance: "10K", distanceKm: 10, startTime: "09:45" },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "kukes-half-marathon",
+      date: "2026-04-26",
+      ...race,
+      status: "Finished",
+      source: URLS.kukes,
+      notes: completedNotes.kukes,
+    }),
+  ),
+  ...[
+    { distance: "Half", distanceKm: 21 },
+    { distance: "11.5K", distanceKm: 11.5 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "enkelana-night-half-marathon",
+      date: "2026-07-25",
+      ...race,
+      status: "Finished",
+      startTime: "19:00",
+      source: URLS.enkelana,
+      notes: completedNotes.enkelana,
+    }),
+  ),
+  ...[
+    {
+      date: "2026-08-08",
+      distance: "100K",
+      distanceKm: 100,
+      startTime: "03:00",
+      source: URLS.migrant100,
+    },
+    {
+      date: "2026-08-08",
+      distance: "60K",
+      distanceKm: 60,
+      startTime: "05:00",
+      source: URLS.migrant60,
+    },
+    {
+      date: "2026-08-08",
+      distance: "40K",
+      distanceKm: 40,
+      startTime: "08:00",
+      source: URLS.migrant40,
+    },
+    { date: "2026-08-09", distance: "21K", distanceKm: 21, source: URLS.migrant21 },
+    { date: "2026-08-09", distance: "11K", distanceKm: 11, source: URLS.migrant11 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "migrant-trail-race-fushe-arrez",
+      ...race,
+      status: "Finished",
+      notes: completedNotes.migrant,
+    }),
+  ),
   ...[
     { date: "2026-09-05", distance: "100K", distanceKm: 100 },
     { date: "2026-09-06", distance: "50K", distanceKm: 50 },

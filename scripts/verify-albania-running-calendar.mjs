@@ -6,9 +6,16 @@ import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts"
 import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
 
 const CHECKED_AT = "2026-08-26";
+const CALENDAR_START = "2026-01-01";
 const HORIZON = "2027-12-31";
 
 const expected = [
+  ["berat-green-half-marathon", "2026-04-05", ["10K", "Half"]],
+  ["martyrs-day-trail-half-marathon-tirana", "2026-05-05", ["10K", "5K", "Half"]],
+  ["kukes-half-marathon", "2026-04-26", ["10K", "Half"]],
+  ["enkelana-night-half-marathon", "2026-07-25", ["11.5K", "Half"]],
+  ["migrant-trail-race-fushe-arrez", "2026-08-08", ["100K", "40K", "60K"]],
+  ["migrant-trail-race-fushe-arrez", "2026-08-09", ["11K", "21K"]],
   ["ultra-4-albania-mountain-race", "2026-09-05", ["100K"]],
   ["ultra-4-albania-mountain-race", "2026-09-06", ["25K", "50K"]],
   ["globallimits-peaks-of-the-balkans", "2026-09-11", ["200K"]],
@@ -45,8 +52,8 @@ function groupedDistances(editions) {
   );
 }
 
-assert.equal(albaniaRaceSeries.length, 11, "Unexpected Albania event-series count");
-assert.equal(albaniaRaceEditions.length, 31, "Unexpected Albania advertised-distance count");
+assert.equal(albaniaRaceSeries.length, 15, "Unexpected Albania event-series count");
+assert.equal(albaniaRaceEditions.length, 45, "Unexpected Albania advertised-distance count");
 
 const albaniaCountry = resolveCountry({ country: "Albania" });
 assert.equal(albaniaCountry.iso, "AL", "Albania must resolve to its ISO country code");
@@ -67,8 +74,8 @@ for (const edition of albaniaRaceEditions) {
   editionKeys.add(editionKey);
   assert(seriesBySlug.has(edition.seriesSlug), `Unknown Albania series: ${edition.seriesSlug}`);
   assert(
-    edition.date >= CHECKED_AT,
-    `Past Albania fixture slipped into the active calendar: ${editionKey}`,
+    edition.date >= CALENDAR_START,
+    `Albania fixture predates the requested full-year calendar: ${editionKey}`,
   );
   assert(edition.date <= HORIZON, `Albania fixture exceeds the requested horizon: ${editionKey}`);
   assert.match(edition.source, /^https:\/\//, `Missing public source for ${editionKey}`);
@@ -81,6 +88,11 @@ for (const edition of albaniaRaceEditions) {
     seriesBySlug.get(edition.seriesSlug).distances.includes(edition.distance),
     `Series distance list omits ${editionKey}`,
   );
+  if (edition.date < CHECKED_AT) {
+    assert.equal(edition.status, "Finished", `Past Albania fixture is not finished: ${editionKey}`);
+    assert(!edition.entryUrl, `Finished fixture must not expose an entry link: ${editionKey}`);
+    continue;
+  }
   if (edition.status === "TBC") {
     assert(
       !edition.entryUrl,
@@ -106,6 +118,31 @@ for (const edition of albaniaRaceEditions) {
     `Unverified entry option for ${editionKey}`,
   );
 }
+
+for (const monitoredSlug of ["vlora-half-marathon", "durres-marathon"]) {
+  assert(seriesBySlug.has(monitoredSlug), `Missing monitored Albania series: ${monitoredSlug}`);
+  assert(
+    !albaniaRaceEditions.some((edition) => edition.seriesSlug === monitoredSlug),
+    `Unadvertised future edition was invented for ${monitoredSlug}`,
+  );
+}
+
+const full2026ShortDistanceCounts = {
+  fiveK: albaniaRaceEditions.filter(
+    (edition) => edition.date.startsWith("2026-") && edition.distance === "5K",
+  ).length,
+  tenK: albaniaRaceEditions.filter(
+    (edition) => edition.date.startsWith("2026-") && edition.distance === "10K",
+  ).length,
+  halfOr21K: albaniaRaceEditions.filter(
+    (edition) => edition.date.startsWith("2026-") && ["Half", "21K"].includes(edition.distance),
+  ).length,
+};
+assert.deepEqual(
+  full2026ShortDistanceCounts,
+  { fiveK: 4, tenK: 6, halfOr21K: 7 },
+  "Confirmed full-year 2026 short-distance totals changed",
+);
 
 const expectedGroups = new Map(
   expected.map(([slug, date, distances]) => [key(slug, date), distances]),
@@ -181,12 +218,18 @@ process.stdout.write(
   JSON.stringify(
     {
       checked_at: CHECKED_AT,
+      calendar_start: CALENDAR_START,
       horizon: HORIZON,
       series: albaniaRaceSeries.length,
       race_dates: expected.length,
       advertised_distance_rows: albaniaRaceEditions.length,
-      confirmed_rows: albaniaRaceEditions.filter((edition) => edition.status !== "TBC").length,
+      completed_rows: albaniaRaceEditions.filter((edition) => edition.status === "Finished").length,
+      future_confirmed_rows: albaniaRaceEditions.filter(
+        (edition) => edition.date >= CHECKED_AT && edition.status !== "TBC",
+      ).length,
       provisional_rows: albaniaRaceEditions.filter((edition) => edition.status === "TBC").length,
+      monitored_undated_series: 2,
+      full_2026_short_distance_counts: full2026ShortDistanceCounts,
       flag: isoToFlagEmoji(albaniaCountry.iso),
       stale_vjosa_dates: 0,
       missing_catalogue_distances: 0,

@@ -1,6 +1,18 @@
-# Albania running calendar through 2027
+# Albania running calendar: full 2026 through 2027
 
-Checked on 26 August 2026. The active calendar covers advertised Albanian running fixtures from the check date through 31 December 2027. Dates are not inferred from an event's prior annual pattern.
+Checked on 26 August 2026 in English and Albanian. The catalogue retains confirmed completed races from 1 January 2026 and advertised future fixtures through 31 December 2027. Dates are not inferred from an event's prior annual pattern.
+
+## Confirmed completed 2026 races recovered by the local-language audit
+
+| Date         | Event                                 | Advertised race distances             | Source status                 |
+| ------------ | ------------------------------------- | ------------------------------------- | ----------------------------- |
+| 5 Apr 2026   | Berat Green Half Marathon             | Half, 10K                             | Registration partner/archive  |
+| 26 Apr 2026  | Kukës Half Marathon                   | Half, 10K; junior distance not stated | Official organiser            |
+| 5 May 2026   | Martyrs' Day International Trail Half | Trail half, 10K, 5K                   | Albanian Athletics Federation |
+| 25 Jul 2026  | Enkelana Night Half Marathon          | Half, 11.5K                           | Official organiser            |
+| 8–9 Aug 2026 | Migrant Trail Race — Fushë-Arrëz      | 100K, 60K, 40K, 21K, 11K              | Official route pages          |
+
+The Migrant organiser heads its short course as 10 km but describes and schedules it as 11 km. ATHRECS uses the detailed 11 km measurement and explains the discrepancy in the edition notes.
 
 ## Published race dates
 
@@ -21,7 +33,21 @@ Checked on 26 August 2026. The active calendar covers advertised Albanian runnin
 
 The Vjosa record was corrected from 24 October to 25 October 2026 after checking each official route page. The organiser labels its Tepelenë course as 26 km, so the earlier 27K catalogue label was also replaced.
 
-No 2027 recurrence is created unless an organiser or clearly labelled live calendar has advertised it. Past-only 2026 races and undated junior/fun runs are therefore not added to the active future calendar.
+## Recurring series monitored without a speculative date
+
+- Vlora Half Marathon — 5K, 10K and half marathon; the fifth edition was held on 30 November 2025.
+- Durrës Marathon — 1K, 5K and 10K; the inaugural edition was held on 2 November 2025.
+
+Neither organiser had advertised a 2026 or 2027 edition when checked. The series are retained for discovery and monitoring but have no invented future fixture. VrapLale Night Edition is not catalogued as a 10K because its 2026 page confirms the event but not the race distance.
+
+## Full-year 2026 short-distance totals
+
+- 5K: 4 confirmed races.
+- Exact 10K: 6 confirmed races.
+- Half marathon or advertised 21K: 7 confirmed races.
+- One additional Migrant short course is described inconsistently as 10 km and 11 km and is conservatively stored as 11K.
+
+No 2027 recurrence is created unless an organiser or clearly labelled live calendar has advertised it.
 
 ## Reference sources
 
@@ -31,6 +57,9 @@ No 2027 recurrence is created unless an organiser or clearly labelled live calen
 - [Skampa Half Marathon](https://marathonskampa.run/) and [Shkodra Mini Marathon schedule](https://shkodramarathon.com/itinerari?lang=en)
 - [Vjosa Wild River route pages](https://vjosarace.al/) and [Tirana Marathon routes](https://www.tiranamarathon.com/itinerari)
 - [Berat Green Half Marathon](https://beratgreenhalfmarathon.com/) and [Enkelana Night Half Marathon](https://marathonenkelana.run/)
+- [Kukës Half Marathon](https://www.kukeshalfmarathon.com/) and [Martyrs' Day federation report](https://fsha.org.al/maraton-albania/)
+- [Migrant Trail Race official routes](https://migranttrailrace.run/)
+- [Municipality of Vlorë 2025 race specification](https://vlora.gov.al/thirrje-per-projekt-propozime-aplikim-per-mbeshtetje-per-projekte-artistike-kulturore-17/) and [Durrës 2025 route notice](https://durreslajm.al/oraret-rruget-e-durresit-ku-qarkullimi-do-te-jete-i-bllokuar-diten-e-diel/)
 - [Race for the Cure Europe](https://www.raceforthecure.eu/en/Races)
 - [Migrant Trail 2027 secondary listing](https://ultraracecalendar.com/events/3927/migrant-trail-race-fushe-arrez/)
 
@@ -43,4 +72,4 @@ npm run verify:albania-running-calendar
 npm run verify:fixture-duplicates
 ```
 
-The Albania verifier checks the 11 event series, all 31 distance-specific records, official-entry metadata, the date horizon, the Vjosa correction, catalogue publication and same-day calendar-card distance badges.
+The Albania verifier checks 15 event series, 45 distance-specific records, completed-versus-upcoming status, official-entry metadata, the requested date range, full-year short-distance totals, the Vjosa correction, monitored undated series, catalogue publication and same-day calendar-card distance badges.
