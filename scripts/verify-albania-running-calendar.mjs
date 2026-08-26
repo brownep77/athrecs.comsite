@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 import { albaniaRaceEditions, albaniaRaceSeries } from "../src/data/albania-races.ts";
+import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts";
 import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
 
 const CHECKED_AT = "2026-08-26";
@@ -46,6 +47,11 @@ function groupedDistances(editions) {
 
 assert.equal(albaniaRaceSeries.length, 11, "Unexpected Albania event-series count");
 assert.equal(albaniaRaceEditions.length, 31, "Unexpected Albania advertised-distance count");
+
+const albaniaCountry = resolveCountry({ country: "Albania" });
+assert.equal(albaniaCountry.iso, "AL", "Albania must resolve to its ISO country code");
+assert.equal(albaniaCountry.name, "Albania", "Albania must retain its country label");
+assert.equal(isoToFlagEmoji(albaniaCountry.iso), "🇦🇱", "Albania must display the Albanian flag");
 
 const seriesBySlug = new Map(albaniaRaceSeries.map((series) => [series.slug, series]));
 assert.equal(seriesBySlug.size, albaniaRaceSeries.length, "Duplicate Albania event slug");
@@ -181,6 +187,7 @@ process.stdout.write(
       advertised_distance_rows: albaniaRaceEditions.length,
       confirmed_rows: albaniaRaceEditions.filter((edition) => edition.status !== "TBC").length,
       provisional_rows: albaniaRaceEditions.filter((edition) => edition.status === "TBC").length,
+      flag: isoToFlagEmoji(albaniaCountry.iso),
       stale_vjosa_dates: 0,
       missing_catalogue_distances: 0,
     },
