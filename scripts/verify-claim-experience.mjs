@@ -10,6 +10,10 @@ const privateProfileRoute = await readFile(
   "utf8",
 );
 const routeTree = await readFile(resolve(root, "src/routeTree.gen.ts"), "utf8");
+const resultClaimVerifier = await readFile(
+  resolve(root, "scripts/verify-result-claims.mjs"),
+  "utf8",
+);
 const accountApi = await readFile(
   resolve(root, "src/lib/athrecs/athlete-account-api.ts"),
   "utf8",
@@ -44,6 +48,13 @@ assert.match(routeTree, /id: '\/my-athlete-profile'/);
 assert.match(routeTree, /'\/my-athlete-profile': typeof MyAthleteProfileRoute/);
 assert.match(routeTree, /preLoaderRoute: typeof MyAthleteProfileRouteImport/);
 assert.match(routeTree, /MyAthleteProfileRoute: MyAthleteProfileRoute/);
+
+assert.match(resultClaimVerifier, /Confirm a matched result once and it is added immediately/);
+assert.match(resultClaimVerifier, /Add this result to my profile/);
+assert.doesNotMatch(
+  resultClaimVerifier,
+  /Matched claims are linked to your Athlete Account immediately/,
+);
 
 const privateProfileHeaders = vercelConfig.headers.find(
   (entry) => entry.source === "/my-athlete-profile",
