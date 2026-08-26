@@ -20,6 +20,7 @@ import {
   applyImportBundle,
   applyResultsImport,
   parseEventsCsv,
+  parseResultsCsv,
   type ImportBundle,
   type ResultsImportBundle,
 } from "./import.server";
@@ -407,7 +408,17 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ed.results_official_url,
         ed.start_time,
         ed.notes,
-        (select count(*)::int from results r where r.edition_id = ed.id) as result_count,
+        (
+          select count(*)::int
+          from results r
+          join athletes result_athlete on result_athlete.id = r.athlete_id
+          where r.edition_id = ed.id
+            and (
+              r.result_visibility in ('public', 'public_figure')
+              or result_athlete.profile_type = 'Public figure'
+              or result_athlete.profile_visibility = 'public'
+            )
+        ) as result_count,
         (
           select coalesce(
             json_agg(json_build_object(
@@ -648,6 +659,11 @@ export const getEditionResults = createServerFn({ method: "GET" })
       join athletes a on a.id = r.athlete_id
       left join clubs c on c.id = a.club_id
       where r.edition_id = ${editionId}
+        and (
+          r.result_visibility in ('public', 'public_figure')
+          or a.profile_type = 'Public figure'
+          or a.profile_visibility = 'public'
+        )
       order by r.finish_time_seconds asc nulls last, a.display_name asc
     `;
   });
@@ -663,16 +679,28 @@ export const listAthletes = createServerFn({ method: "GET" })
         a.profile_type, a.profile_roles,
         c.name as club,
         c.slug as club_slug,
-        (select count(*)::int from results r where r.athlete_id = a.id) as result_count
+        (
+          select count(*)::int
+          from results r
+          where r.athlete_id = a.id
+            and (
+              a.profile_type = 'Public figure'
+              or a.profile_visibility = 'public'
+              or r.result_visibility in ('public', 'public_figure')
+            )
+        ) as result_count
       from athletes a
       left join clubs c on c.id = a.club_id
       where
-        ${q}::text is null
-        or lower(a.display_name) like ${q}
-        or lower(coalesce(c.name, '')) like ${q}
-        or lower(coalesce(a.city, '')) like ${q}
-        or lower(coalesce(a.profile_type, '')) like ${q}
-        or lower(coalesce(a.profile_roles, '')) like ${q}
+        (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
+        and (
+          ${q}::text is null
+          or lower(a.display_name) like ${q}
+          or lower(coalesce(c.name, '')) like ${q}
+          or lower(coalesce(a.city, '')) like ${q}
+          or lower(coalesce(a.profile_type, '')) like ${q}
+          or lower(coalesce(a.profile_roles, '')) like ${q}
+        )
       order by a.display_name
     `;
   });
@@ -709,6 +737,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       from athletes a
       left join clubs c on c.id = a.club_id
       where a.slug = ${slug}
+        and (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
       limit 1
     `;
     const athlete = rows[0];
@@ -740,6 +769,10 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       join editions ed on ed.id = r.edition_id
       join events e on e.id = ed.event_id
       where r.athlete_id = ${athlete.id}
+        and (
+          ${athlete.profile_type} = 'Public figure'
+          or r.result_visibility in ('public', 'public_figure')
+        )
       order by ed.event_date desc
     `;
     return { athlete, results };
@@ -755,7 +788,11 @@ export const listClubs = createServerFn({ method: "GET" })
         c.id, c.slug, c.name, c.city, c.county, c.country,
         c.sports as sports_csv,
         c.website, c.official_source, c.summary,
-        (select count(*)::int from athletes a where a.club_id = c.id) as member_count
+        (
+          select count(*)::int from athletes a
+          where a.club_id = c.id
+            and (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
+        ) as member_count
       from clubs c
       where
         ${q}::text is null
@@ -809,9 +846,19 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     }>`
       select
         a.id, a.slug, a.display_name, a.gender, a.city,
-        (select count(*)::int from results r where r.athlete_id = a.id) as result_count
+        (
+          select count(*)::int
+          from results r
+          where r.athlete_id = a.id
+            and (
+              a.profile_type = 'Public figure'
+              or a.profile_visibility = 'public'
+              or r.result_visibility in ('public', 'public_figure')
+            )
+        ) as result_count
       from athletes a
       where a.club_id = ${club.id}
+        and (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
       order by a.display_name
     `;
     return {
@@ -1404,25 +1451,54 @@ export const importFromJson = createServerFn({ method: "POST" })
 
 export const importResults = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
-  .validator((input: { json: string }) => input)
-  .handler(async ({ data }) => {
+  .validator(
+    (input: {
+      json?: string;
+      content?: string;
+      fileFormat?: "json" | "csv";
+      sport?: string;
+      sourceName?: string;
+      sourceUrl?: string;
+      acquisitionMethod?: "scan" | "upload" | "api" | "manual";
+      fileName?: string;
+      notes?: string;
+    }) => input,
+  )
+  .handler(async ({ data, context }) => {
     await ready();
+    const content = data.content ?? data.json ?? "";
+    const fileFormat = data.fileFormat ?? (data.fileName?.toLowerCase().endsWith(".csv") ? "csv" : "json");
     let bundle: ResultsImportBundle;
     try {
-      const parsed = JSON.parse(data.json) as ResultsImportBundle | { results?: unknown };
-      if (
-        !parsed ||
-        typeof parsed !== "object" ||
-        !Array.isArray((parsed as ResultsImportBundle).results)
-      ) {
-        throw new Error('JSON must be { "results": [ ... ] }');
+      if (fileFormat === "csv") {
+        bundle = parseResultsCsv(content);
+      } else {
+        const parsed = JSON.parse(content) as ResultsImportBundle | { results?: unknown };
+        if (
+          !parsed ||
+          typeof parsed !== "object" ||
+          !Array.isArray((parsed as ResultsImportBundle).results)
+        ) {
+          throw new Error('JSON must be { "results": [ ... ] }');
+        }
+        bundle = parsed as ResultsImportBundle;
       }
-      bundle = parsed as ResultsImportBundle;
     } catch (e) {
-      if (e instanceof SyntaxError) throw new Error("Invalid JSON");
+      if (e instanceof SyntaxError) throw new Error("Invalid results JSON");
       throw e;
     }
-    return applyResultsImport(bundle);
+    return applyResultsImport(bundle, {
+      requestedByUserId: context.userId,
+      sourceContent: content,
+      metadata: {
+        sport: data.sport,
+        sourceName: data.sourceName,
+        sourceUrl: data.sourceUrl,
+        acquisitionMethod: data.acquisitionMethod,
+        fileName: data.fileName,
+        notes: data.notes,
+      },
+    });
   });
 
 export const listAdminEventCards = createServerFn({ method: "GET" })

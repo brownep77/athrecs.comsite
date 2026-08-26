@@ -4,6 +4,7 @@ import type { EntryOptionStatus, EntryOptionType, EntryStatus, Sport } from "./t
 // Append-only results import (athletes + finish times)
 export {
   applyResultsImport,
+  parseResultsCsv,
   type ResultsImportBundle,
   type ImportResultRow,
 } from "./results-import.server";

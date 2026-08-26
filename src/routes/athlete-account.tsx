@@ -4,7 +4,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   BadgeCheck,
   Check,
-  ChevronRight,
   Dumbbell,
   Goal,
   HeartPulse,
@@ -37,6 +36,7 @@ import {
   type AthleteSportProfile,
 } from "@/lib/athrecs/athlete-account-api";
 import { cn } from "@/lib/utils";
+import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 
 export const Route = createFileRoute("/athlete-account")({
   head: () => ({
@@ -312,17 +312,44 @@ function SignedInAccount() {
             </Button>
           </div>
           {account.data.claimedProfiles.length ? (
-            <div className="mt-4 flex flex-wrap gap-2">
-              {account.data.claimedProfiles.map((profile) => (
-                <Link
-                  key={profile.athleteId}
-                  to="/athletes/$slug"
-                  params={{ slug: profile.athleteSlug }}
-                  className="inline-flex items-center gap-1 rounded-full bg-accent-soft px-3 py-1.5 text-sm font-medium text-fg no-underline"
-                >
-                  {profile.athleteName} <ChevronRight className="size-3.5" aria-hidden="true" />
-                </Link>
-              ))}
+            <div className="mt-4 space-y-4">
+              <div className="flex flex-wrap gap-2">
+                {account.data.claimedProfiles.map((profile) => (
+                  <Badge key={profile.athleteId} className="border-accent/30 bg-accent-soft text-fg">
+                    {profile.athleteName} · Private profile
+                  </Badge>
+                ))}
+              </div>
+              {account.data.claimedResults.length ? (
+                <div className="grid gap-2 md:grid-cols-2">
+                  {account.data.claimedResults.map((result) => (
+                    <Link
+                      key={result.resultId}
+                      to="/races/$slug"
+                      params={{ slug: result.eventSlug }}
+                      className="rounded-lg border border-border p-3 no-underline hover:border-accent"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="font-semibold text-fg">{result.eventName}</p>
+                          <p className="mt-1 text-xs text-muted">
+                            {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
+                            {result.category ? ` · ${result.category}` : ""}
+                          </p>
+                        </div>
+                        <div className="text-right">
+                          <p className="font-semibold tabular-nums text-fg">
+                            {formatDuration(result.finishTimeSeconds)}
+                          </p>
+                          {result.overallPlace != null ? (
+                            <p className="mt-1 text-xs text-muted">Place {result.overallPlace}</p>
+                          ) : null}
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              ) : null}
             </div>
           ) : null}
         </section>

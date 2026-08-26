@@ -8,6 +8,7 @@ import {
   notifyResultClaimSubmitted,
   notifyResultClaimWithdrawn,
 } from "./result-claim-email.server";
+import { scorePotentialResultNameMatch, uniquePotentialMatchNames } from "./result-match";
 import { ensureAthrecsSeeded } from "./seed.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
@@ -194,11 +195,104 @@ const CLAIM_SELECT = `
   join events event on event.id = edition.event_id
 `;
 
+type ClaimCandidateIdentity = {
+  resultId: number;
+  athleteId: number;
+  athleteName: string;
+  city: string | null;
+  region: string | null;
+  country: string | null;
+  clubName: string | null;
+};
+
+async function canAccessClaimCandidate(
+  sql: Awaited<ReturnType<typeof getSql>>,
+  userId: string,
+  candidate: ClaimCandidateIdentity,
+): Promise<boolean> {
+  const accessRows = await sql<{ allowed: boolean }>`
+    select (
+      exists (
+        select 1 from athlete_account_links account_link
+        where account_link.athlete_id = ${candidate.athleteId}
+          and account_link.user_id = ${userId}
+          and account_link.status = 'active'
+      )
+      or exists (
+        select 1 from result_claims claim
+        where claim.result_id = ${candidate.resultId}
+          and claim.claimant_user_id = ${userId}
+      )
+    ) as allowed
+  `;
+  if (accessRows[0]?.allowed) return true;
+
+  const [identities, linkedNames] = await Promise.all([
+    sql<{
+      auth_name: string;
+      full_name: string | null;
+      display_name: string | null;
+      city: string | null;
+      region: string | null;
+      country: string | null;
+      club_or_team: string | null;
+    }>`
+      select
+        account_user."name" as auth_name,
+        profile.full_name,
+        profile.display_name,
+        profile.city,
+        profile.region,
+        profile.country,
+        profile.club_or_team
+      from "user" account_user
+      left join athlete_private_profiles profile on profile.user_id = account_user."id"
+      where account_user."id" = ${userId}
+      limit 1
+    `,
+    sql<{ athlete_name: string }>`
+      select athlete.display_name as athlete_name
+      from athlete_account_links account_link
+      join athletes athlete on athlete.id = account_link.athlete_id
+      where account_link.user_id = ${userId}
+        and account_link.status = 'active'
+    `,
+  ]);
+
+  const identity = identities[0];
+  if (!identity) return false;
+  const names = uniquePotentialMatchNames([
+    identity.full_name,
+    identity.display_name,
+    identity.auth_name,
+    ...linkedNames.map((row) => row.athlete_name),
+  ]);
+  return Boolean(
+    scorePotentialResultNameMatch(
+      names,
+      candidate.athleteName,
+      {
+        city: identity.city,
+        region: identity.region,
+        country: identity.country,
+        clubOrTeam: identity.club_or_team,
+      },
+      {
+        city: candidate.city,
+        region: candidate.region,
+        country: candidate.country,
+        clubName: candidate.clubName,
+      },
+    ),
+  );
+}
+
 export const getClaimableResult = createServerFn({ method: "GET" })
+  .middleware([authMiddleware])
   .validator((input: { resultId: number }) => ({
     resultId: positiveInteger(input?.resultId, "Result"),
   }))
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     const sql = await ready();
     const rows = await sql<{
       result_id: number;
@@ -214,6 +308,10 @@ export const getClaimableResult = createServerFn({ method: "GET" })
       bib: string | null;
       category: string | null;
       source_url: string | null;
+      athlete_city: string | null;
+      athlete_region: string | null;
+      athlete_country: string | null;
+      club_name: string | null;
     }>`
       select
         result.id as result_id,
@@ -228,16 +326,31 @@ export const getClaimableResult = createServerFn({ method: "GET" })
         result.overall_place,
         result.bib,
         result.category,
-        result.source_url
+        result.source_url,
+        athlete.city as athlete_city,
+        athlete.county as athlete_region,
+        athlete.country as athlete_country,
+        club.name as club_name
       from results result
       join athletes athlete on athlete.id = result.athlete_id
       join editions edition on edition.id = result.edition_id
       join events event on event.id = edition.event_id
+      left join clubs club on club.id = athlete.club_id
       where result.id = ${data.resultId}
       limit 1
     `;
     const row = rows[0];
     if (!row) return null;
+    const allowed = await canAccessClaimCandidate(sql, context.userId, {
+      resultId: row.result_id,
+      athleteId: row.athlete_id,
+      athleteName: row.athlete_name,
+      city: row.athlete_city,
+      region: row.athlete_region,
+      country: row.athlete_country,
+      clubName: row.club_name,
+    });
+    if (!allowed) return null;
     return {
       resultId: row.result_id,
       athleteId: row.athlete_id,
@@ -293,6 +406,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         event_name: string;
         event_date: string;
         distance_code: string;
+        athlete_city: string | null;
+        athlete_region: string | null;
+        athlete_country: string | null;
+        club_name: string | null;
       }>`
         select
           result.id as result_id,
@@ -300,16 +417,31 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           athlete.display_name as athlete_name,
           event.name as event_name,
           edition.event_date::text as event_date,
-          edition.distance_code
+          edition.distance_code,
+          athlete.city as athlete_city,
+          athlete.county as athlete_region,
+          athlete.country as athlete_country,
+          club.name as club_name
         from results result
         join athletes athlete on athlete.id = result.athlete_id
         join editions edition on edition.id = result.edition_id
         join events event on event.id = edition.event_id
+        left join clubs club on club.id = athlete.club_id
         where result.id = ${data.resultId}
         limit 1
       `;
       const result = results[0];
       if (!result) throw new Error("Result not found");
+      const allowed = await canAccessClaimCandidate(tx, context.userId, {
+        resultId: result.result_id,
+        athleteId: result.athlete_id,
+        athleteName: result.athlete_name,
+        city: result.athlete_city,
+        region: result.athlete_region,
+        country: result.athlete_country,
+        clubName: result.club_name,
+      });
+      if (!allowed) throw new Error("Result not available to this account");
 
       const owners = await tx<{ user_id: string; user_email: string }>`
         select user_id, user_email

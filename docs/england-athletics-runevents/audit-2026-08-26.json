@@ -1,0 +1,4058 @@
+{
+  "checkedAt": "2026-08-26",
+  "horizonEnd": "2027-12-31",
+  "sourceUrl": "https://www.englandathletics.org/runevents/search/",
+  "counts": {
+    "sourceRows": 631,
+    "futureRows": 627,
+    "deduplicatedRows": 621,
+    "eligibleRows": 535,
+    "alreadyPresent": 239,
+    "reusedExistingSeries": 54,
+    "newSeries": 105,
+    "newEditions": 267,
+    "ambiguousHeld": 115,
+    "invalidHeld": 86
+  },
+  "reused": [
+    {
+      "date": "2026-08-26",
+      "name": "Dorney Lake Midweek Series",
+      "place": "Windsor, Berkshire",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "dorney-5k-10k-half-marathon-august-1",
+      "matchedName": "Dorney Lake 5K, 10K & Half Marathon",
+      "score": 0.802,
+      "nameScore": 0.72,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-08-28",
+      "name": "Meteor Mile",
+      "place": "Cheltenham, Gloucestershire",
+      "url": "https://almostathletes.co.uk/races-and-events/meteor-mile/",
+      "matchedSlug": "meteor-mile",
+      "matchedName": "Meteor Mile",
+      "score": 0.62,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": false,
+      "distanceMatch": false,
+      "distanceConflict": true,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-08-29",
+      "name": "Dartmouth Regatta Road Race",
+      "place": "Dartmouth, Devon",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/31690",
+      "matchedSlug": "dartmouth-regatta-road-race",
+      "matchedName": "Dartmouth Regatta Road Race",
+      "score": 0.8,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": false,
+      "distanceConflict": true,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-08-30",
+      "name": "Dorney Lake Series 2",
+      "place": "Windsor, Berkshire",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "dorney-5k-10k-half-marathon-august-1",
+      "matchedName": "Dorney Lake 5K, 10K & Half Marathon",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-02",
+      "name": "Chase The Sun Tatton 10k Series 2026",
+      "place": "Knutsford, Cheshire",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "chase-the-sun-tatton-park-10k-august",
+      "matchedName": "Chase The Sun Tatton Park 10K",
+      "score": 0.864,
+      "nameScore": 0.867,
+      "coverage": 1,
+      "sharedTokens": 3,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-05",
+      "name": "No Walk in the Park 5k",
+      "place": "Chesterfield, Derbyshire",
+      "url": "https://www.northderbyshirerc.co.uk/",
+      "matchedSlug": "no-walk-in-the-park-5k-august",
+      "matchedName": "No Walk In The Park 5K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 4,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-09",
+      "name": "Battersea Park CTS",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "battersea-park-10k-half-marathon-august",
+      "matchedName": "Battersea Park 10K & Half Marathon",
+      "score": 0.873,
+      "nameScore": 0.889,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Sutcliffe & Co Worcester City Run",
+      "place": "Worcester, Worcestershire",
+      "url": "https://worcestercityrun.com/",
+      "matchedSlug": "worcester-city-runs",
+      "matchedName": "Worcester City Runs",
+      "score": 0.692,
+      "nameScore": 0.615,
+      "coverage": 0.667,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-17",
+      "name": "Darlington Harriers Monthly Mile",
+      "place": "Darlington, County Durham",
+      "url": "https://www.evententry.co.uk/",
+      "matchedSlug": "darlington-harriers-monthly-mile-august",
+      "matchedName": "Darlington Harriers Monthly Mile",
+      "score": 0.8,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 3,
+      "locationMatch": true,
+      "distanceMatch": false,
+      "distanceConflict": true,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-19",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-19",
+      "name": "Greenwich Park Series 1",
+      "place": "Greenwich, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-greenwich-park-5k-10k-november",
+      "matchedName": "Greenwich Park 5K & 10K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Warrington Running Festival",
+      "place": "WARRINGTON, Cheshire",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "warrington-running-festival",
+      "matchedName": "Warrington Running Festival",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Letchworth 5k",
+      "place": "Letchworth Garden City, Hertfordshire",
+      "url": "https://nhrr.org.uk/",
+      "matchedSlug": "letchworth-5k",
+      "matchedName": "Letchworth 5K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Tadley Tens 2026",
+      "place": "TADLEY, Hampshire",
+      "url": "https://tadleytens.uk/",
+      "matchedSlug": "tadley-runners-10",
+      "matchedName": "Tadley Tens",
+      "score": 1,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": true
+    },
+    {
+      "date": "2026-10-03",
+      "name": "No Walk in the Park 5k",
+      "place": "Chesterfield, Derbyshire",
+      "url": "https://www.northderbyshirerc.co.uk/",
+      "matchedSlug": "no-walk-in-the-park-5k-august",
+      "matchedName": "No Walk In The Park 5K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 4,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-03",
+      "name": "Dorney Lake Series 2",
+      "place": "Windsor, Berkshire",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "dorney-5k-10k-half-marathon-august-1",
+      "matchedName": "Dorney Lake 5K, 10K & Half Marathon",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Marshfield Mudlark",
+      "place": "CHIPPENHAM, Gloucestershire",
+      "url": "https://www.marshfieldprimaryschoolpta.com/mudlark",
+      "matchedSlug": "marshfield-mudlark",
+      "matchedName": "Marshfield Mudlark",
+      "score": 0.8,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": false,
+      "distanceConflict": true,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Goodwood Motor Circuit Series 1",
+      "place": "Chichester, West Sussex",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "goodwood-motor-circuit-running-gp-duathlons",
+      "matchedName": "Goodwood Motor Circuit Running GP & Duathlons",
+      "score": 0.826,
+      "nameScore": 0.776,
+      "coverage": 1,
+      "sharedTokens": 3,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-11",
+      "name": "RunThrough Town Moor & Exhibition Park 5k, 10k & Half Marathon 2026",
+      "place": "Newcastle upon Tyne, Tyne and Wear",
+      "url": "https://www.runthrough.co.uk/event/runthrough-town-moor-exhibition-park-5k-10k-october-2026",
+      "matchedSlug": "town-moor-exhibition-park-5k-10k-december",
+      "matchedName": "Town Moor & Exhibition Park 5K & 10K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 4,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-11",
+      "name": "West Coast Half Marathon",
+      "place": "Lytham St Annes, Lancashire",
+      "url": "https://www.fyldecoastrunners.com/",
+      "matchedSlug": "the-west-coast-half-marathon",
+      "matchedName": "West Coast Half Marathon",
+      "score": 0.74,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": false,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-17",
+      "name": "RunThrough Lee Valley Velo Park series 1",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-lee-valley-velopark-series-august",
+      "matchedName": "Lee Valley Velopark",
+      "score": 0.853,
+      "nameScore": 1,
+      "coverage": 0.667,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-17",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-17",
+      "name": "RunSeries Battersea Park TEN 2026",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "battersea-park-10k-half-marathon-august",
+      "matchedName": "Battersea Park 10K & Half Marathon",
+      "score": 0.78,
+      "nameScore": 0.667,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-18",
+      "name": "Macclesfield Running Festival",
+      "place": "Macclesfield , Cheshire",
+      "url": "https://www.macclesfieldrunningfestival.com/",
+      "matchedSlug": "macclesfield-half-marathon",
+      "matchedName": "Macclesfield Running Festival",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-10-24",
+      "name": "CraggRunner Sprint 5k",
+      "place": "Barrowford, Lancashire",
+      "url": "https://craggrunner.com/",
+      "matchedSlug": "craggrunner-sprint-5k-august",
+      "matchedName": "Craggrunner Sprint 5K",
+      "score": 0.74,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": false,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-07",
+      "name": "No Walk in the Park 5k",
+      "place": "Chesterfield, Derbyshire",
+      "url": "https://www.northderbyshirerc.co.uk/",
+      "matchedSlug": "no-walk-in-the-park-5k-august",
+      "matchedName": "No Walk In The Park 5K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 4,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-07",
+      "name": "RunThrough Victoria Park 5k, 10k & Half Marathon Series 2",
+      "place": "Hackney, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-victoria-park-may-2027",
+      "matchedName": "Victoria Park 5K, 10K & Half Marathon — May 2027",
+      "score": 0.87,
+      "nameScore": 0.88,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-08",
+      "name": "Dorney Lake Series 2",
+      "place": "Windsor, Berkshire",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "dorney-5k-10k-half-marathon-august-1",
+      "matchedName": "Dorney Lake 5K, 10K & Half Marathon",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-21",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-21",
+      "name": "RunThrough Olympic North Park Weekend Series",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-olympic-park-5k-10k-september",
+      "matchedName": "Queen Elizabeth Olympic Park 5K & 10K",
+      "score": 0.619,
+      "nameScore": 0.522,
+      "coverage": 0.5,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-21",
+      "name": "RunSeries Battersea Park TEN 2026",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "battersea-park-10k-half-marathon-august",
+      "matchedName": "Battersea Park 10K & Half Marathon",
+      "score": 0.78,
+      "nameScore": 0.667,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-25",
+      "name": "RunThrough Battersea Park CTM",
+      "place": "Battersea, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "battersea-park-10k-half-marathon-august",
+      "matchedName": "Battersea Park 10K & Half Marathon",
+      "score": 0.873,
+      "nameScore": 0.889,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-27",
+      "name": "Friday Night Under the Lights Race Series 26",
+      "place": "LONDON, London",
+      "url": "https://www.fridaynightunderthelights5k.co.uk/",
+      "matchedSlug": "friday-night-under-the-lights-road-5k-september",
+      "matchedName": "Friday Night Under The Lights 5K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 4,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-11-29",
+      "name": "RunThrough Finsbury Park 5k, 10k, Half Marathon & Junior Run",
+      "place": "LONDON, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "finsbury-park-5k-10k-half-marathon-january",
+      "matchedName": "Finsbury Park 5K, 10K, Half Marathon & Junior Run — January 2027",
+      "score": 0.848,
+      "nameScore": 0.829,
+      "coverage": 1,
+      "sharedTokens": 3,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-12-05",
+      "name": "No Walk in the Park 5k",
+      "place": "Chesterfield, Derbyshire",
+      "url": "https://www.northderbyshirerc.co.uk/",
+      "matchedSlug": "no-walk-in-the-park-5k-august",
+      "matchedName": "No Walk In The Park 5K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 4,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-12-12",
+      "name": "RunThrough Tatton Park 5k & 10k",
+      "place": "Knutsford, Cheshire",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "run-tatton-5k-10k-november",
+      "matchedName": "Tatton Park 5K & 10K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-12-12",
+      "name": "RunSeries Battersea Park TEN 2026",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "battersea-park-10k-half-marathon-august",
+      "matchedName": "Battersea Park 10K & Half Marathon",
+      "score": 0.78,
+      "nameScore": 0.667,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-12-16",
+      "name": "RunThrough Battersea Park CTM",
+      "place": "Battersea, London",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "battersea-park-10k-half-marathon-august",
+      "matchedName": "Battersea Park 10K & Half Marathon",
+      "score": 0.873,
+      "nameScore": 0.889,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-12-19",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-12-20",
+      "name": "Baltonsborough 5 Mile Road Race",
+      "place": "Glastonbury, Somerset",
+      "url": "https://www.baltonsboroughrace.com/",
+      "matchedSlug": "baltonsborough-5-mile",
+      "matchedName": "Baltonsborough 5 Mile",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2026-12-31",
+      "name": "Friday Night Under the Lights Race Series 26",
+      "place": "LONDON, London",
+      "url": "https://www.fridaynightunderthelights5k.co.uk/",
+      "matchedSlug": "friday-night-under-the-lights-road-5k-september",
+      "matchedName": "Friday Night Under The Lights 5K",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 4,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-01-16",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-02-14",
+      "name": "Richmond Park HM 2027",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-richmond-park-half-marathon",
+      "matchedName": "Richmond Park Half Marathon",
+      "score": 0.885,
+      "nameScore": 0.917,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-02-20",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-03-20",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-03-28",
+      "name": "Richmond Park HM 2027",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-richmond-park-half-marathon",
+      "matchedName": "Richmond Park Half Marathon",
+      "score": 0.885,
+      "nameScore": 0.917,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-04-17",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-05-15",
+      "name": "Tavy 5",
+      "place": "Tavistock, Devon",
+      "url": "http://www.tavistockathletics.co.uk/events/tavy-5/",
+      "matchedSlug": "tavy-5-august",
+      "matchedName": "Tavy 5",
+      "score": 0.92,
+      "nameScore": 1,
+      "coverage": 1,
+      "sharedTokens": 1,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-06-27",
+      "name": "Richmond Park HM 2027",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-richmond-park-half-marathon",
+      "matchedName": "Richmond Park Half Marathon",
+      "score": 0.885,
+      "nameScore": 0.917,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-08-15",
+      "name": "Richmond Park HM 2027",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-richmond-park-half-marathon",
+      "matchedName": "Richmond Park Half Marathon",
+      "score": 0.885,
+      "nameScore": 0.917,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-09-19",
+      "name": "Richmond Park HM 2027",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-richmond-park-half-marathon",
+      "matchedName": "Richmond Park Half Marathon",
+      "score": 0.885,
+      "nameScore": 0.917,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-10-31",
+      "name": "Richmond Park HM 2027",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-richmond-park-half-marathon",
+      "matchedName": "Richmond Park Half Marathon",
+      "score": 0.885,
+      "nameScore": 0.917,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-11-14",
+      "name": "Richmond Park HM 2027",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-richmond-park-half-marathon",
+      "matchedName": "Richmond Park Half Marathon",
+      "score": 0.885,
+      "nameScore": 0.917,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    },
+    {
+      "date": "2027-12-12",
+      "name": "Richmond Park HM 2027",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "matchedSlug": "runthrough-richmond-park-half-marathon",
+      "matchedName": "Richmond Park Half Marathon",
+      "score": 0.885,
+      "nameScore": 0.917,
+      "coverage": 1,
+      "sharedTokens": 2,
+      "locationMatch": true,
+      "distanceMatch": true,
+      "distanceConflict": false,
+      "urlMatch": false
+    }
+  ],
+  "created": [
+    {
+      "slug": "ea-runevents-combe-miles-and-smiles-castle-combe",
+      "name": "Combe Miles and Smiles",
+      "city": "Castle Combe",
+      "distances": ["10K", "3K", "1 Mile"],
+      "website": "https://dbmax.co.uk/events/combe-summer-miles-smiles-2026"
+    },
+    {
+      "slug": "ea-runevents-nymac-4x1-mile-relay-middlesbrough",
+      "name": "NYMAC 4x1 Mile Relay",
+      "city": "MIDDLESBROUGH",
+      "distances": ["1 Mile"],
+      "website": "https://www.nym.ac/"
+    },
+    {
+      "slug": "ea-runevents-wickersley-chase-rotherham",
+      "name": "Wickersley Chase",
+      "city": "ROTHERHAM",
+      "distances": ["4.5mi"],
+      "website": "https://www.kmrseries.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-trimpell-club-events-morecambe",
+      "name": "Trimpell Club events",
+      "city": "Morecambe",
+      "distances": ["10mi"],
+      "website": "https://www.lancaster-race-series.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-brockham-blast5k-betchworth",
+      "name": "Brockham Blast5k",
+      "city": "Betchworth",
+      "distances": ["5K"],
+      "website": "http://www.brockhamblast.com/"
+    },
+    {
+      "slug": "ea-runevents-knowsley-harriers-5k-liverpool",
+      "name": "Knowsley Harriers 5K",
+      "city": "LIVERPOOL",
+      "distances": ["5K"],
+      "website": "https://www.knowsley-harriers.com/halewood-5k"
+    },
+    {
+      "slug": "ea-runevents-2026-kippax-harriers-leeds-country-way-relay-race-garforth",
+      "name": "2026 Kippax Harriers Leeds Country Way Relay Race",
+      "city": "Garforth",
+      "distances": ["Ultra"],
+      "website": "https://kippaxharriers.org.uk/overview-2/"
+    },
+    {
+      "slug": "ea-runevents-hearty-half-marathon-2026-in-association-with-jsac-jersey",
+      "name": "Hearty Half Marathon 2026 in association with JSAC",
+      "city": "JERSEY",
+      "distances": ["Half"],
+      "website": "https://race-nation.co.uk/register/jersey-spartan-athletic-club/hearty-half-marathon-2026-in-association-with-jsac"
+    },
+    {
+      "slug": "ea-runevents-wimbledon-common-series-wimbledon",
+      "name": "Wimbledon Common Series",
+      "city": "Wimbledon",
+      "distances": ["10K", "Half", "5K"],
+      "website": "https://www.runthrough.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-saltfest-5k-droitwich",
+      "name": "Saltfest 5k",
+      "city": "DROITWICH",
+      "distances": ["Fun Run"],
+      "website": "https://www.droitwichac.co.uk/events"
+    },
+    {
+      "slug": "ea-runevents-framlingham-10k-framlingham",
+      "name": "Framlingham 10k",
+      "city": "Framlingham",
+      "distances": ["10K"],
+      "website": "https://framflyers.org.uk/framlingham-10k/"
+    },
+    {
+      "slug": "ea-runevents-waverley-dash-sheffield",
+      "name": "Waverley Dash",
+      "city": "Sheffield",
+      "distances": ["10K"],
+      "website": "https://handsworthroadhogs.uk/"
+    },
+    {
+      "slug": "ea-runevents-veterans-ac-2026-road-race-series-battersea",
+      "name": "Veterans AC 2026 Road Race Series",
+      "city": "Battersea",
+      "distances": ["5K"],
+      "website": "https://www.vetsac.org.uk/Fixtures.html"
+    },
+    {
+      "slug": "ea-runevents-yeovilton-5k-summer-series-ilchester",
+      "name": "Yeovilton 5k Summer Series",
+      "city": "Ilchester",
+      "distances": ["5K"],
+      "website": "https://www.yeoviltownrrc.com/events/tag/ytrrc%20races"
+    },
+    {
+      "slug": "ea-runevents-even-splits-york-5k-series-york",
+      "name": "Even Splits York 5k Series",
+      "city": "York",
+      "distances": ["5K"],
+      "website": "https://evensplits.events/york5k"
+    },
+    {
+      "slug": "ea-runevents-north-west-road-relays-manchester",
+      "name": "North West Road Relays",
+      "city": "Manchester",
+      "distances": ["3.3K", "2.2K", "5.2K", "2K"],
+      "website": "https://nwroadrelays.niftyentries.com/North-West-Road-Relays-2026"
+    },
+    {
+      "slug": "ea-runevents-mansfield-10k-september-mansfield",
+      "name": "Mansfield 10k September",
+      "city": "Mansfield",
+      "distances": ["10K", "1K"],
+      "website": "https://www.runthrough.co.uk/event/mansfield-10k-september-2026"
+    },
+    {
+      "slug": "ea-runevents-clash-of-claydons-east-claydon",
+      "name": "Clash of Claydons",
+      "city": "East Claydon",
+      "distances": ["10K"],
+      "website": "https://www.willpowerevents.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-civil-service-10k-championionships-london",
+      "name": "Civil Service 10k Championionships",
+      "city": "London",
+      "distances": ["10K"],
+      "website": "https://store.cssc.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-best-race-series-battersea",
+      "name": "Best Race Series",
+      "city": "Battersea",
+      "distances": ["5K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/30848"
+    },
+    {
+      "slug": "ea-runevents-trx-wolves-tettenhall-5k-wolverhampton",
+      "name": "TRX WOLVES Tettenhall 5k",
+      "city": "Wolverhampton",
+      "distances": ["5K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/31711"
+    },
+    {
+      "slug": "ea-runevents-weston-junior-prom-1-mile-series-weston-super-mare",
+      "name": "Weston Junior Prom 1 Mile Series",
+      "city": "WESTON-SUPER-MARE",
+      "distances": ["1 Mile"],
+      "website": "https://www.westonac.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-the-fast-and-furious-5km-stourport-on-severn",
+      "name": "The Fast & Furious 5km",
+      "city": "Stourport-on-Severn",
+      "distances": ["5K"],
+      "website": "https://www.facebook.com/groups/170115247027756/"
+    },
+    {
+      "slug": "ea-runevents-mcaa-and-derby-runner-mens-6-stage-womens-4-stage-and-ya-3-stage-road-re-birmingham",
+      "name": "MCAA & Derby Runner Mens 6 Stage, Womens 4 Stage & YA 3 Stage Road Relays Championships",
+      "city": "Birmingham",
+      "distances": ["5.43K", "3.87K"],
+      "website": "https://midland-athletics.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-hoylake-10k-wirral",
+      "name": "Hoylake 10K",
+      "city": "WIRRAL",
+      "distances": ["9.8K"],
+      "website": "https://hoylake10k.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-bury-10k-and-junior-race-bury",
+      "name": "Bury 10k & Junior Race",
+      "city": "BURY",
+      "distances": ["10K", "2.5K"],
+      "website": "https://www.runforall.com/events/10k/bury-10k/"
+    },
+    {
+      "slug": "ea-runevents-northern-6-and-4-stage-and-young-athletes-relays-sunderland",
+      "name": "Northern 6&4 Stage and Young Athletes' Relays",
+      "city": "Sunderland",
+      "distances": ["2.5mi", "5K"],
+      "website": "https://www.northernathletics.co.uk/events/6-4-stage-relays-and-young-athletes-relays/"
+    },
+    {
+      "slug": "ea-runevents-shardeloes-trail-10k-amersham",
+      "name": "Shardeloes Trail 10k",
+      "city": "Amersham",
+      "distances": ["10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/31414"
+    },
+    {
+      "slug": "ea-runevents-wistow-10k-wistow",
+      "name": "Wistow 10k",
+      "city": "Wistow",
+      "distances": ["10K"],
+      "website": "https://selbystriders.org.uk/wistow/"
+    },
+    {
+      "slug": "ea-runevents-highclere-newbury",
+      "name": "Highclere",
+      "city": "Newbury",
+      "distances": ["10K"],
+      "website": "https://www.letsdothis.com/p/L2FwaS9wcmV2aWV3L2diL2UvaGlnaGNsZXJlLWNhc3RsZS0xMGstMjAyNi0yMjQ4NzU/dXRtX29yZ2FuaXNlcl9pZD0xNTYxNzYmZXZlbnRJZD0yMjQ4NzUmb2NjdXJyZW5jZUlkPTIxMTExMTc2ODIxJkJNZFR5UUpoWUM9dHJ1ZQ=="
+    },
+    {
+      "slug": "ea-runevents-humber-aa-road-race-championships-hull",
+      "name": "Humber AA Road Race Championships.",
+      "city": "Hull",
+      "distances": ["1K", "2K", "3K", "5K"],
+      "website": "https://meets.rosterathletics.com/public/competitions/details/about?id=29107"
+    },
+    {
+      "slug": "ea-runevents-abbots-langley-tough-ten-abbots-langley",
+      "name": "Abbots Langley Tough Ten",
+      "city": "ABBOTS LANGLEY",
+      "distances": ["10K", "5K", "3K"],
+      "website": "https://www.tough10.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-sewerby-sprint-5km-road-race-bridlington",
+      "name": "Sewerby Sprint 5KM Road Race",
+      "city": "BRIDLINGTON",
+      "distances": ["5K"],
+      "website": "https://yorkshirecoasttrail.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-iow-marathon-cowes",
+      "name": "IOW Marathon",
+      "city": "Cowes",
+      "distances": ["Marathon"],
+      "website": "https://www.rydeharriers.co.uk/isle-of-wight-marathon-race/"
+    },
+    {
+      "slug": "ea-runevents-hillier-gardens-10k-romsey",
+      "name": "Hillier Gardens 10k",
+      "city": "Romsey",
+      "distances": ["10K"],
+      "website": "https://www.runningmania.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-greenway-10k-liversedge",
+      "name": "Greenway 10K",
+      "city": "Liversedge",
+      "distances": ["10K"],
+      "website": "https://www.spenac.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-northern-ac-winter-road-series-isle-of-man",
+      "name": "Northern AC Winter Road Series",
+      "city": "ISLE OF MAN",
+      "distances": ["5K"],
+      "website": "https://www.northernaciom.com/"
+    },
+    {
+      "slug": "ea-runevents-rosemary-mazzone-memorial-northern-10-mile-half-marathon-run-and-walk-ramsey",
+      "name": "Rosemary Mazzone Memorial Northern 10 Mile / Half Marathon Run and Walk",
+      "city": "Ramsey",
+      "distances": ["10mi", "Half", "Fun Run"],
+      "website": "https://www.northernaciom.com/"
+    },
+    {
+      "slug": "ea-runevents-carsington-water-2026-series-ashbourne",
+      "name": "Carsington Water 2026 Series",
+      "city": "Ashbourne",
+      "distances": ["10K", "Half"],
+      "website": "https://www.runthrough.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-guildford-5k-10k-and-jfr-guilford",
+      "name": "Guildford 5k, 10k & JFR",
+      "city": "Guilford",
+      "distances": ["10K", "5K"],
+      "website": "https://www.runthrough.co.uk/event/guildford-5k-10k-juniors-october-2026"
+    },
+    {
+      "slug": "ea-runevents-green-drive-five-and-junior-mile-lytham-st-annes",
+      "name": "Green Drive Five and Junior Mile",
+      "city": "LYTHAM ST. ANNES",
+      "distances": ["5mi", "1 Mile"],
+      "website": "https://bookitzone.com/greendrive5/ZrjFFX"
+    },
+    {
+      "slug": "ea-runevents-calder-vale-series-garstang",
+      "name": "Calder Vale Series",
+      "city": "Garstang",
+      "distances": ["Fun Run"],
+      "website": "https://www.lancaster-race-series.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-runthrough-haltemprice-10k-nr-hull",
+      "name": "RunThrough Haltemprice 10K",
+      "city": "nr. Hull",
+      "distances": ["10K"],
+      "website": "https://www.runthrough.co.uk/event/haltemprice-10k-october-2026"
+    },
+    {
+      "slug": "ea-runevents-fenland-10-wisbech",
+      "name": "Fenland 10",
+      "city": "Wisbech",
+      "distances": ["10mi"],
+      "website": "https://www.fenlandrunningclub.co.uk/home/fen10"
+    },
+    {
+      "slug": "ea-runevents-marlow-half-marathon-the-frankenstein-and-marlow-7-marlow",
+      "name": "Marlow Half Marathon, The Frankenstein and Marlow 7",
+      "city": "Marlow",
+      "distances": ["Half", "7mi", "10K"],
+      "website": "https://marlowhalfmarathon.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-bideford-10-mile-bideford",
+      "name": "Bideford 10 Mile",
+      "city": "BIDEFORD",
+      "distances": ["10mi"],
+      "website": "https://bidefordaac.co.uk/bideford10mile"
+    },
+    {
+      "slug": "ea-runevents-lmac-salt-ayre-series-lancaster",
+      "name": "LMAC Salt Ayre Series",
+      "city": "Lancaster",
+      "distances": ["Half", "10K"],
+      "website": "https://www.lancaster-race-series.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-leigh-on-sea-10k-leigh-on-sea",
+      "name": "Leigh-on-Sea 10k",
+      "city": "LEIGH-ON-SEA",
+      "distances": ["5K", "10K"],
+      "website": "https://leighonseastriders.co.uk/leigh-on-sea-10k/"
+    },
+    {
+      "slug": "ea-runevents-gbr-run-bexhill-remembrance-run-bexhill-on-sea",
+      "name": "GBR Run Bexhill Remembrance Run",
+      "city": "BEXHILL-ON-SEA",
+      "distances": ["Half", "10K", "5K", "Fun Run"],
+      "website": "https://register.enthuse.com/ps/event/GBRRunBexhillRemembranceRun2026"
+    },
+    {
+      "slug": "ea-runevents-atw-remembrance-runs-saffron-walden",
+      "name": "ATW Remembrance Runs",
+      "city": "Saffron Walden",
+      "distances": ["5K", "10K", "Half"],
+      "website": "https://www.atwevents.co.uk/e/atw-remembrance-runs-9066"
+    },
+    {
+      "slug": "ea-runevents-chocks-away-5km-exeter",
+      "name": "Chocks Away 5km",
+      "city": "Exeter",
+      "distances": ["5K"],
+      "website": "https://race-nation.co.uk/register/cranbrook-running-club/chocksaway5km2026"
+    },
+    {
+      "slug": "ea-runevents-hayling-10-hayling-island",
+      "name": "Hayling 10",
+      "city": "HAYLING ISLAND",
+      "distances": ["10mi"],
+      "website": "http://havantac.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-heaton-harriers-memorial-events-newcastle-upon-tyne",
+      "name": "Heaton Harriers Memorial Events",
+      "city": "Newcastle upon Tyne",
+      "distances": ["1K", "3K", "5K", "10K"],
+      "website": "https://heatonharriers.org.uk/"
+    },
+    {
+      "slug": "ea-runevents-scenic-seven-stowmarket",
+      "name": "Scenic Seven",
+      "city": "Stowmarket",
+      "distances": ["7mi"],
+      "website": "https://stowmarketstriders.org.uk/club-races/scenic-7/"
+    },
+    {
+      "slug": "ea-runevents-stebbing-remembrance-10-dunmow",
+      "name": "Stebbing Remembrance 10",
+      "city": "DUNMOW",
+      "distances": ["10mi"],
+      "website": "https://www.grangefarmdunmowrunners.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-beckenham-charity-trail-beckenham",
+      "name": "Beckenham Charity Trail",
+      "city": "BECKENHAM",
+      "distances": ["10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/31749"
+    },
+    {
+      "slug": "ea-runevents-heanor-10k-heanor",
+      "name": "Heanor 10k",
+      "city": "HEANOR",
+      "distances": ["10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/30537"
+    },
+    {
+      "slug": "ea-runevents-three-sisters-womens-only-5k-wigan",
+      "name": "Three Sisters Womens Only 5k",
+      "city": "Wigan",
+      "distances": ["5K"],
+      "website": "https://www.fyldecoastrunners.com/"
+    },
+    {
+      "slug": "ea-runevents-wimborne-10-mile-road-race-wimborne",
+      "name": "Wimborne 10 Mile Road Race",
+      "city": "WIMBORNE",
+      "distances": ["10mi"],
+      "website": "https://www.wimborneac.co.uk/wimborne-10/"
+    },
+    {
+      "slug": "ea-runevents-haldane-fisher-syd-quirk-half-marathon-malew",
+      "name": "Haldane Fisher Syd Quirk Half Marathon",
+      "city": "Malew",
+      "distances": ["Half"],
+      "website": "http://www.iomvac.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-wilmslow-festive-10k-wilmslow",
+      "name": "Wilmslow Festive 10K",
+      "city": "Wilmslow",
+      "distances": ["10K"],
+      "website": "https://www.runnorthwest.co.uk/pages/events"
+    },
+    {
+      "slug": "ea-runevents-hadleigh-10-5-2-hadleigh",
+      "name": "Hadleigh 10/5/2",
+      "city": "Hadleigh",
+      "distances": ["10mi", "5mi", "Fun Run"],
+      "website": "https://www.hadleigh-hares.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-boscombe-10k-bournemouth",
+      "name": "Boscombe 10K",
+      "city": "Bournemouth",
+      "distances": ["10K", "Fun Run"],
+      "website": "http://www.bournemouthjoggers.co.uk/boscombe10k"
+    },
+    {
+      "slug": "ea-runevents-brent-knoll-race-burnham-on-sea",
+      "name": "Brent Knoll Race",
+      "city": "Burnham-on-Sea",
+      "distances": ["10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/30615"
+    },
+    {
+      "slug": "ea-runevents-ravenstonedale-10k-road-race-kirkby-stephen",
+      "name": "Ravenstonedale 10K Road Race",
+      "city": "KIRKBY STEPHEN",
+      "distances": ["10K"],
+      "website": "https://www.howgillharriers.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-cheddleton-10k-leek",
+      "name": "Cheddleton 10K",
+      "city": "Leek",
+      "distances": ["10K"],
+      "website": "https://avtiming.com/"
+    },
+    {
+      "slug": "ea-runevents-2026-edwinstowe-christmas-10k-trail-race-edwinstowe",
+      "name": "2026 Edwinstowe Christmas 10k Trail Race",
+      "city": "Edwinstowe",
+      "distances": ["10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/30938"
+    },
+    {
+      "slug": "ea-runevents-mobmatch26-falmouth",
+      "name": "MobMatch26",
+      "city": "FALMOUTH",
+      "distances": ["5mi"],
+      "website": "https://www.sientries.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-monsal-tinsel-trail-christmas-10k-5k-and-junior-run-bakewell",
+      "name": "Monsal Tinsel Trail Christmas 10k, 5k & Junior Run",
+      "city": "Bakewell",
+      "distances": ["10K", "5K"],
+      "website": "https://www.nice-work.org.uk/e/monsal-tinsel-trail-christmas-10k-5k-and-junior-run-15346"
+    },
+    {
+      "slug": "ea-runevents-cranbrook-christmas-cracker-cranbrook",
+      "name": "Cranbrook Christmas Cracker",
+      "city": "Cranbrook",
+      "distances": ["5K", "Fun Run"],
+      "website": "https://race-nation.co.uk/register/cranbrook-running-club/cranbrook-chistmas-cracker-2026"
+    },
+    {
+      "slug": "ea-runevents-myerscough-10-mile-preston",
+      "name": "Myerscough 10 mile",
+      "city": "Preston",
+      "distances": ["10mi"],
+      "website": "https://bookitzone.com/frank_miller/zXjFFX"
+    },
+    {
+      "slug": "ea-runevents-bolsover-10k-chesterfield",
+      "name": "Bolsover 10k",
+      "city": "CHESTERFIELD",
+      "distances": ["10K"],
+      "website": "https://northderbyshirerc.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-salcey-forest-christmas-10k-5k-and-junior-fun-run-northampton",
+      "name": "Salcey Forest Christmas 10k, 5k & Junior Fun Run",
+      "city": "Northampton",
+      "distances": ["10K", "5K"],
+      "website": "https://www.nice-work.org.uk/e/salcey-forest-christmas-10k-5k-and-junior-fun-run-9702"
+    },
+    {
+      "slug": "ea-runevents-stockport-10-stockport",
+      "name": "Stockport 10",
+      "city": "Stockport",
+      "distances": ["10mi"],
+      "website": "https://stk10.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-wellington-monument-race-cullompton",
+      "name": "Wellington Monument Race",
+      "city": "CULLOMPTON",
+      "distances": ["10K"],
+      "website": "https://www.tauntonac.org/monument-race"
+    },
+    {
+      "slug": "ea-runevents-kent-christmas-cracker-deal",
+      "name": "Kent Christmas Cracker",
+      "city": "Deal",
+      "distances": ["5mi"],
+      "website": "https://www.nice-work.org.uk/e/kent-christmas-cracker-9709"
+    },
+    {
+      "slug": "ea-runevents-loftus-poultry-run-saltburn-by-the-sea",
+      "name": "Loftus Poultry Run",
+      "city": "Saltburn-by-the-Sea",
+      "distances": ["7mi"],
+      "website": "https://www.loftusandwhitbyac.co.uk/poultry-run/"
+    },
+    {
+      "slug": "ea-runevents-ddac-travellers-6-huddersfield",
+      "name": "DDAC Travellers 6",
+      "city": "Huddersfield",
+      "distances": ["6mi"],
+      "website": "https://www.denbydaleac.co.uk/travellers-6"
+    },
+    {
+      "slug": "ea-runevents-torrington-christmas-caper-torrington",
+      "name": "Torrington Christmas Caper",
+      "city": "Torrington",
+      "distances": ["10mi"],
+      "website": "https://www.torringtonaac.co.uk/christmas-caper"
+    },
+    {
+      "slug": "ea-runevents-pednor-10-and-pednor-relay-chesham",
+      "name": "Pednor 10 & Pednor Relay",
+      "city": "CHESHAM",
+      "distances": ["10mi"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/31775"
+    },
+    {
+      "slug": "ea-runevents-hereford-couriers-summer-sizzler-10k-and-christmas-10k-hereford",
+      "name": "Hereford Couriers Summer Sizzler 10k & Christmas 10k",
+      "city": "Hereford",
+      "distances": ["10K"],
+      "website": "https://herefordcouriers.com/"
+    },
+    {
+      "slug": "ea-runevents-buntingford-10m-buntingford",
+      "name": "Buntingford 10M",
+      "city": "Buntingford",
+      "distances": ["10mi"],
+      "website": "https://racebest.com/races/bunty10"
+    },
+    {
+      "slug": "ea-runevents-templenewsam-10-leeds",
+      "name": "Templenewsam 10",
+      "city": "Leeds",
+      "distances": ["10mi"],
+      "website": "https://www.sttheresasac.org.uk/"
+    },
+    {
+      "slug": "ea-runevents-woodcote-10k-reading",
+      "name": "Woodcote 10K",
+      "city": "Reading",
+      "distances": ["10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/31677"
+    },
+    {
+      "slug": "ea-runevents-stubbington-10k-fareham",
+      "name": "Stubbington 10k",
+      "city": "Fareham",
+      "distances": ["10K"],
+      "website": "https://www.stubbingtongreenrunners.net/"
+    },
+    {
+      "slug": "ea-runevents-st-michael-s-hospice-run-bexhill-on-sea",
+      "name": "St Michael's Hospice Run",
+      "city": "Bexhill-on-Sea",
+      "distances": ["10K", "5K"],
+      "website": "https://www.nice-work.org.uk/e/st-michaels-hospice-run-15209"
+    },
+    {
+      "slug": "ea-runevents-great-bentley-half-marathon-great-bentley",
+      "name": "Great Bentley Half Marathon",
+      "city": "Great Bentley",
+      "distances": ["Half"],
+      "website": "https://gbrc.org.uk/our-races/great-bentley-half-marathon/"
+    },
+    {
+      "slug": "ea-runevents-alsager-5-mile-stoke-on-trent",
+      "name": "Alsager 5 Mile",
+      "city": "STOKE-ON-TRENT",
+      "distances": ["5mi"],
+      "website": "https://www.alsagerfive.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-lytchett-10-poole",
+      "name": "Lytchett 10",
+      "city": "POOLE",
+      "distances": ["10mi"],
+      "website": "https://lytchettmanorstriders.org/"
+    },
+    {
+      "slug": "ea-runevents-jenner-jog-berkeley",
+      "name": "Jenner Jog",
+      "city": "BERKELEY",
+      "distances": ["10K"],
+      "website": "https://dashboard.race-nation.co.uk/register/new-berkeley-harriers/nbh-jenner-jog-10k-2027"
+    },
+    {
+      "slug": "ea-runevents-hadleigh-legacy-10k-benfleet",
+      "name": "Hadleigh Legacy 10k",
+      "city": "BENFLEET",
+      "distances": ["10K"],
+      "website": "https://www.nice-work.org.uk/e/hadleigh-legacy-10k-9886"
+    },
+    {
+      "slug": "ea-runevents-berkhamsted-rotary-half-marathon-berkhamsted",
+      "name": "Berkhamsted Rotary Half Marathon",
+      "city": "BERKHAMSTED",
+      "distances": ["Half"],
+      "website": "https://www.berkorun.com/"
+    },
+    {
+      "slug": "ea-runevents-haweswater-half-marathon-penrith",
+      "name": "Haweswater Half Marathon",
+      "city": "Penrith",
+      "distances": ["Half"],
+      "website": "https://edenrunners.co.uk/haweswater-half-marathon/"
+    },
+    {
+      "slug": "ea-runevents-red-hot-toddy-todmorden",
+      "name": "Red Hot Toddy",
+      "city": "TODMORDEN",
+      "distances": ["10K"],
+      "website": "https://www.todharriers.co.uk/hot-toddy-road-race/"
+    },
+    {
+      "slug": "ea-runevents-devizes-half-marathon-5-mile-and-junior-races-devizes",
+      "name": "Devizes Half Marathon, 5 Mile & Junior Races",
+      "city": "Devizes",
+      "distances": ["Half", "5mi", "1.5K", "Fun Run"],
+      "website": "https://www.devizeshalfmarathon.co.uk/"
+    },
+    {
+      "slug": "ea-runevents-wilmslow-running-festival-wilmslow",
+      "name": "Wilmslow Running Festival",
+      "city": "Wilmslow",
+      "distances": ["Half"],
+      "website": "https://www.wilmslowrunningfestival.org.uk/"
+    },
+    {
+      "slug": "ea-runevents-halifax-10k-sowerby-bridge",
+      "name": "Halifax 10k",
+      "city": "SOWERBY BRIDGE",
+      "distances": ["10K"],
+      "website": "https://www.halifaxharriers.co.uk/club-races/halifax-10k/"
+    },
+    {
+      "slug": "ea-runevents-run-in-the-forest-swadlincote",
+      "name": "Run in the Forest",
+      "city": "Swadlincote",
+      "distances": ["5mi", "Fun Run"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/31296"
+    },
+    {
+      "slug": "ea-runevents-flitwick-10k-bedford",
+      "name": "Flitwick 10k",
+      "city": "Bedford",
+      "distances": ["10K"],
+      "website": "https://affrunningclub.org.uk/flitwick-10k/"
+    },
+    {
+      "slug": "ea-runevents-badrat-bolt-bridgwater",
+      "name": "Badrat Bolt",
+      "city": "BRIDGWATER",
+      "distances": ["10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/31574"
+    },
+    {
+      "slug": "ea-runevents-hallam-chase-sheffield",
+      "name": "Hallam Chase",
+      "city": "Sheffield",
+      "distances": ["3.25mi"],
+      "website": "http://www.thehallamchase.org.uk/"
+    },
+    {
+      "slug": "ea-runevents-run-jericho-oxford",
+      "name": "Run Jericho",
+      "city": "OXFORD",
+      "distances": ["Fun Run", "5K", "10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/29923"
+    },
+    {
+      "slug": "ea-runevents-david-thornby-10k-maidstone",
+      "name": "David Thornby 10k",
+      "city": "Maidstone",
+      "distances": ["10K"],
+      "website": "https://englandathletics.sport80.com/public/wizard/e/31579"
+    },
+    {
+      "slug": "ea-runevents-heathfield-mid-summer-10k-heathfield",
+      "name": "Heathfield Mid Summer 10K",
+      "city": "HEATHFIELD",
+      "distances": ["10K"],
+      "website": "https://register.enthuse.com/ps/event/TheHeathfieldMidsummer10k2025"
+    },
+    {
+      "slug": "ea-runevents-lindley-10k-2027-huddersfield",
+      "name": "Lindley 10k (2027)",
+      "city": "Huddersfield",
+      "distances": ["10K"],
+      "website": "https://racebest.com/races/3yzht"
+    }
+  ],
+  "held": [
+    {
+      "date": "2026-08-26",
+      "name": "Ellerdine Effort",
+      "place": "TELFORD, Shropshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-08-26",
+      "name": "GBR Run Bexhill 5k Series 2025",
+      "place": "BEXHILL-ON-SEA, East Sussex",
+      "url": "https://www.gbrrun.com/",
+      "reasons": ["missing advertised distance", "source name year conflicts with event date"]
+    },
+    {
+      "date": "2026-08-26",
+      "name": "South West PB Series 5K",
+      "place": "Bath, Somerset",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-08-30",
+      "name": "Cleeve 5k Relays",
+      "place": "BRISTOL, Somerset",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-01",
+      "name": "YVAA Grand Prix Northowram Pumas",
+      "place": "Halifax, West Yorkshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-02",
+      "name": "Red Rose Interclub",
+      "place": "Leyland, Lancashire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-03",
+      "name": "Wallings, Thumbsupforcharlie supper run",
+      "place": "Lancaster, Lancashire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-03",
+      "name": "SportsShoes Podium Run the Wharf",
+      "place": "London, London",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-03",
+      "name": "Assembly League Race 1 & 6",
+      "place": "BECKENHAM, Kent",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-04",
+      "name": "Power of 5K Race 1",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-04",
+      "name": "Power of 5K Race 2",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-06",
+      "name": "The Big Half",
+      "place": "LONDON, London",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-06",
+      "name": "South Cheshire 20 2026",
+      "place": "Crewe, Cheshire",
+      "url": "https://www.entryhub.co.uk/south-cheshire-20",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Dream Trail Race",
+      "place": "St.Helens, Merseyside",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Run Norwich 2026",
+      "place": "NORWICH, Norfolk",
+      "url": "https://www.runnorwich.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-06",
+      "name": "BLACKLEACH MULTI-TERRAIN 5 MILE RACE",
+      "place": "SALFORD, Greater Manchester",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Run Scotland Strathclyde Autumn 5k / 10k / Half",
+      "place": "Motherwell, Lanarkshire",
+      "url": "https://runnation.co.uk/r/runscotland_strathclyde_halfmarathon_sep_2026",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Wetherby 10k 2026",
+      "place": "Wetherby, West Yorkshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Rye Ancient Trails 30k & 15k",
+      "place": "Rye, East Sussex",
+      "url": "https://www.nice-work.org.uk/e/rye-ancient-trails-30k-and-15k-9220",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Sussex Road Relay Championships",
+      "place": "Brighton, West Sussex",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Storm the Fort 10 km",
+      "place": "PLYMOUTH, Devon",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-20",
+      "name": "The Castleford 10k",
+      "place": "Castleford, West Yorkshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-20",
+      "name": "RunThrough Richmond Park Half Marathon 2026",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Chariots of Fire Relay",
+      "place": "CAMBRIDGE, Cambridgeshire",
+      "url": "https://www.runthrough.co.uk/event/chariots-of-fire-september-2024/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Kirkstall Abbey 7",
+      "place": "Leeds, West Yorkshire",
+      "url": "https://racebest.com/races/he9vr",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Waseley Wobbler 2026",
+      "place": "Birmingham, West Midlands",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/31576",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-21",
+      "name": "The Tilbury Douglas Yorkshire Run for WaterAid",
+      "place": "Harrogate, North Yorkshire",
+      "url": "https://racebest.com/races/s8hex",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-23",
+      "name": "RAF 10K Championships",
+      "place": "PETERBOROUGH, Cambridgeshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Vitality Westminster Mile",
+      "place": "London, London",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Vitality London 10,000",
+      "place": "London, London",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-09-27",
+      "name": "The One in the Park - Hyde Park 10K & 5K",
+      "place": "London, London",
+      "url": "https://www.onerace.events/london-5k-10k-hyde-park-september",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Marazion 10k",
+      "place": "Marazion, Cornwall and Isles of Scilly",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-10-02",
+      "name": "DonFaster 5K",
+      "place": "DONCASTER, South Yorkshire",
+      "url": "https://donfaster5k.info/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Rotherby8",
+      "place": "Melton Mowbray, Leicestershire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL", "missing advertised distance"]
+    },
+    {
+      "date": "2026-10-10",
+      "name": "Run Scotland Loch Rannoch 10k 2026",
+      "place": "Pitlochry, Perthshire",
+      "url": "https://runnation.co.uk/r/run-scotland-loch-rannoch-10k-2026",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Run Scotland Rannoch Marathon / Half Marathon",
+      "place": "Pitlochry, Perthshire",
+      "url": "https://runnation.co.uk/r/rannochhalfmarathon2026",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Werrington 10K 2025",
+      "place": "STOKE-ON-TRENT, Staffordshire",
+      "url": "https://www.entryhub.co.uk/sub-4-werrington-10k-2026",
+      "reasons": ["source name year conflicts with event date"]
+    },
+    {
+      "date": "2026-10-11",
+      "name": "The KJD Law Ormskirk 10k",
+      "place": "ORMSKIRK, Lancashire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-10-18",
+      "name": "RunThrough Richmond Park Half Marathon 2026",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-10-18",
+      "name": "Wigton Road Runners 10K",
+      "place": "Carlisle, Cumbria",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-10-18",
+      "name": "Lullingstone 10K",
+      "place": "DARTFORD, Kent",
+      "url": "https://eynsfordrunningclub.com/lullingstone-10k/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-10-18",
+      "name": "Bridgnorth 10K",
+      "place": "Bridgnorth, Shropshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-10-22",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-10-23",
+      "name": "Power of 5K Race 1",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-10-23",
+      "name": "Power of 5K Race 2",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-11-08",
+      "name": "Woodstock 12 & 4 2026",
+      "place": "WOODSTOCK, Oxfordshire",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/31668",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-11-19",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-11-22",
+      "name": "Sphinx Coombe 8 2026",
+      "place": "Coventry, West Midlands",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-11-29",
+      "name": "Woodstock 12 2025",
+      "place": "Woodstock, Oxfordshire",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/31547",
+      "reasons": ["missing advertised distance", "source name year conflicts with event date"]
+    },
+    {
+      "date": "2026-12-03",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-12-06",
+      "name": "Bah Humbug 10K",
+      "place": "Leeds, West Yorkshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL", "missing advertised distance"]
+    },
+    {
+      "date": "2026-12-06",
+      "name": "South Leeds Bah Humbug 10k",
+      "place": "LEEDS, West Yorkshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-12-11",
+      "name": "Power of 5K Race 1",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-12-13",
+      "name": "RunThrough Richmond Park Half Marathon 2026",
+      "place": "Richmond, Surrey",
+      "url": "https://www.runthrough.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-12-13",
+      "name": "Run Gateshead Hot Chocolate 10k / 5k & Junior 3k",
+      "place": "NEWCASTLE UPON TYNE, Tyne and Wear",
+      "url": "https://runnation.co.uk/r/gateshead-hotchoc-10k-2026",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2026-12-26",
+      "name": "Stockport Harriers Boxing Day 5k",
+      "place": "STOCKPORT, Greater Manchester",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-12-27",
+      "name": "Wheaton Aston 10k",
+      "place": "Stafford, Staffordshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2026-12-28",
+      "name": "Jolly Hog Jog 2026",
+      "place": "Ripon, North Yorkshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-01-01",
+      "name": "Cleethorpes AC New Year's Day 10K",
+      "place": "CLEETHORPES, Lincolnshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-01-28",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-02-05",
+      "name": "Power of 5K Race 1",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-02-05",
+      "name": "Power of 5K Race 2",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-02-14",
+      "name": "Monsal Metric Marathon & Half Marathon",
+      "place": "Bakewell, Derbyshire",
+      "url": "https://www.nice-work.org.uk/e/monsal-metric-marathon-and-half-marathon-15635",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-02-14",
+      "name": "St Valentine's 30K",
+      "place": "Stamford, Lincolnshire",
+      "url": "https://www.sientries.co.uk/event.php?elid=Y&event_id=17387",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-02-18",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-03-18",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-04-02",
+      "name": "Power of 5K Race 1",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-04-02",
+      "name": "Power of 5K Race 2",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-04-04",
+      "name": "White Horse Half Marathon 2026",
+      "place": "WANTAGE, Oxfordshire",
+      "url": "https://whitehorseharriers.uk/halfmarathon/",
+      "reasons": ["source name year conflicts with event date"]
+    },
+    {
+      "date": "2027-04-11",
+      "name": "Blymhill Shotgun 10k (ish)",
+      "place": "Blymhill, Staffordshire",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-04-15",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-04-24",
+      "name": "The Chieveley Chase 2027",
+      "place": "Chieveley, Berkshire",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/31398",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-05-09",
+      "name": "Alton 10",
+      "place": "Alton, Hampshire",
+      "url": "https://www.altonrunners.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-05-09",
+      "name": "Alderley Edge 10K 2026",
+      "place": "Alderley Edge, Cheshire",
+      "url": "https://www.runnorthwest.co.uk/pages/alderley-edge-10k-2027",
+      "reasons": ["source name year conflicts with event date"]
+    },
+    {
+      "date": "2027-05-16",
+      "name": "Eyam Half Marathon",
+      "place": "Eyam, Derbyshire",
+      "url": "https://www.eyamhalfmarathon.org/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-05-23",
+      "name": "Millom Striders Run the Edge 2027",
+      "place": "MILLOM, Cumbria",
+      "url": "",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-05-27",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-05-28",
+      "name": "Power of 5K Race 1",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-05-28",
+      "name": "Power of 5K Race 2",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-06-25",
+      "name": "Epsom Oddballs 2000 Perch",
+      "place": "Epsom, Surrey",
+      "url": "https://www.epsomoddballs.org/2000-perch/",
+      "reasons": ["source name year conflicts with event date"]
+    },
+    {
+      "date": "2027-07-10",
+      "name": "The Sting Backyard Ultra 2027",
+      "place": "RICHMOND, North Yorkshire",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/31710",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-07-23",
+      "name": "Power of 5K Race 1",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-07-23",
+      "name": "Power of 5K Race 2",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-08-01",
+      "name": "Gosforth Summer Relays",
+      "place": "NEWCASTLE UPON TYNE, Tyne and Wear",
+      "url": "https://gosforth-harriers.org/",
+      "reasons": ["missing advertised distance"]
+    },
+    {
+      "date": "2027-09-17",
+      "name": "Power of 5K Race 1",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL"]
+    },
+    {
+      "date": "2027-09-17",
+      "name": "Power of 5K Race 2",
+      "place": "Lancaster, Lancashire",
+      "url": "https://facebook%20page%20-%20power%20of%205k/",
+      "reasons": ["missing or invalid official event URL", "missing advertised distance"]
+    }
+  ],
+  "ambiguous": [
+    {
+      "date": "2026-08-27",
+      "name": "Media City Series",
+      "place": "Salford Quays, Greater Manchester",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "media-city-half-marathon-february",
+        "name": "Media City Half Marathon",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "run-mediacity-5k-10k-august",
+        "name": "Run MediaCity 5K & 10K",
+        "score": 0.72
+      }
+    },
+    {
+      "date": "2026-08-27",
+      "name": "Mota-vation Stratfield Brake 2026",
+      "place": "Kidlington, Oxfordshire",
+      "url": "https://kidlingtonrunning.org.uk/mota-vation/",
+      "bestSeries": {
+        "slug": "mota-vation-race-5",
+        "name": "Mota-vation Race Series Race 5",
+        "score": 0.609
+      },
+      "bestSameDate": {
+        "slug": "mota-vation-race-5",
+        "name": "Mota-vation Race Series Race 5",
+        "score": 0.609
+      }
+    },
+    {
+      "date": "2026-08-29",
+      "name": "RunThrough Regents park series 2",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "regents-park-5k-10k-august",
+        "name": "Regent's Park 5K & 10K",
+        "score": 0.82
+      },
+      "bestSameDate": {
+        "slug": "regents-park-5k-10k-august",
+        "name": "Regent's Park 5K & 10K",
+        "score": 0.82
+      }
+    },
+    {
+      "date": "2026-08-30",
+      "name": "Plum 10k 2026",
+      "place": "Pershore, Worcestershire",
+      "url": "https://entrycentral.com/plum10k",
+      "bestSeries": {
+        "slug": "pershore-10k",
+        "name": "Pershore Plum 10K",
+        "score": 0.71
+      },
+      "bestSameDate": {
+        "slug": "pershore-10k",
+        "name": "Pershore Plum 10K",
+        "score": 0.71
+      }
+    },
+    {
+      "date": "2026-08-30",
+      "name": "Denstone 10 Mile",
+      "place": "Uttoxeter, Staffordshire",
+      "url": "https://www.nsrra.org.uk/",
+      "bestSeries": {
+        "slug": "denstone-10",
+        "name": "Denstone 10",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "denstone-10",
+        "name": "Denstone 10",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-09-01",
+      "name": "Run Exe 5k",
+      "place": "Exeter, Devon",
+      "url": "https://www.city-runs.co.uk/contact",
+      "bestSeries": {
+        "slug": "run-exe-summer-5k-august",
+        "name": "Run Exe Summer 5K",
+        "score": 0.71
+      },
+      "bestSameDate": {
+        "slug": "dumble-bimble-fun-run",
+        "name": "Dumble Bimble",
+        "score": 0.12
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "name": "Ealing Eagles 5k",
+      "place": "London, London",
+      "url": "https://race-nation.co.uk/register/ealing-eagles-running-club/ealing-eagles-perivale-5km-10-june-26",
+      "bestSeries": {
+        "slug": "the-ealing-mile-august",
+        "name": "Ealing Mile",
+        "score": 0.643
+      },
+      "bestSameDate": {
+        "slug": "ruthin-evening-5k",
+        "name": "Ruthin Evening 5K",
+        "score": 0.193
+      }
+    },
+    {
+      "date": "2026-09-02",
+      "name": "Armada 5K Series",
+      "place": "Plymouth, Devon",
+      "url": "https://www.armadaathletics.co.uk/",
+      "bestSeries": {
+        "slug": "armada-athletics-5k-august",
+        "name": "Armada Athletics Network 5K",
+        "score": 0.662
+      },
+      "bestSameDate": {
+        "slug": "harper-scarper",
+        "name": "Harper Scarper 5K",
+        "score": 0.169
+      }
+    },
+    {
+      "date": "2026-09-04",
+      "name": "Friday Night Under the Lights Fast Barrowford 5K September",
+      "place": "Nelson, Lancashire",
+      "url": "https://data.opentrack.run/en-gb/x/2026/GBR/fnulbarr5/",
+      "bestSeries": {
+        "slug": "friday-night-under-the-lights-road-5k-september",
+        "name": "Friday Night Under The Lights 5K",
+        "score": 0.591
+      },
+      "bestSameDate": {
+        "slug": "ickworth-sunset-chase",
+        "name": "Ickworth Sunset Chase 5K & 10K",
+        "score": 0.174
+      }
+    },
+    {
+      "date": "2026-09-04",
+      "name": "DK Mile Series 2026",
+      "place": "Blyth, Northumberland",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/30524",
+      "bestSeries": {
+        "slug": "dk-mile-august",
+        "name": "DK Mile",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "british-rowing-beach-sprint-championships",
+        "name": "British Rowing Beach Sprint Championships",
+        "score": 0
+      }
+    },
+    {
+      "date": "2026-09-06",
+      "name": "RunThrough Birmingham Running Festival 2026",
+      "place": "Birmingham, West Midlands",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "birmingham-running-festival-september",
+        "name": "Birmingham Running Festival",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "birmingham-running-festival-september",
+        "name": "Birmingham Running Festival",
+        "score": 0.8
+      }
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Kenilworth Half Marathon & 5k 2026",
+      "place": "Kenilworth, Warwickshire",
+      "url": "https://kenilworthrunners.com/kenilworth-half-marathon",
+      "bestSeries": {
+        "slug": "kenilworth-half-marathon",
+        "name": "Kenilworth Half Marathon",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "kenilworth-half-marathon",
+        "name": "Kenilworth Half Marathon",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-09-06",
+      "name": "RunThrough Altrincham 10k",
+      "place": "ALTRINCHAM, Greater Manchester",
+      "url": "https://www.runthrough.co.uk/event/altrincham-10k-2024/",
+      "bestSeries": {
+        "slug": "altrincham-10k",
+        "name": "Altrincham 10K",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "altrincham-10k",
+        "name": "Altrincham 10K",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-09-06",
+      "name": "Sawtry 10",
+      "place": "Sawtry, Cambridgeshire",
+      "url": "https://sawtrywalktorun.co.uk/sawtry10/",
+      "bestSeries": {
+        "slug": "sawtry-10-mile",
+        "name": "Sawtry 10 Mile",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "sawtry-10-mile",
+        "name": "Sawtry 10 Mile",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-09-06",
+      "name": "ATW Bedford Running Festival",
+      "place": "Bedford, Bedfordshire",
+      "url": "https://www.atwevents.co.uk/e/atw-bedford-running-festival-8930",
+      "bestSeries": {
+        "slug": "atw-bedford-half-marathon-2027",
+        "name": "ATW Bedford Half Marathon & 10K 2027",
+        "score": 1
+      },
+      "bestSameDate": {
+        "slug": "bedford-run-fest-sunday",
+        "name": "Bedford Run Fest Sunday",
+        "score": 0.729
+      }
+    },
+    {
+      "date": "2026-09-08",
+      "name": "Wirral Multi Terrain Series",
+      "place": "Wirral, Merseyside",
+      "url": "https://www.facebook.com/groups/276338023306001",
+      "bestSeries": {
+        "slug": "runthrough-wirral-may-2027",
+        "name": "Wirral Running Festival — May 2027",
+        "score": 0.482
+      },
+      "bestSameDate": {
+        "slug": "wa-xl-gara-int-le-di-salto-con-l-asta-in-piazza-7244784",
+        "name": "Xl Gara Int.le Di Salto Con L'asta In Piazza",
+        "score": 0.084
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "name": "Castle 5K Series",
+      "place": "Carlisle, Cumbria",
+      "url": "https://www.sportinaction.co.uk/",
+      "bestSeries": {
+        "slug": "sport-in-action-castle-5k-series-race-4",
+        "name": "Sport in Action Castle 5K Series Race 4",
+        "score": 0.683
+      },
+      "bestSameDate": {
+        "slug": "sport-in-action-castle-5k-series-race-5",
+        "name": "Sport in Action Castle 5K Series Race 5",
+        "score": 0.683
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "name": "Coast Road 5k Series",
+      "place": "Redcar, Cleveland",
+      "url": "https://nmhraces.net/",
+      "bestSeries": {
+        "slug": "autumn-coast-road-5k",
+        "name": "Autumn Coast Road 5K",
+        "score": 0.74
+      },
+      "bestSameDate": {
+        "slug": "autumn-coast-road-5k",
+        "name": "Autumn Coast Road 5K",
+        "score": 0.74
+      }
+    },
+    {
+      "date": "2026-09-09",
+      "name": "Lakeside 5k Series",
+      "place": "Portsmouth, Hampshire",
+      "url": "https://www.havantac.co.uk/",
+      "bestSeries": {
+        "slug": "lakeside-5k-road-race-august",
+        "name": "Lakeside 5K Road Race",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "st-patricks-academy-5k-2026",
+        "name": "St Patrick's Academy 5K",
+        "score": 0.157
+      }
+    },
+    {
+      "date": "2026-09-10",
+      "name": "LandAid 5k and 10k",
+      "place": "SALFORD, Greater Manchester",
+      "url": "https://crazylegsevents.co.uk/",
+      "bestSeries": {
+        "slug": "landaid-north-west-10k-5k",
+        "name": "Race for LandAid North West 5K & 10K",
+        "score": 0.587
+      },
+      "bestSameDate": {
+        "slug": "landaid-north-west-10k-5k",
+        "name": "Race for LandAid North West 5K & 10K",
+        "score": 0.587
+      }
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Richmond RUN-FEST",
+      "place": "Richmond Upon Thames, London",
+      "url": "https://run-fest.com/events/about-richmond-runfest/",
+      "bestSeries": {
+        "slug": "richmond-runfest-marathon",
+        "name": "Richmond Marathon",
+        "score": 0.907
+      },
+      "bestSameDate": {
+        "slug": "richmond-runfest-marathon",
+        "name": "Richmond Marathon",
+        "score": 0.907
+      }
+    },
+    {
+      "date": "2026-09-13",
+      "name": "RunThrough Basildon Half Marathon",
+      "place": "BASILDON, Essex",
+      "url": "https://www.basildonhalfmarathon.com/",
+      "bestSeries": {
+        "slug": "basildon-half-marathon-juniors-september",
+        "name": "Basildon Half Marathon",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "basildon-half-marathon-juniors-september",
+        "name": "Basildon Half Marathon",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-09-13",
+      "name": "RunThrough Cheshire Half Marathon",
+      "place": "Macclesfield, Cheshire",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "cheshire-spring-half-marathon-march",
+        "name": "Cheshire Spring Half Marathon",
+        "score": 0.794
+      },
+      "bestSameDate": {
+        "slug": "cheshire-half-marathon",
+        "name": "Cheshire Autumn Half Marathon",
+        "score": 0.794
+      }
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Hellingly 10K",
+      "place": "Hellingly, East Sussex",
+      "url": "https://hailsham-harriers.org.uk/",
+      "bestSeries": {
+        "slug": "john-faulds-hellingly-10k",
+        "name": "John Faulds Hellingly 10K",
+        "score": 0.838
+      },
+      "bestSameDate": {
+        "slug": "john-faulds-hellingly-10k",
+        "name": "John Faulds Hellingly 10K",
+        "score": 0.838
+      }
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Burnham Half Marathon",
+      "place": "Burnham-on-Sea , Somerset",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/30614",
+      "bestSeries": {
+        "slug": "burnham-on-sea-half-marathon",
+        "name": "Burnham-on-Sea Half Marathon",
+        "score": 0.796
+      },
+      "bestSameDate": {
+        "slug": "burnham-on-sea-half-marathon",
+        "name": "Burnham-on-Sea Half Marathon",
+        "score": 0.796
+      }
+    },
+    {
+      "date": "2026-09-13",
+      "name": "Newcastle 10K",
+      "place": "Newcastle, Staffordshire",
+      "url": "http://newcastlestaffsac.org.uk/",
+      "bestSeries": {
+        "slug": "kmf-newcastle-10k",
+        "name": "PAU Newcastle 10K",
+        "score": 0.854
+      },
+      "bestSameDate": {
+        "slug": "kmf-newcastle-10k",
+        "name": "PAU Newcastle 10K",
+        "score": 0.854
+      }
+    },
+    {
+      "date": "2026-09-13",
+      "name": "The Wingham Run",
+      "place": "CANTERBURY, Kent",
+      "url": "https://www.sportingeventsuk.com/",
+      "bestSeries": {
+        "slug": "wingham-10k-5k",
+        "name": "The Wingham Run 10K & 5K",
+        "score": 1
+      },
+      "bestSameDate": {
+        "slug": "wingham-10k-5k",
+        "name": "The Wingham Run 10K & 5K",
+        "score": 1
+      }
+    },
+    {
+      "date": "2026-09-15",
+      "name": "Wirral Multi Terrain Series",
+      "place": "Wirral, Merseyside",
+      "url": "https://www.facebook.com/groups/276338023306001",
+      "bestSeries": {
+        "slug": "runthrough-wirral-may-2027",
+        "name": "Wirral Running Festival — May 2027",
+        "score": 0.482
+      },
+      "bestSameDate": {
+        "slug": "wa-uae-athletics-grand-prix-7232263",
+        "name": "UAE Athletics Grand Prix",
+        "score": 0.045
+      }
+    },
+    {
+      "date": "2026-09-16",
+      "name": "Hyde Park Chase The Sun Series",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "chase-the-sun-battersea-5k-10k-august",
+        "name": "Chase the Sun Battersea Park 5K & 10K",
+        "score": 0.765
+      },
+      "bestSameDate": {
+        "slug": "wt-2026-south-american-games-santa-fe",
+        "name": "2026 South American Games Santa Fe",
+        "score": 0.043
+      }
+    },
+    {
+      "date": "2026-09-17",
+      "name": "Weston Prom 5 Mile Series",
+      "place": "WESTON-SUPER-MARE, Somerset",
+      "url": "https://westonac.co.uk/",
+      "bestSeries": {
+        "slug": "the-albert-goodman-weston-super-half",
+        "name": "Weston Super Half & 10K",
+        "score": 0.501
+      },
+      "bestSameDate": {
+        "slug": "utmb-world-series-grindstone",
+        "name": "Grindstone Trail Running Festival",
+        "score": 0.11
+      }
+    },
+    {
+      "date": "2026-09-19",
+      "name": "Tissington Trail Half Marathon Weekend",
+      "place": "BUXTON, Derbyshire",
+      "url": "https://www.nice-work.org.uk/e/tissington-trail-september-half-marathon-weekend-9222",
+      "bestSeries": {
+        "slug": "tissington-trail-marathon",
+        "name": "Tissington Trail Marathon",
+        "score": 0.796
+      },
+      "bestSameDate": {
+        "slug": "tissington-trail-half-marathon",
+        "name": "Tissington Trail Half Marathon Saturday",
+        "score": 0.533
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Butterfield Half Marathon",
+      "place": "GUERNSEY, Hampshire",
+      "url": "https://guernseyathletics.org.gg/halfmarathon/",
+      "bestSeries": {
+        "slug": "guernsey-june-half-marathon",
+        "name": "Butterfield Guernsey Half Marathon",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "guernsey-june-half-marathon",
+        "name": "Butterfield Guernsey Half Marathon",
+        "score": 0.8
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Davison Law Stafford 10k",
+      "place": "Stafford, Staffordshire",
+      "url": "https://www.freedom-leisure.co.uk/stafford-10k/",
+      "bestSeries": {
+        "slug": "stafford-10k",
+        "name": "Freedom Leisure Stafford 10K",
+        "score": 0.624
+      },
+      "bestSameDate": {
+        "slug": "stafford-10k",
+        "name": "Freedom Leisure Stafford 10K",
+        "score": 0.624
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Run Reigate 2026",
+      "place": "Reigate, Surrey",
+      "url": "https://www.runthrough.co.uk/event/run-reigate-5k-10k-half-marathon-kids-race-september-2026?gad_source=1&gad_campaignid=22030423194&gbraid=0AAAAAC5gsCd6-DdLszYNo8LzFtQprNwX4&gclid=CjwKCAjw0o3SBhBVEiwAh28-jTWuJjeYk4jtY-3kaGvSh5ga1TF7uXO1Qgy0ON18m60bKQh8H8og5hoCjMoQAvD_BwE",
+      "bestSeries": {
+        "slug": "the-intersport-run-reigate-half-marathon",
+        "name": "Run Reigate Half Marathon, 10K & 5K",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "the-intersport-run-reigate-half-marathon",
+        "name": "Run Reigate Half Marathon, 10K & 5K",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Larkfield 10k 2026",
+      "place": "East Malling, Kent",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/31243",
+      "bestSeries": {
+        "slug": "larkfield-ac-10k",
+        "name": "Larkfield AC 10K",
+        "score": 0.873
+      },
+      "bestSameDate": {
+        "slug": "larkfield-ac-10k",
+        "name": "Larkfield AC 10K",
+        "score": 0.873
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Tissington Trail Half Marathon Weekend",
+      "place": "BUXTON, Derbyshire",
+      "url": "https://www.nice-work.org.uk/e/tissington-trail-september-half-marathon-weekend-9222",
+      "bestSeries": {
+        "slug": "tissington-trail-marathon",
+        "name": "Tissington Trail Marathon",
+        "score": 0.796
+      },
+      "bestSameDate": {
+        "slug": "tissington-trail-half-marathon-sunday",
+        "name": "Tissington Trail Half Marathon Sunday",
+        "score": 0.561
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Morecambe Marathon, Half Marathon and 10k",
+      "place": "Morecambe, Lancashire",
+      "url": "https://www.lancaster-race-series.co.uk/",
+      "bestSeries": {
+        "slug": "morecambe-marathon",
+        "name": "Morecambe Marathon, Half Marathon & 10K",
+        "score": 0.934
+      },
+      "bestSameDate": {
+        "slug": "morecambe-marathon",
+        "name": "Morecambe Marathon, Half Marathon & 10K",
+        "score": 0.934
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "name": "BeckBusters 10km Race",
+      "place": "Bishop Monkton, North Yorkshire",
+      "url": "https://racebest.com/races/2yva2",
+      "bestSeries": {
+        "slug": "beck-busters",
+        "name": "BeckBusters 10K & 2K Fun Run",
+        "score": 0.865
+      },
+      "bestSameDate": {
+        "slug": "beck-busters",
+        "name": "BeckBusters 10K & 2K Fun Run",
+        "score": 0.865
+      }
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Moor Park 10km & Fun Run",
+      "place": "NORTHWOOD, Middlesex",
+      "url": "https://www.atwevents.co.uk/e/moor-park-10k-run-5k-walk-and-junior-fun-runs-9152",
+      "bestSeries": {
+        "slug": "stewarts-law-moor-park-10k",
+        "name": "Moor Park 10 & More",
+        "score": 0.533
+      },
+      "bestSameDate": {
+        "slug": "stewarts-law-moor-park-10k",
+        "name": "Moor Park 10 & More",
+        "score": 0.533
+      }
+    },
+    {
+      "date": "2026-09-22",
+      "name": "Wirral Multi Terrain Series",
+      "place": "Wirral, Merseyside",
+      "url": "https://www.facebook.com/groups/276338023306001",
+      "bestSeries": {
+        "slug": "runthrough-wirral-may-2027",
+        "name": "Wirral Running Festival — May 2027",
+        "score": 0.482
+      },
+      "bestSameDate": {
+        "slug": "wa-7th-national-schools-athletics-meeting-7237619",
+        "name": "7th National Schools Athletics Meeting",
+        "score": 0.05
+      }
+    },
+    {
+      "date": "2026-09-23",
+      "name": "Media City Series",
+      "place": "Salford Quays, Greater Manchester",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "media-city-half-marathon-february",
+        "name": "Media City Half Marathon",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "evensplits-leeds-5k-series-2026",
+        "name": "EvenSplits Leeds 5K Series 2026",
+        "score": 0.196
+      }
+    },
+    {
+      "date": "2026-09-24",
+      "name": "Media City Series",
+      "place": "Salford Quays, Greater Manchester",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "media-city-half-marathon-february",
+        "name": "Media City Half Marathon",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "media-city-relays-september",
+        "name": "Media City Relays",
+        "score": 0.685
+      }
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Ealing Mini Mile",
+      "place": "LONDON, Greater London",
+      "url": "https://www.ealinghalfmarathon.com/ealing-mini-mile/",
+      "bestSeries": {
+        "slug": "the-ealing-mile-august",
+        "name": "Ealing Mile",
+        "score": 0.68
+      },
+      "bestSameDate": {
+        "slug": "battersea-park-10k-half-marathon-september",
+        "name": "Battersea Park Half Marathon, 10K & 5K September",
+        "score": 0.208
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "name": "The Bedford Charity Chase",
+      "place": "BEDFORD, Bedfordshire",
+      "url": "https://www.thebedfordcharitychase.org/",
+      "bestSeries": {
+        "slug": "atw-bedford-5-and-10-2027",
+        "name": "ATW Bedford 5 & 10 2027",
+        "score": 0.71
+      },
+      "bestSameDate": {
+        "slug": "oxford-city-hanney-5",
+        "name": "Oxford City Hanney 5",
+        "score": 0.298
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "name": "RunThrough Swindon Half Marathon",
+      "place": "SWINDON, Wiltshire",
+      "url": "https://www.runthrough.co.uk/events-timeline",
+      "bestSeries": {
+        "slug": "swindon-half-marathon",
+        "name": "Swindon Half Marathon",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "swindon-half-marathon",
+        "name": "Swindon Half Marathon",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Swinton Running Club Five Mile Worsley Woods Trail Race",
+      "place": "MANCHESTER, Lancashire",
+      "url": "http://www.swintonrunningclub.org.uk/",
+      "bestSeries": {
+        "slug": "worsley-woods-5-mile-trail-race",
+        "name": "Worsley Woods 5 Mile Trail Race",
+        "score": 0.606
+      },
+      "bestSameDate": {
+        "slug": "worsley-woods-5-mile-trail-race",
+        "name": "Worsley Woods 5 Mile Trail Race",
+        "score": 0.606
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Ealing Feeling 5k",
+      "place": "LONDON, Greater London",
+      "url": "https://www.ealinghalfmarathon.com/ealing-feeling-5k/",
+      "bestSeries": {
+        "slug": "the-ealing-mile-august",
+        "name": "Ealing Mile",
+        "score": 0.627
+      },
+      "bestSameDate": {
+        "slug": "ealing-half-marathon",
+        "name": "Wizz Air Ealing Half Marathon",
+        "score": 0.535
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Eastbourne 5km",
+      "place": "Eastbourne, East Sussex",
+      "url": "https://www.eastbourneruns.co.uk/",
+      "bestSeries": {
+        "slug": "eastbourne-half-marathon-2027",
+        "name": "Eastbourne Half Marathon 2027",
+        "score": 0.88
+      },
+      "bestSameDate": {
+        "slug": "spartan-south-east",
+        "name": "London South East Spartan Weekend",
+        "score": 0.391
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Run Aintree",
+      "place": "Liverpool, Merseyside",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "runthrough-aintree-may-2027",
+        "name": "Run Aintree 5K, 10K & Half Marathon — May 2027",
+        "score": 0.836
+      },
+      "bestSameDate": {
+        "slug": "run-aintree-5k-10k-and-half-marathon-september",
+        "name": "Run Aintree 5K, 10K & Half Marathon September",
+        "score": 0.74
+      }
+    },
+    {
+      "date": "2026-09-27",
+      "name": "Hanney 5 2026",
+      "place": "Wantage, Oxfordshire",
+      "url": "https://oxfordcityac.com/road-running/oxford-city-ac-hanney-5/",
+      "bestSeries": {
+        "slug": "oxford-city-hanney-5",
+        "name": "Oxford City Hanney 5",
+        "score": 0.71
+      },
+      "bestSameDate": {
+        "slug": "oxford-city-hanney-5",
+        "name": "Oxford City Hanney 5",
+        "score": 0.71
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Welwyn Half and 10k",
+      "place": "Welwyn, Hertfordshire",
+      "url": "https://www.atwevents.co.uk/e/atw-welwyn-half-marathon-and-10k-8927",
+      "bestSeries": {
+        "slug": "welwyn-half-marathon",
+        "name": "ATW Welwyn Half Marathon & 10K",
+        "score": 0.903
+      },
+      "bestSameDate": {
+        "slug": "welwyn-half-marathon",
+        "name": "ATW Welwyn Half Marathon & 10K",
+        "score": 0.903
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Manchester Half Marathon",
+      "place": "MANCHESTER, Greater Manchester",
+      "url": "https://www.manchesterhalfmarathon.com/home/",
+      "bestSeries": {
+        "slug": "manchester-running-festival",
+        "name": "Manchester Running Festival",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "chichester-half",
+        "name": "Chichester Half Marathon",
+        "score": 0.4
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Southampton HM & 10k",
+      "place": "Southampton, Hampshire",
+      "url": "https://www.runthrough.co.uk/events-timeline",
+      "bestSeries": {
+        "slug": "southampton-10k",
+        "name": "Southampton Half Marathon & 10K",
+        "score": 0.882
+      },
+      "bestSameDate": {
+        "slug": "southampton-10k",
+        "name": "Southampton Half Marathon & 10K",
+        "score": 0.882
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Great Cumbrian Runs",
+      "place": "Carlisle, Cumbria",
+      "url": "https://www.sportinaction.co.uk/",
+      "bestSeries": {
+        "slug": "cumberland-building-society-great-cumbrian-run",
+        "name": "Cumbria Waste Group Great Cumbrian Run",
+        "score": 0.657
+      },
+      "bestSameDate": {
+        "slug": "cumberland-building-society-great-cumbrian-run",
+        "name": "Cumbria Waste Group Great Cumbrian Run",
+        "score": 0.657
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Morley 10K",
+      "place": "LEEDS, West Yorkshire",
+      "url": "http://racebest.com/races/4te96",
+      "bestSeries": {
+        "slug": "morley-10k",
+        "name": "Mighty Morley 10K",
+        "score": 0.763
+      },
+      "bestSameDate": {
+        "slug": "morley-10k",
+        "name": "Mighty Morley 10K",
+        "score": 0.763
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Congleton Half Marathon October 2026",
+      "place": "Congleton, Cheshire",
+      "url": "https://www.runthrough.co.uk/event/congleton-half-marathon-october-2026",
+      "bestSeries": {
+        "slug": "congleton-half-and-quarter-marathons",
+        "name": "Congleton Half Marathon",
+        "score": 0.792
+      },
+      "bestSameDate": {
+        "slug": "congleton-half-and-quarter-marathons",
+        "name": "Congleton Half Marathon",
+        "score": 0.792
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Sittingbourne 10 Mile & 10k Road Race",
+      "place": "Sittingbourne, Kent",
+      "url": "https://www.nice-work.org.uk/e/sittingbourne-10-mile-and-10k-road-race-14909",
+      "bestSeries": {
+        "slug": "sittingbourne-chas-ryman-memorial-10-mile-race",
+        "name": "Sittingbourne Striders 10 Mile & 10K Road Race",
+        "score": 0.815
+      },
+      "bestSameDate": {
+        "slug": "sittingbourne-chas-ryman-memorial-10-mile-race",
+        "name": "Sittingbourne Striders 10 Mile & 10K Road Race",
+        "score": 0.815
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Middlesex 10k 2026",
+      "place": "London, London",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/31757",
+      "bestSeries": {
+        "slug": "middlesex-10k",
+        "name": "Middlesex 10K Championship",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "middlesex-10k",
+        "name": "Middlesex 10K Championship",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "The Saxons Five Mile Race",
+      "place": "Saxmundham, Suffolk",
+      "url": "https://www.thesaxons.org.uk/",
+      "bestSeries": {
+        "slug": "saxons-5-mile-race",
+        "name": "Saxons 5 Mile Race",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "saxons-5-mile-race",
+        "name": "Saxons 5 Mile Race",
+        "score": 0.8
+      }
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Thompson 10k Race and 5k Fun Run",
+      "place": "THETFORD, Norfolk",
+      "url": "https://totalracetiming.co.uk/race/598",
+      "bestSeries": {
+        "slug": "thompson-millennium-green",
+        "name": "Thompson Millennium Green 10K & 5K",
+        "score": 0.615
+      },
+      "bestSameDate": {
+        "slug": "thompson-millennium-green",
+        "name": "Thompson Millennium Green 10K & 5K",
+        "score": 0.615
+      }
+    },
+    {
+      "date": "2026-10-10",
+      "name": "RunThrough Hampton Court Palace Half Marathon & 10k",
+      "place": "East Molesey, London",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "hampton-court-palace-running-festival",
+        "name": "Hampton Court Palace Running Festival",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "edinburgh-colour-run-2026",
+        "name": "Edinburgh Colour Run 2026",
+        "score": 0.201
+      }
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Run Bournemouth 2026",
+      "place": "Bournemouth, Dorset",
+      "url": "https://www.runbournemouth.com/",
+      "bestSeries": {
+        "slug": "run-bournemouth-supersonic-10k",
+        "name": "Bournemouth Half Marathon",
+        "score": 1
+      },
+      "bestSameDate": {
+        "slug": "run-bournemouth-supersonic-10k",
+        "name": "Bournemouth Half Marathon",
+        "score": 1
+      }
+    },
+    {
+      "date": "2026-10-11",
+      "name": "The Hedgehog Half Marathon",
+      "place": "Scunthorpe, Lincolnshire",
+      "url": "https://curlysathletes.co.uk/the-hedgehog-half",
+      "bestSeries": {
+        "slug": "the-hedgehog-half",
+        "name": "Hedgehog Half Marathon",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "the-hedgehog-half",
+        "name": "Hedgehog Half Marathon",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Wirral 10K",
+      "place": "New Brighton, Merseyside",
+      "url": "https://www.btrliverpool.com/",
+      "bestSeries": {
+        "slug": "wirral-10k",
+        "name": "BTR Wirral 10K",
+        "score": 0.903
+      },
+      "bestSameDate": {
+        "slug": "wirral-10k",
+        "name": "BTR Wirral 10K",
+        "score": 0.903
+      }
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Tiptree 10 mile",
+      "place": "COLCHESTER, Essex",
+      "url": "https://www.tiptreeroadrunners.com/tiptree-10/",
+      "bestSeries": {
+        "slug": "tiptree-10",
+        "name": "Tiptree 10",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "tiptree-10",
+        "name": "Tiptree 10",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-10-11",
+      "name": "Capel 5 Mile",
+      "place": "IPSWICH, Suffolk",
+      "url": "https://www.capelcheetahs.co.uk/capel-5",
+      "bestSeries": {
+        "slug": "capel-5-mile-race",
+        "name": "Capel 5 Mile Race",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "capel-5-mile-race",
+        "name": "Capel 5 Mile Race",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-10-17",
+      "name": "Langdale Marathon / Half Marathon",
+      "place": "Langdale, Cumbria",
+      "url": "https://www.lakelandroads.org/marathon",
+      "bestSeries": {
+        "slug": "langdale-horseshoe",
+        "name": "Langdale Horseshoe",
+        "score": 0.636
+      },
+      "bestSameDate": {
+        "slug": "amsterdam-half-marathon",
+        "name": "Amsterdam Half Marathon",
+        "score": 0.176
+      }
+    },
+    {
+      "date": "2026-10-18",
+      "name": "The Abingdon Marathon",
+      "place": "Abingdon, Oxfordshire",
+      "url": "https://www.abingdonmarathon.org.uk/",
+      "bestSeries": {
+        "slug": "abingdon-marathon",
+        "name": "Abingdon Marathon",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "abingdon-marathon",
+        "name": "Abingdon Marathon",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-10-18",
+      "name": "Yorkshire Marathon Festival",
+      "place": "York, North Yorkshire",
+      "url": "https://www.runforall.com/events/marathon/yorkshire-marathon/",
+      "bestSeries": {
+        "slug": "yorkshire-10-mile",
+        "name": "Yorkshire 10 Mile",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "yorkshire-10-mile",
+        "name": "Yorkshire 10 Mile",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-10-25",
+      "name": "RunThrough Maidenhead Half Marathon 2026",
+      "place": "MAIDENHEAD, Berkshire",
+      "url": "https://www.runthrough.co.uk/event/maidenhead-half-marathon-2026",
+      "bestSeries": {
+        "slug": "maidenhead-half-marathon",
+        "name": "Maidenhead Half Marathon",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "maidenhead-half-marathon",
+        "name": "Maidenhead Half Marathon",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-10-25",
+      "name": "The Fleet 5 & 10k",
+      "place": "Fleet, Hampshire",
+      "url": "https://www.fleet10k.co.uk/",
+      "bestSeries": {
+        "slug": "fleet-10k5k-peter-driver-memorial",
+        "name": "Fleet 10K & 5K",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "fleet-10k5k-peter-driver-memorial",
+        "name": "Fleet 10K & 5K",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-10-25",
+      "name": "RunThrough Regents park series 2",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "regents-park-5k-10k-august",
+        "name": "Regent's Park 5K & 10K",
+        "score": 0.82
+      },
+      "bestSameDate": {
+        "slug": "the-one-in-the-park-greenwich-park-10k-5k",
+        "name": "The One In The Park Greenwich",
+        "score": 0.556
+      }
+    },
+    {
+      "date": "2026-10-28",
+      "name": "RunThrough Olympic North Park CTM/CTS",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "runthrough-olympic-park-5k-10k-september",
+        "name": "Queen Elizabeth Olympic Park 5K & 10K",
+        "score": 0.587
+      },
+      "bestSameDate": {
+        "slug": "chase-the-moon-olympic-park-5k-10k-october",
+        "name": "Chase The Moon Olympic Park 5K & 10K",
+        "score": 0.43
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "name": "RunThrough Hertfordshire Half Marathon & 10k",
+      "place": "Knebworth, Hertfordshire",
+      "url": "https://www.runthrough.co.uk/events-timeline",
+      "bestSeries": {
+        "slug": "hertfordshire-half-marathon",
+        "name": "Hertfordshire Half Marathon & 10K",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "hertfordshire-half-marathon",
+        "name": "Hertfordshire Half Marathon & 10K",
+        "score": 0.92
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "name": "RunThrough Birmingham Running Festival 2026",
+      "place": "Birmingham, West Midlands",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "birmingham-running-festival-september",
+        "name": "Birmingham Running Festival",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "hertfordshire-half-marathon",
+        "name": "Hertfordshire Half Marathon & 10K",
+        "score": 0.34
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "name": "Running Grand Prix at Oulton Park 2026",
+      "place": "Tarporley, Cheshire",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "running-grand-prix-oulton-park-augut",
+        "name": "Running Grand Prix Oulton Park",
+        "score": 0.756
+      },
+      "bestSameDate": {
+        "slug": "runthrough-greenwich-park-5k-10k-november",
+        "name": "Greenwich Park 5K & 10K",
+        "score": 0.325
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "name": "Guy Fawkes 5",
+      "place": "TEWKESBURY, Gloucestershire",
+      "url": "https://www.tewkesburyrunningclub.com/",
+      "bestSeries": {
+        "slug": "guy-fawkes-10",
+        "name": "Guy Fawkes 10",
+        "score": 0.62
+      },
+      "bestSameDate": {
+        "slug": "guy-fawkes-10",
+        "name": "Guy Fawkes 10",
+        "score": 0.62
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "name": "The Deal Castle 5 Mile",
+      "place": "DEAL, East Sussex",
+      "url": "https://register.enthuse.com/ps/event/TheDealCastle5Mile2026",
+      "bestSeries": {
+        "slug": "deal-half-marathon-2027",
+        "name": "Deal Half Marathon 2027",
+        "score": 0.59
+      },
+      "bestSameDate": {
+        "slug": "striders-trail-5",
+        "name": "Striders Trail 5",
+        "score": 0.2
+      }
+    },
+    {
+      "date": "2026-11-01",
+      "name": "Centurion RC Grand Prix Series 2026-27",
+      "place": "Birmingham, United Kingdom, West Midlands",
+      "url": "https://centurionrc.org.uk/grand-prix-2026-27",
+      "bestSeries": {
+        "slug": "peterborough-5k-grand-prix-race-5",
+        "name": "Peterborough 5K Grand Prix Race 5",
+        "score": 0.523
+      },
+      "bestSameDate": {
+        "slug": "flying-fox-10",
+        "name": "Flying Fox 10",
+        "score": 0.18
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "name": "RunThrough Fulham 10k",
+      "place": "London, Greater London",
+      "url": "https://www.runthrough.co.uk/events-timeline",
+      "bestSeries": {
+        "slug": "putney-fulham-half-marathon-2027",
+        "name": "Putney & Fulham Half Marathon 2027",
+        "score": 0.643
+      },
+      "bestSameDate": {
+        "slug": "runuk-battersea-park-10k",
+        "name": "RunUK Battersea Park 10K",
+        "score": 0.3
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "name": "Gosport Half Marathon",
+      "place": "GOSPORT, Hampshire",
+      "url": "https://www.gosporthalf.org/",
+      "bestSeries": {
+        "slug": "gosport-half-marathon",
+        "name": "The Gosport Half Marathon",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "gosport-half-marathon",
+        "name": "The Gosport Half Marathon",
+        "score": 0.8
+      }
+    },
+    {
+      "date": "2026-11-22",
+      "name": "Adnams 10k",
+      "place": "Southwold, Suffolk",
+      "url": "https://adnams.co.uk/pages/adnams-10km-run",
+      "bestSeries": {
+        "slug": "rb-adnams-southwold-10k",
+        "name": "Adnams Southwold 10k 2026",
+        "score": 0.721
+      },
+      "bestSameDate": {
+        "slug": "rb-adnams-southwold-10k",
+        "name": "Adnams Southwold 10k 2026",
+        "score": 0.721
+      }
+    },
+    {
+      "date": "2026-11-22",
+      "name": "Morecambe Festival of Running",
+      "place": "Morecambe, Lancashire",
+      "url": "https://www.lancaster-race-series.co.uk/",
+      "bestSeries": {
+        "slug": "morecambe-marathon",
+        "name": "Morecambe Marathon, Half Marathon & 10K",
+        "score": 0.953
+      },
+      "bestSameDate": {
+        "slug": "hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run",
+        "name": "Hermitage of Braid and Blackford Hill 5K 2026",
+        "score": 0.29
+      }
+    },
+    {
+      "date": "2026-11-28",
+      "name": "RunThrough Regents park series 2",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "regents-park-5k-10k-august",
+        "name": "Regent's Park 5K & 10K",
+        "score": 0.82
+      },
+      "bestSameDate": {
+        "slug": "fitzmaurice-park-parkrun",
+        "name": "Fitzmaurice Park parkrun",
+        "score": 0.36
+      }
+    },
+    {
+      "date": "2026-11-29",
+      "name": "Run Northumberland Big 10 Miler 2026",
+      "place": "Newcastle upon Tyne, Northumberland",
+      "url": "https://runnation.co.uk/r/run-northumberland-big-10-miler-2026",
+      "bestSeries": {
+        "slug": "run-northumberland-castles-marathon-and-half-marathon",
+        "name": "Run Northumberland Castles Half Marathon",
+        "score": 0.647
+      },
+      "bestSameDate": {
+        "slug": "wa-stramilano-sottozero-7242231",
+        "name": "Stramilano SottoZero",
+        "score": 0.129
+      }
+    },
+    {
+      "date": "2026-11-29",
+      "name": "Doncaster City 10k",
+      "place": "Doncaster, South Yorkshire",
+      "url": "https://doncaster10k.co.uk/",
+      "bestSeries": {
+        "slug": "sheffield-city-10k",
+        "name": "Sheffield City 10K",
+        "score": 0.61
+      },
+      "bestSameDate": {
+        "slug": "ashford-district-christmas-10k",
+        "name": "Pacific Ashford 10K",
+        "score": 0.221
+      }
+    },
+    {
+      "date": "2026-11-29",
+      "name": "AVR Wiltshire Half Marathon",
+      "place": "Edington, Wiltshire",
+      "url": "https://www.avonvalleyrunners.org.uk/",
+      "bestSeries": {
+        "slug": "wiltshire-10-mile-2027",
+        "name": "Wiltshire 10 Mile 2027",
+        "score": 0.734
+      },
+      "bestSameDate": {
+        "slug": "discoveries-half-marathon",
+        "name": "Discoveries Half Marathon",
+        "score": 0.12
+      }
+    },
+    {
+      "date": "2026-12-06",
+      "name": "Carlisle Santa Dash & Fun Run",
+      "place": "Carlisle, Cumbria",
+      "url": "http://www.sportinaction.co.uk/",
+      "bestSeries": {
+        "slug": "run-carlisle-2027",
+        "name": "Run Carlisle 2027",
+        "score": 0.606
+      },
+      "bestSameDate": {
+        "slug": "santa-dash-dublin-5k-2026",
+        "name": "Santa Dash Dublin 5K 2026",
+        "score": 0.482
+      }
+    },
+    {
+      "date": "2026-12-06",
+      "name": "Chasewater Christmas Pudding Dash",
+      "place": "WALSALL, Staffordshire",
+      "url": "https://www.nice-work.org.uk/e/chasewater-christmas-pudding-dash-9239",
+      "bestSeries": {
+        "slug": "chasewater-easter-egg-10k",
+        "name": "Chasewater Easter Egg Challenge",
+        "score": 0.545
+      },
+      "bestSameDate": {
+        "slug": "edinburgh-christmas-run-5k-10k",
+        "name": "Edinburgh Christmas Running Festival 5K & 10K",
+        "score": 0.403
+      }
+    },
+    {
+      "date": "2026-12-06",
+      "name": "Maidstone Harrier's 33rd Turkey Run - 2026",
+      "place": "WEST MALLING, Kent",
+      "url": "https://englandathletics.sport80.com/public/wizard/e/30406",
+      "bestSeries": {
+        "slug": "maidstone-half-marathon",
+        "name": "Maidstone Half Marathon",
+        "score": 0.578
+      },
+      "bestSameDate": {
+        "slug": "queens-park-5k-10k-october-4ho",
+        "name": "Queen's Park 5K & 10K",
+        "score": 0.151
+      }
+    },
+    {
+      "date": "2026-12-06",
+      "name": "Centurion RC Grand Prix Series 2026-27",
+      "place": "Birmingham, United Kingdom, West Midlands",
+      "url": "https://centurionrc.org.uk/grand-prix-2026-27",
+      "bestSeries": {
+        "slug": "peterborough-5k-grand-prix-race-5",
+        "name": "Peterborough 5K Grand Prix Race 5",
+        "score": 0.523
+      },
+      "bestSameDate": {
+        "slug": "allsorts-tinkley-gate-santa-dash",
+        "name": "Allsorts Tinkley Gate Santa Dash",
+        "score": 0.217
+      }
+    },
+    {
+      "date": "2026-12-06",
+      "name": "Hoad Hill Harriers 2026 Race Events",
+      "place": "Ulverston, Cumbria",
+      "url": "https://hoadhillharriers.co.uk/",
+      "bestSeries": {
+        "slug": "hoad-hill-harriers-summer-10k",
+        "name": "Hoad Hill Harriers Summer 10K",
+        "score": 0.85
+      },
+      "bestSameDate": {
+        "slug": "queens-park-5k-10k-october-4ho",
+        "name": "Queen's Park 5K & 10K",
+        "score": 0.155
+      }
+    },
+    {
+      "date": "2026-12-09",
+      "name": "RunThrough Olympic North Park CTM/CTS",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "runthrough-olympic-park-5k-10k-september",
+        "name": "Queen Elizabeth Olympic Park 5K & 10K",
+        "score": 0.587
+      },
+      "bestSameDate": null
+    },
+    {
+      "date": "2026-12-13",
+      "name": "Run Aintree",
+      "place": "Liverpool, Merseyside",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "runthrough-aintree-may-2027",
+        "name": "Run Aintree 5K, 10K & Half Marathon — May 2027",
+        "score": 0.836
+      },
+      "bestSameDate": {
+        "slug": "run-aintree-5k-10-half-marathon-december",
+        "name": "Run Aintree Half Marathon, 10K & 5K — December",
+        "score": 0.752
+      }
+    },
+    {
+      "date": "2026-12-13",
+      "name": "1st Keyworth Scouts Turkey Trot half marathon 2026",
+      "place": "NOTTINGHAM, Nottinghamshire",
+      "url": "https://www.turkeytrot.org.uk/",
+      "bestSeries": {
+        "slug": "10-mile-turkey-trot-road-race",
+        "name": "10 Mile Turkey Trot",
+        "score": 0.416
+      },
+      "bestSameDate": {
+        "slug": "10-mile-turkey-trot-road-race",
+        "name": "10 Mile Turkey Trot",
+        "score": 0.416
+      }
+    },
+    {
+      "date": "2026-12-18",
+      "name": "Friday Night Under the Lights Race Series 26",
+      "place": "LONDON, London",
+      "url": "https://www.fridaynightunderthelights5k.co.uk/",
+      "bestSeries": {
+        "slug": "friday-night-under-the-lights-road-5k-september",
+        "name": "Friday Night Under The Lights 5K",
+        "score": 0.8
+      },
+      "bestSameDate": null
+    },
+    {
+      "date": "2026-12-19",
+      "name": "Media City Series",
+      "place": "Salford Quays, Greater Manchester",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "media-city-half-marathon-february",
+        "name": "Media City Half Marathon",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "great-yarmouth-north-beach-parkrun",
+        "name": "Great Yarmouth North Beach parkrun",
+        "score": 0.165
+      }
+    },
+    {
+      "date": "2026-12-19",
+      "name": "RunThrough Regents park series 2",
+      "place": "London, London",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "regents-park-5k-10k-august",
+        "name": "Regent's Park 5K & 10K",
+        "score": 0.82
+      },
+      "bestSameDate": {
+        "slug": "fitzmaurice-park-parkrun",
+        "name": "Fitzmaurice Park parkrun",
+        "score": 0.36
+      }
+    },
+    {
+      "date": "2026-12-20",
+      "name": "RunThrough Birmingham Running Festival 2026",
+      "place": "Birmingham, West Midlands",
+      "url": "https://www.runthrough.co.uk/",
+      "bestSeries": {
+        "slug": "birmingham-running-festival-september",
+        "name": "Birmingham Running Festival",
+        "score": 0.92
+      },
+      "bestSameDate": {
+        "slug": "birmingham-running-festival-december",
+        "name": "Birmingham Running Festival — December",
+        "score": 0.791
+      }
+    },
+    {
+      "date": "2026-12-26",
+      "name": "Aylesbury Boxing Day 5k Road Race",
+      "place": "Aylesbury, Buckinghamshire",
+      "url": "https://www.voaac.org.uk/boxing-day-race-2/",
+      "bestSeries": {
+        "slug": "aylesbury-parkrun",
+        "name": "Aylesbury parkrun",
+        "score": 0.61
+      },
+      "bestSameDate": {
+        "slug": "boxing-day-challenge",
+        "name": "Boxing Day Challenge",
+        "score": 0.533
+      }
+    },
+    {
+      "date": "2026-12-26",
+      "name": "Chester Round the Walls Race 2026",
+      "place": "Chester, Cheshire",
+      "url": "https://wcac.niftyentries.com/Round-the-Walls-Sat-26-Dec-2026",
+      "bestSeries": {
+        "slug": "the-drop-chester",
+        "name": "The Drop Chester",
+        "score": 0.506
+      },
+      "bestSameDate": {
+        "slug": "brundall-parkrun",
+        "name": "Brundall parkrun",
+        "score": 0.112
+      }
+    },
+    {
+      "date": "2026-12-28",
+      "name": "Boxing Day 5",
+      "place": "Witham, Essex",
+      "url": "https://my.raceresult.com/417064/info",
+      "bestSeries": {
+        "slug": "boxing-day-challenge",
+        "name": "Boxing Day Challenge",
+        "score": 0.48
+      },
+      "bestSameDate": {
+        "slug": "phoenix-manchester-sip-sip-hurray",
+        "name": "Phoenix Manchester — Sip Sip Hurray",
+        "score": 0.023
+      }
+    },
+    {
+      "date": "2026-12-31",
+      "name": "ATW St Albans New Years Eve 10k",
+      "place": "St Albans, Hertfordshire",
+      "url": "https://www.atwevents.co.uk/e/atw-st-albans-new-years-eve-10k-10337",
+      "bestSeries": {
+        "slug": "atw-st-albans-easter-10k-2027",
+        "name": "ATW St Albans Easter 10K 2027",
+        "score": 0.757
+      },
+      "bestSameDate": {
+        "slug": "trails-ales-new-years-eve-fell-race",
+        "name": "Trails & Ales New Years Eve Fell Race",
+        "score": 0.36
+      }
+    },
+    {
+      "date": "2027-01-01",
+      "name": "Wymondham AC NYD 10k",
+      "place": "Wymondham, Norfolk",
+      "url": "https://totalracetiming.co.uk/race/713",
+      "bestSeries": {
+        "slug": "wymondham-20",
+        "name": "Wymondham 20",
+        "score": 0.78
+      },
+      "bestSameDate": {
+        "slug": "wymondham-nyd-10k",
+        "name": "Wymondham New Year’s Day 10K",
+        "score": 0.657
+      }
+    },
+    {
+      "date": "2027-01-03",
+      "name": "Centurion RC Grand Prix Series 2026-27",
+      "place": "Birmingham, United Kingdom, West Midlands",
+      "url": "https://centurionrc.org.uk/grand-prix-2026-27",
+      "bestSeries": {
+        "slug": "peterborough-5k-grand-prix-race-5",
+        "name": "Peterborough 5K Grand Prix Race 5",
+        "score": 0.523
+      },
+      "bestSameDate": {
+        "slug": "oundle-new-year-10k-5k-2027",
+        "name": "Oundle New Year 10K & 5K 2027",
+        "score": 0.054
+      }
+    },
+    {
+      "date": "2027-01-23",
+      "name": "Tissington Trail Half Marathon & 10k Weekend",
+      "place": "ASHBOURNE, Derbyshire",
+      "url": "https://www.nice-work.org.uk/e/tissington-trail-january-half-marathon-and-10k-weekend-13430",
+      "bestSeries": {
+        "slug": "tissington-trail-marathon",
+        "name": "Tissington Trail Marathon",
+        "score": 0.796
+      },
+      "bestSameDate": {
+        "slug": "frostbite-sir-titus-trot-2027",
+        "name": "Frostbite Sir Titus Trot 2027",
+        "score": 0.181
+      }
+    },
+    {
+      "date": "2027-01-24",
+      "name": "Tissington Trail Half Marathon & 10k Weekend",
+      "place": "ASHBOURNE, Derbyshire",
+      "url": "https://www.nice-work.org.uk/e/tissington-trail-january-half-marathon-and-10k-weekend-13430",
+      "bestSeries": {
+        "slug": "tissington-trail-marathon",
+        "name": "Tissington Trail Marathon",
+        "score": 0.796
+      },
+      "bestSameDate": {
+        "slug": "druridge-bay-beach-trail-runs",
+        "name": "Druridge Bay Beach Trail Runs",
+        "score": 0.271
+      }
+    },
+    {
+      "date": "2027-02-07",
+      "name": "Centurion RC Grand Prix Series 2026-27",
+      "place": "Birmingham, United Kingdom, West Midlands",
+      "url": "https://centurionrc.org.uk/grand-prix-2026-27",
+      "bestSeries": {
+        "slug": "peterborough-5k-grand-prix-race-5",
+        "name": "Peterborough 5K Grand Prix Race 5",
+        "score": 0.523
+      },
+      "bestSameDate": {
+        "slug": "cirencester-10k",
+        "name": "Cirencester 10K",
+        "score": 0.238
+      }
+    },
+    {
+      "date": "2027-03-07",
+      "name": "Centurion RC Grand Prix Series 2026-27",
+      "place": "Birmingham, United Kingdom, West Midlands",
+      "url": "https://centurionrc.org.uk/grand-prix-2026-27",
+      "bestSeries": {
+        "slug": "peterborough-5k-grand-prix-race-5",
+        "name": "Peterborough 5K Grand Prix Race 5",
+        "score": 0.643
+      },
+      "bestSameDate": {
+        "slug": "atlanta-marathon-weekend",
+        "name": "Atlanta Marathon Weekend",
+        "score": 0.225
+      }
+    },
+    {
+      "date": "2027-03-14",
+      "name": "Weymouth Half Marathon",
+      "place": "WEYMOUTH, Dorset",
+      "url": "https://www.justracinguk.com/",
+      "bestSeries": {
+        "slug": "weymouth-10",
+        "name": "Weymouth 10",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "run-south-london",
+        "name": "Run South London",
+        "score": 0.268
+      }
+    },
+    {
+      "date": "2027-03-14",
+      "name": "Fleet Half Marathon",
+      "place": "Fleet, Hampshire",
+      "url": "https://www.fleethalfmarathon.com/",
+      "bestSeries": {
+        "slug": "fleet-10k5k-peter-driver-memorial",
+        "name": "Fleet 10K & 5K",
+        "score": 0.8
+      },
+      "bestSameDate": {
+        "slug": "paisley-half-marathon",
+        "name": "Paisley Half Marathon",
+        "score": 0.204
+      }
+    },
+    {
+      "date": "2027-04-11",
+      "name": "Boston Running Festival",
+      "place": "Boston, Lincolnshire",
+      "url": "https://www.bostonmarathon.co.uk/",
+      "bestSeries": {
+        "slug": "baa-boston-half-marathon",
+        "name": "BAA Boston Half Marathon",
+        "score": 0.823
+      },
+      "bestSameDate": {
+        "slug": "runthrough-drayton-manor-april-2027",
+        "name": "Drayton Manor 5K & 10K — April 2027",
+        "score": 0.2
+      }
+    },
+    {
+      "date": "2027-04-11",
+      "name": "Cambridge & Cambourne 10k & Fun Run",
+      "place": "Cambourne, Cambridgeshire",
+      "url": "https://cambridgeandcoleridge.org.uk/",
+      "bestSeries": {
+        "slug": "cambridge-half-marathon-2027",
+        "name": "Cambridge Half Marathon 2027",
+        "score": 0.62
+      },
+      "bestSameDate": {
+        "slug": "high-lodge-wild-trail-runs",
+        "name": "High Lodge Wild Trail Runs",
+        "score": 0.181
+      }
+    },
+    {
+      "date": "2027-05-02",
+      "name": "MK Marathon Weekend",
+      "place": "Milton Keynes, Buckinghamshire",
+      "url": "https://mkmarathon.com/registration-info/",
+      "bestSeries": {
+        "slug": "mkm-half-marathon",
+        "name": "MK Half Marathon",
+        "score": 0.67
+      },
+      "bestSameDate": {
+        "slug": "mk-rocket-5k",
+        "name": "MK Rocket 5K",
+        "score": 0.61
+      }
+    },
+    {
+      "date": "2027-05-03",
+      "name": "MK Marathon Weekend",
+      "place": "Milton Keynes, Buckinghamshire",
+      "url": "https://mkmarathon.com/registration-info/",
+      "bestSeries": {
+        "slug": "mkm-half-marathon",
+        "name": "MK Half Marathon",
+        "score": 0.79
+      },
+      "bestSameDate": {
+        "slug": "milton-keynes-marathon",
+        "name": "MK Marathon",
+        "score": 0.79
+      }
+    }
+  ]
+}
