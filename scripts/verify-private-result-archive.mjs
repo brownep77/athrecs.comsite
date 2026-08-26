@@ -1,8 +1,33 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+import { registerHooks } from "node:module";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
+
+// The catalogue's production modules use bundler-style extensionless relative
+// imports. Node 24 strips TypeScript syntax natively, but its ESM resolver does
+// not add .ts. Keep this verifier on the real catalogue graph by resolving only
+// existing relative TypeScript modules; package and built-in resolution remain
+// untouched.
+registerHooks({
+  resolve(specifier, context, nextResolve) {
+    if (
+      context.parentURL &&
+      (specifier.startsWith("./") || specifier.startsWith("../")) &&
+      !/\.[^/]+$/.test(specifier)
+    ) {
+      const base = new URL(specifier, context.parentURL);
+      for (const candidate of [new URL(`${base.href}.ts`), new URL(`${base.href}/index.ts`)]) {
+        if (existsSync(fileURLToPath(candidate))) {
+          return { url: candidate.href, shortCircuit: true };
+        }
+      }
+    }
+    return nextResolve(specifier, context);
+  },
+});
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const [
