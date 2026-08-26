@@ -13,6 +13,11 @@ type PhotoRow = {
   updated_at: string;
 };
 
+type BlobAuthOptions = {
+  token?: string;
+  storeId?: string;
+};
+
 function json(body: unknown, status = 200): Response {
   return Response.json(body, {
     status,
@@ -23,9 +28,25 @@ function json(body: unknown, status = 200): Response {
   });
 }
 
-function blobToken(): string | null {
+function legacyBlobToken(): string | null {
   const token = process.env.BLOB_READ_WRITE_TOKEN?.trim();
   return token || null;
+}
+
+function blobStoreId(): string | null {
+  const storeId = process.env.BLOB_STORE_ID?.trim();
+  return storeId || null;
+}
+
+function blobStorageConnected(): boolean {
+  return Boolean(legacyBlobToken() || blobStoreId());
+}
+
+function blobAuthOptions(): BlobAuthOptions {
+  const token = legacyBlobToken();
+  if (token) return { token };
+  const storeId = blobStoreId();
+  return storeId ? { storeId } : {};
 }
 
 function mutationIsSameOrigin(request: Request): boolean {
@@ -90,13 +111,17 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
   if (!userId) return json({ ok: false, error: "Sign in to manage your profile photo" }, 401);
 
   if (request.method === "GET") {
-    const token = blobToken();
-    if (!token) return json({ ok: false, error: "Profile photo storage is not connected" }, 503);
+    if (!blobStorageConnected()) {
+      return json({ ok: false, error: "Profile photo storage is not connected" }, 503);
+    }
     const photo = await currentPhoto(userId);
     if (!photo) return new Response("Not found", { status: 404 });
 
     const { get } = await import("@vercel/blob");
-    const result = await get(photo.blob_pathname, { access: "private", token });
+    const result = await get(photo.blob_pathname, {
+      access: "private",
+      ...blobAuthOptions(),
+    });
     if (!result || result.statusCode !== 200) return new Response("Not found", { status: 404 });
 
     return new Response(result.stream, {
@@ -119,8 +144,7 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
     return json({ ok: false, error: "Invalid request origin" }, 403);
   }
 
-  const token = blobToken();
-  if (!token) {
+  if (!blobStorageConnected()) {
     return json(
       {
         ok: false,
@@ -135,12 +159,13 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
   const sql = await getSql();
   const previous = await currentPhoto(userId);
   const { del, put } = await import("@vercel/blob");
+  const authOptions = blobAuthOptions();
 
   if (request.method === "DELETE") {
     await sql`delete from athlete_profile_photos where user_id = ${userId}`;
     if (previous) {
       try {
-        await del(previous.blob_pathname, { token });
+        await del(previous.blob_pathname, authOptions);
       } catch (error) {
         console.warn("[profile-photo] private blob cleanup failed after account deletion", error);
       }
@@ -172,7 +197,7 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
     const uploaded = await put(pathname, file, {
       access: "private",
       addRandomSuffix: false,
-      token,
+      ...authOptions,
     });
     uploadedPathname = uploaded.pathname;
     const rows = await sql<{ updated_at: string }>`
@@ -197,7 +222,7 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
 
     if (previous && previous.blob_pathname !== uploaded.pathname) {
       try {
-        await del(previous.blob_pathname, { token });
+        await del(previous.blob_pathname, authOptions);
       } catch (error) {
         console.warn("[profile-photo] old private blob cleanup failed", error);
       }
@@ -211,7 +236,7 @@ export async function handleAthleteProfilePhotoRequest(request: Request): Promis
   } catch (error) {
     if (uploadedPathname) {
       try {
-        await del(uploadedPathname, { token });
+        await del(uploadedPathname, authOptions);
       } catch {
         // Preserve the original failure. Unreferenced private blobs can be cleaned separately.
       }
