@@ -60,6 +60,12 @@ export const editionReplacements = [
   ...ukHalfMarathonEditionReplacements,
   ...ukTenKEditionReplacements,
   ...verifiedFixtureEditionReplacements,
+  {
+    seriesSlug: "vjosa-wild-river-ultra-trail",
+    distance: "100K",
+    fromDate: "2026-10-24",
+    toDate: "2026-10-25",
+  },
 ];
 
 /** Verified edition corrections across every entry-options research pass. */

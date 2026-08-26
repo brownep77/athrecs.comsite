@@ -128,6 +128,15 @@ const catalogueSource = await readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
   "utf8",
 );
+const entryOptionsSource = await readFile(
+  new URL("../src/data/entry-options.ts", import.meta.url),
+  "utf8",
+);
+assert.match(
+  entryOptionsSource,
+  /seriesSlug: "vjosa-wild-river-ultra-trail",[\s\S]*?distance: "100K",[\s\S]*?fromDate: "2026-10-24",[\s\S]*?toDate: "2026-10-25"/,
+  "The persistent catalogue does not migrate the superseded Vjosa date",
+);
 assert(
   catalogueSource.includes("const key = edition.publishAllDistances"),
   "Catalogue edition merging is not distance-aware",
