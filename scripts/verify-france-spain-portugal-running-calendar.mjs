@@ -13,9 +13,9 @@ const CALENDAR_START = "2026-01-01";
 const HORIZON = "2027-12-31";
 
 const expectedCountryCounts = {
-  France: { iso: "FR", flag: "🇫🇷", series: 17, rows: 45, dates: 23 },
-  Spain: { iso: "ES", flag: "🇪🇸", series: 55, rows: 65, dates: 55 },
-  Portugal: { iso: "PT", flag: "🇵🇹", series: 43, rows: 53, dates: 46 },
+  France: { iso: "FR", flag: "🇫🇷", series: 25, rows: 71, dates: 34 },
+  Spain: { iso: "ES", flag: "🇪🇸", series: 63, rows: 82, dates: 67 },
+  Portugal: { iso: "PT", flag: "🇵🇹", series: 53, rows: 69, dates: 56 },
 };
 
 const seriesBySlug = new Map(franceSpainPortugalRaceSeries.map((series) => [series.slug, series]));
@@ -24,8 +24,8 @@ assert.equal(
   franceSpainPortugalRaceSeries.length,
   "Duplicate event-series slug",
 );
-assert.equal(franceSpainPortugalRaceSeries.length, 115, "Unexpected event-series count");
-assert.equal(franceSpainPortugalRaceEditions.length, 163, "Unexpected advertised-distance count");
+assert.equal(franceSpainPortugalRaceSeries.length, 141, "Unexpected event-series count");
+assert.equal(franceSpainPortugalRaceEditions.length, 222, "Unexpected advertised-distance count");
 
 const editionKeys = new Set();
 for (const edition of franceSpainPortugalRaceEditions) {
@@ -45,8 +45,8 @@ for (const edition of franceSpainPortugalRaceEditions) {
     assert.equal(edition.status, "Finished", `Past fixture is not finished: ${editionKey}`);
     assert(!edition.entryUrl, `Past fixture exposes an entry link: ${editionKey}`);
   } else {
-    if (edition.status === "TBC") {
-      assert(!edition.entryUrl, `TBC fixture exposes an unverified entry link: ${editionKey}`);
+    if (edition.status === "TBC" || edition.status === "Closed") {
+      assert(!edition.entryUrl, `${edition.status} fixture exposes an entry link: ${editionKey}`);
       continue;
     }
     assert.equal(edition.status, "Open", `Future fixture has an invalid status: ${editionKey}`);
@@ -106,6 +106,14 @@ const requiredDistanceGroups = [
   ["funchal-marathon", "2027-01-31", ["8K", "Half"]],
   ["cascais-half-marathon", "2027-02-07", ["10K", "5K"]],
   ["lisbon-half-marathon", "2027-03-07", ["10K"]],
+  ["saintelyon", "2026-11-28", ["13K", "160K", "24K", "35K", "45K", "80K"]],
+  ["grand-raid-des-cathares", "2026-10-23", ["101K", "12K", "25K", "85K"]],
+  ["wa-le-marathon-vert-rennes-school-of-business-7236026", "2026-10-17", ["10K", "5K"]],
+  ["wa-bilbao-night-half-marathon-7236025", "2026-10-17", ["10K", "Half"]],
+  ["transgrancanaria", "2027-02-25", ["12K", "22.9K"]],
+  ["famalicao-half-marathon", "2026-10-18", ["10K", "Half"]],
+  ["ovar-half-marathon", "2026-10-04", ["10K", "Half"]],
+  ["wa-edp-porto-marathon-7236106", "2026-11-08", ["10K", "Marathon"]],
 ];
 for (const [slug, date, distances] of requiredDistanceGroups) {
   const actual = franceSpainPortugalRaceEditions
@@ -124,7 +132,7 @@ const cards = collapseSameEventDate(
     distance_code: edition.distance,
   })),
 );
-assert.equal(cards.length, 124, "Editions do not collapse to one card per race date");
+assert.equal(cards.length, 157, "Editions do not collapse to one card per race date");
 
 const registry = await readFile(
   new URL("../docs/source-registry/fixture-result-sources.csv", import.meta.url),
@@ -159,6 +167,9 @@ process.stdout.write(
       ).length,
       provisional_entry_status_rows: franceSpainPortugalRaceEditions.filter(
         (edition) => edition.status === "TBC",
+      ).length,
+      closed_entry_status_rows: franceSpainPortugalRaceEditions.filter(
+        (edition) => edition.status === "Closed",
       ).length,
       countries: expectedCountryCounts,
       copied_ffa_rows: 0,

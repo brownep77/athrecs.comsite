@@ -154,6 +154,20 @@ export const verifiedFixtureEditionReplacements: VerifiedEditionReplacement[] = 
 ];
 
 export const verifiedFixtureEditionOverrides: Record<string, Partial<Edition>> = {
+  "wa-le-marathon-vert-rennes-school-of-business-7236026|2026-10-18|Other": {
+    distance: "Marathon",
+    distanceKm: 42.195,
+    source: "https://www.lemarathonvert.org/le-marathon.php",
+    notes: "The organiser identifies this World Athletics fixture as the 42.195K marathon.",
+  },
+  "wa-bilbao-night-half-marathon-7236025|2026-10-17|Other": {
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Closed",
+    entryUrl: undefined,
+    source: "https://www.bilbaonightrun.com/en-gb/reglamento",
+    notes: "The organiser identifies this World Athletics fixture as the certified half marathon.",
+  },
   "isle-of-wight-fell-series-sunday|2026-09-12|Other": {
     date: "2026-09-13",
     distanceKm: 21,
