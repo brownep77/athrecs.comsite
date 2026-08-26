@@ -152,9 +152,15 @@ const resultRowKey = (
   result: Pick<ResultRow, "event_slug" | "event_date" | "distance_code" | "athlete_slug">,
 ) => `${result.event_slug}|${result.event_date}|${result.distance_code}|${result.athlete_slug}`;
 
-const resultSeedByKey = new Map(resultSeeds.map((result) => [resultKey(result), result]));
-const athleteSeedBySlug = new Map(athleteSeeds.map((athlete) => [athlete.slug, athlete]));
-const editionSeedByKey = new Map(editionSeeds.map((edition) => [editionSeedKey(edition), edition]));
+const resultSeedByKey = new Map<string, ResultSeed>(
+  resultSeeds.map((result) => [resultKey(result), result]),
+);
+const athleteSeedBySlug = new Map<string, AthleteSeed>(
+  athleteSeeds.map((athlete) => [athlete.slug, athlete]),
+);
+const editionSeedByKey = new Map<string, Edition>(
+  editionSeeds.map((edition) => [editionSeedKey(edition), edition]),
+);
 const seriesSeedBySlug = new Map(seriesList.map((series) => [series.slug, series]));
 const targetAthleteSlugs = new Set(resultSeeds.map((result) => result.athleteSlug));
 const targetEditionKeys = new Set(resultSeeds.map(targetEditionKey));
@@ -655,10 +661,12 @@ export async function publishRecoverableResultReconciliation(input: {
     const clubIdBySlug = new Map(
       beforeInspection.snapshot.clubs.map((club) => [club.slug, club.id]),
     );
-    const missingAthletes = [...beforeInspection.athleteStates]
-      .filter(([, state]) => state === "recoverable")
-      .map(([slug]) => athleteSeedBySlug.get(slug))
-      .filter((athlete): athlete is AthleteSeed => Boolean(athlete));
+    const missingAthletes: AthleteSeed[] = [];
+    for (const [slug, state] of beforeInspection.athleteStates) {
+      if (state !== "recoverable") continue;
+      const athlete = athleteSeedBySlug.get(slug);
+      if (athlete) missingAthletes.push(athlete);
+    }
     const athleteRows = missingAthletes
       .map((athlete) => {
         const clubId = clubIdBySlug.get(athlete.club_slug);
@@ -746,10 +754,12 @@ export async function publishRecoverableResultReconciliation(input: {
     const editionByKey = new Map(
       beforeInspection.snapshot.editions.map((edition) => [editionRowKey(edition), edition]),
     );
-    const recoverableResults = [...beforeInspection.resultStates]
-      .filter(([, state]) => state === "recoverable")
-      .map(([key]) => resultSeedByKey.get(key))
-      .filter((result): result is ResultSeed => Boolean(result));
+    const recoverableResults: ResultSeed[] = [];
+    for (const [key, state] of beforeInspection.resultStates) {
+      if (state !== "recoverable") continue;
+      const result = resultSeedByKey.get(key);
+      if (result) recoverableResults.push(result);
+    }
     const rows = recoverableResults
       .map((result) => {
         const edition = editionByKey.get(targetEditionKey(result));
@@ -871,9 +881,10 @@ export async function publishRecoverableResultReconciliation(input: {
       results: insertedResults.length,
     };
     const blockingConflicts = afterInspection.conflicts.filter((conflict) => conflict.blocksRestore);
-    const runStatus = after.missing.results === 0 && blockingConflicts.length === 0
-      ? "completed"
-      : "completed_with_errors";
+    const runStatus =
+      after.missing.results === 0 && blockingConflicts.length === 0
+        ? "completed"
+        : "completed_with_errors";
     await tx`
       update result_ingestion_runs set
         status = ${runStatus},
