@@ -89,7 +89,7 @@ const seedSource = await readFile(
   "utf8",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-england-athletics-calendar-v249"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-france-spain-portugal-calendar-v250"'),
   "The production catalogue seed version was not advanced",
 );
 
