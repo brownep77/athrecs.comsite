@@ -9,6 +9,7 @@ const privateProfileRoute = await readFile(
   resolve(root, "src/routes/my-athlete-profile.tsx"),
   "utf8",
 );
+const routeTree = await readFile(resolve(root, "src/routeTree.gen.ts"), "utf8");
 const accountApi = await readFile(
   resolve(root, "src/lib/athrecs/athlete-account-api.ts"),
   "utf8",
@@ -37,6 +38,12 @@ assert.match(privateProfileRoute, /Personal bests/);
 assert.match(privateProfileRoute, /Only you and authorised ATHRECS staff can view this profile/);
 assert.match(privateProfileRoute, /noindex, nofollow, noarchive/);
 assert.match(accountApi, /middleware\(\[authMiddleware\]\)/);
+
+assert.match(routeTree, /MyAthleteProfileRouteImport/);
+assert.match(routeTree, /id: '\/my-athlete-profile'/);
+assert.match(routeTree, /'\/my-athlete-profile': typeof MyAthleteProfileRoute/);
+assert.match(routeTree, /preLoaderRoute: typeof MyAthleteProfileRouteImport/);
+assert.match(routeTree, /MyAthleteProfileRoute: MyAthleteProfileRoute/);
 
 const privateProfileHeaders = vercelConfig.headers.find(
   (entry) => entry.source === "/my-athlete-profile",
