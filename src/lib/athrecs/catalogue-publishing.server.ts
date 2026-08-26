@@ -20,6 +20,9 @@ const SPORTS = new Set([
   "Aquabike",
   "Rowing",
   "OCR",
+  "Adventure Racing",
+  "Functional Fitness",
+  "Walking",
 ]);
 
 const EDITION_STATUSES = new Set(["Open", "ClosingSoon", "Closed", "Finished", "TBC"]);

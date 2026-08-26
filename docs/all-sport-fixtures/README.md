@@ -1,6 +1,6 @@
 # All-sport fixture checkpoints
 
-This folder records small, reversible fixture additions for Athrecs' 11 supported sport categories.
+This folder records the 2026-08-19 fixture checkpoint for Athrecs' original 11 sport categories. Adventure Racing, Functional Fitness and Walking were added to the catalogue taxonomy later and will enter this checkpoint after the scraper supplies verified fixtures.
 
 ## 2026-08-19 checkpoint
 

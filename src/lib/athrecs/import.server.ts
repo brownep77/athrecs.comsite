@@ -21,6 +21,9 @@ const SPORTS: Sport[] = [
   "Aquabike",
   "Rowing",
   "OCR",
+  "Adventure Racing",
+  "Functional Fitness",
+  "Walking",
 ];
 
 const STATUSES: EntryStatus[] = ["Open", "ClosingSoon", "Closed", "Finished", "TBC"];
