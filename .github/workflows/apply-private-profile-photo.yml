@@ -39,7 +39,9 @@ jobs:
           node-version: 24
           cache: npm
       - name: Apply profile photo integration
-        run: node scripts/apply-private-profile-photo.mjs
+        run: |
+          node scripts/apply-private-profile-photo.mjs
+          node scripts/apply-private-profile-photo-fixes.mjs
       - name: Install private Blob SDK
         run: npm install @vercel/blob@latest --save --no-audit --no-fund
       - name: Generate the TanStack route tree
@@ -49,6 +51,7 @@ jobs:
       - name: Remove one-off integration helpers
         run: |
           rm scripts/apply-private-profile-photo.mjs
+          rm scripts/apply-private-profile-photo-fixes.mjs
           rm .github/workflows/apply-private-profile-photo.yml
       - name: Commit verified feature
         run: |
