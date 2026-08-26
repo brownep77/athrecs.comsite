@@ -5,16 +5,29 @@ import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const [migration, publicApi, claimsApi, archiveApi, importer, archiveRoute, staffShell] =
-  await Promise.all([
-    readFile(resolve(root, "migrations/0019_private_result_archive.sql"), "utf8"),
-    readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8"),
-    readFile(resolve(root, "src/lib/athrecs/result-claims-api.ts"), "utf8"),
-    readFile(resolve(root, "src/lib/athrecs/result-ingestion-api.ts"), "utf8"),
-    readFile(resolve(root, "src/lib/athrecs/results-import.server.ts"), "utf8"),
-    readFile(resolve(root, "src/routes/admin/result-archive.tsx"), "utf8"),
-    readFile(resolve(root, "src/components/staff/StaffMicrositeShell.tsx"), "utf8"),
-  ]);
+const [
+  migration,
+  publicApi,
+  claimsApi,
+  archiveApi,
+  importer,
+  archiveRoute,
+  staffShell,
+  reconciliationServer,
+  reconciliationApi,
+  reconciliationPanel,
+] = await Promise.all([
+  readFile(resolve(root, "migrations/0019_private_result_archive.sql"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/result-claims-api.ts"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/result-ingestion-api.ts"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/results-import.server.ts"), "utf8"),
+  readFile(resolve(root, "src/routes/admin/result-archive.tsx"), "utf8"),
+  readFile(resolve(root, "src/components/staff/StaffMicrositeShell.tsx"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/result-reconciliation.server.ts"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/result-reconciliation-api.ts"), "utf8"),
+  readFile(resolve(root, "src/components/staff/ResultReconciliationPanel.tsx"), "utf8"),
+]);
 
 assert.match(migration, /create table if not exists result_ingestion_runs/);
 assert.match(migration, /create table if not exists result_ingestion_editions/);
@@ -37,8 +50,33 @@ assert.match(importer, /export function parseResultsCsv/);
 assert.match(importer, /options\.sourceContent/);
 assert.match(importer, /result_visibility/);
 assert.match(archiveRoute, /Event-level tracking only/);
+assert.match(archiveRoute, /<ResultReconciliationPanel\s*\/>/);
 assert.doesNotMatch(archiveRoute, /athleteName|finishTime/);
 assert.match(staffShell, /\/admin\/result-archive/);
+
+assert.match(reconciliationServer, /previewRecoverableResultReconciliation/);
+assert.match(reconciliationServer, /publishRecoverableResultReconciliation/);
+assert.match(reconciliationServer, /on conflict do nothing/);
+assert.match(
+  reconciliationServer,
+  /profileType === "Public figure" \? "public_figure" : "private"/,
+);
+assert.match(reconciliationServer, /profileType === "Public figure" \? "public" : "private"/);
+assert.match(reconciliationServer, /result_ingestion_runs/);
+assert.match(reconciliationServer, /result_ingestion_editions/);
+assert.doesNotMatch(
+  reconciliationServer,
+  /delete\s+from\s+(?:clubs|events|editions|athletes|results)\b/i,
+);
+assert.doesNotMatch(
+  reconciliationServer,
+  /update\s+(?:clubs|events|editions|athletes|results)\b/i,
+);
+assert.doesNotMatch(reconciliationServer, /on\s+conflict[\s\S]{0,100}do\s+update/i);
+assert.match(reconciliationApi, /middleware\(\[staffMiddleware\]\)/);
+assert.match(reconciliationApi, /RESTORE CLAIMABLE RESULTS/);
+assert.match(reconciliationPanel, /Existing records are never/);
+assert.match(reconciliationPanel, /data\.persistent/);
 
 const db = new PGlite();
 await db.waitReady;
@@ -121,5 +159,34 @@ assert.deepEqual(coverage.rows[0], {
   rows_imported: 2,
 });
 
+const [{ athletes, editions, results, seriesList }, { catalogueMetadata }] = await Promise.all([
+  import("../src/data/catalogue.ts"),
+  import("../src/data/catalogue-metadata.ts"),
+]);
+const resultKeys = results.map(
+  (result) => `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
+);
+assert.equal(new Set(resultKeys).size, resultKeys.length, "Recoverable result keys must be unique");
+assert.equal(
+  results.length,
+  catalogueMetadata.merged_counts.results,
+  "Reconciliation must cover every retained catalogue result",
+);
+const athleteSlugs = new Set(athletes.map((athlete) => athlete.slug));
+const eventSlugs = new Set(seriesList.map((series) => series.slug));
+const editionKeys = new Set(
+  editions.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
+);
+for (const result of results) {
+  assert(athleteSlugs.has(result.athleteSlug), `Missing athlete seed for ${result.athleteSlug}`);
+  assert(eventSlugs.has(result.eventSlug), `Missing event seed for ${result.eventSlug}`);
+  assert(
+    editionKeys.has(`${result.eventSlug}|${result.date}|${result.distance}`),
+    `Missing edition seed for ${result.eventSlug} ${result.date} ${result.distance}`,
+  );
+}
+
 await db.close();
-console.log("Private result archive verification passed");
+console.log(
+  `Private result archive verification passed for ${results.length.toLocaleString("en-GB")} recoverable results`,
+);
