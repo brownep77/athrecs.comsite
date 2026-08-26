@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
   ArrowRight,
@@ -15,6 +15,7 @@ import {
   Trophy,
   UserRound,
 } from "lucide-react";
+import { ProfilePhotoUploader } from "@/components/athletes/ProfilePhotoUploader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { openAthleteAuth } from "@/lib/auth/client";
@@ -43,6 +44,7 @@ type ClaimedResult = AthleteAccountData["claimedResults"][number];
 
 function MyAthleteProfilePage() {
   const { user, isPending: sessionPending } = useCurrentUserState();
+  const queryClient = useQueryClient();
   const account = useQuery({
     queryKey: ["my-athlete-account"],
     queryFn: () => getMyAthleteAccount(),
@@ -114,13 +116,27 @@ function MyAthleteProfilePage() {
   const olderResults = results.slice(12);
   const eventCount = new Set(results.map((result) => result.eventSlug)).size;
   const distanceCount = new Set(results.map((result) => result.distanceCode)).size;
+  const primarySport = data.sports.find((sport) => sport.isPrimary) ?? data.sports[0];
+  const location = [data.city, data.region, data.country].filter(Boolean).join(", ");
 
   return (
     <div className="mx-auto max-w-6xl space-y-6">
-      <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
-        <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-800 px-5 py-7 text-white md:px-8">
-          <div className="flex flex-wrap items-start justify-between gap-5">
-            <div>
+      <section className="relative overflow-hidden rounded-3xl border border-border bg-slate-950 shadow-card">
+        <div className="absolute -right-20 -top-24 size-72 rounded-full bg-cyan-400/10 blur-3xl" />
+        <div className="absolute -bottom-28 left-1/3 size-72 rounded-full bg-blue-500/10 blur-3xl" />
+        <div className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-5 py-7 text-white md:px-8 md:py-9">
+          <div className="grid gap-6 md:grid-cols-[auto_minmax(0,1fr)] md:items-center">
+            <ProfilePhotoUploader
+              displayName={profileName}
+              photoUrl={data.profilePhotoUrl}
+              fallbackImageUrl={data.authImageUrl}
+              uploadAvailable={data.profilePhotoUploadAvailable}
+              onChanged={() => {
+                void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
+              }}
+            />
+
+            <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
                 <Badge className="border-cyan-300/30 bg-cyan-300/10 text-cyan-100">
                   <LockKeyhole className="mr-1 size-3.5" aria-hidden="true" />
@@ -133,32 +149,53 @@ function MyAthleteProfilePage() {
                   </Badge>
                 ) : null}
               </div>
-              <h1 className="mt-3 font-display text-3xl font-semibold md:text-4xl">
+
+              <h1 className="mt-3 truncate font-display text-3xl font-semibold md:text-5xl">
                 {profileName}
               </h1>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
-                Your claimed identities, results and personal bests in one clean private view.
-                Ordinary athlete profiles are not visible to the public.
+
+              <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-200">
+                {primarySport ? (
+                  <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5">
+                    {primarySport.sportCode}
+                  </span>
+                ) : null}
+                {data.clubOrTeam ? (
+                  <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5">
+                    {data.clubOrTeam}
+                  </span>
+                ) : null}
+                {location ? (
+                  <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5">
+                    {location}
+                  </span>
+                ) : null}
+              </div>
+
+              <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
+                A private record of your claimed identities, performances and personal bests. Your
+                photograph and ordinary athlete profile are not published publicly.
               </p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              <Button asChild variant="secondary">
-                <Link to="/claim-results" search={{ resultId: undefined }}>
-                  Claim another result
-                </Link>
-              </Button>
-              <Button asChild variant="secondary">
-                <Link to="/athlete-account">
-                  <UserRound className="size-4" aria-hidden="true" />
-                  Edit Athlete Account
-                </Link>
-              </Button>
+
+              <div className="mt-5 flex flex-wrap gap-2">
+                <Button asChild variant="secondary">
+                  <Link to="/claim-results" search={{ resultId: undefined }}>
+                    Claim another result
+                  </Link>
+                </Button>
+                <Button asChild variant="secondary">
+                  <Link to="/athlete-account">
+                    <UserRound className="size-4" aria-hidden="true" />
+                    Edit Athlete Account
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="relative z-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 md:-mt-10 md:px-6">
         <StatCard
           icon={Trophy}
           label="Claimed results"
