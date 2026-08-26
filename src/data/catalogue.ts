@@ -279,6 +279,7 @@ const mergedEditions = [
 
 export const editions: Edition[] = (() => {
   const seen = new Set<string>();
+  const seenExact = new Set<string>();
   const unique: Edition[] = [];
   for (const sourceEdition of mergedEditions) {
     const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
@@ -286,10 +287,12 @@ export const editions: Edition[] = (() => {
       ...sourceEdition,
       ...editionOverrides[sourceKey],
     };
+    const exactKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
     const key = edition.publishAllDistances
-      ? `${edition.seriesSlug}|${edition.date}|${edition.distance}`
+      ? exactKey
       : `${edition.seriesSlug}|${edition.date}`;
-    if (seen.has(key)) continue;
+    if (seenExact.has(exactKey) || seen.has(key)) continue;
+    seenExact.add(exactKey);
     seen.add(key);
     const matchingEntryOptions =
       entryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];
