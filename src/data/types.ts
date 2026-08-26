@@ -11,7 +11,10 @@ export type Sport =
   | "Aquabike"
   | "Rowing"
   | "OCR"
-  | "Athletics";
+  | "Athletics"
+  | "Adventure Racing"
+  | "Functional Fitness"
+  | "Walking";
 
 export type Series = {
   /** Stable ID from the fuller production catalogue, when one exists. */

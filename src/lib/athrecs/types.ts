@@ -9,7 +9,10 @@ export type Sport =
   | "Aquabike"
   | "Rowing"
   | "OCR"
-  | "Athletics";
+  | "Athletics"
+  | "Adventure Racing"
+  | "Functional Fitness"
+  | "Walking";
 
 export type EntryStatus = "Open" | "ClosingSoon" | "Closed" | "Finished" | "TBC";
 
