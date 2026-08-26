@@ -39,6 +39,8 @@ export type ResultClaimListItem = ClaimableResult & {
   verificationMethod: ResultClaimVerificationMethod;
   evidenceText: string;
   evidenceUrl: string | null;
+  evidenceUrl2: string | null;
+  evidenceUrl3: string | null;
   conflictReason: string | null;
   staffNote: string | null;
   submittedAt: string;
@@ -54,6 +56,8 @@ type ClaimRow = {
   verification_method: ResultClaimVerificationMethod;
   evidence_text: string;
   evidence_url: string | null;
+  evidence_url_2: string | null;
+  evidence_url_3: string | null;
   conflict_reason: string | null;
   staff_note: string | null;
   submitted_at: string;
@@ -116,18 +120,6 @@ function shortText(value: unknown, max: number, label: string): string {
   return text;
 }
 
-function verificationMethod(value: unknown): ResultClaimVerificationMethod {
-  if (
-    value === "bib" ||
-    value === "official_email" ||
-    value === "club_confirmation" ||
-    value === "other"
-  ) {
-    return value;
-  }
-  throw new Error("Choose how ATHRECS can verify this claim");
-}
-
 function reviewAction(value: unknown): "approve" | "reject" | "needs_info" {
   if (value === "approve" || value === "reject" || value === "needs_info") return value;
   throw new Error("Review action is invalid");
@@ -154,6 +146,8 @@ function mapClaim(row: ClaimRow): ResultClaimListItem {
     verificationMethod: row.verification_method,
     evidenceText: row.evidence_text,
     evidenceUrl: row.evidence_url,
+    evidenceUrl2: row.evidence_url_2,
+    evidenceUrl3: row.evidence_url_3,
     conflictReason: row.conflict_reason,
     staffNote: row.staff_note,
     submittedAt: row.submitted_at,
@@ -171,6 +165,8 @@ const CLAIM_SELECT = `
     claim.verification_method,
     claim.evidence_text,
     claim.evidence_url,
+    claim.evidence_url_2,
+    claim.evidence_url_3,
     claim.conflict_reason,
     claim.staff_note,
     claim.submitted_at::text as submitted_at,
@@ -373,15 +369,17 @@ export const submitResultClaim = createServerFn({ method: "POST" })
   .validator(
     (input: {
       resultId: number;
-      verificationMethod: ResultClaimVerificationMethod;
-      evidenceText?: string;
       evidenceUrl?: string;
+      evidenceUrl2?: string;
+      evidenceUrl3?: string;
       declarationAccepted: boolean;
     }) => ({
       resultId: positiveInteger(input?.resultId, "Result"),
-      verificationMethod: verificationMethod(input?.verificationMethod),
-      evidenceText: shortText(input?.evidenceText, 1000, "Verification detail"),
+      verificationMethod: "other" as ResultClaimVerificationMethod,
+      evidenceText: "",
       evidenceUrl: optionalHttpsUrl(input?.evidenceUrl),
+      evidenceUrl2: optionalHttpsUrl(input?.evidenceUrl2),
+      evidenceUrl3: optionalHttpsUrl(input?.evidenceUrl3),
       declarationAccepted: input?.declarationAccepted === true,
     }),
   )
@@ -501,6 +499,8 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             verification_method = ${data.verificationMethod},
             evidence_text = ${data.evidenceText},
             evidence_url = ${data.evidenceUrl},
+            evidence_url_2 = ${data.evidenceUrl2},
+            evidence_url_3 = ${data.evidenceUrl3},
             declaration_accepted = true,
             conflict_reason = ${conflictReason},
             staff_note = ${automaticNote},
@@ -517,11 +517,12 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         const inserted = await tx<{ id: number }>`
           insert into result_claims (
             result_id, athlete_id, claimant_user_id, claimant_email, status,
-            verification_method, evidence_text, evidence_url,
+            verification_method, evidence_text, evidence_url, evidence_url_2, evidence_url_3,
             declaration_accepted, conflict_reason, staff_note, reviewed_at
           ) values (
             ${result.result_id}, ${result.athlete_id}, ${context.userId}, ${claimantEmail},
-            ${nextStatus}, ${data.verificationMethod}, ${data.evidenceText}, ${data.evidenceUrl},
+            ${nextStatus}, ${data.verificationMethod}, ${data.evidenceText},
+            ${data.evidenceUrl}, ${data.evidenceUrl2}, ${data.evidenceUrl3},
             true, ${conflictReason}, ${automaticNote},
             case when ${nextStatus} = 'approved' then now() else null end
           )

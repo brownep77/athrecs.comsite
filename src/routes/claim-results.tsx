@@ -21,7 +21,6 @@ import {
   submitResultClaim,
   withdrawResultClaim,
   type ResultClaimStatus,
-  type ResultClaimVerificationMethod,
 } from "@/lib/athrecs/result-claims-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 
@@ -46,13 +45,6 @@ export const Route = createFileRoute("/claim-results")({
   component: ClaimResultsPage,
 });
 
-const METHOD_LABELS: Record<ResultClaimVerificationMethod, string> = {
-  bib: "Bib number or race details",
-  official_email: "Race-entry email",
-  club_confirmation: "Running club confirmation",
-  other: "Other evidence",
-};
-
 const STATUS_LABELS: Record<ResultClaimStatus, string> = {
   pending: "Conflict review",
   needs_info: "More information needed",
@@ -72,9 +64,9 @@ function ClaimResultsPage() {
   const { resultId } = Route.useSearch();
   const { user, isPending: sessionPending } = useCurrentUserState();
   const queryClient = useQueryClient();
-  const [method, setMethod] = useState<ResultClaimVerificationMethod>("bib");
-  const [evidenceText, setEvidenceText] = useState("");
   const [evidenceUrl, setEvidenceUrl] = useState("");
+  const [evidenceUrl2, setEvidenceUrl2] = useState("");
+  const [evidenceUrl3, setEvidenceUrl3] = useState("");
   const [declaration, setDeclaration] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
@@ -96,9 +88,9 @@ function ClaimResultsPage() {
 
   useEffect(() => {
     if (currentClaim?.status !== "needs_info") return;
-    setMethod(currentClaim.verificationMethod);
-    setEvidenceText(currentClaim.evidenceText);
     setEvidenceUrl(currentClaim.evidenceUrl ?? "");
+    setEvidenceUrl2(currentClaim.evidenceUrl2 ?? "");
+    setEvidenceUrl3(currentClaim.evidenceUrl3 ?? "");
   }, [currentClaim]);
 
   const submitClaim = useMutation({
@@ -106,9 +98,9 @@ function ClaimResultsPage() {
       submitResultClaim({
         data: {
           resultId: resultId as number,
-          verificationMethod: method,
-          evidenceText,
           evidenceUrl,
+          evidenceUrl2,
+          evidenceUrl3,
           declarationAccepted: declaration,
         },
       }),
@@ -175,7 +167,7 @@ function ClaimResultsPage() {
           <ClaimStep
             number="2"
             title="Confirm the match"
-            detail="Confirm that the selected result is yours. Supporting details are optional."
+            detail="Confirm that the selected result is yours. Evidence links are optional and never required."
           />
           <ClaimStep
             number="3"
@@ -285,8 +277,8 @@ function ClaimResultsPage() {
               <div>
                 <h3 className="font-semibold text-fg">Sign in before claiming</h3>
                 <p className="mt-1 text-sm text-muted">
-                  Use email and password, Google, or another available provider. Your evidence
-                  remains private to you and ATHRECS staff.
+                  Use email and password, Google, or another available provider. Any optional evidence
+                  links remain private to you and ATHRECS staff.
                 </p>
               </div>
               <Button type="button" onClick={startSignIn}>
@@ -333,50 +325,48 @@ function ClaimResultsPage() {
                 />
               ) : null}
 
-              <label className="block space-y-1.5 text-sm font-medium text-fg">
-                Supporting information type (optional)
-                <select
-                  value={method}
-                  onChange={(event) =>
-                    setMethod(event.target.value as ResultClaimVerificationMethod)
-                  }
-                  className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
-                >
-                  {Object.entries(METHOD_LABELS).map(([value, label]) => (
-                    <option key={value} value={value}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="block space-y-1.5 text-sm font-medium text-fg">
-                Supporting detail <span className="font-normal text-subtle">(optional)</span>
-                <textarea
-                  value={evidenceText}
-                  onChange={(event) => setEvidenceText(event.target.value)}
-                  rows={4}
-                  maxLength={1000}
-                  placeholder="For example: bib 428, club name, entry name, or a short explanation staff can check."
-                  className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
-                />
-                <span className="block text-xs font-normal text-subtle">
-                  You may add a bib number, club or entry name for the private audit trail. Do not
-                  include passwords, payment details or identity-document numbers.
-                </span>
-              </label>
-
-              <label className="block space-y-1.5 text-sm font-medium text-fg">
-                Evidence link <span className="font-normal text-subtle">(optional)</span>
-                <input
-                  type="url"
-                  inputMode="url"
-                  value={evidenceUrl}
-                  onChange={(event) => setEvidenceUrl(event.target.value)}
-                  placeholder="https://official-results.example/…"
-                  className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
-                />
-              </label>
+              <div className="space-y-3 rounded-lg border border-border bg-elevated p-4">
+                <div>
+                  <h3 className="text-sm font-semibold text-fg">Optional evidence links</h3>
+                  <p className="mt-1 text-xs text-muted">
+                    Evidence is not required to claim a result. You may add up to three HTTPS links
+                    for the private audit trail.
+                  </p>
+                </div>
+                <label className="block space-y-1.5 text-sm font-medium text-fg">
+                  Evidence link 1 <span className="font-normal text-subtle">(optional)</span>
+                  <input
+                    type="url"
+                    inputMode="url"
+                    value={evidenceUrl}
+                    onChange={(event) => setEvidenceUrl(event.target.value)}
+                    placeholder="https://official-results.example/…"
+                    className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                  />
+                </label>
+                <label className="block space-y-1.5 text-sm font-medium text-fg">
+                  Evidence link 2 <span className="font-normal text-subtle">(optional)</span>
+                  <input
+                    type="url"
+                    inputMode="url"
+                    value={evidenceUrl2}
+                    onChange={(event) => setEvidenceUrl2(event.target.value)}
+                    placeholder="https://official-results.example/…"
+                    className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                  />
+                </label>
+                <label className="block space-y-1.5 text-sm font-medium text-fg">
+                  Evidence link 3 <span className="font-normal text-subtle">(optional)</span>
+                  <input
+                    type="url"
+                    inputMode="url"
+                    value={evidenceUrl3}
+                    onChange={(event) => setEvidenceUrl3(event.target.value)}
+                    placeholder="https://official-results.example/…"
+                    className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                  />
+                </label>
+              </div>
 
               <label className="flex items-start gap-3 rounded-lg border border-border bg-elevated p-3 text-sm text-muted">
                 <input
