@@ -4,6 +4,7 @@ const CHECKED_AT = "2026-08-22";
 const PREVIOUS_CHECKED_AT = "2026-08-23";
 const PRIOR_CHECKED_AT = "2026-08-24";
 const LATEST_CHECKED_AT = "2026-08-25";
+const CURRENT_CHECKED_AT = "2026-08-26";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
@@ -22,6 +23,7 @@ type RaceSeed = {
   distances?: string[];
   organiser: string;
   url: string;
+  entryUrl?: string;
   status?: Edition["status"];
   entryStatus?: EntryOptionStatus;
   hasEntry?: boolean;
@@ -211,23 +213,6 @@ const seeds: RaceSeed[] = [
     url: "https://www.entrycentral.com/event/129228",
     priceAmount: 27,
     notes: "The direct entry page confirms a UKA-measured course, date, start time and open entry.",
-  },
-  {
-    slug: "thirsk-10-mile-road-race-2027",
-    name: "Thirsk 10 Mile Road Race 2027",
-    date: "2027-03-14",
-    distance: "10mi",
-    startTime: "10:00",
-    country: "England",
-    county: "North Yorkshire",
-    city: "Thirsk",
-    area: "Thirsk Racecourse and surrounding roads",
-    surface: "Road",
-    organiser: "Thirsk and Sowerby Harriers",
-    url: "https://tasharriers.club/thirsk10/",
-    priceAmount: 26,
-    notes:
-      "The organising club confirms the date, measured road course, start time and Racebest entry route.",
   },
   {
     slug: "nene-valley-trail-run-2027",
@@ -807,6 +792,26 @@ const seeds: RaceSeed[] = [
     notes:
       "The official organiser page confirms the half-marathon date, Sheen Gate venue, start time and open direct entry.",
   },
+  {
+    slug: "rabbit-run-wales-half-marathon-2027",
+    name: "Rabbit Run Wales Half Marathon 2027",
+    date: "2027-07-17",
+    distance: "Half",
+    country: "Wales",
+    county: "Bridgend County Borough",
+    city: "Bridgend",
+    area: "Candleston Woods and Merthyr Mawr Warren",
+    surface: "Trail",
+    distances: ["12K", "Half", "Marathon"],
+    organiser: "Run 4 Wales",
+    url: "https://www.rabbitrun.wales/enter-now/",
+    entryUrl:
+      "https://www.letsdothis.com/gb/o/154485/checkout/ticket?eventId=253026&occurrenceId=21111177514&preferred=true",
+    priceAmount: 32,
+    checkedAt: CURRENT_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the 12K, half-marathon and marathon races, 17 July 2027 date and open registration.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -818,7 +823,7 @@ function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
     {
       providerCode: `official-${seed.slug}`,
       providerName: seed.organiser,
-      entryUrl: seed.url,
+      entryUrl: seed.entryUrl ?? seed.url,
       entryType: "official",
       status: seed.entryStatus ?? (status === "Closed" ? "closed" : "open"),
       ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
@@ -858,7 +863,7 @@ export const dailyHalfTenMileEditions: Edition[] = seeds.map((seed) => {
     distance: seed.distance,
     distanceKm: seed.distance === "Half" ? 21.0975 : 16.09,
     status: seed.status ?? "Open",
-    ...(entryOptions ? { entryUrl: seed.url, entryOptions } : {}),
+    ...(entryOptions ? { entryUrl: seed.entryUrl ?? seed.url, entryOptions } : {}),
     ...(seed.startTime ? { startTime: seed.startTime } : {}),
     source: seed.url,
     notes: seed.notes,
@@ -872,6 +877,8 @@ type ExistingSeriesEditionSeed = {
   organiser: string;
   url: string;
   priceAmount?: number;
+  priceCurrency?: string;
+  checkedAt?: string;
   notes: string;
 };
 
@@ -961,6 +968,18 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The official organiser page confirms the 2027 running festival date, half-marathon distance and open entry; no distance-specific start time is asserted.",
   },
+  {
+    seriesSlug: "clontarf-half-marathon-autumn-2026",
+    date: "2027-07-03",
+    startTime: "10:00",
+    organiser: "BEAR Races / Eventmaster",
+    url: "https://eventmaster.ie/event/xZk3IPyS91",
+    priceAmount: 52,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_CHECKED_AT,
+    notes:
+      "The direct official registration page confirms the 2027 half-marathon date, start time, certified course and open entry; the established Clontarf card is reused.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -983,8 +1002,8 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
         entryType: "official",
         status: "open",
         ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
-        priceCurrency: "GBP",
-        checkedAt: LATEST_CHECKED_AT,
+        priceCurrency: seed.priceCurrency ?? "GBP",
+        checkedAt: seed.checkedAt ?? LATEST_CHECKED_AT,
         sourceUrl: seed.url,
         isVerified: true,
         isPrimary: true,
@@ -996,6 +1015,30 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
 
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
+  {
+    slug: "thirsk-10-mile-road-race-2027",
+    date: "2027-03-14",
+    country: "England",
+    reason:
+      "The direct official entry page confirms the race details but currently labels the race licence as TBC.",
+    sourceUrl: "https://racebest.com/races/r7499",
+  },
+  {
+    slug: "fastlane-summer-edition-2027",
+    date: "2027-05-16",
+    country: "Ireland",
+    reason:
+      "The direct registration page gives a consistent date and open checkout but still labels the governing status as TBA.",
+    sourceUrl: "https://eventmaster.ie/event/02wpFzqsA1",
+  },
+  {
+    slug: "tarpley-10-and-20-mile-2027",
+    date: "2027-02-28",
+    country: "England",
+    reason:
+      "The organising club confirms the date and distances, but the same page says entries open on 1 October 2026 while also displaying sold-out and waitlist states with fees TBA.",
+    sourceUrl: "https://www.pacers.org.uk/tarpley-10m-and-20m/",
+  },
   {
     slug: "chippenham-spring-10-mile-2027",
     date: "2027-03-07",
@@ -1111,6 +1154,19 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
       "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-december-2027",
     source_url:
       "https://www.runthrough.co.uk/event/running-gp-at-goodwood-motor-circuit-december-2027",
+  },
+  "clontarf-half-marathon-autumn-2026": {
+    name: "Clontarf Half Marathon",
+    area: "EastPoint Business Park, Clontarf Promenade and Bull Island",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Clontarf Half Marathon — a flat, certified coastal half marathon beside Dublin Bay.",
+    description:
+      "BEAR Races' Clontarf Half Marathon follows a measured coastal route from EastPoint Business Park along Clontarf Promenade and Bull Island; the established card carries its verified seasonal editions.",
+    organiser: "BEAR Races / Eventmaster",
+    website: "https://eventmaster.ie/event/xZk3IPyS91",
+    source_url: "https://eventmaster.ie/event/xZk3IPyS91",
+    defaultStartTime: "10:00",
   },
 };
 

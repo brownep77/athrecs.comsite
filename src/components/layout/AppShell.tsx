@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { CalendarDays, Home, List, Users, UsersRound } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
+import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import {
   COUNTRY_SITES,
@@ -144,7 +145,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <main className="min-w-0 flex-1 px-4 pb-24 pt-4 md:px-6 md:pb-10 md:pt-8">{children}</main>
+      <main className="min-w-0 flex-1 px-4 pb-24 pt-4 md:px-6 md:pb-10 md:pt-8">
+        {pathname === "/athlete-account" ? (
+          <div className="mb-6">
+            <PotentialResultMatchesPanel />
+          </div>
+        ) : null}
+        {children}
+      </main>
 
       <nav
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md md:hidden"

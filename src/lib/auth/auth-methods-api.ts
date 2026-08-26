@@ -15,15 +15,17 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
     const env = process.env;
     const authEnabled = env.VITE_AUTH_ENABLED !== "false";
     const resendApiKeyPresent = configured(env.RESEND_API_KEY);
-    const authEmailFromPresent = configured(env.AUTH_EMAIL_FROM);
+    const authEmailFromCustom = configured(env.AUTH_EMAIL_FROM);
     const emailPassword = authEnabled && emailAndPasswordEnabled;
-    const emailDelivery = emailPassword && resendApiKeyPresent && authEmailFromPresent;
+    // The sender safely defaults to accounts@athrecs.com in email.server.ts.
+    const emailDelivery = emailPassword && resendApiKeyPresent;
 
     console.info("[auth-methods]", {
       authEnabled,
       emailPasswordFeatureEnabled: emailAndPasswordEnabled,
       resendApiKeyPresent,
-      authEmailFromPresent,
+      authEmailFromCustom,
+      authEmailFromDefaulted: !authEmailFromCustom,
       emailPassword,
       emailDelivery,
       environment: env.VERCEL_ENV ?? "unknown",

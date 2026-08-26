@@ -12,10 +12,10 @@ const emailPasswordFeatureEnabled = /emailAndPasswordEnabled\s*=\s*true/.test(fe
 const vercelProduction = process.env.VERCEL_ENV === "production";
 const authEnabled = process.env.VITE_AUTH_ENABLED !== "false";
 const resendApiKeyPresent = present(process.env.RESEND_API_KEY);
-const authEmailFromPresent = present(process.env.AUTH_EMAIL_FROM);
+const authEmailFromCustom = present(process.env.AUTH_EMAIL_FROM);
 const emailPasswordAvailable = authEnabled && emailPasswordFeatureEnabled;
-const emailDeliveryAvailable =
-  emailPasswordAvailable && resendApiKeyPresent && authEmailFromPresent;
+// email.server.ts supplies ATHRECS Accounts <accounts@athrecs.com> by default.
+const emailDeliveryAvailable = emailPasswordAvailable && resendApiKeyPresent;
 
 console.log(
   "[auth-env-check]",
@@ -24,7 +24,8 @@ console.log(
     authEnabled,
     emailPasswordFeatureEnabled,
     resendApiKeyPresent,
-    authEmailFromPresent,
+    authEmailFromCustom,
+    authEmailFromDefaulted: !authEmailFromCustom,
     emailPasswordAvailable,
     emailDeliveryAvailable,
   }),
@@ -32,6 +33,6 @@ console.log(
 
 if (vercelProduction && emailPasswordAvailable && !emailDeliveryAvailable) {
   console.warn(
-    "[auth-env-check] Email/password sign-in will remain available, but email verification and password recovery are disabled until RESEND_API_KEY and AUTH_EMAIL_FROM are present.",
+    "[auth-env-check] Email/password sign-in will remain available, but email verification and password recovery are disabled until RESEND_API_KEY is present.",
   );
 }

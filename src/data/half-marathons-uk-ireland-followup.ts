@@ -462,20 +462,6 @@ const newSeriesSeeds: HalfSeed[] = [
     priceCurrency: "EUR",
   },
   {
-    slug: "great-limerick-run-2027",
-    name: "Great Limerick Run 2027",
-    date: "2027-05-02",
-    startTime: "11:00",
-    country: "Ireland",
-    county: "County Limerick",
-    city: "Limerick",
-    area: "Limerick city",
-    surface: "Road",
-    distances: ["Half", "Marathon"],
-    organiser: "Great Limerick Run / Eventmaster",
-    url: "https://eventmaster.ie/event/32lyhx4tZW",
-  },
-  {
     slug: "clare-burren-marathon-challenge-2027",
     name: "Clare Burren Marathon Challenge 2027",
     date: "2027-05-29",
@@ -690,6 +676,14 @@ export const verifiedHalfMarathonFollowupEntryOptions: Record<string, EntryOptio
 
 /** Candidates withheld until a permit, exact date or half-marathon distance is confirmed. */
 export const verifiedHalfMarathonFollowupResearchQueue = [
+  {
+    slug: "great-limerick-run-2027",
+    date: "2027-05-02",
+    country: "Ireland",
+    reason:
+      "The direct registration page now explicitly labels the Athletics Ireland permit as pending approval.",
+    sourceUrl: "https://eventmaster.ie/event/32lyhx4tZW",
+  },
   {
     slug: "nenagh-half-marathon-10k-2027",
     date: "2027-02-21",

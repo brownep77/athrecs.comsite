@@ -4,7 +4,7 @@ import { rolldown } from "rolldown";
 
 const CHECKED_AT = "2026-08-22";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 31;
+const NEW_SERIES_COUNT = 30;
 const OVERRIDE_SLUGS = new Set([
   "belfast-half",
   "kilkenny-medieval-marathon",
@@ -51,7 +51,7 @@ assert.equal(
 );
 assert.equal(
   verifiedHalfMarathonFollowupResearchQueue.length,
-  5,
+  6,
   "The held half-marathon research queue is incomplete",
 );
 
@@ -162,6 +162,12 @@ for (const candidate of verifiedHalfMarathonFollowupResearchQueue) {
   );
   assert.match(candidate.sourceUrl, /^https:\/\//, `${candidate.slug} source must use HTTPS`);
 }
+assert(
+  verifiedHalfMarathonFollowupResearchQueue.some(
+    (candidate) => candidate.slug === "great-limerick-run-2027",
+  ),
+  "Great Limerick Run must remain held while its permit is pending",
+);
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
@@ -192,7 +198,7 @@ assert(
   "The half-marathon entry overrides are not merged",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v244"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v245"'),
   "The persistent catalogue seed version was not advanced",
 );
 

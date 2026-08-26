@@ -6,9 +6,10 @@ const CHECKED_AT = "2026-08-22";
 const PREVIOUS_CHECKED_AT = "2026-08-23";
 const PRIOR_CHECKED_AT = "2026-08-24";
 const LATEST_CHECKED_AT = "2026-08-25";
+const CURRENT_CHECKED_AT = "2026-08-26";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 44;
-const EXISTING_SERIES_EDITION_COUNT = 9;
+const EXISTING_SERIES_EDITION_COUNT = 10;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -38,12 +39,12 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  33,
+  34,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "10mi").length,
-  11,
+  10,
   "The 10-mile total changed unexpectedly",
 );
 
@@ -126,9 +127,13 @@ for (const edition of dailyHalfTenMileEditions) {
   }
   for (const option of edition.entryOptions ?? []) {
     assert(
-      [CHECKED_AT, PREVIOUS_CHECKED_AT, PRIOR_CHECKED_AT, LATEST_CHECKED_AT].includes(
-        option.checkedAt,
-      ),
+      [
+        CHECKED_AT,
+        PREVIOUS_CHECKED_AT,
+        PRIOR_CHECKED_AT,
+        LATEST_CHECKED_AT,
+        CURRENT_CHECKED_AT,
+      ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
     assert.equal(option.isVerified, true, `${key} has an unverified entry source`);
@@ -143,6 +148,29 @@ for (const edition of dailyHalfTenMileEditions) {
     `${key} was dropped or duplicated during catalogue merge`,
   );
 }
+
+const rabbitSeries = dailyHalfTenMileSeries.find(
+  (series) => series.slug === "rabbit-run-wales-half-marathon-2027",
+);
+const rabbitEdition = dailyHalfTenMileEditions.find(
+  (edition) => edition.seriesSlug === "rabbit-run-wales-half-marathon-2027",
+);
+assert(rabbitSeries && rabbitEdition, "Rabbit Run Wales 2027 is missing");
+assert.equal(
+  rabbitSeries.source_url,
+  "https://www.rabbitrun.wales/enter-now/",
+  "Rabbit Run Wales does not use the official organiser source",
+);
+assert.match(
+  rabbitEdition.entryUrl ?? "",
+  /^https:\/\/www\.letsdothis\.com\/gb\/o\/154485\/checkout\/ticket\?/,
+  "Rabbit Run Wales does not use the direct open checkout",
+);
+assert.equal(
+  rabbitEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_CHECKED_AT,
+  "Rabbit Run Wales entry provenance was not checked in the current scan",
+);
 
 assert.equal(
   dailyHalfTenMileExistingSeriesEditions.length,
@@ -172,7 +200,10 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
   assert.equal(edition.status, "Open", `${key} should be open`);
   assert(edition.entryOptions?.length, `${key} needs a checked official entry option`);
   for (const option of edition.entryOptions ?? []) {
-    assert.equal(option.checkedAt, LATEST_CHECKED_AT, `${key} has a stale entry check date`);
+    assert(
+      [LATEST_CHECKED_AT, CURRENT_CHECKED_AT].includes(option.checkedAt),
+      `${key} has a stale entry check date`,
+    );
     assert.equal(option.isVerified, true, `${key} has an unverified entry source`);
     assert.equal(option.isPrimary, true, `${key} primary source is not marked`);
     assert.equal(
@@ -199,6 +230,18 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
     `${edition.seriesSlug} does not expose a current official organiser source`,
   );
 }
+
+const clontarfEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) =>
+    edition.seriesSlug === "clontarf-half-marathon-autumn-2026" && edition.date === "2027-07-03",
+);
+assert(clontarfEdition, "The verified Clontarf July 2027 edition is missing");
+assert.equal(clontarfEdition.startTime, "10:00", "Clontarf has the wrong start time");
+assert.equal(
+  clontarfEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_CHECKED_AT,
+  "Clontarf entry provenance was not checked in the current scan",
+);
 
 const brightenSeries = catalogue.seriesList.find((series) => series.slug === "brighten-marina");
 assert(brightenSeries, "The existing BrighTEN Marina card disappeared");
@@ -256,6 +299,24 @@ assert(
   ),
   "The malformed Battersea Park December candidate must remain held",
 );
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "thirsk-10-mile-road-race-2027",
+  ),
+  "Thirsk 10 must remain held while its race licence is TBC",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "fastlane-summer-edition-2027",
+  ),
+  "Fastlane Summer must remain held while its governing status is TBA",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "tarpley-10-and-20-mile-2027",
+  ),
+  "Tarpley must remain held while its official entry state is internally conflicted",
+);
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
@@ -283,7 +344,7 @@ assert(
   "The verified existing-card editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v244"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v245"'),
   "The persistent catalogue seed version was not advanced",
 );
 assert(
@@ -292,5 +353,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (33 half marathons and 11 ten-milers), ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (34 half marathons and 10 ten-milers), ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );
