@@ -65,6 +65,9 @@ const HOME_SPORTS: readonly (Sport | "All")[] = [
   "Aquabike",
   "Rowing",
   "OCR",
+  "Adventure Racing",
+  "Functional Fitness",
+  "Walking",
 ];
 
 const distances = [
@@ -432,6 +435,8 @@ function SportGlyph({ sport, className }: { sport: Sport; className?: string }) 
   if (sport === "Aquathlon") return <Waves className={className} />;
   if (sport === "Rowing") return <Ship className={className} />;
   if (sport === "OCR") return <Mountain className={className} />;
+  if (sport === "Adventure Racing") return <Mountain className={className} />;
+  if (sport === "Functional Fitness") return <Zap className={className} />;
   if (sport === "Athletics") return <Medal className={className} />;
   return <Footprints className={className} />;
 }
