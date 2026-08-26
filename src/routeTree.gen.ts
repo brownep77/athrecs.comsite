@@ -18,8 +18,10 @@ import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
+import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/admin/catalogue-recovery-emergency'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
+import { Route as AdminResultArchiveRouteImport } from './routes/admin/result-archive'
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
@@ -81,6 +83,12 @@ const AdminCataloguePublishingRoute =
     path: '/admin/catalogue-publishing',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminCatalogueRecoveryEmergencyRoute =
+  AdminCatalogueRecoveryEmergencyRouteImport.update({
+    id: '/admin/catalogue-recovery-emergency',
+    path: '/admin/catalogue-recovery-emergency',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
   id: '/admin/data-intelligence',
   path: '/admin/data-intelligence',
@@ -89,6 +97,11 @@ const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
 const AdminFixtureReviewRoute = AdminFixtureReviewRouteImport.update({
   id: '/admin/fixture-review',
   path: '/admin/fixture-review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminResultArchiveRoute = AdminResultArchiveRouteImport.update({
+  id: '/admin/result-archive',
+  path: '/admin/result-archive',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminResultClaimsRoute = AdminResultClaimsRouteImport.update({
@@ -173,8 +186,10 @@ export interface FileRoutesByFullPath {
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
+  '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -200,8 +215,10 @@ export interface FileRoutesByTo {
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
+  '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -228,8 +245,10 @@ export interface FileRoutesById {
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
+  '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -257,8 +276,10 @@ export interface FileRouteTypes {
     | '/race-series'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
+    | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
@@ -284,8 +305,10 @@ export interface FileRouteTypes {
     | '/race-series'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
+    | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
@@ -311,8 +334,10 @@ export interface FileRouteTypes {
     | '/race-series'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
+    | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
@@ -339,8 +364,10 @@ export interface RootRouteChildren {
   RaceSeriesRoute: typeof RaceSeriesRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
+  AdminCatalogueRecoveryEmergencyRoute: typeof AdminCatalogueRecoveryEmergencyRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
+  AdminResultArchiveRoute: typeof AdminResultArchiveRoute
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
@@ -423,6 +450,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCataloguePublishingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/catalogue-recovery-emergency': {
+      id: '/admin/catalogue-recovery-emergency'
+      path: '/admin/catalogue-recovery-emergency'
+      fullPath: '/admin/catalogue-recovery-emergency'
+      preLoaderRoute: typeof AdminCatalogueRecoveryEmergencyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/data-intelligence': {
       id: '/admin/data-intelligence'
       path: '/admin/data-intelligence'
@@ -435,6 +469,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/fixture-review'
       fullPath: '/admin/fixture-review'
       preLoaderRoute: typeof AdminFixtureReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/result-archive': {
+      id: '/admin/result-archive'
+      path: '/admin/result-archive'
+      fullPath: '/admin/result-archive'
+      preLoaderRoute: typeof AdminResultArchiveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/result-claims': {
@@ -547,8 +588,10 @@ const rootRouteChildren: RootRouteChildren = {
   RaceSeriesRoute: RaceSeriesRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
+  AdminCatalogueRecoveryEmergencyRoute: AdminCatalogueRecoveryEmergencyRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
+  AdminResultArchiveRoute: AdminResultArchiveRoute,
   AdminResultClaimsRoute: AdminResultClaimsRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
