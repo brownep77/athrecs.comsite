@@ -81,6 +81,14 @@ import { verifiedGlobalEditions, verifiedGlobalSeries } from "./verified-global-
 import { afghanistanRaceEditions, afghanistanRaceSeries } from "./afghanistan-races";
 import { albaniaRaceEditions, albaniaRaceSeries } from "./albania-races";
 import { westernBalkansRaceEditions, westernBalkansRaceSeries } from "./western-balkans-races";
+import {
+  englandAthleticsRunEventsEditions,
+  englandAthleticsRunEventsSeries,
+} from "./england-athletics-runevents";
+import {
+  englandAthleticsUkFixturesEditions,
+  englandAthleticsUkFixturesSeries,
+} from "./england-athletics-uk-fixtures";
 import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races";
 import { continuedFiveKEditions, continuedFiveKSeries } from "./five-k-races-uk-ireland-next";
 import { dailyFiveKEditions, dailyFiveKSeries } from "./five-k-races-uk-ireland-daily";
@@ -165,6 +173,8 @@ for (const series of [
   ...(afghanistanRaceSeries as Series[]),
   ...(albaniaRaceSeries as Series[]),
   ...(westernBalkansRaceSeries as Series[]),
+  ...(englandAthleticsRunEventsSeries as Series[]),
+  ...(englandAthleticsUkFixturesSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
   ...(verifiedGlobalSeries as Series[]),
   ...(verifiedUkSeries as Series[]),
@@ -220,6 +230,12 @@ const mergedEditions = [
   ),
   ...(westernBalkansRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(englandAthleticsRunEventsEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(englandAthleticsUkFixturesEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
   ),
   ...(verifiedAllSportEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
