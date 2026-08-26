@@ -1,0 +1,40 @@
+name: Apply result claim verifier UX update
+
+on:
+  push:
+    branches:
+      - codex/improve-result-claim-experience
+    paths:
+      - .github/workflows/apply-result-claim-verifier-ux-update.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: codex/improve-result-claim-experience
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Update claim verifier
+        run: node scripts/apply-result-claim-verifier-ux-update.mjs
+      - name: Remove one-off verifier helpers
+        run: |
+          rm scripts/apply-result-claim-verifier-ux-update.mjs
+          rm .github/workflows/apply-result-claim-verifier-ux-update.yml
+      - name: Commit verifier update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No verifier changes"
+          else
+            git commit -m "Align claim verification with redesigned journey"
+            git push origin HEAD:codex/improve-result-claim-experience
+          fi
