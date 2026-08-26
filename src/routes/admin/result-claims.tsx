@@ -298,8 +298,8 @@ function ClaimReviewCard({
 
           <div className="flex flex-wrap gap-2">
             <Button asChild variant="secondary">
-              <Link to="/athletes/$slug" params={{ slug: claim.athleteSlug }}>
-                Athlete profile
+              <Link to="/races/$slug" params={{ slug: claim.eventSlug }}>
+                Event page
               </Link>
             </Button>
             {claim.sourceUrl ? (

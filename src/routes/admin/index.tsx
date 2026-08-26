@@ -113,6 +113,14 @@ function AdminPage() {
   const [message, setMessage] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
   const [resultsJson, setResultsJson] = useState("");
+  const [resultSport, setResultSport] = useState("Running");
+  const [resultSourceName, setResultSourceName] = useState("");
+  const [resultSourceUrl, setResultSourceUrl] = useState("");
+  const [resultFileName, setResultFileName] = useState("");
+  const [resultFileFormat, setResultFileFormat] = useState<"json" | "csv">("json");
+  const [resultMethod, setResultMethod] = useState<"scan" | "upload" | "api" | "manual">(
+    "upload",
+  );
 
   const cards = useQuery({
     queryKey: ["admin-events"],
@@ -177,10 +185,21 @@ function AdminPage() {
   });
 
   const resultsMut = useMutation({
-    mutationFn: () => importResults({ data: { json: resultsJson } }),
+    mutationFn: () =>
+      importResults({
+        data: {
+          content: resultsJson,
+          fileFormat: resultFileFormat,
+          sport: resultSport,
+          sourceName: resultSourceName || undefined,
+          sourceUrl: resultSourceUrl || undefined,
+          acquisitionMethod: resultMethod,
+          fileName: resultFileName || undefined,
+        },
+      }),
     onSuccess: (r) => {
       setMessage(
-        `Results import: ${r.athletesUpserted} athletes, ${r.resultsUpserted} results` +
+        `Results import ${r.runId.slice(0, 8)}: ${r.resultsInserted} new, ${r.resultsUpdated} refreshed across ${r.editionsTracked} event editions` +
           (r.errors?.length
             ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}`
             : ""),
@@ -189,6 +208,24 @@ function AdminPage() {
     },
     onError: (e) => setMessage(e instanceof Error ? e.message : String(e)),
   });
+
+  async function loadResultsFile(file: File | undefined) {
+    if (!file) return;
+    if (file.size > 10_000_000) {
+      setMessage("Results file is larger than the 10 MB import limit");
+      return;
+    }
+    const extension = file.name.toLowerCase().split(".").pop();
+    if (extension !== "json" && extension !== "csv") {
+      setMessage("Choose a .json or .csv results file");
+      return;
+    }
+    setResultsJson(await file.text());
+    setResultFileName(file.name);
+    setResultFileFormat(extension);
+    setResultMethod("upload");
+    setMessage(`${file.name} loaded and ready to import`);
+  }
 
   const bulkRunMut = useMutation({
     mutationFn: () => queueBulkSourceRun(),
@@ -689,28 +726,106 @@ function AdminPage() {
         </Button>
       </section>
 
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
+      <section
+        id="results-import"
+        className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card"
+      >
         <h2 className="font-display text-lg font-semibold text-fg">
-          4. Results import (append-only)
+          4. Private results archive import
         </h2>
         <p className="text-sm text-muted">
-          Paste {"{ results: [...] }"} JSON. Creates athletes/clubs as needed and upserts finish
-          times against an existing edition. Does not wipe the seed.
+          Upload a timing-provider CSV or results JSON, or paste {"{ results: [...] }"} produced by
+          a scan or API pull. Participant records are private by default; the staff ledger records
+          only the sport, event editions, sources and row counts. Public-figure results remain
+          public.
         </p>
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          <label className="space-y-1.5 text-xs font-medium text-muted">
+            Sport
+            <input
+              value={resultSport}
+              onChange={(event) => setResultSport(event.target.value)}
+              className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+            />
+          </label>
+          <label className="space-y-1.5 text-xs font-medium text-muted">
+            Source name
+            <input
+              value={resultSourceName}
+              onChange={(event) => setResultSourceName(event.target.value)}
+              placeholder="Official timer or organiser"
+              className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+            />
+          </label>
+          <label className="space-y-1.5 text-xs font-medium text-muted">
+            Source URL
+            <input
+              type="url"
+              value={resultSourceUrl}
+              onChange={(event) => setResultSourceUrl(event.target.value)}
+              placeholder="https://…"
+              className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+            />
+          </label>
+          <label className="space-y-1.5 text-xs font-medium text-muted">
+            Acquisition method
+            <select
+              value={resultMethod}
+              onChange={(event) =>
+                setResultMethod(event.target.value as "scan" | "upload" | "api" | "manual")
+              }
+              className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+            >
+              <option value="upload">Upload / pasted file</option>
+              <option value="scan">Automated scan</option>
+              <option value="api">API pull</option>
+              <option value="manual">Manual entry</option>
+            </select>
+          </label>
+        </div>
+        <div className="flex flex-wrap items-center gap-3 rounded-lg border border-dashed border-border bg-elevated/50 p-3">
+          <label className="inline-flex h-11 cursor-pointer items-center rounded-md border border-border bg-surface px-4 text-sm font-medium text-fg hover:border-accent hover:text-accent">
+            Choose results file
+            <input
+              type="file"
+              accept=".json,.csv,application/json,text/csv"
+              className="sr-only"
+              onChange={(event) => void loadResultsFile(event.target.files?.[0])}
+            />
+          </label>
+          <p className="text-xs text-muted">
+            {resultFileName
+              ? `${resultFileName} · ${resultFileFormat.toUpperCase()}`
+              : "JSON or CSV, up to 10 MB. The original filename and content hash are logged."}
+          </p>
+        </div>
         <textarea
           value={resultsJson}
-          onChange={(e) => setResultsJson(e.target.value)}
+          onChange={(event) => {
+            setResultsJson(event.target.value);
+            setResultFileName("");
+            setResultFileFormat("json");
+          }}
           rows={10}
           placeholder='{"results":[{"eventSlug":"run-norwich","date":"2025-09-07","distance":"10K","athleteName":"Example Runner","gender":"M","time":"49:30","place":1101}]}'
           className="w-full rounded-lg border border-border bg-bg px-3 py-2 font-mono text-xs text-fg outline-none focus:ring-2 focus:ring-accent/30"
         />
-        <Button
-          type="button"
-          disabled={!resultsJson.trim() || resultsMut.isPending}
-          onClick={() => resultsMut.mutate()}
-        >
-          {resultsMut.isPending ? "Importing results…" : "Import results JSON"}
-        </Button>
+        <p className="text-xs text-subtle">
+          CSV requires event_slug, date and distance headers plus an athlete name column. Common
+          timing fields such as place, bib, time, category, club and source_url are recognised.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            disabled={!resultsJson.trim() || resultsMut.isPending}
+            onClick={() => resultsMut.mutate()}
+          >
+            {resultsMut.isPending ? "Importing results…" : "Import private results"}
+          </Button>
+          <Button asChild variant="secondary">
+            <Link to="/admin/result-archive">Open result archive</Link>
+          </Button>
+        </div>
       </section>
 
       {message && (

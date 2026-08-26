@@ -81,7 +81,7 @@ function ClaimResultsPage() {
   const result = useQuery({
     queryKey: ["claimable-result", resultId],
     queryFn: () => getClaimableResult({ data: { resultId: resultId as number } }),
-    enabled: resultId !== undefined,
+    enabled: Boolean(user && resultId !== undefined),
     retry: false,
   });
 
@@ -167,8 +167,8 @@ function ClaimResultsPage() {
         <div className="grid gap-4 p-5 text-sm md:grid-cols-3 md:p-7">
           <ClaimStep
             number="1"
-            title="Choose a result"
-            detail="Open your athlete profile and select Claim this result."
+            title="Find a private match"
+            detail="Sign in and ATHRECS checks your account name against archived results."
           />
           <ClaimStep
             number="2"
@@ -214,16 +214,32 @@ function ClaimResultsPage() {
             <CircleAlert className="mt-0.5 size-5 text-accent" aria-hidden="true" />
             <div className="space-y-2">
               <h2 className="font-display text-lg font-semibold text-fg">
-                Choose the result first
+                Find results matching your name
               </h2>
               <p className="text-sm text-muted">
-                Search for your athlete profile, open it and select the result you want to claim.
+                Archived participant lists are not public. Sign in to your private Athlete Account
+                to see conservative matches for your own name.
               </p>
               <Button asChild variant="secondary">
-                <Link to="/athletes">Find my athlete profile</Link>
+                <Link to="/athlete-account">Open my Athlete Account</Link>
               </Button>
             </div>
           </div>
+        </section>
+      ) : sessionPending ? (
+        <section className="rounded-xl border border-border bg-surface p-8 text-center text-sm text-muted shadow-card">
+          <Loader2 className="mx-auto mb-2 size-5 animate-spin" aria-hidden="true" />
+          Checking your account…
+        </section>
+      ) : !user ? (
+        <section className="space-y-3 rounded-xl border border-accent/30 bg-accent-soft p-5">
+          <h2 className="font-display text-lg font-semibold text-fg">Sign in to view this match</h2>
+          <p className="text-sm text-muted">
+            Athlete names and finish details are kept behind the secure claim flow.
+          </p>
+          <Button type="button" onClick={startSignIn}>
+            <LogIn className="size-4" aria-hidden="true" /> Sign in or create account
+          </Button>
         </section>
       ) : result.isLoading ? (
         <section className="rounded-xl border border-border bg-surface p-8 text-center text-sm text-muted shadow-card">
@@ -232,7 +248,8 @@ function ClaimResultsPage() {
         </section>
       ) : result.isError || !result.data ? (
         <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
-          This result could not be found. Return to the athlete profile and try again.
+          This result is not available to this account. Return to your private Athlete Account and
+          choose one of its suggested matches.
         </section>
       ) : (
         <section className="space-y-5 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">

@@ -34,6 +34,7 @@
     "verify:fixture-review": "node --experimental-strip-types scripts/verify-fixture-review.mjs",
     "verify:results-links": "node --experimental-strip-types scripts/verify-results-links.mjs",
     "verify:result-claims": "node scripts/verify-result-claims.mjs",
+    "verify:private-result-archive": "node scripts/verify-private-result-archive.mjs",
     "verify:result-matches": "node --experimental-strip-types scripts/verify-result-matches.mjs",
     "verify:athlete-accounts": "node scripts/verify-athlete-accounts.mjs",
     "verify:auth-methods": "node --experimental-strip-types scripts/verify-auth-methods.mjs",
@@ -54,7 +55,7 @@
     "format": "prettier --write .",
     "verify:slug-stability": "node --experimental-strip-types scripts/verify-slug-stability.mjs",
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
-    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run build"
+    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:private-result-archive && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run build"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",

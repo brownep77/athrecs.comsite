@@ -531,7 +531,9 @@ export function RacePageContent({
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <Medal className="h-4 w-4 text-accent" />
-              <h2 className="font-display text-lg font-semibold text-fg">ATHRECS finishers</h2>
+              <h2 className="font-display text-lg font-semibold text-fg">
+                Published ATHRECS results
+              </h2>
             </div>
             <Button variant="ghost" size="sm" onClick={() => setResultsEditionId(null)}>
               Close
@@ -546,8 +548,8 @@ export function RacePageContent({
           ) : (
             <>
               <p className="text-xs text-subtle">
-                Ranked here by finish time only. Official places, DQ notes and age-grades live on
-                the timer site.
+                Public-figure and athlete-approved results only. Other archived participant rows
+                remain private and are available through the signed-in claim flow.
               </p>
               <div className="overflow-x-auto rounded-xl border border-border bg-surface shadow-card">
                 <table className="w-full min-w-[28rem] text-left text-sm">
@@ -831,7 +833,7 @@ function EditionResultsLinks({
             </h2>
           </div>
           <p className="mt-1 text-xs text-subtle">
-            ATHRECS finishers and verified timing or organiser result links.
+            Public-figure or athlete-approved ATHRECS results, plus verified organiser links.
           </p>
         </div>
         {grouped.length > 0 ? (
@@ -908,7 +910,7 @@ function EditionResultsLinks({
                         onClick={() => onAthrecsResults(edition.id)}
                         className="inline-flex h-11 min-w-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium"
                       >
-                        ATHRECS ·{" "}
+                        ATHRECS public ·{" "}
                         {formatDistanceWithUnits(edition.distance_code, edition.distance_km)}
                       </button>
                     ))}
@@ -1017,7 +1019,7 @@ function EditionList({
                       onClick={() => onResults(ed.id)}
                       className="inline-flex h-11 min-w-11 items-center rounded-md border border-border bg-elevated px-3 text-xs font-medium"
                     >
-                      View results
+                      View public results
                     </button>
                   )}
                   {st !== "Finished" &&

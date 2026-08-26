@@ -20,6 +20,7 @@ import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
+import { Route as AdminResultArchiveRouteImport } from './routes/admin/result-archive'
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
@@ -89,6 +90,11 @@ const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
 const AdminFixtureReviewRoute = AdminFixtureReviewRouteImport.update({
   id: '/admin/fixture-review',
   path: '/admin/fixture-review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminResultArchiveRoute = AdminResultArchiveRouteImport.update({
+  id: '/admin/result-archive',
+  path: '/admin/result-archive',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminResultClaimsRoute = AdminResultClaimsRouteImport.update({
@@ -175,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -202,6 +209,7 @@ export interface FileRoutesByTo {
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -230,6 +238,7 @@ export interface FileRoutesById {
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
@@ -259,6 +268,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-publishing'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
@@ -286,6 +296,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-publishing'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
@@ -313,6 +324,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-publishing'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
@@ -341,6 +353,7 @@ export interface RootRouteChildren {
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
+  AdminResultArchiveRoute: typeof AdminResultArchiveRoute
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
@@ -435,6 +448,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/fixture-review'
       fullPath: '/admin/fixture-review'
       preLoaderRoute: typeof AdminFixtureReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/result-archive': {
+      id: '/admin/result-archive'
+      path: '/admin/result-archive'
+      fullPath: '/admin/result-archive'
+      preLoaderRoute: typeof AdminResultArchiveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/result-claims': {
@@ -549,6 +569,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
+  AdminResultArchiveRoute: AdminResultArchiveRoute,
   AdminResultClaimsRoute: AdminResultClaimsRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,

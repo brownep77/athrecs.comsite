@@ -99,6 +99,17 @@ export type AthleteAccountData = {
   preferences: AthleteProductPreferences;
   consents: AthleteAccountConsents;
   claimedProfiles: Array<{ athleteId: number; athleteName: string; athleteSlug: string }>;
+  claimedResults: Array<{
+    resultId: number;
+    athleteName: string;
+    eventName: string;
+    eventSlug: string;
+    eventDate: string;
+    distanceCode: string;
+    finishTimeSeconds: number | null;
+    overallPlace: number | null;
+    category: string | null;
+  }>;
   claimCount: number;
 };
 
@@ -439,7 +450,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
   const user = users[0];
   if (!user?.email) throw new Error("Your signed-in account has no email address");
 
-  const [profiles, sports, preferences, consentRows, claimedProfiles, claimCounts] =
+  const [profiles, sports, preferences, consentRows, claimedProfiles, claimedResults, claimCounts] =
     await Promise.all([
       sql<ProfileRow>`
         select
@@ -479,6 +490,37 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         where account_link.user_id = ${userId} and account_link.status = 'active'
         order by athlete.display_name
       `,
+      sql<{
+        result_id: number;
+        athlete_name: string;
+        event_name: string;
+        event_slug: string;
+        event_date: string;
+        distance_code: string;
+        finish_time_seconds: number | null;
+        overall_place: number | null;
+        category: string | null;
+      }>`
+        select
+          result.id as result_id,
+          athlete.display_name as athlete_name,
+          event.name as event_name,
+          event.slug as event_slug,
+          edition.event_date::text as event_date,
+          edition.distance_code,
+          result.finish_time_seconds,
+          result.overall_place,
+          result.category
+        from athlete_account_links account_link
+        join athletes athlete on athlete.id = account_link.athlete_id
+        join results result on result.athlete_id = athlete.id
+        join editions edition on edition.id = result.edition_id
+        join events event on event.id = edition.event_id
+        where account_link.user_id = ${userId}
+          and account_link.status = 'active'
+        order by edition.event_date desc, event.name, result.id desc
+        limit 500
+      `,
       sql<{ claim_count: number }>`
         select count(*)::int as claim_count
         from result_claims
@@ -511,6 +553,17 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       athleteId: row.athlete_id,
       athleteName: row.athlete_name,
       athleteSlug: row.athlete_slug,
+    })),
+    claimedResults: claimedResults.map((row) => ({
+      resultId: row.result_id,
+      athleteName: row.athlete_name,
+      eventName: row.event_name,
+      eventSlug: row.event_slug,
+      eventDate: row.event_date,
+      distanceCode: row.distance_code,
+      finishTimeSeconds: row.finish_time_seconds,
+      overallPlace: row.overall_place,
+      category: row.category,
     })),
     claimCount: claimCounts[0]?.claim_count ?? 0,
   } satisfies AthleteAccountData;
@@ -869,6 +922,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
           athleteName: row.athlete_name,
           athleteSlug: row.athlete_slug,
         })),
+        claimedResults: [],
         claimCount: claimCountByUser.get(profile.user_id) ?? 0,
       };
       return { ...account, completionPercent: accountCompletion(account) };
