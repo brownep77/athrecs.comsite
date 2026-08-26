@@ -24,8 +24,21 @@ const URLS = {
   shkodraSchedule: "https://shkodramarathon.com/itinerari?lang=en",
   shkodraEntry: "https://shkodramarathon.com/regjistrim?lang=en",
   raceForCure: "https://www.raceforthecure.eu/en/Races",
+  kukes: "https://www.kukeshalfmarathon.com/",
+  martyrsDay: "https://apply.martyrsmemorialday.run/index?eventId=11",
   migrantOfficial: "https://migranttrailrace.run/",
   migrantSecondary: "https://ultraracecalendar.com/events/3927/migrant-trail-race-fushe-arrez/",
+  migrantResults2026: "https://my.raceresult.com/414465/",
+  migrant100_2026:
+    "https://itra.run/Races/RaceDetails/Migrant.Trail.Race..Fush%C3%AB.Arr%C3%ABz.Shtegu.Kreshta.e.Dardhes/2026/116152",
+  migrant61_2026:
+    "https://itra.run/Races/RaceDetails/Migrant.Trail.Race..Fush%C3%AB.Arr%C3%ABz.Shtegu.i.Kaprollit/2026/116153",
+  migrant40_2026:
+    "https://itra.run/Races/RaceDetails/Migrant.Trail.Race..Fush%C3%AB.Arr%C3%ABz.Ujvara.e.Kryeziut./2026/116154",
+  migrant21_2026:
+    "https://itra.run/Races/RaceDetails/Migrant.Trail.Race..Fush%C3%AB.Arr%C3%ABz.Shtegu.I.Pishave/2026/116155",
+  migrant10_2026:
+    "https://itra.run/Races/RaceDetails/Migrant.Trail.Race..Fush%C3%AB.Arr%C3%ABz.Micoj.River.Trail/2026/116156",
 } as const;
 
 type AdvertisedEditionInput = Omit<Edition, "entryOptions" | "entryUrl" | "status"> & {
@@ -265,6 +278,44 @@ export const albaniaRaceSeries: Series[] = [
     source_url: URLS.raceForCure,
   },
   {
+    slug: "kukes-half-marathon",
+    name: "Kukës Half Marathon",
+    sport: "Running",
+    country: "Albania",
+    county: "Kukës County",
+    city: "Kukës",
+    area: "Kukës city centre and surrounding villages",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary: "A half-marathon and 10 km road event through Kukës and its mountain landscape.",
+    description:
+      "Kukës Half Marathon starts in the city centre and offers separate half-marathon and 10 km races on paved roads through Kukës and its surrounding villages.",
+    organiser: "QPR / Municipality of Kukës / Drini Sports and Tours",
+    website: URLS.kukes,
+    featured: false,
+    source_url: URLS.kukes,
+  },
+  {
+    slug: "martyrs-day-marathon-albania",
+    name: "International Martyrs’ Day Marathon",
+    sport: "Running",
+    country: "Albania",
+    county: "Tirana County",
+    city: "Tirana",
+    area: "Tirana",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "An international 5 km, 10 km and half-marathon programme marking Albania's Martyrs’ Day.",
+    description:
+      "Maraton Albania's International Martyrs’ Day event offers 5 km, 10 km and half-marathon races, with additional free categories for eligible pupils, students, police, military personnel, pensioners and security-force officers.",
+    organiser: "Maraton Albania",
+    website: URLS.martyrsDay,
+    featured: false,
+    defaultStartTime: "16:00",
+    source_url: URLS.martyrsDay,
+  },
+  {
     slug: "migrant-trail-race-fushe-arrez",
     name: "Migrant Trail Race — Fushë-Arrëz",
     sport: "Running",
@@ -273,15 +324,15 @@ export const albaniaRaceSeries: Series[] = [
     city: "Fushë-Arrëz",
     area: "Fushë-Arrëz mountain trails",
     surface: "Mountain Trail",
-    distances: ["60K", "40K", "Ultra"],
+    distances: ["100K", "61K", "60K", "40K", "21K", "10K", "Ultra"],
     summary:
-      "A provisional 2027 mountain-trail event in northern Albania, currently listed with 40 km and 60 km routes.",
+      "A multi-distance mountain-trail festival in northern Albania, with routes from 10 km to 100 km.",
     description:
-      "The 2027 Migrant Trail Race is currently present only on a secondary ultra calendar. The official organiser's website still displays the completed 2026 edition, so the date and distances remain TBC.",
+      "Migrant Trail Race crosses the mountain trails, pine forests, rivers and villages around Fushë-Arrëz. The completed 2026 programme is verified from the organiser, ITRA and official timing record; the provisional 2027 distances remain TBC until the organiser publishes that edition.",
     organiser: "Maraton Albania and Municipality of Fushë-Arrëz",
     website: URLS.migrantOfficial,
     featured: false,
-    source_url: URLS.migrantSecondary,
+    source_url: URLS.migrantOfficial,
   },
 ];
 
@@ -301,8 +352,85 @@ const enkelanaNotes =
   "The organiser advertises 21 km and 11.5 km races on Saturday 24 July 2027. The organiser's distance is retained where a marketplace labels the shorter option as 10 km.";
 const migrantNotes =
   "Provisional secondary-calendar listing for 7–8 August 2027. It advertises a dated 60 km race and describes a 40 km challenge, but the official organiser has not yet published its 2027 schedule; both remain TBC.";
+const migrant2026Notes =
+  "The organiser's completed 2026 programme, the ITRA race record and the official timing page confirm this advertised trail distance and race day.";
 
 export const albaniaRaceEditions: Edition[] = [
+  ...[
+    { distance: "Half", distanceKm: 21.0975, startTime: "09:30" },
+    { distance: "10K", distanceKm: 10, startTime: "09:45" },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "kukes-half-marathon",
+      date: "2026-04-26",
+      ...race,
+      status: "Finished",
+      source: URLS.kukes,
+      notes:
+        "The official organiser schedule confirms the half marathon and 10 km starts in Kukës on Sunday 26 April 2026.",
+    }),
+  ),
+  ...[
+    { distance: "Half", distanceKm: 21 },
+    { distance: "10K", distanceKm: 10 },
+    { distance: "5K", distanceKm: 5 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "martyrs-day-marathon-albania",
+      date: "2026-05-05",
+      ...race,
+      status: "Finished",
+      startTime: "16:00",
+      source: URLS.martyrsDay,
+      notes:
+        "The direct official registration page confirms all three distances, the 16:00 local start and Tuesday 5 May 2026 date.",
+    }),
+  ),
+  ...[
+    {
+      date: "2026-08-08",
+      distance: "100K",
+      distanceKm: 100,
+      startTime: "03:00",
+      source: URLS.migrant100_2026,
+    },
+    {
+      date: "2026-08-08",
+      distance: "61K",
+      distanceKm: 61,
+      source: URLS.migrant61_2026,
+    },
+    {
+      date: "2026-08-08",
+      distance: "40K",
+      distanceKm: 40,
+      startTime: "07:00",
+      source: URLS.migrant40_2026,
+    },
+    {
+      date: "2026-08-09",
+      distance: "21K",
+      distanceKm: 21.64,
+      startTime: "08:00",
+      source: URLS.migrant21_2026,
+    },
+    {
+      date: "2026-08-09",
+      distance: "10K",
+      distanceKm: 10.48,
+      startTime: "08:00",
+      source: URLS.migrant10_2026,
+    },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "migrant-trail-race-fushe-arrez",
+      ...race,
+      status: "Finished",
+      resultsOfficialUrl: URLS.migrantResults2026,
+      resultsAccess: "link_only",
+      notes: migrant2026Notes,
+    }),
+  ),
   ...[
     { date: "2026-09-05", distance: "100K", distanceKm: 100 },
     { date: "2026-09-06", distance: "50K", distanceKm: 50 },

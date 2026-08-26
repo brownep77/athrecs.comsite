@@ -6,9 +6,14 @@ import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts"
 import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
 
 const CHECKED_AT = "2026-08-26";
+const HISTORIC_FLOOR = "2026-01-01";
 const HORIZON = "2027-12-31";
 
 const expected = [
+  ["kukes-half-marathon", "2026-04-26", ["10K", "Half"]],
+  ["martyrs-day-marathon-albania", "2026-05-05", ["10K", "5K", "Half"]],
+  ["migrant-trail-race-fushe-arrez", "2026-08-08", ["100K", "40K", "61K"]],
+  ["migrant-trail-race-fushe-arrez", "2026-08-09", ["10K", "21K"]],
   ["ultra-4-albania-mountain-race", "2026-09-05", ["100K"]],
   ["ultra-4-albania-mountain-race", "2026-09-06", ["25K", "50K"]],
   ["globallimits-peaks-of-the-balkans", "2026-09-11", ["200K"]],
@@ -45,8 +50,8 @@ function groupedDistances(editions) {
   );
 }
 
-assert.equal(albaniaRaceSeries.length, 11, "Unexpected Albania event-series count");
-assert.equal(albaniaRaceEditions.length, 31, "Unexpected Albania advertised-distance count");
+assert.equal(albaniaRaceSeries.length, 13, "Unexpected Albania event-series count");
+assert.equal(albaniaRaceEditions.length, 41, "Unexpected Albania advertised-distance count");
 
 const albaniaCountry = resolveCountry({ country: "Albania" });
 assert.equal(albaniaCountry.iso, "AL", "Albania must resolve to its ISO country code");
@@ -67,8 +72,8 @@ for (const edition of albaniaRaceEditions) {
   editionKeys.add(editionKey);
   assert(seriesBySlug.has(edition.seriesSlug), `Unknown Albania series: ${edition.seriesSlug}`);
   assert(
-    edition.date >= CHECKED_AT,
-    `Past Albania fixture slipped into the active calendar: ${editionKey}`,
+    edition.date >= HISTORIC_FLOOR,
+    `Albania fixture predates the requested year: ${editionKey}`,
   );
   assert(edition.date <= HORIZON, `Albania fixture exceeds the requested horizon: ${editionKey}`);
   assert.match(edition.source, /^https:\/\//, `Missing public source for ${editionKey}`);
@@ -81,6 +86,16 @@ for (const edition of albaniaRaceEditions) {
     seriesBySlug.get(edition.seriesSlug).distances.includes(edition.distance),
     `Series distance list omits ${editionKey}`,
   );
+  if (edition.status === "Finished") {
+    assert(edition.date < CHECKED_AT, `Future Albania fixture is marked finished: ${editionKey}`);
+    assert(!edition.entryUrl, `Finished fixture exposes a stale entry link: ${editionKey}`);
+    assert.equal(
+      edition.entryOptions?.length ?? 0,
+      0,
+      `Finished fixture exposes stale entry options: ${editionKey}`,
+    );
+    continue;
+  }
   if (edition.status === "TBC") {
     assert(
       !edition.entryUrl,
@@ -106,6 +121,32 @@ for (const edition of albaniaRaceEditions) {
     `Unverified entry option for ${editionKey}`,
   );
 }
+
+const kukesSeries = seriesBySlug.get("kukes-half-marathon");
+assert.equal(
+  kukesSeries?.source_url,
+  "https://www.kukeshalfmarathon.com/",
+  "Kukës does not use the official organiser source",
+);
+const martyrsSeries = seriesBySlug.get("martyrs-day-marathon-albania");
+assert.equal(
+  martyrsSeries?.source_url,
+  "https://apply.martyrsmemorialday.run/index?eventId=11",
+  "Martyrs’ Day does not use the direct official source",
+);
+const migrant2026 = albaniaRaceEditions.filter(
+  (edition) =>
+    edition.seriesSlug === "migrant-trail-race-fushe-arrez" && edition.date.startsWith("2026-"),
+);
+assert.equal(migrant2026.length, 5, "The completed 2026 Migrant Trail programme is incomplete");
+assert(
+  migrant2026.every(
+    (edition) =>
+      edition.source.startsWith("https://itra.run/Races/RaceDetails/") &&
+      edition.resultsOfficialUrl === "https://my.raceresult.com/414465/",
+  ),
+  "Migrant Trail 2026 lacks governing-body or official-results provenance",
+);
 
 const expectedGroups = new Map(
   expected.map(([slug, date, distances]) => [key(slug, date), distances]),
@@ -181,6 +222,7 @@ process.stdout.write(
   JSON.stringify(
     {
       checked_at: CHECKED_AT,
+      historic_floor: HISTORIC_FLOOR,
       horizon: HORIZON,
       series: albaniaRaceSeries.length,
       race_dates: expected.length,

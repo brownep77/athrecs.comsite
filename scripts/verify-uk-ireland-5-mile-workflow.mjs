@@ -96,7 +96,7 @@ assert(
   "The five-mile editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v246"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v247"'),
   "The persistent catalogue seed version is behind the five-mile workflow",
 );
 

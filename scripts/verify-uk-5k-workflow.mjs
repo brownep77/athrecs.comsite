@@ -161,7 +161,7 @@ assert(
   "The UK 5K corrections are not merged into entry options",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v246"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v247"'),
   "The persistent catalogue seed version is behind the daily 5K release",
 );
 

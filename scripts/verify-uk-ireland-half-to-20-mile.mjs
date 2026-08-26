@@ -221,7 +221,7 @@ assert(
   "The in-place audit corrections are not merged",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v246"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v247"'),
   "The persistent catalogue seed version was not advanced",
 );
 assert(
