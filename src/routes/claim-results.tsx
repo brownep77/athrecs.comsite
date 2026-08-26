@@ -47,7 +47,7 @@ export const Route = createFileRoute("/claim-results")({
 
 const STATUS_LABELS: Record<ResultClaimStatus, string> = {
   pending: "Conflict review",
-  needs_info: "More information needed",
+  needs_info: "Conflict clarification",
   approved: "Approved",
   rejected: "Not approved",
   withdrawn: "Withdrawn",
@@ -308,13 +308,17 @@ function ClaimResultsPage() {
               onSubmit={(event) => {
                 event.preventDefault();
                 setMessage(null);
+                if (!declaration) {
+                  setMessage("Tick the confirmation box to confirm this is your result.");
+                  return;
+                }
                 submitClaim.mutate();
               }}
             >
               {currentClaim?.status === "needs_info" ? (
                 <ClaimState
                   status="needs_info"
-                  note={currentClaim.staffNote || "ATHRECS staff need another verification detail."}
+                  note={currentClaim.staffNote || "ATHRECS staff have requested clarification because this athlete profile has a competing claim."}
                 />
               ) : currentClaim?.status === "rejected" ? (
                 <ClaimState
@@ -383,7 +387,7 @@ function ClaimResultsPage() {
 
               <Button
                 type="submit"
-                disabled={submitClaim.isPending || !declaration}
+                disabled={submitClaim.isPending}
               >
                 {submitClaim.isPending ? (
                   <Loader2 className="size-4 animate-spin" aria-hidden="true" />
