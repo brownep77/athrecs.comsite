@@ -12,6 +12,7 @@ profile = profile.replace(
   'import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";\n',
   'import { getMyProfileResultVisibility } from "@/lib/athrecs/athlete-profile-results-api";\n',
 );
+profile = profile.replace('  type AthleteAccountData,\n', "");
 profile = profile.replace(
   '\ntype ClaimedResult = AthleteAccountData["claimedResults"][number];\n',
   "\n",
@@ -60,7 +61,7 @@ const visibleResultSetup = `  const profileName = data.displayName || data.fullN
 if (!profile.includes(resultSetup)) throw new Error("Could not find profile result setup");
 profile = profile.replace(resultSetup, visibleResultSetup);
 
-const resultBlockPattern = /      \{results\.length === 0 \? \([\s\S]*?      \)\}\n\n      <section className="flex flex-wrap items-center/;
+const resultBlockPattern = /^ {6}\{results\.length === 0 \? \([\s\S]*?^ {6}\)\}\n\n^ {6}<section className="flex flex-wrap items-center/m;
 if (!resultBlockPattern.test(profile)) throw new Error("Could not find legacy result-card block");
 profile = profile.replace(
   resultBlockPattern,
