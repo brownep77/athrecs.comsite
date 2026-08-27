@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   apply-and-verify:
+    # Re-run after any integration-helper correction.
     runs-on: ubuntu-latest
     services:
       postgres:
