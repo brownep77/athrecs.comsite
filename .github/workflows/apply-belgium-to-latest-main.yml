@@ -1,0 +1,177 @@
+name: Apply Belgium calendar to latest main
+
+on:
+  push:
+    branches:
+      - data/belgium-comprehensive-2026-v2
+    paths:
+      - .github/workflows/apply-belgium-to-latest-main.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: data/belgium-comprehensive-2026-v2
+          fetch-depth: 0
+
+      - name: Copy audited Belgium files and preserve Netherlands release
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin data/comprehensive-belgium-calendar-2026
+          git show origin/data/comprehensive-belgium-calendar-2026:src/data/belgium-races-comprehensive.ts > src/data/belgium-races-comprehensive.ts
+          git show origin/data/comprehensive-belgium-calendar-2026:scripts/verify-belgium-comprehensive-calendar.mjs > scripts/verify-belgium-comprehensive-calendar.mjs
+          git show origin/data/comprehensive-belgium-calendar-2026:docs/belgium-calendar-comprehensive-audit.md > docs/belgium-calendar-comprehensive-audit.md
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          catalogue_path = Path("src/data/catalogue.ts")
+          catalogue = catalogue_path.read_text(encoding="utf-8")
+
+          old_import = (
+              'import {\n'
+              '  belgiumNetherlandsRaceEditions,\n'
+              '  belgiumNetherlandsRaceSeries,\n'
+              '} from "./belgium-netherlands-races";\n'
+          )
+          new_import = old_import + (
+              'import {\n'
+              '  belgiumComprehensiveRaceEditions,\n'
+              '  belgiumComprehensiveRaceSeries,\n'
+              '  belgiumComprehensiveReplacementSlugs,\n'
+              '} from "./belgium-races-comprehensive";\n'
+          )
+          if 'from "./belgium-races-comprehensive";' not in catalogue:
+              if old_import not in catalogue:
+                  raise SystemExit("Belgium import anchor not found on latest main")
+              catalogue = catalogue.replace(old_import, new_import, 1)
+
+          old_series = (
+              '  ...(franceSpainPortugalRaceSeries as Series[]),\n'
+              '  ...(belgiumNetherlandsRaceSeries as Series[]),\n'
+              '  ...(netherlandsFullRaceSeries as Series[]),'
+          )
+          new_series = (
+              '  ...(franceSpainPortugalRaceSeries as Series[]),\n'
+              '  ...(belgiumComprehensiveRaceSeries as Series[]),\n'
+              '  ...(belgiumNetherlandsRaceSeries as Series[]),\n'
+              '  ...(netherlandsFullRaceSeries as Series[]),'
+          )
+          if '...(belgiumComprehensiveRaceSeries as Series[])' not in catalogue:
+              if old_series not in catalogue:
+                  raise SystemExit("Belgium series anchor not found on latest main")
+              catalogue = catalogue.replace(old_series, new_series, 1)
+
+          old_editions = (
+              '  ...(franceSpainPortugalRaceEditions as Edition[]).filter((edition) =>\n'
+              '    usedSlugs.has(edition.seriesSlug),\n'
+              '  ),\n'
+              '  ...(belgiumNetherlandsRaceEditions as Edition[]).filter((edition) =>\n'
+              '    usedSlugs.has(edition.seriesSlug),\n'
+              '  ),\n'
+              '  ...(netherlandsFullRaceEditions as Edition[]).filter((edition) =>\n'
+              '    usedSlugs.has(edition.seriesSlug),\n'
+              '  ),'
+          )
+          new_editions = (
+              '  ...(franceSpainPortugalRaceEditions as Edition[]).filter((edition) =>\n'
+              '    usedSlugs.has(edition.seriesSlug),\n'
+              '  ),\n'
+              '  ...(belgiumComprehensiveRaceEditions as Edition[]).filter((edition) =>\n'
+              '    usedSlugs.has(edition.seriesSlug),\n'
+              '  ),\n'
+              '  ...(belgiumNetherlandsRaceEditions as Edition[]).filter(\n'
+              '    (edition) =>\n'
+              '      usedSlugs.has(edition.seriesSlug) &&\n'
+              '      !belgiumComprehensiveReplacementSlugs.has(edition.seriesSlug),\n'
+              '  ),\n'
+              '  ...(netherlandsFullRaceEditions as Edition[]).filter((edition) =>\n'
+              '    usedSlugs.has(edition.seriesSlug),\n'
+              '  ),'
+          )
+          if '...(belgiumComprehensiveRaceEditions as Edition[])' not in catalogue:
+              if old_editions not in catalogue:
+                  raise SystemExit("Belgium edition anchor not found on latest main")
+              catalogue = catalogue.replace(old_editions, new_editions, 1)
+
+          catalogue_path.write_text(catalogue, encoding="utf-8")
+
+          package_path = Path("package.json")
+          package = json.loads(package_path.read_text(encoding="utf-8"))
+          scripts = package["scripts"]
+          ordered = {}
+          for key, value in scripts.items():
+              ordered[key] = value
+              if key == "verify:belgium-netherlands-running-calendar":
+                  ordered["verify:belgium-comprehensive"] = (
+                      "node scripts/verify-belgium-comprehensive-calendar.mjs"
+                  )
+          package["scripts"] = ordered
+
+          ci = package["scripts"]["ci:verify"]
+          old_ci = (
+              "npm run verify:belgium-netherlands-running-calendar && "
+              "npm run verify:netherlands-full-running-calendar"
+          )
+          new_ci = (
+              "npm run verify:belgium-netherlands-running-calendar && "
+              "npm run verify:belgium-comprehensive && "
+              "npm run verify:netherlands-full-running-calendar"
+          )
+          if "npm run verify:belgium-comprehensive" not in ci:
+              if old_ci not in ci:
+                  raise SystemExit("Belgium CI anchor not found on latest main")
+              package["scripts"]["ci:verify"] = ci.replace(old_ci, new_ci, 1)
+
+          package_path.write_text(
+              json.dumps(package, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+
+          seed_path = Path("src/lib/athrecs/seed.server.ts")
+          seed = seed_path.read_text(encoding="utf-8")
+          old_seed = 'athrecs-netherlands-full-running-calendar-v270'
+          new_seed = 'athrecs-belgium-netherlands-comprehensive-v271'
+          if new_seed not in seed:
+              if old_seed not in seed:
+                  raise SystemExit("Latest Netherlands seed marker not found")
+              seed = seed.replace(old_seed, new_seed, 1)
+              seed_path.write_text(seed, encoding="utf-8")
+
+          audit_path = Path("docs/belgium-netherlands-calendar-audit.md")
+          audit = audit_path.read_text(encoding="utf-8")
+          notice = (
+              "> **Belgium coverage in this document has been superseded by "
+              "[the comprehensive Belgium audit](./belgium-calendar-comprehensive-audit.md). "
+              "The Netherlands section remains applicable.**\n\n"
+          )
+          if not audit.startswith("> **Belgium coverage"):
+              audit_path.write_text(notice + audit, encoding="utf-8")
+
+          Path(".github/workflows/apply-belgium-to-latest-main.yml").unlink()
+          PY
+
+      - name: Run Belgium and Netherlands data checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/verify-belgium-comprehensive-calendar.mjs
+          node --experimental-strip-types scripts/verify-belgium-netherlands-running-calendar.mjs
+          node --experimental-strip-types scripts/verify-netherlands-full-running-calendar.mjs
+
+      - name: Commit clean Belgium expansion
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "data: publish comprehensive Belgium running calendar"
+          git push origin HEAD:data/belgium-comprehensive-2026-v2
