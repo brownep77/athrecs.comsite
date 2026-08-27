@@ -14,7 +14,6 @@ type EditorState = {
 type ProfilePhotoUploaderProps = {
   displayName: string;
   photoUrl: string;
-  fallbackImageUrl?: string;
   uploadAvailable: boolean;
   onChanged: () => void;
 };
@@ -103,7 +102,6 @@ async function compressedPhoto(
 export function ProfilePhotoUploader({
   displayName,
   photoUrl,
-  fallbackImageUrl = "",
   uploadAvailable,
   onChanged,
 }: ProfilePhotoUploaderProps) {
@@ -170,7 +168,7 @@ export function ProfilePhotoUploader({
     [editor],
   );
 
-  const visibleImage = privateImageUrl || fallbackImageUrl;
+  const visibleImage = privateImageUrl;
   const avatarInitials = useMemo(() => initials(displayName), [displayName]);
 
   function closeEditor() {
@@ -287,7 +285,7 @@ export function ProfilePhotoUploader({
             aria-label={visibleImage ? "Change profile photo" : "Upload profile photo"}
           >
             <Camera className="size-4" aria-hidden="true" />
-            {visibleImage ? "Change" : "Add photo"}
+            {visibleImage ? "Change" : "Upload"}
           </button>
         ) : null}
       </div>
@@ -304,7 +302,7 @@ export function ProfilePhotoUploader({
         {uploadAvailable ? (
           <Button type="button" size="sm" variant="secondary" onClick={() => inputRef.current?.click()}>
             <ImagePlus className="size-4" aria-hidden="true" />
-            {visibleImage ? "Change photo" : "Upload photo"}
+            {visibleImage ? "Change photo" : "Upload from device"}
           </Button>
         ) : (
           <span className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-xs text-slate-200">
@@ -329,6 +327,10 @@ export function ProfilePhotoUploader({
           </Button>
         ) : null}
       </div>
+
+      <p className="max-w-xs text-xs leading-5 text-slate-300">
+        Upload directly from this device. ATHRECS does not use your Google profile picture.
+      </p>
 
       {message ? (
         <p className="max-w-xs rounded-lg border border-white/15 bg-slate-950/45 px-3 py-2 text-xs leading-5 text-slate-100" role="status">
