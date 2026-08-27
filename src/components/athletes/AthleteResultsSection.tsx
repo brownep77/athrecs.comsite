@@ -8,7 +8,6 @@ import {
   LayoutGrid,
   List,
   Loader2,
-  Medal,
   RotateCcw,
   Trash2,
 } from "lucide-react";

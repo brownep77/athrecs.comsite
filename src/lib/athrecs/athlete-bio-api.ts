@@ -107,6 +107,12 @@ async function loadBio(
       join events event on event.id = edition.event_id
       where account_link.user_id = ${userId}
         and account_link.status = 'active'
+        and not exists (
+          select 1
+          from athlete_profile_hidden_results hidden
+          where hidden.user_id = ${userId}
+            and hidden.result_id = result.id
+        )
       order by edition.event_date desc, result.id desc
       limit 500
     `,
