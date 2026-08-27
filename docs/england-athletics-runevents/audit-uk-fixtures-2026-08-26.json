@@ -1,0 +1,1145 @@
+{
+  "checkedAt": "2026-08-26",
+  "horizonEnd": "2027-12-31",
+  "sourceUrl": "https://fixtures.myathletics.uk/",
+  "counts": {
+    "sourceRows": 200,
+    "deduplicatedRows": 200,
+    "alreadyPresent": 11,
+    "reusedExistingSeries": 0,
+    "newSeries": 138,
+    "newEditions": 189,
+    "ambiguousHeld": 0
+  },
+  "disciplines": {
+    "Cross Country": 84,
+    "Outdoor - Track and Field": 115,
+    "Ultra": 1
+  },
+  "alreadyPresent": [
+    {
+      "row": {
+        "date": "2026-09-20",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "",
+        "eventInfo": "Female Seniors : Hammer. Female Under 20 : Hammer. Female Under 18 : Hammer. Male Seniors : Hammer. Male Under 20 : Hammer. Male Under 18 : Hammer. Equipment : Throws cage meets current UKA standards, Electronic Distance Measurement.",
+        "level": "2",
+        "name": "Black Country Hammerfest JGP 3",
+        "venue": "Telford Athletics Stadium",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/e6982f32-20b0-410b-94ce-185ade6acbbb"
+      },
+      "matchedSlug": "wa-black-country-hammerfest-jgp-3-7243088",
+      "matchedName": "Black Country Hammerfest JGP 3"
+    },
+    {
+      "row": {
+        "date": "2026-09-20",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://esaa.org.uk/",
+        "eventInfo": "Female Under 20 : Heptathlon, Wheelchair Racing. Female Under 18 : 100m Hurdles. Female Under 17 : Heptathlon, Wheelchair Racing. Female Under 15 : Pentathlon, Wheelchair Racing. Female Under 13 : Wheelchair Racing. Male Under 20 : Decathlon, Wheelchair Racing. Male Under 18 : 110m Hurdles. Male Under 17 : Octathlon, Wheelchair Racing. Male Under 15 : Pentathlon, Wheelchair Racing. Male Under 13 : Wheelchair Racing. Equipment : Photo Finish Timing, Wind Gauges at all appropriate Sprints and Jumps, Throws cage meets current UKA standards, Electronic Distance Measurement.",
+        "level": "2",
+        "name": "ESAA Combined Event & Race Walk Championships",
+        "venue": "Bedford International Athletics Stadium",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/00cac9b7-365d-4585-b7c4-a5d09b4cd967"
+      },
+      "matchedSlug": "wa-esaa-combined-event-race-walk-championships-7245301",
+      "matchedName": "ESAA Combined Event & Race Walk Championships"
+    },
+    {
+      "row": {
+        "date": "2026-09-19",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "",
+        "eventInfo": "Female Masters : Hammer. Female Seniors : Hammer. Female Under 20 : Hammer. Female Under 18 : Hammer. Male Masters : Hammer. Male Seniors : Hammer. Male Under 20 : Hammer. Male Under 18 : Hammer. Equipment : Throws cage meets current UKA standards, Electronic Distance Measurement.",
+        "level": "2",
+        "name": "Ron Bowden Memorial Graded Hammer",
+        "venue": "Ashton Playing Fields",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/76df118a-5c2c-4b7f-81d7-06d092ca6dbe"
+      },
+      "matchedSlug": "wa-hammer-circle-ron-bowden-memorial-hammer-7245129",
+      "matchedName": "Hammer Circle / Ron Bowden Memorial Hammer"
+    },
+    {
+      "row": {
+        "date": "2026-09-19",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://esaa.org.uk/",
+        "eventInfo": "Female Under 20 : Heptathlon, Wheelchair Racing. Female Under 18 : 100m Hurdles. Female Under 17 : Heptathlon, Wheelchair Racing. Female Under 15 : Pentathlon, Wheelchair Racing. Female Under 13 : Wheelchair Racing. Male Under 20 : Decathlon, Wheelchair Racing. Male Under 18 : 110m Hurdles. Male Under 17 : Octathlon, Wheelchair Racing. Male Under 15 : Pentathlon, Wheelchair Racing. Male Under 13 : Wheelchair Racing. Equipment : Photo Finish Timing, Wind Gauges at all appropriate Sprints and Jumps, Throws cage meets current UKA standards, Electronic Distance Measurement.",
+        "level": "2",
+        "name": "ESAA Combined Event & Race Walk Championships",
+        "venue": "Bedford International Athletics Stadium",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/00cac9b7-365d-4585-b7c4-a5d09b4cd967"
+      },
+      "matchedSlug": "wa-esaa-combined-event-race-walk-championships-7245301",
+      "matchedName": "ESAA Combined Event & Race Walk Championships"
+    },
+    {
+      "row": {
+        "date": "2026-09-05",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://britishmilersclub/",
+        "eventInfo": "Female Seniors : 800m, 1 Mile, 5000m, 400m Hurdles. Female Under 20 : 800m, 1 Mile, 5000m, 400m Hurdles. Male Seniors : 800m, 1 Mile, 5000m, 400m Hurdles. Male Under 20 : 800m, 1 Mile, 5000m, 400m Hurdles. Equipment : Photo Finish Timing.",
+        "level": "2",
+        "name": "BMC Track Festival",
+        "venue": "Market Street Athletics Track",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/1ba1f443-bc2b-49c6-a71f-0d27433394ba"
+      },
+      "matchedSlug": "wa-bmc-bury-track-festival-7244648",
+      "matchedName": "BMC Bury Track Festival"
+    },
+    {
+      "row": {
+        "date": "2026-09-05",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://meets.rosterathletics.com/public/competitions/details/schedule?id=29156",
+        "eventInfo": "Female Seniors : 1 Mile, 400m Hurdles, 4x 800m. Female Under 20 : 1 Mile, 400m Hurdles, 4x 800m. Male Seniors : 1 Mile, 400m Hurdles, 4x 800m. Male Under 20 : 1 Mile, 400m Hurdles, 4x 800m. Equipment : Photo Finish Timing.",
+        "level": "1",
+        "name": "Bury Track Festival",
+        "venue": "Market Street Athletics Track",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/1ba1f443-bc2b-49c6-a71f-0d27433394ba"
+      },
+      "matchedSlug": "wa-bmc-bury-track-festival-7244648",
+      "matchedName": "BMC Bury Track Festival"
+    },
+    {
+      "row": {
+        "date": "2026-09-02",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://necaa.co.uk/",
+        "eventInfo": "Female Seniors : 200m, 800m, 3000m, High Jump, Pole Vault, Long Jump, Triple Jump, Shot Put, Ambulant. Female Under 20 : 200m, 800m, 3000m, High Jump, Pole Vault, Long Jump, Triple Jump, Shot Put, Ambulant. Female Under 18 : Shot Put. Male Seniors : 200m, 800m, 3000m, High Jump, Pole Vault, Long Jump, Triple Jump, Shot Put, Ambulant. Male Under 20 : 200m, 800m, 3000m, High Jump, Pole Vault, Long Jump, Triple Jump, Shot Put, Ambulant. Male Under 18 : Shot Put. Equipment : Photo Finish Timing, Wind Gauges at all appropriate Sprints and Jumps, Throws cage meets current UKA standards, Electronic Distance Measurement.",
+        "level": "2",
+        "name": "North East Grand Prix Series - Match 6",
+        "venue": "Monkton Stadium",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/ef46ea82-cd16-4985-8aaf-1399a841caab"
+      },
+      "matchedSlug": "wa-north-east-grand-prix-series-match-6-7243085",
+      "matchedName": "North East Grand Prix Series - Match 6"
+    },
+    {
+      "row": {
+        "date": "2026-09-02",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://www.watfordharriers.org.uk/",
+        "eventInfo": "Female Seniors : 100m, 200m, 400m, 800m, 1500m, 3000m. Female Under 20 : 100m, 200m, 400m, 800m, 1500m, 3000m. Male Seniors : 100m, 200m, 400m, 800m, 1500m, 3000m. Male Under 20 : 100m, 200m, 400m, 800m, 1500m, 3000m. Equipment : Photo Finish Timing, Wind Gauges at all appropriate Sprints and Jumps.",
+        "level": "2",
+        "name": "Watford Harriers Open Graded Meeting",
+        "venue": "Woodside Stadium",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/e043b3a8-1385-43f2-8f66-e8e44a82121c"
+      },
+      "matchedSlug": "wa-watford-open-graded-meeting-7243048",
+      "matchedName": "Watford Open Graded Meeting"
+    },
+    {
+      "row": {
+        "date": "2026-08-29",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://data.opentrack.run/en-gb/x/2026/GBR/bftta-outdoor-5/",
+        "eventInfo": "Female Seniors : 100m, 200m, 400m, 600m, 800m, High Jump, Long Jump. Female Under 20 : 100m, 200m, 400m, 600m, 800m, High Jump, Long Jump. Male Seniors : 100m, 200m, 400m, 600m, 800m, High Jump, Long Jump. Male Under 20 : 100m, 200m, 400m, 600m, 800m, High Jump, Long Jump. Equipment : Photo Finish Timing, Wind Gauges at all appropriate Sprints and Jumps, Electronic Distance Measurement.",
+        "level": "2",
+        "name": "BFTTA SERIES 5",
+        "venue": "Lee Valley Athletics Centre (Outdoor)",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/55ce93d7-6ad1-40d4-b659-3ce646036591"
+      },
+      "matchedSlug": "wa-bftta-series-5-7244647",
+      "matchedName": "BFTTA Series 5"
+    },
+    {
+      "row": {
+        "date": "2026-08-29",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://evensplits.events/golden-mile",
+        "eventInfo": "Female Seniors : 1 Mile. Female Under 20 : 1 Mile. Male Seniors : 1 Mile. Male Under 20 : 1 Mile.",
+        "level": "1",
+        "name": "Leeds Golden Mile",
+        "venue": "Beckett Park Athletics Centre",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/18047ca2-f1e9-4f5c-a75c-7ecb66fe0a21"
+      },
+      "matchedSlug": "leeds-golden-mile",
+      "matchedName": "Leeds Golden Mile"
+    },
+    {
+      "row": {
+        "date": "2026-08-29",
+        "discipline": "Outdoor - Track and Field",
+        "entryUrl": "https://www.bedfordgames.co.uk/big-on-tour",
+        "eventInfo": "Female Seniors : High Jump, Long Jump, Triple Jump. Female Under 20 : High Jump, Long Jump, Triple Jump. Male Seniors : High Jump, Long Jump, Triple Jump. Male Under 20 : High Jump, Long Jump, Triple Jump. Equipment : Wind Gauges at all appropriate Sprints and Jumps, Electronic Distance Measurement.",
+        "level": "2",
+        "name": "BIG on TOUR Series",
+        "venue": "Bedford International Athletics Stadium",
+        "venueUrl": "https://track-directory.myathletics.uk/Home/Detail/00cac9b7-365d-4585-b7c4-a5d09b4cd967"
+      },
+      "matchedSlug": "wa-big-on-tour-final-7243197",
+      "matchedName": "BIG on TOUR Final"
+    }
+  ],
+  "reused": [],
+  "created": [
+    {
+      "slug": "ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac",
+      "name": "Wirral Primary Schools Cross Country Series Supported by Wirral AC",
+      "sport": "Athletics",
+      "city": "Arrowe Park",
+      "website": "https://wirralxcountry.weebly.com/"
+    },
+    {
+      "slug": "ea-uk-fixtures-merseyside-senior-schools-cross-country-league-supported-by-liverpool-ha",
+      "name": "Merseyside Senior Schools Cross Country League supported by Liverpool Harriers & AC",
+      "sport": "Athletics",
+      "city": "Sefton Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-north-yorkshire-and-south-durham-harrier-league",
+      "name": "North Yorkshire & South Durham Harrier League",
+      "sport": "Athletics",
+      "city": "South Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-north-devon-cross-country-league-note-includes-westward-league-on-10-1-2",
+      "name": "North Devon Cross Country League note includes Westward League on 10/1/27",
+      "sport": "Athletics",
+      "city": "West Buckland School",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-chelmsford-ac-primary-school-cross-county-league",
+      "name": "Chelmsford AC Primary School Cross County League",
+      "sport": "Athletics",
+      "city": "Hylands Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-downs-league",
+      "name": "Downs League",
+      "sport": "Athletics",
+      "city": "Epsom Downs",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-sunday-cross-country-league",
+      "name": "Sunday Cross Country League",
+      "sport": "Athletics",
+      "city": "Manor Farm",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-start-fitness-north-eastern-harrier-league",
+      "name": "Start Fitness North Eastern Harrier League",
+      "sport": "Athletics",
+      "city": "Alnwick Pastures",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-cambridge-harriers-10-mile-open",
+      "name": "Cambridge Harriers 10 Mile Open",
+      "sport": "Athletics",
+      "city": "Joydens Wood",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-hampshire-cross-country-league",
+      "name": "Hampshire Cross Country League",
+      "sport": "Athletics",
+      "city": "Kings Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-surrey-cross-country-league",
+      "name": "Surrey Cross Country League",
+      "sport": "Athletics",
+      "city": "Lloyd Park",
+      "website": "https://www.surreyleague.org/"
+    },
+    {
+      "slug": "ea-uk-fixtures-surrey-county-cross-country-championships",
+      "name": "Surrey County Cross Country Championships",
+      "sport": "Athletics",
+      "city": "Lloyd Park Croydon",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-terry-haines-memorial-plock-court-relays",
+      "name": "Terry Haines Memorial Plock Court Relays",
+      "sport": "Athletics",
+      "city": "Plock Court",
+      "website": "https://www.race-results.co.uk/results/2027/#0"
+    },
+    {
+      "slug": "ea-uk-fixtures-cambridge-harriers-7-5-mile-open",
+      "name": "Cambridge Harriers 7.5 Mile Open",
+      "sport": "Athletics",
+      "city": "Joydens Wood",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-lancashire-cross-country-championships",
+      "name": "Lancashire Cross Country Championships",
+      "sport": "Athletics",
+      "city": "Towneley Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-suffolk-winter-league",
+      "name": "Suffolk Winter League",
+      "sport": "Athletics",
+      "city": "Sutton Heath",
+      "website": "https://suffolkathletics.org.uk/suffolk-winter-leagu"
+    },
+    {
+      "slug": "ea-uk-fixtures-berks-bucks-and-oxon-cross-country-championship",
+      "name": "Berks, Bucks & Oxon Cross Country Championship",
+      "sport": "Athletics",
+      "city": "Broughton Castle",
+      "website": "https://bbocca.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-kent-fitness-league",
+      "name": "Kent Fitness League",
+      "sport": "Athletics",
+      "city": "Event Venue: * Oxleas Meadows and Woods",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-fraternity-and-sorority-cups-cross-country-race-inc-chingford-league",
+      "name": "Fraternity and Sorority Cups Cross Country Race inc. Chingford League",
+      "sport": "Athletics",
+      "city": "Trent Country Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-north-west-london-young-athletes-league",
+      "name": "North West London Young Athletes League",
+      "sport": "Athletics",
+      "city": "Trent Country Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-manchester-area-cross-country-league",
+      "name": "Manchester Area Cross Country League",
+      "sport": "Athletics",
+      "city": "Sherdley Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-west-midlands-young-athletes-cross-country-league",
+      "name": "West Midlands Young Athletes Cross Country League",
+      "sport": "Athletics",
+      "city": "Warley Woods The Pavilion",
+      "website": "http://wmyaccl.com/"
+    },
+    {
+      "slug": "ea-uk-fixtures-cumbria-cross-country-league",
+      "name": "Cumbria Cross Country League",
+      "sport": "Athletics",
+      "city": "Denton Holme",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-north-west-london-cross-country-young-athletes-league",
+      "name": "North West London Cross Country Young Athletes League",
+      "sport": "Athletics",
+      "city": "Fryent Country Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-liddiard-trophy",
+      "name": "Liddiard Trophy",
+      "sport": "Athletics",
+      "city": "Fryent Country Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-ecca-national-cross-country-relay-championships",
+      "name": "ECCA National Cross Country Relay Championships",
+      "sport": "Athletics",
+      "city": "Berry Hill Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-north-essex-and-suffolk-cross-country-league",
+      "name": "North Essex and Suffolk Cross Country League",
+      "sport": "Athletics",
+      "city": "Gosfield School",
+      "website": "https://www.nessxc.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-southern-cross-country-league",
+      "name": "Southern Cross Country League",
+      "sport": "Athletics",
+      "city": "Benyons Inclosure",
+      "website": "https://www.southerncrosscountryleague.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-british-masters-af-cross-country-relays",
+      "name": "British Masters AF Cross Country Relays",
+      "sport": "Athletics",
+      "city": "Shotover Country Park",
+      "website": "https://bmaf.opentrack.run/en-gb/x/2026/GBR/bmaf-xcr/"
+    },
+    {
+      "slug": "ea-uk-fixtures-cambridge-harriers-5-mile-open",
+      "name": "Cambridge Harriers 5 Mile Open",
+      "sport": "Athletics",
+      "city": "Joydens Wood",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-surrey-masters-cross-country-championships",
+      "name": "Surrey Masters Cross Country Championships",
+      "sport": "Athletics",
+      "city": "Nonsuch Park Stoneleigh Surrey",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-hardwick-x-stream",
+      "name": "Hardwick X-Stream",
+      "sport": "Athletics",
+      "city": "Manor House Farm",
+      "website": "https://www.bearbrookrunningclub.co.uk/page/view/hardwick-x-stream"
+    },
+    {
+      "slug": "ea-uk-fixtures-huntingdonshire-ac-club-championships",
+      "name": "Huntingdonshire AC Club Championships",
+      "sport": "Athletics",
+      "city": "One Leisure Outdoor Centre",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-suffolk-schools-rhs-trial-1",
+      "name": "Suffolk Schools RHS Trial 1",
+      "sport": "Athletics",
+      "city": "Royal Hospital School",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-east-sussex-sunday-cross-country-league",
+      "name": "East Sussex Sunday Cross Country League",
+      "sport": "Athletics",
+      "city": "Snape Wood",
+      "website": "https://www.eastsussexcrosscountry.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-surrey-league-cross-country-match-1",
+      "name": "Surrey League Cross-Country Match 1",
+      "sport": "Athletics",
+      "city": "Wimbledon Commom",
+      "website": "https://www.surreyleague.org/"
+    },
+    {
+      "slug": "ea-uk-fixtures-west-suffolk-final-fling",
+      "name": "West Suffolk Final Fling",
+      "sport": "Athletics",
+      "city": "West Suffolk Athletics Arena",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-dartford-harriers-ac-club-championships",
+      "name": "Dartford Harriers AC Club Championships",
+      "sport": "Athletics",
+      "city": "Central Park Athletics Arena",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-yorkshire-vets-cross-country-championships",
+      "name": "YORKSHIRE VETS CROSS COUNTRY CHAMPIONSHIPS",
+      "sport": "Athletics",
+      "city": "PENISTONE SHOWGROUND",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-eastern-combined-events-and-open-meeting",
+      "name": "Eastern  Combined Events & Open Meeting",
+      "sport": "Athletics",
+      "city": "Embankment Athletics Track",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-trafford-ac-medal-meeting",
+      "name": "Trafford AC Medal Meeting",
+      "sport": "Athletics",
+      "city": "Longford Park Athletics Stadium",
+      "website": "https://www.traffordac.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-winchester-and-district-ac-september-season-finale",
+      "name": "Winchester & District AC September Season Finale",
+      "sport": "Athletics",
+      "city": "University of Winchester Sports Stadium",
+      "website": "https://data.opentrack.run/en-gb/x/2026/GBR/wadacseptemberopen/"
+    },
+    {
+      "slug": "ea-uk-fixtures-central-warwickshire-primary-cross-country-supported-by-leamington-athle",
+      "name": "Central Warwickshire Primary Cross Country, supported by Leamington Athletics Academy",
+      "sport": "Athletics",
+      "city": "Hatton Country Farm",
+      "website": "https://www.leamingtonathletics.co.uk/races"
+    },
+    {
+      "slug": "ea-uk-fixtures-wenlock-mile-2026",
+      "name": "Wenlock Mile",
+      "sport": "Athletics",
+      "city": "Gaskell Field",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-north-staffordshire-cross-country-league",
+      "name": "North Staffordshire Cross Country League",
+      "sport": "Athletics",
+      "city": "Betley Court Farm",
+      "website": "https://www.entrycentral.com/Betley-Farm"
+    },
+    {
+      "slug": "ea-uk-fixtures-biggleswade-open-graded-track-and-field-meeting-2026",
+      "name": "Biggleswade Open Graded Track & Field Meeting",
+      "sport": "Athletics",
+      "city": "Sandy Sports Centre (Biggleswade)",
+      "website": "https://www.biggleswadeac.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-basingstoke-and-mid-hampshire-ac-speed-decathlon-and-combined-events",
+      "name": "Basingstoke & Mid Hampshire AC Speed Decathlon & Combined Events",
+      "sport": "Athletics",
+      "city": "Down Grange Athletic Track",
+      "website": "https://www.speed-decathlon.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-the-anne-roberts-memorial-open-track-and-field-meeting-cleethorpes-athle",
+      "name": "The Anne Roberts Memorial Open Track & Field Meeting Cleethorpes Athletics Club",
+      "sport": "Athletics",
+      "city": "King George V Stadium",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-invicta-east-kent-open-event",
+      "name": "Invicta East Kent Open Event",
+      "sport": "Athletics",
+      "city": "Canterbury High School",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-ss-athletics-throws-fest-2026",
+      "name": "SS Athletics Throws Fest",
+      "sport": "Athletics",
+      "city": "Southend Leisure & Tennis Centre",
+      "website": "https://www.race-results.co.uk/onlineentries/user/getentries.php?raceid=6139"
+    },
+    {
+      "slug": "ea-uk-fixtures-exeter-3000m-and-1200m-races",
+      "name": "Exeter 3000m and 1200m Races",
+      "sport": "Athletics",
+      "city": "Exeter Arena",
+      "website": "https://www.city-runs.co.uk/exeter-3k"
+    },
+    {
+      "slug": "ea-uk-fixtures-ryde-harriers-track-series",
+      "name": "Ryde Harriers Track Series",
+      "sport": "Athletics",
+      "city": "Fairway Athletics Centre (Sandown)",
+      "website": "https://www.facebook.com/Rydeharriers/events/"
+    },
+    {
+      "slug": "ea-uk-fixtures-whitewebbs-open",
+      "name": "Whitewebbs Open",
+      "sport": "Athletics",
+      "city": "Whitewebbs Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-east-anglian-track-and-field-league-final-2026",
+      "name": "East Anglian Track and Field League Final",
+      "sport": "Athletics",
+      "city": "West Suffolk Athletics Arena",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-havering-ac-club-championships-and-open-meeting",
+      "name": "Havering AC Club Championships & Open Meeting",
+      "sport": "Athletics",
+      "city": "Hornchurch Stadium",
+      "website": "https://www.haveringac.org/"
+    },
+    {
+      "slug": "ea-uk-fixtures-kent-combined-events-masters-champs-and-u14-champs",
+      "name": "Kent Combined Events, Masters Champs and U14 champs",
+      "sport": "Athletics",
+      "city": "Medway Park",
+      "website": "http://www.kcaa.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-dacorum-athletics-club-championships",
+      "name": "Dacorum Athletics Club Championships",
+      "sport": "Athletics",
+      "city": "Jarman Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-mk-september-open-meeting",
+      "name": "MK September Open Meeting",
+      "sport": "Athletics",
+      "city": "Stantonbury Stadium",
+      "website": "https://data.opentrack.run/accounts/login/?next=/en-gb/x/2026/GBR/mku12s-3"
+    },
+    {
+      "slug": "ea-uk-fixtures-essex-cross-country-relays",
+      "name": "Essex Cross Country Relays",
+      "sport": "Athletics",
+      "city": "Epping Forest",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-surrey-young-athletes-cross-country-relays",
+      "name": "SURREY YOUNG ATHLETES CROSS COUNTRY RELAYS",
+      "sport": "Athletics",
+      "city": "Nonsuch Park",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-emac-track-and-field-league-final",
+      "name": "EMAC Track & Field League Final",
+      "sport": "Athletics",
+      "city": "Stantonbury Stadium",
+      "website": "https://emac.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-kingston-upon-hull-september-open",
+      "name": "Kingston upon Hull September Open",
+      "sport": "Athletics",
+      "city": "Costello Stadium",
+      "website": "https://meets.rosterathletics.com/public/competitions/details/about?id=28889"
+    },
+    {
+      "slug": "ea-uk-fixtures-self-transcendence-24-hour-track-race",
+      "name": "Self Transcendence 24 Hour Track Race",
+      "sport": "Running",
+      "city": "Tooting Bec Athletics Track",
+      "website": "https://uk.srichinmoyraces.org/london-24"
+    },
+    {
+      "slug": "ea-uk-fixtures-lewes-summer-vault-3-and-long-jump-competition",
+      "name": "Lewes Summer Vault 3 & Long Jump Competition",
+      "sport": "Athletics",
+      "city": "Lewes Community Athletics Track",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-tommy-clay-development-open-meetings",
+      "name": "Tommy Clay Development Open Meetings",
+      "sport": "Athletics",
+      "city": "Princess Royal Sports Arena (DABSI)",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-running2time-oxford-city-midweek-open-meeting",
+      "name": "Running2Time Oxford City Midweek Open Meeting",
+      "sport": "Athletics",
+      "city": "Oxford Horspath Athletics Stadium",
+      "website": "https://meets.rosterathletics.com/public/competitions/details/about?id=28307"
+    },
+    {
+      "slug": "ea-uk-fixtures-veterans-ac-10000m-2026-championship-open-to-all-licensed-athletes",
+      "name": "Veterans AC 10000m 2026 Championship (open to all licensed athletes)",
+      "sport": "Athletics",
+      "city": "Tooting Bec Athletics Track",
+      "website": "https://data.opentrack.run/en-gb/x/2026/GBR/vactrack1026/"
+    },
+    {
+      "slug": "ea-uk-fixtures-avon-track-and-field-league",
+      "name": "Avon Track & Field League",
+      "sport": "Athletics",
+      "city": "Yate Outdoor Sports Complex",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-seaa-u16-u18-inter-counties-track-and-field-championships",
+      "name": "SEAA U16/U18 Inter Counties Track and Field Championships",
+      "sport": "Athletics",
+      "city": "Weir Archer Athletics Track (Kingsmeadow)",
+      "website": "https://www.seaa.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-trafford-ac-combined-events-classic",
+      "name": "Trafford AC Combined Events Classic",
+      "sport": "Athletics",
+      "city": "Longford Park Athletics Stadium",
+      "website": "https://traffordac.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-bmaf-outdoor-championships",
+      "name": "BMAF Outdoor Championships",
+      "sport": "Athletics",
+      "city": "Derby Moorways",
+      "website": "https://data.opentrack.run/en-gb/x/2026/GBR/bmaf-otfc/"
+    },
+    {
+      "slug": "ea-uk-fixtures-yeovil-games",
+      "name": "Yeovil Games",
+      "sport": "Athletics",
+      "city": "Bill Whistlecroft Stadium (Yeovil Athletics Arena)",
+      "website": "https://www.yeovilolympiads.com/"
+    },
+    {
+      "slug": "ea-uk-fixtures-cheshire-track-and-field-grand-prix",
+      "name": "Cheshire Track & Field Grand Prix",
+      "sport": "Athletics",
+      "city": "Ellesmere Port Sports Village",
+      "website": "https://www.facebook.com/profile.php?id=61574019416987"
+    },
+    {
+      "slug": "ea-uk-fixtures-the-peter-lee-memorial-meet",
+      "name": "The Peter Lee Memorial Meet",
+      "sport": "Athletics",
+      "city": "Ridlins Wood Athletics Track",
+      "website": "https://meets.rosterathletics.com/public/competitions/details/about?id=27915"
+    },
+    {
+      "slug": "ea-uk-fixtures-newquay-and-par-last-ditch-throws",
+      "name": "Newquay & Par Last Ditch Throws",
+      "sport": "Athletics",
+      "city": "Par Recreation Ground",
+      "website": "https://www.newquayandpar.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-blackpool-open-meeting",
+      "name": "Blackpool Open Meeting",
+      "sport": "Athletics",
+      "city": "Stanley Park Athletics Arena",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-west-yorkshire-track-and-field-league",
+      "name": "West Yorkshire Track & Field League",
+      "sport": "Athletics",
+      "city": "Princess Mary Athletics Stadium",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-national-athletics-league-promotion-final",
+      "name": "National Athletics League Promotion Final",
+      "sport": "Athletics",
+      "city": "Oxford Horspath Athletics Stadium",
+      "website": "https://www.nationalathleticsleague.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-seaa-under-10-under-12-quadrathlon-and-u14-open-races",
+      "name": "SEAA Under 10 / Under 12 Quadrathlon and U14 Open Races",
+      "sport": "Athletics",
+      "city": "Weir Archer Athletics Track (Kingsmeadow)",
+      "website": "https://www.seaa.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-cornwall-athletics-academy-young-athletes-medal-meeting",
+      "name": "Cornwall Athletics Academy Young Athletes Medal Meeting",
+      "sport": "Athletics",
+      "city": "Par Recreation Ground",
+      "website": "https://meets.rosterathletics.com/public/competitions/details/about?id=29533"
+    },
+    {
+      "slug": "ea-uk-fixtures-cumbria-track-and-field-league",
+      "name": "Cumbria Track & Field League",
+      "sport": "Athletics",
+      "city": "Cumbria Sports Academy",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-inter-counties-meeting",
+      "name": "Inter Counties Meeting",
+      "sport": "Athletics",
+      "city": "Costello Stadium",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-telford-games-2026",
+      "name": "Telford Games",
+      "sport": "Athletics",
+      "city": "Telford Athletics Stadium",
+      "website": "https://entry4sports.co.uk/app-v3/#/v2/show-entry-v2/1371"
+    },
+    {
+      "slug": "ea-uk-fixtures-herefordshire-athletics-association-county-championships",
+      "name": "Herefordshire Athletics Association County Championships",
+      "sport": "Athletics",
+      "city": "Hereford Leisure Centre",
+      "website": "https://www.herefordcountyathletics.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-flycarb-cambridge-and-coleridge-10-000m",
+      "name": "Flycarb Cambridge & Coleridge 10,000m",
+      "sport": "Athletics",
+      "city": "Cambridge University Athletics Track",
+      "website": "https://data.opentrack.run/en-gb/x/2026/GBR/flycarb-10000/"
+    },
+    {
+      "slug": "ea-uk-fixtures-trafford-ac-club-championships",
+      "name": "Trafford AC Club Championships",
+      "sport": "Athletics",
+      "city": "Longford Park Athletics Stadium",
+      "website": "https://traffordac.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-kent-ac-late-summer-meet",
+      "name": "Kent AC Late Summer Meet",
+      "sport": "Athletics",
+      "city": "Ladywell Arena",
+      "website": "https://kentac.org.uk/athletics/track-and-field/tf-open-events/"
+    },
+    {
+      "slug": "ea-uk-fixtures-biggleswade-one-mile-open-2026-run-walk-and-1500-m-wheelchair",
+      "name": "Biggleswade One Mile Open 2026 (run, walk and 1500 m wheelchair",
+      "sport": "Athletics",
+      "city": "Sandy Sports Centre (Biggleswade)",
+      "website": "https://www.biggleswadeac.org.uk/news/upcoming-events"
+    },
+    {
+      "slug": "ea-uk-fixtures-north-eastern-counties-athletics-association-necaa-relays-night-2026",
+      "name": "North Eastern Counties Athletics Association (NECAA) Relays Night",
+      "sport": "Athletics",
+      "city": "Monkton Stadium",
+      "website": "https://necaa.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-highgate-harriers-open-meeting",
+      "name": "Highgate Harriers Open Meeting",
+      "sport": "Athletics",
+      "city": "Parliament Hill Fields Track",
+      "website": "https://www.highgateharriers.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-gloucester-ac-september-open",
+      "name": "Gloucester AC September Open",
+      "sport": "Athletics",
+      "city": "Blackbridge Athletics Track",
+      "website": "https://www.gloucesterac.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-ken-jefferson-memorial-farringdon-cross-country-relays",
+      "name": "Ken Jefferson Memorial Farringdon Cross-Country Relays",
+      "sport": "Athletics",
+      "city": "Foxhole Wood",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-basingstoke-and-mid-hants-ac-club-championships",
+      "name": "Basingstoke & Mid Hants AC Club Championships",
+      "sport": "Athletics",
+      "city": "Down Grange Athletic Track",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-brat-club-open-meeting",
+      "name": "BRAT Club Open Meeting",
+      "sport": "Athletics",
+      "city": "University of Birmingham",
+      "website": "https://entry4sports.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-city-of-portsmouth-ac-autumn-open-meeting",
+      "name": "City of Portsmouth AC - Autumn Open Meeting",
+      "sport": "Athletics",
+      "city": "Mountbatten Centre",
+      "website": "https://www.portsmouthathletic.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-aztec-track-and-field-series",
+      "name": "Aztec Track & Field Series",
+      "sport": "Athletics",
+      "city": "Footes Lane",
+      "website": "https://guernseyathletics.org.gg/aztec-track-and-field/"
+    },
+    {
+      "slug": "ea-uk-fixtures-midlands-vets-cup-final",
+      "name": "Midlands Vets Cup Final",
+      "sport": "Athletics",
+      "city": "The Pingles Stadium",
+      "website": "https://mvtfl.wordpress.com/"
+    },
+    {
+      "slug": "ea-uk-fixtures-speermeister-weight-pentathlon-2-and-invitation-hammer-competition",
+      "name": "Speermeister Weight Pentathlon # 2 & Invitation Hammer Competition",
+      "sport": "Athletics",
+      "city": "Witton Park Track",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-sussex-aa-u14-and-u16-track-and-field-league-finals",
+      "name": "Sussex AA U14 and U16 Track and Field League Finals",
+      "sport": "Athletics",
+      "city": "K2 Athletics Stadium",
+      "website": "https://www.sussexathletics.net/take-part/events-information/"
+    },
+    {
+      "slug": "ea-uk-fixtures-south-west-athletics-league",
+      "name": "South West Athletics League",
+      "sport": "Athletics",
+      "city": "Exeter Arena",
+      "website": "https://www.southwestathleticsleague.com/"
+    },
+    {
+      "slug": "ea-uk-fixtures-uk-youth-development-league-national-final-uag",
+      "name": "UK Youth Development League National Final UAG",
+      "sport": "Athletics",
+      "city": "Wavertree Athletic Track",
+      "website": "https://www.ukydl.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-nottinghamshire-county-development-league",
+      "name": "Nottinghamshire County Development League",
+      "sport": "Athletics",
+      "city": "Berry Hill Park Athletic Track",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-oxfordshire-track-and-field-league-match",
+      "name": "Oxfordshire Track and Field League Match",
+      "sport": "Athletics",
+      "city": "Tilsley Park Athletics Track",
+      "website": "https://otfl.org.uk/events/"
+    },
+    {
+      "slug": "ea-uk-fixtures-eyal-finals",
+      "name": "EYAL Finals",
+      "sport": "Athletics",
+      "city": "Chelmsford Sport & Athletics Centre",
+      "website": "http://eyal.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-eyal-finals-2",
+      "name": "EYAL Finals",
+      "sport": "Athletics",
+      "city": "Ridlins Wood Athletics Track",
+      "website": "http://eyal.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-watford-harriers-club-championships",
+      "name": "Watford Harriers Club Championships",
+      "sport": "Athletics",
+      "city": "Woodside Stadium",
+      "website": "https://www.watfordharriers.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-watford-minors-meeting",
+      "name": "Watford Minors Meeting",
+      "sport": "Athletics",
+      "city": "Woodside Stadium",
+      "website": "https://www.watfordharriers.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-cp-sport-national-athletics-championships-2026",
+      "name": "CP Sport National Athletics Championships",
+      "sport": "Athletics",
+      "city": "Coventry Athletic Track (Univeristy of Warwick)",
+      "website": "https://cpsport.org/events/?summary=all"
+    },
+    {
+      "slug": "ea-uk-fixtures-british-milers-club-regional-meeting",
+      "name": "British Milers Club Regional Meeting",
+      "sport": "Athletics",
+      "city": "Medway Park",
+      "website": "https://www.britishmilersclub.com/"
+    },
+    {
+      "slug": "ea-uk-fixtures-amber-valley-and-erewash-ac-club-championships-2026",
+      "name": "Amber Valley & Erewash AC Club Championships",
+      "sport": "Athletics",
+      "city": "Rutland Recreation Ground",
+      "website": "https://aveac.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-medway-and-maidstone-summer-open-competition",
+      "name": "Medway & Maidstone Summer Open Competition",
+      "sport": "Athletics",
+      "city": "Medway Park",
+      "website": "https://entry4sports.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-mk-sprint-series-3-season-finale",
+      "name": "MK Sprint Series 3 – Season Finale",
+      "sport": "Athletics",
+      "city": "Stantonbury Stadium",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-uk-youth-development-league-final-lower-age-group",
+      "name": "UK Youth Development League Final Lower Age Group",
+      "sport": "Athletics",
+      "city": "Wavertree Athletic Track",
+      "website": "https://www.ukydl.org.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-lesley-little-and-matthew-james-hammer-throws-memorial-meeting",
+      "name": "Lesley Little & Matthew James Hammer Throws Memorial Meeting",
+      "sport": "Athletics",
+      "city": "Sheepmount Athletics Stadium",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-swindon-harriers-autumn-track-open-meeting",
+      "name": "Swindon Harriers Autumn Track Open Meeting",
+      "sport": "Athletics",
+      "city": "County Ground Track (Swindon)",
+      "website": "https://www.swindonharriers.com/"
+    },
+    {
+      "slug": "ea-uk-fixtures-shaftesbury-barnet-harriers-athlos-trials-inc-invitational-1000m",
+      "name": "Shaftesbury Barnet Harriers Athlos Trials inc. Invitational 1000m",
+      "sport": "Athletics",
+      "city": "Stonex Stadium",
+      "website": "https://data.opentrack.run/en-gb/x/2026/GBR/sbh-athlos-trials/"
+    },
+    {
+      "slug": "ea-uk-fixtures-burton-midweek-open",
+      "name": "Burton Midweek Open",
+      "sport": "Athletics",
+      "city": "Shobnall Athletics Track",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-kingston-upon-hull-september-jumps-and-throws",
+      "name": "Kingston upon Hull September Jumps and Throws",
+      "sport": "Athletics",
+      "city": "Costello Stadium",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-avon-aa-open-meeting",
+      "name": "Avon AA Open Meeting",
+      "sport": "Athletics",
+      "city": "Kip Keino Athletics Stadium",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-crawley-ac-tom-lintern-open-incorporating-sussex-3000m-championships",
+      "name": "Crawley AC Tom Lintern Open incorporating Sussex 3000m Championships",
+      "sport": "Athletics",
+      "city": "K2 Athletics Stadium",
+      "website": "https://meets.rosterathletics.com/public/competitions/details/about?id=29568"
+    },
+    {
+      "slug": "ea-uk-fixtures-mike-lambert-open",
+      "name": "Mike Lambert Open",
+      "sport": "Athletics",
+      "city": "Alan Moreton Track (Stourport)",
+      "website": "https://www.ksacmikelambertopen.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-stratford-speed-gp5",
+      "name": "Stratford Speed GP5",
+      "sport": "Athletics",
+      "city": "London Marathon Community Track",
+      "website": "https://entry4sports.com/"
+    },
+    {
+      "slug": "ea-uk-fixtures-southend-city-open-2026",
+      "name": "Southend City Open",
+      "sport": "Athletics",
+      "city": "Southend Leisure & Tennis Centre",
+      "website": "http://southendac.co.uk/club-track-and-field-championships-and-open/"
+    },
+    {
+      "slug": "ea-uk-fixtures-tonbridge-bank-holiday-open",
+      "name": "Tonbridge Bank Holiday Open",
+      "sport": "Athletics",
+      "city": "Tonbridge School Athletics Track",
+      "website": "https://data.opentrack.run/en-gb/x/2026/GBR/tacdev5/"
+    },
+    {
+      "slug": "ea-uk-fixtures-conac-throws-fest",
+      "name": "CONAC Throws Fest",
+      "sport": "Athletics",
+      "city": "Sportspark at U",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-northern-t-and-f-league-west-premier",
+      "name": "Northern T&F League - West Premier",
+      "sport": "Athletics",
+      "city": "Longford Park Athletics Stadium",
+      "website": "https://www.northernathletics.co.uk/track-field-league/"
+    },
+    {
+      "slug": "ea-uk-fixtures-northern-t-and-f-league-west-1-south",
+      "name": "Northern T&F League - West 1 South",
+      "sport": "Athletics",
+      "city": "The Sports Centre",
+      "website": "https://www.northernathletics.co.uk/track-field-league/"
+    },
+    {
+      "slug": "ea-uk-fixtures-momentum-sports-bob-lewis-memorial-meeting-ema-league",
+      "name": "Momentum Sports Bob Lewis Memorial Meeting (EMA League)",
+      "sport": "Athletics",
+      "city": "Weir Archer Athletics Track (Kingsmeadow)",
+      "website": "https://data.opentrack.run/en-gb/x/2026/GBR/ms/"
+    },
+    {
+      "slug": "ea-uk-fixtures-newquay-and-par-bank-holiday-discus-and-javelin-invitational",
+      "name": "Newquay and Par Bank Holiday Discus & Javelin Invitational",
+      "sport": "Athletics",
+      "city": "Par Recreation Ground",
+      "website": "https://fixtures.myathletics.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-northern-t-and-f-league-east-1-south",
+      "name": "Northern T&F League - East 1 South",
+      "sport": "Athletics",
+      "city": "Derby Moorways",
+      "website": "https://www.northernathletics.co.uk/track-field-league/"
+    },
+    {
+      "slug": "ea-uk-fixtures-northern-t-and-f-league-west-2",
+      "name": "Northern T&F League - West 2",
+      "sport": "Athletics",
+      "city": "Witton Park Track",
+      "website": "https://www.northernathletics.co.uk/track-field-league/"
+    },
+    {
+      "slug": "ea-uk-fixtures-northern-t-and-f-league-west-1-north",
+      "name": "Northern T&F League - West 1 North",
+      "sport": "Athletics",
+      "city": "Leigh Sports Village",
+      "website": "https://www.northernathletics.co.uk/track-field-league/"
+    },
+    {
+      "slug": "ea-uk-fixtures-northern-t-and-f-league-east-1-north",
+      "name": "Northern T&F League - East 1 North",
+      "sport": "Athletics",
+      "city": "Thornes Park Athletics Stadium",
+      "website": "https://www.northernathletics.co.uk/track-field-league/"
+    },
+    {
+      "slug": "ea-uk-fixtures-midland-counties-league-division-1",
+      "name": "Midland Counties League - Division 1",
+      "sport": "Athletics",
+      "city": "University of Birmingham",
+      "website": "https://midland-athletics.co.uk/"
+    },
+    {
+      "slug": "ea-uk-fixtures-biggleswade-summer-throws-fest",
+      "name": "Biggleswade Summer Throws Fest",
+      "sport": "Athletics",
+      "city": "Sandy Sports Centre (Biggleswade)",
+      "website": "https://meets.rosterathletics.com/public/competitions/details/about?id=28235"
+    },
+    {
+      "slug": "ea-uk-fixtures-midland-counties-league-division-3se-inc-oxfordshire-county-3000m-and-30",
+      "name": "Midland Counties League - Division 3SE inc. Oxfordshire County 3000m & 3000m Steeplechase Championships",
+      "sport": "Athletics",
+      "city": "Tilsley Park Athletics Track",
+      "website": "https://midland-athletics.co.uk/tf/league/"
+    },
+    {
+      "slug": "ea-uk-fixtures-midland-counties-league-division-3ne",
+      "name": "Midland Counties League - Division 3NE",
+      "sport": "Athletics",
+      "city": "The Pingles Stadium",
+      "website": "https://midland-athletics.co.uk/tf/league/"
+    },
+    {
+      "slug": "ea-uk-fixtures-mid-lancs-track-and-field-league",
+      "name": "Mid Lancs Track & Field League",
+      "sport": "Athletics",
+      "city": "UCLAN Sports Arena",
+      "website": "https://www.midlancs.org.uk/"
+    }
+  ],
+  "ambiguous": []
+}

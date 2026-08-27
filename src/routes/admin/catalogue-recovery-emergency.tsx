@@ -30,8 +30,6 @@ const runStaffCatalogueRecoveryBatch = createServerFn({ method: "POST" })
     return runCatalogueRecoveryBatch();
   });
 
-// The checked-in route tree is refreshed later by the Vite build.
-// @ts-expect-error The new literal route is generated during that build step.
 export const Route = createFileRoute("/admin/catalogue-recovery-emergency")({
   head: () => ({
     meta: [

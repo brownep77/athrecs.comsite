@@ -36,6 +36,9 @@ export const verifiedFixtureAliases: Readonly<Record<string, string>> = {
   "wa-asml-eindhoven-marathon-7242235": "eindhoven-marathon",
   "wa-graz-marathon-7242010": "graz-marathon",
   "wa-nlb-ljubljana-marathon-7235593": "ljubljana-marathon",
+  "wa-prishtina-half-marathon-7242724": "prishtina-marathon",
+  "wa-prishtina-marathon-7242723": "prishtina-marathon",
+  "wa-10k-belgrade-nike-run-7244711": "belgrade-nike-10k",
   "tcs-amsterdam-marathonhalf-marathon-8k": "amsterdam-marathon",
   "wa-tcs-amsterdam-marathon-7235581": "amsterdam-marathon",
   "wa-irish-life-dublin-marathon-7238744": "dublin-marathon",
@@ -148,9 +151,37 @@ export const verifiedFixtureEditionReplacements: VerifiedEditionReplacement[] = 
     fromDate: "2027-04-11",
     toDate: "2027-04-19",
   },
+  {
+    seriesSlug: "wa-le-marathon-vert-rennes-school-of-business-7236026",
+    distance: "Other",
+    fromDate: "2026-10-18",
+    toDate: "2026-10-18",
+    toDistance: "Marathon",
+  },
+  {
+    seriesSlug: "wa-bilbao-night-half-marathon-7236025",
+    distance: "Other",
+    fromDate: "2026-10-17",
+    toDate: "2026-10-17",
+    toDistance: "Half",
+  },
 ];
 
 export const verifiedFixtureEditionOverrides: Record<string, Partial<Edition>> = {
+  "wa-le-marathon-vert-rennes-school-of-business-7236026|2026-10-18|Other": {
+    distance: "Marathon",
+    distanceKm: 42.195,
+    source: "https://www.lemarathonvert.org/le-marathon.php",
+    notes: "The organiser identifies this World Athletics fixture as the 42.195K marathon.",
+  },
+  "wa-bilbao-night-half-marathon-7236025|2026-10-17|Other": {
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Closed",
+    entryUrl: undefined,
+    source: "https://www.bilbaonightrun.com/en-gb/reglamento",
+    notes: "The organiser identifies this World Athletics fixture as the certified half marathon.",
+  },
   "isle-of-wight-fell-series-sunday|2026-09-12|Other": {
     date: "2026-09-13",
     distanceKm: 21,

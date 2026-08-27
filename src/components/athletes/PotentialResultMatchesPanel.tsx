@@ -180,13 +180,7 @@ export function PotentialResultMatchesPanel() {
                     {match.eventName}
                   </h3>
                   <p className="mt-1 text-sm text-muted">
-                    <Link
-                      to="/athletes/$slug"
-                      params={{ slug: match.athleteSlug }}
-                      className="font-semibold text-fg no-underline hover:text-accent"
-                    >
-                      {match.athleteName}
-                    </Link>{" "}
+                    <strong className="font-semibold text-fg">{match.athleteName}</strong>{" "}
                     · {formatRaceDateShort(match.eventDate)} · {match.distanceCode}
                   </p>
                   {match.clubName || locationText(match) ? (
@@ -235,11 +229,9 @@ export function PotentialResultMatchesPanel() {
 
               <div className="flex flex-wrap items-center gap-2">
                 {match.claimStatus === "approved" ? (
-                  <Button asChild variant="secondary">
-                    <Link to="/athletes/$slug" params={{ slug: match.athleteSlug }}>
-                      <Trophy className="size-4" aria-hidden="true" /> View linked profile
-                    </Link>
-                  </Button>
+                  <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
+                    Linked to your private Athlete Account
+                  </Badge>
                 ) : (
                   <Button asChild>
                     <Link to="/claim-results" search={{ resultId: match.resultId }}>

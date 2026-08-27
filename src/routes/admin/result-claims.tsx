@@ -117,9 +117,8 @@ function AdminResultClaimsPage() {
             Result claim review
           </h1>
           <p className="max-w-3xl text-sm text-muted">
-            Verify ownership evidence before linking a Google account to an athlete profile.
-            Approving one claimant automatically closes unresolved competing claims for that
-            athlete.
+            Uncontested claims are approved automatically. This queue is only for genuine ownership
+            conflicts, where optional evidence links may help staff decide between claimants.
           </p>
         </div>
         <Button asChild variant="secondary">
@@ -219,6 +218,9 @@ function ClaimReviewCard({
   const revokable = claim.status === "approved";
   const conflict =
     claim.conflictReason || claim.existingOwnerEmail || (claim.competingClaimCount ?? 0) > 0;
+  const evidenceLinks = [claim.evidenceUrl, claim.evidenceUrl2, claim.evidenceUrl3].filter(
+    (url): url is string => Boolean(url),
+  );
 
   return (
     <article className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
@@ -251,29 +253,41 @@ function ClaimReviewCard({
           <dl className="grid gap-3 text-sm sm:grid-cols-2">
             <Info label="Claim ID" value={String(claim.claimId)} />
             <Info label="Claimant email" value={claim.claimantEmail} />
-            <Info
-              label="Verification method"
-              value={claim.verificationMethod.replaceAll("_", " ")}
-            />
+            <Info label="Claim basis" value="Athlete self-confirmation" />
             <Info label="Submitted" value={new Date(claim.submittedAt).toLocaleString("en-GB")} />
           </dl>
 
           <div className="rounded-lg border border-border bg-elevated p-3">
             <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-              Evidence detail
+              Optional evidence links
             </p>
-            <p className="mt-2 whitespace-pre-wrap text-sm text-fg">
-              {claim.evidenceText || "No written detail supplied."}
-            </p>
-            {claim.evidenceUrl ? (
-              <a
-                href={claim.evidenceUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-2 inline-flex min-h-11 items-center gap-1 text-xs font-medium text-accent no-underline hover:underline"
-              >
-                Open evidence link <ExternalLink className="size-3.5" aria-hidden="true" />
-              </a>
+            {evidenceLinks.length ? (
+              <div className="mt-2 flex flex-wrap gap-2">
+                {evidenceLinks.map((url, index) => (
+                  <a
+                    key={url}
+                    href={url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex min-h-11 items-center gap-1 rounded-lg border border-border bg-bg px-3 text-xs font-medium text-accent no-underline hover:underline"
+                  >
+                    Open evidence link {index + 1}
+                    <ExternalLink className="size-3.5" aria-hidden="true" />
+                  </a>
+                ))}
+              </div>
+            ) : (
+              <p className="mt-2 text-sm text-muted">
+                No evidence was supplied. Evidence is not required for an uncontested claim.
+              </p>
+            )}
+            {claim.evidenceText ? (
+              <details className="mt-3 text-sm text-muted">
+                <summary className="cursor-pointer font-medium text-fg">
+                  Legacy written detail
+                </summary>
+                <p className="mt-2 whitespace-pre-wrap">{claim.evidenceText}</p>
+              </details>
             ) : null}
           </div>
 
@@ -298,8 +312,8 @@ function ClaimReviewCard({
 
           <div className="flex flex-wrap gap-2">
             <Button asChild variant="secondary">
-              <Link to="/athletes/$slug" params={{ slug: claim.athleteSlug }}>
-                Athlete profile
+              <Link to="/races/$slug" params={{ slug: claim.eventSlug }}>
+                Event page
               </Link>
             </Button>
             {claim.sourceUrl ? (

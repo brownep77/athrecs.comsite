@@ -60,6 +60,11 @@ import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon"
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
 import { mrdEuMarathonEditions, mrdEuMarathonSeries } from "./mrd-marathons-eu";
 import { mrdIntlMarathonEditions, mrdIntlMarathonSeries } from "./mrd-marathons-intl";
+import {
+  aimsEuropeEditions,
+  aimsEuropeSeries,
+  aimsEuropeSeriesOverrides,
+} from "./aims-europe-road-races";
 import { comradesEditions, comradesSeries } from "./comrades";
 import { twoOceansEditions, twoOceansSeries } from "./two-oceans";
 import { marathonDesSablesEditions, marathonDesSablesSeries } from "./marathon-des-sables";
@@ -75,6 +80,19 @@ import { verifiedAllSportEditions, verifiedAllSportSeries } from "./verified-all
 import { verifiedGlobalEditions, verifiedGlobalSeries } from "./verified-global-fixtures";
 import { afghanistanRaceEditions, afghanistanRaceSeries } from "./afghanistan-races";
 import { albaniaRaceEditions, albaniaRaceSeries } from "./albania-races";
+import { westernBalkansRaceEditions, westernBalkansRaceSeries } from "./western-balkans-races";
+import {
+  franceSpainPortugalRaceEditions,
+  franceSpainPortugalRaceSeries,
+} from "./france-spain-portugal-races";
+import {
+  englandAthleticsRunEventsEditions,
+  englandAthleticsRunEventsSeries,
+} from "./england-athletics-runevents";
+import {
+  englandAthleticsUkFixturesEditions,
+  englandAthleticsUkFixturesSeries,
+} from "./england-athletics-uk-fixtures";
 import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races";
 import { continuedFiveKEditions, continuedFiveKSeries } from "./five-k-races-uk-ireland-next";
 import { dailyFiveKEditions, dailyFiveKSeries } from "./five-k-races-uk-ireland-daily";
@@ -159,6 +177,10 @@ for (const series of [
   ...(marathonDesSablesSeries as Series[]),
   ...(afghanistanRaceSeries as Series[]),
   ...(albaniaRaceSeries as Series[]),
+  ...(westernBalkansRaceSeries as Series[]),
+  ...(franceSpainPortugalRaceSeries as Series[]),
+  ...(englandAthleticsRunEventsSeries as Series[]),
+  ...(englandAthleticsUkFixturesSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
   ...(verifiedGlobalSeries as Series[]),
   ...(verifiedUkSeries as Series[]),
@@ -179,6 +201,7 @@ for (const series of [
   ...(mrdMarathonSeries as Series[]),
   ...(mrdEuMarathonSeries as Series[]),
   ...(mrdIntlMarathonSeries as Series[]),
+  ...(aimsEuropeSeries as Series[]),
   ...(comradesSeries as Series[]),
   ...(twoOceansSeries as Series[]),
   ...(publicFigureSeries as Series[]),
@@ -195,9 +218,11 @@ const extraSlugs = new Set(extraSeries.map((series) => series.slug));
 export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series) => ({
   ...series,
   ...seriesOverrides[series.slug],
+  ...aimsEuropeSeriesOverrides[series.slug],
 }));
 
 const mergedEditions = [
+  ...aimsEuropeEditions.filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...(coreEditions as Edition[]),
   ...(raceCollectionEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(marathonDesSablesEditions as Edition[]).filter((edition) =>
@@ -208,6 +233,18 @@ const mergedEditions = [
   ),
   ...(albaniaRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(westernBalkansRaceEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(franceSpainPortugalRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(englandAthleticsRunEventsEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(englandAthleticsUkFixturesEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
   ),
   ...(verifiedAllSportEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
@@ -244,6 +281,7 @@ const mergedEditions = [
 
 export const editions: Edition[] = (() => {
   const seen = new Set<string>();
+  const seenExact = new Set<string>();
   const unique: Edition[] = [];
   for (const sourceEdition of mergedEditions) {
     const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
@@ -251,8 +289,12 @@ export const editions: Edition[] = (() => {
       ...sourceEdition,
       ...editionOverrides[sourceKey],
     };
-    const key = `${edition.seriesSlug}|${edition.date}`;
-    if (seen.has(key)) continue;
+    const exactKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+    const key = edition.publishAllDistances
+      ? exactKey
+      : `${edition.seriesSlug}|${edition.date}`;
+    if (seenExact.has(exactKey) || seen.has(key)) continue;
+    seenExact.add(exactKey);
     seen.add(key);
     const matchingEntryOptions =
       entryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];

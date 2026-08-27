@@ -3,12 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, useRouterState } from "@tanstack/react-router";
 import {
   AlertTriangle,
+  Archive,
   BarChart3,
   BadgeCheck,
   CalendarCheck,
   Database,
   ExternalLink,
-  Link2,
   Loader2,
   LockKeyhole,
   LogOut,
@@ -57,10 +57,11 @@ const staffNav = [
     match: (path: string) => path.startsWith("/admin/fixture-review"),
   },
   {
-    to: "/admin/result-links",
-    label: "Results",
-    icon: Link2,
-    match: (path: string) => path.startsWith("/admin/result-links"),
+    to: "/admin/result-archive",
+    label: "Result archive",
+    icon: Archive,
+    match: (path: string) =>
+      path.startsWith("/admin/result-archive") || path.startsWith("/admin/result-links"),
   },
   {
     to: "/admin/result-claims",

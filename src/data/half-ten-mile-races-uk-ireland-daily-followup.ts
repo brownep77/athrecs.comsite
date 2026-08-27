@@ -4,7 +4,8 @@ const CHECKED_AT = "2026-08-22";
 const PREVIOUS_CHECKED_AT = "2026-08-23";
 const PRIOR_CHECKED_AT = "2026-08-24";
 const LATEST_CHECKED_AT = "2026-08-25";
-const CURRENT_CHECKED_AT = "2026-08-26";
+const PREVIOUS_CURRENT_CHECKED_AT = "2026-08-26";
+const CURRENT_CHECKED_AT = "2026-08-27";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
@@ -808,9 +809,28 @@ const seeds: RaceSeed[] = [
     entryUrl:
       "https://www.letsdothis.com/gb/o/154485/checkout/ticket?eventId=253026&occurrenceId=21111177514&preferred=true",
     priceAmount: 32,
-    checkedAt: CURRENT_CHECKED_AT,
+    checkedAt: PREVIOUS_CURRENT_CHECKED_AT,
     notes:
       "The official organiser page confirms the 12K, half-marathon and marathon races, 17 July 2027 date and open registration.",
+  },
+  {
+    slug: "eyam-half-marathon-2027",
+    name: "Eyam Half Marathon 2027",
+    date: "2027-05-16",
+    distance: "Half",
+    startTime: "10:30",
+    country: "England",
+    county: "Derbyshire",
+    city: "Eyam",
+    area: "Eyam and the Peak District roads around Bretton, Abney and Hathersage",
+    surface: "Road",
+    organiser: "Eyam Half Marathon",
+    url: "https://www.eyamhalfmarathon.org/",
+    entryUrl: "https://www.sientries.co.uk/event.php?event_id=18017",
+    priceAmount: 25,
+    checkedAt: CURRENT_CHECKED_AT,
+    notes:
+      "The organiser and direct registration pages consistently confirm the 16 May 2027 road half-marathon, 10:30 start and open entry.",
   },
 ];
 
@@ -976,9 +996,20 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     url: "https://eventmaster.ie/event/xZk3IPyS91",
     priceAmount: 52,
     priceCurrency: "EUR",
-    checkedAt: CURRENT_CHECKED_AT,
+    checkedAt: PREVIOUS_CURRENT_CHECKED_AT,
     notes:
       "The direct official registration page confirms the 2027 half-marathon date, start time, certified course and open entry; the established Clontarf card is reused.",
+  },
+  {
+    seriesSlug: "beverley-half-marathon",
+    date: "2027-08-22",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/beverley-half-marathon-august-2027",
+    priceAmount: 36,
+    checkedAt: CURRENT_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the 22 August 2027 road-closed half-marathon, Saturday Market venue, 09:00 start and open direct entry; the established Beverley card is reused.",
   },
 ];
 
@@ -1093,6 +1124,14 @@ export const dailyHalfTenMileResearchQueue = [
       "The official page's structured date says 4 December 2027, but its race-day heading contains a malformed conflicting day, so publication is held pending correction.",
     sourceUrl: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-december-2027",
   },
+  {
+    slug: "world-half-marathon-festival-2027",
+    date: "2027-01-09",
+    country: "Ireland",
+    reason:
+      "The organiser and checkout agree on the 9–10 January 2027 weekend, but the two ticket headings still label the Saturday and Sunday sessions as 2026 and 2025 respectively, so both editions remain held pending correction.",
+    sourceUrl: "https://eventmaster.ie/event/vZ4qcPoSb4",
+  },
 ] as const;
 
 const BRIGHTEN_MARINA_URL =
@@ -1167,6 +1206,20 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     website: "https://eventmaster.ie/event/xZk3IPyS91",
     source_url: "https://eventmaster.ie/event/xZk3IPyS91",
     defaultStartTime: "10:00",
+  },
+  "beverley-half-marathon": {
+    county: "East Riding of Yorkshire",
+    area: "Saturday Market, Beverley Minster, Westwood and surrounding country lanes",
+    surface: "Road",
+    distances: ["Half"],
+    summary:
+      "Beverley Half Marathon — a road-closed half marathon from Saturday Market through Beverley and nearby country lanes.",
+    description:
+      "RunThrough's Beverley Half Marathon starts and finishes at Saturday Market, passing Beverley Minster, Westwood and surrounding country lanes; the established card carries its verified annual editions.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/beverley-half-marathon-august-2027",
+    source_url: "https://www.runthrough.co.uk/event/beverley-half-marathon-august-2027",
+    defaultStartTime: "09:00",
   },
 };
 

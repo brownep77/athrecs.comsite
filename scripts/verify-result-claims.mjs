@@ -6,11 +6,21 @@ import { PGlite } from "@electric-sql/pglite";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const migration = await readFile(resolve(root, "migrations/0013_result_claims.sql"), "utf8");
+const evidenceLinksMigration = await readFile(
+  resolve(root, "migrations/0020_result_claim_evidence_links.sql"),
+  "utf8",
+);
 const api = await readFile(resolve(root, "src/lib/athrecs/result-claims-api.ts"), "utf8");
 const athleteApi = await readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8");
 const athleteRoute = await readFile(resolve(root, "src/routes/athletes/$slug.tsx"), "utf8");
 const raceRoute = await readFile(resolve(root, "src/routes/races/$slug.tsx"), "utf8");
 const homeRoute = await readFile(resolve(root, "src/routes/index.tsx"), "utf8");
+const claimRoute = await readFile(resolve(root, "src/routes/claim-results.tsx"), "utf8");
+const vercelConfig = JSON.parse(await readFile(resolve(root, "vercel.json"), "utf8"));
+const adminClaimRoute = await readFile(
+  resolve(root, "src/routes/admin/result-claims.tsx"),
+  "utf8",
+);
 const staffShell = await readFile(
   resolve(root, "src/components/staff/StaffMicrositeShell.tsx"),
   "utf8",
@@ -49,6 +59,40 @@ assert.match(raceRoute, /to="\/claim-results"/);
 assert.match(homeRoute, /Claim race results/);
 assert.match(staffShell, /\/admin\/result-claims/);
 assert.match(api, /for update/);
+assert.match(api, /const requiresReview = Boolean\(owner\) \|\| otherClaimCount > 0/);
+assert.match(api, /const nextStatus: ResultClaimStatus = requiresReview \? "pending" : "approved"/);
+assert.match(api, /Automatically approved as the first uncontested claim/);
+assert.match(api, /await syncAthleteAccountAfterClaim\(outcome\.claimantUserId\)/);
+assert.match(api, /notifyResultClaimReviewed/);
+assert.doesNotMatch(api, /Add a bib number, verification detail or evidence link/);
+assert.match(api, /evidenceUrl2: optionalHttpsUrl/);
+assert.match(api, /evidenceUrl3: optionalHttpsUrl/);
+assert.match(api, /evidence_url_2/);
+assert.match(api, /evidence_url_3/);
+assert.match(evidenceLinksMigration, /add column if not exists evidence_url_2/);
+assert.match(evidenceLinksMigration, /add column if not exists evidence_url_3/);
+assert.match(claimRoute, /Confirm a matched result once and it is added immediately/);
+assert.match(claimRoute, /No evidence is needed/);
+assert.match(claimRoute, /Not required · add up to three/);
+assert.doesNotMatch(claimRoute, /Supporting detail/);
+assert.doesNotMatch(claimRoute, /Supporting information type/);
+assert.match(claimRoute, /Add this result to my profile/);
+assert.match(claimRoute, /Tick the confirmation box to confirm this is your result/);
+assert.match(claimRoute, /disabled=\{submitClaim\.isPending\}/);
+assert.doesNotMatch(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declaration\}/);
+assert.doesNotMatch(claimRoute, /verification detail/i);
+assert.doesNotMatch(claimRoute, /Resubmit claim/i);
+assert.doesNotMatch(claimRoute, /<textarea/);
+for (const source of ["/claim-results", "/athlete-account"]) {
+  const rule = vercelConfig.headers.find((entry) => entry.source === source);
+  assert.ok(rule, "Missing no-store header rule for " + source);
+  const cacheControl = rule.headers.find(
+    (header) => header.key.toLowerCase() === "cache-control",
+  );
+  assert.match(cacheControl?.value ?? "", /no-store/);
+}
+assert.match(adminClaimRoute, /Optional evidence links/);
+assert.match(adminClaimRoute, /Evidence is not required for an uncontested claim/);
 assert.match(api, /Another verified account was approved/);
 assert.match(api, /Only an approved claim can have ownership revoked/);
 assert.doesNotMatch(
@@ -103,6 +147,7 @@ await db.exec(`
   );
 `);
 await db.exec(migration);
+await db.exec(evidenceLinksMigration);
 await db.exec(`
   insert into "user" ("id", "email") values
     ('user-one', 'runner@example.com'),
@@ -117,16 +162,30 @@ await db.exec(`
   ) values (1, 1, 1, 1200, 10, '42', 'MSEN', 'https://example.com/results');
   insert into result_claims (
     result_id, athlete_id, claimant_user_id, claimant_email,
-    verification_method, evidence_text, declaration_accepted
+    verification_method, evidence_text, evidence_url, evidence_url_2, evidence_url_3,
+    declaration_accepted
   ) values (
-    1, 1, 'user-one', 'runner@example.com', 'bib', 'Bib 42', true
+    1, 1, 'user-one', 'runner@example.com', 'other', '',
+    'https://example.com/evidence-1', 'https://example.com/evidence-2',
+    'https://example.com/evidence-3', true
   );
 `);
 
-const claims = await db.query(`select status, verification_method from result_claims`);
+const claims = await db.query(`
+  select status, verification_method, evidence_url, evidence_url_2, evidence_url_3
+  from result_claims
+`);
 assert.equal(claims.rows.length, 1);
 assert.equal(claims.rows[0].status, "pending");
-assert.equal(claims.rows[0].verification_method, "bib");
+assert.equal(claims.rows[0].verification_method, "other");
+assert.deepEqual(
+  [claims.rows[0].evidence_url, claims.rows[0].evidence_url_2, claims.rows[0].evidence_url_3],
+  [
+    "https://example.com/evidence-1",
+    "https://example.com/evidence-2",
+    "https://example.com/evidence-3",
+  ],
+);
 
 const claimList = await db.query(
   `${claimSelect} where claim.claimant_user_id = $1 order by claim.submitted_at desc`,
@@ -134,6 +193,7 @@ const claimList = await db.query(
 );
 assert.equal(claimList.rows.length, 1);
 assert.equal(claimList.rows[0].athlete_name, "Verification Runner");
+assert.equal(claimList.rows[0].evidence_url_3, "https://example.com/evidence-3");
 
 const staffClaimList = await db.query(
   `select
@@ -173,8 +233,8 @@ await assert.rejects(
   db.query(
     `insert into result_claims (
       result_id, athlete_id, claimant_user_id, claimant_email,
-      verification_method, evidence_text, evidence_url, declaration_accepted
-    ) values (1, 1, 'staff-one', 'staff@example.com', 'other', 'Bad URL', 'http://example.com', true)`,
+      verification_method, evidence_text, evidence_url_2, declaration_accepted
+    ) values (1, 1, 'staff-one', 'staff@example.com', 'other', '', 'http://example.com', true)`,
   ),
   /check/i,
 );

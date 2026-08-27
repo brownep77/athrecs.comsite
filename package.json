@@ -18,6 +18,12 @@
     "verify:all-sport-fixtures": "node --experimental-strip-types scripts/verify-all-sport-fixtures.mjs",
     "verify:fixture-duplicates": "node --experimental-strip-types scripts/verify-fixture-duplicates.mjs",
     "verify:mrd-marathons": "node --experimental-strip-types scripts/verify-mrd-marathons.mjs",
+    "verify:aims-europe-road-races": "node --experimental-strip-types scripts/verify-aims-europe-road-races.mjs",
+    "verify:albania-running-calendar": "node --experimental-strip-types scripts/verify-albania-running-calendar.mjs",
+    "verify:western-balkans-running-calendar": "node --experimental-strip-types scripts/verify-western-balkans-running-calendar.mjs",
+    "verify:france-spain-portugal-running-calendar": "node --experimental-strip-types scripts/verify-france-spain-portugal-running-calendar.mjs",
+    "verify:england-athletics-runevents": "node --experimental-strip-types scripts/verify-england-athletics-runevents.mjs",
+    "verify:england-athletics-uk-fixtures": "node --experimental-strip-types scripts/verify-england-athletics-uk-fixtures.mjs",
     "verify:comrades": "node --experimental-strip-types scripts/verify-comrades.mjs",
     "verify:two-oceans": "node --experimental-strip-types scripts/verify-two-oceans.mjs",
     "verify:race-qualifications": "node --experimental-strip-types scripts/verify-race-qualifications.mjs",
@@ -31,6 +37,8 @@
     "verify:fixture-review": "node --experimental-strip-types scripts/verify-fixture-review.mjs",
     "verify:results-links": "node --experimental-strip-types scripts/verify-results-links.mjs",
     "verify:result-claims": "node scripts/verify-result-claims.mjs",
+    "verify:claim-experience": "node scripts/verify-claim-experience.mjs",
+    "verify:private-result-archive": "node scripts/verify-private-result-archive.mjs",
     "verify:result-matches": "node --experimental-strip-types scripts/verify-result-matches.mjs",
     "verify:athlete-accounts": "node scripts/verify-athlete-accounts.mjs",
     "verify:auth-methods": "node --experimental-strip-types scripts/verify-auth-methods.mjs",
@@ -51,7 +59,9 @@
     "format": "prettier --write .",
     "verify:slug-stability": "node --experimental-strip-types scripts/verify-slug-stability.mjs",
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
-    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run build"
+    "verify:multisport-taxonomy": "node scripts/verify-multisport-taxonomy.mjs",
+    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:result-claims && npm run verify:claim-experience && npm run verify:profile-photo && npm run verify:private-result-archive && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:france-spain-portugal-running-calendar && npm run verify:england-athletics-runevents && npm run verify:england-athletics-uk-fixtures && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run verify:multisport-taxonomy && npm run build",
+    "verify:profile-photo": "node scripts/verify-profile-photo.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
@@ -112,7 +122,8 @@
     "@types/node": "^22.16.5",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
-    "@types/pg": "^8.11.10"
+    "@types/pg": "^8.11.10",
+    "@vercel/blob": "^2.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",

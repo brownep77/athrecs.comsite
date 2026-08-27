@@ -93,12 +93,27 @@ export type AthleteAccountData = {
   nationality: string;
   clubOrTeam: string;
   preferredLanguage: string;
+  profilePhotoUrl: string;
+  profilePhotoUpdatedAt: string | null;
+  profilePhotoUploadAvailable: boolean;
+  authImageUrl: string;
   privacyAcknowledged: boolean;
   updatedAt: string | null;
   sports: AthleteSportProfile[];
   preferences: AthleteProductPreferences;
   consents: AthleteAccountConsents;
   claimedProfiles: Array<{ athleteId: number; athleteName: string; athleteSlug: string }>;
+  claimedResults: Array<{
+    resultId: number;
+    athleteName: string;
+    eventName: string;
+    eventSlug: string;
+    eventDate: string;
+    distanceCode: string;
+    finishTimeSeconds: number | null;
+    overallPlace: number | null;
+    category: string | null;
+  }>;
   claimCount: number;
 };
 
@@ -124,6 +139,7 @@ type UserRow = {
   name: string;
   email: string;
   email_verified: boolean;
+  image: string | null;
 };
 
 type ProfileRow = {
@@ -139,6 +155,10 @@ type ProfileRow = {
   preferred_language: string | null;
   privacy_notice_version: string;
   privacy_acknowledged_at: string;
+  updated_at: string;
+};
+
+type ProfilePhotoRow = {
   updated_at: string;
 };
 
@@ -425,13 +445,24 @@ function mapConsents(rows: Array<{ purpose: string; status: string }>): AthleteA
   };
 }
 
+function safeImageUrl(value: string | null): string {
+  if (!value) return "";
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" ? url.toString() : "";
+  } catch {
+    return "";
+  }
+}
+
 async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: string) {
   const users = await sql<UserRow>`
     select
       "id" as id,
       "name" as name,
       lower("email") as email,
-      "emailVerified" as email_verified
+      "emailVerified" as email_verified,
+      "image" as image
     from "user"
     where "id" = ${userId}
     limit 1
@@ -439,8 +470,16 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
   const user = users[0];
   if (!user?.email) throw new Error("Your signed-in account has no email address");
 
-  const [profiles, sports, preferences, consentRows, claimedProfiles, claimCounts] =
-    await Promise.all([
+  const [
+    profiles,
+    photos,
+    sports,
+    preferences,
+    consentRows,
+    claimedProfiles,
+    claimedResults,
+    claimCounts,
+  ] = await Promise.all([
       sql<ProfileRow>`
         select
           full_name, display_name, date_of_birth::text as date_of_birth,
@@ -449,6 +488,12 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
           privacy_acknowledged_at::text as privacy_acknowledged_at,
           updated_at::text as updated_at
         from athlete_private_profiles
+        where user_id = ${userId}
+        limit 1
+      `,
+      sql<ProfilePhotoRow>`
+        select updated_at::text as updated_at
+        from athlete_profile_photos
         where user_id = ${userId}
         limit 1
       `,
@@ -479,6 +524,37 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         where account_link.user_id = ${userId} and account_link.status = 'active'
         order by athlete.display_name
       `,
+      sql<{
+        result_id: number;
+        athlete_name: string;
+        event_name: string;
+        event_slug: string;
+        event_date: string;
+        distance_code: string;
+        finish_time_seconds: number | null;
+        overall_place: number | null;
+        category: string | null;
+      }>`
+        select
+          result.id as result_id,
+          athlete.display_name as athlete_name,
+          event.name as event_name,
+          event.slug as event_slug,
+          edition.event_date::text as event_date,
+          edition.distance_code,
+          result.finish_time_seconds,
+          result.overall_place,
+          result.category
+        from athlete_account_links account_link
+        join athletes athlete on athlete.id = account_link.athlete_id
+        join results result on result.athlete_id = athlete.id
+        join editions edition on edition.id = result.edition_id
+        join events event on event.id = edition.event_id
+        where account_link.user_id = ${userId}
+          and account_link.status = 'active'
+        order by edition.event_date desc, event.name, result.id desc
+        limit 500
+      `,
       sql<{ claim_count: number }>`
         select count(*)::int as claim_count
         from result_claims
@@ -486,6 +562,10 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       `,
     ]);
   const profile = profiles[0];
+  const photo = photos[0];
+  // Upload is always available: private Blob is preferred, with an
+  // authenticated Postgres bytea fallback until an object store is connected.
+  const profilePhotoUploadAvailable = true;
   return {
     exists: Boolean(profile),
     userId,
@@ -502,6 +582,12 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     nationality: profile?.nationality ?? "",
     clubOrTeam: profile?.club_or_team ?? "",
     preferredLanguage: profile?.preferred_language ?? "",
+    profilePhotoUrl: photo
+      ? `/api/athlete-profile-photo?v=${encodeURIComponent(photo.updated_at)}`
+      : "",
+    profilePhotoUpdatedAt: photo?.updated_at ?? null,
+    profilePhotoUploadAvailable,
+    authImageUrl: safeImageUrl(user.image),
     privacyAcknowledged: Boolean(profile?.privacy_acknowledged_at),
     updatedAt: profile?.updated_at ?? null,
     sports: sports.map(mapSport),
@@ -511,6 +597,17 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       athleteId: row.athlete_id,
       athleteName: row.athlete_name,
       athleteSlug: row.athlete_slug,
+    })),
+    claimedResults: claimedResults.map((row) => ({
+      resultId: row.result_id,
+      athleteName: row.athlete_name,
+      eventName: row.event_name,
+      eventSlug: row.event_slug,
+      eventDate: row.event_date,
+      distanceCode: row.distance_code,
+      finishTimeSeconds: row.finish_time_seconds,
+      overallPlace: row.overall_place,
+      category: row.category,
     })),
     claimCount: claimCounts[0]?.claim_count ?? 0,
   } satisfies AthleteAccountData;
@@ -859,6 +956,10 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
         nationality: profile.nationality ?? "",
         clubOrTeam: profile.club_or_team ?? "",
         preferredLanguage: profile.preferred_language ?? "",
+        profilePhotoUrl: "",
+        profilePhotoUpdatedAt: null,
+        profilePhotoUploadAvailable: false,
+        authImageUrl: "",
         privacyAcknowledged: Boolean(profile.privacy_acknowledged_at),
         updatedAt: profile.updated_at,
         sports: (groupedSports.get(profile.user_id) ?? []).map(mapSport),
@@ -869,6 +970,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
           athleteName: row.athlete_name,
           athleteSlug: row.athlete_slug,
         })),
+        claimedResults: [],
         claimCount: claimCountByUser.get(profile.user_id) ?? 0,
       };
       return { ...account, completionPercent: accountCompletion(account) };
