@@ -90,6 +90,10 @@ import {
   belgiumNetherlandsRaceSeries,
 } from "./belgium-netherlands-races";
 import {
+  netherlandsFullRaceEditions,
+  netherlandsFullRaceSeries,
+} from "./netherlands-full-running-calendar";
+import {
   englandAthleticsRunEventsEditions,
   englandAthleticsRunEventsSeries,
 } from "./england-athletics-runevents";
@@ -183,6 +187,7 @@ for (const series of [
   ...(westernBalkansRaceSeries as Series[]),
   ...(franceSpainPortugalRaceSeries as Series[]),
   ...(belgiumNetherlandsRaceSeries as Series[]),
+  ...(netherlandsFullRaceSeries as Series[]),
   ...(englandAthleticsRunEventsSeries as Series[]),
   ...(englandAthleticsUkFixturesSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
@@ -241,6 +246,9 @@ const mergedEditions = [
     usedSlugs.has(edition.seriesSlug),
   ),
   ...(belgiumNetherlandsRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(netherlandsFullRaceEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
   ),
   ...(englandAthleticsRunEventsEditions as Edition[]).filter((edition) =>
