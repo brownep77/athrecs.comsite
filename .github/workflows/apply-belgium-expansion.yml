@@ -20,92 +20,35 @@ jobs:
           ref: data/comprehensive-belgium-calendar-2026
           fetch-depth: 0
 
-      - name: Generate audited Belgium calendar and wire it into the catalogue
+      - name: Verify payload and apply audited Belgium calendar
         shell: bash
         run: |
           python - <<'PY'
           import base64
+          import hashlib
           import io
           import json
+          import shutil
           import tarfile
           from pathlib import Path
 
-          payload = base64.b64decode("""
-          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
-          """)
+          payload_dir = Path(".github/belgium-payload")
+          chunk_paths = sorted(payload_dir.glob("chunk-*.txt"))
+          if [path.name for path in chunk_paths] != [f"chunk-{index:02d}.txt" for index in range(10)]:
+              raise SystemExit(f"Expected ten ordered payload chunks, got {[path.name for path in chunk_paths]}")
+
+          encoded = "".join(path.read_text(encoding="utf-8").strip() for path in chunk_paths)
+          if len(encoded) != 19396:
+              raise SystemExit(f"Belgium payload length mismatch: {len(encoded)}")
+          encoded_sha = hashlib.sha256(encoded.encode("ascii")).hexdigest()
+          if encoded_sha != "b5f37e9aaae18e89c3568f174737f5c9e373f5ab8cd927b5d7d4f270547cc4da":
+              raise SystemExit(f"Belgium encoded payload checksum mismatch: {encoded_sha}")
+
+          payload = base64.b64decode(encoded, validate=True)
+          payload_sha = hashlib.sha256(payload).hexdigest()
+          if payload_sha != "89dbff4ca04e7c8465acb35f3b77a7e5b411029d565eb33b835506b9e64d4e89":
+              raise SystemExit(f"Belgium archive checksum mismatch: {payload_sha}")
+
           with tarfile.open(fileobj=io.BytesIO(payload), mode="r:gz") as archive:
               archive.extractall(".")
 
@@ -203,6 +146,7 @@ jobs:
           if not old_audit.startswith("> **Belgium coverage"):
               old_audit_path.write_text(notice + old_audit, encoding="utf-8")
 
+          shutil.rmtree(payload_dir)
           workflow_path = Path(".github/workflows/apply-belgium-expansion.yml")
           workflow_path.unlink()
           PY
@@ -212,13 +156,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/belgium-races-comprehensive.ts \
-            src/data/catalogue.ts \
-            src/lib/athrecs/seed.server.ts \
-            scripts/verify-belgium-comprehensive-calendar.mjs \
-            docs/belgium-calendar-comprehensive-audit.md \
-            docs/belgium-netherlands-calendar-audit.md \
-            package.json \
-            .github/workflows/apply-belgium-expansion.yml
+          git add -A
           git commit -m "data: expand Belgium to comprehensive national calendar"
           git push origin HEAD:data/comprehensive-belgium-calendar-2026
