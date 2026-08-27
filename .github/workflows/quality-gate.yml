@@ -51,6 +51,9 @@ jobs:
       - name: Type-check, lint and verify
         run: npm run ci:verify
 
+      - name: Verify historical result source safeguards
+        run: node scripts/verify-result-source-sync.mjs
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
@@ -96,6 +99,24 @@ jobs:
           fi
           grep -F "OIDC bearer token is required" \
             artifacts/catalogue-automation-unauthenticated.json
+
+          result_status=$(curl \
+            --silent \
+            --show-error \
+            --max-time 30 \
+            --output artifacts/result-automation-unauthenticated.json \
+            --write-out '%{http_code}' \
+            --request POST \
+            --header 'content-type: application/json' \
+            --data '{"sourceKey":"run_norwich_results","results":[]}' \
+            'http://127.0.0.1:8080/api/catalogue-automation?mode=historical-results')
+          if [ "$result_status" != "401" ]; then
+            cat artifacts/result-automation-unauthenticated.json
+            echo "Expected historical result HTTP 401, received $result_status"
+            exit 1
+          fi
+          grep -F "OIDC bearer token is required" \
+            artifacts/result-automation-unauthenticated.json
 
       - name: Browser smoke tests
         run: |
