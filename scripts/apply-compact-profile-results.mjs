@@ -45,7 +45,7 @@ profile = profile.replace(personalBestHook, visibilityHooks);
 
 profile = profile.replace(
   '  if (account.isLoading) return <LoadingCard label="Building your private profile…" />;',
-  '  if (account.isLoading || resultVisibility.isLoading)\\n    return <LoadingCard label="Building your private profile…" />;',
+  '  if (account.isLoading || resultVisibility.isLoading)\n    return <LoadingCard label="Building your private profile…" />;',
 );
 
 const resultSetup = `  const profileName = data.displayName || data.fullName || data.authName || "My Athlete Profile";
