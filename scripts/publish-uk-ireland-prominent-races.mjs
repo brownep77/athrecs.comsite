@@ -64,6 +64,20 @@ try {
   const publishing = await vite.ssrLoadModule(
     "/src/lib/athrecs/catalogue-publishing.server.ts",
   );
+  const { getSql } = await vite.ssrLoadModule("/src/lib/db.ts");
+  const sql = await getSql();
+
+  async function loadBatchStatus(batchId) {
+    const rows = await sql.query(
+      `select status, error
+       from catalogue_import_batches
+       where id = $1
+       limit 1`,
+      [batchId],
+    );
+    if (!rows[0]) throw new Error(`Catalogue batch not found: ${batchId}`);
+    return rows[0];
+  }
 
   const existingEventInputs = Object.entries(data.prominentUkIrelandSeriesOverrides).map(
     ([slug, override]) =>
@@ -146,37 +160,34 @@ try {
   }
 
   const staged = await publishing.stageCatalogueBatch(payload, ACTOR);
-  let dashboard = await publishing.getCataloguePublishingDashboard();
-  let batch = dashboard.batches.find((candidate) => candidate.id === staged.batchId);
-  if (!batch) throw new Error(`Staged catalogue batch was not returned: ${staged.batchId}`);
+  let batch = await loadBatchStatus(staged.batchId);
 
   if (batch.status === "published") {
     console.log(
-      `[prominent-races] batch ${batch.id} was already published; no database change needed`,
+      `[prominent-races] batch ${staged.batchId} was already published; no database change needed`,
     );
-    process.exit(0);
-  }
+  } else {
+    if (["staged", "invalid", "failed"].includes(batch.status)) {
+      const validation = await publishing.validateCatalogueBatch(staged.batchId);
+      if (validation.status !== "ready") {
+        throw new Error(
+          `Reviewed race batch failed validation: ${JSON.stringify(validation.errors || validation)}`,
+        );
+      }
+    }
 
-  if (["staged", "invalid", "failed"].includes(batch.status)) {
-    const validation = await publishing.validateCatalogueBatch(batch.id);
-    if (validation.status !== "ready") {
+    batch = await loadBatchStatus(staged.batchId);
+    if (batch.status !== "ready") {
       throw new Error(
-        `Reviewed race batch failed validation: ${JSON.stringify(validation.errors || validation)}`,
+        `Catalogue batch is not publishable after validation: ${batch.status}${batch.error ? ` — ${batch.error}` : ""}`,
       );
     }
-  }
 
-  dashboard = await publishing.getCataloguePublishingDashboard();
-  batch = dashboard.batches.find((candidate) => candidate.id === staged.batchId);
-  if (!batch) throw new Error(`Validated catalogue batch disappeared: ${staged.batchId}`);
-  if (batch.status !== "ready") {
-    throw new Error(`Catalogue batch is not publishable after validation: ${batch.status}`);
+    const result = await publishing.publishCatalogueBatch(staged.batchId, ACTOR);
+    console.log(
+      `[prominent-races] published revision ${result.revisionId}: ${result.eventsUpserted} events, ${result.editionsUpserted} editions, ${result.entryOptionsUpserted} entry options`,
+    );
   }
-
-  const result = await publishing.publishCatalogueBatch(batch.id, ACTOR);
-  console.log(
-    `[prominent-races] published revision ${result.revisionId}: ${result.eventsUpserted} events, ${result.editionsUpserted} editions, ${result.entryOptionsUpserted} entry options`,
-  );
 } finally {
   await vite.close();
 }
