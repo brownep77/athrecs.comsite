@@ -22,6 +22,7 @@
     "verify:albania-running-calendar": "node --experimental-strip-types scripts/verify-albania-running-calendar.mjs",
     "verify:western-balkans-running-calendar": "node --experimental-strip-types scripts/verify-western-balkans-running-calendar.mjs",
     "verify:france-spain-portugal-running-calendar": "node --experimental-strip-types scripts/verify-france-spain-portugal-running-calendar.mjs",
+    "verify:belgium-netherlands-running-calendar": "node --experimental-strip-types scripts/verify-belgium-netherlands-running-calendar.mjs",
     "verify:england-athletics-runevents": "node --experimental-strip-types scripts/verify-england-athletics-runevents.mjs",
     "verify:england-athletics-uk-fixtures": "node --experimental-strip-types scripts/verify-england-athletics-uk-fixtures.mjs",
     "verify:comrades": "node --experimental-strip-types scripts/verify-comrades.mjs",
@@ -60,7 +61,7 @@
     "verify:slug-stability": "node --experimental-strip-types scripts/verify-slug-stability.mjs",
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
     "verify:multisport-taxonomy": "node scripts/verify-multisport-taxonomy.mjs",
-    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:result-claims && npm run verify:claim-experience && npm run verify:profile-photo && npm run verify:athlete-bio && npm run verify:athlete-profile-results && npm run verify:private-result-archive && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:france-spain-portugal-running-calendar && npm run verify:england-athletics-runevents && npm run verify:england-athletics-uk-fixtures && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run verify:multisport-taxonomy && npm run build",
+    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:result-claims && npm run verify:claim-experience && npm run verify:profile-photo && npm run verify:athlete-bio && npm run verify:athlete-profile-results && npm run verify:private-result-archive && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:france-spain-portugal-running-calendar && npm run verify:belgium-netherlands-running-calendar && npm run verify:england-athletics-runevents && npm run verify:england-athletics-uk-fixtures && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run verify:multisport-taxonomy && npm run build",
     "verify:profile-photo": "node scripts/verify-profile-photo.mjs",
     "verify:athlete-bio": "node --experimental-strip-types scripts/verify-athlete-bio.mjs",
     "verify:athlete-profile-results": "node scripts/verify-athlete-profile-results.mjs"
