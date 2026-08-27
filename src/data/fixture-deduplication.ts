@@ -151,6 +151,20 @@ export const verifiedFixtureEditionReplacements: VerifiedEditionReplacement[] = 
     fromDate: "2027-04-11",
     toDate: "2027-04-19",
   },
+  {
+    seriesSlug: "wa-le-marathon-vert-rennes-school-of-business-7236026",
+    distance: "Other",
+    fromDate: "2026-10-18",
+    toDate: "2026-10-18",
+    toDistance: "Marathon",
+  },
+  {
+    seriesSlug: "wa-bilbao-night-half-marathon-7236025",
+    distance: "Other",
+    fromDate: "2026-10-17",
+    toDate: "2026-10-17",
+    toDistance: "Half",
+  },
 ];
 
 export const verifiedFixtureEditionOverrides: Record<string, Partial<Edition>> = {
