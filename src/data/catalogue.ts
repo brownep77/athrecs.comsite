@@ -82,6 +82,10 @@ import { afghanistanRaceEditions, afghanistanRaceSeries } from "./afghanistan-ra
 import { albaniaRaceEditions, albaniaRaceSeries } from "./albania-races";
 import { westernBalkansRaceEditions, westernBalkansRaceSeries } from "./western-balkans-races";
 import {
+  franceSpainPortugalRaceEditions,
+  franceSpainPortugalRaceSeries,
+} from "./france-spain-portugal-races";
+import {
   englandAthleticsRunEventsEditions,
   englandAthleticsRunEventsSeries,
 } from "./england-athletics-runevents";
@@ -173,6 +177,7 @@ for (const series of [
   ...(afghanistanRaceSeries as Series[]),
   ...(albaniaRaceSeries as Series[]),
   ...(westernBalkansRaceSeries as Series[]),
+  ...(franceSpainPortugalRaceSeries as Series[]),
   ...(englandAthleticsRunEventsSeries as Series[]),
   ...(englandAthleticsUkFixturesSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
@@ -231,6 +236,9 @@ const mergedEditions = [
   ...(westernBalkansRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
+  ...(franceSpainPortugalRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
   ...(englandAthleticsRunEventsEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
   ),
@@ -271,6 +279,7 @@ const mergedEditions = [
 
 export const editions: Edition[] = (() => {
   const seen = new Set<string>();
+  const seenExact = new Set<string>();
   const unique: Edition[] = [];
   for (const sourceEdition of mergedEditions) {
     const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
@@ -278,10 +287,12 @@ export const editions: Edition[] = (() => {
       ...sourceEdition,
       ...editionOverrides[sourceKey],
     };
+    const exactKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
     const key = edition.publishAllDistances
-      ? `${edition.seriesSlug}|${edition.date}|${edition.distance}`
+      ? exactKey
       : `${edition.seriesSlug}|${edition.date}`;
-    if (seen.has(key)) continue;
+    if (seenExact.has(exactKey) || seen.has(key)) continue;
+    seenExact.add(exactKey);
     seen.add(key);
     const matchingEntryOptions =
       entryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];

@@ -563,9 +563,9 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     ]);
   const profile = profiles[0];
   const photo = photos[0];
-  const profilePhotoUploadAvailable = Boolean(
-    process.env.BLOB_READ_WRITE_TOKEN?.trim() || process.env.BLOB_STORE_ID?.trim(),
-  );
+  // Upload is always available: private Blob is preferred, with an
+  // authenticated Postgres bytea fallback until an object store is connected.
+  const profilePhotoUploadAvailable = true;
   return {
     exists: Boolean(profile),
     userId,
@@ -582,10 +582,9 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     nationality: profile?.nationality ?? "",
     clubOrTeam: profile?.club_or_team ?? "",
     preferredLanguage: profile?.preferred_language ?? "",
-    profilePhotoUrl:
-      photo && profilePhotoUploadAvailable
-        ? `/api/athlete-profile-photo?v=${encodeURIComponent(photo.updated_at)}`
-        : "",
+    profilePhotoUrl: photo
+      ? `/api/athlete-profile-photo?v=${encodeURIComponent(photo.updated_at)}`
+      : "",
     profilePhotoUpdatedAt: photo?.updated_at ?? null,
     profilePhotoUploadAvailable,
     authImageUrl: safeImageUrl(user.image),
