@@ -129,7 +129,6 @@ function MyAthleteProfilePage() {
             <ProfilePhotoUploader
               displayName={profileName}
               photoUrl={data.profilePhotoUrl}
-              fallbackImageUrl={data.authImageUrl}
               uploadAvailable={data.profilePhotoUploadAvailable}
               onChanged={() => {
                 void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
