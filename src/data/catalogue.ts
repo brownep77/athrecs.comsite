@@ -53,6 +53,7 @@ export { results } from "./results";
 import { seriesList as coreSeries } from "./series";
 import { editions as coreEditions } from "./editions";
 import { runabcEditions, runabcSeries } from "./runabc";
+import { ironman703Editions, ironman703Series } from "./ironman-703-calendar";
 import { multiSportEditions, multiSportSeries } from "./multisport";
 import { parkrunSeries } from "./parkrun-uk";
 import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics";
@@ -209,6 +210,7 @@ for (const series of [
   ...(verifiedHalfToTwentyMileSeries as Series[]),
   ...(dailyHalfTenMileSeries as Series[]),
   ...(runabcSeries as Series[]),
+  ...(ironman703Series as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
   ...(worldAthleticsSeries as Series[]),
@@ -289,6 +291,9 @@ const mergedEditions = [
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(ironman703Editions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldTriathlonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
