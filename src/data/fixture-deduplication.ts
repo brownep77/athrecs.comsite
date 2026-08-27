@@ -165,9 +165,62 @@ export const verifiedFixtureEditionReplacements: VerifiedEditionReplacement[] = 
     toDate: "2026-10-17",
     toDistance: "Half",
   },
+  {
+    seriesSlug: "wa-deloitte-fast-fun-5-10km-trakks-lbfa-road-tour-7244627",
+    distance: "Other",
+    fromDate: "2026-09-06",
+    toDate: "2026-09-06",
+    toDistance: "10K",
+  },
+  {
+    seriesSlug: "wa-dam-tot-damloop-7238027",
+    distance: "Other",
+    fromDate: "2026-09-20",
+    toDate: "2026-09-20",
+    toDistance: "10 Miles",
+  },
+  {
+    seriesSlug: "wa-marathon-the-hague-7243223",
+    distance: "Other",
+    fromDate: "2026-11-01",
+    toDate: "2026-11-01",
+    toDistance: "Marathon",
+  },
+  {
+    seriesSlug: "schoorl-run",
+    distance: "Marathon",
+    fromDate: "2027-02-14",
+    toDate: "2027-02-14",
+    toDistance: "10K",
+  },
 ];
 
 export const verifiedFixtureEditionOverrides: Record<string, Partial<Edition>> = {
+  "wa-deloitte-fast-fun-5-10km-trakks-lbfa-road-tour-7244627|2026-09-06|Other": {
+    distance: "10K",
+    distanceKm: 10,
+    source: "https://worldathletics.org/competition/calendar-results/results/7244627",
+    notes:
+      "The published event title identifies the World Athletics fixture as a 5K and 10K programme.",
+  },
+  "wa-dam-tot-damloop-7238027|2026-09-20|Other": {
+    distance: "10 Miles",
+    distanceKm: 16.09344,
+    source: "https://www.nndamloop.com/",
+    notes: "The organiser identifies the Sunday Dam tot Damloop as a ten-mile road race.",
+  },
+  "wa-marathon-the-hague-7243223|2026-11-01|Other": {
+    distance: "Marathon",
+    distanceKm: 42.195,
+    source: "https://nnmarathonthehague.nl/en/",
+    notes: "The organiser identifies this World Athletics fixture as the full marathon.",
+  },
+  "schoorl-run|2027-02-14|Marathon": {
+    distance: "10K",
+    distanceKm: 10,
+    source: "https://www.groetuitschoorlrun.nl/english",
+    notes: "The organiser advertises 10K, half-marathon and 30K races; no marathon is offered.",
+  },
   "wa-le-marathon-vert-rennes-school-of-business-7236026|2026-10-18|Other": {
     distance: "Marathon",
     distanceKm: 42.195,

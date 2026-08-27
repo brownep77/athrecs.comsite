@@ -86,6 +86,10 @@ import {
   franceSpainPortugalRaceSeries,
 } from "./france-spain-portugal-races";
 import {
+  belgiumNetherlandsRaceEditions,
+  belgiumNetherlandsRaceSeries,
+} from "./belgium-netherlands-races";
+import {
   englandAthleticsRunEventsEditions,
   englandAthleticsRunEventsSeries,
 } from "./england-athletics-runevents";
@@ -178,6 +182,7 @@ for (const series of [
   ...(albaniaRaceSeries as Series[]),
   ...(westernBalkansRaceSeries as Series[]),
   ...(franceSpainPortugalRaceSeries as Series[]),
+  ...(belgiumNetherlandsRaceSeries as Series[]),
   ...(englandAthleticsRunEventsSeries as Series[]),
   ...(englandAthleticsUkFixturesSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
@@ -227,16 +232,15 @@ const mergedEditions = [
   ...(marathonDesSablesEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
-  ...(afghanistanRaceEditions as Edition[]).filter((edition) =>
-    extraSlugs.has(edition.seriesSlug),
-  ),
-  ...(albaniaRaceEditions as Edition[]).filter((edition) =>
-    extraSlugs.has(edition.seriesSlug),
-  ),
+  ...(afghanistanRaceEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(albaniaRaceEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(westernBalkansRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(franceSpainPortugalRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(belgiumNetherlandsRaceEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
   ),
   ...(englandAthleticsRunEventsEditions as Edition[]).filter((edition) =>
@@ -288,9 +292,7 @@ export const editions: Edition[] = (() => {
       ...editionOverrides[sourceKey],
     };
     const exactKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
-    const key = edition.publishAllDistances
-      ? exactKey
-      : `${edition.seriesSlug}|${edition.date}`;
+    const key = edition.publishAllDistances ? exactKey : `${edition.seriesSlug}|${edition.date}`;
     if (seenExact.has(exactKey) || seen.has(key)) continue;
     seenExact.add(exactKey);
     seen.add(key);
