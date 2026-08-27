@@ -1,0 +1,75 @@
+name: Verify live Belgium release
+
+on:
+  push:
+    branches:
+      - verify/live-belgium-calendar-20260827
+    paths:
+      - .github/workflows/verify-live-belgium.yml
+
+permissions:
+  contents: write
+
+jobs:
+  verify-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: verify/live-belgium-calendar-20260827
+          fetch-depth: 0
+
+      - name: Verify Brussels Marathon on production
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts
+          url="https://www.athrecs.com/races/brussels-airport-marathon"
+          status="000"
+
+          for attempt in $(seq 1 12); do
+            status=$(curl \
+              --location \
+              --silent \
+              --show-error \
+              --max-time 90 \
+              --dump-header artifacts/live-belgium.headers \
+              --output artifacts/live-belgium.html \
+              --write-out '%{http_code}' \
+              "$url" || true)
+
+            if [ "$status" = "200" ] \
+              && grep -Fq "Brussels Airport Marathon" artifacts/live-belgium.html \
+              && grep -Fq "7K" artifacts/live-belgium.html \
+              && grep -Fq "Half Marathon" artifacts/live-belgium.html \
+              && grep -Fq "Marathon" artifacts/live-belgium.html; then
+              break
+            fi
+
+            echo "Production verification attempt $attempt returned HTTP $status"
+            sleep 5
+          done
+
+          test "$status" = "200"
+          grep -F "Brussels Airport Marathon" artifacts/live-belgium.html | head -n 1
+          grep -F "7K" artifacts/live-belgium.html | head -n 1
+          grep -F "Half Marathon" artifacts/live-belgium.html | head -n 1
+          grep -F "Marathon" artifacts/live-belgium.html | head -n 1
+          grep -Ei "x-vercel-id|server: Vercel" artifacts/live-belgium.headers || true
+
+          echo "LIVE_URL=$url"
+          echo "HTTP_STATUS=$status"
+          echo "HTML_BYTES=$(wc -c < artifacts/live-belgium.html)"
+          echo "HTML_SHA256=$(sha256sum artifacts/live-belgium.html | cut -d' ' -f1)"
+
+      - name: Remove temporary verification workflow
+        if: success()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/verify-live-belgium.yml
+          git commit -m "chore: remove temporary live Belgium verifier"
+          git push origin HEAD:verify/live-belgium-calendar-20260827
