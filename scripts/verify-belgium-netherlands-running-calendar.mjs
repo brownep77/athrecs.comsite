@@ -9,7 +9,12 @@ import {
   verifiedFixtureEditionOverrides,
   verifiedFixtureEditionReplacements,
 } from "../src/data/fixture-deduplication.ts";
-import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts";
+import {
+  COUNTRY_FILTERS,
+  COUNTRY_GROUPS,
+  isoToFlagEmoji,
+  resolveCountry,
+} from "../src/lib/athrecs/countries.ts";
 import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
 
 const CHECKED_AT = "2026-08-27";
@@ -75,6 +80,11 @@ for (const [country, expected] of Object.entries(expectedCountryCounts)) {
   const resolved = resolveCountry({ country });
   assert.equal(resolved.iso, expected.iso, `${country} resolved to the wrong ISO code`);
   assert.equal(isoToFlagEmoji(resolved.iso), expected.flag, `${country} flag is incorrect`);
+  assert(COUNTRY_FILTERS.includes(country), `${country} is absent from race country filters`);
+  assert(
+    COUNTRY_GROUPS.some((group) => group.options.includes(country)),
+    `${country} is absent from the country selector`,
+  );
 }
 
 const requiredDistanceGroups = [
