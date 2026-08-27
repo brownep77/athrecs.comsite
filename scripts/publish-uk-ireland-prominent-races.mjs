@@ -5,6 +5,8 @@ const SOURCE_KEY = "athrecs-code:uk-ireland-prominent-races:2026-08-27";
 const SOURCE_URL =
   "https://github.com/brownep77/athrecs.comsite/blob/main/src/data/uk-ireland-prominent-races-2026-2027.ts";
 const ACTOR = "athrecs-production-deployment@athrecs.com";
+const SEATON_CLASSIC_KEY = "seaton-classic-10k|2026-09-26|10K";
+const SEATON_CLASSIC_SOURCE = "https://athleticsni.org/Fixtures/Road-Running";
 
 const isProduction = process.env.VERCEL_ENV === "production";
 const branch = process.env.VERCEL_GIT_COMMIT_REF?.trim();
@@ -38,16 +40,38 @@ function eventInput(series) {
 }
 
 function editionInput(edition) {
+  const key = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+  const effectiveEdition =
+    key === SEATON_CLASSIC_KEY
+      ? {
+          ...edition,
+          status: "TBC",
+          entryUrl: SEATON_CLASSIC_SOURCE,
+          entryOptions: [
+            {
+              providerCode: "official-seaton-classic-10k-2026",
+              providerName: "Athletics Northern Ireland",
+              entryUrl: SEATON_CLASSIC_SOURCE,
+              entryType: "official",
+              status: "unknown",
+              checkedAt: "2026-08-27",
+              sourceUrl: SEATON_CLASSIC_SOURCE,
+              isVerified: true,
+              isPrimary: true,
+            },
+          ],
+        }
+      : edition;
   return {
-    eventSlug: edition.seriesSlug,
-    date: edition.date,
-    distance: edition.distance,
-    distanceKm: edition.distanceKm,
-    status: edition.status,
-    ...(edition.startTime ? { startTime: edition.startTime } : {}),
-    ...(edition.entryUrl ? { entryUrl: edition.entryUrl } : {}),
-    ...(edition.entryOptions ? { entryOptions: edition.entryOptions } : {}),
-    ...(edition.source ? { source: edition.source } : {}),
+    eventSlug: effectiveEdition.seriesSlug,
+    date: effectiveEdition.date,
+    distance: effectiveEdition.distance,
+    distanceKm: effectiveEdition.distanceKm,
+    status: effectiveEdition.status,
+    ...(effectiveEdition.startTime ? { startTime: effectiveEdition.startTime } : {}),
+    ...(effectiveEdition.entryUrl ? { entryUrl: effectiveEdition.entryUrl } : {}),
+    ...(effectiveEdition.entryOptions ? { entryOptions: effectiveEdition.entryOptions } : {}),
+    ...(effectiveEdition.source ? { source: effectiveEdition.source } : {}),
   };
 }
 
