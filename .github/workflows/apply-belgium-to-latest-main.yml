@@ -145,6 +145,21 @@ jobs:
               seed = seed.replace(old_seed, new_seed, 1)
               seed_path.write_text(seed, encoding="utf-8")
 
+          seed_assertions_updated = 0
+          for verifier_path in Path("scripts").glob("verify-*.mjs"):
+              verifier = verifier_path.read_text(encoding="utf-8")
+              occurrences = verifier.count(old_seed)
+              if occurrences:
+                  verifier_path.write_text(
+                      verifier.replace(old_seed, new_seed),
+                      encoding="utf-8",
+                  )
+                  seed_assertions_updated += occurrences
+          if seed_assertions_updated < 5:
+              raise SystemExit(
+                  f"Expected at least five strict seed assertions, updated {seed_assertions_updated}"
+              )
+
           audit_path = Path("docs/belgium-netherlands-calendar-audit.md")
           audit = audit_path.read_text(encoding="utf-8")
           notice = (
@@ -165,6 +180,9 @@ jobs:
           node scripts/verify-belgium-comprehensive-calendar.mjs
           node --experimental-strip-types scripts/verify-belgium-netherlands-running-calendar.mjs
           node --experimental-strip-types scripts/verify-netherlands-full-running-calendar.mjs
+          node --experimental-strip-types scripts/verify-france-spain-portugal-running-calendar.mjs
+          node --experimental-strip-types scripts/verify-western-balkans-running-calendar.mjs
+          node --experimental-strip-types scripts/verify-england-athletics-uk-fixtures.mjs
 
       - name: Commit clean Belgium expansion
         shell: bash
