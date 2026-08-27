@@ -5,8 +5,12 @@ import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const migration = await readFile(
+const blobMigration = await readFile(
   resolve(root, "migrations/0021_athlete_profile_photos.sql"),
+  "utf8",
+);
+const fallbackMigration = await readFile(
+  resolve(root, "migrations/0022_athlete_profile_photo_database_fallback.sql"),
   "utf8",
 );
 const handler = await readFile(
@@ -33,10 +37,13 @@ const routeTree = await readFile(resolve(root, "src/routeTree.gen.ts"), "utf8");
 const packageJson = JSON.parse(await readFile(resolve(root, "package.json"), "utf8"));
 const vercelConfig = JSON.parse(await readFile(resolve(root, "vercel.json"), "utf8"));
 
-assert.match(migration, /create table if not exists athlete_profile_photos/);
-assert.match(migration, /blob_pathname text not null/);
-assert.match(migration, /references "user" \("id"\) on delete cascade/);
-assert.doesNotMatch(migration, /bytea/i, "Postgres must not contain photo binary data");
+assert.match(blobMigration, /create table if not exists athlete_profile_photos/);
+assert.match(blobMigration, /references "user" \("id"\) on delete cascade/);
+assert.match(fallbackMigration, /photo_bytes bytea/);
+assert.match(fallbackMigration, /storage_backend text/);
+assert.match(fallbackMigration, /alter column blob_pathname drop not null/);
+assert.match(fallbackMigration, /storage_backend = 'database'/);
+assert.match(fallbackMigration, /storage_backend = 'blob'/);
 
 assert.match(handler, /auth\.api\.getSession\(\{ headers: request\.headers \}\)/);
 assert.match(handler, /mutationIsSameOrigin/);
@@ -46,9 +53,10 @@ assert.match(handler, /fileSignatureMatches/);
 assert.match(handler, /access: "private"/);
 assert.match(handler, /BLOB_READ_WRITE_TOKEN/);
 assert.match(handler, /BLOB_STORE_ID/);
-assert.match(handler, /blobStorageConnected/);
-assert.match(handler, /blobAuthOptions/);
-assert.match(handler, /storeId/);
+assert.match(handler, /saveDatabasePhoto/);
+assert.match(handler, /storage_backend = 'database'/);
+assert.match(handler, /Buffer\.from\(await file\.arrayBuffer\(\)\)/);
+assert.match(handler, /Postgres fallback/);
 assert.match(handler, /Cache-Control.*private, no-store/s);
 assert.match(handler, /delete from athlete_profile_photos where user_id/);
 assert.match(handler, /old private blob cleanup failed/);
@@ -64,7 +72,7 @@ assert.match(uploader, /OUTPUT_SIZE = 512/);
 assert.match(uploader, /canvas\.toBlob/);
 assert.match(uploader, /image\/webp/);
 assert.match(uploader, /stripped of the original file metadata/);
-assert.match(uploader, /Private photo storage required/);
+assert.match(uploader, /Upload photo/);
 assert.match(uploader, /method: "DELETE"/);
 assert.match(uploader, /getBearerToken/);
 assert.doesNotMatch(uploader, /accept="image\/\*"/, "File picker must use an explicit allowlist");
@@ -79,7 +87,7 @@ for (const field of [
 }
 assert.match(accountApi, /from athlete_profile_photos/);
 assert.match(accountApi, /safeImageUrl/);
-assert.match(accountApi, /process\.env\.BLOB_STORE_ID/);
+assert.match(accountApi, /const profilePhotoUploadAvailable = true/);
 assert.match(accountApi, /url\.protocol === "https:"/);
 
 assert.match(profileRoute, /ProfilePhotoUploader/);
@@ -115,39 +123,75 @@ await db.exec(`
     "image" text
   );
 `);
-await db.exec(migration);
+await db.exec(blobMigration);
+await db.exec(fallbackMigration);
 await db.exec(`
-  insert into "user" ("id", "name", "email", "emailVerified")
-  values ('photo-user', 'Photo Runner', 'photo@example.com', true);
+  insert into "user" ("id", "name", "email", "emailVerified") values
+    ('blob-photo-user', 'Blob Runner', 'blob@example.com', true),
+    ('database-photo-user', 'Database Runner', 'database@example.com', true);
+
   insert into athlete_profile_photos (
-    user_id, blob_pathname, content_type, byte_size, width, height
+    user_id, blob_pathname, photo_bytes, storage_backend,
+    content_type, byte_size, width, height
   ) values (
-    'photo-user', 'athlete-profile-photos/account/photo.webp',
+    'blob-photo-user', 'athlete-profile-photos/account/photo.webp', null, 'blob',
     'image/webp', 120000, 512, 512
   );
 `);
+await db.query(
+  `insert into athlete_profile_photos (
+     user_id, blob_pathname, photo_bytes, storage_backend,
+     content_type, byte_size, width, height
+   ) values ($1, null, $2, 'database', 'image/webp', $3, 512, 512)`,
+  ["database-photo-user", Uint8Array.from([82, 73, 70, 70, 1, 2, 3, 4]), 8],
+);
+
 const rows = await db.query(`
-  select user_id, blob_pathname, content_type, byte_size, width, height
+  select
+    user_id,
+    blob_pathname,
+    storage_backend,
+    content_type,
+    byte_size,
+    octet_length(photo_bytes)::int as stored_bytes
   from athlete_profile_photos
+  order by user_id
 `);
-assert.deepEqual(rows.rows[0], {
-  user_id: "photo-user",
-  blob_pathname: "athlete-profile-photos/account/photo.webp",
-  content_type: "image/webp",
-  byte_size: 120000,
-  width: 512,
-  height: 512,
-});
+assert.deepEqual(rows.rows, [
+  {
+    user_id: "blob-photo-user",
+    blob_pathname: "athlete-profile-photos/account/photo.webp",
+    storage_backend: "blob",
+    content_type: "image/webp",
+    byte_size: 120000,
+    stored_bytes: null,
+  },
+  {
+    user_id: "database-photo-user",
+    blob_pathname: null,
+    storage_backend: "database",
+    content_type: "image/webp",
+    byte_size: 8,
+    stored_bytes: 8,
+  },
+]);
+
+await assert.rejects(
+  db.query(
+    `update athlete_profile_photos
+     set blob_pathname = $1, photo_bytes = $2, storage_backend = 'database'
+     where user_id = 'database-photo-user'`,
+    ["athlete-profile-photos/account/invalid.webp", Uint8Array.from([1])],
+  ),
+  /check/i,
+);
 await assert.rejects(
   db.query(`
-    insert into athlete_profile_photos (
-      user_id, blob_pathname, content_type, byte_size, width, height
-    ) values (
-      'photo-user', 'athlete-profile-photos/account/bad.svg',
-      'image/svg+xml', 100, 512, 512
-    )
+    update athlete_profile_photos
+    set content_type = 'image/svg+xml'
+    where user_id = 'blob-photo-user'
   `),
-  /check|duplicate/i,
+  /check/i,
 );
 await db.close();
 
