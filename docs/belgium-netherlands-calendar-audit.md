@@ -1,3 +1,5 @@
+> **Belgium coverage in this document has been superseded by [the comprehensive Belgium audit](./belgium-calendar-comprehensive-audit.md). The Netherlands section remains applicable.**
+
 # Belgium and Netherlands running-calendar audit
 
 Checked: 27 August 2026  
