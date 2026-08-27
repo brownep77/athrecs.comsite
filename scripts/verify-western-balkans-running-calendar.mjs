@@ -153,7 +153,7 @@ assert(
   "Belgrade World Athletics duplicate is not retired",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-belgium-netherlands-running-calendar-v269"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-netherlands-full-running-calendar-v270"'),
   "The persistent catalogue seed was not advanced",
 );
 
