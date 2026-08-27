@@ -13,6 +13,7 @@ import {
 
 const CHECKED_AT = "2026-08-27";
 const HORIZON = "2027-08-27";
+const SEATON_CLASSIC_KEY = "seaton-classic-10k|2026-09-26|10K";
 const EXISTING_SLUGS = [
   "dingle-marathon-half-2026",
   "connemara-international-marathon",
@@ -80,7 +81,9 @@ for (const edition of prominentUkIrelandEditions) {
       `Multi-distance row can be collapsed by the catalogue: ${key}`,
     );
   }
-  if (edition.status === "Open" || edition.status === "Closed") {
+  if (key === SEATON_CLASSIC_KEY) {
+    assert.equal(edition.entryUrl, undefined, "Seaton must not invent a direct entry URL");
+  } else if (edition.status === "Open" || edition.status === "Closed") {
     assert.match(edition.entryUrl ?? "", /^https:\/\//, `Missing entry link: ${key}`);
     assert.equal(edition.entryOptions?.[0]?.checkedAt, CHECKED_AT, `Stale entry check: ${key}`);
     assert.equal(edition.entryOptions?.[0]?.isVerified, true, `Unverified entry: ${key}`);
@@ -153,6 +156,9 @@ for (const token of [
   "prominentUkIrelandSeriesOverrides",
   "prominentUkIrelandEditionOverrides",
   "prominentUkIrelandEntryOptions",
+  "SEATON_CLASSIC_KEY",
+  'status: "TBC"',
+  "official-seaton-classic-10k-2026",
 ]) {
   assert(entryOptionsSource.includes(token), `Entry options are not wired to ${token}`);
 }
@@ -166,6 +172,8 @@ for (const token of [
   "publishCatalogueBatch",
   "payload.events.length > 75",
   "payload.editions.length > 200",
+  "SEATON_CLASSIC_KEY",
+  'status: "TBC"',
 ]) {
   assert(publisherSource.includes(token), `Safe publication script is missing ${token}`);
 }
