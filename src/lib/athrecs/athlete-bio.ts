@@ -26,11 +26,11 @@ export function buildGeneratedAthleteBio(source: AthleteBioSource): string {
     (a, b) => b.eventDate.localeCompare(a.eventDate) || b.resultId - a.resultId,
   );
 
-  const introductionParts = [`${name} is ${articleFor(role)} ${role}`];
-  if (location) introductionParts.push(`based in ${location}`);
-  if (club) introductionParts.push(`affiliated with ${club}`);
+  let introduction = `${name} is ${articleFor(role)} ${role}`;
+  if (location) introduction += ` based in ${location}`;
+  if (club) introduction += `${location ? " and" : ""} affiliated with ${club}`;
 
-  const sentences = [`${joinWithAnd(introductionParts)}.`];
+  const sentences = [`${introduction}.`];
 
   if (results.length === 0) {
     sentences.push(
@@ -47,13 +47,12 @@ export function buildGeneratedAthleteBio(source: AthleteBioSource): string {
   );
 
   const latest = results[0];
-  const latestDetails = [
-    `Their latest recorded performance is at ${latest.eventName}`,
-    `on ${formatDate(latest.eventDate)}`,
-    latest.distanceCode ? `over ${displayDistance(latest.distanceCode)}` : "",
-    latest.finishTimeSeconds != null ? `completed in ${formatDuration(latest.finishTimeSeconds)}` : "",
-  ].filter(Boolean);
-  sentences.push(`${latestDetails.join(", ")}.`);
+  let latestSentence = `Their latest recorded performance is at ${latest.eventName} on ${formatDate(latest.eventDate)}`;
+  if (latest.distanceCode) latestSentence += ` over ${displayDistance(latest.distanceCode)}`;
+  if (latest.finishTimeSeconds != null) {
+    latestSentence += `, completed in ${formatDuration(latest.finishTimeSeconds)}`;
+  }
+  sentences.push(`${latestSentence}.`);
 
   const fastest = fastestByDistance(results).slice(0, 3);
   if (fastest.length) {
@@ -108,11 +107,6 @@ function joinLocation(...parts: string[]): string {
   return values.join(", ");
 }
 
-function joinWithAnd(parts: string[]): string {
-  if (parts.length <= 1) return parts[0] ?? "";
-  return `${parts.slice(0, -1).join(", ")} and ${parts.at(-1)}`;
-}
-
 function plural(word: string, count: number): string {
   return count === 1 ? word : `${word}s`;
 }
@@ -124,9 +118,11 @@ function displayDistance(value: string): string {
     "5k": "5K",
     "5km": "5K",
     "5mile": "5 miles",
+    "5miles": "5 miles",
     "10k": "10K",
     "10km": "10K",
     "10mile": "10 miles",
+    "10miles": "10 miles",
     "halfmarathon": "Half Marathon",
     "21.1k": "Half Marathon",
     "21.1km": "Half Marathon",
@@ -142,9 +138,11 @@ function distanceRank(value: string): number {
     "5k": 2,
     "5km": 2,
     "5mile": 3,
+    "5miles": 3,
     "10k": 4,
     "10km": 4,
     "10mile": 5,
+    "10miles": 5,
     "halfmarathon": 6,
     "21.1k": 6,
     "21.1km": 6,
@@ -166,9 +164,9 @@ function uniqueDistances(results: AthleteBioResult[]): string[] {
 
 function summarizeList(values: string[], visibleLimit: number): string {
   if (values.length <= visibleLimit) return joinNatural(values);
-  const visible = values.slice(0, visibleLimit - 1);
+  const visible = values.slice(0, visibleLimit);
   const remaining = values.length - visible.length;
-  return `${joinNatural(visible)} and ${remaining} other ${plural("distance", remaining)}`;
+  return `${visible.join(", ")} and ${remaining} more ${plural("distance", remaining)}`;
 }
 
 function joinNatural(values: string[]): string {
