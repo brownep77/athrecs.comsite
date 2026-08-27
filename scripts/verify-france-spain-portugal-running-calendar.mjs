@@ -5,6 +5,7 @@ import {
   franceSpainPortugalRaceEditions,
   franceSpainPortugalRaceSeries,
 } from "../src/data/france-spain-portugal-races.ts";
+import { verifiedFixtureEditionReplacements } from "../src/data/fixture-deduplication.ts";
 import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts";
 import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
 
@@ -149,12 +150,40 @@ const catalogueSource = await readFile(
 );
 assert(catalogueSource.includes("franceSpainPortugalRaceSeries"), "Series are not published");
 assert(catalogueSource.includes("franceSpainPortugalRaceEditions"), "Editions are not published");
+for (const expected of [
+  {
+    seriesSlug: "wa-le-marathon-vert-rennes-school-of-business-7236026",
+    distance: "Other",
+    fromDate: "2026-10-18",
+    toDate: "2026-10-18",
+    toDistance: "Marathon",
+  },
+  {
+    seriesSlug: "wa-bilbao-night-half-marathon-7236025",
+    distance: "Other",
+    fromDate: "2026-10-17",
+    toDate: "2026-10-17",
+    toDistance: "Half",
+  },
+]) {
+  assert(
+    verifiedFixtureEditionReplacements.some(
+      (replacement) =>
+        replacement.seriesSlug === expected.seriesSlug &&
+        replacement.distance === expected.distance &&
+        replacement.fromDate === expected.fromDate &&
+        replacement.toDate === expected.toDate &&
+        replacement.toDistance === expected.toDistance,
+    ),
+    `Missing result-safe legacy edition migration: ${expected.seriesSlug}`,
+  );
+}
 const seedSource = await readFile(
   new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
   "utf8",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-france-spain-portugal-expansion-v266"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-france-spain-portugal-live-dedupe-v268"'),
   "The production catalogue seed was not advanced for the expanded calendar",
 );
 
