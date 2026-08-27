@@ -183,7 +183,7 @@ const seedSource = await readFile(
   "utf8",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-france-spain-portugal-live-dedupe-v268"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v269"'),
   "The production catalogue seed was not advanced for the expanded calendar",
 );
 

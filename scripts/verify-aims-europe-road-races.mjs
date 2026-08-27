@@ -114,7 +114,7 @@ const seedSource = fs.readFileSync(
   new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
   "utf8",
 );
-assert(seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v246"'));
+assert(seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v269"'));
 
 process.stdout.write(
   JSON.stringify(
