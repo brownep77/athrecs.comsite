@@ -15,6 +15,7 @@ import {
   Trophy,
   UserRound,
 } from "lucide-react";
+import { AthleteBioCard } from "@/components/athletes/AthleteBioCard";
 import { ProfilePhotoUploader } from "@/components/athletes/ProfilePhotoUploader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -220,6 +221,8 @@ function MyAthleteProfilePage() {
           detail="Distances represented"
         />
       </section>
+
+      <AthleteBioCard />
 
       {data.claimedProfiles.length ? (
         <section className="rounded-2xl border border-border bg-surface p-5 shadow-card md:p-6">
