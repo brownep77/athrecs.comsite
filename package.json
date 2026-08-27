@@ -60,8 +60,9 @@
     "verify:slug-stability": "node --experimental-strip-types scripts/verify-slug-stability.mjs",
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
     "verify:multisport-taxonomy": "node scripts/verify-multisport-taxonomy.mjs",
-    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:result-claims && npm run verify:claim-experience && npm run verify:profile-photo && npm run verify:private-result-archive && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:france-spain-portugal-running-calendar && npm run verify:england-athletics-runevents && npm run verify:england-athletics-uk-fixtures && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run verify:multisport-taxonomy && npm run build",
-    "verify:profile-photo": "node scripts/verify-profile-photo.mjs"
+    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:result-claims && npm run verify:claim-experience && npm run verify:profile-photo && npm run verify:athlete-bio && npm run verify:private-result-archive && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:france-spain-portugal-running-calendar && npm run verify:england-athletics-runevents && npm run verify:england-athletics-uk-fixtures && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run verify:multisport-taxonomy && npm run build",
+    "verify:profile-photo": "node scripts/verify-profile-photo.mjs",
+    "verify:athlete-bio": "node --experimental-strip-types scripts/verify-athlete-bio.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
