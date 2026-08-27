@@ -26,6 +26,7 @@ import { Route as AdminResultArchiveRouteImport } from './routes/admin/result-ar
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
+import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
@@ -125,6 +126,11 @@ const AdminSourcesRoute = AdminSourcesRouteImport.update({
   path: '/admin/sources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAthleteProfilePhotoRoute = ApiAthleteProfilePhotoRouteImport.update({
+  id: '/api/athlete-profile-photo',
+  path: '/api/athlete-profile-photo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiCatalogueAutomationRoute = ApiCatalogueAutomationRouteImport.update({
   id: '/api/catalogue-automation',
   path: '/api/catalogue-automation',
@@ -200,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
@@ -230,6 +237,7 @@ export interface FileRoutesByTo {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
@@ -261,6 +269,7 @@ export interface FileRoutesById {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
@@ -293,6 +302,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
@@ -323,6 +333,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
@@ -353,6 +364,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
@@ -384,6 +396,7 @@ export interface RootRouteChildren {
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
+  ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
@@ -519,6 +532,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/athlete-profile-photo': {
+      id: '/api/athlete-profile-photo'
+      path: '/api/athlete-profile-photo'
+      fullPath: '/api/athlete-profile-photo'
+      preLoaderRoute: typeof ApiAthleteProfilePhotoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/catalogue-automation': {
       id: '/api/catalogue-automation'
       path: '/api/catalogue-automation'
@@ -616,6 +636,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResultClaimsRoute: AdminResultClaimsRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
+  ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   ClubsSlugRoute: ClubsSlugRoute,

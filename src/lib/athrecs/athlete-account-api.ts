@@ -93,6 +93,10 @@ export type AthleteAccountData = {
   nationality: string;
   clubOrTeam: string;
   preferredLanguage: string;
+  profilePhotoUrl: string;
+  profilePhotoUpdatedAt: string | null;
+  profilePhotoUploadAvailable: boolean;
+  authImageUrl: string;
   privacyAcknowledged: boolean;
   updatedAt: string | null;
   sports: AthleteSportProfile[];
@@ -135,6 +139,7 @@ type UserRow = {
   name: string;
   email: string;
   email_verified: boolean;
+  image: string | null;
 };
 
 type ProfileRow = {
@@ -150,6 +155,10 @@ type ProfileRow = {
   preferred_language: string | null;
   privacy_notice_version: string;
   privacy_acknowledged_at: string;
+  updated_at: string;
+};
+
+type ProfilePhotoRow = {
   updated_at: string;
 };
 
@@ -436,13 +445,24 @@ function mapConsents(rows: Array<{ purpose: string; status: string }>): AthleteA
   };
 }
 
+function safeImageUrl(value: string | null): string {
+  if (!value) return "";
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" ? url.toString() : "";
+  } catch {
+    return "";
+  }
+}
+
 async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: string) {
   const users = await sql<UserRow>`
     select
       "id" as id,
       "name" as name,
       lower("email") as email,
-      "emailVerified" as email_verified
+      "emailVerified" as email_verified,
+      "image" as image
     from "user"
     where "id" = ${userId}
     limit 1
@@ -450,8 +470,16 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
   const user = users[0];
   if (!user?.email) throw new Error("Your signed-in account has no email address");
 
-  const [profiles, sports, preferences, consentRows, claimedProfiles, claimedResults, claimCounts] =
-    await Promise.all([
+  const [
+    profiles,
+    photos,
+    sports,
+    preferences,
+    consentRows,
+    claimedProfiles,
+    claimedResults,
+    claimCounts,
+  ] = await Promise.all([
       sql<ProfileRow>`
         select
           full_name, display_name, date_of_birth::text as date_of_birth,
@@ -460,6 +488,12 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
           privacy_acknowledged_at::text as privacy_acknowledged_at,
           updated_at::text as updated_at
         from athlete_private_profiles
+        where user_id = ${userId}
+        limit 1
+      `,
+      sql<ProfilePhotoRow>`
+        select updated_at::text as updated_at
+        from athlete_profile_photos
         where user_id = ${userId}
         limit 1
       `,
@@ -528,6 +562,10 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       `,
     ]);
   const profile = profiles[0];
+  const photo = photos[0];
+  // Upload is always available: private Blob is preferred, with an
+  // authenticated Postgres bytea fallback until an object store is connected.
+  const profilePhotoUploadAvailable = true;
   return {
     exists: Boolean(profile),
     userId,
@@ -544,6 +582,12 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     nationality: profile?.nationality ?? "",
     clubOrTeam: profile?.club_or_team ?? "",
     preferredLanguage: profile?.preferred_language ?? "",
+    profilePhotoUrl: photo
+      ? `/api/athlete-profile-photo?v=${encodeURIComponent(photo.updated_at)}`
+      : "",
+    profilePhotoUpdatedAt: photo?.updated_at ?? null,
+    profilePhotoUploadAvailable,
+    authImageUrl: safeImageUrl(user.image),
     privacyAcknowledged: Boolean(profile?.privacy_acknowledged_at),
     updatedAt: profile?.updated_at ?? null,
     sports: sports.map(mapSport),
@@ -912,6 +956,10 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
         nationality: profile.nationality ?? "",
         clubOrTeam: profile.club_or_team ?? "",
         preferredLanguage: profile.preferred_language ?? "",
+        profilePhotoUrl: "",
+        profilePhotoUpdatedAt: null,
+        profilePhotoUploadAvailable: false,
+        authImageUrl: "",
         privacyAcknowledged: Boolean(profile.privacy_acknowledged_at),
         updatedAt: profile.updated_at,
         sports: (groupedSports.get(profile.user_id) ?? []).map(mapSport),

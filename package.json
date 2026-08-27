@@ -60,7 +60,8 @@
     "verify:slug-stability": "node --experimental-strip-types scripts/verify-slug-stability.mjs",
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
     "verify:multisport-taxonomy": "node scripts/verify-multisport-taxonomy.mjs",
-    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:result-claims && npm run verify:claim-experience && npm run verify:private-result-archive && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:france-spain-portugal-running-calendar && npm run verify:england-athletics-runevents && npm run verify:england-athletics-uk-fixtures && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run verify:multisport-taxonomy && npm run build"
+    "ci:verify": "npm run typecheck && npm run lint && npm run verify:auth-methods && npm run verify:result-matches && npm run verify:result-claims && npm run verify:claim-experience && npm run verify:profile-photo && npm run verify:private-result-archive && npm run verify:catalogue && npm run verify:fixture-duplicates && npm run verify:albania-running-calendar && npm run verify:western-balkans-running-calendar && npm run verify:france-spain-portugal-running-calendar && npm run verify:england-athletics-runevents && npm run verify:england-athletics-uk-fixtures && npm run verify:slug-stability && npm run verify:catalogue-publishing && npm run verify:multisport-taxonomy && npm run build",
+    "verify:profile-photo": "node scripts/verify-profile-photo.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
@@ -121,7 +122,8 @@
     "@types/node": "^22.16.5",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
-    "@types/pg": "^8.11.10"
+    "@types/pg": "^8.11.10",
+    "@vercel/blob": "^2.8.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
