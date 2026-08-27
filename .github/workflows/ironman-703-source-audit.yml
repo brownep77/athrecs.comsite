@@ -1,0 +1,37 @@
+name: IRONMAN 70.3 source audit
+
+on:
+  push:
+    branches:
+      - codex/add-ironman-703-calendar
+    paths:
+      - scripts/audit-ironman-703-source.mjs
+      - .github/workflows/ironman-703-source-audit.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Audit the official IRONMAN 70.3 calendar
+        run: node scripts/audit-ironman-703-source.mjs
+
+      - name: Upload source audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: ironman-703-source-audit
+          path: tmp/ironman-703-audit
+          if-no-files-found: error
+          retention-days: 3
