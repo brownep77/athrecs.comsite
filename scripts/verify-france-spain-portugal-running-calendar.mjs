@@ -149,6 +149,14 @@ const catalogueSource = await readFile(
 );
 assert(catalogueSource.includes("franceSpainPortugalRaceSeries"), "Series are not published");
 assert(catalogueSource.includes("franceSpainPortugalRaceEditions"), "Editions are not published");
+const seedSource = await readFile(
+  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
+  "utf8",
+);
+assert(
+  seedSource.includes('const SEED_VERSION = "athrecs-france-spain-portugal-expansion-v266"'),
+  "The production catalogue seed was not advanced for the expanded calendar",
+);
 
 process.stdout.write(
   JSON.stringify(
