@@ -1,21 +1,23 @@
-name: IRONMAN 70.3 source audit
+name: Apply IRONMAN 70.3 calendar
 
 on:
   push:
     branches:
       - codex/add-ironman-703-calendar
     paths:
-      - scripts/audit-ironman-703-source.mjs
+      - src/data/ironman-703-calendar.ts
+      - scripts/apply-ironman-calendar-patch.mjs
+      - scripts/verify-ironman-703-calendar.mjs
       - .github/workflows/ironman-703-source-audit.yml
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  audit:
+  integrate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -24,14 +26,36 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: npm
 
-      - name: Audit the official IRONMAN 70.3 calendar
-        run: node scripts/audit-ironman-703-source.mjs
+      - name: Apply the catalogue patch
+        run: node scripts/apply-ironman-calendar-patch.mjs
 
-      - name: Upload source audit
-        uses: actions/upload-artifact@v4
-        with:
-          name: ironman-703-source-audit
-          path: tmp/ironman-703-audit
-          if-no-files-found: error
-          retention-days: 3
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify the IRONMAN calendar
+        run: npm run verify:ironman-703-calendar
+
+      - name: Run catalogue and duplicate checks
+        run: |
+          npm run typecheck
+          npm run verify:catalogue
+          npm run verify:fixture-duplicates
+
+      - name: Build the site
+        run: npm run build
+
+      - name: Remove one-use integration files
+        run: |
+          rm -f scripts/audit-ironman-703-source.mjs
+          rm -f scripts/apply-ironman-calendar-patch.mjs
+          rm -f .github/workflows/ironman-703-source-audit.yml
+
+      - name: Commit the verified integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/catalogue.ts src/data/ironman-703-calendar.ts scripts/verify-ironman-703-calendar.mjs package.json scripts/audit-ironman-703-source.mjs scripts/apply-ironman-calendar-patch.mjs .github/workflows/ironman-703-source-audit.yml
+          git commit -m "Integrate official IRONMAN 70.3 calendar"
+          git push origin HEAD:codex/add-ironman-703-calendar
