@@ -127,6 +127,10 @@ import {
   dailyHalfTenMileEditions,
   dailyHalfTenMileSeries,
 } from "./half-ten-mile-races-uk-ireland-daily-followup";
+import {
+  prominentUkIrelandEditions,
+  prominentUkIrelandSeries,
+} from "./uk-ireland-prominent-races-2026-2027";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -208,6 +212,7 @@ for (const series of [
   ...(verifiedHalfMarathonFollowupSeries as Series[]),
   ...(verifiedHalfToTwentyMileSeries as Series[]),
   ...(dailyHalfTenMileSeries as Series[]),
+  ...(prominentUkIrelandSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
@@ -287,6 +292,9 @@ const mergedEditions = [
   ...(verifiedHalfToTwentyMileEditions as Edition[]),
   ...(dailyHalfTenMileEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(prominentUkIrelandEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
   ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
