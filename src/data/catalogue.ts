@@ -90,6 +90,11 @@ import {
   belgiumNetherlandsRaceSeries,
 } from "./belgium-netherlands-races";
 import {
+  belgiumComprehensiveRaceEditions,
+  belgiumComprehensiveRaceSeries,
+  belgiumComprehensiveReplacementSlugs,
+} from "./belgium-races-comprehensive";
+import {
   netherlandsFullRaceEditions,
   netherlandsFullRaceSeries,
 } from "./netherlands-full-running-calendar";
@@ -186,6 +191,7 @@ for (const series of [
   ...(albaniaRaceSeries as Series[]),
   ...(westernBalkansRaceSeries as Series[]),
   ...(franceSpainPortugalRaceSeries as Series[]),
+  ...(belgiumComprehensiveRaceSeries as Series[]),
   ...(belgiumNetherlandsRaceSeries as Series[]),
   ...(netherlandsFullRaceSeries as Series[]),
   ...(englandAthleticsRunEventsSeries as Series[]),
@@ -245,8 +251,13 @@ const mergedEditions = [
   ...(franceSpainPortugalRaceEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
   ),
-  ...(belgiumNetherlandsRaceEditions as Edition[]).filter((edition) =>
+  ...(belgiumComprehensiveRaceEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(belgiumNetherlandsRaceEditions as Edition[]).filter(
+    (edition) =>
+      usedSlugs.has(edition.seriesSlug) &&
+      !belgiumComprehensiveReplacementSlugs.has(edition.seriesSlug),
   ),
   ...(netherlandsFullRaceEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
