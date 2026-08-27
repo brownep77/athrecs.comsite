@@ -23,7 +23,7 @@ type Ironman703RaceSeed = readonly [
   meta?: RaceMeta,
 ];
 
-const raceSeeds = [
+const raceSeeds: readonly Ironman703RaceSeed[] = [
   ["im703-poznan", "IRONMAN 70.3 Poznan", "2026-08-30", "Poznan", "Greater Poland", "Poland", "sold_out"],
   ["im703-zell-am-see", "IRONMAN 70.3 Zell am See-Kaprun", "2026-08-30", "Zell am See", "Salzburg", "Austria", "sold_out"],
   ["im703-baku", "IRONMAN 70.3 Baku", "2026-09-05", "Baku", "Baku", "Azerbaijan", "open"],
@@ -90,7 +90,7 @@ const raceSeeds = [
   ["im703-swansea", "IRONMAN 70.3 Swansea", "2027-07-11", "Swansea", "Swansea", "Wales", "unknown", { dateSource: "official-linked" }],
   ["im703-vitoria", "IRONMAN 70.3 Vitoria-Gasteiz", "2027-07-11", "Vitoria-Gasteiz", "Basque Country", "Spain", "unknown", { dateSource: "official-linked" }],
   ["im703-maine", "IRONMAN 70.3 Maine", "2027-07-18", "Augusta", "Maine", "United States", "unknown", { dateSource: "official-linked" }],
-] satisfies readonly Ironman703RaceSeed[];
+];
 
 function officialRaceUrl(sourceSlug: string): string {
   return `https://www.ironman.com/races/${sourceSlug}`;
