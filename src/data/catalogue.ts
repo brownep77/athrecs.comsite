@@ -126,12 +126,17 @@ import {
 } from "./half-to-20-mile-races-uk-ireland";
 import {
   dailyHalfTenMileEditions,
+  dailyHalfTenMileExistingSeriesEditions,
   dailyHalfTenMileSeries,
 } from "./half-ten-mile-races-uk-ireland-daily-followup";
 import {
   prominentUkIrelandEditions,
   prominentUkIrelandSeries,
 } from "./uk-ireland-prominent-races-2026-2027";
+import {
+  verifiedNonStandardDistanceEditions,
+  verifiedNonStandardDistanceSeries,
+} from "./non-standard-races-uk-ireland";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -214,6 +219,7 @@ for (const series of [
   ...(verifiedHalfToTwentyMileSeries as Series[]),
   ...(dailyHalfTenMileSeries as Series[]),
   ...(prominentUkIrelandSeries as Series[]),
+  ...(verifiedNonStandardDistanceSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(ironman703Series as Series[]),
   ...(multiSportSeries as Series[]),
@@ -295,8 +301,12 @@ const mergedEditions = [
   ...(dailyHalfTenMileEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
+  ...(dailyHalfTenMileExistingSeriesEditions as Edition[]),
   ...(prominentUkIrelandEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(verifiedNonStandardDistanceEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
   ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(ironman703Editions as Edition[]).filter((edition) =>

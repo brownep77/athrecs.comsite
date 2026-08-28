@@ -45,6 +45,12 @@ import {
   dailyHalfTenMileSeriesOverrides,
 } from "./half-ten-mile-races-uk-ireland-daily-followup";
 import {
+  nonStandardDistanceEditionOverrides,
+  nonStandardDistanceEditionReplacements,
+  nonStandardDistanceSeriesOverrides,
+  nonStandardDistanceSlugAliases,
+} from "./non-standard-races-uk-ireland";
+import {
   prominentUkIrelandEditionOverrides,
   prominentUkIrelandEntryOptions,
   prominentUkIrelandSeriesOverrides,
@@ -56,6 +62,7 @@ const SEATON_CLASSIC_SOURCE = "https://athleticsni.org/Fixtures/Road-Running";
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const eventSlugAliases: Readonly<Record<string, string>> = {
   ...allFixtureAliases,
+  ...nonStandardDistanceSlugAliases,
 };
 
 export function canonicalEventSlug(slug: string): string {
@@ -68,6 +75,7 @@ export const editionReplacements = [
   ...ukHalfMarathonEditionReplacements,
   ...ukTenKEditionReplacements,
   ...verifiedFixtureEditionReplacements,
+  ...nonStandardDistanceEditionReplacements,
   {
     seriesSlug: "vjosa-wild-river-ultra-trail",
     distance: "100K",
@@ -87,6 +95,7 @@ export const editionOverrides: Record<string, Partial<Edition>> = {
   ...verifiedHalfMarathonFollowupEditionOverrides,
   ...verifiedHalfToTwentyMileEditionOverrides,
   ...dailyHalfTenMileEditionOverrides,
+  ...nonStandardDistanceEditionOverrides,
   ...prominentUkIrelandEditionOverrides,
   [SEATON_CLASSIC_KEY]: {
     status: "TBC",
@@ -110,6 +119,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...verifiedHalfMarathonFollowupSeriesOverrides,
   ...verifiedHalfToTwentyMileSeriesOverrides,
   ...dailyHalfTenMileSeriesOverrides,
+  ...nonStandardDistanceSeriesOverrides,
   ...prominentUkIrelandSeriesOverrides,
 };
 
