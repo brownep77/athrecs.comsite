@@ -27,6 +27,9 @@ const SPORT_VALUES = new Set<Sport>([
   "Aquabike",
   "Rowing",
   "OCR",
+  "Adventure Racing",
+  "Functional Fitness",
+  "Walking",
 ]);
 
 type RaceSearchParams = {

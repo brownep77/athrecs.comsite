@@ -4,6 +4,7 @@ import type { EntryOptionStatus, EntryOptionType, EntryStatus, Sport } from "./t
 // Append-only results import (athletes + finish times)
 export {
   applyResultsImport,
+  parseResultsCsv,
   type ResultsImportBundle,
   type ImportResultRow,
 } from "./results-import.server";
@@ -20,6 +21,9 @@ const SPORTS: Sport[] = [
   "Aquabike",
   "Rowing",
   "OCR",
+  "Adventure Racing",
+  "Functional Fitness",
+  "Walking",
 ];
 
 const STATUSES: EntryStatus[] = ["Open", "ClosingSoon", "Closed", "Finished", "TBC"];
@@ -162,6 +166,7 @@ export type ImportEditionInput = {
   entryUrl?: string;
   entryOptions?: ImportEntryOptionInput[];
   source?: string;
+  notes?: string;
 };
 
 export type ImportEntryOptionInput = {
@@ -423,11 +428,12 @@ export async function applyImportBundle(
       const editionRows = await sql<{ id: number }>`
         insert into editions (
           event_id, event_date, distance_code, distance_km, status,
-          entry_url, source_url, start_time
+          entry_url, source_url, start_time, notes
         ) values (
           ${again[0].id}, ${raw.date}::date, ${raw.distance},
           ${raw.distanceKm ?? 0}, ${status},
-          ${raw.entryUrl ?? null}, ${raw.source ?? null}, ${raw.startTime ?? null}
+          ${raw.entryUrl ?? null}, ${raw.source ?? null}, ${raw.startTime ?? null},
+          ${raw.notes ?? null}
         )
         on conflict (event_id, event_date, distance_code) do update set
           distance_km = excluded.distance_km,
@@ -444,7 +450,8 @@ export async function applyImportBundle(
             else coalesce(excluded.entry_url, editions.entry_url)
           end,
           source_url = coalesce(excluded.source_url, editions.source_url),
-          start_time = excluded.start_time
+          start_time = excluded.start_time,
+          notes = coalesce(excluded.notes, editions.notes)
         returning id
       `;
       const editionId = editionRows[0]?.id;

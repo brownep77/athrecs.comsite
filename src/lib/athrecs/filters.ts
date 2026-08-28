@@ -1,10 +1,38 @@
 export const DISTANCE_FILTERS = [
   "All",
+  "1K",
+  "1mi",
   "2K",
+  "2.62K",
+  "3K",
   "5K",
-  "10K",
+  "4mi",
+  "6K",
+  "6.5K",
+  "7K",
+  "7.5K",
+  "8K",
   "5mi",
+  "9K",
+  "6mi",
+  "10K",
+  "Quarter",
+  "11K",
+  "7mi",
+  "12K",
+  "8mi",
+  "13K",
+  "13.1K",
+  "14K",
+  "15K",
+  "15.5K",
+  "16K",
   "10mi",
+  "17K",
+  "12mi",
+  "20K",
+  "12.5mi",
+  "21K",
   "Half",
   "Marathon",
   "Ultra",
@@ -53,6 +81,9 @@ export const SPORTS = [
   "Aquabike",
   "Rowing",
   "OCR",
+  "Adventure Racing",
+  "Functional Fitness",
+  "Walking",
 ] as const;
 
 export type SubfilterKey = "distance" | "surface" | "format";
@@ -93,10 +124,16 @@ export function subfiltersForSport(sport: string): SubfilterDef[] {
       { key: "surface", label: "Terrain", options: ["All", "Road", "Trail", "Mixed"] },
     ];
   }
-  if (sport === "OCR") {
+  if (sport === "OCR" || sport === "Adventure Racing") {
     return [{ key: "surface", label: "Terrain", options: TERRAIN_FILTERS }];
   }
-  if (sport === "Rowing") return [];
+  if (sport === "Walking") {
+    return [
+      { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
+      { key: "surface", label: "Surface", options: TERRAIN_FILTERS },
+    ];
+  }
+  if (sport === "Rowing" || sport === "Functional Fitness") return [];
   return [
     { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
     { key: "surface", label: "Surface", options: TERRAIN_FILTERS },

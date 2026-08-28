@@ -11,7 +11,10 @@ export type Sport =
   | "Aquabike"
   | "Rowing"
   | "OCR"
-  | "Athletics";
+  | "Athletics"
+  | "Adventure Racing"
+  | "Functional Fitness"
+  | "Walking";
 
 export type Series = {
   /** Stable ID from the fuller production catalogue, when one exists. */
@@ -103,6 +106,8 @@ export type Edition = {
   partnerResultCount?: number;
   athleteResultCount?: number;
   resultsAccess?: string;
+  /** Keep every advertised same-day distance instead of the catalogue's legacy single-row collapse. */
+  publishAllDistances?: boolean;
 };
 
 export type ClubContactSeed = {

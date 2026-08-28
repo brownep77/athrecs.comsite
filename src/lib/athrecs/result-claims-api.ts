@@ -8,6 +8,7 @@ import {
   notifyResultClaimSubmitted,
   notifyResultClaimWithdrawn,
 } from "./result-claim-email.server";
+import { scorePotentialResultNameMatch, uniquePotentialMatchNames } from "./result-match";
 import { ensureAthrecsSeeded } from "./seed.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
@@ -38,6 +39,8 @@ export type ResultClaimListItem = ClaimableResult & {
   verificationMethod: ResultClaimVerificationMethod;
   evidenceText: string;
   evidenceUrl: string | null;
+  evidenceUrl2: string | null;
+  evidenceUrl3: string | null;
   conflictReason: string | null;
   staffNote: string | null;
   submittedAt: string;
@@ -53,6 +56,8 @@ type ClaimRow = {
   verification_method: ResultClaimVerificationMethod;
   evidence_text: string;
   evidence_url: string | null;
+  evidence_url_2: string | null;
+  evidence_url_3: string | null;
   conflict_reason: string | null;
   staff_note: string | null;
   submitted_at: string;
@@ -115,18 +120,6 @@ function shortText(value: unknown, max: number, label: string): string {
   return text;
 }
 
-function verificationMethod(value: unknown): ResultClaimVerificationMethod {
-  if (
-    value === "bib" ||
-    value === "official_email" ||
-    value === "club_confirmation" ||
-    value === "other"
-  ) {
-    return value;
-  }
-  throw new Error("Choose how ATHRECS can verify this claim");
-}
-
 function reviewAction(value: unknown): "approve" | "reject" | "needs_info" {
   if (value === "approve" || value === "reject" || value === "needs_info") return value;
   throw new Error("Review action is invalid");
@@ -153,6 +146,8 @@ function mapClaim(row: ClaimRow): ResultClaimListItem {
     verificationMethod: row.verification_method,
     evidenceText: row.evidence_text,
     evidenceUrl: row.evidence_url,
+    evidenceUrl2: row.evidence_url_2,
+    evidenceUrl3: row.evidence_url_3,
     conflictReason: row.conflict_reason,
     staffNote: row.staff_note,
     submittedAt: row.submitted_at,
@@ -170,6 +165,8 @@ const CLAIM_SELECT = `
     claim.verification_method,
     claim.evidence_text,
     claim.evidence_url,
+    claim.evidence_url_2,
+    claim.evidence_url_3,
     claim.conflict_reason,
     claim.staff_note,
     claim.submitted_at::text as submitted_at,
@@ -194,11 +191,104 @@ const CLAIM_SELECT = `
   join events event on event.id = edition.event_id
 `;
 
+type ClaimCandidateIdentity = {
+  resultId: number;
+  athleteId: number;
+  athleteName: string;
+  city: string | null;
+  region: string | null;
+  country: string | null;
+  clubName: string | null;
+};
+
+async function canAccessClaimCandidate(
+  sql: Awaited<ReturnType<typeof getSql>>,
+  userId: string,
+  candidate: ClaimCandidateIdentity,
+): Promise<boolean> {
+  const accessRows = await sql<{ allowed: boolean }>`
+    select (
+      exists (
+        select 1 from athlete_account_links account_link
+        where account_link.athlete_id = ${candidate.athleteId}
+          and account_link.user_id = ${userId}
+          and account_link.status = 'active'
+      )
+      or exists (
+        select 1 from result_claims claim
+        where claim.result_id = ${candidate.resultId}
+          and claim.claimant_user_id = ${userId}
+      )
+    ) as allowed
+  `;
+  if (accessRows[0]?.allowed) return true;
+
+  const [identities, linkedNames] = await Promise.all([
+    sql<{
+      auth_name: string;
+      full_name: string | null;
+      display_name: string | null;
+      city: string | null;
+      region: string | null;
+      country: string | null;
+      club_or_team: string | null;
+    }>`
+      select
+        account_user."name" as auth_name,
+        profile.full_name,
+        profile.display_name,
+        profile.city,
+        profile.region,
+        profile.country,
+        profile.club_or_team
+      from "user" account_user
+      left join athlete_private_profiles profile on profile.user_id = account_user."id"
+      where account_user."id" = ${userId}
+      limit 1
+    `,
+    sql<{ athlete_name: string }>`
+      select athlete.display_name as athlete_name
+      from athlete_account_links account_link
+      join athletes athlete on athlete.id = account_link.athlete_id
+      where account_link.user_id = ${userId}
+        and account_link.status = 'active'
+    `,
+  ]);
+
+  const identity = identities[0];
+  if (!identity) return false;
+  const names = uniquePotentialMatchNames([
+    identity.full_name,
+    identity.display_name,
+    identity.auth_name,
+    ...linkedNames.map((row) => row.athlete_name),
+  ]);
+  return Boolean(
+    scorePotentialResultNameMatch(
+      names,
+      candidate.athleteName,
+      {
+        city: identity.city,
+        region: identity.region,
+        country: identity.country,
+        clubOrTeam: identity.club_or_team,
+      },
+      {
+        city: candidate.city,
+        region: candidate.region,
+        country: candidate.country,
+        clubName: candidate.clubName,
+      },
+    ),
+  );
+}
+
 export const getClaimableResult = createServerFn({ method: "GET" })
+  .middleware([authMiddleware])
   .validator((input: { resultId: number }) => ({
     resultId: positiveInteger(input?.resultId, "Result"),
   }))
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     const sql = await ready();
     const rows = await sql<{
       result_id: number;
@@ -214,6 +304,10 @@ export const getClaimableResult = createServerFn({ method: "GET" })
       bib: string | null;
       category: string | null;
       source_url: string | null;
+      athlete_city: string | null;
+      athlete_region: string | null;
+      athlete_country: string | null;
+      club_name: string | null;
     }>`
       select
         result.id as result_id,
@@ -228,16 +322,31 @@ export const getClaimableResult = createServerFn({ method: "GET" })
         result.overall_place,
         result.bib,
         result.category,
-        result.source_url
+        result.source_url,
+        athlete.city as athlete_city,
+        athlete.county as athlete_region,
+        athlete.country as athlete_country,
+        club.name as club_name
       from results result
       join athletes athlete on athlete.id = result.athlete_id
       join editions edition on edition.id = result.edition_id
       join events event on event.id = edition.event_id
+      left join clubs club on club.id = athlete.club_id
       where result.id = ${data.resultId}
       limit 1
     `;
     const row = rows[0];
     if (!row) return null;
+    const allowed = await canAccessClaimCandidate(sql, context.userId, {
+      resultId: row.result_id,
+      athleteId: row.athlete_id,
+      athleteName: row.athlete_name,
+      city: row.athlete_city,
+      region: row.athlete_region,
+      country: row.athlete_country,
+      clubName: row.club_name,
+    });
+    if (!allowed) return null;
     return {
       resultId: row.result_id,
       athleteId: row.athlete_id,
@@ -260,15 +369,17 @@ export const submitResultClaim = createServerFn({ method: "POST" })
   .validator(
     (input: {
       resultId: number;
-      verificationMethod: ResultClaimVerificationMethod;
-      evidenceText?: string;
       evidenceUrl?: string;
+      evidenceUrl2?: string;
+      evidenceUrl3?: string;
       declarationAccepted: boolean;
     }) => ({
       resultId: positiveInteger(input?.resultId, "Result"),
-      verificationMethod: verificationMethod(input?.verificationMethod),
-      evidenceText: shortText(input?.evidenceText, 1000, "Verification detail"),
+      verificationMethod: "other" as ResultClaimVerificationMethod,
+      evidenceText: "",
       evidenceUrl: optionalHttpsUrl(input?.evidenceUrl),
+      evidenceUrl2: optionalHttpsUrl(input?.evidenceUrl2),
+      evidenceUrl3: optionalHttpsUrl(input?.evidenceUrl3),
       declarationAccepted: input?.declarationAccepted === true,
     }),
   )
@@ -278,8 +389,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
       const users = await tx<{ email: string }>`
-        select "email" as email from "user" where "id" = ${context.userId} limit 1
-      `;
+        select "email" as email from "user" where "id" = ${context.userId} limit 1`;
       const claimantEmail = users[0]?.email?.trim().toLowerCase();
       if (!claimantEmail) throw new Error("Your signed-in account has no email address");
 
@@ -290,6 +400,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         event_name: string;
         event_date: string;
         distance_code: string;
+        athlete_city: string | null;
+        athlete_region: string | null;
+        athlete_country: string | null;
+        club_name: string | null;
       }>`
         select
           result.id as result_id,
@@ -297,20 +411,39 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           athlete.display_name as athlete_name,
           event.name as event_name,
           edition.event_date::text as event_date,
-          edition.distance_code
+          edition.distance_code,
+          athlete.city as athlete_city,
+          athlete.county as athlete_region,
+          athlete.country as athlete_country,
+          club.name as club_name
         from results result
         join athletes athlete on athlete.id = result.athlete_id
         join editions edition on edition.id = result.edition_id
         join events event on event.id = edition.event_id
+        left join clubs club on club.id = athlete.club_id
         where result.id = ${data.resultId}
         limit 1
       `;
       const result = results[0];
       if (!result) throw new Error("Result not found");
+      const allowed = await canAccessClaimCandidate(tx, context.userId, {
+        resultId: result.result_id,
+        athleteId: result.athlete_id,
+        athleteName: result.athlete_name,
+        city: result.athlete_city,
+        region: result.athlete_region,
+        country: result.athlete_country,
+        clubName: result.club_name,
+      });
+      if (!allowed) throw new Error("Result not available to this account");
 
-      // Serialize all ownership decisions for the same athlete profile so two
-      // simultaneous first claims cannot both be approved automatically.
-      await tx`select id from athletes where id = ${result.athlete_id} for update`;
+      // Serialise every ownership decision for this athlete so two simultaneous
+      // first claims cannot both be approved.
+      await tx`
+        select id from athletes
+        where id = ${result.athlete_id}
+        for update
+      `;
 
       const owners = await tx<{ user_id: string; user_email: string }>`
         select user_id, user_email
@@ -324,7 +457,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           status: "approved" as const,
           alreadyOwned: true,
           claimId: null,
-          autoApproved: false,
+          claimantUserId: context.userId,
           email: null,
         };
       }
@@ -340,40 +473,30 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         limit 1
         for update
       `;
-      if (existing[0]?.status === "approved") {
-        return {
-          status: "approved" as const,
-          alreadyOwned: true,
-          claimId: existing[0].id,
-          autoApproved: false,
-          email: null,
-        };
-      }
-      if (existing[0]?.status === "pending") {
-        throw new Error("You already have an active claim for this result");
-      }
 
-      const competingClaims = await tx<{ count: number }>`
-        select count(distinct claimant_user_id)::int as count
+      const competing = await tx<{ other_claim_count: number }>`
+        select count(distinct claimant_user_id)::int as other_claim_count
         from result_claims
         where athlete_id = ${result.athlete_id}
           and claimant_user_id <> ${context.userId}
           and status in ('pending', 'needs_info', 'approved')
       `;
-      const competingClaimCount = competingClaims[0]?.count ?? 0;
+      const otherClaimCount = competing[0]?.other_claim_count ?? 0;
       const previouslyReviewed =
         Boolean(existing[0]?.reviewed_by_user_id) ||
         existing[0]?.status === "needs_info" ||
         existing[0]?.status === "rejected";
-      const requiresReview = Boolean(owner) || competingClaimCount > 0 || previouslyReviewed;
+      const requiresReview = Boolean(owner) || otherClaimCount > 0 || previouslyReviewed;
       const conflictReason = owner
         ? "This athlete profile is already linked to another account. Staff identity checks are required."
-        : competingClaimCount > 0
-          ? "Another account has claimed this athlete profile. Staff review is required before ownership changes."
+        : otherClaimCount > 0
+          ? "Another account has claimed this athlete profile. Staff identity checks are required."
           : previouslyReviewed
             ? "This claim was previously reviewed by ATHRECS staff. A new submission requires another staff review."
             : null;
       const nextStatus: ResultClaimStatus = requiresReview ? "pending" : "approved";
+      const automaticNote =
+        nextStatus === "approved" ? "Automatically approved as the first uncontested claim." : null;
 
       let claimId: number;
       if (existing[0]) {
@@ -386,12 +509,14 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             verification_method = ${data.verificationMethod},
             evidence_text = ${data.evidenceText},
             evidence_url = ${data.evidenceUrl},
+            evidence_url_2 = ${data.evidenceUrl2},
+            evidence_url_3 = ${data.evidenceUrl3},
             declaration_accepted = true,
             conflict_reason = ${conflictReason},
-            staff_note = case when ${previouslyReviewed} then staff_note else null end,
+            staff_note = case when ${previouslyReviewed} then staff_note else ${automaticNote} end,
             reviewed_by_user_id = null,
             reviewed_by_email = null,
-            reviewed_at = case when ${requiresReview} then null else now() end,
+            reviewed_at = case when ${nextStatus} = 'approved' then now() else null end,
             submitted_at = now(),
             updated_at = now()
           where id = ${existing[0].id}
@@ -402,20 +527,21 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         const inserted = await tx<{ id: number }>`
           insert into result_claims (
             result_id, athlete_id, claimant_user_id, claimant_email, status,
-            verification_method, evidence_text, evidence_url,
-            declaration_accepted, conflict_reason, reviewed_at
+            verification_method, evidence_text, evidence_url, evidence_url_2, evidence_url_3,
+            declaration_accepted, conflict_reason, staff_note, reviewed_at
           ) values (
             ${result.result_id}, ${result.athlete_id}, ${context.userId}, ${claimantEmail},
-            ${nextStatus}, ${data.verificationMethod}, ${data.evidenceText}, ${data.evidenceUrl},
-            true, ${conflictReason}, case when ${requiresReview} then null else now() end
+            ${nextStatus}, ${data.verificationMethod}, ${data.evidenceText},
+            ${data.evidenceUrl}, ${data.evidenceUrl2}, ${data.evidenceUrl3},
+            true, ${conflictReason}, ${automaticNote},
+            case when ${nextStatus} = 'approved' then now() else null end
           )
           returning id
         `;
         claimId = inserted[0].id;
       }
 
-      let finalStatus = nextStatus;
-      if (!requiresReview) {
+      if (nextStatus === "approved") {
         const linked = await tx<{ athlete_id: number }>`
           insert into athlete_account_links (
             athlete_id, user_id, user_email, source_claim_id, status, linked_at, updated_at
@@ -431,28 +557,49 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             linked_at = now(),
             updated_at = now()
           where athlete_account_links.status = 'revoked'
+             or athlete_account_links.user_id = excluded.user_id
           returning athlete_id
         `;
+
+        // This is a last-resort concurrency guard. The athlete row lock above
+        // normally makes it unreachable, but an existing active owner must
+        // never be overwritten if another code path creates one concurrently.
         if (!linked[0]) {
-          finalStatus = "pending";
+          const concurrentConflict =
+            "This athlete profile was linked to another account while your claim was being processed. Staff identity checks are required.";
           await tx`
             update result_claims
             set
               status = 'pending',
-              conflict_reason = 'This athlete profile became linked to another account while the claim was being submitted. Staff review is required.',
+              conflict_reason = ${concurrentConflict},
+              staff_note = null,
               reviewed_at = null,
               updated_at = now()
             where id = ${claimId}
           `;
+          return {
+            status: "pending" as const,
+            alreadyOwned: false,
+            claimId,
+            claimantUserId: context.userId,
+            email: {
+              claimId,
+              resultId: result.result_id,
+              claimantEmail,
+              athleteName: result.athlete_name,
+              eventName: result.event_name,
+              eventDate: result.event_date,
+              distanceCode: result.distance_code,
+            },
+          };
         }
       }
 
-      const autoApproved = finalStatus === "approved";
       return {
-        status: finalStatus,
+        status: nextStatus,
         alreadyOwned: false,
         claimId,
-        autoApproved,
+        claimantUserId: context.userId,
         email: {
           claimId,
           resultId: result.result_id,
@@ -465,20 +612,19 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       };
     });
 
-    if (outcome.autoApproved) {
-      await syncAthleteAccountAfterClaim(context.userId);
-    }
-    if (outcome.email) {
-      if (outcome.autoApproved) {
+    if (outcome.status === "approved" && !outcome.alreadyOwned) {
+      await syncAthleteAccountAfterClaim(outcome.claimantUserId);
+      if (outcome.email) {
         await notifyResultClaimReviewed({
           ...outcome.email,
           status: "approved",
           staffNote: null,
         });
-      } else {
-        await notifyResultClaimSubmitted(outcome.email);
       }
+    } else if (outcome.status === "pending" && outcome.email) {
+      await notifyResultClaimSubmitted(outcome.email);
     }
+
     return {
       status: outcome.status,
       alreadyOwned: outcome.alreadyOwned,
@@ -567,10 +713,10 @@ export const listStaffResultClaims = createServerFn({ method: "GET" })
          claim_data.*,
          owner.user_email as existing_owner_email,
          (
-           select count(distinct competing.claimant_user_id)::int
+           select count(*)::int
            from result_claims competing
-           where competing.athlete_id = claim.athlete_id
-             and competing.claimant_user_id <> claim.claimant_user_id
+           where competing.result_id = claim.result_id
+             and competing.id <> claim.id
              and competing.status in ('pending', 'needs_info', 'approved')
          ) as competing_claim_count
        from (${CLAIM_SELECT}) claim_data
@@ -606,16 +752,6 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const result = await sql.transaction(async (tx) => {
-      const claimRefs = await tx<{ athlete_id: number }>`
-        select athlete_id
-        from result_claims
-        where id = ${data.claimId}
-        limit 1
-      `;
-      if (!claimRefs[0]) throw new Error("Claim not found");
-
-      await tx`select id from athletes where id = ${claimRefs[0].athlete_id} for update`;
-
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
@@ -752,16 +888,6 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
-      const claimRefs = await tx<{ athlete_id: number }>`
-        select athlete_id
-        from result_claims
-        where id = ${data.claimId}
-        limit 1
-      `;
-      if (!claimRefs[0]) throw new Error("Claim not found");
-
-      await tx`select id from athletes where id = ${claimRefs[0].athlete_id} for update`;
-
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;

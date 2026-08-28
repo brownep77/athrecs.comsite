@@ -89,12 +89,14 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <NoticeSection title="Result claims and public records">
+        <NoticeSection title="Private result archive and claims">
           <p>
-            Race results may already form part of ATHRECS public records. A claim links your secure
-            account to an athlete record only after staff verification. Claim evidence remains
-            private. Claiming does not automatically publish the private contents of your Entry
-            Passport.
+            ATHRECS may hold source-checked race results in a private archive so athletes can find
+            and claim their own records after signing in. Ordinary participant lists, names and
+            finish times are not published as a browseable public directory. Public-figure results
+            are the exception, and an athlete may later choose to publish their own profile. Claim
+            evidence remains private, and claiming does not automatically publish your results or
+            the private contents of your Entry Passport.
           </p>
         </NoticeSection>
 

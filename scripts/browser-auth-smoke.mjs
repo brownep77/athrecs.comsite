@@ -104,7 +104,7 @@ try {
     waitUntil: "networkidle",
     timeout: timeoutMs,
   });
-  const claimSignIn = page.getByRole("button", { name: "Sign in or create account" });
+  const claimSignIn = page.getByRole("button", { name: "Sign in", exact: true }).first();
   await claimSignIn.click();
   const claimDialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
   await claimDialog.waitFor({ state: "visible", timeout: timeoutMs });
