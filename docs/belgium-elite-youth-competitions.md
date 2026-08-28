@@ -91,3 +91,5 @@ The verifier locks:
 - the Belgian road, track, BMX, triathlon and duathlon anchor dates;
 - HTTPS provenance and explicit restricted-entry notes;
 - the absence of misleading public-entry links.
+
+The global fixture-duplicate safeguard also recognises explicitly labelled men’s and women’s competitions as separate races when they share the same organiser, date and host city. This prevents legitimate paired WorldTour events from being incorrectly collapsed while leaving normal same-date duplicate detection in place.
