@@ -57,6 +57,26 @@ jobs:
             scripts/verify-uk-ireland-half-ten-mile-daily-followup.mjs \
             docs/uk-ireland-half-ten-mile-daily-followup.md
           node scripts/assemble-remaining-race-additions.mjs
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          replacement = '/const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource)'
+          for name in (
+              'scripts/verify-uk-ireland-half-ten-mile-daily-followup.mjs',
+              'scripts/verify-uk-ireland-non-standard-distances.mjs',
+          ):
+              path = Path(name)
+              text = path.read_text()
+              text, count = re.subn(
+                  r"seedSource\.includes\('const SEED_VERSION = \"athrecs-[^\"]+\"'\)",
+                  replacement,
+                  text,
+              )
+              if count != 1:
+                  raise SystemExit(f'{name}: expected one seed-version assertion, found {count}')
+              path.write_text(text)
+          PY
           git add -A
 
       - name: Verify assembled catalogue
