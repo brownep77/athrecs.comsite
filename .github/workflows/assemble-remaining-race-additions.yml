@@ -73,8 +73,10 @@ jobs:
                   replacement,
                   text,
               )
-              if count != 1:
-                  raise SystemExit(f'{name}: expected one seed-version assertion, found {count}')
+              if count > 1:
+                  raise SystemExit(f'{name}: expected at most one seed-version assertion, found {count}')
+              if count == 0 and replacement not in text:
+                  raise SystemExit(f'{name}: did not contain a recognised seed-version assertion')
               path.write_text(text)
           PY
           git add -A
