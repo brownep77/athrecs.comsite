@@ -32,6 +32,8 @@ Seaton Classic 10K keeps its confirmed **26 September 2026** fixture and governi
 
 The reviewed payload is applied only during a Vercel production build from `main`. It uses ATHRECS's existing three-step catalogue pipeline—stage, validate and transactional publish—rather than a destructive catalogue reseed or direct row deletion. The source key is stable, so repeat production deployments reuse the published batch and make no additional database change.
 
+The branch was reconciled with the current `main` catalogue after the official IRONMAN 70.3 calendar was merged, preserving both additions without overwriting either source.
+
 ## Verification
 
 The static verifier checks counts, unique edition keys, the 12-month date window, official source and entry links, multi-distance preservation, the three reconciled existing events, catalogue wiring and production publication safeguards:
