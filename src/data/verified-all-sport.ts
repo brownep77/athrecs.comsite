@@ -1,12 +1,17 @@
 import type { Edition, Series } from "./types";
+import {
+  belgiumEliteYouthCompetitionEditions,
+  belgiumEliteYouthCompetitionSeries,
+} from "./belgium-elite-youth-competitions";
 
 /**
- * Small, hand-checked fixture batches for sports with thin UK coverage.
+ * Small, hand-checked fixture batches for sports with thin coverage.
  *
  * Every row is event-level metadata verified against the linked organiser or
  * governing-body page. Participant-level results are deliberately excluded.
  */
 export const verifiedAllSportSeries: Series[] = [
+  ...belgiumEliteYouthCompetitionSeries,
   {
     slug: "british-rowing-beach-sprint-championships",
     name: "British Rowing Beach Sprint Championships",
@@ -66,6 +71,7 @@ export const verifiedAllSportSeries: Series[] = [
 ];
 
 export const verifiedAllSportEditions: Edition[] = [
+  ...belgiumEliteYouthCompetitionEditions,
   {
     seriesSlug: "british-rowing-beach-sprint-championships",
     date: "2026-09-04",
