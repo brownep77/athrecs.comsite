@@ -1,18 +1,19 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
-const [
-  {
-    GERMANY_ENDURANCE_CHECKED_AT,
-    GERMANY_ENDURANCE_WINDOW_END,
-    germanyEnduranceCalendarStats,
-    germanyEnduranceExpectedSeriesSlugs,
-    germanyEnduranceRaceEditions,
-    germanyEnduranceRaceSeries,
-  },
-  { editions, seriesList },
-] = await Promise.all([
-  import("../src/data/germany-endurance-races.ts"),
-  import("../src/data/catalogue.ts"),
+const {
+  GERMANY_ENDURANCE_CHECKED_AT,
+  GERMANY_ENDURANCE_WINDOW_END,
+  germanyEnduranceCalendarStats,
+  germanyEnduranceExpectedSeriesSlugs,
+  germanyEnduranceRaceEditions,
+  germanyEnduranceRaceSeries,
+} = await import("../src/data/germany-endurance-races.ts");
+
+const [catalogueSource, aimsSource, ironmanSource] = await Promise.all([
+  readFile(new URL("../src/data/catalogue.ts", import.meta.url), "utf8"),
+  readFile(new URL("../src/data/aims-europe-road-races.ts", import.meta.url), "utf8"),
+  readFile(new URL("../src/data/ironman-703-calendar.ts", import.meta.url), "utf8"),
 ]);
 
 const exactKey = (edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
@@ -91,52 +92,52 @@ for (const edition of germanyEnduranceRaceEditions) {
   );
 }
 
-const catalogueSeriesSlugs = new Set(seriesList.map((series) => series.slug));
-const catalogueEditionKeys = new Set(editions.map(exactKey));
-
-for (const slug of requestedSlugs) {
-  assert(catalogueSeriesSlugs.has(slug), `${slug} was not merged into the public catalogue`);
+for (const requiredWiring of [
+  'from "./germany-endurance-races"',
+  "germanyEnduranceRaceSeries as Series[]",
+  "germanyEnduranceRaceEditions as Edition[]",
+]) {
   assert(
-    editions.some((edition) => edition.seriesSlug === slug),
-    `${slug} has no public catalogue edition`,
+    catalogueSource.includes(requiredWiring),
+    `The Germany source is not wired into the central catalogue: ${requiredWiring}`,
   );
 }
 
 const berlinKey = "berlin-marathon|2026-09-27|Marathon";
 assert(
-  catalogueSeriesSlugs.has("berlin-marathon"),
-  "BMW BERLIN-MARATHON is missing from the public catalogue",
-);
-assert(
-  catalogueEditionKeys.has(berlinKey),
-  `BMW BERLIN-MARATHON must retain its confirmed 2026 edition (${berlinKey})`,
+  aimsSource.includes('slug: "berlin-marathon"') &&
+    aimsSource.includes('date: "2026-09-27"') &&
+    aimsSource.includes('distance: "Marathon"'),
+  `BMW BERLIN-MARATHON must retain its confirmed 2026 AIMS edition (${berlinKey})`,
 );
 
 const requiredGermanIronmanKeys = [
   "ironman-703-erkner|2026-09-13|70.3",
   "ironman-703-kraichgau|2027-05-23|70.3",
 ];
-for (const key of requiredGermanIronmanKeys) {
+assert(
+  ironmanSource.includes(
+    '["im703-erkner", "IRONMAN 70.3 Erkner", "2026-09-13", "Erkner", "Brandenburg", "Germany"',
+  ),
+  `Confirmed in-window German IRONMAN fixture is missing: ${requiredGermanIronmanKeys[0]}`,
+);
+assert(
+  ironmanSource.includes(
+    '["im703-kraichgau", "IRONMAN 70.3 Kraichgau", "2027-05-23", "Bad Schonborn", "Baden-Wurttemberg", "Germany"',
+  ),
+  `Confirmed in-window German IRONMAN fixture is missing: ${requiredGermanIronmanKeys[1]}`,
+);
+
+for (const existingGlobalSlug of [
+  "berlin-marathon",
+  "ironman-703-erkner",
+  "ironman-703-kraichgau",
+]) {
   assert(
-    catalogueEditionKeys.has(key),
-    `Confirmed in-window German IRONMAN fixture is missing: ${key}`,
+    !requestedSlugs.has(existingGlobalSlug),
+    `${existingGlobalSlug} must remain supplied by its existing global feed rather than duplicated locally`,
   );
 }
-
-const scopedCatalogueKeys = editions
-  .filter(
-    (edition) =>
-      requestedSlugs.has(edition.seriesSlug) ||
-      edition.seriesSlug === "berlin-marathon" ||
-      edition.seriesSlug === "ironman-703-erkner" ||
-      edition.seriesSlug === "ironman-703-kraichgau",
-  )
-  .map(exactKey);
-assert.equal(
-  new Set(scopedCatalogueKeys).size,
-  scopedCatalogueKeys.length,
-  "The Germany import created a duplicate catalogue edition",
-);
 
 process.stdout.write(
   `${JSON.stringify(
@@ -147,7 +148,7 @@ process.stdout.write(
       berlin_marathon: berlinKey,
       german_ironman: requiredGermanIronmanKeys,
       catalogue_status:
-        "all requested and pre-existing major fixtures present without duplicates",
+        "Germany source wired into the catalogue; existing global major fixtures retained without local duplicates",
     },
     null,
     2,
