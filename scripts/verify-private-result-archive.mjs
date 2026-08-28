@@ -1,20 +1,60 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { readFile } from "node:fs/promises";
+import { registerHooks } from "node:module";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
 
+// The catalogue's production modules use bundler-style extensionless relative
+// imports. Node 24 strips TypeScript syntax natively, but its ESM resolver does
+// not add .ts. Keep this verifier on the real catalogue graph by resolving only
+// existing relative TypeScript modules; package and built-in resolution remain
+// untouched.
+registerHooks({
+  resolve(specifier, context, nextResolve) {
+    if (
+      context.parentURL &&
+      (specifier.startsWith("./") || specifier.startsWith("../")) &&
+      !/\.[^/]+$/.test(specifier)
+    ) {
+      const base = new URL(specifier, context.parentURL);
+      for (const candidate of [new URL(`${base.href}.ts`), new URL(`${base.href}/index.ts`)]) {
+        if (existsSync(fileURLToPath(candidate))) {
+          return { url: candidate.href, shortCircuit: true };
+        }
+      }
+    }
+    return nextResolve(specifier, context);
+  },
+});
+
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const [migration, publicApi, claimsApi, archiveApi, importer, archiveRoute, staffShell] =
-  await Promise.all([
-    readFile(resolve(root, "migrations/0019_private_result_archive.sql"), "utf8"),
-    readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8"),
-    readFile(resolve(root, "src/lib/athrecs/result-claims-api.ts"), "utf8"),
-    readFile(resolve(root, "src/lib/athrecs/result-ingestion-api.ts"), "utf8"),
-    readFile(resolve(root, "src/lib/athrecs/results-import.server.ts"), "utf8"),
-    readFile(resolve(root, "src/routes/admin/result-archive.tsx"), "utf8"),
-    readFile(resolve(root, "src/components/staff/StaffMicrositeShell.tsx"), "utf8"),
-  ]);
+const [
+  migration,
+  publicApi,
+  claimsApi,
+  archiveApi,
+  importer,
+  archiveRoute,
+  staffShell,
+  reconciliationServer,
+  reconciliationApi,
+  reconciliationPanel,
+  resultCatalogue,
+] = await Promise.all([
+  readFile(resolve(root, "migrations/0019_private_result_archive.sql"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/result-claims-api.ts"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/result-ingestion-api.ts"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/results-import.server.ts"), "utf8"),
+  readFile(resolve(root, "src/routes/admin/result-archive.tsx"), "utf8"),
+  readFile(resolve(root, "src/components/staff/StaffMicrositeShell.tsx"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/result-reconciliation.server.ts"), "utf8"),
+  readFile(resolve(root, "src/lib/athrecs/result-reconciliation-api.ts"), "utf8"),
+  readFile(resolve(root, "src/components/staff/ResultReconciliationPanel.tsx"), "utf8"),
+  readFile(resolve(root, "src/data/results.ts"), "utf8"),
+]);
 
 assert.match(migration, /create table if not exists result_ingestion_runs/);
 assert.match(migration, /create table if not exists result_ingestion_editions/);
@@ -37,8 +77,37 @@ assert.match(importer, /export function parseResultsCsv/);
 assert.match(importer, /options\.sourceContent/);
 assert.match(importer, /result_visibility/);
 assert.match(archiveRoute, /Event-level tracking only/);
+assert.match(archiveRoute, /<ResultReconciliationPanel\s*\/>/);
 assert.doesNotMatch(archiveRoute, /athleteName|finishTime/);
 assert.match(staffShell, /\/admin\/result-archive/);
+
+assert.match(reconciliationServer, /previewRecoverableResultReconciliation/);
+assert.match(reconciliationServer, /publishRecoverableResultReconciliation/);
+assert.match(reconciliationServer, /on conflict do nothing/);
+assert.match(
+  reconciliationServer,
+  /profileType === "Public figure" \? "public_figure" : "private"/,
+);
+assert.match(reconciliationServer, /profileType === "Public figure" \? "public" : "private"/);
+assert.match(reconciliationServer, /result_ingestion_runs/);
+assert.match(reconciliationServer, /result_ingestion_editions/);
+assert.doesNotMatch(
+  reconciliationServer,
+  /delete\s+from\s+(?:clubs|events|editions|athletes|results)\b/i,
+);
+assert.doesNotMatch(
+  reconciliationServer,
+  /update\s+(?:clubs|events|editions|athletes|results)\b/i,
+);
+assert.doesNotMatch(reconciliationServer, /on\s+conflict[\s\S]{0,100}do\s+update/i);
+assert.match(reconciliationApi, /middleware\(\[staffMiddleware\]\)/);
+assert.match(reconciliationApi, /RESTORE CLAIMABLE RESULTS/);
+assert.doesNotMatch(reconciliationApi, /ensureAthrecsSeeded/);
+assert.match(reconciliationPanel, /Existing records are never/);
+assert.match(reconciliationPanel, /data\.persistent/);
+assert.match(resultCatalogue, /const resultByKey = new Map<string, ResultSeed>/);
+assert.match(resultCatalogue, /mergeCompatibleResult/);
+assert.match(resultCatalogue, /Conflicting duplicate result seed/);
 
 const db = new PGlite();
 await db.waitReady;
@@ -121,5 +190,77 @@ assert.deepEqual(coverage.rows[0], {
   rows_imported: 2,
 });
 
+const [{ athletes, editions, results, seriesList }, { catalogueMetadata }] = await Promise.all([
+  import("../src/data/catalogue.ts"),
+  import("../src/data/catalogue-metadata.ts"),
+]);
+const resultKeys = results.map(
+  (result) => `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
+);
+assert.equal(new Set(resultKeys).size, resultKeys.length, "Recoverable result keys must be unique");
+assert.equal(results.length, 2_599, "Canonical retained result count changed unexpectedly");
+assert(
+  results.length >= catalogueMetadata.merged_counts.results,
+  `Canonical recoverable results (${results.length}) fell below the recorded catalogue floor (${catalogueMetadata.merged_counts.results})`,
+);
+const heidiRunNorwich = results.find(
+  (result) =>
+    result.eventSlug === "run-norwich" &&
+    result.date === "2025-09-07" &&
+    result.distance === "10K" &&
+    result.athleteSlug === "heidi-bacon",
+);
+assert(heidiRunNorwich, "Canonical Heidi Bacon Run Norwich result is missing");
+assert.deepEqual(
+  {
+    source_id: heidiRunNorwich.source_id,
+    place: heidiRunNorwich.place,
+    time: heidiRunNorwich.time,
+    finishTimeSeconds: heidiRunNorwich.finishTimeSeconds,
+    chipTimeSeconds: heidiRunNorwich.chipTimeSeconds,
+    bib: heidiRunNorwich.bib,
+    genderPlace: heidiRunNorwich.genderPlace,
+    category: heidiRunNorwich.category,
+    ageOnDay: heidiRunNorwich.ageOnDay,
+    ageGradePct: heidiRunNorwich.ageGradePct,
+    openRating: heidiRunNorwich.openRating,
+    ageGradeRating: heidiRunNorwich.ageGradeRating,
+    resultSource: heidiRunNorwich.resultSource,
+    source: heidiRunNorwich.source,
+  },
+  {
+    source_id: 7273,
+    place: 560,
+    time: "44:50",
+    finishTimeSeconds: 2690,
+    chipTimeSeconds: 2690,
+    bib: "784",
+    genderPlace: 41,
+    category: "F40",
+    ageOnDay: 40,
+    ageGradePct: 67.6,
+    openRating: 647,
+    ageGradeRating: 676,
+    resultSource: "official",
+    source:
+      "https://www.runnorwich.co.uk/wp-content/uploads/sites/3/2025/09/Run-Norwich-10K-25-Full-Results-by-Chiptime.pdf",
+  },
+);
+const athleteSlugs = new Set(athletes.map((athlete) => athlete.slug));
+const eventSlugs = new Set(seriesList.map((series) => series.slug));
+const editionKeys = new Set(
+  editions.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
+);
+for (const result of results) {
+  assert(athleteSlugs.has(result.athleteSlug), `Missing athlete seed for ${result.athleteSlug}`);
+  assert(eventSlugs.has(result.eventSlug), `Missing event seed for ${result.eventSlug}`);
+  assert(
+    editionKeys.has(`${result.eventSlug}|${result.date}|${result.distance}`),
+    `Missing edition seed for ${result.eventSlug} ${result.date} ${result.distance}`,
+  );
+}
+
 await db.close();
-console.log("Private result archive verification passed");
+console.log(
+  `Private result archive verification passed for ${results.length.toLocaleString("en-GB")} canonical recoverable results`,
+);

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Archive, Database, ExternalLink, FileUp, RefreshCw, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { ResultReconciliationPanel } from "@/components/staff/ResultReconciliationPanel";
 import {
   getResultArchiveDashboard,
   type ResultEditionCoverageStatus,
@@ -131,6 +132,8 @@ function ResultArchivePage() {
           detail="Public figures or explicit opt-in only"
         />
       </section>
+
+      <ResultReconciliationPanel />
 
       <section className="rounded-xl border border-border bg-surface p-4 shadow-card">
         <div className="grid gap-3 md:grid-cols-[minmax(14rem,1fr)_14rem_14rem]">
