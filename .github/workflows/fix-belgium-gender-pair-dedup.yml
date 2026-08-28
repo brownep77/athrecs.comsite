@@ -1,0 +1,80 @@
+name: Preserve legitimate Belgian gender-paired races
+
+on:
+  push:
+    branches:
+      - data/belgium-elite-youth-cycling
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor == 'brownep77'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: data/belgium-elite-youth-cycling
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Distinguish men's and women's competitions in duplicate review
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/verify-fixture-duplicates.mjs')
+          text = path.read_text()
+
+          anchor = '''const groups = new Map();
+          '''
+          helper = '''function competitionGender(name) {
+            const value = compact(name);
+            if (/(?:women|womens|female|dames|vrouwen|femmes)/.test(value)) return "women";
+            if (/(?:men|mens|male|heren|hommes)/.test(value)) return "men";
+            return null;
+          }
+
+          const groups = new Map();
+          '''
+          if anchor not in text:
+              raise SystemExit('Could not locate duplicate-group insertion point')
+          text = text.replace(anchor, helper, 1)
+
+          anchor = '''      if (left.series.slug === right.series.slug) continue;
+                const score = similarity(left.series.name, right.series.name);
+          '''
+          replacement = '''      if (left.series.slug === right.series.slug) continue;
+                const leftGender = competitionGender(left.series.name);
+                const rightGender = competitionGender(right.series.name);
+                if (leftGender && rightGender && leftGender !== rightGender) continue;
+                const score = similarity(left.series.name, right.series.name);
+          '''
+          if anchor not in text:
+              raise SystemExit('Could not locate duplicate-candidate insertion point')
+          text = text.replace(anchor, replacement, 1)
+          path.write_text(text)
+          PY
+
+      - name: Verify Belgian catalogue
+        run: |
+          npm ci
+          npm run typecheck
+          npm run verify:fixture-duplicates
+          node --experimental-strip-types scripts/verify-belgium-elite-youth-competitions.mjs
+
+      - name: Commit repair and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ATHRECS Release Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          rm .github/workflows/fix-belgium-gender-pair-dedup.yml
+          git add -A
+          git commit -m "Keep legitimate men's and women's Belgian races separate"
+          git push origin HEAD:data/belgium-elite-youth-cycling
