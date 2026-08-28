@@ -12,6 +12,8 @@ The additions are divided into two bounded, stable catalogue batches. Production
 
 Fleet's separately verified 5K is published as its own edition even though that distance was absent from the older core seed. The production publisher constructs this reviewed edition from its official event metadata and creates a verified official entry option rather than omitting or collapsing it into the 10K.
 
+Polesden Lacey Trust 10K is also preserved even though its reviewed metadata originally existed only as a catalogue override. Complete override-only races are promoted to standalone event records, retaining their official organiser, location, surface, distance and source information.
+
 ## Verification
 
 - targeted UK 10K, half/10-mile and non-standard-distance verifiers;
