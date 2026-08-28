@@ -126,8 +126,14 @@ try {
     correctionKeys.has(`${edition.seriesSlug}|${edition.date}|${edition.distance}`),
   );
   if (correctedEditions.length !== correctionKeys.size) {
+    const correctedEditionKeys = new Set(
+      correctedEditions.map(
+        (edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`,
+      ),
+    );
+    const missingKeys = [...correctionKeys].filter((key) => !correctedEditionKeys.has(key));
     throw new Error(
-      `Expected ${correctionKeys.size} corrected editions, found ${correctedEditions.length}`,
+      `Expected ${correctionKeys.size} corrected editions, found ${correctedEditions.length}; missing: ${missingKeys.join(", ")}`,
     );
   }
 
