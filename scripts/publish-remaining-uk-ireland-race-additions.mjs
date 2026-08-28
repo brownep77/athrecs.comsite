@@ -86,6 +86,19 @@ function dedupeBy(items, keyFor) {
   return [...new Map(items.map((item) => [keyFor(item), item])).values()];
 }
 
+function distanceKmFor(label) {
+  const exact = {
+    "5K": 5,
+    "10K": 10,
+    Half: 21.0975,
+  };
+  const known = exact[label];
+  if (known) return known;
+  const kmMatch = label.match(/^(\d+(?:\.\d+)?)K$/i);
+  if (kmMatch) return Number(kmMatch[1]);
+  throw new Error(`Cannot infer distance kilometres for ${label}`);
+}
+
 const vite = await createServer({
   appType: "custom",
   logLevel: "error",
@@ -151,15 +164,51 @@ try {
           edition.date === effectiveDate &&
           edition.distance === effectiveDistance,
       );
-    if (!base) throw new Error(`Reviewed source edition is missing: ${sourceKey}`);
-    const effective = {
-      ...base,
-      ...override,
-      seriesSlug: resolvedSlug,
-      date: effectiveDate,
-      distance: effectiveDistance,
-    };
-    const options = entryData.entryOptions?.[sourceKey] ?? effective.entryOptions;
+    const series = seriesBySlug.get(resolvedSlug);
+    if (!series) throw new Error(`Reviewed race series is missing: ${resolvedSlug}`);
+    const fallbackOptions = override.entryUrl
+      ? [
+          {
+            providerCode: `official-${resolvedSlug}-${effectiveDate}-${effectiveDistance.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+            providerName: `${series.name} official entry`,
+            entryUrl: override.entryUrl,
+            entryType: "official",
+            status:
+              override.status === "Closed"
+                ? "closed"
+                : override.status === "TBC"
+                  ? "unknown"
+                  : "open",
+            checkedAt: "2026-08-28",
+            sourceUrl: override.source ?? override.entryUrl,
+            isVerified: true,
+            isPrimary: true,
+          },
+        ]
+      : undefined;
+    const effective = base
+      ? {
+          ...base,
+          ...override,
+          seriesSlug: resolvedSlug,
+          date: effectiveDate,
+          distance: effectiveDistance,
+        }
+      : {
+          seriesSlug: resolvedSlug,
+          date: effectiveDate,
+          distance: effectiveDistance,
+          distanceKm: distanceKmFor(effectiveDistance),
+          status: override.status ?? (override.entryUrl ? "Open" : "TBC"),
+          ...override,
+          source: override.source ?? series.source_url ?? series.website,
+          notes:
+            override.notes ??
+            `Verified ${effectiveDistance} edition published from the reviewed official event source.`,
+          publishAllDistances: true,
+        };
+    const options =
+      entryData.entryOptions?.[sourceKey] ?? effective.entryOptions ?? fallbackOptions;
     return {
       ...effective,
       ...(options?.length ? { entryOptions: options } : {}),
