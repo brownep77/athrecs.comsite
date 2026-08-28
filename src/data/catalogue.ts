@@ -49,7 +49,8 @@ export const athletes = rawAthletes.map((athlete) => ({
     ? (clubSlugAliases[athlete.second_club_slug] ?? athlete.second_club_slug)
     : undefined,
 }));
-export { results } from "./results";
+import { results } from "./results";
+export { results };
 import { seriesList as coreSeries } from "./series";
 import { editions as coreEditions } from "./editions";
 import { runabcEditions, runabcSeries } from "./runabc";
@@ -331,10 +332,30 @@ const mergedEditions = [
   ...(publicFigureEditions as Edition[]),
 ];
 
+const retainedResultEditionKeys = new Set(
+  results.map((result) => `${result.eventSlug}|${result.date}|${result.distance}`),
+);
+
 export const editions: Edition[] = (() => {
   const seen = new Set<string>();
   const seenExact = new Set<string>();
   const unique: Edition[] = [];
+  const pushEdition = (edition: Edition) => {
+    const matchingEntryOptions =
+      entryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];
+    if (!matchingEntryOptions) {
+      unique.push(edition);
+      return;
+    }
+    const primary =
+      matchingEntryOptions.find((option) => option.isPrimary) ?? matchingEntryOptions[0];
+    unique.push({
+      ...edition,
+      entryUrl: primary.entryUrl,
+      entryOptions: matchingEntryOptions,
+    });
+  };
+
   for (const sourceEdition of mergedEditions) {
     const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
     const edition = {
@@ -346,20 +367,24 @@ export const editions: Edition[] = (() => {
     if (seenExact.has(exactKey) || seen.has(key)) continue;
     seenExact.add(exactKey);
     seen.add(key);
-    const matchingEntryOptions =
-      entryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];
-    if (!matchingEntryOptions) {
-      unique.push(edition);
-      continue;
-    }
-    const primary =
-      matchingEntryOptions.find((option) => option.isPrimary) ?? matchingEntryOptions[0];
-    unique.push({
-      ...edition,
-      entryUrl: primary.entryUrl,
-      entryOptions: matchingEntryOptions,
-    });
+    pushEdition(edition);
   }
+
+  // A retained result must always have an exact edition dependency. The normal
+  // card-level dedupe still applies to every other fixture, but a result-backed
+  // distance cannot be discarded merely because another distance shares its date.
+  for (const sourceEdition of mergedEditions) {
+    const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
+    const edition = {
+      ...sourceEdition,
+      ...editionOverrides[sourceKey],
+    };
+    const exactKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+    if (!retainedResultEditionKeys.has(exactKey) || seenExact.has(exactKey)) continue;
+    seenExact.add(exactKey);
+    pushEdition(edition);
+  }
+
   return unique;
 })();
 
