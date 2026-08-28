@@ -462,31 +462,41 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         };
       }
 
+      const existing = await tx<{
+        id: number;
+        status: ResultClaimStatus;
+        reviewed_by_user_id: string | null;
+      }>`
+        select id, status, reviewed_by_user_id
+        from result_claims
+        where result_id = ${result.result_id} and claimant_user_id = ${context.userId}
+        limit 1
+        for update
+      `;
+
       const competing = await tx<{ other_claim_count: number }>`
-        select count(*)::int as other_claim_count
+        select count(distinct claimant_user_id)::int as other_claim_count
         from result_claims
         where athlete_id = ${result.athlete_id}
           and claimant_user_id <> ${context.userId}
           and status in ('pending', 'needs_info', 'approved')
       `;
       const otherClaimCount = competing[0]?.other_claim_count ?? 0;
-      const requiresReview = Boolean(owner) || otherClaimCount > 0;
+      const previouslyReviewed =
+        Boolean(existing[0]?.reviewed_by_user_id) ||
+        existing[0]?.status === "needs_info" ||
+        existing[0]?.status === "rejected";
+      const requiresReview = Boolean(owner) || otherClaimCount > 0 || previouslyReviewed;
       const conflictReason = owner
         ? "This athlete profile is already linked to another account. Staff identity checks are required."
-        : requiresReview
+        : otherClaimCount > 0
           ? "Another account has claimed this athlete profile. Staff identity checks are required."
-          : null;
+          : previouslyReviewed
+            ? "This claim was previously reviewed by ATHRECS staff. A new submission requires another staff review."
+            : null;
       const nextStatus: ResultClaimStatus = requiresReview ? "pending" : "approved";
       const automaticNote =
         nextStatus === "approved" ? "Automatically approved as the first uncontested claim." : null;
-
-      const existing = await tx<{ id: number; status: ResultClaimStatus }>`
-        select id, status
-        from result_claims
-        where result_id = ${result.result_id} and claimant_user_id = ${context.userId}
-        limit 1
-        for update
-      `;
 
       let claimId: number;
       if (existing[0]) {
@@ -503,7 +513,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             evidence_url_3 = ${data.evidenceUrl3},
             declaration_accepted = true,
             conflict_reason = ${conflictReason},
-            staff_note = ${automaticNote},
+            staff_note = case when ${previouslyReviewed} then staff_note else ${automaticNote} end,
             reviewed_by_user_id = null,
             reviewed_by_email = null,
             reviewed_at = case when ${nextStatus} = 'approved' then now() else null end,

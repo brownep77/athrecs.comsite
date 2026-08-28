@@ -38,6 +38,7 @@ import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$co
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as LanguageCountryRacesIndexRouteImport } from './routes/$language/$country/races/index'
 import { Route as LanguageCountryRacesSlugRouteImport } from './routes/$language/$country/races/$slug'
+import { Route as ApiEventsSlugOfficialEntryRouteImport } from './routes/api/events/$slug/official-entry'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -188,6 +189,12 @@ const LanguageCountryRacesSlugRoute =
     path: '/$language/$country/races/$slug',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiEventsSlugOfficialEntryRoute =
+  ApiEventsSlugOfficialEntryRouteImport.update({
+    id: '/api/events/$slug/official-entry',
+    path: '/api/events/$slug/official-entry',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -218,6 +225,7 @@ export interface FileRoutesByFullPath {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/$language/$country/races/': typeof LanguageCountryRacesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -249,6 +257,7 @@ export interface FileRoutesByTo {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/$language/$country/races': typeof LanguageCountryRacesIndexRoute
 }
 export interface FileRoutesById {
@@ -281,6 +290,7 @@ export interface FileRoutesById {
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/$language/$country/races/': typeof LanguageCountryRacesIndexRoute
 }
 export interface FileRouteTypes {
@@ -314,6 +324,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/$language/$country/'
     | '/$language/$country/races/$slug'
+    | '/api/events/$slug/official-entry'
     | '/$language/$country/races/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -345,6 +356,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/$language/$country'
     | '/$language/$country/races/$slug'
+    | '/api/events/$slug/official-entry'
     | '/$language/$country/races'
   id:
     | '__root__'
@@ -376,6 +388,7 @@ export interface FileRouteTypes {
     | '/api/auth/$'
     | '/$language/$country/'
     | '/$language/$country/races/$slug'
+    | '/api/events/$slug/official-entry'
     | '/$language/$country/races/'
   fileRoutesById: FileRoutesById
 }
@@ -408,6 +421,7 @@ export interface RootRouteChildren {
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   LanguageCountryIndexRoute: typeof LanguageCountryIndexRoute
   LanguageCountryRacesSlugRoute: typeof LanguageCountryRacesSlugRoute
+  ApiEventsSlugOfficialEntryRoute: typeof ApiEventsSlugOfficialEntryRoute
   LanguageCountryRacesIndexRoute: typeof LanguageCountryRacesIndexRoute
 }
 
@@ -616,6 +630,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LanguageCountryRacesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/events/$slug/official-entry': {
+      id: '/api/events/$slug/official-entry'
+      path: '/api/events/$slug/official-entry'
+      fullPath: '/api/events/$slug/official-entry'
+      preLoaderRoute: typeof ApiEventsSlugOfficialEntryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -648,6 +669,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   LanguageCountryIndexRoute: LanguageCountryIndexRoute,
   LanguageCountryRacesSlugRoute: LanguageCountryRacesSlugRoute,
+  ApiEventsSlugOfficialEntryRoute: ApiEventsSlugOfficialEntryRoute,
   LanguageCountryRacesIndexRoute: LanguageCountryRacesIndexRoute,
 }
 export const routeTree = rootRouteImport

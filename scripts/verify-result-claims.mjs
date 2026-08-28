@@ -54,12 +54,62 @@ for (const functionName of [
   );
 }
 
+const submitStart = api.indexOf("export const submitResultClaim");
+const submitEnd = api.indexOf("export const listMyResultClaims", submitStart);
+const submitDefinition = api.slice(submitStart, submitEnd);
+assert.match(
+  submitDefinition,
+  /select count\(distinct claimant_user_id\)::int as other_claim_count/,
+  "Competing claimants must be counted as distinct accounts",
+);
+assert.match(
+  submitDefinition,
+  /const previouslyReviewed =/,
+  "A past staff decision must be detected before automatic approval",
+);
+assert.match(
+  submitDefinition,
+  /existing\[0\]\?\.status === "needs_info"/,
+  "A needs-info resubmission must remain reviewable",
+);
+assert.match(
+  submitDefinition,
+  /existing\[0\]\?\.status === "rejected"/,
+  "A rejected resubmission must not bypass staff review",
+);
+assert.match(
+  submitDefinition,
+  /const requiresReview = Boolean\(owner\) \|\| otherClaimCount > 0 \|\| previouslyReviewed/,
+  "Review must cover ownership conflicts, competing claimants and prior staff decisions",
+);
+assert.match(
+  submitDefinition,
+  /const nextStatus: ResultClaimStatus = requiresReview \? "pending" : "approved"/,
+  "A genuinely new uncontested claim must be approved automatically",
+);
+assert.match(
+  submitDefinition,
+  /staff_note = case when \$\{previouslyReviewed\} then staff_note else \$\{automaticNote\} end/,
+  "The prior staff note must survive a reviewed claim resubmission",
+);
+assert.match(
+  submitDefinition,
+  /select id from athletes\s+where id = \$\{result\.athlete_id\}\s+for update/,
+  "Automatic ownership decisions must be serialized per athlete profile",
+);
+assert.match(submitDefinition, /notifyResultClaimReviewed/);
+assert.match(submitDefinition, /notifyResultClaimSubmitted/);
+
 assert.match(athleteRoute, /Claim this result/);
 assert.match(raceRoute, /to="\/claim-results"/);
 assert.match(homeRoute, /Claim race results/);
 assert.match(staffShell, /\/admin\/result-claims/);
+assert.match(claimRoute, /response\.status === "approved"/);
 assert.match(api, /for update/);
-assert.match(api, /const requiresReview = Boolean\(owner\) \|\| otherClaimCount > 0/);
+assert.match(
+  api,
+  /const requiresReview = Boolean\(owner\) \|\| otherClaimCount > 0 \|\| previouslyReviewed/,
+);
 assert.match(api, /const nextStatus: ResultClaimStatus = requiresReview \? "pending" : "approved"/);
 assert.match(api, /Automatically approved as the first uncontested claim/);
 assert.match(api, /await syncAthleteAccountAfterClaim\(outcome\.claimantUserId\)/);
@@ -151,6 +201,7 @@ await db.exec(evidenceLinksMigration);
 await db.exec(`
   insert into "user" ("id", "email") values
     ('user-one', 'runner@example.com'),
+    ('user-two', 'second-runner@example.com'),
     ('staff-one', 'staff@example.com');
   insert into athletes (id, slug, display_name)
     values (1, 'verification-runner', 'Verification Runner');
@@ -200,10 +251,10 @@ const staffClaimList = await db.query(
      claim_data.*,
      owner.user_email as existing_owner_email,
      (
-       select count(*)::int
+       select count(distinct competing.claimant_user_id)::int
        from result_claims competing
-       where competing.result_id = claim.result_id
-         and competing.id <> claim.id
+       where competing.athlete_id = claim.athlete_id
+         and competing.claimant_user_id <> claim.claimant_user_id
          and competing.status in ('pending', 'needs_info', 'approved')
      ) as competing_claim_count
    from (${claimSelect}) claim_data
@@ -244,6 +295,13 @@ await db.exec(`
     athlete_id, user_id, user_email, source_claim_id
   ) values (1, 'user-one', 'runner@example.com', 1);
   update result_claims set status = 'approved', reviewed_at = now() where id = 1;
+  insert into result_claims (
+    result_id, athlete_id, claimant_user_id, claimant_email,
+    verification_method, evidence_text, declaration_accepted, status, conflict_reason
+  ) values (
+    1, 1, 'user-two', 'second-runner@example.com', 'other', '', true, 'pending',
+    'Another account has claimed this athlete profile.'
+  );
 `);
 const owner = await db.query(`
   select link.user_email, claim.status
@@ -251,6 +309,24 @@ const owner = await db.query(`
   join result_claims claim on claim.id = link.source_claim_id
 `);
 assert.deepEqual(owner.rows[0], { user_email: "runner@example.com", status: "approved" });
+
+const competingClaims = await db.query(`
+  select
+    claim.claimant_user_id,
+    (
+      select count(distinct competing.claimant_user_id)::int
+      from result_claims competing
+      where competing.athlete_id = claim.athlete_id
+        and competing.claimant_user_id <> claim.claimant_user_id
+        and competing.status in ('pending', 'needs_info', 'approved')
+    ) as competing_claim_count
+  from result_claims claim
+  order by claim.claimant_user_id
+`);
+assert.deepEqual(competingClaims.rows, [
+  { claimant_user_id: "user-one", competing_claim_count: 1 },
+  { claimant_user_id: "user-two", competing_claim_count: 1 },
+]);
 
 await db.close();
 console.log("Result claim verification passed");
