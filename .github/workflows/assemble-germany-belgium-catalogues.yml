@@ -1,0 +1,100 @@
+name: Assemble Germany and Belgium catalogue release
+
+on:
+  push:
+    branches:
+      - release/germany-belgium-catalogues-2026-08-28
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    if: github.actor == 'brownep77'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/germany-belgium-catalogues-2026-08-28
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Fetch reviewed Germany and Belgium branches
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin \
+            data/germany-endurance-calendar-2026-2027:refs/remotes/origin/data/germany-endurance-calendar-2026-2027 \
+            data/belgium-elite-youth-cycling:refs/remotes/origin/data/belgium-elite-youth-cycling
+
+      - name: Import reviewed source-bounded catalogues
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout origin/data/germany-endurance-calendar-2026-2027 -- \
+            src/data/germany-endurance-races.ts \
+            scripts/verify-germany-endurance-calendar.mjs
+          git checkout origin/data/belgium-elite-youth-cycling -- \
+            docs/belgium-elite-youth-competitions.md \
+            scripts/verify-belgium-elite-youth-competitions.mjs \
+            src/data/belgium-elite-youth-competition-dictionaries-a.ts \
+            src/data/belgium-elite-youth-competition-dictionaries-b.ts \
+            src/data/belgium-elite-youth-competition-rows-1.ts \
+            src/data/belgium-elite-youth-competition-rows-2.ts \
+            src/data/belgium-elite-youth-competition-rows-3.ts \
+            src/data/belgium-elite-youth-competition-rows-4.ts \
+            src/data/belgium-elite-youth-competition-rows-5.ts \
+            src/data/belgium-elite-youth-competitions.ts
+          node scripts/assemble-germany-belgium-catalogues.mjs
+
+      - name: Verify assembled catalogues
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run typecheck
+          npm run lint
+          npm run verify:germany-endurance-calendar
+          npm run verify:belgium-elite-youth-competitions
+          npm run verify:fixture-duplicates
+          npm run build
+
+      - name: Commit verified release and remove temporary assembly files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ATHRECS Release Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          rm .github/workflows/assemble-germany-belgium-catalogues.yml
+          rm scripts/assemble-germany-belgium-catalogues.mjs
+          git add -- \
+            .github/workflows/assemble-germany-belgium-catalogues.yml \
+            docs/belgium-elite-youth-competitions.md \
+            docs/germany-belgium-catalogue-release-2026-08-28.md \
+            package.json \
+            scripts/assemble-germany-belgium-catalogues.mjs \
+            scripts/publish-germany-belgium-catalogues.mjs \
+            scripts/verify-belgium-elite-youth-competitions.mjs \
+            scripts/verify-fixture-duplicates.mjs \
+            scripts/verify-germany-belgium-publication.mjs \
+            scripts/verify-germany-endurance-calendar.mjs \
+            src/data/belgium-elite-youth-competition-dictionaries-a.ts \
+            src/data/belgium-elite-youth-competition-dictionaries-b.ts \
+            src/data/belgium-elite-youth-competition-rows-1.ts \
+            src/data/belgium-elite-youth-competition-rows-2.ts \
+            src/data/belgium-elite-youth-competition-rows-3.ts \
+            src/data/belgium-elite-youth-competition-rows-4.ts \
+            src/data/belgium-elite-youth-competition-rows-5.ts \
+            src/data/belgium-elite-youth-competitions.ts \
+            src/data/catalogue.ts \
+            src/data/germany-endurance-races.ts \
+            src/data/verified-all-sport.ts \
+            src/lib/athrecs/catalogue-publishing.server.ts \
+            src/lib/athrecs/import.server.ts
+          git status --short
+          git commit -m "Publish verified Germany and Belgium endurance catalogues"
+          git push origin HEAD:release/germany-belgium-catalogues-2026-08-28
