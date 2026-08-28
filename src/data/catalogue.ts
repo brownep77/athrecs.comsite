@@ -53,6 +53,7 @@ export { results } from "./results";
 import { seriesList as coreSeries } from "./series";
 import { editions as coreEditions } from "./editions";
 import { runabcEditions, runabcSeries } from "./runabc";
+import { ironman703Editions, ironman703Series } from "./ironman-703-calendar";
 import { multiSportEditions, multiSportSeries } from "./multisport";
 import { parkrunSeries } from "./parkrun-uk";
 import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics";
@@ -85,6 +86,19 @@ import {
   franceSpainPortugalRaceEditions,
   franceSpainPortugalRaceSeries,
 } from "./france-spain-portugal-races";
+import {
+  belgiumNetherlandsRaceEditions,
+  belgiumNetherlandsRaceSeries,
+} from "./belgium-netherlands-races";
+import {
+  belgiumComprehensiveRaceEditions,
+  belgiumComprehensiveRaceSeries,
+  belgiumComprehensiveReplacementSlugs,
+} from "./belgium-races-comprehensive";
+import {
+  netherlandsFullRaceEditions,
+  netherlandsFullRaceSeries,
+} from "./netherlands-full-running-calendar";
 import {
   englandAthleticsRunEventsEditions,
   englandAthleticsRunEventsSeries,
@@ -179,6 +193,9 @@ for (const series of [
   ...(albaniaRaceSeries as Series[]),
   ...(westernBalkansRaceSeries as Series[]),
   ...(franceSpainPortugalRaceSeries as Series[]),
+  ...(belgiumComprehensiveRaceSeries as Series[]),
+  ...(belgiumNetherlandsRaceSeries as Series[]),
+  ...(netherlandsFullRaceSeries as Series[]),
   ...(englandAthleticsRunEventsSeries as Series[]),
   ...(englandAthleticsUkFixturesSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
@@ -194,6 +211,7 @@ for (const series of [
   ...(verifiedHalfToTwentyMileSeries as Series[]),
   ...(dailyHalfTenMileSeries as Series[]),
   ...(runabcSeries as Series[]),
+  ...(ironman703Series as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
   ...(worldAthleticsSeries as Series[]),
@@ -228,16 +246,23 @@ const mergedEditions = [
   ...(marathonDesSablesEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
-  ...(afghanistanRaceEditions as Edition[]).filter((edition) =>
-    extraSlugs.has(edition.seriesSlug),
-  ),
-  ...(albaniaRaceEditions as Edition[]).filter((edition) =>
-    extraSlugs.has(edition.seriesSlug),
-  ),
+  ...(afghanistanRaceEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(albaniaRaceEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(westernBalkansRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(franceSpainPortugalRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(belgiumComprehensiveRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(belgiumNetherlandsRaceEditions as Edition[]).filter(
+    (edition) =>
+      usedSlugs.has(edition.seriesSlug) &&
+      !belgiumComprehensiveReplacementSlugs.has(edition.seriesSlug),
+  ),
+  ...(netherlandsFullRaceEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
   ),
   ...(englandAthleticsRunEventsEditions as Edition[]).filter((edition) =>
@@ -268,6 +293,9 @@ const mergedEditions = [
   ),
   ...(dailyHalfTenMileExistingSeriesEditions as Edition[]),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(ironman703Editions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldTriathlonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
@@ -290,9 +318,7 @@ export const editions: Edition[] = (() => {
       ...editionOverrides[sourceKey],
     };
     const exactKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
-    const key = edition.publishAllDistances
-      ? exactKey
-      : `${edition.seriesSlug}|${edition.date}`;
+    const key = edition.publishAllDistances ? exactKey : `${edition.seriesSlug}|${edition.date}`;
     if (seenExact.has(exactKey) || seen.has(key)) continue;
     seenExact.add(exactKey);
     seen.add(key);

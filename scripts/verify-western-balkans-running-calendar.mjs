@@ -153,7 +153,7 @@ assert(
   "Belgrade World Athletics duplicate is not retired",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v269"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v272"'),
   "The persistent catalogue seed was not advanced",
 );
 

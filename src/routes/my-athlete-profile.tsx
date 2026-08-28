@@ -3,8 +3,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
-  ArrowRight,
-  Award,
   CalendarDays,
   CheckCircle2,
   Loader2,
@@ -15,6 +13,8 @@ import {
   Trophy,
   UserRound,
 } from "lucide-react";
+import { AthleteBioCard } from "@/components/athletes/AthleteBioCard";
+import { AthleteResultsSection } from "@/components/athletes/AthleteResultsSection";
 import { ProfilePhotoUploader } from "@/components/athletes/ProfilePhotoUploader";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,9 +22,8 @@ import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import {
   getMyAthleteAccount,
-  type AthleteAccountData,
 } from "@/lib/athrecs/athlete-account-api";
-import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { getMyProfileResultVisibility } from "@/lib/athrecs/athlete-profile-results-api";
 
 export const Route = createFileRoute("/my-athlete-profile")({
   head: () => ({
@@ -40,7 +39,6 @@ export const Route = createFileRoute("/my-athlete-profile")({
   component: MyAthleteProfilePage,
 });
 
-type ClaimedResult = AthleteAccountData["claimedResults"][number];
 
 function MyAthleteProfilePage() {
   const { user, isPending: sessionPending } = useCurrentUserState();
@@ -52,10 +50,23 @@ function MyAthleteProfilePage() {
     retry: false,
   });
 
-  const personalBests = useMemo(
-    () => findPersonalBests(account.data?.claimedResults ?? []),
-    [account.data?.claimedResults],
+  const resultVisibility = useQuery({
+    queryKey: ["my-profile-result-visibility"],
+    queryFn: () => getMyProfileResultVisibility(),
+    enabled: Boolean(user),
+    retry: false,
+  });
+  const hiddenResultIdSet = useMemo(
+    () => new Set(resultVisibility.data?.hiddenResultIds ?? []),
+    [resultVisibility.data?.hiddenResultIds],
   );
+  const profileResults = useMemo(() => {
+    const allResults = account.data?.claimedResults ?? [];
+    return {
+      visible: allResults.filter((result) => !hiddenResultIdSet.has(result.resultId)),
+      hidden: allResults.filter((result) => hiddenResultIdSet.has(result.resultId)),
+    };
+  }, [account.data?.claimedResults, hiddenResultIdSet]);
 
   function startSignIn() {
     openAthleteAuth({
@@ -91,7 +102,8 @@ function MyAthleteProfilePage() {
     );
   }
 
-  if (account.isLoading) return <LoadingCard label="Building your private profile…" />;
+  if (account.isLoading || resultVisibility.isLoading)
+    return <LoadingCard label="Building your private profile…" />;
 
   if (account.isError || !account.data) {
     return (
@@ -111,9 +123,8 @@ function MyAthleteProfilePage() {
 
   const data = account.data;
   const profileName = data.displayName || data.fullName || data.authName || "My Athlete Profile";
-  const results = data.claimedResults;
-  const recentResults = results.slice(0, 12);
-  const olderResults = results.slice(12);
+  const results = profileResults.visible;
+  const hiddenResults = profileResults.hidden;
   const eventCount = new Set(results.map((result) => result.eventSlug)).size;
   const distanceCount = new Set(results.map((result) => result.distanceCode)).size;
   const primarySport = data.sports.find((sport) => sport.isPrimary) ?? data.sports[0];
@@ -221,6 +232,8 @@ function MyAthleteProfilePage() {
         />
       </section>
 
+      <AthleteBioCard />
+
       {data.claimedProfiles.length ? (
         <section className="rounded-2xl border border-border bg-surface p-5 shadow-card md:p-6">
           <div className="flex items-center gap-2">
@@ -242,94 +255,7 @@ function MyAthleteProfilePage() {
         </section>
       ) : null}
 
-      {results.length === 0 ? (
-        <section className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center">
-          <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-accent-soft text-accent">
-            <Award className="size-6" aria-hidden="true" />
-          </div>
-          <h2 className="mt-4 font-display text-xl font-semibold text-fg">
-            No results have been added yet
-          </h2>
-          <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
-            Find a matched result in your Athlete Account, confirm it, and it will appear here
-            immediately.
-          </p>
-          <Button asChild className="mt-5">
-            <Link to="/athlete-account">
-              Find my results <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
-          </Button>
-        </section>
-      ) : (
-        <>
-          {personalBests.length ? (
-            <section className="space-y-4">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-                  Fastest claimed performance
-                </p>
-                <h2 className="font-display text-2xl font-semibold text-fg">Personal bests</h2>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {personalBests.map((result) => (
-                  <Link
-                    key={`${result.distanceCode}-${result.resultId}`}
-                    to="/races/$slug"
-                    params={{ slug: result.eventSlug }}
-                    className="rounded-2xl border border-border bg-surface p-5 no-underline shadow-card transition hover:border-accent"
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <Badge variant="accent">{result.distanceCode}</Badge>
-                      <Medal className="size-5 text-accent" aria-hidden="true" />
-                    </div>
-                    <p className="mt-4 font-display text-2xl font-semibold tabular-nums text-fg">
-                      {formatDuration(result.finishTimeSeconds)}
-                    </p>
-                    <p className="mt-2 font-medium text-fg">{result.eventName}</p>
-                    <p className="mt-1 text-xs text-muted">
-                      {formatRaceDateShort(result.eventDate)}
-                      {result.overallPlace != null ? ` · Place ${result.overallPlace}` : ""}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            </section>
-          ) : null}
-
-          <section className="space-y-4">
-            <div className="flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-                  Most recent first
-                </p>
-                <h2 className="font-display text-2xl font-semibold text-fg">My results</h2>
-              </div>
-              <Badge variant="outline">
-                {results.length} result{results.length === 1 ? "" : "s"}
-              </Badge>
-            </div>
-
-            <div className="grid gap-3 md:grid-cols-2">
-              {recentResults.map((result) => (
-                <ResultCard key={result.resultId} result={result} />
-              ))}
-            </div>
-
-            {olderResults.length ? (
-              <details className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
-                <summary className="cursor-pointer list-none px-5 py-4 font-semibold text-fg">
-                  Show {olderResults.length} older result{olderResults.length === 1 ? "" : "s"}
-                </summary>
-                <div className="grid gap-3 border-t border-border p-4 md:grid-cols-2 md:p-5">
-                  {olderResults.map((result) => (
-                    <ResultCard key={result.resultId} result={result} />
-                  ))}
-                </div>
-              </details>
-            ) : null}
-          </section>
-        </>
-      )}
+      <AthleteResultsSection results={results} hiddenResults={hiddenResults} />
 
       <section className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-elevated p-4 text-sm text-muted">
         <span className="inline-flex items-center gap-2">
@@ -384,35 +310,6 @@ function StatCard({
   );
 }
 
-function ResultCard({ result }: { result: ClaimedResult }) {
-  return (
-    <Link
-      to="/races/$slug"
-      params={{ slug: result.eventSlug }}
-      className="rounded-xl border border-border bg-surface p-4 no-underline transition hover:border-accent"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="font-semibold text-fg">{result.eventName}</p>
-          <p className="mt-1 text-xs text-muted">
-            {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
-            {result.category ? ` · ${result.category}` : ""}
-          </p>
-          <p className="mt-2 text-xs text-subtle">{result.athleteName}</p>
-        </div>
-        <div className="text-right">
-          <p className="font-semibold tabular-nums text-fg">
-            {formatDuration(result.finishTimeSeconds)}
-          </p>
-          <p className="mt-1 text-xs text-muted">
-            {result.overallPlace != null ? `Place ${result.overallPlace}` : "Place unavailable"}
-          </p>
-        </div>
-      </div>
-    </Link>
-  );
-}
-
 function LoadingCard({ label }: { label: string }) {
   return (
     <div className="mx-auto max-w-4xl">
@@ -424,40 +321,3 @@ function LoadingCard({ label }: { label: string }) {
   );
 }
 
-function findPersonalBests(results: ClaimedResult[]): ClaimedResult[] {
-  const best = new Map<string, ClaimedResult>();
-  for (const result of results) {
-    if (result.finishTimeSeconds == null) continue;
-    const current = best.get(result.distanceCode);
-    if (
-      !current ||
-      current.finishTimeSeconds == null ||
-      result.finishTimeSeconds < current.finishTimeSeconds
-    ) {
-      best.set(result.distanceCode, result);
-    }
-  }
-  return [...best.values()].sort(
-    (a, b) =>
-      distanceRank(a.distanceCode) - distanceRank(b.distanceCode) ||
-      a.distanceCode.localeCompare(b.distanceCode),
-  );
-}
-
-function distanceRank(distance: string): number {
-  const normalized = distance.toLowerCase().replaceAll(" ", "");
-  const known: Record<string, number> = {
-    "1mile": 1,
-    "5k": 2,
-    "5km": 2,
-    "5mile": 3,
-    "10k": 4,
-    "10km": 4,
-    "10mile": 5,
-    "halfmarathon": 6,
-    "21.1k": 6,
-    "21.1km": 6,
-    marathon: 7,
-  };
-  return known[normalized] ?? 100;
-}

@@ -8,8 +8,10 @@ const PRIOR_CHECKED_AT = "2026-08-24";
 const LATEST_CHECKED_AT = "2026-08-25";
 const PREVIOUS_CURRENT_CHECKED_AT = "2026-08-26";
 const CURRENT_CHECKED_AT = "2026-08-27";
+const LATEST_CURRENT_CHECKED_AT = "2026-08-28";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 45;
+const NEW_SERIES_COUNT = 46;
+const NEW_EDITION_COUNT = 49;
 const EXISTING_SERIES_EDITION_COUNT = 11;
 
 async function loadModule(input) {
@@ -35,12 +37,12 @@ const {
 assert.equal(dailyHalfTenMileSeries.length, NEW_SERIES_COUNT, "The daily follow-up is incomplete");
 assert.equal(
   dailyHalfTenMileEditions.length,
-  NEW_SERIES_COUNT,
-  "Every daily follow-up series needs one edition",
+  NEW_EDITION_COUNT,
+  "The daily follow-up edition total changed unexpectedly",
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  35,
+  39,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -135,6 +137,7 @@ for (const edition of dailyHalfTenMileEditions) {
         LATEST_CHECKED_AT,
         PREVIOUS_CURRENT_CHECKED_AT,
         CURRENT_CHECKED_AT,
+        LATEST_CURRENT_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -196,6 +199,36 @@ assert.equal(
   CURRENT_CHECKED_AT,
   "Eyam entry provenance was not checked in the current scan",
 );
+
+const quadrathonSeries = dailyHalfTenMileSeries.find(
+  (series) => series.slug === "quadrathon-challenge-half-marathon-2027",
+);
+const quadrathonEditions = dailyHalfTenMileEditions.filter(
+  (edition) => edition.seriesSlug === "quadrathon-challenge-half-marathon-2027",
+);
+assert(quadrathonSeries, "The verified Quadrathon Challenge 2027 card is missing");
+assert.equal(
+  quadrathonSeries.source_url,
+  "https://www.sientries.co.uk/event.php?event_id=18491",
+  "Quadrathon does not use its direct official registration source",
+);
+assert.deepEqual(
+  quadrathonEditions.map((edition) => edition.date),
+  ["2027-08-12", "2027-08-13", "2027-08-14", "2027-08-15"],
+  "Quadrathon must publish one half-marathon edition for each event day",
+);
+for (const edition of quadrathonEditions) {
+  assert.equal(
+    edition.entryUrl,
+    "https://www.sientries.co.uk/enter.php?event_id=18491",
+    "Quadrathon does not use the direct open checkout",
+  );
+  assert.equal(
+    edition.entryOptions?.[0]?.checkedAt,
+    LATEST_CURRENT_CHECKED_AT,
+    "Quadrathon entry provenance was not checked in the 28 August scan",
+  );
+}
 
 assert.equal(
   dailyHalfTenMileExistingSeriesEditions.length,
@@ -350,6 +383,12 @@ assert(
 );
 assert(
   dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "temple-newsam-10-2027",
+  ),
+  "Temple Newsam 10 must remain held while its race licence is pending",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some(
     (candidate) => candidate.slug === "fastlane-summer-edition-2027",
   ),
   "Fastlane Summer must remain held while its governing status is TBA",
@@ -393,7 +432,7 @@ assert(
   "The verified existing-card editions are not merged into the catalogue",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v269"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v272"'),
   "The persistent catalogue seed version was not advanced",
 );
 assert(
@@ -402,5 +441,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (35 half marathons and 10 ten-milers), ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (36 half marathons and 10 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );

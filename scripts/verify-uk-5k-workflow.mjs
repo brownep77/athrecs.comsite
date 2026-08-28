@@ -161,7 +161,7 @@ assert(
   "The UK 5K corrections are not merged into entry options",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v269"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v272"'),
   "The persistent catalogue seed version is behind the daily 5K release",
 );
 

@@ -6,6 +6,7 @@ const PRIOR_CHECKED_AT = "2026-08-24";
 const LATEST_CHECKED_AT = "2026-08-25";
 const PREVIOUS_CURRENT_CHECKED_AT = "2026-08-26";
 const CURRENT_CHECKED_AT = "2026-08-27";
+const LATEST_CURRENT_CHECKED_AT = "2026-08-28";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
@@ -14,6 +15,7 @@ type RaceSeed = {
   slug: string;
   name: string;
   date: string;
+  additionalDates?: readonly string[];
   distance: RaceDistance;
   startTime?: string;
   country: RaceCountry;
@@ -832,6 +834,26 @@ const seeds: RaceSeed[] = [
     notes:
       "The organiser and direct registration pages consistently confirm the 16 May 2027 road half-marathon, 10:30 start and open entry.",
   },
+  {
+    slug: "quadrathon-challenge-half-marathon-2027",
+    name: "Quadrathon Challenge Half Marathon 2027",
+    date: "2027-08-12",
+    additionalDates: ["2027-08-13", "2027-08-14", "2027-08-15"],
+    distance: "Half",
+    country: "Ireland",
+    county: "County Donegal",
+    city: "Moville",
+    area: "Inishowen Peninsula and the Wild Atlantic Way",
+    surface: "Road",
+    distances: ["Half", "Marathon"],
+    organiser: "Extreme North Events",
+    url: "https://www.sientries.co.uk/event.php?event_id=18491",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18491",
+    priceCurrency: "EUR",
+    checkedAt: LATEST_CURRENT_CHECKED_AT,
+    notes:
+      "The direct official registration page confirms open entry for a separate half-marathon route on each day from 12 to 15 August 2027; runners may enter one to four days.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -875,11 +897,11 @@ export const dailyHalfTenMileSeries: Series[] = seeds.map((seed) => ({
   ...(seed.startTime ? { defaultStartTime: seed.startTime } : {}),
 }));
 
-export const dailyHalfTenMileEditions: Edition[] = seeds.map((seed) => {
+export const dailyHalfTenMileEditions: Edition[] = seeds.flatMap((seed) => {
   const entryOptions = entryOptionsFor(seed);
-  return {
+  return [seed.date, ...(seed.additionalDates ?? [])].map((date) => ({
     seriesSlug: seed.slug,
-    date: seed.date,
+    date,
     distance: seed.distance,
     distanceKm: seed.distance === "Half" ? 21.0975 : 16.09,
     status: seed.status ?? "Open",
@@ -887,7 +909,7 @@ export const dailyHalfTenMileEditions: Edition[] = seeds.map((seed) => {
     ...(seed.startTime ? { startTime: seed.startTime } : {}),
     source: seed.url,
     notes: seed.notes,
-  };
+  }));
 });
 
 type ExistingSeriesEditionSeed = {
@@ -1046,6 +1068,14 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
 
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
+  {
+    slug: "temple-newsam-10-2027",
+    date: "2027-01-10",
+    country: "England",
+    reason:
+      "The direct official entry page confirms the event details but keeps the race licence pending and does not open entry until 31 August 2026.",
+    sourceUrl: "https://racebest.com/races/qq342",
+  },
   {
     slug: "thirsk-10-mile-road-race-2027",
     date: "2027-03-14",

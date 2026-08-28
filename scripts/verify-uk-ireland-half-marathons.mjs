@@ -198,7 +198,7 @@ assert(
   "The half-marathon entry overrides are not merged",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v269"'),
+  seedSource.includes('const SEED_VERSION = "athrecs-uk-ireland-half-ten-mile-scan-v272"'),
   "The persistent catalogue seed version was not advanced",
 );
 
