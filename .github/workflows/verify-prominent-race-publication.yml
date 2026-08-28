@@ -1,0 +1,52 @@
+name: Verify prominent-race publication
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/verify-prominent-race-publication.yml"
+      - "scripts/publish-uk-ireland-prominent-races.mjs"
+      - "scripts/verify-uk-ireland-prominent-race-publication.mjs"
+      - "src/data/uk-ireland-prominent-races-2026-2027.ts"
+      - "src/data/catalogue.ts"
+      - "src/data/entry-options.ts"
+      - "migrations/**"
+      - "package.json"
+      - "package-lock.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-publication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: athrecs_publication_ci
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d athrecs_publication_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/athrecs_publication_ci
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Execute publication twice and verify database state
+        run: node --experimental-strip-types scripts/verify-uk-ireland-prominent-race-publication.mjs
