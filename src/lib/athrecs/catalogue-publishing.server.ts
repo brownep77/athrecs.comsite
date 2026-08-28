@@ -753,7 +753,8 @@ async function rollbackEdition(sql: Sql, change: ChangeRow): Promise<void> {
          status = $3,
          entry_url = $4,
          source_url = $5,
-         start_time = $6
+         start_time = $6,
+         notes = $7
      where id = $1`,
     [
       Number(record.id),
@@ -762,6 +763,7 @@ async function rollbackEdition(sql: Sql, change: ChangeRow): Promise<void> {
       record.entry_url ?? null,
       record.source_url ?? null,
       record.start_time ?? null,
+      record.notes ?? null,
     ],
   );
   await restoreEntryOptions(sql, Number(record.id), before.entryOptions);

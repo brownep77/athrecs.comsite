@@ -53,6 +53,7 @@ function editionInput(edition) {
     ...(edition.entryUrl ? { entryUrl: edition.entryUrl } : {}),
     ...(edition.entryOptions?.length ? { entryOptions: edition.entryOptions } : {}),
     ...(edition.source ? { source: edition.source } : {}),
+    ...(edition.notes ? { notes: edition.notes } : {}),
   };
 }
 
