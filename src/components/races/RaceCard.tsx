@@ -68,8 +68,11 @@ export function RaceCard({
     area: race.area,
   });
   const entryUrl =
-    focusDate && race.website && focusStatus !== "Finished" && focusStatus !== "Closed"
-      ? race.website
+    focusDate &&
+    race.sport !== "Parkrun" &&
+    focusStatus !== "Finished" &&
+    focusStatus !== "Closed"
+      ? `/api/events/${encodeURIComponent(race.slug)}/official-entry`
       : null;
 
   return (
@@ -148,17 +151,13 @@ export function RaceCard({
           <div className="mt-1.5 flex min-w-0 flex-wrap items-center justify-between gap-2">
             <TravelFacts venue={venue} startTime={startLabel} />
             {entryUrl && (
-              <Button
-                asChild
-                size="sm"
-                className="h-8 min-h-8 shrink-0 gap-1.5 px-2.5"
-              >
+              <Button asChild size="sm" className="h-8 min-h-8 shrink-0 gap-1.5 px-2.5">
                 <a
                   href={entryUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={`Open entry page for ${race.name}`}
-                  title="Open entry page"
+                  aria-label={`Open verified entry options for ${race.name}`}
+                  title="Open the verified official entry page when available"
                 >
                   <TicketCheck className="h-3.5 w-3.5" />
                   Entry
