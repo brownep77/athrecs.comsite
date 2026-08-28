@@ -2,7 +2,7 @@ import type { Edition, Series } from "./types";
 import {
   belgiumEliteYouthCompetitionEditions,
   belgiumEliteYouthCompetitionSeries,
-} from "./belgium-elite-youth-competitions";
+} from "./belgium-elite-youth-competitions.ts";
 
 /**
  * Small, hand-checked fixture batches for sports with thin coverage.
