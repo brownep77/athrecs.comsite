@@ -28,6 +28,7 @@ import { Route as AdminResultLinksRouteImport } from './routes/admin/result-link
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
+import { Route as ApiEventsSlugOfficialEntryRouteImport } from './routes/api/events/$slug/official-entry'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
@@ -136,6 +137,12 @@ const ApiCatalogueAutomationRoute = ApiCatalogueAutomationRouteImport.update({
   path: '/api/catalogue-automation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiEventsSlugOfficialEntryRoute =
+  ApiEventsSlugOfficialEntryRouteImport.update({
+    id: '/api/events/$slug/official-entry',
+    path: '/api/events/$slug/official-entry',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AthletesIndexRoute = AthletesIndexRouteImport.update({
   id: '/athletes/',
   path: '/athletes/',
@@ -208,6 +215,7 @@ export interface FileRoutesByFullPath {
   '/admin/sources': typeof AdminSourcesRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -239,6 +247,7 @@ export interface FileRoutesByTo {
   '/admin/sources': typeof AdminSourcesRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -271,6 +280,7 @@ export interface FileRoutesById {
   '/admin/sources': typeof AdminSourcesRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -304,6 +314,7 @@ export interface FileRouteTypes {
     | '/admin/sources'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/events/$slug/official-entry'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -335,6 +346,7 @@ export interface FileRouteTypes {
     | '/admin/sources'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/events/$slug/official-entry'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -366,6 +378,7 @@ export interface FileRouteTypes {
     | '/admin/sources'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/events/$slug/official-entry'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -398,6 +411,7 @@ export interface RootRouteChildren {
   AdminSourcesRoute: typeof AdminSourcesRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
+  ApiEventsSlugOfficialEntryRoute: typeof ApiEventsSlugOfficialEntryRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
@@ -546,6 +560,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiCatalogueAutomationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/events/$slug/official-entry': {
+      id: '/api/events/$slug/official-entry'
+      path: '/api/events/$slug/official-entry'
+      fullPath: '/api/events/$slug/official-entry'
+      preLoaderRoute: typeof ApiEventsSlugOfficialEntryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/athletes/': {
       id: '/athletes/'
       path: '/athletes'
@@ -638,6 +659,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminSourcesRoute: AdminSourcesRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
+  ApiEventsSlugOfficialEntryRoute: ApiEventsSlugOfficialEntryRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   ClubsSlugRoute: ClubsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,
