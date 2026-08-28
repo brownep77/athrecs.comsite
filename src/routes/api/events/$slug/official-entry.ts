@@ -12,10 +12,7 @@ function redirectResponse(location: string): Response {
   });
 }
 
-// The generated TanStack route registry is refreshed during Vite builds.
-// Cast this newly added server route until the generated file is committed,
-// so standalone `tsc --noEmit` checks do not reject the valid route path.
-export const Route = createFileRoute("/api/events/$slug/official-entry" as any)({
+export const Route = createFileRoute("/api/events/$slug/official-entry")({
   server: {
     handlers: {
       GET: async ({ request, params }) => {
