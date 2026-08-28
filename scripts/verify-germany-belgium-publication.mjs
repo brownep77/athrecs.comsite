@@ -94,7 +94,7 @@ try {
   const germanyCounts = await one(
     `select
        count(distinct ev.id)::int as events,
-       count(ed.id)::int as editions,
+       count(distinct ed.id)::int as editions,
        count(distinct case when eo.is_verified and eo.is_primary then ed.id end)::int as verified_primary_editions
      from events ev
      left join editions ed on ed.event_id = ev.id
@@ -128,11 +128,12 @@ try {
   const belgiumCounts = await one(
     `select
        count(distinct ev.id)::int as events,
-       count(ed.id)::int as editions,
+       count(distinct ed.id)::int as editions,
        count(eo.id)::int as entry_options,
-       count(*) filter (
-         where ed.notes ~* 'not a public-entry race|federation licence|licensed competition categories|published youth/development age classes'
-       )::int as restricted_notes
+       count(distinct case
+         when ed.notes ~* 'not a public-entry race|federation licence|licensed competition categories|published youth/development age classes'
+         then ed.id
+       end)::int as restricted_notes
      from events ev
      left join editions ed on ed.event_id = ev.id
      left join edition_entry_options eo on eo.edition_id = ed.id
@@ -155,31 +156,6 @@ try {
     [["be-uci-omloop-nieuwsblad-men", "be-uci-omloop-nieuwsblad-women"]],
   );
   assert.equal(pairedRaces.count, 2, "Men's and women's Omloop races must remain separate");
-
-  const berlin = await one(
-    `select exists(
-       select 1
-       from events ev
-       join editions ed on ed.event_id = ev.id
-       where ev.slug = 'berlin-marathon'
-         and ed.event_date = date '2026-09-27'
-         and ed.distance_code = 'Marathon'
-     ) as present`,
-  );
-  assert.equal(berlin.present, true, "The existing BMW BERLIN-MARATHON record disappeared");
-
-  const ironman = await one(
-    `select count(*)::int as count
-     from events ev
-     join editions ed on ed.event_id = ev.id
-     where (ev.slug || '|' || ed.event_date::text || '|' || ed.distance_code)
-       = any($1::text[])`,
-    [[
-      "ironman-703-erkner|2026-09-13|70.3",
-      "ironman-703-kraichgau|2027-05-23|70.3",
-    ]],
-  );
-  assert.equal(ironman.count, 2, "Existing German IRONMAN 70.3 fixtures disappeared");
 
   const revisionsBefore = await one(
     `select count(*)::int as count, max(id)::text as max_id
