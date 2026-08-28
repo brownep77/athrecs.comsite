@@ -3,9 +3,45 @@ import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 
 import pg from "pg";
+import { createServer } from "vite";
 
 const SOURCE_KEY = "athrecs-code:uk-ireland-five-k-release:2026-08-28";
+const CORRECTION_KEYS = [
+  "lifford-strabane-5k-2026|2026-09-20|5K",
+  "ruthin-evening-5k|2026-09-02|5K",
+  "fountains-abbey-wild-trail-runs|2027-02-28|10K",
+  "culzean-castle-trail-runs|2027-03-07|10K",
+  "bramham-park-trail-runs|2027-04-04|10K",
+  "high-lodge-wild-trail-runs|2027-04-11|10K",
+  "gibside-national-trust-trail-10k|2027-05-05|5K",
+  "margam-wild-trail-runs|2027-05-23|10K",
+  "wentworth-castle-trail-runs|2027-06-16|10K",
+];
+
 assert(process.env.DATABASE_URL?.trim(), "DATABASE_URL is required for publication verification");
+
+const vite = await createServer({
+  appType: "custom",
+  logLevel: "error",
+  server: { middlewareMode: true },
+});
+let catalogueEditions;
+try {
+  const catalogue = await vite.ssrLoadModule("/src/data/catalogue.ts");
+  catalogueEditions = catalogue.editions;
+} finally {
+  await vite.close();
+}
+
+const catalogueEditionKeys = new Set(
+  catalogueEditions.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
+);
+const missingCorrectionKeys = CORRECTION_KEYS.filter((key) => !catalogueEditionKeys.has(key));
+assert.deepEqual(
+  missingCorrectionKeys,
+  [],
+  `Catalogue is missing corrected editions: ${missingCorrectionKeys.join(", ")}`,
+);
 
 function runNode(script, extraEnv = {}) {
   const result = spawnSync(process.execPath, [script], {
@@ -66,15 +102,21 @@ try {
        count(*) filter (where ev.slug = 'lifford-strabane-5k-2026' and ed.event_date = '2026-09-20')::int as lifford_target,
        count(*) filter (where ev.slug = 'lifford-strabane-5k-2026' and ed.event_date = '2026-09-06')::int as lifford_old,
        count(*) filter (where ev.slug = 'fountains-abbey-wild-trail-runs' and ed.event_date = '2027-02-28' and ed.distance_code = '10K')::int as fountains_target,
-       count(*) filter (where ev.slug = 'fountains-abbey-wild-trail-runs' and ed.event_date = '2027-01-31' and ed.distance_code = '10K')::int as fountains_old
+       count(*) filter (where ev.slug = 'fountains-abbey-wild-trail-runs' and ed.event_date = '2027-01-31' and ed.distance_code = '10K')::int as fountains_old,
+       count(*) filter (where ev.slug = 'gibside-national-trust-trail-10k' and ed.event_date = '2027-05-05' and ed.distance_code = '5K')::int as gibside_target
      from editions ed
      join events ev on ev.id = ed.event_id
-     where ev.slug in ('lifford-strabane-5k-2026', 'fountains-abbey-wild-trail-runs')`,
+     where ev.slug in (
+       'lifford-strabane-5k-2026',
+       'fountains-abbey-wild-trail-runs',
+       'gibside-national-trust-trail-10k'
+     )`,
   );
   assert.equal(corrections.lifford_target, 1);
   assert.equal(corrections.lifford_old, 0);
   assert.equal(corrections.fountains_target, 1);
   assert.equal(corrections.fountains_old, 0);
+  assert.equal(corrections.gibside_target, 1);
 
   const revisionsBefore = await one(
     `select count(*)::int as count, max(id)::text as max_id
