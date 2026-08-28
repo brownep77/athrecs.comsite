@@ -125,19 +125,63 @@ try {
     return entryData.canonicalEventSlug?.(slug) ?? entryData.eventSlugAliases?.[slug] ?? slug;
   }
 
-  function resolveSeriesSlug(slug) {
-    const canonical = canonicalSlug(slug);
-    if (seriesBySlug.has(canonical)) return canonical;
-    if (seriesBySlug.has(slug)) return slug;
-    throw new Error(`Reviewed race series is missing from the merged catalogue: ${slug}`);
-  }
+  function ensureSeriesDistance(slug, distance) {
+  const series = seriesBySlug.get(slug);
+  if (!series || series.distances.includes(distance)) return;
+  seriesBySlug.set(slug, {
+    ...series,
+    distances: [...series.distances, distance],
+  });
+}
+
+function seriesFromOverride(slug, fallbackDistance) {
+  const canonical = canonicalSlug(slug);
+  const override =
+    entryData.seriesOverrides?.[slug] ?? entryData.seriesOverrides?.[canonical];
+  if (!override?.name) return null;
+  const descriptiveText = `${override.summary ?? ""} ${override.description ?? ""}`;
+  const website = override.website ?? override.source_url ?? "";
+  const generated = {
+    slug: canonical,
+    name: override.name,
+    sport: override.sport ?? "Running",
+    country: override.country ?? "England",
+    county: override.county ?? "",
+    city: override.city ?? "",
+    area: override.area ?? override.city ?? "",
+    surface:
+      override.surface ??
+      (/trail|fell|cross[ -]?country|woodland|estate path/i.test(descriptiveText)
+        ? "Trail"
+        : "Road"),
+    distances:
+      override.distances?.length ? override.distances : [fallbackDistance],
+    summary: override.summary ?? `${override.name}.`,
+    description: override.description ?? "",
+    organiser: override.organiser ?? "",
+    website,
+    source_url: override.source_url ?? website,
+  };
+  seriesBySlug.set(canonical, generated);
+  return canonical;
+}
+
+function resolveSeriesSlug(slug, fallbackDistance = "Other") {
+  const canonical = canonicalSlug(slug);
+  if (seriesBySlug.has(canonical)) return canonical;
+  if (seriesBySlug.has(slug)) return slug;
+  const generated = seriesFromOverride(slug, fallbackDistance);
+  if (generated) return generated;
+  throw new Error(`Reviewed race series is missing from the merged catalogue: ${slug}`);
+}
 
   function resolveProvidedEdition(sourceEdition) {
     const sourceKey = editionKey(sourceEdition);
     const override = entryData.editionOverrides?.[sourceKey] ?? {};
     const effective = { ...sourceEdition, ...override };
     const options = entryData.entryOptions?.[sourceKey] ?? effective.entryOptions;
-    const seriesSlug = resolveSeriesSlug(effective.seriesSlug);
+    const seriesSlug = resolveSeriesSlug(effective.seriesSlug, effective.distance);
+    ensureSeriesDistance(seriesSlug, effective.distance);
     return {
       ...effective,
       seriesSlug,
@@ -150,7 +194,8 @@ try {
     const override = entryData.editionOverrides?.[sourceKey] ?? {};
     const effectiveDate = override.date ?? parsed.date;
     const effectiveDistance = override.distance ?? parsed.distance;
-    const resolvedSlug = resolveSeriesSlug(parsed.slug);
+    const resolvedSlug = resolveSeriesSlug(parsed.slug, effectiveDistance);
+    ensureSeriesDistance(resolvedSlug, effectiveDistance);
     const base =
       coreEditions.find(
         (edition) =>
