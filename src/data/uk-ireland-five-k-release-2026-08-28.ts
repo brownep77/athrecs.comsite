@@ -1015,7 +1015,7 @@ export const ukIrelandFiveKReleaseEditionOverrides: Record<string, Partial<Editi
     "https://www.wilddeerevents.co.uk/e/gibside-national-trust-wild-trail-runs-2027-14511",
     "Wild Deer Events",
     "gibside-5k-2027",
-    { startTime: "19:15" },
+    { startTime: "19:15", publishAllDistances: true },
   ),
   "margam-wild-trail-runs|2027-05-23|10K": officialEdition(
     "https://www.wilddeerevents.co.uk/e/margam-wild-trail-runs-14954",
