@@ -111,6 +111,11 @@ import {
 import { ukFiveKEditions, ukFiveKSeries } from "./uk-5k-races";
 import { continuedFiveKEditions, continuedFiveKSeries } from "./five-k-races-uk-ireland-next";
 import { dailyFiveKEditions, dailyFiveKSeries } from "./five-k-races-uk-ireland-daily";
+import {
+  ukIrelandFiveKExistingSeriesEditions,
+  ukIrelandFiveKReleaseEditions,
+  ukIrelandFiveKReleaseSeries,
+} from "./uk-ireland-five-k-release-2026-08-28";
 import { verifiedFiveMileEditions, verifiedFiveMileSeries } from "./five-mile-races-uk-ireland";
 import {
   verifiedTenKFollowupEditions,
@@ -217,6 +222,7 @@ for (const series of [
   ...(ukFiveKSeries as Series[]),
   ...(continuedFiveKSeries as Series[]),
   ...(dailyFiveKSeries as Series[]),
+  ...(ukIrelandFiveKReleaseSeries as Series[]),
   ...(verifiedFiveMileSeries as Series[]),
   ...(verifiedTenKFollowupSeries as Series[]),
   ...(verifiedTenMileSeries as Series[]),
@@ -295,6 +301,10 @@ const mergedEditions = [
   ...(ukFiveKEditions as Edition[]),
   ...(continuedFiveKEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(dailyFiveKEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(ukIrelandFiveKReleaseEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(ukIrelandFiveKExistingSeriesEditions as Edition[]),
   ...(verifiedFiveMileEditions as Edition[]),
   ...(verifiedTenKFollowupEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
@@ -318,9 +328,7 @@ const mergedEditions = [
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
-  ...(ironman703Editions as Edition[]).filter((edition) =>
-    extraSlugs.has(edition.seriesSlug),
-  ),
+  ...(ironman703Editions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldTriathlonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),

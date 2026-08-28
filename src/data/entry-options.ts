@@ -25,6 +25,11 @@ import {
 } from "./fixture-deduplication";
 import { ukFiveKEditionOverrides, ukFiveKSeriesOverrides } from "./uk-5k-races";
 import {
+  ukIrelandFiveKReleaseEditionOverrides,
+  ukIrelandFiveKReleaseEditionReplacements,
+  ukIrelandFiveKReleaseSeriesOverrides,
+} from "./uk-ireland-five-k-release-2026-08-28";
+import {
   verifiedFiveMileEditionOverrides,
   verifiedFiveMileSeriesOverrides,
 } from "./five-mile-races-uk-ireland";
@@ -76,6 +81,7 @@ export const editionReplacements = [
   ...ukTenKEditionReplacements,
   ...verifiedFixtureEditionReplacements,
   ...nonStandardDistanceEditionReplacements,
+  ...ukIrelandFiveKReleaseEditionReplacements,
   {
     seriesSlug: "vjosa-wild-river-ultra-trail",
     distance: "100K",
@@ -91,6 +97,7 @@ export const editionOverrides: Record<string, Partial<Edition>> = {
   ...ukTenKEditionOverrides,
   ...verifiedFixtureEditionOverrides,
   ...ukFiveKEditionOverrides,
+  ...ukIrelandFiveKReleaseEditionOverrides,
   ...verifiedFiveMileEditionOverrides,
   ...verifiedHalfMarathonFollowupEditionOverrides,
   ...verifiedHalfToTwentyMileEditionOverrides,
@@ -113,6 +120,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...ukTenKSeriesOverrides,
   ...verifiedFixtureSeriesOverrides,
   ...ukFiveKSeriesOverrides,
+  ...ukIrelandFiveKReleaseSeriesOverrides,
   ...verifiedFiveMileSeriesOverrides,
   ...verifiedTenKFollowupSeriesOverrides,
   ...verifiedTenMileSeriesOverrides,

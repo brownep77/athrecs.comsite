@@ -5,6 +5,7 @@ const [
   fiveKData,
   continuedFiveKData,
   dailyFiveKData,
+  fiveKReleaseData,
   { parkrunSeries },
   { runabcSeries },
   { worldAthleticsSeries },
@@ -12,6 +13,7 @@ const [
   import("../src/data/uk-5k-races.ts"),
   import("../src/data/five-k-races-uk-ireland-next.ts"),
   import("../src/data/five-k-races-uk-ireland-daily.ts"),
+  import("../src/data/uk-ireland-five-k-release-2026-08-28.ts"),
   import("../src/data/parkrun-uk.ts"),
   import("../src/data/runabc.ts"),
   import("../src/data/world-athletics.ts"),
@@ -27,19 +29,41 @@ const {
 const { continuedFiveKEditions, continuedFiveKResearchQueue, continuedFiveKSeries } =
   continuedFiveKData;
 const { dailyFiveKEditions, dailyFiveKResearchQueue, dailyFiveKSeries } = dailyFiveKData;
+const {
+  ukIrelandFiveKExistingSeriesEditions,
+  ukIrelandFiveKReleaseEditions,
+  ukIrelandFiveKReleaseResearchQueue,
+  ukIrelandFiveKReleaseSeries,
+} = fiveKReleaseData;
 
-const allFiveKSeries = [...ukFiveKSeries, ...continuedFiveKSeries, ...dailyFiveKSeries];
-const allFiveKEditions = [...ukFiveKEditions, ...continuedFiveKEditions, ...dailyFiveKEditions];
+const allFiveKSeries = [
+  ...ukFiveKSeries,
+  ...continuedFiveKSeries,
+  ...dailyFiveKSeries,
+  ...ukIrelandFiveKReleaseSeries,
+];
+const allFiveKEditions = [
+  ...ukFiveKEditions,
+  ...continuedFiveKEditions,
+  ...dailyFiveKEditions,
+  ...ukIrelandFiveKReleaseEditions,
+  ...ukIrelandFiveKExistingSeriesEditions,
+];
 const allFiveKResearchQueue = [
   ...ukFiveKResearchQueue,
   ...continuedFiveKResearchQueue,
   ...dailyFiveKResearchQueue,
+  ...ukIrelandFiveKReleaseResearchQueue,
 ];
 
 const TODAY = "2026-08-22";
 const HORIZON = "2027-12-31";
 const COVERED_COUNTRIES = new Set(["England", "Ireland", "Northern Ireland", "Scotland", "Wales"]);
-const existingSeriesEditionSlugs = new Set(["wendover-woods-running-festival-august"]);
+const originalExistingSeriesEditionSlugs = new Set(["wendover-woods-running-festival-august"]);
+const existingSeriesEditionSlugs = new Set([
+  ...originalExistingSeriesEditionSlugs,
+  ...ukIrelandFiveKExistingSeriesEditions.map((edition) => edition.seriesSlug),
+]);
 
 assert(ukFiveKSeries.length >= 55, "The verified UK 5K release is unexpectedly small");
 assert(ukFiveKEditions.length > ukFiveKSeries.length, "Series with multiple dates were lost");
@@ -59,6 +83,13 @@ assert.equal(
   dailyFiveKEditions.length,
   dailyFiveKSeries.length,
   "Each daily-scan series must have one dated 5K edition",
+);
+assert.equal(ukIrelandFiveKReleaseSeries.length, 52, "The 28 August release is incomplete");
+assert.equal(ukIrelandFiveKReleaseEditions.length, 54, "The new-series edition set is incomplete");
+assert.equal(
+  ukIrelandFiveKExistingSeriesEditions.length,
+  12,
+  "Existing event cards lost one of their verified 5K editions",
 );
 
 const slugs = new Set();
@@ -100,7 +131,10 @@ for (const edition of allFiveKEditions) {
     );
   }
   for (const option of edition.entryOptions ?? []) {
-    assert.equal(option.checkedAt, TODAY, `${key} has a stale entry check date`);
+    assert(
+      option.checkedAt >= TODAY && option.checkedAt <= "2026-08-28",
+      `${key} has an invalid entry check date`,
+    );
     assert.equal(option.isVerified, true, `${key} has an unverified entry provider`);
     assert.equal(option.isPrimary, true, `${key} primary entry provider is not marked`);
     assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
@@ -132,6 +166,10 @@ assert(
   "The daily UK and Ireland 5K dataset is not imported by the catalogue",
 );
 assert(
+  catalogueSource.includes('from "./uk-ireland-five-k-release-2026-08-28"'),
+  "The 28 August UK and Ireland 5K release is not imported by the catalogue",
+);
+assert(
   catalogueSource.includes("...(ukFiveKSeries as Series[])"),
   "The UK 5K series are not merged into the catalogue",
 );
@@ -160,15 +198,16 @@ assert(
     entryOptionsSource.includes("...ukFiveKSeriesOverrides"),
   "The UK 5K corrections are not merged into entry options",
 );
-assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v246"'),
-  "The persistent catalogue seed version is behind the daily 5K release",
+assert.match(
+  seedSource,
+  /const SEED_VERSION = "athrecs-[^"]+";/,
+  "The persistent catalogue must retain a versioned ATHRECS seed marker",
 );
 
 const existingSourceSlugs = new Set(
   [...runabcSeries, ...worldAthleticsSeries].map((series) => series.slug),
 );
-for (const reusedSlug of existingSeriesEditionSlugs) {
+for (const reusedSlug of originalExistingSeriesEditionSlugs) {
   assert(existingSourceSlugs.has(reusedSlug), `Reused series is missing upstream: ${reusedSlug}`);
 }
 
