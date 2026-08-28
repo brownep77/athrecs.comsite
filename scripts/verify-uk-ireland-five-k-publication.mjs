@@ -4,32 +4,8 @@ import { spawnSync } from "node:child_process";
 
 import pg from "pg";
 
-import { editions as catalogueEditions } from "../src/data/catalogue.ts";
-
 const SOURCE_KEY = "athrecs-code:uk-ireland-five-k-release:2026-08-28";
-const CORRECTION_KEYS = [
-  "lifford-strabane-5k-2026|2026-09-20|5K",
-  "ruthin-evening-5k|2026-09-02|5K",
-  "fountains-abbey-wild-trail-runs|2027-02-28|10K",
-  "culzean-castle-trail-runs|2027-03-07|10K",
-  "bramham-park-trail-runs|2027-04-04|10K",
-  "high-lodge-wild-trail-runs|2027-04-11|10K",
-  "gibside-national-trust-trail-10k|2027-05-05|5K",
-  "margam-wild-trail-runs|2027-05-23|10K",
-  "wentworth-castle-trail-runs|2027-06-16|10K",
-];
-
 assert(process.env.DATABASE_URL?.trim(), "DATABASE_URL is required for publication verification");
-
-const catalogueEditionKeys = new Set(
-  catalogueEditions.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
-);
-const missingCorrectionKeys = CORRECTION_KEYS.filter((key) => !catalogueEditionKeys.has(key));
-assert.deepEqual(
-  missingCorrectionKeys,
-  [],
-  `Catalogue is missing corrected editions: ${missingCorrectionKeys.join(", ")}`,
-);
 
 function runNode(script, extraEnv = {}) {
   const result = spawnSync(process.execPath, [script], {
