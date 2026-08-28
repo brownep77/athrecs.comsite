@@ -1,0 +1,146 @@
+name: Publish verified override-only race series
+
+on:
+  push:
+    branches:
+      - release/all-remaining-race-additions-2026-08-28
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor == 'brownep77'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: release/all-remaining-race-additions-2026-08-28
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Promote complete series overrides into publication events
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('scripts/publish-remaining-uk-ireland-race-additions.mjs')
+          text = path.read_text()
+
+          old = '''  function resolveSeriesSlug(slug) {
+            const canonical = canonicalSlug(slug);
+            if (seriesBySlug.has(canonical)) return canonical;
+            if (seriesBySlug.has(slug)) return slug;
+            throw new Error(`Reviewed race series is missing from the merged catalogue: ${slug}`);
+          }
+          '''
+          new = '''  function ensureSeriesDistance(slug, distance) {
+            const series = seriesBySlug.get(slug);
+            if (!series || series.distances.includes(distance)) return;
+            seriesBySlug.set(slug, {
+              ...series,
+              distances: [...series.distances, distance],
+            });
+          }
+
+          function seriesFromOverride(slug, fallbackDistance) {
+            const canonical = canonicalSlug(slug);
+            const override =
+              entryData.seriesOverrides?.[slug] ?? entryData.seriesOverrides?.[canonical];
+            if (!override?.name) return null;
+            const descriptiveText = `${override.summary ?? ""} ${override.description ?? ""}`;
+            const website = override.website ?? override.source_url ?? "";
+            const generated = {
+              slug: canonical,
+              name: override.name,
+              sport: override.sport ?? "Running",
+              country: override.country ?? "England",
+              county: override.county ?? "",
+              city: override.city ?? "",
+              area: override.area ?? override.city ?? "",
+              surface:
+                override.surface ??
+                (/trail|fell|cross[ -]?country|woodland|estate path/i.test(descriptiveText)
+                  ? "Trail"
+                  : "Road"),
+              distances:
+                override.distances?.length ? override.distances : [fallbackDistance],
+              summary: override.summary ?? `${override.name}.`,
+              description: override.description ?? "",
+              organiser: override.organiser ?? "",
+              website,
+              source_url: override.source_url ?? website,
+            };
+            seriesBySlug.set(canonical, generated);
+            return canonical;
+          }
+
+          function resolveSeriesSlug(slug, fallbackDistance = "Other") {
+            const canonical = canonicalSlug(slug);
+            if (seriesBySlug.has(canonical)) return canonical;
+            if (seriesBySlug.has(slug)) return slug;
+            const generated = seriesFromOverride(slug, fallbackDistance);
+            if (generated) return generated;
+            throw new Error(`Reviewed race series is missing from the merged catalogue: ${slug}`);
+          }
+          '''
+          if old not in text:
+              raise SystemExit('Could not locate series resolution block')
+          text = text.replace(old, new, 1)
+
+          old_provided = '''    const options = entryData.entryOptions?.[sourceKey] ?? effective.entryOptions;
+              const seriesSlug = resolveSeriesSlug(effective.seriesSlug);
+              return {
+                ...effective,
+                seriesSlug,
+                ...(options?.length ? { entryOptions: options } : {}),
+              };
+          '''
+          new_provided = '''    const options = entryData.entryOptions?.[sourceKey] ?? effective.entryOptions;
+              const seriesSlug = resolveSeriesSlug(effective.seriesSlug, effective.distance);
+              ensureSeriesDistance(seriesSlug, effective.distance);
+              return {
+                ...effective,
+                seriesSlug,
+                ...(options?.length ? { entryOptions: options } : {}),
+              };
+          '''
+          if old_provided not in text:
+              raise SystemExit('Could not locate provided-edition series resolution')
+          text = text.replace(old_provided, new_provided, 1)
+
+          old_source = '''    const resolvedSlug = resolveSeriesSlug(parsed.slug);
+              const base =
+          '''
+          new_source = '''    const resolvedSlug = resolveSeriesSlug(parsed.slug, effectiveDistance);
+              ensureSeriesDistance(resolvedSlug, effectiveDistance);
+              const base =
+          '''
+          if old_source not in text:
+              raise SystemExit('Could not locate source-key series resolution')
+          text = text.replace(old_source, new_source, 1)
+
+          path.write_text(text)
+          PY
+
+      - name: Verify catalogue integration
+        run: |
+          npm ci
+          npm run typecheck
+          npm run verify:uk-10k-workflow
+          npm run verify:fixture-duplicates
+
+      - name: Commit repair and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ATHRECS Release Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          rm .github/workflows/fix-override-only-race-series.yml
+          git add -A
+          git commit -m "Publish verified races that exist only as catalogue overrides"
+          git push origin HEAD:release/all-remaining-race-additions-2026-08-28
