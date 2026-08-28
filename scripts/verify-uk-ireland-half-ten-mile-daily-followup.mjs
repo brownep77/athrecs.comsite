@@ -147,7 +147,10 @@ for (const edition of dailyHalfTenMileEditions) {
   }
   assert.equal(
     catalogue.editions.filter(
-      (item) => item.seriesSlug === edition.seriesSlug && item.date === edition.date,
+      (item) =>
+        item.seriesSlug === edition.seriesSlug &&
+        item.date === edition.date &&
+        item.distance === edition.distance,
     ).length,
     1,
     `${key} was dropped or duplicated during catalogue merge`,
