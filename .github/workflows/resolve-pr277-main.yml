@@ -1,0 +1,127 @@
+name: Resolve PR 277 against current main
+
+on:
+  push:
+    branches:
+      - data/uk-ireland-prominent-races-2026-2027
+
+permissions:
+  contents: write
+
+jobs:
+  resolve:
+    if: github.actor == 'brownep77'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: data/uk-ireland-prominent-races-2026-2027
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Merge main and preserve both catalogue additions
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "ATHRECS Release Automation"
+          git config user.email "paultwbrowne@gmail.com"
+          git fetch origin main
+
+          set +e
+          git merge --no-ff --no-commit origin/main
+          merge_status=$?
+          set -e
+
+          if [ "$merge_status" -ne 0 ]; then
+            conflicts="$(git diff --name-only --diff-filter=U)"
+            unexpected="$(printf '%s\n' "$conflicts" | grep -Ev '^(package\.json|src/data/catalogue\.ts)$' || true)"
+            if [ -n "$unexpected" ]; then
+              echo "Unexpected merge conflicts:"
+              printf '%s\n' "$unexpected"
+              exit 1
+            fi
+            git checkout --theirs package.json src/data/catalogue.ts
+          fi
+
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          const packagePath = 'package.json';
+          const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+          const publisher = 'node scripts/publish-uk-ireland-prominent-races.mjs';
+          if (!pkg.scripts.build.includes(publisher)) {
+            pkg.scripts.build = `${pkg.scripts.build} && ${publisher}`;
+          }
+          pkg.scripts['verify:uk-ireland-prominent-races'] =
+            'node --experimental-strip-types scripts/verify-uk-ireland-prominent-races.mjs';
+          const prominentVerify = 'npm run verify:uk-ireland-prominent-races';
+          if (!pkg.scripts['ci:verify'].includes(prominentVerify)) {
+            const anchor = 'npm run verify:slug-stability';
+            if (!pkg.scripts['ci:verify'].includes(anchor)) {
+              throw new Error('Could not locate ci:verify insertion point');
+            }
+            pkg.scripts['ci:verify'] = pkg.scripts['ci:verify'].replace(
+              anchor,
+              `${prominentVerify} && ${anchor}`,
+            );
+          }
+          fs.writeFileSync(packagePath, `${JSON.stringify(pkg, null, 2)}\n`);
+
+          const cataloguePath = 'src/data/catalogue.ts';
+          let catalogue = fs.readFileSync(cataloguePath, 'utf8');
+          const prominentImport = `import {\n  prominentUkIrelandEditions,\n  prominentUkIrelandSeries,\n} from "./uk-ireland-prominent-races-2026-2027";\n`;
+          if (!catalogue.includes('prominentUkIrelandSeries')) {
+            const importAnchor = 'import type { ClubSeed, Edition, Series } from "./types";\n';
+            if (!catalogue.includes(importAnchor)) {
+              throw new Error('Could not locate catalogue import insertion point');
+            }
+            catalogue = catalogue.replace(importAnchor, `${prominentImport}${importAnchor}`);
+          }
+          const seriesLine = '  ...(prominentUkIrelandSeries as Series[]),\n';
+          if (!catalogue.includes(seriesLine.trim())) {
+            const seriesAnchor = '  ...(runabcSeries as Series[]),\n';
+            if (!catalogue.includes(seriesAnchor)) {
+              throw new Error('Could not locate series insertion point');
+            }
+            catalogue = catalogue.replace(seriesAnchor, `${seriesLine}${seriesAnchor}`);
+          }
+          const editionBlock = `  ...(prominentUkIrelandEditions as Edition[]).filter((edition) =>\n    usedSlugs.has(edition.seriesSlug),\n  ),\n`;
+          if (!catalogue.includes('...(prominentUkIrelandEditions as Edition[])')) {
+            const editionAnchor =
+              '  ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),\n';
+            if (!catalogue.includes(editionAnchor)) {
+              throw new Error('Could not locate edition insertion point');
+            }
+            catalogue = catalogue.replace(editionAnchor, `${editionBlock}${editionAnchor}`);
+          }
+          fs.writeFileSync(cataloguePath, catalogue);
+          NODE
+
+          git add package.json src/data/catalogue.ts
+          unresolved="$(git diff --name-only --diff-filter=U)"
+          if [ -n "$unresolved" ]; then
+            echo "Unresolved conflicts remain:"
+            printf '%s\n' "$unresolved"
+            exit 1
+          fi
+
+      - name: Verify merged catalogue
+        run: |
+          npm ci
+          npm run typecheck
+          npm run verify:uk-ireland-prominent-races
+          npm run verify:ironman-703-calendar
+          npm run verify:fixture-duplicates
+
+      - name: Commit resolved merge and remove temporary workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm .github/workflows/resolve-pr277-main.yml
+          git add -A
+          git commit -m "Merge current main while preserving UK and Ireland race additions"
+          git push origin HEAD:data/uk-ireland-prominent-races-2026-2027
