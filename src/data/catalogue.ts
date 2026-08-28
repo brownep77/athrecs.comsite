@@ -116,10 +116,6 @@ import {
   ukIrelandFiveKReleaseEditions,
   ukIrelandFiveKReleaseSeries,
 } from "./uk-ireland-five-k-release-2026-08-28";
-import {
-  ukIrelandFiveKCorrectionEditions,
-  ukIrelandFiveKCorrectionSeries,
-} from "./uk-ireland-five-k-release-corrections-2026-08-28";
 import { verifiedFiveMileEditions, verifiedFiveMileSeries } from "./five-mile-races-uk-ireland";
 import {
   verifiedTenKFollowupEditions,
@@ -227,7 +223,6 @@ for (const series of [
   ...(continuedFiveKSeries as Series[]),
   ...(dailyFiveKSeries as Series[]),
   ...(ukIrelandFiveKReleaseSeries as Series[]),
-  ...(ukIrelandFiveKCorrectionSeries as Series[]),
   ...(verifiedFiveMileSeries as Series[]),
   ...(verifiedTenKFollowupSeries as Series[]),
   ...(verifiedTenMileSeries as Series[]),
@@ -310,7 +305,6 @@ const mergedEditions = [
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(ukIrelandFiveKExistingSeriesEditions as Edition[]),
-  ...(ukIrelandFiveKCorrectionEditions as Edition[]),
   ...(verifiedFiveMileEditions as Edition[]),
   ...(verifiedTenKFollowupEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
