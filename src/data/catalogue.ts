@@ -49,10 +49,12 @@ export const athletes = rawAthletes.map((athlete) => ({
     ? (clubSlugAliases[athlete.second_club_slug] ?? athlete.second_club_slug)
     : undefined,
 }));
-export { results } from "./results";
+import { results } from "./results";
+export { results };
 import { seriesList as coreSeries } from "./series";
 import { editions as coreEditions } from "./editions";
 import { runabcEditions, runabcSeries } from "./runabc";
+import { ironman703Editions, ironman703Series } from "./ironman-703-calendar";
 import { multiSportEditions, multiSportSeries } from "./multisport";
 import { parkrunSeries } from "./parkrun-uk";
 import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics";
@@ -82,6 +84,23 @@ import { afghanistanRaceEditions, afghanistanRaceSeries } from "./afghanistan-ra
 import { albaniaRaceEditions, albaniaRaceSeries } from "./albania-races";
 import { westernBalkansRaceEditions, westernBalkansRaceSeries } from "./western-balkans-races";
 import {
+  franceSpainPortugalRaceEditions,
+  franceSpainPortugalRaceSeries,
+} from "./france-spain-portugal-races";
+import {
+  belgiumNetherlandsRaceEditions,
+  belgiumNetherlandsRaceSeries,
+} from "./belgium-netherlands-races";
+import {
+  belgiumComprehensiveRaceEditions,
+  belgiumComprehensiveRaceSeries,
+  belgiumComprehensiveReplacementSlugs,
+} from "./belgium-races-comprehensive";
+import {
+  netherlandsFullRaceEditions,
+  netherlandsFullRaceSeries,
+} from "./netherlands-full-running-calendar";
+import {
   englandAthleticsRunEventsEditions,
   englandAthleticsRunEventsSeries,
 } from "./england-athletics-runevents";
@@ -108,8 +127,21 @@ import {
 } from "./half-to-20-mile-races-uk-ireland";
 import {
   dailyHalfTenMileEditions,
+  dailyHalfTenMileExistingSeriesEditions,
   dailyHalfTenMileSeries,
 } from "./half-ten-mile-races-uk-ireland-daily-followup";
+import {
+  prominentUkIrelandEditions,
+  prominentUkIrelandSeries,
+} from "./uk-ireland-prominent-races-2026-2027";
+import {
+  verifiedNonStandardDistanceEditions,
+  verifiedNonStandardDistanceSeries,
+} from "./non-standard-races-uk-ireland";
+import {
+  germanyEnduranceRaceEditions,
+  germanyEnduranceRaceSeries,
+} from "./germany-endurance-races";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -173,6 +205,10 @@ for (const series of [
   ...(afghanistanRaceSeries as Series[]),
   ...(albaniaRaceSeries as Series[]),
   ...(westernBalkansRaceSeries as Series[]),
+  ...(franceSpainPortugalRaceSeries as Series[]),
+  ...(belgiumComprehensiveRaceSeries as Series[]),
+  ...(belgiumNetherlandsRaceSeries as Series[]),
+  ...(netherlandsFullRaceSeries as Series[]),
   ...(englandAthleticsRunEventsSeries as Series[]),
   ...(englandAthleticsUkFixturesSeries as Series[]),
   ...(verifiedAllSportSeries as Series[]),
@@ -187,7 +223,11 @@ for (const series of [
   ...(verifiedHalfMarathonFollowupSeries as Series[]),
   ...(verifiedHalfToTwentyMileSeries as Series[]),
   ...(dailyHalfTenMileSeries as Series[]),
+  ...(prominentUkIrelandSeries as Series[]),
+  ...(verifiedNonStandardDistanceSeries as Series[]),
+  ...(germanyEnduranceRaceSeries as Series[]),
   ...(runabcSeries as Series[]),
+  ...(ironman703Series as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
   ...(worldAthleticsSeries as Series[]),
@@ -222,14 +262,24 @@ const mergedEditions = [
   ...(marathonDesSablesEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
-  ...(afghanistanRaceEditions as Edition[]).filter((edition) =>
-    extraSlugs.has(edition.seriesSlug),
-  ),
-  ...(albaniaRaceEditions as Edition[]).filter((edition) =>
-    extraSlugs.has(edition.seriesSlug),
-  ),
+  ...(afghanistanRaceEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(albaniaRaceEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(westernBalkansRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(franceSpainPortugalRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(belgiumComprehensiveRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(belgiumNetherlandsRaceEditions as Edition[]).filter(
+    (edition) =>
+      usedSlugs.has(edition.seriesSlug) &&
+      !belgiumComprehensiveReplacementSlugs.has(edition.seriesSlug),
+  ),
+  ...(netherlandsFullRaceEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
   ),
   ...(englandAthleticsRunEventsEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
@@ -257,7 +307,20 @@ const mergedEditions = [
   ...(dailyHalfTenMileEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
+  ...(dailyHalfTenMileExistingSeriesEditions as Edition[]),
+  ...(prominentUkIrelandEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(verifiedNonStandardDistanceEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(germanyEnduranceRaceEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
+  ...(ironman703Editions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldAthleticsEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(worldTriathlonEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
@@ -269,25 +332,20 @@ const mergedEditions = [
   ...(publicFigureEditions as Edition[]),
 ];
 
+const retainedResultEditionKeys = new Set(
+  results.map((result) => `${result.eventSlug}|${result.date}|${result.distance}`),
+);
+
 export const editions: Edition[] = (() => {
   const seen = new Set<string>();
+  const seenExact = new Set<string>();
   const unique: Edition[] = [];
-  for (const sourceEdition of mergedEditions) {
-    const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
-    const edition = {
-      ...sourceEdition,
-      ...editionOverrides[sourceKey],
-    };
-    const key = edition.publishAllDistances
-      ? `${edition.seriesSlug}|${edition.date}|${edition.distance}`
-      : `${edition.seriesSlug}|${edition.date}`;
-    if (seen.has(key)) continue;
-    seen.add(key);
+  const pushEdition = (edition: Edition) => {
     const matchingEntryOptions =
       entryOptions[`${edition.seriesSlug}|${edition.date}|${edition.distance}`];
     if (!matchingEntryOptions) {
       unique.push(edition);
-      continue;
+      return;
     }
     const primary =
       matchingEntryOptions.find((option) => option.isPrimary) ?? matchingEntryOptions[0];
@@ -296,7 +354,37 @@ export const editions: Edition[] = (() => {
       entryUrl: primary.entryUrl,
       entryOptions: matchingEntryOptions,
     });
+  };
+
+  for (const sourceEdition of mergedEditions) {
+    const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
+    const edition = {
+      ...sourceEdition,
+      ...editionOverrides[sourceKey],
+    };
+    const exactKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+    const key = edition.publishAllDistances ? exactKey : `${edition.seriesSlug}|${edition.date}`;
+    if (seenExact.has(exactKey) || seen.has(key)) continue;
+    seenExact.add(exactKey);
+    seen.add(key);
+    pushEdition(edition);
   }
+
+  // A retained result must always have an exact edition dependency. The normal
+  // card-level dedupe still applies to every other fixture, but a result-backed
+  // distance cannot be discarded merely because another distance shares its date.
+  for (const sourceEdition of mergedEditions) {
+    const sourceKey = `${sourceEdition.seriesSlug}|${sourceEdition.date}|${sourceEdition.distance}`;
+    const edition = {
+      ...sourceEdition,
+      ...editionOverrides[sourceKey],
+    };
+    const exactKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+    if (!retainedResultEditionKeys.has(exactKey) || seenExact.has(exactKey)) continue;
+    seenExact.add(exactKey);
+    pushEdition(edition);
+  }
+
   return unique;
 })();
 

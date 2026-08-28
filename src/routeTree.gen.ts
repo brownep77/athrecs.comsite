@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AthleteAccountRouteImport } from './routes/athlete-account'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as ClaimResultsRouteImport } from './routes/claim-results'
+import { Route as MyAthleteProfileRouteImport } from './routes/my-athlete-profile'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
@@ -25,7 +26,9 @@ import { Route as AdminResultArchiveRouteImport } from './routes/admin/result-ar
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
+import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
+import { Route as ApiEventsSlugOfficialEntryRouteImport } from './routes/api/events/$slug/official-entry'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
@@ -55,6 +58,11 @@ const CalendarRoute = CalendarRouteImport.update({
 const ClaimResultsRoute = ClaimResultsRouteImport.update({
   id: '/claim-results',
   path: '/claim-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MyAthleteProfileRoute = MyAthleteProfileRouteImport.update({
+  id: '/my-athlete-profile',
+  path: '/my-athlete-profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -119,11 +127,22 @@ const AdminSourcesRoute = AdminSourcesRouteImport.update({
   path: '/admin/sources',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAthleteProfilePhotoRoute = ApiAthleteProfilePhotoRouteImport.update({
+  id: '/api/athlete-profile-photo',
+  path: '/api/athlete-profile-photo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiCatalogueAutomationRoute = ApiCatalogueAutomationRouteImport.update({
   id: '/api/catalogue-automation',
   path: '/api/catalogue-automation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiEventsSlugOfficialEntryRoute =
+  ApiEventsSlugOfficialEntryRouteImport.update({
+    id: '/api/events/$slug/official-entry',
+    path: '/api/events/$slug/official-entry',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AthletesIndexRoute = AthletesIndexRouteImport.update({
   id: '/athletes/',
   path: '/athletes/',
@@ -182,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/athlete-account': typeof AthleteAccountRoute
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
+  '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
@@ -193,7 +213,9 @@ export interface FileRoutesByFullPath {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -211,6 +233,7 @@ export interface FileRoutesByTo {
   '/athlete-account': typeof AthleteAccountRoute
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
+  '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
@@ -222,7 +245,9 @@ export interface FileRoutesByTo {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -241,6 +266,7 @@ export interface FileRoutesById {
   '/athlete-account': typeof AthleteAccountRoute
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
+  '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
@@ -252,7 +278,9 @@ export interface FileRoutesById {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/events/$slug/official-entry': typeof ApiEventsSlugOfficialEntryRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -272,6 +300,7 @@ export interface FileRouteTypes {
     | '/athlete-account'
     | '/calendar'
     | '/claim-results'
+    | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
     | '/admin/athlete-accounts'
@@ -283,7 +312,9 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/events/$slug/official-entry'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -301,6 +332,7 @@ export interface FileRouteTypes {
     | '/athlete-account'
     | '/calendar'
     | '/claim-results'
+    | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
     | '/admin/athlete-accounts'
@@ -312,7 +344,9 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/events/$slug/official-entry'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -330,6 +364,7 @@ export interface FileRouteTypes {
     | '/athlete-account'
     | '/calendar'
     | '/claim-results'
+    | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
     | '/admin/athlete-accounts'
@@ -341,7 +376,9 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/events/$slug/official-entry'
     | '/athletes/$slug'
     | '/clubs/$slug'
     | '/races/$slug'
@@ -360,6 +397,7 @@ export interface RootRouteChildren {
   AthleteAccountRoute: typeof AthleteAccountRoute
   CalendarRoute: typeof CalendarRoute
   ClaimResultsRoute: typeof ClaimResultsRoute
+  MyAthleteProfileRoute: typeof MyAthleteProfileRoute
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
@@ -371,7 +409,9 @@ export interface RootRouteChildren {
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
+  ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
+  ApiEventsSlugOfficialEntryRoute: typeof ApiEventsSlugOfficialEntryRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
@@ -413,6 +453,13 @@ declare module '@tanstack/react-router' {
       path: '/claim-results'
       fullPath: '/claim-results'
       preLoaderRoute: typeof ClaimResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/my-athlete-profile': {
+      id: '/my-athlete-profile'
+      path: '/my-athlete-profile'
+      fullPath: '/my-athlete-profile'
+      preLoaderRoute: typeof MyAthleteProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -499,11 +546,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/athlete-profile-photo': {
+      id: '/api/athlete-profile-photo'
+      path: '/api/athlete-profile-photo'
+      fullPath: '/api/athlete-profile-photo'
+      preLoaderRoute: typeof ApiAthleteProfilePhotoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/catalogue-automation': {
       id: '/api/catalogue-automation'
       path: '/api/catalogue-automation'
       fullPath: '/api/catalogue-automation'
       preLoaderRoute: typeof ApiCatalogueAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/events/$slug/official-entry': {
+      id: '/api/events/$slug/official-entry'
+      path: '/api/events/$slug/official-entry'
+      fullPath: '/api/events/$slug/official-entry'
+      preLoaderRoute: typeof ApiEventsSlugOfficialEntryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/athletes/': {
@@ -584,6 +645,7 @@ const rootRouteChildren: RootRouteChildren = {
   AthleteAccountRoute: AthleteAccountRoute,
   CalendarRoute: CalendarRoute,
   ClaimResultsRoute: ClaimResultsRoute,
+  MyAthleteProfileRoute: MyAthleteProfileRoute,
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
@@ -595,7 +657,9 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResultClaimsRoute: AdminResultClaimsRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
+  ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
+  ApiEventsSlugOfficialEntryRoute: ApiEventsSlugOfficialEntryRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   ClubsSlugRoute: ClubsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,
