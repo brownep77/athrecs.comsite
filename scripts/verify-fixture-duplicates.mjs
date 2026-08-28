@@ -216,6 +216,13 @@ for (const replacement of verifiedFixtureEditionReplacements) {
   );
 }
 
+function competitionGender(name) {
+  const value = compact(name);
+  if (/(?:women|womens|female|dames|vrouwen|femmes)/.test(value)) return "women";
+  if (/(?:men|mens|male|heren|hommes)/.test(value)) return "men";
+  return null;
+}
+
 const groups = new Map();
 for (const edition of editions) {
   if (edition.date < today) continue;
@@ -235,6 +242,9 @@ for (const [key, rows] of groups) {
       const left = rows[leftIndex];
       const right = rows[rightIndex];
       if (left.series.slug === right.series.slug) continue;
+      const leftGender = competitionGender(left.series.name);
+      const rightGender = competitionGender(right.series.name);
+      if (leftGender && rightGender && leftGender !== rightGender) continue;
       const score = similarity(left.series.name, right.series.name);
       const leftName = compact(left.series.name);
       const rightName = compact(right.series.name);

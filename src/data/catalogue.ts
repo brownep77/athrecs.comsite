@@ -137,6 +137,10 @@ import {
   verifiedNonStandardDistanceEditions,
   verifiedNonStandardDistanceSeries,
 } from "./non-standard-races-uk-ireland";
+import {
+  germanyEnduranceRaceEditions,
+  germanyEnduranceRaceSeries,
+} from "./germany-endurance-races";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -220,6 +224,7 @@ for (const series of [
   ...(dailyHalfTenMileSeries as Series[]),
   ...(prominentUkIrelandSeries as Series[]),
   ...(verifiedNonStandardDistanceSeries as Series[]),
+  ...(germanyEnduranceRaceSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(ironman703Series as Series[]),
   ...(multiSportSeries as Series[]),
@@ -306,6 +311,9 @@ const mergedEditions = [
     usedSlugs.has(edition.seriesSlug),
   ),
   ...(verifiedNonStandardDistanceEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(germanyEnduranceRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
