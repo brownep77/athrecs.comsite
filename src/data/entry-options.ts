@@ -18,6 +18,11 @@ import {
   ukTenKSeriesOverrides,
 } from "./entry-options-uk-10ks";
 import {
+  ukTenKRelease64EditionOverrides,
+  ukTenKRelease64EntryOptions,
+  ukTenKRelease64SeriesOverrides,
+} from "./uk-10k-release-64";
+import {
   allFixtureAliases,
   verifiedFixtureEditionOverrides,
   verifiedFixtureEditionReplacements,
@@ -95,6 +100,7 @@ export const editionOverrides: Record<string, Partial<Edition>> = {
   ...ukMarathonEditionOverrides,
   ...ukHalfMarathonEditionOverrides,
   ...ukTenKEditionOverrides,
+  ...ukTenKRelease64EditionOverrides,
   ...verifiedFixtureEditionOverrides,
   ...ukFiveKEditionOverrides,
   ...ukIrelandFiveKReleaseEditionOverrides,
@@ -118,6 +124,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...ukMarathonSeriesOverrides,
   ...ukHalfMarathonSeriesOverrides,
   ...ukTenKSeriesOverrides,
+  ...ukTenKRelease64SeriesOverrides,
   ...verifiedFixtureSeriesOverrides,
   ...ukFiveKSeriesOverrides,
   ...ukIrelandFiveKReleaseSeriesOverrides,
@@ -136,6 +143,7 @@ export const entryOptions: Record<string, EntryOptionSeed[]> = {
   ...ukMarathonEntryOptions,
   ...ukHalfMarathonEntryOptions,
   ...ukTenKEntryOptions,
+  ...ukTenKRelease64EntryOptions,
   ...verifiedHalfMarathonFollowupEntryOptions,
   ...dailyHalfTenMileEntryOptions,
   ...prominentUkIrelandEntryOptions,
