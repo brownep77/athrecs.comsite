@@ -116,6 +116,7 @@ import {
   ukIrelandFiveKReleaseEditions,
   ukIrelandFiveKReleaseSeries,
 } from "./uk-ireland-five-k-release-2026-08-28";
+import { ukTenKRelease64SourceEditions } from "./uk-10k-release-64-source-editions";
 import { verifiedFiveMileEditions, verifiedFiveMileSeries } from "./five-mile-races-uk-ireland";
 import {
   verifiedTenKFollowupEditions,
@@ -305,6 +306,7 @@ const mergedEditions = [
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(ukIrelandFiveKExistingSeriesEditions as Edition[]),
+  ...(ukTenKRelease64SourceEditions as Edition[]),
   ...(verifiedFiveMileEditions as Edition[]),
   ...(verifiedTenKFollowupEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
