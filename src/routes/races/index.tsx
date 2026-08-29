@@ -5,9 +5,9 @@ import type { Sport } from "@/lib/athrecs/types";
 import { SITE_URL } from "@/lib/athrecs/seo";
 import { RaceCard } from "@/components/races/RaceCard";
 import {
+  countActiveSearchFilters,
   EMPTY_SEARCH,
   EventSearch,
-  isEmptySearch,
   searchToApi,
   type EventSearchValues,
 } from "@/components/races/EventSearch";
@@ -146,8 +146,8 @@ function EventsPage() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const filters = filtersFromSearch(routeSearch);
+  const activeFilterCount = countActiveSearchFilters(filters);
   const page = routeSearch.page ?? 1;
-  const empty = isEmptySearch(filters);
   const visibleEvents = data.slice(0, PAGE_SIZE);
   const hasNextPage = data.length > PAGE_SIZE;
   const firstEventNumber = visibleEvents.length ? (page - 1) * PAGE_SIZE + 1 : 0;
@@ -180,33 +180,35 @@ function EventsPage() {
         <div className="space-y-2">
           <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Events</h1>
           <p className="max-w-2xl text-sm text-muted">
-            Search by country, county, city, postcode, month or date range. Every selection is
-            reflected in the address so this view can be bookmarked or shared.
+            Choose a discipline first, then narrow by its relevant surface, distance or format and
+            by country, region, city or town. Every selection remains shareable in the page address.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          <Link
-            to="/race-series"
-            className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg no-underline hover:border-border-strong"
-          >
-            Race series
-          </Link>
+          {filters.sport === "Running" ? (
+            <Link
+              to="/race-series"
+              className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg no-underline hover:border-border-strong"
+            >
+              Running series
+            </Link>
+          ) : null}
           <button
             type="button"
             onClick={() => setMobileOpen((open) => !open)}
+            aria-expanded={mobileOpen}
             className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg lg:hidden"
           >
-            {mobileOpen ? "Hide filters" : "Show filters"}
-            {!empty ? (
-              <span className="ml-2 rounded-full bg-primary px-2 py-0.5 text-[10px] text-primary-fg">
-                On
-              </span>
-            ) : null}
+            {mobileOpen
+              ? "Hide filters"
+              : activeFilterCount
+                ? `Filters (${activeFilterCount})`
+                : "Show filters"}
           </button>
         </div>
       </header>
 
-      <div className="grid gap-5 lg:grid-cols-[minmax(260px,300px)_1fr] lg:items-start">
+      <div className="grid gap-5 lg:grid-cols-[minmax(280px,330px)_1fr] lg:items-start">
         <div
           className={
             mobileOpen
@@ -214,15 +216,21 @@ function EventsPage() {
               : "hidden lg:block lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto"
           }
         >
-          <EventSearch value={filters} onChange={updateFilters} variant="sidebar" />
+          <EventSearch
+            value={filters}
+            onChange={updateFilters}
+            onDone={() => setMobileOpen(false)}
+            variant="sidebar"
+          />
         </div>
 
         <div className="min-w-0 space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-sm text-subtle">
+            <p className="text-sm text-subtle" aria-live="polite">
               {visibleEvents.length
                 ? `Events ${firstEventNumber}–${lastEventNumber}`
                 : "0 events shown"}
+              {filters.sport !== "All" ? ` · ${filters.sport}` : ""}
             </p>
             {page > 1 || hasNextPage ? (
               <p className="text-xs font-medium text-muted">Page {page}</p>
@@ -232,7 +240,8 @@ function EventsPage() {
           <div className="grid gap-2">
             {visibleEvents.length === 0 ? (
               <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">
-                No events match those filters. Try clearing search or widening the date range.
+                No events match those filters. Try clearing a filter or widening the location or
+                date range.
               </p>
             ) : (
               visibleEvents.map((race) => <RaceCard key={race.id} race={race} />)
