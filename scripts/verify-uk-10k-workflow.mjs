@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
+import { createServer } from "vite";
+
 const root = process.cwd();
 const queuePath = path.join(root, "docs/uk-10k-enrichment/queue.json");
 const progressPath = path.join(root, "docs/uk-10k-enrichment/progress.json");
@@ -12,10 +14,23 @@ const release64Path = path.join(root, "src/data/uk-10k-release-64.ts");
 const queue = JSON.parse(fs.readFileSync(queuePath, "utf8"));
 const progress = JSON.parse(fs.readFileSync(progressPath, "utf8"));
 const runAbc = fs.readFileSync(runAbcPath, "utf8");
-const options = [
+const optionsSource = [
   fs.readFileSync(optionsPath, "utf8"),
   fs.readFileSync(release64Path, "utf8"),
 ].join("\n");
+
+const vite = await createServer({
+  appType: "custom",
+  logLevel: "error",
+  server: { middlewareMode: true },
+});
+let entryOptions;
+try {
+  const entryOptionsModule = await vite.ssrLoadModule("/src/data/entry-options.ts");
+  entryOptions = entryOptionsModule.entryOptions;
+} finally {
+  await vite.close();
+}
 
 const failures = [];
 const assert = (condition, message) => {
@@ -93,16 +108,18 @@ for (const [checkpoint, detail] of Object.entries(progress.checkpoints)) {
     for (const key of expectedKeys) {
       const resolvedKey = detail.resolvedKeys?.[key] ?? key;
       assert(
-        options.includes(`"${resolvedKey}": [`),
+        Object.hasOwn(entryOptions, resolvedKey),
         `${checkpoint} is coded but has no entry options for ${resolvedKey}`,
       );
     }
   }
 }
 
-const optionBlocks = [...options.matchAll(/^\s*"([^"\n]+\|\d{4}-\d{2}-\d{2}\|[^"]+)":\s*\[/gm)].map(
-  (match) => match[1],
-);
+const optionBlocks = [
+  ...optionsSource.matchAll(
+    /^\s*"([^"\n]+\|\d{4}-\d{2}-\d{2}\|[^"]+)":\s*(?:\[|verifiedPrimary\()/gm,
+  ),
+].map((match) => match[1]);
 assert(
   optionBlocks.length === new Set(optionBlocks).size,
   "duplicate edition keys exist in UK 10K entry options",
@@ -119,16 +136,16 @@ for (const detail of Object.values(progress.checkpoints)) {
     const [, sourceDate] = sourceKey.split("|");
     const [, resolvedDate] = resolvedKey.split("|");
     if (sourceDate !== resolvedDate) {
-      const overrideStart = options.indexOf(`  "${sourceKey}": {`);
+      const overrideStart = optionsSource.indexOf(`  "${sourceKey}": {`);
       assert(
         overrideStart >= 0,
         `date-corrected queue race has no source-key edition override: ${sourceKey}`,
       );
       if (overrideStart >= 0) {
-        const nextOverride = options.indexOf('\n  "', overrideStart + sourceKey.length + 7);
-        const overrideBlock = options.slice(
+        const nextOverride = optionsSource.indexOf('\n  "', overrideStart + sourceKey.length + 7);
+        const overrideBlock = optionsSource.slice(
           overrideStart,
-          nextOverride < 0 ? options.length : nextOverride,
+          nextOverride < 0 ? optionsSource.length : nextOverride,
         );
         assert(
           overrideBlock.includes(`date: "${resolvedDate}"`),
@@ -142,12 +159,10 @@ for (const detail of Object.values(progress.checkpoints)) {
 
 for (const race of queue.races) {
   const optionKey = resolvedQueueKeys.get(race.key) ?? race.key;
-  if (!options.includes(`"${optionKey}": [`)) continue;
-  const start = options.indexOf(`"${optionKey}": [`);
-  const next = options.indexOf('\n  "', start + optionKey.length + 5);
-  const block = options.slice(start, next < 0 ? options.length : next);
-  const primaryCount = (block.match(/isPrimary:\s*true/g) ?? []).length;
-  const verifiedCount = (block.match(/isVerified:\s*true/g) ?? []).length;
+  const providers = entryOptions[optionKey];
+  if (!providers) continue;
+  const primaryCount = providers.filter((option) => option.isPrimary).length;
+  const verifiedCount = providers.filter((option) => option.isVerified).length;
   assert(primaryCount === 1, `${optionKey} must have exactly one primary provider`);
   assert(verifiedCount >= 1, `${optionKey} must have at least one verified provider`);
 }
