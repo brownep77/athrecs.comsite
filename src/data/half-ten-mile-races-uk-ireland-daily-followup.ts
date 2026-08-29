@@ -7,6 +7,7 @@ const LATEST_CHECKED_AT = "2026-08-25";
 const PREVIOUS_CURRENT_CHECKED_AT = "2026-08-26";
 const CURRENT_CHECKED_AT = "2026-08-27";
 const LATEST_CURRENT_CHECKED_AT = "2026-08-28";
+const SCAN_CHECKED_AT = "2026-08-29";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
@@ -854,6 +855,119 @@ const seeds: RaceSeed[] = [
     notes:
       "The direct official registration page confirms open entry for a separate half-marathon route on each day from 12 to 15 August 2027; runners may enter one to four days.",
   },
+  {
+    slug: "wolf-moon-trail-half-marathon-2027",
+    name: "Wolf Moon Trail Half Marathon 2027",
+    date: "2027-01-23",
+    distance: "Half",
+    startTime: "15:00",
+    country: "England",
+    county: "Derbyshire",
+    city: "Sutton Scarsdale",
+    area: "Rock Lane, Sutton Springs Wood and the Five Pits Trail",
+    surface: "Trail",
+    organiser: "First Light Adventure",
+    url: "https://www.sientries.co.uk/event.php?event_id=18469",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18469",
+    priceAmount: 27,
+    checkedAt: SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 23 January 2027 trail half-marathon, 15:00 start and open entry.",
+  },
+  {
+    slug: "great-north-west-half-marathon-2027",
+    name: "Great North West Half Marathon 2027",
+    date: "2027-02-14",
+    distance: "Half",
+    country: "England",
+    county: "Lancashire",
+    city: "Blackpool",
+    area: "The Solaris Centre and Blackpool seafront",
+    surface: "Road",
+    organiser: "Fylde Coast Runners",
+    url: "https://www.sientries.co.uk/event/great-north-west-half-marathon-2027",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18517",
+    priceAmount: 30,
+    checkedAt: SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the accurately measured 14 February 2027 road half-marathon and open entry.",
+  },
+  {
+    slug: "hameldown-hammer-half-marathon-2027",
+    name: "Hameldown Hammer Half Marathon 2027",
+    date: "2027-02-27",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "Devon",
+    city: "Widecombe-in-the-Moor",
+    area: "Widecombe-in-the-Moor and the Hameldown Ridge",
+    surface: "Trail",
+    organiser: "OuterEdge Events",
+    url: "https://www.sientries.co.uk/event/hameldown-hammer-2027",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=17537",
+    priceAmount: 48,
+    checkedAt: SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 27 February 2027 trail half-marathon, 10:00 start and open entry.",
+  },
+  {
+    slug: "merthyr-half-marathon-2027",
+    name: "Merthyr Half Marathon 2027",
+    date: "2027-04-04",
+    distance: "Half",
+    startTime: "10:00",
+    country: "Wales",
+    county: "Merthyr Tydfil",
+    city: "Merthyr Tydfil",
+    area: "Merthyr College, the Trevithick Trail and the Taff Trail",
+    surface: "Mixed",
+    organiser: "Merthyr Running Club",
+    url: "https://www.sientries.co.uk/event/the-merthyr-half-marathon-2027",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=17706",
+    priceAmount: 38,
+    checkedAt: SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 4 April 2027 mixed-surface half-marathon, 10:00 start and open entry.",
+  },
+  {
+    slug: "silverbacktrails-oswius-revenge-half-marathon-2027",
+    name: "SilverBackTrails Oswiu's Revenge Half Marathon 2027",
+    date: "2027-05-16",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Osmotherley",
+    area: "Square Corner, Black Hambleton and Silton Woods",
+    surface: "Trail",
+    organiser: "SilverBackTrails",
+    url: "https://www.sientries.co.uk/event.php?event_id=18024",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18024",
+    priceAmount: 25,
+    checkedAt: SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 16 May 2027 circa-13.2-mile trail half-marathon, 10:00 start and open entry.",
+  },
+  {
+    slug: "cbte-morland-half-marathon-2027",
+    name: "CBTE Morland Half Marathon 2027",
+    date: "2027-08-15",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "Cumbria",
+    city: "Morland",
+    area: "Morland and the Eden Valley villages near Penrith",
+    surface: "Trail",
+    organiser: "Charm Bracelet Trail Events",
+    url: "https://www.sientries.co.uk/event/cbte-morland-half-marathon-2027",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18433",
+    priceAmount: 37,
+    checkedAt: SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 15 August 2027 trail half-marathon, 10:00 start and open entry.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -918,6 +1032,8 @@ type ExistingSeriesEditionSeed = {
   startTime?: string;
   organiser: string;
   url: string;
+  entryUrl?: string;
+  publishAllDistances?: boolean;
   priceAmount?: number;
   priceCurrency?: string;
   checkedAt?: string;
@@ -1033,6 +1149,19 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The official organiser page confirms the 22 August 2027 road-closed half-marathon, Saturday Market venue, 09:00 start and open direct entry; the established Beverley card is reused.",
   },
+  {
+    seriesSlug: "women-can-marathon",
+    date: "2027-04-18",
+    startTime: "11:00",
+    organiser: "Women Can Marathon",
+    url: "https://www.sientries.co.uk/event/women-can-marathon-2027",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=17314",
+    publishAllDistances: true,
+    priceAmount: 30,
+    checkedAt: SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page confirms the 18 April 2027 half-marathon, 11:00 start and open entry; the existing multi-distance Women Can Marathon card is enriched instead of duplicated.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -1043,15 +1172,16 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
     distance: "Half",
     distanceKm: 21.0975,
     status: "Open",
-    entryUrl: seed.url,
+    entryUrl: seed.entryUrl ?? seed.url,
     ...(seed.startTime ? { startTime: seed.startTime } : {}),
     source: seed.url,
     notes: seed.notes,
+    ...(seed.publishAllDistances ? { publishAllDistances: true } : {}),
     entryOptions: [
       {
         providerCode: `official-${seed.seriesSlug}-${seed.date}`,
         providerName: seed.organiser,
-        entryUrl: seed.url,
+        entryUrl: seed.entryUrl ?? seed.url,
         entryType: "official",
         status: "open",
         ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
@@ -1162,6 +1292,22 @@ export const dailyHalfTenMileResearchQueue = [
       "The organiser and checkout agree on the 9–10 January 2027 weekend, but the two ticket headings still label the Saturday and Sunday sessions as 2026 and 2025 respectively, so both editions remain held pending correction.",
     sourceUrl: "https://eventmaster.ie/event/vZ4qcPoSb4",
   },
+  {
+    slug: "winter-wipeout-2027",
+    date: "2027-01-09",
+    country: "England",
+    reason:
+      "The official entry page describes the route as a half marathon 'ish' without confirming a canonical half-marathon measurement.",
+    sourceUrl: "https://www.sientries.co.uk/event/the-winter-wipeout-2027",
+  },
+  {
+    slug: "cbte-charm-bracelet-half-marathon-2027",
+    date: "2027-04-11",
+    country: "England",
+    reason:
+      "The official entry page markets a half marathon but specifies an actual route distance of 14.35 miles, so it is held for the non-standard-distance catalogue rather than mislabelled as a canonical half.",
+    sourceUrl: "https://www.sientries.co.uk/event.php?event_id=17372",
+  },
 ] as const;
 
 const BRIGHTEN_MARINA_URL =
@@ -1250,6 +1396,22 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     website: "https://www.runthrough.co.uk/event/beverley-half-marathon-august-2027",
     source_url: "https://www.runthrough.co.uk/event/beverley-half-marathon-august-2027",
     defaultStartTime: "09:00",
+  },
+  "women-can-marathon": {
+    city: "Exmouth",
+    county: "Devon",
+    country: "England",
+    area: "East Devon from Tipton St John to Exmouth",
+    surface: "Trail",
+    distances: ["Marathon", "Half", "10K"],
+    summary:
+      "Women Can Marathon — women-only trail marathon, half marathon and 10K events in East Devon.",
+    description:
+      "Women Can Marathon offers women-only trail distances in East Devon; the established marathon card now carries the verified 2027 half-marathon edition instead of creating a duplicate event.",
+    organiser: "Women Can Marathon",
+    website: "https://www.womencanmarathon.co.uk/",
+    source_url: "https://www.sientries.co.uk/event/women-can-marathon-2027",
+    defaultStartTime: "11:00",
   },
 };
 

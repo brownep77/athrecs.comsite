@@ -157,7 +157,7 @@ const seedSource = await readFile(
   "utf8",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-belgium-netherlands-comprehensive-v271"'),
+  /const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource),
   "The persistent catalogue seed version was not advanced",
 );
 

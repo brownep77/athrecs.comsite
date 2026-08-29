@@ -20,4 +20,10 @@ Events already represented elsewhere were not recreated. This includes Beverley 
 
 The research queue holds permit-pending Temple Newsam, Ripon, Thirsk and Chippenham 10-mile races; date-conflicted Salisbury, Achill, Carsington Water and Battersea Park races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race.
 
+## 29 August 2026 scan
+
+Six verified 2027 half-marathon cards were added from direct official SiEntries pages: Wolf Moon Trail, Great North West, Hameldown Hammer, Merthyr, SilverBackTrails Oswiu's Revenge and CBTE Morland. Each uses the direct event checkout while retaining its public event page as source provenance.
+
+The existing Women Can Marathon card was enriched with its official half-marathon and 10K distances and a same-day 2027 half-marathon edition, rather than creating a duplicate card. Winter Wipeout remains held because the organiser describes the distance as a half marathon "ish"; CBTE Charm Bracelet remains held from the canonical-half queue because the official route is 14.35 miles.
+
 Run `npm run verify:uk-ireland-half-ten-mile-daily` to validate the release.

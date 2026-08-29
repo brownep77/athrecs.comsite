@@ -9,10 +9,11 @@ const LATEST_CHECKED_AT = "2026-08-25";
 const PREVIOUS_CURRENT_CHECKED_AT = "2026-08-26";
 const CURRENT_CHECKED_AT = "2026-08-27";
 const LATEST_CURRENT_CHECKED_AT = "2026-08-28";
+const SCAN_CHECKED_AT = "2026-08-29";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 46;
-const NEW_EDITION_COUNT = 49;
-const EXISTING_SERIES_EDITION_COUNT = 11;
+const NEW_SERIES_COUNT = 52;
+const NEW_EDITION_COUNT = 55;
+const EXISTING_SERIES_EDITION_COUNT = 12;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -42,7 +43,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  39,
+  45,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -138,6 +139,7 @@ for (const edition of dailyHalfTenMileEditions) {
         PREVIOUS_CURRENT_CHECKED_AT,
         CURRENT_CHECKED_AT,
         LATEST_CURRENT_CHECKED_AT,
+        SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -154,6 +156,28 @@ for (const edition of dailyHalfTenMileEditions) {
     ).length,
     1,
     `${key} was dropped or duplicated during catalogue merge`,
+  );
+}
+
+const expectedScanAdditions = new Map([
+  ["wolf-moon-trail-half-marathon-2027", "https://www.sientries.co.uk/enter.php?event_id=18469"],
+  ["great-north-west-half-marathon-2027", "https://www.sientries.co.uk/enter.php?event_id=18517"],
+  ["hameldown-hammer-half-marathon-2027", "https://www.sientries.co.uk/enter.php?event_id=17537"],
+  ["merthyr-half-marathon-2027", "https://www.sientries.co.uk/enter.php?event_id=17706"],
+  [
+    "silverbacktrails-oswius-revenge-half-marathon-2027",
+    "https://www.sientries.co.uk/enter.php?event_id=18024",
+  ],
+  ["cbte-morland-half-marathon-2027", "https://www.sientries.co.uk/enter.php?event_id=18433"],
+]);
+for (const [slug, entryUrl] of expectedScanAdditions) {
+  const edition = dailyHalfTenMileEditions.find((candidate) => candidate.seriesSlug === slug);
+  assert(edition, `${slug} is missing from the current scan`);
+  assert.equal(edition.entryUrl, entryUrl, `${slug} does not use its direct official checkout`);
+  assert.equal(
+    edition.entryOptions?.[0]?.checkedAt,
+    SCAN_CHECKED_AT,
+    `${slug} entry provenance was not checked in the 29 August scan`,
   );
 }
 
@@ -262,7 +286,12 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
   assert(edition.entryOptions?.length, `${key} needs a checked official entry option`);
   for (const option of edition.entryOptions ?? []) {
     assert(
-      [LATEST_CHECKED_AT, PREVIOUS_CURRENT_CHECKED_AT, CURRENT_CHECKED_AT].includes(
+      [
+        LATEST_CHECKED_AT,
+        PREVIOUS_CURRENT_CHECKED_AT,
+        CURRENT_CHECKED_AT,
+        SCAN_CHECKED_AT,
+      ].includes(
         option.checkedAt,
       ),
       `${key} has a stale entry check date`,
@@ -270,14 +299,17 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
     assert.equal(option.isVerified, true, `${key} has an unverified entry source`);
     assert.equal(option.isPrimary, true, `${key} primary source is not marked`);
     assert.equal(
-      normalizeUrl(option.entryUrl),
-      sourceUrl,
+      option.entryUrl,
+      edition.entryUrl,
       `${key} does not use the direct official entry URL`,
     );
   }
   assert.equal(
     catalogue.editions.filter(
-      (item) => item.seriesSlug === edition.seriesSlug && item.date === edition.date,
+      (item) =>
+        item.seriesSlug === edition.seriesSlug &&
+        item.date === edition.date &&
+        item.distance === edition.distance,
     ).length,
     1,
     `${key} was dropped or duplicated during catalogue merge`,
@@ -320,6 +352,23 @@ assert.equal(
   dailyHalfTenMileSeriesOverrides["beverley-half-marathon"].source_url,
   "https://www.runthrough.co.uk/event/beverley-half-marathon-august-2027",
   "Beverley does not expose the official organiser source on its existing card",
+);
+
+const womenCanEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) => edition.seriesSlug === "women-can-marathon" && edition.date === "2027-04-18",
+);
+assert(womenCanEdition, "The Women Can 2027 half-marathon enrichment is missing");
+assert.equal(womenCanEdition.startTime, "11:00", "Women Can has the wrong half-marathon start");
+assert.equal(womenCanEdition.publishAllDistances, true, "Women Can must retain both same-day distances");
+assert.equal(
+  womenCanEdition.entryUrl,
+  "https://www.sientries.co.uk/enter.php?event_id=17314",
+  "Women Can does not use the direct official entry URL",
+);
+assert.deepEqual(
+  dailyHalfTenMileSeriesOverrides["women-can-marathon"].distances,
+  ["Marathon", "Half", "10K"],
+  "The existing Women Can card was not enriched with its official distances",
 );
 
 const brightenSeries = catalogue.seriesList.find((series) => series.slug === "brighten-marina");
@@ -408,6 +457,16 @@ assert(
   ),
   "World Half Marathon Festival must remain held while its ticket headings conflict",
 );
+assert(
+  dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "winter-wipeout-2027"),
+  "Winter Wipeout must remain held while its half-marathon distance is approximate",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "cbte-charm-bracelet-half-marathon-2027",
+  ),
+  "Charm Bracelet must remain held from the canonical half catalogue at 14.35 miles",
+);
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
@@ -444,5 +503,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (36 half marathons and 10 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, one enriched multi-distance card, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (42 half marathons and 10 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, two enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );
