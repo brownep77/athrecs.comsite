@@ -14,10 +14,10 @@ export function FilterChips({
   wrap?: boolean;
 }) {
   return (
-    <div className="min-w-0 max-w-full space-y-1.5">
-      <p className="text-[11px] font-medium uppercase tracking-wider text-subtle">
+    <fieldset className="min-w-0 max-w-full space-y-1.5">
+      <legend className="text-[11px] font-medium uppercase tracking-wider text-subtle">
         {label}
-      </p>
+      </legend>
       <div
         className={
           wrap
@@ -25,25 +25,26 @@ export function FilterChips({
             : "flex max-w-full gap-2 overflow-x-auto pb-0.5 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         }
       >
-        {options.map((opt) => {
-          const active = value === opt;
+        {options.map((option) => {
+          const active = value === option;
           return (
             <button
-              key={opt}
+              key={option}
               type="button"
-              onClick={() => onChange(opt)}
+              aria-pressed={active}
+              onClick={() => onChange(option)}
               className={cn(
-                "inline-flex h-10 shrink-0 items-center rounded-full border px-3.5 text-sm font-medium transition-colors",
+                "inline-flex min-h-10 shrink-0 items-center rounded-full border px-3.5 text-sm font-medium transition-colors",
                 active
                   ? "border-primary bg-primary text-primary-fg"
                   : "border-border bg-surface text-muted hover:border-border-strong hover:text-fg",
               )}
             >
-              {opt}
+              {option}
             </button>
           );
         })}
       </div>
-    </div>
+    </fieldset>
   );
 }
