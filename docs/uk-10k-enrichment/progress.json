@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-19T14:55:00+01:00",
-  "activeRelease": 63,
+  "updatedAt": "2026-08-29T10:18:00+01:00",
+  "activeRelease": 64,
   "releaseStatus": "live_verified",
   "checkpoints": {
     "63A": {
@@ -48,6 +48,46 @@
         "dh-river-run|2026-10-25|10K"
       ],
       "notes": "Cramond and DH have current organiser-backed entry routes; Crewe has a direct RunThrough entry plus a distinct YMCA Cheshire charity place. All three production pages and their entry options were live verified."
+    },
+    "64A": {
+      "status": "live_verified",
+      "updatedAt": "2026-08-29T10:18:00+01:00",
+      "races": [
+        "fleet-10k5k-peter-driver-memorial|2026-10-25|10K",
+        "haltemprice-10k|2026-10-25|10K",
+        "jedburgh-half-marathon|2026-10-25|10K"
+      ],
+      "notes": "Fleet, Haltemprice and Jedburgh have exact 25 October 2026 editions with organiser or official-registration entry routes. They passed catalogue, duplicate, PostgreSQL and browser verification and were published in production revision 10."
+    },
+    "64B": {
+      "status": "live_verified",
+      "updatedAt": "2026-08-29T10:18:00+01:00",
+      "races": [
+        "kernow-killer-october|2026-10-25|10K",
+        "monsal-trail-half-marathon-autumn-sunday|2026-10-25|10K",
+        "polesden-lacey-10k|2026-10-25|10K"
+      ],
+      "notes": "Kernow Killer and Monsal Trail use organiser-backed routes. Polesden Lacey now has a canonical National Trust event card and exact 10K edition; booking is not required. All three were published in production revision 10."
+    },
+    "64C": {
+      "status": "live_verified",
+      "updatedAt": "2026-08-29T10:18:00+01:00",
+      "races": [
+        "regents-park-5k-10k-october|2026-10-25|10K",
+        "rosemullion-10k|2026-10-25|10K",
+        "running-tribe-races-october|2026-10-25|10K"
+      ],
+      "notes": "Regent's Park, Rosemullion and Running Tribe retain exact same-day 10K editions and one verified primary route each. They passed clean-PostgreSQL and full repository verification and were published in production revision 10."
+    },
+    "64D": {
+      "status": "live_verified",
+      "updatedAt": "2026-08-29T10:18:00+01:00",
+      "races": [
+        "stroud-half-marathon|2026-10-25|10K",
+        "the-one-in-the-park-greenwich-park-10k-5k|2026-10-25|10K",
+        "the-pumpkin-plod|2026-10-25|10K"
+      ],
+      "notes": "Stroud, Greenwich Park and Pumpkin Plod have exact 10K editions with verified organiser-branded entry routes. Production revision 10 published them with repeat-deployment idempotency confirmed."
     }
   }
 }
