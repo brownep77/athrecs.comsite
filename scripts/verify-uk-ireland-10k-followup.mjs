@@ -1,183 +1,37 @@
-import assert from "node:assert/strict";
-import fs from "node:fs/promises";
-
-const [
-  followupData,
-  { runabcEditions, runabcSeries },
-  { verifiedUkEditions, verifiedUkSeries },
-  { ukFiveKEditions, ukFiveKSeries },
-  { continuedFiveKEditions, continuedFiveKSeries },
-] = await Promise.all([
-  import("../src/data/ten-k-races-uk-ireland-followup.ts"),
-  import("../src/data/runabc.ts"),
-  import("../src/data/verified-races-uk.ts"),
-  import("../src/data/uk-5k-races.ts"),
-  import("../src/data/five-k-races-uk-ireland-next.ts"),
-]);
-
-const {
-  verifiedTenKFollowupEditions,
-  verifiedTenKFollowupResearchQueue,
-  verifiedTenKFollowupSeries,
-  verifiedTenKFollowupSeriesOverrides,
-} = followupData;
-
-const TODAY = "2026-08-22";
-const HORIZON = "2027-12-31";
-const REUSED_SERIES = new Set([
-  "clacton-half-marathon-10k",
-  "edinburgh-running-festival",
-  "mount-ephraim-10k-august",
-]);
-
-assert.equal(verifiedTenKFollowupSeries.length, 11, "The 10K follow-up series set is incomplete");
-assert.equal(
-  verifiedTenKFollowupEditions.length,
-  14,
-  "The 10K follow-up edition set is incomplete",
-);
-assert.equal(
-  Object.keys(verifiedTenKFollowupSeriesOverrides).length,
-  6,
-  "The 10K existing-series correction set is incomplete",
-);
-assert.equal(
-  verifiedTenKFollowupResearchQueue.length,
-  4,
-  "The held 10K research queue is incomplete",
-);
-
-const existingSeries = [
-  ...runabcSeries,
-  ...verifiedUkSeries,
-  ...ukFiveKSeries,
-  ...continuedFiveKSeries,
-];
-const existingEditions = [
-  ...runabcEditions,
-  ...verifiedUkEditions,
-  ...ukFiveKEditions,
-  ...continuedFiveKEditions,
-];
-const existingSlugs = new Set(existingSeries.map((series) => series.slug));
-const existingNameKeys = new Set(
-  existingSeries.map((series) => series.name.toLowerCase().replace(/[^a-z0-9]+/g, "")),
-);
-
-const newSlugs = new Set();
-for (const series of verifiedTenKFollowupSeries) {
-  assert(!newSlugs.has(series.slug), `Duplicate follow-up 10K slug: ${series.slug}`);
-  newSlugs.add(series.slug);
-  assert(!existingSlugs.has(series.slug), `${series.slug} duplicates an existing catalogue slug`);
-  assert(
-    !existingNameKeys.has(series.name.toLowerCase().replace(/[^a-z0-9]+/g, "")),
-    `${series.slug} duplicates an existing catalogue name`,
-  );
-  assert(series.distances.includes("10K"), `${series.slug} does not advertise a 10K distance`);
-  assert(
-    ["England", "Ireland", "Wales"].includes(series.country),
-    `${series.slug} has an out-of-scope country ${series.country}`,
-  );
-  assert.match(series.website, /^https:\/\//, `${series.slug} website must use HTTPS`);
-  assert.match(series.source_url ?? "", /^https:\/\//, `${series.slug} source must use HTTPS`);
-}
-
-const existingEditionKeys = new Set(
-  existingEditions.map((edition) => `${edition.seriesSlug}|${edition.date}`),
-);
-const editionKeys = new Set();
-for (const edition of verifiedTenKFollowupEditions) {
-  const key = `${edition.seriesSlug}|${edition.date}`;
-  assert(!editionKeys.has(key), `Duplicate follow-up 10K edition: ${key}`);
-  editionKeys.add(key);
-  assert(!existingEditionKeys.has(key), `${key} duplicates an existing catalogue edition`);
-  assert(
-    newSlugs.has(edition.seriesSlug) || REUSED_SERIES.has(edition.seriesSlug),
-    `${edition.seriesSlug} has no new or explicitly reused series`,
-  );
-  assert.match(edition.date, /^\d{4}-\d{2}-\d{2}$/, `${key} has an invalid ISO date`);
-  assert(edition.date >= TODAY && edition.date <= HORIZON, `${key} is outside the audit horizon`);
-  assert.equal(edition.distance, "10K", `${key} is not represented as a 10K edition`);
-  assert.equal(edition.distanceKm, 10, `${key} does not have a 10 km metric distance`);
-  assert.match(edition.source, /^https:\/\//, `${key} source must use HTTPS`);
-
-  if (edition.status === "Open") {
-    assert(edition.entryOptions?.length, `${key} needs a verified entry option`);
-  }
-  if (edition.status === "TBC") {
-    assert(!edition.entryOptions?.length, `${key} must not advertise unconfirmed entry`);
-  }
-  for (const option of edition.entryOptions ?? []) {
-    assert.equal(option.checkedAt, TODAY, `${key} has a stale entry check date`);
-    assert.equal(option.isVerified, true, `${key} has an unverified entry provider`);
-    assert.equal(option.isPrimary, true, `${key} primary entry provider is not marked`);
-    assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
-  }
-}
-
-for (const slug of REUSED_SERIES) {
-  assert(existingSlugs.has(slug), `Reused series is missing upstream: ${slug}`);
-}
-for (const slug of Object.keys(verifiedTenKFollowupSeriesOverrides)) {
-  assert(existingSlugs.has(slug), `Override target is missing upstream: ${slug}`);
-}
-for (const candidate of verifiedTenKFollowupResearchQueue) {
-  assert(
-    !newSlugs.has(candidate.slug),
-    `Held candidate was accidentally published: ${candidate.slug}`,
-  );
-  assert.match(candidate.sourceUrl, /^https:\/\//, `${candidate.slug} source must use HTTPS`);
-}
-
-assert.deepEqual(
-  verifiedTenKFollowupSeriesOverrides["run-balmoral-harbour-energy-5k-2027"]?.distances,
-  ["5K", "10K"],
-  "Run Balmoral lost its confirmed 10K distance",
-);
-assert.deepEqual(
-  verifiedTenKFollowupSeriesOverrides["the-chislehurst-half-marathon"]?.distances,
-  ["Half", "10K"],
-  "The Chislehurst series lost its new 10K option",
-);
-assert.deepEqual(
-  verifiedTenKFollowupSeriesOverrides["stansted-house-trail-run"]?.distances,
-  ["Half", "15K", "10K"],
-  "Stansted House lost its confirmed 10K distance",
-);
-
-const catalogueSource = await fs.readFile(
-  new URL("../src/data/catalogue.ts", import.meta.url),
-  "utf8",
-);
-const entryOptionsSource = await fs.readFile(
-  new URL("../src/data/entry-options.ts", import.meta.url),
-  "utf8",
-);
-const seedSource = await fs.readFile(
-  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
-  "utf8",
-);
-assert(
-  catalogueSource.includes('from "./ten-k-races-uk-ireland-followup"'),
-  "The UK and Ireland 10K follow-up dataset is not imported by the catalogue",
-);
-assert(
-  catalogueSource.includes("...(verifiedTenKFollowupSeries as Series[])"),
-  "The UK and Ireland 10K follow-up series are not merged into the catalogue",
-);
-assert(
-  catalogueSource.includes("...(verifiedTenKFollowupEditions as Edition[]).filter"),
-  "The UK and Ireland 10K follow-up editions are not merged into the catalogue",
-);
-assert(
-  entryOptionsSource.includes("...verifiedTenKFollowupSeriesOverrides"),
-  "The UK and Ireland 10K follow-up series corrections are not merged",
-);
-assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v246"'),
-  "The persistent catalogue seed version is behind the 10K follow-up",
-);
-
-console.log(
-  `Verified ${verifiedTenKFollowupSeries.length} new 10K series, ${verifiedTenKFollowupEditions.length} editions, ${Object.keys(verifiedTenKFollowupSeriesOverrides).length} existing-series corrections and ${verifiedTenKFollowupResearchQueue.length} held candidates.`,
-);
+YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíÛo}N‹Z–‹­¦ëeŠw¬Õ¥µÁ½ÉÐ…ÍÍ•ÉÐ™É½´€‰¹½‘”é…ÍÍ•ÉÐ½ÍÑÉ¥Ðˆì)¥µÁ½ÉÐ™Ì™É½´€‰¹½‘”é™Ì½ÁÉ½µ¥Í•Ìˆì()½¹ÍÐl(€™½±±½ÝÕÁ…Ñ„°(€ìÉÕ¹…‰‘¥Ñ¥½¹Ì°ÉÕ¹…‰M•É¥•Ìô°(€ìÙ•É¥™¥•‘U­‘¥Ñ¥½¹Ì°Ù•É¥™¥•‘U­M•É¥•Ìô°(€ìÕ­¥Ù•-‘¥Ñ¥½¹Ì°Õ­¥Ù•-M•É¥•Ìô°(€ì½¹Ñ¥¹Õ•‘¥Ù•-‘¥Ñ¥½¹Ì°½¹Ñ¥¹Õ•‘¥Ù•-M•É¥•Ìô°)t€ô…Ý…¥ÐAÉ½µ¥Í”¹…±°¡l(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½Ñ•¸µ¬µÉ…•ÌµÕ¬µ¥É•±…¹µ™½±±½ÝÕÀ¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½ÉÕ¹…‰Œ¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½Ù•É¥™¥•µÉ…•ÌµÕ¬¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½Õ¬´Õ¬µÉ…•Ì¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½™¥Ù”µ¬µÉ…•ÌµÕ¬µ¥É•±…¹µ¹•áÐ¹ÑÌˆ¤°)t¤ì()½¹ÍÐì(€Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁ‘¥Ñ¥½¹Ì°(€Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁI•Í•…É¡EÕ•Õ”°(€Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁM•É¥•Ì°(€Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁM•É¥•Í=Ù•ÉÉ¥‘•Ì°)ô€ô™½±±½ÝÕÁ…Ñ„ì()½¹ÍÐQ=d€ô€ˆÈÀÈØ´Àà´ÈÈˆì)½¹ÍÐ!=I%i=8€ô€ˆÈÀÈÜ´ÄÈ´ÌÄˆì)½¹ÍÐIUM}MI%L€ô¹•ÜM•Ð¡l(€€‰±…Ñ½¸µ¡…±˜µµ…É…Ñ¡½¸´ÄÁ¬ˆ°(€€‰•‘¥¹‰ÕÉ µÉÕ¹¹¥¹œµ™•ÍÑ¥Ù…°ˆ°(€€‰µ½Õ¹Ðµ•Á¡É…¥´´ÄÁ¬µ…ÕÕÍÐˆ°)t¤ì()…ÍÍ•ÉÐ¹•ÅÕ…°¡Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁM•É¥•Ì¹±•¹Ñ °€ÄÄ°€‰Q¡”€ÄÁ,™½±±½ÜµÕÀÍ•É¥•ÌÍ•Ð¥Ì¥¹½µÁ±•Ñ”ˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁ‘¥Ñ¥½¹Ì¹±•¹Ñ °(€€ÄÐ°(€€‰Q¡”€ÄÁ,™½±±½ÜµÕÀ•‘¥Ñ¥½¸Í•Ð¥Ì¥¹½µÁ±•Ñ”ˆ°(¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€=‰©•Ð¹­•åÌ¡Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁM•É¥•Í=Ù•ÉÉ¥‘•Ì¤¹±•¹Ñ °(€€Ø°(€€‰Q¡”€ÄÁ,•á¥ÍÑ¥¹œµÍ•É¥•Ì½ÉÉ•Ñ¥½¸Í•Ð¥Ì¥¹½µÁ±•Ñ”ˆ°(¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁI•Í•…É¡EÕ•Õ”¹±•¹Ñ °(€€Ð°(€€‰Q¡”¡•±€ÄÁ,É•Í•…É ÅÕ•Õ”¥Ì¥¹½µÁ±•Ñ”ˆ°(¤ì()½¹ÍÐ•á¥ÍÑ¥¹M•É¥•Ì€ôl(€€¸¸¹ÉÕ¹…‰M•É¥•Ì°(€€¸¸¹Ù•É¥™¥•‘U­M•É¥•Ì°(€€¸¸¹Õ­¥Ù•-M•É¥•Ì°(€€¸¸¹½¹Ñ¥¹Õ•‘¥Ù•-M•É¥•Ì°)tì)½¹ÍÐ•á¥ÍÑ¥¹‘¥Ñ¥½¹Ì€ôl(€€¸¸¹ÉÕ¹…‰‘¥Ñ¥½¹Ì°(€€¸¸¹Ù•É¥™¥•‘U­‘¥Ñ¥½¹Ì°(€€¸¸¹Õ­¥Ù•-‘¥Ñ¥½¹Ì°(€€¸¸¹½¹Ñ¥¹Õ•‘¥Ù•-‘¥Ñ¥½¹Ì°)tì)½¹ÍÐ•á¥ÍÑ¥¹M±ÕÌ€ô¹•ÜM•Ð¡•á¥ÍÑ¥¹M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôøÍ•É¥•Ì¹Í±Õœ¤¤ì)½¹ÍÐ•á¥ÍÑ¥¹9…µ•-•åÌ€ô¹•ÜM•Ð (€•á¥ÍÑ¥¹M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôøÍ•É¥•Ì¹¹…µ”¹Ñ½1½Ý•É…Í” ¤¹É•Á±…” ½my„µèÀ´åt¬½œ°€ˆˆ¤¤°(¤ì()½¹ÍÐ¹•ÝM±ÕÌ€ô¹•ÜM•Ð ¤ì)™½È€¡½¹ÍÐÍ•É¥•Ì½˜Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁM•É¥•Ì¤ì(€…ÍÍ•ÉÐ …¹•ÝM±ÕÌ¹¡…Ì¡Í•É¥•Ì¹Í±Õœ¤°ÕÁ±¥…Ñ”™½±±½ÜµÕÀ€ÄÁ,Í±Õœè€‘íÍ•É¥•Ì¹Í±Õõ€¤ì(€¹•ÝM±ÕÌ¹…‘¡Í•É¥•Ì¹Í±Õœ¤ì(€…ÍÍ•ÉÐ …•á¥ÍÑ¥¹M±ÕÌ¹¡…Ì¡Í•É¥•Ì¹Í±Õœ¤°€‘íÍ•É¥•Ì¹Í±Õô‘ÕÁ±¥…Ñ•Ì…¸•á¥ÍÑ¥¹œ…Ñ…±½Õ”Í±Õ€¤ì(€…ÍÍ•ÉÐ (€€€€…•á¥ÍÑ¥¹9…µ•-•åÌ¹¡…Ì¡Í•É¥•Ì¹¹…µ”¹Ñ½1½Ý•É…Í” ¤¹É•Á±…” ½my„µèÀ´åt¬½œ°€ˆˆ¤¤°(€€€€‘íÍ•É¥•Ì¹Í±Õô‘ÕÁ±¥…Ñ•Ì…¸•á¥ÍÑ¥¹œ…Ñ…±½Õ”¹…µ•€°(€€¤ì(€…ÍÍ•ÉÐ¡Í•É¥•Ì¹‘¥ÍÑ…¹•Ì¹¥¹±Õ‘•Ì ˆÄÁ,ˆ¤°€‘íÍ•É¥•Ì¹Í±Õô‘½•Ì¹½Ð…‘Ù•ÉÑ¥Í”„€ÄÁ,‘¥ÍÑ…¹•€¤ì(€…ÍÍ•ÉÐ (€€€l‰¹±…¹ˆ°€‰%É•±…¹ˆ°€‰]…±•Ì‰t¹¥¹±Õ‘•Ì¡Í•É¥•Ì¹½Õ¹ÑÉä¤°(€€€€‘íÍ•É¥•Ì¹Í±Õô¡…Ì…¸½ÕÐµ½˜µÍ½Á”½Õ¹ÑÉä€‘íÍ•É¥•Ì¹½Õ¹ÑÉåõ€°(€€¤ì(€…ÍÍ•ÉÐ¹µ…Ñ ¡Í•É¥•Ì¹Ý•‰Í¥Ñ”°€½y¡ÑÑÁÌép½p¼¼°€‘íÍ•É¥•Ì¹Í±ÕôÝ•‰Í¥Ñ”µÕÍÐÕÍ”!QQAM€¤ì(€…ÍÍ•ÉÐ¹µ…Ñ ¡Í•É¥•Ì¹Í½ÕÉ•}ÕÉ°€üü€ˆˆ°€½y¡ÑÑÁÌép½p¼¼°€‘íÍ•É¥•Ì¹Í±ÕôÍ½ÕÉ”µÕÍÐÕÍ”!QQAM€¤ì)ô()½¹ÍÐ•á¥ÍÑ¥¹‘¥Ñ¥½¹-•åÌ€ô¹•ÜM•Ð (€•á¥ÍÑ¥¹‘¥Ñ¥½¹Ì¹µ…À ¡•‘¥Ñ¥½¸¤€ôø€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõð‘í•‘¥Ñ¥½¸¹‘…Ñ•õ€¤°(¤ì)½¹ÍÐ•‘¥Ñ¥½¹-•åÌ€ô¹•ÜM•Ð ¤ì)™½È€¡½¹ÍÐ•‘¥Ñ¥½¸½˜Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁ‘¥Ñ¥½¹Ì¤ì(€½¹ÍÐ­•ä€ô€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõð‘í•‘¥Ñ¥½¸¹‘…Ñ•õ€ì(€…ÍÍ•ÉÐ …•‘¥Ñ¥½¹-•åÌ¹¡…Ì¡­•ä¤°ÕÁ±¥…Ñ”™½±±½ÜµÕÀ€ÄÁ,•‘¥Ñ¥½¸ëo}¶‰žËkºwµçYY][Û‹™[žSÜ[ÛœÏË›[™Ý	ÚÙ^_H]\Ý›ÝY™\\ÙH[˜ÛÛ™š\›YY[žX
+NÂˆBˆ›Üˆ
+ÛÛœÝÜ[ÛˆÙˆY][Û‹™[žSÜ[ÛœÈÏÈ×JHÂˆ\ÜÙ\™\]X[
+Ü[Û‹˜ÚXÚÙY]ÑVK	ÚÙ^_H\ÈHÝ[H[žHÚXÚÈ]X
+NÂˆ\ÜÙ\™\]X[
+Ü[Û‹š\Õ™\šYšYYYK	ÚÙ^_H\È[ˆ[™\šYšYY[žH›ÝšY\˜
+NÂˆ\ÜÙ\™\]X[
+Ü[Û‹š\Ôš[X\žKYK	ÚÙ^_Hš[X\žH[žH›ÝšY\ˆ\È›ÝX\šÙY
+NÂˆ\ÜÙ\›X]Ú
+Ü[Û‹™[žU\›×šÎ—×ËË	ÚÙ^_H[žHT“]\Ý\ÙHØ
+NÂˆBŸB‚™›Üˆ
+ÛÛœÝÛYÈÙˆ‘UTÑQÔÑT’QTÊHÂˆ\ÜÙ\
+^\Ý[™ÔÛYÜËš\ÊÛYÊK™]\ÙYÙ\šY\È\ÈZ\ÜÚ[™È\Ý™X[Nˆ	ÜÛYßX
+NÂŸB™›Üˆ
+ÛÛœÝÛYÈÙˆØš™XÝšÙ^\Ê™\šYšYY[’Ñ›ÛÝÝ\Ù\šY\ÓÝ™\œšY\ÊJHÂˆ\ÜÙ\
+^\Ý[™ÔÛYÜËš\ÊÛYÊKÝ™\œšYH\™Ù]\ÈZ\ÜÚ[™È\Ý™X[Nˆ	ÜÛYßX
+NÂŸB™›Üˆ
+ÛÛœÝØ[™Y]HÙˆ™\šYšYY[’Ñ›ÛÝÝ\™\ÙX\˜Ú]Y]YJHÂˆ\ÜÙ\
+ˆ[™]ÔÛYÜËš\ÊØ[™Y]KœÛYÊKˆ[Ø[™Y]HØ\ÈXØÚY[[HX›\ÚYˆ	ØØ[™Y]KœÛYßXˆ
+NÂˆ\ÜÙ\›X]Ú
+Ø[™Y]KœÛÝ\˜ÙU\›×šÎ—×ËË	ØØ[™Y]KœÛYßHÛÝ\˜ÙH]\Ý\ÙHØ
+NÂŸB‚˜\ÜÙ\™Y\\]X[
+ˆ™\šYšYY[’Ñ›ÛÝÝ\Ù\šY\ÓÝ™\œšY\ÖÈœ[‹X˜[[Ü˜[Z\˜›Ý\‹Y[™\™ÞKMZËLŒÈ—OË™\Ý[˜Ù\ËˆÈRÈ‹ŒLÈ—Kˆ”[ˆ˜[[Ü˜[ÜÝ]ÈÛÛ™š\›YYLÈ\Ý[˜ÙH‹ŠNÂ˜\ÜÙ\™Y\\]X[
+ˆ™\šYšYY[’Ñ›ÛÝÝ\Ù\šY\ÓÝ™\œšY\ÖÈKXÚ\ÛZ\œÝZ[‹[X\˜]Ûˆ—OË™\Ý[˜Ù\ËˆÈ’[ˆ‹ŒLÈ—Kˆ•HÚ\ÛZ\œÝÙ\šY\ÈÜÝ]È™]ÈLÈÜ[Ûˆ‹ŠNÂ˜\ÜÙ\™Y\\]X[
+ˆ™\šYšYY[’Ñ›ÛÝÝ\Ù\šY\ÓÝ™\œšY\ÖÈœÝ[œÝYZÝ\ÙK]˜Z[\[ˆ—OË™\Ý[˜Ù\ËˆÈ’[ˆ‹ŒMRÈ‹ŒLÈ—Kˆ”Ý[œÝYÝ\ÙHÜÝ]ÈÛÛ™š\›YYLÈ\Ý[˜ÙH‹ŠNÂ‚˜ÛÛœÝØ][ÙÝYTÛÝ\˜ÙHH]ØZ]œËœ™XYš[Jˆ™]ÈT“
+‹‹‹ÜÜ˜ËÙ]KØØ][ÙÝYKÈ‹[\Ü›Y]K\›
+Kˆ]Ž‹ŠNÂ˜ÛÛœÝ[žSÜ[ÛœÔÛÝ\˜ÙHH]ØZ]œËœ™XYš[Jˆ™]ÈT“
+‹‹‹ÜÜ˜ËÙ]KÙ[žK[Ü[ÛœËÈ‹[\Ü›Y]K\›
+Kˆ]Ž‹ŠNÂ˜ÛÛœÝÙYYÛÝ\˜ÙHH]ØZ]œËœ™XYš[Jˆ™]ÈT“
+‹‹‹ÜÜ˜ËÛX‹Ø]™XÜËÜÙYYœÙ\™\‹È‹[\Ü›Y]K\›
+Kˆ]Ž‹ŠNÂ˜\ÜÙ\
+ˆØ][ÙÝYTÛÝ\˜ÙKš[˜ÛY\Ê	Ùœ›ÛH‹‹Ý[‹ZË\˜XÙ\Ë]ZËZ\™[[™Y›ÛÝÝ\‰ÊKˆ•HRÈ[™\™[[™LÈ›ÛÝË]\]\Ù]\È›Ý[\ÜYžHHØ][ÙÝYH‹ŠNÂ˜\ÜÙ\
+ˆØ][ÙÝYTÛÝ\˜ÙKš[˜ÛY\Ê‹‹‹Š™\šYšYY[’Ñ›ÛÝÝ\Ù\šY\È\ÈÙ\šY\Ö×JHŠKˆ•HRÈ[™\™[[™LÈ›ÛÝË]\Ù\šY\È\™H›ÝY\™ÙY[ÈHØ][ÙÝYH‹ŠNÂ˜\ÜÙ\
+ˆØ][ÙÝYTÛÝ\˜ÙKš[˜ÛY\Ê‹‹‹Š™\šYšYY[’Ñ›ÛÝÝ\Y][ÛœÈ\ÈY][Û–×JK™š[\ˆŠKˆ•HRÈ[™\™[[™LÈ›ÛÝË]\Y][ÛœÈ\™H›ÝY\™ÙY[ÈHØ][ÙÝYH‹ŠNÂ˜\ÜÙ\
+ˆ[žSÜ[ÛœÔÛÝ\˜ÙKš[˜ÛY\Ê‹‹‹™\šYšYY[’Ñ›ÛÝÝ\Ù\šY\ÓÝ™\œšY\ÈŠKˆ•HRÈ[™\™[[™LÈ›ÛÝË]\Ù\šY\ÈÛÜœ™XÝ[ÛœÈ\™H›ÝY\™ÙY‹ŠNÂ˜\ÜÙ\
+ˆØÛÛœÝÑQQÕ‘T”ÒSÓˆH˜]™XÜËV×ˆ—JÈŽËË\Ý
+ÙYYÛÝ\˜ÙJKˆ•H\œÚ\Ý[Ø][ÙÝYHÙYY™\œÚ[Ûˆ\È™Z[™HLÈ›ÛÝË]\‹ŠNÂ‚˜ÛÛœÛÛK›ÙÊˆ™\šYšYY	Ý™\šYšYY[’Ñ›ÛÝÝ\Ù\šY\Ë›[™ÝH™]ÈLÈÙ\šY\Ë	Ý™\šYšYY[’Ñ›ÛÝÝ\Y][ÛœË›[™ÝHY][ÛœË	ÓØš™XÝšÙ^\Ê™\šYšYY[’Ñ›ÛÝÝ\Ù\šY\ÓÝ™\œšY\ÊK›[™ÝH^\Ý[™Ë\Ù\šY\ÈÛÜœ™XÝ[ÛœÈ[™	Ý™\šYšYY[’Ñ›ÛÝÝ\™\ÙX\˜Ú]Y]YK›[™ÝH[Ø[™Y]\Ë˜ŠNÂ

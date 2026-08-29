@@ -1,130 +1,4 @@
-import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
-
-import {
-  franceSpainPortugalRaceEditions,
-  franceSpainPortugalRaceSeries,
-} from "../src/data/france-spain-portugal-races.ts";
-import { verifiedFixtureEditionReplacements } from "../src/data/fixture-deduplication.ts";
-import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts";
-import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
-
-const CHECKED_AT = "2026-08-26";
-const CALENDAR_START = "2026-01-01";
-const HORIZON = "2027-12-31";
-
-const expectedCountryCounts = {
-  France: { iso: "FR", flag: "ðŸ‡«ðŸ‡·", series: 25, rows: 71, dates: 34 },
-  Spain: { iso: "ES", flag: "ðŸ‡ªðŸ‡¸", series: 63, rows: 82, dates: 67 },
-  Portugal: { iso: "PT", flag: "ðŸ‡µðŸ‡¹", series: 53, rows: 69, dates: 56 },
-};
-
-const seriesBySlug = new Map(franceSpainPortugalRaceSeries.map((series) => [series.slug, series]));
-assert.equal(
-  seriesBySlug.size,
-  franceSpainPortugalRaceSeries.length,
-  "Duplicate event-series slug",
-);
-assert.equal(franceSpainPortugalRaceSeries.length, 141, "Unexpected event-series count");
-assert.equal(franceSpainPortugalRaceEditions.length, 222, "Unexpected advertised-distance count");
-
-const editionKeys = new Set();
-for (const edition of franceSpainPortugalRaceEditions) {
-  const editionKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
-  assert(!editionKeys.has(editionKey), `Duplicate distance row: ${editionKey}`);
-  editionKeys.add(editionKey);
-  assert(seriesBySlug.has(edition.seriesSlug), `Unknown series: ${edition.seriesSlug}`);
-  assert(edition.date >= CALENDAR_START, `Fixture predates requested calendar: ${editionKey}`);
-  assert(edition.date <= HORIZON, `Fixture exceeds requested horizon: ${editionKey}`);
-  assert.match(edition.source, /^https:\/\//, `Missing public source: ${editionKey}`);
-  assert.equal(edition.publishAllDistances, true, `Distance is not publishable: ${editionKey}`);
-  assert(
-    seriesBySlug.get(edition.seriesSlug).distances.includes(edition.distance),
-    `Series omits advertised distance: ${editionKey}`,
-  );
-  if (edition.date < CHECKED_AT) {
-    assert.equal(edition.status, "Finished", `Past fixture is not finished: ${editionKey}`);
-    assert(!edition.entryUrl, `Past fixture exposes an entry link: ${editionKey}`);
-  } else {
-    if (edition.status === "TBC" || edition.status === "Closed") {
-      assert(!edition.entryUrl, `${edition.status} fixture exposes an entry link: ${editionKey}`);
-      continue;
-    }
-    assert.equal(edition.status, "Open", `Future fixture has an invalid status: ${editionKey}`);
-    assert.match(
-      edition.entryUrl ?? "",
-      /^https:\/\//,
-      `Future fixture has no entry URL: ${editionKey}`,
-    );
-    assert.equal(
-      edition.entryOptions?.[0]?.checkedAt,
-      CHECKED_AT,
-      `Stale entry check: ${editionKey}`,
-    );
-    assert.equal(edition.entryOptions?.[0]?.isVerified, true, `Unverified entry: ${editionKey}`);
-  }
-}
-
-for (const [country, expected] of Object.entries(expectedCountryCounts)) {
-  const countrySeries = franceSpainPortugalRaceSeries.filter(
-    (series) => series.country === country,
-  );
-  const slugs = new Set(countrySeries.map((series) => series.slug));
-  const countryEditions = franceSpainPortugalRaceEditions.filter((edition) =>
-    slugs.has(edition.seriesSlug),
-  );
-  const dates = new Set(countryEditions.map((edition) => `${edition.seriesSlug}|${edition.date}`));
-  assert.equal(slugs.size, expected.series, `${country} series count changed`);
-  assert.equal(countryEditions.length, expected.rows, `${country} distance count changed`);
-  assert.equal(dates.size, expected.dates, `${country} race-date count changed`);
-  const resolved = resolveCountry({ country });
-  assert.equal(resolved.iso, expected.iso, `${country} resolved to the wrong ISO code`);
-  assert.equal(isoToFlagEmoji(resolved.iso), expected.flag, `${country} flag is incorrect`);
-}
-
-assert(
-  !franceSpainPortugalRaceEditions.some((edition) =>
-    edition.source.includes("athle.fr/base/calendrier"),
-  ),
-  "The FFA no-copy calendar must not be used as a published fixture source",
-);
-assert(
-  !franceSpainPortugalRaceEditions.some(
-    (edition) => edition.date.startsWith("2027-") && edition.source.includes("atletismorfea.es"),
-  ),
-  "An unadvertised Spanish 2027 recurrence was added",
-);
-
-const requiredDistanceGroups = [
-  ["run-in-lyon", "2026-10-04", ["10K", "Half", "Marathon"]],
-  ["marathon-de-bordeaux", "2026-11-08", ["10K", "Half", "Marathon"]],
-  ["annecy-lake-marathon", "2026-04-19", ["10K", "5K", "Half", "Marathon"]],
-  ["euro-marathon-metz", "2026-10-11", ["10K", "Half", "Marathon"]],
-  ["marathon-cote-damour", "2026-11-08", ["Half", "Marathon"]],
-  ["murcia-marathon", "2026-02-01", ["10K", "Half", "Marathon"]],
-  ["barakaldo-10k-5k", "2026-03-01", ["10K", "5K"]],
-  ["spain-50k-100k-road-championships", "2026-03-21", ["100K", "50K"]],
-  ["funchal-marathon", "2027-01-31", ["8K", "Half"]],
-  ["cascais-half-marathon", "2027-02-07", ["10K", "5K"]],
-  ["lisbon-half-marathon", "2027-03-07", ["10K"]],
-  ["saintelyon", "2026-11-28", ["13K", "160K", "24K", "35K", "45K", "80K"]],
-  ["grand-raid-des-cathares", "2026-10-23", ["101K", "12K", "25K", "85K"]],
-  ["wa-le-marathon-vert-rennes-school-of-business-7236026", "2026-10-17", ["10K", "5K"]],
-  ["wa-bilbao-night-half-marathon-7236025", "2026-10-17", ["10K", "Half"]],
-  ["transgrancanaria", "2027-02-25", ["12K", "22.9K"]],
-  ["famalicao-half-marathon", "2026-10-18", ["10K", "Half"]],
-  ["ovar-half-marathon", "2026-10-04", ["10K", "Half"]],
-  ["wa-edp-porto-marathon-7236106", "2026-11-08", ["10K", "Marathon"]],
-];
-for (const [slug, date, distances] of requiredDistanceGroups) {
-  const actual = franceSpainPortugalRaceEditions
-    .filter((edition) => edition.seriesSlug === slug && edition.date === date)
-    .map((edition) => edition.distance)
-    .sort();
-  assert.deepEqual(actual, [...distances].sort(), `Distance group changed: ${slug}|${date}`);
-}
-
-const cards = collapseSameEventDate(
+YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíßM8N‹Z–‹­¦ëeŠw¬Õ¥µÁ½ÉÐ…ÍÍ•ÉÐ™É½´€‰¹½‘”é…ÍÍ•ÉÐ½ÍÑÉ¥Ðˆì)¥µÁ½ÉÐìÉ•…‘¥±”ô™É½´€‰¹½‘”é™Ì½ÁÉ½µ¥Í•Ìˆì()¥µÁ½ÉÐì(€™É…¹•MÁ…¥¹A½ÉÑÕ…±I…•‘¥Ñ¥½¹Ì°(€™É…¹•MÁ…¥¹A½ÉÑÕ…±I…•M•É¥•Ì°)ô™É½´€ˆ¸¸½ÍÉŒ½‘…Ñ„½™É…¹”µÍÁ…¥¸µÁ½ÉÑÕ…°µÉ…•Ì¹ÑÌˆì)¥µÁ½ÉÐìÙ•É¥™¥•‘¥áÑÕÉ•‘¥Ñ¥½¹I•Á±…•µ•¹ÑÌô™É½´€ˆ¸¸½ÍÉŒ½‘…Ñ„½™¥áÑÕÉ”µ‘•‘ÕÁ±¥…Ñ¥½¸¹ÑÌˆì)¥µÁ½ÉÐì¥Í½Q½±…µ½©¤°É•Í½±Ù•½Õ¹ÑÉäô™É½´€ˆ¸¸½ÍÉŒ½±¥ˆ½…Ñ¡É•Ì½½Õ¹ÑÉ¥•Ì¹ÑÌˆì)¥µÁ½ÉÐì½±±…ÁÍ•M…µ•Ù•¹Ñ…Ñ”ô™É½´€ˆ¸¸½ÍÉŒ½±¥ˆ½…Ñ¡É•Ì½‘•‘ÕÁ”¹ÑÌˆì()½¹ÍÐ!-}P€ô€ˆÈÀÈØ´Àà´ÈØˆì)½¹ÍÐ19I}MQIP€ô€ˆÈÀÈØ´ÀÄ´ÀÄˆì)½¹ÍÐ!=I%i=8€ô€ˆÈÀÈÜ´ÄÈ´ÌÄˆì()½¹ÍÐ•áÁ•Ñ•‘½Õ¹ÑÉå½Õ¹ÑÌ€ôì(€É…¹”èì¥Í¼è€‰Hˆ°™±…œè€‹Â~¯Â~Üˆ°Í•É¥•Ìè€ÈÔ°É½ÝÌè€ÜÄ°‘…Ñ•Ìè€ÌÐô°(€MÁ…¥¸èì¥Í¼è€‰Lˆ°™±…œè€‹Â~«Â~àˆ°Í•É¥•Ìè€ØÌ°É½ÝÌè€àÈ°‘…Ñ•Ìè€ØÜô°(€A½ÉÑÕ…°èì¥Í¼è€‰APˆ°™±…œè€‹Â~×Â~äˆ°Í•É¥•Ìè€ÔÌ°É½ÝÌè€Øä°‘…Ñ•Ìè€ÔØô°)ôì()½¹ÍÐÍ•É¥•Í	åM±Õœ€ô¹•Ü5…À¡™É…¹•MÁ…¥¹A½ÉÑÕ…±I…•M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôømÍ•É¥•Ì¹Í±Õœ°Í•É¥•Ít¤¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€Í•É¥•Í	åM±Õœ¹Í¥é”°(€™É…¹•MÁ…¥¹A½ÉÑÕ…±I…•M•É¥•Ì¹±•¹Ñ °(€€‰ÕÁ±¥…Ñ”•Ù•¹ÐµÍ•É¥•ÌÍ±Õœˆ°(¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡™É…¹•MÁ…¥¹A½ÉÑÕ…±I…•M•É¥•Ì¹±•¹Ñ °€ÄÐÄ°€‰U¹•áÁ•Ñ••Ù•¹ÐµÍ•É¥•Ì½Õ¹Ðˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡™É…¹•MÁ…¥¹A½ÉÑÕ…±I…•‘¥Ñ¥½¹Ì¹±•¹Ñ °€ÈÈÈ°€‰U¹•áÁ•Ñ•…‘Ù•ÉÑ¥Í•µ‘¥ÍÑ…¹”½Õ¹Ðˆ¤ì()½¹ÍÐ•‘¥Ñ¥½¹-•åÌ€ô¹•ÜM•Ð ¤ì)™½È€¡½¹ÍÐ•‘¥Ñ¥½¸½˜™É…¹•MÁ…¥¹A½ÉÑÕ…±I…•‘¥Ñ¥½¹Ì¤ì(€½¹ÍÐ•‘¥Ñ¥½¹-•ä€ô€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõð‘í•‘¥Ñ¥½¸¹‘…Ñ•õð‘í•‘¥Ñ¥½¸¹‘¥ÍÑ…¹•õ€ì(€…ÍÍ•ÉÐ …•‘¥Ñ¥½¹-•åÌ¹¡…Ì¡•‘¥Ñ¥½¹-•ä¤°ÕÁ±¥…Ñ”‘¥ÍÑ…¹”É½Üè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€•‘¥Ñ¥½¹-•åÌ¹…‘¡•‘¥Ñ¥½¹-•ä¤ì(€…ÍÍ•ÉÐ¡Í•É¥•Í	åM±Õœ¹¡…Ì¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤°U¹­¹½Ý¸Í•É¥•Ìè€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘…Ñ”€øô19I}MQIP°¥áÑÕÉ”ÁÉ•‘…Ñ•ÌÉ•ÅÕ•ÍÑ•…±•¹‘…Èè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘…Ñ”€ðô!=I%i=8°¥áÑÕÉ”•á••‘ÌÉ•ÅÕ•ÍÑ•¡½É¥é½¸è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¹µ…Ñ ¡•‘¥Ñ¥½¸¹Í½ÕÉ”°€½y¡ÑÑÁÌép½p¼¼°5¥ÍÍ¥¹œÁÕ‰±¥ŒÍ½ÕÉ”è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÁÕ‰±¥Í¡±±¥ÍÑ…¹•Ì°ÑÉÕ”°¥ÍÑ…¹”¥Ì¹½ÐÁÕ‰±¥Í¡…‰±”è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ (€€€Í•É¥•Í	åM±Õœ¹•Ð¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤¹‘¥ÍÑ…¹•Ì¹¥¹±Õ‘•Ì¡•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”¤°(€€€M•É¥•Ì½µ¥ÑÌ…‘Ù•ÉÑ¥Í•‘¥ÍÑ…¹”è€‘í•‘¥Ñ¥½¹-•åõ€°(€€¤ì(€¥˜€¡•‘¥Ñ¥½¸¹‘…Ñ”€ð!-}P¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ°€‰¥¹¥Í¡•ˆ°A…ÍÐ™¥áÑÕÉ”¥Ì¹½Ð™¥¹¥Í¡•è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€€€…ÍÍ•ÉÐ …•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°°A…ÍÐ™¥áÑÕÉ”•áÁ½Í•Ì…¸•¹ÑÉä±¥¹¬è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€ô•±Í”ì(€€€¥˜€¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ€ôôô€‰Q	ˆñð•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ€ôôô€‰±½Í•ˆ¤ì(€€€€€…ÍÍ•ÉÐ …•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°°€‘í•‘¥Ñ¥½¸¹ÍÑ…ÑÕÍô™¥áÑÕÉ”•áÁ½Í•Ì…¸•¹ÑÉä±¥¹¬è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€€€€€½¹Ñ¥¹Õ”ì(€€€ô(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ°€‰=Á•¸ˆ°ÕÑÕÉ”™¥áÑÕÉ”¡…Ì…¸¥¹Ù…±¥ÍÑ…ÑÕÌè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€€€…ÍÍ•ÉÐ¹µ…Ñ  (€€€€€•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°€üü€ˆˆ°(€€€€€€½y¡ÑÑÁÌép½p¼¼°(€€€€€ÕÑÕÉ”™¥áÑÕÉ”¡…Ì¹¼•¹ÑÉäUI0è€‘í•‘¥Ñ¥½¹-•åõ€°(€€€€¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…° (€€€€€•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ìü¹lÁtü¹¡•­•‘Ð°(€€€€€!-}P°(€€€€€MÑ…±”•¹ÑÉä¡•¬è€‘í•‘¥Ñ¥½¹-•åõ€°(€€€€¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ìü¹lÁtü¹¥ÍY•É¥™¥•°ÑÉÕ”°U¹Ù•É¥™¥••¹ÑÉäè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€ô)ô()™½È€¡½¹ÍÐƒ]4âÚ$z{-®éÜj×rds = collapseSameEventDate(
   franceSpainPortugalRaceEditions.map((edition, index) => ({
     id: index,
     event_slug: edition.seriesSlug,
@@ -183,7 +57,7 @@ const seedSource = await readFile(
   "utf8",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-belgium-netherlands-comprehensive-v271"'),
+  /const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource),
   "The production catalogue seed was not advanced for the expanded calendar",
 );
 

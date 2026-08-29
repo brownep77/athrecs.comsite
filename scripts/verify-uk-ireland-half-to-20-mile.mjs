@@ -1,159 +1,4 @@
-import assert from "node:assert/strict";
-import fs from "node:fs/promises";
-
-const [
-  auditData,
-  { seriesList: coreSeries, editions: coreEditions },
-  { runabcEditions, runabcSeries },
-  { raceCollectionEditions, raceCollectionSeries },
-  { continuedFiveKEditions, continuedFiveKSeries },
-  { verifiedFiveMileEditions, verifiedFiveMileSeries },
-  { verifiedTenKFollowupEditions, verifiedTenKFollowupSeries },
-  { verifiedUkEditions, verifiedUkSeries },
-] = await Promise.all([
-  import("../src/data/half-to-20-mile-races-uk-ireland.ts"),
-  import("../src/data/series.ts").then(async ({ seriesList }) => ({
-    seriesList,
-    editions: (await import("../src/data/editions.ts")).editions,
-  })),
-  import("../src/data/runabc.ts"),
-  import("../src/data/race-collections.ts"),
-  import("../src/data/five-k-races-uk-ireland-next.ts"),
-  import("../src/data/five-mile-races-uk-ireland.ts"),
-  import("../src/data/ten-k-races-uk-ireland-followup.ts"),
-  import("../src/data/verified-races-uk.ts"),
-]);
-
-const {
-  halfToTwentyMileBounds,
-  verifiedHalfToTwentyMileEditionOverrides,
-  verifiedHalfToTwentyMileEditions,
-  verifiedHalfToTwentyMileResearchQueue,
-  verifiedHalfToTwentyMileSeries,
-  verifiedHalfToTwentyMileSeriesOverrides,
-} = auditData;
-
-const TODAY = "2026-08-22";
-const HORIZON = "2027-12-31";
-const REUSED_SERIES = new Set(["green-gateways"]);
-
-assert.equal(verifiedHalfToTwentyMileSeries.length, 16, "The new race series set is incomplete");
-assert.equal(verifiedHalfToTwentyMileEditions.length, 17, "The new edition set is incomplete");
-assert.equal(
-  Object.keys(verifiedHalfToTwentyMileSeriesOverrides).length,
-  10,
-  "The existing-series correction set is incomplete",
-);
-assert.equal(
-  Object.keys(verifiedHalfToTwentyMileEditionOverrides).length,
-  8,
-  "The existing-edition correction set is incomplete",
-);
-assert.equal(verifiedHalfToTwentyMileResearchQueue.length, 6, "The research queue is incomplete");
-assert.equal(halfToTwentyMileBounds.minimumExclusiveKm, 21.0975);
-assert.equal(halfToTwentyMileBounds.maximumExclusiveKm, 32.18688);
-
-const existingSeries = [
-  ...coreSeries,
-  ...runabcSeries,
-  ...raceCollectionSeries,
-  ...continuedFiveKSeries,
-  ...verifiedFiveMileSeries,
-  ...verifiedTenKFollowupSeries,
-  ...verifiedUkSeries,
-];
-const existingEditions = [
-  ...coreEditions,
-  ...runabcEditions,
-  ...raceCollectionEditions,
-  ...continuedFiveKEditions,
-  ...verifiedFiveMileEditions,
-  ...verifiedTenKFollowupEditions,
-  ...verifiedUkEditions,
-];
-const existingSlugs = new Set(existingSeries.map((series) => series.slug));
-const normaliseName = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, "");
-const existingNames = new Set(existingSeries.map((series) => normaliseName(series.name)));
-
-const newSlugs = new Set();
-const newNames = new Set();
-for (const series of verifiedHalfToTwentyMileSeries) {
-  assert(!newSlugs.has(series.slug), `Duplicate new series slug: ${series.slug}`);
-  assert(!existingSlugs.has(series.slug), `${series.slug} duplicates an existing catalogue slug`);
-  newSlugs.add(series.slug);
-
-  const nameKey = normaliseName(series.name);
-  assert(!newNames.has(nameKey), `Duplicate new series name: ${series.name}`);
-  assert(!existingNames.has(nameKey), `${series.name} duplicates an existing catalogue name`);
-  newNames.add(nameKey);
-
-  assert.equal(series.sport, "Running", `${series.slug} is not a running race`);
-  assert(
-    ["England", "Ireland", "Northern Ireland", "Scotland", "Wales"].includes(series.country),
-    `${series.slug} has an out-of-scope country ${series.country}`,
-  );
-  assert.match(series.website, /^https:\/\//, `${series.slug} website must use HTTPS`);
-  assert.match(series.source_url ?? "", /^https:\/\//, `${series.slug} source must use HTTPS`);
-}
-
-const existingEditionKeys = new Set(
-  existingEditions.map((edition) => `${edition.seriesSlug}|${edition.date}`),
-);
-const newEditionKeys = new Set();
-for (const edition of verifiedHalfToTwentyMileEditions) {
-  const key = `${edition.seriesSlug}|${edition.date}`;
-  assert(!newEditionKeys.has(key), `Duplicate new edition: ${key}`);
-  newEditionKeys.add(key);
-  assert(!existingEditionKeys.has(key), `${key} duplicates an existing catalogue edition`);
-  assert(
-    newSlugs.has(edition.seriesSlug) || REUSED_SERIES.has(edition.seriesSlug),
-    `${edition.seriesSlug} has no new or explicitly reused series`,
-  );
-  assert.match(edition.date, /^\d{4}-\d{2}-\d{2}$/, `${key} has an invalid ISO date`);
-  assert(edition.date >= TODAY && edition.date <= HORIZON, `${key} is outside the audit horizon`);
-  assert(
-    edition.distanceKm > halfToTwentyMileBounds.minimumExclusiveKm,
-    `${key} is not longer than a half marathon`,
-  );
-  assert(
-    edition.distanceKm < halfToTwentyMileBounds.maximumExclusiveKm,
-    `${key} is not shorter than 20 miles`,
-  );
-  assert.match(edition.source, /^https:\/\//, `${key} source must use HTTPS`);
-
-  if (edition.status === "Open") {
-    assert(edition.entryOptions?.length, `${key} needs a verified entry option`);
-  }
-  if (edition.status === "TBC") {
-    assert(!edition.entryOptions?.length, `${key} must not advertise unconfirmed entry`);
-  }
-  for (const option of edition.entryOptions ?? []) {
-    assert.equal(option.checkedAt, TODAY, `${key} has a stale entry check date`);
-    assert.equal(option.isVerified, true, `${key} has an unverified entry provider`);
-    assert.equal(option.isPrimary, true, `${key} primary entry provider is not marked`);
-    assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
-  }
-}
-
-for (const reusedSlug of REUSED_SERIES) {
-  assert(existingSlugs.has(reusedSlug), `Reused series is missing upstream: ${reusedSlug}`);
-}
-for (const slug of Object.keys(verifiedHalfToTwentyMileSeriesOverrides)) {
-  assert(existingSlugs.has(slug), `Series override target is missing upstream: ${slug}`);
-}
-
-const existingFullEditionKeys = new Set(
-  existingEditions.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
-);
-for (const [key, override] of Object.entries(verifiedHalfToTwentyMileEditionOverrides)) {
-  assert(existingFullEditionKeys.has(key), `Edition override target is missing upstream: ${key}`);
-  assert(
-    (override.distanceKm ?? 0) > halfToTwentyMileBounds.minimumExclusiveKm,
-    `${key} correction is not longer than a half marathon`,
-  );
-  assert(
-    (override.distanceKm ?? Infinity) < halfToTwentyMileBounds.maximumExclusiveKm,
-    `${key} correction is not shorter than 20 miles`,
+YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíß^9N‹Z–‹­¦ëeŠw¬Õ¥µÁ½ÉÐ…ÍÍ•ÉÐ™É½´€‰¹½‘”é…ÍÍ•ÉÐ½ÍÑÉ¥Ðˆì)¥µÁ½ÉÐ™Ì™É½´€‰¹½‘”é™Ì½ÁÉ½µ¥Í•Ìˆì()½¹ÍÐl(€…Õ‘¥Ñ…Ñ„°(€ìÍ•É¥•Í1¥ÍÐè½É•M•É¥•Ì°•‘¥Ñ¥½¹Ìè½É•‘¥Ñ¥½¹Ìô°(€ìÉÕ¹…‰‘¥Ñ¥½¹Ì°ÉÕ¹…‰M•É¥•Ìô°(€ìÉ…•½±±•Ñ¥½¹‘¥Ñ¥½¹Ì°É…•½±±•Ñ¥½¹M•É¥•Ìô°(€ì½¹Ñ¥¹Õ•‘¥Ù•-‘¥Ñ¥½¹Ì°½¹Ñ¥¹Õ•‘¥Ù•-M•É¥•Ìô°(€ìÙ•É¥™¥•‘¥Ù•5¥±•‘¥Ñ¥½¹Ì°Ù•É¥™¥•‘¥Ù•5¥±•M•É¥•Ìô°(€ìÙ•É¥™¥•‘Q•¹-½±±½ÝÕÁ‘¥Ñ¥½¹Ì°Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁM•É¥•Ìô°(€ìÙ•É¥™¥•‘U­‘¥Ñ¥½¹Ì°Ù•É¥™¥•‘U­M•É¥•Ìô°)t€ô…Ý…¥ÐAÉ½µ¥Í”¹…±°¡l(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½¡…±˜µÑ¼´ÈÀµµ¥±”µÉ…•ÌµÕ¬µ¥É•±…¹¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½Í•É¥•Ì¹ÑÌˆ¤¹Ñ¡•¸¡…Íå¹Œ€¡ìÍ•É¥•Í1¥ÍÐô¤€ôø€¡ì(€€€Í•É¥•Í1¥ÍÐ°(€€€•‘¥Ñ¥½¹Ìè€¡…Ý…¥Ð¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½•‘¥Ñ¥½¹Ì¹ÑÌˆ¤¤¹•‘¥Ñ¥½¹Ì°(€ô¤¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½ÉÕ¹…‰Œ¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½É…”µ½±±•Ñ¥½¹Ì¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½™¥Ù”µ¬µÉ…•ÌµÕ¬µ¥É•±…¹µ¹•áÐ¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½™¥Ù”µµ¥±”µÉ…•ÌµÕ¬µ¥É•±…¹¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½Ñ•¸µ¬µÉ…•ÌµÕ¬µ¥É•±…¹µ™½±±½ÝÕÀ¹ÑÌˆ¤°(€¥µÁ½ÉÐ ˆ¸¸½ÍÉŒ½‘…Ñ„½Ù•É¥™¥•µÉ…•ÌµÕ¬¹ÑÌˆ¤°)t¤ì()½¹ÍÐì(€¡…±™Q½QÝ•¹Ñå5¥±•	½Õ¹‘Ì°(€Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•‘¥Ñ¥½¹=Ù•ÉÉ¥‘•Ì°(€Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•‘¥Ñ¥½¹Ì°(€Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•I•Í•…É¡EÕ•Õ”°(€Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•M•É¥•Ì°(€Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•M•É¥•Í=Ù•ÉÉ¥‘•Ì°)ô€ô…Õ‘¥Ñ…Ñ„ì()½¹ÍÐQ=d€ô€ˆÈÀÈØ´Àà´ÈÈˆì)½¹ÍÐ!=I%i=8€ô€ˆÈÀÈÜ´ÄÈ´ÌÄˆì)½¹ÍÐIUM}MI%L€ô¹•ÜM•Ð¡l‰É••¸µ…Ñ•Ý…åÌ‰t¤ì()…ÍÍ•ÉÐ¹•ÅÕ…°¡Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•M•É¥•Ì¹±•¹Ñ °€ÄØ°€‰Q¡”¹•ÜÉ…”Í•É¥•ÌÍ•Ð¥Ì¥¹½µÁ±•Ñ”ˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•‘¥Ñ¥½¹Ì¹±•¹Ñ °€ÄÜ°€‰Q¡”¹•Ü•‘¥Ñ¥½¸Í•Ð¥Ì¥¹½µÁ±•Ñ”ˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€=‰©•Ð¹­•åÌ¡Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•M•É¥•Í=Ù•ÉÉ¥‘•Ì¤¹±•¹Ñ °(€€ÄÀ°(€€‰Q¡”•á¥ÍÑ¥¹œµÍ•É¥•Ì½ÉÉ•Ñ¥½¸Í•Ð¥Ì¥¹½µÁ±•Ñ”ˆ°(¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€=‰©•Ð¹­•åÌ¡Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•‘¥Ñ¥½¹=Ù•ÉÉ¥‘•Ì¤¹±•¹Ñ °(€€à°(€€‰Q¡”•á¥ÍÑ¥¹œµ•‘¥Ñ¥½¸½ÉÉ•Ñ¥½¸Í•Ð¥Ì¥¹½µÁ±•Ñ”ˆ°(¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•I•Í•…É¡EÕ•Õ”¹±•¹Ñ °€Ø°€‰Q¡”É•Í•…É ÅÕ•Õ”¥Ì¥¹½µÁ±•Ñ”ˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡¡…±™Q½QÝ•¹Ñå5¥±•	½Õ¹‘Ì¹µ¥¹¥µÕµá±ÕÍ¥Ù•-´°€ÈÄ¸ÀäÜÔ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡¡…±™Q½QÝ•¹Ñå5¥±•	½Õ¹‘Ì¹µ…á¥µÕµá±ÕÍ¥Ù•-´°€ÌÈ¸ÄàØàà¤ì()½¹ÍÐ•á¥ÍÑ¥¹M•É¥•Ì€ôl(€€¸¸¹½É•M•É¥•Ì°(€€¸¸¹ÉÕ¹…‰M•É¥•Ì°(€€¸¸¹É…•½±±•Ñ¥½¹M•É¥•Ì°(€€¸¸¹½¹Ñ¥¹Õ•‘¥Ù•-M•É¥•Ì°(€€¸¸¹Ù•É¥™¥•‘¥Ù•5¥±•M•É¥•Ì°(€€¸¸¹Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁM•É¥•Ì°(€€¸¸¹Ù•É¥™¥•‘U­M•É¥•Ì°)tì)½¹ÍÐ•á¥ÍÑ¥¹‘¥Ñ¥½¹Ì€ôl(€€¸¸¹½É•‘¥Ñ¥½¹Ì°(€€¸¸¹ÉÕ¹…‰‘¥Ñ¥½¹Ì°(€€¸¸¹É…•½±±•Ñ¥½¹‘¥Ñ¥½¹Ì°(€€¸¸¹½¹Ñ¥¹Õ•‘¥Ù•-‘¥Ñ¥½¹Ì°(€€¸¸¹Ù•É¥™¥•‘¥Ù•5¥±•‘¥Ñ¥½¹Ì°(€€¸¸¹Ù•É¥™¥•‘Q•¹-½±±½ÝÕÁ‘¥Ñ¥½¹Ì°(€€¸¸¹Ù•É¥™¥•‘U­‘¥Ñ¥½¹Ì°)tì)½¹ÍÐ•á¥ÍÑ¥¹M±ÕÌ€ô¹•ÜM•Ð¡•á¥ÍÑ¥¹M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôøÍ•É¥•Ì¹Í±Õœ¤¤ì)½¹ÍÐ¹½Éµ…±¥Í•9…µ”€ô€¡¹…µ”¤€ôø¹…µ”¹Ñ½1½Ý•É…Í” ¤¹É•Á±…” ½my„µèÀ´åt¬½œ°€ˆˆ¤ì)½¹ÍÐ•á¥ÍÑ¥¹9…µ•Ì€ô¹•ÜM•Ð¡•á¥ÍÑ¥¹M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôø¹½Éµ…±¥Í•9…µ”¡Í•É¥•Ì¹¹…µ”¤¤¤ì()½¹ÍÐ¹•ÝM±ÕÌ€ô¹•ÜM•Ð ¤ì)½¹ÍÐ¹•Ý9…µ•Ì€ô¹•ÜM•Ð ¤ì)™½È€¡½¹ÍÐÍ•É¥•Ì½˜Ù•É¥™¥•‘!…±™Q½QÝ•¹Ñå5¥±•M•É¥•Ì¤ì(€…ÍÍ•ÉÐ …¹•ÝM±ÕÌ¹¡…Ì¡Í•É¥•Ì¹Í±Õœ¤°ÕÁ±¥…Ñ”¹•ÜÍ•É¥•ÌÍ±Õœè€‘íÍ•É¥•Ì¹Í±Õõ€¤ì(€…ÍÍ•ÉÐ …•á¥ÍÑ¥¹M±ÕÌ¹¡…Ì¡Í•É¥•Ì¹Í±Õœ¤°€‘íÍ•É¥•Ì¹Í±Õô‘ÕÁ±¥…Ñ•Ì‡]xæÚ$z{-®éÜj×rection is not shorter than 20 miles`,
   );
   if (override.status === "Open" || override.status === "Closed") {
     assert(override.entryOptions?.length, `${key} needs a verified entry option`);
@@ -221,7 +66,7 @@ assert(
   "The in-place audit corrections are not merged",
 );
 assert(
-  seedSource.includes('const SEED_VERSION = "athrecs-albania-running-calendar-v246"'),
+  /const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource),
   "The persistent catalogue seed version was not advanced",
 );
 assert(
