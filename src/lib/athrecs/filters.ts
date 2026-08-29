@@ -94,22 +94,54 @@ export type SubfilterDef = {
   options: readonly string[];
 };
 
+const RUNNING_SUBFILTERS: SubfilterDef[] = [
+  { key: "surface", label: "Surface", options: TERRAIN_FILTERS },
+  { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
+];
+
+const ATHLETICS_SUBFILTERS: SubfilterDef[] = [
+  {
+    key: "surface",
+    label: "Surface / venue",
+    options: ["All", "Track", "Road", "XC", "Trail", "Fell", "Mixed"],
+  },
+  { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
+];
+
+const PARKRUN_SUBFILTERS: SubfilterDef[] = [
+  { key: "surface", label: "Surface", options: ["All", "Road", "Trail", "Mixed"] },
+  { key: "distance", label: "Distance", options: ["All", "2K", "5K"] },
+];
+
+const CYCLING_SUBFILTERS: SubfilterDef[] = [
+  {
+    key: "surface",
+    label: "Cycling surface",
+    options: ["All", "Road", "Trail", "Track", "Mixed", "XC"],
+  },
+];
+
+const MULTISPORT_SUBFILTERS: SubfilterDef[] = [
+  { key: "surface", label: "Terrain", options: ["All", "Road", "Trail", "Mixed"] },
+  { key: "format", label: "Distance / format", options: FORMAT_FILTERS },
+];
+
+const TERRAIN_AND_DISTANCE_SUBFILTERS: SubfilterDef[] = [
+  { key: "surface", label: "Surface", options: TERRAIN_FILTERS },
+  { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
+];
+
+/**
+ * Returns only the controls that are meaningful for the selected discipline.
+ * "All" deliberately has no discipline-specific controls so hidden filters
+ * cannot leak from one discipline into another.
+ */
 export function subfiltersForSport(sport: string): SubfilterDef[] {
-  if (sport === "Running" || sport === "Parkrun" || sport === "Athletics") {
-    return [
-      { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
-      { key: "surface", label: "Surface", options: TERRAIN_FILTERS },
-    ];
-  }
-  if (sport === "Cycling") {
-    return [
-      {
-        key: "surface",
-        label: "Discipline / surface",
-        options: ["All", "Road", "Trail", "Track", "Mixed", "XC"],
-      },
-    ];
-  }
+  if (sport === "All") return [];
+  if (sport === "Running") return RUNNING_SUBFILTERS;
+  if (sport === "Athletics") return ATHLETICS_SUBFILTERS;
+  if (sport === "Parkrun") return PARKRUN_SUBFILTERS;
+  if (sport === "Cycling") return CYCLING_SUBFILTERS;
   if (sport === "Swimming") {
     return [{ key: "distance", label: "Distance", options: SWIM_DISTANCE_FILTERS }];
   }
@@ -119,25 +151,21 @@ export function subfiltersForSport(sport: string): SubfilterDef[] {
     sport === "Aquathlon" ||
     sport === "Aquabike"
   ) {
-    return [
-      { key: "format", label: "Format", options: FORMAT_FILTERS },
-      { key: "surface", label: "Terrain", options: ["All", "Road", "Trail", "Mixed"] },
-    ];
+    return MULTISPORT_SUBFILTERS;
   }
-  if (sport === "OCR" || sport === "Adventure Racing") {
-    return [{ key: "surface", label: "Terrain", options: TERRAIN_FILTERS }];
-  }
-  if (sport === "Walking") {
-    return [
-      { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
-      { key: "surface", label: "Surface", options: TERRAIN_FILTERS },
-    ];
+  if (sport === "OCR" || sport === "Adventure Racing" || sport === "Walking") {
+    return TERRAIN_AND_DISTANCE_SUBFILTERS;
   }
   if (sport === "Rowing" || sport === "Functional Fitness") return [];
-  return [
-    { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
-    { key: "surface", label: "Surface", options: TERRAIN_FILTERS },
-  ];
+  return [];
+}
+
+export function supportsRaceGroupFilter(sport: string): boolean {
+  return sport === "Running";
+}
+
+export function subfilterKeysForSport(sport: string): Set<SubfilterKey> {
+  return new Set(subfiltersForSport(sport).map((filter) => filter.key));
 }
 
 export function upcomingMonths(count = 17): { value: string; label: string }[] {
