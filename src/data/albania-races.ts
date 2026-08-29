@@ -8,6 +8,8 @@ const URLS = {
   globalLimits: "https://www.global-limits.com/peaks-of-the-balkan",
   peaksUltra: "https://farcorners.tours/albania",
   skampa: "https://marathonskampa.run/",
+  korca: "https://registration.maratonalbania.al/events",
+  korcaEntry: "https://registration.maratonalbania.al/events/15/apply",
   vjosa: "https://vjosarace.al/",
   vjosa100: "https://vjosarace.al/carshove/",
   vjosa67: "https://vjosarace.al/permet/",
@@ -165,6 +167,25 @@ export const albaniaRaceSeries: Series[] = [
     website: URLS.skampa,
     featured: false,
     source_url: URLS.skampa,
+  },
+  {
+    slug: "korca-half-marathon",
+    name: "Korça Half Marathon",
+    sport: "Running",
+    country: "Albania",
+    county: "Korçë County",
+    city: "Korçë",
+    area: "Korçë city centre",
+    surface: "Road",
+    distances: ["Half", "5K", "3K"],
+    summary:
+      "A new Korçë road event offering a half-marathon, 5 km fan run and free 3 km family run.",
+    description:
+      "Korça Half Marathon is organised by Maraton Albania. Its first edition offers a 21 km half-marathon, a 5 km fan run with free entry categories for pupils, students and veterans, and a free 3 km family run.",
+    organiser: "Maraton Albania",
+    website: URLS.korca,
+    featured: false,
+    source_url: URLS.korcaEntry,
   },
   {
     slug: "martyrs-day-trail-half-marathon-tirana",
@@ -518,6 +539,23 @@ export const albaniaRaceEditions: Edition[] = [
     notes:
       "The published event window is 11–19 September 2026. This is a 200 km, six-stage transnational race through Albania, Kosovo and Montenegro, beginning in Shkodër and finishing in Theth.",
   }),
+  ...[
+    { distance: "Half", distanceKm: 21 },
+    { distance: "5K", distanceKm: 5 },
+    { distance: "3K", distanceKm: 3 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "korca-half-marathon",
+      date: "2026-09-20",
+      ...race,
+      entryUrl: URLS.korcaEntry,
+      providerCode: "maraton-albania",
+      providerName: "Maraton Albania",
+      source: URLS.korcaEntry,
+      notes:
+        "The official registration platform lists the first Korça Half Marathon for Sunday 20 September 2026 with 21 km, 5 km and 3 km categories.",
+    }),
+  ),
   ...[
     { distance: "62K", distanceKm: 62 },
     { distance: "42K", distanceKm: 42 },

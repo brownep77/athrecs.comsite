@@ -19,6 +19,7 @@ const expected = [
   ["ultra-4-albania-mountain-race", "2026-09-05", ["100K"]],
   ["ultra-4-albania-mountain-race", "2026-09-06", ["25K", "50K"]],
   ["globallimits-peaks-of-the-balkans", "2026-09-11", ["200K"]],
+  ["korca-half-marathon", "2026-09-20", ["3K", "5K", "Half"]],
   ["the-peaks-ultra-albania", "2026-09-26", ["42K", "62K"]],
   ["skampa-half-marathon-elbasan", "2026-10-04", ["10K", "5K", "Half"]],
   ["shkodra-mini-marathon", "2026-10-04", ["10K", "2.5K", "5K"]],
@@ -52,8 +53,8 @@ function groupedDistances(editions) {
   );
 }
 
-assert.equal(albaniaRaceSeries.length, 15, "Unexpected Albania event-series count");
-assert.equal(albaniaRaceEditions.length, 45, "Unexpected Albania advertised-distance count");
+assert.equal(albaniaRaceSeries.length, 16, "Unexpected Albania event-series count");
+assert.equal(albaniaRaceEditions.length, 48, "Unexpected Albania advertised-distance count");
 
 const albaniaCountry = resolveCountry({ country: "Albania" });
 assert.equal(albaniaCountry.iso, "AL", "Albania must resolve to its ISO country code");
@@ -140,7 +141,7 @@ const full2026ShortDistanceCounts = {
 };
 assert.deepEqual(
   full2026ShortDistanceCounts,
-  { fiveK: 4, tenK: 6, halfOr21K: 7 },
+  { fiveK: 5, tenK: 6, halfOr21K: 8 },
   "Confirmed full-year 2026 short-distance totals changed",
 );
 
