@@ -1,41 +1,180 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíÛyN‹Z–‹­¦ëeŠw¬Õ¥µÁ½ÉÐ…ÍÍ•ÉÐ™É½´€‰¹½‘”é…ÍÍ•ÉÐ½ÍÑÉ¥Ðˆì)¥µÁ½ÉÐìÉ•…‘¥±”ô™É½´€‰¹½‘”é™Ì½ÁÉ½µ¥Í•Ìˆì()¥µÁ½ÉÐì(€Ý•ÍÑ•É¹	…±­…¹ÍI…•‘¥Ñ¥½¹Ì°(€Ý•ÍÑ•É¹	…±­…¹ÍI…•M•É¥•Ì°)ô™É½´€ˆ¸¸½ÍÉŒ½‘…Ñ„½Ý•ÍÑ•É¸µ‰…±­…¹ÌµÉ…•Ì¹ÑÌˆì)¥µÁ½ÉÐì¥Í½Q½±…µ½©¤°É•Í½±Ù•½Õ¹ÑÉäô™É½´€ˆ¸¸½ÍÉŒ½±¥ˆ½…Ñ¡É•Ì½½Õ¹ÑÉ¥•Ì¹ÑÌˆì)¥µÁ½ÉÐì½±±…ÁÍ•M…µ•Ù•¹Ñ…Ñ”ô™É½´€ˆ¸¸½ÍÉŒ½±¥ˆ½…Ñ¡É•Ì½‘•‘ÕÁ”¹ÑÌˆì()½¹ÍÐ!-}P€ô€ˆÈÀÈØ´Àà´ÈØˆì)½¹ÍÐ19I}MQIP€ô€ˆÈÀÈØ´ÀÄ´ÀÄˆì)½¹ÍÐ!=I%i=8€ô€ˆÈÀÈÜ´ÄÈ´ÌÄˆì()½¹ÍÐ•áÁ•Ñ•‘½Õ¹ÑÉå½Õ¹ÑÌ€ôì(€-½Í½Ù¼èì¥Í¼è€‰a,ˆ°™±…œè€‹Â~÷Â~Àˆ°Í•É¥•Ìè€Ü°É½ÝÌè€ÈÀ°‘…Ñ•Ìè€Üô°(€€‰9½ÉÑ 5…•‘½¹¥„ˆèì¥Í¼è€‰5,ˆ°™±…œè€‹Â~ËÂ~Àˆ°Í•É¥•Ìè€ÄØ°É½ÝÌè€ÌÜ°‘…Ñ•Ìè€Äàô°(€É½…Ñ¥„èì¥Í¼è€‰!Hˆ°™±…œè€‹Â~·Â~Üˆ°Í•É¥•Ìè€ÄÀ°É½ÝÌè€Èà°‘…Ñ•Ìè€ÄÈô°(€€‰	½Í¹¥„…¹!•Éé•½Ù¥¹„ˆèì¥Í¼è€‰	ˆ°™±…œè€‹Â~ŸÂ~˜ˆ°Í•É¥•Ìè€Ð°É½ÝÌè€ÄÔ°‘…Ñ•Ìè€Øô°(€M•É‰¥„èì¥Í¼è€‰ILˆ°™±…œè€‹Â~ßÂ~àˆ°Í•É¥•Ìè€ÄÈ°É½ÝÌè€ÌÄ°‘…Ñ•Ìè€ÄÌô°(€5½¹Ñ•¹•É¼èì¥Í¼è€‰5ˆ°™±…œè€‹Â~ËÂ~¨ˆ°Í•É¥•Ìè€Ô°É½ÝÌè€ÈÄ°‘…Ñ•Ìè€àô°(€M±½Ù•¹¥„èì¥Í¼è€‰M$ˆ°™±…œè€‹Â~ãÂ~¸ˆ°Í•É¥•Ìè€Ô°É½ÝÌè€Äà°‘…Ñ•Ìè€Üô°)ôì()½¹ÍÐ­•ä€ô€¡•‘¥Ñ¥½¸¤€ôø€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõð‘í•‘¥Ñ¥½¸¹‘…Ñ•õð‘í•‘¥Ñ¥½¸¹‘¥ÍÑ…¹•õ€ì)½¹ÍÐÍ•É¥•Í	åM±Õœ€ô¹•Ü5…À¡Ý•ÍÑ•É¹	…±­…¹ÍI…•M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôømÍ•É¥•Ì¹Í±Õœ°Í•É¥•Ít¤¤ì()…ÍÍ•ÉÐ¹•ÅÕ…°¡Ý•ÍÑ•É¹	…±­…¹ÍI…•M•É¥•Ì¹±•¹Ñ °€Ôä°€‰U¹•áÁ•Ñ•É•¥½¹…°•Ù•¹ÐµÍ•É¥•Ì½Õ¹Ðˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡Ý•ÍÑ•É¹	…±­…¹ÍI…•‘¥Ñ¥½¹Ì¹±•¹Ñ °€ÄÜÀ°€‰U¹•áÁ•Ñ•…‘Ù•ÉÑ¥Í•µ‘¥ÍÑ…¹”½Õ¹Ðˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•É¥•Í	åM±Õœ¹Í¥é”°Ý•ÍÑ•É¹	…±­…¹ÍI…•M•É¥•Ì¹±•¹Ñ °€‰ÕÁ±¥…Ñ”É•¥½¹…°Í•É¥•ÌÍ±Õœˆ¤ì()½¹ÍÐ•‘¥Ñ¥½¹-•åÌ€ô¹•ÜM•Ð ¤ì)™½È€¡½¹ÍÐ•‘¥Ñ¥½¸½˜Ý•ÍÑ•É¹	…±­…¹ÍI…•‘¥Ñ¥½¹Ì¤ì(€½¹ÍÐ•‘¥Ñ¥½¹-•ä€ô­•ä¡•‘¥Ñ¥½¸¤ì(€…ÍÍ•ÉÐ …•‘¥Ñ¥½¹-•åÌ¹¡…Ì¡•‘¥Ñ¥½¹-•ä¤°ÕÁ±¥…Ñ”É•¥½¹…°‘¥ÍÑ…¹”É½Üè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€•‘¥Ñ¥½¹-•åÌ¹…‘¡•‘¥Ñ¥½¹-•ä¤ì(€…ÍÍ•ÉÐ¡Í•É¥•Í	åM±Õœ¹¡…Ì¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤°U¹­¹½Ý¸É•¥½¹…°Í•É¥•Ìè€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘…Ñ”€øô19I}MQIP°¥áÑÕÉ”ÁÉ•‘…Ñ•ÌÉ•ÅÕ•ÍÑ•…±•¹‘…Èè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘…Ñ”€ðô!=I%i=8°¥áÑÕÉ”•á••‘ÌÉ•ÅÕ•ÍÑ•¡½É¥é½¸è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¹µ…Ñ ¡•‘¥Ñ¥½¸¹Í½ÕÉ”°€½y¡ÑÑÁÌép½p¼¼°5¥ÍÍ¥¹œÁÕ‰±¥ŒÍ½ÕÉ”è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…° (€€€•‘¥Ñ¥½¸¹ÁÕ‰±¥Í¡±±¥ÍÑ…¹•Ì°(€€€ÑÉÕ”°(€€€M…µ”µ‘…ä‘¥ÍÑ…¹”¹½ÐÁÕ‰±¥Í¡…‰±”è€‘í•‘¥Ñ¥½¹-•åõ€°(€€¤ì(€…ÍÍ•ÉÐ (€€€Í•É¥•Í	åM±Õœ¹•Ð¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤¹‘¥ÍÑ…¹•Ì¹¥¹±Õ‘•Ì¡•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”¤°(€€€M•É¥•Ì½µ¥ÑÌ…‘Ù•ÉÑ¥Í•‘¥ÍÑ…¹”è€‘í•‘¥Ñ¥½¹-•åõ€°(€€¤ì(€¥˜€¡•‘¥Ñ¥½¸¹‘…Ñ”€ð!-}P¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ°€‰¥¹¥Í¡•ˆ°A…ÍÐ™¥áÑÕÉ”¥Ì¹½Ð™¥¹¥Í¡•è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€€€…ÍÍ•ÉÐ …•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°°A…ÍÐ™¥áÑÕÉ”•áÁ½Í•Ì…¸•¹ÑÉä±¥¹¬è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€ô•±Í”ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ°€‰=Á•¸ˆ°½¹™¥Éµ•™ÕÑÕÉ”™¥áÑÕÉ”¥Ì¹½Ð½Á•¸è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€€€…ÍÍ•ÉÐ¹µ…Ñ  (€€€€€•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°€üü€ˆˆ°(€€€€€€½y¡ÑÑÁÌép½p¼¼°(€€€€€ÕÑÕÉ”™¥áÑÕÉ”¡…Ì¹¼•¹ÑÉäUI0è€‘í•‘¥Ñ¥½¹-•åõ€°(€€€€¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…° (€€€€€•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ìü¹lÁtü¹¡•­•‘Ð°(€€€€€!-}P°(€€€€€MÑ…±”•¹ÑÉä¡•¬è€‘í•‘¥Ñ¥½¹-•åõ€°(€€€€¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ§y¶‰žËkºwµçZXØK[Z[[›š][K\[ˆ‹ŒŒ‹LLKL‹È“X\˜]Ûˆ‹’[ˆ‹ŒLÈ‹RÈ—WKˆÈ›X›˜[˜K[X\˜]Ûˆ‹ŒŒ‹LLLN‹È’[ˆ—WKˆÈ™]\›ÜX[‹\[›š[™ËXÚ[\[ÛœÚ\ËX™[Ü˜YKLŒÈ‹ŒŒËLLMÈ‹È’[ˆ‹ŒLÈ—WK—NÂ‚™›Üˆ
-ÛÛœÝÜÛYË]K\Ý[˜Ù\×HÙˆ™\]Z\™Y\Ý[˜ÙQÜ›Ý\ÊHÂˆÛÛœÝXÝX[HÙ\Ý\›˜[Ø[œÔ˜XÙQY][ÛœÂˆ™š[\Š
-Y][ÛŠHOˆY][Û‹œÙ\šY\ÔÛYÈOOHÛYÈ	‰ˆY][Û‹™]HOOH]JBˆ›X\
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
-Y][ÛŠHOˆY][Û‹™\Ý[˜ÙJBˆœÛÜ
+import {
+  westernBalkansRaceEditions,
+  westernBalkansRaceSeries,
+} from "../src/data/western-balkans-races.ts";
+import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts";
+import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
 
-NÂˆ\ÜÙ\™Y\\]X[
-XÝX[Ë‹‹™\Ý[˜Ù\×KœÛÜ
+const CHECKED_AT = "2026-08-26";
+const CALENDAR_START = "2026-01-01";
+const HORIZON = "2027-12-31";
 
-K\Ý[˜ÙHÜ›Ý\Ú[™ÙYˆ	ÜÛYß_	Ù]_X
-NÂŸB‚˜ÛÛœÝØ\™ÈHÛÛ\ÙTØ[YQ]™[]JˆÙ\Ý\›˜[Ø[œÔ˜XÙQY][ÛœË›X\
+const expectedCountryCounts = {
+  Kosovo: { iso: "XK", flag: "ðŸ‡½ðŸ‡°", series: 7, rows: 20, dates: 7 },
+  "North Macedonia": { iso: "MK", flag: "ðŸ‡²ðŸ‡°", series: 16, rows: 37, dates: 18 },
+  Croatia: { iso: "HR", flag: "ðŸ‡­ðŸ‡·", series: 10, rows: 28, dates: 12 },
+  "Bosnia and Herzegovina": { iso: "BA", flag: "ðŸ‡§ðŸ‡¦", series: 4, rows: 15, dates: 6 },
+  Serbia: { iso: "RS", flag: "ðŸ‡·ðŸ‡¸", series: 12, rows: 31, dates: 13 },
+  Montenegro: { iso: "ME", flag: "ðŸ‡²ðŸ‡ª", series: 5, rows: 21, dates: 8 },
+  Slovenia: { iso: "SI", flag: "ðŸ‡¸ðŸ‡®", series: 5, rows: 18, dates: 7 },
+};
 
-Y][Û‹[™^
-HOˆ
-ÂˆYˆ[™^ˆ]™[ÜÛYÎˆY][Û‹œÙ\šY\ÔÛYËˆ]™[Û˜[YNˆÙ\šY\ÐžTÛYË™Ù]
-Y][Û‹œÙ\šY\ÔÛYÊK›˜[YKˆ]™[Ù]NˆY][Û‹™]Kˆ\Ý[˜ÙWØÛÙNˆY][Û‹™\Ý[˜ÙKˆJJKŠNÂ˜\ÜÙ\™\]X[
-Ø\™Ë›[™ÝÌK”™YÚ[Û˜[Y][ÛœÈÈ›ÝÛÛ\ÙHÈÛ™HØ\™\ˆ˜XÙH]HŠNÂ‚˜ÛÛœÝ]\™LŒÈHÙ\Ý\›˜[Ø[œÔ˜XÙQY][ÛœË™š[\Š
-Y][ÛŠHOˆY][Û‹™]KœÝ\ÕÚ]
-ŒŒËHŠJNÂ˜\ÜÙ\™Y\\]X[
-ˆË‹‹›™]ÈÙ]
-]\™LŒË›X\
+const key = (edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+const seriesBySlug = new Map(westernBalkansRaceSeries.map((series) => [series.slug, series]));
 
-Y][ÛŠHOˆY][Û‹œÙ\šY\ÔÛYÊJWKœÛÜ
+assert.equal(westernBalkansRaceSeries.length, 59, "Unexpected regional event-series count");
+assert.equal(westernBalkansRaceEditions.length, 170, "Unexpected advertised-distance count");
+assert.equal(seriesBySlug.size, westernBalkansRaceSeries.length, "Duplicate regional series slug");
 
-KˆÂˆ™]\›ÜX[‹\[›š[™ËXÚ[\[ÛœÚ\ËX™[Ü˜YKLŒÈ‹ˆš[ÙXÛË\ÚÛÜ™K\[ˆ‹ˆ›[ÜÝ\‹\[‹]ÙYZÙ[™‹ˆœÜšKXÚ[›[ÞK[X\˜]Û‹\ÚÛÜ™H‹ˆ™YKZX\Ë[X\˜]Ûˆ‹ˆKˆ[ˆ[˜ÛÛ™š\›YYŒÈ™XÝ\œ™[˜ÙHØ\ÈYY‹ŠNÂ‚˜ÛÛœÝØ][ÙÝYTÛÝ\˜ÙHH]ØZ]™XYš[Jˆ™]ÈT“
-‹‹‹ÜÜ˜ËÙ]KØØ][ÙÝYKÈ‹[\Ü›Y]K\›
-Kˆ]Ž‹ŠNÂ˜ÛÛœÝ\XØ]TÛÝ\˜ÙHH]ØZ]™XYš[Jˆ™]ÈT“
-‹‹‹ÜÜ˜ËÙ]KÙš^\™KYY\XØ][Û‹È‹[\Ü›Y]K\›
-Kˆ]Ž‹ŠNÂ˜ÛÛœÝÙYYÛÝ\˜ÙHH]ØZ]™XYš[Jˆ™]ÈT“
-‹‹‹ÜÜ˜ËÛX‹Ø]™XÜËÜÙYYœÙ\™\‹È‹[\Ü›Y]K\›
-Kˆ]Ž‹ŠNÂ˜\ÜÙ\
-Ø][ÙÝYTÛÝ\˜ÙKš[˜ÛY\ÊÙ\Ý\›˜[Ø[œÔ˜XÙTÙ\šY\ÈŠK”™YÚ[Û˜[Ù\šY\È\™H›ÝX›\ÚYŠNÂ˜\ÜÙ\
-ˆØ][ÙÝYTÛÝ\˜ÙKš[˜ÛY\ÊÙ\Ý\›˜[Ø[œÔ˜XÙQY][ÛœÈŠKˆ”™YÚ[Û˜[Y][ÛœÈ\™H›ÝX›\ÚY‹ŠNÂ˜\ÜÙ\
-ˆ\XØ]TÛÝ\˜ÙKš[˜ÛY\Ê	ÈØK\š\Ú[˜K[X\˜]Û‹MÌÌŒÈŽˆœš\Ú[˜K[X\˜]Ûˆ‰ÊKˆ”š\Ú[˜HÛÜ›]]XÜÈ\XØ]H\È›Ý™]\™Y‹ŠNÂ˜\ÜÙ\
-ˆ\XØ]TÛÝ\˜ÙKš[˜ÛY\Ê	ÈØKLLËX™[Ü˜YK[šZÙK\[‹MÌÌLHŽˆ˜™[Ü˜YK[šZÙKLLÈ‰ÊKˆ™[Ü˜YHÛÜ›]]XÜÈ\XØ]H\È›Ý™]\™Y‹ŠNÂ˜\ÜÙ\
-ˆØÛÛœÝÑQQÕ‘T”ÒSÓˆH˜]™XÜËV×ˆ—JÈŽËË\Ý
-ÙYYÛÝ\˜ÙJKˆ•H\œÚ\Ý[Ø][ÙÝYHÙYYØ\È›ÝY˜[˜ÙY‹ŠNÂ‚œ›ØÙ\ÜËœÝÝ]Üš]Jˆ”ÓÓ‹œÝš[™ÚYžJˆÂˆÚXÚÙYØ]ˆÒPÒÑQÐUˆØ[[™\—ÜÝ\ˆÐSS‘T—ÔÕT•ˆÜš^›ÛŽˆÔ’V“Ó‹ˆÙ\šY\ÎˆÙ\Ý\›˜[Ø[œÔ˜XÙTÙ\šY\Ë›[™Ýˆ˜XÙWÙ]\ÎˆØ\™Ë›[™ÝˆY™\\ÙYÙ\Ý[˜ÙWÜ›ÝÜÎˆÙ\Ý\›˜[Ø[œÔ˜XÙQY][ÛœË›[™ÝˆÛÛ\]YÜ›ÝÜÎˆÙ\Ý\›˜[Ø[œÔ˜XÙQY][ÛœË™š[\Š
-Y][ÛŠHOˆY][Û‹œÝ]\ÈOOH‘š[š\ÚYŠBˆ›[™Ýˆ]\™WÜ›ÝÜÎˆÙ\Ý\›˜[Ø[œÔ˜XÙQY][ÛœË™š[\Š
-Y][ÛŠHOˆY][Û‹œÝ]\ÈOOH‘š[š\ÚYŠBˆ›[™ÝˆÛÝ[šY\Îˆ^XÝYÛÝ[žPÛÝ[Ëˆ[˜ÛÛ™š\›YYÌŒ×Ü™XÝ\œ™[˜Ù\Îˆˆ™]\™YÝÛÜ›Ø]]XÜ×Ù\XØ]\ÎˆËˆKˆ[ˆ‹ˆ
-H
-È—ˆ‹ŠNÂ
+const editionKeys = new Set();
+for (const edition of westernBalkansRaceEditions) {
+  const editionKey = key(edition);
+  assert(!editionKeys.has(editionKey), `Duplicate regional distance row: ${editionKey}`);
+  editionKeys.add(editionKey);
+  assert(seriesBySlug.has(edition.seriesSlug), `Unknown regional series: ${edition.seriesSlug}`);
+  assert(edition.date >= CALENDAR_START, `Fixture predates requested calendar: ${editionKey}`);
+  assert(edition.date <= HORIZON, `Fixture exceeds requested horizon: ${editionKey}`);
+  assert.match(edition.source, /^https:\/\//, `Missing public source: ${editionKey}`);
+  assert.equal(
+    edition.publishAllDistances,
+    true,
+    `Same-day distance not publishable: ${editionKey}`,
+  );
+  assert(
+    seriesBySlug.get(edition.seriesSlug).distances.includes(edition.distance),
+    `Series omits advertised distance: ${editionKey}`,
+  );
+  if (edition.date < CHECKED_AT) {
+    assert.equal(edition.status, "Finished", `Past fixture is not finished: ${editionKey}`);
+    assert(!edition.entryUrl, `Past fixture exposes an entry link: ${editionKey}`);
+  } else {
+    assert.equal(edition.status, "Open", `Confirmed future fixture is not open: ${editionKey}`);
+    assert.match(
+      edition.entryUrl ?? "",
+      /^https:\/\//,
+      `Future fixture has no entry URL: ${editionKey}`,
+    );
+    assert.equal(
+      edition.entryOptions?.[0]?.checkedAt,
+      CHECKED_AT,
+      `Stale entry check: ${editionKey}`,
+    );
+    assert.equal(edition.entryOptions?.[0]?.isVerified, true, `Unverified entry: ${editionKey}`);
+  }
+}
+
+for (const [country, expected] of Object.entries(expectedCountryCounts)) {
+  const countrySeries = westernBalkansRaceSeries.filter((series) => series.country === country);
+  const slugs = new Set(countrySeries.map((series) => series.slug));
+  const countryEditions = westernBalkansRaceEditions.filter((edition) =>
+    slugs.has(edition.seriesSlug),
+  );
+  const raceDates = new Set(
+    countryEditions.map((edition) => `${edition.seriesSlug}|${edition.date}`),
+  );
+  assert.equal(countrySeries.length, expected.series, `${country} series count changed`);
+  assert.equal(countryEditions.length, expected.rows, `${country} distance-row count changed`);
+  assert.equal(raceDates.size, expected.dates, `${country} race-date count changed`);
+  const resolved = resolveCountry({ country });
+  assert.equal(resolved.iso, expected.iso, `${country} resolved to the wrong ISO code`);
+  assert.equal(resolved.name, country, `${country} label changed`);
+  assert.equal(isoToFlagEmoji(resolved.iso), expected.flag, `${country} flag is incorrect`);
+}
+
+const requiredDistanceGroups = [
+  ["prishtina-marathon", "2026-09-20", ["Marathon", "Half", "10K", "5K"]],
+  ["skopje-marathon", "2026-10-04", ["Half", "5K"]],
+  ["wa-34th-zagreb-marathon-7237778", "2026-10-11", ["Half", "10K"]],
+  ["sarajevo-half-marathon", "2026-09-13", ["Half", "5K"]],
+  ["novi-sad-marathon", "2026-10-11", ["25K", "10K", "5K"]],
+  ["podgorica-millennium-run", "2026-11-08", ["Marathon", "Half", "10K", "5K"]],
+  ["ljubljana-marathon", "2026-10-18", ["Half"]],
+  ["european-running-championships-belgrade-2027", "2027-04-17", ["Half", "10K"]],
+];
+
+for (const [slug, date, distances] of requiredDistanceGroups) {
+  const actual = westernBalkansRaceEditions
+    .filter((edition) => edition.seriesSlug === slug && edition.date === date)
+    .map((edition) => edition.distance)
+    .sort();
+  assert.deepEqual(actual, [...distances].sort(), `Distance group changed: ${slug}|${date}`);
+}
+
+const cards = collapseSameEventDate(
+  westernBalkansRaceEditions.map((edition, index) => ({
+    id: index,
+    event_slug: edition.seriesSlug,
+    event_name: seriesBySlug.get(edition.seriesSlug).name,
+    event_date: edition.date,
+    distance_code: edition.distance,
+  })),
+);
+assert.equal(cards.length, 71, "Regional editions do not collapse to one card per race date");
+
+const future2027 = westernBalkansRaceEditions.filter((edition) => edition.date.startsWith("2027-"));
+assert.deepEqual(
+  [...new Set(future2027.map((edition) => edition.seriesSlug))].sort(),
+  [
+    "european-running-championships-belgrade-2027",
+    "halkeco-skopje-run",
+    "mostar-run-weekend",
+    "sri-chinmoy-marathon-skopje",
+    "three-hearts-marathon",
+  ],
+  "An unconfirmed 2027 recurrence was added",
+);
+
+const catalogueSource = await readFile(
+  new URL("../src/data/catalogue.ts", import.meta.url),
+  "utf8",
+);
+const duplicateSource = await readFile(
+  new URL("../src/data/fixture-deduplication.ts", import.meta.url),
+  "utf8",
+);
+const seedSource = await readFile(
+  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
+  "utf8",
+);
+assert(catalogueSource.includes("westernBalkansRaceSeries"), "Regional series are not published");
+assert(
+  catalogueSource.includes("westernBalkansRaceEditions"),
+  "Regional editions are not published",
+);
+assert(
+  duplicateSource.includes('"wa-prishtina-marathon-7242723": "prishtina-marathon"'),
+  "Prishtina World Athletics duplicate is not retired",
+);
+assert(
+  duplicateSource.includes('"wa-10k-belgrade-nike-run-7244711": "belgrade-nike-10k"'),
+  "Belgrade World Athletics duplicate is not retired",
+);
+assert(
+  /const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource),
+  "The persistent catalogue seed was not advanced",
+);
+
+process.stdout.write(
+  JSON.stringify(
+    {
+      checked_at: CHECKED_AT,
+      calendar_start: CALENDAR_START,
+      horizon: HORIZON,
+      series: westernBalkansRaceSeries.length,
+      race_dates: cards.length,
+      advertised_distance_rows: westernBalkansRaceEditions.length,
+      completed_rows: westernBalkansRaceEditions.filter((edition) => edition.status === "Finished")
+        .length,
+      future_rows: westernBalkansRaceEditions.filter((edition) => edition.status !== "Finished")
+        .length,
+      countries: expectedCountryCounts,
+      unconfirmed_2027_recurrences: 0,
+      retired_world_athletics_duplicates: 3,
+    },
+    null,
+    2,
+  ) + "\n",
+);

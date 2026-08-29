@@ -1,1 +1,166 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíÛM=N‹Z–‹­¦ëeŠw¬Õ¥µÁ½ÉÐ…ÍÍ•ÉÐ™É½´€‰¹½‘”é…ÍÍ•ÉÐ½ÍÑÉ¥Ðˆì)¥µÁ½ÉÐìÉ•…‘¥±”ô™É½´€‰¹½‘”é™Ì½ÁÉ½µ¥Í•Ìˆì()¥µÁ½ÉÐì(€¹•Ñ¡•É±…¹‘ÍÕ±±…±•¹‘…ÉÕ‘¥Ð°(€¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì°(€¹•Ñ¡•É±…¹‘ÍÕ±±I…•M•É¥•Ì°)ô™É½´€ˆ¸¸½ÍÉŒ½‘…Ñ„½¹•Ñ¡•É±…¹‘Ìµ™Õ±°µÉÕ¹¹¥¹œµ…±•¹‘…È¹ÑÌˆì)¥µÁ½ÉÐì(€=U9QIe}%1QIL°(€=U9QIe}I=UAL°(€¥Í½Q½±…µ½©¤°(€É•Í½±Ù•½Õ¹ÑÉä°)ô™É½´€ˆ¸¸½ÍÉŒ½±¥ˆ½…Ñ¡É•Ì½½Õ¹ÑÉ¥•Ì¹ÑÌˆì()½¹ÍÐ!-}P€ô€ˆÈÀÈØ´Àà´ÈÜˆì)½¹ÍÐ19I}MQIP€ô€ˆÈÀÈØ´ÀÄ´ÀÄˆì)½¹ÍÐ!=I%i=8€ô€ˆÈÀÈÜ´ÄÈ´ÌÄˆì()…ÍÍ•ÉÐ¹‘••ÁÅÕ…° (€¹•Ñ¡•É±…¹‘ÍÕ±±…±•¹‘…ÉÕ‘¥Ð°(€ì(€€€¡•­•‘Ðè!-}P°(€€€…±•¹‘…ÉMÑ…ÉÐè19I}MQIP°(€€€¡½É¥é½¸è!=I%i=8°(€€€Í½ÕÉ•¹ÑÉ¥•Ìè€ÄÄÐÜ°(€€€ÁÕ‰±¥Í¡…‰±•M•É¥•Ìè€ÄØÔ°(€€€ÁÕ‰±¥Í¡…‰±•I…•…Ñ•Ìè€ÄÜÄ°(€€€ÁÕ‰±¥Í¡…‰±•¥ÍÑ…¹•I½ÝÌè€ØÄä°(€€€Í½ÕÉ•UÉ°è€‰¡ÑÑÁÌè¼½ÝÝÜ¹¡…É‘±½Á•¸¹¹°½•Ù•¹•µ•¹Ñ•¸¼ˆ°(€ô°(€€‰Q¡”9•Ñ¡•É±…¹‘Ì…Õ‘¥Ðµ•Ñ…‘…Ñ„¡…¹•Ý¥Ñ¡½ÕÐÉ•Ù¥•Üˆ°(¤ì()½¹ÍÐÍ•É¥•Í	åM±Õœ€ô¹•Ü5…À¡¹•Ñ¡•É±…¹‘ÍÕ±±I…•M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôømÍ•É¥•Ì¹Í±Õœ°Í•É¥•Ít¤¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•É¥•Í	åM±Õœ¹Í¥é”°€ÄØÔ°€‰ÕÁ±¥…Ñ”½Èµ¥ÍÍ¥¹œ9•Ñ¡•É±…¹‘ÌÍ•É¥•Ìˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì¹±•¹Ñ °€ØÄä°€‰9•Ñ¡•É±…¹‘Ì‘¥ÍÑ…¹”µÉ½Ü½Õ¹Ð¡…¹•ˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€¹•ÜM•Ð¡¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì¹µ…À ¡•‘¥Ñ¥½¸¤€ôø€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõð‘í•‘¥Ñ¥½¸¹‘…Ñ•õ€¤¤(€€€€¹Í¥é”°(€€ÄÜÄ°(€€‰9•Ñ¡•É±…¹‘ÌÉ…”µ‘…Ñ”½Õ¹Ð¡…¹•ˆ°(¤ì()½¹ÍÐ•‘¥Ñ¥½¹-•åÌ€ô¹•ÜM•Ð ¤ì)™½È€¡½¹ÍÐ•‘¥Ñ¥½¸½˜¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì¤ì(€½¹ÍÐ­•ä€ô€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõð‘í•‘¥Ñ¥½¸¹‘…Ñ•õð‘í•‘¥Ñ¥½¸¹‘¥ÍÑ…¹•õ€ì(€…ÍÍ•ÉÐ …•‘¥Ñ¥½¹-•åÌ¹¡…Ì¡­•ä¤°ÕÁ±¥…Ñ”9•Ñ¡•É±…¹‘Ì‘¥ÍÑ…¹”É½Üè€‘í­•åõ€¤ì(€•‘¥Ñ¥½¹-•åÌ¹…‘¡­•ä¤ì(€…ÍÍ•ÉÐ¡Í•É¥•Í	åM±Õœ¹¡…Ì¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤°U¹­¹½Ý¸9•Ñ¡•É±…¹‘ÌÍ•É¥•Ìè€‘í­•åõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘…Ñ”€øô19I}MQIP€˜˜•‘¥Ñ¥½¸¹‘…Ñ”€ðô!=I%i=8°…Ñ”½ÕÑÍ¥‘”…Õ‘¥Ðè€‘í­•åõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘¥ÍÑ…¹•-´€ø€À€˜˜•‘¥Ñ¥½¸¹‘¥ÍÑ…¹•-´€ðô€ÄàÀ°%¹Ù…±¥‘¥ÍÑ…¹”Õ¹¥ÑÌè€‘í­•åõ€¤ì(€…ÍÍ•ÉÐ¹µ…Ñ ¡•‘¥Ñ¥½¸¹Í½ÕÉ”°€½y¡ÑÑÁÌép½p¼¼°5¥ÍÍ¥¹œ•Ù¥‘•¹”UI0è€‘í­•åõ€¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…° (€€€•‘¥Ñ¥½¸¹ÁÕ‰±¥Í¡±±¥ÍÑ…¹•Ì°(€€€ÑÉÕ”°(€€€¥ÍÑ…¹”¥Ì¹½Ð¥¹‘•Á•¹‘•¹Ñ±äÁÕ‰±¥Í¡•è€‘í­•åõ€°(€€¤ì(€…ÍÍ•ÉÐ (€€€Í•É¥•Í	åM±Õœ¹•Ð¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤¹‘¥ÍÑ…¹•Ì¹¥¹±Õ‘•Ì¡•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”¤°(€€€M•É¥•Ì½µ¥ÑÌ…‘Ù•ÉÑ¥Í•‘¥ÍÑ…¹”è€‘í­•åõ€°(€€¤ì(€¥˜€¡•‘¥Ñ¥½¸¹‘…Ñ”€ð!-}P¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ°€‰¥¹¥Í¡•ˆ°!¥ÍÑ½É¥…°™¥áÑÕÉ”¥Ì¹½Ð™¥¹¥Í¡•è€‘í­•åõ€¤ì(€€€…ÍÍ•ÉÐ …•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°°!¥ÍÑ½É¥…°™¥áÑÕÉ”•áÁ½Í•Ì…¸•¹ÑÉä±¥¹¬è€‘í­•åõ€¤ì(€ô•±Í”¥˜€¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ€ôôô€‰=Á•¸ˆ¤ì(€€€…ÍÍ•ÉÐ¹µ…Ñ ¡•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°€üü€ˆˆ°€½y¡ÑÑÁÌép½p¼¼°=Á•¸™¥áÑÕÉ”¡…Ì¹¼•¹ÑÉä±¥¹¬è€‘í­•åõ€¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ìü¹lÁtü¹¡•­•‘Ð°!-}P°MÑ…±”•¹ÑÉä¡•¬è€‘í­•åõ€¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ìü¹lÁtü¹¥ÍY•É¥™¥•°ÑÉÕ”°U¹Ù•É¥™¥••¹ÑÉäè€‘í­•åõ€¤ì(€ô•±Í”ì(€€€…ÍÍ•ÉÐ¡l‰±½Í•ˆ°€‰Q	‰t¹¥¹±Õ‘•Ì¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ¤°%¹Ù…±¥™ÕÑÕÉ”ÍÑ…ÑÕÌè€‘í­•åõ€¤ì(€€€…ÍÍ•ÉÐ …•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°°U¹…Ù…¥±…‰±”™¥áÑÕÉ”•áÁ½Í•Ì…¸•¹ÑÉä±¥¹¬è€‘í­•åõ€¤ì(€ô)ô()™½È€¡½¹ÍÐÍ•É¥•Ì½˜¹•Ñ¡•É±…¹‘ÍÕ±±I…•M•É¥•Ì¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•É¥•Ì¹½Õ¹ÑÉä°€‰9•ÓÛh‘éì¶»§q«^t‘íÍ•É¥•Ì¹Í±Õõ€¤ì(€…ÍÍ•ÉÐ¡Í•É¥•Ì¹¥Ñä€˜˜Í•É¥•Ì¹¥Ñä€„ôô€‰9•Ñ¡•É±…¹‘Ìˆ°U¹É•Í½±Ù•ÕÑ ¥Ñäè€‘íÍ•É¥•Ì¹Í±Õõ€¤ì(€…ÍÍ•ÉÐ¹µ…Ñ ¡Í•É¥•Ì¹Í½ÕÉ•}ÕÉ°€üü€ˆˆ°€½y¡ÑÑÁÌép½p¼¼°5¥ÍÍ¥¹œÍ•É¥•ÌÍ½ÕÉ”è€‘íÍ•É¥•Ì¹Í±Õõ€¤ì(€…ÍÍ•ÉÐ (€€€€…¹•ÜUI0¡Í•É¥•Ì¹Í½ÕÉ•}ÕÉ°¤¹¡½ÍÑ¹…µ”¹•¹‘Í]¥Ñ  ‰¡…É‘±½Á•¸¹¹°ˆ¤°(€€€I•ÍÑÉ¥Ñ•…±•¹‘…ÈÁ…”Ý…ÌÕÍ•…ÌÁÕ‰±¥…Ñ¥½¸•Ù¥‘•¹”è€‘íÍ•É¥•Ì¹Í±Õõ€°(€€¤ì(€…ÍÍ•ÉÐ (€€€€„¼¡…™•±…ÍÑñ•…¹¹Õ±••É‘ñµ…É…Ñ¡½¹‰±½­­•¹ñÑ•ÍÑ±½½ÁñÍ¹•±Ý…¹‘•±•¹ñ•­¥‘•¸¤½¤¹Ñ•ÍÐ¡Í•É¥•Ì¹¹…µ”¤°(€€€á±Õ‘•¹½¸µÉ…”±¥ÍÑ¥¹œÝ…ÌÁÕ‰±¥Í¡•è€‘íÍ•É¥•Ì¹¹…µ•õ€°(€€¤ì)ô()½¹ÍÐÉ•Í½±Ù•€ôÉ•Í½±Ù•½Õ¹ÑÉä¡ì½Õ¹ÑÉäè€‰9•Ñ¡•É±…¹‘Ìˆô¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡É•Í½±Ù•¹¥Í¼°€‰90ˆ°€‰Q¡”9•Ñ¡•É±…¹‘ÌÉ•Í½±Ù•ÌÑ¼Ñ¡”ÝÉ½¹œ%M<½‘”ˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡¥Í½Q½±…µ½©¤¡É•Í½±Ù•¹¥Í¼¤°€‹Â~ÏÂ~Äˆ°€‰Q¡”9•Ñ¡•É±…¹‘Ì™±…œ¥Ì¥¹½ÉÉ•Ðˆ¤ì)…ÍÍ•ÉÐ¡=U9QIe}%1QIL¹¥¹±Õ‘•Ì ‰9•Ñ¡•É±…¹‘Ìˆ¤°€‰Q¡”9•Ñ¡•É±…¹‘Ì¥Ì…‰Í•¹Ð™É½´½Õ¹ÑÉä™¥±Ñ•ÉÌˆ¤ì)…ÍÍ•ÉÐ (€=U9QIe}I=UAL¹Í½µ” ¡É½ÕÀ¤€ôøÉ½ÕÀ¹½ÁÑ¥½¹Ì¹¥¹±Õ‘•Ì ‰9•Ñ¡•É±…¹‘Ìˆ¤¤°(€€‰Q¡”9•Ñ¡•É±…¹‘Ì¥Ì…‰Í•¹Ð™É½´Ñ¡”½Õ¹ÑÉäÍ•±•Ñ½Èˆ°(¤ì()™Õ¹Ñ¥½¸‘¥ÍÑ…¹•Ì¡Í±Õœ°‘…Ñ”¤ì(€É•ÑÕÉ¸¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì(€€€€¹™¥±Ñ•È ¡•‘¥Ñ¥½¸¤€ôø•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ€ôôôÍ±Õœ€˜˜•‘¥Ñ¥½¸¹‘…Ñ”€ôôô‘…Ñ”¤(€€€€¹µ…À ¡•‘¥Ñ¥½¸¤€ôø•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”¤(€€€€¹Í½ÉÐ ¤ì)ô()…ÍÍ•ÉÐ¹‘••ÁÅÕ…° (€‘¥ÍÑ…¹•Ì ‰…µÍÑ•É‘…´µµ…É…Ñ¡½¸ˆ°€ˆÈÀÈØ´ÄÀ´ÄÜˆ¤°(€lˆÄ¸Ù,ˆ°€ˆÅ,ˆ°€ˆÌ¸Õ,ˆ°€ˆØ¸Õ,ˆ°€ˆÜ¸Õ,‰t°(€€‰µÍÑ•É‘…´M…ÑÕÉ‘…äÁÉ½É…µµ”¥Ì¥¹½µÁ±•Ñ”ˆ°(¤ì)…ÍÍ•ÉÐ¹‘••ÁÅÕ…° (€‘¥ÍÑ…¹•Ì ‰…µÍÑ•É‘…´µµ…É…Ñ¡½¸ˆ°€ˆÈÀÈØ´ÄÀ´Äàˆ¤°(€lˆÅ,ˆ°€‰!…±˜ˆ°€‰5…É…Ñ¡½¸‰t°(€€‰µÍÑ•É‘…´MÕ¹‘…äÁÉ½É…µµ”¥Ì¥¹½µÁ±•Ñ”ˆ°(¤ì)…ÍÍ•ÉÐ¹‘••ÁÅÕ…° (€‘¥ÍÑ…¹•Ì ‰•µ½¹µ¡…±˜µµ…É…Ñ¡½¸ˆ°€ˆÈÀÈÜ´ÀÄ´ÄÀˆ¤°(€lˆÅ,ˆ°€ˆÉ,ˆ°€ˆÄÀ¸Õ,ˆ°€‰!…±˜‰t¹Í½ÉÐ ¤°(€€‰µ½¹Ì…‘Ù•ÉÑ¥Í•ÁÉ½É…µµ”¥Ì¥¹½µÁ±•Ñ”ˆ°(¤ì()…ÍÍ•ÉÐ¹•ÅÕ…° (€¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì¹™¥±Ñ•È ¡•‘¥Ñ¥½¸¤€ôø•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”€ôôô€ˆÕ,ˆ¤¹±•¹Ñ °(€€ää°(€€ˆÕ,½Ù•É…”¡…¹•ˆ°(¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì¹™¥±Ñ•È ¡•‘¥Ñ¥½¸¤€ôø•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”€ôôô€ˆÄÁ,ˆ¤¹±•¹Ñ °(€€ÄÀà°(€€ˆÄÁ,½Ù•É…”¡…¹•ˆ°(¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì¹™¥±Ñ•È ¡•‘¥Ñ¥½¸¤€ôø•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”€ôôô€‰!…±˜ˆ¤¹±•¹Ñ °(€€ÌÐ°(€€‰!…±˜µµ…É…Ñ¡½¸½Ù•É…”¡…¹•ˆ°(¤ì)…ÍÍ•ÉÐ¹•ÅÕ…° (€¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì¹™¥±Ñ•È ¡•‘¥Ñ¥½¸¤€ôø•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”€ôôô€‰5…É…Ñ¡½¸ˆ¤¹±•¹Ñ °(€€ÈÀ°(€€‰5…É…Ñ¡½¸½Ù•É…”¡…¹•ˆ°(¤ì()½¹ÍÐ…Ñ…±½Õ•M½ÕÉ”€ô…Ý…¥ÐÉ•…‘¥±” (€¹•ÜUI0 ˆ¸¸½ÍÉŒ½‘…Ñ„½…Ñ…±½Õ”¹ÑÌˆ°¥µÁ½ÉÐ¹µ•Ñ„¹ÕÉ°¤°(€€‰ÕÑ˜àˆ°(¤ì)…ÍÍ•ÉÐ (€…Ñ…±½Õ•M½ÕÉ”¹¥¹±Õ‘•Ì ‰¹•Ñ¡•É±…¹‘ÍÕ±±I…•M•É¥•Ìˆ¤°(€€‰9•Ñ¡•É±…¹‘ÌÍ•É¥•Ì…É”¹½ÐÝ¥É•¥¸ˆ°(¤ì)…ÍÍ•ÉÐ (€…Ñ…±½Õ•M½ÕÉ”¹¥¹±Õ‘•Ì ‰¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ìˆ¤°(€€‰9•Ñ¡•É±…¹‘Ì•‘¥Ñ¥½¹Ì…É”¹½ÐÝ¥É•¥¸ˆ°(¤ì)½¹ÍÐÍ••‘M½ÕÉ”€ô…Ý…¥ÐÉ•…‘¥±” (€¹•ÜUI0 ˆ¸¸½ÍÉŒ½±¥ˆ½…Ñ¡É•Ì½Í••¹Í•ÉÙ•È¹ÑÌˆ°¥µÁ½ÉÐ¹µ•Ñ„¹ÕÉ°¤°(€€‰ÕÑ˜àˆ°(¤ì)…ÍÍ•ÉÐ (€€½½¹ÍÐM}YIM%=8€ô€‰…Ñ¡É•Ìµmx‰t¬ˆì¼¹Ñ•ÍÐ¡Í••‘M½ÕÉ”¤°(€€‰Q¡”Á•ÉÍ¥ÍÑ•¹Ð…Ñ…±½Õ”Í••Ù•ÉÍ¥½¸Ý…Ì¹½Ð…‘Ù…¹•ˆ°(¤ì()½¹Í½±”¹±½œ (€Y•É¥™¥•€‘í¹•Ñ¡•É±…¹‘ÍÕ±±I…•M•É¥•Ì¹±•¹Ñ¡ôÕÑ Í•É¥•Ì°€ÄÜÄÉ…”‘…Ñ•Ì…¹€‘í¹•Ñ¡•É±…¹‘ÍÕ±±I…•‘¥Ñ¥½¹Ì¹±•¹Ñ¡ô…‘Ù•ÉÑ¥Í•‘¥ÍÑ…¹•Ì¹€°(¤ì(
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+
+import {
+  netherlandsFullCalendarAudit,
+  netherlandsFullRaceEditions,
+  netherlandsFullRaceSeries,
+} from "../src/data/netherlands-full-running-calendar.ts";
+import {
+  COUNTRY_FILTERS,
+  COUNTRY_GROUPS,
+  isoToFlagEmoji,
+  resolveCountry,
+} from "../src/lib/athrecs/countries.ts";
+
+const CHECKED_AT = "2026-08-27";
+const CALENDAR_START = "2026-01-01";
+const HORIZON = "2027-12-31";
+
+assert.deepEqual(
+  netherlandsFullCalendarAudit,
+  {
+    checkedAt: CHECKED_AT,
+    calendarStart: CALENDAR_START,
+    horizon: HORIZON,
+    sourceEntries: 1147,
+    publishableSeries: 165,
+    publishableRaceDates: 171,
+    publishableDistanceRows: 619,
+    sourceUrl: "https://www.hardlopen.nl/evenementen/",
+  },
+  "The Netherlands audit metadata changed without review",
+);
+
+const seriesBySlug = new Map(netherlandsFullRaceSeries.map((series) => [series.slug, series]));
+assert.equal(seriesBySlug.size, 165, "Duplicate or missing Netherlands series");
+assert.equal(netherlandsFullRaceEditions.length, 619, "Netherlands distance-row count changed");
+assert.equal(
+  new Set(netherlandsFullRaceEditions.map((edition) => `${edition.seriesSlug}|${edition.date}`))
+    .size,
+  171,
+  "Netherlands race-date count changed",
+);
+
+const editionKeys = new Set();
+for (const edition of netherlandsFullRaceEditions) {
+  const key = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+  assert(!editionKeys.has(key), `Duplicate Netherlands distance row: ${key}`);
+  editionKeys.add(key);
+  assert(seriesBySlug.has(edition.seriesSlug), `Unknown Netherlands series: ${key}`);
+  assert(edition.date >= CALENDAR_START && edition.date <= HORIZON, `Date outside audit: ${key}`);
+  assert(edition.distanceKm > 0 && edition.distanceKm <= 180, `Invalid distance units: ${key}`);
+  assert.match(edition.source, /^https:\/\//, `Missing evidence URL: ${key}`);
+  assert.equal(
+    edition.publishAllDistances,
+    true,
+    `Distance is not independently published: ${key}`,
+  );
+  assert(
+    seriesBySlug.get(edition.seriesSlug).distances.includes(edition.distance),
+    `Series omits advertised distance: ${key}`,
+  );
+  if (edition.date < CHECKED_AT) {
+    assert.equal(edition.status, "Finished", `Historical fixture is not finished: ${key}`);
+    assert(!edition.entryUrl, `Historical fixture exposes an entry link: ${key}`);
+  } else if (edition.status === "Open") {
+    assert.match(edition.entryUrl ?? "", /^https:\/\//, `Open fixture has no entry link: ${key}`);
+    assert.equal(edition.entryOptions?.[0]?.checkedAt, CHECKED_AT, `Stale entry check: ${key}`);
+    assert.equal(edition.entryOptions?.[0]?.isVerified, true, `Unverified entry: ${key}`);
+  } else {
+    assert(["Closed", "TBC"].includes(edition.status), `Invalid future status: ${key}`);
+    assert(!edition.entryUrl, `Unavailable fixture exposes an entry link: ${key}`);
+  }
+}
+
+for (const series of netherlandsFullRaceSeries) {
+  assert.equal(series.country, "Netherlands", `Wrong country: ${series.slug}`);
+  assert(series.city && series.city !== "Netherlands", `Unresolved Dutch city: ${series.slug}`);
+  assert.match(series.source_url ?? "", /^https:\/\//, `Missing series source: ${series.slug}`);
+  assert(
+    !new URL(series.source_url).hostname.endsWith("hardlopen.nl"),
+    `Restricted calendar page was used as publication evidence: ${series.slug}`,
+  );
+  assert(
+    !/(afgelast|geannuleerd|marathonblokken|testloop|snelwandelen|ekiden)/i.test(series.name),
+    `Excluded non-race listing was published: ${series.name}`,
+  );
+}
+
+const resolved = resolveCountry({ country: "Netherlands" });
+assert.equal(resolved.iso, "NL", "The Netherlands resolves to the wrong ISO code");
+assert.equal(isoToFlagEmoji(resolved.iso), "ðŸ‡³ðŸ‡±", "The Netherlands flag is incorrect");
+assert(COUNTRY_FILTERS.includes("Netherlands"), "The Netherlands is absent from country filters");
+assert(
+  COUNTRY_GROUPS.some((group) => group.options.includes("Netherlands")),
+  "The Netherlands is absent from the country selector",
+);
+
+function distances(slug, date) {
+  return netherlandsFullRaceEditions
+    .filter((edition) => edition.seriesSlug === slug && edition.date === date)
+    .map((edition) => edition.distance)
+    .sort();
+}
+
+assert.deepEqual(
+  distances("amsterdam-marathon", "2026-10-17"),
+  ["1.6K", "1K", "3.5K", "6.5K", "7.5K"],
+  "Amsterdam Saturday programme is incomplete",
+);
+assert.deepEqual(
+  distances("amsterdam-marathon", "2026-10-18"),
+  ["1K", "Half", "Marathon"],
+  "Amsterdam Sunday programme is incomplete",
+);
+assert.deepEqual(
+  distances("egmond-half-marathon", "2027-01-10"),
+  ["1K", "2K", "10.5K", "Half"].sort(),
+  "Egmond's advertised programme is incomplete",
+);
+
+assert.equal(
+  netherlandsFullRaceEditions.filter((edition) => edition.distance === "5K").length,
+  99,
+  "5K coverage changed",
+);
+assert.equal(
+  netherlandsFullRaceEditions.filter((edition) => edition.distance === "10K").length,
+  108,
+  "10K coverage changed",
+);
+assert.equal(
+  netherlandsFullRaceEditions.filter((edition) => edition.distance === "Half").length,
+  34,
+  "Half-marathon coverage changed",
+);
+assert.equal(
+  netherlandsFullRaceEditions.filter((edition) => edition.distance === "Marathon").length,
+  20,
+  "Marathon coverage changed",
+);
+
+const catalogueSource = await readFile(
+  new URL("../src/data/catalogue.ts", import.meta.url),
+  "utf8",
+);
+assert(
+  catalogueSource.includes("netherlandsFullRaceSeries"),
+  "Netherlands series are not wired in",
+);
+assert(
+  catalogueSource.includes("netherlandsFullRaceEditions"),
+  "Netherlands editions are not wired in",
+);
+const seedSource = await readFile(
+  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
+  "utf8",
+);
+assert(
+  /const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource),
+  "The persistent catalogue seed version was not advanced",
+);
+
+console.log(
+  `Verified ${netherlandsFullRaceSeries.length} Dutch series, 171 race dates and ${netherlandsFullRaceEditions.length} advertised distances.`,
+);

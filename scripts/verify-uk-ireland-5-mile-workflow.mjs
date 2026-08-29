@@ -1,1 +1,151 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíÛMıN‹Z–‹­¦ëeŠw¬Õ¥µÁ½ÉĞ…ÍÍ•ÉĞ™É½´€‰¹½‘”é…ÍÍ•ÉĞ½ÍÑÉ¥Ğˆì)¥µÁ½ÉĞ™Ì™É½´€‰¹½‘”é™Ì½ÁÉ½µ¥Í•Ìˆì()½¹ÍĞmìÉÕ¹…‰M•É¥•Ìô°™¥Ù•5¥±•…Ñ…t€ô…İ…¥ĞAÉ½µ¥Í”¹…±°¡l(€¥µÁ½ÉĞ ˆ¸¸½ÍÉŒ½‘…Ñ„½ÉÕ¹…‰Œ¹ÑÌˆ¤°(€¥µÁ½ÉĞ ˆ¸¸½ÍÉŒ½‘…Ñ„½™¥Ù”µµ¥±”µÉ…•ÌµÕ¬µ¥É•±…¹¹ÑÌˆ¤°)t¤ì()½¹ÍĞì(€Ù•É¥™¥•‘¥Ù•5¥±•‘¥Ñ¥½¹=Ù•ÉÉ¥‘•Ì°(€Ù•É¥™¥•‘¥Ù•5¥±•‘¥Ñ¥½¹Ì°(€Ù•É¥™¥•‘¥Ù•5¥±•I•Í•…É¡EÕ•Õ”°(€Ù•É¥™¥•‘¥Ù•5¥±•M•É¥•Ì°(€Ù•É¥™¥•‘¥Ù•5¥±•M•É¥•Í=Ù•ÉÉ¥‘•Ì°)ô€ô™¥Ù•5¥±•…Ñ„ì()½¹ÍĞQ=d€ô€ˆÈÀÈØ´Àà´ÈÈˆì)½¹ÍĞ!=I%i=8€ô€ˆÈÀÈÜ´ÄÈ´ÌÄˆì)½¹ÍĞ=YI}=U9QI%L€ô¹•ÜM•Ğ¡l‰¹±…¹ˆ°€‰%É•±…¹ˆ°€‰9½ÉÑ¡•É¸%É•±…¹ˆ°€‰M½Ñ±…¹ˆ°€‰]…±•Ì‰t¤ì)½¹ÍĞIUM}MI%M}M1UL€ô¹•ÜM•Ğ¡l(€€‰…Í¡™½Éµ‘¥ÍÑÉ¥Ğµ¥É±¥¹Ìµµ…ä´ÄÁ¬ˆ°(€€‰…¹¹½¬µ¡…Í”´ÄÀ´Ôµµ¥±”ˆ°)t¤ì()…ÍÍ•ÉĞ¹•ÅÕ…°¡Ù•É¥™¥•‘¥Ù•5¥±•M•É¥•Ì¹±•¹Ñ °€ÈÈ°€‰Q¡”™¥Ù”µµ¥±”É•±•…Í”¥Ì¥¹½µÁ±•Ñ”ˆ¤ì)…ÍÍ•ÉĞ¹•ÅÕ…°¡Ù•É¥™¥•‘¥Ù•5¥±•‘¥Ñ¥½¹Ì¹±•¹Ñ °€ÈĞ°€‰Q¡”™¥Ù”µµ¥±”•‘¥Ñ¥½¸É•±•…Í”¥Ì¥¹½µÁ±•Ñ”ˆ¤ì)…ÍÍ•ÉĞ¹•ÅÕ…°¡Ù•É¥™¥•‘¥Ù•5¥±•I•Í•…É¡EÕ•Õ”¹±•¹Ñ °€Ü°€‰Q¡”¡•±µ…¹‘¥‘…Ñ”…Õ‘¥Ğ¥Ì¥¹½µÁ±•Ñ”ˆ¤ì)…ÍÍ•ÉĞ¹‘••ÁÅÕ…° (€¹•ÜM•Ğ¡Ù•É¥™¥•‘¥Ù•5¥±•M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôøÍ•É¥•Ì¹½Õ¹ÑÉä¤¤°(€=YI}=U9QI%L°(€€‰Q¡”É•±•…Í”±½ÍĞ½¹”½˜Ñ¡”½Ù•É•U,½È%É•±…¹½Õ¹ÑÉ¥•Ìˆ°(¤ì)…ÍÍ•ÉĞ¹‘••ÁÅÕ…° (€¹•ÜM•Ğ¡Ù•É¥™¥•‘¥Ù•5¥±•M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôøÍ•É¥•Ì¹ÍÕÉ™…”¤¤°(€¹•ÜM•Ğ¡l‰I½…ˆ°€‰QÉ…¥°ˆ°€‰5¥á•‰t¤°(€€‰Q¡”É•±•…Í”±½ÍĞ½¹”½˜¥ÑÌÙ•É¥™¥•ÍÕÉ™…”ÑåÁ•Ìˆ°(¤ì()½¹ÍĞÍ±ÕÌ€ô¹•ÜM•Ğ ¤ì)™½È€¡½¹ÍĞÍ•É¥•Ì½˜Ù•É¥™¥•‘¥Ù•5¥±•M•É¥•Ì¤ì(€…ÍÍ•ÉĞ …Í±ÕÌ¹¡…Ì¡Í•É¥•Ì¹Í±Õœ¤°ÕÁ±¥…Ñ”™¥Ù”µµ¥±”Í±Õœè€‘íÍ•É¥•Ì¹Í±Õõ€¤ì(€Í±ÕÌ¹…‘¡Í•É¥•Ì¹Í±Õœ¤ì(€…ÍÍ•ÉĞ¡Í•É¥•Ì¹‘¥ÍÑ…¹•Ì¹¥¹±Õ‘•Ì ˆÕµ¤ˆ¤°€‘íÍ•É¥•Ì¹Í±Õô‘½•Ì¹½Ğ…‘Ù•ÉÑ¥Í”™¥Ù”µ¥±•Í€¤ì(€…ÍÍ•ÉĞ (€€€=YI}=U9QI%L¹¡…Ì¡Í•É¥•Ì¹½Õ¹ÑÉä¤°(€€€€‘íÍ•É¥•Ì¹Í±Õô¡…Ì…¸½ÕĞµ½˜µÍ½Á”½Õ¹ÑÉä€‘íÍ•É¥•Ì¹½Õ¹ÑÉåõ€°(€€¤ì(€…ÍÍ•ÉĞ¹µ…Ñ ¡Í•É¥•Ì¹İ•‰Í¥Ñ”°€½y¡ÑÑÁÌép½p¼¼°€‘íÍ•É¥•Ì¹Í±Õôİ•‰Í¥Ñ”µÕÍĞÕÍ”!QQAM€¤ì(€…ÍÍ•ÉĞ¹µ…Ñ ¡Í•É¥•Ì¹Í½ÕÉ•}ÕÉ°€üü€ˆˆ°€½y¡ÑÑÁÌép½p¼¼°€‘íÍ•É¥•Ì¹Í±ÕôÍ½ÕÉ”µÕÍĞÕÍ”!QQAM€¤ì)ô()½¹ÍĞ•‘¥Ñ¥½¹-•åÌ€ô¹•ÜM•Ğ ¤ì)™½È€¡½¹ÍĞ•‘¥Ñ¥½¸½˜Ù•É¥™¥•‘¥Ù•5¥±•‘¥Ñ¥½¹Ì¤ì(€½¹ÍĞ­•ä€ô€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõğ‘í•‘¥Ñ¥½¸¹‘…Ñ•õ€ì(€…ÍÍ•ÉĞ …•‘¥Ñ¥½¹-•åÌ¹¡…Ì¡­•ä¤°ÕÁ±¥…Ñ”™¥Ù”µµ¥±”•‘¥Ñ¥½¸è€‘í­•åõ€¤ì(€•‘¥Ñ¥½¹-•åÌ¹…‘¡­•ä¤ì(€…ÍÍ•ÉĞ¡Í±ÕÌ¹¡…Ì¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤°€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õô¡…Ì¹¼…Õ‘¥Ñ•Í•É¥•Í€¤ì(€…ÍÍ•ÉĞ¹µ…Ñ ¡•‘¥Ñ¥½¸¹‘…Ñ”°€½yq‘ìÑôµq‘ìÉôµq‘ìÉô¼°€‘í­•åô¡…Ì…¸¥¹Ù…±¥%M<‘…Ñ•€¤ì(€…ÍÍ•ÉĞ¡•‘¥Ñ¥½¸¹‘…Ñ”€øôQ=d€˜˜•‘¥Ñ¥½¸¹‘…Ñ”€ğô!=I%i=8°€‘í­•åô¥Ì½ÕÑÍ¥‘”Ñ¡”…Õ‘¥Ğ¡½É¥é½¹€¤ì(€…ÍÍ•ÉĞ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”°€ˆÕµ¤ˆ°€‘í­•åô¥Ì¹½ĞÉ•ÁÉ•Í•¹Ñ•…Ì™¥Ù”µ¥±•Í€¤ì(€…ÍÍ•ÉĞ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹‘¥ÍÑ…¹•-´°€à¸ÀÔ°€‘í­•åô‘½•Ì¹½Ğ¡…Ù”Ñ¡”…¹½¹¥…°µ•ÑÉ¥Œ‘¥ÍÑ…¹•€¤ì(€…ÍÍ•ÉĞ¹µ…Ñ ¡•‘¥Ñ¥½¸¹Í½ÕÉ”°€½y¡ÑÑÁÌép½p¼¼°€‘í­•åôÍ½ÕÉ”µÕÍĞÕÍ”!QQAM€¤ì((€¥˜€¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ€ôôô€‰=Á•¸ˆñğ•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ€ôôô€‰±½Í•ˆ¤ì(€€€…ÍÍ•ÉĞ¡•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ìü¹±•¹Ñ °€‘í­•åô¹••‘Ì„Ù•É¥™¥••¹ÑÉä½ÍÑ…ÑÕÌ½ÁÑ¥½¹€¤ì(€ô(€¥˜€¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ€ôôô€‰Q	ˆ¤ì(€€€…ÍÍ•ÉĞ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ì°Õ¹‘•™¥¹•°€‘í­•åôµÕÍĞ¹½Ğ¥µÁ±ä…¸½Á•¸¡•­½ÕÑ€¤ì(€ô(€™½È€¡½¹ÍĞ½ÁÑ¥½¸½˜•‘¥Ñ¥½¸¹•¹Óm¢G§²ÚîÆ­yÒ†÷F–öâæ—5fW&–f–VBÂG'VRÂG¶¶W—Ò†2âVçfW&–f–VBVçG'’&÷f–FW&“°¢76W'BæWVÂ†÷F–öâæ—5&–Ö'’ÂG'VRÂG¶¶W—Ò&–Ö'’VçG'’&÷f–FW"—2æ÷BÖ&¶VF“°¢76W'BæÖF6‚†÷F–öâæVçG'•W&ÂÂõæ‡GG3¥ÂõÂòòÂG¶¶W—ÒVçG'’U$Â×W7BW6R…EE6“°¢Ğ§Ğ ¦6öç7B6FÆöwVU6÷W&6RÒv—Bg2ç&VDf–ÆR€¢æWrU$Â‚"ââ÷7&2öFFö6FÆöwVRçG2"Â–×÷'BæÖWFçW&Â’À¢'WFc‚"À¢“°¦6öç7B6VVE6÷W&6RÒv—Bg2ç&VDf–ÆR€¢æWrU$Â‚"ââ÷7&2öÆ–"öF‡&V72÷6VVBç6W'fW"çG2"Â–×÷'BæÖWFçW&Â’À¢'WFc‚"À¢“°¦76W'B€¢6FÆöwVU6÷W&6Ræ–æ6ÇVFW2‚vg&öÒ"âöf—fRÖÖ–ÆR×&6W2×V²Ö—&VÆæB"r’À¢%F†Rf—fRÖÖ–ÆRFF6WB—2æ÷B–×÷'FVB'’F†R6FÆöwVR"À¢“°¦76W'B€¢6FÆöwVU6÷W&6Ræ–æ6ÇVFW2‚"âââ‡fW&–f–VDf—fTÖ–ÆU6W&–W226W&–W5µÒ’"’À¢%F†Rf—fRÖÖ–ÆR6W&–W2&Ræ÷BÖW&vVB–çFòF†R6FÆöwVR"À¢“°¦76W'B€¢6FÆöwVU6÷W&6Ræ–æ6ÇVFW2‚"âââ‡fW&–f–VDf—fTÖ–ÆTVF—F–öç22VF—F–öåµÒ’"’À¢%F†Rf—fRÖÖ–ÆRVF—F–öç2&Ræ÷BÖW&vVB–çFòF†R6FÆöwVR"À¢“°¦76W'B€¢ö6öç7B4TTEõdU%4”ôâÒ&F‡&V72Õµâ%Ò²#²òçFW7B‡6VVE6÷W&6R’À¢%F†RW'6—7FVçB6FÆöwVR6VVBfW'6–öâ—2&V†–æBF†Rf—fRÖÖ–ÆRv÷&¶fÆ÷r"À¢“° ¦6öç7BW7G&VÕ6ÇVw2ÒæWr6WB‡'Væ&56W&–W2æÖ‚‡6W&–W2’Óâ6W&–W2ç6ÇVr’“°¦f÷"†6öç7B&WW6VE6ÇVröb$UU4TEõ4U$”U5õ4ÅTu2’°¢76W'B‡6ÇVw2æ†2‡&WW6VE6ÇVr’Â&WW6VB6W&–W2—2Ö—76–ærg&öÒF†R&VÆV6S¢G·&WW6VE6ÇVwÖ“°¢76W'B‡W7G&VÕ6ÇVw2æ†2‡&WW6VE6ÇVr’Â&WW6VB6W&–W2—2Ö—76–ærW7G&VÓ¢G·&WW6VE6ÇVwÖ“°§Ğ ¦6öç7B6VçF–æVÇ2Ò°¢'÷'G'W6‚ÓRÖÖ–ÆR×&öB×&6RÓ##b"À¢'6WfW&âÖ'&–FvRÓRÖæ–v‡B×&6W2Ó##b"À¢&vÆ6v÷r×Væ—fW'6—G’ÖFW2Öv–ÆÖ÷&RÓRÖÖ–ÆRÓ##b"À¢&&V&ÖvÆVæv'&–fbÓRÖÖ–ÆRÓ##b"À¢&ÇV6âÖ†'&–W'2ÓRÖÖ–ÆR×&öB×&6RÓ##b"À¢'FöÖ×’×'–âÖÖVÖ÷&–ÂÖ6'&–vÆ–æRÓRÖÖ–ÆRÓ##r"À¢&GrÖ&VFf÷&BÓRÖæBÓÓ##r"À¢'VæFÆRÓRÖÖ–ÆR×G&–Â×&6RÓ##r"À¢'7F÷'CÓRÖÖ–ÆR×G&–Â×&6RÓ##r"À¢'7BÖvæW2ÓRÖÖ–ÆW"Ó##r"À¥Ó°¦f÷"†6öç7B6ÇVröb6VçF–æVÇ2’°¢76W'B‡6ÇVw2æ†2‡6ÇVr’Â6÷fW&vR6VçF–æVÂ—2Ö—76–æs¢G·6ÇVwÖ“°§Ğ ¦76W'BæFVWWVÂ€¢fW&–f–VDf—fTÖ–ÆU6W&–W4÷fW'&–FW5²&Ó×7vç6V%ÓòæF—7Fæ6W2À¢²#VÖ’"Â#Ö’%ÒÀ¢$Ó7vç6V×W7BGfW'F—6R—G2öff–6–ÂRÖÖ–ÆRæBÖÖ–ÆRF—7Fæ6W2"À¢“°¦76W'BæFVWWVÂ€¢fW&–f–VDf—fTÖ–ÆTVF—F–öä÷fW'&–FW5²&Ó×7vç6VÃ##rÓ2Ó#ÃÖ’%ÒÀ¢°¢ââçfW&–f–VDf—fTÖ–ÆTVF—F–öä÷fW'&–FW5²&Ó×7vç6VÃ##rÓ2Ó#ÃÖ’%ÒÀ¢FFS¢###rÓ"Ó#‚"À¢F—7Fæ6S¢#VÖ’"À¢F—7Fæ6T¶Ó¢‚ãRÀ¢ÒÀ¢$Ó7vç6Vw2–×÷'FVBVF—F–öâ×W7B&R6÷'&V7FVBFòF†Röff–6–ÂRÖÖ–ÆRFFR"À¢“° ¦6öç7BVWVVE6ÇVw2ÒæWr6WB‚“°¦f÷"†6öç7B6æF–FFRöbfW&–f–VDf—fTÖ–ÆU&W6V&6…VWVR’°¢76W'B‚VWVVE6ÇVw2æ†2†6æF–FFRç6ÇVr’ÂGWÆ–6FR&W6V&6‚6æF–FFS¢G¶6æF–FFRç6ÇVwÖ“°¢VWVVE6ÇVw2æFB†6æF–FFRç6ÇVr“°¢76W'B‚6ÇVw2æ†2†6æF–FFRç6ÇVr’ÂG¶6æF–FFRç6ÇVwÒ—2VWVVBæB×W7Bæ÷B&RV&Æ—6†VF“°¢76W'BæÖF6‚†6æF–FFRç6÷W&6UW&ÂÂõæ‡GG3¥ÂõÂòòÂG¶6æF–FFRç6ÇVwÒVWVR6÷W&6R×W7BW6R…EE6“°§Ğ ¦6öç6öÆRæÆör€¢T²æB—&VÆæBf—fRÖÖ–ÆRv÷&¶fÆ÷rfW&–f–VC¢G·fW&–f–VDf—fTÖ–ÆU6W&–W2æÆVæwF‡ÒVF—FVB6W&–W2ÂG·fW&–f–VDf—fTÖ–ÆTVF—F–öç2æÆVæwF‡ÒVF—F–öç2æBG·fW&–f–VDf—fTÖ–ÆU&W6V&6…VWVRæÆVæwF‡Ò†VÆB6æF–FFW2æÀ¢“° 
+import assert from "node:assert/strict";
+import fs from "node:fs/promises";
+
+const [{ runabcSeries }, fiveMileData] = await Promise.all([
+  import("../src/data/runabc.ts"),
+  import("../src/data/five-mile-races-uk-ireland.ts"),
+]);
+
+const {
+  verifiedFiveMileEditionOverrides,
+  verifiedFiveMileEditions,
+  verifiedFiveMileResearchQueue,
+  verifiedFiveMileSeries,
+  verifiedFiveMileSeriesOverrides,
+} = fiveMileData;
+
+const TODAY = "2026-08-22";
+const HORIZON = "2027-12-31";
+const COVERED_COUNTRIES = new Set(["England", "Ireland", "Northern Ireland", "Scotland", "Wales"]);
+const REUSED_SERIES_SLUGS = new Set([
+  "ashford-district-girlings-may-10k",
+  "cannock-chase-10-5-mile",
+]);
+
+assert.equal(verifiedFiveMileSeries.length, 22, "The five-mile release is incomplete");
+assert.equal(verifiedFiveMileEditions.length, 24, "The five-mile edition release is incomplete");
+assert.equal(verifiedFiveMileResearchQueue.length, 7, "The held-candidate audit is incomplete");
+assert.deepEqual(
+  new Set(verifiedFiveMileSeries.map((series) => series.country)),
+  COVERED_COUNTRIES,
+  "The release lost one of the covered UK or Ireland countries",
+);
+assert.deepEqual(
+  new Set(verifiedFiveMileSeries.map((series) => series.surface)),
+  new Set(["Road", "Trail", "Mixed"]),
+  "The release lost one of its verified surface types",
+);
+
+const slugs = new Set();
+for (const series of verifiedFiveMileSeries) {
+  assert(!slugs.has(series.slug), `Duplicate five-mile slug: ${series.slug}`);
+  slugs.add(series.slug);
+  assert(series.distances.includes("5mi"), `${series.slug} does not advertise five miles`);
+  assert(
+    COVERED_COUNTRIES.has(series.country),
+    `${series.slug} has an out-of-scope country ${series.country}`,
+  );
+  assert.match(series.website, /^https:\/\//, `${series.slug} website must use HTTPS`);
+  assert.match(series.source_url ?? "", /^https:\/\//, `${series.slug} source must use HTTPS`);
+}
+
+const editionKeys = new Set();
+for (const edition of verifiedFiveMileEditions) {
+  const key = `${edition.seriesSlug}|${edition.date}`;
+  assert(!editionKeys.has(key), `Duplicate five-mile edition: ${key}`);
+  editionKeys.add(key);
+  assert(slugs.has(edition.seriesSlug), `${edition.seriesSlug} has no audited series`);
+  assert.match(edition.date, /^\d{4}-\d{2}-\d{2}$/, `${key} has an invalid ISO date`);
+  assert(edition.date >= TODAY && edition.date <= HORIZON, `${key} is outside the audit horizon`);
+  assert.equal(edition.distance, "5mi", `${key} is not represented as five miles`);
+  assert.equal(edition.distanceKm, 8.05, `${key} does not have the canonical metric distance`);
+  assert.match(edition.source, /^https:\/\//, `${key} source must use HTTPS`);
+
+  if (edition.status === "Open" || edition.status === "Closed") {
+    assert(edition.entryOptions?.length, `${key} needs a verified entry/status option`);
+  }
+  if (edition.status === "TBC") {
+    assert.equal(edition.entryOptions, undefined, `${key} must not imply an open checkout`);
+  }
+  for (const option of edition.entryOptions ?? []) {
+    assert.equal(option.checkedAt, TODAY, `${key} has a stale entry check date`);
+    assert.equal(option.isVerified, true, `${key} has an unverified entry provider`);
+    assert.equal(option.isPrimary, true, `${key} primary entry provider is not marked`);
+    assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
+  }
+}
+
+const catalogueSource = await fs.readFile(
+  new URL("../src/data/catalogue.ts", import.meta.url),
+  "utf8",
+);
+const seedSource = await fs.readFile(
+  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
+  "utf8",
+);
+assert(
+  catalogueSource.includes('from "./five-mile-races-uk-ireland"'),
+  "The five-mile dataset is not imported by the catalogue",
+);
+assert(
+  catalogueSource.includes("...(verifiedFiveMileSeries as Series[])"),
+  "The five-mile series are not merged into the catalogue",
+);
+assert(
+  catalogueSource.includes("...(verifiedFiveMileEditions as Edition[])"),
+  "The five-mile editions are not merged into the catalogue",
+);
+assert(
+  /const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource),
+  "The persistent catalogue seed version is behind the five-mile workflow",
+);
+
+const upstreamSlugs = new Set(runabcSeries.map((series) => series.slug));
+for (const reusedSlug of REUSED_SERIES_SLUGS) {
+  assert(slugs.has(reusedSlug), `Reused series is missing from the release: ${reusedSlug}`);
+  assert(upstreamSlugs.has(reusedSlug), `Reused series is missing upstream: ${reusedSlug}`);
+}
+
+const sentinels = [
+  "portrush-5-mile-road-race-2026",
+  "severn-bridge-5-night-races-2026",
+  "glasgow-university-des-gilmore-5-mile-2026",
+  "beara-glengarriff-5-mile-2026",
+  "lucan-harriers-5-mile-road-race-2026",
+  "tommy-ryan-memorial-carrigaline-5-mile-2027",
+  "atw-bedford-5-and-10-2027",
+  "pendle-5-mile-trail-race-2027",
+  "stort10-5-mile-trail-race-2027",
+  "st-agnes-5-miler-2027",
+];
+for (const slug of sentinels) {
+  assert(slugs.has(slug), `Coverage sentinel is missing: ${slug}`);
+}
+
+assert.deepEqual(
+  verifiedFiveMileSeriesOverrides["m10-swansea"]?.distances,
+  ["5mi", "10mi"],
+  "M10 Swansea must advertise its official 5-mile and 10-mile distances",
+);
+assert.deepEqual(
+  verifiedFiveMileEditionOverrides["m10-swansea|2027-03-21|10mi"],
+  {
+    ...verifiedFiveMileEditionOverrides["m10-swansea|2027-03-21|10mi"],
+    date: "2027-02-28",
+    distance: "5mi",
+    distanceKm: 8.05,
+  },
+  "M10 Swansea's imported edition must be corrected to the official 5-mile date",
+);
+
+const queuedSlugs = new Set();
+for (const candidate of verifiedFiveMileResearchQueue) {
+  assert(!queuedSlugs.has(candidate.slug), `Duplicate research candidate: ${candidate.slug}`);
+  queuedSlugs.add(candidate.slug);
+  assert(!slugs.has(candidate.slug), `${candidate.slug} is queued and must not be published`);
+  assert.match(candidate.sourceUrl, /^https:\/\//, `${candidate.slug} queue source must use HTTPS`);
+}
+
+console.log(
+  `UK and Ireland five-mile workflow verified: ${verifiedFiveMileSeries.length} audited series, ${verifiedFiveMileEditions.length} editions and ${verifiedFiveMileResearchQueue.length} held candidates.`,
+);

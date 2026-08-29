@@ -1,32 +1,212 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíÛÞ8N‹Z–‹­¦ëeŠw¬Õ¥µÁ½ÉÐ…ÍÍ•ÉÐ™É½´€‰¹½‘”é…ÍÍ•ÉÐ½ÍÑÉ¥Ðˆì)¥µÁ½ÉÐìÉ•…‘¥±”ô™É½´€‰¹½‘”é™Ì½ÁÉ½µ¥Í•Ìˆì()¥µÁ½ÉÐì(€‰•±¥Õµ9•Ñ¡•É±…¹‘ÍI…•‘¥Ñ¥½¹Ì°(€‰•±¥Õµ9•Ñ¡•É±…¹‘ÍI…•M•É¥•Ì°)ô™É½´€ˆ¸¸½ÍÉŒ½‘…Ñ„½‰•±¥Õ´µ¹•Ñ¡•É±…¹‘ÌµÉ…•Ì¹ÑÌˆì)¥µÁ½ÉÐì(€Ù•É¥™¥•‘¥áÑÕÉ•‘¥Ñ¥½¹=Ù•ÉÉ¥‘•Ì°(€Ù•É¥™¥•‘¥áÑÕÉ•‘¥Ñ¥½¹I•Á±…•µ•¹ÑÌ°)ô™É½´€ˆ¸¸½ÍÉŒ½‘…Ñ„½™¥áÑÕÉ”µ‘•‘ÕÁ±¥…Ñ¥½¸¹ÑÌˆì)¥µÁ½ÉÐì(€=U9QIe}%1QIL°(€=U9QIe}I=UAL°(€¥Í½Q½±…µ½©¤°(€É•Í½±Ù•½Õ¹ÑÉä°)ô™É½´€ˆ¸¸½ÍÉŒ½±¥ˆ½…Ñ¡É•Ì½½Õ¹ÑÉ¥•Ì¹ÑÌˆì)¥µÁ½ÉÐì½±±…ÁÍ•M…µ•Ù•¹Ñ…Ñ”ô™É½´€ˆ¸¸½ÍÉŒ½±¥ˆ½…Ñ¡É•Ì½‘•‘ÕÁ”¹ÑÌˆì()½¹ÍÐ!-}P€ô€ˆÈÀÈØ´Àà´ÈÜˆì)½¹ÍÐ19I}MQIP€ô€ˆÈÀÈØ´ÀÄ´ÀÄˆì)½¹ÍÐ!=I%i=8€ô€ˆÈÀÈÜ´ÄÈ´ÌÄˆì()½¹ÍÐ•áÁ•Ñ•‘½Õ¹ÑÉå½Õ¹ÑÌ€ôì(€	•±¥Õ´èì¥Í¼è€‰	ˆ°™±…œè€‹Â~ŸÂ~¨ˆ°Í•É¥•Ìè€ÌÌ°É½ÝÌè€äÜ°‘…Ñ•Ìè€ÌÜô°(€9•Ñ¡•É±…¹‘Ìèì¥Í¼è€‰90ˆ°™±…œè€‹Â~ÏÂ~Äˆ°Í•É¥•Ìè€ÌÈ°É½ÝÌè€ÄÄÔ°‘…Ñ•Ìè€Ðàô°)ôì()½¹ÍÐÍ•É¥•Í	åM±Õœ€ô¹•Ü5…À¡‰•±¥Õµ9•Ñ¡•É±…¹‘ÍI…•M•É¥•Ì¹µ…À ¡Í•É¥•Ì¤€ôømÍ•É¥•Ì¹Í±Õœ°Í•É¥•Ít¤¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡Í•É¥•Í	åM±Õœ¹Í¥é”°‰•±¥Õµ9•Ñ¡•É±…¹‘ÍI…•M•É¥•Ì¹±•¹Ñ °€‰ÕÁ±¥…Ñ”•Ù•¹ÐµÍ•É¥•ÌÍ±Õœˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡‰•±¥Õµ9•Ñ¡•É±…¹‘ÍI…•M•É¥•Ì¹±•¹Ñ °€ØÔ°€‰U¹•áÁ•Ñ••Ù•¹ÐµÍ•É¥•Ì½Õ¹Ðˆ¤ì)…ÍÍ•ÉÐ¹•ÅÕ…°¡‰•±¥Õµ9•Ñ¡•É±…¹‘ÍI…•‘¥Ñ¥½¹Ì¹±•¹Ñ °€ÈÄÈ°€‰U¹•áÁ•Ñ•…‘Ù•ÉÑ¥Í•µ‘¥ÍÑ…¹”½Õ¹Ðˆ¤ì()½¹ÍÐ•‘¥Ñ¥½¹-•åÌ€ô¹•ÜM•Ð ¤ì)™½È€¡½¹ÍÐ•‘¥Ñ¥½¸½˜‰•±¥Õµ9•Ñ¡•É±…¹‘ÍI…•‘¥Ñ¥½¹Ì¤ì(€½¹ÍÐ•‘¥Ñ¥½¹-•ä€ô€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõð‘í•‘¥Ñ¥½¸¹‘…Ñ•õð‘í•‘¥Ñ¥½¸¹‘¥ÍÑ…¹•õ€ì(€…ÍÍ•ÉÐ …•‘¥Ñ¥½¹-•åÌ¹¡…Ì¡•‘¥Ñ¥½¹-•ä¤°ÕÁ±¥…Ñ”‘¥ÍÑ…¹”É½Üè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€•‘¥Ñ¥½¹-•åÌ¹…‘¡•‘¥Ñ¥½¹-•ä¤ì(€…ÍÍ•ÉÐ¡Í•É¥•Í	åM±Õœ¹¡…Ì¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤°U¹­¹½Ý¸Í•É¥•Ìè€‘í•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘…Ñ”€øô19I}MQIP°¥áÑÕÉ”ÁÉ•‘…Ñ•ÌÉ•ÅÕ•ÍÑ•…±•¹‘…Èè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘…Ñ”€ðô!=I%i=8°¥áÑÕÉ”•á••‘ÌÉ•ÅÕ•ÍÑ•¡½É¥é½¸è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¡•‘¥Ñ¥½¸¹‘¥ÍÑ…¹•-´€ø€À°¥áÑÕÉ”¡…Ì¹¼ÕÍ…‰±”‘¥ÍÑ…¹”è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¹µ…Ñ ¡•‘¥Ñ¥½¸¹Í½ÕÉ”°€½y¡ÑÑÁÌép½p¼¼°5¥ÍÍ¥¹œÁÕ‰±¥ŒÍ½ÕÉ”è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÁÕ‰±¥Í¡±±¥ÍÑ…¹•Ì°ÑÉÕ”°¥ÍÑ…¹”¥Ì¹½ÐÁÕ‰±¥Í¡…‰±”è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€…ÍÍ•ÉÐ (€€€Í•É¥•Í	åM±Õœ¹•Ð¡•‘¥Ñ¥½¸¹Í•É¥•ÍM±Õœ¤¹‘¥ÍÑ…¹•Ì¹¥¹±Õ‘•Ì¡•‘¥Ñ¥½¸¹‘¥ÍÑ…¹”¤°(€€€M•É¥•Ì½µ¥ÑÌ…‘Ù•ÉÑ¥Í•‘¥ÍÑ…¹”è€‘í•‘¥Ñ¥½¹-•åõ€°(€€¤ì(€¥˜€¡•‘¥Ñ¥½¸¹‘…Ñ”€ð!-}P¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ°€‰¥¹¥Í¡•ˆ°A…ÍÐ™¥áÑÕÉ”¥Ì¹½Ð™¥¹¥Í¡•è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€€€…ÍÍ•ÉÐ …•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°°A…ÍÐ™¥áÑÕÉ”•áÁ½Í•Ì…¸•¹ÑÉä±¥¹¬è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€ô•±Í”¥˜€¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ€ôôô€‰±½Í•ˆñð•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ€ôôô€‰Q	ˆ¤ì(€€€…ÍÍ•ÉÐ …•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°°€‘í•‘¥Ñ¥½¸¹ÍÑ…ÑÕÍô™¥áÑÕÉ”•áÁ½Í•Ì…¸•¹ÑÉä±¥¹¬è€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€ô•±Í”ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹ÍÑ…ÑÕÌ°€‰=Á•¸ˆ°ÕÑÕÉ”™¥áÑÕÉ”¡…Ì…¸¥¹Ù…±¥ÍÑ…ÑÕÌè€‘í•‘¥Ñ¥½¹-•åõ€¤ì(€€€…ÍÍ•ÉÐ¹µ…Ñ  (€€€€€•‘¥Ñ¥½¸¹•¹ÑÉåUÉ°€üü€ˆˆ°(€€€€€€½y¡ÑÑÁÌép½p¼¼°(€€€€€ÕÑÕÉ”™¥áÑÕÉ”¡…Ì¹¼•¹ÑÉäUI0è€‘í•‘¥Ñ¥½¹-•åõ€°(€€€€¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…° (€€€€€•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ìü¹lÁtü¹¡•­•‘Ð°(€€€€€!-}P°(€€€€€MÑ…±”•¹ÑÉä¡•¬è€‘í•‘¥Ñ¥½¹-•åõ€°(€€€€¤ì(€€€…ÍÍ•ÉÐ¹•ÅÕ…°¡•‘¥Ñ¥½¸¹•¹ÑÉå=ÁÑ¥½¹Ìü¹lÁtü¹¥ÍY•É¥™¥•°ÑÉÕ”³Þ8¶‰žËkºwµçZ[™Ù[ÛÜ]]™XÚˆ	‰ˆY][Û‹™\Ý[˜ÙHOOH’[ˆ‹ˆ
-Kˆ[ˆ[˜Y™\\ÙY]™XÚ[ˆX\˜]ÛˆØ\ÈYY‹ŠNÂ˜\ÜÙ\
-ˆX™[Ú][S™]\›[™Ô˜XÙQY][ÛœËœÛÛYJˆ
-Y][ÛŠHOˆY][Û‹œÙ\šY\ÔÛYÈOOH›X\˜]Û‹X[Y\œÙ›ÛÜˆ	‰ˆY][Û‹™\Ý[˜ÙHOOH“X\˜]Ûˆ‹ˆ
-Kˆ•H[Y\œÙ›ÛÜ˜Z[š[™ÈX\˜]ÛˆØ\ÈZ\ØÛ\ÜÚYšYY\ÈH˜XÙH‹ŠNÂ‚™›Üˆ
-ÛÛœÝ^XÝYÙˆÂˆÈØKY[Ú]KY˜\ÝY[‹MKLLÛK]˜ZÚÜË[™˜K\›ØY]Ý\‹MÌŒÈ‹“Ý\ˆ‹ŒLÈ—KˆÈØKY[K]ÝY[[ÛÜMÌŒÎÈ‹“Ý\ˆ‹ŒLZ[\È—KˆÈØK[X\˜]Û‹]KZYÝYKMÌÌŒŒÈ‹“Ý\ˆ‹“X\˜]Ûˆ—KˆÈœØÚÛÜ›\[ˆ‹“X\˜]Ûˆ‹ŒLÈ—K—JHÂˆÛÛœÝÜÙ\šY\ÔÛYË\Ý[˜ÙKÑ\Ý[˜ÙWHH^XÝYÂˆ\ÜÙ\
-ˆ™\šYšYYš^\™QY][Û”™\XÙ[Y[ËœÛÛYJˆ
-™\XÙ[Y[
-HO‚ˆ™\XÙ[Y[œÙ\šY\ÔÛYÈOOHÙ\šY\ÔÛYÈ	‰‚ˆ™\XÙ[Y[™\Ý[˜ÙHOOH\Ý[˜ÙH	‰‚ˆ™\XÙ[Y[Ñ\Ý[˜ÙHOOHÑ\Ý[˜ÙKˆ
-KˆZ\ÜÚ[™È™\Ý[\ØY™HYØXÞHY][ÛˆZYÜ˜][ÛŽˆ	ÜÙ\šY\ÔÛYßXˆ
-NÂˆ\ÜÙ\
-ˆ™\šYšYYš^\™QY][Û“Ý™\œšY\ÖÂˆ	ÜÙ\šY\ÔÛYß_	ÂˆÙ\šY\ÔÛYÈOOHœØÚÛÜ›\[ˆ‚ˆÈŒŒËL‹LMX\˜]Ûˆ‚ˆˆÙ\šY\ÔÛYËš[˜ÛY\Ê™[Ú]HŠBˆÈŒŒ‹LKLŸÝ\ˆ‚ˆˆÙ\šY\ÔÛYËš[˜ÛY\Ê™[K]ÝŠBˆÈŒŒ‹LKLŒÝ\ˆ‚ˆˆŒŒ‹LLKL_Ý\ˆ‚ˆXˆKˆZ\ÜÚ[™ÈÝ]XÈØ][ÙÝYHÛÜœ™XÝ[ÛŽˆ	ÜÙ\šY\ÔÛYßXˆ
-NÂŸB‚˜ÛÛœÝØ\™ÈHÛÛ\ÙTØ[YQ]™[]Jˆ™[Ú][S™]\›[™Ô˜XÙQY][ÛœË›X\
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 
-Y][Û‹[™^
-HOˆ
-ÂˆYˆ[™^ˆ]™[ÜÛYÎˆY][Û‹œÙ\šY\ÔÛYËˆ]™[Û˜[YNˆÙ\šY\ÐžTÛYË™Ù]
-Y][Û‹œÙ\šY\ÔÛYÊK›˜[YKˆ]™[Ù]NˆY][Û‹™]Kˆ\Ý[˜ÙWØÛÙNˆY][Û‹™\Ý[˜ÙKˆJJKŠNÂ˜\ÜÙ\™\]X[
-Ø\™Ë›[™ÝK‘Y][ÛœÈÈ›ÝÛÛ\ÙHÈÛ™HØ\™\ˆ˜XÙH]HŠNÂ‚˜ÛÛœÝØ][ÙÝYTÛÝ\˜ÙHH]ØZ]™XYš[Jˆ™]ÈT“
-‹‹‹ÜÜ˜ËÙ]KØØ][ÙÝYKÈ‹[\Ü›Y]K\›
-Kˆ]Ž‹ŠNÂ˜\ÜÙ\
-Ø][ÙÝYTÛÝ\˜ÙKš[˜ÛY\Ê˜™[Ú][S™]\›[™Ô˜XÙTÙ\šY\ÈŠK”Ù\šY\È\™H›ÝX›\ÚYŠNÂ˜\ÜÙ\
-Ø][ÙÝYTÛÝ\˜ÙKš[˜ÛY\Ê˜™[Ú][S™]\›[™Ô˜XÙQY][ÛœÈŠK‘Y][ÛœÈ\™H›ÝX›\ÚYŠNÂ˜ÛÛœÝÙYYÛÝ\˜ÙHH]ØZ]™XYš[Jˆ™]ÈT“
-‹‹‹ÜÜ˜ËÛX‹Ø]™XÜËÜÙYYœÙ\™\‹È‹[\Ü›Y]K\›
-Kˆ]Ž‹ŠNÂ˜\ÜÙ\
-ˆØÛÛœÝÑQQÕ‘T”ÒSÓˆH˜]™XÜËV×ˆ—JÈŽËË\Ý
-ÙYYÛÝ\˜ÙJKˆ•H›ÙXÝ[ÛˆØ][ÙÝYHÙYYØ\È›ÝY˜[˜ÙY›ÜˆH^[™YØ[[™\ˆ‹ŠNÂ‚œ›ØÙ\ÜËœÝÝ]Üš]Jˆ”ÓÓ‹œÝš[™ÚYžJˆÂˆÚXÚÙYØ]ˆÒPÒÑQÐUˆØ[[™\—ÜÝ\ˆÐSS‘T—ÔÕT•ˆÜš^›ÛŽˆÔ’V“Ó‹ˆÙ\šY\Îˆ™[Ú][S™]\›[™Ô˜XÙTÙ\šY\Ë›[™Ýˆ˜XÙWÙ]\ÎˆØ\™Ë›[™ÝˆY™\\ÙYÙ\Ý[˜ÙWÜ›ÝÜÎˆ™[Ú][S™]\›[™Ô˜XÙQY][ÛœË›[™ÝˆÛÛ\]YÜ›ÝÜÎˆ™[Ú][S™]\›[™Ô˜XÙQY][ÛœË™š[\Šˆ
-Y][ÛŠHOˆY][Û‹œÝ]\ÈOOH‘š[š\ÚY‹ˆ
-K›[™Ýˆ]\™WÜ›ÝÜÎˆ™[Ú][S™]\›[™Ô˜XÙQY][ÛœË™š[\Š
-Y][ÛŠHOˆY][Û‹œÝ]\ÈOOH‘š[š\ÚYŠBˆ›[™ÝˆÛÝ[šY\Îˆ^XÝYÛÝ[žPÛÝ[Ëˆ[™[YÌŒ×Ü™XÝ\œ™[˜Ù\ÎˆˆYÚØÛÛ™šY[˜ÙWÙ\XØ]\×Ù^XÝYˆˆKˆ[ˆ‹ˆ
-H
-È—ˆ‹ŠNÂ
+import {
+  belgiumNetherlandsRaceEditions,
+  belgiumNetherlandsRaceSeries,
+} from "../src/data/belgium-netherlands-races.ts";
+import {
+  verifiedFixtureEditionOverrides,
+  verifiedFixtureEditionReplacements,
+} from "../src/data/fixture-deduplication.ts";
+import {
+  COUNTRY_FILTERS,
+  COUNTRY_GROUPS,
+  isoToFlagEmoji,
+  resolveCountry,
+} from "../src/lib/athrecs/countries.ts";
+import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
+
+const CHECKED_AT = "2026-08-27";
+const CALENDAR_START = "2026-01-01";
+const HORIZON = "2027-12-31";
+
+const expectedCountryCounts = {
+  Belgium: { iso: "BE", flag: "ðŸ‡§ðŸ‡ª", series: 33, rows: 97, dates: 37 },
+  Netherlands: { iso: "NL", flag: "ðŸ‡³ðŸ‡±", series: 32, rows: 115, dates: 48 },
+};
+
+const seriesBySlug = new Map(belgiumNetherlandsRaceSeries.map((series) => [series.slug, series]));
+assert.equal(seriesBySlug.size, belgiumNetherlandsRaceSeries.length, "Duplicate event-series slug");
+assert.equal(belgiumNetherlandsRaceSeries.length, 65, "Unexpected event-series count");
+assert.equal(belgiumNetherlandsRaceEditions.length, 212, "Unexpected advertised-distance count");
+
+const editionKeys = new Set();
+for (const edition of belgiumNetherlandsRaceEditions) {
+  const editionKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+  assert(!editionKeys.has(editionKey), `Duplicate distance row: ${editionKey}`);
+  editionKeys.add(editionKey);
+  assert(seriesBySlug.has(edition.seriesSlug), `Unknown series: ${edition.seriesSlug}`);
+  assert(edition.date >= CALENDAR_START, `Fixture predates requested calendar: ${editionKey}`);
+  assert(edition.date <= HORIZON, `Fixture exceeds requested horizon: ${editionKey}`);
+  assert(edition.distanceKm > 0, `Fixture has no usable distance: ${editionKey}`);
+  assert.match(edition.source, /^https:\/\//, `Missing public source: ${editionKey}`);
+  assert.equal(edition.publishAllDistances, true, `Distance is not publishable: ${editionKey}`);
+  assert(
+    seriesBySlug.get(edition.seriesSlug).distances.includes(edition.distance),
+    `Series omits advertised distance: ${editionKey}`,
+  );
+  if (edition.date < CHECKED_AT) {
+    assert.equal(edition.status, "Finished", `Past fixture is not finished: ${editionKey}`);
+    assert(!edition.entryUrl, `Past fixture exposes an entry link: ${editionKey}`);
+  } else if (edition.status === "Closed" || edition.status === "TBC") {
+    assert(!edition.entryUrl, `${edition.status} fixture exposes an entry link: ${editionKey}`);
+  } else {
+    assert.equal(edition.status, "Open", `Future fixture has an invalid status: ${editionKey}`);
+    assert.match(
+      edition.entryUrl ?? "",
+      /^https:\/\//,
+      `Future fixture has no entry URL: ${editionKey}`,
+    );
+    assert.equal(
+      edition.entryOptions?.[0]?.checkedAt,
+      CHECKED_AT,
+      `Stale entry check: ${editionKey}`,
+    );
+    assert.equal(edition.entryOptions?.[0]?.isVerified, true, `Unverified entry: ${editionKey}`);
+  }
+}
+
+for (const [country, expected] of Object.entries(expectedCountryCounts)) {
+  const countrySeries = belgiumNetherlandsRaceSeries.filter((series) => series.country === country);
+  const slugs = new Set(countrySeries.map((series) => series.slug));
+  const countryEditions = belgiumNetherlandsRaceEditions.filter((edition) =>
+    slugs.has(edition.seriesSlug),
+  );
+  const dates = new Set(countryEditions.map((edition) => `${edition.seriesSlug}|${edition.date}`));
+  assert.equal(countrySeries.length, expected.series, `${country} series count changed`);
+  assert.equal(countryEditions.length, expected.rows, `${country} distance count changed`);
+  assert.equal(dates.size, expected.dates, `${country} race-date count changed`);
+  const resolved = resolveCountry({ country });
+  assert.equal(resolved.iso, expected.iso, `${country} resolved to the wrong ISO code`);
+  assert.equal(isoToFlagEmoji(resolved.iso), expected.flag, `${country} flag is incorrect`);
+  assert(COUNTRY_FILTERS.includes(country), `${country} is absent from race country filters`);
+  assert(
+    COUNTRY_GROUPS.some((group) => group.options.includes(country)),
+    `${country} is absent from the country selector`,
+  );
+}
+
+const requiredDistanceGroups = [
+  ["bashirs-run-gentbrugge", "2026-03-08", ["10K", "5K", "Half"]],
+  ["leuven-marathon", "2027-04-11", ["10K", "Half", "Marathon"]],
+  ["energyvision-knokke-run", "2026-05-01", ["10K", "6K", "Half"]],
+  ["nieuwpoort-marathon", "2026-09-20", ["10K", "5K", "Half", "Marathon"]],
+  ["bruges-marathon", "2026-10-11", ["Half", "Marathon"]],
+  ["gtlc-summer", "2027-05-15", ["22K", "8.59K", "87K"]],
+  ["schoorl-run", "2027-02-14", ["10K", "30K", "Half"]],
+  ["nn-cpc-loop-den-haag", "2027-03-14", ["10K", "5K", "Half"]],
+  ["rotterdam-marathon", "2027-04-11", ["10K", "Marathon"]],
+  ["singelloop-utrecht", "2026-10-04", ["10K", "5K"]],
+  ["eindhoven-marathon", "2026-10-11", ["Half", "Marathon", "Quarter Marathon"]],
+  ["amsterdam-marathon", "2026-10-18", ["Half", "Marathon"]],
+  ["wa-marathon-the-hague-7243223", "2026-11-01", ["10K", "5K", "Marathon"]],
+  ["amgen-singelloop-breda", "2027-04-04", ["10K", "5K", "Half"]],
+];
+for (const [slug, date, distances] of requiredDistanceGroups) {
+  const actual = belgiumNetherlandsRaceEditions
+    .filter((edition) => edition.seriesSlug === slug && edition.date === date)
+    .map((edition) => edition.distance)
+    .sort();
+  assert.deepEqual(actual, [...distances].sort(), `Distance group changed: ${slug}|${date}`);
+}
+
+assert(
+  !belgiumNetherlandsRaceEditions.some(
+    (edition) => edition.seriesSlug === "bruges-marathon" && edition.distance === "8K",
+  ),
+  "The Bruges family walk was misclassified as a running race",
+);
+assert(
+  !belgiumNetherlandsRaceEditions.some(
+    (edition) => edition.seriesSlug === "singelloop-utrecht" && edition.distance === "Half",
+  ),
+  "An unadvertised Utrecht half marathon was added",
+);
+assert(
+  !belgiumNetherlandsRaceEditions.some(
+    (edition) => edition.seriesSlug === "marathon-amersfoort" && edition.distance === "Marathon",
+  ),
+  "The Amersfoort training marathon was misclassified as a race",
+);
+
+for (const expected of [
+  ["wa-deloitte-fast-fun-5-10km-trakks-lbfa-road-tour-7244627", "Other", "10K"],
+  ["wa-dam-tot-damloop-7238027", "Other", "10 Miles"],
+  ["wa-marathon-the-hague-7243223", "Other", "Marathon"],
+  ["schoorl-run", "Marathon", "10K"],
+]) {
+  const [seriesSlug, distance, toDistance] = expected;
+  assert(
+    verifiedFixtureEditionReplacements.some(
+      (replacement) =>
+        replacement.seriesSlug === seriesSlug &&
+        replacement.distance === distance &&
+        replacement.toDistance === toDistance,
+    ),
+    `Missing result-safe legacy edition migration: ${seriesSlug}`,
+  );
+  assert(
+    verifiedFixtureEditionOverrides[
+      `${seriesSlug}|${
+        seriesSlug === "schoorl-run"
+          ? "2027-02-14|Marathon"
+          : seriesSlug.includes("deloitte")
+            ? "2026-09-06|Other"
+            : seriesSlug.includes("dam-tot")
+              ? "2026-09-20|Other"
+              : "2026-11-01|Other"
+      }`
+    ],
+    `Missing static catalogue correction: ${seriesSlug}`,
+  );
+}
+
+const cards = collapseSameEventDate(
+  belgiumNetherlandsRaceEditions.map((edition, index) => ({
+    id: index,
+    event_slug: edition.seriesSlug,
+    event_name: seriesBySlug.get(edition.seriesSlug).name,
+    event_date: edition.date,
+    distance_code: edition.distance,
+  })),
+);
+assert.equal(cards.length, 85, "Editions do not collapse to one card per race date");
+
+const catalogueSource = await readFile(
+  new URL("../src/data/catalogue.ts", import.meta.url),
+  "utf8",
+);
+assert(catalogueSource.includes("belgiumNetherlandsRaceSeries"), "Series are not published");
+assert(catalogueSource.includes("belgiumNetherlandsRaceEditions"), "Editions are not published");
+const seedSource = await readFile(
+  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
+  "utf8",
+);
+assert(
+  /const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource),
+  "The production catalogue seed was not advanced for the expanded calendar",
+);
+
+process.stdout.write(
+  JSON.stringify(
+    {
+      checked_at: CHECKED_AT,
+      calendar_start: CALENDAR_START,
+      horizon: HORIZON,
+      series: belgiumNetherlandsRaceSeries.length,
+      race_dates: cards.length,
+      advertised_distance_rows: belgiumNetherlandsRaceEditions.length,
+      completed_rows: belgiumNetherlandsRaceEditions.filter(
+        (edition) => edition.status === "Finished",
+      ).length,
+      future_rows: belgiumNetherlandsRaceEditions.filter((edition) => edition.status !== "Finished")
+        .length,
+      countries: expectedCountryCounts,
+      invented_2027_recurrences: 0,
+      high_confidence_duplicates_expected: 0,
+    },
+    null,
+    2,
+  ) + "\n",
+);
