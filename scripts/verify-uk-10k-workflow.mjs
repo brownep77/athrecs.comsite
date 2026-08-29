@@ -7,11 +7,15 @@ const queuePath = path.join(root, "docs/uk-10k-enrichment/queue.json");
 const progressPath = path.join(root, "docs/uk-10k-enrichment/progress.json");
 const runAbcPath = path.join(root, "src/data/runabc.ts");
 const optionsPath = path.join(root, "src/data/entry-options-uk-10ks.ts");
+const release64Path = path.join(root, "src/data/uk-10k-release-64.ts");
 
 const queue = JSON.parse(fs.readFileSync(queuePath, "utf8"));
 const progress = JSON.parse(fs.readFileSync(progressPath, "utf8"));
 const runAbc = fs.readFileSync(runAbcPath, "utf8");
-const options = fs.readFileSync(optionsPath, "utf8");
+const options = [
+  fs.readFileSync(optionsPath, "utf8"),
+  fs.readFileSync(release64Path, "utf8"),
+].join("\n");
 
 const failures = [];
 const assert = (condition, message) => {
