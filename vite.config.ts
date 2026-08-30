@@ -1,9 +1,66 @@
+import path from "node:path";
 import type { Plugin } from "vite";
 import { defineConfig } from "vite";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
+
+/**
+ * Build a specialist RunRecs deployment from the same repository without
+ * changing ATHRECS production. The RunRecs Vercel project sets
+ * VITE_SITE_BRAND=runrecs; the feature branch is also detected automatically so
+ * its preview exercises the real specialist modules before a domain is added.
+ */
+function runRecsVariantPlugin(): Plugin {
+  const branch = process.env.VERCEL_GIT_COMMIT_REF?.trim() ?? "";
+  const explicitBrand = process.env.VITE_SITE_BRAND?.trim().toLowerCase();
+  const enabled =
+    explicitBrand === "runrecs" ||
+    branch === "feat/runrecs-running-site" ||
+    branch === "runrecs-production";
+
+  const moduleAliases = new Map<string, string>([
+    ["@/lib/athrecs/api", "src/runrecs/api.ts"],
+    ["@/lib/athrecs/filters", "src/runrecs/filters.ts"],
+    ["@/lib/athrecs/seo", "src/runrecs/seo.ts"],
+  ]);
+  const routeAliases = new Map<string, string>([
+    ["./routes/__root", "src/runrecs/routes/__root.tsx"],
+    ["./routes/index", "src/runrecs/routes/index.tsx"],
+  ]);
+
+  return {
+    name: "athrecs:runrecs-variant",
+    enforce: "pre",
+    config() {
+      if (!enabled) return undefined;
+      return {
+        define: {
+          "import.meta.env.VITE_SITE_BRAND": JSON.stringify("runrecs"),
+        },
+      };
+    },
+    resolveId(source, importer) {
+      if (!enabled) return null;
+
+      const moduleReplacement = moduleAliases.get(source);
+      if (moduleReplacement) return path.resolve(process.cwd(), moduleReplacement);
+
+      const normalizedImporter = importer?.replaceAll("\\", "/") ?? "";
+      if (normalizedImporter.endsWith("/src/routeTree.gen.ts")) {
+        const routeReplacement = routeAliases.get(source);
+        if (routeReplacement) return path.resolve(process.cwd(), routeReplacement);
+      }
+      return null;
+    },
+    configResolved() {
+      if (enabled) {
+        console.log(`[runrecs] specialist running build enabled (branch=${branch || "local"})`);
+      }
+    },
+  };
+}
 
 /**
  * Finish PGLite bootstrap during dev-server setup (before traffic). Vite awaits
@@ -132,6 +189,7 @@ export default defineConfig(({ command }) => ({
   },
   resolve: { tsconfigPaths: true },
   plugins: [
+    runRecsVariantPlugin(),
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
     authPopupPlugin(),
