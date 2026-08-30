@@ -8,6 +8,7 @@ const PREVIOUS_CURRENT_CHECKED_AT = "2026-08-26";
 const CURRENT_CHECKED_AT = "2026-08-27";
 const LATEST_CURRENT_CHECKED_AT = "2026-08-28";
 const SCAN_CHECKED_AT = "2026-08-29";
+const CURRENT_SCAN_CHECKED_AT = "2026-08-30";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
@@ -968,6 +969,44 @@ const seeds: RaceSeed[] = [
     notes:
       "The direct official registration page consistently confirms the 15 August 2027 trail half-marathon, 10:00 start and open entry.",
   },
+  {
+    slug: "burnsall-trail-half-2027",
+    name: "Burnsall Trail Half 2027",
+    date: "2027-04-17",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Burnsall",
+    area: "Burnsall village, the Dales Way and surrounding Yorkshire Dales countryside",
+    surface: "Trail",
+    organiser: "Due North Events",
+    url: "https://www.sientries.co.uk/event/burnsall-trail-half-2027",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: CURRENT_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 17 April 2027 trail half-marathon and 10:00 start; entry opens on 5 September 2026, so no live checkout is asserted yet.",
+  },
+  {
+    slug: "kettlewell-trail-half-2027",
+    name: "Kettlewell Trail Half 2027",
+    date: "2027-06-19",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Kettlewell",
+    area: "Hawkswick Cote, Wharfedale and the Yorkshire Dales",
+    surface: "Trail",
+    organiser: "Due North Events",
+    url: "https://www.sientries.co.uk/event/kettlewell-trail-half-2027",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: CURRENT_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 19 June 2027 trail half-marathon and 10:00 start; entry opens on 5 September 2026, so no live checkout is asserted yet.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -1037,6 +1076,8 @@ type ExistingSeriesEditionSeed = {
   priceAmount?: number;
   priceCurrency?: string;
   checkedAt?: string;
+  status?: Edition["status"];
+  hasEntry?: boolean;
   notes: string;
 };
 
@@ -1162,38 +1203,57 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The direct official registration page confirms the 18 April 2027 half-marathon, 11:00 start and open entry; the existing multi-distance Women Can Marathon card is enriched instead of duplicated.",
   },
+  {
+    seriesSlug: "malham-half-marathon",
+    date: "2027-09-04",
+    startTime: "10:00",
+    organiser: "Due North Events",
+    url: "https://www.sientries.co.uk/event/malham-trail-half-2027",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: CURRENT_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 4 September 2027 trail half-marathon and 10:00 start; entry opens on 5 September 2026, so the established Malham card is reused without asserting a live checkout.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
 export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesEditionSeeds.map(
-  (seed) => ({
-    seriesSlug: seed.seriesSlug,
-    date: seed.date,
-    distance: "Half",
-    distanceKm: 21.0975,
-    status: "Open",
-    entryUrl: seed.entryUrl ?? seed.url,
-    ...(seed.startTime ? { startTime: seed.startTime } : {}),
-    source: seed.url,
-    notes: seed.notes,
-    ...(seed.publishAllDistances ? { publishAllDistances: true } : {}),
-    entryOptions: [
-      {
-        providerCode: `official-${seed.seriesSlug}-${seed.date}`,
-        providerName: seed.organiser,
-        entryUrl: seed.entryUrl ?? seed.url,
-        entryType: "official",
-        status: "open",
-        ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
-        priceCurrency: seed.priceCurrency ?? "GBP",
-        checkedAt: seed.checkedAt ?? LATEST_CHECKED_AT,
-        sourceUrl: seed.url,
-        isVerified: true,
-        isPrimary: true,
-        notes: "Official organiser event and direct entry page.",
-      },
-    ],
-  }),
+  (seed) => {
+    const hasEntry = seed.hasEntry ?? seed.status !== "TBC";
+    return {
+      seriesSlug: seed.seriesSlug,
+      date: seed.date,
+      distance: "Half",
+      distanceKm: 21.0975,
+      status: seed.status ?? "Open",
+      ...(hasEntry ? { entryUrl: seed.entryUrl ?? seed.url } : {}),
+      ...(seed.startTime ? { startTime: seed.startTime } : {}),
+      source: seed.url,
+      notes: seed.notes,
+      ...(seed.publishAllDistances ? { publishAllDistances: true } : {}),
+      ...(hasEntry
+        ? {
+            entryOptions: [
+              {
+                providerCode: `official-${seed.seriesSlug}-${seed.date}`,
+                providerName: seed.organiser,
+                entryUrl: seed.entryUrl ?? seed.url,
+                entryType: "official" as const,
+                status: "open" as const,
+                ...(seed.priceAmount !== undefined ? { priceAmount: seed.priceAmount } : {}),
+                priceCurrency: seed.priceCurrency ?? "GBP",
+                checkedAt: seed.checkedAt ?? LATEST_CHECKED_AT,
+                sourceUrl: seed.url,
+                isVerified: true,
+                isPrimary: true,
+                notes: "Official organiser event and direct entry page.",
+              },
+            ],
+          }
+        : {}),
+    };
+  },
 );
 
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
@@ -1308,6 +1368,30 @@ export const dailyHalfTenMileResearchQueue = [
       "The official entry page markets a half marathon but specifies an actual route distance of 14.35 miles, so it is held for the non-standard-distance catalogue rather than mislabelled as a canonical half.",
     sourceUrl: "https://www.sientries.co.uk/event.php?event_id=17372",
   },
+  {
+    slug: "silverbacktrails-othnesberys-revenge-half-marathon-2027",
+    date: "2027-08-15",
+    country: "England",
+    reason:
+      "The official 2027 entry page gives a consistent event date but its race-description heading still labels the edition MMXXVI, so publication is held pending correction.",
+    sourceUrl: "https://www.sientries.co.uk/event/silverbacktrails-othnesberys-revenge-2027",
+  },
+  {
+    slug: "lundy-island-race-2027",
+    date: "2027-07-18",
+    country: "England",
+    reason:
+      "The official entry page markets a half marathon but specifies an actual route distance of 13.5 miles, so it is held for the non-standard-distance catalogue rather than mislabelled as a canonical half.",
+    sourceUrl: "https://www.sientries.co.uk/event/lundy-island-race-2027",
+  },
+  {
+    slug: "abbeyknockmoy-half-marathon-2027",
+    date: "2027-09-12",
+    country: "Ireland",
+    reason:
+      "The direct registration page confirms the date and half-marathon distance but labels the Athletics Ireland permit as pending approval.",
+    sourceUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
+  },
 ] as const;
 
 const BRIGHTEN_MARINA_URL =
@@ -1412,6 +1496,22 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     website: "https://www.womencanmarathon.co.uk/",
     source_url: "https://www.sientries.co.uk/event/women-can-marathon-2027",
     defaultStartTime: "11:00",
+  },
+  "malham-half-marathon": {
+    name: "Malham Trail Half Marathon & 10K",
+    city: "Malham",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Malham Show Field, Malham Cove and Malham Tarn",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    summary: "Malham Trail Half Marathon & 10K — trail races through the Yorkshire Dales.",
+    description:
+      "Due North Events' established Malham card carries its trail half-marathon and 10K editions through Malham Cove and Malham Tarn.",
+    organiser: "Due North Events",
+    website: "https://www.sientries.co.uk/event/malham-trail-half-2027",
+    source_url: "https://www.sientries.co.uk/event/malham-trail-half-2027",
+    defaultStartTime: "10:00",
   },
 };
 
