@@ -339,18 +339,23 @@ export const getPublishedSharedProfile = createServerFn({ method: "GET" })
   }))
   .handler(async ({ data }) => {
     if (!isValidShareSlug(data.slug)) return null;
-    const sql = await ready();
-    const rows = await sql<ShareRow>`
-      select
-        user_id, slug, enabled, share_bio, share_results, share_club, share_location,
-        acknowledged_at::text as acknowledged_at,
-        published_at::text as published_at
-      from athlete_public_shares
-      where slug = ${data.slug}
-        and enabled = true
-      limit 1
-    `;
-    const share = rows[0];
-    if (!share) return null;
-    return buildPublicProfile(sql, share);
+    try {
+      const sql = await ready();
+      const rows = await sql<ShareRow>`
+        select
+          user_id, slug, enabled, share_bio, share_results, share_club, share_location,
+          acknowledged_at::text as acknowledged_at,
+          published_at::text as published_at
+        from athlete_public_shares
+        where slug = ${data.slug}
+          and enabled = true
+        limit 1
+      `;
+      const share = rows[0];
+      if (!share) return null;
+      return buildPublicProfile(sql, share);
+    } catch {
+      // Missing table or lookup failure must 404, never 500 a public athlete URL.
+      return null;
+    }
   });
