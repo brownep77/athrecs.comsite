@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-08-30",
+  "horizonEnd": "2027-12-31",
+  "sources": [
+    "https://www.scottishathletics.org.uk/events/championship-events/",
+    "https://www.welshathletics.org/en/competition/current/discipline",
+    "https://athleticsni.org/Fixtures",
+    "https://www.englishcrosscountry.co.uk/news/nationals-2027-venue-announcement/",
+    "https://fixtures.myathletics.uk/"
+  ],
+  "counts": {
+    "newSeries": 33,
+    "newEditions": 38,
+    "heldAlreadyPresent": 5
+  },
+  "notes": "Power of 10 search is recaptcha-gated; federation championship calendars were used as the licensed equivalent through December 2027. No 2028 dates were published."
+}

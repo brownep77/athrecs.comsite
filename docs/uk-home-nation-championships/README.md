@@ -1,24 +1,25 @@
-# UK home-nation championship fixtures
+# UK home-nation championships 2026–2027
 
-Checked on 29 August 2026.
-
-Power of 10's public Fixture Search (`https://www.powerof10.uk/Home/FixtureSearch`) does not expose a bulk listing: the new site returns an IIS permission error and the search endpoint is recaptcha-gated. The licensed UK Fixtures calendar at `https://fixtures.myathletics.uk/` is the official equivalent feed.
-
-England track, field and cross-country licensed fixtures from that calendar were already imported in `src/data/england-athletics-uk-fixtures.ts` (138 series / 189 editions through 19 April 2027).
-
-This pass adds the remaining home-nation championship meetings published by:
+Power of 10 fixture search is recaptcha-gated, so this release uses the same licensed calendars that feed it:
 
 - [scottishathletics championship events](https://www.scottishathletics.org.uk/events/championship-events/)
-- [Welsh Athletics championship events 2026](https://welshathletics.org/en/page/welsh-championship-events-2026)
-- [Athletics NI fixtures](https://www.athleticsni.org/Fixtures)
-- [English Cross Country Association](https://www.englishcrosscountry.co.uk/) for the 2027 English National XC
+- [Welsh Athletics current competitions](https://www.welshathletics.org/en/competition/current/discipline)
+- [Athletics NI fixtures](https://athleticsni.org/Fixtures)
+- [English Cross Country Association 2027 Nationals](https://www.englishcrosscountry.co.uk/news/nationals-2027-venue-announcement/)
+- [UK Fixtures calendar](https://fixtures.myathletics.uk/) for England-licensed meetings already imported
 
-## Counts
+Checked 30 August 2026 through 31 December 2027. No 2028 championship dates were published on those calendars.
 
-- 26 new championship series
-- 29 editions from 29 August 2026 through 20 February 2027
-- 9 published host races / XC meetings skipped because they are already in Athrecs
+## Added
 
-No fixtures beyond December 2027 were published on the federation calendars at check time. Scottish indoor championships for January–March 2027 are included with venue-TBC notes where the federation has not yet named the hall.
+33 championship series and 38 editions covering remaining 2026 and confirmed 2027 home-nation championships: Scottish outdoor, indoor, district and national XC; Welsh mountain, junior road relays, combined events and 2027 indoor championships; NI combined events and NIMAA XC; English National XC at Thoresby Estate.
 
-Machine-readable decision log: `audit-2026-08-29.json`.
+## Held as already published
+
+- Cardiff Half Marathon / Welsh Half Marathon Championships
+- Richard Burton 10k / Welsh 10km Championship
+- Home Nations 5K, Cardiff
+- ECCA National Cross Country Relay Championships
+- Seaton Classic 10Km NI & Ulster 10K Road Championships
+
+Run `npm run verify:uk-home-nation-championships` to validate the release.
