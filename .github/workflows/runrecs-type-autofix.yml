@@ -25,42 +25,40 @@ jobs:
 
           api = Path("src/runrecs/api.ts")
           text = api.read_text()
-          before = '''    const mapped = rows
-              .map((rawRow) => {
-                const { groups_json, ...row } = rawRow;
-                const distances = sanitizeDistances(
-                  row.name,
-                  row.distances_csv ? row.distances_csv.split(",") : [],
-                );'''
-          after = '''    const mapped: EventListItem[] = rows
-              .map((rawRow): EventListItem | null => {
-                const { groups_json, distances_csv, ...row } = rawRow;
-                const distances = sanitizeDistances(
-                  row.name,
-                  distances_csv ? distances_csv.split(",") : [],
-                );'''
-          if before not in text:
-              raise SystemExit("RunRecs API type-repair anchor was not found")
-          api.write_text(text.replace(before, after, 1))
+          replacements = [
+              ("    const mapped = rows", "    const mapped: EventListItem[] = rows"),
+              ("      .map((rawRow) => {", "      .map((rawRow): EventListItem | null => {"),
+              (
+                  "        const { groups_json, ...row } = rawRow;",
+                  "        const { groups_json, distances_csv, ...row } = rawRow;",
+              ),
+              (
+                  '          row.distances_csv ? row.distances_csv.split(",") : [],',
+                  '          distances_csv ? distances_csv.split(",") : [],',
+              ),
+          ]
+          for before, after in replacements:
+              if before not in text:
+                  raise SystemExit(f"RunRecs API type-repair anchor was not found: {before}")
+              text = text.replace(before, after, 1)
+          api.write_text(text)
 
           home = Path("src/runrecs/routes/index.tsx")
           text = home.read_text()
-          before = '''function RunRecsHomePage() {
-            const { stats, races, updates } = Route.useLoaderData();'''
-          after = '''function RunRecsHomePage() {
-            // The committed ATHRECS route tree still describes the base homepage during
-            // standalone type-checking; Vite swaps in this loader for RunRecs builds.
-            const { stats, races, updates } = Route.useLoaderData() as unknown as {
-              stats: {
-                events: number;
-                clubs: number;
-                athletes: number;
-                upcoming: number;
-                bySport: Array<{ sport: string; n: number; upcoming: number }>;
-              };
-              races: EventListItem[];
-              updates: HomeSportUpdate[];
-            };'''
+          before = "  const { stats, races, updates } = Route.useLoaderData();"
+          after = '''  // The committed ATHRECS route tree still describes the base homepage during
+          // standalone type-checking; Vite swaps in this loader for RunRecs builds.
+          const { stats, races, updates } = Route.useLoaderData() as unknown as {
+            stats: {
+              events: number;
+              clubs: number;
+              athletes: number;
+              upcoming: number;
+              bySport: Array<{ sport: string; n: number; upcoming: number }>;
+            };
+            races: EventListItem[];
+            updates: HomeSportUpdate[];
+          };'''
           if before not in text:
               raise SystemExit("RunRecs homepage type-repair anchor was not found")
           home.write_text(text.replace(before, after, 1))
