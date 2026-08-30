@@ -52,6 +52,7 @@ type IdentityRow = {
   auth_name: string;
   full_name: string | null;
   display_name: string | null;
+  previous_names: string[] | null;
   city: string | null;
   region: string | null;
   country: string | null;
@@ -97,6 +98,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           account_user."name" as auth_name,
           profile.full_name,
           profile.display_name,
+          profile.previous_names,
           profile.city,
           profile.region,
           profile.country,
@@ -124,6 +126,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
       identity.full_name,
       identity.display_name,
       identity.auth_name,
+      ...(identity.previous_names ?? []),
       ...linkedNames.map((row) => row.athlete_name),
     ]);
     const { normalizedPatterns, rawPatterns } = buildPotentialMatchSearchPatterns(searchedNames);
