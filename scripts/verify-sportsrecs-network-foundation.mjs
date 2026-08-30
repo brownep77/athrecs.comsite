@@ -75,6 +75,28 @@ assert(route.includes("ATHRECS remains the protected canonical home"), "Network 
 const shell = await readFile("src/components/staff/StaffMicrositeShell.tsx", "utf8");
 assert(shell.includes('to: "/admin/network"'), "Staff navigation must expose the network view");
 
+const runRecsApi = await readFile("src/runrecs/api.ts", "utf8");
+assert(
+  runRecsApi.includes("e.sport in ('Running', 'Parkrun')") &&
+    runRecsApi.includes("event.sport in ('Running', 'Parkrun')"),
+  "RunRecs public reads must remain limited to Running and Parkrun",
+);
+
+const viteConfig = await readFile("vite.config.ts", "utf8");
+assert(
+  viteConfig.includes("VERCEL_PROJECT_PRODUCTION_URL") &&
+    viteConfig.includes('projectProductionHost.includes("runrecs")'),
+  "A Vercel project named runrecs must activate the specialist build automatically",
+);
+
+const publisher = await readFile("scripts/publish-after-build.mjs", "utf8");
+assert(
+  publisher.includes("VERCEL_PROJECT_PRODUCTION_URL") &&
+    publisher.includes('projectProductionHost.includes("runrecs")') &&
+    publisher.includes("process.exit(0)"),
+  "RunRecs project builds must never execute the shared catalogue publishers",
+);
+
 const docs = await readFile("docs/sportsrecs-network-foundation.md", "utf8");
 assert(docs.includes("Public URL migration and domain activation require a separate approved release."));
 

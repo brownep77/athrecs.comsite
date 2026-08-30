@@ -2,8 +2,14 @@
 import { spawnSync } from "node:child_process";
 
 const siteBrand = process.env.VITE_SITE_BRAND?.trim().toLowerCase();
-if (siteBrand === "runrecs") {
-  console.log("[publish-after-build] RunRecs is a read-through specialist site; ATHRECS remains the sole catalogue publisher.");
+const projectProductionHost =
+  process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim().toLowerCase() ?? "";
+const isRunRecs = siteBrand === "runrecs" || projectProductionHost.includes("runrecs");
+
+if (isRunRecs) {
+  console.log(
+    "[publish-after-build] RunRecs is a read-through specialist site; ATHRECS remains the sole catalogue publisher.",
+  );
   process.exit(0);
 }
 
