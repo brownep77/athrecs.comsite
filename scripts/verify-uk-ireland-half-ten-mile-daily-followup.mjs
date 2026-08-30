@@ -10,10 +10,11 @@ const PREVIOUS_CURRENT_CHECKED_AT = "2026-08-26";
 const CURRENT_CHECKED_AT = "2026-08-27";
 const LATEST_CURRENT_CHECKED_AT = "2026-08-28";
 const SCAN_CHECKED_AT = "2026-08-29";
+const CURRENT_SCAN_CHECKED_AT = "2026-08-30";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 52;
-const NEW_EDITION_COUNT = 55;
-const EXISTING_SERIES_EDITION_COUNT = 12;
+const NEW_SERIES_COUNT = 54;
+const NEW_EDITION_COUNT = 57;
+const EXISTING_SERIES_EDITION_COUNT = 13;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -43,7 +44,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  45,
+  47,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -140,6 +141,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_CHECKED_AT,
         LATEST_CURRENT_CHECKED_AT,
         SCAN_CHECKED_AT,
+        CURRENT_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -178,6 +180,25 @@ for (const [slug, entryUrl] of expectedScanAdditions) {
     edition.entryOptions?.[0]?.checkedAt,
     SCAN_CHECKED_AT,
     `${slug} entry provenance was not checked in the 29 August scan`,
+  );
+}
+
+for (const [slug, date] of [
+  ["burnsall-trail-half-2027", "2027-04-17"],
+  ["kettlewell-trail-half-2027", "2027-06-19"],
+]) {
+  const series = dailyHalfTenMileSeries.find((candidate) => candidate.slug === slug);
+  const edition = dailyHalfTenMileEditions.find(
+    (candidate) => candidate.seriesSlug === slug && candidate.date === date,
+  );
+  assert(series && edition, `${slug} is missing from the 30 August scan`);
+  assert.equal(edition.status, "TBC", `${slug} should remain TBC until entry opens`);
+  assert.equal(edition.entryUrl, undefined, `${slug} must not advertise entry before it opens`);
+  assert.equal(edition.entryOptions, undefined, `${slug} must not expose a premature checkout`);
+  assert.match(
+    series.source_url,
+    /^https:\/\/www\.sientries\.co\.uk\/event\//,
+    `${slug} does not use the direct official event source`,
   );
 }
 
@@ -282,8 +303,13 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
     `${key} duplicates another existing-card source URL`,
   );
   existingEditionSourceUrls.add(sourceUrl);
-  assert.equal(edition.status, "Open", `${key} should be open`);
-  assert(edition.entryOptions?.length, `${key} needs a checked official entry option`);
+  if (edition.status === "Open") {
+    assert(edition.entryOptions?.length, `${key} needs a checked official entry option`);
+  } else {
+    assert.equal(edition.status, "TBC", `${key} uses an unsupported non-open status`);
+    assert.equal(edition.entryUrl, undefined, `${key} must not advertise a premature checkout`);
+    assert.equal(edition.entryOptions, undefined, `${key} must not expose a premature checkout`);
+  }
   for (const option of edition.entryOptions ?? []) {
     assert(
       [
@@ -291,9 +317,8 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         PREVIOUS_CURRENT_CHECKED_AT,
         CURRENT_CHECKED_AT,
         SCAN_CHECKED_AT,
-      ].includes(
-        option.checkedAt,
-      ),
+        CURRENT_SCAN_CHECKED_AT,
+      ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
     assert.equal(option.isVerified, true, `${key} has an unverified entry source`);
@@ -369,6 +394,19 @@ assert.deepEqual(
   dailyHalfTenMileSeriesOverrides["women-can-marathon"].distances,
   ["Marathon", "Half", "10K"],
   "The existing Women Can card was not enriched with its official distances",
+);
+
+const malhamEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) => edition.seriesSlug === "malham-half-marathon" && edition.date === "2027-09-04",
+);
+assert(malhamEdition, "The verified Malham 2027 half-marathon enrichment is missing");
+assert.equal(malhamEdition.startTime, "10:00", "Malham has the wrong half-marathon start");
+assert.equal(malhamEdition.status, "TBC", "Malham should remain TBC until entry opens");
+assert.equal(malhamEdition.entryUrl, undefined, "Malham must not advertise entry before it opens");
+assert.equal(
+  dailyHalfTenMileSeriesOverrides["malham-half-marathon"].source_url,
+  "https://www.sientries.co.uk/event/malham-trail-half-2027",
+  "Malham does not expose the current official event source on its existing card",
 );
 
 const brightenSeries = catalogue.seriesList.find((series) => series.slug === "brighten-marina");
@@ -467,6 +505,22 @@ assert(
   ),
   "Charm Bracelet must remain held from the canonical half catalogue at 14.35 miles",
 );
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "silverbacktrails-othnesberys-revenge-half-marathon-2027",
+  ),
+  "Othnesbery's Revenge must remain held while its year-specific heading conflicts",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "lundy-island-race-2027"),
+  "Lundy Island must remain held from the canonical half catalogue at 13.5 miles",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "abbeyknockmoy-half-marathon-2027",
+  ),
+  "Abbeyknockmoy must remain held while its Athletics Ireland permit is pending",
+);
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
@@ -503,5 +557,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (42 half marathons and 10 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, two enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (44 half marathons and 10 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, two enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );
