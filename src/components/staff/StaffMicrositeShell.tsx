@@ -12,6 +12,7 @@ import {
   Loader2,
   LockKeyhole,
   LogOut,
+  Network,
   RefreshCcw,
   ShieldCheck,
   UserRoundCog,
@@ -36,6 +37,13 @@ const staffNav = [
     label: "Dashboard",
     icon: ShieldCheck,
     match: (path: string) => path === "/admin",
+  },
+  {
+    // The route generator refreshes the committed tree during the Vite build.
+    to: "/admin/network" as never,
+    label: "Network",
+    icon: Network,
+    match: (path: string) => path.startsWith("/admin/network"),
   },
   {
     // The committed route tree is refreshed by the Vite build.
