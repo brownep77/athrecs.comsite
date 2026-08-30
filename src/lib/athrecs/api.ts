@@ -778,6 +778,31 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
     return { athlete, results };
   });
 
+export type PrivateAthleteStub = {
+  slug: string;
+  displayName: string;
+};
+
+export const getPrivateAthleteBySlug = createServerFn({ method: "GET" })
+  .validator((slug: string) => slug)
+  .handler(async ({ data: slug }) => {
+    const sql = await ready();
+    const rows = await sql<{ slug: string; display_name: string }>`
+      select a.slug, a.display_name
+      from athletes a
+      where a.slug = ${slug}
+        and a.profile_type <> 'Public figure'
+        and coalesce(a.profile_visibility, 'private') <> 'public'
+      limit 1
+    `;
+    const athlete = rows[0];
+    if (!athlete) return null;
+    return {
+      slug: athlete.slug,
+      displayName: athlete.display_name,
+    } satisfies PrivateAthleteStub;
+  });
+
 export const listClubs = createServerFn({ method: "GET" })
   .validator((input: { q?: string } | undefined) => input ?? {})
   .handler(async ({ data }) => {

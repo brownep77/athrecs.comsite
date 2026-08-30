@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
-import { ArrowLeft, BadgeCheck, MapPin } from "lucide-react";
-import { getAthleteBySlug } from "@/lib/athrecs/api";
+import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
+import { getAthleteBySlug, getPrivateAthleteBySlug } from "@/lib/athrecs/api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { athletes as athleteCatalogue } from "@/data/athletes";
 import { publicFigureAthletes } from "@/data/public-figures";
@@ -11,6 +11,9 @@ import { Button } from "@/components/ui/button";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
 import { SharedAccountProfile } from "@/components/athletes/SharedAccountProfile";
 import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-api";
+import { parseProfileRoles } from "@/lib/athrecs/athlete-profile-roles";
+import { openAthleteAuth } from "@/lib/auth/client";
+import { useCurrentUserState } from "@/lib/auth/use-current-user";
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
@@ -39,13 +42,7 @@ export const Route = createFileRoute("/athletes/$slug")({
           nationality: seed?.nationality ?? null,
           notes: seed?.notes ?? null,
           profile_type: seed?.profile_type ?? data.athlete.profile_type ?? "Athlete",
-          profile_roles:
-            seed?.profile_roles ??
-            data.athlete.profile_roles
-              ?.split(",")
-              .map((role: string) => role.trim())
-              .filter(Boolean) ??
-            [],
+          profile_roles: parseProfileRoles(seed?.profile_roles, data.athlete.profile_roles),
           profile_source_checked_at:
             seed?.profile_source_checked_at ?? data.athlete.profile_source_checked_at ?? null,
           profile_links: seed?.profile_links ?? [],
@@ -54,9 +51,16 @@ export const Route = createFileRoute("/athletes/$slug")({
       };
     }
 
-    const shared = await getPublishedSharedProfile({ data: { slug: params.slug } });
+    const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
+      () => null,
+    );
     if (shared) {
       return { kind: "shared-account" as const, profile: shared };
+    }
+
+    const privateAthlete = await getPrivateAthleteBySlug({ data: params.slug });
+    if (privateAthlete) {
+      return { kind: "private-athlete" as const, athlete: privateAthlete };
     }
 
     const currentSlug = await resolveSlugRedirect({
@@ -90,9 +94,26 @@ export const Route = createFileRoute("/athletes/$slug")({
       };
     }
 
+    if (loaderData.kind === "private-athlete") {
+      const { athlete } = loaderData;
+      const title = `${athlete.displayName} | ${SITE_NAME}`;
+      const description = `${athlete.displayName}'s ATHRECS athlete profile is private.`;
+      const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
+      return {
+        meta: [
+          ...siteGraphMeta({ title, description, url: canonical, type: "profile" }).map((tag) =>
+            "name" in tag && tag.name === "robots"
+              ? { name: "robots", content: "noindex, nofollow, noarchive" }
+              : tag,
+          ),
+        ],
+        links: [{ rel: "canonical", href: canonical }],
+      };
+    }
+
     const { athlete, results } = loaderData;
     const isPublicFigure = athlete.profile_type === "Public figure";
-    const resultKind = athlete.profile_roles.some((role: string) =>
+    const resultKind = (athlete.profile_roles ?? []).some((role: string) =>
       role.toLowerCase().includes("marathon"),
     )
       ? "marathon results and times"
@@ -147,10 +168,87 @@ function formatDob(iso: string | null | undefined): string | null {
   });
 }
 
+function PrivateAthleteProfile({
+  athlete,
+}: {
+  athlete: { slug: string; displayName: string };
+}) {
+  const { user, isPending } = useCurrentUserState();
+
+  function startSignIn() {
+    openAthleteAuth({
+      mode: "signin",
+      callbackURL: "/my-athlete-profile",
+      errorCallbackURL: `/athletes/${athlete.slug}`,
+    });
+  }
+
+  return (
+    <div className="space-y-8">
+      <Link
+        to="/athletes"
+        className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
+      >
+        <ArrowLeft className="h-4 w-4" />
+        Athletes
+      </Link>
+
+      <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
+        <p className="text-xs font-medium uppercase tracking-wider text-subtle">Athlete profile</p>
+        <h1 className="font-display text-2xl font-semibold text-fg">{athlete.displayName}</h1>
+        <div className="flex flex-wrap gap-2">
+          <Badge variant="outline">
+            <LockKeyhole className="mr-1 size-3.5" aria-hidden="true" />
+            Private profile
+          </Badge>
+        </div>
+        <p className="max-w-prose text-sm leading-6 text-muted">
+          This athlete profile is private. Public race results stay on the event pages. The athlete
+          can sign in to view claimed results, hide performances and optionally share an unlisted
+          profile link.
+        </p>
+      </section>
+
+      <section className="rounded-2xl border border-border bg-surface p-7 text-center shadow-card">
+        <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-accent-soft text-accent">
+          <LockKeyhole className="size-6" aria-hidden="true" />
+        </div>
+        <h2 className="mt-4 font-display text-2xl font-semibold text-fg">
+          {user ? "Open your private Athlete Profile" : "Is this you?"}
+        </h2>
+        <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
+          Ordinary athlete profiles and claimed results are not listed publicly. Sign in with the
+          account that claimed these results to manage your profile.
+        </p>
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
+          {user ? (
+            <Button asChild>
+              <Link to="/my-athlete-profile">View my private profile</Link>
+            </Button>
+          ) : (
+            <Button type="button" onClick={startSignIn} disabled={isPending}>
+              <LogIn className="size-4" aria-hidden="true" />
+              Sign in or create account
+            </Button>
+          )}
+          <Button asChild variant="secondary">
+            <Link to="/claim-results" search={{ resultId: undefined }}>
+              Claim my results
+            </Link>
+          </Button>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 function AthletePage() {
   const data = Route.useLoaderData();
   if (data.kind === "shared-account") {
     return <SharedAccountProfile profile={data.profile} />;
+  }
+  if (data.kind === "private-athlete") {
+    return <PrivateAthleteProfile athlete={data.athlete} />;
   }
 
   const { athlete, results } = data;
@@ -218,7 +316,7 @@ function AthletePage() {
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="accent">{results.length} results</Badge>
-          {athlete.profile_roles.map((role: string) => (
+          {athlete.profile_roles?.map((role: string) => (
             <Badge key={role} variant="outline">
               {role}
             </Badge>
