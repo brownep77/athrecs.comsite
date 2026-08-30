@@ -118,6 +118,13 @@ jobs:
           https://update.athrecs.com/api/auth/callback/google
           ```
 
+          The exact RunRecs Google redirect URIs are:
+
+          ```text
+          https://www.runrecs.com/api/auth/callback/google
+          https://runrecs.com/api/auth/callback/google
+          ```
+
           In Google Cloud, the shared web client must also list these Authorized JavaScript origins with no path:
 
           ```text
@@ -146,7 +153,7 @@ jobs:
             assert.ok(docs.includes(callback), `${runRecsHost} callback docs missing`);
           }
           assert.match(docs, /Authorized JavaScript origins/);
-          assert.match(docs, /BETTER_AUTH_URL=https:\/\/www\\.runrecs\\.com/);
+          assert.ok(docs.includes("BETTER_AUTH_URL=https://www.runrecs.com"));
 
           for (const provider of ['''
           if anchor not in text:
