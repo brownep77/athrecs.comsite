@@ -78,8 +78,8 @@ const githubClientSecret = env("GITHUB_CLIENT_SECRET");
 const directGithubConfigured =
   emailDeliveryConfigured && Boolean(githubClientId && githubClientSecret);
 
-// BETTER_AUTH_URL is a canonical fallback. The actual approved Athrecs hostname
-// is resolved per request so public and staff sessions remain host-only.
+// BETTER_AUTH_URL is a canonical fallback. The actual approved SportsRecs
+// network hostname is resolved per request so sessions remain host-only.
 const explicitBaseURL = env("BETTER_AUTH_URL");
 
 const grokIssuer = env("GROK_AUTH_ISSUER") ?? GROK_ISSUER_DEFAULT;
@@ -105,10 +105,12 @@ export const authConfigured =
   brokerConfigured;
 
 const previewAllowedHosts: string[] = [...PREVIEW_ALLOWED_HOSTS];
-const ATHRECS_DEPLOYED_AUTH_HOSTS: string[] = [
+const DEPLOYED_AUTH_HOSTS: string[] = [
   "www.athrecs.com",
   "athrecs.com",
   "update.athrecs.com",
+  "www.runrecs.com",
+  "runrecs.com",
 ];
 
 function parseAbsoluteURL(value: string | undefined): URL | null {
@@ -126,11 +128,11 @@ function unique(values: string[]): string[] {
 
 const explicitBase = parseAbsoluteURL(explicitBaseURL);
 const deployedAllowedHosts = unique([
-  ...ATHRECS_DEPLOYED_AUTH_HOSTS,
+  ...DEPLOYED_AUTH_HOSTS,
   ...(explicitBase ? [explicitBase.host] : []),
 ]);
 const deployedTrustedOrigins = unique([
-  ...ATHRECS_DEPLOYED_AUTH_HOSTS.map((host) => `https://${host}`),
+  ...DEPLOYED_AUTH_HOSTS.map((host) => `https://${host}`),
   ...(explicitBase ? [explicitBase.origin] : []),
   ...(directAppleConfigured ? ["https://appleid.apple.com"] : []),
 ]);
