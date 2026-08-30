@@ -1,0 +1,135 @@
+name: One-shot RunRecs Vercel root repair
+
+on:
+  push:
+    branches:
+      - ops/runrecs-vercel-root-repair
+
+permissions:
+  contents: read
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN || secrets.VERCEL_API_TOKEN || secrets.VERCEL_ACCESS_TOKEN }}
+      VERCEL_TEAM_ID: team_9LaPtmxxgJlZ80PpdxggOibC
+      RUNRECS_PROJECT_ID: prj_jxAZUsDmABlmGLorOrfjU20TRQNd
+      ATHRECS_PROJECT_ID: prj_lbw3shClq8n6SThzl8i825UPBp6I
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify Vercel API access
+        shell: bash
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo "::error::No VERCEL_TOKEN, VERCEL_API_TOKEN or VERCEL_ACCESS_TOKEN repository secret is configured."
+            exit 78
+          fi
+
+      - name: Repair only the confirmed RunRecs root and audit auth keys
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.error
+          import urllib.parse
+          import urllib.request
+
+          token = os.environ["VERCEL_TOKEN"]
+          team_id = os.environ["VERCEL_TEAM_ID"]
+          runrecs_id = os.environ["RUNRECS_PROJECT_ID"]
+          athrecs_id = os.environ["ATHRECS_PROJECT_ID"]
+          base = "https://api.vercel.com"
+
+          def call(method, path, body=None):
+              url = base + path
+              data = None if body is None else json.dumps(body).encode("utf-8")
+              request = urllib.request.Request(
+                  url,
+                  data=data,
+                  method=method,
+                  headers={
+                      "Authorization": f"Bearer {token}",
+                      "Content-Type": "application/json",
+                      "User-Agent": "athrecs-runrecs-root-repair/1.0",
+                  },
+              )
+              try:
+                  with urllib.request.urlopen(request, timeout=30) as response:
+                      raw = response.read().decode("utf-8")
+                      return json.loads(raw) if raw else {}
+              except urllib.error.HTTPError as exc:
+                  detail = exc.read().decode("utf-8", errors="replace")
+                  raise SystemExit(f"Vercel API {method} {path} failed with HTTP {exc.code}: {detail[:800]}")
+
+          query = urllib.parse.urlencode({"teamId": team_id})
+          project = call("GET", f"/v9/projects/{runrecs_id}?{query}")
+          if project.get("id") != runrecs_id or project.get("name") != "runrecs":
+              raise SystemExit("Refusing repair: the project identity did not exactly match RunRecs")
+          if project.get("accountId") != team_id:
+              raise SystemExit("Refusing repair: the RunRecs project belongs to an unexpected Vercel account")
+
+          root = project.get("rootDirectory")
+          print(f"Confirmed RunRecs rootDirectory: {root!r}")
+          if root == "docs":
+              updated = call("PATCH", f"/v9/projects/{runrecs_id}?{query}", {"rootDirectory": None})
+              if updated.get("rootDirectory") not in (None, ""):
+                  raise SystemExit("Vercel accepted the request but did not clear rootDirectory")
+              print("Cleared the incorrect RunRecs rootDirectory setting.")
+          elif root in (None, ""):
+              print("RunRecs rootDirectory was already at the repository root.")
+          else:
+              raise SystemExit(f"Refusing repair: unexpected RunRecs rootDirectory {root!r}")
+
+          required = {
+              "DATABASE_URL",
+              "BETTER_AUTH_SECRET",
+              "BETTER_AUTH_URL",
+              "GOOGLE_CLIENT_ID",
+              "GOOGLE_CLIENT_SECRET",
+              "VITE_AUTH_ENABLED",
+          }
+
+          def env_keys(project_id):
+              payload = call("GET", f"/v9/projects/{project_id}/env?{query}")
+              rows = payload.get("envs", payload if isinstance(payload, list) else [])
+              return {row.get("key") for row in rows if isinstance(row, dict) and row.get("key")}
+
+          runrecs_keys = env_keys(runrecs_id)
+          athrecs_keys = env_keys(athrecs_id)
+          missing_runrecs = sorted(required - runrecs_keys)
+          missing_athrecs = sorted(required - athrecs_keys)
+          print("RunRecs auth/database key audit:")
+          for key in sorted(required):
+              print(f"- {key}: {'present' if key in runrecs_keys else 'MISSING'}")
+
+          if missing_athrecs:
+              print(f"::warning::ATHRECS itself does not expose these expected keys through the API: {', '.join(missing_athrecs)}")
+          if missing_runrecs:
+              print(f"::warning::RunRecs is missing required environment keys: {', '.join(missing_runrecs)}")
+              print("Root Directory was repaired, but no deployment was started because auth/database configuration is incomplete.")
+              raise SystemExit(0)
+
+          deployment = call(
+              "POST",
+              f"/v13/deployments?{query}",
+              {
+                  "name": "runrecs",
+                  "project": runrecs_id,
+                  "target": "production",
+                  "gitSource": {
+                      "type": "github",
+                      "org": "brownep77",
+                      "repo": "athrecs.comsite",
+                      "ref": "main",
+                  },
+              },
+          )
+          deployment_id = deployment.get("id")
+          deployment_url = deployment.get("url")
+          if not deployment_id:
+              raise SystemExit("RunRecs production deployment was not created")
+          print(f"Created RunRecs production deployment {deployment_id} at {deployment_url or '(URL pending)'}")
+          PY
