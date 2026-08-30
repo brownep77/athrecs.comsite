@@ -8,61 +8,88 @@ import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
+import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
+import { SharedAccountProfile } from "@/components/athletes/SharedAccountProfile";
+import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-api";
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
     const data = await getAthleteBySlug({ data: params.slug });
-    if (!data) {
-      const currentSlug = await resolveSlugRedirect({
-        data: { entityType: "athlete", slug: params.slug },
-      });
-      if (currentSlug && currentSlug !== params.slug) {
+    if (data) {
+      if (data.athlete.slug !== params.slug) {
         throw redirect({
           to: "/athletes/$slug",
-          params: { slug: currentSlug },
+          params: { slug: data.athlete.slug },
           statusCode: 301,
         });
       }
-      throw notFound();
+      const seed = [...athleteCatalogue, ...publicFigureAthletes].find(
+        (athlete) => athlete.slug === data.athlete.slug,
+      );
+      return {
+        kind: "catalogue" as const,
+        ...data,
+        athlete: {
+          ...data.athlete,
+          aliases: seed?.aliases ?? [],
+          date_of_birth: seed?.date_of_birth ?? null,
+          place_of_birth: seed?.place_of_birth ?? null,
+          country_of_birth: seed?.country_of_birth ?? null,
+          address: seed?.address ?? null,
+          nationality: seed?.nationality ?? null,
+          notes: seed?.notes ?? null,
+          profile_type: seed?.profile_type ?? data.athlete.profile_type ?? "Athlete",
+          profile_roles:
+            seed?.profile_roles ??
+            data.athlete.profile_roles
+              ?.split(",")
+              .map((role: string) => role.trim())
+              .filter(Boolean) ??
+            [],
+          profile_source_checked_at:
+            seed?.profile_source_checked_at ?? data.athlete.profile_source_checked_at ?? null,
+          profile_links: seed?.profile_links ?? [],
+          notable_achievements: seed?.notable_achievements ?? [],
+        },
+      };
     }
-    if (data.athlete.slug !== params.slug) {
+
+    const shared = await getPublishedSharedProfile({ data: { slug: params.slug } });
+    if (shared) {
+      return { kind: "shared-account" as const, profile: shared };
+    }
+
+    const currentSlug = await resolveSlugRedirect({
+      data: { entityType: "athlete", slug: params.slug },
+    });
+    if (currentSlug && currentSlug !== params.slug) {
       throw redirect({
         to: "/athletes/$slug",
-        params: { slug: data.athlete.slug },
+        params: { slug: currentSlug },
         statusCode: 301,
       });
     }
-    const seed = [...athleteCatalogue, ...publicFigureAthletes].find(
-      (athlete) => athlete.slug === data.athlete.slug,
-    );
-    return {
-      ...data,
-      athlete: {
-        ...data.athlete,
-        aliases: seed?.aliases ?? [],
-        date_of_birth: seed?.date_of_birth ?? null,
-        place_of_birth: seed?.place_of_birth ?? null,
-        country_of_birth: seed?.country_of_birth ?? null,
-        address: seed?.address ?? null,
-        nationality: seed?.nationality ?? null,
-        notes: seed?.notes ?? null,
-        profile_type: seed?.profile_type ?? data.athlete.profile_type ?? "Athlete",
-        profile_roles:
-          seed?.profile_roles ??
-          data.athlete.profile_roles
-            ?.split(",")
-            .map((role: string) => role.trim())
-            .filter(Boolean) ??
-          [],
-        profile_source_checked_at:
-          seed?.profile_source_checked_at ?? data.athlete.profile_source_checked_at ?? null,
-        profile_links: seed?.profile_links ?? [],
-        notable_achievements: seed?.notable_achievements ?? [],
-      },
-    };
+    throw notFound();
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
+    if (loaderData.kind === "shared-account") {
+      const { profile } = loaderData;
+      const title = `${profile.displayName} athlete profile | ${SITE_NAME}`;
+      const description = profile.bio
+        ? profile.bio.slice(0, 180)
+        : `${profile.displayName}'s shared athlete profile on ATHRECS.`;
+      const canonical = `${SITE_URL}/athletes/${profile.slug}`;
+      return {
+        meta: siteGraphMeta({ title, description, url: canonical, type: "profile" }).map((tag) =>
+          "name" in tag && tag.name === "robots"
+            ? { name: "robots", content: "noindex, nofollow, noarchive" }
+            : tag,
+        ),
+        links: [{ rel: "canonical", href: canonical }],
+      };
+    }
+
     const { athlete, results } = loaderData;
     const isPublicFigure = athlete.profile_type === "Public figure";
     const resultKind = athlete.profile_roles.some((role: string) =>
@@ -121,14 +148,19 @@ function formatDob(iso: string | null | undefined): string | null {
 }
 
 function AthletePage() {
-  const { athlete, results } = Route.useLoaderData();
+  const data = Route.useLoaderData();
+  if (data.kind === "shared-account") {
+    return <SharedAccountProfile profile={data.profile} />;
+  }
+
+  const { athlete, results } = data;
   const aliases = athlete.aliases ?? [];
   const dob = formatDob(athlete.date_of_birth);
   const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
   const isPublicFigure = athlete.profile_type === "Public figure";
   const locationLabel = isPublicFigure
     ? (athlete.nationality ?? athlete.country)
-    : [athlete.city, athlete.county, athlete.country].filter(Boolean).join(" · ");
+    : [athlete.city, athlete.county, athlete.country].filter(Boolean).join(" \u00b7 ");
   const detailRows: { label: string; value: string }[] = [];
   if (dob) detailRows.push({ label: "Date of birth", value: dob });
   if (athlete.place_of_birth)
@@ -193,6 +225,11 @@ function AthletePage() {
           ))}
         </div>
         {athlete.bio && <p className="max-w-prose text-sm text-muted">{athlete.bio}</p>}
+        <ShareProfileButton
+          path={`/athletes/${athlete.slug}`}
+          title={`${athlete.display_name} athlete profile`}
+          compact
+        />
         {aliases.length > 0 && (
           <div className="space-y-1.5 border-t border-border pt-3">
             <p className="text-xs font-medium uppercase tracking-wider text-subtle">
