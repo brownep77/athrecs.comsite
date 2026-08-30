@@ -6,6 +6,8 @@ import {
   ChevronDown,
   ChevronUp,
   CircleAlert,
+  ExternalLink,
+  Globe,
   Loader2,
   MapPin,
   SearchCheck,
@@ -19,6 +21,11 @@ import {
   type PotentialResultClaimStatus,
   type PotentialResultMatch,
 } from "@/lib/athrecs/result-match-api";
+import {
+  findExternalRunnerMatches,
+  type ExternalRunnerMatch,
+  type ExternalRunnerMatchSource,
+} from "@/lib/athrecs/grok-runner-search-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 
 const INITIAL_MATCH_COUNT = 8;
@@ -31,13 +38,21 @@ const CLAIM_STATUS_LABELS: Record<PotentialResultClaimStatus, string> = {
   withdrawn: "Previous claim withdrawn",
 };
 
-function confidenceLabel(match: PotentialResultMatch): string {
+const SOURCE_LABELS: Record<ExternalRunnerMatchSource, string> = {
+  powerof10: "Power of 10",
+  parkrun: "parkrun",
+  worldathletics: "World Athletics",
+  official: "Official results",
+  other: "Public result page",
+};
+
+function confidenceLabel(match: PotentialResultMatch | ExternalRunnerMatch): string {
   if (match.confidence === "exact") return "Exact name";
   if (match.confidence === "strong") return "Strong match";
   return "Possible match";
 }
 
-function confidenceClass(match: PotentialResultMatch): string {
+function confidenceClass(match: PotentialResultMatch | ExternalRunnerMatch): string {
   if (match.confidence === "exact") {
     return "border-emerald-500/30 bg-emerald-50 text-emerald-900";
   }
@@ -82,6 +97,7 @@ function actionLabel(match: PotentialResultMatch): string {
 
 export function PotentialResultMatchesPanel() {
   const [expanded, setExpanded] = useState(false);
+  const [searchPublic, setSearchPublic] = useState(false);
   const { user, isPending: sessionPending } = useCurrentUserState();
   const matches = useQuery({
     queryKey: ["my-potential-result-matches", user?.id],
@@ -89,6 +105,13 @@ export function PotentialResultMatchesPanel() {
     enabled: Boolean(user),
     retry: false,
     staleTime: 60_000,
+  });
+  const external = useQuery({
+    queryKey: ["my-external-runner-matches", user?.id],
+    queryFn: () => findExternalRunnerMatches(),
+    enabled: Boolean(user) && searchPublic,
+    retry: false,
+    staleTime: 5 * 60_000,
   });
 
   if (sessionPending || !user) return null;
@@ -134,7 +157,7 @@ export function PotentialResultMatchesPanel() {
           </p>
           {data.searchedNames.length ? (
             <p className="mt-2 text-xs text-subtle">
-              Checked: {data.searchedNames.join(" · ")}
+              Checked: {data.searchedNames.join(" \u00b7 ")}
             </p>
           ) : null}
         </div>
@@ -181,7 +204,7 @@ export function PotentialResultMatchesPanel() {
                   </h3>
                   <p className="mt-1 text-sm text-muted">
                     <strong className="font-semibold text-fg">{match.athleteName}</strong>{" "}
-                    · {formatRaceDateShort(match.eventDate)} · {match.distanceCode}
+                    \u00b7 {formatRaceDateShort(match.eventDate)} \u00b7 {match.distanceCode}
                   </p>
                   {match.clubName || locationText(match) ? (
                     <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-subtle">
@@ -209,7 +232,7 @@ export function PotentialResultMatchesPanel() {
                       match.bib ? `Bib ${match.bib}` : "",
                     ]
                       .filter(Boolean)
-                      .join(" · ")}
+                      .join(" \u00b7 ")}
                   </p>
                 </div>
               </div>
@@ -275,6 +298,114 @@ export function PotentialResultMatchesPanel() {
           ranking for a common name.
         </p>
       ) : null}
+
+      <div className="border-t border-border bg-elevated/40 p-5">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2">
+              <Globe className="size-5 text-accent" aria-hidden="true" />
+              <h3 className="font-display text-lg font-semibold text-fg">
+                Public result sites
+              </h3>
+            </div>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              Optional second pass. Grok can search Power of 10, parkrun, World Athletics and
+              official result pages using the identity fields you saved. These remain suggestions,
+              not confirmed ownership.
+            </p>
+          </div>
+          <Button
+            type="button"
+            variant="secondary"
+            disabled={external.isFetching}
+            onClick={() => setSearchPublic(true)}
+          >
+            {external.isFetching ? (
+              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+            ) : (
+              <SearchCheck className="size-4" aria-hidden="true" />
+            )}
+            Search Power of 10 and parkrun
+          </Button>
+        </div>
+
+        {!searchPublic ? (
+          <p className="mt-3 text-xs text-subtle">
+            Save your name first. Turn on Performance and habit insights if you want ATHRECS to ask
+            Grok to look outside the ATHRECS database.
+          </p>
+        ) : external.isFetching ? (
+          <p className="mt-4 flex items-center gap-2 text-sm text-muted">
+            <Loader2 className="size-4 animate-spin text-accent" aria-hidden="true" />
+            Searching public result pages…
+          </p>
+        ) : external.isError ? (
+          <p className="mt-4 rounded-lg border border-red-500/30 bg-red-50 px-3 py-2 text-sm text-red-900">
+            Public result search could not run. ATHRECS name matches are unaffected.
+          </p>
+        ) : external.data ? (
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-muted">{external.data.message}</p>
+            {external.data.cached ? (
+              <p className="text-xs text-subtle">Showing a cached search from the last 7 days.</p>
+            ) : null}
+            {external.data.matches.length ? (
+              <div className="divide-y divide-border overflow-hidden rounded-lg border border-border bg-surface">
+                {external.data.matches.map((match) => (
+                  <article key={`${match.sourceUrl}-${match.eventName}`} className="space-y-3 p-4">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Badge className="border-border bg-elevated text-fg">
+                        {SOURCE_LABELS[match.source]}
+                      </Badge>
+                      <Badge className={confidenceClass(match)}>{confidenceLabel(match)}</Badge>
+                    </div>
+                    <div>
+                      <h4 className="font-display text-base font-semibold text-fg">
+                        {match.eventName || "Public result page"}
+                      </h4>
+                      <p className="mt-1 text-sm text-muted">
+                        <strong className="font-semibold text-fg">{match.athleteName}</strong>
+                        {match.eventDate ? ` \u00b7 ${match.eventDate}` : ""}
+                        {match.distance ? ` \u00b7 ${match.distance}` : ""}
+                        {match.finishTime ? ` \u00b7 ${match.finishTime}` : ""}
+                      </p>
+                      {match.club || match.location ? (
+                        <p className="mt-1 text-xs text-subtle">
+                          {[match.club, match.location].filter(Boolean).join(" \u00b7 ")}
+                        </p>
+                      ) : null}
+                    </div>
+                    <p className="text-xs leading-5 text-muted">
+                      <strong className="text-fg">Why this was suggested:</strong> {match.why}
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      {match.resultId ? (
+                        <Button asChild>
+                          <Link to="/claim-results" search={{ resultId: match.resultId }}>
+                            <Trophy className="size-4" aria-hidden="true" /> Claim this result
+                          </Link>
+                        </Button>
+                      ) : null}
+                      {match.eventSlug ? (
+                        <Button asChild variant="secondary">
+                          <Link to="/races/$slug" params={{ slug: match.eventSlug }}>
+                            View event
+                          </Link>
+                        </Button>
+                      ) : null}
+                      <Button asChild variant="secondary">
+                        <a href={match.sourceUrl} target="_blank" rel="noreferrer">
+                          <ExternalLink className="size-4" aria-hidden="true" /> Open evidence
+                        </a>
+                      </Button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
     </section>
   );
 }
