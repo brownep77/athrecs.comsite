@@ -160,7 +160,7 @@ function AthletePage() {
   const isPublicFigure = athlete.profile_type === "Public figure";
   const locationLabel = isPublicFigure
     ? (athlete.nationality ?? athlete.country)
-    : [athlete.city, athlete.county, athlete.country].filter(Boolean).join(" \u00b7 ");
+    : [athlete.city, athlete.county, athlete.country].filter(Boolean).join(" · ");
   const detailRows: { label: string; value: string }[] = [];
   if (dob) detailRows.push({ label: "Date of birth", value: dob });
   if (athlete.place_of_birth)

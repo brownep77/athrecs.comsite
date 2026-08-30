@@ -43,7 +43,8 @@ const packageJson = JSON.parse(await readFile(resolve(root, "package.json"), "ut
 assert.match(migration, /create table if not exists athlete_public_shares/);
 assert.match(migration, /enabled boolean not null default false/);
 assert.match(migration, /references "user" \("id"\) on delete cascade/);
-assert.doesNotMatch(migration, /email|date_of_birth|postcode|photo|previous_names/i);
+const tableSql = migration.replace(/--.*$/gm, "").replace(/comment on[\s\S]*?;/gi, "");
+assert.doesNotMatch(tableSql, /email|date_of_birth|postcode|photo|previous_names/i);
 
 assert.match(helpers, /slugifyShareName/);
 assert.match(helpers, /sharedProfilePath/);

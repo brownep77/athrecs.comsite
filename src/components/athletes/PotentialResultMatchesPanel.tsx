@@ -157,7 +157,7 @@ export function PotentialResultMatchesPanel() {
           </p>
           {data.searchedNames.length ? (
             <p className="mt-2 text-xs text-subtle">
-              Checked: {data.searchedNames.join(" \u00b7 ")}
+              Checked: {data.searchedNames.join(" · ")}
             </p>
           ) : null}
         </div>
@@ -204,7 +204,7 @@ export function PotentialResultMatchesPanel() {
                   </h3>
                   <p className="mt-1 text-sm text-muted">
                     <strong className="font-semibold text-fg">{match.athleteName}</strong>{" "}
-                    \u00b7 {formatRaceDateShort(match.eventDate)} \u00b7 {match.distanceCode}
+                    · {formatRaceDateShort(match.eventDate)} · {match.distanceCode}
                   </p>
                   {match.clubName || locationText(match) ? (
                     <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-subtle">
@@ -232,7 +232,7 @@ export function PotentialResultMatchesPanel() {
                       match.bib ? `Bib ${match.bib}` : "",
                     ]
                       .filter(Boolean)
-                      .join(" \u00b7 ")}
+                      .join(" · ")}
                   </p>
                 </div>
               </div>
@@ -365,13 +365,13 @@ export function PotentialResultMatchesPanel() {
                       </h4>
                       <p className="mt-1 text-sm text-muted">
                         <strong className="font-semibold text-fg">{match.athleteName}</strong>
-                        {match.eventDate ? ` \u00b7 ${match.eventDate}` : ""}
-                        {match.distance ? ` \u00b7 ${match.distance}` : ""}
-                        {match.finishTime ? ` \u00b7 ${match.finishTime}` : ""}
+                        {match.eventDate ? ` · ${match.eventDate}` : ""}
+                        {match.distance ? ` · ${match.distance}` : ""}
+                        {match.finishTime ? ` · ${match.finishTime}` : ""}
                       </p>
                       {match.club || match.location ? (
                         <p className="mt-1 text-xs text-subtle">
-                          {[match.club, match.location].filter(Boolean).join(" \u00b7 ")}
+                          {[match.club, match.location].filter(Boolean).join(" · ")}
                         </p>
                       ) : null}
                     </div>
