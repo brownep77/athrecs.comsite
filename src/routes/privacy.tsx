@@ -100,6 +100,16 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
+        <NoticeSection title="Shareable profile links">
+          <p>
+            You can optionally create an unlisted shareable profile from My Athlete Profile. That
+            page is off unless you turn sharing on, is not added to the Athletes directory, and can
+            be withdrawn immediately. A published share includes only the display name plus the
+            club, location, bio and claimed results you select. Email, date of birth, postcode,
+            photograph, previous names, IDs and product preferences stay private.
+          </p>
+        </NoticeSection>
+
         <NoticeSection title="Access, correction and withdrawal">
           <p>
             Use My Athlete Account to review and correct your details or change consent choices.
