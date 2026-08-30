@@ -13,6 +13,7 @@ const publishers = [
   "scripts/publish-germany-belgium-catalogues.mjs",
   "scripts/publish-uk-ireland-five-k-release.mjs",
   "scripts/publish-uk-home-nation-championships.mjs",
+  "scripts/publish-uk-10k-release-64.mjs",
 ];
 
 for (const publisher of publishers) {
