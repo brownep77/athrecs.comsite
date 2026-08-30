@@ -144,6 +144,10 @@ import {
   prominentUkIrelandSeries,
 } from "./uk-ireland-prominent-races-2026-2027";
 import {
+  ukHomeNationChampionshipsEditions,
+  ukHomeNationChampionshipsSeries,
+} from "./uk-home-nation-championships-2026-2027";
+import {
   verifiedNonStandardDistanceEditions,
   verifiedNonStandardDistanceSeries,
 } from "./non-standard-races-uk-ireland";
@@ -235,6 +239,7 @@ for (const series of [
   ...(verifiedHalfToTwentyMileSeries as Series[]),
   ...(dailyHalfTenMileSeries as Series[]),
   ...(prominentUkIrelandSeries as Series[]),
+  ...(ukHomeNationChampionshipsSeries as Series[]),
   ...(verifiedNonStandardDistanceSeries as Series[]),
   ...(germanyEnduranceRaceSeries as Series[]),
   ...(runabcSeries as Series[]),
@@ -325,6 +330,9 @@ const mergedEditions = [
   ),
   ...(dailyHalfTenMileExistingSeriesEditions as Edition[]),
   ...(prominentUkIrelandEditions as Edition[]).filter((edition) =>
+    usedSlugs.has(edition.seriesSlug),
+  ),
+  ...(ukHomeNationChampionshipsEditions as Edition[]).filter((edition) =>
     usedSlugs.has(edition.seriesSlug),
   ),
   ...(verifiedNonStandardDistanceEditions as Edition[]).filter((edition) =>
