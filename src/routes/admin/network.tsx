@@ -5,6 +5,8 @@ import { AlertTriangle, CheckCircle2, Network, RefreshCcw, ShieldCheck } from "l
 import { Button } from "@/components/ui/button";
 import { getSportsRecsNetworkOverview } from "@/lib/athrecs/sportsrecs-network-api";
 
+// The committed route tree is refreshed by the Vite router generator during build.
+// @ts-expect-error /admin/network is new until that generated file is refreshed.
 export const Route = createFileRoute("/admin/network")({
   head: () => ({
     meta: [
