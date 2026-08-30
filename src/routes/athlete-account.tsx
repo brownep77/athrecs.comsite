@@ -13,6 +13,7 @@ import {
   LogOut,
   MapPin,
   Save,
+  SearchCheck,
   ShieldCheck,
   Shirt,
   Smartphone,
@@ -20,6 +21,7 @@ import {
   Utensils,
   Watch,
 } from "lucide-react";
+import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { signIn, signOut } from "@/lib/auth/client";
@@ -148,6 +150,15 @@ function accountToForm(account: AthleteAccountData): AthleteAccountInput {
     nationality: account.nationality,
     clubOrTeam: account.clubOrTeam,
     preferredLanguage: account.preferredLanguage,
+    previousNames: account.previousNames,
+    parkrunId: account.parkrunId,
+    athleticsUrn: account.athleticsUrn,
+    powerOf10Url: account.powerOf10Url,
+    worldAthleticsUrl: account.worldAthleticsUrl,
+    fingerprintEvent: account.fingerprintEvent,
+    fingerprintYear: account.fingerprintYear,
+    fingerprintDistance: account.fingerprintDistance,
+    fingerprintTime: account.fingerprintTime,
     privacyAcknowledged: account.privacyAcknowledged,
     sports: account.sports.map((sport) => ({ ...sport })),
     preferences: { ...account.preferences },
@@ -293,6 +304,8 @@ function SignedInAccount() {
           <LogOut className="size-4" aria-hidden="true" /> Sign out
         </Button>
       </section>
+
+      <PotentialResultMatchesPanel />
 
       {account.data.claimedProfiles.length || account.data.claimCount ? (
         <section className="rounded-xl border border-border bg-surface p-5 shadow-card">
@@ -440,6 +453,77 @@ function SignedInAccount() {
               label="Preferred language"
               value={form.preferredLanguage ?? ""}
               onChange={(value) => setForm({ ...form, preferredLanguage: value })}
+            />
+          </div>
+          <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-fg">
+            <SearchCheck className="size-4 text-accent" aria-hidden="true" /> Find your previous
+            results
+            <OptionalLabel />
+          </div>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            These fields stay private. ATHRECS uses them only to suggest possible Power of 10,
+            parkrun, World Athletics or official result pages. Nothing is linked until you claim it.
+          </p>
+          <div className="mt-3 grid gap-4 md:grid-cols-2">
+            <CsvField
+              label="Previous or known-as names"
+              values={form.previousNames ?? []}
+              onChange={(previousNames) => setForm({ ...form, previousNames })}
+              placeholder="Maiden name, nickname, previous racing name"
+            />
+            <TextField
+              label="parkrun barcode"
+              value={form.parkrunId ?? ""}
+              onChange={(value) => setForm({ ...form, parkrunId: value })}
+              help="The number printed on your parkrun barcode, without A."
+            />
+            <TextField
+              label="Athletics URN"
+              value={form.athleticsUrn ?? ""}
+              onChange={(value) => setForm({ ...form, athleticsUrn: value })}
+              help="England Athletics, Scottish Athletics, Welsh Athletics or Athletics NI URN."
+            />
+            <TextField
+              label="Power of 10 profile URL"
+              value={form.powerOf10Url ?? ""}
+              onChange={(value) => setForm({ ...form, powerOf10Url: value })}
+              placeholder="https://www.thepowerof10.info/athletes/profile.aspx?athleteid="
+            />
+            <TextField
+              label="World Athletics profile URL"
+              value={form.worldAthleticsUrl ?? ""}
+              onChange={(value) => setForm({ ...form, worldAthleticsUrl: value })}
+              placeholder="https://worldathletics.org/athletes/"
+            />
+          </div>
+          <p className="mt-5 text-sm font-semibold text-fg">A race you know you ran</p>
+          <p className="mt-1 text-xs text-subtle">
+            One distinctive race helps Grok tell you apart from other athletes with the same name.
+          </p>
+          <div className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <TextField
+              label="Event name"
+              value={form.fingerprintEvent ?? ""}
+              onChange={(value) => setForm({ ...form, fingerprintEvent: value })}
+              placeholder="London Marathon"
+            />
+            <TextField
+              label="Year"
+              value={form.fingerprintYear ?? ""}
+              onChange={(value) => setForm({ ...form, fingerprintYear: value })}
+              placeholder="2024"
+            />
+            <TextField
+              label="Distance"
+              value={form.fingerprintDistance ?? ""}
+              onChange={(value) => setForm({ ...form, fingerprintDistance: value })}
+              placeholder="Marathon"
+            />
+            <TextField
+              label="Finish time"
+              value={form.fingerprintTime ?? ""}
+              onChange={(value) => setForm({ ...form, fingerprintTime: value })}
+              placeholder="3:21:14"
             />
           </div>
         </AccountSection>

@@ -93,6 +93,15 @@ export type AthleteAccountData = {
   nationality: string;
   clubOrTeam: string;
   preferredLanguage: string;
+  previousNames: string[];
+  parkrunId: string;
+  athleticsUrn: string;
+  powerOf10Url: string;
+  worldAthleticsUrl: string;
+  fingerprintEvent: string;
+  fingerprintYear: string;
+  fingerprintDistance: string;
+  fingerprintTime: string;
   profilePhotoUrl: string;
   profilePhotoUpdatedAt: string | null;
   profilePhotoUploadAvailable: boolean;
@@ -128,6 +137,15 @@ export type AthleteAccountInput = {
   nationality?: string;
   clubOrTeam?: string;
   preferredLanguage?: string;
+  previousNames?: string[];
+  parkrunId?: string;
+  athleticsUrn?: string;
+  powerOf10Url?: string;
+  worldAthleticsUrl?: string;
+  fingerprintEvent?: string;
+  fingerprintYear?: string;
+  fingerprintDistance?: string;
+  fingerprintTime?: string;
   privacyAcknowledged: boolean;
   sports: AthleteSportProfile[];
   preferences: AthleteProductPreferences;
@@ -153,6 +171,15 @@ type ProfileRow = {
   nationality: string | null;
   club_or_team: string | null;
   preferred_language: string | null;
+  previous_names: string[] | null;
+  parkrun_id: string | null;
+  athletics_urn: string | null;
+  power_of_10_url: string | null;
+  world_athletics_url: string | null;
+  fingerprint_event: string | null;
+  fingerprint_year: string | null;
+  fingerprint_distance: string | null;
+  fingerprint_time: string | null;
   privacy_notice_version: string;
   privacy_acknowledged_at: string;
   updated_at: string;
@@ -236,6 +263,28 @@ function text(value: unknown, max: number, label: string, required = false): str
   const result = typeof value === "string" ? value.trim() : "";
   if (required && result.length < 2) throw new Error(`${label} is required`);
   if (result.length > max) throw new Error(`${label} must be ${max} characters or fewer`);
+  return result;
+}
+
+function optionalHttpsUrl(value: unknown, label: string): string {
+  const result = text(value, 300, label);
+  if (!result) return "";
+  try {
+    const url = new URL(result);
+    if (url.protocol !== "https:") throw new Error(`${label} must be an https link`);
+    return url.toString();
+  } catch {
+    throw new Error(`${label} must be a valid https link`);
+  }
+}
+
+function optionalYear(value: unknown): string {
+  const result = typeof value === "string" ? value.trim() : "";
+  if (!result) return "";
+  if (!/^\d{4}$/.test(result)) throw new Error("Race year must be a 4-digit year");
+  const year = Number(result);
+  const max = new Date().getUTCFullYear() + 1;
+  if (year < 1900 || year > max) throw new Error("Race year is out of range");
   return result;
 }
 
@@ -377,6 +426,15 @@ function validateAccountInput(value: AthleteAccountInput): AthleteAccountInput {
     nationality: text(value?.nationality, 100, "Nationality"),
     clubOrTeam: text(value?.clubOrTeam, 160, "Club or team"),
     preferredLanguage: text(value?.preferredLanguage, 80, "Preferred language"),
+    previousNames: stringArray(value?.previousNames, 8, 120, "Previous or known-as names"),
+    parkrunId: text(value?.parkrunId, 40, "parkrun barcode"),
+    athleticsUrn: text(value?.athleticsUrn, 40, "Athletics URN"),
+    powerOf10Url: optionalHttpsUrl(value?.powerOf10Url, "Power of 10 profile"),
+    worldAthleticsUrl: optionalHttpsUrl(value?.worldAthleticsUrl, "World Athletics profile"),
+    fingerprintEvent: text(value?.fingerprintEvent, 160, "Known race name"),
+    fingerprintYear: optionalYear(value?.fingerprintYear),
+    fingerprintDistance: text(value?.fingerprintDistance, 40, "Known race distance"),
+    fingerprintTime: text(value?.fingerprintTime, 20, "Known race time"),
     privacyAcknowledged: true,
     sports,
     preferences: validatePreferences(value?.preferences ?? EMPTY_PREFERENCES),
@@ -484,7 +542,10 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         select
           full_name, display_name, date_of_birth::text as date_of_birth,
           country, region, city, postcode, nationality, club_or_team,
-          preferred_language, privacy_notice_version,
+          preferred_language, previous_names, parkrun_id, athletics_urn,
+          power_of_10_url, world_athletics_url, fingerprint_event,
+          fingerprint_year, fingerprint_distance, fingerprint_time,
+          privacy_notice_version,
           privacy_acknowledged_at::text as privacy_acknowledged_at,
           updated_at::text as updated_at
         from athlete_private_profiles
@@ -582,6 +643,15 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     nationality: profile?.nationality ?? "",
     clubOrTeam: profile?.club_or_team ?? "",
     preferredLanguage: profile?.preferred_language ?? "",
+    previousNames: profile?.previous_names ?? [],
+    parkrunId: profile?.parkrun_id ?? "",
+    athleticsUrn: profile?.athletics_urn ?? "",
+    powerOf10Url: profile?.power_of_10_url ?? "",
+    worldAthleticsUrl: profile?.world_athletics_url ?? "",
+    fingerprintEvent: profile?.fingerprint_event ?? "",
+    fingerprintYear: profile?.fingerprint_year ?? "",
+    fingerprintDistance: profile?.fingerprint_distance ?? "",
+    fingerprintTime: profile?.fingerprint_time ?? "",
     profilePhotoUrl: photo
       ? `/api/athlete-profile-photo?v=${encodeURIComponent(photo.updated_at)}`
       : "",
@@ -722,13 +792,20 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
         insert into athlete_private_profiles (
           user_id, verified_email, full_name, display_name, date_of_birth,
           country, region, city, postcode, nationality, club_or_team,
-          preferred_language, privacy_notice_version, privacy_acknowledged_at,
+          preferred_language, previous_names, parkrun_id, athletics_urn,
+          power_of_10_url, world_athletics_url, fingerprint_event,
+          fingerprint_year, fingerprint_distance, fingerprint_time,
+          privacy_notice_version, privacy_acknowledged_at,
           onboarding_completed_at, updated_at
         ) values (
           ${context.userId}, ${user.email}, ${data.fullName}, ${data.displayName || null},
           ${data.dateOfBirth || null}::date, ${data.country || null}, ${data.region || null},
           ${data.city || null}, ${data.postcode || null}, ${data.nationality || null},
           ${data.clubOrTeam || null}, ${data.preferredLanguage || null},
+          ${data.previousNames ?? []}, ${data.parkrunId || null}, ${data.athleticsUrn || null},
+          ${data.powerOf10Url || null}, ${data.worldAthleticsUrl || null},
+          ${data.fingerprintEvent || null}, ${data.fingerprintYear || null},
+          ${data.fingerprintDistance || null}, ${data.fingerprintTime || null},
           ${ATHLETE_PRIVACY_VERSION}, now(), now(), now()
         )
         on conflict (user_id) do update set
@@ -743,6 +820,15 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
           nationality = excluded.nationality,
           club_or_team = excluded.club_or_team,
           preferred_language = excluded.preferred_language,
+          previous_names = excluded.previous_names,
+          parkrun_id = excluded.parkrun_id,
+          athletics_urn = excluded.athletics_urn,
+          power_of_10_url = excluded.power_of_10_url,
+          world_athletics_url = excluded.world_athletics_url,
+          fingerprint_event = excluded.fingerprint_event,
+          fingerprint_year = excluded.fingerprint_year,
+          fingerprint_distance = excluded.fingerprint_distance,
+          fingerprint_time = excluded.fingerprint_time,
           privacy_notice_version = excluded.privacy_notice_version,
           privacy_acknowledged_at = now(),
           updated_at = now()
@@ -893,6 +979,15 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
             profile.nationality,
             profile.club_or_team,
             profile.preferred_language,
+            profile.previous_names,
+            profile.parkrun_id,
+            profile.athletics_urn,
+            profile.power_of_10_url,
+            profile.world_athletics_url,
+            profile.fingerprint_event,
+            profile.fingerprint_year,
+            profile.fingerprint_distance,
+            profile.fingerprint_time,
             profile.privacy_notice_version,
             profile.privacy_acknowledged_at::text as privacy_acknowledged_at,
             profile.updated_at::text as updated_at,
@@ -956,6 +1051,15 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
         nationality: profile.nationality ?? "",
         clubOrTeam: profile.club_or_team ?? "",
         preferredLanguage: profile.preferred_language ?? "",
+        previousNames: profile.previous_names ?? [],
+        parkrunId: profile.parkrun_id ?? "",
+        athleticsUrn: profile.athletics_urn ?? "",
+        powerOf10Url: profile.power_of_10_url ?? "",
+        worldAthleticsUrl: profile.world_athletics_url ?? "",
+        fingerprintEvent: profile.fingerprint_event ?? "",
+        fingerprintYear: profile.fingerprint_year ?? "",
+        fingerprintDistance: profile.fingerprint_distance ?? "",
+        fingerprintTime: profile.fingerprint_time ?? "",
         profilePhotoUrl: "",
         profilePhotoUpdatedAt: null,
         profilePhotoUploadAvailable: false,
