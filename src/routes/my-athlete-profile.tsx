@@ -16,6 +16,7 @@ import {
 import { AthleteBioCard } from "@/components/athletes/AthleteBioCard";
 import { AthleteResultsSection } from "@/components/athletes/AthleteResultsSection";
 import { ProfilePhotoUploader } from "@/components/athletes/ProfilePhotoUploader";
+import { ShareProfileCard } from "@/components/athletes/ShareProfileCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { openAthleteAuth } from "@/lib/auth/client";
@@ -234,6 +235,8 @@ function MyAthleteProfilePage() {
 
       <AthleteBioCard />
 
+      <ShareProfileCard />
+
       {data.claimedProfiles.length ? (
         <section className="rounded-2xl border border-border bg-surface p-5 shadow-card md:p-6">
           <div className="flex items-center gap-2">
@@ -320,4 +323,3 @@ function LoadingCard({ label }: { label: string }) {
     </div>
   );
 }
-
