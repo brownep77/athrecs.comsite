@@ -8,15 +8,19 @@ import { nitro } from "nitro/vite";
 
 /**
  * Build a specialist RunRecs deployment from the same repository without
- * changing ATHRECS production. The RunRecs Vercel project sets
- * VITE_SITE_BRAND=runrecs; the feature branch is also detected automatically so
- * its preview exercises the real specialist modules before a domain is added.
+ * changing ATHRECS production. A Vercel project named `runrecs` is detected
+ * from its system production URL, so the first import works before any custom
+ * variables or domains are added. VITE_SITE_BRAND remains an explicit override.
  */
 function runRecsVariantPlugin(): Plugin {
   const branch = process.env.VERCEL_GIT_COMMIT_REF?.trim() ?? "";
   const explicitBrand = process.env.VITE_SITE_BRAND?.trim().toLowerCase();
+  const projectProductionHost =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim().toLowerCase() ?? "";
+  const runRecsProject = projectProductionHost.includes("runrecs");
   const enabled =
     explicitBrand === "runrecs" ||
+    runRecsProject ||
     branch === "feat/runrecs-running-site" ||
     branch === "runrecs-production";
 
@@ -56,7 +60,9 @@ function runRecsVariantPlugin(): Plugin {
     },
     configResolved() {
       if (enabled) {
-        console.log(`[runrecs] specialist running build enabled (branch=${branch || "local"})`);
+        console.log(
+          `[runrecs] specialist running build enabled (branch=${branch || "local"}, project=${projectProductionHost || "unset"})`,
+        );
       }
     },
   };
