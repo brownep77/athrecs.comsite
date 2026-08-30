@@ -50,6 +50,15 @@ assert.match(server, /https:\/\/appleid\.apple\.com/);
 assert.match(server, /generateAppleClientSecret/);
 assert.match(server, /dsaEncoding:\s*["']ieee-p1363["']/);
 
+for (const runRecsHost of ["www.runrecs.com", "runrecs.com"]) {
+  assert.ok(server.includes(`"${runRecsHost}"`), `${runRecsHost} auth host missing`);
+  const callback = `https://${runRecsHost}/api/auth/callback/google`;
+  assert.ok(envExample.includes(callback), `${runRecsHost} env callback missing`);
+  assert.ok(docs.includes(callback), `${runRecsHost} callback docs missing`);
+}
+assert.match(docs, /Authorized JavaScript origins/);
+assert.ok(docs.includes("BETTER_AUTH_URL=https://www.runrecs.com"));
+
 for (const provider of [
   "google",
   "apple",

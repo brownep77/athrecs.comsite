@@ -33,11 +33,18 @@ The sender domain in `AUTH_EMAIL_FROM` must be verified by Resend. Use a dedicat
 
 ## Callback rule
 
-Every activated provider must register its exact Better Auth callback path on both public hosts:
+Every activated provider must register its exact Better Auth callback path on both ATHRECS public hosts:
 
 ```text
 https://www.athrecs.com/api/auth/callback/<provider>
 https://athrecs.com/api/auth/callback/<provider>
+```
+
+RunRecs uses the same account database and OAuth application, but its callbacks are separate exact URLs:
+
+```text
+https://www.runrecs.com/api/auth/callback/<provider>
+https://runrecs.com/api/auth/callback/<provider>
 ```
 
 Google additionally retains the staff callback:
@@ -45,6 +52,22 @@ Google additionally retains the staff callback:
 ```text
 https://update.athrecs.com/api/auth/callback/google
 ```
+
+The exact RunRecs Google redirect URIs are:
+
+```text
+https://www.runrecs.com/api/auth/callback/google
+https://runrecs.com/api/auth/callback/google
+```
+
+In Google Cloud, the shared web client must also list these Authorized JavaScript origins with no path:
+
+```text
+https://www.runrecs.com
+https://runrecs.com
+```
+
+The separate RunRecs Vercel project must use `BETTER_AUTH_URL=https://www.runrecs.com` and copy the same `DATABASE_URL`, `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` as ATHRECS. Redirect the apex host to `www` while retaining both exact Google callbacks.
 
 Provider names in the planned rollout are `google`, `apple`, `microsoft`, `facebook` and `linkedin`. `twitter` is available only as a later, separately approved option.
 
