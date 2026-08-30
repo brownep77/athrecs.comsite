@@ -18,6 +18,11 @@ jobs:
           ref: fix/runrecs-google-auth-hosts
           fetch-depth: 0
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
       - name: Approve RunRecs hosts and document exact Google callbacks
         shell: bash
         run: |
@@ -151,7 +156,7 @@ jobs:
 
       - name: Verify authentication configuration and types
         run: |
-          npm ci
+          npm install --ignore-scripts --no-audit --no-fund
           npm run verify:auth-methods
           npm run typecheck
 
