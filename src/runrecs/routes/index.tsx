@@ -63,7 +63,19 @@ const qualifiers = [
 ] as const;
 
 function RunRecsHomePage() {
-  const { stats, races, updates } = Route.useLoaderData();
+  // The committed ATHRECS route tree still describes the base homepage during
+// standalone type-checking; Vite swaps in this loader for RunRecs builds.
+const { stats, races, updates } = Route.useLoaderData() as unknown as {
+  stats: {
+    events: number;
+    clubs: number;
+    athletes: number;
+    upcoming: number;
+    bySport: Array<{ sport: string; n: number; upcoming: number }>;
+  };
+  races: EventListItem[];
+  updates: HomeSportUpdate[];
+};
   const navigate = useNavigate();
   const routeSearch = Route.useSearch();
   const [query, setQuery] = useState("");

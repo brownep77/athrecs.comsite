@@ -246,12 +246,12 @@ export const listEvents = createServerFn({ method: "GET" })
     const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } =
       await import("../lib/athrecs/parkrun-dates");
 
-    const mapped = rows
-      .map((rawRow) => {
-        const { groups_json, ...row } = rawRow;
+    const mapped: EventListItem[] = rows
+      .map((rawRow): EventListItem | null => {
+        const { groups_json, distances_csv, ...row } = rawRow;
         const distances = sanitizeDistances(
           row.name,
-          row.distances_csv ? row.distances_csv.split(",") : [],
+          distances_csv ? distances_csv.split(",") : [],
         );
         if (row.sport === "Parkrun" && (dateFrom || dateTo)) {
           if (parkrunDates(row.name, dateFrom ?? today, dateTo ?? "2027-12-26").length === 0) {
