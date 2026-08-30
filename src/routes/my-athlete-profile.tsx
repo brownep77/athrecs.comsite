@@ -111,6 +111,9 @@ function MyAthleteProfilePage() {
       <div className="mx-auto max-w-4xl space-y-4">
         <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
           Your private Athlete Profile could not be loaded. Refresh the page to try again.
+          {account.error instanceof Error && account.error.message ? (
+            <span className="mt-2 block text-xs opacity-80">{account.error.message}</span>
+          ) : null}
         </section>
         <Button asChild variant="secondary">
           <Link to="/athlete-account">

@@ -1,4 +1,4 @@
-import { getSql } from "@/lib/db";
+import { getSql, dbSource } from "@/lib/db";
 import {
   athletes as athleteSeeds,
   catalogueMetadata,
@@ -22,6 +22,10 @@ const SEED_VERSION = "athrecs-uk-home-nation-championships-2026-08-30-v274";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v3";
 const EXPECTED = catalogueMetadata.merged_counts;
+const DEV_PREVIEW_USER_ID = "dev-user";
+const DEV_PREVIEW_EMAIL = "dev@example.com";
+const DEV_PREVIEW_ATHLETE_SLUG = "paul-browne";
+const DEV_PREVIEW_PRIVACY_VERSION = "athlete-account-2026-08-23";
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
 type GlobalSeedState = typeof globalThis & {
@@ -460,6 +464,70 @@ async function ensureSchema(sql: Sql): Promise<void> {
         )`,
   ];
   for (const statement of statements) await sql.query(statement);
+}
+
+/** PGLite / live-preview only. Never runs against Neon. */
+export async function ensureDevPreviewAthleteAccount(sql: Sql): Promise<void> {
+  if (dbSource !== "pglite") return;
+
+  await sql`
+    insert into "user" ("id", "name", "email", "emailVerified", "createdAt", "updatedAt")
+    values (${DEV_PREVIEW_USER_ID}, 'Paul Browne', ${DEV_PREVIEW_EMAIL}, true, now(), now())
+    on conflict ("id") do update set
+      "name" = excluded."name",
+      "email" = excluded."email",
+      "emailVerified" = true,
+      "updatedAt" = now()
+  `;
+
+  await sql`
+    insert into athlete_private_profiles (
+      user_id, verified_email, full_name, display_name,
+      country, region, city, club_or_team, nationality,
+      privacy_notice_version, privacy_acknowledged_at
+    )
+    values (
+      ${DEV_PREVIEW_USER_ID},
+      ${DEV_PREVIEW_EMAIL},
+      'Paul Browne',
+      'Paul Browne',
+      'United Kingdom',
+      'Norfolk',
+      'Norfolk',
+      'Unattached',
+      'English',
+      ${DEV_PREVIEW_PRIVACY_VERSION},
+      now()
+    )
+    on conflict (user_id) do nothing
+  `;
+
+  await sql`
+    insert into athlete_sport_profiles (
+      user_id, sport_code, is_primary, experience_level,
+      disciplines, preferred_distances, preferred_surfaces
+    )
+    values (
+      ${DEV_PREVIEW_USER_ID},
+      'Running',
+      true,
+      'club',
+      array['road']::text[],
+      array['10K', 'Half marathon', 'Marathon']::text[],
+      array['road']::text[]
+    )
+    on conflict (user_id, sport_code) do nothing
+  `;
+
+  await sql`
+    insert into athlete_account_links (athlete_id, user_id, user_email, status)
+    select a.id, ${DEV_PREVIEW_USER_ID}, ${DEV_PREVIEW_EMAIL}, 'active'
+    from athletes a
+    where a.slug = ${DEV_PREVIEW_ATHLETE_SLUG}
+      and not exists (
+        select 1 from athlete_account_links linked where linked.athlete_id = a.id
+      )
+  `;
 }
 
 async function alreadySeeded(sql: Sql): Promise<boolean> {
@@ -1530,6 +1598,7 @@ async function seed(): Promise<void> {
 
   if (await alreadySeeded(sql)) {
     await upsertPublicFigureProfiles(sql);
+    await ensureDevPreviewAthleteAccount(sql);
     return;
   }
 
@@ -1547,6 +1616,7 @@ async function seed(): Promise<void> {
       insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
       on conflict (key) do update set value = excluded.value
     `;
+    await ensureDevPreviewAthleteAccount(sql);
     return;
   }
 
@@ -1956,6 +2026,7 @@ async function seed(): Promise<void> {
   if (!(await alreadySeeded(sql))) {
     throw new Error("Catalogue seed verification failed after writing the seed marker");
   }
+  await ensureDevPreviewAthleteAccount(sql);
 }
 
 export function ensureAthrecsSeeded(): Promise<void> {
