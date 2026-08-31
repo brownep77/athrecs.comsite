@@ -177,7 +177,8 @@ await db.exec(`
   create table events (
     id serial primary key,
     slug text not null unique,
-    name text not null
+    name text not null,
+    sport text not null default 'Running'
   );
   create table editions (
     id serial primary key,
@@ -244,6 +245,7 @@ const claimList = await db.query(
 );
 assert.equal(claimList.rows.length, 1);
 assert.equal(claimList.rows[0].athlete_name, "Verification Runner");
+assert.equal(claimList.rows[0].event_sport, "Running");
 assert.equal(claimList.rows[0].evidence_url_3, "https://example.com/evidence-3");
 
 const staffClaimList = await db.query(
