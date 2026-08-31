@@ -67,13 +67,65 @@ assert(api.includes(".middleware([staffMiddleware])"), "Network API must require
 assert(api.includes("publicUrlCutoverEnabled: false"), "Network API must report URL cutover disabled");
 assert(api.includes("specialistDomainWritesEnabled: false"), "Specialist-domain writes must be disabled");
 
-const route = await readFile("src/routes/admin/network.tsx", "utf8");
-assert(route.includes('createFileRoute("/admin/network"'), "Network staff route is missing");
-assert(route.includes("Read-only foundation"), "Network route must show its read-only state");
-assert(route.includes("ATHRECS remains the protected canonical home"), "Network route must explain canonical protection");
+const staffRoute = await readFile("src/routes/admin/network.tsx", "utf8");
+assert(staffRoute.includes('createFileRoute("/admin/network"'), "Network staff route is missing");
+assert(staffRoute.includes("Read-only foundation"), "Network route must show its read-only state");
+assert(
+  staffRoute.includes("ATHRECS remains the protected canonical home"),
+  "Network route must explain canonical protection",
+);
 
-const shell = await readFile("src/components/staff/StaffMicrositeShell.tsx", "utf8");
-assert(shell.includes('to: "/admin/network"'), "Staff navigation must expose the network view");
+const staffShell = await readFile("src/components/staff/StaffMicrositeShell.tsx", "utf8");
+assert(staffShell.includes('to: "/admin/network"'), "Staff navigation must expose the network view");
+
+const landingRoute = await readFile("src/routes/sportsrecs.tsx", "utf8");
+assert(landingRoute.includes('createFileRoute("/sportsrecs"'), "SportsRecs landing route is missing");
+assert(
+  landingRoute.includes("One sporting identity.") && landingRoute.includes("Every competition."),
+  "SportsRecs landing page must explain the network proposition",
+);
+for (const publicBrand of [
+  "RunRecs",
+  "ATHRECS",
+  "CycRecs",
+  "SwimRecs",
+  "TriRecs",
+  "GymRecs",
+  "FitRecs",
+]) {
+  assert(landingRoute.includes(publicBrand), `Landing page is missing ${publicBrand}`);
+}
+assert(
+  landingRoute.includes('href: "https://www.athrecs.com"'),
+  "ATHRECS must remain the only explicitly live specialist link",
+);
+assert(
+  !landingRoute.includes('href: "https://runrecs.com"') &&
+    !landingRoute.includes('href: "https://cycrecs.com"') &&
+    !landingRoute.includes('href: "https://swimrecs.com"'),
+  "Unverified specialist destinations must not be activated from the coming-soon page",
+);
+assert(
+  landingRoute.includes("Link activates at launch"),
+  "Coming-soon cards must explain that their links are not yet active",
+);
+
+const publicShell = await readFile("src/components/layout/AppShell.tsx", "utf8");
+assert(
+  publicShell.includes('pathname === "/sportsrecs"'),
+  "SportsRecs must render without the ATHRECS public navigation shell",
+);
+
+const vercelConfig = JSON.parse(await readFile("vercel.json", "utf8"));
+const sportsRecsHosts = new Set(
+  (vercelConfig.rewrites ?? [])
+    .filter((rewrite) => rewrite.destination === "/sportsrecs")
+    .flatMap((rewrite) => rewrite.has ?? [])
+    .filter((rule) => rule.type === "host")
+    .map((rule) => rule.value),
+);
+assert(sportsRecsHosts.has("sportsrecs.org"), "Apex SportsRecs host rewrite is missing");
+assert(sportsRecsHosts.has("www.sportsrecs.org"), "www SportsRecs host rewrite is missing");
 
 const docs = await readFile("docs/sportsrecs-network-foundation.md", "utf8");
 assert(docs.includes("Public URL migration and domain activation require a separate approved release."));
