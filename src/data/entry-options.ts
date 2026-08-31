@@ -35,6 +35,10 @@ import {
   ukIrelandFiveKReleaseSeriesOverrides,
 } from "./uk-ireland-five-k-release-2026-08-28";
 import {
+  runrecsFinalFiveKEditionOverrides,
+  runrecsFinalFiveKSeriesOverrides,
+} from "./runrecs-five-k-final-release-2026-08-31";
+import {
   verifiedFiveMileEditionOverrides,
   verifiedFiveMileSeriesOverrides,
 } from "./five-mile-races-uk-ireland";
@@ -104,6 +108,7 @@ export const editionOverrides: Record<string, Partial<Edition>> = {
   ...verifiedFixtureEditionOverrides,
   ...ukFiveKEditionOverrides,
   ...ukIrelandFiveKReleaseEditionOverrides,
+  ...runrecsFinalFiveKEditionOverrides,
   ...verifiedFiveMileEditionOverrides,
   ...verifiedHalfMarathonFollowupEditionOverrides,
   ...verifiedHalfToTwentyMileEditionOverrides,
@@ -128,6 +133,7 @@ export const seriesOverrides: Record<string, Partial<Series>> = {
   ...verifiedFixtureSeriesOverrides,
   ...ukFiveKSeriesOverrides,
   ...ukIrelandFiveKReleaseSeriesOverrides,
+  ...runrecsFinalFiveKSeriesOverrides,
   ...verifiedFiveMileSeriesOverrides,
   ...verifiedTenKFollowupSeriesOverrides,
   ...verifiedTenMileSeriesOverrides,

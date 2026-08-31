@@ -133,7 +133,7 @@ const seedSource = await readFile(
   "utf8",
 );
 assert(
-  seedSource.includes("athrecs-runrecs-uk-ireland-five-mile-2026-08-31-v275"),
+  seedSource.includes("athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276"),
   "The production catalogue seed version was not advanced",
 );
 

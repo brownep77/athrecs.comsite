@@ -1055,16 +1055,6 @@ export const ukIrelandFiveKReleaseResearchQueue = [
     sourceUrl: "https://eventmaster.ie/event/2xvys2qc0z",
   },
   {
-    slug: "stonetown-5k-2026",
-    reason: "Direct registration does not confirm the course surface.",
-    sourceUrl: "https://eventmaster.ie/event/kEBjHK2TA2",
-  },
-  {
-    slug: "drogheda-christmas-5k-2026",
-    reason: "Athletics Ireland permit remains pending.",
-    sourceUrl: "https://eventmaster.ie/event/R13PsL5h76",
-  },
-  {
     slug: "boxted-5k-2027",
     reason: "The licence is shown as 2027TBC and registration is not open.",
     sourceUrl: "https://boxted10k.co.uk/",
