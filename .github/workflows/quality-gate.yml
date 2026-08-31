@@ -126,9 +126,22 @@ jobs:
 
       - name: Browser smoke tests
         run: |
-          BROWSER_SMOKE_FULL_PAGE=1 node scripts/browser-smoke.mjs \
-            http://127.0.0.1:8080/sportsrecs \
-            "$GITHUB_WORKSPACE/artifacts/sportsrecs.png"
+          BROWSER_SMOKE_FULL_PAGE=1 \
+          BROWSER_SMOKE_EXPECT_TEXT='One sporting identity.||Every competition.||RunRecs||ATHRECS||Coming soon' \
+          BROWSER_SMOKE_REJECT_TEXT='Help improve ATHRECS' \
+            node scripts/browser-smoke.mjs \
+              http://127.0.0.1:8080/sportsrecs \
+              "$GITHUB_WORKSPACE/artifacts/sportsrecs.png"
+
+          BROWSER_SMOKE_FULL_PAGE=1 \
+          BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
+          BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
+          BROWSER_SMOKE_EXPECT_TEXT='One sporting identity.||Every competition.||RunRecs||ATHRECS||Coming soon' \
+          BROWSER_SMOKE_REJECT_TEXT='Help improve ATHRECS' \
+            node scripts/browser-smoke.mjs \
+              http://127.0.0.1:8080/sportsrecs \
+              "$GITHUB_WORKSPACE/artifacts/sportsrecs-mobile.png"
+
           node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
           node scripts/browser-auth-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/athlete-auth.png"
           node scripts/browser-smoke.mjs "http://127.0.0.1:8080/races?sport=Athletics&surface=XC" "$GITHUB_WORKSPACE/artifacts/races.png"
