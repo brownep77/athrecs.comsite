@@ -122,8 +122,23 @@ jobs:
         run: |
           node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
           node scripts/browser-auth-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/athlete-auth.png"
-          node scripts/browser-smoke.mjs "http://127.0.0.1:8080/races?sport=Running&distance=10K" "$GITHUB_WORKSPACE/artifacts/races.png"
-          node scripts/browser-smoke.mjs http://127.0.0.1:8080/races/boston-marathon "$GITHUB_WORKSPACE/artifacts/boston-marathon.png"
+          node scripts/browser-smoke.mjs "http://127.0.0.1:8080/races?sport=Athletics&surface=XC" "$GITHUB_WORKSPACE/artifacts/races.png"
+          node scripts/browser-smoke.mjs \
+            http://127.0.0.1:8080/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac \
+            "$GITHUB_WORKSPACE/artifacts/athletics-event.png"
+
+          boston_status=$(curl \
+            --silent \
+            --show-error \
+            --max-time 30 \
+            --output artifacts/boston-marathon-not-found.html \
+            --write-out '%{http_code}' \
+            http://127.0.0.1:8080/races/boston-marathon)
+          if [ "$boston_status" != "404" ]; then
+            cat artifacts/boston-marathon-not-found.html
+            echo "Expected non-Athletics Boston Marathon route to return 404, received $boston_status"
+            exit 1
+          fi
 
       - name: Upload smoke evidence
         if: always()
