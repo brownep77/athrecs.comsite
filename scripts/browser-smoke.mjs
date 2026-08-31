@@ -91,8 +91,13 @@ try {
   const title = await page.title();
   const hasCanvas = (await page.locator("canvas").count()) > 0;
   const bodyTextLen = bodyText.trim().length;
-  const missingTexts = expectedTexts.filter((text) => !bodyText.includes(text));
-  const presentRejectedTexts = rejectedTexts.filter((text) => bodyText.includes(text));
+  const normalizedBodyText = bodyText.toLocaleLowerCase("en-GB");
+  const missingTexts = expectedTexts.filter(
+    (text) => !normalizedBodyText.includes(text.toLocaleLowerCase("en-GB")),
+  );
+  const presentRejectedTexts = rejectedTexts.filter((text) =>
+    normalizedBodyText.includes(text.toLocaleLowerCase("en-GB")),
+  );
 
   await page.screenshot({ path: outPng, fullPage });
 
