@@ -1,0 +1,221 @@
+name: One-shot ATHRECS athletics public scope
+
+on:
+  push:
+    branches:
+      - feat/athrecs-athletics-only
+
+permissions:
+  contents: write
+
+jobs:
+  wire-athletics:
+    if: ${{ !contains(github.event.head_commit.message, '[athrecs-athletics-wired]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/athrecs-athletics-only
+          fetch-depth: 0
+
+      - name: Wire the Athletics specialist build
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def replace_once(path: str, before: str, after: str) -> None:
+              file = Path(path)
+              text = file.read_text()
+              if before not in text:
+                  raise SystemExit(f"Anchor not found in {path}: {before[:120]}")
+              file.write_text(text.replace(before, after, 1))
+
+          vite = Path("vite.config.ts")
+          text = vite.read_text()
+          marker = "/**\n * Finish PGLite bootstrap during dev-server setup"
+          plugin = r'''
+/**
+ * ATHRECS is the Athletics specialist domain. Keep the shared multi-sport
+ * backend, but replace public catalogue modules and the visibly multi-sport
+ * routes unless this is a RunRecs build.
+ */
+function athleticsVariantPlugin(): Plugin {
+  const branch = process.env.VERCEL_GIT_COMMIT_REF?.trim() ?? "";
+  const explicitBrand = process.env.VITE_SITE_BRAND?.trim().toLowerCase();
+  const projectProductionHost =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim().toLowerCase() ?? "";
+  const runRecsEnabled =
+    explicitBrand === "runrecs" ||
+    projectProductionHost.includes("runrecs") ||
+    branch === "feat/runrecs-running-site" ||
+    branch === "runrecs-production";
+  const enabled = !runRecsEnabled;
+
+  const moduleAliases = new Map<string, string>([
+    ["@/lib/athrecs/api", "src/athletics/api.ts"],
+    ["@/lib/athrecs/filters", "src/athletics/filters.ts"],
+  ]);
+  const routeAliases = new Map<string, string>([
+    ["./routes/index", "src/athletics/routes/index.tsx"],
+    ["./routes/calendar", "src/athletics/routes/calendar.tsx"],
+    ["./routes/race-series", "src/athletics/routes/race-series.tsx"],
+    ["./routes/$language/$country/index", "src/athletics/routes/$language/$country/index.tsx"],
+  ]);
+
+  return {
+    name: "athrecs:athletics-variant",
+    enforce: "pre",
+    config() {
+      if (!enabled) return undefined;
+      return {
+        define: {
+          "import.meta.env.VITE_SITE_BRAND": JSON.stringify("athrecs"),
+        },
+      };
+    },
+    resolveId(source, importer) {
+      if (!enabled) return null;
+      const moduleReplacement = moduleAliases.get(source);
+      if (moduleReplacement) return path.resolve(process.cwd(), moduleReplacement);
+
+      const normalizedImporter = importer?.replaceAll("\\", "/") ?? "";
+      if (normalizedImporter.endsWith("/src/routeTree.gen.ts")) {
+        const routeReplacement = routeAliases.get(source);
+        if (routeReplacement) return path.resolve(process.cwd(), routeReplacement);
+      }
+      return null;
+    },
+    configResolved() {
+      if (enabled) {
+        console.log(
+          `[athrecs] athletics-only public build enabled (branch=${branch || "local"}, project=${projectProductionHost || "unset"})`,
+        );
+      }
+    },
+  };
+}
+
+'''
+          if marker not in text:
+              raise SystemExit("Vite PGLite marker not found")
+          text = text.replace(marker, plugin + marker, 1)
+          text = text.replace(
+              "    runRecsVariantPlugin(),\n    pgliteBootstrapPlugin(),",
+              "    runRecsVariantPlugin(),\n    athleticsVariantPlugin(),\n    pgliteBootstrapPlugin(),",
+              1,
+          )
+          vite.write_text(text)
+
+          filters = Path("src/lib/athrecs/filters.ts")
+          text = filters.read_text()
+          anchor = "] as const;\n\nexport type SubfilterKey"
+          if anchor not in text:
+              raise SystemExit("Base filters SPORTS anchor not found")
+          filters.write_text(text.replace(anchor, "] as const;\n\nexport const DEFAULT_SPORT = \"All\" as const;\n\nexport type SubfilterKey", 1))
+
+          runrecs_filters = Path("src/runrecs/filters.ts")
+          text = runrecs_filters.read_text()
+          if "DEFAULT_SPORT" not in text:
+              text += '\nexport const DEFAULT_SPORT = "All" as const;\n'
+          runrecs_filters.write_text(text)
+
+          event_search = Path("src/components/races/EventSearch.tsx")
+          text = event_search.read_text()
+          text = text.replace(
+              "  COUNTRY_GROUPS,\n  SPORTS,",
+              "  COUNTRY_GROUPS,\n  DEFAULT_SPORT,\n  SPORTS,",
+              1,
+          )
+          text = text.replace('  sport: "All",', "  sport: DEFAULT_SPORT,", 1)
+          text = text.replace(
+              '    sport: value.sport === "All" ? undefined : value.sport,',
+              '    sport:\n      value.sport === "All" || value.sport === DEFAULT_SPORT ? undefined : value.sport,',
+              1,
+          )
+          event_search.write_text(text)
+
+          races = Path("src/routes/races/index.tsx")
+          text = races.read_text()
+          text = text.replace(
+              'import type { Sport } from "@/lib/athrecs/types";\n',
+              'import type { Sport } from "@/lib/athrecs/types";\nimport { SPORTS as PUBLIC_SPORTS } from "@/lib/athrecs/filters";\n',
+              1,
+          )
+          start = text.index("const SPORT_VALUES = new Set<Sport>([")
+          end = text.index("]);", start) + 3
+          text = text[:start] + (
+              "const SPORT_VALUES = new Set<Sport>(\n"
+              "  PUBLIC_SPORTS.filter((sport): sport is Sport => sport !== \"All\"),\n"
+              ");"
+          ) + text[end:]
+          text = text.replace('    sport: search.sport ?? "All",', "    sport: search.sport ?? EMPTY_SEARCH.sport,", 1)
+          races.write_text(text)
+
+          country_races = Path("src/routes/$language/$country/races/index.tsx")
+          text = country_races.read_text()
+          text = text.replace(
+              'import type { Sport } from "@/lib/athrecs/types";\n',
+              'import type { Sport } from "@/lib/athrecs/types";\nimport { SPORTS as PUBLIC_SPORTS } from "@/lib/athrecs/filters";\n',
+              1,
+          )
+          start = text.index("const SPORTS = new Set<Sport>([")
+          end = text.index("]);", start) + 3
+          text = text[:start] + (
+              "const SPORTS = new Set<Sport>(\n"
+              "  PUBLIC_SPORTS.filter((sport): sport is Sport => sport !== \"All\"),\n"
+              ");"
+          ) + text[end:]
+          text = text.replace('    sport: search.sport ?? "All",', "    sport: search.sport ?? EMPTY_SEARCH.sport,", 1)
+          country_races.write_text(text)
+
+          root = Path("src/routes/__root.tsx")
+          text = root.read_text()
+          text = text.replace(
+              '          "running races, marathon calendar, parkrun, 5K, 10K, half marathon, triathlon, cycling events, race results, athletics clubs, ATHRECS",',
+              '          "athletics events, track and field, cross country, road athletics, athletics results, athletes, athletics clubs, ATHRECS",',
+              1,
+          )
+          text = text.replace(
+              '        title: `${SITE_NAME} — Find races, results and athletes`,',
+              '        title: `${SITE_NAME} — Athletics events, results and athletes`,',
+              1,
+          )
+          root.write_text(text)
+
+          seo = Path("src/lib/athrecs/seo.ts")
+          text = seo.read_text()
+          text = text.replace(
+              '  "Find running, triathlon and cycling events — parkruns, 5Ks, 10Ks, half marathons and marathons — plus athletes, clubs and results on ATHRECS.com.";',
+              '  "Find track and field meetings, cross-country fixtures, road athletics and championships — plus athletics results, athletes and clubs on ATHRECS.com.";',
+              1,
+          )
+          text = text.replace(
+              'const title = opts?.title ?? `${SITE_NAME} — Find races, results and athletes`;',
+              'const title = opts?.title ?? `${SITE_NAME} — Athletics events, results and athletes`;',
+              1,
+          )
+          text = text.replace('    sport: input.sport || "Running",', '    sport: input.sport || "Athletics",', 1)
+          seo.write_text(text)
+
+          shell = Path("src/components/layout/AppShell.tsx")
+          text = shell.read_text()
+          text = text.replace(
+              "          Races\n          <br />\n          Results · Athletes",
+              "          Athletics\n          <br />\n          Events · Results",
+              1,
+          )
+          shell.write_text(text)
+          PY
+
+      - name: Commit the specialist wiring
+        shell: bash
+        run: |
+          git config user.name "athrecs-ci"
+          git config user.email "athrecs-ci@users.noreply.github.com"
+          git add vite.config.ts src/lib/athrecs/filters.ts src/runrecs/filters.ts \
+            src/components/races/EventSearch.tsx src/routes/races/index.tsx \
+            'src/routes/$language/$country/races/index.tsx' src/routes/__root.tsx \
+            src/lib/athrecs/seo.ts src/components/layout/AppShell.tsx
+          git commit -m "Wire ATHRECS athletics-only public scope [athrecs-athletics-wired]"
+          git push origin HEAD:feat/athrecs-athletics-only
