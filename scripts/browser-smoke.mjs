@@ -17,6 +17,10 @@ const outPng = checkedOutputPath(
 );
 const timeoutMs = Number(process.env.BROWSER_SMOKE_TIMEOUT_MS || 45000);
 const fullPage = process.env.BROWSER_SMOKE_FULL_PAGE === "1";
+const viewportWidth = Number(process.env.BROWSER_SMOKE_VIEWPORT_WIDTH || 1280);
+const viewportHeight = Number(process.env.BROWSER_SMOKE_VIEWPORT_HEIGHT || 800);
+const expectedTexts = splitAssertions(process.env.BROWSER_SMOKE_EXPECT_TEXT);
+const rejectedTexts = splitAssertions(process.env.BROWSER_SMOKE_REJECT_TEXT);
 
 mkdirSync(dirname(outPng), { recursive: true });
 
@@ -27,6 +31,13 @@ const transientVitePatterns = [
   /failed to fetch dynamically imported module/i,
   /err_aborted\s+504/i,
 ];
+
+function splitAssertions(value) {
+  return (value || "")
+    .split("||")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
 
 function isTransientViteFailure(bodyText) {
   return [...consoleErrors, ...pageErrors, bodyText].some((value) =>
@@ -40,7 +51,9 @@ const browser = await chromium.launch({
 });
 
 try {
-  const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  const page = await browser.newPage({
+    viewport: { width: viewportWidth, height: viewportHeight },
+  });
   page.on("console", (message) => {
     if (message.type() === "error") consoleErrors.push(message.text());
   });
@@ -78,6 +91,8 @@ try {
   const title = await page.title();
   const hasCanvas = (await page.locator("canvas").count()) > 0;
   const bodyTextLen = bodyText.trim().length;
+  const missingTexts = expectedTexts.filter((text) => !bodyText.includes(text));
+  const presentRejectedTexts = rejectedTexts.filter((text) => bodyText.includes(text));
 
   await page.screenshot({ path: outPng, fullPage });
 
@@ -92,7 +107,12 @@ try {
         bodyTextLen,
         consoleErrors,
         pageErrors,
+        expectedTexts,
+        missingTexts,
+        rejectedTexts,
+        presentRejectedTexts,
         fullPage,
+        viewport: { width: viewportWidth, height: viewportHeight },
         screenshot: outPng,
       },
       null,
@@ -102,6 +122,8 @@ try {
 
   if (status >= 400 || status === 0) process.exit(1);
   if (pageErrors.length || consoleErrors.length) process.exit(2);
+  if (missingTexts.length) process.exit(3);
+  if (presentRejectedTexts.length) process.exit(4);
   process.exit(0);
 } catch (error) {
   console.error(
