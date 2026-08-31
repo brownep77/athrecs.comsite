@@ -1,0 +1,41 @@
+name: One-shot specialist visible-scope hardening
+
+on:
+  push:
+    branches:
+      - feat/athrecs-athletics-only
+
+permissions:
+  contents: write
+
+jobs:
+  harden:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/athrecs-athletics-only
+          fetch-depth: 0
+
+      - name: Apply reviewed specialist-scope changes
+        run: python scripts/apply-specialist-visible-scope.py
+
+      - name: Commit changes when required
+        shell: bash
+        run: |
+          git config user.name "athrecs-ci"
+          git config user.email "athrecs-ci@users.noreply.github.com"
+          git add vite.config.ts \
+            src/lib/athrecs/athlete-account-api.ts \
+            src/lib/athrecs/result-match-api.ts \
+            src/lib/athrecs/result-claims-api.ts \
+            src/components/athletes/PotentialResultMatchesPanel.tsx \
+            src/routes/claim-results.tsx \
+            src/routes/my-athlete-profile.tsx \
+            src/routes/athlete-account.tsx
+          if git diff --cached --quiet; then
+            echo "Specialist visible scope is already hardened."
+            exit 0
+          fi
+          git commit -m "Harden specialist visible sport scope [specialist-scope]"
+          git push origin HEAD:feat/athrecs-athletics-only
