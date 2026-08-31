@@ -9,12 +9,15 @@ const [{ runabcSeries }, fiveMileData] = await Promise.all([
 const {
   verifiedFiveMileEditionOverrides,
   verifiedFiveMileEditions,
+  verifiedFiveMileExistingSeriesEditions,
   verifiedFiveMileResearchQueue,
   verifiedFiveMileSeries,
   verifiedFiveMileSeriesOverrides,
 } = fiveMileData;
 
 const TODAY = "2026-08-22";
+const FOLLOWUP_CHECKED_AT = "2026-08-31";
+const VALID_CHECK_DATES = new Set([TODAY, FOLLOWUP_CHECKED_AT]);
 const HORIZON = "2027-12-31";
 const COVERED_COUNTRIES = new Set(["England", "Ireland", "Northern Ireland", "Scotland", "Wales"]);
 const REUSED_SERIES_SLUGS = new Set([
@@ -22,9 +25,14 @@ const REUSED_SERIES_SLUGS = new Set([
   "cannock-chase-10-5-mile",
 ]);
 
-assert.equal(verifiedFiveMileSeries.length, 22, "The five-mile release is incomplete");
-assert.equal(verifiedFiveMileEditions.length, 24, "The five-mile edition release is incomplete");
-assert.equal(verifiedFiveMileResearchQueue.length, 7, "The held-candidate audit is incomplete");
+assert.equal(verifiedFiveMileSeries.length, 30, "The five-mile release is incomplete");
+assert.equal(verifiedFiveMileEditions.length, 32, "The five-mile edition release is incomplete");
+assert.equal(
+  verifiedFiveMileExistingSeriesEditions.length,
+  10,
+  "The existing-series five-mile additions are incomplete",
+);
+assert.equal(verifiedFiveMileResearchQueue.length, 11, "The held-candidate audit is incomplete");
 assert.deepEqual(
   new Set(verifiedFiveMileSeries.map((series) => series.country)),
   COVERED_COUNTRIES,
@@ -68,10 +76,25 @@ for (const edition of verifiedFiveMileEditions) {
     assert.equal(edition.entryOptions, undefined, `${key} must not imply an open checkout`);
   }
   for (const option of edition.entryOptions ?? []) {
-    assert.equal(option.checkedAt, TODAY, `${key} has a stale entry check date`);
+    assert(VALID_CHECK_DATES.has(option.checkedAt), `${key} has an invalid entry check date`);
     assert.equal(option.isVerified, true, `${key} has an unverified entry provider`);
     assert.equal(option.isPrimary, true, `${key} primary entry provider is not marked`);
     assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
+  }
+}
+
+for (const edition of verifiedFiveMileExistingSeriesEditions) {
+  const key = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+  assert.equal(edition.distance, "5mi", `${key} is not represented as five miles`);
+  assert.equal(edition.distanceKm, 8.05, `${key} does not have the canonical metric distance`);
+  assert.equal(edition.publishAllDistances, true, `${key} may collapse another race distance`);
+  assert.equal(edition.status, "Open", `${key} lost its confirmed entry status`);
+  assert(edition.entryOptions?.length, `${key} needs a verified entry option`);
+  assert.match(edition.source, /^https:\/\//, `${key} source must use HTTPS`);
+  for (const option of edition.entryOptions ?? []) {
+    assert.equal(option.checkedAt, FOLLOWUP_CHECKED_AT, `${key} has a stale check date`);
+    assert.equal(option.isVerified, true, `${key} has an unverified entry provider`);
+    assert.equal(option.isPrimary, true, `${key} primary entry provider is not marked`);
   }
 }
 
@@ -96,6 +119,10 @@ assert(
   "The five-mile editions are not merged into the catalogue",
 );
 assert(
+  catalogueSource.includes("...(verifiedFiveMileExistingSeriesEditions as Edition[])"),
+  "The existing-series five-mile editions are not merged into the catalogue",
+);
+assert(
   /const SEED_VERSION = "athrecs-[^"]+";/.test(seedSource),
   "The persistent catalogue seed version is behind the five-mile workflow",
 );
@@ -117,6 +144,14 @@ const sentinels = [
   "pendle-5-mile-trail-race-2027",
   "stort10-5-mile-trail-race-2027",
   "st-agnes-5-miler-2027",
+  "talan-notorious-trail-5-mile-2027",
+  "gibside-wild-new-year-trail-runs-5-mile-2027",
+  "romsey-5-mile-2027",
+  "run-the-night-cork-2027",
+  "run-the-night-dublin-2027",
+  "ymca-east-surrey-adult-5-mile-2027",
+  "three-forts-challenge-5-mile-2027",
+  "exeter-autumn-5-mile-2026",
 ];
 for (const slug of sentinels) {
   assert(slugs.has(slug), `Coverage sentinel is missing: ${slug}`);
@@ -126,6 +161,27 @@ assert.deepEqual(
   verifiedFiveMileSeriesOverrides["m10-swansea"]?.distances,
   ["5mi", "10mi"],
   "M10 Swansea must advertise its official 5-mile and 10-mile distances",
+);
+assert.equal(
+  verifiedFiveMileEditionOverrides["bishopbriggs-5-miler|2026-08-26|5mi"]?.startTime,
+  "19:00",
+  "Bishopbriggs must use the corrected 19:00 start",
+);
+assert.equal(
+  verifiedFiveMileEditionOverrides["baltonsborough-5-mile|2026-08-31|5mi"]?.startTime,
+  "11:00",
+  "Baltonsborough must use the corrected 11:00 start",
+);
+assert.deepEqual(
+  {
+    date: verifiedFiveMileEditionOverrides["rb-moors-valley-wildwood-trail-series|2027-01-24|Other"]
+      ?.date,
+    distance:
+      verifiedFiveMileEditionOverrides["rb-moors-valley-wildwood-trail-series|2027-01-24|Other"]
+        ?.distance,
+  },
+  { date: "2027-05-02", distance: "5mi" },
+  "Moors Valley must replace the generic January row with the confirmed May five-mile edition",
 );
 assert.deepEqual(
   verifiedFiveMileEditionOverrides["m10-swansea|2027-03-21|10mi"],

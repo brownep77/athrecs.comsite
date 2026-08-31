@@ -1458,7 +1458,7 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     name: "Clontarf Half Marathon",
     area: "EastPoint Business Park, Clontarf Promenade and Bull Island",
     surface: "Road",
-    distances: ["Half"],
+    distances: ["5mi", "Half"],
     summary: "Clontarf Half Marathon — a flat, certified coastal half marathon beside Dublin Bay.",
     description:
       "BEAR Races' Clontarf Half Marathon follows a measured coastal route from EastPoint Business Park along Clontarf Promenade and Bull Island; the established card carries its verified seasonal editions.",

@@ -18,7 +18,11 @@ const EXPECTED_EDITIONS = 38;
 
 assert.equal(ukHomeNationChampionshipsCheckedAt, CHECKED_AT);
 assert.equal(ukHomeNationChampionshipsHorizon, HORIZON);
-assert.equal(ukHomeNationChampionshipsSeries.length, EXPECTED_SERIES, "Championship series count changed");
+assert.equal(
+  ukHomeNationChampionshipsSeries.length,
+  EXPECTED_SERIES,
+  "Championship series count changed",
+);
 assert.equal(
   ukHomeNationChampionshipsEditions.length,
   EXPECTED_EDITIONS,
@@ -51,12 +55,24 @@ for (const required of [
   assert(heldNames.includes(required), `Missing duplicate-control hold: ${required}`);
 }
 
-const seriesBySlug = new Map(ukHomeNationChampionshipsSeries.map((series) => [series.slug, series]));
+const seriesBySlug = new Map(
+  ukHomeNationChampionshipsSeries.map((series) => [series.slug, series]),
+);
 for (const series of ukHomeNationChampionshipsSeries) {
   assert.equal(series.sport, "Athletics", `${series.slug} must stay on the Athletics sport`);
-  assert(["England", "Scotland", "Wales", "Northern Ireland"].includes(series.country), series.slug);
-  assert(series.city && series.area && series.organiser, `${series.slug} is missing venue metadata`);
-  assert.equal(series.distances.length, 1, `${series.slug} needs one championship discipline badge`);
+  assert(
+    ["England", "Scotland", "Wales", "Northern Ireland"].includes(series.country),
+    series.slug,
+  );
+  assert(
+    series.city && series.area && series.organiser,
+    `${series.slug} is missing venue metadata`,
+  );
+  assert.equal(
+    series.distances.length,
+    1,
+    `${series.slug} needs one championship discipline badge`,
+  );
   assert.match(series.website, /^https:\/\//, `${series.slug} has no official website`);
   assert.match(series.source_url ?? "", /^https:\/\//, `${series.slug} has no source URL`);
   assert.equal(series.featured, true, `${series.slug} should be featured as a championship`);
@@ -67,7 +83,10 @@ for (const edition of ukHomeNationChampionshipsEditions) {
   const key = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
   assert(!editionKeys.has(key), `Duplicate championship edition: ${key}`);
   editionKeys.add(key);
-  assert(seriesBySlug.has(edition.seriesSlug), `Unknown championship series: ${edition.seriesSlug}`);
+  assert(
+    seriesBySlug.has(edition.seriesSlug),
+    `Unknown championship series: ${edition.seriesSlug}`,
+  );
   assert(
     edition.date >= CHECKED_AT.slice(0, 10) || edition.date >= "2026-08-29",
     `Championship is before the remaining-season window: ${key}`,
@@ -85,7 +104,8 @@ assert(seriesBySlug.has("ni-ulster-combined-event-championships-2026"));
 
 const scottishNationalXc = ukHomeNationChampionshipsEditions.find(
   (edition) =>
-    edition.seriesSlug === "lindsays-national-xc-championships-2027" && edition.date === "2027-02-20",
+    edition.seriesSlug === "lindsays-national-xc-championships-2027" &&
+    edition.date === "2027-02-20",
 );
 const englishNationalXc = ukHomeNationChampionshipsEditions.find(
   (edition) =>
@@ -100,14 +120,20 @@ assert.notEqual(
   "Scottish and English national XC cards must remain separate",
 );
 
-const catalogueSource = await readFile(new URL("../src/data/catalogue.ts", import.meta.url), "utf8");
+const catalogueSource = await readFile(
+  new URL("../src/data/catalogue.ts", import.meta.url),
+  "utf8",
+);
 assert(catalogueSource.includes('from "./uk-home-nation-championships-2026-2027"'));
 assert(catalogueSource.includes("...(ukHomeNationChampionshipsSeries as Series[])"));
 assert(catalogueSource.includes("...(ukHomeNationChampionshipsEditions as Edition[])"));
 
-const seedSource = await readFile(new URL("../src/lib/athrecs/seed.server.ts", import.meta.url), "utf8");
+const seedSource = await readFile(
+  new URL("../src/lib/athrecs/seed.server.ts", import.meta.url),
+  "utf8",
+);
 assert(
-  seedSource.includes("athrecs-uk-home-nation-championships-2026-08-30-v274"),
+  seedSource.includes("athrecs-runrecs-uk-ireland-five-mile-2026-08-31-v275"),
   "The production catalogue seed version was not advanced",
 );
 

@@ -120,7 +120,11 @@ import {
   ukTenKRelease64SourceEditions,
   ukTenKRelease64SourceSeries,
 } from "./uk-10k-release-64-source-editions";
-import { verifiedFiveMileEditions, verifiedFiveMileSeries } from "./five-mile-races-uk-ireland";
+import {
+  verifiedFiveMileEditions,
+  verifiedFiveMileExistingSeriesEditions,
+  verifiedFiveMileSeries,
+} from "./five-mile-races-uk-ireland";
 import {
   verifiedTenKFollowupEditions,
   verifiedTenKFollowupSeries,
@@ -317,6 +321,7 @@ const mergedEditions = [
   ...(ukIrelandFiveKExistingSeriesEditions as Edition[]),
   ...(ukTenKRelease64SourceEditions as Edition[]),
   ...(verifiedFiveMileEditions as Edition[]),
+  ...(verifiedFiveMileExistingSeriesEditions as Edition[]),
   ...(verifiedTenKFollowupEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
