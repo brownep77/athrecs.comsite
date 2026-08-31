@@ -1,0 +1,652 @@
+name: One-shot ATHRECS athletics-only public-site patch
+
+on:
+  push:
+    branches:
+      - feat/athrecs-athletics-only
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: ${{ !contains(github.event.head_commit.message, '[athrecs-athletics-patch]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/athrecs-athletics-only
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Build the Athletics-only public variant
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import re
+          import textwrap
+
+          root = Path('.')
+          (root / 'src/athrecs/routes').mkdir(parents=True, exist_ok=True)
+
+          # Remove any accidental scratch files before this reviewed release.
+          for scratch in ('noop', 'tmp', '.github/workflows/placeholder'):
+              path = root / scratch
+              if path.is_file():
+                  path.unlink()
+
+          # Reuse the already reviewed RunRecs isolation layer, changing only
+          # the central public sport scope. Standalone Parkrun branches are left
+          # intact and unreachable, avoiding accidental weekly date synthesis.
+          source = (root / 'src/runrecs/api.ts').read_text()
+          api = source.replace('RunRecs', 'AthRecs').replace('runRecs', 'athRecs')
+          api = api.replace('RUNRECS', 'ATHRECS_PUBLIC')
+          api = api.replace('sport is "Running" | "Parkrun"', 'sport is "Athletics"')
+          api = re.sub(
+              r'([A-Za-z0-9_.$]+)\s*===\s*"Running"\s*\|\|\s*\1\s*===\s*"Parkrun"',
+              r'\1 === "Athletics"',
+              api,
+          )
+          api = re.sub(
+              r'\[\s*"Running"\s*,\s*"Parkrun"\s*\]',
+              '["Athletics"]',
+              api,
+              flags=re.S,
+          )
+          api = re.sub(
+              r"\(\s*'Running'\s*,\s*'Parkrun'\s*\)",
+              "('Athletics')",
+              api,
+              flags=re.S,
+          )
+          api = re.sub(
+              r"ARRAY\s*\[\s*'Running'\s*,\s*'Parkrun'\s*\]",
+              "ARRAY['Athletics']",
+              api,
+              flags=re.S | re.I,
+          )
+          api = re.sub(
+              r"([A-Za-z0-9_.$]+)\s*=\s*'Running'\s+OR\s+\1\s*=\s*'Parkrun'",
+              r"\1 = 'Athletics'",
+              api,
+              flags=re.I,
+          )
+          # Catch paired scope expressions formatted on a single line while
+          # deliberately preserving standalone Parkrun-specific display logic.
+          scoped_lines = []
+          for line in api.splitlines():
+              if ('Running' in line and 'Parkrun' in line):
+                  line = line.replace('"Running"', '"Athletics"').replace('"Parkrun"', '"Athletics"')
+                  line = line.replace("'Running'", "'Athletics'").replace("'Parkrun'", "'Athletics'")
+              scoped_lines.append(line)
+          api = '\n'.join(scoped_lines) + '\n'
+          api = (
+              '// ATHRECS public catalogue: Athletics only. The shared database and staff APIs remain unchanged.\n'
+              + api
+          )
+          if '=== "Athletics"' not in api:
+              raise SystemExit('Athletics scope predicate was not generated')
+          if re.search(r"'Running'\s*,\s*'Parkrun'", api, re.S):
+              raise SystemExit('A Running/Parkrun SQL scope survived the Athletics conversion')
+          if re.search(r'"Running"\s*,\s*"Parkrun"', api, re.S):
+              raise SystemExit('A Running/Parkrun array scope survived the Athletics conversion')
+          (root / 'src/athrecs/api.ts').write_text(api)
+
+          filters = (root / 'src/runrecs/filters.ts').read_text()
+          filters = filters.replace('RunRecs', 'AthRecs').replace('runRecs', 'athRecs').replace('RUNRECS', 'ATHRECS_PUBLIC')
+          filters = re.sub(r'\[\s*"Running"\s*,\s*"Parkrun"\s*\]', '["Athletics"]', filters, flags=re.S)
+          filters = filters.replace('"Running" | "Parkrun"', '"Athletics"')
+          (root / 'src/athrecs/filters.ts').write_text(
+              '// ATHRECS public filters expose Athletics only.\n' + filters
+          )
+
+          app_shell = r'''import type { ReactNode } from "react";
+          import { Activity, CalendarDays, Medal, Search, ShieldCheck, Trophy, UserRound } from "lucide-react";
+
+          const navigation = [
+            { href: "/", label: "Home" },
+            { href: "/races", label: "Athletics fixtures" },
+            { href: "/calendar", label: "Calendar" },
+            { href: "/race-series", label: "Championships & series" },
+            { href: "/athletes", label: "Athletes" },
+            { href: "/clubs", label: "Clubs" },
+          ];
+
+          export function AthRecsAppShell({ children }: { children: ReactNode }) {
+            return (
+              <div className="min-h-screen bg-bg text-fg">
+                <a
+                  href="#main-content"
+                  className="sr-only fixed left-3 top-3 z-[100] rounded-md bg-fg px-3 py-2 text-bg focus:not-sr-only"
+                >
+                  Skip to content
+                </a>
+
+                <header className="sticky top-0 z-50 border-b border-border bg-surface/95 backdrop-blur">
+                  <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+                    <a href="/" className="flex items-center gap-3 text-fg no-underline" aria-label="ATHRECS home">
+                      <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-primary-foreground shadow-card">
+                        <Medal className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <span>
+                        <span className="block font-display text-xl font-semibold tracking-tight">ATHRECS</span>
+                        <span className="block text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-muted">
+                          Athletics records & events
+                        </span>
+                      </span>
+                    </a>
+
+                    <nav aria-label="Primary navigation" className="order-3 flex w-full flex-wrap gap-1 border-t border-border pt-3 lg:order-2 lg:w-auto lg:border-0 lg:pt-0">
+                      {navigation.map((item) => (
+                        <a
+                          key={item.href}
+                          href={item.href}
+                          className="rounded-lg px-3 py-2 text-sm font-medium text-muted no-underline transition hover:bg-elevated hover:text-fg"
+                        >
+                          {item.label}
+                        </a>
+                      ))}
+                    </nav>
+
+                    <div className="order-2 flex items-center gap-2 lg:order-3">
+                      <a
+                        href="/races"
+                        className="hidden min-h-10 items-center gap-2 rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg no-underline hover:border-border-strong sm:inline-flex"
+                      >
+                        <Search className="h-4 w-4" aria-hidden="true" />
+                        Search
+                      </a>
+                      <a
+                        href="/athlete-account"
+                        className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-primary px-3 text-sm font-semibold text-primary-foreground no-underline hover:opacity-90"
+                      >
+                        <UserRound className="h-4 w-4" aria-hidden="true" />
+                        Athlete account
+                      </a>
+                    </div>
+                  </div>
+                </header>
+
+                <main id="main-content" className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                  {children}
+                </main>
+
+                <footer className="border-t border-border bg-surface">
+                  <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 text-sm text-muted sm:px-6 md:grid-cols-[1fr_auto] lg:px-8">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 font-semibold text-fg">
+                        <Activity className="h-4 w-4 text-accent" aria-hidden="true" />
+                        ATHRECS
+                      </div>
+                      <p className="max-w-xl leading-relaxed">
+                        Athletics fixtures, championships, athlete profiles and verified results in one focused directory.
+                      </p>
+                      <p className="flex items-center gap-2 text-xs">
+                        <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                        Public catalogue restricted to Athletics. Private records retain their existing privacy controls.
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap items-start gap-x-5 gap-y-2 md:justify-end">
+                      <a href="/calendar" className="inline-flex items-center gap-1.5 text-muted no-underline hover:text-fg">
+                        <CalendarDays className="h-4 w-4" aria-hidden="true" /> Calendar
+                      </a>
+                      <a href="/race-series" className="inline-flex items-center gap-1.5 text-muted no-underline hover:text-fg">
+                        <Trophy className="h-4 w-4" aria-hidden="true" /> Championships
+                      </a>
+                      <a href="/privacy" className="text-muted no-underline hover:text-fg">Privacy</a>
+                    </div>
+                  </div>
+                </footer>
+              </div>
+            );
+          }
+
+          export const AppShell = AthRecsAppShell;
+          export default AthRecsAppShell;
+          '''
+          (root / 'src/athrecs/AppShell.tsx').write_text(textwrap.dedent(app_shell))
+
+          base_root = (root / 'src/routes/__root.tsx').read_text()
+          base_root = re.sub(
+              r'^import\s+\{\s*AppShell\s*\}\s+from\s+["\'][^"\']*components/layout/AppShell["\'];\s*$',
+              'import { AthRecsAppShell as AppShell } from "../AppShell";',
+              base_root,
+              flags=re.M,
+          )
+          if '../AppShell' not in base_root:
+              raise SystemExit('Could not replace the ATHRECS root AppShell import')
+          (root / 'src/athrecs/routes/__root.tsx').write_text(base_root)
+
+          homepage = r'''import { createFileRoute, Link } from "@tanstack/react-router";
+          import { CalendarDays, ChevronRight, Medal, ShieldCheck, Trophy, Users } from "lucide-react";
+          import { listEvents } from "@/lib/athrecs/api";
+          import { formatRaceDateShort } from "@/lib/athrecs/format";
+
+          export const Route = createFileRoute("/")({
+            loader: () =>
+              listEvents({
+                data: {
+                  sport: "Athletics",
+                  upcomingOnly: true,
+                  limit: 18,
+                },
+              }),
+            head: () => ({
+              meta: [
+                { title: "ATHRECS | Athletics fixtures, athletes and results" },
+                {
+                  name: "description",
+                  content:
+                    "Find athletics meetings, championships, clubs, athlete profiles and verified results on ATHRECS.",
+                },
+                { property: "og:title", content: "ATHRECS | Athletics fixtures and results" },
+                {
+                  property: "og:description",
+                  content: "A focused directory for Athletics events, athletes, clubs and results.",
+                },
+              ],
+              links: [{ rel: "canonical", href: "https://www.athrecs.com/" }],
+            }),
+            component: AthleticsHomePage,
+          });
+
+          function AthleticsHomePage() {
+            const events = Route.useLoaderData();
+
+            return (
+              <div className="space-y-10 pb-10">
+                <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
+                  <div className="h-1.5 bg-primary" />
+                  <div className="grid gap-8 p-6 md:p-9 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-end">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+                        Athletics only
+                      </p>
+                      <h1 className="mt-3 max-w-4xl font-display text-4xl font-semibold tracking-tight text-fg sm:text-5xl">
+                        Athletics fixtures, athletes and results.
+                      </h1>
+                      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
+                        Search track and field meetings, championships, cross-country competitions and other events classified as Athletics.
+                      </p>
+                      <div className="mt-6 flex flex-wrap gap-3">
+                        <a
+                          href="/races"
+                          className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground no-underline hover:opacity-90"
+                        >
+                          Find athletics events <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                        </a>
+                        <a
+                          href="/calendar"
+                          className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-border bg-surface px-4 text-sm font-semibold text-fg no-underline hover:border-border-strong"
+                        >
+                          <CalendarDays className="h-4 w-4" aria-hidden="true" /> Open calendar
+                        </a>
+                      </div>
+                    </div>
+                    <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+                      {[
+                        { href: "/race-series", label: "Championships & series", icon: Trophy },
+                        { href: "/athletes", label: "Athlete profiles", icon: Medal },
+                        { href: "/clubs", label: "Athletics clubs", icon: Users },
+                      ].map((item) => (
+                        <a
+                          key={item.href}
+                          href={item.href}
+                          className="flex min-h-14 items-center justify-between rounded-xl border border-border bg-elevated px-4 text-sm font-semibold text-fg no-underline hover:border-border-strong"
+                        >
+                          <span className="flex items-center gap-3">
+                            <item.icon className="h-5 w-5 text-accent" aria-hidden="true" />
+                            {item.label}
+                          </span>
+                          <ChevronRight className="h-4 w-4 text-muted" aria-hidden="true" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                <section className="space-y-4">
+                  <div className="flex flex-wrap items-end justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Upcoming</p>
+                      <h2 className="mt-1 font-display text-2xl font-semibold tracking-tight text-fg">Athletics calendar</h2>
+                    </div>
+                    <a href="/races" className="text-sm font-semibold text-accent no-underline hover:underline">
+                      View all athletics events →
+                    </a>
+                  </div>
+
+                  {events.length > 0 ? (
+                    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                      {events.map((event) => (
+                        <Link
+                          key={event.id}
+                          to="/races/$slug"
+                          params={{ slug: event.slug }}
+                          className="group rounded-xl border border-border bg-surface p-4 text-fg no-underline shadow-card transition hover:-translate-y-0.5 hover:border-border-strong"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Athletics</p>
+                              <h3 className="mt-1 font-display text-lg font-semibold leading-snug group-hover:text-accent">
+                                {event.name}
+                              </h3>
+                            </div>
+                            <Medal className="h-5 w-5 shrink-0 text-muted" aria-hidden="true" />
+                          </div>
+                          <div className="mt-4 space-y-1.5 text-sm text-muted">
+                            <p>{event.next_date ? formatRaceDateShort(event.next_date) : "Date to be confirmed"}</p>
+                            <p>{[event.city, event.country].filter(Boolean).join(", ") || "Location to be confirmed"}</p>
+                            {event.distances.length > 0 && <p>{event.distances.slice(0, 4).join(" · ")}</p>}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="rounded-xl border border-border bg-surface p-6 text-sm text-muted shadow-card">
+                      Athletics fixtures are being verified. Use the complete event search for the latest records.
+                    </div>
+                  )}
+                </section>
+
+                <section className="flex flex-col gap-4 rounded-xl border border-border bg-elevated p-5 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-start gap-3">
+                    <ShieldCheck className="mt-0.5 h-5 w-5 text-accent" aria-hidden="true" />
+                    <div>
+                      <h2 className="font-display text-lg font-semibold text-fg">A focused Athletics directory</h2>
+                      <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted">
+                        The public ATHRECS catalogue now excludes Running, Parkrun and every non-Athletics sport. Existing privacy and result-claim controls remain in place.
+                      </p>
+                    </div>
+                  </div>
+                  <a href="/claim-results" className="shrink-0 text-sm font-semibold text-accent no-underline hover:underline">
+                    Claim an athletics result →
+                  </a>
+                </section>
+              </div>
+            );
+          }
+          '''
+          (root / 'src/athrecs/routes/index.tsx').write_text(textwrap.dedent(homepage))
+
+          series_page = r'''import { createFileRoute } from "@tanstack/react-router";
+          import { Flag, Medal, ShieldCheck, Trophy } from "lucide-react";
+
+          export const Route = createFileRoute("/race-series")({
+            head: () => ({
+              meta: [
+                { title: "Athletics championships and series | ATHRECS" },
+                {
+                  name: "description",
+                  content: "Browse athletics championships, track and field series, cross-country competitions and verified meetings.",
+                },
+              ],
+              links: [{ rel: "canonical", href: "https://www.athrecs.com/race-series" }],
+            }),
+            component: AthleticsSeriesPage,
+          });
+
+          function AthleticsSeriesPage() {
+            const groups = [
+              {
+                title: "Championships",
+                description: "National, continental and international Athletics championships.",
+                icon: Trophy,
+              },
+              {
+                title: "Track & field meetings",
+                description: "Indoor and outdoor meetings across track, jumps, throws and combined events.",
+                icon: Medal,
+              },
+              {
+                title: "Cross-country competitions",
+                description: "Verified cross-country fixtures classified within the Athletics catalogue.",
+                icon: Flag,
+              },
+            ];
+
+            return (
+              <div className="space-y-7 pb-10">
+                <header className="rounded-2xl border border-border bg-surface p-6 shadow-card md:p-8">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Athletics collections</p>
+                  <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
+                    Championships &amp; athletics series
+                  </h1>
+                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+                    ATHRECS is now dedicated to Athletics. Explore verified championships, meetings and competition series without unrelated sports in the catalogue.
+                  </p>
+                </header>
+
+                <div className="grid gap-4 md:grid-cols-3">
+                  {groups.map((group) => (
+                    <section key={group.title} className="rounded-xl border border-border bg-surface p-5 shadow-card">
+                      <group.icon className="h-6 w-6 text-accent" aria-hidden="true" />
+                      <h2 className="mt-4 font-display text-xl font-semibold text-fg">{group.title}</h2>
+                      <p className="mt-2 text-sm leading-relaxed text-muted">{group.description}</p>
+                      <a href="/races" className="mt-5 inline-flex text-sm font-semibold text-accent no-underline hover:underline">
+                        Search Athletics fixtures →
+                      </a>
+                    </section>
+                  ))}
+                </div>
+
+                <div className="flex items-start gap-3 rounded-xl border border-border bg-elevated p-5 text-sm text-muted">
+                  <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-accent" aria-hidden="true" />
+                  Only records whose stored sport is Athletics can appear on public ATHRECS event, athlete, club and result pages.
+                </div>
+              </div>
+            );
+          }
+          '''
+          (root / 'src/athrecs/routes/race-series.tsx').write_text(textwrap.dedent(series_page))
+
+          country_page = r'''import { createFileRoute } from "@tanstack/react-router";
+          import { CalendarDays, Flag, Medal, Users } from "lucide-react";
+
+          export const Route = createFileRoute("/$language/$country/")({
+            component: AthleticsCountryPage,
+          });
+
+          function AthleticsCountryPage() {
+            const { language, country } = Route.useParams();
+            const countryName = country
+              .split("-")
+              .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+              .join(" ");
+            const base = `/${language}/${country}`;
+
+            return (
+              <div className="space-y-7 pb-10">
+                <header className="rounded-2xl border border-border bg-surface p-6 shadow-card md:p-8">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Athletics · {countryName}</p>
+                  <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
+                    {countryName} Athletics
+                  </h1>
+                  <p className="mt-3 max-w-3xl text-sm leading-relaxed text-muted">
+                    Athletics fixtures, championships, clubs, athletes and results for {countryName}. No other sport is included in this public catalogue.
+                  </p>
+                </header>
+
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  {[
+                    { href: `${base}/races`, label: "Athletics fixtures", icon: Flag },
+                    { href: "/calendar", label: "Calendar", icon: CalendarDays },
+                    { href: "/athletes", label: "Athletes", icon: Medal },
+                    { href: "/clubs", label: "Clubs", icon: Users },
+                  ].map((item) => (
+                    <a key={item.href} href={item.href} className="rounded-xl border border-border bg-surface p-5 text-fg no-underline shadow-card hover:border-border-strong">
+                      <item.icon className="h-5 w-5 text-accent" aria-hidden="true" />
+                      <span className="mt-3 block font-semibold">{item.label}</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+          '''
+          (root / 'src/athrecs/routes/country-index.tsx').write_text(textwrap.dedent(country_page))
+
+          vite_path = root / 'vite.config.ts'
+          vite = vite_path.read_text()
+          if 'athleticsOnlyEnabled' not in vite:
+              enabled_match = re.search(r'(  const enabled\s*=\s*.*?;\n)', vite, flags=re.S)
+              if not enabled_match:
+                  raise SystemExit('Could not locate RunRecs enabled declaration in vite.config.ts')
+              athletics_flag = '''  const athleticsOnlyEnabled =
+                !enabled &&
+                (explicitBrand === "athletics" ||
+                  explicitBrand === "athrecs" ||
+                  projectProductionUrl.includes("athrecs"));
+          '''
+              vite = vite[:enabled_match.end()] + textwrap.dedent(athletics_flag) + vite[enabled_match.end():]
+
+              route_match = re.search(
+                  r'(  const routeAliases = new Map<string, string>\(\[.*?\n  \]\);\n)',
+                  vite,
+                  flags=re.S,
+              )
+              if not route_match:
+                  raise SystemExit('Could not locate RunRecs route alias map')
+              athletics_maps = '''
+
+              const athleticsModuleAliases = new Map<string, string>([
+                ["@/lib/athrecs/api", "src/athrecs/api.ts"],
+                ["@/lib/athrecs/filters", "src/athrecs/filters.ts"],
+              ]);
+              const athleticsRouteAliases = new Map<string, string>([
+                ["./routes/__root", "src/athrecs/routes/__root.tsx"],
+                ["./routes/index", "src/athrecs/routes/index.tsx"],
+                ["./routes/race-series", "src/athrecs/routes/race-series.tsx"],
+                ["./routes/$language/$country/index", "src/athrecs/routes/country-index.tsx"],
+              ]);
+              '''
+              vite = vite[:route_match.end()] + textwrap.dedent(athletics_maps) + vite[route_match.end():]
+
+              config_start = vite.index('    config() {', vite.index('function runRecsVariantPlugin'))
+              config_resolved_start = vite.index('    configResolved() {', config_start)
+              plugin_tail = vite.index('    },\n  };\n}', config_resolved_start)
+              replacement_hooks = r'''    config() {
+                if (!enabled && !athleticsOnlyEnabled) return undefined;
+                return {
+                  define: {
+                    "import.meta.env.VITE_SITE_BRAND": JSON.stringify(enabled ? "runrecs" : "athletics"),
+                  },
+                };
+              },
+              resolveId(source, importer) {
+                const normalizedImporter = importer?.replaceAll("\\", "/") ?? "";
+
+                if (athleticsOnlyEnabled) {
+                  if (normalizedImporter.endsWith("/src/routeTree.gen.ts")) {
+                    const routeReplacement = athleticsRouteAliases.get(source);
+                    if (routeReplacement) return path.resolve(process.cwd(), routeReplacement);
+                  }
+
+                  const backendImporter =
+                    normalizedImporter.includes("/src/routes/admin/") ||
+                    normalizedImporter.includes("/src/routes/api/") ||
+                    normalizedImporter.includes("/src/components/staff/") ||
+                    normalizedImporter.includes("/src/lib/athrecs/") ||
+                    normalizedImporter.includes("/src/lib/auth/");
+                  const athleticsReplacement = athleticsModuleAliases.get(source);
+                  if (athleticsReplacement && !backendImporter) {
+                    return path.resolve(process.cwd(), athleticsReplacement);
+                  }
+                }
+
+                if (!enabled) return null;
+                const moduleReplacement = moduleAliases.get(source);
+                if (moduleReplacement) return path.resolve(process.cwd(), moduleReplacement);
+
+                if (normalizedImporter.endsWith("/src/routeTree.gen.ts")) {
+                  const routeReplacement = routeAliases.get(source);
+                  if (routeReplacement) return path.resolve(process.cwd(), routeReplacement);
+                }
+                return null;
+              },
+              configResolved() {
+                if (enabled) {
+                  console.log(`[runrecs] specialist running build enabled (branch=${branch || "local"})`);
+                } else if (athleticsOnlyEnabled) {
+                  console.log(`[athrecs] athletics-only public build enabled (branch=${branch || "local"})`);
+                }
+              },
+          '''
+              vite = vite[:config_start] + textwrap.dedent(replacement_hooks) + vite[plugin_tail + len('    },\n'):]
+              vite_path.write_text(vite)
+
+          verify = r'''#!/usr/bin/env node
+          import assert from "node:assert/strict";
+          import { readFile } from "node:fs/promises";
+
+          const [api, filters, shell, home, series, country, vite] = await Promise.all([
+            readFile("src/athrecs/api.ts", "utf8"),
+            readFile("src/athrecs/filters.ts", "utf8"),
+            readFile("src/athrecs/AppShell.tsx", "utf8"),
+            readFile("src/athrecs/routes/index.tsx", "utf8"),
+            readFile("src/athrecs/routes/race-series.tsx", "utf8"),
+            readFile("src/athrecs/routes/country-index.tsx", "utf8"),
+            readFile("vite.config.ts", "utf8"),
+          ]);
+
+          assert(api.includes('=== "Athletics"'), "ATHRECS API must enforce Athletics");
+          assert(!/'Running'\s*,\s*'Parkrun'/s.test(api), "Running/Parkrun SQL scope must not survive");
+          assert(!/"Running"\s*,\s*"Parkrun"/s.test(api), "Running/Parkrun array scope must not survive");
+          assert(filters.includes("Athletics"), "ATHRECS filters must expose Athletics");
+
+          for (const [name, source] of Object.entries({ shell, home, series, country })) {
+            for (const forbidden of ["Cycling", "Triathlon", "Swimming", "Gymnastics", "Hyrox", "CrossFit"]) {
+              assert(!source.includes(forbidden), `${name} must not advertise ${forbidden}`);
+            }
+          }
+
+          assert(shell.includes("Athletics records & events"), "ATHRECS shell must carry Athletics positioning");
+          assert(home.includes("Athletics only"), "ATHRECS homepage must state the public scope");
+          assert(vite.includes("athleticsOnlyEnabled"), "Vite must auto-detect the Athletics-only ATHRECS build");
+          assert(vite.includes("src/athrecs/api.ts"), "Vite must alias public API reads to Athletics isolation");
+          assert(vite.includes("/src/routes/admin/"), "Vite must preserve the full staff backend");
+          assert(vite.includes("[athrecs] athletics-only public build enabled"), "Build log marker is missing");
+
+          process.stdout.write("ATHRECS Athletics-only public-site verification passed.\n");
+          '''
+          (root / 'scripts/verify-athrecs-athletics-only.mjs').write_text(textwrap.dedent(verify))
+
+          package_path = root / 'package.json'
+          package = json.loads(package_path.read_text())
+          scripts = package.setdefault('scripts', {})
+          scripts['verify:athrecs-athletics-only'] = 'node scripts/verify-athrecs-athletics-only.mjs'
+          verify_command = scripts.get('verify', '')
+          addition = 'npm run verify:athrecs-athletics-only'
+          if verify_command and addition not in verify_command:
+              scripts['verify'] = f'{verify_command} && {addition}'
+          elif not verify_command:
+              scripts['verify'] = addition
+          package_path.write_text(json.dumps(package, indent=2) + '\n')
+          PY
+
+      - name: Verify generated scope and TypeScript
+        shell: bash
+        run: |
+          npm run verify:athrecs-athletics-only
+          npm run typecheck
+          npm run lint
+          VITE_SITE_BRAND=athletics npm run build 2>&1 | tee /tmp/athrecs-athletics-build.log
+          grep -F "[athrecs] athletics-only public build enabled" /tmp/athrecs-athletics-build.log
+
+      - name: Commit reviewed patch
+        shell: bash
+        run: |
+          git config user.name "athrecs-ci"
+          git config user.email "athrecs-ci@users.noreply.github.com"
+          git add -A
+          git commit -m "Make ATHRECS public site Athletics only [athrecs-athletics-patch]"
+          git push origin HEAD:feat/athrecs-athletics-only
