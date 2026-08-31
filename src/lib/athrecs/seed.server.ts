@@ -18,7 +18,7 @@ import {
 } from "@/data/public-figures";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-2026-08-31-v275";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v3";
 const EXPECTED = catalogueMetadata.merged_counts;

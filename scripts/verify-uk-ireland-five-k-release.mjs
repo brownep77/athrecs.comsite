@@ -21,7 +21,7 @@ assert.equal(ukIrelandFiveKReleaseEditions.length, 54);
 assert.equal(ukIrelandFiveKExistingSeriesEditions.length, 12);
 assert.equal(Object.keys(ukIrelandFiveKReleaseEditionOverrides).length, 9);
 assert.equal(ukIrelandFiveKReleaseEditionReplacements.length, 2);
-assert.equal(ukIrelandFiveKReleaseResearchQueue.length, 6);
+assert.equal(ukIrelandFiveKReleaseResearchQueue.length, 4);
 
 const slugs = new Set();
 const names = new Set();

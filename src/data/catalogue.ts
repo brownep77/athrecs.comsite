@@ -117,6 +117,11 @@ import {
   ukIrelandFiveKReleaseSeries,
 } from "./uk-ireland-five-k-release-2026-08-28";
 import {
+  runrecsFinalFiveKEditions,
+  runrecsFinalFiveKExistingSeriesEditions,
+  runrecsFinalFiveKSeries,
+} from "./runrecs-five-k-final-release-2026-08-31";
+import {
   ukTenKRelease64SourceEditions,
   ukTenKRelease64SourceSeries,
 } from "./uk-10k-release-64-source-editions";
@@ -235,6 +240,7 @@ for (const series of [
   ...(continuedFiveKSeries as Series[]),
   ...(dailyFiveKSeries as Series[]),
   ...(ukIrelandFiveKReleaseSeries as Series[]),
+  ...(runrecsFinalFiveKSeries as Series[]),
   ...(ukTenKRelease64SourceSeries as Series[]),
   ...(verifiedFiveMileSeries as Series[]),
   ...(verifiedTenKFollowupSeries as Series[]),
@@ -319,6 +325,10 @@ const mergedEditions = [
     extraSlugs.has(edition.seriesSlug),
   ),
   ...(ukIrelandFiveKExistingSeriesEditions as Edition[]),
+  ...(runrecsFinalFiveKEditions as Edition[]).filter((edition) =>
+    extraSlugs.has(edition.seriesSlug),
+  ),
+  ...(runrecsFinalFiveKExistingSeriesEditions as Edition[]),
   ...(ukTenKRelease64SourceEditions as Edition[]),
   ...(verifiedFiveMileEditions as Edition[]),
   ...(verifiedFiveMileExistingSeriesEditions as Edition[]),
