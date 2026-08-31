@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { FilterChips } from "@/components/races/FilterChips";
 import {
   COUNTRY_GROUPS,
+  DEFAULT_SPORT,
   SPORTS,
   subfilterKeysForSport,
   subfiltersForSport,
@@ -30,7 +31,7 @@ export type EventSearchValues = {
 
 export const EMPTY_SEARCH: EventSearchValues = {
   q: "",
-  sport: "All",
+  sport: DEFAULT_SPORT,
   country: "All",
   county: "",
   city: "",
@@ -88,6 +89,7 @@ export function EventSearch({
   };
 
   const subs = subfiltersForSport(value.sport);
+  const lockedSport = SPORTS.length === 1 ? SPORTS[0] : null;
   const showRaceGroups = supportsRaceGroupFilter(value.sport);
   const clear = () =>
     onChange({
@@ -123,19 +125,28 @@ export function EventSearch({
 
       <section className={sectionClass} aria-labelledby="discipline-filter-heading">
         <SectionHeading id="discipline-filter-heading" eyebrow="1" title="Discipline" />
-        <Field label="Choose a discipline">
-          <select
-            value={value.sport}
-            onChange={(event) => set("sport", event.target.value)}
-            className={fieldClass}
-          >
-            {SPORTS.map((sport) => (
-              <option key={sport} value={sport}>
-                {sport === "All" ? "All disciplines" : sport}
-              </option>
-            ))}
-          </select>
-        </Field>
+        {lockedSport ? (
+          <div className="rounded-lg border border-border bg-elevated px-3 py-2.5">
+            <p className="text-[11px] font-medium uppercase tracking-wider text-subtle">
+              Discipline
+            </p>
+            <p className="mt-1 text-sm font-semibold text-fg">{lockedSport}</p>
+          </div>
+        ) : (
+          <Field label="Choose a discipline">
+            <select
+              value={value.sport}
+              onChange={(event) => set("sport", event.target.value)}
+              className={fieldClass}
+            >
+              {SPORTS.map((sport) => (
+                <option key={sport} value={sport}>
+                  {sport === "All" ? "All disciplines" : sport}
+                </option>
+              ))}
+            </select>
+          </Field>
+        )}
 
         {value.sport === "All" ? (
           <p className="rounded-lg border border-dashed border-border bg-elevated px-3 py-2.5 text-xs leading-relaxed text-muted">
@@ -380,7 +391,8 @@ export function searchToApi(value: EventSearchValues) {
   const supported = subfilterKeysForSport(value.sport);
   return {
     q: value.q || undefined,
-    sport: value.sport === "All" ? undefined : value.sport,
+    sport:
+      value.sport === "All" || value.sport === DEFAULT_SPORT ? undefined : value.sport,
     country: value.country === "All" ? undefined : value.country,
     county: value.county || undefined,
     city: value.city || undefined,

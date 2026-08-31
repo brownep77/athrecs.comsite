@@ -5,7 +5,7 @@ export const SITE_NAME = "ATHRECS.com";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/athrecs-logo.png`;
 
 export const DEFAULT_DESCRIPTION =
-  "Find running, triathlon and cycling events — parkruns, 5Ks, 10Ks, half marathons and marathons — plus athletes, clubs and results on ATHRECS.com.";
+  "Find track and field meetings, cross-country fixtures, road athletics and championships — plus athletics results, athletes and clubs on ATHRECS.com.";
 
 export function absoluteUrl(path: string): string {
   if (path.startsWith("http")) return path;
@@ -19,7 +19,7 @@ export function siteGraphMeta(opts?: {
   image?: string;
   type?: string;
 }) {
-  const title = opts?.title ?? `${SITE_NAME} — Find races, results and athletes`;
+  const title = opts?.title ?? `${SITE_NAME} — Athletics events, results and athletes`;
   const description = opts?.description ?? DEFAULT_DESCRIPTION;
   const url = opts?.url ?? SITE_URL;
   const image = opts?.image ?? DEFAULT_OG_IMAGE;
@@ -105,7 +105,7 @@ export function sportsEventJsonLd(input: {
         addressCountry: input.country || undefined,
       },
     },
-    sport: input.sport || "Running",
+    sport: input.sport || "Athletics",
     organizer: input.website
       ? { "@type": "Organization", url: input.website }
       : undefined,

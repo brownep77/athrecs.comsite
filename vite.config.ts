@@ -69,6 +69,69 @@ function runRecsVariantPlugin(): Plugin {
 }
 
 /**
+ * ATHRECS is the Athletics specialist domain. The database and staff backend
+ * remain shared, while every public catalogue read is routed through an exact
+ * Athletics-only facade. RunRecs builds retain their separate Running/Parkrun
+ * facade and never enable this plugin.
+ */
+function athleticsVariantPlugin(): Plugin {
+  const branch = process.env.VERCEL_GIT_COMMIT_REF?.trim() ?? "";
+  const explicitBrand = process.env.VITE_SITE_BRAND?.trim().toLowerCase();
+  const projectProductionHost =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim().toLowerCase() ?? "";
+  const runRecsEnabled =
+    explicitBrand === "runrecs" ||
+    projectProductionHost.includes("runrecs") ||
+    branch === "feat/runrecs-running-site" ||
+    branch === "runrecs-production";
+  const enabled = !runRecsEnabled;
+
+  const moduleAliases = new Map<string, string>([
+    ["@/lib/athrecs/api", "src/athletics/api.ts"],
+    ["@/lib/athrecs/filters", "src/athletics/filters.ts"],
+  ]);
+  const routeAliases = new Map<string, string>([
+    ["./routes/index", "src/athletics/routes/index.tsx"],
+    ["./routes/calendar", "src/athletics/routes/calendar.tsx"],
+    ["./routes/race-series", "src/athletics/routes/race-series.tsx"],
+    ["./routes/$language/$country/index", "src/athletics/routes/$language/$country/index.tsx"],
+  ]);
+
+  return {
+    name: "athrecs:athletics-variant",
+    enforce: "pre",
+    config() {
+      if (!enabled) return undefined;
+      return {
+        define: {
+          "import.meta.env.VITE_SITE_BRAND": JSON.stringify("athrecs"),
+        },
+      };
+    },
+    resolveId(source, importer) {
+      if (!enabled) return null;
+
+      const moduleReplacement = moduleAliases.get(source);
+      if (moduleReplacement) return path.resolve(process.cwd(), moduleReplacement);
+
+      const normalizedImporter = importer?.replaceAll("\\", "/") ?? "";
+      if (normalizedImporter.endsWith("/src/routeTree.gen.ts")) {
+        const routeReplacement = routeAliases.get(source);
+        if (routeReplacement) return path.resolve(process.cwd(), routeReplacement);
+      }
+      return null;
+    },
+    configResolved() {
+      if (enabled) {
+        console.log(
+          `[athrecs] athletics-only public build enabled (branch=${branch || "local"}, project=${projectProductionHost || "unset"})`,
+        );
+      }
+    },
+  };
+}
+
+/**
  * Finish PGLite bootstrap during dev-server setup (before traffic). Vite awaits
  * async `configureServer` hooks. Production: `src/lib/db` kicks `ensureDbReady`
  * on import.
@@ -196,6 +259,7 @@ export default defineConfig(({ command }) => ({
   resolve: { tsconfigPaths: true },
   plugins: [
     runRecsVariantPlugin(),
+    athleticsVariantPlugin(),
     pgliteBootstrapPlugin(),
     // Before tanstackStart so /auth/popup never falls through to the SPA.
     authPopupPlugin(),

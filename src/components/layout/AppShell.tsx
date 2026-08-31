@@ -231,9 +231,9 @@ function BrandLink({
       <BrandLogo priority={desktop} className={desktop ? "h-9" : "h-7 max-w-[160px]"} />
       {desktop ? (
         <span className="hidden border-l border-border pl-3 text-[11px] leading-tight text-subtle lg:block">
-          Races
+          Athletics
           <br />
-          Results · Athletes
+          Events · Results
         </span>
       ) : null}
     </>

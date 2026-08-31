@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite dev --host 0.0.0.0 --port 8080",
-    "build": "node scripts/migrate.mjs && vite build && node scripts/copy-pglite-assets.mjs && node scripts/publish-uk-ireland-prominent-races.mjs && node scripts/publish-remaining-uk-ireland-race-additions.mjs && node scripts/publish-germany-belgium-catalogues.mjs && node scripts/publish-uk-ireland-five-k-release.mjs && node scripts/publish-uk-home-nation-championships.mjs",
+    "build": "node scripts/migrate.mjs && vite build && node scripts/write-brand-static.mjs && node scripts/copy-pglite-assets.mjs && node scripts/publish-after-build.mjs",
     "db:migrate": "node scripts/migrate.mjs",
     "build:dev": "vite build --mode development",
     "preview": "vite preview --host 0.0.0.0 --port 8080",

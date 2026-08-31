@@ -37,10 +37,10 @@ export const Route = createRootRoute({
       {
         name: "keywords",
         content:
-          "running races, marathon calendar, parkrun, 5K, 10K, half marathon, triathlon, cycling events, race results, athletics clubs, ATHRECS",
+          "athletics events, track and field, cross country, road athletics, athletics results, athletes, athletics clubs, ATHRECS",
       },
       ...siteGraphMeta({
-        title: `${SITE_NAME} — Find races, results and athletes`,
+        title: `${SITE_NAME} — Athletics events, results and athletes`,
         description: DEFAULT_DESCRIPTION,
         url: SITE_URL,
       }),

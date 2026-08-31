@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "npm ci --no-audit --no-fund",
-  "buildCommand": "node scripts/migrate.mjs && vite build && node scripts/copy-pglite-assets.mjs && node scripts/publish-after-build.mjs",
+  "buildCommand": "node scripts/migrate.mjs && vite build && node scripts/write-brand-static.mjs && node scripts/copy-pglite-assets.mjs && node scripts/publish-after-build.mjs",
   "redirects": [
     {
       "source": "/",

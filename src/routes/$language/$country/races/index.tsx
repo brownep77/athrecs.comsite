@@ -3,6 +3,7 @@ import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-ro
 import { ArrowLeft } from "lucide-react";
 import { listEvents } from "@/lib/athrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
+import { SPORTS as PUBLIC_SPORTS } from "@/lib/athrecs/filters";
 import {
   copyForLanguage,
   countrySiteFromSlug,
@@ -20,22 +21,9 @@ import {
 } from "@/components/races/EventSearch";
 import { Button } from "@/components/ui/button";
 
-const SPORTS = new Set<Sport>([
-  "Running",
-  "Athletics",
-  "Parkrun",
-  "Cycling",
-  "Swimming",
-  "Triathlon",
-  "Duathlon",
-  "Aquathlon",
-  "Aquabike",
-  "Rowing",
-  "OCR",
-  "Adventure Racing",
-  "Functional Fitness",
-  "Walking",
-]);
+const SPORTS = new Set<Sport>(
+  PUBLIC_SPORTS.filter((sport): sport is Sport => sport !== "All"),
+);
 
 const PAGE_SIZE = 40;
 const MAX_PAGE = 250;
@@ -71,7 +59,7 @@ function filtersFromSearch(search: CountryRaceSearch, country: string): EventSea
   return {
     ...EMPTY_SEARCH,
     q: search.q ?? "",
-    sport: search.sport ?? "All",
+    sport: search.sport ?? EMPTY_SEARCH.sport,
     country,
     county: search.county ?? "",
     city: search.city ?? "",
