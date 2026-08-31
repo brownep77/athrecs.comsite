@@ -1,0 +1,38 @@
+name: Wire ATHRECS Athletics public scope
+
+on:
+  push:
+    branches:
+      - feat/athrecs-athletics-only
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/athrecs-athletics-only
+          fetch-depth: 0
+
+      - name: Apply reviewed Athletics wiring
+        run: python scripts/wire-athrecs-athletics.py
+
+      - name: Commit wiring when required
+        shell: bash
+        run: |
+          git config user.name "athrecs-ci"
+          git config user.email "athrecs-ci@users.noreply.github.com"
+          git add vite.config.ts package.json vercel.json \
+            src/lib/athrecs/filters.ts src/runrecs/filters.ts \
+            src/components/races/EventSearch.tsx src/routes/races/index.tsx \
+            'src/routes/$language/$country/races/index.tsx' src/routes/__root.tsx \
+            src/lib/athrecs/seo.ts src/components/layout/AppShell.tsx
+          if git diff --cached --quiet; then
+            echo "Athletics public scope is already wired."
+            exit 0
+          fi
+          git commit -m "Wire ATHRECS athletics-only public scope [athrecs-athletics-wired]"
+          git push origin HEAD:feat/athrecs-athletics-only
