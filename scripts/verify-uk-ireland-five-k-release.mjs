@@ -74,10 +74,11 @@ assert.equal(
   "18:30",
 );
 
-const [catalogueSource, entrySource, packageSource] = await Promise.all([
+const [catalogueSource, entrySource, packageSource, publisherSource] = await Promise.all([
   fs.readFile(new URL("../src/data/catalogue.ts", import.meta.url), "utf8"),
   fs.readFile(new URL("../src/data/entry-options.ts", import.meta.url), "utf8"),
   fs.readFile(new URL("../package.json", import.meta.url), "utf8"),
+  fs.readFile(new URL("./publish-after-build.mjs", import.meta.url), "utf8"),
 ]);
 assert(catalogueSource.includes('from "./uk-ireland-five-k-release-2026-08-28"'));
 assert(catalogueSource.includes("...(ukIrelandFiveKReleaseSeries as Series[])"));
@@ -85,7 +86,9 @@ assert(catalogueSource.includes("...(ukIrelandFiveKExistingSeriesEditions as Edi
 assert(entrySource.includes("...ukIrelandFiveKReleaseEditionReplacements"));
 assert(entrySource.includes("...ukIrelandFiveKReleaseEditionOverrides"));
 assert(entrySource.includes("...ukIrelandFiveKReleaseSeriesOverrides"));
-assert(packageSource.includes("publish-uk-ireland-five-k-release.mjs"));
+assert(packageSource.includes("publish-after-build.mjs"));
+assert(publisherSource.includes("scripts/publish-uk-ireland-five-k-release.mjs"));
+assert(publisherSource.includes("process.exit(0)"));
 
 console.log(
   `Verified ${ukIrelandFiveKReleaseSeries.length} new 5K series, ${ukIrelandFiveKReleaseEditions.length + ukIrelandFiveKExistingSeriesEditions.length} new editions, nine corrections and ${ukIrelandFiveKReleaseResearchQueue.length} held candidates.`,
