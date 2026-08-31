@@ -60,7 +60,7 @@ jobs:
       - name: Start browser smoke server and seed PostgreSQL
         run: |
           mkdir -p artifacts
-          nohup npm run dev > artifacts/preview.log 2>&1 &
+          nohup npm run preview > artifacts/preview.log 2>&1 &
           echo $! > artifacts/preview.pid
 
           for attempt in $(seq 1 60); do
