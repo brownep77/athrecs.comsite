@@ -28,6 +28,7 @@ import {
   type ResultClaimStatus,
 } from "@/lib/athrecs/result-claims-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { sportIsInPublicSiteScope } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/claim-results")({
   validateSearch: (search: Record<string, unknown>) => {
@@ -94,8 +95,11 @@ function ClaimResultsPage() {
     retry: false,
   });
 
-  const currentClaim = myClaims.data?.find((claim) => claim.resultId === resultId);
-  const hasPrivateProfile = (myClaims.data ?? []).some((claim) => claim.status === "approved");
+  const siteClaims = (myClaims.data ?? []).filter((claim) =>
+    sportIsInPublicSiteScope(claim.sport),
+  );
+  const currentClaim = siteClaims.find((claim) => claim.resultId === resultId);
+  const hasPrivateProfile = siteClaims.some((claim) => claim.status === "approved");
 
   useEffect(() => {
     setClaimCompleted(false);
@@ -250,7 +254,7 @@ function ClaimResultsPage() {
         </section>
       ) : result.isLoading ? (
         <LoadingCard label="Loading your matched result…" />
-      ) : result.isError || !result.data ? (
+      ) : result.isError || !result.data || !sportIsInPublicSiteScope(result.data.sport) ? (
         <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
           <h2 className="font-semibold">This match is no longer available</h2>
           <p className="mt-1">
@@ -458,7 +462,7 @@ function ClaimResultsPage() {
 
       {user ? (
         <ClaimHistory
-          claims={myClaims.data ?? []}
+          claims={siteClaims}
           loading={myClaims.isLoading}
           compact={Boolean(resultId)}
         />

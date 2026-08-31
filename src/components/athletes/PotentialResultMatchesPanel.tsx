@@ -27,6 +27,7 @@ import {
   type ExternalRunnerMatchSource,
 } from "@/lib/athrecs/grok-runner-search-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { IS_ATHRECS_SITE, sportIsInPublicSiteScope } from "@/lib/site-scope";
 
 const INITIAL_MATCH_COUNT = 8;
 
@@ -109,7 +110,7 @@ export function PotentialResultMatchesPanel() {
   const external = useQuery({
     queryKey: ["my-external-runner-matches", user?.id],
     queryFn: () => findExternalRunnerMatches(),
-    enabled: Boolean(user) && searchPublic,
+    enabled: Boolean(user) && searchPublic && !IS_ATHRECS_SITE,
     retry: false,
     staleTime: 5 * 60_000,
   });
@@ -136,7 +137,14 @@ export function PotentialResultMatchesPanel() {
     );
   }
 
-  const data = matches.data;
+  const scopedMatches = matches.data.matches.filter((match) =>
+    sportIsInPublicSiteScope(match.sport),
+  );
+  const data = {
+    ...matches.data,
+    matches: scopedMatches,
+    totalMatches: scopedMatches.length,
+  };
   const visibleMatches = expanded
     ? data.matches
     : data.matches.slice(0, INITIAL_MATCH_COUNT);
@@ -299,7 +307,8 @@ export function PotentialResultMatchesPanel() {
         </p>
       ) : null}
 
-      <div className="border-t border-border bg-elevated/40 p-5">
+      {!IS_ATHRECS_SITE ? (
+        <div className="border-t border-border bg-elevated/40 p-5">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="max-w-2xl">
             <div className="flex items-center gap-2">
@@ -405,7 +414,8 @@ export function PotentialResultMatchesPanel() {
             ) : null}
           </div>
         ) : null}
-      </div>
+        </div>
+      ) : null}
     </section>
   );
 }

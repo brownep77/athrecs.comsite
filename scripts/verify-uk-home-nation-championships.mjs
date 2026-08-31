@@ -112,8 +112,13 @@ assert(
 );
 
 const packageSource = await readFile(new URL("../package.json", import.meta.url), "utf8");
+const guardedBuildPublisherSource = await readFile(
+  new URL("./publish-after-build.mjs", import.meta.url),
+  "utf8",
+);
 assert(packageSource.includes("verify:uk-home-nation-championships"));
-assert(packageSource.includes("publish-uk-home-nation-championships.mjs"));
+assert(packageSource.includes("publish-after-build.mjs"));
+assert(guardedBuildPublisherSource.includes("scripts/publish-uk-home-nation-championships.mjs"));
 
 console.log(
   `Verified ${EXPECTED_SERIES} home-nation championship series, ${EXPECTED_EDITIONS} editions, ${ukHomeNationChampionshipsHeld.length} duplicate holds and catalogue wiring through 31 December 2027.`,

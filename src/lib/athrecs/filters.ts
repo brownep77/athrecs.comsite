@@ -86,6 +86,8 @@ export const SPORTS = [
   "Walking",
 ] as const;
 
+export const DEFAULT_SPORT = "All" as const;
+
 export type SubfilterKey = "distance" | "surface" | "format";
 
 export type SubfilterDef = {

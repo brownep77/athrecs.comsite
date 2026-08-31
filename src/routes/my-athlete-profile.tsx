@@ -25,6 +25,7 @@ import {
   getMyAthleteAccount,
 } from "@/lib/athrecs/athlete-account-api";
 import { getMyProfileResultVisibility } from "@/lib/athrecs/athlete-profile-results-api";
+import { sportIsInPublicSiteScope } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/my-athlete-profile")({
   head: () => ({
@@ -62,7 +63,9 @@ function MyAthleteProfilePage() {
     [resultVisibility.data?.hiddenResultIds],
   );
   const profileResults = useMemo(() => {
-    const allResults = account.data?.claimedResults ?? [];
+    const allResults = (account.data?.claimedResults ?? []).filter((result) =>
+      sportIsInPublicSiteScope(result.sport),
+    );
     return {
       visible: allResults.filter((result) => !hiddenResultIdSet.has(result.resultId)),
       hidden: allResults.filter((result) => hiddenResultIdSet.has(result.resultId)),
@@ -128,7 +131,9 @@ function MyAthleteProfilePage() {
   const hiddenResults = profileResults.hidden;
   const eventCount = new Set(results.map((result) => result.eventSlug)).size;
   const distanceCount = new Set(results.map((result) => result.distanceCode)).size;
-  const primarySport = data.sports.find((sport) => sport.isPrimary) ?? data.sports[0];
+  const primarySport =
+    data.sports.find((sport) => sport.isPrimary && sportIsInPublicSiteScope(sport.sportCode)) ??
+    data.sports.find((sport) => sportIsInPublicSiteScope(sport.sportCode));
   const location = [data.city, data.region, data.country].filter(Boolean).join(", ");
 
   return (

@@ -27,6 +27,7 @@ export type PotentialResultMatch = {
   clubName: string;
   eventName: string;
   eventSlug: string;
+  sport: string;
   eventDate: string;
   distanceCode: string;
   finishTimeSeconds: number | null;
@@ -70,6 +71,7 @@ type CandidateRow = {
   club_name: string | null;
   event_name: string;
   event_slug: string;
+  event_sport: string;
   event_date: string;
   distance_code: string;
   finish_time_seconds: number | null;
@@ -146,6 +148,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
         club.name as club_name,
         event.name as event_name,
         event.slug as event_slug,
+        event.sport as event_sport,
         edition.event_date::text as event_date,
         edition.distance_code,
         result.finish_time_seconds,
@@ -208,6 +211,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           clubName: row.club_name ?? "",
           eventName: row.event_name,
           eventSlug: row.event_slug,
+          sport: row.event_sport,
           eventDate: row.event_date,
           distanceCode: row.distance_code,
           finishTimeSeconds: row.finish_time_seconds,

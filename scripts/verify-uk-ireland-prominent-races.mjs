@@ -179,9 +179,11 @@ for (const token of [
 }
 
 const packageSource = JSON.parse(await readFile("package.json", "utf8"));
+const guardedBuildPublisherSource = await readFile("scripts/publish-after-build.mjs", "utf8");
 assert(
-  packageSource.scripts.build.includes("publish-uk-ireland-prominent-races.mjs"),
-  "Production build does not run the reviewed publication batch",
+  packageSource.scripts.build.includes("publish-after-build.mjs") &&
+    guardedBuildPublisherSource.includes("scripts/publish-uk-ireland-prominent-races.mjs"),
+  "Production build does not run the reviewed publication batch through its guard",
 );
 assert(
   packageSource.scripts["verify:uk-ireland-prominent-races"],

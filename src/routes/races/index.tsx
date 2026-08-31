@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { listEvents } from "@/lib/athrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
+import { SPORTS as PUBLIC_SPORTS } from "@/lib/athrecs/filters";
 import { SITE_URL } from "@/lib/athrecs/seo";
 import { RaceCard } from "@/components/races/RaceCard";
 import {
@@ -15,22 +16,9 @@ import {
 const PAGE_SIZE = 40;
 const MAX_PAGE = 250;
 
-const SPORT_VALUES = new Set<Sport>([
-  "Running",
-  "Athletics",
-  "Parkrun",
-  "Cycling",
-  "Swimming",
-  "Triathlon",
-  "Duathlon",
-  "Aquathlon",
-  "Aquabike",
-  "Rowing",
-  "OCR",
-  "Adventure Racing",
-  "Functional Fitness",
-  "Walking",
-]);
+const SPORT_VALUES = new Set<Sport>(
+  PUBLIC_SPORTS.filter((sport): sport is Sport => sport !== "All"),
+);
 
 type RaceSearchParams = {
   q?: string;
@@ -64,7 +52,7 @@ function filtersFromSearch(search: RaceSearchParams): EventSearchValues {
   return {
     ...EMPTY_SEARCH,
     q: search.q ?? "",
-    sport: search.sport ?? "All",
+    sport: search.sport ?? EMPTY_SEARCH.sport,
     country: search.country ?? "All",
     county: search.county ?? "",
     city: search.city ?? "",
@@ -180,8 +168,8 @@ function EventsPage() {
         <div className="space-y-2">
           <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Events</h1>
           <p className="max-w-2xl text-sm text-muted">
-            Choose a discipline first, then narrow by its relevant surface, distance or format and
-            by country, region, city or town. Every selection remains shareable in the page address.
+            Search athletics meetings and championships by surface, distance, country, region,
+            city or date. Every selection remains shareable in the page address.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
