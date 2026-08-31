@@ -28,6 +28,8 @@ function runRecsVariantPlugin(): Plugin {
     ["@/lib/athrecs/api", "src/runrecs/api.ts"],
     ["@/lib/athrecs/filters", "src/runrecs/filters.ts"],
     ["@/lib/athrecs/seo", "src/runrecs/seo.ts"],
+    ["@/lib/athrecs/official-entry.server", "src/runrecs/official-entry.server.ts"],
+    ["@/lib/athrecs/athlete-profile-share-api", "src/runrecs/athlete-profile-share-api.ts"],
   ]);
   const routeAliases = new Map<string, string>([
     ["./routes/__root", "src/runrecs/routes/__root.tsx"],
@@ -89,6 +91,8 @@ function athleticsVariantPlugin(): Plugin {
   const moduleAliases = new Map<string, string>([
     ["@/lib/athrecs/api", "src/athletics/api.ts"],
     ["@/lib/athrecs/filters", "src/athletics/filters.ts"],
+    ["@/lib/athrecs/official-entry.server", "src/athletics/official-entry.server.ts"],
+    ["@/lib/athrecs/athlete-profile-share-api", "src/athletics/athlete-profile-share-api.ts"],
   ]);
   const routeAliases = new Map<string, string>([
     ["./routes/index", "src/athletics/routes/index.tsx"],

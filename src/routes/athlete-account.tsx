@@ -39,6 +39,7 @@ import {
 } from "@/lib/athrecs/athlete-account-api";
 import { cn } from "@/lib/utils";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { IS_ATHRECS_SITE, sportIsInPublicSiteScope } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/athlete-account")({
   head: () => ({
@@ -46,7 +47,9 @@ export const Route = createFileRoute("/athlete-account")({
       { title: "My Athlete Account | ATHRECS.com" },
       {
         name: "description",
-        content: "Manage your private ATHRECS Entry Passport, sports, training and preferences.",
+        content: IS_ATHRECS_SITE
+          ? "Manage your private ATHRECS Athletics Entry Passport, training and preferences."
+          : "Manage your private ATHRECS Entry Passport, sports, training and preferences.",
       },
       { name: "robots", content: "noindex, nofollow" },
     ],
@@ -54,18 +57,36 @@ export const Route = createFileRoute("/athlete-account")({
   component: AthleteAccountPage,
 });
 
-const EQUIPMENT = [
-  "Running shoes",
-  "Trail shoes",
-  "Bike",
-  "Helmet",
-  "Wetsuit",
-  "Goggles",
-  "GPS watch",
-  "Heart-rate monitor",
-  "Gym equipment",
-  "Other",
-];
+const ACCOUNT_SPORTS: readonly AthleteSportCode[] = IS_ATHRECS_SITE
+  ? ["Athletics"]
+  : ATHLETE_SPORTS;
+const ACCOUNT_SPORT_SET = new Set<string>(ACCOUNT_SPORTS);
+
+const EQUIPMENT = IS_ATHRECS_SITE
+  ? [
+      "Running shoes",
+      "Track spikes",
+      "Cross-country spikes",
+      "Field-event shoes",
+      "Throwing implements",
+      "Training equipment",
+      "GPS watch",
+      "Heart-rate monitor",
+      "Gym equipment",
+      "Other",
+    ]
+  : [
+      "Running shoes",
+      "Trail shoes",
+      "Bike",
+      "Helmet",
+      "Wetsuit",
+      "Goggles",
+      "GPS watch",
+      "Heart-rate monitor",
+      "Gym equipment",
+      "Other",
+    ];
 const NUTRITION = [
   "Energy gels",
   "Electrolytes",
@@ -76,39 +97,45 @@ const NUTRITION = [
   "Supplements",
   "None",
 ];
-const TECHNOLOGY_DEVICES = [
-  "GPS watch",
-  "Smartwatch",
-  "Heart-rate strap",
-  "Bike computer",
-  "Power meter",
-  "Foot pod",
-  "Smart trainer",
-  "Phone only",
-];
-const TECHNOLOGY_APPS = [
-  "Strava",
-  "Garmin Connect",
-  "COROS",
-  "Polar Flow",
-  "Suunto",
-  "Apple Fitness",
-  "TrainingPeaks",
-  "Zwift",
-  "Komoot",
-  "Other",
-];
-const CLOTHING = [
-  "Tops / vests",
-  "Shorts",
-  "Tights / leggings",
-  "Jackets",
-  "Socks",
-  "Sports bras",
-  "Cycling kit",
-  "Swimwear",
-  "Compression kit",
-];
+const TECHNOLOGY_DEVICES = IS_ATHRECS_SITE
+  ? ["GPS watch", "Smartwatch", "Heart-rate strap", "Foot pod", "Phone only"]
+  : [
+      "GPS watch",
+      "Smartwatch",
+      "Heart-rate strap",
+      "Bike computer",
+      "Power meter",
+      "Foot pod",
+      "Smart trainer",
+      "Phone only",
+    ];
+const TECHNOLOGY_APPS = IS_ATHRECS_SITE
+  ? ["Strava", "Garmin Connect", "COROS", "Polar Flow", "Suunto", "Apple Fitness", "TrainingPeaks", "Other"]
+  : [
+      "Strava",
+      "Garmin Connect",
+      "COROS",
+      "Polar Flow",
+      "Suunto",
+      "Apple Fitness",
+      "TrainingPeaks",
+      "Zwift",
+      "Komoot",
+      "Other",
+    ];
+const CLOTHING = IS_ATHRECS_SITE
+  ? ["Tops / vests", "Shorts", "Tights / leggings", "Jackets", "Socks", "Sports bras", "Competition kit", "Compression kit"]
+  : [
+      "Tops / vests",
+      "Shorts",
+      "Tights / leggings",
+      "Jackets",
+      "Socks",
+      "Sports bras",
+      "Cycling kit",
+      "Swimwear",
+      "Compression kit",
+    ];
 const RECOVERY = [
   "Foam roller",
   "Massage gun",
@@ -271,6 +298,12 @@ function SignedInAccount() {
   }
   if (!form) return <LoadingCard label="Preparing your Entry Passport…" />;
 
+  const visibleSports = form.sports.filter((sport) =>
+    ACCOUNT_SPORT_SET.has(sport.sportCode),
+  );
+  const visibleClaimedResults = account.data.claimedResults.filter((result) =>
+    sportIsInPublicSiteScope(result.sport),
+  );
   const completion = accountCompletion(form, account.data.verifiedEmail);
   const updatePreference = <K extends keyof AthleteProductPreferences>(
     key: K,
@@ -333,9 +366,9 @@ function SignedInAccount() {
                   </Badge>
                 ))}
               </div>
-              {account.data.claimedResults.length ? (
+              {visibleClaimedResults.length ? (
                 <div className="grid gap-2 md:grid-cols-2">
-                  {account.data.claimedResults.map((result) => (
+                  {visibleClaimedResults.map((result) => (
                     <Link
                       key={result.resultId}
                       to="/races/$slug"
@@ -462,7 +495,7 @@ function SignedInAccount() {
           </div>
           <p className="mt-2 text-sm leading-6 text-muted">
             These fields stay private. ATHRECS uses them only to suggest possible Power of 10,
-            parkrun, World Athletics or official result pages. Nothing is linked until you claim it.
+            World Athletics or official athletics result pages. Nothing is linked until you claim it.
           </p>
           <div className="mt-3 grid gap-4 md:grid-cols-2">
             <CsvField
@@ -471,12 +504,14 @@ function SignedInAccount() {
               onChange={(previousNames) => setForm({ ...form, previousNames })}
               placeholder="Maiden name, nickname, previous racing name"
             />
-            <TextField
-              label="parkrun barcode"
-              value={form.parkrunId ?? ""}
-              onChange={(value) => setForm({ ...form, parkrunId: value })}
-              help="The number printed on your parkrun barcode, without A."
-            />
+            {!IS_ATHRECS_SITE ? (
+              <TextField
+                label="parkrun barcode"
+                value={form.parkrunId ?? ""}
+                onChange={(value) => setForm({ ...form, parkrunId: value })}
+                help="The number printed on your parkrun barcode, without A."
+              />
+            ) : null}
             <TextField
               label="Athletics URN"
               value={form.athleticsUrn ?? ""}
@@ -505,7 +540,7 @@ function SignedInAccount() {
               label="Event name"
               value={form.fingerprintEvent ?? ""}
               onChange={(value) => setForm({ ...form, fingerprintEvent: value })}
-              placeholder="London Marathon"
+              placeholder={IS_ATHRECS_SITE ? "British Athletics Championships" : "London Marathon"}
             />
             <TextField
               label="Year"
@@ -517,7 +552,7 @@ function SignedInAccount() {
               label="Distance"
               value={form.fingerprintDistance ?? ""}
               onChange={(value) => setForm({ ...form, fingerprintDistance: value })}
-              placeholder="Marathon"
+              placeholder={IS_ATHRECS_SITE ? "100m" : "Marathon"}
             />
             <TextField
               label="Finish time"
@@ -530,27 +565,36 @@ function SignedInAccount() {
 
         <AccountSection
           icon={Goal}
-          title="Sports and training"
-          description="Add every sport that is relevant to you, then optionally describe disciplines, distances, training and goals."
+          title={IS_ATHRECS_SITE ? "Athletics and training" : "Sports and training"}
+          description={
+            IS_ATHRECS_SITE
+              ? "Add Athletics, then optionally describe disciplines, distances, training and goals."
+              : "Add every sport that is relevant to you, then optionally describe disciplines, distances, training and goals."
+          }
           optional
         >
           <ChoiceGrid
             label="Your sports"
-            choices={[...ATHLETE_SPORTS]}
-            selected={form.sports.map((sport) => sport.sportCode)}
-            onChange={(codes) =>
-              setForm({
-                ...form,
-                sports: codes.map((code, index) => {
-                  const current = form.sports.find((sport) => sport.sportCode === code);
-                  return current ?? emptySport(code as AthleteSportCode, index === 0);
-                }),
-              })
-            }
+            choices={[...ACCOUNT_SPORTS]}
+            selected={visibleSports.map((sport) => sport.sportCode)}
+            onChange={(codes) => {
+              const hiddenSports = IS_ATHRECS_SITE
+                ? form.sports.filter((sport) => !ACCOUNT_SPORT_SET.has(sport.sportCode))
+                : [];
+              const hasHiddenPrimary = hiddenSports.some((sport) => sport.isPrimary);
+              const nextVisibleSports = codes.map((code, index) => {
+                const current = form.sports.find((sport) => sport.sportCode === code);
+                return (
+                  current ??
+                  emptySport(code as AthleteSportCode, index === 0 && !hasHiddenPrimary)
+                );
+              });
+              setForm({ ...form, sports: [...hiddenSports, ...nextVisibleSports] });
+            }}
           />
-          {form.sports.length ? (
+          {visibleSports.length ? (
             <div className="mt-5 grid gap-4">
-              {form.sports.map((sport) => (
+              {visibleSports.map((sport) => (
                 <SportEditor
                   key={sport.sportCode}
                   sport={sport}
@@ -571,7 +615,9 @@ function SignedInAccount() {
             </div>
           ) : (
             <p className="mt-4 rounded-lg border border-dashed border-border p-4 text-sm text-muted">
-              No sport selected yet. You can save the account without adding one.
+              {IS_ATHRECS_SITE
+                ? "Athletics has not been added yet. You can still save the account."
+                : "No sport selected yet. You can save the account without adding one."}
             </p>
           )}
         </AccountSection>
@@ -579,7 +625,7 @@ function SignedInAccount() {
         <ProductSection
           icon={Dumbbell}
           title="Equipment"
-          description="What equipment do you use for your sports?"
+          description={IS_ATHRECS_SITE ? "What equipment do you use for athletics?" : "What equipment do you use for your sports?"}
           choices={EQUIPMENT}
           selected={form.preferences.equipmentItems}
           onSelected={(value) => updatePreference("equipmentItems", value)}
@@ -829,7 +875,7 @@ function AccountHero() {
         </div>
         <h1 className="mt-2 font-display text-3xl font-semibold">My Athlete Account</h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
-          Keep your identity, claimed results, sports, training, kit and preferences together.
+          Keep your identity, claimed results, athletics training, kit and preferences together.
           Private account data is not added to your public athlete profile automatically.
         </p>
       </div>

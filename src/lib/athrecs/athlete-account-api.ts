@@ -117,6 +117,7 @@ export type AthleteAccountData = {
     athleteName: string;
     eventName: string;
     eventSlug: string;
+    sport: string;
     eventDate: string;
     distanceCode: string;
     finishTimeSeconds: number | null;
@@ -590,6 +591,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         athlete_name: string;
         event_name: string;
         event_slug: string;
+        event_sport: string;
         event_date: string;
         distance_code: string;
         finish_time_seconds: number | null;
@@ -601,6 +603,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
           athlete.display_name as athlete_name,
           event.name as event_name,
           event.slug as event_slug,
+          event.sport as event_sport,
           edition.event_date::text as event_date,
           edition.distance_code,
           result.finish_time_seconds,
@@ -673,6 +676,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       athleteName: row.athlete_name,
       eventName: row.event_name,
       eventSlug: row.event_slug,
+      sport: row.event_sport,
       eventDate: row.event_date,
       distanceCode: row.distance_code,
       finishTimeSeconds: row.finish_time_seconds,
