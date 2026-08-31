@@ -16,11 +16,23 @@ const outPng = checkedOutputPath(
   [workspaceRoot, "/workspace"],
 );
 const timeoutMs = Number(process.env.BROWSER_SMOKE_TIMEOUT_MS || 45000);
+const fullPage = process.env.BROWSER_SMOKE_FULL_PAGE === "1";
 
 mkdirSync(dirname(outPng), { recursive: true });
 
 const consoleErrors = [];
 const pageErrors = [];
+const transientVitePatterns = [
+  /outdated optimize dep/i,
+  /failed to fetch dynamically imported module/i,
+  /err_aborted\s+504/i,
+];
+
+function isTransientViteFailure(bodyText) {
+  return [...consoleErrors, ...pageErrors, bodyText].some((value) =>
+    transientVitePatterns.some((pattern) => pattern.test(String(value))),
+  );
+}
 
 const browser = await chromium.launch({
   headless: true,
@@ -34,31 +46,53 @@ try {
   });
   page.on("pageerror", (error) => pageErrors.push(String(error?.message || error)));
 
-  const response = await page.goto(url, { waitUntil: "networkidle", timeout: timeoutMs });
-  const status = response?.status() ?? 0;
-  await page.waitForTimeout(1000);
+  let response;
+  let status = 0;
+  let bodyText = "";
+
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    consoleErrors.length = 0;
+    pageErrors.length = 0;
+
+    const retryUrl =
+      attempt === 1
+        ? url
+        : `${url}${url.includes("?") ? "&" : "?"}__browser_smoke_retry=${Date.now()}`;
+
+    response = await page.goto(retryUrl, { waitUntil: "networkidle", timeout: timeoutMs });
+    status = response?.status() ?? 0;
+    await page.waitForTimeout(1000);
+    bodyText = await page
+      .locator("body")
+      .innerText()
+      .catch(() => "");
+
+    if (attempt === 1 && isTransientViteFailure(bodyText)) {
+      console.warn("Transient Vite optimiser response detected; retrying once.");
+      await page.waitForTimeout(1500);
+      continue;
+    }
+    break;
+  }
 
   const title = await page.title();
   const hasCanvas = (await page.locator("canvas").count()) > 0;
-  const bodyTextLen = (
-    await page
-      .locator("body")
-      .innerText()
-      .catch(() => "")
-  ).trim().length;
+  const bodyTextLen = bodyText.trim().length;
 
-  await page.screenshot({ path: outPng, fullPage: false });
+  await page.screenshot({ path: outPng, fullPage });
 
   console.log(
     JSON.stringify(
       {
         url,
+        finalUrl: page.url(),
         status,
         title,
         hasCanvas,
         bodyTextLen,
         consoleErrors,
         pageErrors,
+        fullPage,
         screenshot: outPng,
       },
       null,
