@@ -89,7 +89,8 @@ export function EventSearch({
   };
 
   const subs = subfiltersForSport(value.sport);
-  const lockedSport = SPORTS.length === 1 ? SPORTS[0] : null;
+  const publicSports = SPORTS as readonly string[];
+  const lockedSport = publicSports.length === 1 ? publicSports[0] : null;
   const showRaceGroups = supportsRaceGroupFilter(value.sport);
   const clear = () =>
     onChange({

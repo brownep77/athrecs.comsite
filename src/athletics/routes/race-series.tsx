@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Flag, Medal, Timer, Trophy } from "lucide-react";
 import { listEvents } from "@/lib/athrecs/api";
 import { RaceCard } from "@/components/races/RaceCard";
+import type { EventListItem } from "@/lib/athrecs/types";
 
 const COLLECTIONS = [
   {
@@ -33,6 +34,8 @@ const COLLECTIONS = [
     filter: { q: "championship" },
   },
 ] as const;
+
+type AthleticsCollection = (typeof COLLECTIONS)[number] & { events: EventListItem[] };
 
 export const Route = createFileRoute("/race-series")({
   loader: async () => {
@@ -67,7 +70,9 @@ export const Route = createFileRoute("/race-series")({
 });
 
 function AthleticsCollectionsPage() {
-  const collections = Route.useLoaderData();
+  // The generated route tree retains the original running-series loader
+  // type during standalone type-checking; Vite supplies Athletics collections.
+  const collections = Route.useLoaderData() as unknown as AthleticsCollection[];
 
   return (
     <div className="space-y-8 pb-10">

@@ -42,7 +42,19 @@ const DISCIPLINES = [
 ] as const;
 
 function AthleticsHomePage() {
-  const { stats, events, updates } = Route.useLoaderData();
+  // The generated route tree retains the base homepage loader type during
+  // standalone type-checking; Vite swaps in this Athletics loader at build time.
+  const { stats, events, updates } = Route.useLoaderData() as unknown as {
+    stats: {
+      events: number;
+      clubs: number;
+      athletes: number;
+      upcoming: number;
+      bySport: Array<{ sport: string; n: number; upcoming: number }>;
+    };
+    events: EventListItem[];
+    updates: HomeSportUpdate[];
+  };
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const resultUpdates = useMemo(

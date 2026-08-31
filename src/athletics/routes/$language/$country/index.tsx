@@ -9,9 +9,12 @@ import {
   isSiteLanguage,
   languageLabel,
   translateCountryText,
+  type CountrySite,
+  type SiteLanguage,
 } from "@/lib/athrecs/country-sites";
 import { RaceCard } from "@/components/races/RaceCard";
 import { Button } from "@/components/ui/button";
+import type { EventListItem } from "@/lib/athrecs/types";
 
 const DISCIPLINES = [
   { label: "Track & field", surface: "Track", icon: Medal },
@@ -64,7 +67,13 @@ export const Route = createFileRoute("/$language/$country/")({
 });
 
 function AthleticsCountryHomePage() {
-  const { site, language, events } = Route.useLoaderData();
+  // The generated route tree retains the base multi-sport country loader
+  // type during standalone type-checking; Vite supplies this Athletics loader.
+  const { site, language, events } = Route.useLoaderData() as unknown as {
+    site: CountrySite;
+    language: SiteLanguage;
+    events: EventListItem[];
+  };
   const navigate = useNavigate();
   const copy = copyForLanguage(language);
   const country = displayCountryForLanguage(site, language);

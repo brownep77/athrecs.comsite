@@ -28,22 +28,39 @@ export const Route = createFileRoute("/calendar")({
   component: AthleticsCalendarPage,
 });
 
+type AthleticsCalendarEdition = {
+  id: number;
+  event_date: string;
+  status: string;
+  start_time: string | null;
+  event_slug: string;
+  event_name: string;
+  sport: string;
+  city: string;
+  county: string;
+  country: string;
+  distance_code: string;
+  surface: string;
+};
+
 function AthleticsCalendarPage() {
-  const initial = Route.useLoaderData();
+  // The generated route tree retains the base calendar loader shape during
+  // standalone type-checking; Vite supplies the Athletics array loader.
+  const initial = Route.useLoaderData() as unknown as AthleticsCalendarEdition[];
   const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
   const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
-  const { data = initial, isFetching } = useQuery({
+  const { data = initial, isFetching } = useQuery<AthleticsCalendarEdition[]>({
     queryKey: ["athletics-calendar", filters],
-    queryFn: () =>
-      listCalendarEditions({
+    queryFn: async () =>
+      (await listCalendarEditions({
         data: {
           ...searchToApi(filters),
           sport: "Athletics",
           upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
           limit: 60,
         },
-      }),
+      })) as AthleticsCalendarEdition[],
     initialData: empty ? initial : undefined,
     staleTime: 30_000,
     refetchOnMount: false,
@@ -128,8 +145,8 @@ function AthleticsCalendarPage() {
   );
 }
 
-function AthleticsCalendarCard({ edition }: { edition: Awaited<ReturnType<typeof listCalendarEditions>>[number] }) {
-  const status = effectiveStatus(edition.status as EntryStatus, edition.event_date);
+function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarEdition }) {
+  const status = effectiveStatus(edition.event_date, edition.status as EntryStatus);
   const location = [edition.city, edition.county, edition.country].filter(Boolean).join(", ");
 
   return (
