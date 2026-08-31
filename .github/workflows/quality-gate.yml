@@ -122,6 +122,7 @@ jobs:
         run: |
           node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
           node scripts/browser-auth-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/athlete-auth.png"
+          node scripts/browser-smoke.mjs http://127.0.0.1:8080/sportsrecs "$GITHUB_WORKSPACE/artifacts/sportsrecs.png"
           node scripts/browser-smoke.mjs "http://127.0.0.1:8080/races?sport=Athletics&surface=XC" "$GITHUB_WORKSPACE/artifacts/races.png"
           node scripts/browser-smoke.mjs \
             http://127.0.0.1:8080/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac \
