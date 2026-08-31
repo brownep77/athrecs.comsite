@@ -62,11 +62,6 @@ function BrandLogo({ className, priority }: { className?: string; priority?: boo
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-
-  if (pathname === "/sportsrecs" || pathname.startsWith("/sportsrecs/")) {
-    return <>{children}</>;
-  }
-
   if (pathname.startsWith("/admin")) {
     return <StaffMicrositeShell>{children}</StaffMicrositeShell>;
   }
