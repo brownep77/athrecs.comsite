@@ -2,15 +2,17 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { listCalendarEditions } from "@/lib/athrecs/api";
+import { SITE_NAME } from "@/lib/athrecs/seo";
 import {
   effectiveStatus,
   formatRaceDateShort,
   formatStartTime,
   statusLabel,
 } from "@/lib/athrecs/format";
-import type { EntryStatus } from "@/lib/athrecs/types";
+import type { EntryStatus, RaceGroupInfo } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { NationBadge } from "@/components/flags/NationFlag";
+import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
@@ -36,6 +38,7 @@ type CardModel = {
   venue: VenueDetails;
   country?: string;
   county?: string;
+  groups?: RaceGroupInfo[];
 };
 
 const FLAG_EXAMPLES: CardModel[] = [
@@ -142,12 +145,10 @@ function CalendarPage() {
     <div className="space-y-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">
-            Calendar
-          </h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Calendar</h1>
           <p className="max-w-2xl text-sm text-muted">
-            Search by country, county, city, postcode, month or date range.
-            Pick a sport in the sidebar to see distance and surface filters.
+            Use the country, area or region, distance and surface dropdowns, then narrow by city,
+            postcode or date.
           </p>
         </div>
         <button
@@ -177,7 +178,7 @@ function CalendarPage() {
               Recently added international races
             </h2>
             <p className="text-sm text-muted">
-              Comrades, Two Oceans and Boston are now in the Athrecs calendar with their latest
+              Comrades, Two Oceans and Boston are now in the {SITE_NAME} calendar with their latest
               official dates and qualification guidance.
             </p>
           </div>
@@ -198,6 +199,7 @@ function CalendarPage() {
                   venue: ed.venue,
                   country: ed.country,
                   county: ed.county,
+                  groups: ed.groups,
                 }}
               />
             ))}
@@ -207,12 +209,10 @@ function CalendarPage() {
 
       <section className="space-y-3 rounded-xl border border-border bg-elevated p-3 lg:col-span-2">
         <div>
-          <p className="font-display text-lg font-semibold text-fg">
-            Flag & travel preview
-          </p>
+          <p className="font-display text-lg font-semibold text-fg">Flag & travel preview</p>
           <p className="text-sm text-muted">
-            Union Jack for the United Kingdom, Irish tricolour for Ireland,
-            and the correct national flag for every other country.
+            Union Jack for the United Kingdom, Irish tricolour for Ireland, and the correct national
+            flag for every other country.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -261,6 +261,7 @@ function CalendarPage() {
                   venue: ed.venue,
                   country: ed.country,
                   county: ed.county,
+                  groups: ed.groups,
                 }}
               />
             ))}
@@ -299,13 +300,10 @@ function EventCard({ ed }: { ed: CardModel }) {
               {formatDistanceWithUnits(code)}
             </Badge>
           ))}
-          <Badge variant={st === "Finished" ? "default" : "solid"}>
-            {statusLabel(st)}
-          </Badge>
+          <RaceGroupBadges groups={ed.groups ?? []} />
+          <Badge variant={st === "Finished" ? "default" : "solid"}>{statusLabel(st)}</Badge>
         </div>
-        <p className="font-display text-base font-semibold leading-snug text-fg">
-          {ed.event_name}
-        </p>
+        <p className="font-display text-base font-semibold leading-snug text-fg">{ed.event_name}</p>
         <p className="text-sm font-medium text-fg">
           {formatRaceDateShort(ed.event_date)}
           {start ? (
