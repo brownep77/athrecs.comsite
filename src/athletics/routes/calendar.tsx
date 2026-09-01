@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { CalendarDays, MapPin } from "lucide-react";
-import { listCalendarEditions } from "@/lib/athrecs/api";
+import { CalendarDays, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import {
+  listAthleticsCalendarPage,
+  type AthleticsCalendarItem,
+  type AthleticsCalendarPage,
+} from "../api";
 import {
   effectiveStatus,
   formatRaceDateShort,
@@ -22,49 +26,44 @@ import {
 
 export const Route = createFileRoute("/calendar")({
   loader: () =>
-    listCalendarEditions({
-      data: { sport: "Athletics", upcomingOnly: true, limit: 40 },
+    listAthleticsCalendarPage({
+      data: { upcomingOnly: true, limit: 40, offset: 0 },
     }),
   component: AthleticsCalendarPage,
 });
 
-type AthleticsCalendarEdition = {
-  id: number;
-  event_date: string;
-  status: string;
-  start_time: string | null;
-  event_slug: string;
-  event_name: string;
-  sport: string;
-  city: string;
-  county: string;
-  country: string;
-  distance_code: string;
-  surface: string;
-};
+const PAGE_SIZE = 40;
 
 function AthleticsCalendarPage() {
-  // The generated route tree retains the base calendar loader shape during
-  // standalone type-checking; Vite supplies the Athletics array loader.
-  const initial = Route.useLoaderData() as unknown as AthleticsCalendarEdition[];
+  const initial = Route.useLoaderData() as unknown as AthleticsCalendarPage;
   const [filters, setFilters] = useState<EventSearchValues>(EMPTY_SEARCH);
+  const [page, setPage] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
-  const { data = initial, isFetching } = useQuery<AthleticsCalendarEdition[]>({
-    queryKey: ["athletics-calendar", filters],
+  const { data = initial, isFetching } = useQuery<AthleticsCalendarPage>({
+    queryKey: ["athletics-calendar", filters, page],
     queryFn: async () =>
-      (await listCalendarEditions({
+      (await listAthleticsCalendarPage({
         data: {
           ...searchToApi(filters),
-          sport: "Athletics",
           upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
-          limit: 60,
+          limit: PAGE_SIZE,
+          offset: page * PAGE_SIZE,
         },
-      })) as AthleticsCalendarEdition[],
-    initialData: empty ? initial : undefined,
+      })) as AthleticsCalendarPage,
+    initialData: empty && page === 0 ? initial : undefined,
     staleTime: 30_000,
     refetchOnMount: false,
   });
+  const firstShown = data.total ? data.offset + 1 : 0;
+  const lastShown = Math.min(data.offset + data.items.length, data.total);
+  const hasPrevious = data.offset > 0;
+  const hasNext = data.offset + data.items.length < data.total;
+
+  const updateFilters = (next: EventSearchValues) => {
+    setFilters(next);
+    setPage(0);
+  };
 
   return (
     <div className="space-y-5 pb-10">
@@ -105,7 +104,7 @@ function AthleticsCalendarPage() {
         >
           <EventSearch
             value={filters}
-            onChange={setFilters}
+            onChange={updateFilters}
             onDone={() => setMobileOpen(false)}
             variant="sidebar"
           />
@@ -116,7 +115,7 @@ function AthleticsCalendarPage() {
             <p className="text-sm text-subtle" aria-live="polite">
               {isFetching
                 ? "Loading athletics fixtures…"
-                : `${data.length} athletics competition days shown`}
+                : `Showing ${firstShown.toLocaleString()}–${lastShown.toLocaleString()} of ${data.total.toLocaleString()} athletics competition days`}
             </p>
             <Link
               to="/races"
@@ -127,8 +126,13 @@ function AthleticsCalendarPage() {
           </div>
 
           <div className="grid gap-2">
-            {data.length ? (
-              data.map((edition) => <AthleticsCalendarCard key={edition.id} edition={edition} />)
+            {data.items.length ? (
+              data.items.map((edition) => (
+                <AthleticsCalendarCard
+                  key={`${edition.id}-${edition.event_date}`}
+                  edition={edition}
+                />
+              ))
             ) : (
               <div className="rounded-xl border border-dashed border-border bg-surface px-5 py-12 text-center">
                 <CalendarDays className="mx-auto h-7 w-7 text-subtle" aria-hidden="true" />
@@ -139,15 +143,51 @@ function AthleticsCalendarPage() {
               </div>
             )}
           </div>
+
+          {data.total > PAGE_SIZE ? (
+            <nav
+              className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3"
+              aria-label="Athletics calendar pages"
+            >
+              <button
+                type="button"
+                disabled={!hasPrevious || isFetching}
+                onClick={() => setPage((current) => Math.max(0, current - 1))}
+                className="inline-flex h-10 items-center gap-1 rounded-lg border border-border px-3 text-sm font-medium text-fg disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                Previous
+              </button>
+              <p className="text-sm text-muted">
+                Page {(data.offset / data.limit + 1).toLocaleString()} of{" "}
+                {Math.ceil(data.total / data.limit).toLocaleString()}
+              </p>
+              <button
+                type="button"
+                disabled={!hasNext || isFetching}
+                onClick={() => setPage((current) => current + 1)}
+                className="inline-flex h-10 items-center gap-1 rounded-lg border border-border px-3 text-sm font-medium text-fg disabled:cursor-not-allowed disabled:opacity-45"
+              >
+                Next
+                <ChevronRight className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </nav>
+          ) : null}
         </section>
       </div>
     </div>
   );
 }
 
-function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarEdition }) {
+function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarItem }) {
   const status = effectiveStatus(edition.event_date, edition.status as EntryStatus);
-  const location = [edition.city, edition.county, edition.country].filter(Boolean).join(", ");
+  const location = [
+    ...new Set([edition.city, edition.county, edition.country].filter(Boolean)),
+  ].join(", ");
+  const distanceLabel =
+    edition.surface === "Track" && /^(?:Other|Track & field)$/i.test(edition.distance_code)
+      ? "Track & field"
+      : formatDistanceWithUnits(edition.distance_code);
 
   return (
     <article className="rounded-xl border border-border bg-surface p-4 shadow-card">
@@ -176,7 +216,14 @@ function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarEdition 
         </div>
 
         <div className="flex flex-wrap items-center gap-2 sm:justify-end">
-          <Badge variant="outline">{formatDistanceWithUnits(edition.distance_code)}</Badge>
+          {edition.competition_label ? (
+            <Badge variant={edition.competition_label === "Diamond League" ? "default" : "outline"}>
+              {edition.competition_label}
+            </Badge>
+          ) : edition.featured ? (
+            <Badge variant="default">Major meeting</Badge>
+          ) : null}
+          <Badge variant="outline">{distanceLabel}</Badge>
           {edition.surface ? <Badge variant="secondary">{edition.surface}</Badge> : null}
           <Badge variant={status === "Open" ? "default" : "outline"}>{statusLabel(status)}</Badge>
         </div>

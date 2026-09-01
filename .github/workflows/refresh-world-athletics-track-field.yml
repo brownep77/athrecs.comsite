@@ -1,0 +1,55 @@
+name: Refresh World Athletics track and field
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 4 * * 1"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: world-athletics-track-field-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Refresh official World Athletics meetings
+        run: node scripts/refresh-world-athletics-track-field.mjs
+
+      - name: Verify global track and field coverage
+        run: node --experimental-strip-types scripts/verify-global-track-field-calendar.mjs
+
+      - name: Open or update the guarded refresh pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then
+            echo "World Athletics calendar is already current."
+            exit 0
+          fi
+
+          branch="automation/world-athletics-track-field"
+          git config user.name "athrecs-calendar-bot"
+          git config user.email "athrecs-calendar-bot@users.noreply.github.com"
+          git fetch origin "$branch:refs/remotes/origin/$branch" || true
+          git switch -C "$branch"
+          git add src/data/world-athletics.ts src/lib/athrecs/seed.server.ts
+          git commit -m "Refresh World Athletics track and field calendar"
+          git push --force-with-lease origin "$branch"
+
+          gh pr view "$branch" >/dev/null 2>&1 || gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "Refresh World Athletics track and field calendar" \
+            --body "Automated official-calendar refresh. The normal Athrecs quality gate and duplicate checks must pass before merge."
