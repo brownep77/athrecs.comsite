@@ -5,6 +5,7 @@ import { getCookie } from "@tanstack/react-start/server";
 import { createPrivateKey, randomBytes, sign as signDigest } from "node:crypto";
 import { Pool } from "pg";
 import { ensureDbReady, getPglite } from "../db";
+import { postgresConnectionConfig } from "../postgres-connection.js";
 import { authEmailConfigured, sendAthrecsAuthEmail } from "./email.server";
 import { emailAndPasswordEnabled } from "./email-password";
 import { GROK_PROVIDERS } from "./providers";
@@ -165,7 +166,7 @@ const trustedOrigins: string[] = explicitBaseURL
 
 const databaseUrl = env("DATABASE_URL");
 const database = databaseUrl
-  ? new Pool({ connectionString: databaseUrl })
+  ? new Pool(postgresConnectionConfig(databaseUrl))
   : { dialect: pgliteDialect(() => getPglite()), type: "postgres" as const };
 
 export const SESSION_TOKEN_COOKIE = "__Host-grok-auth.session_token";
