@@ -375,6 +375,200 @@ type CalendarInput =
     }
   | undefined;
 
+export type AthleticsCalendarItem = {
+  id: number;
+  event_date: string;
+  status: string;
+  start_time: string | null;
+  event_slug: string;
+  event_name: string;
+  sport: string;
+  city: string;
+  county: string;
+  country: string;
+  area: string;
+  distance_code: string;
+  surface: string;
+  featured: boolean;
+  competition_label: string | null;
+};
+
+export type AthleticsCalendarPage = {
+  items: AthleticsCalendarItem[];
+  total: number;
+  limit: number;
+  offset: number;
+};
+
+type AthleticsCalendarPageInput = Exclude<CalendarInput, undefined> & {
+  offset?: number;
+};
+
+function athleticsCompetitionLabel(input: {
+  name: string;
+  summary: string;
+  description: string;
+}): string | null {
+  const text = `${input.name} ${input.summary} ${input.description}`;
+  if (/diamond league/i.test(text)) return "Diamond League";
+  const tour = text.match(
+    /World Athletics (Continental|Indoor) Tour\s*[–-]\s*(Gold|Silver|Bronze|Challenger)/i,
+  );
+  if (tour) return `${tour[1]} Tour · ${tour[2]}`;
+  if (/world athletics indoor championships/i.test(text)) return "World Indoor Championships";
+  if (/world athletics championships/i.test(text)) return "World Championships";
+  if (/olympic games/i.test(text)) return "Olympic Games";
+  if (/area (?:u\d+ |senior )?championship/i.test(text)) return "Continental championship";
+  if (/national (?:u\d+ |senior )?(?:indoor |outdoor )?championship/i.test(text)) {
+    return "National championship";
+  }
+  return null;
+}
+
+/**
+ * The shared calendar endpoint intentionally returns a small homepage-sized
+ * slice. The Athletics calendar needs an exact total and stable pagination so
+ * every global, national and local meeting remains reachable.
+ */
+async function queryAthleticsCalendarPage(
+  data: AthleticsCalendarPageInput = {},
+): Promise<AthleticsCalendarPage> {
+  const sql = await ready();
+  const rawQ = data.q?.trim() ?? "";
+  const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
+  const region = data.region?.trim() || null;
+  const today = todayIso();
+  const upcomingOnly = data.upcomingOnly !== false;
+  const limit = Math.min(Math.max(data.limit ?? 40, 1), 100);
+  const offset = Math.min(Math.max(data.offset ?? 0, 0), 100_000);
+  const requestedDistance =
+    data.distance?.trim() && data.distance !== "All" ? data.distance.trim() : null;
+  const trackAndFieldOnly = requestedDistance === "Track & field";
+  const distance = trackAndFieldOnly ? null : requestedDistance;
+  const surface = data.surface?.trim() && data.surface !== "All" ? data.surface.trim() : null;
+  const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
+  const county = data.county?.trim() ? `%${data.county.trim().toLowerCase()}%` : null;
+  const city = data.city?.trim() ? `%${data.city.trim().toLowerCase()}%` : null;
+  const postcode = data.postcode?.trim() ? `%${data.postcode.trim().toLowerCase()}%` : null;
+  const { monthToRange } = await import("../lib/athrecs/filters");
+  const monthRange = data.month ? monthToRange(data.month) : null;
+  const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
+  const dateTo = data.dateTo?.trim() || monthRange?.to || null;
+
+  const rows = await sql<
+    Omit<AthleticsCalendarItem, "competition_label"> & {
+      summary: string;
+      description: string;
+      total_count: number;
+    }
+  >`
+      with competition_days as (
+        select
+          min(edition.id)::int as id,
+          edition.event_date,
+          (array_agg(edition.status order by edition.id))[1] as status,
+          (array_agg(edition.start_time order by edition.id)
+            filter (where edition.start_time is not null))[1] as start_time,
+          event.slug as event_slug,
+          event.name as event_name,
+          event.sport,
+          event.city,
+          event.county,
+          event.country,
+          event.area,
+          string_agg(distinct edition.distance_code, ' · ') as distance_code,
+          event.surface,
+          event.featured,
+          event.summary,
+          event.description
+        from editions edition
+        join events event on event.id = edition.event_id
+        where event.sport = 'Athletics'
+          and (${trackAndFieldOnly}::boolean is false or event.surface = 'Track')
+          and (${upcomingOnly}::boolean is false or edition.event_date >= ${today}::date)
+          and (${dateFrom}::date is null or edition.event_date >= ${dateFrom}::date)
+          and (${dateTo}::date is null or edition.event_date <= ${dateTo}::date)
+          and (${surface}::text is null or event.surface = ${surface})
+          and (${country}::text is null or event.country = ${country} or event.county = ${country})
+          and (${region}::text is null or event.country = ${region} or event.county = ${region})
+          and (
+            ${county}::text is null
+            or lower(event.county) like ${county}
+            or lower(event.city) like ${county}
+            or lower(event.area) like ${county}
+          )
+          and (
+            ${city}::text is null
+            or lower(event.city) like ${city}
+            or lower(event.area) like ${city}
+          )
+          and (
+            ${postcode}::text is null
+            or lower(event.area) like ${postcode}
+            or lower(event.city) like ${postcode}
+          )
+          and (
+            ${q}::text is null
+            or lower(event.name) like ${q}
+            or lower(event.city) like ${q}
+            or lower(event.county) like ${q}
+            or lower(event.country) like ${q}
+            or lower(event.area) like ${q}
+            or lower(event.surface) like ${q}
+            or lower(event.summary) like ${q}
+            or lower(event.description) like ${q}
+          )
+          and (
+            ${distance}::text is null
+            or exists (
+              select 1
+              from editions matching_edition
+              where matching_edition.event_id = event.id
+                and matching_edition.event_date = edition.event_date
+                and matching_edition.distance_code = ${distance}
+            )
+          )
+        group by
+          event.id,
+          edition.event_date,
+          event.slug,
+          event.name,
+          event.sport,
+          event.city,
+          event.county,
+          event.country,
+          event.area,
+          event.surface,
+          event.featured,
+          event.summary,
+          event.description
+      )
+      select competition_days.*, count(*) over()::int as total_count
+      from competition_days
+      order by event_date asc, event_name asc
+      limit ${limit}
+      offset ${offset}
+    `;
+
+  return {
+    items: rows.map(({ total_count: _totalCount, summary, description, ...row }) => ({
+      ...row,
+      competition_label: athleticsCompetitionLabel({
+        name: row.event_name,
+        summary,
+        description,
+      }),
+    })),
+    total: rows[0]?.total_count ?? 0,
+    limit,
+    offset,
+  } satisfies AthleticsCalendarPage;
+}
+
+export const listAthleticsCalendarPage = createServerFn({ method: "GET" })
+  .validator((input: AthleticsCalendarPageInput | undefined) => input ?? {})
+  .handler(({ data }) => queryAthleticsCalendarPage(data));
+
 export const listCalendarEditions = createServerFn({ method: "GET" })
   .validator((input: CalendarInput) => input ?? {})
   .handler(async ({ data }) => {

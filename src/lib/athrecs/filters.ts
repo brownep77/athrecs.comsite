@@ -96,7 +96,11 @@ const ATHLETICS_SUBFILTERS: SubfilterDef[] = [
     label: "Surface / venue",
     options: ["All", "Track", "Road", "XC", "Trail", "Fell", "Mixed"],
   },
-  { key: "distance", label: "Distance", options: DISTANCE_FILTERS },
+  {
+    key: "distance",
+    label: "Event type / distance",
+    options: [...DISTANCE_FILTERS.slice(0, -1), "Track & field", "Other"],
+  },
 ];
 
 const PARKRUN_SUBFILTERS: SubfilterDef[] = [
