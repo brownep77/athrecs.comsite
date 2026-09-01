@@ -33,7 +33,7 @@ export const Route = createRootRoute({
         name: "viewport",
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
-      { name: "theme-color", content: "#f4f7f7" },
+      { name: "theme-color", content: "#ffffff" },
       {
         name: "keywords",
         content:
@@ -71,7 +71,7 @@ function RootComponent() {
   const pageLanguage = isSiteLanguage(languageSegment) ? languageSegment : "en";
 
   return (
-    <html lang={pageLanguage}>
+    <html lang={pageLanguage} className="athrecs-theme">
       <head>
         <HeadContent />
       </head>
