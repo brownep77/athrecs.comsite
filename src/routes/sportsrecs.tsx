@@ -66,6 +66,7 @@ export const Route = createFileRoute("/sportsrecs")({
 type NetworkSite = {
   name: string;
   domain: string;
+  sport: string;
   description: string;
   coverage: string;
   status: "live" | "coming-soon";
@@ -78,17 +79,22 @@ const networkSites: NetworkSite[] = [
   {
     name: "RunRecs",
     domain: "runrecs.com",
-    description: "The dedicated home for running events, results and runners.",
-    coverage: "Road · Trail · Fell · Ultra · Parkrun",
+    sport: "Running",
+    description:
+      "Race calendars, results and connected athlete records for runners at every level.",
+    coverage: "Road running, trail running, fell running, ultrarunning and parkrun.",
     status: "coming-soon",
     icon: Footprints,
     accent: "border-lime-300/25 bg-lime-300/10 text-lime-200",
   },
   {
-    name: "ATHRECS",
+    name: "AthRecs",
     domain: "athrecs.com",
-    description: "The specialist platform for athletics competitions, athletes and results.",
-    coverage: "Track · Field · Cross-country · Race walking",
+    sport: "Athletics",
+    description:
+      "Competition calendars, programmes and results for the full family of athletics disciplines.",
+    coverage:
+      "Track and field, indoor athletics, cross-country, race walking and combined events.",
     status: "live",
     href: "https://www.athrecs.com",
     icon: Trophy,
@@ -97,8 +103,10 @@ const networkSites: NetworkSite[] = [
   {
     name: "CycRecs",
     domain: "cycrecs.com",
-    description: "Cycling events and results across every major discipline.",
-    coverage: "Road · Gravel · MTB · Cyclocross",
+    sport: "Cycling",
+    description: "Competition calendars and results for road, track and off-road cycling.",
+    coverage:
+      "Road cycling, track cycling, gravel, mountain biking, cyclocross and time trials.",
     status: "coming-soon",
     icon: Bike,
     accent: "border-amber-300/25 bg-amber-300/10 text-amber-200",
@@ -106,8 +114,10 @@ const networkSites: NetworkSite[] = [
   {
     name: "SwimRecs",
     domain: "swimrecs.com",
-    description: "A clearer way to discover swimming competitions and follow performances.",
-    coverage: "Pool · Open water · Masters · Age group",
+    sport: "Swimming",
+    description:
+      "Competition calendars, results and performance records for pool and open-water swimmers.",
+    coverage: "Pool swimming, open-water swimming, masters and age-group competitions.",
     status: "coming-soon",
     icon: Waves,
     accent: "border-blue-300/25 bg-blue-300/10 text-blue-200",
@@ -115,8 +125,11 @@ const networkSites: NetworkSite[] = [
   {
     name: "TriRecs",
     domain: "trirecs.com",
-    description: "One specialist home for triathlon and connected multisport formats.",
-    coverage: "Triathlon · Duathlon · Aquathlon · Aquabike",
+    sport: "Triathlon & multisport",
+    description:
+      "Events, results and split performances for triathlon and related multisport formats.",
+    coverage:
+      "Triathlon, duathlon, aquathlon, aquabike and related multisport competitions.",
     status: "coming-soon",
     icon: Activity,
     accent: "border-violet-300/25 bg-violet-300/10 text-violet-200",
@@ -124,8 +137,10 @@ const networkSites: NetworkSite[] = [
   {
     name: "GymRecs",
     domain: "gymrecs.com",
-    description: "Competition calendars, results and athlete records for gymnastics.",
-    coverage: "Artistic · Rhythmic · Trampoline · Acrobatic",
+    sport: "Gymnastics",
+    description:
+      "Competition calendars, apparatus programmes, scores and athlete records for gymnastics.",
+    coverage: "Artistic, rhythmic, trampoline, tumbling and acrobatic gymnastics.",
     status: "coming-soon",
     icon: Medal,
     accent: "border-pink-300/25 bg-pink-300/10 text-pink-200",
@@ -133,8 +148,11 @@ const networkSites: NetworkSite[] = [
   {
     name: "FitRecs",
     domain: "fitrecs.com",
-    description: "The emerging home for functional fitness and fitness racing.",
-    coverage: "Functional fitness · Fitness racing · Team events",
+    sport: "Functional fitness",
+    description:
+      "Competitions, workouts, results and athlete records for functional fitness and fitness racing.",
+    coverage:
+      "Functional fitness, fitness racing, HYROX events, CrossFit competitions and team formats.",
     status: "coming-soon",
     icon: Dumbbell,
     accent: "border-orange-300/25 bg-orange-300/10 text-orange-200",
@@ -197,7 +215,10 @@ function SportsRecsLandingPage() {
             </span>
           </a>
 
-          <nav className="hidden items-center gap-7 text-sm font-medium text-slate-300 md:flex" aria-label="SportsRecs">
+          <nav
+            className="hidden items-center gap-7 text-sm font-medium text-slate-300 md:flex"
+            aria-label="SportsRecs"
+          >
             <a className="transition hover:text-white" href="#network">
               The network
             </a>
@@ -208,7 +229,7 @@ function SportsRecsLandingPage() {
               className="inline-flex min-h-10 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 text-white transition hover:border-cyan-300/50 hover:bg-cyan-300/10"
               href="https://www.athrecs.com"
             >
-              Visit ATHRECS
+              Visit AthRecs
               <ArrowUpRight className="size-4" aria-hidden="true" />
             </a>
           </nav>
@@ -244,7 +265,7 @@ function SportsRecsLandingPage() {
                   href="https://www.athrecs.com"
                   className="inline-flex min-h-12 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 text-sm font-bold text-white no-underline transition hover:-translate-y-0.5 hover:border-cyan-300/50 hover:bg-cyan-300/10"
                 >
-                  Visit ATHRECS
+                  Visit AthRecs
                   <ArrowUpRight className="size-4" aria-hidden="true" />
                 </a>
               </div>
@@ -279,7 +300,12 @@ function SportsRecsLandingPage() {
                   {networkSites.slice(0, 6).map((site) => (
                     <div key={site.name} className="rounded-2xl border border-white/10 bg-black/15 p-4">
                       <div className="flex items-start justify-between gap-4">
-                        <span className={cn("grid size-9 place-items-center rounded-xl border", site.accent)}>
+                        <span
+                          className={cn(
+                            "grid size-9 place-items-center rounded-xl border",
+                            site.accent,
+                          )}
+                        >
                           <site.icon className="size-4" aria-hidden="true" />
                         </span>
                         <span
@@ -294,7 +320,8 @@ function SportsRecsLandingPage() {
                         </span>
                       </div>
                       <p className="mt-4 font-bold">{site.name}</p>
-                      <p className="mt-1 text-xs text-slate-500">{site.domain}</p>
+                      <p className="mt-1 text-xs font-semibold text-slate-300">{site.sport}</p>
+                      <p className="mt-1 text-[11px] text-slate-500">{site.domain}</p>
                     </div>
                   ))}
                 </div>
@@ -314,12 +341,14 @@ function SportsRecsLandingPage() {
 
           <section id="network" className="scroll-mt-24 border-t border-white/10 py-20 sm:py-24">
             <div className="max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">The network</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-200">
+                The network
+              </p>
               <h2 className="mt-3 text-balance text-4xl font-black tracking-[-0.04em] sm:text-5xl">
                 A dedicated home for every sporting community.
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-300">
-                ATHRECS is live today. The next platforms are being prepared carefully, and their
+                AthRecs is live today. The next platforms are being prepared carefully, and their
                 links will activate as each specialist site is ready.
               </p>
             </div>
@@ -334,25 +363,33 @@ function SportsRecsLandingPage() {
           <section id="vision" className="scroll-mt-24 border-t border-white/10 py-20 sm:py-24">
             <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr]">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">Our vision</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-lime-200">
+                  Our vision
+                </p>
                 <h2 className="mt-3 text-balance text-4xl font-black tracking-[-0.04em] sm:text-5xl">
                   Better recognition for every athlete.
                 </h2>
                 <p className="mt-5 text-lg leading-8 text-slate-300">
                   SportsRecs is being built to make competition information and achievement easier
-                  to discover for everyone — elite, club, local, age-group and recreational athletes alike.
+                  to discover for everyone — elite, club, local, age-group and recreational athletes
+                  alike.
                 </p>
               </div>
 
               <div className="grid gap-4">
                 {principles.map((principle, index) => (
-                  <article key={principle.title} className="rounded-3xl border border-white/10 bg-white/[0.045] p-6 sm:p-7">
+                  <article
+                    key={principle.title}
+                    className="rounded-3xl border border-white/10 bg-white/[0.045] p-6 sm:p-7"
+                  >
                     <div className="flex gap-5">
                       <span className="grid size-11 shrink-0 place-items-center rounded-2xl border border-white/10 bg-white/5 text-cyan-200">
                         <principle.icon className="size-5" aria-hidden="true" />
                       </span>
                       <div>
-                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">0{index + 1}</p>
+                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+                          0{index + 1}
+                        </p>
                         <h3 className="mt-1 text-xl font-bold">{principle.title}</h3>
                         <p className="mt-2 leading-7 text-slate-400">{principle.description}</p>
                       </div>
@@ -373,13 +410,13 @@ function SportsRecsLandingPage() {
               </h2>
               <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300">
                 SportsRecs.org will become the front door to the full family of specialist sports
-                platforms. For now, explore ATHRECS while the next sites are prepared.
+                platforms. For now, explore AthRecs while the next sites are prepared.
               </p>
               <a
                 href="https://www.athrecs.com"
                 className="mt-8 inline-flex min-h-12 items-center gap-2 rounded-full bg-white px-5 text-sm font-bold text-slate-950 no-underline transition hover:-translate-y-0.5 hover:bg-cyan-100"
               >
-                Explore ATHRECS
+                Explore AthRecs
                 <ArrowUpRight className="size-4" aria-hidden="true" />
               </a>
             </div>
@@ -392,7 +429,7 @@ function SportsRecsLandingPage() {
             <span>© {new Date().getFullYear()} SportsRecs. The connected sports network.</span>
           </div>
           <a href="https://www.athrecs.com" className="transition hover:text-white">
-            Visit ATHRECS
+            Visit AthRecs
           </a>
         </footer>
       </div>
@@ -419,11 +456,15 @@ function NetworkCard({ site }: { site: NetworkSite }) {
         </span>
       </div>
       <h3 className="mt-6 text-2xl font-black tracking-[-0.03em]">{site.name}</h3>
-      <p className="mt-1 text-sm font-medium text-slate-500">{site.domain}</p>
-      <p className="mt-4 min-h-14 leading-7 text-slate-300">{site.description}</p>
-      <p className="mt-5 border-t border-white/10 pt-4 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
-        {site.coverage}
-      </p>
+      <p className="mt-1 text-sm font-semibold text-slate-300">{site.sport}</p>
+      <p className="mt-1 text-xs font-medium text-slate-500">{site.domain}</p>
+      <p className="mt-4 min-h-20 leading-7 text-slate-300">{site.description}</p>
+      <div className="mt-5 border-t border-white/10 pt-4">
+        <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">
+          Sports represented
+        </p>
+        <p className="mt-2 text-sm leading-6 text-slate-300">{site.coverage}</p>
+      </div>
       <div className="mt-6 flex items-center justify-between gap-4 text-sm font-bold">
         <span className={site.status === "live" ? "text-cyan-200" : "text-slate-500"}>
           {site.status === "live" ? `Visit ${site.name}` : "Link activates at launch"}
@@ -446,6 +487,8 @@ function NetworkCard({ site }: { site: NetworkSite }) {
       {card}
     </a>
   ) : (
-    <article className="rounded-3xl border border-white/10 bg-white/[0.035] p-6 text-white">{card}</article>
+    <article className="rounded-3xl border border-white/10 bg-white/[0.035] p-6 text-white">
+      {card}
+    </article>
   );
 }
