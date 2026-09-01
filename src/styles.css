@@ -35,6 +35,10 @@
   --color-accent-soft: #d9f3f7;
 }
 
+.athrecs-theme img[src="/athrecs-logo-header.png"] {
+  filter: hue-rotate(15deg) saturate(1.08) brightness(0.8);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
