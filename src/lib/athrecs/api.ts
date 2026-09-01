@@ -81,6 +81,72 @@ function parseResultLinks(value: unknown): EditionResultLink[] {
   }
 }
 
+type EventRegionInput =
+  | {
+      sport?: Sport | "All";
+      country?: string;
+    }
+  | undefined;
+
+/**
+ * Returns catalogue-backed area/region choices for the selected country.
+ * The specialist API facades override this function to preserve their exact
+ * public sport boundary.
+ */
+export const listEventRegions = createServerFn({ method: "GET" })
+  .validator((input: EventRegionInput) => input ?? {})
+  .handler(async ({ data }) => {
+    const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
+    if (!country) return [];
+
+    const sql = await ready();
+    const sport = data.sport && data.sport !== "All" ? data.sport : null;
+    const rows = await sql<{
+      slug: string;
+      name: string;
+      country: string;
+      region: string | null;
+      county: string;
+      city: string;
+      area: string;
+    }>`
+      select e.slug, e.name, e.country, e.region, e.county, e.city, e.area
+      from events e
+      where (${sport}::text is null or e.sport = ${sport})
+        and (
+          lower(coalesce(e.country, '')) = lower(${country})
+          or lower(coalesce(e.county, '')) = lower(${country})
+          or (
+            ${country} in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland')
+            and lower(coalesce(e.country, '')) in (
+              'united kingdom', 'england', 'scotland', 'wales', 'northern ireland', 'uk', 'gb'
+            )
+          )
+        )
+      order by e.region nulls last, e.county, e.city
+    `;
+    const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
+    const choices = rows
+      .filter((row) =>
+        countryMatchesFilter(
+          resolveCountry({
+            slug: row.slug,
+            name: row.name,
+            country: row.country,
+            county: row.county,
+            city: row.city,
+            area: row.area,
+          }),
+          country,
+        ),
+      )
+      .map((row) => row.region?.trim() || row.county?.trim())
+      .filter((value): value is string => Boolean(value))
+      .filter((value) => value.toLowerCase() !== country.toLowerCase());
+
+    return [...new Set(choices)].sort((left, right) => left.localeCompare(right, "en"));
+  });
+
 export const listEvents = createServerFn({ method: "GET" })
   .validator(
     (
@@ -210,7 +276,12 @@ export const listEvents = createServerFn({ method: "GET" })
           )
         )
         and (${country}::text is null or e.country = ${country} or e.county = ${country})
-        and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
+        and (
+          ${county}::text is null
+          or lower(coalesce(e.region, '')) like ${county}
+          or lower(e.county) like ${county}
+          or lower(e.city) like ${county}
+        )
         and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city} or lower(e.county) like ${city})
         and (
           ${postcode}::text is null
@@ -1254,6 +1325,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       country: string;
       area: string;
       surface: string;
+      groups_json: string | RaceGroupInfo[] | null;
     }>`
       select
         ed.id,
@@ -1268,7 +1340,21 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
         e.county,
         e.country,
         e.area,
-        e.surface
+        e.surface,
+        (
+          select coalesce(
+            json_agg(json_build_object(
+              'code', g.group_code,
+              'label', g.label,
+              'level', g.level,
+              'source_url', g.source_url,
+              'checked_at', g.checked_at::text,
+              'note', g.note
+            ) order by g.group_code)::text,
+            '[]'
+          )
+          from event_groups g where g.event_id = e.id
+        ) as groups_json
       from editions ed
       join events e on e.id = ed.event_id
       where
@@ -1300,7 +1386,12 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
           )
         )
         and (${country}::text is null or e.country = ${country} or e.county = ${country})
-        and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
+        and (
+          ${county}::text is null
+          or lower(coalesce(e.region, '')) like ${county}
+          or lower(e.county) like ${county}
+          or lower(e.city) like ${county}
+        )
         and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city})
         and (
           ${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date
@@ -1350,7 +1441,12 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             or lower(e.country) like ${q}
             or lower(e.area) like ${q})
           and (${country}::text is null or e.country = ${country} or e.county = ${country})
-          and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
+          and (
+            ${county}::text is null
+            or lower(coalesce(e.region, '')) like ${county}
+            or lower(e.county) like ${county}
+            or lower(e.city) like ${county}
+          )
           and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city})
           and (${surface}::text is null or e.surface = ${surface})
         order by e.name
@@ -1379,6 +1475,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             country: venue.country,
             area: venue.area,
             surface: venue.surface,
+            groups_json: "[]",
           });
         }
       }
@@ -1397,11 +1494,13 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
     const cleaned = combined.map((row) => {
+      const { groups_json, ...edition } = row;
       const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
       const distanceCode = labels[0] ?? row.distance_code;
       return {
-        ...row,
+        ...edition,
         distance_code: labels.join(" · ") || distanceCode,
+        groups: parseRaceGroups(groups_json),
       };
     });
     const mapped = collapseSameEventDate(cleaned).map((row) => {
@@ -1492,7 +1591,8 @@ export const importResults = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     await ready();
     const content = data.content ?? data.json ?? "";
-    const fileFormat = data.fileFormat ?? (data.fileName?.toLowerCase().endsWith(".csv") ? "csv" : "json");
+    const fileFormat =
+      data.fileFormat ?? (data.fileName?.toLowerCase().endsWith(".csv") ? "csv" : "json");
     let bundle: ResultsImportBundle;
     try {
       if (fileFormat === "csv") {

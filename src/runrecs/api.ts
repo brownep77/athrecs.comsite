@@ -27,6 +27,26 @@ async function ready() {
   return getSql();
 }
 
+type EventRegionInput =
+  | {
+      sport?: Sport | "All";
+      country?: string;
+    }
+  | undefined;
+
+export const listEventRegions = createServerFn({ method: "GET" })
+  .validator((input: EventRegionInput) => input ?? {})
+  .handler(async ({ data }) => {
+    if (data.sport && data.sport !== "All" && !isRunRecsSport(data.sport)) return [];
+    const sports: Array<"Running" | "Parkrun"> = isRunRecsSport(data.sport)
+      ? [data.sport]
+      : ["Running", "Parkrun"];
+    const sets = await Promise.all(
+      sports.map((sport) => base.listEventRegions({ data: { ...data, sport } })),
+    );
+    return [...new Set(sets.flat())].sort((left, right) => left.localeCompare(right, "en"));
+  });
+
 function parseRaceGroups(value: unknown): RaceGroupInfo[] {
   if (!value) return [];
   if (Array.isArray(value)) return value as RaceGroupInfo[];
@@ -187,7 +207,12 @@ export const listEvents = createServerFn({ method: "GET" })
           )
         )
         and (${country}::text is null or e.country = ${country} or e.county = ${country})
-        and (${county}::text is null or lower(e.county) like ${county} or lower(e.city) like ${county})
+        and (
+          ${county}::text is null
+          or lower(coalesce(e.region, '')) like ${county}
+          or lower(e.county) like ${county}
+          or lower(e.city) like ${county}
+        )
         and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city} or lower(e.county) like ${city})
         and (
           ${postcode}::text is null
@@ -273,7 +298,8 @@ export const listEvents = createServerFn({ method: "GET" })
             row.sport === "Parkrun"
               ? parkrunStartTime(row.country, /junior/i.test(row.name))
               : row.next_start_time,
-          next_status: (row.next_status as EntryStatus) ?? (row.sport === "Parkrun" ? "Open" : null),
+          next_status:
+            (row.next_status as EntryStatus) ?? (row.sport === "Parkrun" ? "Open" : null),
           next_distance:
             row.sport === "Parkrun"
               ? /junior/i.test(row.name)

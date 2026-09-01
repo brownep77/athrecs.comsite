@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import {
   Bike,
+  Clock3,
   Droplets,
   Footprints,
   Medal,
@@ -68,10 +69,7 @@ export function RaceCard({
     area: race.area,
   });
   const entryUrl =
-    focusDate &&
-    race.sport !== "Parkrun" &&
-    focusStatus !== "Finished" &&
-    focusStatus !== "Closed"
+    focusDate && race.sport !== "Parkrun" && focusStatus !== "Finished" && focusStatus !== "Closed"
       ? `/api/events/${encodeURIComponent(race.slug)}/official-entry`
       : null;
 
@@ -148,6 +146,12 @@ export function RaceCard({
                 : "No editions yet"}
             </p>
           )}
+          {focusDate ? (
+            <p className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold text-fg">
+              <Clock3 className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+              {startLabel ? `Starts ${startLabel}` : "Start time TBC"}
+            </p>
+          ) : null}
           <div className="mt-1.5 flex min-w-0 flex-wrap items-center justify-between gap-2">
             <TravelFacts venue={venue} startTime={startLabel} />
             {entryUrl && (

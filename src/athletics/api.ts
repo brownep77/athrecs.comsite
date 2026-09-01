@@ -21,6 +21,20 @@ async function ready() {
   return getSql();
 }
 
+type EventRegionInput =
+  | {
+      sport?: Sport | "All";
+      country?: string;
+    }
+  | undefined;
+
+export const listEventRegions = createServerFn({ method: "GET" })
+  .validator((input: EventRegionInput) => input ?? {})
+  .handler(async ({ data }) => {
+    if (data.sport && data.sport !== "All" && !isAthleticsSport(data.sport)) return [];
+    return base.listEventRegions({ data: { ...data, sport: ATHLETICS_SPORT } });
+  });
+
 type ListEventsInput =
   | {
       sport?: Sport | "All";

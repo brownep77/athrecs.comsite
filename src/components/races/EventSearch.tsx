@@ -1,8 +1,12 @@
 import type { ReactNode } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { FilterChips } from "@/components/races/FilterChips";
+import { listEventRegions } from "@/lib/athrecs/api";
+import type { Sport } from "@/lib/athrecs/types";
 import {
   COUNTRY_GROUPS,
   DEFAULT_SPORT,
+  PREFER_DROPDOWN_FILTERS,
   SPORTS,
   subfilterKeysForSport,
   subfiltersForSport,
@@ -92,6 +96,20 @@ export function EventSearch({
   const publicSports = SPORTS as readonly string[];
   const lockedSport = publicSports.length === 1 ? publicSports[0] : null;
   const showRaceGroups = supportsRaceGroupFilter(value.sport);
+  const regionCountry = fixedCountry ?? value.country;
+  const canChooseRegion = Boolean(regionCountry && regionCountry !== "All");
+  const { data: regionOptions = [], isFetching: regionsLoading } = useQuery({
+    queryKey: ["event-region-options", value.sport, regionCountry],
+    queryFn: () =>
+      listEventRegions({
+        data: {
+          sport: value.sport as Sport | "All",
+          country: regionCountry,
+        },
+      }),
+    enabled: canChooseRegion,
+    staleTime: 5 * 60_000,
+  });
   const clear = () =>
     onChange({
       ...EMPTY_SEARCH,
@@ -149,7 +167,7 @@ export function EventSearch({
           </Field>
         )}
 
-        {value.sport === "All" ? (
+        {value.sport === "All" && subs.length === 0 ? (
           <p className="rounded-lg border border-dashed border-border bg-elevated px-3 py-2.5 text-xs leading-relaxed text-muted">
             Choose one discipline to reveal only its relevant surface, distance or format filters.
           </p>
@@ -163,6 +181,7 @@ export function EventSearch({
                   filter={sub}
                   value={value[sub.key as SubfilterKey]}
                   onChange={(next) => set(sub.key, next)}
+                  preferSelect={PREFER_DROPDOWN_FILTERS}
                 />
               ))}
             </div>
@@ -223,14 +242,30 @@ export function EventSearch({
         )}
 
         <div className={gridClass}>
-          <Field label="Region / county / state">
-            <input
+          <Field label="Area / region">
+            <select
               value={value.county}
               onChange={(event) => set("county", event.target.value)}
-              placeholder="Norfolk, Bavaria, California…"
+              disabled={!canChooseRegion || regionsLoading}
               autoComplete="address-level1"
               className={fieldClass}
-            />
+            >
+              <option value="">
+                {!canChooseRegion
+                  ? "Choose a country first"
+                  : regionsLoading
+                    ? "Loading areas…"
+                    : "All areas / regions"}
+              </option>
+              {value.county && !regionOptions.includes(value.county) ? (
+                <option value={value.county}>{value.county}</option>
+              ) : null}
+              {regionOptions.map((region) => (
+                <option key={region} value={region}>
+                  {region}
+                </option>
+              ))}
+            </select>
           </Field>
           <Field label="City / town">
             <input
@@ -273,7 +308,9 @@ export function EventSearch({
           className="rounded-lg border border-border bg-elevated px-3 py-2.5"
           open={Boolean(value.dateFrom || value.dateTo) || undefined}
         >
-          <summary className="cursor-pointer text-sm font-medium text-fg">Choose exact dates</summary>
+          <summary className="cursor-pointer text-sm font-medium text-fg">
+            Choose exact dates
+          </summary>
           <div className={`${gridClass} mt-3`}>
             <Field label="From date">
               <input
@@ -311,9 +348,11 @@ export function EventSearch({
 
       <div className="border-t border-border pt-4">
         <p className="text-[11px] leading-relaxed text-subtle">
-          {value.sport === "All"
+          {value.sport === "All" && subs.length === 0
             ? "Select a discipline for a cleaner, tailored search."
-            : `Only filters relevant to ${value.sport.toLowerCase()} are applied.`}
+            : value.sport === "All"
+              ? "Running and parkrun filters are applied together."
+              : `Only filters relevant to ${value.sport.toLowerCase()} are applied.`}
         </p>
         {onDone ? (
           <button
@@ -349,12 +388,14 @@ function DisciplineFilter({
   filter,
   value,
   onChange,
+  preferSelect,
 }: {
   filter: SubfilterDef;
   value: string;
   onChange: (next: string) => void;
+  preferSelect?: boolean;
 }) {
-  if (filter.options.length <= 7) {
+  if (!preferSelect && filter.options.length <= 7) {
     return (
       <FilterChips
         label={filter.label}
@@ -368,7 +409,11 @@ function DisciplineFilter({
 
   return (
     <Field label={filter.label}>
-      <select value={value} onChange={(event) => onChange(event.target.value)} className={fieldClass}>
+      <select
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className={fieldClass}
+      >
         {filter.options.map((option) => (
           <option key={option} value={option}>
             {option === "All" ? `Any ${filter.label.toLowerCase()}` : option}
@@ -392,8 +437,7 @@ export function searchToApi(value: EventSearchValues) {
   const supported = subfilterKeysForSport(value.sport);
   return {
     q: value.q || undefined,
-    sport:
-      value.sport === "All" || value.sport === DEFAULT_SPORT ? undefined : value.sport,
+    sport: value.sport === "All" || value.sport === DEFAULT_SPORT ? undefined : value.sport,
     country: value.country === "All" ? undefined : value.country,
     county: value.county || undefined,
     city: value.city || undefined,
@@ -401,12 +445,10 @@ export function searchToApi(value: EventSearchValues) {
     month: value.month || undefined,
     dateFrom: value.dateFrom || undefined,
     dateTo: value.dateTo || undefined,
-    distance:
-      supported.has("distance") && value.distance !== "All" ? value.distance : undefined,
+    distance: supported.has("distance") && value.distance !== "All" ? value.distance : undefined,
     surface: supported.has("surface") && value.surface !== "All" ? value.surface : undefined,
     format: supported.has("format") && value.format !== "All" ? value.format : undefined,
-    group:
-      supportsRaceGroupFilter(value.sport) && value.group !== "All" ? value.group : undefined,
+    group: supportsRaceGroupFilter(value.sport) && value.group !== "All" ? value.group : undefined,
   };
 }
 
@@ -416,7 +458,8 @@ export function countActiveSearchFilters(
 ): number {
   const api = searchToApi(value);
   return Object.entries(api).filter(
-    ([key, filterValue]) => filterValue !== undefined && !(options.ignoreCountry && key === "country"),
+    ([key, filterValue]) =>
+      filterValue !== undefined && !(options.ignoreCountry && key === "country"),
   ).length;
 }
 

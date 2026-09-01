@@ -39,25 +39,11 @@ export const DISTANCE_FILTERS = [
   "Other",
 ] as const;
 
-export const TERRAIN_FILTERS = [
-  "All",
-  "Road",
-  "Trail",
-  "Mixed",
-  "Fell",
-  "Track",
-  "XC",
-] as const;
+export const TERRAIN_FILTERS = ["All", "Road", "Trail", "Mixed", "Fell", "Track", "XC"] as const;
 
 export { COUNTRY_FILTERS, COUNTRY_GROUPS, PARKRUN_COUNTRY_SHORTCUTS } from "./countries";
 
-export const SWIM_DISTANCE_FILTERS = [
-  "All",
-  "1K",
-  "5K",
-  "10K",
-  "Other",
-] as const;
+export const SWIM_DISTANCE_FILTERS = ["All", "1K", "5K", "10K", "Other"] as const;
 
 export const FORMAT_FILTERS = [
   "All",
@@ -87,6 +73,9 @@ export const SPORTS = [
 ] as const;
 
 export const DEFAULT_SPORT = "All" as const;
+
+/** Specialist sites may prefer compact selects for their primary filters. */
+export const PREFER_DROPDOWN_FILTERS = false;
 
 export type SubfilterKey = "distance" | "surface" | "format";
 
@@ -176,7 +165,11 @@ export function upcomingMonths(count = 17): { value: string; label: string }[] {
   for (let i = 0; i < count; i += 1) {
     const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + i, 1));
     const value = d.toISOString().slice(0, 7);
-    const label = d.toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
+    const label = d.toLocaleDateString("en-GB", {
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    });
     items.push({ value, label });
   }
   return items;
@@ -250,7 +243,9 @@ export function matchesFormatFilter(name: string, format?: string | null): boole
   if (format === "Standard") return /\b(standard|olympic)\b/.test(n);
   if (format === "Middle") return /70\.3|middle[\s-]*distance|half[\s-]*iron/.test(n);
   if (format === "Iron") {
-    return /\b(ironman|iron[\s-]*distance|full[\s-]*iron)\b/.test(n) && !/70\.3|half[\s-]*iron/.test(n);
+    return (
+      /\b(ironman|iron[\s-]*distance|full[\s-]*iron)\b/.test(n) && !/70\.3|half[\s-]*iron/.test(n)
+    );
   }
   return true;
 }

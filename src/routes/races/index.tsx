@@ -168,8 +168,8 @@ function EventsPage() {
         <div className="space-y-2">
           <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Events</h1>
           <p className="max-w-2xl text-sm text-muted">
-            Search athletics meetings and championships by surface, distance, country, region,
-            city or date. Every selection remains shareable in the page address.
+            Search events by country, area or region, distance, surface, city or date. Every
+            selection remains shareable in the page address.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
