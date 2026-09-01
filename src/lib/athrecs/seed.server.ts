@@ -1,4 +1,4 @@
-import { getSql } from "@/lib/db";
+import { dbSource, getSql } from "@/lib/db";
 import {
   athletes as athleteSeeds,
   catalogueMetadata,
@@ -23,6 +23,7 @@ const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v27
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v3";
 const EXPECTED = catalogueMetadata.merged_counts;
+const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
 type GlobalSeedState = typeof globalThis & {
@@ -1513,8 +1514,30 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
   );
 }
 
-async function seed(): Promise<void> {
-  const sql = await getSql();
+async function catalogueMarkersCurrent(sql: Sql): Promise<boolean> {
+  const expected = new Map([
+    ["seed_version", SEED_VERSION],
+    ["clubs_catalogue_version", SEED_VERSION],
+    ["fixtures_catalogue_version", SEED_VERSION],
+    ["public_figures_catalogue_version", PUBLIC_FIGURE_SEED_VERSION],
+    ["parkrun_through", "2027-12-26"],
+    ["athletics_taxonomy_v1", "complete"],
+  ]);
+  const rows = await sql<{ key: string; value: string }>`
+    select key, value from app_meta
+    where key in (
+      'seed_version',
+      'clubs_catalogue_version',
+      'fixtures_catalogue_version',
+      'public_figures_catalogue_version',
+      'parkrun_through',
+      'athletics_taxonomy_v1'
+    )
+  `;
+  return rows.length === expected.size && rows.every((row) => expected.get(row.key) === row.value);
+}
+
+async function seedCatalogue(sql: Sql): Promise<void> {
   await ensureSchema(sql);
   await ensureAthleticsTaxonomy(sql);
 
@@ -1954,6 +1977,29 @@ async function seed(): Promise<void> {
   if (!(await alreadySeeded(sql))) {
     throw new Error("Catalogue seed verification failed after writing the seed marker");
   }
+}
+
+async function seed(): Promise<void> {
+  const sql = await getSql();
+
+  // Production migrations create app_meta before a deployment can serve traffic.
+  // The marker-only fast path keeps normal cold starts read-only and avoids
+  // serializing every serverless instance after a catalogue is current.
+  if (dbSource === "neon" && (await catalogueMarkersCurrent(sql))) return;
+
+  if (dbSource === "neon") {
+    await sql.transaction(async (tx) => {
+      // Catalogue versions can change while old and new serverless instances are
+      // live together. A database-wide transaction lock prevents their event and
+      // edition upserts from deadlocking one another.
+      await tx.query("select pg_advisory_xact_lock($1)", [CATALOGUE_SEED_LOCK_ID]);
+      if (await catalogueMarkersCurrent(tx)) return;
+      await seedCatalogue(tx);
+    });
+    return;
+  }
+
+  await seedCatalogue(sql);
 }
 
 export function ensureAthrecsSeeded(): Promise<void> {
