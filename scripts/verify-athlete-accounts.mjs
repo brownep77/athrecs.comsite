@@ -32,6 +32,18 @@ assert.notEqual(staffStart, -1);
 assert.match(api.slice(staffStart), /middleware\(\[staffMiddleware\]\)/);
 assert.match(api, /lower\("email"\) as email/, "verified email must be loaded from Better Auth");
 assert.match(api, /privacyAcknowledged !== true/, "privacy acknowledgement must be validated");
+assert.match(api, /ensureDevPreviewAthleteAccount/);
+assert.match(api, /dbSource === "pglite" && userId === "dev-user"/);
+
+const seed = await readFile(resolve(root, "src/lib/athrecs/seed.server.ts"), "utf8");
+assert.match(seed, /DEV_PREVIEW_ATHLETE_SLUG = "paul-browne"/);
+const previewStart = seed.indexOf("export async function ensureDevPreviewAthleteAccount");
+assert.notEqual(previewStart, -1, "preview athlete account seed must exist");
+const previewFn = seed.slice(previewStart, previewStart + 1800);
+assert.match(previewFn, /if \(dbSource !== "pglite"\) return/);
+assert.match(previewFn, /DEV_PREVIEW_ATHLETE_SLUG/);
+assert.doesNotMatch(previewFn, /DATABASE_URL/);
+
 assert.match(accountRoute, /Full name/);
 assert.match(accountRoute, /Verified email/);
 assert.match(accountRoute, /Sports nutrition/);

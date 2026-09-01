@@ -1,8 +1,8 @@
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
-import { getSql } from "@/lib/db";
-import { ensureAthrecsSeeded } from "./seed.server";
+import { getSql, dbSource } from "@/lib/db";
+import { ensureAthrecsSeeded, ensureDevPreviewAthleteAccount } from "./seed.server";
 
 export const ATHLETE_PRIVACY_VERSION = "athlete-account-2026-08-23";
 
@@ -515,6 +515,9 @@ function safeImageUrl(value: string | null): string {
 }
 
 async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: string) {
+  if (dbSource === "pglite" && userId === "dev-user") {
+    await ensureDevPreviewAthleteAccount(sql);
+  }
   const users = await sql<UserRow>`
     select
       "id" as id,
