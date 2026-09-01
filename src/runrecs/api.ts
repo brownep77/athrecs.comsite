@@ -38,13 +38,60 @@ export const listEventRegions = createServerFn({ method: "GET" })
   .validator((input: EventRegionInput) => input ?? {})
   .handler(async ({ data }) => {
     if (data.sport && data.sport !== "All" && !isRunRecsSport(data.sport)) return [];
-    const sports: Array<"Running" | "Parkrun"> = isRunRecsSport(data.sport)
-      ? [data.sport]
-      : ["Running", "Parkrun"];
-    const sets = await Promise.all(
-      sports.map((sport) => base.listEventRegions({ data: { ...data, sport } })),
-    );
-    return [...new Set(sets.flat())].sort((left, right) => left.localeCompare(right, "en"));
+    const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
+    if (!country) return [];
+
+    // Query here instead of invoking the shared createServerFn from another
+    // createServerFn. Nested RPC wrappers return an empty payload in the
+    // deployed specialist runtime, while a direct query preserves the exact
+    // Running/Parkrun public boundary and supplies the catalogue choices.
+    const sql = await ready();
+    const requestedSport = isRunRecsSport(data.sport) ? data.sport : null;
+    const rows = await sql<{
+      slug: string;
+      name: string;
+      country: string;
+      region: string | null;
+      county: string;
+      city: string;
+      area: string;
+    }>`
+      select e.slug, e.name, e.country, e.region, e.county, e.city, e.area
+      from events e
+      where e.sport in ('Running', 'Parkrun')
+        and (${requestedSport}::text is null or e.sport = ${requestedSport})
+        and (
+          lower(coalesce(e.country, '')) = lower(${country})
+          or lower(coalesce(e.county, '')) = lower(${country})
+          or (
+            ${country} in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland')
+            and lower(coalesce(e.country, '')) in (
+              'united kingdom', 'england', 'scotland', 'wales', 'northern ireland', 'uk', 'gb'
+            )
+          )
+        )
+      order by e.region nulls last, e.county, e.city
+    `;
+    const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
+    const choices = rows
+      .filter((row) =>
+        countryMatchesFilter(
+          resolveCountry({
+            slug: row.slug,
+            name: row.name,
+            country: row.country,
+            county: row.county,
+            city: row.city,
+            area: row.area,
+          }),
+          country,
+        ),
+      )
+      .map((row) => row.region?.trim() || row.county?.trim())
+      .filter((value): value is string => Boolean(value))
+      .filter((value) => value.toLowerCase() !== country.toLowerCase());
+
+    return [...new Set(choices)].sort((left, right) => left.localeCompare(right, "en"));
   });
 
 function parseRaceGroups(value: unknown): RaceGroupInfo[] {
