@@ -18,6 +18,7 @@ import { readdir, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import pg from "pg";
+import { postgresConnectionConfig } from "../src/lib/postgres-connection.js";
 
 const strictMigrations =
   process.env.MIGRATIONS_STRICT === "true" ||
@@ -44,15 +45,10 @@ const migrationsDir = join(
 );
 
 function poolConfig(url) {
-  const needsSsl =
-    /neon\.tech|sslmode=require|ssl=true|amazonaws\.com/i.test(url) ||
-    process.env.PGSSLMODE === "require";
-  return {
-    connectionString: url,
+  return postgresConnectionConfig(url, {
     max: 1,
     connectionTimeoutMillis: 30_000,
-    ...(needsSsl ? { ssl: { rejectUnauthorized: false } } : {}),
-  };
+  });
 }
 
 function isTransientDbError(err) {
