@@ -1,6 +1,12 @@
 /** Original ATHRECS meeting briefs for spectators. Facts only — never copy official guides. */
 
-import { TRACK_FIELD_EVENTS } from "./filters";
+import {
+  FIELD_EVENTS,
+  TRACK_EVENTS,
+  TRACK_FIELD_EVENTS,
+  isFieldOnlyMeeting,
+  isTrackOnlyMeeting,
+} from "./filters";
 import type { EventListItem } from "./types";
 
 export type EliteTier = "world" | "continental" | "national" | "regional";
@@ -33,8 +39,6 @@ const NATIONAL_HINT =
 const LISTING_HOST =
   /worldathletics\.org\/competition\/calendar-results|worldathletics\.org\/competitions/i;
 
-const FULL_TRACK_FIELD_PROGRAMME = [...TRACK_FIELD_EVENTS];
-
 export function classifyEliteTier(input: {
   name: string;
   slug?: string | null;
@@ -51,7 +55,7 @@ export const eliteTier = classifyEliteTier;
 
 export function circuitLabel(name: string): string | null {
   if (/diamond league/i.test(name)) return "Diamond League";
-  if (/continental tour[^\n]*gold/i.test(name) || /\bgold\b/i.test(name) && /continental tour/i.test(name)) {
+  if (/continental tour[^\n]*gold/i.test(name) || (/\bgold\b/i.test(name) && /continental tour/i.test(name))) {
     return "Continental Tour Gold";
   }
   if (/continental tour[^\n]*silver/i.test(name)) return "Continental Tour Silver";
@@ -82,14 +86,7 @@ export function inferMeetingEvents(
   };
 
   if (/jump/.test(n) && /throw/.test(n)) {
-    add("High jump");
-    add("Long jump");
-    add("Triple jump");
-    add("Pole vault");
-    add("Shot put");
-    add("Discus");
-    add("Hammer");
-    add("Javelin");
+    for (const event of FIELD_EVENTS) add(event);
   } else {
     if (/high jump/.test(n)) add("High jump");
     if (/long jump/.test(n)) add("Long jump");
@@ -138,10 +135,6 @@ export function inferMeetingEvents(
     add("200m");
     add("400m");
   }
-  if (/800m|1500m|mile|3000m|5000m|10,?000m|middle[- ]distance/.test(n)) {
-    if (!found.includes("800m") && /800|middle/.test(n)) add("800m");
-    if (!found.includes("1500m") && /1500|middle/.test(n)) add("1500m");
-  }
   if (/mixed/.test(n) && /relay|4\s*[x×]\s*400/.test(n)) add("Mixed 4x400m");
   if (/4\s*[x×]\s*100/.test(n)) add("4x100m");
   if (/4\s*[x×]\s*400/.test(n) && !found.includes("Mixed 4x400m")) add("4x400m");
@@ -151,6 +144,7 @@ export function inferMeetingEvents(
   }
   if (/heptathlon/.test(n)) add("Heptathlon");
   if (/decathlon/.test(n)) add("Decathlon");
+  if (/pentathlon/.test(n)) add("Pentathlon");
   if (/combined/.test(n)) {
     add("Heptathlon");
     add("Decathlon");
@@ -161,7 +155,7 @@ export function inferMeetingEvents(
 
   for (const distance of distances) {
     const d = distance.trim();
-    if (!d || d === "Track & field" || d === "Athletics") continue;
+    if (!d || d === "Track & field" || d === "Athletics" || d === "Track" || d === "Field") continue;
     if ((TRACK_FIELD_EVENTS as readonly string[]).includes(d)) add(d);
     else if (found.length < 20) add(d);
   }
@@ -170,7 +164,9 @@ export function inferMeetingEvents(
 
   if (surfaceKey === "xc") return ["Cross country"];
   if (surfaceKey === "road") return ["Road races"];
-  return FULL_TRACK_FIELD_PROGRAMME;
+  if (isFieldOnlyMeeting(name)) return [...FIELD_EVENTS];
+  if (isTrackOnlyMeeting(name)) return [...TRACK_EVENTS];
+  return [...TRACK_FIELD_EVENTS];
 }
 
 function placeLine(city?: string | null, country?: string | null): string {
@@ -187,6 +183,13 @@ function formatShortDate(iso?: string | null): string | null {
     month: "short",
     timeZone: "UTC",
   });
+}
+
+function meetingKindLabel(name: string, surface?: string | null): string {
+  if (isFieldOnlyMeeting(name)) return "field";
+  if (isTrackOnlyMeeting(name)) return "track";
+  if (surface && surface !== "Other") return surface.toLowerCase();
+  return "athletics";
 }
 
 export function meetingBriefLines(event: {
@@ -206,8 +209,7 @@ export function meetingBriefLines(event: {
   const circuit = circuitLabel(event.name);
   const programme = inferMeetingEvents(event.name, event.surface, event.distances ?? []);
   const programmeText = programme.slice(0, 8).join(", ");
-  const surface =
-    event.surface && event.surface !== "Other" ? event.surface.toLowerCase() : "track and field";
+  const kind = meetingKindLabel(event.name, event.surface);
 
   const line1 = circuit
     ? `${event.name} is a ${circuit} meeting${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`
@@ -217,12 +219,16 @@ export function meetingBriefLines(event: {
         ? `${event.name} is a continental athletics fixture${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`
         : tier === "national"
           ? `${event.name} is a national athletics meeting${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`
-          : `${event.name} is a ${surface} meeting${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`;
+          : `${event.name} is a ${kind} meeting${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`;
 
   const line2 =
     programme.length === 1
       ? `On the programme: ${programme[0]}. Local spectators can follow the timetable from the stands — no entry bib required.`
-      : `Events in the meeting include ${programmeText}. Check the spectator link for tickets, gates and the live timetable.`;
+      : isFieldOnlyMeeting(event.name)
+        ? `Field events in the meeting include ${programmeText}. Check the spectator link for tickets, gates and the live timetable.`
+        : isTrackOnlyMeeting(event.name)
+          ? `Track events in the meeting include ${programmeText}. Check the spectator link for tickets, gates and the live timetable.`
+          : `Events in the meeting include ${programmeText}. Check the spectator link for tickets, gates and the live timetable.`;
 
   return [line1, line2];
 }
@@ -267,8 +273,11 @@ export function spectatorChecklist(event: {
   next_date?: string | null;
 }): string[] {
   const place = placeLine(event.city, event.country);
+  const first = isFieldOnlyMeeting(event.name)
+    ? "arrive before the first jump or throw, not just the headline contest"
+    : "arrive before the first track event, not just the headline race";
   return [
-    place ? `Travel plan to ${place} — arrive before the first track event, not just the headline race` : "Travel plan to the stadium with time to spare before the first event",
+    place ? `Travel plan to ${place} — ${first}` : "Travel plan to the venue with time to spare before the first event",
     "Tickets or gate information from the spectator link — club meetings are often free",
     "Timetable for the session you want to watch; athletics is a rolling programme, not a mass start",
     "Weather and seating: evening floodlit meetings can run late, daytime championships can be long",
