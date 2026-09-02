@@ -41,8 +41,8 @@ export const DISTANCE_FILTERS = [
 
 export const TERRAIN_FILTERS = ["All", "Road", "Trail", "Mixed", "Fell", "Track", "XC"] as const;
 
-/** World Athletics outdoor + indoor programme used on ATHRECS filters and briefs. */
-export const TRACK_FIELD_EVENTS = [
+/** Running events contested on the oval or indoor track. */
+export const TRACK_EVENTS = [
   "100m",
   "200m",
   "400m",
@@ -61,6 +61,11 @@ export const TRACK_FIELD_EVENTS = [
   "4x100m",
   "4x400m",
   "Mixed 4x400m",
+  "Race walk",
+] as const;
+
+/** Jumps and throws contested in the infield or on a field-only programme. */
+export const FIELD_EVENTS = [
   "High jump",
   "Pole vault",
   "Long jump",
@@ -69,14 +74,25 @@ export const TRACK_FIELD_EVENTS = [
   "Discus",
   "Hammer",
   "Javelin",
-  "Heptathlon",
-  "Decathlon",
-  "Race walk",
 ] as const;
+
+/** Multi-event competitions that use both track and field. */
+export const COMBINED_EVENTS = ["Heptathlon", "Decathlon", "Pentathlon"] as const;
+
+/** Full World Athletics outdoor + indoor programme. */
+export const TRACK_FIELD_EVENTS = [...TRACK_EVENTS, ...FIELD_EVENTS, ...COMBINED_EVENTS] as const;
 
 export const ATHLETICS_SURFACE_FILTERS = ["All", "Track", "Indoor", "Road", "XC"] as const;
 
-export const ATHLETICS_EVENT_FILTERS = ["All", "Track & field", ...TRACK_FIELD_EVENTS] as const;
+export const ATHLETICS_EVENT_FILTERS = [
+  "All",
+  "Track",
+  "Field",
+  "Combined events",
+  ...TRACK_EVENTS,
+  ...FIELD_EVENTS,
+  ...COMBINED_EVENTS,
+] as const;
 
 export { COUNTRY_FILTERS, COUNTRY_GROUPS, PARKRUN_COUNTRY_SHORTCUTS } from "./countries";
 
@@ -135,7 +151,7 @@ const ATHLETICS_SUBFILTERS: SubfilterDef[] = [
   },
   {
     key: "distance",
-    label: "Track & field event",
+    label: "Track or field event",
     options: ATHLETICS_EVENT_FILTERS,
   },
 ];
@@ -263,7 +279,15 @@ export function sanitizeDistances(name: string, distances: string[]): string[] {
   return codes.filter((code) => code !== "Marathon");
 }
 
-const TRACK_FIELD_DISTANCE_CODES = new Set(["Track & field", "Athletics", "Other"]);
+const TRACK_FIELD_DISTANCE_CODES = new Set(["Track & field", "Athletics", "Other", "Track", "Field"]);
+
+const FIELD_ONLY_NAME =
+  /jumps? and throws?|throws? fest|throws memorial|last ditch throws|long throws|hammerwurf|pole vault|high jump meeting|jump(?:s)? meeting|throw(?:s)? meeting|vault gala|vault in the/i;
+
+const TRACK_ONLY_NAME =
+  /sprint night|hurdles night|distance night|track night|relay gala|middle[- ]distance/i;
+
+const COMBINED_NAME = /heptathlon|decathlon|pentathlon|combined events?/i;
 
 function isGeneralTrackFieldMeeting(name: string, distances: string[]): boolean {
   const blob = `${name} ${distances.join(" ")}`.toLowerCase();
@@ -273,15 +297,36 @@ function isGeneralTrackFieldMeeting(name: string, distances: string[]): boolean 
   );
 }
 
+export function isFieldOnlyMeeting(name: string): boolean {
+  const n = name.toLowerCase();
+  if (/cross[- ]country|\bxc\b|road race|half marathon|\bmarathon\b/.test(n)) return false;
+  if (FIELD_ONLY_NAME.test(name) && !/\b(100m|200m|400m|800m|hurdle|sprint|relay)\b/.test(n)) {
+    return true;
+  }
+  return /\bjumps?\b|\bthrows?\b|\bvault\b/.test(n) && !/\btrack\b|sprint|hurdle|800m|1500m/.test(n);
+}
+
+export function isTrackOnlyMeeting(name: string): boolean {
+  if (isFieldOnlyMeeting(name)) return false;
+  const n = name.toLowerCase();
+  return TRACK_ONLY_NAME.test(n) && !/jump|throw|vault|shot|discus|hammer|javelin/.test(n);
+}
+
 function specialistExcludesEvent(name: string, filter: string): boolean {
   const n = name.toLowerCase();
   const f = filter.toLowerCase();
   const isJump = /high jump|pole vault|long jump|triple jump/.test(f);
   const isThrow = /shot put|discus|hammer|javelin/.test(f);
   const isWalk = f === "race walk";
-  const isCombined = /heptathlon|decathlon/.test(f);
+  const isCombined = /heptathlon|decathlon|pentathlon/.test(f);
+  const isFieldGroup = f === "field";
+  const isTrackGroup = f === "track";
   if (/\bcross[- ]country|\bxc\b/.test(n) && !isWalk) return true;
-  if (/\brace\s*walk|\bwalks?\b/.test(n) && !/road/.test(n) && !isWalk) return true;
+  if (/\brace\s*walk|\bwalks?\b/.test(n) && !/road/.test(n) && !isWalk && !isTrackGroup) return true;
+  if (isFieldOnlyMeeting(name) && (isTrackGroup || isWalk || isCombined || (TRACK_EVENTS as readonly string[]).includes(filter))) {
+    return true;
+  }
+  if (isTrackOnlyMeeting(name) && (isFieldGroup || isJump || isThrow || isCombined)) return true;
   if (/\bjumps?\b/.test(n) && !/throw/.test(n) && (isThrow || isWalk || isCombined)) return true;
   if (/\bthrows?\b/.test(n) && !/jump/.test(n) && (isJump || isWalk || isCombined)) return true;
   return false;
@@ -290,15 +335,37 @@ function specialistExcludesEvent(name: string, filter: string): boolean {
 function nameMentionsTrackFieldEvent(name: string, filter: string): boolean {
   const n = name.toLowerCase();
   const f = filter.toLowerCase();
-  if (f === "track & field") {
-    return /track\s*&?\s*field|athletics/.test(n);
-  }
+  if (f === "field") return isFieldOnlyMeeting(name) || /jump|throw|vault|shot|discus|hammer|javelin|\bfield\b/.test(n);
+  if (f === "track") return /\btrack\b|sprint|hurdle|steeple|relay|\d+m|race walk/.test(n);
+  if (f === "combined events") return COMBINED_NAME.test(n);
   const compact = f.replace(/\s+/g, "\\s*");
   try {
     return new RegExp(compact.replace("4x", "4\\s*[x×]")).test(n);
   } catch {
     return n.includes(f);
   }
+}
+
+function matchesAthleticsGroup(name: string, distances: string[], filter: string): boolean {
+  if (filter === "Field") {
+    if (isFieldOnlyMeeting(name)) return true;
+    if (isTrackOnlyMeeting(name)) return false;
+    if (distances.some((code) => (FIELD_EVENTS as readonly string[]).includes(code))) return true;
+    if (nameMentionsTrackFieldEvent(name, "Field")) return true;
+    return isGeneralTrackFieldMeeting(name, distances);
+  }
+  if (filter === "Track") {
+    if (isTrackOnlyMeeting(name)) return true;
+    if (isFieldOnlyMeeting(name)) return false;
+    if (distances.some((code) => (TRACK_EVENTS as readonly string[]).includes(code))) return true;
+    if (nameMentionsTrackFieldEvent(name, "Track")) return true;
+    return isGeneralTrackFieldMeeting(name, distances);
+  }
+  if (filter === "Combined events") {
+    if (distances.some((code) => (COMBINED_EVENTS as readonly string[]).includes(code))) return true;
+    return COMBINED_NAME.test(name);
+  }
+  return false;
 }
 
 export function matchesDistanceFilter(
@@ -313,6 +380,9 @@ export function matchesDistanceFilter(
   if (filter === "Ultra") return codes.includes("Ultra") || nameHasUltra(name);
   if (codes.includes(filter)) return true;
   if (!(ATHLETICS_EVENT_FILTERS as readonly string[]).includes(filter)) return false;
+  if (filter === "Track" || filter === "Field" || filter === "Combined events") {
+    return matchesAthleticsGroup(name, codes, filter);
+  }
   if (nameMentionsTrackFieldEvent(name, filter)) return true;
   if (specialistExcludesEvent(name, filter)) return false;
   return isGeneralTrackFieldMeeting(name, codes);
