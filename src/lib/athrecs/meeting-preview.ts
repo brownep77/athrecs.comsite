@@ -1,230 +1,244 @@
-/** Original ATHRECS meeting previews for homepage and country cards.
- *  Facts only — never copy official programmes or ticket pages.
- */
+/** Original ATHRECS meeting briefs for spectators. Facts only — never copy official guides. */
 
-import { eventSourceOf } from "./race-briefing";
 import type { EventListItem } from "./types";
 
-export type MeetingTier = "world" | "continental" | "national" | "regional";
+export type EliteTier = "world" | "continental" | "national" | "regional";
+
+export type SpectatorLinkKind = "tickets" | "official" | "listing" | "venue";
 
 export type SpectatorLink = {
   href: string;
   label: string;
-  kind: "organiser" | "official-listing" | "event-page";
+  kind: SpectatorLinkKind;
 };
 
 export type MeetingPreview = {
-  tier: MeetingTier;
+  tier: EliteTier;
+  circuit: string | null;
   lines: [string, string];
-  programme: string[];
+  events: string[];
   spectator: SpectatorLink;
-  attendanceHook: string;
 };
 
-const WORLD_PATTERNS =
-  /\b(diamond league|weltklasse|memorial van damme|athletissima|golden gala|herculis|bislett|prefottane|stockholm bauhaus|london athletics meet|doha diamond|xiamen diamond|shanghai diamond|rabat diamond|rome diamond|oslo diamond|ultimate championship|world athletics championships|world indoor championships|world relays|world cross country|world road running|olympic)\b/i;
+const WORLD_HINT =
+  /\b(diamond league|world athletics|world indoor|world relays|world cross|world road|ultimate championship|olympic|paralympic|world championships?)\b/i;
 
-const CONTINENTAL_PATTERNS =
-  /\b(continental tour|istaf|golden spike|fbk games|kip keino|paavo nurmi|gyulai|han\u017eekovi\u0107|hanzekovic|irena szewi\u0144ska|kusoci\u0144ski|kusocinski|palio citt\u00e0 della quercia|athlos|european athletics|african athletics|asian athletics|nacac|oceania athletics|consudatle|south american championships|area championships|area senior)\b/i;
+const CONTINENTAL_HINT =
+  /\b(european athletics|european championships?|european team|african championships?|asian championships?|asian games|pan american|nacac|oceania championships?|continental tour|area championships?)\b/i;
 
-const NATIONAL_PATTERNS =
-  /\b(national championships?|nationals|campeonato nacional|campionati italiani|deutsche meisterschaften|uk athletics|british championships|aaa championships|indian athletics|copa nacional)\b/i;
+const NATIONAL_HINT =
+  /\b(national championships?|national series|nationales?|campeonato nacional|meisterschaften|campionati nazionali|kampioenschap|nationals)\b/i;
 
-export function classifyMeetingTier(input: {
+const LISTING_HOST =
+  /worldathletics\.org\/competition\/calendar-results|worldathletics\.org\/competitions/i;
+
+export function classifyEliteTier(input: {
   name: string;
-  slug?: string;
-  surface?: string | null;
-  groups?: Array<{ label?: string; code?: string }>;
-}): MeetingTier {
-  const hay = `${input.name} ${input.slug ?? ""} ${(input.groups ?? [])
-    .map((group) => `${group.label ?? ""} ${group.code ?? ""}`)
-    .join(" ")}`;
-  if (WORLD_PATTERNS.test(hay) || /diamond/i.test(hay)) return "world";
-  if (CONTINENTAL_PATTERNS.test(hay) || /\b(gold|silver|bronze) (level|tour)\b/i.test(hay)) {
-    return "continental";
-  }
-  if (NATIONAL_PATTERNS.test(hay)) return "national";
+  slug?: string | null;
+  organiser?: string | null;
+}): EliteTier {
+  const blob = `${input.name} ${input.slug ?? ""} ${input.organiser ?? ""}`;
+  if (WORLD_HINT.test(blob)) return "world";
+  if (CONTINENTAL_HINT.test(blob)) return "continental";
+  if (NATIONAL_HINT.test(blob)) return "national";
   return "regional";
 }
 
-export function inferMeetingProgramme(input: {
-  name: string;
-  surface?: string | null;
-  distances?: string[] | null;
-  summary?: string | null;
-}): string[] {
-  const hay = `${input.name} ${input.surface ?? ""} ${(input.distances ?? []).join(" ")} ${input.summary ?? ""}`.toLowerCase();
-  const items: string[] = [];
+export const eliteTier = classifyEliteTier;
+
+export function circuitLabel(name: string): string | null {
+  if (/diamond league/i.test(name)) return "Diamond League";
+  if (/continental tour[^\n]*gold/i.test(name) || /\bgold\b/i.test(name) && /continental tour/i.test(name)) {
+    return "Continental Tour Gold";
+  }
+  if (/continental tour[^\n]*silver/i.test(name)) return "Continental Tour Silver";
+  if (/continental tour[^\n]*bronze/i.test(name)) return "Continental Tour Bronze";
+  if (/continental tour/i.test(name)) return "Continental Tour";
+  if (/world indoor/i.test(name)) return "World Athletics Indoor";
+  if (/world relays/i.test(name)) return "World Athletics Relays";
+  if (/ultimate championship/i.test(name)) return "World Athletics Ultimate Championship";
+  if (/european athletics|european championships?/i.test(name)) return "European Athletics";
+  if (/african championships?/i.test(name)) return "African Athletics";
+  if (/asian championships?|asian games/i.test(name)) return "Asian Athletics";
+  if (/pan american/i.test(name)) return "Pan American Athletics";
+  if (/nacac/i.test(name)) return "NACAC Athletics";
+  if (/oceania championships?/i.test(name)) return "Oceania Athletics";
+  return null;
+}
+
+export function inferMeetingEvents(
+  name: string,
+  surface?: string | null,
+  distances: string[] = [],
+): string[] {
+  const n = name.toLowerCase();
+  const surfaceKey = (surface || "").toLowerCase();
+  const found: string[] = [];
   const add = (label: string) => {
-    if (!items.includes(label)) items.push(label);
+    if (!found.includes(label)) found.push(label);
   };
 
-  if (/\b(cross[- ]country|xc)\b/.test(hay)) add("Cross country");
-  if (/\b(race ?walk|walk)\b/.test(hay)) add("Race walk");
-  if (/\b(marathon|half marathon|10k|5k|road)\b/.test(hay) && !/track/.test(hay)) add("Road race");
-  if (/\b(heptathlon|decathlon|combined)\b/.test(hay)) add("Combined events");
-  if (/\b(4\s*[x×]\s*100|4\s*[x×]\s*400|relay)\b/.test(hay)) add("Relays");
-  if (/\b(100|200|400|sprint|dash|flutlicht|night of athletics)\b/.test(hay)) add("Sprints");
-  if (/\b(800|1500|mile|3000|5000|10000|distance)\b/.test(hay)) add("Middle / long distance");
-  if (/\b(hurdle|steeple)\b/.test(hay)) add("Hurdles / steeplechase");
-  if (/\b(high jump|pole vault|long jump|triple jump|jump)\b/.test(hay)) add("Jumps");
-  if (/\b(shot|discus|hammer|javelin|throw|heitjate)\b/.test(hay)) add("Throws");
-  if (/\b(pole vault|tyczka|asta)\b/.test(hay)) add("Pole vault");
-  if (/\b(high jump|hochsprung)\b/.test(hay)) add("High jump");
-
-  for (const distance of input.distances ?? []) {
-    const clean = distance.trim();
-    if (clean && clean !== "Track & field" && clean !== "Other" && !items.includes(clean)) {
-      add(clean);
+  if (/jump/.test(n) && /throw/.test(n)) {
+    add("High jump");
+    add("Long jump");
+    add("Triple jump");
+    add("Pole vault");
+    add("Shot put");
+    add("Discus");
+    add("Hammer");
+    add("Javelin");
+  } else {
+    if (/high jump/.test(n)) add("High jump");
+    if (/long jump/.test(n)) add("Long jump");
+    if (/triple jump/.test(n)) add("Triple jump");
+    if (/pole vault/.test(n)) add("Pole vault");
+    if (/shot/.test(n)) add("Shot put");
+    if (/discus/.test(n)) add("Discus");
+    if (/hammer/.test(n)) add("Hammer");
+    if (/javelin/.test(n)) add("Javelin");
+    if (/\bjumps?\b/.test(n)) {
+      add("High jump");
+      add("Long jump");
+      add("Triple jump");
+    }
+    if (/\bthrows?\b/.test(n)) {
+      add("Shot put");
+      add("Discus");
+      add("Javelin");
     }
   }
 
-  if (!items.length) {
-    if (/\bxc\b|cross/.test(hay)) return ["Cross country"];
-    if ((input.surface ?? "").toLowerCase() === "road") return ["Road athletics"];
-    return ["Sprints", "Hurdles", "Jumps", "Throws"];
+  if (/hurdle/.test(n)) add("Hurdles");
+  if (/sprint|100m|200m|400m/.test(n)) add("Sprints");
+  if (/800m|1500m|mile|3000m|5000m|10,?000m|middle[- ]distance/.test(n)) add("Middle distance");
+  if (/relay/.test(n)) add("Relays");
+  if (/heptathlon|decathlon|combined/.test(n)) add("Combined events");
+  if (/race\s*walk|walk/.test(n) && !/sidewalk/.test(n)) add("Race walk");
+  if (/cross[- ]country|\bxc\b/.test(n) || surfaceKey === "xc") add("Cross country");
+  if (/half marathon|marathon|10k|5k|road/.test(n) || surfaceKey === "road") add("Road races");
+
+  for (const distance of distances) {
+    const d = distance.trim();
+    if (!d || d === "Track & field" || d === "Athletics") continue;
+    if (found.length >= 8) break;
+    add(d);
   }
 
-  return items.slice(0, 6);
+  if (found.length) return found.slice(0, 8);
+
+  if (surfaceKey === "xc") return ["Cross country"];
+  if (surfaceKey === "road") return ["Road races"];
+  return ["Sprints", "Hurdles", "Middle distance", "Jumps", "Throws"];
 }
 
 function placeLine(city?: string | null, country?: string | null): string {
   return [city, country].filter(Boolean).join(", ");
 }
 
-function datePhrase(iso?: string | null): string {
-  if (!iso) return "date to be confirmed";
-  return new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-GB", {
-    weekday: "long",
+function formatShortDate(iso?: string | null): string | null {
+  if (!iso) return null;
+  const date = new Date(`${iso}T12:00:00Z`);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleDateString("en-GB", {
+    weekday: "short",
     day: "numeric",
-    month: "long",
+    month: "short",
     timeZone: "UTC",
   });
 }
 
-export function meetingBriefLines(input: {
+export function meetingBriefLines(event: {
   name: string;
   city?: string | null;
   country?: string | null;
   surface?: string | null;
+  next_date?: string | null;
   nextDate?: string | null;
-  distances?: string[] | null;
-  summary?: string | null;
+  organiser?: string | null;
+  slug?: string | null;
+  distances?: string[];
 }): [string, string] {
-  const place = placeLine(input.city, input.country);
-  const programme = inferMeetingProgramme(input);
-  const when = datePhrase(input.nextDate);
+  const place = placeLine(event.city, event.country);
+  const when = formatShortDate(event.next_date ?? event.nextDate);
+  const tier = classifyEliteTier(event);
+  const circuit = circuitLabel(event.name);
+  const programme = inferMeetingEvents(event.name, event.surface, event.distances ?? []);
+  const programmeText = programme.slice(0, 4).join(", ");
   const surface =
-    input.surface && input.surface !== "Other" ? input.surface.toLowerCase() : "track and field";
-  const line1 = place
-    ? `${input.name} is a ${surface} meeting in ${place} on ${when}.`
-    : `${input.name} is a ${surface} meeting on ${when}.`;
-  const line2 = `On the programme: ${programme.join(", ")}. Check the official page for the live timetable before you travel.`;
+    event.surface && event.surface !== "Other" ? event.surface.toLowerCase() : "track and field";
+
+  const line1 = circuit
+    ? `${event.name} is a ${circuit} meeting${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`
+    : tier === "world"
+      ? `${event.name} is a world-level athletics meeting${place ? ` in ${place}` : ""}${when ? `, ${when}` : ""}.`
+      : tier === "continental"
+        ? `${event.name} is a continental athletics fixture${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`
+        : tier === "national"
+          ? `${event.name} is a national athletics meeting${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`
+          : `${event.name} is a ${surface} meeting${place ? ` in ${place}` : ""}${when ? ` on ${when}` : ""}.`;
+
+  const line2 =
+    programme.length === 1
+      ? `On the programme: ${programme[0]}. Local spectators can follow the timetable from the stands — no entry bib required.`
+      : `Events in the meeting include ${programmeText}. Check the spectator link for tickets, gates and the live timetable.`;
+
   return [line1, line2];
 }
 
-function isWorldAthleticsListing(url: string): boolean {
-  return /worldathletics\.org/i.test(url);
-}
-
-export function spectatorLinkForEvent(input: {
-  slug: string;
+export function spectatorLink(event: {
   name: string;
   website?: string | null;
-  sport?: EventListItem["sport"];
-  organiser?: string | null;
+  city?: string | null;
+  country?: string | null;
+  area?: string | null;
 }): SpectatorLink {
-  const website = input.website?.trim() || "";
-  if (website && !isWorldAthleticsListing(website)) {
+  const website = (event.website || "").trim();
+  if (website && !LISTING_HOST.test(website)) {
+    const tickets = /ticket|spectator|hospitality|fans/i.test(website);
     return {
       href: website,
-      label: "Spectators",
-      kind: "organiser",
+      label: tickets ? "Spectator tickets" : "For spectators",
+      kind: tickets ? "tickets" : "official",
     };
   }
   if (website) {
     return {
       href: website,
-      label: "Official listing",
-      kind: "official-listing",
+      label: "Meeting info",
+      kind: "listing",
     };
   }
-  const source = eventSourceOf({
-    slug: input.slug,
-    sport: input.sport ?? "Athletics",
-    website: input.website,
-    organiser: input.organiser,
-  });
-  if (source.url) {
-    return {
-      href: source.url,
-      label: source.kind === "world-athletics" ? "Official listing" : "Spectators",
-      kind: source.kind === "world-athletics" ? "official-listing" : "organiser",
-    };
-  }
+  const query = encodeURIComponent(
+    [event.name, event.area || event.city, event.country].filter(Boolean).join(" "),
+  );
   return {
-    href: `/races/${encodeURIComponent(input.slug)}#spectators`,
-    label: "Spectator guide",
-    kind: "event-page",
+    href: `https://www.google.com/maps/search/?api=1&query=${query}`,
+    label: "Find the venue",
+    kind: "venue",
   };
 }
 
-export function attendanceHook(input: {
+export function spectatorChecklist(event: {
   name: string;
   city?: string | null;
   country?: string | null;
-  tier: MeetingTier;
-}): string {
-  const city = input.city?.trim();
-  if (input.tier === "world") {
-    return city
-      ? `World-level athletics is in ${city} — the cheapest way to see it is from the stands.`
-      : "World-level athletics is easier to watch in person than most people think.";
-  }
-  if (input.tier === "continental") {
-    return city
-      ? `A Continental Tour night in ${city} is built for local crowds as much as for marks.`
-      : "Continental Tour meetings are staged for spectators in the home stadium.";
-  }
-  if (input.tier === "national") {
-    return city
-      ? `National championship athletics in ${city} is the place to watch the next team for this country.`
-      : "National championships are the best free-or-cheap window onto a country's best athletes.";
-  }
-  return city
-    ? `A regional meeting in ${city} is how local clubs fill a stadium — bring family and stay for the last event.`
-    : "Regional meetings are the easiest way to watch live athletics near home.";
+  next_date?: string | null;
+}): string[] {
+  const place = placeLine(event.city, event.country);
+  return [
+    place ? `Travel plan to ${place} — arrive before the first track event, not just the headline race` : "Travel plan to the stadium with time to spare before the first event",
+    "Tickets or gate information from the spectator link — club meetings are often free",
+    "Timetable for the session you want to watch; athletics is a rolling programme, not a mass start",
+    "Weather and seating: evening floodlit meetings can run late, daytime championships can be long",
+  ];
 }
 
-export function buildMeetingPreview(event: Pick<
-  EventListItem,
-  | "name"
-  | "slug"
-  | "city"
-  | "country"
-  | "surface"
-  | "summary"
-  | "organiser"
-  | "website"
-  | "distances"
-  | "next_date"
-  | "sport"
-  | "groups"
->): MeetingPreview {
-  const tier = classifyMeetingTier(event);
+export function buildMeetingPreview(event: EventListItem): MeetingPreview {
   return {
-    tier,
-    lines: meetingBriefLines({
-      name: event.name,
-      city: event.city,
-      country: event.country,
-      surface: event.surface,
-      nextDate: event.next_date,
-      distances: event.distances,
-      summary: event.summary,
-    }),
-    programme: inferMeetingProgramme(event),
-    spectator: spectatorLinkForEvent(event),
-    attendanceHook: attendanceHook({ ...event, tier }),
+    tier: classifyEliteTier(event),
+    circuit: circuitLabel(event.name),
+    lines: meetingBriefLines(event),
+    events: inferMeetingEvents(event.name, event.surface, event.distances),
+    spectator: spectatorLink(event),
   };
 }
