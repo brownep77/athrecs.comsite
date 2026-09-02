@@ -41,6 +41,43 @@ export const DISTANCE_FILTERS = [
 
 export const TERRAIN_FILTERS = ["All", "Road", "Trail", "Mixed", "Fell", "Track", "XC"] as const;
 
+/** World Athletics outdoor + indoor programme used on ATHRECS filters and briefs. */
+export const TRACK_FIELD_EVENTS = [
+  "100m",
+  "200m",
+  "400m",
+  "800m",
+  "1500m",
+  "Mile",
+  "3000m",
+  "5000m",
+  "10,000m",
+  "60m",
+  "60m hurdles",
+  "100m hurdles",
+  "110m hurdles",
+  "400m hurdles",
+  "3000m steeplechase",
+  "4x100m",
+  "4x400m",
+  "Mixed 4x400m",
+  "High jump",
+  "Pole vault",
+  "Long jump",
+  "Triple jump",
+  "Shot put",
+  "Discus",
+  "Hammer",
+  "Javelin",
+  "Heptathlon",
+  "Decathlon",
+  "Race walk",
+] as const;
+
+export const ATHLETICS_SURFACE_FILTERS = ["All", "Track", "Indoor", "Road", "XC"] as const;
+
+export const ATHLETICS_EVENT_FILTERS = ["All", "Track & field", ...TRACK_FIELD_EVENTS] as const;
+
 export { COUNTRY_FILTERS, COUNTRY_GROUPS, PARKRUN_COUNTRY_SHORTCUTS } from "./countries";
 
 export const SWIM_DISTANCE_FILTERS = ["All", "1K", "5K", "10K", "Other"] as const;
@@ -94,12 +131,12 @@ const ATHLETICS_SUBFILTERS: SubfilterDef[] = [
   {
     key: "surface",
     label: "Surface / venue",
-    options: ["All", "Track", "Road", "XC", "Trail", "Fell", "Mixed"],
+    options: ATHLETICS_SURFACE_FILTERS,
   },
   {
     key: "distance",
-    label: "Event type / distance",
-    options: [...DISTANCE_FILTERS.slice(0, -1), "Track & field", "Other"],
+    label: "Track & field event",
+    options: ATHLETICS_EVENT_FILTERS,
   },
 ];
 
@@ -226,6 +263,44 @@ export function sanitizeDistances(name: string, distances: string[]): string[] {
   return codes.filter((code) => code !== "Marathon");
 }
 
+const TRACK_FIELD_DISTANCE_CODES = new Set(["Track & field", "Athletics", "Other"]);
+
+function isGeneralTrackFieldMeeting(name: string, distances: string[]): boolean {
+  const blob = `${name} ${distances.join(" ")}`.toLowerCase();
+  if (distances.some((code) => TRACK_FIELD_DISTANCE_CODES.has(code))) return true;
+  return /track\s*&?\s*field|diamond league|continental tour|indoor tour|athletics meeting|flutlicht|meet(ing)?\b/.test(
+    blob,
+  );
+}
+
+function specialistExcludesEvent(name: string, filter: string): boolean {
+  const n = name.toLowerCase();
+  const f = filter.toLowerCase();
+  const isJump = /high jump|pole vault|long jump|triple jump/.test(f);
+  const isThrow = /shot put|discus|hammer|javelin/.test(f);
+  const isWalk = f === "race walk";
+  const isCombined = /heptathlon|decathlon/.test(f);
+  if (/\bcross[- ]country|\bxc\b/.test(n) && !isWalk) return true;
+  if (/\brace\s*walk|\bwalks?\b/.test(n) && !/road/.test(n) && !isWalk) return true;
+  if (/\bjumps?\b/.test(n) && !/throw/.test(n) && (isThrow || isWalk || isCombined)) return true;
+  if (/\bthrows?\b/.test(n) && !/jump/.test(n) && (isJump || isWalk || isCombined)) return true;
+  return false;
+}
+
+function nameMentionsTrackFieldEvent(name: string, filter: string): boolean {
+  const n = name.toLowerCase();
+  const f = filter.toLowerCase();
+  if (f === "track & field") {
+    return /track\s*&?\s*field|athletics/.test(n);
+  }
+  const compact = f.replace(/\s+/g, "\\s*");
+  try {
+    return new RegExp(compact.replace("4x", "4\\s*[x×]")).test(n);
+  } catch {
+    return n.includes(f);
+  }
+}
+
 export function matchesDistanceFilter(
   name: string,
   distances: string[],
@@ -236,7 +311,11 @@ export function matchesDistanceFilter(
   if (filter === "Marathon") return codes.includes("Marathon");
   if (filter === "Half") return codes.includes("Half") || nameHasHalf(name);
   if (filter === "Ultra") return codes.includes("Ultra") || nameHasUltra(name);
-  return codes.includes(filter);
+  if (codes.includes(filter)) return true;
+  if (!(ATHLETICS_EVENT_FILTERS as readonly string[]).includes(filter)) return false;
+  if (nameMentionsTrackFieldEvent(name, filter)) return true;
+  if (specialistExcludesEvent(name, filter)) return false;
+  return isGeneralTrackFieldMeeting(name, codes);
 }
 
 export function matchesFormatFilter(name: string, format?: string | null): boolean {

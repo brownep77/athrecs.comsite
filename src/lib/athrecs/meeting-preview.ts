@@ -1,5 +1,6 @@
 /** Original ATHRECS meeting briefs for spectators. Facts only — never copy official guides. */
 
+import { TRACK_FIELD_EVENTS } from "./filters";
 import type { EventListItem } from "./types";
 
 export type EliteTier = "world" | "continental" | "national" | "regional";
@@ -31,6 +32,8 @@ const NATIONAL_HINT =
 
 const LISTING_HOST =
   /worldathletics\.org\/competition\/calendar-results|worldathletics\.org\/competitions/i;
+
+const FULL_TRACK_FIELD_PROGRAMME = [...TRACK_FIELD_EVENTS];
 
 export function classifyEliteTier(input: {
   name: string;
@@ -100,35 +103,74 @@ export function inferMeetingEvents(
       add("High jump");
       add("Long jump");
       add("Triple jump");
+      add("Pole vault");
     }
     if (/\bthrows?\b/.test(n)) {
       add("Shot put");
       add("Discus");
+      add("Hammer");
       add("Javelin");
     }
   }
 
-  if (/hurdle/.test(n)) add("Hurdles");
-  if (/sprint|100m|200m|400m/.test(n)) add("Sprints");
-  if (/800m|1500m|mile|3000m|5000m|10,?000m|middle[- ]distance/.test(n)) add("Middle distance");
-  if (/relay/.test(n)) add("Relays");
-  if (/heptathlon|decathlon|combined/.test(n)) add("Combined events");
-  if (/race\s*walk|walk/.test(n) && !/sidewalk/.test(n)) add("Race walk");
+  if (/60m hurdle/.test(n)) add("60m hurdles");
+  if (/100m hurdle/.test(n)) add("100m hurdles");
+  if (/110m hurdle/.test(n)) add("110m hurdles");
+  if (/400m hurdle/.test(n)) add("400m hurdles");
+  if (/hurdle/.test(n) && !found.some((label) => /hurdle/.test(label))) {
+    add("100m hurdles");
+    add("110m hurdles");
+    add("400m hurdles");
+  }
+  if (/steeple/.test(n)) add("3000m steeplechase");
+  if (/\b100m\b/.test(n)) add("100m");
+  if (/\b200m\b/.test(n)) add("200m");
+  if (/\b400m\b/.test(n) && !/hurdle/.test(n)) add("400m");
+  if (/\b800m\b/.test(n)) add("800m");
+  if (/1500m/.test(n)) add("1500m");
+  if (/\bmile\b/.test(n)) add("Mile");
+  if (/3000m/.test(n) && !/steeple/.test(n)) add("3000m");
+  if (/5000m/.test(n)) add("5000m");
+  if (/10,?000m/.test(n)) add("10,000m");
+  if (/\b60m\b/.test(n) && !/hurdle/.test(n)) add("60m");
+  if (/sprint/.test(n)) {
+    add("100m");
+    add("200m");
+    add("400m");
+  }
+  if (/800m|1500m|mile|3000m|5000m|10,?000m|middle[- ]distance/.test(n)) {
+    if (!found.includes("800m") && /800|middle/.test(n)) add("800m");
+    if (!found.includes("1500m") && /1500|middle/.test(n)) add("1500m");
+  }
+  if (/mixed/.test(n) && /relay|4\s*[x×]\s*400/.test(n)) add("Mixed 4x400m");
+  if (/4\s*[x×]\s*100/.test(n)) add("4x100m");
+  if (/4\s*[x×]\s*400/.test(n) && !found.includes("Mixed 4x400m")) add("4x400m");
+  if (/relay/.test(n)) {
+    add("4x100m");
+    add("4x400m");
+  }
+  if (/heptathlon/.test(n)) add("Heptathlon");
+  if (/decathlon/.test(n)) add("Decathlon");
+  if (/combined/.test(n)) {
+    add("Heptathlon");
+    add("Decathlon");
+  }
+  if (/race\s*walk|\bwalks?\b/.test(n) && !/sidewalk/.test(n)) add("Race walk");
   if (/cross[- ]country|\bxc\b/.test(n) || surfaceKey === "xc") add("Cross country");
   if (/half marathon|marathon|10k|5k|road/.test(n) || surfaceKey === "road") add("Road races");
 
   for (const distance of distances) {
     const d = distance.trim();
     if (!d || d === "Track & field" || d === "Athletics") continue;
-    if (found.length >= 8) break;
-    add(d);
+    if ((TRACK_FIELD_EVENTS as readonly string[]).includes(d)) add(d);
+    else if (found.length < 20) add(d);
   }
 
-  if (found.length) return found.slice(0, 8);
+  if (found.length) return found.slice(0, 20);
 
   if (surfaceKey === "xc") return ["Cross country"];
   if (surfaceKey === "road") return ["Road races"];
-  return ["Sprints", "Hurdles", "Middle distance", "Jumps", "Throws"];
+  return FULL_TRACK_FIELD_PROGRAMME;
 }
 
 function placeLine(city?: string | null, country?: string | null): string {
@@ -163,7 +205,7 @@ export function meetingBriefLines(event: {
   const tier = classifyEliteTier(event);
   const circuit = circuitLabel(event.name);
   const programme = inferMeetingEvents(event.name, event.surface, event.distances ?? []);
-  const programmeText = programme.slice(0, 4).join(", ");
+  const programmeText = programme.slice(0, 8).join(", ");
   const surface =
     event.surface && event.surface !== "Other" ? event.surface.toLowerCase() : "track and field";
 
