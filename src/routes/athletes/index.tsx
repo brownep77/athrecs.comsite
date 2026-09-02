@@ -65,9 +65,11 @@ function AthletesPage() {
       {publicFigures.length > 0 && (
         <section className="space-y-3">
           <div>
-            <h2 className="font-display text-lg font-semibold text-fg">Public figures</h2>
+            <h2 className="font-display text-lg font-semibold text-fg">
+              Professional and notable athletes
+            </h2>
             <p className="text-xs text-muted">
-              Source-checked race records for well-known runners and endurance participants.
+              Source-checked profiles and records with official athlete links where available.
             </p>
           </div>
           <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-3">

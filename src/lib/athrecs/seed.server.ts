@@ -21,7 +21,7 @@ import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
-const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v3";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-professional-athletes-wave-1-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 
@@ -212,6 +212,24 @@ async function ensureSchema(sql: Sql): Promise<void> {
       created_at timestamptz not null default now(),
       updated_at timestamptz not null default now(),
       unique (edition_id, canonical_url)
+    )`,
+    `create table if not exists edition_spectator_access (
+      edition_id int primary key references editions(id) on delete cascade,
+      access_type text not null default 'unknown'
+        check (access_type in ('free', 'ticketed', 'free_and_ticketed', 'registration_required', 'sold_out', 'unknown')),
+      ticket_url text check (ticket_url is null or ticket_url ~ '^https://'),
+      price_amount numeric(12, 2) check (price_amount is null or price_amount >= 0),
+      price_currency text,
+      source_url text not null check (source_url ~ '^https://'),
+      checked_at timestamptz not null default now(),
+      is_verified boolean not null default false,
+      notes text,
+      created_at timestamptz not null default now(),
+      updated_at timestamptz not null default now(),
+      check (
+        access_type not in ('ticketed', 'free_and_ticketed', 'registration_required', 'sold_out')
+        or ticket_url is not null
+      )
     )`,
     `create table if not exists athletes (
       id serial primary key,
@@ -426,6 +444,8 @@ async function ensureSchema(sql: Sql): Promise<void> {
     `create index if not exists edition_result_links_edition_idx on edition_result_links(edition_id)`,
     `create index if not exists edition_result_links_public_idx
       on edition_result_links(edition_id, status, is_verified)`,
+    `create index if not exists edition_spectator_access_public_idx
+      on edition_spectator_access(access_type, checked_at desc) where is_verified`,
     `alter table edition_entry_options add column if not exists notes text`,
     `insert into edition_entry_options (
       edition_id, provider_code, provider_name, entry_url, entry_type, status,
