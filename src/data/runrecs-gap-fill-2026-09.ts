@@ -31,7 +31,7 @@ function officialEntry(
 }
 
 export const runrecsGapFillSeries: Series[] = [
-  {
+{
     slug: "standard-chartered-nairobi-marathon",
     name: "Standard Chartered Nairobi Marathon",
     sport: "Running",
@@ -49,7 +49,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.nairobimarathon.com/",
   },
-  {
+{
     slug: "nairobi-city-marathon",
     name: "Nairobi City Marathon",
     sport: "Running",
@@ -67,7 +67,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.nairobicitymarathon.com/",
   },
-  {
+{
     slug: "osaka-marathon",
     name: "Osaka Marathon",
     sport: "Running",
@@ -85,7 +85,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.osaka-marathon.com/2027/en/runner/entry/admission/",
   },
-  {
+{
     slug: "byd-singapore-international-marathon",
     name: "BYD Singapore International Marathon",
     sport: "Running",
@@ -103,7 +103,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://singaporeinternationalmarathon.com/",
   },
-  {
+{
     slug: "asics-gold-coast-marathon",
     name: "ASICS Gold Coast Marathon",
     sport: "Running",
@@ -121,7 +121,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://goldcoastmarathon.com.au/races/marathon/",
   },
-  {
+{
     slug: "great-ethiopian-run",
     name: "Great Ethiopian Run",
     sport: "Running",
@@ -139,7 +139,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://whatracetorun.com/event/great-ethiopian-run-international-10km/",
   },
-  {
+{
     slug: "standard-chartered-hong-kong-marathon",
     name: "Standard Chartered Hong Kong Marathon",
     sport: "Running",
@@ -157,7 +157,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.discoverhongkong.com/eng/events/event.id89102.hong-kong-marathon-2027.html",
   },
-  {
+{
     slug: "wipro-bengaluru-marathon",
     name: "Wipro Bengaluru Marathon",
     sport: "Running",
@@ -175,7 +175,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10155.html",
   },
-  {
+{
     slug: "runaway-auckland-marathon",
     name: "Barfoot & Thompson Runaway Auckland Marathon",
     sport: "Running",
@@ -193,7 +193,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aucklandmarathon.co.nz/race-info/full-marathon/",
   },
-  {
+{
     slug: "telcel-mexico-city-marathon",
     name: "Telcel Mexico City Marathon",
     sport: "Running",
@@ -211,7 +211,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://raceroster.com/events/2026/115971/xliii-telcel-mexico-city-marathon-2026",
   },
-  {
+{
     slug: "vodafone-prague-marathon",
     name: "Vodafone Prague Marathon",
     sport: "Running",
@@ -229,7 +229,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/730.html",
   },
-  {
+{
     slug: "california-international-marathon",
     name: "California International Marathon",
     sport: "Running",
@@ -247,7 +247,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runsra.org/california-international-marathon/",
   },
-  {
+{
     slug: "jal-honolulu-marathon",
     name: "JAL Honolulu Marathon",
     sport: "Running",
@@ -265,7 +265,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.honolulumarathon.org/our-events/jal-honolulu-marathon",
   },
-  {
+{
     slug: "medtronic-twin-cities-marathon",
     name: "Medtronic Twin Cities Marathon",
     sport: "Running",
@@ -283,7 +283,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/medtronictwincitiesmarathon",
   },
-  {
+{
     slug: "taipei-marathon",
     name: "Taipei Marathon",
     sport: "Running",
@@ -301,7 +301,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/927.html",
   },
-  {
+{
     slug: "amazing-thailand-marathon-bangkok",
     name: "Amazing Thailand Marathon Bangkok",
     sport: "Running",
@@ -319,7 +319,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/countries/90.html",
   },
-  {
+{
     slug: "jfk-50-mile",
     name: "JFK 50 Mile",
     sport: "Running",
@@ -337,7 +337,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.jfk50mile.org/",
   },
-  {
+{
     slug: "western-states-endurance-run",
     name: "Western States Endurance Run",
     sport: "Running",
@@ -355,7 +355,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.wser.org/entry-process/",
   },
-  {
+{
     slug: "hardrock-hundred",
     name: "Hardrock Hundred",
     sport: "Running",
@@ -373,7 +373,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://hardrock100.com/",
   },
-  {
+{
     slug: "standard-chartered-kl-marathon",
     name: "Standard Chartered KL Marathon",
     sport: "Running",
@@ -391,7 +391,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.kl-marathon.com/",
   },
-  {
+{
     slug: "adnoc-abu-dhabi-marathon",
     name: "ADNOC Abu Dhabi Marathon",
     sport: "Running",
@@ -409,7 +409,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.adnocabudhabimarathon.com/",
   },
-  {
+{
     slug: "doha-marathon-by-ooredoo",
     name: "Doha Marathon by Ooredoo",
     sport: "Running",
@@ -427,7 +427,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://dohamarathonooredoo.com/en",
   },
-  {
+{
     slug: "jakarta-running-festival-marathon",
     name: "Jakarta Running Festival Marathon",
     sport: "Running",
@@ -445,7 +445,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://jakartarunningfestival.id/event/marathon",
   },
-  {
+{
     slug: "maraton-medellin",
     name: "Maratón Medellín",
     sport: "Running",
@@ -463,7 +463,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/800.html",
   },
-  {
+{
     slug: "raiffeisen-bank-bucharest-city-marathon",
     name: "Raiffeisen Bank Bucharest City Marathon",
     sport: "Running",
@@ -481,7 +481,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://bucharest-marathon.com/en/program-eveniment-bucharest-marathon/",
   },
-  {
+{
     slug: "tiaa-philadelphia-marathon",
     name: "TIAA Philadelphia Marathon",
     sport: "Running",
@@ -499,7 +499,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.philadelphiamarathon.com/races/marathon/",
   },
-  {
+{
     slug: "perth-running-festival-marathon",
     name: "Perth Running Festival Marathon",
     sport: "Running",
@@ -517,7 +517,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://perthrunningfestival.com.au/marathon/",
   },
-  {
+{
     slug: "fukuoka-marathon",
     name: "Fukuoka Marathon",
     sport: "Running",
@@ -535,7 +535,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.f-marathon.jp/en/",
   },
-  {
+{
     slug: "fukuoka-international-marathon",
     name: "Fukuoka International Marathon",
     sport: "Running",
@@ -553,7 +553,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/922.html",
   },
-  {
+{
     slug: "accra-international-marathon",
     name: "Accra International Marathon",
     sport: "Running",
@@ -571,7 +571,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aimghana.com/event-info.php",
   },
-  {
+{
     slug: "kigali-international-peace-marathon",
     name: "Kigali International Peace Marathon",
     sport: "Running",
@@ -589,7 +589,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://kigalimarathon.org/",
   },
-  {
+{
     slug: "maraton-de-santiago",
     name: "Maratón de Santiago",
     sport: "Running",
@@ -607,7 +607,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/countries/21.html",
   },
-  {
+{
     slug: "grandmas-marathon",
     name: "Grandma's Marathon",
     sport: "Running",
@@ -625,7 +625,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://grandmasmarathon.com/the-marathon/grandmas-marathon/",
   },
-  {
+{
     slug: "colombo-marathon",
     name: "Colombo Marathon",
     sport: "Running",
@@ -643,7 +643,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://colombomarathon.lk/",
   },
-  {
+{
     slug: "tbilisi-marathon",
     name: "Tbilisi Marathon",
     sport: "Running",
@@ -661,7 +661,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10099.html",
   },
-  {
+{
     slug: "almaty-marathon",
     name: "Almaty Marathon",
     sport: "Running",
@@ -679,7 +679,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10040.html",
   },
-  {
+{
     slug: "yerevan-marathon",
     name: "Yerevan Marathon",
     sport: "Running",
@@ -697,7 +697,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.armeniamarathon.org/events/yerevan-marathon",
   },
-  {
+{
     slug: "maraton-de-punta-del-este",
     name: "Maratón de Punta del Este",
     sport: "Running",
@@ -715,7 +715,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://maratondepuntadeleste.com.uy/en/2026-details/",
   },
-  {
+{
     slug: "muscat-marathon",
     name: "Muscat Marathon",
     sport: "Running",
@@ -733,7 +733,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://muscatmarathon.om/",
   },
-  {
+{
     slug: "san-jose-costa-rica-marathon",
     name: "San José Costa Rica Marathon",
     sport: "Running",
@@ -751,7 +751,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/913.html",
   },
-  {
+{
     slug: "freshworks-chennai-marathon",
     name: "Freshworks Chennai Marathon",
     sport: "Running",
@@ -769,7 +769,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.thechennaimarathon.com/",
   },
-  {
+{
     slug: "panama-city-marathon",
     name: "Panama City Marathon",
     sport: "Running",
@@ -787,7 +787,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10504.html",
   },
-  {
+{
     slug: "portland-marathon",
     name: "Portland Marathon",
     sport: "Running",
@@ -805,7 +805,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.portlandmarathon.com/",
   },
-  {
+{
     slug: "marathon-comar-tunis-carthage",
     name: "Marathon COMAR Tunis-Carthage",
     sport: "Running",
@@ -823,7 +823,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://marathon.comar.tn/en",
   },
-  {
+{
     slug: "lahore-marathon",
     name: "Lahore Marathon",
     sport: "Running",
@@ -841,7 +841,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://lahore-marathon.com/",
   },
-  {
+{
     slug: "reggae-marathon",
     name: "Reggae Marathon",
     sport: "Running",
@@ -859,7 +859,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.reggaemarathon.com/",
   },
-  {
+{
     slug: "nagoya-womens-marathon",
     name: "Nagoya Women's Marathon",
     sport: "Running",
@@ -877,7 +877,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://womens-marathon.nagoya/en/outline/general/",
   },
-  {
+{
     slug: "flying-pig-marathon",
     name: "Flying Pig Marathon",
     sport: "Running",
@@ -895,7 +895,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://flyingpigmarathon.com/flying-pig-marathon-weekend/full-schedule",
   },
-  {
+{
     slug: "allianz-richmond-marathon",
     name: "Allianz Richmond Marathon",
     sport: "Running",
@@ -913,7 +913,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.richmondmarathon.org/",
   },
-  {
+{
     slug: "ascension-seton-austin-marathon",
     name: "Ascension Seton Austin Marathon",
     sport: "Running",
@@ -931,7 +931,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://youraustinmarathon.com/austin-marathon-opens-2027-registration-with-weeklong-launch-celebration/",
   },
-  {
+{
     slug: "guangzhou-marathon",
     name: "Guangzhou Marathon",
     sport: "Running",
@@ -949,7 +949,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10397.html",
   },
-  {
+{
     slug: "hangzhou-marathon",
     name: "Hangzhou Marathon",
     sport: "Running",
@@ -967,7 +967,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/881.html",
   },
-  {
+{
     slug: "xiamen-marathon",
     name: "C&D Xiamen Marathon",
     sport: "Running",
@@ -985,7 +985,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.facebook.com/xiamenmarathon/posts/2027-cd-xiamen-marathon-will-kick-off-on-january-10th-2027/1417846740033178/",
   },
-  {
+{
     slug: "lusaka-marathon",
     name: "Lusaka Marathon",
     sport: "Running",
@@ -1003,7 +1003,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://lusakamarathon.com/",
   },
-  {
+{
     slug: "eversource-hartford-marathon",
     name: "Eversource Hartford Marathon",
     sport: "Running",
@@ -1021,7 +1021,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.hartfordmarathon.com/eversource-hartford-marathon/",
   },
-  {
+{
     slug: "nationwide-columbus-marathon",
     name: "Nationwide Children's Hospital Columbus Marathon",
     sport: "Running",
@@ -1039,7 +1039,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.columbusmarathon.com/marathon",
   },
-  {
+{
     slug: "detroit-free-press-marathon",
     name: "Detroit Free Press Marathon",
     sport: "Running",
@@ -1057,7 +1057,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.freepmarathon.com/marathon/",
   },
-  {
+{
     slug: "grand-rapids-marathon",
     name: "Grand Rapids Marathon",
     sport: "Running",
@@ -1075,7 +1075,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.grandrapidsmarathon.com/",
   },
-  {
+{
     slug: "chengdu-marathon",
     name: "Chengdu Marathon",
     sport: "Running",
@@ -1093,7 +1093,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10315.html",
   },
-  {
+{
     slug: "changsha-marathon",
     name: "Changsha Marathon",
     sport: "Running",
@@ -1111,7 +1111,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10314.html",
   },
-  {
+{
     slug: "indianapolis-monumental-marathon",
     name: "CNO Financial Indianapolis Monumental Marathon",
     sport: "Running",
@@ -1129,7 +1129,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://monumentalmarathon.com/races/cno-financial-indianapolis-monumental-marathon/",
   },
-  {
+{
     slug: "kobe-marathon",
     name: "Kobe Marathon",
     sport: "Running",
@@ -1147,7 +1147,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://global.kobe-marathon.net/2026/global/runner/guidelines/",
   },
-  {
+{
     slug: "quito-15k-21k",
     name: "Quito 15K/21K Race",
     sport: "Running",
@@ -1165,7 +1165,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/countries/31.html",
   },
-  {
+{
     slug: "erie-marathon",
     name: "Erie Marathon",
     sport: "Running",
@@ -1183,7 +1183,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://eriemarathon.net/",
   },
-  {
+{
     slug: "st-george-marathon",
     name: "St. George Marathon",
     sport: "Running",
@@ -1201,7 +1201,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.sgcityutah.gov/activity/special_events/st._george_marathon/marathon_information.php",
   },
-  {
+{
     slug: "wineglass-marathon",
     name: "Guthrie Wineglass Marathon",
     sport: "Running",
@@ -1219,7 +1219,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.wineglassmarathon.com/races/guthrie-wineglass-marathon/",
   },
-  {
+{
     slug: "milwaukee-lakefront-marathon",
     name: "Milwaukee Lakefront Marathon",
     sport: "Running",
@@ -1237,7 +1237,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.milwaukeelakefrontmarathon.org/",
   },
-  {
+{
     slug: "cape-cod-marathon",
     name: "Cape Cod Marathon",
     sport: "Running",
@@ -1255,7 +1255,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://capecodmarathon.com/race-start-times-location/",
   },
-  {
+{
     slug: "baltimore-running-festival-marathon",
     name: "Baltimore Running Festival Marathon",
     sport: "Running",
@@ -1273,7 +1273,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.thebaltimoremarathon.com/Race/TheBaltimoreRunningFestival/Page/ScheduleofEvents",
   },
-  {
+{
     slug: "manchester-city-marathon-nh",
     name: "Manchester City Marathon",
     sport: "Running",
@@ -1291,7 +1291,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://millenniumrunning.com/marathon/",
   },
-  {
+{
     slug: "revel-big-cottonwood",
     name: "REVEL Big Cottonwood",
     sport: "Running",
@@ -1309,7 +1309,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.runrevel.com/bcm/info",
   },
-  {
+{
     slug: "garmin-kansas-city-marathon",
     name: "Garmin Kansas City Marathon",
     sport: "Running",
@@ -1327,7 +1327,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.sportkc.org/marathon-faqs",
   },
-  {
+{
     slug: "nanjing-marathon",
     name: "Nanjing Marathon",
     sport: "Running",
@@ -1345,7 +1345,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://worldathletics.org/competitions/world-athletics-label-road-races/calendar-results",
   },
-  {
+{
     slug: "shenzhen-marathon",
     name: "Shenzhen Marathon",
     sport: "Running",
@@ -1363,7 +1363,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10481.html",
   },
-  {
+{
     slug: "tucson-marathon",
     name: "Tucson Marathon",
     sport: "Running",
@@ -1381,7 +1381,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.aravaiparunning.com/tucson/",
   },
-  {
+{
     slug: "dalian-international-marathon",
     name: "Dalian International Marathon",
     sport: "Running",
@@ -1399,7 +1399,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/countries/22.html",
   },
-  {
+{
     slug: "oklahoma-city-memorial-marathon",
     name: "Oklahoma City Memorial Marathon",
     sport: "Running",
@@ -1417,7 +1417,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://okcmarathon.com/",
   },
-  {
+{
     slug: "lifetime-miami-marathon",
     name: "Life Time Miami Marathon",
     sport: "Running",
@@ -1435,7 +1435,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.themiamimarathon.com/registration/",
   },
-  {
+{
     slug: "merida-banorte-marathon",
     name: "Maratón Mérida Banorte",
     sport: "Running",
@@ -1453,7 +1453,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10157.html",
   },
-  {
+{
     slug: "publix-gasparilla-half-marathon",
     name: "Publix Gasparilla Half Marathon",
     sport: "Running",
@@ -1471,7 +1471,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.rungasparilla.com/half-marathon/",
   },
-  {
+{
     slug: "napa-valley-marathon",
     name: "Kaiser Permanente Napa Valley Marathon",
     sport: "Running",
@@ -1489,7 +1489,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://napavalleymarathon.org/race-information/",
   },
-  {
+{
     slug: "little-rock-marathon",
     name: "Little Rock Marathon",
     sport: "Running",
@@ -1507,7 +1507,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://littlerockmarathon.com/races/",
   },
-  {
+{
     slug: "victoria-falls-marathon",
     name: "Victoria Falls Marathon",
     sport: "Running",
@@ -1525,7 +1525,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.vicfallsmarathon.com/race-information/",
   },
-  {
+{
     slug: "air-force-marathon",
     name: "Air Force Marathon",
     sport: "Running",
@@ -1542,7 +1542,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.usafmarathon.com/schedule-of-events/",
   },
-  {
+{
     slug: "firstenergy-akron-marathon",
     name: "FirstEnergy Akron Marathon",
     sport: "Running",
@@ -1559,7 +1559,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.akronmarathon.org/race-series/akron-marathon/",
   },
-  {
+{
     slug: "imt-des-moines-marathon",
     name: "IMT Des Moines Marathon",
     sport: "Running",
@@ -1576,7 +1576,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://desmoinesmarathon.com/faqs/",
   },
-  {
+{
     slug: "madison-marathon",
     name: "Madison Marathon",
     sport: "Running",
@@ -1593,7 +1593,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://madisonmarathon.org/",
   },
-  {
+{
     slug: "ymca-harrisburg-marathon",
     name: "YMCA Harrisburg Marathon",
     sport: "Running",
@@ -1610,7 +1610,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://hbgyrun.org/marathon/",
   },
-  {
+{
     slug: "san-antonio-marathon",
     name: "San Antonio Marathon",
     sport: "Running",
@@ -1627,7 +1627,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runsignup.com/Race/TX/SanAntonio/SanAntonioMarathon",
   },
-  {
+{
     slug: "phoenix-marathon",
     name: "The Phoenix Marathon",
     sport: "Running",
@@ -1644,7 +1644,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://phxmarathon.com/",
   },
-  {
+{
     slug: "surf-city-marathon",
     name: "Surf City Marathon",
     sport: "Running",
@@ -1661,7 +1661,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.runsurfcity.com/marathon",
   },
-  {
+{
     slug: "kdf-humana-marathon",
     name: "Humana Kentucky Derby Festival Marathon",
     sport: "Running",
@@ -1678,7 +1678,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://derbyfestivalmarathon.com/",
   },
-  {
+{
     slug: "dicks-pittsburgh-marathon",
     name: "DICK'S Sporting Goods Pittsburgh Marathon",
     sport: "Running",
@@ -1695,7 +1695,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.thepittsburghmarathon.com/",
   },
-  {
+{
     slug: "500-festival-mini-marathon",
     name: "500 Festival Mini-Marathon",
     sport: "Running",
@@ -1712,7 +1712,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://indymini.com/",
   },
-  {
+{
     slug: "ogden-marathon",
     name: "Ogden Marathon",
     sport: "Running",
@@ -1729,7 +1729,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.ogdenmarathon.com/p/about/registration",
   },
-  {
+{
     slug: "utah-valley-marathon",
     name: "Utah Valley Marathon",
     sport: "Running",
@@ -1746,7 +1746,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.utahvalleymarathon.com/utah-valley-marathon-info",
   },
-  {
+{
     slug: "missoula-marathon",
     name: "Missoula Marathon",
     sport: "Running",
@@ -1763,7 +1763,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.missoulamarathon.org/race-info-2/",
   },
-  {
+{
     slug: "space-coast-marathon",
     name: "Space Coast Marathon",
     sport: "Running",
@@ -1780,7 +1780,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.spacecoastmarathon.com/",
   },
-  {
+{
     slug: "naha-marathon",
     name: "Naha Marathon",
     sport: "Running",
@@ -1797,7 +1797,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.sportsentry.ne.jp/event/t/105493",
   },
-  {
+{
     slug: "beppu-oita-mainichi-marathon",
     name: "Beppu-Oita Mainichi Marathon",
     sport: "Running",
@@ -1814,7 +1814,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/countries/51.html",
   },
-  {
+{
     slug: "kyoto-marathon",
     name: "Kyoto Marathon",
     sport: "Running",
@@ -1831,7 +1831,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://kyoto-marathon.com/en/info/",
   },
-  {
+{
     slug: "xm-limassol-marathon",
     name: "XM Limassol Marathon",
     sport: "Running",
@@ -1848,7 +1848,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.limassolmarathon.com/index.php?pageid=151",
   },
-  {
+{
     slug: "cairns-marathon",
     name: "7Cairns Marathon",
     sport: "Running",
@@ -1865,7 +1865,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://cairnsmarathon.com.au/",
   },
-  {
+{
     slug: "sunshine-coast-marathon",
     name: "EVA Air Sunshine Coast Marathon",
     sport: "Running",
@@ -1882,7 +1882,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10019.html",
   },
-  {
+{
     slug: "kanazawa-marathon",
     name: "Kanazawa Marathon",
     sport: "Running",
@@ -1899,7 +1899,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.kanazawa-marathon.jp/outline/english.html",
   },
-  {
+{
     slug: "okayama-marathon",
     name: "Okayama Marathon",
     sport: "Running",
@@ -1916,7 +1916,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.okayama-japan.jp/en/27076",
   },
-  {
+{
     slug: "penang-bridge-international-marathon",
     name: "Penang Bridge International Marathon",
     sport: "Running",
@@ -1933,7 +1933,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.facebook.com/penangbridgemarathon/",
   },
-  {
+{
     slug: "saitama-marathon",
     name: "Saitama Marathon",
     sport: "Running",
@@ -1950,7 +1950,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runjapan.jp/entry/runtes/smp/competitiondetail.do?raceId=E338070&div=1",
   },
-  {
+{
     slug: "miri-marathon",
     name: "Miri Marathon",
     sport: "Running",
@@ -1967,7 +1967,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.marathonmiri.com/faq/",
   },
-  {
+{
     slug: "sarawak-energy-marathon",
     name: "Sarawak Energy Marathon",
     sport: "Running",
@@ -1984,7 +1984,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10458.html",
   },
-  {
+{
     slug: "angkor-empire-marathon",
     name: "Angkor Empire Marathon",
     sport: "Running",
@@ -2001,7 +2001,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.ahotu.com/event/angkor-empire-marathon",
   },
-  {
+{
     slug: "gyeongju-marathon",
     name: "Gyeongju Marathon",
     sport: "Running",
@@ -2018,7 +2018,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/850.html",
   },
-  {
+{
     slug: "jtbc-seoul-marathon",
     name: "JTBC Seoul Marathon",
     sport: "Running",
@@ -2035,7 +2035,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.ahotu.com/event/jtbc-seoul-marathon",
   },
-  {
+{
     slug: "daegu-marathon",
     name: "Daegu Marathon",
     sport: "Running",
@@ -2052,7 +2052,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/698.html",
   },
-  {
+{
     slug: "seoul-marathon",
     name: "Seoul Marathon",
     sport: "Running",
@@ -2069,7 +2069,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/659.html",
   },
-  {
+{
     slug: "eugene-marathon",
     name: "Eugene Marathon",
     sport: "Running",
@@ -2086,7 +2086,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.eugenemarathon.com/",
   },
-  {
+{
     slug: "bmo-vancouver-marathon",
     name: "BMO Vancouver Marathon",
     sport: "Running",
@@ -2103,7 +2103,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://bmovanmarathon.ca/register",
   },
-  {
+{
     slug: "ottawa-international-marathon",
     name: "Tamarack Homes Ottawa International Marathon",
     sport: "Running",
@@ -2120,7 +2120,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.runottawa.ca/torw/runners/faq/",
   },
-  {
+{
     slug: "casablanca-international-marathon",
     name: "Casablanca International Marathon",
     sport: "Running",
@@ -2137,7 +2137,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.casablancamarathon.com/en",
   },
-  {
+{
     slug: "powerade-monterrey-marathon",
     name: "Powerade Monterrey Marathon",
     sport: "Running",
@@ -2154,7 +2154,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://maratonmonterrey.mx/en/index.html",
   },
-  {
+{
     slug: "ameris-bank-jacksonville-marathon",
     name: "Ameris Bank Jacksonville Marathon",
     sport: "Running",
@@ -2171,7 +2171,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://raceroster.com/events/2026/129638/ameris-bank-jacksonville-marathon",
   },
-  {
+{
     slug: "21k-guadalajara-electrolit",
     name: "21K Guadalajara Electrolit",
     sport: "Running",
@@ -2188,7 +2188,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runningcoach.me/en/events/21k-guadalajara-electrolit",
   },
-  {
+{
     slug: "vancouver-sun-run",
     name: "Vancouver Sun Run",
     sport: "Running",
@@ -2205,7 +2205,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.vancouversunrun.com/",
   },
-  {
+{
     slug: "suzuki-midnight-sun-run",
     name: "Suzuki Midnight Sun Run",
     sport: "Running",
@@ -2222,7 +2222,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.midnaeturhlaup.is/en/the-race",
   },
-  {
+{
     slug: "islandsbanki-reykjavik-marathon",
     name: "Íslandsbanki Reykjavik Marathon",
     sport: "Running",
@@ -2239,7 +2239,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.rmi.is/en/the-race",
   },
-  {
+{
     slug: "swedbank-tallinn-marathon",
     name: "Swedbank Tallinn Marathon",
     sport: "Running",
@@ -2256,7 +2256,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/countries/33.html",
   },
-  {
+{
     slug: "raiffeisen-bucharest-marathon",
     name: "Raiffeisen Bank Bucharest Marathon",
     sport: "Running",
@@ -2273,7 +2273,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.finishers.com/en/event/bucharest-marathon",
   },
-  {
+{
     slug: "oberbank-linz-donau-marathon",
     name: "Oberbank Linz Donau Marathon",
     sport: "Running",
@@ -2290,7 +2290,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.linzmarathon.at/en/",
   },
-  {
+{
     slug: "powerade-belgrade-marathon",
     name: "Powerade Belgrade Marathon",
     sport: "Running",
@@ -2307,7 +2307,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://bgdmarathon.org/?lang=en",
   },
-  {
+{
     slug: "valio-helsinki-city-run",
     name: "Valio Helsinki City Run",
     sport: "Running",
@@ -2324,7 +2324,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/779.html",
   },
-  {
+{
     slug: "rimi-riga-marathon",
     name: "Rimi Riga Marathon",
     sport: "Running",
@@ -2341,7 +2341,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://rimirigamarathon.com/en/",
   },
-  {
+{
     slug: "maraton-internacional-de-guayaquil",
     name: "Guayaquil International Marathon",
     sport: "Running",
@@ -2358,7 +2358,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.ahotu.com/event/maraton-de-guayaquil",
   },
-  {
+{
     slug: "maraton-de-cali",
     name: "Maratón de Cali",
     sport: "Running",
@@ -2375,7 +2375,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10431.html",
   },
-  {
+{
     slug: "bay-to-breakers",
     name: "Bay to Breakers",
     sport: "Running",
@@ -2392,7 +2392,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.baytobreakers.com/15k",
   },
-  {
+{
     slug: "bolderboulder",
     name: "BOLDERBoulder",
     sport: "Running",
@@ -2409,7 +2409,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.bolderboulder.com/bolder-faqs/",
   },
-  {
+{
     slug: "northside-hospital-peachtree-road-race",
     name: "Northside Hospital Peachtree Road Race",
     sport: "Running",
@@ -2426,7 +2426,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.atlantatrackclub.org/",
   },
-  {
+{
     slug: "asics-falmouth-road-race",
     name: "ASICS Falmouth Road Race",
     sport: "Running",
@@ -2443,7 +2443,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://give.brighamandwomens.org/falmouth-road-race/",
   },
-  {
+{
     slug: "gate-river-run",
     name: "Gate River Run",
     sport: "Running",
@@ -2460,7 +2460,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://gateriverrun15k.com/",
   },
-  {
+{
     slug: "crescent-city-classic",
     name: "Crescent City Classic",
     sport: "Running",
@@ -2477,7 +2477,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://ccc10k.com/ccc10k/",
   },
-  {
+{
     slug: "cooper-river-bridge-run",
     name: "Cooper River Bridge Run",
     sport: "Running",
@@ -2494,7 +2494,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://bridgerun.com/",
   },
-  {
+{
     slug: "credit-union-cherry-blossom-ten-mile",
     name: "Credit Union Cherry Blossom Ten Mile",
     sport: "Running",
@@ -2511,7 +2511,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://cherryblossom.org/pre-race/events/10-mile/",
   },
-  {
+{
     slug: "lilac-bloomsday-run",
     name: "Lilac Bloomsday Run",
     sport: "Running",
@@ -2528,7 +2528,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://bloomsdayrun.org/",
   },
-  {
+{
     slug: "boilermaker-road-race",
     name: "Boilermaker Road Race",
     sport: "Running",
@@ -2545,7 +2545,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.boilermaker.com/15k/",
   },
-  {
+{
     slug: "army-ten-miler",
     name: "Army Ten-Miler",
     sport: "Running",
@@ -2562,7 +2562,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.armytenmiler.com/live-race-info/",
   },
-  {
+{
     slug: "skechers-hot-chocolate-15k-chicago",
     name: "SKECHERS Hot Chocolate 15K Chicago",
     sport: "Running",
@@ -2579,7 +2579,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://hotchocolate15k.com/cities/",
   },
-  {
+{
     slug: "manchester-road-race",
     name: "Manchester Road Race",
     sport: "Running",
@@ -2596,7 +2596,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://manchesterroadrace.com/",
   },
-  {
+{
     slug: "bank-of-america-shamrock-shuffle",
     name: "Bank of America Shamrock Shuffle",
     sport: "Running",
@@ -2613,7 +2613,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.shamrockshuffle.com/shufflers/general-information/",
   },
-  {
+{
     slug: "azalea-trail-run",
     name: "Azalea Trail Run",
     sport: "Running",
@@ -2630,7 +2630,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://azaleatrailrun.org/",
   },
-  {
+{
     slug: "delightful-run-for-women",
     name: "Delightful Run for Women",
     sport: "Running",
@@ -2647,24 +2647,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runsignup.com/Race/NY/Albany/DelightfulRunForWomen",
   },
-  {
-    slug: "jakarta-running-festival-marathon",
-    name: "Jakarta Running Festival Marathon",
-    sport: "Running",
-    country: "Indonesia",
-    county: "Jakarta",
-    city: "Jakarta",
-    area: "Gelora Bung Karno",
-    surface: "Road",
-    distances: ["Marathon", "Half", "10K", "5K"],
-    summary: "Jakarta Running Festival October marathon.",
-    description: "The 2026 Hydroplus Marathon is Sunday 25 October 2026.",
-    organiser: "Jakarta Running Festival",
-    website: "https://jakartarunningfestival.id/event/marathon",
-    featured: false,
-    source_url: "https://jakartarunningfestival.id/event/marathon",
-  },
-  {
+{
     slug: "queenstown-marathon",
     name: "Queenstown Marathon",
     sport: "Running",
@@ -2681,7 +2664,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://queenstown-marathon.co.nz/",
   },
-  {
+{
     slug: "bank-jateng-borobudur-marathon",
     name: "Bank Jateng Borobudur Marathon",
     sport: "Running",
@@ -2698,7 +2681,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://borobudurmarathon.com/faq-borobudur-marathon/",
   },
-  {
+{
     slug: "cebu-marathon",
     name: "Cebu Marathon",
     sport: "Running",
@@ -2715,7 +2698,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.cebumarathon.com.ph/",
   },
-  {
+{
     slug: "asics-christchurch-marathon",
     name: "ASICS Christchurch Marathon",
     sport: "Running",
@@ -2732,7 +2715,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.christchurchmarathon.co.nz/",
   },
-  {
+{
     slug: "red-stag-rotorua-marathon",
     name: "Red Stag Rotorua Marathon",
     sport: "Running",
@@ -2749,7 +2732,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.rotoruamarathon.co.nz/race-options/marathon",
   },
-  {
+{
     slug: "standard-chartered-kuala-lumpur-marathon",
     name: "Standard Chartered Kuala Lumpur Marathon",
     sport: "Running",
@@ -2766,7 +2749,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.kl-marathon.com/",
   },
-  {
+{
     slug: "techcombank-hanoi-international-marathon",
     name: "Techcombank Hanoi International Marathon",
     sport: "Running",
@@ -2783,7 +2766,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://marathonhn.com/en/techcombank-ha-noi-international-marathon/",
   },
-  {
+{
     slug: "vpbank-hanoi-international-marathon",
     name: "VPBank Hanoi International Marathon",
     sport: "Running",
@@ -2800,7 +2783,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://vpbankmarathon.com/en",
   },
-  {
+{
     slug: "chiang-mai-marathon",
     name: "Chiang Mai Marathon",
     sport: "Running",
@@ -2817,7 +2800,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10433.html",
   },
-  {
+{
     slug: "ho-chi-minh-city-marathon",
     name: "Ho Chi Minh City Marathon",
     sport: "Running",
@@ -2834,7 +2817,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.carnifest.com/hcmc-run-ho-chi-minh-city-marathon-2027/",
   },
-  {
+{
     slug: "laguna-phuket-marathon",
     name: "Laguna Phuket Marathon",
     sport: "Running",
@@ -2851,7 +2834,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://phuketmarathon.com/race-information/",
   },
-  {
+{
     slug: "buenos-aires-international-marathon",
     name: "Buenos Aires International Marathon",
     sport: "Running",
@@ -2868,7 +2851,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/872.html",
   },
-  {
+{
     slug: "maratona-monumental-de-brasilia",
     name: "Maratona Monumental de Brasília",
     sport: "Running",
@@ -2885,7 +2868,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10423.html",
   },
-  {
+{
     slug: "media-maraton-del-mar-cartagena",
     name: "Media Maratón del Mar Sistecrédito",
     sport: "Running",
@@ -2902,7 +2885,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://mediamaratondelmar.com/pages/informacion-2027",
   },
-  {
+{
     slug: "maratona-internacional-de-sao-paulo",
     name: "Maratona Internacional de São Paulo",
     sport: "Running",
@@ -2919,7 +2902,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.42cal.com/races/sao-paulo-international-marathon",
   },
-  {
+{
     slug: "maratona-internacional-de-fortaleza",
     name: "Maratona Internacional de Fortaleza",
     sport: "Running",
@@ -2936,24 +2919,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.42cal.com/races/maratona-internacional-de-fortaleza",
   },
-  {
-    slug: "maraton-de-santiago",
-    name: "Maratón de Santiago",
-    sport: "Running",
-    country: "Chile",
-    county: "Santiago Metropolitan",
-    city: "Santiago",
-    area: "Santiago",
-    surface: "Road",
-    distances: ["Marathon", "Half", "10K"],
-    summary: "Santiago April city marathon.",
-    description: "Maratón de Santiago 2027 is Sunday 25 April 2027.",
-    organiser: "Maratón de Santiago",
-    website: "https://runningcoach.me/en/events/maraton-de-santiago",
-    featured: false,
-    source_url: "https://runningcoach.me/en/events/maraton-de-santiago",
-  },
-  {
+{
     slug: "h2o-wroclaw-half-marathon",
     name: "H2O Wrocław Half Marathon",
     sport: "Running",
@@ -2970,7 +2936,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.finishers.com/en/event/h2o-wroclaw-half-marathon",
   },
-  {
+{
     slug: "amman-international-marathon",
     name: "Amman International Marathon",
     sport: "Running",
@@ -2987,7 +2953,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/countries/52.html",
   },
-  {
+{
     slug: "spinneys-beirut-marathon",
     name: "Spinneys Beirut Marathon",
     sport: "Running",
@@ -3004,7 +2970,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.beirutmarathon.org/registration.php",
   },
-  {
+{
     slug: "stop-gbv-half-marathon-zanzibar",
     name: "Stop GBV Half Marathon Zanzibar",
     sport: "Running",
@@ -3021,7 +2987,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://aims-worldrunning.org/races/10422.html",
   },
-  {
+{
     slug: "clarence-demar-marathon",
     name: "Clarence DeMar Marathon",
     sport: "Running",
@@ -3038,7 +3004,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://clarencedemar.com/",
   },
-  {
+{
     slug: "mohawk-hudson-river-marathon",
     name: "Mohawk Hudson River Marathon",
     sport: "Running",
@@ -3055,7 +3021,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://mohawkhudsonmarathon.com/",
   },
-  {
+{
     slug: "amica-newport-marathon",
     name: "Amica Newport Marathon",
     sport: "Running",
@@ -3072,7 +3038,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://newportmarathon.com/",
   },
-  {
+{
     slug: "hannaford-baystate-marathon",
     name: "Hannaford Baystate Marathon",
     sport: "Running",
@@ -3089,7 +3055,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.baystatemarathon.com/",
   },
-  {
+{
     slug: "greater-st-louis-marathon",
     name: "Greater St. Louis Marathon",
     sport: "Running",
@@ -3106,7 +3072,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://gostlouis.org/races/st-louis-marathon/",
   },
-  {
+{
     slug: "vermont-city-marathon",
     name: "M&T Bank Vermont City Marathon",
     sport: "Running",
@@ -3123,7 +3089,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.runvermont.org/vermont-city-marathon-relay/",
   },
-  {
+{
     slug: "omaha-marathon",
     name: "Omaha Marathon",
     sport: "Running",
@@ -3140,7 +3106,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://omahamarathon.com/",
   },
-  {
+{
     slug: "duke-city-marathon",
     name: "Duke City Marathon",
     sport: "Running",
@@ -3157,7 +3123,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.dukecitymarathon.com/",
   },
-  {
+{
     slug: "williams-route-66-marathon",
     name: "Williams Route 66 Marathon",
     sport: "Running",
@@ -3174,7 +3140,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.finishers.com/en/event/williams-route-66-marathon",
   },
-  {
+{
     slug: "las-vegas-marathon",
     name: "Las Vegas Marathon",
     sport: "Running",
@@ -3191,7 +3157,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://vegasmarathon.com/",
   },
-  {
+{
     slug: "mesa-marathon",
     name: "Mesa Marathon",
     sport: "Running",
@@ -3208,7 +3174,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://mesamarathon.com/race-day/",
   },
-  {
+{
     slug: "michelob-ultra-el-paso-marathon",
     name: "Michelob Ultra El Paso Marathon",
     sport: "Running",
@@ -3225,7 +3191,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.runguides.com/el-paso/runs/marathon/all",
   },
-  {
+{
     slug: "sioux-falls-marathon",
     name: "Sioux Falls Marathon",
     sport: "Running",
@@ -3242,7 +3208,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.siouxfallsmarathon.com/full-marathon",
   },
-  {
+{
     slug: "fox-cities-marathon",
     name: "Community First Fox Cities Marathon",
     sport: "Running",
@@ -3259,7 +3225,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://foxcitiesmarathon.org/races-expo/",
   },
-  {
+{
     slug: "lincoln-marathon",
     name: "Lincoln Marathon",
     sport: "Running",
@@ -3276,7 +3242,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.lincolnmarathon.org/",
   },
-  {
+{
     slug: "med-city-marathon",
     name: "Med City Marathon",
     sport: "Running",
@@ -3293,7 +3259,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.medcitymarathonmn.com/",
   },
-  {
+{
     slug: "essentia-health-fargo-marathon",
     name: "Essentia Health Fargo Marathon",
     sport: "Running",
@@ -3310,7 +3276,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://fargomarathon.com/",
   },
-  {
+{
     slug: "epic-marathon-green-bay",
     name: "EPIC Marathon Green Bay",
     sport: "Running",
@@ -3327,7 +3293,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runsignup.com/Race/EPICMarathonAndRunningFestival/Page/NewPage",
   },
-  {
+{
     slug: "humboldt-redwoods-marathon",
     name: "Humboldt Redwoods Marathon",
     sport: "Running",
@@ -3344,7 +3310,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runsignup.com/Race/CA/Weott/HumboldtRedwoods",
   },
-  {
+{
     slug: "spokane-marathon",
     name: "The Spokane Marathon",
     sport: "Running",
@@ -3361,7 +3327,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://nsplit.com/thespokanemarathon/",
   },
-  {
+{
     slug: "idaho-running-day",
     name: "Idaho Running Day",
     sport: "Running",
@@ -3378,7 +3344,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runsignup.com/Race/ID/Boise/IdahoRunningDay",
   },
-  {
+{
     slug: "boise-river-marathon",
     name: "Boise River Marathon",
     sport: "Running",
@@ -3395,7 +3361,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://boiserivermarathon.com/",
   },
-  {
+{
     slug: "anchorage-mayors-marathon",
     name: "Anchorage Mayor's Marathon",
     sport: "Running",
@@ -3412,7 +3378,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.anchoragemayorsmarathon.com/Race/MayorsMarathon/Page-65",
   },
-  {
+{
     slug: "santa-rosa-marathon",
     name: "Santa Rosa Marathon",
     sport: "Running",
@@ -3429,7 +3395,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://santarosamarathon.com/race-details/",
   },
-  {
+{
     slug: "savannah-southern-half",
     name: "Savannah Southern Half",
     sport: "Running",
@@ -3446,7 +3412,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.southernhalf.com/",
   },
-  {
+{
     slug: "mississippi-gulf-coast-marathon",
     name: "Keesler Federal Mississippi Gulf Coast Marathon",
     sport: "Running",
@@ -3463,7 +3429,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.mississippigulfcoastmarathon.com/Race/MSGulfCoastMarathon/Page/FutureRaceDates",
   },
-  {
+{
     slug: "mobile-marathon",
     name: "Mobile Marathon",
     sport: "Running",
@@ -3480,7 +3446,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://mobilemarathon.org/",
   },
-  {
+{
     slug: "charleston-half-marathon",
     name: "Charleston Half Marathon",
     sport: "Running",
@@ -3497,7 +3463,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://charlestonhalfmarathon.com/",
   },
-  {
+{
     slug: "myrtle-beach-marathon",
     name: "Myrtle Beach Marathon",
     sport: "Running",
@@ -3514,7 +3480,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://mbmarathon.com/marathon/",
   },
-  {
+{
     slug: "covenant-health-knoxville-marathon",
     name: "Covenant Health Knoxville Marathon",
     sport: "Running",
@@ -3531,7 +3497,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://knoxvillemarathon.com/marathon/",
   },
-  {
+{
     slug: "city-of-oaks-marathon",
     name: "City of Oaks Marathon",
     sport: "Running",
@@ -3548,7 +3514,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://cityofoaksmarathon.com/race-26/",
   },
-  {
+{
     slug: "novant-health-charlotte-marathon",
     name: "Novant Health Charlotte Marathon",
     sport: "Running",
@@ -3565,7 +3531,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://runsignup.com/Race/NC/Charlotte/CharlotteMarathon",
   },
-  {
+{
     slug: "st-jude-memphis-marathon",
     name: "St. Jude Memphis Marathon",
     sport: "Running",
@@ -3582,7 +3548,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.stjude.org/get-involved/fitness-fundraisers/memphis-marathon.html",
   },
-  {
+{
     slug: "yuengling-shamrock-marathon",
     name: "Yuengling Shamrock Marathon",
     sport: "Running",
@@ -3599,7 +3565,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.shamrockmarathon.com/marathon/",
   },
-  {
+{
     slug: "kentucky-derby-festival-marathon",
     name: "Kentucky Derby Festival Marathon",
     sport: "Running",
@@ -3616,7 +3582,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://derbyfestivalmarathon.com/",
   },
-  {
+{
     slug: "rock-n-roll-nashville",
     name: "Rock 'n' Roll Nashville",
     sport: "Running",
@@ -3633,7 +3599,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.runrocknroll.com/events/nashville",
   },
-  {
+{
     slug: "tcs-toronto-waterfront-marathon",
     name: "TCS Toronto Waterfront Marathon",
     sport: "Running",
@@ -3650,7 +3616,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.torontowaterfrontmarathon.com/",
   },
-  {
+{
     slug: "beneva-quebec-city-marathon",
     name: "Beneva Quebec City Marathon",
     sport: "Running",
@@ -3667,7 +3633,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.jecoursqc.com/en/beneva-quebec-city-marathon-presented-by-montellier/schedule/",
   },
-  {
+{
     slug: "marathon-beneva-de-montreal",
     name: "Marathon Beneva de Montréal",
     sport: "Running",
@@ -3684,7 +3650,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://couronsmtl.com/en/marathon-beneva/home/",
   },
-  {
+{
     slug: "tamarack-ottawa-international-marathon",
     name: "Tamarack Ottawa International Marathon",
     sport: "Running",
@@ -3701,7 +3667,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://www.runottawa.ca/races-and-events/ottawa-marathon/",
   },
-  {
+{
     slug: "servus-calgary-marathon",
     name: "Servus Calgary Marathon",
     sport: "Running",
@@ -3718,7 +3684,7 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://calgarymarathon.com/",
   },
-  {
+{
     slug: "manitoba-marathon",
     name: "Manitoba Marathon",
     sport: "Running",
@@ -3735,10 +3701,95 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://manitobamarathon.mb.ca/",
   },
+  {
+    slug: "royal-victoria-marathon",
+    name: "Royal Victoria Marathon",
+    sport: "Running",
+    country: "Canada",
+    county: "British Columbia",
+    city: "Victoria",
+    area: "Downtown Victoria / Legislative Buildings",
+    surface: "Road",
+    distances: ["Marathon", "Half", "8K", "5K"],
+    summary: "Victoria October oceanside marathon.",
+    description: "Royal Victoria Marathon 2026 is Sunday 11 October 2026.",
+    organiser: "Victoria Marathon Society",
+    website: "https://www.runvictoriamarathon.com/",
+    featured: false,
+    source_url: "https://www.runvictoriamarathon.com/faqs",
+  },
+  {
+    slug: "around-the-bay-road-race",
+    name: "Around the Bay Road Race",
+    sport: "Running",
+    country: "Canada",
+    county: "Ontario",
+    city: "Hamilton",
+    area: "Hamilton Harbour",
+    surface: "Road",
+    distances: ["30K"],
+    summary: "Hamilton’s historic Around the Bay 30K.",
+    description: "Around the Bay 2027 is Sunday 4 April 2027.",
+    organiser: "Around the Bay",
+    website: "https://bayrace.com/",
+    featured: false,
+    source_url: "https://bayrace.com/",
+  },
+  {
+    slug: "beneva-mississauga-marathon",
+    name: "Beneva Mississauga Marathon",
+    sport: "Running",
+    country: "Canada",
+    county: "Ontario",
+    city: "Mississauga",
+    area: "Mississauga",
+    surface: "Road",
+    distances: ["Marathon", "Half"],
+    summary: "Mississauga April point-to-point marathon.",
+    description: "Beneva Mississauga Marathon 2027 is Sunday 25 April 2027.",
+    organiser: "Mississauga Marathon",
+    website: "https://www.mississaugamarathon.com/",
+    featured: false,
+    source_url: "https://www.mississaugamarathon.com/",
+  },
+  {
+    slug: "medavie-blue-nose-marathon",
+    name: "Medavie Blue Nose Marathon",
+    sport: "Running",
+    country: "Canada",
+    county: "Nova Scotia",
+    city: "Halifax",
+    area: "Halifax / Dartmouth",
+    surface: "Road",
+    distances: ["Marathon", "Half", "10K", "5K"],
+    summary: "Halifax Victoria Day weekend marathon.",
+    description: "Blue Nose Marathon 2027 is Sunday 23 May 2027.",
+    organiser: "Medavie Blue Nose Marathon",
+    website: "https://bluenosemarathon.com/",
+    featured: false,
+    source_url: "https://raceroster.com/events/2027/112559/medavie-blue-nose-marathon",
+  },
+  {
+    slug: "saskatchewan-marathon",
+    name: "Saskatchewan Marathon",
+    sport: "Running",
+    country: "Canada",
+    county: "Saskatchewan",
+    city: "Saskatoon",
+    area: "Diefenbaker Park",
+    surface: "Road",
+    distances: ["Marathon", "Half", "10K", "5K"],
+    summary: "Saskatoon late-May river marathon.",
+    description: "Saskatchewan Marathon 2027 is Sunday 31 May 2027.",
+    organiser: "Saskatoon Road Runners Association",
+    website: "https://www.saskmarathon.ca/",
+    featured: false,
+    source_url: "https://www.saskmarathon.ca/",
+  },
 ];
 
 export const runrecsGapFillEditions: Edition[] = [
-  {
+{
     seriesSlug: "standard-chartered-nairobi-marathon",
     date: "2026-10-25",
     distance: "Marathon",
@@ -3755,7 +3806,7 @@ export const runrecsGapFillEditions: Edition[] = [
     notes: "Also 21K, 10K, 5K and a wheelchair half marathon.",
     publishAllDistances: true,
   },
-  {
+{
     seriesSlug: "nairobi-city-marathon",
     date: "2026-06-07",
     distance: "Marathon",
@@ -3771,7 +3822,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.nairobicitymarathon.com/",
     notes: "Distinct from the October Standard Chartered Nairobi Marathon. Programme includes a 10K Expressway Run.",
   },
-  {
+{
     seriesSlug: "osaka-marathon",
     date: "2027-02-28",
     distance: "Marathon",
@@ -3787,7 +3838,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.osaka-marathon.com/2027/en/runner/entry/admission/",
     notes: "Expo Friday 26–Saturday 27 February 2027 at INTEX Osaka.",
   },
-  {
+{
     seriesSlug: "byd-singapore-international-marathon",
     date: "2026-12-06",
     distance: "Marathon",
@@ -3803,7 +3854,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://singaporeinternationalmarathon.com/",
     notes: "10K Friday 4 December; half Saturday 5 December; marathon Sunday 6 December.",
   },
-  {
+{
     seriesSlug: "asics-gold-coast-marathon",
     date: "2027-07-04",
     distance: "Marathon",
@@ -3819,7 +3870,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://goldcoastmarathon.com.au/races/marathon/",
     notes: "Half marathon is Saturday 3 July 2027. Marathon entries open early December 2026.",
   },
-  {
+{
     seriesSlug: "great-ethiopian-run",
     date: "2026-11-22",
     distance: "10K",
@@ -3835,7 +3886,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://whatracetorun.com/event/great-ethiopian-run-international-10km/",
     notes: "Mass 10K in Addis Ababa.",
   },
-  {
+{
     seriesSlug: "standard-chartered-hong-kong-marathon",
     date: "2027-01-17",
     distance: "Marathon",
@@ -3851,7 +3902,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.discoverhongkong.com/eng/events/event.id89102.hong-kong-marathon-2027.html",
     notes: "Start Nathan Road, Tsim Sha Tsui; finish Victoria Park, Causeway Bay.",
   },
-  {
+{
     seriesSlug: "wipro-bengaluru-marathon",
     date: "2026-09-27",
     distance: "Marathon",
@@ -3867,7 +3918,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10155.html",
     notes: "Also half, 10K and 5K from Sree Kanteerava Stadium.",
   },
-  {
+{
     seriesSlug: "runaway-auckland-marathon",
     date: "2026-11-01",
     distance: "Marathon",
@@ -3883,7 +3934,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aucklandmarathon.co.nz/race-info/full-marathon/",
     notes: "Also half, 11K, 5K and a 2.2K kids marathon. Marathon start 06:00.",
   },
-  {
+{
     seriesSlug: "telcel-mexico-city-marathon",
     date: "2026-08-30",
     distance: "Marathon",
@@ -3899,7 +3950,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://raceroster.com/events/2026/115971/xliii-telcel-mexico-city-marathon-2026",
     notes: "WA / AIMS certified city course.",
   },
-  {
+{
     seriesSlug: "vodafone-prague-marathon",
     date: "2027-05-02",
     distance: "Marathon",
@@ -3915,7 +3966,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/730.html",
     notes: "Weekend 1–2 May 2027.",
   },
-  {
+{
     seriesSlug: "california-international-marathon",
     date: "2026-12-06",
     distance: "Marathon",
@@ -3931,7 +3982,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runsra.org/california-international-marathon/",
     notes: "Folsom to the California State Capitol.",
   },
-  {
+{
     seriesSlug: "jal-honolulu-marathon",
     date: "2026-12-13",
     distance: "Marathon",
@@ -3947,7 +3998,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.honolulumarathon.org/our-events/jal-honolulu-marathon",
     notes: "Start to Park 10K is the same morning. Kalakaua Merrie Mile is Saturday 12 December.",
   },
-  {
+{
     seriesSlug: "medtronic-twin-cities-marathon",
     date: "2026-10-04",
     distance: "Marathon",
@@ -3963,7 +4014,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/medtronictwincitiesmarathon",
     notes: "Weekend also includes half, 10 mile, 10K and 5K on 2–4 October 2026.",
   },
-  {
+{
     seriesSlug: "taipei-marathon",
     date: "2026-12-20",
     distance: "Marathon",
@@ -3979,7 +4030,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/927.html",
     notes: "Also a half marathon.",
   },
-  {
+{
     seriesSlug: "amazing-thailand-marathon-bangkok",
     date: "2026-11-29",
     distance: "Marathon",
@@ -3995,7 +4046,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.ahotu.com/event/amazing-thailand-marathon-bangkok",
     notes: "Not the separate AIMS Bangkok Marathon date (10 January 2027), which was postponed from 8 November 2026.",
   },
-  {
+{
     seriesSlug: "jfk-50-mile",
     date: "2026-11-21",
     distance: "50 Mile",
@@ -4011,7 +4062,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.jfk50mile.org/",
     notes: "Boonsboro to Williamsport. Mass start 06:30.",
   },
-  {
+{
     seriesSlug: "western-states-endurance-run",
     date: "2027-06-26",
     distance: "100 Mile",
@@ -4027,7 +4078,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.wser.org/entry-process/",
     notes: "Start Palisades Tahoe Resort. Lottery registration 1–21 November 2026.",
   },
-  {
+{
     seriesSlug: "hardrock-hundred",
     date: "2027-07-09",
     distance: "100 Mile",
@@ -4043,7 +4094,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://hardrock100.com/",
     notes: "Lottery application window 1–14 October 2026; lottery Saturday 5 December 2026.",
   },
-  {
+{
     seriesSlug: "standard-chartered-kl-marathon",
     date: "2026-10-04",
     distance: "Marathon",
@@ -4059,7 +4110,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.kl-marathon.com/",
     notes: "Weekend 3–4 October 2026. World Athletics Elite Label.",
   },
-  {
+{
     seriesSlug: "adnoc-abu-dhabi-marathon",
     date: "2026-12-12",
     distance: "Marathon",
@@ -4075,7 +4126,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.adnocabudhabimarathon.com/",
     notes: "Also half, 10K, 5K and 2.5K options.",
   },
-  {
+{
     seriesSlug: "doha-marathon-by-ooredoo",
     date: "2027-01-15",
     distance: "Marathon",
@@ -4091,7 +4142,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://dohamarathonooredoo.com/en",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "jakarta-running-festival-marathon",
     date: "2026-10-25",
     distance: "Marathon",
@@ -4107,7 +4158,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://jakartarunningfestival.id/event/marathon",
     notes: "Festival weekend 22–25 October 2026. Half marathon is Saturday 24 October.",
   },
-  {
+{
     seriesSlug: "maraton-medellin",
     date: "2026-09-06",
     distance: "Marathon",
@@ -4123,7 +4174,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/800.html",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "raiffeisen-bank-bucharest-city-marathon",
     date: "2026-10-11",
     distance: "Marathon",
@@ -4139,7 +4190,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://bucharest-marathon.com/en/program-eveniment-bucharest-marathon/",
     notes: "Weekend 10–11 October 2026.",
   },
-  {
+{
     seriesSlug: "tiaa-philadelphia-marathon",
     date: "2026-11-22",
     distance: "Marathon",
@@ -4155,7 +4206,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.philadelphiamarathon.com/races/marathon/",
     notes: "Weekend 20–22 November 2026. Half also sold out; 8K still advertised.",
   },
-  {
+{
     seriesSlug: "perth-running-festival-marathon",
     date: "2026-10-11",
     distance: "Marathon",
@@ -4171,7 +4222,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://perthrunningfestival.com.au/marathon/",
     notes: "WA state marathon championship 2026.",
   },
-  {
+{
     seriesSlug: "fukuoka-marathon",
     date: "2026-11-08",
     distance: "Marathon",
@@ -4187,7 +4238,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.f-marathon.jp/en/",
     notes: "Mass-participation event. Not the December Fukuoka International Marathon.",
   },
-  {
+{
     seriesSlug: "fukuoka-international-marathon",
     date: "2026-12-06",
     distance: "Marathon",
@@ -4203,7 +4254,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/922.html",
     notes: "Elite December race, distinct from the November Fukuoka Marathon.",
   },
-  {
+{
     seriesSlug: "accra-international-marathon",
     date: "2026-10-25",
     distance: "Marathon",
@@ -4219,7 +4270,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aimghana.com/event-info.php",
     notes: "Beach-to-beach course. Packet pickup at Labadi Beach Hotel.",
   },
-  {
+{
     seriesSlug: "kigali-international-peace-marathon",
     date: "2026-06-14",
     distance: "Marathon",
@@ -4235,7 +4286,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://kigalimarathon.org/",
     notes: "AIMS-certified two-loop course. 10K fun run was Saturday 13 June.",
   },
-  {
+{
     seriesSlug: "maraton-de-santiago",
     date: "2027-05-16",
     distance: "Marathon",
@@ -4251,7 +4302,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/countries/21.html",
     notes: "2026 edition already run 26 April 2026.",
   },
-  {
+{
     seriesSlug: "grandmas-marathon",
     date: "2027-06-19",
     distance: "Marathon",
@@ -4267,7 +4318,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://grandmasmarathon.com/the-marathon/grandmas-marathon/",
     notes: "Garry Bjorklund Half is the same day. Irvin 5K is 18 June 2027.",
   },
-  {
+{
     seriesSlug: "colombo-marathon",
     date: "2026-09-13",
     distance: "Marathon",
@@ -4283,7 +4334,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://colombomarathon.lk/",
     notes: "Distinct from the AIMS LSR Colombo Marathon on 4 October 2026.",
   },
-  {
+{
     seriesSlug: "tbilisi-marathon",
     date: "2026-09-27",
     distance: "Marathon",
@@ -4299,7 +4350,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10099.html",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "almaty-marathon",
     date: "2026-09-27",
     distance: "Marathon",
@@ -4315,7 +4366,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10040.html",
     notes: "Also half, 10K, Nordic walking and ekiden.",
   },
-  {
+{
     seriesSlug: "marine-corps-marathon",
     date: "2026-10-25",
     distance: "Marathon",
@@ -4331,7 +4382,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.marinemarathon.com/event/marine-corps-marathon/",
     notes: "Attaches to the existing Marine Corps Marathon series, which had no 2026 edition row.",
   },
-  {
+{
     seriesSlug: "yerevan-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -4347,7 +4398,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.armeniamarathon.org/events/yerevan-marathon",
     notes: "5K is Saturday 17 October.",
   },
-  {
+{
     seriesSlug: "maraton-de-punta-del-este",
     date: "2026-09-06",
     distance: "Marathon",
@@ -4363,7 +4414,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://maratondepuntadeleste.com.uy/en/2026-details/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "muscat-marathon",
     date: "2027-01-30",
     distance: "Marathon",
@@ -4379,7 +4430,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://muscatmarathon.om/",
     notes: "14th edition. Registration opening announced by organiser.",
   },
-  {
+{
     seriesSlug: "san-jose-costa-rica-marathon",
     date: "2026-12-06",
     distance: "Marathon",
@@ -4395,7 +4446,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/913.html",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "freshworks-chennai-marathon",
     date: "2027-01-03",
     distance: "Marathon",
@@ -4411,7 +4462,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.thechennaimarathon.com/",
     notes: "Also 20 miler, half and 10K.",
   },
-  {
+{
     seriesSlug: "panama-city-marathon",
     date: "2026-09-20",
     distance: "Marathon",
@@ -4427,7 +4478,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10504.html",
     notes: "Panama, not Panama City Beach Florida.",
   },
-  {
+{
     seriesSlug: "portland-marathon",
     date: "2026-10-04",
     distance: "Marathon",
@@ -4443,7 +4494,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.portlandmarathon.com/",
     notes: "Also half, 10K and kids run.",
   },
-  {
+{
     seriesSlug: "marathon-comar-tunis-carthage",
     date: "2026-12-06",
     distance: "Marathon",
@@ -4459,7 +4510,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10232.html",
     notes: "Also half and shorter road distances.",
   },
-  {
+{
     seriesSlug: "lahore-marathon",
     date: "2027-01-31",
     distance: "Marathon",
@@ -4475,7 +4526,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://lahore-marathon.com/",
     notes: "2026 edition was 15 February 2026.",
   },
-  {
+{
     seriesSlug: "reggae-marathon",
     date: "2026-12-06",
     distance: "Marathon",
@@ -4491,7 +4542,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.reggaemarathon.com/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "nagoya-womens-marathon",
     date: "2027-03-14",
     distance: "Marathon",
@@ -4507,7 +4558,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://womens-marathon.nagoya/en/outline/general/",
     notes: "Women’s World Athletics Label race.",
   },
-  {
+{
     seriesSlug: "flying-pig-marathon",
     date: "2027-05-02",
     distance: "Marathon",
@@ -4523,7 +4574,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://flyingpigmarathon.com/flying-pig-marathon-weekend/full-schedule",
     notes: "Weekend 30 April–2 May 2027.",
   },
-  {
+{
     seriesSlug: "allianz-richmond-marathon",
     date: "2026-11-14",
     distance: "Marathon",
@@ -4539,7 +4590,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.richmondmarathon.org/",
     notes: "Virginia, not the UK Richmond races already on RunRecs.",
   },
-  {
+{
     seriesSlug: "ascension-seton-austin-marathon",
     date: "2027-02-14",
     distance: "Marathon",
@@ -4555,7 +4606,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://youraustinmarathon.com/",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "guangzhou-marathon",
     date: "2026-12-20",
     distance: "Marathon",
@@ -4571,7 +4622,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10397.html",
     notes: "Also a half marathon.",
   },
-  {
+{
     seriesSlug: "hangzhou-marathon",
     date: "2026-11-01",
     distance: "Marathon",
@@ -4587,7 +4638,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/881.html",
     notes: "West Lake course. Distinct from Hangzhou Mountain Marathon.",
   },
-  {
+{
     seriesSlug: "xiamen-marathon",
     date: "2027-01-10",
     distance: "Marathon",
@@ -4603,7 +4654,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.facebook.com/xiamenmarathon/posts/2027-cd-xiamen-marathon-will-kick-off-on-january-10th-2027/1417846740033178/",
     notes: "Coastal World Athletics Label race.",
   },
-  {
+{
     seriesSlug: "lusaka-marathon",
     date: "2026-11-14",
     distance: "Marathon",
@@ -4619,7 +4670,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://lusakamarathon.com/",
     notes: "Zambia capital marathon.",
   },
-  {
+{
     seriesSlug: "houston-marathon",
     date: "2027-01-17",
     distance: "Marathon",
@@ -4635,7 +4686,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.chevronhoustonmarathon.com/race-weekend/schedule/",
     notes: "Attaches to the existing Houston Marathon series, which only had a 1993 edition row.",
   },
-  {
+{
     seriesSlug: "eversource-hartford-marathon",
     date: "2026-10-10",
     distance: "Marathon",
@@ -4651,7 +4702,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.hartfordmarathon.com/eversource-hartford-marathon/",
     notes: "Also half, relay and charity 5K.",
   },
-  {
+{
     seriesSlug: "nationwide-columbus-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -4667,7 +4718,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.columbusmarathon.com/marathon",
     notes: "Weekend 17–18 October 2026.",
   },
-  {
+{
     seriesSlug: "detroit-free-press-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -4683,7 +4734,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.freepmarathon.com/marathon/",
     notes: "Crosses into Windsor. Weekend 16–18 October 2026.",
   },
-  {
+{
     seriesSlug: "grand-rapids-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -4699,7 +4750,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.grandrapidsmarathon.com/",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "chengdu-marathon",
     date: "2026-10-25",
     distance: "Marathon",
@@ -4715,7 +4766,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10315.html",
     notes: "Also half and wheelchair marathon.",
   },
-  {
+{
     seriesSlug: "changsha-marathon",
     date: "2026-10-25",
     distance: "Marathon",
@@ -4731,7 +4782,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10314.html",
     notes: "Used the AIMS date rather than the conflicting 15 November listing.",
   },
-  {
+{
     seriesSlug: "indianapolis-monumental-marathon",
     date: "2026-11-07",
     distance: "Marathon",
@@ -4747,7 +4798,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://monumentalmarathon.com/races/cno-financial-indianapolis-monumental-marathon/",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "kobe-marathon",
     date: "2026-11-15",
     distance: "Marathon",
@@ -4763,7 +4814,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://global.kobe-marathon.net/2026/global/runner/guidelines/",
     notes: "Overseas entry closed.",
   },
-  {
+{
     seriesSlug: "quito-15k-21k",
     date: "2027-06-06",
     distance: "Half",
@@ -4779,7 +4830,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/countries/31.html",
     notes: "Ecuador AIMS member race. 15K and half, not a full marathon.",
   },
-  {
+{
     seriesSlug: "erie-marathon",
     date: "2026-09-13",
     distance: "Marathon",
@@ -4795,7 +4846,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://eriemarathon.net/",
     notes: "Cap about 2,000 runners.",
   },
-  {
+{
     seriesSlug: "st-george-marathon",
     date: "2026-10-03",
     distance: "Marathon",
@@ -4811,7 +4862,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.sgcityutah.gov/activity/special_events/st._george_marathon/marathon_information.php",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "wineglass-marathon",
     date: "2026-10-04",
     distance: "Marathon",
@@ -4827,7 +4878,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.wineglassmarathon.com/races/guthrie-wineglass-marathon/",
     notes: "Bath to Corning. Half starts 07:30 the same day.",
   },
-  {
+{
     seriesSlug: "milwaukee-lakefront-marathon",
     date: "2026-10-04",
     distance: "Marathon",
@@ -4843,7 +4894,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.milwaukeelakefrontmarathon.org/",
     notes: "Distinct from the April Journal Sentinel Milwaukee Marathon.",
   },
-  {
+{
     seriesSlug: "cape-cod-marathon",
     date: "2026-10-11",
     distance: "Marathon",
@@ -4859,7 +4910,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://capecodmarathon.com/race-start-times-location/",
     notes: "Weekend 10–11 October 2026 in Falmouth.",
   },
-  {
+{
     seriesSlug: "baltimore-running-festival-marathon",
     date: "2026-10-17",
     distance: "Marathon",
@@ -4875,7 +4926,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.thebaltimoremarathon.com/Race/TheBaltimoreRunningFestival/Page/ScheduleofEvents",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "manchester-city-marathon-nh",
     date: "2026-11-08",
     distance: "Marathon",
@@ -4891,7 +4942,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://millenniumrunning.com/marathon/",
     notes: "New Hampshire, not Manchester UK.",
   },
-  {
+{
     seriesSlug: "revel-big-cottonwood",
     date: "2026-09-12",
     distance: "Marathon",
@@ -4907,7 +4958,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.runrevel.com/bcm/info",
     notes: "Half may still have limited spots.",
   },
-  {
+{
     seriesSlug: "garmin-kansas-city-marathon",
     date: "2026-10-17",
     distance: "Marathon",
@@ -4923,7 +4974,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.sportkc.org/marathon-faqs",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "nanjing-marathon",
     date: "2026-11-22",
     distance: "Marathon",
@@ -4939,7 +4990,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://worldathletics.org/competitions/world-athletics-label-road-races/calendar-results",
     notes: "Tenth-anniversary edition.",
   },
-  {
+{
     seriesSlug: "shenzhen-marathon",
     date: "2026-12-06",
     distance: "Marathon",
@@ -4955,7 +5006,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10481.html",
     notes: "World Athletics calendar also lists 6 December 2026.",
   },
-  {
+{
     seriesSlug: "tucson-marathon",
     date: "2026-12-13",
     distance: "Marathon",
@@ -4971,7 +5022,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.aravaiparunning.com/tucson/",
     notes: "Also half and 50K. Start at Biosphere 2.",
   },
-  {
+{
     seriesSlug: "dalian-international-marathon",
     date: "2027-04-25",
     distance: "Marathon",
@@ -4987,7 +5038,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/countries/22.html",
     notes: "2026 edition was 26 April 2026.",
   },
-  {
+{
     seriesSlug: "oklahoma-city-memorial-marathon",
     date: "2027-04-25",
     distance: "Marathon",
@@ -5003,7 +5054,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://okcmarathon.com/",
     notes: "Run to Remember.",
   },
-  {
+{
     seriesSlug: "lifetime-miami-marathon",
     date: "2027-01-31",
     distance: "Marathon",
@@ -5019,7 +5070,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.themiamimarathon.com/registration/",
     notes: "25th anniversary. Half same day. Tropical 5K is 30 January.",
   },
-  {
+{
     seriesSlug: "merida-banorte-marathon",
     date: "2027-01-10",
     distance: "Marathon",
@@ -5035,7 +5086,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10157.html",
     notes: "Paseo de Montejo course.",
   },
-  {
+{
     seriesSlug: "publix-gasparilla-half-marathon",
     date: "2027-02-21",
     distance: "Half",
@@ -5051,7 +5102,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.rungasparilla.com/half-marathon/",
     notes: "50th Gasparilla Distance Classic weekend. 8K same morning.",
   },
-  {
+{
     seriesSlug: "napa-valley-marathon",
     date: "2027-03-07",
     distance: "Marathon",
@@ -5067,7 +5118,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://napavalleymarathon.org/race-information/",
     notes: "Calistoga to Napa on Silverado Trail.",
   },
-  {
+{
     seriesSlug: "little-rock-marathon",
     date: "2027-03-07",
     distance: "Marathon",
@@ -5083,7 +5134,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://littlerockmarathon.com/races/",
     notes: "5K and 10K are Saturday 6 March.",
   },
-  {
+{
     seriesSlug: "victoria-falls-marathon",
     date: "2027-07-04",
     distance: "Marathon",
@@ -5099,7 +5150,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.vicfallsmarathon.com/race-information/",
     notes: "19th edition. Also half marathon.",
   },
-  {
+{
     seriesSlug: "air-force-marathon",
     date: "2026-09-19",
     distance: "Marathon",
@@ -5115,7 +5166,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.usafmarathon.com/schedule-of-events/",
     notes: "30th anniversary. Wright-Patterson AFB, Dayton.",
   },
-  {
+{
     seriesSlug: "firstenergy-akron-marathon",
     date: "2026-09-26",
     distance: "Marathon",
@@ -5131,7 +5182,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.akronmarathon.org/race-series/akron-marathon/",
     notes: "Also half and team relay.",
   },
-  {
+{
     seriesSlug: "imt-des-moines-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -5147,7 +5198,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://desmoinesmarathon.com/faqs/",
     notes: "25th running.",
   },
-  {
+{
     seriesSlug: "madison-marathon",
     date: "2026-11-15",
     distance: "Marathon",
@@ -5163,7 +5214,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://madisonmarathon.org/",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "ymca-harrisburg-marathon",
     date: "2026-11-08",
     distance: "Marathon",
@@ -5179,7 +5230,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://hbgyrun.org/marathon/",
     notes: "Also half and relay.",
   },
-  {
+{
     seriesSlug: "san-antonio-marathon",
     date: "2026-12-06",
     distance: "Marathon",
@@ -5195,7 +5246,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runsignup.com/Race/TX/SanAntonio/SanAntonioMarathon",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "phoenix-marathon",
     date: "2026-12-12",
     distance: "Marathon",
@@ -5211,7 +5262,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://phxmarathon.com/",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "surf-city-marathon",
     date: "2027-02-07",
     distance: "Marathon",
@@ -5227,7 +5278,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.runsurfcity.com/marathon",
     notes: "Huntington Beach. Half 07:15 same morning.",
   },
-  {
+{
     seriesSlug: "kdf-humana-marathon",
     date: "2027-04-24",
     distance: "Marathon",
@@ -5243,7 +5294,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://derbyfestivalmarathon.com/",
     notes: "Also the mini-marathon.",
   },
-  {
+{
     seriesSlug: "dicks-pittsburgh-marathon",
     date: "2027-05-02",
     distance: "Marathon",
@@ -5259,7 +5310,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.thepittsburghmarathon.com/",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "500-festival-mini-marathon",
     date: "2027-05-08",
     distance: "Half",
@@ -5275,7 +5326,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://indymini.com/",
     notes: "Half marathon around Indianapolis Motor Speedway. Also 5K.",
   },
-  {
+{
     seriesSlug: "ogden-marathon",
     date: "2027-05-15",
     distance: "Marathon",
@@ -5291,7 +5342,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.ogdenmarathon.com/p/about/registration",
     notes: "26th annual. Ogden Canyon downhill.",
   },
-  {
+{
     seriesSlug: "utah-valley-marathon",
     date: "2027-06-05",
     distance: "Marathon",
@@ -5307,7 +5358,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.utahvalleymarathon.com/utah-valley-marathon-info",
     notes: "Provo Canyon. Weekend 4–5 June 2027.",
   },
-  {
+{
     seriesSlug: "missoula-marathon",
     date: "2027-06-27",
     distance: "Marathon",
@@ -5323,7 +5374,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.missoulamarathon.org/race-info-2/",
     notes: "Weekend 25–27 June 2027.",
   },
-  {
+{
     seriesSlug: "space-coast-marathon",
     date: "2026-11-22",
     distance: "Marathon",
@@ -5339,7 +5390,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.spacecoastmarathon.com/",
     notes: "Cocoa, Florida. Also half.",
   },
-  {
+{
     seriesSlug: "naha-marathon",
     date: "2026-12-06",
     distance: "Marathon",
@@ -5355,7 +5406,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.sportsentry.ne.jp/event/t/105493",
     notes: "40th edition. Entry closed.",
   },
-  {
+{
     seriesSlug: "beppu-oita-mainichi-marathon",
     date: "2027-02-07",
     distance: "Marathon",
@@ -5371,7 +5422,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/countries/51.html",
     notes: "Point-to-point Beppu to Oita.",
   },
-  {
+{
     seriesSlug: "kyoto-marathon",
     date: "2027-02-21",
     distance: "Marathon",
@@ -5387,7 +5438,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://kyoto-marathon.com/en/info/",
     notes: "Finish at Heian-jingu Shrine.",
   },
-  {
+{
     seriesSlug: "xm-limassol-marathon",
     date: "2027-04-04",
     distance: "Marathon",
@@ -5403,7 +5454,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.limassolmarathon.com/index.php?pageid=151",
     notes: "Weekend 3–4 April 2027.",
   },
-  {
+{
     seriesSlug: "cairns-marathon",
     date: "2027-07-11",
     distance: "Marathon",
@@ -5419,7 +5470,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://cairnsmarathon.com.au/",
     notes: "2027 entries not yet open.",
   },
-  {
+{
     seriesSlug: "sunshine-coast-marathon",
     date: "2027-08-01",
     distance: "Marathon",
@@ -5435,7 +5486,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10019.html",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "kanazawa-marathon",
     date: "2026-10-25",
     distance: "Marathon",
@@ -5451,7 +5502,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.kanazawa-marathon.jp/outline/english.html",
     notes: "Capacity 15,000.",
   },
-  {
+{
     seriesSlug: "okayama-marathon",
     date: "2026-11-08",
     distance: "Marathon",
@@ -5467,7 +5518,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.okayama-japan.jp/en/27076",
     notes: "Also a fun run.",
   },
-  {
+{
     seriesSlug: "penang-bridge-international-marathon",
     date: "2026-12-13",
     distance: "Marathon",
@@ -5483,7 +5534,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.facebook.com/penangbridgemarathon/",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "saitama-marathon",
     date: "2027-02-14",
     distance: "Marathon",
@@ -5499,7 +5550,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runjapan.jp/entry/runtes/smp/competitiondetail.do?raceId=E338070&div=1",
     notes: "4th edition. 09:00 start.",
   },
-  {
+{
     seriesSlug: "miri-marathon",
     date: "2027-03-21",
     distance: "Marathon",
@@ -5515,7 +5566,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.marathonmiri.com/faq/",
     notes: "Organiser save-the-date 21.03.2027.",
   },
-  {
+{
     seriesSlug: "sarawak-energy-marathon",
     date: "2027-08-08",
     distance: "Marathon",
@@ -5531,7 +5582,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10458.html",
     notes: "Kuching Isthmus.",
   },
-  {
+{
     seriesSlug: "angkor-empire-marathon",
     date: "2027-08-08",
     distance: "Marathon",
@@ -5547,7 +5598,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.ahotu.com/event/angkor-empire-marathon",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "gyeongju-marathon",
     date: "2026-10-17",
     distance: "Marathon",
@@ -5563,7 +5614,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/850.html",
     notes: "Gyeongju Civic Stadium.",
   },
-  {
+{
     seriesSlug: "jtbc-seoul-marathon",
     date: "2026-11-01",
     distance: "Marathon",
@@ -5579,7 +5630,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.ahotu.com/event/jtbc-seoul-marathon",
     notes: "Also 10K.",
   },
-  {
+{
     seriesSlug: "daegu-marathon",
     date: "2027-02-28",
     distance: "Marathon",
@@ -5595,7 +5646,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/698.html",
     notes: "Also 10K.",
   },
-  {
+{
     seriesSlug: "seoul-marathon",
     date: "2027-03-21",
     distance: "Marathon",
@@ -5611,7 +5662,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/659.html",
     notes: "Also 10K. Han River course.",
   },
-  {
+{
     seriesSlug: "eugene-marathon",
     date: "2027-04-25",
     distance: "Marathon",
@@ -5627,7 +5678,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.eugenemarathon.com/",
     notes: "20th running.",
   },
-  {
+{
     seriesSlug: "bmo-vancouver-marathon",
     date: "2027-05-02",
     distance: "Marathon",
@@ -5643,7 +5694,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://bmovanmarathon.ca/register",
     notes: "Also half and 8K.",
   },
-  {
+{
     seriesSlug: "ottawa-international-marathon",
     date: "2027-05-30",
     distance: "Marathon",
@@ -5659,7 +5710,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.runottawa.ca/torw/runners/faq/",
     notes: "Tamarack Ottawa Race Weekend 29–30 May 2027.",
   },
-  {
+{
     seriesSlug: "casablanca-international-marathon",
     date: "2026-10-25",
     distance: "Marathon",
@@ -5675,7 +5726,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.casablancamarathon.com/en",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "powerade-monterrey-marathon",
     date: "2026-12-13",
     distance: "Marathon",
@@ -5691,7 +5742,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://maratonmonterrey.mx/en/index.html",
     notes: "Fundidora Park.",
   },
-  {
+{
     seriesSlug: "ameris-bank-jacksonville-marathon",
     date: "2026-12-12",
     distance: "Marathon",
@@ -5707,7 +5758,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://raceroster.com/events/2026/129638/ameris-bank-jacksonville-marathon",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "21k-guadalajara-electrolit",
     date: "2027-02-21",
     distance: "Half",
@@ -5723,7 +5774,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runningcoach.me/en/events/21k-guadalajara-electrolit",
     notes: "Half marathon.",
   },
-  {
+{
     seriesSlug: "vancouver-sun-run",
     date: "2027-04-18",
     distance: "10K",
@@ -5739,7 +5790,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.vancouversunrun.com/",
     notes: "10K road race.",
   },
-  {
+{
     seriesSlug: "suzuki-midnight-sun-run",
     date: "2027-06-24",
     distance: "10K",
@@ -5755,7 +5806,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.midnaeturhlaup.is/en/the-race",
     notes: "Not the Midnight Sun Marathon in Tromsø.",
   },
-  {
+{
     seriesSlug: "islandsbanki-reykjavik-marathon",
     date: "2027-08-21",
     distance: "Marathon",
@@ -5771,7 +5822,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.rmi.is/en/the-race",
     notes: "Same day as Reykjavik Culture Night.",
   },
-  {
+{
     seriesSlug: "swedbank-tallinn-marathon",
     date: "2026-09-12",
     distance: "Marathon",
@@ -5787,7 +5838,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/countries/33.html",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "raiffeisen-bucharest-marathon",
     date: "2026-10-11",
     distance: "Marathon",
@@ -5803,7 +5854,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.finishers.com/en/event/bucharest-marathon",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "oberbank-linz-donau-marathon",
     date: "2027-04-11",
     distance: "Marathon",
@@ -5819,7 +5870,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.linzmarathon.at/en/",
     notes: "Anniversary marathon.",
   },
-  {
+{
     seriesSlug: "powerade-belgrade-marathon",
     date: "2027-04-18",
     distance: "Marathon",
@@ -5835,7 +5886,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://bgdmarathon.org/?lang=en",
     notes: "40th edition.",
   },
-  {
+{
     seriesSlug: "valio-helsinki-city-run",
     date: "2027-05-08",
     distance: "Marathon",
@@ -5851,7 +5902,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/779.html",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "rimi-riga-marathon",
     date: "2027-05-16",
     distance: "Marathon",
@@ -5867,7 +5918,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://rimirigamarathon.com/en/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "maraton-internacional-de-guayaquil",
     date: "2026-10-04",
     distance: "Marathon",
@@ -5883,7 +5934,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.ahotu.com/event/maraton-de-guayaquil",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "maraton-de-cali",
     date: "2027-04-25",
     distance: "Marathon",
@@ -5899,7 +5950,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10431.html",
     notes: "World Athletics Label.",
   },
-  {
+{
     seriesSlug: "bay-to-breakers",
     date: "2027-05-16",
     distance: "12K",
@@ -5915,7 +5966,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.baytobreakers.com/15k",
     notes: "Also 15K Breaker Bonus.",
   },
-  {
+{
     seriesSlug: "bolderboulder",
     date: "2027-05-31",
     distance: "10K",
@@ -5931,7 +5982,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.bolderboulder.com/bolder-faqs/",
     notes: "Memorial Day 10K.",
   },
-  {
+{
     seriesSlug: "northside-hospital-peachtree-road-race",
     date: "2027-07-04",
     distance: "10K",
@@ -5947,7 +5998,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.atlantatrackclub.org/",
     notes: "July 4 10K.",
   },
-  {
+{
     seriesSlug: "asics-falmouth-road-race",
     date: "2027-08-15",
     distance: "7.1 miles",
@@ -5963,7 +6014,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://give.brighamandwomens.org/falmouth-road-race/",
     notes: "Woods Hole to Falmouth Heights.",
   },
-  {
+{
     seriesSlug: "gate-river-run",
     date: "2027-03-06",
     distance: "15K",
@@ -5979,7 +6030,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://gateriverrun15k.com/",
     notes: "50th edition.",
   },
-  {
+{
     seriesSlug: "crescent-city-classic",
     date: "2027-03-27",
     distance: "10K",
@@ -5995,7 +6046,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://ccc10k.com/ccc10k/",
     notes: "New Orleans 10K.",
   },
-  {
+{
     seriesSlug: "cooper-river-bridge-run",
     date: "2027-04-03",
     distance: "10K",
@@ -6011,7 +6062,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://bridgerun.com/",
     notes: "Charleston 10K.",
   },
-  {
+{
     seriesSlug: "credit-union-cherry-blossom-ten-mile",
     date: "2027-04-04",
     distance: "10 miles",
@@ -6027,7 +6078,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://cherryblossom.org/pre-race/events/10-mile/",
     notes: "5K is Saturday 3 April 2027.",
   },
-  {
+{
     seriesSlug: "lilac-bloomsday-run",
     date: "2027-05-02",
     distance: "12K",
@@ -6043,7 +6094,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://bloomsdayrun.org/",
     notes: "51st running.",
   },
-  {
+{
     seriesSlug: "boilermaker-road-race",
     date: "2027-07-11",
     distance: "15K",
@@ -6059,7 +6110,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.boilermaker.com/15k/",
     notes: "50th edition.",
   },
-  {
+{
     seriesSlug: "army-ten-miler",
     date: "2026-10-11",
     distance: "10 miles",
@@ -6075,7 +6126,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.armytenmiler.com/live-race-info/",
     notes: "42nd edition.",
   },
-  {
+{
     seriesSlug: "skechers-hot-chocolate-15k-chicago",
     date: "2026-11-01",
     distance: "15K",
@@ -6091,7 +6142,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://hotchocolate15k.com/cities/",
     notes: "Also 5K.",
   },
-  {
+{
     seriesSlug: "manchester-road-race",
     date: "2026-11-26",
     distance: "4.737 miles",
@@ -6107,7 +6158,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://manchesterroadrace.com/",
     notes: "90th running.",
   },
-  {
+{
     seriesSlug: "bank-of-america-shamrock-shuffle",
     date: "2027-03-21",
     distance: "8K",
@@ -6123,7 +6174,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.shamrockshuffle.com/shufflers/general-information/",
     notes: "Chicago Loop 8K.",
   },
-  {
+{
     seriesSlug: "azalea-trail-run",
     date: "2027-03-27",
     distance: "10K",
@@ -6139,7 +6190,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://azaleatrailrun.org/",
     notes: "Also 5K.",
   },
-  {
+{
     seriesSlug: "delightful-run-for-women",
     date: "2027-06-05",
     distance: "5K",
@@ -6155,23 +6206,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runsignup.com/Race/NY/Albany/DelightfulRunForWomen",
     notes: "49th edition. Formerly Freihofer's.",
   },
-  {
-    seriesSlug: "jakarta-running-festival-marathon",
-    date: "2026-10-25",
-    distance: "Marathon",
-    distanceKm: 42.195,
-    status: "Open",
-    entryUrl: "https://jakartarunningfestival.id/event/marathon",
-    entryOptions: officialEntry(
-      "jakarta-marathon",
-      "Jakarta Running Festival Marathon",
-      "https://jakartarunningfestival.id/event/marathon",
-      "Official festival page: Sunday 25 October 2026, 04:00 WIB, GBK.",
-    ),
-    source: "https://jakartarunningfestival.id/event/marathon",
-    notes: "Hydroplus Marathon.",
-  },
-  {
+{
     seriesSlug: "queenstown-marathon",
     date: "2026-11-14",
     distance: "Marathon",
@@ -6187,7 +6222,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://queenstown-marathon.co.nz/",
     notes: "Queenstown Lakes.",
   },
-  {
+{
     seriesSlug: "bank-jateng-borobudur-marathon",
     date: "2026-11-15",
     distance: "Marathon",
@@ -6203,7 +6238,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://borobudurmarathon.com/faq-borobudur-marathon/",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "cebu-marathon",
     date: "2027-01-10",
     distance: "Marathon",
@@ -6219,7 +6254,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.cebumarathon.com.ph/",
     notes: "Presented by Cebu Landmasters.",
   },
-  {
+{
     seriesSlug: "asics-christchurch-marathon",
     date: "2027-04-18",
     distance: "Marathon",
@@ -6235,7 +6270,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.christchurchmarathon.co.nz/",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "red-stag-rotorua-marathon",
     date: "2027-05-01",
     distance: "Marathon",
@@ -6251,7 +6286,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.rotoruamarathon.co.nz/race-options/marathon",
     notes: "Reverse lake course in 2027.",
   },
-  {
+{
     seriesSlug: "standard-chartered-kuala-lumpur-marathon",
     date: "2026-10-04",
     distance: "Marathon",
@@ -6267,7 +6302,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.kl-marathon.com/registration/rules-and-regulations/",
     notes: "World Athletics Elite Label.",
   },
-  {
+{
     seriesSlug: "techcombank-hanoi-international-marathon",
     date: "2026-10-04",
     distance: "Marathon",
@@ -6283,7 +6318,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://marathonhn.com/en/techcombank-ha-noi-international-marathon/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "vpbank-hanoi-international-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -6299,7 +6334,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://vpbankmarathon.com/en",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "chiang-mai-marathon",
     date: "2026-12-20",
     distance: "Marathon",
@@ -6315,7 +6350,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10433.html",
     notes: "Tha Phae Gate start.",
   },
-  {
+{
     seriesSlug: "ho-chi-minh-city-marathon",
     date: "2027-01-17",
     distance: "Marathon",
@@ -6331,7 +6366,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://worldsmarathons.com/marathon/ho-chi-minh-city-marathon",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "laguna-phuket-marathon",
     date: "2027-06-13",
     distance: "Marathon",
@@ -6347,7 +6382,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://phuketmarathon.com/race-information/",
     notes: "Also half, 10.5K and 5K.",
   },
-  {
+{
     seriesSlug: "buenos-aires-international-marathon",
     date: "2026-09-20",
     distance: "Marathon",
@@ -6363,7 +6398,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/872.html",
     notes: "07:00 start.",
   },
-  {
+{
     seriesSlug: "maratona-monumental-de-brasilia",
     date: "2026-11-22",
     distance: "Marathon",
@@ -6379,7 +6414,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10423.html",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "media-maraton-del-mar-cartagena",
     date: "2027-02-21",
     distance: "Half",
@@ -6395,7 +6430,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://mediamaratondelmar.com/pages/informacion-2027",
     notes: "Kids race Saturday 20 February.",
   },
-  {
+{
     seriesSlug: "maratona-internacional-de-sao-paulo",
     date: "2027-04-04",
     distance: "Marathon",
@@ -6411,7 +6446,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.42cal.com/races/sao-paulo-international-marathon",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "maratona-internacional-de-fortaleza",
     date: "2027-04-11",
     distance: "Marathon",
@@ -6427,23 +6462,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.42cal.com/races/maratona-internacional-de-fortaleza",
     notes: "Fortaleza, Ceará.",
   },
-  {
-    seriesSlug: "maraton-de-santiago",
-    date: "2027-04-25",
-    distance: "Marathon",
-    distanceKm: 42.195,
-    status: "TBC",
-    entryUrl: "https://runningcoach.me/en/events/maraton-de-santiago",
-    entryOptions: officialEntry(
-      "santiago-marathon",
-      "Maratón de Santiago",
-      "https://runningcoach.me/en/events/maraton-de-santiago",
-      "Listed Sunday 25 April 2027.",
-    ),
-    source: "https://runningcoach.me/en/events/maraton-de-santiago",
-    notes: "Also half and 10K.",
-  },
-  {
+{
     seriesSlug: "h2o-wroclaw-half-marathon",
     date: "2026-09-20",
     distance: "Half",
@@ -6459,7 +6478,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.finishers.com/en/event/h2o-wroclaw-half-marathon",
     notes: "Half marathon.",
   },
-  {
+{
     seriesSlug: "amman-international-marathon",
     date: "2026-10-02",
     distance: "Marathon",
@@ -6475,7 +6494,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/countries/52.html",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "spinneys-beirut-marathon",
     date: "2026-11-29",
     distance: "Marathon",
@@ -6491,7 +6510,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.beirutmarathon.org/registration.php",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "stop-gbv-half-marathon-zanzibar",
     date: "2026-11-29",
     distance: "Half",
@@ -6507,7 +6526,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://aims-worldrunning.org/races/10422.html",
     notes: "Half marathon.",
   },
-  {
+{
     seriesSlug: "clarence-demar-marathon",
     date: "2026-09-27",
     distance: "Marathon",
@@ -6523,7 +6542,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://clarencedemar.com/",
     notes: "48th running. Also half.",
   },
-  {
+{
     seriesSlug: "mohawk-hudson-river-marathon",
     date: "2026-10-11",
     distance: "Marathon",
@@ -6539,7 +6558,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://mohawkhudsonmarathon.com/",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "amica-newport-marathon",
     date: "2026-10-11",
     distance: "Marathon",
@@ -6555,7 +6574,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://newportmarathon.com/",
     notes: "17th edition. Also half.",
   },
-  {
+{
     seriesSlug: "hannaford-baystate-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -6571,7 +6590,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.baystatemarathon.com/",
     notes: "Also half and relay.",
   },
-  {
+{
     seriesSlug: "greater-st-louis-marathon",
     date: "2027-04-03",
     distance: "Marathon",
@@ -6587,7 +6606,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://gostlouis.org/races/st-louis-marathon/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "vermont-city-marathon",
     date: "2027-05-30",
     distance: "Marathon",
@@ -6603,7 +6622,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.runvermont.org/",
     notes: "Memorial Day weekend.",
   },
-  {
+{
     seriesSlug: "omaha-marathon",
     date: "2026-09-27",
     distance: "Marathon",
@@ -6619,7 +6638,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://omahamarathon.com/",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "duke-city-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -6635,7 +6654,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.dukecitymarathon.com/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "williams-route-66-marathon",
     date: "2026-11-22",
     distance: "Marathon",
@@ -6651,7 +6670,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.finishers.com/en/event/williams-route-66-marathon",
     notes: "Tulsa. Also half.",
   },
-  {
+{
     seriesSlug: "las-vegas-marathon",
     date: "2027-01-10",
     distance: "Marathon",
@@ -6667,7 +6686,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://vegasmarathon.com/",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "mesa-marathon",
     date: "2027-02-13",
     distance: "Marathon",
@@ -6683,7 +6702,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://mesamarathon.com/race-day/",
     notes: "15th anniversary. Also half and 10K.",
   },
-  {
+{
     seriesSlug: "michelob-ultra-el-paso-marathon",
     date: "2027-02-28",
     distance: "Marathon",
@@ -6699,7 +6718,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.runguides.com/el-paso/runs/marathon/all",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "sioux-falls-marathon",
     date: "2026-09-20",
     distance: "Marathon",
@@ -6715,7 +6734,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.siouxfallsmarathon.com/full-marathon",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "fox-cities-marathon",
     date: "2026-09-20",
     distance: "Marathon",
@@ -6731,7 +6750,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://foxcitiesmarathon.org/races-expo/",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "lincoln-marathon",
     date: "2027-05-02",
     distance: "Marathon",
@@ -6747,7 +6766,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.lincolnmarathon.org/",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "med-city-marathon",
     date: "2027-05-16",
     distance: "Marathon",
@@ -6763,7 +6782,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.medcitymarathonmn.com/",
     notes: "Also half, 20-mile and 5K.",
   },
-  {
+{
     seriesSlug: "essentia-health-fargo-marathon",
     date: "2027-05-22",
     distance: "Marathon",
@@ -6779,7 +6798,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://fargomarathon.com/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "epic-marathon-green-bay",
     date: "2027-05-16",
     distance: "Marathon",
@@ -6795,7 +6814,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runsignup.com/Race/EPICMarathonAndRunningFestival/Page/NewPage",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "humboldt-redwoods-marathon",
     date: "2026-10-11",
     distance: "Marathon",
@@ -6811,7 +6830,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runsignup.com/Race/CA/Weott/HumboldtRedwoods",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "spokane-marathon",
     date: "2026-10-11",
     distance: "Marathon",
@@ -6827,7 +6846,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://nsplit.com/thespokanemarathon/",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "idaho-running-day",
     date: "2026-10-17",
     distance: "Marathon",
@@ -6843,7 +6862,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runsignup.com/Race/ID/Boise/IdahoRunningDay",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "boise-river-marathon",
     date: "2027-05-02",
     distance: "Marathon",
@@ -6859,7 +6878,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://boiserivermarathon.com/",
     notes: "Boise River Greenbelt.",
   },
-  {
+{
     seriesSlug: "anchorage-mayors-marathon",
     date: "2027-06-19",
     distance: "Marathon",
@@ -6875,7 +6894,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.anchoragemayorsmarathon.com/Race/MayorsMarathon/Page-65",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "santa-rosa-marathon",
     date: "2027-08-22",
     distance: "Marathon",
@@ -6891,7 +6910,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://santarosamarathon.com/race-details/",
     notes: "5K/10K Saturday 21 August.",
   },
-  {
+{
     seriesSlug: "savannah-southern-half",
     date: "2026-11-14",
     distance: "Half",
@@ -6907,7 +6926,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.southernhalf.com/",
     notes: "Also 5K.",
   },
-  {
+{
     seriesSlug: "mississippi-gulf-coast-marathon",
     date: "2026-12-13",
     distance: "Marathon",
@@ -6923,7 +6942,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.mississippigulfcoastmarathon.com/Race/MSGulfCoastMarathon/Page/FutureRaceDates",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "mobile-marathon",
     date: "2027-01-10",
     distance: "Marathon",
@@ -6939,7 +6958,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://mobilemarathon.org/",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "charleston-half-marathon",
     date: "2027-01-30",
     distance: "Half",
@@ -6955,7 +6974,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://charlestonhalfmarathon.com/",
     notes: "Also 5K.",
   },
-  {
+{
     seriesSlug: "myrtle-beach-marathon",
     date: "2027-03-06",
     distance: "Marathon",
@@ -6971,7 +6990,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.finishers.com/en/event/marathon-de-myrtle-beach",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "covenant-health-knoxville-marathon",
     date: "2027-04-11",
     distance: "Marathon",
@@ -6987,7 +7006,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://knoxvillemarathon.com/marathon/",
     notes: "Also half and 5K.",
   },
-  {
+{
     seriesSlug: "city-of-oaks-marathon",
     date: "2026-11-01",
     distance: "Marathon",
@@ -7003,7 +7022,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://cityofoaksmarathon.com/race-26/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "novant-health-charlotte-marathon",
     date: "2026-11-14",
     distance: "Marathon",
@@ -7019,7 +7038,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://runsignup.com/Race/NC/Charlotte/CharlotteMarathon",
     notes: "Also half marathon.",
   },
-  {
+{
     seriesSlug: "st-jude-memphis-marathon",
     date: "2026-12-05",
     distance: "Marathon",
@@ -7035,7 +7054,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.stjude.org/get-involved/fitness-fundraisers/memphis-marathon.html",
     notes: "25th anniversary. Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "yuengling-shamrock-marathon",
     date: "2027-03-21",
     distance: "Marathon",
@@ -7051,7 +7070,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.shamrockmarathon.com/marathon/",
     notes: "Also half and 8K.",
   },
-  {
+{
     seriesSlug: "kentucky-derby-festival-marathon",
     date: "2027-04-24",
     distance: "Marathon",
@@ -7067,7 +7086,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://derbyfestivalmarathon.com/",
     notes: "Also miniMarathon.",
   },
-  {
+{
     seriesSlug: "rock-n-roll-nashville",
     date: "2027-04-25",
     distance: "Marathon",
@@ -7083,7 +7102,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.runrocknroll.com/events/nashville",
     notes: "Also half and 10K.",
   },
-  {
+{
     seriesSlug: "tcs-toronto-waterfront-marathon",
     date: "2026-10-18",
     distance: "Marathon",
@@ -7099,7 +7118,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.torontowaterfrontmarathon.com/",
     notes: "Also half. 5K is Saturday 17 October.",
   },
-  {
+{
     seriesSlug: "beneva-quebec-city-marathon",
     date: "2026-10-04",
     distance: "Marathon",
@@ -7115,7 +7134,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.jecoursqc.com/en/beneva-quebec-city-marathon-presented-by-montellier/schedule/",
     notes: "Also half, 10K and 5K.",
   },
-  {
+{
     seriesSlug: "marathon-beneva-de-montreal",
     date: "2026-10-11",
     distance: "Marathon",
@@ -7131,7 +7150,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://couronsmtl.com/en/marathon-beneva/home/",
     notes: "33rd edition. Also half.",
   },
-  {
+{
     seriesSlug: "tamarack-ottawa-international-marathon",
     date: "2027-05-30",
     distance: "Marathon",
@@ -7147,7 +7166,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://www.runottawa.ca/races-and-events/ottawa-marathon/",
     notes: "Race weekend 29–30 May.",
   },
-  {
+{
     seriesSlug: "servus-calgary-marathon",
     date: "2027-05-30",
     distance: "Marathon",
@@ -7163,7 +7182,7 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://calgarymarathon.com/",
     notes: "Registration coming soon.",
   },
-  {
+{
     seriesSlug: "manitoba-marathon",
     date: "2027-06-20",
     distance: "Marathon",
@@ -7178,5 +7197,85 @@ export const runrecsGapFillEditions: Edition[] = [
     ),
     source: "https://manitobamarathon.mb.ca/",
     notes: "Father's Day weekend.",
+  },
+  {
+    seriesSlug: "royal-victoria-marathon",
+    date: "2026-10-11",
+    distance: "Marathon",
+    distanceKm: 42.195,
+    status: "Open",
+    entryUrl: "https://www.runvictoriamarathon.com/",
+    entryOptions: officialEntry(
+      "victoria-marathon",
+      "Royal Victoria Marathon",
+      "https://www.runvictoriamarathon.com/faqs",
+      "Official FAQ: Sunday 11 October 2026, 08:15 marathon start.",
+    ),
+    source: "https://www.runvictoriamarathon.com/faqs",
+    notes: "46th annual. Also half, 8K and 5K.",
+  },
+  {
+    seriesSlug: "around-the-bay-road-race",
+    date: "2027-04-04",
+    distance: "30K",
+    distanceKm: 30,
+    status: "Open",
+    entryUrl: "https://bayrace.com/",
+    entryOptions: officialEntry(
+      "around-the-bay",
+      "Around the Bay Road Race",
+      "https://bayrace.com/",
+      "Official site: Sunday 4 April 2027.",
+    ),
+    source: "https://bayrace.com/",
+    notes: "Moved off Easter Sunday.",
+  },
+  {
+    seriesSlug: "beneva-mississauga-marathon",
+    date: "2027-04-25",
+    distance: "Marathon",
+    distanceKm: 42.195,
+    status: "Open",
+    entryUrl: "https://www.mississaugamarathon.com/",
+    entryOptions: officialEntry(
+      "mississauga-marathon",
+      "Beneva Mississauga Marathon",
+      "https://www.mississaugamarathon.com/",
+      "Official site: Sunday 25 April 2027.",
+    ),
+    source: "https://www.mississaugamarathon.com/",
+    notes: "Also half marathon.",
+  },
+  {
+    seriesSlug: "medavie-blue-nose-marathon",
+    date: "2027-05-23",
+    distance: "Marathon",
+    distanceKm: 42.195,
+    status: "Open",
+    entryUrl: "https://raceroster.com/events/2027/112559/medavie-blue-nose-marathon",
+    entryOptions: officialEntry(
+      "blue-nose-marathon",
+      "Medavie Blue Nose Marathon",
+      "https://raceroster.com/events/2027/112559/medavie-blue-nose-marathon",
+      "Race weekend 21–23 May 2027. Marathon Sunday 23 May.",
+    ),
+    source: "https://discoverhalifaxns.com/event/2027-medavie-blue-nose-marathon/",
+    notes: "Atlantic Canada's largest running weekend.",
+  },
+  {
+    seriesSlug: "saskatchewan-marathon",
+    date: "2027-05-31",
+    distance: "Marathon",
+    distanceKm: 42.195,
+    status: "Open",
+    entryUrl: "https://www.saskmarathon.ca/",
+    entryOptions: officialEntry(
+      "saskatchewan-marathon",
+      "Saskatchewan Marathon",
+      "https://www.saskmarathon.ca/",
+      "Official calendar: race day Monday? site lists Race Day 31 May 2027, Diefenbaker Park.",
+    ),
+    source: "https://www.saskmarathon.ca/",
+    notes: "Also half, 10K and 5K.",
   },
 ];
