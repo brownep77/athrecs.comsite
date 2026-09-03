@@ -164,6 +164,10 @@ import {
   germanyEnduranceRaceEditions,
   germanyEnduranceRaceSeries,
 } from "./germany-endurance-races";
+import {
+  runrecsGapFillEditions,
+  runrecsGapFillSeries,
+} from "./runrecs-gap-fill-2026-09";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -252,6 +256,7 @@ for (const series of [
   ...(ukHomeNationChampionshipsSeries as Series[]),
   ...(verifiedNonStandardDistanceSeries as Series[]),
   ...(germanyEnduranceRaceSeries as Series[]),
+  ...(runrecsGapFillSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(ironman703Series as Series[]),
   ...(multiSportSeries as Series[]),
@@ -356,6 +361,7 @@ const mergedEditions = [
   ...(germanyEnduranceRaceEditions as Edition[]).filter((edition) =>
     extraSlugs.has(edition.seriesSlug),
   ),
+  ...(runrecsGapFillEditions as Edition[]).filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(ironman703Editions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
