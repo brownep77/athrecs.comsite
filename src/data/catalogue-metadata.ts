@@ -13,8 +13,8 @@ export const catalogueMetadata = {
   merged_counts: {
     clubs: 1737,
     athletes: 1255,
-    race_series: 7484,
-    editions: 219199,
+    race_series: 7487,
+    editions: 219202,
     results: 2506,
   },
   clubs_source:
