@@ -2,7 +2,12 @@ import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "../lib/athrecs/seed.server";
 import { todayIso } from "../lib/athrecs/format";
-import type { AthleteListItem, ClubListItem, Sport } from "../lib/athrecs/types";
+import type {
+  AthleteListItem,
+  ClubListItem,
+  SpectatorAccessType,
+  Sport,
+} from "../lib/athrecs/types";
 import * as base from "../lib/athrecs/api";
 
 // Keep staff, import and shared-network functions available. The explicit
@@ -129,18 +134,21 @@ export const listAthletes = createServerFn({ method: "GET" })
       from athletes athlete
       left join clubs club on club.id = athlete.club_id
       where (athlete.profile_type = 'Public figure' or athlete.profile_visibility = 'public')
-        and exists (
-          select 1
-          from results result
-          join editions edition on edition.id = result.edition_id
-          join events event on event.id = edition.event_id
-          where result.athlete_id = athlete.id
-            and event.sport = 'Athletics'
-            and (
-              athlete.profile_type = 'Public figure'
-              or athlete.profile_visibility = 'public'
-              or result.result_visibility in ('public', 'public_figure')
-            )
+        and (
+          lower(coalesce(athlete.profile_roles, '')) like '%professional athlete%'
+          or exists (
+            select 1
+            from results result
+            join editions edition on edition.id = result.edition_id
+            join events event on event.id = edition.event_id
+            where result.athlete_id = athlete.id
+              and event.sport = 'Athletics'
+              and (
+                athlete.profile_type = 'Public figure'
+                or athlete.profile_visibility = 'public'
+                or result.result_visibility in ('public', 'public_figure')
+              )
+          )
         )
         and (
           ${q}::text is null
@@ -171,7 +179,11 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
     `;
     const allowed = new Set(allowedRows.map((row) => row.id));
     const results = result.results.filter((row) => allowed.has(row.id));
-    if (!results.length) return null;
+    const isProfessional = result.athlete.profile_roles
+      .toLowerCase()
+      .split(",")
+      .some((role) => role.trim() === "professional athlete");
+    if (!results.length && !isProfessional) return null;
     return { ...result, results };
   });
 
@@ -391,6 +403,8 @@ export type AthleticsCalendarItem = {
   surface: string;
   featured: boolean;
   competition_label: string | null;
+  spectator_access_type: SpectatorAccessType | null;
+  spectator_ticket_url: string | null;
 };
 
 export type AthleticsCalendarPage = {
@@ -480,9 +494,18 @@ async function queryAthleticsCalendarPage(
           event.surface,
           event.featured,
           event.summary,
-          event.description
+          event.description,
+          (
+            array_agg(spectator.access_type order by spectator.checked_at desc)
+              filter (where spectator.is_verified)
+          )[1] as spectator_access_type,
+          (
+            array_agg(spectator.ticket_url order by spectator.checked_at desc)
+              filter (where spectator.is_verified and spectator.ticket_url is not null)
+          )[1] as spectator_ticket_url
         from editions edition
         join events event on event.id = edition.event_id
+        left join edition_spectator_access spectator on spectator.edition_id = edition.id
         where event.sport = 'Athletics'
           and (${trackAndFieldOnly}::boolean is false or event.surface = 'Track')
           and (${upcomingOnly}::boolean is false or edition.event_date >= ${today}::date)

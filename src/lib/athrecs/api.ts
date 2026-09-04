@@ -11,6 +11,7 @@ import type {
   ClubSocialInfo,
   EditionEntryOption,
   EditionResultLink,
+  EditionSpectatorAccess,
   EntryStatus,
   EventListItem,
   RaceGroupInfo,
@@ -78,6 +79,21 @@ function parseResultLinks(value: unknown): EditionResultLink[] {
     return Array.isArray(parsed) ? (parsed as EditionResultLink[]) : [];
   } catch {
     return [];
+  }
+}
+
+function parseSpectatorAccess(value: unknown): EditionSpectatorAccess | null {
+  if (!value) return null;
+  if (typeof value === "object" && !Array.isArray(value)) {
+    const access = value as EditionSpectatorAccess;
+    return access.is_verified ? access : null;
+  }
+  if (typeof value !== "string") return null;
+  try {
+    const parsed = JSON.parse(value) as EditionSpectatorAccess;
+    return parsed && typeof parsed === "object" && parsed.is_verified ? parsed : null;
+  } catch {
+    return null;
   }
 }
 
@@ -467,6 +483,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       result_count: number;
       entry_options_json: string | EditionEntryOption[] | null;
       result_links_json: string | EditionResultLink[] | null;
+      spectator_access_json: string | EditionSpectatorAccess | null;
     }>`
       select
         ed.id,
@@ -535,6 +552,22 @@ export const getEventBySlug = createServerFn({ method: "GET" })
             and link.status = 'approved'
             and link.is_verified
         ) as result_links_json
+        , (
+          select json_build_object(
+            'access_type', spectator.access_type,
+            'ticket_url', spectator.ticket_url,
+            'price_amount', spectator.price_amount,
+            'price_currency', spectator.price_currency,
+            'checked_at', spectator.checked_at::text,
+            'source_url', spectator.source_url,
+            'is_verified', spectator.is_verified,
+            'notes', spectator.notes
+          )::text
+          from edition_spectator_access spectator
+          where spectator.edition_id = ed.id
+            and spectator.is_verified
+          limit 1
+        ) as spectator_access_json
       from editions ed
       where ed.event_id = ${event.id}
       order by
@@ -557,11 +590,14 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         end,
         ed.id desc
     `;
-    const editions = editionRows.map(({ entry_options_json, result_links_json, ...edition }) => ({
-      ...edition,
-      entry_options: parseEntryOptions(entry_options_json),
-      result_links: parseResultLinks(result_links_json),
-    }));
+    const editions = editionRows.map(
+      ({ entry_options_json, result_links_json, spectator_access_json, ...edition }) => ({
+        ...edition,
+        entry_options: parseEntryOptions(entry_options_json),
+        result_links: parseResultLinks(result_links_json),
+        spectator_access: parseSpectatorAccess(spectator_access_json),
+      }),
+    );
 
     const storedUpcoming = editions.filter((e) => e.event_date >= today);
     const storedDates = new Set(storedUpcoming.map((e) => e.event_date));
@@ -582,6 +618,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
               notes: null,
               result_count: 0,
               result_links: [],
+              spectator_access: null,
               entry_options: event.website
                 ? [
                     {

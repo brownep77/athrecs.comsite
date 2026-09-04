@@ -188,6 +188,7 @@ function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarItem }) 
     edition.surface === "Track" && /^(?:Other|Track & field)$/i.test(edition.distance_code)
       ? "Track & field"
       : formatDistanceWithUnits(edition.distance_code);
+  const spectatorLabel = spectatorAccessLabel(edition.spectator_access_type);
 
   return (
     <article className="rounded-xl border border-border bg-surface p-4 shadow-card">
@@ -225,9 +226,33 @@ function AthleticsCalendarCard({ edition }: { edition: AthleticsCalendarItem }) 
           ) : null}
           <Badge variant="outline">{distanceLabel}</Badge>
           {edition.surface ? <Badge variant="secondary">{edition.surface}</Badge> : null}
+          {spectatorLabel ? (
+            <Badge variant={edition.spectator_access_type === "free" ? "accent" : "outline"}>
+              {spectatorLabel}
+            </Badge>
+          ) : null}
           <Badge variant={status === "Open" ? "default" : "outline"}>{statusLabel(status)}</Badge>
         </div>
       </div>
     </article>
   );
+}
+
+function spectatorAccessLabel(
+  accessType: AthleticsCalendarItem["spectator_access_type"],
+): string | null {
+  switch (accessType) {
+    case "free":
+      return "Free to watch";
+    case "ticketed":
+      return "Tickets available";
+    case "free_and_ticketed":
+      return "Free areas + tickets";
+    case "registration_required":
+      return "Spectator registration";
+    case "sold_out":
+      return "Spectator tickets sold out";
+    default:
+      return null;
+  }
 }

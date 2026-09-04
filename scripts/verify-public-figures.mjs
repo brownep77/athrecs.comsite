@@ -8,6 +8,12 @@ import {
 } from "../src/data/public-figures.ts";
 
 const expectedProfiles = [
+  "keely-hodgkinson",
+  "noah-lyles",
+  "dina-asher-smith",
+  "josh-kerr",
+  "rhasidat-adeleke",
+  "femke-broeders-bol",
   "rich-roll",
   "harry-styles",
   "gordon-ramsay",
