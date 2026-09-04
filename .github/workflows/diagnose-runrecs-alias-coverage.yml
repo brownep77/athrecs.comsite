@@ -28,7 +28,7 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Test alias assertions against the merged catalogue
+      - name: Map every missing canonical slug to its source file
         shell: bash
         run: |
           python3 - <<'PY'
@@ -36,45 +36,44 @@ jobs:
 
           path = Path("scripts/verify-fixture-duplicates.mjs")
           text = path.read_text(encoding="utf-8")
-
-          destructure = '''const [
-            { seriesList: coreSeries },'''
-          destructure_replacement = '''const [
-            { seriesList: catalogueSeries },
-            { seriesList: coreSeries },'''
-          if text.count(destructure) != 1:
-              raise SystemExit(f"Expected one import destructure anchor; found {text.count(destructure)}")
-          text = text.replace(destructure, destructure_replacement, 1)
-
-          imports = '''] = await Promise.all([
-            import("../src/data/series.ts"),'''
-          imports_replacement = '''] = await Promise.all([
-            import("../src/data/catalogue.ts"),
-            import("../src/data/series.ts"),'''
-          if text.count(imports) != 1:
-              raise SystemExit(f"Expected one Promise.all import anchor; found {text.count(imports)}")
-          text = text.replace(imports, imports_replacement, 1)
-
-          map_anchor = '''const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
-          for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
+          old = '''for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
             assert(!seriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
             assert(seriesBySlug.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
-          }'''
-          map_replacement = '''const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
-          const catalogueSeriesBySlug = new Map(
-            catalogueSeries.map((series) => [series.slug, series]),
-          );
-          for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
-            assert(!catalogueSeriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
-            assert(
-              catalogueSeriesBySlug.has(canonical),
-              `Duplicate alias has no canonical event: ${canonical}`,
-            );
-          }'''
-          if text.count(map_anchor) != 1:
-              raise SystemExit(f"Expected one alias map block; found {text.count(map_anchor)}")
-          text = text.replace(map_anchor, map_replacement, 1)
-
-          path.write_text(text, encoding="utf-8")
+          }
+          '''
+          new = '''const missingAliasCanonicals = Object.entries(verifiedFixtureAliases)
+            .filter(([, canonical]) => !seriesBySlug.has(canonical))
+            .map(([alias, canonical]) => ({ alias, canonical }));
+          const { writeFileSync } = await import("node:fs");
+          writeFileSync("/tmp/missing-alias-canonicals.json", JSON.stringify(missingAliasCanonicals));
+          process.exit(0);
+          '''
+          if text.count(old) != 1:
+              raise SystemExit(f"Expected one alias assertion block; found {text.count(old)}")
+          path.write_text(text.replace(old, new, 1), encoding="utf-8")
           PY
-          npm run verify:fixture-duplicates
+
+          node --experimental-strip-types scripts/verify-fixture-duplicates.mjs
+
+          python3 - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          missing = json.loads(Path("/tmp/missing-alias-canonicals.json").read_text())
+          files = list(Path("src/data").glob("*.ts"))
+          report = []
+          for row in missing:
+              canonical = row["canonical"]
+              patterns = [
+                  re.compile(r'\bslug\s*:\s*["\']' + re.escape(canonical) + r'["\']'),
+                  re.compile(r'["\']slug["\']\s*:\s*["\']' + re.escape(canonical) + r'["\']'),
+              ]
+              matches = []
+              for file in files:
+                  text = file.read_text(encoding="utf-8")
+                  if any(pattern.search(text) for pattern in patterns):
+                      matches.append(str(file))
+              report.append({**row, "source_files": matches})
+          print("ALIAS_CANONICAL_SOURCE_MAP=" + json.dumps(report, separators=(",", ":")))
+          PY
