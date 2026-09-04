@@ -1987,19 +1987,33 @@ async function seed(): Promise<void> {
   // serializing every serverless instance after a catalogue is current.
   if (dbSource === "neon" && (await catalogueMarkersCurrent(sql))) return;
 
-  if (dbSource === "neon") {
-    await sql.transaction(async (tx) => {
-      // Catalogue versions can change while old and new serverless instances are
-      // live together. A database-wide transaction lock prevents their event and
-      // edition upserts from deadlocking one another.
-      await tx.query("select pg_advisory_xact_lock($1)", [CATALOGUE_SEED_LOCK_ID]);
-      if (await catalogueMarkersCurrent(tx)) return;
-      await seedCatalogue(tx);
-    });
-    return;
-  }
+  try {
+    if (dbSource === "neon") {
+      await sql.transaction(async (tx) => {
+        // Catalogue versions can change while old and new serverless instances are
+        // live together. A database-wide transaction lock prevents their event and
+        // edition upserts from deadlocking one another.
+        await tx.query("select pg_advisory_xact_lock($1)", [CATALOGUE_SEED_LOCK_ID]);
+        if (await catalogueMarkersCurrent(tx)) return;
+        await seedCatalogue(tx);
+      });
+      return;
+    }
 
-  await seedCatalogue(sql);
+    await seedCatalogue(sql);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    const code = typeof error === "object" && error && "code" in error ? String((error as { code?: string }).code) : "";
+    if (
+      code === "53100" ||
+      message.includes("project size limit") ||
+      message.includes("Catalogue seed count mismatch")
+    ) {
+      console.error("[catalogue-seed] database at capacity; serving existing rows", { code, message });
+      return;
+    }
+    throw error;
+  }
 }
 
 export function ensureAthrecsSeeded(): Promise<void> {
