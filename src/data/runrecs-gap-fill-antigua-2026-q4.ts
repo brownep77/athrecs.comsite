@@ -1,0 +1,140 @@
+/**
+ * Antigua and Barbuda Sep-Dec 2026 road races from the ABAA calendar.
+ */
+import type { Edition, Series } from "./types";
+
+const CHECKED_AT = "2026-09-04";
+const ABAA = "https://www.facebook.com/AntiguaAthletics/posts/1569045255266421";
+
+function officialEntry(notes: string): Edition["entryOptions"] {
+  return [
+    {
+      providerCode: "abaa",
+      providerName: "Antigua Barbuda Athletic Association",
+      entryUrl: ABAA,
+      entryType: "official",
+      status: "open",
+      checkedAt: CHECKED_AT,
+      sourceUrl: ABAA,
+      notes,
+    },
+  ];
+}
+
+export const runrecsGapFillAntiguaQ4Series: Series[] = [
+  {
+    slug: "abaa-one-mile-run",
+    name: "ABAA 1 Mile Run",
+    sport: "Running",
+    country: "Antigua and Barbuda",
+    county: "Saint John",
+    city: "St. John's",
+    area: "St. John's",
+    surface: "Road",
+    distances: ["1M"],
+    summary: "ABAA one-mile road race.",
+    description: "ABAA lists 27 September 2026.",
+    organiser: "Antigua Barbuda Athletic Association",
+    website: ABAA,
+    featured: false,
+    source_url: ABAA,
+  },
+  {
+    slug: "antigua-independence-5k",
+    name: "Antigua Independence 5K",
+    sport: "Running",
+    country: "Antigua and Barbuda",
+    county: "Saint John",
+    city: "St. John's",
+    area: "St. John's",
+    surface: "Road",
+    distances: ["5K"],
+    summary: "Independence 5K on the ABAA calendar.",
+    description: "ABAA lists 31 October 2026.",
+    organiser: "Antigua Barbuda Athletic Association",
+    website: ABAA,
+    featured: false,
+    source_url: ABAA,
+  },
+  {
+    slug: "abaa-10k-run",
+    name: "ABAA 10K Run",
+    sport: "Running",
+    country: "Antigua and Barbuda",
+    county: "Saint John",
+    city: "St. John's",
+    area: "St. John's",
+    surface: "Road",
+    distances: ["10K"],
+    summary: "ABAA 10 km road race.",
+    description: "ABAA lists 22 November 2026.",
+    organiser: "Antigua Barbuda Athletic Association",
+    website: ABAA,
+    featured: false,
+    source_url: ABAA,
+  },
+  {
+    slug: "abaa-two-mile-run",
+    name: "ABAA 2 Mile Run",
+    sport: "Running",
+    country: "Antigua and Barbuda",
+    county: "Saint John",
+    city: "St. John's",
+    area: "St. John's",
+    surface: "Road",
+    distances: ["2M"],
+    summary: "ABAA two-mile road race.",
+    description: "ABAA lists 13 December 2026.",
+    organiser: "Antigua Barbuda Athletic Association",
+    website: ABAA,
+    featured: false,
+    source_url: ABAA,
+  },
+];
+
+export const runrecsGapFillAntiguaQ4Editions: Edition[] = [
+  {
+    seriesSlug: "abaa-one-mile-run",
+    date: "2026-09-27",
+    distance: "1M",
+    distanceKm: 1.609,
+    status: "Open",
+    entryUrl: ABAA,
+    entryOptions: officialEntry("Official ABAA calendar: 27 September 2026."),
+    source: ABAA,
+    notes: "1 mile road race.",
+  },
+  {
+    seriesSlug: "antigua-independence-5k",
+    date: "2026-10-31",
+    distance: "5K",
+    distanceKm: 5,
+    status: "Open",
+    entryUrl: ABAA,
+    entryOptions: officialEntry("Official ABAA calendar: 31 October 2026."),
+    source: ABAA,
+    notes: "5 km road race.",
+  },
+  {
+    seriesSlug: "abaa-10k-run",
+    date: "2026-11-22",
+    distance: "10K",
+    distanceKm: 10,
+    status: "Open",
+    entryUrl: ABAA,
+    entryOptions: officialEntry("Official ABAA calendar: 22 November 2026."),
+    source: ABAA,
+    notes: "10 km road race.",
+  },
+  {
+    seriesSlug: "abaa-two-mile-run",
+    date: "2026-12-13",
+    distance: "2M",
+    distanceKm: 3.219,
+    status: "Open",
+    entryUrl: ABAA,
+    entryOptions: officialEntry("Official ABAA calendar: 13 December 2026."),
+    source: ABAA,
+    notes: "2 mile road race.",
+  },
+];
