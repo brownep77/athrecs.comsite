@@ -5,16 +5,16 @@ export const catalogueMetadata = {
   source_sha256: "b182a63ec45365fd2eba89c76f05c1afd4e3884641a840a7eaa9a83e8feee893",
   source_counts: {
     athletes: 254,
-    race_series: 129,
-    editions: 531,
+    race_series: 142,
+    editions: 544,
     results: 1469,
     raw_club_names: 42,
   },
   merged_counts: {
     clubs: 1737,
     athletes: 1255,
-    race_series: 7901,
-    editions: 219616,
+    race_series: 7914,
+    editions: 219629,
     results: 2506,
   },
   clubs_source:
