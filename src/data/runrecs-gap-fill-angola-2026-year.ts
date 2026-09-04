@@ -13,7 +13,7 @@ function officialEntry(url: string, notes: string): Edition["entryOptions"] {
       providerName: "TCHACO Sport",
       entryUrl: url,
       entryType: "official",
-      status: "finished",
+      status: "closed",
       checkedAt: CHECKED_AT,
       sourceUrl: url,
       notes,
