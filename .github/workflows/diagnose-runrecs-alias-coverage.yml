@@ -1,0 +1,57 @@
+name: Diagnose RunRecs alias coverage
+
+on:
+  push:
+    branches:
+      - diagnose/runrecs-alias-coverage
+    paths:
+      - .github/workflows/diagnose-runrecs-alias-coverage.yml
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out diagnostic branch
+        uses: actions/checkout@v4
+        with:
+          ref: diagnose/runrecs-alias-coverage
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Report every alias coverage problem
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("scripts/verify-fixture-duplicates.mjs")
+          text = path.read_text(encoding="utf-8")
+          old = '''for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
+            assert(!seriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
+            assert(seriesBySlug.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
+          }
+          '''
+          new = '''const aliasCoverageProblems = Object.entries(verifiedFixtureAliases).flatMap(([alias, canonical]) => {
+            const problems = [];
+            if (seriesBySlug.has(alias)) problems.push({ type: "retired-alias-remains", alias, canonical });
+            if (!seriesBySlug.has(canonical)) problems.push({ type: "canonical-missing", alias, canonical });
+            return problems;
+          });
+          console.log("ALIAS_COVERAGE_DIAGNOSTIC=" + JSON.stringify(aliasCoverageProblems));
+          process.exit(0);
+          '''
+          if text.count(old) != 1:
+              raise SystemExit(f"Expected one alias assertion block; found {text.count(old)}")
+          path.write_text(text.replace(old, new, 1), encoding="utf-8")
+          PY
+          node --experimental-strip-types scripts/verify-fixture-duplicates.mjs
