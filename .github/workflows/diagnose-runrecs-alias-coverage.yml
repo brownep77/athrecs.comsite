@@ -33,35 +33,46 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
 
           path = Path("scripts/verify-fixture-duplicates.mjs")
           text = path.read_text(encoding="utf-8")
 
-          destructure_anchor = '''  { englandAthleticsUkFixturesEditions, englandAthleticsUkFixturesSeries },
-          marathonOptions,'''
-          destructure_replacement = '''  { englandAthleticsUkFixturesEditions, englandAthleticsUkFixturesSeries },
-          { runrecsGapFillSeries },
-          { ukFiveKSeries },
-          marathonOptions,'''
-          if text.count(destructure_anchor) != 1:
-              raise SystemExit(f"Expected one destructuring anchor; found {text.count(destructure_anchor)}")
-          text = text.replace(destructure_anchor, destructure_replacement, 1)
+          pattern = re.compile(
+              r'(?m)^(?P<i>\s*)\{ englandAthleticsUkFixturesEditions, englandAthleticsUkFixturesSeries \},\n(?P=i)marathonOptions,'
+          )
+          text, count = pattern.subn(
+              lambda m: (
+                  f'{m.group("i")}{{ englandAthleticsUkFixturesEditions, englandAthleticsUkFixturesSeries }},\n'
+                  f'{m.group("i")}{{ runrecsGapFillSeries }},\n'
+                  f'{m.group("i")}{{ ukFiveKSeries }},\n'
+                  f'{m.group("i")}marathonOptions,'
+              ),
+              text,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit(f"Expected one destructuring anchor; found {count}")
 
-          import_anchor = '''  import("../src/data/england-athletics-uk-fixtures.ts"),
-          import("../src/data/entry-options-uk-marathons.ts"),'''
-          import_replacement = '''  import("../src/data/england-athletics-uk-fixtures.ts"),
-          import("../src/data/runrecs-gap-fill-2026-09.ts"),
-          import("../src/data/uk-5k-races.ts"),
-          import("../src/data/entry-options-uk-marathons.ts"),'''
-          if text.count(import_anchor) != 1:
-              raise SystemExit(f"Expected one import anchor; found {text.count(import_anchor)}")
-          text = text.replace(import_anchor, import_replacement, 1)
+          pattern = re.compile(
+              r'(?m)^(?P<i>\s*)import\("\.\./src/data/england-athletics-uk-fixtures\.ts"\),\n(?P=i)import\("\.\./src/data/entry-options-uk-marathons\.ts"\),'
+          )
+          text, count = pattern.subn(
+              lambda m: (
+                  f'{m.group("i")}import("../src/data/england-athletics-uk-fixtures.ts"),\n'
+                  f'{m.group("i")}import("../src/data/runrecs-gap-fill-2026-09.ts"),\n'
+                  f'{m.group("i")}import("../src/data/uk-5k-races.ts"),\n'
+                  f'{m.group("i")}import("../src/data/entry-options-uk-marathons.ts"),'
+              ),
+              text,
+              count=1,
+          )
+          if count != 1:
+              raise SystemExit(f"Expected one import anchor; found {count}")
 
-          alias_anchor = '''const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
-          for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
-            assert(!seriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
-            assert(seriesBySlug.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
-          }'''
+          alias_pattern = re.compile(
+              r'''const seriesBySlug = new Map\(seriesList\.map\(\(series\) => \[series\.slug, series\]\)\);\nfor \(const \[alias, canonical\] of Object\.entries\(verifiedFixtureAliases\)\) \{\n\s*assert\(!seriesBySlug\.has\(alias\), `Retired duplicate remains in catalogue: \$\{alias\}`\);\n\s*assert\(seriesBySlug\.has\(canonical\), `Duplicate alias has no canonical event: \$\{canonical\}`\);\n\}'''
+          )
           alias_replacement = '''const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
           const aliasCanonicalSeriesBySlug = new Map(
             [...seriesList, ...runrecsGapFillSeries, ...ukFiveKSeries].map((series) => [
@@ -76,9 +87,9 @@ jobs:
               `Duplicate alias has no canonical event: ${canonical}`,
             );
           }'''
-          if text.count(alias_anchor) != 1:
-              raise SystemExit(f"Expected one alias assertion block; found {text.count(alias_anchor)}")
-          text = text.replace(alias_anchor, alias_replacement, 1)
+          text, count = alias_pattern.subn(alias_replacement, text, count=1)
+          if count != 1:
+              raise SystemExit(f"Expected one alias assertion block; found {count}")
 
           path.write_text(text, encoding="utf-8")
           PY
