@@ -30,7 +30,11 @@ function officialEntry(
   ];
 }
 
-export const runrecsGapFillSeries: Series[] = [
+function isDefined<T>(item: T | undefined): item is T {
+  return item !== undefined;
+}
+
+export const runrecsGapFillSeries: Series[] = ([
 {
     slug: "standard-chartered-nairobi-marathon",
     name: "Standard Chartered Nairobi Marathon",
@@ -9804,9 +9808,9 @@ export const runrecsGapFillSeries: Series[] = [
     featured: false,
     source_url: "https://worldathletics.org/competition/calendar-results?competitionGroupId=3775",
   },
-];
+] satisfies (Series | undefined)[]).filter(isDefined);
 
-export const runrecsGapFillEditions: Edition[] = [
+export const runrecsGapFillEditions: Edition[] = ([
 {
     seriesSlug: "standard-chartered-nairobi-marathon",
     date: "2026-10-25",
@@ -17705,4 +17709,4 @@ export const runrecsGapFillEditions: Edition[] = [
     source: "https://worldathletics.org/competition/calendar-results?competitionGroupId=3775",
     notes: "Marathon event.",
   },
-];
+] satisfies (Edition | undefined)[]).filter(isDefined);
