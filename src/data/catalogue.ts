@@ -271,6 +271,7 @@ for (const series of [
   ...(twoOceansSeries as Series[]),
   ...(publicFigureSeries as Series[]),
 ]) {
+  if (!series?.slug) continue;
   if (eventSlugAliases[series.slug]) continue;
   const key = normName(seriesOverrides[series.slug]?.name ?? series.name);
   if (usedSlugs.has(series.slug) || coreNameKeys.has(key)) continue;
