@@ -28,7 +28,7 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Map every missing canonical slug to its source file
+      - name: Test narrow alias source coverage fix
         shell: bash
         run: |
           python3 - <<'PY'
@@ -36,44 +36,51 @@ jobs:
 
           path = Path("scripts/verify-fixture-duplicates.mjs")
           text = path.read_text(encoding="utf-8")
-          old = '''for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
+
+          destructure_anchor = '''  { englandAthleticsUkFixturesEditions, englandAthleticsUkFixturesSeries },
+          marathonOptions,'''
+          destructure_replacement = '''  { englandAthleticsUkFixturesEditions, englandAthleticsUkFixturesSeries },
+          { runrecsGapFillSeries },
+          { ukFiveKSeries },
+          marathonOptions,'''
+          if text.count(destructure_anchor) != 1:
+              raise SystemExit(f"Expected one destructuring anchor; found {text.count(destructure_anchor)}")
+          text = text.replace(destructure_anchor, destructure_replacement, 1)
+
+          import_anchor = '''  import("../src/data/england-athletics-uk-fixtures.ts"),
+          import("../src/data/entry-options-uk-marathons.ts"),'''
+          import_replacement = '''  import("../src/data/england-athletics-uk-fixtures.ts"),
+          import("../src/data/runrecs-gap-fill-2026-09.ts"),
+          import("../src/data/uk-5k-races.ts"),
+          import("../src/data/entry-options-uk-marathons.ts"),'''
+          if text.count(import_anchor) != 1:
+              raise SystemExit(f"Expected one import anchor; found {text.count(import_anchor)}")
+          text = text.replace(import_anchor, import_replacement, 1)
+
+          alias_anchor = '''const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
+          for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
             assert(!seriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
             assert(seriesBySlug.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
-          }
-          '''
-          new = '''const missingAliasCanonicals = Object.entries(verifiedFixtureAliases)
-            .filter(([, canonical]) => !seriesBySlug.has(canonical))
-            .map(([alias, canonical]) => ({ alias, canonical }));
-          const { writeFileSync } = await import("node:fs");
-          writeFileSync("/tmp/missing-alias-canonicals.json", JSON.stringify(missingAliasCanonicals));
-          process.exit(0);
-          '''
-          if text.count(old) != 1:
-              raise SystemExit(f"Expected one alias assertion block; found {text.count(old)}")
-          path.write_text(text.replace(old, new, 1), encoding="utf-8")
+          }'''
+          alias_replacement = '''const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
+          const aliasCanonicalSeriesBySlug = new Map(
+            [...seriesList, ...runrecsGapFillSeries, ...ukFiveKSeries].map((series) => [
+              series.slug,
+              series,
+            ]),
+          );
+          for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
+            assert(!seriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
+            assert(
+              aliasCanonicalSeriesBySlug.has(canonical),
+              `Duplicate alias has no canonical event: ${canonical}`,
+            );
+          }'''
+          if text.count(alias_anchor) != 1:
+              raise SystemExit(f"Expected one alias assertion block; found {text.count(alias_anchor)}")
+          text = text.replace(alias_anchor, alias_replacement, 1)
+
+          path.write_text(text, encoding="utf-8")
           PY
 
-          node --experimental-strip-types scripts/verify-fixture-duplicates.mjs
-
-          python3 - <<'PY'
-          import json
-          import re
-          from pathlib import Path
-
-          missing = json.loads(Path("/tmp/missing-alias-canonicals.json").read_text())
-          files = list(Path("src/data").glob("*.ts"))
-          report = []
-          for row in missing:
-              canonical = row["canonical"]
-              patterns = [
-                  re.compile(r'\bslug\s*:\s*["\']' + re.escape(canonical) + r'["\']'),
-                  re.compile(r'["\']slug["\']\s*:\s*["\']' + re.escape(canonical) + r'["\']'),
-              ]
-              matches = []
-              for file in files:
-                  text = file.read_text(encoding="utf-8")
-                  if any(pattern.search(text) for pattern in patterns):
-                      matches.append(str(file))
-              report.append({**row, "source_files": matches})
-          print("ALIAS_CANONICAL_SOURCE_MAP=" + json.dumps(report, separators=(",", ":")))
-          PY
+          npm run verify:fixture-duplicates
