@@ -6,10 +6,13 @@ import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts"
 import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
 
 const CHECKED_AT = "2026-08-26";
+const HISTORICAL_START = "2025-01-01";
 const CALENDAR_START = "2026-01-01";
 const HORIZON = "2027-12-31";
 
 const expected = [
+  ["vlora-half-marathon", "2025-11-30", ["10K", "5K", "Half"]],
+  ["durres-marathon", "2025-11-02", ["10K", "5K"]],
   ["berat-green-half-marathon", "2026-04-05", ["10K", "Half"]],
   ["martyrs-day-trail-half-marathon-tirana", "2026-05-05", ["10K", "5K", "Half"]],
   ["kukes-half-marathon", "2026-04-26", ["10K", "Half"]],
@@ -54,7 +57,7 @@ function groupedDistances(editions) {
 }
 
 assert.equal(albaniaRaceSeries.length, 16, "Unexpected Albania event-series count");
-assert.equal(albaniaRaceEditions.length, 48, "Unexpected Albania advertised-distance count");
+assert.equal(albaniaRaceEditions.length, 53, "Unexpected Albania advertised-distance count");
 
 const albaniaCountry = resolveCountry({ country: "Albania" });
 assert.equal(albaniaCountry.iso, "AL", "Albania must resolve to its ISO country code");
@@ -68,6 +71,14 @@ for (const series of albaniaRaceSeries) {
   assert.match(series.website, /^https:\/\//, `${series.slug} must have an HTTPS organiser page`);
 }
 
+const retainedHistoricalEditionKeys = new Set(
+  expected
+    .filter(([, date]) => date < CALENDAR_START)
+    .flatMap(([slug, date, distances]) =>
+      distances.map((distance) => `${slug}|${date}|${distance}`),
+    ),
+);
+
 const editionKeys = new Set();
 for (const edition of albaniaRaceEditions) {
   const editionKey = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
@@ -75,9 +86,15 @@ for (const edition of albaniaRaceEditions) {
   editionKeys.add(editionKey);
   assert(seriesBySlug.has(edition.seriesSlug), `Unknown Albania series: ${edition.seriesSlug}`);
   assert(
-    edition.date >= CALENDAR_START,
-    `Albania fixture predates the requested full-year calendar: ${editionKey}`,
+    edition.date >= HISTORICAL_START,
+    `Albania fixture predates retained history: ${editionKey}`,
   );
+  if (edition.date < CALENDAR_START) {
+    assert(
+      retainedHistoricalEditionKeys.has(editionKey),
+      `Unexpected Albania pre-calendar history: ${editionKey}`,
+    );
+  }
   assert(edition.date <= HORIZON, `Albania fixture exceeds the requested horizon: ${editionKey}`);
   assert.match(edition.source, /^https:\/\//, `Missing public source for ${editionKey}`);
   assert.equal(
@@ -123,8 +140,13 @@ for (const edition of albaniaRaceEditions) {
 for (const monitoredSlug of ["vlora-half-marathon", "durres-marathon"]) {
   assert(seriesBySlug.has(monitoredSlug), `Missing monitored Albania series: ${monitoredSlug}`);
   assert(
-    !albaniaRaceEditions.some((edition) => edition.seriesSlug === monitoredSlug),
-    `Unadvertised future edition was invented for ${monitoredSlug}`,
+    !albaniaRaceEditions.some(
+      (edition) =>
+        edition.seriesSlug === monitoredSlug &&
+        edition.date >= CALENDAR_START &&
+        edition.date <= HORIZON,
+    ),
+    `Unadvertised 2026 or 2027 edition was invented for ${monitoredSlug}`,
   );
 }
 
@@ -219,6 +241,7 @@ process.stdout.write(
   JSON.stringify(
     {
       checked_at: CHECKED_AT,
+      historical_start: HISTORICAL_START,
       calendar_start: CALENDAR_START,
       horizon: HORIZON,
       series: albaniaRaceSeries.length,
