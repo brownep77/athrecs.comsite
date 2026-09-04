@@ -34,17 +34,23 @@ jobs:
           path = Path("src/data/runrecs-gap-fill-2026-09.ts")
           text = path.read_text(encoding="utf-8")
 
-          series_marker = "];\n\nexport const runrecsGapFillEditions: Edition[] = ["
-          series_replacement = "].filter((item): item is Series => item !== undefined);\n\nexport const runrecsGapFillEditions: Edition[] = ["
-          if text.count(series_marker) != 1:
-              raise SystemExit(f"Expected exactly one series boundary; found {text.count(series_marker)}")
-          text = text.replace(series_marker, series_replacement, 1)
+          series_start = "export const runrecsGapFillSeries: Series[] = ["
+          series_start_replacement = "export const runrecsGapFillSeries: Series[] = (["
+          if text.count(series_start) != 1:
+              raise SystemExit(f"Expected exactly one series start; found {text.count(series_start)}")
+          text = text.replace(series_start, series_start_replacement, 1)
+
+          boundary = "];\n\nexport const runrecsGapFillEditions: Edition[] = ["
+          boundary_replacement = "] satisfies (Series | undefined)[]).filter((item): item is Series => item !== undefined);\n\nexport const runrecsGapFillEditions: Edition[] = (["
+          if text.count(boundary) != 1:
+              raise SystemExit(f"Expected exactly one series/edition boundary; found {text.count(boundary)}")
+          text = text.replace(boundary, boundary_replacement, 1)
 
           trailing = text[len(text.rstrip()):]
           body = text.rstrip()
           if not body.endswith("];"):
               raise SystemExit("Edition array does not end with the expected ]; marker")
-          body = body[:-2] + "].filter((item): item is Edition => item !== undefined);"
+          body = body[:-2] + "] satisfies (Edition | undefined)[]).filter((item): item is Edition => item !== undefined);"
           path.write_text(body + trailing, encoding="utf-8")
           PY
 
