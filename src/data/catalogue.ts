@@ -264,6 +264,10 @@ import {
   runrecsGapFillDecDzEditions,
   runrecsGapFillDecDzSeries,
 } from "./runrecs-gap-fill-2026-12-dz";
+import {
+  runrecsGapFillMar27DzEditions,
+  runrecsGapFillMar27DzSeries,
+} from "./runrecs-gap-fill-2027-03-dz";
 import type { ClubSeed, Edition, Series } from "./types";
 
 function canonicalClubSport(sport: string): string {
@@ -377,6 +381,7 @@ for (const series of [
   ...(runrecsGapFillOctOSeries as Series[]),
   ...(runrecsGapFillNovBSeries as Series[]),
   ...(runrecsGapFillDecDzSeries as Series[]),
+  ...(runrecsGapFillMar27DzSeries as Series[]),
   ...(runabcSeries as Series[]),
   ...(ironman703Series as Series[]),
   ...(multiSportSeries as Series[]),
@@ -507,6 +512,7 @@ const mergedEditions = [
   ...(runrecsGapFillOctOEditions as Edition[]).filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...(runrecsGapFillNovBEditions as Edition[]).filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...(runrecsGapFillDecDzEditions as Edition[]).filter((edition) => usedSlugs.has(edition.seriesSlug)),
+  ...(runrecsGapFillMar27DzEditions as Edition[]).filter((edition) => usedSlugs.has(edition.seriesSlug)),
   ...(runabcEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(ironman703Editions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(multiSportEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
