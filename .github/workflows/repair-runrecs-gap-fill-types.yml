@@ -1,0 +1,65 @@
+name: One-shot RunRecs catalogue type repair
+
+on:
+  push:
+    branches:
+      - fix/runrecs-gap-fill-types
+    paths:
+      - .github/workflows/repair-runrecs-gap-fill-types.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repair branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/runrecs-gap-fill-types
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Apply asserted catalogue repair
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/data/runrecs-gap-fill-2026-09.ts")
+          text = path.read_text(encoding="utf-8")
+
+          series_marker = "];\n\nexport const runrecsGapFillEditions: Edition[] = ["
+          series_replacement = "].filter((item): item is Series => item !== undefined);\n\nexport const runrecsGapFillEditions: Edition[] = ["
+          if text.count(series_marker) != 1:
+              raise SystemExit(f"Expected exactly one series boundary; found {text.count(series_marker)}")
+          text = text.replace(series_marker, series_replacement, 1)
+
+          trailing = text[len(text.rstrip()):]
+          body = text.rstrip()
+          if not body.endswith("];"):
+              raise SystemExit("Edition array does not end with the expected ]; marker")
+          body = body[:-2] + "].filter((item): item is Edition => item !== undefined);"
+          path.write_text(body + trailing, encoding="utf-8")
+          PY
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Verify TypeScript after repair
+        run: npm run typecheck
+
+      - name: Commit repair and remove one-shot workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/repair-runrecs-gap-fill-types.yml
+          git add src/data/runrecs-gap-fill-2026-09.ts
+          git commit -m "Filter undefined RunRecs gap-fill entries"
+          git push origin HEAD:fix/runrecs-gap-fill-types
