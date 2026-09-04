@@ -89,6 +89,8 @@ export const verifiedFixtureAliases: Readonly<Record<string, string>> = {
   "wa-telekom-night-run-bratislava-7240847": "telekom-night-run-bratislava",
   "sandringham-half-september": "run-sandringham",
   "great-north-5k": "aj-bell-great-north-5k-2026",
+  "cardiff-university-half-marathon": "cardiff-half-marathon",
+  "wa-cardiff-half-marathon-7240793": "cardiff-half-marathon",
 };
 
 /** Canonical aliases established by earlier catalogue audits. */
