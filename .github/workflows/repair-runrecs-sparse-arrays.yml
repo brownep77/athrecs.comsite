@@ -1,0 +1,81 @@
+name: One-shot RunRecs sparse-array repair
+
+on:
+  push:
+    branches:
+      - fix/runrecs-gap-fill-types
+    paths:
+      - .github/workflows/repair-runrecs-sparse-arrays.yml
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repair branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/runrecs-gap-fill-types
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Remove exactly the sparse array holes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/data/runrecs-gap-fill-2026-09.ts")
+          text = path.read_text(encoding="utf-8")
+
+          sparse_count = text.count("},,")
+          if sparse_count != 46:
+              raise SystemExit(f"Expected exactly 46 sparse array holes; found {sparse_count}")
+          text = text.replace("},,", "},")
+
+          helper = "function isDefined<T>(item: T | undefined): item is T {\n  return item !== undefined;\n}\n\n"
+          if text.count(helper) != 1:
+              raise SystemExit(f"Expected exactly one temporary helper; found {text.count(helper)}")
+          text = text.replace(helper, "", 1)
+
+          replacements = {
+              "export const runrecsGapFillSeries: Series[] = ([": "export const runrecsGapFillSeries: Series[] = [",
+              "] satisfies (Series | undefined)[]).filter(isDefined);": "];",
+              "export const runrecsGapFillEditions: Edition[] = ([": "export const runrecsGapFillEditions: Edition[] = [",
+              "] satisfies (Edition | undefined)[]).filter(isDefined);": "];",
+          }
+          for old, new in replacements.items():
+              if text.count(old) != 1:
+                  raise SystemExit(f"Expected exactly one export marker {old!r}; found {text.count(old)}")
+              text = text.replace(old, new, 1)
+
+          if "},," in text or "isDefined" in text:
+              raise SystemExit("Sparse hole or temporary guard remains after repair")
+
+          path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Verify TypeScript
+        run: npm run typecheck
+
+      - name: Verify lint
+        run: npm run lint
+
+      - name: Commit repair and remove one-shot workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/repair-runrecs-sparse-arrays.yml
+          git add src/data/runrecs-gap-fill-2026-09.ts
+          git commit -m "Remove sparse RunRecs catalogue entries"
+          git push origin HEAD:fix/runrecs-gap-fill-types
