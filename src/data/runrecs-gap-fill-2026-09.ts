@@ -30,11 +30,7 @@ function officialEntry(
   ];
 }
 
-function isDefined<T>(item: T | undefined): item is T {
-  return item !== undefined;
-}
-
-export const runrecsGapFillSeries: Series[] = ([
+export const runrecsGapFillSeries: Series[] = [
 {
     slug: "standard-chartered-nairobi-marathon",
     name: "Standard Chartered Nairobi Marathon",
@@ -7784,7 +7780,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "indy-half-fort-ben",
     name: "Indy Half Marathon at Fort Ben",
@@ -7801,7 +7797,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "little-apple-marathon",
     name: "Little Apple Marathon",
@@ -7818,7 +7814,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "rugged-red-half-marathon",
     name: "The Rugged Red Half Marathon",
@@ -7835,7 +7831,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "sleeping-bear-marathon",
     name: "Sleeping Bear Marathon",
@@ -7852,7 +7848,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "new-hampshire-marathon",
     name: "New Hampshire Marathon",
@@ -7869,7 +7865,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "bay-ridge-half-marathon",
     name: "Bay Ridge Half Marathon",
@@ -7886,7 +7882,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "great-south-bay-run",
     name: "Great South Bay Run",
@@ -7903,7 +7899,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "brookings-marathon",
     name: "Brookings Marathon",
@@ -7920,7 +7916,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "harrisonburg-half-marathon",
     name: "Harrisonburg Half Marathon",
@@ -7937,7 +7933,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "leavenworth-marathon",
     name: "Leavenworth Marathon",
@@ -7954,7 +7950,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "bellin-womens-half-marathon",
     name: "Bellin Women's Half Marathon",
@@ -7971,7 +7967,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "bhm-birmingham-marathon",
     name: "BHM Birmingham Marathon",
@@ -7988,7 +7984,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "napa-half-marathon",
     name: "Napa Half Marathon",
@@ -8005,7 +8001,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "ann-arbor-marathon",
     name: "Ann Arbor Marathon",
@@ -8022,7 +8018,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "smuttynose-rockfest-half",
     name: "Smuttynose Rockfest Half Marathon",
@@ -8039,7 +8035,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "ocnj-half-marathon",
     name: "OCNJ Half Marathon",
@@ -8056,7 +8052,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "crawlin-crab-half-marathon",
     name: "Crawlin Crab Half Marathon",
@@ -8073,7 +8069,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "whiskey-row-marathon",
     name: "Whiskey Row Marathon",
@@ -8090,7 +8086,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.halfmarathonsearch.com/half-marathons-october",
     featured: false,
     source_url: "https://www.halfmarathonsearch.com/half-marathons-october",
-  },,
+  },
   {
     slug: "angkor-wat-international-half",
     name: "Angkor Wat International Half Marathon",
@@ -8107,7 +8103,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.ahotu.com/event/angkor-wat-international-half-marathon",
     featured: false,
     source_url: "https://www.ahotu.com/event/angkor-wat-international-half-marathon",
-  },,
+  },
   {
     slug: "ayia-napa-half-marathon",
     name: "Ayia Napa Half Marathon",
@@ -8124,7 +8120,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.ahotu.com/event/ayia-napa-half-marathon",
     featured: false,
     source_url: "https://www.ahotu.com/event/ayia-napa-half-marathon",
-  },,
+  },
   {
     slug: "marathon-des-landes",
     name: "Marathon des Landes",
@@ -8141,7 +8137,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://www.marathondeslandes.fr/",
     featured: false,
     source_url: "https://www.marathondeslandes.fr/",
-  },,
+  },
   {
     slug: "marathon-des-villages",
     name: "Marathon des Villages",
@@ -8158,7 +8154,7 @@ export const runrecsGapFillSeries: Series[] = ([
     website: "https://marathon-des-villages.com/",
     featured: false,
     source_url: "https://marathon-des-villages.com/",
-  },,
+  },
   {
     slug: "vilnius-half-marathon",
     name: "Vilnius Half Marathon",
@@ -9808,9 +9804,9 @@ export const runrecsGapFillSeries: Series[] = ([
     featured: false,
     source_url: "https://worldathletics.org/competition/calendar-results?competitionGroupId=3775",
   },
-] satisfies (Series | undefined)[]).filter(isDefined);
+];
 
-export const runrecsGapFillEditions: Edition[] = ([
+export const runrecsGapFillEditions: Edition[] = [
 {
     seriesSlug: "standard-chartered-nairobi-marathon",
     date: "2026-10-25",
@@ -16399,7 +16395,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("evansville-half-mara", "Evansville Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "indy-half-fort-ben",
     date: "2026-10-03",
@@ -16410,7 +16406,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("indy-half-fort-ben", "Indy Half Marathon at Fort Ben", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "little-apple-marathon",
     date: "2026-10-03",
@@ -16421,7 +16417,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("little-apple-maratho", "Little Apple Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "rugged-red-half-marathon",
     date: "2026-10-03",
@@ -16432,7 +16428,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("rugged-red-half-mara", "The Rugged Red Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "sleeping-bear-marathon",
     date: "2026-10-03",
@@ -16443,7 +16439,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("sleeping-bear-marath", "Sleeping Bear Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "new-hampshire-marathon",
     date: "2026-10-03",
@@ -16454,7 +16450,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("new-hampshire-marath", "New Hampshire Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "bay-ridge-half-marathon",
     date: "2026-10-03",
@@ -16465,7 +16461,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("bay-ridge-half-marat", "Bay Ridge Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "great-south-bay-run",
     date: "2026-10-03",
@@ -16476,7 +16472,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("great-south-bay-run", "Great South Bay Run", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "brookings-marathon",
     date: "2026-10-03",
@@ -16487,7 +16483,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("brookings-marathon", "Brookings Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "harrisonburg-half-marathon",
     date: "2026-10-03",
@@ -16498,7 +16494,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("harrisonburg-half-ma", "Harrisonburg Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "leavenworth-marathon",
     date: "2026-10-03",
@@ -16509,7 +16505,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("leavenworth-marathon", "Leavenworth Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "bellin-womens-half-marathon",
     date: "2026-10-03",
@@ -16520,7 +16516,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("bellin-womens-half-m", "Bellin Women's Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 3 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "bhm-birmingham-marathon",
     date: "2026-10-04",
@@ -16531,7 +16527,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("bhm-birmingham-marat", "BHM Birmingham Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Sunday 4 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "napa-half-marathon",
     date: "2026-10-04",
@@ -16542,7 +16538,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("napa-half-marathon", "Napa Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Sunday 4 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "ann-arbor-marathon",
     date: "2026-10-04",
@@ -16553,7 +16549,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("ann-arbor-marathon", "Ann Arbor Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Sunday 4 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "smuttynose-rockfest-half",
     date: "2026-10-04",
@@ -16564,7 +16560,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("smuttynose-rockfest-", "Smuttynose Rockfest Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Sunday 4 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "ocnj-half-marathon",
     date: "2026-10-04",
@@ -16575,7 +16571,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("ocnj-half-marathon", "OCNJ Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Sunday 4 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "crawlin-crab-half-marathon",
     date: "2026-10-04",
@@ -16586,7 +16582,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("crawlin-crab-half-ma", "Crawlin Crab Half Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Sunday 4 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "whiskey-row-marathon",
     date: "2026-10-10",
@@ -16597,7 +16593,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("whiskey-row-marathon", "Whiskey Row Marathon", "https://www.halfmarathonsearch.com/half-marathons-october", "Calendar listing: Saturday 10 October 2026."),
     source: "https://www.halfmarathonsearch.com/half-marathons-october",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "angkor-wat-international-half",
     date: "2026-12-06",
@@ -16608,7 +16604,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("angkor-wat-internati", "Angkor Wat International Half Marathon", "https://www.ahotu.com/event/angkor-wat-international-half-marathon", "Calendar listing: Sunday 6 December 2026."),
     source: "https://www.ahotu.com/event/angkor-wat-international-half-marathon",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "ayia-napa-half-marathon",
     date: "2026-12-20",
@@ -16619,7 +16615,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("ayia-napa-half-marat", "Ayia Napa Half Marathon", "https://www.ahotu.com/event/ayia-napa-half-marathon", "Calendar listing: Sunday 20 December 2026."),
     source: "https://www.ahotu.com/event/ayia-napa-half-marathon",
     notes: "Half event.",
-  },,
+  },
   {
     seriesSlug: "marathon-des-landes",
     date: "2026-10-11",
@@ -16630,7 +16626,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("marathon-des-landes", "Marathon des Landes", "https://www.marathondeslandes.fr/", "Calendar listing: Sunday 11 October 2026."),
     source: "https://www.marathondeslandes.fr/",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "marathon-des-villages",
     date: "2026-10-18",
@@ -16641,7 +16637,7 @@ export const runrecsGapFillEditions: Edition[] = ([
     entryOptions: officialEntry("marathon-des-village", "Marathon des Villages", "https://marathon-des-villages.com/", "Calendar listing: Sunday 18 October 2026."),
     source: "https://marathon-des-villages.com/",
     notes: "Marathon event.",
-  },,
+  },
   {
     seriesSlug: "vilnius-half-marathon",
     date: "2027-05-22",
@@ -17709,4 +17705,4 @@ export const runrecsGapFillEditions: Edition[] = ([
     source: "https://worldathletics.org/competition/calendar-results?competitionGroupId=3775",
     notes: "Marathon event.",
   },
-] satisfies (Edition | undefined)[]).filter(isDefined);
+];
