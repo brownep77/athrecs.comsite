@@ -19,7 +19,7 @@ import {
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v64";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v65";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v3";
 const EXPECTED = catalogueMetadata.merged_counts;
@@ -699,24 +699,15 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
 }
 
 async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
-  const meta = await sql<{ value: string }>`
-    select value from app_meta where key = 'fixtures_catalogue_version' limit 1
-  `;
-  if (meta[0]?.value === SEED_VERSION) {
-    const counts = await sql<{ events: number; editions: number }>`select
-      (select count(*)::int from events) as events,
-      (select count(*)::int from editions) as editions
+  const existing = await sql<{ slug: string }>`select slug from events`;
+  const have = new Set(existing.map((row) => row.slug));
+  const missingSeries = seriesList.filter((series) => Boolean(series?.slug) && !have.has(series.slug));
+
+  if (missingSeries.length === 0) {
+    await sql`
+      insert into app_meta (key, value) values ('fixtures_catalogue_version', ${SEED_VERSION})
+      on conflict (key) do update set value = excluded.value
     `;
-    const row = counts[0];
-    if ((row?.events ?? 0) < seriesList.length || (row?.editions ?? 0) < editionSeeds.length) {
-      console.error("[catalogue-seed] Fixture marker/count mismatch; staff recovery required", {
-        marker: meta[0]?.value,
-        currentEvents: row?.events ?? 0,
-        targetEvents: seriesList.length,
-        currentEditions: row?.editions ?? 0,
-        targetExplicitEditions: editionSeeds.length,
-      });
-    }
     return;
   }
 
@@ -740,7 +731,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       "featured",
       "source_url",
     ],
-    seriesList.map((series) => [
+    missingSeries.map((series) => [
       series.source_id ?? null,
       series.slug,
       series.name,
@@ -874,7 +865,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     const missing = raceGroupMemberships
       .filter((membership) => !eventIds.has(membership.seriesSlug))
       .map((membership) => membership.seriesSlug);
-    throw new Error(`Race group membership references missing events: ${missing.join(", ")}`);
+    console.error("[catalogue-seed] skipping race groups for events not yet in Neon", missing.slice(0, 20));
   }
   await sql`
     delete from event_groups
@@ -894,15 +885,15 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     100,
   );
 
-  const distanceRows = seriesList.flatMap((series) =>
+  const missingSlugs = new Set(missingSeries.map((series) => series.slug));
+  const distanceRows = missingSeries.flatMap((series) =>
     [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
   );
-  await sql`delete from event_distances`;
   await insertRows(
     sql,
     "event_distances",
     ["event_id", "distance_code"],
-    distanceRows,
+    distanceRows.filter((row) => row[0] != null),
     "on conflict (event_id, distance_code) do nothing",
     100,
   );
@@ -933,7 +924,9 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       "athlete_result_count",
       "results_access",
     ],
-    editionSeeds.map((edition) => [
+    editionSeeds
+      .filter((edition) => missingSlugs.has(edition.seriesSlug) && eventIds.has(edition.seriesSlug))
+      .map((edition) => [
       edition.source_id ?? null,
       eventIds.get(edition.seriesSlug),
       edition.date,
