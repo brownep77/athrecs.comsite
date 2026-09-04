@@ -421,9 +421,41 @@ const completedNotes = {
     "The organiser's completed 2026 programme advertised a 21 km half-marathon and an 11.5 km mini-marathon on Saturday 25 July at 19:00.",
   migrant:
     "The official 2026 route pages advertised 100 km, 60 km and 40 km races on 8 August and 21 km and approximately 11 km races on 9 August. The short route is headed as 10 km but described in the detailed course and schedule as 11 km.",
+  vlora:
+    "Fifth edition on Sunday 30 November 2025: 21 km, 10 km and 5 km from Flag Square. No 2026 or 2027 date published as of 4 September 2026.",
+  durres:
+    "Inaugural edition on Sunday 2 November 2025: 10 km, 5 km and 1 km from Liria Square. Organisers said they want it annual, but no 2026 or 2027 date published as of 4 September 2026.",
 } as const;
 
 export const albaniaRaceEditions: Edition[] = [
+  ...[
+    { distance: "Half", distanceKm: 21.0975 },
+    { distance: "10K", distanceKm: 10 },
+    { distance: "5K", distanceKm: 5 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "vlora-half-marathon",
+      date: "2025-11-30",
+      ...race,
+      status: "Finished",
+      source: URLS.vlora,
+      notes: completedNotes.vlora,
+    }),
+  ),
+  ...[
+    { distance: "10K", distanceKm: 10 },
+    { distance: "5K", distanceKm: 5 },
+  ].map((race) =>
+    advertisedEdition({
+      seriesSlug: "durres-marathon",
+      date: "2025-11-02",
+      ...race,
+      status: "Finished",
+      startTime: "09:00",
+      source: URLS.durresSource,
+      notes: completedNotes.durres,
+    }),
+  ),
   ...[
     { distance: "Half", distanceKm: 21.0975 },
     { distance: "10K", distanceKm: 10 },
