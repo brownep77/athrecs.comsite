@@ -6,6 +6,8 @@ const NON_STANDARD_SOURCE_KEY =
   "athrecs-code:uk-ireland-non-standard-distances:2026-08-28";
 const HALF_TEN_SOURCE_KEY =
   "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints:2026-08-28";
+const HALF_TEN_OVERFLOW_SOURCE_KEY =
+  "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints-overflow:2026-09-05";
 const NON_STANDARD_SOURCE_URL =
   "https://github.com/brownep77/athrecs.comsite/blob/main/src/data/non-standard-races-uk-ireland.ts";
 const HALF_TEN_SOURCE_URL =
@@ -300,6 +302,21 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
     ...CHECKPOINT_KEYS.map((key) => parseEditionKey(key).slug),
     ...halfTenEditions.map((edition) => edition.seriesSlug),
   ]);
+  const halfTenEvents = eventsFor(halfTenSlugs);
+  const halfTenBatches = [halfTenEvents.slice(0, 75), halfTenEvents.slice(75)]
+    .filter((events) => events.length)
+    .map((events, index) => {
+      const eventSlugs = new Set(events.map((event) => event.slug));
+      return {
+        label: `half-ten-mile-and-10k-checkpoints-part-${index + 1}`,
+        sourceKey: index === 0 ? HALF_TEN_SOURCE_KEY : HALF_TEN_OVERFLOW_SOURCE_KEY,
+        sourceUrl: HALF_TEN_SOURCE_URL,
+        events,
+        editions: halfTenEditions
+          .filter((edition) => eventSlugs.has(edition.seriesSlug))
+          .map(editionInput),
+      };
+    });
 
   const batches = [
     {
@@ -309,13 +326,7 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
       events: eventsFor(nonStandardSlugs),
       editions: nonStandardEditions.map(editionInput),
     },
-    {
-      label: "half-ten-mile-and-10k-checkpoints",
-      sourceKey: HALF_TEN_SOURCE_KEY,
-      sourceUrl: HALF_TEN_SOURCE_URL,
-      events: eventsFor(halfTenSlugs),
-      editions: halfTenEditions.map(editionInput),
-    },
+    ...halfTenBatches,
   ];
 
   for (const batch of batches) {
