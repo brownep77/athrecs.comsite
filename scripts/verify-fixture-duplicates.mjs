@@ -25,6 +25,8 @@ const [
   { belgiumNetherlandsRaceEditions, belgiumNetherlandsRaceSeries },
   { englandAthleticsRunEventsEditions, englandAthleticsRunEventsSeries },
   { englandAthleticsUkFixturesEditions, englandAthleticsUkFixturesSeries },
+  { runrecsGapFillSeries },
+  { ukFiveKSeries },
   marathonOptions,
   halfMarathonOptions,
   tenKOptions,
@@ -60,6 +62,8 @@ const [
   import("../src/data/belgium-netherlands-races.ts"),
   import("../src/data/england-athletics-runevents.ts"),
   import("../src/data/england-athletics-uk-fixtures.ts"),
+  import("../src/data/runrecs-gap-fill-2026-09.ts"),
+  import("../src/data/uk-5k-races.ts"),
   import("../src/data/entry-options-uk-marathons.ts"),
   import("../src/data/entry-options-uk-half-marathons.ts"),
   import("../src/data/entry-options-uk-10ks.ts"),
@@ -190,9 +194,18 @@ for (const sourceEdition of editionSources) {
 }
 
 const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
+const aliasCanonicalSeriesBySlug = new Map(
+  [...seriesList, ...runrecsGapFillSeries, ...ukFiveKSeries].map((series) => [
+    series.slug,
+    series,
+  ]),
+);
 for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
   assert(!seriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
-  assert(seriesBySlug.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
+  assert(
+    aliasCanonicalSeriesBySlug.has(canonical),
+    `Duplicate alias has no canonical event: ${canonical}`,
+  );
 }
 
 for (const replacement of verifiedFixtureEditionReplacements) {
