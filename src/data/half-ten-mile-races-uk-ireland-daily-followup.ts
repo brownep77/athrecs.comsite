@@ -9,6 +9,9 @@ const CURRENT_CHECKED_AT = "2026-08-27";
 const LATEST_CURRENT_CHECKED_AT = "2026-08-28";
 const SCAN_CHECKED_AT = "2026-08-29";
 const CURRENT_SCAN_CHECKED_AT = "2026-08-30";
+const LATEST_SCAN_CHECKED_AT = "2026-08-31";
+const CURRENT_DAILY_SCAN_CHECKED_AT = "2026-09-03";
+const LATEST_DAILY_SCAN_CHECKED_AT = "2026-09-05";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
@@ -982,11 +985,11 @@ const seeds: RaceSeed[] = [
     surface: "Trail",
     organiser: "Due North Events",
     url: "https://www.sientries.co.uk/event/burnsall-trail-half-2027",
-    status: "TBC",
-    hasEntry: false,
-    checkedAt: CURRENT_SCAN_CHECKED_AT,
+    entryUrl: "https://www.sientries.co.uk/series.php?series_id=896",
+    priceAmount: 40,
+    checkedAt: LATEST_DAILY_SCAN_CHECKED_AT,
     notes:
-      "The direct official registration page consistently confirms the 17 April 2027 trail half-marathon and 10:00 start; entry opens on 5 September 2026, so no live checkout is asserted yet.",
+      "The direct official registration page consistently confirms the 17 April 2027 trail half-marathon and 10:00 start; entry is open through the official Due North series checkout.",
   },
   {
     slug: "kettlewell-trail-half-2027",
@@ -1001,11 +1004,90 @@ const seeds: RaceSeed[] = [
     surface: "Trail",
     organiser: "Due North Events",
     url: "https://www.sientries.co.uk/event/kettlewell-trail-half-2027",
-    status: "TBC",
-    hasEntry: false,
-    checkedAt: CURRENT_SCAN_CHECKED_AT,
+    entryUrl: "https://www.sientries.co.uk/series.php?series_id=896",
+    priceAmount: 40,
+    checkedAt: LATEST_DAILY_SCAN_CHECKED_AT,
     notes:
-      "The direct official registration page consistently confirms the 19 June 2027 trail half-marathon and 10:00 start; entry opens on 5 September 2026, so no live checkout is asserted yet.",
+      "The direct official registration page consistently confirms the 19 June 2027 trail half-marathon and 10:00 start; entry is open through the official Due North series checkout.",
+  },
+  {
+    slug: "kinvara-rock-and-road-2027",
+    name: "Kinvara Rock and Road 2027",
+    date: "2027-03-06",
+    distance: "Half",
+    country: "Ireland",
+    county: "County Galway",
+    city: "Kinvara",
+    area: "Kinvara Quay and the Burren coast",
+    surface: "Road",
+    distances: ["Half", "10K", "19.65mi"],
+    organiser: "Kinvara Rock and Road",
+    url: "https://www.rockandroad.ie/",
+    entryUrl: "https://eventmaster.ie/event/O1K7CpmH0Z",
+    priceAmount: 45,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_DAILY_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser and direct registration pages consistently confirm the 6 March 2027 half marathon, 10K and three-quarter marathon; registration is open and the checkout does not carry a pending-permit warning.",
+  },
+  {
+    slug: "cape-clear-island-races-2027",
+    name: "Cape Clear Island Races 2027",
+    date: "2027-08-28",
+    distance: "Half",
+    country: "Ireland",
+    county: "County Cork",
+    city: "Cape Clear Island",
+    area: "Cape Clear Island and the West Cork coast",
+    surface: "Mixed",
+    distances: ["Half", "10K"],
+    organiser: "OuterEdge Events",
+    url: "https://www.sientries.co.uk/event/the-cape-clear-island-races-2027",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18595",
+    priceAmount: 90,
+    priceCurrency: "EUR",
+    checkedAt: LATEST_DAILY_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms 28 August 2027 and the half-marathon and 10K programme; entry is open through the event-specific SiEntries checkout.",
+  },
+  {
+    slug: "tiree-half-marathon-10k-2027",
+    name: "Tiree 10K & Half Marathon 2027",
+    date: "2027-05-01",
+    distance: "Half",
+    startTime: "14:00",
+    country: "Scotland",
+    county: "Argyll and Bute",
+    city: "Isle of Tiree",
+    area: "Sorobaidh Beach, Hynish and the west of Tiree",
+    surface: "Mixed",
+    distances: ["Half", "10K"],
+    organiser: "Tiree Fitness",
+    url: "https://www.entrycentral.com/tiree-roadrace",
+    status: "Closed",
+    hasEntry: false,
+    checkedAt: LATEST_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 1 May 2027 half marathon and 10K, 14:00 start and coastal route; registration is currently closed, so no live checkout is advertised.",
+  },
+  {
+    slug: "beacon-beast-marathon-beastly-half-2027",
+    name: "Beacon Beast Marathon & The Beastly Half 2027",
+    date: "2027-04-25",
+    distance: "Half",
+    country: "England",
+    county: "Cornwall",
+    city: "Bodmin",
+    area: "Priory Park, Lanhydrock and Cardinham Woods",
+    surface: "Mixed",
+    distances: ["Marathon", "Half"],
+    organiser: "Beacon Beast",
+    url: "https://www.sientries.co.uk/event/beacon-beast-marathon-the-beastly-half-2027-2",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18191",
+    priceAmount: 30,
+    checkedAt: LATEST_DAILY_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 25 April 2027 marathon and half-marathon programme and open event-specific checkout.",
   },
 ];
 
@@ -1215,6 +1297,31 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The direct official registration page consistently confirms the 4 September 2027 trail half-marathon and 10:00 start; entry opens on 5 September 2026, so the established Malham card is reused without asserting a live checkout.",
   },
+  {
+    seriesSlug: "scurry-around-vogrie-country-park-2027",
+    date: "2027-01-17",
+    startTime: "09:30",
+    organiser: "Scurry Events",
+    url: "https://www.entrycentral.com/ScurryVogrieTyneValley",
+    publishAllDistances: true,
+    priceAmount: 32,
+    checkedAt: LATEST_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page confirms the 17 January 2027 trail half marathon, 09:30 start and open entry; the existing multi-distance Vogrie card is enriched instead of duplicated.",
+  },
+  {
+    seriesSlug: "hardmoors-farndale-trail-races",
+    date: "2027-08-08",
+    startTime: "10:00",
+    organiser: "Hardmoors",
+    url: "https://www.sientries.co.uk/event/hardmoors-262-farndale-2027",
+    publishAllDistances: true,
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: LATEST_DAILY_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 8 August 2027 marathon, half-marathon and 10K programme and the 10:00 half start; entry is withheld because its voucher and public-opening schedule is not yet internally consistent.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -1335,6 +1442,22 @@ export const dailyHalfTenMileResearchQueue = [
     reason:
       "The official page header says 21 August 2027 but its race-day copy still says 26 June 2027, so the date is internally conflicted.",
     sourceUrl: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-august-2027",
+  },
+  {
+    slug: "delphi-half-marathon-10k-2027",
+    date: "2027-05-15",
+    country: "Ireland",
+    reason:
+      "The official organiser page consistently confirms the date and distances but gives the half-marathon start as both 09:00 and 10:00, so publication is held until the timetable is corrected.",
+    sourceUrl: "https://delphimarathon.ie/",
+  },
+  {
+    slug: "borrowdale-trail-half-marathon-2027",
+    date: "2027-08-22",
+    country: "England",
+    reason:
+      "The direct official entry page confirms the 21-kilometre race, date, start time and open checkout but still marks the Trail Running Association licence as pending.",
+    sourceUrl: "https://racebest.com/races/7wfe6",
   },
   {
     slug: "battersea-park-half-marathon-december-2027",
@@ -1513,6 +1636,56 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     source_url: "https://www.sientries.co.uk/event/malham-trail-half-2027",
     defaultStartTime: "10:00",
   },
+  "scurry-around-vogrie-country-park-2027": {
+    name: "Scurry Around Vogrie Country Park Trail Running Festival 2027",
+    city: "Gorebridge",
+    county: "Midlothian",
+    country: "Scotland",
+    area: "Vogrie Country Park and the Tyne Valley",
+    surface: "Trail",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Scurry Around Vogrie Country Park Trail Running Festival 2027 — half-marathon, 10K and 5K trail races in Midlothian.",
+    description:
+      "Scurry Events' Vogrie Country Park festival follows trail loops through the park and Tyne Valley; the established card now carries the verified half-marathon edition and open entry rather than creating a duplicate event.",
+    organiser: "Scurry Events",
+    website: "https://www.entrycentral.com/ScurryVogrieTyneValley",
+    source_url: "https://www.entrycentral.com/ScurryVogrieTyneValley",
+    defaultStartTime: "09:30",
+  },
+  "hardmoors-farndale-trail-races": {
+    name: "Hardmoors 26.2 Farndale Trail Races",
+    city: "Hutton-le-Hole",
+    county: "North Yorkshire",
+    country: "England",
+    area: "Hutton-le-Hole and the North York Moors",
+    surface: "Trail",
+    distances: ["Marathon", "Half", "10K"],
+    summary:
+      "Hardmoors 26.2 Farndale Trail Races — marathon, half-marathon and 10K trail races from Hutton-le-Hole.",
+    description:
+      "Hardmoors' Farndale fixture follows circular trail routes from Hutton-le-Hole across the North York Moors; its existing card carries the verified 2027 multi-distance edition rather than creating a duplicate series.",
+    organiser: "Hardmoors",
+    website: "https://www.sientries.co.uk/event/hardmoors-262-farndale-2027",
+    source_url: "https://www.sientries.co.uk/event/hardmoors-262-farndale-2027",
+    defaultStartTime: "10:00",
+  },
+  "collingbourne-races": {
+    name: "Collingbourne Half Marathon & 10K",
+    city: "Ludgershall",
+    county: "Wiltshire",
+    country: "England",
+    area: "Crawlboys Farm and Collingbourne Woods",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    summary: "Collingbourne Half Marathon & 10K — off-road races through Collingbourne Woods.",
+    description:
+      "And-Over Trail Events' Collingbourne programme uses bridleways, woodland tracks and single-track trails; the established card is retained with current official registration provenance.",
+    organiser: "And-Over Trail Events",
+    website: "https://www.sientries.co.uk/event/collingbourne-races-2027",
+    source_url: "https://www.sientries.co.uk/event/collingbourne-races-2027",
+    defaultStartTime: "08:30",
+  },
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
@@ -1525,6 +1698,16 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
     source: BRIGHTEN_MARINA_URL,
     notes:
       "The organiser confirms the 10-mile start at 09:00 and the companion 10K start at 09:25.",
+  },
+  "collingbourne-races|2027-05-08|Half": {
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18212",
+    startTime: "08:30",
+    source: "https://www.sientries.co.uk/event/collingbourne-races-2027",
+    notes:
+      "The current direct official registration page confirms the 08:30 start, half-marathon and 10K programme, and open event-specific checkout.",
   },
 };
 
@@ -1541,6 +1724,22 @@ export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
       isVerified: true,
       isPrimary: true,
       notes: "Official organiser event and checkout page.",
+    },
+  ],
+  "collingbourne-races|2027-05-08|Half": [
+    {
+      providerCode: "official-collingbourne-races-2027",
+      providerName: "And-Over Trail Events",
+      entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18212",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "GBP",
+      checkedAt: LATEST_DAILY_SCAN_CHECKED_AT,
+      sourceUrl: "https://www.sientries.co.uk/event/collingbourne-races-2027",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration checkout.",
     },
   ],
 };

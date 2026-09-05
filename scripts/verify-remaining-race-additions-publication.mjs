@@ -7,6 +7,7 @@ import pg from "pg";
 const SOURCE_KEYS = [
   "athrecs-code:uk-ireland-non-standard-distances:2026-08-28",
   "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints:2026-08-28",
+  "athrecs-code:uk-ireland-half-ten-mile-and-10k-checkpoints-overflow:2026-09-05",
 ];
 
 assert(process.env.DATABASE_URL?.trim(), "DATABASE_URL is required for publication verification");
@@ -37,7 +38,8 @@ const firstOutput = runNode(
   publisherEnv,
 );
 assert.match(firstOutput, /published non-standard-distances revision \d+:/);
-assert.match(firstOutput, /published half-ten-mile-and-10k-checkpoints revision \d+:/);
+assert.match(firstOutput, /published half-ten-mile-and-10k-checkpoints-part-1 revision \d+:/);
+assert.match(firstOutput, /published half-ten-mile-and-10k-checkpoints-part-2 revision \d+:/);
 
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL });
 await client.connect();
@@ -55,7 +57,7 @@ try {
      order by source_key`,
     [SOURCE_KEYS],
   );
-  assert.equal(batches.rows.length, 2, "Both reviewed catalogue batches must be recorded");
+  assert.equal(batches.rows.length, 3, "All reviewed catalogue batches must be recorded");
   for (const batch of batches.rows) {
     assert.equal(batch.status, "published", `${batch.source_key} did not publish`);
     assert(batch.publish_summary.eventsUpserted > 0, `${batch.source_key} published no events`);
@@ -131,7 +133,7 @@ try {
      where batch_id = any($1::text[])`,
     [batches.rows.map((batch) => batch.id)],
   );
-  assert.equal(revisionsBefore.count, 2, "Expected one revision per reviewed batch");
+  assert.equal(revisionsBefore.count, 3, "Expected one revision per reviewed batch");
 
   const secondOutput = runNode(
     "scripts/publish-remaining-uk-ireland-race-additions.mjs",
@@ -139,8 +141,8 @@ try {
   );
   assert.equal(
     (secondOutput.match(/was already published; no database change needed/g) ?? []).length,
-    2,
-    "Repeat publication did not reuse both existing batches",
+    3,
+    "Repeat publication did not reuse all existing batches",
   );
 
   const revisionsAfter = await one(
@@ -156,5 +158,5 @@ try {
 }
 
 console.log(
-  "Verified both remaining race-addition batches, representative fixtures, entry data and idempotent repeat publication.",
+  "Verified all remaining race-addition batches, representative fixtures, entry data and idempotent repeat publication.",
 );
