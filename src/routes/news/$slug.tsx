@@ -8,10 +8,12 @@ export const Route = createFileRoute("/news/$slug")({
     return { article };
   },
   head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData.article.title} | RunRecs.com` },
-      { name: "description", content: loaderData.article.standfirst },
-    ],
+    meta: loaderData
+      ? [
+          { title: `${loaderData.article.title} | RunRecs.com` },
+          { name: "description", content: loaderData.article.standfirst },
+        ]
+      : [],
   }),
   component: NewsArticlePage,
 });
