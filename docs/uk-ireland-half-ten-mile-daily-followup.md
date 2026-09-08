@@ -1,6 +1,6 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 7 September 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 8 September 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
@@ -18,7 +18,7 @@ Events already represented elsewhere were not recreated. This includes Beverley 
 
 ## Held candidates
 
-The research queue holds permit-pending Temple Newsam, Ripon, Thirsk, Clowne, Chippenham, Borrowdale and Abbeyknockmoy races; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout and CBTE Charm Bracelet remain outside the canonical half catalogue because their official distances are non-standard or approximate.
+The research queue holds permit-pending Temple Newsam, Ripon, Thirsk, Clowne, Chippenham, Borrowdale, Abbeyknockmoy, Kinsale and RunClare races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout and CBTE Charm Bracelet remain outside the canonical half catalogue because their official distances are non-standard or approximate.
 
 ## 29 August 2026 scan
 
@@ -55,5 +55,11 @@ Malham's announced entry time has passed and its official page now shows open re
 ## 7 September 2026 scan
 
 RaceBest now publishes UKA licence `2026-28391` for Tadcaster 10, replacing the placeholder shown in the previous scan. The verified 22 November 2026 road race was moved from the research queue into the public catalogue with its 09:30 start and direct official checkout. Clowne, Temple Newsam, Ripon and Thirsk remain held while their licences are still TBC or pending.
+
+## 8 September 2026 scan
+
+No additional race cleared the publication threshold. Kinsale 10 Mile was queued with its official 28 February 2027 date and 10:30 start because its Athletics Ireland permit is pending. The RunClare series' 10-mile finale was queued for 11 April 2027 because its permit is pending and its race name and venue remain unannounced.
+
+Scottish Athletics lists the Tom Scott 10 Mile on 28 March 2027 in its official 2026–27 road-running handbook, but the organiser still describes the date as provisional and subject to securing the required licence, so the edition remains unpublished. All previously held candidates were rechecked; none resolved its permit, date, timetable, distance or entry-state conflict.
 
 Run `npm run verify:uk-ireland-half-ten-mile-daily` to validate the release.
