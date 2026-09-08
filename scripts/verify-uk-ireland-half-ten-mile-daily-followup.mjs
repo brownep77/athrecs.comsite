@@ -737,6 +737,20 @@ assert(
   ),
   "Abbeyknockmoy must remain held while its Athletics Ireland permit is pending",
 );
+assert(
+  dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "kinsale-10-mile-2027"),
+  "Kinsale 10 must remain held while its Athletics Ireland permit is pending",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "runclare-10-mile-2027"),
+  "RunClare 10-mile finale must remain held while its permit and event identity are pending",
+);
+assert(
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "tom-scott-10-mile-road-race-2027",
+  ),
+  "Tom Scott 10 must remain held while its provisional licence status is unresolved",
+);
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
