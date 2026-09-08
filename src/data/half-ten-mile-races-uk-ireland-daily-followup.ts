@@ -1556,6 +1556,31 @@ export const dailyHalfTenMileResearchQueue = [
       "The direct registration page confirms the date and half-marathon distance but labels the Athletics Ireland permit as pending approval.",
     sourceUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
   },
+  {
+    slug: "kinsale-10-mile-2027",
+    date: "2027-02-28",
+    country: "Ireland",
+    reason:
+      "The direct registration page confirms the date, 10-mile distance and 10:30 start but labels the Athletics Ireland permit as pending approval.",
+    sourceUrl: "https://eventmaster.ie/event/v7jyuPoSb4",
+  },
+  {
+    slug: "runclare-10-mile-2027",
+    date: "2027-04-11",
+    country: "Ireland",
+    reason:
+      "The official series registration page lists a 10-mile finale on this date but keeps the permit pending and the race name and venue as coming soon.",
+    sourceUrl: "https://eventmaster.ie/event/Z7M0iMWcZY",
+  },
+  {
+    slug: "tom-scott-10-mile-road-race-2027",
+    date: "2027-03-28",
+    country: "Scotland",
+    reason:
+      "The Scottish Athletics handbook lists the 10-mile fixture on this date, but the organiser describes it as provisional and subject to securing the required licence.",
+    sourceUrl:
+      "https://www.scottishathletics.org.uk/wp-content/uploads/2026/08/CCRR-Handbook-2026-27-V1.pdf",
+  },
 ] as const;
 
 const BRIGHTEN_MARINA_URL =
