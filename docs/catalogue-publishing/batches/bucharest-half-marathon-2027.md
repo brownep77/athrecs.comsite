@@ -23,13 +23,15 @@ All stored start times are local to Bucharest (`Europe/Bucharest`), not UK time.
 
 No unverified prices, spectator-access claims, elite entrants, future results or additional editions are supplied. The relay and fun race are mentioned in the event description because the official homepage lists them, but they are not imported as separate race rows in this bounded batch.
 
-## Identity and duplicate checks required before staging
+## Identity and duplicate resolution
 
 The May event at `bucuresti21km.ro` is distinct from Bucharest International Half Marathon by Constantina Dita at `bucharest.run`. Do not merge them because their city and distances match.
 
-`bucharest-half-marathon` is the proposed sponsor-neutral slug, **not a claim that this slug is absent from production**. Repository search returned incomplete index results, and live filtered searches / candidate detail URLs could not be retrieved by the available browser tools. No conclusion about complete production absence is justified.
+The shared production catalogue was checked read-only on 9 September 2026 through RunRecs, which reads the same Neon catalogue as ATHRECS. A Romania search covering 2000–2035 returned five event records. The only two Bucharest records were `raiffeisen-bank-bucharest-city-marathon` and `raiffeisen-bucharest-marathon`; both are October marathon records. Exact catalogue searches for `Bucharest`, `Bucuresti`, `OMV`, `Petrom`, `Semimaraton` and `21km` found no candidate for the May event. The proposed `/races/bucharest-half-marathon` URL returned 404 rather than an event or a historical-slug redirect, confirming that this exact slug is unused by both `events.slug` and `slug_redirects.old_slug`.
 
-Before staging, search the actual RunRecs catalogue, including past and undated records, for Bucharest, Bucuresti, OMV Petrom, Semimaraton and the official source domain. If the same May event already exists, reuse its permanent slug in the edition records. Avoid replacing its existing event description, links or distances; omit the proposed event object if no event enrichment is needed, or explicitly preserve existing fields and union its distances. Do not create a second event solely to obtain this proposed slug. Recheck the batch's event/date/distance natural keys against the database.
+The production evidence therefore supports creating one new canonical event with the sponsor-neutral permanent slug `bucharest-half-marathon`. The two October records remain separate: neither uses the May organiser domain, dates or event identity. No existing May edition natural key was found under another Romanian event.
+
+The import is ready for the normal staff stage → validate → review path. Staging remains non-public. The database validator must still run its authoritative transaction-time checks for the proposed event slug, historical slug, event references and both event/date/distance natural keys before a reviewer approves publication.
 
 ## Publication procedure
 
@@ -37,7 +39,7 @@ Use the staged workflow described in `../README.md`: stage, validate, inspect th
 
 Source key: `runrecs:bucharest-half-marathon:2027:2026-09-08`.
 
-After successful publication, record the batch ID and revision ID, and verify the actual RunRecs event page plus the Romania / May 2027 / Half and 10K search results. There must be one May event with the correct distance-specific dates and entry links, without altering the separate April race. Record the resolved canonical slug if an existing event was reused.
+After successful publication, record the batch ID and revision ID, and verify the actual RunRecs event page plus the Romania / May 2027 / Half and 10K search results. There must be one May event with the correct distance-specific dates and entry links, without altering the separate April race or either October Bucharest marathon record. The resolved canonical slug is `bucharest-half-marathon`.
 
 ## Validation performed
 
