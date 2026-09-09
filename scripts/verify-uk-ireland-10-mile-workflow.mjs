@@ -40,7 +40,7 @@ assert.equal(
 );
 assert.equal(
   verifiedTenMileResearchQueue.length,
-  4,
+  3,
   "The held 10-mile research queue is incomplete",
 );
 

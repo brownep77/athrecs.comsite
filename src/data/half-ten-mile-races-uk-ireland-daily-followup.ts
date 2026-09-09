@@ -13,9 +13,10 @@ const CURRENT_DAILY_SCAN_CHECKED_AT = "2026-09-03";
 const LATEST_DAILY_SCAN_CHECKED_AT = "2026-09-05";
 const NEWEST_DAILY_SCAN_CHECKED_AT = "2026-09-06";
 const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
+const LATEST_DAILY_RELEASE_CHECKED_AT = "2026-09-09";
 
 type RaceDistance = "Half" | "10mi";
-type RaceCountry = "England" | "Scotland" | "Wales" | "Ireland";
+type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
 
 type RaceSeed = {
   slug: string;
@@ -1091,6 +1092,46 @@ const seeds: RaceSeed[] = [
       "The official RaceBest event and direct registration pages confirm the 22 November 2026 road 10-mile race, 09:30 start, open entry and UKA licence 2026-28391.",
   },
   {
+    slug: "kinsale-10-mile-2027",
+    name: "Kinsale 10 Mile 2027",
+    date: "2027-02-28",
+    distance: "10mi",
+    startTime: "10:30",
+    country: "Ireland",
+    county: "County Cork",
+    city: "Kinsale",
+    area: "Kinsale Community School and the roads around Kinsale",
+    surface: "Road",
+    organiser: "Riverstick Kinsale Athletic Club & Kinsale Community School",
+    url: "https://eventmaster.ie/event/v7jyuPoSb4",
+    status: "TBC",
+    hasEntry: false,
+    priceAmount: 25,
+    priceCurrency: "EUR",
+    checkedAt: LATEST_DAILY_RELEASE_CHECKED_AT,
+    notes:
+      "The official registration page confirms 28 February 2027, the 10:30 start and approved permit 26/495. Online sales open on 6 November 2026 at 11:00, so no premature checkout is advertised.",
+  },
+  {
+    slug: "spar-omagh-half-marathon-5k-2027",
+    name: "37th SPAR Omagh Half Marathon & 5K 2027",
+    date: "2027-04-04",
+    distance: "Half",
+    country: "Northern Ireland",
+    county: "County Tyrone",
+    city: "Omagh",
+    area: "Omagh",
+    surface: "Road",
+    distances: ["Half", "5K"],
+    organiser: "SPAR Omagh Half Marathon",
+    url: "https://www.sientries.co.uk/event/37th-spar-omagh-half-marathon-5k-2027-2027",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: LATEST_DAILY_RELEASE_CHECKED_AT,
+    notes:
+      "The official direct-registration listing consistently confirms the half marathon and 5K on 4 April 2027. Event setup and entry are not yet complete, so no start time or checkout is asserted.",
+  },
+  {
     slug: "beacon-beast-marathon-beastly-half-2027",
     name: "Beacon Beast Marathon & The Beastly Half 2027",
     date: "2027-04-25",
@@ -1557,14 +1598,6 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
   },
   {
-    slug: "kinsale-10-mile-2027",
-    date: "2027-02-28",
-    country: "Ireland",
-    reason:
-      "The direct registration page confirms the date, 10-mile distance and 10:30 start but labels the Athletics Ireland permit as pending approval.",
-    sourceUrl: "https://eventmaster.ie/event/v7jyuPoSb4",
-  },
-  {
     slug: "runclare-10-mile-2027",
     date: "2027-04-11",
     country: "Ireland",
@@ -1694,8 +1727,7 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     area: "Penistone Hill and Bronte Country between Haworth and Hebden Bridge",
     surface: "Trail",
     distances: ["Half", "10K"],
-    summary:
-      "Sue Ryder Bronte Half Marathon & 10K — timed trail races through Bronte Country.",
+    summary: "Sue Ryder Bronte Half Marathon & 10K — timed trail races through Bronte Country.",
     description:
       "Sue Ryder's Bronte Half Marathon and 10K use hilly trail routes through Bronte Country from Penistone Hill; the established Bronte card carries both verified distances.",
     organiser: "Sue Ryder",
@@ -1736,6 +1768,20 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     website: "https://www.entrycentral.com/ScurryVogrieTyneValley",
     source_url: "https://www.entrycentral.com/ScurryVogrieTyneValley",
     defaultStartTime: "09:30",
+  },
+  "tibthorpe-loop": {
+    county: "East Riding of Yorkshire",
+    city: "Tibthorpe",
+    area: "Field House Farm and the Yorkshire Wolds",
+    surface: "Trail",
+    distances: ["Half"],
+    summary:
+      "Tibthorpe Loop — a waymarked trail half marathon through the Yorkshire Wolds from Field House Farm.",
+    description:
+      "Ultra Trails' Tibthorpe Loop is an undulating trail half marathon through the Yorkshire Wolds, starting and finishing at Field House Farm; its verified edition is attached to the established card.",
+    organiser: "Ultra Trails",
+    website: "https://www.sientries.co.uk/event/ultra-trails-tibthorpe-loop-2027",
+    source_url: "https://www.sientries.co.uk/event/ultra-trails-tibthorpe-loop-2027",
   },
   "hardmoors-farndale-trail-races": {
     name: "Hardmoors 26.2 Farndale Trail Races",
@@ -1793,6 +1839,15 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
     notes:
       "The current direct official registration page confirms the 08:30 start, half-marathon and 10K programme, and open event-specific checkout.",
   },
+  "tibthorpe-loop|2027-02-20|Half": {
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=17658",
+    source: "https://www.sientries.co.uk/event/ultra-trails-tibthorpe-loop-2027",
+    notes:
+      "The direct official registration page confirms the 20 February 2027 trail half marathon at Field House Farm, open entry and a five-hour cut-off.",
+  },
 };
 
 export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
@@ -1821,6 +1876,22 @@ export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
       priceCurrency: "GBP",
       checkedAt: LATEST_DAILY_SCAN_CHECKED_AT,
       sourceUrl: "https://www.sientries.co.uk/event/collingbourne-races-2027",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration checkout.",
+    },
+  ],
+  "tibthorpe-loop|2027-02-20|Half": [
+    {
+      providerCode: "official-tibthorpe-loop-2027",
+      providerName: "Ultra Trails",
+      entryUrl: "https://www.sientries.co.uk/enter.php?event_id=17658",
+      entryType: "official",
+      status: "open",
+      priceAmount: 19,
+      priceCurrency: "GBP",
+      checkedAt: LATEST_DAILY_RELEASE_CHECKED_AT,
+      sourceUrl: "https://www.sientries.co.uk/event/ultra-trails-tibthorpe-loop-2027",
       isVerified: true,
       isPrimary: true,
       notes: "Direct official event-specific registration checkout.",

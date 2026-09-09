@@ -17,8 +17,8 @@ const LATEST_DAILY_SCAN_CHECKED_AT = "2026-09-05";
 const NEWEST_DAILY_SCAN_CHECKED_AT = "2026-09-06";
 const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 59;
-const NEW_EDITION_COUNT = 62;
+const NEW_SERIES_COUNT = 61;
+const NEW_EDITION_COUNT = 64;
 const EXISTING_SERIES_EDITION_COUNT = 16;
 
 async function loadModule(input) {
@@ -49,12 +49,12 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  51,
+  52,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "10mi").length,
-  11,
+  12,
   "The 10-mile total changed unexpectedly",
 );
 
@@ -90,7 +90,7 @@ for (const series of dailyHalfTenMileSeries) {
   sourceUrls.add(sourceUrl);
   assert.equal(series.sport, "Running", `${series.slug} is not a running event`);
   assert(
-    ["England", "Scotland", "Wales", "Ireland"].includes(series.country),
+    ["England", "Scotland", "Wales", "Northern Ireland", "Ireland"].includes(series.country),
     `${series.slug} has an out-of-scope country`,
   );
   assert.match(series.website, /^https:\/\//, `${series.slug} website must use HTTPS`);
@@ -680,9 +680,7 @@ assert(
   "Thirsk 10 must remain held while its race licence is TBC",
 );
 assert(
-  dailyHalfTenMileResearchQueue.some(
-    (candidate) => candidate.slug === "clowne-half-marathon-2026",
-  ),
+  dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "clowne-half-marathon-2026"),
   "Clowne Half must remain held while its race licence is TBC",
 );
 assert(
@@ -737,9 +735,40 @@ assert(
   ),
   "Abbeyknockmoy must remain held while its Athletics Ireland permit is pending",
 );
-assert(
-  dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "kinsale-10-mile-2027"),
-  "Kinsale 10 must remain held while its Athletics Ireland permit is pending",
+const kinsaleSeries = dailyHalfTenMileSeries.find(
+  (series) => series.slug === "kinsale-10-mile-2027",
+);
+const kinsaleEdition = dailyHalfTenMileEditions.find(
+  (edition) => edition.seriesSlug === "kinsale-10-mile-2027",
+);
+assert(kinsaleSeries, "Kinsale 10 was not published after its permit cleared");
+assert.equal(kinsaleEdition?.date, "2027-02-28", "Kinsale 10 date changed unexpectedly");
+assert.equal(kinsaleEdition?.distance, "10mi", "Kinsale 10 lost its canonical distance");
+assert.equal(kinsaleEdition?.startTime, "10:30", "Kinsale 10 start time changed unexpectedly");
+assert.equal(kinsaleEdition?.status, "TBC", "Kinsale 10 must remain closed before sales open");
+assert(!kinsaleEdition?.entryOptions?.length, "Kinsale 10 must not expose entry before 6 November");
+assert.equal(
+  kinsaleSeries.source_url,
+  "https://eventmaster.ie/event/v7jyuPoSb4",
+  "Kinsale 10 lost its official permit provenance",
+);
+
+const omaghEdition = dailyHalfTenMileEditions.find(
+  (edition) => edition.seriesSlug === "spar-omagh-half-marathon-5k-2027",
+);
+assert.equal(omaghEdition?.date, "2027-04-04", "Omagh Half date changed unexpectedly");
+assert.equal(omaghEdition?.status, "TBC", "Omagh Half must remain closed during event setup");
+assert(!omaghEdition?.entryOptions?.length, "Omagh Half must not expose an unfinished checkout");
+
+assert.equal(
+  dailyHalfTenMileEditionOverrides["tibthorpe-loop|2027-02-20|Half"]?.entryUrl,
+  "https://www.sientries.co.uk/enter.php?event_id=17658",
+  "Tibthorpe Loop lost its direct official checkout",
+);
+assert.equal(
+  dailyHalfTenMileEntryOptions["tibthorpe-loop|2027-02-20|Half"]?.[0]?.checkedAt,
+  "2026-09-09",
+  "Tibthorpe Loop has a stale direct-entry check",
 );
 assert(
   dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "runclare-10-mile-2027"),
@@ -787,5 +816,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (48 half marathons and 11 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, seven enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (49 half marathons and 12 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, seven enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );

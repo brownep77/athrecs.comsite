@@ -385,13 +385,6 @@ export const verifiedTenMileResearchQueue = [
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {
-    slug: "kinsale-10-mile-2027",
-    date: "2027-02-28",
-    country: "Ireland",
-    reason: "The direct registration page labels the Athletics Ireland permit as pending.",
-    sourceUrl: "https://eventmaster.ie/event/v7jyuPoSb4",
-  },
-  {
     slug: "runclare-kilkishen-10-mile-2027",
     date: "2027-04-10",
     country: "Ireland",
