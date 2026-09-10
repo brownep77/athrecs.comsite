@@ -3,6 +3,7 @@ import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "../lib/athrecs/seed.server";
 import { todayIso } from "../lib/athrecs/format";
 import type { AthleteListItem, ClubListItem, Sport } from "../lib/athrecs/types";
+import { isTemporaryRunningEdition, isTemporaryRunningEvent } from "./temporary-running";
 import * as base from "../lib/athrecs/api";
 
 // Keep staff, import and shared-network functions available. The explicit
@@ -31,6 +32,8 @@ type EventRegionInput =
 export const listEventRegions = createServerFn({ method: "GET" })
   .validator((input: EventRegionInput) => input ?? {})
   .handler(async ({ data }) => {
+    if (data.sport === "Running")
+      return base.listEventRegions({ data: { ...data, sport: "Running" } });
     if (data.sport && data.sport !== "All" && !isAthleticsSport(data.sport)) return [];
     return base.listEventRegions({ data: { ...data, sport: ATHLETICS_SPORT } });
   });
@@ -59,6 +62,18 @@ type ListEventsInput =
 export const listEvents = createServerFn({ method: "GET" })
   .validator((input: ListEventsInput) => input ?? {})
   .handler(async ({ data }) => {
+    if (data.sport === "Running") {
+      if (data.distance && data.distance !== "All" && !["5K", "10K"].includes(data.distance))
+        return [];
+      return base.listEvents({
+        data: {
+          ...data,
+          sport: "Running",
+          temporaryUkIrelandShortRaces: true,
+          distance: data.distance === "All" ? undefined : data.distance,
+        },
+      });
+    }
     if (data.sport && data.sport !== "All" && !isAthleticsSport(data.sport)) return [];
     return base.listEvents({
       data: {
@@ -72,7 +87,20 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
   .handler(async ({ data }) => {
     const result = await base.getEventBySlug({ data });
-    if (!result || !isAthleticsSport(result.event.sport)) return null;
+    if (!result) return null;
+    if (isTemporaryRunningEvent(result.event)) {
+      const upcoming = result.upcoming.filter(isTemporaryRunningEdition);
+      const past = result.past.filter(isTemporaryRunningEdition);
+      if (!upcoming.length && !past.length) return null;
+      return {
+        ...result,
+        distances: result.distances.filter((d) => d === "5K" || d === "10K"),
+        upcoming,
+        past,
+        related: [],
+      };
+    }
+    if (!isAthleticsSport(result.event.sport)) return null;
     return {
       ...result,
       related: result.related.filter((event) => isAthleticsSport(event.sport)),
@@ -434,6 +462,7 @@ async function queryAthleticsCalendarPage(
   data: AthleticsCalendarPageInput = {},
 ): Promise<AthleticsCalendarPage> {
   const sql = await ready();
+  const shortRaces = data.sport === "Running";
   const rawQ = data.q?.trim() ?? "";
   const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
   const region = data.region?.trim() || null;
@@ -483,13 +512,19 @@ async function queryAthleticsCalendarPage(
           event.description
         from editions edition
         join events event on event.id = edition.event_id
-        where event.sport = 'Athletics'
+        where (
+          (${shortRaces}::boolean is false and event.sport = 'Athletics')
+          or (${shortRaces}::boolean is true and event.sport = 'Running'
+            and event.country in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland', 'Ireland')
+            and edition.event_date between '2026-09-10'::date and '2027-01-31'::date
+            and edition.distance_code in ('5K', '10K'))
+        )
           and (${trackAndFieldOnly}::boolean is false or event.surface = 'Track')
           and (${upcomingOnly}::boolean is false or edition.event_date >= ${today}::date)
           and (${dateFrom}::date is null or edition.event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or edition.event_date <= ${dateTo}::date)
           and (${surface}::text is null or event.surface = ${surface})
-          and (${country}::text is null or event.country = ${country} or event.county = ${country})
+          and (${country}::text is null or event.country = ${country} or event.county = ${country} or (${country} = 'United Kingdom' and event.country in ('England','Scotland','Wales','Northern Ireland')))
           and (${region}::text is null or event.country = ${region} or event.county = ${region})
           and (
             ${county}::text is null

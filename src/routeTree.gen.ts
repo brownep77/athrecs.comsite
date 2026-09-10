@@ -22,6 +22,7 @@ import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/cat
 import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/admin/catalogue-recovery-emergency'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
+import { Route as AdminNetworkRouteImport } from './routes/admin/network'
 import { Route as AdminResultArchiveRouteImport } from './routes/admin/result-archive'
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
@@ -32,6 +33,8 @@ import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
 import { Route as ClubsSlugRouteImport } from './routes/clubs/$slug'
+import { Route as NewsIndexRouteImport } from './routes/news/index'
+import { Route as NewsSlugRouteImport } from './routes/news/$slug'
 import { Route as RacesIndexRouteImport } from './routes/races/index'
 import { Route as RacesSlugRouteImport } from './routes/races/$slug'
 import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$country/index'
@@ -107,6 +110,11 @@ const AdminFixtureReviewRoute = AdminFixtureReviewRouteImport.update({
   path: '/admin/fixture-review',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNetworkRoute = AdminNetworkRouteImport.update({
+  id: '/admin/network',
+  path: '/admin/network',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminResultArchiveRoute = AdminResultArchiveRouteImport.update({
   id: '/admin/result-archive',
   path: '/admin/result-archive',
@@ -155,6 +163,16 @@ const ClubsIndexRoute = ClubsIndexRouteImport.update({
 const ClubsSlugRoute = ClubsSlugRouteImport.update({
   id: '/clubs/$slug',
   path: '/clubs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsIndexRoute = NewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsSlugRoute = NewsSlugRouteImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RacesIndexRoute = RacesIndexRouteImport.update({
@@ -209,6 +227,7 @@ export interface FileRoutesByFullPath {
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/network': typeof AdminNetworkRoute
   '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
@@ -217,10 +236,12 @@ export interface FileRoutesByFullPath {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/athletes/': typeof AthletesIndexRoute
   '/clubs/': typeof ClubsIndexRoute
+  '/news/': typeof NewsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
@@ -241,6 +262,7 @@ export interface FileRoutesByTo {
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/network': typeof AdminNetworkRoute
   '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
@@ -249,10 +271,12 @@ export interface FileRoutesByTo {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/admin': typeof AdminIndexRoute
   '/athletes': typeof AthletesIndexRoute
   '/clubs': typeof ClubsIndexRoute
+  '/news': typeof NewsIndexRoute
   '/races': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country': typeof LanguageCountryIndexRoute
@@ -274,6 +298,7 @@ export interface FileRoutesById {
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/network': typeof AdminNetworkRoute
   '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
@@ -282,10 +307,12 @@ export interface FileRoutesById {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/clubs/$slug': typeof ClubsSlugRoute
+  '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/athletes/': typeof AthletesIndexRoute
   '/clubs/': typeof ClubsIndexRoute
+  '/news/': typeof NewsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
@@ -308,6 +335,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/network'
     | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
@@ -316,10 +344,12 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
+    | '/news/$slug'
     | '/races/$slug'
     | '/admin/'
     | '/athletes/'
     | '/clubs/'
+    | '/news/'
     | '/races/'
     | '/api/auth/$'
     | '/$language/$country/'
@@ -340,6 +370,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/network'
     | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
@@ -348,10 +379,12 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
+    | '/news/$slug'
     | '/races/$slug'
     | '/admin'
     | '/athletes'
     | '/clubs'
+    | '/news'
     | '/races'
     | '/api/auth/$'
     | '/$language/$country'
@@ -372,6 +405,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/network'
     | '/admin/result-archive'
     | '/admin/result-claims'
     | '/admin/result-links'
@@ -380,10 +414,12 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/athletes/$slug'
     | '/clubs/$slug'
+    | '/news/$slug'
     | '/races/$slug'
     | '/admin/'
     | '/athletes/'
     | '/clubs/'
+    | '/news/'
     | '/races/'
     | '/api/auth/$'
     | '/$language/$country/'
@@ -405,6 +441,7 @@ export interface RootRouteChildren {
   AdminCatalogueRecoveryEmergencyRoute: typeof AdminCatalogueRecoveryEmergencyRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
+  AdminNetworkRoute: typeof AdminNetworkRoute
   AdminResultArchiveRoute: typeof AdminResultArchiveRoute
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
@@ -413,10 +450,12 @@ export interface RootRouteChildren {
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
+  NewsSlugRoute: typeof NewsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AthletesIndexRoute: typeof AthletesIndexRoute
   ClubsIndexRoute: typeof ClubsIndexRoute
+  NewsIndexRoute: typeof NewsIndexRoute
   RacesIndexRoute: typeof RacesIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   LanguageCountryIndexRoute: typeof LanguageCountryIndexRoute
@@ -518,6 +557,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminFixtureReviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/network': {
+      id: '/admin/network'
+      path: '/admin/network'
+      fullPath: '/admin/network'
+      preLoaderRoute: typeof AdminNetworkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/result-archive': {
       id: '/admin/result-archive'
       path: '/admin/result-archive'
@@ -588,6 +634,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClubsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news/': {
+      id: '/news/'
+      path: '/news'
+      fullPath: '/news/'
+      preLoaderRoute: typeof NewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/$slug': {
+      id: '/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/news/$slug'
+      preLoaderRoute: typeof NewsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/races/': {
       id: '/races/'
       path: '/races'
@@ -653,6 +713,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCatalogueRecoveryEmergencyRoute: AdminCatalogueRecoveryEmergencyRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
+  AdminNetworkRoute: AdminNetworkRoute,
   AdminResultArchiveRoute: AdminResultArchiveRoute,
   AdminResultClaimsRoute: AdminResultClaimsRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
@@ -661,10 +722,12 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   ClubsSlugRoute: ClubsSlugRoute,
+  NewsSlugRoute: NewsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,
   AdminIndexRoute: AdminIndexRoute,
   AthletesIndexRoute: AthletesIndexRoute,
   ClubsIndexRoute: ClubsIndexRoute,
+  NewsIndexRoute: NewsIndexRoute,
   RacesIndexRoute: RacesIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   LanguageCountryIndexRoute: LanguageCountryIndexRoute,

@@ -2,10 +2,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const migration = await readFile(
-  "migrations/0027_sportsrecs_network_foundation.sql",
-  "utf8",
-);
+const migration = await readFile("migrations/0027_sportsrecs_network_foundation.sql", "utf8");
 
 for (const table of [
   "brands",
@@ -59,13 +56,22 @@ assert(
 );
 
 const server = await readFile("src/lib/athrecs/sportsrecs-network.server.ts", "utf8");
-assert(server.includes("on conflict (event_id) do nothing"), "Sync must preserve reviewed classifications");
+assert(
+  server.includes("on conflict (event_id) do nothing"),
+  "Sync must preserve reviewed classifications",
+);
 assert(server.includes("migration_state = 'shadow'"), "Sync must only refresh shadow rows");
 
 const api = await readFile("src/lib/athrecs/sportsrecs-network-api.ts", "utf8");
 assert(api.includes(".middleware([staffMiddleware])"), "Network API must require staff access");
-assert(api.includes("publicUrlCutoverEnabled: false"), "Network API must report URL cutover disabled");
-assert(api.includes("specialistDomainWritesEnabled: false"), "Specialist-domain writes must be disabled");
+assert(
+  api.includes("publicUrlCutoverEnabled: false"),
+  "Network API must report URL cutover disabled",
+);
+assert(
+  api.includes("specialistDomainWritesEnabled: false"),
+  "Specialist-domain writes must be disabled",
+);
 
 const route = await readFile("src/routes/admin/network.tsx", "utf8");
 assert(route.includes('createFileRoute("/admin/network"'), "Network staff route is missing");
@@ -86,11 +92,14 @@ assert(
   athleticsApi.includes('const ATHLETICS_SPORT = "Athletics"') &&
     athleticsApi.includes("event.sport = 'Athletics'") &&
     athleticsApi.includes("sport: ATHLETICS_SPORT"),
-  "ATHRECS public reads must be limited to Athletics",
+  "ATHRECS public reads must default to Athletics",
 );
 assert(
-  athleticsApi.includes("if (!result || !isAthleticsSport(result.event.sport)) return null"),
-  "Direct non-Athletics event URLs must fail closed on ATHRECS",
+  athleticsApi.includes("if (!isAthleticsSport(result.event.sport)) return null") &&
+    athleticsApi.includes("isTemporaryRunningEvent(result.event)") &&
+    athleticsApi.includes("result.upcoming.filter(isTemporaryRunningEdition)") &&
+    athleticsApi.includes("if (!upcoming.length && !past.length) return null"),
+  "Direct event URLs must allow only Athletics or the temporary short-race scope",
 );
 assert(
   athleticsApi.includes('export * from "../lib/athrecs/api"'),
@@ -99,9 +108,9 @@ assert(
 
 const athleticsFilters = await readFile("src/athletics/filters.ts", "utf8");
 assert(
-  athleticsFilters.includes('export const SPORTS = ["Athletics"] as const') &&
+  athleticsFilters.includes('export const SPORTS = ["Athletics", "Running"] as const') &&
     athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
-  "ATHRECS must expose Athletics as its only public discipline",
+  "ATHRECS must default to Athletics while offering the temporary Running collection",
 );
 
 const athleticsRoutes = await Promise.all([
@@ -112,7 +121,6 @@ const athleticsRoutes = await Promise.all([
 ]);
 for (const routeSource of athleticsRoutes) {
   for (const forbidden of [
-    'sport: "Running"',
     'sport: "Parkrun"',
     'sport: "Triathlon"',
     'sport: "Cycling"',
@@ -123,14 +131,8 @@ for (const routeSource of athleticsRoutes) {
   }
 }
 
-const athleticsOfficialEntry = await readFile(
-  "src/athletics/official-entry.server.ts",
-  "utf8",
-);
-const runRecsOfficialEntry = await readFile(
-  "src/runrecs/official-entry.server.ts",
-  "utf8",
-);
+const athleticsOfficialEntry = await readFile("src/athletics/official-entry.server.ts", "utf8");
+const runRecsOfficialEntry = await readFile("src/runrecs/official-entry.server.ts", "utf8");
 assert(
   athleticsOfficialEntry.includes("sport = 'Athletics'") &&
     athleticsOfficialEntry.includes("if (!allowed.length) return null"),
@@ -142,14 +144,8 @@ assert(
   "RunRecs official-entry redirects must fail closed outside Running and Parkrun",
 );
 
-const athleticsSharedProfile = await readFile(
-  "src/athletics/athlete-profile-share-api.ts",
-  "utf8",
-);
-const runRecsSharedProfile = await readFile(
-  "src/runrecs/athlete-profile-share-api.ts",
-  "utf8",
-);
+const athleticsSharedProfile = await readFile("src/athletics/athlete-profile-share-api.ts", "utf8");
+const runRecsSharedProfile = await readFile("src/runrecs/athlete-profile-share-api.ts", "utf8");
 assert(
   athleticsSharedProfile.includes("event.sport = 'Athletics'") &&
     athleticsSharedProfile.includes('primarySport: "Athletics"') &&
@@ -216,7 +212,7 @@ assert(
   "ATHRECS result suggestions must be Athletics-only and omit the broad runner search",
 );
 assert(
-  accountRoute.includes('ACCOUNT_SPORTS') &&
+  accountRoute.includes("ACCOUNT_SPORTS") &&
     accountRoute.includes('["Athletics"]') &&
     accountRoute.includes("const hiddenSports = IS_ATHRECS_SITE") &&
     accountRoute.includes("sportIsInPublicSiteScope(result.sport)"),
@@ -259,6 +255,10 @@ assert(
 );
 
 const docs = await readFile("docs/sportsrecs-network-foundation.md", "utf8");
-assert(docs.includes("Public URL migration and domain activation require a separate approved release."));
+assert(
+  docs.includes("Public URL migration and domain activation require a separate approved release."),
+);
 
-process.stdout.write("SportsRecs network and complete specialist public-scope verification passed.\n");
+process.stdout.write(
+  "SportsRecs network and complete specialist public-scope verification passed.\n",
+);

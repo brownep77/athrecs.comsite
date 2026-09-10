@@ -153,6 +153,7 @@ export const listEvents = createServerFn({ method: "GET" })
       input:
         | {
             sport?: Sport | "All";
+            temporaryUkIrelandShortRaces?: boolean;
             q?: string;
             upcomingOnly?: boolean;
             limit?: number;
@@ -174,6 +175,7 @@ export const listEvents = createServerFn({ method: "GET" })
   )
   .handler(async ({ data }) => {
     const sql = await ready();
+    const shortRaces = data.temporaryUkIrelandShortRaces === true;
     const sport = data.sport && data.sport !== "All" ? data.sport : null;
     const rawQ = data.q?.trim() ?? "";
     const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
@@ -201,6 +203,16 @@ export const listEvents = createServerFn({ method: "GET" })
         groups_json: string | RaceGroupInfo[] | null;
       }
     >`
+      with scoped_editions as not materialized (
+        select * from editions
+        where (${shortRaces}::boolean is false or (
+          event_date between '2026-09-10'::date and '2027-01-31'::date
+          and distance_code in ('5K', '10K')
+          and (${dateFrom}::date is null or event_date >= ${dateFrom}::date)
+          and (${dateTo}::date is null or event_date <= ${dateTo}::date)
+          and (${distance}::text is null or distance_code = ${distance})
+        ))
+      )
       select
         e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
@@ -223,37 +235,42 @@ export const listEvents = createServerFn({ method: "GET" })
           from event_groups g where g.event_id = e.id
         ) as groups_json,
         (
-          select ed.event_date::text from editions ed
+          select ed.event_date::text from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
           order by ed.event_date asc limit 1
         ) as next_date,
         (
-          select ed.distance_code from editions ed
+          select ed.distance_code from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
-          select ed.status from editions ed
+          select ed.status from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
           order by ed.event_date asc limit 1
         ) as next_status,
         (
-          select ed.start_time from editions ed
+          select ed.start_time from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
-          select count(*)::int from editions ed
+          select count(*)::int from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
         ) as upcoming_count,
         (
-          select count(*)::int from editions ed
+          select count(*)::int from scoped_editions ed
           where ed.event_id = e.id and ed.event_date < ${today}::date
         ) as past_count,
-        (select count(*)::int from editions ed where ed.event_id = e.id) as edition_count
+        (select count(*)::int from scoped_editions ed where ed.event_id = e.id) as edition_count
       from events e
       where
         (${sport}::text is null or e.sport = ${sport})
+        and (${shortRaces}::boolean is false or (
+          e.sport = 'Running'
+          and e.country in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland', 'Ireland')
+          and exists (select 1 from scoped_editions scoped where scoped.event_id = e.id)
+        ))
         and (
           ${q}::text is null
           or lower(e.name) like ${q}
@@ -275,7 +292,7 @@ export const listEvents = createServerFn({ method: "GET" })
             where g.event_id = e.id and g.group_code = ${group}
           )
         )
-        and (${country}::text is null or e.country = ${country} or e.county = ${country})
+        and (${country}::text is null or e.country = ${country} or e.county = ${country} or (${shortRaces}::boolean and ${country} = 'United Kingdom' and e.country in ('England','Scotland','Wales','Northern Ireland')))
         and (
           ${county}::text is null
           or lower(coalesce(e.region, '')) like ${county}
@@ -299,7 +316,7 @@ export const listEvents = createServerFn({ method: "GET" })
           ${dateFrom}::date is null and ${dateTo}::date is null
           or e.sport = 'Parkrun'
           or exists (
-            select 1 from editions ed
+            select 1 from scoped_editions ed
             where ed.event_id = e.id
               and (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
               and (${dateTo}::date is null or ed.event_date <= ${dateTo}::date)
@@ -309,17 +326,17 @@ export const listEvents = createServerFn({ method: "GET" })
           ${upcomingOnly}::boolean is false
           or e.sport = 'Parkrun'
           or exists (
-            select 1 from editions ed
+            select 1 from scoped_editions ed
             where ed.event_id = e.id and ed.event_date >= ${today}::date
           )
         )
       order by
         case when (
-          select min(ed.event_date) from editions ed
+          select min(ed.event_date) from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
         ) is null then 1 else 0 end,
         (
-          select min(ed.event_date) from editions ed
+          select min(ed.event_date) from scoped_editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
         ) asc nulls last,
         e.name asc
@@ -357,7 +374,7 @@ export const listEvents = createServerFn({ method: "GET" })
             : r.next_date;
         return {
           ...r,
-          distances,
+          distances: shortRaces ? distances.filter((d) => d === "5K" || d === "10K") : distances,
           groups: parseRaceGroups(groups_json),
           next_date: nextDate,
           upcoming_count:
