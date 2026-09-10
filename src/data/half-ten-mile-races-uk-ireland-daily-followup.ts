@@ -14,6 +14,7 @@ const LATEST_DAILY_SCAN_CHECKED_AT = "2026-09-05";
 const NEWEST_DAILY_SCAN_CHECKED_AT = "2026-09-06";
 const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
 const LATEST_DAILY_RELEASE_CHECKED_AT = "2026-09-09";
+const NEWEST_DAILY_RELEASE_CHECKED_AT = "2026-09-10";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1113,6 +1114,24 @@ const seeds: RaceSeed[] = [
       "The official registration page confirms 28 February 2027, the 10:30 start and approved permit 26/495. Online sales open on 6 November 2026 at 11:00, so no premature checkout is advertised.",
   },
   {
+    slug: "mallow-10-mile-road-race-2027",
+    name: "Mallow 10 Mile Road Race 2027",
+    date: "2027-03-21",
+    distance: "10mi",
+    country: "Ireland",
+    county: "County Cork",
+    city: "Mallow",
+    area: "Mallow and the north Cork countryside",
+    surface: "Road",
+    organiser: "Mallow Athletic Club",
+    url: "https://athleticsireland.eventmaster.ie/event-calendar/",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: NEWEST_DAILY_RELEASE_CHECKED_AT,
+    notes:
+      "The official Athletics Ireland calendar confirms the 21 March 2027 10-mile road race and approved permit 26/496. Registration is marked Open Soon, so no checkout or unverified start time is advertised.",
+  },
+  {
     slug: "spar-omagh-half-marathon-5k-2027",
     name: "37th SPAR Omagh Half Marathon & 5K 2027",
     date: "2027-04-04",
@@ -1598,12 +1617,38 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
   },
   {
-    slug: "runclare-10-mile-2027",
+    slug: "runclare-lisdoonvarna-10-mile-2027",
     date: "2027-04-11",
     country: "Ireland",
     reason:
-      "The official series registration page lists a 10-mile finale on this date but keeps the permit pending and the race name and venue as coming soon.",
+      "The official Athletics Ireland calendar now identifies the RunClare 10-mile finale as Lisdoonvarna but keeps its permit pending; the series registration page has not yet replaced its Coming Soon copy.",
     sourceUrl: "https://eventmaster.ie/event/Z7M0iMWcZY",
+  },
+  {
+    slug: "walter-raleigh-round-half-marathon-2027",
+    date: "2027-01-09",
+    country: "England",
+    reason:
+      "The official entry page markets a half marathon but specifies a 13.6-mile route, so it is held for the non-standard-distance catalogue rather than mislabelled as a canonical half.",
+    sourceUrl:
+      "https://www.sientries.co.uk/event/walter-raleigh-round-halfthird-marathon-2027",
+  },
+  {
+    slug: "ranger-ultras-loop-the-loop-2027",
+    date: "2027-06-05",
+    country: "England",
+    reason:
+      "The official entry page calls each circuit a half-marathon loop but specifies 23.3 kilometres / 14.5 miles, so it is held for the non-standard-distance catalogue.",
+    sourceUrl: "https://www.sientries.co.uk/event/ranger-ultras-loop-the-loop-2027",
+  },
+  {
+    slug: "dartmoor-great-escape-2027",
+    date: "2027-07-31",
+    country: "England",
+    reason:
+      "The official entry page markets the Great Escape as a long half marathon and specifies 25 kilometres / 15.5 miles, so it is held for the non-standard-distance catalogue.",
+    sourceUrl:
+      "https://www.sientries.co.uk/event/the-dartmoor-crossing-great-escape-2027",
   },
   {
     slug: "tom-scott-10-mile-road-race-2027",

@@ -16,9 +16,10 @@ const CURRENT_DAILY_SCAN_CHECKED_AT = "2026-09-03";
 const LATEST_DAILY_SCAN_CHECKED_AT = "2026-09-05";
 const NEWEST_DAILY_SCAN_CHECKED_AT = "2026-09-06";
 const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
+const NEWEST_DAILY_RELEASE_CHECKED_AT = "2026-09-10";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 61;
-const NEW_EDITION_COUNT = 64;
+const NEW_SERIES_COUNT = 62;
+const NEW_EDITION_COUNT = 65;
 const EXISTING_SERIES_EDITION_COUNT = 16;
 
 async function loadModule(input) {
@@ -54,7 +55,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "10mi").length,
-  12,
+  13,
   "The 10-mile total changed unexpectedly",
 );
 
@@ -753,6 +754,28 @@ assert.equal(
   "Kinsale 10 lost its official permit provenance",
 );
 
+const mallowSeries = dailyHalfTenMileSeries.find(
+  (series) => series.slug === "mallow-10-mile-road-race-2027",
+);
+const mallowEdition = dailyHalfTenMileEditions.find(
+  (edition) => edition.seriesSlug === "mallow-10-mile-road-race-2027",
+);
+assert(mallowSeries && mallowEdition, "The licensed Mallow 10 Mile edition is missing");
+assert.equal(mallowEdition.date, "2027-03-21", "Mallow 10 Mile has the wrong date");
+assert.equal(mallowEdition.distance, "10mi", "Mallow uses the wrong distance");
+assert.equal(mallowEdition.status, "TBC", "Mallow must remain closed until registration opens");
+assert(!mallowEdition.entryOptions?.length, "Mallow must not expose an unopened checkout");
+assert.equal(
+  mallowSeries.source_url,
+  "https://athleticsireland.eventmaster.ie/event-calendar/",
+  "Mallow 10 Mile lost its official governing-body provenance",
+);
+assert.match(
+  mallowSeries.description,
+  new RegExp(NEWEST_DAILY_RELEASE_CHECKED_AT),
+  "Mallow 10 Mile has a stale source check",
+);
+
 const omaghEdition = dailyHalfTenMileEditions.find(
   (edition) => edition.seriesSlug === "spar-omagh-half-marathon-5k-2027",
 );
@@ -771,9 +794,21 @@ assert.equal(
   "Tibthorpe Loop has a stale direct-entry check",
 );
 assert(
-  dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === "runclare-10-mile-2027"),
-  "RunClare 10-mile finale must remain held while its permit and event identity are pending",
+  dailyHalfTenMileResearchQueue.some(
+    (candidate) => candidate.slug === "runclare-lisdoonvarna-10-mile-2027",
+  ),
+  "RunClare Lisdoonvarna 10 must remain held while its permit is pending",
 );
+for (const slug of [
+  "walter-raleigh-round-half-marathon-2027",
+  "ranger-ultras-loop-the-loop-2027",
+  "dartmoor-great-escape-2027",
+]) {
+  assert(
+    dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === slug),
+    `${slug} must remain held from the canonical half catalogue at its non-standard distance`,
+  );
+}
 assert(
   dailyHalfTenMileResearchQueue.some(
     (candidate) => candidate.slug === "tom-scott-10-mile-road-race-2027",
@@ -816,5 +851,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (49 half marathons and 12 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, seven enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (49 half marathons and 13 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, seven enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );

@@ -1,10 +1,10 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 9 September 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 10 September 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
-- Added 61 officially verified series: 49 half marathons and 12 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
+- Added 62 officially verified series: 49 half marathons and 13 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
 - Added 16 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
@@ -18,7 +18,7 @@ Events already represented elsewhere were not recreated. This includes Beverley 
 
 ## Held candidates
 
-The research queue holds permit-pending Temple Newsam, Ripon, Thirsk, Clowne, Chippenham, Borrowdale, Abbeyknockmoy and RunClare races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout and CBTE Charm Bracelet remain outside the canonical half catalogue because their official distances are non-standard or approximate.
+The research queue holds permit-pending Temple Newsam, Ripon, Thirsk, Clowne, Chippenham, Borrowdale, Abbeyknockmoy and RunClare races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard or approximate.
 
 ## 29 August 2026 scan
 
@@ -67,5 +67,11 @@ Scottish Athletics lists the Tom Scott 10 Mile on 28 March 2027 in its official 
 Kinsale 10 Mile cleared its permit hold when the official Eventmaster page published approved permit `26/495`. The 28 February 2027 race and 10:30 start are now public; its checkout remains hidden until the advertised sales opening on 6 November 2026.
 
 The official SiEntries listing announced the 37th SPAR Omagh Half Marathon & 5K for 4 April 2027. The event card is published conservatively as `TBC` without a start time or checkout while registration setup is incomplete. Ultra Trails' confirmed 20 February 2027 Tibthorpe Loop half marathon was attached to the established Tibthorpe card, with its live event-specific entry route, rather than duplicated. Central Lancashire New Year's Half was already present under its canonical name and date, so no second card was created.
+
+## 10 September 2026 scan
+
+Athletics Ireland now lists the Mallow 10 Mile Road Race for 21 March 2027 with approved permit `26/496`. The verified fixture is published as `TBC` without a start time or checkout while the official calendar says registration is Open Soon.
+
+The same governing-body calendar now identifies the RunClare finale as the Lisdoonvarna 10 Mile on 11 April 2027, but its permit is still pending and the series page still says Coming Soon, so it remains unpublished. Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape were added to the non-standard-distance research queue because their marketed half-marathon routes are officially 13.6, 14.5 and 15.5 miles respectively.
 
 Run `npm run verify:uk-ireland-half-ten-mile-daily` to validate the release.
