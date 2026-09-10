@@ -7,12 +7,15 @@ export const Route = createFileRoute("/news/$slug")({
     if (!article) throw notFound();
     return { article };
   },
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData.article.title} | RunRecs.com` },
-      { name: "description", content: loaderData.article.standfirst },
-    ],
-  }),
+  head: ({ loaderData }) =>
+    loaderData
+      ? {
+          meta: [
+            { title: `${loaderData.article.title} | RunRecs.com` },
+            { name: "description", content: loaderData.article.standfirst },
+          ],
+        }
+      : {},
   component: NewsArticlePage,
 });
 

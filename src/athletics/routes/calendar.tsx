@@ -70,14 +70,15 @@ function AthleticsCalendarPage() {
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            Athletics only
+            Athletics · UK &amp; Ireland 5K and 10K
           </p>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-fg">
             Athletics calendar
           </h1>
           <p className="max-w-2xl text-sm text-muted">
             Search track and field meetings, cross-country fixtures, road athletics and
-            championships by place, date, surface or distance.
+            championships by place, date, surface or distance. Select Running for UK and Ireland 5K
+            and 10K races through January 2027.
           </p>
         </div>
         <button
