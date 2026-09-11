@@ -222,6 +222,10 @@ export const listEvents = createServerFn({ method: "GET" })
         (
           select string_agg(d.distance_code, ',' order by d.distance_code)
           from event_distances d where d.event_id = e.id
+            and (${shortRaces}::boolean is false or exists (
+              select 1 from scoped_editions visible
+              where visible.event_id = e.id and visible.distance_code = d.distance_code
+            ))
         ) as distances_csv,
         (
           select coalesce(
