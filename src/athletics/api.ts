@@ -1,3 +1,4 @@
+import { getRunrecsOnlyEditionIds } from "../lib/athrecs/runrecs-publication.server";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "../lib/athrecs/seed.server";
@@ -89,12 +90,15 @@ export const getEventBySlug = createServerFn({ method: "GET" })
     const result = await base.getEventBySlug({ data });
     if (!result) return null;
     if (isTemporaryRunningEvent(result.event)) {
-      const upcoming = result.upcoming.filter(isTemporaryRunningEdition);
-      const past = result.past.filter(isTemporaryRunningEdition);
+      const excluded = new Set(await getRunrecsOnlyEditionIds(await ready()));
+      const eligibleUpcoming = result.upcoming.filter(isTemporaryRunningEdition);
+      const eligiblePast = result.past.filter(isTemporaryRunningEdition);
+      const upcoming = eligibleUpcoming.filter((edition) => !excluded.has(edition.id));
+      const past = eligiblePast.filter((edition) => !excluded.has(edition.id));
       if (!upcoming.length && !past.length) return null;
       return {
         ...result,
-        distances: result.distances.filter((d) => d === "5K" || d === "10K"),
+        distances: [...new Set([...upcoming, ...past].map((edition) => edition.distance_code))],
         upcoming,
         past,
         related: [],
@@ -463,6 +467,7 @@ async function queryAthleticsCalendarPage(
 ): Promise<AthleticsCalendarPage> {
   const sql = await ready();
   const shortRaces = data.sport === "Running";
+  const excludedEditionIds = shortRaces ? await getRunrecsOnlyEditionIds(sql) : [];
   const rawQ = data.q?.trim() ?? "";
   const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
   const region = data.region?.trim() || null;
@@ -517,7 +522,8 @@ async function queryAthleticsCalendarPage(
           or (${shortRaces}::boolean is true and event.sport = 'Running'
             and event.country in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland', 'Ireland')
             and edition.event_date between '2026-09-10'::date and '2027-01-31'::date
-            and edition.distance_code in ('5K', '10K'))
+            and edition.distance_code in ('5K', '10K')
+            and not (edition.id = any(${excludedEditionIds}::int[])))
         )
           and (${trackAndFieldOnly}::boolean is false or event.surface = 'Track')
           and (${upcomingOnly}::boolean is false or edition.event_date >= ${today}::date)
@@ -561,6 +567,7 @@ async function queryAthleticsCalendarPage(
               where matching_edition.event_id = event.id
                 and matching_edition.event_date = edition.event_date
                 and matching_edition.distance_code = ${distance}
+                and not (matching_edition.id = any(${excludedEditionIds}::int[]))
             )
           )
         group by
