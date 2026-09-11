@@ -1,0 +1,4696 @@
+{
+  "events": [
+    {
+      "slug": "duthie-park-5k-10k-2026",
+      "name": "Duthie Park 5K & 10K 2026",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Aberdeen",
+      "city": "Aberdeen",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "hel-n-back-trail-race-10k",
+      "name": "Hel n Back Trail Race 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "West of Scotland",
+      "city": "Helensburgh",
+      "area": "Hermitage Academy",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/hel-n-back-trail-race",
+      "summary": "10K running event in Helensburgh.",
+      "description": "10K running event in Helensburgh. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "up-and-running-5k-and-10k-september",
+      "name": "Kelvingrove Park 5K & 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Glasgow City",
+      "city": "Glasgow",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "cumbernauld-10k-run",
+      "name": "Cumbernauld 10K Running Festival",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "North Lanarkshire",
+      "city": "Cumbernauld",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "john-o-groats-10k",
+      "name": "John O'Groats 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Highlands",
+      "city": "John O'Groats",
+      "area": "John O'Groats",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/john-ogroats-10k",
+      "summary": "10K running event in John O'Groats.",
+      "description": "10K running event in John O'Groats. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "westside-runners-10k-5k-fun-run",
+      "name": "Westside Runners 10K & 5K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Na h-Eileanan Siar",
+      "city": "Shawbost",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "maggies-5k-10k-chase",
+      "name": "Maggie's 5K & 10K Chase",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Falkirk",
+      "city": "Larbert",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "toms-cairn-10k-trail-race",
+      "name": "Tom's Cairn 10K & 5K Trail Races",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Aberdeenshire",
+      "city": "Finzean",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "dumfries-house-5k-10k",
+      "name": "Dumfries House 5K & 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "West of Scotland",
+      "city": "Cumnock",
+      "area": "Dumfries House",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/dumfries-house-5k-and-10k",
+      "summary": "10K and 5K running event in Cumnock.",
+      "description": "10K and 5K running event in Cumnock. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "the-meadows-5k-10-october",
+      "name": "The Meadows 5K & 10K — October",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "City of Edinburgh",
+      "city": "Edinburgh",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "autumn-charity-fun-run",
+      "name": "Autumn Charity Fun Run",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Edinburgh & The Lothians",
+      "city": "Edinburgh",
+      "area": "Edinburgh Outdoor Fitness: Inverleith Park",
+      "surface": "XC",
+      "organiser": "",
+      "website": "https://runabc.co.uk/summer-fun-runfest",
+      "summary": "5K running event in Edinburgh.",
+      "description": "5K running event in Edinburgh. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "up-and-running-events-alexandra-park-5k-10k-january-osv",
+      "name": "Alexandra Park 5K & 10K — October",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Glasgow City",
+      "city": "Glasgow",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "costorphine-hill-5k-10k-15k-20k",
+      "name": "Corstorphine Hill 5K, 10K, 15K & 20K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "City of Edinburgh",
+      "city": "Edinburgh",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "cramond-promenade-5k-10k-half-marathon-october",
+      "name": "Cramond Promenade 5K, 10K & Half Marathon October",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "City of Edinburgh",
+      "city": "Edinburgh",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "jedburgh-half-marathon",
+      "name": "Jedburgh Running Festival Half Marathon & 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Scottish Borders",
+      "city": "Jedburgh",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "helvellyn-trail-run-10k",
+      "name": "Lakeland Trails Helvellyn 5K, 10K & 15K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Scotland",
+      "city": "Lake District",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "inverleith-park-5k-10k-august",
+      "name": "Inverleith Park 5K & 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "City of Edinburgh",
+      "city": "Edinburgh",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "pollok-park-5k-10k-august",
+      "name": "Pollok Park 5K & 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Scotland",
+      "city": "Glasgow",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "up-and-running-events-bellahouston-park-5k-10k-half-marathon-may-coa",
+      "name": "Bellahouston Park 5K, 10K & Half Marathon",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Glasgow City",
+      "city": "Glasgow",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "strathclyde-park-5k-10k-half-marathon-november",
+      "name": "Strathclyde Park 5K, 10K & Half Marathon — November",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "North Lanarkshire",
+      "city": "Motherwell",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "holyrood-park-5k-10k-half-marathon-november",
+      "name": "Holyrood Park 5K, 10K & Half Marathon — November",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "City of Edinburgh",
+      "city": "Edinburgh",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "vogrie-country-park-november",
+      "name": "Vogrie Country Park 5K, 10K & Half Marathon",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Midlothian",
+      "city": "Gorebridge",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run",
+      "name": "Hermitage of Braid and Blackford Hill 5K 2026",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "City of Edinburgh",
+      "city": "Edinburgh",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "hot-chocolate-5k-10k-edinburgh",
+      "name": "Hot Chocolate 5K & 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Scotland",
+      "city": "Edinburgh",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "carlisle-santa-dash",
+      "name": "Carlisle Santa Dash",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cumbria",
+      "city": "Carlisle",
+      "area": "Bitts Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/carlisle-santa-dash-fun-run",
+      "summary": "5K running event in Carlisle.",
+      "description": "5K running event in Carlisle. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "queens-park-5k-10k-october-4ho",
+      "name": "Queen's Park 5K & 10K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Scotland",
+      "city": "Glasgow",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "festive-foodbank-reindeer-run",
+      "name": "Festive Foodbank Reindeer Run",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "West of Scotland",
+      "city": "Glasgow",
+      "area": "Bellahouston Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/festive-foodbank-reindeer-run",
+      "summary": "5K running event in Glasgow.",
+      "description": "5K running event in Glasgow. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "blast-running-santa-elf-dash",
+      "name": "Blast Running Santa & Elf Dash",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Edinburgh & The Lothians",
+      "city": "Edinburgh",
+      "area": "Cammo Nature Reserve",
+      "surface": "Trail",
+      "organiser": "",
+      "website": "https://runabc.co.uk/blast-running-santa-dash",
+      "summary": "10K and 5K running event in Edinburgh.",
+      "description": "10K and 5K running event in Edinburgh. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "blast-meadows-5km-october",
+      "name": "Blast@The Meadows 5K",
+      "sport": "Running",
+      "country": "Scotland",
+      "county": "Scotland",
+      "city": "Edinburgh",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "landaid-north-west-10k-5k",
+      "name": "Race for LandAid North West 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater Manchester",
+      "city": "Salford",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "tatton-10k-september",
+      "name": "Tatton Park 5K & 10K September",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cheshire",
+      "city": "Knutsford",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "nathans-5k-10k",
+      "name": "Nathan's 5K & 10K Charity Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Merseyside",
+      "city": "Crosby",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "styles-athon-5k-10k-fun-run",
+      "name": "Styles-Athon 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater Manchester",
+      "city": "Manchester",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "snape-10k",
+      "name": "Snape 10K & 5K Fun Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "North Yorkshire",
+      "city": "Snape",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "stainland-trail-10k",
+      "name": "Stainland Trail 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Yorkshire",
+      "city": "Stainland",
+      "area": "Recreation Ground",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/stainland-trail",
+      "summary": "10K running event in Stainland.",
+      "description": "10K running event in Stainland. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "run-mediacity-5k-10k-september",
+      "name": "Run MediaCity 5K & 10K September",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater Manchester",
+      "city": "Salford",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "315-national-fitness-5k",
+      "name": "3-1-5 National Fitness 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Lancashire",
+      "city": "Lancaster",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "run-aintree-5k-10k-and-half-marathon-september",
+      "name": "Run Aintree 5K, 10K & Half Marathon September",
+      "sport": "Running",
+      "country": "England",
+      "county": "Merseyside",
+      "city": "Liverpool",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "halewood-5k",
+      "name": "Halewood 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "Knowsley",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "run-yorkshire-half-marathon-10k-5k",
+      "name": "Run Yorkshire Roundhay Half Marathon, 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Yorkshire",
+      "city": "Leeds",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "red-kite-10k",
+      "name": "Red Kite 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "County Durham",
+      "city": "Stanley",
+      "area": "Dipton Jubilee Centre",
+      "surface": "Trail",
+      "organiser": "",
+      "website": "https://runabc.co.uk/red-kite-10k",
+      "summary": "10K running event in Stanley.",
+      "description": "10K running event in Stanley. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "tatton-10k-october",
+      "name": "Tatton Park 5K & 10K — October",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cheshire",
+      "city": "Knutsford",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "phoenix-manchester-priyas-birthday-biryani-dash",
+      "name": "Phoenix Manchester Priya's Birthday Biryani Dash",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "Manchester",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "coxhoe-trail-run",
+      "name": "Coxhoe Trail Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "County Durham",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "abergele-10k",
+      "name": "Abergele 5K & 10K",
+      "sport": "Running",
+      "country": "Wales",
+      "county": "Conwy",
+      "city": "Abergele",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "power-of-5k-october-2",
+      "name": "Power of 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "Morecambe",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "monsal-trail-half-marathon-autumn-sunday",
+      "name": "Monsal Trail October Half Marathon & 10K — Sunday",
+      "sport": "Running",
+      "country": "England",
+      "county": "Derbyshire",
+      "city": "Bakewell",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "whixley-5k-10k",
+      "name": "Whixley 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "North Yorkshire",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "calder-lodge-15k-5k",
+      "name": "Calder Lodge 15K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Lancashire",
+      "city": "Preston",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "piglove-by-the-river-5k-10k-october",
+      "name": "Piglove By The River 5K & 10K Autumn",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "Leeds",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "run-tatton-5k-10k-november",
+      "name": "Tatton Park 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "Cheshire",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "windmill-remembrance-day-10k",
+      "name": "Windmill Remembrance Day 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Lancashire",
+      "city": "Lytham St Annes",
+      "area": "Lytham Windmill",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/windmill-10k",
+      "summary": "10K running event in Lytham St Annes.",
+      "description": "10K running event in Lytham St Annes. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "leeds-morun",
+      "name": "Leeds MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Yorkshire",
+      "city": "Leeds",
+      "area": "Roundhay Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/the-10k-leeds-mo-run",
+      "summary": "10K and 5K running event in Leeds.",
+      "description": "10K and 5K running event in Leeds. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "slaley-hall-half-marathon",
+      "name": "Slaley Hall & Forest Trail Runs",
+      "sport": "Running",
+      "country": "England",
+      "county": "Northumberland",
+      "city": "Hexham",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "last-drop-5k",
+      "name": "Last Drop 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater Manchester",
+      "city": "Bolton",
+      "area": "The Last Drop Inn",
+      "surface": "Trail",
+      "organiser": "",
+      "website": "https://runabc.co.uk/last-drop-5k",
+      "summary": "5K running event in Bolton.",
+      "description": "5K running event in Bolton. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "liverpool-morun",
+      "name": "Liverpool MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "Merseyside",
+      "city": "Liverpool",
+      "area": "Croxteth Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/liverpool-morun",
+      "summary": "10K and 5K running event in Liverpool.",
+      "description": "10K and 5K running event in Liverpool. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "newcastle-morun",
+      "name": "Newcastle MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "Tyne & Wear",
+      "city": "Newcastle",
+      "area": "Exhibition Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/newcastle-morun-10k",
+      "summary": "10K and 5K running event in Newcastle.",
+      "description": "10K and 5K running event in Newcastle. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "litton-birks-fell-race",
+      "name": "Litton Birks Fell Race",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Yorkshire",
+      "city": "Skipton",
+      "area": "Queens Arms Pub, Litton",
+      "surface": "Fell",
+      "organiser": "",
+      "website": "https://runabc.co.uk/litton-birks-fell-race",
+      "summary": "5K running event in Skipton.",
+      "description": "5K running event in Skipton. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "manchester-morun",
+      "name": "Manchester MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater Manchester",
+      "city": "Manchester",
+      "area": "Heaton Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/the-10k-manchester-morun",
+      "summary": "10K and 5K running event in Manchester.",
+      "description": "10K and 5K running event in Manchester. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "york-morun",
+      "name": "York MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "North Yorkshire",
+      "city": "York",
+      "area": "The Racecourse",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/york-morun",
+      "summary": "10K and 5K running event in York.",
+      "description": "10K and 5K running event in York. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "delamere-trails-half-marathon-marathon-november",
+      "name": "Delamere Forest 10K, 21K and 42K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cheshire",
+      "city": "Northwich",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "sherwood-christmas-10k-5k-2026",
+      "name": "Sherwood Christmas 10K & 5K 2026",
+      "sport": "Running",
+      "country": "England",
+      "county": "Nottinghamshire",
+      "city": "Edwinstowe",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "morecambe-festival-of-running-january-2027",
+      "name": "Morecambe Festival of Running — January 2027",
+      "sport": "Running",
+      "country": "England",
+      "county": "Lancashire",
+      "city": "Morecambe",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "mental-elf-fun-run-derbyshire",
+      "name": "Mental Elf Fun Run Derbyshire",
+      "sport": "Running",
+      "country": "England",
+      "county": "Derbyshire",
+      "city": "Derby",
+      "area": "Elvaston Castle",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/mental-elf-fun-run-derbyshire",
+      "summary": "5K running event in Derby.",
+      "description": "5K running event in Derby. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "sunderland-10k",
+      "name": "Sunderland 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Tyne & Wear",
+      "city": "Sunderland",
+      "area": "Marine Walk",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/sunderland-10k-november",
+      "summary": "10K running event in Sunderland.",
+      "description": "10K running event in Sunderland. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "run-heaton-5k-10k-half-marathon-november",
+      "name": "Run Heaton Park 5K, 10K & Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater Manchester",
+      "city": "Manchester",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "llandudno-santa-dash",
+      "name": "Llandudno Santa Dash",
+      "sport": "Running",
+      "country": "Wales",
+      "county": "North Wales",
+      "city": "Llandudno",
+      "area": "The Pier, North Parade",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/llandudno-santa-dash",
+      "summary": "5K running event in Llandudno.",
+      "description": "5K running event in Llandudno. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "jingle-bell-jog-buxton",
+      "name": "Jingle Bell Jog Buxton",
+      "sport": "Running",
+      "country": "England",
+      "county": "Derbyshire",
+      "city": "Buxton",
+      "area": "Pavilion Gardens",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/jingle-bell-jog-buxton",
+      "summary": "5K running event in Buxton.",
+      "description": "5K running event in Buxton. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "btr-liverpool-santa-dash-5k",
+      "name": "BTR Liverpool Santa Dash 5K & 1K Mini Dash",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "Liverpool",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "tatton-yule-yomp-10k",
+      "name": "Tatton Yule Yomp 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cheshire",
+      "city": "Knutsford",
+      "area": "Tatton Park",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/tatton-yule-yomp-10k",
+      "summary": "10K running event in Knutsford.",
+      "description": "10K running event in Knutsford. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "bah-humbug-10k",
+      "name": "Bah Humbug 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Yorkshire",
+      "city": "Leeds",
+      "area": "South Leeds Stadium",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/bah-humbug-10k",
+      "summary": "10K running event in Leeds.",
+      "description": "10K running event in Leeds. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "great-langdale-christmas-pudding-10k",
+      "name": "Great Langdale Christmas Pudding 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cumbria",
+      "city": "Great Langdale",
+      "area": "New Dungeon Ghyll Hotel",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/great-langdale-christmas-pudding-10k-road-race",
+      "summary": "10K running event in Great Langdale.",
+      "description": "10K running event in Great Langdale. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "lymm-runners-dickensian-santa-dash",
+      "name": "Lymm Runners Dickensian Santa Dash",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cheshire",
+      "city": "Lymm",
+      "area": "Brookfield Surgery",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/lymm-runners-dickensian-santa-dash",
+      "summary": "5K running event in Lymm.",
+      "description": "5K running event in Lymm. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "great-sprout-scuttle-5k-10k",
+      "name": "Great Sprout Scuttle 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Lincolnshire",
+      "city": "Scunthorpe",
+      "area": "Normanby Hall Country Park",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/great-sprout-scuttle",
+      "summary": "10K and 5K running event in Scunthorpe.",
+      "description": "10K and 5K running event in Scunthorpe. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "run-gateshead-hot-chocolate-5k-2026",
+      "name": "Run Gateshead Hot Chocolate 5K 2026",
+      "sport": "Running",
+      "country": "England",
+      "county": "Tyne and Wear",
+      "city": "Gateshead",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "quakers-rc-santa-run",
+      "name": "Quakers RC Santa Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "County Durham",
+      "city": "Darlington",
+      "area": "South Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/quakers-rc-santa-run",
+      "summary": "5K running event in Darlington.",
+      "description": "5K running event in Darlington. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "town-moor-exhibition-park-5k-10k-december",
+      "name": "Town Moor & Exhibition Park 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "North of England",
+      "city": "Newcastle",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "charlton-hayes-5k-10k",
+      "name": "Charlton Hayes 5K & 10K Fun Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "South Gloucestershire",
+      "city": "Patchway",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "balsall-common-fun-run",
+      "name": "Balsall Common 10K, 5K & Fun Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Midlands",
+      "city": "Balsall Common",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "thompson-millennium-green",
+      "name": "Thompson Millennium Green 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Norfolk",
+      "city": "Thompson",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "felbrigg-trail-run",
+      "name": "Felbrigg Trail Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Norfolk",
+      "city": "Felbrigg",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "brewers-10k",
+      "name": "Brewers 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Staffordshire",
+      "city": "Burton upon Trent",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "run-breckland-sapiston",
+      "name": "Sapiston 5K & 10K Trail Runs",
+      "sport": "Running",
+      "country": "England",
+      "county": "Suffolk",
+      "city": "Sapiston",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "imperial-war-museum-duxford-dash-5k-10k",
+      "name": "Duxford Dash 5K, 10K & Family Mile",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cambridgeshire",
+      "city": "Duxford",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "stroud-half-marathon",
+      "name": "Stroud Half Marathon & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Gloucestershire",
+      "city": "Stroud",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "cardiff-morun",
+      "name": "Cardiff MoRun",
+      "sport": "Running",
+      "country": "Wales",
+      "county": "South Wales",
+      "city": "Cardiff",
+      "area": "Bute Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/cardiff-morun",
+      "summary": "10K and 5K running event in Cardiff.",
+      "description": "10K and 5K running event in Cardiff. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "marlow-half-marathon-7m-10k",
+      "name": "Marlow Half Marathon, 7M & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire, Bedfordshire & Hertfordshire",
+      "city": "Marlow",
+      "area": "Sports Club",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/marlow-half-marathon",
+      "summary": "10K running event in Marlow.",
+      "description": "10K running event in Marlow. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "nice-charity-10k",
+      "name": "NICE Charity 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Midlands",
+      "city": "Birmingham",
+      "area": "Cannon Hill House",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/nice-charity-10k",
+      "summary": "10K running event in Birmingham.",
+      "description": "10K running event in Birmingham. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "bonfire-burn-10k",
+      "name": "Bonfire Burn 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cambridgeshire",
+      "city": "Cambridge",
+      "area": "Histon & Impington Recreation Ground",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/bonfire-burn-10k-event",
+      "summary": "10K running event in Cambridge.",
+      "description": "10K running event in Cambridge. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "rutland-night-run-friday",
+      "name": "Rutland Night Run Friday",
+      "sport": "Running",
+      "country": "England",
+      "county": "Leicestershire",
+      "city": "Rutland Water",
+      "area": "Normanton Cafe",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/rutland-night-run-friday",
+      "summary": "10K running event in Rutland Water.",
+      "description": "10K running event in Rutland Water. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "rutland-night-run-saturday",
+      "name": "Rutland Night Run Saturday",
+      "sport": "Running",
+      "country": "England",
+      "county": "Leicestershire",
+      "city": "Rutland Water",
+      "area": "Normanton Cafe",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/rutland-night-run-saturday",
+      "summary": "10K running event in Rutland Water.",
+      "description": "10K running event in Rutland Water. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "windsor-trail-run-half-marathon-10k-november",
+      "name": "Windsor Trail Run Half Marathon & 10K — November",
+      "sport": "Running",
+      "country": "England",
+      "county": "Berkshire",
+      "city": "Windsor",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "birmingham-morun",
+      "name": "Birmingham MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Midlands",
+      "city": "Sutton Coldfield",
+      "area": "Sutton Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/10k-birmingham-morun",
+      "summary": "10K and 5K running event in Sutton Coldfield.",
+      "description": "10K and 5K running event in Sutton Coldfield. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "derby-morun",
+      "name": "Derby MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "Derbyshire",
+      "city": "Derby",
+      "area": "Markeaton Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/derby-morun-10k",
+      "summary": "10K and 5K running event in Derby.",
+      "description": "10K and 5K running event in Derby. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "rugged-radnage-10k",
+      "name": "Rugged Radnage 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire, Bedfordshire & Hertfordshire",
+      "city": "Radnage, Bucks",
+      "area": "Village Hall",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/rugged-radnage-10k",
+      "summary": "10K and 5K running event in Radnage, Bucks.",
+      "description": "10K and 5K running event in Radnage, Bucks. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "petzl-night-runner-salcey-forest",
+      "name": "Petzl Night Runner Salcey Forest",
+      "sport": "Running",
+      "country": "England",
+      "county": "Northamptonshire",
+      "city": "Hartwell",
+      "area": "Salcey Forest",
+      "surface": "Trail",
+      "organiser": "",
+      "website": "https://runabc.co.uk/gato-sports-head-torch-10k-december",
+      "summary": "10K running event in Hartwell.",
+      "description": "10K running event in Hartwell. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "silverstone-runfest",
+      "name": "Silverstone Runfest",
+      "sport": "Running",
+      "country": "England",
+      "county": "Northamptonshire",
+      "city": "Towcester",
+      "area": "Silverstone Circuit",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/silverstone-runfest",
+      "summary": "10K and 5K running event in Towcester.",
+      "description": "10K and 5K running event in Towcester. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "far-peak-10k-half-marathon",
+      "name": "Well Run × Far Peak Half Marathon & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Gloucestershire",
+      "city": "Northleach",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "hereford-river-10k",
+      "name": "Hereford River 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Herefordshire",
+      "city": "Hereford",
+      "area": "River Wye River Path",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/hereford-river-10k",
+      "summary": "10K running event in Hereford.",
+      "description": "10K running event in Hereford. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "christmas-jumper-run",
+      "name": "Christmas Jumper Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Shropshire",
+      "city": "Shrewsbury",
+      "area": "Quarry Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/christmas-jumper-run",
+      "summary": "10K and 5K running event in Shrewsbury.",
+      "description": "10K and 5K running event in Shrewsbury. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "9-locks-challenge",
+      "name": "9 Locks Challenge",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Midlands",
+      "city": "Stourbridge",
+      "area": "Stourbridge Navigation Trust",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/9-locks-challenge",
+      "summary": "10K running event in Stourbridge.",
+      "description": "10K running event in Stourbridge. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "milton-keynes-morun",
+      "name": "Milton Keynes MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire, Bedfordshire & Hertfordshire",
+      "city": "Milton Keynes",
+      "area": "Campbell Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/the-10k5k-mo-run-milton-keynes",
+      "summary": "10K and 5K running event in Milton Keynes.",
+      "description": "10K and 5K running event in Milton Keynes. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "thetford-5k-santa-run",
+      "name": "Thetford 5K Santa Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Norfolk",
+      "city": "Thetford",
+      "area": "The Guildhall",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/thetford-5k-santa-run",
+      "summary": "5K running event in Thetford.",
+      "description": "5K running event in Thetford. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "lingwood-santa-dash",
+      "name": "Lingwood Santa Dash",
+      "sport": "Running",
+      "country": "England",
+      "county": "Norfolk",
+      "city": "Lingwood",
+      "area": "Village Hall",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/lingwood-santa-dash",
+      "summary": "5K running event in Lingwood.",
+      "description": "5K running event in Lingwood. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "new-forest-marathon-half",
+      "name": "Garmin New Forest Marathon, Half Marathon, 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Brockenhurst",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "runthrough-olympic-park-5k-10k-september",
+      "name": "Queen Elizabeth Olympic Park 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "the-intersport-run-reigate-half-marathon",
+      "name": "Run Reigate Half Marathon, 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Surrey",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "steps-for-change-childrens-challenge-5k-or-10k",
+      "name": "Steps for Change Children's Challenge 5K or 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "Kingston upon Thames",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "black-hill-run",
+      "name": "Black Hill Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Dorset",
+      "city": "Bere Regis",
+      "area": "Scout Hut",
+      "surface": "Fell",
+      "organiser": "",
+      "website": "https://runabc.co.uk/black-hill-run",
+      "summary": "10K and 5K running event in Bere Regis.",
+      "description": "10K and 5K running event in Bere Regis. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "brooks-serpentine-last-friday-of-the-month-5k-august",
+      "name": "Serpentine Last Friday of the Month 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Hyde Park",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "run-dorney-5k-10k-half-marathon-aug",
+      "name": "Run Dorney Lake September",
+      "sport": "Running",
+      "country": "England",
+      "county": "Berkshire",
+      "city": "Windsor",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "hyde-park-5k-10k-september",
+      "name": "RunThrough Hyde Park 5K & 10K September",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "bradleys-autumn-exmouth-10k",
+      "name": "Bradley's Autumn Exmouth 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Devon",
+      "city": "Exmouth",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "runthrough-clapham-common-5k-10k-august",
+      "name": "Clapham Common 5K, 10K & Half Marathon September",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "badlesmere-10k",
+      "name": "Badlesmere 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Kent",
+      "city": "Badlesmere",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "manuden-fun-run-10k",
+      "name": "Manuden 10K & 5K Fun Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Manuden",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "rtt-margam-trail-10k-5k",
+      "name": "RTT Margam Trail 10K & 5K",
+      "sport": "Running",
+      "country": "Wales",
+      "county": "Neath Port Talbot",
+      "city": "Port Talbot",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "trent-park-rc-5k-handicap-august-race",
+      "name": "Trent Park RC 5K Handicap",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "London",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "runthrough-victoria-park-5k-10k-half-marathon-october",
+      "name": "Victoria Park Half Marathon, 10K & 5K — October",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "basingstoke-half-marathon",
+      "name": "Phillips Law Basingstoke Half Marathon, 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Basingstoke",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "chase-the-moon-battersea-5k-10k-october",
+      "name": "Chase the Moon Battersea Park 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "frieth-hilly-10k5k",
+      "name": "Frieth Hilly 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire",
+      "city": "Frieth",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "rushmoor-wellesley-10k",
+      "name": "Rushmoor Wellesley 10K, 5K & Fun Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Aldershot",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "street-5k",
+      "name": "Street 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Somerset",
+      "city": "Street",
+      "area": "United Reformed Church",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/street-5k-october",
+      "summary": "5K running event in Street.",
+      "description": "5K running event in Street. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "henley-half-marathon",
+      "name": "Henley Half Marathon, 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Oxfordshire",
+      "city": "Henley-on-Thames",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "canvey-island-trail-run",
+      "name": "Canvey Island Trail Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Canvey Island",
+      "area": "Waterside Farm Leisure Centre",
+      "surface": "Trail",
+      "organiser": "",
+      "website": "https://runabc.co.uk/canvey-island-trail-run",
+      "summary": "10K running event in Canvey Island.",
+      "description": "10K running event in Canvey Island. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "maverick-dark-hampshire-gravel-2026",
+      "name": "The Maverick Dark Hampshire Gravel 2026",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Farnham",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "wendover-trail-marathon",
+      "name": "Wendover Woods Marathon, Half Marathon & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire",
+      "city": "Aston Clinton",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "runthrough-greenwich-park-5k-10k-november",
+      "name": "Greenwich Park 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "London",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "crowborough-10k",
+      "name": "Crowborough 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Sussex",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "london-morun",
+      "name": "London MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Richmond Park",
+      "area": "East Sheen Gate",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/morun-london",
+      "summary": "10K and 5K running event in Richmond Park.",
+      "description": "10K and 5K running event in Richmond Park. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "london-riverside-morun",
+      "name": "London Riverside MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Richmond",
+      "area": "Ham Street Riverside",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/london-riverside-morun",
+      "summary": "10K and 5K running event in Richmond.",
+      "description": "10K and 5K running event in Richmond. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "chatham-maritime-10k",
+      "name": "Chatham Maritime 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Kent",
+      "city": "Chatham",
+      "area": "Chatham Maritime Marina",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/chatham-maritime-10k",
+      "summary": "10K running event in Chatham.",
+      "description": "10K running event in Chatham. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "bath-skyline-night-run-saturday",
+      "name": "Bath Skyline Night Run Saturday",
+      "sport": "Running",
+      "country": "England",
+      "county": "Somerset",
+      "city": "Bath",
+      "area": "University of Bath",
+      "surface": "Trail",
+      "organiser": "",
+      "website": "https://runabc.co.uk/bath-skyline-10k",
+      "summary": "10K running event in Bath.",
+      "description": "10K running event in Bath. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "rb-the-lobster-lollop",
+      "name": "The Lobster Lollop 2026",
+      "sport": "Running",
+      "country": "England",
+      "county": "England",
+      "city": "Padstow",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "bath-skyline-run-sunday",
+      "name": "Bath Skyline Run Sunday",
+      "sport": "Running",
+      "country": "England",
+      "county": "Somerset",
+      "city": "Bath",
+      "area": "University of Bath",
+      "surface": "Trail",
+      "organiser": "",
+      "website": "https://runabc.co.uk/bath-skyline-run-november",
+      "summary": "10K and 5K running event in Bath.",
+      "description": "10K and 5K running event in Bath. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "bristol-morun",
+      "name": "Bristol MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "Gloucestershire",
+      "city": "Bristol",
+      "area": "Ashton Court",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/bristol-morun-10k",
+      "summary": "10K and 5K running event in Bristol.",
+      "description": "10K and 5K running event in Bristol. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "fulham-10k",
+      "name": "Fulham 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Fulham",
+      "area": "Eel Brook Common",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/fulham-10k-november",
+      "summary": "10K running event in Fulham.",
+      "description": "10K running event in Fulham. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "southampton-morun",
+      "name": "Southampton MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Southampton",
+      "area": "The Common",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/southampton-morun",
+      "summary": "10K and 5K running event in Southampton.",
+      "description": "10K and 5K running event in Southampton. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "world-aids-day-red-run",
+      "name": "World AIDS Day Red Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Victoria Park",
+      "area": "St Marks Gate",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/5k-red-run-world-aids-day",
+      "summary": "10K and 5K running event in Victoria Park.",
+      "description": "10K and 5K running event in Victoria Park. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "christmas-chilly-10k",
+      "name": "Christmas Chilly 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Wiltshire",
+      "city": "Chippenham",
+      "area": "Castle Combe Circuit",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/christmas-chilly-10k",
+      "summary": "10K running event in Chippenham.",
+      "description": "10K running event in Chippenham. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "rtt-afan-forest-trail-10k-5k",
+      "name": "RTT Afan Forest Trail 10K & 5K",
+      "sport": "Running",
+      "country": "Wales",
+      "county": "Wales",
+      "city": "Port Talbot",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "rudolph-run-for-rennie-grove-hospice-care",
+      "name": "Rudolph Run For Rennie Grove Hospice Care",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire, Bedfordshire & Hertfordshire",
+      "city": "St Albans",
+      "area": "Waterend Barn",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/rudolph-run-rennie-grove-hospice-care",
+      "summary": "5K running event in St Albans.",
+      "description": "5K running event in St Albans. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "santa-fun-run-farleigh-hospice",
+      "name": "Santa Fun Run Farleigh Hospice",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Chelmsford",
+      "area": "Central Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/santa-fun-run-farleigh-hospice",
+      "summary": "10K and 5K running event in Chelmsford.",
+      "description": "10K and 5K running event in Chelmsford. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "watford-mencap-santa-dash",
+      "name": "Watford Mencap Santa Dash",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire, Bedfordshire & Hertfordshire",
+      "city": "Watford",
+      "area": "Cassiobury Park",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/watford-mencap-santa-dash",
+      "summary": "5K running event in Watford.",
+      "description": "5K running event in Watford. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "exeter-santa-5k-run",
+      "name": "Exeter Santa 5K Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Devon",
+      "city": "Exeter",
+      "area": "Bedford St",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/exeter-santa-5k",
+      "summary": "5K running event in Exeter.",
+      "description": "5K running event in Exeter. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "crystal-palce-5k-10k-half-marathon-juniors-december",
+      "name": "Crystal Palace Park 5K, 10K & Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "cockington-christmas-caper",
+      "name": "Cockington Christmas Caper",
+      "sport": "Running",
+      "country": "England",
+      "county": "Devon",
+      "city": "Torquay",
+      "area": "Cockington Country Park",
+      "surface": "Mixed",
+      "organiser": "",
+      "website": "https://runabc.co.uk/cockington-christmas-caper",
+      "summary": "10K running event in Torquay.",
+      "description": "10K running event in Torquay. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "chase-the-moon-olympic-park-5k-10k-october",
+      "name": "Chase The Moon Olympic Park 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Stratford",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "dorney-lake-half-marathon-10k-5k-december",
+      "name": "Run Dorney Lake Half Marathon, 10K & 5K — December",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire",
+      "city": "Windsor",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "barnet-fc-5k-10k",
+      "name": "Barnet FC 5K & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Camrose Ave",
+      "area": "The Hive",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://runabc.co.uk/barnet-fc-5k-10k-december-2026",
+      "summary": "10K and 5K running event in Camrose Ave.",
+      "description": "10K and 5K running event in Camrose Ave. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "runthrough-battersea-park-january-2027",
+      "name": "Battersea Park 5K, 10K & Half Marathon — January 2027",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "victoria-park-5k-10k-half-marathon-january",
+      "name": "Victoria Park 5K, 10K & Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Tower Hamlets",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "cowdray-estate-winter-night-trail-run",
+      "name": "Cowdray Estate Winter Night Trail Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Sussex",
+      "city": "Midhurst",
+      "area": "Walled Garden, Cowdray Park",
+      "surface": "Trail",
+      "organiser": "",
+      "website": "https://runabc.co.uk/run-the-seasons-winter",
+      "summary": "10K and 5K running event in Midhurst.",
+      "description": "10K and 5K running event in Midhurst. Date and distances checked against RunABC on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "finsbury-park-5k-10k-half-marathon-january",
+      "name": "Finsbury Park 5K, 10K, Half Marathon & Junior Run — January 2027",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "runthrough-chase-the-moon-battersea-january-2027",
+      "name": "Chase the Moon Battersea Park 5K & 10K — January 2027",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "runthrough-crystal-palace-5k-10k-half-marathon-january",
+      "name": "Crystal Palace 5K, 10K, Half Marathon & Juniors — January 2027",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "luggacurren-5k-2026",
+      "name": "Luggacurren 5K 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Laois",
+      "city": "Luggacurren",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "bunninadden-charity-road-race-5k-2026",
+      "name": "Bunninadden Charity Road Race 5K 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Sligo",
+      "city": "Bunninadden",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "the-toddy-moore-memorial-10k-and-5k-relay",
+      "name": "The Toddy Moore Memorial 10k and 5k relay",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Wexford",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Kilmore A.C.",
+      "website": "https://eventmaster.ie/event/EYb4c4EF74",
+      "summary": "10K running event in Wexford.",
+      "description": "10K running event in Wexford. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "cook-medical-mini-marathon",
+      "name": "Cook Medical Mini Marathon",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Limerick",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Limerick A.C.",
+      "website": "https://eventmaster.ie/event/VqQnfERTwv",
+      "summary": "5K and 10K running event in Limerick.",
+      "description": "5K and 10K running event in Limerick. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "rebel-run-5k-2026",
+      "name": "Rebel Run 5K 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Cork",
+      "city": "Cork",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "longwood-village-5k-10k-2026",
+      "name": "Longwood Village 5K & 10K 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Meath",
+      "city": "Longwood",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "savills-sandymount-night-run-5k-october-2026",
+      "name": "Savills Sandymount Night Run 5K — October 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Dublin",
+      "city": "Dublin",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "limerick-night-run",
+      "name": "Limerick Night Run",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Limerick",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Limerick Track A.C.",
+      "website": "https://eventmaster.ie/event/kGvPFK2TA2",
+      "summary": "5K running event in Limerick.",
+      "description": "5K running event in Limerick. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "togher-ac-5k",
+      "name": "Togher AC 5k",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Cork",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Togher A.C.",
+      "website": "https://eventmaster.ie/event/lReDHV8HPO",
+      "summary": "5K running event in Cork.",
+      "description": "5K running event in Cork. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "donegal-town-eamon-harvey-10k-2027",
+      "name": "Donegal Town Eamon Harvey 10K 2027",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Donegal",
+      "city": "Donegal Town",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "ceide-coast-atlantic-run-2026",
+      "name": "Céide Coast Atlantic Run 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Mayo",
+      "city": "Ballycastle",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "rhode-ac-marathon-festival-2026",
+      "name": "Rhode AC Marathon Festival 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Offaly",
+      "city": "Rhode",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "athlone-ac-half-marathon-10k-2026",
+      "name": "Athlone AC Half Marathon & 10K 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Westmeath",
+      "city": "Athlone",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "monaghan-phoenix-marathon-festival-2026",
+      "name": "Monaghan Phoenix Marathon Festival 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Monaghan",
+      "city": "Monaghan",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "grey-lake-10k-road-race",
+      "name": "Grey Lake 10K Road Race",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Galway",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Loughrea A.C.",
+      "website": "https://eventmaster.ie/event/d5v4snGSwV",
+      "summary": "10K running event in Galway.",
+      "description": "10K running event in Galway. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "fastlane-autumn-edition-2026",
+      "name": "Fastlane Autumn Edition 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Dublin",
+      "city": "Clondalkin",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "lusk-20-mile",
+      "name": "Lusk 20 Mile & 10K",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Dublin",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Lusk A.C.",
+      "website": "https://eventmaster.ie/event/KKj2spnHGx",
+      "summary": "10K running event in Dublin.",
+      "description": "10K running event in Dublin. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "o-dubhda-challenge-2026",
+      "name": "O'Dubhda Challenge 2026",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "County Sligo",
+      "city": "Enniscrone",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "grange-10k",
+      "name": "Grange 10k",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Sligo",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "North Sligo A.C.",
+      "website": "https://eventmaster.ie/event/OKkBTpmH0Z",
+      "summary": "10K running event in Sligo.",
+      "description": "10K running event in Sligo. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "thomas-kent-10k",
+      "name": "Thomas Kent 10K",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Cork",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "St. Nicholas A.C.",
+      "website": "https://eventmaster.ie/event/qqYzHP7SQq",
+      "summary": "10K running event in Cork.",
+      "description": "10K running event in Cork. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "fields-of-athenry-10km",
+      "name": "Fields of Athenry 10km",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Galway",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Athenry A.C.",
+      "website": "https://eventmaster.ie/event/mL4khyVFM8",
+      "summary": "10K running event in Galway.",
+      "description": "10K running event in Galway. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "new-year-s-eve-10k-road-race",
+      "name": "New Year's Eve 10K Road Race",
+      "sport": "Running",
+      "country": "Ireland",
+      "county": "Cork",
+      "city": "",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Grange/Fermoy A.C.",
+      "website": "https://eventmaster.ie/event/w2L9hPySRQ",
+      "summary": "10K running event in Cork.",
+      "description": "10K running event in Cork. Date and distances checked against Athletics Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "clandeboye-10k",
+      "name": "Clandeboye 10K",
+      "sport": "Running",
+      "country": "Northern Ireland",
+      "county": "Down",
+      "city": "Bangor",
+      "area": "Clandeboye Estate Courtyard",
+      "surface": "Road",
+      "organiser": "",
+      "website": "https://athleticsni.org/Fixtures/Road-Running/Clandeboye-10K-2026",
+      "summary": "10K running event in Northern Ireland.",
+      "description": "10K running event in Northern Ireland. Date and distances checked against Athletics Northern Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "rock-the-lough-5k-2026",
+      "name": "Rock the Lough 5K, 10K & Half Marathon 2026",
+      "sport": "Running",
+      "country": "Northern Ireland",
+      "county": "County Armagh",
+      "city": "Craigavon",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "groomsport-10k",
+      "name": "Groomsport 10k",
+      "sport": "Running",
+      "country": "Northern Ireland",
+      "county": "Down",
+      "city": "Groomsport",
+      "area": "",
+      "surface": "Road",
+      "organiser": "Ward Park Runners",
+      "website": "https://wardparkrunners.com/",
+      "summary": "10K running event in Northern Ireland.",
+      "description": "10K running event in Northern Ireland. Date and distances checked against Athletics Northern Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "saintfield-5k-10k-2026",
+      "name": "Saintfield 5K & 10K",
+      "sport": "Running",
+      "country": "Northern Ireland",
+      "county": "County Down",
+      "city": "Saintfield",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "podium4sport-seeley-cup-10k",
+      "name": "Podium4Sport Seeley Cup 10K",
+      "sport": "Running",
+      "country": "Northern Ireland",
+      "county": "Antrim",
+      "city": "Belfast",
+      "area": "Ormeau Embankment",
+      "surface": "Road",
+      "organiser": "Willowfield Harriers",
+      "website": "https://athleticsni.org/Fixtures/Road-Running/Podium4Sport-Seeley-Cup-10K",
+      "summary": "10K running event in Northern Ireland.",
+      "description": "10K running event in Northern Ireland. Date and distances checked against Athletics Northern Ireland on 10 September 2026. Check the source listing for current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    }
+  ],
+  "editions": [
+    {
+      "eventSlug": "duthie-park-5k-10k-2026",
+      "date": "2026-09-12",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/duthie-park-5k-10k-july-ado",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "hel-n-back-trail-race-10k",
+      "date": "2026-09-12",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hel-n-back-trail-race",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "11:00"
+    },
+    {
+      "eventSlug": "up-and-running-5k-and-10k-september",
+      "date": "2026-09-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/kelvingrove-park-5k-and-10k-september",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "cumbernauld-10k-run",
+      "date": "2026-09-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cumbernauld-10k-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "john-o-groats-10k",
+      "date": "2026-09-13",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/john-ogroats-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "13:00"
+    },
+    {
+      "eventSlug": "westside-runners-10k-5k-fun-run",
+      "date": "2026-09-19",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/westside-runners-10k-5k-fun-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "maggies-5k-10k-chase",
+      "date": "2026-09-20",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/maggies-5k-10k-chase",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "toms-cairn-10k-trail-race",
+      "date": "2026-09-20",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/toms-cairn-10k-trail-race",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "dumfries-house-5k-10k",
+      "date": "2026-09-27",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dumfries-house-5k-and-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "dumfries-house-5k-10k",
+      "date": "2026-09-27",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dumfries-house-5k-and-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "the-meadows-5k-10-october",
+      "date": "2026-10-10",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-meadows-5k-10-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "autumn-charity-fun-run",
+      "date": "2026-10-11",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/summer-fun-runfest",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "12:30"
+    },
+    {
+      "eventSlug": "up-and-running-events-alexandra-park-5k-10k-january-osv",
+      "date": "2026-10-17",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/up-and-running-events-alexandra-park-5k-10k-january-osv",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "costorphine-hill-5k-10k-15k-20k",
+      "date": "2026-10-18",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/costorphine-hill-5k-10k-15k-20k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "cramond-promenade-5k-10k-half-marathon-october",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cramond-promenade-5k-10k-half-marathon-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "jedburgh-half-marathon",
+      "date": "2026-10-25",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/jedburgh-half-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "11:00"
+    },
+    {
+      "eventSlug": "helvellyn-trail-run-10k",
+      "date": "2026-10-31",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/helvellyn-trail-run-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "inverleith-park-5k-10k-august",
+      "date": "2026-10-31",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/inverleith-park-5k-10k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "inverleith-park-5k-10k-august",
+      "date": "2026-10-31",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/inverleith-park-5k-10k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "pollok-park-5k-10k-august",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/pollok-park-5k-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "pollok-park-5k-10k-august",
+      "date": "2026-11-01",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/pollok-park-5k-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "up-and-running-events-bellahouston-park-5k-10k-half-marathon-may-coa",
+      "date": "2026-11-07",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/up-and-running-events-bellahouston-park-5k-10k-half-marathon-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "up-and-running-events-bellahouston-park-5k-10k-half-marathon-may-coa",
+      "date": "2026-11-07",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/up-and-running-events-bellahouston-park-5k-10k-half-marathon-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "strathclyde-park-5k-10k-half-marathon-november",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/strathclyde-park-5k-10k-half-marathon-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "strathclyde-park-5k-10k-half-marathon-november",
+      "date": "2026-11-08",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/strathclyde-park-5k-10k-half-marathon-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "holyrood-park-5k-10k-half-marathon-november",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/holyrood-park-5k-10k-half-marathon-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "holyrood-park-5k-10k-half-marathon-november",
+      "date": "2026-11-08",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/holyrood-park-5k-10k-half-marathon-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "vogrie-country-park-november",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/vogrie-country-park-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "vogrie-country-park-november",
+      "date": "2026-11-15",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/vogrie-country-park-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run",
+      "date": "2026-11-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "hot-chocolate-5k-10k-edinburgh",
+      "date": "2026-11-22",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hot-chocolate-5k-10k-edinburgh",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "carlisle-santa-dash",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/carlisle-santa-dash-fun-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:00"
+    },
+    {
+      "eventSlug": "queens-park-5k-10k-october-4ho",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/queens-park-5k-10k-october-4ho",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "festive-foodbank-reindeer-run",
+      "date": "2026-12-12",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/festive-foodbank-reindeer-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "11:30"
+    },
+    {
+      "eventSlug": "blast-running-santa-elf-dash",
+      "date": "2026-12-20",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/blast-running-santa-dash",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "blast-running-santa-elf-dash",
+      "date": "2026-12-20",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/blast-running-santa-dash",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "blast-meadows-5km-october",
+      "date": "2026-12-22",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/blast-meadows-5km-december-race-3-mulled-wine",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "12:45"
+    },
+    {
+      "eventSlug": "landaid-north-west-10k-5k",
+      "date": "2026-09-10",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/landaid-north-west-10k-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "tatton-10k-september",
+      "date": "2026-09-12",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/tatton-10k-september",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "nathans-5k-10k",
+      "date": "2026-09-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/nathans-5k-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "styles-athon-5k-10k-fun-run",
+      "date": "2026-09-19",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/styles-athon-5k-10k-fun-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "snape-10k",
+      "date": "2026-09-19",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/snape-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "stainland-trail-10k",
+      "date": "2026-09-20",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/stainland-trail",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:00"
+    },
+    {
+      "eventSlug": "run-mediacity-5k-10k-september",
+      "date": "2026-09-24",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-mediacity-5k-10k-september",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "315-national-fitness-5k",
+      "date": "2026-09-26",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/315-national-fitness-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "run-aintree-5k-10k-and-half-marathon-september",
+      "date": "2026-09-27",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-aintree-5k-10k-and-half-marathon-september",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "halewood-5k",
+      "date": "2026-10-03",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/halewood-5k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:30"
+    },
+    {
+      "eventSlug": "run-yorkshire-half-marathon-10k-5k",
+      "date": "2026-10-04",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-yorkshire-half-marathon-10k-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "red-kite-10k",
+      "date": "2026-10-04",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/red-kite-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:00"
+    },
+    {
+      "eventSlug": "tatton-10k-october",
+      "date": "2026-10-10",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/tatton-10k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "phoenix-manchester-priyas-birthday-biryani-dash",
+      "date": "2026-10-11",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-manchester-priyas-birthday-biryani-dash",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "phoenix-manchester-priyas-birthday-biryani-dash",
+      "date": "2026-10-11",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-manchester-priyas-birthday-biryani-dash",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "coxhoe-trail-run",
+      "date": "2026-10-11",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/coxhoe-trail-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:00"
+    },
+    {
+      "eventSlug": "abergele-10k",
+      "date": "2026-10-18",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/abergele-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "power-of-5k-october-2",
+      "date": "2026-10-23",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/power-of-5k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "19:00"
+    },
+    {
+      "eventSlug": "monsal-trail-half-marathon-autumn-sunday",
+      "date": "2026-10-25",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/monsal-trail-half-marathon-autumn-sunday",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:00"
+    },
+    {
+      "eventSlug": "whixley-5k-10k",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/whixley-5k-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "calder-lodge-15k-5k",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/calder-lodge-15k-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "11:00"
+    },
+    {
+      "eventSlug": "piglove-by-the-river-5k-10k-october",
+      "date": "2026-10-28",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/piglove-by-the-river-5k-10k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "run-tatton-5k-10k-november",
+      "date": "2026-11-07",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-tatton-5k-10k-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "halewood-5k",
+      "date": "2026-11-07",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/halewood-free-monthly-5k-nov",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:30"
+    },
+    {
+      "eventSlug": "windmill-remembrance-day-10k",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/windmill-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "11:10"
+    },
+    {
+      "eventSlug": "leeds-morun",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-10k-leeds-mo-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "leeds-morun",
+      "date": "2026-11-15",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-10k-leeds-mo-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "slaley-hall-half-marathon",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/slaley-hall-half-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:45"
+    },
+    {
+      "eventSlug": "last-drop-5k",
+      "date": "2026-11-15",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/last-drop-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:00"
+    },
+    {
+      "eventSlug": "liverpool-morun",
+      "date": "2026-11-21",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/liverpool-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "liverpool-morun",
+      "date": "2026-11-21",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/liverpool-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "newcastle-morun",
+      "date": "2026-11-21",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/newcastle-morun-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "newcastle-morun",
+      "date": "2026-11-21",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/newcastle-morun-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "litton-birks-fell-race",
+      "date": "2026-11-21",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/litton-birks-fell-race",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "12:00"
+    },
+    {
+      "eventSlug": "manchester-morun",
+      "date": "2026-11-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-10k-manchester-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "manchester-morun",
+      "date": "2026-11-22",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-10k-manchester-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "york-morun",
+      "date": "2026-11-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/york-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "york-morun",
+      "date": "2026-11-22",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/york-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "delamere-trails-half-marathon-marathon-november",
+      "date": "2026-11-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/delamere-trails-half-marathon-marathon-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "08:00"
+    },
+    {
+      "eventSlug": "sherwood-christmas-10k-5k-2026",
+      "date": "2026-11-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/sherwood-pines-christmas-10k-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "morecambe-festival-of-running-january-2027",
+      "date": "2026-11-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/morecambe-festival-of-running-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "morecambe-festival-of-running-january-2027",
+      "date": "2026-11-22",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/morecambe-festival-of-running-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "mental-elf-fun-run-derbyshire",
+      "date": "2026-11-29",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/mental-elf-fun-run-derbyshire",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "sunderland-10k",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/sunderland-10k-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:00"
+    },
+    {
+      "eventSlug": "run-heaton-5k-10k-half-marathon-november",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-heaton-5k-10k-half-marathon-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "halewood-5k",
+      "date": "2026-12-05",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/halewood-5k-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:30"
+    },
+    {
+      "eventSlug": "llandudno-santa-dash",
+      "date": "2026-12-05",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/llandudno-santa-dash",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:45"
+    },
+    {
+      "eventSlug": "jingle-bell-jog-buxton",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/jingle-bell-jog-buxton",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "btr-liverpool-santa-dash-5k",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/btr-liverpool-santa-dash-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:30"
+    },
+    {
+      "eventSlug": "tatton-yule-yomp-10k",
+      "date": "2026-12-06",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/tatton-yule-yomp-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:30"
+    },
+    {
+      "eventSlug": "bah-humbug-10k",
+      "date": "2026-12-06",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bah-humbug-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:30"
+    },
+    {
+      "eventSlug": "great-langdale-christmas-pudding-10k",
+      "date": "2026-12-12",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/great-langdale-christmas-pudding-10k-road-race",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "lymm-runners-dickensian-santa-dash",
+      "date": "2026-12-12",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lymm-runners-dickensian-santa-dash",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "13:30"
+    },
+    {
+      "eventSlug": "great-sprout-scuttle-5k-10k",
+      "date": "2026-12-13",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/great-sprout-scuttle",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "great-sprout-scuttle-5k-10k",
+      "date": "2026-12-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/great-sprout-scuttle",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "run-gateshead-hot-chocolate-5k-2026",
+      "date": "2026-12-13",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-gateshead-hot-chocolate-5k-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "quakers-rc-santa-run",
+      "date": "2026-12-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/quakers-rc-santa-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:30"
+    },
+    {
+      "eventSlug": "town-moor-exhibition-park-5k-10k-december",
+      "date": "2026-12-20",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/town-moor-exhibition-park-5k-10k-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "charlton-hayes-5k-10k",
+      "date": "2026-09-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/charlton-hayes-5k-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "balsall-common-fun-run",
+      "date": "2026-09-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/balsall-common-fun-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "thompson-millennium-green",
+      "date": "2026-10-04",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/thompson-millennium-green-10k-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "felbrigg-trail-run",
+      "date": "2026-10-11",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/fellbrigg-trail-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "brewers-10k",
+      "date": "2026-10-18",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/brewers-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "run-breckland-sapiston",
+      "date": "2026-10-18",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-breckland-sapiston",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "imperial-war-museum-duxford-dash-5k-10k",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/imperial-war-museum-duxford-dash-5k-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "stroud-half-marathon",
+      "date": "2026-10-25",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/stroud-half-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:00"
+    },
+    {
+      "eventSlug": "cardiff-morun",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cardiff-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "cardiff-morun",
+      "date": "2026-11-01",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cardiff-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "marlow-half-marathon-7m-10k",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/marlow-half-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:30"
+    },
+    {
+      "eventSlug": "nice-charity-10k",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/nice-charity-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:40"
+    },
+    {
+      "eventSlug": "bonfire-burn-10k",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bonfire-burn-10k-event",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:30"
+    },
+    {
+      "eventSlug": "rutland-night-run-friday",
+      "date": "2026-11-06",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rutland-night-run-friday",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "17:30"
+    },
+    {
+      "eventSlug": "rutland-night-run-saturday",
+      "date": "2026-11-07",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rutland-night-run-saturday",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "17:30"
+    },
+    {
+      "eventSlug": "windsor-trail-run-half-marathon-10k-november",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/windsor-trail-run-half-marathon-10k-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:00"
+    },
+    {
+      "eventSlug": "birmingham-morun",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/10k-birmingham-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "birmingham-morun",
+      "date": "2026-11-08",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/10k-birmingham-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "derby-morun",
+      "date": "2026-11-14",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/derby-morun-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "derby-morun",
+      "date": "2026-11-14",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/derby-morun-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "rugged-radnage-10k",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rugged-radnage-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "rugged-radnage-10k",
+      "date": "2026-11-15",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rugged-radnage-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "petzl-night-runner-salcey-forest",
+      "date": "2026-11-20",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/gato-sports-head-torch-10k-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "19:00"
+    },
+    {
+      "eventSlug": "silverstone-runfest",
+      "date": "2026-11-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/silverstone-runfest",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "silverstone-runfest",
+      "date": "2026-11-22",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/silverstone-runfest",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "far-peak-10k-half-marathon",
+      "date": "2026-11-22",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/well-run-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "hereford-river-10k",
+      "date": "2026-11-28",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hereford-river-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:00"
+    },
+    {
+      "eventSlug": "christmas-jumper-run",
+      "date": "2026-11-28",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/christmas-jumper-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "christmas-jumper-run",
+      "date": "2026-11-28",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/christmas-jumper-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "9-locks-challenge",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/9-locks-challenge",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "milton-keynes-morun",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-10k5k-mo-run-milton-keynes",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "milton-keynes-morun",
+      "date": "2026-11-29",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-10k5k-mo-run-milton-keynes",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "thetford-5k-santa-run",
+      "date": "2026-12-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/thetford-5k-santa-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:00"
+    },
+    {
+      "eventSlug": "lingwood-santa-dash",
+      "date": "2026-12-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lingwood-santa-dash",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "11:00"
+    },
+    {
+      "eventSlug": "new-forest-marathon-half",
+      "date": "2026-09-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/new-forest-marathon-half",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "runthrough-olympic-park-5k-10k-september",
+      "date": "2026-09-19",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-olympic-park-5k-10k-september",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "the-intersport-run-reigate-half-marathon",
+      "date": "2026-09-20",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-reigate-half-marathon-10k-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "steps-for-change-childrens-challenge-5k-or-10k",
+      "date": "2026-09-20",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/steps-for-change-childrens-challenge-5k-or-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "black-hill-run",
+      "date": "2026-09-20",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/black-hill-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "black-hill-run",
+      "date": "2026-09-20",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/black-hill-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "brooks-serpentine-last-friday-of-the-month-5k-august",
+      "date": "2026-09-25",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/brooks-serpentine-last-friday-of-the-month-5k-september",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "12:30"
+    },
+    {
+      "eventSlug": "run-dorney-5k-10k-half-marathon-aug",
+      "date": "2026-09-26",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-dorney-5k-10k-half-marathon-aug",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "hyde-park-5k-10k-september",
+      "date": "2026-09-26",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hyde-park-5k-10k-september",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "bradleys-autumn-exmouth-10k",
+      "date": "2026-09-27",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bradleys-autumn-exmouth-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "runthrough-clapham-common-5k-10k-august",
+      "date": "2026-09-27",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-clapham-common-5k-10k-august",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "badlesmere-10k",
+      "date": "2026-09-27",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/badlesmere-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:30"
+    },
+    {
+      "eventSlug": "manuden-fun-run-10k",
+      "date": "2026-09-27",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/manuden-fun-run-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "rtt-margam-trail-10k-5k",
+      "date": "2026-09-27",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rtt-margam-trail-10k-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "trent-park-rc-5k-handicap-august-race",
+      "date": "2026-10-03",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/trent-park-rc-5k-handicap-october-race",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:30"
+    },
+    {
+      "eventSlug": "runthrough-victoria-park-5k-10k-half-marathon-october",
+      "date": "2026-10-03",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-victoria-park-5k-10k-half-marathon-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "basingstoke-half-marathon",
+      "date": "2026-10-04",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/basingstoke-half-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "basingstoke-half-marathon",
+      "date": "2026-10-04",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/basingstoke-half-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "chase-the-moon-battersea-5k-10k-october",
+      "date": "2026-10-07",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "frieth-hilly-10k5k",
+      "date": "2026-10-11",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/frieth-hilly-10k5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "rushmoor-wellesley-10k",
+      "date": "2026-10-11",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rushmoor-wellesley-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "street-5k",
+      "date": "2026-10-14",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/street-5k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "19:30"
+    },
+    {
+      "eventSlug": "henley-half-marathon",
+      "date": "2026-10-18",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/henley-half-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "henley-half-marathon",
+      "date": "2026-10-18",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/henley-half-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "canvey-island-trail-run",
+      "date": "2026-10-25",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/canvey-island-trail-run",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "12:00"
+    },
+    {
+      "eventSlug": "brooks-serpentine-last-friday-of-the-month-5k-august",
+      "date": "2026-10-30",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/brooks-serpentine-last-friday-of-the-month-5k-october",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "12:30"
+    },
+    {
+      "eventSlug": "maverick-dark-hampshire-gravel-2026",
+      "date": "2026-10-31",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/maverick-exposure-lights-dark-hampshire",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "wendover-trail-marathon",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/wendover-trail-marathon",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:00"
+    },
+    {
+      "eventSlug": "runthrough-greenwich-park-5k-10k-november",
+      "date": "2026-11-01",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-greenwich-park-5k-10k-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "crowborough-10k",
+      "date": "2026-11-01",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/crowborough-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "trent-park-rc-5k-handicap-august-race",
+      "date": "2026-11-07",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/trent-park-rc-5k-handicap-november-race",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:15"
+    },
+    {
+      "eventSlug": "london-morun",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/morun-london",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "london-morun",
+      "date": "2026-11-08",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/morun-london",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "london-riverside-morun",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/london-riverside-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "london-riverside-morun",
+      "date": "2026-11-08",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/london-riverside-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "chatham-maritime-10k",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/chatham-maritime-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:00"
+    },
+    {
+      "eventSlug": "street-5k",
+      "date": "2026-11-11",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/street-5k-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "19:30"
+    },
+    {
+      "eventSlug": "bath-skyline-night-run-saturday",
+      "date": "2026-11-14",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bath-skyline-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "rb-the-lobster-lollop",
+      "date": "2026-11-14",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lobster-lollop",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "rb-the-lobster-lollop",
+      "date": "2026-11-14",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lobster-lollop",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "bath-skyline-run-sunday",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bath-skyline-run-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "bath-skyline-run-sunday",
+      "date": "2026-11-15",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bath-skyline-run-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "bristol-morun",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bristol-morun-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "bristol-morun",
+      "date": "2026-11-15",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bristol-morun-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "fulham-10k",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/fulham-10k-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:00"
+    },
+    {
+      "eventSlug": "southampton-morun",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/southampton-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "southampton-morun",
+      "date": "2026-11-15",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/southampton-morun",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "world-aids-day-red-run",
+      "date": "2026-11-21",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/5k-red-run-world-aids-day",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "world-aids-day-red-run",
+      "date": "2026-11-21",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/5k-red-run-world-aids-day",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "brooks-serpentine-last-friday-of-the-month-5k-august",
+      "date": "2026-11-27",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/brooks-serpentine-last-friday-of-the-month-5k-november",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "12:30"
+    },
+    {
+      "eventSlug": "christmas-chilly-10k",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/christmas-chilly-10k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "11:00"
+    },
+    {
+      "eventSlug": "rtt-afan-forest-trail-10k-5k",
+      "date": "2026-11-29",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "trent-park-rc-5k-handicap-august-race",
+      "date": "2026-12-05",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/trent-park-rc-december-handicap",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:15"
+    },
+    {
+      "eventSlug": "rudolph-run-for-rennie-grove-hospice-care",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rudolph-run-rennie-grove-hospice-care",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "santa-fun-run-farleigh-hospice",
+      "date": "2026-12-06",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/santa-fun-run-farleigh-hospice",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "santa-fun-run-farleigh-hospice",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/santa-fun-run-farleigh-hospice",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "watford-mencap-santa-dash",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/watford-mencap-santa-dash",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "exeter-santa-5k-run",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/exeter-santa-5k",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "09:00"
+    },
+    {
+      "eventSlug": "crystal-palce-5k-10k-half-marathon-juniors-december",
+      "date": "2026-12-06",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/crystal-palce-5k-10k-half-marathon-juniors-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "crystal-palce-5k-10k-half-marathon-juniors-december",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/crystal-palce-5k-10k-half-marathon-juniors-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "cockington-christmas-caper",
+      "date": "2026-12-06",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cockington-christmas-caper",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "10:30"
+    },
+    {
+      "eventSlug": "chase-the-moon-olympic-park-5k-10k-october",
+      "date": "2026-12-09",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-chase-the-moon-olympic-park-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "chase-the-moon-olympic-park-5k-10k-october",
+      "date": "2026-12-09",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-chase-the-moon-olympic-park-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "street-5k",
+      "date": "2026-12-09",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/street-5k-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC.",
+      "startTime": "19:30"
+    },
+    {
+      "eventSlug": "dorney-lake-half-marathon-10k-5k-december",
+      "date": "2026-12-12",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dorney-lake-half-marathon-10k-5k-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "dorney-lake-half-marathon-10k-5k-december",
+      "date": "2026-12-12",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dorney-lake-half-marathon-10k-5k-december",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "barnet-fc-5k-10k",
+      "date": "2026-12-13",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/barnet-fc-5k-10k-december-2026",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "barnet-fc-5k-10k",
+      "date": "2026-12-13",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/barnet-fc-5k-10k-december-2026",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "runthrough-battersea-park-january-2027",
+      "date": "2027-01-09",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-battersea-park-5k-10k-january",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "victoria-park-5k-10k-half-marathon-january",
+      "date": "2027-01-10",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/victoria-park-5k-10k-half-marathon-january",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "cowdray-estate-winter-night-trail-run",
+      "date": "2027-01-23",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-the-seasons-winter",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "cowdray-estate-winter-night-trail-run",
+      "date": "2027-01-23",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/run-the-seasons-winter",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "finsbury-park-5k-10k-half-marathon-january",
+      "date": "2027-01-24",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/finsbury-park-5k-10k-half-marathon-january",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "finsbury-park-5k-10k-half-marathon-january",
+      "date": "2027-01-24",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/finsbury-park-5k-10k-half-marathon-january",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "runthrough-chase-the-moon-battersea-january-2027",
+      "date": "2027-01-27",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-january",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "runthrough-crystal-palace-5k-10k-half-marathon-january",
+      "date": "2027-01-31",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-crystal-palace-5k-10k-half-marathon-january",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "runthrough-crystal-palace-5k-10k-half-marathon-january",
+      "date": "2027-01-31",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-crystal-palace-5k-10k-half-marathon-january",
+      "notes": "Date and distance checked on 10 September 2026 against RunABC."
+    },
+    {
+      "eventSlug": "luggacurren-5k-2026",
+      "date": "2026-09-13",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/b9mAU9AHjr",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/404."
+    },
+    {
+      "eventSlug": "bunninadden-charity-road-race-5k-2026",
+      "date": "2026-09-19",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/P1bZhJDhLe",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/440."
+    },
+    {
+      "eventSlug": "the-toddy-moore-memorial-10k-and-5k-relay",
+      "date": "2026-09-20",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/EYb4c4EF74",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/509."
+    },
+    {
+      "eventSlug": "cook-medical-mini-marathon",
+      "date": "2026-10-04",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/VqQnfERTwv",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/282."
+    },
+    {
+      "eventSlug": "cook-medical-mini-marathon",
+      "date": "2026-10-04",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/VqQnfERTwv",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/282."
+    },
+    {
+      "eventSlug": "rebel-run-5k-2026",
+      "date": "2026-10-18",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/rYZrcPmS9y",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/237."
+    },
+    {
+      "eventSlug": "longwood-village-5k-10k-2026",
+      "date": "2026-10-18",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/WY9RF65i0j",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/463."
+    },
+    {
+      "eventSlug": "savills-sandymount-night-run-5k-october-2026",
+      "date": "2026-10-20",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/DOrzUmAcJr",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/244."
+    },
+    {
+      "eventSlug": "limerick-night-run",
+      "date": "2026-10-29",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/kGvPFK2TA2",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/56."
+    },
+    {
+      "eventSlug": "togher-ac-5k",
+      "date": "2027-01-03",
+      "distance": "5K",
+      "distanceKm": 5,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/lReDHV8HPO",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/472."
+    },
+    {
+      "eventSlug": "donegal-town-eamon-harvey-10k-2027",
+      "date": "2026-09-13",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/MAA5sbdiBz",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 25/618."
+    },
+    {
+      "eventSlug": "ceide-coast-atlantic-run-2026",
+      "date": "2026-09-19",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/BOEYC23c8j",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/182."
+    },
+    {
+      "eventSlug": "rhode-ac-marathon-festival-2026",
+      "date": "2026-09-19",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/12K8CwDHeM",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/341."
+    },
+    {
+      "eventSlug": "athlone-ac-half-marathon-10k-2026",
+      "date": "2026-09-20",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/MrEEFbdiBz",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/66."
+    },
+    {
+      "eventSlug": "monaghan-phoenix-marathon-festival-2026",
+      "date": "2026-09-26",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/8jERH7qTV1",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/409."
+    },
+    {
+      "eventSlug": "grey-lake-10k-road-race",
+      "date": "2026-09-27",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/d5v4snGSwV",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/218."
+    },
+    {
+      "eventSlug": "fastlane-autumn-edition-2026",
+      "date": "2026-10-03",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/GYLrckKtpd",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/245."
+    },
+    {
+      "eventSlug": "lusk-20-mile",
+      "date": "2026-10-03",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/KKj2spnHGx",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/366."
+    },
+    {
+      "eventSlug": "o-dubhda-challenge-2026",
+      "date": "2026-10-04",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/w2A2hPySRQ",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/438."
+    },
+    {
+      "eventSlug": "grange-10k",
+      "date": "2026-10-04",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/OKkBTpmH0Z",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/192."
+    },
+    {
+      "eventSlug": "thomas-kent-10k",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/qqYzHP7SQq",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 25/621."
+    },
+    {
+      "eventSlug": "fields-of-athenry-10km",
+      "date": "2026-12-26",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/mL4khyVFM8",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 25/713."
+    },
+    {
+      "eventSlug": "new-year-s-eve-10k-road-race",
+      "date": "2026-12-31",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://eventmaster.ie/event/w2L9hPySRQ",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Ireland. Approved permit 26/377."
+    },
+    {
+      "eventSlug": "clandeboye-10k",
+      "date": "2026-09-13",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Clandeboye-10K-2026",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Northern Ireland."
+    },
+    {
+      "eventSlug": "rock-the-lough-5k-2026",
+      "date": "2026-09-13",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Rock-the-Lough-2026",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Northern Ireland."
+    },
+    {
+      "eventSlug": "groomsport-10k",
+      "date": "2026-10-04",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Groomsport-10k",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Northern Ireland."
+    },
+    {
+      "eventSlug": "saintfield-5k-10k-2026",
+      "date": "2026-10-18",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Saintfield-5K--10K",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Northern Ireland."
+    },
+    {
+      "eventSlug": "podium4sport-seeley-cup-10k",
+      "date": "2026-11-28",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "TBC",
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Podium4Sport-Seeley-Cup-10K",
+      "notes": "Date and distance checked on 10 September 2026 against Athletics Northern Ireland."
+    }
+  ]
+}

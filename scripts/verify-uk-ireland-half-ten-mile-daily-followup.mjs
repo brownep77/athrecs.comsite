@@ -815,6 +815,30 @@ assert(
   ),
   "Tom Scott 10 must remain held while its provisional licence status is unresolved",
 );
+const irishRunner10 = dailyHalfTenMileResearchQueue.find(
+  (candidate) =>
+    candidate.slug === "athletics-ireland-race-series-irish-runner-10m-challenge-2027",
+);
+assert(irishRunner10, "Irish Runner 10M must remain held without an event-specific source URL");
+assert.equal(irishRunner10.date, "2027-07-18", "Irish Runner 10M has the wrong date");
+assert.match(irishRunner10.reason, /26\/516/, "Irish Runner 10M lost its approved permit");
+assert.match(
+  irishRunner10.reason,
+  /normalized-source duplicate protection/,
+  "Irish Runner 10M must document why its verified fixture is not yet public",
+);
+for (const slug of [
+  "runcork-half-marathon-2027",
+  "sonia-osullivan-cobh-10-mile-2027",
+  "sixmilebridge-half-marathon-2027",
+  "limerick-runs-10-mile-2027",
+  "ennis-half-marathon-2027",
+  "glenmore-challenge-running-festival-2027",
+]) {
+  const candidate = dailyHalfTenMileResearchQueue.find((item) => item.slug === slug);
+  assert(candidate, `${slug} must remain held while its Athletics Ireland permit is pending`);
+  assert.match(candidate.reason, /pending approval/, `${slug} lost its permit-pending reason`);
+}
 
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),

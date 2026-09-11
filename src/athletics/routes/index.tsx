@@ -119,6 +119,14 @@ function AthleticsHomePage() {
           </dl>
         </div>
       </section>
+      <Link
+        to="/races"
+        search={{ sport: "Running" }}
+        className="flex items-center justify-between rounded-xl border border-border bg-surface p-4 font-semibold text-primary hover:bg-primary/5"
+      >
+        UK &amp; Ireland 5K and 10K races · September 2026–January 2027
+        <ArrowRight className="h-5 w-5 shrink-0" aria-hidden="true" />
+      </Link>
 
       <nav className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4" aria-label="Athletics disciplines">
         {DISCIPLINES.map((discipline) => (
@@ -185,7 +193,9 @@ function AthleticsHomePage() {
               {resultUpdates.length ? (
                 resultUpdates.map((update) => <ResultUpdateRow key={update.id} update={update} />)
               ) : (
-                <p className="py-5 text-sm text-muted">Verified athletics results will appear here.</p>
+                <p className="py-5 text-sm text-muted">
+                  Verified athletics results will appear here.
+                </p>
               )}
             </div>
           </section>

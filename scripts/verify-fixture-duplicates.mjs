@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createServer } from "vite";
 
 const [
   { seriesList: coreSeries },
@@ -25,8 +26,6 @@ const [
   { belgiumNetherlandsRaceEditions, belgiumNetherlandsRaceSeries },
   { englandAthleticsRunEventsEditions, englandAthleticsRunEventsSeries },
   { englandAthleticsUkFixturesEditions, englandAthleticsUkFixturesSeries },
-  { runrecsGapFillSeries },
-  { ukFiveKSeries },
   marathonOptions,
   halfMarathonOptions,
   tenKOptions,
@@ -62,8 +61,6 @@ const [
   import("../src/data/belgium-netherlands-races.ts"),
   import("../src/data/england-athletics-runevents.ts"),
   import("../src/data/england-athletics-uk-fixtures.ts"),
-  import("../src/data/runrecs-gap-fill-2026-09.ts"),
-  import("../src/data/uk-5k-races.ts"),
   import("../src/data/entry-options-uk-marathons.ts"),
   import("../src/data/entry-options-uk-half-marathons.ts"),
   import("../src/data/entry-options-uk-10ks.ts"),
@@ -194,18 +191,23 @@ for (const sourceEdition of editionSources) {
 }
 
 const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
-const aliasCanonicalSeriesBySlug = new Map(
-  [...seriesList, ...runrecsGapFillSeries, ...ukFiveKSeries].map((series) => [
-    series.slug,
-    series,
-  ]),
-);
+// Permanent aliases can point into newer catalogue sources beyond this verifier's
+// original fixture sample. Resolve those references against the assembled catalogue.
+const vite = await createServer({
+  appType: "custom",
+  logLevel: "error",
+  server: { middlewareMode: true },
+});
+let assembledCatalogue;
+try {
+  assembledCatalogue = await vite.ssrLoadModule("/src/data/catalogue.ts");
+} finally {
+  await vite.close();
+}
+const assembledSlugs = new Set(assembledCatalogue.seriesList.map((series) => series.slug));
 for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
-  assert(!seriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
-  assert(
-    aliasCanonicalSeriesBySlug.has(canonical),
-    `Duplicate alias has no canonical event: ${canonical}`,
-  );
+  assert(!assembledSlugs.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
+  assert(assembledSlugs.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
 }
 
 for (const replacement of verifiedFixtureEditionReplacements) {

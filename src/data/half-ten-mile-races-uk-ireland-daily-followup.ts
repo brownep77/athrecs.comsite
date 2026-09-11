@@ -15,6 +15,7 @@ const NEWEST_DAILY_SCAN_CHECKED_AT = "2026-09-06";
 const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
 const LATEST_DAILY_RELEASE_CHECKED_AT = "2026-09-09";
 const NEWEST_DAILY_RELEASE_CHECKED_AT = "2026-09-10";
+const LATEST_DAILY_RESEARCH_CHECKED_AT = "2026-09-11";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1658,6 +1659,62 @@ export const dailyHalfTenMileResearchQueue = [
       "The Scottish Athletics handbook lists the 10-mile fixture on this date, but the organiser describes it as provisional and subject to securing the required licence.",
     sourceUrl:
       "https://www.scottishathletics.org.uk/wp-content/uploads/2026/08/CCRR-Handbook-2026-27-V1.pdf",
+  },
+  {
+    slug: "athletics-ireland-race-series-irish-runner-10m-challenge-2027",
+    date: "2027-07-18",
+    country: "Ireland",
+    reason:
+      `The official Athletics Ireland calendar confirms the 10-mile road race and approved permit 26/516, checked ${LATEST_DAILY_RESEARCH_CHECKED_AT}, but registration is Open Soon and the only live provenance is the shared calendar URL already used by another public series. Hold until an event-specific official URL is available so normalized-source duplicate protection is not weakened.`,
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "runcork-half-marathon-2027",
+    date: "2027-02-07",
+    country: "Ireland",
+    reason:
+      "The official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "sonia-osullivan-cobh-10-mile-2027",
+    date: "2027-04-04",
+    country: "Ireland",
+    reason:
+      "The official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "sixmilebridge-half-marathon-2027",
+    date: "2027-04-04",
+    country: "Ireland",
+    reason:
+      "The official Athletics Ireland calendar lists the half-marathon date but still labels the permit as pending approval; its displayed event title also contains a spelling error that should be corrected before publication.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "limerick-runs-10-mile-2027",
+    date: "2027-04-18",
+    country: "Ireland",
+    reason:
+      "The official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "ennis-half-marathon-2027",
+    date: "2027-06-06",
+    country: "Ireland",
+    reason:
+      "The official Athletics Ireland calendar lists the half-marathon date but still labels the permit as pending approval; its displayed event title also contains a spelling error that should be corrected before publication.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "glenmore-challenge-running-festival-2027",
+    date: "2027-06-12",
+    country: "Ireland",
+    reason:
+      "The official Athletics Ireland calendar confirms a running festival with both 10-mile and half-marathon distances but still labels the permit as pending approval.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
 ] as const;
 
