@@ -91,10 +91,10 @@ export const getEventBySlug = createServerFn({ method: "GET" })
     if (!result) return null;
     if (isTemporaryRunningEvent(result.event)) {
       const excluded = new Set(await getRunrecsOnlyEditionIds(await ready()));
-      const visible = (edition: (typeof result.upcoming)[number]) =>
-        isTemporaryRunningEdition(edition) && !excluded.has(edition.id);
-      const upcoming = result.upcoming.filter(visible);
-      const past = result.past.filter(visible);
+      const eligibleUpcoming = result.upcoming.filter(isTemporaryRunningEdition);
+      const eligiblePast = result.past.filter(isTemporaryRunningEdition);
+      const upcoming = eligibleUpcoming.filter((edition) => !excluded.has(edition.id));
+      const past = eligiblePast.filter((edition) => !excluded.has(edition.id));
       if (!upcoming.length && !past.length) return null;
       return {
         ...result,
