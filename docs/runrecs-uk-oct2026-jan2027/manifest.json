@@ -1,0 +1,38 @@
+[
+  {
+    "part": 1,
+    "id": "5cfc80bc-0c04-579a-89da-f498ea635157",
+    "hash": "650c1cc70769f36683d8b04b93f15619fd15330c070359acbaca896f1aa47785",
+    "events": 75,
+    "newEvents": 54,
+    "editions": 90,
+    "rows": 165
+  },
+  {
+    "part": 2,
+    "id": "c7f2ccc0-4b61-579c-8f36-09e79e707459",
+    "hash": "19b32727196acd520f149ce6245dbb51bdc9d5b11472aacd5e8d3df865a0f15b",
+    "events": 75,
+    "newEvents": 44,
+    "editions": 146,
+    "rows": 221
+  },
+  {
+    "part": 3,
+    "id": "88dc02b3-a290-52d5-a03b-04388ccfe94a",
+    "hash": "929cc3cfbefab6f8784e5cde874e71d783fa0a57cb43821f0f373aa4f1822a3d",
+    "events": 75,
+    "newEvents": 47,
+    "editions": 152,
+    "rows": 227
+  },
+  {
+    "part": 4,
+    "id": "b5c26c6d-5ace-5591-9f82-6175d06786a1",
+    "hash": "706c4e0549df89a42c2b052b6736a17e05abbb6b3b395d24e1015d5952c8366f",
+    "events": 3,
+    "newEvents": 0,
+    "editions": 4,
+    "rows": 7
+  }
+]

@@ -1,3 +1,4 @@
+import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
 import { canonicalEventSlug } from "@/data/entry-options";
 import { getSql } from "@/lib/db";
 import { todayIso } from "@/lib/athrecs/format";
@@ -29,6 +30,7 @@ export async function getVerifiedOfficialEntryUrl(
   const today = todayIso();
   const canonicalSlug = canonicalEventSlug(eventSlug);
   const shortRaces = options.temporaryUkIrelandShortRaces === true;
+  const excludedEditionIds = shortRaces ? await getRunrecsOnlyEditionIds(sql) : [];
 
   const rows = await sql<{ entry_url: string }>`
     select option.entry_url
@@ -39,6 +41,7 @@ export async function getVerifiedOfficialEntryUrl(
       and (${shortRaces}::boolean is false or (
         edition.event_date between '2026-09-10'::date and '2027-01-31'::date
         and edition.distance_code in ('5K', '10K')
+        and not (edition.id = any(${excludedEditionIds}::int[]))
       ))
       and edition.event_date = (
         select min(next_edition.event_date)
@@ -48,6 +51,7 @@ export async function getVerifiedOfficialEntryUrl(
           and (${shortRaces}::boolean is false or (
             next_edition.event_date between '2026-09-10'::date and '2027-01-31'::date
             and next_edition.distance_code in ('5K', '10K')
+            and not (next_edition.id = any(${excludedEditionIds}::int[]))
           ))
       )
       and edition.status not in ('Closed', 'Finished')

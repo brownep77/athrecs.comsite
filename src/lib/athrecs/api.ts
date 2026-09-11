@@ -1,3 +1,4 @@
+import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql, dbSource } from "@/lib/db";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
@@ -176,6 +177,7 @@ export const listEvents = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const sql = await ready();
     const shortRaces = data.temporaryUkIrelandShortRaces === true;
+    const excludedEditionIds = shortRaces ? await getRunrecsOnlyEditionIds(sql) : [];
     const sport = data.sport && data.sport !== "All" ? data.sport : null;
     const rawQ = data.q?.trim() ?? "";
     const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
@@ -208,6 +210,7 @@ export const listEvents = createServerFn({ method: "GET" })
         where (${shortRaces}::boolean is false or (
           event_date between '2026-09-10'::date and '2027-01-31'::date
           and distance_code in ('5K', '10K')
+          and not (id = any(${excludedEditionIds}::int[]))
           and (${dateFrom}::date is null or event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or event_date <= ${dateTo}::date)
           and (${distance}::text is null or distance_code = ${distance})
@@ -219,6 +222,10 @@ export const listEvents = createServerFn({ method: "GET" })
         (
           select string_agg(d.distance_code, ',' order by d.distance_code)
           from event_distances d where d.event_id = e.id
+            and (${shortRaces}::boolean is false or exists (
+              select 1 from scoped_editions visible
+              where visible.event_id = e.id and visible.distance_code = d.distance_code
+            ))
         ) as distances_csv,
         (
           select coalesce(
