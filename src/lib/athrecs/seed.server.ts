@@ -21,9 +21,13 @@ import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
-const PUBLIC_FIGURE_SEED_VERSION = "athrecs-public-figures-wave-3-v3";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-professional-athletes-wave-1-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
+const DEV_PREVIEW_USER_ID = "dev-user";
+const DEV_PREVIEW_EMAIL = "dev@example.com";
+const DEV_PREVIEW_ATHLETE_SLUG = "paul-browne";
+const DEV_PREVIEW_PRIVACY_VERSION = "athlete-account-2026-08-23";
 
 type Sql = Awaited<ReturnType<typeof getSql>>;
 type GlobalSeedState = typeof globalThis & {
@@ -212,6 +216,24 @@ async function ensureSchema(sql: Sql): Promise<void> {
       created_at timestamptz not null default now(),
       updated_at timestamptz not null default now(),
       unique (edition_id, canonical_url)
+    )`,
+    `create table if not exists edition_spectator_access (
+      edition_id int primary key references editions(id) on delete cascade,
+      access_type text not null default 'unknown'
+        check (access_type in ('free', 'ticketed', 'free_and_ticketed', 'registration_required', 'sold_out', 'unknown')),
+      ticket_url text check (ticket_url is null or ticket_url ~ '^https://'),
+      price_amount numeric(12, 2) check (price_amount is null or price_amount >= 0),
+      price_currency text,
+      source_url text not null check (source_url ~ '^https://'),
+      checked_at timestamptz not null default now(),
+      is_verified boolean not null default false,
+      notes text,
+      created_at timestamptz not null default now(),
+      updated_at timestamptz not null default now(),
+      check (
+        access_type not in ('ticketed', 'free_and_ticketed', 'registration_required', 'sold_out')
+        or ticket_url is not null
+      )
     )`,
     `create table if not exists athletes (
       id serial primary key,
@@ -426,6 +448,8 @@ async function ensureSchema(sql: Sql): Promise<void> {
     `create index if not exists edition_result_links_edition_idx on edition_result_links(edition_id)`,
     `create index if not exists edition_result_links_public_idx
       on edition_result_links(edition_id, status, is_verified)`,
+    `create index if not exists edition_spectator_access_public_idx
+      on edition_spectator_access(access_type, checked_at desc) where is_verified`,
     `alter table edition_entry_options add column if not exists notes text`,
     `insert into edition_entry_options (
       edition_id, provider_code, provider_name, entry_url, entry_type, status,
@@ -462,6 +486,70 @@ async function ensureSchema(sql: Sql): Promise<void> {
         )`,
   ];
   for (const statement of statements) await sql.query(statement);
+}
+
+/** PGLite / live-preview only. Never runs against Neon. */
+export async function ensureDevPreviewAthleteAccount(sql: Sql): Promise<void> {
+  if (dbSource !== "pglite") return;
+
+  await sql`
+    insert into "user" ("id", "name", "email", "emailVerified", "createdAt", "updatedAt")
+    values (${DEV_PREVIEW_USER_ID}, 'Paul Browne', ${DEV_PREVIEW_EMAIL}, true, now(), now())
+    on conflict ("id") do update set
+      "name" = excluded."name",
+      "email" = excluded."email",
+      "emailVerified" = true,
+      "updatedAt" = now()
+  `;
+
+  await sql`
+    insert into athlete_private_profiles (
+      user_id, verified_email, full_name, display_name,
+      country, region, city, club_or_team, nationality,
+      privacy_notice_version, privacy_acknowledged_at
+    )
+    values (
+      ${DEV_PREVIEW_USER_ID},
+      ${DEV_PREVIEW_EMAIL},
+      'Paul Browne',
+      'Paul Browne',
+      'United Kingdom',
+      'Norfolk',
+      'Norfolk',
+      'Unattached',
+      'English',
+      ${DEV_PREVIEW_PRIVACY_VERSION},
+      now()
+    )
+    on conflict (user_id) do nothing
+  `;
+
+  await sql`
+    insert into athlete_sport_profiles (
+      user_id, sport_code, is_primary, experience_level,
+      disciplines, preferred_distances, preferred_surfaces
+    )
+    values (
+      ${DEV_PREVIEW_USER_ID},
+      'Running',
+      true,
+      'club',
+      array['road']::text[],
+      array['10K', 'Half marathon', 'Marathon']::text[],
+      array['road']::text[]
+    )
+    on conflict (user_id, sport_code) do nothing
+  `;
+
+  await sql`
+    insert into athlete_account_links (athlete_id, user_id, user_email, status)
+    select a.id, ${DEV_PREVIEW_USER_ID}, ${DEV_PREVIEW_EMAIL}, 'active'
+    from athletes a
+    where a.slug = ${DEV_PREVIEW_ATHLETE_SLUG}
+      and not exists (
+        select 1 from athlete_account_links linked where linked.athlete_id = a.id
+      )
+  `;
 }
 
 async function alreadySeeded(sql: Sql): Promise<boolean> {
@@ -1544,6 +1632,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
 
   if (await alreadySeeded(sql)) {
     await upsertPublicFigureProfiles(sql);
+    await ensureDevPreviewAthleteAccount(sql);
     return;
   }
 
@@ -1561,6 +1650,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
       insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
       on conflict (key) do update set value = excluded.value
     `;
+    await ensureDevPreviewAthleteAccount(sql);
     return;
   }
 
@@ -1970,6 +2060,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   if (!(await alreadySeeded(sql))) {
     throw new Error("Catalogue seed verification failed after writing the seed marker");
   }
+  await ensureDevPreviewAthleteAccount(sql);
 }
 
 async function seed(): Promise<void> {

@@ -21,6 +21,7 @@ import {
   publicFigureWave3Results,
   publicFigureWave3Series,
 } from "./public-figures-wave-3.ts";
+import { professionalAthletes } from "./professional-athletes.ts";
 
 const CHECKED_AT = "2026-08-22";
 
@@ -400,6 +401,7 @@ const highTractionPublicFigureResults: ResultSeed[] = [
 ];
 
 export const publicFigureAthletes: AthleteSeed[] = [
+  ...professionalAthletes,
   ...richRollAthletes,
   ...highTractionPublicFigureAthletes,
   ...publicFigureWave2Batch1Athletes,

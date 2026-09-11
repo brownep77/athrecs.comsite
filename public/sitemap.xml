@@ -21,6 +21,36 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.athrecs.com/athletes/keely-hodgkinson</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.athrecs.com/athletes/noah-lyles</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.athrecs.com/athletes/dina-asher-smith</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.athrecs.com/athletes/josh-kerr</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.athrecs.com/athletes/rhasidat-adeleke</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.athrecs.com/athletes/femke-broeders-bol</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.athrecs.com/athletes/rich-roll</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

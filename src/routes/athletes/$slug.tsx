@@ -168,11 +168,7 @@ function formatDob(iso: string | null | undefined): string | null {
   });
 }
 
-function PrivateAthleteProfile({
-  athlete,
-}: {
-  athlete: { slug: string; displayName: string };
-}) {
+function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayName: string } }) {
   const { user, isPending } = useCurrentUserState();
 
   function startSignIn() {
@@ -256,6 +252,9 @@ function AthletePage() {
   const dob = formatDob(athlete.date_of_birth);
   const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
   const isPublicFigure = athlete.profile_type === "Public figure";
+  const isProfessionalAthlete = athlete.profile_roles?.some(
+    (role: string) => role.toLowerCase() === "professional athlete",
+  );
   const locationLabel = isPublicFigure
     ? (athlete.nationality ?? athlete.country)
     : [athlete.city, athlete.county, athlete.country].filter(Boolean).join(" · ");
@@ -284,7 +283,11 @@ function AthletePage() {
 
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-          {isPublicFigure ? "Public figure athlete profile" : "Athlete profile"}
+          {isProfessionalAthlete
+            ? "Professional athlete profile"
+            : isPublicFigure
+              ? "Public figure athlete profile"
+              : "Athlete profile"}
         </p>
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
         {athlete.club && athlete.club_slug ? (
@@ -311,16 +314,25 @@ function AthletePage() {
               Verified athlete
             </Badge>
           ) : null}
-          {isPublicFigure && <Badge variant="accent">Public figure</Badge>}
+          {isProfessionalAthlete ? (
+            <Badge variant="accent">Professional athlete</Badge>
+          ) : isPublicFigure ? (
+            <Badge variant="accent">Public figure</Badge>
+          ) : null}
           <Badge variant="outline">
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="accent">{results.length} results</Badge>
-          {athlete.profile_roles?.map((role: string) => (
-            <Badge key={role} variant="outline">
-              {role}
-            </Badge>
-          ))}
+          {athlete.profile_roles
+            ?.filter(
+              (role: string) =>
+                !isProfessionalAthlete || role.toLowerCase() !== "professional athlete",
+            )
+            .map((role: string) => (
+              <Badge key={role} variant="outline">
+                {role}
+              </Badge>
+            ))}
         </div>
         {athlete.bio && <p className="max-w-prose text-sm text-muted">{athlete.bio}</p>}
         <ShareProfileButton
@@ -352,7 +364,9 @@ function AthletePage() {
 
       {athlete.profile_links.length > 0 && (
         <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
-          <h2 className="font-display text-lg font-semibold text-fg">Official links</h2>
+          <h2 className="font-display text-lg font-semibold text-fg">
+            {isProfessionalAthlete ? "Records and follow links" : "Official links"}
+          </h2>
           <div className="flex flex-wrap gap-2">
             {athlete.profile_links.map((link: { label: string; url: string }) => (
               <a
@@ -428,7 +442,11 @@ function AthletePage() {
           Published finish times only - no composite ratings. Confirm on the official timer site.
         </p>
         {results.length === 0 ? (
-          <p className="text-sm text-muted">No results yet.</p>
+          <p className="text-sm text-muted">
+            {isProfessionalAthlete
+              ? "No source-checked performance rows have been added to ATHRECS yet."
+              : "No results yet."}
+          </p>
         ) : (
           <div className="grid gap-2">
             {results.map((r) => (
