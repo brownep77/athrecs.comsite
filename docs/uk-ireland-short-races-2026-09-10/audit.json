@@ -1,0 +1,3155 @@
+{
+  "additions": [
+    {
+      "slug": "duthie-park-5k-10k-2026",
+      "name": "Duthie Park 5K & 10K September",
+      "date": "2026-09-12",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/duthie-park-5k-10k-july-ado",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "hel-n-back-trail-race-10k",
+      "name": "Hel n Back Trail Race 10K",
+      "date": "2026-09-12",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/hel-n-back-trail-race",
+      "country": "Scotland",
+      "existing": false
+    },
+    {
+      "slug": "up-and-running-5k-and-10k-september",
+      "name": "Kelvingrove Park 5K & 10K September",
+      "date": "2026-09-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/kelvingrove-park-5k-and-10k-september",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "cumbernauld-10k-run",
+      "name": "Cumbernauld 10K, 5K & 1K",
+      "date": "2026-09-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/cumbernauld-10k-run",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "john-o-groats-10k",
+      "name": "John O'Groats 10K",
+      "date": "2026-09-13",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/john-ogroats-10k",
+      "country": "Scotland",
+      "existing": false
+    },
+    {
+      "slug": "westside-runners-10k-5k-fun-run",
+      "name": "Westside Runners 10K & 5K",
+      "date": "2026-09-19",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/westside-runners-10k-5k-fun-run",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "maggies-5k-10k-chase",
+      "name": "Maggie's 5K & 10K Chase",
+      "date": "2026-09-20",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/maggies-5k-10k-chase",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "toms-cairn-10k-trail-race",
+      "name": "Tom's Cairns 5K & 10K Trail Races",
+      "date": "2026-09-20",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/toms-cairn-10k-trail-race",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "dumfries-house-5k-10k",
+      "name": "Dumfries House 5K & 10K",
+      "date": "2026-09-27",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/dumfries-house-5k-and-10k",
+      "country": "Scotland",
+      "existing": false
+    },
+    {
+      "slug": "the-meadows-5k-10-october",
+      "name": "The Meadows 5K & 10K October",
+      "date": "2026-10-10",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/the-meadows-5k-10-october",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "autumn-charity-fun-run",
+      "name": "Autumn Charity Fun Run",
+      "date": "2026-10-11",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/summer-fun-runfest",
+      "country": "Scotland",
+      "existing": false
+    },
+    {
+      "slug": "up-and-running-events-alexandra-park-5k-10k-january-osv",
+      "name": "Alexandra Park 5K & 10K October",
+      "date": "2026-10-17",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/up-and-running-events-alexandra-park-5k-10k-january-osv",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "costorphine-hill-5k-10k-15k-20k",
+      "name": "Costorphine Hill 5K & 10K",
+      "date": "2026-10-18",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/costorphine-hill-5k-10k-15k-20k",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "cramond-promenade-5k-10k-half-marathon-october",
+      "name": "Cramond Promenade 5K, 10K & Half Marathon October",
+      "date": "2026-10-25",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/cramond-promenade-5k-10k-half-marathon-october",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "jedburgh-half-marathon",
+      "name": "Jedburgh Half Marathon & 10K",
+      "date": "2026-10-25",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/jedburgh-half-marathon",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "helvellyn-trail-run-10k",
+      "name": "Lakeland Trails Helvellyn 5K, 10K & 15K",
+      "date": "2026-10-31",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/helvellyn-trail-run-10k",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "inverleith-park-5k-10k-august",
+      "name": "Inverleith Park 5K &10K October",
+      "date": "2026-10-31",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/inverleith-park-5k-10k-october",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "pollok-park-5k-10k-august",
+      "name": "Pollok Park 5K & 10K November",
+      "date": "2026-11-01",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/pollok-park-5k-10k",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "up-and-running-events-bellahouston-park-5k-10k-half-marathon-may-coa",
+      "name": "Bellahouston Park 5K, 10K & Half Marathon November",
+      "date": "2026-11-07",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/up-and-running-events-bellahouston-park-5k-10k-half-marathon-november",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "strathclyde-park-5k-10k-half-marathon-november",
+      "name": "Strathclyde Park 5K, 10K & Half Marathon November",
+      "date": "2026-11-08",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/strathclyde-park-5k-10k-half-marathon-november",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "holyrood-park-5k-10k-half-marathon-november",
+      "name": "Holyrood Park 5K, 10K & Half Marathon November",
+      "date": "2026-11-08",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/holyrood-park-5k-10k-half-marathon-november",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "vogrie-country-park-november",
+      "name": "Vogrie Country Park 5K, 10K & Half Marathon November",
+      "date": "2026-11-15",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/vogrie-country-park-november",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run",
+      "name": "Hermitage Trail Runs & Fun Run",
+      "date": "2026-11-22",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "hot-chocolate-5k-10k-edinburgh",
+      "name": "Hot Chocolate 5K & 10K",
+      "date": "2026-11-22",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/hot-chocolate-5k-10k-edinburgh",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "carlisle-santa-dash",
+      "name": "Carlisle Santa Dash",
+      "date": "2026-12-06",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/carlisle-santa-dash-fun-run",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "queens-park-5k-10k-october-4ho",
+      "name": "Queen's Park 5K & 10K December",
+      "date": "2026-12-06",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/queens-park-5k-10k-october-4ho",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "festive-foodbank-reindeer-run",
+      "name": "Festive Foodbank Reindeer Run",
+      "date": "2026-12-12",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/festive-foodbank-reindeer-run",
+      "country": "Scotland",
+      "existing": false
+    },
+    {
+      "slug": "blast-running-santa-elf-dash",
+      "name": "Blast Running Santa & Elf Dash",
+      "date": "2026-12-20",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/blast-running-santa-dash",
+      "country": "Scotland",
+      "existing": false
+    },
+    {
+      "slug": "blast-meadows-5km-october",
+      "name": "Blast@The Meadows 5K December",
+      "date": "2026-12-22",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/blast-meadows-5km-december-race-3-mulled-wine",
+      "country": "Scotland",
+      "existing": true
+    },
+    {
+      "slug": "landaid-north-west-10k-5k",
+      "name": "LandAid North West 10K & 5K",
+      "date": "2026-09-10",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/landaid-north-west-10k-5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "tatton-10k-september",
+      "name": "Tatton Park 5K & 10K September",
+      "date": "2026-09-12",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/tatton-10k-september",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "nathans-5k-10k",
+      "name": "Nathan’s 5K & 10K",
+      "date": "2026-09-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/nathans-5k-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "styles-athon-5k-10k-fun-run",
+      "name": "Styles-Athon 5K & 10K Fun Run",
+      "date": "2026-09-19",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/styles-athon-5k-10k-fun-run",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "snape-10k",
+      "name": "Snape 10K & 5K Fun Run",
+      "date": "2026-09-19",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/snape-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "stainland-trail-10k",
+      "name": "Stainland Trail 10K",
+      "date": "2026-09-20",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/stainland-trail",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "run-mediacity-5k-10k-september",
+      "name": "Run Media City 5K & 10K September",
+      "date": "2026-09-24",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/run-mediacity-5k-10k-september",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "315-national-fitness-5k",
+      "name": "3-1-5 National Fitness 10K & 5K",
+      "date": "2026-09-26",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/315-national-fitness-5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "run-aintree-5k-10k-and-half-marathon-september",
+      "name": "Run Aintree 5K, 10K & Half Marathon September",
+      "date": "2026-09-27",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/run-aintree-5k-10k-and-half-marathon-september",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "halewood-5k",
+      "name": "Halewood 5K October",
+      "date": "2026-10-03",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/halewood-5k-october",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "run-yorkshire-half-marathon-10k-5k",
+      "name": "Run Yorkshire Half Marathon, 10K & 5K",
+      "date": "2026-10-04",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/run-yorkshire-half-marathon-10k-5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "red-kite-10k",
+      "name": "Red Kite 10K",
+      "date": "2026-10-04",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/red-kite-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "tatton-10k-october",
+      "name": "Tatton Park 5K & 10K October",
+      "date": "2026-10-10",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/tatton-10k-october",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "phoenix-manchester-priyas-birthday-biryani-dash",
+      "name": "Phoenix Manchester Priya's Birthday Biryani Dash",
+      "date": "2026-10-11",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/phoenix-manchester-priyas-birthday-biryani-dash",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "coxhoe-trail-run",
+      "name": "Coxhoe Trail Run",
+      "date": "2026-10-11",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/coxhoe-trail-run",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "abergele-10k",
+      "name": "Abergele 10K & 5K",
+      "date": "2026-10-18",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/abergele-10k",
+      "country": "Wales",
+      "existing": true
+    },
+    {
+      "slug": "power-of-5k-october-2",
+      "name": "Power Of 5K October",
+      "date": "2026-10-23",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/power-of-5k-october",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "monsal-trail-half-marathon-autumn-sunday",
+      "name": "Monsal Trail Half Marathon & 10K Autumn Sunday",
+      "date": "2026-10-25",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/monsal-trail-half-marathon-autumn-sunday",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "whixley-5k-10k",
+      "name": "Whixley 5K & 10K",
+      "date": "2026-10-25",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/whixley-5k-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "calder-lodge-15k-5k",
+      "name": "Calder Lodge 15K & 5K",
+      "date": "2026-10-25",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/calder-lodge-15k-5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "piglove-by-the-river-5k-10k-october",
+      "name": "Piglove By The River 5K & 10K Autumn",
+      "date": "2026-10-28",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/piglove-by-the-river-5k-10k-october",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "run-tatton-5k-10k-november",
+      "name": "Tatton Park 5K & 10K November",
+      "date": "2026-11-07",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/run-tatton-5k-10k-november",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "halewood-5k",
+      "name": "Halewood 5K November",
+      "date": "2026-11-07",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/halewood-free-monthly-5k-nov",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "windmill-remembrance-day-10k",
+      "name": "Windmill Remembrance Day 10K",
+      "date": "2026-11-08",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/windmill-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "leeds-morun",
+      "name": "Leeds MoRun",
+      "date": "2026-11-15",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/the-10k-leeds-mo-run",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "slaley-hall-half-marathon",
+      "name": "Slaley Hall Half Marathon & 10K",
+      "date": "2026-11-15",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/slaley-hall-half-marathon",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "last-drop-5k",
+      "name": "Last Drop 5K",
+      "date": "2026-11-15",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/last-drop-5k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "liverpool-morun",
+      "name": "Liverpool MoRun",
+      "date": "2026-11-21",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/liverpool-morun",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "newcastle-morun",
+      "name": "Newcastle MoRun",
+      "date": "2026-11-21",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/newcastle-morun-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "litton-birks-fell-race",
+      "name": "Litton Birks Fell Race",
+      "date": "2026-11-21",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/litton-birks-fell-race",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "manchester-morun",
+      "name": "Manchester MoRun",
+      "date": "2026-11-22",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/the-10k-manchester-morun",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "york-morun",
+      "name": "York MoRun",
+      "date": "2026-11-22",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/york-morun",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "delamere-trails-half-marathon-marathon-november",
+      "name": "Delamere Forest Marathon, Half Marathon & 10K November",
+      "date": "2026-11-22",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/delamere-trails-half-marathon-marathon-november",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "sherwood-christmas-10k-5k-2026",
+      "name": "Sherwood Christmas 10K & 5K",
+      "date": "2026-11-22",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/sherwood-pines-christmas-10k-5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "morecambe-festival-of-running-january-2027",
+      "name": "Morecambe Festival Of Running November",
+      "date": "2026-11-22",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/morecambe-festival-of-running-november",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "mental-elf-fun-run-derbyshire",
+      "name": "Mental Elf Fun Run Derbyshire",
+      "date": "2026-11-29",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/mental-elf-fun-run-derbyshire",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "sunderland-10k",
+      "name": "Sunderland 10K",
+      "date": "2026-11-29",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/sunderland-10k-november",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "run-heaton-5k-10k-half-marathon-november",
+      "name": "Run Heaton 5K, 10K & Half Marathon November",
+      "date": "2026-11-29",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/run-heaton-5k-10k-half-marathon-november",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "halewood-5k",
+      "name": "Halewood 5K December",
+      "date": "2026-12-05",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/halewood-5k-december",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "llandudno-santa-dash",
+      "name": "Llandudno Santa Dash",
+      "date": "2026-12-05",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/llandudno-santa-dash",
+      "country": "Wales",
+      "existing": false
+    },
+    {
+      "slug": "jingle-bell-jog-buxton",
+      "name": "Jingle Bell Jog Buxton",
+      "date": "2026-12-06",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/jingle-bell-jog-buxton",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "btr-liverpool-santa-dash-5k",
+      "name": "BTR Liverpool Santa Dash",
+      "date": "2026-12-06",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/btr-liverpool-santa-dash-5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "tatton-yule-yomp-10k",
+      "name": "Tatton Yule Yomp 10K",
+      "date": "2026-12-06",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/tatton-yule-yomp-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "bah-humbug-10k",
+      "name": "Bah Humbug 10K",
+      "date": "2026-12-06",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/bah-humbug-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "great-langdale-christmas-pudding-10k",
+      "name": "Great Langdale Christmas Pudding 10K",
+      "date": "2026-12-12",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/great-langdale-christmas-pudding-10k-road-race",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "lymm-runners-dickensian-santa-dash",
+      "name": "Lymm Runners Dickensian Santa Dash",
+      "date": "2026-12-12",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/lymm-runners-dickensian-santa-dash",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "great-sprout-scuttle-5k-10k",
+      "name": "Great Sprout Scuttle 5K & 10K",
+      "date": "2026-12-13",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/great-sprout-scuttle",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "run-gateshead-hot-chocolate-5k-2026",
+      "name": "Run Gateshead Hot Chocolate 5K & 10K",
+      "date": "2026-12-13",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/run-gateshead-hot-chocolate-5k-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "quakers-rc-santa-run",
+      "name": "Quakers RC Santa Run",
+      "date": "2026-12-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/quakers-rc-santa-run",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "town-moor-exhibition-park-5k-10k-december",
+      "name": "Town Moor & Exhibition Park 5K & 10K December",
+      "date": "2026-12-20",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/town-moor-exhibition-park-5k-10k-december",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "charlton-hayes-5k-10k",
+      "name": "Charlton Hayes 5K & 10K",
+      "date": "2026-09-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/charlton-hayes-5k-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "balsall-common-fun-run",
+      "name": "Balsall Common Fun Run 10K & 5K",
+      "date": "2026-09-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/balsall-common-fun-run",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "thompson-millennium-green",
+      "name": "Thompson Millennium Green 10K & 5K",
+      "date": "2026-10-04",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/thompson-millennium-green-10k-5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "felbrigg-trail-run",
+      "name": "Fellbrigg Trail Run",
+      "date": "2026-10-11",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/fellbrigg-trail-run",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "brewers-10k",
+      "name": "Brewers 5K & 10K",
+      "date": "2026-10-18",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/brewers-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "run-breckland-sapiston",
+      "name": "Sapiston 5K & 10K Trail Runs",
+      "date": "2026-10-18",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/run-breckland-sapiston",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "imperial-war-museum-duxford-dash-5k-10k",
+      "name": "Duxford Dash 5K & 10K",
+      "date": "2026-10-25",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/imperial-war-museum-duxford-dash-5k-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "stroud-half-marathon",
+      "name": "Stroud Half Marathon & 10K",
+      "date": "2026-10-25",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/stroud-half-marathon",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "cardiff-morun",
+      "name": "Cardiff MoRun",
+      "date": "2026-11-01",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/cardiff-morun",
+      "country": "Wales",
+      "existing": false
+    },
+    {
+      "slug": "marlow-half-marathon-7m-10k",
+      "name": "Marlow Half Marathon, 7M & 10K",
+      "date": "2026-11-01",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/marlow-half-marathon",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "nice-charity-10k",
+      "name": "NICE Charity 10K",
+      "date": "2026-11-01",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/nice-charity-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "bonfire-burn-10k",
+      "name": "Bonfire Burn 10K",
+      "date": "2026-11-01",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/bonfire-burn-10k-event",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "rutland-night-run-friday",
+      "name": "Rutland Night Run Friday",
+      "date": "2026-11-06",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/rutland-night-run-friday",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "rutland-night-run-saturday",
+      "name": "Rutland Night Run Saturday",
+      "date": "2026-11-07",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/rutland-night-run-saturday",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "windsor-trail-run-half-marathon-10k-november",
+      "name": "Windsor Trail Run Half Marathon & 10K November",
+      "date": "2026-11-08",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/windsor-trail-run-half-marathon-10k-november",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "birmingham-morun",
+      "name": "Birmingham MoRun",
+      "date": "2026-11-08",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/10k-birmingham-morun",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "derby-morun",
+      "name": "Derby MoRun",
+      "date": "2026-11-14",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/derby-morun-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "rugged-radnage-10k",
+      "name": "Rugged Radnage 10K",
+      "date": "2026-11-15",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/rugged-radnage-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "petzl-night-runner-salcey-forest",
+      "name": "Petzl Night Runner Salcey Forest",
+      "date": "2026-11-20",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/gato-sports-head-torch-10k-december",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "silverstone-runfest",
+      "name": "Silverstone Runfest",
+      "date": "2026-11-22",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/silverstone-runfest",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "far-peak-10k-half-marathon",
+      "name": "Well Run Half Marathon & 10K",
+      "date": "2026-11-22",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/well-run-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "hereford-river-10k",
+      "name": "Hereford River 10K",
+      "date": "2026-11-28",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/hereford-river-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "christmas-jumper-run",
+      "name": "Christmas Jumper Run",
+      "date": "2026-11-28",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/christmas-jumper-run",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "9-locks-challenge",
+      "name": "9 Locks Challenge",
+      "date": "2026-11-29",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/9-locks-challenge",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "milton-keynes-morun",
+      "name": "Milton Keynes MoRun",
+      "date": "2026-11-29",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/the-10k5k-mo-run-milton-keynes",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "thetford-5k-santa-run",
+      "name": "Thetford 5K Santa Run",
+      "date": "2026-12-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/thetford-5k-santa-run",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "lingwood-santa-dash",
+      "name": "Lingwood Santa Dash",
+      "date": "2026-12-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/lingwood-santa-dash",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "new-forest-marathon-half",
+      "name": "New Forest Marathon, Half Marathon, 10K & 5K",
+      "date": "2026-09-13",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/new-forest-marathon-half",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "runthrough-olympic-park-5k-10k-september",
+      "name": "Olympic Park 5K & 10K September",
+      "date": "2026-09-19",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/runthrough-olympic-park-5k-10k-september",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "the-intersport-run-reigate-half-marathon",
+      "name": "Run Reigate Half Marathon, 10K & 5K",
+      "date": "2026-09-20",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/run-reigate-half-marathon-10k-5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "steps-for-change-childrens-challenge-5k-or-10k",
+      "name": "Steps For Change Children's Challenge 5K & 10K",
+      "date": "2026-09-20",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/steps-for-change-childrens-challenge-5k-or-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "black-hill-run",
+      "name": "Black Hill Run",
+      "date": "2026-09-20",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/black-hill-run",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "brooks-serpentine-last-friday-of-the-month-5k-august",
+      "name": "Serpentine Last Friday of the Month 5K September",
+      "date": "2026-09-25",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/brooks-serpentine-last-friday-of-the-month-5k-september",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "run-dorney-5k-10k-half-marathon-aug",
+      "name": "Dorney 5K, 10K, Half Marathon & Marathon September",
+      "date": "2026-09-26",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/run-dorney-5k-10k-half-marathon-aug",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "hyde-park-5k-10k-september",
+      "name": "Hyde Park 5K & 10K September",
+      "date": "2026-09-26",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/hyde-park-5k-10k-september",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "bradleys-autumn-exmouth-10k",
+      "name": "Bradley's Autumn Exmouth 10K & 5K",
+      "date": "2026-09-27",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/bradleys-autumn-exmouth-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "runthrough-clapham-common-5k-10k-august",
+      "name": "Clapham Common 5K, 10K & Half Marathon",
+      "date": "2026-09-27",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/runthrough-clapham-common-5k-10k-august",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "badlesmere-10k",
+      "name": "Badlesmere 10K",
+      "date": "2026-09-27",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/badlesmere-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "manuden-fun-run-10k",
+      "name": "Manuden 10K & 5K",
+      "date": "2026-09-27",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/manuden-fun-run-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "rtt-margam-trail-10k-5k",
+      "name": "RTT Margam Trail 10K & 5K",
+      "date": "2026-09-27",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/rtt-margam-trail-10k-5k",
+      "country": "Wales",
+      "existing": true
+    },
+    {
+      "slug": "trent-park-rc-5k-handicap-august-race",
+      "name": "Trent Park RC 5K Handicap October",
+      "date": "2026-10-03",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/trent-park-rc-5k-handicap-october-race",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "runthrough-victoria-park-5k-10k-half-marathon-october",
+      "name": "Victoria Park 5K, 10K & Half Marathon October",
+      "date": "2026-10-03",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/runthrough-victoria-park-5k-10k-half-marathon-october",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "basingstoke-half-marathon",
+      "name": "Basingstoke Half Marathon & 10K",
+      "date": "2026-10-04",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/basingstoke-half-marathon",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "chase-the-moon-battersea-5k-10k-october",
+      "name": "Chase The Moon Battersea 5K & 10K October",
+      "date": "2026-10-07",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-october",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "frieth-hilly-10k5k",
+      "name": "Frieth Hilly 10K & 5K",
+      "date": "2026-10-11",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/frieth-hilly-10k5k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "rushmoor-wellesley-10k",
+      "name": "Rushmoor Wellesley 10K & 5K",
+      "date": "2026-10-11",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/rushmoor-wellesley-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "street-5k",
+      "name": "Street 5K October",
+      "date": "2026-10-14",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/street-5k-october",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "henley-half-marathon",
+      "name": "Henley Half Marathon & 10K",
+      "date": "2026-10-18",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/henley-half-marathon",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "canvey-island-trail-run",
+      "name": "Canvey Island Trail Run",
+      "date": "2026-10-25",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/canvey-island-trail-run",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "brooks-serpentine-last-friday-of-the-month-5k-august",
+      "name": "Serpentine Last Friday of the Month 5K October",
+      "date": "2026-10-30",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/brooks-serpentine-last-friday-of-the-month-5k-october",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "maverick-dark-hampshire-gravel-2026",
+      "name": "Maverick Dark Hampshire Gravel",
+      "date": "2026-10-31",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/maverick-exposure-lights-dark-hampshire",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "wendover-trail-marathon",
+      "name": "Wendover Woods Marathon, Half Marathon & 10K",
+      "date": "2026-11-01",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/wendover-trail-marathon",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "runthrough-greenwich-park-5k-10k-november",
+      "name": "Greenwich Park 5K & 10K November",
+      "date": "2026-11-01",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/runthrough-greenwich-park-5k-10k-november",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "crowborough-10k",
+      "name": "Crowborough 10K & 5K",
+      "date": "2026-11-01",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/crowborough-10k",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "trent-park-rc-5k-handicap-august-race",
+      "name": "Trent Park RC 5K Handicap November",
+      "date": "2026-11-07",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/trent-park-rc-5k-handicap-november-race",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "london-morun",
+      "name": "London MoRun",
+      "date": "2026-11-08",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/morun-london",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "london-riverside-morun",
+      "name": "London Riverside MoRun",
+      "date": "2026-11-08",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/london-riverside-morun",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "chatham-maritime-10k",
+      "name": "Chatham Maritime 10K",
+      "date": "2026-11-08",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/chatham-maritime-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "street-5k",
+      "name": "Street 5K November",
+      "date": "2026-11-11",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/street-5k-november",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "bath-skyline-night-run-saturday",
+      "name": "Bath Skyline Night Run Saturday",
+      "date": "2026-11-14",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/bath-skyline-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "rb-the-lobster-lollop",
+      "name": "Lobster Lollop",
+      "date": "2026-11-14",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/lobster-lollop",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "bath-skyline-run-sunday",
+      "name": "Bath Skyline Run Sunday",
+      "date": "2026-11-15",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/bath-skyline-run-november",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "bristol-morun",
+      "name": "Bristol MoRun",
+      "date": "2026-11-15",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/bristol-morun-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "fulham-10k",
+      "name": "Fulham 10K",
+      "date": "2026-11-15",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/fulham-10k-november",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "southampton-morun",
+      "name": "Southampton MoRun",
+      "date": "2026-11-15",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/southampton-morun",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "world-aids-day-red-run",
+      "name": "World AIDS Day Red Run",
+      "date": "2026-11-21",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/5k-red-run-world-aids-day",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "brooks-serpentine-last-friday-of-the-month-5k-august",
+      "name": "Last Friday of the Month 5K November",
+      "date": "2026-11-27",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/brooks-serpentine-last-friday-of-the-month-5k-november",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "christmas-chilly-10k",
+      "name": "Christmas Chilly 10K",
+      "date": "2026-11-29",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/christmas-chilly-10k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "rtt-afan-forest-trail-10k-5k",
+      "name": "RTT Afan Forest Trail 10K & 5K",
+      "date": "2026-11-29",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/rtt-afan-forest-trail-10k-5k",
+      "country": "Wales",
+      "existing": true
+    },
+    {
+      "slug": "trent-park-rc-5k-handicap-august-race",
+      "name": "Trent Park RC Handicap December",
+      "date": "2026-12-05",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/trent-park-rc-december-handicap",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "rudolph-run-for-rennie-grove-hospice-care",
+      "name": "Rudolph Run For Rennie Grove Hospice Care",
+      "date": "2026-12-06",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/rudolph-run-rennie-grove-hospice-care",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "santa-fun-run-farleigh-hospice",
+      "name": "Santa Fun Run Farleigh Hospice",
+      "date": "2026-12-06",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/santa-fun-run-farleigh-hospice",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "watford-mencap-santa-dash",
+      "name": "Watford Mencap Santa Dash",
+      "date": "2026-12-06",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/watford-mencap-santa-dash",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "exeter-santa-5k-run",
+      "name": "Exeter Santa 5K Run",
+      "date": "2026-12-06",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/exeter-santa-5k",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "crystal-palce-5k-10k-half-marathon-juniors-december",
+      "name": "Crystal Palace 5K, 10K & Half Marathon December",
+      "date": "2026-12-06",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/crystal-palce-5k-10k-half-marathon-juniors-december",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "cockington-christmas-caper",
+      "name": "Cockington Christmas Caper",
+      "date": "2026-12-06",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/cockington-christmas-caper",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "chase-the-moon-olympic-park-5k-10k-october",
+      "name": "Chase The Moon Olympic Park 5K & 10K December",
+      "date": "2026-12-09",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/runthrough-chase-the-moon-olympic-park-december",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "street-5k",
+      "name": "Street 5K December",
+      "date": "2026-12-09",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/street-5k-december",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "dorney-lake-half-marathon-10k-5k-december",
+      "name": "Dorney Lake Half Marathon, 10K & 5K December",
+      "date": "2026-12-12",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/dorney-lake-half-marathon-10k-5k-december",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "barnet-fc-5k-10k",
+      "name": "Barnet FC 5K & 10K",
+      "date": "2026-12-13",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/barnet-fc-5k-10k-december-2026",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "runthrough-battersea-park-january-2027",
+      "name": "Battersea Park 5K, 10K & Half Marathon January",
+      "date": "2027-01-09",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/runthrough-battersea-park-5k-10k-january",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "victoria-park-5k-10k-half-marathon-january",
+      "name": "Victoria Park 5K, 10K & Half Marathon January",
+      "date": "2027-01-10",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/victoria-park-5k-10k-half-marathon-january",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "cowdray-estate-winter-night-trail-run",
+      "name": "Cowdray Estate Winter Night Trail Run",
+      "date": "2027-01-23",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/run-the-seasons-winter",
+      "country": "England",
+      "existing": false
+    },
+    {
+      "slug": "finsbury-park-5k-10k-half-marathon-january",
+      "name": "Finsbury Park 5K, 10K & Half Marathon January",
+      "date": "2027-01-24",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/finsbury-park-5k-10k-half-marathon-january",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "runthrough-chase-the-moon-battersea-january-2027",
+      "name": "Chase The Moon Battersea 5K & 10K January",
+      "date": "2027-01-27",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-january",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "runthrough-crystal-palace-5k-10k-half-marathon-january",
+      "name": "Crystal Palace 5K, 10K & Half Marathon January",
+      "date": "2027-01-31",
+      "distances": [
+        "10K",
+        "5K"
+      ],
+      "source": "https://runabc.co.uk/runthrough-crystal-palace-5k-10k-half-marathon-january",
+      "country": "England",
+      "existing": true
+    },
+    {
+      "slug": "luggacurren-5k-2026",
+      "name": "Luggacurren 10K",
+      "date": "2026-09-13",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/b9mAU9AHjr",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "bunninadden-charity-road-race-5k-2026",
+      "name": "Bunninadden Charity Road race",
+      "date": "2026-09-19",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/P1bZhJDhLe",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "the-toddy-moore-memorial-10k-and-5k-relay",
+      "name": "The Toddy Moore Memorial 10k and 5k relay",
+      "date": "2026-09-20",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/EYb4c4EF74",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "cook-medical-mini-marathon",
+      "name": "Cook Medical Mini Marathon",
+      "date": "2026-10-04",
+      "distances": [
+        "5K",
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/VqQnfERTwv",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "rebel-run-5k-2026",
+      "name": "Rebel Run 5km & 10km 2026",
+      "date": "2026-10-18",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/rYZrcPmS9y",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "longwood-village-5k-10k-2026",
+      "name": "Longwood Village 10K and 5K Race",
+      "date": "2026-10-18",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/WY9RF65i0j",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "savills-sandymount-night-run-5k-october-2026",
+      "name": "Savills Sandymount Night Run 5KM & 10KM",
+      "date": "2026-10-20",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/DOrzUmAcJr",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "limerick-night-run",
+      "name": "Limerick Night Run",
+      "date": "2026-10-29",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://eventmaster.ie/event/kGvPFK2TA2",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "togher-ac-5k",
+      "name": "Togher AC 5k",
+      "date": "2027-01-03",
+      "distances": [
+        "5K"
+      ],
+      "source": "https://eventmaster.ie/event/lReDHV8HPO",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "donegal-town-eamon-harvey-10k-2027",
+      "name": "Donegal Town Eamon Harvey 10k",
+      "date": "2026-09-13",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/MAA5sbdiBz",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "ceide-coast-atlantic-run-2026",
+      "name": "Ceide Coast Atlantic Run",
+      "date": "2026-09-19",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/BOEYC23c8j",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "rhode-ac-marathon-festival-2026",
+      "name": "Rhode AC Marathon, 3/4, half & 10k",
+      "date": "2026-09-19",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/12K8CwDHeM",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "athlone-ac-half-marathon-10k-2026",
+      "name": "Athlone AC Half Marathon  & 10k",
+      "date": "2026-09-20",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/MrEEFbdiBz",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "monaghan-phoenix-marathon-festival-2026",
+      "name": "Monaghan Phoenix Marathon Festival",
+      "date": "2026-09-26",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/8jERH7qTV1",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "grey-lake-10k-road-race",
+      "name": "Grey Lake 10K Road Race",
+      "date": "2026-09-27",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/d5v4snGSwV",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "fastlane-autumn-edition-2026",
+      "name": "Life Style Sports Fastlane Autumn Edition",
+      "date": "2026-10-03",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/GYLrckKtpd",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "lusk-20-mile",
+      "name": "Lusk 20 Mile",
+      "date": "2026-10-03",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/KKj2spnHGx",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "o-dubhda-challenge-2026",
+      "name": "O Dubhda Challenge 2026",
+      "date": "2026-10-04",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/w2A2hPySRQ",
+      "country": "Ireland",
+      "existing": true
+    },
+    {
+      "slug": "grange-10k",
+      "name": "Grange 10k",
+      "date": "2026-10-04",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/OKkBTpmH0Z",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "thomas-kent-10k",
+      "name": "Thomas Kent 10K 2026",
+      "date": "2026-11-08",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/qqYzHP7SQq",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "fields-of-athenry-10km",
+      "name": "Fields of Athenry 10km 2026",
+      "date": "2026-12-26",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/mL4khyVFM8",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "new-year-s-eve-10k-road-race",
+      "name": "New Year's Eve 10K Road Race",
+      "date": "2026-12-31",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://eventmaster.ie/event/w2L9hPySRQ",
+      "country": "Ireland",
+      "existing": false
+    },
+    {
+      "slug": "clandeboye-10k",
+      "name": "Clandeboye 10K 2026",
+      "date": "2026-09-13",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Clandeboye-10K-2026",
+      "country": "Northern Ireland",
+      "existing": false
+    },
+    {
+      "slug": "rock-the-lough-5k-2026",
+      "name": "Rock the Lough 2026",
+      "date": "2026-09-13",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Rock-the-Lough-2026",
+      "country": "Northern Ireland",
+      "existing": true
+    },
+    {
+      "slug": "groomsport-10k",
+      "name": "Groomsport 10k",
+      "date": "2026-10-04",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Groomsport-10k",
+      "country": "Northern Ireland",
+      "existing": false
+    },
+    {
+      "slug": "saintfield-5k-10k-2026",
+      "name": "Saintfield 5K  10K",
+      "date": "2026-10-18",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Saintfield-5K--10K",
+      "country": "Northern Ireland",
+      "existing": true
+    },
+    {
+      "slug": "podium4sport-seeley-cup-10k",
+      "name": "Podium4Sport Seeley Cup 10K",
+      "date": "2026-11-28",
+      "distances": [
+        "10K"
+      ],
+      "source": "https://athleticsni.org/Fixtures/Road-Running/Podium4Sport-Seeley-Cup-10K",
+      "country": "Northern Ireland",
+      "existing": false
+    }
+  ],
+  "held": [
+    {
+      "name": "Auchterarder Running Festival Double Dare",
+      "date": "2026-09-12",
+      "source": "https://runabc.co.uk/auchterarder-double-dare",
+      "reason": "Cancelled, uncertain, restricted, relay or combined challenge"
+    },
+    {
+      "name": "Lakeland Paws Dodd Wood",
+      "date": "2026-10-04",
+      "source": "https://runabc.co.uk/lakeland-paws-dodd-wood",
+      "reason": "Distance or running terrain unconfirmed"
+    },
+    {
+      "name": "Lancashire Rose XC League Leigh",
+      "date": "2026-10-10",
+      "source": "https://runabc.co.uk/red-rose-xc-league-tormorden",
+      "reason": "Club league participation not confirmed for open entry"
+    },
+    {
+      "name": "Autumn Handicap 10K",
+      "date": "2026-10-15",
+      "source": "https://runabc.co.uk/autumn-handicap",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "No Walk in the Park 5K November",
+      "date": "2026-11-07",
+      "source": "https://runabc.co.uk/no-walk-in-the-park-5k-november",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Heaton Harriers Memorial Races",
+      "date": "2026-11-08",
+      "source": "https://runabc.co.uk/heaton-harriers-memorial-10k",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Matthew Walker 10K Pudding Run",
+      "date": "2026-11-15",
+      "source": "https://runabc.co.uk/matthew-walker-10k-pudding-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Kendal Trail Run",
+      "date": "2026-11-21",
+      "source": "https://runabc.co.uk/kendal-mountain-festival-10k-trail-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Lancashire Mind Mental Elf",
+      "date": "2026-11-28",
+      "source": "https://runabc.co.uk/lancashire-mind-mental-elf",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Skipton Santa Fun Run",
+      "date": "2026-11-29",
+      "source": "https://runabc.co.uk/skipton-santa-fun-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "No Walk In the Park 5K December",
+      "date": "2026-12-05",
+      "source": "https://runabc.co.uk/no-walk-in-the-park-5k-december",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Percy Pud 10K",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/percy-pud-10k",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Chase The Pud 10K",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/chase-the-pud-10k",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Bedale Christmas 5K & Mile Santa Fun Run",
+      "date": "2026-12-12",
+      "source": "https://runabc.co.uk/bedale-christmas-5k-mile-santa-fun-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Run Aintree 5K, 10K & Half Marathon December",
+      "date": "2026-12-13",
+      "source": "https://runabc.co.uk/run-aintree-5k-10-half-marathon-december",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Winter Solstice Strider",
+      "date": "2026-12-20",
+      "source": "https://runabc.co.uk/winter-solstice-strider",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Lakeland Paws Grizedale Forest January",
+      "date": "2027-01-03",
+      "source": "https://runabc.co.uk/lakeland-paws-grizedale-forest-february",
+      "reason": "Distance or running terrain unconfirmed"
+    },
+    {
+      "name": "Fountains Abbey Wild Trail Runs",
+      "date": "2027-01-31",
+      "source": "https://runabc.co.uk/fountains-abbey-wild-trail-runs",
+      "reason": "Date conflicts with an existing verified February 2027 correction"
+    },
+    {
+      "name": "North Staffs XC League Race 2",
+      "date": "2026-10-17",
+      "source": "https://runabc.co.uk/north-staffs-xc-league-race-2",
+      "reason": "Club league participation not confirmed for open entry"
+    },
+    {
+      "name": "Stamford Santa Fun Run",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/stamford-santa-fun-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Canaccord Corporate Cup 5K September",
+      "date": "2026-09-23",
+      "source": "https://runabc.co.uk/corporate-cup-september",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Tavy 5 October",
+      "date": "2026-10-17",
+      "source": "https://runabc.co.uk/tavy-5-october",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Bedgebury Forest Half Marathon & 10K",
+      "date": "2026-10-18",
+      "source": "https://runabc.co.uk/bedgebury-forest-half-marathon-10k",
+      "reason": "Distance or running terrain unconfirmed"
+    },
+    {
+      "name": "FOBS 5K & Colour Run",
+      "date": "2026-10-18",
+      "source": "https://runabc.co.uk/fobs-5k-and-colour-run",
+      "reason": "Cancelled, uncertain, restricted, relay or combined challenge"
+    },
+    {
+      "name": "Chase The Moon Olympic Park 5K & 10K Halloween",
+      "date": "2026-10-28",
+      "source": "https://runabc.co.uk/chase-the-moon-olympic-park-5k-10k-halloween",
+      "reason": "Two existing event identities cover this venue and date"
+    },
+    {
+      "name": "Chase The Moon Olympic Park 5K & 10K October",
+      "date": "2026-10-28",
+      "source": "https://runabc.co.uk/chase-the-moon-olympic-park-5k-10k-october",
+      "reason": "Two existing event identities cover this venue and date"
+    },
+    {
+      "name": "Bexhill Remembrance Run",
+      "date": "2026-11-07",
+      "source": "https://runabc.co.uk/bexhill-remembrance-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Windsor Trail Half Marathon & 10K",
+      "date": "2026-11-08",
+      "source": "https://runabc.co.uk/autumn-windsor-trail-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Afan Forest Trail Half Marathon & 10K",
+      "date": "2026-11-14",
+      "source": "https://runabc.co.uk/afan-forest-trail-half-marathon-10k",
+      "reason": "Distance or running terrain unconfirmed"
+    },
+    {
+      "name": "Watford Autumn 10K",
+      "date": "2026-11-15",
+      "source": "https://runabc.co.uk/watford-autumn-10k",
+      "reason": "Source town conflicts with venue and postcode"
+    },
+    {
+      "name": "Bierton 5K & 10K",
+      "date": "2026-11-15",
+      "source": "https://runabc.co.uk/bierton-5k-10k",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Brutal Spider Hill",
+      "date": "2026-11-21",
+      "source": "https://runabc.co.uk/spider-hill-brutal",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Polesden Lacey 10K November",
+      "date": "2026-11-22",
+      "source": "https://runabc.co.uk/polesden-lacey-10k-november",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Dartford Bridge Christmas Pudding Run",
+      "date": "2026-12-05",
+      "source": "https://runabc.co.uk/2nd-dartford-bridge-christmas-pudding-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Santa Dash Brighton",
+      "date": "2026-12-05",
+      "source": "https://runabc.co.uk/santa-dash-brighton",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Winchester Santa Fun Run",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/winchester-santa-fun-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Chiltern Hills Invitational",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/chiltern-hills-invitational",
+      "reason": "Cancelled, uncertain, restricted, relay or combined challenge"
+    },
+    {
+      "name": "Bromham Pudding Run",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/bromham-pudding-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Reading Santa Run",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/roc-search-reading-santa-run",
+      "reason": "Location outside scope or not sufficiently verified"
+    },
+    {
+      "name": "Na Piarsaigh GAA 5 & 10km",
+      "date": "2026-10-11",
+      "source": "https://eventmaster.ie/event/81BDC7qTV1",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "Ray Flynn Memorial 5k",
+      "date": "2026-10-17",
+      "source": "https://eventmaster.ie/event/MDD6sbdiBz",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "MHC-DH SCHOOLS ATHLETICS LEAGUE",
+      "date": "2026-11-04",
+      "source": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "Johnny McKenna Charity Run",
+      "date": "2026-11-07",
+      "source": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "Santa Dash 5km",
+      "date": "2026-12-06",
+      "source": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "Gorey AC 5k Santa Dash",
+      "date": "2026-12-06",
+      "source": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "St Stephens Day Road Race",
+      "date": "2026-12-26",
+      "source": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "Rita & Robbie",
+      "date": "2026-12-27",
+      "source": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "RunClare 2027",
+      "date": "2027-01-23",
+      "source": "https://eventmaster.ie/event/Z7M0iMWcZY",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "Memorial Run for Galway Hospice",
+      "date": "2027-01-30",
+      "source": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "BDN 10KM",
+      "date": "2026-11-22",
+      "source": "https://www.athleticsireland.ie/get-involved/events-calendar/",
+      "reason": "Athletics Ireland permit pending"
+    },
+    {
+      "name": "Kinneil Estate 5K, 10K & Half Marathon",
+      "date": "2026-09-19",
+      "source": "https://runabc.co.uk/kinneil-estate-5k-10k-half-marathon",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "kinneil-estate",
+        "kinneil-estate-5k-10k-half-marathon"
+      ]
+    },
+    {
+      "name": "Flat 'n’ Fast 5K September",
+      "date": "2026-09-19",
+      "source": "https://runabc.co.uk/flat-n-fast-5k-september",
+      "reason": "Existing nearby edition requires date reconciliation",
+      "matches": [
+        {
+          "date": "2026-09-18",
+          "distance": "5K"
+        }
+      ]
+    },
+    {
+      "name": "Cramond Promenade 5K, 10K & Half Marathon September",
+      "date": "2026-09-27",
+      "source": "https://runabc.co.uk/cramond-promenade-5k-10k-half-marathon-may-s7i",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "cramond-promenade-5k-10k-half-marathon-may-s7i",
+        "cramond-promenade-september"
+      ]
+    },
+    {
+      "name": "Giffordtown 5K",
+      "date": "2026-10-11",
+      "source": "https://runabc.co.uk/giffordtown-5k-road-race",
+      "reason": "Existing nearby edition requires date reconciliation",
+      "matches": [
+        {
+          "date": "2026-10-10",
+          "distance": "5K"
+        }
+      ]
+    },
+    {
+      "name": "Chatelherault Trail Races October",
+      "date": "2026-10-17",
+      "source": "https://runabc.co.uk/chatelherault-trail-races-october",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.6956521739130435,
+          "chatelherault-mud-madness",
+          "Chatelherault Mud Madness"
+        ],
+        [
+          0.65,
+          "last-duel-trail-race",
+          "Last Duel Trail Race"
+        ]
+      ]
+    },
+    {
+      "name": "Edinburgh Christmas Running Festival 5K & 10K",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/edinburgh-christmas-run-5k-10k",
+      "reason": "Possible duplicate of Great Scottish Christmas Festival on the same day"
+    },
+    {
+      "name": "RLNI Llandudno 5K & Fun Run",
+      "date": "2026-09-20",
+      "source": "https://runabc.co.uk/rlni-llandudno-5k-fun-run",
+      "reason": "Existing nearby edition requires date reconciliation",
+      "matches": [
+        {
+          "date": "2026-09-19",
+          "distance": "5K"
+        }
+      ]
+    },
+    {
+      "name": "Sheffield 10K",
+      "date": "2026-09-27",
+      "source": "https://runabc.co.uk/sheffield-10k",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.8571428571428571,
+          "sheffield-city-10k",
+          "Sheffield City 10K"
+        ],
+        [
+          0.7272727272727273,
+          "the-sheffield-tententen-10k-endcliffe-park",
+          "Sheffield Tententen 10K"
+        ]
+      ]
+    },
+    {
+      "name": "Darlington Trail Night Run",
+      "date": "2026-10-07",
+      "source": "https://runabc.co.uk/darlington-trail-west-park-night-run",
+      "reason": "Existing nearby edition requires date reconciliation",
+      "matches": [
+        {
+          "date": "2026-10-06",
+          "distance": "5K"
+        }
+      ]
+    },
+    {
+      "name": "Town Moor & Exhibition Park 5K & 10K October",
+      "date": "2026-10-11",
+      "source": "https://runabc.co.uk/town-moor-exhibition-park-5k-10k-october",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "town-moor-exhibition-park-5k-10k-december",
+        "town-moor-exhibition-park-5k-10k-october"
+      ]
+    },
+    {
+      "name": "Rising Sun Country Park 5K, 10K & Half Marathon",
+      "date": "2026-11-01",
+      "source": "https://runabc.co.uk/rising-sun-country-park-5k-10k-half-marathon",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.8181818181818182,
+          "runthrough-finsbury-park-november-2027",
+          "Finsbury Park 5K, 10K & Half Marathon — November 2027"
+        ],
+        [
+          0.8181818181818182,
+          "runthrough-finsbury-park-june-2027",
+          "Finsbury Park 5K, 10K & Half Marathon — June 2027"
+        ]
+      ]
+    },
+    {
+      "name": "Doncaster 10K",
+      "date": "2026-11-29",
+      "source": "https://runabc.co.uk/doncaster-10k",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.8148148148148148,
+          "london-easter-10k",
+          "London Easter 10K"
+        ],
+        [
+          0.782608695652174,
+          "donfaster-5k-october-2026",
+          "DonFaster 5K — October 2026"
+        ]
+      ]
+    },
+    {
+      "name": "Hoad Hill Christmas 10K",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/hoad-hill-christmas-pudding-10k-road-race",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.7142857142857143,
+          "sherwood-christmas-10k-5k-2026",
+          "Sherwood Christmas 10K & 5K 2026"
+        ],
+        [
+          0.7111111111111111,
+          "hoad-hill-harriers-summer-10k",
+          "Hoad Hill Harriers Summer 10K"
+        ]
+      ]
+    },
+    {
+      "name": "Run Media City Christmas 5K & 10K",
+      "date": "2026-12-19",
+      "source": "https://runabc.co.uk/run-mediacity-5k-10k-christmas",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.7906976744186046,
+          "run-mediacity-5k-10k-september",
+          "Run MediaCity 5K & 10K September"
+        ],
+        [
+          0.7906976744186046,
+          "run-mediacity-5k-10k-august",
+          "Run MediaCity 5K & 10K"
+        ]
+      ]
+    },
+    {
+      "name": "Nottingham Holme Run Half Marathon, 10K & 5K December",
+      "date": "2026-12-20",
+      "source": "https://runabc.co.uk/nottingham-holme-run-half-marathon-10k-5k-december",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.7213114754098361,
+          "southampton-10k",
+          "Southampton Half Marathon & 10K"
+        ],
+        [
+          0.6896551724137931,
+          "henley-half-marathon",
+          "Henley Half Marathon, 10K & 5K"
+        ]
+      ]
+    },
+    {
+      "name": "Turkey Trot Half Marathon, 10K & Fun Run",
+      "date": "2026-12-20",
+      "source": "https://runabc.co.uk/the-big-santa-dash-half-marathon-10k",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.6984126984126984,
+          "jersey-spartan-half-marathon-relay-fun-run",
+          "Jersey Spartan Half Marathon & Fun Runs"
+        ],
+        [
+          0.6923076923076923,
+          "torbay-half-marathon",
+          "Torbay Half Marathon & 10K"
+        ]
+      ]
+    },
+    {
+      "name": "Cannock Chase Trail Half Marathon & 10K",
+      "date": "2026-10-11",
+      "source": "https://runabc.co.uk/cannock-chase-trail-half-marathon-10k",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.7931034482758621,
+          "malham-half-marathon",
+          "Malham Trail Half Marathon & 10K"
+        ],
+        [
+          0.7761194029850746,
+          "carsington-water-trail-half-marathon-february-2027",
+          "Carsington Water Trail Half Marathon & 10K — February 2027"
+        ]
+      ]
+    },
+    {
+      "name": "Bedford Blues Half Marathon & 10K",
+      "date": "2026-11-01",
+      "source": "https://runabc.co.uk/bedford-10k",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.8461538461538461,
+          "atw-bedford-half-marathon-2027",
+          "ATW Bedford Half Marathon & 10K 2027"
+        ],
+        [
+          0.8235294117647058,
+          "new-forest-half-marathon-10k",
+          "New Forest Half Marathon & 10K"
+        ]
+      ]
+    },
+    {
+      "name": "Run Alton Towers 5K & 10K",
+      "date": "2026-11-14",
+      "source": "https://runabc.co.uk/run-alton-towers-5k-10k",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.7096774193548387,
+          "two-towers",
+          "Two Towers 50K"
+        ],
+        [
+          0.6666666666666666,
+          "runthrough-drayton-manor-april-2027",
+          "Drayton Manor 5K & 10K — April 2027"
+        ]
+      ]
+    },
+    {
+      "name": "Run Alton Towers Half Marathon & 5K",
+      "date": "2026-11-15",
+      "source": "https://runabc.co.uk/run-alton-towers-half-marathon-and-5k",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.7755102040816326,
+          "tatton-half-marathon-november",
+          "Run Tatton Half Marathon"
+        ],
+        [
+          0.7636363636363637,
+          "run-aintree-half-marathon-january-2027",
+          "Run Aintree Half Marathon, 10K & 5K — January 2027"
+        ]
+      ]
+    },
+    {
+      "name": "Fyfield Footpath 5K & 10K",
+      "date": "2026-09-13",
+      "source": "https://runabc.co.uk/fyfield-5k-and-10k",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "fyfield-10k",
+        "fyfield-5k-and-10k"
+      ]
+    },
+    {
+      "name": "Greenwich Park 5K & 10K September",
+      "date": "2026-09-19",
+      "source": "https://runabc.co.uk/greenwich-park-5k-10k-juniors-september",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "greenwich-park-5k-10k-juniors-september",
+        "runthrough-greenwich-park-5k-10k-november"
+      ]
+    },
+    {
+      "name": "Dorney Lake 5K, 10K & Half Marathon October",
+      "date": "2026-10-03",
+      "source": "https://runabc.co.uk/dorney-5k-10k-half-marathon-october",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "dorney-5k-10k-half-marathon-august-1",
+        "dorney-5k-10k-half-marathon-october"
+      ]
+    },
+    {
+      "name": "Run Bournemouth Saturday",
+      "date": "2026-10-10",
+      "source": "https://runabc.co.uk/run-bournemouth-saturday",
+      "reason": "Existing nearby edition requires date reconciliation",
+      "matches": [
+        {
+          "date": "2026-10-09",
+          "distance": "5K"
+        }
+      ]
+    },
+    {
+      "name": "Wacky Run Series October",
+      "date": "2026-10-11",
+      "source": "https://runabc.co.uk/wacky-run-series-may-2026-27-sxo",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "wacky-run-series-may-2026-27-oay",
+        "wacky-run-series-may-2026-27-wf4"
+      ]
+    },
+    {
+      "name": "Wacky Run Series November",
+      "date": "2026-11-01",
+      "source": "https://runabc.co.uk/wacky-run-series-may-2026-27-aqf",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "wacky-run-series-may-2026-27-oay",
+        "wacky-run-series-may-2026-27-wf4"
+      ]
+    },
+    {
+      "name": "Remembrance Run Essex",
+      "date": "2026-11-07",
+      "source": "https://runabc.co.uk/remembrance-run-essex",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.8484848484848485,
+          "remembrance-run-ferry-meadows",
+          "Remembrance Run"
+        ],
+        [
+          0.8108108108108109,
+          "ea-runevents-atw-remembrance-runs-saffron-walden",
+          "ATW Remembrance Runs"
+        ]
+      ]
+    },
+    {
+      "name": "MoRun Whitstable & Herne Bay",
+      "date": "2026-11-07",
+      "source": "https://runabc.co.uk/morun-whitstable",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.9545454545454546,
+          "rb-run-whitstable-herne-bay-september",
+          "Run Whitstable & Herne Bay September 2026"
+        ],
+        [
+          0.5,
+          "inflatable-5k-donnington-park",
+          "Inflatable 5K Derby"
+        ]
+      ]
+    },
+    {
+      "name": "Marden Half Marathon & 10K",
+      "date": "2026-11-15",
+      "source": "https://runabc.co.uk/marden-half-marathon",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.8095238095238095,
+          "stroud-half-marathon",
+          "Stroud Half Marathon & 10K"
+        ],
+        [
+          0.8095238095238095,
+          "dorset-half-marathon-10k",
+          "Dorset Half Marathon & 10K"
+        ]
+      ]
+    },
+    {
+      "name": "Olympic Park 5K & 10K November",
+      "date": "2026-11-21",
+      "source": "https://runabc.co.uk/runthrough-olympic-park-5k-10k-november",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.7441860465116279,
+          "runthrough-chase-the-sun-olympic-park-5k-10k-august",
+          "Chase The Sun Olympic Park 5K & 10K"
+        ],
+        [
+          0.7272727272727273,
+          "chase-the-moon-olympic-park-5k-10k-october",
+          "Chase The Moon Olympic Park 5K & 10K"
+        ]
+      ]
+    },
+    {
+      "name": "Chase The Moon Battersea 5K & 10K November",
+      "date": "2026-11-25",
+      "source": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-november",
+      "reason": "Already covered by existing Battersea Park editions on the same date"
+    },
+    {
+      "name": "Regent’s Park 5K & 10K November",
+      "date": "2026-11-28",
+      "source": "https://runabc.co.uk/regentrsquos-park-5k-10k-december",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "regents-park-5k-10k-august",
+        "regents-park-5k-10k-october"
+      ]
+    },
+    {
+      "name": "Finsbury Park 5K, 10K & Half Marathon November",
+      "date": "2026-11-29",
+      "source": "https://runabc.co.uk/finsbury-park-5k-10k-half-marathon-november",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "finsbury-park-half-marathon-5k-10k-half-marathon-april",
+        "runthrough-finsbury-park-june-2027",
+        "runthrough-finsbury-park-november-2027"
+      ]
+    },
+    {
+      "name": "London Riverside 1.5K, 10K & Half Marathon",
+      "date": "2026-11-29",
+      "source": "https://runabc.co.uk/london-riverside-10k",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.7887323943661971,
+          "richmond-autumn-riverside-10k",
+          "Richmond Autumn Riverside 10K & Half Marathon"
+        ],
+        [
+          0.7368421052631579,
+          "riverside-10m",
+          "Riverside Half Marathon & 10K"
+        ]
+      ]
+    },
+    {
+      "name": "Wacky Run Series December",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/wacky-run-series-may-2026-27-y4j",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "wacky-run-series-may-2026-27-oay",
+        "wacky-run-series-may-2026-27-wf4"
+      ]
+    },
+    {
+      "name": "London Running Festival",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/london-running-festival",
+      "reason": "Possible existing identity requires review",
+      "matches": [
+        [
+          0.8292682926829268,
+          "runthrough-leeds-running-festival-august",
+          "Leeds Running Festival"
+        ],
+        [
+          0.8292682926829268,
+          "runthrough-leeds-august-2027",
+          "Leeds Running Festival — August 2027"
+        ]
+      ]
+    },
+    {
+      "name": "Mornington Chasers Regent's Park 10K December",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/mornington-chasers-winter-10k-december",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "mornington-chasers-regents-park-10k-october",
+        "mornington-chasers-winter-10k-november"
+      ]
+    },
+    {
+      "name": "Battersea Park 5K, 10K & Half Marathon December",
+      "date": "2026-12-06",
+      "source": "https://runabc.co.uk/runthrough-battersea-park-5k-10k-december",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "battersea-park-5k-10k-half-marathon-february-2027",
+        "battersea-park-half-marathon-december",
+        "battersea-park-half-marathon-march-2027",
+        "battersea-park-half-marathon-november",
+        "runthrough-battersea-park-5k-10k-september",
+        "runthrough-battersea-park-january-2027",
+        "runthrough-battersea-park-july-2027",
+        "runthrough-battersea-park-november-2027",
+        "runthrough-battersea-park-september-2027"
+      ]
+    },
+    {
+      "name": "Victoria Park 5K, 10K & Half Marathon December",
+      "date": "2026-12-12",
+      "source": "https://runabc.co.uk/runthrough-victoria-park-5k-10k-half-marathon-december",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "runthrough-victoria-park-april-2027",
+        "runthrough-victoria-park-december-2027",
+        "runthrough-victoria-park-february-2027",
+        "runthrough-victoria-park-may-2027",
+        "runthrough-victoria-park-october-2027",
+        "victoria-park-5k-10k-half-marathon-january"
+      ]
+    },
+    {
+      "name": "Running Tribe Races December",
+      "date": "2026-12-12",
+      "source": "https://runabc.co.uk/running-tribe-races-december",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "running-tribe-races-november",
+        "running-tribe-races-october"
+      ]
+    },
+    {
+      "name": "Chase The Moon Battersea 5K & 10K December",
+      "date": "2026-12-16",
+      "source": "https://runabc.co.uk/chase-the-moon-battersea-5k-10k-december",
+      "reason": "Already covered by existing Battersea Park editions on the same date"
+    },
+    {
+      "name": "Regent’s Park 5K & 10K December",
+      "date": "2026-12-19",
+      "source": "https://runabc.co.uk/regents-park-5k-10k-december",
+      "reason": "Ambiguous existing identities",
+      "matches": [
+        "regents-park-5k-10k-august",
+        "regents-park-5k-10k-october"
+      ]
+    }
+  ],
+  "skipped": [
+    "duthie-park-5k-10k-2026|2026-09-12|5K",
+    "up-and-running-5k-and-10k-september|2026-09-13|10K",
+    "cumbernauld-10k-run|2026-09-13|10K",
+    "westside-runners-10k-5k-fun-run|2026-09-19|10K",
+    "maggies-5k-10k-chase|2026-09-20|10K",
+    "toms-cairn-10k-trail-race|2026-09-20|10K",
+    "penrith-rotary-10k-trail-run|2026-10-04|10K",
+    "the-meadows-5k-10-october|2026-10-10|10K",
+    "up-and-running-events-alexandra-park-5k-10k-january-osv|2026-10-17|10K",
+    "costorphine-hill-5k-10k-15k-20k|2026-10-18|10K",
+    "cramond-promenade-5k-10k-half-marathon-october|2026-10-25|10K",
+    "helvellyn-trail-run-10k|2026-10-31|10K",
+    "hermitage-of-braid-and-blackford-hill-10km-and-5km-trail-runs-and-festive-fun-run|2026-11-22|5K",
+    "hot-chocolate-5k-10k-edinburgh|2026-11-22|10K",
+    "queens-park-5k-10k-october-4ho|2026-12-06|10K",
+    "queens-park-5k-10k-october-4ho|2026-12-06|10K",
+    "queens-park-5k-10k-october-4ho|2026-12-06|5K",
+    "landaid-north-west-10k-5k|2026-09-10|10K",
+    "ea-runevents-even-splits-york-5k-series-york|2026-09-11|5K",
+    "tatton-10k-september|2026-09-12|10K",
+    "nathans-5k-10k|2026-09-13|10K",
+    "styles-athon-5k-10k-fun-run|2026-09-19|10K",
+    "snape-10k|2026-09-19|10K",
+    "evensplits-leeds-5k-series-2026|2026-09-23|5K",
+    "run-mediacity-5k-10k-september|2026-09-24|10K",
+    "315-national-fitness-5k|2026-09-26|10K",
+    "rrf-half|2026-09-27|10K",
+    "run-aintree-5k-10k-and-half-marathon-september|2026-09-27|10K",
+    "no-walk-in-the-park-5k-august|2026-10-03|5K",
+    "run-yorkshire-half-marathon-10k-5k|2026-10-04|10K",
+    "ea-runevents-even-splits-york-5k-series-york|2026-10-09|5K",
+    "tatton-10k-october|2026-10-10|10K",
+    "abergele-10k|2026-10-18|10K",
+    "craggrunner-sprint-5k-august|2026-10-24|5K",
+    "whixley-5k-10k|2026-10-25|10K",
+    "piglove-by-the-river-5k-10k-october|2026-10-28|10K",
+    "evensplits-leeds-5k-series-2026|2026-10-28|5K",
+    "run-tatton-5k-10k-november|2026-11-07|10K",
+    "ea-runevents-even-splits-york-5k-series-york|2026-11-13|5K",
+    "sherwood-christmas-10k-5k-2026|2026-11-22|5K",
+    "evensplits-leeds-5k-series-2026|2026-11-25|5K",
+    "ea-runevents-ravenstonedale-10k-road-race-kirkby-stephen|2026-11-28|10K",
+    "run-heaton-5k-10k-half-marathon-november|2026-11-29|5K",
+    "run-tatton-5k-10k-november|2026-12-12|10K",
+    "run-gateshead-hot-chocolate-5k-2026|2026-12-13|5K",
+    "town-moor-exhibition-park-5k-10k-december|2026-12-20|10K",
+    "runthrough-heaton-park-january-2027|2027-01-17|10K (existing source under run-heaton-5k-10k-half-marathon-january)",
+    "runthrough-heaton-park-january-2027|2027-01-17|5K",
+    "charlton-hayes-5k-10k|2026-09-13|10K",
+    "balsall-common-fun-run|2026-09-13|10K",
+    "grantchester-charity|2026-09-27|10K",
+    "ea-runevents-abbots-langley-tough-ten-abbots-langley|2026-10-04|10K",
+    "ea-runevents-abbots-langley-tough-ten-abbots-langley|2026-10-04|5K",
+    "thompson-millennium-green|2026-10-04|10K",
+    "felbrigg-trail-run|2026-10-11|10K",
+    "brewers-10k|2026-10-18|10K",
+    "shipston-home-nursing-10k-walton-hall|2026-10-18|10K",
+    "run-breckland-sapiston|2026-10-18|10K",
+    "imperial-war-museum-duxford-dash-5k-10k|2026-10-25|10K",
+    "far-peak-10k-half-marathon|2026-11-22|10K",
+    "ea-runevents-carsington-water-2026-series-ashbourne|2026-12-05|10K",
+    "new-forest-marathon-half|2026-09-13|10K",
+    "wingham-10k-5k|2026-09-13|10K",
+    "tavy-5-august|2026-09-19|5K",
+    "runthrough-olympic-park-5k-10k-september|2026-09-19|10K",
+    "the-intersport-run-reigate-half-marathon|2026-09-20|10K",
+    "steps-for-change-childrens-challenge-5k-or-10k|2026-09-20|10K",
+    "run-dorney-5k-10k-half-marathon-aug|2026-09-26|10K",
+    "hyde-park-5k-10k-september|2026-09-26|10K",
+    "bradleys-autumn-exmouth-10k|2026-09-27|10K",
+    "runthrough-clapham-common-5k-10k-august|2026-09-27|10K",
+    "manuden-fun-run-10k|2026-09-27|10K",
+    "rtt-margam-trail-10k-5k|2026-09-27|10K",
+    "runthrough-victoria-park-5k-10k-half-marathon-october|2026-10-03|10K",
+    "chase-the-moon-battersea-5k-10k-october|2026-10-07|10K",
+    "frieth-hilly-10k5k|2026-10-11|10K",
+    "rushmoor-wellesley-10k|2026-10-11|10K",
+    "runthrough-greenwich-park-5k-10k-november|2026-11-01|10K",
+    "crowborough-10k|2026-11-01|10K",
+    "ea-runevents-leigh-on-sea-10k-leigh-on-sea|2026-11-01|10K",
+    "ea-runevents-leigh-on-sea-10k-leigh-on-sea|2026-11-01|5K",
+    "runthrough-victoria-park-may-2027|2026-11-07|10K",
+    "runthrough-victoria-park-may-2027|2026-11-07|5K",
+    "dorney-5k-10k-half-marathon-august-1|2026-11-08|10K",
+    "dorney-5k-10k-half-marathon-august-1|2026-11-08|5K",
+    "runuk-battersea-park-10k|2026-11-15|10K",
+    "tavy-5-august|2026-11-21|5K",
+    "ea-runevents-wimbledon-common-series-wimbledon|2026-11-22|10K",
+    "friday-night-under-the-lights-road-5k-september|2026-11-27|5K",
+    "rtt-afan-forest-trail-10k-5k|2026-11-29|10K",
+    "ea-runevents-wimbledon-common-series-wimbledon|2026-12-20|10K",
+    "ea-runevents-wimbledon-common-series-wimbledon|2026-12-20|5K",
+    "runthrough-battersea-park-january-2027|2027-01-09|5K",
+    "victoria-park-5k-10k-half-marathon-january|2027-01-10|10K",
+    "runthrough-chase-the-moon-battersea-january-2027|2027-01-27|5K",
+    "dromiskin-5k-2026|2026-09-12|5K",
+    "luggacurren-5k-2026|2026-09-13|5K",
+    "ballydesmond-5k-2026|2026-09-18|5K",
+    "bunninadden-charity-road-race-5k-2026|2026-09-19|5K",
+    "lifford-strabane-5k-2026|2026-09-20|5K",
+    "aughagower-ac-5k-2026|2026-09-26|5K",
+    "tomnafinnoge-ac-5k-2026|2026-09-26|5K",
+    "rathfarnham-5k-road-race-2026|2026-09-27|5K",
+    "rebel-run-5k-2026|2026-10-18|5K",
+    "longwood-village-5k-10k-2026|2026-10-18|5K",
+    "savills-sandymount-night-run-5k-october-2026|2026-10-20|5K",
+    "remembrance-run-5k-2026|2026-11-08|5K",
+    "duhallow-ac-5k-classic-2026|2026-12-06|5K",
+    "drogheda-christmas-5k-2026|2026-12-20|5K",
+    "tom-brennan-memorial-5k-2027|2027-01-01|5K",
+    "the-lakes-10k-blessington|2026-09-12|10K",
+    "dundalk-half-marathon-10k-2027|2027-01-31|10K",
+    "rock-the-lough-5k-2026|2026-09-13|5K",
+    "seaton-classic-10k|2026-09-26|10K",
+    "belfast-bay-run-10k|2026-10-04|10K",
+    "galloper-thompson-5k-2026|2026-10-16|5K",
+    "saintfield-5k-10k-2026|2026-10-18|5K",
+    "phoenix-energy-belfast-city-5k-fun-run-2026|2026-11-15|5K",
+    "ciyms-festive-5k-run-2026|2026-12-28|5K"
+  ]
+}

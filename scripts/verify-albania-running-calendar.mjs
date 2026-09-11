@@ -6,10 +6,12 @@ import { isoToFlagEmoji, resolveCountry } from "../src/lib/athrecs/countries.ts"
 import { collapseSameEventDate } from "../src/lib/athrecs/dedupe.ts";
 
 const CHECKED_AT = "2026-08-26";
-const CALENDAR_START = "2026-01-01";
+const CALENDAR_START = "2025-11-02";
 const HORIZON = "2027-12-31";
 
 const expected = [
+  ["durres-marathon", "2025-11-02", ["10K", "5K"]],
+  ["vlora-half-marathon", "2025-11-30", ["10K", "5K", "Half"]],
   ["berat-green-half-marathon", "2026-04-05", ["10K", "Half"]],
   ["martyrs-day-trail-half-marathon-tirana", "2026-05-05", ["10K", "5K", "Half"]],
   ["kukes-half-marathon", "2026-04-26", ["10K", "Half"]],
@@ -54,7 +56,7 @@ function groupedDistances(editions) {
 }
 
 assert.equal(albaniaRaceSeries.length, 16, "Unexpected Albania event-series count");
-assert.equal(albaniaRaceEditions.length, 48, "Unexpected Albania advertised-distance count");
+assert.equal(albaniaRaceEditions.length, 53, "Unexpected Albania advertised-distance count");
 
 const albaniaCountry = resolveCountry({ country: "Albania" });
 assert.equal(albaniaCountry.iso, "AL", "Albania must resolve to its ISO country code");
@@ -123,7 +125,9 @@ for (const edition of albaniaRaceEditions) {
 for (const monitoredSlug of ["vlora-half-marathon", "durres-marathon"]) {
   assert(seriesBySlug.has(monitoredSlug), `Missing monitored Albania series: ${monitoredSlug}`);
   assert(
-    !albaniaRaceEditions.some((edition) => edition.seriesSlug === monitoredSlug),
+    !albaniaRaceEditions.some(
+      (edition) => edition.seriesSlug === monitoredSlug && edition.date >= "2026-01-01",
+    ),
     `Unadvertised future edition was invented for ${monitoredSlug}`,
   );
 }

@@ -1,0 +1,2663 @@
+{
+  "events": [
+    {
+      "slug": "southend-10k-classic",
+      "name": "City of Southend AC Annual 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Southend-on-Sea",
+      "distances": [
+        "3K"
+      ]
+    },
+    {
+      "slug": "lewes-downland-10-5",
+      "name": "Lewes Downland 10 & 5 Mile",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Lewes",
+      "distances": [
+        "5mi"
+      ]
+    },
+    {
+      "slug": "twyford-charity-5k",
+      "name": "Twyford Charity Fun Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Berkshire",
+      "distances": [
+        "3K"
+      ]
+    },
+    {
+      "slug": "running-miles-jubilee-river-races-3",
+      "name": "Jubilee River — October Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Berkshire",
+      "city": "Slough",
+      "distances": [
+        "Half",
+        "10mi",
+        "5.24mi"
+      ]
+    },
+    {
+      "slug": "south-hams-ultra",
+      "name": "South Hams Ultra",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Plymouth",
+      "distances": [
+        "Marathon"
+      ]
+    },
+    {
+      "slug": "endurancelife-suffolk",
+      "name": "Endurancelife Suffolk",
+      "sport": "Running",
+      "country": "England",
+      "county": "Suffolk",
+      "city": "Dunwich",
+      "distances": [
+        "Half",
+        "10K"
+      ]
+    },
+    {
+      "slug": "wildwood-trail-series-epping-forest",
+      "name": "Wildwood Trail Series Epping Forest",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Chingford Plain",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "hampton-court-palace-running-festival",
+      "name": "Hampton Court Palace Running Festival",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "East Molesey",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "marshfield-mudlark",
+      "name": "Marshfield Mudlark",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Gloucestershire",
+      "distances": [
+        "11K"
+      ]
+    },
+    {
+      "slug": "richmond-autumn-riverside-10k",
+      "name": "Richmond Autumn Riverside 10K & Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "Richmond upon Thames",
+      "distances": [
+        "Half"
+      ]
+    },
+    {
+      "slug": "ridgeway-run-155k",
+      "name": "Ridgeway Run 15.5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Herts",
+      "distances": [
+        "15K"
+      ]
+    },
+    {
+      "slug": "tarmac-twister-trail",
+      "name": "Tarmac Twister Trail",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Chelmsford",
+      "distances": [
+        "6mi"
+      ]
+    },
+    {
+      "slug": "womens-run-series-battersea-october",
+      "name": "Women’s Run Series Battersea",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Battersea",
+      "distances": [
+        "5K",
+        "10K"
+      ]
+    },
+    {
+      "slug": "blackdown-hills-trail-run",
+      "name": "Blackdown Hill Challenge — 10K, 4.5K & Junior Races",
+      "sport": "Running",
+      "country": "England",
+      "county": "West Sussex",
+      "city": "Fernhurst",
+      "distances": [
+        "4.5K"
+      ]
+    },
+    {
+      "slug": "eden-marathon",
+      "name": "Eden Project Marathon & Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Cornwall",
+      "distances": [
+        "Marathon"
+      ]
+    },
+    {
+      "slug": "dave-jones-prom-5m-race-2-of-9",
+      "name": "Dave Jones Prom 5M Race 2 of 9",
+      "sport": "Running",
+      "country": "England",
+      "county": "Somerset",
+      "city": "Weston-Super-Mare",
+      "area": "Marine Parade",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/weston-prom-5m-race-2-of-9",
+      "summary": "5mi, 1mi road running in Weston-Super-Mare.",
+      "description": "5mi, 1mi running event in Weston-Super-Mare, taking place on 2026-10-22. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "5mi",
+        "1mi"
+      ]
+    },
+    {
+      "slug": "battersea-park-half-marathon-october",
+      "name": "Battersea Park Running Festival",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "Half",
+        "5K"
+      ]
+    },
+    {
+      "slug": "joydens-wood-cross-country-races-1",
+      "name": "Joydens Wood Cross Country Races 1",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Bexley",
+      "area": "Joyden's Wood",
+      "surface": "XC",
+      "website": "https://runabc.co.uk/joydens-wood-cross-country-races-1",
+      "summary": "5mi xc running in Bexley.",
+      "description": "5mi running event in Bexley, taking place on 2026-10-24. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "5mi"
+      ]
+    },
+    {
+      "slug": "andover-half-marathon",
+      "name": "Andover Half Marathon & 12K",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Andover",
+      "distances": [
+        "12K"
+      ]
+    },
+    {
+      "slug": "polesden-lacey-10k-october",
+      "name": "Polesden Lacey 10K October",
+      "sport": "Running",
+      "country": "England",
+      "county": "Surrey",
+      "city": "Dorking",
+      "area": "Polesden Lacey National Trust",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/polesden-lacey-10k",
+      "summary": "10K trail running in Dorking.",
+      "description": "10K running event in Dorking, taking place on 2026-10-25. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10K"
+      ]
+    },
+    {
+      "slug": "fleet-10k-5k",
+      "name": "Fleet 10K & 5K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Fleet",
+      "area": "The Harlington Centre",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/fleet-10k5k-peter-driver-memorial",
+      "summary": "10K, 5K road running in Fleet.",
+      "description": "10K, 5K running event in Fleet, taking place on 2026-10-25. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "canterbury-trail-marathon-half-marathon",
+      "name": "Canterbury Trail Marathon & Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Canterbury",
+      "distances": [
+        "Marathon"
+      ]
+    },
+    {
+      "slug": "attack-of-the-zombie-cows",
+      "name": "Attack of the Zombie Cows",
+      "sport": "Running",
+      "country": "England",
+      "county": "Kent",
+      "city": "Dover",
+      "distances": [
+        "Half",
+        "10K",
+        "10mi",
+        "3.28mi"
+      ]
+    },
+    {
+      "slug": "brutal-halloween",
+      "name": "Brutal Halloween",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Bordon",
+      "area": "Hogmoor Inclosure",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/brutal-halloween",
+      "summary": "6.6K, 5K, 10K trail running in Bordon.",
+      "description": "6.6K, 5K, 10K running event in Bordon, taking place on 2026-10-31. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "6.6K",
+        "5K",
+        "10K"
+      ]
+    },
+    {
+      "slug": "wendover-trail-marathon",
+      "name": "Wendover Woods Marathon, Half Marathon & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire",
+      "city": "Aston Clinton",
+      "distances": [
+        "Half"
+      ]
+    },
+    {
+      "slug": "cornish-marathon",
+      "name": "Cornish Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "Cornwall",
+      "city": "Pensilva",
+      "area": "Millenium Centre",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/cornish-marathon",
+      "summary": "Marathon road running in Pensilva.",
+      "description": "Marathon running event in Pensilva, taking place on 2026-11-01. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Marathon"
+      ]
+    },
+    {
+      "slug": "deal-castle-5-mile",
+      "name": "Deal Castle 5 Mile",
+      "sport": "Running",
+      "country": "England",
+      "county": "Kent",
+      "city": "Deal",
+      "area": "Sea Scout Hut",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/deal-castle-5-mile",
+      "summary": "5mi road running in Deal.",
+      "description": "5mi running event in Deal, taking place on 2026-11-01. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "5mi"
+      ]
+    },
+    {
+      "slug": "gunpowder-trot",
+      "name": "Gunpowder Trot",
+      "sport": "Running",
+      "country": "England",
+      "county": "Sussex",
+      "city": "Horsham",
+      "area": "Horsham Sports Club",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/gunpowder-trot",
+      "summary": "4.5mi mixed running in Horsham.",
+      "description": "4.5mi running event in Horsham, taking place on 2026-11-01. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "4.5mi"
+      ]
+    },
+    {
+      "slug": "leigh-on-sea-striders-10k",
+      "name": "Leigh-on-Sea Striders 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Leigh-on-Sea",
+      "area": "Station Car Park",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/leigh-on-sea-striders-10k",
+      "summary": "10K, 5K road running in Leigh-on-Sea.",
+      "description": "10K, 5K running event in Leigh-on-Sea, taking place on 2026-11-01. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10K",
+        "5K"
+      ]
+    },
+    {
+      "slug": "phoenix-lest-we-forget",
+      "name": "Phoenix Lest We Forget",
+      "sport": "Running",
+      "country": "England",
+      "county": "Surrey",
+      "city": "Walton-on-Thames",
+      "area": "XCEL Sports Hub",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/phoenix-armistice-lest-we-forget-2022",
+      "summary": "Half, Marathon, 5K, 10K, 10mi, 3.3mi mixed running in Walton-on-Thames.",
+      "description": "Half, Marathon, 5K, 10K, 10mi, 3.3mi running event in Walton-on-Thames, taking place on 2026-11-07. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "5K",
+        "10K",
+        "10mi",
+        "3.3mi"
+      ]
+    },
+    {
+      "slug": "big-night-out-winchester-trails",
+      "name": "Big Night Out Winchester Trails",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Winchester",
+      "area": "Winchester Athletics Track",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/big-night-out-winchester-trails",
+      "summary": "12K, 22K trail running in Winchester.",
+      "description": "12K, 22K running event in Winchester, taking place on 2026-11-07. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "12K",
+        "22K"
+      ]
+    },
+    {
+      "slug": "over-the-hills-multi-terrain-12k",
+      "name": "Over The Hills Multi Terrain 12K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Wiltshire",
+      "city": "Bradford on Avon",
+      "area": "Barton Farm Country Park",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/over-the-hills-multi-terrain-12k",
+      "summary": "12K mixed running in Bradford on Avon.",
+      "description": "12K running event in Bradford on Avon, taking place on 2026-11-08. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "12K"
+      ]
+    },
+    {
+      "slug": "springfield-striders-hobble",
+      "name": "Springfield Striders Hobble",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Chelmsford",
+      "area": "Galleywood Common",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/springfield-striders-hobble",
+      "summary": "6mi, 16mi trail running in Chelmsford.",
+      "description": "6mi, 16mi running event in Chelmsford, taking place on 2026-11-08. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "6mi",
+        "16mi"
+      ]
+    },
+    {
+      "slug": "stowmarket-scenic-7",
+      "name": "Stowmarket Scenic 7",
+      "sport": "Running",
+      "country": "England",
+      "county": "Suffolk",
+      "city": "Stowmarket",
+      "area": "Mid Suffolk Leisure Centre",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/stowmarket-scenic-7",
+      "summary": "7mi road running in Stowmarket.",
+      "description": "7mi running event in Stowmarket, taking place on 2026-11-08. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "7mi"
+      ]
+    },
+    {
+      "slug": "h-t-remembrance-sunday-run",
+      "name": "H&T Remembrance Sunday Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Brightlingsea",
+      "area": "Bateman’s Café",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/ht-remembrance-sunday-run",
+      "summary": "Half, Marathon, 10K, 6.5mi trail running in Brightlingsea.",
+      "description": "Half, Marathon, 10K, 6.5mi running event in Brightlingsea, taking place on 2026-11-08. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "10K",
+        "6.5mi"
+      ]
+    },
+    {
+      "slug": "phoenix-remembrance-day-marathon-half-marathon",
+      "name": "Phoenix Remembrance Day Marathon & Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "Surrey",
+      "city": "Walton on Thames",
+      "area": "Xcel Sports Hub Stadium",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/phoenix-remembrance-day-marathon-half-marathon",
+      "summary": "Half, Marathon mixed running in Walton on Thames.",
+      "description": "Half, Marathon running event in Walton on Thames, taking place on 2026-11-08. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon"
+      ]
+    },
+    {
+      "slug": "phoenix-hampshire-autumn-feisty-saturday",
+      "name": "Phoenix Hampshire Autumn Feisty Saturday",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Winchester",
+      "area": "Garnier Road Car Park",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/phoenix-hampshire-autumn-feisty",
+      "summary": "Half, Marathon, 10mi, 2.6mi road running in Winchester.",
+      "description": "Half, Marathon, 10mi, 2.6mi running event in Winchester, taking place on 2026-11-14. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "10mi",
+        "2.6mi"
+      ]
+    },
+    {
+      "slug": "bristol-morun",
+      "name": "Bristol MoRun",
+      "sport": "Running",
+      "country": "England",
+      "county": "Gloucestershire",
+      "city": "Bristol",
+      "distances": [
+        "Half"
+      ]
+    },
+    {
+      "slug": "rolys-run-2026",
+      "name": "Roly's Run 2026",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Swanmore",
+      "distances": [
+        "15mi",
+        "20mi"
+      ]
+    },
+    {
+      "slug": "hartfield-honey-run",
+      "name": "Hartfield Honey Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Sussex",
+      "city": "Hartwell",
+      "area": "Cricket Pavillion, Town Croft",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/hartfield-honey-run",
+      "summary": "Half, 10K trail running in Hartwell.",
+      "description": "Half, 10K running event in Hartwell, taking place on 2026-11-15. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "10K"
+      ]
+    },
+    {
+      "slug": "the-one-in-the-park-victoria-november",
+      "name": "The One In The Park Victoria November",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Tower Hamlets",
+      "area": "Victoria Park",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/the-one-in-the-park-victoria-park-half-marathon",
+      "summary": "Half, 10K, 10mi road running in Tower Hamlets.",
+      "description": "Half, 10K, 10mi running event in Tower Hamlets, taking place on 2026-11-15. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "10K",
+        "10mi"
+      ]
+    },
+    {
+      "slug": "coastbuster-10-mile-10k",
+      "name": "Coastbuster 10 Mile & 10K",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Ramsgate",
+      "distances": [
+        "10mi"
+      ]
+    },
+    {
+      "slug": "bath-hilly-half",
+      "name": "Bath Hilly Half",
+      "sport": "Running",
+      "country": "England",
+      "county": "Somerset",
+      "city": "Bath",
+      "area": "The Racecourse",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/bath-hilly-half",
+      "summary": "Half, 12.5K trail running in Bath.",
+      "description": "Half, 12.5K running event in Bath, taking place on 2026-11-15. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "12.5K"
+      ]
+    },
+    {
+      "slug": "maverick-exposure-lights-dark-castle",
+      "name": "Maverick Exposure Lights Dark Castle",
+      "sport": "Running",
+      "country": "England",
+      "county": "Dorset",
+      "city": "Wareham",
+      "area": "Corfe Castle",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/maverick-exposure-lights-dark-dorset",
+      "summary": "15K, 5K, 11K trail running in Wareham.",
+      "description": "15K, 5K, 11K running event in Wareham, taking place on 2026-11-20. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "15K",
+        "5K",
+        "11K"
+      ]
+    },
+    {
+      "slug": "dark-valley-night-trails",
+      "name": "Dark Valley Night Trails",
+      "sport": "Running",
+      "country": "England",
+      "county": "Dorset",
+      "city": "Ringwood",
+      "area": "Moors Valley Country Park",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/dark-valley-night-trails",
+      "summary": "Half, 10K, 20K, 30K trail running in Ringwood.",
+      "description": "Half, 10K, 20K, 30K running event in Ringwood, taking place on 2026-11-21. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "10K",
+        "20K",
+        "30K"
+      ]
+    },
+    {
+      "slug": "budleigh-blister",
+      "name": "Budleigh Blister",
+      "sport": "Running",
+      "country": "England",
+      "county": "Devon",
+      "city": "Budleigh Salterton",
+      "area": "The Holt",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/budleigh-blister",
+      "summary": "10mi trail running in Budleigh Salterton.",
+      "description": "10mi running event in Budleigh Salterton, taking place on 2026-11-22. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10mi"
+      ]
+    },
+    {
+      "slug": "new-forest-stinger",
+      "name": "New Forest Stinger",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "New Forest",
+      "area": "Ocknell Campsite",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/new-forest-stinger-2018",
+      "summary": "10mi, 5mi mixed running in New Forest.",
+      "description": "10mi, 5mi running event in New Forest, taking place on 2026-11-22. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10mi",
+        "5mi"
+      ]
+    },
+    {
+      "slug": "ea-runevents-brent-knoll-race-burnham-on-sea",
+      "name": "Brent Knoll Race",
+      "sport": "Running",
+      "country": "England",
+      "county": "Somerset",
+      "city": "Burnham-on-Sea",
+      "distances": [
+        "5.75mi"
+      ]
+    },
+    {
+      "slug": "combe-crawler",
+      "name": "Combe Crawler",
+      "sport": "Running",
+      "country": "England",
+      "county": "Devon",
+      "city": "Ilfracombe",
+      "area": "Marlborough Park",
+      "surface": "XC",
+      "website": "https://runabc.co.uk/combe-crawler",
+      "summary": "8.5mi xc running in Ilfracombe.",
+      "description": "8.5mi running event in Ilfracombe, taking place on 2026-11-22. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "8.5mi"
+      ]
+    },
+    {
+      "slug": "hadleigh-5-10-mile",
+      "name": "Hadleigh 5 & 10 Mile",
+      "sport": "Running",
+      "country": "England",
+      "county": "Suffolk",
+      "city": "Hadleigh",
+      "area": "Tinkers Lane",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/hadleigh-5-10-mile",
+      "summary": "10mi, 5mi mixed running in Hadleigh.",
+      "description": "10mi, 5mi running event in Hadleigh, taking place on 2026-11-22. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10mi",
+        "5mi"
+      ]
+    },
+    {
+      "slug": "phoenix-christmas-advent-run",
+      "name": "Phoenix Christmas Advent Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Surrey",
+      "city": "Walton on Thames",
+      "area": "Xcel Leisure Centre",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/phoenix-christmas-advent-run",
+      "summary": "Half, Marathon, 5K, 10K, 10mi, 3.28mi mixed running in Walton on Thames.",
+      "description": "Half, Marathon, 5K, 10K, 10mi, 3.28mi running event in Walton on Thames, taking place on 2026-11-29. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "5K",
+        "10K",
+        "10mi",
+        "3.28mi"
+      ]
+    },
+    {
+      "slug": "hatfield-5",
+      "name": "Hatfield 5",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire, Bedfordshire & Hertfordshire",
+      "city": "Hatfield",
+      "area": "University of Hertfordshire",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/hatfield-5-mile-road-race",
+      "summary": "5mi road running in Hatfield.",
+      "description": "5mi running event in Hatfield, taking place on 2026-11-29. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "5mi"
+      ]
+    },
+    {
+      "slug": "mapledurham-10-half",
+      "name": "Mapledurham 10 & Half",
+      "sport": "Running",
+      "country": "England",
+      "county": "Berkshire",
+      "city": "Reading",
+      "area": "Mapledurham Estate",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/mapledurham-10",
+      "summary": "Half, 10mi, 10K trail running in Reading.",
+      "description": "Half, 10mi, 10K running event in Reading, taking place on 2026-11-29. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "10mi",
+        "10K"
+      ]
+    },
+    {
+      "slug": "avr-wiltshire-half-marathon",
+      "name": "AVR Wiltshire Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "Wiltshire",
+      "city": "Edington",
+      "area": "Station Yard",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/wiltshire-half-marathon",
+      "summary": "Half road running in Edington.",
+      "description": "Half running event in Edington, taking place on 2026-11-29. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half"
+      ]
+    },
+    {
+      "slug": "victory-5-mile",
+      "name": "Victory 5 Mile",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Portsmouth",
+      "area": "Lakeside North Harbour",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/victory-5m",
+      "summary": "5mi road running in Portsmouth.",
+      "description": "5mi running event in Portsmouth, taking place on 2026-11-29. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "5mi"
+      ]
+    },
+    {
+      "slug": "endurancelife-dorset",
+      "name": "Endurancelife Dorset",
+      "sport": "Running",
+      "country": "England",
+      "county": "Dorset",
+      "city": "Swanage",
+      "area": "Jurassic Coast Path",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/cts-dorest",
+      "summary": "Half, Marathon, 10K trail running in Swanage.",
+      "description": "Half, Marathon, 10K running event in Swanage, taking place on 2026-12-05. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "10K"
+      ]
+    },
+    {
+      "slug": "salisbury-plain-winter-edition-marathon-half-marathon",
+      "name": "Salisbury Plain Winter Edition Marathon & Half Marathon",
+      "sport": "Running",
+      "country": "England",
+      "county": "Wiltshire",
+      "city": "Ludgershall",
+      "area": "Old Fowler Barracks",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/salisbury-plain-winter-edition-marathon-half-marathon",
+      "summary": "Half, Marathon trail running in Ludgershall.",
+      "description": "Half, Marathon running event in Ludgershall, taking place on 2026-12-05. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon"
+      ]
+    },
+    {
+      "slug": "bournemouth-coastal-ten",
+      "name": "Bournemouth Coastal Ten",
+      "sport": "Running",
+      "country": "England",
+      "county": "South of England",
+      "city": "Bournemouth",
+      "distances": [
+        "10mi"
+      ]
+    },
+    {
+      "slug": "lucky-dip-challenge",
+      "name": "Lucky Dip Challenge",
+      "sport": "Running",
+      "country": "England",
+      "county": "Kent",
+      "city": "Gravesend",
+      "area": "The Cyclopark",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/lucky-dip-challenge",
+      "summary": "Half, Marathon, 5K, 10K, 10mi, 3.28mi mixed running in Gravesend.",
+      "description": "Half, Marathon, 5K, 10K, 10mi, 3.28mi running event in Gravesend, taking place on 2026-12-05. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "5K",
+        "10K",
+        "10mi",
+        "3.28mi"
+      ]
+    },
+    {
+      "slug": "wild-christmas-charity-run",
+      "name": "Wild Christmas Charity Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Buckinghamshire, Bedfordshire & Hertfordshire",
+      "city": "Tring, Herts",
+      "area": "Church Farm, Aldbury",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/wild-christmas-charity-run",
+      "summary": "8K, 4K road running in Tring, Herts.",
+      "description": "8K, 4K running event in Tring, Herts, taking place on 2026-12-05. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "8K",
+        "4K"
+      ]
+    },
+    {
+      "slug": "full-monty-cute-10",
+      "name": "Full Monty Cute 10",
+      "sport": "Running",
+      "country": "England",
+      "county": "Somerset",
+      "city": "Stoke Sub Hamdon",
+      "area": "Ham Hill Country Park",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/full-monty-cute-10",
+      "summary": "10.7mi trail running in Stoke Sub Hamdon.",
+      "description": "10.7mi running event in Stoke Sub Hamdon, taking place on 2026-12-06. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10.7mi"
+      ]
+    },
+    {
+      "slug": "perivale-5",
+      "name": "Perivale 5",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Ealing",
+      "area": "Perivale Park",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/perivale-5",
+      "summary": "5mi road running in Ealing.",
+      "description": "5mi running event in Ealing, taking place on 2026-12-06. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "5mi"
+      ]
+    },
+    {
+      "slug": "dawn-to-dusk-sunlight-ultra-marathon-22k",
+      "name": "Dawn to Dusk Sunlight Ultra, Marathon & 22K",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Woodford Green",
+      "area": "Teresa Gavin House",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/dawn-to-dusk-sunlight-ultra-marathon-22k",
+      "summary": "Half, Marathon, 10K road running in Woodford Green.",
+      "description": "Half, Marathon, 10K running event in Woodford Green, taking place on 2026-12-06. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "10K"
+      ]
+    },
+    {
+      "slug": "bobble-wobble-run",
+      "name": "Bobble Wobble Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Surrey",
+      "city": "Walton on Thames",
+      "area": "Xcel Leisure Centre",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/bobble-wobble-run",
+      "summary": "Half, Marathon, 5K, 10K, 10mi, 3.28mi mixed running in Walton on Thames.",
+      "description": "Half, Marathon, 5K, 10K, 10mi, 3.28mi running event in Walton on Thames, taking place on 2026-12-06. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "5K",
+        "10K",
+        "10mi",
+        "3.28mi"
+      ]
+    },
+    {
+      "slug": "thanet-coastal-5-10-mile-race",
+      "name": "Thanet Coastal 5 & 10 Mile Race",
+      "sport": "Running",
+      "country": "England",
+      "county": "Kent",
+      "city": "Cliftonville",
+      "area": "Palm Bay School",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/alan-green-memorial-10-mile-race",
+      "summary": "10mi, 5mi road running in Cliftonville.",
+      "description": "10mi, 5mi running event in Cliftonville, taking place on 2026-12-06. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10mi",
+        "5mi"
+      ]
+    },
+    {
+      "slug": "great-christmas-fun-run",
+      "name": "Great Christmas Fun Run",
+      "sport": "Running",
+      "country": "Wales",
+      "county": "Wales",
+      "city": "Swansea",
+      "distances": [
+        "5K"
+      ]
+    },
+    {
+      "slug": "maidstone-harriers-turkey-run",
+      "name": "Maidstone Harriers Turkey Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Kent",
+      "city": "Maidstone",
+      "area": "East Malling Research",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/maidstone-harriers-turkey-run",
+      "summary": "7.5mi mixed running in Maidstone.",
+      "description": "7.5mi running event in Maidstone, taking place on 2026-12-06. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "7.5mi"
+      ]
+    },
+    {
+      "slug": "santa-in-the-city-tuesday",
+      "name": "Santa In The City Tuesday",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "City Of London",
+      "area": "Paternoster Square",
+      "surface": "Road",
+      "website": "https://runabc.co.uk/santa-in-the-city-tuesday",
+      "summary": "4.5K road running in City Of London.",
+      "description": "4.5K running event in City Of London, taking place on 2026-12-08. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "4.5K"
+      ]
+    },
+    {
+      "slug": "phoenix-christmas-jumper-friday-run",
+      "name": "Phoenix Christmas Jumper Friday Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Surrey",
+      "city": "Walton on Thames",
+      "area": "Xcel Leisure Centre",
+      "surface": "Mixed",
+      "website": "https://runabc.co.uk/phoenix-christmas-jumper-friday-run",
+      "summary": "Half, Marathon, 5K, 10K, 10mi, 3.28mi mixed running in Walton on Thames.",
+      "description": "Half, Marathon, 5K, 10K, 10mi, 3.28mi running event in Walton on Thames, taking place on 2026-12-11. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "5K",
+        "10K",
+        "10mi",
+        "3.28mi"
+      ]
+    },
+    {
+      "slug": "raynedeer-run",
+      "name": "Raynedeer Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Essex",
+      "city": "Braintree",
+      "area": "Rayne Station",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/raynedeer-run",
+      "summary": "Half, Marathon, 10K, 5.3K trail running in Braintree.",
+      "description": "Half, Marathon, 10K, 5.3K running event in Braintree, taking place on 2026-12-13. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "Half",
+        "Marathon",
+        "10K",
+        "5.3K"
+      ]
+    },
+    {
+      "slug": "christmas-party-run",
+      "name": "Phoenix Hampshire Christmas Party Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Winchester",
+      "distances": [
+        "Marathon",
+        "5K",
+        "5mi",
+        "10K",
+        "10mi"
+      ]
+    },
+    {
+      "slug": "wimbledon-common-5k-10k-christmas-run",
+      "name": "Wimbledon Common 5K & 10K Christmas Run",
+      "sport": "Running",
+      "country": "England",
+      "county": "London",
+      "city": "Wimbledon Common",
+      "area": "The Causeway",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/runthrough-wimbledon-christmas-run-5k-10k",
+      "summary": "5K, 10K trail running in Wimbledon Common.",
+      "description": "5K, 10K running event in Wimbledon Common, taking place on 2026-12-20. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "5K",
+        "10K"
+      ]
+    },
+    {
+      "slug": "winter-x",
+      "name": "Winter X",
+      "sport": "Running",
+      "country": "England",
+      "county": "Hampshire",
+      "city": "Southampton",
+      "area": "The Meon Hall",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/winter-x",
+      "summary": "10K, 30K trail running in Southampton.",
+      "description": "10K, 30K running event in Southampton, taking place on 2026-12-28. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "10K",
+        "30K"
+      ]
+    },
+    {
+      "slug": "race-the-light",
+      "name": "Race The Light",
+      "sport": "Running",
+      "country": "England",
+      "county": "Devon",
+      "city": "Mothecombe",
+      "area": "Flete Estate",
+      "surface": "Trail",
+      "website": "https://runabc.co.uk/race-the-light-mothecombe",
+      "summary": "8.5mi trail running in Mothecombe.",
+      "description": "8.5mi running event in Mothecombe, taking place on 2026-12-28. See the event source for route details, eligibility and current entry arrangements.",
+      "distances": [
+        "8.5mi"
+      ]
+    },
+    {
+      "slug": "runthrough-battersea-park-january-2027",
+      "name": "Battersea Park 5K, 10K & Half Marathon — January 2027",
+      "sport": "Running",
+      "country": "England",
+      "county": "Greater London",
+      "city": "London",
+      "distances": [
+        "Half"
+      ]
+    }
+  ],
+  "editions": [
+    {
+      "eventSlug": "southend-10k-classic",
+      "date": "2026-10-04",
+      "distance": "3K",
+      "distanceKm": 3.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/southend-10k-classic",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "lewes-downland-10-5",
+      "date": "2026-10-04",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lewes-downland-10-5",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "twyford-charity-5k",
+      "date": "2026-10-04",
+      "distance": "3K",
+      "distanceKm": 3.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/twyford-charity-5k",
+      "startTime": "11:50",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "running-miles-jubilee-river-races-3",
+      "date": "2026-10-08",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/running-miles-jubilee-river-races-3",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "running-miles-jubilee-river-races-3",
+      "date": "2026-10-08",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/running-miles-jubilee-river-races-3",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "running-miles-jubilee-river-races-3",
+      "date": "2026-10-08",
+      "distance": "5.24mi",
+      "distanceKm": 8.432963,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/running-miles-jubilee-river-races-3",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "south-hams-ultra",
+      "date": "2026-10-10",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/south-hams-ultra",
+      "startTime": "08:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "endurancelife-suffolk",
+      "date": "2026-10-10",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/endurancelife-suffolk",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "endurancelife-suffolk",
+      "date": "2026-10-10",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/endurancelife-suffolk",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "wildwood-trail-series-epping-forest",
+      "date": "2026-10-10",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/wildwood-trail-series-epping-forest",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "hampton-court-palace-running-festival",
+      "date": "2026-10-11",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hampton-court-palace-running-festival",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "marshfield-mudlark",
+      "date": "2026-10-11",
+      "distance": "11K",
+      "distanceKm": 11.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/marshfield-mudlark",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "richmond-autumn-riverside-10k",
+      "date": "2026-10-11",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/richmond-autumn-riverside-10k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "ridgeway-run-155k",
+      "date": "2026-10-11",
+      "distance": "15K",
+      "distanceKm": 15.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/ridgeway-run-155k",
+      "startTime": "10:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "tarmac-twister-trail",
+      "date": "2026-10-14",
+      "distance": "6mi",
+      "distanceKm": 9.656064,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/tarmac-twister-trail",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "womens-run-series-battersea-october",
+      "date": "2026-10-17",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/womens-run-series-battersea-october",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "womens-run-series-battersea-october",
+      "date": "2026-10-17",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/womens-run-series-battersea-october",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "blackdown-hills-trail-run",
+      "date": "2026-10-18",
+      "distance": "4.5K",
+      "distanceKm": 4.5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/blackdown-hills-trail-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "eden-marathon",
+      "date": "2026-10-18",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/eden-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dave-jones-prom-5m-race-2-of-9",
+      "date": "2026-10-22",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/weston-prom-5m-race-2-of-9",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dave-jones-prom-5m-race-2-of-9",
+      "date": "2026-10-22",
+      "distance": "1mi",
+      "distanceKm": 1.609344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/weston-prom-5m-race-2-of-9",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "battersea-park-half-marathon-october",
+      "date": "2026-10-24",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/battersea-park-half-marathon-october",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "battersea-park-half-marathon-october",
+      "date": "2026-10-24",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/battersea-park-half-marathon-october",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "joydens-wood-cross-country-races-1",
+      "date": "2026-10-24",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/joydens-wood-cross-country-races-1",
+      "startTime": "12:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "andover-half-marathon",
+      "date": "2026-10-25",
+      "distance": "12K",
+      "distanceKm": 12.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/andover-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "polesden-lacey-10k-october",
+      "date": "2026-10-25",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/polesden-lacey-10k",
+      "startTime": "09:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "fleet-10k-5k",
+      "date": "2026-10-25",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/fleet-10k5k-peter-driver-memorial",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "fleet-10k-5k",
+      "date": "2026-10-25",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/fleet-10k5k-peter-driver-memorial",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "canterbury-trail-marathon-half-marathon",
+      "date": "2026-10-25",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/canterbury-trail-marathon-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "attack-of-the-zombie-cows",
+      "date": "2026-10-31",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/attack-of-the-zombie-cows",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "attack-of-the-zombie-cows",
+      "date": "2026-10-31",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/attack-of-the-zombie-cows",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "attack-of-the-zombie-cows",
+      "date": "2026-10-31",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/attack-of-the-zombie-cows",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "attack-of-the-zombie-cows",
+      "date": "2026-10-31",
+      "distance": "3.28mi",
+      "distanceKm": 5.278648,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/attack-of-the-zombie-cows",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "brutal-halloween",
+      "date": "2026-10-31",
+      "distance": "6.6K",
+      "distanceKm": 6.6,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/brutal-halloween",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "brutal-halloween",
+      "date": "2026-10-31",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/brutal-halloween",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "brutal-halloween",
+      "date": "2026-10-31",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/brutal-halloween",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "wendover-trail-marathon",
+      "date": "2026-11-01",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/wendover-trail-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "cornish-marathon",
+      "date": "2026-11-01",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cornish-marathon",
+      "startTime": "10:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "deal-castle-5-mile",
+      "date": "2026-11-01",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/deal-castle-5-mile",
+      "startTime": "10:30",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "gunpowder-trot",
+      "date": "2026-11-01",
+      "distance": "4.5mi",
+      "distanceKm": 7.242048,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/gunpowder-trot",
+      "startTime": "11:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "leigh-on-sea-striders-10k",
+      "date": "2026-11-01",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/leigh-on-sea-striders-10k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "leigh-on-sea-striders-10k",
+      "date": "2026-11-01",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/leigh-on-sea-striders-10k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-lest-we-forget",
+      "date": "2026-11-07",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-armistice-lest-we-forget-2022",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-lest-we-forget",
+      "date": "2026-11-07",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-armistice-lest-we-forget-2022",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-lest-we-forget",
+      "date": "2026-11-07",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-armistice-lest-we-forget-2022",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-lest-we-forget",
+      "date": "2026-11-07",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-armistice-lest-we-forget-2022",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-lest-we-forget",
+      "date": "2026-11-07",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-armistice-lest-we-forget-2022",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-lest-we-forget",
+      "date": "2026-11-07",
+      "distance": "3.3mi",
+      "distanceKm": 5.310835,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-armistice-lest-we-forget-2022",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "big-night-out-winchester-trails",
+      "date": "2026-11-07",
+      "distance": "12K",
+      "distanceKm": 12.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/big-night-out-winchester-trails",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "big-night-out-winchester-trails",
+      "date": "2026-11-07",
+      "distance": "22K",
+      "distanceKm": 22.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/big-night-out-winchester-trails",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "over-the-hills-multi-terrain-12k",
+      "date": "2026-11-08",
+      "distance": "12K",
+      "distanceKm": 12.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/over-the-hills-multi-terrain-12k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "springfield-striders-hobble",
+      "date": "2026-11-08",
+      "distance": "6mi",
+      "distanceKm": 9.656064,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/springfield-striders-hobble",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "springfield-striders-hobble",
+      "date": "2026-11-08",
+      "distance": "16mi",
+      "distanceKm": 25.749504,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/springfield-striders-hobble",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "stowmarket-scenic-7",
+      "date": "2026-11-08",
+      "distance": "7mi",
+      "distanceKm": 11.265408,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/stowmarket-scenic-7",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "h-t-remembrance-sunday-run",
+      "date": "2026-11-08",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/ht-remembrance-sunday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "h-t-remembrance-sunday-run",
+      "date": "2026-11-08",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/ht-remembrance-sunday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "h-t-remembrance-sunday-run",
+      "date": "2026-11-08",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/ht-remembrance-sunday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "h-t-remembrance-sunday-run",
+      "date": "2026-11-08",
+      "distance": "6.5mi",
+      "distanceKm": 10.460736,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/ht-remembrance-sunday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-remembrance-day-marathon-half-marathon",
+      "date": "2026-11-08",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-remembrance-day-marathon-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-remembrance-day-marathon-half-marathon",
+      "date": "2026-11-08",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-remembrance-day-marathon-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-hampshire-autumn-feisty-saturday",
+      "date": "2026-11-14",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-hampshire-autumn-feisty",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-hampshire-autumn-feisty-saturday",
+      "date": "2026-11-14",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-hampshire-autumn-feisty",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-hampshire-autumn-feisty-saturday",
+      "date": "2026-11-14",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-hampshire-autumn-feisty",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-hampshire-autumn-feisty-saturday",
+      "date": "2026-11-14",
+      "distance": "2.6mi",
+      "distanceKm": 4.184294,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-hampshire-autumn-feisty",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bristol-morun",
+      "date": "2026-11-15",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bristol-morun-10k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "rolys-run-2026",
+      "date": "2026-11-15",
+      "distance": "15mi",
+      "distanceKm": 24.14016,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rolys-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "rolys-run-2026",
+      "date": "2026-11-15",
+      "distance": "20mi",
+      "distanceKm": 32.18688,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/rolys-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "hartfield-honey-run",
+      "date": "2026-11-15",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hartfield-honey-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "hartfield-honey-run",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hartfield-honey-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "the-one-in-the-park-victoria-november",
+      "date": "2026-11-15",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-one-in-the-park-victoria-park-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "the-one-in-the-park-victoria-november",
+      "date": "2026-11-15",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-one-in-the-park-victoria-park-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "the-one-in-the-park-victoria-november",
+      "date": "2026-11-15",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/the-one-in-the-park-victoria-park-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "coastbuster-10-mile-10k",
+      "date": "2026-11-15",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/coastbuster-10-mile-10k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bath-hilly-half",
+      "date": "2026-11-15",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bath-hilly-half",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bath-hilly-half",
+      "date": "2026-11-15",
+      "distance": "12.5K",
+      "distanceKm": 12.5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bath-hilly-half",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "maverick-exposure-lights-dark-castle",
+      "date": "2026-11-20",
+      "distance": "15K",
+      "distanceKm": 15.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/maverick-exposure-lights-dark-dorset",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "maverick-exposure-lights-dark-castle",
+      "date": "2026-11-20",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/maverick-exposure-lights-dark-dorset",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "maverick-exposure-lights-dark-castle",
+      "date": "2026-11-20",
+      "distance": "11K",
+      "distanceKm": 11.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/maverick-exposure-lights-dark-dorset",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dark-valley-night-trails",
+      "date": "2026-11-21",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dark-valley-night-trails",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dark-valley-night-trails",
+      "date": "2026-11-21",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dark-valley-night-trails",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dark-valley-night-trails",
+      "date": "2026-11-21",
+      "distance": "20K",
+      "distanceKm": 20.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dark-valley-night-trails",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dark-valley-night-trails",
+      "date": "2026-11-21",
+      "distance": "30K",
+      "distanceKm": 30.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dark-valley-night-trails",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "budleigh-blister",
+      "date": "2026-11-22",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/budleigh-blister",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "new-forest-stinger",
+      "date": "2026-11-22",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/new-forest-stinger-2018",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "new-forest-stinger",
+      "date": "2026-11-22",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/new-forest-stinger-2018",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "ea-runevents-brent-knoll-race-burnham-on-sea",
+      "date": "2026-11-22",
+      "distance": "5.75mi",
+      "distanceKm": 9.253728,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/brent-knoll-race",
+      "startTime": "11:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "combe-crawler",
+      "date": "2026-11-22",
+      "distance": "8.5mi",
+      "distanceKm": 13.679424,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/combe-crawler",
+      "startTime": "11:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "hadleigh-5-10-mile",
+      "date": "2026-11-22",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hadleigh-5-10-mile",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "hadleigh-5-10-mile",
+      "date": "2026-11-22",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hadleigh-5-10-mile",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-advent-run",
+      "date": "2026-11-29",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-advent-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-advent-run",
+      "date": "2026-11-29",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-advent-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-advent-run",
+      "date": "2026-11-29",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-advent-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-advent-run",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-advent-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-advent-run",
+      "date": "2026-11-29",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-advent-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-advent-run",
+      "date": "2026-11-29",
+      "distance": "3.28mi",
+      "distanceKm": 5.278648,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-advent-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "hatfield-5",
+      "date": "2026-11-29",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/hatfield-5-mile-road-race",
+      "startTime": "10:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "mapledurham-10-half",
+      "date": "2026-11-29",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/mapledurham-10",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "mapledurham-10-half",
+      "date": "2026-11-29",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/mapledurham-10",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "mapledurham-10-half",
+      "date": "2026-11-29",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/mapledurham-10",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "avr-wiltshire-half-marathon",
+      "date": "2026-11-29",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/wiltshire-half-marathon",
+      "startTime": "11:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "victory-5-mile",
+      "date": "2026-11-29",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/victory-5m",
+      "startTime": "11:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "endurancelife-dorset",
+      "date": "2026-12-05",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cts-dorest",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "endurancelife-dorset",
+      "date": "2026-12-05",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cts-dorest",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "endurancelife-dorset",
+      "date": "2026-12-05",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/cts-dorest",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "salisbury-plain-winter-edition-marathon-half-marathon",
+      "date": "2026-12-05",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/salisbury-plain-winter-edition-marathon-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "salisbury-plain-winter-edition-marathon-half-marathon",
+      "date": "2026-12-05",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/salisbury-plain-winter-edition-marathon-half-marathon",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bournemouth-coastal-ten",
+      "date": "2026-12-05",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bournemouth-coastal-ten",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "lucky-dip-challenge",
+      "date": "2026-12-05",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lucky-dip-challenge",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "lucky-dip-challenge",
+      "date": "2026-12-05",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lucky-dip-challenge",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "lucky-dip-challenge",
+      "date": "2026-12-05",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lucky-dip-challenge",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "lucky-dip-challenge",
+      "date": "2026-12-05",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lucky-dip-challenge",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "lucky-dip-challenge",
+      "date": "2026-12-05",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lucky-dip-challenge",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "lucky-dip-challenge",
+      "date": "2026-12-05",
+      "distance": "3.28mi",
+      "distanceKm": 5.278648,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/lucky-dip-challenge",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "wild-christmas-charity-run",
+      "date": "2026-12-05",
+      "distance": "8K",
+      "distanceKm": 8.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/wild-christmas-charity-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "wild-christmas-charity-run",
+      "date": "2026-12-05",
+      "distance": "4K",
+      "distanceKm": 4.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/wild-christmas-charity-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "full-monty-cute-10",
+      "date": "2026-12-06",
+      "distance": "10.7mi",
+      "distanceKm": 17.219981,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/full-monty-cute-10",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "perivale-5",
+      "date": "2026-12-06",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/perivale-5",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dawn-to-dusk-sunlight-ultra-marathon-22k",
+      "date": "2026-12-06",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dawn-to-dusk-sunlight-ultra-marathon-22k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dawn-to-dusk-sunlight-ultra-marathon-22k",
+      "date": "2026-12-06",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dawn-to-dusk-sunlight-ultra-marathon-22k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "dawn-to-dusk-sunlight-ultra-marathon-22k",
+      "date": "2026-12-06",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/dawn-to-dusk-sunlight-ultra-marathon-22k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bobble-wobble-run",
+      "date": "2026-12-06",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bobble-wobble-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bobble-wobble-run",
+      "date": "2026-12-06",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bobble-wobble-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bobble-wobble-run",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bobble-wobble-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bobble-wobble-run",
+      "date": "2026-12-06",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bobble-wobble-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bobble-wobble-run",
+      "date": "2026-12-06",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bobble-wobble-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "bobble-wobble-run",
+      "date": "2026-12-06",
+      "distance": "3.28mi",
+      "distanceKm": 5.278648,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/bobble-wobble-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "thanet-coastal-5-10-mile-race",
+      "date": "2026-12-06",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/alan-green-memorial-10-mile-race",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "thanet-coastal-5-10-mile-race",
+      "date": "2026-12-06",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/alan-green-memorial-10-mile-race",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "great-christmas-fun-run",
+      "date": "2026-12-06",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/great-christmas-fun-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "maidstone-harriers-turkey-run",
+      "date": "2026-12-06",
+      "distance": "7.5mi",
+      "distanceKm": 12.07008,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/maidstone-harriers-turkey-run",
+      "startTime": "11:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "santa-in-the-city-tuesday",
+      "date": "2026-12-08",
+      "distance": "4.5K",
+      "distanceKm": 4.5,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/santa-in-the-city-tuesday",
+      "startTime": "19:00",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-jumper-friday-run",
+      "date": "2026-12-11",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-jumper-friday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-jumper-friday-run",
+      "date": "2026-12-11",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-jumper-friday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-jumper-friday-run",
+      "date": "2026-12-11",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-jumper-friday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-jumper-friday-run",
+      "date": "2026-12-11",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-jumper-friday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-jumper-friday-run",
+      "date": "2026-12-11",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-jumper-friday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "phoenix-christmas-jumper-friday-run",
+      "date": "2026-12-11",
+      "distance": "3.28mi",
+      "distanceKm": 5.278648,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/phoenix-christmas-jumper-friday-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "raynedeer-run",
+      "date": "2026-12-13",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/raynedeer-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "raynedeer-run",
+      "date": "2026-12-13",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/raynedeer-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "raynedeer-run",
+      "date": "2026-12-13",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/raynedeer-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "raynedeer-run",
+      "date": "2026-12-13",
+      "distance": "5.3K",
+      "distanceKm": 5.3,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/raynedeer-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "christmas-party-run",
+      "date": "2026-12-19",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/christmas-party-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "christmas-party-run",
+      "date": "2026-12-19",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/christmas-party-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "christmas-party-run",
+      "date": "2026-12-19",
+      "distance": "5mi",
+      "distanceKm": 8.04672,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/christmas-party-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "christmas-party-run",
+      "date": "2026-12-19",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/christmas-party-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "christmas-party-run",
+      "date": "2026-12-19",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/christmas-party-run",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "wimbledon-common-5k-10k-christmas-run",
+      "date": "2026-12-20",
+      "distance": "5K",
+      "distanceKm": 5.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-wimbledon-christmas-run-5k-10k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "wimbledon-common-5k-10k-christmas-run",
+      "date": "2026-12-20",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-wimbledon-christmas-run-5k-10k",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "winter-x",
+      "date": "2026-12-28",
+      "distance": "10K",
+      "distanceKm": 10.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/winter-x",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "winter-x",
+      "date": "2026-12-28",
+      "distance": "30K",
+      "distanceKm": 30.0,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/winter-x",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "race-the-light",
+      "date": "2026-12-28",
+      "distance": "8.5mi",
+      "distanceKm": 13.679424,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/race-the-light-mothecombe",
+      "startTime": "13:15",
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    },
+    {
+      "eventSlug": "runthrough-battersea-park-january-2027",
+      "date": "2027-01-09",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "TBC",
+      "source": "https://runabc.co.uk/runthrough-battersea-park-5k-10k-january",
+      "startTime": null,
+      "notes": "Date and distance checked on 11 September 2026 for the RunRecs UK October 2026–January 2027 audit. Entry availability not verified."
+    }
+  ]
+}

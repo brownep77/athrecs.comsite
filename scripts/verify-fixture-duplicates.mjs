@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createServer } from "vite";
 
 const [
   { seriesList: coreSeries },
@@ -190,9 +191,23 @@ for (const sourceEdition of editionSources) {
 }
 
 const seriesBySlug = new Map(seriesList.map((series) => [series.slug, series]));
+// Permanent aliases can point into newer catalogue sources beyond this verifier's
+// original fixture sample. Resolve those references against the assembled catalogue.
+const vite = await createServer({
+  appType: "custom",
+  logLevel: "error",
+  server: { middlewareMode: true },
+});
+let assembledCatalogue;
+try {
+  assembledCatalogue = await vite.ssrLoadModule("/src/data/catalogue.ts");
+} finally {
+  await vite.close();
+}
+const assembledSlugs = new Set(assembledCatalogue.seriesList.map((series) => series.slug));
 for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
-  assert(!seriesBySlug.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
-  assert(seriesBySlug.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
+  assert(!assembledSlugs.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
+  assert(assembledSlugs.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);
 }
 
 for (const replacement of verifiedFixtureEditionReplacements) {
