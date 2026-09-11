@@ -92,6 +92,7 @@ function distanceKmFor(label) {
   const exact = {
     "5K": 5,
     "10K": 10,
+    "10mi": 16.09,
     Half: 21.0975,
   };
   const known = exact[label];
