@@ -1,3 +1,4 @@
+import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql, dbSource } from "@/lib/db";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
@@ -176,6 +177,7 @@ export const listEvents = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const sql = await ready();
     const shortRaces = data.temporaryUkIrelandShortRaces === true;
+    const excludedEditionIds = shortRaces ? await getRunrecsOnlyEditionIds(sql) : [];
     const sport = data.sport && data.sport !== "All" ? data.sport : null;
     const rawQ = data.q?.trim() ?? "";
     const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
@@ -208,6 +210,7 @@ export const listEvents = createServerFn({ method: "GET" })
         where (${shortRaces}::boolean is false or (
           event_date between '2026-09-10'::date and '2027-01-31'::date
           and distance_code in ('5K', '10K')
+          and not (id = any(${excludedEditionIds}::int[]))
           and (${dateFrom}::date is null or event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or event_date <= ${dateTo}::date)
           and (${distance}::text is null or distance_code = ${distance})
@@ -354,8 +357,9 @@ export const listEvents = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
+    const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } = await import(
+      "@/lib/athrecs/parkrun-dates"
+    );
     const mapped = rows
       .map((rawRow) => {
         const { groups_json, ...r } = rawRow;
@@ -450,8 +454,9 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       | undefined;
     if (!event) return null;
 
-    const { parkrunDates, parkrunDistance, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
+    const { parkrunDates, parkrunDistance, parkrunStartTime } = await import(
+      "@/lib/athrecs/parkrun-dates"
+    );
 
     const distances = await sql<{ distance_code: string }>`
       select distance_code from event_distances where event_id = ${event.id}
@@ -1160,21 +1165,23 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       published_at desc
   `;
 
-  return rows.map((row): HomeSportUpdate => ({
-    id: row.id,
-    kind: row.kind,
-    sport: row.sport,
-    eventSlug: row.event_slug,
-    eventName: row.event_name,
-    country: row.country,
-    county: row.county,
-    city: row.city,
-    eventDate: row.event_date,
-    distance: row.distance,
-    status: row.status,
-    providerName: row.provider_name,
-    publishedAt: row.published_at,
-  }));
+  return rows.map(
+    (row): HomeSportUpdate => ({
+      id: row.id,
+      kind: row.kind,
+      sport: row.sport,
+      eventSlug: row.event_slug,
+      eventName: row.event_name,
+      country: row.country,
+      county: row.county,
+      city: row.city,
+      eventDate: row.event_date,
+      distance: row.distance,
+      status: row.status,
+      providerName: row.provider_name,
+      publishedAt: row.published_at,
+    }),
+  );
 });
 
 /** Live DB backend + row counts for admin diagnosis (Neon vs ephemeral PGLite). */
@@ -1246,8 +1253,9 @@ export const getBulkSourceRun = createServerFn({ method: "GET" })
 export const listFixtureSources = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .handler(async () => {
-    const { getBulkSourceJobManifest, getFixtureSourceRegistrySummary } =
-      await import("./source-registry.server");
+    const { getBulkSourceJobManifest, getFixtureSourceRegistrySummary } = await import(
+      "./source-registry.server"
+    );
     const { registryHash: _registryHash, ...registry } = getFixtureSourceRegistrySummary();
     return {
       registry,
@@ -1428,8 +1436,9 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       order by ed.event_date asc, e.name
       limit ${fetchLimit}
     `;
-    const { parkrunDates, parkrunDistance, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
+    const { parkrunDates, parkrunDistance, parkrunStartTime } = await import(
+      "@/lib/athrecs/parkrun-dates"
+    );
     const wantParkrun = !sport || sport === "Parkrun";
     const generatedRows: typeof rows = [];
     if (wantParkrun) {
