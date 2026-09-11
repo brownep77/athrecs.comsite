@@ -9,7 +9,7 @@ import {
   seriesList,
   clubSlugAliases,
 } from "@/data/catalogue";
-import { editionReplacements, eventSlugAliases } from "@/data/entry-options";
+import { catalogueSeedEventSlugAliases, editionReplacements } from "@/data/entry-options";
 import {
   publicFigureAthletes,
   publicFigureEditions,
@@ -766,7 +766,7 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     80,
   );
 
-  for (const [aliasSlug, canonicalSlug] of Object.entries(eventSlugAliases)) {
+  for (const [aliasSlug, canonicalSlug] of Object.entries(catalogueSeedEventSlugAliases)) {
     const matches = await sql<{ id: number; slug: string }>`
       select id, slug from events where slug in (${aliasSlug}, ${canonicalSlug})
     `;

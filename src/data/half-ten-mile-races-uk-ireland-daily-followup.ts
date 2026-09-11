@@ -1720,9 +1720,32 @@ export const dailyHalfTenMileResearchQueue = [
 
 const BRIGHTEN_MARINA_URL =
   "https://www.ukrunningevents.co.uk/events/trail-runs/brighten-brighton-marina-run-2027";
+const TADCASTER_10_URL = "https://racebest.com/races/e6z7h";
+const TADCASTER_10_ENTRY_URL = "https://racebest.com/races/e6z7h/enter";
+
+/** A newly published year-suffixed card that resolves to the established permanent race URL. */
+export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
+  "tadcaster-10-2026": "tadcaster-10",
+};
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "tadcaster-10": {
+    name: "Tadcaster 10",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Tadcaster",
+    area: "Tadcaster, Catterton, Healaugh and Wighill",
+    surface: "Road",
+    distances: ["10mi"],
+    summary: "Tadcaster 10 — a licensed 10-mile road race through villages near Tadcaster.",
+    description:
+      "Tadcaster Harriers and Sport Yorkshire organise this licensed 10-mile road race through Catterton, Healaugh and Wighill; the established card carries the verified 2026 edition and official entry.",
+    organiser: "Tadcaster Harriers & Sport Yorkshire",
+    website: TADCASTER_10_URL,
+    source_url: TADCASTER_10_URL,
+    defaultStartTime: "09:30",
+  },
   "brighten-marina": {
     name: "BrighTEN (Brighton) Marina Run 2027",
     county: "East Sussex",
@@ -1921,6 +1944,16 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "tadcaster-10|2026-11-22|10mi": {
+    distance: "10mi",
+    distanceKm: 16.09,
+    status: "Open",
+    entryUrl: TADCASTER_10_ENTRY_URL,
+    startTime: "09:30",
+    source: TADCASTER_10_URL,
+    notes:
+      "The official RaceBest event and direct registration pages confirm the 22 November 2026 road 10-mile race, 09:30 start, open entry and UKA licence 2026-28391.",
+  },
   "brighten-marina|2027-02-13|10K": {
     distance: "10mi",
     distanceKm: 16.09,
@@ -1953,6 +1986,22 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
 };
 
 export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
+  "tadcaster-10|2026-11-22|10mi": [
+    {
+      providerCode: "official-tadcaster-10-2026",
+      providerName: "RaceBest",
+      entryUrl: TADCASTER_10_ENTRY_URL,
+      entryType: "official",
+      status: "open",
+      priceAmount: 20,
+      priceCurrency: "GBP",
+      checkedAt: CURRENT_DAILY_RELEASE_CHECKED_AT,
+      sourceUrl: TADCASTER_10_URL,
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration checkout.",
+    },
+  ],
   "brighten-marina|2027-02-13|10mi": [
     {
       providerCode: "official-brighten-marina-2027",

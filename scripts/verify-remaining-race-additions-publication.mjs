@@ -29,6 +29,36 @@ function runNode(script, extraEnv = {}) {
 }
 
 runNode("scripts/migrate.mjs");
+const setupClient = new pg.Client({ connectionString: process.env.DATABASE_URL });
+await setupClient.connect();
+try {
+  await setupClient.query(
+    `insert into events (
+       slug, name, sport, country, county, city, area, surface, summary,
+       description, organiser, website, source_url
+     ) values (
+       'tadcaster-10-2026', 'Tadcaster 10 2026', 'Running', 'England',
+       'North Yorkshire', 'Tadcaster', 'Tadcaster', 'Road',
+       'Production-only duplicate fixture.', 'Verification fixture.',
+       'Tadcaster Harriers & Sport Yorkshire', 'https://racebest.com/races/e6z7h',
+       'https://racebest.com/races/e6z7h'
+     )`,
+  );
+  await setupClient.query(
+    `insert into event_distances (event_id, distance_code)
+     select id, '10mi' from events where slug = 'tadcaster-10-2026'`,
+  );
+  await setupClient.query(
+    `insert into editions (
+       event_id, event_date, distance_code, distance_km, status, entry_url, source_url, start_time
+     )
+     select id, date '2026-11-22', '10mi', 16.09, 'Open',
+       'https://racebest.com/races/e6z7h/enter', 'https://racebest.com/races/e6z7h', '09:30'
+     from events where slug = 'tadcaster-10-2026'`,
+  );
+} finally {
+  await setupClient.end();
+}
 const publisherEnv = {
   VERCEL_ENV: "production",
   VERCEL_GIT_COMMIT_REF: "main",
@@ -40,6 +70,7 @@ const firstOutput = runNode(
 assert.match(firstOutput, /published non-standard-distances revision \d+:/);
 assert.match(firstOutput, /published half-ten-mile-and-10k-checkpoints-part-1 revision \d+:/);
 assert.match(firstOutput, /published half-ten-mile-and-10k-checkpoints-part-2 revision \d+:/);
+assert.match(firstOutput, /retired 1 duplicate event aliases/);
 
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL });
 await client.connect();
@@ -126,6 +157,44 @@ try {
     [["3k-on-the-green-september", "3k-on-the-green-october"]],
   );
   assert.equal(aliasCount.count, 0, "Known duplicate event aliases were republished");
+
+  const tadcaster = await one(
+    `select
+       ev.slug,
+       ev.website,
+       ed.status,
+       ed.entry_url,
+       ed.start_time,
+       eo.provider_name,
+       eo.is_verified
+     from events ev
+     join editions ed on ed.event_id = ev.id
+     left join edition_entry_options eo on eo.edition_id = ed.id and eo.is_primary
+     where ev.slug = 'tadcaster-10'
+       and ed.event_date = date '2026-11-22'
+       and ed.distance_code = '10mi'`,
+  );
+  assert.equal(tadcaster.slug, "tadcaster-10");
+  assert.equal(tadcaster.website, "https://racebest.com/races/e6z7h");
+  assert.equal(tadcaster.status, "Open");
+  assert.equal(tadcaster.entry_url, "https://racebest.com/races/e6z7h/enter");
+  assert.equal(tadcaster.start_time, "09:30");
+  assert.equal(tadcaster.provider_name, "RaceBest");
+  assert.equal(tadcaster.is_verified, true);
+
+  const tadcasterAlias = await one(
+    `select
+       (select count(*)::int from events where slug = 'tadcaster-10-2026') as aliases,
+       (select count(*)::int from slug_redirects
+        where entity_type = 'event'
+          and old_slug = 'tadcaster-10-2026'
+          and current_slug = 'tadcaster-10') as redirects,
+       (select count(*)::int from network_audit_log
+        where action = 'catalogue_duplicate_event_merged'
+          and before_value->>'slug' = 'tadcaster-10-2026'
+          and after_value->>'slug' = 'tadcaster-10') as audits`,
+  );
+  assert.deepEqual(tadcasterAlias, { aliases: 0, redirects: 1, audits: 1 });
 
   const revisionsBefore = await one(
     `select count(*)::int as count, max(id)::text as max_id
