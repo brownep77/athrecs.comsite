@@ -430,6 +430,10 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
 
   async function retireSafeAliases(tx) {
     let retired = 0;
+    const optionalTables = await tx.query(
+      "select to_regclass('public.event_groups') is not null as event_groups",
+    );
+    const hasEventGroups = optionalTables[0]?.event_groups === true;
     const aliasesToRetire = {
       ...nonStandard.nonStandardDistanceSlugAliases,
       ...daily.dailyHalfTenMileSlugAliases,
@@ -459,13 +463,15 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
          on conflict do nothing`,
         [alias.id, canonical.id],
       );
-      await tx.query(
-        `insert into event_groups (event_id, group_code, label, level, source_url, checked_at, note)
-         select $2, group_code, label, level, source_url, checked_at, note
-         from event_groups where event_id = $1
-         on conflict do nothing`,
-        [alias.id, canonical.id],
-      );
+      if (hasEventGroups) {
+        await tx.query(
+          `insert into event_groups (event_id, group_code, label, level, source_url, checked_at, note)
+           select $2, group_code, label, level, source_url, checked_at, note
+           from event_groups where event_id = $1
+           on conflict do nothing`,
+          [alias.id, canonical.id],
+        );
+      }
       const aliasEditions = await tx.query(
         "select id, event_date::text as event_date, distance_code from editions where event_id = $1",
         [alias.id],
