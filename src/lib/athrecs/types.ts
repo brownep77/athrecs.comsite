@@ -49,6 +49,20 @@ export type EditionResultLink = {
   checked_at: string;
 };
 
+export type SpectatorAccessType =
+  "free" | "ticketed" | "free_and_ticketed" | "registration_required" | "sold_out" | "unknown";
+
+export type EditionSpectatorAccess = {
+  access_type: SpectatorAccessType;
+  ticket_url: string | null;
+  price_amount: number | string | null;
+  price_currency: string | null;
+  checked_at: string;
+  source_url: string;
+  is_verified: boolean;
+  notes: string | null;
+};
+
 export type RaceGroupCode = "world-marathon-majors" | "utmb-world-series" | "utmb-index";
 
 export type RaceGroupInfo = {

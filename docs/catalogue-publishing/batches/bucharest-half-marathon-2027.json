@@ -1,0 +1,75 @@
+{
+  "sourceKey": "runrecs:bucharest-half-marathon:2027:2026-09-08",
+  "sourceUrl": "https://www.bucuresti21km.ro/en/rules/",
+  "events": [
+    {
+      "slug": "bucharest-half-marathon",
+      "name": "OMV Petrom Bucharest Half Marathon",
+      "sport": "Running",
+      "country": "Romania",
+      "county": "Bucharest",
+      "city": "Bucharest",
+      "surface": "Road",
+      "distances": [
+        "Half",
+        "10K"
+      ],
+      "summary": "May road-running weekend in Bucharest, with a half marathon and a companion 10K.",
+      "description": "Organised by Bucharest Running Club, this May event has a paved city course. The 2027 half marathon is on Sunday 9 May at 09:00 local time, with a three-hour limit; the 10K is on Saturday 8 May at 09:00, with a 90-minute limit. A three-runner relay and a fun race are also advertised on the official website. This is the May Bucharest Half Marathon at bucuresti21km.ro, not the separate Bucharest International Half Marathon by Constantina Dita. Check the official event pages for final arrangements.",
+      "organiser": "Bucharest Running Club",
+      "website": "https://www.bucuresti21km.ro/en/"
+    }
+  ],
+  "editions": [
+    {
+      "eventSlug": "bucharest-half-marathon",
+      "eventName": "OMV Petrom Bucharest Half Marathon",
+      "date": "2027-05-09",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "Open",
+      "startTime": "09:00",
+      "entryUrl": "https://in.njuko.com/bucharest21k2027",
+      "entryOptions": [
+        {
+          "providerCode": "bucharest-running-club",
+          "providerName": "Bucharest Running Club / njuko",
+          "entryUrl": "https://in.njuko.com/bucharest21k2027",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-09-10",
+          "sourceUrl": "https://www.bucuresti21km.ro/en/",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ],
+      "source": "https://www.bucuresti21km.ro/en/cursa-21km-half-marathon-bucharest/",
+      "notes": "Race date and 09:00 start confirmed on the organiser's 2027 21K page. All times are local to Bucharest (Europe/Bucharest). Time limit: three hours. The organiser displays 21.097 km; distanceKm uses the standard half-marathon value 21.0975. Do not confuse with the separately organised April race."
+    },
+    {
+      "eventSlug": "bucharest-half-marathon",
+      "eventName": "OMV Petrom Bucharest Half Marathon",
+      "date": "2027-05-08",
+      "distance": "10K",
+      "distanceKm": 10,
+      "status": "Open",
+      "startTime": "09:00",
+      "entryUrl": "https://in.njuko.com/bucharest21k2027",
+      "entryOptions": [
+        {
+          "providerCode": "bucharest-running-club",
+          "providerName": "Bucharest Running Club / njuko",
+          "entryUrl": "https://in.njuko.com/bucharest21k2027",
+          "entryType": "official",
+          "status": "open",
+          "checkedAt": "2026-09-10",
+          "sourceUrl": "https://www.bucuresti21km.ro/en/",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ],
+      "source": "https://www.bucuresti21km.ro/en/cursa-10km-10k-bucharest-race/",
+      "notes": "Race date and 09:00 start confirmed on the organiser's 2027 10K page. All times are local to Bucharest (Europe/Bucharest). Time limit: 90 minutes. The 08:45 wheelchair start is a separate category, not the mass 10K start."
+    }
+  ]
+}

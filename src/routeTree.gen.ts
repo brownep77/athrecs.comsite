@@ -16,6 +16,7 @@ import { Route as ClaimResultsRouteImport } from './routes/claim-results'
 import { Route as MyAthleteProfileRouteImport } from './routes/my-athlete-profile'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
+import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
@@ -76,6 +77,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const RaceSeriesRoute = RaceSeriesRouteImport.update({
   id: '/race-series',
   path: '/race-series',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SportsrecsRoute = SportsrecsRouteImport.update({
+  id: '/sportsrecs',
+  path: '/sportsrecs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -222,6 +228,7 @@ export interface FileRoutesByFullPath {
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -257,6 +264,7 @@ export interface FileRoutesByTo {
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -293,6 +301,7 @@ export interface FileRoutesById {
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -330,6 +339,7 @@ export interface FileRouteTypes {
     | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
+    | '/sportsrecs'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -365,6 +375,7 @@ export interface FileRouteTypes {
     | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
+    | '/sportsrecs'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -400,6 +411,7 @@ export interface FileRouteTypes {
     | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
+    | '/sportsrecs'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -436,6 +448,7 @@ export interface RootRouteChildren {
   MyAthleteProfileRoute: typeof MyAthleteProfileRoute
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
+  SportsrecsRoute: typeof SportsrecsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
   AdminCatalogueRecoveryEmergencyRoute: typeof AdminCatalogueRecoveryEmergencyRoute
@@ -513,6 +526,13 @@ declare module '@tanstack/react-router' {
       path: '/race-series'
       fullPath: '/race-series'
       preLoaderRoute: typeof RaceSeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sportsrecs': {
+      id: '/sportsrecs'
+      path: '/sportsrecs'
+      fullPath: '/sportsrecs'
+      preLoaderRoute: typeof SportsrecsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -708,6 +728,7 @@ const rootRouteChildren: RootRouteChildren = {
   MyAthleteProfileRoute: MyAthleteProfileRoute,
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
+  SportsrecsRoute: SportsrecsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
   AdminCatalogueRecoveryEmergencyRoute: AdminCatalogueRecoveryEmergencyRoute,

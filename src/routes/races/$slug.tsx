@@ -14,6 +14,7 @@ import {
   Medal,
   Route as RouteIcon,
   ShieldCheck,
+  Ticket,
 } from "lucide-react";
 import { getEditionResults, getEventBySlug } from "@/lib/athrecs/api";
 import {
@@ -26,6 +27,7 @@ import {
 import type {
   EditionEntryOption,
   EditionResultLink,
+  EditionSpectatorAccess,
   EntryStatus,
   EventListItem,
 } from "@/lib/athrecs/types";
@@ -58,6 +60,7 @@ type EditionRow = {
   results_official_url: string | null;
   result_links: EditionResultLink[];
   entry_options: EditionEntryOption[];
+  spectator_access: EditionSpectatorAccess | null;
   start_time: string | null;
   notes?: string | null;
   result_count: number;
@@ -144,6 +147,34 @@ function RacePage() {
   return <RacePageContent data={Route.useLoaderData()} />;
 }
 
+function spectatorAccessLabel(access: EditionSpectatorAccess | null): string | null {
+  switch (access?.access_type) {
+    case "free":
+      return "Free to watch";
+    case "ticketed":
+      return "Tickets available";
+    case "free_and_ticketed":
+      return "Free viewing areas and ticketed seating";
+    case "registration_required":
+      return "Spectator registration required";
+    case "sold_out":
+      return "Spectator tickets sold out";
+    default:
+      return null;
+  }
+}
+
+function formatCheckedDate(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+
 export function RacePageContent({
   data,
   localized,
@@ -210,6 +241,8 @@ export function RacePageContent({
     next?.entry_options.find((option) => option.is_primary) ??
     next?.entry_options.find((option) => option.entry_type === "official") ??
     next?.entry_options[0];
+  const spectatorAccess = next?.spectator_access ?? null;
+  const spectatorLabel = spectatorAccessLabel(spectatorAccess);
   const pastWithResults = past.filter(
     (ed) =>
       ed.result_count > 0 ||
@@ -258,6 +291,7 @@ export function RacePageContent({
               </Badge>
             ))}
             <RaceGroupBadges groups={groups} />
+            {spectatorLabel ? <Badge variant="accent">{spectatorLabel}</Badge> : null}
           </div>
 
           <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -324,6 +358,14 @@ export function RacePageContent({
                 </a>
               </Button>
             )}
+            {spectatorAccess?.ticket_url && (
+              <Button asChild variant="secondary">
+                <a href={spectatorAccess.ticket_url} target="_blank" rel="noreferrer">
+                  Spectator tickets
+                  <Ticket className="h-3.5 w-3.5" />
+                </a>
+              </Button>
+            )}
             <Button asChild variant="secondary">
               <Link to="/calendar">
                 <CalendarDays className="h-3.5 w-3.5" />
@@ -343,6 +385,34 @@ export function RacePageContent({
         editionDate={next?.event_date}
         officialWebsite={event.website}
       />
+
+      {spectatorAccess && spectatorLabel ? (
+        <section className="flex flex-wrap items-start justify-between gap-4 rounded-xl border border-border bg-surface p-5 shadow-card">
+          <div className="space-y-1">
+            <div className="flex items-center gap-2">
+              <Ticket className="h-4 w-4 text-accent" aria-hidden="true" />
+              <h2 className="font-display text-lg font-semibold text-fg">Spectator access</h2>
+            </div>
+            <p className="text-sm font-medium text-fg">{spectatorLabel}</p>
+            {spectatorAccess.notes ? (
+              <p className="max-w-2xl text-sm text-muted">{spectatorAccess.notes}</p>
+            ) : null}
+            <p className="text-xs text-subtle">
+              Checked {formatCheckedDate(spectatorAccess.checked_at)} from the official source.
+            </p>
+          </div>
+          <Button asChild variant="secondary">
+            <a
+              href={spectatorAccess.ticket_url ?? spectatorAccess.source_url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {spectatorAccess.ticket_url ? "View tickets" : "Spectator information"}
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          </Button>
+        </section>
+      ) : null}
 
       <section aria-labelledby="key-facts-heading">
         <h2 id="key-facts-heading" className="mb-3 font-display text-lg font-semibold text-fg">
@@ -372,6 +442,7 @@ export function RacePageContent({
           <Fact label="Sport" value={sportLabel(event.sport)} />
           <Fact label="Organiser" value={event.organiser || "See official page"} />
           <Fact label="Entry" value={nextStatus ? statusLabel(nextStatus) : "See official page"} />
+          <Fact label="Spectators" value={spectatorLabel ?? "Not confirmed"} />
           <Fact label="Listed from" value={briefing.source.label} />
           <Fact label="Past races on ATHRECS" value={String(past.length)} />
           <Fact

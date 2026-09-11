@@ -16,6 +16,28 @@
       "permanent": false
     }
   ],
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "sportsrecs.org"
+        }
+      ],
+      "destination": "/sportsrecs"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sportsrecs.org"
+        }
+      ],
+      "destination": "/sportsrecs"
+    }
+  ],
   "headers": [
     {
       "source": "/admin/:path*",

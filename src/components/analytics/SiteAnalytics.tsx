@@ -28,18 +28,30 @@ function deviceClass(): "desktop" | "mobile" | "tablet" | "other" {
   return "desktop";
 }
 
+function isSportsRecsHostname(): boolean {
+  if (typeof window === "undefined") return false;
+  const hostname = window.location.hostname.toLowerCase();
+  return hostname === "sportsrecs.org" || hostname === "www.sportsrecs.org";
+}
+
 export function SiteAnalytics() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
   const [choice, setChoice] = useState<ConsentChoice>("unknown");
   const [preferencesOpen, setPreferencesOpen] = useState(false);
+  const analyticsDisabled =
+    pathname.startsWith("/admin") ||
+    pathname === "/sportsrecs" ||
+    pathname.startsWith("/sportsrecs/") ||
+    isSportsRecsHostname();
 
   useEffect(() => {
+    if (analyticsDisabled) return;
     const stored = localStorage.getItem(CONSENT_KEY);
     setChoice(stored === "granted" || stored === "denied" ? stored : "undecided");
-  }, []);
+  }, [analyticsDisabled]);
 
   useEffect(() => {
-    if (choice !== "granted" || pathname.startsWith("/admin")) return;
+    if (analyticsDisabled || choice !== "granted") return;
     void recordSiteAnalyticsEvent({
       data: {
         path: pathname,
@@ -49,9 +61,9 @@ export function SiteAnalytics() {
         referrerDomain: document.referrer,
       },
     }).catch(() => undefined);
-  }, [choice, pathname]);
+  }, [analyticsDisabled, choice, pathname]);
 
-  if (pathname.startsWith("/admin") || choice === "unknown") return null;
+  if (analyticsDisabled || choice === "unknown") return null;
 
   async function saveChoice(next: "granted" | "denied") {
     localStorage.setItem(CONSENT_KEY, next);

@@ -1,6 +1,7 @@
 # Athrecs fixture and result source registry
 
-This directory records the discovery sources supplied by Paul Browne on 19 August 2026.
+This directory records the discovery sources supplied by Paul Browne on 19 August 2026 and
+the governed international athletics expansion reviewed on 2 September 2026.
 The canonical machine-readable file is:
 
 - docs/source-registry/fixture-result-sources.csv
@@ -13,7 +14,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 267 unique sources. Only 32 are enabled; the other 235 remain
+The registry contains 282 unique sources. Only 36 are enabled; the other 246 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -27,6 +28,26 @@ Athrecs currently supports Running, Cycling, Swimming, Triathlon, Duathlon, Park
 Aquathlon, Aquabike, Rowing, OCR and Athletics. Fixtures for the other sports must use
 separately reviewed federation, organiser or timing sources rather than reusing a
 running profile.
+
+## Athletics rollout order
+
+1. Use the enabled World Athletics global calendar as the international event spine.
+2. Cross-check World Championships, Diamond League and the specialist World Athletics
+   tours against their official series pages.
+3. Fill European, national-championship and local-meeting gaps from continental and
+   national federation calendars only after each source passes rights and selector review.
+4. Hold Roster Athletics, AthleticNET, TFRRS, DirectAthletics, MileSplit and similar
+   platforms until an API, licence or reuse agreement is confirmed.
+5. Prioritise professional athlete records and official profile links. Amateur athlete
+   rows need separate provenance, reuse and privacy review; youth rows receive heightened
+   safeguards and are not enabled by this registry.
+
+## Spectator access
+
+Spectator access is edition-specific and is never inferred from athlete entry status.
+Public `Free to watch`, `Tickets available` and related labels require an HTTPS evidence
+source, a checked date and an explicit verified flag. Athlete entry and spectator ticket
+links remain separate even when the organiser uses the same website for both.
 
 ## Safety rules
 
@@ -53,9 +74,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 267 sources create exactly one source job;
-- the 32 enabled and rights-approved sources are queued;
-- the other 235 sources are retained as blocked jobs with their reason;
+- all 282 sources create exactly one source job;
+- the 36 enabled and rights-approved sources are queued;
+- the other 246 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being
