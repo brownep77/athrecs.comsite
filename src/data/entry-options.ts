@@ -57,6 +57,7 @@ import {
   dailyHalfTenMileEditionOverrides,
   dailyHalfTenMileEntryOptions,
   dailyHalfTenMileSeriesOverrides,
+  dailyHalfTenMileSlugAliases,
 } from "./half-ten-mile-races-uk-ireland-daily-followup";
 import {
   nonStandardDistanceEditionOverrides,
@@ -74,9 +75,14 @@ const SEATON_CLASSIC_KEY = "seaton-classic-10k|2026-09-26|10K";
 const SEATON_CLASSIC_SOURCE = "https://athleticsni.org/Fixtures/Road-Running";
 
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
-export const eventSlugAliases: Readonly<Record<string, string>> = {
+export const catalogueSeedEventSlugAliases: Readonly<Record<string, string>> = {
   ...allFixtureAliases,
   ...nonStandardDistanceSlugAliases,
+};
+
+export const eventSlugAliases: Readonly<Record<string, string>> = {
+  ...catalogueSeedEventSlugAliases,
+  ...dailyHalfTenMileSlugAliases,
 };
 
 export function canonicalEventSlug(slug: string): string {

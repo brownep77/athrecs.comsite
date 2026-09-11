@@ -429,11 +429,13 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
 
   async function retireSafeAliases(tx) {
     let retired = 0;
-    for (const [aliasSlug, canonicalSlugValue] of Object.entries(
-      nonStandard.nonStandardDistanceSlugAliases,
-    )) {
+    const aliasesToRetire = {
+      ...nonStandard.nonStandardDistanceSlugAliases,
+      ...daily.dailyHalfTenMileSlugAliases,
+    };
+    for (const [aliasSlug, canonicalSlugValue] of Object.entries(aliasesToRetire)) {
       const rows = await tx.query(
-        "select id, slug from events where slug = any($1::text[])",
+        "select * from events where slug = any($1::text[])",
         [[aliasSlug, canonicalSlugValue]],
       );
       const alias = rows.find((row) => row.slug === aliasSlug);
@@ -480,6 +482,27 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
           await tx.query("update editions set event_id = $2 where id = $1", [edition.id, canonical.id]);
         }
       }
+      await tx.query(
+        `insert into slug_redirects (entity_type, entity_id, old_slug, current_slug)
+         values ('event', $1, $2, $3)
+         on conflict (entity_type, old_slug) do update set
+           entity_id = excluded.entity_id,
+           current_slug = excluded.current_slug,
+           updated_at = now()`,
+        [canonical.id, aliasSlug, canonicalSlugValue],
+      );
+      await tx.query(
+        `insert into network_audit_log (
+           actor_email, action, entity_type, entity_id, before_value, after_value, note
+         ) values ($1, 'catalogue_duplicate_event_merged', 'event', $2, $3::jsonb, $4::jsonb, $5)`,
+        [
+          ACTOR,
+          String(alias.id),
+          JSON.stringify(alias),
+          JSON.stringify({ event_id: canonical.id, slug: canonicalSlugValue }),
+          `Merged result-free catalogue alias ${aliasSlug} into ${canonicalSlugValue} during guarded publication.`,
+        ],
+      );
       await tx.query("delete from events where id = $1", [alias.id]);
       retired += 1;
     }

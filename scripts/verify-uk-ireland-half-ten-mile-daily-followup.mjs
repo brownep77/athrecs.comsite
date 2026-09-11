@@ -40,6 +40,7 @@ const {
   dailyHalfTenMileResearchQueue,
   dailyHalfTenMileSeries,
   dailyHalfTenMileSeriesOverrides,
+  dailyHalfTenMileSlugAliases,
 } = data;
 
 assert.equal(dailyHalfTenMileSeries.length, NEW_SERIES_COUNT, "The daily follow-up is incomplete");
@@ -107,6 +108,19 @@ const priorSourceUrls = new Set(
   ),
 );
 for (const series of dailyHalfTenMileSeries) {
+  const canonicalSlug = dailyHalfTenMileSlugAliases[series.slug];
+  if (canonicalSlug) {
+    assert.equal(
+      catalogue.seriesList.filter((item) => item.slug === series.slug).length,
+      0,
+      `${series.slug} must not survive as a second public card`,
+    );
+    assert(
+      dailyHalfTenMileSeriesOverrides[canonicalSlug]?.name,
+      `${series.slug} cannot rebuild its established catalogue card`,
+    );
+    continue;
+  }
   assert(!priorSlugs.has(series.slug), `${series.slug} duplicates a prior catalogue slug`);
   assert(!priorNames.has(normalize(series.name)), `${series.name} duplicates a prior event name`);
   assert(
@@ -160,16 +174,18 @@ for (const edition of dailyHalfTenMileEditions) {
     assert.equal(option.isPrimary, true, `${key} primary source is not marked`);
     assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
   }
-  assert.equal(
-    catalogue.editions.filter(
-      (item) =>
-        item.seriesSlug === edition.seriesSlug &&
-        item.date === edition.date &&
-        item.distance === edition.distance,
-    ).length,
-    1,
-    `${key} was dropped or duplicated during catalogue merge`,
-  );
+  if (!dailyHalfTenMileSlugAliases[edition.seriesSlug]) {
+    assert.equal(
+      catalogue.editions.filter(
+        (item) =>
+          item.seriesSlug === edition.seriesSlug &&
+          item.date === edition.date &&
+          item.distance === edition.distance,
+      ).length,
+      1,
+      `${key} was dropped or duplicated during catalogue merge`,
+    );
+  }
 }
 
 const expectedScanAdditions = new Map([
@@ -303,6 +319,26 @@ assert.equal(
   tadcasterEdition.entryOptions?.[0]?.checkedAt,
   CURRENT_DAILY_RELEASE_CHECKED_AT,
   "Tadcaster 10 entry provenance was not refreshed on 7 September",
+);
+assert.equal(
+  dailyHalfTenMileSlugAliases["tadcaster-10-2026"],
+  "tadcaster-10",
+  "Tadcaster 10 must resolve to its established permanent slug",
+);
+assert.equal(
+  dailyHalfTenMileSeriesOverrides["tadcaster-10"]?.source_url,
+  "https://racebest.com/races/e6z7h",
+  "The established Tadcaster card lost its verified organiser provenance",
+);
+assert.equal(
+  dailyHalfTenMileEditionOverrides["tadcaster-10|2026-11-22|10mi"]?.entryUrl,
+  "https://racebest.com/races/e6z7h/enter",
+  "The canonical Tadcaster edition lost its official checkout",
+);
+assert.equal(
+  dailyHalfTenMileEntryOptions["tadcaster-10|2026-11-22|10mi"]?.[0]?.checkedAt,
+  CURRENT_DAILY_RELEASE_CHECKED_AT,
+  "The canonical Tadcaster entry provenance is stale",
 );
 
 const rabbitSeries = dailyHalfTenMileSeries.find(
