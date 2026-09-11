@@ -1,0 +1,9 @@
+{
+  "url": "https://www.runrecs.com/calendar",
+  "method": "Browser interaction with Name or keyword and Month controls",
+  "keyword": "Race Over the Glen",
+  "month": "Jan 2027",
+  "observed_result": "United Kingdom | Running | Trail | 10K \u00b7 10 km / 6.2 mi | Date TBC | Race Over the Glen | Fri, 1 Jan 2027 \u00b7 Starts 12:00 GMT",
+  "passed": true,
+  "note": "An initial URL-only check could not select filters. The page uses local filter state, so the test was completed through the visible controls without a site change."
+}

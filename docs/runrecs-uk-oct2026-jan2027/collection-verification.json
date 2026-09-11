@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-09-11T07:23:33.729920+00:00",
+  "checks": [
+    {
+      "url": "https://www.runrecs.com/races?sport=Running&q=Race%20Over%20the%20Glen&dateFrom=2026-10-01&dateTo=2027-01-31",
+      "status": 200,
+      "race_link_present": true,
+      "expected_present": true,
+      "passed": true
+    },
+    {
+      "url": "https://www.athrecs.com/races?sport=Running&q=Race%20Over%20the%20Glen&dateFrom=2026-10-01&dateTo=2027-01-31",
+      "status": 200,
+      "race_link_present": false,
+      "expected_present": false,
+      "passed": true
+    },
+    {
+      "url": "https://www.athrecs.com/calendar?sport=Running&q=Race%20Over%20the%20Glen&dateFrom=2026-10-01&dateTo=2027-01-31",
+      "status": 200,
+      "race_link_present": false,
+      "expected_present": false,
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "note": "RunRecs calendar ignores URL query parameters; verified using its on-page keyword and month controls in calendar-browser-verification.json."
+}

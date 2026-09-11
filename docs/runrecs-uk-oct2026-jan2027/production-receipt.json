@@ -1,0 +1,75 @@
+{
+  "scope": {
+    "added_editions": "392",
+    "affected_events": "228",
+    "out_of_scope": "0",
+    "duplicate_keys": "0",
+    "duplicate_distances": "0",
+    "athrecs_visible_short_editions": "960",
+    "new_short_editions_excluded_from_athrecs": "86"
+  },
+  "batches": [
+    {
+      "source_key": "runrecs:uk:0-100km:2026-10-01:2027-01-31:part-1",
+      "status": "published",
+      "publish_summary": {
+        "newEvents": 54,
+        "revisionId": 18,
+        "eventsUpserted": 75,
+        "editionsUpserted": 90,
+        "entryOptionsUpserted": 0
+      },
+      "revision_id": "18",
+      "actual_new_events": "54",
+      "actual_existing_events": "21",
+      "actual_new_editions": "90"
+    },
+    {
+      "source_key": "runrecs:uk:0-100km:2026-10-01:2027-01-31:part-2",
+      "status": "published",
+      "publish_summary": {
+        "newEvents": 44,
+        "revisionId": 19,
+        "eventsUpserted": 75,
+        "editionsUpserted": 146,
+        "entryOptionsUpserted": 0
+      },
+      "revision_id": "19",
+      "actual_new_events": "44",
+      "actual_existing_events": "31",
+      "actual_new_editions": "146"
+    },
+    {
+      "source_key": "runrecs:uk:0-100km:2026-10-01:2027-01-31:part-3",
+      "status": "published",
+      "publish_summary": {
+        "newEvents": 47,
+        "revisionId": 20,
+        "eventsUpserted": 75,
+        "editionsUpserted": 152,
+        "entryOptionsUpserted": 0
+      },
+      "revision_id": "20",
+      "actual_new_events": "47",
+      "actual_existing_events": "28",
+      "actual_new_editions": "152"
+    },
+    {
+      "source_key": "runrecs:uk:0-100km:2026-10-01:2027-01-31:part-4",
+      "status": "published",
+      "publish_summary": {
+        "newEvents": 0,
+        "revisionId": 21,
+        "eventsUpserted": 3,
+        "editionsUpserted": 4,
+        "entryOptionsUpserted": 0
+      },
+      "revision_id": "21",
+      "actual_new_events": "0",
+      "actual_existing_events": "3",
+      "actual_new_editions": "4"
+    }
+  ],
+  "athrecsDeployment": "dpl_CApaxbQ1zHTdukuHCyAQL1qbBhsw",
+  "mergeCommit": "c34baa8bc9afcff8e60c66983ea021c1944a6785"
+}

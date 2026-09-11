@@ -2,7 +2,7 @@
 
 Requested destination: RunRecs. UK running races with a known distance greater than zero and no more than 100 km, dated 1 October 2026 through 31 January 2027 inclusive.
 
-## Proposed additions
+## Published additions
 
 - 392 race-distance editions across 228 event identities.
 - 145 new events; 83 existing events receive missing editions or distances.
@@ -28,4 +28,6 @@ Final review branch: `br-delicate-rain-aydvme02`. The first review identified an
 
 `manifest.json` contains the exact batch IDs and payload hashes. Run each numbered batch's stage, validate and publish SQL in order. The combined payload and audit are included for inspection. These files are audit records, not build-time data migrations.
 
-Public-page checks and final production counts are recorded separately after release.
+Published on 11 September 2026 as catalogue revisions 18–21 after PR #444 and production deployment of commit c34baa8bc9afcff8e60c66983ea021c1944a6785. The final production query confirms 392 additions at 228 events, including 145 inserted event identities and 83 existing identities, with no out-of-scope rows or duplicate distances.
+
+The ten public race-page checks passed, including RunRecs pages across all four UK nations, three new short-race URLs returning 404 on AthRecs, and an earlier AthRecs race remaining available. RunRecs search and the interactive January calendar include Race Over the Glen; AthRecs search and calendar exclude it. See production-receipt.json, public-verification.json, collection-verification.json and calendar-browser-verification.json.

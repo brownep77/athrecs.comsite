@@ -1,0 +1,20 @@
+{
+  "review_branch": "br-delicate-rain-aydvme02",
+  "added_editions": 392,
+  "affected_events": 228,
+  "new_events": 145,
+  "existing_events": 83,
+  "out_of_scope": 0,
+  "duplicate_keys": 0,
+  "duplicate_numeric_distances": 0,
+  "athrecs_visible_short_editions_before": 960,
+  "athrecs_visible_short_editions_after": 960,
+  "new_short_editions_excluded_from_athrecs": 86,
+  "pull_request": "https://github.com/brownep77/athrecs.comsite/pull/444",
+  "verified_head": "b3f765883f2747fa823980d2bdeebefe54aebf38",
+  "quality_gate_run": 34573227891,
+  "quality_gate_attempt": 2,
+  "quality_gate_conclusion": "success",
+  "first_attempt_failure": "Transient Vite Outdated Optimize Dep 504 in the browser smoke test; unchanged commit passed on retry.",
+  "merge_commit": "c34baa8bc9afcff8e60c66983ea021c1944a6785"
+}

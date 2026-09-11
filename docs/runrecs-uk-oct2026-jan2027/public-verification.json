@@ -1,0 +1,137 @@
+{
+  "checked_at": "2026-09-11T07:23:42.512258+00:00",
+  "checks": [
+    {
+      "url": "https://www.runrecs.com/races/race-over-the-glen",
+      "status": 200,
+      "title": [
+        "Race Over the Glen \u2014 Glenariff | RunRecs.com"
+      ],
+      "checks": {
+        "status": true,
+        "name": true,
+        "date": true,
+        "distance": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.runrecs.com/races/jingle-hells",
+      "status": 200,
+      "title": [
+        "Jingle Hells \u2014 Scout Hut 43 Church Street Church Stretton | RunRecs.com"
+      ],
+      "checks": {
+        "status": true,
+        "name": true,
+        "date": true,
+        "distance": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.runrecs.com/races/beyond-the-lune-winter-ultra",
+      "status": 200,
+      "title": [
+        "Beyond the Lune Winter Ultra \u2014 Kirkby Lonsdale | RunRecs.com"
+      ],
+      "checks": {
+        "status": true,
+        "name": true,
+        "date": true,
+        "distance": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.runrecs.com/races/tour-de-yr-wyddfa",
+      "status": 200,
+      "title": [
+        "Tour De Yr Wyddfa 2027 \u2014 Llanberis | RunRecs.com"
+      ],
+      "checks": {
+        "status": true,
+        "name": true,
+        "date": true,
+        "distance": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.runrecs.com/races/christmas-cracker-glasgow",
+      "status": 200,
+      "title": [
+        "Christmas Cracker Glasgow \u2014 Glasgow | RunRecs.com"
+      ],
+      "checks": {
+        "status": true,
+        "name": true,
+        "date": true,
+        "distance": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.runrecs.com/races/yorkshire-coast-10k-fun-run",
+      "status": 200,
+      "title": [
+        "Yorkshire Coast 10K &amp; Fun Run \u2014 Scarborough | RunRecs.com"
+      ],
+      "checks": {
+        "status": true,
+        "name": true,
+        "date": true,
+        "distance": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.athrecs.com/races/race-over-the-glen",
+      "status": 404,
+      "title": [
+        "ATHRECS.com \u2014 Athletics events, results and athletes"
+      ],
+      "checks": {
+        "status": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.athrecs.com/races/jingle-hells",
+      "status": 404,
+      "title": [
+        "ATHRECS.com \u2014 Athletics events, results and athletes"
+      ],
+      "checks": {
+        "status": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.athrecs.com/races/yorkshire-coast-10k-fun-run",
+      "status": 404,
+      "title": [
+        "ATHRECS.com \u2014 Athletics events, results and athletes"
+      ],
+      "checks": {
+        "status": true
+      },
+      "passed": true
+    },
+    {
+      "url": "https://www.athrecs.com/races/315-national-fitness-5k",
+      "status": 200,
+      "title": [
+        "3-1-5 National Fitness 10K &amp; 5K \u2014 Lancaster | ATHRECS.com"
+      ],
+      "checks": {
+        "status": true,
+        "name": true,
+        "date": true,
+        "distance": true
+      },
+      "passed": true
+    }
+  ],
+  "passed": true
+}
