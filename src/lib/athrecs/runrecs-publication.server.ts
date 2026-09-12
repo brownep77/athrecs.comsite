@@ -13,7 +13,7 @@ export async function getRunrecsOnlyEditionIds(sql: Sql): Promise<number[]> {
     join catalogue_import_batches batch on batch.id = revision.batch_id
     where change.entity_type = 'edition'
       and change.operation = 'insert'
-      and batch.source_key like 'runrecs:uk:0-100km:%'
+      and (batch.source_key like 'runrecs:uk:0-100km:%' or batch.source_key like 'runrecs:collector:%')
       and change.after_json->'record'->>'id' is not null
   `;
   return rows.map((row) => row.id);
