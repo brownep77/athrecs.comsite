@@ -29,6 +29,8 @@ export type Scope = {
   min: number;
   max: number;
   unit: "km" | "mi";
+  /** Missing value preserves two passes for older clients and saved runs. */
+  passes?: 1 | 2;
   /** Explicit opt-in preserves saved country-only runs and older clients. */
   regional?: boolean;
   /** Missing country entry means every supported region in that country. */
@@ -104,6 +106,8 @@ export function validateScope(input: Scope): Scope {
     throw new Error("Choose a valid inclusive date range.");
   if ((Date.parse(input.dateTo) - Date.parse(input.dateFrom)) / 86400000 > 1096)
     throw new Error("Choose up to three years per run.");
+  if (input.passes !== undefined && input.passes !== 1 && input.passes !== 2)
+    throw new Error("Choose Quick or Thorough scan.");
   if (
     !["km", "mi"].includes(input.unit) ||
     !Number.isFinite(input.min) ||
@@ -139,6 +143,7 @@ export function validateScope(input: Scope): Scope {
     min: input.min,
     max: input.max,
     unit: input.unit,
+    passes: input.passes ?? 2,
     regional: input.regional === true,
     regions,
   };
@@ -152,7 +157,8 @@ export function selectedRegions(scope: Scope, country: string) {
 export function planScope(input: Scope): Window[] {
   const s = validateScope(input);
   const windows: Window[] = [];
-  for (const pass of [1, 2] as const)
+  const passes: (1 | 2)[] = s.passes === 1 ? [1] : [1, 2];
+  for (const pass of passes)
     for (const country of s.countries) {
       const regions = selectedRegions(s, country);
       // A regional country has region jobs only; never a parallel country-wide duplicate.

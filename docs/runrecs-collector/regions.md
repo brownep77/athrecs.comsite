@@ -1,6 +1,6 @@
 # Regional race collection
 
-New console runs enable **Split large countries into states and regions** by default. Worldwide still starts one durable run, with each selected region receiving its own two passes and inclusive quarterly date windows. Selecting a country selects all its regions initially; expand that country to choose a subset. Empty region selections are rejected. Other countries continue to use national jobs.
+New console runs enable **Split large countries into states and regions** by default. Worldwide still starts one durable run, with each selected region receiving its own inclusive quarterly date windows: one pass in Quick mode (the console default), or two in Thorough mode. Selecting a country selects all its regions initially; expand that country to choose a subset. Empty region selections are rejected. Other countries continue to use national jobs.
 
 | Country | Collection areas |
 | --- | --- |
@@ -13,7 +13,7 @@ New console runs enable **Split large countries into states and regions** by def
 | Brazil | 26 states plus Federal District (27) |
 | Mexico | 31 states plus Mexico City (32) |
 
-This is 282 regional areas. With the remaining 242 national/territory entries, the 2027–2028 worldwide preset has 524 areas × 8 quarters × 2 passes = **8,384 jobs**. The console shows the actual job count before starting. Turning regional collection off restores the national preset. Regional coverage adds provider requests; it does not promise exhaustive race coverage, and the per-job 50-candidate cap still applies.
+This is 282 regional areas. With the remaining 242 national/territory entries, the 2027–2028 worldwide preset has 524 areas × 8 quarters = **4,192 quick searches**, or **8,384 thorough searches** with a second pass. The console shows the actual search count before starting. Turning regional collection off restores the national preset. Regional coverage adds provider requests; it does not promise exhaustive race coverage, and the per-job 50-candidate cap still applies.
 
 ## Identity and boundaries
 
