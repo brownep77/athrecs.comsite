@@ -17,9 +17,10 @@ const LATEST_DAILY_SCAN_CHECKED_AT = "2026-09-05";
 const NEWEST_DAILY_SCAN_CHECKED_AT = "2026-09-06";
 const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
 const NEWEST_DAILY_RELEASE_CHECKED_AT = "2026-09-10";
+const LATEST_DAILY_PUBLICATION_CHECKED_AT = "2026-09-12";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 62;
-const NEW_EDITION_COUNT = 65;
+const NEW_SERIES_COUNT = 63;
+const NEW_EDITION_COUNT = 66;
 const EXISTING_SERIES_EDITION_COUNT = 16;
 
 async function loadModule(input) {
@@ -56,7 +57,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "10mi").length,
-  13,
+  14,
   "The 10-mile total changed unexpectedly",
 );
 
@@ -167,6 +168,7 @@ for (const edition of dailyHalfTenMileEditions) {
         LATEST_DAILY_SCAN_CHECKED_AT,
         NEWEST_DAILY_SCAN_CHECKED_AT,
         CURRENT_DAILY_RELEASE_CHECKED_AT,
+        LATEST_DAILY_PUBLICATION_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -819,6 +821,29 @@ assert.equal(omaghEdition?.date, "2027-04-04", "Omagh Half date changed unexpect
 assert.equal(omaghEdition?.status, "TBC", "Omagh Half must remain closed during event setup");
 assert(!omaghEdition?.entryOptions?.length, "Omagh Half must not expose an unfinished checkout");
 
+const walledCitySeries = dailyHalfTenMileSeries.find(
+  (series) => series.slug === "walled-city-10-mile-road-race-2027",
+);
+const walledCityEdition = dailyHalfTenMileEditions.find(
+  (edition) => edition.seriesSlug === "walled-city-10-mile-road-race-2027",
+);
+assert(walledCitySeries, "Walled City 10 Mile is missing from the public catalogue");
+assert.equal(walledCitySeries.country, "Northern Ireland", "Walled City has the wrong country");
+assert.equal(walledCityEdition?.date, "2027-03-13", "Walled City has the wrong date");
+assert.equal(walledCityEdition?.distance, "10mi", "Walled City has the wrong distance");
+assert.equal(walledCityEdition?.status, "TBC", "Walled City must remain closed before entry opens");
+assert(!walledCityEdition?.entryOptions?.length, "Walled City must not expose an unopened checkout");
+assert.equal(
+  walledCitySeries.source_url,
+  "https://www.facebook.com/thederrymarathon/",
+  "Walled City lost its official organiser provenance",
+);
+assert.match(
+  walledCitySeries.description,
+  new RegExp(LATEST_DAILY_PUBLICATION_CHECKED_AT),
+  "Walled City has a stale source check",
+);
+
 assert.equal(
   dailyHalfTenMileEditionOverrides["tibthorpe-loop|2027-02-20|Half"]?.entryUrl,
   "https://www.sientries.co.uk/enter.php?event_id=17658",
@@ -831,9 +856,9 @@ assert.equal(
 );
 assert(
   dailyHalfTenMileResearchQueue.some(
-    (candidate) => candidate.slug === "runclare-lisdoonvarna-10-mile-2027",
+    (candidate) => candidate.slug === "runclare-kilkee-10-mile-2027",
   ),
-  "RunClare Lisdoonvarna 10 must remain held while its permit is pending",
+  "RunClare Kilkee 10 must remain held while its permit is pending",
 );
 for (const slug of [
   "walter-raleigh-round-half-marathon-2027",
@@ -911,5 +936,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (49 half marathons and 13 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, seven enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (52 half marathons and 14 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} new editions on existing cards, seven enriched multi-distance cards, ${dailyHalfTenMileResearchQueue.length} held candidates and catalogue-level duplicate protection.`,
 );
