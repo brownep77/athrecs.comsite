@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { randomUUID } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { registerHooks } from "node:module";
@@ -30,6 +31,7 @@ assert(RESEARCH_TIMEOUT_MS > 90_000, "Dense research must outlast the old abort 
 assert(RESEARCH_TIMEOUT_MS + 60_000 <= WORKER_MAX_DURATION_SECONDS * 1000);
 assert(JOB_LEASE_SECONDS >= WORKER_MAX_DURATION_SECONDS + 120);
 const { REGIONS_BY_COUNTRY } = await import("../src/lib/race-collector/regions.ts");
+const { validateReviewQuery, reviewGuidance } = await import("../src/lib/race-collector/review.ts");
 const scope = {
   countries: ["IE"],
   dateFrom: "2027-01-01",
@@ -565,6 +567,80 @@ assert.equal(
 );
 if (priorSecret) process.env.CRON_SECRET = priorSecret;
 else delete process.env.CRON_SECRET;
+// Paging must expose the complete review queue, including rows beyond the old 200-row ceiling.
+const fixtureJob = (
+  await sql`select id from race_collector_jobs where run_id=${nextRun.id}::uuid limit 1`
+)[0].id;
+const queueRows = Array.from({ length: 225 }, (_, index) => ({
+  id: randomUUID(),
+  fingerprint: `queue-${index}`,
+  candidate: { ...c, name: `Queue fixture ${String(index).padStart(3, "0")}` },
+  status: index < 150 ? "review" : index < 175 ? "held" : index < 200 ? "duplicate" : "staged",
+  reason: index >= 150 && index < 175 ? "Possible event alias needs review" : "Check source",
+}));
+await sql`insert into race_collector_candidates(id,run_id,job_id,fingerprint,candidate,status,reason,event_slug) select (x->>'id')::uuid,${nextRun.id}::uuid,${fixtureJob}::uuid,x->>'fingerprint',x->'candidate',x->>'status',x->>'reason','queue-fixture' from jsonb_array_elements(${JSON.stringify(queueRows)}::jsonb) x`;
+const seenIds = new Set();
+for (let page = 0; page < 5; page++) {
+  const result = await service.dashboard(nextRun.id, sql, {
+    search: "QUEUE fixture",
+    page,
+    pageSize: 50,
+  });
+  assert.equal(result.reviewPage.total, 225);
+  assert.equal(result.reviewPage.pages, 5);
+  for (const row of result.candidates) {
+    assert(!seenIds.has(row.id), "Pagination repeated a finding");
+    seenIds.add(row.id);
+  }
+}
+assert.equal(seenIds.size, 225);
+const heldPage = await service.dashboard(nextRun.id, sql, { status: "held", search: "alias" });
+assert.equal(heldPage.reviewPage.total, 25);
+assert(heldPage.candidates.every((row) => row.status === "held"));
+const lastPage = await service.dashboard(nextRun.id, sql, {
+  search: "Queue fixture",
+  page: 999,
+  pageSize: 100,
+});
+assert.equal(lastPage.reviewPage.page, 2);
+assert.equal(lastPage.candidates.length, 25);
+const noMatches = await service.dashboard(nextRun.id, sql, { search: "%_'", page: 10 });
+assert.equal(noMatches.reviewPage.total, 0, "Search characters must be literal, not SQL patterns");
+assert.equal(noMatches.reviewPage.page, 0);
+for (const input of [
+  { status: "published" },
+  { page: -1 },
+  { page: 1.5 },
+  { pageSize: 500 },
+  { search: "a".repeat(201) },
+])
+  assert.throws(() => validateReviewQuery(input), /Invalid review filters/);
+await assert.rejects(
+  () =>
+    service.stageReviewed(
+      queueRows.slice(0, 51).map((row) => row.id),
+      "staff@example.org",
+      sql,
+    ),
+  /1–50/,
+);
+await assert.rejects(
+  () => service.stageReviewed([queueRows[150].id], "staff@example.org", sql),
+  /Selection changed/,
+);
+assert.equal(
+  reviewGuidance({ status: "staged", reason: "Check source", event_id: null }).title,
+  "Sent for publication",
+);
+assert.match(
+  reviewGuidance({ status: "held", reason: "Possible event alias needs review", event_id: null })
+    .why,
+  /different name/,
+);
+assert.match(
+  reviewGuidance({ status: "duplicate", reason: "duplicate", event_id: 1 }).next,
+  /No action needed/,
+);
 await pg.close();
 console.log(
   "Race collector verified: quick/thorough scopes, monthly boundaries, parallel cap, pass ordering, concurrent deduplication, regions, units, durable jobs, leases, retries, staging and worker authentication.",
