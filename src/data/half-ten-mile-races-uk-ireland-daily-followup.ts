@@ -16,6 +16,7 @@ const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
 const LATEST_DAILY_RELEASE_CHECKED_AT = "2026-09-09";
 const NEWEST_DAILY_RELEASE_CHECKED_AT = "2026-09-10";
 const LATEST_DAILY_RESEARCH_CHECKED_AT = "2026-09-11";
+const LATEST_DAILY_PUBLICATION_CHECKED_AT = "2026-09-12";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1170,6 +1171,24 @@ const seeds: RaceSeed[] = [
     notes:
       "The direct official registration page consistently confirms the 25 April 2027 marathon and half-marathon programme and open event-specific checkout.",
   },
+  {
+    slug: "walled-city-10-mile-road-race-2027",
+    name: "Walled City 10 Mile Road Race 2027",
+    date: "2027-03-13",
+    distance: "10mi",
+    country: "Northern Ireland",
+    county: "County Londonderry",
+    city: "Derry",
+    area: "St Columb's Park and the River Foyle",
+    surface: "Road",
+    organiser: "Derry Marathon",
+    url: "https://www.facebook.com/thederrymarathon/",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: LATEST_DAILY_PUBLICATION_CHECKED_AT,
+    notes:
+      "The official organiser account confirms Saturday 13 March 2027 and the 10-mile distance. Registration has not opened, so no checkout or unverified start time is advertised.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -1618,11 +1637,11 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
   },
   {
-    slug: "runclare-lisdoonvarna-10-mile-2027",
+    slug: "runclare-kilkee-10-mile-2027",
     date: "2027-04-11",
     country: "Ireland",
     reason:
-      "The official Athletics Ireland calendar now identifies the RunClare 10-mile finale as Lisdoonvarna but keeps its permit pending; the series registration page has not yet replaced its Coming Soon copy.",
+      "The official Athletics Ireland calendar now identifies the RunClare 10-mile finale as Kilkee but keeps its permit pending; the series registration page still says Coming Soon without naming the venue.",
     sourceUrl: "https://eventmaster.ie/event/Z7M0iMWcZY",
   },
   {
