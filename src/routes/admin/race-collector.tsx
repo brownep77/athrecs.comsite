@@ -62,6 +62,7 @@ function CollectorPage() {
     max: 500,
     unit: "mi",
     regional: true,
+    passes: 1,
   });
   const [areaChoice, setAreaChoice] = useState("worldwide");
   const [dateChoice, setDateChoice] = useState("2027-2028");
@@ -380,6 +381,28 @@ function CollectorPage() {
                 </div>
               )}
             </div>
+            <div>
+              <label htmlFor="scan-depth" className="text-sm font-medium text-fg">
+                Scan depth
+              </label>
+              <select
+                id="scan-depth"
+                className={`${inputClass} mt-2`}
+                value={scope.passes ?? 2}
+                onChange={(e) => setScope({ ...scope, passes: Number(e.target.value) as 1 | 2 })}
+              >
+                <option value={1}>Quick scan — one pass</option>
+                <option value={2}>Thorough scan — two passes</option>
+              </select>
+              <p className="mt-2 text-xs leading-5 text-muted">
+                {scope.passes === 1
+                  ? "Fewer searches, with source and duplicate checks. A thorough scan can find extra races."
+                  : "Includes a second search for missed races. Takes longer and uses more research."}
+              </p>
+              <p className="mt-2 text-xs font-medium text-fg">
+                {plan.jobs.toLocaleString()} searches planned. Choose one month for a smaller scan.
+              </p>
+            </div>
           </fieldset>
           <div className="space-y-1 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-950">
             <p className="font-medium">
@@ -443,6 +466,7 @@ function CollectorPage() {
                 max: 500,
                 unit: "mi",
                 regional: true,
+                passes: 1,
               });
               setAreaChoice("IE");
               setDateChoice("custom");
@@ -598,9 +622,8 @@ function CollectorPage() {
               </div>
             </fieldset>
             <p className="mt-4 text-xs leading-5 text-muted">
-              {plan.jobs.toLocaleString()} searches planned, including a second pass for missed
-              races. Northern Ireland is within the UK. Cross-border races use their start location.
-              Parkrun remains separate.
+              Independent searches run up to three at a time. Northern Ireland is within the UK.
+              Cross-border races use their start location. Parkrun remains separate.
             </p>
           </details>
         </section>
@@ -641,7 +664,8 @@ function CollectorPage() {
               {data.runs.map((r) => (
                 <option key={r.id} value={r.id}>
                   {new Date(r.created_at).toLocaleString()} · {r.scope.countries.length} countries ·{" "}
-                  {r.scope.regional ? "by region" : "national"} · {r.status}
+                  {r.scope.regional ? "by region" : "national"} ·{" "}
+                  {r.scope.passes === 1 ? "quick" : "thorough"} · {r.status}
                 </option>
               ))}
             </select>
@@ -681,8 +705,8 @@ function CollectorPage() {
               />
               <p className="text-xs text-muted">
                 {run.scope.dateFrom} — {run.scope.dateTo} · {run.scope.min}–{run.scope.max}{" "}
-                {run.scope.unit}. Search completion does not mean every race is announced or
-                verified.
+                {run.scope.unit} · {run.scope.passes === 1 ? "Quick scan" : "Thorough scan"}. Search
+                completion does not mean every race is announced or verified.
               </p>
               {run.error && (
                 <p role="alert" className="text-sm text-amber-700">
@@ -726,8 +750,8 @@ function CollectorPage() {
             </>
           ) : (
             <div className="rounded-xl border border-dashed border-border p-6 text-sm leading-6 text-muted">
-              Press Start scan to begin. We’ll search your chosen locations, check for duplicates
-              and look again for missed races. New findings will appear here for source review.
+              Press Start scan to begin. We’ll search your chosen locations and check for
+              duplicates. New findings will appear here for source review.
             </div>
           )}
           {run && (

@@ -69,6 +69,13 @@ for (const month of ["", "2027-00", "2027-13", "2027-2", "not-a-month"])
   assert.equal(core.calendarMonthRange(month, 1), null);
 const windows = core.planScope(scope);
 assert.equal(windows.length, 16);
+assert.equal(core.validateScope(scope).passes, 2);
+assert.equal(core.planScope({ ...scope, passes: 2 }).length, 16);
+const quick = core.planScope({ ...scope, passes: 1 });
+assert.equal(quick.length, 8);
+assert(quick.every((job) => job.pass === 1));
+for (const passes of [0, 3, "1", null])
+  assert.throws(() => core.validateScope({ ...scope, passes }));
 assert.equal(windows[4].dateFrom, "2028-01-01");
 assert.equal(windows[4].dateTo, "2028-03-31");
 assert.equal(windows[7].dateTo, "2028-12-31");
@@ -278,11 +285,12 @@ assert.equal((await sql`select status from race_collector_candidates`)[0].status
 await sql`update race_collector_jobs set status='queued' where ordinal=0`;
 await service.runWorker(sql, research);
 assert.equal((await sql`select count(*)::int n from race_collector_candidates`)[0].n, 1);
-// An expired lease is recovered; a valid lease prevents a second model call.
-await sql`update race_collector_jobs set status='running',lease_until=now()+interval '1 minute' where ordinal=1`;
+// Valid leases cap all overlapping invocations at three requests; expired work is recovered.
+await sql`update race_collector_jobs set status='running',lease_until=now()+interval '1 minute' where ordinal in (1,2,3)`;
 const before = calls;
 assert.equal((await service.runWorker(sql, research)).worked, false);
 assert.equal(calls, before);
+await sql`update race_collector_jobs set status='queued',lease_until=null where ordinal in (2,3)`;
 await sql`update race_collector_jobs set lease_until=now()-interval '1 minute' where ordinal=1`;
 await service.runWorker(sql, async () => {
   throw new Error("Simulated upstream failure");
@@ -378,6 +386,121 @@ const stateBatch = (
 )[0];
 assert.equal(stateBatch.payload.events[0].county, "California");
 assert.equal(stateBatch.payload.editions.length, 1);
+// Overlapping cron batches share the database cap, and concurrent repeated discoveries stay unique.
+const parallelRun = await service.createRun(
+  { ...scope, dateTo: "2027-12-31", passes: 1 },
+  "staff@example.org",
+  sql,
+);
+assert.equal((await service.dashboard(parallelRun.id, sql)).run.total_jobs, 4);
+// Simulate duplicated delivery windows to exercise the commit-time deduplication lock.
+await sql`update race_collector_jobs set "window"=${JSON.stringify(quick[0])}::jsonb where run_id=${parallelRun.id}::uuid`;
+let releaseResearch, reachedCapacity;
+const heldResearch = new Promise((resolve) => {
+  releaseResearch = resolve;
+});
+const capacity = new Promise((resolve) => {
+  reachedCapacity = resolve;
+});
+let inFlight = 0,
+  peak = 0;
+const parallelResearch = async () => {
+  inFlight++;
+  peak = Math.max(peak, inFlight);
+  if (inFlight === 3) reachedCapacity();
+  await heldResearch;
+  inFlight--;
+  return {
+    candidates: [{ ...c }],
+    sources: [c.sourceUrl],
+    gaps: [],
+    capped: false,
+    usage: "{}",
+    responseId: "parallel-fixture",
+  };
+};
+const batchWork = service.runWorkerBatch(sql, parallelResearch);
+let capacityTimer;
+try {
+  await Promise.race([
+    capacity,
+    new Promise((_, reject) => {
+      capacityTimer = setTimeout(
+        () => reject(new Error("Parallel workers did not reach capacity")),
+        5000,
+      );
+    }),
+  ]);
+  assert.equal(
+    (
+      await sql`select count(*)::int n from race_collector_jobs where run_id=${parallelRun.id}::uuid and status='running'`
+    )[0].n,
+    3,
+  );
+  assert.equal((await service.runWorkerBatch(sql, parallelResearch)).worked, 0);
+  await service.controlRun(parallelRun.id, "pause", sql);
+} finally {
+  clearTimeout(capacityTimer);
+  releaseResearch();
+}
+assert.equal((await batchWork).worked, 3);
+assert.equal(peak, 3);
+assert.equal((await service.runWorkerBatch(sql, parallelResearch)).worked, 0);
+assert.equal((await service.dashboard(parallelRun.id, sql)).candidates.length, 1);
+await service.controlRun(parallelRun.id, "resume", sql);
+assert.equal((await service.runWorkerBatch(sql, parallelResearch)).worked, 1);
+assert.equal((await service.dashboard(parallelRun.id, sql)).run.status, "complete");
+// A delayed first pass blocks only its own region's second pass, including retry backoff.
+const orderedRun = await service.createRun(selectedScope, "staff@example.org", sql);
+await sql`update race_collector_jobs set available_at=now()+interval '1 hour' where run_id=${orderedRun.id}::uuid and "window"->>'regionCode'='US-CA' and "window"->>'pass'='1'`;
+const seenPasses = [];
+const orderedResearch = async (job) => {
+  seenPasses.push(`${job.regionCode}:${job.pass}`);
+  return {
+    candidates: [],
+    sources: [],
+    gaps: ["No current programme found."],
+    capped: false,
+    usage: "{}",
+    responseId: "ordered-fixture",
+  };
+};
+await service.runWorker(sql, orderedResearch);
+await service.runWorker(sql, orderedResearch);
+assert.deepEqual(seenPasses, ["US-NY:1", "US-NY:2"]);
+assert.equal((await service.runWorkerBatch(sql, orderedResearch)).worked, 0);
+await sql`update race_collector_jobs set available_at=now() where run_id=${orderedRun.id}::uuid`;
+await service.runWorker(sql, orderedResearch);
+await service.runWorker(sql, orderedResearch);
+assert.deepEqual(seenPasses, ["US-NY:1", "US-NY:2", "US-CA:1", "US-CA:2"]);
+assert.equal((await service.dashboard(orderedRun.id, sql)).run.status, "complete");
+// Cancelling and starting a new run cannot exceed the cap while old requests still have leases.
+const cancelledRun = await service.createRun(
+  { ...scope, dateTo: "2027-09-30", passes: 1 },
+  "staff@example.org",
+  sql,
+);
+await sql`update race_collector_jobs set status='running',lease_until=now()+interval '1 minute' where run_id=${cancelledRun.id}::uuid`;
+await service.controlRun(cancelledRun.id, "cancel", sql);
+const nextRun = await service.createRun(
+  { ...scope, dateTo: "2027-03-31", passes: 1 },
+  "staff@example.org",
+  sql,
+);
+const callsBeforeCancelCheck = calls;
+assert.equal((await service.runWorkerBatch(sql, research)).worked, 0);
+assert.equal(calls, callsBeforeCancelCheck);
+await sql`update race_collector_jobs set status='failed',lease_until=null where run_id=${cancelledRun.id}::uuid`;
+// A provider rate error pauses future work, including requests from later batches.
+await service.runWorkerBatch(sql, async () => {
+  throw Object.assign(new Error("Simulated provider 429"), { pauseRun: true });
+});
+assert.equal((await service.dashboard(nextRun.id, sql)).run.status, "paused");
+assert.equal((await service.runWorkerBatch(sql, research)).worked, 0);
+await sql`update race_collector_jobs set available_at=now() where run_id=${nextRun.id}::uuid`;
+await service.controlRun(nextRun.id, "resume", sql);
+await service.runWorkerBatch(sql, research);
+assert.equal((await service.dashboard(nextRun.id, sql)).run.status, "complete");
 const priorSecret = process.env.CRON_SECRET;
 delete process.env.CRON_SECRET;
 assert.equal(service.authorizedWorker(new Request("https://example.org")), false);
@@ -398,5 +521,5 @@ if (priorSecret) process.env.CRON_SECRET = priorSecret;
 else delete process.env.CRON_SECRET;
 await pg.close();
 console.log(
-  "Race collector verified: regional selection and boundaries, legacy scopes, region progress, units, cross-region duplicates, durable jobs, leases, retries, staging and worker authentication.",
+  "Race collector verified: quick/thorough scopes, monthly boundaries, parallel cap, pass ordering, concurrent deduplication, regions, units, durable jobs, leases, retries, staging and worker authentication.",
 );

@@ -25,6 +25,7 @@ type Run = {
   error: string | null;
 };
 type Job = { id: string; run_id: string; window: Window; lease_token: string; attempts: number };
+export const MAX_CONCURRENT_RESEARCH = 3;
 export type CandidateRow = {
   id: string;
   candidate: Candidate;
@@ -122,17 +123,17 @@ export async function controlRun(
 export async function runWorker(db?: Sql, research = researchWindow) {
   const sql = db ?? (await getSql());
   const claimed = await sql.transaction(async (tx) => {
-    // Serial claim per run; one research request at a time and leases survive lost invocations.
+    // Serialize short claims, then research outside the transaction. Leases cap overlapping ticks.
     const runs =
-      await tx<Run>`select * from race_collector_runs where status='running' order by created_at limit 1 for update skip locked`;
+      await tx<Run>`select * from race_collector_runs where status='running' order by created_at limit 1 for update`;
     const run = runs[0];
     if (!run) return null;
     await tx`update race_collector_jobs set status=case when attempts>=3 then 'failed' else 'queued' end,lease_token=null,error='Previous worker interrupted; checkpoint recovered' where run_id=${run.id}::uuid and status='running' and lease_until<now()`;
     const busy =
-      await tx`select id from race_collector_jobs where run_id=${run.id}::uuid and status='running'`;
-    if (busy.length) return null;
+      await tx`select id from race_collector_jobs where status='running' and lease_until>now()`;
+    if (busy.length >= MAX_CONCURRENT_RESEARCH) return null;
     const jobs =
-      await tx<Job>`select * from race_collector_jobs where run_id=${run.id}::uuid and status='queued' and available_at<=now() order by ordinal limit 1 for update skip locked`;
+      await tx<Job>`select j.* from race_collector_jobs j where j.run_id=${run.id}::uuid and j.status='queued' and j.available_at<=now() and not exists(select 1 from race_collector_jobs earlier where earlier.run_id=j.run_id and earlier.status in ('queued','running') and (earlier."window"->>'pass')::int<(j."window"->>'pass')::int and earlier."window"->>'country'=j."window"->>'country' and coalesce(earlier."window"->>'regionCode','')=coalesce(j."window"->>'regionCode','')) order by j.ordinal limit 1 for update of j skip locked`;
     if (!jobs.length) {
       const pending =
         await tx`select id from race_collector_jobs where run_id=${run.id}::uuid and status in ('queued','running')`;
@@ -165,6 +166,19 @@ export async function runWorker(db?: Sql, research = researchWindow) {
       await sql`update race_collector_runs set status='paused',error=${message},updated_at=now() where id=${run.id}::uuid and status='running'`;
     return { worked: true, error: message };
   }
+}
+export async function runWorkerBatch(db?: Sql, research = researchWindow) {
+  const sql = db ?? (await getSql());
+  const settled = await Promise.allSettled(
+    Array.from({ length: MAX_CONCURRENT_RESEARCH }, () => runWorker(sql, research)),
+  );
+  const failed = settled.find((r) => r.status === "rejected");
+  if (failed?.status === "rejected") throw failed.reason;
+  const results = settled.flatMap((r) => (r.status === "fulfilled" ? [r.value] : []));
+  return {
+    worked: results.filter((r) => r.worked).length,
+    errors: results.flatMap((r) => (r.error ? [r.error] : [])),
+  };
 }
 export async function saveResult(sql: Sql, job: Job, run: Run, result: ResearchResult) {
   await sql.transaction(async (tx) => {
