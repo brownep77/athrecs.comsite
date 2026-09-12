@@ -338,6 +338,7 @@ async function lockCurrentEditionSnapshot(
 export async function stageCatalogueBatch(
   input: CatalogueBatchInput,
   submittedBy: string,
+  sqlOverride?: Sql,
 ): Promise<{ batchId: string; reused: boolean }> {
   const sourceKey = input.sourceKey?.trim();
   if (!sourceKey) throw new Error("sourceKey is required");
@@ -355,7 +356,7 @@ export async function stageCatalogueBatch(
 
   const payloadText = JSON.stringify(payload);
   const payloadHash = createHash("sha256").update(payloadText).digest("hex");
-  const sql = await getSql();
+  const sql = sqlOverride ?? (await getSql());
   const existing = await sql<{ id: string }>`
     select id
     from catalogue_import_batches
@@ -426,6 +427,11 @@ export async function validateCatalogueBatch(batchId: string) {
     `;
 
     const payload = bundleFromRow(batch);
+    if (batch.source_key.startsWith("runrecs:collector:")) {
+      const { assertCollectorPublication } =
+        await import("../race-collector/publication-guard.server");
+      await assertCollectorPublication(tx, batchId, payload);
+    }
     const eventCounts = new Map<string, number>();
     const editionCounts = new Map<string, number>();
     for (const event of payload.events ?? []) {
@@ -525,6 +531,11 @@ export async function publishCatalogueBatch(batchId: string, publishedBy: string
         throw new Error("Only a validated, ready batch can be published");
       }
       const payload = bundleFromRow(batch);
+      if (batch.source_key.startsWith("runrecs:collector:")) {
+        const { assertCollectorPublication } =
+          await import("../race-collector/publication-guard.server");
+        await assertCollectorPublication(tx, batchId, payload);
+      }
       await tx`
         update catalogue_import_batches
         set status = 'publishing', error = null

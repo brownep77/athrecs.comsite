@@ -127,5 +127,11 @@
   ],
   "regions": [
     "lhr1"
+  ],
+  "crons": [
+    {
+      "path": "/api/race-collector-worker",
+      "schedule": "* * * * *"
+    }
   ]
 }

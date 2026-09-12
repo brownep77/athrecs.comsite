@@ -118,9 +118,7 @@ function AdminPage() {
   const [resultSourceUrl, setResultSourceUrl] = useState("");
   const [resultFileName, setResultFileName] = useState("");
   const [resultFileFormat, setResultFileFormat] = useState<"json" | "csv">("json");
-  const [resultMethod, setResultMethod] = useState<"scan" | "upload" | "api" | "manual">(
-    "upload",
-  );
+  const [resultMethod, setResultMethod] = useState<"scan" | "upload" | "api" | "manual">("upload");
 
   const cards = useQuery({
     queryKey: ["admin-events"],
@@ -307,6 +305,9 @@ function AdminPage() {
             <Link to="/admin/catalogue-publishing">Open staged publishing</Link>
           </Button>
         </div>
+        <Button asChild variant="secondary">
+          <Link to="/admin/race-collector">Worldwide race collector</Link>
+        </Button>
         <p className="mt-4 max-w-2xl text-sm text-muted">
           Legacy tools: extract races, paste JSON, or bulk-load a CSV. Live listings use the same
           Race cards as the public Events page.
