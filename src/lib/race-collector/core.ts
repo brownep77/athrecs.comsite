@@ -83,6 +83,15 @@ export function realDate(v: string) {
     new Date(v + "T00:00:00Z").toISOString().slice(0, 10) === v
   );
 }
+export function calendarMonthRange(month: string, months: 1 | 3) {
+  const dateFrom = `${month}-01`;
+  if (!realDate(dateFrom) || ![1, 3].includes(months)) return null;
+  const end = new Date(dateFrom + "T00:00:00Z");
+  end.setUTCMonth(end.getUTCMonth() + months);
+  end.setUTCDate(0);
+  const dateTo = end.toISOString().slice(0, 10);
+  return realDate(dateTo) ? { dateFrom, dateTo } : null;
+}
 export function validateScope(input: Scope): Scope {
   if (
     !input ||

@@ -33,6 +33,40 @@ const scope = {
   max: 500,
   unit: "mi",
 };
+// Calendar presets include the entire selected month(s), including leap days and year changes.
+for (const [month, months, dateFrom, dateTo] of [
+  ["2027-01", 1, "2027-01-01", "2027-01-31"],
+  ["2027-02", 1, "2027-02-01", "2027-02-28"],
+  ["2028-02", 1, "2028-02-01", "2028-02-29"],
+  ["2027-04", 1, "2027-04-01", "2027-04-30"],
+  ["2027-02", 3, "2027-02-01", "2027-04-30"],
+  ["2027-11", 3, "2027-11-01", "2028-01-31"],
+  ["2027-12", 3, "2027-12-01", "2028-02-29"],
+]) {
+  const range = core.calendarMonthRange(month, months);
+  assert.deepEqual(range, { dateFrom, dateTo });
+  const jobs = core.planScope({
+    ...scope,
+    ...range,
+    countries: ["IE", "US"],
+    regional: true,
+    regions: { US: ["US-NY"] },
+  });
+  for (const country of ["IE", "US"])
+    for (const pass of [1, 2]) {
+      const selected = jobs.filter((job) => job.country === country && job.pass === pass);
+      assert.equal(selected[0].dateFrom, dateFrom);
+      assert.equal(selected.at(-1).dateTo, dateTo);
+      assert(selected.every((job) => job.regionCode === (country === "US" ? "US-NY" : undefined)));
+      for (let i = 1; i < selected.length; i++)
+        assert.equal(
+          Date.parse(selected[i].dateFrom) - Date.parse(selected[i - 1].dateTo),
+          86400000,
+        );
+    }
+}
+for (const month of ["", "2027-00", "2027-13", "2027-2", "not-a-month"])
+  assert.equal(core.calendarMonthRange(month, 1), null);
 const windows = core.planScope(scope);
 assert.equal(windows.length, 16);
 assert.equal(windows[4].dateFrom, "2028-01-01");
