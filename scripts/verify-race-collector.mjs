@@ -22,7 +22,9 @@ registerHooks({
 process.env.DATABASE_URL = "postgresql://test-only@127.0.0.1/never-connect";
 const core = await import("../src/lib/race-collector/core.ts");
 const service = await import("../src/lib/race-collector/service.server.ts");
-const { parseResearch } = await import("../src/lib/race-collector/research.server.ts");
+const { parseResearch, buildResearchPrompt } =
+  await import("../src/lib/race-collector/research.server.ts");
+const { REGIONS_BY_COUNTRY } = await import("../src/lib/race-collector/regions.ts");
 const scope = {
   countries: ["IE"],
   dateFrom: "2027-01-01",
@@ -37,6 +39,62 @@ assert.equal(windows[4].dateFrom, "2028-01-01");
 assert.equal(windows[4].dateTo, "2028-03-31");
 assert.equal(windows[7].dateTo, "2028-12-31");
 assert.equal(core.COLLECTOR_COUNTRIES.length, 250);
+// Saved scopes remain national. New scopes expand only the selected states/regions.
+const regionalScope = { ...scope, countries: ["US"], dateTo: "2027-03-31", regional: true };
+assert.equal(core.planScope({ ...regionalScope, regional: undefined }).length, 2);
+const usa = core.planScope(regionalScope);
+assert.equal(usa.length, 102);
+assert.equal(new Set(usa.map((w) => w.regionCode)).size, 51);
+assert(usa.some((w) => w.regionCode === "US-DC"));
+assert(
+  !usa.some((w) =>
+    [undefined, "US-PR", "US-GU", "US-AS", "US-MP", "US-VI", "US-UM"].includes(w.regionCode),
+  ),
+);
+assert.deepEqual(
+  Object.fromEntries(Object.entries(REGIONS_BY_COUNTRY).map(([c, regions]) => [c, regions.length])),
+  { US: 51, CA: 13, AU: 9, IN: 36, CN: 31, RU: 83, BR: 27, MX: 32 },
+);
+const world = core.planScope({
+  ...scope,
+  countries: core.COLLECTOR_COUNTRIES.map((c) => c.code),
+  regional: true,
+});
+assert.equal(world.length, 8384);
+assert.equal(
+  new Set(world.map((w) => `${w.country}|${w.regionCode ?? ""}|${w.pass}|${w.dateFrom}`)).size,
+  world.length,
+);
+assert(world.some((w) => w.country === "HK" && !w.regionCode));
+assert(!world.some((w) => ["CN-HK", "CN-MO", "CN-TW"].includes(w.regionCode)));
+const selectedScope = { ...regionalScope, regions: { US: ["US-NY", "US-CA", "US-NY"] } };
+const selectedWindows = core.planScope(selectedScope);
+assert.equal(selectedWindows.length, 4);
+assert.deepEqual([...new Set(selectedWindows.map((w) => w.regionCode))], ["US-CA", "US-NY"]);
+assert.equal(
+  core.planScope({ ...regionalScope, countries: ["US", "IE"], regions: { US: ["US-CA"] } }).length,
+  4,
+);
+for (const regions of [
+  { US: [] },
+  { US: ["CA-ON"] },
+  { US: ["US-PR"] },
+  { CA: ["CA-ON"] },
+  { US: "US-CA" },
+])
+  assert.throws(() => core.validateScope({ ...regionalScope, regions }));
+assert.throws(() =>
+  core.validateScope({ ...regionalScope, regional: false, regions: { US: ["US-CA"] } }),
+);
+assert.throws(() => core.validateScope({ ...regionalScope, regional: "true" }));
+const californiaPrompt = buildResearchPrompt(selectedWindows[0], selectedScope, []);
+assert(californiaPrompt.includes("ONLY in California (US-CA)"));
+assert(californiaPrompt.includes("state/region of its START venue"));
+assert(californiaPrompt.includes("BOTH miles and kilometres"));
+assert(californiaPrompt.includes("Puerto Rico"));
+assert.throws(() =>
+  buildResearchPrompt({ ...selectedWindows[0], regionCode: "CA-ON" }, selectedScope, []),
+);
 for (const pass of [1, 2]) {
   const w = windows.filter((x) => x.pass === pass);
   for (let i = 1; i < w.length; i++)
@@ -67,6 +125,33 @@ const c = {
   notes: "",
 };
 assert.deepEqual(core.candidateProblems(c, windows[0], scope), []);
+const regionalCandidate = {
+  ...c,
+  name: "Coastal State Run",
+  countryCode: "US",
+  country: "United States",
+  city: "San Diego",
+  region: "California",
+  regionCode: "US-CA",
+  sourceUrl: "https://state-race.example.org/programme/2027",
+};
+assert.deepEqual(core.candidateProblems(regionalCandidate, selectedWindows[0], selectedScope), []);
+assert(
+  core
+    .candidateProblems(
+      { ...regionalCandidate, regionCode: "US-NY" },
+      selectedWindows[0],
+      selectedScope,
+    )
+    .includes("Start state or region is outside this job or unresolved"),
+);
+assert(
+  core.candidateProblems(
+    { ...regionalCandidate, regionCode: undefined },
+    selectedWindows[0],
+    selectedScope,
+  ).length,
+);
 assert.notEqual(
   core.reconcile({ ...c, name: "北京马拉松", countryCode: "CN" }, [], []).eventSlug,
   core.reconcile({ ...c, name: "上海马拉松", countryCode: "CN" }, [], []).eventSlug,
@@ -206,6 +291,59 @@ const rows = await sql`select id from race_collector_candidates`;
 assert.equal(rows.length, 1);
 await service.controlRun(run.id, "cancel", sql);
 assert.equal((await service.runWorker(sql, research)).worked, false);
+// Regional jobs persist their scope; progress rolls up per state and country.
+const regionalRun = await service.createRun(selectedScope, "staff@example.org", sql);
+const regionalResearch = async (window, requestedScope, known) => {
+  assert.deepEqual(requestedScope.regions.US, ["US-CA", "US-NY"]);
+  if (window.regionCode === "US-NY") assert(!known.includes(regionalCandidate.name));
+  const candidates =
+    window.pass === 1 && window.regionCode === "US-CA"
+      ? [
+          regionalCandidate,
+          {
+            ...regionalCandidate,
+            name: "Unknown State Run",
+            regionCode: "",
+            sourceUrl: "https://unknown.example.org/race",
+          },
+        ]
+      : [{ ...regionalCandidate, distance: 6.2137119223733395, unit: "mi" }];
+  return {
+    candidates,
+    sources: [regionalCandidate.sourceUrl],
+    gaps: [],
+    capped: false,
+    usage: "{}",
+    responseId: "regional-fixture",
+  };
+};
+for (let n = 0; n < 4; n++) await service.runWorker(sql, regionalResearch);
+const regionalDashboard = await service.dashboard(regionalRun.id, sql);
+assert.equal(regionalDashboard.run.status, "complete");
+assert.equal(regionalDashboard.jobs.length, 2);
+assert(regionalDashboard.jobs.every((j) => j.count === 2 && j.status === "complete"));
+assert.equal(
+  regionalDashboard.jobs.reduce((n, j) => n + j.count, 0),
+  4,
+);
+assert.equal(regionalDashboard.candidates.length, 2); // one fact across states, units and both passes + one held
+assert.equal(
+  regionalDashboard.candidates.find((r) => r.candidate.name === "Unknown State Run").status,
+  "held",
+);
+const stateRow = regionalDashboard.candidates.find(
+  (r) => r.candidate.name === regionalCandidate.name,
+);
+assert.equal(stateRow.status, "review");
+assert.equal(stateRow.candidate.regionCode, "US-CA");
+assert.equal(stateRow.candidate.region, "California");
+assert(regionalDashboard.gaps.every((g) => ["US-CA", "US-NY"].includes(g.window.regionCode)));
+const stateStaged = await service.stageReviewed([stateRow.id], "staff@example.org", sql);
+const stateBatch = (
+  await sql`select payload from catalogue_import_batches where id=${stateStaged.batchId}`
+)[0];
+assert.equal(stateBatch.payload.events[0].county, "California");
+assert.equal(stateBatch.payload.editions.length, 1);
 const priorSecret = process.env.CRON_SECRET;
 delete process.env.CRON_SECRET;
 assert.equal(service.authorizedWorker(new Request("https://example.org")), false);
@@ -226,5 +364,5 @@ if (priorSecret) process.env.CRON_SECRET = priorSecret;
 else delete process.env.CRON_SECRET;
 await pg.close();
 console.log(
-  "Race collector verified: scope boundaries, units, duplicate identities, durable jobs, leases, retries, pause/cancel and worker authentication.",
+  "Race collector verified: regional selection and boundaries, legacy scopes, region progress, units, cross-region duplicates, durable jobs, leases, retries, staging and worker authentication.",
 );

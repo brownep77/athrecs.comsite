@@ -15,6 +15,7 @@ import {
   type Edition,
 } from "./core.ts";
 import { researchWindow, type ResearchResult } from "./research.server.ts";
+import { collectionRegion } from "./regions.ts";
 type Run = {
   id: string;
   scope: Scope;
@@ -149,7 +150,7 @@ export async function runWorker(db?: Sql, research = researchWindow) {
   try {
     const known = await sql<{
       name: string;
-    }>`select distinct candidate->>'name' name from race_collector_candidates where run_id=${run.id}::uuid and candidate->>'countryCode'=${job.window.country} limit 200`;
+    }>`select distinct candidate->>'name' name from race_collector_candidates where run_id=${run.id}::uuid and candidate->>'countryCode'=${job.window.country} and (${job.window.regionCode ?? null}::text is null or candidate->>'regionCode'=${job.window.regionCode ?? null}) limit 200`;
     const result = await research(
       job.window,
       run.scope,
@@ -182,6 +183,9 @@ export async function saveResult(sql: Sql, job: Job, run: Run, result: ResearchR
     for (const c of result.candidates) {
       c.distanceKm = c.distance * (c.unit === "mi" ? 1.609344 : 1);
       const issues = candidateProblems(c, job.window, run.scope);
+      const region = collectionRegion(job.window.country, c.regionCode);
+      if (region && c.regionCode === job.window.regionCode && !issues.length)
+        c.region = region.name;
       const country = COLLECTOR_COUNTRIES.find((x) => x.code === job.window.country)!;
       if (
         job.window.country !== "GB" ||
@@ -238,17 +242,18 @@ export async function saveResult(sql: Sql, job: Job, run: Run, result: ResearchR
     await tx`update race_collector_runs set updated_at=now(),status=case when status='running' and not exists(select 1 from race_collector_jobs where run_id=${run.id}::uuid and status in ('queued','running')) then 'complete' else status end where id=${run.id}::uuid`;
   });
 }
-export async function dashboard(runId?: string) {
-  const sql = await getSql();
+export async function dashboard(runId?: string, sqlOverride?: Sql) {
+  const sql = sqlOverride ?? (await getSql());
   const runs = await sql<Run>`select * from race_collector_runs order by created_at desc limit 15`;
   const run = runId ? runs.find((r) => r.id === runId) : runs[0];
   if (!run)
     return { readiness: readiness(), runs, run: null, jobs: [], candidates: [], counts: [] };
   const jobs = await sql<{
     country: string;
+    regionCode: string | null;
     status: string;
     count: number;
-  }>`select "window"->>'country' country,status,count(*)::int count from race_collector_jobs where run_id=${run.id}::uuid group by "window"->>'country',status`;
+  }>`select "window"->>'country' country,"window"->>'regionCode' as "regionCode",status,count(*)::int count from race_collector_jobs where run_id=${run.id}::uuid group by "window"->>'country',"window"->>'regionCode',status`;
   const counts = await sql<{
     status: string;
     count: number;

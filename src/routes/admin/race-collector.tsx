@@ -14,7 +14,14 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { COLLECTOR_COUNTRIES, safeUrl, planScope, type Scope } from "@/lib/race-collector/core";
+import {
+  COLLECTOR_COUNTRIES,
+  safeUrl,
+  planScope,
+  selectedRegions,
+  type Scope,
+} from "@/lib/race-collector/core";
+import { collectionRegion, collectionRegions } from "@/lib/race-collector/regions";
 import {
   getCollector,
   startCollector,
@@ -42,6 +49,7 @@ function CollectorPage() {
     min: 0,
     max: 500,
     unit: "mi",
+    regional: true,
   });
   const [search, setSearch] = useState("");
   const [runId, setRunId] = useState<string>();
@@ -119,10 +127,25 @@ function CollectorPage() {
   const failed =
     data?.jobs.filter((j) => j.status === "failed").reduce((n, j) => n + j.count, 0) ?? 0;
   const count = (state: string) => data?.counts.find((c) => c.status === state)?.count ?? 0;
+  const progressScope = run?.scope ?? scope;
+  const chooseCountries = (countries: string[]) =>
+    setScope((current) => ({
+      ...current,
+      countries,
+      regions: Object.fromEntries(
+        Object.entries(current.regions ?? {}).filter(([c]) => countries.includes(c)),
+      ),
+    }));
+  const regionalCountries = COLLECTOR_COUNTRIES.filter(
+    (c) => scope.countries.includes(c.code) && collectionRegions(c.code).length,
+  );
   const countryRows = COLLECTOR_COUNTRIES.filter(
     (c) =>
-      (!run || run.scope.countries.includes(c.code)) &&
-      c.name.toLowerCase().includes(search.toLowerCase()),
+      progressScope.countries.includes(c.code) &&
+      (c.name.toLowerCase().includes(search.toLowerCase()) ||
+        selectedRegions(progressScope, c.code).some((r) =>
+          r.name.toLowerCase().includes(search.toLowerCase()),
+        )),
   );
   const gaps = data && "gaps" in data ? (data.gaps ?? []) : [];
   return (
@@ -148,8 +171,8 @@ function CollectorPage() {
           <span className="text-emerald-300">One place to collect them.</span>
         </h1>
         <p className="relative mt-4 max-w-xl text-sm leading-6 text-slate-300">
-          Search country by country, check every distance and revisit the gaps. Review sourced
-          additions before they reach the calendar.
+          Search country by country and state by state, check every distance and revisit the gaps.
+          Review sourced additions before they reach the calendar.
         </p>
         <div className="relative mt-7 flex flex-wrap gap-5 text-xs text-slate-300">
           <span className="flex items-center gap-2">
@@ -272,13 +295,11 @@ function CollectorPage() {
                 className={`${inputClass} mt-2`}
                 value={scope.countries.length === COLLECTOR_COUNTRIES.length ? "all" : "selected"}
                 onChange={(e) =>
-                  setScope({
-                    ...scope,
-                    countries:
-                      e.target.value === "all"
-                        ? COLLECTOR_COUNTRIES.map((c) => c.code)
-                        : ["GB", "IE"],
-                  })
+                  chooseCountries(
+                    e.target.value === "all"
+                      ? COLLECTOR_COUNTRIES.map((c) => c.code)
+                      : ["GB", "IE"],
+                  )
                 }
               >
                 <option value="all">Worldwide · all countries & territories</option>
@@ -292,10 +313,7 @@ function CollectorPage() {
                   className={`${inputClass} mt-2`}
                   value={scope.countries}
                   onChange={(e) =>
-                    setScope({
-                      ...scope,
-                      countries: [...e.target.selectedOptions].map((o) => o.value),
-                    })
+                    chooseCountries([...e.target.selectedOptions].map((o) => o.value))
                   }
                 >
                   {COLLECTOR_COUNTRIES.map((c) => (
@@ -306,11 +324,96 @@ function CollectorPage() {
                 </select>
               )}
             </div>
+            <div className="space-y-3 border-t border-border pt-4">
+              <label className="flex items-start gap-2 text-sm font-medium text-fg">
+                <input
+                  type="checkbox"
+                  className="mt-1 accent-emerald-600"
+                  checked={scope.regional === true}
+                  onChange={(e) => setScope({ ...scope, regional: e.target.checked, regions: {} })}
+                />
+                Split large countries into states and regions
+              </label>
+              <p className="text-xs leading-5 text-muted">
+                Separate searches and progress for the USA, Canada, Australia, India, China, Russia,
+                Brazil and Mexico. Other countries use national searches.
+              </p>
+              {scope.regional &&
+                regionalCountries.map((c) => {
+                  const regions = collectionRegions(c.code);
+                  const chosen = selectedRegions(scope, c.code).map((r) => r.code);
+                  return (
+                    <details key={c.code} className="rounded-lg border border-border p-3">
+                      <summary className="cursor-pointer text-xs font-medium text-fg">
+                        {c.name} · {chosen.length}/{regions.length} regions
+                      </summary>
+                      <div className="my-2 flex gap-3">
+                        <button
+                          type="button"
+                          className="text-xs text-emerald-700"
+                          onClick={() =>
+                            setScope((current) => ({
+                              ...current,
+                              regions: { ...current.regions, [c.code]: regions.map((r) => r.code) },
+                            }))
+                          }
+                        >
+                          Select all {c.name} regions
+                        </button>
+                        <button
+                          type="button"
+                          className="text-xs text-muted"
+                          onClick={() =>
+                            setScope((current) => ({
+                              ...current,
+                              regions: { ...current.regions, [c.code]: [] },
+                            }))
+                          }
+                        >
+                          Clear {c.name} regions
+                        </button>
+                      </div>
+                      <div className="max-h-48 space-y-2 overflow-y-auto">
+                        {regions.map((r) => (
+                          <label
+                            key={r.code}
+                            className="flex items-center gap-2 text-xs text-muted"
+                          >
+                            <input
+                              type="checkbox"
+                              checked={chosen.includes(r.code)}
+                              aria-label={`${c.name}: ${r.name}`}
+                              onChange={(e) => {
+                                const checked = e.target.checked;
+                                setScope((current) => {
+                                  const codes = selectedRegions(current, c.code).map(
+                                    (region) => region.code,
+                                  );
+                                  return {
+                                    ...current,
+                                    regions: {
+                                      ...current.regions,
+                                      [c.code]: checked
+                                        ? [...codes, r.code]
+                                        : codes.filter((code) => code !== r.code),
+                                    },
+                                  };
+                                });
+                              }}
+                            />
+                            {r.name}
+                          </label>
+                        ))}
+                      </div>
+                    </details>
+                  );
+                })}
+            </div>
           </fieldset>
           <div className="rounded-xl bg-muted/5 p-4 text-xs leading-5 text-muted">
             <strong className="block text-fg">{plan.jobs.toLocaleString()} research windows</strong>
-            Two passes, split by calendar quarter. API usage is charged by your research provider.
-            Large scans can take several days.
+            Two passes per country or selected region, split by calendar quarter. API usage is
+            charged by your research provider. Large scans can take several days.
           </div>
           {plan.error && (
             <p className="text-xs text-red-700" role="alert">
@@ -340,7 +443,8 @@ function CollectorPage() {
           )}
           <p className="text-xs leading-5 text-muted">
             Northern Ireland is covered within the UK scan. Cross-border races use their start
-            country. Parkrun remains separate.
+            country and state/region. Territories already listed separately have their own scans.
+            Parkrun remains separate.
           </p>
         </section>
         <section className="min-w-0 space-y-5 rounded-2xl border border-border bg-surface p-6">
@@ -380,7 +484,7 @@ function CollectorPage() {
               {data.runs.map((r) => (
                 <option key={r.id} value={r.id}>
                   {new Date(r.created_at).toLocaleString()} · {r.scope.countries.length} countries ·{" "}
-                  {r.status}
+                  {r.scope.regional ? "by region" : "national"} · {r.status}
                 </option>
               ))}
             </select>
@@ -470,9 +574,9 @@ function CollectorPage() {
           <div className="relative">
             <Search size={16} className="absolute left-3 top-3 text-muted" />
             <input
-              aria-label="Find a country"
+              aria-label="Find a country or region"
               className={`${inputClass} pl-9`}
-              placeholder="Find a country…"
+              placeholder="Find a country or region…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -481,10 +585,15 @@ function CollectorPage() {
             {countryRows.map((c) => {
               const jobs = data?.jobs.filter((j) => j.country === c.code) ?? [];
               const total = jobs.reduce((n, j) => n + j.count, 0);
-              const done = jobs.find((j) => j.status === "complete")?.count ?? 0;
+              const done = jobs
+                .filter((j) => j.status === "complete")
+                .reduce((n, j) => n + j.count, 0);
               const running = jobs.some((j) => j.status === "running");
-              return (
-                <div key={c.code} className="flex items-center justify-between gap-3 py-3 text-sm">
+              const regionCodes = run
+                ? [...new Set(jobs.flatMap((j) => (j.regionCode ? [j.regionCode] : [])))]
+                : selectedRegions(scope, c.code).map((r) => r.code);
+              const summary = (
+                <span className="flex items-center justify-between gap-3 py-3 text-sm">
                   <span className="flex items-center gap-3">
                     <span className="w-7 text-xs font-semibold text-muted">{c.code}</span>
                     <span className="text-fg">{c.name}</span>
@@ -492,7 +601,41 @@ function CollectorPage() {
                   <span className="shrink-0 text-xs text-muted">
                     {running ? "Searching…" : total ? `${done}/${total} windows` : "Not started"}
                   </span>
-                </div>
+                </span>
+              );
+              if (!regionCodes.length) return <div key={c.code}>{summary}</div>;
+              return (
+                <details key={c.code} open={search ? true : undefined}>
+                  <summary className="cursor-pointer">{summary}</summary>
+                  <div className="mb-3 ml-10 space-y-2 border-l border-border pl-3">
+                    {regionCodes.map((code) => {
+                      const region = collectionRegion(c.code, code);
+                      const rows = jobs.filter((j) => j.regionCode === code);
+                      const total = rows.reduce((n, j) => n + j.count, 0);
+                      const done = rows
+                        .filter((j) => j.status === "complete")
+                        .reduce((n, j) => n + j.count, 0);
+                      const failed = rows
+                        .filter((j) => j.status === "failed")
+                        .reduce((n, j) => n + j.count, 0);
+                      return (
+                        <div
+                          key={code}
+                          className="flex items-center justify-between gap-3 text-xs text-muted"
+                        >
+                          <span>{region?.name ?? code}</span>
+                          <span className="shrink-0">
+                            {rows.some((j) => j.status === "running")
+                              ? "Searching…"
+                              : total
+                                ? `${done}/${total} windows${failed ? ` · ${failed} failed` : ""}`
+                                : "Not started"}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </details>
               );
             })}
           </div>
@@ -550,7 +693,9 @@ function CollectorPage() {
                     <td className="max-w-lg p-3">
                       <p className="font-medium text-fg">{row.candidate.name}</p>
                       <p className="text-xs text-muted">
-                        {row.candidate.city}, {row.candidate.country}
+                        {[row.candidate.city, row.candidate.region, row.candidate.country]
+                          .filter(Boolean)
+                          .join(", ")}
                       </p>
                       <a
                         href={
@@ -618,8 +763,11 @@ function CollectorPage() {
             {gaps.map((g, i) => (
               <article key={i} className="border-t border-border pt-3 text-xs text-muted">
                 <strong className="text-fg">
-                  {g.window.country} · {g.window.dateFrom} — {g.window.dateTo} · pass{" "}
-                  {g.window.pass}
+                  {g.window.country}
+                  {g.window.regionCode
+                    ? ` / ${collectionRegion(g.window.country, g.window.regionCode)?.name ?? g.window.regionCode}`
+                    : ""}{" "}
+                  · {g.window.dateFrom} — {g.window.dateTo} · pass {g.window.pass}
                 </strong>
                 {g.error && <p className="mt-2 text-amber-700">{g.error}</p>}
                 {g.report?.capped && (
