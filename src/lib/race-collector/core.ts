@@ -1,3 +1,4 @@
+import { collectionRegion, collectionRegions } from "./regions.ts";
 /** ISO 3166-1 countries and territories, plus Kosovo. Separate from public filters. */
 const ISO_CODES =
   "AD AE AF AG AI AL AM AO AQ AR AS AT AU AW AX AZ BA BB BD BE BF BG BH BI BJ BL BM BN BO BQ BR BS BT BV BW BY BZ CA CC CD CF CG CH CI CK CL CM CN CO CR CU CV CW CX CY CZ DE DJ DK DM DO DZ EC EE EG EH ER ES ET FI FJ FK FM FO FR GA GB GD GE GF GG GH GI GL GM GN GP GQ GR GS GT GU GW GY HK HM HN HR HT HU ID IE IL IM IN IO IQ IR IS IT JE JM JO JP KE KG KH KI KM KN KP KR KW KY KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MF MG MH MK ML MM MN MO MP MQ MR MS MT MU MV MW MX MY MZ NA NC NE NF NG NI NL NO NP NR NU NZ OM PA PE PF PG PH PK PL PM PN PR PS PT PW PY QA RE RO RS RU RW SA SB SC SD SE SG SH SI SJ SK SL SM SN SO SR SS ST SV SX SY SZ TC TD TF TG TH TJ TK TL TM TN TO TR TT TV TW TZ UA UG UM US UY UZ VA VC VE VG VI VN VU WF WS YE YT ZA ZM ZW XK".split(
@@ -28,14 +29,25 @@ export type Scope = {
   min: number;
   max: number;
   unit: "km" | "mi";
+  /** Explicit opt-in preserves saved country-only runs and older clients. */
+  regional?: boolean;
+  /** Missing country entry means every supported region in that country. */
+  regions?: Record<string, string[]>;
 };
-export type Window = { dateFrom: string; dateTo: string; country: string; pass: 1 | 2 };
+export type Window = {
+  dateFrom: string;
+  dateTo: string;
+  country: string;
+  regionCode?: string;
+  pass: 1 | 2;
+};
 export type Candidate = {
   name: string;
   countryCode: string;
   country: string;
   city: string;
   region: string;
+  regionCode?: string;
   date: string;
   distance: number;
   unit: "km" | "mi";
@@ -92,22 +104,66 @@ export function validateScope(input: Scope): Scope {
     input.max * (input.unit === "mi" ? 1.609344 : 1) > 804.6720001
   )
     throw new Error("Choose a positive range through 500 miles / 804.672 km.");
-  return { ...input, countries: [...new Set(input.countries)].sort() };
+  if (input.regional !== undefined && typeof input.regional !== "boolean")
+    throw new Error("Choose a valid regional collection mode.");
+  if (
+    input.regions !== undefined &&
+    (!input.regions || typeof input.regions !== "object" || Array.isArray(input.regions))
+  )
+    throw new Error("Choose valid states or regions.");
+  const regions: Record<string, string[]> = {};
+  for (const [country, codes] of Object.entries(input.regions ?? {})) {
+    if (
+      !input.regional ||
+      !input.countries.includes(country) ||
+      !Array.isArray(codes) ||
+      !codes.length ||
+      codes.some((code) => !collectionRegion(country, code))
+    )
+      throw new Error("Choose at least one valid region within each selected country.");
+    regions[country] = [...new Set(codes)].sort();
+  }
+  return {
+    countries: [...new Set(input.countries)].sort(),
+    dateFrom: input.dateFrom,
+    dateTo: input.dateTo,
+    min: input.min,
+    max: input.max,
+    unit: input.unit,
+    regional: input.regional === true,
+    regions,
+  };
+}
+export function selectedRegions(scope: Scope, country: string) {
+  if (!scope.regional) return [];
+  return collectionRegions(country).filter(
+    (r) => !scope.regions?.[country] || scope.regions[country].includes(r.code),
+  );
 }
 export function planScope(input: Scope): Window[] {
   const s = validateScope(input);
   const windows: Window[] = [];
   for (const pass of [1, 2] as const)
     for (const country of s.countries) {
-      let start = s.dateFrom;
-      while (start <= s.dateTo) {
-        const d = new Date(start + "T00:00:00Z");
-        const next = new Date(
-          Date.UTC(d.getUTCFullYear(), Math.floor(d.getUTCMonth() / 3) * 3 + 3, 1),
-        );
-        const end = new Date(+next - 86400000).toISOString().slice(0, 10);
-        windows.push({ country, pass, dateFrom: start, dateTo: end < s.dateTo ? end : s.dateTo });
-        start = next.toISOString().slice(0, 10);
+      const regions = selectedRegions(s, country);
+      // A regional country has region jobs only; never a parallel country-wide duplicate.
+      for (const region of regions.length ? regions : [undefined]) {
+        let start = s.dateFrom;
+        while (start <= s.dateTo) {
+          const d = new Date(start + "T00:00:00Z");
+          const next = new Date(
+            Date.UTC(d.getUTCFullYear(), Math.floor(d.getUTCMonth() / 3) * 3 + 3, 1),
+          );
+          const end = new Date(+next - 86400000).toISOString().slice(0, 10);
+          windows.push({
+            country,
+            ...(region ? { regionCode: region.code } : {}),
+            pass,
+            dateFrom: start,
+            dateTo: end < s.dateTo ? end : s.dateTo,
+          });
+          start = next.toISOString().slice(0, 10);
+        }
       }
     }
   return windows;
@@ -161,6 +217,13 @@ export function candidateProblems(c: Candidate, job: Window, scope: Scope): stri
     issues.push("Distance outside scope or open-ended");
   if (c.countryCode !== job.country || !c.country || !c.city)
     issues.push("Start country or venue unresolved");
+  if (
+    job.regionCode &&
+    (!collectionRegion(job.country, job.regionCode) ||
+      c.regionCode !== job.regionCode ||
+      !c.region.trim())
+  )
+    issues.push("Start state or region is outside this job or unresolved");
   if (
     !c.name ||
     !c.distanceLabel ||
