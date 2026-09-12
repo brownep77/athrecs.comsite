@@ -252,6 +252,9 @@ await pg.exec(
 );
 await pg.exec(await readFile("migrations/0016_catalogue_publishing.sql", "utf8"));
 await pg.exec(await readFile("migrations/20260912_worldwide_race_collector.sql", "utf8"));
+await pg.exec(
+  await readFile("migrations/20260912_worldwide_race_collector_dismissals.sql", "utf8"),
+);
 function adapter(db, inTransaction = false) {
   const sql = async (strings, ...values) => {
     let text = strings[0];
@@ -639,7 +642,111 @@ assert.match(
 );
 assert.match(
   reviewGuidance({ status: "duplicate", reason: "duplicate", event_id: 1 }).next,
-  /No action needed/,
+  /No publication action needed/,
+);
+// Dismissal is reversible queue state, never deletion of catalogue data or duplicate identities.
+const catalogueBefore =
+  await sql`select (select count(*) from events)::int events,(select count(*) from editions)::int editions`;
+const duplicateId = queueRows[175].id;
+assert.equal(
+  (await service.dismissDuplicates(nextRun.id, "dismiss", "staff@example.org", [duplicateId], sql))
+    .changed,
+  1,
+);
+assert.equal(
+  (await service.dismissDuplicates(nextRun.id, "dismiss", "staff@example.org", [duplicateId], sql))
+    .changed,
+  0,
+);
+const dismissedPage = await service.dashboard(nextRun.id, sql, { status: "dismissed" });
+assert.equal(dismissedPage.reviewPage.total, 1);
+assert.equal(dismissedPage.candidates[0].id, duplicateId);
+assert.equal(dismissedPage.candidates[0].status, "duplicate");
+assert.equal(dismissedPage.candidates[0].dismissed_by, "staff@example.org");
+assert(dismissedPage.candidates[0].dismissed_at);
+assert.equal(
+  (await service.dashboard(nextRun.id, sql, { search: "Queue fixture" })).reviewPage.total,
+  224,
+);
+assert.equal(reviewGuidance(dismissedPage.candidates[0]).title, "Dismissed duplicate");
+await assert.rejects(
+  () =>
+    service.dismissDuplicates(
+      nextRun.id,
+      "dismiss",
+      "staff@example.org",
+      [queueRows[176].id, queueRows[150].id],
+      sql,
+    ),
+  /Only already-listed/,
+);
+await assert.rejects(
+  () => service.dismissDuplicates(run.id, "dismiss", "staff@example.org", [duplicateId], sql),
+  /Only already-listed/,
+);
+await assert.rejects(
+  () => service.stageReviewed([duplicateId], "staff@example.org", sql),
+  /Selection changed/,
+);
+const duplicateJob = (await sql`select * from race_collector_jobs where id=${fixtureJob}::uuid`)[0];
+const duplicateRun = (await sql`select * from race_collector_runs where id=${nextRun.id}::uuid`)[0];
+const duplicateLease = randomUUID();
+await sql`update race_collector_jobs set lease_token=${duplicateLease}::uuid where id=${fixtureJob}::uuid`;
+await service.saveResult(sql, { ...duplicateJob, lease_token: duplicateLease }, duplicateRun, {
+  candidates: [{ ...queueRows[175].candidate }],
+  sources: [c.sourceUrl],
+  gaps: [],
+  capped: false,
+  usage: "{}",
+  responseId: "dismissed-rediscovery",
+});
+assert.equal(
+  (await service.dashboard(nextRun.id, sql, { status: "dismissed" })).reviewPage.total,
+  1,
+);
+assert.equal(
+  (
+    await sql`select count(*)::int count from race_collector_candidates where run_id=${nextRun.id}::uuid and candidate->>'name'=${queueRows[175].candidate.name}`
+  )[0].count,
+  1,
+);
+const duplicateCount = (
+  await sql`select count(*)::int count from race_collector_candidates where run_id=${nextRun.id}::uuid and status='duplicate'`
+)[0].count;
+assert.equal(
+  (await service.dismissDuplicates(nextRun.id, "dismiss", "staff@example.org", undefined, sql))
+    .changed,
+  duplicateCount - 1,
+);
+assert.equal(
+  (await service.dashboard(nextRun.id, sql, { status: "duplicate" })).reviewPage.total,
+  0,
+);
+assert.equal(
+  (await service.dashboard(nextRun.id, sql, { status: "dismissed" })).reviewPage.total,
+  duplicateCount,
+);
+assert.equal(
+  (await service.dismissDuplicates(nextRun.id, "restore", "staff@example.org", [duplicateId], sql))
+    .changed,
+  1,
+);
+assert.equal(
+  (await service.dismissDuplicates(nextRun.id, "restore", "staff@example.org", undefined, sql))
+    .changed,
+  duplicateCount - 1,
+);
+assert.equal(
+  (await service.dashboard(nextRun.id, sql, { status: "dismissed" })).reviewPage.total,
+  0,
+);
+assert.equal(
+  (await service.dashboard(nextRun.id, sql, { search: "Queue fixture" })).reviewPage.total,
+  225,
+);
+assert.deepEqual(
+  await sql`select (select count(*) from events)::int events,(select count(*) from editions)::int editions`,
+  catalogueBefore,
 );
 await pg.close();
 console.log(

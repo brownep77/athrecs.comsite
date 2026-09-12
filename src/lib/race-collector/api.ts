@@ -58,3 +58,20 @@ export const exportCollector = createServerFn({ method: "GET" })
     const s = await import("./service.server");
     return JSON.stringify(await s.exportRun(data.id));
   });
+export const dismissCollectorDuplicates = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((input: { id: string; action: "dismiss" | "restore"; ids?: string[] }) => {
+    idInput(input);
+    if (
+      !["dismiss", "restore"].includes(input.action) ||
+      (input.ids !== undefined &&
+        (!Array.isArray(input.ids) || !input.ids.length || input.ids.length > 100))
+    )
+      throw new Error("Invalid duplicate selection.");
+    input.ids?.forEach((id) => idInput({ id }));
+    return input;
+  })
+  .handler(async ({ data, context }) => {
+    const s = await import("./service.server");
+    return s.dismissDuplicates(data.id, data.action, context.staffEmail, data.ids);
+  });
