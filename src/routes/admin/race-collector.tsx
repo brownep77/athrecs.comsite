@@ -142,6 +142,10 @@ function CollectorPage() {
     data?.jobs.filter((j) => j.status === "complete").reduce((n, j) => n + j.count, 0) ?? 0;
   const failed =
     data?.jobs.filter((j) => j.status === "failed").reduce((n, j) => n + j.count, 0) ?? 0;
+  const working =
+    data?.jobs.filter((j) => j.status === "running").reduce((n, j) => n + j.count, 0) ?? 0;
+  const queued =
+    data?.jobs.filter((j) => j.status === "queued").reduce((n, j) => n + j.count, 0) ?? 0;
   const count = (state: string) => data?.counts.find((c) => c.status === state)?.count ?? 0;
   const progressScope = run?.scope ?? scope;
   const chooseCountries = (countries: string[]) =>
@@ -634,7 +638,9 @@ function CollectorPage() {
               <h2 className="mt-1 text-xl font-semibold text-fg">
                 {run
                   ? run.status === "complete"
-                    ? "Scan finished"
+                    ? failed > 0
+                      ? "Finished with failed searches"
+                      : "Scan finished"
                     : run.status === "paused"
                       ? "Scan paused"
                       : run.status === "cancelled"
@@ -713,6 +719,53 @@ function CollectorPage() {
                   {run.error}
                 </p>
               )}
+              <div className="space-y-3 rounded-xl bg-slate-50 p-4 text-sm" aria-live="polite">
+                <p className="font-medium text-slate-900">
+                  {working} working · {queued} queued · {failed} failed
+                </p>
+                {working > 0 ? (
+                  <p className="text-slate-600">
+                    Checking sources. A search can take several minutes; findings appear when it
+                    finishes. You can close this page and return later.
+                  </p>
+                ) : run.status === "running" && queued > 0 ? (
+                  <p className="text-slate-600">
+                    Waiting for the next search or scheduled retry. Progress refreshes
+                    automatically.
+                  </p>
+                ) : null}
+                {failed > 0 && run.status !== "cancelled" && (
+                  <p className="text-amber-800">
+                    Some searches stopped after three unsuccessful attempts. Use Retry failed to try
+                    those searches again; completed findings are saved.
+                  </p>
+                )}
+                {data?.activity.map((job) => (
+                  <div
+                    key={job.id}
+                    className="border-t border-slate-200 pt-2 text-xs text-slate-600"
+                  >
+                    <p className="font-medium text-slate-900">
+                      {COLLECTOR_COUNTRIES.find((c) => c.code === job.window.country)?.name}
+                      {job.window.regionCode
+                        ? ` · ${collectionRegion(job.window.country, job.window.regionCode)?.name ?? job.window.regionCode}`
+                        : ""}
+                      {" · "}
+                      {job.window.dateFrom} to {job.window.dateTo} · Pass {job.window.pass}
+                    </p>
+                    <p className="mt-1">
+                      {job.status === "running"
+                        ? `Checking sources · attempt ${job.attempts} of 3`
+                        : job.status === "failed"
+                          ? "Failed after 3 attempts"
+                          : run.status === "running"
+                            ? `Waiting to retry · eligible from ${new Date(job.available_at).toLocaleTimeString()}`
+                            : `Retry ${run.status === "paused" ? "paused" : "stopped"}`}
+                    </p>
+                    {job.error && <p className="mt-1 text-amber-800">Last issue: {job.error}</p>}
+                  </div>
+                ))}
+              </div>
               <div className="flex flex-wrap gap-2">
                 {active && (
                   <Button
