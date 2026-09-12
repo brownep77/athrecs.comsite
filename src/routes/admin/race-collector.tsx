@@ -16,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import {
   COLLECTOR_COUNTRIES,
+  calendarMonthRange,
   safeUrl,
   planScope,
   selectedRegions,
@@ -45,6 +46,12 @@ const datePresets = [
   { value: "2027", label: "2027 only", from: "2027-01-01", to: "2027-12-31" },
   { value: "2028", label: "2028 only", from: "2028-01-01", to: "2028-12-31" },
 ];
+const dateFormatter = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
 function CollectorPage() {
   const client = useQueryClient();
   const [scope, setScope] = useState<Scope>({
@@ -291,16 +298,27 @@ function CollectorPage() {
                 className={`${inputClass} mt-2`}
                 value={dateChoice}
                 onChange={(e) => {
-                  setDateChoice(e.target.value);
-                  const preset = datePresets.find((p) => p.value === e.target.value);
+                  const choice = e.target.value;
+                  setDateChoice(choice);
+                  const preset = datePresets.find((p) => p.value === choice);
                   if (preset)
                     setScope((current) => ({
                       ...current,
                       dateFrom: preset.from,
                       dateTo: preset.to,
                     }));
+                  else if (choice === "month" || choice === "three-months")
+                    setScope((current) => ({
+                      ...current,
+                      ...(calendarMonthRange(
+                        current.dateFrom.slice(0, 7) || "2027-01",
+                        choice === "month" ? 1 : 3,
+                      ) ?? { dateFrom: "", dateTo: "" }),
+                    }));
                 }}
               >
+                <option value="month">One month</option>
+                <option value="three-months">Three months</option>
                 {datePresets.map((p) => (
                   <option key={p.value} value={p.value}>
                     {p.label}
@@ -308,6 +326,35 @@ function CollectorPage() {
                 ))}
                 <option value="custom">Choose dates…</option>
               </select>
+              {(dateChoice === "month" || dateChoice === "three-months") && (
+                <div className="mt-3 space-y-2">
+                  <label htmlFor="search-month" className="text-xs font-medium text-muted">
+                    {dateChoice === "month" ? "Month" : "Starting month"}
+                  </label>
+                  <input
+                    id="search-month"
+                    className={inputClass}
+                    type="month"
+                    value={scope.dateFrom.slice(0, 7)}
+                    onChange={(e) => {
+                      const range = calendarMonthRange(
+                        e.target.value,
+                        dateChoice === "month" ? 1 : 3,
+                      );
+                      setScope((current) => ({
+                        ...current,
+                        ...(range ?? { dateFrom: "", dateTo: "" }),
+                      }));
+                    }}
+                  />
+                  {scope.dateFrom && scope.dateTo && (
+                    <p className="text-xs text-muted">
+                      {dateFormatter.format(new Date(scope.dateFrom + "T00:00:00Z"))}–
+                      {dateFormatter.format(new Date(scope.dateTo + "T00:00:00Z"))}, inclusive.
+                    </p>
+                  )}
+                </div>
+              )}
               {dateChoice === "custom" && (
                 <div className="mt-3 grid grid-cols-2 gap-3">
                   <label className="space-y-1 text-xs font-medium text-muted">

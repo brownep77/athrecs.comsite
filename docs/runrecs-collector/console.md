@@ -6,7 +6,9 @@ The **Start scan** button queues all selected ISO countries/territories (249 plu
 
 ## Simple start screen
 
-The main controls are **Where?**, **When?**, and **Start scan**. Defaults remain worldwide, all of 2027–2028, 0–500 miles and automatic regional collection. Where offers worldwide, UK + Ireland, any single country/territory, or a searchable checkbox list for several countries. When offers 2027–2028, 2027, 2028 or custom inclusive dates.
+The main controls are **Where?**, **When?**, and **Start scan**. Defaults remain worldwide, all of 2027–2028, 0–500 miles and automatic regional collection. Where offers worldwide, UK + Ireland, any single country/territory, or a searchable checkbox list for several countries. When offers **One month**, **Three months**, 2027–2028, 2027, 2028 or custom inclusive dates.
+
+One month and Three months show a month/year picker and the exact inclusive dates. Three months can begin in any month (for example February–April or November–January), with month lengths, leap years and year changes handled automatically. The chosen period applies to every selected country and state. Existing quarterly worker boundaries may split a three-month period into multiple jobs, with no gaps or overlaps within each pass. Clearing the month disables starting until a valid period is selected.
 
 Distance controls and individual state/region selections are inside **More options**. The visible summary always shows the actual distance range and regional mode, and flags partial state selections. Choosing a new area resets any hidden region restrictions. Detailed country/state progress is expandable once a run exists; empty progress lists/counters are hidden before the first scan. Existing source-review, publication and authentication gates are unchanged.
 
