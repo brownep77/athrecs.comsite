@@ -2,7 +2,15 @@
 
 Staff route: `/admin/race-collector`, linked from the staff dashboard/navigation.
 
-The Run collector button queues all selected ISO countries/territories (249 plus Kosovo), local date windows and two passes. Defaults are 1 January 2027–31 December 2028, 0–500 miles; km races are included. UK covers Northern Ireland, Republic of Ireland has its own task; cross-border events use the start country. New console runs default to state/province/region collection for eight large countries. The 2027–2028 worldwide preset creates 8,384 windows across 524 collection areas; disabling the regional option restores 4,000 national windows. See [regional coverage](regions.md) for the 282 supported regions and boundary rules. Staff can select all regions or a subset within each country. Saved national runs keep their persisted jobs and scope. At most one model request is active; a large scan takes several days and incurs provider usage charges. No worldwide research has been started as part of building this console.
+The **Start scan** button queues all selected ISO countries/territories (249 plus Kosovo), local date windows and two passes. Defaults are 1 January 2027–31 December 2028, 0–500 miles; km races are included. UK covers Northern Ireland, Republic of Ireland has its own task; cross-border events use the start country. New console runs default to state/province/region collection for eight large countries. The 2027–2028 worldwide preset creates 8,384 windows across 524 collection areas; disabling the regional option restores 4,000 national windows. See [regional coverage](regions.md) for the 282 supported regions and boundary rules. Staff can select all regions or a subset within each country. Saved national runs keep their persisted jobs and scope. At most one model request is active; a large scan takes several days and incurs provider usage charges. No worldwide research has been started as part of building this console.
+
+## Simple start screen
+
+The main controls are **Where?**, **When?**, and **Start scan**. Defaults remain worldwide, all of 2027–2028, 0–500 miles and automatic regional collection. Where offers worldwide, UK + Ireland, any single country/territory, or a searchable checkbox list for several countries. When offers 2027–2028, 2027, 2028 or custom inclusive dates.
+
+Distance controls and individual state/region selections are inside **More options**. The visible summary always shows the actual distance range and regional mode, and flags partial state selections. Choosing a new area resets any hidden region restrictions. Detailed country/state progress is expandable once a run exists; empty progress lists/counters are hidden before the first scan. Existing source-review, publication and authentication gates are unchanged.
+
+**Use a small Ireland test** fills Ireland, 1 January–31 March 2027 and 0–500 miles (two research jobs). It does not start research; the message explicitly asks staff to press Start scan. Research usage and background-running information remain visible before starting.
 
 ## Execution and activation
 
