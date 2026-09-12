@@ -24,6 +24,12 @@ import {
 } from "@/lib/race-collector/core";
 import { collectionRegion, collectionRegions } from "@/lib/race-collector/regions";
 import {
+  REVIEW_BATCH_LIMIT,
+  REVIEW_FILTERS,
+  reviewGuidance,
+  type ReviewQuery,
+} from "@/lib/race-collector/review";
+import {
   getCollector,
   startCollector,
   controlCollector,
@@ -72,9 +78,23 @@ function CollectorPage() {
   const [selected, setSelected] = useState<string[]>([]);
   const [reviewed, setReviewed] = useState(false);
   const [message, setMessage] = useState("");
+  const [reviewQuery, setReviewQuery] = useState<ReviewQuery>({
+    status: "all",
+    search: "",
+    page: 0,
+    pageSize: 50,
+  });
+  const [reviewSearch, setReviewSearch] = useState("");
+  const changeReview = (changes: Partial<ReviewQuery>) => {
+    setReviewQuery((current) => ({ ...current, page: 0, ...changes }));
+    setSelected([]);
+    setReviewed(false);
+  };
   const query = useQuery({
-    queryKey: ["race-collector", runId],
-    queryFn: () => getCollector({ data: { id: runId } }),
+    queryKey: ["race-collector", runId, reviewQuery],
+    queryFn: () => getCollector({ data: { id: runId, review: reviewQuery } }),
+    placeholderData: (previous, previousQuery) =>
+      previousQuery?.queryKey[1] === runId ? previous : undefined,
     refetchInterval: 15000,
   });
   const data = query.data;
@@ -96,8 +116,7 @@ function CollectorPage() {
     mutationFn: () => startCollector({ data: scope }),
     onSuccess: (r) => {
       setRunId(r.id);
-      setSelected([]);
-      setReviewed(false);
+      changeReview({ page: 0 });
       setMessage(
         r.reused
           ? "Opened the existing active scan."
@@ -119,8 +138,7 @@ function CollectorPage() {
     mutationFn: () => stageCollector({ data: { ids: selected, sourcesReviewed: reviewed } }),
     onSuccess: () => {
       setMessage("Selected races sent to publication review.");
-      setSelected([]);
-      setReviewed(false);
+      changeReview({ page: 0 });
       void refresh();
     },
     onError: fail,
@@ -147,6 +165,9 @@ function CollectorPage() {
   const queued =
     data?.jobs.filter((j) => j.status === "queued").reduce((n, j) => n + j.count, 0) ?? 0;
   const count = (state: string) => data?.counts.find((c) => c.status === state)?.count ?? 0;
+  const totalFindings = data?.counts.reduce((total, row) => total + row.count, 0) ?? 0;
+  const readyOnPage = data?.candidates.filter((row) => row.status === "review") ?? [];
+  const pageInfo = data?.reviewPage;
   const progressScope = run?.scope ?? scope;
   const chooseCountries = (countries: string[]) =>
     setScope((current) => ({
@@ -661,10 +682,10 @@ function CollectorPage() {
               aria-label="Scan history"
               className={inputClass}
               value={run?.id ?? ""}
+              disabled={stage.isPending}
               onChange={(e) => {
                 setRunId(e.target.value);
-                setSelected([]);
-                setReviewed(false);
+                changeReview({ page: 0 });
               }}
             >
               {data.runs.map((r) => (
@@ -677,11 +698,12 @@ function CollectorPage() {
             </select>
           )}
           {run && (
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {[
                 ["Awaiting review", count("review")],
                 ["Already listed", count("duplicate")],
                 ["Held / uncertain", count("held")],
+                ["Sent for publication", count("staged")],
               ].map(([label, n]) => (
                 <div key={label} className="rounded-xl bg-slate-50 p-4">
                   <p className="text-2xl font-semibold text-slate-950">{n}</p>
@@ -892,10 +914,11 @@ function CollectorPage() {
         <section className="space-y-5 rounded-2xl border border-border bg-surface p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-lg font-semibold text-fg">Review new races</h2>
+              <h2 className="text-lg font-semibold text-fg">Work through your findings</h2>
               <p className="mt-1 text-sm text-muted">
-                Check the actual date, distance and venue on each primary programme. Showing up to
-                200 rows; the report includes everything.
+                {totalFindings} findings in this scan · {count("review")} ready to review. Select up
+                to {REVIEW_BATCH_LIMIT} checked findings at a time. Each distance is a separate
+                finding; the number found is not a selection limit.
               </p>
             </div>
             <Link
@@ -905,6 +928,107 @@ function CollectorPage() {
               Publication review <ArrowUpRight size={16} />
             </Link>
           </div>
+          <div className="flex flex-wrap gap-2" aria-label="Filter findings by status">
+            {REVIEW_FILTERS.map((filter) => (
+              <Button
+                key={filter.value}
+                size="sm"
+                variant={reviewQuery.status === filter.value ? "default" : "secondary"}
+                aria-pressed={reviewQuery.status === filter.value}
+                disabled={stage.isPending}
+                onClick={() => changeReview({ status: filter.value })}
+              >
+                {filter.label} ({filter.value === "all" ? totalFindings : count(filter.value)})
+              </Button>
+            ))}
+            {(reviewQuery.status !== "all" || reviewQuery.search) && (
+              <Button
+                size="sm"
+                variant="ghost"
+                disabled={stage.isPending}
+                onClick={() => {
+                  setReviewSearch("");
+                  changeReview({ status: "all", search: "" });
+                }}
+              >
+                Clear filters
+              </Button>
+            )}
+          </div>
+          <form
+            className="flex flex-wrap items-end gap-3"
+            onSubmit={(event) => {
+              event.preventDefault();
+              changeReview({ search: reviewSearch.trim() });
+            }}
+          >
+            <label className="min-w-48 flex-1 text-xs text-muted">
+              Find a race or review issue
+              <input
+                className={`${inputClass} mt-1`}
+                value={reviewSearch}
+                maxLength={200}
+                placeholder="Race, location, date, distance or reason…"
+                disabled={stage.isPending}
+                onChange={(event) => setReviewSearch(event.target.value)}
+              />
+            </label>
+            <Button type="submit" variant="secondary" disabled={stage.isPending}>
+              <Search size={14} /> Search
+            </Button>
+            <label className="text-xs text-muted">
+              Findings per page
+              <select
+                className={`${inputClass} mt-1`}
+                value={reviewQuery.pageSize}
+                disabled={stage.isPending}
+                onChange={(event) => changeReview({ pageSize: Number(event.target.value) })}
+              >
+                {[25, 50, 100].map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </form>
+          <div className="flex flex-wrap items-center gap-3">
+            <Button
+              variant="secondary"
+              size="sm"
+              disabled={!readyOnPage.length || query.isPlaceholderData || stage.isPending}
+              onClick={() => {
+                setSelected(readyOnPage.slice(0, REVIEW_BATCH_LIMIT).map((row) => row.id));
+                setReviewed(false);
+              }}
+            >
+              Select {Math.min(readyOnPage.length, REVIEW_BATCH_LIMIT)} ready on this page
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              disabled={!selected.length || stage.isPending}
+              onClick={() => {
+                setSelected([]);
+                setReviewed(false);
+              }}
+            >
+              Clear selection
+            </Button>
+            <p className="text-xs text-muted">
+              {selected.length} selected · Selections apply to this page.
+            </p>
+          </div>
+          {query.isFetching && (
+            <p role="status" className="text-xs text-muted">
+              Refreshing findings…
+            </p>
+          )}
+          {query.isError && (
+            <p role="alert" className="text-sm text-amber-700">
+              Unable to refresh findings. Please try again.
+            </p>
+          )}
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
@@ -912,76 +1036,149 @@ function CollectorPage() {
                   <th className="p-3">Select</th>
                   <th className="p-3">Race / source</th>
                   <th className="p-3">Date · distance</th>
-                  <th className="p-3">Decision</th>
+                  <th className="p-3">Why this needs review / next step</th>
                 </tr>
               </thead>
               <tbody>
-                {data?.candidates.map((row) => (
-                  <tr key={row.id} className="border-b border-border align-top">
-                    <td className="p-3">
-                      <input
-                        type="checkbox"
-                        aria-label={`Review ${row.candidate.name} ${row.candidate.distanceLabel}`}
-                        disabled={
-                          row.status !== "review" ||
-                          (!selected.includes(row.id) && selected.length >= 50)
-                        }
-                        checked={selected.includes(row.id)}
-                        onChange={(e) => {
-                          setSelected(
-                            e.target.checked
-                              ? [...selected, row.id]
-                              : selected.filter((id) => id !== row.id),
-                          );
-                          setReviewed(false);
-                        }}
-                      />
-                    </td>
-                    <td className="max-w-lg p-3">
-                      <p className="font-medium text-fg">{row.candidate.name}</p>
-                      <p className="text-xs text-muted">
-                        {[row.candidate.city, row.candidate.region, row.candidate.country]
-                          .filter(Boolean)
-                          .join(", ")}
-                      </p>
-                      <a
-                        href={
-                          safeUrl(row.candidate.sourceUrl) ? row.candidate.sourceUrl : undefined
-                        }
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-1 inline-flex items-center gap-1 text-xs text-emerald-700"
-                      >
-                        Primary programme <ArrowUpRight size={12} />
-                      </a>
-                      <p className="mt-2 text-xs leading-5 text-muted">{row.candidate.evidence}</p>
-                    </td>
-                    <td className="whitespace-nowrap p-3 text-fg">
-                      {row.candidate.date}
-                      <p className="mt-1 text-xs text-muted">
-                        {row.candidate.distanceLabel} · {row.candidate.distanceKm.toFixed(2)} km
-                      </p>
-                    </td>
-                    <td className="max-w-xs p-3">
-                      <span className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-700">
-                        {row.status === "review" ? "Source review" : row.status}
-                      </span>
-                      <p className="mt-2 text-xs leading-5 text-muted">{row.reason}</p>
-                    </td>
-                  </tr>
-                ))}
+                {data?.candidates.map((row) => {
+                  const guidance = reviewGuidance(row);
+                  return (
+                    <tr key={row.id} className="border-b border-border align-top">
+                      <td className="p-3">
+                        <input
+                          type="checkbox"
+                          aria-label={`Review ${row.candidate.name} ${row.candidate.distanceLabel}`}
+                          disabled={
+                            row.status !== "review" ||
+                            query.isPlaceholderData ||
+                            stage.isPending ||
+                            (!selected.includes(row.id) && selected.length >= REVIEW_BATCH_LIMIT)
+                          }
+                          checked={selected.includes(row.id)}
+                          onChange={(e) => {
+                            setSelected(
+                              e.target.checked
+                                ? [...selected, row.id]
+                                : selected.filter((id) => id !== row.id),
+                            );
+                            setReviewed(false);
+                          }}
+                        />
+                      </td>
+                      <td className="max-w-lg p-3">
+                        <p className="font-medium text-fg">{row.candidate.name}</p>
+                        <p className="text-xs text-muted">
+                          {[row.candidate.city, row.candidate.region, row.candidate.country]
+                            .filter(Boolean)
+                            .join(", ")}
+                        </p>
+                        <a
+                          href={
+                            safeUrl(row.candidate.sourceUrl) ? row.candidate.sourceUrl : undefined
+                          }
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-1 inline-flex items-center gap-1 text-xs text-emerald-700"
+                        >
+                          Primary programme <ArrowUpRight size={12} />
+                        </a>
+                        <details className="mt-2 text-xs leading-5 text-muted">
+                          <summary className="cursor-pointer font-medium">Source evidence</summary>
+                          <p className="mt-1">{row.candidate.evidence}</p>
+                        </details>
+                      </td>
+                      <td className="whitespace-nowrap p-3 text-fg">
+                        {row.candidate.date}
+                        <p className="mt-1 text-xs text-muted">
+                          {row.candidate.distanceLabel} · {row.candidate.distanceKm.toFixed(2)} km
+                        </p>
+                      </td>
+                      <td className="min-w-64 max-w-md p-3">
+                        <span className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-700">
+                          {guidance.title}
+                        </span>
+                        <p className="mt-2 text-xs leading-5 text-fg">
+                          <strong>Why: </strong>
+                          {guidance.why}
+                        </p>
+                        <p className="mt-1 text-xs leading-5 text-muted">
+                          <strong>Next: </strong>
+                          {guidance.next}
+                        </p>
+                        {row.candidate.notes.trim() && (
+                          <p className="mt-2 text-xs leading-5 text-muted">
+                            <strong>Collector notes: </strong>
+                            {row.candidate.notes}
+                          </p>
+                        )}
+                        {row.event_id && row.event_slug && (
+                          <a
+                            href={`https://www.runrecs.com/races/${encodeURIComponent(row.event_slug)}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-2 inline-flex items-center gap-1 text-xs text-emerald-700"
+                          >
+                            Existing event <ArrowUpRight size={12} />
+                          </a>
+                        )}
+                        {row.status === "held" && (
+                          <details className="mt-2 text-xs text-muted">
+                            <summary className="cursor-pointer">Original check</summary>
+                            <p className="mt-1">{row.reason}</p>
+                          </details>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
             {!data?.candidates.length && (
               <p className="py-8 text-center text-sm text-muted">
-                Findings will appear here as research windows finish.
+                {totalFindings
+                  ? "No findings match these filters. Choose All findings or try another search."
+                  : run.status === "complete"
+                    ? "No findings were saved for this scan. Check the search notes for coverage gaps."
+                    : "Findings will appear here as research windows finish."}
               </p>
             )}
           </div>
+          {pageInfo && (
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted">
+              <p>
+                {pageInfo.total ? pageInfo.page * pageInfo.pageSize + 1 : 0}–
+                {Math.min((pageInfo.page + 1) * pageInfo.pageSize, pageInfo.total)} of{" "}
+                {pageInfo.total} matching findings · Page {pageInfo.page + 1} of {pageInfo.pages}
+              </p>
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  disabled={pageInfo.page === 0 || query.isPlaceholderData || stage.isPending}
+                  onClick={() => changeReview({ page: pageInfo.page - 1 })}
+                >
+                  Previous
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  disabled={
+                    pageInfo.page + 1 >= pageInfo.pages ||
+                    query.isPlaceholderData ||
+                    stage.isPending
+                  }
+                  onClick={() => changeReview({ page: pageInfo.page + 1 })}
+                >
+                  Next
+                </Button>
+              </div>
+            </div>
+          )}
           <label className="flex items-start gap-2 text-sm text-muted">
             <input
               className="mt-1"
               type="checkbox"
+              disabled={!selected.length || query.isPlaceholderData || stage.isPending}
               checked={reviewed}
               onChange={(e) => setReviewed(e.target.checked)}
             />
@@ -989,7 +1186,7 @@ function CollectorPage() {
             and venues.
           </label>
           <Button
-            disabled={!selected.length || !reviewed || stage.isPending}
+            disabled={!selected.length || !reviewed || query.isPlaceholderData || stage.isPending}
             onClick={() => stage.mutate()}
           >
             <ShieldCheck size={16} />

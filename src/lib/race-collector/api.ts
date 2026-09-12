@@ -1,18 +1,20 @@
 import { createServerFn } from "@tanstack/react-start";
 import { staffMiddleware } from "../auth/staff-middleware";
 import { validateScope, type Scope } from "./core";
+import { REVIEW_BATCH_LIMIT, validateReviewQuery, type ReviewQuery } from "./review";
 const idInput = (input: { id: string }) => {
   if (!/^[0-9a-f-]{36}$/i.test(input?.id ?? "")) throw new Error("Invalid run");
   return input;
 };
 export const getCollector = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
-  .validator((input: { id?: string }): { id?: string } =>
-    input?.id ? idInput({ id: input.id }) : {},
-  )
+  .validator((input: { id?: string; review?: Partial<ReviewQuery> }) => ({
+    ...(input?.id ? idInput({ id: input.id }) : {}),
+    review: validateReviewQuery(input?.review),
+  }))
   .handler(async ({ data }) => {
     const s = await import("./service.server");
-    return s.dashboard(data.id);
+    return s.dashboard(data.id, undefined, data.review);
   });
 export const startCollector = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
@@ -36,7 +38,11 @@ export const controlCollector = createServerFn({ method: "POST" })
 export const stageCollector = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: { ids: string[]; sourcesReviewed: boolean }) => {
-    if (input?.sourcesReviewed !== true || !Array.isArray(input.ids) || input.ids.length > 50)
+    if (
+      input?.sourcesReviewed !== true ||
+      !Array.isArray(input.ids) ||
+      input.ids.length > REVIEW_BATCH_LIMIT
+    )
       throw new Error("Review the primary programmes before staging.");
     input.ids.forEach((id) => idInput({ id }));
     return input;

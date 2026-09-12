@@ -17,6 +17,7 @@ import {
 import { researchWindow, type ResearchResult } from "./research.server.ts";
 import { collectionRegion } from "./regions.ts";
 import { JOB_LEASE_SECONDS } from "./timing.ts";
+import { REVIEW_BATCH_LIMIT, validateReviewQuery, type ReviewQuery } from "./review.ts";
 type Run = {
   id: string;
   scope: Scope;
@@ -259,7 +260,12 @@ export async function saveResult(sql: Sql, job: Job, run: Run, result: ResearchR
     await tx`update race_collector_runs set updated_at=now(),status=case when status='running' and not exists(select 1 from race_collector_jobs where run_id=${run.id}::uuid and status in ('queued','running')) then 'complete' else status end where id=${run.id}::uuid`;
   });
 }
-export async function dashboard(runId?: string, sqlOverride?: Sql) {
+export async function dashboard(
+  runId?: string,
+  sqlOverride?: Sql,
+  reviewInput?: Partial<ReviewQuery>,
+) {
+  const review = validateReviewQuery(reviewInput);
   const sql = sqlOverride ?? (await getSql());
   const runs = await sql<Run>`select * from race_collector_runs order by created_at desc limit 15`;
   const run = runId ? runs.find((r) => r.id === runId) : runs[0];
@@ -272,6 +278,7 @@ export async function dashboard(runId?: string, sqlOverride?: Sql) {
       candidates: [],
       counts: [],
       activity: [],
+      reviewPage: { ...review, total: 0, pages: 1 },
     };
   const jobs = await sql<{
     country: string;
@@ -283,8 +290,15 @@ export async function dashboard(runId?: string, sqlOverride?: Sql) {
     status: string;
     count: number;
   }>`select status,count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid group by status`;
+  const total = (
+    await sql<{
+      count: number;
+    }>`select count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid and (${review.status}='all' or status=${review.status}) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0`
+  )[0].count;
+  const pages = Math.max(1, Math.ceil(total / review.pageSize));
+  const page = Math.min(review.page, pages - 1);
   const candidates =
-    await sql<CandidateRow>`select * from race_collector_candidates where run_id=${run.id}::uuid order by case status when 'review' then 0 when 'held' then 1 else 2 end,created_at,id limit 200`;
+    await sql<CandidateRow>`select * from race_collector_candidates where run_id=${run.id}::uuid and (${review.status}='all' or status=${review.status}) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0 order by case status when 'review' then 0 when 'held' then 1 when 'duplicate' then 2 else 3 end,created_at,id limit ${review.pageSize} offset ${page * review.pageSize}`;
   const gaps = await sql<{
     window: Window;
     report: ResearchResult | null;
@@ -298,7 +312,17 @@ export async function dashboard(runId?: string, sqlOverride?: Sql) {
     error: string | null;
     available_at: string;
   }>`select id,"window",status,attempts,error,available_at from race_collector_jobs where run_id=${run.id}::uuid and (status in ('running','failed') or (status='queued' and attempts>0)) order by case status when 'running' then 0 when 'queued' then 1 else 2 end,ordinal limit 6`;
-  return { readiness: readiness(), runs, run, jobs, candidates, counts, gaps, activity };
+  return {
+    readiness: readiness(),
+    runs,
+    run,
+    jobs,
+    candidates,
+    counts,
+    gaps,
+    activity,
+    reviewPage: { ...review, page, pages, total },
+  };
 }
 export async function exportRun(id: string) {
   const sql = await getSql();
@@ -310,7 +334,12 @@ export async function exportRun(id: string) {
   };
 }
 export async function stageReviewed(ids: string[], email: string, sqlOverride?: Sql) {
-  if (!Array.isArray(ids) || !ids.length || ids.length > 50 || new Set(ids).size !== ids.length)
+  if (
+    !Array.isArray(ids) ||
+    !ids.length ||
+    ids.length > REVIEW_BATCH_LIMIT ||
+    new Set(ids).size !== ids.length
+  )
     throw new Error("Select 1–50 reviewed listings.");
   const sql = sqlOverride ?? (await getSql());
   const { stageCatalogueBatch } = await import("../athrecs/catalogue-publishing.server");
