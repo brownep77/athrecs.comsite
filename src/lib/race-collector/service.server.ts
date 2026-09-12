@@ -36,6 +36,8 @@ export type CandidateRow = {
   event_slug: string;
   event_id: number | null;
   batch_id: string | null;
+  dismissed_at?: string | null;
+  dismissed_by?: string | null;
 };
 export function readiness() {
   return {
@@ -289,16 +291,16 @@ export async function dashboard(
   const counts = await sql<{
     status: string;
     count: number;
-  }>`select status,count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid group by status`;
+  }>`select case when dismissed_at is not null then 'dismissed' else status end status,count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid group by case when dismissed_at is not null then 'dismissed' else status end`;
   const total = (
     await sql<{
       count: number;
-    }>`select count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid and (${review.status}='all' or status=${review.status}) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0`
+    }>`select count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid and (case when ${review.status}='dismissed' then dismissed_at is not null else dismissed_at is null and (${review.status}='all' or status=${review.status}) end) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0`
   )[0].count;
   const pages = Math.max(1, Math.ceil(total / review.pageSize));
   const page = Math.min(review.page, pages - 1);
   const candidates =
-    await sql<CandidateRow>`select * from race_collector_candidates where run_id=${run.id}::uuid and (${review.status}='all' or status=${review.status}) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0 order by case status when 'review' then 0 when 'held' then 1 when 'duplicate' then 2 else 3 end,created_at,id limit ${review.pageSize} offset ${page * review.pageSize}`;
+    await sql<CandidateRow>`select * from race_collector_candidates where run_id=${run.id}::uuid and (case when ${review.status}='dismissed' then dismissed_at is not null else dismissed_at is null and (${review.status}='all' or status=${review.status}) end) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0 order by case status when 'review' then 0 when 'held' then 1 when 'duplicate' then 2 else 3 end,created_at,id limit ${review.pageSize} offset ${page * review.pageSize}`;
   const gaps = await sql<{
     window: Window;
     report: ResearchResult | null;
@@ -333,6 +335,36 @@ export async function exportRun(id: string) {
       await sql`select * from race_collector_candidates where run_id=${id}::uuid order by created_at`,
   };
 }
+export async function dismissDuplicates(
+  runId: string,
+  action: "dismiss" | "restore",
+  email: string,
+  ids?: string[],
+  sqlOverride?: Sql,
+) {
+  if (
+    !["dismiss", "restore"].includes(action) ||
+    (ids !== undefined &&
+      (!Array.isArray(ids) || !ids.length || ids.length > 100 || new Set(ids).size !== ids.length))
+  )
+    throw new Error("Invalid duplicate selection.");
+  const sql = sqlOverride ?? (await getSql());
+  return sql.transaction(async (tx) => {
+    const runs = await tx`select id from race_collector_runs where id=${runId}::uuid for update`;
+    if (!runs.length) throw new Error("Run not found.");
+    if (ids) {
+      const rows =
+        await tx`select id from race_collector_candidates where run_id=${runId}::uuid and id=any(${ids}::uuid[]) and status='duplicate' for update`;
+      if (rows.length !== ids.length)
+        throw new Error(
+          "Only already-listed findings from this scan can be dismissed or restored.",
+        );
+    }
+    const rows =
+      await tx`update race_collector_candidates set dismissed_at=case when ${action}='dismiss' then now() else null end,dismissed_by=case when ${action}='dismiss' then ${email} else null end where run_id=${runId}::uuid and status='duplicate' and (${ids ?? null}::uuid[] is null or id=any(${ids ?? null}::uuid[])) and (case when ${action}='dismiss' then dismissed_at is null else dismissed_at is not null end) returning id`;
+    return { changed: rows.length, action };
+  });
+}
 export async function stageReviewed(ids: string[], email: string, sqlOverride?: Sql) {
   if (
     !Array.isArray(ids) ||
@@ -351,7 +383,7 @@ export async function stageReviewed(ids: string[], email: string, sqlOverride?: 
     >`select * from race_collector_candidates where id=any(${ids}::uuid[]) order by id for update`;
     if (
       rows.length !== ids.length ||
-      rows.some((r) => r.status !== "review") ||
+      rows.some((r) => r.status !== "review" || r.dismissed_at) ||
       new Set(rows.map((r) => r.run_id)).size !== 1
     )
       throw new Error("Selection changed. Refresh and review again.");

@@ -35,6 +35,7 @@ import {
   controlCollector,
   stageCollector,
   exportCollector,
+  dismissCollectorDuplicates,
 } from "@/lib/race-collector/api";
 export const Route = createFileRoute("/admin/race-collector")({
   head: () => ({
@@ -143,6 +144,21 @@ function CollectorPage() {
     },
     onError: fail,
   });
+  const dismiss = useMutation({
+    mutationFn: (input: { action: "dismiss" | "restore"; ids?: string[] }) =>
+      dismissCollectorDuplicates({ data: { id: run!.id, ...input } }),
+    onSuccess: async (result) => {
+      setMessage(
+        result.action === "dismiss"
+          ? `${result.changed} already-listed findings dismissed. Published races are unchanged. You can restore findings from Dismissed.`
+          : `${result.changed} findings restored to Already listed.`,
+      );
+      changeReview({ page: 0 });
+      await refresh();
+    },
+    onError: fail,
+  });
+  const reviewBusy = stage.isPending || dismiss.isPending;
   const download = async () => {
     try {
       const result = await exportCollector({ data: { id: run!.id } });
@@ -165,7 +181,10 @@ function CollectorPage() {
   const queued =
     data?.jobs.filter((j) => j.status === "queued").reduce((n, j) => n + j.count, 0) ?? 0;
   const count = (state: string) => data?.counts.find((c) => c.status === state)?.count ?? 0;
-  const totalFindings = data?.counts.reduce((total, row) => total + row.count, 0) ?? 0;
+  const totalFindings =
+    data?.counts
+      .filter((row) => row.status !== "dismissed")
+      .reduce((total, row) => total + row.count, 0) ?? 0;
   const readyOnPage = data?.candidates.filter((row) => row.status === "review") ?? [];
   const pageInfo = data?.reviewPage;
   const progressScope = run?.scope ?? scope;
@@ -682,7 +701,7 @@ function CollectorPage() {
               aria-label="Scan history"
               className={inputClass}
               value={run?.id ?? ""}
-              disabled={stage.isPending}
+              disabled={reviewBusy}
               onChange={(e) => {
                 setRunId(e.target.value);
                 changeReview({ page: 0 });
@@ -916,9 +935,10 @@ function CollectorPage() {
             <div>
               <h2 className="text-lg font-semibold text-fg">Work through your findings</h2>
               <p className="mt-1 text-sm text-muted">
-                {totalFindings} findings in this scan · {count("review")} ready to review. Select up
-                to {REVIEW_BATCH_LIMIT} checked findings at a time. Each distance is a separate
-                finding; the number found is not a selection limit.
+                {totalFindings} current findings · {count("dismissed")} dismissed ·{" "}
+                {count("review")} ready to review. Select up to {REVIEW_BATCH_LIMIT} checked
+                findings at a time. Each distance is a separate finding; the number found is not a
+                selection limit.
               </p>
             </div>
             <Link
@@ -935,7 +955,7 @@ function CollectorPage() {
                 size="sm"
                 variant={reviewQuery.status === filter.value ? "default" : "secondary"}
                 aria-pressed={reviewQuery.status === filter.value}
-                disabled={stage.isPending}
+                disabled={reviewBusy}
                 onClick={() => changeReview({ status: filter.value })}
               >
                 {filter.label} ({filter.value === "all" ? totalFindings : count(filter.value)})
@@ -945,7 +965,7 @@ function CollectorPage() {
               <Button
                 size="sm"
                 variant="ghost"
-                disabled={stage.isPending}
+                disabled={reviewBusy}
                 onClick={() => {
                   setReviewSearch("");
                   changeReview({ status: "all", search: "" });
@@ -955,6 +975,33 @@ function CollectorPage() {
               </Button>
             )}
           </div>
+          {(count("duplicate") > 0 || reviewQuery.status === "dismissed") && (
+            <div className="flex flex-wrap items-center gap-3 rounded-xl bg-slate-50 p-4">
+              {reviewQuery.status === "dismissed" ? (
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  disabled={!count("dismissed") || reviewBusy || query.isPlaceholderData}
+                  onClick={() => dismiss.mutate({ action: "restore" })}
+                >
+                  Restore all dismissed ({count("dismissed")})
+                </Button>
+              ) : (
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  disabled={reviewBusy || query.isPlaceholderData}
+                  onClick={() => dismiss.mutate({ action: "dismiss" })}
+                >
+                  Dismiss all already listed in this scan ({count("duplicate")})
+                </Button>
+              )}
+              <p className="text-xs text-muted">
+                Dismiss removes findings from this review list. Published races stay in RunRecs, and
+                dismissed findings can be restored.
+              </p>
+            </div>
+          )}
           <form
             className="flex flex-wrap items-end gap-3"
             onSubmit={(event) => {
@@ -969,11 +1016,11 @@ function CollectorPage() {
                 value={reviewSearch}
                 maxLength={200}
                 placeholder="Race, location, date, distance or reason…"
-                disabled={stage.isPending}
+                disabled={reviewBusy}
                 onChange={(event) => setReviewSearch(event.target.value)}
               />
             </label>
-            <Button type="submit" variant="secondary" disabled={stage.isPending}>
+            <Button type="submit" variant="secondary" disabled={reviewBusy}>
               <Search size={14} /> Search
             </Button>
             <label className="text-xs text-muted">
@@ -981,7 +1028,7 @@ function CollectorPage() {
               <select
                 className={`${inputClass} mt-1`}
                 value={reviewQuery.pageSize}
-                disabled={stage.isPending}
+                disabled={reviewBusy}
                 onChange={(event) => changeReview({ pageSize: Number(event.target.value) })}
               >
                 {[25, 50, 100].map((size) => (
@@ -996,7 +1043,7 @@ function CollectorPage() {
             <Button
               variant="secondary"
               size="sm"
-              disabled={!readyOnPage.length || query.isPlaceholderData || stage.isPending}
+              disabled={!readyOnPage.length || query.isPlaceholderData || reviewBusy}
               onClick={() => {
                 setSelected(readyOnPage.slice(0, REVIEW_BATCH_LIMIT).map((row) => row.id));
                 setReviewed(false);
@@ -1007,7 +1054,7 @@ function CollectorPage() {
             <Button
               variant="ghost"
               size="sm"
-              disabled={!selected.length || stage.isPending}
+              disabled={!selected.length || reviewBusy}
               onClick={() => {
                 setSelected([]);
                 setReviewed(false);
@@ -1051,7 +1098,7 @@ function CollectorPage() {
                           disabled={
                             row.status !== "review" ||
                             query.isPlaceholderData ||
-                            stage.isPending ||
+                            reviewBusy ||
                             (!selected.includes(row.id) && selected.length >= REVIEW_BATCH_LIMIT)
                           }
                           checked={selected.includes(row.id)}
@@ -1127,6 +1174,24 @@ function CollectorPage() {
                             <p className="mt-1">{row.reason}</p>
                           </details>
                         )}
+                        {row.status === "duplicate" && (
+                          <div className="mt-3">
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              aria-label={`${row.dismissed_at ? "Restore" : "Dismiss"} ${row.candidate.name} ${row.candidate.distanceLabel}`}
+                              disabled={reviewBusy || query.isPlaceholderData}
+                              onClick={() =>
+                                dismiss.mutate({
+                                  action: row.dismissed_at ? "restore" : "dismiss",
+                                  ids: [row.id],
+                                })
+                              }
+                            >
+                              {row.dismissed_at ? "Restore" : "Dismiss"}
+                            </Button>
+                          </div>
+                        )}
                       </td>
                     </tr>
                   );
@@ -1135,7 +1200,7 @@ function CollectorPage() {
             </table>
             {!data?.candidates.length && (
               <p className="py-8 text-center text-sm text-muted">
-                {totalFindings
+                {totalFindings || count("dismissed")
                   ? "No findings match these filters. Choose All findings or try another search."
                   : run.status === "complete"
                     ? "No findings were saved for this scan. Check the search notes for coverage gaps."
@@ -1154,7 +1219,7 @@ function CollectorPage() {
                 <Button
                   size="sm"
                   variant="secondary"
-                  disabled={pageInfo.page === 0 || query.isPlaceholderData || stage.isPending}
+                  disabled={pageInfo.page === 0 || query.isPlaceholderData || reviewBusy}
                   onClick={() => changeReview({ page: pageInfo.page - 1 })}
                 >
                   Previous
@@ -1163,9 +1228,7 @@ function CollectorPage() {
                   size="sm"
                   variant="secondary"
                   disabled={
-                    pageInfo.page + 1 >= pageInfo.pages ||
-                    query.isPlaceholderData ||
-                    stage.isPending
+                    pageInfo.page + 1 >= pageInfo.pages || query.isPlaceholderData || reviewBusy
                   }
                   onClick={() => changeReview({ page: pageInfo.page + 1 })}
                 >
@@ -1178,7 +1241,7 @@ function CollectorPage() {
             <input
               className="mt-1"
               type="checkbox"
-              disabled={!selected.length || query.isPlaceholderData || stage.isPending}
+              disabled={!selected.length || query.isPlaceholderData || reviewBusy}
               checked={reviewed}
               onChange={(e) => setReviewed(e.target.checked)}
             />
@@ -1186,7 +1249,7 @@ function CollectorPage() {
             and venues.
           </label>
           <Button
-            disabled={!selected.length || !reviewed || query.isPlaceholderData || stage.isPending}
+            disabled={!selected.length || !reviewed || query.isPlaceholderData || reviewBusy}
             onClick={() => stage.mutate()}
           >
             <ShieldCheck size={16} />

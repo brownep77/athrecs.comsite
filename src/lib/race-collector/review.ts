@@ -5,6 +5,7 @@ export const REVIEW_FILTERS = [
   { value: "held", label: "Needs attention" },
   { value: "duplicate", label: "Already listed" },
   { value: "staged", label: "Sent for publication" },
+  { value: "dismissed", label: "Dismissed" },
 ] as const;
 export type ReviewQuery = {
   status: (typeof REVIEW_FILTERS)[number]["value"];
@@ -26,7 +27,18 @@ export function validateReviewQuery(input: Partial<ReviewQuery> = {}): ReviewQue
     throw new Error("Invalid review filters.");
   return { ...query, search: query.search.trim() };
 }
-export function reviewGuidance(row: { status: string; reason: string; event_id: number | null }) {
+export function reviewGuidance(row: {
+  status: string;
+  reason: string;
+  event_id: number | null;
+  dismissed_at?: string | null;
+}) {
+  if (row.dismissed_at)
+    return {
+      title: "Dismissed duplicate",
+      why: "This already-listed finding was removed from the current review list. The published race remains in RunRecs.",
+      next: "Use Restore if you want to see this finding in the review list again.",
+    };
   if (row.status === "staged")
     return {
       title: "Sent for publication",
@@ -37,7 +49,7 @@ export function reviewGuidance(row: { status: string; reason: string; event_id: 
     return {
       title: "Already listed",
       why: "The same event, date and distance are already in the catalogue.",
-      next: "No action needed here. This finding cannot be selected again.",
+      next: "No publication action needed. Use Dismiss to remove this duplicate from your review list.",
     };
   if (row.status === "review")
     return {
