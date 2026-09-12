@@ -22,8 +22,13 @@ registerHooks({
 process.env.DATABASE_URL = "postgresql://test-only@127.0.0.1/never-connect";
 const core = await import("../src/lib/race-collector/core.ts");
 const service = await import("../src/lib/race-collector/service.server.ts");
-const { parseResearch, buildResearchPrompt } =
+const { parseResearch, buildResearchPrompt, researchWindow } =
   await import("../src/lib/race-collector/research.server.ts");
+const { RESEARCH_TIMEOUT_MS, WORKER_MAX_DURATION_SECONDS, JOB_LEASE_SECONDS } =
+  await import("../src/lib/race-collector/timing.ts");
+assert(RESEARCH_TIMEOUT_MS > 90_000, "Dense research must outlast the old abort threshold");
+assert(RESEARCH_TIMEOUT_MS + 60_000 <= WORKER_MAX_DURATION_SECONDS * 1000);
+assert(JOB_LEASE_SECONDS >= WORKER_MAX_DURATION_SECONDS + 120);
 const { REGIONS_BY_COUNTRY } = await import("../src/lib/race-collector/regions.ts");
 const scope = {
   countries: ["IE"],
@@ -274,6 +279,33 @@ const research = async () => {
     responseId: "fixture",
   };
 };
+// Exercise the real provider request without waiting or spending research credits.
+const priorFetch = globalThis.fetch;
+const priorTimeout = AbortSignal.timeout;
+const priorKey = process.env.XAI_API_KEY;
+let requestedTimeout;
+try {
+  process.env.XAI_API_KEY = "test-only";
+  AbortSignal.timeout = (ms) => {
+    requestedTimeout = ms;
+    return priorTimeout(ms);
+  };
+  globalThis.fetch = async (_url, options) => {
+    assert(options.signal instanceof AbortSignal);
+    assert.equal(options.signal.aborted, false);
+    return Response.json({
+      status: "completed",
+      output_text: JSON.stringify({ candidates: [c], sources: [c.sourceUrl], gaps: [] }),
+    });
+  };
+  assert.equal((await researchWindow(windows[0], scope, [])).candidates.length, 1);
+  assert.equal(requestedTimeout, RESEARCH_TIMEOUT_MS);
+} finally {
+  globalThis.fetch = priorFetch;
+  AbortSignal.timeout = priorTimeout;
+  if (priorKey === undefined) delete process.env.XAI_API_KEY;
+  else process.env.XAI_API_KEY = priorKey;
+}
 await service.controlRun(run.id, "pause", sql);
 assert.equal((await service.runWorker(sql, research)).worked, false);
 assert.equal(calls, 0);
@@ -299,6 +331,11 @@ assert.equal(
   (await sql`select status from race_collector_jobs where ordinal=1`)[0].status,
   "queued",
 );
+const retryActivity = (await service.dashboard(run.id, sql)).activity;
+assert.equal(retryActivity.length, 1);
+assert.equal(retryActivity[0].status, "queued");
+assert.equal(retryActivity[0].error, "Simulated upstream failure");
+assert(new Date(retryActivity[0].available_at).getTime() > Date.now());
 await sql`update race_collector_jobs set attempts=2,available_at=now() where ordinal=1`;
 await service.runWorker(sql, async () => {
   throw new Error("Simulated upstream failure");
@@ -307,7 +344,9 @@ assert.equal(
   (await sql`select status from race_collector_jobs where ordinal=1`)[0].status,
   "failed",
 );
+assert.equal((await service.dashboard(run.id, sql)).activity[0].status, "failed");
 await service.controlRun(run.id, "retry", sql);
+assert.equal((await service.dashboard(run.id, sql)).activity.length, 0);
 assert.equal((await sql`select attempts from race_collector_jobs where ordinal=1`)[0].attempts, 0);
 // Real staged publisher is exercised on the isolated database, including atomic review links.
 const toStage = (await sql`select id from race_collector_candidates where status='review'`)[0].id;
@@ -431,6 +470,12 @@ try {
       );
     }),
   ]);
+  const activeSearches = (await service.dashboard(parallelRun.id, sql)).activity;
+  assert.equal(activeSearches.length, 3);
+  assert(activeSearches.every((job) => job.status === "running" && job.attempts === 1));
+  const leases =
+    await sql`select extract(epoch from (lease_until-now()))::int seconds from race_collector_jobs where run_id=${parallelRun.id}::uuid and status='running'`;
+  assert(leases.every((lease) => lease.seconds > WORKER_MAX_DURATION_SECONDS));
   assert.equal(
     (
       await sql`select count(*)::int n from race_collector_jobs where run_id=${parallelRun.id}::uuid and status='running'`
@@ -499,6 +544,7 @@ assert.equal((await service.dashboard(nextRun.id, sql)).run.status, "paused");
 assert.equal((await service.runWorkerBatch(sql, research)).worked, 0);
 await sql`update race_collector_jobs set available_at=now() where run_id=${nextRun.id}::uuid`;
 await service.controlRun(nextRun.id, "resume", sql);
+assert.equal((await service.dashboard(nextRun.id, sql)).run.error, null);
 await service.runWorkerBatch(sql, research);
 assert.equal((await service.dashboard(nextRun.id, sql)).run.status, "complete");
 const priorSecret = process.env.CRON_SECRET;

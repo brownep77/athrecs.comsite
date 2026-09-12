@@ -5,6 +5,7 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
+import { WORKER_MAX_DURATION_SECONDS } from "./src/lib/race-collector/timing.ts";
 
 /**
  * Build a specialist RunRecs deployment from the same repository without
@@ -275,7 +276,11 @@ export default defineConfig(({ command }) => ({
       ? [
           nitro({
             preset: "vercel",
-            vercel: { functionRules: { "/api/race-collector-worker": { maxDuration: 120 } } },
+            vercel: {
+              functionRules: {
+                "/api/race-collector-worker": { maxDuration: WORKER_MAX_DURATION_SECONDS },
+              },
+            },
           }),
         ]
       : []),

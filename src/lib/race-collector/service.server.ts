@@ -16,6 +16,7 @@ import {
 } from "./core.ts";
 import { researchWindow, type ResearchResult } from "./research.server.ts";
 import { collectionRegion } from "./regions.ts";
+import { JOB_LEASE_SECONDS } from "./timing.ts";
 type Run = {
   id: string;
   scope: Scope;
@@ -111,12 +112,12 @@ export async function controlRun(
     if (!run) throw new Error("Run not found");
     if (action === "retry") {
       if (run.status === "cancelled") throw new Error("Cancelled runs cannot be retried");
-      await tx`update race_collector_jobs set status='queued',attempts=0,available_at=now(),error=null where run_id=${id}::uuid and status='failed'`;
+      await tx`update race_collector_jobs set status='queued',attempts=0,available_at=now(),error=null,lease_token=null,lease_until=null where run_id=${id}::uuid and status='failed'`;
     }
     const state = action === "pause" ? "paused" : action === "cancel" ? "cancelled" : "running";
     if (run.status === "cancelled" || (run.status === "complete" && action !== "retry"))
       throw new Error("This run has finished. Start a new scan.");
-    await tx`update race_collector_runs set status=${state},updated_at=now() where id=${id}::uuid`;
+    await tx`update race_collector_runs set status=${state},error=case when ${state}='running' then null else error end,updated_at=now() where id=${id}::uuid`;
     return { status: state };
   });
 }
@@ -143,7 +144,8 @@ export async function runWorker(db?: Sql, research = researchWindow) {
     }
     const job = jobs[0];
     const token = randomUUID();
-    await tx`update race_collector_jobs set status='running',attempts=attempts+1,lease_token=${token}::uuid,lease_until=now()+interval '3 minutes' where id=${job.id}::uuid`;
+    await tx`update race_collector_jobs set status='running',attempts=attempts+1,lease_token=${token}::uuid,lease_until=now()+${JOB_LEASE_SECONDS}::int*interval '1 second' where id=${job.id}::uuid`;
+    await tx`update race_collector_runs set updated_at=now() where id=${run.id}::uuid`;
     return { run, job: { ...job, lease_token: token, attempts: job.attempts + 1 } };
   });
   if (!claimed) return { worked: false };
@@ -164,6 +166,7 @@ export async function runWorker(db?: Sql, research = researchWindow) {
     await sql`update race_collector_jobs set status=case when attempts>=3 then 'failed' else 'queued' end,error=${message.slice(0, 250)},lease_token=null,available_at=now()+interval '2 minutes' where id=${job.id}::uuid and lease_token=${job.lease_token}::uuid`;
     if (error && typeof error === "object" && "pauseRun" in error && error.pauseRun)
       await sql`update race_collector_runs set status='paused',error=${message},updated_at=now() where id=${run.id}::uuid and status='running'`;
+    else await sql`update race_collector_runs set updated_at=now() where id=${run.id}::uuid`;
     return { worked: true, error: message };
   }
 }
@@ -261,7 +264,15 @@ export async function dashboard(runId?: string, sqlOverride?: Sql) {
   const runs = await sql<Run>`select * from race_collector_runs order by created_at desc limit 15`;
   const run = runId ? runs.find((r) => r.id === runId) : runs[0];
   if (!run)
-    return { readiness: readiness(), runs, run: null, jobs: [], candidates: [], counts: [] };
+    return {
+      readiness: readiness(),
+      runs,
+      run: null,
+      jobs: [],
+      candidates: [],
+      counts: [],
+      activity: [],
+    };
   const jobs = await sql<{
     country: string;
     regionCode: string | null;
@@ -279,7 +290,15 @@ export async function dashboard(runId?: string, sqlOverride?: Sql) {
     report: ResearchResult | null;
     error: string | null;
   }>`select "window",report,error from race_collector_jobs where run_id=${run.id}::uuid and (error is not null or report is not null) order by ordinal desc limit 100`;
-  return { readiness: readiness(), runs, run, jobs, candidates, counts, gaps };
+  const activity = await sql<{
+    id: string;
+    window: Window;
+    status: string;
+    attempts: number;
+    error: string | null;
+    available_at: string;
+  }>`select id,"window",status,attempts,error,available_at from race_collector_jobs where run_id=${run.id}::uuid and (status in ('running','failed') or (status='queued' and attempts>0)) order by case status when 'running' then 0 when 'queued' then 1 else 2 end,ordinal limit 6`;
+  return { readiness: readiness(), runs, run, jobs, candidates, counts, gaps, activity };
 }
 export async function exportRun(id: string) {
   const sql = await getSql();

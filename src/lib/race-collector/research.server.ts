@@ -1,5 +1,6 @@
 import { COLLECTOR_COUNTRIES, type Candidate, type Scope, type Window } from "./core.ts";
 import { collectionRegion, REGION_BOUNDARIES } from "./regions.ts";
+import { RESEARCH_TIMEOUT_MS } from "./timing.ts";
 export type ResearchResult = {
   candidates: Candidate[];
   sources: string[];
@@ -98,7 +99,7 @@ export async function researchWindow(
       tools: [{ type: "web_search" }],
       max_output_tokens: 14000,
     }),
-    signal: AbortSignal.timeout(90000),
+    signal: AbortSignal.timeout(RESEARCH_TIMEOUT_MS),
   });
   if (!response.ok)
     throw Object.assign(
