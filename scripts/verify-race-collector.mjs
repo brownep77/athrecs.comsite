@@ -668,7 +668,7 @@ assert.equal(
   (await service.dashboard(nextRun.id, sql, { search: "Queue fixture" })).reviewPage.total,
   224,
 );
-assert.equal(reviewGuidance(dismissedPage.candidates[0]).title, "Dismissed duplicate");
+assert.equal(reviewGuidance(dismissedPage.candidates[0]).title, "Dismissed finding");
 await assert.rejects(
   () =>
     service.dismissDuplicates(
@@ -744,6 +744,103 @@ assert.equal(
   (await service.dashboard(nextRun.id, sql, { search: "Queue fixture" })).reviewPage.total,
   225,
 );
+assert.deepEqual(
+  await sql`select (select count(*) from events)::int events,(select count(*) from editions)::int editions`,
+  catalogueBefore,
+);
+// Every status can be dismissed independently and restored without changing its decision.
+for (const index of [0, 150, 175, 200]) {
+  const id = queueRows[index].id;
+  const before = (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0];
+  assert.equal(
+    (await service.dismissFindings(nextRun.id, "dismiss", "staff@example.org", [id], sql)).changed,
+    1,
+  );
+  const hidden = (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0];
+  assert.equal(hidden.status, before.status);
+  assert.equal(hidden.reason, before.reason);
+  assert.deepEqual(hidden.candidate, before.candidate);
+  assert.equal(hidden.batch_id, before.batch_id);
+  assert(hidden.dismissed_at);
+  await assert.rejects(
+    () => service.stageReviewed([id], "staff@example.org", sql),
+    /Selection changed/,
+  );
+  const queue = await service.dashboard(nextRun.id, sql, { search: before.candidate.name });
+  assert.equal(queue.reviewPage.total, 0);
+  assert.equal(
+    (await service.dismissFindings(nextRun.id, "restore", "staff@example.org", [id], sql)).changed,
+    1,
+  );
+  assert.deepEqual(
+    (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0],
+    before,
+  );
+}
+// A dismissed staged finding retains its actual publication batch and reviewer decision.
+const batchBeforeDismissal = (
+  await sql`select * from catalogue_import_batches where id=${staged.batchId}`
+)[0];
+const stagedBeforeDismissal = (
+  await sql`select * from race_collector_candidates where id=${toStage}::uuid`
+)[0];
+await service.dismissFindings(run.id, "dismiss", "staff@example.org", [toStage], sql);
+assert.equal(
+  (await sql`select batch_id from race_collector_candidates where id=${toStage}::uuid`)[0].batch_id,
+  staged.batchId,
+);
+assert.deepEqual(
+  (await sql`select * from catalogue_import_batches where id=${staged.batchId}`)[0],
+  batchBeforeDismissal,
+);
+assert.match(
+  reviewGuidance({ ...stagedBeforeDismissal, dismissed_at: "2026-09-13" }).next,
+  /publication batch is unchanged/,
+);
+await service.dismissFindings(run.id, "restore", "staff@example.org", [toStage], sql);
+assert.deepEqual(
+  (await sql`select * from race_collector_candidates where id=${toStage}::uuid`)[0],
+  stagedBeforeDismissal,
+);
+// Bulk operations cover every status in one run, preserve scope, and are repeatable.
+const allCount = (await service.dashboard(nextRun.id, sql)).reviewPage.total;
+await assert.rejects(
+  () =>
+    service.dismissFindings(
+      nextRun.id,
+      "dismiss",
+      "staff@example.org",
+      [queueRows[0].id, toStage],
+      sql,
+    ),
+  /Only findings from this scan/,
+);
+assert.equal(
+  (await service.dismissFindings(nextRun.id, "dismiss", "staff@example.org", undefined, sql))
+    .changed,
+  allCount,
+);
+assert.equal(
+  (await service.dismissFindings(nextRun.id, "dismiss", "staff@example.org", undefined, sql))
+    .changed,
+  0,
+);
+assert.equal((await service.dashboard(nextRun.id, sql)).reviewPage.total, 0);
+assert.equal(
+  (await service.dashboard(nextRun.id, sql, { status: "dismissed" })).reviewPage.total,
+  allCount,
+);
+assert.equal(
+  (await sql`select dismissed_at from race_collector_candidates where id=${toStage}::uuid`)[0]
+    .dismissed_at,
+  null,
+);
+assert.equal(
+  (await service.dismissFindings(nextRun.id, "restore", "staff@example.org", undefined, sql))
+    .changed,
+  allCount,
+);
+assert.equal((await service.dashboard(nextRun.id, sql)).reviewPage.total, allCount);
 assert.deepEqual(
   await sql`select (select count(*) from events)::int events,(select count(*) from editions)::int editions`,
   catalogueBefore,

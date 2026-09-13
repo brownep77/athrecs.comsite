@@ -342,26 +342,48 @@ export async function dismissDuplicates(
   ids?: string[],
   sqlOverride?: Sql,
 ) {
+  // Older clients still have a button specifically labelled for duplicates.
+  return changeDismissal(runId, action, email, ids, sqlOverride, true);
+}
+export async function dismissFindings(
+  runId: string,
+  action: "dismiss" | "restore",
+  email: string,
+  ids?: string[],
+  sqlOverride?: Sql,
+) {
+  return changeDismissal(runId, action, email, ids, sqlOverride, false);
+}
+async function changeDismissal(
+  runId: string,
+  action: "dismiss" | "restore",
+  email: string,
+  ids: string[] | undefined,
+  sqlOverride: Sql | undefined,
+  duplicatesOnly: boolean,
+) {
   if (
     !["dismiss", "restore"].includes(action) ||
     (ids !== undefined &&
       (!Array.isArray(ids) || !ids.length || ids.length > 100 || new Set(ids).size !== ids.length))
   )
-    throw new Error("Invalid duplicate selection.");
+    throw new Error("Invalid finding selection.");
   const sql = sqlOverride ?? (await getSql());
   return sql.transaction(async (tx) => {
     const runs = await tx`select id from race_collector_runs where id=${runId}::uuid for update`;
     if (!runs.length) throw new Error("Run not found.");
     if (ids) {
       const rows =
-        await tx`select id from race_collector_candidates where run_id=${runId}::uuid and id=any(${ids}::uuid[]) and status='duplicate' for update`;
+        await tx`select id from race_collector_candidates where run_id=${runId}::uuid and id=any(${ids}::uuid[]) and (not ${duplicatesOnly} or status='duplicate') for update`;
       if (rows.length !== ids.length)
         throw new Error(
-          "Only already-listed findings from this scan can be dismissed or restored.",
+          duplicatesOnly
+            ? "Only already-listed findings from this scan can be dismissed or restored."
+            : "Only findings from this scan can be dismissed or restored.",
         );
     }
     const rows =
-      await tx`update race_collector_candidates set dismissed_at=case when ${action}='dismiss' then now() else null end,dismissed_by=case when ${action}='dismiss' then ${email} else null end where run_id=${runId}::uuid and status='duplicate' and (${ids ?? null}::uuid[] is null or id=any(${ids ?? null}::uuid[])) and (case when ${action}='dismiss' then dismissed_at is null else dismissed_at is not null end) returning id`;
+      await tx`update race_collector_candidates set dismissed_at=case when ${action}='dismiss' then now() else null end,dismissed_by=case when ${action}='dismiss' then ${email} else null end where run_id=${runId}::uuid and (not ${duplicatesOnly} or status='duplicate') and (${ids ?? null}::uuid[] is null or id=any(${ids ?? null}::uuid[])) and (case when ${action}='dismiss' then dismissed_at is null else dismissed_at is not null end) returning id`;
     return { changed: rows.length, action };
   });
 }

@@ -35,7 +35,7 @@ import {
   controlCollector,
   stageCollector,
   exportCollector,
-  dismissCollectorDuplicates,
+  dismissCollectorFindings,
 } from "@/lib/race-collector/api";
 export const Route = createFileRoute("/admin/race-collector")({
   head: () => ({
@@ -146,12 +146,12 @@ function CollectorPage() {
   });
   const dismiss = useMutation({
     mutationFn: (input: { action: "dismiss" | "restore"; ids?: string[] }) =>
-      dismissCollectorDuplicates({ data: { id: run!.id, ...input } }),
+      dismissCollectorFindings({ data: { id: run!.id, ...input } }),
     onSuccess: async (result) => {
       setMessage(
         result.action === "dismiss"
-          ? `${result.changed} already-listed findings dismissed. Published races are unchanged. You can restore findings from Dismissed.`
-          : `${result.changed} findings restored to Already listed.`,
+          ? `${result.changed} findings dismissed. Published races and publication batches are unchanged. Restore findings from Dismissed.`
+          : `${result.changed} findings restored with their previous statuses.`,
       );
       changeReview({ page: 0 });
       await refresh();
@@ -185,7 +185,8 @@ function CollectorPage() {
     data?.counts
       .filter((row) => row.status !== "dismissed")
       .reduce((total, row) => total + row.count, 0) ?? 0;
-  const readyOnPage = data?.candidates.filter((row) => row.status === "review") ?? [];
+  const readyOnPage =
+    data?.candidates.filter((row) => row.status === "review" && !row.dismissed_at) ?? [];
   const pageInfo = data?.reviewPage;
   const progressScope = run?.scope ?? scope;
   const chooseCountries = (countries: string[]) =>
@@ -975,7 +976,7 @@ function CollectorPage() {
               </Button>
             )}
           </div>
-          {(count("duplicate") > 0 || reviewQuery.status === "dismissed") && (
+          {(totalFindings > 0 || reviewQuery.status === "dismissed") && (
             <div className="flex flex-wrap items-center gap-3 rounded-xl bg-slate-50 p-4">
               {reviewQuery.status === "dismissed" ? (
                 <Button
@@ -993,12 +994,12 @@ function CollectorPage() {
                   disabled={reviewBusy || query.isPlaceholderData}
                   onClick={() => dismiss.mutate({ action: "dismiss" })}
                 >
-                  Dismiss all already listed in this scan ({count("duplicate")})
+                  Dismiss all current findings in this scan ({totalFindings})
                 </Button>
               )}
               <p className="text-xs text-muted">
-                Dismiss removes findings from this review list. Published races stay in RunRecs, and
-                dismissed findings can be restored.
+                Every finding can be dismissed and restored. Dismiss hides it from this review list;
+                published races and publication batches stay unchanged.
               </p>
             </div>
           )}
@@ -1097,6 +1098,7 @@ function CollectorPage() {
                           aria-label={`Review ${row.candidate.name} ${row.candidate.distanceLabel}`}
                           disabled={
                             row.status !== "review" ||
+                            Boolean(row.dismissed_at) ||
                             query.isPlaceholderData ||
                             reviewBusy ||
                             (!selected.includes(row.id) && selected.length >= REVIEW_BATCH_LIMIT)
@@ -1174,24 +1176,22 @@ function CollectorPage() {
                             <p className="mt-1">{row.reason}</p>
                           </details>
                         )}
-                        {row.status === "duplicate" && (
-                          <div className="mt-3">
-                            <Button
-                              size="sm"
-                              variant="secondary"
-                              aria-label={`${row.dismissed_at ? "Restore" : "Dismiss"} ${row.candidate.name} ${row.candidate.distanceLabel}`}
-                              disabled={reviewBusy || query.isPlaceholderData}
-                              onClick={() =>
-                                dismiss.mutate({
-                                  action: row.dismissed_at ? "restore" : "dismiss",
-                                  ids: [row.id],
-                                })
-                              }
-                            >
-                              {row.dismissed_at ? "Restore" : "Dismiss"}
-                            </Button>
-                          </div>
-                        )}
+                        <div className="mt-3">
+                          <Button
+                            size="sm"
+                            variant="secondary"
+                            aria-label={`${row.dismissed_at ? "Restore" : "Dismiss"} ${row.candidate.name} ${row.candidate.distanceLabel}`}
+                            disabled={reviewBusy || query.isPlaceholderData}
+                            onClick={() =>
+                              dismiss.mutate({
+                                action: row.dismissed_at ? "restore" : "dismiss",
+                                ids: [row.id],
+                              })
+                            }
+                          >
+                            {row.dismissed_at ? "Restore" : "Dismiss"}
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -1200,11 +1200,13 @@ function CollectorPage() {
             </table>
             {!data?.candidates.length && (
               <p className="py-8 text-center text-sm text-muted">
-                {totalFindings || count("dismissed")
-                  ? "No findings match these filters. Choose All findings or try another search."
-                  : run.status === "complete"
-                    ? "No findings were saved for this scan. Check the search notes for coverage gaps."
-                    : "Findings will appear here as research windows finish."}
+                {!totalFindings && count("dismissed") && reviewQuery.status !== "dismissed"
+                  ? "All findings are dismissed. Open Dismissed to restore them."
+                  : totalFindings || count("dismissed")
+                    ? "No findings match these filters. Choose All findings or try another search."
+                    : run.status === "complete"
+                      ? "No findings were saved for this scan. Check the search notes for coverage gaps."
+                      : "Findings will appear here as research windows finish."}
               </p>
             )}
           </div>
