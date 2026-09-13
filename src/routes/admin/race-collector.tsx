@@ -14,6 +14,8 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CollectorDuplicateDialog } from "@/components/admin/collector-duplicate-dialog";
+import type { Candidate } from "@/lib/race-collector/core";
 import { CollectorComparison } from "@/components/admin/collector-comparison";
 import {
   COLLECTOR_COUNTRIES,
@@ -39,6 +41,7 @@ import {
   dismissCollectorFindings,
   dismissCollectorDuplicates,
   recheckCollector,
+  undoCollectorDuplicate,
 } from "@/lib/race-collector/api";
 export const Route = createFileRoute("/admin/race-collector")({
   head: () => ({
@@ -82,6 +85,10 @@ function CollectorPage() {
   const [selected, setSelected] = useState<string[]>([]);
   const [reviewed, setReviewed] = useState(false);
   const [message, setMessage] = useState("");
+  const [duplicateFinding, setDuplicateFinding] = useState<{
+    id: string;
+    candidate: Candidate;
+  } | null>(null);
   const [reviewQuery, setReviewQuery] = useState<ReviewQuery>({
     status: "all",
     search: "",
@@ -183,8 +190,24 @@ function CollectorPage() {
     },
     onError: fail,
   });
+  const undoDuplicate = useMutation({
+    mutationFn: (id: string) => undoCollectorDuplicate({ data: { id } }),
+    onSuccess: async () => {
+      setMessage(
+        "Duplicate decision undone. The finding has its previous review status; the audit record is retained.",
+      );
+      changeReview({ page: 0 });
+      await refresh();
+    },
+    onError: fail,
+  });
   const reviewBusy =
-    stage.isPending || dismiss.isPending || recheck.isPending || clearDuplicates.isPending;
+    stage.isPending ||
+    dismiss.isPending ||
+    recheck.isPending ||
+    clearDuplicates.isPending ||
+    undoDuplicate.isPending ||
+    Boolean(duplicateFinding);
   const download = async () => {
     try {
       const result = await exportCollector({ data: { id: run!.id } });
@@ -1269,7 +1292,47 @@ function CollectorPage() {
                             <p className="mt-1">{row.reason}</p>
                           </details>
                         )}
-                        <div className="mt-3">
+                        {row.check.manualReview && (
+                          <p className="mt-2 text-xs text-muted">
+                            Kept by reviewer: {row.check.manualReview.kept_snapshot.event.name} ·{" "}
+                            {row.check.manualReview.kept_snapshot.edition.distance}.{" "}
+                            {row.check.manualReview.reason}
+                          </p>
+                        )}
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {row.check.manualReview ? (
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              disabled={reviewBusy || query.isPlaceholderData}
+                              onClick={() => undoDuplicate.mutate(row.id)}
+                            >
+                              Undo duplicate decision
+                            </Button>
+                          ) : (
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              disabled={
+                                reviewBusy ||
+                                query.isPlaceholderData ||
+                                row.status === "staged" ||
+                                Boolean(row.batch_id)
+                              }
+                              title={
+                                row.status === "staged"
+                                  ? "Resolve this finding in Publication review first."
+                                  : undefined
+                              }
+                              onClick={() => {
+                                setSelected([]);
+                                setReviewed(false);
+                                setDuplicateFinding({ id: row.id, candidate: row.candidate });
+                              }}
+                            >
+                              Choose the one to keep
+                            </Button>
+                          )}
                           <Button
                             size="sm"
                             variant="secondary"
@@ -1389,6 +1452,19 @@ function CollectorPage() {
             ))}
           </div>
         </details>
+      )}
+      {duplicateFinding && (
+        <CollectorDuplicateDialog
+          key={duplicateFinding.id}
+          finding={duplicateFinding}
+          onClose={() => setDuplicateFinding(null)}
+          onSaved={(notice) => {
+            setDuplicateFinding(null);
+            setMessage(notice);
+            changeReview({ page: 0 });
+            void refresh();
+          }}
+        />
       )}
     </div>
   );

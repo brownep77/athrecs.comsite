@@ -15,6 +15,7 @@ import {
   type Edition,
 } from "./core.ts";
 import { researchWindow, type ResearchResult } from "./research.server.ts";
+import { keptFixtureUnchanged, type DuplicateReview } from "./duplicate-review.ts";
 import { collectionRegion } from "./regions.ts";
 import { JOB_LEASE_SECONDS } from "./timing.ts";
 import { REVIEW_BATCH_LIMIT, validateReviewQuery, type ReviewQuery } from "./review.ts";
@@ -67,7 +68,7 @@ export async function snapshot(sql: Sql, dates: string[]) {
   const events =
     await sql<Identity>`select id,slug,name,country,city,website from events where sport='Running'`;
   const editions =
-    await sql<Edition>`select event_id as "eventId",event_date::text as date,distance_code as distance,distance_km as "distanceKm",source_url as source,entry_url as "entryUrl" from editions where event_date between ${from}::date - interval '31 days' and ${to}::date + interval '31 days' and event_id in (select id from events where sport='Running')`;
+    await sql<Edition>`select id,event_id as "eventId",event_date::text as date,distance_code as distance,distance_km as "distanceKm",source_url as source,entry_url as "entryUrl" from editions where event_date between ${from}::date - interval '31 days' and ${to}::date + interval '31 days' and event_id in (select id from events where sport='Running')`;
   const pending =
     await sql<PendingEdition>`select x->>'eventSlug' as "eventSlug",x->>'date' as date,b.id as "batchId",coalesce(e.name,p->>'name') as name,coalesce(e.country,p->>'country') as country,coalesce(e.city,p->>'city') as city,x->>'source' as source,x->>'entryUrl' as "entryUrl",x->>'distance' as distance,(x->>'distanceKm')::float8 as "distanceKm" from catalogue_import_batches b cross join lateral jsonb_array_elements(coalesce(b.payload->'editions','[]'::jsonb)) x left join events e on e.slug=x->>'eventSlug' left join lateral jsonb_array_elements(coalesce(b.payload->'events','[]'::jsonb)) p on p->>'slug'=x->>'eventSlug' where b.status not in ('published','rolled_back')`;
   const redirects = await sql<{
@@ -76,7 +77,16 @@ export async function snapshot(sql: Sql, dates: string[]) {
   }>`select old_slug,current_slug from slug_redirects where entity_type='event'`;
   for (const event of events)
     event.aliases = redirects.filter((r) => r.current_slug === event.slug).map((r) => r.old_slug);
-  return { events, editions, pending, redirects, match: createMatchIndex(events, editions) };
+  const manualReviews =
+    await sql<DuplicateReview>`select * from race_collector_duplicate_reviews where undone_at is null`;
+  return {
+    events,
+    editions,
+    pending,
+    redirects,
+    manualReviews,
+    match: createMatchIndex(events, editions),
+  };
 }
 type Snapshot = Awaited<ReturnType<typeof snapshot>>;
 function checkFinding(
@@ -127,8 +137,25 @@ function checkFinding(
       reason: "Different names share a programme; confirm event grouping",
     };
   if (issues.length) decision = { ...decision, status: "held", reason: issues.join("; ") };
+  const manualReview = snap.manualReviews.find((r) => r.candidate_id === selfId);
+  if (manualReview)
+    decision = keptFixtureUnchanged(manualReview, snap.events, snap.editions)
+      ? {
+          status: "duplicate",
+          reason: `Manually confirmed duplicate: kept ${manualReview.kept_snapshot.event.name}. ${manualReview.reason}`,
+          eventSlug: manualReview.kept_snapshot.event.slug,
+          eventId: manualReview.kept_event_id,
+        }
+      : {
+          status: "held",
+          reason:
+            "The kept fixture changed since your duplicate decision; undo and review the comparison again",
+          eventSlug: manualReview.kept_snapshot.event.slug,
+          eventId: manualReview.kept_event_id,
+        };
   return {
     ...decision,
+    manualReview,
     matches: matches.slice(0, 4),
     matchCount: matches.length,
     related: related.slice(0, 4).map((r) => ({
@@ -496,6 +523,8 @@ export async function exportRun(id: string) {
     jobs: await sql`select * from race_collector_jobs where run_id=${id}::uuid order by ordinal`,
     candidates:
       await sql`select * from race_collector_candidates where run_id=${id}::uuid order by created_at`,
+    duplicateReviews:
+      await sql`select r.* from race_collector_duplicate_reviews r join race_collector_candidates c on c.id=r.candidate_id where c.run_id=${id}::uuid order by r.reviewed_at`,
   };
 }
 export async function dismissDuplicates(

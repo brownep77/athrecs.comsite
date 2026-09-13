@@ -91,3 +91,30 @@ export const recheckCollector = createServerFn({ method: "POST" })
     const s = await import("./service.server");
     return s.recheckFindings(data.id);
   });
+
+export const getDuplicateOptions = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .validator((input: { id: string; search: string }) => {
+    idInput(input);
+    if (typeof input.search !== "string" || input.search.length > 200)
+      throw new Error("Invalid search");
+    return input;
+  })
+  .handler(async ({ data }) =>
+    (await import("./duplicate-review.server")).duplicateOptions(data.id, data.search),
+  );
+export const confirmCollectorDuplicate = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((input: import("./duplicate-review.server").ConfirmDuplicateInput) => {
+    idInput(input);
+    return input;
+  })
+  .handler(async ({ data, context }) =>
+    (await import("./duplicate-review.server")).confirmDuplicate(data, context.staffEmail),
+  );
+export const undoCollectorDuplicate = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator(idInput)
+  .handler(async ({ data, context }) =>
+    (await import("./duplicate-review.server")).undoDuplicate(data.id, context.staffEmail),
+  );

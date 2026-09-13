@@ -83,6 +83,7 @@ export function createMatchIndex(events: Identity[], editions: Edition[]) {
   const prepared = events.map((event) => ({
     event,
     name: normalizedName(event.name),
+    slugName: normalizedName(event.slug),
     words: tokens(event.name),
     aliases: (event.aliases ?? []).map((a) => normalizedName(a.replace(/-/g, " "))),
     website: page(normalizedUrl(event.website)),
@@ -122,6 +123,20 @@ export function createMatchIndex(events: Identity[], editions: Edition[]) {
       const identity = exactName || alias || website || editionUrl;
       const contained =
         name.length > 8 && p.name.length > 8 && (name.includes(p.name) || p.name.includes(name));
+      const slugHint =
+        name.length > 8 &&
+        p.slugName.length > 8 &&
+        (name.includes(p.slugName) || p.slugName.includes(name));
+      const joinedName =
+        country &&
+        dated.length > 0 &&
+        urls.some((u) => u.origin === p.website.origin) &&
+        wordList.some((a) =>
+          [...p.words].some(
+            (b) =>
+              Math.min(a.length, b.length) >= 7 && a !== b && (a.startsWith(b) || b.startsWith(a)),
+          ),
+        );
       const similar =
         common >= 2 &&
         (common / Math.min(words.size, p.words.size) >= 0.85 ||
@@ -131,7 +146,16 @@ export function createMatchIndex(events: Identity[], editions: Edition[]) {
         (u) =>
           relatedPage(u, p.website) || dated.some((d) => d.urls.some((v) => relatedPage(u, v))),
       );
-      if (!identity && !contained && !similar && !venueName && !childPage) continue;
+      if (
+        !identity &&
+        !contained &&
+        !similar &&
+        !venueName &&
+        !childPage &&
+        !slugHint &&
+        !joinedName
+      )
+        continue;
       const reasons = [
         exactName && "Same event name (year, punctuation and accents normalised)",
         alias && "Matches a recorded former event slug",
@@ -141,6 +165,8 @@ export function createMatchIndex(events: Identity[], editions: Edition[]) {
           (contained || similar || venueName) &&
           "Similar event name, allowing sponsor and distance wording",
         childPage && "Related event page path; requires source comparison",
+        slugHint && "Alternate name matches the existing catalogue URL",
+        joinedName && "Joined or shortened event name on the same organiser site and date",
         sameCity && "Same start town/city",
         dated.length > 0 && "Same date",
         equivalent && "Same numeric distance (within 25 metres, including miles/km conversion)",

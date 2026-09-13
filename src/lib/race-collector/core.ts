@@ -83,6 +83,7 @@ export type Identity = {
   aliases?: string[];
 };
 export type Edition = {
+  id?: number;
   eventId: number;
   date: string;
   distance: string;
