@@ -63,6 +63,10 @@ export function reviewGuidance(row: {
       next: "Open the source, confirm the date, distance and start venue, then select this finding.",
     };
   const reasons: Record<string, { why: string; next: string }> = {
+    "Different names share a programme; confirm event grouping": {
+      why: "Other findings use the same event or entry programme under a different name.",
+      next: "Review the programme as one event with separate distance fixtures before adding it.",
+    },
     "Possible event alias needs review": {
       why: "This race may already be listed under a different name.",
       next: "Compare it with the existing event and confirm which record to use before adding it.",

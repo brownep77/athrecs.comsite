@@ -18,6 +18,12 @@ import { researchWindow, type ResearchResult } from "./research.server.ts";
 import { collectionRegion } from "./regions.ts";
 import { JOB_LEASE_SECONDS } from "./timing.ts";
 import { REVIEW_BATCH_LIMIT, validateReviewQuery, type ReviewQuery } from "./review.ts";
+import {
+  createMatchIndex,
+  findPendingMatches,
+  sharesProgramme,
+  type PendingEdition,
+} from "./matching.ts";
 type Run = {
   id: string;
   scope: Scope;
@@ -59,18 +65,150 @@ export async function snapshot(sql: Sql, dates: string[]) {
   const from = sorted[0];
   const to = sorted[sorted.length - 1];
   const events =
-    await sql<Identity>`select id,slug,name,country,website from events where sport='Running'`;
+    await sql<Identity>`select id,slug,name,country,city,website from events where sport='Running'`;
   const editions =
-    await sql<Edition>`select event_id as "eventId",event_date::text as date,distance_code as distance,distance_km as "distanceKm",source_url as source from editions where event_date between ${from}::date - interval '31 days' and ${to}::date + interval '31 days' and event_id in (select id from events where sport='Running')`;
-  const pending = await sql<{
-    eventSlug: string;
-    date: string;
-  }>`select x->>'eventSlug' as "eventSlug",x->>'date' as date from catalogue_import_batches b cross join lateral jsonb_array_elements(coalesce(b.payload->'editions','[]'::jsonb)) x where b.status not in ('published','rolled_back')`;
+    await sql<Edition>`select event_id as "eventId",event_date::text as date,distance_code as distance,distance_km as "distanceKm",source_url as source,entry_url as "entryUrl" from editions where event_date between ${from}::date - interval '31 days' and ${to}::date + interval '31 days' and event_id in (select id from events where sport='Running')`;
+  const pending =
+    await sql<PendingEdition>`select x->>'eventSlug' as "eventSlug",x->>'date' as date,b.id as "batchId",coalesce(e.name,p->>'name') as name,coalesce(e.country,p->>'country') as country,coalesce(e.city,p->>'city') as city,x->>'source' as source,x->>'entryUrl' as "entryUrl",x->>'distance' as distance,(x->>'distanceKm')::float8 as "distanceKm" from catalogue_import_batches b cross join lateral jsonb_array_elements(coalesce(b.payload->'editions','[]'::jsonb)) x left join events e on e.slug=x->>'eventSlug' left join lateral jsonb_array_elements(coalesce(b.payload->'events','[]'::jsonb)) p on p->>'slug'=x->>'eventSlug' where b.status not in ('published','rolled_back')`;
   const redirects = await sql<{
     old_slug: string;
     current_slug: string;
   }>`select old_slug,current_slug from slug_redirects where entity_type='event'`;
-  return { events, editions, pending, redirects };
+  for (const event of events)
+    event.aliases = redirects.filter((r) => r.current_slug === event.slug).map((r) => r.old_slug);
+  return { events, editions, pending, redirects, match: createMatchIndex(events, editions) };
+}
+type Snapshot = Awaited<ReturnType<typeof snapshot>>;
+function checkFinding(
+  c: Candidate,
+  job: Window,
+  scope: Scope,
+  snap: Snapshot,
+  prior: CandidateRow[],
+  selfId?: string,
+  batchId?: string | null,
+) {
+  const matches = snap.match(c);
+  const pending = snap.pending.filter((p) => !batchId || p.batchId !== batchId);
+  let decision = reconcile(c, snap.events, snap.editions, pending, matches);
+  if (snap.redirects.some((a) => a.old_slug === decision.eventSlug))
+    decision = {
+      ...decision,
+      status: "held",
+      reason: "A retired event slug needs canonical review",
+    };
+  // Different distance names can share an established canonical event safely.
+  if (
+    !decision.eventId &&
+    decision.eventSlug &&
+    prior.some(
+      (p) =>
+        p.id !== selfId &&
+        p.event_slug === decision.eventSlug &&
+        normalizedName(p.candidate.name) !== normalizedName(c.name),
+    )
+  )
+    decision = {
+      ...decision,
+      status: "held",
+      reason: "Proposed slug collides with another discovered event; canonical review required",
+    };
+  const issues = candidateProblems(c, job, scope);
+  const related = !decision.eventId
+    ? prior.filter(
+        (p) =>
+          p.id !== selfId && p.event_slug !== decision.eventSlug && sharesProgramme(c, p.candidate),
+      )
+    : [];
+  if (related.length)
+    decision = {
+      ...decision,
+      status: "held",
+      reason: "Different names share a programme; confirm event grouping",
+    };
+  if (issues.length) decision = { ...decision, status: "held", reason: issues.join("; ") };
+  return {
+    ...decision,
+    matches: matches.slice(0, 4),
+    matchCount: matches.length,
+    related: related.slice(0, 4).map((r) => ({
+      name: r.candidate.name,
+      date: r.candidate.date,
+      distanceLabel: r.candidate.distanceLabel,
+    })),
+    pending: findPendingMatches(c, decision.eventSlug, pending).slice(0, 4),
+  };
+}
+/** Reuses saved evidence. Never starts research or rewrites source-review / dismissal decisions. */
+export async function recheckFindings(runId: string, sqlOverride?: Sql) {
+  const sql = sqlOverride ?? (await getSql());
+  return sql.transaction(async (tx) => {
+    const runs =
+      await tx<Run>`select * from race_collector_runs where id=${runId}::uuid for update`;
+    if (!runs.length) throw new Error("Run not found.");
+    const rows = await tx<
+      CandidateRow & { window: Window }
+    >`select c.*,j."window" from race_collector_candidates c join race_collector_jobs j on j.id=c.job_id where c.run_id=${runId}::uuid order by c.id for update of c`;
+    if (!rows.length)
+      return { checked: 0, updated: 0, duplicates: 0, attention: 0, stagedConflicts: 0 };
+    const snap = await snapshot(tx, [runs[0].scope.dateFrom, runs[0].scope.dateTo]);
+    const changes: {
+      id: string;
+      status: string;
+      reason: string;
+      event_slug: string;
+      event_id: number | null;
+    }[] = [];
+    let duplicates = 0,
+      attention = 0,
+      stagedConflicts = 0;
+    for (const row of rows) {
+      const check = checkFinding(
+        row.candidate,
+        row.window,
+        runs[0].scope,
+        snap,
+        rows,
+        row.id,
+        row.batch_id,
+      );
+      if (check.status === "duplicate") duplicates++;
+      if (check.status === "held") attention++;
+      if (row.status === "staged") {
+        if (
+          check.status !== "review" ||
+          check.eventId !== row.event_id ||
+          check.eventSlug !== row.event_slug
+        )
+          stagedConflicts++;
+        continue;
+      }
+      if (row.dismissed_at) continue;
+      if (
+        check.status !== row.status ||
+        check.reason !== row.reason ||
+        check.eventId !== row.event_id ||
+        check.eventSlug !== row.event_slug
+      ) {
+        changes.push({
+          id: row.id,
+          status: check.status,
+          reason: check.reason,
+          event_slug: check.eventSlug,
+          event_id: check.eventId,
+        });
+      }
+    }
+    if (changes.length)
+      await tx`update race_collector_candidates c set status=x.status,reason=x.reason,event_slug=x.event_slug,event_id=x.event_id from jsonb_to_recordset(${JSON.stringify(changes)}::jsonb) as x(id uuid,status text,reason text,event_slug text,event_id int) where c.id=x.id and c.run_id=${runId}::uuid`;
+    return {
+      checked: rows.length,
+      updated: changes.length,
+      duplicates,
+      attention,
+      stagedConflicts,
+    };
+  });
 }
 export async function createRun(input: Scope, email: string, sql?: Sql) {
   const scope = validateScope(input);
@@ -212,35 +350,18 @@ export async function saveResult(sql: Sql, job: Job, run: Run, result: ResearchR
         !["England", "Wales", "Scotland", "Northern Ireland", "United Kingdom"].includes(c.country)
       )
         c.country = country.name;
-      let decision = reconcile(c, snap.events, snap.editions, snap.pending);
-      if (snap.redirects.some((a) => a.old_slug === decision.eventSlug))
-        decision = {
-          ...decision,
-          status: "held",
-          reason: "A retired event slug needs canonical review",
-        };
+      let decision = checkFinding(c, job.window, run.scope, snap, prior);
       const seen = prior.some(
         (p) =>
           p.candidate.date === c.date &&
           ((normalizedName(p.candidate.name) === normalizedName(c.name) &&
             p.candidate.countryCode === c.countryCode &&
             normalizedName(p.candidate.city) === normalizedName(c.city)) ||
+            sharesProgramme(p.candidate, c) ||
             (normalizedUrl(p.candidate.sourceUrl) === normalizedUrl(c.sourceUrl) &&
               p.event_slug === decision.eventSlug)) &&
           Math.abs(p.candidate.distanceKm - c.distanceKm) <= 0.025,
       );
-      if (
-        prior.some(
-          (p) =>
-            p.event_slug === decision.eventSlug &&
-            normalizedName(p.candidate.name) !== normalizedName(c.name),
-        )
-      )
-        decision = {
-          ...decision,
-          status: "held",
-          reason: "Proposed slug collides with another discovered event; canonical review required",
-        };
       if (seen) continue; // Repeated discovery is not another race or an inflated skip count.
       if (issues.length) decision = { ...decision, status: "held", reason: issues.join("; ") };
       const fingerprint = createHash("sha256")
@@ -301,6 +422,48 @@ export async function dashboard(
   const page = Math.min(review.page, pages - 1);
   const candidates =
     await sql<CandidateRow>`select * from race_collector_candidates where run_id=${run.id}::uuid and (case when ${review.status}='dismissed' then dismissed_at is not null else dismissed_at is null and (${review.status}='all' or status=${review.status}) end) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0 order by case status when 'review' then 0 when 'held' then 1 when 'duplicate' then 2 else 3 end,created_at,id limit ${review.pageSize} offset ${page * review.pageSize}`;
+  const snap = candidates.length
+    ? await snapshot(sql, [run.scope.dateFrom, run.scope.dateTo])
+    : null;
+  const allFindings = candidates.length
+    ? await sql<CandidateRow>`select * from race_collector_candidates where run_id=${run.id}::uuid`
+    : [];
+  const windows = candidates.length
+    ? await sql<{
+        id: string;
+        window: Window;
+      }>`select id,"window" from race_collector_jobs where run_id=${run.id}::uuid`
+    : [];
+  const comparisons = candidates.map((row) => {
+    const window = windows.find(
+      (j) => j.id === (row as CandidateRow & { job_id: string }).job_id,
+    )!.window;
+    const check = checkFinding(
+      row.candidate,
+      window,
+      run.scope,
+      snap!,
+      allFindings,
+      row.id,
+      row.batch_id,
+    );
+    const changed =
+      check.status !== row.status ||
+      check.eventSlug !== row.event_slug ||
+      check.eventId !== row.event_id;
+    return {
+      ...row,
+      check: {
+        ...check,
+        changed:
+          row.status === "staged"
+            ? check.status !== "review" ||
+              check.eventSlug !== row.event_slug ||
+              check.eventId !== row.event_id
+            : changed,
+      },
+    };
+  });
   const gaps = await sql<{
     window: Window;
     report: ResearchResult | null;
@@ -319,7 +482,7 @@ export async function dashboard(
     runs,
     run,
     jobs,
-    candidates,
+    candidates: comparisons,
     counts,
     gaps,
     activity,
@@ -401,14 +564,19 @@ export async function stageReviewed(ids: string[], email: string, sqlOverride?: 
     // Serialize source review against workers and another reviewer.
     await tx`select id from race_collector_runs order by id for update`;
     const rows = await tx<
-      CandidateRow & { run_id: string }
-    >`select * from race_collector_candidates where id=any(${ids}::uuid[]) order by id for update`;
+      CandidateRow & { run_id: string; window: Window }
+    >`select c.*,j."window" from race_collector_candidates c join race_collector_jobs j on j.id=c.job_id where c.id=any(${ids}::uuid[]) order by c.id for update of c`;
     if (
       rows.length !== ids.length ||
       rows.some((r) => r.status !== "review" || r.dismissed_at) ||
       new Set(rows.map((r) => r.run_id)).size !== 1
     )
       throw new Error("Selection changed. Refresh and review again.");
+    const run = (
+      await tx<Run>`select * from race_collector_runs where id=${rows[0].run_id}::uuid`
+    )[0];
+    const prior =
+      await tx<CandidateRow>`select * from race_collector_candidates where run_id=${rows[0].run_id}::uuid`;
     const snap = await snapshot(
       tx,
       rows.map((r) => r.candidate.date),
@@ -417,14 +585,16 @@ export async function stageReviewed(ids: string[], email: string, sqlOverride?: 
     const editions: import("../athrecs/import.server").ImportEditionInput[] = [];
     for (const row of rows) {
       const c = row.candidate;
-      const decision = reconcile(c, snap.events, snap.editions, snap.pending);
+      const decision = checkFinding(c, row.window, run.scope, snap, prior, row.id);
       if (
         decision.status !== "review" ||
         decision.eventSlug !== row.event_slug ||
         decision.eventId !== row.event_id ||
         snap.redirects.some((a) => a.old_slug === row.event_slug)
       )
-        throw new Error(`${c.name}: catalogue identity changed; refresh research before staging.`);
+        throw new Error(
+          `${c.name}: catalogue identity changed; use Recheck duplicates before staging.`,
+        );
       if (
         rows.some(
           (other) =>
@@ -435,6 +605,17 @@ export async function stageReviewed(ids: string[], email: string, sqlOverride?: 
         )
       )
         throw new Error("Selection contains equivalent race distances.");
+      if (
+        rows.some(
+          (other) =>
+            other.id !== row.id &&
+            other.event_slug !== row.event_slug &&
+            sharesProgramme(c, other.candidate),
+        )
+      )
+        throw new Error(
+          "Different names share a programme; confirm event grouping before staging.",
+        );
       if (!row.event_id && !events.some((e) => e.slug === row.event_slug))
         events.push({
           slug: row.event_slug,

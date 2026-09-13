@@ -14,6 +14,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CollectorComparison } from "@/components/admin/collector-comparison";
 import {
   COLLECTOR_COUNTRIES,
   calendarMonthRange,
@@ -36,6 +37,8 @@ import {
   stageCollector,
   exportCollector,
   dismissCollectorFindings,
+  dismissCollectorDuplicates,
+  recheckCollector,
 } from "@/lib/race-collector/api";
 export const Route = createFileRoute("/admin/race-collector")({
   head: () => ({
@@ -158,7 +161,30 @@ function CollectorPage() {
     },
     onError: fail,
   });
-  const reviewBusy = stage.isPending || dismiss.isPending;
+  const recheck = useMutation({
+    mutationFn: () => recheckCollector({ data: { id: run!.id } }),
+    onSuccess: async (result) => {
+      setMessage(
+        `Checked ${result.checked} saved findings: ${result.duplicates} already listed, ${result.attention} need attention; ${result.updated} current findings updated. Dismissals and staged batches kept.${result.stagedConflicts ? ` ${result.stagedConflicts} findings already sent for publication now have a conflict—check Publication review.` : ""}`,
+      );
+      changeReview({ page: 0 });
+      await refresh();
+    },
+    onError: fail,
+  });
+  const clearDuplicates = useMutation({
+    mutationFn: () => dismissCollectorDuplicates({ data: { id: run!.id, action: "dismiss" } }),
+    onSuccess: async (result) => {
+      setMessage(
+        `${result.changed} already-listed findings dismissed. Restore them from Dismissed.`,
+      );
+      changeReview({ page: 0 });
+      await refresh();
+    },
+    onError: fail,
+  });
+  const reviewBusy =
+    stage.isPending || dismiss.isPending || recheck.isPending || clearDuplicates.isPending;
   const download = async () => {
     try {
       const result = await exportCollector({ data: { id: run!.id } });
@@ -186,7 +212,9 @@ function CollectorPage() {
       .filter((row) => row.status !== "dismissed")
       .reduce((total, row) => total + row.count, 0) ?? 0;
   const readyOnPage =
-    data?.candidates.filter((row) => row.status === "review" && !row.dismissed_at) ?? [];
+    data?.candidates.filter(
+      (row) => row.status === "review" && !row.dismissed_at && !row.check.changed,
+    ) ?? [];
   const pageInfo = data?.reviewPage;
   const progressScope = run?.scope ?? scope;
   const chooseCountries = (countries: string[]) =>
@@ -949,6 +977,38 @@ function CollectorPage() {
               Publication review <ArrowUpRight size={16} />
             </Link>
           </div>
+          <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border p-4">
+            <Button
+              variant="secondary"
+              disabled={reviewBusy || query.isPlaceholderData}
+              onClick={() => recheck.mutate()}
+            >
+              <RotateCcw size={14} />{" "}
+              {recheck.isPending ? "Checking saved findings…" : "Recheck duplicates"}
+            </Button>
+            <Button
+              variant="secondary"
+              disabled={reviewBusy || !count("review")}
+              onClick={() => {
+                setReviewSearch("");
+                changeReview({ status: "review", search: "" });
+              }}
+            >
+              Review new findings
+            </Button>
+            <Button
+              variant="secondary"
+              disabled={reviewBusy || !count("duplicate")}
+              onClick={() => clearDuplicates.mutate()}
+            >
+              Dismiss already listed ({count("duplicate")})
+            </Button>
+            <p className="w-full text-xs text-muted">
+              Recheck uses your saved findings and the latest catalogue and pending imports. No new
+              web scan. Compare the evidence below, then select up to 50 checked fixtures for
+              publication review.
+            </p>
+          </div>
           <div className="flex flex-wrap gap-2" aria-label="Filter findings by status">
             {REVIEW_FILTERS.map((filter) => (
               <Button
@@ -1098,6 +1158,7 @@ function CollectorPage() {
                           aria-label={`Review ${row.candidate.name} ${row.candidate.distanceLabel}`}
                           disabled={
                             row.status !== "review" ||
+                            row.check.changed ||
                             Boolean(row.dismissed_at) ||
                             query.isPlaceholderData ||
                             reviewBusy ||
@@ -1131,16 +1192,37 @@ function CollectorPage() {
                         >
                           Primary programme <ArrowUpRight size={12} />
                         </a>
-                        <details className="mt-2 text-xs leading-5 text-muted">
-                          <summary className="cursor-pointer font-medium">Source evidence</summary>
-                          <p className="mt-1">{row.candidate.evidence}</p>
-                        </details>
+                        <p className="mt-2 text-xs leading-5 text-muted">
+                          <strong>Source evidence: </strong>
+                          {row.candidate.evidence}
+                        </p>
+                        <p className="mt-1 text-xs text-muted">
+                          Source type: {row.candidate.sourceKind} · Surface:{" "}
+                          {row.candidate.surface || "Not confirmed"}
+                        </p>
+                        {safeUrl(row.candidate.entryUrl) && (
+                          <a
+                            href={row.candidate.entryUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-1 inline-block text-xs text-emerald-700 underline"
+                          >
+                            Entry page
+                          </a>
+                        )}
                       </td>
                       <td className="whitespace-nowrap p-3 text-fg">
                         {row.candidate.date}
                         <p className="mt-1 text-xs text-muted">
-                          {row.candidate.distanceLabel} · {row.candidate.distanceKm.toFixed(2)} km
+                          {row.candidate.distanceLabel} · {row.candidate.distanceKm.toFixed(3)} km
                         </p>
+                        <p className="mt-1 text-xs text-muted">
+                          {(row.candidate.distanceKm / 1.609344).toFixed(3)} miles
+                        </p>
+                        <p className="mt-2 text-xs text-muted">
+                          Start: {row.candidate.startTime || "Not confirmed"}
+                        </p>
+                        <p className="text-xs text-muted">Entries: {row.candidate.entryStatus}</p>
                       </td>
                       <td className="min-w-64 max-w-md p-3">
                         <span className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-700">
@@ -1154,6 +1236,17 @@ function CollectorPage() {
                           <strong>Next: </strong>
                           {guidance.next}
                         </p>
+                        {row.check.changed && (
+                          <p className="mt-2 text-xs font-medium leading-5 text-amber-800">
+                            Latest check: {row.check.reason}.{" "}
+                            {row.dismissed_at
+                              ? "Your dismissal is kept."
+                              : row.status === "staged"
+                                ? "Check this conflict in Publication review."
+                                : "Use Recheck duplicates to update this finding before selecting it."}
+                          </p>
+                        )}
+                        <CollectorComparison check={row.check} />
                         {row.candidate.notes.trim() && (
                           <p className="mt-2 text-xs leading-5 text-muted">
                             <strong>Collector notes: </strong>
