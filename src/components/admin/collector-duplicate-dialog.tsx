@@ -2,7 +2,10 @@ import { useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import { getDuplicateOptions, confirmCollectorDuplicate } from "@/lib/race-collector/api";
+import {
+  getDuplicateDistanceOptions,
+  confirmCollectorDuplicateDistances,
+} from "@/lib/race-collector/api";
 import { safeUrl, type Candidate } from "@/lib/race-collector/core";
 
 export function CollectorDuplicateDialog({
@@ -17,25 +20,25 @@ export function CollectorDuplicateDialog({
   const [search, setSearch] = useState("");
   const [input, setInput] = useState("");
   const [choice, setChoice] = useState<
-    Awaited<ReturnType<typeof getDuplicateOptions>>["options"][number] | null
+    Awaited<ReturnType<typeof getDuplicateDistanceOptions>>["events"][number] | null
   >(null);
+  const [selected, setSelected] = useState<{ id: string; editionId: number; token: string }[]>([]);
   const [confirmed, setConfirmed] = useState(false);
   const [differencesAccepted, setDifferencesAccepted] = useState(false);
   const [note, setNote] = useState("");
   const options = useQuery({
-    queryKey: ["collector-duplicate-options", finding.id, search],
-    queryFn: () => getDuplicateOptions({ data: { id: finding.id, search } }),
+    queryKey: ["collector-duplicate-distance-options", finding.id, search],
+    queryFn: () => getDuplicateDistanceOptions({ data: { id: finding.id, search } }),
     staleTime: 0,
     refetchOnWindowFocus: false,
   });
   const save = useMutation({
     mutationFn: () =>
-      confirmCollectorDuplicate({
+      confirmCollectorDuplicateDistances({
         data: {
           id: finding.id,
           eventId: choice!.event.id,
-          editionId: choice!.edition.id,
-          token: choice!.token,
+          selections: selected,
           sameRaceConfirmed: confirmed,
           differencesAccepted,
           note,
@@ -43,10 +46,24 @@ export function CollectorDuplicateDialog({
       }),
     onSuccess: (result) =>
       onSaved(
-        `Kept ${result.keptName} · ${result.keptDistance}. Removed the duplicate finding. Use Dismissed → Undo duplicate decision to restore it.`,
+        `Kept ${result.keptName}. Removed ${result.count} duplicate finding${result.count === 1 ? "" : "s"}. Use Dismissed → Undo duplicate decision to restore each distance.`,
       ),
   });
   const c = finding.candidate;
+  const selectedPairs =
+    choice?.distances.flatMap((distance) =>
+      distance.matches
+        .filter((match) =>
+          selected.some((s) => s.id === match.id && s.editionId === distance.edition.id),
+        )
+        .map((match) => ({ ...match, edition: distance.edition })),
+    ) ?? [];
+  const hasDifferences = selectedPairs.some((pair) => pair.differences.length > 0);
+  function resetConfirmation() {
+    setConfirmed(false);
+    setDifferencesAccepted(false);
+    save.reset();
+  }
   return (
     <Dialog.Root
       open
@@ -67,12 +84,12 @@ export function CollectorDuplicateDialog({
         >
           <Dialog.Title className="text-lg font-semibold">Choose the one to keep</Dialog.Title>
           <Dialog.Description className="mt-1 text-sm text-slate-600">
-            Choose the published fixture that is the same race. The collected copy will move to
-            Dismissed with your decision saved. Published fixtures and results remain intact.
+            Choose an event, then tick the distances whose collected copies you want to remove.
+            Unticked findings stay in the queue. Each saved distance has its own undo option.
           </Dialog.Description>
-          <div className="mt-5 grid gap-5 md:grid-cols-2">
-            <section className="space-y-2 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm">
-              <h3 className="font-semibold">Remove this collected finding</h3>
+          <div className="mt-5 grid gap-5 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+            <section className="self-start space-y-2 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm">
+              <h3 className="font-semibold">Finding being reviewed</h3>
               <p className="font-medium">{c.name}</p>
               <p>
                 {c.date} · {c.distanceLabel} · {c.distanceKm.toFixed(3)} km
@@ -101,16 +118,15 @@ export function CollectorDuplicateDialog({
               )}
             </section>
             <section className="space-y-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm">
-              <h3 className="font-semibold">Keep an existing fixture</h3>
+              <h3 className="font-semibold">Keep an existing event and choose distances</h3>
               <form
                 className="flex gap-2"
                 onSubmit={(e) => {
                   e.preventDefault();
                   setSearch(input.trim());
                   setChoice(null);
-                  setConfirmed(false);
-                  setDifferencesAccepted(false);
-                  save.reset();
+                  setSelected([]);
+                  resetConfirmation();
                 }}
               >
                 <input
@@ -135,78 +151,194 @@ export function CollectorDuplicateDialog({
               {options.data && !options.data.total && (
                 <p>No existing fixtures found. Try a shorter name or an alternate spelling.</p>
               )}
-              <div className="max-h-72 space-y-2 overflow-y-auto">
-                {options.data?.options.map((option) => (
-                  <label
-                    key={option.edition.id}
-                    className={`block rounded-lg border bg-white p-3 ${choice?.edition.id === option.edition.id ? "border-emerald-700" : "border-slate-200"}`}
-                  >
-                    <span className="flex items-start gap-2">
-                      <input
-                        type="radio"
-                        name="kept-fixture"
-                        value={option.edition.id}
-                        checked={choice?.edition.id === option.edition.id}
-                        disabled={save.isPending || Boolean(option.blocker)}
-                        onChange={() => {
-                          setChoice(option);
-                          setConfirmed(false);
-                          setDifferencesAccepted(false);
-                          save.reset();
-                        }}
-                        className="mt-1"
-                      />
-                      <span>
-                        <strong>{option.event.name}</strong>
-                        <br />
-                        {option.edition.date} · {option.edition.distance} ·{" "}
-                        {option.edition.distanceKm.toFixed(3)} km
-                        <br />
-                        {option.event.city}, {option.event.country}
-                      </span>
-                    </span>
-                    {option.blocker && (
-                      <p className="mt-1 text-xs text-slate-600">{option.blocker}</p>
-                    )}
-                  </label>
-                ))}
+              <div className="space-y-3">
+                {options.data?.events.map((result) => {
+                  // Keep the reviewed snapshot (including tokens) until a deliberate new choice.
+                  const group = choice?.event.id === result.event.id ? choice : result;
+                  const chosen = choice?.event.id === group.event.id;
+                  return (
+                    <div
+                      key={group.event.id}
+                      className={`rounded-lg border bg-white p-3 ${chosen ? "border-emerald-700" : "border-slate-200"}`}
+                    >
+                      <label className="flex items-start gap-2">
+                        <input
+                          type="radio"
+                          name="kept-event"
+                          value={group.event.id}
+                          checked={chosen}
+                          disabled={save.isPending}
+                          onChange={() => {
+                            setChoice(group);
+                            setSelected([]);
+                            resetConfirmation();
+                          }}
+                          className="mt-1"
+                        />
+                        <span>
+                          <strong>{group.event.name}</strong>
+                          <br />
+                          {group.date} ·{" "}
+                          {[group.event.city, group.event.country].filter(Boolean).join(", ")}
+                          <br />
+                          <span className="text-xs text-slate-600">
+                            {group.distances.map((d) => d.edition.distance).join(" · ")}
+                          </span>
+                        </span>
+                      </label>
+                      {chosen && (
+                        <fieldset
+                          className="mt-3 space-y-3 border-t border-emerald-200 pt-3"
+                          disabled={save.isPending}
+                        >
+                          <legend className="px-1 font-semibold">Choose distances to keep</legend>
+                          <p className="text-xs text-slate-600">
+                            Tick each duplicate to resolve. Published distances and results stay
+                            saved.
+                          </p>
+                          <a
+                            className="block text-emerald-800 underline"
+                            href={`https://www.runrecs.com/races/${encodeURIComponent(group.event.slug)}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Open event to keep
+                          </a>
+                          {group.distances.map(({ edition, matches }) => (
+                            <div
+                              key={edition.id}
+                              className="rounded-lg border border-slate-200 p-3"
+                            >
+                              <p className="font-semibold">
+                                Keep {edition.distance} · {edition.distanceKm.toFixed(3)} km ·{" "}
+                                {(edition.distanceKm / 1.609344).toFixed(2)} miles
+                              </p>
+                              {edition.source && safeUrl(edition.source) && (
+                                <a
+                                  className="text-xs text-emerald-800 underline"
+                                  href={edition.source}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  Saved distance source
+                                </a>
+                              )}
+                              {matches.length === 0 && (
+                                <p className="mt-1 text-xs text-slate-600">
+                                  No matching collected distance to remove. This published distance
+                                  stays saved.
+                                </p>
+                              )}
+                              {matches.map((match) => (
+                                <div key={match.id} className="mt-2 space-y-2 text-xs">
+                                  <label className="flex items-start gap-2 text-sm">
+                                    <input
+                                      type="checkbox"
+                                      aria-label={`Keep ${edition.distance}; remove ${match.candidate.name} (${match.candidate.distanceLabel})`}
+                                      checked={selected.some(
+                                        (s) => s.id === match.id && s.editionId === edition.id,
+                                      )}
+                                      onChange={(e) => {
+                                        const checked = e.target.checked;
+                                        setSelected((current) => [
+                                          ...current.filter((s) => s.id !== match.id),
+                                          ...(checked
+                                            ? [
+                                                {
+                                                  id: match.id,
+                                                  editionId: edition.id,
+                                                  token: match.token,
+                                                },
+                                              ]
+                                            : []),
+                                        ]);
+                                        resetConfirmation();
+                                      }}
+                                      className="mt-1"
+                                    />
+                                    <span>
+                                      Remove collected copy: <strong>{match.candidate.name}</strong>
+                                      <br />
+                                      {match.candidate.date} · {match.candidate.distanceLabel} ·{" "}
+                                      {match.candidate.distanceKm.toFixed(3)} km
+                                      <br />
+                                      {[
+                                        match.candidate.city,
+                                        match.candidate.region,
+                                        match.candidate.country,
+                                      ]
+                                        .filter(Boolean)
+                                        .join(", ")}
+                                    </span>
+                                  </label>
+                                  <details>
+                                    <summary className="cursor-pointer text-slate-600">
+                                      Collected evidence and links
+                                    </summary>
+                                    <p className="mt-1">{match.candidate.evidence}</p>
+                                    {safeUrl(match.candidate.sourceUrl) && (
+                                      <a
+                                        className="mr-3 inline-block text-emerald-800 underline"
+                                        href={match.candidate.sourceUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        Collected source
+                                      </a>
+                                    )}
+                                    {safeUrl(match.candidate.entryUrl) && (
+                                      <a
+                                        className="inline-block text-emerald-800 underline"
+                                        href={match.candidate.entryUrl}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        Collected entry page
+                                      </a>
+                                    )}
+                                  </details>
+                                  {match.differences.map((difference) => (
+                                    <p key={difference} className="font-medium text-amber-800">
+                                      {difference}
+                                    </p>
+                                  ))}
+                                </div>
+                              ))}
+                            </div>
+                          ))}
+                        </fieldset>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-              {options.data && options.data.total > options.data.options.length && (
+              {options.data && options.data.total > options.data.events.length && (
                 <p>
-                  Showing {options.data.options.length} of {options.data.total}. Refine your search.
+                  Showing {options.data.events.length} of {options.data.total} events. Refine your
+                  search.
                 </p>
               )}
-              {choice && (
-                <div className="space-y-2 border-t border-emerald-200 pt-3">
-                  <a
-                    className="block text-emerald-800 underline"
-                    href={`https://www.runrecs.com/races/${encodeURIComponent(choice.event.slug)}`}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Open event to keep
-                  </a>
-                  {choice.edition.source && safeUrl(choice.edition.source) && (
-                    <a
-                      className="block text-emerald-800 underline"
-                      href={choice.edition.source}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Saved source
-                    </a>
-                  )}
-                  {choice.differences.map((difference) => (
-                    <p key={difference} className="font-medium text-amber-800">
-                      {difference}
-                    </p>
-                  ))}
-                </div>
+              {options.data && options.data.totalFindings > options.data.findings.length && (
+                <p>
+                  Showing {options.data.findings.length} of {options.data.totalFindings} collected
+                  distances. Review the remaining findings after saving.
+                </p>
+              )}
+              {choice && options.data && (
+                <p className="text-xs text-slate-600">
+                  Related findings with no equivalent published distance stay in the review queue
+                  for separate review.
+                </p>
               )}
             </section>
           </div>
-          {choice && (
+          {choice && selected.length > 0 && (
             <div className="mt-5 space-y-3 text-sm">
+              <p className="font-semibold">
+                Keep {choice.event.name}: {selectedPairs.map((p) => p.edition.distance).join(", ")}.
+                Remove {selected.length} selected collected{" "}
+                {selected.length === 1 ? "copy" : "copies"}.
+              </p>
               <label className="flex items-start gap-2">
                 <input
                   type="checkbox"
@@ -216,11 +348,11 @@ export function CollectorDuplicateDialog({
                   className="mt-1"
                 />
                 <span>
-                  I have compared the names, date, distance, locations and sources. These are the
-                  same fixture, and I want to keep {choice.event.name}.
+                  I have compared the names, dates, distances, locations and sources for every
+                  ticked copy. Each is the same race as its selected published distance.
                 </span>
               </label>
-              {choice.differences.length > 0 && (
+              {hasDifferences && (
                 <label className="flex items-start gap-2 font-medium text-amber-800">
                   <input
                     type="checkbox"
@@ -259,9 +391,9 @@ export function CollectorDuplicateDialog({
             <Button
               disabled={
                 !choice ||
+                !selected.length ||
                 !confirmed ||
-                Boolean(choice.blocker) ||
-                Boolean(choice.differences.length && !differencesAccepted) ||
+                (hasDifferences && !differencesAccepted) ||
                 save.isPending ||
                 options.isFetching
               }
@@ -269,7 +401,7 @@ export function CollectorDuplicateDialog({
             >
               {save.isPending
                 ? "Saving decision…"
-                : "Keep this fixture and remove duplicate finding"}
+                : `Keep selected distances and remove ${selected.length || "duplicate"} ${selected.length === 1 ? "copy" : "copies"}`}
             </Button>
           </div>
         </Dialog.Content>

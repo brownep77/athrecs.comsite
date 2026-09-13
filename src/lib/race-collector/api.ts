@@ -118,3 +118,31 @@ export const undoCollectorDuplicate = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) =>
     (await import("./duplicate-review.server")).undoDuplicate(data.id, context.staffEmail),
   );
+
+export const getDuplicateDistanceOptions = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .validator((input: { id: string; search: string }) => {
+    idInput(input);
+    if (typeof input.search !== "string" || input.search.length > 200)
+      throw new Error("Invalid search");
+    return input;
+  })
+  .handler(async ({ data }) =>
+    (await import("./duplicate-review.server")).duplicateDistanceOptions(data.id, data.search),
+  );
+export const confirmCollectorDuplicateDistances = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((input: import("./duplicate-review.server").ConfirmDuplicateDistancesInput) => {
+    idInput(input);
+    if (
+      !Array.isArray(input.selections) ||
+      !input.selections.length ||
+      input.selections.length > 50
+    )
+      throw new Error("Invalid distance selection");
+    input.selections.forEach(idInput);
+    return input;
+  })
+  .handler(async ({ data, context }) =>
+    (await import("./duplicate-review.server")).confirmDuplicateDistances(data, context.staffEmail),
+  );

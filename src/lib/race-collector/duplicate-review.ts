@@ -1,5 +1,20 @@
 import type { Candidate, Edition, Identity } from "./core.ts";
-import { normalizedName, sameCountry } from "./matching.ts";
+import { normalizedName, normalizedUrl, sameCountry } from "./matching.ts";
+
+// Suggestions only: a shared event entry page can span different start villages.
+// Every distance still requires its own comparison, explicit selection and saved decision.
+export function sameDuplicateProgramme(a: Candidate, b: Candidate) {
+  if (a.date !== b.date || a.countryCode !== b.countryCode) return false;
+  const entry = normalizedUrl(a.entryUrl);
+  if (entry && entry === normalizedUrl(b.entryUrl) && new URL(entry).pathname !== "/") return true;
+  const source = normalizedUrl(a.sourceUrl);
+  return Boolean(
+    source &&
+    source === normalizedUrl(b.sourceUrl) &&
+    normalizedName(a.name) &&
+    normalizedName(a.name) === normalizedName(b.name),
+  );
+}
 
 export type Keeper = { event: Identity; edition: Edition & { id: number } };
 export type DuplicateReview = {
