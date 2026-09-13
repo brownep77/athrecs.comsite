@@ -22,6 +22,7 @@ registerHooks({
 });
 process.env.DATABASE_URL = "postgresql://test-only@127.0.0.1/never-connect";
 const core = await import("../src/lib/race-collector/core.ts");
+const matching = await import("../src/lib/race-collector/matching.ts");
 const service = await import("../src/lib/race-collector/service.server.ts");
 const { parseResearch, buildResearchPrompt, researchWindow } =
   await import("../src/lib/race-collector/research.server.ts");
@@ -247,8 +248,154 @@ assert.equal(
   1,
 );
 const pg = new PGlite();
+// Festival distances and sponsor variants: identity comes from an exact event/entry link.
+const festival = {
+  id: 301,
+  slug: "dundalk-festival",
+  name: "Dundalk Half Marathon & 10K 2027",
+  country: "Ireland",
+  city: "Dundalk",
+  website: "https://entry.example.org/event/CaseSensitive42",
+};
+const tenK = {
+  ...c,
+  name: "Life Style Sports Dundalk 10K",
+  city: "Dundalk",
+  entryUrl: festival.website + "/?utm_source=discovery",
+  sourceUrl: "https://organiser.example.org/dundalk",
+};
+const festivalEditions = [
+  {
+    eventId: festival.id,
+    date: c.date,
+    distance: "6.2mi",
+    distanceKm: 9.9779,
+    source: festival.website,
+  },
+];
+assert.equal(core.reconcile(tenK, [festival], festivalEditions).status, "duplicate");
+assert.equal(
+  core.reconcile(
+    { ...tenK, distance: 21.0975, distanceKm: 21.0975, distanceLabel: "Half" },
+    [festival],
+    festivalEditions,
+  ).status,
+  "review",
+);
+const comparison = matching.createMatchIndex([festival], festivalEditions)(tenK)[0];
+assert.equal(comparison.confidence, "identity");
+assert(comparison.reasons.some((reason) => reason.includes("entry page")));
+assert.equal(comparison.editions[0].distance, "6.2mi");
+assert.equal(
+  core.reconcile({ ...tenK, city: "Belfast" }, [festival], festivalEditions).status,
+  "held",
+);
+assert.equal(
+  core.reconcile({ ...tenK, countryCode: "GB", country: "Scotland" }, [festival], festivalEditions)
+    .status,
+  "held",
+);
+// Reordered names and sponsor changes are suggestions, never sufficient for an automatic merge.
+const sponsorEvent = { ...festival, name: "Wicklow Half Marathon & 10K 2027", city: "Wicklow" };
+const sponsorCandidate = {
+  ...tenK,
+  name: "Volkswagen Financial Services Wicklow 10K",
+  city: "Wicklow",
+  entryUrl: "https://unrelated.example.org/book",
+  sourceUrl: "https://another.example.org/race",
+};
+assert.equal(core.reconcile(sponsorCandidate, [sponsorEvent], festivalEditions).status, "held");
+assert.equal(
+  matching.createMatchIndex([sponsorEvent], festivalEditions)(sponsorCandidate)[0].confidence,
+  "possible",
+);
+assert.equal(
+  core.reconcile(
+    { ...c, name: "Mountain Blue Challenge", sourceUrl: "https://another.example.org/race" },
+    [{ ...festival, name: "Blue Mountain Challenge" }],
+    [],
+  ).status,
+  "held",
+);
+// A former slug helps find the canonical identity without recreating its retired URL.
+assert.equal(
+  core.reconcile(
+    { ...c, name: "Old Island Challenge", sourceUrl: "https://another.example.org/race" },
+    [{ ...festival, city: "Dublin", aliases: ["old-island-challenge-2026"] }],
+    [],
+  ).eventId,
+  festival.id,
+);
+// A shared host, generic organiser homepage, city, date or distance alone is not a match.
+const unrelated = {
+  ...c,
+  name: "Harbour Sprint",
+  city: "Dundalk",
+  sourceUrl: "https://entry.example.org/event/Other42",
+  entryUrl: "",
+};
+assert.equal(core.reconcile(unrelated, [festival], festivalEditions).status, "review");
+assert.equal(
+  core.reconcile(
+    { ...unrelated, sourceUrl: "https://entry.example.org" },
+    [{ ...festival, website: "https://entry.example.org" }],
+    [{ ...festivalEditions[0], source: "https://entry.example.org" }],
+  ).status,
+  "review",
+);
+assert.equal(
+  core.reconcile(
+    { ...unrelated, entryUrl: festival.website.toLowerCase() },
+    [festival],
+    festivalEditions,
+  ).status,
+  "review",
+);
+assert.equal(
+  core.reconcile(
+    tenK,
+    [festival, { ...festival, id: 302, slug: "other-identity" }],
+    festivalEditions,
+  ).status,
+  "held",
+);
+assert.equal(
+  core.reconcile({ ...tenK, date: "2027-02-02" }, [festival], festivalEditions).status,
+  "held",
+);
+assert.equal(
+  core.reconcile({ ...tenK, entryUrl: festival.website + "/ticket" }, [festival], festivalEditions)
+    .status,
+  "held",
+  "Child page paths are suggestions, not proof of identity",
+);
+// An equivalent pending import is found even when it uses a different proposed slug/name.
+const pendingFixture = {
+  eventSlug: "another-dundalk-name",
+  date: c.date,
+  name: festival.name,
+  country: "Ireland",
+  city: "Dundalk",
+  source: tenK.sourceUrl,
+  entryUrl: tenK.entryUrl,
+  distanceKm: 10,
+  batchId: "pending-batch",
+};
+assert.equal(core.reconcile(tenK, [], [], [pendingFixture]).reason, "Overlapping pending import");
+assert.equal(
+  core.reconcile(tenK, [], [], [{ ...pendingFixture, date: "2027-02-02" }]).status,
+  "review",
+);
+assert.equal(
+  core.reconcile(tenK, [], [], [{ ...pendingFixture, distanceKm: 21.0975 }]).status,
+  "held",
+);
+assert.equal(
+  core.reconcile(tenK, [], [], [{ ...pendingFixture, distanceKm: undefined }]).status,
+  "held",
+);
 await pg.exec(
-  `create table events(id int primary key,slug text,name text,country text,website text,sport text);create table editions(event_id int,event_date date,distance_code text,distance_km float8,source_url text);create table slug_redirects(entity_type text,old_slug text,current_slug text);`,
+  `create table events(id int primary key,slug text,name text,country text,website text,sport text,city text);create table editions(event_id int,event_date date,distance_code text,distance_km float8,source_url text,entry_url text);create table slug_redirects(entity_type text,old_slug text,current_slug text);`,
 );
 await pg.exec(await readFile("migrations/0016_catalogue_publishing.sql", "utf8"));
 await pg.exec(await readFile("migrations/20260912_worldwide_race_collector.sql", "utf8"));
@@ -844,6 +991,185 @@ assert.equal((await service.dashboard(nextRun.id, sql)).reviewPage.total, allCou
 assert.deepEqual(
   await sql`select (select count(*) from events)::int events,(select count(*) from editions)::int editions`,
   catalogueBefore,
+);
+// A saved scan can be rechecked locally, without a provider call or catalogue mutation.
+const matchRun = await service.createRun(
+  { ...scope, passes: 1, dateTo: "2027-03-31" },
+  "staff@example.org",
+  sql,
+);
+const findingReport = (candidates) => ({
+  candidates,
+  sources: [tenK.sourceUrl],
+  gaps: [],
+  capped: false,
+  usage: "{}",
+  responseId: "matching-fixture",
+});
+await service.runWorker(sql, async () =>
+  findingReport([
+    tenK,
+    {
+      ...tenK,
+      name: "Distinct Sunset Run",
+      sourceUrl: "https://sunset.example.org/race",
+      entryUrl: "",
+    },
+  ]),
+);
+const beforeMatch = await service.dashboard(matchRun.id, sql);
+const newTen = beforeMatch.candidates.find((row) => row.candidate.name === tenK.name);
+const sunset = beforeMatch.candidates.find((row) => row.candidate.name === "Distinct Sunset Run");
+await service.dismissFindings(matchRun.id, "dismiss", "staff@example.org", [sunset.id], sql);
+const dismissedBeforeRecheck = (
+  await sql`select * from race_collector_candidates where id=${sunset.id}::uuid`
+)[0];
+await sql`insert into events(id,slug,name,country,city,website,sport) values(${festival.id},${festival.slug},${festival.name},${festival.country},${festival.city},${festival.website},'Running')`;
+await sql`insert into editions(event_id,event_date,distance_code,distance_km,source_url,entry_url) values(${festival.id},${c.date},'10K',10,${tenK.sourceUrl},${festival.website})`;
+const stalePage = await service.dashboard(matchRun.id, sql);
+assert.equal(stalePage.candidates[0].status, "review");
+assert.equal(stalePage.candidates[0].check.status, "duplicate");
+assert.equal(stalePage.candidates[0].check.changed, true);
+await assert.rejects(
+  () => service.stageReviewed([newTen.id], "staff@example.org", sql),
+  /Recheck duplicates/,
+);
+const catalogueBeforeRecheck =
+  await sql`select row_to_json(e) from events e union all select row_to_json(d) from editions d`;
+const rechecked = await service.recheckFindings(matchRun.id, sql);
+assert.deepEqual(rechecked, {
+  checked: 2,
+  updated: 1,
+  duplicates: 1,
+  attention: 0,
+  stagedConflicts: 0,
+});
+assert.equal((await service.dashboard(matchRun.id, sql)).candidates[0].status, "duplicate");
+assert.equal((await service.recheckFindings(matchRun.id, sql)).updated, 0);
+assert.deepEqual(
+  (await sql`select * from race_collector_candidates where id=${sunset.id}::uuid`)[0],
+  dismissedBeforeRecheck,
+);
+assert.deepEqual(
+  await sql`select row_to_json(e) from events e union all select row_to_json(d) from editions d`,
+  catalogueBeforeRecheck,
+);
+const stagedBeforeRecheck = (
+  await sql`select * from race_collector_candidates where id=${toStage}::uuid`
+)[0];
+assert.equal((await service.recheckFindings(run.id, sql)).stagedConflicts, 1);
+assert.deepEqual(
+  (await sql`select * from race_collector_candidates where id=${toStage}::uuid`)[0],
+  stagedBeforeRecheck,
+);
+assert.deepEqual(
+  (await sql`select * from catalogue_import_batches where id=${staged.batchId}`)[0],
+  batchBeforeDismissal,
+);
+await assert.rejects(() => service.recheckFindings(randomUUID(), sql), /Run not found/);
+// Different names for existing festival distances must not trigger the old slug-collision hold.
+const festivalRun = await service.createRun(
+  { ...scope, passes: 1, dateTo: "2027-03-31" },
+  "staff@example.org",
+  sql,
+);
+await sql`insert into editions(event_id,event_date,distance_code,distance_km,source_url) values(${festival.id},${c.date},'Half',21.0975,${tenK.sourceUrl})`;
+await service.runWorker(sql, async () =>
+  findingReport([
+    tenK,
+    {
+      ...tenK,
+      name: "Dundalk Half Marathon",
+      distance: 21.0975,
+      distanceKm: 21.0975,
+      distanceLabel: "Half",
+    },
+  ]),
+);
+const festivalPage = await service.dashboard(festivalRun.id, sql);
+assert.equal(festivalPage.candidates.length, 2);
+assert(festivalPage.candidates.every((row) => row.status === "duplicate"));
+// New programmes use one event name for their separate distance editions, so one batch creates one event.
+const programmeRun = await service.createRun(
+  { ...scope, passes: 1, dateTo: "2027-03-31" },
+  "staff@example.org",
+  sql,
+);
+const programme = {
+  ...c,
+  name: "Silver Birch Festival",
+  sourceUrl: "https://silver-birch.example.org/programme",
+  entryUrl: "",
+};
+await service.runWorker(sql, async () =>
+  findingReport([programme, { ...programme, distance: 5, distanceKm: 5, distanceLabel: "5K" }]),
+);
+const programmePage = await service.dashboard(programmeRun.id, sql);
+const programmeBatch = await service.stageReviewed(
+  programmePage.candidates.map((row) => row.id),
+  "staff@example.org",
+  sql,
+);
+const programmePayload = (
+  await sql`select payload from catalogue_import_batches where id=${programmeBatch.batchId}`
+)[0].payload;
+assert.equal(programmePayload.events.length, 1);
+assert.equal(programmePayload.editions.length, 2);
+await assertCollectorPublication(sql, programmeBatch.batchId, programmePayload);
+// A later overlapping import with a different slug is still blocked at final publication.
+const conflictingBatchId = randomUUID();
+const overlappingPayload = {
+  events: [{ ...programmePayload.events[0], slug: "birch-alias" }],
+  editions: [{ ...programmePayload.editions[0], eventSlug: "birch-alias" }],
+};
+await sql`insert into catalogue_import_batches(id,source_key,payload,payload_hash,status,submitted_by) values(${conflictingBatchId},'matching-overlap',${JSON.stringify(overlappingPayload)}::jsonb,'test','staged','staff@example.org')`;
+await assert.rejects(
+  () => assertCollectorPublication(sql, programmeBatch.batchId, programmePayload),
+  /identity|distance/,
+);
+// Same scan: renamed rediscoveries do not add a second copy of a numeric fixture.
+const aliasRun = await service.createRun(
+  { ...scope, passes: 1, dateTo: "2027-03-31" },
+  "staff@example.org",
+  sql,
+);
+const aliasProgramme = {
+  ...programme,
+  name: "Amber Brook Challenge",
+  sourceUrl: "https://amber-brook.example.org/event",
+};
+await service.runWorker(sql, async () =>
+  findingReport([
+    aliasProgramme,
+    { ...aliasProgramme, name: "Sponsor Amber Brook 10K" },
+    { ...aliasProgramme, name: "Amber Brook 5K", distance: 5, distanceKm: 5, distanceLabel: "5K" },
+  ]),
+);
+const aliasPage = await service.dashboard(aliasRun.id, sql);
+assert.equal(aliasPage.candidates.length, 2);
+assert.equal(aliasPage.candidates.find((row) => row.candidate.distanceKm === 5).status, "held");
+assert(aliasPage.candidates.every((row) => row.check.status === "held"));
+await assert.rejects(
+  () =>
+    service.stageReviewed(
+      [aliasPage.candidates.find((row) => row.status === "review").id],
+      "staff@example.org",
+      sql,
+    ),
+  /Recheck duplicates/,
+);
+await service.recheckFindings(aliasRun.id, sql);
+assert(
+  (await service.dashboard(aliasRun.id, sql)).candidates.every((row) => row.status === "held"),
+);
+assert.equal(
+  core.reconcile(
+    tenK,
+    [],
+    [],
+    [{ ...pendingFixture, eventSlug: core.reconcile(tenK, [], []).eventSlug, distanceKm: 21.0975 }],
+  ).status,
+  "review",
 );
 await pg.close();
 console.log(

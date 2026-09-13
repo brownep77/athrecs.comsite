@@ -2,6 +2,7 @@ import type { Sql } from "../db";
 import type { ImportBundle } from "../athrecs/import.server";
 import { snapshot } from "./service.server";
 import { reconcile, type Candidate } from "./core";
+import { sharesProgramme } from "./matching";
 /** Invoked again under the normal publisher's revision lock, not just at collection time. */
 export async function assertCollectorPublication(sql: Sql, batchId: string, payload: ImportBundle) {
   const rows = await sql<{
@@ -15,12 +16,15 @@ export async function assertCollectorPublication(sql: Sql, batchId: string, payl
     sql,
     rows.map((r) => r.candidate.date),
   );
-  const otherPending = await sql<{
-    eventSlug: string;
-    date: string;
-  }>`select x->>'eventSlug' as "eventSlug",x->>'date' date from catalogue_import_batches b cross join lateral jsonb_array_elements(coalesce(b.payload->'editions','[]'::jsonb)) x where b.id<>${batchId} and b.status not in ('published','rolled_back')`;
+  const otherPending = snap.pending.filter((p) => p.batchId !== batchId);
   for (const row of rows) {
     const c = row.candidate;
+    if (
+      rows.some(
+        (other) => other.event_slug !== row.event_slug && sharesProgramme(c, other.candidate),
+      )
+    )
+      throw new Error("Collector programme has conflicting event identities in this batch.");
     const d = (payload.editions ?? []).find(
       (x) => x.eventSlug === row.event_slug && x.date === c.date && x.distance === c.distanceLabel,
     );
@@ -33,7 +37,7 @@ export async function assertCollectorPublication(sql: Sql, batchId: string, payl
       (d.startTime ?? "") !== c.startTime
     )
       throw new Error("Staged edition differs from the reviewed source.");
-    const current = reconcile(c, snap.events, snap.editions, otherPending);
+    const current = reconcile(c, snap.events, snap.editions, otherPending, snap.match(c));
     if (
       current.status !== "review" ||
       current.eventSlug !== row.event_slug ||

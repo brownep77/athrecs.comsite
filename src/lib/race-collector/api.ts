@@ -83,3 +83,11 @@ export const dismissCollectorFindings = createServerFn({ method: "POST" })
     const s = await import("./service.server");
     return s.dismissFindings(data.id, data.action, context.staffEmail, data.ids);
   });
+
+export const recheckCollector = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator(idInput)
+  .handler(async ({ data }) => {
+    const s = await import("./service.server");
+    return s.recheckFindings(data.id);
+  });

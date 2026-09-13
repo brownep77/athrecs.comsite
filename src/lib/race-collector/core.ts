@@ -1,3 +1,12 @@
+import {
+  normalizedName,
+  sameCountry,
+  createMatchIndex,
+  findPendingMatches,
+  type CatalogueMatch,
+  type PendingEdition,
+} from "./matching.ts";
+export { normalizedName, normalizedUrl } from "./matching.ts";
 import { collectionRegion, collectionRegions } from "./regions.ts";
 /** ISO 3166-1 countries and territories, plus Kosovo. Separate from public filters. */
 const ISO_CODES =
@@ -70,6 +79,8 @@ export type Identity = {
   name: string;
   country: string;
   website: string | null;
+  city?: string | null;
+  aliases?: string[];
 };
 export type Edition = {
   eventId: number;
@@ -77,6 +88,7 @@ export type Edition = {
   distance: string;
   distanceKm: number;
   source: string | null;
+  entryUrl?: string | null;
 };
 export function realDate(v: string) {
   return (
@@ -197,25 +209,6 @@ export function safeUrl(value: string) {
     return false;
   }
 }
-export function normalizedName(v: string) {
-  return v
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/\b20\d{2}\b/g, "")
-    .replace(/[^\p{L}\p{N}]/gu, "");
-}
-export function normalizedUrl(v: string | null) {
-  try {
-    const u = new URL(v ?? "");
-    u.hash = "";
-    for (const k of [...u.searchParams.keys()])
-      if (/^(utm_|fbclid|gclid)/.test(k)) u.searchParams.delete(k);
-    return u.toString().replace(/\/$/, "");
-  } catch {
-    return "";
-  }
-}
 export function candidateProblems(c: Candidate, job: Window, scope: Scope): string[] {
   const issues: string[] = [];
   const km = c.distance * (c.unit === "mi" ? 1.609344 : 1);
@@ -262,26 +255,16 @@ export function reconcile(
   c: Candidate,
   events: Identity[],
   editions: Edition[],
-  pending: { eventSlug: string; date: string }[] = [],
+  pending: PendingEdition[] = [],
+  comparisons: CatalogueMatch[] = createMatchIndex(events, editions)(c),
 ): {
   status: "review" | "duplicate" | "held";
   reason: string;
   eventSlug: string;
   eventId: number | null;
 } {
-  const source = normalizedUrl(c.sourceUrl);
   const name = normalizedName(c.name);
-  const sourceEventIds = new Set(
-    editions
-      .filter((d) => d.date === c.date && source && normalizedUrl(d.source) === source)
-      .map((d) => d.eventId),
-  );
-  const matches = events.filter(
-    (e) =>
-      normalizedName(e.name) === name ||
-      (source && normalizedUrl(e.website) === source && new URL(source).pathname !== "/") ||
-      sourceEventIds.has(e.id),
-  );
+  const matches = comparisons.filter((m) => m.confidence === "identity").map((m) => m.event);
   if (matches.length > 1)
     return {
       status: "held",
@@ -302,14 +285,7 @@ export function reconcile(
         .replace(/^-|-$/g, "") || `running-race-${nameHash(name)}`
     }-${c.countryCode.toLowerCase()}`;
   const base = { eventSlug: slug, eventId: event?.id ?? null };
-  if (
-    event &&
-    event.country !== c.country &&
-    !(
-      c.countryCode === "GB" &&
-      ["United Kingdom", "England", "Wales", "Scotland", "Northern Ireland"].includes(event.country)
-    )
-  )
+  if (event && !sameCountry(c, event.country))
     return {
       ...base,
       status: "held",
@@ -317,8 +293,12 @@ export function reconcile(
     };
   if (events.some((e) => e.slug === slug && e.id !== event?.id))
     return { ...base, status: "held", reason: "Slug already belongs to a different event" };
-  if (pending.some((p) => p.eventSlug === slug && p.date === c.date))
-    return { ...base, status: "held", reason: "Overlapping pending import" };
+  if (event?.city && c.city && normalizedName(event.city) !== normalizedName(c.city))
+    return {
+      ...base,
+      status: "held",
+      reason: "Canonical event town/city differs from the verified start location",
+    };
   const same = editions.filter((d) => d.eventId === event?.id && d.date === c.date);
   if (same.some((d) => Math.abs(d.distanceKm - c.distanceKm) <= 0.025))
     return {
@@ -326,6 +306,8 @@ export function reconcile(
       status: "duplicate",
       reason: "Equivalent event, date and distance already exists",
     };
+  if (findPendingMatches(c, slug, pending).length)
+    return { ...base, status: "held", reason: "Overlapping pending import" };
   if (same.some((d) => d.distance === c.distanceLabel))
     return { ...base, status: "held", reason: "Existing distance label differs numerically" };
   if (
@@ -343,14 +325,8 @@ export function reconcile(
       status: "held",
       reason: "Possible reschedule or distinct repeat date; review first",
     };
-  // Similar names are deliberately held, never auto-merged, even across countries.
-  if (
-    !event &&
-    events.some((e) => {
-      const n = normalizedName(e.name);
-      return n.length > 8 && name.length > 8 && (n.includes(name) || name.includes(n));
-    })
-  )
+  // Name similarity alone never chooses an identity, even with a matching date and distance.
+  if (!event && comparisons.length)
     return { ...base, status: "held", reason: "Possible event alias needs review" };
   return { ...base, status: "review", reason: "Check the linked primary programme before staging" };
 }
