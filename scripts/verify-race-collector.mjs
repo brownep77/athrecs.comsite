@@ -1224,9 +1224,19 @@ const connemaraUltra = {
   distanceKm: 39.3 * 1.609344,
   distanceLabel: "Ultra Marathon",
 };
-await service.runWorker(sql, async () => findingReport([connemara, connemaraUltra]));
+const connemaraMarathon = {
+  ...connemara,
+  name: "Connemara International Marathon",
+  city: "Lough Inagh",
+  distance: 42.195,
+  distanceKm: 42.195,
+  distanceLabel: "Marathon",
+};
+await service.runWorker(sql, async () =>
+  findingReport([connemara, connemaraMarathon, connemaraUltra]),
+);
 const manualPage = await service.dashboard(manualRun.id, sql);
-assert.equal(manualPage.candidates.length, 2);
+assert.equal(manualPage.candidates.length, 3);
 assert(manualPage.candidates.every((row) => row.status === "held"));
 assert(
   manualPage.candidates.every((row) =>
@@ -1396,6 +1406,146 @@ await assert.rejects(
 );
 await assert.rejects(
   () => manual.undoDuplicate(toStage, "staff@example.org", sql),
+  /publication batch/,
+);
+// Choose several distances inside one event, preserving unticked findings and per-distance undo.
+const { sameDuplicateProgramme } = await import("../src/lib/race-collector/duplicate-review.ts");
+assert(sameDuplicateProgramme(connemara, connemaraUltra));
+assert(!sameDuplicateProgramme(connemara, { ...connemaraUltra, date: "2027-04-26" }));
+assert(!sameDuplicateProgramme(connemara, { ...connemaraUltra, countryCode: "GB" }));
+assert(
+  !sameDuplicateProgramme(connemara, {
+    ...connemaraUltra,
+    entryUrl: "https://entry.example.org/another-race",
+  }),
+);
+assert(
+  !sameDuplicateProgramme(
+    { ...connemara, entryUrl: "https://entry.example.org" },
+    { ...connemaraUltra, entryUrl: "https://entry.example.org" },
+  ),
+);
+const grouped = await manual.duplicateDistanceOptions(halfFinding.id, "connema", sql);
+assert.equal(grouped.total, 1);
+assert.equal(grouped.totalFindings, 3);
+assert.deepEqual(
+  grouped.events[0].distances.map((d) => d.edition.distance),
+  ["Half", "Marathon", "Ultra"],
+);
+assert(grouped.events[0].distances.every((d) => d.matches.length === 1));
+assert.equal(grouped.events[0].distances[0].matches[0].id, halfFinding.id);
+assert.equal(grouped.events[0].distances[2].matches[0].id, ultraFinding.id);
+assert(
+  grouped.events[0].distances[2].matches[0].differences.some((d) => d.includes("Distance differs")),
+);
+assert.equal(
+  (await manual.duplicateDistanceOptions(halfFinding.id, "%not-a-wildcard%", sql)).total,
+  0,
+);
+const selections = grouped.events[0].distances
+  .filter((d) => d.edition.distance !== "Marathon")
+  .flatMap((d) => d.matches.map((m) => ({ id: m.id, editionId: d.edition.id, token: m.token })));
+const distanceInput = {
+  id: halfFinding.id,
+  eventId: connemaraEvent.id,
+  selections,
+  sameRaceConfirmed: true,
+  differencesAccepted: true,
+  note: "Keep half and ultra; leave marathon for separate review.",
+};
+const programmeRows = () =>
+  sql`select * from race_collector_candidates where run_id=${manualRun.id}::uuid order by id`;
+const beforeDistances = await programmeRows();
+const auditsBeforeDistances = await sql`select * from race_collector_duplicate_reviews order by id`;
+await assert.rejects(
+  () =>
+    manual.confirmDuplicateDistances(
+      { ...distanceInput, selections: [] },
+      "staff@example.org",
+      sql,
+    ),
+  /Select between/,
+);
+await assert.rejects(
+  () =>
+    manual.confirmDuplicateDistances(
+      { ...distanceInput, selections: [selections[0], selections[0]] },
+      "staff@example.org",
+      sql,
+    ),
+  /distinct collected/,
+);
+await assert.rejects(
+  () =>
+    manual.confirmDuplicateDistances(
+      { ...distanceInput, differencesAccepted: false },
+      "staff@example.org",
+      sql,
+    ),
+  /displayed distance and location/,
+);
+// Change the last processed distance so an earlier valid decision must be rolled back too.
+const lastSelected = selections
+  .slice()
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .at(-1);
+await sql`update editions set distance_km=distance_km+1 where id=${lastSelected.editionId}`;
+await assert.rejects(
+  () => manual.confirmDuplicateDistances(distanceInput, "staff@example.org", sql),
+  /changed since/,
+);
+assert.deepEqual(await programmeRows(), beforeDistances);
+assert.deepEqual(
+  await sql`select * from race_collector_duplicate_reviews order by id`,
+  auditsBeforeDistances,
+);
+await sql`update editions set distance_km=${lastSelected.id === halfFinding.id ? 21.0975 : 63.3} where id=${lastSelected.editionId}`;
+// A forged selection cannot reach unrelated findings from another event/run.
+const foreign = (
+  await sql`select id from race_collector_candidates where run_id<>${manualRun.id}::uuid and batch_id is null and status<>'staged' limit 1`
+)[0];
+assert(foreign);
+await assert.rejects(
+  () =>
+    manual.confirmDuplicateDistances(
+      { ...distanceInput, selections: [{ ...selections[0], id: foreign.id }] },
+      "staff@example.org",
+      sql,
+    ),
+  /collected distances changed/,
+);
+assert.deepEqual(await manual.confirmDuplicateDistances(distanceInput, "staff@example.org", sql), {
+  count: 2,
+  keptName: "Connemarathon",
+});
+const marathonFinding = beforeDistances.find((r) => r.candidate.distanceKm === 42.195);
+assert.deepEqual(
+  (await programmeRows()).find((r) => r.id === marathonFinding.id),
+  marathonFinding,
+);
+assert.equal((await programmeRows()).filter((r) => r.dismissed_at).length, 2);
+assert.deepEqual(await catalogueAndDependants(), beforeProtected);
+const activeDistances =
+  await sql`select * from race_collector_duplicate_reviews where candidate_id=any(${selections.map((s) => s.id)}::uuid[]) and undone_at is null`;
+assert.equal(activeDistances.length, 2);
+assert(
+  activeDistances.every(
+    (r) => r.reason === distanceInput.note && r.reviewed_by === "staff@example.org",
+  ),
+);
+assert.equal(
+  (await manual.duplicateDistanceOptions(marathonFinding.id, "connema", sql)).totalFindings,
+  1,
+);
+await manual.undoDuplicate(halfFinding.id, "staff@example.org", sql);
+assert.equal((await programmeRows()).filter((r) => r.dismissed_at).length, 1);
+await manual.undoDuplicate(ultraFinding.id, "staff@example.org", sql);
+assert.deepEqual(await programmeRows(), beforeDistances);
+assert.deepEqual(await catalogueAndDependants(), beforeProtected);
+await assert.rejects(() => manual.duplicateDistanceOptions(toStage, "", sql), /publication batch/);
+await assert.rejects(
+  () =>
+    manual.confirmDuplicateDistances({ ...distanceInput, id: toStage }, "staff@example.org", sql),
   /publication batch/,
 );
 await pg.close();
