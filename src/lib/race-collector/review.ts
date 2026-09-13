@@ -35,9 +35,12 @@ export function reviewGuidance(row: {
 }) {
   if (row.dismissed_at)
     return {
-      title: "Dismissed duplicate",
-      why: "This already-listed finding was removed from the current review list. The published race remains in RunRecs.",
-      next: "Use Restore if you want to see this finding in the review list again.",
+      title: "Dismissed finding",
+      why: `Removed from the current review list. Previous status: ${REVIEW_FILTERS.find((filter) => filter.value === row.status)?.label ?? row.status}.`,
+      next:
+        row.status === "staged"
+          ? "Its publication batch is unchanged. Manage that in Publication review, or Restore this finding to the list."
+          : "Use Restore to return this finding with its previous status. Published races are unchanged.",
     };
   if (row.status === "staged")
     return {
