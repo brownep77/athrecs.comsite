@@ -395,13 +395,14 @@ assert.equal(
   "held",
 );
 await pg.exec(
-  `create table events(id int primary key,slug text,name text,country text,website text,sport text,city text);create table editions(event_id int,event_date date,distance_code text,distance_km float8,source_url text,entry_url text);create table slug_redirects(entity_type text,old_slug text,current_slug text);`,
+  `create table events(id int primary key,slug text,name text,country text,website text,sport text,city text);create table editions(id serial primary key,event_id int,event_date date,distance_code text,distance_km float8,source_url text,entry_url text);create table slug_redirects(entity_type text,old_slug text,current_slug text);`,
 );
 await pg.exec(await readFile("migrations/0016_catalogue_publishing.sql", "utf8"));
 await pg.exec(await readFile("migrations/20260912_worldwide_race_collector.sql", "utf8"));
 await pg.exec(
   await readFile("migrations/20260912_worldwide_race_collector_dismissals.sql", "utf8"),
 );
+await pg.exec(await readFile("migrations/20260913_collector_duplicate_reviews.sql", "utf8"));
 function adapter(db, inTransaction = false) {
   const sql = async (strings, ...values) => {
     let text = strings[0];
@@ -1180,6 +1181,222 @@ assert.equal(
     [{ ...pendingFixture, eventSlug: festival.slug, distance: tenK.distanceLabel, distanceKm: 11 }],
   ).status,
   "held",
+);
+// Staff can choose the published keeper when names and start venues defeated automatic matching.
+const manual = await import("../src/lib/race-collector/duplicate-review.server.ts");
+const connemara = {
+  ...c,
+  name: "Connemara International Marathon Half Marathon",
+  city: "Leenane",
+  date: "2027-04-25",
+  distance: 21.0975,
+  distanceKm: 21.0975,
+  distanceLabel: "Half Marathon",
+  sourceUrl: "https://www.connemarathon.com/",
+  entryUrl: "https://in.njuko.com/connemara-2027",
+};
+const connemaraEvent = {
+  id: 9001,
+  slug: "connemara-international-marathon",
+  name: "Connemarathon",
+  city: "Connemara",
+  country: "Ireland",
+  website: "https://www.connemarathon.com/international/",
+};
+await sql`insert into events(id,slug,name,country,city,website,sport) values(${connemaraEvent.id},${connemaraEvent.slug},${connemaraEvent.name},${connemaraEvent.country},${connemaraEvent.city},${connemaraEvent.website},'Running')`;
+for (const [distance, km] of [
+  ["Half", 21.0975],
+  ["Marathon", 42.195],
+  ["Ultra", 63.3],
+])
+  await sql`insert into editions(event_id,event_date,distance_code,distance_km,source_url,entry_url) values(${connemaraEvent.id},${connemara.date},${distance},${km},${connemaraEvent.website},${connemaraEvent.website})`;
+const manualRun = await service.createRun(
+  { ...scope, dateFrom: "2027-04-01", dateTo: "2027-04-30", passes: 1 },
+  "staff@example.org",
+  sql,
+);
+const connemaraUltra = {
+  ...connemara,
+  name: "Connemara International Marathon Ultra",
+  city: "Recess",
+  distance: 39.3,
+  unit: "mi",
+  distanceKm: 39.3 * 1.609344,
+  distanceLabel: "Ultra Marathon",
+};
+await service.runWorker(sql, async () => findingReport([connemara, connemaraUltra]));
+const manualPage = await service.dashboard(manualRun.id, sql);
+assert.equal(manualPage.candidates.length, 2);
+assert(manualPage.candidates.every((row) => row.status === "held"));
+assert(
+  manualPage.candidates.every((row) =>
+    row.check.matches.some((m) => m.event.id === connemaraEvent.id),
+  ),
+);
+const halfFinding = manualPage.candidates.find((row) => row.candidate.distanceKm < 30);
+const ultraFinding = manualPage.candidates.find((row) => row.candidate.distanceKm > 60);
+const choices = await manual.duplicateOptions(halfFinding.id, "", sql);
+assert.equal(choices.options[0].event.name, "Connemarathon");
+assert.equal(choices.options[0].edition.distance, "Half");
+assert.equal(choices.options[0].blocker, "");
+assert(choices.options[0].differences.some((d) => d.includes("location differs")));
+assert(choices.options.find((o) => o.edition.distance === "Marathon").blocker);
+assert.equal((await manual.duplicateOptions(halfFinding.id, "connema", sql)).total, 3);
+assert.equal((await manual.duplicateOptions(halfFinding.id, "%not-a-wildcard%", sql)).total, 0);
+await assert.rejects(
+  () => manual.duplicateOptions(halfFinding.id, "x".repeat(201), sql),
+  /Invalid event search/,
+);
+// The shorter Connemara Marathon name is also suggested, but never automatically merged.
+const conneSnap = await service.snapshot(sql, [connemara.date]);
+const shorter = { ...connemara, name: "Connemara Marathon" };
+assert(
+  conneSnap
+    .match(shorter)
+    .some((m) => m.event.id === connemaraEvent.id && m.confidence === "possible"),
+);
+assert.equal(core.reconcile(shorter, conneSnap.events, conneSnap.editions).status, "held");
+const choose = (id, option) => ({
+  id,
+  eventId: option.event.id,
+  editionId: option.edition.id,
+  token: option.token,
+  sameRaceConfirmed: true,
+  differencesAccepted: true,
+  note: "Same programme; distances have different start villages.",
+});
+const halfInput = choose(halfFinding.id, choices.options[0]);
+await assert.rejects(
+  () =>
+    manual.confirmDuplicate({ ...halfInput, sameRaceConfirmed: false }, "staff@example.org", sql),
+  /Compare the two/,
+);
+await assert.rejects(
+  () =>
+    manual.confirmDuplicate({ ...halfInput, differencesAccepted: false }, "staff@example.org", sql),
+  /displayed distance and location/,
+);
+const wrongDistance = choices.options.find((o) => o.edition.distance === "Marathon");
+await assert.rejects(
+  () => manual.confirmDuplicate(choose(halfFinding.id, wrongDistance), "staff@example.org", sql),
+  /different race distances/,
+);
+await assert.rejects(
+  () => manual.confirmDuplicate({ ...halfInput, id: ultraFinding.id }, "staff@example.org", sql),
+  /changed since/,
+);
+await sql`update editions set distance_km=21.2 where id=${halfInput.editionId}`;
+await assert.rejects(
+  () => manual.confirmDuplicate(halfInput, "staff@example.org", sql),
+  /changed since/,
+);
+await sql`update editions set distance_km=21.0975 where id=${halfInput.editionId}`;
+const beforeManual = (
+  await sql`select * from race_collector_candidates where id=${halfFinding.id}::uuid`
+)[0];
+// Result/entry dependants are represented by a protected reference and must survive unchanged.
+await pg.exec(
+  "create table manual_test_dependants (edition_id int references editions(id), payload jsonb not null)",
+);
+await sql`insert into manual_test_dependants(edition_id,payload) values(${halfInput.editionId},'{"finishTime":"01:40:00","entryUrl":"https://entry.example.org/original"}'::jsonb)`;
+const catalogueAndDependants = async () => ({
+  events: await sql`select * from events order by id`,
+  editions: await sql`select * from editions order by id`,
+  dependants: await sql`select * from manual_test_dependants`,
+  batches: await sql`select * from catalogue_import_batches order by id`,
+});
+const beforeProtected = await catalogueAndDependants();
+const concurrentChoices = await Promise.allSettled([
+  manual.confirmDuplicate(halfInput, "staff@example.org", sql),
+  manual.confirmDuplicate(halfInput, "other-staff@example.org", sql),
+]);
+assert.equal(concurrentChoices.filter((x) => x.status === "fulfilled").length, 1);
+assert.equal(concurrentChoices.filter((x) => x.status === "rejected").length, 1);
+const halfAfter = (
+  await sql`select * from race_collector_candidates where id=${halfFinding.id}::uuid`
+)[0];
+assert.equal(halfAfter.status, "duplicate");
+assert.equal(halfAfter.event_id, connemaraEvent.id);
+assert(halfAfter.dismissed_at);
+assert.deepEqual(halfAfter.candidate, beforeManual.candidate);
+assert.deepEqual(await catalogueAndDependants(), beforeProtected);
+assert.equal(
+  (await service.dashboard(manualRun.id, sql, { status: "dismissed" })).candidates[0].check
+    .manualReview.kept_edition_id,
+  halfInput.editionId,
+);
+await service.recheckFindings(manualRun.id, sql);
+assert.equal(
+  (await sql`select status from race_collector_candidates where id=${halfFinding.id}::uuid`)[0]
+    .status,
+  "duplicate",
+);
+await service.dismissFindings(manualRun.id, "restore", "staff@example.org", [halfFinding.id], sql);
+await assert.rejects(
+  () => service.stageReviewed([halfFinding.id], "staff@example.org", sql),
+  /Selection changed/,
+);
+await manual.undoDuplicate(halfFinding.id, "staff@example.org", sql);
+assert.deepEqual(
+  (await sql`select * from race_collector_candidates where id=${halfFinding.id}::uuid`)[0],
+  beforeManual,
+);
+const history =
+  await sql`select * from race_collector_duplicate_reviews where candidate_id=${halfFinding.id}::uuid`;
+assert.equal(history.length, 1);
+assert(history[0].undone_at);
+assert(history[0].reviewed_by);
+assert.equal(history[0].undone_by, "staff@example.org");
+assert.equal(history[0].kept_snapshot.edition.id, halfInput.editionId);
+await assert.rejects(
+  () => manual.undoDuplicate(halfFinding.id, "staff@example.org", sql),
+  /No active duplicate decision/,
+);
+// Rounding beyond the automatic 25m threshold requires an explicit acknowledgement.
+const ultraOptions = await manual.duplicateOptions(ultraFinding.id, "connema", sql);
+const ultraOption = ultraOptions.options.find((o) => o.edition.distance === "Ultra");
+assert.equal(ultraOption.blocker, "");
+assert(ultraOption.differences.some((d) => d.includes("Distance differs")));
+const ultraInput = choose(ultraFinding.id, ultraOption);
+await assert.rejects(
+  () =>
+    manual.confirmDuplicate(
+      { ...ultraInput, differencesAccepted: false },
+      "staff@example.org",
+      sql,
+    ),
+  /displayed distance and location/,
+);
+await manual.confirmDuplicate(ultraInput, "staff@example.org", sql);
+await service.dismissFindings(manualRun.id, "restore", "staff@example.org", [ultraFinding.id], sql);
+await sql`update editions set distance_km=64 where id=${ultraInput.editionId}`;
+assert.equal(
+  (await service.dashboard(manualRun.id, sql)).candidates.find((r) => r.id === ultraFinding.id)
+    .check.status,
+  "held",
+);
+await service.recheckFindings(manualRun.id, sql);
+assert.equal(
+  (await sql`select status from race_collector_candidates where id=${ultraFinding.id}::uuid`)[0]
+    .status,
+  "held",
+);
+await assert.rejects(
+  () => service.stageReviewed([ultraFinding.id], "staff@example.org", sql),
+  /Selection changed/,
+);
+await manual.undoDuplicate(ultraFinding.id, "staff@example.org", sql);
+await sql`update editions set distance_km=63.3 where id=${ultraInput.editionId}`;
+assert.deepEqual(await catalogueAndDependants(), beforeProtected);
+// Existing publication batches must be resolved through their own review process.
+await assert.rejects(() => manual.duplicateOptions(toStage, "", sql), /publication batch/);
+await assert.rejects(
+  () => manual.confirmDuplicate({ ...halfInput, id: toStage }, "staff@example.org", sql),
+  /publication batch/,
+);
+await assert.rejects(
+  () => manual.undoDuplicate(toStage, "staff@example.org", sql),
+  /publication batch/,
 );
 await pg.close();
 console.log(
