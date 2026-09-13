@@ -1171,6 +1171,16 @@ assert.equal(
   ).status,
   "review",
 );
+// Matching labels must still hold when a pending import has a conflicting numeric distance.
+assert.equal(
+  core.reconcile(
+    tenK,
+    [festival],
+    [],
+    [{ ...pendingFixture, eventSlug: festival.slug, distance: tenK.distanceLabel, distanceKm: 11 }],
+  ).status,
+  "held",
+);
 await pg.close();
 console.log(
   "Race collector verified: quick/thorough scopes, monthly boundaries, parallel cap, pass ordering, concurrent deduplication, regions, units, durable jobs, leases, retries, staging and worker authentication.",

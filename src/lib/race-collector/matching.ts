@@ -188,6 +188,7 @@ export type PendingEdition = {
   source?: string;
   entryUrl?: string;
   distanceKm?: number;
+  distance?: string;
 };
 export function sharesProgramme(a: Candidate, b: Candidate) {
   if (
@@ -223,7 +224,10 @@ export function findPendingMatches(c: Candidate, slug: string, pending: PendingE
   );
   const possible = new Set(index(c).map((m) => m.event.id));
   return dated.filter((p, i) => {
-    const sameDistance = p.distanceKm == null || Math.abs(p.distanceKm - c.distanceKm) <= 0.025;
+    const sameDistance =
+      p.distanceKm == null ||
+      Math.abs(p.distanceKm - c.distanceKm) <= 0.025 ||
+      p.distance === c.distanceLabel;
     // A second distance under one identity is safe. Another identity for the same programme
     // needs review even when its distance differs.
     return p.eventSlug === slug ? sameDistance : possible.has(i);
