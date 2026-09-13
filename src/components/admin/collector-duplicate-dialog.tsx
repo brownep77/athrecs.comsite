@@ -389,6 +389,7 @@ export function CollectorDuplicateDialog({
               Cancel
             </Button>
             <Button
+              className="h-auto max-w-full whitespace-normal text-center"
               disabled={
                 !choice ||
                 !selected.length ||
