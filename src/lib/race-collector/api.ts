@@ -5,6 +5,7 @@ import {
   REVIEW_BATCH_LIMIT,
   validateReviewQuery,
   validateFindingDecision,
+  validateBulkFindingAction,
   type ReviewQuery,
 } from "./review";
 const idInput = (input: { id: string }) => {
@@ -158,4 +159,12 @@ export const decideCollectorFinding = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const s = await import("./service.server");
     return s.decideFinding(data, context.staffEmail);
+  });
+
+export const actOnCollectorFindings = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator(validateBulkFindingAction)
+  .handler(async ({ data, context }) => {
+    const { actOnFindings } = await import("./bulk-actions.server");
+    return actOnFindings(data, context.staffEmail);
   });

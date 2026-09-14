@@ -13,7 +13,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CollectorCandidateCard } from "@/components/admin/collector-candidate-card";
+import { CollectorCandidateList } from "@/components/admin/collector-candidate-list";
 import {
   COLLECTOR_COUNTRIES,
   calendarMonthRange,
@@ -22,13 +22,18 @@ import {
   type Scope,
 } from "@/lib/race-collector/core";
 import { collectionRegion, collectionRegions } from "@/lib/race-collector/regions";
-import { DECISION_FILTERS, type ReviewQuery } from "@/lib/race-collector/review";
+import {
+  DECISION_FILTERS,
+  type ReviewQuery,
+  type BulkFindingActionInput,
+} from "@/lib/race-collector/review";
 import {
   getCollector,
   startCollector,
   controlCollector,
   exportCollector,
   decideCollectorFinding,
+  actOnCollectorFindings,
 } from "@/lib/race-collector/api";
 export const Route = createFileRoute("/admin/race-collector")({
   head: () => ({
@@ -137,7 +142,14 @@ function CollectorPage() {
     },
     onError: fail,
   });
-  const reviewBusy = decision.isPending;
+  const bulk = useMutation({
+    mutationFn: (input: Omit<BulkFindingActionInput, "runId">) =>
+      actOnCollectorFindings({ data: { ...input, runId: run!.id } }),
+    onSuccess: async () => {
+      await refresh();
+    },
+  });
+  const reviewBusy = decision.isPending || bulk.isPending;
   const download = async () => {
     try {
       const result = await exportCollector({ data: { id: run!.id } });
@@ -917,8 +929,9 @@ function CollectorPage() {
                 {count("dismissed")} dismissed
               </p>
               <p className="mt-2 text-sm text-muted">
-                Choose Keep or Dismiss, then confirm. Keep saves a candidate for RunRecs;
-                publication is separate. Every race retains its information, sources and checks.
+                Keep or dismiss one candidate, or select several and confirm a bulk action. Publish
+                selected adds ready races to RunRecs. Every race retains its information, sources
+                and checks.
               </p>
             </div>
           </div>
@@ -984,14 +997,13 @@ function CollectorPage() {
             </p>
           )}
           <div className="space-y-3">
-            {data?.candidates.map((row) => (
-              <CollectorCandidateCard
-                key={row.id}
-                row={row}
-                disabled={reviewBusy || query.isPlaceholderData}
-                onDecide={(action) => decision.mutate({ id: row.id, action })}
-              />
-            ))}
+            <CollectorCandidateList
+              key={run.id}
+              rows={data?.candidates ?? []}
+              disabled={reviewBusy || query.isPlaceholderData}
+              onDecide={(id, action) => decision.mutate({ id, action })}
+              onBulkAction={(input) => bulk.mutateAsync(input)}
+            />
             {!data?.candidates.length && (
               <p className="py-8 text-center text-sm text-muted">
                 {reviewQuery.search

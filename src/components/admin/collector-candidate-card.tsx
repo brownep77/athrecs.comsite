@@ -5,16 +5,22 @@ import { safeUrl } from "@/lib/race-collector/core";
 import { reviewGuidance } from "@/lib/race-collector/review";
 import type { dashboard } from "@/lib/race-collector/service.server";
 
-type Finding = Awaited<ReturnType<typeof dashboard>>["candidates"][number];
+export type CollectorFinding = Awaited<ReturnType<typeof dashboard>>["candidates"][number];
 
 export function CollectorCandidateCard({
   row,
   disabled = false,
   onDecide,
+  selection,
+  selectionFull = false,
+  onSelect,
 }: {
-  row: Finding;
+  row: CollectorFinding;
   disabled?: boolean;
   onDecide: (action: "keep" | "dismiss") => void;
+  selection?: "keep" | "dismiss";
+  selectionFull?: boolean;
+  onSelect?: (action: "keep" | "dismiss") => void;
 }) {
   const c = row.candidate;
   const dismissed = Boolean(row.dismissed_at);
@@ -45,13 +51,19 @@ export function CollectorCandidateCard({
           </p>
         </div>
         <span className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-700">
-          {dismissed ? "Dismissed" : kept ? "Kept" : "To decide"}
+          {dismissed
+            ? "Dismissed"
+            : row.publication_status === "published"
+              ? "Published"
+              : kept
+                ? "Kept"
+                : "To decide"}
         </span>
       </div>
       <p className="mt-3 text-xs leading-5 text-muted">
         {guidance.title}: {guidance.why}
       </p>
-      <div className="mt-3 flex gap-2" aria-label="Candidate decision">
+      <div className="mt-3 flex flex-wrap gap-2" aria-label="Candidate decision">
         <Button
           size="sm"
           disabled={disabled || kept}
@@ -69,6 +81,30 @@ export function CollectorCandidateCard({
         >
           Dismiss
         </Button>
+        {onSelect && (
+          <>
+            <Button
+              size="sm"
+              variant={selection === "keep" ? "default" : "secondary"}
+              disabled={disabled || (selectionFull && !selection)}
+              aria-pressed={selection === "keep"}
+              aria-label={`Select to keep ${c.name} ${c.distanceLabel} ${c.date}`}
+              onClick={() => onSelect("keep")}
+            >
+              Select to keep
+            </Button>
+            <Button
+              size="sm"
+              variant={selection === "dismiss" ? "default" : "secondary"}
+              disabled={disabled || (selectionFull && !selection)}
+              aria-pressed={selection === "dismiss"}
+              aria-label={`Select to dismiss ${c.name} ${c.distanceLabel} ${c.date}`}
+              onClick={() => onSelect("dismiss")}
+            >
+              Select to dismiss
+            </Button>
+          </>
+        )}
       </div>
       <details className="mt-4 text-xs leading-5 text-muted">
         <summary className="cursor-pointer font-medium text-fg">
@@ -78,32 +114,60 @@ export function CollectorCandidateCard({
           <p>
             {c.distanceKm.toFixed(3)} km · {(c.distanceKm / 1.609344).toFixed(3)} miles
           </p>
-          <p>Start: {c.startTime || "Not confirmed"} · Entries: {c.entryStatus}</p>
-          <p>Source type: {c.sourceKind} · Surface: {c.surface || "Not confirmed"}</p>
+          <p>
+            Start: {c.startTime || "Not confirmed"} · Entries: {c.entryStatus}
+          </p>
+          <p>
+            Source type: {c.sourceKind} · Surface: {c.surface || "Not confirmed"}
+          </p>
           {safeUrl(c.sourceUrl) && (
-            <a href={c.sourceUrl} target="_blank" rel="noreferrer"
-              className="inline-flex items-center gap-1 text-emerald-700 underline">
+            <a
+              href={c.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-emerald-700 underline"
+            >
               Primary programme <ArrowUpRight size={12} />
             </a>
           )}
-          <p><strong>Source evidence: </strong>{c.evidence}</p>
+          <p>
+            <strong>Source evidence: </strong>
+            {c.evidence}
+          </p>
           {safeUrl(c.entryUrl) && (
-            <a href={c.entryUrl} target="_blank" rel="noreferrer"
-              className="inline-block text-emerald-700 underline">Entry page</a>
+            <a
+              href={c.entryUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-block text-emerald-700 underline"
+            >
+              Entry page
+            </a>
           )}
-          {c.notes.trim() && <p><strong>Collector notes: </strong>{c.notes}</p>}
-          <p><strong>Original check: </strong>{row.reason}</p>
+          {c.notes.trim() && (
+            <p>
+              <strong>Collector notes: </strong>
+              {c.notes}
+            </p>
+          )}
+          <p>
+            <strong>Original check: </strong>
+            {row.reason}
+          </p>
           <p>{guidance.next}</p>
-          {row.check.changed && (
+          {row.check.changed && row.publication_status !== "published" && (
             <p className="font-medium text-amber-800">
               Latest check: {row.check.reason}. Your Keep or Dismiss decision is retained.
             </p>
           )}
           <CollectorComparison check={row.check} />
           {row.event_id && row.event_slug && (
-            <a href={`https://www.runrecs.com/races/${encodeURIComponent(row.event_slug)}`}
-              target="_blank" rel="noreferrer"
-              className="inline-flex items-center gap-1 text-emerald-700 underline">
+            <a
+              href={`https://www.runrecs.com/races/${encodeURIComponent(row.event_slug)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-emerald-700 underline"
+            >
               Existing event <ArrowUpRight size={12} />
             </a>
           )}
@@ -114,9 +178,17 @@ export function CollectorCandidateCard({
               {row.check.manualReview.reason}
             </p>
           )}
-          {row.kept_at && <p>Kept by {row.kept_by || "a reviewer"} · {new Date(row.kept_at).toLocaleString("en-GB", { timeZone: "UTC" })} UTC</p>}
+          {row.kept_at && (
+            <p>
+              Kept by {row.kept_by || "a reviewer"} ·{" "}
+              {new Date(row.kept_at).toLocaleString("en-GB", { timeZone: "UTC" })} UTC
+            </p>
+          )}
           {row.dismissed_at && (
-            <p>Dismissed by {row.dismissed_by || "a reviewer"} · {new Date(row.dismissed_at).toLocaleString("en-GB", { timeZone: "UTC" })} UTC</p>
+            <p>
+              Dismissed by {row.dismissed_by || "a reviewer"} ·{" "}
+              {new Date(row.dismissed_at).toLocaleString("en-GB", { timeZone: "UTC" })} UTC
+            </p>
           )}
         </div>
       </details>

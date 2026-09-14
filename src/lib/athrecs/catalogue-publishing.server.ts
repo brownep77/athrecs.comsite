@@ -413,8 +413,8 @@ export async function stageCatalogueBatch(
   return { batchId, reused: false };
 }
 
-export async function validateCatalogueBatch(batchId: string) {
-  const sql = await getSql();
+export async function validateCatalogueBatch(batchId: string, sqlOverride?: Sql) {
+  const sql = sqlOverride ?? (await getSql());
   return sql.transaction(async (tx) => {
     const batch = await loadBatch(tx, batchId, true);
     if (batch.status === "published" || batch.status === "rolled_back") {
@@ -512,11 +512,15 @@ export async function validateCatalogueBatch(batchId: string) {
   });
 }
 
-export async function publishCatalogueBatch(batchId: string, publishedBy: string) {
+export async function publishCatalogueBatch(
+  batchId: string,
+  publishedBy: string,
+  sqlOverride?: Sql,
+) {
   if (dbSource !== "neon") {
     throw new Error("Persistent Neon Postgres is required before publishing a catalogue batch");
   }
-  const sql = await getSql();
+  const sql = sqlOverride ?? (await getSql());
   try {
     return await sql.transaction(async (tx) => {
       const stateRows = await tx<{ current_revision_id: number | null }>`
@@ -666,7 +670,9 @@ export async function publishCatalogueBatch(batchId: string, publishedBy: string
       return { batchId, ...summary };
     });
   } catch (error) {
-    await sql`
+    // An enclosing transaction owns rollback when staging, validation and publication are atomic.
+    if (!sqlOverride)
+      await sql`
       update catalogue_import_batches
       set status = case when status = 'published' then status else 'failed' end,
           error = ${error instanceof Error ? error.message : String(error)}
