@@ -172,6 +172,7 @@ jobs:
       - name: Check collector release preview
         if: github.event_name == 'pull_request' && github.event.pull_request.number == 460
         env:
+          BROWSER_ALLOW_EXTERNAL_HOST: "1"
           PREVIEW_BASE_URL: https://athrecs-comsite-git-codex-co-1a712d-athrecs-holding-page-set-up.vercel.app
         run: |
           BROWSER_SMOKE_EXPECT_TEXT='ATHRECS' \
