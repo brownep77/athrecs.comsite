@@ -7,14 +7,28 @@ import {
 const GITHUB_ACTIONS_ISSUER = "https://token.actions.githubusercontent.com";
 const GITHUB_ACTIONS_JWKS_URL = `${GITHUB_ACTIONS_ISSUER}/.well-known/jwks`;
 export const ATHRECS_CATALOGUE_OIDC_AUDIENCE = "athrecs-catalogue";
+export const RUNRECS_CATALOGUE_OIDC_AUDIENCE = "runrecs-catalogue";
 
 const TRUSTED_REPOSITORY = "brownep77/athrecs-holding";
 const TRUSTED_REPOSITORY_ID = "1123206060";
 const TRUSTED_OWNER_ID = "208288942";
 const TRUSTED_REF = "refs/heads/main";
-const TRUSTED_WORKFLOW_REF =
-  "brownep77/athrecs-holding/.github/workflows/refresh-races.yml@refs/heads/main";
-const TRUSTED_WORKFLOW_NAME = "Refresh Athrecs race data";
+const TRUSTED_WORKFLOWS = [
+  {
+    audience: ATHRECS_CATALOGUE_OIDC_AUDIENCE,
+    siteBrand: "athrecs",
+    workflowRef:
+      "brownep77/athrecs-holding/.github/workflows/refresh-races.yml@refs/heads/main",
+    workflowName: "Refresh Athrecs race data",
+  },
+  {
+    audience: RUNRECS_CATALOGUE_OIDC_AUDIENCE,
+    siteBrand: "runrecs",
+    workflowRef:
+      "brownep77/athrecs-holding/.github/workflows/weekly-uk-ireland-races.yml@refs/heads/main",
+    workflowName: "Weekly UK and Ireland race expansion",
+  },
+] as const;
 const ALLOWED_EVENTS = new Set(["schedule", "workflow_dispatch", "push"]);
 
 type JwtHeader = {
@@ -81,9 +95,33 @@ function requiredNumber(claims: Record<string, unknown>, key: string): number {
   return value;
 }
 
-function audienceMatches(raw: unknown): boolean {
-  if (typeof raw === "string") return raw === ATHRECS_CATALOGUE_OIDC_AUDIENCE;
-  return Array.isArray(raw) && raw.includes(ATHRECS_CATALOGUE_OIDC_AUDIENCE);
+function audienceValues(raw: unknown): string[] {
+  if (typeof raw === "string") return [raw];
+  return Array.isArray(raw) && raw.every((value) => typeof value === "string")
+    ? raw
+    : [];
+}
+
+function trustedWorkflowForClaims(rawClaims: Record<string, unknown>) {
+  const audiences = audienceValues(rawClaims.aud);
+  const workflowRef = requiredString(rawClaims, "workflow_ref");
+  const workflowName = requiredString(rawClaims, "workflow");
+  const trusted = TRUSTED_WORKFLOWS.find(
+    (candidate) =>
+      audiences.includes(candidate.audience) &&
+      workflowRef === candidate.workflowRef &&
+      workflowName === candidate.workflowName,
+  );
+  if (!trusted) throw new Error("GitHub Actions OIDC workflow and audience are not trusted");
+
+  const deployedSiteBrand =
+    import.meta.env.VITE_SITE_BRAND?.trim().toLowerCase() === "runrecs"
+      ? "runrecs"
+      : "athrecs";
+  if (trusted.siteBrand !== deployedSiteBrand) {
+    throw new Error("GitHub Actions OIDC workflow is not trusted for this site");
+  }
+  return trusted;
 }
 
 function cacheSeconds(response: Response): number {
@@ -153,7 +191,7 @@ export async function verifyGitHubActionsOidcToken(
   if (!verified) throw new Error("GitHub Actions OIDC signature is invalid");
 
   assertClaim(requiredString(rawClaims, "iss"), GITHUB_ACTIONS_ISSUER, "issuer");
-  if (!audienceMatches(rawClaims.aud)) throw new Error("GitHub Actions OIDC audience is not trusted");
+  const trustedWorkflow = trustedWorkflowForClaims(rawClaims);
 
   const exp = requiredNumber(rawClaims, "exp");
   const iat = requiredNumber(rawClaims, "iat");
@@ -177,8 +215,16 @@ export async function verifyGitHubActionsOidcToken(
   assertClaim(requiredString(rawClaims, "repository_visibility"), "private", "visibility");
   assertClaim(requiredString(rawClaims, "ref"), TRUSTED_REF, "ref");
   assertClaim(requiredString(rawClaims, "ref_type"), "branch", "ref type");
-  assertClaim(requiredString(rawClaims, "workflow_ref"), TRUSTED_WORKFLOW_REF, "workflow ref");
-  assertClaim(requiredString(rawClaims, "workflow"), TRUSTED_WORKFLOW_NAME, "workflow");
+  assertClaim(
+    requiredString(rawClaims, "workflow_ref"),
+    trustedWorkflow.workflowRef,
+    "workflow ref",
+  );
+  assertClaim(
+    requiredString(rawClaims, "workflow"),
+    trustedWorkflow.workflowName,
+    "workflow",
+  );
   assertClaim(
     requiredString(rawClaims, "runner_environment"),
     "github-hosted",
@@ -213,8 +259,8 @@ export async function verifyGitHubActionsOidcToken(
     run_id: runId,
     run_attempt: runAttempt,
     event_name: eventName,
-    workflow: TRUSTED_WORKFLOW_NAME,
-    workflow_ref: TRUSTED_WORKFLOW_REF,
+    workflow: trustedWorkflow.workflowName,
+    workflow_ref: trustedWorkflow.workflowRef,
     runner_environment: "github-hosted",
   };
 }
