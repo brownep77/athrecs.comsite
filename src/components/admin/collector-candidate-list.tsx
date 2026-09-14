@@ -103,7 +103,7 @@ export function CollectorCandidateList({
   return (
     <div className="space-y-3">
       <div
-        className="sticky top-2 z-10 space-y-3 rounded-xl border border-border bg-surface p-4 shadow-sm"
+        className="sticky top-[calc(env(safe-area-inset-top)+3.5rem)] z-10 space-y-3 rounded-xl border border-border bg-surface p-4 shadow-sm md:top-[calc(env(safe-area-inset-top)+4.5rem)]"
         aria-label="Bulk candidate actions"
       >
         <p className="text-sm font-medium text-fg">
