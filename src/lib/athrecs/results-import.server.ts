@@ -611,8 +611,8 @@ export async function applyResultsImport(
         on conflict (edition_id, athlete_id) do update set
           status = excluded.status,
           finish_time_seconds = excluded.finish_time_seconds,
-          chip_time_seconds = excluded.chip_time_seconds,
-          gun_time_seconds = excluded.gun_time_seconds,
+            chip_time_seconds = coalesce(excluded.chip_time_seconds, results.chip_time_seconds),
+            gun_time_seconds = coalesce(excluded.gun_time_seconds, results.gun_time_seconds),
           overall_place = excluded.overall_place,
           gender_place = excluded.gender_place,
           category = excluded.category,
@@ -624,9 +624,19 @@ export async function applyResultsImport(
             when excluded.result_visibility = 'public_figure' then 'public_figure'
             else results.result_visibility
           end,
-          ingestion_run_id = excluded.ingestion_run_id
-        returning id
-      `;
+            ingestion_run_id = excluded.ingestion_run_id
+          where (
+            results.finish_time_seconds is not distinct from excluded.finish_time_seconds
+            and (results.chip_time_seconds is null or excluded.chip_time_seconds is null
+              or results.chip_time_seconds = excluded.chip_time_seconds)
+            and (results.gun_time_seconds is null or excluded.gun_time_seconds is null
+              or results.gun_time_seconds = excluded.gun_time_seconds)
+          ) or (results.source_url is not null and results.source_url = excluded.source_url)
+          returning id
+        `;
+        if (!savedResults.length) {
+          throw new Error("Concurrent conflicting time; existing record retained for review");
+        }
         if (incomingSource)
           await sql`
         insert into result_source_references (result_id, source_url, source_name)

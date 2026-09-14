@@ -127,6 +127,36 @@ try {
     1,
     "A missing time cannot erase a valid performance",
   );
+  const concurrent = await Promise.all([
+    applyResultsImport({
+      results: [
+        {
+          ...identified,
+          eventSlug: "unified-concurrent",
+          time: "40:00",
+          source: "https://concurrent-one.example/result",
+        },
+      ],
+    }),
+    applyResultsImport({
+      results: [
+        {
+          ...identified,
+          eventSlug: "unified-concurrent",
+          time: "35:00",
+          source: "https://concurrent-two.example/result",
+        },
+      ],
+    }),
+  ]);
+  assert.equal(
+    concurrent.reduce((count, report) => count + report.resultsUpserted, 0),
+    1,
+  );
+  assert.equal(
+    concurrent.reduce((count, report) => count + report.skipped, 0),
+    1,
+  );
   await sql`update athlete_private_profiles set world_athletics_url='https://worldathletics.org/athletes/test/fixture-76543210' where user_id='dev-user'`;
   let matches = await rpc("result-match-api", "listMyPotentialResultMatches");
   assert(
