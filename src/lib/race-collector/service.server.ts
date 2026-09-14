@@ -49,6 +49,7 @@ export type CandidateRow = {
   event_slug: string;
   event_id: number | null;
   batch_id: string | null;
+  publication_status?: string | null;
   kept_at?: string | null;
   kept_by?: string | null;
   dismissed_at?: string | null;
@@ -450,7 +451,12 @@ export async function dashboard(
     count: number;
   }>`select case when dismissed_at is not null then 'dismissed' else status end status,count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid group by case when dismissed_at is not null then 'dismissed' else status end`;
   const decisions = (
-    await sql<{ pending: number; kept: number; dismissed: number; all: number }>`select count(*) filter (where dismissed_at is null and kept_at is null and status<>'staged')::int pending,count(*) filter (where dismissed_at is null and (kept_at is not null or status='staged'))::int kept,count(*) filter (where dismissed_at is not null)::int dismissed,count(*) filter (where dismissed_at is null)::int "all" from race_collector_candidates where run_id=${run.id}::uuid`
+    await sql<{
+      pending: number;
+      kept: number;
+      dismissed: number;
+      all: number;
+    }>`select count(*) filter (where dismissed_at is null and kept_at is null and status<>'staged')::int pending,count(*) filter (where dismissed_at is null and (kept_at is not null or status='staged'))::int kept,count(*) filter (where dismissed_at is not null)::int dismissed,count(*) filter (where dismissed_at is null)::int "all" from race_collector_candidates where run_id=${run.id}::uuid`
   )[0];
   const total = (
     await sql<{
@@ -473,6 +479,15 @@ export async function dashboard(
         window: Window;
       }>`select id,"window" from race_collector_jobs where run_id=${run.id}::uuid`
     : [];
+  const batchIds = [
+    ...new Set(candidates.map((row) => row.batch_id).filter((id): id is string => Boolean(id))),
+  ];
+  const publication = batchIds.length
+    ? await sql<{
+        id: string;
+        status: string;
+      }>`select id,status from catalogue_import_batches where id=any(${batchIds}::text[])`
+    : [];
   const comparisons = candidates.map((row) => {
     const window = windows.find(
       (j) => j.id === (row as CandidateRow & { job_id: string }).job_id,
@@ -492,6 +507,7 @@ export async function dashboard(
       check.eventId !== row.event_id;
     return {
       ...row,
+      publication_status: publication.find((batch) => batch.id === row.batch_id)?.status ?? null,
       check: {
         ...check,
         changed:
@@ -542,17 +558,14 @@ export async function exportRun(id: string) {
 }
 
 /** A queue decision preserves source evidence and never grants publication approval. */
-export async function decideFinding(
-  input: FindingDecisionInput,
-  email: string,
-  sqlOverride?: Sql,
-) {
+export async function decideFinding(input: FindingDecisionInput, email: string, sqlOverride?: Sql) {
   const { runId, id, action } = validateFindingDecision(input);
   const sql = sqlOverride ?? (await getSql());
   return sql.transaction(async (tx) => {
     const runs = await tx`select id from race_collector_runs where id=${runId}::uuid for update`;
     if (!runs.length) throw new Error("Run not found.");
-    const rows = await tx<CandidateRow>`select * from race_collector_candidates where run_id=${runId}::uuid and id=${id}::uuid for update`;
+    const rows =
+      await tx<CandidateRow>`select * from race_collector_candidates where run_id=${runId}::uuid and id=${id}::uuid for update`;
     if (!rows.length) throw new Error("Candidate not found in this scan.");
     const row = rows[0];
     const alreadyDecided =

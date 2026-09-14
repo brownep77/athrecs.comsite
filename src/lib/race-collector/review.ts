@@ -40,6 +40,7 @@ export function reviewGuidance(row: {
   reason: string;
   event_id: number | null;
   dismissed_at?: string | null;
+  publication_status?: string | null;
 }) {
   if (row.dismissed_at)
     return {
@@ -49,6 +50,12 @@ export function reviewGuidance(row: {
         row.status === "staged"
           ? "Its publication batch is unchanged. Manage that in Publication review, or use Keep to return this candidate to your kept list."
           : "Use Keep to return this candidate to your kept list. Its information and checks are retained.",
+    };
+  if (row.publication_status === "published")
+    return {
+      title: "Published",
+      why: "This race has been published to RunRecs.",
+      next: "Its source information and publication history are retained.",
     };
   if (row.status === "staged")
     return {
@@ -126,4 +133,33 @@ export function validateFindingDecision(input: FindingDecisionInput): FindingDec
   )
     throw new Error("Confirm Keep or Dismiss for this candidate.");
   return { runId: input.runId, id: input.id, action: input.action, confirmed: true };
+}
+
+export type BulkFindingActionInput = {
+  runId: string;
+  ids: string[];
+  action: "keep" | "dismiss" | "publish";
+  confirmed: boolean;
+  sourcesReviewed?: boolean;
+};
+
+export function validateBulkFindingAction(input: BulkFindingActionInput): BulkFindingActionInput {
+  const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (
+    !input ||
+    !uuid.test(input.runId ?? "") ||
+    !Array.isArray(input.ids) ||
+    !input.ids.length ||
+    input.ids.length > REVIEW_BATCH_LIMIT ||
+    new Set(input.ids).size !== input.ids.length ||
+    input.ids.some((id) => typeof id !== "string" || !uuid.test(id)) ||
+    !["keep", "dismiss", "publish"].includes(input.action) ||
+    input.confirmed !== true
+  )
+    throw new Error(`Confirm an action for 1–${REVIEW_BATCH_LIMIT} selected candidates.`);
+  if (input.action === "publish" && input.sourcesReviewed !== true)
+    throw new Error(
+      "Confirm the primary programme dates, distances and start venues before publishing.",
+    );
+  return { ...input, ids: [...input.ids] };
 }

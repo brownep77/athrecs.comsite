@@ -60,6 +60,9 @@ jobs:
       - name: Collector Keep and Dismiss browser check
         run: node scripts/verify-collector-decisions-ui.mjs
 
+      - name: Collector bulk publication browser check
+        run: node scripts/verify-collector-bulk-ui.mjs
+
       - name: Collector distance selection browser check
         run: node scripts/verify-collector-distance-ui.mjs
 
