@@ -35,10 +35,11 @@ try {
   await page.goto("http://127.0.0.1:8091/");
   await page.getByRole("heading", { name: "Forest Challenge", exact: true }).waitFor();
   const button = (name) => page.getByRole("button", { name, exact: true });
-  assert.equal(
-    await button("Keep selected (0)").evaluate((element) => getComputedStyle(element).display),
-    "inline-flex",
-    "The fixture must load the real component styles",
+  assert.ok(
+    await button("Keep selected (0)").evaluate(
+      (element) => element.getBoundingClientRect().height >= 36,
+    ),
+    "Bulk buttons must retain their usable target size with the real component styles",
   );
   const choose = (name, choice) =>
     page.getByRole("button", { name: new RegExp(`^Select to ${choice} ${name} `) }).click();
