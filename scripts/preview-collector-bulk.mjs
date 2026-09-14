@@ -1,7 +1,7 @@
 // Local-only browser fixture: real UI, collector service and disposable publication database.
-import { mkdtemp, writeFile, symlink, rm } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile, symlink, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { resolve, join } from "node:path";
+import { resolve, join, relative } from "node:path";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -19,6 +19,12 @@ await fixture.add(
   { status: "held", reason: "Possible event alias needs review" },
 );
 await symlink(join(root, "node_modules"), join(temp, "node_modules"), "dir");
+// The fixture lives outside the app root: explicitly include the real components' utilities.
+await writeFile(
+  join(temp, "fixture.css"),
+  (await readFile(join(root, "src/styles.css"), "utf8")) +
+    `\n@source "${relative(temp, join(root, "src"))}";\n`,
+);
 await writeFile(
   join(temp, "index.html"),
   '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><script type="module" src="/entry.tsx"></script></body></html>',
@@ -29,7 +35,7 @@ await writeFile(
   import React, { useState, useEffect } from "react";
   import { createRoot } from "react-dom/client";
   import { CollectorCandidateList } from "${join(root, "src/components/admin/collector-candidate-list.tsx")}";
-  import "${join(root, "src/styles.css")}";
+  import "./fixture.css";
   function Fixture() {
     const [data, setData] = useState(null), [page, setPage] = useState(0), [scan, setScan] = useState(0);
     const [fail, setFail] = useState(false), [last, setLast] = useState("None"), [mobile, setMobile] = useState(false);
