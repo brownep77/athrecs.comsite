@@ -168,6 +168,19 @@ jobs:
             exit 1
           fi
 
+
+      - name: Check collector release preview
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 460
+        env:
+          PREVIEW_BASE_URL: https://athrecs-comsite-git-codex-co-1a712d-athrecs-holding-page-set-up.vercel.app
+        run: |
+          BROWSER_SMOKE_EXPECT_TEXT='ATHRECS' \
+            node scripts/browser-smoke.mjs "$PREVIEW_BASE_URL/" "$GITHUB_WORKSPACE/artifacts/collector-preview-home.png"
+          BROWSER_SMOKE_EXPECT_TEXT='Cross country' \
+            node scripts/browser-smoke.mjs "$PREVIEW_BASE_URL/races?sport=Athletics&surface=XC" "$GITHUB_WORKSPACE/artifacts/collector-preview-filter.png"
+          BROWSER_SMOKE_EXPECT_TEXT='Wirral' \
+            node scripts/browser-smoke.mjs "$PREVIEW_BASE_URL/races/ea-uk-fixtures-wirral-primary-schools-cross-country-series-supported-by-wirral-ac" "$GITHUB_WORKSPACE/artifacts/collector-preview-event.png"
+
       - name: Upload smoke evidence
         if: always()
         uses: actions/upload-artifact@v4
