@@ -90,11 +90,11 @@ const networkSites: NetworkSite[] = [
   {
     name: "AthRecs",
     domain: "athrecs.com",
-    sport: "Athletics",
+    sport: "Athlete profiles · Every sport",
     description:
-      "Competition calendars, programmes and results for the full family of athletics disciplines.",
+      "One athlete profile for results, personal bests, progress and sporting identity across every sport.",
     coverage:
-      "Track and field, indoor athletics, cross-country, race walking and combined events.",
+      "Bring your records together, then find your next event through the specialist sports sites.",
     status: "live",
     href: "https://www.athrecs.com",
     icon: Trophy,
@@ -105,8 +105,7 @@ const networkSites: NetworkSite[] = [
     domain: "cycrecs.com",
     sport: "Cycling",
     description: "Competition calendars and results for road, track and off-road cycling.",
-    coverage:
-      "Road cycling, track cycling, gravel, mountain biking, cyclocross and time trials.",
+    coverage: "Road cycling, track cycling, gravel, mountain biking, cyclocross and time trials.",
     status: "coming-soon",
     icon: Bike,
     accent: "border-amber-300/25 bg-amber-300/10 text-amber-200",
@@ -128,8 +127,7 @@ const networkSites: NetworkSite[] = [
     sport: "Triathlon & multisport",
     description:
       "Events, results and split performances for triathlon and related multisport formats.",
-    coverage:
-      "Triathlon, duathlon, aquathlon, aquabike and related multisport competitions.",
+    coverage: "Triathlon, duathlon, aquathlon, aquabike and related multisport competitions.",
     status: "coming-soon",
     icon: Activity,
     accent: "border-violet-300/25 bg-violet-300/10 text-violet-200",
@@ -239,8 +237,8 @@ function SportsRecsLandingPage() {
           <section className="grid min-h-[650px] items-center gap-14 py-20 lg:grid-cols-[1.08fr_0.92fr] lg:py-28">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-100">
-                <Sparkles className="size-3.5" aria-hidden="true" />
-                A new family of specialist sports platforms
+                <Sparkles className="size-3.5" aria-hidden="true" />A new family of specialist
+                sports platforms
               </div>
               <h1 className="mt-7 max-w-4xl text-balance text-5xl font-black leading-[0.96] tracking-[-0.055em] sm:text-6xl lg:text-7xl xl:text-[5.2rem]">
                 One sporting identity.
@@ -270,14 +268,16 @@ function SportsRecsLandingPage() {
                 </a>
               </div>
               <div className="mt-9 flex max-w-2xl flex-wrap gap-x-7 gap-y-3 text-sm text-slate-400">
-                {["Specialist calendars", "Connected athlete records", "Privacy-first by design"].map(
-                  (item) => (
-                    <span key={item} className="inline-flex items-center gap-2">
-                      <CheckCircle2 className="size-4 text-cyan-300" aria-hidden="true" />
-                      {item}
-                    </span>
-                  ),
-                )}
+                {[
+                  "Specialist calendars",
+                  "Connected athlete records",
+                  "Privacy-first by design",
+                ].map((item) => (
+                  <span key={item} className="inline-flex items-center gap-2">
+                    <CheckCircle2 className="size-4 text-cyan-300" aria-hidden="true" />
+                    {item}
+                  </span>
+                ))}
               </div>
             </div>
 
@@ -298,7 +298,10 @@ function SportsRecsLandingPage() {
 
                 <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   {networkSites.slice(0, 6).map((site) => (
-                    <div key={site.name} className="rounded-2xl border border-white/10 bg-black/15 p-4">
+                    <div
+                      key={site.name}
+                      className="rounded-2xl border border-white/10 bg-black/15 p-4"
+                    >
                       <div className="flex items-start justify-between gap-4">
                         <span
                           className={cn(
@@ -348,8 +351,8 @@ function SportsRecsLandingPage() {
                 A dedicated home for every sporting community.
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-300">
-                RunRecs and AthRecs are live today. The next platforms are being prepared
-                carefully, and their links will activate as each specialist site is ready.
+                RunRecs and AthRecs are live today. The next platforms are being prepared carefully,
+                and their links will activate as each specialist site is ready.
               </p>
             </div>
 

@@ -878,6 +878,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       id: number;
       event_name: string;
       event_slug: string;
+      sport: string;
       event_date: string;
       distance_code: string;
       overall_place: number | null;
@@ -890,6 +891,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
         r.id,
         e.name as event_name,
         e.slug as event_slug,
+        e.sport,
         ed.event_date::text as event_date,
         ed.distance_code,
         r.overall_place,

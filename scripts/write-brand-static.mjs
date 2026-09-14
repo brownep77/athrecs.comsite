@@ -14,10 +14,11 @@ const isRunRecs =
 const siteUrl = isRunRecs ? "https://www.runrecs.com" : "https://www.athrecs.com";
 const paths = [
   { path: "/", frequency: "daily", priority: "1.0" },
-  { path: "/races", frequency: "hourly", priority: "0.9" },
-  { path: "/calendar", frequency: "hourly", priority: "0.9" },
+  { path: "/races", frequency: "hourly", priority: isRunRecs ? "0.9" : "0.5" },
+  { path: "/calendar", frequency: "hourly", priority: isRunRecs ? "0.9" : "0.5" },
   { path: "/race-series", frequency: "daily", priority: "0.8" },
-  { path: "/athletes", frequency: "daily", priority: "0.8" },
+  { path: "/athletes", frequency: "daily", priority: isRunRecs ? "0.8" : "0.9" },
+  ...(!isRunRecs ? [{ path: "/find-events", frequency: "weekly", priority: "0.7" }] : []),
   { path: "/clubs", frequency: "weekly", priority: "0.7" },
   { path: "/privacy", frequency: "yearly", priority: "0.3" },
 ];
@@ -52,4 +53,4 @@ await Promise.all([
   writeFile(path.join(outputDir, "robots.txt"), robots, "utf8"),
 ]);
 
-console.log(`[brand-static] wrote ${isRunRecs ? "RunRecs" : "ATHRECS Athletics"} sitemap and robots`);
+console.log(`[brand-static] wrote ${isRunRecs ? "RunRecs" : "ATHRECS"} sitemap and robots`);

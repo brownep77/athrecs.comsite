@@ -10,6 +10,7 @@ import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
 import { SharedAccountProfile } from "@/components/athletes/SharedAccountProfile";
+import { ProfileEventLink } from "@/components/athletes/ProfileEventLink";
 import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-api";
 import { parseProfileRoles } from "@/lib/athrecs/athlete-profile-roles";
 import { openAthleteAuth } from "@/lib/auth/client";
@@ -454,9 +455,12 @@ function AthletePage() {
                 key={r.id}
                 className="rounded-xl border border-border bg-surface px-3.5 py-3 shadow-card hover:border-border-strong"
               >
-                <Link
-                  to="/races/$slug"
-                  params={{ slug: r.event_slug }}
+                <ProfileEventLink
+                  result={{
+                    sport: r.sport,
+                    eventSlug: r.event_slug,
+                    sourceUrls: r.source_url ? [r.source_url] : [],
+                  }}
                   className="flex flex-col gap-1 no-underline sm:flex-row sm:justify-between"
                 >
                   <div>
@@ -473,7 +477,7 @@ function AthletePage() {
                   <p className="font-semibold tabular text-fg">
                     {formatDuration(r.finish_time_seconds)}
                   </p>
-                </Link>
+                </ProfileEventLink>
                 <div className="mt-1 flex flex-wrap items-center gap-2">
                   {r.source_url && (
                     <a

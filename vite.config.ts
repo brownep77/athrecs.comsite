@@ -97,6 +97,7 @@ function athleticsVariantPlugin(): Plugin {
   ]);
   const routeAliases = new Map<string, string>([
     ["./routes/index", "src/athletics/routes/index.tsx"],
+    ["./routes/athletes/index", "src/athletics/routes/athletes/index.tsx"],
     ["./routes/calendar", "src/athletics/routes/calendar.tsx"],
     ["./routes/race-series", "src/athletics/routes/race-series.tsx"],
     ["./routes/$language/$country/index", "src/athletics/routes/$language/$country/index.tsx"],
