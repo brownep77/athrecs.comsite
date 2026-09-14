@@ -1,137 +1,26 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "npm ci --no-audit --no-fund",
-  "buildCommand": "node scripts/migrate.mjs && vite build && node scripts/write-brand-static.mjs && node scripts/copy-pglite-assets.mjs && node scripts/publish-after-build.mjs",
-  "redirects": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "update.athrecs.com"
-        }
-      ],
-      "destination": "/admin",
-      "permanent": false
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "sportsrecs.org"
-        }
-      ],
-      "destination": "/sportsrecs"
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.sportsrecs.org"
-        }
-      ],
-      "destination": "/sportsrecs"
-    }
-  ],
+  "installCommand": "node --version",
+  "buildCommand": "node design-preview/build.mjs",
+  "outputDirectory": "design-preview/dist",
   "headers": [
     {
-      "source": "/admin/:path*",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",
           "value": "noindex, nofollow, noarchive"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "private, no-store"
-        }
-      ]
-    },
-    {
-      "source": "/claim-results",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "private, no-store, no-cache, max-age=0, must-revalidate"
-        },
-        {
-          "key": "Pragma",
-          "value": "no-cache"
-        },
-        {
-          "key": "Expires",
-          "value": "0"
-        }
-      ]
-    },
-    {
-      "source": "/athlete-account",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "private, no-store, no-cache, max-age=0, must-revalidate"
-        },
-        {
-          "key": "Pragma",
-          "value": "no-cache"
-        },
-        {
-          "key": "Expires",
-          "value": "0"
-        }
-      ]
-    },
-    {
-      "source": "/my-athlete-profile",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "private, no-store, no-cache, max-age=0, must-revalidate"
-        },
-        {
-          "key": "Pragma",
-          "value": "no-cache"
-        },
-        {
-          "key": "Expires",
-          "value": "0"
-        }
-      ]
-    },
-    {
-      "source": "/api/athlete-profile-photo",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "private, no-store, no-cache, max-age=0, must-revalidate"
         },
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
         }
       ]
-    }
-  ],
-  "regions": [
-    "lhr1"
-  ],
-  "crons": [
-    {
-      "path": "/api/race-collector-worker",
-      "schedule": "* * * * *"
     }
   ]
 }
