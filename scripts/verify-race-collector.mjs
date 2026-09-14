@@ -403,6 +403,7 @@ await pg.exec(
   await readFile("migrations/20260912_worldwide_race_collector_dismissals.sql", "utf8"),
 );
 await pg.exec(await readFile("migrations/20260913_collector_duplicate_reviews.sql", "utf8"));
+await pg.exec(await readFile("migrations/20260914_collector_keep_decisions.sql", "utf8"));
 function adapter(db, inTransaction = false) {
   const sql = async (strings, ...values) => {
     let text = strings[0];
@@ -1548,6 +1549,86 @@ await assert.rejects(
     manual.confirmDuplicateDistances({ ...distanceInput, id: toStage }, "staff@example.org", sql),
   /publication batch/,
 );
+
+// Keep/Dismiss decisions are reversible retention choices, never source approval.
+const protectedBeforeDecisions = await catalogueAndDependants();
+const aliasesBeforeDecisions = await sql`select * from slug_redirects order by old_slug`;
+const reviewsBeforeDecisions = await sql`select * from race_collector_duplicate_reviews order by id`;
+const jobsBeforeDecisions = await sql`select id,report from race_collector_jobs order by id`;
+for (const index of [0, 150, 175, 200]) {
+  const id = queueRows[index].id;
+  const input = { runId: nextRun.id, id, action: "keep", confirmed: true };
+  const before = (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0];
+  for (const invalid of [
+    { ...input, confirmed: false },
+    { ...input, confirmed: undefined },
+    { ...input, action: "publish" },
+    { ...input, id: "invalid" },
+    { ...input, runId: "invalid" },
+  ])
+    await assert.rejects(
+      () => service.decideFinding(invalid, "staff@example.org", sql),
+      /Confirm Keep or Dismiss/,
+    );
+  await assert.rejects(
+    () => service.decideFinding({ ...input, runId: run.id }, "staff@example.org", sql),
+    /Candidate not found in this scan/,
+  );
+  assert.deepEqual(
+    (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0],
+    before,
+    "Unconfirmed or cross-scan decisions must have no effect",
+  );
+  await service.decideFinding(input, "staff@example.org", sql);
+  const saved = (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0];
+  if (before.status !== "staged") {
+    assert(saved.kept_at);
+    assert.equal(saved.kept_by, "staff@example.org");
+  }
+  for (const key of ["candidate", "status", "reason", "event_id", "event_slug", "batch_id", "reviewed_at", "reviewed_by"])
+    assert.deepEqual(saved[key], before[key], "Keep must preserve " + key);
+  assert.equal((await service.decideFinding(input, "other-staff@example.org", sql)).changed, 0);
+  assert.deepEqual(
+    (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0],
+    saved,
+    "Retry must preserve the original decision",
+  );
+  const kept = await service.dashboard(nextRun.id, sql, { status: "kept", search: before.candidate.name });
+  assert(kept.candidates.some((row) => row.id === id));
+  const pending = await service.dashboard(nextRun.id, sql, { status: "pending", search: before.candidate.name });
+  assert(!pending.candidates.some((row) => row.id === id));
+  await service.decideFinding({ ...input, action: "dismiss" }, "staff@example.org", sql);
+  const hidden = (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0];
+  assert(hidden.dismissed_at);
+  assert.equal(hidden.dismissed_by, "staff@example.org");
+  assert.deepEqual(hidden.kept_at, saved.kept_at, "Dismiss retains the previous Keep information");
+  assert.deepEqual(hidden.candidate, before.candidate);
+  assert.equal((await service.decideFinding({ ...input, action: "dismiss" }, "staff@example.org", sql)).changed, 0);
+  assert(!(await service.dashboard(nextRun.id, sql, { status: "kept", search: before.candidate.name })).candidates.some((row) => row.id === id));
+  assert((await service.dashboard(nextRun.id, sql, { status: "dismissed", search: before.candidate.name })).candidates.some((row) => row.id === id));
+  await service.decideFinding(input, "staff@example.org", sql);
+  const restored = (await sql`select * from race_collector_candidates where id=${id}::uuid`)[0];
+  assert.equal(restored.dismissed_at, null);
+  assert.equal(restored.dismissed_by, null);
+  assert(restored.kept_at);
+  assert.deepEqual(restored.candidate, before.candidate);
+  if (["held", "duplicate", "staged"].includes(before.status))
+    await assert.rejects(() => service.stageReviewed([id], "staff@example.org", sql), /Selection changed/);
+}
+const decisionCounts = (await service.dashboard(nextRun.id, sql)).decisions;
+assert.equal(decisionCounts.pending + decisionCounts.kept, decisionCounts.all);
+assert.equal((await service.dashboard(nextRun.id, sql, { status: "kept" })).reviewPage.total, decisionCounts.kept);
+assert.equal((await service.dashboard(nextRun.id, sql, { status: "pending" })).reviewPage.total, decisionCounts.pending);
+// A later duplicate recheck must preserve the retention decision as well as dismissal.
+const decidedId = queueRows[0].id;
+const retentionBeforeRecheck = (await sql`select kept_at,kept_by,dismissed_at,dismissed_by from race_collector_candidates where id=${decidedId}::uuid`)[0];
+await service.recheckFindings(nextRun.id, sql);
+assert.deepEqual((await sql`select kept_at,kept_by,dismissed_at,dismissed_by from race_collector_candidates where id=${decidedId}::uuid`)[0], retentionBeforeRecheck);
+assert.deepEqual(await catalogueAndDependants(), protectedBeforeDecisions);
+assert.deepEqual(await sql`select * from slug_redirects order by old_slug`, aliasesBeforeDecisions);
+assert.deepEqual(await sql`select * from race_collector_duplicate_reviews order by id`, reviewsBeforeDecisions);
+assert.deepEqual(await sql`select id,report from race_collector_jobs order by id`, jobsBeforeDecisions);
+
 await pg.close();
 console.log(
   "Race collector verified: quick/thorough scopes, monthly boundaries, parallel cap, pass ordering, concurrent deduplication, regions, units, durable jobs, leases, retries, staging and worker authentication.",

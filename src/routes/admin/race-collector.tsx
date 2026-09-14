@@ -3,7 +3,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowLeft,
-  ArrowUpRight,
   CheckCircle2,
   Download,
   Globe2,
@@ -11,37 +10,24 @@ import {
   Play,
   Search,
   ShieldCheck,
-  RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CollectorDuplicateDialog } from "@/components/admin/collector-duplicate-dialog";
-import type { Candidate } from "@/lib/race-collector/core";
-import { CollectorComparison } from "@/components/admin/collector-comparison";
+import { CollectorCandidateCard } from "@/components/admin/collector-candidate-card";
 import {
   COLLECTOR_COUNTRIES,
   calendarMonthRange,
-  safeUrl,
   planScope,
   selectedRegions,
   type Scope,
 } from "@/lib/race-collector/core";
 import { collectionRegion, collectionRegions } from "@/lib/race-collector/regions";
-import {
-  REVIEW_BATCH_LIMIT,
-  REVIEW_FILTERS,
-  reviewGuidance,
-  type ReviewQuery,
-} from "@/lib/race-collector/review";
+import { DECISION_FILTERS, type ReviewQuery } from "@/lib/race-collector/review";
 import {
   getCollector,
   startCollector,
   controlCollector,
-  stageCollector,
   exportCollector,
-  dismissCollectorFindings,
-  dismissCollectorDuplicates,
-  recheckCollector,
-  undoCollectorDuplicate,
+  decideCollectorFinding,
 } from "@/lib/race-collector/api";
 export const Route = createFileRoute("/admin/race-collector")({
   head: () => ({
@@ -82,15 +68,9 @@ function CollectorPage() {
   const [countrySearch, setCountrySearch] = useState("");
   const [search, setSearch] = useState("");
   const [runId, setRunId] = useState<string>();
-  const [selected, setSelected] = useState<string[]>([]);
-  const [reviewed, setReviewed] = useState(false);
   const [message, setMessage] = useState("");
-  const [duplicateFinding, setDuplicateFinding] = useState<{
-    id: string;
-    candidate: Candidate;
-  } | null>(null);
   const [reviewQuery, setReviewQuery] = useState<ReviewQuery>({
-    status: "all",
+    status: "pending",
     search: "",
     page: 0,
     pageSize: 50,
@@ -98,8 +78,6 @@ function CollectorPage() {
   const [reviewSearch, setReviewSearch] = useState("");
   const changeReview = (changes: Partial<ReviewQuery>) => {
     setReviewQuery((current) => ({ ...current, page: 0, ...changes }));
-    setSelected([]);
-    setReviewed(false);
   };
   const query = useQuery({
     queryKey: ["race-collector", runId, reviewQuery],
@@ -145,69 +123,20 @@ function CollectorPage() {
     },
     onError: fail,
   });
-  const stage = useMutation({
-    mutationFn: () => stageCollector({ data: { ids: selected, sourcesReviewed: reviewed } }),
-    onSuccess: () => {
-      setMessage("Selected races sent to publication review.");
-      changeReview({ page: 0 });
-      void refresh();
-    },
-    onError: fail,
-  });
-  const dismiss = useMutation({
-    mutationFn: (input: { action: "dismiss" | "restore"; ids?: string[] }) =>
-      dismissCollectorFindings({ data: { id: run!.id, ...input } }),
+  const decision = useMutation({
+    mutationFn: (input: { id: string; action: "keep" | "dismiss" }) =>
+      decideCollectorFinding({ data: { runId: run!.id, ...input, confirmed: true } }),
     onSuccess: async (result) => {
       setMessage(
-        result.action === "dismiss"
-          ? `${result.changed} findings dismissed. Published races and publication batches are unchanged. Restore findings from Dismissed.`
-          : `${result.changed} findings restored with their previous statuses.`,
+        result.action === "keep"
+          ? "Candidate saved to Kept. Its information and duplicate checks are retained."
+          : "Candidate dismissed. All information is saved; use Keep in Dismissed to bring it back.",
       );
-      changeReview({ page: 0 });
       await refresh();
     },
     onError: fail,
   });
-  const recheck = useMutation({
-    mutationFn: () => recheckCollector({ data: { id: run!.id } }),
-    onSuccess: async (result) => {
-      setMessage(
-        `Checked ${result.checked} saved findings: ${result.duplicates} already listed, ${result.attention} need attention; ${result.updated} current findings updated. Dismissals and staged batches kept.${result.stagedConflicts ? ` ${result.stagedConflicts} findings already sent for publication now have a conflict—check Publication review.` : ""}`,
-      );
-      changeReview({ page: 0 });
-      await refresh();
-    },
-    onError: fail,
-  });
-  const clearDuplicates = useMutation({
-    mutationFn: () => dismissCollectorDuplicates({ data: { id: run!.id, action: "dismiss" } }),
-    onSuccess: async (result) => {
-      setMessage(
-        `${result.changed} already-listed findings dismissed. Restore them from Dismissed.`,
-      );
-      changeReview({ page: 0 });
-      await refresh();
-    },
-    onError: fail,
-  });
-  const undoDuplicate = useMutation({
-    mutationFn: (id: string) => undoCollectorDuplicate({ data: { id } }),
-    onSuccess: async () => {
-      setMessage(
-        "Duplicate decision undone. The finding has its previous review status; the audit record is retained.",
-      );
-      changeReview({ page: 0 });
-      await refresh();
-    },
-    onError: fail,
-  });
-  const reviewBusy =
-    stage.isPending ||
-    dismiss.isPending ||
-    recheck.isPending ||
-    clearDuplicates.isPending ||
-    undoDuplicate.isPending ||
-    Boolean(duplicateFinding);
+  const reviewBusy = decision.isPending;
   const download = async () => {
     try {
       const result = await exportCollector({ data: { id: run!.id } });
@@ -234,10 +163,6 @@ function CollectorPage() {
     data?.counts
       .filter((row) => row.status !== "dismissed")
       .reduce((total, row) => total + row.count, 0) ?? 0;
-  const readyOnPage =
-    data?.candidates.filter(
-      (row) => row.status === "review" && !row.dismissed_at && !row.check.changed,
-    ) ?? [];
   const pageInfo = data?.reviewPage;
   const progressScope = run?.scope ?? scope;
   const chooseCountries = (countries: string[]) =>
@@ -985,55 +910,19 @@ function CollectorPage() {
         <section className="space-y-5 rounded-2xl border border-border bg-surface p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-lg font-semibold text-fg">Work through your findings</h2>
+              <h2 className="text-lg font-semibold text-fg">Keep or dismiss candidates</h2>
               <p className="mt-1 text-sm text-muted">
-                {totalFindings} current findings · {count("dismissed")} dismissed ·{" "}
-                {count("review")} ready to review. Select up to {REVIEW_BATCH_LIMIT} checked
-                findings at a time. Each distance is a separate finding; the number found is not a
-                selection limit.
+                {data?.decisions.pending ?? 0} to decide · {data?.decisions.kept ?? 0} kept ·{" "}
+                {count("dismissed")} dismissed
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                Choose Keep or Dismiss, then confirm. Keep saves a candidate for RunRecs;
+                publication is separate. Every race retains its information, sources and checks.
               </p>
             </div>
-            <Link
-              to="/admin/catalogue-publishing"
-              className="flex items-center gap-1 text-sm font-medium text-emerald-700"
-            >
-              Publication review <ArrowUpRight size={16} />
-            </Link>
           </div>
-          <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border p-4">
-            <Button
-              variant="secondary"
-              disabled={reviewBusy || query.isPlaceholderData}
-              onClick={() => recheck.mutate()}
-            >
-              <RotateCcw size={14} />{" "}
-              {recheck.isPending ? "Checking saved findings…" : "Recheck duplicates"}
-            </Button>
-            <Button
-              variant="secondary"
-              disabled={reviewBusy || !count("review")}
-              onClick={() => {
-                setReviewSearch("");
-                changeReview({ status: "review", search: "" });
-              }}
-            >
-              Review new findings
-            </Button>
-            <Button
-              variant="secondary"
-              disabled={reviewBusy || !count("duplicate")}
-              onClick={() => clearDuplicates.mutate()}
-            >
-              Dismiss already listed ({count("duplicate")})
-            </Button>
-            <p className="w-full text-xs text-muted">
-              Recheck uses your saved findings and the latest catalogue and pending imports. No new
-              web scan. Compare the evidence below, then select up to 50 checked fixtures for
-              publication review.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2" aria-label="Filter findings by status">
-            {REVIEW_FILTERS.map((filter) => (
+          <div className="flex flex-wrap gap-2" aria-label="Filter candidate decisions">
+            {DECISION_FILTERS.map((filter) => (
               <Button
                 key={filter.value}
                 size="sm"
@@ -1042,50 +931,10 @@ function CollectorPage() {
                 disabled={reviewBusy}
                 onClick={() => changeReview({ status: filter.value })}
               >
-                {filter.label} ({filter.value === "all" ? totalFindings : count(filter.value)})
+                {filter.label} ({data?.decisions[filter.value] ?? 0})
               </Button>
             ))}
-            {(reviewQuery.status !== "all" || reviewQuery.search) && (
-              <Button
-                size="sm"
-                variant="ghost"
-                disabled={reviewBusy}
-                onClick={() => {
-                  setReviewSearch("");
-                  changeReview({ status: "all", search: "" });
-                }}
-              >
-                Clear filters
-              </Button>
-            )}
           </div>
-          {(totalFindings > 0 || reviewQuery.status === "dismissed") && (
-            <div className="flex flex-wrap items-center gap-3 rounded-xl bg-slate-50 p-4">
-              {reviewQuery.status === "dismissed" ? (
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  disabled={!count("dismissed") || reviewBusy || query.isPlaceholderData}
-                  onClick={() => dismiss.mutate({ action: "restore" })}
-                >
-                  Restore all dismissed ({count("dismissed")})
-                </Button>
-              ) : (
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  disabled={reviewBusy || query.isPlaceholderData}
-                  onClick={() => dismiss.mutate({ action: "dismiss" })}
-                >
-                  Dismiss all current findings in this scan ({totalFindings})
-                </Button>
-              )}
-              <p className="text-xs text-muted">
-                Every finding can be dismissed and restored. Dismiss hides it from this review list;
-                published races and publication batches stay unchanged.
-              </p>
-            </div>
-          )}
           <form
             className="flex flex-wrap items-end gap-3"
             onSubmit={(event) => {
@@ -1123,33 +972,6 @@ function CollectorPage() {
               </select>
             </label>
           </form>
-          <div className="flex flex-wrap items-center gap-3">
-            <Button
-              variant="secondary"
-              size="sm"
-              disabled={!readyOnPage.length || query.isPlaceholderData || reviewBusy}
-              onClick={() => {
-                setSelected(readyOnPage.slice(0, REVIEW_BATCH_LIMIT).map((row) => row.id));
-                setReviewed(false);
-              }}
-            >
-              Select {Math.min(readyOnPage.length, REVIEW_BATCH_LIMIT)} ready on this page
-            </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              disabled={!selected.length || reviewBusy}
-              onClick={() => {
-                setSelected([]);
-                setReviewed(false);
-              }}
-            >
-              Clear selection
-            </Button>
-            <p className="text-xs text-muted">
-              {selected.length} selected · Selections apply to this page.
-            </p>
-          </div>
           {query.isFetching && (
             <p role="status" className="text-xs text-muted">
               Refreshing findings…
@@ -1160,209 +982,26 @@ function CollectorPage() {
               Unable to refresh findings. Please try again.
             </p>
           )}
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead>
-                <tr className="border-b border-border text-xs text-muted">
-                  <th className="p-3">Select</th>
-                  <th className="p-3">Race / source</th>
-                  <th className="p-3">Date · distance</th>
-                  <th className="p-3">Why this needs review / next step</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data?.candidates.map((row) => {
-                  const guidance = reviewGuidance(row);
-                  return (
-                    <tr key={row.id} className="border-b border-border align-top">
-                      <td className="p-3">
-                        <input
-                          type="checkbox"
-                          aria-label={`Review ${row.candidate.name} ${row.candidate.distanceLabel}`}
-                          disabled={
-                            row.status !== "review" ||
-                            row.check.changed ||
-                            Boolean(row.dismissed_at) ||
-                            query.isPlaceholderData ||
-                            reviewBusy ||
-                            (!selected.includes(row.id) && selected.length >= REVIEW_BATCH_LIMIT)
-                          }
-                          checked={selected.includes(row.id)}
-                          onChange={(e) => {
-                            setSelected(
-                              e.target.checked
-                                ? [...selected, row.id]
-                                : selected.filter((id) => id !== row.id),
-                            );
-                            setReviewed(false);
-                          }}
-                        />
-                      </td>
-                      <td className="max-w-lg p-3">
-                        <p className="font-medium text-fg">{row.candidate.name}</p>
-                        <p className="text-xs text-muted">
-                          {[row.candidate.city, row.candidate.region, row.candidate.country]
-                            .filter(Boolean)
-                            .join(", ")}
-                        </p>
-                        <a
-                          href={
-                            safeUrl(row.candidate.sourceUrl) ? row.candidate.sourceUrl : undefined
-                          }
-                          target="_blank"
-                          rel="noreferrer"
-                          className="mt-1 inline-flex items-center gap-1 text-xs text-emerald-700"
-                        >
-                          Primary programme <ArrowUpRight size={12} />
-                        </a>
-                        <p className="mt-2 text-xs leading-5 text-muted">
-                          <strong>Source evidence: </strong>
-                          {row.candidate.evidence}
-                        </p>
-                        <p className="mt-1 text-xs text-muted">
-                          Source type: {row.candidate.sourceKind} · Surface:{" "}
-                          {row.candidate.surface || "Not confirmed"}
-                        </p>
-                        {safeUrl(row.candidate.entryUrl) && (
-                          <a
-                            href={row.candidate.entryUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-1 inline-block text-xs text-emerald-700 underline"
-                          >
-                            Entry page
-                          </a>
-                        )}
-                      </td>
-                      <td className="whitespace-nowrap p-3 text-fg">
-                        {row.candidate.date}
-                        <p className="mt-1 text-xs text-muted">
-                          {row.candidate.distanceLabel} · {row.candidate.distanceKm.toFixed(3)} km
-                        </p>
-                        <p className="mt-1 text-xs text-muted">
-                          {(row.candidate.distanceKm / 1.609344).toFixed(3)} miles
-                        </p>
-                        <p className="mt-2 text-xs text-muted">
-                          Start: {row.candidate.startTime || "Not confirmed"}
-                        </p>
-                        <p className="text-xs text-muted">Entries: {row.candidate.entryStatus}</p>
-                      </td>
-                      <td className="min-w-64 max-w-md p-3">
-                        <span className="rounded-full bg-slate-100 px-2 py-1 text-xs text-slate-700">
-                          {guidance.title}
-                        </span>
-                        <p className="mt-2 text-xs leading-5 text-fg">
-                          <strong>Why: </strong>
-                          {guidance.why}
-                        </p>
-                        <p className="mt-1 text-xs leading-5 text-muted">
-                          <strong>Next: </strong>
-                          {guidance.next}
-                        </p>
-                        {row.check.changed && (
-                          <p className="mt-2 text-xs font-medium leading-5 text-amber-800">
-                            Latest check: {row.check.reason}.{" "}
-                            {row.dismissed_at
-                              ? "Your dismissal is kept."
-                              : row.status === "staged"
-                                ? "Check this conflict in Publication review."
-                                : "Use Recheck duplicates to update this finding before selecting it."}
-                          </p>
-                        )}
-                        <CollectorComparison check={row.check} />
-                        {row.candidate.notes.trim() && (
-                          <p className="mt-2 text-xs leading-5 text-muted">
-                            <strong>Collector notes: </strong>
-                            {row.candidate.notes}
-                          </p>
-                        )}
-                        {row.event_id && row.event_slug && (
-                          <a
-                            href={`https://www.runrecs.com/races/${encodeURIComponent(row.event_slug)}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-2 inline-flex items-center gap-1 text-xs text-emerald-700"
-                          >
-                            Existing event <ArrowUpRight size={12} />
-                          </a>
-                        )}
-                        {row.status === "held" && (
-                          <details className="mt-2 text-xs text-muted">
-                            <summary className="cursor-pointer">Original check</summary>
-                            <p className="mt-1">{row.reason}</p>
-                          </details>
-                        )}
-                        {row.check.manualReview && (
-                          <p className="mt-2 text-xs text-muted">
-                            Kept by reviewer: {row.check.manualReview.kept_snapshot.event.name} ·{" "}
-                            {row.check.manualReview.kept_snapshot.edition.distance}.{" "}
-                            {row.check.manualReview.reason}
-                          </p>
-                        )}
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {row.check.manualReview ? (
-                            <Button
-                              size="sm"
-                              variant="secondary"
-                              disabled={reviewBusy || query.isPlaceholderData}
-                              onClick={() => undoDuplicate.mutate(row.id)}
-                            >
-                              Undo duplicate decision
-                            </Button>
-                          ) : (
-                            <Button
-                              size="sm"
-                              variant="secondary"
-                              disabled={
-                                reviewBusy ||
-                                query.isPlaceholderData ||
-                                row.status === "staged" ||
-                                Boolean(row.batch_id)
-                              }
-                              title={
-                                row.status === "staged"
-                                  ? "Resolve this finding in Publication review first."
-                                  : undefined
-                              }
-                              onClick={() => {
-                                setSelected([]);
-                                setReviewed(false);
-                                setDuplicateFinding({ id: row.id, candidate: row.candidate });
-                              }}
-                            >
-                              Choose the one to keep
-                            </Button>
-                          )}
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            aria-label={`${row.dismissed_at ? "Restore" : "Dismiss"} ${row.candidate.name} ${row.candidate.distanceLabel}`}
-                            disabled={reviewBusy || query.isPlaceholderData}
-                            onClick={() =>
-                              dismiss.mutate({
-                                action: row.dismissed_at ? "restore" : "dismiss",
-                                ids: [row.id],
-                              })
-                            }
-                          >
-                            {row.dismissed_at ? "Restore" : "Dismiss"}
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div className="space-y-3">
+            {data?.candidates.map((row) => (
+              <CollectorCandidateCard
+                key={row.id}
+                row={row}
+                disabled={reviewBusy || query.isPlaceholderData}
+                onDecide={(action) => decision.mutate({ id: row.id, action })}
+              />
+            ))}
             {!data?.candidates.length && (
               <p className="py-8 text-center text-sm text-muted">
-                {!totalFindings && count("dismissed") && reviewQuery.status !== "dismissed"
-                  ? "All findings are dismissed. Open Dismissed to restore them."
-                  : totalFindings || count("dismissed")
-                    ? "No findings match these filters. Choose All findings or try another search."
-                    : run.status === "complete"
-                      ? "No findings were saved for this scan. Check the search notes for coverage gaps."
-                      : "Findings will appear here as research windows finish."}
+                {reviewQuery.search
+                  ? "No candidates match this search."
+                  : reviewQuery.status === "pending" && (totalFindings || count("dismissed"))
+                    ? "All caught up. Your decisions are saved in Kept and Dismissed."
+                    : totalFindings || count("dismissed")
+                      ? "No candidates in this list."
+                      : run.status === "complete"
+                        ? "No findings were saved for this scan. Check the search notes for coverage gaps."
+                        : "Findings will appear here as research windows finish."}
               </p>
             )}
           </div>
@@ -1395,24 +1034,6 @@ function CollectorPage() {
               </div>
             </div>
           )}
-          <label className="flex items-start gap-2 text-sm text-muted">
-            <input
-              className="mt-1"
-              type="checkbox"
-              disabled={!selected.length || query.isPlaceholderData || reviewBusy}
-              checked={reviewed}
-              onChange={(e) => setReviewed(e.target.checked)}
-            />
-            I checked the linked primary programmes and confirm the selected race dates, distances
-            and venues.
-          </label>
-          <Button
-            disabled={!selected.length || !reviewed || query.isPlaceholderData || reviewBusy}
-            onClick={() => stage.mutate()}
-          >
-            <ShieldCheck size={16} />
-            {stage.isPending ? "Sending…" : `Send ${selected.length} to publication review`}
-          </Button>
         </section>
       )}
       {run && (
@@ -1452,19 +1073,6 @@ function CollectorPage() {
             ))}
           </div>
         </details>
-      )}
-      {duplicateFinding && (
-        <CollectorDuplicateDialog
-          key={duplicateFinding.id}
-          finding={duplicateFinding}
-          onClose={() => setDuplicateFinding(null)}
-          onSaved={(notice) => {
-            setDuplicateFinding(null);
-            setMessage(notice);
-            changeReview({ page: 0 });
-            void refresh();
-          }}
-        />
       )}
     </div>
   );

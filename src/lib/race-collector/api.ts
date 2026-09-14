@@ -1,7 +1,12 @@
 import { createServerFn } from "@tanstack/react-start";
 import { staffMiddleware } from "../auth/staff-middleware";
 import { validateScope, type Scope } from "./core";
-import { REVIEW_BATCH_LIMIT, validateReviewQuery, type ReviewQuery } from "./review";
+import {
+  REVIEW_BATCH_LIMIT,
+  validateReviewQuery,
+  validateFindingDecision,
+  type ReviewQuery,
+} from "./review";
 const idInput = (input: { id: string }) => {
   if (!/^[0-9a-f-]{36}$/i.test(input?.id ?? "")) throw new Error("Invalid run");
   return input;
@@ -146,3 +151,11 @@ export const confirmCollectorDuplicateDistances = createServerFn({ method: "POST
   .handler(async ({ data, context }) =>
     (await import("./duplicate-review.server")).confirmDuplicateDistances(data, context.staffEmail),
   );
+
+export const decideCollectorFinding = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator(validateFindingDecision)
+  .handler(async ({ data, context }) => {
+    const s = await import("./service.server");
+    return s.decideFinding(data, context.staffEmail);
+  });
