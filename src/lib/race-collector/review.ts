@@ -1,5 +1,13 @@
 export const REVIEW_BATCH_LIMIT = 50;
+export const DECISION_FILTERS = [
+  { value: "pending", label: "To decide" },
+  { value: "kept", label: "Kept" },
+  { value: "dismissed", label: "Dismissed" },
+  { value: "all", label: "All current" },
+] as const;
 export const REVIEW_FILTERS = [
+  { value: "pending", label: "To decide" },
+  { value: "kept", label: "Kept" },
   { value: "all", label: "All findings" },
   { value: "review", label: "Ready to review" },
   { value: "held", label: "Needs attention" },
@@ -39,8 +47,8 @@ export function reviewGuidance(row: {
       why: `Removed from the current review list. Previous status: ${REVIEW_FILTERS.find((filter) => filter.value === row.status)?.label ?? row.status}.`,
       next:
         row.status === "staged"
-          ? "Its publication batch is unchanged. Manage that in Publication review, or Restore this finding to the list."
-          : "Use Restore to return this finding with its previous status. Published races are unchanged.",
+          ? "Its publication batch is unchanged. Manage that in Publication review, or use Keep to return this candidate to your kept list."
+          : "Use Keep to return this candidate to your kept list. Its information and checks are retained.",
     };
   if (row.status === "staged")
     return {
@@ -60,7 +68,7 @@ export function reviewGuidance(row: {
       why: row.event_id
         ? "A new date or distance was found for an existing event. Its source needs your final check."
         : "A new race listing was found. Its source needs your final check before it can be added.",
-      next: "Open the source, confirm the date, distance and start venue, then select this finding.",
+      next: "Use Keep to save this candidate. Its source must be confirmed before publication.",
     };
   const reasons: Record<string, { why: string; next: string }> = {
     "Different names share a programme; confirm event grouping": {
@@ -99,4 +107,23 @@ export function reviewGuidance(row: {
       next: "Resolve this issue against the primary programme before this finding can move forward.",
     }),
   };
+}
+
+export type FindingDecisionInput = {
+  runId: string;
+  id: string;
+  action: "keep" | "dismiss";
+  confirmed: boolean;
+};
+export function validateFindingDecision(input: FindingDecisionInput): FindingDecisionInput {
+  const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (
+    !input ||
+    !uuid.test(input.runId ?? "") ||
+    !uuid.test(input.id ?? "") ||
+    !["keep", "dismiss"].includes(input.action) ||
+    input.confirmed !== true
+  )
+    throw new Error("Confirm Keep or Dismiss for this candidate.");
+  return { runId: input.runId, id: input.id, action: input.action, confirmed: true };
 }

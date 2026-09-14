@@ -57,6 +57,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Collector Keep and Dismiss browser check
+        run: node scripts/verify-collector-decisions-ui.mjs
+
       - name: Collector distance selection browser check
         run: node scripts/verify-collector-distance-ui.mjs
 

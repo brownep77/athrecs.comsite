@@ -18,7 +18,13 @@ import { researchWindow, type ResearchResult } from "./research.server.ts";
 import { keptFixtureUnchanged, type DuplicateReview } from "./duplicate-review.ts";
 import { collectionRegion } from "./regions.ts";
 import { JOB_LEASE_SECONDS } from "./timing.ts";
-import { REVIEW_BATCH_LIMIT, validateReviewQuery, type ReviewQuery } from "./review.ts";
+import {
+  REVIEW_BATCH_LIMIT,
+  validateReviewQuery,
+  validateFindingDecision,
+  type FindingDecisionInput,
+  type ReviewQuery,
+} from "./review.ts";
 import {
   createMatchIndex,
   findPendingMatches,
@@ -43,6 +49,8 @@ export type CandidateRow = {
   event_slug: string;
   event_id: number | null;
   batch_id: string | null;
+  kept_at?: string | null;
+  kept_by?: string | null;
   dismissed_at?: string | null;
   dismissed_by?: string | null;
 };
@@ -427,6 +435,7 @@ export async function dashboard(
       jobs: [],
       candidates: [],
       counts: [],
+      decisions: { pending: 0, kept: 0, dismissed: 0, all: 0 },
       activity: [],
       reviewPage: { ...review, total: 0, pages: 1 },
     };
@@ -440,15 +449,18 @@ export async function dashboard(
     status: string;
     count: number;
   }>`select case when dismissed_at is not null then 'dismissed' else status end status,count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid group by case when dismissed_at is not null then 'dismissed' else status end`;
+  const decisions = (
+    await sql<{ pending: number; kept: number; dismissed: number; all: number }>`select count(*) filter (where dismissed_at is null and kept_at is null and status<>'staged')::int pending,count(*) filter (where dismissed_at is null and (kept_at is not null or status='staged'))::int kept,count(*) filter (where dismissed_at is not null)::int dismissed,count(*) filter (where dismissed_at is null)::int "all" from race_collector_candidates where run_id=${run.id}::uuid`
+  )[0];
   const total = (
     await sql<{
       count: number;
-    }>`select count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid and (case when ${review.status}='dismissed' then dismissed_at is not null else dismissed_at is null and (${review.status}='all' or status=${review.status}) end) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0`
+    }>`select count(*)::int count from race_collector_candidates where run_id=${run.id}::uuid and (case when ${review.status}='dismissed' then dismissed_at is not null when ${review.status}='kept' then dismissed_at is null and (kept_at is not null or status='staged') when ${review.status}='pending' then dismissed_at is null and kept_at is null and status<>'staged' else dismissed_at is null and (${review.status}='all' or status=${review.status}) end) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0`
   )[0].count;
   const pages = Math.max(1, Math.ceil(total / review.pageSize));
   const page = Math.min(review.page, pages - 1);
   const candidates =
-    await sql<CandidateRow>`select * from race_collector_candidates where run_id=${run.id}::uuid and (case when ${review.status}='dismissed' then dismissed_at is not null else dismissed_at is null and (${review.status}='all' or status=${review.status}) end) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0 order by case status when 'review' then 0 when 'held' then 1 when 'duplicate' then 2 else 3 end,created_at,id limit ${review.pageSize} offset ${page * review.pageSize}`;
+    await sql<CandidateRow>`select * from race_collector_candidates where run_id=${run.id}::uuid and (case when ${review.status}='dismissed' then dismissed_at is not null when ${review.status}='kept' then dismissed_at is null and (kept_at is not null or status='staged') when ${review.status}='pending' then dismissed_at is null and kept_at is null and status<>'staged' else dismissed_at is null and (${review.status}='all' or status=${review.status}) end) and strpos(lower(concat_ws(' ',candidate->>'name',candidate->>'city',candidate->>'region',candidate->>'country',candidate->>'date',candidate->>'distanceLabel',reason)),lower(${review.search}))>0 order by case status when 'review' then 0 when 'held' then 1 when 'duplicate' then 2 else 3 end,created_at,id limit ${review.pageSize} offset ${page * review.pageSize}`;
   const snap = candidates.length
     ? await snapshot(sql, [run.scope.dateFrom, run.scope.dateTo])
     : null;
@@ -511,6 +523,7 @@ export async function dashboard(
     jobs,
     candidates: comparisons,
     counts,
+    decisions,
     gaps,
     activity,
     reviewPage: { ...review, page, pages, total },
@@ -527,6 +540,34 @@ export async function exportRun(id: string) {
       await sql`select r.* from race_collector_duplicate_reviews r join race_collector_candidates c on c.id=r.candidate_id where c.run_id=${id}::uuid order by r.reviewed_at`,
   };
 }
+
+/** A queue decision preserves source evidence and never grants publication approval. */
+export async function decideFinding(
+  input: FindingDecisionInput,
+  email: string,
+  sqlOverride?: Sql,
+) {
+  const { runId, id, action } = validateFindingDecision(input);
+  const sql = sqlOverride ?? (await getSql());
+  return sql.transaction(async (tx) => {
+    const runs = await tx`select id from race_collector_runs where id=${runId}::uuid for update`;
+    if (!runs.length) throw new Error("Run not found.");
+    const rows = await tx<CandidateRow>`select * from race_collector_candidates where run_id=${runId}::uuid and id=${id}::uuid for update`;
+    if (!rows.length) throw new Error("Candidate not found in this scan.");
+    const row = rows[0];
+    const alreadyDecided =
+      action === "dismiss"
+        ? Boolean(row.dismissed_at)
+        : !row.dismissed_at && Boolean(row.kept_at || row.status === "staged");
+    if (alreadyDecided) return { action, changed: 0 };
+    if (action === "keep")
+      await tx`update race_collector_candidates set kept_at=now(),kept_by=${email},dismissed_at=null,dismissed_by=null where id=${id}::uuid`;
+    else
+      await tx`update race_collector_candidates set dismissed_at=now(),dismissed_by=${email} where id=${id}::uuid`;
+    return { action, changed: 1 };
+  });
+}
+
 export async function dismissDuplicates(
   runId: string,
   action: "dismiss" | "restore",
