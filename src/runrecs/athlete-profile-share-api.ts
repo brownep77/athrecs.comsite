@@ -36,6 +36,7 @@ export const getPublishedSharedProfile = createServerFn({ method: "GET" })
     return {
       ...profile,
       primarySport: runRecsPrimary ? profile.primarySport : "Running",
+      sports: profile.sports.filter((sport) => RUNRECS_SPORTS.has(sport)),
       bio: runRecsPrimary ? profile.bio : "",
       results,
     };

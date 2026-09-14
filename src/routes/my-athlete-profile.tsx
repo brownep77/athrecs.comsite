@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -21,11 +21,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import {
-  getMyAthleteAccount,
-} from "@/lib/athrecs/athlete-account-api";
+import { getMyAthleteAccount } from "@/lib/athrecs/athlete-account-api";
 import { getMyProfileResultVisibility } from "@/lib/athrecs/athlete-profile-results-api";
-import { sportIsInPublicSiteScope } from "@/lib/site-scope";
+import { sportIsInAthleteProfileScope } from "@/lib/site-scope";
+import { combineProfileResults } from "@/lib/athrecs/profile-records";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
+import { ProfileConnectionsPanel } from "@/components/athletes/ProfileConnectionsPanel";
+import { ProfileProgress } from "@/components/athletes/ProfileProgress";
 
 export const Route = createFileRoute("/my-athlete-profile")({
   head: () => ({
@@ -41,10 +44,10 @@ export const Route = createFileRoute("/my-athlete-profile")({
   component: MyAthleteProfilePage,
 });
 
-
 function MyAthleteProfilePage() {
   const { user, isPending: sessionPending } = useCurrentUserState();
   const queryClient = useQueryClient();
+  const [selectedSport, setSelectedSport] = useState("All sports");
   const account = useQuery({
     queryKey: ["my-athlete-account"],
     queryFn: () => getMyAthleteAccount(),
@@ -63,12 +66,19 @@ function MyAthleteProfilePage() {
     [resultVisibility.data?.hiddenResultIds],
   );
   const profileResults = useMemo(() => {
-    const allResults = (account.data?.claimedResults ?? []).filter((result) =>
-      sportIsInPublicSiteScope(result.sport),
+    const allResults = combineProfileResults(
+      (account.data?.claimedResults ?? []).filter((result) =>
+        sportIsInAthleteProfileScope(result.sport),
+      ),
     );
     return {
-      visible: allResults.filter((result) => !hiddenResultIdSet.has(result.resultId)),
-      hidden: allResults.filter((result) => hiddenResultIdSet.has(result.resultId)),
+      visible: allResults.filter(
+        (result) =>
+          !(result.sourceResultIds ?? [result.resultId]).some((id) => hiddenResultIdSet.has(id)),
+      ),
+      hidden: allResults.filter((result) =>
+        (result.sourceResultIds ?? [result.resultId]).some((id) => hiddenResultIdSet.has(id)),
+      ),
     };
   }, [account.data?.claimedResults, hiddenResultIdSet]);
 
@@ -94,8 +104,8 @@ function MyAthleteProfilePage() {
             Sign in to view your profile
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
-            Ordinary athlete profiles and claimed results are private. Sign in with the account
-            that claimed the results.
+            Ordinary athlete profiles and claimed results are private. Sign in with the account that
+            claimed the results.
           </p>
           <Button className="mt-5" type="button" onClick={startSignIn}>
             <LogIn className="size-4" aria-hidden="true" />
@@ -109,7 +119,7 @@ function MyAthleteProfilePage() {
   if (account.isLoading || resultVisibility.isLoading)
     return <LoadingCard label="Building your private profile…" />;
 
-  if (account.isError || !account.data) {
+  if (account.isError || resultVisibility.isError || !account.data) {
     return (
       <div className="mx-auto max-w-4xl space-y-4">
         <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
@@ -130,13 +140,24 @@ function MyAthleteProfilePage() {
 
   const data = account.data;
   const profileName = data.displayName || data.fullName || data.authName || "My Athlete Profile";
-  const results = profileResults.visible;
-  const hiddenResults = profileResults.hidden;
+  const availableSports = [
+    ...new Set([
+      ...data.sports.map((sport) => sport.sportCode),
+      ...profileResults.visible.map((result) => result.sport),
+    ]),
+  ].filter(sportIsInAthleteProfileScope);
+  const activeSport = availableSports.includes(selectedSport) ? selectedSport : "All sports";
+  const results = profileResults.visible.filter(
+    (result) => activeSport === "All sports" || result.sport === activeSport,
+  );
+  const hiddenResults = profileResults.hidden.filter(
+    (result) => activeSport === "All sports" || result.sport === activeSport,
+  );
   const eventCount = new Set(results.map((result) => result.eventSlug)).size;
   const distanceCount = new Set(results.map((result) => result.distanceCode)).size;
   const primarySport =
-    data.sports.find((sport) => sport.isPrimary && sportIsInPublicSiteScope(sport.sportCode)) ??
-    data.sports.find((sport) => sportIsInPublicSiteScope(sport.sportCode));
+    data.sports.find((sport) => sport.isPrimary && sportIsInAthleteProfileScope(sport.sportCode)) ??
+    data.sports.find((sport) => sportIsInAthleteProfileScope(sport.sportCode));
   const location = [data.city, data.region, data.country].filter(Boolean).join(", ");
 
   return (
@@ -192,8 +213,8 @@ function MyAthleteProfilePage() {
               </div>
 
               <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
-                A private record of your claimed identities, performances and personal bests. Your
-                photograph and ordinary athlete profile are not published publicly.
+                Your results, personal bests and sporting progress together. Choose a sport to focus
+                your profile, or view your complete history.
               </p>
 
               <div className="mt-5 flex flex-wrap gap-2">
@@ -241,32 +262,118 @@ function MyAthleteProfilePage() {
         />
       </section>
 
-      <AthleteBioCard />
-
-      <ShareProfileCard />
-
-      {data.claimedProfiles.length ? (
-        <section className="rounded-2xl border border-border bg-surface p-5 shadow-card md:p-6">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="size-5 text-accent" aria-hidden="true" />
-            <h2 className="font-display text-xl font-semibold text-fg">Linked athlete identities</h2>
-          </div>
-          <p className="mt-1 text-sm text-muted">
-            These records are joined inside your account but remain hidden from public athlete
-            search and public profile pages.
+      <div className="flex flex-wrap items-center gap-3">
+        <label htmlFor="profile-sport" className="text-sm font-semibold">
+          Sport
+        </label>
+        <select
+          id="profile-sport"
+          value={activeSport}
+          onChange={(event) => setSelectedSport(event.target.value)}
+          className="h-11 max-w-full rounded-lg border border-border bg-surface px-3 text-sm"
+        >
+          <option>All sports</option>
+          {availableSports.map((sport) => (
+            <option key={sport}>{sport}</option>
+          ))}
+        </select>
+        <span className="text-sm text-muted">
+          {results.length} linked result{results.length === 1 ? "" : "s"}
+        </span>
+      </div>
+      <Tabs defaultValue="results" className="space-y-5">
+        <TabsList className="h-auto w-full flex-wrap justify-start gap-1 bg-elevated p-1.5">
+          <TabsTrigger value="results" className="min-h-10 text-sm">
+            Results & personal bests
+          </TabsTrigger>
+          <TabsTrigger value="progress" className="min-h-10 text-sm">
+            Progress
+          </TabsTrigger>
+          <TabsTrigger value="overview" className="min-h-10 text-sm">
+            About & sports
+          </TabsTrigger>
+          <TabsTrigger value="matches" className="min-h-10 text-sm">
+            Find my results
+          </TabsTrigger>
+          <TabsTrigger value="connections" className="min-h-10 text-sm">
+            Linked profiles
+          </TabsTrigger>
+          <TabsTrigger value="sharing" className="min-h-10 text-sm">
+            Sharing
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="results">
+          <AthleteResultsSection results={results} hiddenResults={hiddenResults} />
+        </TabsContent>
+        <TabsContent value="progress">
+          <ProfileProgress results={results} />
+        </TabsContent>
+        <TabsContent value="overview" className="space-y-5">
+          <AthleteBioCard />
+          <section className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+            <h2 className="font-display text-xl font-semibold">My sports</h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {data.sports
+                .filter((sport) => sportIsInAthleteProfileScope(sport.sportCode))
+                .map((sport) => (
+                  <article key={sport.sportCode} className="rounded-xl border border-border p-4">
+                    <h3 className="font-semibold">
+                      {sport.sportCode}
+                      {sport.isPrimary ? " · Primary sport" : ""}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted">
+                      {[...sport.disciplines, ...sport.preferredDistances].join(" · ") ||
+                        "Sport added to your profile"}
+                    </p>
+                    {sport.goals ? <p className="mt-2 text-sm">{sport.goals}</p> : null}
+                    <p className="mt-2 text-sm text-accent">
+                      {
+                        profileResults.visible.filter((result) => result.sport === sport.sportCode)
+                          .length
+                      }{" "}
+                      linked results
+                    </p>
+                  </article>
+                ))}
+            </div>
+            <Button asChild variant="secondary" className="mt-4">
+              <Link to="/athlete-account">Edit sports and goals</Link>
+            </Button>
+          </section>
+          {data.claimedProfiles.length ? (
+            <section className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+              <h2 className="flex items-center gap-2 font-display text-xl font-semibold">
+                <ShieldCheck className="size-5 text-accent" />
+                Linked athlete identities
+              </h2>
+              <p className="mt-2 text-sm text-muted">
+                These confirmed source records all contribute to your profile. Future results added
+                to these records appear here automatically.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {data.claimedProfiles.map((profile) => (
+                  <Badge key={profile.athleteId} variant="outline">
+                    {profile.athleteName}
+                  </Badge>
+                ))}
+              </div>
+            </section>
+          ) : null}
+        </TabsContent>
+        <TabsContent value="matches">
+          <PotentialResultMatchesPanel />
+        </TabsContent>
+        <TabsContent value="connections">
+          <ProfileConnectionsPanel account={data} />
+        </TabsContent>
+        <TabsContent value="sharing">
+          <p className="mb-4 text-sm text-muted">
+            Your photograph and ordinary athlete profile are not published publicly. You choose
+            which details to include in a separate shareable profile below.
           </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {data.claimedProfiles.map((profile) => (
-              <Badge key={profile.athleteId} className="border-accent/30 bg-accent-soft text-fg">
-                <CheckCircle2 className="mr-1 size-3.5" aria-hidden="true" />
-                {profile.athleteName}
-              </Badge>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
-      <AthleteResultsSection results={results} hiddenResults={hiddenResults} />
+          <ShareProfileCard />
+        </TabsContent>
+      </Tabs>
 
       <section className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-elevated p-4 text-sm text-muted">
         <span className="inline-flex items-center gap-2">
@@ -291,7 +398,7 @@ function ProfileHero() {
         </div>
         <h1 className="mt-2 font-display text-3xl font-semibold">Private Athlete Profile</h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
-          A clean, signed-in view of your claimed athlete identities, results and personal bests.
+          Bring your results, personal bests, sporting progress and social profiles together.
         </p>
       </div>
     </section>

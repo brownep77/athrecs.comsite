@@ -17,3 +17,11 @@ export function sportIsInPublicSiteScope(sport: string | null | undefined): bool
 export function scopedSportLabel(): string {
   return IS_RUNRECS_SITE ? "Running and Parkrun" : "Athletics";
 }
+
+/** Athlete identity spans sports; specialist event catalogues keep their own scope. */
+export function sportIsInAthleteProfileScope(sport: string | null | undefined): boolean {
+  if (!sport) return false;
+  return IS_RUNRECS_SITE
+    ? ["Running", "Parkrun", "Trail running", "Ultra running"].includes(sport)
+    : true;
+}

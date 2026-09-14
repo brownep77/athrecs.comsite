@@ -177,7 +177,7 @@ await assert.rejects(
     now,
     jwks: [jwk],
   }),
-  /workflow ref is not trusted/,
+  /workflow (?:ref is|and audience are) not trusted/,
 );
 
 console.log("Catalogue publishing verification passed, including review-only GitHub Actions OIDC staging.");

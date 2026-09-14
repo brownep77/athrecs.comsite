@@ -147,10 +147,8 @@ assert(
 const athleticsSharedProfile = await readFile("src/athletics/athlete-profile-share-api.ts", "utf8");
 const runRecsSharedProfile = await readFile("src/runrecs/athlete-profile-share-api.ts", "utf8");
 assert(
-  athleticsSharedProfile.includes("event.sport = 'Athletics'") &&
-    athleticsSharedProfile.includes('primarySport: "Athletics"') &&
-    athleticsSharedProfile.includes("if (!athleticsPrimary && !results.length) return null"),
-  "ATHRECS unlisted shared profiles must expose Athletics only",
+  athleticsSharedProfile.includes('export * from "../lib/athrecs/athlete-profile-share-api"'),
+  "ATHRECS shared profiles must use the complete, opt-in profile API",
 );
 assert(
   runRecsSharedProfile.includes("event.sport in ('Running', 'Parkrun')") &&
@@ -207,26 +205,25 @@ const accountRoute = await readFile("src/routes/athlete-account.tsx", "utf8");
 const claimRoute = await readFile("src/routes/claim-results.tsx", "utf8");
 const privateProfileRoute = await readFile("src/routes/my-athlete-profile.tsx", "utf8");
 assert(
-  potentialMatches.includes("sportIsInPublicSiteScope(match.sport)") &&
-    potentialMatches.includes("!IS_ATHRECS_SITE"),
-  "ATHRECS result suggestions must be Athletics-only and omit the broad runner search",
+  potentialMatches.includes("sportIsInAthleteProfileScope(match.sport)"),
+  "Athlete suggestions must use the unified profile scope",
 );
 assert(
   accountRoute.includes("ACCOUNT_SPORTS") &&
-    accountRoute.includes('["Athletics"]') &&
+    accountRoute.includes("= ATHLETE_SPORTS;") &&
     accountRoute.includes("const hiddenSports = IS_ATHRECS_SITE") &&
-    accountRoute.includes("sportIsInPublicSiteScope(result.sport)"),
-  "ATHRECS Athlete Account must show Athletics only without deleting shared hidden sports",
+    accountRoute.includes("sportIsInAthleteProfileScope(result.sport)"),
+  "ATHRECS accounts must support all sports and preserve existing sport settings",
 );
 assert(
-  claimRoute.includes("sportIsInPublicSiteScope(claim.sport)") &&
-    claimRoute.includes("sportIsInPublicSiteScope(result.data.sport)"),
-  "Claim pages must not expose another specialist site's results",
+  claimRoute.includes("sportIsInAthleteProfileScope(claim.sport)") &&
+    claimRoute.includes("sportIsInAthleteProfileScope(result.data.sport)"),
+  "Claim pages must use the athlete profile scope",
 );
 assert(
-  privateProfileRoute.includes("sportIsInPublicSiteScope(result.sport)") &&
-    privateProfileRoute.includes("sportIsInPublicSiteScope(sport.sportCode)"),
-  "Private profiles must show only the active specialist site's results and sport",
+  privateProfileRoute.includes("sportIsInAthleteProfileScope(result.sport)") &&
+    privateProfileRoute.includes("sportIsInAthleteProfileScope(sport.sportCode)"),
+  "Private profiles must use the complete athlete profile scope",
 );
 
 const publisher = await readFile("scripts/publish-after-build.mjs", "utf8");

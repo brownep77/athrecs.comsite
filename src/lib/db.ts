@@ -5,10 +5,8 @@ export type DbSource = "neon" | "pglite";
 
 // An empty/whitespace DATABASE_URL (an easy misconfig in deploy UIs) must mean
 // "unset" — otherwise production would silently run on the PGLite fallback.
-const rawDatabaseUrl =
-  typeof process !== "undefined" ? process.env.DATABASE_URL : undefined;
-const databaseUrl =
-  rawDatabaseUrl && rawDatabaseUrl.trim() ? rawDatabaseUrl : undefined;
+const rawDatabaseUrl = typeof process !== "undefined" ? process.env.DATABASE_URL : undefined;
+const databaseUrl = rawDatabaseUrl && rawDatabaseUrl.trim() ? rawDatabaseUrl : undefined;
 
 /**
  * Active backend: real **Neon** when `DATABASE_URL` is set (deployed / configured
@@ -27,14 +25,8 @@ export const dbSource: DbSource = databaseUrl ? "neon" : "pglite";
  *   const rows2 = await sql.query("select * from todos where id = $1", [id]);
  */
 export interface Sql {
-  <T = Record<string, unknown>>(
-    strings: TemplateStringsArray,
-    ...values: unknown[]
-  ): Promise<T[]>;
-  query<T = Record<string, unknown>>(
-    text: string,
-    params?: unknown[],
-  ): Promise<T[]>;
+  <T = Record<string, unknown>>(strings: TemplateStringsArray, ...values: unknown[]): Promise<T[]>;
+  query<T = Record<string, unknown>>(text: string, params?: unknown[]): Promise<T[]>;
   transaction<T>(run: (sql: Sql) => Promise<T>): Promise<T>;
 }
 
@@ -162,12 +154,12 @@ async function createPgliteSql(): Promise<Sql> {
       import: "default",
       eager: true,
     }) as Record<string, string>;
-    const doneRows = await pg.query<{ name: string }>(
-      "select name from _migrations",
-    );
+    const doneRows = await pg.query<{ name: string }>("select name from _migrations");
     const done = new Set(doneRows.rows.map((r) => r.name));
+    // Match the deploy migrator's code-point ordering. Locale collation can
+    // sort a suffix migration before the file that creates its table.
     for (const [path, text] of Object.entries(migrations).sort(([a], [b]) =>
-      a.localeCompare(b),
+      a < b ? -1 : a > b ? 1 : 0,
     )) {
       const name = path.split("/").pop() as string;
       if (done.has(name)) continue;

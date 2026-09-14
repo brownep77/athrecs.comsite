@@ -1,0 +1,187 @@
+import assert from "node:assert/strict";
+import { readFile, readdir } from "node:fs/promises";
+import { PGlite } from "@electric-sql/pglite";
+import {
+  combineProfileResults,
+  eligiblePerformance,
+  findPersonalBests,
+  performanceGroup,
+} from "../src/lib/athrecs/profile-records.ts";
+import {
+  sourceIdentityFromUrl,
+  validateProfileConnection,
+} from "../src/lib/athrecs/profile-connections.ts";
+
+const result = {
+  resultId: 1,
+  editionId: 1,
+  athleteName: "Alex Runner",
+  eventName: "City 10K",
+  eventSlug: "city-10k",
+  sport: "Running",
+  surface: "Road",
+  country: "United Kingdom",
+  eventDate: "2026-06-01",
+  distanceCode: "10K",
+  distanceKm: 10,
+  status: "finished",
+  finishTimeSeconds: 2700,
+  chipTimeSeconds: 2700,
+  gunTimeSeconds: 2704,
+  overallPlace: 100,
+  category: "M40",
+  sourceUrls: ["https://timer.example/result/1"],
+};
+const combined = combineProfileResults([
+  result,
+  {
+    ...result,
+    resultId: 2,
+    athleteName: "Alex Previous",
+    sourceUrls: ["https://organiser.example/result/1"],
+  },
+]);
+assert.equal(combined.length, 1);
+assert.deepEqual(combined[0].sourceResultIds, [1, 2]);
+assert.equal(combined[0].sourceUrls.length, 2);
+assert.equal(combined[0].conflicting, false);
+assert.equal(result.sourceUrls.length, 1, "Combining must not mutate source records");
+const conflicting = combineProfileResults([
+  result,
+  { ...result, resultId: 3, finishTimeSeconds: 2600 },
+]);
+assert.equal(conflicting.length, 2);
+assert.ok(conflicting.every((item) => item.conflicting));
+assert.equal(findPersonalBests(conflicting).length, 0, "Conflicting sources cannot establish a PB");
+assert.equal(eligiblePerformance({ ...result, status: "dnf" }), false);
+assert.equal(eligiblePerformance({ ...result, finishTimeSeconds: 0 }), false);
+assert.equal(eligiblePerformance({ ...result, distanceCode: "Ultra" }), false);
+assert.equal(eligiblePerformance({ ...result, surface: "Cross country" }), false);
+assert.notEqual(performanceGroup(result), performanceGroup({ ...result, surface: "Track" }));
+assert.notEqual(performanceGroup(result), performanceGroup({ ...result, sport: "Cycling" }));
+assert.notEqual(performanceGroup(result), performanceGroup({ ...result, finishTimeSeconds: 2704 }));
+assert.equal(
+  findPersonalBests([
+    result,
+    { ...result, resultId: 4, editionId: 2, finishTimeSeconds: 2690, chipTimeSeconds: 2690 },
+  ])[0].resultId,
+  4,
+);
+
+assert.deepEqual(
+  sourceIdentityFromUrl("https://worldathletics.org/athletes/ireland/example-name-12345"),
+  { provider: "worldathletics", externalId: "12345" },
+);
+assert.deepEqual(
+  sourceIdentityFromUrl("https://thepowerof10.info/athletes/profile.aspx?athleteid=987"),
+  { provider: "powerof10", externalId: "987" },
+);
+assert.equal(
+  sourceIdentityFromUrl(
+    "https://worldathletics.org.attacker.example/athletes/ireland/example-12345",
+  ),
+  null,
+);
+assert.equal(sourceIdentityFromUrl("javascript:alert(1)"), null);
+assert.equal(
+  validateProfileConnection({
+    platform: "instagram",
+    url: "https://www.instagram.com/runner/?tracking=1",
+    sharePublicly: false,
+  }).url,
+  "https://www.instagram.com/runner/",
+);
+assert.throws(() =>
+  validateProfileConnection({
+    platform: "instagram",
+    url: "https://instagram.com.attacker.example/runner/",
+    sharePublicly: false,
+  }),
+);
+assert.throws(() =>
+  validateProfileConnection({
+    platform: "linkedin",
+    url: "javascript:alert(1)",
+    sharePublicly: true,
+  }),
+);
+
+const db = new PGlite();
+await db.waitReady;
+const migrationNames = (await readdir(new URL("../migrations/", import.meta.url)))
+  .filter((name) => name.endsWith(".sql"))
+  .sort();
+for (const name of migrationNames)
+  await db.exec(await readFile(new URL(`../migrations/${name}`, import.meta.url), "utf8"));
+await db.exec(`
+  insert into "user" ("id", "name", "email", "emailVerified", "createdAt", "updatedAt")
+  values ('profile-a', 'Alex Runner', 'a@example.test', true, now(), now()),
+         ('profile-b', 'Blake Runner', 'b@example.test', true, now(), now());
+  insert into athlete_private_profiles (user_id, verified_email, full_name, privacy_notice_version, privacy_acknowledged_at)
+  values ('profile-a', 'a@example.test', 'Alex Runner', 'test', now());
+  insert into athletes (id, slug, display_name, source_url)
+  values (1, 'alex', 'Alex Runner', 'https://worldathletics.org/athletes/test/alex-12345'),
+         (2, 'duplicate-a', 'Duplicate A', 'https://worldathletics.org/athletes/test/duplicate-99999'),
+         (3, 'duplicate-b', 'Duplicate B', 'https://worldathletics.org/athletes/test/duplicate-99999');
+`);
+const migration = await readFile(
+  new URL("../migrations/0029_unified_athlete_profiles.sql", import.meta.url),
+  "utf8",
+);
+await db.exec(migration);
+const identities = await db.query(
+  "select provider, external_id, athlete_id from athlete_source_identities order by external_id",
+);
+assert.deepEqual(identities.rows, [
+  { provider: "worldathletics", external_id: "12345", athlete_id: 1 },
+]);
+await assert.rejects(
+  db.query(
+    "insert into athlete_source_identities (provider, external_id, athlete_id) values ('worldathletics','12345',2)",
+  ),
+  /duplicate|unique/i,
+);
+const before = (
+  await db.query(
+    "select athlete_profile_id from athlete_private_profiles where user_id='profile-a'",
+  )
+).rows[0].athlete_profile_id;
+await db.exec(
+  "update athlete_private_profiles set full_name='Alex Previous' where user_id='profile-a'",
+);
+assert.equal(
+  (
+    await db.query(
+      "select athlete_profile_id from athlete_private_profiles where user_id='profile-a'",
+    )
+  ).rows[0].athlete_profile_id,
+  before,
+);
+await db.exec(`
+  insert into athlete_profile_connections (user_id, platform, url) values ('profile-a','instagram','https://www.instagram.com/example/');
+  insert into athlete_match_dismissals (user_id, athlete_id) values ('profile-a', 1);
+`);
+assert.equal(
+  (await db.query("select * from athlete_profile_connections where share_publicly=true")).rows
+    .length,
+  0,
+);
+assert.equal(
+  (await db.query("select * from athlete_profile_connections where user_id='profile-b'")).rows
+    .length,
+  0,
+);
+assert.equal(
+  (await db.query("select * from athlete_match_dismissals where user_id='profile-b'")).rows.length,
+  0,
+);
+await db.exec("delete from athlete_match_dismissals where user_id='profile-a' and athlete_id=1");
+assert.equal(
+  (await db.query("select * from athletes where id=1")).rows.length,
+  1,
+  "Dismissal changes cannot delete athlete records",
+);
+await db.close();
+console.log(
+  "Unified profiles verified: complete fresh migrations, stable IDs, unique source mappings, private connections and dismissals, safe duplicates and comparable PBs.",
+);

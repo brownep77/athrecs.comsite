@@ -1,3 +1,4 @@
+import { ProfileEventLink } from "@/components/athletes/ProfileEventLink";
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -28,7 +29,7 @@ import {
   type ResultClaimStatus,
 } from "@/lib/athrecs/result-claims-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
-import { sportIsInPublicSiteScope } from "@/lib/site-scope";
+import { sportIsInAthleteProfileScope } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/claim-results")({
   validateSearch: (search: Record<string, unknown>) => {
@@ -96,7 +97,7 @@ function ClaimResultsPage() {
   });
 
   const siteClaims = (myClaims.data ?? []).filter((claim) =>
-    sportIsInPublicSiteScope(claim.sport),
+    sportIsInAthleteProfileScope(claim.sport),
   );
   const currentClaim = siteClaims.find((claim) => claim.resultId === resultId);
   const hasPrivateProfile = siteClaims.some((claim) => claim.status === "approved");
@@ -200,7 +201,10 @@ function ClaimResultsPage() {
                   <Link to="/athlete-account">My Athlete Account</Link>
                 </Button>
               ) : sessionPending ? (
-                <Loader2 className="size-5 animate-spin text-cyan-300" aria-label="Checking account" />
+                <Loader2
+                  className="size-5 animate-spin text-cyan-300"
+                  aria-label="Checking account"
+                />
               ) : (
                 <Button type="button" variant="secondary" onClick={startSignIn}>
                   <LogIn className="size-4" aria-hidden="true" />
@@ -254,7 +258,7 @@ function ClaimResultsPage() {
         </section>
       ) : result.isLoading ? (
         <LoadingCard label="Loading your matched result…" />
-      ) : result.isError || !result.data || !sportIsInPublicSiteScope(result.data.sport) ? (
+      ) : result.isError || !result.data || !sportIsInAthleteProfileScope(result.data.sport) ? (
         <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
           <h2 className="font-semibold">This match is no longer available</h2>
           <p className="mt-1">
@@ -283,7 +287,9 @@ function ClaimResultsPage() {
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Badge variant="accent">{result.data.distanceCode}</Badge>
-                  {result.data.category ? <Badge variant="outline">{result.data.category}</Badge> : null}
+                  {result.data.category ? (
+                    <Badge variant="outline">{result.data.category}</Badge>
+                  ) : null}
                   {result.data.bib ? <Badge variant="outline">Bib {result.data.bib}</Badge> : null}
                 </div>
               </div>
@@ -298,13 +304,12 @@ function ClaimResultsPage() {
                 </p>
               </div>
             </div>
-            <Link
-              to="/races/$slug"
-              params={{ slug: result.data.eventSlug }}
+            <ProfileEventLink
+              result={result.data}
               className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-accent no-underline hover:underline"
             >
               View event page <ArrowRight className="ml-1 size-4" aria-hidden="true" />
-            </Link>
+            </ProfileEventLink>
           </div>
 
           <div className="space-y-4 p-5 md:p-7">
@@ -406,21 +411,9 @@ function ClaimResultsPage() {
                     </span>
                   </summary>
                   <div className="grid gap-3 border-t border-border p-4 md:grid-cols-3">
-                    <EvidenceLinkField
-                      number={1}
-                      value={evidenceUrl}
-                      onChange={setEvidenceUrl}
-                    />
-                    <EvidenceLinkField
-                      number={2}
-                      value={evidenceUrl2}
-                      onChange={setEvidenceUrl2}
-                    />
-                    <EvidenceLinkField
-                      number={3}
-                      value={evidenceUrl3}
-                      onChange={setEvidenceUrl3}
-                    />
+                    <EvidenceLinkField number={1} value={evidenceUrl} onChange={setEvidenceUrl} />
+                    <EvidenceLinkField number={2} value={evidenceUrl2} onChange={setEvidenceUrl2} />
+                    <EvidenceLinkField number={3} value={evidenceUrl3} onChange={setEvidenceUrl3} />
                   </div>
                 </details>
 

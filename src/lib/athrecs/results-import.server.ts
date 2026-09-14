@@ -1,6 +1,7 @@
 import { createHash, randomUUID } from "node:crypto";
 import { getSql } from "@/lib/db";
 import { slugify } from "./import.server";
+import { sourceIdentityFromUrl, type SourceIdentity } from "./profile-connections";
 
 export type ResultAcquisitionMethod = "scan" | "upload" | "api" | "manual";
 
@@ -22,6 +23,9 @@ export type ImportResultRow = {
   place?: number;
   bib?: string;
   athleteSlug?: string;
+  athleteSourceUrl?: string;
+  athleteSourceProvider?: SourceIdentity["provider"];
+  athleteSourceId?: string;
   givenName?: string;
   familyName?: string;
   displayName?: string;
@@ -149,6 +153,10 @@ export function parseResultsCsv(csv: string): ResultsImportBundle {
       place: csvNumber(value(cells, "place", "overall_place", "position"), "place", rowNumber),
       bib: value(cells, "bib", "bib_number") || undefined,
       athleteSlug: value(cells, "athlete_slug") || undefined,
+      athleteSourceUrl: value(cells, "athlete_source_url") || undefined,
+      athleteSourceProvider: (value(cells, "athlete_source_provider") || undefined) as
+        SourceIdentity["provider"] | undefined,
+      athleteSourceId: value(cells, "athlete_source_id") || undefined,
       givenName: value(cells, "given_name", "first_name", "firstname") || undefined,
       familyName: value(cells, "family_name", "last_name", "surname", "lastname") || undefined,
       displayName: value(cells, "display_name") || undefined,
@@ -208,12 +216,54 @@ function resolveDisplayName(row: ImportResultRow): string {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   }
-  throw new Error("Result row needs displayName, athleteName, givenName/familyName, or athleteSlug");
+  throw new Error(
+    "Result row needs displayName, athleteName, givenName/familyName, or athleteSlug",
+  );
 }
 
 function resolveAthleteSlug(row: ImportResultRow, displayName: string): string {
   if (row.athleteSlug?.trim()) return slugify(row.athleteSlug);
-  return slugify(displayName);
+  const source = resultAthleteSource(row);
+  if (source) return `${slugify(displayName)}-${source.provider}-${slugify(source.externalId)}`;
+  // A name alone cannot identify a person across races. Keep unmatched race
+  // entries separate until the athlete confirms them through the claim flow.
+  const key = [
+    row.eventSlug,
+    row.date,
+    row.distance,
+    row.bib || row.place || "",
+    displayName.toLowerCase(),
+    row.clubSlug || row.clubName || "",
+  ].join("|");
+  return `${slugify(displayName)}-${createHash("sha256").update(key).digest("hex").slice(0, 16)}`;
+}
+
+function resultAthleteSource(row: ImportResultRow): SourceIdentity | null {
+  if (row.athleteSourceProvider || row.athleteSourceId) {
+    if (
+      !["worldathletics", "powerof10", "parkrun", "athleticsurn"].includes(
+        row.athleteSourceProvider ?? "",
+      ) ||
+      !row.athleteSourceId?.trim()
+    )
+      throw new Error("A supported athlete source provider and identifier are required together");
+    const externalId = row.athleteSourceId
+      .trim()
+      .toLowerCase()
+      .replace(row.athleteSourceProvider === "parkrun" ? /^a/ : /^$/, "");
+    if (row.athleteSourceProvider !== "athleticsurn" && !/^\d+$/.test(externalId))
+      throw new Error("Athlete source identifier must be numeric");
+    const fromUrl = sourceIdentityFromUrl(row.athleteSourceUrl);
+    if (
+      fromUrl &&
+      (fromUrl.provider !== row.athleteSourceProvider || fromUrl.externalId !== externalId)
+    )
+      throw new Error("Athlete source URL and identifier conflict; review before importing");
+    return { provider: row.athleteSourceProvider!, externalId };
+  }
+  const fromUrl = sourceIdentityFromUrl(row.athleteSourceUrl);
+  if (row.athleteSourceUrl && !fromUrl) throw new Error("Unrecognised athlete source profile URL");
+  return fromUrl;
 }
 
 function resolveClubSlug(row: ImportResultRow): string {
@@ -274,7 +324,9 @@ export async function applyResultsImport(
   const sql = await getSql();
   const rows = Array.isArray(bundle.results) ? bundle.results : [];
   const suppliedMetadata = Object.fromEntries(
-    Object.entries(options.metadata ?? {}).filter(([, value]) => value !== undefined && value !== ""),
+    Object.entries(options.metadata ?? {}).filter(
+      ([, value]) => value !== undefined && value !== "",
+    ),
   ) as ResultIngestionMetadata;
   const metadata = { ...(bundle.ingestion ?? {}), ...suppliedMetadata };
   const sport = shortText(metadata.sport || rows[0]?.sport || "Running", 80) || "Running";
@@ -328,27 +380,38 @@ export async function applyResultsImport(
     const existingEvents = await sql<EventLookup>`select id, slug, name, sport from events`;
     for (const event of existingEvents) eventBySlug.set(event.slug, event);
 
-  for (let index = 0; index < rows.length; index += 1) {
-    const raw = rows[index];
-    let coverageRow: Coverage | undefined;
-    try {
-      if (!raw.eventSlug?.trim()) throw new Error("eventSlug required");
-      if (!/^\d{4}-\d{2}-\d{2}$/.test(raw.date || "")) {
-        throw new Error(`Bad date "${raw.date}"`);
-      }
-      if (!raw.distance?.trim()) throw new Error("distance required");
+    for (let index = 0; index < rows.length; index += 1) {
+      const raw = rows[index];
+      let coverageRow: Coverage | undefined;
+      try {
+        if (!raw.eventSlug?.trim()) throw new Error("eventSlug required");
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(raw.date || "")) {
+          throw new Error(`Bad date "${raw.date}"`);
+        }
+        if (!raw.distance?.trim()) throw new Error("distance required");
 
-      const displayName = resolveDisplayName(raw);
-      const athleteSlug = resolveAthleteSlug(raw, displayName);
-      const clubSlug = resolveClubSlug(raw);
-      const gender = raw.gender?.toString().trim().toUpperCase().slice(0, 1) || "U";
-      const finishSecs =
-        raw.finishTimeSeconds ?? raw.chipTimeSeconds ?? timeToSeconds(raw.time) ?? 0;
+        const displayName = resolveDisplayName(raw);
+        const athleteSlug = resolveAthleteSlug(raw, displayName);
+        const clubSlug = resolveClubSlug(raw);
+        const gender = raw.gender?.toString().trim().toUpperCase().slice(0, 1) || "U";
+        const finishSecs =
+          raw.finishTimeSeconds ??
+          raw.chipTimeSeconds ??
+          raw.gunTimeSeconds ??
+          timeToSeconds(raw.time) ??
+          0;
+        if (
+          !Number.isFinite(finishSecs) ||
+          finishSecs < 0 ||
+          ((raw.status ?? "finished").toLowerCase() === "finished" && finishSecs <= 0)
+        ) {
+          throw new Error("A finished result needs a positive finish time");
+        }
 
-      let clubId = clubIdBySlug.get(clubSlug);
-      if (clubId == null) {
-        const clubName = (raw.clubName || "Unattached").trim() || "Unattached";
-        const inserted = await sql<{ id: number }>`
+        let clubId = clubIdBySlug.get(clubSlug);
+        if (clubId == null) {
+          const clubName = (raw.clubName || "Unattached").trim() || "Unattached";
+          const inserted = await sql<{ id: number }>`
           insert into clubs (slug, name, city, county, country, sports, summary, source_names)
           values (
             ${clubSlug}, ${clubName}, ${raw.city ?? ""}, ${raw.county ?? ""},
@@ -357,16 +420,16 @@ export async function applyResultsImport(
           on conflict (slug) do update set name = excluded.name
           returning id
         `;
-        clubId = inserted[0].id;
-        clubIdBySlug.set(clubSlug, clubId);
-        clubsUpserted += 1;
-      }
+          clubId = inserted[0].id;
+          clubIdBySlug.set(clubSlug, clubId);
+          clubsUpserted += 1;
+        }
 
-      let event = eventBySlug.get(raw.eventSlug);
-      if (!event) {
-        const name = eventTitle(raw);
-        const eventSport = shortText(raw.sport || sport, 80) || "Running";
-        const inserted = await sql<EventLookup>`
+        let event = eventBySlug.get(raw.eventSlug);
+        if (!event) {
+          const name = eventTitle(raw);
+          const eventSport = shortText(raw.sport || sport, 80) || "Running";
+          const inserted = await sql<EventLookup>`
           insert into events (
             slug, name, sport, country, county, city, area, surface,
             summary, description, organiser, website, featured
@@ -377,29 +440,29 @@ export async function applyResultsImport(
           on conflict (slug) do update set name = excluded.name
           returning id, slug, name, sport
         `;
-        event = inserted[0];
-        eventBySlug.set(raw.eventSlug, event);
-      }
-      await sql`
+          event = inserted[0];
+          eventBySlug.set(raw.eventSlug, event);
+        }
+        await sql`
         insert into event_distances (event_id, distance_code)
         values (${event.id}, ${raw.distance})
         on conflict do nothing
       `;
 
-      const editionKey = `${raw.eventSlug}|${raw.date}|${raw.distance}`;
-      let editionId = editionIdByKey.get(editionKey);
-      if (editionId == null) {
-        const existing = await sql<{ id: number }>`
+        const editionKey = `${raw.eventSlug}|${raw.date}|${raw.distance}`;
+        let editionId = editionIdByKey.get(editionKey);
+        if (editionId == null) {
+          const existing = await sql<{ id: number }>`
           select id from editions
           where event_id = ${event.id}
             and event_date = ${raw.date}::date
             and distance_code = ${raw.distance}
           limit 1
         `;
-        if (existing[0]) {
-          editionId = existing[0].id;
-        } else {
-          const inserted = await sql<{ id: number }>`
+          if (existing[0]) {
+            editionId = existing[0].id;
+          } else {
+            const inserted = await sql<{ id: number }>`
             insert into editions (
               event_id, event_date, distance_code, distance_km, status, source_url
             ) values (
@@ -410,46 +473,61 @@ export async function applyResultsImport(
             do update set status = excluded.status
             returning id
           `;
-          editionId = inserted[0].id;
-          editionsEnsured += 1;
+            editionId = inserted[0].id;
+            editionsEnsured += 1;
+          }
+          editionIdByKey.set(editionKey, editionId);
         }
-        editionIdByKey.set(editionKey, editionId);
-      }
 
-      coverageRow = coverage.get(editionKey);
-      if (!coverageRow) {
-        coverageRow = {
-          eventId: event.id,
-          editionId,
-          sport: event.sport,
-          eventName: event.name,
-          eventSlug: event.slug,
-          eventDate: raw.date,
-          distanceCode: raw.distance,
-          sourceUrl: httpsUrl(raw.source) ?? sourceUrl,
-          detected: 0,
-          imported: 0,
-          updated: 0,
-          skipped: 0,
-          errors: [],
-        };
-        coverage.set(editionKey, coverageRow);
-      }
-      coverageRow.detected += 1;
+        coverageRow = coverage.get(editionKey);
+        if (!coverageRow) {
+          coverageRow = {
+            eventId: event.id,
+            editionId,
+            sport: event.sport,
+            eventName: event.name,
+            eventSlug: event.slug,
+            eventDate: raw.date,
+            distanceCode: raw.distance,
+            sourceUrl: httpsUrl(raw.source) ?? sourceUrl,
+            detected: 0,
+            imported: 0,
+            updated: 0,
+            skipped: 0,
+            errors: [],
+          };
+          coverage.set(editionKey, coverageRow);
+        }
+        coverageRow.detected += 1;
 
-      let athlete = athleteBySlug.get(athleteSlug);
-      if (!athlete) {
-        const existing = await sql<{ id: number; profile_type: string }>`
+        const sourceIdentity = resultAthleteSource(raw);
+        const mapped = sourceIdentity
+          ? await sql<{ id: number; profile_type: string; slug: string }>`
+        select athlete.id, athlete.profile_type, athlete.slug
+        from athlete_source_identities identity
+        join athletes athlete on athlete.id = identity.athlete_id
+        where identity.provider = ${sourceIdentity.provider} and identity.external_id = ${sourceIdentity.externalId}
+      `
+          : [];
+        if (mapped[0] && raw.athleteSlug && mapped[0].slug !== athleteSlug)
+          throw new Error(
+            "Source athlete identifier conflicts with supplied athleteSlug; review required",
+          );
+        let athlete = mapped[0]
+          ? { id: mapped[0].id, profileType: mapped[0].profile_type }
+          : athleteBySlug.get(athleteSlug);
+        if (!athlete) {
+          const existing = await sql<{ id: number; profile_type: string }>`
           select id, profile_type from athletes where slug = ${athleteSlug} limit 1
         `;
-        if (existing[0]) {
-          athlete = { id: existing[0].id, profileType: existing[0].profile_type };
-        } else {
-          const given = raw.givenName?.trim() || displayName.split(/\s+/)[0] || null;
-          const family =
-            raw.familyName?.trim() ||
-            (displayName.includes(" ") ? displayName.split(/\s+/).slice(1).join(" ") : null);
-          const inserted = await sql<{ id: number; profile_type: string }>`
+          if (existing[0]) {
+            athlete = { id: existing[0].id, profileType: existing[0].profile_type };
+          } else {
+            const given = raw.givenName?.trim() || displayName.split(/\s+/)[0] || null;
+            const family =
+              raw.familyName?.trim() ||
+              (displayName.includes(" ") ? displayName.split(/\s+/).slice(1).join(" ") : null);
+            const inserted = await sql<{ id: number; profile_type: string }>`
             insert into athletes (
               slug, display_name, given_name, family_name, gender, club_id,
               source_club_name, city, county, country, bio, profile_visibility
@@ -461,24 +539,64 @@ export async function applyResultsImport(
             on conflict (slug) do update set display_name = excluded.display_name
             returning id, profile_type
           `;
-          athlete = { id: inserted[0].id, profileType: inserted[0].profile_type };
-          athletesUpserted += 1;
-          await sql`
+            athlete = { id: inserted[0].id, profileType: inserted[0].profile_type };
+            athletesUpserted += 1;
+            await sql`
             insert into athlete_clubs (athlete_id, club_id, relationship, source_name)
             values (${athlete.id}, ${clubId}, 'primary', ${raw.clubName ?? null})
             on conflict (athlete_id, club_id, relationship) do nothing
           `;
+          }
+          athleteBySlug.set(athleteSlug, athlete);
         }
-        athleteBySlug.set(athleteSlug, athlete);
-      }
 
-      const existingResult = await sql<{ id: number }>`
-        select id from results
+        if (sourceIdentity) {
+          const mapping = await sql<{ athlete_id: number }>`
+          insert into athlete_source_identities (provider, external_id, athlete_id, source_url)
+          values (${sourceIdentity.provider}, ${sourceIdentity.externalId}, ${athlete.id}, ${httpsUrl(raw.athleteSourceUrl)})
+          on conflict (provider, external_id) do update set source_url = athlete_source_identities.source_url
+          returning athlete_id
+        `;
+          if (mapping[0].athlete_id !== athlete.id)
+            throw new Error("Concurrent source identity conflict; result held for review");
+        }
+        const existingResult = await sql<{
+          id: number;
+          source_url: string | null;
+          finish_time_seconds: number | null;
+          chip_time_seconds: number | null;
+          gun_time_seconds: number | null;
+        }>`
+        select id, source_url, finish_time_seconds, chip_time_seconds, gun_time_seconds from results
         where edition_id = ${editionId} and athlete_id = ${athlete.id}
         limit 1
       `;
-      const visibility = athlete.profileType === "Public figure" ? "public_figure" : "private";
-      await sql`
+        const previous = existingResult[0];
+        const incomingSource = httpsUrl(raw.source) ?? sourceUrl;
+        if (
+          previous &&
+          previous.finish_time_seconds != null &&
+          finishSecs > 0 &&
+          (previous.finish_time_seconds !== finishSecs ||
+            (previous.chip_time_seconds != null &&
+              raw.chipTimeSeconds != null &&
+              previous.chip_time_seconds !== raw.chipTimeSeconds) ||
+            (previous.gun_time_seconds != null &&
+              raw.gunTimeSeconds != null &&
+              previous.gun_time_seconds !== raw.gunTimeSeconds)) &&
+          (!incomingSource || !previous.source_url || previous.source_url !== incomingSource)
+        ) {
+          throw new Error(
+            `Conflicting time for existing result ${previous.id}; existing record retained. Review source ${incomingSource ?? sourceName}`,
+          );
+        }
+        if (previous?.source_url?.startsWith("https://"))
+          await sql`
+        insert into result_source_references (result_id, source_url, source_name)
+        values (${previous.id}, ${previous.source_url}, '') on conflict do nothing
+      `;
+        const visibility = athlete.profileType === "Public figure" ? "public_figure" : "private";
+        const savedResults = await sql<{ id: number }>`
         insert into results (
           edition_id, athlete_id, status, finish_time_seconds, chip_time_seconds,
           gun_time_seconds, bib, overall_place, gender_place, category,
@@ -488,49 +606,65 @@ export async function applyResultsImport(
           ${raw.chipTimeSeconds ?? null}, ${raw.gunTimeSeconds ?? null}, ${raw.bib ?? null},
           ${raw.place ?? null}, ${raw.genderPlace ?? null}, ${raw.category ?? null},
           ${raw.categoryPlace ?? null}, ${raw.resultSource ?? "import"},
-          ${raw.source ?? sourceUrl}, ${visibility}, ${runId}
+          ${incomingSource}, ${visibility}, ${runId}
         )
         on conflict (edition_id, athlete_id) do update set
           status = excluded.status,
           finish_time_seconds = excluded.finish_time_seconds,
-          chip_time_seconds = excluded.chip_time_seconds,
-          gun_time_seconds = excluded.gun_time_seconds,
+            chip_time_seconds = coalesce(excluded.chip_time_seconds, results.chip_time_seconds),
+            gun_time_seconds = coalesce(excluded.gun_time_seconds, results.gun_time_seconds),
           overall_place = excluded.overall_place,
           gender_place = excluded.gender_place,
           category = excluded.category,
           category_place = excluded.category_place,
           bib = excluded.bib,
           result_source = excluded.result_source,
-          source_url = excluded.source_url,
+          source_url = coalesce(excluded.source_url, results.source_url),
           result_visibility = case
             when excluded.result_visibility = 'public_figure' then 'public_figure'
             else results.result_visibility
           end,
-          ingestion_run_id = excluded.ingestion_run_id
+            ingestion_run_id = excluded.ingestion_run_id
+          where (
+            results.finish_time_seconds is not distinct from excluded.finish_time_seconds
+            and (results.chip_time_seconds is null or excluded.chip_time_seconds is null
+              or results.chip_time_seconds = excluded.chip_time_seconds)
+            and (results.gun_time_seconds is null or excluded.gun_time_seconds is null
+              or results.gun_time_seconds = excluded.gun_time_seconds)
+          ) or (results.source_url is not null and results.source_url = excluded.source_url)
+          returning id
+        `;
+        if (!savedResults.length) {
+          throw new Error("Concurrent conflicting time; existing record retained for review");
+        }
+        if (incomingSource)
+          await sql`
+        insert into result_source_references (result_id, source_url, source_name)
+        values (${savedResults[0].id}, ${incomingSource}, ${sourceName}) on conflict do nothing
       `;
-      resultsUpserted += 1;
-      if (existingResult[0]) {
-        resultsUpdated += 1;
-        coverageRow.updated += 1;
-      } else {
-        resultsInserted += 1;
-        coverageRow.imported += 1;
-      }
-    } catch (error) {
-      skipped += 1;
-      const message = `row ${index + 1}: ${error instanceof Error ? error.message : String(error)}`;
-      errors.push(message);
-      if (coverageRow) {
-        coverageRow.skipped += 1;
-        coverageRow.errors.push(message);
+        resultsUpserted += 1;
+        if (existingResult[0]) {
+          resultsUpdated += 1;
+          coverageRow.updated += 1;
+        } else {
+          resultsInserted += 1;
+          coverageRow.imported += 1;
+        }
+      } catch (error) {
+        skipped += 1;
+        const message = `row ${index + 1}: ${error instanceof Error ? error.message : String(error)}`;
+        errors.push(message);
+        if (coverageRow) {
+          coverageRow.skipped += 1;
+          coverageRow.errors.push(message);
+        }
       }
     }
-  }
 
-  for (const item of coverage.values()) {
-    const successful = item.imported + item.updated;
-    const status = item.skipped === 0 ? "complete" : successful > 0 ? "partial" : "failed";
-    await sql`
+    for (const item of coverage.values()) {
+      const successful = item.imported + item.updated;
+      const status = item.skipped === 0 ? "complete" : successful > 0 ? "partial" : "failed";
+      await sql`
       insert into result_ingestion_editions (
         ingestion_run_id, event_id, edition_id, sport, event_name, event_slug,
         event_date, distance_code, source_url, status, rows_detected,
@@ -553,15 +687,11 @@ export async function applyResultsImport(
         finished_at = now(),
         updated_at = now()
     `;
-  }
+    }
 
-  const status =
-    errors.length === 0
-      ? "completed"
-      : resultsUpserted > 0
-        ? "completed_with_errors"
-        : "failed";
-  await sql`
+    const status =
+      errors.length === 0 ? "completed" : resultsUpserted > 0 ? "completed_with_errors" : "failed";
+    await sql`
     update result_ingestion_runs set
       status = ${status},
       rows_imported = ${resultsInserted},

@@ -115,7 +115,7 @@ function trustedWorkflowForClaims(rawClaims: Record<string, unknown>) {
   if (!trusted) throw new Error("GitHub Actions OIDC workflow and audience are not trusted");
 
   const deployedSiteBrand =
-    import.meta.env.VITE_SITE_BRAND?.trim().toLowerCase() === "runrecs"
+    import.meta.env?.VITE_SITE_BRAND?.trim().toLowerCase() === "runrecs"
       ? "runrecs"
       : "athrecs";
   if (trusted.siteBrand !== deployedSiteBrand) {

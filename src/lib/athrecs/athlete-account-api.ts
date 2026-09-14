@@ -3,6 +3,7 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { getSql, dbSource } from "@/lib/db";
 import { ensureAthrecsSeeded, ensureDevPreviewAthleteAccount } from "./seed.server";
+import type { ProfileResult } from "./profile-records";
 
 export const ATHLETE_PRIVACY_VERSION = "athlete-account-2026-08-23";
 
@@ -80,6 +81,7 @@ export type AthleteAccountConsents = {
 export type AthleteAccountData = {
   exists: boolean;
   userId: string;
+  athleteProfileId: string;
   verifiedEmail: string;
   emailVerified: boolean;
   authName: string;
@@ -112,18 +114,7 @@ export type AthleteAccountData = {
   preferences: AthleteProductPreferences;
   consents: AthleteAccountConsents;
   claimedProfiles: Array<{ athleteId: number; athleteName: string; athleteSlug: string }>;
-  claimedResults: Array<{
-    resultId: number;
-    athleteName: string;
-    eventName: string;
-    eventSlug: string;
-    sport: string;
-    eventDate: string;
-    distanceCode: string;
-    finishTimeSeconds: number | null;
-    overallPlace: number | null;
-    category: string | null;
-  }>;
+  claimedResults: ProfileResult[];
   claimCount: number;
 };
 
@@ -162,6 +153,7 @@ type UserRow = {
 };
 
 type ProfileRow = {
+  athlete_profile_id: string;
   full_name: string;
   display_name: string | null;
   date_of_birth: string | null;
@@ -542,8 +534,9 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     claimedResults,
     claimCounts,
   ] = await Promise.all([
-      sql<ProfileRow>`
+    sql<ProfileRow>`
         select
+          athlete_profile_id::text as athlete_profile_id,
           full_name, display_name, date_of_birth::text as date_of_birth,
           country, region, city, postcode, nationality, club_or_team,
           preferred_language, previous_names, parkrun_id, athletics_urn,
@@ -556,30 +549,30 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         where user_id = ${userId}
         limit 1
       `,
-      sql<ProfilePhotoRow>`
+    sql<ProfilePhotoRow>`
         select updated_at::text as updated_at
         from athlete_profile_photos
         where user_id = ${userId}
         limit 1
       `,
-      sql<SportRow>`
+    sql<SportRow>`
         select *
         from athlete_sport_profiles
         where user_id = ${userId}
         order by is_primary desc, sport_code
       `,
-      sql<PreferencesRow>`
+    sql<PreferencesRow>`
         select *
         from athlete_product_preferences
         where user_id = ${userId}
         limit 1
       `,
-      sql<{ purpose: string; status: string }>`
+    sql<{ purpose: string; status: string }>`
         select purpose, status
         from athlete_account_consents
         where user_id = ${userId}
       `,
-      sql<{ athlete_id: number; athlete_name: string; athlete_slug: string }>`
+    sql<{ athlete_id: number; athlete_name: string; athlete_slug: string }>`
         select
           athlete.id as athlete_id,
           athlete.display_name as athlete_name,
@@ -589,20 +582,40 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         where account_link.user_id = ${userId} and account_link.status = 'active'
         order by athlete.display_name
       `,
-      sql<{
-        result_id: number;
-        athlete_name: string;
-        event_name: string;
-        event_slug: string;
-        event_sport: string;
-        event_date: string;
-        distance_code: string;
-        finish_time_seconds: number | null;
-        overall_place: number | null;
-        category: string | null;
-      }>`
+    sql<{
+      result_id: number;
+      edition_id: number;
+      surface: string;
+      event_country: string;
+      distance_km: number;
+      result_status: string;
+      chip_time_seconds: number | null;
+      gun_time_seconds: number | null;
+      source_urls: string[];
+      athlete_name: string;
+      event_name: string;
+      event_slug: string;
+      event_sport: string;
+      event_date: string;
+      distance_code: string;
+      finish_time_seconds: number | null;
+      overall_place: number | null;
+      category: string | null;
+    }>`
         select
           result.id as result_id,
+          edition.id as edition_id,
+          event.surface,
+          event.country as event_country,
+          edition.distance_km,
+          result.status as result_status,
+          result.chip_time_seconds,
+          result.gun_time_seconds,
+          array(select distinct link from (
+            select result.source_url as link
+            union all select edition.results_official_url
+            union all select reference.source_url from result_source_references reference where reference.result_id = result.id
+          ) sources where link like 'https://%') as source_urls,
           athlete.display_name as athlete_name,
           event.name as event_name,
           event.slug as event_slug,
@@ -620,14 +633,13 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         where account_link.user_id = ${userId}
           and account_link.status = 'active'
         order by edition.event_date desc, event.name, result.id desc
-        limit 500
       `,
-      sql<{ claim_count: number }>`
+    sql<{ claim_count: number }>`
         select count(*)::int as claim_count
         from result_claims
         where claimant_user_id = ${userId}
       `,
-    ]);
+  ]);
   const profile = profiles[0];
   const photo = photos[0];
   // Upload is always available: private Blob is preferred, with an
@@ -636,6 +648,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
   return {
     exists: Boolean(profile),
     userId,
+    athleteProfileId: profile?.athlete_profile_id ?? "",
     verifiedEmail: user.email,
     emailVerified: user.email_verified,
     authName: user.name ?? "",
@@ -676,6 +689,14 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     })),
     claimedResults: claimedResults.map((row) => ({
       resultId: row.result_id,
+      editionId: row.edition_id,
+      surface: row.surface,
+      country: row.event_country,
+      distanceKm: Number(row.distance_km),
+      status: row.result_status,
+      chipTimeSeconds: row.chip_time_seconds,
+      gunTimeSeconds: row.gun_time_seconds,
+      sourceUrls: row.source_urls ?? [],
       athleteName: row.athlete_name,
       eventName: row.event_name,
       eventSlug: row.event_slug,
@@ -976,6 +997,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
         >`
           select
             profile.user_id,
+            profile.athlete_profile_id::text as athlete_profile_id,
             profile.full_name,
             profile.display_name,
             profile.date_of_birth::text as date_of_birth,
@@ -1045,6 +1067,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
       const account: AthleteAccountData = {
         exists: true,
         userId: profile.user_id,
+        athleteProfileId: profile.athlete_profile_id,
         verifiedEmail: profile.auth_email,
         emailVerified: profile.email_verified,
         authName: profile.auth_name ?? "",

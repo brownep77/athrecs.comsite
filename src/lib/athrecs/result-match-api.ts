@@ -8,13 +8,10 @@ import {
   type PotentialResultMatchConfidence,
 } from "./result-match";
 import { ensureAthrecsSeeded } from "./seed.server";
+import { sourceIdentityFromUrl } from "./profile-connections";
 
 export type PotentialResultClaimStatus =
-  | "pending"
-  | "needs_info"
-  | "approved"
-  | "rejected"
-  | "withdrawn";
+  "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
 
 export type PotentialResultMatch = {
   resultId: number;
@@ -58,6 +55,10 @@ type IdentityRow = {
   region: string | null;
   country: string | null;
   club_or_team: string | null;
+  power_of_10_url: string | null;
+  world_athletics_url: string | null;
+  parkrun_id: string | null;
+  athletics_urn: string | null;
 };
 
 type CandidateRow = {
@@ -80,6 +81,7 @@ type CandidateRow = {
   category: string | null;
   claim_status: PotentialResultClaimStatus | null;
   owner_user_id: string | null;
+  source_identifier_matches: boolean;
 };
 
 const MAX_CANDIDATE_ROWS = 1000;
@@ -101,6 +103,10 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           profile.full_name,
           profile.display_name,
           profile.previous_names,
+          profile.power_of_10_url,
+          profile.world_athletics_url,
+          profile.parkrun_id,
+          profile.athletics_urn,
           profile.city,
           profile.region,
           profile.country,
@@ -132,7 +138,18 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
       ...linkedNames.map((row) => row.athlete_name),
     ]);
     const { normalizedPatterns, rawPatterns } = buildPotentialMatchSearchPatterns(searchedNames);
-    if (!searchedNames.length || (!normalizedPatterns.length && !rawPatterns.length)) {
+    const sourceKeys = [identity.power_of_10_url, identity.world_athletics_url]
+      .map(sourceIdentityFromUrl)
+      .filter((value) => value !== null)
+      .map((value) => `${value.provider}:${value.externalId}`);
+    if (identity.parkrun_id && /^A?\d+$/i.test(identity.parkrun_id.trim()))
+      sourceKeys.push(`parkrun:${identity.parkrun_id.trim().replace(/^a/i, "")}`);
+    if (identity.athletics_urn?.trim())
+      sourceKeys.push(`athleticsurn:${identity.athletics_urn.trim().toLowerCase()}`);
+    if (
+      !sourceKeys.length &&
+      (!searchedNames.length || (!normalizedPatterns.length && !rawPatterns.length))
+    ) {
       return { searchedNames, matches: [], totalMatches: 0, truncated: false };
     }
 
@@ -156,7 +173,12 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
         result.bib,
         result.category,
         my_claim.status as claim_status,
-        owner.user_id as owner_user_id
+        owner.user_id as owner_user_id,
+        exists (
+          select 1 from athlete_source_identities source_identity
+          where source_identity.athlete_id = athlete.id
+            and (source_identity.provider || ':' || source_identity.external_id) = any(${sourceKeys}::text[])
+        ) as source_identifier_matches
       from results result
       join athletes athlete on athlete.id = result.athlete_id
       join editions edition on edition.id = result.edition_id
@@ -170,12 +192,21 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
        and owner.status = 'active'
       where result.status = 'finished'
         and coalesce(owner.user_id, '') <> ${context.userId}
+        and not exists (
+          select 1 from athlete_match_dismissals dismissal
+          where dismissal.user_id = ${context.userId} and dismissal.athlete_id = athlete.id
+        )
         and (
           trim(regexp_replace(lower(athlete.display_name), '[^a-z0-9]+', ' ', 'g'))
             like any(${normalizedPatterns}::text[])
           or lower(athlete.display_name) like any(${rawPatterns}::text[])
+          or exists (
+            select 1 from athlete_source_identities source_identity
+            where source_identity.athlete_id = athlete.id
+              and (source_identity.provider || ':' || source_identity.external_id) = any(${sourceKeys}::text[])
+          )
         )
-      order by edition.event_date desc, result.id desc
+      order by source_identifier_matches desc, edition.event_date desc, result.id desc
       limit ${MAX_CANDIDATE_ROWS}
     `;
 
@@ -188,17 +219,19 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
 
     const matches = rows
       .map((row): PotentialResultMatch | null => {
-        const match = scorePotentialResultNameMatch(
-          searchedNames,
-          row.athlete_name,
-          accountContext,
-          {
-            city: row.athlete_city,
-            region: row.athlete_region,
-            country: row.athlete_country,
-            clubName: row.club_name,
-          },
-        );
+        const match = row.source_identifier_matches
+          ? {
+              score: 100,
+              confidence: "strong" as const,
+              matchedName: row.athlete_name,
+              reasons: ["Matches a source athlete identifier saved in your account"],
+            }
+          : scorePotentialResultNameMatch(searchedNames, row.athlete_name, accountContext, {
+              city: row.athlete_city,
+              region: row.athlete_region,
+              country: row.athlete_country,
+              clubName: row.club_name,
+            });
         if (!match) return null;
         return {
           resultId: row.result_id,
@@ -223,9 +256,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           reasons: match.reasons,
           matchedAccountName: match.matchedName,
           claimStatus: row.claim_status,
-          ownedByAnotherAccount: Boolean(
-            row.owner_user_id && row.owner_user_id !== context.userId,
-          ),
+          ownedByAnotherAccount: Boolean(row.owner_user_id && row.owner_user_id !== context.userId),
         };
       })
       .filter((match): match is PotentialResultMatch => Boolean(match))
@@ -241,7 +272,6 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
       searchedNames,
       matches: matches.slice(0, MAX_RETURNED_MATCHES),
       totalMatches: matches.length,
-      truncated:
-        rows.length === MAX_CANDIDATE_ROWS || matches.length > MAX_RETURNED_MATCHES,
+      truncated: rows.length === MAX_CANDIDATE_ROWS || matches.length > MAX_RETURNED_MATCHES,
     };
   });

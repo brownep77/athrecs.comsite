@@ -9,6 +9,7 @@ import {
   notifyResultClaimWithdrawn,
 } from "./result-claim-email.server";
 import { scorePotentialResultNameMatch, uniquePotentialMatchNames } from "./result-match";
+import { sourceIdentityFromUrl } from "./profile-connections";
 import { ensureAthrecsSeeded } from "./seed.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
@@ -232,6 +233,11 @@ async function canAccessClaimCandidate(
       auth_name: string;
       full_name: string | null;
       display_name: string | null;
+      previous_names: string[] | null;
+      power_of_10_url: string | null;
+      world_athletics_url: string | null;
+      parkrun_id: string | null;
+      athletics_urn: string | null;
       city: string | null;
       region: string | null;
       country: string | null;
@@ -241,6 +247,11 @@ async function canAccessClaimCandidate(
         account_user."name" as auth_name,
         profile.full_name,
         profile.display_name,
+        profile.previous_names,
+        profile.power_of_10_url,
+        profile.world_athletics_url,
+        profile.parkrun_id,
+        profile.athletics_urn,
         profile.city,
         profile.region,
         profile.country,
@@ -261,10 +272,31 @@ async function canAccessClaimCandidate(
 
   const identity = identities[0];
   if (!identity) return false;
+  // Use the same source-identity evidence as the suggestion list. A result
+  // still requires an explicit claim, and competing owners still require review.
+  const sourceKeys = [identity.power_of_10_url, identity.world_athletics_url]
+    .map(sourceIdentityFromUrl)
+    .filter((value) => value !== null)
+    .map((value) => `${value.provider}:${value.externalId}`);
+  if (identity.parkrun_id && /^A?\d+$/i.test(identity.parkrun_id.trim()))
+    sourceKeys.push(`parkrun:${identity.parkrun_id.trim().replace(/^a/i, "")}`);
+  if (identity.athletics_urn?.trim())
+    sourceKeys.push(`athleticsurn:${identity.athletics_urn.trim().toLowerCase()}`);
+  if (sourceKeys.length) {
+    const sourceMatches = await sql<{ allowed: boolean }>`
+      select exists (
+        select 1 from athlete_source_identities source_identity
+        where source_identity.athlete_id = ${candidate.athleteId}
+          and (source_identity.provider || ':' || source_identity.external_id) = any(${sourceKeys}::text[])
+      ) as allowed
+    `;
+    if (sourceMatches[0]?.allowed) return true;
+  }
   const names = uniquePotentialMatchNames([
     identity.full_name,
     identity.display_name,
     identity.auth_name,
+    ...(identity.previous_names ?? []),
     ...linkedNames.map((row) => row.athlete_name),
   ]);
   return Boolean(
