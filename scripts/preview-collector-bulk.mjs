@@ -52,7 +52,7 @@ await writeFile(
         <button aria-pressed={fail} onClick={()=>setFail(!fail)}>Fail next request</button>
         <button onClick={()=>setMobile(!mobile)}>Toggle mobile width</button>
       </nav>
-      <p data-testid="database-counts">{data ? JSON.stringify(data.counts) : "Loading"}</p>
+      <p data-testid="database-counts" className="break-all">{data ? JSON.stringify(data.counts) : "Loading"}</p>
       <details><summary>Last request</summary><pre data-testid="last-request" className="whitespace-pre-wrap break-all">{last}</pre></details>
       {data && <CollectorCandidateList key={scan} rows={data.rows.slice(page*2,page*2+2)} onDecide={(id,decision)=>void action({ids:[id],action:decision,confirmed:true})} onBulkAction={action}/>}
     </main>;

@@ -120,13 +120,24 @@ try {
   await page.screenshot({ path: "artifacts/collector-bulk-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await choose("Orchard Spring Run", "keep");
+  await page.screenshot({ path: "artifacts/collector-bulk-mobile.png", fullPage: true });
+  const overflow = await page.evaluate(() =>
+    [...document.querySelectorAll("main *")]
+      .filter((element) => element.getBoundingClientRect().right > window.innerWidth)
+      .map((element) => ({
+        tag: element.tagName,
+        text: element.textContent?.slice(0, 100),
+        right: element.getBoundingClientRect().right,
+      })),
+  );
+  assert.deepEqual(overflow, [], "Mobile content must fit the viewport");
   assert.equal(
     await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
     true,
+    "Mobile page must not scroll horizontally",
   );
   for (const name of ["Keep selected (1)", "Publish selected (1)", "Dismiss selected (0)"])
     assert.equal(await button(name).isVisible(), true);
-  await page.screenshot({ path: "artifacts/collector-bulk-mobile.png", fullPage: true });
   assert.deepEqual(errors, []);
   console.log(
     "Collector bulk browser: cross-page selection, exclusive choices, cancel, keep, dismiss, publish, failure/retry, retained evidence and mobile layout passed against disposable database.",
