@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
-import { CalendarDays, Home, List, Users, UsersRound } from "lucide-react";
+import { CalendarDays, Home, List, Users, UsersRound, UserRound } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
@@ -17,6 +17,13 @@ import { cn } from "@/lib/utils";
 
 const nav = [
   { key: "home", to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
+  {
+    key: "profile",
+    to: "/my-athlete-profile",
+    label: "My profile",
+    icon: UserRound,
+    match: (p: string) => p === "/my-athlete-profile",
+  },
   {
     key: "events",
     to: "/races",
@@ -163,7 +170,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md md:hidden"
         aria-label="Primary"
       >
-        <ul className="mx-auto grid max-w-lg grid-cols-5 px-0.5 pt-1">
+        <ul className="mx-auto grid max-w-lg grid-cols-6 px-0.5 pt-1">
           {nav.map((item) => {
             const active = isActive(item);
             return (
@@ -236,9 +243,9 @@ function BrandLink({
       <BrandLogo priority={desktop} className={desktop ? "h-9" : "h-7 max-w-[160px]"} />
       {desktop ? (
         <span className="hidden border-l border-border pl-3 text-[11px] leading-tight text-subtle lg:block">
-          Athletics
+          Athlete profiles
           <br />
-          Events · Results
+          Every sport
         </span>
       ) : null}
     </>

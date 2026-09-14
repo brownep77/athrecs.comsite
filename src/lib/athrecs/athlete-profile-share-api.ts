@@ -3,11 +3,9 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { buildGeneratedAthleteBio } from "./athlete-bio";
-import {
-  buildShareSlug,
-  isValidShareSlug,
-  sharedProfilePath,
-} from "./athlete-profile-share";
+import { combineProfileResults, type ProfileResult } from "./profile-records";
+import type { ProfileConnection, SocialPlatform } from "./profile-connections";
+import { buildShareSlug, isValidShareSlug, sharedProfilePath } from "./athlete-profile-share";
 
 export type AthleteShareSettings = {
   enabled: boolean;
@@ -30,16 +28,7 @@ export type AthleteShareInput = {
   acknowledged?: boolean;
 };
 
-export type SharedProfileResult = {
-  resultId: number;
-  eventName: string;
-  eventSlug: string;
-  eventDate: string;
-  distanceCode: string;
-  finishTimeSeconds: number | null;
-  overallPlace: number | null;
-  category: string | null;
-};
+export type SharedProfileResult = Omit<ProfileResult, "athleteName">;
 
 export type SharedAthleteProfile = {
   kind: "shared-account";
@@ -51,6 +40,8 @@ export type SharedAthleteProfile = {
   region: string;
   country: string;
   primarySport: string;
+  sports: string[];
+  connections: ProfileConnection[];
   publishedAt: string | null;
   results: SharedProfileResult[];
 };
@@ -98,7 +89,9 @@ function mapSettings(row: ShareRow): AthleteShareSettings {
 
 function validateShareInput(value: AthleteShareInput): AthleteShareInput {
   if (value?.enabled === true && value?.acknowledged !== true) {
-    throw new Error("Confirm that you want to publish a shareable profile before turning sharing on");
+    throw new Error(
+      "Confirm that you want to publish a shareable profile before turning sharing on",
+    );
   }
   return {
     enabled: value?.enabled === true,
@@ -134,7 +127,12 @@ async function loadIdentity(
 }
 
 function displayNameOf(identity: IdentityRow): string {
-  return identity.display_name?.trim() || identity.full_name?.trim() || identity.auth_name?.trim() || "Athlete";
+  return (
+    identity.display_name?.trim() ||
+    identity.full_name?.trim() ||
+    identity.auth_name?.trim() ||
+    "Athlete"
+  );
 }
 
 async function ensureShareRow(
@@ -175,6 +173,16 @@ async function loadVisibleResults(
 ): Promise<SharedProfileResult[]> {
   const rows = await sql<{
     result_id: number;
+    edition_id: number;
+    sport: string;
+    surface: string;
+    country: string;
+    distance_km: number;
+    status: string;
+    chip_time_seconds: number | null;
+    gun_time_seconds: number | null;
+    source_urls: string[];
+    hidden: boolean;
     event_name: string;
     event_slug: string;
     event_date: string;
@@ -185,6 +193,15 @@ async function loadVisibleResults(
   }>`
     select
       result.id as result_id,
+      exists (select 1 from athlete_profile_hidden_results hidden where hidden.user_id = ${userId} and hidden.result_id = result.id) as hidden,
+      edition.id as edition_id,
+      event.sport, event.surface, event.country, edition.distance_km,
+      result.status, result.chip_time_seconds, result.gun_time_seconds,
+      array(select distinct link from (
+        select result.source_url as link
+        union all select edition.results_official_url
+        union all select reference.source_url from result_source_references reference where reference.result_id = result.id
+      ) sources where link like 'https://%') as source_urls,
       event.name as event_name,
       event.slug as event_slug,
       edition.event_date::text as event_date,
@@ -198,39 +215,43 @@ async function loadVisibleResults(
     join events event on event.id = edition.event_id
     where account_link.user_id = ${userId}
       and account_link.status = 'active'
-      and not exists (
-        select 1
-        from athlete_profile_hidden_results hidden
-        where hidden.user_id = ${userId}
-          and hidden.result_id = result.id
-      )
     order by edition.event_date desc, result.id desc
-    limit 500
   `;
-  return rows.map((row) => ({
-    resultId: row.result_id,
-    eventName: row.event_name,
-    eventSlug: row.event_slug,
-    eventDate: row.event_date,
-    distanceCode: row.distance_code,
-    finishTimeSeconds: row.finish_time_seconds,
-    overallPlace: row.overall_place,
-    category: row.category,
-  }));
+  const hiddenIds = new Set(rows.filter((row) => row.hidden).map((row) => row.result_id));
+  return combineProfileResults(
+    rows.map((row) => ({
+      resultId: row.result_id,
+      editionId: row.edition_id,
+      sport: row.sport,
+      surface: row.surface,
+      country: row.country,
+      distanceKm: Number(row.distance_km),
+      status: row.status,
+      chipTimeSeconds: row.chip_time_seconds,
+      gunTimeSeconds: row.gun_time_seconds,
+      sourceUrls: row.source_urls ?? [],
+      eventName: row.event_name,
+      eventSlug: row.event_slug,
+      eventDate: row.event_date,
+      distanceCode: row.distance_code,
+      finishTimeSeconds: row.finish_time_seconds,
+      overallPlace: row.overall_place,
+      category: row.category,
+    })),
+  ).filter((result) => !result.sourceResultIds.some((id) => hiddenIds.has(id)));
 }
 
 async function buildPublicProfile(
   sql: Awaited<ReturnType<typeof getSql>>,
   share: ShareRow,
 ): Promise<SharedAthleteProfile> {
-  const [identity, sportRows, bioRows, results] = await Promise.all([
+  const [identity, sportRows, bioRows, results, connectionRows] = await Promise.all([
     loadIdentity(sql, share.user_id),
     sql<{ sport_code: string }>`
       select sport_code
       from athlete_sport_profiles
       where user_id = ${share.user_id}
       order by is_primary desc, sport_code
-      limit 1
     `,
     sql<{ mode: string; custom_bio: string | null }>`
       select mode, custom_bio
@@ -239,6 +260,11 @@ async function buildPublicProfile(
       limit 1
     `,
     share.share_results ? loadVisibleResults(sql, share.user_id) : Promise.resolve([]),
+    sql<{ platform: SocialPlatform; url: string }>`
+      select platform, url from athlete_profile_connections
+      where user_id = ${share.user_id} and share_publicly = true
+      order by platform
+    `,
   ]);
 
   const displayName = displayNameOf(identity);
@@ -271,6 +297,12 @@ async function buildPublicProfile(
     region: share.share_location ? (identity.region?.trim() ?? "") : "",
     country: share.share_location ? (identity.country?.trim() ?? "") : "",
     primarySport,
+    sports: sportRows.map((row) => row.sport_code),
+    connections: connectionRows.map((row) => ({
+      platform: row.platform,
+      url: row.url,
+      sharePublicly: true,
+    })),
     publishedAt: share.published_at,
     results,
   };

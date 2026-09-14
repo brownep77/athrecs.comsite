@@ -6,13 +6,17 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/athletes/")({
-  loader: () => listAthletes({ data: {} }),
+  validateSearch: (search: Record<string, unknown>): { q?: string } => ({
+    q: typeof search.q === "string" ? search.q.trim().slice(0, 120) : "",
+  }),
+  loaderDeps: ({ search }) => ({ q: search.q }),
+  loader: ({ deps }) => listAthletes({ data: { q: deps.q } }),
   component: AthletesPage,
 });
 
 function AthletesPage() {
   const initial = Route.useLoaderData();
-  const [q, setQ] = useState("");
+  const [q, setQ] = useState(Route.useSearch().q ?? "");
   const { data = initial } = useQuery({
     queryKey: ["athletes", q],
     queryFn: () => listAthletes({ data: { q: q || undefined } }),

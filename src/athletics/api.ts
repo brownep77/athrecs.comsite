@@ -3,12 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "../lib/athrecs/seed.server";
 import { todayIso } from "../lib/athrecs/format";
-import type {
-  AthleteListItem,
-  ClubListItem,
-  SpectatorAccessType,
-  Sport,
-} from "../lib/athrecs/types";
+import type { ClubListItem, SpectatorAccessType, Sport } from "../lib/athrecs/types";
 import { isTemporaryRunningEdition, isTemporaryRunningEvent } from "./temporary-running";
 import * as base from "../lib/athrecs/api";
 
@@ -132,92 +127,10 @@ export const getEditionResults = createServerFn({ method: "GET" })
     return base.getEditionResults({ data });
   });
 
-export const listAthletes = createServerFn({ method: "GET" })
-  .validator((input: { q?: string } | undefined) => input ?? {})
-  .handler(async ({ data }) => {
-    const sql = await ready();
-    const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
-    return sql<AthleteListItem>`
-      select
-        athlete.id,
-        athlete.slug,
-        athlete.display_name,
-        athlete.gender,
-        athlete.city,
-        athlete.county,
-        athlete.country,
-        athlete.profile_type,
-        athlete.profile_roles,
-        club.name as club,
-        club.slug as club_slug,
-        (
-          select count(*)::int
-          from results result
-          join editions edition on edition.id = result.edition_id
-          join events event on event.id = edition.event_id
-          where result.athlete_id = athlete.id
-            and event.sport = 'Athletics'
-            and (
-              athlete.profile_type = 'Public figure'
-              or athlete.profile_visibility = 'public'
-              or result.result_visibility in ('public', 'public_figure')
-            )
-        ) as result_count
-      from athletes athlete
-      left join clubs club on club.id = athlete.club_id
-      where (athlete.profile_type = 'Public figure' or athlete.profile_visibility = 'public')
-        and (
-          lower(coalesce(athlete.profile_roles, '')) like '%professional athlete%'
-          or exists (
-            select 1
-            from results result
-            join editions edition on edition.id = result.edition_id
-            join events event on event.id = edition.event_id
-            where result.athlete_id = athlete.id
-              and event.sport = 'Athletics'
-              and (
-                athlete.profile_type = 'Public figure'
-                or athlete.profile_visibility = 'public'
-                or result.result_visibility in ('public', 'public_figure')
-              )
-          )
-        )
-        and (
-          ${q}::text is null
-          or lower(athlete.display_name) like ${q}
-          or lower(coalesce(club.name, '')) like ${q}
-          or lower(coalesce(athlete.city, '')) like ${q}
-          or lower(coalesce(athlete.profile_type, '')) like ${q}
-          or lower(coalesce(athlete.profile_roles, '')) like ${q}
-        )
-      order by athlete.display_name
-    `;
-  });
+// Athlete profiles span sports; the event catalogue retains its specialist scope.
+export const listAthletes = base.listAthletes;
 
-export const getAthleteBySlug = createServerFn({ method: "GET" })
-  .validator((slug: string) => slug)
-  .handler(async ({ data }) => {
-    const result = await base.getAthleteBySlug({ data });
-    if (!result) return null;
-
-    const sql = await ready();
-    const allowedRows = await sql<{ id: number }>`
-      select result.id
-      from results result
-      join editions edition on edition.id = result.edition_id
-      join events event on event.id = edition.event_id
-      where result.athlete_id = ${result.athlete.id}
-        and event.sport = 'Athletics'
-    `;
-    const allowed = new Set(allowedRows.map((row) => row.id));
-    const results = result.results.filter((row) => allowed.has(row.id));
-    const isProfessional = result.athlete.profile_roles
-      .toLowerCase()
-      .split(",")
-      .some((role) => role.trim() === "professional athlete");
-    if (!results.length && !isProfessional) return null;
-    return { ...result, results };
-  });
+export const getAthleteBySlug = base.getAthleteBySlug;
 
 export const getPrivateAthleteBySlug = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)

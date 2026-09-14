@@ -21,6 +21,14 @@ import type { EventListItem } from "@/lib/athrecs/types";
 
 export const Route = createFileRoute("/")({
   head: () => ({
+    meta: [
+      { title: "ATHRECS | One athlete profile for every sport" },
+      {
+        name: "description",
+        content:
+          "Bring your race results, personal bests, sporting progress and social profiles together on ATHRECS.",
+      },
+    ],
     links: [{ rel: "canonical", href: SITE_URL }],
   }),
   loader: async () => {
@@ -65,7 +73,7 @@ function AthleticsHomePage() {
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     void navigate({
-      to: "/races",
+      to: "/athletes",
       search: { q: query.trim() || undefined },
     });
   };
@@ -77,29 +85,43 @@ function AthleticsHomePage() {
         <div className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(18rem,0.5fr)] lg:items-end lg:p-10">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-              Track & field · Cross country · Road athletics
+              Results · Personal bests · Every sport
             </p>
             <h1 className="mt-4 max-w-3xl font-display text-4xl font-semibold tracking-tight text-fg sm:text-5xl lg:text-6xl">
-              Athletics events, results and athletes.
+              Every sport. One athlete profile.
             </h1>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted sm:text-base">
-              Find athletics meetings and championships, follow verified results and discover
-              athletes and clubs around the world.
+              Bring your results, personal bests and sporting progress together. Link your race
+              history, previous names and social profiles in one place.
             </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link
+                to="/my-athlete-profile"
+                className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-fg no-underline"
+              >
+                Open my profile <ArrowRight className="size-4" />
+              </Link>
+              <Link
+                to="/athlete-account"
+                className="inline-flex min-h-12 items-center rounded-xl border border-border px-5 py-3 text-sm font-semibold text-fg no-underline"
+              >
+                Find my results
+              </Link>
+            </div>
             <form
               onSubmit={submitSearch}
               className="mt-6 grid max-w-3xl gap-2 sm:grid-cols-[minmax(0,1fr)_auto]"
               role="search"
             >
               <label className="sr-only" htmlFor="athletics-event-search">
-                Athletics event, athlete or place
+                Find a public athlete profile
               </label>
               <input
                 id="athletics-event-search"
                 type="search"
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
-                placeholder="Meeting, championship, stadium or city"
+                placeholder="Athlete name, club or place"
                 className="h-12 min-w-0 rounded-xl border border-border bg-bg px-4 text-sm text-fg outline-none placeholder:text-subtle focus:ring-2 focus:ring-accent/30"
               />
               <button
@@ -107,7 +129,7 @@ function AthleticsHomePage() {
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-semibold text-primary-fg transition-colors hover:bg-accent"
               >
                 <Search className="h-4 w-4" aria-hidden="true" />
-                Search athletics
+                Find athlete
               </button>
             </form>
           </div>

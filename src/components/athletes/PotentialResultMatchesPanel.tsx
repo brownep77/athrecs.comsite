@@ -1,6 +1,7 @@
+import { ProfileEventLink } from "./ProfileEventLink";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   AlertTriangle,
   ChevronDown,
@@ -27,7 +28,22 @@ import {
   type ExternalRunnerMatchSource,
 } from "@/lib/athrecs/grok-runner-search-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
-import { IS_ATHRECS_SITE, sportIsInPublicSiteScope } from "@/lib/site-scope";
+import { sportIsInAthleteProfileScope } from "@/lib/site-scope";
+import { submitResultClaim } from "@/lib/athrecs/result-claims-api";
+import {
+  dismissMyAthleteMatch,
+  getMyDismissedAthletes,
+} from "@/lib/athrecs/profile-connections-api";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+} from "@/components/ui/alert-dialog";
 
 const INITIAL_MATCH_COUNT = 8;
 
@@ -93,13 +109,52 @@ function actionLabel(match: PotentialResultMatch): string {
     return "Claim again";
   }
   if (match.ownedByAnotherAccount) return "Submit ownership claim";
-  return "Claim this result";
+  return "Add to my profile";
 }
 
 export function PotentialResultMatchesPanel() {
+  const queryClient = useQueryClient();
+  const [confirmMatch, setConfirmMatch] = useState<PotentialResultMatch | null>(null);
+  const [feedback, setFeedback] = useState("");
+  const refresh = () =>
+    Promise.all([
+      queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] }),
+      queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] }),
+      queryClient.invalidateQueries({ queryKey: ["my-dismissed-athletes"] }),
+      queryClient.invalidateQueries({ queryKey: ["my-athlete-bio"] }),
+    ]);
+  const addMatch = useMutation({
+    mutationFn: (resultId: number) =>
+      submitResultClaim({ data: { resultId, declarationAccepted: true } }),
+    onSuccess: async (outcome) => {
+      setConfirmMatch(null);
+      setFeedback(
+        outcome.status === "approved"
+          ? "Results added to your profile."
+          : "Your claim is with staff for an ownership check.",
+      );
+      await refresh();
+    },
+    onError: (error) => setFeedback(error.message),
+  });
+  const dismiss = useMutation({
+    mutationFn: (data: { athleteId: number; dismissed: boolean }) =>
+      dismissMyAthleteMatch({ data }),
+    onSuccess: async () => {
+      setFeedback("Match preferences saved.");
+      await refresh();
+    },
+    onError: (error) => setFeedback(error.message),
+  });
   const [expanded, setExpanded] = useState(false);
   const [searchPublic, setSearchPublic] = useState(false);
   const { user, isPending: sessionPending } = useCurrentUserState();
+  const dismissed = useQuery({
+    queryKey: ["my-dismissed-athletes", user?.id],
+    queryFn: () => getMyDismissedAthletes(),
+    enabled: Boolean(user),
+    retry: false,
+  });
   const matches = useQuery({
     queryKey: ["my-potential-result-matches", user?.id],
     queryFn: () => listMyPotentialResultMatches(),
@@ -110,7 +165,7 @@ export function PotentialResultMatchesPanel() {
   const external = useQuery({
     queryKey: ["my-external-runner-matches", user?.id],
     queryFn: () => findExternalRunnerMatches(),
-    enabled: Boolean(user) && searchPublic && !IS_ATHRECS_SITE,
+    enabled: Boolean(user) && searchPublic,
     retry: false,
     staleTime: 5 * 60_000,
   });
@@ -138,19 +193,50 @@ export function PotentialResultMatchesPanel() {
   }
 
   const scopedMatches = matches.data.matches.filter((match) =>
-    sportIsInPublicSiteScope(match.sport),
+    sportIsInAthleteProfileScope(match.sport),
   );
   const data = {
     ...matches.data,
     matches: scopedMatches,
     totalMatches: scopedMatches.length,
   };
-  const visibleMatches = expanded
-    ? data.matches
-    : data.matches.slice(0, INITIAL_MATCH_COUNT);
+  const visibleMatches = expanded ? data.matches : data.matches.slice(0, INITIAL_MATCH_COUNT);
 
   return (
     <section className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
+      {feedback ? (
+        <p role="status" className="border-b border-border bg-accent-soft p-4 text-sm text-fg">
+          {feedback}
+        </p>
+      ) : null}
+      <AlertDialog
+        open={Boolean(confirmMatch)}
+        onOpenChange={(open) => {
+          if (!open && !addMatch.isPending) setConfirmMatch(null);
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Add this result to your profile?</AlertDialogTitle>
+            <AlertDialogDescription>
+              {confirmMatch?.athleteName} · {confirmMatch?.eventName}. Confirm this is your result.
+              Other results attached to the same athlete record will also appear in your profile.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={addMatch.isPending}>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              disabled={addMatch.isPending}
+              onClick={(event) => {
+                event.preventDefault();
+                if (confirmMatch) addMatch.mutate(confirmMatch.resultId);
+              }}
+            >
+              {addMatch.isPending ? "Adding…" : "This is my result"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border bg-elevated/50 p-5">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2">
@@ -160,13 +246,11 @@ export function PotentialResultMatchesPanel() {
             </h2>
           </div>
           <p className="mt-2 text-sm leading-6 text-muted">
-            These are suggestions, not confirmed ownership. Select only your own result and ATHRECS
-            will keep the existing evidence and staff-review checks before linking a profile.
+            These are suggestions, not confirmed ownership. Confirm your result, or choose Not me to
+            dismiss that athlete. Competing ownership claims go to staff for review.
           </p>
           {data.searchedNames.length ? (
-            <p className="mt-2 text-xs text-subtle">
-              Checked: {data.searchedNames.join(" · ")}
-            </p>
+            <p className="mt-2 text-xs text-subtle">Checked: {data.searchedNames.join(" · ")}</p>
           ) : null}
         </div>
         <Badge className="border-accent/30 bg-accent-soft text-accent">
@@ -211,8 +295,8 @@ export function PotentialResultMatchesPanel() {
                     {match.eventName}
                   </h3>
                   <p className="mt-1 text-sm text-muted">
-                    <strong className="font-semibold text-fg">{match.athleteName}</strong>{" "}
-                    · {formatRaceDateShort(match.eventDate)} · {match.distanceCode}
+                    <strong className="font-semibold text-fg">{match.athleteName}</strong> ·{" "}
+                    {formatRaceDateShort(match.eventDate)} · {match.distanceCode}
                   </p>
                   {match.clubName || locationText(match) ? (
                     <p className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-subtle">
@@ -263,17 +347,34 @@ export function PotentialResultMatchesPanel() {
                   <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
                     Linked to your private Athlete Account
                   </Badge>
-                ) : (
+                ) : match.claimStatus === "pending" ||
+                  match.claimStatus === "needs_info" ||
+                  match.ownedByAnotherAccount ? (
                   <Button asChild>
                     <Link to="/claim-results" search={{ resultId: match.resultId }}>
-                      <Trophy className="size-4" aria-hidden="true" /> {actionLabel(match)}
+                      {actionLabel(match)}
                     </Link>
                   </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      setFeedback("");
+                      setConfirmMatch(match);
+                    }}
+                  >
+                    <Trophy className="size-4" aria-hidden="true" />
+                    Add to my profile
+                  </Button>
                 )}
-                <Button asChild variant="secondary">
-                  <Link to="/races/$slug" params={{ slug: match.eventSlug }}>
-                    View event
-                  </Link>
+                <Button
+                  variant="secondary"
+                  disabled={dismiss.isPending}
+                  onClick={() => dismiss.mutate({ athleteId: match.athleteId, dismissed: true })}
+                >
+                  Not me
+                </Button>
+                <Button asChild variant="ghost">
+                  <ProfileEventLink result={match}>View event</ProfileEventLink>
                 </Button>
               </div>
             </article>
@@ -289,9 +390,7 @@ export function PotentialResultMatchesPanel() {
             ) : (
               <ChevronDown className="size-4" aria-hidden="true" />
             )}
-            {expanded
-              ? "Show fewer matches"
-              : `Show all ${data.matches.length} returned matches`}
+            {expanded ? "Show fewer matches" : `Show all ${data.matches.length} returned matches`}
           </Button>
           {data.truncated ? (
             <p className="mt-2 text-xs text-subtle">
@@ -307,115 +406,143 @@ export function PotentialResultMatchesPanel() {
         </p>
       ) : null}
 
-      {!IS_ATHRECS_SITE ? (
-        <div className="border-t border-border bg-elevated/40 p-5">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2">
-              <Globe className="size-5 text-accent" aria-hidden="true" />
-              <h3 className="font-display text-lg font-semibold text-fg">
-                Public result sites
-              </h3>
-            </div>
-            <p className="mt-2 text-sm leading-6 text-muted">
-              Optional second pass. Grok can search Power of 10, parkrun, World Athletics and
-              official result pages using the identity fields you saved. These remain suggestions,
-              not confirmed ownership.
-            </p>
-          </div>
-          <Button
-            type="button"
-            variant="secondary"
-            disabled={external.isFetching}
-            onClick={() => setSearchPublic(true)}
-          >
-            {external.isFetching ? (
-              <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-            ) : (
-              <SearchCheck className="size-4" aria-hidden="true" />
-            )}
-            Search Power of 10 and parkrun
-          </Button>
-        </div>
-
-        {!searchPublic ? (
-          <p className="mt-3 text-xs text-subtle">
-            Save your name first. Turn on Performance and habit insights if you want ATHRECS to ask
-            Grok to look outside the ATHRECS database.
-          </p>
-        ) : external.isFetching ? (
-          <p className="mt-4 flex items-center gap-2 text-sm text-muted">
-            <Loader2 className="size-4 animate-spin text-accent" aria-hidden="true" />
-            Searching public result pages…
-          </p>
-        ) : external.isError ? (
-          <p className="mt-4 rounded-lg border border-red-500/30 bg-red-50 px-3 py-2 text-sm text-red-900">
-            Public result search could not run. ATHRECS name matches are unaffected.
-          </p>
-        ) : external.data ? (
-          <div className="mt-4 space-y-3">
-            <p className="text-sm text-muted">{external.data.message}</p>
-            {external.data.cached ? (
-              <p className="text-xs text-subtle">Showing a cached search from the last 7 days.</p>
-            ) : null}
-            {external.data.matches.length ? (
-              <div className="divide-y divide-border overflow-hidden rounded-lg border border-border bg-surface">
-                {external.data.matches.map((match) => (
-                  <article key={`${match.sourceUrl}-${match.eventName}`} className="space-y-3 p-4">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <Badge className="border-border bg-elevated text-fg">
-                        {SOURCE_LABELS[match.source]}
-                      </Badge>
-                      <Badge className={confidenceClass(match)}>{confidenceLabel(match)}</Badge>
-                    </div>
-                    <div>
-                      <h4 className="font-display text-base font-semibold text-fg">
-                        {match.eventName || "Public result page"}
-                      </h4>
-                      <p className="mt-1 text-sm text-muted">
-                        <strong className="font-semibold text-fg">{match.athleteName}</strong>
-                        {match.eventDate ? ` · ${match.eventDate}` : ""}
-                        {match.distance ? ` · ${match.distance}` : ""}
-                        {match.finishTime ? ` · ${match.finishTime}` : ""}
-                      </p>
-                      {match.club || match.location ? (
-                        <p className="mt-1 text-xs text-subtle">
-                          {[match.club, match.location].filter(Boolean).join(" · ")}
-                        </p>
-                      ) : null}
-                    </div>
-                    <p className="text-xs leading-5 text-muted">
-                      <strong className="text-fg">Why this was suggested:</strong> {match.why}
-                    </p>
-                    <div className="flex flex-wrap items-center gap-2">
-                      {match.resultId ? (
-                        <Button asChild>
-                          <Link to="/claim-results" search={{ resultId: match.resultId }}>
-                            <Trophy className="size-4" aria-hidden="true" /> Claim this result
-                          </Link>
-                        </Button>
-                      ) : null}
-                      {match.eventSlug ? (
-                        <Button asChild variant="secondary">
-                          <Link to="/races/$slug" params={{ slug: match.eventSlug }}>
-                            View event
-                          </Link>
-                        </Button>
-                      ) : null}
-                      <Button asChild variant="secondary">
-                        <a href={match.sourceUrl} target="_blank" rel="noreferrer">
-                          <ExternalLink className="size-4" aria-hidden="true" /> Open evidence
-                        </a>
-                      </Button>
-                    </div>
-                  </article>
-                ))}
+      {dismissed.data?.length ? (
+        <details className="border-t border-border p-5">
+          <summary className="cursor-pointer text-sm font-semibold">
+            Dismissed athletes ({dismissed.data.length})
+          </summary>
+          <div className="mt-3 space-y-2">
+            {dismissed.data.map((item) => (
+              <div key={item.athleteId} className="flex items-center justify-between gap-3 text-sm">
+                <span>{item.name}</span>
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  disabled={dismiss.isPending}
+                  onClick={() => dismiss.mutate({ athleteId: item.athleteId, dismissed: false })}
+                >
+                  Restore matches
+                </Button>
               </div>
-            ) : null}
+            ))}
           </div>
-        ) : null}
-        </div>
+        </details>
       ) : null}
+      {
+        <div className="border-t border-border bg-elevated/40 p-5">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div className="max-w-2xl">
+              <div className="flex items-center gap-2">
+                <Globe className="size-5 text-accent" aria-hidden="true" />
+                <h3 className="font-display text-lg font-semibold text-fg">Public result sites</h3>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-muted">
+                Search Power of 10, parkrun, World Athletics and official result pages using your
+                saved athlete details. Review the source before adding a result.
+              </p>
+            </div>
+            <Button
+              type="button"
+              variant="secondary"
+              disabled={external.isFetching}
+              onClick={() => setSearchPublic(true)}
+            >
+              {external.isFetching ? (
+                <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+              ) : (
+                <SearchCheck className="size-4" aria-hidden="true" />
+              )}
+              Search Power of 10 and parkrun
+            </Button>
+          </div>
+
+          {!searchPublic ? (
+            <p className="mt-3 text-xs text-subtle">
+              Save your name first. Turn on Performance and habit insights if you want ATHRECS to
+              ask Grok to look outside the ATHRECS database.
+            </p>
+          ) : external.isFetching ? (
+            <p className="mt-4 flex items-center gap-2 text-sm text-muted">
+              <Loader2 className="size-4 animate-spin text-accent" aria-hidden="true" />
+              Searching public result pages…
+            </p>
+          ) : external.isError ? (
+            <p className="mt-4 rounded-lg border border-red-500/30 bg-red-50 px-3 py-2 text-sm text-red-900">
+              Public result search could not run. ATHRECS name matches are unaffected.
+            </p>
+          ) : external.data ? (
+            <div className="mt-4 space-y-3">
+              <p className="text-sm text-muted">{external.data.message}</p>
+              {external.data.cached ? (
+                <p className="text-xs text-subtle">Showing a cached search from the last 7 days.</p>
+              ) : null}
+              {external.data.matches.length ? (
+                <div className="divide-y divide-border overflow-hidden rounded-lg border border-border bg-surface">
+                  {external.data.matches.map((match) => (
+                    <article
+                      key={`${match.sourceUrl}-${match.eventName}`}
+                      className="space-y-3 p-4"
+                    >
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge className="border-border bg-elevated text-fg">
+                          {SOURCE_LABELS[match.source]}
+                        </Badge>
+                        <Badge className={confidenceClass(match)}>{confidenceLabel(match)}</Badge>
+                      </div>
+                      <div>
+                        <h4 className="font-display text-base font-semibold text-fg">
+                          {match.eventName || "Public result page"}
+                        </h4>
+                        <p className="mt-1 text-sm text-muted">
+                          <strong className="font-semibold text-fg">{match.athleteName}</strong>
+                          {match.eventDate ? ` · ${match.eventDate}` : ""}
+                          {match.distance ? ` · ${match.distance}` : ""}
+                          {match.finishTime ? ` · ${match.finishTime}` : ""}
+                        </p>
+                        {match.club || match.location ? (
+                          <p className="mt-1 text-xs text-subtle">
+                            {[match.club, match.location].filter(Boolean).join(" · ")}
+                          </p>
+                        ) : null}
+                      </div>
+                      <p className="text-xs leading-5 text-muted">
+                        <strong className="text-fg">Why this was suggested:</strong> {match.why}
+                      </p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        {match.resultId ? (
+                          <Button asChild>
+                            <Link to="/claim-results" search={{ resultId: match.resultId }}>
+                              <Trophy className="size-4" aria-hidden="true" /> Claim this result
+                            </Link>
+                          </Button>
+                        ) : null}
+                        {match.eventSlug ? (
+                          <Button asChild variant="secondary">
+                            <ProfileEventLink
+                              result={{
+                                sport: "Running",
+                                eventSlug: match.eventSlug,
+                                sourceUrls: [match.sourceUrl],
+                              }}
+                            >
+                              View event
+                            </ProfileEventLink>
+                          </Button>
+                        ) : null}
+                        <Button asChild variant="secondary">
+                          <a href={match.sourceUrl} target="_blank" rel="noreferrer">
+                            <ExternalLink className="size-4" aria-hidden="true" /> Open evidence
+                          </a>
+                        </Button>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
+      }
     </section>
   );
 }
