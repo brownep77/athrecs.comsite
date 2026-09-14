@@ -10,6 +10,7 @@ import {
   Play,
   Search,
   ShieldCheck,
+  RotateCcw,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CollectorCandidateCard } from "@/components/admin/collector-candidate-card";

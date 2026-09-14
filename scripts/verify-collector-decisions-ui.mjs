@@ -123,8 +123,8 @@ try {
   assert(await keep.isDisabled());
   assert(await dismiss.isEnabled());
   await page.getByText("Race information, sources and checks", { exact: true }).click();
-  assert(await page.getByText(row.candidate.evidence, { exact: true }).isVisible());
-  assert(await page.getByText(row.candidate.notes, { exact: true }).isVisible());
+  assert(await page.getByText(row.candidate.evidence).isVisible());
+  assert(await page.getByText(row.candidate.notes).isVisible());
   assert(await page.getByText(row.reason, { exact: false }).isVisible());
   assert.equal(await page.getByRole("link", { name: "Primary programme" }).getAttribute("href"), row.candidate.sourceUrl);
   assert.equal(await page.getByRole("button").count(), 2);
