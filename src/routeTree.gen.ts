@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AthleteAccountRouteImport } from './routes/athlete-account'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as ClaimResultsRouteImport } from './routes/claim-results'
+import { Route as FindEventsRouteImport } from './routes/find-events'
 import { Route as MyAthleteProfileRouteImport } from './routes/my-athlete-profile'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
@@ -64,6 +65,11 @@ const CalendarRoute = CalendarRouteImport.update({
 const ClaimResultsRoute = ClaimResultsRouteImport.update({
   id: '/claim-results',
   path: '/claim-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FindEventsRoute = FindEventsRouteImport.update({
+  id: '/find-events',
+  path: '/find-events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MyAthleteProfileRoute = MyAthleteProfileRouteImport.update({
@@ -237,6 +243,7 @@ export interface FileRoutesByFullPath {
   '/athlete-account': typeof AthleteAccountRoute
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
+  '/find-events': typeof FindEventsRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
@@ -275,6 +282,7 @@ export interface FileRoutesByTo {
   '/athlete-account': typeof AthleteAccountRoute
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
+  '/find-events': typeof FindEventsRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
@@ -314,6 +322,7 @@ export interface FileRoutesById {
   '/athlete-account': typeof AthleteAccountRoute
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
+  '/find-events': typeof FindEventsRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
@@ -354,6 +363,7 @@ export interface FileRouteTypes {
     | '/athlete-account'
     | '/calendar'
     | '/claim-results'
+    | '/find-events'
     | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
@@ -392,6 +402,7 @@ export interface FileRouteTypes {
     | '/athlete-account'
     | '/calendar'
     | '/claim-results'
+    | '/find-events'
     | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
@@ -430,6 +441,7 @@ export interface FileRouteTypes {
     | '/athlete-account'
     | '/calendar'
     | '/claim-results'
+    | '/find-events'
     | '/my-athlete-profile'
     | '/privacy'
     | '/race-series'
@@ -469,6 +481,7 @@ export interface RootRouteChildren {
   AthleteAccountRoute: typeof AthleteAccountRoute
   CalendarRoute: typeof CalendarRoute
   ClaimResultsRoute: typeof ClaimResultsRoute
+  FindEventsRoute: typeof FindEventsRoute
   MyAthleteProfileRoute: typeof MyAthleteProfileRoute
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
@@ -531,6 +544,13 @@ declare module '@tanstack/react-router' {
       path: '/claim-results'
       fullPath: '/claim-results'
       preLoaderRoute: typeof ClaimResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-events': {
+      id: '/find-events'
+      path: '/find-events'
+      fullPath: '/find-events'
+      preLoaderRoute: typeof FindEventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/my-athlete-profile': {
@@ -765,6 +785,7 @@ const rootRouteChildren: RootRouteChildren = {
   AthleteAccountRoute: AthleteAccountRoute,
   CalendarRoute: CalendarRoute,
   ClaimResultsRoute: ClaimResultsRoute,
+  FindEventsRoute: FindEventsRoute,
   MyAthleteProfileRoute: MyAthleteProfileRoute,
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,

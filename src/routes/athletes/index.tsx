@@ -4,11 +4,10 @@ import { useQuery } from "@tanstack/react-query";
 import { listAthletes } from "@/lib/athrecs/api";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { parseAthleteDirectorySearch } from "@/lib/athrecs/athlete-directory";
 
 export const Route = createFileRoute("/athletes/")({
-  validateSearch: (search: Record<string, unknown>): { q?: string } => ({
-    q: typeof search.q === "string" ? search.q.trim().slice(0, 120) : "",
-  }),
+  validateSearch: parseAthleteDirectorySearch,
   loaderDeps: ({ search }) => ({ q: search.q }),
   loader: ({ deps }) => listAthletes({ data: { q: deps.q } }),
   component: AthletesPage,

@@ -5,7 +5,7 @@ export const SITE_NAME = "ATHRECS.com";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/athrecs-logo.png`;
 
 export const DEFAULT_DESCRIPTION =
-  "Find track and field meetings, cross-country fixtures, road athletics and championships — plus athletics results, athletes and clubs on ATHRECS.com.";
+  "Your sporting life, in one profile. Find athletes and bring your results, personal bests, progress and social links together across every sport on ATHRECS.com.";
 
 export function absoluteUrl(path: string): string {
   if (path.startsWith("http")) return path;
@@ -19,7 +19,7 @@ export function siteGraphMeta(opts?: {
   image?: string;
   type?: string;
 }) {
-  const title = opts?.title ?? `${SITE_NAME} — Athletics events, results and athletes`;
+  const title = opts?.title ?? `${SITE_NAME} — Athlete profiles for every sport`;
   const description = opts?.description ?? DEFAULT_DESCRIPTION;
   const url = opts?.url ?? SITE_URL;
   const image = opts?.image ?? DEFAULT_OG_IMAGE;
@@ -54,7 +54,7 @@ export function organizationJsonLd() {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/races?q={search_term_string}`,
+        urlTemplate: `${SITE_URL}/athletes?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -82,7 +82,7 @@ export function sportsEventJsonLd(input: {
   const start =
     input.startDate && input.startTime
       ? `${input.startDate}T${input.startTime}`
-      : input.startDate ?? undefined;
+      : (input.startDate ?? undefined);
 
   return {
     "@context": "https://schema.org",
@@ -106,9 +106,7 @@ export function sportsEventJsonLd(input: {
       },
     },
     sport: input.sport || "Athletics",
-    organizer: input.website
-      ? { "@type": "Organization", url: input.website }
-      : undefined,
+    organizer: input.website ? { "@type": "Organization", url: input.website } : undefined,
   };
 }
 
