@@ -8,6 +8,7 @@ import {
   EyeOff,
   LayoutGrid,
   List,
+  Medal,
   Loader2,
   RotateCcw,
   Trash2,
@@ -65,6 +66,7 @@ export function AthleteResultsSection({
   const activePage = Math.min(page, pageCount - 1);
   const shown = filtered.slice(activePage * 30, (activePage + 1) * 30);
   const personalBests = useMemo(() => findPersonalBests(results), [results]);
+  const finisherCount = results.filter(hasFinisherMedal).length;
 
   useEffect(() => {
     try {
@@ -177,6 +179,16 @@ export function AthleteResultsSection({
             <Badge variant="outline">
               {results.length} result{results.length === 1 ? "" : "s"}
             </Badge>
+            {finisherCount > 0 ? (
+              <Badge
+                variant="outline"
+                className="gap-1.5 border-amber-300 bg-amber-50 text-amber-900"
+                title="Medals mark completed events in your profile"
+              >
+                <Medal className="size-4" aria-hidden="true" />
+                {finisherCount} finisher’s medal{finisherCount === 1 ? "" : "s"}
+              </Badge>
+            ) : null}
             <div
               className="inline-flex rounded-lg border border-border bg-surface p-1"
               aria-label="Result view"
@@ -466,17 +478,20 @@ function ResultRow({
   return (
     <article className="px-4 py-3">
       <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_8rem_7rem_auto] md:items-center">
-        <div className="min-w-0">
-          <ProfileEventLink
-            result={result}
-            className="block truncate text-sm font-semibold text-fg no-underline hover:text-accent hover:underline"
-          >
-            {result.eventName}
-          </ProfileEventLink>
-          <p className="mt-0.5 text-xs text-muted">
-            {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
-            {result.category ? ` · ${result.category}` : ""} · {result.athleteName}
-          </p>
+        <div className="flex min-w-0 items-center gap-3">
+          {hasFinisherMedal(result) ? <FinisherMedal /> : null}
+          <div className="min-w-0">
+            <ProfileEventLink
+              result={result}
+              className="block truncate text-sm font-semibold text-fg no-underline hover:text-accent hover:underline"
+            >
+              {result.eventName}
+            </ProfileEventLink>
+            <p className="mt-0.5 text-xs text-muted">
+              {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
+              {result.category ? ` · ${result.category}` : ""} · {result.athleteName}
+            </p>
+          </div>
         </div>
         <div>
           <p className="font-semibold tabular-nums text-fg">
@@ -529,18 +544,21 @@ function ResultCardGrid(props: ResultCollectionProps) {
           className="rounded-xl border border-border bg-surface p-4 shadow-card"
         >
           <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0">
-              <ProfileEventLink
-                result={result}
-                className="block truncate font-semibold text-fg no-underline hover:text-accent hover:underline"
-              >
-                {result.eventName}
-              </ProfileEventLink>
-              <p className="mt-1 text-xs text-muted">
-                {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
-                {result.category ? ` · ${result.category}` : ""}
-              </p>
-              <p className="mt-2 text-xs text-subtle">{result.athleteName}</p>
+            <div className="flex min-w-0 items-start gap-3">
+              {hasFinisherMedal(result) ? <FinisherMedal /> : null}
+              <div className="min-w-0">
+                <ProfileEventLink
+                  result={result}
+                  className="block truncate font-semibold text-fg no-underline hover:text-accent hover:underline"
+                >
+                  {result.eventName}
+                </ProfileEventLink>
+                <p className="mt-1 text-xs text-muted">
+                  {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
+                  {result.category ? ` · ${result.category}` : ""}
+                </p>
+                <p className="mt-2 text-xs text-subtle">{result.athleteName}</p>
+              </div>
             </div>
             <div className="text-right">
               <p className="font-semibold tabular-nums text-fg">
@@ -579,6 +597,30 @@ function ResultCardGrid(props: ResultCollectionProps) {
         </article>
       ))}
     </div>
+  );
+}
+
+function hasFinisherMedal(result: AthleteResult): boolean {
+  return result.status.toLowerCase() === "finished" && !result.conflicting;
+}
+
+function FinisherMedal() {
+  return (
+    <svg viewBox="0 0 32 40" className="h-10 w-8 shrink-0" role="img" aria-label="Finisher’s medal">
+      <title>Finisher’s medal · completed event</title>
+      <path d="M5 1h8l10 20-7 4L5 1Z" fill="#2563eb" />
+      <path d="M19 1h8L16 25l-7-4L19 1Z" fill="#38bdf8" />
+      <circle cx="16" cy="26" r="12" fill="#fbbf24" stroke="#b45309" strokeWidth="1.5" />
+      <circle cx="16" cy="26" r="8.5" fill="#fef3c7" stroke="#d97706" />
+      <path
+        d="m12 26 2.5 2.5 5.5-6"
+        fill="none"
+        stroke="#92400e"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
