@@ -1,11 +1,21 @@
-import { useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { CollectorCandidateCard, type CollectorFinding } from "./collector-candidate-card";
-import { REVIEW_BATCH_LIMIT, type BulkFindingActionInput } from "@/lib/race-collector/review";
+import {
+  REVIEW_BATCH_LIMIT,
+  reviewGuidance,
+  type BulkFindingActionInput,
+} from "@/lib/race-collector/review";
 import type { BulkFindingResult } from "@/lib/race-collector/bulk-actions.server";
 
 type Choice = "keep" | "dismiss";
-type Selected = { id: string; label: string; choice: Choice; publishable: boolean };
+type Selected = {
+  id: string;
+  label: string;
+  choice: Choice;
+  publishable: boolean;
+  blockingReason: string;
+};
 function selectedFinding(row: CollectorFinding, choice: Choice): Selected {
   return {
     id: row.id,
@@ -13,6 +23,18 @@ function selectedFinding(row: CollectorFinding, choice: Choice): Selected {
     choice,
     publishable:
       row.status === "review" && !row.dismissed_at && !row.batch_id && !row.check.changed,
+    blockingReason:
+      row.publication_status === "published"
+        ? "Already published to RunRecs. No further publication is needed."
+        : row.dismissed_at
+          ? "This candidate is dismissed. Use Keep to restore it before publication."
+          : row.batch_id
+            ? "Already in a publication batch. Open Publication review to check its status."
+            : row.status !== "review"
+              ? reviewGuidance(row).why
+              : row.check.changed
+                ? `The record checks have changed. ${row.check.reason}. Review the latest checks in Race information, sources and checks.`
+                : "",
   };
 }
 
@@ -32,6 +54,7 @@ export function CollectorCandidateList({
   const [notice, setNotice] = useState("");
   const [error, setError] = useState("");
   const submitting = useRef(false);
+  const publicationHelpId = useId();
   const selected = Object.values(choices).map((item) => {
     const latest = rows.find((row) => row.id === item.id);
     return latest ? selectedFinding(latest, item.choice) : item;
@@ -39,6 +62,7 @@ export function CollectorCandidateList({
   const keep = selected.filter((item) => item.choice === "keep");
   const dismiss = selected.filter((item) => item.choice === "dismiss");
   const blocked = keep.filter((item) => !item.publishable);
+  const readyCount = keep.length - blocked.length;
   const busy = disabled || pending;
   const forget = (ids: string[]) =>
     setChoices((current) =>
@@ -116,6 +140,7 @@ export function CollectorCandidateList({
           <Button
             size="sm"
             disabled={busy || !keep.length || Boolean(blocked.length)}
+            aria-describedby={publicationHelpId}
             onClick={() => void act("publish")}
           >
             Publish selected ({keep.length})
@@ -137,14 +162,36 @@ export function CollectorCandidateList({
             Clear selection
           </Button>
         </div>
-        <p className="text-xs text-muted">
-          Select to keep for bulk keeping or publication. Select up to {REVIEW_BATCH_LIMIT}{" "}
-          candidates; selections stay as you change pages or filters within this scan.
+        <p className="text-sm text-fg">
+          Keep saves candidates for later. Publish selected makes them live on RunRecs.
         </p>
-        {blocked.length > 0 && (
-          <p className="text-xs text-amber-800">
-            {blocked.length} selected candidates are not ready for publication. You can keep them;
-            select only ready candidates to publish.
+        <p
+          id={publicationHelpId}
+          aria-live="polite"
+          className={blocked.length ? "text-sm font-medium text-amber-800" : "text-sm text-muted"}
+        >
+          {busy
+            ? "Please wait while your selection is updated."
+            : !keep.length
+              ? "To publish, click Select to keep on each race. Opening Kept does not select its races."
+              : blocked.length
+                ? `Publish selected is unavailable: ${readyCount} ready to publish, ${blocked.length} blocked. The races and reasons are listed below.`
+                : `${readyCount} selected ${readyCount === 1 ? "race is" : "races are"} ready for your final source check. Click Publish selected, then confirm to make them live.`}
+        </p>
+        {blocked.length > 0 && readyCount > 0 && (
+          <Button
+            size="sm"
+            variant="secondary"
+            disabled={busy}
+            onClick={() => forget(blocked.map((item) => item.id))}
+          >
+            Select only ready races ({readyCount})
+          </Button>
+        )}
+        {keep.length > 0 && (
+          <p className="text-xs text-muted">
+            Select up to {REVIEW_BATCH_LIMIT} candidates. Selections stay as you change pages or
+            filters within this scan.
           </p>
         )}
         {selected.length > 0 && (
@@ -176,6 +223,26 @@ export function CollectorCandidateList({
           </p>
         )}
       </div>
+      {blocked.length > 0 && (
+        <section
+          aria-label="Races blocking publication"
+          className="space-y-2 rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900"
+        >
+          <h3 className="font-semibold">Why publication is blocked</h3>
+          <p>
+            Every selected race must be ready. Deselect the races below to publish the others. Their
+            information and Keep decisions are retained.
+          </p>
+          <ul className="max-h-64 space-y-3 overflow-y-auto break-words">
+            {blocked.map((item) => (
+              <li key={item.id}>
+                <p className="font-medium">{item.label}</p>
+                <p>{item.blockingReason}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       {rows.map((row) => (
         <CollectorCandidateCard
           key={row.id}

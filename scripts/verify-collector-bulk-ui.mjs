@@ -58,6 +58,60 @@ try {
     await dialogDone;
     return message;
   };
+  assert.equal(
+    await page
+      .getByText(
+        "To publish, click Select to keep on each race. Opening Kept does not select its races.",
+        { exact: true },
+      )
+      .isVisible(),
+    true,
+  );
+  await choose("Forest Challenge", "keep");
+  const blockers = page.getByRole("region", { name: "Races blocking publication" });
+  assert.match(await blockers.innerText(), /Forest Challenge/);
+  assert.match(await blockers.innerText(), /may already be listed under a different name/);
+  assert.equal(await button("Publish selected (1)").isEnabled(), false);
+  assert.equal(await button("Select only ready races (0)").count(), 0);
+  await choose("Harbour Sunset Circuit", "keep");
+  assert.equal(await button("Publish selected (2)").isEnabled(), false);
+  assert.match(
+    await page
+      .locator(`[id="${await button("Publish selected (2)").getAttribute("aria-describedby")}"]`)
+      .innerText(),
+    /1 ready to publish, 1 blocked/,
+  );
+  await mkdir("artifacts", { recursive: true });
+  await page.screenshot({
+    path: "artifacts/collector-publication-blocked-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({
+    path: "artifacts/collector-publication-blocked-mobile.png",
+    fullPage: true,
+  });
+  assert.equal(
+    await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+    true,
+    "Publication reasons must fit the mobile viewport",
+  );
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await button("Page 2").click();
+  await choose("Meadow Lantern Loop", "dismiss");
+  assert.match(
+    await blockers.innerText(),
+    /Forest Challenge/,
+    "Off-page blockers retain their name and reason",
+  );
+  await button("Select only ready races (1)").click();
+  assert.equal(await button("Publish selected (1)").isEnabled(), true);
+  assert.equal(await button("Dismiss selected (1)").isEnabled(), true);
+  assert.equal(await blockers.count(), 0);
+  assert.equal(await page.getByTestId("last-request").textContent(), "None");
+  assert.deepEqual(await counts(), { editions: 0, revisions: 0, kept: 0, dismissed: 0 });
+  await button("Clear selection").click();
+  await button("Page 1").click();
   await choose("Forest Challenge", "keep");
   assert.equal(await button("Publish selected (1)").isEnabled(), false);
   await choose("Forest Challenge", "dismiss");
