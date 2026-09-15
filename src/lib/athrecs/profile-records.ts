@@ -17,6 +17,7 @@ export type ProfileResult = {
   overallPlace: number | null;
   category: string | null;
   sourceUrls: string[];
+  resultSource?: string | null;
   sourceResultIds?: number[];
   conflicting?: boolean;
 };
@@ -30,10 +31,26 @@ export function timingBasis(result: ProfileResult): string {
 }
 
 export function performanceGroup(result: ProfileResult): string {
+  // Older imports rounded standard race distances to one or two decimal places.
+  // Recognise only those exact roundings, keeping genuinely different distances apart.
+  const miles = result.distanceCode.match(/^(\d+(?:\.\d+)?)mi$/);
+  const standardKm =
+    result.distanceCode === "Marathon"
+      ? 42.195
+      : result.distanceCode === "Half"
+        ? 21.0975
+        : miles
+          ? Number(miles[1]) * 1.609344
+          : null;
+  const comparisonKm =
+    standardKm != null &&
+    [1, 2, 3].some((places) => result.distanceKm === Number(standardKm.toFixed(places)))
+      ? standardKm
+      : result.distanceKm;
   return [
     result.sport,
     result.distanceCode,
-    result.distanceKm,
+    comparisonKm,
     result.surface,
     timingBasis(result),
   ].join("|");
