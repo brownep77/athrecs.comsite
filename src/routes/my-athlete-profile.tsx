@@ -29,6 +29,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { ProfileConnectionsPanel } from "@/components/athletes/ProfileConnectionsPanel";
 import { ProfileProgress } from "@/components/athletes/ProfileProgress";
+import { AthleteId } from "@/components/athletes/AthleteId";
 
 export const Route = createFileRoute("/my-athlete-profile")({
   head: () => ({
@@ -193,6 +194,7 @@ function MyAthleteProfilePage() {
               <h1 className="mt-3 truncate font-display text-3xl font-semibold md:text-5xl">
                 {profileName}
               </h1>
+              <AthleteId number={data.athleteNumber} className="mt-2 text-slate-200" />
 
               <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-200">
                 {primarySport ? (

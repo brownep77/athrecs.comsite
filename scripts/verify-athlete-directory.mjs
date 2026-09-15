@@ -127,6 +127,68 @@ try {
     0,
     "Search treats wildcards as literal text",
   );
+  const identifierRows = await sql`select athlete.id, athlete.slug, identifier.athlete_number::text
+    from athletes athlete join athlete_resolved_ids identifier on identifier.athlete_id=athlete.id
+    where athlete.slug in ('directory-fixture-alpha', 'directory-fixture-secret')`;
+  const alpha = identifierRows.find((row) => row.slug.endsWith("alpha"));
+  const secret = identifierRows.find((row) => row.slug.endsWith("secret"));
+  const reference = (number) => `ATH-${number.padStart(6, "0")}`;
+  const byId = await rpc("athlete-directory-api", "getAthleteDirectory", {
+    q: reference(alpha.athlete_number).toLowerCase(),
+  });
+  assert.equal(byId.total, 1);
+  assert.equal(byId.athletes[0].athlete_number, alpha.athlete_number);
+  assert.equal(byId.athletes[0].id, alpha.id);
+  assert.equal(
+    (
+      await rpc("athlete-directory-api", "getAthleteDirectory", {
+        q: reference(secret.athlete_number),
+      })
+    ).total,
+    0,
+    "Knowing a private athlete's ID cannot reveal their profile",
+  );
+  assert.equal(await rpc("api", "getAthleteBySlug", reference(secret.athlete_number)), null);
+  await sql`insert into "user" ("id", "name", "email", "emailVerified", "createdAt", "updatedAt")
+    values ('directory-owner', 'Private Account', 'directory@example.test', true, now(), now())`;
+  const [owner] =
+    await sql`select number::text from athlete_identifiers where user_id='directory-owner'`;
+  await sql`insert into athlete_account_links(athlete_id, user_id, user_email)
+    values(${secret.id}, 'directory-owner', 'directory@example.test')`;
+  assert.equal(
+    (await rpc("athlete-directory-api", "getAthleteDirectory", { q: reference(owner.number) }))
+      .total,
+    0,
+    "An account linked only to private identities stays undiscoverable by ID",
+  );
+  await sql`insert into athlete_account_links(athlete_id, user_id, user_email)
+    values(${alpha.id}, 'directory-owner', 'directory@example.test')`;
+  for (const number of [owner.number, alpha.athlete_number]) {
+    const canonical = await rpc("athlete-directory-api", "getAthleteDirectory", {
+      q: reference(number),
+    });
+    assert.equal(
+      canonical.total,
+      1,
+      "The source ID remains a searchable alias for the public athlete",
+    );
+    assert.equal(canonical.athletes[0].athlete_number, owner.number);
+    assert.equal(canonical.athletes[0].id, alpha.id);
+    const profile = await rpc("api", "getAthleteBySlug", reference(number));
+    assert.equal(profile.athlete.athlete_number, owner.number);
+    assert.equal(profile.athlete.id, alpha.id);
+    const response = await fetch(`${origin}/athletes/${reference(number)}`, { redirect: "manual" });
+    assert.equal(response.status, 301);
+    assert(response.headers.get("location").endsWith(`/athletes/${alpha.slug}`));
+  }
+  assert.equal(
+    await rpc("api", "getAthleteBySlug", reference(secret.athlete_number)),
+    null,
+    "A private source alias must not reveal other identities owned by the same account",
+  );
+  const profileHtml = await (await fetch(`${origin}/athletes/${alpha.slug}`)).text();
+  assert(profileHtml.includes(reference(owner.number)));
+  assert(profileHtml.includes("Copy athlete ID"));
   await assert.rejects(rpc("athlete-directory-api", "getAthleteDirectory", { pageSize: 10000 }));
   for (const path of ["/", "/athletes?country=Ireland", "/find-events"]) {
     const response = await fetch(`${origin}${path}`);

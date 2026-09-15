@@ -11,6 +11,22 @@ import {
   sourceIdentityFromUrl,
   validateProfileConnection,
 } from "../src/lib/athrecs/profile-connections.ts";
+import { formatAthleteId, parseAthleteId } from "../src/lib/athrecs/athlete-id.ts";
+
+assert.equal(formatAthleteId("123"), "ATH-000123");
+assert.equal(formatAthleteId("1234567"), "ATH-1234567");
+assert.equal(formatAthleteId("9223372036854775807"), "ATH-9223372036854775807");
+assert.equal(parseAthleteId(" ath-000123 "), "123");
+assert.equal(parseAthleteId("ATH-9223372036854775807"), "9223372036854775807");
+for (const invalid of [
+  "ATH-000000",
+  "123",
+  "ATH-1.1",
+  "ATH-1%",
+  "ATH--1",
+  "ATH-12345678901234567890",
+])
+  assert.equal(parseAthleteId(invalid), null);
 
 const result = {
   resultId: 1,
@@ -234,8 +250,12 @@ await db.waitReady;
 const migrationNames = (await readdir(new URL("../migrations/", import.meta.url)))
   .filter((name) => name.endsWith(".sql"))
   .sort();
-for (const name of migrationNames)
-  await db.exec(await readFile(new URL(`../migrations/${name}`, import.meta.url), "utf8"));
+for (const name of migrationNames) {
+  // Simulate an upgrade with existing athletes, then verify automatic IDs for
+  // subsequent inserts below.
+  if (name !== "0030_athlete_identifiers.sql")
+    await db.exec(await readFile(new URL(`../migrations/${name}`, import.meta.url), "utf8"));
+}
 await db.exec(`
   insert into "user" ("id", "name", "email", "emailVerified", "createdAt", "updatedAt")
   values ('profile-a', 'Alex Runner', 'a@example.test', true, now(), now()),
@@ -303,6 +323,84 @@ assert.equal(
   (await db.query("select * from athletes where id=1")).rows.length,
   1,
   "Dismissal changes cannot delete athlete records",
+);
+const identifierMigration = await readFile(
+  new URL("../migrations/0030_athlete_identifiers.sql", import.meta.url),
+  "utf8",
+);
+await db.exec(identifierMigration);
+const identifiers = (
+  await db.query(
+    "select number::text, athlete_id, user_id from athlete_identifiers order by number",
+  )
+).rows;
+assert.equal(identifiers.length, 5, "All existing athletes and accounts get an ID");
+assert.equal(new Set(identifiers.map((row) => row.number)).size, 5);
+await db.exec(identifierMigration);
+assert.deepEqual(
+  (
+    await db.query(
+      "select number::text, athlete_id, user_id from athlete_identifiers order by number",
+    )
+  ).rows,
+  identifiers,
+  "Reapplying the backfill must not renumber anyone",
+);
+const accountNumber = identifiers.find((row) => row.user_id === "profile-a").number;
+const sourceNumber = identifiers.find((row) => row.athlete_id === 1).number;
+await db.exec(`
+  insert into "user" ("id", "name", "email", "emailVerified", "createdAt", "updatedAt")
+    values ('profile-c', 'New Runner', 'c@example.test', true, now(), now());
+  insert into athletes (id, slug, display_name) values (4, 'alex-new', 'Alex Runner');
+  insert into athlete_account_links (athlete_id, user_id, user_email)
+    values (1, 'profile-a', 'a@example.test'), (2, 'profile-a', 'a@example.test'),
+           (3, 'profile-b', 'b@example.test');
+`);
+assert.equal((await db.query("select count(*)::int as n from athlete_identifiers")).rows[0].n, 7);
+assert.equal(
+  (await db.query("select count(*)::int as n from athlete_private_profiles")).rows[0].n,
+  1,
+  "Assigning IDs cannot manufacture profile onboarding or privacy consent",
+);
+let resolved = (
+  await db.query(
+    "select athlete_id, athlete_number::text, source_number::text from athlete_resolved_ids order by athlete_id",
+  )
+).rows;
+assert.equal(resolved[0].athlete_number, accountNumber);
+assert.equal(resolved[1].athlete_number, accountNumber, "Approved aliases share the account ID");
+assert.equal(resolved[0].source_number, sourceNumber, "Source reference is retained as an alias");
+assert.notEqual(resolved[2].athlete_number, accountNumber, "Another account has its own ID");
+assert.notEqual(
+  resolved[3].athlete_number,
+  accountNumber,
+  "A name match is not proof of ownership",
+);
+await db.exec(`
+  update athletes set display_name='Alex New Name' where id=1;
+  insert into athletes (id, slug, display_name) values (1, 'alex', 'Alex New Name')
+    on conflict (id) do update set display_name=excluded.display_name;
+  update athlete_account_links set status='revoked' where athlete_id=1;
+`);
+resolved = (
+  await db.query(
+    "select athlete_id, athlete_number::text from athlete_resolved_ids order by athlete_id",
+  )
+).rows;
+assert.equal(resolved[0].athlete_number, sourceNumber);
+assert.equal(
+  resolved[1].athlete_number,
+  accountNumber,
+  "Unlinking one source cannot change the account ID",
+);
+assert.deepEqual(
+  (
+    await db.query(
+      "select number::text, athlete_id, user_id from athlete_identifiers where athlete_id in (1,2,3) or user_id in ('profile-a','profile-b') order by number",
+    )
+  ).rows,
+  identifiers,
+  "Names, imports and ownership changes cannot reassign permanent registry numbers",
 );
 await db.close();
 console.log(

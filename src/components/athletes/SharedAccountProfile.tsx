@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { sharedProfilePath } from "@/lib/athrecs/athlete-profile-share";
 import type { SharedAthleteProfile } from "@/lib/athrecs/athlete-profile-share-api";
+import { AthleteId } from "./AthleteId";
 
 export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfile }) {
   const [sport, setSport] = useState("All sports");
@@ -49,6 +50,7 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
           Shared athlete profile
         </p>
         <h1 className="font-display text-2xl font-semibold text-fg">{profile.displayName}</h1>
+        <AthleteId number={profile.athleteNumber} />
         {profile.club ? <p className="text-sm text-muted">{profile.club}</p> : null}
         {locationLabel ? (
           <p className="flex items-center gap-1.5 text-xs text-subtle">

@@ -70,7 +70,7 @@ function AthleteDirectoryPage() {
         className="grid gap-3 rounded-2xl border border-border bg-elevated/40 p-4 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_auto]"
       >
         <label className="space-y-1.5 text-xs font-medium text-muted">
-          Name, club or place
+          Name, athlete ID, club or place
           <input
             name="q"
             type="search"

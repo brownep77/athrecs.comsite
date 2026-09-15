@@ -5,6 +5,7 @@ import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { canonicalEventSlug } from "@/data/entry-options";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
+import { parseAthleteId } from "./athlete-id";
 import type {
   AthleteListItem,
   ClubContactInfo,
@@ -841,8 +842,10 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
     const sql = await ready();
+    const athleteNumber = parseAthleteId(slug);
     const rows = await sql<{
       id: number;
+      athlete_number: string;
       slug: string;
       display_name: string;
       gender: string;
@@ -859,6 +862,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
     }>`
       select
         a.*,
+        identifier.athlete_number::text as athlete_number,
         c.name as club,
         c.slug as club_slug,
         exists (
@@ -867,9 +871,13 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
           where account_link.athlete_id = a.id and account_link.status = 'active'
         ) as is_claimed
       from athletes a
+      join athlete_resolved_ids identifier on identifier.athlete_id = a.id
       left join clubs c on c.id = a.club_id
-      where a.slug = ${slug}
+      where (a.slug = ${slug}
+        or identifier.athlete_number::text = ${athleteNumber}
+        or identifier.source_number::text = ${athleteNumber})
         and (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
+      order by (a.slug = ${slug}) desc, a.id
       limit 1
     `;
     const athlete = rows[0];

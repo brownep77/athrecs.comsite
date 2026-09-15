@@ -21,6 +21,7 @@ export function parseAthleteDirectorySearch(
 
 export type DirectoryAthlete = {
   id: number;
+  athlete_number: string;
   slug: string;
   display_name: string;
   country: string;

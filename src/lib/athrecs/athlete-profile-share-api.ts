@@ -32,6 +32,7 @@ export type SharedProfileResult = Omit<ProfileResult, "athleteName">;
 
 export type SharedAthleteProfile = {
   kind: "shared-account";
+  athleteNumber: string;
   slug: string;
   displayName: string;
   bio: string;
@@ -60,6 +61,7 @@ type ShareRow = {
 
 type IdentityRow = {
   auth_name: string;
+  athlete_number: string;
   full_name: string | null;
   display_name: string | null;
   city: string | null;
@@ -110,6 +112,7 @@ async function loadIdentity(
   const rows = await sql<IdentityRow>`
     select
       account_user."name" as auth_name,
+      identifier.number::text as athlete_number,
       profile.full_name,
       profile.display_name,
       profile.city,
@@ -117,6 +120,7 @@ async function loadIdentity(
       profile.country,
       profile.club_or_team
     from "user" account_user
+    join athlete_identifiers identifier on identifier.user_id = account_user."id"
     left join athlete_private_profiles profile on profile.user_id = account_user."id"
     where account_user."id" = ${userId}
     limit 1
@@ -289,6 +293,7 @@ async function buildPublicProfile(
 
   return {
     kind: "shared-account",
+    athleteNumber: identity.athlete_number,
     slug: share.slug,
     displayName,
     bio,
