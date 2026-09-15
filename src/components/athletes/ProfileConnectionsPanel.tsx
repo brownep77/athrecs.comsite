@@ -15,6 +15,7 @@ import {
   type SocialPlatform,
 } from "@/lib/athrecs/profile-connections";
 import type { AthleteAccountData } from "@/lib/athrecs/athlete-account-api";
+import { AthleteId } from "./AthleteId";
 
 export function ProfileConnectionsPanel({ account }: { account: AthleteAccountData }) {
   const links = useQuery({
@@ -38,11 +39,7 @@ export function ProfileConnectionsPanel({ account }: { account: AthleteAccountDa
         <p className="mt-2 text-sm text-muted">
           Names and source profiles help bring your results into this account.
         </p>
-        {account.athleteProfileId ? (
-          <p className="mt-3 break-all font-mono text-sm text-accent">
-            ATH-{account.athleteProfileId}
-          </p>
-        ) : null}
+        <AthleteId number={account.athleteNumber} className="mt-3" />
         <div className="mt-3 flex flex-wrap gap-2">
           {[
             ...new Set([

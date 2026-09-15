@@ -48,6 +48,7 @@ try {
   );
   const account = await rpc("athlete-account-api", "getMyAthleteAccount");
   assert.match(account.athleteProfileId, /^[a-f0-9-]{36}$/);
+  assert.match(account.athleteNumber, /^[1-9]\d*$/);
   console.log("Real account handler and database loaded.");
   const row = {
     eventSlug: "unified-fixture-road",
@@ -197,6 +198,13 @@ try {
   console.log("Imports, source matching, dismissals and confirmed ownership passed.");
   const after = await rpc("athlete-account-api", "getMyAthleteAccount");
   assert.equal(after.athleteProfileId, account.athleteProfileId);
+  assert.equal(after.athleteNumber, account.athleteNumber);
+  assert.equal(
+    (await sql`select athlete_number::text from athlete_resolved_ids where athlete_id=${known}`)[0]
+      .athlete_number,
+    account.athleteNumber,
+    "An approved claim resolves to the stable account ID",
+  );
   assert.equal(
     after.claimedResults.filter((result) =>
       ["unified-fixture-road", "unified-fixture-track"].includes(result.eventSlug),
@@ -248,6 +256,14 @@ try {
     slug: share.slug,
   });
   assert(published);
+  assert.equal(published.athleteNumber, account.athleteNumber);
+  assert.equal(
+    await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
+      slug: `ATH-${account.athleteNumber.padStart(6, "0")}`,
+    }),
+    null,
+    "A sequential ID must not make unlisted shared profiles discoverable",
+  );
   assert.equal(published.connections.length, 0);
   assert.equal(published.club, "");
   assert.equal(published.country, "");
@@ -266,6 +282,12 @@ try {
     await sql`insert into athletes(slug,display_name,profile_visibility) values('fixture-confirmed-alias','Fixture Previous Name','private') returning id`
   )[0].id;
   await sql`insert into athlete_account_links(athlete_id,user_id,user_email) values(${alias},'dev-user','fixture@example.test')`;
+  assert.equal(
+    (await sql`select athlete_number::text from athlete_resolved_ids where athlete_id=${alias}`)[0]
+      .athlete_number,
+    account.athleteNumber,
+    "Every confirmed source identity resolves to the same account ID",
+  );
   await sql`insert into results(edition_id,athlete_id,status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,category,source_url)
     select edition_id,${alias},status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,category,'https://extra-source.example/race/1' from results where id=${knownResult}`;
   published = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {

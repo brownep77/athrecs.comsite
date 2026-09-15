@@ -15,6 +15,7 @@ import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-a
 import { parseProfileRoles } from "@/lib/athrecs/athlete-profile-roles";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
+import { AthleteId } from "@/components/athletes/AthleteId";
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
@@ -291,6 +292,7 @@ function AthletePage() {
               : "Athlete profile"}
         </p>
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
+        <AthleteId number={athlete.athlete_number} />
         {athlete.club && athlete.club_slug ? (
           <p className="text-sm text-muted">
             <Link

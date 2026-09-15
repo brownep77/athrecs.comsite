@@ -82,6 +82,7 @@ export type AthleteAccountData = {
   exists: boolean;
   userId: string;
   athleteProfileId: string;
+  athleteNumber: string;
   verifiedEmail: string;
   emailVerified: boolean;
   authName: string;
@@ -146,6 +147,7 @@ export type AthleteAccountInput = {
 
 type UserRow = {
   id: string;
+  athlete_number: string;
   name: string;
   email: string;
   email_verified: boolean;
@@ -512,13 +514,15 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
   }
   const users = await sql<UserRow>`
     select
-      "id" as id,
-      "name" as name,
-      lower("email") as email,
-      "emailVerified" as email_verified,
-      "image" as image
-    from "user"
-    where "id" = ${userId}
+      account_user."id" as id,
+      identifier.number::text as athlete_number,
+      account_user."name" as name,
+      lower(account_user."email") as email,
+      account_user."emailVerified" as email_verified,
+      account_user."image" as image
+    from "user" account_user
+    join athlete_identifiers identifier on identifier.user_id = account_user."id"
+    where account_user."id" = ${userId}
     limit 1
   `;
   const user = users[0];
@@ -651,6 +655,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     exists: Boolean(profile),
     userId,
     athleteProfileId: profile?.athlete_profile_id ?? "",
+    athleteNumber: user.athlete_number,
     verifiedEmail: user.email,
     emailVerified: user.email_verified,
     authName: user.name ?? "",
@@ -993,6 +998,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
         sql<
           ProfileRow & {
             user_id: string;
+            athlete_number: string;
             auth_name: string;
             auth_email: string;
             email_verified: boolean;
@@ -1001,6 +1007,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
           select
             profile.user_id,
             profile.athlete_profile_id::text as athlete_profile_id,
+            identifier.number::text as athlete_number,
             profile.full_name,
             profile.display_name,
             profile.date_of_birth::text as date_of_birth,
@@ -1028,6 +1035,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
             account_user."emailVerified" as email_verified
           from athlete_private_profiles profile
           join "user" account_user on account_user."id" = profile.user_id
+          join athlete_identifiers identifier on identifier.user_id = profile.user_id
           order by profile.updated_at desc
         `,
         sql<SportRow & { user_id: string }>`
@@ -1071,6 +1079,7 @@ export const listStaffAthleteAccounts = createServerFn({ method: "GET" })
         exists: true,
         userId: profile.user_id,
         athleteProfileId: profile.athlete_profile_id,
+        athleteNumber: profile.athlete_number,
         verifiedEmail: profile.auth_email,
         emailVerified: profile.email_verified,
         authName: profile.auth_name ?? "",
