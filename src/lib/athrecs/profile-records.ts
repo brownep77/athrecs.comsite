@@ -30,7 +30,7 @@ export function timingBasis(result: ProfileResult): string {
   return "Recorded";
 }
 
-export function performanceGroup(result: ProfileResult): string {
+function comparisonDistanceKm(result: ProfileResult): number {
   // Older imports rounded standard race distances to one or two decimal places.
   // Recognise only those exact roundings, keeping genuinely different distances apart.
   const miles = result.distanceCode.match(/^(\d+(?:\.\d+)?)mi$/);
@@ -42,17 +42,36 @@ export function performanceGroup(result: ProfileResult): string {
         : miles
           ? Number(miles[1]) * 1.609344
           : null;
-  const comparisonKm =
-    standardKm != null &&
+  return standardKm != null &&
     [1, 2, 3].some((places) => result.distanceKm === Number(standardKm.toFixed(places)))
-      ? standardKm
-      : result.distanceKm;
+    ? standardKm
+    : result.distanceKm;
+}
+
+export function performanceGroup(result: ProfileResult): string {
   return [
     result.sport,
     result.distanceCode,
-    comparisonKm,
+    comparisonDistanceKm(result),
     result.surface,
     timingBasis(result),
+  ].join("|");
+}
+
+function personalBestSport(result: ProfileResult): string {
+  // Road races imported from athletics calendars belong to the same PB category
+  // as running road races. Track, parkrun and other sports remain distinct.
+  return result.sport === "Athletics" && result.surface === "Road" ? "Running" : result.sport;
+}
+
+function personalBestGroup(result: ProfileResult): string {
+  // The headline PB is the fastest recorded finish, with its timing basis shown
+  // alongside it. Progress uses performanceGroup for comparisons by timing basis.
+  return [
+    personalBestSport(result),
+    result.distanceCode,
+    comparisonDistanceKm(result),
+    result.surface,
   ].join("|");
 }
 
@@ -117,13 +136,13 @@ export function findPersonalBests<T extends ProfileResult>(results: T[]): T[] {
   const best = new Map<string, T>();
   for (const result of results) {
     if (!eligiblePerformance(result)) continue;
-    const key = performanceGroup(result);
+    const key = personalBestGroup(result);
     const previous = best.get(key);
     if (!previous || result.finishTimeSeconds! < previous.finishTimeSeconds!) best.set(key, result);
   }
   return [...best.values()].sort(
     (a, b) =>
-      a.sport.localeCompare(b.sport) ||
+      personalBestSport(a).localeCompare(personalBestSport(b)) ||
       a.distanceKm - b.distanceKm ||
       a.surface.localeCompare(b.surface),
   );

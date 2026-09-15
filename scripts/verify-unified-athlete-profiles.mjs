@@ -87,6 +87,110 @@ assert.equal(
   4,
 );
 
+const halfMarathon = {
+  ...result,
+  distanceCode: "Half",
+  distanceKm: 21.0975,
+  chipTimeSeconds: null,
+  gunTimeSeconds: null,
+};
+const slowerAthleticsHalf = {
+  ...halfMarathon,
+  resultId: 10,
+  editionId: 10,
+  eventName: "City Half Marathon",
+  sport: "Athletics",
+  finishTimeSeconds: 7500,
+};
+const chipHalf = {
+  ...halfMarathon,
+  resultId: 11,
+  editionId: 11,
+  eventName: "Coastal Half Marathon",
+  distanceKm: 21.1,
+  finishTimeSeconds: 6000,
+  chipTimeSeconds: 6000,
+};
+const fastestHalf = {
+  ...halfMarathon,
+  resultId: 12,
+  editionId: 12,
+  eventName: "River Half Marathon",
+  finishTimeSeconds: 5100,
+  resultSource: "athlete",
+};
+for (const halves of [
+  [slowerAthleticsHalf, chipHalf, fastestHalf],
+  [fastestHalf, chipHalf, slowerAthleticsHalf],
+]) {
+  assert.deepEqual(
+    findPersonalBests(combineProfileResults(halves)),
+    combineProfileResults([fastestHalf]),
+    "Road-running PBs must choose the fastest result across Athletics/Running and timing labels",
+  );
+}
+assert.deepEqual(
+  findPersonalBests([chipHalf, { ...slowerAthleticsHalf, finishTimeSeconds: 4800 }]).map(
+    (item) => item.resultId,
+  ),
+  [slowerAthleticsHalf.resultId],
+  "A faster Athletics road result must also be able to establish the running PB",
+);
+assert.notEqual(
+  performanceGroup(chipHalf),
+  performanceGroup(fastestHalf),
+  "Progress must retain separate timing comparisons",
+);
+const marathon = { ...result, distanceCode: "Marathon", distanceKm: 42.195 };
+assert.deepEqual(
+  findPersonalBests([
+    {
+      ...marathon,
+      resultId: 20,
+      editionId: 20,
+      finishTimeSeconds: 15000,
+      chipTimeSeconds: null,
+      gunTimeSeconds: null,
+    },
+    { ...marathon, resultId: 21, editionId: 21, finishTimeSeconds: 12600, chipTimeSeconds: 12600 },
+    {
+      ...marathon,
+      resultId: 22,
+      editionId: 22,
+      finishTimeSeconds: 13500,
+      chipTimeSeconds: null,
+      gunTimeSeconds: 13500,
+    },
+  ]).map((item) => item.resultId),
+  [21],
+  "Chip, gun and unspecified timing must produce one fastest marathon",
+);
+assert.equal(
+  findPersonalBests([
+    result,
+    { ...result, resultId: 30, sport: "Cycling" },
+    { ...result, resultId: 31, sport: "Parkrun" },
+    { ...result, resultId: 32, surface: "Track" },
+    { ...result, resultId: 33, sport: "Athletics", surface: "Track" },
+    { ...result, resultId: 34, distanceKm: 9.8 },
+  ]).length,
+  6,
+  "PB summaries must keep other sports, track and materially different distances separate",
+);
+assert.deepEqual(
+  findPersonalBests([
+    chipHalf,
+    { ...fastestHalf, conflicting: true },
+    { ...fastestHalf, status: "dnf" },
+    { ...fastestHalf, surface: "Trail" },
+    { ...fastestHalf, surface: "Mixed" },
+    { ...fastestHalf, surface: "Unknown" },
+    { ...fastestHalf, finishTimeSeconds: 0 },
+  ]),
+  [chipHalf],
+  "An invalid or non-comparable faster result must not replace the PB",
+);
+
 assert.deepEqual(
   sourceIdentityFromUrl("https://worldathletics.org/athletes/ireland/example-name-12345"),
   { provider: "worldathletics", externalId: "12345" },

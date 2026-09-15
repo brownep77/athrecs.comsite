@@ -133,9 +133,13 @@ export function AthleteResultsSection({
         <section className="space-y-3">
           <div>
             <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-              Fastest comparable linked performances
+              Your fastest recorded performances
             </p>
             <h2 className="font-display text-2xl font-semibold text-fg">Personal bests</h2>
+            <p className="mt-1 text-sm text-muted">
+              One best time per sport, distance and surface. Chip, gun and recorded times are
+              included, with the timing type shown for each result.
+            </p>
           </div>
           <div className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface shadow-card">
             {personalBests.map((result) => (
