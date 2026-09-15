@@ -210,7 +210,8 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
         <TabsContent value="bests" className="space-y-4">
           <h2 className="font-display text-2xl font-semibold">Personal bests</h2>
           <p className="text-sm text-muted">
-            Fastest comparable linked performances, separated by sport, surface and timing type.
+            One best time per sport, distance and surface. Chip, gun and recorded times are
+            included, with the timing type shown for each result.
           </p>
           {bests.length ? (
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
