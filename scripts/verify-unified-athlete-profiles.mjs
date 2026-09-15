@@ -60,6 +60,25 @@ assert.equal(eligiblePerformance({ ...result, surface: "Cross country" }), false
 assert.notEqual(performanceGroup(result), performanceGroup({ ...result, surface: "Track" }));
 assert.notEqual(performanceGroup(result), performanceGroup({ ...result, sport: "Cycling" }));
 assert.notEqual(performanceGroup(result), performanceGroup({ ...result, finishTimeSeconds: 2704 }));
+for (const [distanceCode, exact, rounded] of [
+  ["Marathon", 42.195, 42.2],
+  ["Half", 21.0975, 21.1],
+  ["10mi", 16.09344, 16.1],
+  ["20mi", 32.18688, 32.19],
+  ["20mi", 32.18688, 32.2],
+]) {
+  const precise = { ...result, distanceCode, distanceKm: exact };
+  assert.equal(
+    performanceGroup(precise),
+    performanceGroup({ ...precise, distanceKm: rounded }),
+    "Conventional rounding of a standard distance must not create a second PB",
+  );
+  assert.notEqual(
+    performanceGroup(precise),
+    performanceGroup({ ...precise, distanceKm: exact - 0.2 }),
+    "A materially shorter race must remain separate",
+  );
+}
 assert.equal(
   findPersonalBests([
     result,

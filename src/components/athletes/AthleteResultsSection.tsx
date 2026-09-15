@@ -152,6 +152,7 @@ export function AthleteResultsSection({
                   {result.eventName}
                   <span className="mt-1 block text-xs font-normal text-muted">
                     {result.sport} · {result.surface} · {timingBasis(result)}
+                    {result.resultSource === "athlete" ? " · Athlete supplied" : ""}
                   </span>
                 </span>
                 <span className="text-xs text-muted">
@@ -638,6 +639,7 @@ function ResultSourceLinks({ result }: { result: AthleteResult }) {
         {result.sport} · {result.surface} · {timingBasis(result)}
       </span>
       {result.status !== "finished" ? <span>{result.status}</span> : null}
+      {result.resultSource === "athlete" ? <span>Athlete supplied</span> : null}
       {result.conflicting ? (
         <span className="font-semibold text-amber-800">Check source details</span>
       ) : null}

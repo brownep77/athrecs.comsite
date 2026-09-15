@@ -589,6 +589,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       event_country: string;
       distance_km: number;
       result_status: string;
+      result_source: string | null;
       chip_time_seconds: number | null;
       gun_time_seconds: number | null;
       source_urls: string[];
@@ -609,6 +610,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
           event.country as event_country,
           edition.distance_km,
           result.status as result_status,
+          result.result_source,
           result.chip_time_seconds,
           result.gun_time_seconds,
           array(select distinct link from (
@@ -694,6 +696,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       country: row.event_country,
       distanceKm: Number(row.distance_km),
       status: row.result_status,
+      resultSource: row.result_source,
       chipTimeSeconds: row.chip_time_seconds,
       gunTimeSeconds: row.gun_time_seconds,
       sourceUrls: row.source_urls ?? [],
