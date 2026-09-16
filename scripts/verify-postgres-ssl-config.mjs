@@ -4,9 +4,39 @@ import { readFile } from "node:fs/promises";
 import {
   normalizePostgresConnectionString,
   postgresConnectionConfig,
+  migrationConnectionString,
 } from "../src/lib/postgres-connection.js";
 
 const base = "postgresql://runner:secret@example-pooler.neon.tech/runrecs";
+
+const migrationUrl = new URL(
+  migrationConnectionString(`${base}?sslmode=require&channel_binding=require`),
+);
+assert.equal(migrationUrl.hostname, "example.neon.tech");
+assert.equal(migrationUrl.username, "runner");
+assert.equal(migrationUrl.password, "secret");
+assert.equal(migrationUrl.pathname, "/runrecs");
+assert.equal(migrationUrl.searchParams.get("channel_binding"), "require");
+assert.equal(migrationUrl.searchParams.get("sslmode"), "require");
+assert.equal(
+  migrationConnectionString(
+    "postgresql://runner:secret@ep-test-pooler.c-5.us-east-2.aws.neon.tech/neondb",
+  ),
+  "postgresql://runner:secret@ep-test.c-5.us-east-2.aws.neon.tech/neondb",
+);
+for (const unchanged of [
+  "postgresql://runner:secret@localhost/runrecs",
+  "postgresql://runner:secret@example.neon.tech/runrecs",
+  "postgresql://runner:secret@example-pooler.com/runrecs",
+  "postgresql://runner:secret@pooler.neon.tech.attacker.test/runrecs",
+]) {
+  assert.equal(migrationConnectionString(unchanged), unchanged);
+}
+assert.equal(
+  new URL(postgresConnectionConfig(base).connectionString).hostname,
+  "example-pooler.neon.tech",
+  "Application traffic must retain pooling",
+);
 
 for (const legacyMode of ["prefer", "require", "verify-ca"]) {
   const normalized = new URL(
