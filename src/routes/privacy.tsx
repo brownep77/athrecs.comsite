@@ -55,9 +55,9 @@ function AthletePrivacyPage() {
       <section className="space-y-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-8">
         <NoticeSection title="Information required to operate the account">
           <p>
-            ATHRECS requires your verified Google email, full name and acknowledgement of this
-            notice. These are used to authenticate you, protect result claims, prevent duplicate
-            ownership and support your account.
+            ATHRECS requires your verified email, full name and acknowledgement of this notice.
+            These are used to authenticate you, protect result claims, prevent duplicate ownership
+            and support your account.
           </p>
         </NoticeSection>
 

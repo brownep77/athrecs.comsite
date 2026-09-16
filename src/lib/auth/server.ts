@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { bearer, genericOAuth } from "better-auth/plugins";
+import { bearer, emailOTP, genericOAuth } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getCookie } from "@tanstack/react-start/server";
 import { createPrivateKey, randomBytes, sign as signDigest } from "node:crypto";
@@ -41,8 +41,7 @@ const emailDeliveryConfigured = emailPasswordConfigured && authEmailConfigured()
 
 const googleClientId = env("GOOGLE_CLIENT_ID");
 const googleClientSecret = env("GOOGLE_CLIENT_SECRET");
-const directGoogleConfigured =
-  !authDisabled && Boolean(googleClientId && googleClientSecret);
+const directGoogleConfigured = !authDisabled && Boolean(googleClientId && googleClientSecret);
 
 const appleClientId = env("APPLE_CLIENT_ID");
 const appleTeamId = env("APPLE_TEAM_ID");
@@ -50,8 +49,7 @@ const appleKeyId = env("APPLE_KEY_ID");
 const applePrivateKey = env("APPLE_PRIVATE_KEY")?.replace(/\\n/g, "\n");
 const appleAppBundleIdentifier = env("APPLE_APP_BUNDLE_IDENTIFIER");
 const directAppleConfigured =
-  !authDisabled &&
-  Boolean(appleClientId && appleTeamId && appleKeyId && applePrivateKey);
+  !authDisabled && Boolean(appleClientId && appleTeamId && appleKeyId && applePrivateKey);
 
 const microsoftClientId = env("MICROSOFT_CLIENT_ID");
 const microsoftClientSecret = env("MICROSOFT_CLIENT_SECRET");
@@ -227,9 +225,7 @@ const socialProviders = {
         apple: async () => ({
           clientId: appleClientId as string,
           clientSecret: generateAppleClientSecret(),
-          ...(appleAppBundleIdentifier
-            ? { appBundleIdentifier: appleAppBundleIdentifier }
-            : {}),
+          ...(appleAppBundleIdentifier ? { appBundleIdentifier: appleAppBundleIdentifier } : {}),
           requireEmailVerification: true,
         }),
       }
@@ -314,13 +310,7 @@ const emailAndPassword = emailPasswordConfigured
       resetPasswordTokenExpiresIn: 60 * 60,
       ...(emailDeliveryConfigured
         ? {
-            sendResetPassword: async ({
-              user,
-              url,
-            }: {
-              user: { email: string };
-              url: string;
-            }) => {
+            sendResetPassword: async ({ user, url }: { user: { email: string }; url: string }) => {
               await sendAthrecsAuthEmail({
                 to: user.email,
                 subject: "Reset your ATHRECS password",
@@ -375,6 +365,33 @@ export const auth = betterAuth({
   },
   plugins: [
     ...(grokOAuthPlugin ? [grokOAuthPlugin] : []),
+    ...(emailDeliveryConfigured
+      ? [
+          emailOTP({
+            otpLength: 6,
+            expiresIn: 5 * 60,
+            allowedAttempts: 3,
+            storeOTP: "hashed",
+            rateLimit: { window: 60, max: 3 },
+            async sendVerificationOTP({ email, otp, type }) {
+              const action =
+                type === "sign-in"
+                  ? "Sign in"
+                  : type === "forget-password"
+                    ? "Reset your password"
+                    : "Verify your email";
+              await sendAthrecsAuthEmail({
+                to: email,
+                subject: `Your ATHRECS ${type === "sign-in" ? "sign-in" : "verification"} code`,
+                heading: `${action} with this code`,
+                message:
+                  "Enter this one-time code in ATHRECS. It expires in five minutes. Never share it with anyone.",
+                code: otp,
+              });
+            },
+          }),
+        ]
+      : []),
     bearer(),
     tanstackStartCookies(),
   ],

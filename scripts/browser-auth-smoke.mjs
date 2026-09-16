@@ -112,6 +112,29 @@ try {
   await claimDialog.waitFor({ state: "hidden", timeout: timeoutMs });
   record("claim sign-in button resets after chooser closes", !(await claimSignIn.isDisabled()));
 
+  await page.goto(new URL("/athlete-account", baseUrl).href, {
+    waitUntil: "networkidle",
+    timeout: timeoutMs,
+  });
+  const accountEntry = page.getByRole("button", { name: "Sign in or create account", exact: true });
+  await accountEntry.waitFor({ state: "visible", timeout: timeoutMs });
+  record(
+    "profile entry accepts multiple email providers",
+    await page.getByText("Gmail, Outlook, Hotmail, Yahoo, iCloud", { exact: false }).isVisible(),
+  );
+  await accountEntry.click();
+  const accountDialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
+  await accountDialog
+    .getByRole("button", { name: "Sign in with email", exact: true })
+    .waitFor({ state: "visible", timeout: timeoutMs });
+  record("account entry opens email sign-in directly", true);
+  record(
+    "unconfigured email codes are not offered",
+    (await accountDialog.getByRole("button", { name: "Continue with an email code" }).count()) ===
+      0,
+  );
+  await accountDialog.getByRole("button", { name: "Close sign-in" }).click();
+
   record("page emitted no runtime errors", pageErrors.length === 0);
   record("page emitted no console errors", consoleErrors.length === 0);
 

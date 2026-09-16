@@ -1,4 +1,4 @@
-import { genericOAuthClient } from "better-auth/client/plugins";
+import { emailOTPClient, genericOAuthClient } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
 import {
   AUTH_DIALOG_EVENT,
@@ -11,7 +11,7 @@ import { GROK_PROVIDERS } from "./providers";
 
 /** Same-origin Better Auth client. Preview sessions use a bearer token. */
 export const authClient = createAuthClient({
-  plugins: [genericOAuthClient()],
+  plugins: [genericOAuthClient(), emailOTPClient()],
   fetchOptions: {
     onRequest(ctx) {
       const token = getBearerToken();
@@ -46,10 +46,7 @@ function setBearerToken(token: string | null): void {
 }
 
 function inLivePreview(): boolean {
-  return (
-    typeof window !== "undefined" &&
-    window.location.hostname.endsWith(".grok-sandbox.com")
-  );
+  return typeof window !== "undefined" && window.location.hostname.endsWith(".grok-sandbox.com");
 }
 
 function isBrokerProvider(providerId: AthleteAuthProviderId): providerId is BrokerSocialProviderId {
@@ -77,10 +74,7 @@ export function openAthleteAuth(options: AuthDialogOptions = {}): void {
  * buttons. Public Google buttons now open the full chooser; the staff microsite
  * remains deliberately Google-only and continues directly to Google.
  */
-export async function signIn(
-  providerId: string,
-  options: AuthDialogOptions = {},
-): Promise<void> {
+export async function signIn(providerId: string, options: AuthDialogOptions = {}): Promise<void> {
   const callbackURL = safeAuthCallback(options.callbackURL);
   if (providerId === "grok-google" && !callbackURL.startsWith("/admin")) {
     openAthleteAuth({ ...options, callbackURL });

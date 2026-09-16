@@ -33,7 +33,7 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
     });
 
     if (!authEnabled) {
-      return { emailPassword: false, passwordReset: false, providers: [] };
+      return { emailPassword: false, emailCode: false, passwordReset: false, providers: [] };
     }
 
     const deployed = configured(env.BETTER_AUTH_URL);
@@ -62,12 +62,7 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
       "apple",
       "Apple",
       "identity",
-      configured(
-        env.APPLE_CLIENT_ID,
-        env.APPLE_TEAM_ID,
-        env.APPLE_KEY_ID,
-        env.APPLE_PRIVATE_KEY,
-      ),
+      configured(env.APPLE_CLIENT_ID, env.APPLE_TEAM_ID, env.APPLE_KEY_ID, env.APPLE_PRIVATE_KEY),
     );
     add(
       "microsoft",
@@ -98,6 +93,7 @@ export const getAvailableAuthMethods = createServerFn({ method: "GET" }).handler
 
     return {
       emailPassword,
+      emailCode: emailDelivery,
       passwordReset: emailDelivery,
       providers,
     };
