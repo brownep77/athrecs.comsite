@@ -3,8 +3,9 @@ type AuthEmail = {
   subject: string;
   heading: string;
   message: string;
-  actionLabel: string;
-  actionUrl: string;
+  actionLabel?: string;
+  actionUrl?: string;
+  code?: string;
 };
 
 const text = (value: string | undefined): string | undefined => {
@@ -46,8 +47,9 @@ export async function sendAthrecsAuthEmail(email: AuthEmail): Promise<void> {
 
   const safeHeading = escapeHtml(email.heading);
   const safeMessage = escapeHtml(email.message);
-  const safeLabel = escapeHtml(email.actionLabel);
-  const safeUrl = escapeHtml(email.actionUrl);
+  const safeLabel = escapeHtml(email.actionLabel ?? "");
+  const safeUrl = escapeHtml(email.actionUrl ?? "");
+  const safeCode = escapeHtml(email.code ?? "");
   const html = `<!doctype html>
 <html lang="en">
   <body style="margin:0;background:#f4f7f7;font-family:Arial,sans-serif;color:#17212b">
@@ -61,10 +63,15 @@ export async function sendAthrecsAuthEmail(email: AuthEmail): Promise<void> {
           <tr><td style="padding:28px">
             <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25">${safeHeading}</h1>
             <p style="margin:0 0 24px;color:#52606d;font-size:15px;line-height:1.6">${safeMessage}</p>
-            <p style="margin:0 0 24px">
+            ${email.code ? `<p style="margin:0 0 24px;padding:18px;background:#ecfeff;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px">${safeCode}</p>` : ""}
+            ${
+              email.actionUrl
+                ? `<p style="margin:0 0 24px">
               <a href="${safeUrl}" style="display:inline-block;border-radius:9px;background:#0891b2;color:#ffffff;padding:12px 18px;text-decoration:none;font-weight:700">${safeLabel}</a>
             </p>
-            <p style="margin:0;color:#7b8794;font-size:12px;line-height:1.5">If the button does not work, copy this address into your browser:<br><span style="word-break:break-all">${safeUrl}</span></p>
+            <p style="margin:0;color:#7b8794;font-size:12px;line-height:1.5">If the button does not work, copy this address into your browser:<br><span style="word-break:break-all">${safeUrl}</span></p>`
+                : ""
+            }
           </td></tr>
         </table>
         <p style="max-width:560px;margin:16px auto 0;color:#7b8794;font-size:12px;line-height:1.5">If you did not request this, you can safely ignore the email. ATHRECS will never ask you to send a password by email.</p>
@@ -84,15 +91,13 @@ export async function sendAthrecsAuthEmail(email: AuthEmail): Promise<void> {
       to: [email.to],
       subject: email.subject,
       html,
-      text: `${email.heading}\n\n${email.message}\n\n${email.actionLabel}: ${email.actionUrl}\n\nIf you did not request this, you can ignore this email.`,
+      text: `${email.heading}\n\n${email.message}\n\n${email.code ?? `${email.actionLabel}: ${email.actionUrl}`}\n\nIf you did not request this, you can ignore this email.`,
     }),
   });
 
   if (!response.ok) {
-    const detail = await response.text().catch(() => "");
     console.error("[auth-email] delivery failed", {
       status: response.status,
-      detail: detail.slice(0, 300),
     });
     throw new Error("ATHRECS could not send the account email");
   }

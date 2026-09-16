@@ -830,7 +830,8 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
     `;
     const user = users[0];
     if (!user?.email) throw new Error("Your signed-in account has no email address");
-    if (!user.email_verified) throw new Error("Verify your Google email before saving");
+    if (!user.email_verified)
+      throw new Error("Verify your email before saving your athlete profile");
 
     await sql.transaction(async (tx) => {
       await tx`

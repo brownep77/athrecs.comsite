@@ -54,6 +54,7 @@ function errorMessage(error: unknown, fallback: string): string {
 export function AthleteAuthDialog() {
   const titleId = useId();
   const emailInput = useRef<HTMLInputElement>(null);
+  const codeInput = useRef<HTMLInputElement>(null);
   const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<AuthDialogMode>("signin");
@@ -68,6 +69,9 @@ export function AthleteAuthDialog() {
   const [error, setError] = useState<string | null>(null);
   const [needsVerification, setNeedsVerification] = useState(false);
   const [resetToken, setResetToken] = useState<string | null>(null);
+  const [code, setCode] = useState("");
+  const [codeSentTo, setCodeSentTo] = useState<string | null>(null);
+  const [resendAfter, setResendAfter] = useState(0);
 
   const methods = useQuery({
     queryKey: ["available-auth-methods"],
@@ -78,6 +82,7 @@ export function AthleteAuthDialog() {
   });
 
   const emailAvailable = methods.data?.emailPassword === true;
+  const emailCodeAvailable = methods.data?.emailCode === true;
   const passwordResetAvailable = methods.data?.passwordReset === true;
   const socialProviders = methods.data?.providers ?? [];
 
@@ -87,7 +92,10 @@ export function AthleteAuthDialog() {
     if (initial.searchParams.get("auth") === "1") {
       const requestedMode = initial.searchParams.get("authMode");
       const nextMode: AuthDialogMode =
-        requestedMode === "signup" || requestedMode === "forgot" || requestedMode === "reset"
+        requestedMode === "signup" ||
+        requestedMode === "forgot" ||
+        requestedMode === "reset" ||
+        requestedMode === "code"
           ? requestedMode
           : "signin";
       setMode(nextMode);
@@ -113,6 +121,9 @@ export function AthleteAuthDialog() {
       setMessage(null);
       setError(null);
       setNeedsVerification(false);
+      setCode("");
+      setCodeSentTo(null);
+      setResendAfter(0);
       setOpen(true);
     };
     window.addEventListener(AUTH_DIALOG_EVENT, onOpen);
@@ -151,6 +162,9 @@ export function AthleteAuthDialog() {
 
   function switchMode(nextMode: AuthDialogMode) {
     clearStatus();
+    setCode("");
+    setCodeSentTo(null);
+    setResendAfter(0);
     setPassword("");
     setConfirmPassword("");
     if ((nextMode === "forgot" || nextMode === "reset") && !passwordResetAvailable) {
@@ -161,6 +175,72 @@ export function AthleteAuthDialog() {
       return;
     }
     setMode(nextMode);
+  }
+
+  useEffect(() => {
+    if (resendAfter <= 0) return;
+    const timer = window.setTimeout(() => setResendAfter((value) => value - 1), 1000);
+    return () => window.clearTimeout(timer);
+  }, [resendAfter]);
+
+  useEffect(() => {
+    if (codeSentTo) codeInput.current?.focus();
+  }, [codeSentTo]);
+
+  async function sendCode() {
+    clearStatus();
+    if (!emailCodeAvailable) {
+      setError("Email codes are temporarily unavailable. Choose another sign-in method.");
+      return;
+    }
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
+      setError("Enter a valid email address.");
+      return;
+    }
+    setBusy("email-code-send");
+    try {
+      const result = await authClient.emailOtp.sendVerificationOtp({
+        email: normalizedEmail,
+        type: "sign-in",
+      });
+      if (result.error) throw new Error(result.error.message ?? "The code could not be sent.");
+      setCodeSentTo(normalizedEmail);
+      setCode("");
+      setResendAfter(60);
+      setMessage("Check your inbox for a six-digit code. It expires in five minutes.");
+    } catch (cause) {
+      setError(errorMessage(cause, "The code could not be sent. Please try again."));
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function submitCode(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!codeSentTo) {
+      await sendCode();
+      return;
+    }
+    clearStatus();
+    if (!/^[0-9]{6}$/.test(code)) {
+      setError("Enter the six-digit code from your email.");
+      return;
+    }
+    setBusy("email-code-verify");
+    try {
+      const result = await authClient.signIn.emailOtp({ email: codeSentTo, otp: code });
+      if (result.error) throw new Error(result.error.message ?? "That code could not be verified.");
+      window.location.href = callbackURL;
+    } catch (cause) {
+      setError(
+        errorMessage(
+          cause,
+          "That code could not be verified. Request a new code if it has expired.",
+        ),
+      );
+      setBusy(null);
+    }
   }
 
   function cleanBrowserUrl() {
@@ -344,7 +424,9 @@ export function AthleteAuthDialog() {
         ? "Reset your password"
         : mode === "reset"
           ? "Choose a new password"
-          : "Sign in to ATHRECS";
+          : mode === "code"
+            ? "Sign in with an email code"
+            : "Sign in to ATHRECS";
 
   return createPortal(
     <div
@@ -467,7 +549,102 @@ export function AthleteAuthDialog() {
             </div>
           ) : null}
 
-          {emailAvailable ? (
+          {(mode === "signin" || mode === "signup") && emailCodeAvailable ? (
+            <Button
+              type="button"
+              variant="secondary"
+              className="w-full"
+              disabled={Boolean(busy)}
+              onClick={() => switchMode("code")}
+            >
+              <Mail className="size-4" aria-hidden="true" /> Continue with an email code
+            </Button>
+          ) : null}
+
+          {mode === "code" ? (
+            emailCodeAvailable ? (
+              <form className="space-y-4" onSubmit={(event) => void submitCode(event)}>
+                <p className="text-sm text-muted">
+                  Use any email address. We’ll send you a one-time code, so you don’t need a
+                  password. New athletes can add their name and profile after signing in.
+                </p>
+                <label className="block space-y-1.5 text-sm font-medium text-fg">
+                  Email address
+                  <input
+                    ref={emailInput}
+                    type="email"
+                    inputMode="email"
+                    autoComplete="email"
+                    value={codeSentTo ?? email}
+                    onChange={(event) => setEmail(event.target.value)}
+                    disabled={Boolean(codeSentTo) || Boolean(busy)}
+                    maxLength={254}
+                    className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg"
+                    required
+                  />
+                </label>
+                {codeSentTo ? (
+                  <label className="block space-y-1.5 text-sm font-medium text-fg">
+                    Six-digit code
+                    <input
+                      ref={codeInput}
+                      type="text"
+                      inputMode="numeric"
+                      autoComplete="one-time-code"
+                      value={code}
+                      onChange={(event) =>
+                        setCode(event.target.value.replace(/\D/g, "").slice(0, 6))
+                      }
+                      minLength={6}
+                      maxLength={6}
+                      pattern="[0-9]{6}"
+                      className="h-12 w-full rounded-lg border border-border bg-bg px-3 text-center text-xl tracking-[0.35em] text-fg"
+                      required
+                    />
+                  </label>
+                ) : null}
+                <Button type="submit" className="w-full" disabled={Boolean(busy)}>
+                  {busy ? (
+                    <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <Mail className="size-4" aria-hidden="true" />
+                  )}
+                  {codeSentTo ? "Verify code and sign in" : "Send sign-in code"}
+                </Button>
+                {codeSentTo ? (
+                  <div className="flex flex-wrap justify-between gap-3 text-sm">
+                    <button
+                      type="button"
+                      disabled={Boolean(busy) || resendAfter > 0}
+                      onClick={() => void sendCode()}
+                      className="font-semibold text-accent disabled:text-subtle"
+                    >
+                      {resendAfter > 0 ? `Resend code in ${resendAfter}s` : "Resend code"}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={Boolean(busy)}
+                      onClick={() => {
+                        setCodeSentTo(null);
+                        setCode("");
+                        clearStatus();
+                      }}
+                      className="font-semibold text-accent"
+                    >
+                      Use another email
+                    </button>
+                  </div>
+                ) : null}
+              </form>
+            ) : !methods.isLoading && !methods.isError ? (
+              <p className="text-sm text-muted">
+                Email codes are temporarily unavailable. Go back to sign in and choose another
+                method.
+              </p>
+            ) : null
+          ) : null}
+
+          {emailAvailable && mode !== "code" ? (
             <>
               {(mode === "signin" || mode === "signup") && socialProviders.length > 0 ? (
                 <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-subtle">
@@ -479,8 +656,9 @@ export function AthleteAuthDialog() {
               {!passwordResetAvailable ? (
                 <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-3 text-sm leading-5 text-amber-950">
                   Email and password accounts are available. Verification emails and password
-                  recovery are temporarily unavailable, so keep your password safe. Unverified
-                  manual accounts are not automatically linked to another sign-in provider.
+                  recovery are temporarily unavailable, so keep your password safe. A verified email
+                  is required to save an athlete profile. Unverified manual accounts are not
+                  automatically linked to another sign-in provider.
                 </div>
               ) : null}
 

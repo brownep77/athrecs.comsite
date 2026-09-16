@@ -26,7 +26,8 @@ import {
 import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { signIn, signOut } from "@/lib/auth/client";
+import { authClient, openAthleteAuth, signOut } from "@/lib/auth/client";
+import { getAvailableAuthMethods } from "@/lib/auth/auth-methods-api";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import {
   ATHLETE_SPORTS,
@@ -215,28 +216,11 @@ function accountToForm(account: AthleteAccountData): AthleteAccountInput {
 
 function AthleteAccountPage() {
   const { user, isPending } = useCurrentUserState();
-  const [signingIn, setSigningIn] = useState(false);
-  const [message, setMessage] = useState<string | null>(null);
-
   if (isPending) {
     return <LoadingCard label="Checking your Athlete Account…" />;
   }
 
   if (!user) {
-    async function startSignIn() {
-      setSigningIn(true);
-      setMessage(null);
-      try {
-        await signIn("grok-google", {
-          callbackURL: "/athlete-account",
-          errorCallbackURL: "/athlete-account",
-        });
-      } catch (error) {
-        setMessage(error instanceof Error ? error.message : "Google sign-in failed");
-        setSigningIn(false);
-      }
-    }
-
     return (
       <div className="mx-auto max-w-4xl space-y-5">
         <AccountHero />
@@ -248,26 +232,20 @@ function AthleteAccountPage() {
             Sign in or create your account
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
-            Continue with Google to create a secure ATHRECS Athlete Account. Google supplies the
-            verified email; you choose which optional sport and product details to add.
+            Use your email address or choose an available sign-in provider to create your ATHRECS
+            Athlete Account. Gmail, Outlook, Hotmail, Yahoo, iCloud and other email addresses are
+            welcome.
           </p>
           <Button
             className="mt-5"
             type="button"
-            disabled={signingIn}
-            onClick={() => void startSignIn()}
+            onClick={() => openAthleteAuth({ callbackURL: "/athlete-account" })}
           >
-            {signingIn ? <Loader2 className="size-4 animate-spin" aria-hidden="true" /> : null}
-            {signingIn ? "Opening Google…" : "Continue with Google"}
+            Sign in or create account
           </Button>
-          {message ? (
-            <p className="mt-4 text-sm text-red-700" role="alert">
-              {message}
-            </p>
-          ) : null}
           <div className="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-subtle">
             <span className="inline-flex items-center gap-1.5">
-              <Check className="size-3.5" aria-hidden="true" /> No password to create
+              <Check className="size-3.5" aria-hidden="true" /> Choose how you sign in
             </span>
             <span className="inline-flex items-center gap-1.5">
               <LockKeyhole className="size-3.5" aria-hidden="true" /> Private by default
@@ -308,6 +286,28 @@ function SignedInAccount() {
     onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
   });
 
+  const authMethods = useQuery({
+    queryKey: ["available-auth-methods"],
+    queryFn: () => getAvailableAuthMethods(),
+    staleTime: 60_000,
+  });
+  const verifyEmail = useMutation({
+    mutationFn: async () => {
+      const result = await authClient.sendVerificationEmail({
+        email: account.data?.verifiedEmail ?? "",
+        callbackURL: "/athlete-account",
+      });
+      if (result.error)
+        throw new Error(result.error.message ?? "Verification email could not be sent.");
+    },
+    onSuccess: () =>
+      setMessage(
+        "Check your inbox for a verification link, then return here to save your profile.",
+      ),
+    onError: (error) =>
+      setMessage(error instanceof Error ? error.message : "Verification email could not be sent."),
+  });
+
   if (account.isLoading) return <LoadingCard label="Loading your Entry Passport…" />;
   if (account.isError || !account.data) {
     return (
@@ -338,8 +338,15 @@ function SignedInAccount() {
       <section className="grid gap-4 rounded-xl border border-border bg-surface p-5 shadow-card sm:grid-cols-[1fr_auto] sm:items-center">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
-              <BadgeCheck className="mr-1 size-3.5" aria-hidden="true" /> Google email verified
+            <Badge
+              className={
+                account.data.emailVerified
+                  ? "border-emerald-500/30 bg-emerald-50 text-emerald-900"
+                  : "border-amber-500/30 bg-amber-50 text-amber-900"
+              }
+            >
+              <BadgeCheck className="mr-1 size-3.5" aria-hidden="true" />{" "}
+              {account.data.emailVerified ? "Email verified" : "Email not verified"}
             </Badge>
             <span className="text-sm font-medium text-fg">{account.data.verifiedEmail}</span>
           </div>
@@ -355,6 +362,26 @@ function SignedInAccount() {
           <LogOut className="size-4" aria-hidden="true" /> Sign out
         </Button>
       </section>
+      {!account.data.emailVerified ? (
+        <section className="space-y-3 rounded-xl border border-amber-500/30 bg-amber-50 p-5 text-sm text-amber-950">
+          <p>Verify your email address before saving your athlete profile.</p>
+          {authMethods.data?.passwordReset ? (
+            <Button
+              type="button"
+              variant="secondary"
+              disabled={verifyEmail.isPending}
+              onClick={() => verifyEmail.mutate()}
+            >
+              {verifyEmail.isPending ? "Sending…" : "Send verification email"}
+            </Button>
+          ) : (
+            <p>
+              Email verification is temporarily unavailable. Your sign-in is available, but profile
+              saving requires a verified email.
+            </p>
+          )}
+        </section>
+      ) : null}
 
       <PotentialResultMatchesPanel />
 
@@ -447,7 +474,7 @@ function SignedInAccount() {
               required
               value={account.data.verifiedEmail}
               disabled
-              help="Managed by your signed-in Google account."
+              help="Managed securely by your sign-in account."
             />
             <TextField
               label="Display name"

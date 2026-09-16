@@ -1,6 +1,6 @@
 export const AUTH_DIALOG_EVENT = "athrecs:open-athlete-auth";
 
-export type AuthDialogMode = "signin" | "signup" | "forgot" | "reset";
+export type AuthDialogMode = "signin" | "signup" | "forgot" | "reset" | "code";
 
 export type AuthDialogOptions = {
   callbackURL?: string;
@@ -9,12 +9,7 @@ export type AuthDialogOptions = {
 };
 
 export type DirectSocialProviderId =
-  | "google"
-  | "apple"
-  | "microsoft"
-  | "facebook"
-  | "twitter"
-  | "linkedin";
+  "google" | "apple" | "microsoft" | "facebook" | "twitter" | "linkedin";
 
 export type BrokerSocialProviderId = "grok-google" | "grok-x";
 export type AthleteAuthProviderId = DirectSocialProviderId | BrokerSocialProviderId;
@@ -27,6 +22,7 @@ export type AvailableSocialProvider = {
 
 export type AvailableAuthMethods = {
   emailPassword: boolean;
+  emailCode: boolean;
   passwordReset: boolean;
   providers: AvailableSocialProvider[];
 };
