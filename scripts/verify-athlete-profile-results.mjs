@@ -46,7 +46,7 @@ assert.match(component, /Remove from profile/);
 assert.match(component, /Removed from my profile/);
 assert.match(component, /Restore/);
 assert.match(component, /official result stays in ATHRECS/i);
-assert.match(component, /CompactResultList/);
+assert.match(component, /<CompactResultsTable/);
 assert.match(component, /queryKey: \["my-athlete-bio"\]/);
 
 assert.match(profileRoute, /AthleteResultsSection/);
