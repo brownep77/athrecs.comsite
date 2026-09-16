@@ -10,13 +10,14 @@ const origin = "http://127.0.0.1:18226";
 process.env.BETTER_AUTH_URL = origin;
 const server = await createServer({ server: { host: "127.0.0.1", port: 18226, strictPort: true } });
 let browser;
+let page;
 try {
   await server.listen();
   browser = await chromium.launch({
     headless: true,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
   });
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const pageErrors = [];
   page.on("pageerror", (error) => pageErrors.push(error.message));
   const requests = [];
@@ -37,6 +38,7 @@ try {
     });
   });
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle", timeout: 60000 });
+  await page.getByRole("button", { name: "No thanks", exact: true }).click();
   await page.getByRole("button", { name: "Sign in or create account", exact: true }).click();
   await page.getByRole("button", { name: "Continue with an email code" }).click();
   const dialog = page.getByRole("dialog", { name: "Sign in with an email code" });
@@ -70,6 +72,10 @@ try {
   console.log(
     "Email-code browser checks passed: passwordless form, delivery request, code focus, countdown, errors and changing email.",
   );
+} catch (error) {
+  await mkdir("artifacts", { recursive: true });
+  await page?.screenshot({ path: "artifacts/email-code-failure.png", fullPage: true });
+  throw error;
 } finally {
   await browser?.close();
   await server.close();
