@@ -17,10 +17,7 @@ const raceRoute = await readFile(resolve(root, "src/routes/races/$slug.tsx"), "u
 const homeRoute = await readFile(resolve(root, "src/routes/index.tsx"), "utf8");
 const claimRoute = await readFile(resolve(root, "src/routes/claim-results.tsx"), "utf8");
 const vercelConfig = JSON.parse(await readFile(resolve(root, "vercel.json"), "utf8"));
-const adminClaimRoute = await readFile(
-  resolve(root, "src/routes/admin/result-claims.tsx"),
-  "utf8",
-);
+const adminClaimRoute = await readFile(resolve(root, "src/routes/admin/result-claims.tsx"), "utf8");
 const staffShell = await readFile(
   resolve(root, "src/components/staff/StaffMicrositeShell.tsx"),
   "utf8",
@@ -100,7 +97,14 @@ assert.match(
 assert.match(submitDefinition, /notifyResultClaimReviewed/);
 assert.match(submitDefinition, /notifyResultClaimSubmitted/);
 
-assert.match(athleteRoute, /Claim this result/);
+assert.match(athleteRoute, /CompactResults/);
+assert.match(
+  await readFile(
+    new URL("../src/components/athletes/CompactResultsTable.tsx", import.meta.url),
+    "utf8",
+  ),
+  /Claim this result/,
+);
 assert.match(raceRoute, /to="\/claim-results"/);
 assert.match(homeRoute, /Claim race results/);
 assert.match(staffShell, /\/admin\/result-claims/);
@@ -136,9 +140,7 @@ assert.doesNotMatch(claimRoute, /<textarea/);
 for (const source of ["/claim-results", "/athlete-account"]) {
   const rule = vercelConfig.headers.find((entry) => entry.source === source);
   assert.ok(rule, "Missing no-store header rule for " + source);
-  const cacheControl = rule.headers.find(
-    (header) => header.key.toLowerCase() === "cache-control",
-  );
+  const cacheControl = rule.headers.find((header) => header.key.toLowerCase() === "cache-control");
   assert.match(cacheControl?.value ?? "", /no-store/);
 }
 assert.match(adminClaimRoute, /Optional evidence links/);

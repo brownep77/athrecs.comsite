@@ -13,6 +13,10 @@ const privateProfileResults = await readFile(
   resolve(root, "src/components/athletes/AthleteResultsSection.tsx"),
   "utf8",
 );
+const profileHighlights = await readFile(
+  resolve(root, "src/components/athletes/ProfileAchievements.tsx"),
+  "utf8",
+);
 const routeTree = await readFile(resolve(root, "src/routeTree.gen.ts"), "utf8");
 const resultClaimVerifier = await readFile(
   resolve(root, "scripts/verify-result-claims.mjs"),
@@ -42,7 +46,9 @@ assert.match(privateProfileRoute, /createFileRoute\("\/my-athlete-profile"\)/);
 assert.match(privateProfileRoute, /getMyAthleteAccount/);
 assert.match(privateProfileRoute, /enabled: Boolean\(user\)/);
 assert.match(privateProfileRoute, /Private profile/);
-assert.match(privateProfileResults, /Personal bests/);
+assert.match(privateProfileRoute, /<ProfileRecordHighlights/);
+assert.match(profileHighlights, /<PersonalBestStrip results=\{results\}/);
+assert.match(profileHighlights, /Personal bests/);
 assert.match(privateProfileResults, /Remove from profile/);
 assert.match(privateProfileResults, /Removed from my profile/);
 assert.match(privateProfileRoute, /Only you and authorised ATHRECS staff can view this profile/);

@@ -15,18 +15,9 @@ const migration = await readFile(
   resolve(root, "migrations/0026_athlete_public_shares.sql"),
   "utf8",
 );
-const helpers = await readFile(
-  resolve(root, "src/lib/athrecs/athlete-profile-share.ts"),
-  "utf8",
-);
-const api = await readFile(
-  resolve(root, "src/lib/athrecs/athlete-profile-share-api.ts"),
-  "utf8",
-);
-const card = await readFile(
-  resolve(root, "src/components/athletes/ShareProfileCard.tsx"),
-  "utf8",
-);
+const helpers = await readFile(resolve(root, "src/lib/athrecs/athlete-profile-share.ts"), "utf8");
+const api = await readFile(resolve(root, "src/lib/athrecs/athlete-profile-share-api.ts"), "utf8");
+const card = await readFile(resolve(root, "src/components/athletes/ShareProfileCard.tsx"), "utf8");
 const button = await readFile(
   resolve(root, "src/components/athletes/ShareProfileButton.tsx"),
   "utf8",
@@ -62,8 +53,13 @@ assert.match(api, /getPublishedSharedProfile/);
 assert.match(api, /enabled = true/);
 assert.match(api, /athlete_profile_hidden_results/);
 assert.match(api, /Confirm that you want to publish/);
-assert.doesNotMatch(api, /verified_email|date_of_birth|postcode|profilePhotoUrl|previous_names/);
+assert.doesNotMatch(api, /verified_email|postcode|profilePhotoUrl|previous_names/);
 assert.match(api, /no photograph|share_bio|share_results|share_club|share_location/i);
+assert.match(
+  api,
+  /publicProfileDetails\(identity.profile_details, identity.date_of_birth\)/,
+  "Birthday must use the explicit visibility projection; runtime privacy tests cover each setting",
+);
 
 assert.match(card, /Share profile/);
 assert.match(card, /Create a shareable profile link/);
@@ -72,7 +68,7 @@ assert.match(card, /Save sharing/);
 assert.match(button, /Copy link/);
 assert.match(button, /navigator.share/);
 assert.match(sharedPage, /Shared by athlete/);
-assert.match(sharedPage, /photograph stay private/);
+assert.match(sharedPage.replace(/\s+/g, " "), /photograph stay private/);
 
 assert.match(profileRoute, /ShareProfileCard/);
 assert.match(athleteRoute, /getPublishedSharedProfile/);

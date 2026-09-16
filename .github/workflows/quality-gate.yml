@@ -160,6 +160,18 @@ jobs:
       - name: Sponsorship enquiry round trip
         run: node scripts/browser-sponsorship-smoke.mjs http://127.0.0.1:8080/
 
+      - name: Compact athlete profiles and achievements
+        run: |
+          BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Personal bests||Achievements board||Paul Evans||Results history' \
+            node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/paul-browne "$GITHUB_WORKSPACE/artifacts/paul-compact.png"
+          BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
+          BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
+          BROWSER_SMOKE_FULL_PAGE=1 \
+          BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Achievements board||Results history' \
+            node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/paul-browne "$GITHUB_WORKSPACE/artifacts/paul-compact-mobile.png"
+          BROWSER_SMOKE_EXPECT_TEXT='Harry Styles||Achievements board||Marathon majors journey||Results history' \
+            node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/harry-styles "$GITHUB_WORKSPACE/artifacts/harry-compact.png"
+
       - name: Browser smoke tests
         run: |
           BROWSER_SMOKE_FULL_PAGE=1 \

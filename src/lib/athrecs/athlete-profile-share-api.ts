@@ -1,3 +1,5 @@
+import { publicProfileDetails, type PublicProfileDetails } from "./profile-details";
+import { loadUpcoming, type UpcomingEvent } from "./athlete-upcoming-api";
 import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
@@ -40,6 +42,10 @@ export type SharedAthleteProfile = {
   city: string;
   region: string;
   country: string;
+  details: PublicProfileDetails;
+  nationality: string;
+  coaches: { sport: string; name: string }[];
+  upcoming: UpcomingEvent[];
   primarySport: string;
   sports: string[];
   connections: ProfileConnection[];
@@ -67,6 +73,9 @@ type IdentityRow = {
   city: string | null;
   region: string | null;
   country: string | null;
+  nationality: string | null;
+  date_of_birth: string | null;
+  profile_details: unknown;
   club_or_team: string | null;
 };
 
@@ -118,7 +127,7 @@ async function loadIdentity(
       profile.city,
       profile.region,
       profile.country,
-      profile.club_or_team
+      profile.club_or_team, profile.nationality, profile.date_of_birth::text as date_of_birth, profile.profile_details
     from "user" account_user
     join athlete_identifiers identifier on identifier.user_id = account_user."id"
     left join athlete_private_profiles profile on profile.user_id = account_user."id"
@@ -181,6 +190,7 @@ async function loadVisibleResults(
     sport: string;
     surface: string;
     country: string;
+    city: string;
     distance_km: number;
     status: string;
     chip_time_seconds: number | null;
@@ -199,7 +209,7 @@ async function loadVisibleResults(
       result.id as result_id,
       exists (select 1 from athlete_profile_hidden_results hidden where hidden.user_id = ${userId} and hidden.result_id = result.id) as hidden,
       edition.id as edition_id,
-      event.sport, event.surface, event.country, edition.distance_km,
+      event.sport, event.surface, event.country, event.city, edition.distance_km,
       result.status, result.chip_time_seconds, result.gun_time_seconds,
       array(select distinct link from (
         select result.source_url as link
@@ -229,6 +239,7 @@ async function loadVisibleResults(
       sport: row.sport,
       surface: row.surface,
       country: row.country,
+      city: row.city,
       distanceKm: Number(row.distance_km),
       status: row.status,
       chipTimeSeconds: row.chip_time_seconds,
@@ -249,10 +260,10 @@ async function buildPublicProfile(
   sql: Awaited<ReturnType<typeof getSql>>,
   share: ShareRow,
 ): Promise<SharedAthleteProfile> {
-  const [identity, sportRows, bioRows, results, connectionRows] = await Promise.all([
+  const [identity, sportRows, bioRows, results, connectionRows, upcoming] = await Promise.all([
     loadIdentity(sql, share.user_id),
-    sql<{ sport_code: string }>`
-      select sport_code
+    sql<{ sport_code: string; coach_name: string }>`
+      select sport_code, coach_name
       from athlete_sport_profiles
       where user_id = ${share.user_id}
       order by is_primary desc, sport_code
@@ -269,8 +280,15 @@ async function buildPublicProfile(
       where user_id = ${share.user_id} and share_publicly = true
       order by platform
     `,
+    loadUpcoming(share.user_id, null, true),
   ]);
 
+  const linked = await sql<{
+    athlete_id: number;
+  }>`select athlete_id from athlete_account_links where user_id=${share.user_id} and status='active'`;
+  const sourceFixtures = await Promise.all(
+    linked.map((link) => loadUpcoming(null, link.athlete_id, true)),
+  );
   const displayName = displayNameOf(identity);
   const primarySport = sportRows[0]?.sport_code ?? "";
   const bioMode = bioRows[0]?.mode ?? "automatic";
@@ -301,6 +319,15 @@ async function buildPublicProfile(
     city: share.share_location ? (identity.city?.trim() ?? "") : "",
     region: share.share_location ? (identity.region?.trim() ?? "") : "",
     country: share.share_location ? (identity.country?.trim() ?? "") : "",
+    details: {
+      ...publicProfileDetails(identity.profile_details, identity.date_of_birth),
+      ...(!share.share_club ? { previousClub: "" } : {}),
+    },
+    nationality: identity.nationality ?? "",
+    coaches: sportRows.map((row) => ({ sport: row.sport_code, name: row.coach_name ?? "" })),
+    upcoming: [...upcoming, ...sourceFixtures.flat()].sort((a, b) =>
+      a.eventDate.localeCompare(b.eventDate),
+    ),
     primarySport,
     sports: sportRows.map((row) => row.sport_code),
     connections: connectionRows.map((row) => ({
@@ -384,7 +411,11 @@ export const getPublishedSharedProfile = createServerFn({ method: "GET" })
           acknowledged_at::text as acknowledged_at,
           published_at::text as published_at
         from athlete_public_shares
-        where slug = ${data.slug}
+        where (slug = ${data.slug} or exists (
+          select 1 from athlete_account_links link join athletes a on a.id=link.athlete_id
+          where link.user_id=athlete_public_shares.user_id and link.status='active'
+            and a.slug=${data.slug} and a.profile_visibility='public' and a.profile_type <> 'Public figure'
+        ))
           and enabled = true
         limit 1
       `;

@@ -1,3 +1,5 @@
+import { readProfileDetails } from "@/lib/athrecs/profile-details";
+import { ShareProfileCard } from "@/components/athletes/ShareProfileCard";
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -191,6 +193,7 @@ function accountToForm(account: AthleteAccountData): AthleteAccountInput {
     region: account.region,
     city: account.city,
     postcode: account.postcode,
+    profileDetails: readProfileDetails(account.profileDetails),
     nationality: account.nationality,
     clubOrTeam: account.clubOrTeam,
     preferredLanguage: account.preferredLanguage,
@@ -429,7 +432,7 @@ function SignedInAccount() {
         <AccountSection
           icon={UserRound}
           title="Identity and Entry Passport"
-          description="Full name and verified email are required. Everything else in this section is optional and private."
+          description="Full name and verified email are required. Other fields are optional. Your profile stays private until you enable sharing."
         >
           <div className="grid gap-4 md:grid-cols-2">
             <TextField
@@ -505,6 +508,77 @@ function SignedInAccount() {
               onChange={(value) => setForm({ ...form, preferredLanguage: value })}
             />
           </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {(
+              [
+                ["birthCountry", "Country of birth"],
+                ["previousClub", "Previous club or team"],
+                ["coach", "Coach"],
+                ["manager", "Manager"],
+                ["runningAgeCategory", "Running age category"],
+              ] as const
+            ).map(([field, label]) => (
+              <TextField
+                key={field}
+                label={label}
+                value={form.profileDetails?.[field] ?? ""}
+                onChange={(value) =>
+                  setForm({
+                    ...form,
+                    profileDetails: { ...readProfileDetails(form.profileDetails), [field]: value },
+                  })
+                }
+                help={
+                  field === "runningAgeCategory"
+                    ? "Published independently of your birthday, e.g. M45 or W40. Update when your category changes."
+                    : field === "coach"
+                      ? "You can also add a coach for each sport below."
+                      : undefined
+                }
+              />
+            ))}
+            <SelectField
+              label="Birthday display on public profile"
+              value={form.profileDetails?.birthdayVisibility ?? "hidden"}
+              options={[
+                ["hidden", "Do not display"],
+                ["day-month", "Day and month only"],
+                ["full", "Full date of birth"],
+              ]}
+              onChange={(value) =>
+                setForm({
+                  ...form,
+                  profileDetails: {
+                    ...readProfileDetails(form.profileDetails),
+                    birthdayVisibility: value as "hidden" | "day-month" | "full",
+                  },
+                })
+              }
+            />
+          </div>
+          <label className="mt-4 flex items-start gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={form.profileDetails?.acceptContact ?? false}
+              onChange={(event) =>
+                setForm({
+                  ...form,
+                  profileDetails: {
+                    ...readProfileDetails(form.profileDetails),
+                    acceptContact: event.target.checked,
+                  },
+                })
+              }
+              className="mt-1"
+            />
+            <span>
+              I am open to being contacted about my athlete profile.
+              <span className="block text-xs text-muted">
+                Shows your contact preference on your public profile. Your email stays private; this
+                is separate from marketing consent.
+              </span>
+            </span>
+          </label>
           <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-fg">
             <SearchCheck className="size-4 text-accent" aria-hidden="true" /> Find your previous
             results
@@ -882,6 +956,13 @@ function SignedInAccount() {
           </div>
         </div>
       </form>
+      <section id="profile-visibility" className="space-y-3">
+        <h2 className="font-display text-xl font-semibold">Public or private profile</h2>
+        <p className="text-sm text-muted">
+          Save your details above, then choose whether to publish your profile.
+        </p>
+        <ShareProfileCard />
+      </section>
     </div>
   );
 }

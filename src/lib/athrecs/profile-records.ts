@@ -1,4 +1,5 @@
 export type ProfileResult = {
+  city?: string;
   resultId: number;
   editionId: number;
   athleteName?: string;

@@ -1,3 +1,4 @@
+import { readProfileDetails, type AthleteProfileDetails } from "./profile-details";
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
@@ -93,6 +94,7 @@ export type AthleteAccountData = {
   region: string;
   city: string;
   postcode: string;
+  profileDetails?: AthleteProfileDetails;
   nationality: string;
   clubOrTeam: string;
   preferredLanguage: string;
@@ -127,6 +129,7 @@ export type AthleteAccountInput = {
   region?: string;
   city?: string;
   postcode?: string;
+  profileDetails?: AthleteProfileDetails;
   nationality?: string;
   clubOrTeam?: string;
   preferredLanguage?: string;
@@ -163,6 +166,7 @@ type ProfileRow = {
   region: string | null;
   city: string | null;
   postcode: string | null;
+  profile_details: AthleteProfileDetails;
   nationality: string | null;
   club_or_team: string | null;
   preferred_language: string | null;
@@ -411,6 +415,7 @@ function validateAccountInput(value: AthleteAccountInput): AthleteAccountInput {
     throw new Error("Read and acknowledge the Athlete Account privacy notice");
   }
   return {
+    profileDetails: readProfileDetails(value?.profileDetails),
     fullName: text(value?.fullName, 120, "Full name", true),
     displayName: text(value?.displayName, 120, "Display name"),
     dateOfBirth: optionalDate(value?.dateOfBirth),
@@ -542,7 +547,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         select
           athlete_profile_id::text as athlete_profile_id,
           full_name, display_name, date_of_birth::text as date_of_birth,
-          country, region, city, postcode, nationality, club_or_team,
+          country, region, city, postcode, nationality, club_or_team, profile_details,
           preferred_language, previous_names, parkrun_id, athletics_urn,
           power_of_10_url, world_athletics_url, fingerprint_event,
           fingerprint_year, fingerprint_distance, fingerprint_time,
@@ -591,6 +596,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       edition_id: number;
       surface: string;
       event_country: string;
+      event_city: string;
       distance_km: number;
       result_status: string;
       result_source: string | null;
@@ -612,6 +618,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
           edition.id as edition_id,
           event.surface,
           event.country as event_country,
+          event.city as event_city,
           edition.distance_km,
           result.status as result_status,
           result.result_source,
@@ -666,6 +673,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     region: profile?.region ?? "",
     city: profile?.city ?? "",
     postcode: profile?.postcode ?? "",
+    profileDetails: readProfileDetails(profile?.profile_details),
     nationality: profile?.nationality ?? "",
     clubOrTeam: profile?.club_or_team ?? "",
     preferredLanguage: profile?.preferred_language ?? "",
@@ -699,6 +707,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       editionId: row.edition_id,
       surface: row.surface,
       country: row.event_country,
+      city: row.event_city,
       distanceKm: Number(row.distance_km),
       status: row.result_status,
       resultSource: row.result_source,
@@ -827,7 +836,7 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
       await tx`
         insert into athlete_private_profiles (
           user_id, verified_email, full_name, display_name, date_of_birth,
-          country, region, city, postcode, nationality, club_or_team,
+          country, region, city, postcode, nationality, club_or_team, profile_details,
           preferred_language, previous_names, parkrun_id, athletics_urn,
           power_of_10_url, world_athletics_url, fingerprint_event,
           fingerprint_year, fingerprint_distance, fingerprint_time,
@@ -837,7 +846,7 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
           ${context.userId}, ${user.email}, ${data.fullName}, ${data.displayName || null},
           ${data.dateOfBirth || null}::date, ${data.country || null}, ${data.region || null},
           ${data.city || null}, ${data.postcode || null}, ${data.nationality || null},
-          ${data.clubOrTeam || null}, ${data.preferredLanguage || null},
+          ${data.clubOrTeam || null}, ${JSON.stringify(data.profileDetails)}::jsonb, ${data.preferredLanguage || null},
           ${data.previousNames ?? []}, ${data.parkrunId || null}, ${data.athleticsUrn || null},
           ${data.powerOf10Url || null}, ${data.worldAthleticsUrl || null},
           ${data.fingerprintEvent || null}, ${data.fingerprintYear || null},
@@ -853,6 +862,7 @@ export const saveMyAthleteAccount = createServerFn({ method: "POST" })
           region = excluded.region,
           city = excluded.city,
           postcode = excluded.postcode,
+          profile_details = excluded.profile_details,
           nationality = excluded.nationality,
           club_or_team = excluded.club_or_team,
           preferred_language = excluded.preferred_language,
