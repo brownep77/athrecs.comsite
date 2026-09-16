@@ -233,3 +233,26 @@ assert.equal(
 console.log(
   "Profile achievement checks passed: completion, deduplication, distance/sport, countries and seven-day boundaries.",
 );
+
+// Flag resolution must not depend on the ICU version in Node or Chromium.
+const originalDisplayNames = Intl.DisplayNames;
+try {
+  Intl.DisplayNames = class {
+    constructor() {
+      throw new Error("Runtime region names must not be used");
+    }
+  };
+  const { countryFlag } = await import("../src/lib/athrecs/country-flags.ts?stable-region-test");
+  for (const [value, code, name] of [
+    ["Hong Kong", "HK", "Hong Kong"],
+    ["Macau", "MO", "Macau"],
+    ["British", "GB", "United Kingdom"],
+    ["IE", "IE", "Ireland"],
+  ]) {
+    assert.equal(countryFlag(value).code, code);
+    assert.equal(countryFlag(value).name, name);
+  }
+  assert.equal(countryFlag("Unspecified").code, "");
+} finally {
+  Intl.DisplayNames = originalDisplayNames;
+}
