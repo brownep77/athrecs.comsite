@@ -18,13 +18,22 @@ import { readdir, readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 import pg from "pg";
-import { postgresConnectionConfig } from "../src/lib/postgres-connection.js";
+import {
+  migrationConnectionString,
+  postgresConnectionConfig,
+} from "../src/lib/postgres-connection.js";
 
 const strictMigrations =
   process.env.MIGRATIONS_STRICT === "true" ||
   process.env.MIGRATIONS_REQUIRED === "true" ||
   process.env.VERCEL_ENV === "production";
-const databaseUrl = process.env.DATABASE_URL?.trim();
+const configuredDatabaseUrl =
+  process.env.DATABASE_URL_UNPOOLED?.trim() ||
+  process.env.POSTGRES_URL_NON_POOLING?.trim() ||
+  process.env.DATABASE_URL?.trim();
+const databaseUrl = configuredDatabaseUrl
+  ? migrationConnectionString(configuredDatabaseUrl)
+  : undefined;
 if (!databaseUrl) {
   if (strictMigrations) {
     console.error(
@@ -32,17 +41,11 @@ if (!databaseUrl) {
     );
     process.exit(1);
   }
-  console.log(
-    "[migrate] DATABASE_URL not set — skipping (the PGLite fallback migrates itself).",
-  );
+  console.log("[migrate] DATABASE_URL not set — skipping (the PGLite fallback migrates itself).");
   process.exit(0);
 }
 
-const migrationsDir = join(
-  dirname(fileURLToPath(import.meta.url)),
-  "..",
-  "migrations",
-);
+const migrationsDir = join(dirname(fileURLToPath(import.meta.url)), "..", "migrations");
 
 function poolConfig(url) {
   return postgresConnectionConfig(url, {
@@ -107,26 +110,25 @@ async function main() {
     throw err;
   }
 
+  let migrationLockHeld = false;
   try {
     // AthRecs and RunRecs can build concurrently against the same database.
-    // Hold a session lock across migration discovery and application so both
-    // deployments cannot try to create the same new tables. Closing this
-    // single-connection pool in finally releases the lock, including on error.
+    // Use a direct connection: a pooled Neon backend can retain session locks
+    // after the client disconnects, and then lend the locked session to others.
+    await client.query("SET lock_timeout = '60s'");
+    console.log("[migrate] connected; waiting up to 60s for the schema migration lock.");
     await client.query("SELECT pg_advisory_lock(hashtext('athrecs-schema-migrations'))");
+    migrationLockHeld = true;
     await client.query(
       "CREATE TABLE IF NOT EXISTS _migrations (name TEXT PRIMARY KEY, applied_at TIMESTAMPTZ NOT NULL DEFAULT now())",
     );
     const applied = new Set(
-      (await client.query("SELECT name FROM _migrations")).rows.map(
-        (r) => r.name,
-      ),
+      (await client.query("SELECT name FROM _migrations")).rows.map((r) => r.name),
     );
 
     let files;
     try {
-      files = (await readdir(migrationsDir))
-        .filter((f) => f.endsWith(".sql"))
-        .sort();
+      files = (await readdir(migrationsDir)).filter((f) => f.endsWith(".sql")).sort();
     } catch {
       console.log("[migrate] no migrations/ directory — nothing to do.");
       return;
@@ -139,9 +141,7 @@ async function main() {
       try {
         await client.query("BEGIN");
         await client.query(text);
-        await client.query("INSERT INTO _migrations (name) VALUES ($1)", [
-          name,
-        ]);
+        await client.query("INSERT INTO _migrations (name) VALUES ($1)", [name]);
         await client.query("COMMIT");
       } catch (err) {
         console.error(`[migrate] error applying ${name}`);
@@ -156,21 +156,24 @@ async function main() {
       count += 1;
     }
     console.log(
-      count
-        ? `[migrate] done — ${count} migration(s) applied.`
-        : "[migrate] up to date.",
+      count ? `[migrate] done — ${count} migration(s) applied.` : "[migrate] up to date.",
     );
   } finally {
-    client.release();
-    await pool.end();
+    try {
+      if (migrationLockHeld) {
+        await client.query("SELECT pg_advisory_unlock(hashtext('athrecs-schema-migrations'))");
+        console.log("[migrate] schema migration lock released.");
+      }
+    } finally {
+      client.release(true);
+      await pool.end();
+    }
   }
 }
 
 main().catch((err) => {
   if (isTransientDbError(err) && !strictMigrations) {
-    console.warn(
-      "[migrate] transient DB error — skipping migrations for this build.",
-    );
+    console.warn("[migrate] transient DB error — skipping migrations for this build.");
     console.warn(`[migrate]   ${err?.code || ""} ${err?.message || err}`);
     process.exit(0);
   }

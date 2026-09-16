@@ -1,6 +1,18 @@
 const LEGACY_STRICT_SSL_MODES = new Set(["prefer", "require", "verify-ca"]);
 const SSL_QUERY_PARAMETERS = ["ssl", "sslmode", "sslcert", "sslkey", "sslrootcert"];
 
+/** Migrations need a dedicated session; Neon transaction pooling cannot retain session locks. */
+export function migrationConnectionString(rawConnectionString) {
+  const value = rawConnectionString.trim();
+  const url = parsePostgresUrl(value);
+  if (!url || !url.hostname.endsWith(".neon.tech")) return value;
+  const labels = url.hostname.split(".");
+  if (!labels[0].endsWith("-pooler")) return value;
+  labels[0] = labels[0].slice(0, -"-pooler".length);
+  url.hostname = labels.join(".");
+  return url.toString();
+}
+
 function parsePostgresUrl(rawConnectionString) {
   const value = rawConnectionString.trim();
   try {
