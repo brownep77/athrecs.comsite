@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, SearchCheck, Users, UserRound, CalendarDays } from "lucide-react";
+import { Home, SearchCheck, Users, UserRound, CalendarDays, Handshake } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
@@ -30,6 +30,12 @@ const nav = [
     label: "Find events",
     icon: CalendarDays,
     match: (p: string) => p === "/find-events",
+  },
+  {
+    to: "/brands",
+    label: "Brands",
+    icon: Handshake,
+    match: (p: string) => p.startsWith("/brands") || p === "/opportunities",
   },
 ] as const;
 
@@ -66,7 +72,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="mx-auto flex min-h-dvh w-full max-w-6xl flex-col overflow-x-hidden bg-bg">
-      <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md md:block">
+      <header className="safe-pt sticky top-0 z-40 hidden border-b border-border/80 bg-bg/90 backdrop-blur-md lg:block">
         <div className="flex h-16 items-center justify-between gap-3 px-6">
           <BrandLink desktop />
           <nav className="flex items-center gap-0.5" aria-label="Primary">
@@ -94,7 +100,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </nav>
         </div>
       </header>
-      <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md md:hidden">
+      <header className="safe-pt sticky top-0 z-40 border-b border-border/80 bg-bg/90 backdrop-blur-md lg:hidden">
         <div className="flex h-14 items-center justify-between gap-2 px-4">
           <BrandLink />
           <AthleteAccountAccess compact />
@@ -108,9 +114,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         ) : null}
         {children}
       </main>
-      <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 md:pb-5">
+      <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
+          <Link to="/brands" className="hover:text-accent">Brands & Partners</Link>
+          <Link to="/opportunities" className="hover:text-accent">Opportunities</Link>
           <Link to="/find-events" className="hover:text-accent">
             Find events
           </Link>
@@ -123,10 +131,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </div>
       </footer>
       <nav
-        className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md md:hidden"
+        className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md lg:hidden"
         aria-label="Primary"
       >
-        <ul className="mx-auto grid max-w-lg grid-cols-5 px-1 pt-1">
+        <ul className="mx-auto grid max-w-xl grid-cols-6 px-1 pt-1">
           {nav.map((item) => {
             const active = item.match(pathname);
             return (

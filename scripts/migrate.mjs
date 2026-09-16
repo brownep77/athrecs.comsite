@@ -108,6 +108,11 @@ async function main() {
   }
 
   try {
+    // AthRecs and RunRecs can build concurrently against the same database.
+    // Hold a session lock across migration discovery and application so both
+    // deployments cannot try to create the same new tables. Closing this
+    // single-connection pool in finally releases the lock, including on error.
+    await client.query("SELECT pg_advisory_lock(hashtext('athrecs-schema-migrations'))");
     await client.query(
       "CREATE TABLE IF NOT EXISTS _migrations (name TEXT PRIMARY KEY, applied_at TIMESTAMPTZ NOT NULL DEFAULT now())",
     );

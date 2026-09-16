@@ -313,6 +313,11 @@ function MyAthleteProfilePage() {
         <TabsContent value="overview" className="space-y-5">
           <AthleteBioCard />
           <section className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+            <h2 className="font-display text-xl font-semibold">Brand opportunities</h2>
+            <p className="mt-2 text-sm text-muted">Choose whether to apply for sponsorships, product testing or offers. Your private profile stays under your control.</p>
+            <Button asChild variant="secondary" className="mt-4"><Link to="/opportunities">Manage partnership choices</Link></Button>
+          </section>
+          <section className="rounded-2xl border border-border bg-surface p-5 shadow-card">
             <h2 className="font-display text-xl font-semibold">My sports</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {data.sports

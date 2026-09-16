@@ -110,6 +110,29 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
+        <NoticeSection title="Brand partnerships and applications">
+          <p>
+            Registering a brand shares your company details, representative name, role and account
+            email with authorised AthRecs reviewers. Only approved company descriptions, categories,
+            websites, sports and markets are public. Representative details and email stay private.
+          </p>
+          <p className="mt-3">
+            Partnership choices are separate from email marketing consent and start switched off.
+            They do not publish an athlete profile or give companies access to private account data.
+            Applications are currently for adults aged 18 and over. After review, applying shares
+            the selected athlete or club name, club website if supplied, and application message
+            with that opportunity's brand. A reply stays in your dashboard. No automatic marketing
+            emails are enabled by these choices.
+          </p>
+          <p className="mt-3">
+            You can withdraw an application in Opportunities. Turning off a partnership category
+            also withdraws your athlete applications in that category. Withdrawal removes the
+            brand's access in AthRecs but cannot recall information already read or copied.
+            Decisions, declarations and withdrawals are recorded for review and dispute handling.
+            Agreement to an application does not grant advertising or image rights.
+          </p>
+        </NoticeSection>
+
         <NoticeSection title="Access, correction and withdrawal">
           <p>
             Use My Athlete Account to review and correct your details or change consent choices.
@@ -119,7 +142,7 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <p className="text-xs text-subtle">Athlete Account notice version: 23 August 2026.</p>
+        <p className="text-xs text-subtle">Athlete Account notice: 23 August 2026. Partnerships addition: 16 September 2026.</p>
       </section>
 
       <div className="flex justify-end">
