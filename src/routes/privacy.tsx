@@ -105,8 +105,12 @@ function AthletePrivacyPage() {
             You can optionally create an unlisted shareable profile from My Athlete Profile. That
             page is off unless you turn sharing on, is not added to the Athletes directory, and can
             be withdrawn immediately. A published share includes only the display name plus the
-            club, location, bio and claimed results you select. Email, date of birth, postcode,
-            photograph, previous names, IDs and product preferences stay private.
+            club, location, bio and claimed results you select. Email, postcode, photograph,
+            previous names, external IDs and product preferences stay private. Your AthRecs ID
+            identifies the profile across sports. Nationality, country of birth, age category,
+            coach, manager and contact preference can appear on the shared profile. Your birthday
+            stays hidden unless you choose to display its day and month or full date in your
+            account.
           </p>
         </NoticeSection>
 

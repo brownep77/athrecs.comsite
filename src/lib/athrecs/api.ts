@@ -1,3 +1,7 @@
+import { parseProfileRoles } from "./athlete-profile-roles";
+import { combineProfileResults } from "./profile-records";
+import { publicProfileDetails } from "./profile-details";
+import { loadUpcoming } from "./athlete-upcoming-api";
 import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql, dbSource } from "@/lib/db";
@@ -844,6 +848,8 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
     const sql = await ready();
     const athleteNumber = parseAthleteId(slug);
     const rows = await sql<{
+      profile_details: unknown;
+      date_of_birth: string | null;
       id: number;
       athlete_number: string;
       slug: string;
@@ -861,7 +867,9 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       club_slug: string | null;
     }>`
       select
-        a.*,
+        a.id, a.slug, a.display_name, a.gender, a.city, a.county, a.country, a.bio,
+        a.profile_type, a.profile_roles, a.profile_source_checked_at::text as profile_source_checked_at,
+        a.profile_details, a.date_of_birth::text as date_of_birth,
         identifier.athlete_number::text as athlete_number,
         c.name as club,
         c.slug as club_slug,
@@ -876,13 +884,24 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       where (a.slug = ${slug}
         or identifier.athlete_number::text = ${athleteNumber}
         or identifier.source_number::text = ${athleteNumber})
-        and (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
+        and (a.profile_type = 'Public figure' or (a.profile_visibility = 'public' and not exists (
+          select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+          where l.athlete_id=a.id and l.status='active' and s.enabled=false
+        )))
       order by (a.slug = ${slug}) desc, a.id
       limit 1
     `;
     const athlete = rows[0];
     if (!athlete) return null;
     const results = await sql<{
+      edition_id: number;
+      surface: string;
+      country: string;
+      city: string;
+      distance_km: number;
+      status: string;
+      chip_time_seconds: number | null;
+      gun_time_seconds: number | null;
       id: number;
       event_name: string;
       event_slug: string;
@@ -896,7 +915,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       source_url: string | null;
     }>`
       select
-        r.id,
+        r.id, r.edition_id, e.surface, e.country, e.city, ed.distance_km, r.status, r.chip_time_seconds, r.gun_time_seconds,
         e.name as event_name,
         e.slug as event_slug,
         e.sport,
@@ -915,9 +934,64 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
           ${athlete.profile_type} = 'Public figure'
           or r.result_visibility in ('public', 'public_figure')
         )
+        and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=r.athlete_id and hidden.result_id=r.id)
+        and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=r.athlete_id and l.status='active' and s.share_results=false)
       order by ed.event_date desc
     `;
-    return { athlete, results };
+    const links = await sql<{
+      user_id: string;
+    }>`select l.user_id from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id and s.enabled=true where l.athlete_id=${athlete.id} and l.status='active' limit 1`;
+    const { date_of_birth, profile_details, ...safeAthlete } = athlete;
+    const [{ athletes: athleteCatalogue }, { publicFigureAthletes }] = await Promise.all([
+      import("@/data/athletes"),
+      import("@/data/public-figures"),
+    ]);
+    const seed = [...athleteCatalogue, ...publicFigureAthletes].find(
+      (item) => item.slug === athlete.slug,
+    );
+    const details = publicProfileDetails(profile_details, date_of_birth);
+    return {
+      athlete: {
+        ...safeAthlete,
+        details,
+        aliases: seed?.aliases ?? [],
+        date_of_birth:
+          athlete.profile_type === "Public figure" ? (seed?.date_of_birth ?? null) : null,
+        place_of_birth: seed?.place_of_birth ?? null,
+        country_of_birth: details.birthCountry || seed?.country_of_birth || null,
+        address: athlete.profile_type === "Public figure" ? (seed?.address ?? null) : null,
+        nationality: details.nationality || seed?.nationality || null,
+        notes: seed?.notes ?? null,
+        profile_roles: parseProfileRoles(seed?.profile_roles, athlete.profile_roles),
+        profile_links: seed?.profile_links ?? [],
+        notable_achievements: seed?.notable_achievements ?? [],
+      },
+      results,
+      upcoming: await loadUpcoming(links[0]?.user_id ?? null, athlete.id, true),
+      profileResults: combineProfileResults(
+        results.map((r) => ({
+          resultId: r.id,
+          editionId: r.edition_id,
+          eventName: r.event_name,
+          eventSlug: r.event_slug,
+          sport: r.sport,
+          eventDate: r.event_date,
+          distanceCode: r.distance_code,
+          distanceKm: Number(r.distance_km),
+          surface: r.surface,
+          country: r.country,
+          city: r.city,
+          status: r.status,
+          finishTimeSeconds: r.finish_time_seconds,
+          chipTimeSeconds: r.chip_time_seconds,
+          gunTimeSeconds: r.gun_time_seconds,
+          overallPlace: r.overall_place,
+          category: r.category,
+          resultSource: r.result_source,
+          sourceUrls: r.source_url ? [r.source_url] : [],
+        })),
+      ),
+    };
   });
 
 export type PrivateAthleteStub = {

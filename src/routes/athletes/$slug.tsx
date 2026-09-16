@@ -1,24 +1,31 @@
+import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
+import { CompactResults } from "@/components/athletes/CompactResultsTable";
+import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
+import { ProfileDetails } from "@/components/athletes/ProfileDetails";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
 import { getAthleteBySlug, getPrivateAthleteBySlug } from "@/lib/athrecs/api";
-import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
-import { athletes as athleteCatalogue } from "@/data/athletes";
-import { publicFigureAthletes } from "@/data/public-figures";
 import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
 import { SharedAccountProfile } from "@/components/athletes/SharedAccountProfile";
-import { ProfileEventLink } from "@/components/athletes/ProfileEventLink";
 import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-api";
-import { parseProfileRoles } from "@/lib/athrecs/athlete-profile-roles";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
+    const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
+      () => null,
+    );
+    if (shared) {
+      return { kind: "shared-account" as const, profile: shared };
+    }
+
     const data = await getAthleteBySlug({ data: params.slug });
     if (data) {
       if (data.athlete.slug !== params.slug) {
@@ -28,36 +35,7 @@ export const Route = createFileRoute("/athletes/$slug")({
           statusCode: 301,
         });
       }
-      const seed = [...athleteCatalogue, ...publicFigureAthletes].find(
-        (athlete) => athlete.slug === data.athlete.slug,
-      );
-      return {
-        kind: "catalogue" as const,
-        ...data,
-        athlete: {
-          ...data.athlete,
-          aliases: seed?.aliases ?? [],
-          date_of_birth: seed?.date_of_birth ?? null,
-          place_of_birth: seed?.place_of_birth ?? null,
-          country_of_birth: seed?.country_of_birth ?? null,
-          address: seed?.address ?? null,
-          nationality: seed?.nationality ?? null,
-          notes: seed?.notes ?? null,
-          profile_type: seed?.profile_type ?? data.athlete.profile_type ?? "Athlete",
-          profile_roles: parseProfileRoles(seed?.profile_roles, data.athlete.profile_roles),
-          profile_source_checked_at:
-            seed?.profile_source_checked_at ?? data.athlete.profile_source_checked_at ?? null,
-          profile_links: seed?.profile_links ?? [],
-          notable_achievements: seed?.notable_achievements ?? [],
-        },
-      };
-    }
-
-    const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
-      () => null,
-    );
-    if (shared) {
-      return { kind: "shared-account" as const, profile: shared };
+      return { kind: "catalogue" as const, ...data };
     }
 
     const privateAthlete = await getPrivateAthleteBySlug({ data: params.slug });
@@ -182,7 +160,7 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <Link
         to="/athletes"
         className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
@@ -191,7 +169,7 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
         Athletes
       </Link>
 
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
+      <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">Athlete profile</p>
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.displayName}</h1>
         <div className="flex flex-wrap gap-2">
@@ -249,7 +227,7 @@ function AthletePage() {
     return <PrivateAthleteProfile athlete={data.athlete} />;
   }
 
-  const { athlete, results } = data;
+  const { athlete, results, profileResults, upcoming } = data;
   const aliases = athlete.aliases ?? [];
   const dob = formatDob(athlete.date_of_birth);
   const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
@@ -274,7 +252,7 @@ function AthletePage() {
   if (athlete.notes) detailRows.push({ label: "Notes", value: athlete.notes });
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <Link
         to="/athletes"
         className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
@@ -283,7 +261,7 @@ function AthletePage() {
         Athletes
       </Link>
 
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
+      <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">
           {isProfessionalAthlete
             ? "Professional athlete profile"
@@ -292,7 +270,16 @@ function AthletePage() {
               : "Athlete profile"}
         </p>
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
-        <AthleteId number={athlete.athlete_number} />
+        <div className="flex flex-wrap items-center gap-3">
+          <AthleteId number={athlete.athlete_number} />
+          {[
+            ...new Set([...profileResults.map((r) => r.sport), ...upcoming.map((r) => r.sport)]),
+          ].map((sport) => (
+            <Badge key={sport} variant="outline">
+              {sport}
+            </Badge>
+          ))}
+        </div>
         {athlete.club && athlete.club_slug ? (
           <p className="text-sm text-muted">
             <Link
@@ -310,6 +297,12 @@ function AthletePage() {
           <MapPin className="h-3.5 w-3.5" />
           {locationLabel}
         </p>
+        {!isPublicFigure ? (
+          <ProfileDetails
+            details={athlete.details}
+            nationality={athlete.nationality ?? undefined}
+          />
+        ) : null}
         <div className="flex flex-wrap gap-2">
           {athlete.is_claimed ? (
             <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
@@ -365,8 +358,10 @@ function AthletePage() {
         )}
       </section>
 
+      <ProfileRecordHighlights results={profileResults} />
+
       {athlete.profile_links.length > 0 && (
-        <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
+        <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
           <h2 className="font-display text-lg font-semibold text-fg">
             {isProfessionalAthlete ? "Records and follow links" : "Official links"}
           </h2>
@@ -423,8 +418,8 @@ function AthletePage() {
         </section>
       )}
 
-      {detailRows.length > 0 && (
-        <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
+      {isPublicFigure && detailRows.length > 0 && (
+        <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
           <h2 className="font-display text-lg font-semibold text-fg">Personal details</h2>
           <dl className="grid gap-3 sm:grid-cols-2">
             {detailRows.map((row) => (
@@ -439,71 +434,27 @@ function AthletePage() {
         </section>
       )}
 
-      <section className="space-y-3">
-        <h2 className="font-display text-lg font-semibold text-fg">Results history</h2>
-        <p className="text-xs text-subtle">
-          Published finish times only - no composite ratings. Confirm on the official timer site.
-        </p>
-        {results.length === 0 ? (
-          <p className="text-sm text-muted">
-            {isProfessionalAthlete
-              ? "No source-checked performance rows have been added to ATHRECS yet."
-              : "No results yet."}
+      <Tabs defaultValue="results" className="space-y-3">
+        <TabsList>
+          <TabsTrigger value="results">Results history</TabsTrigger>
+          <TabsTrigger value="upcoming">Upcoming ({upcoming.length})</TabsTrigger>
+        </TabsList>
+        <TabsContent value="results">
+          {isProfessionalAthlete && !profileResults.length ? (
+            <p className="text-sm text-muted">
+              No source-checked performance rows have been added to ATHRECS yet.
+            </p>
+          ) : (
+            <CompactResults results={profileResults} claimable />
+          )}
+        </TabsContent>
+        <TabsContent value="upcoming">
+          <UpcomingTable events={upcoming} />
+          <p className="mt-2 text-xs text-muted">
+            Fixtures are manually added by the athlete or ATHRECS staff.
           </p>
-        ) : (
-          <div className="grid gap-2">
-            {results.map((r) => (
-              <div
-                key={r.id}
-                className="rounded-xl border border-border bg-surface px-3.5 py-3 shadow-card hover:border-border-strong"
-              >
-                <ProfileEventLink
-                  result={{
-                    sport: r.sport,
-                    eventSlug: r.event_slug,
-                    sourceUrls: r.source_url ? [r.source_url] : [],
-                  }}
-                  className="flex flex-col gap-1 no-underline sm:flex-row sm:justify-between"
-                >
-                  <div>
-                    <div className="mb-1 flex flex-wrap gap-1.5">
-                      <Badge variant="outline">{r.distance_code}</Badge>
-                      {r.category && <Badge variant="outline">{r.category}</Badge>}
-                      {r.overall_place != null && (
-                        <Badge variant="outline">Place {r.overall_place}</Badge>
-                      )}
-                    </div>
-                    <p className="font-medium text-fg">{r.event_name}</p>
-                    <p className="text-xs text-muted">{formatRaceDateShort(r.event_date)}</p>
-                  </div>
-                  <p className="font-semibold tabular text-fg">
-                    {formatDuration(r.finish_time_seconds)}
-                  </p>
-                </ProfileEventLink>
-                <div className="mt-1 flex flex-wrap items-center gap-2">
-                  {r.source_url && (
-                    <a
-                      href={r.source_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex min-h-11 items-center text-xs font-medium text-accent no-underline hover:underline"
-                    >
-                      {r.result_source === "official" || r.result_source === "official organiser"
-                        ? "Official result ↗"
-                        : "Source-checked result ↗"}
-                    </a>
-                  )}
-                  <Button asChild size="sm" variant="secondary">
-                    <Link to="/claim-results" search={{ resultId: r.id }}>
-                      Claim this result
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </section>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

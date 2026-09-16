@@ -33,7 +33,7 @@ import type {
 } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { NationBadge } from "@/components/flags/NationFlag";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { RaceCard } from "@/components/races/RaceCard";
 import { EntryOptions } from "@/components/races/EntryOptions";
@@ -280,7 +280,7 @@ export function RacePageContent({
         <div className="h-1.5 bg-primary" />
         <div className="space-y-5 p-5 md:p-8">
           <div className="flex flex-wrap items-center gap-2">
-            <NationBadge info={country} />
+            <CountryFlag country={displayCountryName(country)} />
             <Badge variant="accent">{sportLabel(event.sport)}</Badge>
             {event.surface && event.surface !== "Other" && (
               <Badge variant="outline">{event.surface}</Badge>
@@ -302,7 +302,7 @@ export function RacePageContent({
               <p className="flex items-start gap-2 text-sm text-muted">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-subtle" />
                 <span>
-                  {[event.area, event.city, event.county, displayCountryName(country)]
+                  {[event.area, event.city, event.county]
                     .map((part) => part?.trim())
                     .filter((part): part is string => Boolean(part))
                     .filter((part, i, arr) => {
@@ -316,7 +316,8 @@ export function RacePageContent({
                       }
                       return true;
                     })
-                    .join(" · ")}
+                    .join(" · ")}{" "}
+                  <CountryFlag country={displayCountryName(country)} />
                 </span>
               </p>
             </div>

@@ -789,7 +789,9 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
 async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
   const existing = await sql<{ slug: string }>`select slug from events`;
   const have = new Set(existing.map((row) => row.slug));
-  const missingSeries = seriesList.filter((series) => Boolean(series?.slug) && !have.has(series.slug));
+  const missingSeries = seriesList.filter(
+    (series) => Boolean(series?.slug) && !have.has(series.slug),
+  );
 
   if (missingSeries.length === 0) {
     await sql`
@@ -953,7 +955,10 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     const missing = raceGroupMemberships
       .filter((membership) => !eventIds.has(membership.seriesSlug))
       .map((membership) => membership.seriesSlug);
-    console.error("[catalogue-seed] skipping race groups for events not yet in Neon", missing.slice(0, 20));
+    console.error(
+      "[catalogue-seed] skipping race groups for events not yet in Neon",
+      missing.slice(0, 20),
+    );
   }
   await sql`
     delete from event_groups
@@ -1015,28 +1020,28 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
     editionSeeds
       .filter((edition) => missingSlugs.has(edition.seriesSlug) && eventIds.has(edition.seriesSlug))
       .map((edition) => [
-      edition.source_id ?? null,
-      eventIds.get(edition.seriesSlug),
-      edition.date,
-      edition.distance,
-      edition.distanceKm,
-      edition.status,
-      edition.entryUrl ?? null,
-      edition.source,
-      edition.startTime ?? null,
-      edition.notes ?? null,
-      edition.resultsPermission ?? null,
-      edition.resultsHosting ?? null,
-      edition.resultsOfficialUrl ?? null,
-      edition.resultsPermissionNote ?? null,
-      edition.resultsPermissionAt ?? null,
-      edition.resultsPermissionBy ?? null,
-      (edition as { resultsRightsRequestedAt?: string | null }).resultsRightsRequestedAt ?? null,
-      edition.publicResultCount ?? null,
-      edition.partnerResultCount ?? null,
-      edition.athleteResultCount ?? null,
-      edition.resultsAccess ?? null,
-    ]),
+        edition.source_id ?? null,
+        eventIds.get(edition.seriesSlug),
+        edition.date,
+        edition.distance,
+        edition.distanceKm,
+        edition.status,
+        edition.entryUrl ?? null,
+        edition.source,
+        edition.startTime ?? null,
+        edition.notes ?? null,
+        edition.resultsPermission ?? null,
+        edition.resultsHosting ?? null,
+        edition.resultsOfficialUrl ?? null,
+        edition.resultsPermissionNote ?? null,
+        edition.resultsPermissionAt ?? null,
+        edition.resultsPermissionBy ?? null,
+        (edition as { resultsRightsRequestedAt?: string | null }).resultsRightsRequestedAt ?? null,
+        edition.publicResultCount ?? null,
+        edition.partnerResultCount ?? null,
+        edition.athleteResultCount ?? null,
+        edition.resultsAccess ?? null,
+      ]),
     `on conflict (event_id, event_date, distance_code) do update set
       source_id = excluded.source_id,
       distance_km = excluded.distance_km,
@@ -2060,6 +2065,8 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   if (!(await alreadySeeded(sql))) {
     throw new Error("Catalogue seed verification failed after writing the seed marker");
   }
+  await sql`update athletes set profile_visibility='public', profile_details='{"nationality":"British","birthCountry":"United Kingdom","previousClub":"Norfolk Gazelle","coach":"Paul Evans","birthdayVisibility":"hidden","runningAgeCategory":"M45","acceptContact":false}'::jsonb where slug='paul-browne'`;
+  await sql`update results set result_visibility='public' where athlete_id in (select id from athletes where slug='paul-browne')`;
   await ensureDevPreviewAthleteAccount(sql);
 }
 
@@ -2087,13 +2094,19 @@ async function seed(): Promise<void> {
     await seedCatalogue(sql);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    const code = typeof error === "object" && error && "code" in error ? String((error as { code?: string }).code) : "";
+    const code =
+      typeof error === "object" && error && "code" in error
+        ? String((error as { code?: string }).code)
+        : "";
     if (
       code === "53100" ||
       message.includes("project size limit") ||
       message.includes("Catalogue seed count mismatch")
     ) {
-      console.error("[catalogue-seed] database at capacity; serving existing rows", { code, message });
+      console.error("[catalogue-seed] database at capacity; serving existing rows", {
+        code,
+        message,
+      });
       return;
     }
     throw error;

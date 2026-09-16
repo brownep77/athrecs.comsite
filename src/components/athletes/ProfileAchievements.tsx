@@ -1,0 +1,264 @@
+import { useMemo } from "react";
+import { Medal, Trophy, Globe2, Mountain, Flag, Layers } from "lucide-react";
+import {
+  buildProfileAchievements,
+  isCompletedResult,
+  resultEvidenceLabel,
+} from "@/lib/athrecs/profile-achievements";
+import { findPersonalBests, timingBasis, type ProfileResult } from "@/lib/athrecs/profile-records";
+import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { ProfileEventLink } from "./ProfileEventLink";
+import { CountryFlag } from "./CountryFlag";
+
+export function ResultMedal({ result }: { result: ProfileResult }) {
+  if (!isCompletedResult(result)) return null;
+  return (
+    <span
+      className="inline-flex shrink-0 text-amber-700 dark:text-amber-300"
+      title="Completed event"
+    >
+      <Medal className="size-4" aria-hidden="true" />
+      <span className="sr-only">Completed event · </span>
+    </span>
+  );
+}
+
+export function PersonalBestStrip({ results }: { results: ProfileResult[] }) {
+  const bests = useMemo(() => findPersonalBests(results), [results]);
+  if (!bests.length) return null;
+  return (
+    <section aria-label="Personal bests" className="space-y-2">
+      <h2 className="flex items-center gap-2 font-display text-lg font-semibold">
+        <Trophy className="size-4 text-accent" aria-hidden="true" />
+        Personal bests
+      </h2>
+      <div className="flex flex-wrap gap-2">
+        {bests.map((best) => (
+          <ProfileEventLink
+            key={best.resultId}
+            result={best}
+            className="min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
+          >
+            <span className="block text-xs text-muted">
+              {best.sport} · {best.distanceCode}
+            </span>
+            <strong className="text-lg tabular-nums text-fg">
+              {formatDuration(best.finishTimeSeconds)}
+            </strong>
+            <span className="ml-2 text-xs font-semibold text-accent">PB</span>
+            <span className="block text-xs text-muted">
+              {best.surface} · {timingBasis(best)}
+            </span>
+            <span className="block text-xs text-muted">{resultEvidenceLabel(best)}</span>
+            <span className="sr-only">
+              {" "}
+              · {best.eventName} · {formatRaceDateShort(best.eventDate)}
+            </span>
+          </ProfileEventLink>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function AchievementEvidence({ results }: { results: ProfileResult[] }) {
+  return (
+    <ul className="mt-3 space-y-2 border-t border-border pt-3 text-xs">
+      {results.map((result) => (
+        <li key={result.resultId} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+          <span className="tabular-nums text-muted">{formatRaceDateShort(result.eventDate)}</span>
+          <ProfileEventLink result={result} className="font-medium text-accent hover:underline">
+            {result.eventName}
+          </ProfileEventLink>
+          <span className="text-muted">{resultEvidenceLabel(result)}</span>
+          {result.sourceUrls[0] ? (
+            <a
+              href={result.sourceUrls[0]}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent hover:underline"
+            >
+              Source
+            </a>
+          ) : null}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export function AchievementsBoard({ results }: { results: ProfileResult[] }) {
+  const record = useMemo(() => buildProfileAchievements(results), [results]);
+  const hasRunning = results.some((result) =>
+    ["running", "athletics", "parkrun"].includes(result.sport.trim().toLowerCase()),
+  );
+  const metrics = [
+    {
+      label: "Completed events",
+      value: record.finishes.length,
+      icon: Medal,
+      results: record.finishes,
+    },
+    ...(hasRunning
+      ? [
+          {
+            label: "Marathons",
+            value: record.marathons.length,
+            icon: Flag,
+            results: record.marathons,
+          },
+          { label: "Ultras", value: record.ultras.length, icon: Mountain, results: record.ultras },
+          {
+            label: "Marathon majors",
+            value: record.completedMajors.length,
+            icon: Globe2,
+            results: record.completedMajors.flatMap((major) => major.results),
+          },
+        ]
+      : []),
+    {
+      label: "Sports completed",
+      value: record.sports.length,
+      icon: Layers,
+      results: record.finishes,
+    },
+  ];
+  return (
+    <section
+      aria-label="Achievements board"
+      className="space-y-3 rounded-xl border border-border bg-surface p-4"
+    >
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <h2 className="font-display text-lg font-semibold">Achievements board</h2>
+        <span className="text-xs text-muted">From results on this profile</span>
+      </div>
+      <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
+        {metrics.map(({ label, value, icon: Icon, results: evidence }) => (
+          <details key={label} className="min-w-0 rounded-lg bg-elevated p-3">
+            <summary className="cursor-pointer list-none">
+              <Icon className="mb-2 size-4 text-accent" aria-hidden="true" />
+              <strong className="block text-2xl tabular-nums">{value}</strong>
+              <span className="text-xs text-muted">{label}</span>
+              <span className="sr-only"> · Show supporting results</span>
+            </summary>
+            {evidence.length ? (
+              <AchievementEvidence results={evidence} />
+            ) : (
+              <p className="mt-2 text-xs text-muted">No completed results recorded yet.</p>
+            )}
+          </details>
+        ))}
+        <details className="min-w-0 rounded-lg bg-elevated p-3">
+          <summary className="cursor-pointer list-none">
+            <Globe2 className="mb-2 size-4 text-accent" aria-hidden="true" />
+            <strong className="block text-2xl tabular-nums">{record.countries.length}</strong>
+            <span className="text-xs text-muted">Countries raced in</span>
+            <span className="sr-only"> · Show countries</span>
+          </summary>
+          <div className="mt-3 space-y-2 border-t border-border pt-3 text-xs">
+            {record.countries.map((country) => (
+              <div key={country.code} className="flex items-center gap-2">
+                <CountryFlag country={country.name} showName />
+              </div>
+            ))}
+            {!record.countries.length ? "No race countries recorded yet." : null}
+          </div>
+        </details>
+      </div>
+      {record.milestones.length ? (
+        <div className="grid items-start gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {record.milestones.map((achievement) => (
+            <details
+              key={achievement.id}
+              className="rounded-lg border border-border bg-accent-soft p-3"
+              data-achievement={achievement.id}
+            >
+              <summary className="flex cursor-pointer list-none items-start gap-2">
+                <Medal className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+                <span>
+                  <strong className="block text-sm font-medium">{achievement.title}</strong>
+                  <span className="text-xs text-muted">View supporting results</span>
+                </span>
+              </summary>
+              <p className="mt-2 text-xs text-muted">{achievement.rule}</p>
+              <AchievementEvidence results={achievement.results} />
+            </details>
+          ))}
+        </div>
+      ) : (
+        <p className="text-sm text-muted">
+          Your first recorded finish starts your achievement collection.
+        </p>
+      )}
+      {record.nextFinishTarget ? (
+        <div className="space-y-2 rounded-lg bg-elevated p-3 text-sm">
+          <div className="flex flex-wrap justify-between gap-2">
+            <span>
+              Next milestone ·{" "}
+              {record.nextFinishTarget === 1
+                ? "First recorded finish"
+                : `${record.nextFinishTarget} recorded finishes`}
+            </span>
+            <span className="text-xs tabular-nums text-muted">
+              {record.finishes.length} / {record.nextFinishTarget}
+            </span>
+          </div>
+          <progress
+            className="h-1.5 w-full accent-accent"
+            aria-label="Progress towards the next finish milestone"
+            value={record.finishes.length}
+            max={record.nextFinishTarget}
+          />
+        </div>
+      ) : null}
+      {hasRunning ? (
+        <details className="border-t border-border pt-3">
+          <summary className="cursor-pointer text-sm font-medium">
+            Marathon majors journey · {record.completedMajors.length} / {record.majors.length}
+          </summary>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            {record.majors.map((major) => (
+              <div
+                key={major.id}
+                className={`rounded-lg border p-3 text-sm ${major.results.length ? "border-accent bg-accent-soft" : "border-border"}`}
+              >
+                <strong className="font-medium">{major.name}</strong>
+                <p className="mt-1 text-xs text-muted">
+                  {major.results.length
+                    ? "Completed in this record"
+                    : "No qualifying result linked"}
+                </p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-xs text-muted">
+            Different qualifying major marathons count once each. Sydney counts from 2025 and Cape
+            Town from 2026; earlier special eligibility needs separate confirmation. These are
+            AthRecs achievements, independent of the official Six Star award.{" "}
+            <a
+              className="text-accent hover:underline"
+              href="https://www.worldmarathonmajors.com/six-star/how-it-works"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Eligibility rules
+            </a>
+          </p>
+        </details>
+      ) : null}
+      <p className="text-xs text-muted">
+        Each completed event counts once. Hidden and conflicting results are excluded. UK home
+        nations count as one country. Totals grow as results are added.
+      </p>
+    </section>
+  );
+}
+
+export function ProfileRecordHighlights({ results }: { results: ProfileResult[] }) {
+  return (
+    <div className="space-y-4">
+      <PersonalBestStrip results={results} />
+      <AchievementsBoard results={results} />
+    </div>
+  );
+}

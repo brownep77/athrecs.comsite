@@ -33,7 +33,7 @@ assert.doesNotMatch(privateFn, /date_of_birth|postcode|bio|email|previous_names|
 assert.match(route, /kind: "private-athlete"/);
 assert.match(route, /This athlete profile is private/);
 assert.match(route, /noindex, nofollow, noarchive/);
-assert.match(route, /parseProfileRoles/);
+assert.match(api, /parseProfileRoles/);
 assert.match(route, /getPrivateAthleteBySlug/);
 assert.match(route, /throw notFound\(\)/);
 assert.doesNotMatch(route, /profile_roles\s*\n\s*\?\.split/);

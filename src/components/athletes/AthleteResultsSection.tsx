@@ -1,3 +1,7 @@
+import { ResultMedal } from "./ProfileAchievements";
+import { buildProfileAchievements } from "@/lib/athrecs/profile-achievements";
+import { CountryFlag } from "./CountryFlag";
+import { CompactResultsTable } from "./CompactResultsTable";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -66,7 +70,8 @@ export function AthleteResultsSection({
   const activePage = Math.min(page, pageCount - 1);
   const shown = filtered.slice(activePage * 30, (activePage + 1) * 30);
   const personalBests = useMemo(() => findPersonalBests(results), [results]);
-  const finisherCount = results.filter(hasFinisherMedal).length;
+  const finisherCount = buildProfileAchievements(results).finishes.length;
+  const personalBestIds = new Set(personalBests.map((r) => r.resultId));
 
   useEffect(() => {
     try {
@@ -129,48 +134,6 @@ export function AthleteResultsSection({
 
   return (
     <div className="space-y-6">
-      {personalBests.length ? (
-        <section className="space-y-3">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-              Your fastest recorded performances
-            </p>
-            <h2 className="font-display text-2xl font-semibold text-fg">Personal bests</h2>
-            <p className="mt-1 text-sm text-muted">
-              One best time per sport, distance and surface. Chip, gun and recorded times are
-              included, with the timing type shown for each result.
-            </p>
-          </div>
-          <div className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface shadow-card">
-            {personalBests.map((result) => (
-              <ProfileEventLink
-                key={`${result.distanceCode}-${result.resultId}`}
-                result={result}
-                className="grid gap-2 px-4 py-3 no-underline transition hover:bg-elevated sm:grid-cols-[7rem_8rem_minmax(0,1fr)_auto] sm:items-center"
-              >
-                <Badge variant="accent" className="w-fit">
-                  {result.distanceCode}
-                </Badge>
-                <span className="font-semibold tabular-nums text-fg">
-                  {formatDuration(result.finishTimeSeconds)}
-                </span>
-                <span className="min-w-0 truncate text-sm font-medium text-fg">
-                  {result.eventName}
-                  <span className="mt-1 block text-xs font-normal text-muted">
-                    {result.sport} · {result.surface} · {timingBasis(result)}
-                    {result.resultSource === "athlete" ? " · Athlete supplied" : ""}
-                  </span>
-                </span>
-                <span className="text-xs text-muted">
-                  {formatRaceDateShort(result.eventDate)}
-                  {result.overallPlace != null ? ` · Place ${result.overallPlace}` : ""}
-                </span>
-              </ProfileEventLink>
-            ))}
-          </div>
-        </section>
-      ) : null}
-
       <section className="space-y-4">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -190,7 +153,7 @@ export function AthleteResultsSection({
                 title="Medals mark completed events in your profile"
               >
                 <Medal className="size-4" aria-hidden="true" />
-                {finisherCount} finisher’s medal{finisherCount === 1 ? "" : "s"}
+                {finisherCount} completed event{finisherCount === 1 ? "" : "s"}
               </Badge>
             ) : null}
             <div
@@ -336,6 +299,7 @@ export function AthleteResultsSection({
         ) : viewMode === "list" ? (
           <CompactResultList
             results={shown}
+            personalBestIds={personalBestIds}
             confirmingResultId={confirmingResultId}
             busyResultId={hideBusyId ?? null}
             onAskRemove={(resultId) => {
@@ -348,6 +312,7 @@ export function AthleteResultsSection({
         ) : (
           <ResultCardGrid
             results={shown}
+            personalBestIds={personalBestIds}
             confirmingResultId={confirmingResultId}
             busyResultId={hideBusyId ?? null}
             onAskRemove={(resultId) => {
@@ -440,6 +405,7 @@ export function AthleteResultsSection({
 
 function CompactResultList({
   results,
+  personalBestIds,
   confirmingResultId,
   busyResultId,
   onAskRemove,
@@ -447,95 +413,29 @@ function CompactResultList({
   onRemove,
 }: ResultCollectionProps) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
-      <div className="hidden grid-cols-[minmax(0,1fr)_8rem_7rem_auto] gap-3 border-b border-border bg-elevated px-4 py-2 text-xs font-semibold uppercase tracking-wider text-subtle md:grid">
-        <span>Event</span>
-        <span>Time</span>
-        <span>Place</span>
-        <span className="text-right">Actions</span>
-      </div>
-      <div className="divide-y divide-border">
-        {results.map((result) => (
-          <ResultRow
-            key={result.resultId}
+    <CompactResultsTable
+      results={results}
+      personalBestIds={personalBestIds}
+      action={(result) =>
+        confirmingResultId === result.resultId ? (
+          <RemoveConfirmation
             result={result}
-            confirming={confirmingResultId === result.resultId}
             busy={busyResultId === result.resultId}
-            onAskRemove={onAskRemove}
-            onCancelRemove={onCancelRemove}
-            onRemove={onRemove}
+            onCancel={onCancelRemove}
+            onConfirm={() => onRemove(result.resultId)}
           />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ResultRow({
-  result,
-  confirming,
-  busy,
-  onAskRemove,
-  onCancelRemove,
-  onRemove,
-}: ResultItemProps) {
-  return (
-    <article className="px-4 py-3">
-      <div className="grid gap-3 md:grid-cols-[minmax(0,1fr)_8rem_7rem_auto] md:items-center">
-        <div className="flex min-w-0 items-center gap-3">
-          {hasFinisherMedal(result) ? <FinisherMedal /> : null}
-          <div className="min-w-0">
-            <ProfileEventLink
-              result={result}
-              className="block truncate text-sm font-semibold text-fg no-underline hover:text-accent hover:underline"
-            >
-              {result.eventName}
-            </ProfileEventLink>
-            <p className="mt-0.5 text-xs text-muted">
-              {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
-              {result.category ? ` · ${result.category}` : ""} · {result.athleteName}
-            </p>
-          </div>
-        </div>
-        <div>
-          <p className="font-semibold tabular-nums text-fg">
-            {formatDuration(result.finishTimeSeconds)}
-          </p>
-          <p className="text-xs text-subtle md:hidden">Finish time</p>
-        </div>
-        <div>
-          <p className="text-sm text-fg">
-            {result.overallPlace != null ? result.overallPlace : "—"}
-          </p>
-          <p className="text-xs text-subtle md:hidden">Overall place</p>
-        </div>
-        <div className="flex flex-wrap justify-start gap-2 md:justify-end">
-          <Button asChild size="sm" variant="secondary">
-            <ProfileEventLink result={result}>View</ProfileEventLink>
-          </Button>
-          <Button
+        ) : (
+          <button
             type="button"
-            size="sm"
-            variant="secondary"
-            disabled={busy}
-            className="text-red-700 hover:text-red-800"
+            disabled={busyResultId === result.resultId}
             onClick={() => onAskRemove(result.resultId)}
+            className="min-h-8 text-xs text-red-700 hover:underline"
           >
-            <Trash2 className="size-4" aria-hidden="true" />
             Remove
-          </Button>
-        </div>
-      </div>
-      <ResultSourceLinks result={result} />
-      {confirming ? (
-        <RemoveConfirmation
-          result={result}
-          busy={busy}
-          onCancel={onCancelRemove}
-          onConfirm={() => onRemove(result.resultId)}
-        />
-      ) : null}
-    </article>
+          </button>
+        )
+      }
+    />
   );
 }
 
@@ -549,7 +449,7 @@ function ResultCardGrid(props: ResultCollectionProps) {
         >
           <div className="flex items-start justify-between gap-4">
             <div className="flex min-w-0 items-start gap-3">
-              {hasFinisherMedal(result) ? <FinisherMedal /> : null}
+              <ResultMedal result={result} />
               <div className="min-w-0">
                 <ProfileEventLink
                   result={result}
@@ -558,7 +458,8 @@ function ResultCardGrid(props: ResultCollectionProps) {
                   {result.eventName}
                 </ProfileEventLink>
                 <p className="mt-1 text-xs text-muted">
-                  {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
+                  {formatRaceDateShort(result.eventDate)} · {result.sport} · {result.distanceCode} ·{" "}
+                  <CountryFlag country={result.country} />
                   {result.category ? ` · ${result.category}` : ""}
                 </p>
                 <p className="mt-2 text-xs text-subtle">{result.athleteName}</p>
@@ -567,6 +468,9 @@ function ResultCardGrid(props: ResultCollectionProps) {
             <div className="text-right">
               <p className="font-semibold tabular-nums text-fg">
                 {formatDuration(result.finishTimeSeconds)}
+                {props.personalBestIds?.has(result.resultId) ? (
+                  <span className="ml-2 text-xs text-accent">PB</span>
+                ) : null}
               </p>
               <p className="mt-1 text-xs text-muted">
                 {result.overallPlace != null ? `Place ${result.overallPlace}` : "Place unavailable"}
@@ -604,30 +508,6 @@ function ResultCardGrid(props: ResultCollectionProps) {
   );
 }
 
-function hasFinisherMedal(result: AthleteResult): boolean {
-  return result.status.toLowerCase() === "finished" && !result.conflicting;
-}
-
-function FinisherMedal() {
-  return (
-    <svg viewBox="0 0 32 40" className="h-10 w-8 shrink-0" role="img" aria-label="Finisher’s medal">
-      <title>Finisher’s medal · completed event</title>
-      <path d="M5 1h8l10 20-7 4L5 1Z" fill="#2563eb" />
-      <path d="M19 1h8L16 25l-7-4L19 1Z" fill="#38bdf8" />
-      <circle cx="16" cy="26" r="12" fill="#fbbf24" stroke="#b45309" strokeWidth="1.5" />
-      <circle cx="16" cy="26" r="8.5" fill="#fef3c7" stroke="#d97706" />
-      <path
-        d="m12 26 2.5 2.5 5.5-6"
-        fill="none"
-        stroke="#92400e"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 function RemoveConfirmation({
   result,
   busy,
@@ -662,17 +542,9 @@ function RemoveConfirmation({
 
 type ResultCollectionProps = {
   results: AthleteResult[];
+  personalBestIds?: ReadonlySet<number>;
   confirmingResultId: number | null;
   busyResultId: number | null;
-  onAskRemove: (resultId: number) => void;
-  onCancelRemove: () => void;
-  onRemove: (resultId: number) => void;
-};
-
-type ResultItemProps = {
-  result: AthleteResult;
-  confirming: boolean;
-  busy: boolean;
   onAskRemove: (resultId: number) => void;
   onCancelRemove: () => void;
   onRemove: (resultId: number) => void;

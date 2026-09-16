@@ -22,6 +22,7 @@ import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
+import { Route as AdminAthleteDirectoryRouteImport } from './routes/admin/athlete-directory'
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
 import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/admin/catalogue-recovery-emergency'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
@@ -117,6 +118,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
 const AdminAthleteAccountsRoute = AdminAthleteAccountsRouteImport.update({
   id: '/admin/athlete-accounts',
   path: '/admin/athlete-accounts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAthleteDirectoryRoute = AdminAthleteDirectoryRouteImport.update({
+  id: '/admin/athlete-directory',
+  path: '/admin/athlete-directory',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminCataloguePublishingRoute =
@@ -293,6 +299,7 @@ export interface FileRoutesByFullPath {
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
+  '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
@@ -339,6 +346,7 @@ export interface FileRoutesByTo {
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
+  '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
@@ -386,6 +394,7 @@ export interface FileRoutesById {
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
+  '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
@@ -434,6 +443,7 @@ export interface FileRouteTypes {
     | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
+    | '/admin/athlete-directory'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
@@ -480,6 +490,7 @@ export interface FileRouteTypes {
     | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
+    | '/admin/athlete-directory'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
@@ -526,6 +537,7 @@ export interface FileRouteTypes {
     | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
+    | '/admin/athlete-directory'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
     | '/admin/data-intelligence'
@@ -573,6 +585,7 @@ export interface RootRouteChildren {
   SponsorshipRoute: typeof SponsorshipRoute
   SportsrecsRoute: typeof SportsrecsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
+  AdminAthleteDirectoryRoute: typeof AdminAthleteDirectoryRoute
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
   AdminCatalogueRecoveryEmergencyRoute: typeof AdminCatalogueRecoveryEmergencyRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
@@ -698,6 +711,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/athlete-accounts'
       fullPath: '/admin/athlete-accounts'
       preLoaderRoute: typeof AdminAthleteAccountsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/athlete-directory': {
+      id: '/admin/athlete-directory'
+      path: '/admin/athlete-directory'
+      fullPath: '/admin/athlete-directory'
+      preLoaderRoute: typeof AdminAthleteDirectoryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/catalogue-publishing': {
@@ -933,6 +953,7 @@ const rootRouteChildren: RootRouteChildren = {
   SponsorshipRoute: SponsorshipRoute,
   SportsrecsRoute: SportsrecsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
+  AdminAthleteDirectoryRoute: AdminAthleteDirectoryRoute,
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
   AdminCatalogueRecoveryEmergencyRoute: AdminCatalogueRecoveryEmergencyRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,

@@ -24,7 +24,7 @@ import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { NationBadge } from "@/components/flags/NationFlag";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 
@@ -100,7 +100,7 @@ export function RaceCard({
         </div>
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex flex-wrap items-center gap-1">
-            <NationBadge nation={venue.nation} />
+            <CountryFlag country={venue.nation} />
             <Badge variant="accent" className="gap-1">
               <SportIcon sport={race.sport} />
               {race.sport}

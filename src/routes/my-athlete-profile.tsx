@@ -1,3 +1,7 @@
+import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
+import { UpcomingEventsEditor } from "@/components/athletes/UpcomingEvents";
+import { ProfileDetails } from "@/components/athletes/ProfileDetails";
+import { publicProfileDetails } from "@/lib/athrecs/profile-details";
 import { useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -156,9 +160,6 @@ function MyAthleteProfilePage() {
   );
   const eventCount = new Set(results.map((result) => result.eventSlug)).size;
   const distanceCount = new Set(results.map((result) => result.distanceCode)).size;
-  const primarySport =
-    data.sports.find((sport) => sport.isPrimary && sportIsInAthleteProfileScope(sport.sportCode)) ??
-    data.sports.find((sport) => sportIsInAthleteProfileScope(sport.sportCode));
   const location = [data.city, data.region, data.country].filter(Boolean).join(", ");
 
   return (
@@ -166,7 +167,7 @@ function MyAthleteProfilePage() {
       <section className="relative overflow-hidden rounded-3xl border border-border bg-slate-950 shadow-card">
         <div className="absolute -right-20 -top-24 size-72 rounded-full bg-cyan-400/10 blur-3xl" />
         <div className="absolute -bottom-28 left-1/3 size-72 rounded-full bg-blue-500/10 blur-3xl" />
-        <div className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-5 py-7 text-white md:px-8 md:py-9">
+        <div className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-5 py-4 text-white md:px-6 md:py-5">
           <div className="grid gap-6 md:grid-cols-[auto_minmax(0,1fr)] md:items-center">
             <ProfilePhotoUploader
               displayName={profileName}
@@ -191,17 +192,20 @@ function MyAthleteProfilePage() {
                 ) : null}
               </div>
 
-              <h1 className="mt-3 truncate font-display text-3xl font-semibold md:text-5xl">
+              <h1 className="mt-3 truncate font-display text-2xl font-semibold md:text-3xl">
                 {profileName}
               </h1>
               <AthleteId number={data.athleteNumber} className="mt-2 text-slate-200" />
 
               <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-200">
-                {primarySport ? (
-                  <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5">
-                    {primarySport.sportCode}
+                {availableSports.map((sport) => (
+                  <span
+                    key={sport}
+                    className="rounded-full border border-white/15 bg-white/10 px-2 py-1"
+                  >
+                    {sport}
                   </span>
-                ) : null}
+                ))}
                 {data.clubOrTeam ? (
                   <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1.5">
                     {data.clubOrTeam}
@@ -237,7 +241,7 @@ function MyAthleteProfilePage() {
         </div>
       </section>
 
-      <section className="relative z-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 md:-mt-10 md:px-6">
+      <section className="grid grid-cols-2 gap-2 lg:grid-cols-4">
         <StatCard
           icon={Trophy}
           label="Claimed results"
@@ -283,11 +287,20 @@ function MyAthleteProfilePage() {
           {results.length} linked result{results.length === 1 ? "" : "s"}
         </span>
       </div>
+      <section className="rounded-xl border border-border bg-surface p-4">
+        <ProfileDetails
+          details={publicProfileDetails(data.profileDetails, data.dateOfBirth)}
+          nationality={data.nationality}
+          coaches={data.sports.map((sport) => ({ sport: sport.sportCode, name: sport.coachName }))}
+        />
+      </section>
+      <ProfileRecordHighlights results={results} />
       <Tabs defaultValue="results" className="space-y-5">
         <TabsList className="h-auto w-full flex-wrap justify-start gap-1 bg-elevated p-1.5">
           <TabsTrigger value="results" className="min-h-10 text-sm">
             Results & personal bests
           </TabsTrigger>
+          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
           <TabsTrigger value="progress" className="min-h-10 text-sm">
             Progress
           </TabsTrigger>
@@ -307,17 +320,25 @@ function MyAthleteProfilePage() {
         <TabsContent value="results">
           <AthleteResultsSection results={results} hiddenResults={hiddenResults} />
         </TabsContent>
+        <TabsContent value="upcoming">
+          <UpcomingEventsEditor />
+        </TabsContent>
         <TabsContent value="progress">
           <ProfileProgress results={results} />
         </TabsContent>
         <TabsContent value="overview" className="space-y-5">
           <AthleteBioCard />
-          <section className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+          <section className="rounded-lg border border-border bg-surface px-3 py-2">
             <h2 className="font-display text-xl font-semibold">Brand opportunities</h2>
-            <p className="mt-2 text-sm text-muted">Choose whether to apply for sponsorships, product testing or offers. Your private profile stays under your control.</p>
-            <Button asChild variant="secondary" className="mt-4"><Link to="/opportunities">Manage partnership choices</Link></Button>
+            <p className="mt-2 text-sm text-muted">
+              Choose whether to apply for sponsorships, product testing or offers. Your private
+              profile stays under your control.
+            </p>
+            <Button asChild variant="secondary" className="mt-4">
+              <Link to="/opportunities">Manage partnership choices</Link>
+            </Button>
           </section>
-          <section className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+          <section className="rounded-lg border border-border bg-surface px-3 py-2">
             <h2 className="font-display text-xl font-semibold">My sports</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {data.sports
@@ -348,7 +369,7 @@ function MyAthleteProfilePage() {
             </Button>
           </section>
           {data.claimedProfiles.length ? (
-            <section className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+            <section className="rounded-lg border border-border bg-surface px-3 py-2">
               <h2 className="flex items-center gap-2 font-display text-xl font-semibold">
                 <ShieldCheck className="size-5 text-accent" />
                 Linked athlete identities
@@ -398,7 +419,7 @@ function MyAthleteProfilePage() {
 function ProfileHero() {
   return (
     <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
-      <div className="bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-7 text-white md:px-8">
+      <div className="bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-4 text-white md:px-8">
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
           <LockKeyhole className="size-4" aria-hidden="true" />
           My ATHRECS
@@ -424,12 +445,12 @@ function StatCard({
   detail: string;
 }) {
   return (
-    <article className="rounded-2xl border border-border bg-surface p-5 shadow-card">
+    <article className="rounded-lg border border-border bg-surface px-3 py-2">
       <div className="flex items-center justify-between gap-3">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">{label}</p>
         <Icon className="size-5 text-accent" aria-hidden="true" />
       </div>
-      <p className="mt-3 font-display text-3xl font-semibold tabular-nums text-fg">{value}</p>
+      <p className="mt-1 font-display text-xl font-semibold tabular-nums text-fg">{value}</p>
       <p className="mt-1 text-xs text-muted">{detail}</p>
     </article>
   );

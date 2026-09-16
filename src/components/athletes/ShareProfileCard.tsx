@@ -69,7 +69,13 @@ export function ShareProfileCard() {
       <section className="rounded-2xl border border-border bg-surface p-6 shadow-card">
         <h2 className="font-display text-xl font-semibold text-fg">Share profile</h2>
         <p className="mt-1 text-sm text-muted">Sharing settings could not be loaded.</p>
-        <Button className="mt-3" type="button" variant="secondary" size="sm" onClick={() => void share.refetch()}>
+        <Button
+          className="mt-3"
+          type="button"
+          variant="secondary"
+          size="sm"
+          onClick={() => void share.refetch()}
+        >
           Try again
         </Button>
       </section>
@@ -85,7 +91,11 @@ export function ShareProfileCard() {
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="flex items-start gap-3">
             <div className="flex size-10 items-center justify-center rounded-full bg-accent-soft text-accent">
-              {data.enabled ? <Globe className="size-5" aria-hidden="true" /> : <LockKeyhole className="size-5" aria-hidden="true" />}
+              {data.enabled ? (
+                <Globe className="size-5" aria-hidden="true" />
+              ) : (
+                <LockKeyhole className="size-5" aria-hidden="true" />
+              )}
             </div>
             <div>
               <p className="text-xs font-medium uppercase tracking-wider text-subtle">Visibility</p>
@@ -100,7 +110,8 @@ export function ShareProfileCard() {
         <p className="max-w-3xl text-sm leading-6 text-muted">
           Your ordinary Athlete Profile stays private until you turn sharing on. The public link is
           unlisted — it is not added to the Athletes directory — and never includes your email,
-          date of birth, postcode, photograph or product preferences.
+          postcode, photograph or product preferences. Your birthday is hidden unless you choose to
+          display it in your account.
         </p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-elevated p-4">
@@ -125,9 +136,17 @@ export function ShareProfileCard() {
         {enabled ? (
           <div className="grid gap-2 sm:grid-cols-2">
             <ShareToggle checked={shareBio} label="Include bio" onChange={setShareBio} />
-            <ShareToggle checked={shareResults} label="Include claimed results" onChange={setShareResults} />
+            <ShareToggle
+              checked={shareResults}
+              label="Include claimed results"
+              onChange={setShareResults}
+            />
             <ShareToggle checked={shareClub} label="Include club or team" onChange={setShareClub} />
-            <ShareToggle checked={shareLocation} label="Include city and country" onChange={setShareLocation} />
+            <ShareToggle
+              checked={shareLocation}
+              label="Include city and country"
+              onChange={setShareLocation}
+            />
           </div>
         ) : null}
 
@@ -165,7 +184,10 @@ export function ShareProfileCard() {
         </div>
 
         {message ? (
-          <p className="rounded-lg border border-border bg-elevated px-3 py-2 text-sm text-accent" role="status">
+          <p
+            className="rounded-lg border border-border bg-elevated px-3 py-2 text-sm text-accent"
+            role="status"
+          >
             {message}
           </p>
         ) : null}

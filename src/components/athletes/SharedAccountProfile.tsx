@@ -1,8 +1,11 @@
+import { ProfileRecordHighlights } from "./ProfileAchievements";
+import { CompactResultsTable } from "./CompactResultsTable";
+import { UpcomingTable } from "./UpcomingEvents";
+import { ProfileDetails } from "./ProfileDetails";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, MapPin, ExternalLink } from "lucide-react";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
-import { ProfileEventLink } from "./ProfileEventLink";
 import { ProfileProgress } from "./ProfileProgress";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { findPersonalBests, timingBasis } from "@/lib/athrecs/profile-records";
@@ -19,7 +22,11 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
   const [year, setYear] = useState("All years");
   const [page, setPage] = useState(0);
   const sports = [
-    ...new Set([...profile.sports, ...profile.results.map((result) => result.sport)]),
+    ...new Set([
+      ...profile.sports,
+      ...profile.results.map((result) => result.sport),
+      ...profile.upcoming.map((event) => event.sport),
+    ]),
   ];
   const results = profile.results.filter(
     (result) => sport === "All sports" || result.sport === sport,
@@ -36,7 +43,7 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
   const locationLabel = [profile.city, profile.region, profile.country].filter(Boolean).join(" · ");
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-4">
       <Link
         to="/athletes"
         className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
@@ -45,7 +52,7 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
         Athletes
       </Link>
 
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
+      <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">
           Shared athlete profile
         </p>
@@ -60,9 +67,18 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
         ) : null}
         <div className="flex flex-wrap gap-2">
           <Badge variant="accent">Shared by athlete</Badge>
-          {profile.primarySport ? <Badge variant="outline">{profile.primarySport}</Badge> : null}
+          {sports.map((item) => (
+            <Badge key={item} variant="outline">
+              {item}
+            </Badge>
+          ))}
           <Badge variant="outline">{profile.results.length} results</Badge>
         </div>
+        <ProfileDetails
+          details={profile.details}
+          nationality={profile.nationality}
+          coaches={profile.coaches}
+        />
         {profile.bio ? (
           <p className="max-w-prose whitespace-pre-line text-sm text-muted">{profile.bio}</p>
         ) : null}
@@ -87,10 +103,12 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
           title={`${profile.displayName} athlete profile`}
         />
         <p className="border-t border-border pt-3 text-xs text-subtle">
-          This unlisted page is published by the athlete. Email, date of birth, postcode and
-          photograph stay private.
+          This unlisted page is published by the athlete. Email, postcode and photograph stay
+          private. Birthday display is chosen by the athlete.
         </p>
       </section>
+
+      <ProfileRecordHighlights results={profile.results} />
 
       <div className="flex flex-wrap items-center gap-3">
         <label htmlFor="shared-profile-sport" className="text-sm font-semibold">
@@ -115,6 +133,7 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
       <Tabs defaultValue="results" className="space-y-5">
         <TabsList className="h-auto flex-wrap">
           <TabsTrigger value="results">Results history</TabsTrigger>
+          <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
           <TabsTrigger value="bests">Personal bests</TabsTrigger>
           <TabsTrigger value="progress">Progress</TabsTrigger>
         </TabsList>
@@ -141,51 +160,10 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
               No shared results in this selection.
             </p>
           ) : (
-            <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
-              {filtered.slice(activePage * 30, (activePage + 1) * 30).map((result) => (
-                <article key={result.resultId} className="p-4">
-                  <div className="flex flex-wrap items-start justify-between gap-3">
-                    <div>
-                      <ProfileEventLink result={result} className="font-semibold text-fg">
-                        {result.eventName}
-                      </ProfileEventLink>
-                      <p className="mt-1 text-sm text-muted">
-                        {formatRaceDateShort(result.eventDate)} · {result.distanceCode} ·{" "}
-                        {result.surface}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-semibold tabular-nums">
-                        {formatDuration(result.finishTimeSeconds)}
-                      </p>
-                      <p className="text-xs text-muted">
-                        {timingBasis(result)}
-                        {result.overallPlace != null ? ` · Place ${result.overallPlace}` : ""}
-                      </p>
-                    </div>
-                  </div>
-                  {result.conflicting ? (
-                    <p className="mt-2 text-sm text-amber-800">
-                      Sources differ; excluded from personal bests.
-                    </p>
-                  ) : null}
-                  <div className="mt-2 flex flex-wrap gap-3">
-                    {result.sourceUrls.map((url, index) => (
-                      <a
-                        key={url}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex min-h-8 items-center gap-1 text-xs font-semibold text-accent"
-                      >
-                        Source{result.sourceUrls.length > 1 ? ` ${index + 1}` : ""}
-                        <ExternalLink className="size-3.5" />
-                      </a>
-                    ))}
-                  </div>
-                </article>
-              ))}
-            </div>
+            <CompactResultsTable
+              results={filtered.slice(activePage * 30, (activePage + 1) * 30)}
+              personalBestIds={new Set(findPersonalBests(profile.results).map((r) => r.resultId))}
+            />
           )}
           {pages > 1 ? (
             <div className="flex items-center justify-between text-sm">
@@ -208,6 +186,13 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
               </Button>
             </div>
           ) : null}
+        </TabsContent>
+        <TabsContent value="upcoming">
+          <UpcomingTable
+            events={profile.upcoming.filter(
+              (event) => sport === "All sports" || event.sport === sport,
+            )}
+          />
         </TabsContent>
         <TabsContent value="bests" className="space-y-4">
           <h2 className="font-display text-2xl font-semibold">Personal bests</h2>

@@ -98,6 +98,12 @@ const staffNav = [
     match: (path: string) => path.startsWith("/admin/result-claims"),
   },
   {
+    to: "/admin/athlete-directory",
+    label: "Athlete directory",
+    icon: UserRoundCog,
+    match: (path: string) => path.startsWith("/admin/athlete-directory"),
+  },
+  {
     to: "/admin/athlete-accounts",
     label: "Athlete accounts",
     icon: UserRoundCog,
