@@ -87,16 +87,12 @@ export function AthleteAuthDialog() {
     if (initial.searchParams.get("auth") === "1") {
       const requestedMode = initial.searchParams.get("authMode");
       const nextMode: AuthDialogMode =
-        requestedMode === "signup" ||
-        requestedMode === "forgot" ||
-        requestedMode === "reset"
+        requestedMode === "signup" || requestedMode === "forgot" || requestedMode === "reset"
           ? requestedMode
           : "signin";
       setMode(nextMode);
       setCallbackURL(
-        safeAuthCallback(
-          initial.searchParams.get("returnTo") ?? pathWithoutAuthParams(initial),
-        ),
+        safeAuthCallback(initial.searchParams.get("returnTo") ?? pathWithoutAuthParams(initial)),
       );
       setResetToken(initial.searchParams.get("token"));
       const oauthError = initial.searchParams.get("error");
@@ -144,9 +140,7 @@ export function AthleteAuthDialog() {
     if (mode !== "forgot" && mode !== "reset") return;
     setMode("signin");
     setResetToken(null);
-    setError(
-      "Password recovery is temporarily unavailable. Sign in with your existing password.",
-    );
+    setError("Password recovery is temporarily unavailable. Sign in with your existing password.");
   }, [open, mode, methods.isLoading, methods.isError, passwordResetAvailable]);
 
   function clearStatus() {
@@ -159,10 +153,7 @@ export function AthleteAuthDialog() {
     clearStatus();
     setPassword("");
     setConfirmPassword("");
-    if (
-      (nextMode === "forgot" || nextMode === "reset") &&
-      !passwordResetAvailable
-    ) {
+    if ((nextMode === "forgot" || nextMode === "reset") && !passwordResetAvailable) {
       setMode("signin");
       setError(
         "Password recovery is temporarily unavailable. Sign in with your existing password.",
@@ -218,10 +209,7 @@ export function AthleteAuthDialog() {
     event.preventDefault();
     clearStatus();
 
-    if (
-      (mode === "forgot" || mode === "reset") &&
-      !passwordResetAvailable
-    ) {
+    if ((mode === "forgot" || mode === "reset") && !passwordResetAvailable) {
       setError(
         "Password recovery is temporarily unavailable. Sign in with your existing password.",
       );
@@ -282,7 +270,7 @@ export function AthleteAuthDialog() {
               ? passwordResetAvailable
                 ? "Verify your email before signing in. A new verification email can be sent below."
                 : "This account still needs email verification, but verification-email delivery is temporarily unavailable."
-              : result.error.message ?? "Email sign-in failed",
+              : (result.error.message ?? "Email sign-in failed"),
           );
         }
         window.location.href = callbackURL;
@@ -344,9 +332,14 @@ export function AthleteAuthDialog() {
 
   if (!mounted || !open) return null;
 
+  const sponsorshipAccount = callbackURL.startsWith("/sponsorship");
   const formTitle =
     mode === "signup"
-      ? callbackURL.startsWith("/brands") ? "Create your brand account" : "Create an Athlete Account"
+      ? sponsorshipAccount
+        ? "Create your sponsorship account"
+        : callbackURL.startsWith("/brands")
+          ? "Create your brand account"
+          : "Create an Athlete Account"
       : mode === "forgot"
         ? "Reset your password"
         : mode === "reset"
@@ -369,13 +362,22 @@ export function AthleteAuthDialog() {
         <div className="flex items-start justify-between gap-4 border-b border-border bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-5 text-white sm:px-7">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-cyan-300">
-              <ShieldCheck className="size-4" aria-hidden="true" /> {callbackURL.startsWith("/brands") ? "Secure brand account" : "Secure Athlete Account"}
+              <ShieldCheck className="size-4" aria-hidden="true" />{" "}
+              {sponsorshipAccount
+                ? "Secure sponsorship account"
+                : callbackURL.startsWith("/brands")
+                  ? "Secure brand account"
+                  : "Secure Athlete Account"}
             </div>
             <h2 id={titleId} className="mt-2 font-display text-2xl font-semibold">
               {formTitle}
             </h2>
             <p className="mt-1 max-w-md text-sm leading-5 text-slate-300">
-              {callbackURL.startsWith("/brands") ? "Sign in to register your company and manage partnership opportunities. Company approval is a separate review." : "One account for your Entry Passport, claimed results and future race-entry tools."}
+              {sponsorshipAccount
+                ? "Sign in to submit a private sponsorship enquiry and read responses from our team."
+                : callbackURL.startsWith("/brands")
+                  ? "Sign in to register your company and manage partnership opportunities. Company approval is a separate review."
+                  : "One account for your Entry Passport, claimed results and future race-entry tools."}
             </p>
           </div>
           <button
@@ -456,7 +458,8 @@ export function AthleteAuthDialog() {
 
           {methods.isLoading ? (
             <div className="flex items-center justify-center gap-2 rounded-lg border border-border p-4 text-sm text-muted">
-              <Loader2 className="size-4 animate-spin" aria-hidden="true" /> Loading secure sign-in methods…
+              <Loader2 className="size-4 animate-spin" aria-hidden="true" /> Loading secure sign-in
+              methods…
             </div>
           ) : methods.isError ? (
             <div className="rounded-lg border border-red-500/30 bg-red-50 p-4 text-sm text-red-900">
@@ -468,13 +471,16 @@ export function AthleteAuthDialog() {
             <>
               {(mode === "signin" || mode === "signup") && socialProviders.length > 0 ? (
                 <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-subtle">
-                  <span className="h-px flex-1 bg-border" /> or use email <span className="h-px flex-1 bg-border" />
+                  <span className="h-px flex-1 bg-border" /> or use email{" "}
+                  <span className="h-px flex-1 bg-border" />
                 </div>
               ) : null}
 
               {!passwordResetAvailable ? (
                 <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-3 text-sm leading-5 text-amber-950">
-                  Email and password accounts are available. Verification emails and password recovery are temporarily unavailable, so keep your password safe. Unverified manual accounts are not automatically linked to another sign-in provider.
+                  Email and password accounts are available. Verification emails and password
+                  recovery are temporarily unavailable, so keep your password safe. Unverified
+                  manual accounts are not automatically linked to another sign-in provider.
                 </div>
               ) : null}
 
@@ -483,7 +489,10 @@ export function AthleteAuthDialog() {
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
                     Full name
                     <div className="relative">
-                      <UserRound className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle" aria-hidden="true" />
+                      <UserRound
+                        className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
+                        aria-hidden="true"
+                      />
                       <input
                         type="text"
                         autoComplete="name"
@@ -501,7 +510,10 @@ export function AthleteAuthDialog() {
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
                     Email address
                     <div className="relative">
-                      <Mail className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle" aria-hidden="true" />
+                      <Mail
+                        className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
+                        aria-hidden="true"
+                      />
                       <input
                         ref={emailInput}
                         type="email"
@@ -521,7 +533,10 @@ export function AthleteAuthDialog() {
                   <label className="block space-y-1.5 text-sm font-medium text-fg">
                     {mode === "reset" ? "New password" : "Password"}
                     <div className="relative">
-                      <LockKeyhole className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle" aria-hidden="true" />
+                      <LockKeyhole
+                        className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
+                        aria-hidden="true"
+                      />
                       <input
                         ref={mode === "reset" ? emailInput : undefined}
                         type={showPassword ? "text" : "password"}
@@ -642,7 +657,8 @@ export function AthleteAuthDialog() {
           <div className="rounded-lg bg-elevated p-3 text-xs leading-5 text-muted">
             <p className="flex items-start gap-2">
               <LockKeyhole className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-              ATHRECS keeps account details private. Result claims are checked before a public athlete profile is linked.
+              ATHRECS keeps account details private. Result claims are checked before a public
+              athlete profile is linked.
             </p>
             <p className="mt-2 text-center">
               By continuing, you acknowledge the{" "}

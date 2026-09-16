@@ -135,12 +135,12 @@ jobs:
 
       - name: Partnership pages and sign-in gates
         run: |
-          BROWSER_SMOKE_EXPECT_TEXT='Find your next partnership||Brand registration is open||Register your brand' \
+          BROWSER_SMOKE_EXPECT_TEXT='Give your brand more exposure||Brand registration is open||Register your brand' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/brands "$GITHUB_WORKSPACE/artifacts/brands.png"
           BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
           BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Find your next partnership||Brand registration is open' \
+          BROWSER_SMOKE_EXPECT_TEXT='Give your brand more exposure||Brand registration is open' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/brands "$GITHUB_WORKSPACE/artifacts/brands-mobile.png"
           BROWSER_SMOKE_EXPECT_TEXT='Opportunities for your next chapter||No open opportunities yet' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/opportunities "$GITHUB_WORKSPACE/artifacts/opportunities.png"
@@ -148,6 +148,17 @@ jobs:
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/brands/register "$GITHUB_WORKSPACE/artifacts/brand-registration.png"
           BROWSER_SMOKE_EXPECT_TEXT='Your brand dashboard||Sign in to continue' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/brands/manage "$GITHUB_WORKSPACE/artifacts/brand-dashboard.png"
+
+          BROWSER_SMOKE_EXPECT_TEXT='Bring brands, athletes and influencers together.||Sign in to submit your enquiry' \
+            node scripts/browser-smoke.mjs http://127.0.0.1:8080/sponsorship "$GITHUB_WORKSPACE/artifacts/sponsorship.png"
+          BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
+          BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
+          BROWSER_SMOKE_FULL_PAGE=1 \
+          BROWSER_SMOKE_EXPECT_TEXT='Start a sponsorship enquiry||Sign in to submit your enquiry' \
+            node scripts/browser-smoke.mjs http://127.0.0.1:8080/sponsorship "$GITHUB_WORKSPACE/artifacts/sponsorship-mobile.png"
+
+      - name: Sponsorship enquiry round trip
+        run: node scripts/browser-sponsorship-smoke.mjs http://127.0.0.1:8080/
 
       - name: Browser smoke tests
         run: |

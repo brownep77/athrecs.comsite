@@ -35,7 +35,7 @@ const nav = [
     to: "/brands",
     label: "Brands",
     icon: Handshake,
-    match: (p: string) => p.startsWith("/brands") || p === "/opportunities",
+    match: (p: string) => p.startsWith("/brands") || p === "/opportunities" || p === "/sponsorship",
   },
 ] as const;
 
@@ -117,8 +117,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
-          <Link to="/brands" className="hover:text-accent">Brands & Partners</Link>
-          <Link to="/opportunities" className="hover:text-accent">Opportunities</Link>
+          <Link to="/brands" className="hover:text-accent">
+            Brands & Partners
+          </Link>
+          <Link to="/opportunities" className="hover:text-accent">
+            Opportunities
+          </Link>
           <Link to="/find-events" className="hover:text-accent">
             Find events
           </Link>

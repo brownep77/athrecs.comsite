@@ -56,7 +56,7 @@ function BrandRegistration() {
     <>
       <PartnerHeader
         title="Register your brand"
-        description="Introduce your company and the sports you support. Our team checks your business and authority to represent it before publication."
+        description="Grow your brand's exposure through athletes, influencers and sporting communities. Introduce your company and the partnerships you want to build. Our team checks your business and authority before publication."
       />
       {isPending || query.isLoading ? (
         <LoadingPartners />

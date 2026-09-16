@@ -67,8 +67,19 @@ function Opportunities() {
     <>
       <PartnerHeader
         title="Opportunities for your next chapter"
-        description="Explore sponsorship, product testing and collaborations. You choose whether to apply and what to share with a brand."
+        description="Build partnerships with brands through sponsorship, content and product experiences. Share your sporting story, reach new audiences and choose the opportunities that fit you."
       />
+      <p className="text-sm text-muted">
+        Athlete and club applications use the profile checks below. Influencers can{" "}
+        <Link
+          to="/sponsorship"
+          search={{ kind: "creator" }}
+          className="font-semibold text-accent underline"
+        >
+          submit a private partnership enquiry
+        </Link>
+        .
+      </p>
       {isPending || query.isLoading ? <LoadingPartners /> : null}
       <PartnerError error={query.error} />
       {query.data && user ? (
