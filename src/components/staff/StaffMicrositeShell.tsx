@@ -35,6 +35,12 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
   {
+    to: "/admin/sponsorship",
+    label: "Sponsorship enquiries",
+    icon: Handshake,
+    match: (path: string) => path.startsWith("/admin/sponsorship"),
+  },
+  {
     to: "/admin/partnerships",
     label: "Partnerships",
     icon: Handshake,
@@ -276,24 +282,26 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
         </div>
         <nav className="border-t border-slate-800" aria-label="Staff tools">
           <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 md:px-6">
-            {staffNav.filter((item) => IS_ATHRECS_SITE || item.to !== "/admin/partnerships").map((item) => {
-              const active = item.match(pathname);
-              return (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={cn(
-                    "inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 text-sm font-medium no-underline transition-colors",
-                    active
-                      ? "bg-cyan-300 text-slate-950"
-                      : "text-slate-300 hover:bg-slate-800 hover:text-white",
-                  )}
-                >
-                  <item.icon className="size-4" aria-hidden="true" />
-                  {item.label}
-                </Link>
-              );
-            })}
+            {staffNav
+              .filter((item) => IS_ATHRECS_SITE || item.to !== "/admin/partnerships")
+              .map((item) => {
+                const active = item.match(pathname);
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={cn(
+                      "inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 text-sm font-medium no-underline transition-colors",
+                      active
+                        ? "bg-cyan-300 text-slate-950"
+                        : "text-slate-300 hover:bg-slate-800 hover:text-white",
+                    )}
+                  >
+                    <item.icon className="size-4" aria-hidden="true" />
+                    {item.label}
+                  </Link>
+                );
+              })}
             <a
               href="https://www.athrecs.com"
               className="ml-auto inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 text-sm font-medium text-slate-300 no-underline transition-colors hover:bg-slate-800 hover:text-white"

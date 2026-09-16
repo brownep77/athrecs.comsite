@@ -21,7 +21,7 @@ export const Route = createFileRoute("/brands/")({
       {
         name: "description",
         content:
-          "Find sportswear, footwear, nutrition and equipment brands offering athlete and club partnerships.",
+          "Give your brand more exposure through athletes and influencers. Explore sponsorships, ambassador roles and product partnerships across sport.",
       },
     ],
   }),
@@ -42,9 +42,51 @@ function BrandDirectory() {
   return (
     <>
       <PartnerHeader
-        title="Find your next partnership"
-        description="Connect with brands supporting athletes and clubs through sponsorships, equipment and opportunities across sport."
+        title="Give your brand more exposure"
+        description="Connect with athletes and influencers who can bring your brand to new audiences. Build partnerships through sponsorship, authentic content, ambassador roles and product experiences."
       />
+      <section className="grid gap-4 md:grid-cols-3" aria-label="Partnership pathways">
+        <article className={panelClass}>
+          <h2 className="text-lg font-semibold">For brands</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Reach relevant sporting communities through athletes, influencers and clubs. Register
+            your company and propose opportunities.
+          </p>
+          <Link
+            to="/brands/register"
+            className="mt-4 inline-block font-semibold text-accent hover:underline"
+          >
+            Register your brand →
+          </Link>
+        </article>
+        <article className={panelClass}>
+          <h2 className="text-lg font-semibold">For athletes & influencers</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Turn your sporting story and audience into brand partnerships. Share your interests and
+            a public profile for review.
+          </p>
+          <Link
+            to="/sponsorship"
+            search={{ kind: "creator" }}
+            className="mt-4 inline-block font-semibold text-accent hover:underline"
+          >
+            Share your partnership interests →
+          </Link>
+        </article>
+        <article className={panelClass}>
+          <h2 className="text-lg font-semibold">For races & organisers</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Connect brands with race-day audiences through event sponsorship, product experiences
+            and community partnerships.
+          </p>
+          <a
+            href="https://www.runrecs.com/sponsorship"
+            className="mt-4 inline-block font-semibold text-accent hover:underline"
+          >
+            Race sponsorship on RunRecs →
+          </a>
+        </article>
+      </section>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="w-full sm:w-64">
           <label htmlFor="brand-category" className="text-sm font-semibold">

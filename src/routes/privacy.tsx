@@ -110,6 +110,22 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
+        <NoticeSection title="Race, athlete and influencer sponsorship enquiries">
+          <p>
+            Sponsorship enquiries submitted on RunRecs or AthRecs are private to you and authorised
+            staff. We use your account email, representative name, public website or profile, event
+            details, audience evidence and sponsorship brief to assess and respond to your request.
+            Nothing is published or shared with a potential partner automatically.
+          </p>
+          <p className="mt-3">
+            Staff responses appear on the sponsorship page after you sign in. You can withdraw an
+            open enquiry there. Withdrawal stops us progressing it; the enquiry and action history
+            remain for account support and dispute handling. Submitting does not enable marketing
+            emails, grant sponsorship or advertising rights, verify your profile, or agree a service
+            fee. A specific introduction and any fee require a separate agreement.
+          </p>
+        </NoticeSection>
+
         <NoticeSection title="Brand partnerships and applications">
           <p>
             Registering a brand shares your company details, representative name, role and account
@@ -142,7 +158,9 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <p className="text-xs text-subtle">Athlete Account notice: 23 August 2026. Partnerships addition: 16 September 2026.</p>
+        <p className="text-xs text-subtle">
+          Athlete Account notice: 23 August 2026. Partnerships addition: 16 September 2026.
+        </p>
       </section>
 
       <div className="flex justify-end">

@@ -50,6 +50,12 @@ export function PartnerHeader({ title, description }: { title: string; descripti
         <Link to="/brands/register" className="text-accent hover:underline">
           Register your brand
         </Link>
+        <Link to="/sponsorship" className="text-accent hover:underline">
+          Athlete & influencer enquiries
+        </Link>
+        <a href="https://www.runrecs.com/sponsorship" className="text-accent hover:underline">
+          Race sponsorship
+        </a>
       </nav>
     </header>
   );

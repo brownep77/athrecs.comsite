@@ -566,6 +566,30 @@ function RunRecsHomePage() {
       </section>
 
       <section
+        className="grid gap-5 rounded-2xl border border-border bg-surface p-5 shadow-card sm:p-8 md:grid-cols-[1fr_auto] md:items-center"
+        aria-labelledby="sponsorship-title"
+      >
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+            Race sponsorship
+          </p>
+          <h2 id="sponsorship-title" className="mt-2 font-display text-3xl font-semibold">
+            Put your brand at the heart of race day.
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
+            Connect brands with running communities. Explore event sponsorship, product experiences
+            and opportunities for race organisers.
+          </p>
+        </div>
+        <Link
+          to="/sponsorship"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-fg no-underline hover:bg-accent"
+        >
+          Explore sponsorship <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
+      </section>
+
+      <section
         aria-labelledby="coming-soon-title"
         className="rounded-2xl bg-primary p-5 text-primary-fg sm:p-8"
       >

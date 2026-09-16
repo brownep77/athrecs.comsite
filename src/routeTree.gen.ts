@@ -18,6 +18,7 @@ import { Route as MyAthleteProfileRouteImport } from './routes/my-athlete-profil
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
+import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
@@ -32,6 +33,7 @@ import { Route as AdminResultArchiveRouteImport } from './routes/admin/result-ar
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
+import { Route as AdminSponsorshipRouteImport } from './routes/admin/sponsorship'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
@@ -95,6 +97,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const RaceSeriesRoute = RaceSeriesRouteImport.update({
   id: '/race-series',
   path: '/race-series',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SponsorshipRoute = SponsorshipRouteImport.update({
+  id: '/sponsorship',
+  path: '/sponsorship',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SportsrecsRoute = SportsrecsRouteImport.update({
@@ -167,6 +174,11 @@ const AdminResultLinksRoute = AdminResultLinksRouteImport.update({
 const AdminSourcesRoute = AdminSourcesRouteImport.update({
   id: '/admin/sources',
   path: '/admin/sources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminSponsorshipRoute = AdminSponsorshipRouteImport.update({
+  id: '/admin/sponsorship',
+  path: '/admin/sponsorship',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAthleteProfilePhotoRoute = ApiAthleteProfilePhotoRouteImport.update({
@@ -278,6 +290,7 @@ export interface FileRoutesByFullPath {
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
@@ -291,6 +304,7 @@ export interface FileRoutesByFullPath {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/admin/sponsorship': typeof AdminSponsorshipRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
@@ -322,6 +336,7 @@ export interface FileRoutesByTo {
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
@@ -335,6 +350,7 @@ export interface FileRoutesByTo {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/admin/sponsorship': typeof AdminSponsorshipRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
@@ -367,6 +383,7 @@ export interface FileRoutesById {
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
@@ -380,6 +397,7 @@ export interface FileRoutesById {
   '/admin/result-claims': typeof AdminResultClaimsRoute
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
+  '/admin/sponsorship': typeof AdminSponsorshipRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
@@ -413,6 +431,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/privacy'
     | '/race-series'
+    | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
@@ -426,6 +445,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/admin/sponsorship'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/race-collector-worker'
@@ -457,6 +477,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/privacy'
     | '/race-series'
+    | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
@@ -470,6 +491,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/admin/sponsorship'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/race-collector-worker'
@@ -501,6 +523,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/privacy'
     | '/race-series'
+    | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
     | '/admin/catalogue-publishing'
@@ -514,6 +537,7 @@ export interface FileRouteTypes {
     | '/admin/result-claims'
     | '/admin/result-links'
     | '/admin/sources'
+    | '/admin/sponsorship'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/race-collector-worker'
@@ -546,6 +570,7 @@ export interface RootRouteChildren {
   OpportunitiesRoute: typeof OpportunitiesRoute
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
+  SponsorshipRoute: typeof SponsorshipRoute
   SportsrecsRoute: typeof SportsrecsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
@@ -559,6 +584,7 @@ export interface RootRouteChildren {
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
+  AdminSponsorshipRoute: typeof AdminSponsorshipRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
@@ -644,6 +670,13 @@ declare module '@tanstack/react-router' {
       path: '/race-series'
       fullPath: '/race-series'
       preLoaderRoute: typeof RaceSeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sponsorship': {
+      id: '/sponsorship'
+      path: '/sponsorship'
+      fullPath: '/sponsorship'
+      preLoaderRoute: typeof SponsorshipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sportsrecs': {
@@ -742,6 +775,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/sources'
       fullPath: '/admin/sources'
       preLoaderRoute: typeof AdminSourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/sponsorship': {
+      id: '/admin/sponsorship'
+      path: '/admin/sponsorship'
+      fullPath: '/admin/sponsorship'
+      preLoaderRoute: typeof AdminSponsorshipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/athlete-profile-photo': {
@@ -890,6 +930,7 @@ const rootRouteChildren: RootRouteChildren = {
   OpportunitiesRoute: OpportunitiesRoute,
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
+  SponsorshipRoute: SponsorshipRoute,
   SportsrecsRoute: SportsrecsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
@@ -903,6 +944,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResultClaimsRoute: AdminResultClaimsRoute,
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
+  AdminSponsorshipRoute: AdminSponsorshipRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,

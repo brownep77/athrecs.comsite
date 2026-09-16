@@ -64,7 +64,9 @@ function BrandLogo({ compact = false }: { compact?: boolean }) {
       aria-label="RunRecs.com"
     >
       Run<span className="text-accent">Recs</span>
-      <span className="ml-0.5 font-sans text-[0.48em] font-semibold tracking-normal text-subtle">.com</span>
+      <span className="ml-0.5 font-sans text-[0.48em] font-semibold tracking-normal text-subtle">
+        .com
+      </span>
     </span>
   );
 }
@@ -162,8 +164,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         ) : null}
         {children}
-        <div className="mt-10 border-t border-border pt-5 text-sm text-muted">
-          <a href="https://www.athrecs.com/brands" className="font-semibold text-accent hover:underline">Brand and club partnerships on AthRecs</a>
+        <div className="mt-10 flex flex-wrap gap-4 border-t border-border pt-5 text-sm text-muted">
+          <Link to="/sponsorship" className="font-semibold text-accent hover:underline">
+            Race sponsorship
+          </Link>
+          <a
+            href="https://www.athrecs.com/brands"
+            className="font-semibold text-accent hover:underline"
+          >
+            Athlete and influencer partnerships on AthRecs
+          </a>
         </div>
       </main>
 
