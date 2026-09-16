@@ -15,6 +15,7 @@ import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as ClaimResultsRouteImport } from './routes/claim-results'
 import { Route as FindEventsRouteImport } from './routes/find-events'
 import { Route as MyAthleteProfileRouteImport } from './routes/my-athlete-profile'
+import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
@@ -25,6 +26,7 @@ import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/ad
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
 import { Route as AdminNetworkRouteImport } from './routes/admin/network'
+import { Route as AdminPartnershipsRouteImport } from './routes/admin/partnerships'
 import { Route as AdminRaceCollectorRouteImport } from './routes/admin/race-collector'
 import { Route as AdminResultArchiveRouteImport } from './routes/admin/result-archive'
 import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-claims'
@@ -35,6 +37,9 @@ import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalog
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
+import { Route as BrandsIndexRouteImport } from './routes/brands/index'
+import { Route as BrandsManageRouteImport } from './routes/brands/manage'
+import { Route as BrandsRegisterRouteImport } from './routes/brands/register'
 import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
 import { Route as ClubsSlugRouteImport } from './routes/clubs/$slug'
 import { Route as NewsIndexRouteImport } from './routes/news/index'
@@ -75,6 +80,11 @@ const FindEventsRoute = FindEventsRouteImport.update({
 const MyAthleteProfileRoute = MyAthleteProfileRouteImport.update({
   id: '/my-athlete-profile',
   path: '/my-athlete-profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OpportunitiesRoute = OpportunitiesRouteImport.update({
+  id: '/opportunities',
+  path: '/opportunities',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -129,6 +139,11 @@ const AdminNetworkRoute = AdminNetworkRouteImport.update({
   path: '/admin/network',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPartnershipsRoute = AdminPartnershipsRouteImport.update({
+  id: '/admin/partnerships',
+  path: '/admin/partnerships',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRaceCollectorRoute = AdminRaceCollectorRouteImport.update({
   id: '/admin/race-collector',
   path: '/admin/race-collector',
@@ -177,6 +192,21 @@ const AthletesIndexRoute = AthletesIndexRouteImport.update({
 const AthletesSlugRoute = AthletesSlugRouteImport.update({
   id: '/athletes/$slug',
   path: '/athletes/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsIndexRoute = BrandsIndexRouteImport.update({
+  id: '/brands/',
+  path: '/brands/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsManageRoute = BrandsManageRouteImport.update({
+  id: '/brands/manage',
+  path: '/brands/manage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsRegisterRoute = BrandsRegisterRouteImport.update({
+  id: '/brands/register',
+  path: '/brands/register',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClubsIndexRoute = ClubsIndexRouteImport.update({
@@ -245,6 +275,7 @@ export interface FileRoutesByFullPath {
   '/claim-results': typeof ClaimResultsRoute
   '/find-events': typeof FindEventsRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/sportsrecs': typeof SportsrecsRoute
@@ -254,6 +285,7 @@ export interface FileRoutesByFullPath {
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
+  '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
   '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
@@ -263,11 +295,14 @@ export interface FileRoutesByFullPath {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
+  '/brands/manage': typeof BrandsManageRoute
+  '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/athletes/': typeof AthletesIndexRoute
+  '/brands/': typeof BrandsIndexRoute
   '/clubs/': typeof ClubsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/races/': typeof RacesIndexRoute
@@ -284,6 +319,7 @@ export interface FileRoutesByTo {
   '/claim-results': typeof ClaimResultsRoute
   '/find-events': typeof FindEventsRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/sportsrecs': typeof SportsrecsRoute
@@ -293,6 +329,7 @@ export interface FileRoutesByTo {
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
+  '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
   '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
@@ -302,11 +339,14 @@ export interface FileRoutesByTo {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
+  '/brands/manage': typeof BrandsManageRoute
+  '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/admin': typeof AdminIndexRoute
   '/athletes': typeof AthletesIndexRoute
+  '/brands': typeof BrandsIndexRoute
   '/clubs': typeof ClubsIndexRoute
   '/news': typeof NewsIndexRoute
   '/races': typeof RacesIndexRoute
@@ -324,6 +364,7 @@ export interface FileRoutesById {
   '/claim-results': typeof ClaimResultsRoute
   '/find-events': typeof FindEventsRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
+  '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/sportsrecs': typeof SportsrecsRoute
@@ -333,6 +374,7 @@ export interface FileRoutesById {
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
+  '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
   '/admin/result-archive': typeof AdminResultArchiveRoute
   '/admin/result-claims': typeof AdminResultClaimsRoute
@@ -342,11 +384,14 @@ export interface FileRoutesById {
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
+  '/brands/manage': typeof BrandsManageRoute
+  '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/admin/': typeof AdminIndexRoute
   '/athletes/': typeof AthletesIndexRoute
+  '/brands/': typeof BrandsIndexRoute
   '/clubs/': typeof ClubsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/races/': typeof RacesIndexRoute
@@ -365,6 +410,7 @@ export interface FileRouteTypes {
     | '/claim-results'
     | '/find-events'
     | '/my-athlete-profile'
+    | '/opportunities'
     | '/privacy'
     | '/race-series'
     | '/sportsrecs'
@@ -374,6 +420,7 @@ export interface FileRouteTypes {
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/network'
+    | '/admin/partnerships'
     | '/admin/race-collector'
     | '/admin/result-archive'
     | '/admin/result-claims'
@@ -383,11 +430,14 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/api/race-collector-worker'
     | '/athletes/$slug'
+    | '/brands/manage'
+    | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
     | '/races/$slug'
     | '/admin/'
     | '/athletes/'
+    | '/brands/'
     | '/clubs/'
     | '/news/'
     | '/races/'
@@ -404,6 +454,7 @@ export interface FileRouteTypes {
     | '/claim-results'
     | '/find-events'
     | '/my-athlete-profile'
+    | '/opportunities'
     | '/privacy'
     | '/race-series'
     | '/sportsrecs'
@@ -413,6 +464,7 @@ export interface FileRouteTypes {
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/network'
+    | '/admin/partnerships'
     | '/admin/race-collector'
     | '/admin/result-archive'
     | '/admin/result-claims'
@@ -422,11 +474,14 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/api/race-collector-worker'
     | '/athletes/$slug'
+    | '/brands/manage'
+    | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
     | '/races/$slug'
     | '/admin'
     | '/athletes'
+    | '/brands'
     | '/clubs'
     | '/news'
     | '/races'
@@ -443,6 +498,7 @@ export interface FileRouteTypes {
     | '/claim-results'
     | '/find-events'
     | '/my-athlete-profile'
+    | '/opportunities'
     | '/privacy'
     | '/race-series'
     | '/sportsrecs'
@@ -452,6 +508,7 @@ export interface FileRouteTypes {
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/network'
+    | '/admin/partnerships'
     | '/admin/race-collector'
     | '/admin/result-archive'
     | '/admin/result-claims'
@@ -461,11 +518,14 @@ export interface FileRouteTypes {
     | '/api/catalogue-automation'
     | '/api/race-collector-worker'
     | '/athletes/$slug'
+    | '/brands/manage'
+    | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
     | '/races/$slug'
     | '/admin/'
     | '/athletes/'
+    | '/brands/'
     | '/clubs/'
     | '/news/'
     | '/races/'
@@ -483,6 +543,7 @@ export interface RootRouteChildren {
   ClaimResultsRoute: typeof ClaimResultsRoute
   FindEventsRoute: typeof FindEventsRoute
   MyAthleteProfileRoute: typeof MyAthleteProfileRoute
+  OpportunitiesRoute: typeof OpportunitiesRoute
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
   SportsrecsRoute: typeof SportsrecsRoute
@@ -492,6 +553,7 @@ export interface RootRouteChildren {
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
   AdminNetworkRoute: typeof AdminNetworkRoute
+  AdminPartnershipsRoute: typeof AdminPartnershipsRoute
   AdminRaceCollectorRoute: typeof AdminRaceCollectorRoute
   AdminResultArchiveRoute: typeof AdminResultArchiveRoute
   AdminResultClaimsRoute: typeof AdminResultClaimsRoute
@@ -501,11 +563,14 @@ export interface RootRouteChildren {
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
+  BrandsManageRoute: typeof BrandsManageRoute
+  BrandsRegisterRoute: typeof BrandsRegisterRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
   NewsSlugRoute: typeof NewsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AthletesIndexRoute: typeof AthletesIndexRoute
+  BrandsIndexRoute: typeof BrandsIndexRoute
   ClubsIndexRoute: typeof ClubsIndexRoute
   NewsIndexRoute: typeof NewsIndexRoute
   RacesIndexRoute: typeof RacesIndexRoute
@@ -558,6 +623,13 @@ declare module '@tanstack/react-router' {
       path: '/my-athlete-profile'
       fullPath: '/my-athlete-profile'
       preLoaderRoute: typeof MyAthleteProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/opportunities': {
+      id: '/opportunities'
+      path: '/opportunities'
+      fullPath: '/opportunities'
+      preLoaderRoute: typeof OpportunitiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -630,6 +702,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminNetworkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/partnerships': {
+      id: '/admin/partnerships'
+      path: '/admin/partnerships'
+      fullPath: '/admin/partnerships'
+      preLoaderRoute: typeof AdminPartnershipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/race-collector': {
       id: '/admin/race-collector'
       path: '/admin/race-collector'
@@ -698,6 +777,27 @@ declare module '@tanstack/react-router' {
       path: '/athletes/$slug'
       fullPath: '/athletes/$slug'
       preLoaderRoute: typeof AthletesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands/': {
+      id: '/brands/'
+      path: '/brands'
+      fullPath: '/brands/'
+      preLoaderRoute: typeof BrandsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands/manage': {
+      id: '/brands/manage'
+      path: '/brands/manage'
+      fullPath: '/brands/manage'
+      preLoaderRoute: typeof BrandsManageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands/register': {
+      id: '/brands/register'
+      path: '/brands/register'
+      fullPath: '/brands/register'
+      preLoaderRoute: typeof BrandsRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clubs/': {
@@ -787,6 +887,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClaimResultsRoute: ClaimResultsRoute,
   FindEventsRoute: FindEventsRoute,
   MyAthleteProfileRoute: MyAthleteProfileRoute,
+  OpportunitiesRoute: OpportunitiesRoute,
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
   SportsrecsRoute: SportsrecsRoute,
@@ -796,6 +897,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
   AdminNetworkRoute: AdminNetworkRoute,
+  AdminPartnershipsRoute: AdminPartnershipsRoute,
   AdminRaceCollectorRoute: AdminRaceCollectorRoute,
   AdminResultArchiveRoute: AdminResultArchiveRoute,
   AdminResultClaimsRoute: AdminResultClaimsRoute,
@@ -805,11 +907,14 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
   AthletesSlugRoute: AthletesSlugRoute,
+  BrandsManageRoute: BrandsManageRoute,
+  BrandsRegisterRoute: BrandsRegisterRoute,
   ClubsSlugRoute: ClubsSlugRoute,
   NewsSlugRoute: NewsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,
   AdminIndexRoute: AdminIndexRoute,
   AthletesIndexRoute: AthletesIndexRoute,
+  BrandsIndexRoute: BrandsIndexRoute,
   ClubsIndexRoute: ClubsIndexRoute,
   NewsIndexRoute: NewsIndexRoute,
   RacesIndexRoute: RacesIndexRoute,

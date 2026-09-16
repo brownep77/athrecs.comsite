@@ -346,7 +346,7 @@ export function AthleteAuthDialog() {
 
   const formTitle =
     mode === "signup"
-      ? "Create an Athlete Account"
+      ? callbackURL.startsWith("/brands") ? "Create your brand account" : "Create an Athlete Account"
       : mode === "forgot"
         ? "Reset your password"
         : mode === "reset"
@@ -369,13 +369,13 @@ export function AthleteAuthDialog() {
         <div className="flex items-start justify-between gap-4 border-b border-border bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-5 text-white sm:px-7">
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-cyan-300">
-              <ShieldCheck className="size-4" aria-hidden="true" /> Secure Athlete Account
+              <ShieldCheck className="size-4" aria-hidden="true" /> {callbackURL.startsWith("/brands") ? "Secure brand account" : "Secure Athlete Account"}
             </div>
             <h2 id={titleId} className="mt-2 font-display text-2xl font-semibold">
               {formTitle}
             </h2>
             <p className="mt-1 max-w-md text-sm leading-5 text-slate-300">
-              One account for your Entry Passport, claimed results and future race-entry tools.
+              {callbackURL.startsWith("/brands") ? "Sign in to register your company and manage partnership opportunities. Company approval is a separate review." : "One account for your Entry Passport, claimed results and future race-entry tools."}
             </p>
           </div>
           <button

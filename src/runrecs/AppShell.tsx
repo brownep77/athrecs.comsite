@@ -162,6 +162,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         ) : null}
         {children}
+        <div className="mt-10 border-t border-border pt-5 text-sm text-muted">
+          <a href="https://www.athrecs.com/brands" className="font-semibold text-accent hover:underline">Brand and club partnerships on AthRecs</a>
+        </div>
       </main>
 
       <nav

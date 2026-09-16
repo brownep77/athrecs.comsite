@@ -11,6 +11,7 @@ import {
   ExternalLink,
   Loader2,
   LockKeyhole,
+  Handshake,
   LogOut,
   Network,
   RefreshCcw,
@@ -26,12 +27,19 @@ import {
   normalizeHostname,
 } from "@/lib/auth/staff-config";
 import { cn } from "@/lib/utils";
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 
 const staffSiteUrl =
   import.meta.env.VITE_STAFF_SITE_URL?.trim().replace(/\/+$/, "") || DEFAULT_STAFF_SITE_URL;
 const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
+  {
+    to: "/admin/partnerships",
+    label: "Partnerships",
+    icon: Handshake,
+    match: (path: string) => path.startsWith("/admin/partnerships"),
+  },
   {
     to: "/admin/race-collector",
     label: "Race collector",
@@ -268,7 +276,7 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
         </div>
         <nav className="border-t border-slate-800" aria-label="Staff tools">
           <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 md:px-6">
-            {staffNav.map((item) => {
+            {staffNav.filter((item) => IS_ATHRECS_SITE || item.to !== "/admin/partnerships").map((item) => {
               const active = item.match(pathname);
               return (
                 <Link
