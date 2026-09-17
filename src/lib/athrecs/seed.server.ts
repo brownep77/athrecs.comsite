@@ -1600,7 +1600,10 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
   );
 }
 
-async function catalogueMarkersCurrent(sql: Sql): Promise<boolean> {
+async function catalogueMarkersCurrent(
+  sql: Sql,
+  { includePublicFigures = true } = {},
+): Promise<boolean> {
   const expected = new Map([
     ["seed_version", SEED_VERSION],
     ["clubs_catalogue_version", SEED_VERSION],
@@ -1609,6 +1612,7 @@ async function catalogueMarkersCurrent(sql: Sql): Promise<boolean> {
     ["parkrun_through", "2027-12-26"],
     ["athletics_taxonomy_v1", "complete"],
   ]);
+  if (!includePublicFigures) expected.delete("public_figures_catalogue_version");
   const rows = await sql<{ key: string; value: string }>`
     select key, value from app_meta
     where key in (
@@ -1620,7 +1624,22 @@ async function catalogueMarkersCurrent(sql: Sql): Promise<boolean> {
       'athletics_taxonomy_v1'
     )
   `;
-  return rows.length === expected.size && rows.every((row) => expected.get(row.key) === row.value);
+  const relevantRows = rows.filter((row) => expected.has(row.key));
+  return (
+    relevantRows.length === expected.size &&
+    relevantRows.every((row) => expected.get(row.key) === row.value)
+  );
+}
+
+async function refreshCatalogue(sql: Sql): Promise<void> {
+  if (await catalogueMarkersCurrent(sql)) return;
+  // Athlete editorial updates have their own version. Do not rerun unrelated
+  // fixture imports: a production event may now have a protected redirect.
+  if (await catalogueMarkersCurrent(sql, { includePublicFigures: false })) {
+    await upsertPublicFigureProfiles(sql);
+    return;
+  }
+  await seedCatalogue(sql);
 }
 
 async function seedCatalogue(sql: Sql): Promise<void> {
@@ -2085,13 +2104,12 @@ async function seed(): Promise<void> {
         // live together. A database-wide transaction lock prevents their event and
         // edition upserts from deadlocking one another.
         await tx.query("select pg_advisory_xact_lock($1)", [CATALOGUE_SEED_LOCK_ID]);
-        if (await catalogueMarkersCurrent(tx)) return;
-        await seedCatalogue(tx);
+        await refreshCatalogue(tx);
       });
       return;
     }
 
-    await seedCatalogue(sql);
+    await refreshCatalogue(sql);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     const code =
