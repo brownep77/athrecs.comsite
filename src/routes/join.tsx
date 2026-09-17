@@ -304,9 +304,12 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
           className={field}
         />
       </label>
-      <label className="block text-sm font-semibold">
-        Your main sport
+      <div className="text-sm font-semibold">
+        <label htmlFor="recruitment-main-sport" className="block">
+          Your main sport
+        </label>
         <select
+          id="recruitment-main-sport"
           value={sport}
           onChange={(event) => setSport(event.target.value as AthleteSportCode)}
           disabled={busy}
@@ -316,7 +319,7 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
             <option key={value}>{value}</option>
           ))}
         </select>
-      </label>
+      </div>
       <label className="flex items-start gap-3 text-sm leading-6">
         <input
           type="checkbox"
