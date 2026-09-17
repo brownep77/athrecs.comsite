@@ -1124,9 +1124,12 @@ async function publicFigureRowsComplete(sql: Sql): Promise<boolean> {
        athlete_slug, event_slug, event_date, distance_code
      )
      join athletes athlete on athlete.slug = target.athlete_slug
-     join events event on event.slug = target.event_slug
+     left join events event on event.slug = target.event_slug
+     left join slug_redirects redirect
+       on redirect.entity_type = 'event'
+      and redirect.old_slug = target.event_slug
      join editions edition
-       on edition.event_id = event.id
+       on edition.event_id = coalesce(event.id, redirect.entity_id)
       and edition.event_date = target.event_date
       and edition.distance_code = target.distance_code
      join results result
@@ -1198,7 +1201,17 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       source_url = excluded.source_url`,
   );
 
-  const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
+  // Production may have renamed or merged events since this source catalogue
+  // was published. Resolve permanent historic URLs to the existing identity;
+  // never recreate a retired slug or bypass its insert guard.
+  const eventRows = await sql<{ id: number; slug: string }>`
+    select id, slug from events
+    union all
+    select event.id, redirect.old_slug as slug
+    from slug_redirects redirect
+    join events event on event.id = redirect.entity_id
+    where redirect.entity_type = 'event'
+  `;
   const eventIds = new Map(eventRows.map((row) => [row.slug, row.id]));
   const distanceRows = publicFigureSeries.flatMap((series) =>
     [...new Set(series.distances)].map((distance) => [eventIds.get(series.slug), distance]),
@@ -1358,20 +1371,19 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
   const athleteIds = new Map(athleteRows.map((row) => [row.slug, row.id]));
   const editionRows = await sql<{
     id: number;
-    event_slug: string;
+    event_id: number;
     event_date: string;
     distance_code: string;
   }>`
-    select ed.id, e.slug as event_slug, ed.event_date::text as event_date, ed.distance_code
+    select ed.id, ed.event_id, ed.event_date::text as event_date, ed.distance_code
     from editions ed
-    join events e on e.id = ed.event_id
   `;
   const editionIds = new Map(
-    editionRows.map((row) => [`${row.event_slug}|${row.event_date}|${row.distance_code}`, row.id]),
+    editionRows.map((row) => [`${row.event_id}|${row.event_date}|${row.distance_code}`, row.id]),
   );
   const rows = publicFigureResults
     .map((result) => [
-      editionIds.get(`${result.eventSlug}|${result.date}|${result.distance}`),
+      editionIds.get(`${eventIds.get(result.eventSlug)}|${result.date}|${result.distance}`),
       athleteIds.get(result.athleteSlug),
       result.status ?? "finished",
       result.status && !["finished", "FIN"].includes(result.status)
