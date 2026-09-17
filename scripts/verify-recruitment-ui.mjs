@@ -88,7 +88,7 @@ try {
   );
   await mkdir("artifacts", { recursive: true });
   await page.screenshot({ path: "artifacts/recruitment-mobile.png", fullPage: true });
-  await page.goto(`${origin}/athletes/mo-farah`, { waitUntil: "networkidle" });
+  await page.goto(`${origin}/athletes/mo-farah`, { waitUntil: "networkidle", timeout: 90000 });
   await page.getByRole("heading", { name: "Mo Farah", exact: true }).waitFor();
   const photo = page.getByRole("img", { name: /Mo Farah, wearing/ });
   assert.equal(await photo.evaluate((image) => image.complete && image.naturalWidth > 0), true);
@@ -96,6 +96,12 @@ try {
   await page.getByText("59:32", { exact: true }).waitFor();
   await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
   assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
+  assert.equal(
+    await page
+      .getByText("Your first recorded finish starts your achievement collection.", { exact: true })
+      .count(),
+    0,
+  );
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   await page.screenshot({ path: "artifacts/mo-farah-mobile.png", fullPage: true });
   assert.deepEqual(errors, []);

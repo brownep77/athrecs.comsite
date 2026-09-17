@@ -365,7 +365,9 @@ function AthletePage() {
       </section>
 
       <EditorialAthleteOverview slug={athlete.slug} />
-      <ProfileRecordHighlights results={profileResults} />
+      {(!isPublicFigure || profileResults.length > 0) && (
+        <ProfileRecordHighlights results={profileResults} />
+      )}
 
       {athlete.profile_links.length > 0 && (
         <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
