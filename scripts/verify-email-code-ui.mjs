@@ -109,9 +109,9 @@ try {
     waitUntil: "networkidle",
   });
   const resetDialog = page.getByRole("dialog", { name: "Choose a new password" });
-  await resetDialog.getByLabel("New password", { exact: true }).waitFor();
+  await resetDialog.getByLabel(/^New password/).waitFor();
   assert.equal(await resetDialog.getByLabel("Email address", { exact: true }).count(), 0);
-  await resetDialog.getByLabel("New password", { exact: true }).fill("Test-reset-password-123!");
+  await resetDialog.getByLabel(/^New password/).fill("Test-reset-password-123!");
   await resetDialog.getByLabel("Confirm password", { exact: true }).fill("Different-password-123!");
   await resetDialog.getByRole("button", { name: "Save new password" }).click();
   await resetDialog.getByText("The passwords do not match.", { exact: true }).waitFor();
