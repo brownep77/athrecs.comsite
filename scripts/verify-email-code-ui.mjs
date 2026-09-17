@@ -83,6 +83,9 @@ try {
   assert.equal(await close.evaluate((element) => element === document.activeElement), true);
   await page.keyboard.press("Escape");
   await signInDialog.waitFor({ state: "hidden" });
+  await page.waitForFunction(
+    () => document.activeElement?.textContent === "Sign in or create account",
+  );
   assert.equal(
     await page
       .getByRole("button", { name: "Sign in or create account", exact: true })
