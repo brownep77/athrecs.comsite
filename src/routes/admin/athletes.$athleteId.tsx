@@ -5,6 +5,7 @@ import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
+import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
 import { getStaffAthleteProfile } from "@/lib/athrecs/staff-athlete-directory-api";
 import { publicProfileDetails } from "@/lib/athrecs/profile-details";
 
@@ -80,6 +81,10 @@ function StaffAthleteProfile() {
           </section>
           <ProfileRecordHighlights results={profile.results} />
           <CompactResults key={athleteId} results={profile.results} />
+          <SourcePerformanceHistory
+            key={`source-${athleteId}`}
+            histories={profile.sourceHistories}
+          />
         </>
       )}
     </div>

@@ -208,6 +208,42 @@ try {
     values (${source.id},${profileEdition.id},2700,'private')`;
   const getStaffProfile = (athleteId, headers) =>
     rpc("staff-athlete-directory-api", "getStaffAthleteProfile", { athleteId }, headers);
+  const sourcePerformances = [
+    {
+      year: 2025,
+      date: "2025-06-01",
+      sourceDate: "1 Jun",
+      ageGroup: "Senior",
+      discipline: "1500",
+      performance: "3:37.30",
+      wind: "",
+      place: "3h2",
+      venue: "Test track",
+      meeting: "Test meeting",
+      sourceUrls: ["https://example.test/track"],
+      labels: ["Personal Best"],
+    },
+    {
+      year: 2025,
+      date: "2025-06-01",
+      sourceDate: "1 Jun",
+      ageGroup: "Senior",
+      discipline: "Long Jump",
+      performance: "4.04\nw",
+      wind: "2.5",
+      place: "3",
+      venue: "Test track",
+      meeting: "Test meeting",
+      sourceUrls: ["https://example.test/track"],
+      labels: [],
+    },
+  ];
+  await sql`insert into athlete_source_histories
+    (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances)
+    values (${privateSource.id},'powerof10','history-private','https://example.test/athlete',
+      now(),true,array[2025],array[2025],${JSON.stringify(sourcePerformances)}::jsonb),
+      (${source.id},'powerof10','history-linked','https://example.test/linked',
+      now(),false,array[2025,2024],array[2025],'[]'::jsonb)`;
   await assert.rejects(() => getStaffProfile(privateId));
   await assert.rejects(() => getStaffProfile(privateId, owner));
   await assert.rejects(() => getStaffProfile(privateId, other));
@@ -229,6 +265,17 @@ try {
   );
   assert.equal(privateProfile.results[0].resultId, privateResult.id);
   assert.equal(privateProfile.results[0].chipTimeSeconds, 2400);
+  assert.equal(
+    privateProfile.sourceHistories.length,
+    1,
+    "Source histories stay scoped to the athlete",
+  );
+  assert.deepEqual(
+    privateProfile.sourceHistories[0].performances,
+    sourcePerformances,
+    "Track precision, field marks, annotations and heat positions survive the database and HTTP transport exactly",
+  );
+  assert.equal(privateProfile.sourceHistories[0].complete, true);
   assert.deepEqual(privateProfile.results[0].sourceUrls.sort(), [
     "https://example.test/corroboration",
     "https://example.test/result",
@@ -237,6 +284,18 @@ try {
   assert.equal(accountProfile.athlete.name, "Compact Test Athlete");
   assert.equal(accountProfile.results.length, 1, "Account view includes linked source results");
   assert.equal(accountProfile.results[0].finishTimeSeconds, 2700);
+  assert.equal(
+    accountProfile.sourceHistories.length,
+    1,
+    "Canonical account includes its linked source history",
+  );
+  assert.equal(accountProfile.sourceHistories[0].externalId, "history-linked");
+  assert.equal(accountProfile.sourceHistories[0].complete, false);
+  const publicProfile = await rpc("api", "getAthleteBySlug", "compact-linked-athlete");
+  assert(
+    !("sourceHistories" in publicProfile),
+    "Private source archives must not be exposed through public profiles",
+  );
   assert.equal(await rpc("api", "getAthleteBySlug", "compact-private-directory"), null);
   const [stillPrivate] = await sql`select a.profile_visibility,r.result_visibility
     from athletes a join results r on r.athlete_id=a.id where r.id=${privateResult.id}`;

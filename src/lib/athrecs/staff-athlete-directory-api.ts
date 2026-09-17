@@ -6,6 +6,7 @@ import { ensureAthrecsSeeded } from "./seed.server";
 import { formatAthleteId, parseAthleteId } from "./athlete-id";
 import { readProfileDetails, type AthleteProfileDetails } from "./profile-details";
 import { combineProfileResults, type ProfileResult } from "./profile-records";
+import { sourceHistorySchema } from "./source-performance-history";
 
 const filterSchema = z.object({
   q: z.string().trim().max(120).default(""),
@@ -164,7 +165,19 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
       where r.athlete_id=any(${sourceIds}::int[])
       order by ed.event_date desc,r.id desc
     `;
-    return { athlete, results: combineProfileResults(results) };
+    const histories = await sql`
+      select provider, external_id as "externalId", source_url as "sourceUrl",
+        captured_at::text as "capturedAt", complete,
+        years_expected as "yearsExpected", years_captured as "yearsCaptured", performances
+      from athlete_source_histories
+      where athlete_id=any(${sourceIds}::int[])
+      order by provider, external_id
+    `;
+    return {
+      athlete,
+      results: combineProfileResults(results),
+      sourceHistories: histories.map((history) => sourceHistorySchema.parse(history)),
+    };
   });
 
 export const exportStaffAthleteDirectory = createServerFn({ method: "POST" })
