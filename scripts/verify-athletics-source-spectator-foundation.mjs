@@ -64,13 +64,24 @@ assert.match(raceRoute, /spectatorAccess\.ticket_url/);
 assert.match(raceRoute, /<Fact label="Entry"/);
 assert.match(raceRoute, /<Fact label="Spectators"/);
 
-assert.equal(professionalAthletes.length, 6, "The first professional-athlete cohort changed");
+const initialCohort = professionalAthletes.filter((athlete) => athlete.slug !== "mo-farah");
+assert.equal(initialCohort.length, 6, "The first professional-athlete cohort changed");
+const moFarah = professionalAthletes.find((athlete) => athlete.slug === "mo-farah");
+assert(moFarah, "The sourced Mo Farah profile must be included");
+assert.equal(moFarah.profile_type, "Public figure");
+assert.equal(moFarah.source_url, "https://www.olympedia.org/athletes/115344");
+assert(
+  moFarah.profile_links?.some(
+    (link) =>
+      link.url === "https://worldathletics.org/athletes/great-britain-ni/mohamed-farah-14189197",
+  ),
+);
 assert.equal(
   new Set(professionalAthletes.map((athlete) => athlete.slug)).size,
   professionalAthletes.length,
   "Professional-athlete slugs must be unique",
 );
-for (const athlete of professionalAthletes) {
+for (const athlete of initialCohort) {
   assert.equal(athlete.profile_type, "Public figure");
   assert(athlete.profile_roles?.includes("Professional athlete"));
   assert.match(athlete.source_url ?? "", /^https:\/\/worldathletics\.org\/athletes\//);

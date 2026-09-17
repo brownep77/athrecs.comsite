@@ -1,4 +1,5 @@
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
+import { EditorialAthleteOverview } from "@/components/athletes/EditorialAthleteOverview";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
@@ -331,6 +332,11 @@ function AthletePage() {
             ))}
         </div>
         {athlete.bio && <p className="max-w-prose text-sm text-muted">{athlete.bio}</p>}
+        {athlete.slug === "mo-farah" && !athlete.is_claimed ? (
+          <p className="text-xs text-subtle">
+            Independent ATHRECS profile. Not athlete-claimed; no endorsement is implied.
+          </p>
+        ) : null}
         <ShareProfileButton
           path={`/athletes/${athlete.slug}`}
           title={`${athlete.display_name} athlete profile`}
@@ -358,7 +364,10 @@ function AthletePage() {
         )}
       </section>
 
-      <ProfileRecordHighlights results={profileResults} />
+      <EditorialAthleteOverview slug={athlete.slug} />
+      {(!isPublicFigure || profileResults.length > 0) && (
+        <ProfileRecordHighlights results={profileResults} />
+      )}
 
       {athlete.profile_links.length > 0 && (
         <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">

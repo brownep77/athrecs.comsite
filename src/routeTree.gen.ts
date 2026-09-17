@@ -14,6 +14,7 @@ import { Route as AthleteAccountRouteImport } from './routes/athlete-account'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as ClaimResultsRouteImport } from './routes/claim-results'
 import { Route as FindEventsRouteImport } from './routes/find-events'
+import { Route as JoinRouteImport } from './routes/join'
 import { Route as MyAthleteProfileRouteImport } from './routes/my-athlete-profile'
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PrivacyRouteImport } from './routes/privacy'
@@ -78,6 +79,11 @@ const ClaimResultsRoute = ClaimResultsRouteImport.update({
 const FindEventsRoute = FindEventsRouteImport.update({
   id: '/find-events',
   path: '/find-events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JoinRoute = JoinRouteImport.update({
+  id: '/join',
+  path: '/join',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MyAthleteProfileRoute = MyAthleteProfileRouteImport.update({
@@ -292,6 +298,7 @@ export interface FileRoutesByFullPath {
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
   '/find-events': typeof FindEventsRoute
+  '/join': typeof JoinRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
@@ -339,6 +346,7 @@ export interface FileRoutesByTo {
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
   '/find-events': typeof FindEventsRoute
+  '/join': typeof JoinRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
@@ -387,6 +395,7 @@ export interface FileRoutesById {
   '/calendar': typeof CalendarRoute
   '/claim-results': typeof ClaimResultsRoute
   '/find-events': typeof FindEventsRoute
+  '/join': typeof JoinRoute
   '/my-athlete-profile': typeof MyAthleteProfileRoute
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
@@ -436,6 +445,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/claim-results'
     | '/find-events'
+    | '/join'
     | '/my-athlete-profile'
     | '/opportunities'
     | '/privacy'
@@ -483,6 +493,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/claim-results'
     | '/find-events'
+    | '/join'
     | '/my-athlete-profile'
     | '/opportunities'
     | '/privacy'
@@ -530,6 +541,7 @@ export interface FileRouteTypes {
     | '/calendar'
     | '/claim-results'
     | '/find-events'
+    | '/join'
     | '/my-athlete-profile'
     | '/opportunities'
     | '/privacy'
@@ -578,6 +590,7 @@ export interface RootRouteChildren {
   CalendarRoute: typeof CalendarRoute
   ClaimResultsRoute: typeof ClaimResultsRoute
   FindEventsRoute: typeof FindEventsRoute
+  JoinRoute: typeof JoinRoute
   MyAthleteProfileRoute: typeof MyAthleteProfileRoute
   OpportunitiesRoute: typeof OpportunitiesRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -655,6 +668,13 @@ declare module '@tanstack/react-router' {
       path: '/find-events'
       fullPath: '/find-events'
       preLoaderRoute: typeof FindEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/join': {
+      id: '/join'
+      path: '/join'
+      fullPath: '/join'
+      preLoaderRoute: typeof JoinRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/my-athlete-profile': {
@@ -946,6 +966,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalendarRoute: CalendarRoute,
   ClaimResultsRoute: ClaimResultsRoute,
   FindEventsRoute: FindEventsRoute,
+  JoinRoute: JoinRoute,
   MyAthleteProfileRoute: MyAthleteProfileRoute,
   OpportunitiesRoute: OpportunitiesRoute,
   PrivacyRoute: PrivacyRoute,

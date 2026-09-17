@@ -48,9 +48,6 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
-      - name: Type-check, lint and verify
-        run: npm run ci:verify
-
       - name: Verify historical result source safeguards
         run: node scripts/verify-result-source-sync.mjs
 
@@ -59,6 +56,12 @@ jobs:
 
       - name: Email-only sign-in form
         run: node scripts/verify-email-code-ui.mjs
+
+      - name: Social recruitment and sourced athlete profile
+        run: node scripts/verify-recruitment-ui.mjs
+
+      - name: Type-check, lint and verify
+        run: npm run ci:verify
 
       - name: Account results panel appears once on both sites
         run: |
