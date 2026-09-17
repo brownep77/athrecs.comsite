@@ -188,6 +188,60 @@ try {
   assert.equal(directory.athletes[0].athleteNumber, account.athleteNumber);
   assert.equal(directory.athletes[0].sources.length, 1);
   assert.equal(directory.athletes[0].sports.length, 2);
+  const [privateSource] = await sql`insert into athletes (slug,display_name,profile_visibility)
+    values ('compact-private-directory','Compact private directory athlete','private') returning id`;
+  const [privateIdentity] =
+    await sql`select athlete_number::text as number from athlete_resolved_ids
+    where athlete_id=${privateSource.id}`;
+  const privateId = `ATH-${privateIdentity.number.padStart(6, "0")}`;
+  const [profileEvent] = await sql`insert into events (slug,name,sport)
+    values ('compact-profile-result','Compact profile race','Running') returning id`;
+  const [profileEdition] =
+    await sql`insert into editions (event_id,event_date,distance_code,distance_km)
+    values (${profileEvent.id},'2025-01-01','10K',10) returning id`;
+  const [privateResult] = await sql`insert into results
+    (athlete_id,edition_id,finish_time_seconds,chip_time_seconds,result_visibility,source_url)
+    values (${privateSource.id},${profileEdition.id},2400,2400,'private','https://example.test/result') returning id`;
+  await sql`insert into result_source_references (result_id,source_url,source_name)
+    values (${privateResult.id},'https://example.test/corroboration','Corroborating source')`;
+  await sql`insert into results (athlete_id,edition_id,finish_time_seconds,result_visibility)
+    values (${source.id},${profileEdition.id},2700,'private')`;
+  const getStaffProfile = (athleteId, headers) =>
+    rpc("staff-athlete-directory-api", "getStaffAthleteProfile", { athleteId }, headers);
+  await assert.rejects(() => getStaffProfile(privateId));
+  await assert.rejects(() => getStaffProfile(privateId, owner));
+  await assert.rejects(() => getStaffProfile(privateId, other));
+  await assert.rejects(() =>
+    getStaffProfile(privateId, { ...staff, "x-forwarded-host": "www.athrecs.com" }),
+  );
+  await assert.rejects(() =>
+    getStaffProfile(privateId, { ...staff, "sec-fetch-site": "cross-site" }),
+  );
+  await assert.rejects(() => getStaffProfile("invalid", staff));
+  assert.equal(await getStaffProfile("ATH-999999999999", staff), null);
+  const privateProfile = await getStaffProfile(privateId, staff);
+  assert.equal(privateProfile.athlete.visibility, "Private");
+  assert.equal(privateProfile.athlete.profilePath, null);
+  assert.equal(
+    privateProfile.results.length,
+    1,
+    "Staff view must not include another athlete's results",
+  );
+  assert.equal(privateProfile.results[0].resultId, privateResult.id);
+  assert.equal(privateProfile.results[0].chipTimeSeconds, 2400);
+  assert.deepEqual(privateProfile.results[0].sourceUrls.sort(), [
+    "https://example.test/corroboration",
+    "https://example.test/result",
+  ]);
+  const accountProfile = await getStaffProfile(directory.athletes[0].athrecsId, staff);
+  assert.equal(accountProfile.athlete.name, "Compact Test Athlete");
+  assert.equal(accountProfile.results.length, 1, "Account view includes linked source results");
+  assert.equal(accountProfile.results[0].finishTimeSeconds, 2700);
+  assert.equal(await rpc("api", "getAthleteBySlug", "compact-private-directory"), null);
+  const [stillPrivate] = await sql`select a.profile_visibility,r.result_visibility
+    from athletes a join results r on r.athlete_id=a.id where r.id=${privateResult.id}`;
+  assert.equal(stillPrivate.profile_visibility, "private");
+  assert.equal(stillPrivate.result_visibility, "private");
   await rpc(
     "athlete-upcoming-api",
     "saveStaffUpcoming",

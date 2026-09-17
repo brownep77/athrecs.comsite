@@ -101,7 +101,8 @@ const staffNav = [
     to: "/admin/athlete-directory",
     label: "Athlete directory",
     icon: UserRoundCog,
-    match: (path: string) => path.startsWith("/admin/athlete-directory"),
+    match: (path: string) =>
+      path.startsWith("/admin/athlete-directory") || path.startsWith("/admin/athletes/"),
   },
   {
     to: "/admin/athlete-accounts",
