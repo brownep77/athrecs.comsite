@@ -51,6 +51,9 @@ jobs:
       - name: Verify historical result source safeguards
         run: node scripts/verify-result-source-sync.mjs
 
+      - name: Public-figure updates preserve retired event URLs
+        run: node scripts/verify-public-figure-refresh.mjs
+
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
