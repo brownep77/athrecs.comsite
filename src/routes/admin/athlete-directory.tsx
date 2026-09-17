@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
@@ -168,7 +168,13 @@ function AthleteDirectory() {
                   <tr key={p.athleteNumber}>
                     <td className="whitespace-nowrap px-3 py-2 font-mono text-xs">{p.athrecsId}</td>
                     <td className="px-3 py-2 font-medium">
-                      {p.name}
+                      <Link
+                        to="/admin/athletes/$athleteId"
+                        params={{ athleteId: p.athrecsId }}
+                        className="text-accent hover:underline"
+                      >
+                        {p.name}
+                      </Link>
                       <span className="block text-[10px] font-normal text-subtle">
                         {p.registered ? "Registered account" : "Source profile"}
                       </span>
@@ -184,6 +190,14 @@ function AthleteDirectory() {
                     <td className="px-3 py-2 text-xs">{p.visibility}</td>
                     <td className="px-3 py-2 tabular-nums">{p.resultCount}</td>
                     <td className="px-3 py-2">
+                      <Link
+                        to="/admin/athletes/$athleteId"
+                        params={{ athleteId: p.athrecsId }}
+                        aria-label={`View profile for ${p.name}`}
+                        className="mr-3 inline-block whitespace-nowrap text-xs text-accent hover:underline"
+                      >
+                        View profile
+                      </Link>
                       <button
                         className="text-xs text-accent hover:underline"
                         onClick={() => setSelected(p)}
@@ -246,6 +260,13 @@ function AthleteDirectory() {
               </div>
             ))}
           </dl>
+          <Link
+            to="/admin/athletes/$athleteId"
+            params={{ athleteId: selected.athrecsId }}
+            className="mr-4 inline-block text-sm text-accent hover:underline"
+          >
+            View profile
+          </Link>
           {selected.profilePath ? (
             <a
               href={`https://www.athrecs.com${selected.profilePath}`}

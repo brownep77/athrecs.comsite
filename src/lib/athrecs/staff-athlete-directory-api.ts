@@ -3,8 +3,9 @@ import { z } from "zod";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
-import { formatAthleteId } from "./athlete-id";
+import { formatAthleteId, parseAthleteId } from "./athlete-id";
 import { readProfileDetails, type AthleteProfileDetails } from "./profile-details";
+import { combineProfileResults, type ProfileResult } from "./profile-records";
 
 const filterSchema = z.object({
   q: z.string().trim().max(120).default(""),
@@ -50,7 +51,7 @@ export type StaffAthlete = {
   sources: { id: number; slug: string }[];
   profilePath: string | null;
 };
-async function loadDirectory(filters: z.infer<typeof filterSchema>) {
+async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumber?: string) {
   await ensureAthrecsSeeded();
   const sql = await getSql();
   const rows = await sql<RawProfile>`
@@ -62,6 +63,7 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>) {
       coalesce(a.date_of_birth::text,'') as birthday, '' as email
     from athletes a join athlete_resolved_ids i on i.athlete_id=a.id left join clubs c on c.id=a.club_id
     cross join lateral (select array_agg(distinct e.sport) as sports,count(*)::int as count from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id where r.athlete_id=a.id) records
+    where (${athleteNumber ?? null}::bigint is null or i.athlete_number=${athleteNumber ?? null}::bigint)
     union all
     select i.number::text, null::integer, s.slug, coalesce(nullif(p.display_name,''),p.full_name,u."name",'Athlete'),
       coalesce(p.country,''), coalesce(p.city,''), coalesce(p.nationality,''), coalesce(p.club_or_team,''),
@@ -72,6 +74,7 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>) {
     left join athlete_public_shares s on s.user_id=p.user_id
     cross join lateral (select array_agg(sport_code order by is_primary desc,sport_code) as names,
       jsonb_agg(jsonb_build_object('sport',sport_code,'name',coalesce(coach_name,''))) as coaches from athlete_sport_profiles where user_id=p.user_id) sports
+    where (${athleteNumber ?? null}::bigint is null or i.number=${athleteNumber ?? null}::bigint)
     order by is_account desc, name
   `;
   const profiles = new Map<string, StaffAthlete>();
@@ -130,6 +133,40 @@ export const getStaffAthleteDirectory = createServerFn({ method: "GET" })
       sports,
     };
   });
+
+/** A private, read-only profile. Public profile visibility is never changed. */
+export const getStaffAthleteProfile = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .validator((input: { athleteId: string }) =>
+    z.object({ athleteId: z.string().regex(/^ATH-\d{6,18}$/) }).parse(input),
+  )
+  .handler(async ({ data }) => {
+    const number = parseAthleteId(data.athleteId);
+    if (!number) return null;
+    const { all } = await loadDirectory(filterSchema.parse({}), number);
+    const athlete = all.find((profile) => profile.athleteNumber === number);
+    if (!athlete) return null;
+    const sql = await getSql();
+    const sourceIds = athlete.sources.map((source) => source.id);
+    const results = await sql<ProfileResult>`
+      select r.id as "resultId", r.edition_id as "editionId",
+        e.name as "eventName", e.slug as "eventSlug", e.sport, e.surface, e.country, e.city,
+        ed.event_date::text as "eventDate", ed.distance_code as "distanceCode",
+        ed.distance_km as "distanceKm", r.status,
+        r.finish_time_seconds as "finishTimeSeconds", r.chip_time_seconds as "chipTimeSeconds",
+        r.gun_time_seconds as "gunTimeSeconds", r.overall_place as "overallPlace", r.category,
+        r.result_source as "resultSource",
+        array(select distinct url from (
+          select r.source_url as url union all
+          select ref.source_url from result_source_references ref where ref.result_id=r.id
+        ) sources where url like 'https://%') as "sourceUrls"
+      from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
+      where r.athlete_id=any(${sourceIds}::int[])
+      order by ed.event_date desc,r.id desc
+    `;
+    return { athlete, results: combineProfileResults(results) };
+  });
+
 export const exportStaffAthleteDirectory = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: DirectoryFilters) => filterSchema.parse(input))

@@ -51,6 +51,7 @@ import { Route as NewsSlugRouteImport } from './routes/news/$slug'
 import { Route as RacesIndexRouteImport } from './routes/races/index'
 import { Route as RacesSlugRouteImport } from './routes/races/$slug'
 import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$country/index'
+import { Route as AdminAthletesAthleteIdRouteImport } from './routes/admin/athletes.$athleteId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as LanguageCountryRacesIndexRouteImport } from './routes/$language/$country/races/index'
 import { Route as LanguageCountryRacesSlugRouteImport } from './routes/$language/$country/races/$slug'
@@ -268,6 +269,11 @@ const LanguageCountryIndexRoute = LanguageCountryIndexRouteImport.update({
   path: '/$language/$country/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAthletesAthleteIdRoute = AdminAthletesAthleteIdRouteImport.update({
+  id: '/admin/athletes/$athleteId',
+  path: '/admin/athletes/$athleteId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -334,6 +340,7 @@ export interface FileRoutesByFullPath {
   '/clubs/': typeof ClubsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/races/': typeof RacesIndexRoute
+  '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
@@ -382,6 +389,7 @@ export interface FileRoutesByTo {
   '/clubs': typeof ClubsIndexRoute
   '/news': typeof NewsIndexRoute
   '/races': typeof RacesIndexRoute
+  '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
@@ -431,6 +439,7 @@ export interface FileRoutesById {
   '/clubs/': typeof ClubsIndexRoute
   '/news/': typeof NewsIndexRoute
   '/races/': typeof RacesIndexRoute
+  '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
   '/$language/$country/races/$slug': typeof LanguageCountryRacesSlugRoute
@@ -481,6 +490,7 @@ export interface FileRouteTypes {
     | '/clubs/'
     | '/news/'
     | '/races/'
+    | '/admin/athletes/$athleteId'
     | '/api/auth/$'
     | '/$language/$country/'
     | '/$language/$country/races/$slug'
@@ -529,6 +539,7 @@ export interface FileRouteTypes {
     | '/clubs'
     | '/news'
     | '/races'
+    | '/admin/athletes/$athleteId'
     | '/api/auth/$'
     | '/$language/$country'
     | '/$language/$country/races/$slug'
@@ -577,6 +588,7 @@ export interface FileRouteTypes {
     | '/clubs/'
     | '/news/'
     | '/races/'
+    | '/admin/athletes/$athleteId'
     | '/api/auth/$'
     | '/$language/$country/'
     | '/$language/$country/races/$slug'
@@ -626,6 +638,7 @@ export interface RootRouteChildren {
   ClubsIndexRoute: typeof ClubsIndexRoute
   NewsIndexRoute: typeof NewsIndexRoute
   RacesIndexRoute: typeof RacesIndexRoute
+  AdminAthletesAthleteIdRoute: typeof AdminAthletesAthleteIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
   LanguageCountryIndexRoute: typeof LanguageCountryIndexRoute
   LanguageCountryRacesSlugRoute: typeof LanguageCountryRacesSlugRoute
@@ -929,6 +942,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LanguageCountryIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/athletes/$athleteId': {
+      id: '/admin/athletes/$athleteId'
+      path: '/admin/athletes/$athleteId'
+      fullPath: '/admin/athletes/$athleteId'
+      preLoaderRoute: typeof AdminAthletesAthleteIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -1002,6 +1022,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClubsIndexRoute: ClubsIndexRoute,
   NewsIndexRoute: NewsIndexRoute,
   RacesIndexRoute: RacesIndexRoute,
+  AdminAthletesAthleteIdRoute: AdminAthletesAthleteIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
   LanguageCountryIndexRoute: LanguageCountryIndexRoute,
   LanguageCountryRacesSlugRoute: LanguageCountryRacesSlugRoute,
