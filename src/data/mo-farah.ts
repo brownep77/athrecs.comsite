@@ -31,12 +31,27 @@ export const moFarahAthlete: AthleteSeed = {
     { label: "Olympic record · Olympedia", url: OLYMPEDIA },
     {
       label: "World Athletics records & results",
-      url: "https://worldathletics.org/athletes/great-britain-ni/mohamed-farah-14189197",
+      url: "https://worldathletics.org/athletes/-/14189197",
     },
     { label: "Official website", url: "https://www.mofarah.com/" },
     { label: "Career biography and personal bests", url: BIOGRAPHY },
   ],
   notable_achievements: [
+    {
+      year: 2019,
+      title: "Six consecutive Great North Run wins",
+      detail:
+        "Won every edition from 2014 to 2019, finishing the sixth in 59:07 on the assisted course.",
+      source_url:
+        "https://worldathletics.org/competition/calendar-results/results/7135647?eventId=10229633",
+    },
+    {
+      year: 2016,
+      title: "World Half Marathon Championships bronze",
+      detail: "Finished third in Cardiff in 59:59.",
+      source_url:
+        "https://worldathletics.org/competition/calendar-results/results/7093751?eventId=10229633",
+    },
     {
       year: 2012,
       title: "London Olympic double",
@@ -60,7 +75,8 @@ export const moFarahAthlete: AthleteSeed = {
       year: 2018,
       title: "Chicago Marathon champion",
       detail: "Won in 2:05:11, his marathon personal best.",
-      source_url: BIOGRAPHY,
+      source_url:
+        "https://worldathletics.org/competition/calendar-results/results/7122980?eventId=10229634",
     },
   ],
 };
@@ -70,13 +86,30 @@ export const moFarahCareerBests = [
   { event: "1,500m", time: "3:28.81", location: "Monaco · 2013" },
   { event: "5,000m", time: "12:53.11", location: "Monaco · 2011" },
   { event: "10,000m", time: "26:46.57", location: "Eugene · 2011" },
+] as const;
+
+// Intermediate performances are not separate race finishes.
+export const moFarahTwoMileRoadBest = {
+  time: "8:38",
+  year: 2010,
+  source: "https://www.powerof10.uk/Home/Athlete/40ad027e-74f4-444d-b84a-d206b38c7716",
+} as const;
+
+export const moFarahRoadSplits = [
   {
-    event: "Half marathon",
-    time: "59:32",
-    location: "Lisbon · 2015",
-    note: "Record-eligible course",
+    distance: "15K",
+    time: "42:03",
+    date: "2016-03-26",
+    event: "World Half Marathon Championships · Cardiff",
+    source: "https://en.wikipedia.org/wiki/Mo_Farah#Personal_bests",
   },
-  { event: "Marathon", time: "2:05:11", location: "Chicago · 2018" },
+  {
+    distance: "20K",
+    time: "56:27",
+    date: "2015-03-22",
+    event: "Lisbon Half Marathon",
+    source: "https://en.wikipedia.org/wiki/Mo_Farah#Personal_bests",
+  },
 ] as const;
 
 export const moFarahPhoto = {

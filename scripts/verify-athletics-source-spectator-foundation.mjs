@@ -72,8 +72,7 @@ assert.equal(moFarah.profile_type, "Public figure");
 assert.equal(moFarah.source_url, "https://www.olympedia.org/athletes/115344");
 assert(
   moFarah.profile_links?.some(
-    (link) =>
-      link.url === "https://worldathletics.org/athletes/great-britain-ni/mohamed-farah-14189197",
+    (link) => link.url === "https://worldathletics.org/athletes/-/14189197",
   ),
 );
 assert.equal(

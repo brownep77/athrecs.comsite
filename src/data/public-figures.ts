@@ -22,6 +22,11 @@ import {
   publicFigureWave3Series,
 } from "./public-figures-wave-3.ts";
 import { professionalAthletes } from "./professional-athletes.ts";
+import {
+  moFarahRoadSeries,
+  moFarahRoadEditions,
+  moFarahRoadResults,
+} from "./mo-farah-road-results.ts";
 
 const CHECKED_AT = "2026-08-22";
 
@@ -413,20 +418,35 @@ export const publicFigureAthletes: AthleteSeed[] = [
 ];
 
 export const publicFigureSeries: Series[] = [
+  ...moFarahRoadSeries,
   ...(richRollSeries as Series[]),
   ...highTractionPublicFigureSeries,
   ...publicFigureWave2Series,
   ...publicFigureWave3Series,
 ];
 
-export const publicFigureEditions: Edition[] = [
+const existingPublicFigureEditions: Edition[] = [
   ...(richRollEditions as Edition[]),
   ...highTractionPublicFigureEditions,
   ...publicFigureWave2Editions,
   ...publicFigureWave3Editions,
 ];
 
+const existingEditionKeys = new Set(
+  existingPublicFigureEditions.map(
+    (edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`,
+  ),
+);
+export const publicFigureEditions: Edition[] = [
+  ...existingPublicFigureEditions,
+  ...moFarahRoadEditions.filter(
+    (edition) =>
+      !existingEditionKeys.has(`${edition.seriesSlug}|${edition.date}|${edition.distance}`),
+  ),
+];
+
 export const publicFigureResults: ResultSeed[] = [
+  ...moFarahRoadResults,
   ...richRollResults,
   ...highTractionPublicFigureResults,
   ...publicFigureWave2Results,
