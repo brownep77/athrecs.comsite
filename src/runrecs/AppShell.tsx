@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { CalendarDays, Home, List, Newspaper, Users, UsersRound } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
-import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import {
   COUNTRY_SITES,
@@ -158,11 +157,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </header>
 
       <main className="min-w-0 flex-1 px-4 pb-24 pt-4 md:px-6 md:pb-10 md:pt-8">
-        {pathname === "/athlete-account" ? (
-          <div className="mb-6">
-            <PotentialResultMatchesPanel />
-          </div>
-        ) : null}
         {children}
         <div className="mt-10 flex flex-wrap gap-4 border-t border-border pt-5 text-sm text-muted">
           <Link to="/sponsorship" className="font-semibold text-accent hover:underline">

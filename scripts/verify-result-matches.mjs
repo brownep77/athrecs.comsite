@@ -11,10 +11,10 @@ import {
 } from "../src/lib/athrecs/result-match.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const [api, panel, shell] = await Promise.all([
+const [api, panel, accountRoute] = await Promise.all([
   readFile(resolve(root, "src/lib/athrecs/result-match-api.ts"), "utf8"),
   readFile(resolve(root, "src/components/athletes/PotentialResultMatchesPanel.tsx"), "utf8"),
-  readFile(resolve(root, "src/components/layout/AppShell.tsx"), "utf8"),
+  readFile(resolve(root, "src/routes/athlete-account.tsx"), "utf8"),
 ]);
 
 assert.equal(normalizePersonName("Dr. Paul T. Browne Jr"), "paul t browne");
@@ -100,8 +100,8 @@ assert.match(api, /ownedByAnotherAccount/);
 assert.match(panel, /Potential results matching your name/);
 assert.match(panel, /to="\/claim-results"/);
 assert.match(panel, /suggestions, not confirmed ownership/i);
-assert.match(shell, /pathname === "\/athlete-account"/);
-assert.match(shell, /PotentialResultMatchesPanel/);
+assert.match(accountRoute, /useCurrentUserState/);
+assert.match(accountRoute, /<PotentialResultMatchesPanel\s*\/>/);
 
 console.log(
   "Potential result matching verification passed: conservative name scoring, contextual support, private account gating and claim links are present.",

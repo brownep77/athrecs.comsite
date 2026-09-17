@@ -1,7 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Home, SearchCheck, Users, UserRound, CalendarDays, Handshake } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
-import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import { cn } from "@/lib/utils";
 
@@ -106,14 +105,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <AthleteAccountAccess compact />
         </div>
       </header>
-      <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">
-        {pathname === "/athlete-account" ? (
-          <div className="mb-6">
-            <PotentialResultMatchesPanel />
-          </div>
-        ) : null}
-        {children}
-      </main>
+      <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">{children}</main>
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">

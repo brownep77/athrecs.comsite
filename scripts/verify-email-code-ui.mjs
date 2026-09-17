@@ -4,6 +4,9 @@ import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "vite";
 import { chromium } from "playwright";
+process.env.DATABASE_URL = "";
+process.env.DATABASE_URL_UNPOOLED = "";
+process.env.POSTGRES_URL_NON_POOLING = "";
 process.env.RESEND_API_KEY = "test-key-never-used-for-delivery";
 process.env.VITE_AUTH_ENABLED = "true";
 const origin = "http://127.0.0.1:18226";
@@ -68,9 +71,63 @@ try {
   await page
     .getByRole("button", { name: "Sign in with email", exact: true })
     .waitFor({ state: "visible" });
+
+  // Keyboard navigation must stay inside the modal in both directions.
+  const signInDialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
+  const close = signInDialog.getByRole("button", { name: "Close sign-in" });
+  const privacy = signInDialog.getByRole("link", { name: "privacy notice", exact: true });
+  await close.focus();
+  await page.keyboard.press("Shift+Tab");
+  assert.equal(await privacy.evaluate((element) => element === document.activeElement), true);
+  await page.keyboard.press("Tab");
+  assert.equal(await close.evaluate((element) => element === document.activeElement), true);
+  await page.keyboard.press("Escape");
+  await signInDialog.waitFor({ state: "hidden" });
+  await page.waitForFunction(
+    () => document.activeElement?.textContent === "Sign in or create account",
+  );
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Sign in or create account", exact: true })
+      .evaluate((element) => element === document.activeElement),
+    true,
+    "Closing restores focus to the account button",
+  );
+
+  // A reset link is a fresh document: there is no email carried over from
+  // requesting it. Only the reset token and matching new passwords are needed.
+  const resetRequests = [];
+  await page.route(`${origin}/api/auth/reset-password`, async (route) => {
+    resetRequests.push(route.request().postDataJSON());
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ status: true }),
+    });
+  });
+  await page.goto(`${origin}/athlete-account?auth=1&authMode=reset&token=fixture-reset-token`, {
+    waitUntil: "networkidle",
+  });
+  const resetDialog = page.getByRole("dialog", { name: "Choose a new password" });
+  await resetDialog.getByLabel(/^New password/).waitFor();
+  assert.equal(await resetDialog.getByLabel("Email address", { exact: true }).count(), 0);
+  await resetDialog.getByLabel(/^New password/).fill("Test-reset-password-123!");
+  await resetDialog.getByLabel("Confirm password", { exact: true }).fill("Different-password-123!");
+  await resetDialog.getByRole("button", { name: "Save new password" }).click();
+  await resetDialog.getByText("The passwords do not match.", { exact: true }).waitFor();
+  assert.equal(resetRequests.length, 0, "Mismatched passwords are not submitted");
+  await resetDialog
+    .getByLabel("Confirm password", { exact: true })
+    .fill("Test-reset-password-123!");
+  await resetDialog.getByRole("button", { name: "Save new password" }).click();
+  await page.getByRole("status").filter({ hasText: "Your password has been changed" }).waitFor();
+  assert.deepEqual(resetRequests, [
+    { newPassword: "Test-reset-password-123!", token: "fixture-reset-token" },
+  ]);
+  assert.equal(new URL(page.url()).searchParams.has("token"), false);
   assert.deepEqual(pageErrors, []);
   console.log(
-    "Email-code browser checks passed: passwordless form, delivery request, code focus, countdown, errors and changing email.",
+    "Authentication browser checks passed: email codes, keyboard containment, focus restoration and fresh-link password reset.",
   );
 } catch (error) {
   await mkdir("artifacts", { recursive: true });

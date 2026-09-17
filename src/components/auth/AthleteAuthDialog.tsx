@@ -1,5 +1,5 @@
-import { useEffect, useId, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useEffect, useRef, useState } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
 import {
@@ -52,7 +52,7 @@ function errorMessage(error: unknown, fallback: string): string {
 }
 
 export function AthleteAuthDialog() {
-  const titleId = useId();
+  const returnFocus = useRef<HTMLElement | null>(null);
   const emailInput = useRef<HTMLInputElement>(null);
   const codeInput = useRef<HTMLInputElement>(null);
   const [mounted, setMounted] = useState(false);
@@ -115,6 +115,8 @@ export function AthleteAuthDialog() {
     }
 
     const onOpen = (event: Event) => {
+      returnFocus.current =
+        document.activeElement instanceof HTMLElement ? document.activeElement : null;
       const detail = (event as CustomEvent<AuthDialogOptions>).detail ?? {};
       setCallbackURL(safeAuthCallback(detail.callbackURL));
       setMode(detail.mode ?? "signin");
@@ -132,19 +134,9 @@ export function AthleteAuthDialog() {
 
   useEffect(() => {
     if (!open) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     const timer = window.setTimeout(() => emailInput.current?.focus(), 80);
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && !busy) closeDialog();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.clearTimeout(timer);
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open, mode, busy]);
+    return () => window.clearTimeout(timer);
+  }, [open, mode, emailAvailable, emailCodeAvailable]);
 
   useEffect(() => {
     if (!open || methods.isLoading || methods.isError || passwordResetAvailable) return;
@@ -161,6 +153,7 @@ export function AthleteAuthDialog() {
   }
 
   function switchMode(nextMode: AuthDialogMode) {
+    if (busy) return;
     clearStatus();
     setCode("");
     setCodeSentTo(null);
@@ -272,7 +265,10 @@ export function AthleteAuthDialog() {
 
   function validateEmailFields(): string | null {
     const normalizedEmail = email.trim().toLowerCase();
-    if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) return "Enter a valid email address.";
+    // Reset links identify the account through their token, not an email input.
+    if (mode !== "reset" && !/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
+      return "Enter a valid email address.";
+    }
     if (mode === "forgot") return null;
     if (password.length < 10) return "Use a password of at least 10 characters.";
     if (mode === "signup") {
@@ -428,427 +424,441 @@ export function AthleteAuthDialog() {
             ? "Sign in with an email code"
             : "Sign in to ATHRECS";
 
-  return createPortal(
-    <div
-      className="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-5"
-      onMouseDown={(event) => {
-        if (event.currentTarget === event.target) closeDialog();
+  return (
+    <Dialog.Root
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) closeDialog();
       }}
     >
-      <section
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        className="max-h-[96dvh] w-full overflow-y-auto rounded-t-2xl border border-border bg-surface shadow-2xl sm:max-w-xl sm:rounded-2xl"
-      >
-        <div className="flex items-start justify-between gap-4 border-b border-border bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-5 text-white sm:px-7">
-          <div>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-cyan-300">
-              <ShieldCheck className="size-4" aria-hidden="true" />{" "}
-              {sponsorshipAccount
-                ? "Secure sponsorship account"
-                : callbackURL.startsWith("/brands")
-                  ? "Secure brand account"
-                  : "Secure Athlete Account"}
-            </div>
-            <h2 id={titleId} className="mt-2 font-display text-2xl font-semibold">
-              {formTitle}
-            </h2>
-            <p className="mt-1 max-w-md text-sm leading-5 text-slate-300">
-              {sponsorshipAccount
-                ? "Sign in to submit a private sponsorship enquiry and read responses from our team."
-                : callbackURL.startsWith("/brands")
-                  ? "Sign in to register your company and manage partnership opportunities. Company approval is a separate review."
-                  : "One account for your Entry Passport, claimed results and future race-entry tools."}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={closeDialog}
-            disabled={Boolean(busy)}
-            className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 disabled:opacity-50"
-            aria-label="Close sign-in"
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-[100] flex items-end justify-center bg-slate-950/60 p-0 backdrop-blur-sm sm:items-center sm:p-5">
+          <Dialog.Content
+            onEscapeKeyDown={(event) => {
+              if (busy) event.preventDefault();
+            }}
+            onPointerDownOutside={(event) => {
+              if (busy) event.preventDefault();
+            }}
+            onCloseAutoFocus={(event) => {
+              event.preventDefault();
+              returnFocus.current?.focus();
+            }}
+            className="max-h-[96dvh] w-full overflow-y-auto rounded-t-2xl border border-border bg-surface shadow-2xl outline-none sm:max-w-xl sm:rounded-2xl"
           >
-            <XIcon className="size-5" aria-hidden="true" />
-          </button>
-        </div>
-
-        <div className="space-y-5 p-5 sm:p-7">
-          {mode === "signin" || mode === "signup" ? (
-            <div className="grid grid-cols-2 rounded-lg bg-elevated p-1" role="tablist">
+            <div className="flex items-start justify-between gap-4 border-b border-border bg-gradient-to-r from-slate-950 to-slate-800 px-5 py-5 text-white sm:px-7">
+              <div>
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-cyan-300">
+                  <ShieldCheck className="size-4" aria-hidden="true" />{" "}
+                  {sponsorshipAccount
+                    ? "Secure sponsorship account"
+                    : callbackURL.startsWith("/brands")
+                      ? "Secure brand account"
+                      : "Secure Athlete Account"}
+                </div>
+                <Dialog.Title className="mt-2 font-display text-2xl font-semibold">
+                  {formTitle}
+                </Dialog.Title>
+                <Dialog.Description className="mt-1 max-w-md text-sm leading-5 text-slate-300">
+                  {sponsorshipAccount
+                    ? "Sign in to submit a private sponsorship enquiry and read responses from our team."
+                    : callbackURL.startsWith("/brands")
+                      ? "Sign in to register your company and manage partnership opportunities. Company approval is a separate review."
+                      : "One account for your Entry Passport, claimed results and future race-entry tools."}
+                </Dialog.Description>
+              </div>
               <button
                 type="button"
-                role="tab"
-                aria-selected={mode === "signin"}
-                onClick={() => switchMode("signin")}
-                className={cn(
-                  "min-h-10 rounded-md px-3 text-sm font-semibold transition-colors",
-                  mode === "signin" ? "bg-surface text-fg shadow-sm" : "text-muted",
-                )}
+                onClick={closeDialog}
+                disabled={Boolean(busy)}
+                className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10 disabled:opacity-50"
+                aria-label="Close sign-in"
               >
-                Sign in
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={mode === "signup"}
-                onClick={() => switchMode("signup")}
-                className={cn(
-                  "min-h-10 rounded-md px-3 text-sm font-semibold transition-colors",
-                  mode === "signup" ? "bg-surface text-fg shadow-sm" : "text-muted",
-                )}
-              >
-                Create account
+                <XIcon className="size-5" aria-hidden="true" />
               </button>
             </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => switchMode("signin")}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-accent"
-            >
-              <ArrowLeft className="size-4" aria-hidden="true" /> Back to sign in
-            </button>
-          )}
 
-          {(mode === "signin" || mode === "signup") && socialProviders.length > 0 ? (
-            <div className="grid gap-2 sm:grid-cols-2">
-              {socialProviders.map((provider) => (
+            <div className="space-y-5 p-5 sm:p-7">
+              {mode === "signin" || mode === "signup" ? (
+                <div className="grid grid-cols-2 rounded-lg bg-elevated p-1" role="tablist">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={mode === "signin"}
+                    onClick={() => switchMode("signin")}
+                    className={cn(
+                      "min-h-10 rounded-md px-3 text-sm font-semibold transition-colors",
+                      mode === "signin" ? "bg-surface text-fg shadow-sm" : "text-muted",
+                    )}
+                  >
+                    Sign in
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={mode === "signup"}
+                    onClick={() => switchMode("signup")}
+                    className={cn(
+                      "min-h-10 rounded-md px-3 text-sm font-semibold transition-colors",
+                      mode === "signup" ? "bg-surface text-fg shadow-sm" : "text-muted",
+                    )}
+                  >
+                    Create account
+                  </button>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => switchMode("signin")}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-accent"
+                >
+                  <ArrowLeft className="size-4" aria-hidden="true" /> Back to sign in
+                </button>
+              )}
+
+              {(mode === "signin" || mode === "signup") && socialProviders.length > 0 ? (
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {socialProviders.map((provider) => (
+                    <Button
+                      key={provider.providerId}
+                      type="button"
+                      variant="secondary"
+                      className="justify-start bg-surface"
+                      disabled={Boolean(busy)}
+                      onClick={() => void startProvider(provider.providerId)}
+                    >
+                      {busy === provider.providerId ? (
+                        <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                      ) : (
+                        <span
+                          className="inline-flex size-6 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white"
+                          aria-hidden="true"
+                        >
+                          {provider.label.charAt(0)}
+                        </span>
+                      )}
+                      Continue with {provider.label}
+                    </Button>
+                  ))}
+                </div>
+              ) : null}
+
+              {methods.isLoading ? (
+                <div className="flex items-center justify-center gap-2 rounded-lg border border-border p-4 text-sm text-muted">
+                  <Loader2 className="size-4 animate-spin" aria-hidden="true" /> Loading secure
+                  sign-in methods…
+                </div>
+              ) : methods.isError ? (
+                <div className="rounded-lg border border-red-500/30 bg-red-50 p-4 text-sm text-red-900">
+                  Sign-in methods could not be loaded. Close this window and try again.
+                </div>
+              ) : null}
+
+              {(mode === "signin" || mode === "signup") && emailCodeAvailable ? (
                 <Button
-                  key={provider.providerId}
                   type="button"
                   variant="secondary"
-                  className="justify-start bg-surface"
+                  className="w-full"
                   disabled={Boolean(busy)}
-                  onClick={() => void startProvider(provider.providerId)}
+                  onClick={() => switchMode("code")}
                 >
-                  {busy === provider.providerId ? (
-                    <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                  ) : (
-                    <span
-                      className="inline-flex size-6 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white"
-                      aria-hidden="true"
-                    >
-                      {provider.label.charAt(0)}
-                    </span>
-                  )}
-                  Continue with {provider.label}
+                  <Mail className="size-4" aria-hidden="true" /> Continue with an email code
                 </Button>
-              ))}
-            </div>
-          ) : null}
-
-          {methods.isLoading ? (
-            <div className="flex items-center justify-center gap-2 rounded-lg border border-border p-4 text-sm text-muted">
-              <Loader2 className="size-4 animate-spin" aria-hidden="true" /> Loading secure sign-in
-              methods…
-            </div>
-          ) : methods.isError ? (
-            <div className="rounded-lg border border-red-500/30 bg-red-50 p-4 text-sm text-red-900">
-              Sign-in methods could not be loaded. Close this window and try again.
-            </div>
-          ) : null}
-
-          {(mode === "signin" || mode === "signup") && emailCodeAvailable ? (
-            <Button
-              type="button"
-              variant="secondary"
-              className="w-full"
-              disabled={Boolean(busy)}
-              onClick={() => switchMode("code")}
-            >
-              <Mail className="size-4" aria-hidden="true" /> Continue with an email code
-            </Button>
-          ) : null}
-
-          {mode === "code" ? (
-            emailCodeAvailable ? (
-              <form className="space-y-4" onSubmit={(event) => void submitCode(event)}>
-                <p className="text-sm text-muted">
-                  Use any email address. We’ll send you a one-time code, so you don’t need a
-                  password. New athletes can add their name and profile after signing in.
-                </p>
-                <label className="block space-y-1.5 text-sm font-medium text-fg">
-                  Email address
-                  <input
-                    ref={emailInput}
-                    type="email"
-                    inputMode="email"
-                    autoComplete="email"
-                    value={codeSentTo ?? email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    disabled={Boolean(codeSentTo) || Boolean(busy)}
-                    maxLength={254}
-                    className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg"
-                    required
-                  />
-                </label>
-                {codeSentTo ? (
-                  <label className="block space-y-1.5 text-sm font-medium text-fg">
-                    Six-digit code
-                    <input
-                      ref={codeInput}
-                      type="text"
-                      inputMode="numeric"
-                      autoComplete="one-time-code"
-                      value={code}
-                      onChange={(event) =>
-                        setCode(event.target.value.replace(/\D/g, "").slice(0, 6))
-                      }
-                      minLength={6}
-                      maxLength={6}
-                      pattern="[0-9]{6}"
-                      className="h-12 w-full rounded-lg border border-border bg-bg px-3 text-center text-xl tracking-[0.35em] text-fg"
-                      required
-                    />
-                  </label>
-                ) : null}
-                <Button type="submit" className="w-full" disabled={Boolean(busy)}>
-                  {busy ? (
-                    <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                  ) : (
-                    <Mail className="size-4" aria-hidden="true" />
-                  )}
-                  {codeSentTo ? "Verify code and sign in" : "Send sign-in code"}
-                </Button>
-                {codeSentTo ? (
-                  <div className="flex flex-wrap justify-between gap-3 text-sm">
-                    <button
-                      type="button"
-                      disabled={Boolean(busy) || resendAfter > 0}
-                      onClick={() => void sendCode()}
-                      className="font-semibold text-accent disabled:text-subtle"
-                    >
-                      {resendAfter > 0 ? `Resend code in ${resendAfter}s` : "Resend code"}
-                    </button>
-                    <button
-                      type="button"
-                      disabled={Boolean(busy)}
-                      onClick={() => {
-                        setCodeSentTo(null);
-                        setCode("");
-                        clearStatus();
-                      }}
-                      className="font-semibold text-accent"
-                    >
-                      Use another email
-                    </button>
-                  </div>
-                ) : null}
-              </form>
-            ) : !methods.isLoading && !methods.isError ? (
-              <p className="text-sm text-muted">
-                Email codes are temporarily unavailable. Go back to sign in and choose another
-                method.
-              </p>
-            ) : null
-          ) : null}
-
-          {emailAvailable && mode !== "code" ? (
-            <>
-              {(mode === "signin" || mode === "signup") && socialProviders.length > 0 ? (
-                <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-subtle">
-                  <span className="h-px flex-1 bg-border" /> or use email{" "}
-                  <span className="h-px flex-1 bg-border" />
-                </div>
               ) : null}
 
-              {!passwordResetAvailable ? (
-                <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-3 text-sm leading-5 text-amber-950">
-                  Email and password accounts are available. Verification emails and password
-                  recovery are temporarily unavailable, so keep your password safe. A verified email
-                  is required to save an athlete profile. Unverified manual accounts are not
-                  automatically linked to another sign-in provider.
-                </div>
-              ) : null}
-
-              <form className="space-y-4" onSubmit={(event) => void submitEmail(event)}>
-                {mode === "signup" ? (
-                  <label className="block space-y-1.5 text-sm font-medium text-fg">
-                    Full name
-                    <div className="relative">
-                      <UserRound
-                        className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
-                        aria-hidden="true"
-                      />
-                      <input
-                        type="text"
-                        autoComplete="name"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                        maxLength={120}
-                        className="h-11 w-full rounded-lg border border-border bg-bg pl-10 pr-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
-                        required
-                      />
-                    </div>
-                  </label>
-                ) : null}
-
-                {mode !== "reset" ? (
-                  <label className="block space-y-1.5 text-sm font-medium text-fg">
-                    Email address
-                    <div className="relative">
-                      <Mail
-                        className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
-                        aria-hidden="true"
-                      />
+              {mode === "code" ? (
+                emailCodeAvailable ? (
+                  <form className="space-y-4" onSubmit={(event) => void submitCode(event)}>
+                    <p className="text-sm text-muted">
+                      Use any email address. We’ll send you a one-time code, so you don’t need a
+                      password. New athletes can add their name and profile after signing in.
+                    </p>
+                    <label className="block space-y-1.5 text-sm font-medium text-fg">
+                      Email address
                       <input
                         ref={emailInput}
                         type="email"
                         inputMode="email"
                         autoComplete="email"
-                        value={email}
+                        value={codeSentTo ?? email}
                         onChange={(event) => setEmail(event.target.value)}
+                        disabled={Boolean(codeSentTo) || Boolean(busy)}
                         maxLength={254}
-                        className="h-11 w-full rounded-lg border border-border bg-bg pl-10 pr-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                        className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg"
                         required
                       />
-                    </div>
-                  </label>
-                ) : null}
-
-                {mode !== "forgot" ? (
-                  <label className="block space-y-1.5 text-sm font-medium text-fg">
-                    {mode === "reset" ? "New password" : "Password"}
-                    <div className="relative">
-                      <LockKeyhole
-                        className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
-                        aria-hidden="true"
-                      />
-                      <input
-                        ref={mode === "reset" ? emailInput : undefined}
-                        type={showPassword ? "text" : "password"}
-                        autoComplete={mode === "signin" ? "current-password" : "new-password"}
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                        minLength={10}
-                        maxLength={128}
-                        className="h-11 w-full rounded-lg border border-border bg-bg pl-10 pr-11 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
-                        required
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword((value) => !value)}
-                        className="absolute right-1 top-1 inline-flex size-9 items-center justify-center rounded-md text-muted hover:bg-elevated"
-                        aria-label={showPassword ? "Hide password" : "Show password"}
-                      >
-                        {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-                      </button>
-                    </div>
-                    {mode !== "signin" ? (
-                      <span className="block text-xs font-normal text-subtle">
-                        At least 10 characters. Avoid a password used on another site.
-                      </span>
+                    </label>
+                    {codeSentTo ? (
+                      <label className="block space-y-1.5 text-sm font-medium text-fg">
+                        Six-digit code
+                        <input
+                          ref={codeInput}
+                          type="text"
+                          inputMode="numeric"
+                          autoComplete="one-time-code"
+                          value={code}
+                          onChange={(event) =>
+                            setCode(event.target.value.replace(/\D/g, "").slice(0, 6))
+                          }
+                          minLength={6}
+                          maxLength={6}
+                          pattern="[0-9]{6}"
+                          className="h-12 w-full rounded-lg border border-border bg-bg px-3 text-center text-xl tracking-[0.35em] text-fg"
+                          required
+                        />
+                      </label>
                     ) : null}
-                  </label>
-                ) : null}
-
-                {mode === "signup" || mode === "reset" ? (
-                  <label className="block space-y-1.5 text-sm font-medium text-fg">
-                    Confirm password
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      autoComplete="new-password"
-                      value={confirmPassword}
-                      onChange={(event) => setConfirmPassword(event.target.value)}
-                      minLength={10}
-                      maxLength={128}
-                      className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
-                      required
-                    />
-                  </label>
-                ) : null}
-
-                <Button type="submit" className="w-full" disabled={Boolean(busy)}>
-                  {busy?.startsWith("email-") ? (
-                    <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                  ) : mode === "signup" ? (
-                    <UserRound className="size-4" aria-hidden="true" />
-                  ) : (
-                    <Mail className="size-4" aria-hidden="true" />
-                  )}
-                  {mode === "signup"
-                    ? "Create account with email"
-                    : mode === "forgot"
-                      ? "Send password-reset link"
-                      : mode === "reset"
-                        ? "Save new password"
-                        : "Sign in with email"}
-                </Button>
-              </form>
-
-              {mode === "signin" && passwordResetAvailable ? (
-                <button
-                  type="button"
-                  onClick={() => switchMode("forgot")}
-                  className="block w-full text-center text-sm font-semibold text-accent"
-                >
-                  Forgotten your password?
-                </button>
+                    <Button type="submit" className="w-full" disabled={Boolean(busy)}>
+                      {busy ? (
+                        <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                      ) : (
+                        <Mail className="size-4" aria-hidden="true" />
+                      )}
+                      {codeSentTo ? "Verify code and sign in" : "Send sign-in code"}
+                    </Button>
+                    {codeSentTo ? (
+                      <div className="flex flex-wrap justify-between gap-3 text-sm">
+                        <button
+                          type="button"
+                          disabled={Boolean(busy) || resendAfter > 0}
+                          onClick={() => void sendCode()}
+                          className="font-semibold text-accent disabled:text-subtle"
+                        >
+                          {resendAfter > 0 ? `Resend code in ${resendAfter}s` : "Resend code"}
+                        </button>
+                        <button
+                          type="button"
+                          disabled={Boolean(busy)}
+                          onClick={() => {
+                            setCodeSentTo(null);
+                            setCode("");
+                            clearStatus();
+                          }}
+                          className="font-semibold text-accent"
+                        >
+                          Use another email
+                        </button>
+                      </div>
+                    ) : null}
+                  </form>
+                ) : !methods.isLoading && !methods.isError ? (
+                  <p className="text-sm text-muted">
+                    Email codes are temporarily unavailable. Go back to sign in and choose another
+                    method.
+                  </p>
+                ) : null
               ) : null}
-            </>
-          ) : null}
 
-          {!methods.isLoading &&
-          !methods.isError &&
-          !emailAvailable &&
-          socialProviders.length === 0 ? (
-            <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-4 text-sm text-amber-950">
-              No public sign-in method is configured on this deployment yet.
-            </div>
-          ) : null}
+              {emailAvailable && mode !== "code" ? (
+                <>
+                  {(mode === "signin" || mode === "signup") && socialProviders.length > 0 ? (
+                    <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-subtle">
+                      <span className="h-px flex-1 bg-border" /> or use email{" "}
+                      <span className="h-px flex-1 bg-border" />
+                    </div>
+                  ) : null}
 
-          {error ? (
-            <div
-              className="rounded-lg border border-red-500/30 bg-red-50 p-3 text-sm text-red-900"
-              role="alert"
-            >
-              {error}
-            </div>
-          ) : null}
-          {message ? (
-            <div
-              className="flex items-start gap-2 rounded-lg border border-emerald-500/30 bg-emerald-50 p-3 text-sm text-emerald-950"
-              role="status"
-            >
-              <CheckCircle2 className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-              {message}
-            </div>
-          ) : null}
-          {needsVerification && passwordResetAvailable ? (
-            <Button
-              type="button"
-              variant="secondary"
-              className="w-full"
-              disabled={Boolean(busy)}
-              onClick={() => void resendVerification()}
-            >
-              {busy === "verification" ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : (
-                <Mail className="size-4" />
-              )}
-              Resend verification email
-            </Button>
-          ) : null}
+                  {!passwordResetAvailable ? (
+                    <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-3 text-sm leading-5 text-amber-950">
+                      Email and password accounts are available. Verification emails and password
+                      recovery are temporarily unavailable, so keep your password safe. A verified
+                      email is required to save an athlete profile. Unverified manual accounts are
+                      not automatically linked to another sign-in provider.
+                    </div>
+                  ) : null}
 
-          <div className="rounded-lg bg-elevated p-3 text-xs leading-5 text-muted">
-            <p className="flex items-start gap-2">
-              <LockKeyhole className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-              ATHRECS keeps account details private. Result claims are checked before a public
-              athlete profile is linked.
-            </p>
-            <p className="mt-2 text-center">
-              By continuing, you acknowledge the{" "}
-              <Link to="/privacy" className="font-semibold text-accent" onClick={closeDialog}>
-                privacy notice
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
-      </section>
-    </div>,
-    document.body,
+                  <form className="space-y-4" onSubmit={(event) => void submitEmail(event)}>
+                    {mode === "signup" ? (
+                      <label className="block space-y-1.5 text-sm font-medium text-fg">
+                        Full name
+                        <div className="relative">
+                          <UserRound
+                            className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
+                            aria-hidden="true"
+                          />
+                          <input
+                            type="text"
+                            autoComplete="name"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            maxLength={120}
+                            className="h-11 w-full rounded-lg border border-border bg-bg pl-10 pr-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                            required
+                          />
+                        </div>
+                      </label>
+                    ) : null}
+
+                    {mode !== "reset" ? (
+                      <label className="block space-y-1.5 text-sm font-medium text-fg">
+                        Email address
+                        <div className="relative">
+                          <Mail
+                            className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
+                            aria-hidden="true"
+                          />
+                          <input
+                            ref={emailInput}
+                            type="email"
+                            inputMode="email"
+                            autoComplete="email"
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                            maxLength={254}
+                            className="h-11 w-full rounded-lg border border-border bg-bg pl-10 pr-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                            required
+                          />
+                        </div>
+                      </label>
+                    ) : null}
+
+                    {mode !== "forgot" ? (
+                      <label className="block space-y-1.5 text-sm font-medium text-fg">
+                        {mode === "reset" ? "New password" : "Password"}
+                        <div className="relative">
+                          <LockKeyhole
+                            className="pointer-events-none absolute left-3 top-3.5 size-4 text-subtle"
+                            aria-hidden="true"
+                          />
+                          <input
+                            ref={mode === "reset" ? emailInput : undefined}
+                            type={showPassword ? "text" : "password"}
+                            autoComplete={mode === "signin" ? "current-password" : "new-password"}
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                            minLength={10}
+                            maxLength={128}
+                            className="h-11 w-full rounded-lg border border-border bg-bg pl-10 pr-11 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                            required
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword((value) => !value)}
+                            className="absolute right-1 top-1 inline-flex size-9 items-center justify-center rounded-md text-muted hover:bg-elevated"
+                            aria-label={showPassword ? "Hide password" : "Show password"}
+                          >
+                            {showPassword ? (
+                              <EyeOff className="size-4" />
+                            ) : (
+                              <Eye className="size-4" />
+                            )}
+                          </button>
+                        </div>
+                        {mode !== "signin" ? (
+                          <span className="block text-xs font-normal text-subtle">
+                            At least 10 characters. Avoid a password used on another site.
+                          </span>
+                        ) : null}
+                      </label>
+                    ) : null}
+
+                    {mode === "signup" || mode === "reset" ? (
+                      <label className="block space-y-1.5 text-sm font-medium text-fg">
+                        Confirm password
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          autoComplete="new-password"
+                          value={confirmPassword}
+                          onChange={(event) => setConfirmPassword(event.target.value)}
+                          minLength={10}
+                          maxLength={128}
+                          className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
+                          required
+                        />
+                      </label>
+                    ) : null}
+
+                    <Button type="submit" className="w-full" disabled={Boolean(busy)}>
+                      {busy?.startsWith("email-") ? (
+                        <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                      ) : mode === "signup" ? (
+                        <UserRound className="size-4" aria-hidden="true" />
+                      ) : (
+                        <Mail className="size-4" aria-hidden="true" />
+                      )}
+                      {mode === "signup"
+                        ? "Create account with email"
+                        : mode === "forgot"
+                          ? "Send password-reset link"
+                          : mode === "reset"
+                            ? "Save new password"
+                            : "Sign in with email"}
+                    </Button>
+                  </form>
+
+                  {mode === "signin" && passwordResetAvailable ? (
+                    <button
+                      type="button"
+                      onClick={() => switchMode("forgot")}
+                      className="block w-full text-center text-sm font-semibold text-accent"
+                    >
+                      Forgotten your password?
+                    </button>
+                  ) : null}
+                </>
+              ) : null}
+
+              {!methods.isLoading &&
+              !methods.isError &&
+              !emailAvailable &&
+              socialProviders.length === 0 ? (
+                <div className="rounded-lg border border-amber-500/30 bg-amber-50 p-4 text-sm text-amber-950">
+                  No public sign-in method is configured on this deployment yet.
+                </div>
+              ) : null}
+
+              {error ? (
+                <div
+                  className="rounded-lg border border-red-500/30 bg-red-50 p-3 text-sm text-red-900"
+                  role="alert"
+                >
+                  {error}
+                </div>
+              ) : null}
+              {message ? (
+                <div
+                  className="flex items-start gap-2 rounded-lg border border-emerald-500/30 bg-emerald-50 p-3 text-sm text-emerald-950"
+                  role="status"
+                >
+                  <CheckCircle2 className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                  {message}
+                </div>
+              ) : null}
+              {needsVerification && passwordResetAvailable ? (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  className="w-full"
+                  disabled={Boolean(busy)}
+                  onClick={() => void resendVerification()}
+                >
+                  {busy === "verification" ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <Mail className="size-4" />
+                  )}
+                  Resend verification email
+                </Button>
+              ) : null}
+
+              <div className="rounded-lg bg-elevated p-3 text-xs leading-5 text-muted">
+                <p className="flex items-start gap-2">
+                  <LockKeyhole className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+                  ATHRECS keeps account details private. Result claims are checked before a public
+                  athlete profile is linked.
+                </p>
+                <p className="mt-2 text-center">
+                  By continuing, you acknowledge the{" "}
+                  <Link to="/privacy" className="font-semibold text-accent" onClick={closeDialog}>
+                    privacy notice
+                  </Link>
+                  .
+                </p>
+              </div>
+            </div>
+          </Dialog.Content>
+        </Dialog.Overlay>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
