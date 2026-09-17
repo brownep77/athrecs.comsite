@@ -6,6 +6,7 @@ import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
 import { ResultMedal } from "./ProfileAchievements";
+import { roadPerformanceCondition } from "@/lib/athrecs/road-performance-conditions";
 
 type Row = Omit<ProfileResult, "athleteName">;
 export function CompactResultsTable({
@@ -63,6 +64,11 @@ export function CompactResultsTable({
                 {result.conflicting ? (
                   <span className="block text-xs text-amber-800">
                     Sources differ · excluded from PBs
+                  </span>
+                ) : null}
+                {roadPerformanceCondition(result) ? (
+                  <span className="block text-xs text-muted">
+                    {roadPerformanceCondition(result)!.note}
                   </span>
                 ) : null}
               </td>

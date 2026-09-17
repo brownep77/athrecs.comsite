@@ -20,6 +20,14 @@ try {
   const { moFarahAthlete } = await server.ssrLoadModule("/src/data/mo-farah.ts");
   await ensureAthrecsSeeded();
 
+  const roadRows =
+    await sql`select r.status, r.finish_time_seconds from results r join athletes a on a.id=r.athlete_id where a.slug='mo-farah'`;
+  assert.equal(roadRows.length, 52, "All sourced road records reach the database");
+  assert.equal(roadRows.filter((row) => row.status === "finished").length, 50);
+  assert(
+    roadRows.filter((row) => row.status === "DNF").every((row) => row.finish_time_seconds === null),
+  );
+
   const oldSlug = "marriotts-way-marathon-and-half-marathon";
   const newSlug = `${oldSlug}-refresh-regression`;
   const events = await sql`select id from events where slug=${oldSlug}`;
@@ -39,7 +47,7 @@ try {
   assert.equal(refreshed[0].bio, moFarahAthlete.bio);
   const version =
     await sql`select value from app_meta where key='public_figures_catalogue_version'`;
-  assert.equal(version[0].value, "athrecs-professional-athletes-mo-farah-2026-09-17-v2");
+  assert.equal(version[0].value, "athrecs-professional-athletes-mo-farah-road-2026-09-17-v3");
   assert.deepEqual(
     await sql`select key, value from app_meta where key <> 'public_figures_catalogue_version' order by key`,
     markers,
@@ -61,6 +69,13 @@ try {
   globalThis.__athrecsFullSeedPromise__ = undefined;
   await ensureAthrecsSeeded();
   assert.equal((await sql`select count(*)::int as n from athletes where slug='mo-farah'`)[0].n, 1);
+  assert.equal(
+    (
+      await sql`select count(*)::int as n from results r join athletes a on a.id=r.athlete_id where a.slug='mo-farah'`
+    )[0].n,
+    52,
+    "Repeated refreshes do not duplicate road performances",
+  );
   console.log(
     "Public-figure refresh passed: updated biography and version, preserved retired event URL and redirect, unchanged catalogue markers, active slug guard and idempotent cold start.",
   );

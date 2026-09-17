@@ -21,7 +21,7 @@ import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
-const PUBLIC_FIGURE_SEED_VERSION = "athrecs-professional-athletes-mo-farah-2026-09-17-v2";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-professional-athletes-mo-farah-road-2026-09-17-v3";
 const EXPECTED = catalogueMetadata.merged_counts;
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 const DEV_PREVIEW_USER_ID = "dev-user";
@@ -1374,7 +1374,9 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       editionIds.get(`${result.eventSlug}|${result.date}|${result.distance}`),
       athleteIds.get(result.athleteSlug),
       result.status ?? "finished",
-      result.finishTimeSeconds ?? parseTimeToSeconds(result.time),
+      result.status && !["finished", "FIN"].includes(result.status)
+        ? null
+        : (result.finishTimeSeconds ?? parseTimeToSeconds(result.time)),
       result.place,
       result.category ?? null,
       result.ageOnDay ?? null,
@@ -2016,7 +2018,9 @@ async function seedCatalogue(sql: Sql): Promise<void> {
         editionIds.get(`${result.eventSlug}|${result.date}|${result.distance}`),
         athleteIds.get(result.athleteSlug),
         result.status ?? "finished",
-        result.finishTimeSeconds ?? parseTimeToSeconds(result.time),
+        result.status && !["finished", "FIN"].includes(result.status)
+          ? null
+          : (result.finishTimeSeconds ?? parseTimeToSeconds(result.time)),
         result.chipTimeSeconds ?? null,
         result.gunTimeSeconds ?? null,
         result.bib ?? null,

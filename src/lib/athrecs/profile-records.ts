@@ -1,3 +1,5 @@
+import { roadPerformanceCondition } from "./road-performance-conditions.ts";
+
 export type ProfileResult = {
   city?: string;
   resultId: number;
@@ -121,6 +123,7 @@ export function combineProfileResults<T extends ProfileResult>(
 
 export function eligiblePerformance(result: ProfileResult): boolean {
   return (
+    roadPerformanceCondition(result)?.eligible !== false &&
     result.status.toLowerCase() === "finished" &&
     !result.conflicting &&
     result.finishTimeSeconds != null &&

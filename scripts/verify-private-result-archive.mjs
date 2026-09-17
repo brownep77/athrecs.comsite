@@ -67,7 +67,10 @@ assert.match(publicApi, /result_visibility in \('public', 'public_figure'\)/);
 assert.match(publicApi, /a\.profile_type = 'Public figure' or a\.profile_visibility = 'public'/);
 const claimableStart = claimsApi.indexOf("export const getClaimableResult");
 assert.notEqual(claimableStart, -1);
-assert.match(claimsApi.slice(claimableStart, claimableStart + 400), /middleware\(\[authMiddleware\]\)/);
+assert.match(
+  claimsApi.slice(claimableStart, claimableStart + 400),
+  /middleware\(\[authMiddleware\]\)/,
+);
 assert.match(claimsApi, /canAccessClaimCandidate/);
 assert.match(claimsApi, /Result not available to this account/);
 assert.match(archiveApi, /middleware\(\[staffMiddleware\]\)/);
@@ -95,10 +98,7 @@ assert.doesNotMatch(
   reconciliationServer,
   /delete\s+from\s+(?:clubs|events|editions|athletes|results)\b/i,
 );
-assert.doesNotMatch(
-  reconciliationServer,
-  /update\s+(?:clubs|events|editions|athletes|results)\b/i,
-);
+assert.doesNotMatch(reconciliationServer, /update\s+(?:clubs|events|editions|athletes|results)\b/i);
 assert.doesNotMatch(reconciliationServer, /on\s+conflict[\s\S]{0,100}do\s+update/i);
 assert.match(reconciliationApi, /middleware\(\[staffMiddleware\]\)/);
 assert.match(reconciliationApi, /RESTORE CLAIMABLE RESULTS/);
@@ -198,7 +198,16 @@ const resultKeys = results.map(
   (result) => `${result.eventSlug}|${result.date}|${result.distance}|${result.athleteSlug}`,
 );
 assert.equal(new Set(resultKeys).size, resultKeys.length, "Recoverable result keys must be unique");
-assert.equal(results.length, 2_599, "Canonical retained result count changed unexpectedly");
+assert.equal(
+  results.filter((result) => result.athleteSlug !== "mo-farah").length,
+  2_599,
+  "Existing canonical retained results changed unexpectedly",
+);
+assert.equal(
+  results.filter((result) => result.athleteSlug === "mo-farah").length,
+  52,
+  "Mo Farah's sourced road history is recoverable from the canonical catalogue",
+);
 assert(
   results.length >= catalogueMetadata.merged_counts.results,
   `Canonical recoverable results (${results.length}) fell below the recorded catalogue floor (${catalogueMetadata.merged_counts.results})`,
