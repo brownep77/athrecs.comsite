@@ -60,6 +60,11 @@ jobs:
       - name: Email-only sign-in form
         run: node scripts/verify-email-code-ui.mjs
 
+      - name: Account results panel appears once on both sites
+        run: |
+          node scripts/verify-account-panel-ui.mjs
+          node scripts/verify-account-panel-ui.mjs --runrecs
+
       - name: Collector Keep and Dismiss browser check
         run: node scripts/verify-collector-decisions-ui.mjs
 
