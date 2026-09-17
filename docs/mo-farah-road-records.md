@@ -81,3 +81,9 @@ Only the public-figure refresh marker advances. The global catalogue marker and 
 | 2005-10-16 | cabbage-patch-10                          | 10mi     | 48:59   | 1     | [Source](https://worldathletics.org/athletes/-/14189197)                                                                          |
 | 2004-11-28 | nike-london-10k                           | 10K      | 28:58   | 3     | [Source](https://worldathletics.org/athletes/-/14189197)                                                                          |
 | 2004-05-08 | balmoral-road-races                       | 5K       | 14:04   | 8     | [Source](https://worldathletics.org/athletes/-/14189197)                                                                          |
+
+## Production identity compatibility
+
+The first production deployment exposed two existing event redirects absent from a fresh database: `aj-bell-great-manchester-run` resolves to `bupa-great-manchester-run`, and `vitality-london-10000` resolves to `bupa-london-10000`. Read-only production inspection confirmed both retained event IDs. The scoped profile refresh now resolves saved redirects and joins editions by event ID. Its completeness check uses the same identity resolution, so later cold starts do not repeat the import. No production redirects, event slugs or URL guards are modified.
+
+The database regression reproduces both renames, removes Mo's results only in disposable storage, reimports all 52, and confirms the existing event IDs and redirects survive. A subsequent editorial biography change remains intact on a cold start, proving that redirected results satisfy completeness.
