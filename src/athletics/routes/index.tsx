@@ -73,7 +73,7 @@ function AthleteHomePage() {
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link
-                to="/my-athlete-profile"
+                to="/join"
                 className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-fg no-underline hover:bg-primary/90"
               >
                 Build my profile <ArrowRight className="size-4" aria-hidden="true" />

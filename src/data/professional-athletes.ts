@@ -1,8 +1,10 @@
 import type { AthleteSeed } from "./types";
+import { moFarahAthlete } from "./mo-farah.ts";
 
 const CHECKED_AT = "2026-09-02";
 
 export const professionalAthletes: AthleteSeed[] = [
+  moFarahAthlete,
   {
     slug: "keely-hodgkinson",
     display_name: "Keely Hodgkinson",

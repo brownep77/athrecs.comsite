@@ -60,6 +60,9 @@ jobs:
       - name: Email-only sign-in form
         run: node scripts/verify-email-code-ui.mjs
 
+      - name: Social recruitment and sourced athlete profile
+        run: node scripts/verify-recruitment-ui.mjs
+
       - name: Account results panel appears once on both sites
         run: |
           node scripts/verify-account-panel-ui.mjs
