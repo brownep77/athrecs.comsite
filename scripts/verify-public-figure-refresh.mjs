@@ -38,13 +38,45 @@ try {
     join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
     where a.slug='david-goggins'
   `;
-  assert.equal(gogginsRows.length, 44);
+  assert.equal(gogginsRows.length, 53);
   const { findPersonalBests } = await server.ssrLoadModule("/src/lib/athrecs/profile-records.ts");
   const { buildProfileAchievements } = await server.ssrLoadModule(
     "/src/lib/athrecs/profile-achievements.ts",
   );
-  assert.equal(buildProfileAchievements(gogginsRows).finishes.length, 40);
-  assert(gogginsRows.filter((r) => r.status === "DNF").every((r) => r.finishTimeSeconds === null));
+  assert.equal(buildProfileAchievements(gogginsRows).finishes.length, 47);
+  assert.equal(gogginsRows.filter((r) => r.status === "DNF").length, 5);
+  assert.equal(gogginsRows.filter((r) => r.status === "DNS").length, 1);
+  assert(
+    gogginsRows
+      .filter((r) => r.status !== "finished")
+      .every((r) => r.finishTimeSeconds === null && r.overallPlace === null),
+  );
+  const utmb = gogginsRows.find((r) => r.eventSlug === "utmb-world-series-montblanc");
+  assert.equal(utmb.country, "France");
+  assert.equal(utmb.eventDate, "2008-08-29");
+  assert.equal(utmb.overallPlace, 100);
+  assert.equal(utmb.finishTimeSeconds, 110954);
+  assert.equal(gogginsRows.find((r) => r.eventSlug === "leadville-trail-100-run").overallPlace, 15);
+  assert.equal(
+    gogginsRows.find((r) => r.eventSlug === "dont-fence-me-in-trail-run").eventDate,
+    "2018-05-12",
+  );
+  assert.equal(gogginsRows.find((r) => r.eventSlug === "infinitus").status, "DNS");
+  assert.equal(
+    gogginsRows.find((r) => r.eventSlug === "across-florida-200").surface,
+    "Trail / Road",
+  );
+  const { davidGogginsTimedPerformances } = await server.ssrLoadModule(
+    "/src/data/david-goggins.ts",
+  );
+  assert.deepEqual(
+    davidGogginsTimedPerformances.map((r) => [r.year, r.durationHours, r.distanceMiles]),
+    [
+      [2007, 48, 203.5],
+      [2005, 24, 101],
+    ],
+  );
+  assert(!gogginsRows.some((r) => /ultracentric|san-diego-1-day/.test(r.eventSlug)));
   assert(findPersonalBests(gogginsRows).every((r) => r.surface === "Road"));
   assert.equal(gogginsRows.filter((r) => r.eventSlug === "jfk-50-mile").length, 3);
   assert(
@@ -92,7 +124,7 @@ try {
   assert.equal(refreshed[0].bio, moFarahAthlete.bio);
   const version =
     await sql`select value from app_meta where key='public_figures_catalogue_version'`;
-  assert.equal(version[0].value, "athrecs-david-goggins-running-2026-09-18-v1");
+  assert.equal(version[0].value, "athrecs-david-goggins-running-2026-09-18-v2");
   assert.deepEqual(
     await sql`select key, value from app_meta where key <> 'public_figures_catalogue_version' order by key`,
     markers,
@@ -141,7 +173,7 @@ try {
     (
       await sql`select count(*)::int as n from results r join athletes a on a.id=r.athlete_id where a.slug='david-goggins'`
     )[0].n,
-    44,
+    53,
   );
   assert.deepEqual(
     await sql`select a.profile_type, a.date_of_birth, i.athlete_number::text as number from athletes a join athlete_resolved_ids i on i.athlete_id=a.id where a.slug='david-goggins'`,

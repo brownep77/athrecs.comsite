@@ -1,3 +1,4 @@
+import { davidGogginsTimedPerformances } from "@/data/david-goggins";
 import {
   moFarahCareerBests,
   moFarahPhoto,
@@ -7,6 +8,42 @@ import {
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 
 export function EditorialAthleteOverview({ slug }: { slug: string }) {
+  if (slug === "david-goggins") {
+    return (
+      <section
+        aria-labelledby="timed-distance-performances"
+        className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card"
+      >
+        <h2 id="timed-distance-performances" className="font-display text-lg font-semibold">
+          Timed-distance performances
+        </h2>
+        <p className="text-sm text-muted">
+          Distance covered during a fixed-duration race. Exact race dates remain under review; these
+          marks are listed by year and excluded from the finish-time totals below.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {davidGogginsTimedPerformances.map((performance) => (
+            <a
+              key={performance.event}
+              href={performance.source}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-lg border border-border px-3 py-2 no-underline hover:bg-elevated"
+            >
+              <span className="block text-sm font-medium text-fg">{performance.event}</span>
+              <strong className="block text-lg tabular-nums text-fg">
+                {performance.distanceMiles} miles in {performance.durationHours} hours
+              </strong>
+              <span className="block text-xs text-muted">
+                {performance.year} · Overall place {performance.place}
+              </span>
+              <span className="block text-xs text-accent">UltraSignup results ↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    );
+  }
   if (slug !== "mo-farah") return null;
   return (
     <section

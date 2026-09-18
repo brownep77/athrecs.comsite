@@ -4,6 +4,129 @@ import type { AthleteSeed, Edition, ResultSeed, Series } from "./types";
 // Nominal race categories are not certified measurements; see docs/david-goggins-records.md.
 export const davidGogginsRecords = [
   {
+    eventSlug: "across-florida-200",
+    eventName: "Across Florida 200",
+    location: "St. Augustine Beach, FL",
+    distance: "200 Mile",
+    distanceKm: 321.8688,
+    date: "2025-11-12",
+    time: "DNF",
+    place: null,
+    status: "DNF",
+    surface: "Trail / Road",
+    source: "https://ultrasignup.com/results_event.aspx?did=121291#id5403",
+  },
+  {
+    eventSlug: "infinitus",
+    eventName: "Infinitus",
+    location: "Ripton, VT",
+    distance: "100 Mile",
+    distanceKm: 160.9344,
+    date: "2018-06-01",
+    time: "DNS",
+    place: null,
+    status: "DNS",
+    surface: "Trail",
+    source: "https://ultrasignup.com/results_event.aspx?did=48915#id5403",
+  },
+  {
+    eventSlug: "dont-fence-me-in-trail-run",
+    eventName: "Don't Fence Me In Trail Run",
+    location: "Helena, MT",
+    distance: "30K",
+    distanceKm: 30,
+    date: "2018-05-12",
+    // Original timing is 2:54:33.2; the existing result schema stores whole seconds.
+    time: "2:54:33",
+    place: 20,
+    status: "finished",
+    surface: "Trail",
+    resultSource: "Competitive Timing",
+    source: "https://competitivetiming.com/events/dont-fence-me-in-trail-run/2018/30k-run/results",
+  },
+  {
+    eventSlug: "potato-creek-trail-runs",
+    eventName: "Potato Creek Trail Runs",
+    location: "North Liberty, IN",
+    distance: "60K",
+    distanceKm: 60,
+    date: "2013-04-27",
+    time: "6:07:19",
+    place: 1,
+    status: "finished",
+    surface: "Trail",
+    source: "https://ultrasignup.com/results_event.aspx?did=29501#id5403",
+  },
+  {
+    eventSlug: "ultra-race-of-champions",
+    eventName: "Ultra Race of Champions",
+    location: "Skylark, VA",
+    distance: "100K",
+    distanceKm: 100,
+    date: "2011-09-24",
+    time: "12:05:02",
+    place: 21,
+    status: "finished",
+    surface: "Trail",
+    source: "https://ultrasignup.com/results_event.aspx?did=42769#id5403",
+  },
+  {
+    eventSlug: "utmb-world-series-montblanc",
+    eventName: "Ultra-Trail du Mont-Blanc",
+    location: "Chamonix, France",
+    distance: "UTMB",
+    distanceKm: 166.4,
+    date: "2008-08-29",
+    time: "30:49:14",
+    place: 100,
+    status: "finished",
+    surface: "Trail",
+    resultSource: "UTMB",
+    source:
+      "https://utmb.world/utmb-index/races/142.thenorthfaceultra-traildumont-blanc-utmb-.2008?page=4",
+  },
+  {
+    eventSlug: "mount-disappointment-mountain-race",
+    eventName: "Mount Disappointment Mountain Race",
+    location: "Mt. Wilson, CA",
+    distance: "50K",
+    distanceKm: 50,
+    date: "2008-08-09",
+    time: "4:56:13",
+    place: 2,
+    status: "finished",
+    surface: "Trail",
+    source: "https://ultrasignup.com/results_event.aspx?did=133343#id5403",
+  },
+  {
+    eventSlug: "leadville-trail-100-run",
+    eventName: "Leadville Trail 100 Run",
+    location: "Leadville, CO",
+    distance: "100 Mile",
+    distanceKm: 160.9344,
+    date: "2007-08-18",
+    time: "22:15:36",
+    place: 15,
+    status: "finished",
+    surface: "Trail",
+    resultSource: "Leadville Race Series",
+    source:
+      "https://www.leadvilleraceseries.com/wp-content/uploads/2013/12/2007-Leadville-Trail-100-Run-Overall-Results.pdf",
+  },
+  {
+    eventSlug: "wauhatchie-trail-race",
+    eventName: "Wauhatchie Trail Race",
+    location: "Chattanooga, TN",
+    distance: "6.7 Mile",
+    distanceKm: 10.7826048,
+    date: "2006-12-17",
+    time: "0:45:01",
+    place: 26,
+    status: "finished",
+    surface: "Trail",
+    source: "https://ultrasignup.com/results_event.aspx?did=15590#id5403",
+  },
+  {
     eventSlug: "moab-240",
     eventName: "Moab 240 Endurance Run",
     location: "Moab, UT",
@@ -591,7 +714,7 @@ export const davidGogginsAthletes: AthleteSeed[] = [
     nationality: "American",
     nation: "United States",
     continent: "North America",
-    bio: "American endurance runner and author competing in road and trail ultramarathons. This partial running history includes 40 source-checked finishes and four DNFs from 2006–2025. Distances are nominal race categories; trail course lengths can vary. Further entries are under review.",
+    bio: "American endurance runner and author competing in road and trail ultramarathons. This partial running history includes 47 source-checked finishes, five DNFs and one DNS from 2006–2025, plus two timed-distance performances from 2005 and 2007 shown separately. Distances are nominal race categories; trail course lengths can vary. Nine further entries remain under review.",
     preferred_distance: "Ultramarathon",
     source_url: "https://davidgoggins.com/athletic-achievements/",
     profile_type: "Public figure",
@@ -615,8 +738,12 @@ export const davidGogginsAthletes: AthleteSeed[] = [
   },
 ];
 
-// These two events already have canonical identities and course classifications.
-const existingSeries = new Set(["jfk-50-mile", "western-states-endurance-run"]);
+// Reuse existing event identities and course classifications, including UTMB in France.
+const existingSeries = new Set([
+  "jfk-50-mile",
+  "western-states-endurance-run",
+  "utmb-world-series-montblanc",
+]);
 export const davidGogginsSeries: Series[] = [
   ...new Map(davidGogginsRecords.map((r) => [r.eventSlug, r])).values(),
 ]
@@ -669,6 +796,27 @@ export const davidGogginsResults: ResultSeed[] = davidGogginsRecords.map((r) => 
     ? { finishTimeSeconds: r.time.split(":").reduce((total, part) => total * 60 + Number(part), 0) }
     : {}),
   category: "Men",
-  resultSource: "UltraSignup",
+  resultSource: "resultSource" in r ? r.resultSource : "UltraSignup",
   source: r.source,
 }));
+
+// Distance covered in a fixed duration, never a fixed-distance finish time.
+// Sources disagree on the exact dates, so only the confirmed years are displayed.
+export const davidGogginsTimedPerformances = [
+  {
+    event: "UltraCentric Gold Rush",
+    year: 2007,
+    durationHours: 48,
+    distanceMiles: 203.5,
+    place: 1,
+    source: "https://ultrasignup.com/results_event.aspx?did=13500#id5403",
+  },
+  {
+    event: "San Diego One Day",
+    year: 2005,
+    durationHours: 24,
+    distanceMiles: 101,
+    place: 37,
+    source: "https://ultrasignup.com/results_event.aspx?did=14996#id5403",
+  },
+] as const;
