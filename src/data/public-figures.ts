@@ -1,3 +1,9 @@
+import {
+  davidGogginsAthletes,
+  davidGogginsSeries,
+  davidGogginsEditions,
+  davidGogginsResults,
+} from "./david-goggins.ts";
 import type { AthleteSeed, Edition, ResultSeed, Series } from "./types";
 import {
   publicFigureAthletes as richRollAthletes,
@@ -406,6 +412,7 @@ const highTractionPublicFigureResults: ResultSeed[] = [
 ];
 
 export const publicFigureAthletes: AthleteSeed[] = [
+  ...davidGogginsAthletes,
   ...professionalAthletes,
   ...richRollAthletes,
   ...highTractionPublicFigureAthletes,
@@ -418,6 +425,7 @@ export const publicFigureAthletes: AthleteSeed[] = [
 ];
 
 export const publicFigureSeries: Series[] = [
+  ...davidGogginsSeries,
   ...moFarahRoadSeries,
   ...(richRollSeries as Series[]),
   ...highTractionPublicFigureSeries,
@@ -426,6 +434,7 @@ export const publicFigureSeries: Series[] = [
 ];
 
 const existingPublicFigureEditions: Edition[] = [
+  ...davidGogginsEditions,
   ...(richRollEditions as Edition[]),
   ...highTractionPublicFigureEditions,
   ...publicFigureWave2Editions,
@@ -446,6 +455,7 @@ export const publicFigureEditions: Edition[] = [
 ];
 
 export const publicFigureResults: ResultSeed[] = [
+  ...davidGogginsResults,
   ...moFarahRoadResults,
   ...richRollResults,
   ...highTractionPublicFigureResults,

@@ -28,6 +28,38 @@ try {
     roadRows.filter((row) => row.status === "DNF").every((row) => row.finish_time_seconds === null),
   );
 
+  // The new public profile retains result status, terrain and database identity.
+  const gogginsRows = await sql`
+    select r.id as "resultId", ed.id as "editionId", e.slug as "eventSlug", e.name as "eventName",
+      e.sport, e.surface, e.country, ed.event_date::text as "eventDate",
+      ed.distance_code as "distanceCode", ed.distance_km as "distanceKm",
+      r.status, r.finish_time_seconds as "finishTimeSeconds", r.overall_place as "overallPlace"
+    from results r join athletes a on a.id=r.athlete_id
+    join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
+    where a.slug='david-goggins'
+  `;
+  assert.equal(gogginsRows.length, 44);
+  const { findPersonalBests } = await server.ssrLoadModule("/src/lib/athrecs/profile-records.ts");
+  const { buildProfileAchievements } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-achievements.ts",
+  );
+  assert.equal(buildProfileAchievements(gogginsRows).finishes.length, 40);
+  assert(gogginsRows.filter((r) => r.status === "DNF").every((r) => r.finishTimeSeconds === null));
+  assert(findPersonalBests(gogginsRows).every((r) => r.surface === "Road"));
+  assert.equal(gogginsRows.filter((r) => r.eventSlug === "jfk-50-mile").length, 3);
+  assert(
+    gogginsRows.filter((r) => r.eventSlug === "jfk-50-mile").every((r) => /Trail/.test(r.surface)),
+  );
+  const gogginsIdentity = await sql`
+    select a.profile_type, a.date_of_birth, i.athlete_number::text as number
+    from athletes a join athlete_resolved_ids i on i.athlete_id=a.id
+    where a.slug='david-goggins'
+  `;
+  assert.equal(gogginsIdentity.length, 1);
+  assert.equal(gogginsIdentity[0].profile_type, "Public figure");
+  assert.equal(gogginsIdentity[0].date_of_birth, null);
+  assert.match(gogginsIdentity[0].number, /^\d+$/);
+
   // Reproduce the production redirects that blocked the first road import.
   const renamedEvents = [];
   for (const [sourceSlug, currentSlug] of [
@@ -60,7 +92,7 @@ try {
   assert.equal(refreshed[0].bio, moFarahAthlete.bio);
   const version =
     await sql`select value from app_meta where key='public_figures_catalogue_version'`;
-  assert.equal(version[0].value, "athrecs-professional-athletes-mo-farah-road-2026-09-17-v3");
+  assert.equal(version[0].value, "athrecs-david-goggins-running-2026-09-18-v1");
   assert.deepEqual(
     await sql`select key, value from app_meta where key <> 'public_figures_catalogue_version' order by key`,
     markers,
@@ -104,6 +136,16 @@ try {
     )[0].n,
     52,
     "Repeated refreshes do not duplicate road performances",
+  );
+  assert.equal(
+    (
+      await sql`select count(*)::int as n from results r join athletes a on a.id=r.athlete_id where a.slug='david-goggins'`
+    )[0].n,
+    44,
+  );
+  assert.deepEqual(
+    await sql`select a.profile_type, a.date_of_birth, i.athlete_number::text as number from athletes a join athlete_resolved_ids i on i.athlete_id=a.id where a.slug='david-goggins'`,
+    gogginsIdentity,
   );
   console.log(
     "Public-figure refresh passed: source results follow renamed production events, retired URLs remain guarded, catalogue markers stay unchanged and cold starts do not replay the import.",
