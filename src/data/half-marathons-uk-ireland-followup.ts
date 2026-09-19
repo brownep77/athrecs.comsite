@@ -701,14 +701,16 @@ export const verifiedHalfMarathonFollowupResearchQueue = [
     slug: "cork-city-half-marathon-2027",
     date: "2027-06-06",
     country: "Ireland",
-    reason: "The official registration page still labels the Athletics Ireland permit as pending.",
-    sourceUrl: "https://eventmaster.ie/custom/event/Cork-City-Marathon-2027",
+    reason:
+      "Checked 2026-09-18: the Athletics Ireland calendar shows approved permit 26/483, but the direct official registration page still labels the permit as pending approval.",
+    sourceUrl: "https://eventmaster.ie/event/zm54cPYSQJ",
   },
   {
     slug: "waterford-viking-half-marathon-2027",
-    date: "2027-06-19",
+    date: "2027-06-20",
     country: "Ireland",
-    reason: "The official registration page still labels the Athletics Ireland permit as pending.",
+    reason:
+      "Checked 2026-09-19: the official registration page confirms the half marathon on 20 June 2027 but still labels the Athletics Ireland permit as pending; 19 June is the children's fun run.",
     sourceUrl: "https://eventmaster.ie/event/62vzhEpT5G",
   },
   {

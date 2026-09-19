@@ -1,10 +1,10 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 11 September 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 19 September 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
-- Added 62 officially verified series: 49 half marathons and 13 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
+- Published 63 officially verified series after moving one permit-conflicted race back to research: 53 half-marathon editions and 13 ten-mile editions across England, Scotland, Wales, Northern Ireland and Ireland.
 - Added 16 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
@@ -18,7 +18,7 @@ Events already represented elsewhere were not recreated. This includes Beverley 
 
 ## Held candidates
 
-The research queue holds permit-pending Temple Newsam, Ripon, Thirsk, Clowne, Chippenham, Borrowdale, Abbeyknockmoy, RunClare, RunCork, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs, Ennis and Glenmore races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard or approximate.
+The research queue holds permit-pending John Treacy Dungarvan, Temple Newsam, Ripon, Thirsk, Clowne, Chippenham, Borrowdale, Abbeyknockmoy, RunClare, RunCork, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs, Ennis and Glenmore races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard or approximate.
 
 ## 29 August 2026 scan
 
@@ -79,5 +79,21 @@ The same governing-body calendar now identifies the RunClare finale as the Lisdo
 Athletics Ireland has now published the Irish Runner 10M Challenge for 18 July 2027 with approved permit `26/516`. Registration is marked Open Soon, and the governing-body calendar does not yet expose an event-specific URL. Because that shared calendar URL already backs the public Mallow card, the verified Irish Runner fixture remains in the research queue rather than weakening the normalized official-source duplicate rule.
 
 RunCork Half, Sonia O'Sullivan Cobh 10 Mile, Sixmilebridge Half, Limerick Runs 10 Mile, Ennis Half and the Glenmore Challenge Running Festival were also added to the research queue. Their dates and distances are listed by Athletics Ireland, but all six permits remain pending; Glenmore includes both a 10-mile and half-marathon distance.
+
+## 17 September 2026 scan
+
+Athletics Ireland now lists the Nenagh Half Marathon & 10K for 21 February 2027. Its permit remains pending approval, so the candidate is recorded in the research queue and not exposed in the public catalogue. Borrowdale Trail Half also remains held because its 2027 Trail Running Association licence is still pending; the approved licence shown on the adjacent RaceBest page belongs to the completed 2026 edition.
+
+## 18 September 2026 scan
+
+Athletics Ireland now shows approved permit `26/483` for the Analog Devices Cork City Marathon, Half Marathon & 10K on 6 June 2027, but the direct official registration page still says permit approval is pending. The existing Cork City card is therefore unchanged and its half-marathon edition remains in the research queue until the official sources agree. Its queue record now uses the current direct Eventmaster page rather than the retired custom URL.
+
+## 19 September 2026 scan
+
+The West Waterford Athletic Club page confirms the John Treacy Dungarvan 10 Mile for 31 January 2027 at 11:00 and describes it as a permitted A.A.I. event, but the current Athletics Ireland calendar still marks its permit as pending approval. The race was moved from the public catalogue into the research queue until those official sources agree.
+
+Waterford Viking's held 2027 half-marathon record was corrected to 20 June. The official registration page assigns 19 June to the children's fun run and 20 June to the marathon, half marathon and 10K; its permit remains pending, so it is still unpublished.
+
+All other UK and Ireland half-marathon and 10-mile candidates were rechecked against the official SiEntries, RaceBest, Athletics Ireland and Athletics Northern Ireland listings. No additional race cleared its permit, date, distance and provenance checks.
 
 Run `npm run verify:uk-ireland-half-ten-mile-daily` to validate the release.
