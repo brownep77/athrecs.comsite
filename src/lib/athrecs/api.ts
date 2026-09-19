@@ -1,3 +1,4 @@
+import { readResultDetails } from "./result-details";
 import { parseProfileRoles } from "./athlete-profile-roles";
 import { combineProfileResults } from "./profile-records";
 import { publicProfileDetails } from "./profile-details";
@@ -775,8 +776,10 @@ export const getEditionResults = createServerFn({ method: "GET" })
   .validator((editionId: number) => editionId)
   .handler(async ({ data: editionId }) => {
     const sql = await ready();
-    return sql<{
+    const rows = await sql<{
       id: number;
+      status: string;
+      result_details: unknown;
       overall_place: number | null;
       finish_time_seconds: number | null;
       category: string | null;
@@ -785,7 +788,7 @@ export const getEditionResults = createServerFn({ method: "GET" })
       club: string | null;
     }>`
       select
-        r.id,
+        r.id, r.status, r.result_details,
         r.overall_place,
         r.finish_time_seconds,
         r.category,
@@ -799,10 +802,13 @@ export const getEditionResults = createServerFn({ method: "GET" })
         and (
           r.result_visibility in ('public', 'public_figure')
           or a.profile_type = 'Public figure'
-          or a.profile_visibility = 'public'
         )
-      order by r.finish_time_seconds asc nulls last, a.display_name asc
+      order by (lower(r.status) in ('finished', 'fin')) desc, r.finish_time_seconds asc nulls last, a.display_name asc
     `;
+    return rows.map(({ result_details, ...row }) => ({
+      ...row,
+      details: readResultDetails(result_details),
+    }));
   });
 
 export const listAthletes = createServerFn({ method: "GET" })
@@ -822,8 +828,7 @@ export const listAthletes = createServerFn({ method: "GET" })
           where r.athlete_id = a.id
             and (
               a.profile_type = 'Public figure'
-              or a.profile_visibility = 'public'
-              or r.result_visibility in ('public', 'public_figure')
+                  or r.result_visibility in ('public', 'public_figure')
             )
         ) as result_count
       from athletes a
@@ -900,6 +905,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       city: string;
       distance_km: number;
       status: string;
+      result_details: unknown;
       chip_time_seconds: number | null;
       gun_time_seconds: number | null;
       id: number;
@@ -915,7 +921,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       source_url: string | null;
     }>`
       select
-        r.id, r.edition_id, e.surface, e.country, e.city, ed.distance_km, r.status, r.chip_time_seconds, r.gun_time_seconds,
+        r.id, r.edition_id, e.surface, e.country, e.city, ed.distance_km, r.status, r.result_details, r.chip_time_seconds, r.gun_time_seconds,
         e.name as event_name,
         e.slug as event_slug,
         e.sport,
@@ -968,7 +974,10 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
         profile_links: seed?.profile_links ?? [],
         notable_achievements: seed?.notable_achievements ?? [],
       },
-      results,
+      results: results.map(({ result_details, ...row }) => ({
+        ...row,
+        details: readResultDetails(result_details),
+      })),
       upcoming: await loadUpcoming(links[0]?.user_id ?? null, athlete.id, true),
       profileResults: combineProfileResults(
         results.map((r) => ({
@@ -984,6 +993,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
           country: r.country,
           city: r.city,
           status: r.status,
+          details: readResultDetails(r.result_details),
           finishTimeSeconds: r.finish_time_seconds,
           chipTimeSeconds: r.chip_time_seconds,
           gunTimeSeconds: r.gun_time_seconds,
@@ -1095,8 +1105,7 @@ export const getClubBySlug = createServerFn({ method: "GET" })
           where r.athlete_id = a.id
             and (
               a.profile_type = 'Public figure'
-              or a.profile_visibility = 'public'
-              or r.result_visibility in ('public', 'public_figure')
+                  or r.result_visibility in ('public', 'public_figure')
             )
         ) as result_count
       from athletes a

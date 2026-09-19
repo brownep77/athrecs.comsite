@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
+import { ResultDisqualification } from "./ResultDisqualification";
 
 export function SourcePerformanceHistory({ histories }: { histories: SourceHistory[] }) {
   const [year, setYear] = useState("");
@@ -134,6 +135,8 @@ export function SourcePerformanceHistory({ histories }: { histories: SourceHisto
                 <td className="whitespace-nowrap px-3 py-2">{row.discipline}</td>
                 <td className="whitespace-pre-line px-3 py-2 font-semibold tabular-nums">
                   {row.performance}
+                  {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
+                  <ResultDisqualification decision={row.disqualification} />
                   {row.labels.length ? (
                     <span className="block text-xs font-normal text-muted">
                       Source: {row.labels.join(", ")}
@@ -141,7 +144,12 @@ export function SourcePerformanceHistory({ histories }: { histories: SourceHisto
                   ) : null}
                 </td>
                 <td className="px-3 py-2">{row.wind || "—"}</td>
-                <td className="px-3 py-2">{row.place || "—"}</td>
+                <td className="px-3 py-2">
+                  {row.place || "—"}
+                  {row.disqualification ? (
+                    <span className="block text-xs text-muted">Original · void</span>
+                  ) : null}
+                </td>
                 <td className="min-w-52 px-3 py-2">{row.meeting}</td>
                 <td className="px-3 py-2">{row.venue}</td>
                 <td className="whitespace-nowrap px-3 py-2 text-xs">{row.ageGroup}</td>

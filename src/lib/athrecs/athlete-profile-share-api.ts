@@ -1,3 +1,4 @@
+import { readResultDetails } from "./result-details";
 import { publicProfileDetails, type PublicProfileDetails } from "./profile-details";
 import { loadUpcoming, type UpcomingEvent } from "./athlete-upcoming-api";
 import { createServerFn } from "@tanstack/react-start";
@@ -193,6 +194,7 @@ async function loadVisibleResults(
     city: string;
     distance_km: number;
     status: string;
+    result_details: unknown;
     chip_time_seconds: number | null;
     gun_time_seconds: number | null;
     source_urls: string[];
@@ -211,6 +213,7 @@ async function loadVisibleResults(
       edition.id as edition_id,
       event.sport, event.surface, event.country, event.city, edition.distance_km,
       result.status, result.chip_time_seconds, result.gun_time_seconds,
+          result.result_details,
       array(select distinct link from (
         select result.source_url as link
         union all select edition.results_official_url
@@ -242,6 +245,7 @@ async function loadVisibleResults(
       city: row.city,
       distanceKm: Number(row.distance_km),
       status: row.status,
+      details: readResultDetails(row.result_details),
       chipTimeSeconds: row.chip_time_seconds,
       gunTimeSeconds: row.gun_time_seconds,
       sourceUrls: row.source_urls ?? [],

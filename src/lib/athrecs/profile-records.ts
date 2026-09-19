@@ -1,4 +1,5 @@
 import { roadPerformanceCondition } from "./road-performance-conditions.ts";
+import { isDisqualified, type ResultDetails } from "./result-details.ts";
 
 export type ProfileResult = {
   city?: string;
@@ -14,6 +15,7 @@ export type ProfileResult = {
   distanceCode: string;
   distanceKm: number;
   status: string;
+  details?: ResultDetails;
   finishTimeSeconds: number | null;
   chipTimeSeconds: number | null;
   gunTimeSeconds: number | null;
@@ -93,6 +95,7 @@ export function combineProfileResults<T extends ProfileResult>(
       result.gunTimeSeconds,
       result.overallPlace,
       result.category,
+      result.details?.disqualification ?? null,
     ]);
     const keys = editionKeys.get(result.editionId) ?? new Set<string>();
     keys.add(key);
@@ -124,6 +127,7 @@ export function combineProfileResults<T extends ProfileResult>(
 export function eligiblePerformance(result: ProfileResult): boolean {
   return (
     roadPerformanceCondition(result)?.eligible !== false &&
+    !isDisqualified(result) &&
     result.status.toLowerCase() === "finished" &&
     !result.conflicting &&
     result.finishTimeSeconds != null &&

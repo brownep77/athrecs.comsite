@@ -1,3 +1,4 @@
+import { readResultDetails } from "./result-details";
 import { readProfileDetails, type AthleteProfileDetails } from "./profile-details";
 import { createServerFn, createServerOnlyFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
@@ -599,6 +600,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       event_city: string;
       distance_km: number;
       result_status: string;
+      result_details: unknown;
       result_source: string | null;
       chip_time_seconds: number | null;
       gun_time_seconds: number | null;
@@ -621,6 +623,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
           event.city as event_city,
           edition.distance_km,
           result.status as result_status,
+          result.result_details,
           result.result_source,
           result.chip_time_seconds,
           result.gun_time_seconds,
@@ -710,6 +713,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       city: row.event_city,
       distanceKm: Number(row.distance_km),
       status: row.result_status,
+      details: readResultDetails(row.result_details),
       resultSource: row.result_source,
       chipTimeSeconds: row.chip_time_seconds,
       gunTimeSeconds: row.gun_time_seconds,
