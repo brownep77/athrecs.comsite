@@ -1,3 +1,5 @@
+import { ResultDisqualification } from "@/components/athletes/ResultDisqualification";
+import { isDisqualified } from "@/lib/athrecs/result-details";
 import { useMemo, useState } from "react";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -636,10 +638,10 @@ export function RacePageContent({
                     </tr>
                   </thead>
                   <tbody>
-                    {results.map((r, i) => (
+                    {results.map((r) => (
                       <tr key={r.id} className="border-b border-border/70 last:border-0">
                         <td className="px-3 py-2.5 tabular text-muted">
-                          {r.finish_time_seconds != null ? i + 1 : "—"}
+                          {isDisqualified(r) ? "DQ" : (r.overall_place ?? "—")}
                         </td>
                         <td className="px-3 py-2.5">
                           <Link
@@ -649,11 +651,15 @@ export function RacePageContent({
                           >
                             {r.athlete_name}
                           </Link>
+                          <ResultDisqualification decision={r.details.disqualification} />
                         </td>
                         <td className="px-3 py-2.5 text-muted">{r.club ?? "—"}</td>
                         <td className="px-3 py-2.5 text-muted">{r.category ?? "—"}</td>
                         <td className="px-3 py-2.5 font-medium tabular">
                           {formatDuration(r.finish_time_seconds)}
+                          {isDisqualified(r) ? (
+                            <span aria-label="Disqualified result">*</span>
+                          ) : null}
                         </td>
                         <td className="px-3 py-2.5">
                           <Link

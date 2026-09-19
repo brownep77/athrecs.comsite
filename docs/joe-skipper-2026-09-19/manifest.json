@@ -1,0 +1,1061 @@
+{
+  "athleteId": 128,
+  "athleteNumber": "ATH-000128",
+  "slug": "joe-skipper",
+  "checkedAt": "2026-09-19",
+  "decision": {
+    "reason": "whereabouts",
+    "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+    "decisionDate": "2026-08-17",
+    "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+  },
+  "results": [
+    {
+      "date": "2019-05-15",
+      "slug": "wroxham-5k",
+      "name": "Wroxham 5K",
+      "sport": "Running",
+      "country": "England",
+      "city": "Wroxham",
+      "code": "5K",
+      "km": 5,
+      "time": "15:45",
+      "seconds": 945,
+      "place": null,
+      "source": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2015-03-29",
+      "slug": "lowestoft-promenade-dash-5",
+      "name": "Lowestoft Promenade Dash 5",
+      "sport": "Running",
+      "country": "England",
+      "city": "Lowestoft",
+      "code": "5mi",
+      "km": 8.04672,
+      "time": "25:32",
+      "seconds": 1532,
+      "place": null,
+      "source": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2024-03-03",
+      "slug": "trafford-10k-partington",
+      "name": "Trafford 10K",
+      "sport": "Running",
+      "country": "England",
+      "city": "Partington",
+      "code": "10K",
+      "km": 10,
+      "time": "30:58",
+      "seconds": 1858,
+      "place": null,
+      "source": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2015-01-25",
+      "slug": "freethorpe-10",
+      "name": "Freethorpe 10",
+      "sport": "Running",
+      "country": "England",
+      "city": "Freethorpe",
+      "code": "10mi",
+      "km": 16.09344,
+      "time": "53:30",
+      "seconds": 3210,
+      "place": null,
+      "source": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2014-11-23",
+      "slug": "city-of-norwich-half-marathon",
+      "name": "City of Norwich Half Marathon (historic)",
+      "sport": "Running",
+      "country": "England",
+      "city": "Norwich",
+      "code": "Half",
+      "km": 21.0975,
+      "time": "1:11:58",
+      "seconds": 4318,
+      "place": null,
+      "source": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2016-04-03",
+      "slug": "wymondham-20",
+      "name": "Wymondham 20",
+      "sport": "Running",
+      "country": "England",
+      "city": "Wymondham",
+      "code": "20mi",
+      "km": 32.18688,
+      "time": "1:54:38",
+      "seconds": 6878,
+      "place": null,
+      "source": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2025-04-13",
+      "slug": "norfolk-marathon-half",
+      "name": "Norfolk Marathon & Half",
+      "sport": "Running",
+      "country": "England",
+      "city": "Cromer",
+      "code": "Marathon",
+      "km": 42.195,
+      "time": "2:34:07",
+      "seconds": 9247,
+      "place": 1,
+      "source": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+      "details": {
+        "note": "Power of 10 also lists 2:34:08; timing basis remains unconfirmed."
+      },
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2025-06-06",
+      "slug": "epic-aylsham-5k",
+      "name": "EPIC Aylsham 5K",
+      "sport": "Running",
+      "country": "England",
+      "city": "Aylsham",
+      "code": "5K",
+      "km": 5,
+      "time": "15:38",
+      "seconds": 938,
+      "place": 3,
+      "source": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "note": "Power of 10 also lists 15:39; original source precision retained in the linked archive."
+      },
+      "status": "DQ",
+      "surface": "Road"
+    },
+    {
+      "date": "2026-05-13",
+      "slug": "great-yarmouth-promenade-5m",
+      "name": "Great Yarmouth Promenade 5",
+      "sport": "Running",
+      "country": "England",
+      "city": "Great Yarmouth",
+      "code": "5mi",
+      "km": 8.04672,
+      "time": "25:21",
+      "seconds": 1521,
+      "place": 4,
+      "source": "https://totalracetiming.co.uk/raceresults/683",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "note": "Original timing: chip 25:21.0; gun 25:21.4."
+      },
+      "status": "DQ",
+      "surface": "Road"
+    },
+    {
+      "date": "2026-07-24",
+      "slug": "worstead-5",
+      "name": "Worstead 5",
+      "sport": "Running",
+      "country": "England",
+      "city": "Worstead",
+      "code": "5mi",
+      "km": 8.04672,
+      "time": "25:53",
+      "seconds": 1553,
+      "place": 2,
+      "source": "https://totalracetiming.co.uk/raceresults/698",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "note": "Original timing: chip 25:52.5; gun 25:53.3. Display time rounded to whole seconds."
+      },
+      "status": "DQ",
+      "surface": "Road"
+    },
+    {
+      "date": "2017-05-21",
+      "slug": "great-yarmouth-cc-25",
+      "name": "Great Yarmouth CC 25-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "25mi",
+      "km": 40.2336,
+      "time": "53:25",
+      "seconds": 3205,
+      "place": 1,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2017",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2017-09-02",
+      "slug": "cc-breckland-50",
+      "name": "CC Breckland 50-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "50mi",
+      "km": 80.4672,
+      "time": "1:40:31",
+      "seconds": 6031,
+      "place": 1,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2017",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2018-05-12",
+      "slug": "vc-norwich-25",
+      "name": "VC Norwich 25-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "25mi",
+      "km": 40.2336,
+      "time": "48:55",
+      "seconds": 2935,
+      "place": 3,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2018",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2019-09-07",
+      "slug": "norwich-abc-10",
+      "name": "Norwich ABC 10-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "10mi",
+      "km": 16.09344,
+      "time": "20:18",
+      "seconds": 1218,
+      "place": 1,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2019",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2020-08-23",
+      "slug": "vc-baracchi-50",
+      "name": "VC Baracchi 50-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "50mi",
+      "km": 80.4672,
+      "time": "1:45:11",
+      "seconds": 6311,
+      "place": 1,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2020",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2021-06-27",
+      "slug": "cc-breckland-50",
+      "name": "CC Breckland 50-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "50mi",
+      "km": 80.4672,
+      "time": "1:39:20",
+      "seconds": 5960,
+      "place": 3,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2021",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2022-05-22",
+      "slug": "great-yarmouth-cc-25",
+      "name": "Great Yarmouth CC 25-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "25mi",
+      "km": 40.2336,
+      "time": "52:31",
+      "seconds": 3151,
+      "place": 3,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2022",
+      "details": {},
+      "status": "finished",
+      "surface": "Road"
+    },
+    {
+      "date": "2026-02-08",
+      "slug": "ely-district-25",
+      "name": "Ely & District 25-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "25mi",
+      "km": 40.2336,
+      "time": "55:32",
+      "seconds": 3332,
+      "place": 4,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2026",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "note": "Spindata retains the original performance; status follows the ITA decision covering competitive results since 15 May 2025."
+      },
+      "status": "DQ",
+      "surface": "Road"
+    },
+    {
+      "date": "2026-03-14",
+      "slug": "west-suffolk-21",
+      "name": "West Suffolk 21-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "21mi",
+      "km": 33.796224,
+      "time": "44:04",
+      "seconds": 2644,
+      "place": 1,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2026",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "note": "Spindata retains the original performance; status follows the ITA decision covering competitive results since 15 May 2025."
+      },
+      "status": "DQ",
+      "surface": "Road"
+    },
+    {
+      "date": "2026-04-11",
+      "slug": "stowmarket-debenham-tt",
+      "name": "Stowmarket Debenham 15.3-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "15.3mi",
+      "km": 24.622963,
+      "time": "32:27",
+      "seconds": 1947,
+      "place": 1,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2026",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "note": "Spindata retains the original performance; status follows the ITA decision covering competitive results since 15 May 2025."
+      },
+      "status": "DQ",
+      "surface": "Road"
+    },
+    {
+      "date": "2026-05-10",
+      "slug": "vc-norwich-25",
+      "name": "VC Norwich 25-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "25mi",
+      "km": 40.2336,
+      "time": "50:45",
+      "seconds": 3045,
+      "place": 1,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2026",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "note": "Spindata retains the original performance; status follows the ITA decision covering competitive results since 15 May 2025."
+      },
+      "status": "DQ",
+      "surface": "Road"
+    },
+    {
+      "date": "2026-05-25",
+      "slug": "hashtag-coaching-10",
+      "name": "Hashtag Coaching 10-mile time trial",
+      "sport": "Cycling",
+      "country": "England",
+      "city": "",
+      "code": "10mi",
+      "km": 16.09344,
+      "time": "19:28",
+      "seconds": 1168,
+      "place": 1,
+      "source": "https://www.spindata.co.uk/riders/rider/3839-joe-skipper?year=2026",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "note": "Spindata retains the original performance; status follows the ITA decision covering competitive results since 15 May 2025."
+      },
+      "status": "DQ",
+      "surface": "Road"
+    },
+    {
+      "date": "2018-07-15",
+      "slug": "ironman-uk",
+      "name": "IRONMAN UK",
+      "sport": "Triathlon",
+      "country": "England",
+      "city": "Bolton",
+      "code": "Shortened triathlon",
+      "km": 0,
+      "time": "7:55:34",
+      "seconds": 28534,
+      "place": 1,
+      "source": "https://stats.protriathletes.org/race/im-uk/2018/results",
+      "details": {
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2019-11-02",
+      "slug": "ironman-florida",
+      "name": "IRONMAN Florida",
+      "sport": "Triathlon",
+      "country": "United States",
+      "city": "Panama City Beach",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "7:46:28",
+      "seconds": 27988,
+      "place": 1,
+      "source": "https://stats.protriathletes.org/race/im-florida/2019/results",
+      "details": {
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2020-03-07",
+      "slug": "ironman-new-zealand",
+      "name": "IRONMAN New Zealand",
+      "sport": "Triathlon",
+      "country": "New Zealand",
+      "city": "Taupo",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "7:54:17",
+      "seconds": 28457,
+      "place": 1,
+      "source": "https://stats.protriathletes.org/race/im-new-zealand/2020/results",
+      "details": {
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2021-07-04",
+      "slug": "ironman-uk",
+      "name": "IRONMAN UK",
+      "sport": "Triathlon",
+      "country": "England",
+      "city": "Bolton",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "8:42:58",
+      "seconds": 31378,
+      "place": 1,
+      "source": "https://stats.protriathletes.org/race/im-uk/2021/results",
+      "details": {
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2021-09-26",
+      "slug": "ironman-chattanooga",
+      "name": "IRONMAN Chattanooga",
+      "sport": "Triathlon",
+      "country": "United States",
+      "city": "Chattanooga",
+      "code": "140.6mi Triathlon",
+      "km": 0,
+      "time": "7:46:18",
+      "seconds": 27978,
+      "place": 1,
+      "source": "https://stats.protriathletes.org/race/im-chattanooga/2021/results",
+      "details": {
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2022-09-11",
+      "slug": "ironman-wales",
+      "name": "IRONMAN Wales",
+      "sport": "Triathlon",
+      "country": "Wales",
+      "city": "Tenby",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "8:35:48",
+      "seconds": 30948,
+      "place": 1,
+      "source": "https://stats.protriathletes.org/race/im-wales/2022/results",
+      "details": {
+        "splits": [
+          {
+            "label": "Swim",
+            "time": "49:38"
+          },
+          {
+            "label": "Bike",
+            "time": "5:00:28"
+          },
+          {
+            "label": "Run",
+            "time": "2:37:24"
+          }
+        ],
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2022-11-20",
+      "slug": "ironman-arizona",
+      "name": "IRONMAN Arizona",
+      "sport": "Triathlon",
+      "country": "United States",
+      "city": "Tempe",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "7:45:59",
+      "seconds": 27959,
+      "place": 1,
+      "source": "https://stats.protriathletes.org/race/im-arizona/2022/results",
+      "details": {
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2023-07-23",
+      "slug": "ironman-lake-placid",
+      "name": "IRONMAN Lake Placid",
+      "sport": "Triathlon",
+      "country": "United States",
+      "city": "Lake Placid",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "8:03:45",
+      "seconds": 29025,
+      "place": 1,
+      "source": "https://stats.protriathletes.org/race/im-lake-placid/2023/results",
+      "details": {
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2022-10-08",
+      "slug": "ironman-world-championship",
+      "name": "IRONMAN World Championship",
+      "sport": "Triathlon",
+      "country": "United States",
+      "city": "Kailua-Kona",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "7:54:04",
+      "seconds": 28444,
+      "place": 5,
+      "source": "https://stats.protriathletes.org/race/im-hawaii/2022/results",
+      "details": {
+        "splits": [
+          {
+            "label": "Swim",
+            "time": "52:54"
+          },
+          {
+            "label": "Bike",
+            "time": "4:11:10"
+          },
+          {
+            "label": "Run",
+            "time": "2:45:25"
+          }
+        ],
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2023-06-25",
+      "slug": "challenge-roth",
+      "name": "Challenge Roth",
+      "sport": "Triathlon",
+      "country": "Germany",
+      "city": "Roth",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "7:44:10",
+      "seconds": 27850,
+      "place": 5,
+      "source": "https://stats.protriathletes.org/race/challenge-roth/2023/results",
+      "details": {
+        "splits": [
+          {
+            "label": "Swim",
+            "time": "51:18"
+          },
+          {
+            "label": "Bike",
+            "time": "4:09:04"
+          },
+          {
+            "label": "Run",
+            "time": "2:40:52"
+          }
+        ],
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2025-03-01",
+      "slug": "ironman-new-zealand",
+      "name": "IRONMAN New Zealand",
+      "sport": "Triathlon",
+      "country": "New Zealand",
+      "city": "Taupo",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "7:48:47",
+      "seconds": 28127,
+      "place": 2,
+      "source": "https://stats.protriathletes.org/race/im-new-zealand/2025/results",
+      "details": {
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2025-07-06",
+      "slug": "challenge-roth",
+      "name": "Challenge Roth",
+      "sport": "Triathlon",
+      "country": "Germany",
+      "city": "Roth",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "7:55:28",
+      "seconds": 28528,
+      "place": 14,
+      "source": "https://stats.protriathletes.org/race/challenge-roth/2025/results",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "splits": [
+          {
+            "label": "Swim",
+            "time": "56:51"
+          },
+          {
+            "label": "Bike",
+            "time": "4:09:00"
+          },
+          {
+            "label": "Run",
+            "time": "2:45:23"
+          }
+        ],
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "DQ",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2025-09-14",
+      "slug": "ironman-world-championship-nice",
+      "name": "IRONMAN World Championship Nice",
+      "sport": "Triathlon",
+      "country": "France",
+      "city": "Nice",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "8:33:25",
+      "seconds": 30805,
+      "place": 26,
+      "source": "https://stats.protriathletes.org/athlete/joe-skipper",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "splits": [
+          {
+            "label": "Swim",
+            "time": "52:00"
+          },
+          {
+            "label": "Bike",
+            "time": "4:46:38"
+          },
+          {
+            "label": "Run",
+            "time": "2:49:31"
+          }
+        ],
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "DQ",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2026-04-19",
+      "slug": "ironman-south-africa",
+      "name": "IRONMAN South Africa",
+      "sport": "Triathlon",
+      "country": "South Africa",
+      "city": "Gqeberha",
+      "code": "140.6mi Triathlon",
+      "km": 226.3,
+      "time": "7:56:18",
+      "seconds": 28578,
+      "place": 2,
+      "source": "https://stats.protriathletes.org/athlete/joe-skipper",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "splits": [
+          {
+            "label": "Swim",
+            "time": "55:42"
+          },
+          {
+            "label": "Bike",
+            "time": "4:16:05"
+          },
+          {
+            "label": "Run",
+            "time": "2:41:00"
+          }
+        ],
+        "note": "Overall race time includes transitions. Courses and conditions vary; splits are parts of this result, not separate races."
+      },
+      "status": "DQ",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2025-09-07",
+      "slug": "ironman-703-knokke-heist",
+      "name": "IRONMAN 70.3 Knokke-Heist",
+      "sport": "Triathlon",
+      "country": "Belgium",
+      "city": "Knokke-Heist",
+      "code": "70.3",
+      "km": 113.1,
+      "time": "3:46:46",
+      "seconds": 13606,
+      "place": 5,
+      "source": "https://stats.protriathletes.org/athlete/joe-skipper",
+      "details": {
+        "disqualification": {
+          "reason": "whereabouts",
+          "sourceUrl": "https://ita.sport/news/the-ita-acknowledges-the-international-hearing-panel-decision-sanctioning-ironman-athlete-joe-skipper/",
+          "decisionDate": "2026-08-17",
+          "note": "The ITA announcement of 4 September 2026 reports the disqualification of competitive results obtained since 15 May 2025 following three whereabouts failures. This is a whereabouts-rule violation, not a reported positive drug test. The announcement records a right of appeal."
+        },
+        "splits": [
+          {
+            "label": "Swim",
+            "time": "23:59"
+          },
+          {
+            "label": "Bike",
+            "time": "1:58:34"
+          },
+          {
+            "label": "Run",
+            "time": "1:18:27"
+          }
+        ]
+      },
+      "status": "DQ",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2013-05-19",
+      "slug": "european-middle-distance-barcelona",
+      "name": "European Middle Distance Championships Barcelona",
+      "sport": "Triathlon",
+      "country": "Spain",
+      "city": "Barcelona",
+      "code": "Middle-distance triathlon",
+      "km": 0,
+      "time": "4:23:28",
+      "seconds": 15808,
+      "place": 13,
+      "source": "https://triathlon.org/athletes/profile/71400/joe-skipper",
+      "details": {},
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2015-06-27",
+      "slug": "world-long-distance-motala",
+      "name": "World Long Distance Championships Motala",
+      "sport": "Triathlon",
+      "country": "Sweden",
+      "city": "Motala",
+      "code": "Long-distance triathlon",
+      "km": 0,
+      "time": "4:55:10",
+      "seconds": 17710,
+      "place": 3,
+      "source": "https://triathlon.org/athletes/profile/71400/joe-skipper",
+      "details": {},
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2017-09-09",
+      "slug": "european-long-distance-almere",
+      "name": "European Long Distance Championships Almere-Amsterdam",
+      "sport": "Triathlon",
+      "country": "Netherlands",
+      "city": "Almere",
+      "code": "Long-distance triathlon",
+      "km": 0,
+      "time": "7:59:39",
+      "seconds": 28779,
+      "place": 1,
+      "source": "https://triathlon.org/athletes/profile/71400/joe-skipper",
+      "details": {},
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2023-05-07",
+      "slug": "world-long-distance-ibiza",
+      "name": "World Long Distance Championships Ibiza",
+      "sport": "Triathlon",
+      "country": "Spain",
+      "city": "Ibiza",
+      "code": "Long-distance triathlon",
+      "km": 0,
+      "time": "5:35:16",
+      "seconds": 20116,
+      "place": 22,
+      "source": "https://triathlon.org/athletes/profile/71400/joe-skipper",
+      "details": {},
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2014-04-13",
+      "slug": "european-long-distance-duathlon-horst",
+      "name": "European Long Distance Duathlon Championships Horst",
+      "sport": "Duathlon",
+      "country": "Netherlands",
+      "city": "Horst aan de Maas",
+      "code": "Long-distance duathlon",
+      "km": 0,
+      "time": "2:53:04",
+      "seconds": 10384,
+      "place": 14,
+      "source": "https://triathlon.org/athletes/profile/71400/joe-skipper",
+      "details": {},
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2018-07-29",
+      "slug": "ironman-hamburg-2018-duathlon",
+      "name": "IRONMAN Hamburg (duathlon)",
+      "sport": "Duathlon",
+      "country": "Germany",
+      "city": "Hamburg",
+      "code": "Run–bike–run",
+      "km": 0,
+      "time": "7:12:35",
+      "seconds": 25955,
+      "place": 2,
+      "source": "https://stats.protriathletes.org/race/im-hamburg/2018/results",
+      "details": {
+        "splits": [
+          {
+            "label": "Opening run",
+            "time": "19:49"
+          }
+        ],
+        "note": "Swim cancelled; converted to duathlon. The opening run is labelled Swim in the original generic results table."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    },
+    {
+      "date": "2024-09-29",
+      "slug": "ironman-chattanooga-2024-bike-run",
+      "name": "IRONMAN Chattanooga (bike–run)",
+      "sport": "Duathlon",
+      "country": "United States",
+      "city": "Chattanooga",
+      "code": "Bike–run (no swim)",
+      "km": 0,
+      "time": "6:43:53",
+      "seconds": 24233,
+      "place": 7,
+      "source": "https://stats.protriathletes.org/race/im-chattanooga/2024/results",
+      "details": {
+        "splits": [
+          {
+            "label": "Bike",
+            "time": "3:55:51"
+          },
+          {
+            "label": "Transition",
+            "time": "2:40"
+          },
+          {
+            "label": "Run",
+            "time": "2:45:22"
+          }
+        ],
+        "note": "No swim or opening run recorded; bike–run format, not a standard triathlon or run–bike–run duathlon."
+      },
+      "status": "finished",
+      "surface": "Mixed"
+    }
+  ],
+  "sourceHistory": {
+    "provider": "powerof10",
+    "externalId": "366603",
+    "sourceUrl": "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603",
+    "capturedAt": "2026-09-19T12:00:00Z",
+    "complete": false,
+    "yearsExpected": [
+      2011,
+      2014,
+      2015,
+      2016,
+      2019,
+      2024,
+      2025
+    ],
+    "yearsCaptured": [
+      2011,
+      2024
+    ],
+    "performances": [
+      {
+        "year": 2011,
+        "date": "2011-05-31",
+        "sourceDate": "2011-05-31",
+        "ageGroup": "",
+        "discipline": "3000m",
+        "performance": "9:25.67",
+        "wind": "",
+        "place": "",
+        "venue": "Trafford",
+        "meeting": "Trafford Grand Prix",
+        "sourceUrls": [
+          "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603"
+        ],
+        "labels": []
+      },
+      {
+        "year": 2024,
+        "date": "2024-05-11",
+        "sourceDate": "2024-05-11",
+        "ageGroup": "",
+        "discipline": "5000m",
+        "performance": "15:37.4",
+        "wind": "",
+        "place": "",
+        "venue": "Norfolk",
+        "meeting": "Norfolk County Championships",
+        "sourceUrls": [
+          "https://www.thepowerof10.info/athletes/profile.aspx?athleteid=366603"
+        ],
+        "labels": []
+      }
+    ]
+  },
+  "withheldExistingResultIds": [
+    12255,
+    11181
+  ]
+}

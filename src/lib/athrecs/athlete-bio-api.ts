@@ -1,10 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
-import {
-  buildGeneratedAthleteBio,
-  type AthleteBioResult,
-} from "./athlete-bio";
+import { buildGeneratedAthleteBio, type AthleteBioResult } from "./athlete-bio";
 import { ensureAthrecsSeeded } from "./seed.server";
 
 export type AthleteBioMode = "automatic" | "custom" | "hidden";
@@ -107,6 +104,7 @@ async function loadBio(
       join events event on event.id = edition.event_id
       where account_link.user_id = ${userId}
         and account_link.status = 'active'
+        and lower(result.status) in ('finished', 'fin')
         and not exists (
           select 1
           from athlete_profile_hidden_results hidden

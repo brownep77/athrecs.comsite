@@ -7,6 +7,8 @@ import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
 import { ResultMedal } from "./ProfileAchievements";
 import { roadPerformanceCondition } from "@/lib/athrecs/road-performance-conditions";
+import { isDisqualified } from "@/lib/athrecs/result-details";
+import { ResultDisqualification } from "./ResultDisqualification";
 
 type Row = Omit<ProfileResult, "athleteName">;
 export function CompactResultsTable({
@@ -61,6 +63,17 @@ export function CompactResultsTable({
                     {result.eventName}
                   </ProfileEventLink>
                 </span>
+                <ResultDisqualification decision={result.details?.disqualification} />
+                {result.details?.note ? (
+                  <span className="block text-xs text-muted">{result.details.note}</span>
+                ) : null}
+                {result.details?.splits?.length ? (
+                  <span className="block text-xs font-normal text-muted">
+                    {result.details.splits
+                      .map((split) => `${split.label} ${split.time}`)
+                      .join(" · ")}
+                  </span>
+                ) : null}
                 {result.conflicting ? (
                   <span className="block text-xs text-amber-800">
                     Sources differ · excluded from PBs
@@ -84,10 +97,14 @@ export function CompactResultsTable({
                 </span>
               </td>
               <td className="whitespace-nowrap px-3 py-2 font-semibold tabular-nums">
-                {result.status === "finished" || result.status === "FIN" || !result.status
+                {isDisqualified(result) ||
+                result.status === "finished" ||
+                result.status === "FIN" ||
+                !result.status
                   ? formatDuration(result.finishTimeSeconds)
                   : result.status}
-                {bestIds.has(result.resultId) ? (
+                {isDisqualified(result) ? <span aria-label="Disqualified result">*</span> : null}
+                {!isDisqualified(result) && bestIds.has(result.resultId) ? (
                   <span
                     className="ml-2 rounded bg-accent-soft px-1.5 py-0.5 text-xs font-semibold text-accent"
                     aria-label="Personal best"
@@ -96,10 +113,15 @@ export function CompactResultsTable({
                   </span>
                 ) : null}
                 <span className="block text-[10px] font-normal text-subtle">
-                  {timingBasis(result)}
+                  {isDisqualified(result) ? "Original time · disqualified" : timingBasis(result)}
                 </span>
               </td>
-              <td className="px-3 py-2 tabular-nums">{result.overallPlace ?? "—"}</td>
+              <td className="px-3 py-2 tabular-nums">
+                {result.overallPlace ?? "—"}
+                {isDisqualified(result) ? (
+                  <span className="block text-[10px] text-subtle">Original · void</span>
+                ) : null}
+              </td>
               <td className="px-3 py-2 text-xs">{result.category || "—"}</td>
               <td className="px-3 py-2">
                 {result.sourceUrls.length ? (

@@ -1,6 +1,7 @@
 import type { ProfileResult } from "./profile-records";
 import { countryFlag } from "./country-flags.ts";
 import { eligiblePerformance, performanceGroup } from "./profile-records.ts";
+import { isDisqualified } from "./result-details.ts";
 
 const DAY = 86_400_000;
 const RUNNING_SPORTS = new Set(["running", "athletics", "parkrun"]);
@@ -17,6 +18,7 @@ export function isCompletedResult(result: ProfileResult, today = new Date()): bo
   const partialYear = /^\d{4}$/.test(result.eventDate) ? Number(result.eventDate) : null;
   return (
     ["finished", "fin"].includes(result.status.trim().toLowerCase()) &&
+    !isDisqualified(result) &&
     !result.conflicting &&
     (day != null
       ? day <= today.getTime()
@@ -108,7 +110,7 @@ export function buildProfileAchievements(results: ProfileResult[], today = new D
   const finishes: ProfileResult[] = [];
   for (const group of editions.values()) {
     // Never hide a conflicting source by selecting whichever row looks like a finish.
-    if (group.some((r) => r.conflicting)) continue;
+    if (group.some((r) => r.conflicting || isDisqualified(r))) continue;
     const outcomes = new Set(
       group.map((r) =>
         JSON.stringify([

@@ -28,6 +28,8 @@ import {
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 
 import { findPersonalBests, timingBasis } from "@/lib/athrecs/profile-records";
+import { isDisqualified } from "@/lib/athrecs/result-details";
+import { ResultDisqualification } from "./ResultDisqualification";
 
 type AthleteResult = AthleteAccountData["claimedResults"][number];
 type ResultViewMode = "list" | "cards";
@@ -363,6 +365,7 @@ export function AthleteResultsSection({
               >
                 <div className="min-w-0">
                   <p className="truncate text-sm font-semibold text-fg">{result.eventName}</p>
+                  <ResultDisqualification decision={result.details?.disqualification} />
                   <p className="mt-0.5 text-xs text-muted">
                     {formatRaceDateShort(result.eventDate)} · {result.distanceCode} ·{" "}
                     {result.athleteName}
@@ -370,6 +373,7 @@ export function AthleteResultsSection({
                 </div>
                 <p className="font-semibold tabular-nums text-fg">
                   {formatDuration(result.finishTimeSeconds)}
+                  {isDisqualified(result) ? <span aria-label="Disqualified result">*</span> : null}
                 </p>
                 <Button
                   type="button"
@@ -463,17 +467,20 @@ function ResultCardGrid(props: ResultCollectionProps) {
                   {result.category ? ` · ${result.category}` : ""}
                 </p>
                 <p className="mt-2 text-xs text-subtle">{result.athleteName}</p>
+                <ResultDisqualification decision={result.details?.disqualification} />
               </div>
             </div>
             <div className="text-right">
               <p className="font-semibold tabular-nums text-fg">
                 {formatDuration(result.finishTimeSeconds)}
-                {props.personalBestIds?.has(result.resultId) ? (
+                {isDisqualified(result) ? <span aria-label="Disqualified result">*</span> : null}
+                {!isDisqualified(result) && props.personalBestIds?.has(result.resultId) ? (
                   <span className="ml-2 text-xs text-accent">PB</span>
                 ) : null}
               </p>
               <p className="mt-1 text-xs text-muted">
                 {result.overallPlace != null ? `Place ${result.overallPlace}` : "Place unavailable"}
+                {isDisqualified(result) ? " · original, void" : ""}
               </p>
             </div>
           </div>

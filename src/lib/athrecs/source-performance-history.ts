@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { disqualificationSchema } from "./result-details.ts";
 
 // Text fields deliberately retain decimal precision, field marks, heat positions,
 // non-finishes and source annotations; never coerce these into integer seconds.
@@ -19,6 +20,7 @@ export const sourcePerformanceSchema = z.object({
   meeting: z.string(),
   sourceUrls: z.array(sourceUrl),
   labels: z.array(z.string()),
+  disqualification: disqualificationSchema.optional(),
 });
 export type SourcePerformance = z.infer<typeof sourcePerformanceSchema>;
 export const sourceHistorySchema = z.object({
