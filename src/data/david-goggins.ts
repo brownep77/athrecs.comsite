@@ -714,7 +714,7 @@ export const davidGogginsAthletes: AthleteSeed[] = [
     nationality: "American",
     nation: "United States",
     continent: "North America",
-    bio: "American endurance runner and author competing in road and trail ultramarathons. This partial running history includes 47 source-checked finishes, five DNFs and one DNS from 2006–2025, plus two timed-distance performances from 2005 and 2007 shown separately. Distances are nominal race categories; trail course lengths can vary. Nine further entries remain under review.",
+    bio: "American endurance runner and author competing in road and trail ultramarathons. This partial running history includes 47 source-checked finishes, five DNFs and one DNS from 2006–2025, plus two timed-distance performances from 2005 and 2007 shown separately. Nine additional entries are published as unverified, with unresolved details explained below. Distances are nominal race categories; trail course lengths can vary.",
     preferred_distance: "Ultramarathon",
     source_url: "https://davidgoggins.com/athletic-achievements/",
     profile_type: "Public figure",

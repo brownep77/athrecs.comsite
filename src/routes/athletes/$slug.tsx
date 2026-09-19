@@ -20,6 +20,8 @@ import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-a
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
+import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
+import { davidGogginsUnverifiedRecords } from "@/data/david-goggins-unverified";
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
@@ -105,9 +107,13 @@ export const Route = createFileRoute("/athletes/$slug")({
     const title = isPublicFigure
       ? `${athlete.display_name} ${resultKind} | ${SITE_NAME}`
       : `${athlete.display_name} athlete profile | ${SITE_NAME}`;
-    const description = isPublicFigure
-      ? `${athlete.display_name}'s source-checked race results, finish times and endurance achievements on ATHRECS. ${results.length} verified result${results.length === 1 ? "" : "s"} listed.`
-      : `${athlete.display_name}'s athlete profile, club and race results on ATHRECS.`;
+    const unverifiedCount =
+      athlete.slug === "david-goggins" ? davidGogginsUnverifiedRecords.length : 0;
+    const description = unverifiedCount
+      ? `${athlete.display_name}'s running history on ATHRECS: ${results.length} source-checked records and ${unverifiedCount} unverified entries, with source links and unresolved details.`
+      : isPublicFigure
+        ? `${athlete.display_name}'s source-checked race results, finish times and endurance achievements on ATHRECS. ${results.length} verified result${results.length === 1 ? "" : "s"} listed.`
+        : `${athlete.display_name}'s athlete profile, club and race results on ATHRECS.`;
     const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
 
     return {
@@ -323,6 +329,14 @@ function AthletePage() {
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="accent">{results.length} results</Badge>
+          {athlete.slug === "david-goggins" ? (
+            <a
+              href="#unverified-results"
+              className="inline-flex items-center text-xs text-accent underline"
+            >
+              {davidGogginsUnverifiedRecords.length} unverified entries
+            </a>
+          ) : null}
           {athlete.profile_roles
             ?.filter(
               (role: string) =>
@@ -468,6 +482,7 @@ function AthletePage() {
           </p>
         </TabsContent>
       </Tabs>
+      <UnverifiedRaceHistory slug={athlete.slug} />
     </div>
   );
 }
