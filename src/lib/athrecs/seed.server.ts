@@ -21,7 +21,7 @@ import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
-const PUBLIC_FIGURE_SEED_VERSION = "athrecs-david-goggins-unverified-2026-09-19-v1";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-david-goggins-sunmart-infinitus-2026-09-19-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 const DEV_PREVIEW_USER_ID = "dev-user";
@@ -1389,6 +1389,8 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       result.status && !["finished", "FIN"].includes(result.status)
         ? null
         : (result.finishTimeSeconds ?? parseTimeToSeconds(result.time)),
+      result.chipTimeSeconds ?? null,
+      result.gunTimeSeconds ?? null,
       result.place,
       result.category ?? null,
       result.ageOnDay ?? null,
@@ -1407,6 +1409,8 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       "athlete_id",
       "status",
       "finish_time_seconds",
+      "chip_time_seconds",
+      "gun_time_seconds",
       "overall_place",
       "category",
       "age_on_day",
@@ -1417,6 +1421,8 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
     `on conflict (edition_id, athlete_id) do update set
       status = excluded.status,
       finish_time_seconds = excluded.finish_time_seconds,
+      chip_time_seconds = coalesce(excluded.chip_time_seconds, results.chip_time_seconds),
+      gun_time_seconds = coalesce(excluded.gun_time_seconds, results.gun_time_seconds),
       overall_place = excluded.overall_place,
       category = excluded.category,
       age_on_day = excluded.age_on_day,

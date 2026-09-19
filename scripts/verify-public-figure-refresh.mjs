@@ -33,17 +33,18 @@ try {
     select r.id as "resultId", ed.id as "editionId", e.slug as "eventSlug", e.name as "eventName",
       e.sport, e.surface, e.country, ed.event_date::text as "eventDate",
       ed.distance_code as "distanceCode", ed.distance_km as "distanceKm",
-      r.status, r.finish_time_seconds as "finishTimeSeconds", r.overall_place as "overallPlace"
+      r.status, r.finish_time_seconds as "finishTimeSeconds", r.overall_place as "overallPlace",
+      r.chip_time_seconds as "chipTimeSeconds", r.gun_time_seconds as "gunTimeSeconds"
     from results r join athletes a on a.id=r.athlete_id
     join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
     where a.slug='david-goggins'
   `;
-  assert.equal(gogginsRows.length, 53);
+  assert.equal(gogginsRows.length, 55);
   const { findPersonalBests } = await server.ssrLoadModule("/src/lib/athrecs/profile-records.ts");
   const { buildProfileAchievements } = await server.ssrLoadModule(
     "/src/lib/athrecs/profile-achievements.ts",
   );
-  assert.equal(buildProfileAchievements(gogginsRows).finishes.length, 47);
+  assert.equal(buildProfileAchievements(gogginsRows).finishes.length, 49);
   assert.equal(gogginsRows.filter((r) => r.status === "DNF").length, 5);
   assert.equal(gogginsRows.filter((r) => r.status === "DNS").length, 1);
   assert(
@@ -61,11 +62,30 @@ try {
     gogginsRows.find((r) => r.eventSlug === "dont-fence-me-in-trail-run").eventDate,
     "2018-05-12",
   );
-  assert.equal(gogginsRows.find((r) => r.eventSlug === "infinitus").status, "DNS");
+  assert.equal(
+    gogginsRows.find((r) => r.eventSlug === "infinitus" && r.eventDate === "2018-06-01").status,
+    "DNS",
+  );
   assert.equal(
     gogginsRows.find((r) => r.eventSlug === "across-florida-200").surface,
     "Trail / Road",
   );
+  const sunmart = gogginsRows.find((r) => r.eventSlug === "sunmart-texas-trails");
+  assert.equal(sunmart.eventDate, "2006-12-09");
+  assert.equal(sunmart.overallPlace, 25);
+  assert.equal(sunmart.finishTimeSeconds, 27873);
+  assert.equal(sunmart.chipTimeSeconds, 27873);
+  assert.equal(sunmart.gunTimeSeconds, 27877);
+  const { timingBasis } = await server.ssrLoadModule("/src/lib/athrecs/profile-records.ts");
+  assert.equal(timingBasis(sunmart), "Chip");
+  assert(!findPersonalBests(gogginsRows).some((r) => r.resultId === sunmart.resultId));
+  const infinitus88 = gogginsRows.find(
+    (r) => r.eventSlug === "infinitus" && r.eventDate === "2016-05-28",
+  );
+  assert.equal(infinitus88.distanceCode, "88K");
+  assert.equal(infinitus88.finishTimeSeconds, 43260);
+  assert.equal(infinitus88.overallPlace, 1);
+  assert(!findPersonalBests(gogginsRows).some((r) => r.resultId === infinitus88.resultId));
   const { davidGogginsTimedPerformances } = await server.ssrLoadModule(
     "/src/data/david-goggins.ts",
   );
@@ -80,8 +100,11 @@ try {
   const { davidGogginsUnverifiedRecords } = await server.ssrLoadModule(
     "/src/data/david-goggins-unverified.ts",
   );
-  assert.equal(davidGogginsUnverifiedRecords.length, 9);
-  assert.equal(new Set(davidGogginsUnverifiedRecords.map((r) => r.id)).size, 9);
+  assert.equal(davidGogginsUnverifiedRecords.length, 7);
+  assert.equal(new Set(davidGogginsUnverifiedRecords.map((r) => r.id)).size, 7);
+  assert(
+    !davidGogginsUnverifiedRecords.some((r) => ["sunmart-2006", "infinitus-2016"].includes(r.id)),
+  );
   assert.equal(
     gogginsRows.length +
       davidGogginsTimedPerformances.length +
@@ -89,7 +112,7 @@ try {
     64,
   );
   const [gogginsBio] = await sql`select bio from athletes where slug='david-goggins'`;
-  assert.match(gogginsBio.bio, /Nine additional entries are published as unverified/);
+  assert.match(gogginsBio.bio, /Seven additional entries are published as unverified/);
   assert.equal(
     davidGogginsUnverifiedRecords.find((r) => r.id === "hurt-2012").reportedTime,
     "Time and finish status unknown",
@@ -135,13 +158,27 @@ try {
   await sql`update app_meta set value='athrecs-professional-athletes-wave-1-v1' where key='public_figures_catalogue_version'`;
   await sql`update athletes set bio='Previous editorial biography' where slug='mo-farah'`;
 
+  await sql`delete from results where id in (${sunmart.resultId}, ${infinitus88.resultId})`;
   globalThis.__athrecsFullSeedPromise__ = undefined;
   await ensureAthrecsSeeded();
+  const promoted = await sql`
+    select e.slug, ed.event_date::text as date, r.finish_time_seconds, r.chip_time_seconds,
+      r.gun_time_seconds, r.overall_place, ed.notes
+    from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
+    where r.athlete_id=(select id from athletes where slug='david-goggins')
+      and (e.slug='sunmart-texas-trails' or (e.slug='infinitus' and ed.event_date='2016-05-28'))
+    order by e.slug
+  `;
+  assert.equal(promoted.length, 2, "Upgrade adds both previously unverified results once");
+  assert.equal(promoted[1].chip_time_seconds, 27873);
+  assert.equal(promoted[1].gun_time_seconds, 27877);
+  assert.match(promoted[1].notes, /7:44:33 chip, 7:44:37 gun/);
+  assert.match(promoted[0].notes, /without claiming second-level precision/);
   const refreshed = await sql`select bio from athletes where slug='mo-farah'`;
   assert.equal(refreshed[0].bio, moFarahAthlete.bio);
   const version =
     await sql`select value from app_meta where key='public_figures_catalogue_version'`;
-  assert.equal(version[0].value, "athrecs-david-goggins-unverified-2026-09-19-v1");
+  assert.equal(version[0].value, "athrecs-david-goggins-sunmart-infinitus-2026-09-19-v1");
   assert.deepEqual(
     await sql`select key, value from app_meta where key <> 'public_figures_catalogue_version' order by key`,
     markers,
@@ -190,7 +227,7 @@ try {
     (
       await sql`select count(*)::int as n from results r join athletes a on a.id=r.athlete_id where a.slug='david-goggins'`
     )[0].n,
-    53,
+    55,
   );
   assert.deepEqual(
     await sql`select a.profile_type, a.date_of_birth, i.athlete_number::text as number from athletes a join athlete_resolved_ids i on i.athlete_id=a.id where a.slug='david-goggins'`,

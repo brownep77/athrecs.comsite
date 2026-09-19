@@ -292,8 +292,9 @@ try {
   assert.equal(accountProfile.sourceHistories[0].externalId, "history-linked");
   assert.equal(accountProfile.sourceHistories[0].complete, false);
   const publicProfile = await rpc("api", "getAthleteBySlug", "compact-linked-athlete");
-  assert(
-    !("sourceHistories" in publicProfile),
+  assert.deepEqual(
+    publicProfile.sourceHistories,
+    [],
     "Private source archives must not be exposed through public profiles",
   );
   assert.equal(await rpc("api", "getAthleteBySlug", "compact-private-directory"), null);
