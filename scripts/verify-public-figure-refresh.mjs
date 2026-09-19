@@ -109,6 +109,48 @@ try {
   assert.equal(gogginsIdentity[0].date_of_birth, null);
   assert.match(gogginsIdentity[0].number, /^\d+$/);
 
+  const richRollRows = await sql`
+    select e.slug as "eventSlug", e.name as "eventName", e.sport, e.surface,
+      ed.event_date::text as "eventDate", ed.distance_code as "distanceCode",
+      ed.distance_km as "distanceKm", r.status,
+      r.finish_time_seconds as "finishTimeSeconds", r.overall_place as "overallPlace",
+      r.chip_time_seconds as "chipTimeSeconds", r.gun_time_seconds as "gunTimeSeconds",
+      r.bib, r.gender_place as "genderPlace", r.category_place as "categoryPlace", r.age_on_day
+    from results r join athletes a on a.id=r.athlete_id
+    join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
+    where a.slug='rich-roll'
+  `;
+  assert.equal(richRollRows.length, 9, "Seven timed rows and two documented non-finishes");
+  assert.equal(buildProfileAchievements(richRollRows).finishes.length, 7);
+  assert.equal(richRollRows.filter((r) => r.status === "DNF").length, 2);
+  assert(
+    richRollRows
+      .filter((r) => r.status === "DNF")
+      .every(
+        (r) =>
+          r.finishTimeSeconds === null &&
+          r.overallPlace === null &&
+          r.chipTimeSeconds === null &&
+          r.gunTimeSeconds === null,
+      ),
+  );
+  const longBeach = richRollRows.find((r) => r.eventSlug === "long-beach-marathon");
+  assert.equal(longBeach.eventDate, "2007-10-14");
+  assert.equal(longBeach.finishTimeSeconds, 13637);
+  assert.equal(longBeach.chipTimeSeconds, 13637);
+  assert.equal(longBeach.gunTimeSeconds, 13654);
+  assert.equal(longBeach.overallPlace, 332);
+  const miami = richRollRows.find((r) => r.eventSlug === "live-ultimate-seed-food-wine-5k");
+  assert.equal(miami.eventDate, "2017-11-04");
+  assert.equal(miami.chipTimeSeconds, 1543);
+  assert.equal(miami.gunTimeSeconds, 1581);
+  assert.equal(miami.bib, "849");
+  assert.equal(miami.genderPlace, 68);
+  assert.equal(miami.categoryPlace, 5);
+  assert.equal(miami.age_on_day, null, "Do not propagate the archive's conflicting age");
+  assert(!richRollRows.some((r) => /malibu|epic5/.test(r.eventSlug)));
+  assert(findPersonalBests(richRollRows).every((r) => r.status === "finished"));
+
   // Reproduce the production redirects that blocked the first road import.
   const renamedEvents = [];
   for (const [sourceSlug, currentSlug] of [
@@ -141,7 +183,7 @@ try {
   assert.equal(refreshed[0].bio, moFarahAthlete.bio);
   const version =
     await sql`select value from app_meta where key='public_figures_catalogue_version'`;
-  assert.equal(version[0].value, "athrecs-david-goggins-unverified-2026-09-19-v1");
+  assert.equal(version[0].value, "athrecs-rich-roll-additional-records-2026-09-19-v1");
   assert.deepEqual(
     await sql`select key, value from app_meta where key <> 'public_figures_catalogue_version' order by key`,
     markers,
@@ -195,6 +237,21 @@ try {
   assert.deepEqual(
     await sql`select a.profile_type, a.date_of_birth, i.athlete_number::text as number from athletes a join athlete_resolved_ids i on i.athlete_id=a.id where a.slug='david-goggins'`,
     gogginsIdentity,
+  );
+  const richRollRefreshed = await sql`
+    select r.chip_time_seconds, r.gun_time_seconds, r.bib, r.category_place
+    from results r join athletes a on a.id=r.athlete_id
+    join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
+    where a.slug='rich-roll' and e.slug='live-ultimate-seed-food-wine-5k'
+  `;
+  assert.deepEqual(richRollRefreshed, [
+    { chip_time_seconds: 1543, gun_time_seconds: 1581, bib: "849", category_place: 5 },
+  ]);
+  assert.equal(
+    (
+      await sql`select count(*)::int as n from results r join athletes a on a.id=r.athlete_id where a.slug='rich-roll'`
+    )[0].n,
+    9,
   );
   console.log(
     "Public-figure refresh passed: source results follow renamed production events, retired URLs remain guarded, catalogue markers stay unchanged and cold starts do not replay the import.",
