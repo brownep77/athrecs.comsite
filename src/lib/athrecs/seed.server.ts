@@ -21,7 +21,7 @@ import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
-const PUBLIC_FIGURE_SEED_VERSION = "athrecs-david-goggins-unverified-2026-09-19-v1";
+const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 const DEV_PREVIEW_USER_ID = "dev-user";
@@ -1389,8 +1389,13 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       result.status && !["finished", "FIN"].includes(result.status)
         ? null
         : (result.finishTimeSeconds ?? parseTimeToSeconds(result.time)),
+      result.chipTimeSeconds ?? null,
+      result.gunTimeSeconds ?? null,
+      result.bib ?? null,
       result.place,
+      result.genderPlace ?? null,
       result.category ?? null,
+      result.categoryPlace ?? null,
       result.ageOnDay ?? null,
       result.resultSource ?? "official",
       result.source,
@@ -1407,8 +1412,13 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
       "athlete_id",
       "status",
       "finish_time_seconds",
+      "chip_time_seconds",
+      "gun_time_seconds",
+      "bib",
       "overall_place",
+      "gender_place",
       "category",
+      "category_place",
       "age_on_day",
       "result_source",
       "source_url",
@@ -1417,8 +1427,17 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
     `on conflict (edition_id, athlete_id) do update set
       status = excluded.status,
       finish_time_seconds = excluded.finish_time_seconds,
+      chip_time_seconds = case when excluded.status in ('finished', 'FIN')
+        then coalesce(excluded.chip_time_seconds, results.chip_time_seconds) else null end,
+      gun_time_seconds = case when excluded.status in ('finished', 'FIN')
+        then coalesce(excluded.gun_time_seconds, results.gun_time_seconds) else null end,
+      bib = coalesce(excluded.bib, results.bib),
       overall_place = excluded.overall_place,
+      gender_place = case when excluded.status in ('finished', 'FIN')
+        then coalesce(excluded.gender_place, results.gender_place) else null end,
       category = excluded.category,
+      category_place = case when excluded.status in ('finished', 'FIN')
+        then coalesce(excluded.category_place, results.category_place) else null end,
       age_on_day = excluded.age_on_day,
       result_source = excluded.result_source,
       source_url = excluded.source_url`,
