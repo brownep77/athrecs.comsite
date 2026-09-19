@@ -217,7 +217,7 @@ assert.equal(
 );
 assert.equal(
   results.filter((result) => result.athleteSlug === "david-goggins").length,
-  53,
+  55,
   "David Goggins's sourced running history is recoverable from the canonical catalogue",
 );
 assert(

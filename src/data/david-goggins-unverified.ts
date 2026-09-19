@@ -21,24 +21,7 @@ export const davidGogginsUnverifiedRecords = [
       { label: "UTMB profile", url: "https://utmb.world/runner/17272.david.goggins" },
     ],
   },
-  {
-    id: "infinitus-2016",
-    event: "Infinitus",
-    distance: "88K",
-    location: "Ripton, VT, United States",
-    reportedDate: "May 2016 · exact start date disputed",
-    reportedTime: "12:01:00",
-    reportedPlace: "1st overall",
-    uncertainty:
-      "UltraSignup dates the festival to 19 May; DUV places the 88K on 28–29 May. The original 88K start schedule or dated results are still needed.",
-    sources: [
-      {
-        label: "UltraSignup results",
-        url: "https://ultrasignup.com/results_event.aspx?did=49714#id5403",
-      },
-      { label: "DUV results", url: "https://statistik.d-u-v.org/getresultevent.php?event=41722" },
-    ],
-  },
+
   {
     id: "hurt-2012",
     event: "HURT 100",
@@ -138,20 +121,5 @@ export const davidGogginsUnverifiedRecords = [
     uncertainty:
       "The linked athlete history reports this result, but an independent organiser or timing table confirming identity, category and placing was not recovered.",
     sources: [{ label: "UltraSignup history", url: history }],
-  },
-  {
-    id: "sunmart-2006",
-    event: "Sunmart Texas Trails",
-    distance: "50 miles",
-    location: "Huntsville, TX, United States",
-    reportedDate: "December 2006 · 1 / 9 December disputed",
-    reportedTime: "7:44:33",
-    reportedPlace: "25th overall",
-    uncertainty:
-      "UltraSignup history lists 1 December and 7:44:33. DUV's event table lists 9 December and 7:44:38, while its athlete history has 7:44:33. Original dated timing results are still needed.",
-    sources: [
-      { label: "UltraSignup history", url: history },
-      { label: "DUV results", url: "https://statistik.d-u-v.org/getresultevent.php?event=712" },
-    ],
   },
 ] as const;

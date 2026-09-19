@@ -1,8 +1,44 @@
 import type { AthleteSeed, Edition, ResultSeed, Series } from "./types";
 
-// Source-checked running history, 18 September 2026. This is a partial career record.
+// Source-checked running history, updated 19 September 2026. This is a partial career record.
 // Nominal race categories are not certified measurements; see docs/david-goggins-records.md.
 export const davidGogginsRecords = [
+  {
+    eventSlug: "sunmart-texas-trails",
+    eventName: "Sunmart Texas Trails",
+    location: "Huntsville, TX",
+    distance: "50 Mile",
+    distanceKm: 80.4672,
+    date: "2006-12-09",
+    time: "7:44:33",
+    chipTimeSeconds: 27873,
+    gunTimeSeconds: 27877,
+    place: 25,
+    status: "finished",
+    surface: "Trail",
+    resultSource: "RunFAR / MyChipTime",
+    source: "https://mychiptime.com/searchevent.php?id=40&bib=214",
+    notes:
+      "RunFAR / MyChipTime, bib 214: 7:44:33 chip, 7:44:37 gun; 25th of 193 in the 50-mile results. DUV's 7:44:38 is not the primary gun time. The legacy detail pop-up mislabels age 31 as overall place; the full results table confirms 25th.",
+  },
+  {
+    eventSlug: "infinitus",
+    eventName: "Infinitus",
+    location: "Goshen, VT",
+    distance: "88K",
+    distanceKm: 88,
+    date: "2016-05-28",
+    // Organiser's PDF reports hours:minutes; 12:01:00 is its normalized representation.
+    time: "12:01:00",
+    place: 1,
+    status: "finished",
+    surface: "Trail",
+    resultSource: "The Endurance Society (archived original results)",
+    source:
+      "https://web.archive.org/web/20160615011946id_/http://www.endurancesociety.org:80/uploads/3/9/0/2/39026079/infinitus_2016_results_-_88k.pdf",
+    notes:
+      "Original organiser PDF: INFINITUS 2016 - 88K; May 28th, 2016 - Goshen, VT; David Goggins, 1st, 12:01 (hours:minutes). Stored as 12:01:00 without claiming second-level precision. The 19 May festival start is not this race's start date.",
+  },
   {
     eventSlug: "across-florida-200",
     eventName: "Across Florida 200",
@@ -714,12 +750,12 @@ export const davidGogginsAthletes: AthleteSeed[] = [
     nationality: "American",
     nation: "United States",
     continent: "North America",
-    bio: "American endurance runner and author competing in road and trail ultramarathons. This partial running history includes 47 source-checked finishes, five DNFs and one DNS from 2006–2025, plus two timed-distance performances from 2005 and 2007 shown separately. Nine additional entries are published as unverified, with unresolved details explained below. Distances are nominal race categories; trail course lengths can vary.",
+    bio: "American endurance runner and author competing in road and trail ultramarathons. This partial running history includes 49 source-checked finishes, five DNFs and one DNS from 2006–2025, plus two timed-distance performances from 2005 and 2007 shown separately. Seven additional entries are published as unverified, with unresolved details explained below. Distances are nominal race categories; trail course lengths can vary. Infinitus 88K 2016 is recorded to the organiser's minute precision (12 hours 1 minute).",
     preferred_distance: "Ultramarathon",
     source_url: "https://davidgoggins.com/athletic-achievements/",
     profile_type: "Public figure",
     profile_roles: ["Ultrarunner", "Road running", "Trail running", "Author"],
-    profile_source_checked_at: "2026-09-18",
+    profile_source_checked_at: "2026-09-19",
     profile_links: [
       {
         label: "Official athletic achievements",
@@ -781,7 +817,8 @@ export const davidGogginsEditions: Edition[] = davidGogginsRecords.map((r) => ({
   source: r.source,
   resultsAccess: "public",
   notes:
-    "Nominal result category; not a certified course measurement. Source-checked David Goggins record; partial career coverage.",
+    "Nominal result category; not a certified course measurement. Source-checked David Goggins record; partial career coverage." +
+    ("notes" in r ? ` ${r.notes}` : ""),
 }));
 
 export const davidGogginsResults: ResultSeed[] = davidGogginsRecords.map((r) => ({
@@ -797,6 +834,8 @@ export const davidGogginsResults: ResultSeed[] = davidGogginsRecords.map((r) => 
     : {}),
   category: "Men",
   resultSource: "resultSource" in r ? r.resultSource : "UltraSignup",
+  ...("chipTimeSeconds" in r ? { chipTimeSeconds: r.chipTimeSeconds } : {}),
+  ...("gunTimeSeconds" in r ? { gunTimeSeconds: r.gunTimeSeconds } : {}),
   source: r.source,
 }));
 
