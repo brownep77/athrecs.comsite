@@ -5,6 +5,15 @@ const ULTRAMAN_2008_RESULTS = "https://jtltiming.com/results/uman08.html";
 const ULTRAMAN_2009_RESULTS =
   "https://ultramanlive.com/blog/history/archived-official-results/2009-main-results-page/";
 const OTILLO_2017_RESULTS = "https://live.eqtiming.com/37132";
+const LONG_BEACH_2007_RESULTS =
+  "https://marathonguide.com/print/long-beach-marathon-7/results/?subevent=699090&gender=all&age_group=all&page=1&limit=10&order_by=over_all_place&order_dir=asc&year=2007&last_name=Roll";
+const MIAMI_2017_RESULTS =
+  "https://runsignup.com/Race/Results/49619/IndividualResult/PKLQ?resultSetId=87485#U22139880";
+const WILDFLOWER_2007_ARCHIVE =
+  "https://archive.latriclub.com/racing/results/WildflowerLong2007.htm";
+const WILDFLOWER_2007_REPORT = "https://richroll.com/blog/what-now/";
+const ULTRAMAN_2011_REPORT = "https://richroll.com/blog/dreamdeferred/";
+const EPIC5_REPORT = "https://richroll.com/blog/some-brief-ruminations-on-epic5/";
 
 export const publicFigureAthletes: AthleteSeed[] = [
   {
@@ -22,33 +31,76 @@ export const publicFigureAthletes: AthleteSeed[] = [
     nationality: "American",
     nation: "United States",
     continent: "North America",
-    bio: "American ultra-endurance athlete, author and host of the Rich Roll Podcast. His source-checked race history includes two Ultraman World Championship finishes and the 2017 ÖTILLÖ Swimrun World Championship.",
+    bio: "American ultra-endurance athlete, author and host of the Rich Roll Podcast. His documented race history includes the 2007 Long Beach Marathon, two Ultraman World Championship finishes, the 2017 ÖTILLÖ Swimrun World Championship and a Miami 5K. His own race reports also document non-finishes at Wildflower in 2007 and Ultraman in 2011.",
     race_entry_name: "Richard Roll",
     preferred_distance: "Ultra endurance",
     athrecs_id: "ATH-US-PF-0001",
     notes:
-      "Only source-checked competitive results are published. EPIC5 is listed as a notable challenge rather than a timed race result.",
+      "Results are checked against published timing archives or linked first-person race reports. Ultraman running stages appear alongside their overall events. EPIC5 is a challenge achievement. The 2017 Miami 5K source records 25:43.1 chip and 26:20.7 gun; race-table times are rounded to whole seconds. Its listed age of 52 conflicts with his birth year, so age is omitted from that result.",
     source_url: RICH_ROLL_BIO,
     profile_type: "Public figure",
     profile_roles: ["Podcaster", "Author", "Ultra-endurance athlete"],
-    profile_source_checked_at: "2026-08-22",
+    profile_source_checked_at: "2026-09-19",
     profile_links: [
       { label: "Official profile", url: RICH_ROLL_BIO },
       { label: "Rich Roll Podcast", url: "https://richroll.com/podcast/" },
+      { label: "Wildflower and first marathon account", url: WILDFLOWER_2007_REPORT },
+      { label: "Ultraman 2011 race report", url: ULTRAMAN_2011_REPORT },
     ],
     notable_achievements: [
       {
         year: 2010,
         title: "EPIC5 Challenge",
         detail:
-          "Completed five Ironman-distance triathlons on five Hawaiian islands in under a week with Jason Lester.",
-        source_url: RICH_ROLL_BIO,
+          "Completed five Ironman-distance triathlons in under a week with Jason Lester, on Kauai, Oahu, Molokai, Maui and the Big Island. His account describes a shared endurance challenge, with travel between islands.",
+        source_url: EPIC5_REPORT,
+      },
+      {
+        year: 2011,
+        title: "Ultraman opening swim leader",
+        detail:
+          "Led the opening 10 km swim at the Ultraman World Championships. He later withdrew on day two; the overall result is recorded as DNF.",
+        source_url: ULTRAMAN_2011_REPORT,
       },
     ],
   },
 ];
 
 export const richRollSeries: Series[] = [
+  {
+    slug: "wildflower-triathlon",
+    name: "Wildflower Triathlon",
+    sport: "Triathlon",
+    country: "United States",
+    county: "California",
+    city: "Lake San Antonio",
+    area: "Lake San Antonio",
+    surface: "Mixed",
+    distances: ["70.3mi Triathlon"],
+    summary: "Long-course triathlon at Lake San Antonio, California.",
+    description:
+      "The archived 2007 long course comprised a 1.2-mile swim, 56-mile bike and 13.1-mile run.",
+    organiser: "Wildflower Triathlon",
+    website: WILDFLOWER_2007_ARCHIVE,
+    source_url: WILDFLOWER_2007_ARCHIVE,
+  },
+  {
+    slug: "live-ultimate-seed-food-wine-5k",
+    name: "Live Ultimate Seed Food & Wine 5K Run/Walk",
+    sport: "Running",
+    country: "United States",
+    county: "Florida",
+    city: "Miami",
+    area: "Miami",
+    surface: "Road",
+    distances: ["5K"],
+    summary: "Miami 5K run and walk held during the Seed Food & Wine Festival.",
+    description:
+      "The 2017 festival 5K was held on 4 November, with results published on RunSignup by Race Day Professionals.",
+    organiser: "Live Ultimate / Seed Food & Wine Festival",
+    website: "https://runsignup.com/Race/FL/Miami/LiveUltimateSeedFoodWine5K",
+    source_url: "https://runsignup.com/Race/FL/Miami/LiveUltimateSeedFoodWine5K",
+  },
   {
     slug: "ultraman-world-championship",
     name: "Ultraman World Championship",
@@ -87,6 +139,50 @@ export const richRollSeries: Series[] = [
 ];
 
 export const richRollEditions: Edition[] = [
+  {
+    seriesSlug: "wildflower-triathlon",
+    date: "2007-05-05",
+    distance: "70.3mi Triathlon",
+    distanceKm: 113.137,
+    status: "Finished",
+    source: WILDFLOWER_2007_ARCHIVE,
+    notes:
+      "Date and course verified in the LA Tri Club archive. Rich Roll's own account documents a DNF about half a mile into the run; no finish time is claimed.",
+  },
+  {
+    seriesSlug: "long-beach-marathon",
+    date: "2007-10-14",
+    distance: "Marathon",
+    distanceKm: 42.195,
+    status: "Finished",
+    source: LONG_BEACH_2007_RESULTS,
+    notes:
+      "MarathonGuide archive: Richard Roll, male age 40, Calabasas, California. Chip 3:47:17; gun 3:47:34; overall 332; division 54. Identity corroborated by his own account of running Long Beach after Wildflower 2007.",
+    resultsOfficialUrl: LONG_BEACH_2007_RESULTS,
+    resultsAccess: "public",
+  },
+  {
+    seriesSlug: "ultraman-world-championship",
+    date: "2011-11-25",
+    distance: "320mi Ultra Triathlon",
+    distanceKm: 515,
+    status: "Finished",
+    source: ULTRAMAN_2011_REPORT,
+    notes:
+      "Three-day event, 25–27 November 2011. Rich Roll's first-person report documents withdrawal on day two after leading the opening swim. DNF has no overall finish time or place.",
+  },
+  {
+    seriesSlug: "live-ultimate-seed-food-wine-5k",
+    date: "2017-11-04",
+    distance: "5K",
+    distanceKm: 5,
+    status: "Finished",
+    source: MIAMI_2017_RESULTS,
+    notes:
+      "Rich Roll, bib 849: chip 25:43.1; gun 26:20.7; overall 85/344, male 68/162 and M50–54 5/16. Database times are rounded to whole seconds. The source's age 52 conflicts with his birth year; age is omitted. Festival coverage identifies the participating athlete and podcaster.",
+    resultsOfficialUrl: MIAMI_2017_RESULTS,
+    resultsAccess: "public",
+  },
   {
     seriesSlug: "ultraman-world-championship",
     date: "2008-11-28",
@@ -145,6 +241,62 @@ export const richRollEditions: Edition[] = [
 ];
 
 export const publicFigureResults: ResultSeed[] = [
+  {
+    eventSlug: "wildflower-triathlon",
+    date: "2007-05-05",
+    distance: "70.3mi Triathlon",
+    athleteSlug: "rich-roll",
+    place: null,
+    time: "DNF",
+    status: "DNF",
+    resultSource: "athlete",
+    source: WILDFLOWER_2007_REPORT,
+  },
+  {
+    eventSlug: "long-beach-marathon",
+    date: "2007-10-14",
+    distance: "Marathon",
+    athleteSlug: "rich-roll",
+    place: 332,
+    time: "3:47:17",
+    finishTimeSeconds: 13_637,
+    chipTimeSeconds: 13_637,
+    gunTimeSeconds: 13_654,
+    status: "finished",
+    categoryPlace: 54,
+    ageOnDay: 40,
+    resultSource: "published",
+    source: LONG_BEACH_2007_RESULTS,
+  },
+  {
+    eventSlug: "ultraman-world-championship",
+    date: "2011-11-25",
+    distance: "320mi Ultra Triathlon",
+    athleteSlug: "rich-roll",
+    place: null,
+    time: "DNF",
+    status: "DNF",
+    resultSource: "athlete",
+    source: ULTRAMAN_2011_REPORT,
+  },
+  {
+    eventSlug: "live-ultimate-seed-food-wine-5k",
+    date: "2017-11-04",
+    distance: "5K",
+    athleteSlug: "rich-roll",
+    place: 85,
+    time: "0:25:43",
+    finishTimeSeconds: 1_543,
+    chipTimeSeconds: 1_543,
+    gunTimeSeconds: 1_581,
+    bib: "849",
+    status: "finished",
+    genderPlace: 68,
+    category: "M50-54",
+    categoryPlace: 5,
+    resultSource: "official",
+    source: MIAMI_2017_RESULTS,
+  },
   {
     eventSlug: "ultraman-world-championship",
     date: "2008-11-28",

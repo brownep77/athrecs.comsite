@@ -199,9 +199,16 @@ const resultKeys = results.map(
 );
 assert.equal(new Set(resultKeys).size, resultKeys.length, "Recoverable result keys must be unique");
 assert.equal(
-  results.filter((result) => !["mo-farah", "david-goggins"].includes(result.athleteSlug)).length,
-  2_599,
+  results.filter(
+    (result) => !["mo-farah", "david-goggins", "rich-roll"].includes(result.athleteSlug),
+  ).length,
+  2_594,
   "Existing canonical retained results changed unexpectedly",
+);
+assert.equal(
+  results.filter((result) => result.athleteSlug === "rich-roll").length,
+  9,
+  "Rich Roll's seven timed rows and two DNFs are recoverable from the canonical catalogue",
 );
 assert.equal(
   results.filter((result) => result.athleteSlug === "mo-farah").length,
