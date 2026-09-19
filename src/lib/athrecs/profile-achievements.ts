@@ -110,7 +110,7 @@ export function buildProfileAchievements(results: ProfileResult[], today = new D
   const finishes: ProfileResult[] = [];
   for (const group of editions.values()) {
     // Never hide a conflicting source by selecting whichever row looks like a finish.
-    if (group.some((r) => r.conflicting)) continue;
+    if (group.some((r) => r.conflicting || isDisqualified(r))) continue;
     const outcomes = new Set(
       group.map((r) =>
         JSON.stringify([

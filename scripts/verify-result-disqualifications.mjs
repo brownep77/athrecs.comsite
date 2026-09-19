@@ -55,6 +55,11 @@ assert.equal(
   2,
   "Conflicting decisions cannot be collapsed away",
 );
+assert.equal(
+  buildProfileAchievements([sample, { ...sample, details: excluded.details }]).finishes.length,
+  0,
+  "A stale duplicate without the decision cannot restore an achievement",
+);
 assert.equal(manifest.results.length, 44);
 assert.equal(manifest.results.filter((r) => r.status === "DQ").length, 12);
 for (const row of manifest.results) {
