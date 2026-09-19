@@ -1,6 +1,10 @@
 # David Goggins running records
 
-Checked 18 September 2026. Updated partial profile: 47 finishes, five DNFs and one DNS, 2006–2025, plus two year-only timed-distance performances (2005 and 2007). Not a complete career history. No account has been claimed or verified on his behalf.
+Sources checked 18 September 2026; publication updated 19 September 2026. Partial profile: 47 source-checked finishes, five DNFs and one DNS, 2006–2025, plus two year-only timed-distance performances (2005 and 2007) and nine unverified entries. Not a complete career history. No account has been claimed or verified on his behalf.
+
+On 19 September, Paul explicitly requested publication of the nine remaining held entries as **unverified**. They now appear in a separate public profile section, with a label on every entry, reported values, source links and the unresolved evidence. They do not enter verified result totals, PBs, medals or achievements. HURT 2012 remains unknown status. Disputed exact dates are displayed as reported alternatives or a month/year, not invented database dates. The 53 existing dated records and their status counts are unchanged; all 64 original source entries are represented across these three sections.
+
+Profile correction audit: there is no dedicated public “Add a correction” form in the current code. Result claiming is available but is not a correction-submission workflow. No correction form or automatic editing permission is implied by the unverified section.
 
 ## Evidence
 
@@ -19,7 +23,7 @@ Distances preserve the nominal result category, converted to km for the existing
 
 ## Review of all 20 held entries
 
-Rechecked 18 September 2026. **Nine dated race-history entries added** (seven finishes, one DNF, one DNS); **two timed-distance marks displayed by year**; **nine entries remain held**. The two timed marks still have unresolved exact dates. This is not a claim that every detail of 11 entries has been independently verified.
+Rechecked 18 September 2026. **Nine dated race-history entries added** (seven finishes, one DNF, one DNS); **two timed-distance marks displayed by year**; **nine entries initially held and subsequently published as unverified on 19 September**. The two timed marks still have unresolved exact dates. This is not a claim that every detail of 11 entries has been independently verified.
 
 ### Added to race history
 
@@ -42,9 +46,9 @@ Rechecked 18 September 2026. **Nine dated race-history entries added** (seven fi
 | UltraCentric Gold Rush, 2007 | 203.5 miles in 48 hours; 1st overall | [UltraSignup event table](https://ultrasignup.com/results_event.aspx?did=13500#id5403) displays 203.5 in the distance result field. [DUV](https://statistik.d-u-v.org/getresultevent.php?event=1287) corroborates with 327.501 km. UltraSignup's 17 November differs from DUV's 16–18 November; the old timing link is no longer a usable results archive. Display year only. |
 | San Diego One Day, 2005 | 101 miles in 24 hours; 37th overall | [UltraSignup event table](https://ultrasignup.com/results_event.aspx?did=14996#id5403) displays 101; [DUV](https://statistik.d-u-v.org/getresultevent.php?event=68) corroborates with 162.543 km and 37th overall. UltraSignup's 1 November differs from DUV's 12–13 November; the American Ultrarunning archive could not be retrieved. Display year only. |
 
-### Still held
+### Published as unverified on 19 September
 
-| Entry | Findings | Evidence needed before publication |
+| Entry | Findings | Evidence still needed for verification |
 | --- | --- | --- |
 | Leadville Trail 100, 2019 | UltraSignup / athlete site 22:55:44; UTMB 22:55:48; DUV 22:55:49. The organiser's [2019 timing link](https://www.athlinks.com/event/33913/results/Event/711340/Results) could not be loaded. | Original timer's chip/gun times and ranking, to explain the discrepancy. |
 | Infinitus 88K, 2016 | [UltraSignup](https://ultrasignup.com/results_event.aspx?did=49714#id5403) lists the festival start, 19 May, with 12:01:00 / 1st. [DUV](https://statistik.d-u-v.org/getresultevent.php?event=41722) lists the 88K on 28–29 May. The linked organiser PDF returns 404; the current registration description has a later year's schedule. | A surviving 2016 88K-specific start schedule or original dated results, rather than the festival start. |

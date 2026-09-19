@@ -77,6 +77,23 @@ try {
     ],
   );
   assert(!gogginsRows.some((r) => /ultracentric|san-diego-1-day/.test(r.eventSlug)));
+  const { davidGogginsUnverifiedRecords } = await server.ssrLoadModule(
+    "/src/data/david-goggins-unverified.ts",
+  );
+  assert.equal(davidGogginsUnverifiedRecords.length, 9);
+  assert.equal(new Set(davidGogginsUnverifiedRecords.map((r) => r.id)).size, 9);
+  assert.equal(
+    gogginsRows.length +
+      davidGogginsTimedPerformances.length +
+      davidGogginsUnverifiedRecords.length,
+    64,
+  );
+  const [gogginsBio] = await sql`select bio from athletes where slug='david-goggins'`;
+  assert.match(gogginsBio.bio, /Nine additional entries are published as unverified/);
+  assert.equal(
+    davidGogginsUnverifiedRecords.find((r) => r.id === "hurt-2012").reportedTime,
+    "Time and finish status unknown",
+  );
   assert(findPersonalBests(gogginsRows).every((r) => r.surface === "Road"));
   assert.equal(gogginsRows.filter((r) => r.eventSlug === "jfk-50-mile").length, 3);
   assert(
@@ -124,7 +141,7 @@ try {
   assert.equal(refreshed[0].bio, moFarahAthlete.bio);
   const version =
     await sql`select value from app_meta where key='public_figures_catalogue_version'`;
-  assert.equal(version[0].value, "athrecs-david-goggins-running-2026-09-18-v2");
+  assert.equal(version[0].value, "athrecs-david-goggins-unverified-2026-09-19-v1");
   assert.deepEqual(
     await sql`select key, value from app_meta where key <> 'public_figures_catalogue_version' order by key`,
     markers,
