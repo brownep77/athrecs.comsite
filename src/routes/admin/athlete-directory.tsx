@@ -1,12 +1,23 @@
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+} from "@/components/ui/alert-dialog";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { UpcomingEventsEditor } from "@/components/athletes/UpcomingEvents";
 import {
   getStaffAthleteDirectory,
   exportStaffAthleteDirectory,
+  selectAllStaffAthleteProfiles,
+  publishStaffAthleteProfiles,
   type DirectoryFilters,
   type StaffAthlete,
 } from "@/lib/athrecs/staff-athlete-directory-api";
@@ -30,10 +41,58 @@ function AthleteDirectory() {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState<StaffAthlete | null>(null);
   const [message, setMessage] = useState("");
+  const [selectedNumbers, setSelectedNumbers] = useState<Set<string>>(new Set());
+  const [confirmPublish, setConfirmPublish] = useState(false);
+  const [publishError, setPublishError] = useState("");
+  const queryClient = useQueryClient();
+  function changeFilters(next: DirectoryFilters) {
+    setSelectedNumbers(new Set());
+    setMessage("");
+    setFilters(next);
+  }
   const query = useQuery({
     queryKey: ["staff-athlete-directory", filters],
     queryFn: () => getStaffAthleteDirectory({ data: filters }),
   });
+  const selectAll = useMutation({
+    mutationFn: () => selectAllStaffAthleteProfiles({ data: filters }),
+    onSuccess: (numbers) => {
+      setSelectedNumbers(new Set(numbers));
+      setMessage(`Selected ${numbers.length} private source profiles across all matching pages.`);
+    },
+    onError: (error) => setMessage(error.message),
+  });
+  const publish = useMutation({
+    mutationFn: () =>
+      publishStaffAthleteProfiles({ data: { athleteNumbers: [...selectedNumbers] } }),
+    onSuccess: async (result) => {
+      setSelectedNumbers(new Set());
+      setSelected(null);
+      setConfirmPublish(false);
+      setMessage(
+        `${result.published} profiles made public · ${result.resultsPublished} race results published.${result.skipped ? ` ${result.skipped} profiles skipped because they are already public, account-managed or no longer available.` : ""}`,
+      );
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["staff-athlete-directory"] }),
+        queryClient.invalidateQueries({ queryKey: ["staff-athlete-profile"] }),
+      ]);
+    },
+    onError: (error) => setPublishError(error.message),
+  });
+  const busy = selectAll.isPending || publish.isPending;
+  const pageNumbers =
+    query.data?.athletes.filter((p) => p.canPublish).map((p) => p.athleteNumber) ?? [];
+  const selectedOnPage = pageNumbers.filter((number) => selectedNumbers.has(number)).length;
+  function togglePage(checked: boolean) {
+    setSelectedNumbers((previous) => {
+      const next = new Set(previous);
+      for (const number of pageNumbers) {
+        if (checked) next.add(number);
+        else next.delete(number);
+      }
+      return next;
+    });
+  }
   const download = useMutation({
     mutationFn: () => exportStaffAthleteDirectory({ data: filters }),
     onSuccess: (data) => {
@@ -83,20 +142,22 @@ function AthleteDirectory() {
         className="flex flex-wrap gap-2"
         onSubmit={(event) => {
           event.preventDefault();
-          setFilters({ ...filters, q: search, page: 1 });
+          if (!busy) changeFilters({ ...filters, q: search, page: 1 });
         }}
       >
         <input
           aria-label="Search athlete directory"
           placeholder="Name, AthRecs ID, club or location"
           value={search}
+          disabled={busy}
           onChange={(event) => setSearch(event.target.value)}
           className="h-10 min-w-64 flex-1 rounded border border-border bg-surface px-3 text-sm"
         />
         <select
           aria-label="Filter by sport"
           value={filters.sport}
-          onChange={(e) => setFilters({ ...filters, sport: e.target.value, page: 1 })}
+          disabled={busy}
+          onChange={(e) => changeFilters({ ...filters, sport: e.target.value, page: 1 })}
           className="h-10 rounded border border-border bg-surface px-2 text-sm"
         >
           <option value="">All sports</option>
@@ -107,8 +168,9 @@ function AthleteDirectory() {
         <select
           aria-label="Filter by visibility"
           value={filters.visibility}
+          disabled={busy}
           onChange={(e) =>
-            setFilters({
+            changeFilters({
               ...filters,
               visibility: e.target.value as DirectoryFilters["visibility"],
               page: 1,
@@ -120,7 +182,7 @@ function AthleteDirectory() {
           <option>Public</option>
           <option>Private</option>
         </select>
-        <Button type="submit" variant="secondary">
+        <Button type="submit" variant="secondary" disabled={busy}>
           Search
         </Button>
       </form>
@@ -143,10 +205,75 @@ function AthleteDirectory() {
           <p className="text-sm text-muted">
             {query.data.total} matching athletes · {query.data.totalStored} stored
           </p>
+          <section
+            aria-label="Publish selected athletes"
+            className="space-y-2 rounded-lg border border-border bg-surface p-3"
+          >
+            <div className="flex flex-wrap items-center gap-2">
+              <Button
+                variant="secondary"
+                disabled={busy || query.isFetching || !pageNumbers.length}
+                onClick={() => togglePage(true)}
+              >
+                Select this page
+              </Button>
+              <Button
+                variant="secondary"
+                disabled={busy || query.isFetching || !query.data.publishableTotal}
+                onClick={() => {
+                  setMessage("");
+                  selectAll.mutate();
+                }}
+              >
+                {selectAll.isPending
+                  ? "Selecting…"
+                  : `Select all matching (${query.data.publishableTotal})`}
+              </Button>
+              <Button
+                variant="ghost"
+                disabled={busy || !selectedNumbers.size}
+                onClick={() => setSelectedNumbers(new Set())}
+              >
+                Clear selection
+              </Button>
+              <span role="status" className="text-sm">
+                {selectedNumbers.size} selected
+              </span>
+              <Button
+                disabled={busy || query.isFetching || !selectedNumbers.size}
+                onClick={() => {
+                  setPublishError("");
+                  setConfirmPublish(true);
+                }}
+              >
+                {publish.isPending ? "Publishing…" : `Make public (${selectedNumbers.size})`}
+              </Button>
+            </div>
+            <p className="text-sm text-muted">
+              Select private source profiles to publish with their imported race results and source
+              histories. Already public profiles and athlete-managed accounts are excluded. Changing
+              filters clears your selection.
+            </p>
+          </section>
           <div className="overflow-x-auto rounded-lg border border-border">
             <table className="w-full text-left text-sm">
               <thead className="bg-elevated text-xs text-subtle">
                 <tr>
+                  <th className="px-3 py-2">
+                    <input
+                      type="checkbox"
+                      className="size-4 accent-accent"
+                      aria-label="Select all private source profiles on this page"
+                      checked={pageNumbers.length > 0 && selectedOnPage === pageNumbers.length}
+                      ref={(element) => {
+                        if (element)
+                          element.indeterminate =
+                            selectedOnPage > 0 && selectedOnPage < pageNumbers.length;
+                      }}
+                      disabled={busy || query.isFetching || !pageNumbers.length}
+                      onChange={(event) => togglePage(event.target.checked)}
+                    />
+                  </th>
                   {[
                     "AthRecs ID",
                     "Athlete",
@@ -166,6 +293,24 @@ function AthleteDirectory() {
               <tbody className="divide-y divide-border">
                 {query.data.athletes.map((p) => (
                   <tr key={p.athleteNumber}>
+                    <td className="px-3 py-2">
+                      <input
+                        type="checkbox"
+                        className="size-4 accent-accent"
+                        aria-label={`Select ${p.name} (${p.athrecsId})`}
+                        checked={selectedNumbers.has(p.athleteNumber)}
+                        disabled={busy || query.isFetching || !p.canPublish}
+                        onChange={(event) => {
+                          const checked = event.target.checked;
+                          setSelectedNumbers((previous) => {
+                            const next = new Set(previous);
+                            if (checked === true) next.add(p.athleteNumber);
+                            else next.delete(p.athleteNumber);
+                            return next;
+                          });
+                        }}
+                      />
+                    </td>
                     <td className="whitespace-nowrap px-3 py-2 font-mono text-xs">{p.athrecsId}</td>
                     <td className="px-3 py-2 font-medium">
                       <Link
@@ -213,7 +358,7 @@ function AthleteDirectory() {
           {!query.data.total ? <p>No athletes match these filters.</p> : null}
           <div className="flex justify-end gap-4 text-sm">
             <button
-              disabled={query.data.page <= 1}
+              disabled={busy || query.isFetching || query.data.page <= 1}
               onClick={() => setFilters({ ...filters, page: query.data!.page - 1 })}
               className="disabled:opacity-40"
             >
@@ -223,7 +368,7 @@ function AthleteDirectory() {
               {query.data.page} / {query.data.pages}
             </span>
             <button
-              disabled={query.data.page >= query.data.pages}
+              disabled={busy || query.isFetching || query.data.page >= query.data.pages}
               onClick={() => setFilters({ ...filters, page: query.data!.page + 1 })}
               className="disabled:opacity-40"
             >
@@ -232,6 +377,41 @@ function AthleteDirectory() {
           </div>
         </>
       ) : null}
+      <AlertDialog
+        open={confirmPublish}
+        onOpenChange={(open) => {
+          if (!publish.isPending) setConfirmPublish(open);
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              Make {selectedNumbers.size} athlete profiles public?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              The selected profiles, imported race results and captured source histories will be
+              visible on AthRecs. Only the selected profiles will be published.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          {publishError ? (
+            <p role="alert" className="text-sm">
+              {publishError}
+            </p>
+          ) : null}
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={publish.isPending}>Cancel</AlertDialogCancel>
+            <Button
+              disabled={publish.isPending}
+              onClick={() => {
+                setPublishError("");
+                publish.mutate();
+              }}
+            >
+              {publish.isPending ? "Publishing…" : "Confirm make public"}
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       {selected ? (
         <section className="space-y-4 rounded-xl border border-border bg-surface p-5">
           <div className="flex justify-between">

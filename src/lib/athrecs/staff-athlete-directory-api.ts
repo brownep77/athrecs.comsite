@@ -26,6 +26,7 @@ type RawProfile = {
   club: string;
   details: AthleteProfileDetails;
   is_account: boolean;
+  account_managed: boolean;
   public: boolean;
   sports: string[];
   coaches: { sport: string; name: string }[];
@@ -44,6 +45,7 @@ export type StaffAthlete = {
   details: AthleteProfileDetails;
   visibility: "Public" | "Private";
   registered: boolean;
+  canPublish: boolean;
   sports: string[];
   coaches: { sport: string; name: string }[];
   resultCount: number;
@@ -59,6 +61,7 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumbe
     select i.athlete_number::text as number, a.id as source_id, a.slug, a.display_name as name,
       coalesce(a.country,'') as country, coalesce(a.city,'') as city, coalesce(a.profile_details->>'nationality','') as nationality,
       coalesce(c.name,'') as club, a.profile_details as details, false as is_account,
+      exists(select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active') as account_managed,
       (a.profile_visibility='public' or a.profile_type='Public figure') as public,
       (coalesce(records.sports,array[]::text[]) || array(select distinct sport from athlete_upcoming_events where athlete_id=a.id)) as sports, '[]'::jsonb as coaches, records.count as results,
       coalesce(a.date_of_birth::text,'') as birthday, '' as email
@@ -68,7 +71,7 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumbe
     union all
     select i.number::text, null::integer, s.slug, coalesce(nullif(p.display_name,''),p.full_name,u."name",'Athlete'),
       coalesce(p.country,''), coalesce(p.city,''), coalesce(p.nationality,''), coalesce(p.club_or_team,''),
-      coalesce(p.profile_details,'{}'::jsonb), true, coalesce(s.enabled,false),
+      coalesce(p.profile_details,'{}'::jsonb), true, true, coalesce(s.enabled,false),
       (coalesce(sports.names,array[]::text[]) || array(select distinct sport from athlete_upcoming_events where user_id=p.user_id)), coalesce(sports.coaches,'[]'::jsonb), 0,
       coalesce(p.date_of_birth::text,''), coalesce(p.verified_email,'')
     from athlete_private_profiles p join "user" u on u."id"=p.user_id join athlete_identifiers i on i.user_id=p.user_id
@@ -93,6 +96,7 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumbe
         details: readProfileDetails(row.details),
         visibility: row.public ? "Public" : "Private",
         registered: row.is_account,
+        canPublish: !row.is_account && !row.account_managed && !row.public,
         sports: [],
         coaches: row.coaches,
         resultCount: 0,
@@ -132,7 +136,34 @@ export const getStaffAthleteDirectory = createServerFn({ method: "GET" })
       page,
       pages: Math.max(1, Math.ceil(filtered.length / 50)),
       sports,
+      publishableTotal: filtered.filter((p) => p.canPublish).length,
     };
+  });
+
+export const selectAllStaffAthleteProfiles = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .validator((input: DirectoryFilters) => filterSchema.parse(input))
+  .handler(async ({ data }) => {
+    const { filtered } = await loadDirectory(data);
+    return filtered.filter((p) => p.canPublish).map((p) => p.athleteNumber);
+  });
+
+export const publishStaffAthleteProfiles = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((input: { athleteNumbers: string[] }) =>
+    z
+      .object({
+        athleteNumbers: z
+          .array(z.string().regex(/^[1-9]\d{0,17}$/))
+          .min(1)
+          .max(100000),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    await ensureAthrecsSeeded();
+    const { publishAthleteProfiles } = await import("./athlete-publication.server");
+    return publishAthleteProfiles(await getSql(), data.athleteNumbers, context);
   });
 
 /** A private, read-only profile. Public profile visibility is never changed. */
