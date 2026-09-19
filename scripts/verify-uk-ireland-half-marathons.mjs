@@ -162,6 +162,31 @@ for (const candidate of verifiedHalfMarathonFollowupResearchQueue) {
   assert.match(candidate.sourceUrl, /^https:\/\//, `${candidate.slug} source must use HTTPS`);
 }
 
+const corkCityCandidate = verifiedHalfMarathonFollowupResearchQueue.find(
+  (candidate) => candidate.slug === "cork-city-half-marathon-2027",
+);
+assert(corkCityCandidate, "Cork City permit conflict is missing from the research queue");
+assert.equal(
+  corkCityCandidate.sourceUrl,
+  "https://eventmaster.ie/event/zm54cPYSQJ",
+  "Cork City must retain its direct official registration source",
+);
+assert.match(
+  corkCityCandidate.reason,
+  /approved permit 26\/483.*pending approval/i,
+  "Cork City must remain held while its official permit sources conflict",
+);
+
+const waterfordViking2027 = verifiedHalfMarathonFollowupResearchQueue.find(
+  (candidate) => candidate.slug === "waterford-viking-half-marathon-2027",
+);
+assert(waterfordViking2027, "Waterford Viking 2027 must remain held while its permit is pending");
+assert.equal(
+  waterfordViking2027.date,
+  "2027-06-20",
+  "Waterford Viking must use the main half-marathon date rather than the children's event date",
+);
+
 const catalogueSource = await fs.readFile(
   new URL("../src/data/catalogue.ts", import.meta.url),
   "utf8",
