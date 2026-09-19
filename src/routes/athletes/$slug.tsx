@@ -4,6 +4,7 @@ import {
   EditorialRoadSplits,
 } from "@/components/athletes/EditorialAthleteOverview";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
+import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -237,7 +238,7 @@ function AthletePage() {
     return <PrivateAthleteProfile athlete={data.athlete} />;
   }
 
-  const { athlete, results, profileResults, upcoming } = data;
+  const { athlete, results, profileResults, upcoming, sourceHistories } = data;
   const aliases = athlete.aliases ?? [];
   const dob = formatDob(athlete.date_of_birth);
   const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
@@ -474,6 +475,7 @@ function AthletePage() {
           ) : (
             <CompactResults results={profileResults} claimable />
           )}
+          <SourcePerformanceHistory histories={sourceHistories} />
         </TabsContent>
         <TabsContent value="upcoming">
           <UpcomingTable events={upcoming} />

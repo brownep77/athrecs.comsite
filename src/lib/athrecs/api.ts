@@ -950,7 +950,9 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       (item) => item.slug === athlete.slug,
     );
     const details = publicProfileDetails(profile_details, date_of_birth);
+    const { loadPublishedSourceHistories } = await import("./athlete-publication.server");
     return {
+      sourceHistories: await loadPublishedSourceHistories(sql, athlete.id),
       athlete: {
         ...safeAthlete,
         details,
