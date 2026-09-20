@@ -1,8 +1,9 @@
-import { davidGogginsUnverifiedRecords } from "@/data/david-goggins-unverified";
+import { getUnverifiedRaceRecords } from "@/data/unverified-race-histories";
 import { Badge } from "@/components/ui/badge";
 
 export function UnverifiedRaceHistory({ slug }: { slug: string }) {
-  if (slug !== "david-goggins") return null;
+  const records = getUnverifiedRaceRecords(slug);
+  if (!records.length) return null;
 
   return (
     <section
@@ -11,21 +12,22 @@ export function UnverifiedRaceHistory({ slug }: { slug: string }) {
       className="space-y-3"
     >
       <h2 id="unverified-results-heading" className="font-display text-lg font-semibold">
-        Unverified results ({davidGogginsUnverifiedRecords.length})
+        Unverified results ({records.length})
       </h2>
       <p className="max-w-prose text-sm text-muted">
-        Source-reported entries with unresolved details. Times and places below are as reported by
-        UltraSignup; known differences are shown alongside them. These entries do not count towards
-        verified finishes, personal bests or achievements.
+        * Unverified: source-reported entries with unresolved details, explained alongside each
+        account. Participation may be documented even when the official race name or result is
+        unknown. These entries do not count towards verified finishes, personal bests or
+        achievements.
       </p>
       <div className="space-y-3">
-        {davidGogginsUnverifiedRecords.map((record) => (
+        {records.map((record) => (
           <article key={record.id} className="rounded-xl border border-border bg-surface p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h3 className="font-semibold text-fg">
                 {record.event} · {record.distance}
               </h3>
-              <Badge variant="outline">Unverified</Badge>
+              <Badge variant="outline">* Unverified</Badge>
             </div>
             <p className="mt-1 text-xs text-muted">
               {record.reportedDate} · {record.location}

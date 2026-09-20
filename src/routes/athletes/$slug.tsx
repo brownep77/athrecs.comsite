@@ -22,7 +22,7 @@ import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
 import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
-import { davidGogginsUnverifiedRecords } from "@/data/david-goggins-unverified";
+import { getUnverifiedRaceRecords } from "@/data/unverified-race-histories";
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
@@ -108,8 +108,7 @@ export const Route = createFileRoute("/athletes/$slug")({
     const title = isPublicFigure
       ? `${athlete.display_name} ${resultKind} | ${SITE_NAME}`
       : `${athlete.display_name} athlete profile | ${SITE_NAME}`;
-    const unverifiedCount =
-      athlete.slug === "david-goggins" ? davidGogginsUnverifiedRecords.length : 0;
+    const unverifiedCount = getUnverifiedRaceRecords(athlete.slug).length;
     const description = unverifiedCount
       ? `${athlete.display_name}'s running history on ATHRECS: ${results.length} source-checked records and ${unverifiedCount} unverified entries, with source links and unresolved details.`
       : isPublicFigure
@@ -239,6 +238,7 @@ function AthletePage() {
   }
 
   const { athlete, results, profileResults, upcoming, sourceHistories } = data;
+  const unverifiedCount = getUnverifiedRaceRecords(athlete.slug).length;
   const aliases = athlete.aliases ?? [];
   const dob = formatDob(athlete.date_of_birth);
   const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
@@ -330,12 +330,12 @@ function AthletePage() {
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="accent">{results.length} results</Badge>
-          {athlete.slug === "david-goggins" ? (
+          {unverifiedCount > 0 ? (
             <a
               href="#unverified-results"
               className="inline-flex items-center text-xs text-accent underline"
             >
-              {davidGogginsUnverifiedRecords.length} unverified entries
+              {unverifiedCount} unverified entries
             </a>
           ) : null}
           {athlete.profile_roles
