@@ -22,7 +22,7 @@ import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
 import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
-import { davidGogginsUnverifiedRecords } from "@/data/david-goggins-unverified";
+import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
@@ -108,10 +108,10 @@ export const Route = createFileRoute("/athletes/$slug")({
     const title = isPublicFigure
       ? `${athlete.display_name} ${resultKind} | ${SITE_NAME}`
       : `${athlete.display_name} athlete profile | ${SITE_NAME}`;
-    const unverifiedCount =
-      athlete.slug === "david-goggins" ? davidGogginsUnverifiedRecords.length : 0;
-    const description = unverifiedCount
-      ? `${athlete.display_name}'s running history on ATHRECS: ${results.length} source-checked records and ${unverifiedCount} unverified entries, with source links and unresolved details.`
+    const reportedHistory = getReportedRaceHistory(athlete.slug);
+    const unverifiedCount = reportedHistory?.records.length ?? 0;
+    const description = reportedHistory
+      ? `${athlete.display_name}'s running history on ATHRECS: ${results.length} source-checked records and ${unverifiedCount} ${reportedHistory.countLabel}, with source links and unresolved details.`
       : isPublicFigure
         ? `${athlete.display_name}'s source-checked race results, finish times and endurance achievements on ATHRECS. ${results.length} verified result${results.length === 1 ? "" : "s"} listed.`
         : `${athlete.display_name}'s athlete profile, club and race results on ATHRECS.`;
@@ -239,6 +239,7 @@ function AthletePage() {
   }
 
   const { athlete, results, profileResults, upcoming, sourceHistories } = data;
+  const reportedHistory = getReportedRaceHistory(athlete.slug);
   const aliases = athlete.aliases ?? [];
   const dob = formatDob(athlete.date_of_birth);
   const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
@@ -329,13 +330,15 @@ function AthletePage() {
           <Badge variant="outline">
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
-          <Badge variant="accent">{results.length} results</Badge>
-          {athlete.slug === "david-goggins" ? (
+          <Badge variant="accent">
+            {results.length} {reportedHistory ? "verified results" : "results"}
+          </Badge>
+          {reportedHistory ? (
             <a
               href="#unverified-results"
               className="inline-flex items-center text-xs text-accent underline"
             >
-              {davidGogginsUnverifiedRecords.length} unverified entries
+              {reportedHistory.records.length} {reportedHistory.countLabel}
             </a>
           ) : null}
           {athlete.profile_roles
@@ -476,6 +479,7 @@ function AthletePage() {
             <CompactResults results={profileResults} claimable />
           )}
           <SourcePerformanceHistory histories={sourceHistories} />
+          <UnverifiedRaceHistory slug={athlete.slug} />
         </TabsContent>
         <TabsContent value="upcoming">
           <UpcomingTable events={upcoming} />
@@ -484,7 +488,6 @@ function AthletePage() {
           </p>
         </TabsContent>
       </Tabs>
-      <UnverifiedRaceHistory slug={athlete.slug} />
     </div>
   );
 }

@@ -55,6 +55,7 @@ jobs:
         run: |
           node scripts/verify-mo-farah-road-records.mjs
           node scripts/verify-public-figure-refresh.mjs
+          node scripts/verify-reported-race-history.mjs
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
