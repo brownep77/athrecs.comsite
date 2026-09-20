@@ -50,19 +50,21 @@ try {
   assert.equal(goggins.records.length, 7);
   assert.match(goggins.description, /UltraSignup/);
   const murakami = getReportedRaceHistory("haruki-murakami");
-  assert.equal(murakami.records.length, 3);
-  assert.equal(new Set(murakami.records.map((row) => row.id)).size, 3);
+  assert.equal(murakami.records.length, 9);
+  assert.equal(new Set(murakami.records.map((row) => row.id)).size, 9);
   const murakamiHtml = renderToStaticMarkup(
     createElement(UnverifiedRaceHistory, { slug: "haruki-murakami" }),
   );
-  assert.equal((murakamiHtml.match(/<article/g) ?? []).length, 3);
+  assert.equal((murakamiHtml.match(/<article/g) ?? []).length, 9);
   assert.match(murakamiHtml, /\* Unverified/);
   assert.match(murakamiHtml, /exact date unknown/);
   assert.match(murakamiHtml, /not counted as an additional finish/);
+  assert.match(murakamiHtml, /Reported withdrawal during swim/);
+  assert.match(murakamiHtml, /Triathlon · no standalone running result/);
   assert(!murakamiHtml.includes("UltraSignup"));
   assert(!murakamiHtml.includes("1 January"));
   console.log(
-    "Reported history: Neil 28, Murakami 3 and Goggins 7 entries render with isolated labels and uncertainty.",
+    "Reported history: Neil 28, Murakami 9 and Goggins 7 entries render with isolated labels and uncertainty.",
   );
 } finally {
   await server.close();
