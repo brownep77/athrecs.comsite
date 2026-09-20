@@ -35,10 +35,10 @@ export function getReportedRaceHistory(slug: string) {
   }
   if (slug === "neil-featherby") {
     return {
-      title: "Historical race entries",
-      countLabel: "historical entries",
+      title: "Unverified races",
+      countLabel: "unverified entries",
       description:
-        "Race and stage records from organiser archives, contemporary club records and Neil’s published accounts. Each entry identifies its evidence and any missing details. Incomplete and athlete-reported entries are excluded from verified finish totals, personal bests and achievements. The four Norfolk wins are grouped in one entry until their editions are identified.",
+        "These races and stages are listed as part of Neil’s race history with Unverified status. Sources include organiser archives, contemporary club records and Neil’s published accounts; each entry explains its evidence and any unresolved details. All entries here are excluded from verified finish totals, personal bests and achievements. The four Norfolk wins are grouped in one entry until their editions are identified.",
       records: neilFeatherbyReportedRecords,
     };
   }

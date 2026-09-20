@@ -34,7 +34,8 @@ try {
     createElement(UnverifiedRaceHistory, { slug: "neil-featherby" }),
   );
   assert.equal((html.match(/<article/g) ?? []).length, 28);
-  assert.match(html, /Historical race entries \(28\)/);
+  assert.match(html, /Unverified races \(28\)/);
+  assert.equal((html.match(/>Unverified · /g) ?? []).length, 28);
   assert.match(html, /Athlete-reported/);
   assert.match(html, /Organiser archive/);
   assert.match(html, /excluded from verified finish totals/);
