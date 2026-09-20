@@ -51,6 +51,9 @@ jobs:
       - name: Verify historical result source safeguards
         run: node scripts/verify-result-source-sync.mjs
 
+      - name: Verify independent result evidence comparisons
+        run: node scripts/verify-result-evidence-audit.mjs
+
       - name: Public-figure updates preserve retired event URLs
         run: |
           node scripts/verify-mo-farah-road-records.mjs

@@ -7,6 +7,7 @@ import { formatAthleteId, parseAthleteId } from "./athlete-id";
 import { readProfileDetails, type AthleteProfileDetails } from "./profile-details";
 import { combineProfileResults, type ProfileResult } from "./profile-records";
 import { sourceHistorySchema } from "./source-performance-history";
+import { readResultDetails } from "./result-details";
 
 const filterSchema = z.object({
   q: z.string().trim().max(120).default(""),
@@ -187,7 +188,7 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
         ed.distance_km as "distanceKm", r.status,
         r.finish_time_seconds as "finishTimeSeconds", r.chip_time_seconds as "chipTimeSeconds",
         r.gun_time_seconds as "gunTimeSeconds", r.overall_place as "overallPlace", r.category,
-        r.result_source as "resultSource",
+        r.result_source as "resultSource", r.result_details as details,
         array(select distinct url from (
           select r.source_url as url union all
           select ref.source_url from result_source_references ref where ref.result_id=r.id
@@ -206,7 +207,9 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
     `;
     return {
       athlete,
-      results: combineProfileResults(results),
+      results: combineProfileResults(
+        results.map((result) => ({ ...result, details: readResultDetails(result.details) })),
+      ),
       sourceHistories: histories.map((history) => sourceHistorySchema.parse(history)),
     };
   });
