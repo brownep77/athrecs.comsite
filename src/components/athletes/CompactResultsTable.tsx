@@ -10,14 +10,25 @@ import { roadPerformanceCondition } from "@/lib/athrecs/road-performance-conditi
 import { isDisqualified } from "@/lib/athrecs/result-details";
 import { ResultDisqualification } from "./ResultDisqualification";
 
+import { ReportedRaceResultRows } from "./ReportedRaceResultRows";
+import type { ReportedRaceHistory, ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
+import { selectProfilePersonalBests } from "@/lib/athrecs/reported-personal-bests";
+
+const NO_REPORTED_RECORDS: readonly ReportedRaceRecord[] = [];
+const NO_REPORTED_BEST_IDS = new Set<string>();
+
 type Row = Omit<ProfileResult, "athleteName">;
 export function CompactResultsTable({
   results,
   action,
   claimable = false,
   personalBestIds,
+  reportedRecords = NO_REPORTED_RECORDS,
+  reportedBestIds = NO_REPORTED_BEST_IDS,
 }: {
   results: Row[];
+  reportedRecords?: readonly ReportedRaceRecord[];
+  reportedBestIds?: ReadonlySet<string>;
   personalBestIds?: ReadonlySet<number>;
   action?: (result: Row) => ReactNode;
   claimable?: boolean;
@@ -26,7 +37,7 @@ export function CompactResultsTable({
   return (
     <div className="overflow-x-auto rounded-lg border border-border bg-surface">
       <table className="w-full text-left text-sm">
-        <caption className="sr-only">Athlete results, most recent first</caption>
+        <caption className="sr-only">Athlete race and stage results</caption>
         <thead className="bg-elevated text-xs text-subtle">
           <tr>
             {[
@@ -158,6 +169,11 @@ export function CompactResultsTable({
               ) : null}
             </tr>
           ))}
+          <ReportedRaceResultRows
+            records={reportedRecords}
+            bestIds={reportedBestIds}
+            hasActions={Boolean(action || claimable)}
+          />
         </tbody>
       </table>
     </div>
@@ -166,30 +182,67 @@ export function CompactResultsTable({
 export function CompactResults({
   results,
   claimable = false,
+  reportedHistory,
 }: {
   results: Row[];
   claimable?: boolean;
+  reportedHistory?: ReportedRaceHistory;
 }) {
   const [sport, setSport] = useState("");
   const [year, setYear] = useState("");
   const [q, setQ] = useState("");
   const [page, setPage] = useState(0);
-  const sports = [...new Set(results.map((r) => r.sport))].sort();
-  const years = [...new Set(results.map((r) => r.eventDate.slice(0, 4)))].sort().reverse();
+  const reportedRecords = reportedHistory?.records ?? NO_REPORTED_RECORDS;
+  const reportYear = (record: ReportedRaceRecord) =>
+    record.reportedDate.match(/^\d{4}\b/)?.[0] ?? "Unknown";
+  const sports = [
+    ...new Set([...results.map((r) => r.sport), ...(reportedRecords.length ? ["Running"] : [])]),
+  ].sort();
+  const years = [
+    ...new Set([
+      ...results.map((r) => r.eventDate.slice(0, 4)),
+      ...reportedRecords.map(reportYear),
+    ]),
+  ]
+    .sort()
+    .reverse();
   const filtered = results.filter(
     (r) =>
       (!sport || r.sport === sport) &&
       (!year || r.eventDate.startsWith(year)) &&
       (!q || r.eventName.toLowerCase().includes(q.toLowerCase())),
   );
-  const pages = Math.max(1, Math.ceil(filtered.length / 30));
+  const filteredReports = reportedRecords
+    .filter(
+      (r) =>
+        (!sport || sport === "Running") &&
+        (!year || reportYear(r) === year) &&
+        (!q || r.event.toLowerCase().includes(q.toLowerCase())),
+    )
+    .sort((a, b) =>
+      (reportYear(b) === "Unknown" ? "" : reportYear(b)).localeCompare(
+        reportYear(a) === "Unknown" ? "" : reportYear(a),
+      ),
+    );
+  const total = filtered.length + filteredReports.length;
+  const pages = Math.max(1, Math.ceil(total / 30));
   const active = Math.min(page, pages - 1);
-  const bestIds = new Set(findPersonalBests(results).map((r) => r.resultId));
+  const bests = selectProfilePersonalBests(results, reportedHistory?.personalBests);
+  const bestIds = new Set(
+    bests.flatMap((best) => (best.kind === "recorded" ? [best.value.resultId] : [])),
+  );
+  const reportedBestIds = new Set(
+    bests.flatMap((best) =>
+      best.kind === "reported" && best.value.recordId ? [best.value.recordId] : [],
+    ),
+  );
+  const reportStart = Math.max(0, active * 30 - filtered.length);
+  const reportEnd = Math.max(0, (active + 1) * 30 - filtered.length);
   return (
-    <section className="space-y-3">
+    <section className="space-y-3" id={reportedHistory ? "race-results" : undefined}>
       <div className="flex flex-wrap items-center gap-2">
         <h2 className="mr-auto font-display text-lg font-semibold">
-          Results <span className="font-sans text-sm text-subtle">{filtered.length}</span>
+          Results <span className="font-sans text-sm text-subtle">{total}</span>
         </h2>
         <input
           aria-label="Search results"
@@ -222,11 +275,14 @@ export function CompactResults({
           </select>
         ))}
       </div>
-      {filtered.length ? (
+      {reportedHistory ? <p className="text-sm text-muted">{reportedHistory.description}</p> : null}
+      {total ? (
         <CompactResultsTable
           results={filtered.slice(active * 30, (active + 1) * 30)}
           claimable={claimable}
           personalBestIds={bestIds}
+          reportedRecords={filteredReports.slice(reportStart, reportEnd)}
+          reportedBestIds={reportedBestIds}
         />
       ) : (
         <p className="rounded-lg border border-border p-4 text-sm text-muted">

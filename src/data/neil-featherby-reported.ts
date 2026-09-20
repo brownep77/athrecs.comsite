@@ -1,7 +1,8 @@
+import type { ReportedPersonalBest } from "@/lib/athrecs/reported-personal-bests";
 import type { ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 
-// Published at the site owner's request. Incomplete records remain outside ResultSeed,
-// verified finish totals, personal best calculations and achievement calculations.
+// Published at the site owner's request. Entries belong to his race results;
+// explicitly sourced PBs below are included with a chip-time caveat, without invented dates.
 // Research reviewed 20 September 2026. Existing athlete: ATH-009703 / neil-featherby.
 export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   {
@@ -12,7 +13,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "1989 · exact date not established",
     reportedTime: "1:07:37",
     reportedPlace: "1st male",
-    evidenceLabel: "Unverified · Organiser archive",
+    evidenceLabel: "Organiser archive",
     uncertainty:
       "The organiser confirms the year, winning time and Norfolk Gazelles affiliation; the day and month are not supplied.",
     sources: [
@@ -30,7 +31,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "1990 · exact date unresolved",
     reportedTime: "2:23:15",
     reportedPlace: "9th overall",
-    evidenceLabel: "Unverified · Timing archive · date conflict",
+    evidenceLabel: "Timing archive · date conflict",
     uncertainty:
       "MTEC lists Neil Featherby of England in this time and place, but the match to Norwich’s Neil still needs corroboration. Its header and summary also disagree on the date (31 May versus 1 May). No full date has been assigned.",
     sources: [
@@ -48,7 +49,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "1986 · exact date not established",
     reportedTime: "Time not established",
     reportedPlace: "2nd, reported in biography",
-    evidenceLabel: "Unverified · Club archive / biography",
+    evidenceLabel: "Club archive / biography",
     uncertainty:
       "The March 1989 Belgravian records his 1986 England appearance. Sportlink reports the runner-up placing; original results remain to be checked.",
     sources: [
@@ -70,7 +71,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "1987 · exact date not established",
     reportedTime: "Time not established",
     reportedPlace: "Place not established",
-    evidenceLabel: "Unverified · Contemporary club archive",
+    evidenceLabel: "Contemporary club archive",
     uncertainty:
       "The March 1989 Belgravian records a Great Britain appearance. A finish time, placing and exact race date have not been established.",
     sources: [
@@ -88,7 +89,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "1986 · exact date not established",
     reportedTime: "2:17:35",
     reportedPlace: "22nd",
-    evidenceLabel: "Unverified · Organiser archive",
+    evidenceLabel: "Organiser archive",
     uncertainty:
       "The official 1986 archive lists Neil Featherby, GBR, bib 86, in 22nd place. Select 1986 and search Featherby. The club journal identifies this as his second Berlin appearance and marathon best.",
     sources: [
@@ -110,7 +111,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "Before the 1986 appearance · year not established",
     reportedTime: "Time not established",
     reportedPlace: "Place not established",
-    evidenceLabel: "Unverified · Contemporary club archive",
+    evidenceLabel: "Contemporary club archive",
     uncertainty:
       "The club journal documents two Berlin appearances. This entry preserves the earlier appearance without assigning it an unverified year or time.",
     sources: [
@@ -128,7 +129,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "1987 · year inferred from athlete’s account",
     reportedTime: "Time not established",
     reportedPlace: "1st, athlete-reported",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "In his account of the 1990 Great Race, Neil recalls winning here three years earlier. The full date and finish time remain unverified.",
     sources: [
@@ -140,13 +141,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-1",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 1",
     distance: "12 miles",
     location: "Glasgow–East Kilbride",
     reportedDate: "1990",
     reportedTime: "1:05:47",
     reportedPlace: "62nd",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -158,13 +160,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-2",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 2",
     distance: "10.6 miles",
     location: "East Kilbride–Motherwell",
     reportedDate: "1990",
     reportedTime: "57:55",
     reportedPlace: "56th",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -176,13 +179,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-3",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 3",
     distance: "10.5 miles",
     location: "Lockerbie–Annan",
     reportedDate: "1990",
     reportedTime: "56:26",
     reportedPlace: "57th",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -194,13 +198,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-4",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 4",
     distance: "12.8 miles",
     location: "Gretna–Carlisle",
     reportedDate: "1990",
     reportedTime: "1:09:40",
     reportedPlace: "35th",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -212,13 +217,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-5",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 5",
     distance: "13.2 miles",
     location: "Keswick–Grasmere",
     reportedDate: "1990",
     reportedTime: "1:13:06",
     reportedPlace: "54th",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -230,13 +236,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-6",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 6",
     distance: "9.1 miles",
     location: "Windermere–Kendal",
     reportedDate: "1990",
     reportedTime: "48:43",
     reportedPlace: "Joint 44th",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -248,13 +255,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-7",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 7",
     distance: "11.5 miles",
     location: "Kendal–Kirkby Lonsdale",
     reportedDate: "1990",
     reportedTime: "1:01:54",
     reportedPlace: "Joint 52nd",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -266,13 +274,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-8",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 8",
     distance: "13.7 miles",
     location: "Bolton–Manchester",
     reportedDate: "1990",
     reportedTime: "1:13:08",
     reportedPlace: "41st",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -284,13 +293,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-9",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 9",
     distance: "6.9 miles",
     location: "Manchester–Stockport",
     reportedDate: "1990",
     reportedTime: "37:08",
     reportedPlace: "62nd",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -302,13 +312,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-10",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 10",
     distance: "13.1 miles",
     location: "Stockport–Macclesfield",
     reportedDate: "1990",
     reportedTime: "1:14:11",
     reportedPlace: "61st",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -320,13 +331,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-11",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 11",
     distance: "12.2 miles",
     location: "Leek–Stoke-on-Trent",
     reportedDate: "1990",
     reportedTime: "1:08:36",
     reportedPlace: "51st",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -338,13 +350,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-12",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 12",
     distance: "10.4 miles",
     location: "Stone–Stafford",
     reportedDate: "1990",
     reportedTime: "55:02",
     reportedPlace: "45th",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -356,13 +369,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-13",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 13",
     distance: "12.5 miles",
     location: "Penkridge–Wolverhampton",
     reportedDate: "1990",
     reportedTime: "1:08:32",
     reportedPlace: "47th",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -374,13 +388,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-14",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 14",
     distance: "15.5 miles",
     location: "Wolverhampton–Birmingham",
     reportedDate: "1990",
     reportedTime: "1:24:28",
     reportedPlace: "34th",
-    evidenceLabel: "Unverified · Athlete-reported",
+    evidenceLabel: "Athlete-reported",
     uncertainty:
       "From Neil’s retrospective account, representing Red Counties AC. Stage time, distance and place await independent result-sheet verification.",
     sources: [
@@ -398,7 +413,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "Year not established",
     reportedTime: "Time not supplied",
     reportedPlace: "1st",
-    evidenceLabel: "Unverified · Biography-reported",
+    evidenceLabel: "Biography-reported",
     uncertainty: "Biography reports this result; date and time not supplied.",
     sources: [
       {
@@ -415,7 +430,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "Year not established",
     reportedTime: "Time not supplied",
     reportedPlace: "1st",
-    evidenceLabel: "Unverified · Biography-reported",
+    evidenceLabel: "Biography-reported",
     uncertainty: "Biography reports this result; date and time not supplied.",
     sources: [
       {
@@ -426,13 +441,14 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "norfolk-wins",
+    entryKind: "grouped",
     event: "Norfolk Marathon — four reported wins",
     distance: "Marathon",
     location: "Norfolk, England",
     reportedDate: "Year not established",
     reportedTime: "Time not supplied",
     reportedPlace: "Four wins; editions not identified",
-    evidenceLabel: "Unverified · Biography-reported",
+    evidenceLabel: "Biography-reported",
     uncertainty:
       "Four wins reported together; individual editions remain unidentified. County championship titles have not been counted as extra races.",
     sources: [
@@ -450,7 +466,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "Year not established",
     reportedTime: "Time not supplied",
     reportedPlace: "3rd",
-    evidenceLabel: "Unverified · Biography-reported",
+    evidenceLabel: "Biography-reported",
     uncertainty: "Biography reports this result; date and time not supplied.",
     sources: [
       {
@@ -467,7 +483,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "Year not established",
     reportedTime: "Time not supplied",
     reportedPlace: "3rd",
-    evidenceLabel: "Unverified · Biography-reported",
+    evidenceLabel: "Biography-reported",
     uncertainty: "Biography reports this result; date and time not supplied.",
     sources: [
       {
@@ -484,7 +500,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "Year not established",
     reportedTime: "Time not supplied",
     reportedPlace: "3rd",
-    evidenceLabel: "Unverified · Biography-reported",
+    evidenceLabel: "Biography-reported",
     uncertainty: "Biography reports this result; date and time not supplied.",
     sources: [
       {
@@ -501,7 +517,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedDate: "Year not established",
     reportedTime: "Time not supplied",
     reportedPlace: "3rd",
-    evidenceLabel: "Unverified · Biography-reported",
+    evidenceLabel: "Biography-reported",
     uncertainty: "Biography reports this result; date and time not supplied.",
     sources: [
       {
@@ -510,4 +526,61 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
       },
     ],
   },
+];
+
+// PB-only biography claims do not create invented races. Race-linked PBs retain
+// their existing history IDs; stages are deliberately not PB candidates.
+const linkedBest = (
+  recordId: string,
+  distanceCode: string,
+  distanceKm: number,
+  finishTimeSeconds: number,
+): ReportedPersonalBest => {
+  const record = neilFeatherbyReportedRecords.find((row) => row.id === recordId)!;
+  return {
+    id: recordId,
+    recordId,
+    sport: "Running",
+    surface: "Road",
+    distanceCode,
+    distanceKm,
+    finishTimeSeconds,
+    event: record.event,
+    date: record.reportedDate,
+    note: record.uncertainty,
+    sources: record.sources,
+  };
+};
+
+export const neilFeatherbyReportedPersonalBests: readonly ReportedPersonalBest[] = [
+  {
+    id: "sportlink-10k-pb",
+    sport: "Running",
+    surface: "Road",
+    distanceCode: "10K",
+    distanceKm: 10,
+    finishTimeSeconds: 1768,
+    event: "Sportlink biography",
+    date: "Race and date not established",
+    note: "Biography-reported personal best; no race edition has been assigned.",
+    sources: [
+      { label: "Sportlink biography", url: "https://www.sportlink.co.uk/pages/neil-featherby" },
+    ],
+  },
+  {
+    id: "sportlink-10-mile-pb",
+    sport: "Running",
+    surface: "Road",
+    distanceCode: "10mi",
+    distanceKm: 16.09344,
+    finishTimeSeconds: 2987,
+    event: "Sportlink biography",
+    date: "Race and date not established",
+    note: "Biography-reported personal best; no race edition has been assigned.",
+    sources: [
+      { label: "Sportlink biography", url: "https://www.sportlink.co.uk/pages/neil-featherby" },
+    ],
+  },
+  linkedBest("stevenage-1989", "Half", 21.0975, 4057),
+  linkedBest("berlin-1986", "Marathon", 42.195, 8255),
 ];

@@ -1,3 +1,4 @@
+import { getReportedRaceHistory } from "./reported-race-history";
 import { readResultDetails } from "./result-details";
 import { parseProfileRoles } from "./athlete-profile-roles";
 import { combineProfileResults } from "./profile-records";
@@ -816,7 +817,7 @@ export const listAthletes = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const sql = await ready();
     const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
-    return sql<AthleteListItem>`
+    const athletes = await sql<AthleteListItem>`
       select
         a.id, a.slug, a.display_name, a.gender, a.city, a.county, a.country,
         a.profile_type, a.profile_roles,
@@ -845,6 +846,12 @@ export const listAthletes = createServerFn({ method: "GET" })
         )
       order by a.display_name
     `;
+    return athletes.map((athlete) => {
+      const reported = getReportedRaceHistory(athlete.slug);
+      return reported?.includeInResults
+        ? { ...athlete, result_count: athlete.result_count + reported.records.length }
+        : athlete;
+    });
   });
 
 export const getAthleteBySlug = createServerFn({ method: "GET" })

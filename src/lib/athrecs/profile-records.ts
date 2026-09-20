@@ -35,7 +35,9 @@ export function timingBasis(result: ProfileResult): string {
   return "Recorded";
 }
 
-function comparisonDistanceKm(result: ProfileResult): number {
+type PerformanceCategory = Pick<ProfileResult, "sport" | "distanceCode" | "distanceKm" | "surface">;
+
+function comparisonDistanceKm(result: Pick<ProfileResult, "distanceCode" | "distanceKm">): number {
   // Older imports rounded standard race distances to one or two decimal places.
   // Recognise only those exact roundings, keeping genuinely different distances apart.
   const miles = result.distanceCode.match(/^(\d+(?:\.\d+)?)mi$/);
@@ -63,13 +65,13 @@ export function performanceGroup(result: ProfileResult): string {
   ].join("|");
 }
 
-function personalBestSport(result: ProfileResult): string {
+function personalBestSport(result: Pick<ProfileResult, "sport" | "surface">): string {
   // Road races imported from athletics calendars belong to the same PB category
   // as running road races. Track, parkrun and other sports remain distinct.
   return result.sport === "Athletics" && result.surface === "Road" ? "Running" : result.sport;
 }
 
-function personalBestGroup(result: ProfileResult): string {
+export function personalBestGroup(result: PerformanceCategory): string {
   // The headline PB is the fastest recorded finish, with its timing basis shown
   // alongside it. Progress uses performanceGroup for comparisons by timing basis.
   return [
