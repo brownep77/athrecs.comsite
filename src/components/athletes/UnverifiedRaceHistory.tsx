@@ -1,33 +1,28 @@
-import { getUnverifiedRaceRecords } from "@/data/unverified-race-histories";
+import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 import { Badge } from "@/components/ui/badge";
 
 export function UnverifiedRaceHistory({ slug }: { slug: string }) {
-  const records = getUnverifiedRaceRecords(slug);
-  if (!records.length) return null;
+  const history = getReportedRaceHistory(slug);
+  if (!history) return null;
 
   return (
     <section
       id="unverified-results"
       aria-labelledby="unverified-results-heading"
-      className="space-y-3"
+      className="mt-6 space-y-3"
     >
       <h2 id="unverified-results-heading" className="font-display text-lg font-semibold">
-        Unverified results ({records.length})
+        {history.title} ({history.records.length})
       </h2>
-      <p className="max-w-prose text-sm text-muted">
-        * Unverified: source-reported entries with unresolved details, explained alongside each
-        account. Participation may be documented even when the official race name or result is
-        unknown. These entries do not count towards verified finishes, personal bests or
-        achievements.
-      </p>
+      <p className="max-w-prose text-sm text-muted">{history.description}</p>
       <div className="space-y-3">
-        {records.map((record) => (
+        {history.records.map((record) => (
           <article key={record.id} className="rounded-xl border border-border bg-surface p-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h3 className="font-semibold text-fg">
                 {record.event} · {record.distance}
               </h3>
-              <Badge variant="outline">* Unverified</Badge>
+              <Badge variant="outline">{record.evidenceLabel ?? "Unverified"}</Badge>
             </div>
             <p className="mt-1 text-xs text-muted">
               {record.reportedDate} · {record.location}
