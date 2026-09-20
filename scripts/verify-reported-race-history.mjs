@@ -49,8 +49,20 @@ try {
   const goggins = getReportedRaceHistory("david-goggins");
   assert.equal(goggins.records.length, 7);
   assert.match(goggins.description, /UltraSignup/);
+  const murakami = getReportedRaceHistory("haruki-murakami");
+  assert.equal(murakami.records.length, 3);
+  assert.equal(new Set(murakami.records.map((row) => row.id)).size, 3);
+  const murakamiHtml = renderToStaticMarkup(
+    createElement(UnverifiedRaceHistory, { slug: "haruki-murakami" }),
+  );
+  assert.equal((murakamiHtml.match(/<article/g) ?? []).length, 3);
+  assert.match(murakamiHtml, /\* Unverified/);
+  assert.match(murakamiHtml, /exact date unknown/);
+  assert.match(murakamiHtml, /not counted as an additional finish/);
+  assert(!murakamiHtml.includes("UltraSignup"));
+  assert(!murakamiHtml.includes("1 January"));
   console.log(
-    "Reported history: 28 sourced Neil entries render; labels, isolation and existing Goggins records verified.",
+    "Reported history: Neil 28, Murakami 3 and Goggins 7 entries render with isolated labels and uncertainty.",
   );
 } finally {
   await server.close();

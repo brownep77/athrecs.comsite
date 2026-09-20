@@ -12,6 +12,18 @@ export type ReportedRaceRecord = {
 };
 
 export function getReportedRaceHistory(slug: string) {
+  if (slug === "haruki-murakami") {
+    return {
+      title: "Unverified results",
+      countLabel: "unverified entries",
+      description:
+        "* Unverified: source-reported entries with unresolved details, explained alongside each account. Participation may be documented even when the official race name or result is unknown. These entries do not count towards verified finishes, personal bests or achievements.",
+      records: harukiMurakamiUnverifiedRecords.map((record) => ({
+        ...record,
+        evidenceLabel: "* Unverified",
+      })),
+    };
+  }
   if (slug === "david-goggins") {
     return {
       title: "Unverified results",
@@ -34,3 +46,4 @@ export function getReportedRaceHistory(slug: string) {
 }
 import { davidGogginsUnverifiedRecords } from "@/data/david-goggins-unverified";
 import { neilFeatherbyReportedRecords } from "@/data/neil-featherby-reported";
+import { harukiMurakamiUnverifiedRecords } from "@/data/haruki-murakami-unverified";
