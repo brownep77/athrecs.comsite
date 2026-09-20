@@ -6,12 +6,22 @@ export type ReportedRaceRecord = {
   reportedDate: string;
   reportedTime: string;
   reportedPlace: string;
+  entryKind?: "race" | "stage" | "grouped";
   evidenceLabel?: string;
   uncertainty: string;
   sources: readonly { label: string; url: string }[];
 };
 
-export function getReportedRaceHistory(slug: string) {
+export type ReportedRaceHistory = {
+  title: string;
+  countLabel: string;
+  description: string;
+  records: readonly ReportedRaceRecord[];
+  includeInResults?: boolean;
+  personalBests?: readonly ReportedPersonalBest[];
+};
+
+export function getReportedRaceHistory(slug: string): ReportedRaceHistory | null {
   if (slug === "haruki-murakami") {
     return {
       title: "Unverified results",
@@ -35,15 +45,21 @@ export function getReportedRaceHistory(slug: string) {
   }
   if (slug === "neil-featherby") {
     return {
-      title: "Unverified races",
-      countLabel: "unverified entries",
+      title: "Race results",
+      countLabel: "race and stage entries",
+      includeInResults: true,
+      personalBests: neilFeatherbyReportedPersonalBests,
       description:
-        "These races and stages are listed as part of Neil’s race history with Unverified status. Sources include organiser archives, contemporary club records and Neil’s published accounts; each entry explains its evidence and any unresolved details. All entries here are excluded from verified finish totals, personal bests and achievements. The four Norfolk wins are grouped in one entry until their editions are identified.",
+        "Neil’s races and stages are included in his results, and sourced standard-distance times contribute to his PBs. Not verified by chip time. Source links and other unresolved details are shown for each entry. The four Norfolk wins remain grouped until their editions are identified; Great Race stages are not separate full-race finishes.",
       records: neilFeatherbyReportedRecords,
     };
   }
   return null;
 }
 import { davidGogginsUnverifiedRecords } from "@/data/david-goggins-unverified";
-import { neilFeatherbyReportedRecords } from "@/data/neil-featherby-reported";
+import {
+  neilFeatherbyReportedRecords,
+  neilFeatherbyReportedPersonalBests,
+} from "@/data/neil-featherby-reported";
 import { harukiMurakamiUnverifiedRecords } from "@/data/haruki-murakami-unverified";
+import type { ReportedPersonalBest } from "./reported-personal-bests";

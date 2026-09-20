@@ -57,3 +57,28 @@ and every race badge starts with Unverified while retaining the source type.
 This includes Berlin 1986 despite its stronger source evidence. Grandma’s
 entry also explicitly retains the unresolved identity match. No race, time,
 placing or source is removed; no verified result row is created.
+
+## Race list and PB inclusion — owner clarification, 20 September 2026
+
+The owner clarified that the entries should count as Neil’s races and feed his
+PBs, with the caveat “Not verified by chip time”. This supersedes the earlier
+blanket PB exclusion for this profile.
+
+All 28 existing entries now appear in the main results table and its count,
+search and year/sport filters. Each row retains its original date text, source
+links and unresolved details, alongside the chip-time caveat. No exact dates,
+chip times, gun times, result IDs or extra editions have been manufactured.
+The 14 Great Race stages remain stages; four Norfolk wins remain one grouped
+record. These rows do not mint verified medals or rankings.
+
+The PB strip includes four explicitly sourced candidates:
+- 10K 29:28 and 10 miles 49:47: Sportlink biography (checked 20 September 2026);
+  the race and date are unknown, so these PB claims do not create extra races.
+- Half marathon 1:07:37: Stevenage 1989 organiser winners archive.
+- Marathon 2:17:35: Berlin 1986 organiser archive, corroborated by the club journal.
+
+The headline calculation chooses one fastest candidate per comparable distance
+and surface. Each reported PB has a PB* marker and the chip-time caveat. This is
+an explicit Neil-only opt-in; other athletes’ unverified histories retain their
+existing exclusions. Any separate identity uncertainty, including Grandma’s,
+remains stated in the race row.
