@@ -14,8 +14,9 @@ of 28 independently verified finishes.
 
 - Stevenage's organiser archive confirms the 1989 men's win in 1:07:37 for
   Norfolk Gazelles; no day/month is supplied.
-- MTEC confirms ninth at Grandma's Marathon in 1990, 2:23:15, but its header and
-  summary disagree on the date. No invented date is used.
+- MTEC lists Neil Featherby of England ninth at Grandma's Marathon in 1990,
+  2:23:15. The identity match to Norwich’s Neil still needs corroboration,
+  and its header and summary disagree on the date. No invented date is used.
 - Berlin's official results UI was checked on 20 September: select
   `1986 | 13. BERLIN-MARATHON`, enter `Featherby`, press Enter. It lists Neil
   Featherby, GBR, bib 86, place 22, 02:17:35. The URL does not encode this filter:
@@ -47,3 +48,12 @@ inside the Results history tab, and the profile header links to it.
 Validation: type-check, focused ESLint, and
 `node scripts/verify-reported-race-history.mjs`; normal PR quality gate and live
 profile verification are required before reporting publication complete.
+
+## Explicit unverified status — 20 September 2026
+
+The owner clarified that all 28 entries should be included as Neil’s races
+but remain unverified. The section and profile count now say Unverified,
+and every race badge starts with Unverified while retaining the source type.
+This includes Berlin 1986 despite its stronger source evidence. Grandma’s
+entry also explicitly retains the unresolved identity match. No race, time,
+placing or source is removed; no verified result row is created.
