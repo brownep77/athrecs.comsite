@@ -14,8 +14,9 @@ of 28 independently verified finishes.
 
 - Stevenage's organiser archive confirms the 1989 men's win in 1:07:37 for
   Norfolk Gazelles; no day/month is supplied.
-- MTEC confirms ninth at Grandma's Marathon in 1990, 2:23:15, but its header and
-  summary disagree on the date. No invented date is used.
+- MTEC lists Neil Featherby of England ninth at Grandma's Marathon in 1990,
+  2:23:15. The identity match to Norwich’s Neil still needs corroboration,
+  and its header and summary disagree on the date. No invented date is used.
 - Berlin's official results UI was checked on 20 September: select
   `1986 | 13. BERLIN-MARATHON`, enter `Featherby`, press Enter. It lists Neil
   Featherby, GBR, bib 86, place 22, 02:17:35. The URL does not encode this filter:
@@ -47,3 +48,37 @@ inside the Results history tab, and the profile header links to it.
 Validation: type-check, focused ESLint, and
 `node scripts/verify-reported-race-history.mjs`; normal PR quality gate and live
 profile verification are required before reporting publication complete.
+
+## Explicit unverified status — 20 September 2026
+
+The owner clarified that all 28 entries should be included as Neil’s races
+but remain unverified. The section and profile count now say Unverified,
+and every race badge starts with Unverified while retaining the source type.
+This includes Berlin 1986 despite its stronger source evidence. Grandma’s
+entry also explicitly retains the unresolved identity match. No race, time,
+placing or source is removed; no verified result row is created.
+
+## Race list and PB inclusion — owner clarification, 20 September 2026
+
+The owner clarified that the entries should count as Neil’s races and feed his
+PBs, with the caveat “Not verified by chip time”. This supersedes the earlier
+blanket PB exclusion for this profile.
+
+All 28 existing entries now appear in the main results table and its count,
+search and year/sport filters. Each row retains its original date text, source
+links and unresolved details, alongside the chip-time caveat. No exact dates,
+chip times, gun times, result IDs or extra editions have been manufactured.
+The 14 Great Race stages remain stages; four Norfolk wins remain one grouped
+record. These rows do not mint verified medals or rankings.
+
+The PB strip includes four explicitly sourced candidates:
+- 10K 29:28 and 10 miles 49:47: Sportlink biography (checked 20 September 2026);
+  the race and date are unknown, so these PB claims do not create extra races.
+- Half marathon 1:07:37: Stevenage 1989 organiser winners archive.
+- Marathon 2:17:35: Berlin 1986 organiser archive, corroborated by the club journal.
+
+The headline calculation chooses one fastest candidate per comparable distance
+and surface. Each reported PB has a PB* marker and the chip-time caveat. This is
+an explicit Neil-only opt-in; other athletes’ unverified histories retain their
+existing exclusions. Any separate identity uncertainty, including Grandma’s,
+remains stated in the race row.

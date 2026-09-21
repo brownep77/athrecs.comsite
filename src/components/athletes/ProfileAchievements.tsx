@@ -5,7 +5,12 @@ import {
   isCompletedResult,
   resultEvidenceLabel,
 } from "@/lib/athrecs/profile-achievements";
-import { findPersonalBests, timingBasis, type ProfileResult } from "@/lib/athrecs/profile-records";
+import { timingBasis, type ProfileResult } from "@/lib/athrecs/profile-records";
+import {
+  CHIP_TIME_CAVEAT,
+  selectProfilePersonalBests,
+  type ReportedPersonalBest,
+} from "@/lib/athrecs/reported-personal-bests";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
@@ -23,8 +28,19 @@ export function ResultMedal({ result }: { result: ProfileResult }) {
   );
 }
 
-export function PersonalBestStrip({ results }: { results: ProfileResult[] }) {
-  const bests = useMemo(() => findPersonalBests(results), [results]);
+const NO_REPORTED_BESTS: readonly ReportedPersonalBest[] = [];
+
+export function PersonalBestStrip({
+  results,
+  reportedBests = NO_REPORTED_BESTS,
+}: {
+  results: ProfileResult[];
+  reportedBests?: readonly ReportedPersonalBest[];
+}) {
+  const bests = useMemo(
+    () => selectProfilePersonalBests(results, reportedBests),
+    [results, reportedBests],
+  );
   if (!bests.length) return null;
   return (
     <section aria-label="Personal bests" className="space-y-2">
@@ -33,29 +49,56 @@ export function PersonalBestStrip({ results }: { results: ProfileResult[] }) {
         Personal bests
       </h2>
       <div className="flex flex-wrap gap-2">
-        {bests.map((best) => (
-          <ProfileEventLink
-            key={best.resultId}
-            result={best}
-            className="min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
-          >
-            <span className="block text-xs text-muted">
-              {best.sport} · {best.distanceCode}
-            </span>
-            <strong className="text-lg tabular-nums text-fg">
-              {formatDuration(best.finishTimeSeconds)}
-            </strong>
-            <span className="ml-2 text-xs font-semibold text-accent">PB</span>
-            <span className="block text-xs text-muted">
-              {best.surface} · {timingBasis(best)}
-            </span>
-            <span className="block text-xs text-muted">{resultEvidenceLabel(best)}</span>
-            <span className="sr-only">
-              {" "}
-              · {best.eventName} · {formatRaceDateShort(best.eventDate)}
-            </span>
-          </ProfileEventLink>
-        ))}
+        {bests.map((candidate) => {
+          if (candidate.kind === "reported") {
+            const best = candidate.value;
+            return (
+              <a
+                key={`reported-${best.id}`}
+                href={best.recordId ? `#reported-result-${best.recordId}` : best.sources[0].url}
+                className="min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
+                title={best.note}
+              >
+                <span className="block text-xs text-muted">
+                  {best.sport} · {best.distanceCode}
+                </span>
+                <strong className="text-lg tabular-nums text-fg">
+                  {formatDuration(best.finishTimeSeconds)}
+                </strong>
+                <span className="ml-2 text-xs font-semibold text-accent">PB*</span>
+                <span className="block text-xs text-muted">{best.surface} · Reported time</span>
+                <span className="block text-xs text-muted">{CHIP_TIME_CAVEAT}</span>
+                <span className="block text-xs text-muted">
+                  {best.event} · {best.date}
+                </span>
+              </a>
+            );
+          }
+          const best = candidate.value;
+          return (
+            <ProfileEventLink
+              key={best.resultId}
+              result={best}
+              className="min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
+            >
+              <span className="block text-xs text-muted">
+                {best.sport} · {best.distanceCode}
+              </span>
+              <strong className="text-lg tabular-nums text-fg">
+                {formatDuration(best.finishTimeSeconds)}
+              </strong>
+              <span className="ml-2 text-xs font-semibold text-accent">PB</span>
+              <span className="block text-xs text-muted">
+                {best.surface} · {timingBasis(best)}
+              </span>
+              <span className="block text-xs text-muted">{resultEvidenceLabel(best)}</span>
+              <span className="sr-only">
+                {" "}
+                · {best.eventName} · {formatRaceDateShort(best.eventDate)}
+              </span>
+            </ProfileEventLink>
+          );
+        })}
       </div>
     </section>
   );
@@ -254,11 +297,17 @@ export function AchievementsBoard({ results }: { results: ProfileResult[] }) {
   );
 }
 
-export function ProfileRecordHighlights({ results }: { results: ProfileResult[] }) {
+export function ProfileRecordHighlights({
+  results,
+  reportedBests = NO_REPORTED_BESTS,
+}: {
+  results: ProfileResult[];
+  reportedBests?: readonly ReportedPersonalBest[];
+}) {
   return (
     <div className="space-y-4">
-      <PersonalBestStrip results={results} />
-      <AchievementsBoard results={results} />
+      <PersonalBestStrip results={results} reportedBests={reportedBests} />
+      {results.length > 0 || !reportedBests.length ? <AchievementsBoard results={results} /> : null}
     </div>
   );
 }

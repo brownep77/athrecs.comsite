@@ -110,11 +110,13 @@ export const Route = createFileRoute("/athletes/$slug")({
       : `${athlete.display_name} athlete profile | ${SITE_NAME}`;
     const reportedHistory = getReportedRaceHistory(athlete.slug);
     const unverifiedCount = reportedHistory?.records.length ?? 0;
-    const description = reportedHistory
-      ? `${athlete.display_name}'s running history on ATHRECS: ${results.length} source-checked records and ${unverifiedCount} ${reportedHistory.countLabel}, with source links and unresolved details.`
-      : isPublicFigure
-        ? `${athlete.display_name}'s source-checked race results, finish times and endurance achievements on ATHRECS. ${results.length} verified result${results.length === 1 ? "" : "s"} listed.`
-        : `${athlete.display_name}'s athlete profile, club and race results on ATHRECS.`;
+    const description = reportedHistory?.includeInResults
+      ? `${athlete.display_name}’s ${results.length + unverifiedCount} race and stage entries and sourced personal bests. Reported times are not verified by chip time; source notes are retained.`
+      : reportedHistory
+        ? `${athlete.display_name}'s running history on ATHRECS: ${results.length} source-checked records and ${unverifiedCount} ${reportedHistory.countLabel}, with source links and unresolved details.`
+        : isPublicFigure
+          ? `${athlete.display_name}'s source-checked race results, finish times and endurance achievements on ATHRECS. ${results.length} verified result${results.length === 1 ? "" : "s"} listed.`
+          : `${athlete.display_name}'s athlete profile, club and race results on ATHRECS.`;
     const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
 
     return {
@@ -240,6 +242,7 @@ function AthletePage() {
 
   const { athlete, results, profileResults, upcoming, sourceHistories } = data;
   const reportedHistory = getReportedRaceHistory(athlete.slug);
+  const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
   const aliases = athlete.aliases ?? [];
   const dob = formatDob(athlete.date_of_birth);
   const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
@@ -331,14 +334,21 @@ function AthletePage() {
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="accent">
-            {results.length} {reportedHistory ? "verified results" : "results"}
+            {results.length + (includedHistory?.records.length ?? 0)}{" "}
+            {includedHistory
+              ? "race and stage entries"
+              : reportedHistory
+                ? "verified results"
+                : "results"}
           </Badge>
           {reportedHistory ? (
             <a
-              href="#unverified-results"
+              href={includedHistory ? "#race-results" : "#unverified-results"}
               className="inline-flex items-center text-xs text-accent underline"
             >
-              {reportedHistory.records.length} {reportedHistory.countLabel}
+              {includedHistory
+                ? "Not verified by chip time"
+                : `${reportedHistory.records.length} ${reportedHistory.countLabel}`}
             </a>
           ) : null}
           {athlete.profile_roles
@@ -386,8 +396,11 @@ function AthletePage() {
       </section>
 
       <EditorialAthleteOverview slug={athlete.slug} />
-      {(!isPublicFigure || profileResults.length > 0) && (
-        <ProfileRecordHighlights results={profileResults} />
+      {(!isPublicFigure || profileResults.length > 0 || includedHistory) && (
+        <ProfileRecordHighlights
+          results={profileResults}
+          reportedBests={includedHistory?.personalBests}
+        />
       )}
       <EditorialRoadSplits slug={athlete.slug} />
 
@@ -471,12 +484,12 @@ function AthletePage() {
           <TabsTrigger value="upcoming">Upcoming ({upcoming.length})</TabsTrigger>
         </TabsList>
         <TabsContent value="results">
-          {isProfessionalAthlete && !profileResults.length ? (
+          {isProfessionalAthlete && !profileResults.length && !includedHistory ? (
             <p className="text-sm text-muted">
               No source-checked performance rows have been added to ATHRECS yet.
             </p>
           ) : (
-            <CompactResults results={profileResults} claimable />
+            <CompactResults results={profileResults} reportedHistory={includedHistory} claimable />
           )}
           <SourcePerformanceHistory histories={sourceHistories} />
           <UnverifiedRaceHistory slug={athlete.slug} />

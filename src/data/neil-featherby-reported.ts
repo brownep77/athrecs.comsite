@@ -1,7 +1,8 @@
+import type { ReportedPersonalBest } from "@/lib/athrecs/reported-personal-bests";
 import type { ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 
-// Published at the site owner's request. Incomplete records remain outside ResultSeed,
-// verified finish totals, personal best calculations and achievement calculations.
+// Published at the site owner's request. Entries belong to his race results;
+// explicitly sourced PBs below are included with a chip-time caveat, without invented dates.
 // Research reviewed 20 September 2026. Existing athlete: ATH-009703 / neil-featherby.
 export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   {
@@ -32,7 +33,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
     reportedPlace: "9th overall",
     evidenceLabel: "Timing archive · date conflict",
     uncertainty:
-      "MTEC confirms the time and place, but displays 31 May in its header and 1 May in its summary. No full date has been assigned.",
+      "MTEC lists Neil Featherby of England in this time and place, but the match to Norwich’s Neil still needs corroboration. Its header and summary also disagree on the date (31 May versus 1 May). No full date has been assigned.",
     sources: [
       {
         label: "MTEC individual result",
@@ -140,6 +141,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-1",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 1",
     distance: "12 miles",
     location: "Glasgow–East Kilbride",
@@ -158,6 +160,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-2",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 2",
     distance: "10.6 miles",
     location: "East Kilbride–Motherwell",
@@ -176,6 +179,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-3",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 3",
     distance: "10.5 miles",
     location: "Lockerbie–Annan",
@@ -194,6 +198,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-4",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 4",
     distance: "12.8 miles",
     location: "Gretna–Carlisle",
@@ -212,6 +217,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-5",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 5",
     distance: "13.2 miles",
     location: "Keswick–Grasmere",
@@ -230,6 +236,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-6",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 6",
     distance: "9.1 miles",
     location: "Windermere–Kendal",
@@ -248,6 +255,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-7",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 7",
     distance: "11.5 miles",
     location: "Kendal–Kirkby Lonsdale",
@@ -266,6 +274,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-8",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 8",
     distance: "13.7 miles",
     location: "Bolton–Manchester",
@@ -284,6 +293,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-9",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 9",
     distance: "6.9 miles",
     location: "Manchester–Stockport",
@@ -302,6 +312,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-10",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 10",
     distance: "13.1 miles",
     location: "Stockport–Macclesfield",
@@ -320,6 +331,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-11",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 11",
     distance: "12.2 miles",
     location: "Leek–Stoke-on-Trent",
@@ -338,6 +350,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-12",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 12",
     distance: "10.4 miles",
     location: "Stone–Stafford",
@@ -356,6 +369,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-13",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 13",
     distance: "12.5 miles",
     location: "Penkridge–Wolverhampton",
@@ -374,6 +388,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "great-race-1990-stage-14",
+    entryKind: "stage",
     event: "Sun Life Great Race — stage 14",
     distance: "15.5 miles",
     location: "Wolverhampton–Birmingham",
@@ -426,6 +441,7 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
   },
   {
     id: "norfolk-wins",
+    entryKind: "grouped",
     event: "Norfolk Marathon — four reported wins",
     distance: "Marathon",
     location: "Norfolk, England",
@@ -510,4 +526,61 @@ export const neilFeatherbyReportedRecords: readonly ReportedRaceRecord[] = [
       },
     ],
   },
+];
+
+// PB-only biography claims do not create invented races. Race-linked PBs retain
+// their existing history IDs; stages are deliberately not PB candidates.
+const linkedBest = (
+  recordId: string,
+  distanceCode: string,
+  distanceKm: number,
+  finishTimeSeconds: number,
+): ReportedPersonalBest => {
+  const record = neilFeatherbyReportedRecords.find((row) => row.id === recordId)!;
+  return {
+    id: recordId,
+    recordId,
+    sport: "Running",
+    surface: "Road",
+    distanceCode,
+    distanceKm,
+    finishTimeSeconds,
+    event: record.event,
+    date: record.reportedDate,
+    note: record.uncertainty,
+    sources: record.sources,
+  };
+};
+
+export const neilFeatherbyReportedPersonalBests: readonly ReportedPersonalBest[] = [
+  {
+    id: "sportlink-10k-pb",
+    sport: "Running",
+    surface: "Road",
+    distanceCode: "10K",
+    distanceKm: 10,
+    finishTimeSeconds: 1768,
+    event: "Sportlink biography",
+    date: "Race and date not established",
+    note: "Biography-reported personal best; no race edition has been assigned.",
+    sources: [
+      { label: "Sportlink biography", url: "https://www.sportlink.co.uk/pages/neil-featherby" },
+    ],
+  },
+  {
+    id: "sportlink-10-mile-pb",
+    sport: "Running",
+    surface: "Road",
+    distanceCode: "10mi",
+    distanceKm: 16.09344,
+    finishTimeSeconds: 2987,
+    event: "Sportlink biography",
+    date: "Race and date not established",
+    note: "Biography-reported personal best; no race edition has been assigned.",
+    sources: [
+      { label: "Sportlink biography", url: "https://www.sportlink.co.uk/pages/neil-featherby" },
+    ],
+  },
+  linkedBest("stevenage-1989", "Half", 21.0975, 4057),
+  linkedBest("berlin-1986", "Marathon", 42.195, 8255),
 ];

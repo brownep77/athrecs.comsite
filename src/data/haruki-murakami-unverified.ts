@@ -1,9 +1,26 @@
-// Author and eyewitness accounts, published with their unresolved details.
+// Author, eyewitness and secondary chronology accounts, with unresolved details.
 // Keep these separate from canonical results: no invented dates or finish times.
 const essay = "https://www.newyorker.com/magazine/2008/06/09/haruki-murakami-the-running-novelist";
 const eyewitness = "https://hawaiireviewofbooks.com/stories/running-with-haruki-murakami";
+const chronology = "https://murakami-haruki-times.com/";
 
 export const harukiMurakamiUnverifiedRecords = [
+  ...[
+    { id: "murakami-triathlon-1997", event: "Murakami International Triathlon", location: "Murakami, Niigata, Japan", reportedDate: "28 September 1997 (reported)", reportedTime: "Time not found", uncertainty: "Reader-compiled chronology reports participation. An official individual result has not been located." },
+    { id: "tinman-triathlon-1998", event: "Tinman Triathlon", location: "Oahu, Hawaii", reportedDate: "12 July 1998 (reported)", reportedTime: "Time not found", uncertainty: "Reader-compiled chronology reports participation with bib 1647. Official result and race date remain unverified." },
+    { id: "murakami-triathlon-2000", event: "Murakami International Triathlon", location: "Murakami, Niigata, Japan", reportedDate: "2000 · exact date unknown", reportedTime: "Reported withdrawal during swim", uncertainty: "Reader-compiled chronology reports withdrawal during swimming. This is not a reported finish; official status remains unverified." },
+    { id: "murakami-triathlon-2004", event: "Murakami International Triathlon", location: "Murakami, Niigata, Japan", reportedDate: "2004 · exact date unknown", reportedTime: "Time not found", uncertainty: "Reader-compiled chronology reports his return to this event. An official individual result has not been located." },
+    { id: "murakami-triathlon-2006", event: "Murakami–Sasagawa Nagare International Triathlon", location: "Murakami, Niigata, Japan", reportedDate: "1 October 2006", reportedTime: "Time not found", uncertainty: "JTU confirms the event date; the reader chronology reports participation. His individual result remains unverified." },
+    { id: "honolulu-triathlon-2007", event: "Honolulu Triathlon", location: "Honolulu, Hawaii", reportedDate: "May 2007 · exact date unverified", reportedTime: "Time not found", uncertainty: "Reader-compiled chronology reports participation. An official individual result has not been located." },
+  ].map((record) => ({
+    ...record,
+    distance: "Triathlon · no standalone running result",
+    reportedPlace: "Not verified",
+    sources: [
+      { label: "Haruki Murakami Times (reader-compiled chronology)", url: chronology },
+      ...(record.id === "murakami-triathlon-2006" ? [{ label: "JTU event date and distances", url: "https://archive.jtu.or.jp/race/japancup/06murakami.html" }] : []),
+    ],
+  })),
   {
     id: "first-road-race-1983",
     event: "First road race — official name unknown",

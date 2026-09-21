@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 
 export function UnverifiedRaceHistory({ slug }: { slug: string }) {
   const history = getReportedRaceHistory(slug);
-  if (!history) return null;
+  if (!history || history.includeInResults) return null;
 
   return (
     <section
