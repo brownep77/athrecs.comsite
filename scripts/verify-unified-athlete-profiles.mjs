@@ -12,6 +12,32 @@ import {
   validateProfileConnection,
 } from "../src/lib/athrecs/profile-connections.ts";
 import { formatAthleteId, parseAthleteId } from "../src/lib/athrecs/athlete-id.ts";
+import {
+  profileDetailsSchema,
+  publicProfileDetails,
+  readProfileDetails,
+} from "../src/lib/athrecs/profile-details.ts";
+
+const importedDetails = Object.freeze({ nationality: null, coach: "Fixture Coach" });
+assert.equal(readProfileDetails(importedDetails).nationality, "");
+assert.equal(readProfileDetails(importedDetails).coach, "Fixture Coach");
+assert.equal(importedDetails.nationality, null, "Reading must not modify stored details");
+const emptyDetails = readProfileDetails({});
+assert.deepEqual(
+  readProfileDetails(Object.fromEntries(Object.keys(emptyDetails).map((key) => [key, null]))),
+  emptyDetails,
+  "Imported nulls use the existing defaults for unknown details",
+);
+assert.equal(
+  publicProfileDetails({ nationality: null, birthdayVisibility: null }, "1980-01-02").birthday,
+  "",
+  "An unknown birthday preference must keep the birthday private",
+);
+assert.equal(readProfileDetails({ acceptContact: null }).acceptContact, false);
+assert.equal(profileDetailsSchema.safeParse(importedDetails).success, false);
+assert.equal(profileDetailsSchema.safeParse({ acceptContact: "true" }).success, false);
+assert.throws(() => readProfileDetails({ nationality: 42 }));
+assert.throws(() => readProfileDetails({ nationality: "x".repeat(101) }));
 
 assert.equal(formatAthleteId("123"), "ATH-000123");
 assert.equal(formatAthleteId("1234567"), "ATH-1234567");
