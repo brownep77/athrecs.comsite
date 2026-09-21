@@ -328,12 +328,111 @@ try {
     workbook.getWorksheet("Athletes").getCell("A2").value,
     directory.athletes[0].athrecsId,
   );
+  // Publish through the authenticated HTTP endpoint, then read anonymously.
+  // All fixtures and privacy transitions stay in this process's disposable DB.
+  const publishSelection = (athleteNumbers, headers) =>
+    rpc("staff-athlete-directory-api", "publishStaffAthleteProfiles", { athleteNumbers }, headers);
+  const readPrivateSource = () => rpc("api", "getAthleteBySlug", "compact-private-directory");
+  for (const headers of [
+    undefined,
+    owner,
+    other,
+    { ...staff, "x-forwarded-host": "www.athrecs.com" },
+    { ...staff, "sec-fetch-site": "cross-site" },
+  ]) {
+    await assert.rejects(() => publishSelection([privateIdentity.number], headers));
+  }
+  assert.equal(await readPrivateSource(), null, "Rejected requests must not publish the profile");
+  await assert.rejects(() => publishSelection([], staff));
+  await assert.rejects(() => publishSelection(["invalid"], staff));
+
+  // An unclaimed public profile still requires explicit archive publication.
+  const [unselected] = await sql`insert into athletes (slug,display_name,profile_visibility)
+    values ('compact-unselected-history','Compact unselected history','public') returning id`;
+  await sql`insert into athlete_source_histories
+    (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances)
+    values (${unselected.id},'powerof10','history-unselected','https://example.test/unselected',
+      now(),true,array[2025],array[2025],${JSON.stringify(sourcePerformances)}::jsonb)`;
+  assert.deepEqual(
+    (await rpc("api", "getAthleteBySlug", "compact-unselected-history")).sourceHistories,
+    [],
+    "Being public alone must not expose an unpublished archive",
+  );
+  assert.deepEqual(
+    await publishSelection([privateIdentity.number, privateIdentity.number], staff),
+    {
+      published: 1,
+      resultsPublished: 1,
+      skipped: 0,
+    },
+  );
+  const publishedSource = await readPrivateSource();
+  assert.deepEqual(
+    publishedSource.sourceHistories,
+    privateProfile.sourceHistories,
+    "Explicit publication preserves the selected archive exactly through the public API",
+  );
+  assert.equal(publishedSource.results.length, 1);
+  assert.equal(publishedSource.results[0].id, privateResult.id);
+  assert.deepEqual(
+    (await rpc("api", "getAthleteBySlug", "compact-unselected-history")).sourceHistories,
+    [],
+    "Publishing a selected profile must not expose another athlete's archive",
+  );
+  assert.deepEqual(await publishSelection([privateIdentity.number], staff), {
+    published: 0,
+    resultsPublished: 0,
+    skipped: 1,
+  });
+  const [audit] = await sql`select count(*)::int as count from network_audit_log
+    where action='athlete.bulk_publish' and entity_id=${String(privateSource.id)}`;
+  assert.equal(audit.count, 1, "Repeated publication must not duplicate audit entries");
+
+  await sql`update athletes set profile_visibility='private' where id=${privateSource.id}`;
+  assert.equal(
+    await readPrivateSource(),
+    null,
+    "Making a published profile private must hide its archived history through the public API",
+  );
+  await sql`update athletes set profile_visibility='public' where id=${privateSource.id}`;
+  assert.deepEqual((await readPrivateSource()).sourceHistories, publishedSource.sourceHistories);
+  await sql`update athlete_source_histories set published_at=null where athlete_id=${privateSource.id}`;
+  assert.deepEqual(
+    (await readPrivateSource()).sourceHistories,
+    [],
+    "Revoking archive publication must hide the archive even while the profile is public",
+  );
+  await sql`update athlete_source_histories set published_at=now() where athlete_id=${privateSource.id}`;
+  await sql`insert into athlete_account_links (athlete_id,user_id,user_email)
+    values (${privateSource.id},'compact-owner','compact-owner@example.test')`;
+  assert.deepEqual(
+    (await readPrivateSource()).sourceHistories,
+    [],
+    "Claiming a published source profile must stop staff archive sharing",
+  );
+  await sql`update athletes set profile_visibility='private' where id=${privateSource.id}`;
+  assert.deepEqual(await publishSelection([privateIdentity.number], staff), {
+    published: 0,
+    resultsPublished: 0,
+    skipped: 1,
+  });
+  assert.equal(
+    await readPrivateSource(),
+    null,
+    "Staff publication must not override an account-managed profile's privacy",
+  );
+  await sql`update athletes set profile_visibility='public' where id=${privateSource.id}`;
   await rpc("athlete-profile-share-api", "saveMyProfileShare", { enabled: false }, owner);
   assert.equal(
     await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }),
     null,
   );
   assert.equal(await rpc("api", "getAthleteBySlug", "compact-linked-athlete"), null);
+  assert.equal(
+    await readPrivateSource(),
+    null,
+    "Owner opt-out must hide a formerly staff-published source profile too",
+  );
   assert.equal(
     (await rpc("athlete-directory-api", "getAthleteDirectory", { q: "Compact previous name" }))
       .total,
