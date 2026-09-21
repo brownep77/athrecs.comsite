@@ -15,7 +15,14 @@ const NEWEST_DAILY_SCAN_CHECKED_AT = "2026-09-06";
 const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
 const LATEST_DAILY_RELEASE_CHECKED_AT = "2026-09-09";
 const NEWEST_DAILY_RELEASE_CHECKED_AT = "2026-09-10";
-const LATEST_DAILY_RESEARCH_CHECKED_AT = "2026-09-11";
+const LATEST_DAILY_RESEARCH_CHECKED_AT = "2026-09-13";
+const LATEST_DAILY_PUBLICATION_CHECKED_AT = "2026-09-12";
+const CURRENT_DAILY_RESEARCH_CHECKED_AT = "2026-09-15";
+const CURRENT_DAILY_PUBLICATION_CHECKED_AT = "2026-09-16";
+const NEWEST_DAILY_RESEARCH_CHECKED_AT = "2026-09-17";
+const CURRENT_OFFICIAL_SOURCE_CHECKED_AT = "2026-09-19";
+const LATEST_OFFICIAL_SOURCE_CHECKED_AT = "2026-09-20";
+const CURRENT_LIVE_ENTRY_CHECKED_AT = "2026-09-21";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -77,6 +84,25 @@ const seeds: RaceSeed[] = [
     url: "https://llhm.co.uk/",
     notes:
       "The official event page confirms the date and currently offers access through charity places.",
+  },
+  {
+    slug: "shakespeare-marathon-half-marathon-2027",
+    name: "Shakespeare Marathon & Half Marathon 2027",
+    date: "2027-04-25",
+    distance: "Half",
+    startTime: "09:00",
+    country: "England",
+    county: "Warwickshire",
+    city: "Stratford-upon-Avon",
+    area: "Stratford Recreation Ground and the Warwickshire countryside",
+    surface: "Mixed",
+    distances: ["Marathon", "Half"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+    priceAmount: 41,
+    checkedAt: CURRENT_DAILY_PUBLICATION_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the 25 April 2027 marathon and half marathon, shared 09:00 start, open entry and current half-marathon price.",
   },
   {
     slug: "deal-half-marathon-2027",
@@ -278,25 +304,6 @@ const seeds: RaceSeed[] = [
     priceAmount: 38,
     notes:
       "The organiser confirms the road-closed 10-mile and 10K races, date, start times and live entry.",
-  },
-  {
-    slug: "john-treacy-dungarvan-10-mile-2027",
-    name: "John Treacy Dungarvan 10 Mile 2027",
-    date: "2027-01-31",
-    distance: "10mi",
-    startTime: "11:00",
-    country: "Ireland",
-    county: "County Waterford",
-    city: "Dungarvan",
-    area: "Youghal Road and Dungarvan town",
-    surface: "Road",
-    organiser: "West Waterford Athletic Club",
-    url: "https://www.westwaterfordathletics.org/dungarvan-10-mile/",
-    status: "TBC",
-    hasEntry: false,
-    checkedAt: PREVIOUS_CHECKED_AT,
-    notes:
-      "The organising club confirms the permitted A.A.I. race, date and start time. Entry is due to open to A.A.I. club members on 1 December 2026 and to remaining runners on 8 December, so no live checkout is asserted yet.",
   },
   {
     slug: "the-duergar-nightcrawler-2027",
@@ -1170,6 +1177,44 @@ const seeds: RaceSeed[] = [
     notes:
       "The direct official registration page consistently confirms the 25 April 2027 marathon and half-marathon programme and open event-specific checkout.",
   },
+  {
+    slug: "rugeley-10-mile-road-race-2027",
+    name: "Rugeley 10 Mile Road Race 2027",
+    date: "2027-02-14",
+    distance: "10mi",
+    startTime: "10:00",
+    country: "England",
+    county: "Staffordshire",
+    city: "Rugeley",
+    area: "Redbrook Hayes School and Brereton Road",
+    surface: "Road",
+    organiser: "Rugeley Runners",
+    url: "https://www.entrycentral.com/Rugeley-10-miler",
+    entryUrl: "https://www.entrycentral.com/form/118206",
+    priceAmount: 24,
+    priceCurrency: "GBP",
+    checkedAt: CURRENT_LIVE_ENTRY_CHECKED_AT,
+    notes:
+      "The direct official registration page confirms the 14 February 2027 road 10-mile race, 10:00 start and open event-specific checkout.",
+  },
+  {
+    slug: "walled-city-10-mile-road-race-2027",
+    name: "Walled City 10 Mile Road Race 2027",
+    date: "2027-03-13",
+    distance: "10mi",
+    country: "Northern Ireland",
+    county: "County Londonderry",
+    city: "Derry",
+    area: "St Columb's Park and the River Foyle",
+    surface: "Road",
+    organiser: "Derry Marathon",
+    url: "https://www.facebook.com/thederrymarathon/",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: LATEST_DAILY_PUBLICATION_CHECKED_AT,
+    notes:
+      "The official organiser account confirms Saturday 13 March 2027 and the 10-mile distance. Registration has not opened, so no checkout or unverified start time is advertised.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -1460,6 +1505,13 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
   {
+    slug: "john-treacy-dungarvan-10-mile-2027",
+    date: "2027-01-31",
+    country: "Ireland",
+    reason: `Checked ${CURRENT_OFFICIAL_SOURCE_CHECKED_AT}: West Waterford Athletic Club confirms the date, 11:00 start and describes the race as a permitted A.A.I. event, but the Athletics Ireland calendar still labels its permit as pending approval. Hold until the governing-body and organiser sources agree.`,
+    sourceUrl: "https://www.westwaterfordathletics.org/dungarvan-10-mile/",
+  },
+  {
     slug: "temple-newsam-10-2027",
     date: "2027-01-10",
     country: "England",
@@ -1618,11 +1670,11 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
   },
   {
-    slug: "runclare-lisdoonvarna-10-mile-2027",
+    slug: "runclare-kilkee-10-mile-2027",
     date: "2027-04-11",
     country: "Ireland",
     reason:
-      "The official Athletics Ireland calendar now identifies the RunClare 10-mile finale as Lisdoonvarna but keeps its permit pending; the series registration page has not yet replaced its Coming Soon copy.",
+      "The official Athletics Ireland calendar now identifies the RunClare 10-mile finale as Kilkee but keeps its permit pending; the series registration page still says Coming Soon without naming the venue.",
     sourceUrl: "https://eventmaster.ie/event/Z7M0iMWcZY",
   },
   {
@@ -1631,8 +1683,7 @@ export const dailyHalfTenMileResearchQueue = [
     country: "England",
     reason:
       "The official entry page markets a half marathon but specifies a 13.6-mile route, so it is held for the non-standard-distance catalogue rather than mislabelled as a canonical half.",
-    sourceUrl:
-      "https://www.sientries.co.uk/event/walter-raleigh-round-halfthird-marathon-2027",
+    sourceUrl: "https://www.sientries.co.uk/event/walter-raleigh-round-halfthird-marathon-2027",
   },
   {
     slug: "ranger-ultras-loop-the-loop-2027",
@@ -1648,8 +1699,7 @@ export const dailyHalfTenMileResearchQueue = [
     country: "England",
     reason:
       "The official entry page markets the Great Escape as a long half marathon and specifies 25 kilometres / 15.5 miles, so it is held for the non-standard-distance catalogue.",
-    sourceUrl:
-      "https://www.sientries.co.uk/event/the-dartmoor-crossing-great-escape-2027",
+    sourceUrl: "https://www.sientries.co.uk/event/the-dartmoor-crossing-great-escape-2027",
   },
   {
     slug: "tom-scott-10-mile-road-race-2027",
@@ -1664,8 +1714,7 @@ export const dailyHalfTenMileResearchQueue = [
     slug: "athletics-ireland-race-series-irish-runner-10m-challenge-2027",
     date: "2027-07-18",
     country: "Ireland",
-    reason:
-      `The official Athletics Ireland calendar confirms the 10-mile road race and approved permit 26/516, checked ${LATEST_DAILY_RESEARCH_CHECKED_AT}, but registration is Open Soon and the only live provenance is the shared calendar URL already used by another public series. Hold until an event-specific official URL is available so normalized-source duplicate protection is not weakened.`,
+    reason: `The official Athletics Ireland calendar confirms the 10-mile road race and approved permit 26/516, checked ${LATEST_DAILY_RESEARCH_CHECKED_AT}, but registration is Open Soon and the only live provenance is the shared calendar URL already used by another public series. Hold until an event-specific official URL is available so normalized-source duplicate protection is not weakened.`,
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {
@@ -1674,6 +1723,20 @@ export const dailyHalfTenMileResearchQueue = [
     country: "Ireland",
     reason:
       "The official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "nenagh-half-marathon-10k-2027",
+    date: "2027-02-21",
+    country: "Ireland",
+    reason: `The official Athletics Ireland calendar confirms the half-marathon and 10K date, checked ${NEWEST_DAILY_RESEARCH_CHECKED_AT}, but still labels the permit as pending approval.`,
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "noreen-mccarthy-memorial-road-race-2027",
+    date: "2027-02-14",
+    country: "Ireland",
+    reason: `The official Athletics Ireland calendar confirms a 10-mile road race on 14 February 2027, checked ${LATEST_DAILY_RESEARCH_CHECKED_AT}, but still labels its permit as pending approval.`,
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {
@@ -1714,6 +1777,13 @@ export const dailyHalfTenMileResearchQueue = [
     country: "Ireland",
     reason:
       "The official Athletics Ireland calendar confirms a running festival with both 10-mile and half-marathon distances but still labels the permit as pending approval.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "longford-marathon-festival-2027",
+    date: "2027-08-29",
+    country: "Ireland",
+    reason: `The official Athletics Ireland calendar confirms the half-marathon date, checked ${CURRENT_DAILY_RESEARCH_CHECKED_AT}, but still labels the permit as pending approval. If approved, enrich the existing Abbott Longford Marathon Festival card instead of creating another series.`,
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
 ] as const;
@@ -1941,6 +2011,13 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     source_url: "https://www.sientries.co.uk/event/collingbourne-races-2027",
     defaultStartTime: "08:30",
   },
+  "central-lancashire-new-year-half-marathon-2027": {
+    area: "Marriott Hotel, Broughton and the Lancashire countryside",
+    organiser: "Fylde Coast Runners",
+    website: "https://www.sientries.co.uk/event/central-lancs-new-years-half-marathon-2027",
+    source_url: "https://www.sientries.co.uk/event/central-lancs-new-years-half-marathon-2027",
+    defaultStartTime: "10:00",
+  },
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
@@ -1982,6 +2059,27 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
     source: "https://www.sientries.co.uk/event/ultra-trails-tibthorpe-loop-2027",
     notes:
       "The direct official registration page confirms the 20 February 2027 trail half marathon at Field House Farm, open entry and a five-hour cut-off.",
+  },
+  "dundalk-half-marathon-10k-2027|2027-01-31|10K": {
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl: "https://eventmaster.ie/event/02RwczqsA1",
+    startTime: "10:20",
+    source: "https://eventmaster.ie/event/02RwczqsA1",
+    publishAllDistances: true,
+    notes:
+      "The approved official registration page confirms the 31 January 2027 half marathon and 10K, with the half starting at 10:20 and open direct entry; the existing Dundalk card is enriched instead of duplicated.",
+  },
+  "central-lancashire-new-year-half-marathon-2027|2027-01-10|Half": {
+    distance: "Half",
+    distanceKm: 21.0975,
+    status: "Open",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18516",
+    startTime: "10:00",
+    source: "https://www.sientries.co.uk/event/central-lancs-new-years-half-marathon-2027",
+    notes:
+      "The direct official registration page confirms the accurately measured 10 January 2027 half marathon, 10:00 start and open event-specific checkout.",
   },
 };
 
@@ -2043,6 +2141,38 @@ export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
       priceCurrency: "GBP",
       checkedAt: LATEST_DAILY_RELEASE_CHECKED_AT,
       sourceUrl: "https://www.sientries.co.uk/event/ultra-trails-tibthorpe-loop-2027",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration checkout.",
+    },
+  ],
+  "dundalk-half-marathon-10k-2027|2027-01-31|Half": [
+    {
+      providerCode: "official-dundalk-half-marathon-10k-2027",
+      providerName: "BEAR Races / Eventmaster",
+      entryUrl: "https://eventmaster.ie/event/02RwczqsA1",
+      entryType: "official",
+      status: "open",
+      priceAmount: 44.5,
+      priceCurrency: "EUR",
+      checkedAt: LATEST_OFFICIAL_SOURCE_CHECKED_AT,
+      sourceUrl: "https://eventmaster.ie/event/02RwczqsA1",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration checkout.",
+    },
+  ],
+  "central-lancashire-new-year-half-marathon-2027|2027-01-10|Half": [
+    {
+      providerCode: "official-central-lancashire-new-year-half-marathon-2027",
+      providerName: "Fylde Coast Runners / SiEntries",
+      entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18516",
+      entryType: "official",
+      status: "open",
+      priceAmount: 30,
+      priceCurrency: "GBP",
+      checkedAt: LATEST_OFFICIAL_SOURCE_CHECKED_AT,
+      sourceUrl: "https://www.sientries.co.uk/event/central-lancs-new-years-half-marathon-2027",
       isVerified: true,
       isPrimary: true,
       notes: "Direct official event-specific registration checkout.",

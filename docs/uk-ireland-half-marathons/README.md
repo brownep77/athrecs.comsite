@@ -16,6 +16,6 @@ The workflow rejects duplicate slugs, duplicate normalized names, duplicate `ser
 
 ## Held candidates
 
-Nenagh, Cork City and Waterford Viking 2027 remain unpublished while their official pages show permit approval as pending. Carlingford and Mullingar 2027 remain unpublished until exact dates are available.
+Nenagh and Waterford Viking 2027 remain unpublished while their official pages show permit approval as pending. Waterford Viking's main half-marathon date is 20 June 2027; 19 June is the children's fun run. Cork City 2027 is also held because the Athletics Ireland calendar shows approved permit `26/483` while the direct official registration page still says permit approval is pending. Carlingford and Mullingar 2027 remain unpublished until exact dates are available.
 
 Run `npm run verify:uk-ireland-half-marathons` to validate the batch, official-source provenance, in-place enrichments, research-queue isolation, catalogue wiring and persistent seed version.
