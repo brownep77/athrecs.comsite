@@ -132,6 +132,21 @@ try {
     where athlete.slug in ('directory-fixture-alpha', 'directory-fixture-secret')`;
   const alpha = identifierRows.find((row) => row.slug.endsWith("alpha"));
   const secret = identifierRows.find((row) => row.slug.endsWith("secret"));
+  await sql`update athletes set profile_details='{"nationality":null,"birthdayVisibility":null}'::jsonb,
+    date_of_birth='1980-01-02' where id=${alpha.id}`;
+  const nullDetailsProfile = await rpc("api", "getAthleteBySlug", alpha.slug);
+  assert.equal(
+    nullDetailsProfile.athlete.id,
+    alpha.id,
+    "An imported null must not break a profile",
+  );
+  assert.equal(
+    (
+      await sql`select profile_details->'nationality' as nationality from athletes where id=${alpha.id}`
+    )[0].nationality,
+    null,
+    "Reading a profile must not rewrite its source details",
+  );
   const reference = (number) => `ATH-${number.padStart(6, "0")}`;
   const byId = await rpc("athlete-directory-api", "getAthleteDirectory", {
     q: reference(alpha.athlete_number).toLowerCase(),

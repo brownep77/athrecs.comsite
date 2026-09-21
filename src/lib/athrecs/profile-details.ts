@@ -13,7 +13,14 @@ export const profileDetailsSchema = z.object({
 export type AthleteProfileDetails = z.infer<typeof profileDetailsSchema>;
 export type PublicProfileDetails = AthleteProfileDetails & { birthday: string };
 export function readProfileDetails(value: unknown): AthleteProfileDetails {
-  return profileDetailsSchema.parse(value ?? {});
+  // Imports may represent unknown details as JSON null. Treat those fields as
+  // absent when reading, so the existing blank/private defaults apply. Keep the
+  // write schema strict and never mutate the stored source object.
+  const details =
+    value && typeof value === "object" && !Array.isArray(value)
+      ? Object.fromEntries(Object.entries(value).filter(([, field]) => field !== null))
+      : value;
+  return profileDetailsSchema.parse(details ?? {});
 }
 /** Never return the underlying birthday when the athlete has chosen to hide it. */
 export function publicProfileDetails(value: unknown, dob?: string | null): PublicProfileDetails {
