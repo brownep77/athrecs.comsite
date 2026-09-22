@@ -181,8 +181,10 @@ export const listEvents = createServerFn({ method: "GET" })
     const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
     const dateTo = data.dateTo?.trim() || monthRange?.to || null;
 
+    // Inline the filtered set so repeated event lookups retain the editions
+    // index instead of scanning a materialized copy of the whole catalogue.
     const rows = await sql<RawEventRow>`
-      with display_editions as (
+      with display_editions as not materialized (
         select ed.* from editions ed
         where (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or ed.event_date <= ${dateTo}::date)
