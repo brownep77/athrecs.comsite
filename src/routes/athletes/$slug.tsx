@@ -5,6 +5,7 @@ import {
 } from "@/components/athletes/EditorialAthleteOverview";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
 import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
+import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -396,6 +397,7 @@ function AthletePage() {
       </section>
 
       <EditorialAthleteOverview slug={athlete.slug} />
+      <AthleteMediaCoverage slug={athlete.slug} />
       {(!isPublicFigure || profileResults.length > 0 || includedHistory) && (
         <ProfileRecordHighlights
           results={profileResults}
