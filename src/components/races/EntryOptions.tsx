@@ -1,7 +1,8 @@
 import { CalendarClock, ExternalLink, ShieldCheck, Ticket } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { formatRaceDateShort } from "@/lib/athrecs/format";
+import { formatRaceDateShort, todayIso } from "@/lib/athrecs/format";
+import { entryDeadlinePassed, raceLink } from "@/lib/athrecs/race-information";
 import type { EditionEntryOption, EntryOptionStatus, EntryOptionType } from "@/lib/athrecs/types";
 
 const STATUS_LABELS: Record<EntryOptionStatus, string> = {
@@ -45,10 +46,10 @@ function checkedLabel(option: EditionEntryOption): string {
 
 function availabilityDetail(option: EditionEntryOption): string | null {
   if (option.closes_at && ["open", "closing_soon", "ballot", "waitlist"].includes(option.status)) {
-    return `Closes ${formatRaceDateShort(option.closes_at)}`;
+    return `Closes ${formatRaceDateShort(option.closes_at.slice(0, 10))}`;
   }
   if (option.opens_at && ["closed", "unknown"].includes(option.status)) {
-    return `Opens ${formatRaceDateShort(option.opens_at)}`;
+    return `Opens ${formatRaceDateShort(option.opens_at.slice(0, 10))}`;
   }
   return null;
 }
@@ -62,6 +63,7 @@ export function EntryOptions({
   editionDate?: string;
   officialWebsite?: string;
 }) {
+  const validOptions = options.filter((option) => raceLink(option.entry_url));
   return (
     <section
       aria-labelledby="entry-options-heading"
@@ -76,7 +78,7 @@ export function EntryOptions({
             </h2>
           </div>
           <p className="text-sm text-muted">
-            Official entry is shown first, followed by other verified booking routes when available.
+            Compare the listed booking routes. Verified links show when they were checked.
           </p>
         </div>
         {editionDate ? (
@@ -87,12 +89,15 @@ export function EntryOptions({
         ) : null}
       </div>
 
-      {options.length ? (
+      {validOptions.length ? (
         <div className="grid gap-3 lg:grid-cols-2">
-          {options.map((option) => {
+          {validOptions.map((option) => {
             const price = formatPrice(option);
             const availability = availabilityDetail(option);
-            const unavailable = option.status === "closed" || option.status === "sold_out";
+            const expired =
+              (editionDate && editionDate < todayIso()) || entryDeadlinePassed(option.closes_at);
+            const unavailable =
+              option.status === "closed" || option.status === "sold_out" || expired;
             return (
               <article
                 key={`${option.provider_code}-${option.id}`}
@@ -109,7 +114,7 @@ export function EntryOptions({
                   </div>
                   <div className="flex flex-wrap justify-end gap-1.5">
                     <Badge variant={unavailable ? "default" : "solid"}>
-                      {STATUS_LABELS[option.status]}
+                      {expired ? "Closed" : STATUS_LABELS[option.status]}
                     </Badge>
                     {option.is_verified ? (
                       <Badge variant="outline">
@@ -126,13 +131,15 @@ export function EntryOptions({
                   <span>{checkedLabel(option)}</span>
                 </div>
 
-                {option.notes ? <p className="text-xs leading-relaxed text-muted">{option.notes}</p> : null}
+                {option.notes ? (
+                  <p className="text-xs leading-relaxed text-muted">{option.notes}</p>
+                ) : null}
 
                 <Button asChild variant={option.is_primary ? "default" : "secondary"}>
                   <a href={option.entry_url} target="_blank" rel="noreferrer sponsored">
                     {unavailable
                       ? "Check provider"
-                      : option.entry_type === "official"
+                      : option.entry_type === "official" && option.is_verified
                         ? "Enter officially"
                         : `View ${option.provider_name}`}
                     <ExternalLink className="h-3.5 w-3.5" />
@@ -148,10 +155,10 @@ export function EntryOptions({
           <p className="mt-1 text-xs text-muted">
             Check the organiser’s page for the latest ballot, waiting-list or entry information.
           </p>
-          {officialWebsite ? (
+          {raceLink(officialWebsite) ? (
             <Button asChild variant="secondary" className="mt-3">
               <a href={officialWebsite} target="_blank" rel="noreferrer">
-                Official race page
+                Race website
                 <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </Button>

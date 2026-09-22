@@ -50,6 +50,10 @@ import { raceFormatGuideFor } from "@/data/race-format-guides";
 import { raceQualifications, type RaceQualification } from "@/data/race-qualifications";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { SITE_NAME, SITE_URL, siteGraphMeta, sportsEventJsonLd } from "@/lib/athrecs/seo";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { RacePracticalInformation } from "@/components/races/RacePracticalInformation";
+import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
+import { editionEntry } from "@/lib/athrecs/race-information";
 
 type EditionRow = {
   id: number;
@@ -103,7 +107,7 @@ export const Route = createFileRoute("/races/$slug")({
       : `${event.name} | ${SITE_NAME}`;
     const description =
       event.summary ||
-      `ATHRECS event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`;
+      `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`;
     const next = upcoming[0];
 
     return {
@@ -239,6 +243,8 @@ export function RacePageContent({
   });
 
   const nextStatus = next ? effectiveStatus(next.event_date, next.status as EntryStatus) : null;
+  const nextEntry = next ? editionEntry(next) : null;
+  const nextDayEditions = upcoming.filter((edition) => edition.event_date === next?.event_date);
   const primaryEntry =
     next?.entry_options.find((option) => option.is_primary) ??
     next?.entry_options.find((option) => option.entry_type === "official") ??
@@ -326,13 +332,15 @@ export function RacePageContent({
             {next ? (
               <div className="rounded-xl border border-border bg-elevated px-4 py-3 text-left lg:min-w-44 lg:text-right">
                 <p className="text-[11px] font-semibold uppercase tracking-wider text-subtle">
-                  Next start
+                  Next race day
                 </p>
                 <p className="font-display text-xl font-semibold text-fg">
                   {formatRaceDateShort(next.event_date)}
                 </p>
                 <p className="text-sm font-medium text-muted">
-                  {nextStart ?? (zoneAbbr ? `Time TBC · ${zoneAbbr}` : "Time TBC")}
+                  {IS_RUNRECS_SITE && nextDayEditions.length > 1
+                    ? `${nextDayEditions.length} distances · see start times below`
+                    : (nextStart ?? (zoneAbbr ? `Time TBC · ${zoneAbbr}` : "Time TBC"))}
                 </p>
               </div>
             ) : (
@@ -346,20 +354,31 @@ export function RacePageContent({
             {event.website && (
               <Button asChild>
                 <a href={event.website} target="_blank" rel="noreferrer">
-                  Official page
+                  {IS_RUNRECS_SITE ? "Race website" : "Official page"}
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
               </Button>
             )}
-            {primaryEntry && nextStatus !== "Finished" && (
+            {IS_RUNRECS_SITE && nextEntry ? (
               <Button asChild variant="secondary">
-                <a href={primaryEntry.entry_url} target="_blank" rel="noreferrer sponsored">
-                  {primaryEntry.entry_type === "official"
-                    ? "Official entry"
-                    : `Enter via ${primaryEntry.provider_name}`}
+                <a href={nextEntry.url} target="_blank" rel="noopener noreferrer">
+                  {nextEntry.label}
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
               </Button>
+            ) : (
+              !IS_RUNRECS_SITE &&
+              primaryEntry &&
+              nextStatus !== "Finished" && (
+                <Button asChild variant="secondary">
+                  <a href={primaryEntry.entry_url} target="_blank" rel="noreferrer sponsored">
+                    {primaryEntry.entry_type === "official"
+                      ? "Official entry"
+                      : `Enter via ${primaryEntry.provider_name}`}
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </Button>
+              )
             )}
             {spectatorAccess?.ticket_url && (
               <Button asChild variant="secondary">
@@ -379,15 +398,46 @@ export function RacePageContent({
         </div>
       </header>
 
+      {IS_RUNRECS_SITE ? (
+        <>
+          <nav
+            aria-label="Race information"
+            className="flex flex-wrap gap-x-5 gap-y-2 border-b border-border pb-3 text-sm font-semibold text-accent"
+          >
+            <a className="inline-flex min-h-10 items-center" href="#race-schedule">
+              Dates & entry
+            </a>
+            <a className="inline-flex min-h-10 items-center" href="#race-location">
+              Location & race day
+            </a>
+            {event.sport !== "Parkrun" && (
+              <a className="inline-flex min-h-10 items-center" href="#entry-options-heading">
+                All entry options
+              </a>
+            )}
+            {pastWithResults.length ? (
+              <a className="inline-flex min-h-10 items-center" href="#results-heading">
+                Results
+              </a>
+            ) : null}
+          </nav>
+          <RacePracticalInformation data={data} />
+        </>
+      ) : null}
+
       <RaceGroupDetails groups={groups} />
 
       {qualification && <QualificationDetails qualification={qualification} />}
 
-      <EntryOptions
-        options={next?.entry_options ?? []}
-        editionDate={next?.event_date}
-        officialWebsite={event.website}
-      />
+      {IS_RUNRECS_SITE ? (
+        <RaceEntryOptions data={data} />
+      ) : (
+        <EntryOptions
+          options={next?.entry_options ?? []}
+          editionDate={next?.event_date}
+          officialWebsite={event.website}
+        />
+      )}
 
       {spectatorAccess && spectatorLabel ? (
         <section className="flex flex-wrap items-start justify-between gap-4 rounded-xl border border-border bg-surface p-5 shadow-card">
@@ -417,47 +467,52 @@ export function RacePageContent({
         </section>
       ) : null}
 
-      <section aria-labelledby="key-facts-heading">
-        <h2 id="key-facts-heading" className="mb-3 font-display text-lg font-semibold text-fg">
-          Key facts
-        </h2>
-        <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
-          <Fact
-            label="Date"
-            value={next ? formatRaceDateShort(next.event_date) : "No future date"}
-          />
-          <Fact
-            label="Local start"
-            value={nextStart ?? "Confirm officially"}
-            hint={zoneAbbr ? `Venue zone ${zoneAbbr}` : undefined}
-          />
-          <Fact label="Country" value={displayCountryName(country)} />
-          <Fact label="City" value={event.city || "TBC"} />
-          <Fact
-            label="Distances"
-            value={
-              shownDistances.length
-                ? shownDistances.map((d) => formatDistanceWithUnits(d)).join(" · ")
-                : "See official timetable"
-            }
-          />
-          <Fact label="Surface" value={event.surface || "TBC"} />
-          <Fact label="Sport" value={sportLabel(event.sport)} />
-          <Fact label="Organiser" value={event.organiser || "See official page"} />
-          <Fact label="Entry" value={nextStatus ? statusLabel(nextStatus) : "See official page"} />
-          <Fact label="Spectators" value={spectatorLabel ?? "Not confirmed"} />
-          <Fact label="Listed from" value={briefing.source.label} />
-          <Fact label="Past races on ATHRECS" value={String(past.length)} />
-          <Fact
-            label="Results listed"
-            value={
-              pastWithResults.length
-                ? `${pastWithResults.length} edition${pastWithResults.length === 1 ? "" : "s"}`
-                : "None yet"
-            }
-          />
-        </dl>
-      </section>
+      {!IS_RUNRECS_SITE && (
+        <section aria-labelledby="key-facts-heading">
+          <h2 id="key-facts-heading" className="mb-3 font-display text-lg font-semibold text-fg">
+            Key facts
+          </h2>
+          <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+            <Fact
+              label="Date"
+              value={next ? formatRaceDateShort(next.event_date) : "No future date"}
+            />
+            <Fact
+              label="Local start"
+              value={nextStart ?? "Confirm officially"}
+              hint={zoneAbbr ? `Venue zone ${zoneAbbr}` : undefined}
+            />
+            <Fact label="Country" value={displayCountryName(country)} />
+            <Fact label="City" value={event.city || "TBC"} />
+            <Fact
+              label="Distances"
+              value={
+                shownDistances.length
+                  ? shownDistances.map((d) => formatDistanceWithUnits(d)).join(" · ")
+                  : "See official timetable"
+              }
+            />
+            <Fact label="Surface" value={event.surface || "TBC"} />
+            <Fact label="Sport" value={sportLabel(event.sport)} />
+            <Fact label="Organiser" value={event.organiser || "See official page"} />
+            <Fact
+              label="Entry"
+              value={nextStatus ? statusLabel(nextStatus) : "See official page"}
+            />
+            <Fact label="Spectators" value={spectatorLabel ?? "Not confirmed"} />
+            <Fact label="Listed from" value={briefing.source.label} />
+            <Fact label="Past races on ATHRECS" value={String(past.length)} />
+            <Fact
+              label="Results listed"
+              value={
+                pastWithResults.length
+                  ? `${pastWithResults.length} edition${pastWithResults.length === 1 ? "" : "s"}`
+                  : "None yet"
+              }
+            />
+          </dl>
+        </section>
+      )}
 
       {formatGuide && (
         <section
@@ -538,55 +593,61 @@ export function RacePageContent({
         </section>
       )}
 
-      <section className="grid gap-4 lg:grid-cols-5">
-        <div className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card lg:col-span-3">
-          <div className="flex items-center gap-2">
-            <Info className="h-4 w-4 text-accent" />
-            <h2 className="font-display text-lg font-semibold text-fg">Athlete briefing</h2>
+      {!IS_RUNRECS_SITE && (
+        <section className="grid gap-4 lg:grid-cols-5">
+          <div className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card lg:col-span-3">
+            <div className="flex items-center gap-2">
+              <Info className="h-4 w-4 text-accent" />
+              <h2 className="font-display text-lg font-semibold text-fg">Athlete briefing</h2>
+            </div>
+            <p className="max-w-prose text-sm leading-relaxed text-fg">{briefing.lede}</p>
+            <p className="max-w-prose text-sm leading-relaxed text-muted">{briefing.what}</p>
+            <p className="max-w-prose text-sm leading-relaxed text-muted">{briefing.confirm}</p>
           </div>
-          <p className="max-w-prose text-sm leading-relaxed text-fg">{briefing.lede}</p>
-          <p className="max-w-prose text-sm leading-relaxed text-muted">{briefing.what}</p>
-          <p className="max-w-prose text-sm leading-relaxed text-muted">{briefing.confirm}</p>
-        </div>
-        <div className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card lg:col-span-2">
-          <div className="flex items-center gap-2">
-            <ListChecks className="h-4 w-4 text-accent" />
-            <h2 className="font-display text-lg font-semibold text-fg">Before you go</h2>
+          <div className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card lg:col-span-2">
+            <div className="flex items-center gap-2">
+              <ListChecks className="h-4 w-4 text-accent" />
+              <h2 className="font-display text-lg font-semibold text-fg">Before you go</h2>
+            </div>
+            <ul className="space-y-2">
+              {briefing.checklist.map((item) => (
+                <li key={item} className="flex gap-2 text-sm text-muted">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="space-y-2">
-            {briefing.checklist.map((item) => (
-              <li key={item} className="flex gap-2 text-sm text-muted">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+        </section>
+      )}
 
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
-        <div className="flex items-center gap-2">
-          <RouteIcon className="h-4 w-4 text-accent" />
-          <h2 className="font-display text-lg font-semibold text-fg">Venue and travel</h2>
-        </div>
-        <TravelFacts venue={venue} startTime={nextStart} />
-        <p className="text-xs text-subtle">
-          Times are local to the venue ({zoneAbbr || zone}). Parking and transit are ATHRECS
-          estimates unless a postcode lookup is stored — confirm on the official page.
-        </p>
-      </section>
+      {!IS_RUNRECS_SITE && (
+        <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
+          <div className="flex items-center gap-2">
+            <RouteIcon className="h-4 w-4 text-accent" />
+            <h2 className="font-display text-lg font-semibold text-fg">Venue and travel</h2>
+          </div>
+          <TravelFacts venue={venue} startTime={nextStart} />
+          <p className="text-xs text-subtle">
+            Times are local to the venue ({zoneAbbr || zone}). Parking and transit are ATHRECS
+            estimates unless a postcode lookup is stored — confirm on the official page.
+          </p>
+        </section>
+      )}
 
-      <EditionList
-        title={
-          event.sport === "Parkrun"
-            ? "Upcoming — weekly through 25 December 2027"
-            : "Upcoming races"
-        }
-        items={upcomingPreview}
-        hidden={upcomingHidden}
-        country={event.country}
-        county={event.county}
-      />
+      {!IS_RUNRECS_SITE && (
+        <EditionList
+          title={
+            event.sport === "Parkrun"
+              ? "Upcoming — weekly through 25 December 2027"
+              : "Upcoming races"
+          }
+          items={upcomingPreview}
+          hidden={upcomingHidden}
+          country={event.country}
+          county={event.county}
+        />
+      )}
 
       <EditionResultsLinks
         items={pastWithResults}
@@ -712,29 +773,31 @@ export function RacePageContent({
         </section>
       )}
 
-      <aside className="rounded-xl border border-dashed border-border px-4 py-4 text-xs leading-relaxed text-subtle">
-        This page is an ATHRECS briefing written from public listing facts (name, date, venue,
-        sport, distances). We do not copy official athlete guides, course maps, start lists or
-        marketing copy. parkrun, World Athletics, World Triathlon and other names are trademarks of
-        their owners. Always confirm entry, rules and the course on the official page
-        {briefing.source.url ? (
-          <>
-            {" "}
-            (
-            <a
-              href={briefing.source.url}
-              className="text-muted underline"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {briefing.source.label}
-            </a>
-            )
-          </>
-        ) : (
-          "."
-        )}
-      </aside>
+      {!IS_RUNRECS_SITE && (
+        <aside className="rounded-xl border border-dashed border-border px-4 py-4 text-xs leading-relaxed text-subtle">
+          This page is an ATHRECS briefing written from public listing facts (name, date, venue,
+          sport, distances). We do not copy official athlete guides, course maps, start lists or
+          marketing copy. parkrun, World Athletics, World Triathlon and other names are trademarks
+          of their owners. Always confirm entry, rules and the course on the official page
+          {briefing.source.url ? (
+            <>
+              {" "}
+              (
+              <a
+                href={briefing.source.url}
+                className="text-muted underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {briefing.source.label}
+              </a>
+              )
+            </>
+          ) : (
+            "."
+          )}
+        </aside>
+      )}
     </div>
   );
 }
