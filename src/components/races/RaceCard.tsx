@@ -27,6 +27,8 @@ import { Button } from "@/components/ui/button";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { RunRecsRaceCard } from "./RunRecsRaceCard";
 
 function SportIcon({ sport }: { sport: Sport }) {
   if (sport === "Cycling") return <Bike className="h-3.5 w-3.5" />;
@@ -50,6 +52,7 @@ export function RaceCard({
   race: EventListItem;
   localized?: { language: string; country: string };
 }) {
+  if (IS_RUNRECS_SITE) return <RunRecsRaceCard race={race} localized={localized} />;
   const focusDate = race.next_date;
   const focusStatus =
     race.next_date && race.next_status ? effectiveStatus(race.next_date, race.next_status) : null;

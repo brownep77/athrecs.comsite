@@ -14,6 +14,8 @@ import { Badge } from "@/components/ui/badge";
 import { NationBadge } from "@/components/flags/NationFlag";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
 import { TravelFacts } from "@/components/races/TravelFacts";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { raceLocation } from "@/lib/athrecs/race-information";
 import { sanitizeDistances, splitDistanceLabels } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import type { VenueDetails } from "@/data/venue-details";
@@ -291,6 +293,16 @@ function EventCard({ ed }: { ed: CardModel }) {
       className="block rounded-xl border border-border bg-surface p-3.5 no-underline shadow-card hover:border-border-strong"
     >
       <div className="min-w-0 flex-1 space-y-2">
+        {IS_RUNRECS_SITE ? (
+          <>
+            <p className="font-display text-lg font-semibold leading-snug text-fg">
+              {ed.event_name}
+            </p>
+            <p className="text-sm leading-relaxed text-muted">
+              {raceLocation([venue.address, venue.postcode, venue.nation])}
+            </p>
+          </>
+        ) : null}
         <div className="flex flex-wrap items-center gap-1.5">
           <NationBadge nation={nation} />
           <Badge variant="accent">{ed.sport}</Badge>
@@ -303,7 +315,11 @@ function EventCard({ ed }: { ed: CardModel }) {
           <RaceGroupBadges groups={ed.groups ?? []} />
           <Badge variant={st === "Finished" ? "default" : "solid"}>{statusLabel(st)}</Badge>
         </div>
-        <p className="font-display text-base font-semibold leading-snug text-fg">{ed.event_name}</p>
+        {!IS_RUNRECS_SITE && (
+          <p className="font-display text-base font-semibold leading-snug text-fg">
+            {ed.event_name}
+          </p>
+        )}
         <p className="text-sm font-medium text-fg">
           {formatRaceDateShort(ed.event_date)}
           {start ? (
@@ -312,7 +328,7 @@ function EventCard({ ed }: { ed: CardModel }) {
             <span className="text-subtle"> · Start time TBC</span>
           )}
         </p>
-        <TravelFacts venue={venue} startTime={start} />
+        {!IS_RUNRECS_SITE && <TravelFacts venue={venue} startTime={start} />}
       </div>
     </Link>
   );

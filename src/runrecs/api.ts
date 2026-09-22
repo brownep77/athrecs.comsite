@@ -11,6 +11,7 @@ import type {
   Sport,
 } from "../lib/athrecs/types";
 import * as base from "../lib/athrecs/api";
+import { supplementedStart } from "../data/runrecs-race-guides";
 
 // Keep every staff/import function available. Explicit RunRecs exports below
 // replace only the public catalogue functions that require sport isolation.
@@ -146,6 +147,8 @@ type RawEventRow = {
   next_distance: string | null;
   next_status: string | null;
   next_start_time: string | null;
+  next_entry_url: string | null;
+  next_starts_json: string | Array<{ distance: string; time: string | null }> | null;
   upcoming_count: number;
   past_count: number;
   edition_count: number;
@@ -179,6 +182,14 @@ export const listEvents = createServerFn({ method: "GET" })
     const dateTo = data.dateTo?.trim() || monthRange?.to || null;
 
     const rows = await sql<RawEventRow>`
+      with display_editions as (
+        select ed.* from editions ed
+        where (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
+          and (${dateTo}::date is null or ed.event_date <= ${dateTo}::date)
+          and ((${dateFrom}::date is not null or ${dateTo}::date is not null) or ed.event_date >= ${today}::date)
+          and (${upcomingOnly}::boolean is false or ed.event_date >= ${today}::date)
+          and (${distance}::text is null or ed.distance_code = ${distance})
+      )
       select
         e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
         e.surface, e.summary, e.organiser, e.website,
@@ -201,25 +212,47 @@ export const listEvents = createServerFn({ method: "GET" })
           from event_groups g where g.event_id = e.id
         ) as groups_json,
         (
-          select ed.event_date::text from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
-          order by ed.event_date asc limit 1
+          select ed.event_date::text from display_editions ed
+          where ed.event_id = e.id
+          order by ed.event_date asc, ed.distance_km asc, ed.id asc limit 1
         ) as next_date,
         (
-          select ed.distance_code from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
-          order by ed.event_date asc limit 1
+          select ed.distance_code from display_editions ed
+          where ed.event_id = e.id
+          order by ed.event_date asc, ed.distance_km asc, ed.id asc limit 1
         ) as next_distance,
         (
-          select ed.status from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
-          order by ed.event_date asc limit 1
+          select ed.status from display_editions ed
+          where ed.event_id = e.id
+          order by ed.event_date asc, ed.distance_km asc, ed.id asc limit 1
         ) as next_status,
         (
-          select ed.start_time from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
-          order by ed.event_date asc limit 1
+          select ed.start_time from display_editions ed
+          where ed.event_id = e.id
+          order by ed.event_date asc, ed.distance_km asc, ed.id asc limit 1
         ) as next_start_time,
+        (
+          select option.entry_url
+          from display_editions ed
+          join edition_entry_options option on option.edition_id = ed.id
+          where ed.event_id = e.id
+            and ed.status not in ('Closed', 'Finished')
+            and option.entry_type = 'official' and option.is_verified
+            and option.status in ('open', 'closing_soon', 'ballot', 'waitlist', 'unknown')
+            and (option.closes_at is null or option.closes_at >= ${today}::date)
+            and ed.id = (select first_ed.id from display_editions first_ed
+              where first_ed.event_id = e.id
+              order by first_ed.event_date, first_ed.distance_km, first_ed.id limit 1)
+          order by option.is_primary desc, option.checked_at desc, option.id limit 1
+        ) as next_entry_url,
+        (
+          select json_agg(json_build_object('distance', ed.distance_code, 'time', ed.start_time)
+            order by ed.distance_km, ed.id)::text
+          from display_editions ed where ed.event_id = e.id and ed.event_date = (
+            select min(first_ed.event_date) from display_editions first_ed
+            where first_ed.event_id = e.id
+          )
+        ) as next_starts_json,
         (
           select count(*)::int from editions ed
           where ed.event_id = e.id and ed.event_date >= ${today}::date
@@ -232,6 +265,12 @@ export const listEvents = createServerFn({ method: "GET" })
       from events e
       where e.sport in ('Running', 'Parkrun')
         and (${requestedSport}::text is null or e.sport = ${requestedSport})
+        and (
+          (${upcomingOnly}::boolean is false and ${dateFrom}::date is null
+            and ${dateTo}::date is null and ${distance}::text is null)
+          or e.sport = 'Parkrun'
+          or exists (select 1 from display_editions ed where ed.event_id = e.id)
+        )
         and (
           ${q}::text is null
           or lower(e.name) like ${q}
@@ -293,12 +332,12 @@ export const listEvents = createServerFn({ method: "GET" })
         )
       order by
         case when (
-          select min(ed.event_date) from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          select min(ed.event_date) from display_editions ed
+          where ed.event_id = e.id
         ) is null then 1 else 0 end,
         (
-          select min(ed.event_date) from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          select min(ed.event_date) from display_editions ed
+          where ed.event_id = e.id
         ) asc nulls last,
         e.name asc
       limit ${fetchLimit}
@@ -320,7 +359,11 @@ export const listEvents = createServerFn({ method: "GET" })
 
     const mapped: EventListItem[] = rows
       .map((rawRow): EventListItem | null => {
-        const { groups_json, distances_csv, ...row } = rawRow;
+        const { groups_json, distances_csv, next_starts_json, ...row } = rawRow;
+        const nextStarts =
+          typeof next_starts_json === "string"
+            ? (JSON.parse(next_starts_json) as Array<{ distance: string; time: string | null }>)
+            : (next_starts_json ?? []);
         const distances = sanitizeDistances(
           row.name,
           distances_csv ? distances_csv.split(",") : [],
@@ -344,7 +387,14 @@ export const listEvents = createServerFn({ method: "GET" })
           next_start_time:
             row.sport === "Parkrun"
               ? parkrunStartTime(row.country, /junior/i.test(row.name))
-              : row.next_start_time,
+              : supplementedStart(row, nextDate, row.next_distance, row.next_start_time),
+          next_starts:
+            row.sport === "Parkrun"
+              ? []
+              : nextStarts.map((start) => ({
+                  distance: start.distance,
+                  time: supplementedStart(row, nextDate, start.distance, start.time),
+                })),
           next_status:
             (row.next_status as EntryStatus) ?? (row.sport === "Parkrun" ? "Open" : null),
           next_distance:
@@ -393,6 +443,15 @@ export const getEventBySlug = createServerFn({ method: "GET" })
     if (!result || !isRunRecsSport(result.event.sport)) return null;
     return {
       ...result,
+      upcoming: result.upcoming.map((edition) => ({
+        ...edition,
+        start_time: supplementedStart(
+          result.event,
+          edition.event_date,
+          edition.distance_code,
+          edition.start_time,
+        ),
+      })),
       related: result.related.filter((event) => isRunRecsSport(event.sport)),
     };
   });
@@ -693,6 +752,15 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     const seen = new Set<string>();
     return sets
       .flat()
+      .map((row) => ({
+        ...row,
+        start_time: supplementedStart(
+          { slug: row.event_slug },
+          row.event_date,
+          row.distance_code,
+          row.start_time,
+        ),
+      }))
       .filter((row) => {
         const key = `${row.event_slug}|${row.event_date}|${row.distance_code}`;
         if (seen.has(key)) return false;
