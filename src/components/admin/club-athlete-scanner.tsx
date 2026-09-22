@@ -618,8 +618,8 @@ export function ClubScanner() {
           </h2>
           <p className="text-sm text-muted">
             Approval records your identity decision. Publishing rechecks source values and
-            duplicates, then adds a source history. Source histories do not change PBs or
-            achievements.
+            duplicates, then adds a source history. Source histories stay separate from canonical
+            race results and PBs.
           </p>
           <div className="grid gap-3 md:grid-cols-2">
             <label className="grid gap-1 text-sm">
