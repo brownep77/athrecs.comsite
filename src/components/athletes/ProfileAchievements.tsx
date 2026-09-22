@@ -148,6 +148,7 @@ export function AchievementsBoard({
     () => buildRaceWinAchievements(results, sourceHistories, sourceGender),
     [results, sourceHistories, sourceGender],
   );
+  const showCompletionProgress = record.finishes.length > 0 || wins.length === 0;
   const hasRunning = results.some((result) =>
     ["running", "athletics", "parkrun"].includes(result.sport.trim().toLowerCase()),
   );
@@ -192,39 +193,41 @@ export function AchievementsBoard({
         <span className="text-xs text-muted">From results on this profile</span>
       </div>
       <RaceWinAchievements wins={wins} />
-      <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
-        {metrics.map(({ label, value, icon: Icon, results: evidence }) => (
-          <details key={label} className="min-w-0 rounded-lg bg-elevated p-3">
+      {showCompletionProgress ? (
+        <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
+          {metrics.map(({ label, value, icon: Icon, results: evidence }) => (
+            <details key={label} className="min-w-0 rounded-lg bg-elevated p-3">
+              <summary className="cursor-pointer list-none">
+                <Icon className="mb-2 size-4 text-accent" aria-hidden="true" />
+                <strong className="block text-2xl tabular-nums">{value}</strong>
+                <span className="text-xs text-muted">{label}</span>
+                <span className="sr-only"> · Show supporting results</span>
+              </summary>
+              {evidence.length ? (
+                <AchievementEvidence results={evidence} />
+              ) : (
+                <p className="mt-2 text-xs text-muted">No completed results recorded yet.</p>
+              )}
+            </details>
+          ))}
+          <details className="min-w-0 rounded-lg bg-elevated p-3">
             <summary className="cursor-pointer list-none">
-              <Icon className="mb-2 size-4 text-accent" aria-hidden="true" />
-              <strong className="block text-2xl tabular-nums">{value}</strong>
-              <span className="text-xs text-muted">{label}</span>
-              <span className="sr-only"> · Show supporting results</span>
+              <Globe2 className="mb-2 size-4 text-accent" aria-hidden="true" />
+              <strong className="block text-2xl tabular-nums">{record.countries.length}</strong>
+              <span className="text-xs text-muted">Countries raced in</span>
+              <span className="sr-only"> · Show countries</span>
             </summary>
-            {evidence.length ? (
-              <AchievementEvidence results={evidence} />
-            ) : (
-              <p className="mt-2 text-xs text-muted">No completed results recorded yet.</p>
-            )}
+            <div className="mt-3 space-y-2 border-t border-border pt-3 text-xs">
+              {record.countries.map((country) => (
+                <div key={country.code} className="flex items-center gap-2">
+                  <CountryFlag country={country.name} showName />
+                </div>
+              ))}
+              {!record.countries.length ? "No race countries recorded yet." : null}
+            </div>
           </details>
-        ))}
-        <details className="min-w-0 rounded-lg bg-elevated p-3">
-          <summary className="cursor-pointer list-none">
-            <Globe2 className="mb-2 size-4 text-accent" aria-hidden="true" />
-            <strong className="block text-2xl tabular-nums">{record.countries.length}</strong>
-            <span className="text-xs text-muted">Countries raced in</span>
-            <span className="sr-only"> · Show countries</span>
-          </summary>
-          <div className="mt-3 space-y-2 border-t border-border pt-3 text-xs">
-            {record.countries.map((country) => (
-              <div key={country.code} className="flex items-center gap-2">
-                <CountryFlag country={country.name} showName />
-              </div>
-            ))}
-            {!record.countries.length ? "No race countries recorded yet." : null}
-          </div>
-        </details>
-      </div>
+        </div>
+      ) : null}
       {record.milestones.length ? (
         <div className="grid items-start gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {record.milestones.map((achievement) => (
@@ -245,12 +248,12 @@ export function AchievementsBoard({
             </details>
           ))}
         </div>
-      ) : (
+      ) : showCompletionProgress ? (
         <p className="text-sm text-muted">
           Your first recorded finish starts your achievement collection.
         </p>
-      )}
-      {record.nextFinishTarget ? (
+      ) : null}
+      {record.nextFinishTarget && showCompletionProgress ? (
         <div className="space-y-2 rounded-lg bg-elevated p-3 text-sm">
           <div className="flex flex-wrap justify-between gap-2">
             <span>
