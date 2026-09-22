@@ -156,6 +156,34 @@ try {
   assert.equal((await list())[0].next_entry_url, "https://example.com/5k");
   await db.exec("update edition_entry_options set status = 'sold_out' where edition_id = 900001");
   assert.equal((await list())[0].next_entry_url, null, "Sold-out entries cannot appear open");
+  // A shared materialized edition set turns each per-event lookup into a full
+  // catalogue scan. Exercise enough rows to inspect the actual indexed plan.
+  await db.exec(`
+    insert into events (id, slug, name, sport, county, city)
+      select 910000 + n, 'scale-' || n, 'Scale race ' || n, 'Running', 'Norfolk', 'Norwich'
+      from generate_series(1, 1500) n;
+    insert into event_distances (event_id, distance_code)
+      select id, '5K' from events where id > 910000;
+    insert into editions (event_id, event_date, distance_code, distance_km, status)
+      select event.id, date '2099-10-01' + n, '5K', 5, 'Open'
+      from events event cross join generate_series(0, 15) n where event.id > 910000;
+    analyze events; analyze editions;
+  `);
+  const explain = async (parts, ...params) => {
+    const text = parts.reduce((text, part, index) => text + (index ? `$${index}` : "") + part, "");
+    return (await db.query(`explain (format json) ${text}`, params)).rows;
+  };
+  const plan = await runQuery(explain, ...Object.values(defaults));
+  assert(
+    !JSON.stringify(plan).includes('"Node Type":"CTE Scan"'),
+    "Per-event lookups must not repeatedly scan a materialized catalogue",
+  );
+  const started = performance.now();
+  const scaled = await list();
+  assert.equal(scaled.length, 100);
+  console.log(
+    `Listing 1,501 races / 24,004 editions: ${Math.round(performance.now() - started)}ms`,
+  );
   console.log(
     "RunRecs race information: query alignment, entry availability, safe links and source matching passed.",
   );
