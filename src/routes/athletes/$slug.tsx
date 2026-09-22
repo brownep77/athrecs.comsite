@@ -140,6 +140,7 @@ export const Route = createFileRoute("/athletes/$slug")({
                 url: canonical,
                 name: title,
                 description,
+                citation: sourceHistories.map((history) => history.sourceUrl),
                 mainEntity: { "@id": `${canonical}#athlete` },
                 breadcrumb: { "@id": `${canonical}#breadcrumb` },
               },
@@ -151,7 +152,6 @@ export const Route = createFileRoute("/athletes/$slug")({
                 description: athlete.bio || description,
                 nationality: athlete.nationality || athlete.country || undefined,
                 knowsAbout: athlete.profile_roles,
-                sameAs: sourceHistories.map((history) => history.sourceUrl),
                 memberOf: clubLabel
                   ? { "@type": "SportsOrganization", name: athlete.club }
                   : undefined,
