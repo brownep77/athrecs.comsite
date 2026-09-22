@@ -922,6 +922,8 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
       event_date: string;
       distance_code: string;
       overall_place: number | null;
+      gender_place: number | null;
+      category_place: number | null;
       finish_time_seconds: number | null;
       category: string | null;
       result_source: string | null;
@@ -934,7 +936,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
         e.sport,
         ed.event_date::text as event_date,
         ed.distance_code,
-        r.overall_place,
+        r.overall_place, r.gender_place, r.category_place,
         r.finish_time_seconds,
         r.category,
         r.result_source,
@@ -1005,6 +1007,9 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
           chipTimeSeconds: r.chip_time_seconds,
           gunTimeSeconds: r.gun_time_seconds,
           overallPlace: r.overall_place,
+          genderPlace: r.gender_place,
+          categoryPlace: r.category_place,
+          resultGender: athlete.gender,
           category: r.category,
           resultSource: r.result_source,
           sourceUrls: r.source_url ? [r.source_url] : [],

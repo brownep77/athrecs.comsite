@@ -398,10 +398,15 @@ function AthletePage() {
 
       <EditorialAthleteOverview slug={athlete.slug} />
       <AthleteMediaCoverage slug={athlete.slug} />
-      {(!isPublicFigure || profileResults.length > 0 || includedHistory) && (
+      {(!isPublicFigure ||
+        profileResults.length > 0 ||
+        sourceHistories.length > 0 ||
+        includedHistory) && (
         <ProfileRecordHighlights
           results={profileResults}
           reportedBests={includedHistory?.personalBests}
+          sourceHistories={sourceHistories}
+          sourceGender={athlete.gender}
         />
       )}
       <EditorialRoadSplits slug={athlete.slug} />

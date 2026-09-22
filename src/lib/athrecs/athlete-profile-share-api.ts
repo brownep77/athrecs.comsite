@@ -195,6 +195,7 @@ async function loadVisibleResults(
     distance_km: number;
     status: string;
     result_details: unknown;
+    result_source: string | null;
     chip_time_seconds: number | null;
     gun_time_seconds: number | null;
     source_urls: string[];
@@ -205,6 +206,9 @@ async function loadVisibleResults(
     distance_code: string;
     finish_time_seconds: number | null;
     overall_place: number | null;
+    gender_place: number | null;
+    category_place: number | null;
+    result_gender: string | null;
     category: string | null;
   }>`
     select
@@ -213,7 +217,7 @@ async function loadVisibleResults(
       edition.id as edition_id,
       event.sport, event.surface, event.country, event.city, edition.distance_km,
       result.status, result.chip_time_seconds, result.gun_time_seconds,
-          result.result_details,
+          result.result_details, result.result_source,
       array(select distinct link from (
         select result.source_url as link
         union all select edition.results_official_url
@@ -224,9 +228,10 @@ async function loadVisibleResults(
       edition.event_date::text as event_date,
       edition.distance_code,
       result.finish_time_seconds,
-      result.overall_place,
+      result.overall_place, result.gender_place, result.category_place, athlete.gender as result_gender,
       result.category
     from athlete_account_links account_link
+    join athletes athlete on athlete.id = account_link.athlete_id
     join results result on result.athlete_id = account_link.athlete_id
     join editions edition on edition.id = result.edition_id
     join events event on event.id = edition.event_id
@@ -246,6 +251,7 @@ async function loadVisibleResults(
       distanceKm: Number(row.distance_km),
       status: row.status,
       details: readResultDetails(row.result_details),
+      resultSource: row.result_source,
       chipTimeSeconds: row.chip_time_seconds,
       gunTimeSeconds: row.gun_time_seconds,
       sourceUrls: row.source_urls ?? [],
@@ -255,6 +261,9 @@ async function loadVisibleResults(
       distanceCode: row.distance_code,
       finishTimeSeconds: row.finish_time_seconds,
       overallPlace: row.overall_place,
+      genderPlace: row.gender_place,
+      categoryPlace: row.category_place,
+      resultGender: row.result_gender,
       category: row.category,
     })),
   ).filter((result) => !result.sourceResultIds.some((id) => hiddenIds.has(id)));

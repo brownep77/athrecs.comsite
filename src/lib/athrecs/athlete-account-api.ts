@@ -613,6 +613,9 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       distance_code: string;
       finish_time_seconds: number | null;
       overall_place: number | null;
+      gender_place: number | null;
+      category_place: number | null;
+      result_gender: string | null;
       category: string | null;
     }>`
         select
@@ -639,7 +642,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
           edition.event_date::text as event_date,
           edition.distance_code,
           result.finish_time_seconds,
-          result.overall_place,
+          result.overall_place, result.gender_place, result.category_place, athlete.gender as result_gender,
           result.category
         from athlete_account_links account_link
         join athletes athlete on athlete.id = account_link.athlete_id
@@ -726,6 +729,9 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
       distanceCode: row.distance_code,
       finishTimeSeconds: row.finish_time_seconds,
       overallPlace: row.overall_place,
+      genderPlace: row.gender_place,
+      categoryPlace: row.category_place,
+      resultGender: row.result_gender,
       category: row.category,
     })),
     claimCount: claimCounts[0]?.claim_count ?? 0,
