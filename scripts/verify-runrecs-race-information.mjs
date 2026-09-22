@@ -83,7 +83,7 @@ try {
   // The existing seed bootstrap also owns schema additions used by the listing.
   const seed = await readFile("src/lib/athrecs/seed.server.ts", "utf8");
   const schema = seed.match(
-    /async function ensureSchema[\s\S]*?const statements = \[([\s\S]*?)\n  \];/,
+    /async function ensureSchema[\s\S]*?const statements = \[([\s\S]*?)\n {2}\];/,
   )?.[1];
   assert(schema, "Production seed schema must be present");
   for (const statement of schema.matchAll(/`([^`]+)`/g)) await db.exec(statement[1]);
