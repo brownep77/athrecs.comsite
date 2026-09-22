@@ -1,0 +1,188 @@
+{
+  "sourceKey": "runrecs:uk:0-100km:uk-ireland-pr447-2026-09-22",
+  "sourceUrl": "https://github.com/brownep77/athrecs.comsite/pull/447",
+  "events": [
+    {
+      "slug": "rugeley-10-mile-road-race",
+      "name": "Rugeley 10 Mile Road Race",
+      "sport": "Running",
+      "country": "England",
+      "county": "Staffordshire",
+      "city": "Rugeley",
+      "area": "Redbrook Hayes School race HQ; Brereton Road start",
+      "surface": "Road",
+      "summary": "A 10-mile road race organised by Rugeley Runners.",
+      "description": "Race headquarters and finish at Redbrook Hayes School. The Brereton Road start is a short walk from race HQ.",
+      "organiser": "Rugeley Runners",
+      "website": "https://www.entrycentral.com/Rugeley-10-miler",
+      "distances": ["10mi"]
+    },
+    {
+      "slug": "walled-city-10-mile-road-race",
+      "name": "Walled City 10 Mile Road Race",
+      "sport": "Running",
+      "country": "Northern Ireland",
+      "county": "County Londonderry",
+      "city": "Derry",
+      "area": "Derry",
+      "surface": "Road",
+      "summary": "The Bentley Walled City 10 Mile Road Race in Derry.",
+      "description": "The organiser announces Saturday 13 March 2027 at 10am. An event-specific entry route has not been verified.",
+      "organiser": "Walled City Marathon",
+      "website": "https://www.facebook.com/photo/?fbid=1641342294698774&set=a.559416112891403",
+      "distances": ["10mi"]
+    }
+  ],
+  "editions": [
+    {
+      "eventSlug": "rugeley-10-mile-road-race",
+      "date": "2027-02-14",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "Open",
+      "startTime": "10:00",
+      "source": "https://www.entrycentral.com/Rugeley-10-miler",
+      "notes": "Official registration checked 22 September 2026: £24 affiliated or £26 standard. Race HQ and finish at Redbrook Hayes School; start on Brereton Road.",
+      "entryUrl": "https://www.entrycentral.com/Rugeley-10-miler",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "Rugeley Runners / EntryCentral",
+          "entryUrl": "https://www.entrycentral.com/Rugeley-10-miler",
+          "entryType": "official",
+          "status": "open",
+          "priceAmount": 24,
+          "priceCurrency": "GBP",
+          "checkedAt": "2026-09-22",
+          "sourceUrl": "https://www.entrycentral.com/Rugeley-10-miler",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "walled-city-10-mile-road-race",
+      "date": "2027-03-13",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "startTime": "10:00",
+      "source": "https://www.facebook.com/photo/?fbid=1641342294698774&set=a.559416112891403",
+      "notes": "Date, distance and 10am start confirmed by the organiser’s public announcement, checked 22 September 2026. Entry availability has not been verified."
+    },
+    {
+      "eventSlug": "shakespeare-marathon-half",
+      "date": "2027-04-25",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "Open",
+      "startTime": "09:00",
+      "source": "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+      "notes": "The official dated 2027 programme confirms 25 April, a 09:00 start and £41 half-marathon entry; checked 22 September 2026. The page title retains a stale 2026 label.",
+      "entryUrl": "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "RunThrough",
+          "entryUrl": "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+          "entryType": "official",
+          "status": "open",
+          "priceAmount": 41,
+          "priceCurrency": "GBP",
+          "checkedAt": "2026-09-22",
+          "sourceUrl": "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "shakespeare-marathon-half",
+      "date": "2027-04-25",
+      "distance": "Marathon",
+      "distanceKm": 42.195,
+      "status": "Open",
+      "startTime": "09:00",
+      "source": "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+      "notes": "The official dated 2027 programme confirms 25 April, a 09:00 start and £45 marathon entry; checked 22 September 2026. The page title retains a stale 2026 label.",
+      "entryUrl": "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "RunThrough",
+          "entryUrl": "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+          "entryType": "official",
+          "status": "open",
+          "priceAmount": 45,
+          "priceCurrency": "GBP",
+          "checkedAt": "2026-09-22",
+          "sourceUrl": "https://www.runthrough.co.uk/event/shakespeare-marathon-half-marathon-april-2027",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "dundalk-half-marathon-10k-2027",
+      "date": "2027-01-31",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "Open",
+      "startTime": "10:20",
+      "source": "https://eventmaster.ie/event/02RwczqsA1",
+      "notes": "Official registration checked 22 September 2026: approved permit 26/320, half-marathon start 10:20 and early-bird entry €44.50 including race-number postage. The separate 10K edition is preserved.",
+      "entryUrl": "https://eventmaster.ie/event/02RwczqsA1",
+      "entryOptions": [
+        {
+          "providerCode": "official",
+          "providerName": "BEAR Races / Eventmaster",
+          "entryUrl": "https://eventmaster.ie/event/02RwczqsA1",
+          "entryType": "official",
+          "status": "open",
+          "priceAmount": 44.5,
+          "priceCurrency": "EUR",
+          "checkedAt": "2026-09-22",
+          "sourceUrl": "https://eventmaster.ie/event/02RwczqsA1",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "central-lancashire-new-year-half-marathon-2027",
+      "date": "2027-01-10",
+      "distance": "Half",
+      "distanceKm": 21.0975,
+      "status": "Open",
+      "startTime": "10:00",
+      "source": "https://www.sientries.co.uk/event/central-lancs-new-years-half-marathon-2027",
+      "notes": "Official registration checked 22 September 2026: £30 UKA member or £32 non-member. The existing 10:00 start is retained; this entry page does not independently confirm the start time.",
+      "entryUrl": "https://www.sientries.co.uk/enter.php?event_id=18516",
+      "entryOptions": [
+        {
+          "providerCode": "sientries",
+          "providerName": "Fylde Coast Runners / SiEntries",
+          "entryUrl": "https://www.sientries.co.uk/enter.php?event_id=18516",
+          "entryType": "official",
+          "status": "open",
+          "priceAmount": 30,
+          "priceCurrency": "GBP",
+          "checkedAt": "2026-09-22",
+          "sourceUrl": "https://www.sientries.co.uk/event/central-lancs-new-years-half-marathon-2027",
+          "isVerified": true,
+          "isPrimary": true
+        }
+      ]
+    },
+    {
+      "eventSlug": "john-treacy-dungarvan-10-mile-2027",
+      "date": "2027-01-31",
+      "distance": "10mi",
+      "distanceKm": 16.09344,
+      "status": "TBC",
+      "startTime": "11:00",
+      "source": "https://www.westwaterfordathletics.org/dungarvan-10-mile/",
+      "notes": "Permit approval is pending in the Athletics Ireland calendar, despite the organiser describing the event as permitted (checked 22 September 2026). The organiser announces 31 January 2027 at 11:00; entry is not yet open. Permit approval and conflicting entry fees remain under review."
+    }
+  ]
+}

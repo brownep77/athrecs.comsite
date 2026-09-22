@@ -296,7 +296,7 @@ const seeds: RaceSeed[] = [
     hasEntry: false,
     checkedAt: PREVIOUS_CHECKED_AT,
     notes:
-      "The organising club confirms the permitted A.A.I. race, date and start time. Entry is due to open to A.A.I. club members on 1 December 2026 and to remaining runners on 8 December, so no live checkout is asserted yet.",
+      "Permit approval is pending in the Athletics Ireland calendar, despite the organiser describing the event as permitted (checked 22 September 2026). The organiser announces 31 January 2027 at 11:00; entry is not yet open. Permit approval and conflicting entry fees remain under review.",
   },
   {
     slug: "the-duergar-nightcrawler-2027",
