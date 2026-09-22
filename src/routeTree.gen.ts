@@ -26,6 +26,7 @@ import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete
 import { Route as AdminAthleteDirectoryRouteImport } from './routes/admin/athlete-directory'
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
 import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/admin/catalogue-recovery-emergency'
+import { Route as AdminClubScannerRouteImport } from './routes/admin/club-scanner'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
 import { Route as AdminNetworkRouteImport } from './routes/admin/network'
@@ -38,6 +39,7 @@ import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
 import { Route as AdminSponsorshipRouteImport } from './routes/admin/sponsorship'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
+import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scanner-worker'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
@@ -144,6 +146,11 @@ const AdminCatalogueRecoveryEmergencyRoute =
     path: '/admin/catalogue-recovery-emergency',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminClubScannerRoute = AdminClubScannerRouteImport.update({
+  id: '/admin/club-scanner',
+  path: '/admin/club-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
   id: '/admin/data-intelligence',
   path: '/admin/data-intelligence',
@@ -202,6 +209,11 @@ const ApiAthleteProfilePhotoRoute = ApiAthleteProfilePhotoRouteImport.update({
 const ApiCatalogueAutomationRoute = ApiCatalogueAutomationRouteImport.update({
   id: '/api/catalogue-automation',
   path: '/api/catalogue-automation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiClubScannerWorkerRoute = ApiClubScannerWorkerRouteImport.update({
+  id: '/api/club-scanner-worker',
+  path: '/api/club-scanner-worker',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiRaceCollectorWorkerRoute = ApiRaceCollectorWorkerRouteImport.update({
@@ -315,6 +327,7 @@ export interface FileRoutesByFullPath {
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
+  '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -327,6 +340,7 @@ export interface FileRoutesByFullPath {
   '/admin/sponsorship': typeof AdminSponsorshipRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
@@ -364,6 +378,7 @@ export interface FileRoutesByTo {
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
+  '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -376,6 +391,7 @@ export interface FileRoutesByTo {
   '/admin/sponsorship': typeof AdminSponsorshipRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
@@ -414,6 +430,7 @@ export interface FileRoutesById {
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
+  '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -426,6 +443,7 @@ export interface FileRoutesById {
   '/admin/sponsorship': typeof AdminSponsorshipRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
+  '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
@@ -465,6 +483,7 @@ export interface FileRouteTypes {
     | '/admin/athlete-directory'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
+    | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -477,6 +496,7 @@ export interface FileRouteTypes {
     | '/admin/sponsorship'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
     | '/athletes/$slug'
     | '/brands/manage'
@@ -514,6 +534,7 @@ export interface FileRouteTypes {
     | '/admin/athlete-directory'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
+    | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -526,6 +547,7 @@ export interface FileRouteTypes {
     | '/admin/sponsorship'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
     | '/athletes/$slug'
     | '/brands/manage'
@@ -563,6 +585,7 @@ export interface FileRouteTypes {
     | '/admin/athlete-directory'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
+    | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -575,6 +598,7 @@ export interface FileRouteTypes {
     | '/admin/sponsorship'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
+    | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
     | '/athletes/$slug'
     | '/brands/manage'
@@ -613,6 +637,7 @@ export interface RootRouteChildren {
   AdminAthleteDirectoryRoute: typeof AdminAthleteDirectoryRoute
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
   AdminCatalogueRecoveryEmergencyRoute: typeof AdminCatalogueRecoveryEmergencyRoute
+  AdminClubScannerRoute: typeof AdminClubScannerRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
   AdminNetworkRoute: typeof AdminNetworkRoute
@@ -625,6 +650,7 @@ export interface RootRouteChildren {
   AdminSponsorshipRoute: typeof AdminSponsorshipRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
+  ApiClubScannerWorkerRoute: typeof ApiClubScannerWorkerRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   BrandsManageRoute: typeof BrandsManageRoute
@@ -767,6 +793,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCatalogueRecoveryEmergencyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/club-scanner': {
+      id: '/admin/club-scanner'
+      path: '/admin/club-scanner'
+      fullPath: '/admin/club-scanner'
+      preLoaderRoute: typeof AdminClubScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/data-intelligence': {
       id: '/admin/data-intelligence'
       path: '/admin/data-intelligence'
@@ -849,6 +882,13 @@ declare module '@tanstack/react-router' {
       path: '/api/catalogue-automation'
       fullPath: '/api/catalogue-automation'
       preLoaderRoute: typeof ApiCatalogueAutomationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/club-scanner-worker': {
+      id: '/api/club-scanner-worker'
+      path: '/api/club-scanner-worker'
+      fullPath: '/api/club-scanner-worker'
+      preLoaderRoute: typeof ApiClubScannerWorkerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/race-collector-worker': {
@@ -997,6 +1037,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminAthleteDirectoryRoute: AdminAthleteDirectoryRoute,
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
   AdminCatalogueRecoveryEmergencyRoute: AdminCatalogueRecoveryEmergencyRoute,
+  AdminClubScannerRoute: AdminClubScannerRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
   AdminNetworkRoute: AdminNetworkRoute,
@@ -1009,6 +1050,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminSponsorshipRoute: AdminSponsorshipRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
+  ApiClubScannerWorkerRoute: ApiClubScannerWorkerRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   BrandsManageRoute: BrandsManageRoute,

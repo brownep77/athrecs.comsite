@@ -308,6 +308,9 @@ function AdminPage() {
         <Button asChild variant="secondary">
           <Link to="/admin/race-collector">Worldwide race collector</Link>
         </Button>
+        <Button asChild variant="secondary">
+          <Link to="/admin/club-scanner">Club athlete scanner</Link>
+        </Button>
         <p className="mt-4 max-w-2xl text-sm text-muted">
           Legacy tools: extract races, paste JSON, or bulk-load a CSV. Live listings use the same
           Race cards as the public Events page.

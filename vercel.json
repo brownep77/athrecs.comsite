@@ -132,6 +132,10 @@
     {
       "path": "/api/race-collector-worker",
       "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/club-scanner-worker",
+      "schedule": "* * * * *"
     }
   ]
 }

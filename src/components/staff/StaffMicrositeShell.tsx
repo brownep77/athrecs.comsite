@@ -35,6 +35,12 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
   {
+    to: "/admin/club-scanner",
+    label: "Club athlete scanner",
+    icon: UserRoundCog,
+    match: (path: string) => path.startsWith("/admin/club-scanner"),
+  },
+  {
     to: "/admin/sponsorship",
     label: "Sponsorship enquiries",
     icon: Handshake,
