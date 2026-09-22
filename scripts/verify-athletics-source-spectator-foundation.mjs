@@ -61,8 +61,8 @@ assert.match(calendarRoute, /Free to watch/);
 assert.match(calendarRoute, /Tickets available/);
 assert.match(raceRoute, /Spectator access/);
 assert.match(raceRoute, /spectatorAccess\.ticket_url/);
-assert.match(raceRoute, /<Fact label="Entry"/);
-assert.match(raceRoute, /<Fact label="Spectators"/);
+assert.match(raceRoute, /<Fact\s+label="Entry"/);
+assert.match(raceRoute, /<Fact\s+label="Spectators"/);
 
 const initialCohort = professionalAthletes.filter((athlete) => athlete.slug !== "mo-farah");
 assert.equal(initialCohort.length, 6, "The first professional-athlete cohort changed");
