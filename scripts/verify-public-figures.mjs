@@ -97,14 +97,8 @@ assert(
   "Every public figure needs a checked HTTPS source and must not use an unlicensed image",
 );
 
-const sitemapSource = readFileSync(new URL("../public/sitemap.xml", import.meta.url), "utf8");
-for (const slug of expectedProfiles) {
-  assert.match(
-    sitemapSource,
-    new RegExp(`<loc>https://www\\.athrecs\\.com/athletes/${slug}</loc>`),
-    `Public-figure profile ${slug} must be included in the sitemap`,
-  );
-}
+// Sitemap membership now comes from live publication state, exercised against
+// PostgreSQL-compatible data by verify:athlete-sitemap.
 
 const catalogueSource = readFileSync(new URL("../src/data/catalogue.ts", import.meta.url), "utf8");
 const seedSource = readFileSync(

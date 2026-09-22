@@ -4,5 +4,8 @@ Allow: /
 # Prefer public discovery pages; admin is for operators
 Disallow: /admin
 Disallow: /api/
+Disallow: /athlete-account
+Disallow: /my-athlete-profile
+Disallow: /claim-results
 
 Sitemap: https://www.athrecs.com/sitemap.xml

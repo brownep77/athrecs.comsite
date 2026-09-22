@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const explicitBrand = process.env.VITE_SITE_BRAND?.trim().toLowerCase();
@@ -49,7 +49,10 @@ Sitemap: ${siteUrl}/sitemap.xml
 const outputDir = path.resolve(process.cwd(), ".vercel/output/static");
 await mkdir(outputDir, { recursive: true });
 await Promise.all([
-  writeFile(path.join(outputDir, "sitemap.xml"), sitemap, "utf8"),
+  // ATHRECS serves its live, paginated sitemap from the database.
+  isRunRecs
+    ? writeFile(path.join(outputDir, "sitemap.xml"), sitemap, "utf8")
+    : rm(path.join(outputDir, "sitemap.xml"), { force: true }),
   writeFile(path.join(outputDir, "robots.txt"), robots, "utf8"),
 ]);
 
