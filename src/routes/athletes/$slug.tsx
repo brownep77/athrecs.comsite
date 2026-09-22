@@ -99,7 +99,7 @@ export const Route = createFileRoute("/athletes/$slug")({
       };
     }
 
-    const { athlete, results } = loaderData;
+    const { athlete, results, sourceHistories } = loaderData;
     const isPublicFigure = athlete.profile_type === "Public figure";
     const resultKind = (athlete.profile_roles ?? []).some((role: string) =>
       role.toLowerCase().includes("marathon"),
@@ -108,7 +108,12 @@ export const Route = createFileRoute("/athletes/$slug")({
       : "race results and finish times";
     const title = isPublicFigure
       ? `${athlete.display_name} ${resultKind} | ${SITE_NAME}`
-      : `${athlete.display_name} athlete profile | ${SITE_NAME}`;
+      : `${athlete.display_name} results & performance history | ${SITE_NAME}`;
+    const sourceCount = sourceHistories.reduce(
+      (total, history) => total + history.performances.length,
+      0,
+    );
+    const clubLabel = athlete.club && athlete.club !== "Unattached" ? ` (${athlete.club})` : "";
     const reportedHistory = getReportedRaceHistory(athlete.slug);
     const unverifiedCount = reportedHistory?.records.length ?? 0;
     const description = reportedHistory?.includeInResults
@@ -117,7 +122,7 @@ export const Route = createFileRoute("/athletes/$slug")({
         ? `${athlete.display_name}'s running history on ATHRECS: ${results.length} source-checked records and ${unverifiedCount} ${reportedHistory.countLabel}, with source links and unresolved details.`
         : isPublicFigure
           ? `${athlete.display_name}'s source-checked race results, finish times and endurance achievements on ATHRECS. ${results.length} verified result${results.length === 1 ? "" : "s"} listed.`
-          : `${athlete.display_name}'s athlete profile, club and race results on ATHRECS.`;
+          : `${athlete.display_name}${clubLabel}: results and performance history on ATHRECS. ${results.length} race result${results.length === 1 ? "" : "s"}${sourceCount ? ` and ${sourceCount} source performance${sourceCount === 1 ? "" : "s"}` : ""}, with source links.`;
     const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
 
     return {
@@ -128,13 +133,44 @@ export const Route = createFileRoute("/athletes/$slug")({
           type: "application/ld+json",
           children: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Person",
-            name: athlete.display_name,
-            url: canonical,
-            description: athlete.bio || description,
-            nationality: athlete.nationality || athlete.country || undefined,
-            knowsAbout: athlete.profile_roles,
-          }),
+            "@graph": [
+              {
+                "@type": "WebPage",
+                "@id": canonical,
+                url: canonical,
+                name: title,
+                description,
+                mainEntity: { "@id": `${canonical}#athlete` },
+                breadcrumb: { "@id": `${canonical}#breadcrumb` },
+              },
+              {
+                "@type": "Person",
+                "@id": `${canonical}#athlete`,
+                name: athlete.display_name,
+                url: canonical,
+                description: athlete.bio || description,
+                nationality: athlete.nationality || athlete.country || undefined,
+                knowsAbout: athlete.profile_roles,
+                sameAs: sourceHistories.map((history) => history.sourceUrl),
+                memberOf: clubLabel
+                  ? { "@type": "SportsOrganization", name: athlete.club }
+                  : undefined,
+              },
+              {
+                "@type": "BreadcrumbList",
+                "@id": `${canonical}#breadcrumb`,
+                itemListElement: [
+                  {
+                    "@type": "ListItem",
+                    position: 1,
+                    name: "Athletes",
+                    item: `${SITE_URL}/athletes`,
+                  },
+                  { "@type": "ListItem", position: 2, name: athlete.display_name, item: canonical },
+                ],
+              },
+            ],
+          }).replace(/</g, "\\u003c"),
         },
       ],
     };

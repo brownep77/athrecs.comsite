@@ -19,6 +19,7 @@ import { Route as MyAthleteProfileRouteImport } from './routes/my-athlete-profil
 import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
@@ -52,6 +53,7 @@ import { Route as NewsIndexRouteImport } from './routes/news/index'
 import { Route as NewsSlugRouteImport } from './routes/news/$slug'
 import { Route as RacesIndexRouteImport } from './routes/races/index'
 import { Route as RacesSlugRouteImport } from './routes/races/$slug'
+import { Route as SitemapsFileRouteImport } from './routes/sitemaps/$file'
 import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$country/index'
 import { Route as AdminAthletesAthleteIdRouteImport } from './routes/admin/athletes.$athleteId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
@@ -107,6 +109,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const RaceSeriesRoute = RaceSeriesRouteImport.update({
   id: '/race-series',
   path: '/race-series',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SponsorshipRoute = SponsorshipRouteImport.update({
@@ -276,6 +283,11 @@ const RacesSlugRoute = RacesSlugRouteImport.update({
   path: '/races/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapsFileRoute = SitemapsFileRouteImport.update({
+  id: '/sitemaps/$file',
+  path: '/sitemaps/$file',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LanguageCountryIndexRoute = LanguageCountryIndexRouteImport.update({
   id: '/$language/$country/',
   path: '/$language/$country/',
@@ -321,6 +333,7 @@ export interface FileRoutesByFullPath {
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
@@ -348,6 +361,7 @@ export interface FileRoutesByFullPath {
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
+  '/sitemaps/$file': typeof SitemapsFileRoute
   '/admin/': typeof AdminIndexRoute
   '/athletes/': typeof AthletesIndexRoute
   '/brands/': typeof BrandsIndexRoute
@@ -372,6 +386,7 @@ export interface FileRoutesByTo {
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
@@ -399,6 +414,7 @@ export interface FileRoutesByTo {
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
+  '/sitemaps/$file': typeof SitemapsFileRoute
   '/admin': typeof AdminIndexRoute
   '/athletes': typeof AthletesIndexRoute
   '/brands': typeof BrandsIndexRoute
@@ -424,6 +440,7 @@ export interface FileRoutesById {
   '/opportunities': typeof OpportunitiesRoute
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
@@ -451,6 +468,7 @@ export interface FileRoutesById {
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
+  '/sitemaps/$file': typeof SitemapsFileRoute
   '/admin/': typeof AdminIndexRoute
   '/athletes/': typeof AthletesIndexRoute
   '/brands/': typeof BrandsIndexRoute
@@ -477,6 +495,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/privacy'
     | '/race-series'
+    | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
@@ -504,6 +523,7 @@ export interface FileRouteTypes {
     | '/clubs/$slug'
     | '/news/$slug'
     | '/races/$slug'
+    | '/sitemaps/$file'
     | '/admin/'
     | '/athletes/'
     | '/brands/'
@@ -528,6 +548,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/privacy'
     | '/race-series'
+    | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
@@ -555,6 +576,7 @@ export interface FileRouteTypes {
     | '/clubs/$slug'
     | '/news/$slug'
     | '/races/$slug'
+    | '/sitemaps/$file'
     | '/admin'
     | '/athletes'
     | '/brands'
@@ -579,6 +601,7 @@ export interface FileRouteTypes {
     | '/opportunities'
     | '/privacy'
     | '/race-series'
+    | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
     | '/admin/athlete-accounts'
@@ -606,6 +629,7 @@ export interface FileRouteTypes {
     | '/clubs/$slug'
     | '/news/$slug'
     | '/races/$slug'
+    | '/sitemaps/$file'
     | '/admin/'
     | '/athletes/'
     | '/brands/'
@@ -631,6 +655,7 @@ export interface RootRouteChildren {
   OpportunitiesRoute: typeof OpportunitiesRoute
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SponsorshipRoute: typeof SponsorshipRoute
   SportsrecsRoute: typeof SportsrecsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
@@ -658,6 +683,7 @@ export interface RootRouteChildren {
   ClubsSlugRoute: typeof ClubsSlugRoute
   NewsSlugRoute: typeof NewsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
+  SitemapsFileRoute: typeof SitemapsFileRoute
   AdminIndexRoute: typeof AdminIndexRoute
   AthletesIndexRoute: typeof AthletesIndexRoute
   BrandsIndexRoute: typeof BrandsIndexRoute
@@ -742,6 +768,13 @@ declare module '@tanstack/react-router' {
       path: '/race-series'
       fullPath: '/race-series'
       preLoaderRoute: typeof RaceSeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sponsorship': {
@@ -975,6 +1008,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RacesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemaps/$file': {
+      id: '/sitemaps/$file'
+      path: '/sitemaps/$file'
+      fullPath: '/sitemaps/$file'
+      preLoaderRoute: typeof SitemapsFileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$language/$country/': {
       id: '/$language/$country/'
       path: '/$language/$country'
@@ -1031,6 +1071,7 @@ const rootRouteChildren: RootRouteChildren = {
   OpportunitiesRoute: OpportunitiesRoute,
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SponsorshipRoute: SponsorshipRoute,
   SportsrecsRoute: SportsrecsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
@@ -1058,6 +1099,7 @@ const rootRouteChildren: RootRouteChildren = {
   ClubsSlugRoute: ClubsSlugRoute,
   NewsSlugRoute: NewsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,
+  SitemapsFileRoute: SitemapsFileRoute,
   AdminIndexRoute: AdminIndexRoute,
   AthletesIndexRoute: AthletesIndexRoute,
   BrandsIndexRoute: BrandsIndexRoute,

@@ -14,15 +14,30 @@ export const Route = createFileRoute("/athletes/")({
   validateSearch: parseAthleteDirectorySearch,
   loaderDeps: ({ search }) => search,
   loader: ({ deps }) => getAthleteDirectory({ data: deps }),
-  head: () => ({
-    meta: siteGraphMeta({
-      title: "Explore athlete profiles | ATHRECS",
-      description:
-        "Find public athlete profiles by name, country and sport. Explore their records and start building your own sporting profile.",
-      url: `${SITE_URL}/athletes`,
-    }),
-    links: [{ rel: "canonical", href: `${SITE_URL}/athletes` }],
-  }),
+  head: ({ loaderData, match }) => {
+    const search = parseAthleteDirectorySearch(match.search);
+    const query = new URLSearchParams();
+    for (const key of ["q", "country", "sport"] as const) {
+      if (search[key]) query.set(key, search[key]);
+    }
+    const page = loaderData?.page ?? search.page ?? 1;
+    if (page > 1) query.set("page", String(page));
+    const canonical = `${SITE_URL}/athletes${query.size ? `?${query}` : ""}`;
+    const filtered = Boolean(search.q || search.country || search.sport);
+    return {
+      meta: siteGraphMeta({
+        title: `Explore athlete profiles${page > 1 ? ` · Page ${page}` : ""} | ATHRECS`,
+        description:
+          "Find public athlete profiles by name, country and sport. Explore race results, source performance histories and sporting records.",
+        url: canonical,
+      }).map((tag) =>
+        filtered && "name" in tag && tag.name === "robots"
+          ? { name: "robots", content: "noindex, follow" }
+          : tag,
+      ),
+      links: [{ rel: "canonical", href: canonical }],
+    };
+  },
   component: AthleteDirectoryPage,
 });
 
