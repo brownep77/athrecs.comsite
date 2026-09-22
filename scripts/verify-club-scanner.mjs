@@ -149,6 +149,13 @@ try {
     f.sql,
   );
   assert.equal((await service.reviewHistory(named("Alex Variant").id, f.sql)).length, 1);
+  assert.equal(
+    (
+      await f.sql`select before_value->'data'->>'name' as name from club_scan_reviews where candidate_id=${named("Alex Variant").id}::uuid`
+    )[0].name,
+    "Alex Variant",
+    "Review audit retains the original source row",
+  );
   await service.review(
     {
       ids: [named("Alex Variant").id],

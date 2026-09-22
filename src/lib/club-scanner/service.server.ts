@@ -74,7 +74,7 @@ async function audit(
   reason: string,
   after: unknown,
 ) {
-  await tx`insert into club_scan_reviews(id,candidate_id,actor,action,reason,before_value,after_value) values(${randomUUID()}::uuid,${c.id}::uuid,${actor},${action},${reason},${JSON.stringify({ status: c.status, decision: c.decision, athleteId: c.athlete_id })}::jsonb,${JSON.stringify(after)}::jsonb)`;
+  await tx`insert into club_scan_reviews(id,candidate_id,actor,action,reason,before_value,after_value) values(${randomUUID()}::uuid,${c.id}::uuid,${actor},${action},${reason},${JSON.stringify({ status: c.status, decision: c.decision, athleteId: c.athlete_id, data: c.data })}::jsonb,${JSON.stringify(after)}::jsonb)`;
 }
 export async function runNext(runId?: string, override?: Sql, fetcher = fetchSource) {
   const sql = await db(override),
@@ -512,7 +512,7 @@ export async function recheck(ids: string[], actor: string, override?: Sql, fetc
         actor,
         "recheck",
         "Fetched source again; previous approval cleared",
-        check,
+        { ...check, data: next },
       );
     });
   }
