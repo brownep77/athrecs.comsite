@@ -20,6 +20,9 @@ export type ProfileResult = {
   chipTimeSeconds: number | null;
   gunTimeSeconds: number | null;
   overallPlace: number | null;
+  genderPlace?: number | null;
+  categoryPlace?: number | null;
+  resultGender?: string | null;
   category: string | null;
   sourceUrls: string[];
   resultSource?: string | null;
@@ -88,7 +91,15 @@ export function combineProfileResults<T extends ProfileResult>(
 ): Array<T & { sourceResultIds: number[]; conflicting: boolean }> {
   const groups = new Map<string, T>();
   const editionKeys = new Map<number, Set<string>>();
+  const classificationPlaces = new Map<number, { gender: Set<number>; category: Set<number> }>();
   for (const result of results) {
+    const placings = classificationPlaces.get(result.editionId) ?? {
+      gender: new Set<number>(),
+      category: new Set<number>(),
+    };
+    if (result.genderPlace != null) placings.gender.add(result.genderPlace);
+    if (result.categoryPlace != null) placings.category.add(result.categoryPlace);
+    classificationPlaces.set(result.editionId, placings);
     const key = JSON.stringify([
       result.editionId,
       result.status,
@@ -104,6 +115,10 @@ export function combineProfileResults<T extends ProfileResult>(
     editionKeys.set(result.editionId, keys);
     const existing = groups.get(key);
     if (existing) {
+      // Missing classifications are not disagreements; retain the supplied placing.
+      existing.genderPlace ??= result.genderPlace;
+      existing.categoryPlace ??= result.categoryPlace;
+      existing.resultGender ||= result.resultGender;
       existing.sourceUrls = [...new Set([...existing.sourceUrls, ...result.sourceUrls])];
       existing.sourceResultIds = [
         ...new Set([
@@ -122,7 +137,10 @@ export function combineProfileResults<T extends ProfileResult>(
   return [...groups.values()].map((result) => ({
     ...result,
     sourceResultIds: result.sourceResultIds ?? [result.resultId],
-    conflicting: (editionKeys.get(result.editionId)?.size ?? 0) > 1,
+    conflicting:
+      (editionKeys.get(result.editionId)?.size ?? 0) > 1 ||
+      (classificationPlaces.get(result.editionId)?.gender.size ?? 0) > 1 ||
+      (classificationPlaces.get(result.editionId)?.category.size ?? 0) > 1,
   }));
 }
 

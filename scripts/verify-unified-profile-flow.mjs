@@ -1,6 +1,7 @@
 // Exercise the real importer and HTTP handlers against a disposable PGLite database.
 // Environment changes affect only this test process, never a deployment or configured database.
 import assert from "node:assert/strict";
+import { buildRaceWinAchievements } from "../src/lib/athrecs/race-win-achievements.ts";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
@@ -107,6 +108,41 @@ try {
   const knownResult = (
     await sql`select r.id from results r join editions ed on ed.id=r.edition_id where r.athlete_id=${known} and ed.event_date='2026-07-01'`
   )[0].id;
+  // A women's and category win must survive all three profile read paths.
+  await sql`update athletes set gender='F',profile_visibility='public' where id=${known}`;
+  await sql`update results set overall_place=8,gender_place=1,category_place=1,category='F40-44',result_visibility='public' where id=${knownResult}`;
+  const knownSlug = (await sql`select slug from athletes where id=${known}`)[0].slug;
+  const publicResult = (await rpc("api", "getAthleteBySlug", knownSlug)).profileResults.find(
+    (r) => r.resultId === knownResult,
+  );
+  assert.deepEqual(
+    [
+      publicResult.overallPlace,
+      publicResult.genderPlace,
+      publicResult.categoryPlace,
+      publicResult.resultGender,
+    ],
+    [8, 1, 1, "F"],
+  );
+  assert.deepEqual(
+    buildRaceWinAchievements([publicResult]).map((w) => w.kind),
+    ["gender", "category"],
+  );
+  const renderedProfile = await fetch(`${origin}/athletes/${knownSlug}`);
+  assert.equal(renderedProfile.status, 200);
+  const html = await renderedProfile.text();
+  assert.equal((html.match(/data-achievement="race-win"/g) ?? []).length, 2);
+  assert.match(html, /border-amber-400 bg-amber-50/);
+  const visibleHtml = html.replace(/<!--[^]*?-->/g, "");
+  assert.match(visibleHtml, /10K winner/);
+  assert.match(visibleHtml, /Women’s race/);
+  await sql`update athletes set profile_visibility='private' where id=${known}`;
+  await sql`update results set result_visibility='private' where id=${knownResult}`;
+  assert.equal(
+    await rpc("api", "getAthleteBySlug", knownSlug),
+    null,
+    "Private wins cannot expose a catalogue profile",
+  );
   assert.equal(
     (
       await sql`select count(*)::int n from result_source_references where result_id=${knownResult}`
@@ -269,6 +305,24 @@ try {
   assert.equal(published.country, "");
   assert(!("email" in published) && !("dateOfBirth" in published));
   assert(published.results.some((result) => result.resultId === knownResult));
+  const sharedWin = published.results.find((result) => result.resultId === knownResult);
+  assert.deepEqual(
+    [
+      sharedWin.overallPlace,
+      sharedWin.genderPlace,
+      sharedWin.categoryPlace,
+      sharedWin.resultGender,
+    ],
+    [8, 1, 1, "F"],
+  );
+  const ownedWin = (await rpc("athlete-account-api", "getMyAthleteAccount")).claimedResults.find(
+    (result) => result.resultId === knownResult,
+  );
+  assert.deepEqual(
+    [ownedWin.genderPlace, ownedWin.categoryPlace, ownedWin.resultGender],
+    [1, 1, "F"],
+  );
+  assert.equal(buildRaceWinAchievements([sharedWin]).length, 2);
   await rpc("profile-connections-api", "saveMyProfileConnection", {
     platform: "instagram",
     url: "https://www.instagram.com/fixture_runner/",
@@ -288,8 +342,9 @@ try {
     account.athleteNumber,
     "Every confirmed source identity resolves to the same account ID",
   );
-  await sql`insert into results(edition_id,athlete_id,status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,category,source_url)
-    select edition_id,${alias},status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,category,'https://extra-source.example/race/1' from results where id=${knownResult}`;
+  await sql`update athletes set gender='F' where id=${alias}`;
+  await sql`insert into results(edition_id,athlete_id,status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,gender_place,category_place,category,source_url)
+    select edition_id,${alias},status,finish_time_seconds,chip_time_seconds,gun_time_seconds,overall_place,gender_place,category_place,category,'https://extra-source.example/race/1' from results where id=${knownResult}`;
   published = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
     slug: share.slug,
   });
@@ -306,6 +361,20 @@ try {
     !published.results.some((result) => result.eventSlug === "unified-fixture-road"),
     "A duplicate cannot expose a hidden performance",
   );
+  assert.equal(
+    buildRaceWinAchievements(published.results).length,
+    0,
+    "Hidden wins leave no achievement behind",
+  );
+  await rpc("athlete-profile-share-api", "saveMyProfileShare", {
+    enabled: true,
+    acknowledged: true,
+    shareResults: false,
+  });
+  published = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
+    slug: share.slug,
+  });
+  assert.deepEqual(published.results, [], "Turning result sharing off also removes win evidence");
   await rpc("athlete-profile-share-api", "saveMyProfileShare", { enabled: false });
   assert.equal(
     await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }),

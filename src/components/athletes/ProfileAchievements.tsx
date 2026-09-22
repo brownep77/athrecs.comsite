@@ -14,6 +14,9 @@ import {
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
+import { RaceWinAchievements } from "./RaceWinAchievements";
+import { buildRaceWinAchievements } from "@/lib/athrecs/race-win-achievements";
+import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 
 export function ResultMedal({ result }: { result: ProfileResult }) {
   if (!isCompletedResult(result)) return null;
@@ -29,6 +32,7 @@ export function ResultMedal({ result }: { result: ProfileResult }) {
 }
 
 const NO_REPORTED_BESTS: readonly ReportedPersonalBest[] = [];
+const NO_SOURCE_HISTORIES: readonly SourceHistory[] = [];
 
 export function PersonalBestStrip({
   results,
@@ -130,8 +134,20 @@ function AchievementEvidence({ results }: { results: ProfileResult[] }) {
   );
 }
 
-export function AchievementsBoard({ results }: { results: ProfileResult[] }) {
+export function AchievementsBoard({
+  results,
+  sourceHistories = NO_SOURCE_HISTORIES,
+  sourceGender = "",
+}: {
+  results: ProfileResult[];
+  sourceHistories?: readonly SourceHistory[];
+  sourceGender?: string;
+}) {
   const record = useMemo(() => buildProfileAchievements(results), [results]);
+  const wins = useMemo(
+    () => buildRaceWinAchievements(results, sourceHistories, sourceGender),
+    [results, sourceHistories, sourceGender],
+  );
   const hasRunning = results.some((result) =>
     ["running", "athletics", "parkrun"].includes(result.sport.trim().toLowerCase()),
   );
@@ -175,6 +191,7 @@ export function AchievementsBoard({ results }: { results: ProfileResult[] }) {
         <h2 className="font-display text-lg font-semibold">Achievements board</h2>
         <span className="text-xs text-muted">From results on this profile</span>
       </div>
+      <RaceWinAchievements wins={wins} />
       <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
         {metrics.map(({ label, value, icon: Icon, results: evidence }) => (
           <details key={label} className="min-w-0 rounded-lg bg-elevated p-3">
@@ -300,14 +317,24 @@ export function AchievementsBoard({ results }: { results: ProfileResult[] }) {
 export function ProfileRecordHighlights({
   results,
   reportedBests = NO_REPORTED_BESTS,
+  sourceHistories = NO_SOURCE_HISTORIES,
+  sourceGender = "",
 }: {
   results: ProfileResult[];
   reportedBests?: readonly ReportedPersonalBest[];
+  sourceHistories?: readonly SourceHistory[];
+  sourceGender?: string;
 }) {
   return (
     <div className="space-y-4">
       <PersonalBestStrip results={results} reportedBests={reportedBests} />
-      {results.length > 0 || !reportedBests.length ? <AchievementsBoard results={results} /> : null}
+      {results.length > 0 || sourceHistories.length > 0 || !reportedBests.length ? (
+        <AchievementsBoard
+          results={results}
+          sourceHistories={sourceHistories}
+          sourceGender={sourceGender}
+        />
+      ) : null}
     </div>
   );
 }
