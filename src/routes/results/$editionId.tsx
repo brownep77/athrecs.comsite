@@ -9,7 +9,7 @@ import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/results/$editionId")({
-  validateSearch: (raw: Record<string, unknown>) => {
+  validateSearch: (raw: Record<string, unknown>): { q?: string; page?: number } => {
     const search = normalizeResultsSearch(raw);
     return { q: search.q || undefined, page: search.page > 1 ? search.page : undefined };
   },
