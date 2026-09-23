@@ -40,8 +40,9 @@ const schema = `
   );
   create table editions (
     id serial primary key, event_id integer references events(id), event_date date,
-    distance_code text, distance_km double precision, status text, source_url text,
-    unique(event_id, event_date, distance_code)
+    distance_code text, distance_km double precision,
+    status text check(status in ('Open','ClosingSoon','Closed','Finished','TBC')),
+    source_url text, unique(event_id, event_date, distance_code)
   );
   create table results (
     id serial primary key, edition_id integer references editions(id),
@@ -108,9 +109,10 @@ await test('new profile, exact 10K and manually verified time, unknown values re
   assert.equal(r.result_details.verification.method, 'staff_visual_confirmation');
   assert.equal(r.result_details.verification.verifiedBy, 'Test Reviewer');
   assert.equal(r.result_details.verification.timingBasis, 'unspecified');
-  const [ed] = await rows(db, 'select distance_code,distance_km from editions');
+  const [ed] = await rows(db, 'select distance_code,distance_km,status from editions');
   assert.equal(ed.distance_code, '10K');
   assert.equal(ed.distance_km, 10);
+  assert.equal(ed.status, 'Finished');
   await apply(db);
   for (const table of ['athletes','results','editions','network_audit_log','athlete_identifiers','result_source_references']) {
     assert.equal((await rows(db, `select count(*)::int n from ${table}`))[0].n, 1);
