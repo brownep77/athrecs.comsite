@@ -50,11 +50,11 @@ const fallbackTones = Object.keys(tones) as ProfileTone[];
 /** Normalise display aliases only; this never changes result grouping or PB eligibility. */
 export function distanceTone(code: string, distanceKm = 0): ProfileTone {
   const label = code.trim().toLowerCase().replaceAll(",", "").replace(/\s+/g, " ");
+  if (/^(?:half|half marathon|hm)$/.test(label)) return "rose";
+  if (/^(?:full )?marathon$/.test(label)) return "periwinkle";
   let km = Number.isFinite(distanceKm) && distanceKm > 0 ? distanceKm : 0;
   if (!km) {
-    if (/^(?:half|half marathon|hm)$/.test(label)) km = 21.0975;
-    else if (/^(?:full )?marathon$/.test(label)) km = 42.195;
-    else if (/^(?:one |1 )?mile$/.test(label)) km = 1.609344;
+    if (/^(?:one |1 )?mile$/.test(label)) km = 1.609344;
     else {
       const match = label.match(/^(\d+(?:\.\d+)?)\s*(k|km|m|mi|miles?)$/);
       if (match) {
