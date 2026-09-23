@@ -1,0 +1,58 @@
+name: Public Results section
+
+on:
+  pull_request:
+    paths:
+      - "src/routes/results/**"
+      - "src/lib/athrecs/public-results*"
+      - "src/components/layout/AppShell.tsx"
+      - "scripts/verify-public-results-section.mjs"
+      - ".github/workflows/public-results-section.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-results-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  results:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      # Use isolated PGLite. Never use a deployment or production database URL.
+      DATABASE_URL: ""
+      VITE_SITE_BRAND: athrecs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: PostgreSQL privacy and identity regression tests
+        run: node scripts/verify-public-results-section.mjs
+      - name: Generate routes and compile without migration or publication hooks
+        run: |
+          mkdir -p artifacts
+          npx vite build --mode development 2>&1 | tee artifacts/results-build.log
+      - name: Check generated route types
+        run: npm run typecheck
+      - name: Lint Results implementation
+        run: >-
+          npx eslint
+          src/lib/athrecs/public-results-search.ts
+          src/lib/athrecs/public-results-api.ts
+          src/routes/results/index.tsx
+          'src/routes/results/$editionId.tsx'
+          src/components/layout/AppShell.tsx
+          scripts/verify-public-results-section.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: public-results-validation
+          path: |
+            artifacts/results-build.log
+            src/routeTree.gen.ts
