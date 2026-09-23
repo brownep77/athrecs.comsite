@@ -309,15 +309,21 @@ export function ProfileRecordHighlights({
   reportedBests = NO_REPORTED_BESTS,
   sourceHistories = NO_SOURCE_HISTORIES,
   sourceGender = "",
+  showEvidence = false,
 }: {
   results: ProfileResult[];
   reportedBests?: readonly ReportedPersonalBest[];
   sourceHistories?: readonly SourceHistory[];
   sourceGender?: string;
+  showEvidence?: boolean;
 }) {
   return (
     <div className="space-y-4">
-      <PersonalBestStrip results={results} reportedBests={reportedBests} />
+      <PersonalBestStrip
+        results={results}
+        reportedBests={reportedBests}
+        showEvidence={showEvidence}
+      />
       {results.length > 0 || sourceHistories.length > 0 || !reportedBests.length ? (
         <AchievementsBoard
           results={results}

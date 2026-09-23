@@ -7,7 +7,13 @@ import {
 } from "@/data/mo-farah";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 
-export function EditorialAthleteOverview({ slug }: { slug: string }) {
+export function EditorialAthleteOverview({
+  slug,
+  showEvidence = false,
+}: {
+  slug: string;
+  showEvidence?: boolean;
+}) {
   if (slug === "david-goggins") {
     return (
       <section
@@ -17,10 +23,12 @@ export function EditorialAthleteOverview({ slug }: { slug: string }) {
         <h2 id="timed-distance-performances" className="font-display text-lg font-semibold">
           Timed-distance performances
         </h2>
-        <p className="text-sm text-muted">
-          Distance covered during a fixed-duration race. Exact race dates remain under review; these
-          marks are listed by year and excluded from the finish-time totals below.
-        </p>
+        {showEvidence ? (
+          <p className="text-sm text-muted">
+            Distance covered during a fixed-duration race. Exact race dates remain under review;
+            these marks are listed by year and excluded from the finish-time totals below.
+          </p>
+        ) : null}
         <div className="grid gap-3 sm:grid-cols-2">
           {davidGogginsTimedPerformances.map((performance) => (
             <a
@@ -98,33 +106,44 @@ export function EditorialAthleteOverview({ slug }: { slug: string }) {
             </div>
           ))}
         </dl>
-        <p className="mt-3 text-xs leading-5 text-muted">
-          Road results, PBs and achievements appear below. His fastest assisted half marathon was
-          59:07 at the 2019 Great North Run; his record-eligible best is 59:32 in Lisbon.{" "}
-          <a
-            href="https://worldathletics.org/athletes/-/14189197"
-            target="_blank"
-            rel="noreferrer"
-            className="text-accent underline"
-          >
-            Personal-best sources
-          </a>
-          .
-        </p>
+        {showEvidence ? (
+          <p className="mt-3 text-xs leading-5 text-muted">
+            Road results, PBs and achievements appear below. His fastest assisted half marathon was
+            59:07 at the 2019 Great North Run; his record-eligible best is 59:32 in Lisbon.{" "}
+            <a
+              href="https://worldathletics.org/athletes/-/14189197"
+              target="_blank"
+              rel="noreferrer"
+              className="text-accent underline"
+            >
+              Personal-best sources
+            </a>
+            .
+          </p>
+        ) : null}
       </div>
     </section>
   );
 }
 
-export function EditorialRoadSplits({ slug }: { slug: string }) {
+export function EditorialRoadSplits({
+  slug,
+  showEvidence = false,
+}: {
+  slug: string;
+  showEvidence?: boolean;
+}) {
   if (slug !== "mo-farah") return null;
   return (
     <section aria-label="Additional road bests" className="space-y-2">
       <h2 className="font-display text-lg font-semibold">Additional road bests</h2>
-      <p className="text-xs text-muted">
-        The 15K and 20K times are intermediate splits. Power of 10 also lists a two-mile road best;
-        its exact race date is unconfirmed. These records do not add another finish or achievement.
-      </p>
+      {showEvidence ? (
+        <p className="text-xs text-muted">
+          The 15K and 20K times are intermediate splits. Power of 10 also lists a two-mile road
+          best; its exact race date is unconfirmed. These records do not add another finish or
+          achievement.
+        </p>
+      ) : null}
       <div className="flex flex-wrap gap-2">
         <a
           href={moFarahTwoMileRoadBest.source}
@@ -135,7 +154,8 @@ export function EditorialRoadSplits({ slug }: { slug: string }) {
           <span className="block text-xs text-muted">Running · 2 miles road</span>
           <strong className="text-lg tabular-nums text-fg">{moFarahTwoMileRoadBest.time}</strong>
           <span className="block text-xs text-muted">
-            {moFarahTwoMileRoadBest.year} · Year confirmed; exact race date unconfirmed
+            {moFarahTwoMileRoadBest.year}
+            {showEvidence ? " · Year confirmed; exact race date unconfirmed" : ""}
           </span>
           <span className="block text-xs text-accent">Source ↗</span>
         </a>
@@ -156,10 +176,12 @@ export function EditorialRoadSplits({ slug }: { slug: string }) {
           </a>
         ))}
       </div>
-      <p className="text-xs text-muted">
-        Source-checked road history, 2004–2023. Historical sources may omit races. London 2013 was a
-        planned partial run and London 2020 a pacing appearance; both are recorded as DNF.
-      </p>
+      {showEvidence ? (
+        <p className="text-xs text-muted">
+          Source-checked road history, 2004–2023. Historical sources may omit races. London 2013 was
+          a planned partial run and London 2020 a pacing appearance; both are recorded as DNF.
+        </p>
+      ) : null}
     </section>
   );
 }

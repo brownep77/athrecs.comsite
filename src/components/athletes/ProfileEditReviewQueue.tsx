@@ -23,7 +23,10 @@ export function ProfileEditReviewQueue() {
       {review.isError ? <p role="alert">{review.error.message}</p> : null}
       {query.data?.map((item) => (
         <article key={item.id} className="mt-3 space-y-2 border-t border-border pt-3 text-sm">
-          <a className="text-accent underline" href={`/athletes/${item.profile_slug}`}>
+          <a
+            className="text-accent underline"
+            href={`https://www.athrecs.com/athletes/${item.profile_slug}`}
+          >
             {item.profile_slug}
           </a>
           <p className="whitespace-pre-wrap">{item.suggestion}</p>

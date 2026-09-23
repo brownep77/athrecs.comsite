@@ -1,3 +1,7 @@
+import {
+  EditorialAthleteOverview,
+  EditorialRoadSplits,
+} from "@/components/athletes/EditorialAthleteOverview";
 import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -93,7 +97,13 @@ function StaffAthleteProfile() {
               ))}
             </details>
           ) : null}
-          <ProfileRecordHighlights results={profile.results} />
+          <ProfileRecordHighlights results={profile.results} showEvidence />
+          {profile.athlete.sources.map((source) => (
+            <div key={`editorial-${source.slug}`} className="space-y-3">
+              <EditorialAthleteOverview slug={source.slug} showEvidence />
+              <EditorialRoadSplits slug={source.slug} showEvidence />
+            </div>
+          ))}
           <CompactResults showEvidence key={athleteId} results={profile.results} />
           {profile.athlete.sources.map((source) => (
             <UnverifiedRaceHistory key={source.slug} slug={source.slug} showEvidence />
