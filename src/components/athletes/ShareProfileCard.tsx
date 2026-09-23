@@ -19,6 +19,7 @@ export function ShareProfileCard() {
     staleTime: 0,
     retry: false,
   });
+  const [searchIndexable, setSearchIndexable] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [shareBio, setShareBio] = useState(true);
   const [shareResults, setShareResults] = useState(true);
@@ -30,6 +31,7 @@ export function ShareProfileCard() {
   useEffect(() => {
     if (!share.data) return;
     setEnabled(share.data.enabled);
+    setSearchIndexable(share.data.searchIndexable);
     setShareBio(share.data.shareBio);
     setShareResults(share.data.shareResults);
     setShareClub(share.data.shareClub);
@@ -40,7 +42,15 @@ export function ShareProfileCard() {
   const save = useMutation({
     mutationFn: () =>
       saveMyProfileShare({
-        data: { enabled, shareBio, shareResults, shareClub, shareLocation, acknowledged },
+        data: {
+          enabled,
+          searchIndexable,
+          shareBio,
+          shareResults,
+          shareClub,
+          shareLocation,
+          acknowledged,
+        },
       }),
     onSuccess: (data: AthleteShareSettings) => {
       queryClient.setQueryData(["my-profile-share"], data);
@@ -109,9 +119,9 @@ export function ShareProfileCard() {
 
         <p className="max-w-3xl text-sm leading-6 text-muted">
           Your ordinary Athlete Profile stays private until you turn sharing on. The public link is
-          unlisted — it is not added to the Athletes directory — and never includes your email,
-          postcode, photograph or product preferences. Your birthday is hidden unless you choose to
-          display it in your account.
+          unlisted unless you enable search discovery below. It never includes your email, postcode,
+          photograph or product preferences. Your birthday is hidden unless you choose to display it
+          in your account.
         </p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-elevated p-4">
@@ -135,6 +145,11 @@ export function ShareProfileCard() {
 
         {enabled ? (
           <div className="grid gap-2 sm:grid-cols-2">
+            <ShareToggle
+              checked={searchIndexable}
+              label="Allow Google and other search engines to find this profile"
+              onChange={setSearchIndexable}
+            />
             <ShareToggle checked={shareBio} label="Include bio" onChange={setShareBio} />
             <ShareToggle
               checked={shareResults}
@@ -159,8 +174,9 @@ export function ShareProfileCard() {
               className="mt-1 size-4"
             />
             <span className="text-sm leading-6 text-fg">
-              I understand this creates a public, unlisted ATHRECS page that anyone with the link
-              can open. Hidden results, photos and private account fields stay off that page.
+              I understand this creates a public ATHRECS page that anyone with the link can open,
+              and that enabling search discovery allows it to appear in search results. Hidden
+              results, photos and private account fields stay off that page.
             </span>
           </label>
         ) : null}
@@ -168,7 +184,7 @@ export function ShareProfileCard() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="flex items-center gap-2 text-xs text-subtle">
             <ShieldCheck className="size-4 text-accent" aria-hidden="true" />
-            Withdrawal takes effect immediately.
+            Profile withdrawal is immediate. Search engines may take time to remove old listings.
           </p>
           <Button
             type="button"

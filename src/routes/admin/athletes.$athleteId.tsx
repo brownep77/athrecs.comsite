@@ -1,3 +1,8 @@
+import {
+  EditorialAthleteOverview,
+  EditorialRoadSplits,
+} from "@/components/athletes/EditorialAthleteOverview";
+import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { AthleteId } from "@/components/athletes/AthleteId";
@@ -79,9 +84,32 @@ function StaffAthleteProfile() {
               </a>
             ) : null}
           </section>
-          <ProfileRecordHighlights results={profile.results} />
-          <CompactResults key={athleteId} results={profile.results} />
+          {profile.bioNotes.length ? (
+            <details className="rounded-xl border border-border bg-surface p-4">
+              <summary className="cursor-pointer font-semibold">
+                Biography and research notes
+              </summary>
+              {profile.bioNotes.map((note, index) => (
+                <div key={index} className="mt-3 text-sm">
+                  <h2 className="font-semibold">{note.label}</h2>
+                  <p className="whitespace-pre-wrap">{note.bio}</p>
+                </div>
+              ))}
+            </details>
+          ) : null}
+          <ProfileRecordHighlights results={profile.results} showEvidence />
+          {profile.athlete.sources.map((source) => (
+            <div key={`editorial-${source.slug}`} className="space-y-3">
+              <EditorialAthleteOverview slug={source.slug} showEvidence />
+              <EditorialRoadSplits slug={source.slug} showEvidence />
+            </div>
+          ))}
+          <CompactResults showEvidence key={athleteId} results={profile.results} />
+          {profile.athlete.sources.map((source) => (
+            <UnverifiedRaceHistory key={source.slug} slug={source.slug} showEvidence />
+          ))}
           <SourcePerformanceHistory
+            showEvidence
             key={`source-${athleteId}`}
             histories={profile.sourceHistories}
           />

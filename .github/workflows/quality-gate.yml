@@ -189,7 +189,7 @@ jobs:
           BROWSER_SMOKE_FULL_PAGE=1 \
           BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Achievements board||Results history' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/paul-browne "$GITHUB_WORKSPACE/artifacts/paul-compact-mobile.png"
-          BROWSER_SMOKE_EXPECT_TEXT='Harry Styles||Achievements board||Marathon majors journey||Results history' \
+          BROWSER_SMOKE_EXPECT_TEXT='Harry Styles||Achievements board||Milestones||Results history' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/harry-styles "$GITHUB_WORKSPACE/artifacts/harry-compact.png"
 
       - name: Browser smoke tests

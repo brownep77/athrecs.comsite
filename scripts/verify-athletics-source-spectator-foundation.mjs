@@ -97,7 +97,10 @@ for (const athlete of initialCohort) {
   );
 }
 assert.match(athleteRoute, /Professional athlete profile/);
-assert.match(athleteRoute, /No source-checked performance rows have been added/);
+assert.match(
+  await read("../src/components/athletes/CompactResultsTable.tsx"),
+  /No results in this selection/,
+);
 
 console.log(
   JSON.stringify(

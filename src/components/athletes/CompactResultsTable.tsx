@@ -23,10 +23,12 @@ export function CompactResultsTable({
   action,
   claimable = false,
   personalBestIds,
+  showEvidence = false,
   reportedRecords = NO_REPORTED_RECORDS,
   reportedBestIds = NO_REPORTED_BEST_IDS,
 }: {
   results: Row[];
+  showEvidence?: boolean;
   reportedRecords?: readonly ReportedRaceRecord[];
   reportedBestIds?: ReadonlySet<string>;
   personalBestIds?: ReadonlySet<number>;
@@ -75,7 +77,7 @@ export function CompactResultsTable({
                   </ProfileEventLink>
                 </span>
                 <ResultDisqualification decision={result.details?.disqualification} />
-                {result.details?.note ? (
+                {showEvidence && result.details?.note ? (
                   <span className="block text-xs text-muted">{result.details.note}</span>
                 ) : null}
                 {result.details?.splits?.length ? (
@@ -90,7 +92,7 @@ export function CompactResultsTable({
                     Sources differ · excluded from PBs
                   </span>
                 ) : null}
-                {roadPerformanceCondition(result) ? (
+                {showEvidence && roadPerformanceCondition(result) ? (
                   <span className="block text-xs text-muted">
                     {roadPerformanceCondition(result)!.note}
                   </span>
@@ -123,9 +125,17 @@ export function CompactResultsTable({
                     PB
                   </span>
                 ) : null}
-                <span className="block text-[10px] font-normal text-subtle">
-                  {isDisqualified(result) ? "Original time · disqualified" : timingBasis(result)}
-                </span>
+                {showEvidence ? (
+                  <span className="block text-xs font-normal text-subtle">
+                    {isDisqualified(result) ? "Original time · disqualified" : timingBasis(result)}
+                    {result.chipTimeSeconds != null
+                      ? ` · Chip ${formatDuration(result.chipTimeSeconds)}`
+                      : ""}
+                    {result.gunTimeSeconds != null
+                      ? ` · Gun ${formatDuration(result.gunTimeSeconds)}`
+                      : ""}
+                  </span>
+                ) : null}
               </td>
               <td className="px-3 py-2 tabular-nums">
                 {result.overallPlace ?? "—"}
@@ -173,6 +183,7 @@ export function CompactResultsTable({
             records={reportedRecords}
             bestIds={reportedBestIds}
             hasActions={Boolean(action || claimable)}
+            showEvidence={showEvidence}
           />
         </tbody>
       </table>
@@ -183,15 +194,17 @@ export function CompactResults({
   results,
   claimable = false,
   reportedHistory,
+  showEvidence = false,
 }: {
   results: Row[];
   claimable?: boolean;
   reportedHistory?: ReportedRaceHistory;
+  showEvidence?: boolean;
 }) {
   const [sport, setSport] = useState("");
   const [year, setYear] = useState("");
   const [q, setQ] = useState("");
-  const [page, setPage] = useState(0);
+
   const reportedRecords = reportedHistory?.records ?? NO_REPORTED_RECORDS;
   const reportYear = (record: ReportedRaceRecord) =>
     record.reportedDate.match(/^\d{4}\b/)?.[0] ?? "Unknown";
@@ -225,8 +238,7 @@ export function CompactResults({
       ),
     );
   const total = filtered.length + filteredReports.length;
-  const pages = Math.max(1, Math.ceil(total / 30));
-  const active = Math.min(page, pages - 1);
+
   const bests = selectProfilePersonalBests(results, reportedHistory?.personalBests);
   const bestIds = new Set(
     bests.flatMap((best) => (best.kind === "recorded" ? [best.value.resultId] : [])),
@@ -236,13 +248,13 @@ export function CompactResults({
       best.kind === "reported" && best.value.recordId ? [best.value.recordId] : [],
     ),
   );
-  const reportStart = Math.max(0, active * 30 - filtered.length);
-  const reportEnd = Math.max(0, (active + 1) * 30 - filtered.length);
+  const previewSize = 8;
+  const previewReports = Math.max(0, previewSize - filtered.length);
   return (
     <section className="space-y-3" id={reportedHistory ? "race-results" : undefined}>
       <div className="flex flex-wrap items-center gap-2">
         <h2 className="mr-auto font-display text-lg font-semibold">
-          Results <span className="font-sans text-sm text-subtle">{total}</span>
+          Results history <span className="font-sans text-sm text-subtle">{total}</span>
         </h2>
         <input
           aria-label="Search results"
@@ -250,9 +262,8 @@ export function CompactResults({
           value={q}
           onChange={(e) => {
             setQ(e.target.value);
-            setPage(0);
           }}
-          className="h-9 rounded border border-border bg-surface px-2 text-sm"
+          className="h-9 max-w-full rounded border border-border bg-surface px-2 text-sm"
         />
         {[
           { label: "Sport", value: sport, options: sports, set: setSport },
@@ -264,9 +275,8 @@ export function CompactResults({
             value={filter.value}
             onChange={(e) => {
               filter.set(e.target.value);
-              setPage(0);
             }}
-            className="h-9 rounded border border-border bg-surface px-2 text-sm"
+            className="h-9 max-w-full rounded border border-border bg-surface px-2 text-sm"
           >
             <option value="">All {filter.label.toLowerCase()}s</option>
             {filter.options.map((item) => (
@@ -275,13 +285,16 @@ export function CompactResults({
           </select>
         ))}
       </div>
-      {reportedHistory ? <p className="text-sm text-muted">{reportedHistory.description}</p> : null}
+      {showEvidence && reportedHistory ? (
+        <p className="text-sm text-muted">{reportedHistory.description}</p>
+      ) : null}
       {total ? (
         <CompactResultsTable
-          results={filtered.slice(active * 30, (active + 1) * 30)}
+          results={filtered.slice(0, previewSize)}
+          showEvidence={showEvidence}
           claimable={claimable}
           personalBestIds={bestIds}
-          reportedRecords={filteredReports.slice(reportStart, reportEnd)}
+          reportedRecords={filteredReports.slice(0, previewReports)}
           reportedBestIds={reportedBestIds}
         />
       ) : (
@@ -289,26 +302,25 @@ export function CompactResults({
           No results in this selection.
         </p>
       )}
-      {pages > 1 ? (
-        <div className="flex justify-end gap-4 text-sm">
-          <button
-            disabled={!active}
-            onClick={() => setPage(active - 1)}
-            className="disabled:opacity-40"
-          >
-            Previous
-          </button>
-          <span>
-            {active + 1} / {pages}
-          </span>
-          <button
-            disabled={active + 1 >= pages}
-            onClick={() => setPage(active + 1)}
-            className="disabled:opacity-40"
-          >
-            Next
-          </button>
-        </div>
+      {total > previewSize ? (
+        <details
+          className="rounded-lg border border-border bg-surface p-3"
+          key={`${sport}:${year}:${q}`}
+        >
+          <summary className="cursor-pointer text-sm font-semibold text-accent">
+            Show all {total} results
+          </summary>
+          <div className="mt-3">
+            <CompactResultsTable
+              results={filtered.slice(previewSize)}
+              claimable={claimable}
+              showEvidence={showEvidence}
+              personalBestIds={bestIds}
+              reportedRecords={filteredReports.slice(previewReports)}
+              reportedBestIds={reportedBestIds}
+            />
+          </div>
+        </details>
       ) : null}
     </section>
   );

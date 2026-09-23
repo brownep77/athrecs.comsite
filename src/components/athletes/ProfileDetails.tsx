@@ -23,9 +23,9 @@ export function ProfileDetails({
     ["Contact", details.acceptContact ? "Open to contact" : "Not accepting contact"],
   ].filter((row) => row[1]);
   return (
-    <dl className="grid gap-x-6 gap-y-2 border-t border-border pt-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+    <dl className="flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-2 text-sm">
       {nationality || details.nationality ? (
-        <div>
+        <div className="flex items-center gap-1.5">
           <dt className="text-xs text-subtle">Nationality</dt>
           <dd>
             <CountryFlag country={nationality || details.nationality} showName />
@@ -33,7 +33,7 @@ export function ProfileDetails({
         </div>
       ) : null}
       {rows.map(([label, value]) => (
-        <div key={label}>
+        <div key={label} className="flex flex-wrap items-baseline gap-1.5">
           <dt className="text-xs text-subtle">{label}</dt>
           <dd className="font-medium text-fg">{value}</dd>
         </div>

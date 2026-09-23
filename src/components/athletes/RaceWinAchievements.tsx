@@ -59,9 +59,7 @@ export function RaceWinAchievements({ wins }: { wins: RaceWinAchievement[] }) {
                       ? ` · ${evidence.performance ?? formatDuration(evidence.result!.finishTimeSeconds)}`
                       : ""}
                   </p>
-                  <p>
-                    {evidence.evidenceLabel} · 1st in {win.label.toLowerCase()}
-                  </p>
+                  <p>1st in {win.label.toLowerCase()}</p>
                   {evidence.sourceUrls.map((url, sourceIndex) => (
                     <a
                       key={url}
@@ -79,11 +77,6 @@ export function RaceWinAchievements({ wins }: { wins: RaceWinAchievement[] }) {
           </details>
         ))}
       </div>
-      <p className="text-xs text-muted">
-        Gold marks a recorded first place. Overall, women’s/men’s and category wins are separate;
-        one race can appear in more than one classification. Source-history wins retain their source
-        labels and do not change completion or PB totals.
-      </p>
     </div>
   );
 }

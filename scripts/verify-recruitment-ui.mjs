@@ -90,6 +90,7 @@ try {
   await page.screenshot({ path: "artifacts/recruitment-mobile.png", fullPage: true });
   await page.goto(`${origin}/athletes/mo-farah`, { waitUntil: "networkidle", timeout: 90000 });
   await page.getByRole("heading", { name: "Mo Farah", exact: true }).waitFor();
+  await page.getByText("More about Mo Farah", { exact: true }).click();
   const photo = page.getByRole("img", { name: /Mo Farah, wearing/ });
   assert.equal(await photo.evaluate((image) => image.complete && image.naturalWidth > 0), true);
   await page.getByText("12:53.11", { exact: true }).waitFor();
@@ -98,19 +99,22 @@ try {
   assert.equal(await personalBests.getByText("59:07", { exact: true }).count(), 0);
   await personalBests.getByText("27:44", { exact: true }).waitFor();
   await personalBests.getByText("2:05:11", { exact: true }).waitFor();
-  await page.getByRole("heading", { name: "Results 52", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Results history 52", exact: true }).waitFor();
   await page
     .getByRole("region", { name: "Achievements board" })
     .getByText("50", { exact: true })
     .waitFor();
   await page.getByLabel("Year", { exact: true }).selectOption("2019");
   const assistedRow = page.getByRole("row").filter({ hasText: "59:07" });
-  await assistedRow.getByText("Assisted course · excluded from PBs", { exact: true }).waitFor();
+  assert.equal(
+    await assistedRow.getByText("Assisted course · excluded from PBs", { exact: true }).count(),
+    0,
+  );
   assert.equal(await assistedRow.getByLabel("Personal best", { exact: true }).count(), 0);
   await page.getByLabel("Year", { exact: true }).selectOption("");
-  await page.getByRole("button", { name: "Next", exact: true }).click();
+  await page.getByText("Show all 52 results", { exact: true }).click();
   await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
-  await page.getByRole("button", { name: "Previous", exact: true }).click();
+  await page.getByText("Show all 52 results", { exact: true }).click();
   await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
   assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
   assert.equal(

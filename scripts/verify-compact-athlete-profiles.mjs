@@ -148,6 +148,76 @@ try {
     slug: share.slug,
   });
   assert(published);
+  assert.equal(published.searchIndexable, false, "Sharing alone must not opt in to search");
+  await rpc(
+    "athlete-profile-share-api",
+    "saveMyProfileShare",
+    { enabled: true, acknowledged: true, searchIndexable: true },
+    owner,
+  );
+  let searchable = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
+    slug: share.slug,
+  });
+  assert.equal(searchable.searchIndexable, true);
+  const suggestion = {
+    slug: share.slug,
+    suggestion: "Please correct the club to Example Running Club.",
+    evidenceUrl: "https://example.test/club",
+  };
+  await assert.rejects(() => rpc("profile-edit-suggestions-api", "submitProfileEdit", suggestion));
+  await assert.rejects(() =>
+    rpc(
+      "profile-edit-suggestions-api",
+      "submitProfileEdit",
+      { ...suggestion, evidenceUrl: "javascript:alert(1)" },
+      owner,
+    ),
+  );
+  const submitted = await rpc(
+    "profile-edit-suggestions-api",
+    "submitProfileEdit",
+    suggestion,
+    owner,
+  );
+  await assert.rejects(() =>
+    rpc("profile-edit-suggestions-api", "getProfileEdits", undefined, owner),
+  );
+  let queue = await rpc("profile-edit-suggestions-api", "getProfileEdits", undefined, staff);
+  assert(queue.some((row) => row.id === submitted.id && row.suggestion === suggestion.suggestion));
+  assert.equal(
+    (await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }))
+      .club,
+    searchable.club,
+    "A suggestion must not change the profile",
+  );
+  await assert.rejects(() =>
+    rpc(
+      "profile-edit-suggestions-api",
+      "reviewProfileEdit",
+      { id: submitted.id, status: "reviewed" },
+      owner,
+    ),
+  );
+  await rpc(
+    "profile-edit-suggestions-api",
+    "reviewProfileEdit",
+    { id: submitted.id, status: "reviewed" },
+    staff,
+  );
+  queue = await rpc("profile-edit-suggestions-api", "getProfileEdits", undefined, staff);
+  assert(!queue.some((row) => row.id === submitted.id));
+  await rpc(
+    "athlete-profile-share-api",
+    "saveMyProfileShare",
+    { enabled: true, acknowledged: true, searchIndexable: false },
+    owner,
+  );
+  assert.equal(
+    (await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }))
+      .searchIndexable,
+    false,
+  );
+
   assert.equal(published.details.birthday, "");
   assert(!JSON.stringify(published).includes("1980-01-02"));
   assert.equal(published.details.runningAgeCategory, "M45");

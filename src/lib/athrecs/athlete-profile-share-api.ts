@@ -12,6 +12,7 @@ import { buildShareSlug, isValidShareSlug, sharedProfilePath } from "./athlete-p
 
 export type AthleteShareSettings = {
   enabled: boolean;
+  searchIndexable: boolean;
   slug: string;
   shareUrlPath: string;
   shareBio: boolean;
@@ -24,6 +25,7 @@ export type AthleteShareSettings = {
 
 export type AthleteShareInput = {
   enabled: boolean;
+  searchIndexable?: boolean;
   shareBio?: boolean;
   shareResults?: boolean;
   shareClub?: boolean;
@@ -35,6 +37,7 @@ export type SharedProfileResult = Omit<ProfileResult, "athleteName">;
 
 export type SharedAthleteProfile = {
   kind: "shared-account";
+  searchIndexable: boolean;
   athleteNumber: string;
   slug: string;
   displayName: string;
@@ -55,6 +58,7 @@ export type SharedAthleteProfile = {
 };
 
 type ShareRow = {
+  search_indexable: boolean;
   user_id: string;
   slug: string;
   enabled: boolean;
@@ -88,6 +92,7 @@ async function ready() {
 function mapSettings(row: ShareRow): AthleteShareSettings {
   return {
     enabled: row.enabled,
+    searchIndexable: row.search_indexable === true,
     slug: row.slug,
     shareUrlPath: sharedProfilePath(row.slug),
     shareBio: row.share_bio,
@@ -107,6 +112,7 @@ function validateShareInput(value: AthleteShareInput): AthleteShareInput {
   }
   return {
     enabled: value?.enabled === true,
+    searchIndexable: value?.searchIndexable,
     shareBio: value?.shareBio !== false,
     shareResults: value?.shareResults !== false,
     shareClub: value?.shareClub !== false,
@@ -156,7 +162,7 @@ async function ensureShareRow(
   const existing = await sql<ShareRow>`
     select
       user_id, slug, enabled, share_bio, share_results, share_club, share_location,
-      acknowledged_at::text as acknowledged_at,
+      search_indexable, acknowledged_at::text as acknowledged_at,
       published_at::text as published_at
     from athlete_public_shares
     where user_id = ${userId}
@@ -175,7 +181,7 @@ async function ensureShareRow(
     on conflict (user_id) do update set updated_at = athlete_public_shares.updated_at
     returning
       user_id, slug, enabled, share_bio, share_results, share_club, share_location,
-      acknowledged_at::text as acknowledged_at,
+      search_indexable, acknowledged_at::text as acknowledged_at,
       published_at::text as published_at
   `;
   return inserted[0];
@@ -324,6 +330,7 @@ async function buildPublicProfile(
 
   return {
     kind: "shared-account",
+    searchIndexable: share.search_indexable === true,
     athleteNumber: identity.athlete_number,
     slug: share.slug,
     displayName,
@@ -372,7 +379,7 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
     const rows = await sql<ShareRow>`
       insert into athlete_public_shares (
         user_id, slug, enabled, share_bio, share_results, share_club, share_location,
-        acknowledged_at, published_at, unpublished_at, updated_at
+        search_indexable, acknowledged_at, published_at, unpublished_at, updated_at
       ) values (
         ${context.userId},
         ${slug},
@@ -381,6 +388,7 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
         ${data.shareResults === true},
         ${data.shareClub === true},
         ${data.shareLocation === true},
+        ${data.enabled && (data.searchIndexable ?? current.search_indexable) === true},
         ${data.enabled ? new Date() : current.acknowledged_at},
         ${data.enabled ? new Date() : null},
         ${data.enabled ? null : new Date()},
@@ -388,6 +396,7 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
       )
       on conflict (user_id) do update set
         enabled = excluded.enabled,
+        search_indexable = excluded.search_indexable,
         share_bio = excluded.share_bio,
         share_results = excluded.share_results,
         share_club = excluded.share_club,
@@ -404,7 +413,7 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
         updated_at = now()
       returning
         user_id, slug, enabled, share_bio, share_results, share_club, share_location,
-        acknowledged_at::text as acknowledged_at,
+        search_indexable, acknowledged_at::text as acknowledged_at,
         published_at::text as published_at
     `;
     return mapSettings(rows[0]);
@@ -421,7 +430,7 @@ export const getPublishedSharedProfile = createServerFn({ method: "GET" })
       const rows = await sql<ShareRow>`
         select
           user_id, slug, enabled, share_bio, share_results, share_club, share_location,
-          acknowledged_at::text as acknowledged_at,
+          search_indexable, acknowledged_at::text as acknowledged_at,
           published_at::text as published_at
         from athlete_public_shares
         where (slug = ${data.slug} or exists (

@@ -1,0 +1,43 @@
+name: Notify search engines of public athlete profiles
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/components/athletes/**'
+      - 'src/routes/athletes/**'
+      - 'src/lib/athrecs/athlete-sitemap.server.ts'
+      - 'migrations/20260923_profile_search_and_edits.sql'
+      - '.github/workflows/notify-athlete-search.yml'
+permissions:
+  contents: read
+concurrency:
+  group: notify-athlete-search
+  cancel-in-progress: true
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Wait for the public profile release
+        run: |
+          node --input-type=module <<'JS'
+          const origin = 'https://www.athrecs.com';
+          let ready = false;
+          for (let attempt = 0; attempt < 30; attempt++) {
+            try {
+              const response = await fetch(`${origin}/athletes/paul-browne`, { signal: AbortSignal.timeout(10000) });
+              const html = await response.text();
+              ready = response.ok && html.includes('id="suggest-edit"') && /<meta[^>]*name="robots"[^>]*content="index, follow/.test(html);
+              if (ready) break;
+            } catch { /* Deployment may still be replacing the previous version. */ }
+            await new Promise(resolve => setTimeout(resolve, 15000));
+          }
+          if (!ready) throw new Error('The indexable profile release is not live; no URLs submitted.');
+          JS
+      - name: Submit live sitemap URLs to IndexNow
+        run: node scripts/submit-athlete-indexnow.mjs

@@ -205,8 +205,16 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
       where athlete_id=any(${sourceIds}::int[])
       order by provider, external_id
     `;
+    const bioNotes = await sql<{ label: string; bio: string }>`
+      select a.display_name as label, a.bio from athletes a
+      where a.id=any(${sourceIds}::int[]) and a.bio <> ''
+      union all
+      select 'Account biography' as label, b.custom_bio as bio
+      from athlete_profile_bios b join athlete_identifiers i on i.user_id=b.user_id
+      where i.number=${number}::bigint and b.custom_bio <> ''`;
     return {
       athlete,
+      bioNotes,
       results: combineProfileResults(
         results.map((result) => ({ ...result, details: readResultDetails(result.details) })),
       ),

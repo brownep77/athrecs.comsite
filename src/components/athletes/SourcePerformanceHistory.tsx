@@ -3,7 +3,13 @@ import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
 
-export function SourcePerformanceHistory({ histories }: { histories: SourceHistory[] }) {
+export function SourcePerformanceHistory({
+  histories,
+  showEvidence = false,
+}: {
+  histories: SourceHistory[];
+  showEvidence?: boolean;
+}) {
   const [year, setYear] = useState("");
   const [discipline, setDiscipline] = useState("");
   const [query, setQuery] = useState("");
@@ -34,30 +40,36 @@ export function SourcePerformanceHistory({ histories }: { histories: SourceHisto
   return (
     <section className="space-y-3" aria-label="Source performance history">
       <h2 className="font-display text-lg font-semibold">
-        Source performance history{" "}
+        {showEvidence ? "Source performance history" : "Performance history"}{" "}
         <span className="font-sans text-sm text-subtle">{rows.length}</span>
       </h2>
-      <p className="text-sm text-muted">
-        Original source performances, including decimal times, field marks and annotations. These
-        may also appear in Results above and are not added again to personal bests or achievement
-        totals.
-      </p>
-      {histories.map((history) => (
-        <p key={`${history.provider}:${history.externalId}`} className="text-xs text-muted">
-          <a
-            href={history.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="text-accent hover:underline"
-          >
-            {history.provider === "powerof10" ? "Power of 10" : history.provider} profile ↗
-          </a>
-          {" · "}
-          {history.yearsCaptured.length} of {history.yearsExpected.length} source years imported
-          {" · "}
-          {history.complete ? "All available source years captured" : "History import in progress"}
-        </p>
-      ))}
+      {showEvidence ? (
+        <>
+          <p className="text-sm text-muted">
+            Original source performances, including decimal times, field marks and annotations.
+            These may also appear in Results above and are not added again to personal bests or
+            achievement totals.
+          </p>
+          {histories.map((history) => (
+            <p key={`${history.provider}:${history.externalId}`} className="text-xs text-muted">
+              <a
+                href={history.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="text-accent hover:underline"
+              >
+                {history.provider === "powerof10" ? "Power of 10" : history.provider} profile ↗
+              </a>
+              {" · "}
+              {history.yearsCaptured.length} of {history.yearsExpected.length} source years imported
+              {" · "}
+              {history.complete
+                ? "All available source years captured"
+                : "History import in progress"}
+            </p>
+          ))}
+        </>
+      ) : null}
       <div className="flex flex-wrap gap-2">
         <input
           aria-label="Search source history"
@@ -104,7 +116,11 @@ export function SourcePerformanceHistory({ histories }: { histories: SourceHisto
           </select>
         ))}
       </div>
-      <div className="overflow-x-auto rounded-lg border border-border bg-surface">
+      <div
+        className="max-h-96 overflow-auto rounded-lg border border-border bg-surface"
+        tabIndex={0}
+        aria-label="Performance history table"
+      >
         <table className="w-full text-left text-sm">
           <caption className="sr-only">Source performances, most recent first</caption>
           <thead className="bg-elevated text-xs text-subtle">
@@ -127,48 +143,50 @@ export function SourcePerformanceHistory({ histories }: { histories: SourceHisto
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
-            {filtered.slice(active * 30, (active + 1) * 30).map((row) => (
-              <tr key={row.key} className="hover:bg-elevated/50">
-                <td className="whitespace-nowrap px-3 py-2 text-xs">
-                  {formatRaceDateShort(row.date)}
-                </td>
-                <td className="whitespace-nowrap px-3 py-2">{row.discipline}</td>
-                <td className="whitespace-pre-line px-3 py-2 font-semibold tabular-nums">
-                  {row.performance}
-                  {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
-                  <ResultDisqualification decision={row.disqualification} />
-                  {row.labels.length ? (
-                    <span className="block text-xs font-normal text-muted">
-                      Source: {row.labels.join(", ")}
-                    </span>
-                  ) : null}
-                </td>
-                <td className="px-3 py-2">{row.wind || "—"}</td>
-                <td className="px-3 py-2">
-                  {row.place || "—"}
-                  {row.disqualification ? (
-                    <span className="block text-xs text-muted">Original · void</span>
-                  ) : null}
-                </td>
-                <td className="min-w-52 px-3 py-2">{row.meeting}</td>
-                <td className="px-3 py-2">{row.venue}</td>
-                <td className="whitespace-nowrap px-3 py-2 text-xs">{row.ageGroup}</td>
-                <td className="px-3 py-2">
-                  {row.sourceUrls.map((url, index) => (
-                    <a
-                      key={url}
-                      href={url}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`Source history result ${index + 1} for ${row.meeting}`}
-                      className="mr-2 whitespace-nowrap text-xs text-accent hover:underline"
-                    >
-                      Source{row.sourceUrls.length > 1 ? ` ${index + 1}` : ""} ↗
-                    </a>
-                  ))}
-                </td>
-              </tr>
-            ))}
+            {(showEvidence ? filtered.slice(active * 30, (active + 1) * 30) : filtered).map(
+              (row) => (
+                <tr key={row.key} className="hover:bg-elevated/50">
+                  <td className="whitespace-nowrap px-3 py-2 text-xs">
+                    {formatRaceDateShort(row.date)}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-2">{row.discipline}</td>
+                  <td className="whitespace-pre-line px-3 py-2 font-semibold tabular-nums">
+                    {row.performance}
+                    {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
+                    <ResultDisqualification decision={row.disqualification} />
+                    {showEvidence && row.labels.length ? (
+                      <span className="block text-xs font-normal text-muted">
+                        Source: {row.labels.join(", ")}
+                      </span>
+                    ) : null}
+                  </td>
+                  <td className="px-3 py-2">{row.wind || "—"}</td>
+                  <td className="px-3 py-2">
+                    {row.place || "—"}
+                    {row.disqualification ? (
+                      <span className="block text-xs text-muted">Original · void</span>
+                    ) : null}
+                  </td>
+                  <td className="min-w-52 px-3 py-2">{row.meeting}</td>
+                  <td className="px-3 py-2">{row.venue}</td>
+                  <td className="whitespace-nowrap px-3 py-2 text-xs">{row.ageGroup}</td>
+                  <td className="px-3 py-2">
+                    {row.sourceUrls.map((url, index) => (
+                      <a
+                        key={url}
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Source history result ${index + 1} for ${row.meeting}`}
+                        className="mr-2 whitespace-nowrap text-xs text-accent hover:underline"
+                      >
+                        Source{row.sourceUrls.length > 1 ? ` ${index + 1}` : ""} ↗
+                      </a>
+                    ))}
+                  </td>
+                </tr>
+              ),
+            )}
           </tbody>
         </table>
         {!filtered.length ? (

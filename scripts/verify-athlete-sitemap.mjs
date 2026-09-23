@@ -11,6 +11,8 @@ const sql = { query: async (query, values) => (await db.query(query, values)).ro
 try {
   await db.exec(`
     create table athletes (id int primary key, slug text, profile_type text, profile_visibility text);
+    create table athlete_public_shares (user_id text, slug text, enabled boolean, search_indexable boolean);
+    create table athlete_identifiers (user_id text);
     create table athlete_account_links (athlete_id int, status text);
     insert into athletes select i, 'athlete-' || i, 'Athlete', 'public' from generate_series(1, 5001) i;
     insert into athletes values
@@ -39,6 +41,17 @@ try {
     (await athleteSitemapSlugs(sql, 2)).includes("private-source"),
     "New publications need no rebuild",
   );
+  await db.exec(`insert into athlete_identifiers values ('public'), ('unlisted'), ('withdrawn');
+    insert into athlete_public_shares values
+      ('public', 'search-opt-in', true, true),
+      ('unlisted', 'link-only', true, false),
+      ('withdrawn', 'withdrawn', false, true),
+      ('missing-identity', 'broken-account', true, true)`);
+  const slugs = [...(await athleteSitemapSlugs(sql, 1)), ...(await athleteSitemapSlugs(sql, 2))];
+  assert(slugs.includes("search-opt-in"));
+  for (const slug of ["link-only", "withdrawn", "broken-account"]) assert(!slugs.includes(slug));
+  await db.exec("update athlete_public_shares set search_indexable=false");
+  assert(!(await athleteSitemapSlugs(sql, 1)).includes("search-opt-in"));
   assert.match(sitemapXml(["https://example.test/a?x=1&y=2"]), /x=1&amp;y=2/);
   assert.match(sitemapXml(["https://example.test/sitemaps/athletes-1.xml"], true), /<sitemapindex/);
   console.log(

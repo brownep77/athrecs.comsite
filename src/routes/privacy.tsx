@@ -110,7 +110,18 @@ function AthletePrivacyPage() {
             identifies the profile across sports. Nationality, country of birth, age category,
             coach, manager and contact preference can appear on the shared profile. Your birthday
             stays hidden unless you choose to display its day and month or full date in your
-            account.
+            account. Search discovery is a separate choice: enabling it allows the selected public
+            fields to appear in Google and other search engines and includes the profile in our
+            sitemap. Turning it off removes that permission and the sitemap entry immediately;
+            search engines may take time to update their own listings.
+          </p>
+        </NoticeSection>
+
+        <NoticeSection title="Suggested profile edits">
+          <p>
+            Signed-in visitors can submit factual corrections and supporting links for staff review.
+            Suggestions and the submitting account reference stay in the staff review queue; they do
+            not change a public profile automatically.
           </p>
         </NoticeSection>
 
