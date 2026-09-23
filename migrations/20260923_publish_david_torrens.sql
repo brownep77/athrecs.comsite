@@ -15,6 +15,13 @@ DECLARE
   source_link constant text := 'https://results.eventchiptiming.com/myresults.aspx?CId=16202&RId=10399&EId=5&AId=253543';
   audit_note constant text := 'Paul Browne explicitly confirmed by sight and authorised publication on 2026-09-23: David Torrens, St Albans 10K, 2026-06-14, finished in 1:03:34 (3814 seconds). Timing basis and placings were not supplied. London, United Kingdom was supplied by Paul. Reepham 10K participation was reported without a date or time and is not added as a verified performance by this change.';
 BEGIN
+  -- This is a correction to an established catalogue, not a bootstrap seed.
+  -- Inserting an athlete before the normal initial seed would make its
+  -- non-empty-database safeguard skip the remainder of the initial catalogue.
+  IF NOT EXISTS (SELECT 1 FROM app_meta WHERE key = 'seed_version') THEN
+    RETURN;
+  END IF;
+
   PERFORM pg_advisory_xact_lock(hashtext('athrecs:publish:david-torrens:2026-06-14'));
 
   -- Repeat-safe even when exercised outside the deployment migration ledger.
