@@ -1,6 +1,5 @@
 import { CHIP_TIME_CAVEAT } from "@/lib/athrecs/reported-personal-bests";
 import type { ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
-import { distanceColourClass } from "@/lib/athrecs/profile-colours";
 
 export function ReportedRaceResultRows({
   records,
@@ -33,7 +32,7 @@ export function ReportedRaceResultRows({
         <span className="font-semibold tabular-nums">{record.reportedTime}</span>
         {bestIds.has(record.id) ? (
           <span
-            className={`ml-2 rounded border px-1.5 py-0.5 text-xs font-semibold ${distanceColourClass(record.distance)}`}
+            className="ml-2 text-xs font-semibold text-accent"
             aria-label="Personal best, not verified by chip time"
           >
             PB*
