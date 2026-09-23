@@ -1,6 +1,10 @@
 import { useMemo } from "react";
 import { Medal, Trophy, Globe2, Mountain, Flag, Layers } from "lucide-react";
-import { buildProfileAchievements, isCompletedResult } from "@/lib/athrecs/profile-achievements";
+import {
+  buildProfileAchievements,
+  isCompletedResult,
+  resultEvidenceLabel,
+} from "@/lib/athrecs/profile-achievements";
 import { type ProfileResult } from "@/lib/athrecs/profile-records";
 import {
   CHIP_TIME_CAVEAT,
