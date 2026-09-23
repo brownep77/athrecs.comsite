@@ -125,9 +125,17 @@ export function CompactResultsTable({
                     PB
                   </span>
                 ) : null}
-                <span className={showEvidence ? "block text-xs font-normal text-subtle" : "hidden"}>
-                  {isDisqualified(result) ? "Original time · disqualified" : timingBasis(result)}
-                </span>
+                {showEvidence ? (
+                  <span className="block text-xs font-normal text-subtle">
+                    {isDisqualified(result) ? "Original time · disqualified" : timingBasis(result)}
+                    {result.chipTimeSeconds != null
+                      ? ` · Chip ${formatDuration(result.chipTimeSeconds)}`
+                      : ""}
+                    {result.gunTimeSeconds != null
+                      ? ` · Gun ${formatDuration(result.gunTimeSeconds)}`
+                      : ""}
+                  </span>
+                ) : null}
               </td>
               <td className="px-3 py-2 tabular-nums">
                 {result.overallPlace ?? "—"}
