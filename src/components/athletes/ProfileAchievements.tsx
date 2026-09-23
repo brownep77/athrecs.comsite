@@ -17,7 +17,7 @@ import { CountryFlag } from "./CountryFlag";
 import { RaceWinAchievements } from "./RaceWinAchievements";
 import { buildRaceWinAchievements } from "@/lib/athrecs/race-win-achievements";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
-import { achievementColourClass, distanceColourClass } from "@/lib/athrecs/profile-colours";
+import { achievementColourClass } from "@/lib/athrecs/profile-colours";
 
 export function ResultMedal({ result }: { result: ProfileResult }) {
   if (!isCompletedResult(result)) return null;
@@ -63,21 +63,21 @@ export function PersonalBestStrip({
               <a
                 key={`reported-${best.id}`}
                 href={best.recordId ? `#reported-result-${best.recordId}` : best.sources[0].url}
-                className={`min-w-28 flex-1 rounded-lg border px-3 py-2 no-underline hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 ${distanceColourClass(best.distanceCode, best.distanceKm)}`}
+                className="min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
                 title={best.note}
               >
-                <span className="block text-xs">
+                <span className="block text-xs text-muted">
                   {best.sport} · {best.distanceCode}
                 </span>
-                <strong className="text-lg tabular-nums">
+                <strong className="text-lg tabular-nums text-fg">
                   {formatDuration(best.finishTimeSeconds)}
                 </strong>
-                <span className="ml-2 text-xs font-semibold">PB*</span>
-                <span className="block text-xs">{best.surface} · Reported time</span>
-                <span className="block text-xs">
+                <span className="ml-2 text-xs font-semibold text-accent">PB*</span>
+                <span className="block text-xs text-muted">{best.surface} · Reported time</span>
+                <span className="block text-xs text-muted">
                   {showEvidence ? CHIP_TIME_CAVEAT : "Reported"}
                 </span>
-                <span className="block text-xs">
+                <span className="block text-xs text-muted">
                   {best.event} · {best.date}
                 </span>
               </a>
@@ -88,18 +88,18 @@ export function PersonalBestStrip({
             <ProfileEventLink
               key={best.resultId}
               result={best}
-              className={`min-w-28 flex-1 rounded-lg border px-3 py-2 no-underline hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 ${distanceColourClass(best.distanceCode, best.distanceKm)}`}
+              className="min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
             >
-              <span className="block text-xs">
+              <span className="block text-xs text-muted">
                 {best.sport} · {best.distanceCode}
               </span>
-              <strong className="text-lg tabular-nums">
+              <strong className="text-lg tabular-nums text-fg">
                 {formatDuration(best.finishTimeSeconds)}
               </strong>
-              <span className="ml-2 text-xs font-semibold">PB</span>
-              <span className="block text-xs">{best.surface}</span>
+              <span className="ml-2 text-xs font-semibold text-accent">PB</span>
+              <span className="block text-xs text-muted">{best.surface}</span>
               {showEvidence || resultEvidenceLabel(best) === "Athlete-submitted" ? (
-                <span className="block text-xs">
+                <span className="block text-xs text-muted">
                   {showEvidence ? resultEvidenceLabel(best) : "Reported"}
                 </span>
               ) : null}

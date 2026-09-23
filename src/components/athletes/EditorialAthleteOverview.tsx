@@ -6,7 +6,6 @@ import {
   moFarahTwoMileRoadBest,
 } from "@/data/mo-farah";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
-import { distanceColourClass } from "@/lib/athrecs/profile-colours";
 
 export function EditorialAthleteOverview({
   slug,
@@ -99,11 +98,11 @@ export function EditorialAthleteOverview({
           {moFarahCareerBests.map((best) => (
             <div
               key={best.event}
-              className={`flex-1 rounded-lg border px-3 py-2 ${distanceColourClass(best.event)}`}
+              className="flex-1 rounded-lg border border-border bg-elevated/50 px-3 py-2"
             >
-              <dt className="text-sm font-medium">{best.event}</dt>
+              <dt className="text-sm font-medium text-muted">{best.event}</dt>
               <dd className="mt-1 text-lg font-semibold tabular-nums">{best.time}</dd>
-              <dd className="mt-1 text-xs">{best.location}</dd>
+              <dd className="mt-1 text-xs text-muted">{best.location}</dd>
             </div>
           ))}
         </dl>
