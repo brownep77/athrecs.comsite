@@ -1,3 +1,4 @@
+import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
@@ -328,8 +329,11 @@ function AthletePage() {
     (role: string) => role.toLowerCase() === "professional athlete",
   );
   const locationLabel = isPublicFigure
+    ? ""
+    : [athlete.city, athlete.county].filter(Boolean).join(" · ");
+  const locationCountry = isPublicFigure
     ? (athlete.nationality ?? athlete.country)
-    : [athlete.city, athlete.county, athlete.country].filter(Boolean).join(" · ");
+    : athlete.country;
   const detailRows: { label: string; value: string }[] = [];
   if (dob) detailRows.push({ label: "Date of birth", value: dob });
   if (athlete.place_of_birth)
@@ -344,7 +348,7 @@ function AthletePage() {
   if (athlete.notes) detailRows.push({ label: "Notes", value: athlete.notes });
 
   return (
-    <div className="space-y-3">
+    <div className="public-athlete-profile space-y-3">
       <Link
         to="/athletes"
         className="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-muted no-underline hover:text-fg"
@@ -385,9 +389,10 @@ function AthletePage() {
         ) : (
           <p className="text-sm text-muted">Unattached</p>
         )}
-        <p className="flex items-center gap-1.5 text-xs text-subtle">
+        <p className="flex flex-wrap items-center gap-1.5 text-xs text-subtle">
           <MapPin className="h-3.5 w-3.5" />
           {locationLabel}
+          {locationCountry ? <CountryFlag country={locationCountry} showName /> : null}
         </p>
         {!isPublicFigure ? (
           <ProfileDetails
@@ -539,14 +544,6 @@ function AthletePage() {
                         <h3 className="font-semibold text-fg">{achievement.title}</h3>
                       </div>
                       <p className="mt-2 text-sm text-muted">{achievement.detail}</p>
-                      <a
-                        href={achievement.source_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="mt-2 inline-flex min-h-11 items-center text-xs font-medium text-accent no-underline hover:underline"
-                      >
-                        Source ↗
-                      </a>
                     </article>
                   ),
                 )}
@@ -563,7 +560,13 @@ function AthletePage() {
                     <dt className="text-xs font-medium uppercase tracking-wider text-subtle">
                       {row.label}
                     </dt>
-                    <dd className="text-sm text-fg">{row.value}</dd>
+                    <dd className="text-sm text-fg">
+                      {row.label === "Nationality" || row.label === "Country of birth" ? (
+                        <CountryFlag country={row.value} showName />
+                      ) : (
+                        row.value
+                      )}
+                    </dd>
                   </div>
                 ))}
               </dl>

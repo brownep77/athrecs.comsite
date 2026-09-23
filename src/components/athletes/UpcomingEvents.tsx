@@ -29,11 +29,16 @@ export function UpcomingTable({
       </p>
     );
   return (
-    <div className="overflow-x-auto rounded-lg border border-border bg-surface">
-      <table className="w-full text-left text-sm">
+    <div
+      className={`${action ? "" : "profile-table-wrap"} overflow-x-auto rounded-lg border border-border bg-surface`}
+    >
+      <table
+        role="table"
+        className={`${action ? "" : "profile-card-table"} w-full text-left text-sm`}
+      >
         <caption className="sr-only">Manually added athlete fixtures</caption>
-        <thead className="bg-elevated text-xs text-subtle">
-          <tr>
+        <thead role="rowgroup" className="bg-elevated text-xs text-subtle">
+          <tr role="row">
             {[
               "Date",
               "Event",
@@ -43,19 +48,28 @@ export function UpcomingTable({
               "Status",
               ...(action ? ["Manage"] : []),
             ].map((label) => (
-              <th key={label} scope="col" className="whitespace-nowrap px-3 py-2 font-medium">
+              <th
+                role="columnheader"
+                key={label}
+                scope="col"
+                className="whitespace-nowrap px-3 py-2 font-medium"
+              >
                 {label}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-border">
+        <tbody role="rowgroup" className="divide-y divide-border">
           {events.map((event) => (
-            <tr key={event.id} className="hover:bg-elevated/50">
-              <td className="whitespace-nowrap px-3 py-2 text-xs tabular-nums">
+            <tr role="row" key={event.id} className="hover:bg-elevated/50">
+              <td
+                role="cell"
+                data-label="Date"
+                className="whitespace-nowrap px-3 py-2 text-xs tabular-nums"
+              >
                 {formatRaceDateShort(event.eventDate)}
               </td>
-              <td className="min-w-40 px-3 py-2 font-medium">
+              <td role="cell" data-label="Event" className="min-w-40 px-3 py-2 font-medium">
                 {event.eventUrl ? (
                   <a
                     href={event.eventUrl}
@@ -69,16 +83,26 @@ export function UpcomingTable({
                   event.eventName
                 )}
               </td>
-              <td className="px-3 py-2 text-xs">{event.sport}</td>
-              <td className="px-3 py-2 text-xs">{event.distance || "—"}</td>
-              <td className="px-3 py-2">
-                <span className="inline-flex items-center gap-2 whitespace-nowrap text-xs">
+              <td role="cell" data-label="Sport" className="px-3 py-2 text-xs">
+                {event.sport}
+              </td>
+              <td role="cell" data-label="Distance" className="px-3 py-2 text-xs">
+                {event.distance || "—"}
+              </td>
+              <td role="cell" data-label="Location" className="px-3 py-2">
+                <span className="inline-flex flex-wrap items-center gap-2 text-xs">
                   {event.city}
                   <CountryFlag country={event.country} />
                 </span>
               </td>
-              <td className="px-3 py-2 text-xs">{event.status}</td>
-              {action ? <td className="px-3 py-2">{action(event)}</td> : null}
+              <td role="cell" data-label="Status" className="px-3 py-2 text-xs">
+                {event.status}
+              </td>
+              {action ? (
+                <td role="cell" data-label="Actions" className="px-3 py-2">
+                  {action(event)}
+                </td>
+              ) : null}
             </tr>
           ))}
         </tbody>

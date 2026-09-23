@@ -516,7 +516,8 @@ try {
   assert(!JSON.stringify(paul).includes("1978-05-20"));
   const html = await (await fetch(`${origin}/athletes/paul-browne`)).text();
   assert(html.includes("Norfolk Gazelle"));
-  assert(html.includes('role="tooltip"'));
+  assert(html.includes('data-country-code="GB"'));
+  assert(html.includes('aria-label="United Kingdom"'));
   assert(!html.includes("1978-05-20"));
   console.log(
     "Compact profiles verified: real authenticated account saves, birthday choices, multi-sport IDs, fixture persistence/ownership, staff-only directory and XLSX export, publication and privacy.",

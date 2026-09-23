@@ -38,7 +38,10 @@ export function SourcePerformanceHistory({
   const pages = Math.max(1, Math.ceil(filtered.length / 30));
   const active = Math.min(page, pages - 1);
   return (
-    <section className="space-y-3" aria-label="Source performance history">
+    <section
+      className="space-y-3"
+      aria-label={showEvidence ? "Source performance history" : "Performance history"}
+    >
       <h2 className="font-display text-lg font-semibold">
         {showEvidence ? "Source performance history" : "Performance history"}{" "}
         <span className="font-sans text-sm text-subtle">{rows.length}</span>
@@ -70,10 +73,10 @@ export function SourcePerformanceHistory({
           ))}
         </>
       ) : null}
-      <div className="flex flex-wrap gap-2">
+      <div className="profile-filters flex flex-wrap gap-2">
         <input
-          aria-label="Search source history"
-          placeholder="Search source history"
+          aria-label={showEvidence ? "Search source history" : "Search performances"}
+          placeholder={showEvidence ? "Search source history" : "Search performances"}
           value={query}
           onChange={(event) => {
             setQuery(event.target.value);
@@ -83,14 +86,14 @@ export function SourcePerformanceHistory({
         />
         {[
           {
-            label: "Source history year",
+            label: showEvidence ? "Source history year" : "Performance year",
             value: year,
             options: years,
             set: setYear,
             all: "All years",
           },
           {
-            label: "Source history discipline",
+            label: showEvidence ? "Source history discipline" : "Performance discipline",
             value: discipline,
             options: disciplines,
             set: setDiscipline,
@@ -117,14 +120,17 @@ export function SourcePerformanceHistory({
         ))}
       </div>
       <div
-        className="max-h-96 overflow-auto rounded-lg border border-border bg-surface"
+        className={`${showEvidence ? "max-h-96" : "profile-table-wrap max-h-none sm:max-h-96"} overflow-auto rounded-lg border border-border bg-surface`}
         tabIndex={0}
         aria-label="Performance history table"
       >
-        <table className="w-full text-left text-sm">
-          <caption className="sr-only">Source performances, most recent first</caption>
-          <thead className="bg-elevated text-xs text-subtle">
-            <tr>
+        <table
+          role="table"
+          className={`${showEvidence ? "" : "profile-card-table"} w-full text-left text-sm`}
+        >
+          <caption className="sr-only">Performances, most recent first</caption>
+          <thead role="rowgroup" className="bg-elevated text-xs text-subtle">
+            <tr role="row">
               {[
                 "Date",
                 "Discipline",
@@ -134,23 +140,33 @@ export function SourcePerformanceHistory({
                 "Meeting",
                 "Venue",
                 "Age group",
-                "Source",
+                ...(showEvidence ? ["Source"] : []),
               ].map((label) => (
-                <th key={label} scope="col" className="whitespace-nowrap px-3 py-2 font-medium">
+                <th
+                  role="columnheader"
+                  key={label}
+                  scope="col"
+                  className="whitespace-nowrap px-3 py-2 font-medium"
+                >
                   {label}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-border">
+          <tbody role="rowgroup" className="divide-y divide-border">
             {(showEvidence ? filtered.slice(active * 30, (active + 1) * 30) : filtered).map(
               (row) => (
-                <tr key={row.key} className="hover:bg-elevated/50">
-                  <td className="whitespace-nowrap px-3 py-2 text-xs">
+                <tr role="row" key={row.key} className="hover:bg-elevated/50">
+                  <td role="cell" data-label="Date" className="whitespace-nowrap px-3 py-2 text-xs">
                     {formatRaceDateShort(row.date)}
                   </td>
-                  <td className="whitespace-nowrap px-3 py-2">{row.discipline}</td>
-                  <td className="whitespace-pre-line px-3 py-2 font-semibold tabular-nums">
+                  <td role="cell" data-label="Discipline" className="whitespace-nowrap px-3 py-2">
+                    {row.discipline}
+                  </td>
+                  <td
+                    data-label="Performance"
+                    className="whitespace-pre-line px-3 py-2 font-semibold tabular-nums"
+                  >
                     {row.performance}
                     {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
                     <ResultDisqualification decision={row.disqualification} />
@@ -160,58 +176,74 @@ export function SourcePerformanceHistory({
                       </span>
                     ) : null}
                   </td>
-                  <td className="px-3 py-2">{row.wind || "—"}</td>
-                  <td className="px-3 py-2">
+                  <td role="cell" data-label="Wind" className="px-3 py-2">
+                    {row.wind || "—"}
+                  </td>
+                  <td role="cell" data-label="Place" className="px-3 py-2">
                     {row.place || "—"}
                     {row.disqualification ? (
                       <span className="block text-xs text-muted">Original · void</span>
                     ) : null}
                   </td>
-                  <td className="min-w-52 px-3 py-2">{row.meeting}</td>
-                  <td className="px-3 py-2">{row.venue}</td>
-                  <td className="whitespace-nowrap px-3 py-2 text-xs">{row.ageGroup}</td>
-                  <td className="px-3 py-2">
-                    {row.sourceUrls.map((url, index) => (
-                      <a
-                        key={url}
-                        href={url}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`Source history result ${index + 1} for ${row.meeting}`}
-                        className="mr-2 whitespace-nowrap text-xs text-accent hover:underline"
-                      >
-                        Source{row.sourceUrls.length > 1 ? ` ${index + 1}` : ""} ↗
-                      </a>
-                    ))}
+                  <td role="cell" data-label="Meeting" className="min-w-52 px-3 py-2">
+                    {row.meeting}
                   </td>
+                  <td role="cell" data-label="Venue" className="px-3 py-2">
+                    {row.venue}
+                  </td>
+                  <td
+                    role="cell"
+                    data-label="Age group"
+                    className="whitespace-nowrap px-3 py-2 text-xs"
+                  >
+                    {row.ageGroup}
+                  </td>
+                  {showEvidence ? (
+                    <td role="cell" data-label="Source" className="px-3 py-2">
+                      {row.sourceUrls.map((url, index) => (
+                        <a
+                          key={url}
+                          href={url}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Source history result ${index + 1} for ${row.meeting}`}
+                          className="mr-2 whitespace-nowrap text-xs text-accent hover:underline"
+                        >
+                          Source{row.sourceUrls.length > 1 ? ` ${index + 1}` : ""} ↗
+                        </a>
+                      ))}
+                    </td>
+                  ) : null}
                 </tr>
               ),
             )}
           </tbody>
         </table>
         {!filtered.length ? (
-          <p className="p-4 text-sm text-muted">No source performances match these filters.</p>
+          <p className="p-4 text-sm text-muted">No performances match these filters.</p>
         ) : null}
       </div>
-      <div className="flex items-center justify-between gap-2 text-sm">
-        <button
-          disabled={active === 0}
-          onClick={() => setPage(active - 1)}
-          className="rounded border border-border px-3 py-1 disabled:opacity-40"
-        >
-          Previous source results
-        </button>
-        <span>
-          {filtered.length} performances · {active + 1} / {pages}
-        </span>
-        <button
-          disabled={active + 1 >= pages}
-          onClick={() => setPage(active + 1)}
-          className="rounded border border-border px-3 py-1 disabled:opacity-40"
-        >
-          Next source results
-        </button>
-      </div>
+      {showEvidence ? (
+        <div className="flex items-center justify-between gap-2 text-sm">
+          <button
+            disabled={active === 0}
+            onClick={() => setPage(active - 1)}
+            className="rounded border border-border px-3 py-1 disabled:opacity-40"
+          >
+            Previous source results
+          </button>
+          <span>
+            {filtered.length} performances · {active + 1} / {pages}
+          </span>
+          <button
+            disabled={active + 1 >= pages}
+            onClick={() => setPage(active + 1)}
+            className="rounded border border-border px-3 py-1 disabled:opacity-40"
+          >
+            Next source results
+          </button>
+        </div>
+      ) : null}
     </section>
   );
 }

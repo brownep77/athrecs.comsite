@@ -124,7 +124,56 @@ try {
     0,
   );
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.equal(await page.getByRole("columnheader", { name: "Source", exact: true }).count(), 0);
+  assert.equal(await page.getByRole("link", { name: /^Source(?: \d+)?(?: ↗)?$/ }).count(), 0);
+  assert.equal(await page.getByLabel(/^Result source /).count(), 0);
+  const resultsTable = page
+    .getByRole("table", { name: "Athlete race and stage results", exact: true })
+    .first();
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    assert.equal(
+      await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+      true,
+    );
+    const mobileLayout = await resultsTable.evaluate((table) => {
+      const row = table.querySelector("tbody tr");
+      const box = row.getBoundingClientRect();
+      return {
+        display: getComputedStyle(row).display,
+        fits: box.left >= 0 && box.right <= innerWidth,
+        noClippedCells: [...row.cells].every((cell) => cell.scrollWidth <= cell.clientWidth + 1),
+      };
+    });
+    assert.deepEqual(mobileLayout, { display: "grid", fits: true, noClippedCells: true });
+    assert.equal(
+      await page
+        .getByLabel("Search results", { exact: true })
+        .evaluate((input) => input.getBoundingClientRect().height >= 44),
+      true,
+    );
+  }
+  const flagSizes = await page
+    .locator("[data-country-code]")
+    .evaluateAll((flags) =>
+      flags
+        .filter((flag) => flag.getBoundingClientRect().width > 0)
+        .map((flag) => ({
+          width: flag.getBoundingClientRect().width,
+          height: flag.getBoundingClientRect().height,
+          accessible: Boolean(flag.getAttribute("aria-label")),
+        })),
+    );
+  assert(flagSizes.length > 1);
+  assert(flagSizes.every((flag) => flag.width === 24 && flag.height === 16 && flag.accessible));
+  await page.setViewportSize({ width: 1280, height: 900 });
+  assert.equal(await resultsTable.evaluate((table) => getComputedStyle(table).display), "table");
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({ path: "artifacts/mo-farah-mobile.png", fullPage: true });
+  await resultsTable.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "artifacts/mo-farah-mobile-results.png", fullPage: false });
+  await page.getByRole("heading", { name: "Mo Farah", exact: true }).scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "artifacts/mo-farah-mobile-profile.png", fullPage: false });
   assert.deepEqual(errors, []);
   console.log(
     "Recruitment journey passed: optional follow, real email code, verified private profile save, unchanged marketing consent, return visit and sourced Mo Farah profile with loaded CC0 image.",

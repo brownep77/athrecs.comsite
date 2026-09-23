@@ -4,7 +4,13 @@ import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { distanceColourClass } from "@/lib/athrecs/profile-colours";
 
-export function RaceWinAchievements({ wins }: { wins: RaceWinAchievement[] }) {
+export function RaceWinAchievements({
+  wins,
+  showEvidence = false,
+}: {
+  wins: RaceWinAchievement[];
+  showEvidence?: boolean;
+}) {
   if (!wins.length) return null;
   return (
     <div className="space-y-2" aria-label="Race wins by distance">
@@ -61,17 +67,18 @@ export function RaceWinAchievements({ wins }: { wins: RaceWinAchievement[] }) {
                       : ""}
                   </p>
                   <p>1st in {win.label.toLowerCase()}</p>
-                  {evidence.sourceUrls.map((url, sourceIndex) => (
-                    <a
-                      key={url}
-                      href={url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mr-3 inline-block underline underline-offset-2"
-                    >
-                      Source{evidence.sourceUrls.length > 1 ? ` ${sourceIndex + 1}` : ""} ↗
-                    </a>
-                  ))}
+                  {showEvidence &&
+                    evidence.sourceUrls.map((url, sourceIndex) => (
+                      <a
+                        key={url}
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mr-3 inline-block underline underline-offset-2"
+                      >
+                        Source{evidence.sourceUrls.length > 1 ? ` ${sourceIndex + 1}` : ""} ↗
+                      </a>
+                    ))}
                 </li>
               ))}
             </ul>

@@ -1,3 +1,4 @@
+import { CountryFlag } from "./CountryFlag";
 import { ProfileRecordHighlights } from "./ProfileAchievements";
 import { CompactResults } from "./CompactResultsTable";
 import { UpcomingTable } from "./UpcomingEvents";
@@ -27,19 +28,22 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
       })
     : "";
   return (
-    <div className="space-y-3">
+    <div className="public-athlete-profile space-y-3">
       <Link to="/athletes" className="inline-flex items-center gap-1.5 py-2 text-sm text-muted">
         <ArrowLeft className="size-4" />
         Athletes
       </Link>
       <section className="space-y-3 rounded-xl border border-border bg-surface p-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
+          <div className="min-w-0">
             <h1 className="font-display text-2xl font-semibold">{profile.displayName}</h1>
             <div className="mt-1 flex flex-wrap items-center gap-3 text-sm text-muted">
               <AthleteId number={profile.athleteNumber} />
               {profile.club}
-              <span>{[profile.city, profile.country].filter(Boolean).join(" · ")}</span>
+              <span className="inline-flex flex-wrap items-center gap-2">
+                {profile.city}
+                {profile.country ? <CountryFlag country={profile.country} showName /> : null}
+              </span>
             </div>
           </div>
           <ShareProfileButton

@@ -45,17 +45,18 @@ export function UnverifiedRaceHistory({
             </dl>
             {showEvidence ? <p className="mt-3 text-sm text-muted">{record.uncertainty}</p> : null}
             <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
-              {record.sources.map((source) => (
-                <a
-                  key={source.url}
-                  href={source.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-9 items-center text-xs text-accent underline"
-                >
-                  {source.label} ↗
-                </a>
-              ))}
+              {showEvidence &&
+                record.sources.map((source) => (
+                  <a
+                    key={source.url}
+                    href={source.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex min-h-9 items-center text-xs text-accent underline"
+                  >
+                    {source.label} ↗
+                  </a>
+                ))}
             </div>
           </article>
         ))}

@@ -74,6 +74,58 @@ try {
   assert.equal((publicRows.match(/id="reported-result-/g) ?? []).length, 28);
   assert(!publicRows.includes("Not verified by chip time"));
   assert.equal((publicRows.match(/>Reported</g) ?? []).length, 28);
+  assert(!publicRows.includes('data-label="Source"'));
+  assert(!publicRows.includes("Organiser archive"));
+  assert(html.includes('data-label="Source"'), "Staff retain the source field");
+  const { SourcePerformanceHistory } = await server.ssrLoadModule(
+    "/src/components/athletes/SourcePerformanceHistory.tsx",
+  );
+  const histories = [
+    {
+      provider: "powerof10",
+      externalId: "fixture",
+      sourceUrl: "https://example.test/profile",
+      complete: true,
+      yearsCaptured: [2025],
+      yearsExpected: [2025],
+      performances: [
+        {
+          date: "2025-06-01",
+          year: 2025,
+          discipline: "Long Jump",
+          performance: "4.04",
+          wind: "2.5",
+          place: "3",
+          meeting: "Fixture meeting",
+          venue: "Fixture venue",
+          ageGroup: "Senior",
+          labels: ["Wind assisted"],
+          sourceUrls: ["https://example.test/performance"],
+        },
+      ],
+    },
+  ];
+  for (const showEvidence of [false, true]) {
+    const markup = renderToStaticMarkup(
+      createElement(SourcePerformanceHistory, { histories, showEvidence }),
+    );
+    assert(markup.includes("4.04"));
+    assert(markup.includes("Fixture meeting"));
+    assert.equal(markup.includes('data-label="Source"'), showEvidence);
+    assert.equal(markup.includes("https://example.test/performance"), showEvidence);
+    assert.equal(markup.includes("Next source results"), showEvidence);
+  }
+  const { countryFlag } = await server.ssrLoadModule("/src/lib/athrecs/country-flags.ts");
+  for (const [values, code] of [
+    [["GB", "UK", "British", "GBR"], "GB"],
+    [["IE", "Ireland", "Irish", "IRL"], "IE"],
+    [["England", "English", "GB-ENG"], "GB-ENG"],
+    [["Scotland", "Scottish", "GB-SCT"], "GB-SCT"],
+    [["Wales", "Welsh", "GB-WLS"], "GB-WLS"],
+    [["Kenya", "Kenyan", "KE"], "KE"],
+  ])
+    for (const value of values) assert.equal(countryFlag(value).code, code);
+  assert.equal(countryFlag("Unspecified nationality").code, "");
   assert.match(pbHtml, /29:28/);
   assert.match(pbHtml, /49:47/);
   assert.match(pbHtml, /1:07:37/);

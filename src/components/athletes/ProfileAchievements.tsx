@@ -116,7 +116,13 @@ export function PersonalBestStrip({
   );
 }
 
-function AchievementEvidence({ results }: { results: ProfileResult[] }) {
+function AchievementEvidence({
+  results,
+  showEvidence,
+}: {
+  results: ProfileResult[];
+  showEvidence: boolean;
+}) {
   return (
     <ul className="mt-3 space-y-2 border-t border-current/20 pt-3 text-xs">
       {results.map((result) => (
@@ -126,7 +132,7 @@ function AchievementEvidence({ results }: { results: ProfileResult[] }) {
             {result.eventName}
           </ProfileEventLink>
 
-          {result.sourceUrls[0] ? (
+          {showEvidence && result.sourceUrls[0] ? (
             <a
               href={result.sourceUrls[0]}
               target="_blank"
@@ -144,10 +150,12 @@ function AchievementEvidence({ results }: { results: ProfileResult[] }) {
 
 export function AchievementsBoard({
   results,
+  showEvidence = false,
   sourceHistories = NO_SOURCE_HISTORIES,
   sourceGender = "",
 }: {
   results: ProfileResult[];
+  showEvidence?: boolean;
   sourceHistories?: readonly SourceHistory[];
   sourceGender?: string;
 }) {
@@ -209,7 +217,7 @@ export function AchievementsBoard({
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="font-display text-lg font-semibold">Achievements board</h2>
       </div>
-      <RaceWinAchievements wins={wins} />
+      <RaceWinAchievements wins={wins} showEvidence={showEvidence} />
       {showCompletionProgress ? (
         <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
           {metrics.map(({ id, label, value, icon: Icon, results: evidence }) => (
@@ -224,7 +232,7 @@ export function AchievementsBoard({
                 <span className="sr-only"> · Show supporting results</span>
               </summary>
               {evidence.length ? (
-                <AchievementEvidence results={evidence} />
+                <AchievementEvidence results={evidence} showEvidence={showEvidence} />
               ) : (
                 <p className="mt-2 text-xs text-muted">No completed results recorded yet.</p>
               )}
@@ -271,7 +279,7 @@ export function AchievementsBoard({
                     </span>
                   </summary>
 
-                  <AchievementEvidence results={achievement.results} />
+                  <AchievementEvidence results={achievement.results} showEvidence={showEvidence} />
                 </details>
               ))}
             </div>
@@ -356,6 +364,7 @@ export function ProfileRecordHighlights({
           results={results}
           sourceHistories={sourceHistories}
           sourceGender={sourceGender}
+          showEvidence={showEvidence}
         />
       ) : null}
     </div>

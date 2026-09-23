@@ -45,7 +45,9 @@ export function EditorialAthleteOverview({
               <span className="block text-xs text-muted">
                 {performance.year} · Overall place {performance.place}
               </span>
-              <span className="block text-xs text-accent">UltraSignup results ↗</span>
+              {showEvidence ? (
+                <span className="block text-xs text-accent">UltraSignup results ↗</span>
+              ) : null}
             </a>
           ))}
         </div>
@@ -157,7 +159,7 @@ export function EditorialRoadSplits({
             {moFarahTwoMileRoadBest.year}
             {showEvidence ? " · Year confirmed; exact race date unconfirmed" : ""}
           </span>
-          <span className="block text-xs text-accent">Source ↗</span>
+          {showEvidence ? <span className="block text-xs text-accent">Source ↗</span> : null}
         </a>
         {moFarahRoadSplits.map((split) => (
           <a
@@ -172,7 +174,7 @@ export function EditorialRoadSplits({
             <span className="block text-xs text-muted">
               {split.event} · {formatRaceDateShort(split.date)}
             </span>
-            <span className="block text-xs text-accent">Source ↗</span>
+            {showEvidence ? <span className="block text-xs text-accent">Source ↗</span> : null}
           </a>
         ))}
       </div>
