@@ -5,10 +5,12 @@ export function ReportedRaceResultRows({
   records,
   bestIds,
   hasActions,
+  showEvidence = false,
 }: {
   records: readonly ReportedRaceRecord[];
   bestIds: ReadonlySet<string>;
   hasActions: boolean;
+  showEvidence?: boolean;
 }) {
   return records.map((record) => (
     <tr
@@ -19,7 +21,9 @@ export function ReportedRaceResultRows({
       <td className="min-w-36 px-3 py-2 text-xs">{record.reportedDate}</td>
       <td className="min-w-64 px-3 py-2">
         <span className="font-medium">{record.event}</span>
-        <span className="block text-xs text-muted">{record.uncertainty}</span>
+        {showEvidence ? (
+          <span className="block text-xs text-muted">{record.uncertainty}</span>
+        ) : null}
       </td>
       <td className="px-3 py-2 text-xs">Running</td>
       <td className="whitespace-nowrap px-3 py-2 text-xs">{record.distance}</td>
@@ -34,7 +38,9 @@ export function ReportedRaceResultRows({
             PB*
           </span>
         ) : null}
-        <span className="block text-xs text-muted">{CHIP_TIME_CAVEAT}</span>
+        <span className="block text-xs text-muted">
+          {showEvidence ? CHIP_TIME_CAVEAT : "Reported"}
+        </span>
       </td>
       <td className="px-3 py-2 text-xs">{record.reportedPlace}</td>
       <td className="px-3 py-2 text-xs">
@@ -45,7 +51,7 @@ export function ReportedRaceResultRows({
             : "Race"}
       </td>
       <td className="min-w-40 px-3 py-2 text-xs">
-        <span className="block text-muted">{record.evidenceLabel}</span>
+        {showEvidence ? <span className="block text-muted">{record.evidenceLabel}</span> : null}
         {record.sources.map((source) => (
           <a
             key={source.url}

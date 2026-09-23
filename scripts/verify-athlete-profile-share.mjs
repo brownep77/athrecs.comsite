@@ -68,7 +68,7 @@ assert.match(card, /Save sharing/);
 assert.match(button, /Copy link/);
 assert.match(button, /navigator.share/);
 assert.match(sharedPage, /Shared by athlete/);
-assert.match(sharedPage.replace(/\s+/g, " "), /photograph stay private/);
+assert.match(card.replace(/\s+/g, " "), /never includes your email, postcode, photograph/);
 
 assert.match(profileRoute, /ShareProfileCard/);
 assert.match(athleteRoute, /getPublishedSharedProfile/);

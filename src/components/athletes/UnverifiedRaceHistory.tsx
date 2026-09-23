@@ -6,15 +6,14 @@ export function UnverifiedRaceHistory({ slug }: { slug: string }) {
   if (!history || history.includeInResults) return null;
 
   return (
-    <section
+    <details
       id="unverified-results"
       aria-labelledby="unverified-results-heading"
       className="mt-6 space-y-3"
     >
-      <h2 id="unverified-results-heading" className="font-display text-lg font-semibold">
+      <summary id="unverified-results-heading" className="cursor-pointer text-sm font-semibold">
         {history.title} ({history.records.length})
-      </h2>
-      <p className="max-w-prose text-sm text-muted">{history.description}</p>
+      </summary>
       <div className="space-y-3">
         {history.records.map((record) => (
           <article key={record.id} className="rounded-xl border border-border bg-surface p-4">
@@ -37,7 +36,6 @@ export function UnverifiedRaceHistory({ slug }: { slug: string }) {
                 <dd>{record.reportedPlace}</dd>
               </div>
             </dl>
-            <p className="mt-3 text-sm text-muted">{record.uncertainty}</p>
             <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
               {record.sources.map((source) => (
                 <a
@@ -54,6 +52,6 @@ export function UnverifiedRaceHistory({ slug }: { slug: string }) {
           </article>
         ))}
       </div>
-    </section>
+    </details>
   );
 }

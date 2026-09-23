@@ -7,9 +7,16 @@ const publicSourceProfile = `(a.profile_type = 'Public figure' or a.profile_visi
   and not exists (select 1 from athlete_account_links l
     where l.athlete_id = a.id and l.status = 'active')`;
 
+const indexableProfiles = `select a.slug, 'source-' || lpad(a.id::text, 20, '0') as sort_key
+  from athletes a where ${publicSourceProfile}
+  union all
+  select s.slug, 'shared-' || s.slug as sort_key from athlete_public_shares s
+  join athlete_identifiers i on i.user_id=s.user_id
+  where s.enabled and s.search_indexable`;
+
 export async function athleteSitemapPageCount(sql: Sql): Promise<number> {
   const [row] = await sql.query<{ count: number }>(
-    `select count(*)::int as count from athletes a where ${publicSourceProfile}`,
+    `select count(*)::int as count from (${indexableProfiles}) profiles`,
   );
   return Math.ceil(row.count / ATHLETE_SITEMAP_PAGE_SIZE);
 }
@@ -17,8 +24,8 @@ export async function athleteSitemapPageCount(sql: Sql): Promise<number> {
 export async function athleteSitemapSlugs(sql: Sql, page: number): Promise<string[]> {
   if (!Number.isSafeInteger(page) || page < 1) return [];
   const rows = await sql.query<{ slug: string }>(
-    `select a.slug from athletes a where ${publicSourceProfile}
-     order by a.id limit $1 offset $2`,
+    `select slug from (${indexableProfiles}) profiles
+     order by sort_key limit $1 offset $2`,
     [ATHLETE_SITEMAP_PAGE_SIZE, (page - 1) * ATHLETE_SITEMAP_PAGE_SIZE],
   );
   return rows.map((row) => row.slug);

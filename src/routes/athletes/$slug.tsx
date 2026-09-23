@@ -1,3 +1,5 @@
+import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
+import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
 import {
   EditorialAthleteOverview,
@@ -8,7 +10,6 @@ import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanc
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
 import { getAthleteBySlug, getPrivateAthleteBySlug } from "@/lib/athrecs/api";
@@ -31,6 +32,9 @@ export const Route = createFileRoute("/athletes/$slug")({
       () => null,
     );
     if (shared) {
+      if (shared.searchIndexable && shared.slug !== params.slug) {
+        throw redirect({ to: "/athletes/$slug", params: { slug: shared.slug }, statusCode: 301 });
+      }
       return { kind: "shared-account" as const, profile: shared };
     }
 
@@ -68,17 +72,50 @@ export const Route = createFileRoute("/athletes/$slug")({
     if (loaderData.kind === "shared-account") {
       const { profile } = loaderData;
       const title = `${profile.displayName} athlete profile | ${SITE_NAME}`;
-      const description = profile.bio
-        ? profile.bio.slice(0, 180)
-        : `${profile.displayName}'s shared athlete profile on ATHRECS.`;
+      const description = publicAthleteBio({
+        name: profile.displayName,
+        sport: profile.primarySport,
+        city: profile.city,
+        country: profile.country,
+        club: profile.club,
+        coach: profile.details.coach,
+      }).slice(0, 180);
       const canonical = `${SITE_URL}/athletes/${profile.slug}`;
       return {
         meta: siteGraphMeta({ title, description, url: canonical, type: "profile" }).map((tag) =>
-          "name" in tag && tag.name === "robots"
+          !profile.searchIndexable && "name" in tag && tag.name === "robots"
             ? { name: "robots", content: "noindex, nofollow, noarchive" }
             : tag,
         ),
         links: [{ rel: "canonical", href: canonical }],
+        scripts: profile.searchIndexable
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify({
+                  "@context": "https://schema.org",
+                  "@type": "ProfilePage",
+                  "@id": canonical,
+                  url: canonical,
+                  name: title,
+                  description,
+                  mainEntity: {
+                    "@type": "Person",
+                    "@id": `${canonical}#athlete`,
+                    name: profile.displayName,
+                    url: canonical,
+                    identifier: `ATH-${String(profile.athleteNumber).padStart(6, "0")}`,
+                    nationality: profile.nationality || undefined,
+                    memberOf:
+                      profile.club && profile.club !== "Unattached"
+                        ? { "@type": "SportsOrganization", name: profile.club }
+                        : undefined,
+                    sameAs: profile.connections.map((connection) => connection.url),
+                  },
+                }).replace(/</g, "\\u003c"),
+              },
+            ]
+          : [],
       };
     }
 
@@ -99,7 +136,7 @@ export const Route = createFileRoute("/athletes/$slug")({
       };
     }
 
-    const { athlete, results, sourceHistories } = loaderData;
+    const { athlete, sourceHistories } = loaderData;
     const isPublicFigure = athlete.profile_type === "Public figure";
     const resultKind = (athlete.profile_roles ?? []).some((role: string) =>
       role.toLowerCase().includes("marathon"),
@@ -109,20 +146,15 @@ export const Route = createFileRoute("/athletes/$slug")({
     const title = isPublicFigure
       ? `${athlete.display_name} ${resultKind} | ${SITE_NAME}`
       : `${athlete.display_name} results & performance history | ${SITE_NAME}`;
-    const sourceCount = sourceHistories.reduce(
-      (total, history) => total + history.performances.length,
-      0,
-    );
     const clubLabel = athlete.club && athlete.club !== "Unattached" ? ` (${athlete.club})` : "";
-    const reportedHistory = getReportedRaceHistory(athlete.slug);
-    const unverifiedCount = reportedHistory?.records.length ?? 0;
-    const description = reportedHistory?.includeInResults
-      ? `${athlete.display_name}’s ${results.length + unverifiedCount} race and stage entries and sourced personal bests. Reported times are not verified by chip time; source notes are retained.`
-      : reportedHistory
-        ? `${athlete.display_name}'s running history on ATHRECS: ${results.length} source-checked records and ${unverifiedCount} ${reportedHistory.countLabel}, with source links and unresolved details.`
-        : isPublicFigure
-          ? `${athlete.display_name}'s source-checked race results, finish times and endurance achievements on ATHRECS. ${results.length} verified result${results.length === 1 ? "" : "s"} listed.`
-          : `${athlete.display_name}${clubLabel}: results and performance history on ATHRECS. ${results.length} race result${results.length === 1 ? "" : "s"}${sourceCount ? ` and ${sourceCount} source performance${sourceCount === 1 ? "" : "s"}` : ""}, with source links.`;
+    const description = `${publicAthleteBio({
+      name: athlete.display_name,
+      sport: loaderData.profileResults[0]?.sport,
+      city: athlete.city,
+      country: athlete.country,
+      club: athlete.club,
+      coach: athlete.details.coach,
+    })} Results, personal bests and achievements on ATHRECS.`.slice(0, 180);
     const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
 
     return {
@@ -149,7 +181,7 @@ export const Route = createFileRoute("/athletes/$slug")({
                 "@id": `${canonical}#athlete`,
                 name: athlete.display_name,
                 url: canonical,
-                description: athlete.bio || description,
+                description,
                 nationality: athlete.nationality || athlete.country || undefined,
                 knowsAbout: athlete.profile_roles,
                 memberOf: clubLabel
@@ -210,16 +242,16 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <Link
         to="/athletes"
-        className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
+        className="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-muted no-underline hover:text-fg"
       >
         <ArrowLeft className="h-4 w-4" />
         Athletes
       </Link>
 
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
+      <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">Athlete profile</p>
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.displayName}</h1>
         <div className="flex flex-wrap gap-2">
@@ -281,8 +313,16 @@ function AthletePage() {
   const reportedHistory = getReportedRaceHistory(athlete.slug);
   const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
   const aliases = athlete.aliases ?? [];
+  const bio = publicAthleteBio({
+    name: athlete.display_name,
+    sport: profileResults[0]?.sport,
+    city: athlete.city,
+    country: athlete.country,
+    club: athlete.club,
+    coach: athlete.details.coach,
+  });
   const dob = formatDob(athlete.date_of_birth);
-  const sourceCheckedAt = formatDob(athlete.profile_source_checked_at);
+
   const isPublicFigure = athlete.profile_type === "Public figure";
   const isProfessionalAthlete = athlete.profile_roles?.some(
     (role: string) => role.toLowerCase() === "professional athlete",
@@ -304,16 +344,16 @@ function AthletePage() {
   if (athlete.notes) detailRows.push({ label: "Notes", value: athlete.notes });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <Link
         to="/athletes"
-        className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
+        className="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-muted no-underline hover:text-fg"
       >
         <ArrowLeft className="h-4 w-4" />
         Athletes
       </Link>
 
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
+      <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">
           {isProfessionalAthlete
             ? "Professional athlete profile"
@@ -372,22 +412,8 @@ function AthletePage() {
           </Badge>
           <Badge variant="accent">
             {results.length + (includedHistory?.records.length ?? 0)}{" "}
-            {includedHistory
-              ? "race and stage entries"
-              : reportedHistory
-                ? "verified results"
-                : "results"}
+            {includedHistory ? "race and stage entries" : reportedHistory ? "results" : "results"}
           </Badge>
-          {reportedHistory ? (
-            <a
-              href={includedHistory ? "#race-results" : "#unverified-results"}
-              className="inline-flex items-center text-xs text-accent underline"
-            >
-              {includedHistory
-                ? "Not verified by chip time"
-                : `${reportedHistory.records.length} ${reportedHistory.countLabel}`}
-            </a>
-          ) : null}
           {athlete.profile_roles
             ?.filter(
               (role: string) =>
@@ -399,7 +425,7 @@ function AthletePage() {
               </Badge>
             ))}
         </div>
-        {athlete.bio && <p className="max-w-prose text-sm text-muted">{athlete.bio}</p>}
+        <p className="text-sm leading-relaxed text-muted">{bio}</p>
         {athlete.slug === "mo-farah" && !athlete.is_claimed ? (
           <p className="text-xs text-subtle">
             Independent ATHRECS profile. Not athlete-claimed; no endorsement is implied.
@@ -424,16 +450,8 @@ function AthletePage() {
             </div>
           </div>
         )}
-        {isPublicFigure && sourceCheckedAt && (
-          <p className="border-t border-border pt-3 text-xs text-subtle">
-            Public biographical and race sources checked {sourceCheckedAt}. This label does not mean
-            the athlete has claimed the account.
-          </p>
-        )}
       </section>
 
-      <EditorialAthleteOverview slug={athlete.slug} />
-      <AthleteMediaCoverage slug={athlete.slug} />
       {(!isPublicFigure ||
         profileResults.length > 0 ||
         sourceHistories.length > 0 ||
@@ -445,105 +463,114 @@ function AthletePage() {
           sourceGender={athlete.gender}
         />
       )}
-      <EditorialRoadSplits slug={athlete.slug} />
 
-      {athlete.profile_links.length > 0 && (
-        <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
-          <h2 className="font-display text-lg font-semibold text-fg">
-            {isProfessionalAthlete ? "Records and follow links" : "Official links"}
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {athlete.profile_links.map((link: { label: string; url: string }) => (
-              <a
-                key={link.url}
-                href={link.url}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 text-sm font-medium text-accent no-underline hover:border-border-strong hover:underline"
-              >
-                {link.label} ↗
-              </a>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {athlete.notable_achievements.length > 0 && (
-        <section className="space-y-3">
-          <h2 className="font-display text-lg font-semibold text-fg">
-            Notable endurance achievements
-          </h2>
-          <div className="grid gap-2">
-            {athlete.notable_achievements.map(
-              (achievement: {
-                year: number;
-                title: string;
-                detail: string;
-                source_url: string;
-              }) => (
-                <article
-                  key={`${achievement.year}-${achievement.title}`}
-                  className="rounded-xl border border-border bg-surface p-4 shadow-card"
-                >
-                  <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant="outline">{achievement.year}</Badge>
-                    <h3 className="font-semibold text-fg">{achievement.title}</h3>
-                  </div>
-                  <p className="mt-2 text-sm text-muted">{achievement.detail}</p>
+      <section id="results-history" className="space-y-3">
+        <CompactResults results={profileResults} reportedHistory={includedHistory} claimable />
+        {sourceHistories.length ? (
+          <details
+            className="rounded-lg border border-border bg-surface p-3"
+            open={!profileResults.length}
+          >
+            <summary className="cursor-pointer text-sm font-semibold">Performance history</summary>
+            <div className="mt-3">
+              <SourcePerformanceHistory histories={sourceHistories} />
+            </div>
+          </details>
+        ) : null}
+        <UnverifiedRaceHistory slug={athlete.slug} />
+      </section>
+      <details className="rounded-lg border border-border bg-surface p-3">
+        <summary className="cursor-pointer text-sm font-semibold">
+          Upcoming ({upcoming.length})
+        </summary>
+        <div className="mt-3">
+          <UpcomingTable events={upcoming} />
+        </div>
+      </details>
+      <SuggestProfileEdit slug={athlete.slug} />
+      <details className="rounded-lg border border-border bg-surface p-3">
+        <summary className="cursor-pointer text-sm font-semibold">
+          More about {athlete.display_name}
+        </summary>
+        <div className="mt-3 space-y-3">
+          <EditorialAthleteOverview slug={athlete.slug} />
+          <EditorialRoadSplits slug={athlete.slug} />
+          <AthleteMediaCoverage slug={athlete.slug} />
+          {athlete.profile_links.length > 0 && (
+            <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
+              <h2 className="font-display text-lg font-semibold text-fg">
+                {isProfessionalAthlete ? "Records and follow links" : "Official links"}
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {athlete.profile_links.map((link: { label: string; url: string }) => (
                   <a
-                    href={achievement.source_url}
+                    key={link.url}
+                    href={link.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-2 inline-flex min-h-11 items-center text-xs font-medium text-accent no-underline hover:underline"
+                    className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 text-sm font-medium text-accent no-underline hover:border-border-strong hover:underline"
                   >
-                    Source ↗
+                    {link.label} ↗
                   </a>
-                </article>
-              ),
-            )}
-          </div>
-        </section>
-      )}
-
-      {isPublicFigure && detailRows.length > 0 && (
-        <section className="space-y-3 rounded-xl border border-border bg-surface p-4 shadow-card md:p-5">
-          <h2 className="font-display text-lg font-semibold text-fg">Personal details</h2>
-          <dl className="grid gap-3 sm:grid-cols-2">
-            {detailRows.map((row) => (
-              <div key={row.label} className="space-y-0.5">
-                <dt className="text-xs font-medium uppercase tracking-wider text-subtle">
-                  {row.label}
-                </dt>
-                <dd className="text-sm text-fg">{row.value}</dd>
+                ))}
               </div>
-            ))}
-          </dl>
-        </section>
-      )}
-
-      <Tabs defaultValue="results" className="space-y-3">
-        <TabsList>
-          <TabsTrigger value="results">Results history</TabsTrigger>
-          <TabsTrigger value="upcoming">Upcoming ({upcoming.length})</TabsTrigger>
-        </TabsList>
-        <TabsContent value="results">
-          {isProfessionalAthlete && !profileResults.length && !includedHistory ? (
-            <p className="text-sm text-muted">
-              No source-checked performance rows have been added to ATHRECS yet.
-            </p>
-          ) : (
-            <CompactResults results={profileResults} reportedHistory={includedHistory} claimable />
+            </section>
           )}
-          <SourcePerformanceHistory histories={sourceHistories} />
-          <UnverifiedRaceHistory slug={athlete.slug} />
-        </TabsContent>
-        <TabsContent value="upcoming">
-          <UpcomingTable events={upcoming} />
-          <p className="mt-2 text-xs text-muted">
-            Fixtures are manually added by the athlete or ATHRECS staff.
-          </p>
-        </TabsContent>
-      </Tabs>
+
+          {athlete.notable_achievements.length > 0 && (
+            <section className="space-y-3">
+              <h2 className="font-display text-lg font-semibold text-fg">
+                Notable endurance achievements
+              </h2>
+              <div className="grid gap-2">
+                {athlete.notable_achievements.map(
+                  (achievement: {
+                    year: number;
+                    title: string;
+                    detail: string;
+                    source_url: string;
+                  }) => (
+                    <article
+                      key={`${achievement.year}-${achievement.title}`}
+                      className="rounded-xl border border-border bg-surface p-4 shadow-card"
+                    >
+                      <div className="flex flex-wrap items-center gap-2">
+                        <Badge variant="outline">{achievement.year}</Badge>
+                        <h3 className="font-semibold text-fg">{achievement.title}</h3>
+                      </div>
+                      <p className="mt-2 text-sm text-muted">{achievement.detail}</p>
+                      <a
+                        href={achievement.source_url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-2 inline-flex min-h-11 items-center text-xs font-medium text-accent no-underline hover:underline"
+                      >
+                        Source ↗
+                      </a>
+                    </article>
+                  ),
+                )}
+              </div>
+            </section>
+          )}
+
+          {isPublicFigure && detailRows.length > 0 && (
+            <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
+              <h2 className="font-display text-lg font-semibold text-fg">Personal details</h2>
+              <dl className="grid gap-3 sm:grid-cols-2">
+                {detailRows.map((row) => (
+                  <div key={row.label} className="space-y-0.5">
+                    <dt className="text-xs font-medium uppercase tracking-wider text-subtle">
+                      {row.label}
+                    </dt>
+                    <dd className="text-sm text-fg">{row.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
+        </div>
+      </details>
     </div>
   );
 }

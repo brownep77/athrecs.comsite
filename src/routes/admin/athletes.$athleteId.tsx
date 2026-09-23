@@ -79,9 +79,23 @@ function StaffAthleteProfile() {
               </a>
             ) : null}
           </section>
+          {profile.bioNotes.length ? (
+            <details className="rounded-xl border border-border bg-surface p-4">
+              <summary className="cursor-pointer font-semibold">
+                Biography and research notes
+              </summary>
+              {profile.bioNotes.map((note, index) => (
+                <div key={index} className="mt-3 text-sm">
+                  <h2 className="font-semibold">{note.label}</h2>
+                  <p className="whitespace-pre-wrap">{note.bio}</p>
+                </div>
+              ))}
+            </details>
+          ) : null}
           <ProfileRecordHighlights results={profile.results} />
-          <CompactResults key={athleteId} results={profile.results} />
+          <CompactResults showEvidence key={athleteId} results={profile.results} />
           <SourcePerformanceHistory
+            showEvidence
             key={`source-${athleteId}`}
             histories={profile.sourceHistories}
           />

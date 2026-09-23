@@ -1,3 +1,4 @@
+import { ProfileEditReviewQueue } from "@/components/athletes/ProfileEditReviewQueue";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -138,6 +139,7 @@ function AthleteDirectory() {
         Staff access only. The Excel export includes all matching athletes, their profile details
         and a separate Sports sheet. It contains private account data.
       </p>
+      <ProfileEditReviewQueue />
       <form
         className="flex flex-wrap gap-2"
         onSubmit={(event) => {
