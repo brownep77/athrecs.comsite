@@ -37,11 +37,16 @@ export function CompactResultsTable({
 }) {
   const bestIds = personalBestIds ?? new Set(findPersonalBests(results).map((r) => r.resultId));
   return (
-    <div className="overflow-x-auto rounded-lg border border-border bg-surface">
-      <table className="w-full text-left text-sm">
+    <div
+      className={`${showEvidence ? "" : "profile-table-wrap"} overflow-x-auto rounded-lg border border-border bg-surface`}
+    >
+      <table
+        role="table"
+        className={`${showEvidence ? "" : "profile-card-table"} w-full text-left text-sm`}
+      >
         <caption className="sr-only">Athlete race and stage results</caption>
-        <thead className="bg-elevated text-xs text-subtle">
-          <tr>
+        <thead role="rowgroup" className="bg-elevated text-xs text-subtle">
+          <tr role="row">
             {[
               "Date",
               "Event",
@@ -51,22 +56,31 @@ export function CompactResultsTable({
               "Time",
               "Place",
               "Category",
-              "Source",
+              ...(showEvidence ? ["Source"] : []),
               ...(action || claimable ? ["Actions"] : []),
             ].map((label) => (
-              <th key={label} scope="col" className="whitespace-nowrap px-3 py-2 font-medium">
+              <th
+                role="columnheader"
+                key={label}
+                scope="col"
+                className="whitespace-nowrap px-3 py-2 font-medium"
+              >
                 {label}
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-border">
+        <tbody role="rowgroup" className="divide-y divide-border">
           {results.map((result) => (
-            <tr key={result.resultId} className="hover:bg-elevated/50">
-              <td className="whitespace-nowrap px-3 py-2 text-xs tabular-nums">
+            <tr role="row" key={result.resultId} className="hover:bg-elevated/50">
+              <td
+                role="cell"
+                data-label="Date"
+                className="whitespace-nowrap px-3 py-2 text-xs tabular-nums"
+              >
                 {formatRaceDateShort(result.eventDate)}
               </td>
-              <td className="min-w-44 px-3 py-2 font-medium">
+              <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
                 <span className="flex items-center gap-1.5">
                   <ResultMedal result={result} />
                   <ProfileEventLink
@@ -89,7 +103,7 @@ export function CompactResultsTable({
                 ) : null}
                 {result.conflicting ? (
                   <span className="block text-xs text-amber-800">
-                    Sources differ · excluded from PBs
+                    Conflicting result · excluded from PBs
                   </span>
                 ) : null}
                 {showEvidence && roadPerformanceCondition(result) ? (
@@ -98,18 +112,23 @@ export function CompactResultsTable({
                   </span>
                 ) : null}
               </td>
-              <td className="px-3 py-2 text-xs">{result.sport}</td>
-              <td className="whitespace-nowrap px-3 py-2 text-xs">
+              <td role="cell" data-label="Sport" className="px-3 py-2 text-xs">
+                {result.sport}
+              </td>
+              <td role="cell" data-label="Distance" className="whitespace-nowrap px-3 py-2 text-xs">
                 {result.distanceCode}
                 <span className="block text-[10px] text-subtle">{result.surface}</span>
               </td>
-              <td className="px-3 py-2">
-                <span className="inline-flex items-center gap-2 whitespace-nowrap text-xs">
+              <td role="cell" data-label="Location" className="px-3 py-2">
+                <span className="inline-flex flex-wrap items-center gap-2 text-xs">
                   {result.city}
                   <CountryFlag country={result.country} />
                 </span>
               </td>
-              <td className="whitespace-nowrap px-3 py-2 font-semibold tabular-nums">
+              <td
+                data-label="Time"
+                className="whitespace-nowrap px-3 py-2 font-semibold tabular-nums"
+              >
                 {isDisqualified(result) ||
                 result.status === "finished" ||
                 result.status === "FIN" ||
@@ -137,33 +156,37 @@ export function CompactResultsTable({
                   </span>
                 ) : null}
               </td>
-              <td className="px-3 py-2 tabular-nums">
+              <td role="cell" data-label="Place" className="px-3 py-2 tabular-nums">
                 {result.overallPlace ?? "—"}
                 {isDisqualified(result) ? (
                   <span className="block text-[10px] text-subtle">Original · void</span>
                 ) : null}
               </td>
-              <td className="px-3 py-2 text-xs">{result.category || "—"}</td>
-              <td className="px-3 py-2">
-                {result.sourceUrls.length ? (
-                  result.sourceUrls.map((url, index) => (
-                    <a
-                      key={url}
-                      href={url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="mr-2 inline-flex min-h-7 items-center whitespace-nowrap text-xs text-accent hover:underline"
-                      aria-label={`Result source ${index + 1} for ${result.eventName}`}
-                    >
-                      Source{result.sourceUrls.length > 1 ? ` ${index + 1}` : ""} ↗
-                    </a>
-                  ))
-                ) : (
-                  <span className="text-subtle">—</span>
-                )}
+              <td role="cell" data-label="Category" className="px-3 py-2 text-xs">
+                {result.category || "—"}
               </td>
+              {showEvidence ? (
+                <td role="cell" data-label="Source" className="px-3 py-2">
+                  {result.sourceUrls.length ? (
+                    result.sourceUrls.map((url, index) => (
+                      <a
+                        key={url}
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mr-2 inline-flex min-h-7 items-center whitespace-nowrap text-xs text-accent hover:underline"
+                        aria-label={`Result source ${index + 1} for ${result.eventName}`}
+                      >
+                        Source{result.sourceUrls.length > 1 ? ` ${index + 1}` : ""} ↗
+                      </a>
+                    ))
+                  ) : (
+                    <span className="text-subtle">—</span>
+                  )}
+                </td>
+              ) : null}
               {action || claimable ? (
-                <td className="px-3 py-2">
+                <td role="cell" data-label="Actions" className="px-3 py-2">
                   {action?.(result)}
                   {claimable ? (
                     <Link
@@ -252,7 +275,7 @@ export function CompactResults({
   const previewReports = Math.max(0, previewSize - filtered.length);
   return (
     <section className="space-y-3" id={reportedHistory ? "race-results" : undefined}>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="profile-filters flex flex-wrap items-center gap-2">
         <h2 className="mr-auto font-display text-lg font-semibold">
           Results history <span className="font-sans text-sm text-subtle">{total}</span>
         </h2>
