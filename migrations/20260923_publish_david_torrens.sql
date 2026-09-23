@@ -87,7 +87,7 @@ BEGIN
     END IF;
     INSERT INTO event_distances (event_id, distance_code) VALUES (target_event, '10K') ON CONFLICT DO NOTHING;
     INSERT INTO editions (event_id, event_date, distance_code, distance_km, status, source_url)
-    VALUES (target_event, DATE '2026-06-14', '10K', 10, 'Completed', source_link)
+    VALUES (target_event, DATE '2026-06-14', '10K', 10, 'Finished', source_link)
     RETURNING id INTO target_edition;
   END IF;
 
