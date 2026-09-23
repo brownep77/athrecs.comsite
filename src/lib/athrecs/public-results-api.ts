@@ -48,7 +48,7 @@ export const listPublicResultEditions = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     if (IS_RUNRECS_SITE) return { editions: [] as PublicResultEdition[], hasMore: false };
     await ensureAthrecsSeeded();
-    const sql = getSql();
+    const sql = await getSql();
     const q = like(data.q);
     const sport = data.sport || null;
     const distance = data.distance || null;
@@ -97,7 +97,7 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     if (IS_RUNRECS_SITE) return null;
     await ensureAthrecsSeeded();
-    const sql = getSql();
+    const sql = await getSql();
     const editions = await sql<PublicResultEdition>`
       select ed.id as edition_id, e.name as event_name,
         ed.event_date::text as event_date, e.sport, ed.distance_code,
