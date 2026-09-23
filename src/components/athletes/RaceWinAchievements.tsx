@@ -2,6 +2,7 @@ import { Trophy } from "lucide-react";
 import type { RaceWinAchievement } from "@/lib/athrecs/race-win-achievements";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
+import { distanceColourClass } from "@/lib/athrecs/profile-colours";
 
 export function RaceWinAchievements({ wins }: { wins: RaceWinAchievement[] }) {
   if (!wins.length) return null;
@@ -14,11 +15,11 @@ export function RaceWinAchievements({ wins }: { wins: RaceWinAchievement[] }) {
             key={win.id}
             data-achievement="race-win"
             data-win-kind={win.kind}
-            className="rounded-lg border border-amber-400 bg-amber-50 p-3 text-amber-950 dark:border-amber-600 dark:bg-amber-950/40 dark:text-amber-100"
+            className={`rounded-lg border p-3 ${distanceColourClass(win.distance)}`}
           >
             <summary className="flex cursor-pointer list-none items-start gap-2">
               <Trophy
-                className="mt-0.5 size-5 shrink-0 text-amber-700 dark:text-amber-300"
+                className="mt-0.5 size-5 shrink-0 rounded bg-amber-100 p-0.5 text-amber-800"
                 aria-hidden="true"
               />
               <span>
@@ -31,7 +32,7 @@ export function RaceWinAchievements({ wins }: { wins: RaceWinAchievement[] }) {
                 </span>
               </span>
             </summary>
-            <ul className="mt-3 space-y-3 border-t border-amber-300 pt-3 text-xs dark:border-amber-800">
+            <ul className="mt-3 space-y-3 border-t border-current/20 pt-3 text-xs">
               {win.results.map((evidence, index) => (
                 <li key={`${evidence.date}:${evidence.event}:${index}`} className="space-y-1">
                   <p className="font-semibold">

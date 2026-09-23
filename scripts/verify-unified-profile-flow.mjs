@@ -132,7 +132,8 @@ try {
   assert.equal(renderedProfile.status, 200);
   const html = await renderedProfile.text();
   assert.equal((html.match(/data-achievement="race-win"/g) ?? []).length, 2);
-  assert.match(html, /border-amber-400 bg-amber-50/);
+  assert.match(html, /data-achievement="race-win"[^>]*class="[^"]*bg-sky-100/);
+  assert.match(html, /class="[^"]*lucide-trophy[^"]*bg-amber-100/);
   const visibleHtml = html.replace(/<!--[^]*?-->/g, "");
   assert.match(visibleHtml, /10K winner/);
   assert.match(visibleHtml, /Women’s race/);

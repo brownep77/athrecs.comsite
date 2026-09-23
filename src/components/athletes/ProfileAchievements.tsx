@@ -17,6 +17,7 @@ import { CountryFlag } from "./CountryFlag";
 import { RaceWinAchievements } from "./RaceWinAchievements";
 import { buildRaceWinAchievements } from "@/lib/athrecs/race-win-achievements";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
+import { achievementColourClass, distanceColourClass } from "@/lib/athrecs/profile-colours";
 
 export function ResultMedal({ result }: { result: ProfileResult }) {
   if (!isCompletedResult(result)) return null;
@@ -62,21 +63,21 @@ export function PersonalBestStrip({
               <a
                 key={`reported-${best.id}`}
                 href={best.recordId ? `#reported-result-${best.recordId}` : best.sources[0].url}
-                className="min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
+                className={`min-w-28 flex-1 rounded-lg border px-3 py-2 no-underline hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 ${distanceColourClass(best.distanceCode, best.distanceKm)}`}
                 title={best.note}
               >
-                <span className="block text-xs text-muted">
+                <span className="block text-xs">
                   {best.sport} · {best.distanceCode}
                 </span>
-                <strong className="text-lg tabular-nums text-fg">
+                <strong className="text-lg tabular-nums">
                   {formatDuration(best.finishTimeSeconds)}
                 </strong>
-                <span className="ml-2 text-xs font-semibold text-accent">PB*</span>
-                <span className="block text-xs text-muted">{best.surface} · Reported time</span>
-                <span className="block text-xs text-muted">
+                <span className="ml-2 text-xs font-semibold">PB*</span>
+                <span className="block text-xs">{best.surface} · Reported time</span>
+                <span className="block text-xs">
                   {showEvidence ? CHIP_TIME_CAVEAT : "Reported"}
                 </span>
-                <span className="block text-xs text-muted">
+                <span className="block text-xs">
                   {best.event} · {best.date}
                 </span>
               </a>
@@ -87,18 +88,18 @@ export function PersonalBestStrip({
             <ProfileEventLink
               key={best.resultId}
               result={best}
-              className="min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
+              className={`min-w-28 flex-1 rounded-lg border px-3 py-2 no-underline hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 ${distanceColourClass(best.distanceCode, best.distanceKm)}`}
             >
-              <span className="block text-xs text-muted">
+              <span className="block text-xs">
                 {best.sport} · {best.distanceCode}
               </span>
-              <strong className="text-lg tabular-nums text-fg">
+              <strong className="text-lg tabular-nums">
                 {formatDuration(best.finishTimeSeconds)}
               </strong>
-              <span className="ml-2 text-xs font-semibold text-accent">PB</span>
-              <span className="block text-xs text-muted">{best.surface}</span>
+              <span className="ml-2 text-xs font-semibold">PB</span>
+              <span className="block text-xs">{best.surface}</span>
               {showEvidence || resultEvidenceLabel(best) === "Athlete-submitted" ? (
-                <span className="block text-xs text-muted">
+                <span className="block text-xs">
                   {showEvidence ? resultEvidenceLabel(best) : "Reported"}
                 </span>
               ) : null}
@@ -117,11 +118,11 @@ export function PersonalBestStrip({
 
 function AchievementEvidence({ results }: { results: ProfileResult[] }) {
   return (
-    <ul className="mt-3 space-y-2 border-t border-border pt-3 text-xs">
+    <ul className="mt-3 space-y-2 border-t border-current/20 pt-3 text-xs">
       {results.map((result) => (
         <li key={result.resultId} className="flex flex-wrap items-center gap-x-2 gap-y-1">
           <span className="tabular-nums text-muted">{formatRaceDateShort(result.eventDate)}</span>
-          <ProfileEventLink result={result} className="font-medium text-accent hover:underline">
+          <ProfileEventLink result={result} className="font-medium underline underline-offset-2">
             {result.eventName}
           </ProfileEventLink>
 
@@ -130,7 +131,7 @@ function AchievementEvidence({ results }: { results: ProfileResult[] }) {
               href={result.sourceUrls[0]}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent hover:underline"
+              className="underline underline-offset-2"
             >
               Source
             </a>
@@ -161,6 +162,7 @@ export function AchievementsBoard({
   );
   const metrics = [
     {
+      id: "finishes",
       label: "Completed events",
       value: record.finishes.length,
       icon: Medal,
@@ -169,13 +171,21 @@ export function AchievementsBoard({
     ...(hasRunning
       ? [
           {
+            id: "marathons",
             label: "Marathons",
             value: record.marathons.length,
             icon: Flag,
             results: record.marathons,
           },
-          { label: "Ultras", value: record.ultras.length, icon: Mountain, results: record.ultras },
           {
+            id: "ultras",
+            label: "Ultras",
+            value: record.ultras.length,
+            icon: Mountain,
+            results: record.ultras,
+          },
+          {
+            id: "majors",
             label: "Marathon majors",
             value: record.completedMajors.length,
             icon: Globe2,
@@ -184,6 +194,7 @@ export function AchievementsBoard({
         ]
       : []),
     {
+      id: "sports",
       label: "Sports completed",
       value: record.sports.length,
       icon: Layers,
@@ -201,12 +212,15 @@ export function AchievementsBoard({
       <RaceWinAchievements wins={wins} />
       {showCompletionProgress ? (
         <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
-          {metrics.map(({ label, value, icon: Icon, results: evidence }) => (
-            <details key={label} className="min-w-0 rounded-lg bg-elevated p-2">
+          {metrics.map(({ id, label, value, icon: Icon, results: evidence }) => (
+            <details
+              key={id}
+              className={`min-w-0 rounded-lg border p-2 ${achievementColourClass(id)}`}
+            >
               <summary className="cursor-pointer list-none">
-                <Icon className="mr-1 inline size-4 text-accent" aria-hidden="true" />
+                <Icon className="mr-1 inline size-4" aria-hidden="true" />
                 <strong className="mr-1 text-lg tabular-nums">{value}</strong>
-                <span className="text-xs text-muted">{label}</span>
+                <span className="text-xs">{label}</span>
                 <span className="sr-only"> · Show supporting results</span>
               </summary>
               {evidence.length ? (
@@ -216,11 +230,13 @@ export function AchievementsBoard({
               )}
             </details>
           ))}
-          <details className="min-w-0 rounded-lg bg-elevated p-2">
+          <details
+            className={`min-w-0 rounded-lg border p-2 ${achievementColourClass("countries")}`}
+          >
             <summary className="cursor-pointer list-none">
-              <Globe2 className="mr-1 inline size-4 text-accent" aria-hidden="true" />
+              <Globe2 className="mr-1 inline size-4" aria-hidden="true" />
               <strong className="mr-1 text-lg tabular-nums">{record.countries.length}</strong>
-              <span className="text-xs text-muted">Countries raced in</span>
+              <span className="text-xs">Countries raced in</span>
               <span className="sr-only"> · Show countries</span>
             </summary>
             <div className="mt-3 space-y-2 border-t border-border pt-3 text-xs">
@@ -244,14 +260,14 @@ export function AchievementsBoard({
               {record.milestones.map((achievement) => (
                 <details
                   key={achievement.id}
-                  className="rounded-lg border border-border bg-accent-soft p-3"
+                  className={`rounded-lg border p-3 ${achievementColourClass(achievement.id)}`}
                   data-achievement={achievement.id}
                 >
                   <summary className="flex cursor-pointer list-none items-start gap-2">
-                    <Medal className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
+                    <Medal className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
                     <span>
                       <strong className="block text-sm font-medium">{achievement.title}</strong>
-                      <span className="text-xs text-muted">View supporting results</span>
+                      <span className="text-xs">View supporting results</span>
                     </span>
                   </summary>
 
@@ -265,7 +281,9 @@ export function AchievementsBoard({
             </p>
           ) : null}
           {record.nextFinishTarget && showCompletionProgress ? (
-            <div className="space-y-2 rounded-lg bg-elevated p-3 text-sm">
+            <div
+              className={`space-y-2 rounded-lg border p-3 text-sm ${achievementColourClass("finishes")}`}
+            >
               <div className="flex flex-wrap justify-between gap-2">
                 <span>
                   Next milestone ·{" "}
@@ -278,7 +296,7 @@ export function AchievementsBoard({
                 </span>
               </div>
               <progress
-                className="h-1.5 w-full accent-accent"
+                className="h-1.5 w-full accent-current"
                 aria-label="Progress towards the next finish milestone"
                 value={record.finishes.length}
                 max={record.nextFinishTarget}
@@ -294,7 +312,7 @@ export function AchievementsBoard({
                 {record.majors.map((major) => (
                   <div
                     key={major.id}
-                    className={`rounded-lg border p-3 text-sm ${major.results.length ? "border-accent bg-accent-soft" : "border-border"}`}
+                    className={`rounded-lg border p-3 text-sm ${major.results.length ? achievementColourClass("majors") : "border-border"}`}
                   >
                     <strong className="font-medium">{major.name}</strong>
                     <p className="mt-1 text-xs text-muted">

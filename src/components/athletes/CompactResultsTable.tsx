@@ -13,6 +13,7 @@ import { ResultDisqualification } from "./ResultDisqualification";
 import { ReportedRaceResultRows } from "./ReportedRaceResultRows";
 import type { ReportedRaceHistory, ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 import { selectProfilePersonalBests } from "@/lib/athrecs/reported-personal-bests";
+import { distanceColourClass } from "@/lib/athrecs/profile-colours";
 
 const NO_REPORTED_RECORDS: readonly ReportedRaceRecord[] = [];
 const NO_REPORTED_BEST_IDS = new Set<string>();
@@ -119,7 +120,7 @@ export function CompactResultsTable({
                 {isDisqualified(result) ? <span aria-label="Disqualified result">*</span> : null}
                 {!isDisqualified(result) && bestIds.has(result.resultId) ? (
                   <span
-                    className="ml-2 rounded bg-accent-soft px-1.5 py-0.5 text-xs font-semibold text-accent"
+                    className={`ml-2 rounded border px-1.5 py-0.5 text-xs font-semibold ${distanceColourClass(result.distanceCode, result.distanceKm)}`}
                     aria-label="Personal best"
                   >
                     PB
