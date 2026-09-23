@@ -22,10 +22,7 @@ const resultClaimVerifier = await readFile(
   resolve(root, "scripts/verify-result-claims.mjs"),
   "utf8",
 );
-const accountApi = await readFile(
-  resolve(root, "src/lib/athrecs/athlete-account-api.ts"),
-  "utf8",
-);
+const accountApi = await readFile(resolve(root, "src/lib/athrecs/athlete-account-api.ts"), "utf8");
 const vercelConfig = JSON.parse(await readFile(resolve(root, "vercel.json"), "utf8"));
 
 assert.match(claimRoute, /Add this result to your profile/);
@@ -47,7 +44,7 @@ assert.match(privateProfileRoute, /getMyAthleteAccount/);
 assert.match(privateProfileRoute, /enabled: Boolean\(user\)/);
 assert.match(privateProfileRoute, /Private profile/);
 assert.match(privateProfileRoute, /<ProfileRecordHighlights/);
-assert.match(profileHighlights, /<PersonalBestStrip results=\{results\}/);
+assert.match(profileHighlights, /<PersonalBestStrip\s+results=\{results\}/);
 assert.match(profileHighlights, /Personal bests/);
 assert.match(privateProfileResults, /Remove from profile/);
 assert.match(privateProfileResults, /Removed from my profile/);

@@ -93,6 +93,11 @@ export function PersonalBestStrip({
               </strong>
               <span className="ml-2 text-xs font-semibold text-accent">PB</span>
               <span className="block text-xs text-muted">{best.surface}</span>
+              {showEvidence || resultEvidenceLabel(best) === "Athlete-submitted" ? (
+                <span className="block text-xs text-muted">
+                  {showEvidence ? resultEvidenceLabel(best) : "Reported"}
+                </span>
+              ) : null}
 
               <span className="sr-only">
                 {" "}
