@@ -3,6 +3,7 @@ import { Medal, Trophy, Globe2, Mountain, Flag, Layers } from "lucide-react";
 import { buildProfileAchievements, isCompletedResult } from "@/lib/athrecs/profile-achievements";
 import { type ProfileResult } from "@/lib/athrecs/profile-records";
 import {
+  CHIP_TIME_CAVEAT,
   selectProfilePersonalBests,
   type ReportedPersonalBest,
 } from "@/lib/athrecs/reported-personal-bests";
@@ -32,9 +33,11 @@ const NO_SOURCE_HISTORIES: readonly SourceHistory[] = [];
 export function PersonalBestStrip({
   results,
   reportedBests = NO_REPORTED_BESTS,
+  showEvidence = false,
 }: {
   results: ProfileResult[];
   reportedBests?: readonly ReportedPersonalBest[];
+  showEvidence?: boolean;
 }) {
   const bests = useMemo(
     () => selectProfilePersonalBests(results, reportedBests),
@@ -66,7 +69,9 @@ export function PersonalBestStrip({
                 </strong>
                 <span className="ml-2 text-xs font-semibold text-accent">PB*</span>
                 <span className="block text-xs text-muted">{best.surface} · Reported time</span>
-                <span className="block text-xs text-muted">Reported</span>
+                <span className="block text-xs text-muted">
+                  {showEvidence ? CHIP_TIME_CAVEAT : "Reported"}
+                </span>
                 <span className="block text-xs text-muted">
                   {best.event} · {best.date}
                 </span>

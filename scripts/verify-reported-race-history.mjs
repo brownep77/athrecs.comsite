@@ -48,6 +48,7 @@ try {
     createElement(CompactResults, {
       results: [],
       reportedHistory: neil,
+      showEvidence: true,
     }),
   );
   assert.equal((html.match(/id="reported-result-/g) ?? []).length, 28);
@@ -64,8 +65,15 @@ try {
     createElement(PersonalBestStrip, {
       results: [],
       reportedBests: neil.personalBests,
+      showEvidence: true,
     }),
   );
+  const publicRows = renderToStaticMarkup(
+    createElement(CompactResults, { results: [], reportedHistory: neil }),
+  );
+  assert.equal((publicRows.match(/id="reported-result-/g) ?? []).length, 28);
+  assert(!publicRows.includes("Not verified by chip time"));
+  assert.equal((publicRows.match(/>Reported</g) ?? []).length, 28);
   assert.match(pbHtml, /29:28/);
   assert.match(pbHtml, /49:47/);
   assert.match(pbHtml, /1:07:37/);
@@ -138,7 +146,7 @@ try {
   assert.equal(murakami.records.length, 9);
   assert.equal(new Set(murakami.records.map((row) => row.id)).size, 9);
   const murakamiHtml = renderToStaticMarkup(
-    createElement(UnverifiedRaceHistory, { slug: "haruki-murakami" }),
+    createElement(UnverifiedRaceHistory, { slug: "haruki-murakami", showEvidence: true }),
   );
   assert.equal((murakamiHtml.match(/<article/g) ?? []).length, 9);
   assert.match(murakamiHtml, /\* Unverified/);
