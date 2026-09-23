@@ -17,6 +17,8 @@ const migration = original
   .replaceAll('1:03:34', '1:10:00')
   .replaceAll('https://results.eventchiptiming.com/myresults.aspx?CId=16202&RId=10399&EId=5&AId=253543', 'https://example.test/result/123');
 const schema = `
+  create table app_meta (key text primary key, value text not null);
+  insert into app_meta values ('seed_version', 'synthetic-established-catalogue');
   create table athletes (
     id serial primary key, slug text not null unique, display_name text not null,
     given_name text, family_name text, gender text default 'U', city text,
@@ -85,6 +87,12 @@ const event = `
   insert into events(slug,name,sport,surface) values ('existing-st-albans','ATW St Albans Half Marathon','Running','Road');
   insert into editions(event_id,event_date,distance_code,distance_km) values (1,'2026-06-14','10K',10),(1,'2026-06-14','Half',21.0975);
 `;
+await test('unseeded databases remain empty for normal catalogue bootstrap', 'delete from app_meta;', async (db) => {
+  await apply(db);
+  for (const table of ['athletes','events','editions','results','network_audit_log']) {
+    assert.equal((await rows(db, `select count(*)::int n from ${table}`))[0].n, 0);
+  }
+});
 await test('new profile, exact 10K and manually verified time, unknown values remain empty', '', async (db) => {
   await apply(db);
   const [a] = await rows(db, 'select * from athletes');
