@@ -8,6 +8,7 @@ on:
       - '.github/workflows/verify-manual-athlete-publication.yml'
   push:
     branches:
+      - main
       - 'fix/publish-david-torrens-20260923'
     paths:
       - 'migrations/20260923_publish_david_torrens.sql'
@@ -38,32 +39,42 @@ jobs:
       - run: node scripts/verify-manual-athlete-publication.mjs
 
   public-profile:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 8
     steps:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - name: Read the public profile without credentials
         env:
-          PROFILE_PATH: ${{ inputs.profile_path }}
+          PROFILE_PATH: ${{ inputs.profile_path || '/athletes/david-torrens' }}
         run: |
           node --input-type=module <<'NODE'
           import assert from 'node:assert/strict';
+          import { setTimeout as pause } from 'node:timers/promises';
           const path = process.env.PROFILE_PATH;
           assert(/^\/athletes\/[a-z0-9-]+$/.test(path), 'Expected a public athlete path');
           const url = `https://www.athrecs.com${path}`;
-          const response = await fetch(url, {signal: AbortSignal.timeout(60000)});
-          const html = await response.text();
-          const heading = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)].map(m => m[1].replace(/<[^>]*>/g, '').trim()).join(' | ');
-          console.log(`Public URL: ${response.url}`);
-          console.log(`HTTP status: ${response.status}`);
-          console.log(`Heading: ${heading}`);
-          assert.equal(response.status, 200, 'Public profile must return HTTP 200');
-          assert(/David Torrens/i.test(heading), 'Profile must identify David Torrens');
-          assert(/St Albans/i.test(html), 'Profile must include St Albans');
-          assert(/1:03:34/.test(html), 'Profile must render the approved time');
-          assert(/10K/i.test(html), 'Profile must include the 10K distance');
-          console.log('PASS: public David Torrens profile and approved St Albans 10K time are visible.');
+          let lastError;
+          for (let attempt = 1; attempt <= 16; attempt++) {
+            try {
+              const response = await fetch(url, {signal: AbortSignal.timeout(12000)});
+              const html = await response.text();
+              const heading = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)].map(m => m[1].replace(/<[^>]*>/g, '').trim()).join(' | ');
+              console.log(`Attempt ${attempt}: ${response.url} HTTP ${response.status}; heading: ${heading}`);
+              assert.equal(response.status, 200, 'Public profile must return HTTP 200');
+              assert(/David Torrens/i.test(heading), 'Profile must identify David Torrens');
+              assert(/St Albans/i.test(html), 'Profile must include St Albans');
+              assert(/1:03:34/.test(html), 'Profile must render the approved time');
+              assert(/10K/i.test(html), 'Profile must include the 10K distance');
+              console.log(`PASS: public David Torrens profile and approved St Albans 10K time visible at ${response.url}`);
+              process.exit(0);
+            } catch (error) {
+              lastError = error;
+              console.log(`Publication not yet confirmed: ${error.message}`);
+              if (attempt < 16) await pause(15000);
+            }
+          }
+          throw lastError;
           NODE
