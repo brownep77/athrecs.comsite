@@ -1,0 +1,135 @@
+name: Signup troubleshooting audit
+
+on:
+  push:
+    branches: [test/signup-audit-20260924]
+    paths: [.github/workflows/signup-audit.yml, scripts/verify-signup-adversarial.mjs]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: signup-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  signup-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DATABASE_URL: ''
+      DATABASE_URL_UNPOOLED: ''
+      POSTGRES_URL: ''
+      POSTGRES_URL_NON_POOLING: ''
+      RESEND_API_KEY: ''
+      BETTER_AUTH_SECRET: isolated-signup-audit-only-not-a-production-secret
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Authentication methods and origin guards
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm run verify:auth-methods 2>&1 | tee artifacts/auth-methods.log
+      - name: Real isolated signup, verification, OTP and profile persistence
+        if: ${{ !cancelled() }}
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          npm run verify:email-login-flow 2>&1 | tee artifacts/email-login-flow.log
+      - name: Mobile forms, accessibility and password reset
+        if: ${{ !cancelled() }}
+        run: |
+          mkdir -p artifacts
+          set -o pipefail
+          node scripts/verify-email-code-ui.mjs 2>&1 | tee artifacts/email-code-ui.log
+      - name: Additional signup failure cases
+        if: ${{ !cancelled() && hashFiles('scripts/verify-signup-adversarial.mjs') != '' }}
+        run: |
+          set -o pipefail
+          node scripts/verify-signup-adversarial.mjs 2>&1 | tee artifacts/signup-adversarial.log
+      - name: Bounded public production checks without accounts or email
+        if: ${{ !cancelled() }}
+        run: |
+          mkdir -p artifacts
+          node --input-type=module <<'NODE'
+          import { chromium } from 'playwright';
+          import { writeFile } from 'node:fs/promises';
+          const results = [];
+          const record = (name, status, detail) => { results.push({name,status,detail}); console.log(`${name}: ${status} ${JSON.stringify(detail)}`); };
+          const urls = [
+            'https://athrecs.com/athlete-account',
+            'https://www.athrecs.com/athlete-account',
+            'https://www.athrecs.com/my-athlete-profile',
+            'https://www.athrecs.com/api/auth/get-session'
+          ];
+          for (const url of urls) {
+            try {
+              const res = await fetch(url, { signal: AbortSignal.timeout(20000) });
+              const text = await res.text();
+              record(`GET ${url}`, res.ok ? 'PASS' : 'FAIL', {http: res.status, finalUrl: res.url, contentType: res.headers.get('content-type'), bytes: text.length, session: url.endsWith('/get-session') ? text.slice(0,500) : undefined});
+            } catch (e) { record(`GET ${url}`, 'BLOCKED', e.message); }
+          }
+          // Only invalid submissions: no deliverable addresses, passwords, sessions or profiles are created.
+          for (const [name, path, body, origin, expected] of [
+            ['Empty signup rejected', 'sign-up/email', {}, 'https://www.athrecs.com', [400,422]],
+            ['Short password rejected', 'sign-up/email', {name:'Signup Audit',email:'signup-audit@example.invalid',password:'short'}, 'https://www.athrecs.com', [400,422]],
+            ['Untrusted origin rejected', 'sign-up/email', {}, 'https://example.invalid', [403]]
+          ]) {
+            try {
+              const res = await fetch(`https://www.athrecs.com/api/auth/${path}`, {method:'POST',headers:{'content-type':'application/json',origin},body:JSON.stringify(body),redirect:'manual',signal:AbortSignal.timeout(20000)});
+              record(name, expected.includes(res.status) ? 'PASS' : 'FAIL', {http:res.status,body:(await res.text()).slice(0,1500)});
+            } catch(e) { record(name, 'BLOCKED', e.message); }
+          }
+          let browser;
+          try {
+            browser = await chromium.launch({headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
+            for (const [label,width,height] of [['mobile',390,844],['desktop',1440,1000]]) {
+              const context = await browser.newContext({viewport:{width,height}});
+              const page = await context.newPage();
+              const errors = [];
+              page.on('pageerror', e => errors.push(e.message));
+              // No browser POST can create an account, send mail, or modify production.
+              await page.route('**/api/auth/**', async route => {
+                if (!['GET','HEAD','OPTIONS'].includes(route.request().method())) return route.abort('blockedbyclient');
+                return route.continue();
+              });
+              try {
+                const response = await page.goto('https://www.athrecs.com/athlete-account', {waitUntil:'domcontentloaded',timeout:45000});
+                const reject = page.getByRole('button',{name:'No thanks',exact:true});
+                if(await reject.isVisible().catch(()=>false)) await reject.click();
+                const start = page.getByRole('button',{name:'Sign in or create account',exact:true});
+                await start.waitFor({state:'visible',timeout:20000});
+                await start.click();
+                const dialog = page.getByRole('dialog');
+                await dialog.waitFor({state:'visible',timeout:15000});
+                const text = await dialog.innerText();
+                const controls = await dialog.locator('button,input,a').evaluateAll(nodes=>nodes.map(n=>({tag:n.tagName,text:n.textContent,type:n.getAttribute('type'),label:n.getAttribute('aria-label'),disabled:n.disabled??false})));
+                await page.screenshot({path:`artifacts/live-signup-${label}.png`,fullPage:true});
+                const overflow = await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
+                record(`Live ${label} signup chooser`, response?.ok() && !errors.length && !overflow ? 'PASS' : 'FAIL', {http:response?.status(),text,controls,errors,horizontalOverflow:overflow});
+              } catch(e) {
+                record(`Live ${label} signup chooser`,'BLOCKED',{message:e.message,errors});
+                await page.screenshot({path:`artifacts/live-signup-${label}-blocked.png`,fullPage:true}).catch(()=>{});
+              } finally { await context.close(); }
+            }
+          } catch(e) { record('Chromium startup','BLOCKED',e.message); }
+          finally { await browser?.close(); await writeFile('artifacts/live-signup-report.json',JSON.stringify({checkedAt:new Date().toISOString(),productionWrites:'Invalid signup requests only; no accounts, emails or profiles',results},null,2)); }
+          for(const r of results) console.log(`::notice title=${r.name.replaceAll(',',' ')}::${r.status}`);
+          if(results.some(r=>r.status!=='PASS')) process.exitCode=1;
+          NODE
+      - name: Preserve audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: signup-audit-evidence
+          path: artifacts/
+          retention-days: 7
