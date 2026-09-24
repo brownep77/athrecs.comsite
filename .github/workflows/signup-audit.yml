@@ -52,79 +52,124 @@ jobs:
           set -o pipefail
           node scripts/verify-email-code-ui.mjs 2>&1 | tee artifacts/email-code-ui.log
       - name: Additional signup failure cases
-        if: ${{ !cancelled() && hashFiles('scripts/verify-signup-adversarial.mjs') != '' }}
+        if: ${{ !cancelled() }}
         run: |
           set -o pipefail
           node scripts/verify-signup-adversarial.mjs 2>&1 | tee artifacts/signup-adversarial.log
-      - name: Bounded public production checks without accounts or email
+      - name: Live form readiness and safe validation checks
         if: ${{ !cancelled() }}
         run: |
           mkdir -p artifacts
           node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
           import { chromium } from 'playwright';
-          import { writeFile } from 'node:fs/promises';
+          import { readFile, writeFile } from 'node:fs/promises';
+          const version = JSON.parse(await readFile('node_modules/better-auth/package.json','utf8')).version;
           const results = [];
           const record = (name, status, detail) => { results.push({name,status,detail}); console.log(`${name}: ${status} ${JSON.stringify(detail)}`); };
-          const urls = [
-            'https://athrecs.com/athlete-account',
-            'https://www.athrecs.com/athlete-account',
-            'https://www.athrecs.com/my-athlete-profile',
-            'https://www.athrecs.com/api/auth/get-session'
-          ];
-          for (const url of urls) {
+          const site = 'https://www.athrecs.com';
+          for (const url of ['https://athrecs.com/athlete-account',`${site}/athlete-account`,`${site}/my-athlete-profile`,`${site}/api/auth/get-session`]) {
             try {
-              const res = await fetch(url, { signal: AbortSignal.timeout(20000) });
-              const text = await res.text();
-              record(`GET ${url}`, res.ok ? 'PASS' : 'FAIL', {http: res.status, finalUrl: res.url, contentType: res.headers.get('content-type'), bytes: text.length, session: url.endsWith('/get-session') ? text.slice(0,500) : undefined});
-            } catch (e) { record(`GET ${url}`, 'BLOCKED', e.message); }
+              const res=await fetch(url,{signal:AbortSignal.timeout(20000)});
+              const text=await res.text();
+              record(`GET ${url}`,res.ok?'PASS':'FAIL',{http:res.status,finalUrl:res.url,bytes:text.length,session:url.endsWith('/get-session')?text.slice(0,500):undefined});
+            } catch(e) { record(`GET ${url}`,'BLOCKED',e.message); }
           }
-          // Only invalid submissions: no deliverable addresses, passwords, sessions or profiles are created.
-          for (const [name, path, body, origin, expected] of [
-            ['Empty signup rejected', 'sign-up/email', {}, 'https://www.athrecs.com', [400,422]],
-            ['Short password rejected', 'sign-up/email', {name:'Signup Audit',email:'signup-audit@example.invalid',password:'short'}, 'https://www.athrecs.com', [400,422]],
-            ['Untrusted origin rejected', 'sign-up/email', {}, 'https://example.invalid', [403]]
+          // Invalid signup payloads and a nonexistent-account sign-in only.
+          // Never submit a valid production registration or request a real email.
+          for (const [name,path,body,origin,expected] of [
+            ['Empty signup rejected','sign-up/email',{},site,[400,422]],
+            ['Short password rejected','sign-up/email',{name:'Signup Audit',email:'signup-audit@example.invalid',password:'short'},site,[400,422]],
+            ['Untrusted origin rejected','sign-in/email',{email:'signup-audit@example.invalid',password:'Synthetic-invalid-account-123!'},'https://example.invalid',[403]]
           ]) {
             try {
-              const res = await fetch(`https://www.athrecs.com/api/auth/${path}`, {method:'POST',headers:{'content-type':'application/json',origin},body:JSON.stringify(body),redirect:'manual',signal:AbortSignal.timeout(20000)});
-              record(name, expected.includes(res.status) ? 'PASS' : 'FAIL', {http:res.status,body:(await res.text()).slice(0,1500)});
-            } catch(e) { record(name, 'BLOCKED', e.message); }
+              const res=await fetch(`${site}/api/auth/${path}`,{method:'POST',headers:{'content-type':'application/json',origin},body:JSON.stringify(body),redirect:'manual',signal:AbortSignal.timeout(20000)});
+              record(name,expected.includes(res.status)?'PASS':'FAIL',{http:res.status,body:(await res.text()).slice(0,1200)});
+            } catch(e) { record(name,'BLOCKED',e.message); }
           }
           let browser;
           try {
-            browser = await chromium.launch({headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
+            browser=await chromium.launch({headless:true,args:['--no-sandbox','--disable-dev-shm-usage']});
             for (const [label,width,height] of [['mobile',390,844],['desktop',1440,1000]]) {
-              const context = await browser.newContext({viewport:{width,height}});
-              const page = await context.newPage();
-              const errors = [];
-              page.on('pageerror', e => errors.push(e.message));
-              // No browser POST can create an account, send mail, or modify production.
-              await page.route('**/api/auth/**', async route => {
-                if (!['GET','HEAD','OPTIONS'].includes(route.request().method())) return route.abort('blockedbyclient');
-                return route.continue();
+              const context=await browser.newContext({viewport:{width,height}});
+              const page=await context.newPage();
+              const errors=[];
+              const intercepted=[];
+              page.on('pageerror',e=>errors.push(e.message));
+              // Read the real live interface. Every auth write from the browser is
+              // intercepted and mocked; these are UI checks, not real email delivery.
+              await page.route('**/api/auth/**',async route=>{
+                if(['GET','HEAD','OPTIONS'].includes(route.request().method())) return route.continue();
+                const path=new URL(route.request().url()).pathname;
+                intercepted.push(path);
+                if(path.endsWith('/email-otp/send-verification-otp')) return route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({code:'EMAIL_DELIVERY_UNAVAILABLE',message:'The test email service is unavailable. Please try again.'})});
+                return route.fulfill({status:400,contentType:'application/json',body:JSON.stringify({code:'AUDIT_INTERCEPTED',message:'Synthetic audit request was not sent to production.'})});
               });
               try {
-                const response = await page.goto('https://www.athrecs.com/athlete-account', {waitUntil:'domcontentloaded',timeout:45000});
-                const reject = page.getByRole('button',{name:'No thanks',exact:true});
-                if(await reject.isVisible().catch(()=>false)) await reject.click();
-                const start = page.getByRole('button',{name:'Sign in or create account',exact:true});
-                await start.waitFor({state:'visible',timeout:20000});
+                const response=await page.goto(`${site}/athlete-account`,{waitUntil:'networkidle',timeout:60000});
+                assert(response?.ok());
+                const reject=page.getByRole('button',{name:'No thanks',exact:true});
+                await reject.waitFor({state:'visible',timeout:15000});
+                await reject.click();
+                const start=page.getByRole('button',{name:'Sign in or create account',exact:true});
                 await start.click();
-                const dialog = page.getByRole('dialog');
-                await dialog.waitFor({state:'visible',timeout:15000});
-                const text = await dialog.innerText();
-                const controls = await dialog.locator('button,input,a').evaluateAll(nodes=>nodes.map(n=>({tag:n.tagName,text:n.textContent,type:n.getAttribute('type'),label:n.getAttribute('aria-label'),disabled:n.disabled??false})));
-                await page.screenshot({path:`artifacts/live-signup-${label}.png`,fullPage:true});
-                const overflow = await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
-                record(`Live ${label} signup chooser`, response?.ok() && !errors.length && !overflow ? 'PASS' : 'FAIL', {http:response?.status(),text,controls,errors,horizontalOverflow:overflow});
+                let dialog=page.getByRole('dialog');
+                await dialog.getByRole('button',{name:'Sign in with email',exact:true}).waitFor({state:'visible',timeout:30000});
+                const methods=await dialog.getByRole('button').allTextContents();
+                const text=await dialog.innerText();
+                assert(!text.includes('Loading secure sign-in methods'));
+                record(`Live ${label} ready sign-in methods`,'PASS',{methods,text});
+                await dialog.getByRole('tab',{name:'Create account',exact:true}).click();
+                await dialog.getByLabel('Full name',{exact:true}).waitFor({state:'visible'});
+                const submit=dialog.getByRole('button',{name:'Create account with email',exact:true});
+                const before=intercepted.length;
+                await submit.click();
+                assert.equal(intercepted.length,before,'Empty fields are blocked before any auth request');
+                await dialog.getByLabel('Full name',{exact:true}).fill('Synthetic Signup Audit');
+                await dialog.getByLabel('Email address',{exact:true}).fill('signup-audit@example.invalid');
+                const passwords=dialog.locator('input[autocomplete="new-password"]');
+                await passwords.nth(0).fill('Synthetic-password-123!');
+                await passwords.nth(1).fill('Different-password-123!');
+                await submit.click();
+                await dialog.getByText('The passwords do not match.',{exact:true}).waitFor();
+                assert.equal(intercepted.length,before,'Mismatched passwords are blocked before any auth request');
+                await passwords.nth(1).fill('Synthetic-password-123!');
+                await dialog.getByRole('button',{name:'Show password',exact:true}).click();
+                assert.equal(await passwords.nth(0).getAttribute('type'),'text');
+                await dialog.getByRole('button',{name:'Hide password',exact:true}).click();
+                assert.equal(await passwords.nth(0).getAttribute('type'),'password');
+                await page.screenshot({path:`artifacts/live-signup-${label}-ready.png`,fullPage:true});
+                const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+2);
+                assert(!overflow,'No horizontal overflow');
+                record(`Live ${label} signup fields and validation`,'PASS',{emptyRequiredFieldsBlocked:true,mismatchedPasswordsBlocked:true,passwordVisibility:true,horizontalOverflow:overflow});
+                const codeMethod=dialog.getByRole('button',{name:'Continue with an email code',exact:true});
+                if(await codeMethod.count()) {
+                  await codeMethod.click();
+                  dialog=page.getByRole('dialog',{name:'Sign in with an email code'});
+                  await dialog.getByLabel('Email address',{exact:true}).fill('signup-audit@example.invalid');
+                  await dialog.getByRole('button',{name:'Send sign-in code',exact:true}).click();
+                  await dialog.getByRole('alert').waitFor({state:'visible'});
+                  assert.equal(await dialog.getByLabel('Six-digit code',{exact:true}).count(),0);
+                  assert.equal(await dialog.getByRole('button',{name:'Send sign-in code',exact:true}).isDisabled(),false);
+                  record(`Live ${label} UI handles a simulated delivery failure`,'PASS',{scope:'Browser response intercepted; no real email request',error:await dialog.getByRole('alert').innerText()});
+                } else record(`Live ${label} email-code availability`,'UNAVAILABLE',{methods});
+                await page.keyboard.press('Escape');
+                await page.getByRole('dialog').waitFor({state:'hidden'});
+                await start.click();
+                await page.getByRole('dialog').getByRole('button',{name:'Sign in with email',exact:true}).waitFor();
+                assert.deepEqual(errors,[]);
+                record(`Live ${label} close and reopen without JavaScript errors`,'PASS',{errors});
               } catch(e) {
-                record(`Live ${label} signup chooser`,'BLOCKED',{message:e.message,errors});
-                await page.screenshot({path:`artifacts/live-signup-${label}-blocked.png`,fullPage:true}).catch(()=>{});
+                record(`Live ${label} complete form check`,'FAIL',{message:e.message,errors});
+                await page.screenshot({path:`artifacts/live-signup-${label}-failure.png`,fullPage:true}).catch(()=>{});
               } finally { await context.close(); }
             }
-          } catch(e) { record('Chromium startup','BLOCKED',e.message); }
-          finally { await browser?.close(); await writeFile('artifacts/live-signup-report.json',JSON.stringify({checkedAt:new Date().toISOString(),productionWrites:'Invalid signup requests only; no accounts, emails or profiles',results},null,2)); }
-          for(const r of results) console.log(`::notice title=${r.name.replaceAll(',',' ')}::${r.status}`);
-          if(results.some(r=>r.status!=='PASS')) process.exitCode=1;
+          } catch(e) {record('Chromium startup','BLOCKED',e.message);}
+          finally {
+            await browser?.close();
+            await writeFile('artifacts/live-signup-report.json',JSON.stringify({checkedAt:new Date().toISOString(),betterAuthVersion:version,productionWrites:'Rejected signup/sign-in payloads only; browser writes intercepted; no accounts, profiles or emails created',results},null,2));
+          }
+          if(results.some(r=>['FAIL','BLOCKED'].includes(r.status))) process.exitCode=1;
           NODE
       - name: Preserve audit evidence
         if: always()
