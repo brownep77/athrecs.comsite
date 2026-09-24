@@ -10,6 +10,7 @@ import {
   clubSlugAliases,
 } from "@/data/catalogue";
 import { catalogueSeedEventSlugAliases, editionReplacements } from "@/data/entry-options";
+import { dailyHalfTenMileRetiredSeriesSlugs } from "@/data/half-ten-mile-races-uk-ireland-daily-followup";
 import {
   publicFigureAthletes,
   publicFigureEditions,
@@ -19,7 +20,7 @@ import {
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-09-24-v1";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
@@ -876,6 +877,24 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       throw new Error(`Cannot retire event alias ${aliasSlug}: it has stored results`);
     }
     await sql`delete from events where id = ${alias.id}`;
+  }
+
+  for (const retiredSlug of dailyHalfTenMileRetiredSeriesSlugs) {
+    const retiredEvents = await sql<{ id: number }>`
+      select id from events where slug = ${retiredSlug}
+    `;
+    const retiredEvent = retiredEvents[0];
+    if (!retiredEvent) continue;
+    const resultCounts = await sql<{ count: number }>`
+      select count(*)::int as count
+      from results r
+      join editions ed on ed.id = r.edition_id
+      where ed.event_id = ${retiredEvent.id}
+    `;
+    if ((resultCounts[0]?.count ?? 0) > 0) {
+      throw new Error(`Cannot retire invalidated event ${retiredSlug}: it has stored results`);
+    }
+    await sql`delete from events where id = ${retiredEvent.id}`;
   }
 
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
