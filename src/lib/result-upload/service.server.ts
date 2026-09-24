@@ -91,7 +91,7 @@ export async function commitUpload(sql:Sql,actor:Actor,id:string,decisions:Decis
       const [created]=await tx<{id:number;slug:string;name:string}>`insert into events(slug,name,sport,country,county,city,surface) values(${slug},${batch.meta.eventName},'Running','','','','') returning id,slug,name`;event=created;
     }
     await tx`insert into event_distances(event_id,distance_code) values(${event.id},${batch.meta.distance}) on conflict do nothing`;
-    let edition=live.edition;
+    let edition:{id:number}|undefined=live.edition;
     if(!edition){const [created]=await tx<{id:number}>`insert into editions(event_id,event_date,distance_code,distance_km,status,source_url) values(${event.id},${batch.meta.date}::date,${batch.meta.distance},${distanceKm(batch.meta.distance)},'Finished',${batch.meta.sourceUrl}) returning id`;edition=created;}
     const newRows=allowed.filter(r=>r.athleteId===undefined).map(({row})=>({key:row.key,slug:`${normal(row.name).slice(0,45)}-trt-${createHash('sha256').update(row.key).digest('hex').slice(0,16)}`,name:row.name,given:row.given||null,family:row.family||null,gender:row.gender,club:row.club}));
     const insertedAthletes=newRows.length?await tx<{id:number;slug:string}>`insert into athletes(slug,display_name,given_name,family_name,gender,source_club_name,city,county,country,bio,profile_visibility) select x.slug,x.name,x.given,x.family,x.gender,x.club,'','','','','private' from jsonb_to_recordset(${JSON.stringify(newRows)}::jsonb) as x(slug text,name text,given text,family text,gender text,club text) returning id,slug`:[];

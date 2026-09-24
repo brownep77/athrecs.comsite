@@ -41,7 +41,7 @@ export async function readUpload(fileName:string,base64:string,sheetName?:string
           const base=workbook.properties.date1904?Date.UTC(1904,0,1):Date.UTC(1899,11,30);
           const duration=v.getTime()-base;if(duration<0||duration>604800000)throw Error(`Cell ${cell.address}: use a duration, not a calendar timestamp.`);
           values.push(formatMs(duration));
-        }else if(typeof v==='number'&&/[hms]/i.test(cell.numFmt.replace(/"[^"]*"/g,''))){if(v<0||v>7)throw Error(`Invalid Excel duration in ${cell.address}.`);values.push(formatMs(v*86400000));}
+        }else if(typeof v==='number'&&/[hms]/i.test((cell.numFmt??'').replace(/"[^"]*"/g,''))){if(v<0||v>7)throw Error(`Invalid Excel duration in ${cell.address}.`);values.push(formatMs(v*86400000));}
         else if(typeof v==='object')throw Error(`Cell ${cell.address}: paste values only; formulas, links and rich-text objects are not accepted.`);
         else values.push(String(v));
       }

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { inspectResultsFile,previewResultsFile,getResultsUpload,importReviewedResults,downloadResultsTemplate } from '@/lib/result-upload/api';
 import { FIELDS, type Meta,type Mapping,type ReviewRow } from '@/lib/result-upload/core';
 export const Route=createFileRoute('/admin/import-results')({head:()=>({meta:[{title:'Import Excel results | ATHRECS Staff'},{name:'robots',content:'noindex, nofollow, noarchive'}]}),component:UploadResults});
-type Preview=Awaited<ReturnType<typeof previewResultsFile>>;
+type Preview=Awaited<ReturnType<typeof getResultsUpload>>;
 type Inspection=Awaited<ReturnType<typeof inspectResultsFile>>;
 const labels:Record<string,string>={name:'Full name',given:'First name',family:'Surname',bib:'Bib / tag',gender:'Gender',category:'Category',club:'Club / team at this race',time:'Time (basis below)',chip:'Chip time',gun:'Gun time',place:'Overall placing',genderPlace:'Gender placing',categoryPlace:'Category placing'};
 const inputClass='min-h-11 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-950';

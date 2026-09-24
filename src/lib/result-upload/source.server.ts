@@ -39,7 +39,7 @@ export async function checkSource(input:Row[],meta:Meta):Promise<SourceCheck>{
   const proposed=rows.map(r=>({id:r.key,athlete_id:r.name,display_name:r.name,event_name:meta.eventName,event_date:meta.date,distance_code:meta.distance,status:'finished',result_visibility:'private',source_url:meta.sourceUrl,finish_time_seconds:r.finishMs===null?null:r.finishMs/1000,chip_time_seconds:r.chipMs===null?null:r.chipMs/1000,gun_time_seconds:r.gunMs===null?null:r.gunMs/1000,overall_place:r.place,gender_place:r.genderPlace,category_place:r.categoryPlace}));
   const audit=auditResults(proposed,[capture]);
   if(audit.scope.untestedResults)throw Error('Independent source audit is incomplete.');
-  for(const result of [...audit.issues,...audit.comparisons]){
+  for(const result of [...audit.issues,...audit.comparisons] as Array<{result_id?:string;flags:string[]}>){
     const r=rows.find(row=>row.key===result.result_id);if(r)r.issues=[...new Set([...r.issues,...result.flags])];
   }
   return {rows,hash:createHash('sha256').update(JSON.stringify(capture)).digest('hex')};
