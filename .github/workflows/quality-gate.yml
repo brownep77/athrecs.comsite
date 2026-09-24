@@ -211,13 +211,13 @@ jobs:
               "$GITHUB_WORKSPACE/artifacts/sportsrecs-mobile.png"
 
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||in one profile.||Find an athlete||Your next event starts here' \
-          BROWSER_SMOKE_REJECT_TEXT='Upcoming athletics||Event calendar||Browse verified athletics fixtures' \
+          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||all in one place.||Athletes||Events||Results||Clubs||Recent performances||Athlete spotlight||Find your next event||Achievements worth sharing||Better together||My shortlist' \
+          BROWSER_SMOKE_REJECT_TEXT='Upcoming athletics||Browse verified athletics fixtures' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
           BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
           BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||Find an athlete||Find events' \
+          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||all in one place.||Athletes||Events||Results||Clubs||Recent performances||Athlete spotlight||Find your next event||Achievements worth sharing||Better together||My shortlist' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-mobile.png"
           BROWSER_SMOKE_EXPECT_TEXT='Explore athlete profiles||Sport in results' \
             node scripts/browser-smoke.mjs 'http://127.0.0.1:8080/athletes?country=Ireland' "$GITHUB_WORKSPACE/artifacts/athletes.png"
