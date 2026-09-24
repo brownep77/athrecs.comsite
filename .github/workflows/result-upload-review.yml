@@ -1,0 +1,35 @@
+name: Excel result import and bulk review
+on:
+  pull_request:
+    paths:
+      - 'src/lib/result-upload/**'
+      - 'src/routes/admin/import-results.tsx'
+      - 'scripts/verify-result-upload.mjs'
+      - '.github/workflows/result-upload-review.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      DATABASE_URL: ''
+      DATABASE_URL_UNPOOLED: ''
+      POSTGRES_URL_NON_POOLING: ''
+      VERCEL_ENV: preview
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Test synthetic Excel and isolated PostgreSQL-compatible database
+        run: node --experimental-strip-types scripts/verify-result-upload.mjs
+      - name: Generate routes and build without production credentials
+        run: npx vite build
+      - name: Check application types
+        run: npm run typecheck
+      - name: Lint changed import modules
+        run: npx eslint src/lib/result-upload src/routes/admin/import-results.tsx scripts/verify-result-upload.mjs

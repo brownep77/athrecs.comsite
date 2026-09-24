@@ -35,6 +35,12 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
   {
+    to: "/admin/import-results",
+    label: "Import results (Excel/CSV)",
+    icon: Database,
+    match: (path: string) => path.startsWith("/admin/import-results"),
+  },
+  {
     to: "/admin/club-scanner",
     label: "Club athlete scanner",
     icon: UserRoundCog,
@@ -296,7 +302,7 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
         <nav className="border-t border-slate-800" aria-label="Staff tools">
           <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 md:px-6">
             {staffNav
-              .filter((item) => IS_ATHRECS_SITE || item.to !== "/admin/partnerships")
+              .filter((item) => IS_ATHRECS_SITE || (item.to !== "/admin/partnerships" && item.to !== "/admin/import-results"))
               .map((item) => {
                 const active = item.match(pathname);
                 return (
