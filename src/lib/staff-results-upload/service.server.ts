@@ -12,6 +12,8 @@ function assertInput(input: UploadInput) {
   if (IS_RUNRECS_SITE) throw new Error("Use the AthRecs staff site for athlete results.");
   if (!/^https:\/\/totalracetiming\.co\.uk\/raceresults\/[1-9]\d*\/?$/.test(input.sourceUrl)) throw new Error("Use the exact Total Race Timing race-results URL, without a query or fragment.");
   if (!/^\d{4}-\d{2}-\d{2}$/.test(input.date) || !Number.isFinite(Date.parse(input.date)) || new Date(input.date).toISOString().slice(0, 10) !== input.date || input.date > new Date().toISOString().slice(0, 10)) throw new Error("A valid past race date is required.");
+  const selectedKm = distanceKm(input.distance);
+  if (selectedKm === null || Math.abs(selectedKm - input.distanceKm) > 0.001) throw new Error("Selected distance label and kilometres disagree with the distance table selection.");
 }
 /** Bound ZIP expansion before handing an XLSX to ExcelJS. ZIP64 is not accepted. */
 function checkWorkbookZip(bytes: Buffer) {
@@ -33,7 +35,9 @@ async function uploadedRows(input: UploadInput): Promise<UploadRow[]> {
   if (!/\.xlsx$/i.test(input.filename)) throw new Error("Choose the original CSV or a single-sheet .xlsx file.");
   if (!/^[A-Za-z0-9+/]*={0,2}$/.test(input.content)) throw new Error("Invalid workbook encoding.");
   const bytes = Buffer.from(input.content, "base64"); checkWorkbookZip(bytes);
-  const { Workbook, ValueType } = await import("exceljs"); const wb = new Workbook();
+  const ExcelJS = await import("exceljs");
+  const { Workbook, ValueType } = ExcelJS.default ?? ExcelJS;
+  const wb = new Workbook();
   await wb.xlsx.load(bytes as never);
   const sheets = wb.worksheets.filter(s => s.actualRowCount > 1);
   if (sheets.length !== 1) throw new Error("Save just the race-results worksheet in this upload.");
