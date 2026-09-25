@@ -15,7 +15,9 @@ export async function importCheckedRaceUpload({data}){if(!data.rightsConfirmed||
 export async function downloadResultsUploadTemplate(){throw Error('Template is covered separately; this is an isolated UI fixture')}`);
 writeFileSync(resolve(root,'router.js'),'export const createFileRoute=()=>options=>({options});');
 const css=['src/styles.css','src/index.css','src/app.css'].find(existsSync);
-writeFileSync(resolve(root,'style.css'),css?`@import "${resolve(css)}";`:'@import "tailwindcss";');
+// The isolated Vite root is outside src. Explicitly scan the real component tree
+// so screenshots include the same utility classes as the application build.
+writeFileSync(resolve(root,'style.css'),(css?`@import "${resolve(css)}";`:'@import "tailwindcss";')+`\n@source "${resolve('src')}";\n`);
 writeFileSync(resolve(root,'main.tsx'),`import React from 'react';import {createRoot} from 'react-dom/client';import {Route} from '/@fs/${resolve('src/routes/admin/check-results-upload.tsx')}';import './style.css';const Component=Route.options.component;createRoot(document.getElementById('root')!).render(<div style={{maxWidth:1280,margin:'auto',padding:20}}><p style={{fontSize:12}}>ISOLATED UI TEST — SYNTHETIC DATA — NO LIVE DATABASE</p><Component/></div>);`);
 writeFileSync(resolve(root,'index.html'),'<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Isolated AthRecs import test</title></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
 const server=await createServer({configFile:false,root,plugins:[react(),tailwindcss()],resolve:{alias:[{find:'@/lib/staff-results-upload/api',replacement:resolve(root,'api.js')},{find:'@tanstack/react-router',replacement:resolve(root,'router.js')},{find:'@',replacement:resolve('src')}]},server:{host:'127.0.0.1',port:8099,strictPort:true,fs:{allow:[process.cwd()]}}});
@@ -26,6 +28,7 @@ try{
   page.on('pageerror',error=>errors.push(error.message));
   await page.route('**/*',route=>{const u=new URL(route.request().url());return u.hostname==='127.0.0.1'?route.continue():route.abort();});
   await page.goto('http://127.0.0.1:8099');await page.getByRole('heading',{name:'Import athletes & race results'}).waitFor();
+  assert.equal(await page.getByLabel('Race name',{exact:true}).evaluate(el=>getComputedStyle(el).height),'44px','Application utility styles must be loaded');
   await page.getByLabel('Choose Excel or CSV race results').setInputFiles({name:'synthetic.csv',mimeType:'text/csv',buffer:Buffer.from('Position,Forename,Surname,Tag,Time\n1,New,Synthetic,101,00:40:00.1')});
   await page.getByRole('button',{name:'Check source & duplicates'}).click();
   await page.getByRole('button',{name:/Select all without a match/}).waitFor();
@@ -35,7 +38,6 @@ try{
   assert(await button.isDisabled(),'Publication starts disabled');
   await page.getByRole('combobox',{name:/^Show/}).selectOption('all');
   assert(await page.getByLabel('Create profile for New Synthetic').isChecked());
-  // Read the native OPTION itself rather than a locator state retargeted to SELECT.
   const protectedOption=page.getByLabel('Match Protected Synthetic',{exact:true}).locator('option[value="12"]');
   const protectedState=await protectedOption.evaluate(option=>({disabled:option.disabled,attribute:option.hasAttribute('disabled'),text:option.textContent}));
   assert.equal(protectedState.disabled,true,JSON.stringify(protectedState));
@@ -66,12 +68,13 @@ try{
   await page.getByRole('button',{name:'Check source & duplicates'}).click();
   await page.getByRole('button',{name:/Select all without a match/}).waitFor();
   await page.screenshot({path:'artifacts/import-mobile.png',fullPage:true});
-  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),'The mobile page must not overflow horizontally');
+  const mobile=await page.evaluate(()=>({width:window.innerWidth,scroll:document.documentElement.scrollWidth,overflow:[...document.querySelectorAll('fieldset,legend,section,input,select,button')].filter(el=>el.getBoundingClientRect().right>window.innerWidth).map(el=>({tag:el.tagName,class:el.className,width:el.getBoundingClientRect().width,text:el.textContent?.slice(0,80)}))}));
+  assert(mobile.scroll<=mobile.width+1,`The mobile page must not overflow horizontally: ${JSON.stringify(mobile)}`);
   await page.getByLabel('Race name',{exact:true}).fill('Changed Synthetic Race');
   assert.equal(await page.getByRole('button',{name:/Import \d+ selected/}).count(),0,'Editing metadata clears the stale review');
   assert.equal(await page.evaluate(()=>window.testImportCalls.length),2);
   assert.deepEqual(errors,[]);
-  console.log('PASS: actual React import screen, file upload, no automatic write, bulk selection, protected native options, explicit confirmations, identity-note gating, receipt links, stale-review reset and mobile width. APIs are synthetic mocks, not a signed-in production import.');
+  console.log('PASS: actual React import screen, application styles, file upload, no automatic write, bulk selection, protected native options, explicit confirmations, identity-note gating, receipt links, stale-review reset and mobile width. APIs are synthetic mocks, not a signed-in production import.');
 } catch(error) {
   if(page){await page.screenshot({path:'artifacts/import-failure.png',fullPage:true});writeFileSync('artifacts/import-failure.html',await page.content());}
   throw error;
