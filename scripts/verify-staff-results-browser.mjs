@@ -1,10 +1,12 @@
 import assert from "node:assert/strict";
 import { mkdirSync, writeFileSync, rmSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
+import { createRequire } from "node:module";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
-import { chromium } from "playwright";
+const require=createRequire(import.meta.url);
+const {chromium}=require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 const root=resolve('artifacts/import-ui-fixture');mkdirSync(root,{recursive:true});
 const row=(index,name,state,candidates=[])=>({index,name,givenName:name.split(' ')[0],familyName:name.split(' ')[1],gender:'M',category:'MO',club:'Synthetic Club',bib:String(100+index),place:index,genderPlace:index,categoryPlace:index,timeText:'00:40:00.1',chipText:'00:40:00.1',gunText:'',finishSeconds:2400.1,chipSeconds:2400.1,gunSeconds:null,issues:state==='blocked'?['Synthetic source conflict']:[],state,candidates,note:state==='review'?'Possible existing identity; staff review required':'Synthetic test record'});
 const review={rows:[row(1,'New Synthetic','new'),row(2,'Existing Synthetic','review',[{id:10,name:'Existing Synthetic',slug:'existing-synthetic',club:'Synthetic Club',visibility:'public',managed:false}]),row(3,'Protected Synthetic','review',[{id:12,name:'Protected Synthetic',slug:'protected-synthetic',club:'',visibility:'private',managed:true}]),row(4,'Duplicate Synthetic','duplicate'),row(5,'Conflict Synthetic','blocked')],summary:{total:5,new:1,review:2,duplicate:1,blocked:1,identitiesChecked:20},sourceRows:5,sourceHash:'b'.repeat(64),reviewHash:'a'.repeat(64),event:{id:1},edition:{id:2}};
@@ -18,8 +20,9 @@ writeFileSync(resolve(root,'main.tsx'),`import React from 'react';import {create
 writeFileSync(resolve(root,'index.html'),'<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Isolated AthRecs import test</title></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
 const server=await createServer({configFile:false,root,plugins:[react(),tailwindcss()],resolve:{alias:[{find:'@/lib/staff-results-upload/api',replacement:resolve(root,'api.js')},{find:'@tanstack/react-router',replacement:resolve(root,'router.js')},{find:'@',replacement:resolve('src')}]},server:{host:'127.0.0.1',port:8099,strictPort:true,fs:{allow:[process.cwd()]}}});
 await server.listen();const browser=await chromium.launch({headless:true});
+let page;
 try{
-  const page=await browser.newPage({viewport:{width:1365,height:1000}}),errors=[];
+  page=await browser.newPage({viewport:{width:1365,height:1000}});const errors=[];
   page.on('pageerror',error=>errors.push(error.message));
   await page.route('**/*',route=>{const u=new URL(route.request().url());return u.hostname==='127.0.0.1'?route.continue():route.abort();});
   await page.goto('http://127.0.0.1:8099');await page.getByRole('heading',{name:'Import athletes & race results'}).waitFor();
@@ -32,7 +35,11 @@ try{
   assert(await button.isDisabled(),'Publication starts disabled');
   await page.getByRole('combobox',{name:/^Show/}).selectOption('all');
   assert(await page.getByLabel('Create profile for New Synthetic').isChecked());
-  assert(await page.getByRole('option',{name:/Protected Synthetic.*Protected/}).isDisabled());
+  // Read the native OPTION itself rather than a locator state retargeted to SELECT.
+  const protectedOption=page.getByLabel('Match Protected Synthetic',{exact:true}).locator('option[value="12"]');
+  const protectedState=await protectedOption.evaluate(option=>({disabled:option.disabled,attribute:option.hasAttribute('disabled'),text:option.textContent}));
+  assert.equal(protectedState.disabled,true,JSON.stringify(protectedState));
+  assert.equal(protectedState.attribute,true,'The protected native option must carry disabled');
   assert.equal(await page.getByRole('checkbox',{name:/Create profile/}).count(),1,'Blocked and duplicate entries cannot be selected as new');
   await page.screenshot({path:'artifacts/import-desktop.png',fullPage:true});
   await page.getByRole('checkbox',{name:/I am authorised to import/}).check();
@@ -64,5 +71,8 @@ try{
   assert.equal(await page.getByRole('button',{name:/Import \d+ selected/}).count(),0,'Editing metadata clears the stale review');
   assert.equal(await page.evaluate(()=>window.testImportCalls.length),2);
   assert.deepEqual(errors,[]);
-  console.log('PASS: actual React import screen, file upload, no automatic write, bulk selection, protected options, explicit confirmations, identity-note gating, receipt links, stale-review reset and mobile width. APIs are synthetic mocks, not a signed-in production import.');
+  console.log('PASS: actual React import screen, file upload, no automatic write, bulk selection, protected native options, explicit confirmations, identity-note gating, receipt links, stale-review reset and mobile width. APIs are synthetic mocks, not a signed-in production import.');
+} catch(error) {
+  if(page){await page.screenshot({path:'artifacts/import-failure.png',fullPage:true});writeFileSync('artifacts/import-failure.html',await page.content());}
+  throw error;
 } finally {await browser.close();await server.close();rmSync(root,{recursive:true,force:true});}
