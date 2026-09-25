@@ -49,8 +49,6 @@ async function uploadedRows(input: UploadInput): Promise<UploadRow[]> {
     for (let i = 1; i <= sheet.columnCount; i++) {
       const c = row.getCell(i);
       if (c.type === ValueType.Formula || c.type === ValueType.Error) throw new Error("Use values, not formulas or error cells, in the results workbook.");
-      // ExcelJS decodes time-formatted numeric cells as Date objects. Reverse
-      // its UTC date conversion instead of turning a duration into locale text.
       const value = c.value;
       if (value instanceof Date) {
         const serial = 25569 + value.getTime() / 86400000 - (wb.properties.date1904 ? 1462 : 0);
@@ -100,7 +98,8 @@ async function verifySource(input: UploadInput, rows: UploadRow[]) {
   return { sourceHash: hash(capture), sourceRows: capture.rowCount };
 }
 type ExistingResult = { id: number; athleteId: number; name: string; bib: string; source: string; finish: number | null; chip: number | null; gun: number | null; place: number | null; gp: number | null; cp: number | null; category: string };
-async function plan(sql: Sql, input: UploadInput, rows: UploadRow[], source: { sourceHash: string; sourceRows: number }) {
+/** SELECT-only plan, shared by preview and by the explicit import transaction. */
+export async function planUpload(sql: Sql, input: UploadInput, rows: UploadRow[], source: { sourceHash: string; sourceRows: number }) {
   const identities = await sql<IdentityCandidate>`
     select a.id, a.display_name as name, a.slug, coalesce(c.name,a.source_club_name,'') as club,
       a.profile_visibility as visibility,
@@ -112,6 +111,7 @@ async function plan(sql: Sql, input: UploadInput, rows: UploadRow[], source: { s
     from athlete_private_profiles p join "user" u on u."id"=p.user_id
     limit 100001`;
   if (identities.length > 100000) throw new Error("Directory is too large for this bounded review; no incomplete comparison is allowed.");
+  identities.sort((a,b) => (a.id ?? Number.MAX_SAFE_INTEGER) - (b.id ?? Number.MAX_SAFE_INTEGER) || JSON.stringify(a).localeCompare(JSON.stringify(b)));
   const events = await sql<{ id: number; slug: string; name: string; sport: string }>`select id,slug,name,sport from events where slug=${slug(input.eventName)} or regexp_replace(lower(name),'[^a-z0-9]','','g')=${normalize(input.eventName)}`;
   if (events.length > 1 || events.some(e => !['Running','Athletics'].includes(e.sport))) throw new Error("Existing race identity is ambiguous; resolve the event before importing.");
   const event = events[0] ?? null;
@@ -130,9 +130,14 @@ async function plan(sql: Sql, input: UploadInput, rows: UploadRow[], source: { s
   const summary = { total: reviewed.length, new: reviewed.filter(r=>r.state==='new').length, review: reviewed.filter(r=>r.state==='review').length, duplicate: reviewed.filter(r=>r.state==='duplicate').length, blocked: reviewed.filter(r=>r.state==='blocked').length, identitiesChecked: identities.length };
   return { rows: reviewed, summary, event, edition, ...source, reviewHash: hash({ metadata: { ...input, content: hash(input.content) }, reviewed, event, edition, source }) };
 }
-export async function previewUpload(input: UploadInput) {
+/** Source checks only; this helper never writes or connects to a substitute database. */
+export async function prepareUpload(input: UploadInput) {
   assertInput(input);
   if (dbSource !== "neon") throw new Error("The live database connection is not configured. No seed-catalogue substitute is used for duplicate checking.");
   const rows = await uploadedRows(input), source = await verifySource(input, rows);
-  return plan(await getSql(), input, rows, source);
+  return { rows, source };
+}
+export async function previewUpload(input: UploadInput) {
+  const prepared = await prepareUpload(input);
+  return planUpload(await getSql(), input, prepared.rows, prepared.source);
 }
