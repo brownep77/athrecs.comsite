@@ -35,6 +35,12 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
   {
+    to: "/admin/check-results-upload",
+    label: "Import athletes & results",
+    icon: Database,
+    match: (path: string) => path === "/admin/check-results-upload",
+  },
+  {
     to: "/admin/club-scanner",
     label: "Club athlete scanner",
     icon: UserRoundCog,
@@ -209,9 +215,11 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
       setSigningIn(true);
       setSignInError(null);
       try {
+        // Fixed first-party destination, never an arbitrary user-supplied redirect.
+        const returnTo = pathname === "/admin/check-results-upload" ? "/admin/check-results-upload" : "/admin";
         await signIn("grok-google", {
-          callbackURL: "/admin",
-          errorCallbackURL: "/admin",
+          callbackURL: returnTo,
+          errorCallbackURL: returnTo,
         });
       } catch (error) {
         setSignInError(error instanceof Error ? error.message : "Google sign-in failed");
@@ -268,59 +276,33 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
       <header className="border-b border-slate-800 bg-slate-950 text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 md:px-6">
           <Link to="/admin" className="flex items-center gap-3 no-underline">
-            <img
-              src="/athrecs-logo-header.png"
-              alt="ATHRECS.com"
-              width={158}
-              height={32}
-              className="h-8 w-auto brightness-0 invert"
-            />
-            <span className="border-l border-slate-700 pl-3 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
-              Staff
-            </span>
+            <img src="/athrecs-logo-header.png" alt="ATHRECS.com" width={158} height={32} className="h-8 w-auto brightness-0 invert" />
+            <span className="border-l border-slate-700 pl-3 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">Staff</span>
           </Link>
           <div className="flex items-center gap-3 text-sm">
-            <span className="hidden max-w-64 truncate text-slate-300 sm:block">
-              {access.data.email}
-            </span>
-            <button
-              type="button"
-              onClick={() => void signOut("/admin")}
-              className="inline-flex min-h-10 items-center gap-2 rounded-md border border-slate-700 px-3 font-medium text-white transition-colors hover:border-cyan-400 hover:text-cyan-200"
-            >
-              <LogOut className="size-4" aria-hidden="true" />
-              Sign out
+            <span className="hidden max-w-64 truncate text-slate-300 sm:block">{access.data.email}</span>
+            <button type="button" onClick={() => void signOut("/admin")} className="inline-flex min-h-10 items-center gap-2 rounded-md border border-slate-700 px-3 font-medium text-white transition-colors hover:border-cyan-400 hover:text-cyan-200">
+              <LogOut className="size-4" aria-hidden="true" />Sign out
             </button>
           </div>
         </div>
         <nav className="border-t border-slate-800" aria-label="Staff tools">
           <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 md:px-6">
             {staffNav
-              .filter((item) => IS_ATHRECS_SITE || item.to !== "/admin/partnerships")
+              .filter((item) => IS_ATHRECS_SITE || (item.to !== "/admin/partnerships" && item.to !== "/admin/check-results-upload"))
               .map((item) => {
                 const active = item.match(pathname);
                 return (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    className={cn(
-                      "inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 text-sm font-medium no-underline transition-colors",
-                      active
-                        ? "bg-cyan-300 text-slate-950"
-                        : "text-slate-300 hover:bg-slate-800 hover:text-white",
-                    )}
-                  >
-                    <item.icon className="size-4" aria-hidden="true" />
-                    {item.label}
+                  <Link key={item.to} to={item.to} className={cn(
+                    "inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 text-sm font-medium no-underline transition-colors",
+                    active ? "bg-cyan-300 text-slate-950" : "text-slate-300 hover:bg-slate-800 hover:text-white",
+                  )}>
+                    <item.icon className="size-4" aria-hidden="true" />{item.label}
                   </Link>
                 );
               })}
-            <a
-              href="https://www.athrecs.com"
-              className="ml-auto inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 text-sm font-medium text-slate-300 no-underline transition-colors hover:bg-slate-800 hover:text-white"
-            >
-              View ATHRECS
-              <ExternalLink className="size-4" aria-hidden="true" />
+            <a href="https://www.athrecs.com" className="ml-auto inline-flex min-h-10 shrink-0 items-center gap-2 rounded-md px-3 text-sm font-medium text-slate-300 no-underline transition-colors hover:bg-slate-800 hover:text-white">
+              View ATHRECS<ExternalLink className="size-4" aria-hidden="true" />
             </a>
           </div>
         </nav>
@@ -334,48 +316,27 @@ function StaffLoadingScreen({ label }: { label: string }) {
   return (
     <div className="flex min-h-dvh items-center justify-center bg-slate-950 px-4 text-white">
       <div className="flex items-center gap-3 text-sm text-slate-300">
-        <Loader2 className="size-5 animate-spin text-cyan-300" aria-hidden="true" />
-        {label}
+        <Loader2 className="size-5 animate-spin text-cyan-300" aria-hidden="true" />{label}
       </div>
     </div>
   );
 }
 
-function StaffNotice({
-  icon: Icon,
-  eyebrow,
-  title,
-  description,
-  children,
-}: {
-  icon: typeof LockKeyhole;
-  eyebrow: string;
-  title: string;
-  description: string;
-  children?: React.ReactNode;
+function StaffNotice({ icon: Icon, eyebrow, title, description, children }: {
+  icon: typeof LockKeyhole; eyebrow: string; title: string; description: string; children?: React.ReactNode;
 }) {
   return (
     <div className="flex min-h-dvh items-center justify-center bg-slate-950 px-4 py-10 text-white">
       <section className="w-full max-w-lg rounded-2xl border border-slate-700 bg-slate-900 p-6 shadow-2xl md:p-8">
         <div className="mb-6 flex items-center justify-between gap-4">
-          <img
-            src="/athrecs-logo-header.png"
-            alt="ATHRECS.com"
-            width={158}
-            height={32}
-            className="h-8 w-auto brightness-0 invert"
-          />
-          <div className="rounded-full border border-cyan-300/30 bg-cyan-300/10 p-2 text-cyan-300">
-            <Icon className="size-5" aria-hidden="true" />
-          </div>
+          <img src="/athrecs-logo-header.png" alt="ATHRECS.com" width={158} height={32} className="h-8 w-auto brightness-0 invert" />
+          <div className="rounded-full border border-cyan-300/30 bg-cyan-300/10 p-2 text-cyan-300"><Icon className="size-5" aria-hidden="true" /></div>
         </div>
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-300">{eyebrow}</p>
         <h1 className="mt-2 font-display text-3xl font-semibold text-white">{title}</h1>
         <p className="mt-3 text-sm leading-6 text-slate-300">{description}</p>
         {children ? <div className="mt-6 flex flex-wrap gap-3">{children}</div> : null}
-        <p className="mt-8 border-t border-slate-800 pt-4 text-xs text-slate-500">
-          Access attempts are checked again on every staff action.
-        </p>
+        <p className="mt-8 border-t border-slate-800 pt-4 text-xs text-slate-500">Access attempts are checked again on every staff action.</p>
       </section>
     </div>
   );
