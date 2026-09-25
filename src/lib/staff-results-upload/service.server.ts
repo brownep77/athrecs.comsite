@@ -49,7 +49,18 @@ async function uploadedRows(input: UploadInput): Promise<UploadRow[]> {
     for (let i = 1; i <= sheet.columnCount; i++) {
       const c = row.getCell(i);
       if (c.type === ValueType.Formula || c.type === ValueType.Error) throw new Error("Use values, not formulas or error cells, in the results workbook.");
-      cells.push(typeof c.value === "number" ? c.value : c.text);
+      // ExcelJS decodes time-formatted numeric cells as Date objects. Reverse
+      // its UTC date conversion instead of turning a duration into locale text.
+      const value = c.value;
+      if (value instanceof Date) {
+        const serial = 25569 + value.getTime() / 86400000 - (wb.properties.date1904 ? 1462 : 0);
+        if (!Number.isFinite(serial) || serial <= 0 || serial >= 7)
+          throw new Error("A calendar-date cell cannot be used as a finish duration.");
+        const column = normalize(sheet.getRow(1).getCell(i).text);
+        if (!["time", "chiptime", "guntime", "finishtime", "totaltime"].includes(column))
+          throw new Error("Date-formatted cells are only accepted in race-time columns.");
+        cells.push(serial);
+      } else cells.push(typeof value === "number" ? value : c.text);
     }
     table.push(cells);
   });
