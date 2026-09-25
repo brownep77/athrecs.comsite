@@ -94,7 +94,7 @@ async function verifySource(input: UploadInput, rows: UploadRow[]) {
     const matches = official.filter(o => o.bib === r.bib && normalize(o.name) === normalize(r.name));
     const o = matches[0];
     if (matches.length !== 1 || !o || o.issues.length || ["gender", "category", "club"].some(k => String(o[k as keyof UploadRow]) !== String(r[k as keyof UploadRow])) || ["finishSeconds", "chipSeconds", "gunSeconds", "place", "genderPlace", "categoryPlace"].some(k => o[k as keyof UploadRow] !== r[k as keyof UploadRow])) r.issues.push("Uploaded fields differ from the independent official source row");
-    r.issues.push(...audit.issues.filter(i => i.result_id === r.index).flatMap(i => i.flags), ...audit.comparisons.filter(c => c.result_id === r.index).flatMap(c => c.flags));
+    r.issues.push(...audit.issues.filter(i => "result_id" in i && i.result_id === r.index).flatMap(i => i.flags), ...audit.comparisons.filter(c => "result_id" in c && c.result_id === r.index).flatMap(c => c.flags));
   }
   if (audit.scope.untestedResults) throw new Error("Independent source comparison did not cover every uploaded row.");
   return { sourceHash: hash(capture), sourceRows: capture.rowCount };
