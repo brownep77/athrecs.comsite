@@ -10,13 +10,13 @@ const {chromium}=require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 const root=resolve('artifacts/import-ui-fixture');mkdirSync(root,{recursive:true});
 const row=(index,name,state,candidates=[])=>({index,name,givenName:name.split(' ')[0],familyName:name.split(' ')[1],gender:'M',category:'MO',club:'Synthetic Club',bib:String(100+index),place:index,genderPlace:index,categoryPlace:index,timeText:'00:40:00.1',chipText:'00:40:00.1',gunText:'',finishSeconds:2400.1,chipSeconds:2400.1,gunSeconds:null,issues:state==='blocked'?['Synthetic source conflict']:[],state,candidates,note:state==='review'?'Possible existing identity; staff review required':'Synthetic test record'});
 const review={rows:[row(1,'New Synthetic','new'),row(2,'Existing Synthetic','review',[{id:10,name:'Existing Synthetic',slug:'existing-synthetic',club:'Synthetic Club',visibility:'public',managed:false}]),row(3,'Protected Synthetic','review',[{id:12,name:'Protected Synthetic',slug:'protected-synthetic',club:'',visibility:'private',managed:true}]),row(4,'Duplicate Synthetic','duplicate'),row(5,'Conflict Synthetic','blocked')],summary:{total:5,new:1,review:2,duplicate:1,blocked:1,identitiesChecked:20},sourceRows:5,sourceHash:'b'.repeat(64),reviewHash:'a'.repeat(64),event:{id:1},edition:{id:2}};
-writeFileSync(resolve(root,'api.js'),`window.testImportCalls=[];export async function checkRaceUpload(){return ${JSON.stringify(review)}}
+const large={...review,rows:Array.from({length:430},(_,i)=>row(i+1,`Synthetic Runner ${i+1}`,'new')),summary:{total:430,new:430,review:0,duplicate:0,blocked:0,identitiesChecked:20000},sourceRows:430};
+writeFileSync(resolve(root,'api.js'),`window.testImportCalls=[];window.testCheckCalls=[];
+export async function checkRaceUpload({data}){window.testCheckCalls.push(data);if(window.testFailCheck)throw Error('Synthetic source check failed. Nothing was imported.');return window.testLargeReview?${JSON.stringify(large)}:${JSON.stringify(review)}}
 export async function importCheckedRaceUpload({data}){if(!data.rightsConfirmed||!data.identitiesConfirmed||data.decisions.some(d=>![1,2].includes(d.index)))throw Error('Unsafe mock request');window.testImportCalls.push(data);return {runId:data.requestId,editionId:2,createdProfiles:data.decisions.filter(d=>d.mode==='new').length,linkedProfiles:data.decisions.filter(d=>d.mode==='link').length,importedResults:data.decisions.length,heldRows:5-data.decisions.length,resultsPath:'/results/2',replay:false}}
 export async function downloadResultsUploadTemplate(){throw Error('Template is covered separately; this is an isolated UI fixture')}`);
 writeFileSync(resolve(root,'router.js'),'export const createFileRoute=()=>options=>({options});');
 const css=['src/styles.css','src/index.css','src/app.css'].find(existsSync);
-// The isolated Vite root is outside src. Explicitly scan the real component tree
-// so screenshots include the same utility classes as the application build.
 writeFileSync(resolve(root,'style.css'),(css?`@import "${resolve(css)}";`:'@import "tailwindcss";')+`\n@source "${resolve('src')}";\n`);
 writeFileSync(resolve(root,'main.tsx'),`import React from 'react';import {createRoot} from 'react-dom/client';import {Route} from '/@fs/${resolve('src/routes/admin/check-results-upload.tsx')}';import './style.css';const Component=Route.options.component;createRoot(document.getElementById('root')!).render(<div style={{maxWidth:1280,margin:'auto',padding:20}}><p style={{fontSize:12}}>ISOLATED UI TEST — SYNTHETIC DATA — NO LIVE DATABASE</p><Component/></div>);`);
 writeFileSync(resolve(root,'index.html'),'<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Isolated AthRecs import test</title></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
@@ -29,13 +29,55 @@ try{
   await page.route('**/*',route=>{const u=new URL(route.request().url());return u.hostname==='127.0.0.1'?route.continue():route.abort();});
   await page.goto('http://127.0.0.1:8099');await page.getByRole('heading',{name:'Import athletes & race results'}).waitFor();
   assert.equal(await page.getByLabel('Race name',{exact:true}).evaluate(el=>getComputedStyle(el).height),'44px','Application utility styles must be loaded');
-  await page.getByLabel('Choose Excel or CSV race results').setInputFiles({name:'synthetic.csv',mimeType:'text/csv',buffer:Buffer.from('Position,Forename,Surname,Tag,Time\n1,New,Synthetic,101,00:40:00.1')});
-  await page.getByRole('button',{name:'Check source & duplicates'}).click();
+  // Regression: no unexplained disabled source check and no hidden import step.
+  const check=page.getByRole('button',{name:'Check source & duplicates'});
+  assert(await check.isEnabled(),'The initial source check opens a file chooser, not a disabled dead end');
+  let button=page.getByRole('button',{name:'Import 0 selected & publish'});
+  assert(await button.isVisible(),'The import button must exist before a file is selected');
+  assert(await button.isDisabled(),'Showing the import button must not bypass source/identity checks');
+  assert.match(await page.locator('#import-readiness').innerText(),/Choose your Excel or CSV file/);
+  assert.equal(await page.evaluate(()=>window.testImportCalls.length),0);
+  await page.screenshot({path:'artifacts/import-empty-desktop.png',fullPage:true});
+  await page.setViewportSize({width:390,height:844});
+  assert(await check.isEnabled());assert(await button.isVisible());
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),'Empty mobile screen must fit');
+  await page.screenshot({path:'artifacts/import-empty-mobile.png',fullPage:true});
+  await page.setViewportSize({width:1365,height:1000});
+  const [chooser]=await Promise.all([page.waitForEvent('filechooser'),check.click()]);
+  assert.equal(await page.evaluate(()=>window.testCheckCalls.length),0,'No source request without an uploaded file');
+  await chooser.setFiles([]);
+  const input=page.getByLabel('Choose Excel or CSV race results');
+  await input.setInputFiles({name:'wrong.json',mimeType:'application/json',buffer:Buffer.from('{}')});
+  await page.getByRole('alert').waitFor();
+  assert.match(await page.getByRole('alert').innerText(),/not supported/);
+  assert(await check.isEnabled(),'Bad file must not leave the screen busy');
+  assert(await button.isDisabled());
+  await input.setInputFiles({name:'empty.csv',mimeType:'text/csv',buffer:Buffer.alloc(0)});
+  await page.waitForFunction(()=>document.querySelector('[role="alert"]')?.textContent?.includes('empty'));
+  assert(await check.isEnabled());
+  // Exercise a file-reader error, then recover using the same filename.
+  await page.evaluate(()=>{window.savedReadAsText=FileReader.prototype.readAsText;FileReader.prototype.readAsText=function(){queueMicrotask(()=>this.dispatchEvent(new Event('error')));};});
+  const synthetic={name:'synthetic.csv',mimeType:'text/csv',buffer:Buffer.from('Position,Forename,Surname,Tag,Time\n1,New,Synthetic,101,00:40:00.1')};
+  await input.setInputFiles(synthetic);
+  await page.waitForFunction(()=>document.querySelector('[role="alert"]')?.textContent?.includes('could not be read'));
+  assert(await check.isEnabled());assert(await button.isDisabled());
+  await page.evaluate(()=>{FileReader.prototype.readAsText=window.savedReadAsText;});
+  const [validChooser]=await Promise.all([page.waitForEvent('filechooser'),page.getByRole('button',{name:'Choose Excel or CSV file',exact:true}).click()]);
+  await validChooser.setFiles(synthetic);
+  await page.getByText('File ready: synthetic.csv',{exact:true}).waitFor();
+  assert.equal(await page.getByRole('alert').count(),0);
+  assert.match(await page.locator('#import-readiness').innerText(),/Click Check source & duplicates/);
+  assert(await button.isDisabled(),'Loaded file is not an approved review');
+  await page.getByRole('button',{name:'Download blank Excel template'}).click();
+  await page.getByText('Template is covered separately; this is an isolated UI fixture',{exact:true}).waitFor();
+  assert(await check.isEnabled(),'Template failure must not block the selected file');
+  await check.click();
   await page.getByRole('button',{name:/Select all without a match/}).waitFor();
   assert.equal(await page.evaluate(()=>window.testImportCalls.length),0,'Loading/checking never submits an import');
   await page.getByRole('button',{name:/Select all without a match/}).click();
-  let button=page.getByRole('button',{name:'Import 1 selected & publish'});
+  button=page.getByRole('button',{name:'Import 1 selected & publish'});
   assert(await button.isDisabled(),'Publication starts disabled');
+  assert.match(await page.locator('#import-readiness').innerText(),/tick both approval boxes/);
   await page.getByRole('combobox',{name:/^Show/}).selectOption('all');
   assert(await page.getByLabel('Create profile for New Synthetic').isChecked());
   const protectedOption=page.getByLabel('Match Protected Synthetic',{exact:true}).locator('option[value="12"]');
@@ -43,6 +85,11 @@ try{
   assert.equal(protectedState.disabled,true,JSON.stringify(protectedState));
   assert.equal(protectedState.attribute,true,'The protected native option must carry disabled');
   assert.equal(await page.getByRole('checkbox',{name:/Create profile/}).count(),1,'Blocked and duplicate entries cannot be selected as new');
+  // Cancelling a replacement file picker keeps the existing review/selection.
+  const [cancelChooser]=await Promise.all([page.waitForEvent('filechooser'),page.getByRole('button',{name:'Choose a different file'}).click()]);
+  await cancelChooser.setFiles([]);
+  assert(await button.isVisible());
+  assert(await page.getByLabel('Create profile for New Synthetic').isChecked());
   await page.screenshot({path:'artifacts/import-desktop.png',fullPage:true});
   await page.getByRole('checkbox',{name:/I am authorised to import/}).check();
   assert(await button.isDisabled(),'One confirmation alone is insufficient');
@@ -53,7 +100,7 @@ try{
   assert.deepEqual(first.decisions.map(d=>d.index),[1]);
   assert.equal(first.confirmation,'IMPORT SELECTED RESULTS');
   assert.equal(await page.getByRole('link',{name:'View this race’s results'}).getAttribute('href'),'https://www.athrecs.com/results/2');
-  await page.getByRole('button',{name:'Check source & duplicates'}).click();
+  await check.click();
   await page.getByLabel('Match Existing Synthetic',{exact:true}).selectOption('10');
   button=page.getByRole('button',{name:'Import 1 selected & publish'});
   await page.getByRole('checkbox',{name:/I am authorised to import/}).check();
@@ -65,16 +112,36 @@ try{
   await button.click();await page.getByRole('heading',{name:'Import complete',exact:true}).waitFor();
   assert.equal((await page.evaluate(()=>window.testImportCalls[1])).decisions[0].athleteId,10);
   await page.setViewportSize({width:390,height:844});
-  await page.getByRole('button',{name:'Check source & duplicates'}).click();
+  await check.click();
   await page.getByRole('button',{name:/Select all without a match/}).waitFor();
   await page.screenshot({path:'artifacts/import-mobile.png',fullPage:true});
-  const mobile=await page.evaluate(()=>({width:window.innerWidth,scroll:document.documentElement.scrollWidth,overflow:[...document.querySelectorAll('fieldset,legend,section,input,select,button')].filter(el=>el.getBoundingClientRect().right>window.innerWidth).map(el=>({tag:el.tagName,class:el.className,width:el.getBoundingClientRect().width,text:el.textContent?.slice(0,80)}))}));
-  assert(mobile.scroll<=mobile.width+1,`The mobile page must not overflow horizontally: ${JSON.stringify(mobile)}`);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),'The mobile page must not overflow horizontally');
   await page.getByLabel('Race name',{exact:true}).fill('Changed Synthetic Race');
-  assert.equal(await page.getByRole('button',{name:/Import \d+ selected/}).count(),0,'Editing metadata clears the stale review');
+  button=page.getByRole('button',{name:'Import 0 selected & publish'});
+  assert(await button.isVisible(),'Editing metadata keeps the import step visible');
+  assert(await button.isDisabled(),'Editing metadata clears the stale review and approvals');
+  assert.equal(await page.getByRole('checkbox',{name:/Create profile/}).count(),0);
+  assert(await page.getByRole('checkbox',{name:/I have reviewed the selected/}).isDisabled());
+  await page.evaluate(()=>{window.testFailCheck=true;});
+  await check.click();
+  await page.getByText('Synthetic source check failed. Nothing was imported.',{exact:true}).waitFor();
+  assert(await check.isEnabled());assert(await button.isDisabled());
+  assert.equal(await page.evaluate(()=>window.testImportCalls.length),2,'No import on failed or stale review');
+  // Large results lists must not bury the import controls below hundreds of rows.
+  await page.evaluate(()=>{window.testFailCheck=false;window.testLargeReview=true;});
+  await check.click();
+  await page.getByRole('button',{name:'Select all without a match (430)'}).click();
+  const table=page.getByRole('region',{name:'Race entries review table'});
+  const size=await table.evaluate(el=>({height:el.clientHeight,scroll:el.scrollHeight}));
+  assert(size.height<=450 && size.scroll>size.height,'430 rows stay inside a bounded scroll area');
+  assert(await page.getByRole('button',{name:'Import 430 selected & publish'}).isVisible());
+  assert(await page.getByRole('button',{name:'Import 430 selected & publish'}).isDisabled());
+  await page.getByRole('link',{name:'Continue to import',exact:true}).click();
+  assert(await page.locator('#import-confirmation').evaluate(el=>el.getBoundingClientRect().top<window.innerHeight),'Import jump reaches the controls');
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1),'430-row mobile screen must fit');
   assert.equal(await page.evaluate(()=>window.testImportCalls.length),2);
   assert.deepEqual(errors,[]);
-  console.log('PASS: actual React import screen, application styles, file upload, no automatic write, bulk selection, protected native options, explicit confirmations, identity-note gating, receipt links, stale-review reset and mobile width. APIs are synthetic mocks, not a signed-in production import.');
+  console.log('PASS: visible import step before/after file checks, actionable file chooser, invalid/empty/read-failed files, same-file retry, cancellation, source/template failure recovery, explicit confirmations, protected identities, receipt links, stale-review reset, 430-row scroll and mobile layout. Only synthetic APIs/data; no signed-in production import.');
 } catch(error) {
   if(page){await page.screenshot({path:'artifacts/import-failure.png',fullPage:true});writeFileSync('artifacts/import-failure.html',await page.content());}
   throw error;
