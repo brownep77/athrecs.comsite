@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, SearchCheck, Users, UserRound, CalendarDays, Handshake } from "lucide-react";
+import { Home, SearchCheck, Users, UserRound, CalendarDays, Handshake, Trophy } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import { cn } from "@/lib/utils";
@@ -11,6 +11,12 @@ const nav = [
     label: "Athletes",
     icon: Users,
     match: (p: string) => p.startsWith("/athletes"),
+  },
+  {
+    to: "/results",
+    label: "Results",
+    icon: Trophy,
+    match: (p: string) => p === "/results" || p.startsWith("/results/"),
   },
   {
     to: "/my-athlete-profile",
@@ -87,11 +93,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     : "text-muted hover:bg-elevated/60 hover:text-fg",
                 )}
               >
-                <item.icon
-                  className="hidden size-4 lg:block"
-                  strokeWidth={1.75}
-                  aria-hidden="true"
-                />
                 {item.label}
               </Link>
             ))}
@@ -109,6 +110,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
+          <Link to="/results" className="hover:text-accent">Results</Link>
           <Link to="/brands" className="hover:text-accent">
             Brands & Partners
           </Link>
@@ -130,7 +132,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md lg:hidden"
         aria-label="Primary"
       >
-        <ul className="mx-auto grid max-w-xl grid-cols-6 px-1 pt-1">
+        <ul className="mx-auto grid max-w-xl grid-cols-7 px-1 pt-1">
           {nav.map((item) => {
             const active = item.match(pathname);
             return (
