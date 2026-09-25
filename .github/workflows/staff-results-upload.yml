@@ -4,7 +4,8 @@ on:
     paths:
       - 'src/lib/staff-results-upload/**'
       - 'src/routes/admin/check-results-upload.tsx'
-      - 'scripts/verify-staff-results-upload.mjs'
+      - 'src/components/staff/StaffMicrositeShell.tsx'
+      - 'scripts/verify-staff-results-*.mjs'
       - '.github/workflows/staff-results-upload.yml'
   workflow_dispatch:
 permissions:
@@ -26,10 +27,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Synthetic CSV, Excel, database and no-write tests
+      - name: Synthetic CSV, Excel, source and read-only review tests
         run: node scripts/verify-staff-results-upload.mjs
+      - name: Migrated-schema synthetic imports, rollback and repeat safety
+        run: node scripts/verify-staff-results-commit.mjs
       - name: Generate routes and build without migration or publication hooks
         run: npx vite build --mode development
       - run: npm run typecheck
       - name: Lint changed code
-        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx scripts/verify-staff-results-upload.mjs
+        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx scripts/verify-staff-results-upload.mjs scripts/verify-staff-results-commit.mjs
