@@ -1,0 +1,35 @@
+name: Staff results upload check
+on:
+  pull_request:
+    paths:
+      - 'src/lib/staff-results-upload/**'
+      - 'src/routes/admin/check-results-upload.tsx'
+      - 'scripts/verify-staff-results-upload.mjs'
+      - '.github/workflows/staff-results-upload.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: staff-results-upload-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  upload-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: ''
+      VITE_SITE_BRAND: athrecs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Synthetic CSV, Excel, database and no-write tests
+        run: node scripts/verify-staff-results-upload.mjs
+      - name: Generate routes and build without migration or publication hooks
+        run: npx vite build --mode development
+      - run: npm run typecheck
+      - name: Lint changed code
+        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx scripts/verify-staff-results-upload.mjs
