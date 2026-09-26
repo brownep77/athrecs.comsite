@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, Search, LayoutGrid } from "lucide-react";
 
-export const backendTasks = [
+const backendTasks = [
   { title: "Import athletes & race results", group: "Athletes & results", path: "/admin/check-results-upload", description: "Upload Excel or CSV, check existing athletes, select clear entries together, then confirm publication.", keywords: "upload spreadsheet chip gun duplicate Marriott" },
   { title: "Find and manage athletes", group: "Athletes & results", path: "/admin/athlete-directory", description: "Search public and private profiles, open an athlete, export the directory or review visibility changes.", keywords: "athlete directory profile edit public private bulk export" },
   { title: "Import history & race coverage", group: "Athletes & results", path: "/admin/result-archive", description: "See ingestion runs, race coverage and recorded import outcomes. Check what was actually saved.", keywords: "results archive receipts batches errors" },
