@@ -240,7 +240,8 @@ function AthleteHomePage() {
               Your next event starts here
             </h2>
             <p className="mt-1 text-xs text-muted">
-              Compare road marathons across six countries and explore event sites for other sports.
+              Compare road marathons across seven countries and explore event sites for other
+              sports.
             </p>
           </div>
         </div>
@@ -251,6 +252,12 @@ function AthleteHomePage() {
           >
             Running <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
+          <a
+            href="https://www.runrecs.com/races"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-border px-4 text-sm font-semibold text-fg no-underline"
+          >
+            RunRecs race calendar <ArrowRight className="size-4" aria-hidden="true" />
+          </a>
           <Link
             to="/find-events"
             className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-border px-4 text-sm font-semibold text-fg no-underline"
