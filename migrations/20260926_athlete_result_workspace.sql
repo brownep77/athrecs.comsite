@@ -30,3 +30,31 @@ create table if not exists athlete_result_review_invitations (
   created_at timestamptz not null default now()
 );
 create index if not exists athlete_result_review_batch on athlete_result_review_invitations (batch_id);
+
+-- Extra guard for this new, explicitly approved proposal writer only.
+-- A bib is an edition-scoped source-row locator, never a global athlete identifier.
+-- Existing importers and existing records are not modified by this migration.
+create or replace function athlete_workspace_source_assignment_guard()
+returns trigger language plpgsql security invoker set search_path = public as $$
+begin
+  if new.result_source = 'Staff-reviewed submissions'
+    and new.result_details ? 'proposal'
+    and coalesce(btrim(new.bib),'') <> ''
+    and coalesce(new.source_url,'') <> '' then
+    perform pg_advisory_xact_lock(hashtext('athrecs:workspace-source-result'),
+      hashtext(new.edition_id::text || '|' || split_part(new.source_url,'#',1) || '|' || btrim(new.bib)));
+    if exists (
+      select 1 from results r
+      where r.edition_id = new.edition_id and r.athlete_id <> new.athlete_id
+        and btrim(r.bib) = btrim(new.bib)
+        and split_part(r.source_url,'#',1) = split_part(new.source_url,'#',1)
+    ) then
+      raise exception 'This source result is already assigned to another athlete. Review the existing assignment; nothing was copied.' using errcode = '23505';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+drop trigger if exists athlete_workspace_source_assignment on results;
+create trigger athlete_workspace_source_assignment before insert on results
+for each row execute function athlete_workspace_source_assignment_guard();
