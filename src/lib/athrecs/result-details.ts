@@ -14,6 +14,9 @@ export const resultDetailsSchema = z.object({
   disqualification: disqualificationSchema.optional(),
   splits: z.array(z.object({ label: z.string(), time: z.string() })).optional(),
   note: z.string().max(2000).optional(),
+  // Display exclusion only. Original source result and race archive remain intact.
+  // Actor identities and reasons are retained in the staff audit, not this shape.
+  profileExcluded: z.boolean().optional(),
 });
 export type ResultDetails = z.infer<typeof resultDetailsSchema>;
 export function readResultDetails(value: unknown): ResultDetails {

@@ -24,7 +24,7 @@ try {
   await page.goto("http://127.0.0.1:8101");
   await page.getByRole("heading", { name: "What would you like to do?" }).waitFor();
   const cards = page.locator('[aria-label="Backend tasks"] article');
-  assert.equal(await cards.count(), 17);
+  assert.equal(await cards.count(), 18);
   const paths = await cards.locator("a").evaluateAll(anchors => anchors.map(anchor => anchor.getAttribute("href")));
   assert.equal(new Set(paths).size, paths.length);
   for (const path of paths) {
@@ -37,6 +37,7 @@ try {
     const route = name === "index.tsx" ? "/admin" : `/admin/${name.slice(0, -4)}`;
     assert(covered.has(route), `Top-level staff tool missing from panel: ${route}`);
   }
+  assert.equal(await page.getByRole('link',{name:'Edit profiles & pasted results',exact:true}).getAttribute('href'),'/admin/athlete-workspace');
   const linksCard = cards.filter({ has: page.getByRole("heading", { name: "Import official results-page links", exact: true }) });
   assert.match(await linksCard.innerText(), /adds links, not runners or finish times/);
   assert.equal(await linksCard.getByRole("link").getAttribute("href"), "/admin/result-links");
@@ -45,14 +46,16 @@ try {
   await page.getByLabel("Find a backend task").fill("duplicates");
   assert.equal(await cards.count(), 1);
   assert.equal(await cards.getByRole("link").getAttribute("href"), "/admin/check-results-upload");
+  await page.getByLabel('Find a backend task').fill('confirmations');
+  assert.equal(await cards.count(),1);assert.equal(await cards.getByRole('link').getAttribute('href'),'/admin/athlete-workspace');
   await page.getByLabel("Find a backend task").fill("does-not-exist-xyz");
   assert.equal(await cards.count(), 0);
   await page.getByRole("button", { name: "Show all tasks", exact: true }).click();
-  assert.equal(await cards.count(), 17);
+  assert.equal(await cards.count(), 18);
   await page.getByRole("button", { name: "Maintenance & data", exact: true }).click();
   assert.equal(await cards.count(), 3);
   await page.getByRole("button", { name: "All tasks", exact: true }).click();
-  assert.equal(await cards.count(), 17);
+  assert.equal(await cards.count(), 18);
   assert.equal(await page.getByRole("link", { name: "Import athletes & results", exact: true }).getAttribute("href"), "/admin/check-results-upload");
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
@@ -63,7 +66,7 @@ try {
   assert.match(shell, /id="legacy-admin-tools"/);
   assert.doesNotMatch(readFileSync("src/components/staff/BackendTaskPanel.tsx", "utf8"), /createServerFn|getSql|fetch\(|localStorage/);
   assert.deepEqual(errors, []);
-  console.log("PASS: all top-level staff routes covered, 17 distinct tool links, accurate results-link purpose, duplicates search opens athlete/results importer, search/reset/categories, no writes or live requests, preserved authentication/brand gate and desktop/mobile navigation layout.");
+  console.log("PASS: all top-level staff routes covered, 18 distinct tool links, editing/confirmation route, accurate results-link purpose, duplicate searches, preserved authentication/brand gate and desktop/mobile navigation.");
 } catch (error) {
   if (page) await page.screenshot({ path: "artifacts/import-backend-tasks-failure.png", fullPage: true });
   throw error;
