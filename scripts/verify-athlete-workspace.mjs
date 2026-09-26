@@ -27,6 +27,7 @@ try{
   for(const name of readdirSync('migrations').filter(n=>n.endsWith('.sql')).sort())await client.query(readFileSync(`migrations/${name}`,'utf8'));
   for(const actor of [staff,owner,stranger])await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values(${actor.userId},'Synthetic account',${actor.userId+'@example.test'},true,now(),now())`;
   const [a]=await sql`insert into athletes(slug,display_name,profile_visibility) values('workspace-unmanaged-synthetic','Workspace Unmanaged Synthetic','public') returning id`;
+  const [other]=await sql`insert into athletes(slug,display_name,profile_visibility) values('workspace-other-synthetic','Workspace Other Synthetic','public') returning id`;
   const [managed]=await sql`insert into athletes(slug,display_name,profile_visibility) values('workspace-managed-synthetic','Workspace Managed Synthetic','public') returning id`;
   await sql`insert into athlete_account_links(athlete_id,user_id,user_email) values(${managed.id},${owner.userId},'workspace-owner@example.test')`;
   await assert.rejects(()=>service.workspace(a.id,owner),/linked athlete/);
@@ -40,9 +41,11 @@ try{
   await service.editProfile({athleteId:managed.id,version:ownView.profileVersion,fields:{...mf,city:'Owner supplied city'},reason:'Own profile correction authorised.'},owner);
   const parsed=core.parsePaste('Meeting\tDate\tEvent\tPerf\nSynthetic race\t20 Sep 2026\t10K\t00:40:00.1',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'});
   assert.equal(parsed[0].date,'2026-09-20');assert.equal(core.resultIssues(parsed[0]).length,0);
-  assert.equal(core.isoDate('01/02/2026','month-first'),'2026-01-02');assert.equal(core.isoDate('20/09/26'),'20/09/26');
+  assert.equal(core.isoDate('01/02/2026','month-first'),'2026-01-02');assert.equal(core.isoDate('20-09-2026'),'2026-09-20');assert.equal(core.isoDate('20/09/26'),'20/09/26');
   assert(core.resultIssues({...row(1),date:'2026-02-30'}).length);assert(core.resultIssues({...row(1),time:'40:00c'}).length);
   assert.throws(()=>core.parsePaste('A,B\n1,2',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'}));
+  assert.throws(()=>core.parsePaste('Race,Date,Chip Time,Gun Time\nExample,2026-09-20,40:00,40:01',{sourceUrl:source,timingBasis:'chip',dateOrder:'day-first'}),/More than one/);
+  assert.throws(()=>core.tableCells('Race,Date,Time\nExample,40:00'),/column counts/);
   assert.equal(core.httpsUrl.safeParse('javascript:alert(1)').success,false);assert.equal(core.httpsUrl.safeParse('https://user:secret@example.test/').success,false);
   const saved=await makeBatch(a.id,[row(1),row(2,'Second Workspace Synthetic 10K')]);
   assert.equal((await sql`select count(*)::integer as n from results where athlete_id=${a.id}`)[0].n,0,'Saving pasted candidates cannot publish');
@@ -67,6 +70,9 @@ try{
   await service.excludeResult(removal,staff);
   let current=(await sql`select * from results where id=${storedResult.id}`)[0];assert.equal(current.result_details.profileExcluded,true);assert.equal(current.result_visibility,'public');
   await service.excludeResult({...removal,excluded:false},staff);current=(await sql`select * from results where id=${storedResult.id}`)[0];assert.equal(current.result_details.profileExcluded,false);
+  const foreign=await makeBatch(other.id,[{...row(1,'Second Workspace Synthetic 10K'),bib:'2',place:'2'}]);const beforeForeign=await snapshot();
+  await assert.rejects(()=>publication.reviewBatch(request(foreign.id,1,other.id,[1]),staff),/already assigned to another athlete/);
+  assert.equal(await snapshot(),beforeForeign,'The same source row cannot be copied onto another athlete');
   const dup=await makeBatch(a.id,[row(1,'Second Workspace Synthetic 10K')]);const dupResult=await publication.reviewBatch(request(dup.id,1,a.id,[1]),staff);assert.equal(dupResult.added,0);assert.equal(dupResult.duplicates,1);
   const conflict=await makeBatch(a.id,[row(1,'Second Workspace Synthetic 10K','00:41:00.1')]);const before=await snapshot();await assert.rejects(()=>publication.reviewBatch(request(conflict.id,1,a.id,[1]),staff),/conflicts/);assert.equal(await snapshot(),before);
   const late=await makeBatch(a.id,[row(1,'Rollback Workspace Synthetic 10K')]);const beforeFailure=await snapshot();inject=true;await assert.rejects(()=>publication.reviewBatch(request(late.id,1,a.id,[1]),staff),/Synthetic write failure/);inject=false;assert.equal(await snapshot(),beforeFailure,'Late writes roll back newly created races, editions, ledger and outcomes');
@@ -75,9 +81,17 @@ try{
   await assert.rejects(()=>service.issueInvitation({batchId:protectedBatch.id,revision:1,email:'workspace-stranger@example.test'},staff),/linked owner/);
   const revoke=await service.issueInvitation({batchId:protectedBatch.id,revision:1,email:'workspace-owner@example.test'},staff);await service.revokeInvitation(revoke.id,staff);await assert.rejects(()=>service.reviewInvitation(revoke.url.split('#')[1],owner),/unavailable/);
   const expire=await service.issueInvitation({batchId:protectedBatch.id,revision:1,email:'workspace-owner@example.test'},staff);await sql`update athlete_result_review_invitations set expires_at=now()-interval '1 second' where id=${expire.id}::uuid`;await assert.rejects(()=>service.reviewInvitation(expire.url.split('#')[1],owner),/unavailable/);
+  const confirmedLink=await service.issueInvitation({batchId:protectedBatch.id,revision:1,email:'workspace-owner@example.test'},staff);
+  await service.respondInvitation({token:confirmedLink.url.split('#')[1],responses:[{index:1,response:'yes',note:'Confirmed by the linked owner.'}],declaration:true},owner);
+  assert.equal((await publication.reviewBatch(request(protectedBatch.id,2,managed.id,[1]),staff)).added,1,'Owner-confirmed races can be attached after staff source review');
+  const ownDraft=await makeBatch(null,[row(1,'Private Evidence Synthetic 10K')],owner);
+  await sql`update athlete_result_proposals set evidence_for='Private staff investigation',evidence_against='Internal evidence note' where id=${ownDraft.id}::uuid`;
+  const safeBatch=await service.getBatch(ownDraft.id,owner);assert.equal(safeBatch.evidence_for,'');assert.equal(safeBatch.evidence_against,'');assert.equal('responseBy' in safeBatch.entries[0],false);
+  assert((await service.workspace(null,staff)).batches.some(b=>b.id===ownDraft.id),'Unassigned member submissions are available for staff review');
+  assert.equal((await publication.reviewBatch(request(ownDraft.id,1,other.id,[1]),staff)).added,1,'Staff can link a reviewed unassigned proposal to a selected athlete');
   const details=load('src/lib/athrecs/result-details.ts',{zod});const records=load('src/lib/athrecs/profile-records.ts',{'./result-details.ts':details,'./road-performance-conditions.ts':{roadPerformanceCondition:()=>null}});
   const perf={resultId:1,editionId:1,sport:'Running',surface:'Road',distanceCode:'10K',distanceKm:10,status:'finished',finishTimeSeconds:2400,chipTimeSeconds:2400,gunTimeSeconds:null,overallPlace:1,category:null,sourceUrls:[source],details:details.readResultDetails({profileExcluded:true,privateReason:'not exposed'})};
   assert.equal('privateReason' in perf.details,false);assert.equal(records.combineProfileResults([perf]).length,0);assert.equal(records.findPersonalBests([perf]).length,0);assert.equal(records.findPersonalBests([{...perf,details:{profileExcluded:false}}]).length,1);
   scope.IS_RUNRECS_SITE=true;await assert.rejects(()=>service.workspace(null,staff),/AthRecs/);
-  console.log('PASS: real PostgreSQL, ownership and IDOR rejection, optimistic profile edits, pasted-table validation, private proposals, recipient binding, hashed expiring single-use links, denial protection, exact timing, duplicate preservation, atomic rollback, idempotent receipt and reversible profile-only removal. Synthetic records only.');
+  console.log('PASS: real PostgreSQL, ownership/IDOR, optimistic edits, strict table parsing, private proposals and evidence, recipient binding, hashed expiring single-use links, denials, owner-confirmed additions, exact timing, cross-athlete source-row conflicts, duplicates, atomic rollback, replay receipts, unassigned submissions and reversible profile-only removal. Synthetic records only.');
 }finally{await client.end();}
