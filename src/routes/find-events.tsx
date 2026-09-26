@@ -78,6 +78,18 @@ function FindEventsPage() {
           Explore running <ArrowRight className="size-4" aria-hidden="true" />
         </span>
       </a>
+      {!IS_RUNRECS_SITE ? (
+        <p className="text-sm leading-6 text-muted">
+          Looking for other distances or surfaces? Browse the{" "}
+          <a
+            href="https://www.runrecs.com/races"
+            className="font-semibold text-accent underline underline-offset-4"
+          >
+            RunRecs race calendar
+          </a>
+          .
+        </p>
+      ) : null}
       <section className="space-y-4">
         <div>
           <h2 className="font-display text-2xl font-semibold">Event calendars for other sports</h2>
