@@ -5,6 +5,8 @@ on:
       - 'src/lib/staff-results-upload/**'
       - 'src/routes/admin/check-results-upload.tsx'
       - 'src/components/staff/StaffMicrositeShell.tsx'
+      - 'src/components/staff/BackendTaskPanel.tsx'
+      - 'scripts/verify-backend-tasks.mjs'
       - 'scripts/verify-staff-results-*.mjs'
       - '.github/workflows/staff-results-upload.yml'
   workflow_dispatch:
@@ -51,7 +53,7 @@ jobs:
         run: npx vite build --mode development
       - run: npm run typecheck
       - name: Lint changed code
-        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx scripts/verify-staff-results-*.mjs
+        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx src/components/staff/BackendTaskPanel.tsx src/components/staff/StaffMicrositeShell.tsx scripts/verify-staff-results-*.mjs scripts/verify-backend-tasks.mjs
       - name: Install isolated browser-test dependency
         run: npm install --prefix "$RUNNER_TEMP/athrecs-browser-tools" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
       - name: Install test browser
@@ -62,6 +64,7 @@ jobs:
         run: |
           node scripts/verify-staff-results-browser.mjs
           node scripts/verify-staff-results-final-stage.mjs
+          node scripts/verify-backend-tasks.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
