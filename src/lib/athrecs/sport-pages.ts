@@ -7,43 +7,72 @@ export const SPORT_PAGES = [
     label: "Road Running",
     sport: "Running",
     sports: ["Running", "Athletics"],
-    surface: "Road",
+    surfaces: ["Road"],
   },
   {
     slug: "trail-running",
     label: "Trail Running",
     sport: "Running",
     sports: ["Running", "Athletics"],
-    surface: "Trail",
+    surfaces: ["Trail"],
   },
   {
     slug: "track-and-field",
     label: "Track and Field",
     sport: "Athletics",
     sports: ["Athletics", "Running"],
-    surface: "Track",
+    surfaces: ["Track"],
   },
   {
     slug: "triathlon",
     label: "Triathlon",
     sport: "Triathlon",
     sports: ["Triathlon"],
-    surface: null,
+    surfaces: null,
   },
-  { slug: "biking", label: "Biking", sport: "Cycling", sports: ["Cycling"], surface: null },
-  { slug: "swimming", label: "Swimming", sport: "Swimming", sports: ["Swimming"], surface: null },
+  {
+    slug: "road-cycling",
+    label: "Road Cycling",
+    sport: "Cycling",
+    sports: ["Cycling"],
+    surfaces: ["Road"],
+  },
+  {
+    slug: "mountain-biking",
+    label: "Mountain Biking",
+    sport: "Cycling",
+    sports: ["Cycling"],
+    surfaces: ["MTB", "MTB / Gravel", "Trail", "XC", "Mountain Bike", "Mountain Biking"],
+  },
+  {
+    slug: "track-cycling",
+    label: "Track Cycling",
+    sport: "Cycling",
+    sports: ["Cycling"],
+    surfaces: ["Track", "Velodrome"],
+  },
+  {
+    slug: "bmx",
+    label: "BMX",
+    sport: "Cycling",
+    sports: ["Cycling"],
+    surfaces: ["BMX Track", "BMX", "BMX Freestyle"],
+  },
+  { slug: "swimming", label: "Swimming", sport: "Swimming", sports: ["Swimming"], surfaces: null },
 ] as const satisfies readonly {
   slug: string;
   label: string;
   sport: Sport;
   sports: readonly Sport[];
-  surface: string | null;
+  surfaces: readonly string[] | null;
 }[];
 
 export type SportPage = (typeof SPORT_PAGES)[number];
 
 export function getSportPage(slug: unknown): SportPage | undefined {
-  return SPORT_PAGES.find((page) => page.slug === (slug === "running" ? "road-running" : slug));
+  const canonicalSlug =
+    slug === "running" ? "road-running" : slug === "biking" ? "road-cycling" : slug;
+  return SPORT_PAGES.find((page) => page.slug === canonicalSlug);
 }
 
 export function parseSportFixtureSearch(raw: Record<string, unknown>): {

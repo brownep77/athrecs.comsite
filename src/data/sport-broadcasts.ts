@@ -3,7 +3,7 @@ import type { SportPage } from "../lib/athrecs/sport-pages";
 export type SportBroadcast = {
   id: string;
   sport: SportPage["sport"];
-  surface?: SportPage["surface"];
+  surface?: string;
   name: string;
   startDate: string;
   endDate: string;
@@ -76,6 +76,7 @@ export const SPORT_BROADCASTS: readonly SportBroadcast[] = [
   {
     id: "uci-road-worlds-2026",
     sport: "Cycling",
+    surface: "Road",
     name: "UCI Road World Championships",
     startDate: "2026-09-20",
     endDate: "2026-09-27",
@@ -136,7 +137,7 @@ export function upcomingBroadcasts(page: SportPage, now = new Date()) {
     }).format(now);
     return (
       item.sport === page.sport &&
-      (!page.surface || item.surface === page.surface) &&
+      (!page.surfaces || (page.surfaces as readonly string[]).includes(item.surface ?? "")) &&
       item.endDate >= localDate
     );
   }).sort((a, b) => a.startDate.localeCompare(b.startDate) || a.id.localeCompare(b.id));

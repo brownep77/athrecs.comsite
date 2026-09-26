@@ -7,7 +7,7 @@ export const getSportFixtures = createServerFn({ method: "GET" })
   .validator((raw: { slug: string; q?: string; page?: number }) => {
     const sport = getSportPage(raw?.slug);
     if (!sport || IS_RUNRECS_SITE) throw new Error("Sport page not found");
-    return { sports: sport.sports, surface: sport.surface, ...parseSportFixtureSearch(raw) };
+    return { sports: sport.sports, surfaces: sport.surfaces, ...parseSportFixtureSearch(raw) };
   })
   .handler(async ({ data }) => {
     const { ensureAthrecsSeeded } = await import("./seed.server");

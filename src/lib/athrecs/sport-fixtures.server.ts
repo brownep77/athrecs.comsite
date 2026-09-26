@@ -17,7 +17,12 @@ export type SportFixture = {
 /** Read the published event catalogue without changing any data or visibility. */
 export async function readSportFixtures(
   sql: Sql,
-  input: { sports: SportPage["sports"]; surface: SportPage["surface"]; q?: string; page?: number },
+  input: {
+    sports: SportPage["sports"];
+    surfaces: SportPage["surfaces"];
+    q?: string;
+    page?: number;
+  },
   today: string,
 ) {
   const q = input.q ? `%${input.q.replace(/[\\%_]/g, "\\$&")}%` : null;
@@ -39,7 +44,7 @@ export async function readSportFixtures(
     from events e join editions ed on ed.event_id = e.id
     where e.sport = any($1::text[]) and ed.event_date >= $2::date
       and ($3::text is null or e.name ilike $3 or e.city ilike $3 or e.country ilike $3)
-      and ($6::text is null or e.surface = $6)
+      and ($6::text[] is null or e.surface = any($6::text[]))
     group by e.id, e.name, ed.event_date, e.city, e.country, e.website
     order by ed.event_date, e.name, e.id
     limit $4 offset $5
@@ -50,7 +55,7 @@ export async function readSportFixtures(
       q,
       SPORT_FIXTURE_PAGE_SIZE + 1,
       (page - 1) * SPORT_FIXTURE_PAGE_SIZE,
-      input.surface,
+      input.surfaces ? [...input.surfaces] : null,
     ],
   );
   return {

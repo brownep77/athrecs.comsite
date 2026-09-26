@@ -134,7 +134,15 @@ try {
       (23, 'Cross Country', 'Athletics', 'Cross Country'),
       (24, 'Track Cycling', 'Cycling', 'Track'),
       (25, 'Trail Athletics', 'Athletics', 'Trail'),
-      (26, 'Athletics Road', 'Athletics', 'Road');
+      (26, 'Athletics Road', 'Athletics', 'Road'),
+      (27, 'Road Cycling', 'Cycling', 'Road'),
+      (28, 'MTB Race', 'Cycling', 'MTB'),
+      (29, 'Trail Ride', 'Cycling', 'Trail'),
+      (30, 'MTB Gravel Programme', 'Cycling', 'MTB / Gravel'),
+      (31, 'BMX Race', 'Cycling', 'BMX Track'),
+      (32, 'Cyclo-cross Race', 'Cycling', 'Cyclo-cross'),
+      (33, 'Gravel Race', 'Cycling', 'Gravel'),
+      (34, 'Velodrome Meet', 'Cycling', 'Velodrome');
     insert into editions select id, id, '2026-09-01', 'Other' from events where id >= 20;
     insert into results (id, athlete_id, edition_id, status, result_visibility)
       select id, 1, id, 'Finished', 'public' from editions where id >= 20;
@@ -143,6 +151,10 @@ try {
   assert.deepEqual(await namesFor("trail-running"), ["Trail Athletics", "Trail Run"]);
   assert.deepEqual(await namesFor("track-and-field"), ["Track Meeting", "Track Run"]);
   assert.deepEqual(await namesFor("road-running"), ["Athletics Road", "Synthetic 10K"]);
+  assert.deepEqual(await namesFor("road-cycling"), ["Road Cycling"]);
+  assert.deepEqual(await namesFor("mountain-biking"), ["MTB Gravel Programme", "MTB Race", "Trail Ride"]);
+  assert.deepEqual(await namesFor("track-cycling"), ["Track Cycling", "Velodrome Meet"]);
+  assert.deepEqual(await namesFor("bmx"), ["BMX Race"]);
   await db.exec(`delete from results where edition_id >= 20; delete from editions where id >= 20; delete from events where id >= 20;`);
 
   await db.exec(`
