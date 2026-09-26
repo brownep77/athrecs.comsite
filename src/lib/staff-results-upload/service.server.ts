@@ -95,7 +95,11 @@ async function verifySource(input: UploadInput, rows: UploadRow[]) {
     r.issues.push(...audit.issues.filter(i => "result_id" in i && i.result_id === r.index).flatMap(i => i.flags), ...audit.comparisons.filter(c => "result_id" in c && c.result_id === r.index).flatMap(c => c.flags));
   }
   if (audit.scope.untestedResults) throw new Error("Independent source comparison did not cover every uploaded row.");
-  return { sourceHash: hash(capture), sourceRows: capture.rowCount };
+  // Fingerprint actual results, not the unrelated photo/action cells in the raw
+  // capture. Photo availability may change between review and confirmation.
+  // Every parsed identity, time (including source precision), placing, category,
+  // club, source date and distance still participates in the stale-review check.
+  return { sourceHash: hash({ url: capture.url, headings: capture.headings, startTimes: capture.startTimes, rows: official }), sourceRows: capture.rowCount };
 }
 type ExistingResult = { id: number; athleteId: number; name: string; bib: string; source: string; finish: number | null; chip: number | null; gun: number | null; place: number | null; gp: number | null; cp: number | null; category: string };
 /** SELECT-only plan, shared by preview and by the explicit import transaction. */

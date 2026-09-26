@@ -17,6 +17,20 @@ jobs:
   upload-check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: athrecs_import_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d athrecs_import_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     env:
       DATABASE_URL: ''
       VITE_SITE_BRAND: athrecs
@@ -31,11 +45,13 @@ jobs:
         run: node scripts/verify-staff-results-upload.mjs
       - name: Migrated-schema synthetic imports, rollback and repeat safety
         run: node scripts/verify-staff-results-commit.mjs
+      - name: Real PostgreSQL final save, source stability and replay safety
+        run: node scripts/verify-staff-results-postgres.mjs
       - name: Generate routes and build without migration or publication hooks
         run: npx vite build --mode development
       - run: npm run typecheck
       - name: Lint changed code
-        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx scripts/verify-staff-results-upload.mjs scripts/verify-staff-results-commit.mjs scripts/verify-staff-results-browser.mjs
+        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx scripts/verify-staff-results-*.mjs
       - name: Install isolated browser-test dependency
         run: npm install --prefix "$RUNNER_TEMP/athrecs-browser-tools" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
       - name: Install test browser
@@ -43,15 +59,15 @@ jobs:
       - name: Desktop and mobile import-flow interaction tests
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athrecs-browser-tools/node_modules/playwright
-        run: node scripts/verify-staff-results-browser.mjs
+        run: |
+          node scripts/verify-staff-results-browser.mjs
+          node scripts/verify-staff-results-final-stage.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: staff-import-browser-checks
           path: |
-            artifacts/import-desktop.png
-            artifacts/import-mobile.png
-            artifacts/import-failure.png
+            artifacts/import-*.png
             artifacts/import-failure.html
           if-no-files-found: ignore
           retention-days: 7

@@ -7,11 +7,27 @@ const uploadSchema = z.object({
   distance: z.string().trim().min(1).max(40), distanceKm: z.number().positive().max(1000),
   sourceUrl: z.string().url().max(300), timingBasis: z.enum(["chip", "gun", "unspecified"]),
 }).strict();
+/** Log only a correlation identifier and a bounded failure category, never
+ * uploads, participant names, staff identities, SQL, credentials or raw errors. */
+function logImportFailure(error: unknown, stage: "check" | "commit", requestId?: string) {
+  const rawCode = error && typeof error === "object" && "code" in error ? error.code : null;
+  const message = error instanceof Error ? error.message : "";
+  const code = typeof rawCode === "string" && /^[0-9A-Z]{5}$/.test(rawCode) ? rawCode
+    : /source or athlete matches changed/i.test(message) ? "STALE_REVIEW"
+    : /already.*imported|already.*result|already in use/i.test(message) ? "EXISTING_RESULT"
+    : /protected|ownership|visibility/i.test(message) ? "PROTECTED_IDENTITY"
+    : /source|race|distance/i.test(message) ? "SOURCE_REVIEW"
+    : "IMPORT_REJECTED";
+  console.error("[staff-results-upload]", JSON.stringify({ stage, requestId, code }));
+}
 /** Checking transports the file but does not mutate athlete or result records. */
 export const checkRaceUpload = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: z.input<typeof uploadSchema>) => uploadSchema.parse(input))
-  .handler(async ({ data }) => (await import("./service.server")).previewUpload(data));
+  .handler(async ({ data }) => {
+    try { return await (await import("./service.server")).previewUpload(data); }
+    catch (error) { logImportFailure(error, "check"); throw error; }
+  });
 const commitSchema = z.object({
   upload: uploadSchema, reviewHash: z.string().regex(/^[a-f0-9]{64}$/), requestId: z.string().uuid(),
   rightsConfirmed: z.literal(true), identitiesConfirmed: z.literal(true),
@@ -25,9 +41,13 @@ const commitSchema = z.object({
 export const importCheckedRaceUpload = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: z.input<typeof commitSchema>) => commitSchema.parse(input))
-  .handler(async ({ data, context }) => (await import("./commit.server")).commitUpload(data, {
-    userId: context.userId, staffEmail: context.staffEmail,
-  }));
+  .handler(async ({ data, context }) => {
+    try {
+      return await (await import("./commit.server")).commitUpload(data, {
+        userId: context.userId, staffEmail: context.staffEmail,
+      });
+    } catch (error) { logImportFailure(error, "commit", data.requestId); throw error; }
+  });
 export const downloadResultsUploadTemplate = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .handler(async () => {
