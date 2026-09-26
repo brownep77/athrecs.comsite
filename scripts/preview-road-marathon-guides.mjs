@@ -55,7 +55,9 @@ async function worker() {
       JSON.parse($(script).html());
     $("main a[href]").each((i, element) => {
       const href = $(element).attr("href");
-      if (href.startsWith("/running"))
+      if (href.startsWith("/running/ultramarathons/") || href === "/running/uk-road-ultramarathons")
+        $(element).attr("href", `https://www.athrecs.com${href}`);
+      else if (href.startsWith("/running"))
         assert(paths.includes(href.split("#")[0]), `${route} has broken internal link ${href}`);
       else if (href.startsWith("/")) $(element).attr("href", `https://www.athrecs.com${href}`);
       if (href.startsWith("http"))

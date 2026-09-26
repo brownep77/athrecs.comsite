@@ -1,4 +1,5 @@
 import { SPORT_PAGES } from "./sport-pages";
+import { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } from "../running/road-ultras";
 
 /** One list for the HTML directory and the XML sitemap. Account tools stay private. */
 export const PUBLIC_PAGES = [
@@ -17,5 +18,10 @@ export const PUBLIC_PAGES = [
   { path: "/sponsorship", name: "Athlete sponsorship" },
   { path: "/privacy", name: "Athlete privacy" },
   { path: "/site-map", name: "Browse AthRecs" },
+  { path: ULTRA_GUIDE_PATH, name: "UK road ultramarathons" },
+  ...ROAD_ULTRAS.map((race) => ({
+    path: ultraPath(race.slug),
+    name: `${race.name} — road ultra guide`,
+  })),
   ...SPORT_PAGES.map((sport) => ({ path: `/sports/${sport.slug}`, name: sport.label })),
 ];

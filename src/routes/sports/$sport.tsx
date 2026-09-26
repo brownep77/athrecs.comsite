@@ -101,6 +101,11 @@ function SportPage() {
         <Link to="/results" search={{ category: sport.slug }} className={textLink}>
           Results <ArrowRight className="size-4" aria-hidden="true" />
         </Link>
+        {sport.slug === "road-running" && (
+          <Link to="/running/uk-road-ultramarathons" className={textLink}>
+            UK road ultramarathons <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+        )}
       </nav>
 
       <section id="on-tv" aria-labelledby="on-tv-heading" className="scroll-mt-24 space-y-4">

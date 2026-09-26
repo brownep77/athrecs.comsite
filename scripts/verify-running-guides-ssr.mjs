@@ -29,9 +29,13 @@ const { ROAD_HALF_MARATHONS } = await import("../src/data/road-half-marathons/in
 const { HALF_MARATHON_COUNTRIES } = await import("../src/data/road-half-marathons/countries.ts");
 const ROAD_MARATHONS = [...FULL_MARATHONS, ...ROAD_HALF_MARATHONS];
 const MARATHON_COUNTRIES = [...FULL_COUNTRIES, ...HALF_MARATHON_COUNTRIES];
+const { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } =
+  await import("../src/lib/running/road-ultras.ts");
 const base = process.env.RUNNING_VERIFY_BASE ?? "http://127.0.0.1:8097";
 const paths = [
   "/running",
+  ULTRA_GUIDE_PATH,
+  ...ROAD_ULTRAS.map((race) => ultraPath(race.slug)),
   ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
   ...ROAD_MARATHONS.map((race) => `/running/races/${race.slug}`),
 ];
