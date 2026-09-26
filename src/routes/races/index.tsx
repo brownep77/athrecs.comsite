@@ -1,9 +1,10 @@
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { listEvents } from "@/lib/athrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
 import { SPORTS as PUBLIC_SPORTS } from "@/lib/athrecs/filters";
-import { SITE_URL } from "@/lib/athrecs/seo";
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { RaceCard } from "@/components/races/RaceCard";
 import {
   countActiveSearchFilters,
@@ -106,10 +107,7 @@ export const Route = createFileRoute("/races/")({
       page: optionalPage(search.page),
     };
   },
-  head: () => ({
-    links: [{ rel: "canonical", href: `${SITE_URL}/races` }],
-  }),
-  loaderDeps: ({ search }) => search,
+  loaderDeps: ({ search }): RaceSearchParams => search,
   loader: ({ deps }) => {
     const filters = filtersFromSearch(deps);
     const api = searchToApi(filters);
@@ -123,6 +121,16 @@ export const Route = createFileRoute("/races/")({
         offset: (page - 1) * PAGE_SIZE,
       },
     });
+  },
+  head: ({ match }) => {
+    if (IS_RUNRECS_SITE) return { links: [{ rel: "canonical", href: `${SITE_URL}/races` }] };
+    const page = match.search.page ?? 1;
+    const url = `${SITE_URL}/races${page > 1 ? `?page=${page}` : ""}`;
+    const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
+    return {
+      meta: siteGraphMeta({ title: `Races and athletics events${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find athletics events, race dates, locations, distances and official entry links. Browse track, field, cross-country and road fixtures on AthRecs.", url }).map((tag) => filtered && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
+      links: [{ rel: "canonical", href: url }],
+    };
   },
   component: EventsPage,
 });

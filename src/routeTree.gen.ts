@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as AthleteAccountRouteImport } from './routes/athlete-account'
 import { Route as AthleteResultsRouteImport } from './routes/athlete-results'
 import { Route as CalendarRouteImport } from './routes/calendar'
@@ -21,6 +22,7 @@ import { Route as OpportunitiesRouteImport } from './routes/opportunities'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RaceSeriesRouteImport } from './routes/race-series'
 import { Route as ReviewResultsRouteImport } from './routes/review-results'
+import { Route as SiteMapRouteImport } from './routes/site-map'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
@@ -77,6 +79,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutUsRoute = AboutUsRouteImport.update({
+  id: '/about-us',
+  path: '/about-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AthleteAccountRoute = AthleteAccountRouteImport.update({
   id: '/athlete-account',
   path: '/athlete-account',
@@ -130,6 +137,11 @@ const RaceSeriesRoute = RaceSeriesRouteImport.update({
 const ReviewResultsRoute = ReviewResultsRouteImport.update({
   id: '/review-results',
   path: '/review-results',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SiteMapRoute = SiteMapRouteImport.update({
+  id: '/site-map',
+  path: '/site-map',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -390,6 +402,7 @@ const ApiEventsSlugOfficialEntryRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about-us': typeof AboutUsRoute
   '/athlete-account': typeof AthleteAccountRoute
   '/athlete-results': typeof AthleteResultsRoute
   '/calendar': typeof CalendarRoute
@@ -401,6 +414,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
@@ -454,6 +468,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about-us': typeof AboutUsRoute
   '/athlete-account': typeof AthleteAccountRoute
   '/athlete-results': typeof AthleteResultsRoute
   '/calendar': typeof CalendarRoute
@@ -465,6 +480,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
@@ -519,6 +535,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about-us': typeof AboutUsRoute
   '/athlete-account': typeof AthleteAccountRoute
   '/athlete-results': typeof AthleteResultsRoute
   '/calendar': typeof CalendarRoute
@@ -530,6 +547,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/race-series': typeof RaceSeriesRoute
   '/review-results': typeof ReviewResultsRoute
+  '/site-map': typeof SiteMapRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
@@ -585,6 +603,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about-us'
     | '/athlete-account'
     | '/athlete-results'
     | '/calendar'
@@ -596,6 +615,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
@@ -649,6 +669,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about-us'
     | '/athlete-account'
     | '/athlete-results'
     | '/calendar'
@@ -660,6 +681,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
@@ -713,6 +735,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about-us'
     | '/athlete-account'
     | '/athlete-results'
     | '/calendar'
@@ -724,6 +747,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/race-series'
     | '/review-results'
+    | '/site-map'
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
@@ -778,6 +802,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutUsRoute: typeof AboutUsRoute
   AthleteAccountRoute: typeof AthleteAccountRoute
   AthleteResultsRoute: typeof AthleteResultsRoute
   CalendarRoute: typeof CalendarRoute
@@ -789,6 +814,7 @@ export interface RootRouteChildren {
   PrivacyRoute: typeof PrivacyRoute
   RaceSeriesRoute: typeof RaceSeriesRoute
   ReviewResultsRoute: typeof ReviewResultsRoute
+  SiteMapRoute: typeof SiteMapRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SponsorshipRoute: typeof SponsorshipRoute
   SportsrecsRoute: typeof SportsrecsRoute
@@ -848,6 +874,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about-us': {
+      id: '/about-us'
+      path: '/about-us'
+      fullPath: '/about-us'
+      preLoaderRoute: typeof AboutUsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/athlete-account': {
@@ -925,6 +958,13 @@ declare module '@tanstack/react-router' {
       path: '/review-results'
       fullPath: '/review-results'
       preLoaderRoute: typeof ReviewResultsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/site-map': {
+      id: '/site-map'
+      path: '/site-map'
+      fullPath: '/site-map'
+      preLoaderRoute: typeof SiteMapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -1282,6 +1322,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutUsRoute: AboutUsRoute,
   AthleteAccountRoute: AthleteAccountRoute,
   AthleteResultsRoute: AthleteResultsRoute,
   CalendarRoute: CalendarRoute,
@@ -1293,6 +1334,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacyRoute: PrivacyRoute,
   RaceSeriesRoute: RaceSeriesRoute,
   ReviewResultsRoute: ReviewResultsRoute,
+  SiteMapRoute: SiteMapRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SponsorshipRoute: SponsorshipRoute,
   SportsrecsRoute: SportsrecsRoute,

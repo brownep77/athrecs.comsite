@@ -123,6 +123,82 @@
           "value": "nosniff"
         }
       ]
+    },
+    {
+      "source": "/athlete-results",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?athrecs\\.com"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
+      ]
+    },
+    {
+      "source": "/review-results",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?athrecs\\.com"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
+      ]
+    },
+    {
+      "source": "/brands/manage",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?athrecs\\.com"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
+      ]
+    },
+    {
+      "source": "/brands/register",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?athrecs\\.com"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "private, no-store"
+        }
+      ]
     }
   ],
   "regions": [

@@ -28,7 +28,7 @@ export function siteGraphMeta(opts?: {
   return [
     { title },
     { name: "description", content: description },
-    { name: "robots", content: "index, follow, max-image-preview:large" },
+    { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
     { property: "og:type", content: type },
     { property: "og:site_name", content: SITE_NAME },
     { property: "og:title", content: title },
@@ -47,6 +47,8 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    inLanguage: "en-GB",
     name: SITE_NAME,
     url: SITE_URL,
     description: DEFAULT_DESCRIPTION,
@@ -60,6 +62,7 @@ export function organizationJsonLd() {
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
       name: SITE_NAME,
       url: SITE_URL,
       logo: DEFAULT_OG_IMAGE,
@@ -94,7 +97,7 @@ export function sportsEventJsonLd(input: {
     url,
     image: DEFAULT_OG_IMAGE,
     startDate: start,
-    eventStatus: "https://schema.org/EventScheduled",
+    eventStatus: start ? "https://schema.org/EventScheduled" : undefined,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
       "@type": "Place",

@@ -7,5 +7,9 @@ Disallow: /api/
 Disallow: /athlete-account
 Disallow: /my-athlete-profile
 Disallow: /claim-results
+Disallow: /athlete-results
+Disallow: /review-results
+Disallow: /brands/manage
+Disallow: /brands/register
 
 Sitemap: https://www.athrecs.com/sitemap.xml
