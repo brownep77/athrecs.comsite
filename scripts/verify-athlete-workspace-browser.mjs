@@ -45,6 +45,13 @@ try{
   await page.waitForFunction(()=>window.calls.some(c=>c.kind==='edit'));
   await page.getByRole('button',{name:'Remove from profile',exact:true}).click();assert.equal(await page.evaluate(()=>window.calls.filter(c=>c.kind==='exclude').length),0);
   await page.getByLabel('Reason',{exact:true}).fill('Wrong profile attribution; retain original race record.');await page.getByRole('button',{name:'Confirm change',exact:true}).click();await page.getByRole('button',{name:'Restore to profile',exact:true}).waitFor();
+  // A manual entry with no URL or a malformed URL must show issues, not crash React.
+  await page.getByRole('button',{name:'Add a race manually',exact:true}).click();
+  await page.getByText(/Source-results HTTPS link required/).waitFor();
+  assert(await page.getByRole('button',{name:'Save proposed results for review'}).isDisabled());
+  await page.getByLabel('Source profile or results URL').fill('not a URL');
+  assert(await page.getByRole('button',{name:'Save proposed results for review'}).isDisabled());
+  assert.deepEqual(errors,[]);
   await page.getByLabel('Source profile or results URL').fill('https://example.test/results');await page.getByLabel('Unlabelled times mean').selectOption('chip');
   await page.getByLabel('Copied results table').fill('Race,Date,Distance,Time\nNew Synthetic 10K,20/09/2026,10K,00:41:00.1');await page.getByRole('button',{name:'Preview pasted rows'}).click();
   assert.equal(await page.evaluate(()=>window.calls.filter(c=>c.kind==='draft').length),0);await page.getByLabel('I am authorised to submit this material for review.',{exact:false}).check();await page.getByRole('button',{name:'Save proposed results for review'}).click();
@@ -55,8 +62,19 @@ try{
   await page.evaluate(()=>{window.failPublish=true;});await publish.click();await page.getByText(/Synthetic source conflict; nothing saved./).waitFor();const first=await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish')[0].data);
   await page.screenshot({path:'artifacts/workspace-desktop.png',fullPage:true});await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:'artifacts/workspace-mobile.png',fullPage:true});
   await page.evaluate(()=>{window.failPublish=false;});await publish.click();await page.waitForFunction(()=>window.calls.filter(c=>c.kind==='publish').length===2);const retry=await page.evaluate(()=>window.calls.filter(c=>c.kind==='publish')[1].data);assert.deepEqual(retry,first,'Retry retains the reviewed payload and request ID');
+  await page.getByText('1 results added; 0 existing results retained. No athlete ownership was changed.',{exact:true}).waitFor();
+  // Unassigned member proposals remain open while staff select their intended athlete.
+  await page.evaluate(()=>{window.batch.athlete_id=null;window.batch.entries[0].state='pending';window.batch.revision++;window.workspace.batches=[window.batch];});
+  await page.getByRole('button',{name:'Show all proposal batches'}).click();
+  await page.getByRole('button',{name:/1 proposed races.*not linked yet/}).click();
+  await page.getByRole('heading',{name:'Review proposed races',exact:true}).waitFor();
+  await page.getByLabel('Find an athlete',{exact:true}).fill('Synthetic');await page.getByRole('button',{name:'Search athletes',exact:true}).click();
+  await page.getByRole('button',{name:/Synthetic Athlete.*Record 7/}).click();
+  await page.getByText(/Target athlete 7/).waitFor();
+  assert(await page.getByRole('heading',{name:'Review proposed races',exact:true}).isVisible());
+  assert(await page.getByRole('button',{name:'Add 0 checked results to profile'}).isDisabled());
   await page.goto(`http://127.0.0.1:8102/?review=1#${'c'.repeat(64)}`);await page.getByRole('heading',{name:'Proposed matches for Synthetic Athlete'}).waitFor();assert.equal(await page.evaluate(()=>window.calls.length),0);
   await page.getByLabel('Not mine',{exact:true}).check();const submit=page.getByRole('button',{name:'Submit my responses'});assert(await submit.isDisabled());await page.getByLabel('I have reviewed these answers.',{exact:false}).check();await page.screenshot({path:'artifacts/workspace-recipient-mobile.png',fullPage:true});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await submit.click();await page.getByRole('heading',{name:'Response recorded'}).waitFor();
   const calls=await page.evaluate(()=>window.calls);assert.deepEqual(calls.map(c=>c.kind),['response']);assert.equal(calls[0].data.responses[0].response,'no');assert.equal(await page.evaluate(()=>sessionStorage.getItem('athrecs:recipient-result-review')),null);assert.deepEqual(errors,[]);
-  console.log('PASS: actual React profile edit, explicit reversible removal, paste preview without write, private draft save, link creation, approval gates, identical failed-save retry, recipient denial and no automatic publication; desktop/mobile. APIs are synthetic mocks.');
+  console.log('PASS: actual React edits, explicit removal, invalid-link recovery, paste preview/private save, link creation, approval gates, identical failed-save retry, persistent receipt, unassigned target selection and recipient denial without publication; desktop/mobile. APIs are synthetic mocks.');
 }catch(e){if(page)await page.screenshot({path:'artifacts/workspace-failure.png',fullPage:true});throw e;}finally{await browser.close();await server.close();rmSync(root,{recursive:true,force:true});}
