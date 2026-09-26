@@ -11,11 +11,21 @@ export const Route = createFileRoute("/sitemaps/$file")({
         const { sitemapXml, sitemapResponse, athleteSitemapSlugs } =
           await import("@/lib/athrecs/athlete-sitemap.server");
         if (params.file === "pages.xml") {
+          const runningPaths: string[] = [];
+          if (!IS_RUNRECS_SITE) {
+            const { MARATHON_COUNTRIES } = await import("@/data/road-marathons/countries");
+            const { ROAD_MARATHONS } = await import("@/data/road-marathons");
+            runningPaths.push(
+              "/running",
+              ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
+              ...ROAD_MARATHONS.map((race) => `/running/races/${race.slug}`),
+            );
+          }
           return sitemapResponse(
             sitemapXml(
               (IS_RUNRECS_SITE
                 ? ["/", "/races", "/calendar", "/race-series", "/athletes", "/clubs", "/privacy"]
-                : PUBLIC_PAGES.map((page) => page.path)
+                : [...PUBLIC_PAGES.map((page) => page.path), ...runningPaths]
               ).map((path) => `${SITE_URL}${path}`),
             ),
           );

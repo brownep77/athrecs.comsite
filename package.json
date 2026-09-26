@@ -104,6 +104,7 @@
     "verify:result-disqualifications": "node --experimental-strip-types scripts/verify-result-disqualifications.mjs",
     "verify:club-scanner": "node --experimental-strip-types scripts/verify-club-scanner.mjs",
     "verify:athlete-sitemap": "node --experimental-strip-types scripts/verify-athlete-sitemap.mjs",
+    "verify:road-marathon-guides": "node scripts/verify-road-marathon-guides.mjs",
     "verify:search-discovery": "node scripts/verify-search-discovery.mjs"
   },
   "dependencies": {
