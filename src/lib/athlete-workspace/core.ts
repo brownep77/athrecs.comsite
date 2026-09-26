@@ -1,8 +1,12 @@
 import { z } from "zod";
 
 export const httpsUrl = z.string().trim().url().max(2000).refine(value => {
-  const url = new URL(value);
-  return url.protocol === "https:" && !url.username && !url.password;
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && !url.username && !url.password;
+  } catch {
+    return false;
+  }
 }, "Use an HTTPS source URL without credentials.");
 export const draftSchema = z.object({
   index: z.number().int().min(1).max(250), race: z.string().trim().max(200),
