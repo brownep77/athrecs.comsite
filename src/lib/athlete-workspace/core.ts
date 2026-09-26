@@ -55,7 +55,7 @@ export function timeSeconds(value: string): number | null {
 export function isoDate(value: string, order: "day-first" | "month-first" = "day-first"): string {
   const text = value.trim();
   if (/^\d{4}-\d{2}-\d{2}$/.test(text)) return text;
-  const numeric = text.match(/^(\d{1,2})[/.\-](\d{1,2})[/.\-](\d{4})$/);
+  const numeric = text.match(/^(\d{1,2})[./-](\d{1,2})[./-](\d{4})$/);
   if (numeric) return `${numeric[3]}-${(order === "day-first" ? numeric[2] : numeric[1]).padStart(2,"0")}-${(order === "day-first" ? numeric[1] : numeric[2]).padStart(2,"0")}`;
   const words = text.match(/^(\d{1,2})\s+([A-Za-z]{3,9})\s+(\d{4})$/);
   if (words) {
@@ -90,11 +90,16 @@ export function tableCells(text: string): string[][] {
   row.push(cell.trim());if(row.some(Boolean))rows.push(row);
   if(rows.length<2||rows.length>251)throw new Error("Include column headings and 1–250 result rows per paste.");
   if(rows.some(r=>r.length>40))throw new Error("Paste only the results table, not a complete webpage.");
+  if(rows.some(r=>r.length!==rows[0].length))throw new Error("The copied rows have different column counts. Check the table before continuing; no columns have been guessed.");
   return rows;
 }
 export function parsePaste(text: string, defaults: { sourceUrl: string; timingBasis: DraftResult["timingBasis"]; dateOrder: "day-first"|"month-first" }): DraftResult[] {
   const table=tableCells(text), headers=table[0].map(normal);
-  const find=(names:string[])=>headers.findIndex(h=>names.includes(h));
+  const find=(names:string[])=>{
+    const matches=headers.flatMap((h,i)=>names.includes(h)?[i]:[]);
+    if(matches.length>1)throw new Error(`More than one ${names[0]} column was found. Paste one clearly labelled column per field, or use the Excel/CSV race-results importer for separate chip and gun columns. Nothing has been saved.`);
+    return matches[0]??-1;
+  };
   const raceIndex=find(["race","racename","meeting","meetingname","eventname","competition"]);
   const dateIndex=find(["date","racedate","eventdate"]);
   const distIndex=find(["distance","distancecode","discipline",...(raceIndex>=0?["event"]:[])]);
