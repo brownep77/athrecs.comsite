@@ -51,6 +51,7 @@ import { raceQualifications, type RaceQualification } from "@/data/race-qualific
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { SITE_NAME, SITE_URL, siteGraphMeta, sportsEventJsonLd } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { PUBLIC_EDITION_PREVIEW_LIMIT } from "@/lib/athrecs/public-read-limits";
 import { RacePracticalInformation } from "@/components/races/RacePracticalInformation";
 import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
 import { editionEntry } from "@/lib/athrecs/race-information";
@@ -686,6 +687,19 @@ export function RacePageContent({
                 Public-figure and athlete-approved results only. Other archived participant rows
                 remain private and are available through the signed-in claim flow.
               </p>
+              {!IS_RUNRECS_SITE && results.length >= PUBLIC_EDITION_PREVIEW_LIMIT ? (
+                <p className="text-sm text-muted">
+                  Showing the first {PUBLIC_EDITION_PREVIEW_LIMIT} results.{' '}
+                  <Link
+                    to="/results/$editionId"
+                    params={{ editionId: String(resultsEditionId) }}
+                    search={{ q: "", page: 1 }}
+                    className="font-medium text-accent underline"
+                  >
+                    Browse all published results
+                  </Link>
+                </p>
+              ) : null}
               <div className="overflow-x-auto rounded-xl border border-border bg-surface shadow-card">
                 <table className="w-full min-w-[28rem] text-left text-sm">
                   <thead className="border-b border-border bg-elevated/60 text-[11px] uppercase tracking-wider text-subtle">
