@@ -37,9 +37,14 @@ try {
     const route = name === "index.tsx" ? "/admin" : `/admin/${name.slice(0, -4)}`;
     assert(covered.has(route), `Top-level staff tool missing from panel: ${route}`);
   }
+  const linksCard = cards.filter({ has: page.getByRole("heading", { name: "Import official results-page links", exact: true }) });
+  assert.match(await linksCard.innerText(), /adds links, not runners or finish times/);
+  assert.equal(await linksCard.getByRole("link").getAttribute("href"), "/admin/result-links");
+  assert.match(readFileSync("src/routes/admin/result-links.tsx", "utf8"), /Upload result-page links for existing editions/);
   await page.screenshot({ path: "artifacts/import-backend-tasks-desktop.png", fullPage: true });
-  await page.getByLabel("Find a backend task").fill("duplicate");
-  assert((await cards.count()) > 0 && (await cards.count()) < 17);
+  await page.getByLabel("Find a backend task").fill("duplicates");
+  assert.equal(await cards.count(), 1);
+  assert.equal(await cards.getByRole("link").getAttribute("href"), "/admin/check-results-upload");
   await page.getByLabel("Find a backend task").fill("does-not-exist-xyz");
   assert.equal(await cards.count(), 0);
   await page.getByRole("button", { name: "Show all tasks", exact: true }).click();
@@ -58,7 +63,7 @@ try {
   assert.match(shell, /id="legacy-admin-tools"/);
   assert.doesNotMatch(readFileSync("src/components/staff/BackendTaskPanel.tsx", "utf8"), /createServerFn|getSql|fetch\(|localStorage/);
   assert.deepEqual(errors, []);
-  console.log("PASS: all top-level staff routes covered, 17 distinct tool links, search/reset/categories, no writes or live requests, preserved authentication/brand gate and desktop/mobile navigation layout.");
+  console.log("PASS: all top-level staff routes covered, 17 distinct tool links, accurate results-link purpose, duplicates search opens athlete/results importer, search/reset/categories, no writes or live requests, preserved authentication/brand gate and desktop/mobile navigation layout.");
 } catch (error) {
   if (page) await page.screenshot({ path: "artifacts/import-backend-tasks-failure.png", fullPage: true });
   throw error;
