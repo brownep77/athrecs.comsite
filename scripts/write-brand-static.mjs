@@ -43,7 +43,7 @@ Disallow: /admin
 Disallow: /athlete-account
 Disallow: /my-athlete-profile
 Disallow: /claim-results
-Sitemap: ${siteUrl}/sitemap.xml
+${!isRunRecs ? "Disallow: /api/\nDisallow: /athlete-results\nDisallow: /review-results\nDisallow: /brands/manage\nDisallow: /brands/register\n" : ""}Sitemap: ${siteUrl}/sitemap.xml
 `;
 
 const outputDir = path.resolve(process.cwd(), ".vercel/output/static");

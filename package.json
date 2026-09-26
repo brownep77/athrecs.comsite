@@ -103,7 +103,8 @@
     "verify:athlete-publication": "node --experimental-strip-types scripts/verify-athlete-publication.mjs",
     "verify:result-disqualifications": "node --experimental-strip-types scripts/verify-result-disqualifications.mjs",
     "verify:club-scanner": "node --experimental-strip-types scripts/verify-club-scanner.mjs",
-    "verify:athlete-sitemap": "node --experimental-strip-types scripts/verify-athlete-sitemap.mjs"
+    "verify:athlete-sitemap": "node --experimental-strip-types scripts/verify-athlete-sitemap.mjs",
+    "verify:search-discovery": "node scripts/verify-search-discovery.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",

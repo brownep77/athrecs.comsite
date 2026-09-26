@@ -1,16 +1,12 @@
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { EyeOff, LockKeyhole, RefreshCw, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
-    meta: [
-      { title: "Athlete Account privacy | ATHRECS.com" },
-      {
-        name: "description",
-        content: "How ATHRECS handles Athlete Account, Entry Passport and preference data.",
-      },
-    ],
+    meta: siteGraphMeta({ title: "Athlete account and profile privacy | ATHRECS", description: "Learn how AthRecs handles athlete accounts, profile visibility, result claims, Entry Passport details and preferences.", url: `${SITE_URL}/privacy` }),
+    links: [{ rel: "canonical", href: `${SITE_URL}/privacy` }],
   }),
   component: AthletePrivacyPage,
 });

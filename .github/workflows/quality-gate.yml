@@ -48,6 +48,9 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Verify search URLs and sitemap privacy
+        run: npm run verify:search-discovery
+
       - name: Verify historical result source safeguards
         run: node scripts/verify-result-source-sync.mjs
 

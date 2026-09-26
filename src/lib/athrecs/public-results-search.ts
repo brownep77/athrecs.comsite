@@ -30,14 +30,5 @@ export function normalizeResultsSearch(input: unknown): ResultsSearch {
   };
 }
 
-export function parseResultsEditionId(value: unknown): number {
-  if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error("Invalid race edition");
-  }
-  if (!/^\d+$/.test(String(value))) throw new Error("Invalid race edition");
-  const id = Number(value);
-  if (!Number.isSafeInteger(id) || id <= 0 || id > 2147483647) {
-    throw new Error("Invalid race edition");
-  }
-  return id;
-}
+// Accept legacy numeric URLs as well as descriptive result slugs.
+export { resultEditionId as parseResultsEditionId } from "./result-slug.ts";

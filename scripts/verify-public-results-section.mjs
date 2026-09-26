@@ -20,7 +20,7 @@ function loadTypeScript(path, dependencies = {}) {
 }
 
 const sportPages = loadTypeScript("src/lib/athrecs/sport-pages.ts");
-const search = loadTypeScript("src/lib/athrecs/public-results-search.ts", { "./sport-pages": sportPages });
+const search = loadTypeScript("src/lib/athrecs/public-results-search.ts", { "./sport-pages": sportPages, "./result-slug.ts": loadTypeScript("src/lib/athrecs/result-slug.ts") });
 assert.equal(search.normalizeResultsSearch({ category: "trail-running" }).category, "trail-running");
 assert.equal(search.normalizeResultsSearch({ category: "unknown" }).category, "");
 assert.equal(search.normalizeResultsSearch(undefined).page, 1);

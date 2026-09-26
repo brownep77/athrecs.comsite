@@ -1,3 +1,4 @@
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { useState } from "react";
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
@@ -129,19 +130,17 @@ export const Route = createFileRoute("/$language/$country/races/")({
     });
     return { site, language: params.language, races };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, match }) => {
     if (!loaderData) return {};
     const { site, language } = loaderData;
     const copy = copyForLanguage(language);
     const country = displayCountryForLanguage(site, language);
+    const page = match.search.page ?? 1;
+    const url = `${SITE_URL}/${language}/${site.slug}/races${page > 1 ? `?page=${page}` : ""}`;
+    const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
     return {
-      meta: [
-        { title: `${translateCountryText(copy.racesIn, country)} | ATHRECS` },
-        {
-          name: "description",
-          content: translateCountryText(copy.racesIntro, country),
-        },
-      ],
+      meta: siteGraphMeta({ title: `${translateCountryText(copy.racesIn, country)}${page > 1 ? ` — ${page}` : ""} | ATHRECS`, description: translateCountryText(copy.racesIntro, country), url }).map((tag) => filtered && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
+      links: [{ rel: "canonical", href: url }],
     };
   },
   component: CountryRacesPage,

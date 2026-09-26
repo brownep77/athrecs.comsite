@@ -1,3 +1,4 @@
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import {
   formText,
   usePartnerAccount,
@@ -33,15 +34,10 @@ import {
 } from "@/lib/athrecs/partnerships";
 
 export const Route = createFileRoute("/opportunities")({
+  loader: () => getPublicPartnerships(),
   head: () => ({
-    meta: [
-      { title: "Athlete & club opportunities | ATHRECS" },
-      {
-        name: "description",
-        content:
-          "Explore reviewed sponsorships, product testing and brand collaborations for athletes and clubs.",
-      },
-    ],
+    meta: siteGraphMeta({ title: "Athlete and club sponsorship opportunities | ATHRECS", description: "Explore reviewed sponsorships, product testing and brand collaborations for athletes and clubs on AthRecs.", url: `${SITE_URL}/opportunities` }),
+    links: [{ rel: "canonical", href: `${SITE_URL}/opportunities` }],
   }),
   component: () => (
     <PartnerArea>
@@ -50,6 +46,7 @@ export const Route = createFileRoute("/opportunities")({
   ),
 });
 function Opportunities() {
+  const initialDirectory = Route.useLoaderData();
   const [kind, setKind] = useState("");
   const [applying, setApplying] = useState<number | null>(null);
   const { user, isPending, query } = usePartnerAccount();
@@ -57,6 +54,7 @@ function Opportunities() {
   const directory = useQuery({
     queryKey: ["partners", "public"],
     queryFn: () => getPublicPartnerships(),
+    initialData: initialDirectory,
   });
   const withdraw = useMutation({
     mutationFn: (id: number) => withdrawPartnerApplication({ data: { id } }),

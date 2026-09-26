@@ -153,6 +153,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Link to="/sportsrecs" className="hover:text-accent">
             SportsRecs network
           </Link>
+          <Link to="/about-us" className="hover:text-accent">About us</Link>
+          <Link to="/site-map" className="hover:text-accent">Browse AthRecs</Link>
           <Link to="/privacy" className="hover:text-accent">
             Privacy
           </Link>

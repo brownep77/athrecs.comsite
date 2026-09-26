@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, SearchCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -6,6 +6,7 @@ import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
 import { normalizeResultsSearch, parseResultsEditionId } from "@/lib/athrecs/public-results-search";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { resultSlug } from "@/lib/athrecs/result-slug";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/results/$editionId")({
@@ -21,17 +22,19 @@ export const Route = createFileRoute("/results/$editionId")({
   loader: async ({ params, deps }) => {
     const data = await getPublicRaceResults({ data: { editionId: params.editionId, q: deps.q, page: deps.page } });
     if (!data) throw notFound();
+    const canonicalSlug = resultSlug(data.edition);
+    if (params.editionId !== canonicalSlug) throw redirect({ to: "/results/$editionId", params: { editionId: canonicalSlug }, search: { q: deps.q || undefined, page: deps.page > 1 ? deps.page : undefined }, statusCode: 301 });
     return data;
   },
   staleTime: 60_000,
   head: ({ loaderData, match }) => {
     if (!loaderData) return {};
     const edition = loaderData.edition;
-    const url = `${SITE_URL}/results/${edition.edition_id}`;
+    const url = `${SITE_URL}/results/${resultSlug(edition)}`;
     return {
       meta: [
         ...siteGraphMeta({
-          title: `${edition.event_name} ${edition.event_date.slice(0, 4)} results | ATHRECS.com`,
+          title: `${edition.event_name} ${edition.distance_code} results — ${edition.event_date.slice(0, 10)} | ATHRECS.com`,
           description: `Recorded results for ${edition.event_name}, ${edition.distance_code}, ${formatRaceDateShort(edition.event_date)}. Explore performances and athlete profiles on AthRecs.`,
           url,
         }),
@@ -60,7 +63,7 @@ export const Route = createFileRoute("/results/$editionId")({
 function RaceResultsPage() {
   const { edition, results, hasMore } = Route.useLoaderData();
   const search = normalizeResultsSearch(Route.useSearch());
-  const params = { editionId: String(edition.edition_id) };
+  const params = { editionId: resultSlug(edition) };
   return (
     <div className="space-y-5">
       <Link to="/results" className="inline-flex items-center gap-1.5 text-sm text-accent no-underline hover:underline"><ArrowLeft className="size-4" aria-hidden="true" />All results</Link>
@@ -71,12 +74,12 @@ function RaceResultsPage() {
         <p className="text-sm font-medium text-accent">{edition.result_count.toLocaleString("en-GB")} results recorded on AthRecs</p>
       </header>
 
-      <form action={`/results/${edition.edition_id}`} method="get" className="flex flex-wrap items-end gap-3 rounded-xl border border-border bg-surface p-4">
+      <form action={`/results/${resultSlug(edition)}`} method="get" className="flex flex-wrap items-end gap-3 rounded-xl border border-border bg-surface p-4">
         <label className="min-w-0 flex-1 basis-64 space-y-1.5 text-xs font-medium text-muted">Athlete, profile club or category
           <input name="q" defaultValue={search.q} maxLength={120} placeholder="Search these results" className="h-11 w-full rounded-lg border border-border bg-bg px-3 text-sm text-fg focus:outline-none focus:ring-2 focus:ring-accent/40" />
         </label>
         <Button type="submit" className="h-11">Search</Button>
-        {search.q ? <a href={`/results/${edition.edition_id}`} className="py-3 text-sm text-accent underline">Clear</a> : null}
+        {search.q ? <a href={`/results/${resultSlug(edition)}`} className="py-3 text-sm text-accent underline">Clear</a> : null}
       </form>
 
       <section aria-label="Recorded race results" className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">

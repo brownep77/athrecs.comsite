@@ -7,6 +7,7 @@ import { normalizeResultsSearch } from "@/lib/athrecs/public-results-search";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { resultSlug } from "@/lib/athrecs/result-slug";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 
 export const Route = createFileRoute("/results/")({
@@ -101,7 +102,7 @@ function ResultsPage() {
         {data.editions.length ? (
           <div className="grid gap-3 md:grid-cols-2">
             {data.editions.map((edition) => (
-              <Link key={edition.edition_id} to="/results/$editionId" params={{ editionId: String(edition.edition_id) }}
+              <Link key={edition.edition_id} to="/results/$editionId" params={{ editionId: resultSlug(edition) }}
                 className="group flex min-w-0 items-start justify-between gap-3 rounded-xl border border-border bg-surface p-4 no-underline shadow-card transition-colors hover:border-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
                 <div className="min-w-0 space-y-2">
                   <div className="flex flex-wrap gap-2"><Badge variant="outline">{edition.sport}</Badge><Badge variant="outline">{edition.distance_code}</Badge></div>
