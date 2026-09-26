@@ -1,3 +1,4 @@
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { listEvents } from "@/lib/athrecs/api";
@@ -122,6 +123,7 @@ export const Route = createFileRoute("/races/")({
     });
   },
   head: ({ match }) => {
+    if (IS_RUNRECS_SITE) return { links: [{ rel: "canonical", href: `${SITE_URL}/races` }] };
     const page = match.search.page ?? 1;
     const url = `${SITE_URL}/races${page > 1 ? `?page=${page}` : ""}`;
     const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
