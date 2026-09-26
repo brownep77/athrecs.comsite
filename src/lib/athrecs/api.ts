@@ -6,6 +6,13 @@ import { publicProfileDetails } from "./profile-details";
 import { loadUpcoming } from "./athlete-upcoming-api";
 import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
 import { createServerFn } from "@tanstack/react-start";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import {
+  PUBLIC_ATHLETE_LIST_LIMIT,
+  PUBLIC_EDITION_PREVIEW_LIMIT,
+  publicAthleteListSchema,
+  publicEditionIdSchema,
+} from "./public-read-limits";
 import { getSql, dbSource } from "@/lib/db";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { canonicalEventSlug } from "@/data/entry-options";
@@ -774,7 +781,9 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   });
 
 export const getEditionResults = createServerFn({ method: "GET" })
-  .validator((editionId: number) => editionId)
+  .validator((editionId: number) =>
+    IS_RUNRECS_SITE ? editionId : publicEditionIdSchema.parse(editionId),
+  )
   .handler(async ({ data: editionId }) => {
     const sql = await ready();
     const rows = await sql<{
@@ -804,7 +813,22 @@ export const getEditionResults = createServerFn({ method: "GET" })
           r.result_visibility in ('public', 'public_figure')
           or a.profile_type = 'Public figure'
         )
-      order by (lower(r.status) in ('finished', 'fin')) desc, r.finish_time_seconds asc nulls last, a.display_name asc
+        and (${IS_RUNRECS_SITE} or (
+          (a.profile_visibility = 'public' or a.profile_type = 'Public figure')
+          and not exists (
+            select 1 from athlete_account_links l
+            join athlete_public_shares s on s.user_id = l.user_id
+            where l.athlete_id = a.id and l.status = 'active'
+              and (s.enabled = false or s.share_results = false)
+          )
+          and not exists (
+            select 1 from athlete_profile_hidden_results h
+            join athlete_account_links l on l.user_id = h.user_id and l.status = 'active'
+            where l.athlete_id = a.id and h.result_id = r.id
+          )
+        ))
+      order by (lower(r.status) in ('finished', 'fin')) desc, r.finish_time_seconds asc nulls last, a.display_name asc, r.id
+      limit ${IS_RUNRECS_SITE ? null : PUBLIC_EDITION_PREVIEW_LIMIT}
     `;
     return rows.map(({ result_details, ...row }) => ({
       ...row,
@@ -813,7 +837,9 @@ export const getEditionResults = createServerFn({ method: "GET" })
   });
 
 export const listAthletes = createServerFn({ method: "GET" })
-  .validator((input: { q?: string } | undefined) => input ?? {})
+  .validator((input: { q?: string; offset?: number } | undefined) =>
+    IS_RUNRECS_SITE ? input ?? {} : publicAthleteListSchema.parse(input ?? {}),
+  )
   .handler(async ({ data }) => {
     const sql = await ready();
     const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
@@ -831,11 +857,28 @@ export const listAthletes = createServerFn({ method: "GET" })
               a.profile_type = 'Public figure'
                   or r.result_visibility in ('public', 'public_figure')
             )
+            and (${IS_RUNRECS_SITE} or (
+              not exists (
+                select 1 from athlete_account_links l
+                join athlete_public_shares s on s.user_id = l.user_id
+                where l.athlete_id = a.id and l.status = 'active' and s.share_results = false
+              )
+              and not exists (
+                select 1 from athlete_profile_hidden_results h
+                join athlete_account_links l on l.user_id = h.user_id and l.status = 'active'
+                where l.athlete_id = a.id and h.result_id = r.id
+              )
+            ))
         ) as result_count
       from athletes a
       left join clubs c on c.id = a.club_id
       where
         (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
+        and (${IS_RUNRECS_SITE} or not exists (
+          select 1 from athlete_account_links l
+          join athlete_public_shares s on s.user_id = l.user_id
+          where l.athlete_id = a.id and l.status = 'active' and s.enabled = false
+        ))
         and (
           ${q}::text is null
           or lower(a.display_name) like ${q}
@@ -844,7 +887,9 @@ export const listAthletes = createServerFn({ method: "GET" })
           or lower(coalesce(a.profile_type, '')) like ${q}
           or lower(coalesce(a.profile_roles, '')) like ${q}
         )
-      order by a.display_name
+      order by a.display_name, a.id
+      limit ${IS_RUNRECS_SITE ? null : PUBLIC_ATHLETE_LIST_LIMIT}
+      offset ${IS_RUNRECS_SITE ? 0 : data.offset ?? 0}
     `;
     return athletes.map((athlete) => {
       const reported = getReportedRaceHistory(athlete.slug);
