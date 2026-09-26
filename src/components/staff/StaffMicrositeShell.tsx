@@ -19,6 +19,7 @@ import {
   UserRoundCog,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BackendTaskPanel } from "./BackendTaskPanel";
 import { getStaffAccess } from "@/lib/auth/staff-access";
 import { signIn, signOut } from "@/lib/auth/client";
 import {
@@ -288,6 +289,7 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
         </div>
         <nav className="border-t border-slate-800" aria-label="Staff tools">
           <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 md:px-6">
+            {IS_ATHRECS_SITE ? <a href="/admin#backend-tasks" className="inline-flex min-h-10 shrink-0 items-center rounded-md bg-cyan-300 px-3 text-sm font-semibold text-slate-950 no-underline hover:bg-cyan-200">All backend tasks</a> : null}
             {staffNav
               .filter((item) => IS_ATHRECS_SITE || (item.to !== "/admin/partnerships" && item.to !== "/admin/check-results-upload"))
               .map((item) => {
@@ -307,7 +309,9 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
           </div>
         </nav>
       </header>
-      <main className="mx-auto w-full max-w-7xl px-4 py-6 md:px-6 md:py-8">{children}</main>
+      <main className="mx-auto w-full max-w-7xl px-4 py-6 md:px-6 md:py-8">
+        {IS_ATHRECS_SITE && pathname === "/admin" ? <><BackendTaskPanel /><div id="legacy-admin-tools" className="scroll-mt-6">{children}</div></> : children}
+      </main>
     </div>
   );
 }
@@ -316,7 +320,7 @@ function StaffLoadingScreen({ label }: { label: string }) {
   return (
     <div className="flex min-h-dvh items-center justify-center bg-slate-950 px-4 text-white">
       <div className="flex items-center gap-3 text-sm text-slate-300">
-        <Loader2 className="size-5 animate-spin text-cyan-300" aria-hidden="true" />{label}
+        <Loader2 className="size-5 animate-spin" aria-hidden="true" />{label}
       </div>
     </div>
   );
