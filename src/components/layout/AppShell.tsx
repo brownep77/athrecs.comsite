@@ -112,7 +112,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           aria-label="Browse by sport"
           className="border-b border-accent/20 bg-accent-soft px-4 md:px-6"
         >
-          <ul className="flex flex-wrap items-center gap-x-1 py-1 sm:gap-x-3">
+          <ul className="flex flex-wrap items-center gap-x-1 py-1">
             {SPORT_PAGES.map((item) => (
               <li key={item.slug}>
                 <Link
@@ -121,7 +121,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                   search={{}}
                   aria-current={pathname === `/sports/${item.slug}` ? "page" : undefined}
                   className={cn(
-                    "inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold no-underline transition-colors hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-4",
+                    "inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold no-underline transition-colors hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3",
                     pathname === `/sports/${item.slug}`
                       ? "bg-primary text-primary-fg"
                       : "text-accent",

@@ -8,7 +8,14 @@ import {
 } from "../src/lib/athrecs/sport-pages.ts";
 import { SPORT_BROADCASTS, upcomingBroadcasts } from "../src/data/sport-broadcasts.ts";
 
-assert.equal(getSportPage("biking").sport, "Cycling");
+assert.equal(getSportPage("biking").slug, "road-cycling");
+for (const slug of ["mountain-biking", "track-cycling", "bmx"]) {
+  assert.equal(
+    upcomingBroadcasts(getSportPage(slug), new Date("2026-09-26T12:00:00Z")).length,
+    0,
+    "Road broadcasts must stay on Road Cycling",
+  );
+}
 assert.equal(getSportPage("unknown"), undefined);
 assert.equal(getSportPage("running").slug, "road-running");
 assert.equal(
@@ -119,7 +126,15 @@ try {
       (13, 'Cross Country', 'Athletics', 'Cross Country'),
       (14, 'Track Cycling', 'Cycling', 'Track'),
       (15, 'Trail Athletics', 'Athletics', 'Trail'),
-      (16, 'Athletics Road', 'Athletics', 'Road');
+      (16, 'Athletics Road', 'Athletics', 'Road'),
+      (17, 'Road Cycling', 'Cycling', 'Road'),
+      (18, 'MTB Race', 'Cycling', 'MTB'),
+      (19, 'Trail Ride', 'Cycling', 'Trail'),
+      (20, 'MTB Gravel Programme', 'Cycling', 'MTB / Gravel'),
+      (21, 'BMX Race', 'Cycling', 'BMX Track'),
+      (22, 'Cyclo-cross Race', 'Cycling', 'Cyclo-cross'),
+      (23, 'Gravel Race', 'Cycling', 'Gravel'),
+      (24, 'Velodrome Meet', 'Cycling', 'Velodrome');
     insert into editions select id, id, '2026-10-01', 'Other', null from events where id >= 10;
   `);
   const namesFor = async (slug) =>
@@ -129,6 +144,14 @@ try {
   assert.deepEqual(await namesFor("trail-running"), ["Trail Athletics", "Trail Run"]);
   assert.deepEqual(await namesFor("track-and-field"), ["Track Meeting", "Track Run"]);
   assert.deepEqual(await namesFor("road-running"), ["100% Run", "Athletics Road", "Example Run"]);
+  assert.deepEqual(await namesFor("road-cycling"), ["Example Ride", "Road Cycling"]);
+  assert.deepEqual(await namesFor("mountain-biking"), [
+    "MTB Gravel Programme",
+    "MTB Race",
+    "Trail Ride",
+  ]);
+  assert.deepEqual(await namesFor("track-cycling"), ["Track Cycling", "Velodrome Meet"]);
+  assert.deepEqual(await namesFor("bmx"), ["BMX Race"]);
   await db.exec(`delete from editions where event_id >= 10; delete from events where id >= 10;`);
   await db.exec(`
     insert into editions select 100+n, 1, '2026-10-01'::date+n, '10K', null from generate_series(0,30) n;
