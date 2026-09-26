@@ -93,6 +93,7 @@ export function combineProfileResults<T extends ProfileResult>(
   const editionKeys = new Map<number, Set<string>>();
   const classificationPlaces = new Map<number, { gender: Set<number>; category: Set<number> }>();
   for (const result of results) {
+    if (result.details?.profileExcluded) continue;
     const placings = classificationPlaces.get(result.editionId) ?? {
       gender: new Set<number>(),
       category: new Set<number>(),
@@ -146,6 +147,7 @@ export function combineProfileResults<T extends ProfileResult>(
 
 export function eligiblePerformance(result: ProfileResult): boolean {
   return (
+    !result.details?.profileExcluded &&
     roadPerformanceCondition(result)?.eligible !== false &&
     !isDisqualified(result) &&
     result.status.toLowerCase() === "finished" &&
