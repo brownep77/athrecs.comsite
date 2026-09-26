@@ -1,12 +1,11 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { getSql, dbSource, type Sql } from "../db";
 import { IS_RUNRECS_SITE } from "../site-scope";
-import { normal, distanceValue, timeSeconds, resultIssues, profileSchema, type ProfileFields, type DraftResult, type CandidateResult, type Batch } from "./core";
+import { normal, profileSchema, type ProfileFields, type DraftResult, type CandidateResult, type Batch } from "./core";
 
 type Actor = { userId: string; staff: boolean };
 const hash = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
 const tokenHash = (token: string) => createHash("sha256").update(token).digest("hex");
-const slug = (text: string) => text.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g, "").slice(0,140);
 async function ready() {
   if (IS_RUNRECS_SITE) throw new Error("Use AthRecs for athlete profile changes.");
   if (dbSource !== "neon") throw new Error("The live database is unavailable. Nothing has been saved.");
@@ -20,6 +19,9 @@ async function user(sql: Sql, actor: Actor) {
 async function audit(sql: Sql, actor: Actor, action: string, id: string, before: unknown, after: unknown, note: string) {
   await sql`insert into network_audit_log(actor_user_id,action,entity_type,entity_id,before_value,after_value,note)
     values(${actor.userId},${action},'athlete_workspace',${id},${JSON.stringify(before)}::jsonb,${JSON.stringify(after)}::jsonb,${note})`;
+}
+function memberEntry(row: CandidateResult): CandidateResult {
+  return {index:row.index,race:row.race,date:row.date,distance:row.distance,time:row.time,timingBasis:row.timingBasis,sourceUrl:row.sourceUrl,bib:row.bib,place:row.place,state:row.state,response:row.response,responseAt:row.responseAt,responseNote:row.responseNote,resultId:row.resultId};
 }
 async function owners(sql: Sql, athleteId: number) {
   return sql<{ user_id: string; email: string }>`select l.user_id,u.email from athlete_account_links l join "user" u on u.id=l.user_id where l.athlete_id=${athleteId} and l.status='active'`;
@@ -51,14 +53,15 @@ export async function workspace(athleteId: number | null, actor: Actor) {
   const links=athleteId ? await owners(sql,athleteId) : [];
   const results=athleteId ? await sql<{id:number;race:string;date:string;distance:string;time:string;excluded:boolean}>`
     select r.id,e.name as race,ed.event_date::text as date,ed.distance_code as distance,
-      coalesce(r.result_details->'timing'->>'finishText',r.finish_time_seconds::text,'') as time,
+      coalesce(r.result_details->'timing'->>'finishText',case when r.finish_time_seconds is not null then
+        lpad((r.finish_time_seconds/3600)::text,2,'0')||':'||lpad(((r.finish_time_seconds%3600)/60)::text,2,'0')||':'||lpad((r.finish_time_seconds%60)::text,2,'0') end,'') as time,
       coalesce((r.result_details->>'profileExcluded')::boolean,false) as excluded
     from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
     where r.athlete_id=${athleteId} order by ed.event_date desc,r.id desc limit 5000` : [];
   const batches=await sql<{id:string;athlete_id:number|null;revision:number;updated_at:string;entries:CandidateResult[]}>`
     select id::text,athlete_id,revision,updated_at::text,entries from athlete_result_proposals
     where (${actor.staff} or submitted_by=${actor.userId}) and (${athleteId}::integer is null or athlete_id=${athleteId}) order by updated_at desc limit 100`;
-  return {profile:p,profileVersion:p?hash(p):null,editable:Boolean(p && (links.some(l=>l.user_id===actor.userId)||(actor.staff&&!links.length))),linked,results,batches,email:account.email};
+  return {profile:p,profileVersion:p?hash(p):null,editable:Boolean(p && (links.some(l=>l.user_id===actor.userId)||(actor.staff&&!links.length))),linked,results,batches:actor.staff?batches:batches.map(b=>({...b,entries:b.entries.map(memberEntry)})),email:account.email};
 }
 export async function editProfile(data: {athleteId:number;version:string;fields:ProfileFields;reason:string}, actor:Actor) {
   const sql=await ready();await user(sql,actor);
@@ -107,7 +110,7 @@ async function batch(sql:Sql,id:string,actor:Actor,lock=false):Promise<Batch> {
   const rows=await sql.query<Batch>(`select *,id::text,updated_at::text from athlete_result_proposals where id=$1::uuid ${lock?'for update':''}`,[id]);
   const b=rows[0];if(!b||(!actor.staff&&b.submitted_by!==actor.userId))throw new Error("This result draft is not available to your account.");return b;
 }
-export async function getBatch(id:string,actor:Actor){const sql=await ready();await user(sql,actor);return batch(sql,id,actor);}
+export async function getBatch(id:string,actor:Actor){const sql=await ready();await user(sql,actor);const b=await batch(sql,id,actor);return actor.staff?b:{...b,evidence_for:'',evidence_against:'',entries:b.entries.map(memberEntry)};}
 export async function issueInvitation(data:{batchId:string;revision:number;email:string},actor:Actor) {
   if(!actor.staff)throw new Error("Staff access required.");
   const sql=await ready();await user(sql,actor);
@@ -128,7 +131,10 @@ export async function issueInvitation(data:{batchId:string;revision:number;email
     return {id,url:`https://www.athrecs.com/review-results#${token}`,expiresInDays:7};
   });
 }
-export async function revokeInvitation(id:string,actor:Actor){if(!actor.staff)throw new Error("Staff access required.");const sql=await ready();await user(sql,actor);await sql`update athlete_result_review_invitations set revoked_at=now() where id=${id}::uuid`;return {revoked:true};}
+export async function revokeInvitation(id:string,actor:Actor){
+  if(!actor.staff)throw new Error("Staff access required.");const sql=await ready();await user(sql,actor);
+  return sql.transaction(async tx=>{const rows=await tx`update athlete_result_review_invitations set revoked_at=now() where id=${id}::uuid returning id`;if(rows.length)await audit(tx,actor,'athlete.review_link_revoked',id,null,{revoked:true},'Revoked by staff.');return {revoked:rows.length>0};});
+}
 async function invited(sql:Sql,token:string,actor:Actor,lock=false){
   const account=await user(sql,actor);
   const [invite]=await sql.query<{id:string;batch_id:string;recipient_email:string;issued_revision:number}>(`select id::text,batch_id::text,recipient_email,issued_revision from athlete_result_review_invitations where token_hash=$1 and revoked_at is null and responded_at is null and expires_at>now() ${lock?'for update':''}`,[tokenHash(token)]);
