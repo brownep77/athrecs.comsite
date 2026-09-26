@@ -8,7 +8,7 @@ export const Route = createFileRoute("/find-events")({
     meta: siteGraphMeta({
       title: "Find your next event | ATHRECS",
       description:
-        "Explore AthRecs road marathon guides across seven countries, with entry methods, routes and results, plus specialist event calendars for other sports.",
+        "Explore AthRecs road marathon and half marathon guides across seven countries, with entry methods, routes and results, plus specialist event calendars for other sports.",
       url: `${SITE_URL}/find-events`,
     }),
     links: [{ rel: "canonical", href: `${SITE_URL}/find-events` }],
@@ -72,7 +72,7 @@ function FindEventsPage() {
         <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
           {IS_RUNRECS_SITE
             ? "Explore road, trail, fell and ultra races, plus parkrun. Search by place, distance and date to find your next run."
-            : "Explore road marathons in the UK, Australia, New Zealand, USA, Canada, Ireland and South Africa. Compare entry methods, routes, dates and previous results."}
+            : "Explore road marathons and half marathons in the UK, Australia, New Zealand, USA, Canada, Ireland and South Africa. Compare entry methods, routes, dates and previous results."}
         </p>
         <span className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-fg">
           Explore running <ArrowRight className="size-4" aria-hidden="true" />

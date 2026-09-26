@@ -240,8 +240,8 @@ function AthleteHomePage() {
               Your next event starts here
             </h2>
             <p className="mt-1 text-xs text-muted">
-              Compare road marathons across seven countries and explore event sites for other
-              sports.
+              Compare road marathons and half marathons across seven countries and explore event
+              sites for other sports.
             </p>
           </div>
         </div>

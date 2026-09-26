@@ -3,7 +3,8 @@ export type MarathonCountry =
 
 export type RaceLink = { label: string; url: string };
 
-export type RoadMarathon = {
+export type RoadRace = {
+  distanceKm?: 21.0975 | 42.195;
   slug: string;
   name: string;
   country: MarathonCountry;
@@ -22,6 +23,7 @@ export type RoadMarathon = {
   practical?: { label: string; value: string; sourceUrl: string }[];
   media: { label: string; url: string; kind: "news" | "video" | "photos" }[];
   resultsUrl: string;
+  resultsLabel?: string;
   pastEditions: {
     year: number;
     date?: string;
@@ -41,3 +43,7 @@ export type MarathonCountryGuide = {
   regionLabel: string;
   description: string;
 };
+
+/** Compatibility name for existing full-marathon records. */
+export type RoadMarathon = RoadRace;
+export type RoadHalfMarathon = RoadRace & { distanceKm: 21.0975 };

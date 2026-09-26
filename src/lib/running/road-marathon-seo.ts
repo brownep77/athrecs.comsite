@@ -1,4 +1,5 @@
 import type { MarathonCountryGuide, RoadMarathon } from "@/data/road-marathons/types";
+import { halfMarathonCountry } from "@/data/road-half-marathons/countries";
 import { countryGuide } from "@/data/road-marathons/countries";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { roadMarathonDate, upcomingRoadEditions } from "./road-marathon-calendar";
@@ -42,6 +43,7 @@ export function countryMarathonQuestions(
   races: readonly RoadMarathon[],
   now: string,
 ) {
+  const distance = country.guide.endsWith("-half-marathons") ? "half marathon" : "marathon";
   const location = ["uk", "usa"].includes(country.id) ? `the ${country.name}` : country.name;
   const upcoming = races
     .flatMap((race) =>
@@ -51,27 +53,27 @@ export function countryMarathonQuestions(
     .slice(0, 3);
   return [
     {
-      question: `Which road marathons are included in this ${country.name} guide?`,
-      answer: `This AthRecs guide includes ${races.length} road marathons in ${location}, including ${races
+      question: `Which road ${distance}s are included in this ${country.name} guide?`,
+      answer: `This AthRecs guide includes ${races.length} road ${distance}s in ${location}, including ${races
         .slice(0, 5)
         .map((race) => race.name)
         .join(", ")}. Open a race guide for its course, entry options, dates and previous results.`,
     },
     {
-      question: `When are the next road marathons in ${location}?`,
+      question: `When are the next road ${distance}s in ${location}?`,
       answer: upcoming.length
         ? `The next confirmed dates in this guide are ${upcoming.map((race) => `${race.name} on ${roadMarathonDate(race.date, race.endDate)}`).join("; ")}. All dates are local to the race.`
         : "Upcoming race dates are TBC (to be confirmed). Each race guide links to the organiser for the latest announcements.",
     },
     {
-      question: `How do I enter a road marathon in ${location}?`,
+      question: `How do I enter a road ${distance} in ${location}?`,
       answer:
         "Open an individual race guide to compare its entry methods and eligibility rules. Follow the official entry links for registration windows, qualifying requirements, fees and available places.",
     },
     {
       question: "Where can I find past race and category results?",
       answer:
-        "Each race guide has a past-results section with race summaries and a link to the official archive. Open the full results to search for a runner or see the complete category standings.",
+        "Each race guide links to the organiser’s results. Choose the correct distance and edition to find a runner or published category standings.",
     },
   ];
 }
@@ -81,11 +83,13 @@ export function countryMarathonHead(
   races: readonly RoadMarathon[],
   now: string,
 ) {
+  const distance = country.guide.endsWith("-half-marathons") ? "half marathon" : "marathon";
+  const displayDistance = distance === "half marathon" ? "Half Marathons" : "Marathons";
   const path = roadCountryPath(country);
   const url = `${SITE_URL}${path}`;
   const shortName = country.id === "uk" ? "UK" : country.id === "usa" ? "USA" : country.name;
-  const title = `${shortName} Road Marathons: Dates, Entry & Results | ATHRECS`;
-  const description = `Compare ${races.length} road marathons in ${country.name}: confirmed dates through 2027, entry methods, course guides, field sizes and previous results.`;
+  const title = `${shortName} Road ${displayDistance}: Dates, Entry & Results | ATHRECS`;
+  const description = `Compare ${races.length} road ${distance}s in ${country.name}: confirmed dates through 2027, entry methods, course guides, field sizes and previous results.`;
   return head(title, description, path, [
     {
       "@type": "CollectionPage",
@@ -104,7 +108,7 @@ export function countryMarathonHead(
     {
       "@type": "ItemList",
       "@id": `${url}#races`,
-      name: `${country.name} road marathons`,
+      name: `${country.name} road ${distance}s`,
       numberOfItems: races.length,
       itemListElement: races.map((race, index) => ({
         "@type": "ListItem",
@@ -120,7 +124,7 @@ export function countryMarathonHead(
     {
       "@type": "ItemList",
       "@id": `${url}#upcoming`,
-      name: "Confirmed upcoming marathon dates through 2027",
+      name: `Confirmed upcoming ${distance} dates through 2027`,
       numberOfItems: races.reduce(
         (count, race) => count + upcomingRoadEditions(race, now).length,
         0,
@@ -145,7 +149,7 @@ export function countryMarathonHead(
     breadcrumb([
       { name: "AthRecs", path: "/" },
       { name: "Running", path: "/running" },
-      { name: `${country.name} marathons`, path },
+      { name: `${country.name} ${distance}s`, path },
     ]),
   ]);
 }
@@ -169,17 +173,19 @@ export function roadRaceQuestions(race: RoadMarathon, now: string) {
     {
       question: `Where can I find past ${race.name} results?`,
       answer:
-        "The past races and results section links to the official results archive and individual editions. Use the full results for participant searches and published category standings.",
+        "The past races and results section links to the organiser’s results. Select the distance and edition for participant searches and published category standings.",
     },
   ];
 }
 
 export function roadRaceHead(race: RoadMarathon, now: string) {
-  const country = countryGuide(race.country)!;
+  const half = race.distanceKm === 21.0975;
+  const distance = half ? "half marathon" : "marathon";
+  const country = (half ? halfMarathonCountry(race.country) : countryGuide(race.country))!;
   const path = roadRacePath(race);
   const url = `${SITE_URL}${path}`;
   const title = `${race.name}: Entry, Route, Dates & Results | ATHRECS`;
-  const description = `${race.name} in ${roadRaceLocation(race, country.name)}: find race dates, entry options, the course route, previous results and race photos.`;
+  const description = `${race.name} in ${roadRaceLocation(race, country.name)}: find race dates, entry options, the course route, previous results and official race information.`;
   return head(title, description, path, [
     {
       "@type": "WebPage",
@@ -226,7 +232,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
     breadcrumb([
       { name: "AthRecs", path: "/" },
       { name: "Running", path: "/running" },
-      { name: `${country.name} marathons`, path: roadCountryPath(country) },
+      { name: `${country.name} ${distance}s`, path: roadCountryPath(country) },
       { name: race.name, path },
     ]),
   ]);

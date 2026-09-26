@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
+import { HALF_MARATHON_COUNTRIES, halfMarathonCountry } from "@/data/road-half-marathons/countries";
 import { MARATHON_COUNTRIES, countryGuide } from "@/data/road-marathons/countries";
 import type { MarathonCountryGuide, RoadMarathon } from "@/data/road-marathons/types";
 import { roadMarathonDate, upcomingRoadEditions } from "@/lib/running/road-marathon-calendar";
@@ -20,7 +21,7 @@ function CountryLink({
   country: MarathonCountryGuide;
   children: React.ReactNode;
 }) {
-  return country.id === "uk" ? (
+  return country.guide === "uk-marathons" ? (
     <Link to="/running/uk-marathons" className={linkClass}>
       {children}
     </Link>
@@ -31,13 +32,13 @@ function CountryLink({
   );
 }
 
-function CountryNavigation({ selected }: { selected: string }) {
+function CountryNavigation({ selected, half = false }: { selected: string; half?: boolean }) {
   return (
     <nav
-      aria-label="Marathon countries"
+      aria-label={half ? "Half marathon countries" : "Marathon countries"}
       className="flex flex-wrap gap-x-5 gap-y-1 border-y border-border py-3 text-sm"
     >
-      {MARATHON_COUNTRIES.map((country) =>
+      {(half ? HALF_MARATHON_COUNTRIES : MARATHON_COUNTRIES).map((country) =>
         country.id === selected ? (
           <span
             key={country.id}
@@ -73,6 +74,8 @@ export function CountryMarathonPage({
     races.map((race) => race.timeZone),
     now,
   );
+  const half = country.guide.endsWith("-half-marathons");
+  const distance = half ? "half marathon" : "marathon";
   const dated = races
     .flatMap((race) => upcomingRoadEditions(race, now).map((edition) => ({ race, edition })))
     .sort(
@@ -88,28 +91,31 @@ export function CountryMarathonPage({
         <span aria-hidden="true">/</span>
         <Link to="/running">Running</Link>
         <span aria-hidden="true">/</span>
-        <span aria-current="page">{country.name} marathons</span>
+        <span aria-current="page">
+          {country.name} {distance}s
+        </span>
       </nav>
       <header className="max-w-4xl">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">
           {country.name} · Road running
         </p>
         <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-          {country.name} road marathons
+          {country.name} road {distance}s
         </h1>
         <p className="mt-5 max-w-3xl text-base leading-7 text-muted">{country.description}</p>
         <p className="mt-3 text-sm text-muted">
-          {races.length} race guides · 42.195 km / 26.2 miles · Dates through 2027
+          {races.length} race guides · {half ? "21.0975 km / 13.1 miles" : "42.195 km / 26.2 miles"}{" "}
+          · Dates through 2027
         </p>
       </header>
-      <CountryNavigation selected={country.id} />
+      <CountryNavigation selected={country.id} half={half} />
       <section aria-labelledby="upcoming" className="space-y-4">
         <h2 id="upcoming" className="scroll-mt-24 font-display text-2xl font-semibold">
-          Upcoming marathon dates
+          Upcoming {distance} dates
         </h2>
         <p className="max-w-3xl text-sm leading-6 text-muted">
-          Find road marathons taking place between now and the end of 2027. Compare the location and
-          approximate field, then open a race guide for entry options, course maps and previous
+          Find road {distance}s taking place between now and the end of 2027. Compare the location
+          and approximate field, then open a race guide for entry options, course maps and previous
           results. Runner numbers refer to the year shown; Unknown means a reliable estimate is not
           available.
         </p>
@@ -117,19 +123,19 @@ export function CountryMarathonPage({
           <div
             className="overflow-x-auto rounded-xl border border-border"
             role="region"
-            aria-label="Upcoming marathons; scroll horizontally on smaller screens"
+            aria-label={`Upcoming ${distance}s; scroll horizontally on smaller screens`}
             tabIndex={0}
           >
             <table className="w-full min-w-[800px] text-left text-sm">
               <caption className="sr-only">
-                Upcoming road marathons in {country.name}, with locations and approximate field
+                Upcoming road {distance}s in {country.name}, with locations and approximate field
                 sizes.
               </caption>
               <thead className="bg-accent-soft/50">
                 <tr>
                   {[
                     "Date",
-                    "Marathon",
+                    half ? "Half marathon" : "Marathon",
                     "City / location",
                     country.regionLabel,
                     "Approximate field",
@@ -283,8 +289,8 @@ export function CountryMarathonPage({
       <aside className="rounded-xl bg-elevated/50 p-5 text-sm leading-6 text-muted">
         <p className="font-semibold text-fg">Before you choose</p>
         <p className="mt-2">
-          A road marathon can include paved paths or a track finish, so check the course map as well
-          as the name. Recent runner numbers give a sense of the race’s scale. For entry
+          A road {distance} can include paved paths or a track finish, so check the course map as
+          well as the name. Recent runner numbers give a sense of the race’s scale. For entry
           availability, final routes and race-day arrangements, follow the organiser’s latest
           information.
         </p>
@@ -295,7 +301,8 @@ export function CountryMarathonPage({
 
 export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: string }) {
   useRaceDateRefresh([race.timeZone], now);
-  const country = countryGuide(race.country)!;
+  const half = race.distanceKm === 21.0975;
+  const country = (half ? halfMarathonCountry(race.country) : countryGuide(race.country))!;
   const upcoming = upcomingRoadEditions(race, now);
   const questions = roadRaceQuestions(race, now);
   return (
@@ -311,7 +318,7 @@ export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: strin
       </nav>
       <header className="border-b border-border pb-7">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">
-          {country.name} · Road marathon · 42.195 km
+          {country.name} · Road {half ? "half marathon · 21.0975 km" : "marathon · 42.195 km"}
         </p>
         <h1 className="mt-4 max-w-4xl font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
           {race.name}
@@ -378,6 +385,9 @@ export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: strin
               <DateNote />
             </p>
           )}
+          {half && race.nextDateNote ? (
+            <p className="mt-3 text-sm leading-6 text-muted">{race.nextDateNote}</p>
+          ) : null}
           <p className="mt-3 text-xs leading-5 text-muted">
             {upcoming.length
               ? "Planning your race weekend? These are the announced dates through 2027. "
@@ -407,7 +417,9 @@ export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: strin
             ) : null}
             <div>
               <dt className="font-semibold">Distance</dt>
-              <dd className="text-muted">42.195 kilometres / 26.2 miles</dd>
+              <dd className="text-muted">
+                {half ? "21.0975 kilometres / 13.1 miles" : "42.195 kilometres / 26.2 miles"}
+              </dd>
             </div>
             <div>
               <dt className="font-semibold">Surface</dt>
@@ -515,11 +527,13 @@ export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: strin
           Past races and results
         </h2>
         <a href={race.resultsUrl} className={`${linkClass} mt-2`}>
-          Official results archive <ArrowUpRight className="size-4" aria-hidden="true" />
+          {race.resultsLabel ?? "Official results archive"}{" "}
+          <ArrowUpRight className="size-4" aria-hidden="true" />
         </a>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-muted">
-          Look back at previous editions, from the overall winners to the age-group contests. Read
-          the race summaries below or open the full results to find a runner, club or category.
+          Open the organiser’s results to find a runner, club or published category standing. At
+          festivals with several distances, select the {half ? "half marathon" : "marathon"}{" "}
+          results.
         </p>
         <div className="mt-5 space-y-5">
           {[...race.pastEditions]
@@ -632,7 +646,8 @@ export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: strin
         </ul>
       </details>
       <CountryLink country={country}>
-        More road marathons in {country.name} <ArrowRight className="size-4" aria-hidden="true" />
+        More road {half ? "half marathons" : "marathons"} in {country.name}{" "}
+        <ArrowRight className="size-4" aria-hidden="true" />
       </CountryLink>
     </article>
   );

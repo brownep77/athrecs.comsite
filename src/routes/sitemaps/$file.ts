@@ -15,8 +15,13 @@ export const Route = createFileRoute("/sitemaps/$file")({
           if (!IS_RUNRECS_SITE) {
             const { MARATHON_COUNTRIES } = await import("@/data/road-marathons/countries");
             const { ROAD_MARATHONS } = await import("@/data/road-marathons");
+            const { HALF_MARATHON_COUNTRIES } =
+              await import("@/data/road-half-marathons/countries");
+            const { ROAD_HALF_MARATHONS } = await import("@/data/road-half-marathons");
             runningPaths.push(
               "/running",
+              ...HALF_MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
+              ...ROAD_HALF_MARATHONS.map((race) => `/running/races/${race.slug}`),
               ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
               ...ROAD_MARATHONS.map((race) => `/running/races/${race.slug}`),
             );
