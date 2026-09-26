@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 
-const title = "About AthRecs | Athlete profiles, race results and sports fixtures";
+const title = "About AthRecs | Athlete Profiles, Race Results & Fixtures";
 const description =
-  "Get to know AthRecs: athlete profiles, race results, personal bests, clubs and sports fixtures, built to make sporting records easier to find and follow.";
+  "AthRecs brings athlete profiles, race results, personal bests, clubs and sports fixtures together. Discover our purpose, coverage and approach to sporting records.";
 const questions = [
   {
     question: "What is AthRecs?",
@@ -33,6 +33,16 @@ const questions = [
       "Yes. Create an athlete account to build your profile and submit results for review. You can also suggest an edit from an athlete profile. Useful supporting details include the official results link, race date, distance and bib number. Claims and corrections are checked before they change the public record.",
   },
   {
+    question: "Can I browse AthRecs without an account?",
+    answer:
+      "Yes. Public athlete profiles, published race results and event guides can be read without signing in. An athlete account lets you manage your own profile and submit results for review. Private account information and unpublished records are not part of the public directory.",
+  },
+  {
+    question: "Can I find marathon, half-marathon and ultramarathon information?",
+    answer:
+      "Yes. The AthRecs running section includes road marathon and half-marathon guides for the United Kingdom, Ireland, Australia, New Zealand, the United States, Canada and South Africa, plus a UK road ultramarathon guide. Race pages cover entry methods, locations, distances and official links. Dates are shown as TBC when they have not been confirmed.",
+  },
+  {
     question: "Does AthRecs organise races or sell race entries?",
     answer:
       "AthRecs helps you discover events and find the organiser or entry provider. Check the official event page for the latest date, entry availability, course details and race instructions. RunRecs is our linked running race directory for exploring your next start line.",
@@ -40,6 +50,7 @@ const questions = [
 ];
 
 export const Route = createFileRoute("/about-us")({
+  ssr: true,
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
@@ -60,10 +71,39 @@ export const Route = createFileRoute("/about-us")({
               description,
               inLanguage: "en-GB",
               about: { "@id": `${SITE_URL}/#organization` },
+              mainEntity: { "@id": `${SITE_URL}/#organization` },
               isPartOf: { "@id": `${SITE_URL}/#website` },
+              breadcrumb: { "@id": `${SITE_URL}/about-us#breadcrumbs` },
+              hasPart: { "@id": `${SITE_URL}/about-us#questions` },
+            },
+            {
+              "@type": "Organization",
+              "@id": `${SITE_URL}/#organization`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              logo: DEFAULT_OG_IMAGE,
+              description: questions[0].answer,
+              mainEntityOfPage: { "@id": `${SITE_URL}/about-us#page` },
+            },
+            {
+              "@type": "BreadcrumbList",
+              "@id": `${SITE_URL}/about-us#breadcrumbs`,
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "About AthRecs",
+                  item: `${SITE_URL}/about-us`,
+                },
+              ],
             },
             {
               "@type": "FAQPage",
+              "@id": `${SITE_URL}/about-us#questions`,
+              url: `${SITE_URL}/about-us#questions`,
+              inLanguage: "en-GB",
+              isPartOf: { "@id": `${SITE_URL}/about-us#page` },
               mainEntity: questions.map(({ question, answer }) => ({
                 "@type": "Question",
                 name: question,
@@ -81,16 +121,25 @@ export const Route = createFileRoute("/about-us")({
 function AboutPage() {
   return (
     <article className="mx-auto max-w-3xl space-y-9 py-3 sm:py-6">
+      <nav aria-label="Breadcrumb" className="text-sm text-muted">
+        <ol className="flex flex-wrap items-center gap-2">
+          <li>
+            <Link to="/" className="text-accent underline">
+              Home
+            </Link>
+          </li>
+          <li aria-hidden="true">/</li>
+          <li aria-current="page">About AthRecs</li>
+        </ol>
+      </nav>
       <header className="space-y-4 border-b border-border pb-7">
-        <p className="text-sm font-semibold uppercase tracking-wider text-accent">
-          The people behind the performances
-        </p>
         <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
           About AthRecs
         </h1>
         <p className="text-lg leading-8 text-muted">
-          Your sporting life rarely fits on one results sheet. AthRecs brings athlete profiles, race
-          results and personal bests together, making them easier to find, follow and share.
+          AthRecs is a sports discovery and athlete profile website bringing together race results,
+          personal bests, clubs and sports fixtures. It helps everyday competitors and sports fans
+          find an athlete’s sporting history and explore their next event.
         </p>
       </header>
       <section className="space-y-4 text-base leading-7">
@@ -110,6 +159,35 @@ function AboutPage() {
           We have a soft spot for the everyday competitor: the club runner fitting training around
           work, the swimmer returning after a break, the cyclist having a go at a first event. You
           do not need a podium to have a story worth recording.
+        </p>
+      </section>
+      <section className="space-y-4 text-base leading-7" aria-labelledby="explore-records">
+        <h2 id="explore-records" className="font-display text-2xl font-semibold">
+          From your first 5K to your next marathon
+        </h2>
+        <p>
+          A personal best is more useful when you can see the race, distance and date behind it. Our{" "}
+          <Link to="/athletes" className="text-accent underline">
+            athlete profiles
+          </Link>{" "}
+          bring published performances together, while the{" "}
+          <Link to="/results" className="text-accent underline">
+            race results section
+          </Link>{" "}
+          lets you explore individual events. Coverage is still growing: a gap in a profile is a gap
+          to investigate, not a verdict on someone’s running career.
+        </p>
+        <p>
+          Looking for the next start line? Our{" "}
+          <Link to="/running" className="text-accent underline">
+            marathon and half-marathon guides
+          </Link>{" "}
+          cover races in the UK, Ireland, Australia, New Zealand, the USA, Canada and South Africa.
+          Compare locations and entry methods, then follow the official organiser links. The{" "}
+          <Link to="/running/uk-road-ultramarathons" className="text-accent underline">
+            UK road ultramarathon guide
+          </Link>{" "}
+          is there for anyone who reaches 26.2 miles and thinks there might be a little more to do.
         </p>
       </section>
       <section className="space-y-4 text-base leading-7">
@@ -141,10 +219,13 @@ function AboutPage() {
           .
         </p>
       </section>
-      <section className="space-y-5" aria-label="Questions about AthRecs">
+      <section id="questions" className="space-y-5" aria-labelledby="questions-heading">
+        <h2 id="questions-heading" className="font-display text-2xl font-semibold">
+          Questions about AthRecs
+        </h2>
         {questions.map(({ question, answer }) => (
           <section key={question} className="space-y-2">
-            <h2 className="font-display text-xl font-semibold">{question}</h2>
+            <h3 className="font-display text-xl font-semibold">{question}</h3>
             <p className="text-base leading-7 text-muted">{answer}</p>
           </section>
         ))}
