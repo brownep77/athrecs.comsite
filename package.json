@@ -105,7 +105,9 @@
     "verify:club-scanner": "node --experimental-strip-types scripts/verify-club-scanner.mjs",
     "verify:athlete-sitemap": "node --experimental-strip-types scripts/verify-athlete-sitemap.mjs",
     "verify:road-marathon-guides": "node scripts/verify-road-marathon-guides.mjs",
-    "verify:search-discovery": "node scripts/verify-search-discovery.mjs"
+    "verify:search-discovery": "node scripts/verify-search-discovery.mjs",
+    "verify:road-half-marathon-guides": "node scripts/verify-road-half-marathon-guides.mjs",
+    "verify:running-guides-ssr": "node scripts/verify-running-guides-ssr.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
