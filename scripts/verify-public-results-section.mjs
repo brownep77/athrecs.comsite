@@ -152,7 +152,7 @@ try {
   assert.deepEqual(await namesFor("track-and-field"), ["Track Meeting", "Track Run"]);
   assert.deepEqual(await namesFor("road-running"), ["Athletics Road", "Synthetic 10K"]);
   assert.deepEqual(await namesFor("road-cycling"), ["Road Cycling"]);
-  assert.deepEqual(await namesFor("mountain-biking"), ["MTB Gravel Programme", "MTB Race", "Trail Ride"]);
+  assert.deepEqual(await namesFor("mountain-biking"), ["MTB Gravel Programme", "MTB Race"]);
   assert.deepEqual(await namesFor("track-cycling"), ["Track Cycling", "Velodrome Meet"]);
   assert.deepEqual(await namesFor("bmx"), ["BMX Race"]);
   await db.exec(`delete from results where edition_id >= 20; delete from editions where id >= 20; delete from events where id >= 20;`);

@@ -42,7 +42,8 @@ export const SPORT_PAGES = [
     label: "Mountain Biking",
     sport: "Cycling",
     sports: ["Cycling"],
-    surfaces: ["MTB", "MTB / Gravel", "Trail", "XC", "Mountain Bike", "Mountain Biking"],
+    // Generic Trail can also mean gravel; only explicit MTB / XC categories belong here.
+    surfaces: ["MTB", "MTB / Gravel", "XC", "Mountain Bike", "Mountain Biking"],
   },
   {
     slug: "track-cycling",
