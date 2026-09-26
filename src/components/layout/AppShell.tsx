@@ -2,7 +2,16 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Home, SearchCheck, Users, UserRound, CalendarDays, Handshake, Trophy } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
+import type { Sport } from "@/lib/athrecs/types";
 import { cn } from "@/lib/utils";
+
+// Add future sports here; labels can differ from the stored sport name.
+const sportNav = [
+  { label: "Running", sport: "Running" },
+  { label: "Triathlon", sport: "Triathlon" },
+  { label: "Biking", sport: "Cycling" },
+  { label: "Swimming", sport: "Swimming" },
+] as const satisfies readonly { label: string; sport: Sport }[];
 
 const nav = [
   { to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
@@ -106,11 +115,33 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <AthleteAccountAccess compact />
         </div>
       </header>
+      {pathname === "/" ? (
+        <nav
+          aria-label="Browse by sport"
+          className="border-b border-accent/20 bg-accent-soft px-4 md:px-6"
+        >
+          <ul className="flex flex-wrap items-center gap-x-1 py-1 sm:gap-x-3">
+            {sportNav.map((item) => (
+              <li key={item.sport}>
+                <Link
+                  to="/athletes"
+                  search={{ sport: item.sport }}
+                  className="inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold text-accent no-underline transition-colors hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-4"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
       <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">{children}</main>
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
-          <Link to="/results" className="hover:text-accent">Results</Link>
+          <Link to="/results" className="hover:text-accent">
+            Results
+          </Link>
           <Link to="/brands" className="hover:text-accent">
             Brands & Partners
           </Link>
