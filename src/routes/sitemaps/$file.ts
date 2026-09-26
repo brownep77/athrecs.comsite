@@ -10,6 +10,16 @@ export const Route = createFileRoute("/sitemaps/$file")({
         const { sitemapXml, sitemapResponse, athleteSitemapSlugs } =
           await import("@/lib/athrecs/athlete-sitemap.server");
         if (params.file === "pages.xml") {
+          const runningPaths: string[] = [];
+          if (!IS_RUNRECS_SITE) {
+            const { MARATHON_COUNTRIES } = await import("@/data/road-marathons/countries");
+            const { ROAD_MARATHONS } = await import("@/data/road-marathons");
+            runningPaths.push(
+              "/running",
+              ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
+              ...ROAD_MARATHONS.map((race) => `/running/races/${race.slug}`),
+            );
+          }
           return sitemapResponse(
             sitemapXml(
               [
@@ -19,6 +29,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
                 "/race-series",
                 "/athletes",
                 "/find-events",
+                ...runningPaths,
                 "/clubs",
                 "/privacy",
                 ...(!IS_RUNRECS_SITE ? SPORT_PAGES.map((sport) => `/sports/${sport.slug}`) : []),

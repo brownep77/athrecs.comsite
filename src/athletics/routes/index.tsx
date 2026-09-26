@@ -2,7 +2,6 @@ import { useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
   ArrowRight,
-  ArrowUpRight,
   Check,
   Footprints,
   Link2,
@@ -241,17 +240,17 @@ function AthleteHomePage() {
               Your next event starts here
             </h2>
             <p className="mt-1 text-xs text-muted">
-              Find running races on RunRecs and explore event sites for other sports.
+              Compare road marathons across six countries and explore event sites for other sports.
             </p>
           </div>
         </div>
         <div className="flex shrink-0 flex-wrap gap-3">
-          <a
-            href="https://www.runrecs.com/races"
+          <Link
+            to="/running"
             className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-fg no-underline"
           >
-            RunRecs <ArrowUpRight className="size-4" aria-hidden="true" />
-          </a>
+            Running <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
           <Link
             to="/find-events"
             className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-border px-4 text-sm font-semibold text-fg no-underline"

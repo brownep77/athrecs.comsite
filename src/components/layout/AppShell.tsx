@@ -1,5 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, SearchCheck, Users, UserRound, CalendarDays, Handshake, Trophy } from "lucide-react";
+import { Home, SearchCheck, Users, UserRound, Footprints, Handshake, Trophy } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
 import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
@@ -32,10 +32,10 @@ const nav = [
     match: (p: string) => p === "/athlete-account" || p === "/claim-results",
   },
   {
-    to: "/find-events",
-    label: "Find events",
-    icon: CalendarDays,
-    match: (p: string) => p === "/find-events",
+    to: "/running",
+    label: "Running",
+    icon: Footprints,
+    match: (p: string) => p === "/running" || p.startsWith("/running/"),
   },
   {
     to: "/brands",
@@ -138,6 +138,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
+          <Link to="/running" className="hover:text-accent">
+            Running
+          </Link>
+          <Link to="/running/uk-marathons" className="hover:text-accent">
+            UK marathons
+          </Link>
           <Link to="/results" className="hover:text-accent">
             Results
           </Link>

@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Activity, ArrowRight, ArrowUpRight, Footprints, Medal, Waves } from "lucide-react";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/find-events")({
   head: () => ({
     meta: siteGraphMeta({
       title: "Find your next event | ATHRECS",
       description:
-        "Find running events on RunRecs and visit specialist event calendars for other sports. Keep your sporting records together on AthRecs.",
+        "Explore AthRecs road marathon guides across six countries, with entry methods, routes and results, plus specialist event calendars for other sports.",
       url: `${SITE_URL}/find-events`,
     }),
     links: [{ rel: "canonical", href: `${SITE_URL}/find-events` }],
@@ -50,12 +51,12 @@ function FindEventsPage() {
           Find your next event
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
-          Keep your athlete profile and sporting records together on AthRecs. Visit RunRecs and
-          specialist event sites to find your next competition.
+          Explore running guides on AthRecs and specialist event calendars for other sports. Keep
+          your athlete profile and sporting records together.
         </p>
       </header>
       <a
-        href="https://www.runrecs.com/races"
+        href={IS_RUNRECS_SITE ? "https://www.runrecs.com/races" : "/running"}
         className="group block rounded-3xl border border-accent/30 bg-elevated/60 p-5 no-underline sm:p-7"
       >
         <div className="flex items-center justify-between gap-4">
@@ -63,17 +64,18 @@ function FindEventsPage() {
             <Footprints className="size-6" aria-hidden="true" />
           </span>
           <span className="rounded-full border border-accent/20 bg-surface px-3 py-1 text-xs font-semibold text-accent">
-            SportsRecs network · Live
+            {IS_RUNRECS_SITE ? "RunRecs · Running" : "AthRecs · Running"}
           </span>
         </div>
-        <h2 className="mt-4 font-display text-3xl font-semibold text-fg">RunRecs</h2>
+        <h2 className="mt-4 font-display text-3xl font-semibold text-fg">Running</h2>
         <p className="mt-1 text-sm font-semibold text-accent">Running events</p>
         <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
-          Explore road, trail, fell and ultra races, plus parkrun. Search by place, distance and
-          date to find your next run.
+          {IS_RUNRECS_SITE
+            ? "Explore road, trail, fell and ultra races, plus parkrun. Search by place, distance and date to find your next run."
+            : "Explore road marathons in the UK, Australia, New Zealand, USA, Canada and Ireland. Compare entry methods, routes, dates and previous results."}
         </p>
         <span className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-fg">
-          Find races on RunRecs <ArrowUpRight className="size-4" aria-hidden="true" />
+          Explore running <ArrowRight className="size-4" aria-hidden="true" />
         </span>
       </a>
       <section className="space-y-4">
