@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { checkRaceUpload, importCheckedRaceUpload, downloadResultsUploadTemplate } from "@/lib/staff-results-upload/api";
@@ -33,6 +33,7 @@ function readUploadFile(file: File): Promise<string> {
 }
 function ImportRaceResults() {
   const fileInput = useRef<HTMLInputElement>(null);
+  const failurePanel = useRef<HTMLDivElement>(null);
   const [file, setFile] = useState<{ filename: string; content: string } | null>(null);
   const [fileError, setFileError] = useState("");
   const [details, setDetails] = useState<Omit<UploadInput,"filename"|"content">>({ eventName:"Marriott's Way 10k", date:"2026-09-20", distance:"10K", distanceKm:10, sourceUrl:"https://totalracetiming.co.uk/raceresults/706", timingBasis:"chip" });
@@ -44,9 +45,13 @@ function ImportRaceResults() {
   const [rights, setRights] = useState(false), [identities, setIdentities] = useState(false);
   const [requestId, setRequestId] = useState("");
   const [receipt, setReceipt] = useState<ImportReceipt | null>(null);
-  function reset() { setReview(null); setCheckedInput(null); setChoices({}); setRights(false); setIdentities(false); setReceipt(null); setMessage(""); }
+  const [importFailure, setImportFailure] = useState<{ message: string; requestId: string } | null>(null);
+  useEffect(() => {
+    if (importFailure) failurePanel.current?.scrollIntoView({ block: "center" });
+  }, [importFailure]);
+  function reset() { setReview(null); setCheckedInput(null); setChoices({}); setRights(false); setIdentities(false); setReceipt(null); setMessage(""); setImportFailure(null); }
   function edit(key: keyof typeof details, value: string | number) { reset(); setDetails(previous => ({...previous,[key]:value})); }
-  function setSelection(next: Record<number,ImportDecision>) { setChoices(next); setIdentities(false); setRequestId(crypto.randomUUID()); }
+  function setSelection(next: Record<number,ImportDecision>) { setChoices(next); setIdentities(false); setRequestId(crypto.randomUUID()); setImportFailure(null); }
   function chooseFile() { fileInput.current?.click(); }
   async function choose(f: File | undefined) {
     // Cancelling the picker must not clear a previously loaded file or review.
@@ -99,27 +104,45 @@ function ImportRaceResults() {
     if (!value) delete next[index]; else next[index] = {index,mode:"link",athleteId:Number(value),identityNote:""};
     setSelection(next);
   }
+  function holdUnfinished() {
+    // Explicit staff choice: remove only incomplete decisions. Never silently
+    // drop rows during submit or weaken the server's identity requirements.
+    const next = {...choices};
+    for (const choice of Object.values(next)) if (choice.identityNote.trim().length < 12) delete next[choice.index];
+    setSelection(next);
+  }
   async function submit() {
     if (busy || receipt || !checkedInput || !review || !rights || !identities || !Object.keys(choices).length || Object.values(choices).some(c=>c.identityNote.trim().length<12)) return;
-    setBusy("import"); setMessage("");
+    setBusy("import"); setMessage(""); setImportFailure(null);
     try {
       const result = await importCheckedRaceUpload({data:{upload:checkedInput, reviewHash:review.reviewHash, requestId,
         decisions:Object.values(choices).sort((a,b)=>a.index-b.index), rightsConfirmed:true, identitiesConfirmed:true, confirmation:"IMPORT SELECTED RESULTS"}});
       setReceipt(result); setMessage("Import completed. The selected results are now stored on AthRecs.");
-    } catch (error) { setMessage(error instanceof Error ? error.message : "Import was not confirmed. Retry the same selection to retrieve its receipt, or check the file again before changing anything."); }
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : error && typeof error === "object" && "message" in error && typeof error.message === "string" ? error.message : "The server did not confirm this import.";
+      // Keep the same request ID, file and selection. Retrying retrieves the
+      // saved receipt if the commit succeeded but its response was lost.
+      setImportFailure({ message: detail, requestId });
+    }
     finally { setBusy(""); }
   }
   const selected = Object.values(choices), newCount = selected.filter(c=>c.mode==='new').length;
-  const invalidNotes = selected.some(c=>c.identityNote.trim().length<12);
+  const unfinished = selected.filter(c=>c.identityNote.trim().length<12);
+  const invalidNotes = unfinished.length > 0;
+  const readyCount = selected.length - unfinished.length;
+  const unfinishedNames = unfinished.map(c=>review?.rows.find(r=>r.index===c.index)?.name ?? `Row ${c.index}`);
   const visible = review?.rows.filter(row => (filter==="all" || filter==="selected" && Boolean(choices[row.index]) || filter==="review" && (row.state==="review" || row.state==="blocked") || row.state===filter) && (!search || `${row.name} ${row.bib} ${row.club}`.toLowerCase().includes(search.toLowerCase()))) ?? [];
+  const allImported = Boolean(review && review.summary.duplicate === review.summary.total);
   const readiness = busy === "import" ? "Saving your selected athletes and results. Do not submit the batch again."
     : busy === "file" ? "Reading your file. No athletes or results have been saved."
     : busy === "check" ? "Checking the source and existing profiles. No athletes or results have been saved."
     : busy ? "Finish the current action before importing."
     : !file ? "Choose your Excel or CSV file in step 1. The prefilled race details are not a results file."
     : !review || !checkedInput ? "Click Check source & duplicates in step 2 before importing."
+    : allImported ? "Every result in this file is already imported. No second copy will be added."
+    : !selected.length && !review.summary.new ? "No entries are ready to add. The remaining rows are possible matches or source conflicts, not approved new athletes. Review their reasons in step 3."
     : !selected.length ? "Select entries in step 3. Use Select all without a match for the clear group; review possible matches separately."
-    : invalidNotes ? "Add an identity-evidence note for each selected existing-profile match in step 3."
+    : invalidNotes ? `${unfinished.length} selected match${unfinished.length===1?' needs':'es need'} identity evidence. Add the notes in step 3, or hold those unfinished matches below and keep the ready entries.`
     : !rights || !identities ? "Read and tick both approval boxes below to enable the import button."
     : "Ready. Click the import button below to add only your selected athletes and race results.";
   const canImport = Boolean(file && review && checkedInput && selected.length && rights && identities && !invalidNotes && !busy && !receipt);
@@ -183,7 +206,21 @@ function ImportRaceResults() {
       <fieldset id="import-confirmation" disabled={Boolean(busy)} className="min-w-0 scroll-mt-6 space-y-4 rounded-xl border border-cyan-300 bg-cyan-50 p-5 text-cyan-950">
         <legend className="max-w-full px-1 text-xl font-semibold">4. Import selected entries & publish</legend>
         <p id="import-readiness" role="status" className="rounded-lg border border-cyan-200 bg-white p-3 text-sm font-medium">{readiness}</p>
-        {review ? <p><strong>{newCount} new public athlete profiles</strong> and <strong>{selected.length} race results</strong> will be added. {selected.length-newCount} existing public profiles will be reused without changing their profile details.</p> : <p className="text-sm">This is the import step. The button is available after the source check, entry selection and both approvals.</p>}
+        {importFailure ? <div ref={failurePanel} role="alert" className="space-y-2 break-words rounded-lg border border-red-300 bg-red-50 p-4 text-sm text-red-950">
+          <h3 className="font-semibold">Import not confirmed</h3><p>{importFailure.message}</p>
+          <p>Your file and selection are kept. Retry the import button with the same selection, or recheck this file if the message asks for it. Do not assume the batch was saved without a receipt.</p>
+          <p className="break-all text-xs">Import reference: {importFailure.requestId}</p>
+          <Button type="button" className={action} variant="secondary" onClick={()=>void check()}>Check this file again</Button>
+        </div> : null}
+        {review ? <>
+          <p><strong>{newCount} new public athlete profiles</strong> and <strong>{selected.length} race results</strong> will be added. {selected.length-newCount} existing public profiles will be reused without changing their profile details.</p>
+          {!selected.length && review.summary.new > 0 ? <Button type="button" className={action} variant="secondary" onClick={selectNew}>Select {review.summary.new} unmatched entries here</Button> : null}
+          {invalidNotes ? <div className="space-y-2 rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-950">
+            <p><strong>Unfinished identity matches:</strong> {unfinishedNames.slice(0,8).join(', ')}{unfinishedNames.length>8 ? ` and ${unfinishedNames.length-8} more` : ''}.</p>
+            <p>{readyCount} other selected entries are ready for approval. Holding unfinished matches removes only those choices; it does not create duplicate profiles or discard their source results.</p>
+            <Button type="button" className={action} variant="secondary" onClick={holdUnfinished}>Hold {unfinished.length} unfinished matches; keep {readyCount} ready</Button>
+          </div> : null}
+        </> : <p className="text-sm">This is the import step. The button is available after the source check, entry selection and both approvals.</p>}
         <p className="text-sm">Only this selection is saved. Uncertain matches, existing results and protected profiles stay unchanged. This does not publish other race histories.</p>
         <label className="flex items-start gap-2 text-sm"><input type="checkbox" disabled={!review || !selected.length} checked={rights} onChange={e=>setRights(e.target.checked)} />I am authorised to import and publicly display these race results.</label>
         <label className="flex items-start gap-2 text-sm"><input type="checkbox" disabled={!review || !selected.length} checked={identities} onChange={e=>setIdentities(e.target.checked)} />I have reviewed the selected new profiles and existing-profile matches and approve this selection.</label>
