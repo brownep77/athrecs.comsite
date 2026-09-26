@@ -3,6 +3,7 @@ import { NEWS_ARTICLES } from "@/data/runrecs-news";
 
 export const Route = createFileRoute("/news/")({
   head: () => ({
+    links: [{ rel: "canonical", href: "https://www.runrecs.com/news" }],
     meta: [
       { title: "News | RunRecs.com" },
       {

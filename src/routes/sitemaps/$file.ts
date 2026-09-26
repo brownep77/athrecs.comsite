@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE_URL } from "@/lib/athrecs/seo";
-import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
+import { PUBLIC_PAGES } from "@/lib/athrecs/public-pages";
+import { COUNTRY_SITES, SITE_LANGUAGES } from "@/lib/athrecs/country-sites";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/sitemaps/$file")({
@@ -12,19 +13,38 @@ export const Route = createFileRoute("/sitemaps/$file")({
         if (params.file === "pages.xml") {
           return sitemapResponse(
             sitemapXml(
-              [
-                "/",
-                "/races",
-                "/calendar",
-                "/race-series",
-                "/athletes",
-                "/find-events",
-                "/clubs",
-                "/privacy",
-                ...(!IS_RUNRECS_SITE ? SPORT_PAGES.map((sport) => `/sports/${sport.slug}`) : []),
-              ].map((path) => `${SITE_URL}${path}`),
+              (IS_RUNRECS_SITE
+                ? ["/", "/races", "/calendar", "/race-series", "/athletes", "/clubs", "/privacy"]
+                : PUBLIC_PAGES.map((page) => page.path)
+              ).map((path) => `${SITE_URL}${path}`),
             ),
           );
+        }
+        if (!IS_RUNRECS_SITE && params.file === "countries.xml") {
+          return sitemapResponse(
+            sitemapXml(
+              COUNTRY_SITES.flatMap((site) =>
+                SITE_LANGUAGES.flatMap((language) => [
+                  `${SITE_URL}/${language}/${site.slug}`,
+                  `${SITE_URL}/${language}/${site.slug}/races`,
+                ]),
+              ),
+            ),
+          );
+        }
+        const contentMatch = /^(races|clubs|results)-([1-9]\d{0,5})\.xml$/.exec(params.file);
+        if (!IS_RUNRECS_SITE && contentMatch) {
+          const { getSql } = await import("@/lib/db");
+          const { ensureAthrecsSeeded } = await import("@/lib/athrecs/seed.server");
+          const { contentSitemapPaths } = await import("@/lib/athrecs/content-sitemap.server");
+          await ensureAthrecsSeeded();
+          const paths = await contentSitemapPaths(
+            await getSql(),
+            contentMatch[1] as "races" | "clubs" | "results",
+            Number(contentMatch[2]),
+          );
+          if (!paths.length) return new Response("Sitemap not found", { status: 404 });
+          return sitemapResponse(sitemapXml(paths.map((path) => `${SITE_URL}${path}`)));
         }
         const match = /^athletes-([1-9]\d{0,5})\.xml$/.exec(params.file);
         if (!match) return new Response("Sitemap not found", { status: 404 });

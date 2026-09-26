@@ -1,3 +1,4 @@
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -29,6 +30,10 @@ export const Route = createFileRoute("/calendar")({
     listAthleticsCalendarPage({
       data: { upcomingOnly: true, limit: 40, offset: 0 },
     }),
+  head: () => ({
+    meta: siteGraphMeta({ title: "Athletics calendar | Track, field and cross-country fixtures", description: "Browse athletics fixtures by date, location and discipline. Find track and field meetings, cross-country championships and road athletics events.", url: `${SITE_URL}/calendar` }),
+    links: [{ rel: "canonical", href: `${SITE_URL}/calendar` }],
+  }),
   component: AthleticsCalendarPage,
 });
 

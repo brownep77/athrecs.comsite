@@ -1,3 +1,4 @@
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -15,15 +16,10 @@ import { getPublicPartnerships } from "@/lib/athrecs/partnerships-api";
 import { BRAND_CATEGORIES } from "@/lib/athrecs/partnerships";
 
 export const Route = createFileRoute("/brands/")({
+  loader: () => getPublicPartnerships(),
   head: () => ({
-    meta: [
-      { title: "Brands & Partners | ATHRECS" },
-      {
-        name: "description",
-        content:
-          "Give your brand more exposure through athletes and influencers. Explore sponsorships, ambassador roles and product partnerships across sport.",
-      },
-    ],
+    meta: siteGraphMeta({ title: "Sports brands and athlete partnerships | ATHRECS", description: "Explore sports brands, athlete sponsorships, ambassador roles and product partnerships for athletes, influencers and clubs.", url: `${SITE_URL}/brands` }),
+    links: [{ rel: "canonical", href: `${SITE_URL}/brands` }],
   }),
   component: () => (
     <PartnerArea>
@@ -32,10 +28,12 @@ export const Route = createFileRoute("/brands/")({
   ),
 });
 function BrandDirectory() {
+  const initialDirectory = Route.useLoaderData();
   const [category, setCategory] = useState("");
   const directory = useQuery({
     queryKey: ["partners", "public"],
     queryFn: () => getPublicPartnerships(),
+    initialData: initialDirectory,
   });
   const brands =
     directory.data?.brands.filter((brand) => !category || brand.category === category) ?? [];

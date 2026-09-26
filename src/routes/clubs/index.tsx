@@ -1,3 +1,5 @@
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -6,6 +8,10 @@ import { ClubCard } from "@/components/clubs/ClubCard";
 
 export const Route = createFileRoute("/clubs/")({
   loader: () => listClubs({ data: {} }),
+  head: () => IS_RUNRECS_SITE ? {} : ({
+    meta: siteGraphMeta({ title: "Running and athletics clubs | ATHRECS", description: "Find running, athletics and multi-sport clubs. Browse club profiles, locations, official websites and athlete records on AthRecs.", url: `${SITE_URL}/clubs` }),
+    links: [{ rel: "canonical", href: `${SITE_URL}/clubs` }],
+  }),
   component: ClubsPage,
 });
 

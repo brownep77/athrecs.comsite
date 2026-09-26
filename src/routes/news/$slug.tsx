@@ -10,6 +10,7 @@ export const Route = createFileRoute("/news/$slug")({
   head: ({ loaderData }) =>
     loaderData
       ? {
+          links: [{ rel: "canonical", href: `https://www.runrecs.com/news/${loaderData.article.slug}` }],
           meta: [
             { title: `${loaderData.article.title} | RunRecs.com` },
             { name: "description", content: loaderData.article.standfirst },

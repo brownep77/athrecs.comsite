@@ -1,3 +1,4 @@
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Flag, Medal, Timer, Trophy } from "lucide-react";
 import { listEvents } from "@/lib/athrecs/api";
@@ -57,14 +58,8 @@ export const Route = createFileRoute("/race-series")({
     }));
   },
   head: () => ({
-    meta: [
-      { title: "Athletics disciplines and championships | ATHRECS" },
-      {
-        name: "description",
-        content:
-          "Browse track and field, cross-country, road athletics and championship fixtures on ATHRECS.",
-      },
-    ],
+    meta: siteGraphMeta({ title: "Athletics disciplines and championships | ATHRECS", description: "Browse track and field, cross-country, road athletics and championship fixtures on AthRecs.", url: `${SITE_URL}/race-series` }),
+    links: [{ rel: "canonical", href: `${SITE_URL}/race-series` }],
   }),
   component: AthleticsCollectionsPage,
 });
