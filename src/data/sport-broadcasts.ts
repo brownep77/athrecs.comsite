@@ -3,6 +3,7 @@ import type { SportPage } from "../lib/athrecs/sport-pages";
 export type SportBroadcast = {
   id: string;
   sport: SportPage["sport"];
+  surface?: SportPage["surface"];
   name: string;
   startDate: string;
   endDate: string;
@@ -28,6 +29,7 @@ export const SPORT_BROADCASTS: readonly SportBroadcast[] = [
   {
     id: "berlin-marathon-2026",
     sport: "Running",
+    surface: "Road",
     name: "BMW Berlin Marathon",
     startDate: "2026-09-27",
     endDate: "2026-09-27",
@@ -124,7 +126,7 @@ export const SPORT_BROADCASTS: readonly SportBroadcast[] = [
   })),
 ];
 
-export function upcomingBroadcasts(sport: SportPage["sport"], now = new Date()) {
+export function upcomingBroadcasts(page: SportPage, now = new Date()) {
   return SPORT_BROADCASTS.filter((item) => {
     const localDate = new Intl.DateTimeFormat("en-CA", {
       timeZone: item.timeZone,
@@ -132,6 +134,10 @@ export function upcomingBroadcasts(sport: SportPage["sport"], now = new Date()) 
       month: "2-digit",
       day: "2-digit",
     }).format(now);
-    return item.sport === sport && item.endDate >= localDate;
+    return (
+      item.sport === page.sport &&
+      (!page.surface || item.surface === page.surface) &&
+      item.endDate >= localDate
+    );
   }).sort((a, b) => a.startDate.localeCompare(b.startDate) || a.id.localeCompare(b.id));
 }

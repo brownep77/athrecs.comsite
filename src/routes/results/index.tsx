@@ -7,13 +7,15 @@ import { normalizeResultsSearch } from "@/lib/athrecs/public-results-search";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 
 export const Route = createFileRoute("/results/")({
-  validateSearch: (raw: Record<string, unknown>): { q?: string; sport?: string; year?: string; distance?: string; page?: number } => {
+  validateSearch: (raw: Record<string, unknown>): { q?: string; sport?: string; category?: string; year?: string; distance?: string; page?: number } => {
     const search = normalizeResultsSearch(raw);
     return {
       q: search.q || undefined,
       sport: search.sport || undefined,
+      category: search.category || undefined,
       year: search.year || undefined,
       distance: search.distance || undefined,
       page: search.page > 1 ? search.page : undefined,
@@ -65,13 +67,19 @@ function ResultsPage() {
       </header>
 
       <form action="/results" method="get" className="rounded-xl border border-border bg-surface p-4 shadow-card">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_0.7fr_1fr_auto]">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[2fr_1fr_1fr_0.7fr_1fr_auto]">
           <label className="space-y-1.5 text-xs font-medium text-muted">Race or location
             <input className={fieldClass} name="q" defaultValue={search.q} maxLength={120} placeholder="Search race, town or country" />
           </label>
           <label className="space-y-1.5 text-xs font-medium text-muted">Sport
             <input className={fieldClass} name="sport" defaultValue={search.sport} maxLength={60} list="result-sports" placeholder="All sports" />
             <datalist id="result-sports">{["Running", "Parkrun", "Athletics", "Triathlon", "Cycling", "Swimming", "Gymnastics"].map((sport) => <option key={sport} value={sport} />)}</datalist>
+          </label>
+          <label className="space-y-1.5 text-xs font-medium text-muted">Sport category
+            <select className={fieldClass} name="category" defaultValue={search.category}>
+              <option value="">All categories</option>
+              {SPORT_PAGES.map((page) => <option key={page.slug} value={page.slug}>{page.label}</option>)}
+            </select>
           </label>
           <label className="space-y-1.5 text-xs font-medium text-muted">Year
             <input className={fieldClass} name="year" defaultValue={search.year} inputMode="numeric" pattern="[0-9]{4}" maxLength={4} placeholder="All years" />
@@ -82,7 +90,7 @@ function ResultsPage() {
           </label>
           <Button type="submit" className="h-11 self-end">Search</Button>
         </div>
-        {search.q || search.sport || search.year || search.distance ? <a href="/results" className="mt-3 inline-block text-xs text-accent underline">Clear filters</a> : null}
+        {search.q || search.sport || search.category || search.year || search.distance ? <a href="/results" className="mt-3 inline-block text-xs text-accent underline">Clear filters</a> : null}
       </form>
 
       <section aria-label="Race results" className="space-y-3">

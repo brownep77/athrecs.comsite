@@ -1,6 +1,9 @@
+import { getSportPage } from "./sport-pages";
+
 export type ResultsSearch = {
   q: string;
   sport: string;
+  category: string;
   year: string;
   distance: string;
   page: number;
@@ -20,6 +23,7 @@ export function normalizeResultsSearch(input: unknown): ResultsSearch {
   return {
     q: text("q", 120),
     sport: text("sport", 60),
+    category: getSportPage(raw.category)?.slug ?? "",
     year: /^\d{4}$/.test(year) && Number(year) >= 1800 && Number(year) <= 9998 ? year : "",
     distance: text("distance", 40),
     page: Number.isSafeInteger(rawPage) && rawPage > 0 ? Math.min(rawPage, 1000) : 1,
