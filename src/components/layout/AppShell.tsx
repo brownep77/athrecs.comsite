@@ -114,7 +114,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         >
           <ul className="flex flex-wrap items-center gap-x-1 py-1 sm:gap-x-3">
             {SPORT_PAGES.map((item) => (
-              <li key={item.sport}>
+              <li key={item.slug}>
                 <Link
                   to="/sports/$sport"
                   params={{ sport: item.slug }}

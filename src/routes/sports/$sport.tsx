@@ -1,4 +1,4 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowRight, ArrowUpRight, CalendarDays, MapPin, Search, Trophy, Tv } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { upcomingBroadcasts, type SportBroadcast } from "@/data/sport-broadcasts";
@@ -12,15 +12,24 @@ import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/sports/$sport")({
   validateSearch: parseSportFixtureSearch,
-  beforeLoad: ({ params }) => {
-    if (IS_RUNRECS_SITE || !getSportPage(params.sport)) throw notFound();
+  beforeLoad: ({ params, search }) => {
+    const page = getSportPage(params.sport);
+    if (IS_RUNRECS_SITE || !page) throw notFound();
+    if (params.sport !== page.slug) {
+      throw redirect({
+        to: "/sports/$sport",
+        params: { sport: page.slug },
+        search,
+        statusCode: 301,
+      });
+    }
   },
   loaderDeps: ({ search }) => search,
   loader: async ({ params, deps }) => {
     const sport = getSportPage(params.sport);
     if (!sport) throw notFound();
     const fixtures = await getSportFixtures({ data: { slug: sport.slug, ...deps } });
-    return { sport, ...fixtures, broadcasts: upcomingBroadcasts(sport.sport) };
+    return { sport, ...fixtures, broadcasts: upcomingBroadcasts(sport) };
   },
   staleTime: 60_000,
   head: ({ params, match }) => {
@@ -73,7 +82,7 @@ function SportPage() {
           </p>
         </div>
         <Button asChild>
-          <Link to="/results" search={{ sport: sport.sport }}>
+          <Link to="/results" search={{ category: sport.slug }}>
             <Trophy className="size-4" aria-hidden="true" /> {sport.label} results
           </Link>
         </Button>
@@ -89,7 +98,7 @@ function SportPage() {
         <a href="#fixtures" className={textLink}>
           General fixtures
         </a>
-        <Link to="/results" search={{ sport: sport.sport }} className={textLink}>
+        <Link to="/results" search={{ category: sport.slug }} className={textLink}>
           Results <ArrowRight className="size-4" aria-hidden="true" />
         </Link>
       </nav>
@@ -174,7 +183,7 @@ function SportPage() {
               <FixtureRow
                 key={`${fixture.eventId}-${fixture.eventDate}`}
                 fixture={fixture}
-                sport={sport.sport}
+                category={sport.slug}
               />
             ))}
           </div>
@@ -220,7 +229,7 @@ function SportPage() {
 
       <Link
         to="/results"
-        search={{ sport: sport.sport }}
+        search={{ category: sport.slug }}
         className="flex min-h-14 items-center justify-between gap-3 rounded-xl border border-accent/25 bg-accent-soft px-5 font-semibold text-accent no-underline hover:underline"
       >
         <span className="flex items-center gap-2">
@@ -273,7 +282,7 @@ function BroadcastCard({ broadcast }: { broadcast: SportBroadcast }) {
   );
 }
 
-function FixtureRow({ fixture, sport }: { fixture: SportFixture; sport: string }) {
+function FixtureRow({ fixture, category }: { fixture: SportFixture; category: string }) {
   return (
     <article className="grid gap-3 py-4 sm:grid-cols-[9rem_minmax(0,1fr)_auto] sm:items-start">
       <time dateTime={fixture.eventDate} className="text-sm font-semibold text-accent">
@@ -308,7 +317,7 @@ function FixtureRow({ fixture, sport }: { fixture: SportFixture; sport: string }
             Official event <ArrowUpRight className="size-3.5" aria-hidden="true" />
           </a>
         ) : null}
-        <Link to="/results" search={{ sport, q: fixture.name }} className={textLink}>
+        <Link to="/results" search={{ category, q: fixture.name }} className={textLink}>
           Past results <ArrowRight className="size-3.5" aria-hidden="true" />
         </Link>
       </div>

@@ -19,7 +19,10 @@ function loadTypeScript(path, dependencies = {}) {
   return module.exports;
 }
 
-const search = loadTypeScript("src/lib/athrecs/public-results-search.ts");
+const sportPages = loadTypeScript("src/lib/athrecs/sport-pages.ts");
+const search = loadTypeScript("src/lib/athrecs/public-results-search.ts", { "./sport-pages": sportPages });
+assert.equal(search.normalizeResultsSearch({ category: "trail-running" }).category, "trail-running");
+assert.equal(search.normalizeResultsSearch({ category: "unknown" }).category, "");
 assert.equal(search.normalizeResultsSearch(undefined).page, 1);
 for (const page of [-1, 0, NaN, Infinity, "bad", {}, []]) {
   assert.equal(search.normalizeResultsSearch({ page }).page, 1);
@@ -53,11 +56,12 @@ const api = loadTypeScript("src/lib/athrecs/public-results-api.ts", {
   "./seed.server": { ensureAthrecsSeeded: async () => {} },
   "./format": { todayIso: () => "2026-09-23" },
   "./public-results-search": search,
+  "./sport-pages": sportPages,
 });
 
 try {
   await db.exec(`
-    create table events (id integer primary key, name text, sport text, city text, country text);
+    create table events (id integer primary key, name text, sport text, city text, country text, surface text default 'Road');
     create table editions (id integer primary key, event_id integer, event_date date, distance_code text);
     create table clubs (id integer primary key, name text);
     create table athletes (id integer primary key, display_name text, slug text, club_id integer,
@@ -69,7 +73,7 @@ try {
     create table athlete_account_links (user_id text, athlete_id integer, status text);
     create table athlete_public_shares (user_id text, enabled boolean, share_results boolean);
     create table athlete_profile_hidden_results (user_id text, result_id integer);
-    insert into events values (10, 'Synthetic 10K', 'Running', 'Example town', 'United Kingdom'),
+    insert into events (id, name, sport, city, country) values (10, 'Synthetic 10K', 'Running', 'Example town', 'United Kingdom'),
       (11, 'Future race', 'Running', 'Example town', 'United Kingdom');
     insert into editions values (10, 10, '2026-09-20', '10K'), (11, 11, '2027-01-01', '10K');
     insert into clubs values (1, 'Synthetic Club');
@@ -123,7 +127,26 @@ try {
   assert.equal(await snapshot(), before, "Reading must not mutate canonical results");
 
   await db.exec(`
-    insert into events select n, 'Synthetic event ' || n, 'Running', 'Example town', 'United Kingdom'
+    insert into events (id, name, sport, surface) values
+      (20, 'Trail Run', 'Running', 'Trail'),
+      (21, 'Track Meeting', 'Athletics', 'Track'),
+      (22, 'Track Run', 'Running', 'Track'),
+      (23, 'Cross Country', 'Athletics', 'Cross Country'),
+      (24, 'Track Cycling', 'Cycling', 'Track'),
+      (25, 'Trail Athletics', 'Athletics', 'Trail'),
+      (26, 'Athletics Road', 'Athletics', 'Road');
+    insert into editions select id, id, '2026-09-01', 'Other' from events where id >= 20;
+    insert into results (id, athlete_id, edition_id, status, result_visibility)
+      select id, 1, id, 'Finished', 'public' from editions where id >= 20;
+  `);
+  const namesFor = async (category) => (await api.listPublicResultEditions({ data: { category } })).editions.map(row => row.event_name).sort();
+  assert.deepEqual(await namesFor("trail-running"), ["Trail Athletics", "Trail Run"]);
+  assert.deepEqual(await namesFor("track-and-field"), ["Track Meeting", "Track Run"]);
+  assert.deepEqual(await namesFor("road-running"), ["Athletics Road", "Synthetic 10K"]);
+  await db.exec(`delete from results where edition_id >= 20; delete from editions where id >= 20; delete from events where id >= 20;`);
+
+  await db.exec(`
+    insert into events (id, name, sport, city, country) select n, 'Synthetic event ' || n, 'Running', 'Example town', 'United Kingdom'
       from generate_series(100, 130) n;
     insert into editions select n, n, '2026-08-01'::date, '5K' from generate_series(100, 130) n;
     insert into results (id, athlete_id, edition_id, status, result_visibility)

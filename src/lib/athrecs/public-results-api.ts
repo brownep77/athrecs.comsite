@@ -4,6 +4,7 @@ import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
 import { normalizeResultsSearch, parseResultsEditionId } from "./public-results-search";
+import { getSportPage } from "./sport-pages";
 
 export type PublicResultEdition = {
   edition_id: number;
@@ -51,6 +52,9 @@ export const listPublicResultEditions = createServerFn({ method: "GET" })
     const sql = await getSql();
     const q = like(data.q);
     const sport = data.sport || null;
+    const category = getSportPage(data.category);
+    const categorySports = category ? [...category.sports] : null;
+    const surface = category?.surface ?? null;
     const distance = data.distance || null;
     const from = data.year ? `${data.year}-01-01` : null;
     const until = data.year ? `${Number(data.year) + 1}-01-01` : null;
@@ -79,6 +83,8 @@ export const listPublicResultEditions = createServerFn({ method: "GET" })
         )
         and (${q}::text is null or e.name ilike ${q} or e.city ilike ${q} or e.country ilike ${q})
         and (${sport}::text is null or e.sport = ${sport})
+        and (${categorySports}::text[] is null or e.sport = any(${categorySports}::text[]))
+        and (${surface}::text is null or e.surface = ${surface})
         and (${distance}::text is null or ed.distance_code = ${distance})
         and (${from}::date is null or ed.event_date >= ${from}::date)
         and (${until}::date is null or ed.event_date < ${until}::date)
