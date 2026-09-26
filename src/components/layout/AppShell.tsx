@@ -2,16 +2,8 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { Home, SearchCheck, Users, UserRound, CalendarDays, Handshake, Trophy } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
-import type { Sport } from "@/lib/athrecs/types";
+import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { cn } from "@/lib/utils";
-
-// Add future sports here; labels can differ from the stored sport name.
-const sportNav = [
-  { label: "Running", sport: "Running" },
-  { label: "Triathlon", sport: "Triathlon" },
-  { label: "Biking", sport: "Cycling" },
-  { label: "Swimming", sport: "Swimming" },
-] as const satisfies readonly { label: string; sport: Sport }[];
 
 const nav = [
   { to: "/", label: "Home", icon: Home, match: (p: string) => p === "/" },
@@ -115,18 +107,25 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <AthleteAccountAccess compact />
         </div>
       </header>
-      {pathname === "/" ? (
+      {pathname === "/" || pathname.startsWith("/sports/") ? (
         <nav
           aria-label="Browse by sport"
           className="border-b border-accent/20 bg-accent-soft px-4 md:px-6"
         >
           <ul className="flex flex-wrap items-center gap-x-1 py-1 sm:gap-x-3">
-            {sportNav.map((item) => (
+            {SPORT_PAGES.map((item) => (
               <li key={item.sport}>
                 <Link
-                  to="/athletes"
-                  search={{ sport: item.sport }}
-                  className="inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold text-accent no-underline transition-colors hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-4"
+                  to="/sports/$sport"
+                  params={{ sport: item.slug }}
+                  search={{}}
+                  aria-current={pathname === `/sports/${item.slug}` ? "page" : undefined}
+                  className={cn(
+                    "inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold no-underline transition-colors hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-4",
+                    pathname === `/sports/${item.slug}`
+                      ? "bg-primary text-primary-fg"
+                      : "text-accent",
+                  )}
                 >
                   {item.label}
                 </Link>

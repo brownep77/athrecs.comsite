@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SITE_URL } from "@/lib/athrecs/seo";
+import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/sitemaps/$file")({
   server: {
@@ -19,6 +21,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
                 "/find-events",
                 "/clubs",
                 "/privacy",
+                ...(!IS_RUNRECS_SITE ? SPORT_PAGES.map((sport) => `/sports/${sport.slug}`) : []),
               ].map((path) => `${SITE_URL}${path}`),
             ),
           );
