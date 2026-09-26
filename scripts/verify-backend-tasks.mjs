@@ -10,7 +10,7 @@ const { chromium } = require(process.env.ATHRECS_BROWSER_MODULE || "playwright")
 const root = resolve("artifacts/backend-task-fixture");
 mkdirSync(root, { recursive: true });
 writeFileSync(resolve(root, "style.css"), `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);
-writeFileSync(resolve(root, "main.tsx"), `import React from 'react';import{createRoot}from'react-dom/client';import{BackendTaskPanel,backendTasks}from'/@fs/${resolve("src/components/staff/BackendTaskPanel.tsx")}';import'./style.css';window.taskPaths=backendTasks.map(t=>t.path);createRoot(document.getElementById('root')!).render(<main style={{maxWidth:1280,margin:'auto',padding:20}}><p>ISOLATED NAVIGATION TEST — NO LIVE DATABASE</p><BackendTaskPanel/></main>);`);
+writeFileSync(resolve(root, "main.tsx"), `import React from 'react';import{createRoot}from'react-dom/client';import{BackendTaskPanel}from'/@fs/${resolve("src/components/staff/BackendTaskPanel.tsx")}';import'./style.css';createRoot(document.getElementById('root')!).render(<main style={{maxWidth:1280,margin:'auto',padding:20}}><p>ISOLATED NAVIGATION TEST — NO LIVE DATABASE</p><BackendTaskPanel/></main>);`);
 writeFileSync(resolve(root, "index.html"), '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
 const server = await createServer({ configFile: false, root, plugins: [react(), tailwindcss()], resolve: { alias: { "@": resolve("src") } }, server: { host: "127.0.0.1", port: 8101, strictPort: true, fs: { allow: [process.cwd()] } } });
 await server.listen();
@@ -25,10 +25,10 @@ try {
   await page.getByRole("heading", { name: "What would you like to do?" }).waitFor();
   const cards = page.locator('[aria-label="Backend tasks"] article');
   assert.equal(await cards.count(), 17);
-  const paths = await page.evaluate(() => window.taskPaths);
+  const paths = await cards.locator("a").evaluateAll(anchors => anchors.map(anchor => anchor.getAttribute("href")));
   assert.equal(new Set(paths).size, paths.length);
   for (const path of paths) {
-    assert.match(path, /^\/admin(?:[\/#]|$)/);
+    assert(path === "/admin" || path.startsWith("/admin/") || path.startsWith("/admin#"));
     const route = path.split("#")[0];
     assert(existsSync(`src/routes${route === "/admin" ? "/admin/index" : route}.tsx`), `Missing route: ${path}`);
   }
