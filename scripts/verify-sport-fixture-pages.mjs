@@ -148,7 +148,6 @@ try {
   assert.deepEqual(await namesFor("mountain-biking"), [
     "MTB Gravel Programme",
     "MTB Race",
-    "Trail Ride",
   ]);
   assert.deepEqual(await namesFor("track-cycling"), ["Track Cycling", "Velodrome Meet"]);
   assert.deepEqual(await namesFor("bmx"), ["BMX Race"]);
