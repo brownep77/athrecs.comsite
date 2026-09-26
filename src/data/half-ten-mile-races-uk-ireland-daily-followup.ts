@@ -16,6 +16,10 @@ const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
 const LATEST_DAILY_RELEASE_CHECKED_AT = "2026-09-09";
 const NEWEST_DAILY_RELEASE_CHECKED_AT = "2026-09-10";
 const LATEST_DAILY_RESEARCH_CHECKED_AT = "2026-09-11";
+const CURRENT_OFFICIAL_SCAN_CHECKED_AT = "2026-09-22";
+const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
+const CURRENT_GOVERNING_BODY_SCAN_CHECKED_AT = "2026-09-24";
+const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -405,24 +409,6 @@ const seeds: RaceSeed[] = [
     checkedAt: PREVIOUS_CHECKED_AT,
     notes:
       "The direct registration page confirms the roughly 13-mile mixed-surface race, date, start time and open entry.",
-  },
-  {
-    slug: "pagan-midwinter-half-marathon-2027",
-    name: "Pagan Midwinter Half Marathon 2027",
-    date: "2027-01-23",
-    distance: "Half",
-    startTime: "11:00",
-    country: "England",
-    county: "Devon",
-    city: "Chagford",
-    area: "Chagford and north Dartmoor",
-    surface: "Trail",
-    organiser: "OuterEdge Events",
-    url: "https://www.sientries.co.uk/event.php?elid=Y&event_id=17305",
-    priceAmount: 48,
-    checkedAt: PREVIOUS_CHECKED_AT,
-    notes:
-      "The dedicated direct-registration record confirms the 2027 half-marathon date, start time, Chagford venue and open entry.",
   },
   {
     slug: "silverbacktrails-wades-revenge-2027",
@@ -1170,6 +1156,120 @@ const seeds: RaceSeed[] = [
     notes:
       "The direct official registration page consistently confirms the 25 April 2027 marathon and half-marathon programme and open event-specific checkout.",
   },
+  {
+    slug: "battersea-park-half-marathon-10k-5k-may-2027",
+    name: "Battersea Park Half Marathon, 10K & 5K — May 2027",
+    date: "2027-05-08",
+    distance: "Half",
+    startTime: "10:30",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Millennium Arena, Battersea Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-may-2027",
+    priceAmount: 40,
+    checkedAt: CURRENT_OFFICIAL_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 8 May 2027 half marathon, 10K and 5K, the 10:30 half-marathon start and open direct entry.",
+  },
+  {
+    slug: "carlisle-half-marathon-10k-5k-july-2027",
+    name: "Carlisle Half Marathon, 10K & 5K — July 2027",
+    date: "2027-07-18",
+    distance: "Half",
+    startTime: "09:00",
+    country: "England",
+    county: "Cumbria",
+    city: "Carlisle",
+    area: "Carlisle Racecourse",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/carlisle-half-marathon-10k-july-2027",
+    priceAmount: 38,
+    checkedAt: CURRENT_OFFICIAL_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 18 July 2027 multi-distance race at Carlisle Racecourse, the 09:00 half-marathon start and open direct entry.",
+  },
+  {
+    slug: "newcastle-half-marathon-10k-july-2027",
+    name: "Newcastle Half Marathon & 10K — July 2027",
+    date: "2027-07-11",
+    distance: "Half",
+    startTime: "09:00",
+    country: "England",
+    county: "Tyne and Wear",
+    city: "Newcastle upon Tyne",
+    area: "Kingston Park Stadium and country lanes near Newcastle Airport",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    organiser: "RunThrough Events / Newcastle Frontrunners",
+    url: "https://www.runthrough.co.uk/event/newcastle-half-marathon-10k-july-2027",
+    priceAmount: 35,
+    checkedAt: CURRENT_OFFICIAL_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the road-closed half marathon and 10K on 11 July 2027, their shared 09:00 start and open direct entry.",
+  },
+  {
+    slug: "east-yorkshire-half-marathon-10k-june-2027",
+    name: "East Yorkshire Half Marathon & 10K — June 2027",
+    date: "2027-06-20",
+    distance: "Half",
+    startTime: "09:00",
+    country: "England",
+    county: "East Riding of Yorkshire",
+    city: "Skirlaugh",
+    area: "Skirlaugh and the East Yorkshire countryside",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/east-yorkshire-half-marathon-10k-june-2027",
+    priceAmount: 36,
+    checkedAt: CURRENT_OFFICIAL_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the road-closed half marathon and 10K on 20 June 2027, the 09:00 half-marathon start and open direct entry.",
+  },
+  {
+    slug: "newcastle-gateshead-marathon-half-marathon-10k-may-2027",
+    name: "Newcastle-Gateshead Marathon, Half Marathon & 10K — May 2027",
+    date: "2027-05-02",
+    distance: "Half",
+    startTime: "09:25",
+    country: "England",
+    county: "Tyne and Wear",
+    city: "Gateshead",
+    area: "Gateshead International Stadium and surrounding closed roads",
+    surface: "Road",
+    distances: ["Marathon", "Half", "10K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/newcastle-gateshead-marathon-half-marathon-10k-may-2027",
+    priceAmount: 33,
+    checkedAt: CURRENT_OFFICIAL_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the marathon, half marathon and 10K on 2 May 2027, the 09:25 half-marathon start and open direct entry.",
+  },
+  {
+    slug: "crystal-palace-5k-10k-half-marathon-juniors-may-2027",
+    name: "Crystal Palace 5K, 10K, Half Marathon & Juniors — May 2027",
+    date: "2027-05-02",
+    distance: "Half",
+    startTime: "10:00",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Crystal Palace Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-may-2027",
+    priceAmount: 35,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 2 May 2027 half marathon, 10K, 5K and junior programme, the 10:00 half-marathon start and open direct entry.",
+  },
 ];
 
 function entryOptionsFor(seed: RaceSeed): EntryOptionSeed[] | undefined {
@@ -1416,6 +1516,207 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The direct official registration page consistently confirms the 8 August 2027 marathon, half-marathon and 10K programme and the 10:00 half start; entry is withheld because its voucher and public-opening schedule is not yet internally consistent.",
   },
+  {
+    seriesSlug: "runthrough-battersea-park-july-2027",
+    date: "2027-07-04",
+    startTime: "10:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-july-2027",
+    publishAllDistances: true,
+    priceAmount: 40,
+    checkedAt: CURRENT_OFFICIAL_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms this additional July race day on 4 July 2027, the half marathon, 10K and 5K, the 10:30 half start and open direct entry; the established July card is reused.",
+  },
+  {
+    seriesSlug: "hertfordshire-half-marathon",
+    date: "2027-11-07",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/hertfordshire-half-marathon-10k-november-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_OFFICIAL_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 7 November 2027 road-closed half marathon and 10K at Knebworth House, the 09:00 half start and open direct entry; the established card is reused.",
+  },
+  {
+    seriesSlug: "henley-half-marathon-river-trail-run-10k-september",
+    date: "2027-09-04",
+    startTime: "10:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-september-2027",
+    publishAllDistances: true,
+    priceAmount: 35,
+    checkedAt: CURRENT_OFFICIAL_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the mixed-terrain half marathon and 10K on 4 September 2027, the 10:00 half start and open direct entry; the established Henley card is reused.",
+  },
+  {
+    seriesSlug: "basildon-half",
+    date: "2027-09-12",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
+    priceAmount: 36,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the road-closed Basildon half marathon on 12 September 2027, its 09:00 start and open direct entry; the established Basildon card is reused.",
+  },
+  {
+    seriesSlug: "cheshire-autumn-half",
+    date: "2027-09-12",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/cheshire-autumn-half-marathon-2027",
+    priceAmount: 34,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the UKA-licensed Cheshire Autumn Half Marathon on 12 September 2027, its 09:00 start and open direct entry; the established Cheshire card is reused.",
+  },
+  {
+    seriesSlug: "crystal-palce-5k-10k-half-marathon-juniors-december",
+    date: "2027-12-05",
+    startTime: "10:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2027",
+    publishAllDistances: true,
+    priceAmount: 35,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 5 December 2027 half marathon, 10K, 5K and junior programme, the 10:00 half start and open direct entry; the established Crystal Palace card is reused.",
+  },
+  {
+    seriesSlug: "holkham-half-10k",
+    date: "2027-05-16",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/holkham-half-marathon-10k-may-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page confirms the 16 May 2027 half marathon and 10K, first race at 09:00 and open direct entry; it replaces directory provenance on the existing Holkham edition.",
+  },
+  {
+    seriesSlug: "newark-half-marathon",
+    date: "2027-08-15",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/newark-half-marathon-august-2027",
+    priceAmount: 35,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the road-closed Newark Half Marathon on 15 August 2027, its 09:00 start and open direct entry; the established Newark card is reused.",
+  },
+  {
+    seriesSlug: "newbury-racecourse-5k-10k-half-marathon-august",
+    date: "2027-08-14",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/newbury-racecourse-half-marathon-10k-5k-august-2027",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the half marathon, 10K and 5K at Newbury Racecourse on 14 August 2027 and open direct entry; the established Newbury card is reused and no unsupported start time is asserted.",
+  },
+  {
+    seriesSlug: "warwick-half-marathon",
+    date: "2027-01-31",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/warwick-half-marathon-january-2027",
+    priceAmount: 50,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The new event-specific organiser page confirms the existing 31 January 2027 Warwick edition, 09:00 start and open direct entry; its canonical card and date are retained.",
+  },
+  {
+    seriesSlug: "wimbledon-common-half-marathon-10k-september",
+    date: "2027-04-04",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-april-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the Wimbledon Common half marathon and 10K on 4 April 2027, the 09:30 half start and open direct entry; the established Wimbledon card is reused.",
+  },
+  {
+    seriesSlug: "wimbledon-common-half-marathon-10k-september",
+    date: "2027-06-20",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-june-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the Wimbledon Common half marathon and 10K on 20 June 2027, the 09:30 half start and open direct entry; the established Wimbledon card is reused.",
+  },
+  {
+    seriesSlug: "wimbledon-common-half-marathon-10k-september",
+    date: "2027-09-05",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the Wimbledon Common half marathon and 10K on 5 September 2027, the 09:30 half start and open direct entry; the established Wimbledon card is reused.",
+  },
+  {
+    seriesSlug: "wimbledon-common-half-marathon-10k-september",
+    date: "2027-11-21",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-november-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_SITEMAP_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the Wimbledon Common half marathon and 10K on 21 November 2027, the 09:30 half start and open direct entry; the established Wimbledon card is reused.",
+  },
+  {
+    seriesSlug: "abbott-longford-marathon-2026",
+    date: "2027-08-29",
+    startTime: "09:00",
+    organiser: "Longford Marathon / Eventmaster",
+    url: "https://eventmaster.ie/event/3x1jhx4tZW",
+    publishAllDistances: true,
+    status: "TBC",
+    hasEntry: false,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_GOVERNING_BODY_SCAN_CHECKED_AT,
+    notes:
+      "Athletics Ireland approves permit 26/552 and the direct official event page confirms the 29 August 2027 festival, half-marathon distance and 09:00 start; checkout remains hidden until online sales open on 30 October 2026 at 08:00.",
+  },
+  {
+    seriesSlug: "kilmacolm-running-festival",
+    date: "2027-09-12",
+    startTime: "10:00",
+    organiser: "Inverclyde Leisure / EntryCentral",
+    url: "https://www.entrycentral.com/kilmacolmraces",
+    entryUrl: "https://www.entrycentral.com/kilmacolmraces",
+    publishAllDistances: true,
+    priceAmount: 32,
+    checkedAt: CURRENT_REGISTRATION_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 12 September 2027 festival, half-marathon, 10K and 3K programme, the 10:00 half-marathon start and open registration; the established Kilmacolm card is reused. Its separate half-marathon button currently resolves to a stale 2026 form, so the internally consistent 2027 registration page remains the entry destination.",
+  },
+  {
+    seriesSlug: "kelpies-half-marathon",
+    date: "2027-09-25",
+    organiser: "Scurry Events / Everyrunner Events",
+    url: "https://www.entrycentral.com/kelpieshalfmarathon",
+    status: "Closed",
+    hasEntry: false,
+    checkedAt: CURRENT_REGISTRATION_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 25 September 2027 half marathon at Helix Park. Registration is closed and the published 08:45 itinerary is explicitly provisional, so no checkout or start time is exposed.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -1460,11 +1761,19 @@ export const dailyHalfTenMileExistingSeriesEditions: Edition[] = existingSeriesE
 /** Confirmed dates that remain unpublished until their governing-body permit or entry state clears. */
 export const dailyHalfTenMileResearchQueue = [
   {
+    slug: "pagan-midwinter-half-marathon-2027",
+    date: "2027-01-30",
+    country: "England",
+    reason:
+      "The live official page moved the event to 30 January 2027 and now states that its advertised half-marathon route is well over 14 miles, so the former canonical half card is retired and the event remains unpublished pending non-standard-distance treatment.",
+    sourceUrl: "https://www.sientries.co.uk/event/pagan-midwinter-half-marathon-2027",
+  },
+  {
     slug: "temple-newsam-10-2027",
     date: "2027-01-10",
     country: "England",
     reason:
-      "The direct official entry page confirms the event details but keeps the race licence pending and does not open entry until 31 August 2026.",
+      "The direct official entry page confirms the event details and open registration but currently marks the race licence Pending, so the race remains unpublished until the permit is confirmed.",
     sourceUrl: "https://racebest.com/races/qq342",
   },
   {
@@ -1545,6 +1854,63 @@ export const dailyHalfTenMileResearchQueue = [
       "The official page header says 21 August 2027 but its race-day copy still says 26 June 2027, so the date is internally conflicted.",
     sourceUrl: "https://www.runthrough.co.uk/event/carsington-water-half-marathon-10k-august-2027",
   },
+  {
+    slug: "battersea-park-half-marathon-10k-5k-april-2027",
+    date: "2027-04-03",
+    country: "England",
+    reason:
+      "The official page's structured date, title and summary say 3 April 2027, but its opening race-day sentence says 3 July 2027, so the edition remains unpublished until RunThrough corrects the conflict.",
+    sourceUrl:
+      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
+  },
+  {
+    slug: "finsbury-park-half-marathon-5k-10k-half-marathon-april-2027",
+    date: "2027-04-11",
+    country: "England",
+    reason:
+      "RunThrough now confirms 11 April 2027, while the existing imported fixture carries 4 April 2027; hold publication until that prior edition can be replaced atomically rather than exposing two dates.",
+    sourceUrl:
+      "https://www.runthrough.co.uk/event/finsbury-park-5k-10k-half-marathon-junior-run-april-2027",
+  },
+  {
+    slug: "punk-panther-dales-dazzler-2027",
+    date: "2027-08-14",
+    country: "England",
+    reason:
+      "The direct official page markets a half marathon but variously specifies the shortest route as 13 and 14 miles, so the non-standard and internally inconsistent distance is not published as a canonical half.",
+    sourceUrl: "https://www.sientries.co.uk/event/punk-panther-dales-dazzler-2027",
+  },
+  {
+    slug: "derby-running-festival-5k-10k-half-marathon-august-2027",
+    date: "2027-08-01",
+    country: "England",
+    reason:
+      "The official page title and structured date say 1 August 2027, but its opening race-day sentence still says 2 August 2026, so the existing Derby card is not updated until RunThrough corrects the conflict.",
+    sourceUrl:
+      "https://www.runthrough.co.uk/event/derby-running-festival-5k-10k-half-marathon-august-2027",
+  },
+  {
+    slug: "victoria-park-half-marathon-10k-5k-january-2027",
+    date: "2027-01-10",
+    country: "England",
+    reason:
+      "The official page title and structured date say 10 January 2027, but its opening race-day sentence still says 3 October 2026, so its existing catalogue edition retains prior provenance until the conflict is corrected.",
+    sourceUrl:
+      "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
+  },
+  ...[
+    ["january", "2027-01-17"],
+    ["february", "2027-02-06"],
+    ["march", "2027-03-13"],
+    ["april", "2027-04-03"],
+  ].map(([month, date]) => ({
+    slug: `run-dorney-lake-half-marathon-10k-5k-${month}-2027`,
+    date,
+    country: "England" as const,
+    reason:
+      "The official page advertises a 2027 date but still opens with the 26 September 2026 race date and exposes 00:00 as its first start, so it remains unpublished until the organiser corrects both placeholders.",
+    sourceUrl: `https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-${month}-2027`,
+  })),
   {
     slug: "delphi-half-marathon-10k-2027",
     date: "2027-05-15",
@@ -1716,6 +2082,11 @@ export const dailyHalfTenMileResearchQueue = [
       "The official Athletics Ireland calendar confirms a running festival with both 10-mile and half-marathon distances but still labels the permit as pending approval.",
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
+] as const;
+
+/** Public seed records retired after current official evidence invalidated the canonical distance. */
+export const dailyHalfTenMileRetiredSeriesSlugs = [
+  "pagan-midwinter-half-marathon-2027",
 ] as const;
 
 const BRIGHTEN_MARINA_URL =
@@ -1925,6 +2296,168 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     source_url: "https://www.sientries.co.uk/event/hardmoors-262-farndale-2027",
     defaultStartTime: "10:00",
   },
+  "runthrough-battersea-park-july-2027": {
+    name: "Battersea Park Half Marathon, 10K & 5K — July 2027",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Battersea Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Battersea Park Half Marathon, 10K & 5K — flat road races in Battersea Park.",
+    description:
+      "RunThrough stages several Battersea Park race days; the established July card carries both verified July 2027 editions and their event-specific official entry routes.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-july-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-july-2027",
+    defaultStartTime: "10:30",
+  },
+  "hertfordshire-half-marathon": {
+    name: "Hertfordshire Half Marathon & 10K",
+    city: "Knebworth",
+    county: "Hertfordshire",
+    country: "England",
+    area: "Knebworth House, Knebworth Park and surrounding country lanes",
+    surface: "Road",
+    distances: ["Half", "10K"],
+    summary:
+      "Hertfordshire Half Marathon & 10K — road-closed races through Knebworth Park and nearby country lanes.",
+    description:
+      "RunThrough's Hertfordshire Half Marathon and 10K start and finish at Knebworth House, using park roads and surrounding closed country lanes; the established card carries the verified 2027 edition.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/hertfordshire-half-marathon-10k-november-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/hertfordshire-half-marathon-10k-november-2027",
+    defaultStartTime: "09:00",
+  },
+  "henley-half-marathon-river-trail-run-10k-september": {
+    name: "Henley River Trail Half Marathon & 10K",
+    city: "Henley-on-Thames",
+    county: "Oxfordshire",
+    country: "England",
+    area: "Remenham Farm and Thames-side trails",
+    surface: "Trail",
+    distances: ["Half", "10K"],
+    summary:
+      "Henley River Trail Half Marathon & 10K — mixed-terrain races beside the Thames from Remenham Farm.",
+    description:
+      "RunThrough's Henley River Trail races use a mixed-terrain Thames-side route from Remenham Farm; the established card carries the verified 2027 half marathon and 10K.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-september-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/henley-river-half-marathon-10k-junior-race-september-2027",
+    defaultStartTime: "10:00",
+  },
+  "basildon-half": {
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
+    defaultStartTime: "09:00",
+  },
+  "cheshire-autumn-half": {
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/cheshire-autumn-half-marathon-2027",
+    source_url: "https://www.runthrough.co.uk/event/cheshire-autumn-half-marathon-2027",
+    defaultStartTime: "09:00",
+  },
+  "crystal-palce-5k-10k-half-marathon-juniors-december": {
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-december-2027",
+    defaultStartTime: "10:00",
+  },
+  "holkham-half-10k": {
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/holkham-half-marathon-10k-may-2027",
+    source_url: "https://www.runthrough.co.uk/event/holkham-half-marathon-10k-may-2027",
+    defaultStartTime: "09:00",
+  },
+  "newark-half-marathon": {
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/newark-half-marathon-august-2027",
+    source_url: "https://www.runthrough.co.uk/event/newark-half-marathon-august-2027",
+    defaultStartTime: "09:00",
+  },
+  "newbury-racecourse-5k-10k-half-marathon-august": {
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/newbury-racecourse-half-marathon-10k-5k-august-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/newbury-racecourse-half-marathon-10k-5k-august-2027",
+  },
+  "warwick-half-marathon": {
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/warwick-half-marathon-january-2027",
+    source_url: "https://www.runthrough.co.uk/event/warwick-half-marathon-january-2027",
+    defaultStartTime: "09:00",
+  },
+  "wimbledon-common-half-marathon-10k-september": {
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2027",
+    defaultStartTime: "09:30",
+  },
+  "abbott-longford-marathon-2026": {
+    name: "Abbott Longford Marathon Festival",
+    city: "Longford",
+    county: "County Longford",
+    country: "Ireland",
+    area: "Main Street, Longford town and surrounding roads",
+    surface: "Road",
+    distances: ["5K", "Half", "Marathon", "Ultra"],
+    summary:
+      "Abbott Longford Marathon Festival — 5K, half-marathon, marathon, relay and ultra events in County Longford.",
+    description:
+      "Longford Marathon's established festival card carries its verified 2027 half-marathon edition and other published distances from the official Eventmaster record.",
+    organiser: "Longford Marathon / Eventmaster",
+    website: "https://eventmaster.ie/event/3x1jhx4tZW",
+    source_url: "https://eventmaster.ie/event/3x1jhx4tZW",
+    defaultStartTime: "09:00",
+  },
+  "kilmacolm-running-festival": {
+    name: "Kilmacolm Running Festival",
+    city: "Kilmacolm",
+    county: "Inverclyde",
+    country: "Scotland",
+    area: "Birkmyre Park and roads around Kilmacolm",
+    surface: "Road",
+    distances: ["Half", "10K", "Other"],
+    summary:
+      "Kilmacolm Running Festival — half-marathon, 10K and 3K road races from Birkmyre Park.",
+    description:
+      "Inverclyde Leisure's Kilmacolm Running Festival starts and finishes at Birkmyre Park; the established card carries its verified 2027 half-marathon, 10K and 3K programme.",
+    organiser: "Inverclyde Leisure",
+    website: "https://www.entrycentral.com/kilmacolmraces",
+    source_url: "https://www.entrycentral.com/kilmacolmraces",
+    defaultStartTime: "10:00",
+  },
+  "kelpies-half-marathon": {
+    name: "Kelpies Half Marathon",
+    city: "Falkirk",
+    county: "Falkirk",
+    country: "Scotland",
+    area: "Helix Park, Clackmannanshire Bridge and Kincardine Bridge",
+    surface: "Road",
+    distances: ["Half"],
+    summary:
+      "Kelpies Half Marathon — a road half marathon from Helix Park across the Forth bridges.",
+    description:
+      "The Kelpies Half Marathon starts and finishes at Helix Park and crosses the Clackmannanshire and Kincardine bridges; the established card carries its verified 2027 edition.",
+    organiser: "Scurry Events / Everyrunner Events",
+    website: "https://www.entrycentral.com/kelpieshalfmarathon",
+    source_url: "https://www.entrycentral.com/kelpieshalfmarathon",
+  },
   "collingbourne-races": {
     name: "Collingbourne Half Marathon & 10K",
     city: "Ludgershall",
@@ -1944,6 +2477,15 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "blarney-stone-mad-half-marathon-2027|2027-03-14|Half": {
+    status: "TBC",
+    entryUrl: undefined,
+    entryOptions: undefined,
+    startTime: "09:00",
+    source: "https://eventmaster.ie/event/eoRKHrKF8x",
+    notes:
+      "Athletics Ireland permit 26/458 and the 14 March 2027 date are approved, but the direct page states that online sales do not open until 1 October 2026 at 09:00, so no premature checkout is exposed.",
+  },
   "tadcaster-10|2026-11-22|10mi": {
     distance: "10mi",
     distanceKm: 16.09,

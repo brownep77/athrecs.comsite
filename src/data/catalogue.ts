@@ -147,6 +147,7 @@ import {
   dailyHalfTenMileEditions,
   dailyHalfTenMileExistingSeriesEditions,
   dailyHalfTenMileSeries,
+  dailyHalfTenMileSeriesOverrides,
 } from "./half-ten-mile-races-uk-ireland-daily-followup";
 import {
   prominentUkIrelandEditions,
@@ -445,6 +446,7 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
   ...series,
   ...seriesOverrides[series.slug],
   ...aimsEuropeSeriesOverrides[series.slug],
+  ...dailyHalfTenMileSeriesOverrides[series.slug],
 }));
 
 const mergedEditions = [

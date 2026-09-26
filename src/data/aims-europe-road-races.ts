@@ -66,13 +66,13 @@ export const aimsEuropeSourceRows: readonly AimsEuropeRace[] = [
   },
   {
     slug: "abbott-longford-marathon-2026",
-    name: "Abbott Longford Marathon",
+    name: "Abbott Longford Marathon Festival",
     city: "Longford",
     country: "Ireland",
-    organiser: "Ciaran McGovern",
-    officialUrl: "https://longfordmarathon.com",
+    organiser: "Longford Marathon / Eventmaster",
+    officialUrl: "https://eventmaster.ie/event/3x1jhx4tZW",
     raceUrl: "https://www.aims-worldrunning.org/races/785.html",
-    distances: ["Marathon"],
+    distances: ["Half", "Marathon"],
     editions: [
       {
         date: "2026-08-30",
