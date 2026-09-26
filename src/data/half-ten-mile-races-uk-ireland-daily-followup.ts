@@ -19,6 +19,7 @@ const LATEST_DAILY_RESEARCH_CHECKED_AT = "2026-09-11";
 const CURRENT_OFFICIAL_SCAN_CHECKED_AT = "2026-09-22";
 const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
 const CURRENT_GOVERNING_BODY_SCAN_CHECKED_AT = "2026-09-24";
+const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1692,6 +1693,30 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "Athletics Ireland approves permit 26/552 and the direct official event page confirms the 29 August 2027 festival, half-marathon distance and 09:00 start; checkout remains hidden until online sales open on 30 October 2026 at 08:00.",
   },
+  {
+    seriesSlug: "kilmacolm-running-festival",
+    date: "2027-09-12",
+    startTime: "10:00",
+    organiser: "Inverclyde Leisure / EntryCentral",
+    url: "https://www.entrycentral.com/kilmacolmraces",
+    entryUrl: "https://www.entrycentral.com/kilmacolmraces",
+    publishAllDistances: true,
+    priceAmount: 32,
+    checkedAt: CURRENT_REGISTRATION_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 12 September 2027 festival, half-marathon, 10K and 3K programme, the 10:00 half-marathon start and open registration; the established Kilmacolm card is reused. Its separate half-marathon button currently resolves to a stale 2026 form, so the internally consistent 2027 registration page remains the entry destination.",
+  },
+  {
+    seriesSlug: "kelpies-half-marathon",
+    date: "2027-09-25",
+    organiser: "Scurry Events / Everyrunner Events",
+    url: "https://www.entrycentral.com/kelpieshalfmarathon",
+    status: "Closed",
+    hasEntry: false,
+    checkedAt: CURRENT_REGISTRATION_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page consistently confirms the 25 September 2027 half marathon at Helix Park. Registration is closed and the published 08:45 itinerary is explicitly provisional, so no checkout or start time is exposed.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -1748,7 +1773,7 @@ export const dailyHalfTenMileResearchQueue = [
     date: "2027-01-10",
     country: "England",
     reason:
-      "The direct official entry page confirms the event details but keeps the race licence pending and does not open entry until 31 August 2026.",
+      "The direct official entry page confirms the event details and open registration but currently marks the race licence Pending, so the race remains unpublished until the permit is confirmed.",
     sourceUrl: "https://racebest.com/races/qq342",
   },
   {
@@ -2399,6 +2424,39 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     website: "https://eventmaster.ie/event/3x1jhx4tZW",
     source_url: "https://eventmaster.ie/event/3x1jhx4tZW",
     defaultStartTime: "09:00",
+  },
+  "kilmacolm-running-festival": {
+    name: "Kilmacolm Running Festival",
+    city: "Kilmacolm",
+    county: "Inverclyde",
+    country: "Scotland",
+    area: "Birkmyre Park and roads around Kilmacolm",
+    surface: "Road",
+    distances: ["Half", "10K", "Other"],
+    summary:
+      "Kilmacolm Running Festival — half-marathon, 10K and 3K road races from Birkmyre Park.",
+    description:
+      "Inverclyde Leisure's Kilmacolm Running Festival starts and finishes at Birkmyre Park; the established card carries its verified 2027 half-marathon, 10K and 3K programme.",
+    organiser: "Inverclyde Leisure",
+    website: "https://www.entrycentral.com/kilmacolmraces",
+    source_url: "https://www.entrycentral.com/kilmacolmraces",
+    defaultStartTime: "10:00",
+  },
+  "kelpies-half-marathon": {
+    name: "Kelpies Half Marathon",
+    city: "Falkirk",
+    county: "Falkirk",
+    country: "Scotland",
+    area: "Helix Park, Clackmannanshire Bridge and Kincardine Bridge",
+    surface: "Road",
+    distances: ["Half"],
+    summary:
+      "Kelpies Half Marathon — a road half marathon from Helix Park across the Forth bridges.",
+    description:
+      "The Kelpies Half Marathon starts and finishes at Helix Park and crosses the Clackmannanshire and Kincardine bridges; the established card carries its verified 2027 edition.",
+    organiser: "Scurry Events / Everyrunner Events",
+    website: "https://www.entrycentral.com/kelpieshalfmarathon",
+    source_url: "https://www.entrycentral.com/kelpieshalfmarathon",
   },
   "collingbourne-races": {
     name: "Collingbourne Half Marathon & 10K",

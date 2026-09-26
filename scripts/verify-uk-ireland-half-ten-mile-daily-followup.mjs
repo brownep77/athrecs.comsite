@@ -19,10 +19,11 @@ const CURRENT_DAILY_RELEASE_CHECKED_AT = "2026-09-07";
 const NEWEST_DAILY_RELEASE_CHECKED_AT = "2026-09-10";
 const CURRENT_OFFICIAL_SCAN_CHECKED_AT = "2026-09-22";
 const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
+const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 67;
 const NEW_EDITION_COUNT = 70;
-const EXISTING_SERIES_EDITION_COUNT = 31;
+const EXISTING_SERIES_EDITION_COUNT = 33;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -172,6 +173,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_DAILY_RELEASE_CHECKED_AT,
         CURRENT_OFFICIAL_SCAN_CHECKED_AT,
         CURRENT_SITEMAP_SCAN_CHECKED_AT,
+        CURRENT_REGISTRATION_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -517,7 +519,10 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
   if (edition.status === "Open") {
     assert(edition.entryOptions?.length, `${key} needs a checked official entry option`);
   } else {
-    assert.equal(edition.status, "TBC", `${key} uses an unsupported non-open status`);
+    assert(
+      ["TBC", "Closed"].includes(edition.status),
+      `${key} uses an unsupported non-open status`,
+    );
     assert.equal(edition.entryUrl, undefined, `${key} must not advertise a premature checkout`);
     assert.equal(edition.entryOptions, undefined, `${key} must not expose a premature checkout`);
   }
@@ -536,6 +541,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_DAILY_RELEASE_CHECKED_AT,
         CURRENT_OFFICIAL_SCAN_CHECKED_AT,
         CURRENT_SITEMAP_SCAN_CHECKED_AT,
+        CURRENT_REGISTRATION_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -584,6 +590,52 @@ assert.equal(
   longfordSeries.website,
   "https://eventmaster.ie/event/3x1jhx4tZW",
   "Longford must expose the current event-specific official page",
+);
+
+const kilmacolmEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) =>
+    edition.seriesSlug === "kilmacolm-running-festival" && edition.date === "2027-09-12",
+);
+assert(kilmacolmEdition, "The verified Kilmacolm 2027 half-marathon edition is missing");
+assert.equal(kilmacolmEdition.startTime, "10:00", "Kilmacolm has the wrong start time");
+assert.equal(kilmacolmEdition.status, "Open", "Kilmacolm should expose open entry");
+assert.equal(
+  kilmacolmEdition.entryUrl,
+  "https://www.entrycentral.com/kilmacolmraces",
+  "Kilmacolm does not use the internally consistent 2027 registration page",
+);
+assert.equal(
+  kilmacolmEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_REGISTRATION_SCAN_CHECKED_AT,
+  "Kilmacolm entry provenance was not checked in the current scan",
+);
+assert.equal(
+  kilmacolmEdition.publishAllDistances,
+  true,
+  "Kilmacolm must retain all verified festival distances on one card",
+);
+assert.deepEqual(
+  dailyHalfTenMileSeriesOverrides["kilmacolm-running-festival"].distances,
+  ["Half", "10K", "Other"],
+  "Kilmacolm was not enriched with its complete official programme",
+);
+
+const kelpiesEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) => edition.seriesSlug === "kelpies-half-marathon" && edition.date === "2027-09-25",
+);
+assert(kelpiesEdition, "The verified Kelpies 2027 half-marathon edition is missing");
+assert.equal(kelpiesEdition.status, "Closed", "Kelpies must preserve its closed entry state");
+assert.equal(kelpiesEdition.entryUrl, undefined, "Kelpies must not expose a closed checkout");
+assert.equal(kelpiesEdition.entryOptions, undefined, "Kelpies must not expose closed entry options");
+assert.equal(
+  kelpiesEdition.startTime,
+  undefined,
+  "Kelpies must not publish its explicitly provisional start time",
+);
+assert.equal(
+  dailyHalfTenMileSeriesOverrides["kelpies-half-marathon"].source_url,
+  "https://www.entrycentral.com/kelpieshalfmarathon",
+  "Kelpies does not expose the current official registration source",
 );
 
 for (const [seriesSlug, date, startTime, source] of [

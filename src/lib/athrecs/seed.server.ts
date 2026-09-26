@@ -20,7 +20,7 @@ import {
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-09-24-v1";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-09-26-v1";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
 const EXPECTED = catalogueMetadata.merged_counts;

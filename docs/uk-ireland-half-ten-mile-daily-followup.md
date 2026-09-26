@@ -98,4 +98,10 @@ Derby Running Festival and Victoria Park January remain held because their new p
 
 The Athletics Ireland recheck found no newly publishable Irish card. Blarney Stone Mad Half remains date- and permit-verified for 14 March 2027, but its checkout is now hidden until the direct page's stated 09:00 opening on 1 October 2026. Cork City remains held because Athletics Ireland shows approved permit 26/483 while the direct registration page still says approval is pending; all other reviewed Irish half and 10-mile candidates remain permit-pending or future-entry fixtures already represented in the catalogue.
 
+## 26 September 2026 registration scan
+
+EntryCentral's live event list exposed two verified 2027 Scottish editions on existing canonical cards. Kilmacolm Running Festival is confirmed for 12 September 2027 with a 10:00 half-marathon start and open registration; its half marathon, 10K and 3K remain together on the established Kilmacolm card. The page's separate half-marathon button currently resolves to a stale 2026 form, so the internally consistent 2027 registration page is used as the entry destination. Kelpies Half Marathon is confirmed for 25 September 2027 at Helix Park, but registration is closed and its published 08:45 itinerary is explicitly provisional, so the edition is published without a checkout or start time.
+
+RaceBest currently marks the Temple Newsam 10 race licence `Pending`, so the 10 January 2027 race remains in research despite its otherwise consistent details and open entry. Clowne and Thirsk remain held with licences marked `TBC`, while Ripon remains `#Pending`. All direct official pages were rechecked on 26 September 2026.
+
 Run `npm run verify:uk-ireland-half-ten-mile-daily` to validate the release.
