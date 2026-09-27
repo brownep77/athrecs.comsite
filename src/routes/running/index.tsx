@@ -121,7 +121,7 @@ function RunningPage() {
         </div>
       </section>
       <section aria-labelledby="countries-title">
-        <h2 id="countries-title" className="font-display text-2xl font-semibold">
+        <h2 id="countries-title" className="scroll-mt-24 font-display text-2xl font-semibold">
           Road marathons by country
         </h2>
         <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
