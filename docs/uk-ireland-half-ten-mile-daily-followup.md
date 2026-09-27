@@ -111,6 +111,6 @@ Run `npm run verify:uk-ireland-half-ten-mile-daily` to validate the release.
 
 Temple Newsam 10 (TNT) was promoted from research after RaceBest replaced the pending licence marker with licence `31550`. The verified 10 January 2027 edition uses its 10:00 start and direct event-specific checkout.
 
-OTT Trail Marathon & 10 Mile Trail Race was added for 15 May 2027 at Parkwood Dolygaer. The official SiEntries record consistently confirms the 10-mile trail race, 10:00 start, open entry and direct event-specific checkout alongside the marathon.
+The existing OTT Trail Marathon & 10 Mile Trail Race card was enriched for 15 May 2027 rather than duplicated. The official SiEntries record consistently confirms the 10-mile trail race, 10:00 start, open entry and direct event-specific checkout alongside the marathon.
 
 Ripon, Thirsk, Clowne and Borrowdale remain unpublished while their official licence fields are pending or TBC.

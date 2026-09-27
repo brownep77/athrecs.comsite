@@ -22,8 +22,8 @@ const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 69;
-const NEW_EDITION_COUNT = 72;
+const NEW_SERIES_COUNT = 68;
+const NEW_EDITION_COUNT = 71;
 const EXISTING_SERIES_EDITION_COUNT = 33;
 
 async function loadModule(input) {
@@ -61,7 +61,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "10mi").length,
-  15,
+  14,
   "The 10-mile total changed unexpectedly",
 );
 
@@ -1049,10 +1049,13 @@ assert.equal(
 );
 assert.match(templeNewsamEdition.notes ?? "", /licence 31550/);
 
-const ottEdition = dailyHalfTenMileEditions.find(
-  (edition) => edition.seriesSlug === "ott-trail-marathon-10-mile-race-2027",
+const ottEdition = catalogue.editions.find(
+  (edition) =>
+    edition.seriesSlug === "ott-trail-marathon-10-mile-2027" &&
+    edition.date === "2027-05-15" &&
+    edition.distance === "10mi",
 );
-assert(ottEdition, "The verified OTT 10-mile edition is missing");
+assert(ottEdition, "The existing OTT 10-mile edition is missing");
 assert.equal(ottEdition.date, "2027-05-15", "OTT has the wrong date");
 assert.equal(ottEdition.startTime, "10:00", "OTT has the wrong 10-mile start time");
 assert.equal(
@@ -1064,6 +1067,11 @@ assert.equal(
   ottEdition.entryOptions?.[0]?.checkedAt,
   LATEST_REGISTRATION_SCAN_CHECKED_AT,
   "OTT entry provenance was not checked in the current scan",
+);
+assert.equal(
+  catalogue.seriesList.filter((series) => /OTT Trail Marathon/.test(series.name)).length,
+  1,
+  "OTT must enrich its existing canonical card instead of creating a duplicate",
 );
 assert(
   dailyHalfTenMileResearchQueue.some(

@@ -71,26 +71,6 @@ const seeds: RaceSeed[] = [
       "The official event and direct entry pages confirm the 10-mile race, date, start time, open registration and race licence 31550.",
   },
   {
-    slug: "ott-trail-marathon-10-mile-race-2027",
-    name: "OTT Trail Marathon & 10 Mile Trail Race 2027",
-    date: "2027-05-15",
-    distance: "10mi",
-    startTime: "10:00",
-    country: "Wales",
-    county: "Merthyr Tydfil",
-    city: "Merthyr Tydfil",
-    area: "Parkwood Dolygaer and the Brecon Beacons",
-    surface: "Trail",
-    distances: ["Marathon", "10mi"],
-    organiser: "Off the Tarmac",
-    url: "https://www.sientries.co.uk/event/ott-marathon-10-mile-race-2027",
-    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18393",
-    priceAmount: 23,
-    checkedAt: LATEST_REGISTRATION_SCAN_CHECKED_AT,
-    notes:
-      "The direct official registration page confirms the marathon and 10-mile trail races, date, 10-mile start time and open event-specific checkout.",
-  },
-  {
     slug: "cambridge-half-marathon-2027",
     name: "Cambridge Half Marathon 2027",
     date: "2027-03-14",
@@ -2509,6 +2489,14 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "ott-trail-marathon-10-mile-2027|2027-05-15|10mi": {
+    status: "Open",
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18393",
+    startTime: "10:00",
+    source: "https://www.sientries.co.uk/event/ott-marathon-10-mile-race-2027",
+    notes:
+      "The direct official registration page confirms the marathon and 10-mile trail races, date, 10-mile start time and open event-specific checkout.",
+  },
   "blarney-stone-mad-half-marathon-2027|2027-03-14|Half": {
     status: "TBC",
     entryUrl: undefined,
@@ -2560,6 +2548,22 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
 };
 
 export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
+  "ott-trail-marathon-10-mile-2027|2027-05-15|10mi": [
+    {
+      providerCode: "official-ott-trail-marathon-10-mile-2027",
+      providerName: "Off The Tarmac",
+      entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18393",
+      entryType: "official",
+      status: "open",
+      priceAmount: 23,
+      priceCurrency: "GBP",
+      checkedAt: LATEST_REGISTRATION_SCAN_CHECKED_AT,
+      sourceUrl: "https://www.sientries.co.uk/event/ott-marathon-10-mile-race-2027",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration checkout.",
+    },
+  ],
   "tadcaster-10|2026-11-22|10mi": [
     {
       providerCode: "official-tadcaster-10-2026",
