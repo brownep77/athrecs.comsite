@@ -235,7 +235,7 @@ function AthleteHomePage() {
         </div>
       </section>
       <section
-        className="flex flex-col gap-4 rounded-2xl border border-border p-5 sm:flex-row sm:items-center sm:justify-between"
+        className="flex flex-col gap-4 rounded-2xl border border-border p-5"
         aria-labelledby="next-event"
       >
         <div className="flex items-center gap-3">
