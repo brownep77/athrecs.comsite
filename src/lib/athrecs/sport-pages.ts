@@ -17,6 +17,13 @@ export const SPORT_PAGES = [
     surfaces: ["Trail"],
   },
   {
+    slug: "parkrun",
+    label: "parkrun",
+    sport: "Parkrun",
+    sports: ["Parkrun"],
+    surfaces: null,
+  },
+  {
     slug: "track-and-field",
     label: "Track and Field",
     sport: "Athletics",
