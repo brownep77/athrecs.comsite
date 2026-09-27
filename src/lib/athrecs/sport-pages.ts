@@ -18,7 +18,7 @@ export const SPORT_PAGES = [
   },
   {
     slug: "parkrun",
-    label: "parkrun",
+    label: "Parkrun",
     sport: "Parkrun",
     sports: ["Parkrun"],
     surfaces: null,
