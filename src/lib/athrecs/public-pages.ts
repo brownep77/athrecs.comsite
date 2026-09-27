@@ -7,6 +7,7 @@ export const PUBLIC_PAGES = [
   { path: "/about-us", name: "About AthRecs" },
   { path: "/athletes", name: "Athlete profiles" },
   { path: "/results", name: "Race results" },
+  { path: "/results/berlin-marathon-2026", name: "Berlin Marathon 2026 results" },
   { path: "/races", name: "Races and events" },
   { path: "/calendar", name: "Athletics calendar" },
   { path: "/race-series", name: "Athletics disciplines and championships" },

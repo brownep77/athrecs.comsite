@@ -55,6 +55,13 @@ function AthleteHomePage() {
   }
   return (
     <div className="space-y-7 pb-2">
+      <a
+        href="/results/berlin-marathon-2026"
+        className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 font-semibold text-accent no-underline hover:bg-elevated"
+      >
+        <span>Berlin Marathon 2026 · Results</span>
+        <span className="text-sm">Men, women & age categories →</span>
+      </a>
       <section className="overflow-hidden rounded-3xl border border-border bg-elevated/50">
         <div className="grid gap-7 p-5 sm:p-7 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:p-8">
           <div>
