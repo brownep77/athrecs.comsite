@@ -108,6 +108,38 @@ function SportPage() {
         )}
       </nav>
 
+      {sport.slug === "track-and-field" && (
+        <section
+          aria-labelledby="world-athletics-heading"
+          className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-accent/25 bg-accent-soft/40 p-4 sm:p-5"
+        >
+          <div className="min-w-0 flex-1 basis-64">
+            <h2
+              id="world-athletics-heading"
+              className="flex items-center gap-2 font-display text-xl font-semibold"
+            >
+              <CalendarDays className="size-5 shrink-0 text-accent" aria-hidden="true" />
+              World Athletics calendar
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-muted">
+              Explore the official worldwide calendar of track and field meetings, with dates,
+              venues and results. Filter by date, country or competition on World Athletics.
+            </p>
+          </div>
+          <Button asChild>
+            <a
+              href="https://worldathletics.org/competition/calendar-results?disciplineId=5"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View calendar & results
+              <ArrowUpRight className="size-4" aria-hidden="true" />
+              <span className="sr-only"> on World Athletics (opens in a new tab)</span>
+            </a>
+          </Button>
+        </section>
+      )}
+
       <section id="on-tv" aria-labelledby="on-tv-heading" className="scroll-mt-24 space-y-4">
         <div>
           <h2
