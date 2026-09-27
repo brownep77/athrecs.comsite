@@ -248,9 +248,17 @@ function AthleteHomePage() {
         <div className="flex shrink-0 flex-wrap gap-3">
           <Link
             to="/running"
+            hash="countries-title"
             className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-fg no-underline"
           >
-            Running <ArrowRight className="size-4" aria-hidden="true" />
+            Marathons <ArrowRight className="size-4" aria-hidden="true" />
+          </Link>
+          <Link
+            to="/running"
+            hash="half-marathons"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-fg no-underline"
+          >
+            Half marathons <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
           <a
             href="https://www.runrecs.com/races"
