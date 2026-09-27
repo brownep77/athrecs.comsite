@@ -1,6 +1,7 @@
 export type HistoricalResultSourceKey =
   | "total_race_timing_results"
-  | "run_norwich_results";
+  | "run_norwich_results"
+  | "mika_timing_berlin_results";
 
 export type HistoricalResultSourcePolicy = {
   key: HistoricalResultSourceKey;
@@ -23,6 +24,15 @@ export const HISTORICAL_RESULT_SOURCES: readonly HistoricalResultSourcePolicy[] 
     displayName: "Run Norwich official historical results",
     officialArchiveUrl: "https://www.runnorwich.co.uk/event-info/results/",
     coverageYears: [2015, 2016, 2017, 2018, 2019, 2022, 2023, 2024, 2025],
+    participantRowsRequireApproval: true,
+  },
+  {
+    key: "mika_timing_berlin_results",
+    displayName: "SCC EVENTS / mika:timing Berlin Marathon results",
+    officialArchiveUrl: "https://berlin.r.mikatiming.com/2026/",
+    // Registered edition scope, not a claim of complete collection or reuse permission.
+    // Earlier editions need their own verified source coverage before being added here.
+    coverageYears: [2026],
     participantRowsRequireApproval: true,
   },
 ] as const;
