@@ -55,7 +55,11 @@ function BerlinResultsPage() {
   const [busy, setBusy] = useState(false);
   const rows = berlinSelection(data, search);
   const categories = [
-    ...new Set(data.results.flatMap((row) => (row.category ? [row.category] : []))),
+    ...new Set(
+      data.results.flatMap((row) =>
+        row.category && row.gender === search.ageGender ? [row.category] : [],
+      ),
+    ),
   ].sort((a, b) => a.localeCompare(b, "en", { numeric: true }));
   const pageSize = search.view === "all" || search.q ? 50 : 10;
   const pageCount = Math.max(1, Math.ceil(rows.length / pageSize));
@@ -76,10 +80,10 @@ function BerlinResultsPage() {
         format,
         Boolean(runner),
       );
-      const suffix = (runner?.bib ?? `${search.view}-${search.category}`).replace(
-        /[^a-z0-9-]/gi,
-        "-",
-      );
+      const suffix = (
+        runner?.bib ??
+        `${search.view}-${search.view === "age" ? search.ageGender : ""}-${search.category}`
+      ).replace(/[^a-z0-9-]/gi, "-");
       downloadBerlinCard(blob, `athrecs-berlin-2026-${suffix}-${format}.png`);
       setMessage(
         `${format === "instagram" ? "Instagram" : "X"} image downloaded. Attach it to your post.`,
@@ -152,7 +156,7 @@ function BerlinResultsPage() {
             <Link
               key={view.value}
               to={BERLIN_PATH}
-              search={{ view: view.value, category: "", q: "", page: 1 }}
+              search={{ view: view.value, ageGender: "men", category: "", q: "", page: 1 }}
               aria-current={search.view === view.value ? "page" : undefined}
               className={`flex min-h-12 items-center justify-center rounded-lg px-3 text-center text-sm font-semibold no-underline ${search.view === view.value ? "bg-primary text-primary-fg" : "text-fg hover:bg-elevated"}`}
             >
@@ -170,27 +174,52 @@ function BerlinResultsPage() {
             </p>
           </div>
           {search.view === "age" && (
-            <label className="block max-w-md space-y-2 text-sm font-medium">
-              Official age category
-              <select
-                className={field}
-                value={search.category}
-                onChange={(event) =>
-                  void navigate({ search: { ...search, category: event.target.value, page: 1 } })
-                }
-              >
-                <option value="">
-                  {categories.length
-                    ? "Choose an age category"
-                    : "Awaiting official age categories"}
-                </option>
-                {categories.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
+            <div className="grid gap-3 sm:grid-cols-2">
+              <label className="block max-w-md space-y-2 text-sm font-medium">
+                Category classification
+                <select
+                  className={field}
+                  value={search.ageGender}
+                  onChange={(event) =>
+                    void navigate({
+                      search: {
+                        ...search,
+                        ageGender: event.target.value as typeof search.ageGender,
+                        category: "",
+                        page: 1,
+                      },
+                    })
+                  }
+                >
+                  <option value="men">Men</option>
+                  <option value="women">Women</option>
+                  {data.results.some((row) => row.gender === "other") && (
+                    <option value="other">Other classifications</option>
+                  )}
+                </select>
+              </label>
+              <label className="block max-w-md space-y-2 text-sm font-medium">
+                Official age category
+                <select
+                  className={field}
+                  value={search.category}
+                  onChange={(event) =>
+                    void navigate({ search: { ...search, category: event.target.value, page: 1 } })
+                  }
+                >
+                  <option value="">
+                    {categories.length
+                      ? "Choose an age category"
+                      : "Awaiting official age categories"}
                   </option>
-                ))}
-              </select>
-            </label>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
           )}
           {search.view === "all" && (
             <form action={BERLIN_PATH} method="get" className="flex flex-wrap items-end gap-3">

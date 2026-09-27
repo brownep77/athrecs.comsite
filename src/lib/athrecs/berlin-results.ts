@@ -55,13 +55,20 @@ export const berlinSnapshotSchema = z
   });
 export type BerlinSnapshot = z.infer<typeof berlinSnapshotSchema>;
 export type BerlinView = "men" | "women" | "age" | "all";
-export type BerlinSearch = { view: BerlinView; category: string; q: string; page: number };
+export type BerlinSearch = {
+  view: BerlinView;
+  ageGender: "men" | "women" | "other";
+  category: string;
+  q: string;
+  page: number;
+};
 export function berlinSearch(raw: Record<string, unknown>): BerlinSearch {
   return {
     view: ["men", "women", "age", "all"].includes(String(raw.view))
       ? (raw.view as BerlinView)
       : "men",
     category: typeof raw.category === "string" ? raw.category.slice(0, 50) : "",
+    ageGender: raw.ageGender === "women" || raw.ageGender === "other" ? raw.ageGender : "men",
     q: typeof raw.q === "string" ? raw.q.trim().slice(0, 120) : "",
     page:
       Number.isSafeInteger(Number(raw.page)) && Number(raw.page) > 0
@@ -79,7 +86,8 @@ export function berlinSelection(data: BerlinSnapshot, search: BerlinSearch): Ber
     .filter(
       (row) =>
         ((search.view !== "men" && search.view !== "women") || row.gender === search.view) &&
-        (search.view !== "age" || row.category === search.category) &&
+        (search.view !== "age" ||
+          (row.category === search.category && row.gender === search.ageGender)) &&
         (!query ||
           [row.name, row.bib, row.club ?? ""].some((value) =>
             value.toLocaleLowerCase("en-GB").includes(query),
@@ -93,7 +101,7 @@ export function berlinSelection(data: BerlinSnapshot, search: BerlinSearch): Ber
 }
 export function berlinTitle(search: BerlinSearch): string {
   if (search.view === "age")
-    return search.category ? `Age category · ${search.category}` : "Age categories";
+    return `${search.ageGender === "women" ? "Women" : search.ageGender === "other" ? "Other classifications" : "Men"} · ${search.category ? `Age category ${search.category}` : "Age categories"}`;
   return search.view === "men"
     ? "Men"
     : search.view === "women"
@@ -103,13 +111,16 @@ export function berlinTitle(search: BerlinSearch): string {
 export function berlinShareUrl(search: BerlinSearch): string {
   const params = new URLSearchParams({ view: search.view });
   if (search.view === "age" && search.category) params.set("category", search.category);
+  if (search.view === "age") params.set("ageGender", search.ageGender);
   if (search.q) params.set("q", search.q);
   return `${BERLIN_URL}?${params}`;
 }
 export function berlinCaption(data: BerlinSnapshot, search: BerlinSearch): string {
   const rows = berlinSelection(data, search);
   const status = !rows.length
-    ? "Awaiting verified results."
+    ? data.results.length
+      ? "No published results in this selection."
+      : "Awaiting verified results."
     : `${data.status === "official" ? "Official" : "Provisional"} results · ${data.coverage} coverage.`;
   return `Berlin Marathon 2026 · ${berlinTitle(search)}\n27 September · 42.195 km\n${status}\n${berlinShareUrl(search)}\n#BerlinMarathon #AthRecs`;
 }

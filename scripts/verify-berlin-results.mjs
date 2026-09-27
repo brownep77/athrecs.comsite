@@ -65,7 +65,8 @@ assert.equal(berlinPlace(synthetic, "age"), 1);
 assert.equal(berlinSelection(fixture, berlinSearch({ view: "men" })).length, 0);
 assert.equal(berlinSelection(fixture, berlinSearch({ view: "women" })).length, 1);
 assert.equal(
-  berlinSelection(fixture, berlinSearch({ view: "age", category: "TEST-W45" })).length,
+  berlinSelection(fixture, berlinSearch({ view: "age", category: "TEST-W45", ageGender: "women" }))
+    .length,
   1,
 );
 assert.equal(berlinSelection(fixture, berlinSearch({ view: "age" })).length, 0);
@@ -76,4 +77,23 @@ assert(
 );
 console.log(
   `Berlin snapshot valid: ${snapshot.results.length} results, ${snapshot.status}; rank, evidence and sharing checks passed.`,
+);
+
+const sharedLabel = {
+  ...fixture,
+  results: [synthetic, { ...synthetic, id: "test-2", bib: "TEST-2", gender: "men" }],
+};
+assert.equal(
+  berlinSelection(
+    sharedLabel,
+    berlinSearch({ view: "age", category: "TEST-W45", ageGender: "women" }),
+  ).length,
+  1,
+);
+assert.equal(
+  berlinSelection(
+    sharedLabel,
+    berlinSearch({ view: "age", category: "TEST-W45", ageGender: "men" }),
+  )[0].gender,
+  "men",
 );
