@@ -95,6 +95,10 @@ function ResultsPage() {
       </form>
 
       <section aria-label="Race results" className="space-y-3">
+        <a href="/results/berlin-marathon-2026" className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/30 bg-accent-soft p-4 font-semibold text-accent no-underline hover:bg-elevated">
+          <span>Berlin Marathon · 27 September 2026</span>
+          <span className="text-sm">Men, women & age categories →</span>
+        </a>
         <div className="flex items-center justify-between gap-3">
           <h2 className="font-display text-xl font-semibold">Race results archive</h2>
           <span className="text-xs text-muted">Newest first</span>
