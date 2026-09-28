@@ -21,6 +21,7 @@ const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
 const CURRENT_GOVERNING_BODY_SCAN_CHECKED_AT = "2026-09-24";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
+const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1737,6 +1738,19 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The direct official registration page consistently confirms the 25 September 2027 half marathon at Helix Park. Registration is closed and the published 08:45 itinerary is explicitly provisional, so no checkout or start time is exposed.",
   },
+  {
+    seriesSlug: "congleton-half-and-quarter-marathons",
+    date: "2027-01-24",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/congleton-half-marathon-january-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/congleton-half-marathon-january-2027",
+    publishAllDistances: true,
+    priceAmount: 35,
+    checkedAt: CURRENT_DISCOVERY_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 24 January 2027 half marathon, 10K and 5K programme, the 09:00 half start and open entry. Its half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified event page is retained as the safe entry destination and the established Congleton card is reused.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -1872,8 +1886,7 @@ export const dailyHalfTenMileResearchQueue = [
     country: "England",
     reason:
       "The official page's structured date, title and summary say 3 April 2027, but its opening race-day sentence says 3 July 2027, so the edition remains unpublished until RunThrough corrects the conflict.",
-    sourceUrl:
-      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
+    sourceUrl: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-april-2027",
   },
   {
     slug: "finsbury-park-half-marathon-5k-10k-half-marathon-april-2027",
@@ -1907,8 +1920,31 @@ export const dailyHalfTenMileResearchQueue = [
     country: "England",
     reason:
       "The official page title and structured date say 10 January 2027, but its opening race-day sentence still says 3 October 2026, so its existing catalogue edition retains prior provenance until the conflict is corrected.",
-    sourceUrl:
-      "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
+    sourceUrl: "https://www.runthrough.co.uk/event/victoria-park-half-marathon-10k-5k-january-2027",
+  },
+  {
+    slug: "brixton-5k-10k-half-marathon-july-2027",
+    date: "2027-07-18",
+    country: "England",
+    reason:
+      "The official page consistently confirms the date and programme and gives a 10:10 half-marathon schedule, but its structured start field still says 00:00, so publication is held until RunThrough removes the timetable conflict.",
+    sourceUrl: "https://www.runthrough.co.uk/event/brixton-5k-10k-half-marathon-july-2027",
+  },
+  {
+    slug: "nantwich-half-marathon-december-2027",
+    date: "2027-12-12",
+    country: "England",
+    reason:
+      "The official page consistently confirms the date and gives a 09:00 half-marathon schedule, but its structured start field still says 00:00, so publication is held until RunThrough removes the timetable conflict.",
+    sourceUrl: "https://www.runthrough.co.uk/event/nantwich-half-marathon-december-2027",
+  },
+  {
+    slug: "swindon-half-marathon-september-2027",
+    date: "2027-09-26",
+    country: "England",
+    reason:
+      "The official title and structured date say 26 September 2027, but the race-day copy still says 27 September 2026 and the structured start field says 00:00, so the established Swindon card is not enriched until both conflicts are corrected.",
+    sourceUrl: "https://www.runthrough.co.uk/event/swindon-half-marathon-september-2027",
   },
   ...[
     ["january", "2027-01-17"],
@@ -2009,8 +2045,7 @@ export const dailyHalfTenMileResearchQueue = [
     country: "England",
     reason:
       "The official entry page markets a half marathon but specifies a 13.6-mile route, so it is held for the non-standard-distance catalogue rather than mislabelled as a canonical half.",
-    sourceUrl:
-      "https://www.sientries.co.uk/event/walter-raleigh-round-halfthird-marathon-2027",
+    sourceUrl: "https://www.sientries.co.uk/event/walter-raleigh-round-halfthird-marathon-2027",
   },
   {
     slug: "ranger-ultras-loop-the-loop-2027",
@@ -2026,8 +2061,7 @@ export const dailyHalfTenMileResearchQueue = [
     country: "England",
     reason:
       "The official entry page markets the Great Escape as a long half marathon and specifies 25 kilometres / 15.5 miles, so it is held for the non-standard-distance catalogue.",
-    sourceUrl:
-      "https://www.sientries.co.uk/event/the-dartmoor-crossing-great-escape-2027",
+    sourceUrl: "https://www.sientries.co.uk/event/the-dartmoor-crossing-great-escape-2027",
   },
   {
     slug: "tom-scott-10-mile-road-race-2027",
@@ -2042,8 +2076,7 @@ export const dailyHalfTenMileResearchQueue = [
     slug: "athletics-ireland-race-series-irish-runner-10m-challenge-2027",
     date: "2027-07-18",
     country: "Ireland",
-    reason:
-      `The official Athletics Ireland calendar confirms the 10-mile road race and approved permit 26/516, checked ${LATEST_DAILY_RESEARCH_CHECKED_AT}, but registration is Open Soon and the only live provenance is the shared calendar URL already used by another public series. Hold until an event-specific official URL is available so normalized-source duplicate protection is not weakened.`,
+    reason: `The official Athletics Ireland calendar confirms the 10-mile road race and approved permit 26/516, checked ${LATEST_DAILY_RESEARCH_CHECKED_AT}, but registration is Open Soon and the only live provenance is the shared calendar URL already used by another public series. Hold until an event-specific official URL is available so normalized-source duplicate protection is not weakened.`,
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {
@@ -2097,9 +2130,7 @@ export const dailyHalfTenMileResearchQueue = [
 ] as const;
 
 /** Public seed records retired after current official evidence invalidated the canonical distance. */
-export const dailyHalfTenMileRetiredSeriesSlugs = [
-  "pagan-midwinter-half-marathon-2027",
-] as const;
+export const dailyHalfTenMileRetiredSeriesSlugs = ["pagan-midwinter-half-marathon-2027"] as const;
 
 const BRIGHTEN_MARINA_URL =
   "https://www.ukrunningevents.co.uk/events/trail-runs/brighten-brighton-marina-run-2027";
@@ -2316,15 +2347,12 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     area: "Battersea Park",
     surface: "Road",
     distances: ["Half", "10K", "5K"],
-    summary:
-      "Battersea Park Half Marathon, 10K & 5K — flat road races in Battersea Park.",
+    summary: "Battersea Park Half Marathon, 10K & 5K — flat road races in Battersea Park.",
     description:
       "RunThrough stages several Battersea Park race days; the established July card carries both verified July 2027 editions and their event-specific official entry routes.",
     organiser: "RunThrough Events",
-    website:
-      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-july-2027",
-    source_url:
-      "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-july-2027",
+    website: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-july-2027",
+    source_url: "https://www.runthrough.co.uk/event/battersea-park-half-marathon-10k-july-2027",
     defaultStartTime: "10:30",
   },
   "hertfordshire-half-marathon": {
@@ -2340,10 +2368,8 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     description:
       "RunThrough's Hertfordshire Half Marathon and 10K start and finish at Knebworth House, using park roads and surrounding closed country lanes; the established card carries the verified 2027 edition.",
     organiser: "RunThrough Events",
-    website:
-      "https://www.runthrough.co.uk/event/hertfordshire-half-marathon-10k-november-2027",
-    source_url:
-      "https://www.runthrough.co.uk/event/hertfordshire-half-marathon-10k-november-2027",
+    website: "https://www.runthrough.co.uk/event/hertfordshire-half-marathon-10k-november-2027",
+    source_url: "https://www.runthrough.co.uk/event/hertfordshire-half-marathon-10k-november-2027",
     defaultStartTime: "09:00",
   },
   "henley-half-marathon-river-trail-run-10k-september": {
@@ -2367,8 +2393,7 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
   },
   "basildon-half": {
     organiser: "RunThrough Events",
-    website:
-      "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
+    website: "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
     source_url:
       "https://www.runthrough.co.uk/event/basildon-half-marathon-and-juniors-september-2027",
     defaultStartTime: "09:00",
@@ -2414,8 +2439,7 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
   },
   "wimbledon-common-half-marathon-10k-september": {
     organiser: "RunThrough Events",
-    website:
-      "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2027",
+    website: "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2027",
     source_url:
       "https://www.runthrough.co.uk/event/wimbledon-common-half-marathon-10k-september-2027",
     defaultStartTime: "09:30",
@@ -2469,6 +2493,23 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     organiser: "Scurry Events / Everyrunner Events",
     website: "https://www.entrycentral.com/kelpieshalfmarathon",
     source_url: "https://www.entrycentral.com/kelpieshalfmarathon",
+  },
+  "congleton-half-and-quarter-marathons": {
+    name: "Congleton Running Festival",
+    city: "Congleton",
+    county: "Cheshire",
+    country: "England",
+    area: "Back Lane Playing Field and surrounding Cheshire lanes",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Congleton Running Festival — half-marathon, 10K and 5K road races from Back Lane Playing Field.",
+    description:
+      "RunThrough's Congleton Running Festival follows road-closed lanes from Back Lane Playing Field; the established Congleton card carries its verified 2027 half marathon, 10K and 5K programme.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/congleton-half-marathon-january-2027",
+    source_url: "https://www.runthrough.co.uk/event/congleton-half-marathon-january-2027",
+    defaultStartTime: "09:00",
   },
   "collingbourne-races": {
     name: "Collingbourne Half Marathon & 10K",

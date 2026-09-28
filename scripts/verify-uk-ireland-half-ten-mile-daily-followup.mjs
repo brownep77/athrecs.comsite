@@ -21,10 +21,11 @@ const CURRENT_OFFICIAL_SCAN_CHECKED_AT = "2026-09-22";
 const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
+const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 68;
 const NEW_EDITION_COUNT = 71;
-const EXISTING_SERIES_EDITION_COUNT = 33;
+const EXISTING_SERIES_EDITION_COUNT = 34;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -176,6 +177,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_SITEMAP_SCAN_CHECKED_AT,
         CURRENT_REGISTRATION_SCAN_CHECKED_AT,
         LATEST_REGISTRATION_SCAN_CHECKED_AT,
+        CURRENT_DISCOVERY_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -312,23 +314,43 @@ assert.equal(beaconEdition.entryOptions?.[0]?.checkedAt, LATEST_DAILY_SCAN_CHECK
 const currentOfficialAdditions = new Map([
   [
     "battersea-park-half-marathon-10k-5k-may-2027",
-    ["2027-05-08", "10:30", "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-may-2027"],
+    [
+      "2027-05-08",
+      "10:30",
+      "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-may-2027",
+    ],
   ],
   [
     "carlisle-half-marathon-10k-5k-july-2027",
-    ["2027-07-18", "09:00", "https://www.runthrough.co.uk/event/carlisle-half-marathon-10k-july-2027"],
+    [
+      "2027-07-18",
+      "09:00",
+      "https://www.runthrough.co.uk/event/carlisle-half-marathon-10k-july-2027",
+    ],
   ],
   [
     "newcastle-half-marathon-10k-july-2027",
-    ["2027-07-11", "09:00", "https://www.runthrough.co.uk/event/newcastle-half-marathon-10k-july-2027"],
+    [
+      "2027-07-11",
+      "09:00",
+      "https://www.runthrough.co.uk/event/newcastle-half-marathon-10k-july-2027",
+    ],
   ],
   [
     "east-yorkshire-half-marathon-10k-june-2027",
-    ["2027-06-20", "09:00", "https://www.runthrough.co.uk/event/east-yorkshire-half-marathon-10k-june-2027"],
+    [
+      "2027-06-20",
+      "09:00",
+      "https://www.runthrough.co.uk/event/east-yorkshire-half-marathon-10k-june-2027",
+    ],
   ],
   [
     "newcastle-gateshead-marathon-half-marathon-10k-may-2027",
-    ["2027-05-02", "09:25", "https://www.runthrough.co.uk/event/newcastle-gateshead-marathon-half-marathon-10k-may-2027"],
+    [
+      "2027-05-02",
+      "09:25",
+      "https://www.runthrough.co.uk/event/newcastle-gateshead-marathon-half-marathon-10k-may-2027",
+    ],
   ],
 ]);
 for (const [slug, [date, startTime, source]] of currentOfficialAdditions) {
@@ -353,10 +375,7 @@ assert.equal(
   "https://www.runthrough.co.uk/event/crystal-palace-5k-10k-half-marathon-juniors-may-2027",
   "Crystal Palace May does not use direct organiser entry",
 );
-assert.equal(
-  crystalPalaceMayEdition.entryOptions?.[0]?.checkedAt,
-  CURRENT_SITEMAP_SCAN_CHECKED_AT,
-);
+assert.equal(crystalPalaceMayEdition.entryOptions?.[0]?.checkedAt, CURRENT_SITEMAP_SCAN_CHECKED_AT);
 
 const tadcasterSeries = dailyHalfTenMileSeries.find(
   (series) => series.slug === "tadcaster-10-2026",
@@ -545,6 +564,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_SITEMAP_SCAN_CHECKED_AT,
         CURRENT_REGISTRATION_SCAN_CHECKED_AT,
         LATEST_REGISTRATION_SCAN_CHECKED_AT,
+        CURRENT_DISCOVERY_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -596,8 +616,7 @@ assert.equal(
 );
 
 const kilmacolmEdition = dailyHalfTenMileExistingSeriesEditions.find(
-  (edition) =>
-    edition.seriesSlug === "kilmacolm-running-festival" && edition.date === "2027-09-12",
+  (edition) => edition.seriesSlug === "kilmacolm-running-festival" && edition.date === "2027-09-12",
 );
 assert(kilmacolmEdition, "The verified Kilmacolm 2027 half-marathon edition is missing");
 assert.equal(kilmacolmEdition.startTime, "10:00", "Kilmacolm has the wrong start time");
@@ -629,7 +648,11 @@ const kelpiesEdition = dailyHalfTenMileExistingSeriesEditions.find(
 assert(kelpiesEdition, "The verified Kelpies 2027 half-marathon edition is missing");
 assert.equal(kelpiesEdition.status, "Closed", "Kelpies must preserve its closed entry state");
 assert.equal(kelpiesEdition.entryUrl, undefined, "Kelpies must not expose a closed checkout");
-assert.equal(kelpiesEdition.entryOptions, undefined, "Kelpies must not expose closed entry options");
+assert.equal(
+  kelpiesEdition.entryOptions,
+  undefined,
+  "Kelpies must not expose closed entry options",
+);
 assert.equal(
   kelpiesEdition.startTime,
   undefined,
@@ -639,6 +662,34 @@ assert.equal(
   dailyHalfTenMileSeriesOverrides["kelpies-half-marathon"].source_url,
   "https://www.entrycentral.com/kelpieshalfmarathon",
   "Kelpies does not expose the current official registration source",
+);
+
+const congletonEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) =>
+    edition.seriesSlug === "congleton-half-and-quarter-marathons" && edition.date === "2027-01-24",
+);
+assert(congletonEdition, "The verified 2027 Congleton half-marathon edition is missing");
+assert.equal(congletonEdition.startTime, "09:00", "Congleton has the wrong half start time");
+assert.equal(congletonEdition.status, "Open", "Congleton must preserve its open entry state");
+assert.equal(
+  congletonEdition.entryUrl,
+  "https://www.runthrough.co.uk/event/congleton-half-marathon-january-2027",
+  "Congleton must avoid the currently misdirected downstream checkout",
+);
+assert.equal(
+  congletonEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_DISCOVERY_SCAN_CHECKED_AT,
+  "Congleton entry provenance was not checked in the current scan",
+);
+assert.equal(
+  congletonEdition.publishAllDistances,
+  true,
+  "Congleton must retain the full verified festival programme on one card",
+);
+assert.deepEqual(
+  dailyHalfTenMileSeriesOverrides["congleton-half-and-quarter-marathons"].distances,
+  ["Half", "10K", "5K"],
+  "Congleton was not enriched with its complete official programme",
 );
 
 for (const [seriesSlug, date, startTime, source] of [
@@ -738,7 +789,8 @@ for (const [seriesSlug, date, startTime, source, publishAllDistances] of [
     (candidate) => candidate.seriesSlug === seriesSlug && candidate.date === date,
   );
   assert(edition, `${seriesSlug} is missing its verified ${date} sitemap edition`);
-  if (startTime) assert.equal(edition.startTime, startTime, `${seriesSlug} has the wrong start time`);
+  if (startTime)
+    assert.equal(edition.startTime, startTime, `${seriesSlug} has the wrong start time`);
   assert.equal(edition.entryUrl, source, `${seriesSlug} does not use direct organiser entry`);
   assert.equal(
     edition.publishAllDistances ?? false,
@@ -933,7 +985,11 @@ const blarneyEdition = catalogue.editions.find(
 assert(blarneyEdition, "The approved Blarney Stone Mad Half edition disappeared");
 assert.equal(blarneyEdition.status, "TBC", "Blarney entry must remain future-dated");
 assert.equal(blarneyEdition.entryUrl, undefined, "Blarney must not expose a premature checkout");
-assert.equal(blarneyEdition.entryOptions, undefined, "Blarney must not expose premature entry options");
+assert.equal(
+  blarneyEdition.entryOptions,
+  undefined,
+  "Blarney must not expose premature entry options",
+);
 assert.equal(
   blarneyEdition.source,
   "https://eventmaster.ie/event/eoRKHrKF8x",
@@ -969,8 +1025,7 @@ assert(
 );
 assert(
   dailyHalfTenMileResearchQueue.some(
-    (candidate) =>
-      candidate.slug === "finsbury-park-half-marathon-5k-10k-half-marathon-april-2027",
+    (candidate) => candidate.slug === "finsbury-park-half-marathon-5k-10k-half-marathon-april-2027",
   ),
   "Finsbury Park April must remain held until its stale prior date is atomically replaced",
 );
@@ -993,6 +1048,25 @@ for (const [slug, message] of [
     `run-dorney-lake-half-marathon-10k-5k-${month}-2027`,
     `Dorney Lake ${month} must remain held while its official date and start-time copy conflict`,
   ]),
+]) {
+  assert(
+    dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === slug),
+    message,
+  );
+}
+for (const [slug, message] of [
+  [
+    "brixton-5k-10k-half-marathon-july-2027",
+    "Brixton must remain held while its structured and detailed start times conflict",
+  ],
+  [
+    "nantwich-half-marathon-december-2027",
+    "Nantwich must remain held while its structured and detailed start times conflict",
+  ],
+  [
+    "swindon-half-marathon-september-2027",
+    "Swindon must remain held while its 2026/2027 date copy and start fields conflict",
+  ],
 ]) {
   assert(
     dailyHalfTenMileResearchQueue.some((candidate) => candidate.slug === slug),
@@ -1197,8 +1271,7 @@ assert(
   "Tom Scott 10 must remain held while its provisional licence status is unresolved",
 );
 const irishRunner10 = dailyHalfTenMileResearchQueue.find(
-  (candidate) =>
-    candidate.slug === "athletics-ireland-race-series-irish-runner-10m-challenge-2027",
+  (candidate) => candidate.slug === "athletics-ireland-race-series-irish-runner-10m-challenge-2027",
 );
 assert(irishRunner10, "Irish Runner 10M must remain held without an event-specific source URL");
 assert.equal(irishRunner10.date, "2027-07-18", "Irish Runner 10M has the wrong date");
@@ -1282,5 +1355,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (54 half marathons and 13 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (55 half marathons and 13 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
 );

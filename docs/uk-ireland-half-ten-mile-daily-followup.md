@@ -1,11 +1,11 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 23 September 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 28 September 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
 - Added 68 officially verified series: 55 half marathons and 13 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
-- Added 30 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
+- Added 34 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
 - Burnsall, Kettlewell and Malham now use the live official Due North series checkout.
@@ -14,11 +14,11 @@ Checked through 23 September 2026 for the catalogue horizon ending 31 December 2
 
 The verifier rejects duplicate slugs, duplicate names after year/punctuation normalization, duplicate `seriesSlug|date` editions, catalogue rows dropped by the merge, stale source checks and held candidates leaking into the public catalogue.
 
-Events already represented elsewhere were not recreated. This includes Beverley Half Marathon, Clontarf Half Marathon, Run Tatton, Hampton Court Palace, Richmond Park, Windsor Trail, Carsington Water, Running GP Goodwood, Battersea Park, Hertfordshire, Henley River Trail, Basildon, Cheshire Autumn, Crystal Palace, Holkham, Newark, Newbury, Warwick and Wimbledon Common; verified dates were attached to their canonical cards.
+Events already represented elsewhere were not recreated. This includes Beverley Half Marathon, Clontarf Half Marathon, Run Tatton, Hampton Court Palace, Richmond Park, Windsor Trail, Carsington Water, Running GP Goodwood, Battersea Park, Hertfordshire, Henley River Trail, Basildon, Cheshire Autumn, Crystal Palace, Holkham, Newark, Newbury, Warwick, Wimbledon Common and Congleton; verified dates were attached to their canonical cards.
 
 ## Held candidates
 
-The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, Abbeyknockmoy, RunClare, RunCork, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs, Ennis and Glenmore races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
+The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, Abbeyknockmoy, RunClare, RunCork, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs, Ennis and Glenmore races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
 
 ## 29 August 2026 scan
 
@@ -106,7 +106,6 @@ RaceBest currently marks the Temple Newsam 10 race licence `Pending`, so the 10 
 
 Run `npm run verify:uk-ireland-half-ten-mile-daily` to validate the release.
 
-
 ## 27 September 2026 scan
 
 Temple Newsam 10 (TNT) was promoted from research after RaceBest replaced the pending licence marker with licence `31550`. The verified 10 January 2027 edition uses its 10:00 start and direct event-specific checkout.
@@ -114,3 +113,9 @@ Temple Newsam 10 (TNT) was promoted from research after RaceBest replaced the pe
 The existing OTT Trail Marathon & 10 Mile Trail Race card was enriched for 15 May 2027 rather than duplicated. The official SiEntries record consistently confirms the 10-mile trail race, 10:00 start, open entry and direct event-specific checkout alongside the marathon.
 
 Ripon, Thirsk, Clowne and Borrowdale remain unpublished while their official licence fields are pending or TBC.
+
+## 28 September 2026 scan
+
+RunThrough's official event sitemap exposed the Congleton Running Festival on 24 January 2027. Its organiser page consistently confirms the half marathon, 10K and 5K programme and the 09:00 half start, so the verified edition and all distances were attached to the existing Congleton card rather than creating a duplicate. The page advertises open entry, but its half-marathon checkout currently redirects to an unrelated Blackburn event; the safe organiser page remains the catalogue entry destination until RunThrough fixes that downstream link.
+
+Brixton on 18 July and Nantwich on 12 December remain in research because each page's detailed half-marathon schedule conflicts with a structured 00:00 start. Swindon on 26 September remains held from its existing card because the 2027 structured date conflicts with stale 2026 race-day copy and the same midnight placeholder. Melbourne, Sydney and San Diego listings from the same source remain outside the UK and Ireland scope.
