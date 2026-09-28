@@ -28,6 +28,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminApprovalsRouteImport } from './routes/admin/approvals'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
 import { Route as AdminAthleteDirectoryRouteImport } from './routes/admin/athlete-directory'
 import { Route as AdminAthleteWorkspaceRouteImport } from './routes/admin/athlete-workspace'
@@ -171,6 +172,11 @@ const SportsrecsRoute = SportsrecsRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminApprovalsRoute = AdminApprovalsRouteImport.update({
+  id: '/admin/approvals',
+  path: '/admin/approvals',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminAthleteAccountsRoute = AdminAthleteAccountsRouteImport.update({
@@ -446,6 +452,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
@@ -516,6 +523,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
@@ -587,6 +595,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
@@ -659,6 +668,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
     | '/admin/athlete-workspace'
@@ -729,6 +739,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
     | '/admin/athlete-workspace'
@@ -799,6 +810,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
     | '/admin/athlete-workspace'
@@ -870,6 +882,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SponsorshipRoute: typeof SponsorshipRoute
   SportsrecsRoute: typeof SportsrecsRoute
+  AdminApprovalsRoute: typeof AdminApprovalsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminAthleteDirectoryRoute: typeof AdminAthleteDirectoryRoute
   AdminAthleteWorkspaceRoute: typeof AdminAthleteWorkspaceRoute
@@ -1055,6 +1068,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/approvals': {
+      id: '/admin/approvals'
+      path: '/admin/approvals'
+      fullPath: '/admin/approvals'
+      preLoaderRoute: typeof AdminApprovalsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/athlete-accounts': {
@@ -1422,6 +1442,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SponsorshipRoute: SponsorshipRoute,
   SportsrecsRoute: SportsrecsRoute,
+  AdminApprovalsRoute: AdminApprovalsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminAthleteDirectoryRoute: AdminAthleteDirectoryRoute,
   AdminAthleteWorkspaceRoute: AdminAthleteWorkspaceRoute,
