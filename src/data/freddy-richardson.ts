@@ -204,7 +204,7 @@ export const freddyRichardsonCareer = {
       date: "14 December 2025 · Telford",
       outcomes: [
         "Reported 3rd place · 28:57 (28:58)",
-        "User-supplied Power of 10 extract; not independently verified.",
+        "User-supplied result; not independently verified.",
       ],
       sources: [
         {
@@ -220,7 +220,7 @@ export const freddyRichardsonCareer = {
       date: "3 August 2025 · Birmingham",
       outcomes: [
         "Reported 5000m 12th place · 14:11.56",
-        "User-supplied Power of 10 extract; not independently verified.",
+        "User-supplied result; not independently verified.",
       ],
       sources: [
         {
