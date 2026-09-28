@@ -3,6 +3,7 @@ import type { RaceWinAchievement } from "@/lib/athrecs/race-win-achievements";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { distanceColourClass } from "@/lib/athrecs/profile-colours";
+import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 
 export function RaceWinAchievements({
   wins,
@@ -39,48 +40,55 @@ export function RaceWinAchievements({
               </span>
             </summary>
             <ul className="mt-3 space-y-3 border-t border-current/20 pt-3 text-xs">
-              {win.results.map((evidence, index) => (
-                <li key={`${evidence.date}:${evidence.event}:${index}`} className="space-y-1">
-                  <p className="font-semibold">
-                    {evidence.result ? (
-                      <ProfileEventLink
-                        result={evidence.result}
-                        className="underline underline-offset-2"
-                      >
-                        {evidence.event}
-                      </ProfileEventLink>
-                    ) : (
-                      <a
-                        href={evidence.sourceUrls[0]}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="underline underline-offset-2"
-                      >
-                        {evidence.event}
-                      </a>
-                    )}
-                  </p>
-                  <p>
-                    {formatRaceDateShort(evidence.date)}
-                    {evidence.performance || evidence.result?.finishTimeSeconds
-                      ? ` · ${evidence.performance ?? formatDuration(evidence.result!.finishTimeSeconds)}`
-                      : ""}
-                  </p>
-                  <p>1st in {win.label.toLowerCase()}</p>
-                  {showEvidence &&
-                    evidence.sourceUrls.map((url, sourceIndex) => (
-                      <a
-                        key={url}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mr-3 inline-block underline underline-offset-2"
-                      >
-                        Source{evidence.sourceUrls.length > 1 ? ` ${sourceIndex + 1}` : ""} ↗
-                      </a>
-                    ))}
-                </li>
-              ))}
+              {win.results.map((evidence, index) => {
+                const source = evidence.sourceUrls.find(
+                  (url) => showEvidence || isPublicProfileSource(url),
+                );
+                return (
+                  <li key={`${evidence.date}:${evidence.event}:${index}`} className="space-y-1">
+                    <p className="font-semibold">
+                      {evidence.result ? (
+                        <ProfileEventLink
+                          result={evidence.result}
+                          className="underline underline-offset-2"
+                        >
+                          {evidence.event}
+                        </ProfileEventLink>
+                      ) : source ? (
+                        <a
+                          href={source}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline underline-offset-2"
+                        >
+                          {evidence.event}
+                        </a>
+                      ) : (
+                        evidence.event
+                      )}
+                    </p>
+                    <p>
+                      {formatRaceDateShort(evidence.date)}
+                      {evidence.performance || evidence.result?.finishTimeSeconds
+                        ? ` · ${evidence.performance ?? formatDuration(evidence.result!.finishTimeSeconds)}`
+                        : ""}
+                    </p>
+                    <p>1st in {win.label.toLowerCase()}</p>
+                    {showEvidence &&
+                      evidence.sourceUrls.map((url, sourceIndex) => (
+                        <a
+                          key={url}
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mr-3 inline-block underline underline-offset-2"
+                        >
+                          Source{evidence.sourceUrls.length > 1 ? ` ${sourceIndex + 1}` : ""} ↗
+                        </a>
+                      ))}
+                  </li>
+                );
+              })}
             </ul>
           </details>
         ))}

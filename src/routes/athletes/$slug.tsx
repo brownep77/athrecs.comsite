@@ -1,6 +1,7 @@
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
+import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
@@ -113,7 +114,9 @@ export const Route = createFileRoute("/athletes/$slug")({
                       profile.club && profile.club !== "Unattached"
                         ? { "@type": "SportsOrganization", name: profile.club }
                         : undefined,
-                    sameAs: profile.connections.map((connection) => connection.url),
+                    sameAs: profile.connections
+                      .map((connection) => connection.url)
+                      .filter((url) => isPublicProfileSource(url)),
                   },
                 }).replace(/</g, "\\u003c"),
               },
@@ -178,7 +181,9 @@ export const Route = createFileRoute("/athletes/$slug")({
                 url: canonical,
                 name: title,
                 description,
-                citation: sourceHistories.map((history) => history.sourceUrl),
+                citation: sourceHistories
+                  .map((history) => history.sourceUrl)
+                  .filter((url) => isPublicProfileSource(url)),
                 mainEntity: { "@id": `${canonical}#athlete` },
                 breadcrumb: { "@id": `${canonical}#breadcrumb` },
               },
@@ -320,6 +325,9 @@ function AthletePage() {
   const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
   const aliases = athlete.aliases ?? [];
   const career = getEditorialAthleteCareer(athlete.slug);
+  const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
+    isPublicProfileSource(link.url, link.label),
+  );
   const bio = publicAthleteBio({
     name: athlete.display_name,
     sport: profileResults[0]?.sport,
@@ -447,18 +455,20 @@ function AthletePage() {
             <details className="text-xs">
               <summary className="cursor-pointer text-accent">Biography sources</summary>
               <ul className="mt-2 space-y-2">
-                {career.biographySources.map((source) => (
-                  <li key={source.url}>
-                    <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent underline underline-offset-2"
-                    >
-                      {source.label} ↗
-                    </a>
-                  </li>
-                ))}
+                {career.biographySources
+                  .filter((source) => isPublicProfileSource(source.url, source.label))
+                  .map((source) => (
+                    <li key={source.url}>
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent underline underline-offset-2"
+                      >
+                        {source.label} ↗
+                      </a>
+                    </li>
+                  ))}
               </ul>
             </details>
           </div>
@@ -538,13 +548,13 @@ function AthletePage() {
           <EditorialAthleteOverview slug={athlete.slug} />
           <EditorialRoadSplits slug={athlete.slug} />
           <AthleteMediaCoverage slug={athlete.slug} />
-          {athlete.profile_links.length > 0 && (
+          {profileLinks.length > 0 && (
             <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
               <h2 className="font-display text-lg font-semibold text-fg">
                 {isProfessionalAthlete ? "Records and follow links" : "Official links"}
               </h2>
               <div className="flex flex-wrap gap-2">
-                {athlete.profile_links.map((link: { label: string; url: string }) => (
+                {profileLinks.map((link: { label: string; url: string }) => (
                   <a
                     key={link.url}
                     href={link.url}

@@ -1,5 +1,6 @@
 import { Award } from "lucide-react";
 import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
+import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 
 export function AthleteCareerHighlights({ slug }: { slug: string }) {
   const career = getEditorialAthleteCareer(slug);
@@ -18,34 +19,41 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
         Career achievements
       </h2>
       <div className="grid gap-3 sm:grid-cols-2">
-        {career.achievements.map((achievement) => (
-          <article key={achievement.id} className="space-y-2 rounded-lg border border-border p-3">
-            <h3 className="text-sm font-semibold">{achievement.title}</h3>
-            <p className="text-xs text-muted">{achievement.date}</p>
-            <ul className="space-y-1 text-sm tabular-nums">
-              {achievement.outcomes.map((outcome) => (
-                <li key={outcome}>{outcome}</li>
-              ))}
-            </ul>
-            <details className="text-xs">
-              <summary className="cursor-pointer text-accent">Sources</summary>
-              <ul className="mt-2 space-y-2">
-                {achievement.sources.map((source) => (
-                  <li key={source.url}>
-                    <a
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-accent underline underline-offset-2"
-                    >
-                      {source.label} ↗
-                    </a>
-                  </li>
+        {career.achievements.map((achievement) => {
+          const sources = achievement.sources.filter((source) =>
+            isPublicProfileSource(source.url, source.label),
+          );
+          return (
+            <article key={achievement.id} className="space-y-2 rounded-lg border border-border p-3">
+              <h3 className="text-sm font-semibold">{achievement.title}</h3>
+              <p className="text-xs text-muted">{achievement.date}</p>
+              <ul className="space-y-1 text-sm tabular-nums">
+                {achievement.outcomes.map((outcome) => (
+                  <li key={outcome}>{outcome}</li>
                 ))}
               </ul>
-            </details>
-          </article>
-        ))}
+              {sources.length > 0 && (
+                <details className="text-xs">
+                  <summary className="cursor-pointer text-accent">Sources</summary>
+                  <ul className="mt-2 space-y-2">
+                    {sources.map((source) => (
+                      <li key={source.url}>
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-accent underline underline-offset-2"
+                        >
+                          {source.label} ↗
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </article>
+          );
+        })}
       </div>
       <div className="space-y-3 border-t border-border pt-4">
         <h3 className="font-display font-semibold">Reported major race results</h3>
@@ -62,17 +70,19 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
                   {outcome}
                 </p>
               ))}
-              {race.sources.map((source) => (
-                <a
-                  key={source.url}
-                  href={source.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block text-xs text-accent underline underline-offset-2"
-                >
-                  {source.label} ↗
-                </a>
-              ))}
+              {race.sources
+                .filter((source) => isPublicProfileSource(source.url, source.label))
+                .map((source) => (
+                  <a
+                    key={source.url}
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block text-xs text-accent underline underline-offset-2"
+                  >
+                    {source.label} ↗
+                  </a>
+                ))}
             </article>
           ))}
         </div>
