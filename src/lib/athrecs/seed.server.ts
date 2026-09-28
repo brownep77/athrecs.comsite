@@ -2549,7 +2549,9 @@ async function seed(): Promise<void> {
       return;
     }
 
-    await refreshCatalogue(sql);
+    // Featured-profile inserts use savepoints in both database backends.
+    // Keep the disposable preview database inside a transaction as well.
+    await sql.transaction((tx) => refreshCatalogue(tx));
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     const code =
