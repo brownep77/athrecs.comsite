@@ -1,6 +1,8 @@
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
+import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
+import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
 import {
   EditorialAthleteOverview,
@@ -148,14 +150,17 @@ export const Route = createFileRoute("/athletes/$slug")({
       ? `${athlete.display_name} ${resultKind} | ${SITE_NAME}`
       : `${athlete.display_name} results & performance history | ${SITE_NAME}`;
     const clubLabel = athlete.club && athlete.club !== "Unattached" ? ` (${athlete.club})` : "";
-    const description = `${publicAthleteBio({
-      name: athlete.display_name,
-      sport: loaderData.profileResults[0]?.sport,
-      city: athlete.city,
-      country: athlete.country,
-      club: athlete.club,
-      coach: athlete.details.coach,
-    })} Results, personal bests and achievements on ATHRECS.`.slice(0, 180);
+    const description = `${
+      getEditorialAthleteCareer(athlete.slug)?.biography.join(" ") ??
+      publicAthleteBio({
+        name: athlete.display_name,
+        sport: loaderData.profileResults[0]?.sport,
+        city: athlete.city,
+        country: athlete.country,
+        club: athlete.club,
+        coach: athlete.details.coach,
+      })
+    } Results, personal bests and achievements on ATHRECS.`.slice(0, 180);
     const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
 
     return {
@@ -314,6 +319,7 @@ function AthletePage() {
   const reportedHistory = getReportedRaceHistory(athlete.slug);
   const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
   const aliases = athlete.aliases ?? [];
+  const career = getEditorialAthleteCareer(athlete.slug);
   const bio = publicAthleteBio({
     name: athlete.display_name,
     sport: profileResults[0]?.sport,
@@ -430,7 +436,35 @@ function AthletePage() {
               </Badge>
             ))}
         </div>
-        <p className="text-sm leading-relaxed text-muted">{bio}</p>
+        {career ? (
+          <div className="space-y-2">
+            <h2 className="text-sm font-semibold">Biography</h2>
+            {career.biography.map((paragraph) => (
+              <p key={paragraph} className="text-sm leading-relaxed text-muted">
+                {paragraph}
+              </p>
+            ))}
+            <details className="text-xs">
+              <summary className="cursor-pointer text-accent">Biography sources</summary>
+              <ul className="mt-2 space-y-2">
+                {career.biographySources.map((source) => (
+                  <li key={source.url}>
+                    <a
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-accent underline underline-offset-2"
+                    >
+                      {source.label} ↗
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </div>
+        ) : (
+          <p className="text-sm leading-relaxed text-muted">{bio}</p>
+        )}
         {athlete.slug === "mo-farah" && !athlete.is_claimed ? (
           <p className="text-xs text-subtle">
             Independent ATHRECS profile. Not athlete-claimed; no endorsement is implied.
@@ -457,17 +491,20 @@ function AthletePage() {
         )}
       </section>
 
-      {(!isPublicFigure ||
-        profileResults.length > 0 ||
-        sourceHistories.length > 0 ||
-        includedHistory) && (
-        <ProfileRecordHighlights
-          results={profileResults}
-          reportedBests={includedHistory?.personalBests}
-          sourceHistories={sourceHistories}
-          sourceGender={athlete.gender}
-        />
-      )}
+      <AthleteCareerHighlights slug={athlete.slug} />
+
+      {(!career || profileResults.length > 0 || includedHistory) &&
+        (!isPublicFigure ||
+          profileResults.length > 0 ||
+          sourceHistories.length > 0 ||
+          includedHistory) && (
+          <ProfileRecordHighlights
+            results={profileResults}
+            reportedBests={includedHistory?.personalBests}
+            sourceHistories={sourceHistories}
+            sourceGender={athlete.gender}
+          />
+        )}
 
       <section id="results-history" className="space-y-3">
         <CompactResults results={profileResults} reportedHistory={includedHistory} claimable />
