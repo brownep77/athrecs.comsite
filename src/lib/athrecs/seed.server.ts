@@ -1656,7 +1656,32 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
   `;
   if (meta[0]?.value === FEATURED_RACE_RESULTS_VERSION) return;
 
-  async function eventIdFor(slugs: string[]): Promise<number> {
+  async function rowsForSlugs<T>(
+    build: (placeholders: string) => string,
+    slugs: string[],
+  ): Promise<T[]> {
+    const found: T[] = [];
+    for (let index = 0; index < slugs.length; index += 80) {
+      const part = slugs.slice(index, index + 80);
+      if (!part.length) continue;
+      const placeholders = part.map((_, i) => `$${i + 1}`).join(", ");
+      found.push(...(await sql.query<T>(build(placeholders), part)));
+    }
+    return found;
+  }
+
+  async function eventIdFor(
+    slugs: string[],
+    create: {
+      slug: string;
+      name: string;
+      country: string;
+      city: string;
+      website: string;
+      sourceUrl: string;
+      distance: string;
+    },
+  ): Promise<number> {
     for (const slug of slugs) {
       const rows = await sql<{ id: number }>`
         select event.id
@@ -1668,11 +1693,109 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
       `;
       if (rows[0]) return rows[0].id;
     }
-    throw new Error(`Featured race event is missing: ${slugs.join(", ")}`);
+    const redirect = await sql<{ entity_id: number }>`
+      select entity_id from slug_redirects
+      where entity_type = 'event'
+        and (old_slug = ${create.slug} or current_slug = ${create.slug})
+      limit 1
+    `;
+    if (redirect[0]) {
+      const live = await sql<{ id: number }>`
+        select id from events where id = ${redirect[0].entity_id} limit 1
+      `;
+      if (!live[0]) {
+        throw new Error(
+          `Featured Berlin/London profiles were not saved: ${create.slug} is a retired URL with no live event`,
+        );
+      }
+      return live[0].id;
+    }
+    await sql.query("savepoint featured_event_insert");
+    let inserted: { id: number }[] = [];
+    try {
+      inserted = await sql<{ id: number }>`
+        insert into events (
+          slug, name, sport, country, county, city, area, surface, summary, description,
+          organiser, website, featured, source_url
+        ) values (
+          ${create.slug},
+          ${create.name},
+          'Running',
+          ${create.country},
+          '',
+          ${create.city},
+          '',
+          'Road',
+          ${create.name},
+          ${create.name},
+          '',
+          ${create.website},
+          false,
+          ${create.sourceUrl}
+        )
+        on conflict (slug) do nothing
+        returning id
+      `;
+      await sql.query("release savepoint featured_event_insert");
+    } catch (error) {
+      await sql.query("rollback to savepoint featured_event_insert");
+      const message = error instanceof Error ? error.message : String(error);
+      const recovered = await sql<{ id: number }>`
+        select event.id
+        from events event
+        left join slug_redirects redirect
+          on redirect.entity_type = 'event' and redirect.entity_id = event.id
+        where event.slug = ${create.slug}
+          or redirect.old_slug = ${create.slug}
+          or redirect.current_slug = ${create.slug}
+        limit 1
+      `;
+      if (recovered[0]) return recovered[0].id;
+      throw new Error(
+        `Featured Berlin/London profiles were not saved: event ${create.slug} (${message})`,
+      );
+    }
+    const id =
+      inserted[0]?.id ??
+      (
+        await sql<{ id: number }>`
+          select id from events where slug = ${create.slug} limit 1
+        `
+      )[0]?.id;
+    if (!id) {
+      throw new Error(
+        `Featured Berlin/London profiles were not saved: event ${create.slug} was not created`,
+      );
+    }
+    await sql`
+      insert into event_distances (event_id, distance_code)
+      values (${id}, ${create.distance})
+      on conflict (event_id, distance_code) do nothing
+    `;
+    return id;
   }
 
-  const berlinEventId = await eventIdFor(["berlin-marathon", "bmw-berlin-marathon"]);
-  const londonEventId = await eventIdFor(["vitality-london-10000", "bupa-london-10000"]);
+  const berlinEventId = await eventIdFor(
+    ["berlin-marathon", "bmw-berlin-marathon", "wa-bmw-berlin-marathon-7235580"],
+    {
+      slug: "berlin-marathon",
+      name: "BMW Berlin Marathon",
+      country: "Germany",
+      city: "Berlin",
+      website: "https://www.bmw-berlin-marathon.com",
+      sourceUrl: "https://berlin.r.mikatiming.com/2026/?lang=EN_CAP",
+      distance: "Marathon",
+    },
+  );
+  const londonEventId = await eventIdFor(["vitality-london-10000", "bupa-london-10000"], {
+    slug: "bupa-london-10000",
+    name: "Vitality London 10,000",
+    country: "United Kingdom",
+    city: "London",
+    website: "https://www.londonmarathonevents.co.uk/london-10000",
+    sourceUrl: "https://results.vitalitylondon10000.co.uk/2026/",
+    distance: "10K",
+  });
 
   async function editionIdFor(
     eventId: number,
@@ -1706,7 +1829,11 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
         and distance_code = ${distance}
       limit 1
     `;
-    if (!again[0]) throw new Error(`Featured race edition is missing: ${distance} ${date}`);
+    if (!again[0]) {
+      throw new Error(
+        `Featured Berlin/London profiles were not saved: ${distance} edition ${date} was not created`,
+      );
+    }
     return again[0].id;
   }
 
@@ -1734,28 +1861,42 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
   const clubIdBySlug = new Map<string, number>();
   const clubSlugs = [...clubNameBySlug.keys()];
   if (clubSlugs.length) {
-    const known = await sql<{ id: number; slug: string }>`
-      select id, slug from clubs where slug = any(${clubSlugs}::text[])
-    `;
+    const known = await rowsForSlugs<{ id: number; slug: string }>(
+      (placeholders) => `select id, slug from clubs where slug in (${placeholders})`,
+      clubSlugs,
+    );
     for (const club of known) clubIdBySlug.set(club.slug, club.id);
-    const blockedRows = await sql<{ slug: string }>`
-      select old_slug as slug from slug_redirects
-      where entity_type = 'club' and old_slug = any(${clubSlugs}::text[])
-      union
-      select current_slug as slug from slug_redirects
-      where entity_type = 'club' and current_slug = any(${clubSlugs}::text[])
-    `;
+    const blockedRows = await rowsForSlugs<{ slug: string }>(
+      (placeholders) =>
+        `select old_slug as slug from slug_redirects
+         where entity_type = 'club' and old_slug in (${placeholders})
+         union
+         select current_slug as slug from slug_redirects
+         where entity_type = 'club' and current_slug in (${placeholders})`,
+      clubSlugs,
+    );
     const blockedClubs = new Set(blockedRows.map((row) => row.slug));
     for (const slug of clubSlugs) {
       if (clubIdBySlug.has(slug) || blockedClubs.has(slug)) continue;
       const name = clubNameBySlug.get(slug)!;
-      const inserted = await sql<{ id: number }>`
-        insert into clubs (slug, name, city, county, country, sports, summary, source_names)
-        values (${slug}, ${name}, '', '', '', 'Running', ${name}, ${name})
-        on conflict (slug) do nothing
-        returning id
-      `;
-      if (inserted[0]) clubIdBySlug.set(slug, inserted[0].id);
+      await sql.query("savepoint featured_club_insert");
+      try {
+        const inserted = await sql<{ id: number }>`
+          insert into clubs (slug, name, city, county, country, sports, summary, source_names)
+          values (${slug}, ${name}, '', '', '', 'Running', ${name}, ${name})
+          on conflict (slug) do nothing
+          returning id
+        `;
+        await sql.query("release savepoint featured_club_insert");
+        if (inserted[0]) clubIdBySlug.set(slug, inserted[0].id);
+      } catch (error) {
+        await sql.query("rollback to savepoint featured_club_insert");
+        console.error(
+          "[featured-race] skipped club",
+          slug,
+          error instanceof Error ? error.message : String(error),
+        );
+      }
     }
   }
 
@@ -1767,15 +1908,17 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
     const raceTag = result.eventSlug === "berlin-marathon" ? "berlin-2026" : "london-10000-2026";
     candidateSlugs.push(athlete.slug, `${athlete.slug}-${raceTag}`.slice(0, 80).replace(/-+$/g, ""));
   }
-  const takenRows = await sql<{ slug: string }>`
-    select slug from athletes where slug = any(${candidateSlugs}::text[])
-    union
-    select old_slug as slug from slug_redirects
-    where entity_type = 'athlete' and old_slug = any(${candidateSlugs}::text[])
-    union
-    select current_slug as slug from slug_redirects
-    where entity_type = 'athlete' and current_slug = any(${candidateSlugs}::text[])
-  `;
+  const takenRows = await rowsForSlugs<{ slug: string }>(
+    (placeholders) =>
+      `select slug from athletes where slug in (${placeholders})
+       union
+       select old_slug as slug from slug_redirects
+       where entity_type = 'athlete' and old_slug in (${placeholders})
+       union
+       select current_slug as slug from slug_redirects
+       where entity_type = 'athlete' and current_slug in (${placeholders})`,
+    candidateSlugs,
+  );
   const taken = new Set(takenRows.map((row) => row.slug));
   const choices: { sourceSlug: string; slug: string; athlete: (typeof featuredRaceAthletes)[number] }[] =
     [];
@@ -1885,7 +2028,7 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
 
 async function catalogueMarkersCurrent(
   sql: Sql,
-  { includePublicFigures = true } = {},
+  { includePublicFigures = true, includeFeaturedRaces = true } = {},
 ): Promise<boolean> {
   const expected = new Map([
     ["seed_version", SEED_VERSION],
@@ -1897,6 +2040,7 @@ async function catalogueMarkersCurrent(
     ["featured_race_results_version", FEATURED_RACE_RESULTS_VERSION],
   ]);
   if (!includePublicFigures) expected.delete("public_figures_catalogue_version");
+  if (!includeFeaturedRaces) expected.delete("featured_race_results_version");
   const rows = await sql<{ key: string; value: string }>`
     select key, value from app_meta
     where key in (
@@ -1918,10 +2062,16 @@ async function catalogueMarkersCurrent(
 
 async function refreshCatalogue(sql: Sql): Promise<void> {
   if (await catalogueMarkersCurrent(sql)) return;
-  // Athlete editorial updates have their own version. Do not rerun unrelated
-  // fixture imports: a production event may now have a protected redirect.
-  if (await catalogueMarkersCurrent(sql, { includePublicFigures: false })) {
+  // Profile catalogues have their own versions. Do not rerun fixture imports:
+  // a production event may now have a protected redirect.
+  if (
+    await catalogueMarkersCurrent(sql, {
+      includePublicFigures: false,
+      includeFeaturedRaces: false,
+    })
+  ) {
     await upsertPublicFigureProfiles(sql);
+    await upsertFeaturedRaceResults(sql);
     return;
   }
   await seedCatalogue(sql);
