@@ -16,12 +16,17 @@ import {
   publicFigureResults,
   publicFigureSeries,
 } from "@/data/public-figures";
+import {
+  featuredRaceAthletes,
+  featuredRaceResults,
+} from "@/data/featured-race-results-2026-09-27";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
+const FEATURED_RACE_RESULTS_VERSION = "berlin-london-2026-09-27-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 const DEV_PREVIEW_USER_ID = "dev-user";
@@ -1633,6 +1638,251 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
   );
 }
 
+function featuredSlug(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80)
+    .replace(/-+$/g, "");
+}
+
+/** Public profiles for the checked Berlin and London cards. Never overwrites an existing slug. */
+async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'featured_race_results_version' limit 1
+  `;
+  if (meta[0]?.value === FEATURED_RACE_RESULTS_VERSION) return;
+
+  async function eventIdFor(slugs: string[]): Promise<number> {
+    for (const slug of slugs) {
+      const rows = await sql<{ id: number }>`
+        select event.id
+        from events event
+        left join slug_redirects redirect
+          on redirect.entity_type = 'event' and redirect.entity_id = event.id
+        where event.slug = ${slug} or redirect.old_slug = ${slug}
+        limit 1
+      `;
+      if (rows[0]) return rows[0].id;
+    }
+    throw new Error(`Featured race event is missing: ${slugs.join(", ")}`);
+  }
+
+  const berlinEventId = await eventIdFor(["berlin-marathon", "bmw-berlin-marathon"]);
+  const londonEventId = await eventIdFor(["vitality-london-10000", "bupa-london-10000"]);
+
+  async function editionIdFor(
+    eventId: number,
+    date: string,
+    distance: string,
+    distanceKm: number,
+    sourceUrl: string,
+  ): Promise<number> {
+    const existing = await sql<{ id: number }>`
+      select id from editions
+      where event_id = ${eventId}
+        and event_date = ${date}::date
+        and distance_code = ${distance}
+      limit 1
+    `;
+    if (existing[0]) return existing[0].id;
+    const inserted = await sql<{ id: number }>`
+      insert into editions (
+        event_id, event_date, distance_code, distance_km, status, source_url, results_official_url
+      ) values (
+        ${eventId}, ${date}::date, ${distance}, ${distanceKm}, 'Finished', ${sourceUrl}, ${sourceUrl}
+      )
+      on conflict (event_id, event_date, distance_code) do nothing
+      returning id
+    `;
+    if (inserted[0]) return inserted[0].id;
+    const again = await sql<{ id: number }>`
+      select id from editions
+      where event_id = ${eventId}
+        and event_date = ${date}::date
+        and distance_code = ${distance}
+      limit 1
+    `;
+    if (!again[0]) throw new Error(`Featured race edition is missing: ${distance} ${date}`);
+    return again[0].id;
+  }
+
+  const berlinEditionId = await editionIdFor(
+    berlinEventId,
+    "2026-09-27",
+    "Marathon",
+    42.195,
+    "https://berlin.r.mikatiming.com/2026/?lang=EN_CAP",
+  );
+  const londonEditionId = await editionIdFor(
+    londonEventId,
+    "2026-09-27",
+    "10K",
+    10,
+    "https://results.vitalitylondon10000.co.uk/2026/",
+  );
+
+  const clubNameBySlug = new Map<string, string>();
+  for (const athlete of featuredRaceAthletes) {
+    if (!athlete.clubName?.trim()) continue;
+    const slug = featuredSlug(athlete.clubName);
+    if (slug) clubNameBySlug.set(slug, athlete.clubName.trim());
+  }
+  const clubIdBySlug = new Map<string, number>();
+  const clubSlugs = [...clubNameBySlug.keys()];
+  if (clubSlugs.length) {
+    const known = await sql<{ id: number; slug: string }>`
+      select id, slug from clubs where slug = any(${clubSlugs}::text[])
+    `;
+    for (const club of known) clubIdBySlug.set(club.slug, club.id);
+    const blockedRows = await sql<{ slug: string }>`
+      select old_slug as slug from slug_redirects
+      where entity_type = 'club' and old_slug = any(${clubSlugs}::text[])
+      union
+      select current_slug as slug from slug_redirects
+      where entity_type = 'club' and current_slug = any(${clubSlugs}::text[])
+    `;
+    const blockedClubs = new Set(blockedRows.map((row) => row.slug));
+    for (const slug of clubSlugs) {
+      if (clubIdBySlug.has(slug) || blockedClubs.has(slug)) continue;
+      const name = clubNameBySlug.get(slug)!;
+      const inserted = await sql<{ id: number }>`
+        insert into clubs (slug, name, city, county, country, sports, summary, source_names)
+        values (${slug}, ${name}, '', '', '', 'Running', ${name}, ${name})
+        on conflict (slug) do nothing
+        returning id
+      `;
+      if (inserted[0]) clubIdBySlug.set(slug, inserted[0].id);
+    }
+  }
+
+  const resultBySlug = new Map(featuredRaceResults.map((result) => [result.athleteSlug, result]));
+  const candidateSlugs: string[] = [];
+  for (const athlete of featuredRaceAthletes) {
+    const result = resultBySlug.get(athlete.slug);
+    if (!result) throw new Error(`Featured athlete has no result: ${athlete.slug}`);
+    const raceTag = result.eventSlug === "berlin-marathon" ? "berlin-2026" : "london-10000-2026";
+    candidateSlugs.push(athlete.slug, `${athlete.slug}-${raceTag}`.slice(0, 80).replace(/-+$/g, ""));
+  }
+  const takenRows = await sql<{ slug: string }>`
+    select slug from athletes where slug = any(${candidateSlugs}::text[])
+    union
+    select old_slug as slug from slug_redirects
+    where entity_type = 'athlete' and old_slug = any(${candidateSlugs}::text[])
+    union
+    select current_slug as slug from slug_redirects
+    where entity_type = 'athlete' and current_slug = any(${candidateSlugs}::text[])
+  `;
+  const taken = new Set(takenRows.map((row) => row.slug));
+  const choices: { sourceSlug: string; slug: string; athlete: (typeof featuredRaceAthletes)[number] }[] =
+    [];
+  for (const athlete of featuredRaceAthletes) {
+    const result = resultBySlug.get(athlete.slug)!;
+    const raceTag = result.eventSlug === "berlin-marathon" ? "berlin-2026" : "london-10000-2026";
+    const fallback = `${athlete.slug}-${raceTag}`.slice(0, 80).replace(/-+$/g, "");
+    const slug = !taken.has(athlete.slug) ? athlete.slug : !taken.has(fallback) ? fallback : "";
+    if (!slug) continue;
+    taken.add(slug);
+    choices.push({ sourceSlug: athlete.slug, slug, athlete });
+  }
+
+  const created: { id: number; slug: string }[] = [];
+  for (let index = 0; index < choices.length; index += 40) {
+    const batch = choices.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map(({ athlete, slug }) => {
+        const clubSlug = athlete.clubName ? featuredSlug(athlete.clubName) : "";
+        const row = [
+          slug,
+          athlete.displayName,
+          athlete.givenName,
+          athlete.familyName,
+          athlete.gender,
+          clubSlug ? (clubIdBySlug.get(clubSlug) ?? null) : null,
+          athlete.clubName,
+          "",
+          "",
+          athlete.country,
+          athlete.bio,
+          athlete.nation || null,
+          athlete.continent || null,
+          athlete.sourceUrl,
+          "Athlete",
+          "public",
+        ];
+        const placeholders = row.map((value) => {
+          params.push(value);
+          return `$${params.length}`;
+        });
+        return `(${placeholders.join(", ")})`;
+      })
+      .join(", ");
+    const inserted = await sql.query<{ id: number; slug: string }>(
+      `insert into athletes (
+        slug, display_name, given_name, family_name, gender, club_id, source_club_name,
+        city, county, country, bio, nation, continent, source_url, profile_type, profile_visibility
+      ) values ${values}
+      on conflict (slug) do nothing
+      returning id, slug`,
+      params,
+    );
+    created.push(...inserted);
+  }
+
+  const sourceByInserted = new Map(choices.map((choice) => [choice.slug, choice.sourceSlug]));
+  for (let index = 0; index < created.length; index += 40) {
+    const batch = created.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const result = resultBySlug.get(sourceByInserted.get(row.slug) ?? "");
+        if (!result) throw new Error(`Inserted featured athlete lost its result: ${row.slug}`);
+        const editionId = result.eventSlug === "berlin-marathon" ? berlinEditionId : londonEditionId;
+        const valuesRow = [
+          editionId,
+          row.id,
+          "finished",
+          result.finishTimeSeconds,
+          result.chipTimeSeconds,
+          result.gunTimeSeconds,
+          result.bib,
+          result.place,
+          result.genderPlace,
+          result.category,
+          result.categoryPlace,
+          result.resultSource,
+          result.sourceUrl,
+          "public",
+        ];
+        const placeholders = valuesRow.map((value) => {
+          params.push(value);
+          return `$${params.length}`;
+        });
+        return `(${placeholders.join(", ")})`;
+      })
+      .join(", ");
+    await sql.query(
+      `insert into results (
+        edition_id, athlete_id, status, finish_time_seconds, chip_time_seconds, gun_time_seconds,
+        bib, overall_place, gender_place, category, category_place, result_source, source_url,
+        result_visibility
+      ) values ${values}
+      on conflict (edition_id, athlete_id) do nothing`,
+      params,
+    );
+  }
+
+  await sql`
+    insert into app_meta (key, value)
+    values ('featured_race_results_version', ${FEATURED_RACE_RESULTS_VERSION})
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
 async function catalogueMarkersCurrent(
   sql: Sql,
   { includePublicFigures = true } = {},
@@ -1644,6 +1894,7 @@ async function catalogueMarkersCurrent(
     ["public_figures_catalogue_version", PUBLIC_FIGURE_SEED_VERSION],
     ["parkrun_through", "2027-12-26"],
     ["athletics_taxonomy_v1", "complete"],
+    ["featured_race_results_version", FEATURED_RACE_RESULTS_VERSION],
   ]);
   if (!includePublicFigures) expected.delete("public_figures_catalogue_version");
   const rows = await sql<{ key: string; value: string }>`
@@ -1654,7 +1905,8 @@ async function catalogueMarkersCurrent(
       'fixtures_catalogue_version',
       'public_figures_catalogue_version',
       'parkrun_through',
-      'athletics_taxonomy_v1'
+      'athletics_taxonomy_v1',
+      'featured_race_results_version'
     )
   `;
   const relevantRows = rows.filter((row) => expected.has(row.key));
@@ -1689,6 +1941,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
 
   if (await alreadySeeded(sql)) {
     await upsertPublicFigureProfiles(sql);
+    await upsertFeaturedRaceResults(sql);
     await ensureDevPreviewAthleteAccount(sql);
     return;
   }
@@ -1703,6 +1956,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   const g = guard[0];
   if (g && (g.athletes > 0 || g.results > 0)) {
     await upsertPublicFigureProfiles(sql);
+    await upsertFeaturedRaceResults(sql);
     await sql`
       insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
       on conflict (key) do update set value = excluded.value
@@ -2121,6 +2375,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   }
   await sql`update athletes set profile_visibility='public', profile_details='{"nationality":"British","birthCountry":"United Kingdom","previousClub":"Norfolk Gazelle","coach":"Paul Evans","birthdayVisibility":"hidden","runningAgeCategory":"M45","acceptContact":false}'::jsonb where slug='paul-browne'`;
   await sql`update results set result_visibility='public' where athlete_id in (select id from athletes where slug='paul-browne')`;
+  await upsertFeaturedRaceResults(sql);
   await ensureDevPreviewAthleteAccount(sql);
 }
 
