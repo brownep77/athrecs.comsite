@@ -55,6 +55,26 @@ The full London 10,000 top twenties, the remaining Berlin age groups, other majo
 
 ## Validation and rollback
 
-Run `node --experimental-strip-types scripts/verify-mika-source-registration.mjs` for the narrow policy assertions. Full repository typecheck, lint, build and importer integration checks are separate requirements; this narrow check does not claim they passed.
+Both Berlin checks now run in the existing historical-source CI step:
+
+```sh
+node --experimental-strip-types scripts/verify-mika-source-registration.mjs
+node --experimental-vm-modules scripts/verify-mika-source-integration.mjs
+```
+
+The registration check also asserts that the rights-review record still has no permission reference and that participant reuse, automated ingestion and publication remain unapproved.
+
+The integration check executes the actual API route, historical-results handler, source policy and OIDC verifier in an isolated VM. It uses an ephemeral test signing key and an in-memory JWKS response, with the route factory and all database/import dependencies replaced by test doubles. Twenty rejection checks cover missing/invalid/expired/untrusted authentication, an authenticated but unapproved Berlin request, empty/malformed approval configuration, unregistered sources, wrong edition/host URLs, missing permission references, content type, body size and malformed JSON. Every case asserts zero database, seeding, import and row-normalization calls. No configured approval is granted, no result host is contacted, and no participant rows are supplied.
+
+### Review validation, 28 September 2026
+
+- Installed the locked dependencies locally with `npm ci --offline --ignore-scripts --no-audit --no-fund`, using Node 24.19.0.
+- Full `npm run typecheck`: passed.
+- Full `npm run lint`: passed with seven existing warnings in unrelated files; changed code also passed targeted lint without warnings.
+- Production-mode AthRecs client, SSR and Nitro build: passed using `node node_modules/vite/bin/vite.js build`, followed by `scripts/write-brand-static.mjs` and `scripts/copy-pglite-assets.mjs`. The commands ran with a cleared environment and `VITE_SITE_BRAND=athrecs`. Local migration and publication hooks were intentionally excluded.
+- Both Berlin checks, `scripts/verify-result-source-sync.mjs`, `scripts/verify-result-evidence-audit.mjs` and `git diff --check`: passed.
+- The original PR head `e4a215355dc75872984322973edf8b746bca4a1c` also has a successful [GitHub quality-gate run](https://github.com/brownep77/athrecs.comsite/actions/runs/36353926394), checked at merge commit `6f14f5a4ca06c69ac5b4f1204a2e1c4ec6197354`. Its logs confirm full typecheck, lint, `ci:verify` including `npm run build`, and an unauthenticated historical-results API rejection against disposable CI PostgreSQL. This is separate from the new isolated Berlin checks and supersedes the original statement that only the narrow local verifier had run.
+
+These checks validate source registration and rejection behavior. They are not a live authenticated API test, a participant import, an independently audited row adapter, or reuse permission. The managed-source database row was not read or written during this review; its previously recorded disabled/pending state has not been altered by this work. Reuse permission and an independently audited adapter remain prerequisites before any participant imports.
 
 This PR contains no athlete rows, credentials, approval references, workflow or production-publication change. Reverting its policy addition removes the new code registration. The separately registered managed-source row remains disabled until reviewed; do not delete it as a blanket rollback without checking for subsequent legitimate use.

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import {
   HISTORICAL_RESULT_SOURCES,
   historicalResultSource,
@@ -8,6 +9,16 @@ const berlin = historicalResultSource("mika_timing_berlin_results");
 assert.ok(berlin, "Berlin result source must be registered");
 assert.equal(berlin.officialArchiveUrl, "https://berlin.r.mikatiming.com/2026/");
 assert.equal(berlin.participantRowsRequireApproval, true);
+const rights = JSON.parse(await readFile(
+  new URL("../docs/source-registry/mika-berlin-rights-review.json", import.meta.url),
+  "utf8",
+));
+assert.equal(rights.sourceKey, berlin.key);
+assert.equal(rights.sourceUrl, berlin.officialArchiveUrl);
+assert.equal(rights.participantReuseApproved, false);
+assert.equal(rights.automatedIngestionEnabled, false);
+assert.equal(rights.publicationApproved, false);
+assert.equal(rights.permissionReference, null);
 assert.deepEqual(berlin.coverageYears, [2026], "Do not invent historical coverage");
 assert.equal(new URL(berlin.officialArchiveUrl).protocol, "https:");
 assert.equal(new URL(berlin.officialArchiveUrl).username, "");
