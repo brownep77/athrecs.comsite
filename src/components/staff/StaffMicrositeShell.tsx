@@ -36,6 +36,12 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
   {
+    to: "/admin/approvals",
+    label: "Approvals",
+    icon: BadgeCheck,
+    match: (path: string) => path.startsWith("/admin/approvals"),
+  },
+  {
     to: "/admin/check-results-upload",
     label: "Import athletes & results",
     icon: Database,
