@@ -22,6 +22,30 @@ import {
   getClubReviewHistory,
 } from "@/lib/club-scanner/api";
 import type { Candidate, Filters, ReviewInput } from "@/lib/club-scanner/core";
+import { approvalProfileHref, type ApprovalProfile } from "@/lib/club-scanner/profile-links";
+
+function AthleteProfileName({
+  name,
+  profile,
+  suggested = false,
+}: {
+  name: string;
+  profile?: ApprovalProfile | null;
+  suggested?: boolean;
+}) {
+  if (!profile) return <>{name}</>;
+  return (
+    <a
+      href={approvalProfileHref(profile)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-accent underline underline-offset-2 hover:no-underline"
+      title={`${suggested ? "View possible profile" : "View athlete profile"} (opens in a new tab)`}
+    >
+      {name}
+    </a>
+  );
+}
 const inputClass = "rounded-md border border-border bg-surface px-3 py-2 text-sm text-fg";
 const statuses = [
   "all",
@@ -482,7 +506,11 @@ export function ClubScanner({ embedded = false }: { embedded?: boolean }) {
                     />
                   </td>
                   <td className="p-3 font-medium">
-                    {c.data.name}
+                    <AthleteProfileName
+                      name={c.data.name}
+                      profile={c.profile}
+                      suggested={!c.athlete_id && !c.decision}
+                    />
                     <div className="text-xs font-normal text-muted">
                       {c.data.gender} · {c.data.club} · {c.data.performance.ageGroup}
                     </div>
@@ -551,7 +579,14 @@ export function ClubScanner({ embedded = false }: { embedded?: boolean }) {
           className="space-y-3 rounded-xl border border-border bg-surface p-5"
           aria-label="Source comparison"
         >
-          <h2 className="text-lg font-semibold">{open.data.name} — source comparison</h2>
+          <h2 className="text-lg font-semibold">
+            <AthleteProfileName
+              name={open.data.name}
+              profile={open.profile}
+              suggested={!open.athlete_id && !open.decision}
+            />{" "}
+            — source comparison
+          </h2>
           <p className="text-sm">
             <a
               className="text-accent underline"
@@ -581,15 +616,8 @@ export function ClubScanner({ embedded = false }: { embedded?: boolean }) {
               {open.matches.length ? (
                 open.matches.map((m) => (
                   <p className="my-2 text-sm" key={m.id}>
-                    {m.name} · {m.club || "Club unknown"} · {m.gender}{" "}
-                    <a
-                      href={`/admin/athletes/ATH-${String(m.number).padStart(6, "0")}`}
-                      className="text-accent underline"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Inspect
-                    </a>
+                    <AthleteProfileName name={m.name} profile={m} suggested /> ·{" "}
+                    {m.club || "Club unknown"} · {m.gender}{" "}
                     {m.managed || m.visibility !== "public"
                       ? " · separate publication review required"
                       : ""}
