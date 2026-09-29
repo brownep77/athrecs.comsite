@@ -59,6 +59,8 @@ import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
 import { Route as ClubsSlugRouteImport } from './routes/clubs/$slug'
 import { Route as NewsIndexRouteImport } from './routes/news/index'
 import { Route as NewsSlugRouteImport } from './routes/news/$slug'
+import { Route as RaceReportsIndexRouteImport } from './routes/race-reports/index'
+import { Route as RaceReportsSlugRouteImport } from './routes/race-reports/$slug'
 import { Route as RacesIndexRouteImport } from './routes/races/index'
 import { Route as RacesSlugRouteImport } from './routes/races/$slug'
 import { Route as ResultsIndexRouteImport } from './routes/results/index'
@@ -331,6 +333,16 @@ const NewsSlugRoute = NewsSlugRouteImport.update({
   path: '/news/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RaceReportsIndexRoute = RaceReportsIndexRouteImport.update({
+  id: '/race-reports/',
+  path: '/race-reports/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RaceReportsSlugRoute = RaceReportsSlugRouteImport.update({
+  id: '/race-reports/$slug',
+  path: '/race-reports/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RacesIndexRoute = RacesIndexRouteImport.update({
   id: '/races/',
   path: '/races/',
@@ -479,6 +491,7 @@ export interface FileRoutesByFullPath {
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
@@ -492,6 +505,7 @@ export interface FileRoutesByFullPath {
   '/brands/': typeof BrandsIndexRoute
   '/clubs/': typeof ClubsIndexRoute
   '/news/': typeof NewsIndexRoute
+  '/race-reports/': typeof RaceReportsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/results/': typeof ResultsIndexRoute
   '/running/': typeof RunningIndexRoute
@@ -550,6 +564,7 @@ export interface FileRoutesByTo {
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
@@ -563,6 +578,7 @@ export interface FileRoutesByTo {
   '/brands': typeof BrandsIndexRoute
   '/clubs': typeof ClubsIndexRoute
   '/news': typeof NewsIndexRoute
+  '/race-reports': typeof RaceReportsIndexRoute
   '/races': typeof RacesIndexRoute
   '/results': typeof ResultsIndexRoute
   '/running': typeof RunningIndexRoute
@@ -622,6 +638,7 @@ export interface FileRoutesById {
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
@@ -635,6 +652,7 @@ export interface FileRoutesById {
   '/brands/': typeof BrandsIndexRoute
   '/clubs/': typeof ClubsIndexRoute
   '/news/': typeof NewsIndexRoute
+  '/race-reports/': typeof RaceReportsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/results/': typeof ResultsIndexRoute
   '/running/': typeof RunningIndexRoute
@@ -695,6 +713,7 @@ export interface FileRouteTypes {
     | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
+    | '/race-reports/$slug'
     | '/races/$slug'
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
@@ -708,6 +727,7 @@ export interface FileRouteTypes {
     | '/brands/'
     | '/clubs/'
     | '/news/'
+    | '/race-reports/'
     | '/races/'
     | '/results/'
     | '/running/'
@@ -766,6 +786,7 @@ export interface FileRouteTypes {
     | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
+    | '/race-reports/$slug'
     | '/races/$slug'
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
@@ -779,6 +800,7 @@ export interface FileRouteTypes {
     | '/brands'
     | '/clubs'
     | '/news'
+    | '/race-reports'
     | '/races'
     | '/results'
     | '/running'
@@ -837,6 +859,7 @@ export interface FileRouteTypes {
     | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
+    | '/race-reports/$slug'
     | '/races/$slug'
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
@@ -850,6 +873,7 @@ export interface FileRouteTypes {
     | '/brands/'
     | '/clubs/'
     | '/news/'
+    | '/race-reports/'
     | '/races/'
     | '/results/'
     | '/running/'
@@ -909,6 +933,7 @@ export interface RootRouteChildren {
   BrandsRegisterRoute: typeof BrandsRegisterRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
   NewsSlugRoute: typeof NewsSlugRoute
+  RaceReportsSlugRoute: typeof RaceReportsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
   ResultsEditionIdRoute: typeof ResultsEditionIdRoute
   ResultsBerlinMarathon2026Route: typeof ResultsBerlinMarathon2026Route
@@ -922,6 +947,7 @@ export interface RootRouteChildren {
   BrandsIndexRoute: typeof BrandsIndexRoute
   ClubsIndexRoute: typeof ClubsIndexRoute
   NewsIndexRoute: typeof NewsIndexRoute
+  RaceReportsIndexRoute: typeof RaceReportsIndexRoute
   RacesIndexRoute: typeof RacesIndexRoute
   ResultsIndexRoute: typeof ResultsIndexRoute
   RunningIndexRoute: typeof RunningIndexRoute
@@ -1287,6 +1313,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/race-reports/': {
+      id: '/race-reports/'
+      path: '/race-reports'
+      fullPath: '/race-reports/'
+      preLoaderRoute: typeof RaceReportsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/race-reports/$slug': {
+      id: '/race-reports/$slug'
+      path: '/race-reports/$slug'
+      fullPath: '/race-reports/$slug'
+      preLoaderRoute: typeof RaceReportsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/races/': {
       id: '/races/'
       path: '/races'
@@ -1469,6 +1509,7 @@ const rootRouteChildren: RootRouteChildren = {
   BrandsRegisterRoute: BrandsRegisterRoute,
   ClubsSlugRoute: ClubsSlugRoute,
   NewsSlugRoute: NewsSlugRoute,
+  RaceReportsSlugRoute: RaceReportsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,
   ResultsEditionIdRoute: ResultsEditionIdRoute,
   ResultsBerlinMarathon2026Route: ResultsBerlinMarathon2026Route,
@@ -1482,6 +1523,7 @@ const rootRouteChildren: RootRouteChildren = {
   BrandsIndexRoute: BrandsIndexRoute,
   ClubsIndexRoute: ClubsIndexRoute,
   NewsIndexRoute: NewsIndexRoute,
+  RaceReportsIndexRoute: RaceReportsIndexRoute,
   RacesIndexRoute: RacesIndexRoute,
   ResultsIndexRoute: ResultsIndexRoute,
   RunningIndexRoute: RunningIndexRoute,
