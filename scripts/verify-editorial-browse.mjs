@@ -17,6 +17,10 @@ const stories = [
 const find = (kind, filters) => filterEditorialArticles(stories, kind, filters).map((story) => story.slug);
 assert.deepEqual(find("race-reports", {}), ["later", "two-locations"]);
 assert.deepEqual(find("news", {}), ["announcement"]);
+assert.deepEqual(find("race-reports", { country: "United Kingdom", county: "Norfolk" }), ["two-locations"]);
+assert.deepEqual(find("news", { country: "United Kingdom" }), [], "Ireland is not part of the UK");
+assert.deepEqual(editorialLocationOptions(stories, { country: "United Kingdom", area: "East of England" }).counties, ["Norfolk"]);
+assert.deepEqual(editorialLocationOptions(stories, { country: "United Kingdom" }).areas, ["East of England", "London"]);
 assert.deepEqual(find("race-reports", { sport: "road-running", country: "England", area: "East of England", county: "Norfolk" }), ["two-locations"]);
 assert.deepEqual(find("race-reports", { country: "England", area: "London", county: "Norfolk" }), [], "Must match one complete location, not mix two locations");
 assert.deepEqual(find("race-reports", { sport: "trail-running", county: "Norfolk" }), []);

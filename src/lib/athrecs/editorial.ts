@@ -36,9 +36,18 @@ export function parseEditorialSearch(raw: Record<string, unknown>): EditorialSea
   return result;
 }
 
+function matchesCountry(country: string, filter?: string) {
+  return (
+    !filter ||
+    country === filter ||
+    (filter === "United Kingdom" &&
+      ["England", "Scotland", "Wales", "Northern Ireland"].includes(country))
+  );
+}
+
 export function matchesEditorialLocation(location: EditorialLocation, search: EditorialSearch) {
   return (
-    (!search.country || location.country === search.country) &&
+    matchesCountry(location.country, search.country) &&
     (!search.area || location.area === search.area) &&
     (!search.county || location.county === search.county)
   );
@@ -74,7 +83,7 @@ export function editorialLocationOptions(
     areas: search.country
       ? unique(
           locations
-            .filter((location) => location.country === search.country)
+            .filter((location) => matchesCountry(location.country, search.country))
             .map((location) => location.area),
         )
       : [],
@@ -83,7 +92,8 @@ export function editorialLocationOptions(
         ? unique(
             locations
               .filter(
-                (location) => location.country === search.country && location.area === search.area,
+                (location) =>
+                  matchesCountry(location.country, search.country) && location.area === search.area,
               )
               .map((location) => location.county),
           )
