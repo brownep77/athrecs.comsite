@@ -78,7 +78,7 @@ function SportPage() {
             {sport.label}
           </h1>
           <p className="mt-2 text-sm text-muted">
-            TV & live streams, upcoming fixtures and results.
+            TV & live streams, upcoming fixtures, results, race reports and news.
           </p>
         </div>
         <Button asChild>
@@ -100,6 +100,12 @@ function SportPage() {
         </a>
         <Link to="/results" search={{ category: sport.slug }} className={textLink}>
           Results <ArrowRight className="size-4" aria-hidden="true" />
+        </Link>
+        <Link to="/race-reports" search={{ sport: sport.slug }} className={textLink}>
+          Race Reports
+        </Link>
+        <Link to="/news" search={{ sport: sport.slug }} className={textLink}>
+          News
         </Link>
         {sport.slug === "road-running" && (
           <>
