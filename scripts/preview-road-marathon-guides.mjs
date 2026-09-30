@@ -24,6 +24,11 @@ registerHooks({
 });
 const { ROAD_MARATHONS } = await import("../src/data/road-marathons/index.ts");
 const { MARATHON_COUNTRIES } = await import("../src/data/road-marathons/countries.ts");
+const { ROAD_HALF_MARATHONS } = await import("../src/data/road-half-marathons/index.ts");
+const { HALF_MARATHON_COUNTRIES } = await import("../src/data/road-half-marathons/countries.ts");
+const { FEATURED_ROAD_RACES } = await import("../src/data/featured-road-races.ts");
+const { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } =
+  await import("../src/lib/running/road-ultras.ts");
 const base = process.env.MARATHON_PREVIEW_BASE ?? "http://127.0.0.1:8095";
 const output = process.argv[2];
 assert(output, "Pass an output HTML path");
@@ -32,6 +37,15 @@ const paths = [
   ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
   ...ROAD_MARATHONS.map((race) => `/running/races/${race.slug}`),
 ];
+// Other running sections remain linked to the live site in this marathon-only snapshot.
+const relatedPaths = new Set([
+  ULTRA_GUIDE_PATH,
+  ...ROAD_ULTRAS.map((race) => ultraPath(race.slug)),
+  ...HALF_MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
+  ...ROAD_HALF_MARATHONS.map((race) => `/running/races/${race.slug}`),
+  "/running/featured-races",
+  ...FEATURED_ROAD_RACES.map((race) => `/running/previews/${race.slug}`),
+]);
 const initialRoute = process.argv[3] ?? "/running";
 assert(paths.includes(initialRoute), "Initial preview route must be a running guide");
 const pages = {};
@@ -55,7 +69,7 @@ async function worker() {
       JSON.parse($(script).html());
     $("main a[href]").each((i, element) => {
       const href = $(element).attr("href");
-      if (href.startsWith("/running/ultramarathons/") || href === "/running/uk-road-ultramarathons")
+      if (relatedPaths.has(href.split("#")[0]))
         $(element).attr("href", `https://www.athrecs.com${href}`);
       else if (href.startsWith("/running"))
         assert(paths.includes(href.split("#")[0]), `${route} has broken internal link ${href}`);
