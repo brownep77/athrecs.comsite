@@ -22,9 +22,10 @@ const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
+const CURRENT_CLUB_SCAN_CHECKED_AT = "2026-09-30";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 68;
-const NEW_EDITION_COUNT = 71;
+const NEW_SERIES_COUNT = 69;
+const NEW_EDITION_COUNT = 72;
 const EXISTING_SERIES_EDITION_COUNT = 34;
 
 async function loadModule(input) {
@@ -62,7 +63,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "10mi").length,
-  14,
+  15,
   "The 10-mile total changed unexpectedly",
 );
 
@@ -376,6 +377,23 @@ assert.equal(
   "Crystal Palace May does not use direct organiser entry",
 );
 assert.equal(crystalPalaceMayEdition.entryOptions?.[0]?.checkedAt, CURRENT_SITEMAP_SCAN_CHECKED_AT);
+
+const looeSeries = dailyHalfTenMileSeries.find((series) => series.slug === "looe-10-miler-2027");
+const looeEdition = dailyHalfTenMileEditions.find(
+  (edition) => edition.seriesSlug === "looe-10-miler-2027",
+);
+assert(looeSeries && looeEdition, "Looe 10 Miler is missing from the 30 September club scan");
+assert.equal(looeEdition.date, "2027-02-28", "Looe 10 Miler has the wrong date");
+assert.equal(looeEdition.distance, "10mi", "Looe 10 Miler has the wrong distance");
+assert.equal(looeEdition.status, "TBC", "Looe entry must remain unopened");
+assert.equal(looeEdition.entryUrl, undefined, "Looe must not expose a premature checkout");
+assert.equal(looeEdition.startTime, undefined, "Looe must not expose an unverified start time");
+assert.equal(
+  looeSeries.source_url,
+  "https://www.looepioneers.co.uk/looe-10-miler-2027.html",
+  "Looe lost its direct organising-club provenance",
+);
+assert.match(looeSeries.description, new RegExp(CURRENT_CLUB_SCAN_CHECKED_AT));
 
 const tadcasterSeries = dailyHalfTenMileSeries.find(
   (series) => series.slug === "tadcaster-10-2026",
@@ -1355,5 +1373,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (55 half marathons and 13 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (55 half marathons and 14 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
 );

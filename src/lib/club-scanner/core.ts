@@ -91,6 +91,7 @@ export type Candidate = {
   status: string;
   decision: Decision | null;
   athlete_id: number | null;
+  profile?: Pick<Match, "id" | "slug" | "number" | "visibility"> | null;
 };
 export function matchesFor(row: Row, athletes: Match[]) {
   const parts = row.name.trim().split(/\s+/),

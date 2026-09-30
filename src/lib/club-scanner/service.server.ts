@@ -18,6 +18,7 @@ import {
   type ReviewInput,
 } from "./core.ts";
 import { discover, extract, fetchSource, INDEX_URL } from "./provider.server.ts";
+import { candidateProfileId, type ApprovalProfile } from "./profile-links.ts";
 const db = async (override?: Sql) => override ?? (await import("../db.ts")).getSql();
 type Run = {
   id: string;
@@ -184,6 +185,16 @@ export async function dashboard(input: Filters, override?: Sql) {
   const query = "%" + filters.q + "%";
   const candidates =
     await sql<Candidate>`select c.* from club_scan_candidates c join club_scan_run_candidates rc on rc.candidate_id=c.id where rc.run_id=${runId}::uuid and (${filters.status}='all' or c.status=${filters.status}) and (c.data->>'name' ilike ${query} or c.data->'performance'->>'meeting' ilike ${query}) order by c.data->>'name',c.source_key limit 50 offset ${(filters.page - 1) * 50}`;
+  const profileIds = [...new Set(candidates.map(candidateProfileId))].filter(
+    (id): id is number => id !== null && Number.isSafeInteger(id) && id > 0,
+  );
+  const profiles = profileIds.length
+    ? await sql<ApprovalProfile>`select a.id,a.slug,a.profile_visibility as visibility,(select athlete_number::text from athlete_resolved_ids where athlete_id=a.id) as number from athletes a where a.id=any(${profileIds}::integer[])`
+    : [];
+  const profilesById = new Map(profiles.map((profile) => [profile.id, profile]));
+  for (const candidate of candidates) {
+    candidate.profile = profilesById.get(candidateProfileId(candidate) ?? 0) ?? null;
+  }
   const totals = await sql<{
     n: number;
   }>`select count(*)::int n from club_scan_candidates c join club_scan_run_candidates rc on rc.candidate_id=c.id where rc.run_id=${runId}::uuid and (${filters.status}='all' or c.status=${filters.status}) and (c.data->>'name' ilike ${query} or c.data->'performance'->>'meeting' ilike ${query})`;

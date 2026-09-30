@@ -1,10 +1,10 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 28 September 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 30 September 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
-- Added 68 officially verified series: 55 half marathons and 13 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
+- Added 69 officially verified series: 55 half marathons and 14 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
 - Added 34 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
@@ -119,3 +119,9 @@ Ripon, Thirsk, Clowne and Borrowdale remain unpublished while their official lic
 RunThrough's official event sitemap exposed the Congleton Running Festival on 24 January 2027. Its organiser page consistently confirms the half marathon, 10K and 5K programme and the 09:00 half start, so the verified edition and all distances were attached to the existing Congleton card rather than creating a duplicate. The page advertises open entry, but its half-marathon checkout currently redirects to an unrelated Blackburn event; the safe organiser page remains the catalogue entry destination until RunThrough fixes that downstream link.
 
 Brixton on 18 July and Nantwich on 12 December remain in research because each page's detailed half-marathon schedule conflicts with a structured 00:00 start. Swindon on 26 September remains held from its existing card because the 2027 structured date conflicts with stale 2026 race-day copy and the same midnight placeholder. Melbourne, Sydney and San Diego listings from the same source remain outside the UK and Ireland scope.
+
+## 30 September 2026 scan
+
+The official Looe Pioneers Running Club page confirms the Looe 10 Miler for 28 February 2027. The new canonical card records the verified 10-mile road race and organiser provenance without a checkout or start time while the club says entries are opening soon.
+
+RunThrough's live sitemap contained no other missing in-scope 2027 half-marathon or 10-mile page after canonical source matching. EntryCentral and RaceBest candidates were already represented or held, and Athletics Ireland's approved and permit-pending fixtures remain unchanged.

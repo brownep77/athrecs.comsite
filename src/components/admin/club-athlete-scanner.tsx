@@ -22,6 +22,30 @@ import {
   getClubReviewHistory,
 } from "@/lib/club-scanner/api";
 import type { Candidate, Filters, ReviewInput } from "@/lib/club-scanner/core";
+import { approvalProfileHref, type ApprovalProfile } from "@/lib/club-scanner/profile-links";
+
+function AthleteProfileName({
+  name,
+  profile,
+  suggested = false,
+}: {
+  name: string;
+  profile?: ApprovalProfile | null;
+  suggested?: boolean;
+}) {
+  if (!profile) return <>{name}</>;
+  return (
+    <a
+      href={approvalProfileHref(profile)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-accent underline underline-offset-2 hover:no-underline"
+      title={`${suggested ? "View possible profile" : "View athlete profile"} (opens in a new tab)`}
+    >
+      {name}
+    </a>
+  );
+}
 const inputClass = "rounded-md border border-border bg-surface px-3 py-2 text-sm text-fg";
 const statuses = [
   "all",
@@ -32,7 +56,7 @@ const statuses = [
   "dismissed",
   "duplicate",
 ] as const;
-export function ClubScanner() {
+export function ClubScanner({ embedded = false }: { embedded?: boolean }) {
   const today = new Date().toISOString().slice(0, 10),
     client = useQueryClient();
   const [filters, setFilters] = useState<Filters>({ status: "all", q: "", page: 1 });
@@ -188,105 +212,110 @@ export function ClubScanner() {
   }
   return (
     <div className="space-y-6">
-      <header>
-        <p className="text-xs uppercase tracking-widest text-accent">Athlete collection</p>
-        <h1 className="font-display text-3xl font-semibold">Club athlete scanner</h1>
-        <p className="mt-2 max-w-3xl text-sm text-muted">
-          Find club-labelled race results, review athlete identities and publish source histories.
-          Scans save proposals; profiles are created when you publish approved results.
-        </p>
-      </header>
-      <form
-        className="grid gap-4 rounded-xl border border-border bg-surface p-5 md:grid-cols-2"
-        onSubmit={(e) => {
-          e.preventDefault();
-          start.mutate();
-        }}
-      >
-        <label className="grid gap-1 text-sm">
-          Running club
-          <select
-            required
-            className={inputClass}
-            value={clubId}
-            onChange={(e) => {
-              setClubId(e.target.value);
-              const club = query.data?.clubs.find((c) => c.id === Number(e.target.value));
-              setAliases(club?.name ?? "");
+      {!embedded && (
+        <>
+          <header>
+            <p className="text-xs uppercase tracking-widest text-accent">Athlete collection</p>
+            <h1 className="font-display text-3xl font-semibold">Club athlete scanner</h1>
+            <p className="mt-2 max-w-3xl text-sm text-muted">
+              Find club-labelled race results, review athlete identities and publish source
+              histories. Scans save proposals; profiles are created when you publish approved
+              results.
+            </p>
+          </header>
+          <form
+            className="grid gap-4 rounded-xl border border-border bg-surface p-5 md:grid-cols-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              start.mutate();
             }}
           >
-            <option value="">Choose a club</option>
-            {query.data?.clubs.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className="grid gap-1 text-sm">
-          Exact club names in results
-          <textarea
-            className={inputClass}
-            value={aliases}
-            onChange={(e) => setAliases(e.target.value)}
-            rows={2}
-            placeholder={"Wymondham AC\nWymondham Athletics Club"}
-          />
-          <span className="text-xs text-muted">
-            One name per line. Add abbreviations only when they identify this club.
-          </span>
-        </label>
-        <label className="grid gap-1 text-sm">
-          From
-          <input
-            type="date"
-            required
-            className={inputClass}
-            value={from}
-            onChange={(e) => setFrom(e.target.value)}
-          />
-        </label>
-        <label className="grid gap-1 text-sm">
-          To
-          <input
-            type="date"
-            required
-            max={today}
-            className={inputClass}
-            value={to}
-            onChange={(e) => setTo(e.target.value)}
-          />
-        </label>
-        <label className="flex items-center gap-2 text-sm">
-          <input
-            type="checkbox"
-            checked={discover}
-            onChange={(e) => setDiscover(e.target.checked)}
-          />
-          Scan the Total Race Timing results archive
-        </label>
-        <label className="grid gap-1 text-sm">
-          Additional result links
-          <textarea
-            className={inputClass}
-            rows={2}
-            value={urls}
-            onChange={(e) => setUrls(e.target.value)}
-            placeholder="https://… (one per line)"
-          />
-          <span className="text-xs text-muted">
-            TRT pages are scanned. Other providers and PDFs are saved as manual-review links.
-          </span>
-        </label>
-        <div className="md:col-span-2">
-          <Button disabled={busy || !clubId}>
-            {start.isPending ? "Starting…" : "Start club scan"}
-          </Button>
-          <span className="ml-3 text-xs text-muted">
-            Partial provider coverage · no AI research charges
-          </span>
-        </div>
-      </form>
+            <label className="grid gap-1 text-sm">
+              Running club
+              <select
+                required
+                className={inputClass}
+                value={clubId}
+                onChange={(e) => {
+                  setClubId(e.target.value);
+                  const club = query.data?.clubs.find((c) => c.id === Number(e.target.value));
+                  setAliases(club?.name ?? "");
+                }}
+              >
+                <option value="">Choose a club</option>
+                {query.data?.clubs.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="grid gap-1 text-sm">
+              Exact club names in results
+              <textarea
+                className={inputClass}
+                value={aliases}
+                onChange={(e) => setAliases(e.target.value)}
+                rows={2}
+                placeholder={"Wymondham AC\nWymondham Athletics Club"}
+              />
+              <span className="text-xs text-muted">
+                One name per line. Add abbreviations only when they identify this club.
+              </span>
+            </label>
+            <label className="grid gap-1 text-sm">
+              From
+              <input
+                type="date"
+                required
+                className={inputClass}
+                value={from}
+                onChange={(e) => setFrom(e.target.value)}
+              />
+            </label>
+            <label className="grid gap-1 text-sm">
+              To
+              <input
+                type="date"
+                required
+                max={today}
+                className={inputClass}
+                value={to}
+                onChange={(e) => setTo(e.target.value)}
+              />
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={discover}
+                onChange={(e) => setDiscover(e.target.checked)}
+              />
+              Scan the Total Race Timing results archive
+            </label>
+            <label className="grid gap-1 text-sm">
+              Additional result links
+              <textarea
+                className={inputClass}
+                rows={2}
+                value={urls}
+                onChange={(e) => setUrls(e.target.value)}
+                placeholder="https://… (one per line)"
+              />
+              <span className="text-xs text-muted">
+                TRT pages are scanned. Other providers and PDFs are saved as manual-review links.
+              </span>
+            </label>
+            <div className="md:col-span-2">
+              <Button disabled={busy || !clubId}>
+                {start.isPending ? "Starting…" : "Start club scan"}
+              </Button>
+              <span className="ml-3 text-xs text-muted">
+                Partial provider coverage · no AI research charges
+              </span>
+            </div>
+          </form>
+        </>
+      )}
       {message && (
         <p role="status" className="rounded-lg border border-border bg-surface p-3 text-sm">
           {message}
@@ -477,7 +506,11 @@ export function ClubScanner() {
                     />
                   </td>
                   <td className="p-3 font-medium">
-                    {c.data.name}
+                    <AthleteProfileName
+                      name={c.data.name}
+                      profile={c.profile}
+                      suggested={!c.athlete_id && !c.decision}
+                    />
                     <div className="text-xs font-normal text-muted">
                       {c.data.gender} · {c.data.club} · {c.data.performance.ageGroup}
                     </div>
@@ -546,7 +579,14 @@ export function ClubScanner() {
           className="space-y-3 rounded-xl border border-border bg-surface p-5"
           aria-label="Source comparison"
         >
-          <h2 className="text-lg font-semibold">{open.data.name} — source comparison</h2>
+          <h2 className="text-lg font-semibold">
+            <AthleteProfileName
+              name={open.data.name}
+              profile={open.profile}
+              suggested={!open.athlete_id && !open.decision}
+            />{" "}
+            — source comparison
+          </h2>
           <p className="text-sm">
             <a
               className="text-accent underline"
@@ -576,15 +616,8 @@ export function ClubScanner() {
               {open.matches.length ? (
                 open.matches.map((m) => (
                   <p className="my-2 text-sm" key={m.id}>
-                    {m.name} · {m.club || "Club unknown"} · {m.gender}{" "}
-                    <a
-                      href={`/admin/athletes/ATH-${String(m.number).padStart(6, "0")}`}
-                      className="text-accent underline"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Inspect
-                    </a>
+                    <AthleteProfileName name={m.name} profile={m} suggested /> ·{" "}
+                    {m.club || "Club unknown"} · {m.gender}{" "}
                     {m.managed || m.visibility !== "public"
                       ? " · separate publication review required"
                       : ""}

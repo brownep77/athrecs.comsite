@@ -22,6 +22,7 @@ const CURRENT_GOVERNING_BODY_SCAN_CHECKED_AT = "2026-09-24";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
+const CURRENT_CLUB_SCAN_CHECKED_AT = "2026-09-30";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -52,6 +53,24 @@ type RaceSeed = {
 };
 
 const seeds: RaceSeed[] = [
+  {
+    slug: "looe-10-miler-2027",
+    name: "Looe 10 Miler 2027",
+    date: "2027-02-28",
+    distance: "10mi",
+    country: "England",
+    county: "Cornwall",
+    city: "Looe",
+    area: "West Looe, Talland and the coastal road around Killigarth and Porthallow",
+    surface: "Road",
+    organiser: "Looe Pioneers Running Club",
+    url: "https://www.looepioneers.co.uk/looe-10-miler-2027.html",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: CURRENT_CLUB_SCAN_CHECKED_AT,
+    notes:
+      "The organising club's official 2027 page confirms the 10-mile race and 28 February 2027 date. Entries are advertised as opening soon, so no checkout or unverified start time is exposed.",
+  },
   {
     slug: "temple-newsam-10-2027",
     name: "Temple Newsam 10 (TNT) 2027",
