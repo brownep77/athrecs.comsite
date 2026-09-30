@@ -1,6 +1,27 @@
 import { Link } from "@tanstack/react-router";
 import type { EditorialArticle } from "@/lib/athrecs/editorial";
 
+function ArticleText({ text, links }: { text: string; links?: Record<string, string> }) {
+  if (!links || !Object.keys(links).length) return text;
+  const names = Object.keys(links)
+    .sort((a, b) => b.length - a.length)
+    .map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  return text.split(new RegExp(`(${names.join("|")})`, "g")).map((part, index) =>
+    links[part] ? (
+      <Link
+        key={`${part}-${index}`}
+        to="/athletes/$slug"
+        params={{ slug: links[part] }}
+        className="text-accent underline underline-offset-2"
+      >
+        {part}
+      </Link>
+    ) : (
+      part
+    ),
+  );
+}
+
 export function EditorialArticlePage({ article }: { article: EditorialArticle }) {
   return (
     <article className="mx-auto max-w-3xl space-y-6">
@@ -18,7 +39,9 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
         <h1 className="font-display text-3xl font-semibold leading-tight sm:text-4xl">
           {article.title}
         </h1>
-        <p className="text-lg leading-8 text-muted">{article.standfirst}</p>
+        <p className="text-lg leading-8 text-muted">
+          <ArticleText text={article.standfirst} links={article.athleteLinks} />
+        </p>
         <ul className="flex flex-wrap gap-2" aria-label="Story locations">
           {article.locations.map((location) => (
             <li key={`${location.country}-${location.area}-${location.county}`}>
@@ -35,7 +58,9 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
       </header>
       <div className="space-y-5 text-base leading-8">
         {article.body.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <p key={paragraph}>
+            <ArticleText text={paragraph} links={article.athleteLinks} />
+          </p>
         ))}
       </div>
       {article.links?.length ? (
