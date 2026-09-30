@@ -1,5 +1,10 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
-import { BURE_ORGANISER_URL, BURE_RESULTS_URL, BURE_WINNERS } from "@/data/bure-valley-2026";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import {
+  BURE_ORGANISER_URL,
+  BURE_PROFILE_SLUGS,
+  BURE_RESULTS_URL,
+  BURE_WINNERS,
+} from "@/data/bure-valley-2026";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 
@@ -33,8 +38,8 @@ function BureResultsPage() {
         <h1 className="font-display text-3xl font-semibold sm:text-4xl">Bure Valley 10 results</h1>
         <p className="text-lg">Published winners and category awards</p>
         <p className="text-sm leading-6 text-muted">
-          This is a winners summary, not the complete finishing list. Full participant results and
-          profile links are awaiting source-row and identity checks.
+          This is a winners summary, not the complete finishing list. Linked names open their
+          AthRecs profiles. The full results are available through the official link below.
         </p>
         <a
           href={BURE_RESULTS_URL}
@@ -69,7 +74,19 @@ function BureResultsPage() {
             {BURE_WINNERS.map((row) => (
               <tr key={row.category} className="border-t border-border">
                 <td className="p-3">{row.category}</td>
-                <td className="p-3 font-medium">{row.name}</td>
+                <td className="p-3 font-medium">
+                  {BURE_PROFILE_SLUGS[row.name] ? (
+                    <Link
+                      to="/athletes/$slug"
+                      params={{ slug: BURE_PROFILE_SLUGS[row.name] }}
+                      className="text-accent underline underline-offset-2"
+                    >
+                      {row.name}
+                    </Link>
+                  ) : (
+                    row.name
+                  )}
+                </td>
                 <td className="whitespace-nowrap p-3 text-right tabular-nums">{row.time}</td>
               </tr>
             ))}

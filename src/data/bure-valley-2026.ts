@@ -29,6 +29,30 @@ export const BURE_WINNERS = [
   { category: "Female 75+", name: "Veronica Manly", time: "1:51:11.8" },
 ] as const;
 
+// Profile identities matched against the official entry list (name and club),
+// checked 30 September 2026. These links do not publish a result to the profile.
+// James Preston and Emily Haslam have conflicting clubs; Zoe Thomas has no
+// distinguishing club evidence. Their potential matches remain in review.
+export const BURE_PROFILE_SLUGS: Record<string, string> = {
+  "Sam Peck": "sam-peck",
+  "Grace Buchanan": "grace-buchanan",
+  "Andrew Plume": "andrew-plume-43eb650d",
+  "Neil Adams": "neil-adams",
+  "Mitchell Dann": "mitchell-dann",
+  "Tim Mardall": "tim-mardall",
+  "David Crotch": "david-crotch",
+  "Nigel Marlow": "nigel-marlow",
+  "Andrew Hammond": "andrew-hammond",
+  "Graham Walsh": "graham-walsh",
+  "Amy Wright": "amy-wright",
+  "Juliet Garnham": "juliet-garnham-ed922e52fd1f",
+  "Louise Hurr": "louise-hurr",
+  "Karen Balcombe": "karen-balcombe",
+  "Bobbie Sauerzapf": "bobbie-sauerzapf",
+  "Linda Cusack": "linda-cusack-495c69a01a91",
+  "Veronica Manly": "veronica-manly-5e50c3944ef3",
+};
+
 export const BURE_REPORT: EditorialArticle = {
   slug: "bure-valley-10-2026",
   kind: "race-reports",
@@ -49,6 +73,7 @@ export const BURE_REPORT: EditorialArticle = {
   ],
   sports: ["road-running"],
   locations: [{ country: "England", area: "East of England", county: "Norfolk" }],
+  athleteLinks: BURE_PROFILE_SLUGS,
   links: [
     { label: "Bure Valley 10 winners summary", url: "/results/bure-valley-10-2026" },
     { label: "Official results — Sublime Timing / Webscorer", url: BURE_RESULTS_URL },
