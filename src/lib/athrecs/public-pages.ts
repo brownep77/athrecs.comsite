@@ -13,6 +13,7 @@ export const PUBLIC_PAGES = [
   { path: "/news", name: "News" },
   ...EDITORIAL_ARTICLES.map((article) => ({ path: editorialPath(article), name: article.title })),
   { path: "/results/berlin-marathon-2026", name: "Berlin Marathon 2026 results" },
+  { path: "/results/bure-valley-10-2026", name: "Bure Valley 10 2026 winners summary" },
   { path: "/races", name: "Races and events" },
   { path: "/calendar", name: "Athletics calendar" },
   { path: "/race-series", name: "Athletics disciplines and championships" },
