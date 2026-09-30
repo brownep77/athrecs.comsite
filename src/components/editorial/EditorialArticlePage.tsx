@@ -38,6 +38,18 @@ export function EditorialArticlePage({ article }: { article: EditorialArticle })
           <p key={paragraph}>{paragraph}</p>
         ))}
       </div>
+      {article.links?.length ? (
+        <nav
+          aria-label="Report sources and results"
+          className="flex flex-col gap-3 border-t border-border pt-5"
+        >
+          {article.links.map((link) => (
+            <a key={link.url} href={link.url} className="text-accent underline underline-offset-2">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      ) : null}
     </article>
   );
 }
