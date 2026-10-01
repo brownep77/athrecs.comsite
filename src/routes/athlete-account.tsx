@@ -1,7 +1,18 @@
+import { AccountNavigation } from "@/components/athletes/AccountNavigation";
+import { AccountRaces } from "@/components/athletes/AccountRaces";
+import { AthleteBioCard } from "@/components/athletes/AthleteBioCard";
+import { ProfilePhotoUploader } from "@/components/athletes/ProfilePhotoUploader";
+import { ProfileConnectionsPanel } from "@/components/athletes/ProfileConnectionsPanel";
+import { UpcomingEventsEditor } from "@/components/athletes/UpcomingEvents";
+import {
+  isAccountFormSection,
+  validateAccountSearch,
+  type AccountSectionId,
+} from "@/lib/athrecs/account-sections";
 import { readProfileDetails } from "@/lib/athrecs/profile-details";
 import { ShareProfileCard } from "@/components/athletes/ShareProfileCard";
-import { useEffect, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
+import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   BadgeCheck,
@@ -46,6 +57,7 @@ import { ProfileEventLink } from "@/components/athletes/ProfileEventLink";
 import { IS_ATHRECS_SITE, sportIsInAthleteProfileScope } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/athlete-account")({
+  validateSearch: validateAccountSearch,
   head: () => ({
     meta: [
       { title: "My Athlete Account | ATHRECS.com" },
@@ -263,6 +275,11 @@ function AthleteAccountPage() {
 }
 
 function SignedInAccount() {
+  const { section } = Route.useSearch();
+  const hash = useLocation({ select: (location) => location.hash });
+  const activeSection = section ?? (hash === "profile-visibility" ? "sharing" : "races");
+  const show = (id: AccountSectionId) => !IS_ATHRECS_SITE || activeSection === id;
+  const lastLoadedForm = useRef<AthleteAccountInput | null>(null);
   const queryClient = useQueryClient();
   const [form, setForm] = useState<AthleteAccountInput | null>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -273,13 +290,21 @@ function SignedInAccount() {
   });
 
   useEffect(() => {
-    if (account.data) setForm(accountToForm(account.data));
+    if (!account.data) return;
+    const next = accountToForm(account.data);
+    const previous = lastLoadedForm.current;
+    // Result claims and photo uploads refresh this query too. Keep unsaved edits.
+    setForm((current) =>
+      current && JSON.stringify(current) !== JSON.stringify(previous) ? current : next,
+    );
+    lastLoadedForm.current = next;
   }, [account.data]);
 
   const save = useMutation({
     mutationFn: (input: AthleteAccountInput) => saveMyAthleteAccount({ data: input }),
     onSuccess: (updated) => {
-      setForm(accountToForm(updated));
+      lastLoadedForm.current = accountToForm(updated);
+      setForm(lastLoadedForm.current);
       setMessage("Your Athlete Account has been saved.");
       queryClient.setQueryData(["my-athlete-account"], updated);
     },
@@ -331,667 +356,867 @@ function SignedInAccount() {
       (current) => current && { ...current, preferences: { ...current.preferences, [key]: value } },
     );
 
+  const profileName =
+    account.data.displayName || account.data.fullName || account.data.authName || "My profile";
+  const isDirty = JSON.stringify(form) !== JSON.stringify(lastLoadedForm.current);
+  const showForm = !IS_ATHRECS_SITE || isAccountFormSection(activeSection);
+
   return (
-    <div className="mx-auto max-w-5xl space-y-6">
-      <AccountHero />
-
-      <section className="grid gap-4 rounded-xl border border-border bg-surface p-5 shadow-card sm:grid-cols-[1fr_auto] sm:items-center">
-        <div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge
-              className={
-                account.data.emailVerified
-                  ? "border-emerald-500/30 bg-emerald-50 text-emerald-900"
-                  : "border-amber-500/30 bg-amber-50 text-amber-900"
-              }
-            >
-              <BadgeCheck className="mr-1 size-3.5" aria-hidden="true" />{" "}
-              {account.data.emailVerified ? "Email verified" : "Email not verified"}
-            </Badge>
-            <span className="text-sm font-medium text-fg">{account.data.verifiedEmail}</span>
-          </div>
-          <p className="mt-2 text-sm text-muted">
-            Profile completion: <strong className="text-fg">{completion}%</strong>. Optional
-            sections improve your Entry Passport and any analytics you approve.
-          </p>
-          <div className="mt-3 h-2 overflow-hidden rounded-full bg-elevated" aria-hidden="true">
-            <div className="h-full rounded-full bg-accent" style={{ width: `${completion}%` }} />
-          </div>
-        </div>
-        <Button type="button" variant="secondary" onClick={() => void signOut("/")}>
-          <LogOut className="size-4" aria-hidden="true" /> Sign out
-        </Button>
-      </section>
-      {!account.data.emailVerified ? (
-        <section className="space-y-3 rounded-xl border border-amber-500/30 bg-amber-50 p-5 text-sm text-amber-950">
-          <p>Verify your email address before saving your athlete profile.</p>
-          {authMethods.data?.passwordReset ? (
-            <Button
-              type="button"
-              variant="secondary"
-              disabled={verifyEmail.isPending}
-              onClick={() => verifyEmail.mutate()}
-            >
-              {verifyEmail.isPending ? "Sending…" : "Send verification email"}
-            </Button>
-          ) : (
-            <p>
-              Email verification is temporarily unavailable. Your sign-in is available, but profile
-              saving requires a verified email.
-            </p>
-          )}
-        </section>
-      ) : null}
-
-      <PotentialResultMatchesPanel />
-
-      {account.data.claimedProfiles.length || account.data.claimCount ? (
-        <section className="rounded-xl border border-border bg-surface p-5 shadow-card">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className={cn("mx-auto space-y-5", IS_ATHRECS_SITE ? "max-w-7xl" : "max-w-5xl")}>
+      {IS_ATHRECS_SITE ? (
+        <header className="flex flex-wrap items-center justify-between gap-3">
+          <h1 className="font-display text-2xl font-semibold text-fg md:text-3xl">
+            My Athlete Account
+          </h1>
+          <Button asChild variant="secondary">
+            <Link to="/my-athlete-profile">View my profile</Link>
+          </Button>
+        </header>
+      ) : (
+        <AccountHero />
+      )}
+      <div
+        className={cn(
+          IS_ATHRECS_SITE && "grid items-start gap-5 lg:grid-cols-[15rem_minmax(0,1fr)]",
+        )}
+      >
+        {IS_ATHRECS_SITE ? (
+          <AccountNavigation
+            active={activeSection}
+            name={profileName}
+            athleteNumber={account.data.athleteNumber}
+          />
+        ) : null}
+        <div className="min-w-0 space-y-5" id="account-section-content">
+          <section className="grid gap-4 rounded-xl border border-border bg-surface p-5 shadow-card sm:grid-cols-[1fr_auto] sm:items-center">
             <div>
-              <h2 className="font-display text-lg font-semibold text-fg">Claimed results</h2>
-              <p className="mt-1 text-sm text-muted">
-                {account.data.claimedProfiles.length} linked athlete profile
-                {account.data.claimedProfiles.length === 1 ? "" : "s"} · {account.data.claimCount}{" "}
-                claim{account.data.claimCount === 1 ? "" : "s"} submitted
-              </p>
-            </div>
-            <Button asChild variant="secondary">
-              <Link to="/claim-results" search={{ resultId: undefined }}>
-                Manage claims
-              </Link>
-            </Button>
-          </div>
-          {account.data.claimedProfiles.length ? (
-            <div className="mt-4 space-y-4">
-              <div className="flex flex-wrap gap-2">
-                {account.data.claimedProfiles.map((profile) => (
-                  <Badge
-                    key={profile.athleteId}
-                    className="border-accent/30 bg-accent-soft text-fg"
-                  >
-                    {profile.athleteName} · Private profile
-                  </Badge>
-                ))}
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge
+                  className={
+                    account.data.emailVerified
+                      ? "border-emerald-500/30 bg-emerald-50 text-emerald-900"
+                      : "border-amber-500/30 bg-amber-50 text-amber-900"
+                  }
+                >
+                  <BadgeCheck className="mr-1 size-3.5" aria-hidden="true" />{" "}
+                  {account.data.emailVerified ? "Email verified" : "Email not verified"}
+                </Badge>
+                <span className="text-sm font-medium text-fg">{account.data.verifiedEmail}</span>
               </div>
-              {visibleClaimedResults.length ? (
-                <div className="grid gap-2 md:grid-cols-2">
-                  {visibleClaimedResults.map((result) => (
-                    <ProfileEventLink
-                      key={result.resultId}
-                      result={result}
-                      className="rounded-lg border border-border p-3 no-underline hover:border-accent"
-                    >
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <p className="font-semibold text-fg">{result.eventName}</p>
-                          <p className="mt-1 text-xs text-muted">
-                            {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
-                            {result.category ? ` · ${result.category}` : ""}
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-semibold tabular-nums text-fg">
-                            {formatDuration(result.finishTimeSeconds)}
-                          </p>
-                          {result.overallPlace != null ? (
-                            <p className="mt-1 text-xs text-muted">Place {result.overallPlace}</p>
-                          ) : null}
-                        </div>
-                      </div>
-                    </ProfileEventLink>
-                  ))}
+              <p className="mt-2 text-sm text-muted">
+                Profile completion: <strong className="text-fg">{completion}%</strong>. Optional
+                sections improve your Entry Passport and any analytics you approve.
+              </p>
+              <div className="mt-3 h-2 overflow-hidden rounded-full bg-elevated" aria-hidden="true">
+                <div
+                  className="h-full rounded-full bg-accent"
+                  style={{ width: `${completion}%` }}
+                />
+              </div>
+            </div>
+            <Button type="button" variant="secondary" onClick={() => void signOut("/")}>
+              <LogOut className="size-4" aria-hidden="true" /> Sign out
+            </Button>
+          </section>
+          {!account.data.emailVerified ? (
+            <section className="space-y-3 rounded-xl border border-amber-500/30 bg-amber-50 p-5 text-sm text-amber-950">
+              <p>Verify your email address before saving your athlete profile.</p>
+              {authMethods.data?.passwordReset ? (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  disabled={verifyEmail.isPending}
+                  onClick={() => verifyEmail.mutate()}
+                >
+                  {verifyEmail.isPending ? "Sending…" : "Send verification email"}
+                </Button>
+              ) : (
+                <p>
+                  Email verification is temporarily unavailable. Your sign-in is available, but
+                  profile saving requires a verified email.
+                </p>
+              )}
+            </section>
+          ) : null}
+
+          {show("potential") ? <PotentialResultMatchesPanel /> : null}
+          {IS_ATHRECS_SITE && ["races", "achievements", "progress"].includes(activeSection) ? (
+            <AccountRaces
+              account={account.data}
+              view={activeSection as "races" | "achievements" | "progress"}
+            />
+          ) : null}
+          {IS_ATHRECS_SITE ? (
+            <>
+              <PreservedAccountPanel active={activeSection === "upcoming"}>
+                <UpcomingEventsEditor />
+              </PreservedAccountPanel>
+              <PreservedAccountPanel active={activeSection === "biography"}>
+                <AthleteBioCard />
+              </PreservedAccountPanel>
+              <PreservedAccountPanel active={activeSection === "connections"}>
+                <ProfileConnectionsPanel account={account.data} />
+              </PreservedAccountPanel>
+              <PreservedAccountPanel active={activeSection === "photo"}>
+                <AccountSection
+                  icon={UserRound}
+                  title="Profile photo"
+                  description="Choose a photograph for your athlete profile."
+                >
+                  <ProfilePhotoUploader
+                    displayName={profileName}
+                    photoUrl={account.data.profilePhotoUrl}
+                    uploadAvailable={account.data.profilePhotoUploadAvailable}
+                    onChanged={() => {
+                      void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
+                    }}
+                  />
+                </AccountSection>
+              </PreservedAccountPanel>
+              {activeSection === "opportunities" ? (
+                <AccountSection
+                  icon={BadgeCheck}
+                  title="Partnerships"
+                  description="Manage sponsorship, product testing and partner offers."
+                >
+                  <Button asChild variant="secondary">
+                    <Link to="/opportunities">Manage partnership choices</Link>
+                  </Button>
+                </AccountSection>
+              ) : null}
+            </>
+          ) : null}
+
+          {!IS_ATHRECS_SITE && (account.data.claimedProfiles.length || account.data.claimCount) ? (
+            <section className="rounded-xl border border-border bg-surface p-5 shadow-card">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h2 className="font-display text-lg font-semibold text-fg">Claimed results</h2>
+                  <p className="mt-1 text-sm text-muted">
+                    {account.data.claimedProfiles.length} linked athlete profile
+                    {account.data.claimedProfiles.length === 1 ? "" : "s"} ·{" "}
+                    {account.data.claimCount} claim{account.data.claimCount === 1 ? "" : "s"}{" "}
+                    submitted
+                  </p>
+                </div>
+                <Button asChild variant="secondary">
+                  <Link to="/claim-results" search={{ resultId: undefined }}>
+                    Manage claims
+                  </Link>
+                </Button>
+              </div>
+              {account.data.claimedProfiles.length ? (
+                <div className="mt-4 space-y-4">
+                  <div className="flex flex-wrap gap-2">
+                    {account.data.claimedProfiles.map((profile) => (
+                      <Badge
+                        key={profile.athleteId}
+                        className="border-accent/30 bg-accent-soft text-fg"
+                      >
+                        {profile.athleteName} · Private profile
+                      </Badge>
+                    ))}
+                  </div>
+                  {visibleClaimedResults.length ? (
+                    <div className="grid gap-2 md:grid-cols-2">
+                      {visibleClaimedResults.map((result) => (
+                        <ProfileEventLink
+                          key={result.resultId}
+                          result={result}
+                          className="rounded-lg border border-border p-3 no-underline hover:border-accent"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div>
+                              <p className="font-semibold text-fg">{result.eventName}</p>
+                              <p className="mt-1 text-xs text-muted">
+                                {formatRaceDateShort(result.eventDate)} · {result.distanceCode}
+                                {result.category ? ` · ${result.category}` : ""}
+                              </p>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-semibold tabular-nums text-fg">
+                                {formatDuration(result.finishTimeSeconds)}
+                              </p>
+                              {result.overallPlace != null ? (
+                                <p className="mt-1 text-xs text-muted">
+                                  Place {result.overallPlace}
+                                </p>
+                              ) : null}
+                            </div>
+                          </div>
+                        </ProfileEventLink>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               ) : null}
-            </div>
+            </section>
           ) : null}
-        </section>
-      ) : null}
 
-      <form
-        className="space-y-6"
-        onSubmit={(event) => {
-          event.preventDefault();
-          setMessage(null);
-          save.mutate(form);
-        }}
-      >
-        <AccountSection
-          icon={UserRound}
-          title="Identity and Entry Passport"
-          description="Full name and verified email are required. Other fields are optional. Your profile stays private until you enable sharing."
-        >
-          <div className="grid gap-4 md:grid-cols-2">
-            <TextField
-              label="Full name"
-              required
-              value={form.fullName}
-              onChange={(value) => setForm({ ...form, fullName: value })}
-              autoComplete="name"
-            />
-            <TextField
-              label="Verified email"
-              required
-              value={account.data.verifiedEmail}
-              disabled
-              help="Managed securely by your sign-in account."
-            />
-            <TextField
-              label="Display name"
-              value={form.displayName ?? ""}
-              onChange={(value) => setForm({ ...form, displayName: value })}
-              help="Optional name you prefer ATHRECS staff to use."
-            />
-            <TextField
-              label="Date of birth"
-              type="date"
-              value={form.dateOfBirth ?? ""}
-              onChange={(value) => setForm({ ...form, dateOfBirth: value })}
-              autoComplete="bday"
-            />
-          </div>
-          <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-fg">
-            <MapPin className="size-4 text-accent" aria-hidden="true" /> Location and affiliation
-            <OptionalLabel />
-          </div>
-          <div className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <TextField
-              label="Country"
-              value={form.country ?? ""}
-              onChange={(value) => setForm({ ...form, country: value })}
-              autoComplete="country-name"
-            />
-            <TextField
-              label="Region / county / state"
-              value={form.region ?? ""}
-              onChange={(value) => setForm({ ...form, region: value })}
-              addressLevel="1"
-            />
-            <TextField
-              label="City / town"
-              value={form.city ?? ""}
-              onChange={(value) => setForm({ ...form, city: value })}
-              addressLevel="2"
-            />
-            <TextField
-              label="Postcode"
-              value={form.postcode ?? ""}
-              onChange={(value) => setForm({ ...form, postcode: value })}
-              autoComplete="postal-code"
-            />
-            <TextField
-              label="Nationality"
-              value={form.nationality ?? ""}
-              onChange={(value) => setForm({ ...form, nationality: value })}
-            />
-            <TextField
-              label="Club or team"
-              value={form.clubOrTeam ?? ""}
-              onChange={(value) => setForm({ ...form, clubOrTeam: value })}
-            />
-            <TextField
-              label="Preferred language"
-              value={form.preferredLanguage ?? ""}
-              onChange={(value) => setForm({ ...form, preferredLanguage: value })}
-            />
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {(
-              [
-                ["birthCountry", "Country of birth"],
-                ["previousClub", "Previous club or team"],
-                ["coach", "Coach"],
-                ["manager", "Manager"],
-                ["runningAgeCategory", "Running age category"],
-              ] as const
-            ).map(([field, label]) => (
-              <TextField
-                key={field}
-                label={label}
-                value={form.profileDetails?.[field] ?? ""}
-                onChange={(value) =>
-                  setForm({
-                    ...form,
-                    profileDetails: { ...readProfileDetails(form.profileDetails), [field]: value },
-                  })
-                }
-                help={
-                  field === "runningAgeCategory"
-                    ? "Published independently of your birthday, e.g. M45 or W40. Update when your category changes."
-                    : field === "coach"
-                      ? "You can also add a coach for each sport below."
-                      : undefined
-                }
-              />
-            ))}
-            <SelectField
-              label="Birthday display on public profile"
-              value={form.profileDetails?.birthdayVisibility ?? "hidden"}
-              options={[
-                ["hidden", "Do not display"],
-                ["day-month", "Day and month only"],
-                ["full", "Full date of birth"],
-              ]}
-              onChange={(value) =>
-                setForm({
-                  ...form,
-                  profileDetails: {
-                    ...readProfileDetails(form.profileDetails),
-                    birthdayVisibility: value as "hidden" | "day-month" | "full",
-                  },
-                })
-              }
-            />
-          </div>
-          <label className="mt-4 flex items-start gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={form.profileDetails?.acceptContact ?? false}
-              onChange={(event) =>
-                setForm({
-                  ...form,
-                  profileDetails: {
-                    ...readProfileDetails(form.profileDetails),
-                    acceptContact: event.target.checked,
-                  },
-                })
-              }
-              className="mt-1"
-            />
-            <span>
-              I am open to being contacted about my athlete profile.
-              <span className="block text-xs text-muted">
-                Shows your contact preference on your public profile. Your email stays private; this
-                is separate from marketing consent.
-              </span>
-            </span>
-          </label>
-          <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-fg">
-            <SearchCheck className="size-4 text-accent" aria-hidden="true" /> Find your previous
-            results
-            <OptionalLabel />
-          </div>
-          <p className="mt-2 text-sm leading-6 text-muted">
-            These fields stay private. ATHRECS uses them only to suggest possible Power of 10, World
-            Athletics or official athletics result pages. Nothing is linked until you claim it.
-          </p>
-          <div className="mt-3 grid gap-4 md:grid-cols-2">
-            <CsvField
-              label="Previous or known-as names"
-              values={form.previousNames ?? []}
-              onChange={(previousNames) => setForm({ ...form, previousNames })}
-              placeholder="Maiden name, nickname, previous racing name"
-            />
-            {
-              <TextField
-                label="parkrun barcode"
-                value={form.parkrunId ?? ""}
-                onChange={(value) => setForm({ ...form, parkrunId: value })}
-                help="The number printed on your parkrun barcode, without A."
-              />
-            }
-            <TextField
-              label="Athletics URN"
-              value={form.athleticsUrn ?? ""}
-              onChange={(value) => setForm({ ...form, athleticsUrn: value })}
-              help="England Athletics, Scottish Athletics, Welsh Athletics or Athletics NI URN."
-            />
-            <TextField
-              label="Power of 10 profile URL"
-              value={form.powerOf10Url ?? ""}
-              onChange={(value) => setForm({ ...form, powerOf10Url: value })}
-              placeholder="https://www.thepowerof10.info/athletes/profile.aspx?athleteid="
-            />
-            <TextField
-              label="World Athletics profile URL"
-              value={form.worldAthleticsUrl ?? ""}
-              onChange={(value) => setForm({ ...form, worldAthleticsUrl: value })}
-              placeholder="https://worldathletics.org/athletes/"
-            />
-          </div>
-          <p className="mt-5 text-sm font-semibold text-fg">A race you know you ran</p>
-          <p className="mt-1 text-xs text-subtle">
-            One distinctive race helps Grok tell you apart from other athletes with the same name.
-          </p>
-          <div className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <TextField
-              label="Event name"
-              value={form.fingerprintEvent ?? ""}
-              onChange={(value) => setForm({ ...form, fingerprintEvent: value })}
-              placeholder={IS_ATHRECS_SITE ? "British Athletics Championships" : "London Marathon"}
-            />
-            <TextField
-              label="Year"
-              value={form.fingerprintYear ?? ""}
-              onChange={(value) => setForm({ ...form, fingerprintYear: value })}
-              placeholder="2024"
-            />
-            <TextField
-              label="Distance"
-              value={form.fingerprintDistance ?? ""}
-              onChange={(value) => setForm({ ...form, fingerprintDistance: value })}
-              placeholder={IS_ATHRECS_SITE ? "100m" : "Marathon"}
-            />
-            <TextField
-              label="Finish time"
-              value={form.fingerprintTime ?? ""}
-              onChange={(value) => setForm({ ...form, fingerprintTime: value })}
-              placeholder="3:21:14"
-            />
-          </div>
-        </AccountSection>
-
-        <AccountSection
-          icon={Goal}
-          title="Sports and training"
-          description={
-            IS_ATHRECS_SITE
-              ? "Add every sport you take part in, with disciplines, distances, training and goals."
-              : "Add every sport that is relevant to you, then optionally describe disciplines, distances, training and goals."
-          }
-          optional
-        >
-          <ChoiceGrid
-            label="Your sports"
-            choices={[...ACCOUNT_SPORTS]}
-            selected={visibleSports.map((sport) => sport.sportCode)}
-            onChange={(codes) => {
-              const hiddenSports = IS_ATHRECS_SITE
-                ? form.sports.filter((sport) => !ACCOUNT_SPORT_SET.has(sport.sportCode))
-                : [];
-              const hasHiddenPrimary = hiddenSports.some((sport) => sport.isPrimary);
-              const nextVisibleSports = codes.map((code, index) => {
-                const current = form.sports.find((sport) => sport.sportCode === code);
-                return (
-                  current ?? emptySport(code as AthleteSportCode, index === 0 && !hasHiddenPrimary)
-                );
-              });
-              setForm({ ...form, sports: [...hiddenSports, ...nextVisibleSports] });
+          <form
+            className="space-y-6"
+            aria-label="Athlete account details"
+            onSubmit={(event) => {
+              event.preventDefault();
+              setMessage(null);
+              save.mutate(form);
             }}
-          />
-          {visibleSports.length ? (
-            <div className="mt-5 grid gap-4">
-              {visibleSports.map((sport) => (
-                <SportEditor
-                  key={sport.sportCode}
-                  sport={sport}
-                  onChange={(next) =>
-                    setForm({
-                      ...form,
-                      sports: form.sports.map((item) =>
-                        item.sportCode === sport.sportCode
-                          ? next
-                          : next.isPrimary
-                            ? { ...item, isPrimary: false }
-                            : item,
-                      ),
-                    })
-                  }
+          >
+            {show("identity") || show("location") || show("matching") ? (
+              <AccountSection
+                icon={UserRound}
+                title={
+                  IS_ATHRECS_SITE
+                    ? activeSection === "location"
+                      ? "Location and clubs"
+                      : activeSection === "matching"
+                        ? "Names and result sources"
+                        : "Personal details"
+                    : "Identity and Entry Passport"
+                }
+                description={
+                  activeSection === "matching" && IS_ATHRECS_SITE
+                    ? "Help ATHRECS find your previous results. These details stay private."
+                    : activeSection === "location" && IS_ATHRECS_SITE
+                      ? "Your location, nationality and club or team."
+                      : "Full name and verified email are required. Other fields are optional. Your profile stays private until you enable sharing."
+                }
+              >
+                {show("identity") ? (
+                  <>
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <TextField
+                        label="Full name"
+                        required
+                        value={form.fullName}
+                        onChange={(value) => setForm({ ...form, fullName: value })}
+                        autoComplete="name"
+                      />
+                      <TextField
+                        label="Verified email"
+                        required
+                        value={account.data.verifiedEmail}
+                        disabled
+                        help="Managed securely by your sign-in account."
+                      />
+                      <TextField
+                        label="Display name"
+                        value={form.displayName ?? ""}
+                        onChange={(value) => setForm({ ...form, displayName: value })}
+                        help="Optional name you prefer ATHRECS staff to use."
+                      />
+                      <TextField
+                        label="Date of birth"
+                        type="date"
+                        value={form.dateOfBirth ?? ""}
+                        onChange={(value) => setForm({ ...form, dateOfBirth: value })}
+                        autoComplete="bday"
+                      />
+                    </div>
+                  </>
+                ) : null}
+                {show("location") ? (
+                  <>
+                    <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-fg">
+                      <MapPin className="size-4 text-accent" aria-hidden="true" /> Location and
+                      affiliation
+                      <OptionalLabel />
+                    </div>
+                    <div className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                      <TextField
+                        label="Country"
+                        value={form.country ?? ""}
+                        onChange={(value) => setForm({ ...form, country: value })}
+                        autoComplete="country-name"
+                      />
+                      <TextField
+                        label="Region / county / state"
+                        value={form.region ?? ""}
+                        onChange={(value) => setForm({ ...form, region: value })}
+                        addressLevel="1"
+                      />
+                      <TextField
+                        label="City / town"
+                        value={form.city ?? ""}
+                        onChange={(value) => setForm({ ...form, city: value })}
+                        addressLevel="2"
+                      />
+                      <TextField
+                        label="Postcode"
+                        value={form.postcode ?? ""}
+                        onChange={(value) => setForm({ ...form, postcode: value })}
+                        autoComplete="postal-code"
+                      />
+                      <TextField
+                        label="Nationality"
+                        value={form.nationality ?? ""}
+                        onChange={(value) => setForm({ ...form, nationality: value })}
+                      />
+                      <TextField
+                        label="Club or team"
+                        value={form.clubOrTeam ?? ""}
+                        onChange={(value) => setForm({ ...form, clubOrTeam: value })}
+                      />
+                      <TextField
+                        label="Preferred language"
+                        value={form.preferredLanguage ?? ""}
+                        onChange={(value) => setForm({ ...form, preferredLanguage: value })}
+                      />
+                    </div>
+                  </>
+                ) : null}
+                {show("identity") ? (
+                  <>
+                    <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                      {(
+                        [
+                          ["birthCountry", "Country of birth"],
+                          ["previousClub", "Previous club or team"],
+                          ["coach", "Coach"],
+                          ["manager", "Manager"],
+                          ["runningAgeCategory", "Running age category"],
+                        ] as const
+                      ).map(([field, label]) => (
+                        <TextField
+                          key={field}
+                          label={label}
+                          value={form.profileDetails?.[field] ?? ""}
+                          onChange={(value) =>
+                            setForm({
+                              ...form,
+                              profileDetails: {
+                                ...readProfileDetails(form.profileDetails),
+                                [field]: value,
+                              },
+                            })
+                          }
+                          help={
+                            field === "runningAgeCategory"
+                              ? "Published independently of your birthday, e.g. M45 or W40. Update when your category changes."
+                              : field === "coach"
+                                ? "You can also add a coach for each sport below."
+                                : undefined
+                          }
+                        />
+                      ))}
+                      <SelectField
+                        label="Birthday display on public profile"
+                        value={form.profileDetails?.birthdayVisibility ?? "hidden"}
+                        options={[
+                          ["hidden", "Do not display"],
+                          ["day-month", "Day and month only"],
+                          ["full", "Full date of birth"],
+                        ]}
+                        onChange={(value) =>
+                          setForm({
+                            ...form,
+                            profileDetails: {
+                              ...readProfileDetails(form.profileDetails),
+                              birthdayVisibility: value as "hidden" | "day-month" | "full",
+                            },
+                          })
+                        }
+                      />
+                    </div>
+                    <label className="mt-4 flex items-start gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        checked={form.profileDetails?.acceptContact ?? false}
+                        onChange={(event) =>
+                          setForm({
+                            ...form,
+                            profileDetails: {
+                              ...readProfileDetails(form.profileDetails),
+                              acceptContact: event.target.checked,
+                            },
+                          })
+                        }
+                        className="mt-1"
+                      />
+                      <span>
+                        I am open to being contacted about my athlete profile.
+                        <span className="block text-xs text-muted">
+                          Shows your contact preference on your public profile. Your email stays
+                          private; this is separate from marketing consent.
+                        </span>
+                      </span>
+                    </label>
+                  </>
+                ) : null}
+                {show("matching") ? (
+                  <>
+                    <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-fg">
+                      <SearchCheck className="size-4 text-accent" aria-hidden="true" /> Find your
+                      previous results
+                      <OptionalLabel />
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-muted">
+                      These fields stay private. ATHRECS uses them only to suggest possible Power of
+                      10, World Athletics or official athletics result pages. Nothing is linked
+                      until you claim it.
+                    </p>
+                    <div className="mt-3 grid gap-4 md:grid-cols-2">
+                      <CsvField
+                        label="Previous or known-as names"
+                        values={form.previousNames ?? []}
+                        onChange={(previousNames) => setForm({ ...form, previousNames })}
+                        placeholder="Maiden name, nickname, previous racing name"
+                      />
+                      {
+                        <TextField
+                          label="parkrun barcode"
+                          value={form.parkrunId ?? ""}
+                          onChange={(value) => setForm({ ...form, parkrunId: value })}
+                          help="The number printed on your parkrun barcode, without A."
+                        />
+                      }
+                      <TextField
+                        label="Athletics URN"
+                        value={form.athleticsUrn ?? ""}
+                        onChange={(value) => setForm({ ...form, athleticsUrn: value })}
+                        help="England Athletics, Scottish Athletics, Welsh Athletics or Athletics NI URN."
+                      />
+                      <TextField
+                        label="Power of 10 profile URL"
+                        value={form.powerOf10Url ?? ""}
+                        onChange={(value) => setForm({ ...form, powerOf10Url: value })}
+                        placeholder="https://www.thepowerof10.info/athletes/profile.aspx?athleteid="
+                      />
+                      <TextField
+                        label="World Athletics profile URL"
+                        value={form.worldAthleticsUrl ?? ""}
+                        onChange={(value) => setForm({ ...form, worldAthleticsUrl: value })}
+                        placeholder="https://worldathletics.org/athletes/"
+                      />
+                    </div>
+                    <p className="mt-5 text-sm font-semibold text-fg">A race you know you ran</p>
+                    <p className="mt-1 text-xs text-subtle">
+                      One distinctive race helps Grok tell you apart from other athletes with the
+                      same name.
+                    </p>
+                    <div className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                      <TextField
+                        label="Event name"
+                        value={form.fingerprintEvent ?? ""}
+                        onChange={(value) => setForm({ ...form, fingerprintEvent: value })}
+                        placeholder={
+                          IS_ATHRECS_SITE ? "British Athletics Championships" : "London Marathon"
+                        }
+                      />
+                      <TextField
+                        label="Year"
+                        value={form.fingerprintYear ?? ""}
+                        onChange={(value) => setForm({ ...form, fingerprintYear: value })}
+                        placeholder="2024"
+                      />
+                      <TextField
+                        label="Distance"
+                        value={form.fingerprintDistance ?? ""}
+                        onChange={(value) => setForm({ ...form, fingerprintDistance: value })}
+                        placeholder={IS_ATHRECS_SITE ? "100m" : "Marathon"}
+                      />
+                      <TextField
+                        label="Finish time"
+                        value={form.fingerprintTime ?? ""}
+                        onChange={(value) => setForm({ ...form, fingerprintTime: value })}
+                        placeholder="3:21:14"
+                      />
+                    </div>
+                  </>
+                ) : null}
+              </AccountSection>
+            ) : null}
+
+            {show("sports") ? (
+              <AccountSection
+                icon={Goal}
+                title="Sports and training"
+                description={
+                  IS_ATHRECS_SITE
+                    ? "Add every sport you take part in, with disciplines, distances, training and goals."
+                    : "Add every sport that is relevant to you, then optionally describe disciplines, distances, training and goals."
+                }
+                optional
+              >
+                <ChoiceGrid
+                  label="Your sports"
+                  choices={[...ACCOUNT_SPORTS]}
+                  selected={visibleSports.map((sport) => sport.sportCode)}
+                  onChange={(codes) => {
+                    const hiddenSports = IS_ATHRECS_SITE
+                      ? form.sports.filter((sport) => !ACCOUNT_SPORT_SET.has(sport.sportCode))
+                      : [];
+                    const hasHiddenPrimary = hiddenSports.some((sport) => sport.isPrimary);
+                    const nextVisibleSports = codes.map((code, index) => {
+                      const current = form.sports.find((sport) => sport.sportCode === code);
+                      return (
+                        current ??
+                        emptySport(code as AthleteSportCode, index === 0 && !hasHiddenPrimary)
+                      );
+                    });
+                    setForm({ ...form, sports: [...hiddenSports, ...nextVisibleSports] });
+                  }}
                 />
-              ))}
-            </div>
-          ) : (
-            <p className="mt-4 rounded-lg border border-dashed border-border p-4 text-sm text-muted">
-              {IS_ATHRECS_SITE
-                ? "No sport selected yet. You can save the account without adding one."
-                : "No sport selected yet. You can save the account without adding one."}
-            </p>
-          )}
-        </AccountSection>
+                {visibleSports.length ? (
+                  <div className="mt-5 grid gap-4">
+                    {visibleSports.map((sport) => (
+                      <SportEditor
+                        key={sport.sportCode}
+                        sport={sport}
+                        onChange={(next) =>
+                          setForm({
+                            ...form,
+                            sports: form.sports.map((item) =>
+                              item.sportCode === sport.sportCode
+                                ? next
+                                : next.isPrimary
+                                  ? { ...item, isPrimary: false }
+                                  : item,
+                            ),
+                          })
+                        }
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <p className="mt-4 rounded-lg border border-dashed border-border p-4 text-sm text-muted">
+                    {IS_ATHRECS_SITE
+                      ? "No sport selected yet. You can save the account without adding one."
+                      : "No sport selected yet. You can save the account without adding one."}
+                  </p>
+                )}
+              </AccountSection>
+            ) : null}
 
-        <ProductSection
-          icon={Dumbbell}
-          title="Equipment"
-          description={
-            IS_ATHRECS_SITE
-              ? "What equipment do you use for your sports?"
-              : "What equipment do you use for your sports?"
-          }
-          choices={EQUIPMENT}
-          selected={form.preferences.equipmentItems}
-          onSelected={(value) => updatePreference("equipmentItems", value)}
-          brandLabel="Brands used"
-          brands={form.preferences.equipmentBrands}
-          onBrands={(value) => updatePreference("equipmentBrands", value)}
-          extraLabel="Models used"
-          extras={form.preferences.equipmentModels}
-          onExtras={(value) => updatePreference("equipmentModels", value)}
-          notes={form.preferences.equipmentNotes}
-          onNotes={(value) => updatePreference("equipmentNotes", value)}
-        />
+            {show("equipment") ? (
+              <ProductSection
+                icon={Dumbbell}
+                title="Equipment"
+                description={
+                  IS_ATHRECS_SITE
+                    ? "What equipment do you use for your sports?"
+                    : "What equipment do you use for your sports?"
+                }
+                choices={EQUIPMENT}
+                selected={form.preferences.equipmentItems}
+                onSelected={(value) => updatePreference("equipmentItems", value)}
+                brandLabel="Brands used"
+                brands={form.preferences.equipmentBrands}
+                onBrands={(value) => updatePreference("equipmentBrands", value)}
+                extraLabel="Models used"
+                extras={form.preferences.equipmentModels}
+                onExtras={(value) => updatePreference("equipmentModels", value)}
+                notes={form.preferences.equipmentNotes}
+                onNotes={(value) => updatePreference("equipmentNotes", value)}
+              />
+            ) : null}
 
-        <ProductSection
-          icon={Utensils}
-          title="Sports nutrition"
-          description="Products you choose around training and racing. Do not include medical diagnoses."
-          choices={NUTRITION}
-          selected={form.preferences.nutritionProducts}
-          onSelected={(value) => updatePreference("nutritionProducts", value)}
-          brandLabel="Nutrition brands used"
-          brands={form.preferences.nutritionBrands}
-          onBrands={(value) => updatePreference("nutritionBrands", value)}
-          notes={form.preferences.nutritionNotes}
-          onNotes={(value) => updatePreference("nutritionNotes", value)}
-        />
+            {show("nutrition") ? (
+              <ProductSection
+                icon={Utensils}
+                title="Sports nutrition"
+                description="Products you choose around training and racing. Do not include medical diagnoses."
+                choices={NUTRITION}
+                selected={form.preferences.nutritionProducts}
+                onSelected={(value) => updatePreference("nutritionProducts", value)}
+                brandLabel="Nutrition brands used"
+                brands={form.preferences.nutritionBrands}
+                onBrands={(value) => updatePreference("nutritionBrands", value)}
+                notes={form.preferences.nutritionNotes}
+                onNotes={(value) => updatePreference("nutritionNotes", value)}
+              />
+            ) : null}
 
-        <ProductSection
-          icon={Smartphone}
-          title="Technology"
-          description="Devices, platforms and training apps you use."
-          choices={TECHNOLOGY_DEVICES}
-          selected={form.preferences.technologyDevices}
-          onSelected={(value) => updatePreference("technologyDevices", value)}
-          secondaryChoices={TECHNOLOGY_APPS}
-          secondaryLabel="Apps and platforms"
-          secondarySelected={form.preferences.technologyApps}
-          onSecondary={(value) => updatePreference("technologyApps", value)}
-          brandLabel="Technology brands used"
-          brands={form.preferences.technologyBrands}
-          onBrands={(value) => updatePreference("technologyBrands", value)}
-          notes={form.preferences.technologyNotes}
-          onNotes={(value) => updatePreference("technologyNotes", value)}
-        />
+            {show("technology") ? (
+              <ProductSection
+                icon={Smartphone}
+                title="Technology"
+                description="Devices, platforms and training apps you use."
+                choices={TECHNOLOGY_DEVICES}
+                selected={form.preferences.technologyDevices}
+                onSelected={(value) => updatePreference("technologyDevices", value)}
+                secondaryChoices={TECHNOLOGY_APPS}
+                secondaryLabel="Apps and platforms"
+                secondarySelected={form.preferences.technologyApps}
+                onSecondary={(value) => updatePreference("technologyApps", value)}
+                brandLabel="Technology brands used"
+                brands={form.preferences.technologyBrands}
+                onBrands={(value) => updatePreference("technologyBrands", value)}
+                notes={form.preferences.technologyNotes}
+                onNotes={(value) => updatePreference("technologyNotes", value)}
+              />
+            ) : null}
 
-        <AccountSection
-          icon={Shirt}
-          title="Clothing"
-          description="Optional clothing types, brands, general sizing and fit preference."
-          optional
-        >
-          <ChoiceGrid
-            label="Clothing used"
-            choices={CLOTHING}
-            selected={form.preferences.clothingItems}
-            onChange={(value) => updatePreference("clothingItems", value)}
-          />
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
-            <CsvField
-              label="Clothing brands used"
-              values={form.preferences.clothingBrands}
-              onChange={(value) => updatePreference("clothingBrands", value)}
-            />
-            <TextField
-              label="General clothing size"
-              value={form.preferences.clothingSize}
-              onChange={(value) => updatePreference("clothingSize", value)}
-            />
-            <SelectField
-              label="Preferred fit"
-              value={form.preferences.clothingFit ?? ""}
-              onChange={(value) =>
-                updatePreference(
-                  "clothingFit",
-                  (value || null) as AthleteProductPreferences["clothingFit"],
-                )
-              }
-              options={[
-                ["", "Not specified"],
-                ["relaxed", "Relaxed"],
-                ["regular", "Regular"],
-                ["fitted", "Fitted"],
-                ["compression", "Compression"],
-                ["varies", "Varies"],
-              ]}
-            />
-          </div>
-          <NotesField
-            value={form.preferences.clothingNotes}
-            onChange={(value) => updatePreference("clothingNotes", value)}
-          />
-        </AccountSection>
+            {show("clothing") ? (
+              <AccountSection
+                icon={Shirt}
+                title="Clothing"
+                description="Optional clothing types, brands, general sizing and fit preference."
+                optional
+              >
+                <ChoiceGrid
+                  label="Clothing used"
+                  choices={CLOTHING}
+                  selected={form.preferences.clothingItems}
+                  onChange={(value) => updatePreference("clothingItems", value)}
+                />
+                <div className="mt-5 grid gap-4 md:grid-cols-3">
+                  <CsvField
+                    label="Clothing brands used"
+                    values={form.preferences.clothingBrands}
+                    onChange={(value) => updatePreference("clothingBrands", value)}
+                  />
+                  <TextField
+                    label="General clothing size"
+                    value={form.preferences.clothingSize}
+                    onChange={(value) => updatePreference("clothingSize", value)}
+                  />
+                  <SelectField
+                    label="Preferred fit"
+                    value={form.preferences.clothingFit ?? ""}
+                    onChange={(value) =>
+                      updatePreference(
+                        "clothingFit",
+                        (value || null) as AthleteProductPreferences["clothingFit"],
+                      )
+                    }
+                    options={[
+                      ["", "Not specified"],
+                      ["relaxed", "Relaxed"],
+                      ["regular", "Regular"],
+                      ["fitted", "Fitted"],
+                      ["compression", "Compression"],
+                      ["varies", "Varies"],
+                    ]}
+                  />
+                </div>
+                <NotesField
+                  value={form.preferences.clothingNotes}
+                  onChange={(value) => updatePreference("clothingNotes", value)}
+                />
+              </AccountSection>
+            ) : null}
 
-        <ProductSection
-          icon={HeartPulse}
-          title="Recovery"
-          description="Recovery products and methods you choose to use."
-          choices={RECOVERY}
-          selected={form.preferences.recoveryProducts}
-          onSelected={(value) => updatePreference("recoveryProducts", value)}
-          brandLabel="Recovery brands used"
-          brands={form.preferences.recoveryBrands}
-          onBrands={(value) => updatePreference("recoveryBrands", value)}
-          notes={form.preferences.recoveryNotes}
-          onNotes={(value) => updatePreference("recoveryNotes", value)}
-        />
+            {show("recovery") ? (
+              <ProductSection
+                icon={HeartPulse}
+                title="Recovery"
+                description="Recovery products and methods you choose to use."
+                choices={RECOVERY}
+                selected={form.preferences.recoveryProducts}
+                onSelected={(value) => updatePreference("recoveryProducts", value)}
+                brandLabel="Recovery brands used"
+                brands={form.preferences.recoveryBrands}
+                onBrands={(value) => updatePreference("recoveryBrands", value)}
+                notes={form.preferences.recoveryNotes}
+                onNotes={(value) => updatePreference("recoveryNotes", value)}
+              />
+            ) : null}
 
-        <AccountSection
-          icon={Watch}
-          title="Buying preferences"
-          description="Optional information about how you choose and buy sports products."
-          optional
-        >
-          <ChoiceGrid
-            label="Where you buy"
-            choices={PURCHASE_CHANNELS}
-            selected={form.preferences.purchaseChannels}
-            onChange={(value) => updatePreference("purchaseChannels", value)}
-          />
-          <div className="mt-5">
-            <ChoiceGrid
-              label="What matters when choosing products"
-              choices={PURCHASE_PRIORITIES}
-              selected={form.preferences.purchasePriorities}
-              onChange={(value) => updatePreference("purchasePriorities", value)}
-            />
-          </div>
-          <div className="mt-5 max-w-sm">
-            <SelectField
-              label="Approximate annual sports spend"
-              value={form.preferences.annualSportsSpendBand ?? ""}
-              onChange={(value) =>
-                updatePreference(
-                  "annualSportsSpendBand",
-                  (value || null) as AthleteProductPreferences["annualSportsSpendBand"],
-                )
-              }
-              options={[
-                ["", "Not specified"],
-                ["prefer_not_to_say", "Prefer not to say"],
-                ["under_250", "Under £250"],
-                ["250_499", "£250–£499"],
-                ["500_999", "£500–£999"],
-                ["1000_1999", "£1,000–£1,999"],
-                ["2000_plus", "£2,000 or more"],
-              ]}
-            />
-          </div>
-        </AccountSection>
+            {show("buying") ? (
+              <AccountSection
+                icon={Watch}
+                title="Buying preferences"
+                description="Optional information about how you choose and buy sports products."
+                optional
+              >
+                <ChoiceGrid
+                  label="Where you buy"
+                  choices={PURCHASE_CHANNELS}
+                  selected={form.preferences.purchaseChannels}
+                  onChange={(value) => updatePreference("purchaseChannels", value)}
+                />
+                <div className="mt-5">
+                  <ChoiceGrid
+                    label="What matters when choosing products"
+                    choices={PURCHASE_PRIORITIES}
+                    selected={form.preferences.purchasePriorities}
+                    onChange={(value) => updatePreference("purchasePriorities", value)}
+                  />
+                </div>
+                <div className="mt-5 max-w-sm">
+                  <SelectField
+                    label="Approximate annual sports spend"
+                    value={form.preferences.annualSportsSpendBand ?? ""}
+                    onChange={(value) =>
+                      updatePreference(
+                        "annualSportsSpendBand",
+                        (value || null) as AthleteProductPreferences["annualSportsSpendBand"],
+                      )
+                    }
+                    options={[
+                      ["", "Not specified"],
+                      ["prefer_not_to_say", "Prefer not to say"],
+                      ["under_250", "Under £250"],
+                      ["250_499", "£250–£499"],
+                      ["500_999", "£500–£999"],
+                      ["1000_1999", "£1,000–£1,999"],
+                      ["2000_plus", "£2,000 or more"],
+                    ]}
+                  />
+                </div>
+              </AccountSection>
+            ) : null}
 
-        <AccountSection
-          icon={ShieldCheck}
-          title="Privacy and consent centre"
-          description="Saving your account does not automatically opt you into research or marketing. Change these choices at any time."
-        >
-          <div className="grid gap-3">
-            <ConsentChoice
-              checked={form.consents.performanceInsights}
-              onChange={(checked) =>
-                setForm({ ...form, consents: { ...form.consents, performanceInsights: checked } })
-              }
-              title="Performance and habit insights"
-              description="Allow ATHRECS to analyse your sport, training and race habits to show you insights."
-            />
-            <ConsentChoice
-              checked={form.consents.personalisation}
-              onChange={(checked) =>
-                setForm({ ...form, consents: { ...form.consents, personalisation: checked } })
-              }
-              title="Personalised ATHRECS experience"
-              description="Allow ATHRECS to use your choices to improve which events and content you see."
-            />
-            <ConsentChoice
-              checked={form.consents.productResearch}
-              onChange={(checked) =>
-                setForm({ ...form, consents: { ...form.consents, productResearch: checked } })
-              }
-              title="Anonymous product research"
-              description="Allow optional kit, nutrition, technology and clothing choices to be used in aggregated research."
-            />
-            <ConsentChoice
-              checked={form.consents.marketing}
-              onChange={(checked) =>
-                setForm({ ...form, consents: { ...form.consents, marketing: checked } })
-              }
-              title="Marketing emails"
-              description="Allow ATHRECS to send relevant news, product information or partner offers by email."
-            />
-          </div>
-          <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-xl border border-accent/30 bg-accent-soft p-4">
-            <input
-              type="checkbox"
-              required
-              checked={form.privacyAcknowledged}
-              onChange={(event) => setForm({ ...form, privacyAcknowledged: event.target.checked })}
-              className="mt-1 size-4 accent-[var(--color-accent)]"
-            />
-            <span>
-              <strong className="block text-sm text-fg">Required privacy acknowledgement</strong>
-              <span className="mt-1 block text-sm leading-5 text-muted">
-                I have read the{" "}
-                <Link to="/privacy" className="font-medium text-accent">
-                  Athlete Account privacy notice
-                </Link>{" "}
-                and understand that required account identity is separate from optional analytics,
-                research and marketing choices.
-              </span>
-            </span>
-          </label>
-        </AccountSection>
+            {show("privacy") ? (
+              <AccountSection
+                icon={ShieldCheck}
+                title="Privacy and consent centre"
+                description="Saving your account does not automatically opt you into research or marketing. Change these choices at any time."
+              >
+                <div className="grid gap-3">
+                  <ConsentChoice
+                    checked={form.consents.performanceInsights}
+                    onChange={(checked) =>
+                      setForm({
+                        ...form,
+                        consents: { ...form.consents, performanceInsights: checked },
+                      })
+                    }
+                    title="Performance and habit insights"
+                    description="Allow ATHRECS to analyse your sport, training and race habits to show you insights."
+                  />
+                  <ConsentChoice
+                    checked={form.consents.personalisation}
+                    onChange={(checked) =>
+                      setForm({ ...form, consents: { ...form.consents, personalisation: checked } })
+                    }
+                    title="Personalised ATHRECS experience"
+                    description="Allow ATHRECS to use your choices to improve which events and content you see."
+                  />
+                  <ConsentChoice
+                    checked={form.consents.productResearch}
+                    onChange={(checked) =>
+                      setForm({ ...form, consents: { ...form.consents, productResearch: checked } })
+                    }
+                    title="Anonymous product research"
+                    description="Allow optional kit, nutrition, technology and clothing choices to be used in aggregated research."
+                  />
+                  <ConsentChoice
+                    checked={form.consents.marketing}
+                    onChange={(checked) =>
+                      setForm({ ...form, consents: { ...form.consents, marketing: checked } })
+                    }
+                    title="Marketing emails"
+                    description="Allow ATHRECS to send relevant news, product information or partner offers by email."
+                  />
+                </div>
+                <label className="mt-5 flex cursor-pointer items-start gap-3 rounded-xl border border-accent/30 bg-accent-soft p-4">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={form.privacyAcknowledged}
+                    onChange={(event) =>
+                      setForm({ ...form, privacyAcknowledged: event.target.checked })
+                    }
+                    className="mt-1 size-4 accent-[var(--color-accent)]"
+                  />
+                  <span>
+                    <strong className="block text-sm text-fg">
+                      Required privacy acknowledgement
+                    </strong>
+                    <span className="mt-1 block text-sm leading-5 text-muted">
+                      I have read the{" "}
+                      <Link to="/privacy" className="font-medium text-accent">
+                        Athlete Account privacy notice
+                      </Link>{" "}
+                      and understand that required account identity is separate from optional
+                      analytics, research and marketing choices.
+                    </span>
+                  </span>
+                </label>
+              </AccountSection>
+            ) : null}
 
-        <div className="sticky bottom-16 z-30 rounded-xl border border-border bg-surface/95 p-4 shadow-lg backdrop-blur-md md:bottom-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p
-              className={cn(
-                "text-sm",
-                message?.includes("saved") ? "text-emerald-700" : "text-muted",
-              )}
-              role="status"
-            >
-              {message ?? "Required: verified email, full name and privacy acknowledgement."}
-            </p>
-            <Button
-              type="submit"
-              disabled={save.isPending || !form.fullName.trim() || !form.privacyAcknowledged}
-            >
-              {save.isPending ? (
-                <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-              ) : (
-                <Save className="size-4" aria-hidden="true" />
-              )}
-              {save.isPending ? "Saving…" : "Save Athlete Account"}
-            </Button>
-          </div>
+            {showForm || (IS_ATHRECS_SITE && isDirty) ? (
+              <div className="sticky bottom-16 z-30 rounded-xl border border-border bg-surface/95 p-4 shadow-lg backdrop-blur-md md:bottom-4">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <p
+                    className={cn(
+                      "text-sm",
+                      message?.includes("saved") ? "text-emerald-700" : "text-muted",
+                    )}
+                    role="status"
+                  >
+                    {message ??
+                      (isDirty
+                        ? "You have unsaved account changes."
+                        : "Account details saved. Choose a section to make changes.")}
+                    {IS_ATHRECS_SITE && !form.fullName.trim() ? (
+                      <>
+                        {" "}
+                        <Link
+                          to="/athlete-account"
+                          search={{ section: "identity" }}
+                          className="text-accent underline"
+                        >
+                          Add your full name.
+                        </Link>
+                      </>
+                    ) : null}
+                    {IS_ATHRECS_SITE && !form.privacyAcknowledged ? (
+                      <>
+                        {" "}
+                        <Link
+                          to="/athlete-account"
+                          search={{ section: "privacy" }}
+                          className="text-accent underline"
+                        >
+                          Complete the privacy acknowledgement.
+                        </Link>
+                      </>
+                    ) : null}
+                  </p>
+                  <Button
+                    type="submit"
+                    disabled={
+                      save.isPending ||
+                      !account.data.emailVerified ||
+                      !form.fullName.trim() ||
+                      !form.privacyAcknowledged
+                    }
+                  >
+                    {save.isPending ? (
+                      <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                    ) : (
+                      <Save className="size-4" aria-hidden="true" />
+                    )}
+                    {save.isPending ? "Saving…" : "Save Athlete Account"}
+                  </Button>
+                </div>
+              </div>
+            ) : null}
+          </form>
+          <PreservedAccountPanel active={show("sharing")}>
+            <section id="profile-visibility" className="space-y-3">
+              <h2 className="font-display text-xl font-semibold">Public or private profile</h2>
+              <p className="text-sm text-muted">
+                Save your account details, then choose whether to publish your profile.
+              </p>
+              <ShareProfileCard />
+            </section>
+          </PreservedAccountPanel>
         </div>
-      </form>
-      <section id="profile-visibility" className="space-y-3">
-        <h2 className="font-display text-xl font-semibold">Public or private profile</h2>
-        <p className="text-sm text-muted">
-          Save your details above, then choose whether to publish your profile.
-        </p>
-        <ShareProfileCard />
-      </section>
+      </div>
     </div>
   );
+}
+
+// Visit each independently saved editor on demand, then retain its draft when
+// navigating between sections. No personal data is stored in browser storage.
+function PreservedAccountPanel({
+  active,
+  children,
+}: {
+  active: boolean;
+  children: React.ReactNode;
+}) {
+  const [visited, setVisited] = useState(active);
+  useEffect(() => {
+    if (active) setVisited(true);
+  }, [active]);
+  if (!active && !visited) return null;
+  return <div hidden={!active}>{children}</div>;
 }
 
 function AccountHero() {

@@ -1,0 +1,51 @@
+name: Athlete account navigation
+on:
+  pull_request:
+    paths:
+      - 'src/routes/athlete-account.tsx'
+      - 'src/components/athletes/Account*.tsx'
+      - 'src/components/athletes/AthleteResultsSection.tsx'
+      - 'src/components/athletes/PotentialResultMatchesPanel.tsx'
+      - 'src/components/athletes/ProfileConnectionsPanel.tsx'
+      - 'src/lib/athrecs/account-sections.ts'
+      - 'scripts/verify-account-panel-ui.mjs'
+      - '.github/workflows/athlete-account-navigation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: account-navigation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Lint changed account files
+        run: npx eslint src/routes/athlete-account.tsx src/components/athletes/Account*.tsx src/components/athletes/AthleteResultsSection.tsx src/components/athletes/PotentialResultMatchesPanel.tsx src/components/athletes/ProfileConnectionsPanel.tsx src/lib/athrecs/account-sections.ts scripts/verify-account-panel-ui.mjs
+      - name: Install isolated browser test dependency
+        run: npm install --prefix "$RUNNER_TEMP/account-browser" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
+      - name: Install browser
+        run: node "$RUNNER_TEMP/account-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Account navigation, race controls and mobile layout
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
+        run: node scripts/verify-account-panel-ui.mjs
+      - name: RunRecs account regression
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
+        run: node scripts/verify-account-panel-ui.mjs --runrecs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: account-navigation-screenshots
+          path: artifacts/account-sidebar-*.png
+          if-no-files-found: ignore
+          retention-days: 7
