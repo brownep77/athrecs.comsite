@@ -100,6 +100,8 @@ for (const race of ROAD_MARATHONS) {
     graph.filter((item) => item["@type"] === "SportsEvent").length,
     upcomingRoadEditions(race, now).length,
   );
+  for (const event of graph.filter((item) => item["@type"] === "SportsEvent"))
+    assert.equal(event.eventStatus, "https://schema.org/EventScheduled", race.slug);
   assert.equal(graph.find((item) => item["@type"] === "FAQPage").mainEntity.length, 4);
   assert(head.links[0].href.endsWith(`/running/races/${race.slug}`));
   assert.equal(upcomingRoadEditions(race, "2028-01-02T12:00:00Z").length, 0);
@@ -157,6 +159,22 @@ for (const instant of ["2027-01-01T21:59:59Z", "2027-01-01T22:00:00Z"]) {
 }
 assert.equal(upcomingRoadEditions(twoDays, "2027-04-25T22:59:59Z").length, 1);
 assert.equal(upcomingRoadEditions(twoDays, "2027-04-25T23:00:00Z").length, 0);
+// Keep status coverage deterministic even after all catalogue dates have expired.
+for (const race of [sample, twoDays]) {
+  const endDate = race.editions[0].endDate ?? race.editions[0].date;
+  const graph = JSON.parse(roadRaceHead(race, `${endDate}T12:00:00Z`).scripts[0].children)[
+    "@graph"
+  ];
+  const events = graph.filter((item) => item["@type"] === "SportsEvent");
+  assert.equal(events.length, 1);
+  assert.equal(events[0].eventStatus, "https://schema.org/EventScheduled");
+  assert.equal(events[0].startDate, race.editions[0].date);
+  assert.equal(events[0].endDate, endDate);
+  const expiredGraph = JSON.parse(roadRaceHead(race, "2028-01-02T12:00:00Z").scripts[0].children)[
+    "@graph"
+  ];
+  assert.equal(expiredGraph.filter((item) => item["@type"] === "SportsEvent").length, 0);
+}
 for (const [zone, date, expected] of [
   ["Europe/London", "2027-03-28T12:00:00Z", "2027-03-28T23:00:00Z"],
   ["America/New_York", "2027-03-14T12:00:00Z", "2027-03-15T04:00:00Z"],
