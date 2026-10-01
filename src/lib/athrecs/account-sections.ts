@@ -51,7 +51,7 @@ export function validateAccountSearch(search: Record<string, unknown>): {
   return typeof section === "string" &&
     ACCOUNT_SECTION_GROUPS.some((group) => group.items.some((item) => item.id === section))
     ? { section: section as AccountSectionId }
-    : {};
+    : { section: undefined };
 }
 
 export function isAccountFormSection(section: AccountSectionId): boolean {

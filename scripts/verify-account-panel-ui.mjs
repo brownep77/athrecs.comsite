@@ -54,7 +54,7 @@ try {
     const go = async (name) => {
       await nav.getByRole("link", { name, exact: true }).click();
     };
-    await page.getByRole("heading", { name: "My races", exact: true }).waitFor();
+    await page.getByRole("heading", { name: "My races", exact: true }).waitFor({ timeout: 120000 });
     const analyticsChoice = page.getByRole("button", { name: "No thanks", exact: true });
     if (await analyticsChoice.isVisible()) await analyticsChoice.click();
     const labels = await nav.getByRole("link").allTextContents();

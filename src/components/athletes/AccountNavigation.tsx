@@ -20,8 +20,8 @@ export function AccountNavigation({
     (item) => item.id === active,
   )?.label;
   return (
-    <aside className="self-start rounded-xl border border-border bg-surface shadow-card lg:sticky lg:top-24">
-      <div className="hidden border-b border-border p-4 lg:block">
+    <aside className="self-start rounded-xl border border-border bg-surface shadow-card lg:sticky lg:top-24 lg:flex lg:max-h-[calc(100dvh-12rem)] lg:flex-col">
+      <div className="hidden shrink-0 border-b border-border p-4 lg:block">
         <UserRound className="mb-2 size-6 text-accent" aria-hidden="true" />
         <p className="break-words font-semibold text-fg">{name}</p>
         <AthleteId number={athleteNumber} className="mt-1 text-muted" />
@@ -47,7 +47,7 @@ export function AccountNavigation({
         id="athlete-account-navigation"
         aria-label="Athlete profile sections"
         className={cn(
-          "space-y-4 p-3 lg:block lg:max-h-[calc(100dvh-13rem)] lg:overflow-y-auto",
+          "space-y-4 p-3 lg:block lg:min-h-0 lg:overflow-y-auto",
           !expanded && "hidden",
         )}
       >
