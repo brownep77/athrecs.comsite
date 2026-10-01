@@ -59,7 +59,7 @@ export function AccountRaces({
     );
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-5 md:[&_td[data-label=Actions]]:sticky md:[&_td[data-label=Actions]]:right-0 md:[&_td[data-label=Actions]]:bg-surface md:[&_th:last-child]:sticky md:[&_th:last-child]:right-0 md:[&_th:last-child]:bg-elevated">
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4">
         <div>
           <h2 className="font-display text-xl font-semibold">My races</h2>

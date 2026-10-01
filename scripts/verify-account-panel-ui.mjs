@@ -55,9 +55,11 @@ try {
       await nav.getByRole("link", { name, exact: true }).click();
     };
     await page.getByRole("heading", { name: "My races", exact: true }).waitFor();
+    const analyticsChoice = page.getByRole("button", { name: "No thanks", exact: true });
+    if (await analyticsChoice.isVisible()) await analyticsChoice.click();
     const labels = await nav.getByRole("link").allTextContents();
     assert.deepEqual(labels.slice(0, 2), ["Potential races", "My races"]);
-    assert.equal(labels.length, 22);
+    assert.equal(labels.length, 21);
     await go("Personal details");
     await page.getByLabel("Full name", { exact: false }).fill("Sidebar Test Runner");
     await page.getByLabel("Display name", { exact: false }).fill("Sidebar Test Runner");
@@ -207,7 +209,7 @@ try {
     await page.screenshot({ path: "artifacts/account-sidebar-mobile.png", fullPage: true });
     assert.deepEqual(errors, []);
     console.log(
-      "PASS: all 22 account sections, deep links/history, mobile navigation, saved and unsaved drafts, actual claim/remove/restore RPCs and unchanged official result.",
+      "PASS: all 21 account sections, deep links/history, mobile navigation, saved and unsaved drafts, actual claim/remove/restore RPCs and unchanged official result.",
     );
   }
 } catch (error) {

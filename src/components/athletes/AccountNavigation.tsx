@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronDown, UserRound } from "lucide-react";
 import { ACCOUNT_SECTION_GROUPS, type AccountSectionId } from "@/lib/athrecs/account-sections";
@@ -15,6 +15,7 @@ export function AccountNavigation({
   athleteNumber: string;
 }) {
   const [expanded, setExpanded] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
   const activeLabel = ACCOUNT_SECTION_GROUPS.flatMap((group) => [...group.items]).find(
     (item) => item.id === active,
   )?.label;
@@ -26,6 +27,7 @@ export function AccountNavigation({
         <AthleteId number={athleteNumber} className="mt-1 text-muted" />
       </div>
       <button
+        ref={menuButton}
         type="button"
         aria-expanded={expanded}
         aria-controls="athlete-account-navigation"
@@ -61,9 +63,11 @@ export function AccountNavigation({
                     to="/athlete-account"
                     search={{ section: item.id }}
                     hash=""
-                    resetScroll={false}
                     aria-current={active === item.id ? "page" : undefined}
-                    onClick={() => setExpanded(false)}
+                    onClick={() => {
+                      if (expanded) menuButton.current?.focus();
+                      setExpanded(false);
+                    }}
                     className={cn(
                       "block rounded-lg border-l-2 px-3 py-2.5 text-sm no-underline transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent",
                       active === item.id
