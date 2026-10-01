@@ -21,13 +21,15 @@ import {
   featuredRaceAthletes,
   featuredRaceResults,
 } from "@/data/featured-race-results-2026-09-27";
+import { featuredWaHistories } from "@/data/featured-wa-histories-2026-09-30";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-09-30-v1";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-01-v1";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
 const FEATURED_RACE_RESULTS_VERSION = "berlin-london-2026-09-27-v1";
+const FEATURED_WA_HISTORIES_VERSION = "featured-wa-histories-2026-09-30-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 const DEV_PREVIEW_USER_ID = "dev-user";
@@ -2045,9 +2047,272 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
   `;
 }
 
+/** Career rows from World Athletics, only for profiles confirmed on the 27 September 2026 race. */
+async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'featured_wa_histories_version' limit 1
+  `;
+  if (meta[0]?.value === FEATURED_WA_HISTORIES_VERSION) return;
+  // The 27 September card result is already stored on the catalogue event.
+  const histories = featuredWaHistories.filter(
+    (row) => !(row.date === "2026-09-27" && (row.distance === "Marathon" || row.distance === "10K")),
+  );
+
+  async function rowsForSlugs<T>(
+    build: (placeholders: string) => string,
+    slugs: string[],
+  ): Promise<T[]> {
+    const found: T[] = [];
+    for (let index = 0; index < slugs.length; index += 80) {
+      const part = slugs.slice(index, index + 80);
+      if (!part.length) continue;
+      const placeholders = part.map((_, i) => `$${i + 1}`).join(", ");
+      found.push(...(await sql.query<T>(build(placeholders), part)));
+    }
+    return found;
+  }
+
+  const raceTag = new Map(
+    featuredRaceResults.map((result) => [
+      result.athleteSlug,
+      result.eventSlug === "berlin-marathon" ? "berlin-2026" : "london-10000-2026",
+    ]),
+  );
+  const lookup = new Map<string, string>();
+  for (const row of histories) {
+    const tag = raceTag.get(row.athleteSlug) ?? "berlin-2026";
+    const fallback = `${row.athleteSlug}-${tag}`.slice(0, 80).replace(/-+$/g, "");
+    lookup.set(row.athleteSlug, fallback);
+  }
+  const knownAthletes = await rowsForSlugs<{
+    id: number;
+    slug: string;
+    profile_visibility: string;
+  }>(
+    (placeholders) =>
+      `select id, slug, profile_visibility from athletes where slug in (${placeholders})`,
+    [...new Set([...lookup.keys(), ...lookup.values()])],
+  );
+  const athleteBySlug = new Map(knownAthletes.map((row) => [row.slug, row]));
+  const athleteId = new Map<string, number>();
+  for (const [source, fallback] of lookup) {
+    const suffix = athleteBySlug.get(fallback);
+    const clean = athleteBySlug.get(source);
+    const chosen =
+      suffix?.profile_visibility === "public" ? suffix : clean ?? suffix;
+    if (chosen) athleteId.set(source, chosen.id);
+  }
+
+  const events = new Map<string, (typeof histories)[number]>();
+  for (const row of histories) {
+    if (!athleteId.has(row.athleteSlug) || events.has(row.eventSlug)) continue;
+    events.set(row.eventSlug, row);
+  }
+  const eventIdBySlug = new Map<string, number>();
+  const existingEvents = await rowsForSlugs<{ id: number; slug: string }>(
+    (placeholders) => `select id, slug from events where slug in (${placeholders})`,
+    [...events.keys()],
+  );
+  for (const row of existingEvents) eventIdBySlug.set(row.slug, Number(row.id));
+  const missingEvents = [...events.values()].filter((row) => !eventIdBySlug.has(row.eventSlug));
+  for (let index = 0; index < missingEvents.length; index += 40) {
+    const batch = missingEvents.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const fields = [
+          row.eventSlug,
+          row.eventName,
+          row.sport,
+          row.country || "",
+          "",
+          row.city || "",
+          "",
+          row.surface,
+          row.eventName,
+          row.eventName,
+          "",
+          "",
+          false,
+          row.sourceUrl,
+        ];
+        return `(${fields
+          .map((value) => {
+            params.push(value);
+            return `$${params.length}`;
+          })
+          .join(", ")})`;
+      })
+      .join(", ");
+    const inserted = await sql.query<{ id: number; slug: string }>(
+      `insert into events (
+        slug, name, sport, country, county, city, area, surface, summary, description,
+        organiser, website, featured, source_url
+      ) values ${values}
+      on conflict (slug) do nothing
+      returning id, slug`,
+      params,
+    );
+    for (const row of inserted) eventIdBySlug.set(row.slug, Number(row.id));
+  }
+  const stillMissing = [...events.keys()].filter((slug) => !eventIdBySlug.has(slug));
+  if (stillMissing.length) {
+    const again = await rowsForSlugs<{ id: number; slug: string }>(
+      (placeholders) => `select id, slug from events where slug in (${placeholders})`,
+      stillMissing,
+    );
+    for (const row of again) eventIdBySlug.set(row.slug, Number(row.id));
+  }
+
+  const editionKey = (eventId: number, date: string, distance: string) =>
+    `${eventId}|${date}|${distance}`;
+  const editionRows = new Map<string, { eventId: number; date: string; distance: string; km: number; sourceUrl: string }>();
+  for (const row of histories) {
+    const id = eventIdBySlug.get(row.eventSlug);
+    const linked = athleteId.get(row.athleteSlug);
+    if (!id || !linked) continue;
+    const key = editionKey(id, row.date, row.distance);
+    if (!editionRows.has(key)) {
+      editionRows.set(key, {
+        eventId: id,
+        date: row.date,
+        distance: row.distance,
+        km: row.distanceKm,
+        sourceUrl: row.sourceUrl,
+      });
+    }
+  }
+  const editionList = [...editionRows.values()];
+  for (let index = 0; index < editionList.length; index += 40) {
+    const batch = editionList.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const fields = [row.eventId, row.date, row.distance, row.km, "Finished", row.sourceUrl, row.sourceUrl];
+        const placeholders = fields.map((value, field) => {
+          params.push(value);
+          const token = `$${params.length}`;
+          return field === 1 ? `${token}::date` : token;
+        });
+        return `(${placeholders.join(", ")})`;
+      })
+      .join(", ");
+    await sql.query(
+      `insert into editions (
+        event_id, event_date, distance_code, distance_km, status, source_url, results_official_url
+      ) values ${values}
+      on conflict (event_id, event_date, distance_code) do nothing`,
+      params,
+    );
+  }
+  const editionId = new Map<string, number>();
+  const eventIds = [...new Set(editionList.map((row) => row.eventId))];
+  for (let index = 0; index < eventIds.length; index += 80) {
+    const part = eventIds.slice(index, index + 80);
+    const placeholders = part.map((_, i) => `$${i + 1}`).join(", ");
+    const rows = await sql.query<{
+      id: number;
+      event_id: number;
+      event_date: string;
+      distance_code: string;
+    }>(
+      `select id, event_id, event_date::text as event_date, distance_code
+       from editions where event_id in (${placeholders})`,
+      part,
+    );
+    for (const row of rows) {
+      editionId.set(
+        editionKey(Number(row.event_id), String(row.event_date).slice(0, 10), row.distance_code),
+        Number(row.id),
+      );
+    }
+  }
+
+  const pending: {
+    editionId: number;
+    athleteId: number;
+    status: string;
+    seconds: number | null;
+    place: number | null;
+    sourceUrl: string;
+    note: string;
+  }[] = [];
+  const seen = new Set<string>();
+  for (const row of histories) {
+    const linkedAthlete = athleteId.get(row.athleteSlug);
+    const linkedEvent = eventIdBySlug.get(row.eventSlug);
+    if (!linkedAthlete || !linkedEvent) continue;
+    const linkedEdition = editionId.get(editionKey(linkedEvent, row.date, row.distance));
+    if (!linkedEdition) continue;
+    const key = `${linkedEdition}|${linkedAthlete}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    pending.push({
+      editionId: linkedEdition,
+      athleteId: linkedAthlete,
+      status: row.status,
+      seconds: row.seconds,
+      place: row.place,
+      sourceUrl: row.sourceUrl,
+      note: row.note,
+    });
+  }
+  if (histories.length > 0 && pending.length === 0) {
+    throw new Error(
+      "Featured Berlin/London profiles were not saved: World Athletics histories did not link to an athlete",
+    );
+  }
+
+  for (let index = 0; index < pending.length; index += 40) {
+    const batch = pending.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const fields = [
+          row.editionId,
+          row.athleteId,
+          row.status,
+          row.seconds,
+          row.place,
+          row.place,
+          "World Athletics",
+          row.sourceUrl,
+          "public",
+          row.note ? JSON.stringify({ note: row.note }) : "{}",
+        ];
+        return `(${fields
+          .map((value, field) => {
+            params.push(value);
+            const token = `$${params.length}`;
+            return field === 9 ? `${token}::jsonb` : token;
+          })
+          .join(", ")})`;
+      })
+      .join(", ");
+    await sql.query(
+      `insert into results (
+        edition_id, athlete_id, status, finish_time_seconds, overall_place, gender_place,
+        result_source, source_url, result_visibility, result_details
+      ) values ${values}
+      on conflict (edition_id, athlete_id) do nothing`,
+      params,
+    );
+  }
+
+  await sql`
+    insert into app_meta (key, value)
+    values ('featured_wa_histories_version', ${FEATURED_WA_HISTORIES_VERSION})
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
 async function catalogueMarkersCurrent(
   sql: Sql,
-  { includePublicFigures = true, includeFeaturedRaces = true } = {},
+  {
+    includePublicFigures = true,
+    includeFeaturedRaces = true,
+    includeFeaturedHistories = true,
+  } = {},
 ): Promise<boolean> {
   const expected = new Map([
     ["seed_version", SEED_VERSION],
@@ -2057,9 +2322,11 @@ async function catalogueMarkersCurrent(
     ["parkrun_through", "2027-12-26"],
     ["athletics_taxonomy_v1", "complete"],
     ["featured_race_results_version", FEATURED_RACE_RESULTS_VERSION],
+    ["featured_wa_histories_version", FEATURED_WA_HISTORIES_VERSION],
   ]);
   if (!includePublicFigures) expected.delete("public_figures_catalogue_version");
   if (!includeFeaturedRaces) expected.delete("featured_race_results_version");
+  if (!includeFeaturedHistories) expected.delete("featured_wa_histories_version");
   const rows = await sql<{ key: string; value: string }>`
     select key, value from app_meta
     where key in (
@@ -2069,7 +2336,8 @@ async function catalogueMarkersCurrent(
       'public_figures_catalogue_version',
       'parkrun_through',
       'athletics_taxonomy_v1',
-      'featured_race_results_version'
+      'featured_race_results_version',
+      'featured_wa_histories_version'
     )
   `;
   const relevantRows = rows.filter((row) => expected.has(row.key));
@@ -2087,10 +2355,12 @@ async function refreshCatalogue(sql: Sql): Promise<void> {
     await catalogueMarkersCurrent(sql, {
       includePublicFigures: false,
       includeFeaturedRaces: false,
+      includeFeaturedHistories: false,
     })
   ) {
     await upsertPublicFigureProfiles(sql);
     await upsertFeaturedRaceResults(sql);
+    await upsertFeaturedWorldAthleticsHistories(sql);
     return;
   }
   await seedCatalogue(sql);
@@ -2111,6 +2381,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   if (await alreadySeeded(sql)) {
     await upsertPublicFigureProfiles(sql);
     await upsertFeaturedRaceResults(sql);
+    await upsertFeaturedWorldAthleticsHistories(sql);
     await ensureDevPreviewAthleteAccount(sql);
     return;
   }
@@ -2126,6 +2397,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   if (g && (g.athletes > 0 || g.results > 0)) {
     await upsertPublicFigureProfiles(sql);
     await upsertFeaturedRaceResults(sql);
+    await upsertFeaturedWorldAthleticsHistories(sql);
     await sql`
       insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
       on conflict (key) do update set value = excluded.value
@@ -2545,6 +2817,7 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   await sql`update athletes set profile_visibility='public', profile_details='{"nationality":"British","birthCountry":"United Kingdom","previousClub":"Norfolk Gazelle","coach":"Paul Evans","birthdayVisibility":"hidden","runningAgeCategory":"M45","acceptContact":false}'::jsonb where slug='paul-browne'`;
   await sql`update results set result_visibility='public' where athlete_id in (select id from athletes where slug='paul-browne')`;
   await upsertFeaturedRaceResults(sql);
+  await upsertFeaturedWorldAthleticsHistories(sql);
   await ensureDevPreviewAthleteAccount(sql);
 }
 

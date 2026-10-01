@@ -22,7 +22,7 @@ const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
-const CURRENT_CLUB_SCAN_CHECKED_AT = "2026-09-30";
+const CURRENT_ENTRY_OPENING_SCAN_CHECKED_AT = "2026-10-01";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 69;
 const NEW_EDITION_COUNT = 72;
@@ -382,18 +382,18 @@ const looeSeries = dailyHalfTenMileSeries.find((series) => series.slug === "looe
 const looeEdition = dailyHalfTenMileEditions.find(
   (edition) => edition.seriesSlug === "looe-10-miler-2027",
 );
-assert(looeSeries && looeEdition, "Looe 10 Miler is missing from the 30 September club scan");
+assert(looeSeries && looeEdition, "Looe 10 Miler is missing from the 1 October entry scan");
 assert.equal(looeEdition.date, "2027-02-28", "Looe 10 Miler has the wrong date");
 assert.equal(looeEdition.distance, "10mi", "Looe 10 Miler has the wrong distance");
 assert.equal(looeEdition.status, "TBC", "Looe entry must remain unopened");
 assert.equal(looeEdition.entryUrl, undefined, "Looe must not expose a premature checkout");
-assert.equal(looeEdition.startTime, undefined, "Looe must not expose an unverified start time");
+assert.equal(looeEdition.startTime, "11:00", "Looe has the wrong verified start time");
 assert.equal(
   looeSeries.source_url,
-  "https://www.looepioneers.co.uk/looe-10-miler-2027.html",
-  "Looe lost its direct organising-club provenance",
+  "https://www.sientries.co.uk/event/looe-10-miler-2027-2027",
+  "Looe lost its current direct-registration provenance",
 );
-assert.match(looeSeries.description, new RegExp(CURRENT_CLUB_SCAN_CHECKED_AT));
+assert.match(looeSeries.description, new RegExp(CURRENT_ENTRY_OPENING_SCAN_CHECKED_AT));
 
 const tadcasterSeries = dailyHalfTenMileSeries.find(
   (series) => series.slug === "tadcaster-10-2026",
@@ -1310,6 +1310,19 @@ for (const slug of [
   const candidate = dailyHalfTenMileResearchQueue.find((item) => item.slug === slug);
   assert(candidate, `${slug} must remain held while its Athletics Ireland permit is pending`);
   assert.match(candidate.reason, /pending approval/, `${slug} lost its permit-pending reason`);
+}
+for (const slug of [
+  "trim-10-mile-road-race-2027",
+  "noreen-mccarthy-memorial-10-mile-2027",
+  "bohermeen-half-marathon-2027",
+  "dublin-city-half-marathon-2027",
+  "irish-life-frank-duffy-10-mile-2027",
+  "irish-life-dublin-half-marathon-2027",
+]) {
+  const candidate = dailyHalfTenMileResearchQueue.find((item) => item.slug === slug);
+  assert(candidate, `${slug} must remain held while its Athletics Ireland permit is pending`);
+  assert.match(candidate.reason, /pending approval/, `${slug} lost its permit-pending reason`);
+  assert.match(candidate.reason, /2026-10-01/, `${slug} lost its current governing-body check date`);
 }
 
 assert.deepEqual(

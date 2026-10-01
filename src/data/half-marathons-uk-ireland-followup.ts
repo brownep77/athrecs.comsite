@@ -710,7 +710,7 @@ export const verifiedHalfMarathonFollowupResearchQueue = [
     date: "2027-06-20",
     country: "Ireland",
     reason:
-      "Checked 2026-09-19: the official registration page confirms the half marathon on 20 June 2027 but still labels the Athletics Ireland permit as pending; 19 June is the children's fun run.",
+      "Checked 2026-10-01: the Athletics Ireland calendar shows approved permit 26/557 for the half marathon on 20 June 2027, but the direct official registration page still labels the permit as pending approval; 19 June is the children's fun run.",
     sourceUrl: "https://eventmaster.ie/event/62vzhEpT5G",
   },
   {

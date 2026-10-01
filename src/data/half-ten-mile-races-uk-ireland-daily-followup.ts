@@ -22,7 +22,7 @@ const CURRENT_GOVERNING_BODY_SCAN_CHECKED_AT = "2026-09-24";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
-const CURRENT_CLUB_SCAN_CHECKED_AT = "2026-09-30";
+const CURRENT_ENTRY_OPENING_SCAN_CHECKED_AT = "2026-10-01";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -58,18 +58,20 @@ const seeds: RaceSeed[] = [
     name: "Looe 10 Miler 2027",
     date: "2027-02-28",
     distance: "10mi",
+    startTime: "11:00",
     country: "England",
     county: "Cornwall",
     city: "Looe",
     area: "West Looe, Talland and the coastal road around Killigarth and Porthallow",
     surface: "Road",
     organiser: "Looe Pioneers Running Club",
-    url: "https://www.looepioneers.co.uk/looe-10-miler-2027.html",
+    url: "https://www.sientries.co.uk/event/looe-10-miler-2027-2027",
     status: "TBC",
     hasEntry: false,
-    checkedAt: CURRENT_CLUB_SCAN_CHECKED_AT,
+    priceAmount: 20,
+    checkedAt: CURRENT_ENTRY_OPENING_SCAN_CHECKED_AT,
     notes:
-      "The organising club's official 2027 page confirms the 10-mile race and 28 February 2027 date. Entries are advertised as opening soon, so no checkout or unverified start time is exposed.",
+      "The direct official registration page confirms the 10-mile race, 28 February 2027 date, 11:00 start and £20 affiliated / £22 unaffiliated fees. It states that entries open at 09:00 on 1 October 2026, so the pre-opening scan does not expose a checkout.",
   },
   {
     slug: "temple-newsam-10-2027",
@@ -2144,6 +2146,54 @@ export const dailyHalfTenMileResearchQueue = [
     country: "Ireland",
     reason:
       "The official Athletics Ireland calendar confirms a running festival with both 10-mile and half-marathon distances but still labels the permit as pending approval.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "trim-10-mile-road-race-2027",
+    date: "2027-01-31",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval and registration as Open Soon.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "noreen-mccarthy-memorial-10-mile-2027",
+    date: "2027-02-14",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-01: the official Athletics Ireland calendar and event-specific registration record confirm the 10-mile date but still label the permit as pending approval.",
+    sourceUrl: "https://eventmaster.ie/event/eEEWcrKF8x",
+  },
+  {
+    slug: "bohermeen-half-marathon-2027",
+    date: "2027-03-07",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "dublin-city-half-marathon-2027",
+    date: "2027-05-02",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon; once approved, this should enrich the existing Dublin City Half card.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "irish-life-frank-duffy-10-mile-2027",
+    date: "2027-08-14",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval and registration as Open Soon.",
+    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
+  },
+  {
+    slug: "irish-life-dublin-half-marathon-2027",
+    date: "2027-09-19",
+    country: "Ireland",
+    reason:
+      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the half-marathon date but still labels the permit as pending approval and registration as Open Soon.",
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
 ] as const;

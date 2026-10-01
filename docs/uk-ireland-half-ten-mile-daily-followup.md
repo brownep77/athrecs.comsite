@@ -122,6 +122,12 @@ Brixton on 18 July and Nantwich on 12 December remain in research because each p
 
 ## 30 September 2026 scan
 
-The official Looe Pioneers Running Club page confirms the Looe 10 Miler for 28 February 2027. The new canonical card records the verified 10-mile road race and organiser provenance without a checkout or start time while the club says entries are opening soon.
+The official Looe Pioneers Running Club page confirms the Looe 10 Miler for 28 February 2027. The new canonical card initially recorded the verified 10-mile road race and organiser provenance without a checkout or start time while the club said entries were opening soon.
 
-RunThrough's live sitemap contained no other missing in-scope 2027 half-marathon or 10-mile page after canonical source matching. EntryCentral and RaceBest candidates were already represented or held, and Athletics Ireland's approved and permit-pending fixtures remain unchanged.
+## 1 October entry-opening and governing-body recheck
+
+The direct official Looe registration page now confirms an 11:00 start and £20 affiliated / £22 unaffiliated fees for 28 February 2027. It states that entries open at 09:00 on 1 October, so the pre-opening scan enriches the canonical card with the verified timetable and source while continuing to hide checkout.
+
+Athletics Ireland also added or clarified six 2027 fixtures: Trim 10 Mile, Noreen McCarthy Memorial 10 Mile, Bohermeen Half, Dublin City Half, Irish Life Frank Duffy 10 Mile and Irish Life Dublin Half. All remain in research because their permits are pending; Dublin City will enrich its existing canonical card when approved. Waterford Viking remains held because the governing calendar shows approved permit 26/557 while the direct registration record still says permit pending.
+
+RunThrough's live sitemap contained no other missing in-scope 2027 half-marathon or 10-mile page after canonical source matching. EntryCentral and RaceBest candidates were already represented or held; the Athletics Ireland changes are recorded above.
