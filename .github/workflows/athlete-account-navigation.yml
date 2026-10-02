@@ -2,6 +2,8 @@ name: Athlete account navigation
 on:
   pull_request:
     paths:
+      - 'package.json'
+      - 'package-lock.json'
       - 'src/routes/athlete-account.tsx'
       - 'src/components/athletes/Account*.tsx'
       - 'src/components/athletes/AthleteResultsSection.tsx'
