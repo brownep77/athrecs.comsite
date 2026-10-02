@@ -46,6 +46,7 @@ import {
   ATHLETE_SPORTS,
   getMyAthleteAccount,
   saveMyAthleteAccount,
+  saveMyAthleteRacingName,
   type AthleteAccountData,
   type AthleteAccountInput,
   type AthleteExperienceLevel,
@@ -246,9 +247,9 @@ function AthleteAccountPage() {
             Sign in or create your account
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
-            Use your email address or choose an available sign-in provider to create your ATHRECS
-            Athlete Account. Gmail, Outlook, Hotmail, Yahoo, iCloud and other email addresses are
-            welcome.
+            {IS_ATHRECS_SITE
+              ? "Start with your email or an available sign-in provider. No date of birth or address needed. You can add your athlete details later."
+              : "Use your email address or choose an available sign-in provider to create your ATHRECS Athlete Account. Gmail, Outlook, Hotmail, Yahoo, iCloud and other email addresses are welcome."}
           </p>
           <Button
             className="mt-5"
@@ -309,6 +310,7 @@ function SignedInAccount() {
       setForm(lastLoadedForm.current);
       setMessage("Your Athlete Account has been saved.");
       queryClient.setQueryData(["my-athlete-account"], updated);
+      void queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] });
     },
     onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
   });
@@ -317,6 +319,26 @@ function SignedInAccount() {
     queryKey: ["available-auth-methods"],
     queryFn: () => getAvailableAuthMethods(),
     staleTime: 60_000,
+  });
+  const saveRacingName = useMutation({
+    mutationFn: (fullName: string) =>
+      saveMyAthleteRacingName({ data: { fullName, privacyAcknowledged: true } }),
+    onSuccess: (updated) => {
+      lastLoadedForm.current = accountToForm(updated);
+      // Preserve unrelated edits as drafts; this action only commits the name.
+      setForm(
+        (current) =>
+          current && {
+            ...current,
+            fullName: updated.fullName,
+            privacyAcknowledged: updated.privacyAcknowledged,
+          },
+      );
+      setMessage("Your racing name has been saved.");
+      queryClient.setQueryData(["my-athlete-account"], updated);
+      void queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] });
+    },
+    onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
   });
   const verifyEmail = useMutation({
     mutationFn: async () => {
@@ -441,7 +463,65 @@ function SignedInAccount() {
             </section>
           ) : null}
 
-          {show("potential") ? <PotentialResultMatchesPanel /> : null}
+          {show("potential") ? (
+            IS_ATHRECS_SITE && !account.data.fullName.trim() ? (
+              <section className="rounded-xl border border-border bg-surface p-5 shadow-card">
+                <h2 className="font-display text-xl font-semibold text-fg">Find my race results</h2>
+                <p className="mt-2 text-sm text-muted">
+                  What name do you race under? We’ll look for possible matches already on AthRecs.
+                  You decide which results belong to you. Nothing is published automatically.
+                </p>
+                <form
+                  className="mt-4 max-w-md space-y-4"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    saveRacingName.mutate(form.fullName);
+                  }}
+                >
+                  <TextField
+                    label="Name used in race results"
+                    required
+                    autoComplete="name"
+                    value={form.fullName}
+                    onChange={(fullName) => setForm({ ...form, fullName })}
+                  />
+                  <p className="text-xs text-muted">
+                    By saving your name, you acknowledge our{" "}
+                    <Link to="/privacy" className="font-semibold text-accent underline">
+                      privacy notice
+                    </Link>
+                    . No date of birth or address needed.
+                  </p>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Button
+                      type="submit"
+                      disabled={
+                        saveRacingName.isPending ||
+                        !account.data.emailVerified ||
+                        form.fullName.trim().length < 2
+                      }
+                    >
+                      {saveRacingName.isPending ? "Finding results…" : "Save name and find results"}
+                    </Button>
+                    <Link
+                      to="/athlete-account"
+                      search={{ section: "races" }}
+                      className="text-sm font-semibold text-accent"
+                    >
+                      Skip for now
+                    </Link>
+                  </div>
+                  {message ? (
+                    <p role={save.isError ? "alert" : "status"} className="text-sm text-muted">
+                      {message}
+                    </p>
+                  ) : null}
+                </form>
+              </section>
+            ) : (
+              <PotentialResultMatchesPanel />
+            )
+          ) : null}
           {IS_ATHRECS_SITE && ["races", "achievements", "progress"].includes(activeSection) ? (
             <AccountRaces
               account={account.data}
@@ -619,6 +699,11 @@ function SignedInAccount() {
                         value={form.dateOfBirth ?? ""}
                         onChange={(value) => setForm({ ...form, dateOfBirth: value })}
                         autoComplete="bday"
+                        help={
+                          IS_ATHRECS_SITE
+                            ? "Optional. Add only if needed to help distinguish your results from another athlete’s. Hidden unless you choose to share your birthday below."
+                            : undefined
+                        }
                       />
                     </div>
                   </>
@@ -654,6 +739,11 @@ function SignedInAccount() {
                         value={form.postcode ?? ""}
                         onChange={(value) => setForm({ ...form, postcode: value })}
                         autoComplete="postal-code"
+                        help={
+                          IS_ATHRECS_SITE
+                            ? "Optional and private. Only add it if needed for a specific identity check. A street address is not required."
+                            : undefined
+                        }
                       />
                       <TextField
                         label="Nationality"

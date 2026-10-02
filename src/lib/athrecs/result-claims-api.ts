@@ -427,10 +427,13 @@ export const submitResultClaim = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
-      const users = await tx<{ email: string }>`
-        select "email" as email from "user" where "id" = ${context.userId} limit 1`;
+      const users = await tx<{ email: string; email_verified: boolean }>`
+        select "email" as email, "emailVerified" as email_verified
+        from "user" where "id" = ${context.userId} limit 1`;
       const claimantEmail = users[0]?.email?.trim().toLowerCase();
       if (!claimantEmail) throw new Error("Your signed-in account has no email address");
+      if (!users[0].email_verified)
+        throw new Error("Verify your email before claiming athlete results");
 
       const results = await tx<{
         result_id: number;

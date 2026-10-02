@@ -5,7 +5,12 @@ import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
-    meta: siteGraphMeta({ title: "Athlete account and profile privacy | ATHRECS", description: "Learn how AthRecs handles athlete accounts, profile visibility, result claims, Entry Passport details and preferences.", url: `${SITE_URL}/privacy` }),
+    meta: siteGraphMeta({
+      title: "Athlete account and profile privacy | ATHRECS",
+      description:
+        "Learn how AthRecs handles athlete accounts, profile visibility, result claims, Entry Passport details and preferences.",
+      url: `${SITE_URL}/privacy`,
+    }),
     links: [{ rel: "canonical", href: `${SITE_URL}/privacy` }],
   }),
   component: AthletePrivacyPage,
@@ -51,9 +56,22 @@ function AthletePrivacyPage() {
       <section className="space-y-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-8">
         <NoticeSection title="Information required to operate the account">
           <p>
-            ATHRECS requires your verified email, full name and acknowledgement of this notice.
-            These are used to authenticate you, protect result claims, prevent duplicate ownership
-            and support your account.
+            When email codes are available, you can sign in or create an account with just your
+            email and a one-time code. A name is requested for password sign-up or when you save
+            your athlete details. Saving athlete details requires a verified email and
+            acknowledgement of this notice. These details help authenticate you, protect result
+            claims, prevent duplicate ownership and support your account.
+          </p>
+        </NoticeSection>
+
+        <NoticeSection title="Optional details for identity checks">
+          <p>
+            Date of birth and postcode are not needed to sign in or create an account. Only add them
+            if needed for a specific athlete or result identity check. Date of birth is hidden
+            unless you choose to share it; postcode stays private to you and authorised ATHRECS
+            staff. You can clear either field in My Athlete Account and save the change. We do not
+            ask for a street address. These details can support a review but do not, by themselves,
+            verify an athlete or a race result.
           </p>
         </NoticeSection>
 
@@ -86,6 +104,12 @@ function AthletePrivacyPage() {
         </NoticeSection>
 
         <NoticeSection title="Private result archive and claims">
+          <p className="mb-3">
+            The optional “Find my race results” choice at sign-up opens suggestions from the AthRecs
+            results database. You can add your racing name after signing in. The choice does not
+            publish a profile, claim results, start an external search, or enable analytics or
+            marketing consent.
+          </p>
           <p>
             ATHRECS may hold source-checked race results in a private archive so athletes can find
             and claim their own records after signing in. Ordinary participant lists, names and
@@ -170,7 +194,8 @@ function AthletePrivacyPage() {
         </NoticeSection>
 
         <p className="text-xs text-subtle">
-          Athlete Account notice: 23 August 2026. Partnerships addition: 16 September 2026.
+          Athlete Account notice: 23 August 2026. Partnerships addition: 16 September 2026. Sign-in
+          and optional identity details clarified: 2 October 2026.
         </p>
       </section>
 
