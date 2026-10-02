@@ -1762,7 +1762,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     return filtered.slice(0, limit);
   });
 
-// -- Admin / Grok-assisted imports --
+// -- Admin / catalogue imports --
 export const importFromCsv = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: { csv: string }) => input)
@@ -1781,7 +1781,7 @@ export const importFromJson = createServerFn({ method: "POST" })
     try {
       bundle = JSON.parse(data.json) as ImportBundle;
     } catch {
-      throw new Error("Invalid JSON - paste a Grok export with events[] and/or editions[]");
+      throw new Error("Invalid JSON - paste ATHRECS import data with events[] and/or editions[]");
     }
     return applyImportBundle(bundle);
   });
