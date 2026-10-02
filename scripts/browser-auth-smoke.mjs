@@ -93,7 +93,7 @@ try {
   record("full name field is present", true);
   record("email field is present", true);
   record("password field is present", (await newPasswords.count()) >= 1);
-  record("confirmation field is present", (await newPasswords.count()) >= 2);
+  record("password is entered once on AthRecs sign-up", (await newPasswords.count()) === 1);
   record("email account action is present", true);
 
   await page.screenshot({ path: outPng, fullPage: false });

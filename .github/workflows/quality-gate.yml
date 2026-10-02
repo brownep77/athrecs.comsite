@@ -69,6 +69,12 @@ jobs:
       - name: Email-only sign-in form
         run: node scripts/verify-email-code-ui.mjs
 
+      - name: Quick sign-up and optional result discovery
+        run: |
+          node scripts/verify-quick-signin-ui.mjs
+          node scripts/verify-quick-signin-ui.mjs --no-email
+          node scripts/verify-quick-signin-ui.mjs --runrecs
+
       - name: Social recruitment and sourced athlete profile
         run: node scripts/verify-recruitment-ui.mjs
 

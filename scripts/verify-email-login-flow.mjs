@@ -161,7 +161,7 @@ try {
       stored.every((row) => !row.value.includes(code)),
       "Only a hash of the code is stored",
     );
-    const login = await post("sign-in/email-otp", { email, otp: code, name: "Code Runner" });
+    const login = await post("sign-in/email-otp", { email, otp: code });
     assert.equal(login.status, 200, await login.clone().text());
     const user = await login.json();
     assert.equal(user.user.emailVerified, true);
@@ -175,6 +175,9 @@ try {
       undefined,
       user.token,
     );
+    assert.equal(account.dateOfBirth, "");
+    assert.equal(account.postcode, "");
+    assert.equal(account.exists, false, "Email-only sign-up does not require a completed profile");
     const saved = await rpc(
       "athrecs/athlete-account-api",
       "saveMyAthleteAccount",
@@ -183,6 +186,23 @@ try {
     );
     assert.equal(saved.fullName, "Code Runner");
     assert.equal(saved.athleteNumber, account.athleteNumber);
+    const withDetails = await rpc(
+      "athrecs/athlete-account-api",
+      "saveMyAthleteAccount",
+      { ...saved, dateOfBirth: "1990-04-12", postcode: "EX1 1AA" },
+      user.token,
+    );
+    assert.equal(withDetails.dateOfBirth, "1990-04-12");
+    assert.equal(withDetails.postcode, "EX1 1AA");
+    assert.equal(withDetails.profileDetails.birthdayVisibility, "hidden");
+    const cleared = await rpc(
+      "athrecs/athlete-account-api",
+      "saveMyAthleteAccount",
+      { ...withDetails, dateOfBirth: "", postcode: "" },
+      user.token,
+    );
+    assert.equal(cleared.dateOfBirth, "");
+    assert.equal(cleared.postcode, "");
     const again = await post("sign-in/email-otp", { email, otp: await sendCode(email) });
     assert.equal(again.status, 200, await again.clone().text());
     assert.equal(

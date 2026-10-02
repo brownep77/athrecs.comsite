@@ -19,11 +19,13 @@ import { authClient, signInWithProvider } from "@/lib/auth/client";
 import { getAvailableAuthMethods } from "@/lib/auth/auth-methods-api";
 import {
   AUTH_DIALOG_EVENT,
+  athleteAuthDestination,
   safeAuthCallback,
   type AuthDialogMode,
   type AuthDialogOptions,
 } from "@/lib/auth/auth-methods";
 import { cn } from "@/lib/utils";
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 
 const AUTH_QUERY_KEYS = ["auth", "authMode", "returnTo", "token", "error"] as const;
 
@@ -72,6 +74,9 @@ export function AthleteAuthDialog() {
   const [code, setCode] = useState("");
   const [codeSentTo, setCodeSentTo] = useState<string | null>(null);
   const [resendAfter, setResendAfter] = useState(0);
+  const [usePassword, setUsePassword] = useState(false);
+  const [showAllProviders, setShowAllProviders] = useState(false);
+  const [findRaceResults, setFindRaceResults] = useState(false);
 
   const methods = useQuery({
     queryKey: ["available-auth-methods"],
@@ -85,6 +90,20 @@ export function AthleteAuthDialog() {
   const emailCodeAvailable = methods.data?.emailCode === true;
   const passwordResetAvailable = methods.data?.passwordReset === true;
   const socialProviders = methods.data?.providers ?? [];
+  const quickEntry =
+    IS_ATHRECS_SITE &&
+    emailCodeAvailable &&
+    !usePassword &&
+    (mode === "signin" || mode === "signup" || mode === "code");
+  const codeEntry = mode === "code" || quickEntry;
+  const visibleProviders =
+    quickEntry && !showAllProviders ? socialProviders.slice(0, 2) : socialProviders;
+  const destination = athleteAuthDestination(callbackURL, IS_ATHRECS_SITE && findRaceResults);
+  const showResultChoice =
+    IS_ATHRECS_SITE &&
+    callbackURL.split(/[?#]/)[0] === "/athlete-account" &&
+    (quickEntry || mode === "signup") &&
+    !codeSentTo;
 
   useEffect(() => {
     setMounted(true);
@@ -123,6 +142,13 @@ export function AthleteAuthDialog() {
       setMessage(null);
       setError(null);
       setNeedsVerification(false);
+      setUsePassword(false);
+      setShowAllProviders(false);
+      setFindRaceResults(false);
+      setPassword("");
+      setConfirmPassword("");
+      setShowPassword(false);
+      setResetToken(null);
       setCode("");
       setCodeSentTo(null);
       setResendAfter(0);
@@ -136,7 +162,7 @@ export function AthleteAuthDialog() {
     if (!open) return;
     const timer = window.setTimeout(() => emailInput.current?.focus(), 80);
     return () => window.clearTimeout(timer);
-  }, [open, mode, emailAvailable, emailCodeAvailable]);
+  }, [open, mode, emailAvailable, emailCodeAvailable, usePassword]);
 
   useEffect(() => {
     if (!open || methods.isLoading || methods.isError || passwordResetAvailable) return;
@@ -160,6 +186,7 @@ export function AthleteAuthDialog() {
     setResendAfter(0);
     setPassword("");
     setConfirmPassword("");
+    if (nextMode === "code") setUsePassword(false);
     if ((nextMode === "forgot" || nextMode === "reset") && !passwordResetAvailable) {
       setMode("signin");
       setError(
@@ -186,7 +213,7 @@ export function AthleteAuthDialog() {
       setError("Email codes are temporarily unavailable. Choose another sign-in method.");
       return;
     }
-    const normalizedEmail = email.trim().toLowerCase();
+    const normalizedEmail = (codeSentTo ?? email).trim().toLowerCase();
     if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
       setError("Enter a valid email address.");
       return;
@@ -224,7 +251,7 @@ export function AthleteAuthDialog() {
     try {
       const result = await authClient.signIn.emailOtp({ email: codeSentTo, otp: code });
       if (result.error) throw new Error(result.error.message ?? "That code could not be verified.");
-      window.location.href = callbackURL;
+      window.location.href = destination;
     } catch (cause) {
       setError(
         errorMessage(
@@ -254,8 +281,8 @@ export function AthleteAuthDialog() {
     clearStatus();
     try {
       await signInWithProvider(providerId, {
-        callbackURL,
-        errorCallbackURL: authCallbackPath(callbackURL, mode),
+        callbackURL: destination,
+        errorCallbackURL: authCallbackPath(destination, mode),
       });
     } catch (cause) {
       setError(errorMessage(cause, "That sign-in method could not be opened."));
@@ -273,7 +300,7 @@ export function AthleteAuthDialog() {
     if (password.length < 10) return "Use a password of at least 10 characters.";
     if (mode === "signup") {
       if (name.trim().length < 2) return "Enter your full name.";
-      if (password !== confirmPassword) return "The passwords do not match.";
+      if (!IS_ATHRECS_SITE && password !== confirmPassword) return "The passwords do not match.";
     }
     if (mode === "reset" && password !== confirmPassword) {
       return "The passwords do not match.";
@@ -306,7 +333,7 @@ export function AthleteAuthDialog() {
           name: name.trim(),
           email: normalizedEmail,
           password,
-          callbackURL,
+          callbackURL: destination,
         });
         if (result.error) throw new Error(result.error.message ?? "Account creation failed");
 
@@ -321,7 +348,7 @@ export function AthleteAuthDialog() {
             email: normalizedEmail,
             password,
             rememberMe: true,
-            callbackURL,
+            callbackURL: destination,
           });
           if (signInResult.error) {
             throw new Error(
@@ -329,14 +356,14 @@ export function AthleteAuthDialog() {
                 "The account was created, but ATHRECS could not sign it in.",
             );
           }
-          window.location.href = callbackURL;
+          window.location.href = destination;
         }
       } else if (mode === "signin") {
         const result = await authClient.signIn.email({
           email: normalizedEmail,
           password,
           rememberMe: true,
-          callbackURL,
+          callbackURL: destination,
         });
         if (result.error) {
           const verificationRequired = result.error.status === 403;
@@ -349,11 +376,11 @@ export function AthleteAuthDialog() {
               : (result.error.message ?? "Email sign-in failed"),
           );
         }
-        window.location.href = callbackURL;
+        window.location.href = destination;
       } else if (mode === "forgot") {
         const result = await authClient.requestPasswordReset({
           email: normalizedEmail,
-          redirectTo: `${window.location.origin}${authCallbackPath(callbackURL, "reset")}`,
+          redirectTo: `${window.location.origin}${authCallbackPath(destination, "reset")}`,
         });
         if (result.error) throw new Error(result.error.message ?? "Reset request failed");
         setMessage(
@@ -395,7 +422,7 @@ export function AthleteAuthDialog() {
     try {
       const result = await authClient.sendVerificationEmail({
         email: normalizedEmail,
-        callbackURL,
+        callbackURL: destination,
       });
       if (result.error) throw new Error(result.error.message ?? "Verification email failed");
       setMessage("A new verification link has been sent if the account exists.");
@@ -409,8 +436,11 @@ export function AthleteAuthDialog() {
   if (!mounted || !open) return null;
 
   const sponsorshipAccount = callbackURL.startsWith("/sponsorship");
-  const formTitle =
-    mode === "signup"
+  const formTitle = quickEntry
+    ? codeSentTo
+      ? "Check your email"
+      : "Welcome to AthRecs"
+    : mode === "signup"
       ? sponsorshipAccount
         ? "Create your sponsorship account"
         : callbackURL.startsWith("/brands")
@@ -460,11 +490,15 @@ export function AthleteAuthDialog() {
                   {formTitle}
                 </Dialog.Title>
                 <Dialog.Description className="mt-1 max-w-md text-sm leading-5 text-slate-300">
-                  {sponsorshipAccount
-                    ? "Sign in to submit a private sponsorship enquiry and read responses from our team."
-                    : callbackURL.startsWith("/brands")
-                      ? "Sign in to register your company and manage partnership opportunities. Company approval is a separate review."
-                      : "One account for your Entry Passport, claimed results and future race-entry tools."}
+                  {quickEntry
+                    ? codeSentTo
+                      ? "Enter your six-digit code to continue."
+                      : "Sign in or create an account with your email. No password needed."
+                    : sponsorshipAccount
+                      ? "Sign in to submit a private sponsorship enquiry and read responses from our team."
+                      : callbackURL.startsWith("/brands")
+                        ? "Sign in to register your company and manage partnership opportunities. Company approval is a separate review."
+                        : "One account for your Entry Passport, claimed results and future race-entry tools."}
                 </Dialog.Description>
               </div>
               <button
@@ -479,7 +513,25 @@ export function AthleteAuthDialog() {
             </div>
 
             <div className="space-y-5 p-5 sm:p-7">
-              {mode === "signin" || mode === "signup" ? (
+              {showResultChoice ? (
+                <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-accent-soft p-3 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={findRaceResults}
+                    disabled={Boolean(busy)}
+                    onChange={(event) => setFindRaceResults(event.target.checked)}
+                    className="mt-0.5 size-4 shrink-0 accent-accent"
+                  />
+                  <span>
+                    <span className="font-semibold text-fg">Find my race results</span>
+                    <span className="mt-1 block text-xs leading-5 text-muted">
+                      Optional. Show possible matches already on AthRecs after signing in. You
+                      choose which results to add.
+                    </span>
+                  </span>
+                </label>
+              ) : null}
+              {quickEntry ? null : mode === "signin" || mode === "signup" ? (
                 <div className="grid grid-cols-2 rounded-lg bg-elevated p-1" role="tablist">
                   <button
                     type="button"
@@ -516,30 +568,45 @@ export function AthleteAuthDialog() {
                 </button>
               )}
 
-              {(mode === "signin" || mode === "signup") && socialProviders.length > 0 ? (
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {socialProviders.map((provider) => (
-                    <Button
-                      key={provider.providerId}
+              {(mode === "signin" || mode === "signup" || quickEntry) &&
+              !codeSentTo &&
+              socialProviders.length > 0 ? (
+                <div className="space-y-2">
+                  <div className="grid gap-2 sm:grid-cols-2">
+                    {visibleProviders.map((provider) => (
+                      <Button
+                        key={provider.providerId}
+                        type="button"
+                        variant="secondary"
+                        className="justify-start bg-surface"
+                        disabled={Boolean(busy)}
+                        onClick={() => void startProvider(provider.providerId)}
+                      >
+                        {busy === provider.providerId ? (
+                          <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                        ) : (
+                          <span
+                            className="inline-flex size-6 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white"
+                            aria-hidden="true"
+                          >
+                            {provider.label.charAt(0)}
+                          </span>
+                        )}
+                        Continue with {provider.label}
+                      </Button>
+                    ))}
+                  </div>
+                  {quickEntry && socialProviders.length > 2 ? (
+                    <button
                       type="button"
-                      variant="secondary"
-                      className="justify-start bg-surface"
                       disabled={Boolean(busy)}
-                      onClick={() => void startProvider(provider.providerId)}
+                      aria-expanded={showAllProviders}
+                      onClick={() => setShowAllProviders((value) => !value)}
+                      className="block w-full py-1 text-center text-sm font-semibold text-accent"
                     >
-                      {busy === provider.providerId ? (
-                        <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                      ) : (
-                        <span
-                          className="inline-flex size-6 items-center justify-center rounded-full bg-slate-950 text-xs font-bold text-white"
-                          aria-hidden="true"
-                        >
-                          {provider.label.charAt(0)}
-                        </span>
-                      )}
-                      Continue with {provider.label}
-                    </Button>
-                  ))}
+                      {showAllProviders ? "Fewer sign-in options" : "More sign-in options"}
+                    </button>
+                  ) : null}
                 </div>
               ) : null}
 
@@ -554,7 +621,7 @@ export function AthleteAuthDialog() {
                 </div>
               ) : null}
 
-              {(mode === "signin" || mode === "signup") && emailCodeAvailable ? (
+              {!quickEntry && (mode === "signin" || mode === "signup") && emailCodeAvailable ? (
                 <Button
                   type="button"
                   variant="secondary"
@@ -566,13 +633,21 @@ export function AthleteAuthDialog() {
                 </Button>
               ) : null}
 
-              {mode === "code" ? (
+              {codeEntry ? (
                 emailCodeAvailable ? (
                   <form className="space-y-4" onSubmit={(event) => void submitCode(event)}>
-                    <p className="text-sm text-muted">
-                      Use any email address. We’ll send you a one-time code, so you don’t need a
-                      password. New athletes can add their name and profile after signing in.
-                    </p>
+                    {quickEntry && !codeSentTo && socialProviders.length > 0 ? (
+                      <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-subtle">
+                        <span className="h-px flex-1 bg-border" /> or use email
+                        <span className="h-px flex-1 bg-border" />
+                      </div>
+                    ) : null}
+                    {!quickEntry ? (
+                      <p className="text-sm text-muted">
+                        Use any email address. We’ll send you a one-time code, so you don’t need a
+                        password. New athletes can add their name and profile after signing in.
+                      </p>
+                    ) : null}
                     <label className="block space-y-1.5 text-sm font-medium text-fg">
                       Email address
                       <input
@@ -614,7 +689,11 @@ export function AthleteAuthDialog() {
                       ) : (
                         <Mail className="size-4" aria-hidden="true" />
                       )}
-                      {codeSentTo ? "Verify code and sign in" : "Send sign-in code"}
+                      {codeSentTo
+                        ? "Verify code and continue"
+                        : quickEntry
+                          ? "Continue with email"
+                          : "Send sign-in code"}
                     </Button>
                     {codeSentTo ? (
                       <div className="flex flex-wrap justify-between gap-3 text-sm">
@@ -640,6 +719,11 @@ export function AthleteAuthDialog() {
                         </button>
                       </div>
                     ) : null}
+                    {quickEntry && !codeSentTo ? (
+                      <p className="text-center text-xs text-muted">
+                        No date of birth or address needed. Add your athlete details later.
+                      </p>
+                    ) : null}
                   </form>
                 ) : !methods.isLoading && !methods.isError ? (
                   <p className="text-sm text-muted">
@@ -649,7 +733,21 @@ export function AthleteAuthDialog() {
                 ) : null
               ) : null}
 
-              {emailAvailable && mode !== "code" ? (
+              {quickEntry && emailAvailable ? (
+                <button
+                  type="button"
+                  disabled={Boolean(busy)}
+                  onClick={() => {
+                    switchMode("signin");
+                    setUsePassword(true);
+                  }}
+                  className="block w-full text-center text-sm font-semibold text-accent"
+                >
+                  Use a password instead
+                </button>
+              ) : null}
+
+              {emailAvailable && !codeEntry ? (
                 <>
                   {(mode === "signin" || mode === "signup") && socialProviders.length > 0 ? (
                     <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-wider text-subtle">
@@ -752,7 +850,7 @@ export function AthleteAuthDialog() {
                       </label>
                     ) : null}
 
-                    {mode === "signup" || mode === "reset" ? (
+                    {(mode === "signup" && !IS_ATHRECS_SITE) || mode === "reset" ? (
                       <label className="block space-y-1.5 text-sm font-medium text-fg">
                         Confirm password
                         <input

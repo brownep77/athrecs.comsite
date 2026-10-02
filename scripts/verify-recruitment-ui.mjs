@@ -36,6 +36,7 @@ try {
   const sql = await db.getSql();
   browser = await chromium.launch({
     headless: true,
+    executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
   });
   page = await browser.newPage({ viewport: { width: 390, height: 844 } });
@@ -48,14 +49,14 @@ try {
     .getByRole("button", { name: "Skip for now and create my profile", exact: true })
     .click();
   await page.getByRole("button", { name: "Create my profile with email", exact: true }).click();
-  const dialog = page.getByRole("dialog", { name: "Sign in with an email code" });
+  const dialog = page.getByRole("dialog");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
-  await dialog.getByRole("button", { name: "Send sign-in code", exact: true }).click();
+  await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
   await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
   const code = sent.at(-1)?.text.match(/\b([0-9]{6})\b/)?.[1];
   assert(code, "The actual email adapter receives the sign-in code");
   await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
-  await dialog.getByRole("button", { name: "Verify code and sign in", exact: true }).click();
+  await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
   await page.getByRole("heading", { name: "Let’s start your profile", exact: true }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("from"), "instagram");
   await page.getByLabel("Your name", { exact: true }).fill("Fictional Recruitment Runner");
@@ -153,17 +154,15 @@ try {
       true,
     );
   }
-  const flagSizes = await page
-    .locator("[data-country-code]")
-    .evaluateAll((flags) =>
-      flags
-        .filter((flag) => flag.getBoundingClientRect().width > 0)
-        .map((flag) => ({
-          width: flag.getBoundingClientRect().width,
-          height: flag.getBoundingClientRect().height,
-          accessible: Boolean(flag.getAttribute("aria-label")),
-        })),
-    );
+  const flagSizes = await page.locator("[data-country-code]").evaluateAll((flags) =>
+    flags
+      .filter((flag) => flag.getBoundingClientRect().width > 0)
+      .map((flag) => ({
+        width: flag.getBoundingClientRect().width,
+        height: flag.getBoundingClientRect().height,
+        accessible: Boolean(flag.getAttribute("aria-label")),
+      })),
+  );
   assert(flagSizes.length > 1);
   assert(flagSizes.every((flag) => flag.width === 24 && flag.height === 16 && flag.accessible));
   await page.setViewportSize({ width: 1280, height: 900 });

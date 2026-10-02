@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { safeAuthCallback } from "../src/lib/auth/auth-methods.ts";
+import { athleteAuthDestination, safeAuthCallback } from "../src/lib/auth/auth-methods.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (path) => readFile(resolve(root, path), "utf8");
@@ -37,6 +37,21 @@ assert.equal(safeAuthCallback("/claim-results?resultId=42"), "/claim-results?res
 assert.equal(safeAuthCallback("https://evil.example/steal"), "/athlete-account");
 assert.equal(safeAuthCallback("//evil.example/steal"), "/athlete-account");
 assert.equal(safeAuthCallback("javascript:alert(1)"), "/athlete-account");
+assert.equal(athleteAuthDestination("/athlete-account", false), "/athlete-account");
+assert.equal(
+  athleteAuthDestination("/athlete-account", true),
+  "/athlete-account?section=potential",
+);
+assert.equal(
+  athleteAuthDestination("/athlete-account?section=identity", true),
+  "/athlete-account?section=potential",
+);
+assert.equal(
+  athleteAuthDestination("/claim-results?resultId=42", true),
+  "/claim-results?resultId=42",
+);
+assert.equal(athleteAuthDestination("/brands/register", true), "/brands/register");
+assert.equal(athleteAuthDestination("//evil.example/steal", false), "/athlete-account");
 
 assert.match(emailFlag, /emailAndPasswordEnabled = true/);
 assert.match(server, /emailPasswordConfigured = !authDisabled && emailAndPasswordEnabled/);
@@ -59,14 +74,7 @@ for (const runRecsHost of ["www.runrecs.com", "runrecs.com"]) {
 assert.match(docs, /Authorized JavaScript origins/);
 assert.ok(docs.includes("BETTER_AUTH_URL=https://www.runrecs.com"));
 
-for (const provider of [
-  "google",
-  "apple",
-  "microsoft",
-  "facebook",
-  "twitter",
-  "linkedin",
-]) {
+for (const provider of ["google", "apple", "microsoft", "facebook", "twitter", "linkedin"]) {
   assert.match(server, new RegExp(`${provider}:`), `${provider} server provider missing`);
   assert.match(envExample, new RegExp(`callback/${provider}`), `${provider} callback docs missing`);
 }
