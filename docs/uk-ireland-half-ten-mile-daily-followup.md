@@ -1,6 +1,6 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 30 September 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 2 October 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
@@ -131,3 +131,9 @@ The direct official Looe registration page now confirms an 11:00 start and £20 
 Athletics Ireland also added or clarified six 2027 fixtures: Trim 10 Mile, Noreen McCarthy Memorial 10 Mile, Bohermeen Half, Dublin City Half, Irish Life Frank Duffy 10 Mile and Irish Life Dublin Half. All remain in research because their permits are pending; Dublin City will enrich its existing canonical card when approved. Waterford Viking remains held because the governing calendar shows approved permit 26/557 while the direct registration record still says permit pending.
 
 RunThrough's live sitemap contained no other missing in-scope 2027 half-marathon or 10-mile page after canonical source matching. EntryCentral and RaceBest candidates were already represented or held; the Athletics Ireland changes are recorded above.
+
+## 2 October 2026 scan
+
+The announced entry windows have now opened for two verified editions. Looe 10 Miler on 28 February 2027 now uses its event-specific SiEntries checkout, while Blarney Stone Mad Half on 14 March 2027 now uses its live Eventmaster registration page and €40 entry option. Both retain their previously verified dates, start times and official source provenance.
+
+Two newly surfaced RunThrough editions were attached to existing canonical cards rather than duplicated: Battersea Park Running Festival on 23 October 2027 and Run Aintree on 31 October 2027. Their official pages consistently confirm the dates, half-marathon programmes, 10:00 starts and open entry. Carsington Water on 16 October and Hampton Court Palace on 17 October were already represented by verified editions, so no duplicate rows were added.

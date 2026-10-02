@@ -22,11 +22,11 @@ const CURRENT_SITEMAP_SCAN_CHECKED_AT = "2026-09-23";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
-const CURRENT_ENTRY_OPENING_SCAN_CHECKED_AT = "2026-10-01";
+const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 69;
 const NEW_EDITION_COUNT = 72;
-const EXISTING_SERIES_EDITION_COUNT = 34;
+const EXISTING_SERIES_EDITION_COUNT = 36;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -179,6 +179,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_REGISTRATION_SCAN_CHECKED_AT,
         LATEST_REGISTRATION_SCAN_CHECKED_AT,
         CURRENT_DISCOVERY_SCAN_CHECKED_AT,
+        CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -378,22 +379,52 @@ assert.equal(
 );
 assert.equal(crystalPalaceMayEdition.entryOptions?.[0]?.checkedAt, CURRENT_SITEMAP_SCAN_CHECKED_AT);
 
+for (const [seriesSlug, date, startTime, source] of [
+  [
+    "battersea-park-half-marathon-october",
+    "2027-10-23",
+    "10:00",
+    "https://www.runthrough.co.uk/event/battersea-park-running-festival-october-2027",
+  ],
+  [
+    "runthrough-aintree-october-2027",
+    "2027-10-31",
+    "10:00",
+    "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-october-2027",
+  ],
+]) {
+  const edition = dailyHalfTenMileExistingSeriesEditions.find(
+    (candidate) => candidate.seriesSlug === seriesSlug && candidate.date === date,
+  );
+  assert(edition, `${seriesSlug} is missing from the 2 October official-page scan`);
+  assert.equal(edition.startTime, startTime, `${seriesSlug} has the wrong start time`);
+  assert.equal(edition.status, "Open", `${seriesSlug} must retain open entry`);
+  assert.equal(edition.source, source, `${seriesSlug} lost its current official source`);
+  assert.equal(edition.entryUrl, source, `${seriesSlug} lost its official entry route`);
+  assert.equal(edition.entryOptions?.[0]?.checkedAt, CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT);
+}
+
 const looeSeries = dailyHalfTenMileSeries.find((series) => series.slug === "looe-10-miler-2027");
 const looeEdition = dailyHalfTenMileEditions.find(
   (edition) => edition.seriesSlug === "looe-10-miler-2027",
 );
-assert(looeSeries && looeEdition, "Looe 10 Miler is missing from the 1 October entry scan");
+assert(looeSeries && looeEdition, "Looe 10 Miler is missing from the 2 October entry scan");
 assert.equal(looeEdition.date, "2027-02-28", "Looe 10 Miler has the wrong date");
 assert.equal(looeEdition.distance, "10mi", "Looe 10 Miler has the wrong distance");
-assert.equal(looeEdition.status, "TBC", "Looe entry must remain unopened");
-assert.equal(looeEdition.entryUrl, undefined, "Looe must not expose a premature checkout");
+assert.equal(looeEdition.status, "Open", "Looe entry must be open");
+assert.equal(
+  looeEdition.entryUrl,
+  "https://www.sientries.co.uk/enter.php?event_id=17363",
+  "Looe must use the direct event-specific checkout",
+);
+assert.equal(looeEdition.entryOptions?.[0]?.checkedAt, CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT);
 assert.equal(looeEdition.startTime, "11:00", "Looe has the wrong verified start time");
 assert.equal(
   looeSeries.source_url,
   "https://www.sientries.co.uk/event/looe-10-miler-2027-2027",
   "Looe lost its current direct-registration provenance",
 );
-assert.match(looeSeries.description, new RegExp(CURRENT_ENTRY_OPENING_SCAN_CHECKED_AT));
+assert.match(looeSeries.description, new RegExp(CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT));
 
 const tadcasterSeries = dailyHalfTenMileSeries.find(
   (series) => series.slug === "tadcaster-10-2026",
@@ -583,6 +614,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_REGISTRATION_SCAN_CHECKED_AT,
         LATEST_REGISTRATION_SCAN_CHECKED_AT,
         CURRENT_DISCOVERY_SCAN_CHECKED_AT,
+        CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -1001,13 +1033,19 @@ const blarneyEdition = catalogue.editions.find(
     edition.distance === "Half",
 );
 assert(blarneyEdition, "The approved Blarney Stone Mad Half edition disappeared");
-assert.equal(blarneyEdition.status, "TBC", "Blarney entry must remain future-dated");
-assert.equal(blarneyEdition.entryUrl, undefined, "Blarney must not expose a premature checkout");
+assert.equal(blarneyEdition.status, "Open", "Blarney entry must be open");
 assert.equal(
-  blarneyEdition.entryOptions,
-  undefined,
-  "Blarney must not expose premature entry options",
+  blarneyEdition.entryUrl,
+  "https://eventmaster.ie/event/eoRKHrKF8x",
+  "Blarney must use the direct official registration page",
 );
+assert.deepEqual(
+  blarneyEdition.entryOptions,
+  dailyHalfTenMileEntryOptions["blarney-stone-mad-half-marathon-2027|2027-03-14|Half"],
+  "Blarney must expose its verified official entry option",
+);
+assert.equal(blarneyEdition.entryOptions?.[0]?.checkedAt, CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT);
+assert.equal(blarneyEdition.entryOptions?.[0]?.priceAmount, 40);
 assert.equal(
   blarneyEdition.source,
   "https://eventmaster.ie/event/eoRKHrKF8x",

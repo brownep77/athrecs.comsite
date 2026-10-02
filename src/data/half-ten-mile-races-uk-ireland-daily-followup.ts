@@ -22,7 +22,7 @@ const CURRENT_GOVERNING_BODY_SCAN_CHECKED_AT = "2026-09-24";
 const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
-const CURRENT_ENTRY_OPENING_SCAN_CHECKED_AT = "2026-10-01";
+const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -66,12 +66,11 @@ const seeds: RaceSeed[] = [
     surface: "Road",
     organiser: "Looe Pioneers Running Club",
     url: "https://www.sientries.co.uk/event/looe-10-miler-2027-2027",
-    status: "TBC",
-    hasEntry: false,
+    entryUrl: "https://www.sientries.co.uk/enter.php?event_id=17363",
     priceAmount: 20,
-    checkedAt: CURRENT_ENTRY_OPENING_SCAN_CHECKED_AT,
+    checkedAt: CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
     notes:
-      "The direct official registration page confirms the 10-mile race, 28 February 2027 date, 11:00 start and £20 affiliated / £22 unaffiliated fees. It states that entries open at 09:00 on 1 October 2026, so the pre-opening scan does not expose a checkout.",
+      "The direct official registration page confirms the 10-mile race, 28 February 2027 date, 11:00 start and £20 affiliated / £22 unaffiliated fees. Entries are open and the edition uses the event-specific SiEntries checkout.",
   },
   {
     slug: "temple-newsam-10-2027",
@@ -1407,6 +1406,30 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
       "The official organiser page confirms the 2027 half-marathon and 10K festival date, half-marathon start time and open entry.",
   },
   {
+    seriesSlug: "battersea-park-half-marathon-october",
+    date: "2027-10-23",
+    startTime: "10:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/battersea-park-running-festival-october-2027",
+    publishAllDistances: true,
+    priceAmount: 40,
+    checkedAt: CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 23 October 2027 half marathon and marathon festival, the 10:00 half-marathon start and open entry; the established Battersea Park Running Festival card is reused.",
+  },
+  {
+    seriesSlug: "runthrough-aintree-october-2027",
+    date: "2027-10-31",
+    startTime: "10:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-october-2027",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 31 October 2027 half marathon, 10K and 5K, the 10:00 half-marathon start and open entry; the established Aintree card is enriched rather than duplicated.",
+  },
+  {
     seriesSlug: "runthrough-richmond-park-half-marathon",
     date: "2027-10-31",
     startTime: "09:30",
@@ -2257,6 +2280,17 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
     source_url:
       "https://www.runthrough.co.uk/event/hampton-court-palace-running-festival-presented-by-voltarol-october-2027",
   },
+  "battersea-park-half-marathon-october": {
+    distances: ["Half", "Marathon"],
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/battersea-park-running-festival-october-2027",
+    source_url: "https://www.runthrough.co.uk/event/battersea-park-running-festival-october-2027",
+  },
+  "runthrough-aintree-october-2027": {
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-october-2027",
+    source_url: "https://www.runthrough.co.uk/event/run-aintree-half-marathon-10k-5k-october-2027",
+  },
   "runthrough-richmond-park-half-marathon": {
     surface: "Mixed",
     organiser: "RunThrough Events",
@@ -2608,13 +2642,12 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
       "The direct official registration page confirms the marathon and 10-mile trail races, date, 10-mile start time and open event-specific checkout.",
   },
   "blarney-stone-mad-half-marathon-2027|2027-03-14|Half": {
-    status: "TBC",
-    entryUrl: undefined,
-    entryOptions: undefined,
+    status: "Open",
+    entryUrl: "https://eventmaster.ie/event/eoRKHrKF8x",
     startTime: "09:00",
     source: "https://eventmaster.ie/event/eoRKHrKF8x",
     notes:
-      "Athletics Ireland permit 26/458 and the 14 March 2027 date are approved, but the direct page states that online sales do not open until 1 October 2026 at 09:00, so no premature checkout is exposed.",
+      "Athletics Ireland permit 26/458 is approved and the direct official registration page confirms the 14 March 2027 date, 09:00 start and open €40 entry.",
   },
   "tadcaster-10|2026-11-22|10mi": {
     distance: "10mi",
@@ -2658,6 +2691,22 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
 };
 
 export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
+  "blarney-stone-mad-half-marathon-2027|2027-03-14|Half": [
+    {
+      providerCode: "official-blarney-stone-mad-half-marathon-2027",
+      providerName: "Eventmaster",
+      entryUrl: "https://eventmaster.ie/event/eoRKHrKF8x",
+      entryType: "official",
+      status: "open",
+      priceAmount: 40,
+      priceCurrency: "EUR",
+      checkedAt: CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
+      sourceUrl: "https://eventmaster.ie/event/eoRKHrKF8x",
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration page and checkout.",
+    },
+  ],
   "ott-trail-marathon-10-mile-2027|2027-05-15|10mi": [
     {
       providerCode: "official-ott-trail-marathon-10-mile-2027",
