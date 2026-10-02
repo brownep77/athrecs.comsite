@@ -56,7 +56,7 @@ export async function handleAthleteGalleryRequest(request: Request): Promise<Res
       photos: photos.map((photo) => ({
         id: photo.id,
         url: `/api/athlete-photos?photo=${photo.id}`,
-        uploadedAt: photo.uploaded_at,
+        uploadedAt: new Date(photo.uploaded_at).toISOString(),
       })),
       limit: MAX_PHOTOS,
     });
