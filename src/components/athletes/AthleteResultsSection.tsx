@@ -29,6 +29,7 @@ import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 
 import { findPersonalBests, timingBasis } from "@/lib/athrecs/profile-records";
 import { isDisqualified } from "@/lib/athrecs/result-details";
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 import { ResultDisqualification } from "./ResultDisqualification";
 
 type AthleteResult = AthleteAccountData["claimedResults"][number];
@@ -292,7 +293,10 @@ export function AthleteResultsSection({
             </p>
             {!hiddenResults.length ? (
               <Button asChild className="mt-5">
-                <Link to="/athlete-account">
+                <Link
+                  to="/athlete-account"
+                  search={IS_ATHRECS_SITE ? { section: "potential" } : {}}
+                >
                   Find my results <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
               </Button>

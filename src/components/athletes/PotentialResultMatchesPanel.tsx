@@ -28,7 +28,7 @@ import {
   type ExternalRunnerMatchSource,
 } from "@/lib/athrecs/grok-runner-search-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
-import { sportIsInAthleteProfileScope } from "@/lib/site-scope";
+import { IS_ATHRECS_SITE, sportIsInAthleteProfileScope } from "@/lib/site-scope";
 import { submitResultClaim } from "@/lib/athrecs/result-claims-api";
 import {
   dismissMyAthleteMatch,
@@ -262,8 +262,15 @@ export function PotentialResultMatchesPanel() {
         <div className="flex items-start gap-3 p-5 text-sm text-muted">
           <CircleAlert className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
           <p>
-            Add and save your full name in the Identity section below. ATHRECS will then compare it
-            with athlete names in the results database.
+            Add and save your full name in{" "}
+            <Link
+              to="/athlete-account"
+              search={IS_ATHRECS_SITE ? { section: "identity" } : {}}
+              className="font-medium text-accent underline"
+            >
+              your personal details
+            </Link>
+            . ATHRECS will then compare it with athlete names in the results database.
           </p>
         </div>
       ) : data.matches.length === 0 ? (
