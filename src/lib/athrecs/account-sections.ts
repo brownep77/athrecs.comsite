@@ -14,7 +14,7 @@ export const ACCOUNT_SECTION_GROUPS = [
     items: [
       { id: "identity", label: "Personal details" },
       { id: "location", label: "Location & clubs" },
-      { id: "photo", label: "Profile photo" },
+      { id: "photo", label: "Photos" },
       { id: "biography", label: "Biography" },
       { id: "matching", label: "Names & result sources" },
       { id: "connections", label: "Linked profiles" },

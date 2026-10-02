@@ -1,5 +1,6 @@
 import { AccountNavigation } from "@/components/athletes/AccountNavigation";
 import { AccountRaces } from "@/components/athletes/AccountRaces";
+import { AccountPhotos } from "@/components/athletes/AccountPhotos";
 import { AthleteBioCard } from "@/components/athletes/AthleteBioCard";
 import { ProfilePhotoUploader } from "@/components/athletes/ProfilePhotoUploader";
 import { ProfileConnectionsPanel } from "@/components/athletes/ProfileConnectionsPanel";
@@ -20,6 +21,7 @@ import {
   Dumbbell,
   Goal,
   HeartPulse,
+  Images,
   Loader2,
   LockKeyhole,
   LogIn,
@@ -459,18 +461,24 @@ function SignedInAccount() {
               </PreservedAccountPanel>
               <PreservedAccountPanel active={activeSection === "photo"}>
                 <AccountSection
-                  icon={UserRound}
-                  title="Profile photo"
-                  description="Choose a photograph for your athlete profile."
+                  icon={Images}
+                  title="Photos"
+                  description="Add photos to your private gallery and manage your profile picture."
                 >
-                  <ProfilePhotoUploader
-                    displayName={profileName}
-                    photoUrl={account.data.profilePhotoUrl}
-                    uploadAvailable={account.data.profilePhotoUploadAvailable}
-                    onChanged={() => {
-                      void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
-                    }}
-                  />
+                  <AccountPhotos />
+                  <div className="mt-8 border-t border-border pt-6">
+                    <h3 className="mb-4 font-display text-lg font-semibold text-fg">
+                      Profile photo
+                    </h3>
+                    <ProfilePhotoUploader
+                      displayName={profileName}
+                      photoUrl={account.data.profilePhotoUrl}
+                      uploadAvailable={account.data.profilePhotoUploadAvailable}
+                      onChanged={() => {
+                        void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
+                      }}
+                    />
+                  </div>
                 </AccountSection>
               </PreservedAccountPanel>
               {activeSection === "opportunities" ? (
