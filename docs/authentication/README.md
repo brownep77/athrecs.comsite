@@ -24,11 +24,11 @@ Providers whose email may be absent or unverified remain held back until ATHRECS
 
 ## Email security
 
-Passwords are handled by Better Auth and never stored in Athlete Account tables. The minimum password length is 10 characters.
+Passwords are handled by Better Auth and never stored in Athlete Account tables. New and reset passwords require at least 10 characters; sign-in also accepts valid older credentials.
 
 When Resend delivery is configured, manual accounts require email verification before sign-in. Password reset links expire after one hour, and a successful reset revokes existing sessions.
 
-When Resend delivery is not configured, manual accounts can sign in without email verification. Profile saving and automatic account linking still require a verified local email. Result-ownership checks are separate from authentication. Password recovery is unavailable in this mode.
+When Resend delivery is not configured, manual accounts can sign in without email verification. Profile saving, result claims and automatic account linking still require a verified local email. Email verification establishes mailbox control, not athlete identity: the existing first-uncontested-claim rule remains a separate ownership policy. Password recovery is unavailable in this mode.
 
 The sender domain in `AUTH_EMAIL_FROM` must be verified by Resend. Use a dedicated address such as `accounts@athrecs.com`.
 

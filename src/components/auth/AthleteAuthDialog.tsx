@@ -297,6 +297,8 @@ export function AthleteAuthDialog() {
       return "Enter a valid email address.";
     }
     if (mode === "forgot") return null;
+    // The current policy applies when creating a password, not to older credentials.
+    if (mode === "signin") return password ? null : "Enter your password.";
     if (password.length < 10) return "Use a password of at least 10 characters.";
     if (mode === "signup") {
       if (name.trim().length < 2) return "Enter your full name.";
@@ -824,7 +826,7 @@ export function AthleteAuthDialog() {
                             autoComplete={mode === "signin" ? "current-password" : "new-password"}
                             value={password}
                             onChange={(event) => setPassword(event.target.value)}
-                            minLength={10}
+                            minLength={mode === "signin" ? undefined : 10}
                             maxLength={128}
                             className="h-11 w-full rounded-lg border border-border bg-bg pl-10 pr-11 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
                             required

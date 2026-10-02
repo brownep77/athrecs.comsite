@@ -5,6 +5,7 @@ import { promisify } from "node:util";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "vite";
 import { chromium } from "playwright";
+import { hashPassword } from "better-auth/crypto";
 
 // Isolated local database and intercepted delivery: no production writes or mail.
 const delivery = !process.argv.includes("--no-email");
@@ -53,6 +54,16 @@ const server = await createServer({ server: { host: "127.0.0.1", port: 18229, st
 let browser;
 let database;
 const errors = [];
+const failures = [];
+async function check(label, action) {
+  try {
+    await action();
+    console.log(`PASS: ${label}`);
+  } catch (error) {
+    failures.push(`${label}: ${error.message}`);
+    console.error(`FAIL: ${label}: ${error.message}`);
+  }
+}
 try {
   await server.listen();
   database = await (await server.ssrLoadModule("/src/lib/db.ts")).getPglite();
@@ -108,6 +119,54 @@ try {
       `PASS: ${runrecs ? "RunRecs keeps its existing chooser" : "Password fallback works without email delivery"}.`,
     );
   } else {
+    // A provider can fail after returning HTTP 200 (for example, a bad proxy).
+    await page.route("**/api/auth/sign-in/social", (route) =>
+      route.fulfill({ status: 200, contentType: "application/json", body: "{}" }),
+    );
+    await dialog.getByRole("button", { name: "Continue with Google", exact: true }).click();
+    await check("Malformed provider response leaves an actionable error", async () => {
+      await dialog.getByRole("alert").waitFor({ timeout: 10000 });
+      assert(
+        await dialog.getByRole("button", { name: "Continue with email", exact: true }).isEnabled(),
+      );
+    });
+    await page.unroute("**/api/auth/sign-in/social");
+    dialog = await open();
+
+    // Existing accounts can predate today's new-password minimum.
+    const legacyEmail = "legacy-runner@example.test";
+    const signup = await fetch(`${origin}/api/auth/sign-up/email`, {
+      method: "POST",
+      headers: { "content-type": "application/json", origin },
+      body: JSON.stringify({
+        email: legacyEmail,
+        name: "Legacy Test Runner",
+        password: "Initial-password-123!",
+      }),
+    });
+    assert.equal(signup.status, 200, await signup.clone().text());
+    const legacyId = (await signup.json()).user.id;
+    const legacyPassword = "Older123";
+    await database.query('update "user" set "emailVerified"=true where id=$1', [legacyId]);
+    await database.query(
+      'update account set password=$1 where "userId"=$2 and "providerId"=\'credential\'',
+      [await hashPassword(legacyPassword), legacyId],
+    );
+    const legacyLogin = await fetch(`${origin}/api/auth/sign-in/email`, {
+      method: "POST",
+      headers: { "content-type": "application/json", origin },
+      body: JSON.stringify({ email: legacyEmail, password: legacyPassword }),
+    });
+    assert.equal(legacyLogin.status, 200, "The server accepts the existing credential");
+    await dialog.getByRole("button", { name: "Use a password instead" }).click();
+    await dialog.getByLabel("Email address", { exact: true }).fill(legacyEmail);
+    await dialog.getByLabel("Password", { exact: true }).fill(legacyPassword);
+    await dialog.getByRole("button", { name: "Sign in with email", exact: true }).click();
+    await check("Existing shorter passwords work through the UI", () =>
+      page.waitForURL(`${origin}/athlete-account`, { timeout: 10000 }),
+    );
+    await context.clearCookies();
+    dialog = await open();
     assert.equal(await dialog.getByRole("heading", { name: "Welcome to AthRecs" }).count(), 1);
     assert.equal(await dialog.getByRole("textbox").count(), 1);
     assert.equal(await dialog.locator('input[type="password"],input[type="date"]').count(), 0);
@@ -155,6 +214,11 @@ try {
     await dialog.getByRole("button", { name: "Verify code and continue" }).click();
     await page.waitForURL(`${origin}/athlete-account?section=potential`);
     await page.getByLabel("Name used in race results", { exact: false }).waitFor();
+    await page.setViewportSize({ width: 1280, height: 900 });
+    // A draft consent choice must not be committed by the separate name form.
+    await page.locator('a[href="/athlete-account?section=privacy"]').first().click();
+    await page.getByRole("checkbox", { name: /Marketing emails/ }).check();
+    await page.locator('a[href="/athlete-account?section=potential"]').first().click();
     await database.exec(`
       insert into events (id, slug, name, sport, surface, country) values (990021, 'quick-signin-test', 'Quick Signin Test 10K', 'Athletics', 'Road', 'United Kingdom');
       insert into editions (id, event_id, event_date, distance_code, distance_km) values (990021, 990021, '2026-09-01', '10K', 10);
@@ -185,19 +249,33 @@ try {
       date_of_birth: null,
       postcode: null,
     });
+    await check("Saving a racing name does not grant draft consent", async () =>
+      assert.equal(
+        (
+          await database.query(
+            "select count(*)::int as n from athlete_account_consents where user_id=$1 and status='granted'",
+            [userId],
+          )
+        ).rows[0].n,
+        0,
+      ),
+    );
+    await page.locator('a[href="/athlete-account?section=privacy"]').first().click();
+    assert(
+      await page.getByRole("checkbox", { name: /Marketing emails/ }).isChecked(),
+      "Unsaved consent edits are retained as drafts",
+    );
+    await page.reload({ waitUntil: "networkidle" });
+    await check("Reload discards the unsaved marketing choice", async () => {
+      assert.equal(
+        await page.getByRole("checkbox", { name: /Marketing emails/ }).isChecked(),
+        false,
+      );
+    });
     assert.equal(
       (
         await database.query(
           "select count(*)::int as n from result_claims where claimant_user_id=$1",
-          [userId],
-        )
-      ).rows[0].n,
-      0,
-    );
-    assert.equal(
-      (
-        await database.query(
-          "select count(*)::int as n from athlete_account_consents where user_id=$1 and status='granted'",
           [userId],
         )
       ).rows[0].n,
@@ -225,6 +303,7 @@ try {
     );
   }
   assert.deepEqual(errors, []);
+  assert.deepEqual(failures, [], "All adversarial browser checks must pass");
 } catch (error) {
   await browser
     ?.contexts()[0]

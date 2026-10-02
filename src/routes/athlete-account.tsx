@@ -46,6 +46,7 @@ import {
   ATHLETE_SPORTS,
   getMyAthleteAccount,
   saveMyAthleteAccount,
+  saveMyAthleteRacingName,
   type AthleteAccountData,
   type AthleteAccountInput,
   type AthleteExperienceLevel,
@@ -319,6 +320,26 @@ function SignedInAccount() {
     queryFn: () => getAvailableAuthMethods(),
     staleTime: 60_000,
   });
+  const saveRacingName = useMutation({
+    mutationFn: (fullName: string) =>
+      saveMyAthleteRacingName({ data: { fullName, privacyAcknowledged: true } }),
+    onSuccess: (updated) => {
+      lastLoadedForm.current = accountToForm(updated);
+      // Preserve unrelated edits as drafts; this action only commits the name.
+      setForm(
+        (current) =>
+          current && {
+            ...current,
+            fullName: updated.fullName,
+            privacyAcknowledged: updated.privacyAcknowledged,
+          },
+      );
+      setMessage("Your racing name has been saved.");
+      queryClient.setQueryData(["my-athlete-account"], updated);
+      void queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] });
+    },
+    onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
+  });
   const verifyEmail = useMutation({
     mutationFn: async () => {
       const result = await authClient.sendVerificationEmail({
@@ -454,7 +475,7 @@ function SignedInAccount() {
                   className="mt-4 max-w-md space-y-4"
                   onSubmit={(event) => {
                     event.preventDefault();
-                    save.mutate({ ...form, privacyAcknowledged: true });
+                    saveRacingName.mutate(form.fullName);
                   }}
                 >
                   <TextField
@@ -475,12 +496,12 @@ function SignedInAccount() {
                     <Button
                       type="submit"
                       disabled={
-                        save.isPending ||
+                        saveRacingName.isPending ||
                         !account.data.emailVerified ||
                         form.fullName.trim().length < 2
                       }
                     >
-                      {save.isPending ? "Finding results…" : "Save name and find results"}
+                      {saveRacingName.isPending ? "Finding results…" : "Save name and find results"}
                     </Button>
                     <Link
                       to="/athlete-account"

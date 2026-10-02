@@ -119,13 +119,8 @@ export async function signInWithProvider(
     } catch {
       // The normal session hook will retry on the destination page.
     }
-    const destination = new URL(callbackURL, window.location.origin);
-    if (
-      destination.pathname !== window.location.pathname ||
-      destination.search !== window.location.search
-    ) {
-      window.location.href = callbackURL;
-    }
+    // Reload even on the same route so the pending chooser is replaced by the session.
+    window.location.href = callbackURL;
     return;
   }
 
@@ -138,7 +133,8 @@ export async function signInWithProvider(
       disableRedirect: true,
     });
     if (error) throw new Error(error.message ?? "Google sign-in failed");
-    if (data?.url) window.location.href = data.url;
+    if (!data?.url) throw new Error("Google sign-in could not be opened. Try again or use email.");
+    window.location.href = data.url;
     return;
   }
 
@@ -149,7 +145,8 @@ export async function signInWithProvider(
       errorCallbackURL,
     });
     if (error) throw new Error(error.message ?? "Sign-in failed");
-    if (data?.url) window.location.href = data.url;
+    if (!data?.url) throw new Error("Sign-in could not be opened. Try again or use email.");
+    window.location.href = data.url;
     return;
   }
 
@@ -160,7 +157,8 @@ export async function signInWithProvider(
     disableRedirect: true,
   });
   if (error) throw new Error(error.message ?? `${providerId} sign-in failed`);
-  if (data?.url) window.location.href = data.url;
+  if (!data?.url) throw new Error("Sign-in could not be opened. Try again or use email.");
+  window.location.href = data.url;
 }
 
 type PopupMessage = {
