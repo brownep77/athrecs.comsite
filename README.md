@@ -36,7 +36,7 @@ npm run typecheck
 
 ## Updating fixtures
 
-- On the live site: **/admin** (Update) — CSV bulk import or Grok JSON paste.
+- On the live site: **/admin** (Update) — CSV bulk import or ATHRECS JSON import.
 - Or edit `src/data/catalogue.ts` and redeploy.
 
 ## Stack

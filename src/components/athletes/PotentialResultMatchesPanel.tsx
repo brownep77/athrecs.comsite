@@ -466,7 +466,7 @@ export function PotentialResultMatchesPanel() {
           {!searchPublic ? (
             <p className="mt-3 text-xs text-subtle">
               Save your name first. Turn on Performance and habit insights if you want ATHRECS to
-              ask Grok to look outside the ATHRECS database.
+              search public result sites for more of your races.
             </p>
           ) : external.isFetching ? (
             <p className="mt-4 flex items-center gap-2 text-sm text-muted">

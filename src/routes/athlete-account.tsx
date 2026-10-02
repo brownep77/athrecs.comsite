@@ -791,7 +791,7 @@ function SignedInAccount() {
                     </div>
                     <p className="mt-5 text-sm font-semibold text-fg">A race you know you ran</p>
                     <p className="mt-1 text-xs text-subtle">
-                      One distinctive race helps Grok tell you apart from other athletes with the
+                      One distinctive race helps ATHRECS tell you apart from other athletes with the
                       same name.
                     </p>
                     <div className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-4">

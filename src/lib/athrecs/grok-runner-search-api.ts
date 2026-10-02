@@ -340,7 +340,7 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
         available: false,
         consentRequired: true,
         message:
-          "Turn on Performance and habit insights, then save your Athlete Account, before ATHRECS asks Grok to search public result sites.",
+          "Turn on Performance and habit insights, then save your Athlete Account, to allow ATHRECS to search public result sites.",
         searchedNames,
         matches: [],
         cached: false,
@@ -400,7 +400,7 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
         available = false;
         status = "unavailable";
         message =
-          "Public search is wired, but XAI_API_KEY is not set on this deployment yet. ATHRECS matches still work.";
+          "Public result search is not available on this site yet. ATHRECS name matches still work.";
       } else if (!result.ok) {
         available = false;
         status = "error";

@@ -157,7 +157,7 @@ function ImportRaceResults() {
     </header>
     <fieldset disabled={Boolean(busy)} className="min-w-0 space-y-4 rounded-xl border border-cyan-300 bg-white p-5">
       <legend className="max-w-full px-1 text-xl font-semibold">1. Choose your results file</legend>
-      <p className="text-sm">Choose the original race-results <strong>.csv</strong> or <strong>.xlsx</strong> file from your computer or phone. A file attached in ChatGPT is not automatically selected on this website.</p>
+      <p className="text-sm">Choose the original race-results <strong>.csv</strong> or <strong>.xlsx</strong> file from your computer or phone to upload it to ATHRECS.</p>
       <input ref={fileInput} aria-label="Choose Excel or CSV race results" aria-describedby="upload-file-state" type="file" accept=".csv,.xlsx" onChange={e=>{const chosen=e.target.files?.[0];e.target.value="";void choose(chosen);}} className="sr-only" />
       <div className="flex flex-wrap items-center gap-3">
         <Button type="button" className={action} onClick={chooseFile}>{busy==='file' ? 'Reading your file…' : file ? 'Choose a different file' : 'Choose Excel or CSV file'}</Button>
