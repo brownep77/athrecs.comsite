@@ -2,13 +2,7 @@ import type { ErrorComponentProps } from "@tanstack/react-router";
 import { TriangleAlert } from "lucide-react";
 
 export function AppErrorComponent({ error }: ErrorComponentProps) {
-  const message =
-    error instanceof Error
-      ? error.message
-      : typeof error === "string"
-        ? error
-        : "An unexpected error occurred. Try reloading the page.";
-
+  const message = error instanceof Error ? error.message : "";
   return (
     <main
       className={
