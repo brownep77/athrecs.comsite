@@ -213,12 +213,12 @@ try {
       (await post("sign-in/email-otp", { email: expiredEmail, otp: expired })).status >= 400,
       "Expired codes are refused",
     );
-    const passwordEmail = "email-password@example.test";
+    const passwordEmail = "test-runner@example.test";
     const password = "Test-password-123!";
     const signup = await post("sign-up/email", {
       email: passwordEmail,
       password,
-      name: "Password Runner",
+      name: "AthRecs Test Runner",
       callbackURL: "/athlete-account",
     });
     assert.equal(signup.status, 200, await signup.clone().text());
@@ -230,7 +230,190 @@ try {
     assert(verified.status < 400);
     const credentialLogin = await post("sign-in/email", { email: passwordEmail, password });
     assert.equal(credentialLogin.status, 200, await credentialLogin.clone().text());
-    assert.equal((await credentialLogin.json()).user.emailVerified, true);
+    const testRunner = await credentialLogin.json();
+    assert.equal(testRunner.user.emailVerified, true);
+    const testAccount = await rpc(
+      "athrecs/athlete-account-api",
+      "getMyAthleteAccount",
+      undefined,
+      testRunner.token,
+    );
+    const testProfile = {
+      ...testAccount,
+      fullName: "AthRecs Test Runner",
+      displayName: "Test Runner — fictional QA profile",
+      dateOfBirth: "1990-01-01",
+      country: "United Kingdom",
+      region: "Norfolk",
+      city: "Norwich",
+      nationality: "British",
+      clubOrTeam: "Unattached",
+      previousNames: ["Fictional Previous Runner"],
+      privacyAcknowledged: true,
+      sports: [
+        {
+          sportCode: "Running",
+          isPrimary: true,
+          experienceLevel: "recreational",
+          disciplines: ["Road running"],
+          preferredDistances: ["5K", "10K"],
+          preferredSurfaces: ["Road"],
+          trainingSessionsPerWeek: 3,
+          trainingHoursPerWeek: 3,
+          weeklyDistanceKm: 25,
+          eventsPerYear: 6,
+          goals: "Fictional test: complete a 10K",
+          coachName: "",
+        },
+        {
+          sportCode: "Swimming",
+          isPrimary: false,
+          experienceLevel: "new",
+          disciplines: [],
+          preferredDistances: [],
+          preferredSurfaces: [],
+          trainingSessionsPerWeek: 1,
+          trainingHoursPerWeek: 1,
+          weeklyDistanceKm: null,
+          eventsPerYear: 0,
+          goals: "Fictional test: improve technique",
+          coachName: "",
+        },
+      ],
+    };
+    await rpc("athrecs/athlete-account-api", "saveMyAthleteAccount", testProfile, testRunner.token);
+    const reloaded = await rpc(
+      "athrecs/athlete-account-api",
+      "getMyAthleteAccount",
+      undefined,
+      testRunner.token,
+    );
+    for (const key of ["fullName", "displayName", "dateOfBirth", "country", "city", "nationality"])
+      assert.equal(reloaded[key], testProfile[key], `${key} survives save and reload`);
+    assert.equal(reloaded.athleteNumber, testAccount.athleteNumber);
+    assert.equal(reloaded.sports.length, 2);
+    assert.equal(reloaded.sports.find((sport) => sport.isPrimary)?.sportCode, "Running");
+    assert.equal(reloaded.claimedResults.length, 0, "A new identity has no borrowed results");
+    assert.deepEqual(reloaded.previousNames, testProfile.previousNames);
+    assert(Object.values(reloaded.consents).every((consent) => consent === false));
+    const testShare = await rpc(
+      "athrecs/athlete-profile-share-api",
+      "getMyProfileShare",
+      undefined,
+      testRunner.token,
+    );
+    assert.equal(testShare.enabled, false);
+    assert.equal(
+      await rpc("athrecs/athlete-profile-share-api", "getPublishedSharedProfile", {
+        slug: testShare.slug,
+      }),
+      null,
+    );
+    await assert.rejects(() =>
+      rpc(
+        "athrecs/athlete-profile-share-api",
+        "saveMyProfileShare",
+        { enabled: true, acknowledged: false },
+        testRunner.token,
+      ),
+    );
+    await rpc(
+      "athrecs/athlete-profile-share-api",
+      "saveMyProfileShare",
+      {
+        enabled: true,
+        acknowledged: true,
+        shareBio: false,
+        shareResults: true,
+        shareClub: false,
+        shareLocation: false,
+      },
+      testRunner.token,
+    );
+    const publicTestProfile = await rpc(
+      "athrecs/athlete-profile-share-api",
+      "getPublishedSharedProfile",
+      { slug: testShare.slug },
+    );
+    assert.equal(publicTestProfile.displayName, testProfile.displayName);
+    assert.equal(publicTestProfile.athleteNumber, testAccount.athleteNumber);
+    assert.equal(publicTestProfile.country, "");
+    assert.equal(publicTestProfile.city, "");
+    assert.equal(publicTestProfile.club, "");
+    assert(!("email" in publicTestProfile) && !("dateOfBirth" in publicTestProfile));
+    await rpc(
+      "athrecs/athlete-profile-share-api",
+      "saveMyProfileShare",
+      {
+        enabled: false,
+      },
+      testRunner.token,
+    );
+    assert.equal(
+      await rpc("athrecs/athlete-profile-share-api", "getPublishedSharedProfile", {
+        slug: testShare.slug,
+      }),
+      null,
+      "Disabling sharing removes the public profile",
+    );
+    console.log(
+      "Fictional athlete: verified signup, two sports, save/reload and private/public controls passed.",
+    );
+
+    const resetRequest = await post("request-password-reset", {
+      email: passwordEmail,
+      redirectTo: `${origin}/athlete-account?auth=1&authMode=reset`,
+    });
+    assert.equal(resetRequest.status, 200, await resetRequest.clone().text());
+    const resetEmail = sent.findLast((mail) => mail.to.includes(passwordEmail));
+    const resetUrl = resetEmail?.text.match(/http:\/\/[^\s]+/)?.[0];
+    assert(resetUrl?.startsWith(origin), "Recovery email contains a local reset link");
+    const resetLink = await fetch(resetUrl, { headers: { origin }, redirect: "manual" });
+    assert(resetLink.status >= 300 && resetLink.status < 400);
+    const resetLocation = new URL(resetLink.headers.get("location"), origin);
+    assert.equal(resetLocation.origin, origin);
+    const resetToken = resetLocation.searchParams.get("token");
+    assert(resetToken, "The emailed link opens a fresh reset page with a token");
+    const newPassword = "Changed-test-password-456!";
+    const reset = await post("reset-password", { token: resetToken, newPassword });
+    assert.equal(reset.status, 200, await reset.clone().text());
+    assert((await post("sign-in/email", { email: passwordEmail, password })).status >= 400);
+    assert((await post("reset-password", { token: resetToken, newPassword })).status >= 400);
+    await assert.rejects(
+      () => rpc("athrecs/athlete-account-api", "getMyAthleteAccount", undefined, testRunner.token),
+      /Unauthorized|signed.in|authentication/i,
+      "Password recovery revokes the old session",
+    );
+    const afterReset = await post("sign-in/email", { email: passwordEmail, password: newPassword });
+    assert.equal(afterReset.status, 200, await afterReset.clone().text());
+    const resetUser = await afterReset.json();
+    assert.equal(resetUser.user.id, testRunner.user.id);
+    const codeSignIn = await post("sign-in/email-otp", {
+      email: passwordEmail,
+      otp: await sendCode(passwordEmail),
+    });
+    assert.equal(codeSignIn.status, 200, await codeSignIn.clone().text());
+    const codeUser = await codeSignIn.json();
+    assert.equal(codeUser.user.id, testRunner.user.id, "Code login reuses the password account");
+    const afterCode = await rpc(
+      "athrecs/athlete-account-api",
+      "getMyAthleteAccount",
+      undefined,
+      codeUser.token,
+    );
+    assert.equal(afterCode.athleteNumber, testAccount.athleteNumber);
+    assert.equal(afterCode.displayName, testProfile.displayName);
+    assert.equal(afterCode.sports.length, 2);
+    const signOut = await post("sign-out", {}, { authorization: `Bearer ${codeUser.token}` });
+    assert.equal(signOut.status, 200, await signOut.clone().text());
+    await assert.rejects(
+      () => rpc("athrecs/athlete-account-api", "getMyAthleteAccount", undefined, codeUser.token),
+      /Unauthorized|signed.in|authentication/i,
+      "Signing out invalidates the session",
+    );
+    console.log(
+      "Fictional athlete: emailed password recovery, old-password rejection, token replay rejection, session revocation, email-code relogin and sign-out passed.",
+    );
     for (const provider of ["google", "apple", "microsoft", "facebook", "twitter", "linkedin"]) {
       const response = await post("sign-in/social", {
         provider,
