@@ -10,7 +10,12 @@ on:
       - 'src/components/athletes/PotentialResultMatchesPanel.tsx'
       - 'src/components/athletes/ProfileConnectionsPanel.tsx'
       - 'src/lib/athrecs/account-sections.ts'
+      - 'src/lib/athrecs/*photo.server.ts'
+      - 'src/routes/api/athlete-photos.ts'
+      - 'migrations/*athlete_photo_gallery.sql'
+      - 'vercel.json'
       - 'scripts/verify-account-panel-ui.mjs'
+      - 'scripts/verify-photo-gallery.mjs'
       - '.github/workflows/athlete-account-navigation.yml'
   workflow_dispatch:
 permissions:
@@ -31,7 +36,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - name: Lint changed account files
-        run: npx eslint src/routes/athlete-account.tsx src/components/athletes/Account*.tsx src/components/athletes/AthleteResultsSection.tsx src/components/athletes/PotentialResultMatchesPanel.tsx src/components/athletes/ProfileConnectionsPanel.tsx src/lib/athrecs/account-sections.ts scripts/verify-account-panel-ui.mjs
+        run: npx eslint src/routes/athlete-account.tsx src/routes/api/athlete-photos.ts src/components/athletes/Account*.tsx src/components/athletes/AthleteResultsSection.tsx src/components/athletes/PotentialResultMatchesPanel.tsx src/components/athletes/ProfileConnectionsPanel.tsx src/lib/athrecs/account-sections.ts src/lib/athrecs/gallery-photo.server.ts scripts/verify-account-panel-ui.mjs scripts/verify-photo-gallery.mjs
       - name: Install isolated browser test dependency
         run: npm install --prefix "$RUNNER_TEMP/account-browser" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
       - name: Install browser
@@ -44,10 +49,14 @@ jobs:
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
         run: node scripts/verify-account-panel-ui.mjs --runrecs
+      - name: Private gallery upload, ownership and removal
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
+        run: node scripts/verify-photo-gallery.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: account-navigation-screenshots
-          path: artifacts/account-sidebar-*.png
+          path: artifacts/account-*.png
           if-no-files-found: ignore
           retention-days: 7

@@ -46,6 +46,7 @@ import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-cla
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
 import { Route as AdminSponsorshipRouteImport } from './routes/admin/sponsorship'
+import { Route as ApiAthletePhotosRouteImport } from './routes/api/athlete-photos'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
 import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scanner-worker'
@@ -269,6 +270,11 @@ const AdminSponsorshipRoute = AdminSponsorshipRouteImport.update({
   path: '/admin/sponsorship',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAthletePhotosRoute = ApiAthletePhotosRouteImport.update({
+  id: '/api/athlete-photos',
+  path: '/api/athlete-photos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAthleteProfilePhotoRoute = ApiAthleteProfilePhotoRouteImport.update({
   id: '/api/athlete-profile-photo',
   path: '/api/athlete-profile-photo',
@@ -488,6 +494,7 @@ export interface FileRoutesByFullPath {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
@@ -562,6 +569,7 @@ export interface FileRoutesByTo {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
@@ -637,6 +645,7 @@ export interface FileRoutesById {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
@@ -713,6 +722,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
@@ -787,6 +797,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
@@ -861,6 +872,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
@@ -936,6 +948,7 @@ export interface RootRouteChildren {
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
   AdminSponsorshipRoute: typeof AdminSponsorshipRoute
+  ApiAthletePhotosRoute: typeof ApiAthletePhotosRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
   ApiClubScannerWorkerRoute: typeof ApiClubScannerWorkerRoute
@@ -1235,6 +1248,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSponsorshipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/athlete-photos': {
+      id: '/api/athlete-photos'
+      path: '/api/athlete-photos'
+      fullPath: '/api/athlete-photos'
+      preLoaderRoute: typeof ApiAthletePhotosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/athlete-profile-photo': {
       id: '/api/athlete-profile-photo'
       path: '/api/athlete-profile-photo'
@@ -1520,6 +1540,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
   AdminSponsorshipRoute: AdminSponsorshipRoute,
+  ApiAthletePhotosRoute: ApiAthletePhotosRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
   ApiClubScannerWorkerRoute: ApiClubScannerWorkerRoute,

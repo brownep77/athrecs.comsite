@@ -164,7 +164,7 @@ try {
     for (const [label, heading] of [
       ["Upcoming races", "Upcoming events"],
       ["Progress", "Your progress"],
-      ["Profile photo", "Profile photo"],
+      ["Photos", "Photos"],
       ["Biography", "About me"],
       ["Names & result sources", "Names and result sources"],
       ["Linked profiles", "Social profiles"],
