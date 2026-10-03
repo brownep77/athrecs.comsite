@@ -9,11 +9,14 @@ process.env.RESEND_API_KEY = "";
 process.env.VITE_AUTH_ENABLED = "false";
 const origin = "http://127.0.0.1:18190";
 process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
+console.log("[athlete-directory] Preparing isolated database and HTTP server");
 const server = await createServer({ server: { host: "127.0.0.1", port: 18190, strictPort: true } });
+console.log("[athlete-directory] Database ready");
 let database;
 const cache = new Map();
 async function rpc(file, name, data, headers) {
   if (!cache.has(file)) {
+    console.log(`[athlete-directory] Loading HTTP module ${file}`);
     const response = await fetch(`${origin}/src/lib/athrecs/${file}.ts`);
     assert.equal(response.status, 200);
     cache.set(file, await response.text());
@@ -40,10 +43,12 @@ async function rpc(file, name, data, headers) {
 }
 try {
   await server.listen();
+  console.log("[athlete-directory] HTTP server ready");
   const dbModule = await server.ssrLoadModule("/src/lib/db.ts");
   database = await dbModule.getPglite();
   const sql = await dbModule.getSql();
   const before = await rpc("athlete-directory-api", "getAthleteDirectory", {});
+  console.log("[athlete-directory] Catalogue ready; checking discovery and privacy");
   const fields = [
     ["alpha", "Directory Fixture Alpha", "England", "public"],
     ["beta", "Directory Fixture Beta", "Scotland", "public"],
@@ -70,6 +75,18 @@ try {
   });
   assert.equal(first.total, 4);
   assert.equal(first.athletes.length, 2);
+  const withoutFacets = await rpc("athlete-directory-api", "getAthleteDirectory", {
+    q: "Directory Fixture",
+    pageSize: 2,
+    includeFacets: false,
+  });
+  assert.deepEqual(withoutFacets.countries, []);
+  assert.deepEqual(withoutFacets.sports, []);
+  assert.deepEqual(
+    { ...withoutFacets, countries: first.countries, sports: first.sports },
+    first,
+    "Skipping unused homepage facets must preserve profiles, counts and pagination",
+  );
   assert.deepEqual(
     first.athletes.map((a) => a.display_name),
     ["Directory Fixture Alpha", "Directory Fixture Beta"],
@@ -204,6 +221,54 @@ try {
   const profileHtml = await (await fetch(`${origin}/athletes/${alpha.slug}`)).text();
   assert(profileHtml.includes(reference(owner.number)));
   assert(profileHtml.includes("Copy athlete ID"));
+  const readFixture = () =>
+    rpc("athlete-directory-api", "getAthleteDirectory", { q: "Directory Fixture" });
+  const visible = await readFixture();
+  const [alphaResult] = await sql`select id from results where athlete_id=${alpha.id}`;
+  await sql`insert into athlete_public_shares (user_id, slug, enabled, share_results)
+    values ('directory-owner', 'directory-owner-fixture', true, true)`;
+  await sql`insert into athlete_profile_hidden_results (user_id, result_id)
+    values ('directory-owner', ${alphaResult.id})`;
+  const hidden = await readFixture();
+  assert.equal(hidden.publicResults, visible.publicResults - 1);
+  assert.equal(hidden.publicAthletes, visible.publicAthletes);
+  assert.equal(hidden.athletes.find((a) => a.id === alpha.id).result_count, 0);
+  assert.deepEqual(hidden.athletes.find((a) => a.id === alpha.id).sports, []);
+  await sql`delete from athlete_profile_hidden_results where user_id='directory-owner'`;
+  await sql`update athlete_public_shares set share_results=false where user_id='directory-owner'`;
+  const resultsOptOut = await readFixture();
+  assert.equal(resultsOptOut.publicResults, visible.publicResults - 1);
+  assert.equal(resultsOptOut.athletes.find((a) => a.id === alpha.id).result_count, 0);
+  assert.deepEqual(resultsOptOut.athletes.find((a) => a.id === alpha.id).sports, []);
+  await sql`update athlete_public_shares set enabled=false where user_id='directory-owner'`;
+  const unpublished = await readFixture();
+  assert.equal(unpublished.total, visible.total - 1);
+  assert.equal(unpublished.publicAthletes, visible.publicAthletes - 1);
+  assert(!unpublished.athletes.some((a) => a.id === alpha.id));
+  await sql`update athlete_account_links set status='revoked' where athlete_id=${alpha.id}`;
+  const revoked = await readFixture();
+  assert.equal(revoked.publicResults, visible.publicResults);
+  assert.equal(revoked.publicAthletes, visible.publicAthletes);
+  assert.equal(revoked.athletes.find((a) => a.id === alpha.id).result_count, 1);
+  await sql`update athlete_account_links set status='active' where athlete_id=${alpha.id}`;
+  await sql`update athlete_public_shares set enabled=true, share_results=true
+    where user_id='directory-owner'`;
+  assert.deepEqual(await readFixture(), visible, "Privacy changes take effect on the next read");
+  await sql`update athletes set profile_type='Public figure' where id=${secret.id}`;
+  await sql`update results set result_visibility='private' where athlete_id=${secret.id}`;
+  const publicFigure = await readFixture();
+  assert.equal(publicFigure.publicAthletes, visible.publicAthletes + 1);
+  assert.equal(publicFigure.publicResults, visible.publicResults + 1);
+  assert.equal(publicFigure.athletes.find((a) => a.id === secret.id).result_count, 1);
+  await sql`update athlete_public_shares set enabled=false, share_results=false
+    where user_id='directory-owner'`;
+  const figureOptOut = await readFixture();
+  assert(figureOptOut.athletes.some((a) => a.id === secret.id));
+  assert.equal(figureOptOut.athletes.find((a) => a.id === secret.id).result_count, 0);
+  assert.deepEqual(figureOptOut.athletes.find((a) => a.id === secret.id).sports, []);
+  await sql`update athletes set profile_type='Athlete' where id=${secret.id}`;
+  await sql`update athlete_public_shares set enabled=true, share_results=true
+    where user_id='directory-owner'`;
   await assert.rejects(rpc("athlete-directory-api", "getAthleteDirectory", { pageSize: 10000 }));
   for (const path of ["/", "/athletes?country=Ireland", "/find-events"]) {
     const response = await fetch(`${origin}${path}`);
@@ -218,8 +283,11 @@ try {
     if (path === "/find-events") assert(html.includes("https://triathlon.org/events"));
   }
   console.log(
-    "Athlete discovery verified over HTTP: search, country, sport, pagination, visibility, counts and page rendering.",
+    "Athlete discovery verified over HTTP: search, facets, pagination, visibility, hidden results, opt-outs, public figures, counts and page rendering.",
   );
+} catch (error) {
+  console.error("[athlete-directory] Verification failed", error);
+  throw error;
 } finally {
   await server.close();
   if (database) await database.close();

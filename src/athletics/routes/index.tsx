@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
     }),
     links: [{ rel: "canonical", href: SITE_URL }],
   }),
-  loader: () => getAthleteDirectory({ data: { pageSize: 6 } }),
+  loader: () => getAthleteDirectory({ data: { pageSize: 6, includeFacets: false } }),
   component: AthleteHomePage,
 });
 
