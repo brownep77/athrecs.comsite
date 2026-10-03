@@ -1,0 +1,16 @@
+{
+  "sourceKey": "mika_timing_berlin_results",
+  "reviewDate": "2026-09-27",
+  "sourceUrl": "https://berlin.r.mikatiming.com/2026/",
+  "noticeUrl": "https://www.bmw-berlin-marathon.com/en/your-race/results",
+  "noticeSummary": "The current indexed organiser results page states that result lists are protected and may be viewed solely for private informational purposes. It refers readers to the organiser's general terms.",
+  "evidenceLimit": "The current indexed page contains this notice; the older cached direct rendering omitted it. The linked participation-terms landing page is not itself a third-party data reuse grant.",
+  "participantReuseApproved": false,
+  "automatedIngestionEnabled": false,
+  "publicationApproved": false,
+  "permissionReference": null,
+  "requiredNextEvidence": "Documented source permission or an applicable licensed feed/export covering athlete-profile use, historical records and the intended social leaderboard use.",
+  "separateTechnicalBlocker": "The connected browser stopped at its cost limit before returning any new age-30 or age-35 rows. Direct result-host extraction was also unavailable. No missing row is inferred from this failure.",
+  "existingArtwork": "Four previously produced Berlin draft cards exist in the user's private workspace. They remain unofficial and have not acquired a third-party reuse approval through this source registration.",
+  "scope": "Berlin result-list source only. Do not generalise this finding to every mika:timing client or unrelated race organiser."
+}
