@@ -180,11 +180,16 @@ assert.match(
 const waterfordViking2027 = verifiedHalfMarathonFollowupResearchQueue.find(
   (candidate) => candidate.slug === "waterford-viking-half-marathon-2027",
 );
-assert(waterfordViking2027, "Waterford Viking 2027 must remain held while its permit is pending");
+assert(waterfordViking2027, "Waterford Viking 2027 must remain held while its permit sources conflict");
 assert.equal(
   waterfordViking2027.date,
   "2027-06-20",
   "Waterford Viking must use the main half-marathon date rather than the children's event date",
+);
+assert.match(
+  waterfordViking2027.reason,
+  /approved permit 26\/557.*pending approval/i,
+  "Waterford Viking must remain held while its official permit sources conflict",
 );
 
 const catalogueSource = await fs.readFile(
