@@ -16,7 +16,7 @@ export const Route = createFileRoute("/running/")({
     meta: siteGraphMeta({
       title: "Road Race Guides: Marathons, Half Marathons & UK Ultras | ATHRECS",
       description:
-        "Explore road marathons and half marathons in seven countries, plus UK road ultramarathons. Compare entry options, routes, dates and results.",
+        "Explore featured road race previews, marathons and half marathons in seven countries, plus UK road ultras. Compare athletes, entry options, routes, dates and results.",
       url: `${SITE_URL}/running`,
     }),
     links: [{ rel: "canonical", href: `${SITE_URL}/running` }],
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/running/")({
           url: `${SITE_URL}/running`,
           mainEntity: {
             "@type": "ItemList",
-            numberOfItems: MARATHON_COUNTRIES.length + HALF_MARATHON_COUNTRIES.length + 1,
+            numberOfItems: MARATHON_COUNTRIES.length + HALF_MARATHON_COUNTRIES.length + 2,
             itemListElement: [
               ...[...MARATHON_COUNTRIES, ...HALF_MARATHON_COUNTRIES].map((country, index) => ({
                 "@type": "ListItem",
@@ -43,6 +43,12 @@ export const Route = createFileRoute("/running/")({
                 position: MARATHON_COUNTRIES.length + HALF_MARATHON_COUNTRIES.length + 1,
                 name: "UK road ultramarathons",
                 url: `${SITE_URL}/running/uk-road-ultramarathons`,
+              },
+              {
+                "@type": "ListItem",
+                position: MARATHON_COUNTRIES.length + HALF_MARATHON_COUNTRIES.length + 2,
+                name: "Featured road race previews",
+                url: `${SITE_URL}/running/featured-races`,
               },
             ],
           },
@@ -92,6 +98,28 @@ function RunningPage() {
           UK road ultras · Beyond the marathon
         </a>
       </nav>
+      <section aria-labelledby="featured-races-title">
+        <Link
+          to="/running/featured-races"
+          className="flex flex-col gap-4 rounded-xl border border-accent/30 bg-accent-soft/30 p-5 hover:border-accent sm:p-6 md:flex-row md:items-center md:justify-between"
+        >
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wide text-accent">
+              Featured road races
+            </p>
+            <h2 id="featured-races-title" className="mt-2 font-display text-2xl font-semibold">
+              Major road races worth following
+            </h2>
+            <p className="mt-3 max-w-3xl text-sm leading-6 text-muted">
+              Explore race previews from the UK, Australia, USA, Canada, New Zealand, Ireland and
+              around the world, with official race links and athlete stories.
+            </p>
+          </div>
+          <span className="inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-semibold text-accent">
+            Read the previews <ArrowRight className="size-4" aria-hidden="true" />
+          </span>
+        </Link>
+      </section>
       <section aria-labelledby="half-marathons">
         <h2 id="half-marathons" className="scroll-mt-24 font-display text-2xl font-semibold">
           Road half marathons by country

@@ -70,6 +70,7 @@ import { Route as ResultsBerlinMarathon2026RouteImport } from './routes/results/
 import { Route as ResultsBureValley102026RouteImport } from './routes/results/bure-valley-10-2026'
 import { Route as RunningIndexRouteImport } from './routes/running/index'
 import { Route as RunningGuideRouteImport } from './routes/running/$guide'
+import { Route as RunningFeaturedRacesRouteImport } from './routes/running/featured-races'
 import { Route as RunningUkMarathonsRouteImport } from './routes/running/uk-marathons'
 import { Route as RunningUkRoadUltramarathonsRouteImport } from './routes/running/uk-road-ultramarathons'
 import { Route as SitemapsFileRouteImport } from './routes/sitemaps/$file'
@@ -77,6 +78,7 @@ import { Route as SportsSportRouteImport } from './routes/sports/$sport'
 import { Route as LanguageCountryIndexRouteImport } from './routes/$language/$country/index'
 import { Route as AdminAthletesAthleteIdRouteImport } from './routes/admin/athletes.$athleteId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as RunningPreviewsSlugRouteImport } from './routes/running/previews/$slug'
 import { Route as RunningRacesSlugRouteImport } from './routes/running/races/$slug'
 import { Route as RunningUltramarathonsSlugRouteImport } from './routes/running/ultramarathons/$slug'
 import { Route as LanguageCountryRacesIndexRouteImport } from './routes/$language/$country/races/index'
@@ -391,6 +393,11 @@ const RunningGuideRoute = RunningGuideRouteImport.update({
   path: '/running/$guide',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RunningFeaturedRacesRoute = RunningFeaturedRacesRouteImport.update({
+  id: '/running/featured-races',
+  path: '/running/featured-races',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunningUkMarathonsRoute = RunningUkMarathonsRouteImport.update({
   id: '/running/uk-marathons',
   path: '/running/uk-marathons',
@@ -425,6 +432,11 @@ const AdminAthletesAthleteIdRoute = AdminAthletesAthleteIdRouteImport.update({
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RunningPreviewsSlugRoute = RunningPreviewsSlugRouteImport.update({
+  id: '/running/previews/$slug',
+  path: '/running/previews/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RunningRacesSlugRoute = RunningRacesSlugRouteImport.update({
@@ -510,6 +522,7 @@ export interface FileRoutesByFullPath {
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/featured-races': typeof RunningFeaturedRacesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -525,6 +538,7 @@ export interface FileRoutesByFullPath {
   '/running/': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/running/previews/$slug': typeof RunningPreviewsSlugRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
@@ -585,6 +599,7 @@ export interface FileRoutesByTo {
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/featured-races': typeof RunningFeaturedRacesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -600,6 +615,7 @@ export interface FileRoutesByTo {
   '/running': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/running/previews/$slug': typeof RunningPreviewsSlugRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
   '/$language/$country': typeof LanguageCountryIndexRoute
@@ -661,6 +677,7 @@ export interface FileRoutesById {
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/featured-races': typeof RunningFeaturedRacesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -676,6 +693,7 @@ export interface FileRoutesById {
   '/running/': typeof RunningIndexRoute
   '/admin/athletes/$athleteId': typeof AdminAthletesAthleteIdRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/running/previews/$slug': typeof RunningPreviewsSlugRoute
   '/running/races/$slug': typeof RunningRacesSlugRoute
   '/running/ultramarathons/$slug': typeof RunningUltramarathonsSlugRoute
   '/$language/$country/': typeof LanguageCountryIndexRoute
@@ -738,6 +756,7 @@ export interface FileRouteTypes {
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/featured-races'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -753,6 +772,7 @@ export interface FileRouteTypes {
     | '/running/'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/running/previews/$slug'
     | '/running/races/$slug'
     | '/running/ultramarathons/$slug'
     | '/$language/$country/'
@@ -813,6 +833,7 @@ export interface FileRouteTypes {
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/featured-races'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -828,6 +849,7 @@ export interface FileRouteTypes {
     | '/running'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/running/previews/$slug'
     | '/running/races/$slug'
     | '/running/ultramarathons/$slug'
     | '/$language/$country'
@@ -888,6 +910,7 @@ export interface FileRouteTypes {
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/featured-races'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -903,6 +926,7 @@ export interface FileRouteTypes {
     | '/running/'
     | '/admin/athletes/$athleteId'
     | '/api/auth/$'
+    | '/running/previews/$slug'
     | '/running/races/$slug'
     | '/running/ultramarathons/$slug'
     | '/$language/$country/'
@@ -964,6 +988,7 @@ export interface RootRouteChildren {
   ResultsBerlinMarathon2026Route: typeof ResultsBerlinMarathon2026Route
   ResultsBureValley102026Route: typeof ResultsBureValley102026Route
   RunningGuideRoute: typeof RunningGuideRoute
+  RunningFeaturedRacesRoute: typeof RunningFeaturedRacesRoute
   RunningUkMarathonsRoute: typeof RunningUkMarathonsRoute
   RunningUkRoadUltramarathonsRoute: typeof RunningUkRoadUltramarathonsRoute
   SitemapsFileRoute: typeof SitemapsFileRoute
@@ -979,6 +1004,7 @@ export interface RootRouteChildren {
   RunningIndexRoute: typeof RunningIndexRoute
   AdminAthletesAthleteIdRoute: typeof AdminAthletesAthleteIdRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  RunningPreviewsSlugRoute: typeof RunningPreviewsSlugRoute
   RunningRacesSlugRoute: typeof RunningRacesSlugRoute
   RunningUltramarathonsSlugRoute: typeof RunningUltramarathonsSlugRoute
   LanguageCountryIndexRoute: typeof LanguageCountryIndexRoute
@@ -1416,6 +1442,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RunningGuideRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/running/featured-races': {
+      id: '/running/featured-races'
+      path: '/running/featured-races'
+      fullPath: '/running/featured-races'
+      preLoaderRoute: typeof RunningFeaturedRacesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/running/uk-marathons': {
       id: '/running/uk-marathons'
       path: '/running/uk-marathons'
@@ -1463,6 +1496,13 @@ declare module '@tanstack/react-router' {
       path: '/api/auth/$'
       fullPath: '/api/auth/$'
       preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/running/previews/$slug': {
+      id: '/running/previews/$slug'
+      path: '/running/previews/$slug'
+      fullPath: '/running/previews/$slug'
+      preLoaderRoute: typeof RunningPreviewsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/running/races/$slug': {
@@ -1556,6 +1596,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResultsBerlinMarathon2026Route: ResultsBerlinMarathon2026Route,
   ResultsBureValley102026Route: ResultsBureValley102026Route,
   RunningGuideRoute: RunningGuideRoute,
+  RunningFeaturedRacesRoute: RunningFeaturedRacesRoute,
   RunningUkMarathonsRoute: RunningUkMarathonsRoute,
   RunningUkRoadUltramarathonsRoute: RunningUkRoadUltramarathonsRoute,
   SitemapsFileRoute: SitemapsFileRoute,
@@ -1571,6 +1612,7 @@ const rootRouteChildren: RootRouteChildren = {
   RunningIndexRoute: RunningIndexRoute,
   AdminAthletesAthleteIdRoute: AdminAthletesAthleteIdRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  RunningPreviewsSlugRoute: RunningPreviewsSlugRoute,
   RunningRacesSlugRoute: RunningRacesSlugRoute,
   RunningUltramarathonsSlugRoute: RunningUltramarathonsSlugRoute,
   LanguageCountryIndexRoute: LanguageCountryIndexRoute,
