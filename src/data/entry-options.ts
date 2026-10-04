@@ -78,6 +78,7 @@ const SEATON_CLASSIC_SOURCE = "https://athleticsni.org/Fixtures/Road-Running";
 export const catalogueSeedEventSlugAliases: Readonly<Record<string, string>> = {
   ...allFixtureAliases,
   ...nonStandardDistanceSlugAliases,
+  "dingle-marathon-half-2026": "dingle-marathon",
 };
 
 export const eventSlugAliases: Readonly<Record<string, string>> = {

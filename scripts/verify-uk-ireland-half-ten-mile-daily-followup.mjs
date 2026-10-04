@@ -23,10 +23,11 @@ const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
+const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 69;
 const NEW_EDITION_COUNT = 72;
-const EXISTING_SERIES_EDITION_COUNT = 36;
+const EXISTING_SERIES_EDITION_COUNT = 39;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -180,6 +181,7 @@ for (const edition of dailyHalfTenMileEditions) {
         LATEST_REGISTRATION_SCAN_CHECKED_AT,
         CURRENT_DISCOVERY_SCAN_CHECKED_AT,
         CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
+        CURRENT_CHALLENGE_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -615,6 +617,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         LATEST_REGISTRATION_SCAN_CHECKED_AT,
         CURRENT_DISCOVERY_SCAN_CHECKED_AT,
         CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
+        CURRENT_CHALLENGE_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -696,12 +699,21 @@ const kelpiesEdition = dailyHalfTenMileExistingSeriesEditions.find(
   (edition) => edition.seriesSlug === "kelpies-half-marathon" && edition.date === "2027-09-25",
 );
 assert(kelpiesEdition, "The verified Kelpies 2027 half-marathon edition is missing");
-assert.equal(kelpiesEdition.status, "Closed", "Kelpies must preserve its closed entry state");
-assert.equal(kelpiesEdition.entryUrl, undefined, "Kelpies must not expose a closed checkout");
+assert.equal(kelpiesEdition.status, "Open", "Kelpies must preserve its open entry state");
 assert.equal(
-  kelpiesEdition.entryOptions,
-  undefined,
-  "Kelpies must not expose closed entry options",
+  kelpiesEdition.entryUrl,
+  "https://www.entrycentral.com/form/130917",
+  "Kelpies must expose the direct event-specific EntryCentral form",
+);
+assert.equal(
+  kelpiesEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+  "Kelpies must retain the current source-check date",
+);
+assert.equal(
+  kelpiesEdition.entryOptions?.[0]?.priceAmount,
+  39,
+  "Kelpies must retain the official first-tier entry price",
 );
 assert.equal(
   kelpiesEdition.startTime,
@@ -740,6 +752,105 @@ assert.deepEqual(
   dailyHalfTenMileSeriesOverrides["congleton-half-and-quarter-marathons"].distances,
   ["Half", "10K", "5K"],
   "Congleton was not enriched with its complete official programme",
+);
+
+const oxfordEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) => edition.seriesSlug === "oxford-half-marathon" && edition.date === "2027-10-10",
+);
+assert(oxfordEdition, "The officially confirmed Oxford Half Marathon 2027 edition is missing");
+assert.equal(oxfordEdition.status, "TBC", "Oxford must remain TBC before general entry opens");
+assert.equal(oxfordEdition.entryUrl, undefined, "Oxford must not expose a premature checkout");
+assert.equal(
+  oxfordEdition.entryOptions,
+  undefined,
+  "Oxford must not expose premature entry options",
+);
+assert.equal(
+  oxfordEdition.startTime,
+  undefined,
+  "Oxford must not publish an unsupported start time",
+);
+assert.equal(
+  oxfordEdition.source,
+  "https://www.oxfordhalf.com/cambridgexoxford",
+  "Oxford lost its event-specific official 2027 source",
+);
+assert.equal(
+  dailyHalfTenMileSeriesOverrides["oxford-half-marathon"]?.source_url,
+  "https://www.oxfordhalf.com/cambridgexoxford",
+  "The established Oxford card was not upgraded to official organiser provenance",
+);
+assert.equal(
+  catalogue.seriesList.filter(
+    (series) => normalize(series.name) === normalize("Oxford Half Marathon"),
+  ).length,
+  1,
+  "Oxford 2027 must enrich the established card rather than create a duplicate series",
+);
+
+const dingleEditions = dailyHalfTenMileExistingSeriesEditions.filter(
+  (edition) => edition.seriesSlug === "dingle-marathon",
+);
+assert.deepEqual(
+  dingleEditions.map((edition) => edition.date),
+  ["2026-09-05", "2027-09-04"],
+  "Dingle must preserve its prior half marathon and add the verified 2027 edition",
+);
+const dingle2027Edition = dingleEditions.find((edition) => edition.date === "2027-09-04");
+assert(dingle2027Edition, "The verified Dingle 2027 half marathon is missing");
+assert.equal(dingle2027Edition.status, "Closed", "Dingle must reflect sold-out registration");
+assert.equal(dingle2027Edition.startTime, "09:00", "Dingle has the wrong official start time");
+assert.equal(
+  dingle2027Edition.source,
+  "https://eventmaster.ie/event/2xmRS2qc0z",
+  "Dingle lost its event-specific official source",
+);
+assert.equal(dingle2027Edition.entryUrl, undefined, "Dingle must not advertise sold-out checkout");
+assert.equal(
+  dingle2027Edition.publishAllDistances,
+  true,
+  "Dingle must keep its half marathon and marathon on one edition card",
+);
+assert.equal(
+  catalogue.seriesList.filter((series) => series.slug === "dingle-marathon-half-2026").length,
+  0,
+  "The historical Dingle alias must not survive as a second public card",
+);
+assert.equal(
+  catalogue.seriesList.filter((series) => series.slug === "dingle-marathon").length,
+  1,
+  "Dingle must resolve to one permanent public card",
+);
+assert.equal(
+  catalogue.seriesList.filter(
+    (series) =>
+      series.source_url &&
+      normalizeUrl(series.source_url) === normalizeUrl("https://eventmaster.ie/event/2xmRS2qc0z"),
+  ).length,
+  1,
+  "Dingle must have one canonical normalized official source URL",
+);
+assert.equal(
+  catalogue.seriesList.filter(
+    (series) => normalize(series.name) === normalize("Dingle Marathon & Half Marathon"),
+  ).length,
+  1,
+  "Dingle must not retain a normalized yearless-name duplicate",
+);
+assert.deepEqual(
+  dailyHalfTenMileSeriesOverrides["dingle-marathon"]?.distances,
+  ["Half", "Marathon"],
+  "Dingle must retain both official race distances on its canonical card",
+);
+assert.equal(
+  catalogue.editions.filter(
+    (edition) =>
+      edition.seriesSlug === "dingle-marathon" &&
+      edition.date === "2027-09-04" &&
+      edition.distance === "Half",
+  ).length,
+  1,
+  "Dingle must have one canonical seriesSlug|date half-marathon edition",
 );
 
 for (const [seriesSlug, date, startTime, source] of [
@@ -1360,7 +1471,11 @@ for (const slug of [
   const candidate = dailyHalfTenMileResearchQueue.find((item) => item.slug === slug);
   assert(candidate, `${slug} must remain held while its Athletics Ireland permit is pending`);
   assert.match(candidate.reason, /pending approval/, `${slug} lost its permit-pending reason`);
-  assert.match(candidate.reason, /2026-10-01/, `${slug} lost its current governing-body check date`);
+  assert.match(
+    candidate.reason,
+    /2026-10-01/,
+    `${slug} lost its current governing-body check date`,
+  );
 }
 
 assert.deepEqual(

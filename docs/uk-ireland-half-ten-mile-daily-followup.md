@@ -1,11 +1,11 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 2 October 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 4 October 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
 - Added 69 officially verified series: 55 half marathons and 14 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
-- Added 34 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
+- Added 37 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
 - Burnsall, Kettlewell and Malham now use the live official Due North series checkout.
@@ -15,6 +15,8 @@ Checked through 2 October 2026 for the catalogue horizon ending 31 December 2027
 The verifier rejects duplicate slugs, duplicate names after year/punctuation normalization, duplicate `seriesSlug|date` editions, catalogue rows dropped by the merge, stale source checks and held candidates leaking into the public catalogue.
 
 Events already represented elsewhere were not recreated. This includes Beverley Half Marathon, Clontarf Half Marathon, Run Tatton, Hampton Court Palace, Richmond Park, Windsor Trail, Carsington Water, Running GP Goodwood, Battersea Park, Hertfordshire, Henley River Trail, Basildon, Cheshire Autumn, Crystal Palace, Holkham, Newark, Newbury, Warwick, Wimbledon Common and Congleton; verified dates were attached to their canonical cards.
+
+Oxford Half Marathon is also retained on its established permanent card. The official challenge page now confirms the 2027 edition for 10 October; general entry does not open until 11 October 2026, so no premature checkout or unsupported start time is displayed.
 
 ## Held candidates
 
@@ -137,3 +139,11 @@ RunThrough's live sitemap contained no other missing in-scope 2027 half-marathon
 The announced entry windows have now opened for two verified editions. Looe 10 Miler on 28 February 2027 now uses its event-specific SiEntries checkout, while Blarney Stone Mad Half on 14 March 2027 now uses its live Eventmaster registration page and €40 entry option. Both retain their previously verified dates, start times and official source provenance.
 
 Two newly surfaced RunThrough editions were attached to existing canonical cards rather than duplicated: Battersea Park Running Festival on 23 October 2027 and Run Aintree on 31 October 2027. Their official pages consistently confirm the dates, half-marathon programmes, 10:00 starts and open entry. Carsington Water on 16 October and Hampton Court Palace on 17 October were already represented by verified editions, so no duplicate rows were added.
+
+## 4 October 2026 scan
+
+Oxford Half Marathon was officially confirmed for 10 October 2027 by the organisers' Cambridge x Oxford challenge page. The date was attached to the established `oxford-half-marathon` card instead of creating a year-suffixed duplicate. General entry is scheduled to open on 11 October 2026, so the edition remains `TBC` without a checkout or start time until those details are live and verified.
+
+The direct official Dingle registration page confirms the half marathon and marathon for 4 September 2027 at 09:00. Both distances are sold out, so the verified edition is published without a checkout. The historical `dingle-marathon-half-2026` card is retired into the permanent `dingle-marathon` series, preserving the 2026 half marathon and consolidating both distances under one canonical identity.
+
+Kelpies Half Marathon registration is now open for 25 September 2027 and uses EntryCentral's direct event-specific entry form, with the first 200 places priced at £39. The official 08:45 itinerary remains explicitly provisional, so no start time is published yet.

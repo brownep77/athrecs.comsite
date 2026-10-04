@@ -23,6 +23,7 @@ const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
+const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1776,11 +1777,11 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     date: "2027-09-25",
     organiser: "Scurry Events / Everyrunner Events",
     url: "https://www.entrycentral.com/kelpieshalfmarathon",
-    status: "Closed",
-    hasEntry: false,
-    checkedAt: CURRENT_REGISTRATION_SCAN_CHECKED_AT,
+    entryUrl: "https://www.entrycentral.com/form/130917",
+    priceAmount: 39,
+    checkedAt: CURRENT_CHALLENGE_SCAN_CHECKED_AT,
     notes:
-      "The direct official registration page consistently confirms the 25 September 2027 half marathon at Helix Park. Registration is closed and the published 08:45 itinerary is explicitly provisional, so no checkout or start time is exposed.",
+      "The direct official registration page consistently confirms the 25 September 2027 half marathon at Helix Park and now exposes open entry through its event-specific form. The published 08:45 itinerary remains explicitly provisional, so no start time is exposed.",
   },
   {
     seriesSlug: "congleton-half-and-quarter-marathons",
@@ -1794,6 +1795,45 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     checkedAt: CURRENT_DISCOVERY_SCAN_CHECKED_AT,
     notes:
       "The official organiser page consistently confirms the 24 January 2027 half marathon, 10K and 5K programme, the 09:00 half start and open entry. Its half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified event page is retained as the safe entry destination and the established Congleton card is reused.",
+  },
+  {
+    seriesSlug: "oxford-half-marathon",
+    date: "2027-10-10",
+    organiser: "Motiv Sports UK / Oxford Half",
+    url: "https://www.oxfordhalf.com/cambridgexoxford",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+    notes:
+      "The official Oxford Half challenge page confirms the half marathon on 10 October 2027. General entry does not open until 11 October 2026, so the established Oxford card is enriched without a premature checkout or unsupported start time.",
+  },
+  {
+    seriesSlug: "dingle-marathon",
+    date: "2026-09-05",
+    startTime: "09:00",
+    organiser: "Dingle Marathon",
+    url: "https://dinglemarathon.ie/",
+    publishAllDistances: true,
+    status: "Closed",
+    hasEntry: false,
+    checkedAt: CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser archive confirms the 2026 marathon and half marathon on 5 September 2026. The half-marathon edition is retained on the permanent Dingle card without a stale checkout.",
+  },
+  {
+    seriesSlug: "dingle-marathon",
+    date: "2027-09-04",
+    startTime: "09:00",
+    organiser: "Dingle Marathon / Eventmaster",
+    url: "https://eventmaster.ie/event/2xmRS2qc0z",
+    publishAllDistances: true,
+    status: "Closed",
+    hasEntry: false,
+    priceAmount: 74,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page confirms the half marathon and marathon on 4 September 2027 at 09:00. Both distances are sold out and only a waiting list is available, so the permanent Dingle card is enriched without advertising checkout.",
   },
 ];
 
@@ -2236,6 +2276,37 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "dingle-marathon": {
+    name: "Dingle Marathon & Half Marathon",
+    country: "Ireland",
+    county: "County Kerry",
+    city: "Dingle",
+    area: "Dingle Peninsula",
+    surface: "Road",
+    distances: ["Half", "Marathon"],
+    summary: "Dingle Marathon & Half Marathon — coastal road races around the Dingle Peninsula.",
+    description:
+      "Dingle Marathon's full and half-marathon routes follow the roads of the Dingle Peninsula; the permanent card carries the verified 2026 and sold-out 2027 editions.",
+    organiser: "Dingle Marathon",
+    website: "https://dinglemarathon.ie/",
+    source_url: "https://eventmaster.ie/event/2xmRS2qc0z",
+    defaultStartTime: "09:00",
+  },
+  "oxford-half-marathon": {
+    name: "Oxford Half Marathon",
+    country: "England",
+    county: "Oxfordshire",
+    city: "Oxford",
+    area: "Oxford city centre",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Oxford Half Marathon — a closed-road half marathon through central Oxford.",
+    description:
+      "Motiv Sports UK's Oxford Half Marathon follows a fast, closed-road route through central Oxford; the established card carries the officially confirmed 2027 edition.",
+    organiser: "Motiv Sports UK / Oxford Half",
+    website: "https://www.oxfordhalf.com/cambridgexoxford",
+    source_url: "https://www.oxfordhalf.com/cambridgexoxford",
+  },
   "tadcaster-10": {
     name: "Tadcaster 10",
     country: "England",
