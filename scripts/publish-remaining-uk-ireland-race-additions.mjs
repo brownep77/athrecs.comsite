@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import { createServer } from "vite";
+import { resolveCataloguePublisherRedirects } from "./lib/catalogue-publisher-redirects.mjs";
 
 const ACTOR = "athrecs-production-deployment@athrecs.com";
 const NON_STANDARD_SOURCE_KEY =
@@ -351,12 +352,13 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
   }
 
   async function publishBatch(batch) {
+    const resolved = await resolveCataloguePublisherRedirects(sql, batch);
     const staged = await publishing.stageCatalogueBatch(
       {
         sourceKey: batch.sourceKey,
         sourceUrl: batch.sourceUrl,
-        events: batch.events,
-        editions: batch.editions,
+        events: resolved.events,
+        editions: resolved.editions,
       },
       ACTOR,
     );

@@ -222,6 +222,53 @@ try {
   );
   assert.equal(revisionsAfter.count, revisionsBefore.count, "Repeat deployment created a revision");
   assert.equal(revisionsAfter.max_id, revisionsBefore.max_id);
+
+  // Reproduce a reviewed source URL being retired after an earlier publication.
+  const retiredSlug = "richmond-park-half-marathon-february-2027";
+  const liveSlug = `${retiredSlug}-publication-regression`;
+  const sourceEvent = await one("select id from events where slug=$1", [retiredSlug]);
+  assert(sourceEvent, "The reviewed Richmond Park source fixture exists");
+  const sourceEdition = await one(
+    "select id from editions where event_id=$1 order by id limit 1",
+    [sourceEvent.id],
+  );
+  assert(sourceEdition);
+  const fixtureAthlete = await one(
+    `insert into athletes (slug, display_name, profile_visibility)
+     values ('publisher-redirect-regression', 'Synthetic publisher regression', 'private')
+     returning id`,
+  );
+  await client.query(
+    `insert into results (edition_id, athlete_id, finish_time_seconds, result_visibility)
+     values ($1, $2, 5400, 'private')`,
+    [sourceEdition.id, fixtureAthlete.id],
+  );
+  await client.query("update events set slug=$2 where id=$1", [sourceEvent.id, liveSlug]);
+  const canonicalBefore = await one("select * from events where id=$1", [sourceEvent.id]);
+  const redirectBefore = await one(
+    "select * from slug_redirects where entity_type='event' and old_slug=$1",
+    [retiredSlug],
+  );
+  const resultsBefore = (await client.query("select * from results order by id")).rows;
+  const redirectedOutput = runNode(
+    "scripts/publish-remaining-uk-ireland-race-additions.mjs",
+    publisherEnv,
+  );
+  assert.match(redirectedOutput, /published half-ten-mile-and-10k-checkpoints-part-1 revision/);
+  assert.deepEqual(await one("select * from events where id=$1", [sourceEvent.id]), canonicalBefore);
+  assert.deepEqual(
+    await one("select * from slug_redirects where entity_type='event' and old_slug=$1", [retiredSlug]),
+    redirectBefore,
+  );
+  assert.deepEqual((await client.query("select * from results order by id")).rows, resultsBefore);
+  assert.equal((await one("select count(*)::int as n from events where slug=$1", [retiredSlug])).n, 0);
+  assert.equal((await one("select event_id from editions where id=$1", [sourceEdition.id])).event_id, sourceEvent.id);
+  await assert.rejects(
+    () => client.query("insert into events (slug,name,sport) values ($1,'Must remain blocked','Running')", [retiredSlug]),
+    /permanent public URL and cannot be reused/,
+  );
+  const replayOutput = runNode("scripts/publish-remaining-uk-ireland-race-additions.mjs", publisherEnv);
+  assert.equal((replayOutput.match(/was already published; no database change needed/g) ?? []).length, 3);
 } finally {
   await client.end();
 }
