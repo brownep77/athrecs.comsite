@@ -25,6 +25,12 @@ const data = await import(
   `data:text/javascript;base64,${Buffer.from(dataGenerated.output[0].code).toString("base64")}`
 );
 
+const aliasBundle = await rolldown({ input: "src/data/entry-options.ts" });
+const aliasGenerated = await aliasBundle.generate({ format: "esm" });
+const { catalogueSeedEventSlugAliases } = await import(
+  `data:text/javascript;base64,${Buffer.from(aliasGenerated.output[0].code).toString("base64")}`
+);
+
 const {
   verifiedHalfMarathonFollowupEditionOverrides,
   verifiedHalfMarathonFollowupEditions,
@@ -80,6 +86,20 @@ for (const series of verifiedHalfMarathonFollowupSeries) {
 const priorSeries = catalogue.seriesList.filter((series) => !newSlugs.has(series.slug));
 const priorNameKeys = new Set(priorSeries.map((series) => normalize(series.name)));
 for (const series of verifiedHalfMarathonFollowupSeries) {
+  const canonicalSlug = catalogueSeedEventSlugAliases[series.slug];
+  if (canonicalSlug) {
+    assert.equal(
+      catalogue.seriesList.filter((item) => item.slug === series.slug).length,
+      0,
+      `${series.slug} must not survive as a second public card`,
+    );
+    assert.equal(
+      catalogue.seriesList.filter((item) => item.slug === canonicalSlug).length,
+      1,
+      `${series.slug} has no unique canonical event`,
+    );
+    continue;
+  }
   assert(
     !priorNameKeys.has(normalize(series.name)),
     `${series.slug} duplicates an existing catalogue event name`,
@@ -111,9 +131,10 @@ for (const edition of verifiedHalfMarathonFollowupEditions) {
     assert.equal(option.isPrimary, true, `${key} primary source is not marked`);
     assert.match(option.entryUrl, /^https:\/\//, `${key} entry URL must use HTTPS`);
   }
+  const canonicalSlug = catalogueSeedEventSlugAliases[edition.seriesSlug] ?? edition.seriesSlug;
   assert(
     catalogue.editions.some(
-      (item) => item.seriesSlug === edition.seriesSlug && item.date === edition.date,
+      (item) => item.seriesSlug === canonicalSlug && item.date === edition.date,
     ),
     `${key} was dropped during catalogue merge`,
   );
@@ -180,7 +201,10 @@ assert.match(
 const waterfordViking2027 = verifiedHalfMarathonFollowupResearchQueue.find(
   (candidate) => candidate.slug === "waterford-viking-half-marathon-2027",
 );
-assert(waterfordViking2027, "Waterford Viking 2027 must remain held while its permit sources conflict");
+assert(
+  waterfordViking2027,
+  "Waterford Viking 2027 must remain held while its permit sources conflict",
+);
 assert.equal(
   waterfordViking2027.date,
   "2027-06-20",

@@ -1807,6 +1807,34 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The official Oxford Half challenge page confirms the half marathon on 10 October 2027. General entry does not open until 11 October 2026, so the established Oxford card is enriched without a premature checkout or unsupported start time.",
   },
+  {
+    seriesSlug: "dingle-marathon",
+    date: "2026-09-05",
+    startTime: "09:00",
+    organiser: "Dingle Marathon",
+    url: "https://dinglemarathon.ie/",
+    publishAllDistances: true,
+    status: "Closed",
+    hasEntry: false,
+    checkedAt: CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser archive confirms the 2026 marathon and half marathon on 5 September 2026. The half-marathon edition is retained on the permanent Dingle card without a stale checkout.",
+  },
+  {
+    seriesSlug: "dingle-marathon",
+    date: "2027-09-04",
+    startTime: "09:00",
+    organiser: "Dingle Marathon / Eventmaster",
+    url: "https://eventmaster.ie/event/2xmRS2qc0z",
+    publishAllDistances: true,
+    status: "Closed",
+    hasEntry: false,
+    priceAmount: 74,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+    notes:
+      "The direct official registration page confirms the half marathon and marathon on 4 September 2027 at 09:00. Both distances are sold out and only a waiting list is available, so the permanent Dingle card is enriched without advertising checkout.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -2248,6 +2276,22 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "dingle-marathon": {
+    name: "Dingle Marathon & Half Marathon",
+    country: "Ireland",
+    county: "County Kerry",
+    city: "Dingle",
+    area: "Dingle Peninsula",
+    surface: "Road",
+    distances: ["Half", "Marathon"],
+    summary: "Dingle Marathon & Half Marathon — coastal road races around the Dingle Peninsula.",
+    description:
+      "Dingle Marathon's full and half-marathon routes follow the roads of the Dingle Peninsula; the permanent card carries the verified 2026 and sold-out 2027 editions.",
+    organiser: "Dingle Marathon",
+    website: "https://dinglemarathon.ie/",
+    source_url: "https://eventmaster.ie/event/2xmRS2qc0z",
+    defaultStartTime: "09:00",
+  },
   "oxford-half-marathon": {
     name: "Oxford Half Marathon",
     country: "England",

@@ -143,3 +143,5 @@ Two newly surfaced RunThrough editions were attached to existing canonical cards
 ## 4 October 2026 scan
 
 Oxford Half Marathon was officially confirmed for 10 October 2027 by the organisers' Cambridge x Oxford challenge page. The date was attached to the established `oxford-half-marathon` card instead of creating a year-suffixed duplicate. General entry is scheduled to open on 11 October 2026, so the edition remains `TBC` without a checkout or start time until those details are live and verified.
+
+The direct official Dingle registration page confirms the half marathon and marathon for 4 September 2027 at 09:00. Both distances are sold out, so the verified edition is published without a checkout. The historical `dingle-marathon-half-2026` card is retired into the permanent `dingle-marathon` series, preserving the 2026 half marathon and consolidating both distances under one canonical identity.
