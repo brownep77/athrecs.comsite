@@ -26,7 +26,7 @@ const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 69;
 const NEW_EDITION_COUNT = 72;
-const EXISTING_SERIES_EDITION_COUNT = 36;
+const EXISTING_SERIES_EDITION_COUNT = 37;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -740,6 +740,40 @@ assert.deepEqual(
   dailyHalfTenMileSeriesOverrides["congleton-half-and-quarter-marathons"].distances,
   ["Half", "10K", "5K"],
   "Congleton was not enriched with its complete official programme",
+);
+
+const oxfordEdition = dailyHalfTenMileExistingSeriesEditions.find(
+  (edition) => edition.seriesSlug === "oxford-half-marathon" && edition.date === "2027-10-10",
+);
+assert(oxfordEdition, "The officially confirmed Oxford Half Marathon 2027 edition is missing");
+assert.equal(oxfordEdition.status, "TBC", "Oxford must remain TBC before general entry opens");
+assert.equal(oxfordEdition.entryUrl, undefined, "Oxford must not expose a premature checkout");
+assert.equal(
+  oxfordEdition.entryOptions,
+  undefined,
+  "Oxford must not expose premature entry options",
+);
+assert.equal(
+  oxfordEdition.startTime,
+  undefined,
+  "Oxford must not publish an unsupported start time",
+);
+assert.equal(
+  oxfordEdition.source,
+  "https://www.oxfordhalf.com/cambridgexoxford",
+  "Oxford lost its event-specific official 2027 source",
+);
+assert.equal(
+  dailyHalfTenMileSeriesOverrides["oxford-half-marathon"]?.source_url,
+  "https://www.oxfordhalf.com/cambridgexoxford",
+  "The established Oxford card was not upgraded to official organiser provenance",
+);
+assert.equal(
+  catalogue.seriesList.filter(
+    (series) => normalize(series.name) === normalize("Oxford Half Marathon"),
+  ).length,
+  1,
+  "Oxford 2027 must enrich the established card rather than create a duplicate series",
 );
 
 for (const [seriesSlug, date, startTime, source] of [

@@ -23,6 +23,7 @@ const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
+const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1795,6 +1796,17 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The official organiser page consistently confirms the 24 January 2027 half marathon, 10K and 5K programme, the 09:00 half start and open entry. Its half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified event page is retained as the safe entry destination and the established Congleton card is reused.",
   },
+  {
+    seriesSlug: "oxford-half-marathon",
+    date: "2027-10-10",
+    organiser: "Motiv Sports UK / Oxford Half",
+    url: "https://www.oxfordhalf.com/cambridgexoxford",
+    status: "TBC",
+    hasEntry: false,
+    checkedAt: CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+    notes:
+      "The official Oxford Half challenge page confirms the half marathon on 10 October 2027. General entry does not open until 11 October 2026, so the established Oxford card is enriched without a premature checkout or unsupported start time.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -2236,6 +2248,21 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "oxford-half-marathon": {
+    name: "Oxford Half Marathon",
+    country: "England",
+    county: "Oxfordshire",
+    city: "Oxford",
+    area: "Oxford city centre",
+    surface: "Road",
+    distances: ["Half"],
+    summary: "Oxford Half Marathon — a closed-road half marathon through central Oxford.",
+    description:
+      "Motiv Sports UK's Oxford Half Marathon follows a fast, closed-road route through central Oxford; the established card carries the officially confirmed 2027 edition.",
+    organiser: "Motiv Sports UK / Oxford Half",
+    website: "https://www.oxfordhalf.com/cambridgexoxford",
+    source_url: "https://www.oxfordhalf.com/cambridgexoxford",
+  },
   "tadcaster-10": {
     name: "Tadcaster 10",
     country: "England",
