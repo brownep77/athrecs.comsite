@@ -209,6 +209,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
       sport: "Running",
       description: race.description,
       sameAs: edition.sourceUrl,
+      eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       location: {
         "@type": "Place",
