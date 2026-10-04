@@ -797,7 +797,18 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
 }
 
 async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
-  const existing = await sql<{ slug: string }>`select slug from events`;
+  // A production event can be renamed after the source catalogue is published.
+  // Its historic URL still represents the same live identity, not a missing
+  // fixture to recreate. Leave orphaned reservations to the database guard.
+  const existing = await sql<{ slug: string }>`
+    select slug from events
+    union
+    select redirect.old_slug as slug
+    from slug_redirects redirect
+    join events event
+      on event.id = redirect.entity_id and event.slug = redirect.current_slug
+    where redirect.entity_type = 'event'
+  `;
   const have = new Set(existing.map((row) => row.slug));
   const missingSeries = seriesList.filter(
     (series) => Boolean(series?.slug) && !have.has(series.slug),
