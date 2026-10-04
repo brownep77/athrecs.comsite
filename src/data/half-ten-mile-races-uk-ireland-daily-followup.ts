@@ -1777,11 +1777,11 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     date: "2027-09-25",
     organiser: "Scurry Events / Everyrunner Events",
     url: "https://www.entrycentral.com/kelpieshalfmarathon",
-    status: "Closed",
-    hasEntry: false,
-    checkedAt: CURRENT_REGISTRATION_SCAN_CHECKED_AT,
+    entryUrl: "https://www.entrycentral.com/form/130917",
+    priceAmount: 39,
+    checkedAt: CURRENT_CHALLENGE_SCAN_CHECKED_AT,
     notes:
-      "The direct official registration page consistently confirms the 25 September 2027 half marathon at Helix Park. Registration is closed and the published 08:45 itinerary is explicitly provisional, so no checkout or start time is exposed.",
+      "The direct official registration page consistently confirms the 25 September 2027 half marathon at Helix Park and now exposes open entry through its event-specific form. The published 08:45 itinerary remains explicitly provisional, so no start time is exposed.",
   },
   {
     seriesSlug: "congleton-half-and-quarter-marathons",

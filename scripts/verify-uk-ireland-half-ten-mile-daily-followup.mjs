@@ -23,6 +23,7 @@ const CURRENT_REGISTRATION_SCAN_CHECKED_AT = "2026-09-26";
 const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
+const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 69;
 const NEW_EDITION_COUNT = 72;
@@ -180,6 +181,7 @@ for (const edition of dailyHalfTenMileEditions) {
         LATEST_REGISTRATION_SCAN_CHECKED_AT,
         CURRENT_DISCOVERY_SCAN_CHECKED_AT,
         CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
+        CURRENT_CHALLENGE_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -615,6 +617,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         LATEST_REGISTRATION_SCAN_CHECKED_AT,
         CURRENT_DISCOVERY_SCAN_CHECKED_AT,
         CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
+        CURRENT_CHALLENGE_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -696,12 +699,21 @@ const kelpiesEdition = dailyHalfTenMileExistingSeriesEditions.find(
   (edition) => edition.seriesSlug === "kelpies-half-marathon" && edition.date === "2027-09-25",
 );
 assert(kelpiesEdition, "The verified Kelpies 2027 half-marathon edition is missing");
-assert.equal(kelpiesEdition.status, "Closed", "Kelpies must preserve its closed entry state");
-assert.equal(kelpiesEdition.entryUrl, undefined, "Kelpies must not expose a closed checkout");
+assert.equal(kelpiesEdition.status, "Open", "Kelpies must preserve its open entry state");
 assert.equal(
-  kelpiesEdition.entryOptions,
-  undefined,
-  "Kelpies must not expose closed entry options",
+  kelpiesEdition.entryUrl,
+  "https://www.entrycentral.com/form/130917",
+  "Kelpies must expose the direct event-specific EntryCentral form",
+);
+assert.equal(
+  kelpiesEdition.entryOptions?.[0]?.checkedAt,
+  CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+  "Kelpies must retain the current source-check date",
+);
+assert.equal(
+  kelpiesEdition.entryOptions?.[0]?.priceAmount,
+  39,
+  "Kelpies must retain the official first-tier entry price",
 );
 assert.equal(
   kelpiesEdition.startTime,
