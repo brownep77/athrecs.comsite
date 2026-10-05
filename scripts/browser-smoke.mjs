@@ -5,6 +5,7 @@
  * inside the checked-out workspace (or /workspace in the app-builder image).
  */
 import { mkdirSync } from "node:fs";
+import { randomUUID } from "node:crypto";
 import { dirname, resolve } from "node:path";
 import { chromium } from "playwright";
 import { checkedOutputPath, checkedUrl } from "./browser-guard.mjs";
@@ -54,6 +55,23 @@ try {
   const page = await browser.newPage({
     viewport: { width: viewportWidth, height: viewportHeight },
   });
+  if (process.env.BROWSER_SMOKE_MEMBER === "1") {
+    // checkedUrl restricts this helper to loopback. Create an ordinary member
+    // through real authentication; never spoof a user or grant staff access.
+    const origin = new URL(url).origin;
+    const signup = await page.request.post(`${origin}/api/auth/sign-up/email`, {
+      headers: { origin },
+      data: {
+        name: "Profile Smoke Viewer",
+        email: `profile-smoke-${randomUUID()}@example.test`,
+        password: `Smoke-only-${randomUUID()}`,
+      },
+    });
+    if (!signup.ok()) throw new Error(`Smoke member sign-up failed: ${signup.status()}`);
+    const { token } = await signup.json();
+    if (!token) throw new Error("Smoke member sign-up did not return a session");
+    await page.setExtraHTTPHeaders({ authorization: `Bearer ${token}` });
+  }
   page.on("console", (message) => {
     if (message.type() === "error") consoleErrors.push(message.text());
   });

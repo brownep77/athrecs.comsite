@@ -86,7 +86,7 @@ try {
     assert(!html.includes("Explore athlete profiles</h1>"));
     assert(
       !html.includes(
-        'application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"ProfilePage',
+        'application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage',
       ),
     );
   }
