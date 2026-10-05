@@ -1,4 +1,5 @@
 import { lazy, Suspense, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 import { SingleAthleteLink } from "./SingleAthleteLink";
 
@@ -67,6 +68,21 @@ export function AthleteTools({
         <p className="text-xs font-semibold uppercase tracking-widest text-cyan-800">
           Athlete tools
         </p>
+        <div className="flex flex-wrap gap-3 text-sm font-semibold">
+          <Link
+            to="/admin/result-archive"
+            className="inline-flex min-h-11 items-center rounded-lg border border-cyan-700 px-3 text-cyan-900"
+          >
+            Collected results
+          </Link>
+          <Link
+            to="/admin/result-claims"
+            search={{ claimId: undefined }}
+            className="inline-flex min-h-11 items-center rounded-lg border border-cyan-700 px-3 text-cyan-900"
+          >
+            Claim conflicts & emails
+          </Link>
+        </div>
         <h1 className="font-display text-3xl font-semibold">Add or update athletes</h1>
         <p className="max-w-3xl text-sm leading-6 text-slate-700">
           One place to add a person, find existing profiles, import a results file and review

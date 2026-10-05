@@ -6,7 +6,6 @@ import {
   Bike,
   CheckCircle2,
   Dumbbell,
-  Footprints,
   Globe2,
   Layers3,
   Medal,
@@ -76,25 +75,13 @@ type NetworkSite = {
 
 const networkSites: NetworkSite[] = [
   {
-    name: "RunRecs",
-    domain: "runrecs.com",
-    sport: "Running",
-    description:
-      "Race calendars, results and connected athlete records for runners at every level.",
-    coverage: "Road running, trail running, fell running, ultrarunning and parkrun.",
-    status: "live",
-    href: "https://www.runrecs.com",
-    icon: Footprints,
-    accent: "border-lime-300/25 bg-lime-300/10 text-lime-200",
-  },
-  {
     name: "AthRecs",
     domain: "athrecs.com",
     sport: "Athlete profiles · Every sport",
     description:
       "One athlete profile for results, personal bests, progress and sporting identity across every sport.",
     coverage:
-      "Bring your records together, then find your next event through the specialist sports sites.",
+      "Bring your records together and find athletics meetings, running races and parkrun on AthRecs.",
     status: "live",
     href: "https://www.athrecs.com",
     icon: Trophy,
@@ -351,7 +338,7 @@ function SportsRecsLandingPage() {
                 A dedicated home for every sporting community.
               </h2>
               <p className="mt-5 text-lg leading-8 text-slate-300">
-                RunRecs and AthRecs are live today. The next platforms are being prepared carefully,
+                AthRecs brings athlete profiles, athletics and running races together. The next platforms are being prepared carefully,
                 and their links will activate as each specialist site is ready.
               </p>
             </div>

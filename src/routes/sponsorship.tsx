@@ -239,7 +239,7 @@ function SponsorshipPage() {
             href={
               IS_RUNRECS_SITE
                 ? "https://www.athrecs.com/brands"
-                : "https://www.runrecs.com/sponsorship"
+                : "https://www.athrecs.com/sponsorship"
             }
           >
             {IS_RUNRECS_SITE ? "AthRecs partnerships" : "RunRecs race sponsorship"}

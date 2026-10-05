@@ -1,10 +1,5 @@
 import type { Sql } from "../db";
 import { resultSlug } from "./result-slug.ts";
-import {
-  SHORT_RACE_COUNTRIES,
-  SHORT_RACE_FROM,
-  SHORT_RACE_TO,
-} from "../../athletics/temporary-running.ts";
 
 export const CONTENT_SITEMAP_PAGE_SIZE = 5000;
 export type ContentSitemapKind = "races" | "clubs" | "results";
@@ -13,27 +8,15 @@ export type ContentSitemapKind = "races" | "clubs" | "results";
 function selection(kind: ContentSitemapKind): { query: string; values: unknown[] } {
   if (kind === "races")
     return {
-      query: `select e.id, e.slug from events e where e.sport = 'Athletics' or (
-      e.sport = 'Running' and e.country = any($1::text[]) and exists (
-        select 1 from editions ed where ed.event_id = e.id
-          and ed.distance_code in ('5K', '10K') and ed.event_date between $2::date and $3::date
-          and not exists (
-            select 1 from catalogue_change_log change
-            join catalogue_revisions revision on revision.id = change.revision_id
-            join catalogue_import_batches batch on batch.id = revision.batch_id
-            where change.entity_type = 'edition' and change.operation = 'insert'
-              and (batch.source_key like 'runrecs:uk:0-100km:%' or batch.source_key like 'runrecs:collector:%')
-              and change.after_json->'record'->>'id' = ed.id::text
-          )
-      ))`,
-      values: [[...SHORT_RACE_COUNTRIES], SHORT_RACE_FROM, SHORT_RACE_TO],
+      query: `select e.id, e.slug from events e where e.sport in ('Athletics', 'Running', 'Parkrun')`,
+      values: [],
     };
   if (kind === "clubs")
     return {
-      query: `select c.id, c.slug from clubs c where lower(coalesce(c.sports, '')) like '%athletics%'
+      query: `select c.id, c.slug from clubs c where lower(coalesce(c.sports, '')) ~ '(athletics|running|parkrun)'
       or exists (select 1 from athletes a join results r on r.athlete_id = a.id
         join editions ed on ed.id = r.edition_id join events e on e.id = ed.event_id
-        where a.club_id = c.id and e.sport = 'Athletics'
+        where a.club_id = c.id and e.sport in ('Athletics', 'Running', 'Parkrun')
           and (a.profile_visibility = 'public' or a.profile_type = 'Public figure'))`,
       values: [],
     };

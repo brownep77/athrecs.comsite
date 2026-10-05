@@ -161,6 +161,7 @@ export function PotentialResultMatchesPanel() {
     enabled: Boolean(user),
     retry: false,
     staleTime: 60_000,
+    refetchInterval: 60_000,
   });
   const external = useQuery({
     queryKey: ["my-external-runner-matches", user?.id],
@@ -187,7 +188,10 @@ export function PotentialResultMatchesPanel() {
     return (
       <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
         Potential result matches could not be loaded. Your Athlete Account and existing claims are
-        unaffected.
+        unaffected.{" "}
+        <button type="button" className="underline" onClick={() => void matches.refetch()}>
+          Try again
+        </button>
       </section>
     );
   }

@@ -52,7 +52,7 @@ export function RaceCard({
   race: EventListItem;
   localized?: { language: string; country: string };
 }) {
-  if (IS_RUNRECS_SITE) return <RunRecsRaceCard race={race} localized={localized} />;
+  if (IS_RUNRECS_SITE || race.sport === "Running" || race.sport === "Parkrun") return <RunRecsRaceCard race={race} localized={localized} />;
   const focusDate = race.next_date;
   const focusStatus =
     race.next_date && race.next_status ? effectiveStatus(race.next_date, race.next_status) : null;
@@ -72,7 +72,7 @@ export function RaceCard({
     area: race.area,
   });
   const entryUrl =
-    focusDate && race.sport !== "Parkrun" && focusStatus !== "Finished" && focusStatus !== "Closed"
+    focusDate && focusStatus !== "Finished" && focusStatus !== "Closed"
       ? `/api/events/${encodeURIComponent(race.slug)}/official-entry`
       : null;
 
