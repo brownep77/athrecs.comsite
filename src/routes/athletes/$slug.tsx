@@ -19,7 +19,7 @@ import { ProfileDetails } from "@/components/athletes/ProfileDetails";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
 import { getAthleteBySlug, getPrivateAthleteBySlug } from "@/lib/athrecs/api";
-import { SITE_NAME } from "@/lib/athrecs/seo";
+import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
@@ -79,7 +79,8 @@ export const Route = createFileRoute("/athletes/$slug")({
     }
     throw notFound();
   },
-  head: () => ({
+  head: ({ params }) => ({
+    links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
     meta: [
       { title: `Athlete profile | ${SITE_NAME}` },
       { name: "robots", content: "noindex, nofollow, noarchive" },
