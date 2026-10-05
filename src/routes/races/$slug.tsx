@@ -190,6 +190,7 @@ export function RacePageContent({
   localized?: { language: string; country: string };
 }) {
   const { event, groups, distances, upcoming, past, related } = data;
+  const isRunningEvent = event.sport === "Running" || event.sport === "Parkrun";
   const qualification = raceQualifications[event.slug];
   const shownDistances = sanitizeDistances(event.name, distances);
   const country = resolveCountry({
@@ -339,7 +340,7 @@ export function RacePageContent({
                   {formatRaceDateShort(next.event_date)}
                 </p>
                 <p className="text-sm font-medium text-muted">
-                  {IS_RUNRECS_SITE && nextDayEditions.length > 1
+                  {isRunningEvent && nextDayEditions.length > 1
                     ? `${nextDayEditions.length} distances · see start times below`
                     : (nextStart ?? (zoneAbbr ? `Time TBC · ${zoneAbbr}` : "Time TBC"))}
                 </p>
@@ -355,12 +356,12 @@ export function RacePageContent({
             {event.website && (
               <Button asChild>
                 <a href={event.website} target="_blank" rel="noreferrer">
-                  {IS_RUNRECS_SITE ? "Race website" : "Official page"}
+                  {isRunningEvent ? "Race website" : "Official page"}
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
               </Button>
             )}
-            {IS_RUNRECS_SITE && nextEntry ? (
+            {isRunningEvent && nextEntry ? (
               <Button asChild variant="secondary">
                 <a href={nextEntry.url} target="_blank" rel="noopener noreferrer">
                   {nextEntry.label}
@@ -368,7 +369,7 @@ export function RacePageContent({
                 </a>
               </Button>
             ) : (
-              !IS_RUNRECS_SITE &&
+              !isRunningEvent &&
               primaryEntry &&
               nextStatus !== "Finished" && (
                 <Button asChild variant="secondary">
@@ -390,7 +391,7 @@ export function RacePageContent({
               </Button>
             )}
             <Button asChild variant="secondary">
-              <Link to="/calendar">
+              <Link to={isRunningEvent && !IS_RUNRECS_SITE ? "/running/calendar" : "/calendar"}>
                 <CalendarDays className="h-3.5 w-3.5" />
                 Calendar
               </Link>
@@ -399,7 +400,7 @@ export function RacePageContent({
         </div>
       </header>
 
-      {IS_RUNRECS_SITE ? (
+      {isRunningEvent ? (
         <>
           <nav
             aria-label="Race information"
@@ -430,7 +431,7 @@ export function RacePageContent({
 
       {qualification && <QualificationDetails qualification={qualification} />}
 
-      {IS_RUNRECS_SITE ? (
+      {isRunningEvent ? (
         <RaceEntryOptions data={data} />
       ) : (
         <EntryOptions
@@ -468,7 +469,7 @@ export function RacePageContent({
         </section>
       ) : null}
 
-      {!IS_RUNRECS_SITE && (
+      {!isRunningEvent && (
         <section aria-labelledby="key-facts-heading">
           <h2 id="key-facts-heading" className="mb-3 font-display text-lg font-semibold text-fg">
             Key facts
@@ -594,7 +595,7 @@ export function RacePageContent({
         </section>
       )}
 
-      {!IS_RUNRECS_SITE && (
+      {!isRunningEvent && (
         <section className="grid gap-4 lg:grid-cols-5">
           <div className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card lg:col-span-3">
             <div className="flex items-center gap-2">
@@ -622,7 +623,7 @@ export function RacePageContent({
         </section>
       )}
 
-      {!IS_RUNRECS_SITE && (
+      {!isRunningEvent && (
         <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
           <div className="flex items-center gap-2">
             <RouteIcon className="h-4 w-4 text-accent" />
@@ -636,7 +637,7 @@ export function RacePageContent({
         </section>
       )}
 
-      {!IS_RUNRECS_SITE && (
+      {!isRunningEvent && (
         <EditionList
           title={
             event.sport === "Parkrun"
@@ -787,7 +788,7 @@ export function RacePageContent({
         </section>
       )}
 
-      {!IS_RUNRECS_SITE && (
+      {!isRunningEvent && (
         <aside className="rounded-xl border border-dashed border-border px-4 py-4 text-xs leading-relaxed text-subtle">
           This page is an ATHRECS briefing written from public listing facts (name, date, venue,
           sport, distances). We do not copy official athlete guides, course maps, start lists or

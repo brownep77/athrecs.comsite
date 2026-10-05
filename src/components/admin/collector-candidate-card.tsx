@@ -163,7 +163,7 @@ export function CollectorCandidateCard({
           <CollectorComparison check={row.check} />
           {row.event_id && row.event_slug && (
             <a
-              href={`https://www.runrecs.com/races/${encodeURIComponent(row.event_slug)}`}
+              href={`https://www.athrecs.com/races/${encodeURIComponent(row.event_slug)}`}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1 text-emerald-700 underline"

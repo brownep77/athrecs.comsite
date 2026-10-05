@@ -254,8 +254,8 @@ function AboutPage() {
           Create your athlete profile
         </Link>{" "}
         ·{" "}
-        <a href="https://www.runrecs.com" className="text-accent underline">
-          Find running races on RunRecs
+        <a href="/running" className="text-accent underline">
+          Find running races on AthRecs
         </a>{" "}
         ·{" "}
         <Link to="/privacy" className="text-accent underline">

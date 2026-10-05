@@ -70,6 +70,9 @@ import { Route as ResultsBerlinMarathon2026RouteImport } from './routes/results/
 import { Route as ResultsBureValley102026RouteImport } from './routes/results/bure-valley-10-2026'
 import { Route as RunningIndexRouteImport } from './routes/running/index'
 import { Route as RunningGuideRouteImport } from './routes/running/$guide'
+import { Route as RunningCalendarRouteImport } from './routes/running/calendar'
+import { Route as RunningEventsRouteImport } from './routes/running/events'
+import { Route as RunningRaceSeriesRouteImport } from './routes/running/race-series'
 import { Route as RunningUkMarathonsRouteImport } from './routes/running/uk-marathons'
 import { Route as RunningUkRoadUltramarathonsRouteImport } from './routes/running/uk-road-ultramarathons'
 import { Route as SitemapsFileRouteImport } from './routes/sitemaps/$file'
@@ -391,6 +394,21 @@ const RunningGuideRoute = RunningGuideRouteImport.update({
   path: '/running/$guide',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RunningCalendarRoute = RunningCalendarRouteImport.update({
+  id: '/running/calendar',
+  path: '/running/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RunningEventsRoute = RunningEventsRouteImport.update({
+  id: '/running/events',
+  path: '/running/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RunningRaceSeriesRoute = RunningRaceSeriesRouteImport.update({
+  id: '/running/race-series',
+  path: '/running/race-series',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunningUkMarathonsRoute = RunningUkMarathonsRouteImport.update({
   id: '/running/uk-marathons',
   path: '/running/uk-marathons',
@@ -510,6 +528,9 @@ export interface FileRoutesByFullPath {
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/calendar': typeof RunningCalendarRoute
+  '/running/events': typeof RunningEventsRoute
+  '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -585,6 +606,9 @@ export interface FileRoutesByTo {
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/calendar': typeof RunningCalendarRoute
+  '/running/events': typeof RunningEventsRoute
+  '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -661,6 +685,9 @@ export interface FileRoutesById {
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
   '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/calendar': typeof RunningCalendarRoute
+  '/running/events': typeof RunningEventsRoute
+  '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -738,6 +765,9 @@ export interface FileRouteTypes {
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/calendar'
+    | '/running/events'
+    | '/running/race-series'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -813,6 +843,9 @@ export interface FileRouteTypes {
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/calendar'
+    | '/running/events'
+    | '/running/race-series'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -888,6 +921,9 @@ export interface FileRouteTypes {
     | '/results/berlin-marathon-2026'
     | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/calendar'
+    | '/running/events'
+    | '/running/race-series'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -964,6 +1000,9 @@ export interface RootRouteChildren {
   ResultsBerlinMarathon2026Route: typeof ResultsBerlinMarathon2026Route
   ResultsBureValley102026Route: typeof ResultsBureValley102026Route
   RunningGuideRoute: typeof RunningGuideRoute
+  RunningCalendarRoute: typeof RunningCalendarRoute
+  RunningEventsRoute: typeof RunningEventsRoute
+  RunningRaceSeriesRoute: typeof RunningRaceSeriesRoute
   RunningUkMarathonsRoute: typeof RunningUkMarathonsRoute
   RunningUkRoadUltramarathonsRoute: typeof RunningUkRoadUltramarathonsRoute
   SitemapsFileRoute: typeof SitemapsFileRoute
@@ -1416,6 +1455,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RunningGuideRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/running/calendar': {
+      id: '/running/calendar'
+      path: '/running/calendar'
+      fullPath: '/running/calendar'
+      preLoaderRoute: typeof RunningCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/running/events': {
+      id: '/running/events'
+      path: '/running/events'
+      fullPath: '/running/events'
+      preLoaderRoute: typeof RunningEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/running/race-series': {
+      id: '/running/race-series'
+      path: '/running/race-series'
+      fullPath: '/running/race-series'
+      preLoaderRoute: typeof RunningRaceSeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/running/uk-marathons': {
       id: '/running/uk-marathons'
       path: '/running/uk-marathons'
@@ -1556,6 +1616,9 @@ const rootRouteChildren: RootRouteChildren = {
   ResultsBerlinMarathon2026Route: ResultsBerlinMarathon2026Route,
   ResultsBureValley102026Route: ResultsBureValley102026Route,
   RunningGuideRoute: RunningGuideRoute,
+  RunningCalendarRoute: RunningCalendarRoute,
+  RunningEventsRoute: RunningEventsRoute,
+  RunningRaceSeriesRoute: RunningRaceSeriesRoute,
   RunningUkMarathonsRoute: RunningUkMarathonsRoute,
   RunningUkRoadUltramarathonsRoute: RunningUkRoadUltramarathonsRoute,
   SitemapsFileRoute: SitemapsFileRoute,

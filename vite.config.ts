@@ -72,9 +72,9 @@ function runRecsVariantPlugin(): Plugin {
 }
 
 /**
- * ATHRECS is the Athletics specialist domain. The database and staff backend
- * remain shared, while every public catalogue read is routed through an exact
- * Athletics-only facade. RunRecs builds retain their separate Running/Parkrun
+ * ATHRECS hosts Athletics, Running and Parkrun. The database and staff backend
+ * remain shared, with public catalogue reads routed through the consolidated
+ * facade. RunRecs builds retain their separate Running/Parkrun
  * facade and never enable this plugin.
  */
 function athleticsVariantPlugin(): Plugin {
