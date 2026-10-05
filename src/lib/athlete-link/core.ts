@@ -66,6 +66,20 @@ export function athleteSource(value: string): AthleteSource {
         url: `https://www.thepowerof10.info/athletes/profile.aspx?athleteid=${ids[0]}`,
       };
   }
+  if (host === "powerof10.uk") {
+    id = u.pathname
+      .match(
+        /^\/Home\/Athlete\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})\/?$/i,
+      )?.[1]
+      ?.toLowerCase();
+    if (id)
+      return {
+        provider: "powerof10",
+        label: "Power of 10",
+        externalId: id,
+        url: `https://www.powerof10.uk/Home/Athlete/${id}`,
+      };
+  }
   if (host === "parkrun.org.uk") {
     id = u.pathname.match(/^\/parkrunner\/([1-9]\d{0,17})\/?$/)?.[1];
     if (id)
