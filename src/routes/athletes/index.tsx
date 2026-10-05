@@ -1,3 +1,5 @@
+import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
+import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -9,12 +11,32 @@ import { parseAthleteDirectorySearch } from "@/lib/athrecs/athlete-directory";
 export const Route = createFileRoute("/athletes/")({
   validateSearch: parseAthleteDirectorySearch,
   loaderDeps: ({ search }) => ({ q: search.q }),
-  loader: ({ deps }) => listAthletes({ data: { q: deps.q } }),
+  headers: () => ({
+    "Cache-Control": "private, no-store",
+    Vary: "Cookie, Authorization",
+    "X-Robots-Tag": "noindex, nofollow, noarchive",
+  }),
+  head: () => ({
+    meta: [
+      { title: "Athletes | ATHRECS" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+    ],
+  }),
+  loader: async ({ deps }) =>
+    (await canViewAthleteProfiles()) ? listAthletes({ data: { q: deps.q } }) : null,
   component: AthletesPage,
 });
 
 function AthletesPage() {
   const initial = Route.useLoaderData();
+  return (
+    <ProfileViewer authenticated={initial !== null} returnTo="/athletes">
+      {initial ? <AthleteDirectory initial={initial} /> : <ProfileSignIn returnTo="/athletes" />}
+    </ProfileViewer>
+  );
+}
+
+function AthleteDirectory({ initial }: { initial: Awaited<ReturnType<typeof listAthletes>> }) {
   const [q, setQ] = useState(Route.useSearch().q ?? "");
   const { data = initial } = useQuery({
     queryKey: ["athletes", q],
