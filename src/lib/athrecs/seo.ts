@@ -71,7 +71,7 @@ export function organizationJsonLd() {
 }
 
 /** Archive and undated race pages are not upcoming event listings. */
-export function racePageJsonLd(input: {
+export function sportsEventJsonLd(input: {
   name: string;
   slug: string;
   description?: string;
