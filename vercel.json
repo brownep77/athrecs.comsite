@@ -9,6 +9,305 @@
       "has": [
         {
           "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "q"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "sport"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "country"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "county"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "city"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "postcode"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "month"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "dateFrom"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "dateTo"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "distance"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "surface"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "format"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "group"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        },
+        {
+          "type": "query",
+          "key": "page"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running",
+      "permanent": true
+    },
+    {
+      "source": "/races",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/events",
+      "permanent": true
+    },
+    {
+      "source": "/calendar",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/calendar",
+      "permanent": true
+    },
+    {
+      "source": "/race-series",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        }
+      ],
+      "destination": "https://www.athrecs.com/running/race-series",
+      "permanent": true
+    },
+    {
+      "source": "/:language(en|fr|de|es|it|nl|pl|pt)/:country",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "sport"
+        }
+      ],
+      "destination": "https://www.athrecs.com/:language/:country/races?sport=Running",
+      "permanent": true
+    },
+    {
+      "source": "/:language(en|fr|de|es|it|nl|pl|pt)/:country/races",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        }
+      ],
+      "missing": [
+        {
+          "type": "query",
+          "key": "sport"
+        }
+      ],
+      "destination": "https://www.athrecs.com/:language/:country/races?sport=Running",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?runrecs\\.com"
+        }
+      ],
+      "destination": "https://www.athrecs.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
           "value": "update.athrecs.com"
         }
       ],
