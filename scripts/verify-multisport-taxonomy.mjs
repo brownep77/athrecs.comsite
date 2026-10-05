@@ -53,9 +53,9 @@ for (const routeSource of [raceRoute, countryRaceRoute]) {
 }
 
 assert(
-  athleticsFilters.includes('export const SPORTS = ["Athletics", "Running"] as const') &&
+  athleticsFilters.includes('export const SPORTS = ["Athletics", "Running", "Parkrun"] as const') &&
     athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
-  "ATHRECS must expose Athletics and the temporary Running collection, defaulting to Athletics",
+  "ATHRECS must expose Athletics, Running and Parkrun, defaulting to Athletics",
 );
 assert(
   runRecsFilters.includes('export const SPORTS = ["All", "Running", "Parkrun"] as const') &&
