@@ -97,7 +97,7 @@ try {
     await page.goBack();
     await page.getByRole("heading", { name: "Personal details", exact: true }).waitFor();
 
-    // A synthetic result is added through the real confirmation flow, never production.
+    // A synthetic result is claimed through the real confirmation flow, never production.
     await database.exec(`
       insert into events (id, slug, name, sport, surface, country) values (990001, 'sidebar-synthetic-race', 'Sidebar Synthetic 10K', 'Running', 'Road', 'United Kingdom');
       insert into editions (id, event_id, event_date, distance_code, distance_km) values (990001, 990001, '2026-09-01', '10K', 10);
@@ -108,15 +108,36 @@ try {
     await page.getByLabel("Display name", { exact: false }).fill("Unsaved sidebar draft");
     await go("Potential races");
     const match = page.getByRole("article").filter({ hasText: "Sidebar Synthetic 10K" });
-    await match.getByRole("button", { name: "Add to my profile", exact: true }).click();
+    await match.getByRole("button", { name: "Claim this result", exact: true }).click();
     const dialog = page.getByRole("alertdialog");
-    await dialog.getByRole("button", { name: "This is my result", exact: true }).click();
-    await page.getByText("Results added to your profile.", { exact: true }).waitFor();
+    await dialog.getByRole("button", { name: "Submit claim for review", exact: true }).click();
+    await page
+      .getByText("Your claim is with staff for an ownership check.", { exact: true })
+      .waitFor();
+    assert.deepEqual(
+      (await database.query("select status from result_claims where result_id=990001")).rows,
+      [{ status: "pending" }],
+    );
+    assert.equal(
+      (await database.query("select athlete_id from athlete_account_links where athlete_id=990001"))
+        .rows.length,
+      0,
+    );
     await go("Personal details");
     assert.equal(
       await page.getByLabel("Display name", { exact: false }).inputValue(),
       "Unsaved sidebar draft",
     );
+    // The staff approval service is tested in verify-result-conflict-flow.
+    // Supply an explicitly reviewed fixture for the downstream race controls.
+    await database.exec(`
+      insert into athlete_account_links (athlete_id,user_id,user_email,source_claim_id)
+        select athlete_id,claimant_user_id,claimant_email,id from result_claims where result_id=990001;
+      update result_claims set status='approved', reviewed_at=now(),
+        reviewed_by_email='synthetic-reviewer@example.test', staff_note='Synthetic reviewed identity fixture'
+        where result_id=990001;
+    `);
+    await page.reload({ waitUntil: "networkidle" });
     await go("My races");
     await page.getByRole("searchbox", { name: "Search your results" }).fill("Sidebar Synthetic");
     const row = page.getByRole("row").filter({ hasText: "Sidebar Synthetic 10K" });

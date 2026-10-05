@@ -486,6 +486,12 @@ try {
     failEmail = false;
     const firstConcurrentSend = sends.length;
     await Promise.all(Array.from({ length: 4 }, () => alerts.deliverClaimConflictAlerts(sql)));
+    assert(sends.length > firstConcurrentSend, "Overlapping workers must make delivery progress");
+    // A worker prepares deliveries under a row lock and sends at most three.
+    // Other workers may finish before that preparation commits, so overlapping
+    // invocations need not drain all six alerts in a single scheduled tick.
+    // Subsequent ticks must deliver the remaining due messages without repeats.
+    for (let tick = 0; tick < 3; tick++) await alerts.deliverClaimConflictAlerts(sql);
     const concurrentSends = sends.slice(firstConcurrentSend);
     const keys = concurrentSends.map((s) => s.options.idempotencyKey);
     assert.equal(new Set(keys).size, keys.length, "Overlapping workers send each delivery once");
