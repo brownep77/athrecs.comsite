@@ -70,7 +70,8 @@ export function organizationJsonLd() {
   };
 }
 
-export function sportsEventJsonLd(input: {
+/** Archive and undated race pages are not upcoming event listings. */
+export function racePageJsonLd(input: {
   name: string;
   slug: string;
   description?: string;
@@ -82,6 +83,29 @@ export function sportsEventJsonLd(input: {
   website?: string | null;
 }) {
   const url = absoluteUrl(`/races/${input.slug}`);
+  const description =
+    input.description ??
+    `${input.name} race details on ATHRECS — date, local start, venue and distances. Confirm entry on the official site.`;
+  const date = input.startDate;
+  const parsedDate = date && /^\d{4}-\d{2}-\d{2}$/.test(date) ? new Date(date) : null;
+  const hasDate =
+    parsedDate &&
+    Number.isFinite(parsedDate.getTime()) &&
+    parsedDate.toISOString().slice(0, 10) === date;
+
+  // Google requires startDate for every SportsEvent. Do not invent a date or
+  // reuse a past edition when the page has no dated upcoming edition.
+  if (!hasDate) {
+    return {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: input.name,
+      description,
+      url,
+      inLanguage: "en-GB",
+    };
+  }
+
   const start =
     input.startDate && input.startTime
       ? `${input.startDate}T${input.startTime}`
@@ -91,9 +115,7 @@ export function sportsEventJsonLd(input: {
     "@context": "https://schema.org",
     "@type": "SportsEvent",
     name: input.name,
-    description:
-      input.description ??
-      `${input.name} race details on ATHRECS — date, local start, venue and distances. Confirm entry on the official site.`,
+    description,
     url,
     image: DEFAULT_OG_IMAGE,
     startDate: start,

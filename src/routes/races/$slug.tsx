@@ -49,7 +49,7 @@ import { buildRaceBriefing, sportLabel } from "@/lib/athrecs/race-briefing";
 import { raceFormatGuideFor } from "@/data/race-format-guides";
 import { raceQualifications, type RaceQualification } from "@/data/race-qualifications";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
-import { SITE_NAME, SITE_URL, siteGraphMeta, sportsEventJsonLd } from "@/lib/athrecs/seo";
+import { SITE_NAME, SITE_URL, siteGraphMeta, racePageJsonLd } from "@/lib/athrecs/seo";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { PUBLIC_EDITION_PREVIEW_LIMIT } from "@/lib/athrecs/public-read-limits";
 import { RacePracticalInformation } from "@/components/races/RacePracticalInformation";
@@ -123,7 +123,7 @@ export const Route = createFileRoute("/races/$slug")({
         {
           type: "application/ld+json",
           children: JSON.stringify(
-            sportsEventJsonLd({
+            racePageJsonLd({
               name: event.name,
               slug: event.slug,
               description,
