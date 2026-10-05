@@ -101,7 +101,7 @@ export function CollectorComparison({
             )}
             <a
               className="inline-block font-medium text-emerald-700 underline"
-              href={`https://www.runrecs.com/races/${encodeURIComponent(match.event.slug)}`}
+              href={`https://www.athrecs.com/races/${encodeURIComponent(match.event.slug)}`}
               target="_blank"
               rel="noreferrer"
             >

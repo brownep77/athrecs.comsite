@@ -32,7 +32,8 @@ try {
       (3, 'runrecs-only', 'RunRecs Only', 'Running', 'Ireland'),
       (4, 'marathon', 'Marathon', 'Running', 'United Kingdom'),
       (5, 'outside-window', 'Outside Window', 'Running', 'Ireland'),
-      (6, 'cycling', 'Cycling', 'Cycling', 'United Kingdom');
+      (6, 'cycling', 'Cycling', 'Cycling', 'United Kingdom'),
+      (7, 'parkrun', 'Parkrun', 'Parkrun', 'Australia');
     insert into editions values (1,1,'2026-09-20','1500m'), (2,2,'2026-09-20','10K'),
       (3,3,'2026-09-20','5K'), (4,4,'2026-09-20','Marathon'), (5,5,'2028-01-01','5K'),
       (6,6,'2026-09-20','Road race'), (7,1,'9999-01-01','1500m'),
@@ -42,7 +43,7 @@ try {
     insert into catalogue_revisions values (1,1);
     insert into catalogue_change_log values (1,'edition','insert','{"record":{"id":3}}');
     insert into clubs values (1,'athletics-club','Athletics'), (2,'running-club','Running'),
-      (3,'private-member-only','Running'), (4,'out-of-scope','Cycling');
+      (3,'private-member-only','Cycling'), (4,'out-of-scope','Cycling');
     insert into athletes values (1,2,'public','Athlete'), (2,3,'private','Athlete'),
       (3,4,'public','Athlete'), (4,1,'public','Athlete'), (5,1,'public','Athlete'),
       (6,1,'public','Athlete');
@@ -52,7 +53,7 @@ try {
     insert into athlete_public_shares values ('disabled',false,true), ('hidden',true,true);
     insert into athlete_profile_hidden_results values ('hidden',5);
   `);
-  assert.deepEqual(await contentSitemapPaths(sql, "races", 1), ["/races/track-meeting", "/races/short-road-race"]);
+  assert.deepEqual(await contentSitemapPaths(sql, "races", 1), ["/races/track-meeting", "/races/short-road-race", "/races/runrecs-only", "/races/marathon", "/races/outside-window", "/races/parkrun"]);
   assert.deepEqual(await contentSitemapPaths(sql, "clubs", 1), ["/clubs/athletics-club", "/clubs/running-club"]);
   assert.deepEqual(await contentSitemapPaths(sql, "results", 1), ["/results/track-meeting-2026-09-20-1500m-1", "/results/cycling-2026-09-20-road-race-6"]);
   assert.equal(await contentSitemapPageCount(sql, "results"), 1);
@@ -67,5 +68,5 @@ try {
   assert.equal(new Set(clubs).size,5002);
   assert.deepEqual(await contentSitemapPaths(sql,"clubs",3),[]);
   assert.deepEqual(await contentSitemapPaths(sql,"clubs",0),[]);
-  console.log("PASS: readable collision-safe result URLs; complete sitemap pagination; event scope; RunRecs exclusions; private, hidden, disabled and future result exclusions; immediate publication changes.");
+  console.log("PASS: readable collision-safe result URLs; complete sitemap pagination; event scope; published Running and Parkrun inclusion; private, hidden, disabled and future result exclusions; immediate publication changes.");
 } finally { await db.close(); }

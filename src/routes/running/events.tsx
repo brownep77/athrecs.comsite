@@ -1,24 +1,25 @@
-import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { listEvents } from "@/lib/athrecs/api";
+import { listEvents } from "@/runrecs/api";
 import type { Sport } from "@/lib/athrecs/types";
-import { SPORTS as PUBLIC_SPORTS } from "@/lib/athrecs/filters";
+import { SPORTS as PUBLIC_SPORTS } from "@/runrecs/filters";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { RaceCard } from "@/components/races/RaceCard";
 import {
   countActiveSearchFilters,
-  EMPTY_SEARCH,
+  EMPTY_SEARCH as BASE_SEARCH,
   EventSearch,
   searchToApi,
   type EventSearchValues,
 } from "@/components/races/EventSearch";
 
+const EMPTY_SEARCH = { ...BASE_SEARCH, sport: "All" };
+
 const PAGE_SIZE = 40;
 const MAX_PAGE = 250;
 
 const SPORT_VALUES = new Set<Sport>(
-  PUBLIC_SPORTS.filter((sport): sport is Sport => sport !== "All"),
+  PUBLIC_SPORTS.filter((sport) => sport !== "All"),
 );
 
 type RaceSearchParams = {
@@ -87,7 +88,7 @@ function searchFromFilters(filters: EventSearchValues): RaceSearchParams {
   };
 }
 
-export const Route = createFileRoute("/races/")({
+export const Route = createFileRoute("/running/events")({
   validateSearch: (search: Record<string, unknown>): RaceSearchParams => {
     const sport = optionalText(search.sport);
     return {
@@ -123,12 +124,11 @@ export const Route = createFileRoute("/races/")({
     });
   },
   head: ({ match }) => {
-    if (IS_RUNRECS_SITE) return { links: [{ rel: "canonical", href: `${SITE_URL}/races` }] };
     const page = match.search.page ?? 1;
-    const url = `${SITE_URL}/races${page > 1 ? `?page=${page}` : ""}`;
+    const url = `${SITE_URL}/running/events${page > 1 ? `?page=${page}` : ""}`;
     const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
     return {
-      meta: siteGraphMeta({ title: `Races and athletics events${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find athletics events, race dates, locations, distances and official entry links. Browse track, field, cross-country and road fixtures on AthRecs.", url }).map((tag) => filtered && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
+      meta: siteGraphMeta({ title: `Running races${page > 1 ? ` — Page ${page}` : ""} | ATHRECS`, description: "Find running races and parkruns by date, country, distance and surface, with official entry links on AthRecs.", url }).map((tag) => filtered && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
       links: [{ rel: "canonical", href: url }],
     };
   },
@@ -151,7 +151,7 @@ function EventsPage() {
 
   const updateFilters = (next: EventSearchValues) => {
     void navigate({
-      to: "/races",
+      to: "/running/events",
       search: searchFromFilters(next),
       replace: true,
       resetScroll: false,
@@ -161,7 +161,7 @@ function EventsPage() {
   const changePage = (nextPage: number) => {
     const safePage = Math.min(Math.max(nextPage, 1), MAX_PAGE);
     void navigate({
-      to: "/races",
+      to: "/running/events",
       search: {
         ...routeSearch,
         page: safePage > 1 ? safePage : undefined,
@@ -174,7 +174,7 @@ function EventsPage() {
     <div className="space-y-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
-          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Events</h1>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-fg">Running races</h1>
           <p className="max-w-2xl text-sm text-muted">
             Search events by country, area or region, distance, surface, city or date. Every
             selection remains shareable in the page address.
@@ -183,7 +183,7 @@ function EventsPage() {
         <div className="flex flex-wrap gap-2">
           {filters.sport === "Running" ? (
             <Link
-              to={IS_RUNRECS_SITE ? "/race-series" : "/running/race-series"}
+              to="/running/race-series"
               className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg no-underline hover:border-border-strong"
             >
               Running series
@@ -213,6 +213,8 @@ function EventsPage() {
           }
         >
           <EventSearch
+            sports={PUBLIC_SPORTS}
+            defaultSport="All"
             value={filters}
             onChange={updateFilters}
             onDone={() => setMobileOpen(false)}

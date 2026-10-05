@@ -1,15 +1,15 @@
-import { getRunrecsOnlyEditionIds } from "../lib/athrecs/runrecs-publication.server";
 import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "../lib/athrecs/seed.server";
 import { todayIso } from "../lib/athrecs/format";
 import type { ClubListItem, SpectatorAccessType, Sport } from "../lib/athrecs/types";
-import { isTemporaryRunningEdition, isTemporaryRunningEvent } from "./temporary-running";
+import { queryRunningEvents, queryRunningRegions } from "../lib/running/catalogue.server";
+import { supplementedStart } from "../data/runrecs-race-guides";
 import * as base from "../lib/athrecs/api";
 
 // Keep staff, import and shared-network functions available. The explicit
 // exports below replace only public catalogue functions that require the
-// ATHRECS Athletics-only boundary.
+// Athletics, Running and Parkrun catalogue boundary.
 export * from "../lib/athrecs/api";
 
 const ATHLETICS_SPORT = "Athletics" as const;
@@ -33,9 +33,9 @@ type EventRegionInput =
 export const listEventRegions = createServerFn({ method: "GET" })
   .validator((input: EventRegionInput) => input ?? {})
   .handler(async ({ data }) => {
-    if (data.sport === "Running")
-      return base.listEventRegions({ data: { ...data, sport: "Running" } });
-    if (data.sport && data.sport !== "All" && !isAthleticsSport(data.sport)) return [];
+    if (data.sport === "Running" || data.sport === "Parkrun" || data.sport === "All")
+      return queryRunningRegions(data);
+    if (data.sport && !isAthleticsSport(data.sport)) return [];
     return base.listEventRegions({ data: { ...data, sport: ATHLETICS_SPORT } });
   });
 
@@ -63,19 +63,10 @@ type ListEventsInput =
 export const listEvents = createServerFn({ method: "GET" })
   .validator((input: ListEventsInput) => input ?? {})
   .handler(async ({ data }) => {
-    if (data.sport === "Running") {
-      if (data.distance && data.distance !== "All" && !["5K", "10K"].includes(data.distance))
-        return [];
-      return base.listEvents({
-        data: {
-          ...data,
-          sport: "Running",
-          temporaryUkIrelandShortRaces: true,
-          distance: data.distance === "All" ? undefined : data.distance,
-        },
-      });
+    if (data.sport === "Running" || data.sport === "Parkrun" || data.sport === "All") {
+      return queryRunningEvents({ ...data, distance: data.distance === "All" ? undefined : data.distance });
     }
-    if (data.sport && data.sport !== "All" && !isAthleticsSport(data.sport)) return [];
+    if (data.sport && !isAthleticsSport(data.sport)) return [];
     return base.listEvents({
       data: {
         ...data,
@@ -89,25 +80,16 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const result = await base.getEventBySlug({ data });
     if (!result) return null;
-    if (isTemporaryRunningEvent(result.event)) {
-      const excluded = new Set(await getRunrecsOnlyEditionIds(await ready()));
-      const eligibleUpcoming = result.upcoming.filter(isTemporaryRunningEdition);
-      const eligiblePast = result.past.filter(isTemporaryRunningEdition);
-      const upcoming = eligibleUpcoming.filter((edition) => !excluded.has(edition.id));
-      const past = eligiblePast.filter((edition) => !excluded.has(edition.id));
-      if (!upcoming.length && !past.length) return null;
-      return {
-        ...result,
-        distances: [...new Set([...upcoming, ...past].map((edition) => edition.distance_code))],
-        upcoming,
-        past,
-        related: [],
-      };
-    }
-    if (!isAthleticsSport(result.event.sport)) return null;
+    if (!["Athletics", "Running", "Parkrun"].includes(result.event.sport)) return null;
     return {
       ...result,
-      related: result.related.filter((event) => isAthleticsSport(event.sport)),
+      upcoming: result.upcoming.map((edition) => ({
+        ...edition,
+        start_time: result.event.sport === "Athletics" ? edition.start_time : supplementedStart(
+          result.event, edition.event_date, edition.distance_code, edition.start_time,
+        ),
+      })),
+      related: result.related.filter((event) => ["Athletics", "Running", "Parkrun"].includes(event.sport)),
     };
   });
 
@@ -120,7 +102,7 @@ export const getEditionResults = createServerFn({ method: "GET" })
       from editions edition
       join events event on event.id = edition.event_id
       where edition.id = ${data}
-        and event.sport = 'Athletics'
+        and event.sport in ('Athletics', 'Running', 'Parkrun')
       limit 1
     `;
     if (!allowed.length) return [];
@@ -146,7 +128,7 @@ export const getPrivateAthleteBySlug = createServerFn({ method: "GET" })
       join editions edition on edition.id = result.edition_id
       join events event on event.id = edition.event_id
       where athlete.slug = ${data}
-        and event.sport = 'Athletics'
+        and event.sport in ('Athletics', 'Running', 'Parkrun')
       limit 1
     `;
     return allowed.length ? stub : null;
@@ -180,12 +162,12 @@ export const listClubs = createServerFn({ method: "GET" })
               join editions edition on edition.id = result.edition_id
               join events event on event.id = edition.event_id
               where result.athlete_id = athlete.id
-                and event.sport = 'Athletics'
+                and event.sport in ('Athletics', 'Running', 'Parkrun')
             )
         ) as member_count
       from clubs club
       where (
-          lower(coalesce(club.sports, '')) like '%athletics%'
+          lower(coalesce(club.sports, '')) ~ '(athletics|running|parkrun)'
           or exists (
             select 1
             from athletes athlete
@@ -193,7 +175,7 @@ export const listClubs = createServerFn({ method: "GET" })
             join editions edition on edition.id = result.edition_id
             join events event on event.id = edition.event_id
             where athlete.club_id = club.id
-              and event.sport = 'Athletics'
+              and event.sport in ('Athletics', 'Running', 'Parkrun')
           )
         )
         and (
@@ -207,7 +189,7 @@ export const listClubs = createServerFn({ method: "GET" })
 
     return rows.map((row) => ({
       ...row,
-      sports: [ATHLETICS_SPORT],
+      sports: row.sports_csv.split(",").map((sport) => sport.trim()).filter(Boolean),
     }));
   });
 
@@ -226,21 +208,17 @@ export const getClubBySlug = createServerFn({ method: "GET" })
       join editions edition on edition.id = result.edition_id
       join events event on event.id = edition.event_id
       where athlete.club_id = ${clubId}
-        and event.sport = 'Athletics'
+        and event.sport in ('Athletics', 'Running', 'Parkrun')
     `;
     const allowed = new Set(allowedRows.map((row) => row.id));
     const members = result.members.filter((member) => allowed.has(member.id));
-    const isAthleticsClub = result.club.sports.some((sport) =>
-      sport.toLowerCase().includes("athletics"),
+    const isCatalogueClub = result.club.sports.some((sport) =>
+      /athletics|running|parkrun/i.test(sport),
     );
-    if (!members.length && !isAthleticsClub) return null;
+    if (!members.length && !isCatalogueClub) return null;
 
     return {
       ...result,
-      club: {
-        ...result.club,
-        sports: [ATHLETICS_SPORT],
-      },
       members,
     };
   });
@@ -393,8 +371,7 @@ async function queryAthleticsCalendarPage(
   data: AthleticsCalendarPageInput = {},
 ): Promise<AthleticsCalendarPage> {
   const sql = await ready();
-  const shortRaces = data.sport === "Running";
-  const excludedEditionIds = shortRaces ? await getRunrecsOnlyEditionIds(sql) : [];
+  const calendarSport = data.sport === "Running" || data.sport === "Parkrun" ? data.sport : ATHLETICS_SPORT;
   const rawQ = data.q?.trim() ?? "";
   const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
   const region = data.region?.trim() || null;
@@ -453,14 +430,7 @@ async function queryAthleticsCalendarPage(
         from editions edition
         join events event on event.id = edition.event_id
         left join edition_spectator_access spectator on spectator.edition_id = edition.id
-        where (
-          (${shortRaces}::boolean is false and event.sport = 'Athletics')
-          or (${shortRaces}::boolean is true and event.sport = 'Running'
-            and event.country in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland', 'Ireland')
-            and edition.event_date between '2026-09-10'::date and '2027-01-31'::date
-            and edition.distance_code in ('5K', '10K')
-            and not (edition.id = any(${excludedEditionIds}::int[])))
-        )
+        where event.sport = ${calendarSport}
           and (${trackAndFieldOnly}::boolean is false or event.surface = 'Track')
           and (${upcomingOnly}::boolean is false or edition.event_date >= ${today}::date)
           and (${dateFrom}::date is null or edition.event_date >= ${dateFrom}::date)
@@ -503,7 +473,6 @@ async function queryAthleticsCalendarPage(
               where matching_edition.event_id = event.id
                 and matching_edition.event_date = edition.event_date
                 and matching_edition.distance_code = ${distance}
-                and not (matching_edition.id = any(${excludedEditionIds}::int[]))
             )
           )
         group by

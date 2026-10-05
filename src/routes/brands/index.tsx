@@ -78,7 +78,7 @@ function BrandDirectory() {
             and community partnerships.
           </p>
           <a
-            href="https://www.runrecs.com/sponsorship"
+            href="https://www.athrecs.com/sponsorship"
             className="mt-4 inline-block font-semibold text-accent hover:underline"
           >
             Race sponsorship on RunRecs →

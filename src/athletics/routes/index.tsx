@@ -268,10 +268,10 @@ function AthleteHomePage() {
             Half marathons <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
           <a
-            href="https://www.runrecs.com/races"
+            href="/running/events"
             className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-border px-4 text-sm font-semibold text-fg no-underline"
           >
-            RunRecs race calendar <ArrowRight className="size-4" aria-hidden="true" />
+            AthRecs running races <ArrowRight className="size-4" aria-hidden="true" />
           </a>
           <Link
             to="/find-events"
