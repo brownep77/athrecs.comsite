@@ -5,6 +5,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { createRequire } from "node:module";
 import crypto from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
+import { Pool, types } from "pg";
 const require = createRequire(import.meta.url);
 const ts = require("typescript");
 function load(path, deps = {}) {
@@ -22,13 +23,65 @@ function load(path, deps = {}) {
   );
   return module.exports;
 }
-const db = new PGlite();
+const postgres = process.env.ATHRECS_CLAIM_TEST_POSTGRES === "1";
+async function disposablePostgres() {
+  assert.equal(process.env.CI, "true", "PostgreSQL checks require the disposable CI service");
+  for (const name of ["DATABASE_URL", "DATABASE_URL_UNPOOLED", "POSTGRES_URL"])
+    assert.equal(process.env[name] ?? "", "", "Never use application database credentials");
+  types.setTypeParser(20, Number);
+  types.setTypeParser(1082, (value) => value);
+  const pool = new Pool({
+    host: "127.0.0.1",
+    port: 5432,
+    user: "postgres",
+    password: "postgres",
+    database: "athrecs_claim_test",
+    max: 10,
+    options: "-c statement_timeout=15000 -c lock_timeout=5000",
+  });
+  assert.equal(
+    (await pool.query("select current_database() as name")).rows[0].name,
+    "athrecs_claim_test",
+  );
+  assert.equal(
+    (
+      await pool.query(
+        "select count(*)::int as n from information_schema.tables where table_schema='public'",
+      )
+    ).rows[0].n,
+    0,
+    "Use a fresh disposable database for each run",
+  );
+  return {
+    query: (text, values) => pool.query(text, values),
+    exec: (text) => pool.query(text),
+    transaction: async (work) => {
+      const client = await pool.connect();
+      try {
+        await client.query("begin");
+        const result = await work(client);
+        await client.query("commit");
+        return result;
+      } catch (error) {
+        await client.query("rollback");
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+    close: () => pool.end(),
+  };
+}
+const db = postgres ? await disposablePostgres() : new PGlite();
 await db.waitReady;
 let failOutbox = false;
+let failSentWrite = false;
 function sqlFor(connection) {
   const query = async (text, params = []) => {
     if (failOutbox && /insert into result_claim_alerts/.test(text))
       throw Error("Synthetic outbox failure");
+    if (failSentWrite && /set sent_at =/.test(text))
+      throw Error("Synthetic database failure after provider acceptance");
     return (await connection.query(text, params)).rows;
   };
   const sql = async (parts, ...values) => {
@@ -52,6 +105,15 @@ const receipts = [];
 const mail = {
   authEmailConfigured: () => configured,
   sendAthrecsAuthEmail: async (email, options) => {
+    if (postgres) {
+      const deliveryId = Number(options.idempotencyKey.split("-").at(-1));
+      const [marker] =
+        await sql`select first_attempt_at,attempts from result_claim_alert_deliveries where id=${deliveryId}`;
+      assert(
+        marker.first_attempt_at && marker.attempts > 0,
+        "Attempt marker must be committed and visible to another connection before sending",
+      );
+    }
     sends.push({ email, options });
     if (failEmail) throw Error("Synthetic email failure");
   },
@@ -256,6 +318,167 @@ try {
     JSON.stringify(await sql`select * from results order by id`),
     originalResults,
     "Suggestions, claims and alerts never edit performances or publication",
+  );
+  // An account must not undo a staff revocation by resubmitting twice.
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values
+    ('staff','Synthetic Staff','reviewer@example.test',true,now(),now()),
+    ('revoked','Jordan Revocation Test','revoked@example.test',true,now(),now())`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility)
+    values (2,'synthetic-revocation','Jordan Revocation Test','private')`;
+  await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,result_visibility)
+    values (3,1,2,2500,'private'), (4,2,2,2480,'private')`;
+  const first = await claim("revoked", 3);
+  assert.equal(first.status, "approved");
+  await claims.revokeAthleteOwnership(
+    { claimId: first.claimId, staffNote: "Synthetic identity check rejected this ownership." },
+    { userId: "staff", staffEmail: "reviewer@example.test" },
+  );
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    assert.equal(
+      (await claim("revoked", 3)).status,
+      "pending",
+      `Staff revocation cannot be bypassed by resubmission ${attempt}`,
+    );
+  }
+  assert.equal(
+    (
+      await sql`select user_id from athlete_account_links
+    where athlete_id=2 and status='active'`
+    ).length,
+    0,
+  );
+  await claims.withdrawResultClaim({ claimId: first.claimId }, user("revoked"));
+  assert.equal(
+    (await claim("revoked", 4)).status,
+    "pending",
+    "A staff revocation also applies to another result of the same athlete",
+  );
+  // Removing the reviewer must not remove the decision's durable marker.
+  await sql`delete from "user" where id='staff'`;
+  for (let attempt = 0; attempt < 2; attempt++)
+    assert.equal((await claim("revoked", 3)).status, "pending");
+
+  if (postgres) {
+    // Real independent PostgreSQL transactions, not PGlite's single session.
+    configured = false;
+    await sql`insert into athletes(id,slug,display_name,profile_visibility)
+      values (10,'synthetic-racing','Concurrent Synthetic Athlete','private')`;
+    await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,result_visibility)
+      values (10,1,10,2500,'private'),(11,2,10,2490,'private')`;
+    for (let i = 0; i < 6; i++)
+      await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
+      values (${"race-" + i},'Concurrent Synthetic Athlete',${"race-" + i + "@example.test"},true,now(),now())`;
+    const contested = await Promise.all(
+      Array.from({ length: 6 }, (_, i) => claim("race-" + i, 10 + (i % 2))),
+    );
+    assert.equal(
+      contested.filter((c) => c.status === "approved").length,
+      1,
+      "Exactly one simultaneous first claimant gets ownership",
+    );
+    assert.equal(contested.filter((c) => c.status === "pending").length, 5);
+    assert.equal(
+      (await sql`select * from athlete_account_links where athlete_id=10 and status='active'`)
+        .length,
+      1,
+    );
+    const pendingIndex = contested.findIndex((c) => c.status === "pending");
+    await Promise.all(
+      Array.from({ length: 6 }, () => claim("race-" + pendingIndex, 10 + (pendingIndex % 2))),
+    );
+    assert.equal(
+      (await sql`select * from result_claims where athlete_id=10`).length,
+      6,
+      "Concurrent repeated submissions cannot create extra claims",
+    );
+    assert.equal(
+      (
+        await sql`select * from result_claim_alerts where claim_id in
+      (select id from result_claims where athlete_id=10)`
+      ).length,
+      5,
+    );
+    configured = true;
+    failEmail = false;
+    const firstConcurrentSend = sends.length;
+    await Promise.all(Array.from({ length: 4 }, () => alerts.deliverClaimConflictAlerts(sql)));
+    const concurrentSends = sends.slice(firstConcurrentSend);
+    const keys = concurrentSends.map((s) => s.options.idempotencyKey);
+    assert.equal(new Set(keys).size, keys.length, "Overlapping workers send each delivery once");
+    assert.equal(
+      (
+        await sql`select * from result_claim_alert_deliveries where sent_at is null
+      and claim_id in (select id from result_claims where athlete_id=10)`
+      ).length,
+      0,
+    );
+    await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
+      values ('concurrent-staff','Synthetic Staff','concurrent-staff@example.test',true,now(),now())`;
+    const reviewer = { userId: "concurrent-staff", staffEmail: "concurrent-staff@example.test" };
+    await claims.revokeAthleteOwnership(
+      {
+        claimId: contested.find((c) => c.status === "approved").claimId,
+        staffNote: "Synthetic review of competing identities.",
+      },
+      reviewer,
+    );
+    const decisions = await Promise.allSettled(
+      contested
+        .filter((c) => c.status === "pending")
+        .map((c) => claims.reviewResultClaim({ claimId: c.claimId, action: "approve" }, reviewer)),
+    );
+    assert.equal(
+      decisions.filter((d) => d.status === "fulfilled").length,
+      1,
+      "Simultaneous staff approvals produce only one owner",
+    );
+    for (const decision of decisions)
+      if (decision.status === "rejected")
+        assert.match(
+          decision.reason.message,
+          /Only a pending claim|already owned/,
+          "Losing staff decisions must not deadlock or overwrite ownership",
+        );
+    console.log(
+      "PostgreSQL contention passed: simultaneous first claims, repeated submissions, competing staff approvals and overlapping email workers.",
+    );
+  }
+  // A long queue delay is not an ambiguous delivery: the first attempt is safe.
+  failEmail = false;
+  const delayedEmail = { ...sends[0].email, to: "delayed-staff@example.test" };
+  await sql`insert into result_claim_alert_deliveries(claim_id,recipient,email_payload,created_at)
+    values (${conflict.claimId},${delayedEmail.to},${JSON.stringify(delayedEmail)}::jsonb,now()-interval '2 days')`;
+  assert.equal(
+    (await alerts.deliverClaimConflictAlerts(sql, conflict.claimId)).sent,
+    1,
+    "An alert that has never been attempted must still send after a long queue delay",
+  );
+  const interruptedEmail = { ...sends[0].email, to: "interrupted-staff@example.test" };
+  const [interrupted] =
+    await sql`insert into result_claim_alert_deliveries(claim_id,recipient,email_payload)
+    values (${conflict.claimId},${interruptedEmail.to},${JSON.stringify(interruptedEmail)}::jsonb) returning id`;
+  failSentWrite = true;
+  assert.equal((await alerts.deliverClaimConflictAlerts(sql, conflict.claimId)).failed, 1);
+  const ambiguousSend = JSON.stringify(sends.at(-1));
+  const [durableAttempt] =
+    await sql`select first_attempt_at,attempts,sent_at from result_claim_alert_deliveries where id=${interrupted.id}`;
+  assert(durableAttempt.first_attempt_at);
+  assert.equal(durableAttempt.attempts, 1);
+  assert.equal(durableAttempt.sent_at, null);
+  failSentWrite = false;
+  const beforeBackoff = sends.length;
+  await alerts.deliverClaimConflictAlerts(sql, conflict.claimId);
+  assert.equal(
+    sends.length,
+    beforeBackoff,
+    "An interrupted receipt still respects its reservation",
+  );
+  await sql`update result_claim_alert_deliveries set next_attempt_at=now()-interval '1 second' where id=${interrupted.id}`;
+  assert.equal((await alerts.deliverClaimConflictAlerts(sql, conflict.claimId)).sent, 1);
+  assert.equal(
+    JSON.stringify(sends.at(-1)),
+    ambiguousSend,
+    "Uncertain provider acceptance retries the same payload and idempotency key",
   );
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");

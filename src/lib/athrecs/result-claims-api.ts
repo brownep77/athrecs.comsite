@@ -526,10 +526,24 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           and status in ('pending', 'needs_info', 'approved')
       `;
       const otherClaimCount = competing[0]?.other_claim_count ?? 0;
+      // Staff identity decisions apply to the athlete, not just one finish row.
+      // A withdrawn/resubmitted claim must not let the same account regain a
+      // revoked identity by choosing another result. Retain the email marker
+      // even if the original reviewer's account has since been deleted.
+      const reviewedIdentity = await tx<{ reviewed: boolean }>`
+        select exists (
+          select 1 from result_claims
+          where athlete_id = ${result.athlete_id}
+            and claimant_user_id = ${context.userId}
+            and (reviewed_by_user_id is not null or reviewed_by_email is not null
+              or status in ('needs_info', 'rejected'))
+        ) as reviewed
+      `;
       const previouslyReviewed =
         Boolean(existing[0]?.reviewed_by_user_id) ||
         existing[0]?.status === "needs_info" ||
-        existing[0]?.status === "rejected";
+        existing[0]?.status === "rejected" ||
+        Boolean(reviewedIdentity[0]?.reviewed);
       const requiresReview = Boolean(owner) || otherClaimCount > 0 || previouslyReviewed;
       const conflictReason = owner
         ? "This athlete profile is already linked to another account. Staff identity checks are required."
@@ -558,9 +572,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             declaration_accepted = true,
             conflict_reason = ${conflictReason},
             staff_note = case when ${previouslyReviewed} then staff_note else ${automaticNote} end,
-            reviewed_by_user_id = null,
-            reviewed_by_email = null,
-            reviewed_at = case when ${nextStatus} = 'approved' then now() else null end,
+            reviewed_by_user_id = case when ${previouslyReviewed} then reviewed_by_user_id else null end,
+            reviewed_by_email = case when ${previouslyReviewed} then reviewed_by_email else null end,
+            reviewed_at = case when ${previouslyReviewed} then reviewed_at
+              when ${nextStatus} = 'approved' then now() else null end,
             submitted_at = now(),
             updated_at = now()
           where id = ${existing[0].id}
