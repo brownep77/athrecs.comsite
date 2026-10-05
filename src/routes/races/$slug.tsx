@@ -271,6 +271,7 @@ export function RacePageContent({
         <Link
           to="/$language/$country/races"
           params={localized}
+          search={{ sport: event.sport }}
           className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -278,7 +279,7 @@ export function RacePageContent({
         </Link>
       ) : (
         <Link
-          to="/races"
+          to={isRunningEvent && !IS_RUNRECS_SITE ? "/running/events" : "/races"}
           className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
         >
           <ArrowLeft className="h-4 w-4" />
