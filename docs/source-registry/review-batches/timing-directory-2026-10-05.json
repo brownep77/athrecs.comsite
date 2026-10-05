@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-05",
+  "base_repository": "brownep77/athrecs.comsite",
+  "base_commit": "ef8715ece2026b1b41811792ea51386ef5cff022",
+  "scope": "Review data only; not a publication/import execution. Reconcile with current main and live database before writing.",
+  "changes": [
+    {
+      "entity": "series",
+      "eventSlug": "great-eastern-run",
+      "date": null,
+      "distance": null,
+      "expectedValues": {
+        "distances": [
+          "5K"
+        ]
+      },
+      "proposedChanges": {
+        "distances": [
+          "Half",
+          "5K"
+        ]
+      },
+      "evidenceUrls": [
+        "https://www.greateastern.run/",
+        "https://totalracetiming.co.uk/race/648"
+      ],
+      "evidenceSummary": "Organiser and authorised entry page offer a half marathon and Anna's Hope 5K on 11 October 2026. Current series distances omit Half.",
+      "checkedAt": "2026-10-05",
+      "timezone": "Europe/London",
+      "reviewStatus": "source_checked; publication_pending",
+      "liveApplied": false
+    },
+    {
+      "entity": "edition",
+      "eventSlug": "west-acre-wild-10k",
+      "date": "2026-10-18",
+      "distance": "10K",
+      "expectedValues": {
+        "startTime": null,
+        "status": "ClosingSoon",
+        "entryOptions": null
+      },
+      "proposedChanges": {
+        "startTime": "10:30",
+        "status": "Closed",
+        "entryOptions": [
+          {
+            "providerCode": "official-total-race-timing",
+            "providerName": "Total Race Timing official waiting list",
+            "entryUrl": "https://totalracetiming.co.uk/race/668",
+            "entryType": "official",
+            "status": "waitlist",
+            "checkedAt": "2026-10-05",
+            "sourceUrl": "https://totalracetiming.co.uk/race/668",
+            "isVerified": true,
+            "isPrimary": true,
+            "notes": "General entry sold out; waiting-list registration offered."
+          }
+        ]
+      },
+      "evidenceUrls": [
+        "https://totalracetiming.co.uk/race/668"
+      ],
+      "evidenceSummary": "10K main start 10:30; dogs start separately at 10:20. General entries are full and a waiting-list option remains.",
+      "checkedAt": "2026-10-05",
+      "timezone": "Europe/London",
+      "reviewStatus": "source_checked; publication_pending",
+      "liveApplied": false
+    },
+    {
+      "entity": "series",
+      "eventSlug": "autumn-blickling-half",
+      "date": null,
+      "distance": null,
+      "expectedValues": {
+        "surface": "Mixed",
+        "area": "Blickling Estate",
+        "organiser": "See website / TRT"
+      },
+      "proposedChanges": {
+        "surface": "Road",
+        "area": "Aylsham Market Place and Blickling-area roads",
+        "organiser": "EPIC Norfolk"
+      },
+      "evidenceUrls": [
+        "https://epicnorfolk.com/autumn-blickling-half-marathon/",
+        "https://totalracetiming.co.uk/race/669"
+      ],
+      "evidenceSummary": "Organiser describes the autumn course as entirely road, starting and finishing in Aylsham Market Place.",
+      "checkedAt": "2026-10-05",
+      "timezone": "Europe/London",
+      "reviewStatus": "source_checked; publication_pending",
+      "liveApplied": false
+    },
+    {
+      "entity": "edition",
+      "eventSlug": "autumn-blickling-half",
+      "date": "2026-10-18",
+      "distance": "Half",
+      "expectedValues": {
+        "startTime": null,
+        "status": "ClosingSoon",
+        "entryOptions": null
+      },
+      "proposedChanges": {
+        "startTime": "09:00",
+        "status": "Closed",
+        "entryOptions": [
+          {
+            "providerCode": "official-total-race-timing",
+            "providerName": "Total Race Timing official waiting list",
+            "entryUrl": "https://totalracetiming.co.uk/race/669",
+            "entryType": "official",
+            "status": "waitlist",
+            "checkedAt": "2026-10-05",
+            "sourceUrl": "https://totalracetiming.co.uk/race/669",
+            "isVerified": true,
+            "isPrimary": true,
+            "notes": "General entry sold out; waiting-list registration offered."
+          }
+        ]
+      },
+      "evidenceUrls": [
+        "https://epicnorfolk.com/autumn-blickling-half-marathon/",
+        "https://totalracetiming.co.uk/race/669"
+      ],
+      "evidenceSummary": "The organiser confirms 18 October and sold-out status. The entry page shows 09:00 and a waiting-list option.",
+      "checkedAt": "2026-10-05",
+      "timezone": "Europe/London",
+      "reviewStatus": "source_checked; publication_pending",
+      "liveApplied": false
+    },
+    {
+      "entity": "edition",
+      "eventSlug": "wymondham-nyd-10k",
+      "date": "2027-01-01",
+      "distance": "10K",
+      "expectedValues": {
+        "startTime": null,
+        "notes": "Synced from Total Race Timing (fixture)."
+      },
+      "proposedChanges": {
+        "startTime": "10:00",
+        "notes": "Start and finish: Lady's Lane. Race HQ: Wymondham Central Hall, Back Lane, NR18 0QB; number collection from 07:45. All times local (Europe/London). Checked 5 October 2026."
+      },
+      "evidenceUrls": [
+        "https://totalracetiming.co.uk/race/713"
+      ],
+      "evidenceSummary": "Authorised entry page confirms 1 January 2027 and 10:00, with a distinct 07:45 number-collection time.",
+      "checkedAt": "2026-10-05",
+      "timezone": "Europe/London",
+      "reviewStatus": "source_checked; publication_pending",
+      "liveApplied": false
+    },
+    {
+      "entity": "edition",
+      "eventSlug": "marriotts-way-10k",
+      "date": "2026-09-20",
+      "distance": "10K",
+      "expectedValues": {
+        "status": "Open",
+        "resultsOfficialUrl": null,
+        "resultsHosting": "none"
+      },
+      "proposedChanges": {
+        "status": "Finished",
+        "resultsOfficialUrl": "https://totalracetiming.co.uk/raceresults/706",
+        "resultsHosting": "link_only"
+      },
+      "evidenceUrls": [
+        "https://totalracetiming.co.uk/raceresults/706"
+      ],
+      "evidenceSummary": "10K results table explicitly dated 20 September 2026, 10:00. The time column is generic Time and must not be relabelled chip time.",
+      "checkedAt": "2026-10-05",
+      "timezone": "Europe/London",
+      "reviewStatus": "source_checked; publication_pending",
+      "liveApplied": false
+    },
+    {
+      "entity": "edition",
+      "eventSlug": "norfolk-coastal-trail",
+      "date": "2026-09-19",
+      "distance": "Half",
+      "expectedValues": {
+        "status": "ClosingSoon",
+        "resultsOfficialUrl": null,
+        "resultsHosting": "none"
+      },
+      "proposedChanges": {
+        "status": "Finished",
+        "resultsOfficialUrl": "https://totalracetiming.co.uk/raceresults/680",
+        "resultsHosting": "link_only"
+      },
+      "evidenceUrls": [
+        "https://totalracetiming.co.uk/raceresults/680"
+      ],
+      "evidenceSummary": "Separate Marathon and Half Marathon tables are present. Half Marathon starts 19 September 2026 at 10:30.",
+      "checkedAt": "2026-10-05",
+      "timezone": "Europe/London",
+      "reviewStatus": "source_checked; publication_pending",
+      "liveApplied": false
+    },
+    {
+      "entity": "edition",
+      "eventSlug": "run-sandringham-half-marathon",
+      "date": "2026-09-27",
+      "distance": "Half",
+      "expectedValues": {
+        "status": "Open",
+        "resultsOfficialUrl": null,
+        "resultsHosting": null
+      },
+      "proposedChanges": {
+        "status": "Finished",
+        "resultsOfficialUrl": "https://totalracetiming.co.uk/raceresults/646",
+        "resultsHosting": "link_only"
+      },
+      "evidenceUrls": [
+        "https://totalracetiming.co.uk/raceresults/646"
+      ],
+      "evidenceSummary": "Half Marathon table explicitly dated 27 September 2026 at 10:00, with distinct gun and chip columns.",
+      "checkedAt": "2026-10-05",
+      "timezone": "Europe/London",
+      "reviewStatus": "source_checked; publication_pending",
+      "liveApplied": false
+    }
+  ],
+  "held_findings": [
+    {
+      "item": "AEPG Great Eastern Run 5K, 11 October 2026",
+      "reason": "Source confirms 09:00 but the current exported catalogue retains only the Half edition. Add a distance-specific edition only after checking existing replacement/deduplication rules; do not create another event brand.",
+      "sources": [
+        "https://totalracetiming.co.uk/race/648"
+      ]
+    },
+    {
+      "item": "Run Sandringham 10K, 27 September 2026",
+      "reason": "Catalogue has a 10K edition under run-sandringham. The linked page has 5K, Half Marathon and an empty Community Mile table, with no 10K table. Do not attach those results to the 10K.",
+      "sources": [
+        "https://totalracetiming.co.uk/raceresults/646"
+      ]
+    },
+    {
+      "item": "Norfolk Coastal 2026 duplicate",
+      "reason": "Both norfolk-coastal-trail and norfolk-coastal-marathon-half-marathon contain a Half edition on 19 September. Possible duplicate retained for canonical review; no merge/delete performed.",
+      "sources": [
+        "https://totalracetiming.co.uk/raceresults/680"
+      ]
+    },
+    {
+      "item": "Autumn Blickling duplicate series",
+      "reason": "Both autumn-blickling-half and blickling-half-marathon-autumn exist in the repository snapshot. Review canonical identity before any new event card.",
+      "sources": [
+        "https://epicnorfolk.com/autumn-blickling-half-marathon/"
+      ]
+    },
+    {
+      "item": "Wymondham entry-transfer deadline",
+      "reason": "Entry page states a December 2027 transfer cutoff after the January 2027 race. Omit that deadline until organiser correction; do not guess December 2026.",
+      "sources": [
+        "https://totalracetiming.co.uk/race/713"
+      ]
+    },
+    {
+      "item": "West Acre automatic surface classification",
+      "reason": "Scraper labelled the event Track after reading woodland tracks. Source-checked surface is Trail. Raw extraction remains unverified.",
+      "sources": [
+        "https://totalracetiming.co.uk/race/668"
+      ]
+    },
+    {
+      "item": "Great Eastern automatic price/end time",
+      "reason": "Extracted price and end-time fields conflict with visible race options and multiple-distance starts. Use distance-specific visible evidence and omit unsupported end times.",
+      "sources": [
+        "https://totalracetiming.co.uk/race/648"
+      ]
+    },
+    {
+      "item": "Amberwood Amble in results index",
+      "reason": "Results index includes 31 October 2026, which is future as of this scan. An index entry is not a completed result.",
+      "sources": [
+        "https://totalracetiming.co.uk/result"
+      ]
+    },
+    {
+      "item": "Athlete/result participant imports",
+      "reason": "Worker config/result_sources.json still marks Total Race Timing and Run Norwich permission_required. No participant-level approval/feed was verified, no participant batch was extracted, no names were matched, and no profile was changed.",
+      "sources": [
+        "https://github.com/brownep77/athrecs-holding/blob/main/config/result_sources.json"
+      ]
+    }
+  ]
+}
