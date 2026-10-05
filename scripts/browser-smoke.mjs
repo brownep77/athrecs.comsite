@@ -70,7 +70,15 @@ try {
     if (!signup.ok()) throw new Error(`Smoke member sign-up failed: ${signup.status()}`);
     const { token } = await signup.json();
     if (!token) throw new Error("Smoke member sign-up did not return a session");
-    await page.setExtraHTTPHeaders({ authorization: `Bearer ${token}` });
+    // Scope the synthetic session to this local app. Global extra headers also
+    // reach third-party fonts and trigger CORS failures (and leak the token).
+    await page.route("**/*", async (route) => {
+      const request = route.request();
+      if (new URL(request.url()).origin !== origin) return route.continue();
+      return route.continue({
+        headers: { ...request.headers(), authorization: `Bearer ${token}` },
+      });
+    });
   }
   page.on("console", (message) => {
     if (message.type() === "error") consoleErrors.push(message.text());
