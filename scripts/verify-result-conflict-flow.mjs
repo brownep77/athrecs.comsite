@@ -246,7 +246,57 @@ try {
     () => claims.submitResultClaim({ resultId: 1, declarationAccepted: false }, user("one")),
     /Confirm/,
   );
-  assert.equal((await claim("one")).status, "approved");
+  const initialClaim = await claim("one");
+  assert.equal(
+    initialClaim.status,
+    "pending",
+    "A matching name and verified mailbox do not prove ownership",
+  );
+  assert.equal(
+    await count("athlete_account_links"),
+    0,
+    "Submitting a claim must not grant control of the athlete",
+  );
+  assert.equal(
+    (await claim("one")).status,
+    "pending",
+    "Replaying an uncontested claim cannot bypass review",
+  );
+  const otherResultClaim = await claims.submitResultClaim(
+    {
+      resultId: 2,
+      declarationAccepted: true,
+      evidenceUrl: "https://example.test/self-declared-profile",
+      status: "approved",
+      reviewed_by_user_id: "staff",
+    },
+    user("one"),
+  );
+  assert.equal(
+    otherResultClaim.status,
+    "pending",
+    "Another result, a supplied URL and forged review fields cannot establish ownership",
+  );
+  assert.equal(await count("athlete_account_links"), 0);
+  assert.equal(receipts.at(-1).notifyStaff, true, "Uncontested claims reach the staff queue");
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
+    values ('initial-reviewer','Synthetic Reviewer','initial-reviewer@example.test',true,now(),now())`;
+  await assert.rejects(
+    () =>
+      claims.reviewResultClaim(
+        { claimId: initialClaim.claimId, action: "approve" },
+        { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
+      ),
+    /independent identity evidence/,
+  );
+  await claims.reviewResultClaim(
+    {
+      claimId: initialClaim.claimId,
+      action: "approve",
+      staffNote: "Synthetic independent identity check completed.",
+    },
+    { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
+  );
   assert.equal(await count("result_claim_alerts"), 0);
   assert.equal(
     (await matches.listMyPotentialResultMatches(undefined, user("one"))).matches.length,
@@ -349,7 +399,15 @@ try {
   await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,result_visibility)
     values (3,1,2,2500,'private'), (4,2,2,2480,'private')`;
   const first = await claim("revoked", 3);
-  assert.equal(first.status, "approved");
+  assert.equal(first.status, "pending");
+  await claims.reviewResultClaim(
+    {
+      claimId: first.claimId,
+      action: "approve",
+      staffNote: "Synthetic identity evidence checked.",
+    },
+    { userId: "staff", staffEmail: "reviewer@example.test" },
+  );
   await claims.revokeAthleteOwnership(
     { claimId: first.claimId, staffNote: "Synthetic identity check rejected this ownership." },
     { userId: "staff", staffEmail: "reviewer@example.test" },
@@ -394,16 +452,21 @@ try {
     );
     assert.equal(
       contested.filter((c) => c.status === "approved").length,
-      1,
-      "Exactly one simultaneous first claimant gets ownership",
+      0,
+      "No simultaneous first claimant gets ownership without staff review",
     );
-    assert.equal(contested.filter((c) => c.status === "pending").length, 5);
+    assert.equal(contested.filter((c) => c.status === "pending").length, 6);
     assert.equal(
       (await sql`select * from athlete_account_links where athlete_id=10 and status='active'`)
         .length,
-      1,
+      0,
     );
-    const pendingIndex = contested.findIndex((c) => c.status === "pending");
+    // Transaction order is deliberately nondeterministic. Replay an account
+    // that already has a conflict alert, rather than assuming who submitted first.
+    const [alertedClaim] = await sql`select claim.claimant_user_id from result_claims claim
+      join result_claim_alerts alert on alert.claim_id=claim.id
+      where claim.athlete_id=10 order by claim.id limit 1`;
+    const pendingIndex = Number(alertedClaim.claimant_user_id.slice("race-".length));
     await Promise.all(
       Array.from({ length: 6 }, () => claim("race-" + pendingIndex, 10 + (pendingIndex % 2))),
     );
@@ -436,17 +499,19 @@ try {
     await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
       values ('concurrent-staff','Synthetic Staff','concurrent-staff@example.test',true,now(),now())`;
     const reviewer = { userId: "concurrent-staff", staffEmail: "concurrent-staff@example.test" };
-    await claims.revokeAthleteOwnership(
-      {
-        claimId: contested.find((c) => c.status === "approved").claimId,
-        staffNote: "Synthetic review of competing identities.",
-      },
-      reviewer,
-    );
     const decisions = await Promise.allSettled(
       contested
         .filter((c) => c.status === "pending")
-        .map((c) => claims.reviewResultClaim({ claimId: c.claimId, action: "approve" }, reviewer)),
+        .map((c) =>
+          claims.reviewResultClaim(
+            {
+              claimId: c.claimId,
+              action: "approve",
+              staffNote: "Synthetic independent identity evidence checked.",
+            },
+            reviewer,
+          ),
+        ),
     );
     assert.equal(
       decisions.filter((d) => d.status === "fulfilled").length,

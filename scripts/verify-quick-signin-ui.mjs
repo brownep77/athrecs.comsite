@@ -233,7 +233,7 @@ try {
     await page
       .getByRole("article")
       .filter({ hasText: "Quick Signin Test 10K" })
-      .getByRole("button", { name: "Add to my profile", exact: true })
+      .getByRole("button", { name: "Claim this result", exact: true })
       .waitFor();
     const userId = (
       await database.query('select id from "user" where email = $1', ["quick-runner@example.test"])

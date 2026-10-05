@@ -231,8 +231,23 @@ try {
     resultId: knownResult,
     declarationAccepted: true,
   });
-  assert.equal(claim.status, "approved");
-  console.log("Imports, source matching, dismissals and confirmed ownership passed.");
+  assert.equal(claim.status, "pending");
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=${known}`).length,
+    0,
+  );
+  // The real staff review service is exercised in verify-result-conflict-flow.
+  // This downstream identity/profile test supplies an explicitly reviewed fixture.
+  await sql`insert into athlete_account_links (athlete_id,user_id,user_email,source_claim_id)
+    select athlete_id,claimant_user_id,claimant_email,id from result_claims where id=${claim.claimId}`;
+  await sql`update result_claims set status='approved', reviewed_at=now(),
+    reviewed_by_email='synthetic-reviewer@example.test', staff_note='Synthetic reviewed identity fixture'
+    where id=${claim.claimId}`;
+  const { syncAthleteAccountAfterClaim } = await server.ssrLoadModule(
+    "/src/lib/athrecs/athlete-account-api.ts",
+  );
+  await syncAthleteAccountAfterClaim(account.userId);
+  console.log("Imports, source matching, dismissals and staff-reviewed ownership fixture passed.");
   const after = await rpc("athlete-account-api", "getMyAthleteAccount");
   assert.equal(after.athleteProfileId, account.athleteProfileId);
   assert.equal(after.athleteNumber, account.athleteNumber);

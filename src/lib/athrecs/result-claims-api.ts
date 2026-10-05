@@ -499,8 +499,8 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       });
       if (!allowed) throw new Error("Result not available to this account");
 
-      // Serialise every ownership decision for this athlete so two simultaneous
-      // first claims cannot both be approved.
+      // Serialise submissions for this athlete so simultaneous claims retain
+      // consistent conflict detection and one claim per account/result.
       await tx`
         select id from athletes
         where id = ${result.athlete_id}
@@ -563,7 +563,6 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         existing[0]?.status === "needs_info" ||
         existing[0]?.status === "rejected" ||
         Boolean(reviewedIdentity[0]?.reviewed);
-      const requiresReview = Boolean(owner) || otherClaimCount > 0 || previouslyReviewed;
       const conflictReason = owner
         ? "This athlete profile is already linked to another account. Staff identity checks are required."
         : otherClaimCount > 0
@@ -571,9 +570,9 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           : previouslyReviewed
             ? "This claim was previously reviewed by ATHRECS staff. A new submission requires another staff review."
             : null;
-      const nextStatus: ResultClaimStatus = requiresReview ? "pending" : "approved";
-      const automaticNote =
-        nextStatus === "approved" ? "Automatically approved as the first uncontested claim." : null;
+      // A verified mailbox, matching name and self-supplied URL are not proof
+      // of athlete identity. Only staff review can create a new ownership link.
+      const nextStatus = "pending" as const;
 
       let claimId: number;
       if (existing[0]) {
@@ -590,11 +589,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             evidence_url_3 = ${data.evidenceUrl3},
             declaration_accepted = true,
             conflict_reason = ${conflictReason},
-            staff_note = case when ${previouslyReviewed} then staff_note else ${automaticNote} end,
+            staff_note = case when ${previouslyReviewed} then staff_note else null end,
             reviewed_by_user_id = case when ${previouslyReviewed} then reviewed_by_user_id else null end,
             reviewed_by_email = case when ${previouslyReviewed} then reviewed_by_email else null end,
-            reviewed_at = case when ${previouslyReviewed} then reviewed_at
-              when ${nextStatus} = 'approved' then now() else null end,
+            reviewed_at = case when ${previouslyReviewed} then reviewed_at else null end,
             submitted_at = now(),
             updated_at = now()
           where id = ${existing[0].id}
@@ -611,68 +609,11 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             ${result.result_id}, ${result.athlete_id}, ${context.userId}, ${claimantEmail},
             ${nextStatus}, ${data.verificationMethod}, ${data.evidenceText},
             ${data.evidenceUrl}, ${data.evidenceUrl2}, ${data.evidenceUrl3},
-            true, ${conflictReason}, ${automaticNote},
-            case when ${nextStatus} = 'approved' then now() else null end
+            true, ${conflictReason}, null, null
           )
           returning id
         `;
         claimId = inserted[0].id;
-      }
-
-      if (nextStatus === "approved") {
-        const linked = await tx<{ athlete_id: number }>`
-          insert into athlete_account_links (
-            athlete_id, user_id, user_email, source_claim_id, status, linked_at, updated_at
-          ) values (
-            ${result.athlete_id}, ${context.userId}, ${claimantEmail},
-            ${claimId}, 'active', now(), now()
-          )
-          on conflict (athlete_id) do update set
-            user_id = excluded.user_id,
-            user_email = excluded.user_email,
-            source_claim_id = excluded.source_claim_id,
-            status = 'active',
-            linked_at = now(),
-            updated_at = now()
-          where athlete_account_links.status = 'revoked'
-             or athlete_account_links.user_id = excluded.user_id
-          returning athlete_id
-        `;
-
-        // This is a last-resort concurrency guard. The athlete row lock above
-        // normally makes it unreachable, but an existing active owner must
-        // never be overwritten if another code path creates one concurrently.
-        if (!linked[0]) {
-          const concurrentConflict =
-            "This athlete profile was linked to another account while your claim was being processed. Staff identity checks are required.";
-          await tx`
-            update result_claims
-            set
-              status = 'pending',
-              conflict_reason = ${concurrentConflict},
-              staff_note = null,
-              reviewed_at = null,
-              updated_at = now()
-            where id = ${claimId}
-          `;
-          await queueClaimConflict(tx, claimId);
-          return {
-            status: "pending" as const,
-            isConflict: true,
-            alreadyOwned: false,
-            claimId,
-            claimantUserId: context.userId,
-            email: {
-              claimId,
-              resultId: result.result_id,
-              claimantEmail,
-              athleteName: result.athlete_name,
-              eventName: result.event_name,
-              eventDate: result.event_date,
-              distanceCode: result.distance_code,
-            },
-          };
-        }
       }
 
       const isConflict = Boolean(owner) || otherClaimCount > 0;
@@ -695,16 +636,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       };
     });
 
-    if (outcome.status === "approved" && !outcome.alreadyOwned) {
-      await syncAthleteAccountAfterClaim(outcome.claimantUserId);
-      if (outcome.email) {
-        await notifyResultClaimReviewed({
-          ...outcome.email,
-          status: "approved",
-          staffNote: null,
-        });
-      }
-    } else if (outcome.status === "pending" && outcome.email) {
+    if (outcome.status === "pending" && outcome.email) {
       // The durable outbox owns staff conflict emails. Keep the athlete receipt
       // separate and avoid sending a second generic staff notification.
       if (outcome.isConflict) {
@@ -840,8 +772,12 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
     }),
   )
   .handler(async ({ data, context }) => {
-    if (data.action !== "approve" && !data.staffNote) {
-      throw new Error("Add a staff note explaining the decision");
+    if (!data.staffNote) {
+      throw new Error(
+        data.action === "approve"
+          ? "Record the independent identity evidence checked before approving ownership"
+          : "Add a staff note explaining the decision",
+      );
     }
 
     const sql = await ready();
