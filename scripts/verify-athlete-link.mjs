@@ -24,6 +24,32 @@ function load(path, deps = {}) {
   return m.exports;
 }
 const core = load("src/lib/athlete-link/core.ts", { zod });
+const connections = load("src/lib/athrecs/profile-connections.ts");
+const modernPowerOf10 =
+  "https://www.powerof10.uk/Home/Athlete/11111111-2222-4333-8444-555555555555";
+assert.deepEqual(core.athleteSource(modernPowerOf10), {
+  provider: "powerof10",
+  label: "Power of 10",
+  externalId: "11111111-2222-4333-8444-555555555555",
+  url: modernPowerOf10,
+});
+assert.deepEqual(connections.sourceIdentityFromUrl(modernPowerOf10), {
+  provider: "powerof10",
+  externalId: "11111111-2222-4333-8444-555555555555",
+});
+for (const bad of [
+  modernPowerOf10.replace("powerof10.uk", "powerof10.uk.evil.test"),
+  modernPowerOf10.replace("/Athlete/", "/Results/"),
+  modernPowerOf10.replace("11111111-", "invalid-"),
+  modernPowerOf10.replace("powerof10.uk", "powerof10.uk:444"),
+]) {
+  assert.throws(() => core.athleteSource(bad));
+  assert.equal(connections.sourceIdentityFromUrl(bad), null);
+}
+assert.equal(
+  core.athleteSource(modernPowerOf10.toUpperCase() + "/?utm_source=test#bio").url,
+  modernPowerOf10,
+);
 const match = load("src/lib/staff-results-upload/core.ts");
 for (const url of [
   "http://worldathletics.org/athletes/test/person-1",
@@ -249,6 +275,15 @@ try {
   assert(!JSON.stringify(await service.checkLink(input(77), actor)).includes("owner@example.test"));
   const aliases = await service.checkLink(input(79, "Changed Surname", "Christopher Match"), actor);
   assert(aliases.candidates.some((c) => c.id === existing.id));
+  const modernInput = { url: modernPowerOf10, name: "Synthetic Modern Profile", searchName: "" };
+  const modernReview = await service.checkLink(modernInput, actor);
+  const modernSaved = await service.saveLink(request(modernInput, modernReview), actor);
+  assert.equal((await service.checkLink({ ...modernInput, name: "" }, actor)).state, "existing");
+  assert.equal(
+    (await sql`select profile_visibility from athletes where id=${modernSaved.athleteId}`)[0]
+      .profile_visibility,
+    "private",
+  );
   let middlewareSeen = 0;
   const fakeStaff = {};
   const api = load("src/lib/athlete-link/api.ts", {

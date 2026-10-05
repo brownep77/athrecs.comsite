@@ -220,6 +220,27 @@ try {
     0,
   );
   await assert.rejects(() => claim("unrelated"), /not available/);
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
+    values ('source-id','Different Account Name','source-id@example.test',true,now(),now())`;
+  await sql`insert into athlete_private_profiles(user_id,verified_email,full_name,power_of_10_url,privacy_notice_version,privacy_acknowledged_at)
+    values ('source-id','source-id@example.test','Different Account Name',
+      'https://www.powerof10.uk/Home/Athlete/11111111-2222-4333-8444-555555555555','synthetic-test',now())`;
+  await sql`insert into athlete_source_identities(provider,external_id,athlete_id,source_url)
+    values ('powerof10','11111111-2222-4333-8444-555555555555',1,
+      'https://www.powerof10.uk/Home/Athlete/11111111-2222-4333-8444-555555555555')`;
+  const bySource = await matches.listMyPotentialResultMatches(undefined, user("source-id"));
+  assert.equal(
+    bySource.matches.length,
+    2,
+    "Current Power of 10 IDs match despite a different account name",
+  );
+  assert(bySource.matches.every((match) => match.score === 100));
+  assert.equal((await claims.getClaimableResult({ resultId: 1 }, user("source-id"))).resultId, 1);
+  assert.equal(
+    await count("athlete_account_links"),
+    0,
+    "A source-ID suggestion still requires confirmation",
+  );
   await assert.rejects(() => claim("unverified"), /Verify your email/);
   await assert.rejects(
     () => claims.submitResultClaim({ resultId: 1, declarationAccepted: false }, user("one")),

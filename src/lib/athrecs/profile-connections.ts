@@ -66,6 +66,14 @@ export function sourceIdentityFromUrl(value: string | null | undefined): SourceI
       const id = [...url.searchParams].find(([key]) => key.toLowerCase() === "athleteid")?.[1];
       return id && /^\d+$/.test(id) ? { provider: "powerof10", externalId: id } : null;
     }
+    if (host === "powerof10.uk" && !url.port && !/[%\\]/.test(url.pathname)) {
+      const id = url.pathname
+        .match(
+          /^\/Home\/Athlete\/([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})\/?$/i,
+        )?.[1]
+        ?.toLowerCase();
+      return id ? { provider: "powerof10", externalId: id } : null;
+    }
     if (host === "parkrun.org.uk" && url.pathname.startsWith("/parkrunner/")) {
       const id = url.pathname.match(/^\/parkrunner\/(\d+)\/?/)?.[1];
       return id ? { provider: "parkrun", externalId: id } : null;
