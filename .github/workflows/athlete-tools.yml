@@ -1,0 +1,54 @@
+name: Athlete tools and single-profile links
+on:
+  pull_request:
+    paths:
+      - 'src/lib/athlete-link/**'
+      - 'src/components/admin/AthleteTools.tsx'
+      - 'src/components/admin/SingleAthleteLink.tsx'
+      - 'src/components/admin/AthleteDirectory.tsx'
+      - 'src/components/admin/ImportRaceResults.tsx'
+      - 'src/routes/admin/athlete-tools.tsx'
+      - 'scripts/verify-athlete-link.mjs'
+      - 'scripts/verify-athlete-tools-browser.mjs'
+      - '.github/workflows/athlete-tools.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: athlete-tools-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DATABASE_URL: ''
+      VITE_SITE_BRAND: athrecs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Private creation, matching, access and transaction checks
+        run: node scripts/verify-athlete-link.mjs
+      - name: Build without database migration or publication hooks
+        run: npx vite build --mode development
+      - run: npm run typecheck
+      - run: npx eslint src/lib/athlete-link/ src/components/admin/AthleteTools.tsx src/components/admin/SingleAthleteLink.tsx src/components/admin/AthleteDirectory.tsx src/components/admin/ImportRaceResults.tsx src/routes/admin/athlete-tools.tsx scripts/verify-athlete-link.mjs scripts/verify-athlete-tools-browser.mjs
+      - name: Install isolated browser tools
+        run: npm install --prefix "$RUNNER_TEMP/athlete-tools-browser" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
+      - name: Install browser
+        run: node "$RUNNER_TEMP/athlete-tools-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Desktop and mobile interactions
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
+        run: node scripts/verify-athlete-tools-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: athlete-tools-preview
+          path: artifacts/athlete-tools-*.png
+          if-no-files-found: ignore
+          retention-days: 7

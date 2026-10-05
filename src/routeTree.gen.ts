@@ -31,6 +31,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminApprovalsRouteImport } from './routes/admin/approvals'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
 import { Route as AdminAthleteDirectoryRouteImport } from './routes/admin/athlete-directory'
+import { Route as AdminAthleteToolsRouteImport } from './routes/admin/athlete-tools'
 import { Route as AdminAthleteWorkspaceRouteImport } from './routes/admin/athlete-workspace'
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
 import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/admin/catalogue-recovery-emergency'
@@ -191,6 +192,11 @@ const AdminAthleteAccountsRoute = AdminAthleteAccountsRouteImport.update({
 const AdminAthleteDirectoryRoute = AdminAthleteDirectoryRouteImport.update({
   id: '/admin/athlete-directory',
   path: '/admin/athlete-directory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAthleteToolsRoute = AdminAthleteToolsRouteImport.update({
+  id: '/admin/athlete-tools',
+  path: '/admin/athlete-tools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminAthleteWorkspaceRoute = AdminAthleteWorkspaceRouteImport.update({
@@ -479,6 +485,7 @@ export interface FileRoutesByFullPath {
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -554,6 +561,7 @@ export interface FileRoutesByTo {
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -630,6 +638,7 @@ export interface FileRoutesById {
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -707,6 +716,7 @@ export interface FileRouteTypes {
     | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -782,6 +792,7 @@ export interface FileRouteTypes {
     | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -857,6 +868,7 @@ export interface FileRouteTypes {
     | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -933,6 +945,7 @@ export interface RootRouteChildren {
   AdminApprovalsRoute: typeof AdminApprovalsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminAthleteDirectoryRoute: typeof AdminAthleteDirectoryRoute
+  AdminAthleteToolsRoute: typeof AdminAthleteToolsRoute
   AdminAthleteWorkspaceRoute: typeof AdminAthleteWorkspaceRoute
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
   AdminCatalogueRecoveryEmergencyRoute: typeof AdminCatalogueRecoveryEmergencyRoute
@@ -1141,6 +1154,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/athlete-directory'
       fullPath: '/admin/athlete-directory'
       preLoaderRoute: typeof AdminAthleteDirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/athlete-tools': {
+      id: '/admin/athlete-tools'
+      path: '/admin/athlete-tools'
+      fullPath: '/admin/athlete-tools'
+      preLoaderRoute: typeof AdminAthleteToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/athlete-workspace': {
@@ -1525,6 +1545,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminApprovalsRoute: AdminApprovalsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminAthleteDirectoryRoute: AdminAthleteDirectoryRoute,
+  AdminAthleteToolsRoute: AdminAthleteToolsRoute,
   AdminAthleteWorkspaceRoute: AdminAthleteWorkspaceRoute,
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
   AdminCatalogueRecoveryEmergencyRoute: AdminCatalogueRecoveryEmergencyRoute,

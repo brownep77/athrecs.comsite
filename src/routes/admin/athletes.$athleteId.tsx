@@ -74,7 +74,7 @@ function StaffAthleteProfile() {
               coaches={profile.athlete.coaches}
             />
             <div className="flex flex-wrap gap-3">
-              {profile.athlete.sources.map(source => <a key={source.id} href={`/admin/athlete-workspace?athleteId=${source.id}`} className="inline-flex min-h-11 items-center rounded-lg bg-cyan-800 px-4 py-2 text-sm font-semibold text-white">Edit profile & manage races{profile.athlete.sources.length > 1 ? ` · ${source.slug}` : ''}</a>)}
+              {profile.athlete.sources.map(source => <a key={source.id} href={`/admin/athlete-tools?section=review&athleteId=${source.id}`} className="inline-flex min-h-11 items-center rounded-lg bg-cyan-800 px-4 py-2 text-sm font-semibold text-white">Edit profile & manage races{profile.athlete.sources.length > 1 ? ` · ${source.slug}` : ''}</a>)}
               {!profile.athlete.sources.length ? <a href="/admin/athlete-workspace" className="inline-flex min-h-11 items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold">Open athlete editing workspace</a> : null}
             </div>
             {profile.athlete.profilePath ? (
