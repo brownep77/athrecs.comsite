@@ -422,7 +422,15 @@ try {
     configured = true;
     failEmail = false;
     const firstConcurrentSend = sends.length;
-    await Promise.all(Array.from({ length: 4 }, () => alerts.deliverClaimConflictAlerts(sql)));
+    // Each worker deliberately sends at most three deliveries. Earlier cases
+    // leave a backlog, so one wave is not guaranteed to reach these new claims.
+    // Keep overlapping workers and the final zero-pending/unique-key assertions.
+    for (let wave = 0; wave < 4; wave++) {
+      await Promise.all(Array.from({ length: 4 }, () => alerts.deliverClaimConflictAlerts(sql)));
+      const pending = await sql`select id from result_claim_alert_deliveries where sent_at is null
+        and claim_id in (select id from result_claims where athlete_id=10)`;
+      if (!pending.length) break;
+    }
     const concurrentSends = sends.slice(firstConcurrentSend);
     const keys = concurrentSends.map((s) => s.options.idempotencyKey);
     assert.equal(new Set(keys).size, keys.length, "Overlapping workers send each delivery once");

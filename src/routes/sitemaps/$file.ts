@@ -8,7 +8,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
   server: {
     handlers: {
       GET: async ({ params }) => {
-        const { sitemapXml, sitemapResponse, athleteSitemapSlugs } =
+        const { sitemapXml, sitemapResponse } =
           await import("@/lib/athrecs/athlete-sitemap.server");
         if (params.file === "pages.xml") {
           const runningPaths: string[] = [];
@@ -29,8 +29,13 @@ export const Route = createFileRoute("/sitemaps/$file")({
           return sitemapResponse(
             sitemapXml(
               (IS_RUNRECS_SITE
-                ? ["/", "/races", "/calendar", "/race-series", "/athletes", "/clubs", "/privacy"]
-                : [...PUBLIC_PAGES.map((page) => page.path), ...runningPaths]
+                ? ["/", "/races", "/calendar", "/race-series", "/clubs", "/privacy"]
+                : [
+                    ...PUBLIC_PAGES.filter((page) => page.path !== "/athletes").map(
+                      (page) => page.path,
+                    ),
+                    ...runningPaths,
+                  ]
               ).map((path) => `${SITE_URL}${path}`),
             ),
           );
@@ -61,16 +66,11 @@ export const Route = createFileRoute("/sitemaps/$file")({
           if (!paths.length) return new Response("Sitemap not found", { status: 404 });
           return sitemapResponse(sitemapXml(paths.map((path) => `${SITE_URL}${path}`)));
         }
-        const match = /^athletes-([1-9]\d{0,5})\.xml$/.exec(params.file);
-        if (!match) return new Response("Sitemap not found", { status: 404 });
-        const { getSql } = await import("@/lib/db");
-        const { ensureAthrecsSeeded } = await import("@/lib/athrecs/seed.server");
-        await ensureAthrecsSeeded();
-        const slugs = await athleteSitemapSlugs(await getSql(), Number(match[1]));
-        if (!slugs.length) return new Response("Sitemap not found", { status: 404 });
-        return sitemapResponse(
-          sitemapXml(slugs.map((slug) => `${SITE_URL}/athletes/${encodeURIComponent(slug)}`)),
-        );
+        // Previously indexed profile URLs are now member-only.
+        return new Response("Sitemap not found", {
+          status: 404,
+          headers: { "Cache-Control": "no-store" },
+        });
       },
     },
   },

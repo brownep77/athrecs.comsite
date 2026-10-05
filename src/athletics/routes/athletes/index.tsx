@@ -1,3 +1,5 @@
+import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
+import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import type { FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Search, UserRound } from "lucide-react";
@@ -8,41 +10,39 @@ import {
   type AthleteDirectory,
   type AthleteDirectorySearch,
 } from "@/lib/athrecs/athlete-directory";
-import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 
 export const Route = createFileRoute("/athletes/")({
   validateSearch: parseAthleteDirectorySearch,
   loaderDeps: ({ search }) => search,
-  loader: ({ deps }) => getAthleteDirectory({ data: deps }),
-  head: ({ loaderData, match }) => {
-    const search = parseAthleteDirectorySearch(match.search);
-    const query = new URLSearchParams();
-    for (const key of ["q", "country", "sport"] as const) {
-      if (search[key]) query.set(key, search[key]);
-    }
-    const page = loaderData?.page ?? search.page ?? 1;
-    if (page > 1) query.set("page", String(page));
-    const canonical = `${SITE_URL}/athletes${query.size ? `?${query}` : ""}`;
-    const filtered = Boolean(search.q || search.country || search.sport);
-    return {
-      meta: siteGraphMeta({
-        title: `Explore athlete profiles${page > 1 ? ` · Page ${page}` : ""} | ATHRECS`,
-        description:
-          "Find public athlete profiles by name, country and sport. Explore race results, source performance histories and sporting records.",
-        url: canonical,
-      }).map((tag) =>
-        filtered && "name" in tag && tag.name === "robots"
-          ? { name: "robots", content: "noindex, follow" }
-          : tag,
-      ),
-      links: [{ rel: "canonical", href: canonical }],
-    };
-  },
+  loader: async ({ deps }) =>
+    (await canViewAthleteProfiles()) ? getAthleteDirectory({ data: deps }) : null,
+  head: () => ({
+    meta: [
+      { title: "Explore athlete profiles | ATHRECS" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+      {
+        name: "description",
+        content: "Sign in to explore athlete profiles and published results.",
+      },
+    ],
+  }),
   component: AthleteDirectoryPage,
 });
 
 function AthleteDirectoryPage() {
-  const directory = Route.useLoaderData() as unknown as AthleteDirectory;
+  const directory = Route.useLoaderData() as unknown as AthleteDirectory | null;
+  return (
+    <ProfileViewer authenticated={directory !== null} returnTo="/athletes">
+      {directory ? (
+        <MemberDirectory directory={directory} />
+      ) : (
+        <ProfileSignIn returnTo="/athletes" />
+      )}
+    </ProfileViewer>
+  );
+}
+
+function MemberDirectory({ directory }: { directory: AthleteDirectory }) {
   const search = Route.useSearch();
   const navigate = useNavigate();
   const pending = useRouterState({ select: (s) => s.isLoading });
@@ -66,7 +66,7 @@ function AthleteDirectoryPage() {
             Explore athlete profiles
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted">
-            Discover the people behind the performances. Search public profiles and explore their
+            Discover the people behind the performances. Search published profiles and explore their
             sporting records.
           </p>
         </div>

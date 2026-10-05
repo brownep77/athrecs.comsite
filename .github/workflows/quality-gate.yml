@@ -193,6 +193,8 @@ jobs:
         run: node scripts/browser-sponsorship-smoke.mjs http://127.0.0.1:8080/
 
       - name: Compact athlete profiles and achievements
+        env:
+          BROWSER_SMOKE_MEMBER: "1"
         run: |
           BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Personal bests||Achievements board||Paul Evans||Results history' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/paul-browne "$GITHUB_WORKSPACE/artifacts/paul-compact.png"
@@ -231,8 +233,12 @@ jobs:
           BROWSER_SMOKE_FULL_PAGE=1 \
           BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||Find an athlete||Find events' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-mobile.png"
-          BROWSER_SMOKE_EXPECT_TEXT='Explore athlete profiles||Sport in results' \
+          BROWSER_SMOKE_EXPECT_TEXT='Sign in to view athlete profiles' \
+          BROWSER_SMOKE_REJECT_TEXT='Explore athlete profiles||Sport in results' \
             node scripts/browser-smoke.mjs 'http://127.0.0.1:8080/athletes?country=Ireland' "$GITHUB_WORKSPACE/artifacts/athletes.png"
+          BROWSER_SMOKE_MEMBER=1 \
+          BROWSER_SMOKE_EXPECT_TEXT='Explore athlete profiles||Sport in results' \
+            node scripts/browser-smoke.mjs 'http://127.0.0.1:8080/athletes?country=Ireland' "$GITHUB_WORKSPACE/artifacts/athletes-member.png"
           BROWSER_SMOKE_EXPECT_TEXT='Find your next event||AthRecs||World Triathlon||Coming soon' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/find-events "$GITHUB_WORKSPACE/artifacts/find-events.png"
           node scripts/browser-auth-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/athlete-auth.png"
