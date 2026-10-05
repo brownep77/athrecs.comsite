@@ -522,6 +522,10 @@
   ],
   "crons": [
     {
+      "path": "/api/result-claim-alerts",
+      "schedule": "*/10 * * * *"
+    },
+    {
       "path": "/api/race-collector-worker",
       "schedule": "* * * * *"
     },

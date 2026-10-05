@@ -17,3 +17,5 @@ Evidence links are private to the claimant and ATHRECS staff. Existing legacy wr
 ## Ownership protection
 
 An existing active owner is never overwritten. Ownership decisions are serialised and the claim record and athlete-account link are committed atomically. A concurrent or competing claim is sent to conflict review instead of changing ownership.
+
+Competing claims now also create a durable staff email alert. The review screen shows delivery status, supports specific claim links and can retry due emails. See [collected results and claims](collected-results-and-claims.md) for the collection, potential-match and retry boundaries.

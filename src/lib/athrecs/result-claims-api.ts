@@ -11,6 +11,7 @@ import {
 import { scorePotentialResultNameMatch, uniquePotentialMatchNames } from "./result-match";
 import { sourceIdentityFromUrl } from "./profile-connections";
 import { ensureAthrecsSeeded } from "./seed.server";
+import { queueClaimConflict, deliverClaimConflictAlerts } from "./result-claim-alerts.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
 
@@ -501,6 +502,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           claimId: null,
           claimantUserId: context.userId,
           email: null,
+          isConflict: false,
         };
       }
 
@@ -619,8 +621,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
               updated_at = now()
             where id = ${claimId}
           `;
+          await queueClaimConflict(tx, claimId);
           return {
             status: "pending" as const,
+            isConflict: true,
             alreadyOwned: false,
             claimId,
             claimantUserId: context.userId,
@@ -637,8 +641,11 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         }
       }
 
+      const isConflict = Boolean(owner) || otherClaimCount > 0;
+      if (isConflict) await queueClaimConflict(tx, claimId);
       return {
         status: nextStatus,
+        isConflict,
         alreadyOwned: false,
         claimId,
         claimantUserId: context.userId,
@@ -664,7 +671,16 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         });
       }
     } else if (outcome.status === "pending" && outcome.email) {
-      await notifyResultClaimSubmitted(outcome.email);
+      // The durable outbox owns staff conflict emails. Keep the athlete receipt
+      // separate and avoid sending a second generic staff notification.
+      if (outcome.isConflict) {
+        try {
+          await deliverClaimConflictAlerts(sql, outcome.claimId);
+        } catch {
+          console.error("[claim-alerts] immediate delivery deferred to the worker");
+        }
+      }
+      await notifyResultClaimSubmitted(outcome.email, !outcome.isConflict);
     }
 
     return {
@@ -755,10 +771,10 @@ export const listStaffResultClaims = createServerFn({ method: "GET" })
          claim_data.*,
          owner.user_email as existing_owner_email,
          (
-           select count(*)::int
+           select count(distinct competing.claimant_user_id)::int
            from result_claims competing
-           where competing.result_id = claim.result_id
-             and competing.id <> claim.id
+           where competing.athlete_id = claim.athlete_id
+             and competing.claimant_user_id <> claim.claimant_user_id
              and competing.status in ('pending', 'needs_info', 'approved')
          ) as competing_claim_count
        from (${CLAIM_SELECT}) claim_data

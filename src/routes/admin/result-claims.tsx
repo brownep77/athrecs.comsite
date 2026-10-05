@@ -19,8 +19,13 @@ import {
   type ResultClaimStatus,
 } from "@/lib/athrecs/result-claims-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
+import { ClaimAlertStatus } from "@/components/staff/ClaimAlertStatus";
 
 export const Route = createFileRoute("/admin/result-claims")({
+  validateSearch: (search: Record<string, unknown>) => {
+    const id = Number(search.claimId);
+    return { claimId: Number.isSafeInteger(id) && id > 0 ? id : undefined };
+  },
   head: () => ({
     meta: [
       { title: "Result claims — ATHRECS Staff" },
@@ -48,8 +53,10 @@ function statusClass(status: ResultClaimStatus): string {
 }
 
 function AdminResultClaimsPage() {
+  const { claimId } = Route.useSearch();
   const queryClient = useQueryClient();
-  const [status, setStatus] = useState<ResultClaimStatus | "all">("pending");
+  const [status, setStatus] = useState<ResultClaimStatus | "all">(claimId ? "all" : "pending");
+  const [conflictsOnly, setConflictsOnly] = useState(false);
   const [notes, setNotes] = useState<Record<number, string>>({});
   const [message, setMessage] = useState<string | null>(null);
 
@@ -105,6 +112,15 @@ function AdminResultClaimsPage() {
     },
     { pending: 0, needs_info: 0, approved: 0, rejected: 0, withdrawn: 0 },
   );
+  const displayedClaims = (claims.data ?? []).filter(
+    (claim) =>
+      (!claimId || claim.claimId === claimId) &&
+      (!conflictsOnly ||
+        Boolean(
+          claim.competingClaimCount ||
+          (claim.existingOwnerEmail && claim.existingOwnerEmail !== claim.claimantEmail),
+        )),
+  );
 
   return (
     <div className="space-y-6">
@@ -134,6 +150,8 @@ function AdminResultClaimsPage() {
         <SummaryCard label="Withdrawn" value={counts.withdrawn} />
       </div>
 
+      <ClaimAlertStatus />
+
       <section className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-surface p-4 shadow-card">
         <label className="text-sm font-medium text-fg" htmlFor="claim-status-filter">
           Show
@@ -153,6 +171,23 @@ function AdminResultClaimsPage() {
         <Button type="button" variant="secondary" onClick={() => void claims.refetch()}>
           Refresh queue
         </Button>
+        <label className="flex min-h-11 items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={conflictsOnly}
+            onChange={(event) => setConflictsOnly(event.target.checked)}
+          />
+          Ownership conflicts only
+        </label>
+        {claimId ? (
+          <Link
+            to="/admin/result-claims"
+            search={{ claimId: undefined }}
+            className="text-sm underline"
+          >
+            Show all claims
+          </Link>
+        ) : null}
         {message ? (
           <p
             className="w-full rounded-lg border border-border bg-accent-soft px-3 py-2 text-sm text-accent"
@@ -172,9 +207,9 @@ function AdminResultClaimsPage() {
         <p className="rounded-xl border border-red-500/30 bg-red-50 p-4 text-sm text-red-900">
           The claim queue could not be loaded. Refresh to try again.
         </p>
-      ) : claims.data?.length ? (
+      ) : displayedClaims.length ? (
         <div className="grid gap-4">
-          {claims.data.map((claim) => (
+          {displayedClaims.map((claim) => (
             <ClaimReviewCard
               key={claim.claimId}
               claim={claim}
@@ -217,7 +252,9 @@ function ClaimReviewCard({
   const reviewable = claim.status === "pending" || claim.status === "needs_info";
   const revokable = claim.status === "approved";
   const conflict =
-    claim.conflictReason || claim.existingOwnerEmail || (claim.competingClaimCount ?? 0) > 0;
+    claim.conflictReason ||
+    (claim.existingOwnerEmail && claim.existingOwnerEmail !== claim.claimantEmail) ||
+    (claim.competingClaimCount ?? 0) > 0;
   const evidenceLinks = [claim.evidenceUrl, claim.evidenceUrl2, claim.evidenceUrl3].filter(
     (url): url is string => Boolean(url),
   );

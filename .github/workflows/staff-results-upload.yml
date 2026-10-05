@@ -4,6 +4,8 @@ on:
     paths:
       - 'src/lib/staff-results-upload/**'
       - 'src/routes/admin/check-results-upload.tsx'
+      - 'src/components/admin/ImportRaceResults.tsx'
+      - 'src/components/admin/AthleteTools.tsx'
       - 'src/components/staff/StaffMicrositeShell.tsx'
       - 'src/components/staff/BackendTaskPanel.tsx'
       - 'scripts/verify-backend-tasks.mjs'
@@ -53,7 +55,7 @@ jobs:
         run: npx vite build --mode development
       - run: npm run typecheck
       - name: Lint changed code
-        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx src/components/staff/BackendTaskPanel.tsx src/components/staff/StaffMicrositeShell.tsx scripts/verify-staff-results-*.mjs scripts/verify-backend-tasks.mjs
+        run: npx eslint src/lib/staff-results-upload/ src/routes/admin/check-results-upload.tsx src/components/admin/ImportRaceResults.tsx src/components/staff/BackendTaskPanel.tsx src/components/staff/StaffMicrositeShell.tsx scripts/verify-staff-results-*.mjs scripts/verify-backend-tasks.mjs
       - name: Install isolated browser-test dependency
         run: npm install --prefix "$RUNNER_TEMP/athrecs-browser-tools" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
       - name: Install test browser
