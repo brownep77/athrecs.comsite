@@ -98,6 +98,25 @@ async function ready() {
   return getSql();
 }
 
+// Every ownership operation locks the athlete before any claim or owner row.
+// Locking a whole joined claim first can deadlock with another review that
+// holds the athlete and is closing the remaining competing claims.
+async function lockClaimAthlete(
+  sql: Awaited<ReturnType<typeof getSql>>,
+  claimId: number,
+  claimantUserId?: string,
+): Promise<number | null> {
+  const rows = await sql<{ id: number }>`
+    select athlete.id from athletes athlete
+    join result_claims claim on claim.athlete_id = athlete.id
+    where claim.id = ${claimId}
+      and (${claimantUserId ?? null}::text is null
+        or claim.claimant_user_id = ${claimantUserId ?? null})
+    for update of athlete
+  `;
+  return rows[0]?.id ?? null;
+}
+
 function positiveInteger(value: unknown, label: string): number {
   const parsed = typeof value === "number" ? value : Number(value);
   if (!Number.isInteger(parsed) || parsed <= 0) throw new Error(`${label} is invalid`);
@@ -726,6 +745,7 @@ export const withdrawResultClaim = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
+      const lockedAthleteId = await lockClaimAthlete(tx, data.claimId, context.userId);
       const rows = await tx<ClaimEmailRow>`
         select
           claim.id as claim_id,
@@ -741,10 +761,11 @@ export const withdrawResultClaim = createServerFn({ method: "POST" })
         join editions edition on edition.id = result.edition_id
         join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
+          and claim.athlete_id = ${lockedAthleteId}
           and claim.claimant_user_id = ${context.userId}
           and claim.status in ('pending', 'needs_info')
         limit 1
-        for update
+        for update of claim
       `;
       const claim = rows[0];
       if (!claim) throw new Error("Only an active claim can be withdrawn");
@@ -825,6 +846,7 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const result = await sql.transaction(async (tx) => {
+      const lockedAthleteId = await lockClaimAthlete(tx, data.claimId);
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
@@ -854,8 +876,9 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
         join editions edition on edition.id = result.edition_id
         join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
+          and claim.athlete_id = ${lockedAthleteId}
         limit 1
-        for update
+        for update of claim
       `;
       const claim = claims[0];
       if (!claim) throw new Error("Claim not found");
@@ -961,6 +984,7 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
+      const lockedAthleteId = await lockClaimAthlete(tx, data.claimId);
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
@@ -990,8 +1014,9 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
         join editions edition on edition.id = result.edition_id
         join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
+          and claim.athlete_id = ${lockedAthleteId}
         limit 1
-        for update
+        for update of claim
       `;
       const claim = claims[0];
       if (!claim) throw new Error("Claim not found");

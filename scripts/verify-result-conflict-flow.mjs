@@ -460,6 +460,24 @@ try {
           /Only a pending claim|already owned/,
           "Losing staff decisions must not deadlock or overwrite ownership",
         );
+    const [finalOwner] =
+      await sql`select user_id from athlete_account_links where athlete_id=10 and status='active'`;
+    const otherIndex = contested.findIndex((_, i) => "race-" + i !== finalOwner.user_id);
+    const renewed = await claim("race-" + otherIndex, 10 + (otherIndex % 2));
+    const withdrawalRace = await Promise.allSettled([
+      claims.withdrawResultClaim({ claimId: renewed.claimId }, user("race-" + otherIndex)),
+      claim("race-" + otherIndex, 10 + (otherIndex % 2)),
+    ]);
+    assert(
+      withdrawalRace.every((outcome) => outcome.status === "fulfilled"),
+      "A simultaneous withdrawal and resubmission must not deadlock",
+    );
+    assert.equal(
+      (
+        await sql`select user_id from athlete_account_links where athlete_id=10 and status='active'`
+      )[0].user_id,
+      finalOwner.user_id,
+    );
     console.log(
       "PostgreSQL contention passed: simultaneous first claims, repeated submissions, competing staff approvals and overlapping email workers.",
     );
@@ -501,6 +519,28 @@ try {
     ambiguousSend,
     "Uncertain provider acceptance retries the same payload and idempotency key",
   );
+  // Execute the actual HTTP worker handler as well as its authorization helper.
+  const worker = load("src/routes/api/result-claim-alerts.ts", {
+    "@tanstack/react-router": { createFileRoute: () => (config) => config },
+    "@/lib/athrecs/result-claim-alerts.server": alerts,
+    "@/lib/db": connection,
+  }).Route.server.handlers.GET;
+  process.env.CRON_SECRET = "synthetic-worker-key";
+  const requestFor = (token) =>
+    new Request("https://example.test/api/result-claim-alerts", {
+      headers: token ? { authorization: token } : {},
+    });
+  const beforeUnauthorized = sends.length;
+  for (const token of [undefined, "Bearer wrong", "Basic synthetic-worker-key"]) {
+    const response = await worker({ request: requestFor(token) });
+    assert.equal(response.status, 401);
+    assert.equal(response.headers.get("cache-control"), "no-store");
+  }
+  process.env.VERCEL_ENV = "preview";
+  assert.equal((await worker({ request: requestFor("Bearer synthetic-worker-key") })).status, 503);
+  assert.equal(sends.length, beforeUnauthorized, "Denied and preview HTTP calls cannot send mail");
+  process.env.VERCEL_ENV = "production";
+  assert.equal((await worker({ request: requestFor("Bearer synthetic-worker-key") })).status, 200);
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");
   const savedFetch = globalThis.fetch;
