@@ -11,11 +11,11 @@ export const IS_RUNRECS_SITE = PUBLIC_SITE_BRAND === "runrecs";
 
 export function sportIsInPublicSiteScope(sport: string | null | undefined): boolean {
   if (!sport) return false;
-  return IS_RUNRECS_SITE ? sport === "Running" || sport === "Parkrun" : ["Athletics", "Running", "Parkrun"].includes(sport);
+  return IS_RUNRECS_SITE ? sport === "Running" || sport === "Parkrun" : ["Athletics", "Running", "Parkrun", "Triathlon"].includes(sport);
 }
 
 export function scopedSportLabel(): string {
-  return IS_RUNRECS_SITE ? "Running and Parkrun" : "Athletics and running";
+  return IS_RUNRECS_SITE ? "Running and Parkrun" : "Athletics, running and triathlon";
 }
 
 /** Athlete identity spans sports; specialist event catalogues keep their own scope. */

@@ -1,8 +1,8 @@
 import * as base from "../lib/athrecs/filters";
 export * from "../lib/athrecs/filters";
 
-/** ATHRECS is the home for athletics and running. */
-export const SPORTS = ["Athletics", "Running", "Parkrun"] as const;
+/** Public event sports supported by ATHRECS. */
+export const SPORTS = ["Athletics", "Running", "Parkrun", "Triathlon"] as const;
 export const DEFAULT_SPORT = "Athletics" as const;
 
 // The running directory's All option combines Running and Parkrun.
