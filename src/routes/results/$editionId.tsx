@@ -8,6 +8,7 @@ import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { resultSlug } from "@/lib/athrecs/result-slug";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
+import { resultCredit } from "@/lib/athrecs/result-credit";
 
 export const Route = createFileRoute("/results/$editionId")({
   validateSearch: (raw: Record<string, unknown>): { q?: string; page?: number } => {
@@ -64,6 +65,10 @@ function RaceResultsPage() {
   const { edition, results, hasMore } = Route.useLoaderData();
   const search = normalizeResultsSearch(Route.useSearch());
   const params = { editionId: resultSlug(edition) };
+  const credits = [...new Map(results.flatMap((result) => {
+    const credit = resultCredit(result.source_url, result.result_source);
+    return credit ? [[credit.url, credit] as const] : [];
+  })).values()];
   return (
     <div className="space-y-5">
       <Link to="/results" className="inline-flex items-center gap-1.5 text-sm text-accent no-underline hover:underline"><ArrowLeft className="size-4" aria-hidden="true" />All results</Link>
@@ -72,6 +77,10 @@ function RaceResultsPage() {
         <h1 className="font-display text-3xl font-semibold leading-tight">{edition.event_name}</h1>
         <p className="text-sm text-muted">{formatRaceDateShort(edition.event_date)}{edition.city ? ` · ${edition.city}` : ""}{edition.country ? ` · ${edition.country}` : ""}</p>
         <p className="text-sm font-medium text-accent">{edition.result_count.toLocaleString("en-GB")} results recorded on AthRecs</p>
+        {credits.length ? <div className="space-y-1 text-sm text-muted" aria-label="Results provider credits">
+          <p>Results credited to:</p>
+          <ul className="flex flex-wrap gap-x-4 gap-y-2">{credits.map((credit) => <li key={credit.url}><a href={credit.url} target="_blank" rel="noreferrer" className="text-accent underline">{credit.name}</a></li>)}</ul>
+        </div> : null}
       </header>
 
       <form action={`/results/${resultSlug(edition)}`} method="get" className="flex flex-wrap items-end gap-3 rounded-xl border border-border bg-surface p-4">
@@ -92,6 +101,7 @@ function RaceResultsPage() {
             <tbody>
               {results.map((result) => {
                 const finished = ["finished", "fin"].includes(result.status.trim().toLowerCase()) && !result.disqualified;
+                const credit = resultCredit(result.source_url, result.result_source);
                 return (
                   <tr key={result.id} className="border-b border-border/70 last:border-0 hover:bg-elevated/40">
                     <td className="px-3 py-4 align-top font-semibold tabular-nums">{result.disqualified ? "—" : result.overall_place ?? "—"}</td>
@@ -99,6 +109,7 @@ function RaceResultsPage() {
                       <Link to="/athletes/$slug" params={{ slug: result.athlete_slug }} className="font-semibold text-fg no-underline hover:text-accent">{result.athlete_name}</Link>
                       {!finished ? <p className="mt-1 text-xs text-muted">{result.disqualified ? "Disqualified" : result.status}</p> : null}
                       {finished && result.gender_place !== null ? <p className="mt-1 text-xs text-muted">Gender position {result.gender_place}</p> : null}
+                      {credit ? <a href={credit.url} target="_blank" rel="noreferrer" className="mt-1 block text-xs text-accent underline">Results: {credit.name}</a> : null}
                     </td>
                     <td className="max-w-44 px-3 py-4 align-top text-muted">{result.profile_club || "—"}</td>
                     <td className="px-3 py-4 align-top text-muted">{result.category || "—"}{finished && result.category_place !== null ? <p className="mt-1 text-xs">Position {result.category_place}</p> : null}</td>
