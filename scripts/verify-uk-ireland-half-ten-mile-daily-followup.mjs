@@ -24,10 +24,12 @@ const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
 const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
+const CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT = "2026-10-05";
+const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 69;
 const NEW_EDITION_COUNT = 72;
-const EXISTING_SERIES_EDITION_COUNT = 39;
+const EXISTING_SERIES_EDITION_COUNT = 40;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -182,6 +184,8 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_DISCOVERY_SCAN_CHECKED_AT,
         CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
         CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+        CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT,
+        CURRENT_SITEMAP_REFRESH_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -618,6 +622,8 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_DISCOVERY_SCAN_CHECKED_AT,
         CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT,
         CURRENT_CHALLENGE_SCAN_CHECKED_AT,
+        CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT,
+        CURRENT_SITEMAP_REFRESH_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -724,6 +730,119 @@ assert.equal(
   dailyHalfTenMileSeriesOverrides["kelpies-half-marathon"].source_url,
   "https://www.entrycentral.com/kelpieshalfmarathon",
   "Kelpies does not expose the current official registration source",
+);
+
+const haweswaterKey = "ea-runevents-haweswater-half-marathon-penrith|2027-03-07|Half";
+const haweswaterSeries = catalogue.seriesList.find(
+  (series) => series.slug === "ea-runevents-haweswater-half-marathon-penrith",
+);
+const haweswaterEditions = catalogue.editions.filter(
+  (edition) =>
+    edition.seriesSlug === "ea-runevents-haweswater-half-marathon-penrith" &&
+    edition.date === "2027-03-07" &&
+    edition.distance === "Half",
+);
+assert(haweswaterSeries, "The canonical Haweswater card disappeared");
+assert.equal(haweswaterEditions.length, 1, "Haweswater must remain one canonical edition");
+assert.equal(
+  haweswaterSeries.source_url,
+  "https://www.sientries.co.uk/event/haweswater-half-marathon-2027",
+  "Haweswater lost its current event-specific provenance",
+);
+assert.equal(haweswaterSeries.city, "Bampton", "Haweswater has the wrong official host village");
+assert.equal(
+  dailyHalfTenMileEditionOverrides[haweswaterKey]?.entryUrl,
+  "https://www.sientries.co.uk/enter.php?event_id=18793",
+  "Haweswater does not use the direct event-specific checkout",
+);
+assert.equal(
+  dailyHalfTenMileEditionOverrides[haweswaterKey]?.startTime,
+  "11:30",
+  "Haweswater has the wrong official start time",
+);
+assert.equal(
+  dailyHalfTenMileEntryOptions[haweswaterKey]?.[0]?.checkedAt,
+  CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT,
+  "Haweswater entry provenance is stale",
+);
+assert.equal(
+  dailyHalfTenMileEntryOptions[haweswaterKey]?.[0]?.priceAmount,
+  25,
+  "Haweswater lost its affiliated entry price",
+);
+assert.equal(
+  haweswaterEditions[0].source,
+  "https://www.sientries.co.uk/event/haweswater-half-marathon-2027",
+  "The catalogue Haweswater edition lost its event-specific provenance",
+);
+assert.equal(
+  haweswaterEditions[0].entryUrl,
+  "https://www.sientries.co.uk/enter.php?event_id=18793",
+  "The catalogue Haweswater edition lost its direct checkout",
+);
+assert.equal(haweswaterEditions[0].startTime, "11:30", "The catalogue Haweswater start is wrong");
+assert.equal(
+  haweswaterEditions[0].entryOptions?.[0]?.checkedAt,
+  CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT,
+  "The catalogue Haweswater entry provenance is stale",
+);
+
+const batterseaAugustUrl =
+  "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-august-2027";
+const batterseaAugustSeries = catalogue.seriesList.find(
+  (series) => series.slug === "battersea-park-10k-half-marathon-august",
+);
+const batterseaAugustEditions = catalogue.editions.filter(
+  (edition) =>
+    edition.seriesSlug === "battersea-park-10k-half-marathon-august" &&
+    edition.date === "2027-08-08",
+);
+const batterseaAugustHalf = batterseaAugustEditions.find((edition) => edition.distance === "Half");
+assert(batterseaAugustSeries, "The canonical Battersea Park August card disappeared");
+assert(batterseaAugustHalf, "The verified 2027 Battersea Park August half is missing");
+assert.equal(
+  batterseaAugustEditions.filter((edition) => edition.distance === "Half").length,
+  1,
+  "Battersea Park August must retain one canonical half-marathon edition",
+);
+assert.deepEqual(
+  batterseaAugustSeries.distances,
+  ["Half", "10K", "5K"],
+  "Battersea Park August lost its verified race programme",
+);
+assert.equal(
+  batterseaAugustSeries.source_url,
+  batterseaAugustUrl,
+  "Battersea Park August lost its event-specific organiser provenance",
+);
+assert.equal(
+  batterseaAugustHalf.startTime,
+  "10:30",
+  "Battersea Park August has the wrong half start",
+);
+assert.equal(
+  batterseaAugustHalf.entryUrl,
+  batterseaAugustUrl,
+  "Battersea Park August must avoid the currently misdirected downstream checkout",
+);
+assert.equal(
+  batterseaAugustHalf.entryOptions?.[0]?.checkedAt,
+  CURRENT_SITEMAP_REFRESH_CHECKED_AT,
+  "Battersea Park August entry provenance is stale",
+);
+assert.equal(
+  batterseaAugustHalf.entryOptions?.[0]?.priceAmount,
+  38,
+  "Battersea Park August lost its official half-marathon entry price",
+);
+assert.equal(
+  dailyHalfTenMileExistingSeriesEditions.filter(
+    (edition) =>
+      edition.seriesSlug === "battersea-park-10k-half-marathon-august" &&
+      edition.date === "2027-08-08",
+  ).length,
+  1,
+  "Battersea Park August must enrich its established card exactly once",
 );
 
 const congletonEdition = dailyHalfTenMileExistingSeriesEditions.find(

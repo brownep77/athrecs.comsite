@@ -24,6 +24,8 @@ const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
 const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
+const CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT = "2026-10-05";
+const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1835,6 +1837,19 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The direct official registration page confirms the half marathon and marathon on 4 September 2027 at 09:00. Both distances are sold out and only a waiting list is available, so the permanent Dingle card is enriched without advertising checkout.",
   },
+  {
+    seriesSlug: "battersea-park-10k-half-marathon-august",
+    date: "2027-08-08",
+    startTime: "10:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-august-2027",
+    publishAllDistances: true,
+    priceAmount: 38,
+    checkedAt: CURRENT_SITEMAP_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 8 August 2027 half marathon, 10K and 5K, the 10:30 half-marathon start and open entry. Its half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified event page is retained as the safe entry destination and the established August card is reused.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -2268,6 +2283,10 @@ const BRIGHTEN_MARINA_URL =
   "https://www.ukrunningevents.co.uk/events/trail-runs/brighten-brighton-marina-run-2027";
 const TADCASTER_10_URL = "https://racebest.com/races/e6z7h";
 const TADCASTER_10_ENTRY_URL = "https://racebest.com/races/e6z7h/enter";
+const HAWESWATER_HALF_URL = "https://www.sientries.co.uk/event/haweswater-half-marathon-2027";
+const HAWESWATER_HALF_ENTRY_URL = "https://www.sientries.co.uk/enter.php?event_id=18793";
+const BATTERSEA_AUGUST_2027_URL =
+  "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-august-2027";
 
 /** A newly published year-suffixed card that resolves to the established permanent race URL. */
 export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
@@ -2276,6 +2295,40 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "battersea-park-10k-half-marathon-august": {
+    name: "Battersea Park 5K, 10K & Half Marathon",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Battersea Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Battersea Park 5K, 10K & Half Marathon — flat road races on the park's traffic-free paths.",
+    description:
+      "RunThrough's Battersea Park race day offers a half marathon, 10K and 5K on flat, traffic-free park paths; the established August card carries the verified 2027 edition.",
+    organiser: "RunThrough Events",
+    website: BATTERSEA_AUGUST_2027_URL,
+    source_url: BATTERSEA_AUGUST_2027_URL,
+    defaultStartTime: "10:30",
+  },
+  "ea-runevents-haweswater-half-marathon-penrith": {
+    name: "Haweswater Half Marathon",
+    country: "England",
+    county: "Cumbria",
+    city: "Bampton",
+    area: "Bampton Village Hall and the Haweswater valley",
+    surface: "Road",
+    distances: ["Half"],
+    summary:
+      "Haweswater Half Marathon — a licensed road half marathon from Bampton into the Haweswater valley.",
+    description:
+      "Eden Runners' Haweswater Half Marathon follows an out-and-back road route from Bampton into the Haweswater valley; the established card carries the verified 2027 edition and event-specific SiEntries checkout.",
+    organiser: "Eden Runners",
+    website: "https://edenrunners.co.uk/haweswater-half-marathon/",
+    source_url: HAWESWATER_HALF_URL,
+    defaultStartTime: "11:30",
+  },
   "dingle-marathon": {
     name: "Dingle Marathon & Half Marathon",
     country: "Ireland",
@@ -2704,6 +2757,14 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "ea-runevents-haweswater-half-marathon-penrith|2027-03-07|Half": {
+    status: "Open",
+    entryUrl: HAWESWATER_HALF_ENTRY_URL,
+    startTime: "11:30",
+    source: HAWESWATER_HALF_URL,
+    notes:
+      "The current authorised SiEntries page confirms the 7 March 2027 road half marathon, 11:30 start, open event-specific checkout and race licence 31512.",
+  },
   "ott-trail-marathon-10-mile-2027|2027-05-15|10mi": {
     status: "Open",
     entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18393",
@@ -2762,6 +2823,22 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
 };
 
 export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
+  "ea-runevents-haweswater-half-marathon-penrith|2027-03-07|Half": [
+    {
+      providerCode: "official-haweswater-half-marathon-2027",
+      providerName: "Eden Runners / SiEntries",
+      entryUrl: HAWESWATER_HALF_ENTRY_URL,
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT,
+      sourceUrl: HAWESWATER_HALF_URL,
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration checkout; affiliated entry price.",
+    },
+  ],
   "blarney-stone-mad-half-marathon-2027|2027-03-14|Half": [
     {
       providerCode: "official-blarney-stone-mad-half-marathon-2027",

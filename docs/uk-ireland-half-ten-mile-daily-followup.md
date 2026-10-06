@@ -147,3 +147,15 @@ Oxford Half Marathon was officially confirmed for 10 October 2027 by the organis
 The direct official Dingle registration page confirms the half marathon and marathon for 4 September 2027 at 09:00. Both distances are sold out, so the verified edition is published without a checkout. The historical `dingle-marathon-half-2026` card is retired into the permanent `dingle-marathon` series, preserving the 2026 half marathon and consolidating both distances under one canonical identity.
 
 Kelpies Half Marathon registration is now open for 25 September 2027 and uses EntryCentral's direct event-specific entry form, with the first 200 places priced at £39. The official 08:45 itinerary remains explicitly provisional, so no start time is published yet.
+
+## 5 October 2026 scan
+
+Haweswater Half Marathon's authorised SiEntries page now confirms open registration for 7 March 2027, an 11:30 start and race licence 31512. The established England Athletics card is refreshed with the current event-specific source and direct SiEntries checkout rather than creating a second Haweswater card; the verified affiliated entry price is £25.
+
+Ripon 10 Mile remains held with licence `#Pending`, Thirsk 10 remains held with licence `TBC`, and Borrowdale Trail Half remains held while its TRA licence is pending. Athletics Ireland's direct records also continue to mark RunCork, Nenagh, Abbeyknockmoy and Glenmore's permits pending, so none is promoted prematurely.
+
+## 6 October 2026 scan
+
+RunThrough's live sitemap now includes Battersea Park 5K, 10K & Half Marathon on 8 August 2027. The official event page consistently confirms the date, the 10:30 half-marathon start and open entry from £38, so the edition is attached to the established `battersea-park-10k-half-marathon-august` card with its full same-day programme. The half-marathon entry button currently redirects to an unrelated Blackburn race; the verified event page is therefore retained as the safe entry destination until RunThrough corrects the downstream checkout.
+
+No other missing in-scope event survived canonical slug, yearless-name, normalized-source and series-date matching. Ripon, Thirsk, Clowne, Chippenham and Borrowdale remain held on their current official `Pending` or `TBC` licence evidence, while RunCork, Nenagh, Abbeyknockmoy, Glenmore and Waterford Viking remain held on pending or conflicting Athletics Ireland permit records.
