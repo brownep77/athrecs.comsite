@@ -243,6 +243,22 @@ try {
   assert.equal(pageTwo.hasMore, false);
   assert.ok(pageOne.fixtures.at(-1).eventDate < pageTwo.fixtures[0].eventDate);
   assert.deepEqual(pageTwo.countries, pageOne.countries);
+  await db.exec(`
+    insert into editions values
+      (300,31,'2027-02-01','Half Marathon',null),
+      (301,31,'2027-02-02','10 Miles',null),
+      (302,31,'2027-02-03','10mi',null),
+      (303,31,'2027-02-04','10 miles',null),
+      (304,31,'2027-02-05','5 km',null);
+  `);
+  assert.equal((await filtered({ country: "Ireland", distance: "Half" })).fixtures.length, 2);
+  assert.equal(
+    (await filtered({ country: "Ireland", distance: "Half Marathon" })).fixtures.length,
+    2,
+  );
+  assert.equal((await filtered({ country: "Ireland", distance: "10mi" })).fixtures.length, 3);
+  assert.equal((await filtered({ country: "Ireland", distance: "5K" })).fixtures.length, 1);
+  assert.deepEqual((await filtered({})).distances, ["5K", "10K", "10mi", "Half"]);
 } finally {
   await db.close();
 }

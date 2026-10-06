@@ -95,6 +95,21 @@ export type SportFixtureSearch = {
   page?: number;
 };
 
+/** Collapse explicit distance aliases without guessing from an event's name. */
+export function fixtureDistanceCode(value: string): string {
+  const code = value.trim();
+  const named = code.toLowerCase().replace(/[\s-]+/g, "");
+  if (named === "half" || named === "halfmarathon") return "Half";
+  if (named === "quarter" || named === "quartermarathon") return "Quarter";
+  if (named === "marathon") return "Marathon";
+  if (named === "ultra" || named === "ultramarathon") return "Ultra";
+  const kilometres = code.match(/^(\d+(?:\.\d+)?)\s*k(?:m)?$/i);
+  if (kilometres) return `${Number(kilometres[1])}K`;
+  const miles = code.match(/^(\d+(?:\.\d+)?)\s*mi(?:le)?s?$/i);
+  if (miles) return `${Number(miles[1])}mi`;
+  return code;
+}
+
 export function getSportPage(slug: unknown): SportPage | undefined {
   const canonicalSlug =
     slug === "running" ? "road-running" : slug === "biking" ? "road-cycling" : slug;
@@ -110,7 +125,7 @@ export function parseSportFixtureSearch(raw: Record<string, unknown>): SportFixt
   return {
     q: typeof raw.q === "string" ? raw.q.trim().slice(0, 120) || undefined : undefined,
     country: filter(raw.country),
-    distance: filter(raw.distance),
+    distance: filter(raw.distance) ? fixtureDistanceCode(filter(raw.distance)!) : undefined,
     page: Number.isSafeInteger(page) && page > 1 ? Math.min(page, 400) : undefined,
   };
 }
