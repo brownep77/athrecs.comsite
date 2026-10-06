@@ -77,19 +77,40 @@ export const SPORT_PAGES = [
 
 export type SportPage = (typeof SPORT_PAGES)[number];
 
+export const UK_FIXTURE_COUNTRIES = [
+  "United Kingdom",
+  "England",
+  "Scotland",
+  "Wales",
+  "Northern Ireland",
+  "UK",
+  "GB",
+  "Great Britain",
+] as const;
+
+export type SportFixtureSearch = {
+  q?: string;
+  country?: string;
+  distance?: string;
+  page?: number;
+};
+
 export function getSportPage(slug: unknown): SportPage | undefined {
   const canonicalSlug =
     slug === "running" ? "road-running" : slug === "biking" ? "road-cycling" : slug;
   return SPORT_PAGES.find((page) => page.slug === canonicalSlug);
 }
 
-export function parseSportFixtureSearch(raw: Record<string, unknown>): {
-  q?: string;
-  page?: number;
-} {
+export function parseSportFixtureSearch(raw: Record<string, unknown>): SportFixtureSearch {
   const page = typeof raw.page === "number" || typeof raw.page === "string" ? Number(raw.page) : 1;
+  const filter = (value: unknown) =>
+    typeof value === "string" && value.trim() !== "All"
+      ? value.trim().slice(0, 120) || undefined
+      : undefined;
   return {
     q: typeof raw.q === "string" ? raw.q.trim().slice(0, 120) || undefined : undefined,
+    country: filter(raw.country),
+    distance: filter(raw.distance),
     page: Number.isSafeInteger(page) && page > 1 ? Math.min(page, 400) : undefined,
   };
 }

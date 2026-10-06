@@ -33,6 +33,14 @@ assert.equal(
 assert.equal(parseSportFixtureSearch({ page: "-2", q: "  Norwich  " }).page, undefined);
 assert.equal(parseSportFixtureSearch({ page: "Infinity" }).page, undefined);
 assert.equal(parseSportFixtureSearch({ page: "9999" }).page, 400);
+assert.deepEqual(parseSportFixtureSearch({ country: " Ireland ", distance: " Half ", page: "2" }), {
+  q: undefined,
+  country: "Ireland",
+  distance: "Half",
+  page: 2,
+});
+assert.equal(parseSportFixtureSearch({ country: ["Ireland"], distance: {} }).country, undefined);
+assert.equal(parseSportFixtureSearch({ country: "All", distance: " " }).distance, undefined);
 assert.equal(publicHttpUrl("javascript:alert(1)"), null);
 assert.equal(publicHttpUrl("https://user:secret@example.com"), null);
 
@@ -145,10 +153,7 @@ try {
   assert.deepEqual(await namesFor("track-and-field"), ["Track Meeting", "Track Run"]);
   assert.deepEqual(await namesFor("road-running"), ["100% Run", "Athletics Road", "Example Run"]);
   assert.deepEqual(await namesFor("road-cycling"), ["Example Ride", "Road Cycling"]);
-  assert.deepEqual(await namesFor("mountain-biking"), [
-    "MTB Gravel Programme",
-    "MTB Race",
-  ]);
+  assert.deepEqual(await namesFor("mountain-biking"), ["MTB Gravel Programme", "MTB Race"]);
   assert.deepEqual(await namesFor("track-cycling"), ["Track Cycling", "Velodrome Meet"]);
   assert.deepEqual(await namesFor("bmx"), ["BMX Race"]);
   await db.exec(`delete from editions where event_id >= 10; delete from events where id >= 10;`);
@@ -166,9 +171,81 @@ try {
   assert.equal(second.hasMore, false);
   assert.equal(second.fixtures.length, 9);
   assert.ok(first.fixtures.at(-1).eventDate < second.fixtures[0].eventDate);
+
+  await db.exec(`
+    insert into events (id, name, sport, country, surface) values
+      (30, 'Example Scotland', 'Running', 'Scotland', 'Road'),
+      (31, 'Example Ireland', 'Running', 'Ireland', 'Road'),
+      (32, 'Example England', 'Running', 'England', 'Road'),
+      (33, 'Past Race', 'Running', 'France', 'Road'),
+      (34, 'Trail Race', 'Running', 'Spain', 'Trail'),
+      (35, 'Example Wales', 'Running', 'Wales', 'Road'),
+      (36, 'Example Northern Ireland', 'Running', 'Northern Ireland', 'Road');
+    insert into editions values
+      (200,30,'2027-01-01','Half',null),
+      (201,31,'2027-01-01','Half',null),
+      (202,32,'2027-01-01','5K',null),
+      (203,33,'2026-01-01','Marathon',null),
+      (204,34,'2027-01-01','50K',null),
+      (205,30,'2027-01-02','10K',null),
+      (206,35,'2027-01-01','Half',null),
+      (207,36,'2027-01-01','Half',null);
+  `);
+  const filtered = (search) =>
+    readSportFixtures(sql, { ...getSportPage("road-running"), ...search }, "2026-09-26");
+  const irishHalf = await filtered({ country: "Ireland", distance: "Half", q: "Example" });
+  assert.deepEqual(
+    irishHalf.fixtures.map((row) => row.name),
+    ["Example Ireland"],
+  );
+  assert.equal(irishHalf.hasMore, false);
+  assert.deepEqual(
+    irishHalf.distances,
+    ["5K", "10K", "Half"],
+    "Options include distances beyond page one and exclude past/other-sport editions",
+  );
+  assert.deepEqual(irishHalf.countries, [
+    "England",
+    "Ireland",
+    "Northern Ireland",
+    "Scotland",
+    "United Kingdom",
+    "Wales",
+  ]);
+  const britishHalves = await filtered({ country: "United Kingdom", distance: "Half" });
+  assert.deepEqual(
+    britishHalves.fixtures.map((row) => row.name),
+    ["Example Northern Ireland", "Example Scotland", "Example Wales"],
+  );
+  assert.deepEqual(
+    (await filtered({ country: "England" })).fixtures.map((row) => row.name),
+    ["Example England"],
+  );
+  assert.equal((await filtered({ country: "Ireland", distance: "10K" })).fixtures.length, 0);
+  const fiveK = await filtered({ distance: "5K", q: "Example Run" });
+  assert.equal(fiveK.fixtures.length, 1, "Do not match another date of the same event");
+  assert.deepEqual(
+    fiveK.fixtures[0].starts.map((start) => start.distance),
+    ["5K"],
+  );
+  for (const search of [{ country: "' OR 1=1 --" }, { distance: "' OR 1=1 --" }]) {
+    assert.equal(
+      (await filtered(search)).fixtures.length,
+      0,
+      "Filter values must remain SQL parameters",
+    );
+  }
+  const pageOne = await filtered({ country: "United Kingdom", distance: "10K" });
+  const pageTwo = await filtered({ country: "United Kingdom", distance: "10K", page: 2 });
+  assert.equal(pageOne.fixtures.length, 24);
+  assert.equal(pageOne.hasMore, true);
+  assert.equal(pageTwo.fixtures.length, 10);
+  assert.equal(pageTwo.hasMore, false);
+  assert.ok(pageOne.fixtures.at(-1).eventDate < pageTwo.fixtures[0].eventDate);
+  assert.deepEqual(pageTwo.countries, pageOne.countries);
 } finally {
   await db.close();
 }
 console.log(
-  "Sport fixtures: sport filters, local broadcast expiry, grouped distances, search escaping and pagination passed.",
+  "Sport fixtures: combined country/distance/search filters, UK nations, complete options, local broadcast expiry, grouped distances, escaping and pagination passed.",
 );

@@ -43,7 +43,7 @@ export const Route = createFileRoute("/sports/$sport")({
           description: `Find ${sport.label.toLowerCase()} on TV and live streams, browse upcoming fixtures and explore results on AthRecs.`,
           url,
         }),
-        ...(match.search.q || match.search.page
+        ...(match.search.q || match.search.country || match.search.distance || match.search.page
           ? [{ name: "robots", content: "noindex, follow" }]
           : []),
       ],
@@ -68,8 +68,12 @@ const textLink =
   "inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-accent no-underline hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
 function SportPage() {
-  const { sport, broadcasts, fixtures, hasMore, page } = Route.useLoaderData();
+  const { sport, broadcasts, fixtures, hasMore, page, countries, distances } =
+    Route.useLoaderData();
   const search = Route.useSearch();
+  const filtered = !!(search.q || search.country || search.distance);
+  const filterControl =
+    "h-11 w-full min-w-0 rounded-lg border border-border bg-surface px-3 text-base text-fg outline-none focus:ring-2 focus:ring-accent/40";
   return (
     <div className="space-y-7 pb-6">
       <header className="flex flex-wrap items-end justify-between gap-4 border-b border-border pb-5">
@@ -198,35 +202,85 @@ function SportPage() {
           action={`/sports/${sport.slug}#fixtures`}
           method="get"
           role="search"
-          className="flex flex-wrap gap-2"
+          key={`${sport.slug}-${search.q ?? ""}-${search.country ?? ""}-${search.distance ?? ""}`}
+          className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)_minmax(0,1fr)_auto] lg:items-end"
         >
-          <label htmlFor="sport-fixture-search" className="sr-only">
-            Search fixtures by event or location
-          </label>
-          <input
-            id="sport-fixture-search"
-            key={search.q ?? ""}
-            name="q"
-            type="search"
-            maxLength={120}
-            defaultValue={search.q}
-            placeholder="Search event, city or country"
-            className="h-11 min-w-0 flex-1 rounded-lg border border-border bg-surface px-3 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/40"
-          />
-          <Button type="submit" className="h-11">
-            <Search className="size-4" aria-hidden="true" /> Search
-          </Button>
-          {search.q ? (
-            <Link
-              to="/sports/$sport"
-              params={{ sport: sport.slug }}
-              search={{}}
-              hash="fixtures"
-              className={textLink}
+          <div className="min-w-0 space-y-1.5">
+            <label htmlFor="sport-fixture-search" className="block text-sm font-medium">
+              Search fixtures
+            </label>
+            <input
+              id="sport-fixture-search"
+              name="q"
+              type="search"
+              maxLength={120}
+              defaultValue={search.q}
+              placeholder="Search event, city or country"
+              className={filterControl}
+            />
+          </div>
+          <div className="min-w-0 space-y-1.5">
+            <label htmlFor="sport-fixture-country" className="block text-sm font-medium">
+              Country
+            </label>
+            <select
+              id="sport-fixture-country"
+              name="country"
+              defaultValue={search.country ?? ""}
+              className={filterControl}
             >
-              Clear
-            </Link>
-          ) : null}
+              <option value="">All countries</option>
+              {search.country && !countries.includes(search.country) && (
+                <option value={search.country}>{search.country}</option>
+              )}
+              {countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="min-w-0 space-y-1.5">
+            <label htmlFor="sport-fixture-distance" className="block text-sm font-medium">
+              Distance
+            </label>
+            <select
+              id="sport-fixture-distance"
+              name="distance"
+              defaultValue={search.distance ?? ""}
+              className={filterControl}
+            >
+              <option value="">All distances</option>
+              {search.distance && !distances.includes(search.distance) && (
+                <option value={search.distance}>{search.distance}</option>
+              )}
+              {distances.map((distance) => (
+                <option key={distance} value={distance}>
+                  {distance === "Half"
+                    ? "Half marathon"
+                    : distance === "Ultra"
+                      ? "Ultramarathon"
+                      : distance}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-wrap items-center gap-3 sm:self-end">
+            <Button type="submit" className="h-11">
+              <Search className="size-4" aria-hidden="true" /> Apply filters
+            </Button>
+            {filtered ? (
+              <Link
+                to="/sports/$sport"
+                params={{ sport: sport.slug }}
+                search={{}}
+                hash="fixtures"
+                className={textLink}
+              >
+                Clear filters
+              </Link>
+            ) : null}
+          </div>
         </form>
         {fixtures.length ? (
           <div className="divide-y divide-border rounded-xl border border-border bg-surface px-4 sm:px-5">
@@ -240,8 +294,8 @@ function SportPage() {
           </div>
         ) : (
           <div className="rounded-xl border border-border bg-surface p-6 text-sm text-muted">
-            {search.q
-              ? "No upcoming fixtures match this search. Try another event or location."
+            {filtered
+              ? "No upcoming fixtures match these filters. Try another country or distance, change your search, or clear the filters."
               : "No upcoming fixtures are listed for this sport yet."}
           </div>
         )}
