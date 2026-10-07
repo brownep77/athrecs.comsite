@@ -32,6 +32,7 @@ const MARATHON_COUNTRIES = [...FULL_COUNTRIES, ...HALF_MARATHON_COUNTRIES];
 const { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } =
   await import("../src/lib/running/road-ultras.ts");
 const base = process.env.RUNNING_VERIFY_BASE ?? "http://127.0.0.1:8097";
+const toolPaths = ["/running/events", "/running/calendar", "/running/race-series"];
 const paths = [
   "/running",
   ULTRA_GUIDE_PATH,
@@ -60,13 +61,30 @@ async function worker() {
     $("main a[href]").each((i, element) => {
       const href = $(element).attr("href");
       if (href.startsWith("/running"))
-        assert(paths.includes(href.split("#")[0]), `${route} has broken internal link ${href}`);
+        assert(
+          [...paths, ...toolPaths].includes(href.split("#")[0]),
+          `${route} has broken internal link ${href}`,
+        );
       else if (href.startsWith("/")) $(element).attr("href", `https://www.athrecs.com${href}`);
       if (href.startsWith("http"))
         $(element).attr("target", "_blank").attr("rel", "noopener noreferrer");
     });
     const race = ROAD_MARATHONS.find((item) => route === `/running/races/${item.slug}`);
     if (race) {
+      const graph = $('script[type="application/ld+json"]')
+        .toArray()
+        .flatMap((element) => JSON.parse($(element).html())["@graph"] ?? []);
+      const events = graph.filter((item) => item["@type"] === "SportsEvent");
+      for (const event of events) {
+        assert.equal(event.eventStatus, "https://schema.org/EventScheduled", route);
+        assert(
+          race.editions.some((edition) => edition.date === event.startDate),
+          route,
+        );
+      }
+      if (!race.editions.length)
+        assert.equal(events.length, 0, `${route}: TBC must not create events`);
+      assert($("#related-races").length, `${route}: related race links missing`);
       for (const id of ["dates", "entry", "course", "results", "media", "questions"])
         assert.equal($(`#${id}`).length, 1, `${route} missing ${id}`);
       for (const method of race.entryMethods)
@@ -99,8 +117,22 @@ await Promise.all(Array.from({ length: 5 }, worker));
 const sitemap = await fetch(`${base}/sitemaps/pages.xml`);
 assert.equal(sitemap.status, 200);
 const xml = await sitemap.text();
-for (const route of paths)
-  assert(xml.includes(`https://www.athrecs.com${route}`), `Missing sitemap entry: ${route}`);
+const sitemapDoc = cheerio.load(xml, { xmlMode: true });
+const locations = sitemapDoc("url > loc")
+  .toArray()
+  .map((element) => sitemapDoc(element).text());
+assert.equal(new Set(locations).size, locations.length, "Duplicate sitemap URLs");
+for (const route of paths) {
+  assert(locations.includes(`https://www.athrecs.com${route}`), `Missing sitemap entry: ${route}`);
+  if (route !== "/running") {
+    const entry = sitemapDoc("url")
+      .toArray()
+      .find(
+        (element) => sitemapDoc(element).find("loc").text() === `https://www.athrecs.com${route}`,
+      );
+    assert.match(sitemapDoc(entry).find("lastmod").text(), /^\d{4}-\d{2}-\d{2}$/, route);
+  }
+}
 for (const route of ["/running/unknown-country", "/running/races/not-a-real-marathon"])
   assert.equal((await fetch(`${base}${route}`)).status, 404, route);
 console.log(

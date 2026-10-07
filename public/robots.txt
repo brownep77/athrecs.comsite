@@ -13,3 +13,6 @@ Disallow: /brands/manage
 Disallow: /brands/register
 
 Sitemap: https://www.athrecs.com/sitemap.xml
+
+# Static discovery pages remain available independently of catalogue queries.
+Sitemap: https://www.athrecs.com/sitemaps/pages.xml

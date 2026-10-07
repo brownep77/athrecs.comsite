@@ -9,6 +9,7 @@ import {
   roadRaceLocation,
   roadRaceQuestions,
 } from "@/lib/running/road-marathon-seo";
+import { roadGuideModifiedAt } from "@/lib/running/guide-modified";
 import { useRaceDateRefresh } from "./use-race-date-refresh";
 
 const linkClass =
@@ -76,13 +77,18 @@ export function CountryMarathonPage({
   );
   const half = country.guide.endsWith("-half-marathons");
   const distance = half ? "half marathon" : "marathon";
+  const year = country.calendarYear;
   const dated = races
-    .flatMap((race) => upcomingRoadEditions(race, now).map((edition) => ({ race, edition })))
+    .flatMap((race) => upcomingRoadEditions(race, now, year).map((edition) => ({ race, edition })))
     .sort(
       (a, b) =>
         a.edition.date.localeCompare(b.edition.date) || a.race.name.localeCompare(b.race.name),
     );
-  const undated = races.filter((race) => !upcomingRoadEditions(race, now).length);
+  const undated = races.filter((race) =>
+    year
+      ? !race.editions.some((edition) => edition.date.startsWith(`${year}-`))
+      : !upcomingRoadEditions(race, now).length,
+  );
   const questions = countryMarathonQuestions(country, races, now);
   return (
     <article className="space-y-8 pb-8">
@@ -100,24 +106,25 @@ export function CountryMarathonPage({
           {country.name} · Road running
         </p>
         <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
-          {country.name} road {distance}s
+          {country.name} road {distance}s{year ? ` ${year}` : ""}
         </h1>
         <p className="mt-5 max-w-3xl text-base leading-7 text-muted">{country.description}</p>
         <p className="mt-3 text-sm text-muted">
           {races.length} race guides · {half ? "21.0975 km / 13.1 miles" : "42.195 km / 26.2 miles"}{" "}
-          · Dates through 2027
+          · {year ? `${year} calendar` : "Dates through 2027"}
         </p>
       </header>
       <CountryNavigation selected={country.id} half={half} />
       <section aria-labelledby="upcoming" className="space-y-4">
         <h2 id="upcoming" className="scroll-mt-24 font-display text-2xl font-semibold">
-          Upcoming {distance} dates
+          {year ? `${year} road ${distance} dates` : `Upcoming ${distance} dates`}
         </h2>
         <p className="max-w-3xl text-sm leading-6 text-muted">
-          Find road {distance}s taking place between now and the end of 2027. Compare the location
-          and approximate field, then open a race guide for entry options, course maps and previous
-          results. Runner numbers refer to the year shown; Unknown means a reliable estimate is not
-          available.
+          Find road {distance}s{" "}
+          {year ? `taking place in ${year}` : "taking place between now and the end of 2027"}.
+          Compare the location and approximate field, then open a race guide for entry options,
+          course maps and previous results. Runner numbers refer to the year shown; Unknown means a
+          reliable estimate is not available.
         </p>
         {dated.length ? (
           <div
@@ -199,9 +206,12 @@ export function CountryMarathonPage({
           </p>
         )}
         {undated.length ? (
-          <details className="rounded-xl border border-border p-4 text-sm">
+          <details
+            open={year ? true : undefined}
+            className="rounded-xl border border-border p-4 text-sm"
+          >
             <summary className="cursor-pointer font-semibold">
-              Race dates TBC ({undated.length})
+              {year ? `${year} race dates TBC` : "Race dates TBC"} ({undated.length})
             </summary>
             <ul className="mt-3 space-y-2">
               {undated.map((race) => (
@@ -299,7 +309,15 @@ export function CountryMarathonPage({
   );
 }
 
-export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: string }) {
+export function RoadMarathonPage({
+  race,
+  now,
+  related = [],
+}: {
+  race: RoadMarathon;
+  now: string;
+  related?: Pick<RoadMarathon, "slug" | "name" | "city" | "region">[];
+}) {
   useRaceDateRefresh([race.timeZone], now);
   const half = race.distanceKm === 21.0975;
   const country = (half ? halfMarathonCountry(race.country) : countryGuide(race.country))!;
@@ -341,7 +359,9 @@ export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: strin
         </div>
         <p className="mt-4 text-xs text-muted">
           AthRecs race guide · Updated{" "}
-          <time dateTime={race.checkedAt}>{roadMarathonDate(race.checkedAt)}</time>
+          <time dateTime={roadGuideModifiedAt([race.checkedAt])}>
+            {roadMarathonDate(roadGuideModifiedAt([race.checkedAt]))}
+          </time>
         </p>
       </header>
       <nav aria-label="Race guide sections" className="flex flex-wrap gap-x-5 gap-y-1 text-sm">
@@ -645,6 +665,25 @@ export function RoadMarathonPage({ race, now }: { race: RoadMarathon; now: strin
           ))}
         </ul>
       </details>
+      {related.length ? (
+        <section aria-labelledby="related-races" className="border-t border-border pt-7">
+          <h2 id="related-races" className="font-display text-2xl font-semibold">
+            More {half ? "half marathons" : "marathons"} in {country.name}
+          </h2>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+            {related.map((item) => (
+              <li key={item.slug} className="rounded-xl border border-border p-4">
+                <Link to="/running/races/$slug" params={{ slug: item.slug }} className={linkClass}>
+                  {item.name}
+                </Link>
+                <p className="text-sm text-muted">
+                  {[...new Set([item.city, item.region].filter(Boolean))].join(", ")}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
       <CountryLink country={country}>
         More road {half ? "half marathons" : "marathons"} in {country.name}{" "}
         <ArrowRight className="size-4" aria-hidden="true" />

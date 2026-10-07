@@ -554,6 +554,10 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
       {
         "date": "2026-10-11",
         "sourceUrl": "https://www.runvictoriamarathon.com/royal-victoria-marathon"
+      },
+      {
+        "date": "2027-10-10",
+        "sourceUrl": "https://aims-worldrunning.org/races/833.html"
       }
     ],
     "media": [
@@ -603,8 +607,7 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
         "url": "https://www.runvictoriamarathon.com/results"
       }
     ],
-    "checkedAt": "2026-09-26",
-    "nextDateNote": "2027 date not yet confirmed.",
+    "checkedAt": "2026-09-28",
     "practical": [
       {
         "label": "2026 start",
@@ -638,7 +641,7 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
     "region": "Alberta",
     "timeZone": "America/Edmonton",
     "officialUrl": "https://www.edmontonmarathon.ca/marathon",
-    "description": "The Edmonton Marathon is a city road race with its start and finish at the Edmonton Convention Centre. That shared base keeps the basic race-day geography straightforward, though full-marathon runners and walkers also need to meet a halfway checkpoint. One detail matters when looking back at 2026: the organiser confirmed a measurement error that made the course longer than intended. Read that statement before comparing finishing times or qualification performances. The next race date has not yet been confirmed.",
+    "description": "The Edmonton Marathon is a city road race with its start and finish at the Edmonton Convention Centre. That shared base keeps the basic race-day geography straightforward, though full-marathon runners and walkers also need to meet a halfway checkpoint. One detail matters when looking back at 2026: the organiser confirmed a measurement error that made the course longer than intended. Read that statement before comparing finishing times or qualification performances. The next race is scheduled for 15 August 2027.",
     "course": {
       "summary": "City road course starting and finishing at the Edmonton Convention Centre.",
       "surface": "Road",
@@ -657,8 +660,12 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
         "url": "https://www.edmontonmarathon.ca/marathon"
       }
     ],
-    "editions": [],
-    "nextDateNote": "2027 date not yet confirmed in the checked official sources.",
+    "editions": [
+      {
+        "date": "2027-08-15",
+        "sourceUrl": "https://www.edmontonmarathon.ca/"
+      }
+    ],
     "media": [
       {
         "label": "2026 course-measurement statement",
@@ -710,6 +717,10 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
         "url": "https://www.edmontonmarathon.ca/marathon"
       },
       {
+        "label": "2027 event date",
+        "url": "https://www.edmontonmarathon.ca/"
+      },
+      {
         "label": "Official results",
         "url": "https://www.edmontonmarathon.ca/results"
       },
@@ -729,7 +740,7 @@ export const CANADA_ROAD_MARATHONS: RoadMarathon[] = [
       "sourceUrl": "https://findmymarathon.com/race-detail.php?zname=Edmonton+Marathon",
       "note": "Rounded from FindMyMarathon's 1,296 full-marathon finishers in 2025; shorter races excluded."
     },
-    "checkedAt": "2026-09-26"
+    "checkedAt": "2026-10-03"
   },
   {
     "slug": "manitoba-marathon",

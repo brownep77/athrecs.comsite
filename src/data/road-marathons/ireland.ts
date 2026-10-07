@@ -54,6 +54,10 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
         date: "2026-10-25",
         sourceUrl: "https://irishlifedublinmarathon.ie/",
       },
+      {
+        date: "2027-10-24",
+        sourceUrl: "https://irishlifedublinmarathon.ie/2027-event-dates-entry-information/",
+      },
     ],
     media: [
       {
@@ -188,7 +192,7 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
       sourceUrl: "https://www.findmymarathon.com/race-detail.php?zname=Dublin+Marathon",
       note: "Based on 18,508 marathon finishers in 2025, as reported by FindMyMarathon.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-01",
     practical: [
       {
         label: "2026 start times",
@@ -201,7 +205,6 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
         sourceUrl: "https://irishlifedublinmarathon.ie/frequently-asked-questions/",
       },
     ],
-    nextDateNote: "2027 date has not yet been verified from the organiser.",
   },
   {
     slug: "cork-city-marathon",
@@ -922,7 +925,7 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
     timeZone: "Europe/Dublin",
     officialUrl: "https://rungalwaybay.com/",
     description:
-      "Run Galway Bay Marathon follows the waterfront between the Claddagh and Salthill on closed roads and the paved promenade. Two short laps and four full laps make up the distance, so there is more than one chance to admire the view. The course is flat, with some narrow sections worth bearing in mind when passing other runners. The 2026 race is sold out, with race numbers posted to entrants. There is no official bag drop, so plan where to leave your belongings.",
+      "Run Galway Bay Marathon follows the waterfront between the Claddagh and Salthill on closed roads and the paved promenade. Two short laps and four full laps make up the distance, so there is more than one chance to admire the view. The course is flat, with some narrow sections worth bearing in mind when passing other runners. The next race is scheduled for 2 October 2027, with entry through the organiser’s registration link. There is no official bag drop, so plan where to leave your belongings.",
     course: {
       summary:
         "Two short laps and four full laps from the Claddagh through Salthill, returning along the promenade.",
@@ -939,11 +942,15 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
       {
         name: "Online entry",
         description:
-          "The 2026 race is sold out. Use the organiser’s updates and entry links for future releases.",
-        url: "https://rungalwaybay.com/faqs/",
+          "Use the organiser-linked registration page for the 2 October 2027 edition. Check the current entry terms and availability before booking.",
+        url: "https://in.njuko.com/run-galway-bay-2027",
       },
     ],
     editions: [
+      {
+        date: "2027-10-02",
+        sourceUrl: "https://rungalwaybay.com/race-information/",
+      },
       {
         date: "2026-10-03",
         sourceUrl: "https://rungalwaybay.com/faqs/",
@@ -1121,6 +1128,10 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
     ],
     sources: [
       {
+        label: "2027 official entry and date",
+        url: "https://rungalwaybay.com/race-information/",
+      },
+      {
         label: "Official race website",
         url: "https://rungalwaybay.com/",
       },
@@ -1144,8 +1155,13 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
       sourceUrl: "https://redtagtiming.com/results/RGB2025_42km.html",
       note: "Based on 353 full-marathon finishers in 2025, excluding 12 runners listed as not finishing.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-07",
     practical: [
+      {
+        label: "2027 marathon start",
+        value: "08:30 local time on Saturday 2 October.",
+        sourceUrl: "https://rungalwaybay.com/race-information/",
+      },
       {
         label: "2026 start",
         value: "08:30 local time.",
@@ -1157,7 +1173,6 @@ export const IRELAND_ROAD_MARATHONS: RoadMarathon[] = [
         sourceUrl: "https://rungalwaybay.com/full-marathon/",
       },
     ],
-    nextDateNote: "2027 date has not yet been verified from the organiser.",
   },
   {
     slug: "dingle-marathon",
