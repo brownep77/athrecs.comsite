@@ -1,11 +1,7 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  type ProfileResult,
-  findPersonalBests,
-  timingBasis,
-} from "@/lib/athrecs/profile-records";
+import { type ProfileResult, findPersonalBests, timingBasis } from "@/lib/athrecs/profile-records";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
@@ -15,10 +11,7 @@ import { isDisqualified } from "@/lib/athrecs/result-details";
 import { ResultDisqualification } from "./ResultDisqualification";
 
 import { ReportedRaceResultRows } from "./ReportedRaceResultRows";
-import type {
-  ReportedRaceHistory,
-  ReportedRaceRecord,
-} from "@/lib/athrecs/reported-race-history";
+import type { ReportedRaceHistory, ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 import { selectProfilePersonalBests } from "@/lib/athrecs/reported-personal-bests";
 
 const NO_REPORTED_RECORDS: readonly ReportedRaceRecord[] = [];
@@ -42,9 +35,7 @@ export function CompactResultsTable({
   action?: (result: Row) => ReactNode;
   claimable?: boolean;
 }) {
-  const bestIds =
-    personalBestIds ??
-    new Set(findPersonalBests(results).map((r) => r.resultId));
+  const bestIds = personalBestIds ?? new Set(findPersonalBests(results).map((r) => r.resultId));
   return (
     <div
       className={`${showEvidence ? "" : "profile-table-wrap"} overflow-x-auto rounded-lg border border-border bg-surface`}
@@ -81,11 +72,7 @@ export function CompactResultsTable({
         </thead>
         <tbody role="rowgroup" className="divide-y divide-border">
           {results.map((result) => (
-            <tr
-              role="row"
-              key={result.resultId}
-              className="hover:bg-elevated/50"
-            >
+            <tr role="row" key={result.resultId} className="hover:bg-elevated/50">
               <td
                 role="cell"
                 data-label="Date"
@@ -93,11 +80,7 @@ export function CompactResultsTable({
               >
                 {formatRaceDateShort(result.eventDate)}
               </td>
-              <td
-                role="cell"
-                data-label="Event"
-                className="min-w-44 px-3 py-2 font-medium"
-              >
+              <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
                 <span className="flex items-center gap-1.5">
                   <ResultMedal result={result} />
                   <ProfileEventLink
@@ -107,13 +90,9 @@ export function CompactResultsTable({
                     {result.eventName}
                   </ProfileEventLink>
                 </span>
-                <ResultDisqualification
-                  decision={result.details?.disqualification}
-                />
+                <ResultDisqualification decision={result.details?.disqualification} />
                 {showEvidence && result.details?.note ? (
-                  <span className="block text-xs text-muted">
-                    {result.details.note}
-                  </span>
+                  <span className="block text-xs text-muted">{result.details.note}</span>
                 ) : null}
                 {result.details?.splits?.length ? (
                   <span className="block text-xs font-normal text-muted">
@@ -136,15 +115,9 @@ export function CompactResultsTable({
               <td role="cell" data-label="Sport" className="px-3 py-2 text-xs">
                 {result.sport}
               </td>
-              <td
-                role="cell"
-                data-label="Distance"
-                className="whitespace-nowrap px-3 py-2 text-xs"
-              >
+              <td role="cell" data-label="Distance" className="whitespace-nowrap px-3 py-2 text-xs">
                 {result.distanceCode}
-                <span className="block text-[10px] text-subtle">
-                  {result.surface}
-                </span>
+                <span className="block text-[10px] text-subtle">{result.surface}</span>
               </td>
               <td role="cell" data-label="Location" className="px-3 py-2">
                 <span className="inline-flex flex-wrap items-center gap-2 text-xs">
@@ -162,9 +135,7 @@ export function CompactResultsTable({
                 !result.status
                   ? formatDuration(result.finishTimeSeconds)
                   : result.status}
-                {isDisqualified(result) ? (
-                  <span aria-label="Disqualified result">*</span>
-                ) : null}
+                {isDisqualified(result) ? <span aria-label="Disqualified result">*</span> : null}
                 {!isDisqualified(result) && bestIds.has(result.resultId) ? (
                   <span
                     className="ml-2 rounded bg-accent-soft px-1.5 py-0.5 text-xs font-semibold text-accent"
@@ -175,9 +146,7 @@ export function CompactResultsTable({
                 ) : null}
                 {showEvidence ? (
                   <span className="block text-xs font-normal text-subtle">
-                    {isDisqualified(result)
-                      ? "Original time · disqualified"
-                      : timingBasis(result)}
+                    {isDisqualified(result) ? "Original time · disqualified" : timingBasis(result)}
                     {result.chipTimeSeconds != null
                       ? ` · Chip ${formatDuration(result.chipTimeSeconds)}`
                       : ""}
@@ -187,23 +156,13 @@ export function CompactResultsTable({
                   </span>
                 ) : null}
               </td>
-              <td
-                role="cell"
-                data-label="Place"
-                className="px-3 py-2 tabular-nums"
-              >
+              <td role="cell" data-label="Place" className="px-3 py-2 tabular-nums">
                 {result.overallPlace ?? "—"}
                 {isDisqualified(result) ? (
-                  <span className="block text-[10px] text-subtle">
-                    Original · void
-                  </span>
+                  <span className="block text-[10px] text-subtle">Original · void</span>
                 ) : null}
               </td>
-              <td
-                role="cell"
-                data-label="Category"
-                className="px-3 py-2 text-xs"
-              >
+              <td role="cell" data-label="Category" className="px-3 py-2 text-xs">
                 {result.category || "—"}
               </td>
               {showEvidence ? (
@@ -276,10 +235,7 @@ export function CompactResults({
   const reportYear = (record: ReportedRaceRecord) =>
     record.reportedDate.match(/^\d{4}\b/)?.[0] ?? "Unknown";
   const sports = [
-    ...new Set([
-      ...results.map((r) => r.sport),
-      ...(reportedRecords.length ? ["Running"] : []),
-    ]),
+    ...new Set([...results.map((r) => r.sport), ...(reportedRecords.length ? ["Running"] : [])]),
   ].sort();
   const years = [
     ...new Set([
@@ -309,33 +265,22 @@ export function CompactResults({
     );
   const total = filtered.length + filteredReports.length;
 
-  const bests = selectProfilePersonalBests(
-    results,
-    reportedHistory?.personalBests,
-  );
+  const bests = selectProfilePersonalBests(results, reportedHistory?.personalBests);
   const bestIds = new Set(
-    bests.flatMap((best) =>
-      best.kind === "recorded" ? [best.value.resultId] : [],
-    ),
+    bests.flatMap((best) => (best.kind === "recorded" ? [best.value.resultId] : [])),
   );
   const reportedBestIds = new Set(
     bests.flatMap((best) =>
-      best.kind === "reported" && best.value.recordId
-        ? [best.value.recordId]
-        : [],
+      best.kind === "reported" && best.value.recordId ? [best.value.recordId] : [],
     ),
   );
   const previewSize = 8;
   const previewReports = Math.max(0, previewSize - filtered.length);
   return (
-    <section
-      className="space-y-3"
-      id={reportedHistory ? "race-results" : undefined}
-    >
+    <section className="space-y-3" id={reportedHistory ? "race-results" : undefined}>
       <div className="profile-filters flex flex-wrap items-center gap-2">
         <h2 className="mr-auto font-display text-lg font-semibold">
-          Results history{" "}
-          <span className="font-sans text-sm text-subtle">{total}</span>
+          Results history <span className="font-sans text-sm text-subtle">{total}</span>
         </h2>
         <input
           aria-label="Search results"

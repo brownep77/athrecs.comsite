@@ -20,10 +20,7 @@ let database;
 const cache = new Map();
 async function rpc(file, name, data, headers) {
   // These are now member reads. Use an unrelated signed-in viewer, never staff.
-  if (
-    headers === undefined &&
-    ["getAthleteBySlug", "getPublishedSharedProfile"].includes(name)
-  ) {
+  if (headers === undefined && ["getAthleteBySlug", "getPublishedSharedProfile"].includes(name)) {
     headers = { authorization: "Bearer compact-test-other" };
   }
   if (!cache.has(file)) {
@@ -78,10 +75,7 @@ try {
     overallPlace: null,
     category: null,
   };
-  const renderSourceLinks = (
-    resultSource,
-    sourceUrls = [originalResultUrl],
-  ) => {
+  const renderSourceLinks = (resultSource, sourceUrls = [originalResultUrl]) => {
     const html = renderToStaticMarkup(
       createElement(CompactResultsTable, {
         results: [{ ...sourceRow, resultSource, sourceUrls }],
@@ -108,15 +102,9 @@ try {
     const [fallback] = renderSourceLinks(absentProvider);
     assert.equal(fallback.text, "Source ↗");
     assert.equal(fallback.url, originalResultUrl);
-    assert.equal(
-      fallback.accessibleName,
-      "Source result source for Synthetic source credit race",
-    );
+    assert.equal(fallback.accessibleName, "Source result source for Synthetic source credit race");
   }
-  const multipleSources = renderSourceLinks("Example Timer", [
-    originalResultUrl,
-    corroboratingUrl,
-  ]);
+  const multipleSources = renderSourceLinks("Example Timer", [originalResultUrl, corroboratingUrl]);
   assert.deepEqual(
     multipleSources.map((source) => source.text),
     ["Example Timer 1 ↗", "Example Timer 2 ↗"],
@@ -134,9 +122,7 @@ try {
   const dbModule = await server.ssrLoadModule("/src/lib/db.ts");
   database = await dbModule.getPglite();
   const sql = await dbModule.getSql();
-  const { ensureAthrecsSeeded } = await server.ssrLoadModule(
-    "/src/lib/athrecs/seed.server.ts",
-  );
+  const { ensureAthrecsSeeded } = await server.ssrLoadModule("/src/lib/athrecs/seed.server.ts");
   await ensureAthrecsSeeded();
   for (const id of ["owner", "other", "staff"]) {
     await sql`insert into "user" ("id","name","email","emailVerified") values (${`compact-${id}`},${`Compact ${id}`},${`compact-${id}@example.test`},true)`;
@@ -151,19 +137,9 @@ try {
     rpc("staff-athlete-directory-api", "getStaffAthleteDirectory", {}, owner),
   );
   await assert.rejects(() =>
-    rpc(
-      "staff-athlete-directory-api",
-      "exportStaffAthleteDirectory",
-      {},
-      other,
-    ),
+    rpc("staff-athlete-directory-api", "exportStaffAthleteDirectory", {}, other),
   );
-  const account = await rpc(
-    "athlete-account-api",
-    "getMyAthleteAccount",
-    undefined,
-    owner,
-  );
+  const account = await rpc("athlete-account-api", "getMyAthleteAccount", undefined, owner);
   const sport = (name, primary) => ({
     sportCode: name,
     isPrimary: primary,
@@ -198,12 +174,7 @@ try {
     privacyAcknowledged: true,
   };
   await rpc("athlete-account-api", "saveMyAthleteAccount", input, owner);
-  const saved = await rpc(
-    "athlete-account-api",
-    "getMyAthleteAccount",
-    undefined,
-    owner,
-  );
+  const saved = await rpc("athlete-account-api", "getMyAthleteAccount", undefined, owner);
   assert.equal(saved.profileDetails.manager, "Test manager");
   assert.equal(saved.athleteNumber, account.athleteNumber);
   assert.equal(saved.sports.length, 2);
@@ -218,24 +189,12 @@ try {
     status: "Entered",
   };
   await rpc("athlete-upcoming-api", "saveMyUpcoming", fixture, owner);
-  let events = await rpc(
-    "athlete-upcoming-api",
-    "getMyUpcoming",
-    undefined,
-    owner,
-  );
+  let events = await rpc("athlete-upcoming-api", "getMyUpcoming", undefined, owner);
   assert.equal(events.length, 1);
   assert.equal(events[0].country, "Sweden");
+  await assert.rejects(() => rpc("athlete-upcoming-api", "saveMyUpcoming", fixture, owner));
   await assert.rejects(() =>
-    rpc("athlete-upcoming-api", "saveMyUpcoming", fixture, owner),
-  );
-  await assert.rejects(() =>
-    rpc(
-      "athlete-upcoming-api",
-      "saveMyUpcoming",
-      { ...fixture, eventDate: "2099-02-30" },
-      owner,
-    ),
+    rpc("athlete-upcoming-api", "saveMyUpcoming", { ...fixture, eventDate: "2099-02-30" }, owner),
   );
   await assert.rejects(() =>
     rpc(
@@ -246,32 +205,13 @@ try {
     ),
   );
   await assert.rejects(() =>
-    rpc(
-      "athlete-upcoming-api",
-      "saveMyUpcoming",
-      { ...events[0], eventName: "Take over" },
-      other,
-    ),
+    rpc("athlete-upcoming-api", "saveMyUpcoming", { ...events[0], eventName: "Take over" }, other),
   );
   await assert.rejects(() =>
-    rpc(
-      "athlete-upcoming-api",
-      "deleteMyUpcoming",
-      { id: events[0].id },
-      other,
-    ),
+    rpc("athlete-upcoming-api", "deleteMyUpcoming", { id: events[0].id }, other),
   );
-  assert.equal(
-    (await rpc("athlete-upcoming-api", "getMyUpcoming", undefined, other))
-      .length,
-    0,
-  );
-  const share = await rpc(
-    "athlete-profile-share-api",
-    "getMyProfileShare",
-    undefined,
-    owner,
-  );
+  assert.equal((await rpc("athlete-upcoming-api", "getMyUpcoming", undefined, other)).length, 0);
+  const share = await rpc("athlete-profile-share-api", "getMyProfileShare", undefined, owner);
   assert.equal(
     await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
       slug: share.slug,
@@ -284,41 +224,27 @@ try {
     { enabled: true, acknowledged: true },
     owner,
   );
-  let published = await rpc(
-    "athlete-profile-share-api",
-    "getPublishedSharedProfile",
-    {
-      slug: share.slug,
-    },
-  );
+  let published = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
+    slug: share.slug,
+  });
   assert(published);
-  assert.equal(
-    published.searchIndexable,
-    false,
-    "Sharing alone must not opt in to search",
-  );
+  assert.equal(published.searchIndexable, false, "Sharing alone must not opt in to search");
   await rpc(
     "athlete-profile-share-api",
     "saveMyProfileShare",
     { enabled: true, acknowledged: true, searchIndexable: true },
     owner,
   );
-  let searchable = await rpc(
-    "athlete-profile-share-api",
-    "getPublishedSharedProfile",
-    {
-      slug: share.slug,
-    },
-  );
+  let searchable = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
+    slug: share.slug,
+  });
   assert.equal(searchable.searchIndexable, true);
   const suggestion = {
     slug: share.slug,
     suggestion: "Please correct the club to Example Running Club.",
     evidenceUrl: "https://example.test/club",
   };
-  await assert.rejects(() =>
-    rpc("profile-edit-suggestions-api", "submitProfileEdit", suggestion),
-  );
+  await assert.rejects(() => rpc("profile-edit-suggestions-api", "submitProfileEdit", suggestion));
   await assert.rejects(() =>
     rpc(
       "profile-edit-suggestions-api",
@@ -336,18 +262,8 @@ try {
   await assert.rejects(() =>
     rpc("profile-edit-suggestions-api", "getProfileEdits", undefined, owner),
   );
-  let queue = await rpc(
-    "profile-edit-suggestions-api",
-    "getProfileEdits",
-    undefined,
-    staff,
-  );
-  assert(
-    queue.some(
-      (row) =>
-        row.id === submitted.id && row.suggestion === suggestion.suggestion,
-    ),
-  );
+  let queue = await rpc("profile-edit-suggestions-api", "getProfileEdits", undefined, staff);
+  assert(queue.some((row) => row.id === submitted.id && row.suggestion === suggestion.suggestion));
   assert.equal(
     (
       await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
@@ -371,12 +287,7 @@ try {
     { id: submitted.id, status: "reviewed" },
     staff,
   );
-  queue = await rpc(
-    "profile-edit-suggestions-api",
-    "getProfileEdits",
-    undefined,
-    staff,
-  );
+  queue = await rpc("profile-edit-suggestions-api", "getProfileEdits", undefined, staff);
   assert(!queue.some((row) => row.id === submitted.id));
   await rpc(
     "athlete-profile-share-api",
@@ -414,22 +325,13 @@ try {
       },
       owner,
     );
-    published = await rpc(
-      "athlete-profile-share-api",
-      "getPublishedSharedProfile",
-      {
-        slug: share.slug,
-      },
-    );
+    published = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
+      slug: share.slug,
+    });
     assert.equal(published.details.birthday, birthday);
     assert(!("dateOfBirth" in published));
   }
-  await rpc(
-    "athlete-upcoming-api",
-    "saveMyUpcoming",
-    { ...events[0], city: "Uppsala" },
-    owner,
-  );
+  await rpc("athlete-upcoming-api", "saveMyUpcoming", { ...events[0], city: "Uppsala" }, owner);
   assert.equal(
     (
       await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
@@ -451,8 +353,7 @@ try {
   assert.equal(directory.athletes[0].athleteNumber, account.athleteNumber);
   assert.equal(directory.athletes[0].sources.length, 1);
   assert.equal(directory.athletes[0].sports.length, 2);
-  const [privateSource] =
-    await sql`insert into athletes (slug,display_name,profile_visibility)
+  const [privateSource] = await sql`insert into athletes (slug,display_name,profile_visibility)
     values ('compact-private-directory','Compact private directory athlete','private') returning id`;
   const [privateIdentity] =
     await sql`select athlete_number::text as number from athlete_resolved_ids
@@ -471,12 +372,7 @@ try {
   await sql`insert into results (athlete_id,edition_id,finish_time_seconds,result_visibility)
     values (${source.id},${profileEdition.id},2700,'private')`;
   const getStaffProfile = (athleteId, headers) =>
-    rpc(
-      "staff-athlete-directory-api",
-      "getStaffAthleteProfile",
-      { athleteId },
-      headers,
-    );
+    rpc("staff-athlete-directory-api", "getStaffAthleteProfile", { athleteId }, headers);
   const sourcePerformances = [
     {
       year: 2025,
@@ -552,16 +448,9 @@ try {
     "https://example.test/corroboration",
     "https://example.test/result",
   ]);
-  const accountProfile = await getStaffProfile(
-    directory.athletes[0].athrecsId,
-    staff,
-  );
+  const accountProfile = await getStaffProfile(directory.athletes[0].athrecsId, staff);
   assert.equal(accountProfile.athlete.name, "Compact Test Athlete");
-  assert.equal(
-    accountProfile.results.length,
-    1,
-    "Account view includes linked source results",
-  );
+  assert.equal(accountProfile.results.length, 1, "Account view includes linked source results");
   assert.equal(accountProfile.results[0].finishTimeSeconds, 2700);
   assert.equal(
     accountProfile.sourceHistories.length,
@@ -570,22 +459,14 @@ try {
   );
   assert.equal(accountProfile.sourceHistories[0].externalId, "history-linked");
   assert.equal(accountProfile.sourceHistories[0].complete, false);
-  const publicProfile = await rpc(
-    "api",
-    "getAthleteBySlug",
-    "compact-linked-athlete",
-  );
+  const publicProfile = await rpc("api", "getAthleteBySlug", "compact-linked-athlete");
   assert.deepEqual(
     publicProfile.sourceHistories,
     [],
     "Private source archives must not be exposed through public profiles",
   );
-  assert.equal(
-    await rpc("api", "getAthleteBySlug", "compact-private-directory"),
-    null,
-  );
-  const [stillPrivate] =
-    await sql`select a.profile_visibility,r.result_visibility
+  assert.equal(await rpc("api", "getAthleteBySlug", "compact-private-directory"), null);
+  const [stillPrivate] = await sql`select a.profile_visibility,r.result_visibility
     from athletes a join results r on r.athlete_id=a.id where r.id=${privateResult.id}`;
   assert.equal(stillPrivate.profile_visibility, "private");
   assert.equal(stillPrivate.result_visibility, "private");
@@ -626,14 +507,8 @@ try {
   // Publish through the authenticated HTTP endpoint, then read as an unrelated signed-in member.
   // All fixtures and privacy transitions stay in this process's disposable DB.
   const publishSelection = (athleteNumbers, headers) =>
-    rpc(
-      "staff-athlete-directory-api",
-      "publishStaffAthleteProfiles",
-      { athleteNumbers },
-      headers,
-    );
-  const readPrivateSource = () =>
-    rpc("api", "getAthleteBySlug", "compact-private-directory");
+    rpc("staff-athlete-directory-api", "publishStaffAthleteProfiles", { athleteNumbers }, headers);
+  const readPrivateSource = () => rpc("api", "getAthleteBySlug", "compact-private-directory");
   for (const headers of [
     undefined,
     owner,
@@ -641,37 +516,26 @@ try {
     { ...staff, "x-forwarded-host": "www.athrecs.com" },
     { ...staff, "sec-fetch-site": "cross-site" },
   ]) {
-    await assert.rejects(() =>
-      publishSelection([privateIdentity.number], headers),
-    );
+    await assert.rejects(() => publishSelection([privateIdentity.number], headers));
   }
-  assert.equal(
-    await readPrivateSource(),
-    null,
-    "Rejected requests must not publish the profile",
-  );
+  assert.equal(await readPrivateSource(), null, "Rejected requests must not publish the profile");
   await assert.rejects(() => publishSelection([], staff));
   await assert.rejects(() => publishSelection(["invalid"], staff));
 
   // An unclaimed public profile still requires explicit archive publication.
-  const [unselected] =
-    await sql`insert into athletes (slug,display_name,profile_visibility)
+  const [unselected] = await sql`insert into athletes (slug,display_name,profile_visibility)
     values ('compact-unselected-history','Compact unselected history','public') returning id`;
   await sql`insert into athlete_source_histories
     (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances)
     values (${unselected.id},'powerof10','history-unselected','https://example.test/unselected',
       now(),true,array[2025],array[2025],${JSON.stringify(sourcePerformances)}::jsonb)`;
   assert.deepEqual(
-    (await rpc("api", "getAthleteBySlug", "compact-unselected-history"))
-      .sourceHistories,
+    (await rpc("api", "getAthleteBySlug", "compact-unselected-history")).sourceHistories,
     [],
     "Being public alone must not expose an unpublished archive",
   );
   assert.deepEqual(
-    await publishSelection(
-      [privateIdentity.number, privateIdentity.number],
-      staff,
-    ),
+    await publishSelection([privateIdentity.number, privateIdentity.number], staff),
     {
       published: 1,
       resultsPublished: 1,
@@ -687,8 +551,7 @@ try {
   assert.equal(publishedSource.results.length, 1);
   assert.equal(publishedSource.results[0].id, privateResult.id);
   assert.deepEqual(
-    (await rpc("api", "getAthleteBySlug", "compact-unselected-history"))
-      .sourceHistories,
+    (await rpc("api", "getAthleteBySlug", "compact-unselected-history")).sourceHistories,
     [],
     "Publishing a selected profile must not expose another athlete's archive",
   );
@@ -699,11 +562,7 @@ try {
   });
   const [audit] = await sql`select count(*)::int as count from network_audit_log
     where action='athlete.bulk_publish' and entity_id=${String(privateSource.id)}`;
-  assert.equal(
-    audit.count,
-    1,
-    "Repeated publication must not duplicate audit entries",
-  );
+  assert.equal(audit.count, 1, "Repeated publication must not duplicate audit entries");
 
   await sql`update athletes set profile_visibility='private' where id=${privateSource.id}`;
   assert.equal(
@@ -712,10 +571,7 @@ try {
     "Making a published profile private must hide its archived history through the public API",
   );
   await sql`update athletes set profile_visibility='public' where id=${privateSource.id}`;
-  assert.deepEqual(
-    (await readPrivateSource()).sourceHistories,
-    publishedSource.sourceHistories,
-  );
+  assert.deepEqual((await readPrivateSource()).sourceHistories, publishedSource.sourceHistories);
   await sql`update athlete_source_histories set published_at=null where athlete_id=${privateSource.id}`;
   assert.deepEqual(
     (await readPrivateSource()).sourceHistories,
@@ -742,22 +598,14 @@ try {
     "Staff publication must not override an account-managed profile's privacy",
   );
   await sql`update athletes set profile_visibility='public' where id=${privateSource.id}`;
-  await rpc(
-    "athlete-profile-share-api",
-    "saveMyProfileShare",
-    { enabled: false },
-    owner,
-  );
+  await rpc("athlete-profile-share-api", "saveMyProfileShare", { enabled: false }, owner);
   assert.equal(
     await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
       slug: share.slug,
     }),
     null,
   );
-  assert.equal(
-    await rpc("api", "getAthleteBySlug", "compact-linked-athlete"),
-    null,
-  );
+  assert.equal(await rpc("api", "getAthleteBySlug", "compact-linked-athlete"), null);
   assert.equal(
     await readPrivateSource(),
     null,
@@ -771,24 +619,13 @@ try {
     ).total,
     0,
   );
-  await rpc(
-    "athlete-upcoming-api",
-    "deleteMyUpcoming",
-    { id: events[0].id },
-    owner,
-  );
-  assert.equal(
-    (await rpc("athlete-upcoming-api", "getMyUpcoming", undefined, owner))
-      .length,
-    0,
-  );
+  await rpc("athlete-upcoming-api", "deleteMyUpcoming", { id: events[0].id }, owner);
+  assert.equal((await rpc("athlete-upcoming-api", "getMyUpcoming", undefined, owner)).length, 0);
   const paul = await rpc("api", "getAthleteBySlug", "paul-browne");
   assert.equal(paul.athlete.details.nationality, "British");
   assert.equal(paul.athlete.details.birthday, "");
   assert(!JSON.stringify(paul).includes("1978-05-20"));
-  const html = await (
-    await fetch(`${origin}/athletes/paul-browne`, { headers: other })
-  ).text();
+  const html = await (await fetch(`${origin}/athletes/paul-browne`, { headers: other })).text();
   assert(html.includes("Norfolk Gazelle"));
   assert(html.includes('data-country-code="GB"'));
   assert(html.includes('aria-label="United Kingdom"'));
