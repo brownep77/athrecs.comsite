@@ -3,7 +3,9 @@
 import assert from "node:assert/strict";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "vite";
-import { chromium } from "playwright";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
+const { chromium } = require(process.env.ATHRECS_BROWSER_MODULE || "playwright");
 
 for (const key of ["DATABASE_URL", "DATABASE_URL_UNPOOLED", "POSTGRES_URL_NON_POOLING"])
   process.env[key] = "";
@@ -11,6 +13,9 @@ process.env.VITE_AUTH_ENABLED = "true";
 process.env.RESEND_API_KEY = "test-key-not-used-for-delivery";
 process.env.BETTER_AUTH_SECRET = "recruitment-test-only-secret-at-least-32-characters";
 const origin = "http://127.0.0.1:18228";
+const signupOnly = process.argv.includes("--signup-only");
+const source = process.argv.includes("--linkedin") ? "linkedin" : "instagram";
+const platform = source === "linkedin" ? "LinkedIn" : "Instagram";
 process.env.BETTER_AUTH_URL = origin;
 const sent = [];
 const realFetch = globalThis.fetch;
@@ -36,28 +41,29 @@ try {
   const sql = await db.getSql();
   browser = await chromium.launch({
     headless: true,
+    executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
   });
   page = await browser.newPage({ viewport: { width: 390, height: 844 } });
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto(`${origin}/join?from=instagram`, { waitUntil: "networkidle", timeout: 60000 });
+  await page.goto(`${origin}/join?from=${source}`, { waitUntil: "networkidle", timeout: 60000 });
   await page.getByRole("button", { name: "No thanks", exact: true }).click();
-  await page.getByRole("heading", { name: "Follow along on Instagram", exact: true }).waitFor();
+  await page.getByRole("heading", { name: `Follow along on ${platform}`, exact: true }).waitFor();
   await page
     .getByRole("button", { name: "Skip for now and create my profile", exact: true })
     .click();
   await page.getByRole("button", { name: "Create my profile with email", exact: true }).click();
-  const dialog = page.getByRole("dialog", { name: "Sign in with an email code" });
+  const dialog = page.getByRole("dialog");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
-  await dialog.getByRole("button", { name: "Send sign-in code", exact: true }).click();
+  await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
   await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
   const code = sent.at(-1)?.text.match(/\b([0-9]{6})\b/)?.[1];
   assert(code, "The actual email adapter receives the sign-in code");
   await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
-  await dialog.getByRole("button", { name: "Verify code and sign in", exact: true }).click();
+  await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
   await page.getByRole("heading", { name: "Let’s start your profile", exact: true }).waitFor();
-  assert.equal(new URL(page.url()).searchParams.get("from"), "instagram");
+  assert.equal(new URL(page.url()).searchParams.get("from"), source);
   await page.getByLabel("Your name", { exact: true }).fill("Fictional Recruitment Runner");
   await page.getByLabel("Your main sport", { exact: true }).selectOption("Running");
   const save = page.getByRole("button", { name: "Create my private profile", exact: true });
@@ -79,6 +85,14 @@ try {
   const publicRows =
     await sql`select enabled from athlete_public_shares where user_id=${rows[0].id} and enabled=true`;
   assert.equal(publicRows.length, 0);
+  await sql`insert into events (id,slug,name,sport) values
+    (991601,'synthetic-recruitment-race','Synthetic Recruitment 10K','Running')`;
+  await sql`insert into editions (id,event_id,event_date,distance_code) values
+    (991601,991601,'2026-09-01','10K')`;
+  await sql`insert into athletes (id,slug,display_name,profile_visibility) values
+    (991601,'synthetic-recruitment-runner','Fictional Recruitment Runner','private')`;
+  await sql`insert into results (id,edition_id,athlete_id,finish_time_seconds,result_visibility)
+    values (991601,991601,991601,2400,'private')`;
   await page.reload({ waitUntil: "networkidle" });
   await page.getByRole("heading", { name: "Your profile is ready", exact: true }).waitFor();
   assert.equal(
@@ -88,74 +102,111 @@ try {
   );
   await mkdir("artifacts", { recursive: true });
   await page.screenshot({ path: "artifacts/recruitment-mobile.png", fullPage: true });
-  await page.goto(`${origin}/athletes/mo-farah`, { waitUntil: "networkidle", timeout: 90000 });
-  await page.getByRole("heading", { name: "Mo Farah", exact: true }).waitFor();
-  await page.getByText("More about Mo Farah", { exact: true }).click();
-  const photo = page.getByRole("img", { name: /Mo Farah, wearing/ });
-  assert.equal(await photo.evaluate((image) => image.complete && image.naturalWidth > 0), true);
-  await page.getByText("12:53.11", { exact: true }).waitFor();
-  const personalBests = page.getByRole("region", { name: "Personal bests", exact: true });
-  await personalBests.getByText("59:32", { exact: true }).waitFor();
-  assert.equal(await personalBests.getByText("59:07", { exact: true }).count(), 0);
-  await personalBests.getByText("27:44", { exact: true }).waitFor();
-  await personalBests.getByText("2:05:11", { exact: true }).waitFor();
-  await page.getByRole("heading", { name: "Results history 52", exact: true }).waitFor();
+  for (const width of [390, 1280]) {
+    await page.setViewportSize({ width, height: 900 });
+    const resultsLink = page.getByRole("link", { name: "Find and add my results" });
+    assert.equal(await resultsLink.getAttribute("href"), "/athlete-account?section=potential");
+    assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  }
+  await page.getByRole("link", { name: "Find and add my results" }).click();
+  await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
+  assert.equal(new URL(page.url()).searchParams.get("section"), "potential");
+  const match = page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" });
+  await match.getByRole("button", { name: "Claim this result", exact: true }).click();
+  const confirmation = page.getByRole("alertdialog");
+  await confirmation.getByText(/ATHRECS will check your identity/).waitFor();
+  await confirmation.getByRole("button", { name: "Cancel", exact: true }).click();
+  assert.equal((await sql`select id from result_claims where result_id=991601`).length, 0);
+  await match.getByRole("button", { name: "Claim this result", exact: true }).click();
+  await confirmation.getByRole("button", { name: "Submit claim for review", exact: true }).click();
   await page
-    .getByRole("region", { name: "Achievements board" })
-    .getByText("50", { exact: true })
+    .getByText("Your claim is with staff for an ownership check.", { exact: true })
     .waitFor();
-  await page.getByLabel("Year", { exact: true }).selectOption("2019");
-  const assistedRow = page.getByRole("row").filter({ hasText: "59:07" });
+  assert.deepEqual(await sql`select status from result_claims where result_id=991601`, [
+    { status: "pending" },
+  ]);
   assert.equal(
-    await assistedRow.getByText("Assisted course · excluded from PBs", { exact: true }).count(),
+    (await sql`select athlete_id from athlete_account_links where athlete_id=991601`).length,
     0,
   );
-  assert.equal(await assistedRow.getByLabel("Personal best", { exact: true }).count(), 0);
-  await page.getByLabel("Year", { exact: true }).selectOption("");
-  await page.getByText("Show all 52 results", { exact: true }).click();
-  await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
-  await page.getByText("Show all 52 results", { exact: true }).click();
-  await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
-  assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
-  assert.equal(
+  await match.getByRole("link", { name: "View claim", exact: true }).click();
+  await page.getByText("This claim needs an identity check", { exact: true }).waitFor();
+  assert.equal(await page.getByText(/Another account has already claimed/).count(), 0);
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  await page.screenshot({ path: "artifacts/recruitment-claim-mobile.png", fullPage: true });
+  if (!signupOnly) {
+    await page.goto(`${origin}/athletes/mo-farah`, { waitUntil: "networkidle", timeout: 90000 });
+    await page.getByRole("heading", { name: "Mo Farah", exact: true }).waitFor();
+    await page.getByText("More about Mo Farah", { exact: true }).click();
+    const photo = page.getByRole("img", { name: /Mo Farah, wearing/ });
+    assert.equal(await photo.evaluate((image) => image.complete && image.naturalWidth > 0), true);
+    await page.getByText("12:53.11", { exact: true }).waitFor();
+    const personalBests = page.getByRole("region", { name: "Personal bests", exact: true });
+    await personalBests.getByText("59:32", { exact: true }).waitFor();
+    assert.equal(await personalBests.getByText("59:07", { exact: true }).count(), 0);
+    await personalBests.getByText("27:44", { exact: true }).waitFor();
+    await personalBests.getByText("2:05:11", { exact: true }).waitFor();
+    await page.getByRole("heading", { name: "Results history 52", exact: true }).waitFor();
     await page
-      .getByText("Your first recorded finish starts your achievement collection.", { exact: true })
-      .count(),
-    0,
-  );
-  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
-  assert.equal(await page.getByRole("columnheader", { name: "Source", exact: true }).count(), 0);
-  assert.equal(await page.getByRole("link", { name: /^Source(?: \d+)?(?: ↗)?$/ }).count(), 0);
-  assert.equal(await page.getByLabel(/^Result source /).count(), 0);
-  const resultsTable = page
-    .getByRole("table", { name: "Athlete race and stage results", exact: true })
-    .first();
-  for (const width of [390, 320]) {
-    await page.setViewportSize({ width, height: 844 });
+      .getByRole("region", { name: "Achievements board" })
+      .getByText("50", { exact: true })
+      .waitFor();
+    await page.getByLabel("Year", { exact: true }).selectOption("2019");
+    const assistedRow = page.getByRole("row").filter({ hasText: "59:07" });
+    assert.equal(
+      await assistedRow.getByText("Assisted course · excluded from PBs", { exact: true }).count(),
+      0,
+    );
+    assert.equal(await assistedRow.getByLabel("Personal best", { exact: true }).count(), 0);
+    await page.getByLabel("Year", { exact: true }).selectOption("");
+    await page.getByText("Show all 52 results", { exact: true }).click();
+    await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
+    await page.getByText("Show all 52 results", { exact: true }).click();
+    await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
+    assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
+    assert.equal(
+      await page
+        .getByText("Your first recorded finish starts your achievement collection.", {
+          exact: true,
+        })
+        .count(),
+      0,
+    );
     assert.equal(
       await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
       true,
     );
-    const mobileLayout = await resultsTable.evaluate((table) => {
-      const row = table.querySelector("tbody tr");
-      const box = row.getBoundingClientRect();
-      return {
-        display: getComputedStyle(row).display,
-        fits: box.left >= 0 && box.right <= innerWidth,
-        noClippedCells: [...row.cells].every((cell) => cell.scrollWidth <= cell.clientWidth + 1),
-      };
-    });
-    assert.deepEqual(mobileLayout, { display: "grid", fits: true, noClippedCells: true });
-    assert.equal(
-      await page
-        .getByLabel("Search results", { exact: true })
-        .evaluate((input) => input.getBoundingClientRect().height >= 44),
-      true,
-    );
-  }
-  const flagSizes = await page
-    .locator("[data-country-code]")
-    .evaluateAll((flags) =>
+    assert.equal(await page.getByRole("columnheader", { name: "Source", exact: true }).count(), 0);
+    assert.equal(await page.getByRole("link", { name: /^Source(?: \d+)?(?: ↗)?$/ }).count(), 0);
+    assert.equal(await page.getByLabel(/^Result source /).count(), 0);
+    const resultsTable = page
+      .getByRole("table", { name: "Athlete race and stage results", exact: true })
+      .first();
+    for (const width of [390, 320]) {
+      await page.setViewportSize({ width, height: 844 });
+      assert.equal(
+        await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
+        true,
+      );
+      const mobileLayout = await resultsTable.evaluate((table) => {
+        const row = table.querySelector("tbody tr");
+        const box = row.getBoundingClientRect();
+        return {
+          display: getComputedStyle(row).display,
+          fits: box.left >= 0 && box.right <= innerWidth,
+          noClippedCells: [...row.cells].every((cell) => cell.scrollWidth <= cell.clientWidth + 1),
+        };
+      });
+      assert.deepEqual(mobileLayout, { display: "grid", fits: true, noClippedCells: true });
+      assert.equal(
+        await page
+          .getByLabel("Search results", { exact: true })
+          .evaluate((input) => input.getBoundingClientRect().height >= 44),
+        true,
+      );
+    }
+    const flagSizes = await page.locator("[data-country-code]").evaluateAll((flags) =>
       flags
         .filter((flag) => flag.getBoundingClientRect().width > 0)
         .map((flag) => ({
@@ -164,19 +215,20 @@ try {
           accessible: Boolean(flag.getAttribute("aria-label")),
         })),
     );
-  assert(flagSizes.length > 1);
-  assert(flagSizes.every((flag) => flag.width === 24 && flag.height === 16 && flag.accessible));
-  await page.setViewportSize({ width: 1280, height: 900 });
-  assert.equal(await resultsTable.evaluate((table) => getComputedStyle(table).display), "table");
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.screenshot({ path: "artifacts/mo-farah-mobile.png", fullPage: true });
-  await resultsTable.scrollIntoViewIfNeeded();
-  await page.screenshot({ path: "artifacts/mo-farah-mobile-results.png", fullPage: false });
-  await page.getByRole("heading", { name: "Mo Farah", exact: true }).scrollIntoViewIfNeeded();
-  await page.screenshot({ path: "artifacts/mo-farah-mobile-profile.png", fullPage: false });
+    assert(flagSizes.length > 1);
+    assert(flagSizes.every((flag) => flag.width === 24 && flag.height === 16 && flag.accessible));
+    await page.setViewportSize({ width: 1280, height: 900 });
+    assert.equal(await resultsTable.evaluate((table) => getComputedStyle(table).display), "table");
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.screenshot({ path: "artifacts/mo-farah-mobile.png", fullPage: true });
+    await resultsTable.scrollIntoViewIfNeeded();
+    await page.screenshot({ path: "artifacts/mo-farah-mobile-results.png", fullPage: false });
+    await page.getByRole("heading", { name: "Mo Farah", exact: true }).scrollIntoViewIfNeeded();
+    await page.screenshot({ path: "artifacts/mo-farah-mobile-profile.png", fullPage: false });
+  }
   assert.deepEqual(errors, []);
   console.log(
-    "Recruitment journey passed: optional follow, real email code, verified private profile save, unchanged marketing consent, return visit and sourced Mo Farah profile with loaded CC0 image.",
+    `Recruitment journey passed (${source}): optional follow, real email code, verified private profile save, unchanged marketing consent, return visit and results destination.${signupOnly ? "" : " Public athlete layout also checked."}`,
   );
 } catch (error) {
   await mkdir("artifacts", { recursive: true });

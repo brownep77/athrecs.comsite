@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { createServer } from "vite";
+import { createHash } from "node:crypto";
+import { resolveCataloguePublisherRedirects } from "./lib/catalogue-publisher-redirects.mjs";
 
 const ACTOR = "athrecs-production-deployment@athrecs.com";
 const NON_STANDARD_SOURCE_KEY =
@@ -351,12 +353,30 @@ function resolveSeriesSlug(slug, fallbackDistance = "Other") {
   }
 
   async function publishBatch(batch) {
+    // Match stageCatalogueBatch's original payload identity before resolving
+    // later redirects. A completed source revision must never be replayed.
+    const originalHash = createHash("sha256")
+      .update(JSON.stringify({ events: batch.events, editions: batch.editions }))
+      .digest("hex");
+    const published = await sql.query(
+      `select id from catalogue_import_batches
+       where source_key=$1 and payload_hash=$2 and status='published'
+       order by submitted_at desc limit 1`,
+      [batch.sourceKey, originalHash],
+    );
+    if (published[0]) {
+      console.log(
+        `[remaining-races] ${batch.label} batch ${published[0].id} was already published; no database change needed`,
+      );
+      return;
+    }
+    const resolved = await resolveCataloguePublisherRedirects(sql, batch);
     const staged = await publishing.stageCatalogueBatch(
       {
         sourceKey: batch.sourceKey,
         sourceUrl: batch.sourceUrl,
-        events: batch.events,
-        editions: batch.editions,
+        events: resolved.events,
+        editions: resolved.editions,
       },
       ACTOR,
     );

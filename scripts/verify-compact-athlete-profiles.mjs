@@ -1,6 +1,9 @@
 // Exercise the real importer and HTTP handlers against a disposable PGLite database.
 // Environment changes affect only this test process, never a deployment or configured database.
 import assert from "node:assert/strict";
+import { load } from "cheerio";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
@@ -14,6 +17,10 @@ const server = await createServer({ server: { host: "127.0.0.1", port: 18192, st
 let database;
 const cache = new Map();
 async function rpc(file, name, data, headers) {
+  // These are now member reads. Use an unrelated signed-in viewer, never staff.
+  if (headers === undefined && ["getAthleteBySlug", "getPublishedSharedProfile"].includes(name)) {
+    headers = { authorization: "Bearer compact-test-other" };
+  }
   if (!cache.has(file)) {
     const response = await fetch(`${origin}/src/lib/athrecs/${file}.ts`);
     assert.equal(response.status, 200);
@@ -41,6 +48,77 @@ async function rpc(file, name, data, headers) {
 }
 try {
   await server.listen();
+  // Render the actual source cell with synthetic evidence. Provider credit must
+  // retain the exact result URL and its fragment without creating permissions.
+  const { CompactResultsTable } = await server.ssrLoadModule(
+    "/src/components/athletes/CompactResultsTable.tsx",
+  );
+  const originalResultUrl = "https://example.test/original-results.pdf#page=17";
+  const corroboratingUrl = "https://example.test/corroborating-results#bib=42";
+  const sourceRow = {
+    resultId: 42,
+    editionId: 17,
+    eventName: "Synthetic source credit race",
+    eventSlug: "synthetic-source-credit",
+    sport: "Swimming",
+    surface: "Pool",
+    country: "United Kingdom",
+    eventDate: "2099-01-01",
+    distanceCode: "1500m",
+    distanceKm: 1.5,
+    status: "finished",
+    finishTimeSeconds: 1200,
+    chipTimeSeconds: null,
+    gunTimeSeconds: null,
+    overallPlace: null,
+    category: null,
+  };
+  const renderSourceLinks = (resultSource, sourceUrls = [originalResultUrl]) => {
+    const html = renderToStaticMarkup(
+      createElement(CompactResultsTable, {
+        results: [{ ...sourceRow, resultSource, sourceUrls }],
+        showEvidence: true,
+      }),
+    );
+    const $ = load(html);
+    return $('td[data-label="Source"] a')
+      .map((_, element) => ({
+        url: $(element).attr("href"),
+        text: $(element).text().trim(),
+        accessibleName: $(element).attr("aria-label"),
+      }))
+      .get();
+  };
+  const [creditedSource] = renderSourceLinks("  Example Timing & Results  ");
+  assert.equal(creditedSource.text, "Example Timing & Results ↗");
+  assert.equal(creditedSource.url, originalResultUrl);
+  assert.equal(
+    creditedSource.accessibleName,
+    "Example Timing & Results result source for Synthetic source credit race",
+  );
+  const longProvider = "Example official timing and results provider with a long credit name";
+  assert.equal(renderSourceLinks(longProvider)[0].text, `${longProvider} ↗`);
+  for (const absentProvider of [undefined, null, "", "   "]) {
+    const [fallback] = renderSourceLinks(absentProvider);
+    assert.equal(fallback.text, "Source ↗");
+    assert.equal(fallback.url, originalResultUrl);
+    assert.equal(fallback.accessibleName, "Source result source for Synthetic source credit race");
+  }
+  const multipleSources = renderSourceLinks("Example Timer", [originalResultUrl, corroboratingUrl]);
+  assert.deepEqual(
+    multipleSources.map((source) => source.text),
+    ["Example Timer 1 ↗", "Example Timer 2 ↗"],
+  );
+  assert.deepEqual(
+    multipleSources.map((source) => source.url),
+    [originalResultUrl, corroboratingUrl],
+  );
+  assert(
+    multipleSources.every((source, index) =>
+      source.accessibleName.includes(`Example Timer ${index + 1}`),
+    ),
+  );
+  assert.deepEqual(renderSourceLinks("Example Timer", []), []);
   const dbModule = await server.ssrLoadModule("/src/lib/db.ts");
   database = await dbModule.getPglite();
   const sql = await dbModule.getSql();
@@ -398,7 +476,7 @@ try {
     workbook.getWorksheet("Athletes").getCell("A2").value,
     directory.athletes[0].athrecsId,
   );
-  // Publish through the authenticated HTTP endpoint, then read anonymously.
+  // Publish through the authenticated HTTP endpoint, then read as an unrelated signed-in member.
   // All fixtures and privacy transitions stay in this process's disposable DB.
   const publishSelection = (athleteNumbers, headers) =>
     rpc("staff-athlete-directory-api", "publishStaffAthleteProfiles", { athleteNumbers }, headers);
@@ -514,7 +592,7 @@ try {
   assert.equal(paul.athlete.details.nationality, "British");
   assert.equal(paul.athlete.details.birthday, "");
   assert(!JSON.stringify(paul).includes("1978-05-20"));
-  const html = await (await fetch(`${origin}/athletes/paul-browne`)).text();
+  const html = await (await fetch(`${origin}/athletes/paul-browne`, { headers: other })).text();
   assert(html.includes("Norfolk Gazelle"));
   assert(html.includes('data-country-code="GB"'));
   assert(html.includes('aria-label="United Kingdom"'));

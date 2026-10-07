@@ -10,6 +10,7 @@ import {
   clubSlugAliases,
 } from "@/data/catalogue";
 import { catalogueSeedEventSlugAliases, editionReplacements } from "@/data/entry-options";
+import { dailyHalfTenMileRetiredSeriesSlugs } from "@/data/half-ten-mile-races-uk-ireland-daily-followup";
 import {
   publicFigureAthletes,
   publicFigureEditions,
@@ -20,13 +21,17 @@ import {
   featuredRaceAthletes,
   featuredRaceResults,
 } from "@/data/featured-race-results-2026-09-27";
+import { featuredWaHistories } from "@/data/featured-wa-histories-2026-09-30";
+import { nationalAgeAthletes, nationalAgeResults } from "@/data/featured-gbr-irl-age-2026-10-01";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
 
 // prettier-ignore
-const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99";
+const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-04-v3";
 export const CATALOGUE_SEED_VERSION = SEED_VERSION;
 const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09-19-v1";
 const FEATURED_RACE_RESULTS_VERSION = "berlin-london-2026-09-27-v1";
+const FEATURED_WA_HISTORIES_VERSION = "featured-wa-histories-2026-09-30-v1";
+const FEATURED_GBR_IRL_AGE_VERSION = "gbr-irl-age-berlin-2026-10-01-v1";
 const EXPECTED = catalogueMetadata.merged_counts;
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 const DEV_PREVIEW_USER_ID = "dev-user";
@@ -792,7 +797,18 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
 }
 
 async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
-  const existing = await sql<{ slug: string }>`select slug from events`;
+  // A production event can be renamed after the source catalogue is published.
+  // Its historic URL still represents the same live identity, not a missing
+  // fixture to recreate. Leave orphaned reservations to the database guard.
+  const existing = await sql<{ slug: string }>`
+    select slug from events
+    union
+    select redirect.old_slug as slug
+    from slug_redirects redirect
+    join events event
+      on event.id = redirect.entity_id and event.slug = redirect.current_slug
+    where redirect.entity_type = 'event'
+  `;
   const have = new Set(existing.map((row) => row.slug));
   const missingSeries = seriesList.filter(
     (series) => Boolean(series?.slug) && !have.has(series.slug),
@@ -881,6 +897,24 @@ async function upsertCatalogueFixtures(sql: Sql): Promise<void> {
       throw new Error(`Cannot retire event alias ${aliasSlug}: it has stored results`);
     }
     await sql`delete from events where id = ${alias.id}`;
+  }
+
+  for (const retiredSlug of dailyHalfTenMileRetiredSeriesSlugs) {
+    const retiredEvents = await sql<{ id: number }>`
+      select id from events where slug = ${retiredSlug}
+    `;
+    const retiredEvent = retiredEvents[0];
+    if (!retiredEvent) continue;
+    const resultCounts = await sql<{ count: number }>`
+      select count(*)::int as count
+      from results r
+      join editions ed on ed.id = r.edition_id
+      where ed.event_id = ${retiredEvent.id}
+    `;
+    if ((resultCounts[0]?.count ?? 0) > 0) {
+      throw new Error(`Cannot retire invalidated event ${retiredSlug}: it has stored results`);
+    }
+    await sql`delete from events where id = ${retiredEvent.id}`;
   }
 
   const eventRows = await sql<{ id: number; slug: string }>`select id, slug from events`;
@@ -2026,9 +2060,515 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
   `;
 }
 
+/** Career rows from World Athletics, only for profiles confirmed on the 27 September 2026 race. */
+async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'featured_wa_histories_version' limit 1
+  `;
+  if (meta[0]?.value === FEATURED_WA_HISTORIES_VERSION) return;
+  // The 27 September card result is already stored on the catalogue event.
+  const histories = featuredWaHistories.filter(
+    (row) => !(row.date === "2026-09-27" && (row.distance === "Marathon" || row.distance === "10K")),
+  );
+
+  async function rowsForSlugs<T>(
+    build: (placeholders: string) => string,
+    slugs: string[],
+  ): Promise<T[]> {
+    const found: T[] = [];
+    for (let index = 0; index < slugs.length; index += 80) {
+      const part = slugs.slice(index, index + 80);
+      if (!part.length) continue;
+      const placeholders = part.map((_, i) => `$${i + 1}`).join(", ");
+      found.push(...(await sql.query<T>(build(placeholders), part)));
+    }
+    return found;
+  }
+
+  const raceTag = new Map(
+    featuredRaceResults.map((result) => [
+      result.athleteSlug,
+      result.eventSlug === "berlin-marathon" ? "berlin-2026" : "london-10000-2026",
+    ]),
+  );
+  const lookup = new Map<string, string>();
+  for (const row of histories) {
+    const tag = raceTag.get(row.athleteSlug) ?? "berlin-2026";
+    const fallback = `${row.athleteSlug}-${tag}`.slice(0, 80).replace(/-+$/g, "");
+    lookup.set(row.athleteSlug, fallback);
+  }
+  const knownAthletes = await rowsForSlugs<{
+    id: number;
+    slug: string;
+    profile_visibility: string;
+  }>(
+    (placeholders) =>
+      `select id, slug, profile_visibility from athletes where slug in (${placeholders})`,
+    [...new Set([...lookup.keys(), ...lookup.values()])],
+  );
+  const athleteBySlug = new Map(knownAthletes.map((row) => [row.slug, row]));
+  const athleteId = new Map<string, number>();
+  for (const [source, fallback] of lookup) {
+    const suffix = athleteBySlug.get(fallback);
+    const clean = athleteBySlug.get(source);
+    const chosen =
+      suffix?.profile_visibility === "public" ? suffix : clean ?? suffix;
+    if (chosen) athleteId.set(source, chosen.id);
+  }
+
+  const events = new Map<string, (typeof histories)[number]>();
+  for (const row of histories) {
+    if (!athleteId.has(row.athleteSlug) || events.has(row.eventSlug)) continue;
+    events.set(row.eventSlug, row);
+  }
+  const eventIdBySlug = new Map<string, number>();
+  const existingEvents = await rowsForSlugs<{ id: number; slug: string }>(
+    (placeholders) => `select id, slug from events where slug in (${placeholders})`,
+    [...events.keys()],
+  );
+  for (const row of existingEvents) eventIdBySlug.set(row.slug, Number(row.id));
+  const missingEvents = [...events.values()].filter((row) => !eventIdBySlug.has(row.eventSlug));
+  for (let index = 0; index < missingEvents.length; index += 40) {
+    const batch = missingEvents.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const fields = [
+          row.eventSlug,
+          row.eventName,
+          row.sport,
+          row.country || "",
+          "",
+          row.city || "",
+          "",
+          row.surface,
+          row.eventName,
+          row.eventName,
+          "",
+          "",
+          false,
+          row.sourceUrl,
+        ];
+        return `(${fields
+          .map((value) => {
+            params.push(value);
+            return `$${params.length}`;
+          })
+          .join(", ")})`;
+      })
+      .join(", ");
+    const inserted = await sql.query<{ id: number; slug: string }>(
+      `insert into events (
+        slug, name, sport, country, county, city, area, surface, summary, description,
+        organiser, website, featured, source_url
+      ) values ${values}
+      on conflict (slug) do nothing
+      returning id, slug`,
+      params,
+    );
+    for (const row of inserted) eventIdBySlug.set(row.slug, Number(row.id));
+  }
+  const stillMissing = [...events.keys()].filter((slug) => !eventIdBySlug.has(slug));
+  if (stillMissing.length) {
+    const again = await rowsForSlugs<{ id: number; slug: string }>(
+      (placeholders) => `select id, slug from events where slug in (${placeholders})`,
+      stillMissing,
+    );
+    for (const row of again) eventIdBySlug.set(row.slug, Number(row.id));
+  }
+
+  const editionKey = (eventId: number, date: string, distance: string) =>
+    `${eventId}|${date}|${distance}`;
+  const editionRows = new Map<string, { eventId: number; date: string; distance: string; km: number; sourceUrl: string }>();
+  for (const row of histories) {
+    const id = eventIdBySlug.get(row.eventSlug);
+    const linked = athleteId.get(row.athleteSlug);
+    if (!id || !linked) continue;
+    const key = editionKey(id, row.date, row.distance);
+    if (!editionRows.has(key)) {
+      editionRows.set(key, {
+        eventId: id,
+        date: row.date,
+        distance: row.distance,
+        km: row.distanceKm,
+        sourceUrl: row.sourceUrl,
+      });
+    }
+  }
+  const editionList = [...editionRows.values()];
+  for (let index = 0; index < editionList.length; index += 40) {
+    const batch = editionList.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const fields = [row.eventId, row.date, row.distance, row.km, "Finished", row.sourceUrl, row.sourceUrl];
+        const placeholders = fields.map((value, field) => {
+          params.push(value);
+          const token = `$${params.length}`;
+          return field === 1 ? `${token}::date` : token;
+        });
+        return `(${placeholders.join(", ")})`;
+      })
+      .join(", ");
+    await sql.query(
+      `insert into editions (
+        event_id, event_date, distance_code, distance_km, status, source_url, results_official_url
+      ) values ${values}
+      on conflict (event_id, event_date, distance_code) do nothing`,
+      params,
+    );
+  }
+  const editionId = new Map<string, number>();
+  const eventIds = [...new Set(editionList.map((row) => row.eventId))];
+  for (let index = 0; index < eventIds.length; index += 80) {
+    const part = eventIds.slice(index, index + 80);
+    const placeholders = part.map((_, i) => `$${i + 1}`).join(", ");
+    const rows = await sql.query<{
+      id: number;
+      event_id: number;
+      event_date: string;
+      distance_code: string;
+    }>(
+      `select id, event_id, event_date::text as event_date, distance_code
+       from editions where event_id in (${placeholders})`,
+      part,
+    );
+    for (const row of rows) {
+      editionId.set(
+        editionKey(Number(row.event_id), String(row.event_date).slice(0, 10), row.distance_code),
+        Number(row.id),
+      );
+    }
+  }
+
+  const pending: {
+    editionId: number;
+    athleteId: number;
+    status: string;
+    seconds: number | null;
+    place: number | null;
+    sourceUrl: string;
+    note: string;
+  }[] = [];
+  const seen = new Set<string>();
+  for (const row of histories) {
+    const linkedAthlete = athleteId.get(row.athleteSlug);
+    const linkedEvent = eventIdBySlug.get(row.eventSlug);
+    if (!linkedAthlete || !linkedEvent) continue;
+    const linkedEdition = editionId.get(editionKey(linkedEvent, row.date, row.distance));
+    if (!linkedEdition) continue;
+    const key = `${linkedEdition}|${linkedAthlete}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    pending.push({
+      editionId: linkedEdition,
+      athleteId: linkedAthlete,
+      status: row.status,
+      seconds: row.seconds,
+      place: row.place,
+      sourceUrl: row.sourceUrl,
+      note: row.note,
+    });
+  }
+  if (histories.length > 0 && pending.length === 0) {
+    throw new Error(
+      "Featured Berlin/London profiles were not saved: World Athletics histories did not link to an athlete",
+    );
+  }
+
+  for (let index = 0; index < pending.length; index += 40) {
+    const batch = pending.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const fields = [
+          row.editionId,
+          row.athleteId,
+          row.status,
+          row.seconds,
+          row.place,
+          row.place,
+          "World Athletics",
+          row.sourceUrl,
+          "public",
+          row.note ? JSON.stringify({ note: row.note }) : "{}",
+        ];
+        return `(${fields
+          .map((value, field) => {
+            params.push(value);
+            const token = `$${params.length}`;
+            return field === 9 ? `${token}::jsonb` : token;
+          })
+          .join(", ")})`;
+      })
+      .join(", ");
+    await sql.query(
+      `insert into results (
+        edition_id, athlete_id, status, finish_time_seconds, overall_place, gender_place,
+        result_source, source_url, result_visibility, result_details
+      ) values ${values}
+      on conflict (edition_id, athlete_id) do nothing`,
+      params,
+    );
+  }
+
+  await sql`
+    insert into app_meta (key, value)
+    values ('featured_wa_histories_version', ${FEATURED_WA_HISTORIES_VERSION})
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
+/** Public profiles for British and Irish age-group cards. Does not attach a result to an existing slug. */
+async function upsertNationalAgeResults(sql: Sql): Promise<void> {
+  const meta = await sql<{ value: string }>`
+    select value from app_meta where key = 'featured_gbr_irl_age_results_version' limit 1
+  `;
+  if (meta[0]?.value === FEATURED_GBR_IRL_AGE_VERSION) return;
+
+  const resultBySlug = new Map(nationalAgeResults.map((result) => [result.athleteSlug, result]));
+  for (const athlete of nationalAgeAthletes) {
+    if (!resultBySlug.get(athlete.slug)) {
+      throw new Error(`British and Irish Berlin profiles were not saved: ${athlete.slug} has no result`);
+    }
+  }
+
+  const edition = await sql<{ id: number }>`
+    select edition.id
+    from editions edition
+    join events event on event.id = edition.event_id
+    left join slug_redirects redirect
+      on redirect.entity_type = 'event' and redirect.entity_id = event.id
+    where edition.event_date = '2026-09-27'::date
+      and edition.distance_code = 'Marathon'
+      and (
+        event.slug in ('berlin-marathon', 'bmw-berlin-marathon', 'wa-bmw-berlin-marathon-7235580')
+        or redirect.old_slug in ('berlin-marathon', 'bmw-berlin-marathon')
+      )
+    order by case when event.slug = 'berlin-marathon' then 0 else 1 end
+    limit 1
+  `;
+  const berlinEditionId = Number(edition[0]?.id);
+  if (!Number.isInteger(berlinEditionId)) {
+    throw new Error(
+      "British and Irish Berlin profiles were not saved: the 27 September 2026 marathon edition is missing",
+    );
+  }
+
+  async function rowsForSlugs<T>(build: (placeholders: string) => string, slugs: string[]): Promise<T[]> {
+    const found: T[] = [];
+    for (let index = 0; index < slugs.length; index += 80) {
+      const part = slugs.slice(index, index + 80);
+      if (!part.length) continue;
+      const placeholders = part.map((_, i) => `$${i + 1}`).join(", ");
+      found.push(...(await sql.query<T>(build(placeholders), part)));
+    }
+    return found;
+  }
+
+  const clubNameBySlug = new Map<string, string>();
+  for (const athlete of nationalAgeAthletes) {
+    if (!athlete.clubName?.trim()) continue;
+    const slug = featuredSlug(athlete.clubName);
+    if (slug) clubNameBySlug.set(slug, athlete.clubName.trim());
+  }
+  const clubIdBySlug = new Map<string, number>();
+  const clubSlugs = [...clubNameBySlug.keys()];
+  if (clubSlugs.length) {
+    const known = await rowsForSlugs<{ id: number; slug: string }>(
+      (placeholders) => `select id, slug from clubs where slug in (${placeholders})`,
+      clubSlugs,
+    );
+    for (const club of known) clubIdBySlug.set(club.slug, club.id);
+    const blockedRows = await rowsForSlugs<{ slug: string }>(
+      (placeholders) =>
+        `select old_slug as slug from slug_redirects
+         where entity_type = 'club' and old_slug in (${placeholders})
+         union
+         select current_slug as slug from slug_redirects
+         where entity_type = 'club' and current_slug in (${placeholders})`,
+      clubSlugs,
+    );
+    const blockedClubs = new Set(blockedRows.map((row) => row.slug));
+    for (const slug of clubSlugs) {
+      if (clubIdBySlug.has(slug) || blockedClubs.has(slug)) continue;
+      const name = clubNameBySlug.get(slug)!;
+      await sql.query("savepoint national_age_club_insert");
+      try {
+        const inserted = await sql<{ id: number }>`
+          insert into clubs (slug, name, city, county, country, sports, summary, source_names)
+          values (${slug}, ${name}, '', '', '', 'Running', ${name}, ${name})
+          on conflict (slug) do nothing
+          returning id
+        `;
+        await sql.query("release savepoint national_age_club_insert");
+        if (inserted[0]) clubIdBySlug.set(slug, inserted[0].id);
+      } catch (error) {
+        await sql.query("rollback to savepoint national_age_club_insert");
+        console.error(
+          "[national-age] skipped club",
+          slug,
+          error instanceof Error ? error.message : String(error),
+        );
+      }
+    }
+  }
+
+  const fallbackFor = (slug: string) => `${slug}-berlin-2026`.slice(0, 80).replace(/-+$/g, "");
+  const candidateSlugs = nationalAgeAthletes.flatMap((athlete) => [athlete.slug, fallbackFor(athlete.slug)]);
+  const takenRows = await rowsForSlugs<{ slug: string }>(
+    (placeholders) =>
+      `select slug from athletes where slug in (${placeholders})
+       union
+       select old_slug as slug from slug_redirects
+       where entity_type = 'athlete' and old_slug in (${placeholders})
+       union
+       select current_slug as slug from slug_redirects
+       where entity_type = 'athlete' and current_slug in (${placeholders})`,
+    candidateSlugs,
+  );
+  const taken = new Set(takenRows.map((row) => row.slug));
+  const existingChips = await rowsForSlugs<{ slug: string; chip_time_seconds: number | null }>(
+    (placeholders) =>
+      `select athlete.slug, result.chip_time_seconds
+       from athletes athlete
+       join results result on result.athlete_id = athlete.id and result.edition_id = ${berlinEditionId}
+       where athlete.slug in (${placeholders})`,
+    nationalAgeAthletes.map((athlete) => athlete.slug),
+  );
+  const chipBySlug = new Map(
+    existingChips.map((row) => [
+      row.slug,
+      row.chip_time_seconds == null ? null : Number(row.chip_time_seconds),
+    ]),
+  );
+  const choices: { slug: string; athlete: (typeof nationalAgeAthletes)[number] }[] = [];
+  let alreadyStored = 0;
+  for (const athlete of nationalAgeAthletes) {
+    const result = resultBySlug.get(athlete.slug)!;
+    if (taken.has(athlete.slug)) {
+      if (chipBySlug.get(athlete.slug) === result.chipTimeSeconds) {
+        alreadyStored += 1;
+        continue;
+      }
+      const fallback = fallbackFor(athlete.slug);
+      if (taken.has(fallback)) {
+        console.error("[national-age] skipped occupied slug", athlete.slug);
+        continue;
+      }
+      taken.add(fallback);
+      choices.push({ slug: fallback, athlete });
+      continue;
+    }
+    taken.add(athlete.slug);
+    choices.push({ slug: athlete.slug, athlete });
+  }
+
+  const created: { id: number; slug: string }[] = [];
+  for (let index = 0; index < choices.length; index += 40) {
+    const batch = choices.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map(({ athlete, slug }) => {
+        const clubSlug = athlete.clubName ? featuredSlug(athlete.clubName) : "";
+        const row = [
+          slug,
+          athlete.displayName,
+          athlete.givenName,
+          athlete.familyName,
+          athlete.gender,
+          clubSlug ? (clubIdBySlug.get(clubSlug) ?? null) : null,
+          athlete.clubName,
+          "",
+          "",
+          athlete.country,
+          athlete.bio,
+          athlete.nation || null,
+          athlete.continent || null,
+          athlete.sourceUrl,
+          "Athlete",
+          "public",
+        ];
+        const placeholders = row.map((value) => {
+          params.push(value);
+          return `$${params.length}`;
+        });
+        return `(${placeholders.join(", ")})`;
+      })
+      .join(", ");
+    const inserted = await sql.query<{ id: number; slug: string }>(
+      `insert into athletes (
+        slug, display_name, given_name, family_name, gender, club_id, source_club_name,
+        city, county, country, bio, nation, continent, source_url, profile_type, profile_visibility
+      ) values ${values}
+      on conflict (slug) do nothing
+      returning id, slug`,
+      params,
+    );
+    created.push(...inserted);
+  }
+
+  const athleteByChoice = new Map(choices.map((choice) => [choice.slug, choice.athlete.slug]));
+  for (let index = 0; index < created.length; index += 40) {
+    const batch = created.slice(index, index + 40);
+    const params: unknown[] = [];
+    const values = batch
+      .map((row) => {
+        const result = resultBySlug.get(athleteByChoice.get(row.slug) ?? "");
+        if (!result) throw new Error(`Inserted national age athlete lost its result: ${row.slug}`);
+        const valuesRow = [
+          berlinEditionId,
+          row.id,
+          "finished",
+          result.finishTimeSeconds,
+          result.chipTimeSeconds,
+          result.gunTimeSeconds,
+          result.bib,
+          result.place,
+          result.genderPlace,
+          result.category,
+          result.categoryPlace,
+          result.resultSource,
+          result.sourceUrl,
+          "public",
+        ];
+        const placeholders = valuesRow.map((value) => {
+          params.push(value);
+          return `$${params.length}`;
+        });
+        return `(${placeholders.join(", ")})`;
+      })
+      .join(", ");
+    await sql.query(
+      `insert into results (
+        edition_id, athlete_id, status, finish_time_seconds, chip_time_seconds, gun_time_seconds,
+        bib, overall_place, gender_place, category, category_place, result_source, source_url,
+        result_visibility
+      ) values ${values}
+      on conflict (edition_id, athlete_id) do nothing`,
+      params,
+    );
+  }
+
+  if (created.length + alreadyStored === 0) {
+    throw new Error("British and Irish Berlin profiles were not saved: no athlete row was written");
+  }
+
+  await sql`
+    insert into app_meta (key, value)
+    values ('featured_gbr_irl_age_results_version', ${FEATURED_GBR_IRL_AGE_VERSION})
+    on conflict (key) do update set value = excluded.value
+  `;
+}
+
 async function catalogueMarkersCurrent(
   sql: Sql,
-  { includePublicFigures = true, includeFeaturedRaces = true } = {},
+  {
+    includePublicFigures = true,
+    includeFeaturedRaces = true,
+    includeFeaturedHistories = true,
+    includeNationalAge = true,
+  } = {},
 ): Promise<boolean> {
   const expected = new Map([
     ["seed_version", SEED_VERSION],
@@ -2038,9 +2578,13 @@ async function catalogueMarkersCurrent(
     ["parkrun_through", "2027-12-26"],
     ["athletics_taxonomy_v1", "complete"],
     ["featured_race_results_version", FEATURED_RACE_RESULTS_VERSION],
+    ["featured_wa_histories_version", FEATURED_WA_HISTORIES_VERSION],
+    ["featured_gbr_irl_age_results_version", FEATURED_GBR_IRL_AGE_VERSION],
   ]);
   if (!includePublicFigures) expected.delete("public_figures_catalogue_version");
   if (!includeFeaturedRaces) expected.delete("featured_race_results_version");
+  if (!includeFeaturedHistories) expected.delete("featured_wa_histories_version");
+  if (!includeNationalAge) expected.delete("featured_gbr_irl_age_results_version");
   const rows = await sql<{ key: string; value: string }>`
     select key, value from app_meta
     where key in (
@@ -2050,7 +2594,9 @@ async function catalogueMarkersCurrent(
       'public_figures_catalogue_version',
       'parkrun_through',
       'athletics_taxonomy_v1',
-      'featured_race_results_version'
+      'featured_race_results_version',
+      'featured_wa_histories_version',
+      'featured_gbr_irl_age_results_version'
     )
   `;
   const relevantRows = rows.filter((row) => expected.has(row.key));
@@ -2068,10 +2614,14 @@ async function refreshCatalogue(sql: Sql): Promise<void> {
     await catalogueMarkersCurrent(sql, {
       includePublicFigures: false,
       includeFeaturedRaces: false,
+      includeFeaturedHistories: false,
+      includeNationalAge: false,
     })
   ) {
     await upsertPublicFigureProfiles(sql);
     await upsertFeaturedRaceResults(sql);
+    await upsertFeaturedWorldAthleticsHistories(sql);
+    await upsertNationalAgeResults(sql);
     return;
   }
   await seedCatalogue(sql);
@@ -2092,6 +2642,8 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   if (await alreadySeeded(sql)) {
     await upsertPublicFigureProfiles(sql);
     await upsertFeaturedRaceResults(sql);
+    await upsertFeaturedWorldAthleticsHistories(sql);
+    await upsertNationalAgeResults(sql);
     await ensureDevPreviewAthleteAccount(sql);
     return;
   }
@@ -2107,6 +2659,8 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   if (g && (g.athletes > 0 || g.results > 0)) {
     await upsertPublicFigureProfiles(sql);
     await upsertFeaturedRaceResults(sql);
+    await upsertFeaturedWorldAthleticsHistories(sql);
+    await upsertNationalAgeResults(sql);
     await sql`
       insert into app_meta (key, value) values ('seed_version', ${SEED_VERSION})
       on conflict (key) do update set value = excluded.value
@@ -2526,6 +3080,8 @@ async function seedCatalogue(sql: Sql): Promise<void> {
   await sql`update athletes set profile_visibility='public', profile_details='{"nationality":"British","birthCountry":"United Kingdom","previousClub":"Norfolk Gazelle","coach":"Paul Evans","birthdayVisibility":"hidden","runningAgeCategory":"M45","acceptContact":false}'::jsonb where slug='paul-browne'`;
   await sql`update results set result_visibility='public' where athlete_id in (select id from athletes where slug='paul-browne')`;
   await upsertFeaturedRaceResults(sql);
+  await upsertFeaturedWorldAthleticsHistories(sql);
+  await upsertNationalAgeResults(sql);
   await ensureDevPreviewAthleteAccount(sql);
 }
 

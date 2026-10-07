@@ -14,9 +14,9 @@ export const Route = createFileRoute("/running/")({
   },
   head: () => ({
     meta: siteGraphMeta({
-      title: "Road Race Guides: Marathons, Half Marathons & UK Ultras | ATHRECS",
+      title: "Running Races, Calendars & Race Guides | ATHRECS",
       description:
-        "Explore featured road race previews, marathons and half marathons in seven countries, plus UK road ultras. Compare athletes, entry options, routes, dates and results.",
+        "Search running races and parkruns, browse race calendars, and explore marathon, half marathon and ultra guides on AthRecs.",
       url: `${SITE_URL}/running`,
     }),
     links: [{ rel: "canonical", href: `${SITE_URL}/running` }],
@@ -69,7 +69,7 @@ function RunningPage() {
         <h1 className="mt-4 font-display text-4xl font-semibold leading-tight tracking-tight sm:text-5xl">
           Find your next
           <br />
-          <span className="text-accent">road race</span>
+          <span className="text-accent">running event</span>
         </h1>
         <p className="mt-5 max-w-3xl text-base leading-7 text-muted">
           Marathon or half marathon? Choose between 42.195 kilometres and 21.0975 kilometres, then
@@ -84,6 +84,19 @@ function RunningPage() {
           guides · {MARATHON_COUNTRIES.length} countries · Published dates and dates TBC
         </p>
       </header>
+      <nav aria-label="Running tools" className="grid gap-3 sm:grid-cols-3">
+        {[
+          { to: "/running/events", title: "Search running races", detail: "Road, trail, fell, ultras and parkrun. Filter by country, distance and date." },
+          { to: "/running/calendar", title: "Running calendar", detail: "Browse published race days, start times and locations." },
+          { to: "/running/race-series", title: "Race series", detail: "Explore the World Marathon Majors and UTMB race collections." },
+        ].map((item) => (
+          <Link key={item.to} to={item.to} className="rounded-xl border border-accent/30 bg-accent-soft/20 p-5 hover:border-accent">
+            <h2 className="font-display text-xl font-semibold">{item.title}</h2>
+            <p className="mt-2 text-sm leading-6 text-muted">{item.detail}</p>
+            <span className="mt-3 inline-flex min-h-10 items-center gap-2 font-semibold text-accent">Explore <ArrowRight className="size-4" aria-hidden="true" /></span>
+          </Link>
+        ))}
+      </nav>
       <nav
         aria-label="Race distances"
         className="flex flex-wrap gap-5 text-base font-semibold text-accent"

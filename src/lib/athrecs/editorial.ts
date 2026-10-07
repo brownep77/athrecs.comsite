@@ -25,6 +25,7 @@ export type EditorialArticle = {
   // Each location is a complete hierarchy. Multi-location reports can have several.
   locations: EditorialLocation[];
   links?: { label: string; url: string }[];
+  athleteLinks?: Record<string, string>;
 };
 
 export function parseEditorialSearch(raw: Record<string, unknown>): EditorialSearch {

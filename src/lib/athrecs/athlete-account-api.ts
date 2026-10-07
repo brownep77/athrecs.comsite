@@ -293,7 +293,11 @@ function optionalDate(value: unknown): string {
   if (!result) return "";
   if (!/^\d{4}-\d{2}-\d{2}$/.test(result)) throw new Error("Date of birth is invalid");
   const date = new Date(`${result}T00:00:00Z`);
-  if (Number.isNaN(date.getTime()) || date > new Date())
+  if (
+    Number.isNaN(date.getTime()) ||
+    date > new Date() ||
+    date.toISOString().slice(0, 10) !== result
+  )
     throw new Error("Date of birth is invalid");
   return result;
 }
@@ -824,6 +828,41 @@ export const syncAthleteAccountAfterClaim = createServerOnlyFn(async (userId: st
 export const getMyAthleteAccount = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }) => loadAccount(await ready(), context.userId));
+
+// The quick discovery form must never save draft profile or consent fields.
+export const saveMyAthleteRacingName = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .validator((input: { fullName: string; privacyAcknowledged: boolean }) => {
+    const fullName = text(input?.fullName, 120, "Full name", true);
+    if (fullName.length < 2) throw new Error("Enter your full name");
+    if (input?.privacyAcknowledged !== true) throw new Error("Acknowledge the privacy notice");
+    return { fullName };
+  })
+  .handler(async ({ data, context }) => {
+    const sql = await ready();
+    const users = await sql<{ email: string; email_verified: boolean }>`
+      select lower("email") as email, "emailVerified" as email_verified
+      from "user" where "id" = ${context.userId} limit 1
+    `;
+    const user = users[0];
+    if (!user?.email) throw new Error("Your signed-in account has no email address");
+    if (!user.email_verified)
+      throw new Error("Verify your email before saving your athlete profile");
+    await sql`
+      insert into athlete_private_profiles (
+        user_id, verified_email, full_name, privacy_notice_version, privacy_acknowledged_at
+      ) values (
+        ${context.userId}, ${user.email}, ${data.fullName}, ${ATHLETE_PRIVACY_VERSION}, now()
+      )
+      on conflict (user_id) do update set
+        verified_email = excluded.verified_email,
+        full_name = excluded.full_name,
+        privacy_notice_version = excluded.privacy_notice_version,
+        privacy_acknowledged_at = now(),
+        updated_at = now()
+    `;
+    return loadAccount(sql, context.userId);
+  });
 
 export const saveMyAthleteAccount = createServerFn({ method: "POST" })
   .middleware([authMiddleware])

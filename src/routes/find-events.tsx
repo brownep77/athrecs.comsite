@@ -51,12 +51,12 @@ function FindEventsPage() {
           Find your next event
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-muted">
-          Explore running guides on AthRecs and specialist event calendars for other sports. Keep
+          Explore running races, calendars and guides on AthRecs, plus event calendars for other sports. Keep
           your athlete profile and sporting records together.
         </p>
       </header>
       <a
-        href={IS_RUNRECS_SITE ? "https://www.runrecs.com/races" : "/running"}
+        href={IS_RUNRECS_SITE ? "/running/events" : "/running"}
         className="group block rounded-3xl border border-accent/30 bg-elevated/60 p-5 no-underline sm:p-7"
       >
         <div className="flex items-center justify-between gap-4">
@@ -72,7 +72,7 @@ function FindEventsPage() {
         <p className="mt-2 max-w-xl text-sm leading-6 text-muted">
           {IS_RUNRECS_SITE
             ? "Explore road, trail, fell and ultra races, plus parkrun. Search by place, distance and date to find your next run."
-            : "Explore road marathons and half marathons in the UK, Australia, New Zealand, USA, Canada, Ireland and South Africa. Compare entry methods, routes, dates and previous results."}
+            : "Explore road, trail, fell and ultra races, plus parkrun. Search by place, distance and date, with race guides, entry information and previous results."}
         </p>
         <span className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-fg">
           Explore running <ArrowRight className="size-4" aria-hidden="true" />
@@ -82,13 +82,28 @@ function FindEventsPage() {
         <p className="text-sm leading-6 text-muted">
           Looking for other distances or surfaces? Browse the{" "}
           <a
-            href="https://www.runrecs.com/races"
+            href="/running/events"
             className="font-semibold text-accent underline underline-offset-4"
           >
-            RunRecs race calendar
+            AthRecs running races
           </a>
           .
         </p>
+      ) : null}
+      {!IS_RUNRECS_SITE ? (
+        <a
+          href="/races?sport=Triathlon"
+          className="block rounded-2xl border border-border bg-surface p-5 no-underline hover:border-accent"
+        >
+          <Activity className="size-6 text-accent" aria-hidden="true" />
+          <h2 className="mt-3 font-display text-2xl font-semibold text-fg">Triathlon</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Find triathlon fixtures, distances, official entry links and previous results.
+          </p>
+          <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-accent">
+            Explore triathlon <ArrowRight className="size-4" aria-hidden="true" />
+          </span>
+        </a>
       ) : null}
       <section className="space-y-4">
         <div>

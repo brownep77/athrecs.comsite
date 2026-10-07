@@ -61,7 +61,11 @@ export function EventSearch({
   fixedCountry,
   fixedCountryLabel,
   onDone,
+  sports = SPORTS,
+  defaultSport = DEFAULT_SPORT,
 }: {
+  sports?: readonly string[];
+  defaultSport?: string;
   value: EventSearchValues;
   onChange: (next: EventSearchValues) => void;
   /** sidebar = vertical stack for left column; panel = wider grid */
@@ -93,7 +97,7 @@ export function EventSearch({
   };
 
   const subs = subfiltersForSport(value.sport);
-  const publicSports = SPORTS as readonly string[];
+  const publicSports = sports;
   const lockedSport = publicSports.length === 1 ? publicSports[0] : null;
   const showRaceGroups = supportsRaceGroupFilter(value.sport);
   const regionCountry = fixedCountry ?? value.country;
@@ -113,6 +117,7 @@ export function EventSearch({
   const clear = () =>
     onChange({
       ...EMPTY_SEARCH,
+      sport: defaultSport,
       country: fixedCountry ?? "All",
     });
   const activeFilterCount = countActiveSearchFilters(value, {
@@ -158,7 +163,7 @@ export function EventSearch({
               onChange={(event) => set("sport", event.target.value)}
               className={fieldClass}
             >
-              {SPORTS.map((sport) => (
+              {publicSports.map((sport) => (
                 <option key={sport} value={sport}>
                   {sport === "All" ? "All disciplines" : sport}
                 </option>

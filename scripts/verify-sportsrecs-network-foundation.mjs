@@ -80,7 +80,7 @@ assert(route.includes("Read-only foundation"), "Network route must show its read
 const shell = await readFile("src/components/staff/StaffMicrositeShell.tsx", "utf8");
 assert(shell.includes('to: "/admin/network"'), "Staff navigation must expose the network view");
 
-const runRecsApi = await readFile("src/runrecs/api.ts", "utf8");
+const runRecsApi = await readFile("src/runrecs/api.ts", "utf8") + await readFile("src/lib/running/catalogue.server.ts", "utf8");
 assert(
   runRecsApi.includes("e.sport in ('Running', 'Parkrun')") &&
     runRecsApi.includes("event.sport in ('Running', 'Parkrun')"),
@@ -95,11 +95,10 @@ assert(
   "ATHRECS public reads must default to Athletics",
 );
 assert(
-  athleticsApi.includes("if (!isAthleticsSport(result.event.sport)) return null") &&
-    athleticsApi.includes("isTemporaryRunningEvent(result.event)") &&
-    athleticsApi.includes("result.upcoming.filter(isTemporaryRunningEdition)") &&
-    athleticsApi.includes("if (!upcoming.length && !past.length) return null"),
-  "Direct event URLs must allow only Athletics or the temporary short-race scope",
+  athleticsApi.includes('["Athletics", "Running", "Parkrun", "Triathlon"].includes(result.event.sport)') &&
+    athleticsApi.includes("queryRunningEvents") &&
+    !athleticsApi.includes("isTemporaryRunningEdition"),
+  "AthRecs direct URLs must include published Athletics, Running, Parkrun and Triathlon events",
 );
 assert(
   athleticsApi.includes('export * from "../lib/athrecs/api"'),
@@ -108,9 +107,9 @@ assert(
 
 const athleticsFilters = await readFile("src/athletics/filters.ts", "utf8");
 assert(
-  athleticsFilters.includes('export const SPORTS = ["Athletics", "Running"] as const') &&
+  athleticsFilters.includes('export const SPORTS = ["Athletics", "Running", "Parkrun", "Triathlon"] as const') &&
     athleticsFilters.includes('export const DEFAULT_SPORT = "Athletics" as const'),
-  "ATHRECS must default to Athletics while offering the temporary Running collection",
+  "ATHRECS must default to Athletics while offering Running, Parkrun and Triathlon",
 );
 
 const athleticsRoutes = await Promise.all([
@@ -134,9 +133,9 @@ for (const routeSource of athleticsRoutes) {
 const athleticsOfficialEntry = await readFile("src/athletics/official-entry.server.ts", "utf8");
 const runRecsOfficialEntry = await readFile("src/runrecs/official-entry.server.ts", "utf8");
 assert(
-  athleticsOfficialEntry.includes("sport = 'Athletics'") &&
+  athleticsOfficialEntry.includes("sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon')") &&
     athleticsOfficialEntry.includes("if (!allowed.length) return null"),
-  "ATHRECS official-entry redirects must fail closed outside Athletics",
+  "ATHRECS official-entry redirects must fail closed outside Athletics, Running, Parkrun and Triathlon",
 );
 assert(
   runRecsOfficialEntry.includes("sport in ('Running', 'Parkrun')") &&
@@ -181,7 +180,7 @@ assert(
 const siteScope = await readFile("src/lib/site-scope.ts", "utf8");
 assert(
   siteScope.includes('sport === "Running" || sport === "Parkrun"') &&
-    siteScope.includes('sport === "Athletics"'),
+    siteScope.includes('["Athletics", "Running", "Parkrun", "Triathlon"].includes(sport)'),
   "Signed-in specialist pages need one shared sport-scope predicate",
 );
 

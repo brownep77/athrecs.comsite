@@ -29,6 +29,30 @@ export const BURE_WINNERS = [
   { category: "Female 75+", name: "Veronica Manly", time: "1:51:11.8" },
 ] as const;
 
+// Profile identities matched against the official entry list (name and club),
+// checked 30 September 2026. These links do not publish a result to the profile.
+// James Preston and Emily Haslam have conflicting clubs; Zoe Thomas has no
+// distinguishing club evidence. Their potential matches remain in review.
+export const BURE_PROFILE_SLUGS: Record<string, string> = {
+  "Sam Peck": "sam-peck",
+  "Grace Buchanan": "grace-buchanan",
+  "Andrew Plume": "andrew-plume-43eb650d",
+  "Neil Adams": "neil-adams",
+  "Mitchell Dann": "mitchell-dann",
+  "Tim Mardall": "tim-mardall",
+  "David Crotch": "david-crotch",
+  "Nigel Marlow": "nigel-marlow",
+  "Andrew Hammond": "andrew-hammond",
+  "Graham Walsh": "graham-walsh",
+  "Amy Wright": "amy-wright",
+  "Juliet Garnham": "juliet-garnham-ed922e52fd1f",
+  "Louise Hurr": "louise-hurr",
+  "Karen Balcombe": "karen-balcombe",
+  "Bobbie Sauerzapf": "bobbie-sauerzapf",
+  "Linda Cusack": "linda-cusack-495c69a01a91",
+  "Veronica Manly": "veronica-manly-5e50c3944ef3",
+};
+
 export const BURE_REPORT: EditorialArticle = {
   slug: "bure-valley-10-2026",
   kind: "race-reports",
@@ -39,13 +63,17 @@ export const BURE_REPORT: EditorialArticle = {
     "Sam Peck won the tenth anniversary Bure Valley 10 in a course record of 52:33.9, with Grace Buchanan taking the women’s race in 1:04:31.9.",
   body: [
     "The race returned to Banningham on Sunday 27 September. Organised by Bure Valley Harriers, the ten-mile course follows the country lanes around the village, with a few climbs along the way before the finish on the green.",
-    "Tim Mardall won the men’s 55–59 category in 57:51.4. Neil Adams took the 45–49 award in 58:14.4, while Andrew Plume won the 40–44 category in 58:32.8.",
-    "Among the women, Emily Haslam won the senior category in 1:08:11.9. Zoe Thomas took the 45–49 award in 1:10:26.6, with Juliet Garnham winning the 50–54 category in 1:13:03.9.",
-    "Graham Walsh won the men’s 75-plus category in 1:24:35.2, while Veronica Manly took the women’s award in 1:51:11.8.",
+    "James Preston took the men’s senior award in 56:51.3. Andrew Plume won the 40–44 category in 58:32.8, with Neil Adams taking the 45–49 title in 58:14.4.",
+    "Tim Mardall ran 57:51.4 to win the men’s 55–59 category. Mitchell Dann took the 50–54 award in 1:00:47.9, while David Crotch finished in 1:11:33.7 to win the 60–64 category.",
+    "Nigel Marlow won the men’s 65–69 category in 1:20:59.5. The 70–74 award went to Andrew Hammond in 1:26:49.1, and Graham Walsh took the 75-plus title in 1:24:35.2.",
+    "In the women’s categories, Emily Haslam won the senior award in 1:08:11.9. Amy Wright took the 40–44 title in 1:15:57.0, while Zoe Thomas won the 45–49 category in 1:10:26.6.",
+    "Juliet Garnham led the women’s 50–54 category in 1:13:03.9, with Louise Hurr winning the 55–59 award in 1:14:20.3. Karen Balcombe took the 60–64 title in 1:18:11.0.",
+    "Bobbie Sauerzapf won the women’s 65–69 category in 1:37:21.5. Linda Cusack took the 70–74 award in 1:27:07.1, and Veronica Manly won the 75-plus category in 1:51:11.8.",
     "The winners and age-category results are linked below, along with the official results for the full field. Category awards exclude the top three overall.",
   ],
   sports: ["road-running"],
   locations: [{ country: "England", area: "East of England", county: "Norfolk" }],
+  athleteLinks: BURE_PROFILE_SLUGS,
   links: [
     { label: "Bure Valley 10 winners summary", url: "/results/bure-valley-10-2026" },
     { label: "Official results — Sublime Timing / Webscorer", url: BURE_RESULTS_URL },

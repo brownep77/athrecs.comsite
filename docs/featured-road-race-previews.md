@@ -40,3 +40,24 @@ node --experimental-strip-types --input-type=module -e 'import { FEATURED_ROAD_R
 
 No participant/result import, publication gate, crawler schedule, athlete record
 or RunRecs source is changed.
+
+## Main integration and regression checks
+
+The 7 October integration retains the current Running landing title, description,
+heading and links to `/running/events`, `/running/calendar` and
+`/running/race-series`. The featured-races entry is additional. All 20 dated
+preview URLs remain available, including completed editions, with their original
+metadata and JSON-LD. Sitemap modification dates use the recorded editorial
+check dates rather than a build or request date.
+
+`node scripts/verify-featured-road-races.mjs` starts an isolated local application
+and checks all 20 previews, cards and date boundaries, the full running-guide SSR
+inventory, sitemap coverage, desktop/mobile navigation, country filters, archived
+editions and caption copying. It never submits a social post. Optional Google
+Fonts are stubbed in the browser test; application resources and errors are checked.
+Use `--ssr-only` when a browser is unavailable. `ATHRECS_BROWSER_MODULE` can select
+an isolated Playwright installation; the focused workflow uses version 1.56.1,
+matching the existing account-navigation workflow, without changing app dependencies.
+
+The focused `Featured road races and running landing` workflow runs these checks
+and saves screenshots. The repository-wide `Athrecs quality gate` remains unchanged.

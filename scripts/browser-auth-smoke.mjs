@@ -28,6 +28,7 @@ function record(name, passed) {
 }
 
 const browser = await chromium.launch({
+  executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
   headless: true,
   args: ["--no-sandbox", "--disable-dev-shm-usage"],
 });
@@ -93,7 +94,7 @@ try {
   record("full name field is present", true);
   record("email field is present", true);
   record("password field is present", (await newPasswords.count()) >= 1);
-  record("confirmation field is present", (await newPasswords.count()) >= 2);
+  record("password is entered once on AthRecs sign-up", (await newPasswords.count()) === 1);
   record("email account action is present", true);
 
   await page.screenshot({ path: outPng, fullPage: false });
@@ -118,16 +119,27 @@ try {
   });
   const accountEntry = page.getByRole("button", { name: "Sign in or create account", exact: true });
   await accountEntry.waitFor({ state: "visible", timeout: timeoutMs });
-  record(
-    "profile entry accepts multiple email providers",
-    await page.getByText("Gmail, Outlook, Hotmail, Yahoo, iCloud", { exact: false }).isVisible(),
-  );
   await accountEntry.click();
   const accountDialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
   await accountDialog
     .getByRole("button", { name: "Sign in with email", exact: true })
     .waitFor({ state: "visible", timeout: timeoutMs });
   record("account entry opens email sign-in directly", true);
+  const accountEmail = accountDialog.locator('input[autocomplete="email"]');
+  for (const domain of [
+    "gmail.com",
+    "outlook.com",
+    "hotmail.com",
+    "yahoo.com",
+    "icloud.com",
+    "example.test",
+  ]) {
+    await accountEmail.fill(`test+athlete@${domain}`);
+    record(
+      `email input accepts ${domain}`,
+      await accountEmail.evaluate((input) => input.checkValidity()),
+    );
+  }
   record(
     "unconfigured email codes are not offered",
     (await accountDialog.getByRole("button", { name: "Continue with an email code" }).count()) ===

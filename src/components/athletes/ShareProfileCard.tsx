@@ -56,8 +56,8 @@ export function ShareProfileCard() {
       queryClient.setQueryData(["my-profile-share"], data);
       setMessage(
         data.enabled
-          ? "Sharing is on. Anyone with the link can see the fields you selected."
-          : "Sharing is off. The public link now returns not found.",
+          ? "Sharing is on. Signed-in members with the link can see the fields you selected."
+          : "Sharing is off. The shared link now returns not found.",
       );
     },
     onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
@@ -118,10 +118,10 @@ export function ShareProfileCard() {
         </div>
 
         <p className="max-w-3xl text-sm leading-6 text-muted">
-          Your ordinary Athlete Profile stays private until you turn sharing on. The public link is
-          unlisted unless you enable search discovery below. It never includes your email, postcode,
-          photograph or product preferences. Your birthday is hidden unless you choose to display it
-          in your account.
+          Your ordinary Athlete Profile stays private until you turn sharing on. An unlisted link
+          requires viewers to sign in and is not indexed by search engines. It never includes your
+          email, postcode, photograph or product preferences. Your birthday is hidden unless you
+          choose to display it in your account.
         </p>
 
         <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-elevated p-4">
@@ -137,19 +137,14 @@ export function ShareProfileCard() {
           <span>
             <strong className="block text-sm text-fg">Create a shareable profile link</strong>
             <span className="mt-1 block text-xs leading-5 text-muted">
-              People with the URL can view the name, club, location, bio and claimed results you
-              choose below. You can switch this off at any time.
+              Signed-in members with the URL can view the name, club, location, bio and claimed
+              results you choose below. You can switch this off at any time.
             </span>
           </span>
         </label>
 
         {enabled ? (
           <div className="grid gap-2 sm:grid-cols-2">
-            <ShareToggle
-              checked={searchIndexable}
-              label="Allow Google and other search engines to find this profile"
-              onChange={setSearchIndexable}
-            />
             <ShareToggle checked={shareBio} label="Include bio" onChange={setShareBio} />
             <ShareToggle
               checked={shareResults}
@@ -174,9 +169,8 @@ export function ShareProfileCard() {
               className="mt-1 size-4"
             />
             <span className="text-sm leading-6 text-fg">
-              I understand this creates a public ATHRECS page that anyone with the link can open,
-              and that enabling search discovery allows it to appear in search results. Hidden
-              results, photos and private account fields stay off that page.
+              I understand this creates a shared ATHRECS page that signed-in members with the link
+              can open. Hidden results, photos and private account fields stay off that page.
             </span>
           </label>
         ) : null}
@@ -213,7 +207,7 @@ export function ShareProfileCard() {
         <div className="space-y-3 border-t border-border bg-elevated p-5 md:p-6">
           <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-wider text-subtle">
             <Link2 className="size-4" aria-hidden="true" />
-            Your public link
+            Your shared link
           </p>
           <p className="break-all font-mono text-sm text-fg">{publicUrl}</p>
           <ShareProfileButton path={data.shareUrlPath} title="My ATHRECS athlete profile" />

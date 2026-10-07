@@ -22,6 +22,8 @@ export type PublicRaceResult = {
   athlete_name: string;
   athlete_slug: string;
   profile_club: string | null;
+  source_url: string | null;
+  result_source: string | null;
   overall_place: number | null;
   gender_place: number | null;
   category_place: number | null;
@@ -134,7 +136,8 @@ export const getPublicRaceResults = createServerFn({ method: "GET" })
     const offset = (data.page - 1) * RESULT_PAGE_SIZE;
     const rows = await sql<PublicRaceResult>`
       select r.id, a.display_name as athlete_name, a.slug as athlete_slug,
-        c.name as profile_club, r.overall_place, r.gender_place, r.category_place,
+        c.name as profile_club, r.source_url, r.result_source,
+        r.overall_place, r.gender_place, r.category_place,
         r.category, r.status, r.finish_time_seconds, r.chip_time_seconds, r.gun_time_seconds,
         (lower(trim(r.status)) in ('dq', 'dsq', 'disqualified')
           or coalesce(r.result_details->'disqualification', 'null'::jsonb) <> 'null'::jsonb) as disqualified

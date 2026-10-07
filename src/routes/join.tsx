@@ -372,7 +372,7 @@ function ProfileReady() {
       </p>
       <div className="mt-5 flex flex-wrap gap-3">
         <Button asChild>
-          <Link to="/athlete-account">
+          <Link to="/athlete-account" search={{ section: "potential" }}>
             Find and add my results <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </Button>

@@ -1,3 +1,4 @@
+import { profileReadMiddleware } from "@/lib/auth/profile-access";
 import { getReportedRaceHistory } from "./reported-race-history";
 import { readResultDetails } from "./result-details";
 import { parseProfileRoles } from "./athlete-profile-roles";
@@ -837,8 +838,9 @@ export const getEditionResults = createServerFn({ method: "GET" })
   });
 
 export const listAthletes = createServerFn({ method: "GET" })
+  .middleware([profileReadMiddleware])
   .validator((input: { q?: string; offset?: number } | undefined) =>
-    IS_RUNRECS_SITE ? input ?? {} : publicAthleteListSchema.parse(input ?? {}),
+    IS_RUNRECS_SITE ? (input ?? {}) : publicAthleteListSchema.parse(input ?? {}),
   )
   .handler(async ({ data }) => {
     const sql = await ready();
@@ -889,7 +891,7 @@ export const listAthletes = createServerFn({ method: "GET" })
         )
       order by a.display_name, a.id
       limit ${IS_RUNRECS_SITE ? null : PUBLIC_ATHLETE_LIST_LIMIT}
-      offset ${IS_RUNRECS_SITE ? 0 : data.offset ?? 0}
+      offset ${IS_RUNRECS_SITE ? 0 : (data.offset ?? 0)}
     `;
     return athletes.map((athlete) => {
       const reported = getReportedRaceHistory(athlete.slug);
@@ -900,6 +902,7 @@ export const listAthletes = createServerFn({ method: "GET" })
   });
 
 export const getAthleteBySlug = createServerFn({ method: "GET" })
+  .middleware([profileReadMiddleware])
   .validator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
     const sql = await ready();
@@ -1069,6 +1072,7 @@ export type PrivateAthleteStub = {
 };
 
 export const getPrivateAthleteBySlug = createServerFn({ method: "GET" })
+  .middleware([profileReadMiddleware])
   .validator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
     const sql = await ready();
@@ -1762,7 +1766,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     return filtered.slice(0, limit);
   });
 
-// -- Admin / Grok-assisted imports --
+// -- Admin / catalogue imports --
 export const importFromCsv = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: { csv: string }) => input)
@@ -1781,7 +1785,7 @@ export const importFromJson = createServerFn({ method: "POST" })
     try {
       bundle = JSON.parse(data.json) as ImportBundle;
     } catch {
-      throw new Error("Invalid JSON - paste a Grok export with events[] and/or editions[]");
+      throw new Error("Invalid JSON - paste ATHRECS import data with events[] and/or editions[]");
     }
     return applyImportBundle(bundle);
   });

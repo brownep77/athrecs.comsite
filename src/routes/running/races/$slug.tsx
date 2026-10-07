@@ -1,7 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
-import { roadHalfMarathonBySlug } from "@/data/road-half-marathons";
-import { roadMarathonBySlug } from "@/data/road-marathons";
+import { roadHalfMarathonBySlug, roadHalfMarathonsForCountry } from "@/data/road-half-marathons";
+import { roadMarathonBySlug, roadMarathonsForCountry } from "@/data/road-marathons";
 import { RoadMarathonPage } from "@/components/running/RoadMarathonPages";
 import { roadRaceHead } from "@/lib/running/road-marathon-seo";
 
@@ -12,7 +12,20 @@ export const Route = createFileRoute("/running/races/$slug")({
   loader: ({ params }) => {
     const race = roadHalfMarathonBySlug(params.slug) ?? roadMarathonBySlug(params.slug);
     if (!race) throw notFound();
-    return { race, now: new Date().toISOString() };
+    const candidates =
+      race.distanceKm === 21.0975
+        ? roadHalfMarathonsForCountry(race.country)
+        : roadMarathonsForCountry(race.country);
+    const related = candidates
+      .filter((item) => item.slug !== race.slug)
+      .sort(
+        (a, b) =>
+          Number(b.region === race.region) - Number(a.region === race.region) ||
+          a.name.localeCompare(b.name),
+      )
+      .slice(0, 4)
+      .map(({ slug, name, city, region }) => ({ slug, name, city, region }));
+    return { race, related, now: new Date().toISOString() };
   },
   staleTime: 0,
   preloadStaleTime: 0,

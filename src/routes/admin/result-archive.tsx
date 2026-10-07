@@ -83,14 +83,24 @@ function ResultArchivePage() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-cyan-700">
             Private-by-default archive
           </p>
-          <h1 className="font-display text-3xl font-semibold text-fg">Result ingestion & coverage</h1>
+          <h1 className="font-display text-3xl font-semibold text-fg">Collected results</h1>
           <p className="text-sm leading-6 text-muted">
             Track scanned, uploaded and API-supplied results by sport, event and race edition.
             Participant names and finish times stay out of this staff index and remain available
             only to the secure athlete matching and claim workflow.
           </p>
+          <p className="text-sm leading-6 text-muted">
+            Saved results are checked when existing athletes or new registrations open their
+            account. Possible matches stay private until confirmed. Competing claims are flagged for
+            staff review and email notification.
+          </p>
         </div>
         <div className="flex flex-wrap gap-2">
+          <Button asChild variant="secondary">
+            <Link to="/admin/result-claims" search={{ claimId: undefined }}>
+              Review claim conflicts
+            </Link>
+          </Button>
           <Button type="button" variant="secondary" onClick={() => void dashboard.refetch()}>
             <RefreshCw
               className={dashboard.isFetching ? "size-4 animate-spin" : "size-4"}
@@ -99,7 +109,7 @@ function ResultArchivePage() {
             Refresh
           </Button>
           <Button asChild>
-            <Link to="/admin" hash="results-import">
+            <Link to="/admin/athlete-tools" search={{ section: "upload", athleteId: undefined }}>
               <FileUp className="size-4" aria-hidden="true" /> Import results
             </Link>
           </Button>
@@ -183,7 +193,9 @@ function ResultArchivePage() {
       <section className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border p-4">
           <div>
-            <h2 className="font-display text-xl font-semibold text-fg">Coverage by event edition</h2>
+            <h2 className="font-display text-xl font-semibold text-fg">
+              Coverage by event edition
+            </h2>
             <p className="mt-1 text-xs text-muted">
               Event-level tracking only — no participant directory is exposed here.
             </p>
@@ -238,8 +250,8 @@ function ResultArchivePage() {
                       </strong>{" "}
                       stored
                       <p className="mt-1 text-xs">
-                        {formatNumber(edition.rowsInserted)} new · {formatNumber(edition.rowsUpdated)}
-                        {" "}refreshed
+                        {formatNumber(edition.rowsInserted)} new ·{" "}
+                        {formatNumber(edition.rowsUpdated)} refreshed
                       </p>
                     </td>
                     <td className="px-4 py-3 align-top">
@@ -302,7 +314,8 @@ function ResultArchivePage() {
                   stored
                   <br />
                   <span className="text-xs">
-                    {formatNumber(run.rowsDetected)} detected · {formatNumber(run.rowsSkipped)} skipped
+                    {formatNumber(run.rowsDetected)} detected · {formatNumber(run.rowsSkipped)}{" "}
+                    skipped
                   </span>
                 </p>
               </article>
