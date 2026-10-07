@@ -18,6 +18,9 @@ import {
   ShieldCheck,
   Ticket,
 } from "lucide-react";
+import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
+import { resultSlug } from "@/lib/athrecs/result-slug";
+import { resultCredit } from "@/lib/athrecs/result-credit";
 import { getEditionResults, getEventBySlug } from "@/lib/athrecs/api";
 import {
   effectiveStatus,
@@ -84,7 +87,10 @@ export const Route = createFileRoute("/races/$slug")({
           statusCode: 301,
         });
       }
-      return data;
+      const archiveResults = !IS_RUNRECS_SITE && !data.upcoming.length && data.past.length === 1 && data.past[0].result_count > 0
+        ? await getPublicRaceResults({ data: { editionId: String(data.past[0].id) } })
+        : null;
+      return { ...data, archiveResults: archiveResults ? { ...archiveResults, results: archiveResults.results.slice(0, 5) } : null };
     }
 
     const currentSlug = await resolveSlugRedirect({
@@ -101,13 +107,14 @@ export const Route = createFileRoute("/races/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const { event, upcoming } = loaderData;
+    const { event, upcoming, archiveResults } = loaderData;
     const canonical = `${SITE_URL}/races/${event.slug}`;
-    const title = event.city
+    const archiveLabel = archiveResults ? `${archiveResults.edition.event_date} · ${archiveResults.edition.distance_code} · ${archiveResults.results.slice(0, 3).map((result) => result.athlete_name).join(", ")}` : null;
+    const title = archiveLabel ? `${event.name} — ${archiveLabel} | ${SITE_NAME}` : event.city
       ? `${event.name} — ${event.city} | ${SITE_NAME}`
       : `${event.name} | ${SITE_NAME}`;
     const description =
-      event.summary ||
+      archiveResults ? `Recorded ${archiveResults.edition.distance_code} performances at ${event.name}, ${archiveResults.edition.event_date}, ${[event.city, event.country].filter(Boolean).join(", ")}. ${archiveResults.results.slice(0, 3).map((result) => result.athlete_name).join(", ")}. View recorded results and original provider links.` : event.summary ||
       `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`;
     const next = upcoming[0];
 
@@ -151,7 +158,8 @@ export const Route = createFileRoute("/races/$slug")({
 });
 
 function RacePage() {
-  return <RacePageContent data={Route.useLoaderData()} />;
+  const data = Route.useLoaderData();
+  return <RacePageContent data={data} archiveResults={data.archiveResults} />;
 }
 
 function spectatorAccessLabel(access: EditionSpectatorAccess | null): string | null {
@@ -185,14 +193,16 @@ function formatCheckedDate(value: string): string {
 export function RacePageContent({
   data,
   localized,
+  archiveResults,
 }: {
   data: NonNullable<Awaited<ReturnType<typeof getEventBySlug>>>;
   localized?: { language: string; country: string };
+  archiveResults?: Awaited<ReturnType<typeof getPublicRaceResults>>;
 }) {
   const { event, groups, distances, upcoming, past, related } = data;
   const isRunningEvent = event.sport === "Running" || event.sport === "Parkrun";
   const qualification = raceQualifications[event.slug];
-  const shownDistances = sanitizeDistances(event.name, distances);
+  const shownDistances = sanitizeDistances(event.name, distances.length ? distances : [...new Set(past.map((edition) => edition.distance_code))]);
   const country = resolveCountry({
     slug: event.slug,
     name: event.name,
@@ -210,6 +220,7 @@ export function RacePageContent({
     area: event.area,
   });
   const next = upcoming[0];
+  const archived = !next && past.length > 0;
   const place = {
     country: event.country,
     county: event.county,
@@ -401,6 +412,30 @@ export function RacePageContent({
         </div>
       </header>
 
+      {archiveResults ? (
+        <section aria-labelledby="archive-results-heading" className="space-y-3 rounded-xl border border-border bg-surface p-5">
+          <h2 id="archive-results-heading" className="font-display text-xl font-semibold">
+            {archiveResults.edition.distance_code} results · {formatRaceDateShort(archiveResults.edition.event_date)}
+          </h2>
+          <p className="text-sm text-muted">
+            Recorded performances from {event.name} in {[event.city, event.country].filter(Boolean).join(", ")}.
+            This is a partial results archive; it does not represent the full field.
+          </p>
+          <ul className="space-y-2">
+            {archiveResults.results.slice(0, 5).map((result) => {
+              const credit = resultCredit(result.source_url, result.result_source);
+              const finished = ["finished", "fin"].includes(result.status.trim().toLowerCase()) && !result.disqualified;
+              return <li key={result.id} className="text-sm">
+                <span className="font-semibold">{result.athlete_name}</span>{" · "}
+                {finished ? formatDuration(result.finish_time_seconds) : result.disqualified ? "Disqualified" : result.status}
+                {credit ? <> · <a href={credit.url} className="text-accent underline" rel="noreferrer" target="_blank">Results: {credit.name}</a></> : null}
+              </li>;
+            })}
+          </ul>
+          <Link to="/results/$editionId" params={{ editionId: resultSlug(archiveResults.edition) }} className="text-sm text-accent underline">View recorded results</Link>
+        </section>
+      ) : null}
+
       {isRunningEvent ? (
         <>
           <nav
@@ -432,7 +467,7 @@ export function RacePageContent({
 
       {qualification && <QualificationDetails qualification={qualification} />}
 
-      {isRunningEvent ? (
+      {!archived && (isRunningEvent ? (
         <RaceEntryOptions data={data} />
       ) : (
         <EntryOptions
@@ -440,7 +475,7 @@ export function RacePageContent({
           editionDate={next?.event_date}
           officialWebsite={event.website}
         />
-      )}
+      ))}
 
       {spectatorAccess && spectatorLabel ? (
         <section className="flex flex-wrap items-start justify-between gap-4 rounded-xl border border-border bg-surface p-5 shadow-card">
@@ -477,8 +512,8 @@ export function RacePageContent({
           </h2>
           <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             <Fact
-              label="Date"
-              value={next ? formatRaceDateShort(next.event_date) : "No future date"}
+              label={archived ? "Latest recorded race" : "Date"}
+              value={next ? formatRaceDateShort(next.event_date) : past[0] ? formatRaceDateShort(past[0].event_date) : "No future date"}
             />
             <Fact
               label="Local start"
@@ -596,7 +631,7 @@ export function RacePageContent({
         </section>
       )}
 
-      {!isRunningEvent && (
+      {!isRunningEvent && !archived && (
         <section className="grid gap-4 lg:grid-cols-5">
           <div className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card lg:col-span-3">
             <div className="flex items-center gap-2">
@@ -624,7 +659,7 @@ export function RacePageContent({
         </section>
       )}
 
-      {!isRunningEvent && (
+      {!isRunningEvent && !archived && (
         <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
           <div className="flex items-center gap-2">
             <RouteIcon className="h-4 w-4 text-accent" />
@@ -638,7 +673,7 @@ export function RacePageContent({
         </section>
       )}
 
-      {!isRunningEvent && (
+      {!isRunningEvent && !archived && (
         <EditionList
           title={
             event.sport === "Parkrun"
@@ -789,7 +824,7 @@ export function RacePageContent({
         </section>
       )}
 
-      {!isRunningEvent && (
+      {!isRunningEvent && !archived && (
         <aside className="rounded-xl border border-dashed border-border px-4 py-4 text-xs leading-relaxed text-subtle">
           This page is an ATHRECS briefing written from public listing facts (name, date, venue,
           sport, distances). We do not copy official athlete guides, course maps, start lists or

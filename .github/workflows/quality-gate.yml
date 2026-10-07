@@ -51,6 +51,9 @@ jobs:
       - name: Verify search URLs and sitemap privacy
         run: npm run verify:search-discovery
 
+      - name: Verify indexing recovery and archive privacy
+        run: node scripts/verify-indexing-recovery.mjs
+
       - name: Verify race-page event structured data
         run: node scripts/verify-race-page-schema.mjs
 
