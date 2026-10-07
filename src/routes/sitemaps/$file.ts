@@ -65,12 +65,17 @@ export const Route = createFileRoute("/sitemaps/$file")({
           );
         }
         if (!IS_RUNRECS_SITE && params.file === "countries.xml") {
+          const { getSql } = await import("@/lib/db");
+          const { ensureAthrecsSeeded } = await import("@/lib/athrecs/seed.server");
+          const { populatedRunningCountries } = await import("@/lib/athrecs/country-sitemap.server");
+          await ensureAthrecsSeeded();
+          const populated = await populatedRunningCountries(await getSql(), COUNTRY_SITES.map((site) => site.country));
           return sitemapResponse(
             sitemapXml(
               COUNTRY_SITES.flatMap((site) =>
                 SITE_LANGUAGES.flatMap((language) => [
                   `${SITE_URL}/${language}/${site.slug}`,
-                  `${SITE_URL}/${language}/${site.slug}/races`,
+                  ...(populated.has(site.country) ? [`${SITE_URL}/${language}/${site.slug}/races`] : []),
                 ]),
               ),
             ),
