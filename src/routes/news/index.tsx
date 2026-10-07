@@ -1,18 +1,49 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { NEWS_ARTICLES } from "@/data/runrecs-news";
+import { EditorialBrowse } from "@/components/editorial/EditorialBrowse";
+import { parseEditorialSearch } from "@/lib/athrecs/editorial";
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/news/")({
-  head: () => ({
-    meta: [
-      { title: "News | RunRecs.com" },
-      {
-        name: "description",
-        content: "Race reports and results from RunRecs.",
-      },
-    ],
-  }),
-  component: NewsIndexPage,
+  validateSearch: parseEditorialSearch,
+  head: () =>
+    IS_RUNRECS_SITE
+      ? {
+          links: [{ rel: "canonical", href: "https://www.runrecs.com/news" }],
+          meta: [
+            { title: "News | RunRecs.com" },
+            {
+              name: "description",
+              content: "Race reports and results from RunRecs.",
+            },
+          ],
+        }
+      : {
+          links: [{ rel: "canonical", href: `${SITE_URL}/news` }],
+          meta: siteGraphMeta({
+            title: "Sports News by country, area and county | ATHRECS.com",
+            description:
+              "Browse sports news, event announcements and local updates on AthRecs by sport, country, area and county.",
+            url: `${SITE_URL}/news`,
+          }),
+        },
+  component: IS_RUNRECS_SITE ? NewsIndexPage : AthRecsNewsPage,
 });
+
+function AthRecsNewsPage() {
+  const search = Route.useSearch();
+  const navigate = Route.useNavigate();
+  return (
+    <EditorialBrowse
+      kind="news"
+      search={search}
+      onChange={(next) => {
+        void navigate({ search: next });
+      }}
+    />
+  );
+}
 
 function NewsIndexPage() {
   return (
@@ -41,7 +72,9 @@ function NewsIndexPage() {
                 {article.title}
               </h2>
               <p className="mt-3 text-sm leading-6 text-muted">{article.standfirst}</p>
-              <span className="mt-4 inline-block text-sm font-semibold text-fg">Read the report</span>
+              <span className="mt-4 inline-block text-sm font-semibold text-fg">
+                Read the report
+              </span>
             </Link>
           </li>
         ))}

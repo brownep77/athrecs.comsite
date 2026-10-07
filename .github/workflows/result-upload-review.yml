@@ -4,6 +4,12 @@ on:
     paths:
       - 'src/lib/result-upload/**'
       - 'src/routes/admin/import-results.tsx'
+      - 'src/routes/admin/athlete-tools.tsx'
+      - 'scripts/verify-backend-tasks.mjs'
+      - 'src/components/admin/ExcelResultsUpload.tsx'
+      - 'src/components/admin/AthleteTools.tsx'
+      - 'src/components/staff/StaffMicrositeShell.tsx'
+      - 'scripts/verify-athlete-tools-browser.mjs'
       - 'scripts/verify-result-upload.mjs'
       - '.github/workflows/result-upload-review.yml'
   workflow_dispatch:
@@ -32,4 +38,10 @@ jobs:
       - name: Check application types
         run: npm run typecheck
       - name: Lint changed import modules
-        run: npx eslint src/lib/result-upload src/routes/admin/import-results.tsx scripts/verify-result-upload.mjs
+        run: npx eslint src/lib/result-upload src/routes/admin/import-results.tsx src/components/admin/ExcelResultsUpload.tsx src/components/admin/AthleteTools.tsx scripts/verify-result-upload.mjs
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Staff hub and both results workflows on desktop and mobile
+        run: |
+          node scripts/verify-athlete-tools-browser.mjs
+          node scripts/verify-backend-tasks.mjs

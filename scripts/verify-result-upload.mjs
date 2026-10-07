@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
+import {createRequire} from 'node:module';
 import {parseTable,guessMapping,timeMs,canonicalDistance,csvTable,classify} from '../src/lib/result-upload/core.ts';
 const meta={eventName:'Synthetic 10K',date:'2025-09-20',distance:'10K',sourceUrl:'https://totalracetiming.co.uk/raceresults/999999',basis:'chip',timingConfirmed:true};
 const headers=['Position','Forename','Surname','GenderFM','GenderPos','CategoryF40-44FOMO','CatPos','ClubAylsham RunnersSynthetic Club','Tag','Time',''];
@@ -91,4 +92,27 @@ console.log('PASS: isolated database staging, source approval, actor isolation, 
 const api=await readFile(new URL('../src/lib/result-upload/api.ts',import.meta.url),'utf8');
 assert(api.includes('staffMiddleware'));assert(api.includes("process.env.VERCEL_ENV==='preview'"));
 assert(!api.includes('VITE_AUTH_ENABLED=false'));
+// Invoke the actual API guards with a synthetic server-function boundary and no database.
+const require=createRequire(import.meta.url),ts=require('typescript');
+const transformed=ts.transpileModule(api,{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS}}).outputText;
+const staffGate=Symbol('staff-middleware'),site={IS_RUNRECS_SITE:false};let databaseCalls=0;
+const deps={
+ '@tanstack/react-start':{createServerFn:()=>{const fn={middleware(m){assert.deepEqual(m,[staffGate]);return fn;},validator(){return fn;},handler(handler){return handler;}};return fn;}},
+ zod:require('zod'),'../auth/staff-middleware':{staffMiddleware:staffGate},'./core.ts':{FIELDS:['name','given','family','bib','gender','category','club','time','chip','gun','place','genderPlace','categoryPlace']},
+ '../site-scope':site,'../db':{getSql:()=>{databaseCalls++;throw Error('Synthetic database sentinel');}}
+};
+const module={exports:{}};
+new Function('require','module','exports',transformed)(name=>{assert(name in deps,`Unexpected API dependency: ${name}`);return deps[name];},module,module.exports);
+const savedEnv=process.env.VERCEL_ENV;
+try {
+ process.env.VERCEL_ENV='preview';
+ await assert.rejects(()=>module.exports.previewResultsFile({data:{},context:actor}),/Preview deployments/);
+ await assert.rejects(()=>module.exports.importReviewedResults({data:{},context:actor}),/Preview deployments/);
+ assert.equal(databaseCalls,0,'Preview writes must stop before database access');
+ site.IS_RUNRECS_SITE=true;
+ await assert.rejects(()=>module.exports.previewResultsFile({data:{},context:actor}),/only available on AthRecs/);
+ await assert.rejects(()=>module.exports.importReviewedResults({data:{},context:actor}),/only available on AthRecs/);
+ assert.equal(databaseCalls,0);
+} finally {if(savedEnv===undefined)delete process.env.VERCEL_ENV;else process.env.VERCEL_ENV=savedEnv;}
+console.log('PASS: all upload APIs retain staff middleware; actual preview and RunRecs staging/import guards reject before database access');
 await pg.close();

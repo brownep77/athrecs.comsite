@@ -27,9 +27,11 @@ assert.match(sharedApi, /groups_json/);
 assert.match(sharedApi, /groups: parseRaceGroups\(groups_json\)/);
 
 assert.match(runRecsApi, /export const listEventRegions/);
-assert.match(runRecsApi, /e\.sport in \('Running', 'Parkrun'\)/);
+const runningCatalogue = await readFile("src/lib/running/catalogue.server.ts", "utf8");
+assert.match(runRecsApi, /queryRunningEvents/);
+assert.match(runningCatalogue, /e\.sport in \('Running', 'Parkrun'\)/);
 assert.doesNotMatch(runRecsApi, /base\.listEventRegions/);
-assert.match(runRecsApi, /lower\(coalesce\(e\.region, ''\)\) like/);
+assert.match(runningCatalogue, /lower\(coalesce\(e\.region, ''\)\) like/);
 
 assert.match(card, /Start time TBC/);
 assert.match(card, /`Starts \$\{startLabel\}`/);

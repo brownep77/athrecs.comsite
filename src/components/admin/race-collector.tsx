@@ -1,0 +1,1093 @@
+import { useMemo, useState } from "react";
+import { Link } from "@tanstack/react-router";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  ArrowLeft,
+  CheckCircle2,
+  Download,
+  Globe2,
+  Pause,
+  Play,
+  Search,
+  ShieldCheck,
+  RotateCcw,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { CollectorCandidateList } from "@/components/admin/collector-candidate-list";
+import {
+  COLLECTOR_COUNTRIES,
+  calendarMonthRange,
+  planScope,
+  selectedRegions,
+  type Scope,
+} from "@/lib/race-collector/core";
+import { collectionRegion, collectionRegions } from "@/lib/race-collector/regions";
+import {
+  DECISION_FILTERS,
+  type ReviewQuery,
+  type BulkFindingActionInput,
+} from "@/lib/race-collector/review";
+import {
+  getCollector,
+  startCollector,
+  controlCollector,
+  exportCollector,
+  decideCollectorFinding,
+  actOnCollectorFindings,
+} from "@/lib/race-collector/api";
+const inputClass =
+  "w-full rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-fg focus:outline-none focus:ring-2 focus:ring-emerald-500";
+const datePresets = [
+  { value: "2027-2028", label: "All of 2027 and 2028", from: "2027-01-01", to: "2028-12-31" },
+  { value: "2027", label: "2027 only", from: "2027-01-01", to: "2027-12-31" },
+  { value: "2028", label: "2028 only", from: "2028-01-01", to: "2028-12-31" },
+];
+const dateFormatter = new Intl.DateTimeFormat("en-GB", {
+  day: "numeric",
+  month: "short",
+  year: "numeric",
+  timeZone: "UTC",
+});
+export function CollectorPage({ embedded = false }: { embedded?: boolean }) {
+  const client = useQueryClient();
+  const [scope, setScope] = useState<Scope>({
+    countries: COLLECTOR_COUNTRIES.map((c) => c.code),
+    dateFrom: "2027-01-01",
+    dateTo: "2028-12-31",
+    min: 0,
+    max: 500,
+    unit: "mi",
+    regional: true,
+    passes: 1,
+  });
+  const [areaChoice, setAreaChoice] = useState("worldwide");
+  const [dateChoice, setDateChoice] = useState("2027-2028");
+  const [countrySearch, setCountrySearch] = useState("");
+  const [search, setSearch] = useState("");
+  const [runId, setRunId] = useState<string>();
+  const [message, setMessage] = useState("");
+  const [reviewQuery, setReviewQuery] = useState<ReviewQuery>({
+    status: "pending",
+    search: "",
+    page: 0,
+    pageSize: 50,
+  });
+  const [reviewSearch, setReviewSearch] = useState("");
+  const changeReview = (changes: Partial<ReviewQuery>) => {
+    setReviewQuery((current) => ({ ...current, page: 0, ...changes }));
+  };
+  const query = useQuery({
+    queryKey: ["race-collector", runId, reviewQuery],
+    queryFn: () => getCollector({ data: { id: runId, review: reviewQuery } }),
+    placeholderData: (previous, previousQuery) =>
+      previousQuery?.queryKey[1] === runId ? previous : undefined,
+    refetchInterval: 15000,
+  });
+  const data = query.data;
+  const run = data?.run;
+  const active = run && ["running", "paused"].includes(run.status);
+  const ready = data?.readiness;
+  const configured = ready?.persistent && ready.research && ready.background;
+  const plan = useMemo(() => {
+    try {
+      return { jobs: planScope(scope).length, error: "" };
+    } catch (e) {
+      return { jobs: 0, error: e instanceof Error ? e.message : "Invalid settings" };
+    }
+  }, [scope]);
+  const refresh = () => client.invalidateQueries({ queryKey: ["race-collector"] });
+  const fail = (error: unknown) =>
+    setMessage(error instanceof Error ? error.message : "Something went wrong. Please retry.");
+  const start = useMutation({
+    mutationFn: () => startCollector({ data: scope }),
+    onSuccess: (r) => {
+      setRunId(r.id);
+      changeReview({ page: 0 });
+      setMessage(
+        r.reused
+          ? "Opened the existing active scan."
+          : "Scan started. You can close this page; your progress is saved.",
+      );
+      void refresh();
+    },
+    onError: fail,
+  });
+  const control = useMutation({
+    mutationFn: (action: "pause" | "resume" | "retry" | "cancel") =>
+      controlCollector({ data: { id: run!.id, action } }),
+    onSuccess: () => {
+      void refresh();
+    },
+    onError: fail,
+  });
+  const decision = useMutation({
+    mutationFn: (input: { id: string; action: "keep" | "dismiss" }) =>
+      decideCollectorFinding({ data: { runId: run!.id, ...input, confirmed: true } }),
+    onSuccess: async (result) => {
+      setMessage(
+        result.action === "keep"
+          ? "Candidate saved to Kept. Its information and duplicate checks are retained."
+          : "Candidate dismissed. All information is saved; use Keep in Dismissed to bring it back.",
+      );
+      await refresh();
+    },
+    onError: fail,
+  });
+  const bulk = useMutation({
+    mutationFn: (input: Omit<BulkFindingActionInput, "runId">) =>
+      actOnCollectorFindings({ data: { ...input, runId: run!.id } }),
+    onSuccess: async () => {
+      await refresh();
+    },
+  });
+  const reviewBusy = decision.isPending || bulk.isPending;
+  const download = async () => {
+    try {
+      const result = await exportCollector({ data: { id: run!.id } });
+      const url = URL.createObjectURL(new Blob([result], { type: "application/json" }));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `runrecs-scan-${run!.id}.json`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (e) {
+      fail(e);
+    }
+  };
+  const completed =
+    data?.jobs.filter((j) => j.status === "complete").reduce((n, j) => n + j.count, 0) ?? 0;
+  const failed =
+    data?.jobs.filter((j) => j.status === "failed").reduce((n, j) => n + j.count, 0) ?? 0;
+  const working =
+    data?.jobs.filter((j) => j.status === "running").reduce((n, j) => n + j.count, 0) ?? 0;
+  const queued =
+    data?.jobs.filter((j) => j.status === "queued").reduce((n, j) => n + j.count, 0) ?? 0;
+  const count = (state: string) => data?.counts.find((c) => c.status === state)?.count ?? 0;
+  const totalFindings =
+    data?.counts
+      .filter((row) => row.status !== "dismissed")
+      .reduce((total, row) => total + row.count, 0) ?? 0;
+  const pageInfo = data?.reviewPage;
+  const progressScope = run?.scope ?? scope;
+  const chooseCountries = (countries: string[]) =>
+    setScope((current) => ({
+      ...current,
+      countries,
+      regions: Object.fromEntries(
+        Object.entries(current.regions ?? {}).filter(([c]) => countries.includes(c)),
+      ),
+    }));
+  const regionalCountries = COLLECTOR_COUNTRIES.filter(
+    (c) => scope.countries.includes(c.code) && collectionRegions(c.code).length,
+  );
+  const countryRows = COLLECTOR_COUNTRIES.filter(
+    (c) =>
+      progressScope.countries.includes(c.code) &&
+      (c.name.toLowerCase().includes(search.toLowerCase()) ||
+        selectedRegions(progressScope, c.code).some((r) =>
+          r.name.toLowerCase().includes(search.toLowerCase()),
+        )),
+  );
+  const gaps = data && "gaps" in data ? (data.gaps ?? []) : [];
+  return (
+    <div className="mx-auto max-w-7xl space-y-7 pb-16">
+      {!embedded && (
+        <>
+          <Link to="/admin" className="inline-flex items-center gap-2 text-sm text-muted">
+            <ArrowLeft size={15} /> Staff tools
+          </Link>
+          <header className="rounded-2xl bg-slate-950 p-6 text-white md:p-7">
+            <p className="text-xs font-semibold uppercase tracking-widest text-emerald-300">
+              RunRecs
+            </p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-tight">Find races</h1>
+            <p className="mt-2 text-sm text-slate-300">
+              Choose where and when. We’ll search, check for duplicates and save your progress.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-4 text-xs text-slate-300">
+              <span className="flex items-center gap-2">
+                <Globe2 size={15} />
+                {COLLECTOR_COUNTRIES.length} countries & territories
+              </span>
+              <span className="flex items-center gap-2">
+                <ShieldCheck size={15} />
+                Duplicate checks included
+              </span>
+              <span className="flex items-center gap-2">
+                <CheckCircle2 size={15} />
+                Miles and kilometres
+              </span>
+            </div>
+          </header>
+        </>
+      )}
+      {query.isError && (
+        <div
+          role="alert"
+          className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950"
+        >
+          {query.error.message}{" "}
+          <Button variant="secondary" size="sm" onClick={() => void query.refetch()}>
+            Retry
+          </Button>
+        </div>
+      )}
+      {message && (
+        <p
+          role="status"
+          className="rounded-xl border border-emerald-300 bg-emerald-50 p-4 text-sm text-emerald-950"
+        >
+          {message}
+        </p>
+      )}
+      <div className={embedded ? "space-y-6" : "grid gap-6 lg:grid-cols-[340px_minmax(0,1fr)]"}>
+        {!embedded && (
+          <section className="space-y-5 rounded-2xl border border-border bg-surface p-6">
+            <h2 className="text-lg font-semibold text-fg">Start a scan</h2>
+            <fieldset
+              disabled={Boolean(active) || start.isPending}
+              className="space-y-5 disabled:opacity-60"
+            >
+              <div>
+                <label htmlFor="search-area" className="text-sm font-medium text-fg">
+                  Where?
+                </label>
+                <select
+                  id="search-area"
+                  className={`${inputClass} mt-2`}
+                  value={areaChoice}
+                  onChange={(e) => {
+                    const choice = e.target.value;
+                    setAreaChoice(choice);
+                    setCountrySearch("");
+                    setScope((current) => ({
+                      ...current,
+                      regions: {},
+                      countries:
+                        choice === "worldwide"
+                          ? COLLECTOR_COUNTRIES.map((c) => c.code)
+                          : choice === "uk-ie" || choice === "several"
+                            ? ["GB", "IE"]
+                            : [choice],
+                    }));
+                  }}
+                >
+                  <option value="worldwide">Worldwide — all countries</option>
+                  <option value="uk-ie">United Kingdom and Ireland</option>
+                  <option value="several">Choose several countries…</option>
+                  <optgroup label="One country or territory">
+                    {COLLECTOR_COUNTRIES.map((c) => (
+                      <option key={c.code} value={c.code}>
+                        {c.name}
+                      </option>
+                    ))}
+                  </optgroup>
+                </select>
+                {areaChoice === "several" && (
+                  <div className="mt-3 space-y-2">
+                    <input
+                      aria-label="Search countries to select"
+                      placeholder="Search countries…"
+                      className={inputClass}
+                      value={countrySearch}
+                      onChange={(e) => setCountrySearch(e.target.value)}
+                    />
+                    <p className="text-xs text-muted">
+                      {scope.countries.length} selected ·{" "}
+                      {scope.countries
+                        .map((code) => COLLECTOR_COUNTRIES.find((c) => c.code === code)?.name)
+                        .join(", ") || "Choose at least one"}
+                    </p>
+                    <div className="max-h-48 space-y-2 overflow-y-auto rounded-lg border border-border p-3">
+                      {COLLECTOR_COUNTRIES.filter((c) =>
+                        c.name.toLowerCase().includes(countrySearch.toLowerCase()),
+                      ).map((c) => (
+                        <label key={c.code} className="flex items-center gap-2 text-sm text-fg">
+                          <input
+                            type="checkbox"
+                            aria-label={`Select ${c.name}`}
+                            checked={scope.countries.includes(c.code)}
+                            onChange={(e) =>
+                              chooseCountries(
+                                e.target.checked
+                                  ? [...scope.countries, c.code]
+                                  : scope.countries.filter((code) => code !== c.code),
+                              )
+                            }
+                          />
+                          {c.name}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div>
+                <label htmlFor="search-period" className="text-sm font-medium text-fg">
+                  When?
+                </label>
+                <select
+                  id="search-period"
+                  className={`${inputClass} mt-2`}
+                  value={dateChoice}
+                  onChange={(e) => {
+                    const choice = e.target.value;
+                    setDateChoice(choice);
+                    const preset = datePresets.find((p) => p.value === choice);
+                    if (preset)
+                      setScope((current) => ({
+                        ...current,
+                        dateFrom: preset.from,
+                        dateTo: preset.to,
+                      }));
+                    else if (choice === "month" || choice === "three-months")
+                      setScope((current) => ({
+                        ...current,
+                        ...(calendarMonthRange(
+                          current.dateFrom.slice(0, 7) || "2027-01",
+                          choice === "month" ? 1 : 3,
+                        ) ?? { dateFrom: "", dateTo: "" }),
+                      }));
+                  }}
+                >
+                  <option value="month">One month</option>
+                  <option value="three-months">Three months</option>
+                  {datePresets.map((p) => (
+                    <option key={p.value} value={p.value}>
+                      {p.label}
+                    </option>
+                  ))}
+                  <option value="custom">Choose dates…</option>
+                </select>
+                {(dateChoice === "month" || dateChoice === "three-months") && (
+                  <div className="mt-3 space-y-2">
+                    <label htmlFor="search-month" className="text-xs font-medium text-muted">
+                      {dateChoice === "month" ? "Month" : "Starting month"}
+                    </label>
+                    <input
+                      id="search-month"
+                      className={inputClass}
+                      type="month"
+                      value={scope.dateFrom.slice(0, 7)}
+                      onChange={(e) => {
+                        const range = calendarMonthRange(
+                          e.target.value,
+                          dateChoice === "month" ? 1 : 3,
+                        );
+                        setScope((current) => ({
+                          ...current,
+                          ...(range ?? { dateFrom: "", dateTo: "" }),
+                        }));
+                      }}
+                    />
+                    {scope.dateFrom && scope.dateTo && (
+                      <p className="text-xs text-muted">
+                        {dateFormatter.format(new Date(scope.dateFrom + "T00:00:00Z"))}–
+                        {dateFormatter.format(new Date(scope.dateTo + "T00:00:00Z"))}, inclusive.
+                      </p>
+                    )}
+                  </div>
+                )}
+                {dateChoice === "custom" && (
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    <label className="space-y-1 text-xs font-medium text-muted">
+                      From
+                      <input
+                        className={inputClass}
+                        aria-label="Start date"
+                        type="date"
+                        value={scope.dateFrom}
+                        onChange={(e) => setScope({ ...scope, dateFrom: e.target.value })}
+                      />
+                    </label>
+                    <label className="space-y-1 text-xs font-medium text-muted">
+                      Through
+                      <input
+                        className={inputClass}
+                        aria-label="End date"
+                        type="date"
+                        value={scope.dateTo}
+                        onChange={(e) => setScope({ ...scope, dateTo: e.target.value })}
+                      />
+                    </label>
+                  </div>
+                )}
+              </div>
+              <div>
+                <label htmlFor="scan-depth" className="text-sm font-medium text-fg">
+                  Scan depth
+                </label>
+                <select
+                  id="scan-depth"
+                  className={`${inputClass} mt-2`}
+                  value={scope.passes ?? 2}
+                  onChange={(e) => setScope({ ...scope, passes: Number(e.target.value) as 1 | 2 })}
+                >
+                  <option value={1}>Quick scan — one pass</option>
+                  <option value={2}>Thorough scan — two passes</option>
+                </select>
+                <p className="mt-2 text-xs leading-5 text-muted">
+                  {scope.passes === 1
+                    ? "Fewer searches, with source and duplicate checks. A thorough scan can find extra races."
+                    : "Includes a second search for missed races. Takes longer and uses more research."}
+                </p>
+                <p className="mt-2 text-xs font-medium text-fg">
+                  {plan.jobs.toLocaleString()} searches planned. Choose one month for a smaller
+                  scan.
+                </p>
+              </div>
+            </fieldset>
+            <div className="space-y-1 rounded-xl bg-emerald-50 p-4 text-sm text-emerald-950">
+              <p className="font-medium">
+                {scope.min}–{scope.max} {scope.unit === "mi" ? "miles" : "km"} · includes kilometre
+                and mile races
+              </p>
+              <p className="text-xs">
+                {scope.regional
+                  ? "Large countries are searched state by state automatically."
+                  : "Countries are searched nationally."}
+              </p>
+              {Object.entries(scope.regions ?? {}).some(
+                ([country, codes]) => codes.length < collectionRegions(country).length,
+              ) && (
+                <p className="text-xs font-medium">
+                  Some states/regions are selected — see More options.
+                </p>
+              )}
+              <p className="text-xs">Duplicates checked. New findings wait for source review.</p>
+            </div>
+            {plan.error && (
+              <p className="text-xs text-red-700" role="alert">
+                {plan.error}
+              </p>
+            )}
+            <Button
+              className="w-full bg-emerald-600 py-6 text-base text-white hover:bg-emerald-700"
+              disabled={!configured || Boolean(active) || start.isPending || Boolean(plan.error)}
+              onClick={() => start.mutate()}
+            >
+              <Play size={18} />
+              {start.isPending ? "Starting…" : active ? "Scan in progress" : "Start scan"}
+            </Button>
+            <p className="text-xs leading-5 text-muted">
+              You can close this page after starting. Large scans can take several days. Research
+              usage is billed by your provider.
+            </p>
+            {ready && !configured && (
+              <p className="text-xs leading-5 text-amber-700">
+                Setup needed:{" "}
+                {[
+                  !ready.persistent && "persistent database",
+                  !ready.research && "research connection",
+                  !ready.background && "background worker",
+                ]
+                  .filter(Boolean)
+                  .join(", ")}
+                . Starting is disabled until these are connected.
+              </p>
+            )}
+            <button
+              type="button"
+              className="text-sm font-medium text-emerald-700 underline underline-offset-4 disabled:opacity-50"
+              disabled={Boolean(active) || start.isPending}
+              onClick={() => {
+                setScope({
+                  countries: ["IE"],
+                  dateFrom: "2027-01-01",
+                  dateTo: "2027-03-31",
+                  min: 0,
+                  max: 500,
+                  unit: "mi",
+                  regional: true,
+                  passes: 1,
+                });
+                setAreaChoice("IE");
+                setDateChoice("custom");
+                setCountrySearch("");
+                setMessage(
+                  "Test settings filled in. Check where and when, then press Start scan when ready.",
+                );
+              }}
+            >
+              Use a small Ireland test
+            </button>
+            <details className="border-t border-border pt-4">
+              <summary className="cursor-pointer text-sm font-medium text-fg">More options</summary>
+              <fieldset
+                disabled={Boolean(active) || start.isPending}
+                className="mt-4 space-y-5 disabled:opacity-60"
+              >
+                <div>
+                  <div className="mb-2 flex items-center justify-between">
+                    <span className="text-xs font-medium text-muted">Distance range</span>
+                    <select
+                      aria-label="Distance unit"
+                      className="rounded border border-border bg-surface p-1 text-xs"
+                      value={scope.unit}
+                      onChange={(e) => {
+                        const unit = e.target.value as "mi" | "km";
+                        const factor = unit === "km" ? 1.609344 : 1 / 1.609344;
+                        setScope({
+                          ...scope,
+                          unit,
+                          min: Number((scope.min * factor).toFixed(6)),
+                          max: Number((scope.max * factor).toFixed(6)),
+                        });
+                      }}
+                    >
+                      <option value="mi">Miles</option>
+                      <option value="km">Kilometres</option>
+                    </select>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3">
+                    <input
+                      aria-label="Minimum distance"
+                      className={inputClass}
+                      type="number"
+                      min="0"
+                      step="any"
+                      value={scope.min}
+                      onChange={(e) => setScope({ ...scope, min: Number(e.target.value) })}
+                    />
+                    <input
+                      aria-label="Maximum distance"
+                      className={inputClass}
+                      type="number"
+                      min="0"
+                      step="any"
+                      value={scope.max}
+                      onChange={(e) => setScope({ ...scope, max: Number(e.target.value) })}
+                    />
+                  </div>
+                  <p className="mt-2 text-xs text-muted">
+                    Includes miles and kilometres in every scan.
+                  </p>
+                </div>
+                <div className="space-y-3 border-t border-border pt-4">
+                  <label className="flex items-start gap-2 text-sm font-medium text-fg">
+                    <input
+                      type="checkbox"
+                      className="mt-1 accent-emerald-600"
+                      checked={scope.regional === true}
+                      onChange={(e) =>
+                        setScope({ ...scope, regional: e.target.checked, regions: {} })
+                      }
+                    />
+                    Split large countries into states and regions
+                  </label>
+                  <p className="text-xs leading-5 text-muted">
+                    Separate searches and progress for the USA, Canada, Australia, India, China,
+                    Russia, Brazil and Mexico. Other countries use national searches.
+                  </p>
+                  {scope.regional &&
+                    regionalCountries.map((c) => {
+                      const regions = collectionRegions(c.code);
+                      const chosen = selectedRegions(scope, c.code).map((r) => r.code);
+                      return (
+                        <details key={c.code} className="rounded-lg border border-border p-3">
+                          <summary className="cursor-pointer text-xs font-medium text-fg">
+                            {c.name} · {chosen.length}/{regions.length} regions
+                          </summary>
+                          <div className="my-2 flex gap-3">
+                            <button
+                              type="button"
+                              className="text-xs text-emerald-700"
+                              onClick={() =>
+                                setScope((current) => ({
+                                  ...current,
+                                  regions: {
+                                    ...current.regions,
+                                    [c.code]: regions.map((r) => r.code),
+                                  },
+                                }))
+                              }
+                            >
+                              Select all {c.name} regions
+                            </button>
+                            <button
+                              type="button"
+                              className="text-xs text-muted"
+                              onClick={() =>
+                                setScope((current) => ({
+                                  ...current,
+                                  regions: { ...current.regions, [c.code]: [] },
+                                }))
+                              }
+                            >
+                              Clear {c.name} regions
+                            </button>
+                          </div>
+                          <div className="max-h-48 space-y-2 overflow-y-auto">
+                            {regions.map((r) => (
+                              <label
+                                key={r.code}
+                                className="flex items-center gap-2 text-xs text-muted"
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={chosen.includes(r.code)}
+                                  aria-label={`${c.name}: ${r.name}`}
+                                  onChange={(e) => {
+                                    const checked = e.target.checked;
+                                    setScope((current) => {
+                                      const codes = selectedRegions(current, c.code).map(
+                                        (region) => region.code,
+                                      );
+                                      return {
+                                        ...current,
+                                        regions: {
+                                          ...current.regions,
+                                          [c.code]: checked
+                                            ? [...codes, r.code]
+                                            : codes.filter((code) => code !== r.code),
+                                        },
+                                      };
+                                    });
+                                  }}
+                                />
+                                {r.name}
+                              </label>
+                            ))}
+                          </div>
+                        </details>
+                      );
+                    })}
+                </div>
+              </fieldset>
+              <p className="mt-4 text-xs leading-5 text-muted">
+                Independent searches run up to three at a time. Northern Ireland is within the UK.
+                Cross-border races use their start location. Parkrun remains separate.
+              </p>
+            </details>
+          </section>
+        )}
+        <section className="min-w-0 space-y-5 rounded-2xl border border-border bg-surface p-6">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="text-xs uppercase tracking-wider text-muted">Collection progress</p>
+              <h2 className="mt-1 text-xl font-semibold text-fg">
+                {run
+                  ? run.status === "complete"
+                    ? failed > 0
+                      ? "Finished with failed searches"
+                      : "Scan finished"
+                    : run.status === "paused"
+                      ? "Scan paused"
+                      : run.status === "cancelled"
+                        ? "Scan cancelled"
+                        : "Searching for races"
+                  : "Ready when you are"}
+              </h2>
+            </div>
+            {run && (
+              <Button variant="secondary" size="sm" onClick={() => void download()}>
+                <Download size={14} />
+                Report
+              </Button>
+            )}
+          </div>
+          {data && data.runs.length > 0 && (
+            <select
+              aria-label="Scan history"
+              className={inputClass}
+              value={run?.id ?? ""}
+              disabled={reviewBusy}
+              onChange={(e) => {
+                setRunId(e.target.value);
+                changeReview({ page: 0 });
+              }}
+            >
+              {data.runs.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {new Date(r.created_at).toLocaleString()} · {r.scope.countries.length} countries ·{" "}
+                  {r.scope.regional ? "by region" : "national"} ·{" "}
+                  {r.scope.passes === 1 ? "quick" : "thorough"} · {r.status}
+                </option>
+              ))}
+            </select>
+          )}
+          {run && (
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {[
+                ["Awaiting review", count("review")],
+                ["Already listed", count("duplicate")],
+                ["Held / uncertain", count("held")],
+                ["Sent for publication", count("staged")],
+              ].map(([label, n]) => (
+                <div key={label} className="rounded-xl bg-slate-50 p-4">
+                  <p className="text-2xl font-semibold text-slate-950">{n}</p>
+                  <p className="mt-1 text-xs text-slate-500">{label}</p>
+                </div>
+              ))}
+            </div>
+          )}
+          {run ? (
+            <>
+              <div className="flex justify-between text-xs text-muted">
+                <span>
+                  {completed.toLocaleString()} of {run.total_jobs.toLocaleString()} searches
+                  completed
+                </span>
+                <span>
+                  {failed > 0
+                    ? `${failed} failed`
+                    : `${Math.floor((completed / run.total_jobs) * 100)}%`}
+                </span>
+              </div>
+              <progress
+                aria-label="Completed searches"
+                className="h-2 w-full accent-emerald-600"
+                max={run.total_jobs}
+                value={completed}
+              />
+              <p className="text-xs text-muted">
+                {run.scope.dateFrom} — {run.scope.dateTo} · {run.scope.min}–{run.scope.max}{" "}
+                {run.scope.unit} · {run.scope.passes === 1 ? "Quick scan" : "Thorough scan"}. Search
+                completion does not mean every race is announced or verified.
+              </p>
+              {run.error && (
+                <p role="alert" className="text-sm text-amber-700">
+                  {run.error}
+                </p>
+              )}
+              <div className="space-y-3 rounded-xl bg-slate-50 p-4 text-sm" aria-live="polite">
+                <p className="font-medium text-slate-900">
+                  {working} working · {queued} queued · {failed} failed
+                </p>
+                {working > 0 ? (
+                  <p className="text-slate-600">
+                    Checking sources. A search can take several minutes; findings appear when it
+                    finishes. You can close this page and return later.
+                  </p>
+                ) : run.status === "running" && queued > 0 ? (
+                  <p className="text-slate-600">
+                    Waiting for the next search or scheduled retry. Progress refreshes
+                    automatically.
+                  </p>
+                ) : null}
+                {failed > 0 && run.status !== "cancelled" && (
+                  <p className="text-amber-800">
+                    Some searches stopped after three unsuccessful attempts. Use Retry failed to try
+                    those searches again; completed findings are saved.
+                  </p>
+                )}
+                {data?.activity.map((job) => (
+                  <div
+                    key={job.id}
+                    className="border-t border-slate-200 pt-2 text-xs text-slate-600"
+                  >
+                    <p className="font-medium text-slate-900">
+                      {COLLECTOR_COUNTRIES.find((c) => c.code === job.window.country)?.name}
+                      {job.window.regionCode
+                        ? ` · ${collectionRegion(job.window.country, job.window.regionCode)?.name ?? job.window.regionCode}`
+                        : ""}
+                      {" · "}
+                      {job.window.dateFrom} to {job.window.dateTo} · Pass {job.window.pass}
+                    </p>
+                    <p className="mt-1">
+                      {job.status === "running"
+                        ? `Checking sources · attempt ${job.attempts} of 3`
+                        : job.status === "failed"
+                          ? "Failed after 3 attempts"
+                          : run.status === "running"
+                            ? `Waiting to retry · eligible from ${new Date(job.available_at).toLocaleTimeString()}`
+                            : `Retry ${run.status === "paused" ? "paused" : "stopped"}`}
+                    </p>
+                    {job.error && <p className="mt-1 text-amber-800">Last issue: {job.error}</p>}
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {active && (
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    disabled={control.isPending}
+                    onClick={() => control.mutate(run.status === "paused" ? "resume" : "pause")}
+                  >
+                    {run.status === "paused" ? <Play size={14} /> : <Pause size={14} />}{" "}
+                    {run.status === "paused" ? "Resume" : "Pause"}
+                  </Button>
+                )}
+                {failed > 0 && run.status !== "cancelled" && (
+                  <Button
+                    size="sm"
+                    variant="secondary"
+                    onClick={() => control.mutate("retry")}
+                    disabled={control.isPending}
+                  >
+                    <RotateCcw size={14} />
+                    Retry failed
+                  </Button>
+                )}
+                {active && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => control.mutate("cancel")}
+                    disabled={control.isPending}
+                  >
+                    Stop scan
+                  </Button>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="rounded-xl border border-dashed border-border p-6 text-sm leading-6 text-muted">
+              {embedded
+                ? "No saved race scan is available yet. Open the full race collector to start one; its findings will appear here for review."
+                : "Press Start scan to begin. We’ll search your chosen locations and check for duplicates. New findings will appear here for source review."}
+            </div>
+          )}
+          {run && (
+            <details className="border-t border-border pt-4">
+              <summary className="mb-3 cursor-pointer text-sm font-medium text-fg">
+                Country and state progress
+              </summary>
+              <div className="relative">
+                <Search size={16} className="absolute left-3 top-3 text-muted" />
+                <input
+                  aria-label="Find a country or region"
+                  className={`${inputClass} pl-9`}
+                  placeholder="Find a country or region…"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+              <div className="max-h-72 overflow-auto divide-y divide-border">
+                {countryRows.map((c) => {
+                  const jobs = data?.jobs.filter((j) => j.country === c.code) ?? [];
+                  const total = jobs.reduce((n, j) => n + j.count, 0);
+                  const done = jobs
+                    .filter((j) => j.status === "complete")
+                    .reduce((n, j) => n + j.count, 0);
+                  const running = jobs.some((j) => j.status === "running");
+                  const regionCodes = run
+                    ? [...new Set(jobs.flatMap((j) => (j.regionCode ? [j.regionCode] : [])))]
+                    : selectedRegions(scope, c.code).map((r) => r.code);
+                  const summary = (
+                    <span className="flex items-center justify-between gap-3 py-3 text-sm">
+                      <span className="flex items-center gap-3">
+                        <span className="w-7 text-xs font-semibold text-muted">{c.code}</span>
+                        <span className="text-fg">{c.name}</span>
+                      </span>
+                      <span className="shrink-0 text-xs text-muted">
+                        {running
+                          ? "Searching…"
+                          : total
+                            ? `${done}/${total} searches`
+                            : "Not started"}
+                      </span>
+                    </span>
+                  );
+                  if (!regionCodes.length) return <div key={c.code}>{summary}</div>;
+                  return (
+                    <details key={c.code} open={search ? true : undefined}>
+                      <summary className="cursor-pointer">{summary}</summary>
+                      <div className="mb-3 ml-10 space-y-2 border-l border-border pl-3">
+                        {regionCodes.map((code) => {
+                          const region = collectionRegion(c.code, code);
+                          const rows = jobs.filter((j) => j.regionCode === code);
+                          const total = rows.reduce((n, j) => n + j.count, 0);
+                          const done = rows
+                            .filter((j) => j.status === "complete")
+                            .reduce((n, j) => n + j.count, 0);
+                          const failed = rows
+                            .filter((j) => j.status === "failed")
+                            .reduce((n, j) => n + j.count, 0);
+                          return (
+                            <div
+                              key={code}
+                              className="flex items-center justify-between gap-3 text-xs text-muted"
+                            >
+                              <span>{region?.name ?? code}</span>
+                              <span className="shrink-0">
+                                {rows.some((j) => j.status === "running")
+                                  ? "Searching…"
+                                  : total
+                                    ? `${done}/${total} searches${failed ? ` · ${failed} failed` : ""}`
+                                    : "Not started"}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </details>
+                  );
+                })}
+              </div>
+            </details>
+          )}
+        </section>
+      </div>
+      {run && (
+        <section className="space-y-5 rounded-2xl border border-border bg-surface p-6">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-lg font-semibold text-fg">Keep or dismiss candidates</h2>
+              <p className="mt-1 text-sm text-muted">
+                {data?.decisions.pending ?? 0} to decide · {data?.decisions.kept ?? 0} kept ·{" "}
+                {count("dismissed")} dismissed
+              </p>
+              <p className="mt-2 text-sm text-muted">
+                Keep or dismiss one candidate, or select several and confirm a bulk action. Publish
+                selected adds ready races to RunRecs. Every race retains its information, sources
+                and checks.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2" aria-label="Filter candidate decisions">
+            {DECISION_FILTERS.map((filter) => (
+              <Button
+                key={filter.value}
+                size="sm"
+                variant={reviewQuery.status === filter.value ? "default" : "secondary"}
+                aria-pressed={reviewQuery.status === filter.value}
+                disabled={reviewBusy}
+                onClick={() => changeReview({ status: filter.value })}
+              >
+                {filter.label} ({data?.decisions[filter.value] ?? 0})
+              </Button>
+            ))}
+          </div>
+          <form
+            className="flex flex-wrap items-end gap-3"
+            onSubmit={(event) => {
+              event.preventDefault();
+              changeReview({ search: reviewSearch.trim() });
+            }}
+          >
+            <label className="min-w-48 flex-1 text-xs text-muted">
+              Find a race or review issue
+              <input
+                className={`${inputClass} mt-1`}
+                value={reviewSearch}
+                maxLength={200}
+                placeholder="Race, location, date, distance or reason…"
+                disabled={reviewBusy}
+                onChange={(event) => setReviewSearch(event.target.value)}
+              />
+            </label>
+            <Button type="submit" variant="secondary" disabled={reviewBusy}>
+              <Search size={14} /> Search
+            </Button>
+            <label className="text-xs text-muted">
+              Findings per page
+              <select
+                className={`${inputClass} mt-1`}
+                value={reviewQuery.pageSize}
+                disabled={reviewBusy}
+                onChange={(event) => changeReview({ pageSize: Number(event.target.value) })}
+              >
+                {[25, 50, 100].map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </form>
+          {query.isFetching && (
+            <p role="status" className="text-xs text-muted">
+              Refreshing findings…
+            </p>
+          )}
+          {query.isError && (
+            <p role="alert" className="text-sm text-amber-700">
+              Unable to refresh findings. Please try again.
+            </p>
+          )}
+          <div className="space-y-3">
+            <CollectorCandidateList
+              key={run.id}
+              rows={data?.candidates ?? []}
+              disabled={reviewBusy || query.isPlaceholderData}
+              onDecide={(id, action) => decision.mutate({ id, action })}
+              onBulkAction={(input) => bulk.mutateAsync(input)}
+            />
+            {!data?.candidates.length && (
+              <p className="py-8 text-center text-sm text-muted">
+                {reviewQuery.search
+                  ? "No candidates match this search."
+                  : reviewQuery.status === "pending" && (totalFindings || count("dismissed"))
+                    ? "All caught up. Your decisions are saved in Kept and Dismissed."
+                    : totalFindings || count("dismissed")
+                      ? "No candidates in this list."
+                      : run.status === "complete"
+                        ? "No findings were saved for this scan. Check the search notes for coverage gaps."
+                        : "Findings will appear here as research windows finish."}
+              </p>
+            )}
+          </div>
+          {pageInfo && (
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-muted">
+              <p>
+                {pageInfo.total ? pageInfo.page * pageInfo.pageSize + 1 : 0}–
+                {Math.min((pageInfo.page + 1) * pageInfo.pageSize, pageInfo.total)} of{" "}
+                {pageInfo.total} matching findings · Page {pageInfo.page + 1} of {pageInfo.pages}
+              </p>
+              <div className="flex gap-2">
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  disabled={pageInfo.page === 0 || query.isPlaceholderData || reviewBusy}
+                  onClick={() => changeReview({ page: pageInfo.page - 1 })}
+                >
+                  Previous
+                </Button>
+                <Button
+                  size="sm"
+                  variant="secondary"
+                  disabled={
+                    pageInfo.page + 1 >= pageInfo.pages || query.isPlaceholderData || reviewBusy
+                  }
+                  onClick={() => changeReview({ page: pageInfo.page + 1 })}
+                >
+                  Next
+                </Button>
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+      {run && (
+        <details className="rounded-2xl border border-border bg-surface p-6">
+          <summary className="cursor-pointer text-sm font-semibold text-fg">
+            Search notes and gaps ({gaps.length} recent search reports)
+          </summary>
+          <p className="mt-3 text-xs text-muted">
+            Unannounced dates, inaccessible sources and capped searches stay visible here. A
+            completed search is not an exhaustive country calendar.
+          </p>
+          <div className="mt-4 max-h-96 space-y-4 overflow-auto">
+            {gaps.map((g, i) => (
+              <article key={i} className="border-t border-border pt-3 text-xs text-muted">
+                <strong className="text-fg">
+                  {g.window.country}
+                  {g.window.regionCode
+                    ? ` / ${collectionRegion(g.window.country, g.window.regionCode)?.name ?? g.window.regionCode}`
+                    : ""}{" "}
+                  · {g.window.dateFrom} — {g.window.dateTo} · pass {g.window.pass}
+                </strong>
+                {g.error && <p className="mt-2 text-amber-700">{g.error}</p>}
+                {g.report?.capped && (
+                  <p className="mt-2 text-amber-700">
+                    Candidate limit reached; further research needed.
+                  </p>
+                )}
+                {g.report?.gaps.map((gap, n) => (
+                  <p key={n} className="mt-2">
+                    {gap}
+                  </p>
+                ))}
+                <p className="mt-2">
+                  {g.report?.sources.length ?? 0} sources recorded in the downloadable report.
+                </p>
+              </article>
+            ))}
+          </div>
+        </details>
+      )}
+    </div>
+  );
+}

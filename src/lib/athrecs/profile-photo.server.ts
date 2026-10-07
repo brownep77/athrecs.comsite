@@ -37,7 +37,7 @@ function json(body: unknown, status = 200): Response {
   });
 }
 
-function photoResponse(body: BodyInit, contentType: string, byteSize: number): Response {
+export function photoResponse(body: BodyInit, contentType: string, byteSize: number): Response {
   return new Response(body, {
     headers: {
       "Content-Type": contentType,
@@ -61,11 +61,11 @@ function blobStoreId(): string | null {
   return storeId || null;
 }
 
-function blobStorageConnected(): boolean {
+export function blobStorageConnected(): boolean {
   return Boolean(legacyBlobToken() || blobStoreId());
 }
 
-function blobAuthOptions(): BlobAuthOptions {
+export function blobAuthOptions(): BlobAuthOptions {
   const token = legacyBlobToken();
   if (token) return { token };
   const storeId = blobStoreId();
@@ -94,7 +94,7 @@ function privatePhotoPath(userId: string, contentType: string): string {
   return `athlete-profile-photos/${accountKey}/${Date.now()}-${randomUUID()}.${extension}`;
 }
 
-async function fileSignatureMatches(file: File): Promise<boolean> {
+export async function fileSignatureMatches(file: File): Promise<boolean> {
   const bytes = new Uint8Array(await file.slice(0, 16).arrayBuffer());
   if (file.type === "image/jpeg") {
     return bytes.length >= 3 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
@@ -113,7 +113,7 @@ async function fileSignatureMatches(file: File): Promise<boolean> {
   return false;
 }
 
-function databaseBytes(value: PhotoRow["photo_bytes"]): Uint8Array | null {
+export function databaseBytes(value: PhotoRow["photo_bytes"]): Uint8Array | null {
   if (!value) return null;
   if (value instanceof Uint8Array) return Uint8Array.from(value);
   if (typeof value === "string" && value.startsWith("\\x")) {
@@ -142,7 +142,7 @@ async function currentPhoto(userId: string): Promise<PhotoRow | null> {
   return rows[0] ?? null;
 }
 
-async function deletePrivateBlob(pathname: string | null, label: string): Promise<void> {
+export async function deletePrivateBlob(pathname: string | null, label: string): Promise<void> {
   if (!pathname || !blobStorageConnected()) return;
   try {
     const { del } = await import("@vercel/blob");

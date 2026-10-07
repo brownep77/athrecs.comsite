@@ -14,9 +14,13 @@ import type { SharedAthleteProfile } from "@/lib/athrecs/athlete-profile-share-a
 import { AthleteId } from "./AthleteId";
 import { SuggestProfileEdit } from "./SuggestProfileEdit";
 import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
+import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 
 export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfile }) {
   const sports = [...new Set([...profile.sports, ...profile.results.map((r) => r.sport)])];
+  const connections = profile.connections.filter((connection) =>
+    isPublicProfileSource(connection.url),
+  );
   const bio = profile.bio
     ? publicAthleteBio({
         name: profile.displayName,
@@ -67,9 +71,9 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
           nationality={profile.nationality}
           coaches={profile.coaches}
         />
-        {profile.connections.length ? (
+        {connections.length ? (
           <div className="flex flex-wrap gap-3">
-            {profile.connections.map((connection) => (
+            {connections.map((connection) => (
               <a
                 key={connection.platform}
                 href={connection.url}

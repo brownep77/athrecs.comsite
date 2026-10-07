@@ -290,8 +290,44 @@ try {
     )[0].n,
     9,
   );
+
+  // A new fixture catalogue version takes the full refresh path in production.
+  // Renamed source events must still count as existing catalogue identities.
+  const catalogueMarkers = await sql`
+    select key, value from app_meta
+    where key in ('seed_version', 'clubs_catalogue_version', 'fixtures_catalogue_version')
+    order by key
+  `;
+  const preservedEvents = await sql`select * from events order by id`;
+  const preservedEditions = await sql`select * from editions order by id`;
+  const preservedResults = await sql`select * from results order by id`;
+  const preservedRedirects = await sql`select * from slug_redirects order by entity_type, old_slug`;
+  await sql`
+    update app_meta set value='previous-fixture-catalogue-version'
+    where key in ('seed_version', 'clubs_catalogue_version', 'fixtures_catalogue_version')
+  `;
+  globalThis.__athrecsFullSeedPromise__ = undefined;
+  await ensureAthrecsSeeded();
+  assert.deepEqual(await sql`select * from events order by id`, preservedEvents);
+  assert.deepEqual(await sql`select * from editions order by id`, preservedEditions);
+  assert.deepEqual(await sql`select * from results order by id`, preservedResults);
+  assert.deepEqual(
+    await sql`select * from slug_redirects order by entity_type, old_slug`,
+    preservedRedirects,
+  );
+  assert.deepEqual(
+    await sql`select key, value from app_meta
+      where key in ('seed_version', 'clubs_catalogue_version', 'fixtures_catalogue_version')
+      order by key`,
+    catalogueMarkers,
+  );
+  await assert.rejects(
+    () => sql`insert into events (slug,name,sport)
+      values (${oldSlug},'Must still remain blocked','Running')`,
+    /permanent public URL and cannot be reused/,
+  );
   console.log(
-    "Public-figure refresh passed: source results follow renamed production events, retired URLs remain guarded, catalogue markers stay unchanged and cold starts do not replay the import.",
+    "Public-figure and fixture refresh passed: source results follow renamed production events, full catalogue upgrades preserve events, editions, results and redirects, retired URLs remain guarded and cold starts do not replay the import.",
   );
 } finally {
   await server.close();

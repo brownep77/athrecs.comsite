@@ -48,6 +48,15 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Verify search URLs and sitemap privacy
+        run: npm run verify:search-discovery
+
+      - name: Verify indexing recovery and archive privacy
+        run: node scripts/verify-indexing-recovery.mjs
+
+      - name: Verify race-page event structured data
+        run: node scripts/verify-race-page-schema.mjs
+
       - name: Verify historical result source safeguards
         run: node scripts/verify-result-source-sync.mjs
 
@@ -65,6 +74,12 @@ jobs:
 
       - name: Email-only sign-in form
         run: node scripts/verify-email-code-ui.mjs
+
+      - name: Quick sign-up and optional result discovery
+        run: |
+          node scripts/verify-quick-signin-ui.mjs
+          node scripts/verify-quick-signin-ui.mjs --no-email
+          node scripts/verify-quick-signin-ui.mjs --runrecs
 
       - name: Social recruitment and sourced athlete profile
         run: node scripts/verify-recruitment-ui.mjs
@@ -181,6 +196,8 @@ jobs:
         run: node scripts/browser-sponsorship-smoke.mjs http://127.0.0.1:8080/
 
       - name: Compact athlete profiles and achievements
+        env:
+          BROWSER_SMOKE_MEMBER: "1"
         run: |
           BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Personal bests||Achievements board||Paul Evans||Results history' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/paul-browne "$GITHUB_WORKSPACE/artifacts/paul-compact.png"
@@ -195,7 +212,7 @@ jobs:
       - name: Browser smoke tests
         run: |
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='One sporting identity.||Every competition.||RunRecs||AthRecs||Coming soon' \
+          BROWSER_SMOKE_EXPECT_TEXT='One sporting identity.||Every competition.||AthRecs||Coming soon' \
           BROWSER_SMOKE_REJECT_TEXT='Help improve ATHRECS' \
             node scripts/browser-smoke.mjs \
               http://127.0.0.1:8080/sportsrecs \
@@ -204,7 +221,7 @@ jobs:
           BROWSER_SMOKE_FULL_PAGE=1 \
           BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
           BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
-          BROWSER_SMOKE_EXPECT_TEXT='One sporting identity.||Every competition.||RunRecs||AthRecs||Coming soon' \
+          BROWSER_SMOKE_EXPECT_TEXT='One sporting identity.||Every competition.||AthRecs||Coming soon' \
           BROWSER_SMOKE_REJECT_TEXT='Help improve ATHRECS' \
             node scripts/browser-smoke.mjs \
               http://127.0.0.1:8080/sportsrecs \
@@ -219,9 +236,13 @@ jobs:
           BROWSER_SMOKE_FULL_PAGE=1 \
           BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||Find an athlete||Find events' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-mobile.png"
-          BROWSER_SMOKE_EXPECT_TEXT='Explore athlete profiles||Sport in results' \
+          BROWSER_SMOKE_EXPECT_TEXT='Sign in to view athlete profiles' \
+          BROWSER_SMOKE_REJECT_TEXT='Explore athlete profiles||Sport in results' \
             node scripts/browser-smoke.mjs 'http://127.0.0.1:8080/athletes?country=Ireland' "$GITHUB_WORKSPACE/artifacts/athletes.png"
-          BROWSER_SMOKE_EXPECT_TEXT='Find your next event||RunRecs||World Triathlon||Coming soon' \
+          BROWSER_SMOKE_MEMBER=1 \
+          BROWSER_SMOKE_EXPECT_TEXT='Explore athlete profiles||Sport in results' \
+            node scripts/browser-smoke.mjs 'http://127.0.0.1:8080/athletes?country=Ireland' "$GITHUB_WORKSPACE/artifacts/athletes-member.png"
+          BROWSER_SMOKE_EXPECT_TEXT='Find your next event||AthRecs||World Triathlon||Coming soon' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/find-events "$GITHUB_WORKSPACE/artifacts/find-events.png"
           node scripts/browser-auth-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/athlete-auth.png"
           node scripts/browser-smoke.mjs "http://127.0.0.1:8080/races?sport=Athletics&surface=XC" "$GITHUB_WORKSPACE/artifacts/races.png"
@@ -233,12 +254,12 @@ jobs:
             --silent \
             --show-error \
             --max-time 30 \
-            --output artifacts/boston-marathon-not-found.html \
+            --output artifacts/boston-marathon.html \
             --write-out '%{http_code}' \
             http://127.0.0.1:8080/races/boston-marathon)
-          if [ "$boston_status" != "404" ]; then
-            cat artifacts/boston-marathon-not-found.html
-            echo "Expected non-Athletics Boston Marathon route to return 404, received $boston_status"
+          if [ "$boston_status" != "200" ]; then
+            cat artifacts/boston-marathon.html
+            echo "Expected consolidated Boston Marathon route to return 200, received $boston_status"
             exit 1
           fi
 

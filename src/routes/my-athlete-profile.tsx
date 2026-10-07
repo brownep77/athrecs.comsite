@@ -31,6 +31,7 @@ import { sportIsInAthleteProfileScope } from "@/lib/site-scope";
 import { combineProfileResults } from "@/lib/athrecs/profile-records";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
+import { listMyPotentialResultMatches } from "@/lib/athrecs/result-match-api";
 import { ProfileConnectionsPanel } from "@/components/athletes/ProfileConnectionsPanel";
 import { ProfileProgress } from "@/components/athletes/ProfileProgress";
 import { AthleteId } from "@/components/athletes/AthleteId";
@@ -53,6 +54,14 @@ function MyAthleteProfilePage() {
   const { user, isPending: sessionPending } = useCurrentUserState();
   const queryClient = useQueryClient();
   const [selectedSport, setSelectedSport] = useState("All sports");
+  const potentialMatches = useQuery({
+    queryKey: ["my-potential-result-matches", user?.id],
+    queryFn: () => listMyPotentialResultMatches(),
+    enabled: Boolean(user),
+    staleTime: 60_000,
+    refetchInterval: 60_000,
+    retry: false,
+  });
   const account = useQuery({
     queryKey: ["my-athlete-account"],
     queryFn: () => getMyAthleteAccount(),
@@ -308,7 +317,10 @@ function MyAthleteProfilePage() {
             About & sports
           </TabsTrigger>
           <TabsTrigger value="matches" className="min-h-10 text-sm">
-            Find my results
+            Potential results
+            {potentialMatches.data?.matches.length
+              ? ` (${potentialMatches.data.matches.length}${potentialMatches.data.truncated ? "+" : ""})`
+              : ""}
           </TabsTrigger>
           <TabsTrigger value="connections" className="min-h-10 text-sm">
             Linked profiles

@@ -1,6 +1,17 @@
 # Excel results import and bulk review
 
-Staff entry: `/admin/import-results` on `update.athrecs.com`.
+Staff entry: `/admin/athlete-tools?section=upload` on `update.athrecs.com`.
+Choose **Excel/CSV grouped import** within **Results file**. The existing
+**Source-reviewed results** workflow remains available alongside it. Both tools
+load on demand and keep their forms/files when switching workflows or hub sections.
+Single athlete, Find profiles, Review results, Club scans, Collected results and
+Claim conflicts & emails retain their existing navigation and protection.
+
+`/admin/import-results` remains a compatible staff URL, opening the same hub with
+the Excel option selected. Saved `batch` URLs on either route restore the creator's
+private preview through the existing staff API. Saving a preview preserves existing
+query parameters and records the Results file section. The staff shell and its
+Google/allowlist/host checks are retained from main.
 
 ## Staff workflow
 
@@ -30,6 +41,34 @@ This import path requires the existing staff-host, Google and email-allowlist mi
 
 `node --experimental-strip-types scripts/verify-result-upload.mjs`
 
+`node scripts/verify-athlete-tools-browser.mjs` exercises the actual hub and route
+components with fictional APIs on desktop/mobile: both importers, retained files,
+column inspection, explicit timing confirmation, source-permission rejection and
+saved batch routes. `node scripts/verify-backend-tasks.mjs` checks staff links and
+coverage, including the compatibility alias. No browser fixture writes live data.
+
 The full command uses synthetic Excel workbooks and an isolated PGlite database. The dedicated workflow also builds routes, type-checks and lints without production database credentials. The server source adapter still needs fixture/integration review against real provider DOM changes; passing parser or database tests alone is not athlete identity verification.
 
 Current bounded limits: 3 MB compressed file, 25 MB declared XLSX expansion, 5,000 rows, 100 columns, 20 visible sheets, 100 rows per write transaction, and 50,000 live athlete/event records for identity/event lookup. Exceeding a bound stops rather than silently truncating and creating potentially duplicate records. Protected records, alternative names not inferable from the source, non-finishers, changed results and race aliases outside exact normalization require separate review.
+
+## 7 October 2026 integration review
+
+Merged main `49b150c4ae882e0b155ddd2a9749b190c56c03b9` into the draft branch,
+including merged PR #563's consolidated tools. Local verification passed:
+synthetic Excel/source DOM/PGlite importer checks; actual API preview/RunRecs
+write guards before database access; hub and saved-batch-route desktop/mobile
+browser checks; backend navigation; existing source-reviewed importer; athlete-link,
+account, private archive, conflict-flow and signup-ownership regressions; and the
+full `npm run ci:verify` gate including typecheck, full lint and application build.
+Production database credentials were absent and build publication hooks skipped
+writes in preview mode. Diff checks against main passed.
+
+The separate legacy `verify-staff-microsite.mjs` check still fails its already
+documented inline `socialProviders: {` assertion against unchanged main auth code.
+No authentication code was changed to accommodate that stale assertion.
+
+Browser APIs and source DOM are synthetic, email sends are mocked, and PGlite
+checks do not exercise independent concurrent PostgreSQL sessions. Authenticated
+hosted production imports, real provider changes and production delivery were not
+exercised. This remains a draft integration for review, with no production participant
+imports, profile publication or email sends.

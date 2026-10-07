@@ -1,3 +1,4 @@
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { useState } from "react";
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
@@ -59,7 +60,7 @@ function filtersFromSearch(search: CountryRaceSearch, country: string): EventSea
   return {
     ...EMPTY_SEARCH,
     q: search.q ?? "",
-    sport: search.sport ?? EMPTY_SEARCH.sport,
+    sport: search.sport ?? "Running",
     country,
     county: search.county ?? "",
     city: search.city ?? "",
@@ -78,7 +79,7 @@ function searchFromFilters(filters: EventSearchValues): CountryRaceSearch {
   const api = searchToApi(filters);
   return {
     q: api.q,
-    sport: api.sport as Sport | undefined,
+    sport: filters.sport === "Running" ? undefined : filters.sport as Sport,
     county: api.county,
     city: api.city,
     postcode: api.postcode,
@@ -121,7 +122,7 @@ export const Route = createFileRoute("/$language/$country/races/")({
       data: {
         ...api,
         country: site.country,
-        sport: api.sport as Sport | undefined,
+        sport: filters.sport as Sport,
         upcomingOnly: !filters.dateFrom && !filters.dateTo && !filters.month,
         limit: PAGE_SIZE + 1,
         offset: ((deps.page ?? 1) - 1) * PAGE_SIZE,
@@ -129,19 +130,17 @@ export const Route = createFileRoute("/$language/$country/races/")({
     });
     return { site, language: params.language, races };
   },
-  head: ({ loaderData }) => {
+  head: ({ loaderData, match }) => {
     if (!loaderData) return {};
     const { site, language } = loaderData;
     const copy = copyForLanguage(language);
     const country = displayCountryForLanguage(site, language);
+    const page = match.search.page ?? 1;
+    const url = `${SITE_URL}/${language}/${site.slug}/races${page > 1 ? `?page=${page}` : ""}`;
+    const filtered = Object.entries(match.search).some(([key, value]) => key !== "page" && Boolean(value));
     return {
-      meta: [
-        { title: `${translateCountryText(copy.racesIn, country)} | ATHRECS` },
-        {
-          name: "description",
-          content: translateCountryText(copy.racesIntro, country),
-        },
-      ],
+      meta: siteGraphMeta({ title: `${translateCountryText(copy.racesIn, country)}${page > 1 ? ` — ${page}` : ""} | ATHRECS`, description: translateCountryText(copy.racesIntro, country), url }).map((tag) => (filtered || loaderData.races.length === 0) && "name" in tag && tag.name === "robots" ? { name: "robots", content: "noindex, follow" } : tag),
+      links: [{ rel: "canonical", href: url }],
     };
   },
   component: CountryRacesPage,
@@ -233,6 +232,7 @@ function CountryRacesPage() {
         >
           <EventSearch
             value={filters}
+            defaultSport="Running"
             onChange={updateFilters}
             fixedCountry={site.country}
             fixedCountryLabel={country}

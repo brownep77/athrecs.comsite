@@ -28,7 +28,7 @@ import {
   type ExternalRunnerMatchSource,
 } from "@/lib/athrecs/grok-runner-search-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
-import { sportIsInAthleteProfileScope } from "@/lib/site-scope";
+import { IS_ATHRECS_SITE, sportIsInAthleteProfileScope } from "@/lib/site-scope";
 import { submitResultClaim } from "@/lib/athrecs/result-claims-api";
 import {
   dismissMyAthleteMatch,
@@ -109,7 +109,7 @@ function actionLabel(match: PotentialResultMatch): string {
     return "Claim again";
   }
   if (match.ownedByAnotherAccount) return "Submit ownership claim";
-  return "Add to my profile";
+  return "Claim this result";
 }
 
 export function PotentialResultMatchesPanel() {
@@ -161,6 +161,7 @@ export function PotentialResultMatchesPanel() {
     enabled: Boolean(user),
     retry: false,
     staleTime: 60_000,
+    refetchInterval: 60_000,
   });
   const external = useQuery({
     queryKey: ["my-external-runner-matches", user?.id],
@@ -187,7 +188,10 @@ export function PotentialResultMatchesPanel() {
     return (
       <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
         Potential result matches could not be loaded. Your Athlete Account and existing claims are
-        unaffected.
+        unaffected.{" "}
+        <button type="button" className="underline" onClick={() => void matches.refetch()}>
+          Try again
+        </button>
       </section>
     );
   }
@@ -217,10 +221,11 @@ export function PotentialResultMatchesPanel() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Add this result to your profile?</AlertDialogTitle>
+            <AlertDialogTitle>Claim this result?</AlertDialogTitle>
             <AlertDialogDescription>
               {confirmMatch?.athleteName} · {confirmMatch?.eventName}. Confirm this is your result.
-              Other results attached to the same athlete record will also appear in your profile.
+              ATHRECS will check your identity before adding this athlete record and its results to
+              your private profile.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -232,7 +237,7 @@ export function PotentialResultMatchesPanel() {
                 if (confirmMatch) addMatch.mutate(confirmMatch.resultId);
               }}
             >
-              {addMatch.isPending ? "Adding…" : "This is my result"}
+              {addMatch.isPending ? "Submitting…" : "Submit claim for review"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -247,7 +252,7 @@ export function PotentialResultMatchesPanel() {
           </div>
           <p className="mt-2 text-sm leading-6 text-muted">
             These are suggestions, not confirmed ownership. Confirm your result, or choose Not me to
-            dismiss that athlete. Competing ownership claims go to staff for review.
+            dismiss that athlete. All new ownership claims go to staff for an identity check.
           </p>
           {data.searchedNames.length ? (
             <p className="mt-2 text-xs text-subtle">Checked: {data.searchedNames.join(" · ")}</p>
@@ -262,8 +267,15 @@ export function PotentialResultMatchesPanel() {
         <div className="flex items-start gap-3 p-5 text-sm text-muted">
           <CircleAlert className="mt-0.5 size-5 shrink-0 text-accent" aria-hidden="true" />
           <p>
-            Add and save your full name in the Identity section below. ATHRECS will then compare it
-            with athlete names in the results database.
+            Add and save your full name in{" "}
+            <Link
+              to="/athlete-account"
+              search={IS_ATHRECS_SITE ? { section: "identity" } : {}}
+              className="font-medium text-accent underline"
+            >
+              your personal details
+            </Link>
+            . ATHRECS will then compare it with athlete names in the results database.
           </p>
         </div>
       ) : data.matches.length === 0 ? (
@@ -363,7 +375,7 @@ export function PotentialResultMatchesPanel() {
                     }}
                   >
                     <Trophy className="size-4" aria-hidden="true" />
-                    Add to my profile
+                    {actionLabel(match)}
                   </Button>
                 )}
                 <Button
@@ -459,7 +471,7 @@ export function PotentialResultMatchesPanel() {
           {!searchPublic ? (
             <p className="mt-3 text-xs text-subtle">
               Save your name first. Turn on Performance and habit insights if you want ATHRECS to
-              ask Grok to look outside the ATHRECS database.
+              search public result sites for more of your races.
             </p>
           ) : external.isFetching ? (
             <p className="mt-4 flex items-center gap-2 text-sm text-muted">
