@@ -279,7 +279,11 @@ try {
       assert(html.includes("Your sporting life,"));
       assert(html.includes('href="/races"'), "Homepage must link to AthRecs fixtures");
       assert(html.includes('href="/sports/road-running"'));
-      assert(!html.includes("https://www.runrecs.com/races"));
+      assert(
+        html.includes('href="https://www.runrecs.com/races"') &&
+          html.includes("More running events on RunRecs"),
+        "The approved homepage must label its separate RunRecs destination",
+      );
       assert(!html.includes("Upcoming athletics"));
     }
     if (path === "/find-events") assert(html.includes("https://triathlon.org/events"));

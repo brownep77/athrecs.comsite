@@ -40,7 +40,9 @@ search, sport filters, empty states and SSR. It never connects to production.
   existing session middleware and omits performances for anonymous/invalid
   sessions, while preserving public event discovery. Signed-in readers still
   pass through the original owner-sharing, hidden-result and eligibility rules.
-  Client feed caches are separated by viewer and hidden on logout.
+  The profile endpoint and homepage reuse one authenticated server reader so
+  preview bearer sessions reach the same privacy-filtered query. Client feed
+  caches are separated by viewer and hidden on logout.
 - The device-local shortlist and public-sharing controls are unchanged. RunRecs
   routes, filters, event destinations and publication code are unchanged.
 - Git-triggered Vercel deployments are disabled for

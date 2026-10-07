@@ -139,9 +139,11 @@ try {
   assert(token);
   const home = await rpc("getHomeDiscovery", {}, token);
   assert.equal(home.canViewProfiles, true);
+  console.log("Header-authenticated homepage profile reads passed");
   const clientHome = await rpc("getHomeDiscovery", {}, token, true);
   assert.equal(clientHome.canViewProfiles, true);
   assert.deepEqual(clientHome.people, home.people);
+  console.log("Client-context authenticated homepage profile reads passed");
   assert(home.directory.publicAthletes > 0);
   assert(home.people.length > 0, "Seed catalogue should provide real public spotlights");
   for (const person of home.people) {

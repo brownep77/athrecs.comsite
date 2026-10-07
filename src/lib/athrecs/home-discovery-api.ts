@@ -4,7 +4,7 @@ import { profileSessionMiddleware } from "@/lib/auth/profile-access";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { getAthleteDirectory } from "./athlete-directory-api";
-import { getAthleteBySlug, listEvents } from "./api";
+import { listEvents } from "./api";
 import { homeProfileSlugs } from "./home-discovery.server";
 import { findPersonalBests, timingBasis } from "./profile-records";
 import { buildProfileAchievements, isCompletedResult } from "./profile-achievements";
@@ -44,7 +44,12 @@ export const getHomeDiscovery = createServerFn({ method: "GET" })
         ),
       ),
     ]);
-    const profiles = await Promise.all(slugs.map(({ slug }) => getAthleteBySlug({ data: slug })));
+    // Reuse the same authenticated reader as the public profile endpoint,
+    // preserving the current request's preview token across nested reads.
+    const { readPublishedAthleteProfile } = await import("./public-athlete-profile.server");
+    const profiles = await Promise.all(
+      slugs.map(({ slug }) => readPublishedAthleteProfile(slug, context.bearerToken)),
+    );
     const today = todayIso();
     const people = profiles.flatMap((profile) => {
       if (!profile) return [];
