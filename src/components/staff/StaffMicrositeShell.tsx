@@ -36,6 +36,18 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
   {
+    to: "/admin/athlete-tools",
+    label: "Add or update athletes",
+    icon: UserRoundCog,
+    match: (path: string) => ["/admin/athlete-tools", "/admin/athlete-workspace", "/admin/athlete-directory", "/admin/check-results-upload", "/admin/club-scanner"].includes(path) || path.startsWith("/admin/athletes/"),
+  },
+  {
+    to: "/admin/approvals",
+    label: "Approvals",
+    icon: BadgeCheck,
+    match: (path: string) => path.startsWith("/admin/approvals"),
+  },
+  {
     to: "/admin/check-results-upload",
     label: "Import athletes & results",
     icon: Database,
@@ -217,7 +229,7 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
       setSignInError(null);
       try {
         // Fixed first-party destination, never an arbitrary user-supplied redirect.
-        const returnTo = pathname === "/admin/check-results-upload" ? "/admin/check-results-upload" : "/admin";
+        const returnTo = pathname === "/admin/athlete-tools" ? "/admin/athlete-tools" : pathname === "/admin/check-results-upload" ? "/admin/check-results-upload" : "/admin";
         await signIn("grok-google", {
           callbackURL: returnTo,
           errorCallbackURL: returnTo,
@@ -291,7 +303,7 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
           <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-4 py-2 md:px-6">
             {IS_ATHRECS_SITE ? <a href="/admin#backend-tasks" className="inline-flex min-h-10 shrink-0 items-center rounded-md bg-cyan-300 px-3 text-sm font-semibold text-slate-950 no-underline hover:bg-cyan-200">All backend tasks</a> : null}
             {staffNav
-              .filter((item) => IS_ATHRECS_SITE || (item.to !== "/admin/partnerships" && item.to !== "/admin/check-results-upload"))
+              .filter((item) => IS_ATHRECS_SITE ? !["/admin/check-results-upload", "/admin/athlete-directory", "/admin/club-scanner"].includes(item.to) : !["/admin/partnerships", "/admin/check-results-upload", "/admin/athlete-tools"].includes(item.to))
               .map((item) => {
                 const active = item.match(pathname);
                 return (

@@ -28,8 +28,10 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminApprovalsRouteImport } from './routes/admin/approvals'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
 import { Route as AdminAthleteDirectoryRouteImport } from './routes/admin/athlete-directory'
+import { Route as AdminAthleteToolsRouteImport } from './routes/admin/athlete-tools'
 import { Route as AdminAthleteWorkspaceRouteImport } from './routes/admin/athlete-workspace'
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
 import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/admin/catalogue-recovery-emergency'
@@ -45,10 +47,12 @@ import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-cla
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
 import { Route as AdminSponsorshipRouteImport } from './routes/admin/sponsorship'
+import { Route as ApiAthletePhotosRouteImport } from './routes/api/athlete-photos'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
 import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scanner-worker'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
+import { Route as ApiResultClaimAlertsRouteImport } from './routes/api/result-claim-alerts'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as BrandsIndexRouteImport } from './routes/brands/index'
@@ -58,13 +62,19 @@ import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
 import { Route as ClubsSlugRouteImport } from './routes/clubs/$slug'
 import { Route as NewsIndexRouteImport } from './routes/news/index'
 import { Route as NewsSlugRouteImport } from './routes/news/$slug'
+import { Route as RaceReportsIndexRouteImport } from './routes/race-reports/index'
+import { Route as RaceReportsSlugRouteImport } from './routes/race-reports/$slug'
 import { Route as RacesIndexRouteImport } from './routes/races/index'
 import { Route as RacesSlugRouteImport } from './routes/races/$slug'
 import { Route as ResultsIndexRouteImport } from './routes/results/index'
 import { Route as ResultsEditionIdRouteImport } from './routes/results/$editionId'
 import { Route as ResultsBerlinMarathon2026RouteImport } from './routes/results/berlin-marathon-2026'
+import { Route as ResultsBureValley102026RouteImport } from './routes/results/bure-valley-10-2026'
 import { Route as RunningIndexRouteImport } from './routes/running/index'
 import { Route as RunningGuideRouteImport } from './routes/running/$guide'
+import { Route as RunningCalendarRouteImport } from './routes/running/calendar'
+import { Route as RunningEventsRouteImport } from './routes/running/events'
+import { Route as RunningRaceSeriesRouteImport } from './routes/running/race-series'
 import { Route as RunningUkMarathonsRouteImport } from './routes/running/uk-marathons'
 import { Route as RunningUkRoadUltramarathonsRouteImport } from './routes/running/uk-road-ultramarathons'
 import { Route as SitemapsFileRouteImport } from './routes/sitemaps/$file'
@@ -173,6 +183,11 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminApprovalsRoute = AdminApprovalsRouteImport.update({
+  id: '/admin/approvals',
+  path: '/admin/approvals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminAthleteAccountsRoute = AdminAthleteAccountsRouteImport.update({
   id: '/admin/athlete-accounts',
   path: '/admin/athlete-accounts',
@@ -181,6 +196,11 @@ const AdminAthleteAccountsRoute = AdminAthleteAccountsRouteImport.update({
 const AdminAthleteDirectoryRoute = AdminAthleteDirectoryRouteImport.update({
   id: '/admin/athlete-directory',
   path: '/admin/athlete-directory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAthleteToolsRoute = AdminAthleteToolsRouteImport.update({
+  id: '/admin/athlete-tools',
+  path: '/admin/athlete-tools',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminAthleteWorkspaceRoute = AdminAthleteWorkspaceRouteImport.update({
@@ -260,6 +280,11 @@ const AdminSponsorshipRoute = AdminSponsorshipRouteImport.update({
   path: '/admin/sponsorship',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAthletePhotosRoute = ApiAthletePhotosRouteImport.update({
+  id: '/api/athlete-photos',
+  path: '/api/athlete-photos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAthleteProfilePhotoRoute = ApiAthleteProfilePhotoRouteImport.update({
   id: '/api/athlete-profile-photo',
   path: '/api/athlete-profile-photo',
@@ -278,6 +303,11 @@ const ApiClubScannerWorkerRoute = ApiClubScannerWorkerRouteImport.update({
 const ApiRaceCollectorWorkerRoute = ApiRaceCollectorWorkerRouteImport.update({
   id: '/api/race-collector-worker',
   path: '/api/race-collector-worker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiResultClaimAlertsRoute = ApiResultClaimAlertsRouteImport.update({
+  id: '/api/result-claim-alerts',
+  path: '/api/result-claim-alerts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AthletesIndexRoute = AthletesIndexRouteImport.update({
@@ -325,6 +355,16 @@ const NewsSlugRoute = NewsSlugRouteImport.update({
   path: '/news/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RaceReportsIndexRoute = RaceReportsIndexRouteImport.update({
+  id: '/race-reports/',
+  path: '/race-reports/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RaceReportsSlugRoute = RaceReportsSlugRouteImport.update({
+  id: '/race-reports/$slug',
+  path: '/race-reports/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RacesIndexRoute = RacesIndexRouteImport.update({
   id: '/races/',
   path: '/races/',
@@ -351,6 +391,11 @@ const ResultsBerlinMarathon2026Route =
     path: '/results/berlin-marathon-2026',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ResultsBureValley102026Route = ResultsBureValley102026RouteImport.update({
+  id: '/results/bure-valley-10-2026',
+  path: '/results/bure-valley-10-2026',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RunningIndexRoute = RunningIndexRouteImport.update({
   id: '/running/',
   path: '/running/',
@@ -359,6 +404,21 @@ const RunningIndexRoute = RunningIndexRouteImport.update({
 const RunningGuideRoute = RunningGuideRouteImport.update({
   id: '/running/$guide',
   path: '/running/$guide',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RunningCalendarRoute = RunningCalendarRouteImport.update({
+  id: '/running/calendar',
+  path: '/running/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RunningEventsRoute = RunningEventsRouteImport.update({
+  id: '/running/events',
+  path: '/running/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RunningRaceSeriesRoute = RunningRaceSeriesRouteImport.update({
+  id: '/running/race-series',
+  path: '/running/race-series',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RunningUkMarathonsRoute = RunningUkMarathonsRouteImport.update({
@@ -446,8 +506,10 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -463,19 +525,26 @@ export interface FileRoutesByFullPath {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
+  '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
+  '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/calendar': typeof RunningCalendarRoute
+  '/running/events': typeof RunningEventsRoute
+  '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -485,6 +554,7 @@ export interface FileRoutesByFullPath {
   '/brands/': typeof BrandsIndexRoute
   '/clubs/': typeof ClubsIndexRoute
   '/news/': typeof NewsIndexRoute
+  '/race-reports/': typeof RaceReportsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/results/': typeof ResultsIndexRoute
   '/running/': typeof RunningIndexRoute
@@ -516,8 +586,10 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -533,19 +605,26 @@ export interface FileRoutesByTo {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
+  '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
+  '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/calendar': typeof RunningCalendarRoute
+  '/running/events': typeof RunningEventsRoute
+  '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -555,6 +634,7 @@ export interface FileRoutesByTo {
   '/brands': typeof BrandsIndexRoute
   '/clubs': typeof ClubsIndexRoute
   '/news': typeof NewsIndexRoute
+  '/race-reports': typeof RaceReportsIndexRoute
   '/races': typeof RacesIndexRoute
   '/results': typeof ResultsIndexRoute
   '/running': typeof RunningIndexRoute
@@ -587,8 +667,10 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
+  '/admin/athlete-tools': typeof AdminAthleteToolsRoute
   '/admin/athlete-workspace': typeof AdminAthleteWorkspaceRoute
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
@@ -604,19 +686,26 @@ export interface FileRoutesById {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
+  '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
   '/news/$slug': typeof NewsSlugRoute
+  '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
   '/results/$editionId': typeof ResultsEditionIdRoute
   '/results/berlin-marathon-2026': typeof ResultsBerlinMarathon2026Route
+  '/results/bure-valley-10-2026': typeof ResultsBureValley102026Route
   '/running/$guide': typeof RunningGuideRoute
+  '/running/calendar': typeof RunningCalendarRoute
+  '/running/events': typeof RunningEventsRoute
+  '/running/race-series': typeof RunningRaceSeriesRoute
   '/running/uk-marathons': typeof RunningUkMarathonsRoute
   '/running/uk-road-ultramarathons': typeof RunningUkRoadUltramarathonsRoute
   '/sitemaps/$file': typeof SitemapsFileRoute
@@ -626,6 +715,7 @@ export interface FileRoutesById {
   '/brands/': typeof BrandsIndexRoute
   '/clubs/': typeof ClubsIndexRoute
   '/news/': typeof NewsIndexRoute
+  '/race-reports/': typeof RaceReportsIndexRoute
   '/races/': typeof RacesIndexRoute
   '/results/': typeof ResultsIndexRoute
   '/running/': typeof RunningIndexRoute
@@ -659,8 +749,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -676,19 +768,26 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
+    | '/api/result-claim-alerts'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
+    | '/race-reports/$slug'
     | '/races/$slug'
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
+    | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/calendar'
+    | '/running/events'
+    | '/running/race-series'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -698,6 +797,7 @@ export interface FileRouteTypes {
     | '/brands/'
     | '/clubs/'
     | '/news/'
+    | '/race-reports/'
     | '/races/'
     | '/results/'
     | '/running/'
@@ -729,8 +829,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -746,19 +848,26 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
+    | '/api/result-claim-alerts'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
+    | '/race-reports/$slug'
     | '/races/$slug'
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
+    | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/calendar'
+    | '/running/events'
+    | '/running/race-series'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -768,6 +877,7 @@ export interface FileRouteTypes {
     | '/brands'
     | '/clubs'
     | '/news'
+    | '/race-reports'
     | '/races'
     | '/results'
     | '/running'
@@ -799,8 +909,10 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
+    | '/admin/athlete-tools'
     | '/admin/athlete-workspace'
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
@@ -816,19 +928,26 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
     | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
+    | '/api/result-claim-alerts'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
     | '/clubs/$slug'
     | '/news/$slug'
+    | '/race-reports/$slug'
     | '/races/$slug'
     | '/results/$editionId'
     | '/results/berlin-marathon-2026'
+    | '/results/bure-valley-10-2026'
     | '/running/$guide'
+    | '/running/calendar'
+    | '/running/events'
+    | '/running/race-series'
     | '/running/uk-marathons'
     | '/running/uk-road-ultramarathons'
     | '/sitemaps/$file'
@@ -838,6 +957,7 @@ export interface FileRouteTypes {
     | '/brands/'
     | '/clubs/'
     | '/news/'
+    | '/race-reports/'
     | '/races/'
     | '/results/'
     | '/running/'
@@ -870,8 +990,10 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SponsorshipRoute: typeof SponsorshipRoute
   SportsrecsRoute: typeof SportsrecsRoute
+  AdminApprovalsRoute: typeof AdminApprovalsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminAthleteDirectoryRoute: typeof AdminAthleteDirectoryRoute
+  AdminAthleteToolsRoute: typeof AdminAthleteToolsRoute
   AdminAthleteWorkspaceRoute: typeof AdminAthleteWorkspaceRoute
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
   AdminCatalogueRecoveryEmergencyRoute: typeof AdminCatalogueRecoveryEmergencyRoute
@@ -887,19 +1009,26 @@ export interface RootRouteChildren {
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
   AdminSponsorshipRoute: typeof AdminSponsorshipRoute
+  ApiAthletePhotosRoute: typeof ApiAthletePhotosRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
   ApiClubScannerWorkerRoute: typeof ApiClubScannerWorkerRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
+  ApiResultClaimAlertsRoute: typeof ApiResultClaimAlertsRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   BrandsManageRoute: typeof BrandsManageRoute
   BrandsRegisterRoute: typeof BrandsRegisterRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
   NewsSlugRoute: typeof NewsSlugRoute
+  RaceReportsSlugRoute: typeof RaceReportsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
   ResultsEditionIdRoute: typeof ResultsEditionIdRoute
   ResultsBerlinMarathon2026Route: typeof ResultsBerlinMarathon2026Route
+  ResultsBureValley102026Route: typeof ResultsBureValley102026Route
   RunningGuideRoute: typeof RunningGuideRoute
+  RunningCalendarRoute: typeof RunningCalendarRoute
+  RunningEventsRoute: typeof RunningEventsRoute
+  RunningRaceSeriesRoute: typeof RunningRaceSeriesRoute
   RunningUkMarathonsRoute: typeof RunningUkMarathonsRoute
   RunningUkRoadUltramarathonsRoute: typeof RunningUkRoadUltramarathonsRoute
   SitemapsFileRoute: typeof SitemapsFileRoute
@@ -909,6 +1038,7 @@ export interface RootRouteChildren {
   BrandsIndexRoute: typeof BrandsIndexRoute
   ClubsIndexRoute: typeof ClubsIndexRoute
   NewsIndexRoute: typeof NewsIndexRoute
+  RaceReportsIndexRoute: typeof RaceReportsIndexRoute
   RacesIndexRoute: typeof RacesIndexRoute
   ResultsIndexRoute: typeof ResultsIndexRoute
   RunningIndexRoute: typeof RunningIndexRoute
@@ -1057,6 +1187,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/approvals': {
+      id: '/admin/approvals'
+      path: '/admin/approvals'
+      fullPath: '/admin/approvals'
+      preLoaderRoute: typeof AdminApprovalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/athlete-accounts': {
       id: '/admin/athlete-accounts'
       path: '/admin/athlete-accounts'
@@ -1069,6 +1206,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/athlete-directory'
       fullPath: '/admin/athlete-directory'
       preLoaderRoute: typeof AdminAthleteDirectoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/athlete-tools': {
+      id: '/admin/athlete-tools'
+      path: '/admin/athlete-tools'
+      fullPath: '/admin/athlete-tools'
+      preLoaderRoute: typeof AdminAthleteToolsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/athlete-workspace': {
@@ -1176,6 +1320,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminSponsorshipRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/athlete-photos': {
+      id: '/api/athlete-photos'
+      path: '/api/athlete-photos'
+      fullPath: '/api/athlete-photos'
+      preLoaderRoute: typeof ApiAthletePhotosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/athlete-profile-photo': {
       id: '/api/athlete-profile-photo'
       path: '/api/athlete-profile-photo'
@@ -1202,6 +1353,13 @@ declare module '@tanstack/react-router' {
       path: '/api/race-collector-worker'
       fullPath: '/api/race-collector-worker'
       preLoaderRoute: typeof ApiRaceCollectorWorkerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/result-claim-alerts': {
+      id: '/api/result-claim-alerts'
+      path: '/api/result-claim-alerts'
+      fullPath: '/api/result-claim-alerts'
+      preLoaderRoute: typeof ApiResultClaimAlertsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/athletes/': {
@@ -1267,6 +1425,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/race-reports/': {
+      id: '/race-reports/'
+      path: '/race-reports'
+      fullPath: '/race-reports/'
+      preLoaderRoute: typeof RaceReportsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/race-reports/$slug': {
+      id: '/race-reports/$slug'
+      path: '/race-reports/$slug'
+      fullPath: '/race-reports/$slug'
+      preLoaderRoute: typeof RaceReportsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/races/': {
       id: '/races/'
       path: '/races'
@@ -1302,6 +1474,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ResultsBerlinMarathon2026RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/results/bure-valley-10-2026': {
+      id: '/results/bure-valley-10-2026'
+      path: '/results/bure-valley-10-2026'
+      fullPath: '/results/bure-valley-10-2026'
+      preLoaderRoute: typeof ResultsBureValley102026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/running/': {
       id: '/running/'
       path: '/running'
@@ -1314,6 +1493,27 @@ declare module '@tanstack/react-router' {
       path: '/running/$guide'
       fullPath: '/running/$guide'
       preLoaderRoute: typeof RunningGuideRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/running/calendar': {
+      id: '/running/calendar'
+      path: '/running/calendar'
+      fullPath: '/running/calendar'
+      preLoaderRoute: typeof RunningCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/running/events': {
+      id: '/running/events'
+      path: '/running/events'
+      fullPath: '/running/events'
+      preLoaderRoute: typeof RunningEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/running/race-series': {
+      id: '/running/race-series'
+      path: '/running/race-series'
+      fullPath: '/running/race-series'
+      preLoaderRoute: typeof RunningRaceSeriesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/running/uk-marathons': {
@@ -1422,8 +1622,10 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SponsorshipRoute: SponsorshipRoute,
   SportsrecsRoute: SportsrecsRoute,
+  AdminApprovalsRoute: AdminApprovalsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminAthleteDirectoryRoute: AdminAthleteDirectoryRoute,
+  AdminAthleteToolsRoute: AdminAthleteToolsRoute,
   AdminAthleteWorkspaceRoute: AdminAthleteWorkspaceRoute,
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
   AdminCatalogueRecoveryEmergencyRoute: AdminCatalogueRecoveryEmergencyRoute,
@@ -1439,19 +1641,26 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
   AdminSponsorshipRoute: AdminSponsorshipRoute,
+  ApiAthletePhotosRoute: ApiAthletePhotosRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
   ApiClubScannerWorkerRoute: ApiClubScannerWorkerRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
+  ApiResultClaimAlertsRoute: ApiResultClaimAlertsRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   BrandsManageRoute: BrandsManageRoute,
   BrandsRegisterRoute: BrandsRegisterRoute,
   ClubsSlugRoute: ClubsSlugRoute,
   NewsSlugRoute: NewsSlugRoute,
+  RaceReportsSlugRoute: RaceReportsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,
   ResultsEditionIdRoute: ResultsEditionIdRoute,
   ResultsBerlinMarathon2026Route: ResultsBerlinMarathon2026Route,
+  ResultsBureValley102026Route: ResultsBureValley102026Route,
   RunningGuideRoute: RunningGuideRoute,
+  RunningCalendarRoute: RunningCalendarRoute,
+  RunningEventsRoute: RunningEventsRoute,
+  RunningRaceSeriesRoute: RunningRaceSeriesRoute,
   RunningUkMarathonsRoute: RunningUkMarathonsRoute,
   RunningUkRoadUltramarathonsRoute: RunningUkRoadUltramarathonsRoute,
   SitemapsFileRoute: SitemapsFileRoute,
@@ -1461,6 +1670,7 @@ const rootRouteChildren: RootRouteChildren = {
   BrandsIndexRoute: BrandsIndexRoute,
   ClubsIndexRoute: ClubsIndexRoute,
   NewsIndexRoute: NewsIndexRoute,
+  RaceReportsIndexRoute: RaceReportsIndexRoute,
   RacesIndexRoute: RacesIndexRoute,
   ResultsIndexRoute: ResultsIndexRoute,
   RunningIndexRoute: RunningIndexRoute,
@@ -1478,10 +1688,11 @@ export const routeTree = rootRouteImport
   ._addFileTypes<FileRouteTypes>()
 
 import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { startInstance } from './start.ts'
 declare module '@tanstack/react-start' {
   interface Register {
     ssr: true
     router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
   }
 }

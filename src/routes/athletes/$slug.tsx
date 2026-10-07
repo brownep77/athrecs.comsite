@@ -1,6 +1,11 @@
+import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
+import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
+import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
+import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
+import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
 import {
   EditorialAthleteOverview,
@@ -14,7 +19,7 @@ import { ProfileDetails } from "@/components/athletes/ProfileDetails";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
 import { getAthleteBySlug, getPrivateAthleteBySlug } from "@/lib/athrecs/api";
-import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
@@ -28,7 +33,13 @@ import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHisto
 import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 
 export const Route = createFileRoute("/athletes/$slug")({
+  headers: () => ({
+    "Cache-Control": "private, no-store",
+    Vary: "Cookie, Authorization",
+    "X-Robots-Tag": "noindex, nofollow, noarchive",
+  }),
   loader: async ({ params }) => {
+    if (!(await canViewAthleteProfiles())) return { kind: "sign-in" as const };
     const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
       () => null,
     );
@@ -68,146 +79,17 @@ export const Route = createFileRoute("/athletes/$slug")({
     }
     throw notFound();
   },
-  head: ({ loaderData }) => {
-    if (!loaderData) return {};
-    if (loaderData.kind === "shared-account") {
-      const { profile } = loaderData;
-      const title = `${profile.displayName} athlete profile | ${SITE_NAME}`;
-      const description = publicAthleteBio({
-        name: profile.displayName,
-        sport: profile.primarySport,
-        city: profile.city,
-        country: profile.country,
-        club: profile.club,
-        coach: profile.details.coach,
-      }).slice(0, 180);
-      const canonical = `${SITE_URL}/athletes/${profile.slug}`;
-      return {
-        meta: siteGraphMeta({ title, description, url: canonical, type: "profile" }).map((tag) =>
-          !profile.searchIndexable && "name" in tag && tag.name === "robots"
-            ? { name: "robots", content: "noindex, nofollow, noarchive" }
-            : tag,
-        ),
-        links: [{ rel: "canonical", href: canonical }],
-        scripts: profile.searchIndexable
-          ? [
-              {
-                type: "application/ld+json",
-                children: JSON.stringify({
-                  "@context": "https://schema.org",
-                  "@type": "ProfilePage",
-                  "@id": canonical,
-                  url: canonical,
-                  name: title,
-                  description,
-                  mainEntity: {
-                    "@type": "Person",
-                    "@id": `${canonical}#athlete`,
-                    name: profile.displayName,
-                    url: canonical,
-                    identifier: `ATH-${String(profile.athleteNumber).padStart(6, "0")}`,
-                    nationality: profile.nationality || undefined,
-                    memberOf:
-                      profile.club && profile.club !== "Unattached"
-                        ? { "@type": "SportsOrganization", name: profile.club }
-                        : undefined,
-                    sameAs: profile.connections.map((connection) => connection.url),
-                  },
-                }).replace(/</g, "\\u003c"),
-              },
-            ]
-          : [],
-      };
-    }
-
-    if (loaderData.kind === "private-athlete") {
-      const { athlete } = loaderData;
-      const title = `${athlete.displayName} | ${SITE_NAME}`;
-      const description = `${athlete.displayName}'s ATHRECS athlete profile is private.`;
-      const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
-      return {
-        meta: [
-          ...siteGraphMeta({ title, description, url: canonical, type: "profile" }).map((tag) =>
-            "name" in tag && tag.name === "robots"
-              ? { name: "robots", content: "noindex, nofollow, noarchive" }
-              : tag,
-          ),
-        ],
-        links: [{ rel: "canonical", href: canonical }],
-      };
-    }
-
-    const { athlete, sourceHistories } = loaderData;
-    const isPublicFigure = athlete.profile_type === "Public figure";
-    const resultKind = (athlete.profile_roles ?? []).some((role: string) =>
-      role.toLowerCase().includes("marathon"),
-    )
-      ? "marathon results and times"
-      : "race results and finish times";
-    const title = isPublicFigure
-      ? `${athlete.display_name} ${resultKind} | ${SITE_NAME}`
-      : `${athlete.display_name} results & performance history | ${SITE_NAME}`;
-    const clubLabel = athlete.club && athlete.club !== "Unattached" ? ` (${athlete.club})` : "";
-    const description = `${publicAthleteBio({
-      name: athlete.display_name,
-      sport: loaderData.profileResults[0]?.sport,
-      city: athlete.city,
-      country: athlete.country,
-      club: athlete.club,
-      coach: athlete.details.coach,
-    })} Results, personal bests and achievements on ATHRECS.`.slice(0, 180);
-    const canonical = `${SITE_URL}/athletes/${athlete.slug}`;
-
-    return {
-      meta: siteGraphMeta({ title, description, url: canonical, type: "profile" }),
-      links: [{ rel: "canonical", href: canonical }],
-      scripts: [
-        {
-          type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@graph": [
-              {
-                "@type": "WebPage",
-                "@id": canonical,
-                url: canonical,
-                name: title,
-                description,
-                citation: sourceHistories.map((history) => history.sourceUrl),
-                mainEntity: { "@id": `${canonical}#athlete` },
-                breadcrumb: { "@id": `${canonical}#breadcrumb` },
-              },
-              {
-                "@type": "Person",
-                "@id": `${canonical}#athlete`,
-                name: athlete.display_name,
-                url: canonical,
-                description,
-                nationality: athlete.nationality || athlete.country || undefined,
-                knowsAbout: athlete.profile_roles,
-                memberOf: clubLabel
-                  ? { "@type": "SportsOrganization", name: athlete.club }
-                  : undefined,
-              },
-              {
-                "@type": "BreadcrumbList",
-                "@id": `${canonical}#breadcrumb`,
-                itemListElement: [
-                  {
-                    "@type": "ListItem",
-                    position: 1,
-                    name: "Athletes",
-                    item: `${SITE_URL}/athletes`,
-                  },
-                  { "@type": "ListItem", position: 2, name: athlete.display_name, item: canonical },
-                ],
-              },
-            ],
-          }).replace(/</g, "\\u003c"),
-        },
-      ],
-    };
-  },
+  head: ({ params }) => ({
+    links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
+    meta: [
+      { title: `Athlete profile | ${SITE_NAME}` },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+      {
+        name: "description",
+        content: "Sign in to view athlete profiles and published results on ATHRECS.",
+      },
+    ],
+  }),
   component: AthletePage,
   notFoundComponent: () => (
     <div className="space-y-4 py-10 text-center">
@@ -303,6 +185,22 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
 
 function AthletePage() {
   const data = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  return (
+    <ProfileViewer
+      authenticated={data.kind !== "sign-in"}
+      returnTo={`/athletes/${encodeURIComponent(slug)}`}
+    >
+      <AthleteContent />
+    </ProfileViewer>
+  );
+}
+
+function AthleteContent() {
+  const data = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  if (data.kind === "sign-in")
+    return <ProfileSignIn returnTo={`/athletes/${encodeURIComponent(slug)}`} />;
   if (data.kind === "shared-account") {
     return <SharedAccountProfile profile={data.profile} />;
   }
@@ -314,6 +212,10 @@ function AthletePage() {
   const reportedHistory = getReportedRaceHistory(athlete.slug);
   const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
   const aliases = athlete.aliases ?? [];
+  const career = getEditorialAthleteCareer(athlete.slug);
+  const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
+    isPublicProfileSource(link.url, link.label),
+  );
   const bio = publicAthleteBio({
     name: athlete.display_name,
     sport: profileResults[0]?.sport,
@@ -430,7 +332,37 @@ function AthletePage() {
               </Badge>
             ))}
         </div>
-        <p className="text-sm leading-relaxed text-muted">{bio}</p>
+        {career ? (
+          <div className="space-y-2">
+            <h2 className="text-sm font-semibold">Biography</h2>
+            {career.biography.map((paragraph) => (
+              <p key={paragraph} className="text-sm leading-relaxed text-muted">
+                {paragraph}
+              </p>
+            ))}
+            <details className="text-xs">
+              <summary className="cursor-pointer text-accent">Biography sources</summary>
+              <ul className="mt-2 space-y-2">
+                {career.biographySources
+                  .filter((source) => isPublicProfileSource(source.url, source.label))
+                  .map((source) => (
+                    <li key={source.url}>
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent underline underline-offset-2"
+                      >
+                        {source.label} ↗
+                      </a>
+                    </li>
+                  ))}
+              </ul>
+            </details>
+          </div>
+        ) : (
+          <p className="text-sm leading-relaxed text-muted">{bio}</p>
+        )}
         {athlete.slug === "mo-farah" && !athlete.is_claimed ? (
           <p className="text-xs text-subtle">
             Independent ATHRECS profile. Not athlete-claimed; no endorsement is implied.
@@ -457,17 +389,20 @@ function AthletePage() {
         )}
       </section>
 
-      {(!isPublicFigure ||
-        profileResults.length > 0 ||
-        sourceHistories.length > 0 ||
-        includedHistory) && (
-        <ProfileRecordHighlights
-          results={profileResults}
-          reportedBests={includedHistory?.personalBests}
-          sourceHistories={sourceHistories}
-          sourceGender={athlete.gender}
-        />
-      )}
+      <AthleteCareerHighlights slug={athlete.slug} />
+
+      {(!career || profileResults.length > 0 || includedHistory) &&
+        (!isPublicFigure ||
+          profileResults.length > 0 ||
+          sourceHistories.length > 0 ||
+          includedHistory) && (
+          <ProfileRecordHighlights
+            results={profileResults}
+            reportedBests={includedHistory?.personalBests}
+            sourceHistories={sourceHistories}
+            sourceGender={athlete.gender}
+          />
+        )}
 
       <section id="results-history" className="space-y-3">
         <CompactResults results={profileResults} reportedHistory={includedHistory} claimable />
@@ -501,13 +436,13 @@ function AthletePage() {
           <EditorialAthleteOverview slug={athlete.slug} />
           <EditorialRoadSplits slug={athlete.slug} />
           <AthleteMediaCoverage slug={athlete.slug} />
-          {athlete.profile_links.length > 0 && (
+          {profileLinks.length > 0 && (
             <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
               <h2 className="font-display text-lg font-semibold text-fg">
                 {isProfessionalAthlete ? "Records and follow links" : "Official links"}
               </h2>
               <div className="flex flex-wrap gap-2">
-                {athlete.profile_links.map((link: { label: string; url: string }) => (
+                {profileLinks.map((link: { label: string; url: string }) => (
                   <a
                     key={link.url}
                     href={link.url}

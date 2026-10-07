@@ -24,6 +24,19 @@ registerHooks({
 });
 const { ROAD_MARATHONS } = await import("../src/data/road-marathons/index.ts");
 const { MARATHON_COUNTRIES } = await import("../src/data/road-marathons/countries.ts");
+const { ROAD_HALF_MARATHONS } = await import("../src/data/road-half-marathons/index.ts");
+const { HALF_MARATHON_COUNTRIES } = await import("../src/data/road-half-marathons/countries.ts");
+const { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } =
+  await import("../src/lib/running/road-ultras.ts");
+const otherGuidePaths = new Set([
+  "/running/events",
+  "/running/calendar",
+  "/running/race-series",
+  ...HALF_MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
+  ...ROAD_HALF_MARATHONS.map((race) => `/running/races/${race.slug}`),
+  ULTRA_GUIDE_PATH,
+  ...ROAD_ULTRAS.map((race) => ultraPath(race.slug)),
+]);
 const base = process.env.MARATHON_PREVIEW_BASE ?? "http://127.0.0.1:8095";
 const output = process.argv[2];
 assert(output, "Pass an output HTML path");
@@ -34,6 +47,12 @@ const paths = [
 ];
 const initialRoute = process.argv[3] ?? "/running";
 assert(paths.includes(initialRoute), "Initial preview route must be a running guide");
+const previewDate = new Date().toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "Europe/London",
+});
 const pages = {};
 let cursor = 0;
 async function worker() {
@@ -55,7 +74,7 @@ async function worker() {
       JSON.parse($(script).html());
     $("main a[href]").each((i, element) => {
       const href = $(element).attr("href");
-      if (href.startsWith("/running/ultramarathons/") || href === "/running/uk-road-ultramarathons")
+      if (otherGuidePaths.has(href.split("#")[0]))
         $(element).attr("href", `https://www.athrecs.com${href}`);
       else if (href.startsWith("/running"))
         assert(paths.includes(href.split("#")[0]), `${route} has broken internal link ${href}`);
@@ -99,7 +118,7 @@ const cssName = fs
 const css = fs.readFileSync(path.join(cssDir, cssName), "utf8");
 const logo = fs.readFileSync(path.join(root, "public/athrecs-logo-header.png")).toString("base64");
 const data = JSON.stringify(pages).replace(/</g, "\\u003c");
-const html = `<!doctype html><html lang="en" class="athrecs-theme"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AthRecs marathon guides preview</title><style>${css}</style><style>html{scroll-behavior:smooth}body{margin:0}.preview-banner{padding:10px 16px;background:#173d30;color:white;text-align:center;font:13px system-ui}.preview-top{max-width:1200px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}.preview-logo{width:165px;max-width:40vw;height:auto}.preview-main{max-width:1200px;margin:auto;padding:16px 24px 50px}@media(max-width:600px){.preview-main{padding:12px 16px 40px}}</style></head><body class="bg-bg text-fg antialiased"><div class="preview-banner">Review preview · 26 September 2026 · ${ROAD_MARATHONS.length} race pages · awaiting publication approval</div><header class="preview-top"><a href="/running" aria-label="AthRecs running guides"><img class="preview-logo" src="data:image/png;base64,${logo}" alt="AthRecs"></a><a href="/running" class="font-semibold text-accent">All country guides</a></header><main id="preview-app" class="preview-main">${pages[initialRoute].html}</main><script>const pages=${data};let current=${JSON.stringify(initialRoute)};function render(){let state;try{state=decodeURIComponent(location.hash.slice(1))}catch{state=${JSON.stringify(initialRoute)}}const parts=(state||${JSON.stringify(initialRoute)}).split('#');const route=pages[parts[0]]?parts[0]:${JSON.stringify(initialRoute)};current=route;document.getElementById('preview-app').innerHTML=pages[route].html;document.title=pages[route].title;requestAnimationFrame(()=>{const target=parts[1]&&document.getElementById(parts[1]);if(target)target.scrollIntoView();else window.scrollTo(0,0)})}document.addEventListener('click',event=>{const a=event.target.closest('a[href]');if(!a||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;const href=a.getAttribute('href');if(href.startsWith('#')){event.preventDefault();location.hash=encodeURIComponent(current+href);return}const url=new URL(href,'https://www.athrecs.com');if(url.origin==='https://www.athrecs.com'&&pages[url.pathname]){event.preventDefault();const next=encodeURIComponent(url.pathname+url.hash);if(location.hash.slice(1)===next)render();else location.hash=next}});window.addEventListener('hashchange',render);render();</script></body></html>`;
+const html = `<!doctype html><html lang="en" class="athrecs-theme"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>AthRecs marathon guides preview</title><style>${css}</style><style>html{scroll-behavior:smooth}body{margin:0}.preview-banner{padding:10px 16px;background:#173d30;color:white;text-align:center;font:13px system-ui}.preview-top{max-width:1200px;margin:auto;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}.preview-logo{width:165px;max-width:40vw;height:auto}.preview-main{max-width:1200px;margin:auto;padding:16px 24px 50px}@media(max-width:600px){.preview-main{padding:12px 16px 40px}}</style></head><body class="bg-bg text-fg antialiased"><div class="preview-banner">Review preview · ${previewDate} · ${ROAD_MARATHONS.length} race pages · saved review snapshot</div><header class="preview-top"><a href="/running" aria-label="AthRecs running guides"><img class="preview-logo" src="data:image/png;base64,${logo}" alt="AthRecs"></a><a href="/running" class="font-semibold text-accent">All country guides</a></header><main id="preview-app" class="preview-main">${pages[initialRoute].html}</main><script>const pages=${data};let current=${JSON.stringify(initialRoute)};function render(){let state;try{state=decodeURIComponent(location.hash.slice(1))}catch{state=${JSON.stringify(initialRoute)}}const parts=(state||${JSON.stringify(initialRoute)}).split('#');const route=pages[parts[0]]?parts[0]:${JSON.stringify(initialRoute)};current=route;document.getElementById('preview-app').innerHTML=pages[route].html;document.title=pages[route].title;requestAnimationFrame(()=>{const target=parts[1]&&document.getElementById(parts[1]);if(target)target.scrollIntoView();else window.scrollTo(0,0)})}document.addEventListener('click',event=>{const a=event.target.closest('a[href]');if(!a||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;const href=a.getAttribute('href');if(href.startsWith('#')){event.preventDefault();location.hash=encodeURIComponent(current+href);return}const url=new URL(href,'https://www.athrecs.com');if(url.origin==='https://www.athrecs.com'&&pages[url.pathname]){event.preventDefault();const next=encodeURIComponent(url.pathname+url.hash);if(location.hash.slice(1)===next)render();else location.hash=next}});window.addEventListener('hashchange',render);render();</script></body></html>`;
 fs.writeFileSync(output, html);
 console.log(
   `Passed SSR: ${paths.length} routes, internal links, metadata, results categories, official archives, sitemap and 404s. Wrote ${output} (${fs.statSync(output).size} bytes).`,

@@ -20,6 +20,12 @@ function loadTypeScript(path, dependencies = {}) {
 }
 
 const sportPages = loadTypeScript("src/lib/athrecs/sport-pages.ts");
+const { resultCredit } = loadTypeScript("src/lib/athrecs/result-credit.ts");
+assert.deepEqual(resultCredit("https://totalracetiming.co.uk/raceresults/123", "import"), { name: "Total Race Timing", url: "https://totalracetiming.co.uk/raceresults/123" });
+assert.equal(resultCredit("https://example.com/result", "Example Timing").name, "Example Timing");
+assert.equal(resultCredit("javascript:alert(1)", "Unsafe"), null);
+assert.equal(resultCredit(null, "No source"), null);
+assert.equal(resultCredit("https://totalracetiming.co.uk.example.org/results", "import").name, "totalracetiming.co.uk.example.org");
 const search = loadTypeScript("src/lib/athrecs/public-results-search.ts", { "./sport-pages": sportPages, "./result-slug.ts": loadTypeScript("src/lib/athrecs/result-slug.ts") });
 assert.equal(search.normalizeResultsSearch({ category: "trail-running" }).category, "trail-running");
 assert.equal(search.normalizeResultsSearch({ category: "unknown" }).category, "");
@@ -68,6 +74,7 @@ try {
       profile_type text, profile_visibility text);
     create table results (id integer primary key, athlete_id integer, edition_id integer,
       status text, result_details jsonb default '{}', result_visibility text,
+      source_url text, result_source text,
       overall_place integer, gender_place integer, category_place integer, category text,
       finish_time_seconds integer, chip_time_seconds integer, gun_time_seconds integer);
     create table athlete_account_links (user_id text, athlete_id integer, status text);
@@ -93,6 +100,7 @@ try {
       select id, id, 10, 'Finished', case when id = 8 then 'private' else 'public' end,
         id + 6, id, id, 'V40', 1900 + id, 1890 + id, 1900 + id from athletes;
     update results set result_details = '{"disqualification":{"reason":"other"}}' where id = 7;
+    update results set source_url = 'https://totalracetiming.co.uk/raceresults/123', result_source = 'Total Race Timing' where id = 1;
     insert into results (id, athlete_id, edition_id, status, result_visibility) values
       (90, 1, 11, 'Finished', 'public');
     insert into athlete_account_links values ('u3', 3, 'active'), ('u4', 4, 'active'),
@@ -112,6 +120,8 @@ try {
   assert.equal(detail.results[2].disqualified, true);
   assert.equal(detail.results[0].overall_place, 7, "Do not renumber official placings");
   assert.equal(detail.results[0].chip_time_seconds, 1891);
+  assert.equal(detail.results[0].source_url, "https://totalracetiming.co.uk/raceresults/123");
+  assert.equal(detail.results[0].result_source, "Total Race Timing");
   assert.equal(detail.results[0].gun_time_seconds, 1901);
   assert.notEqual(detail.results[0].athlete_slug, detail.results[1].athlete_slug,
     "Same-name identities must remain distinct");

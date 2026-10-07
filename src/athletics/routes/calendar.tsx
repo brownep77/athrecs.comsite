@@ -45,6 +45,7 @@ function AthleticsCalendarPage() {
   const [page, setPage] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const empty = isEmptySearch(filters);
+  const sportLabel = filters.sport === "Triathlon" ? "Triathlon" : filters.sport === "Running" || filters.sport === "Parkrun" ? filters.sport : "Athletics";
   const { data = initial, isFetching } = useQuery<AthleticsCalendarPage>({
     queryKey: ["athletics-calendar", filters, page],
     queryFn: async () =>
@@ -75,15 +76,15 @@ function AthleticsCalendarPage() {
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="space-y-2">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">
-            Athletics · UK &amp; Ireland 5K and 10K
+            Athletics, running and triathlon
           </p>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-fg">
-            Athletics calendar
+            {sportLabel} calendar
           </h1>
           <p className="max-w-2xl text-sm text-muted">
             Search track and field meetings, cross-country fixtures, road athletics and
-            championships by place, date, surface or distance. Select Running for UK and Ireland 5K
-            and 10K races through January 2027.
+            championships by place, date, surface or distance. Select Running, Parkrun or Triathlon
+            to explore those fixtures.
           </p>
         </div>
         <button
@@ -120,8 +121,8 @@ function AthleticsCalendarPage() {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <p className="text-sm text-subtle" aria-live="polite">
               {isFetching
-                ? "Loading athletics fixtures…"
-                : `Showing ${firstShown.toLocaleString()}–${lastShown.toLocaleString()} of ${data.total.toLocaleString()} athletics competition days`}
+                ? `Loading ${sportLabel.toLowerCase()} fixtures…`
+                : `Showing ${firstShown.toLocaleString()}–${lastShown.toLocaleString()} of ${data.total.toLocaleString()} ${sportLabel.toLowerCase()} competition days`}
             </p>
             <Link
               to="/races"
@@ -142,7 +143,7 @@ function AthleticsCalendarPage() {
             ) : (
               <div className="rounded-xl border border-dashed border-border bg-surface px-5 py-12 text-center">
                 <CalendarDays className="mx-auto h-7 w-7 text-subtle" aria-hidden="true" />
-                <p className="mt-3 text-sm font-medium text-fg">No athletics events match.</p>
+                <p className="mt-3 text-sm font-medium text-fg">No {sportLabel.toLowerCase()} events match.</p>
                 <p className="mt-1 text-xs text-muted">
                   Widen the date or location filters to see more fixtures.
                 </p>
@@ -153,7 +154,7 @@ function AthleticsCalendarPage() {
           {data.total > PAGE_SIZE ? (
             <nav
               className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3"
-              aria-label="Athletics calendar pages"
+              aria-label={`${sportLabel} calendar pages`}
             >
               <button
                 type="button"

@@ -38,7 +38,10 @@ function escapeHtml(value: string): string {
     .replaceAll("'", "&#039;");
 }
 
-export async function sendAthrecsAuthEmail(email: AuthEmail): Promise<void> {
+export async function sendAthrecsAuthEmail(
+  email: AuthEmail,
+  options: { idempotencyKey?: string } = {},
+): Promise<void> {
   const apiKey = text(process.env.RESEND_API_KEY);
   if (!apiKey) {
     throw new Error("ATHRECS authentication email is not configured");
@@ -85,7 +88,9 @@ export async function sendAthrecsAuthEmail(email: AuthEmail): Promise<void> {
     headers: {
       Authorization: `Bearer ${apiKey}`,
       "Content-Type": "application/json",
+      ...(options.idempotencyKey ? { "Idempotency-Key": options.idempotencyKey } : {}),
     },
+    signal: AbortSignal.timeout(8_000),
     body: JSON.stringify({
       from,
       to: [email.to],

@@ -1,15 +1,7 @@
-import {
-  authEmailConfigured,
-  sendAthrecsAuthEmail,
-} from "@/lib/auth/email.server";
+import { authEmailConfigured, sendAthrecsAuthEmail } from "@/lib/auth/email.server";
 
 export type ClaimEmailStatus =
-  | "pending"
-  | "needs_info"
-  | "approved"
-  | "rejected"
-  | "withdrawn"
-  | "revoked";
+  "pending" | "needs_info" | "approved" | "rejected" | "withdrawn" | "revoked";
 
 type ClaimEmailContext = {
   claimId: number;
@@ -45,17 +37,17 @@ function staffOrigin(): string {
   return `https://${host}`;
 }
 
-function staffRecipients(): string[] {
+export function staffRecipients(): string[] {
   const raw =
-    process.env.ATHRECS_CLAIMS_EMAILS?.trim() ||
-    process.env.ATHRECS_STAFF_EMAILS?.trim() ||
-    "";
-  return [...new Set(
-    raw
-      .split(",")
-      .map((email) => email.trim().toLowerCase())
-      .filter((email) => /^\S+@\S+\.\S+$/.test(email)),
-  )];
+    process.env.ATHRECS_CLAIMS_EMAILS?.trim() || process.env.ATHRECS_STAFF_EMAILS?.trim() || "";
+  return [
+    ...new Set(
+      raw
+        .split(",")
+        .map((email) => email.trim().toLowerCase())
+        .filter((email) => /^\S+@\S+\.\S+$/.test(email)),
+    ),
+  ];
 }
 
 function claimSummary(context: ClaimEmailContext): string {
@@ -80,6 +72,7 @@ async function deliver(
 /** Confirm receipt to the athlete and alert the private staff review inbox. */
 export async function notifyResultClaimSubmitted(
   context: ClaimEmailContext,
+  notifyStaff = true,
 ): Promise<void> {
   if (!authEmailConfigured()) return;
   const claimUrl = `${publicOrigin()}/claim-results?resultId=${context.resultId}`;
@@ -95,7 +88,7 @@ export async function notifyResultClaimSubmitted(
       actionLabel: "View my claim",
       actionUrl: claimUrl,
     }),
-    ...staffRecipients().map((to) =>
+    ...(notifyStaff ? staffRecipients() : []).map((to) =>
       deliver("claim-submitted-staff", {
         to,
         subject: `New ATHRECS result claim #${context.claimId}`,
@@ -109,9 +102,7 @@ export async function notifyResultClaimSubmitted(
 }
 
 /** Tell the athlete whenever staff changes the claim decision. */
-export async function notifyResultClaimReviewed(
-  context: ClaimReviewEmailContext,
-): Promise<void> {
+export async function notifyResultClaimReviewed(context: ClaimReviewEmailContext): Promise<void> {
   if (!authEmailConfigured()) return;
   const claimUrl = `${publicOrigin()}/claim-results?resultId=${context.resultId}`;
   const summary = claimSummary(context);
@@ -158,9 +149,7 @@ export async function notifyResultClaimReviewed(
   });
 }
 
-export async function notifyResultClaimWithdrawn(
-  context: ClaimEmailContext,
-): Promise<void> {
+export async function notifyResultClaimWithdrawn(context: ClaimEmailContext): Promise<void> {
   if (!authEmailConfigured()) return;
   await deliver("claim-withdrawn-athlete", {
     to: context.claimantEmail,

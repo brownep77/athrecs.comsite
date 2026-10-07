@@ -198,7 +198,7 @@ export function CollectorDuplicateDialog({
                           </p>
                           <a
                             className="block text-emerald-800 underline"
-                            href={`https://www.runrecs.com/races/${encodeURIComponent(group.event.slug)}`}
+                            href={`https://www.athrecs.com/races/${encodeURIComponent(group.event.slug)}`}
                             target="_blank"
                             rel="noreferrer"
                           >

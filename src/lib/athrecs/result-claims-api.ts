@@ -11,6 +11,7 @@ import {
 import { scorePotentialResultNameMatch, uniquePotentialMatchNames } from "./result-match";
 import { sourceIdentityFromUrl } from "./profile-connections";
 import { ensureAthrecsSeeded } from "./seed.server";
+import { queueClaimConflict, deliverClaimConflictAlerts } from "./result-claim-alerts.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
 
@@ -95,6 +96,25 @@ type ClaimEmailRow = {
 async function ready() {
   await ensureAthrecsSeeded();
   return getSql();
+}
+
+// Every ownership operation locks the athlete before any claim or owner row.
+// Locking a whole joined claim first can deadlock with another review that
+// holds the athlete and is closing the remaining competing claims.
+async function lockClaimAthlete(
+  sql: Awaited<ReturnType<typeof getSql>>,
+  claimId: number,
+  claimantUserId?: string,
+): Promise<number | null> {
+  const rows = await sql<{ id: number }>`
+    select athlete.id from athletes athlete
+    join result_claims claim on claim.athlete_id = athlete.id
+    where claim.id = ${claimId}
+      and (${claimantUserId ?? null}::text is null
+        or claim.claimant_user_id = ${claimantUserId ?? null})
+    for update of athlete
+  `;
+  return rows[0]?.id ?? null;
 }
 
 function positiveInteger(value: unknown, label: string): number {
@@ -427,10 +447,13 @@ export const submitResultClaim = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
-      const users = await tx<{ email: string }>`
-        select "email" as email from "user" where "id" = ${context.userId} limit 1`;
+      const users = await tx<{ email: string; email_verified: boolean }>`
+        select "email" as email, "emailVerified" as email_verified
+        from "user" where "id" = ${context.userId} limit 1`;
       const claimantEmail = users[0]?.email?.trim().toLowerCase();
       if (!claimantEmail) throw new Error("Your signed-in account has no email address");
+      if (!users[0].email_verified)
+        throw new Error("Verify your email before claiming athlete results");
 
       const results = await tx<{
         result_id: number;
@@ -498,6 +521,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           claimId: null,
           claimantUserId: context.userId,
           email: null,
+          isConflict: false,
         };
       }
 
@@ -521,10 +545,24 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           and status in ('pending', 'needs_info', 'approved')
       `;
       const otherClaimCount = competing[0]?.other_claim_count ?? 0;
+      // Staff identity decisions apply to the athlete, not just one finish row.
+      // A withdrawn/resubmitted claim must not let the same account regain a
+      // revoked identity by choosing another result. Retain the email marker
+      // even if the original reviewer's account has since been deleted.
+      const reviewedIdentity = await tx<{ reviewed: boolean }>`
+        select exists (
+          select 1 from result_claims
+          where athlete_id = ${result.athlete_id}
+            and claimant_user_id = ${context.userId}
+            and (reviewed_by_user_id is not null or reviewed_by_email is not null
+              or status in ('needs_info', 'rejected'))
+        ) as reviewed
+      `;
       const previouslyReviewed =
         Boolean(existing[0]?.reviewed_by_user_id) ||
         existing[0]?.status === "needs_info" ||
-        existing[0]?.status === "rejected";
+        existing[0]?.status === "rejected" ||
+        Boolean(reviewedIdentity[0]?.reviewed);
       const requiresReview = Boolean(owner) || otherClaimCount > 0 || previouslyReviewed;
       const conflictReason = owner
         ? "This athlete profile is already linked to another account. Staff identity checks are required."
@@ -553,9 +591,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             declaration_accepted = true,
             conflict_reason = ${conflictReason},
             staff_note = case when ${previouslyReviewed} then staff_note else ${automaticNote} end,
-            reviewed_by_user_id = null,
-            reviewed_by_email = null,
-            reviewed_at = case when ${nextStatus} = 'approved' then now() else null end,
+            reviewed_by_user_id = case when ${previouslyReviewed} then reviewed_by_user_id else null end,
+            reviewed_by_email = case when ${previouslyReviewed} then reviewed_by_email else null end,
+            reviewed_at = case when ${previouslyReviewed} then reviewed_at
+              when ${nextStatus} = 'approved' then now() else null end,
             submitted_at = now(),
             updated_at = now()
           where id = ${existing[0].id}
@@ -616,8 +655,10 @@ export const submitResultClaim = createServerFn({ method: "POST" })
               updated_at = now()
             where id = ${claimId}
           `;
+          await queueClaimConflict(tx, claimId);
           return {
             status: "pending" as const,
+            isConflict: true,
             alreadyOwned: false,
             claimId,
             claimantUserId: context.userId,
@@ -634,8 +675,11 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         }
       }
 
+      const isConflict = Boolean(owner) || otherClaimCount > 0;
+      if (isConflict) await queueClaimConflict(tx, claimId);
       return {
         status: nextStatus,
+        isConflict,
         alreadyOwned: false,
         claimId,
         claimantUserId: context.userId,
@@ -661,7 +705,16 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         });
       }
     } else if (outcome.status === "pending" && outcome.email) {
-      await notifyResultClaimSubmitted(outcome.email);
+      // The durable outbox owns staff conflict emails. Keep the athlete receipt
+      // separate and avoid sending a second generic staff notification.
+      if (outcome.isConflict) {
+        try {
+          await deliverClaimConflictAlerts(sql, outcome.claimId);
+        } catch {
+          console.error("[claim-alerts] immediate delivery deferred to the worker");
+        }
+      }
+      await notifyResultClaimSubmitted(outcome.email, !outcome.isConflict);
     }
 
     return {
@@ -692,6 +745,7 @@ export const withdrawResultClaim = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
+      const lockedAthleteId = await lockClaimAthlete(tx, data.claimId, context.userId);
       const rows = await tx<ClaimEmailRow>`
         select
           claim.id as claim_id,
@@ -707,10 +761,11 @@ export const withdrawResultClaim = createServerFn({ method: "POST" })
         join editions edition on edition.id = result.edition_id
         join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
+          and claim.athlete_id = ${lockedAthleteId}
           and claim.claimant_user_id = ${context.userId}
           and claim.status in ('pending', 'needs_info')
         limit 1
-        for update
+        for update of claim
       `;
       const claim = rows[0];
       if (!claim) throw new Error("Only an active claim can be withdrawn");
@@ -752,10 +807,10 @@ export const listStaffResultClaims = createServerFn({ method: "GET" })
          claim_data.*,
          owner.user_email as existing_owner_email,
          (
-           select count(*)::int
+           select count(distinct competing.claimant_user_id)::int
            from result_claims competing
-           where competing.result_id = claim.result_id
-             and competing.id <> claim.id
+           where competing.athlete_id = claim.athlete_id
+             and competing.claimant_user_id <> claim.claimant_user_id
              and competing.status in ('pending', 'needs_info', 'approved')
          ) as competing_claim_count
        from (${CLAIM_SELECT}) claim_data
@@ -791,6 +846,7 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const result = await sql.transaction(async (tx) => {
+      const lockedAthleteId = await lockClaimAthlete(tx, data.claimId);
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
@@ -820,8 +876,9 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
         join editions edition on edition.id = result.edition_id
         join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
+          and claim.athlete_id = ${lockedAthleteId}
         limit 1
-        for update
+        for update of claim
       `;
       const claim = claims[0];
       if (!claim) throw new Error("Claim not found");
@@ -927,6 +984,7 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
 
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
+      const lockedAthleteId = await lockClaimAthlete(tx, data.claimId);
       const claims = await tx<{
         id: number;
         status: ResultClaimStatus;
@@ -956,8 +1014,9 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
         join editions edition on edition.id = result.edition_id
         join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
+          and claim.athlete_id = ${lockedAthleteId}
         limit 1
-        for update
+        for update of claim
       `;
       const claim = claims[0];
       if (!claim) throw new Error("Claim not found");

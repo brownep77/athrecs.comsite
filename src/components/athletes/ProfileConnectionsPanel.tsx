@@ -15,6 +15,7 @@ import {
   type SocialPlatform,
 } from "@/lib/athrecs/profile-connections";
 import type { AthleteAccountData } from "@/lib/athrecs/athlete-account-api";
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 import { AthleteId } from "./AthleteId";
 
 export function ProfileConnectionsPanel({ account }: { account: AthleteAccountData }) {
@@ -73,7 +74,9 @@ export function ProfileConnectionsPanel({ account }: { account: AthleteAccountDa
           <p className="mt-3 text-sm text-muted">Athletics membership: {account.athleticsUrn}</p>
         ) : null}
         <Button asChild variant="secondary" className="mt-4">
-          <Link to="/athlete-account">Edit names and result sources</Link>
+          <Link to="/athlete-account" search={IS_ATHRECS_SITE ? { section: "matching" } : {}}>
+            Edit names and result sources
+          </Link>
         </Button>
       </section>
       <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">

@@ -38,3 +38,7 @@ publication and personal-best calculations in this repository.
   because schema, row-count or code tests pass.
 - Keep private athlete audits and database exports out of source-control changes
   intended for external publication. Use synthetic examples in regression tests.
+- Always credit the chip-timing/results provider by name when publishing results
+  on AthRecs, with a link to the original result page. Preserve provider credit in
+  imports, athlete histories, club results and editorial coverage. Record the
+  organiser separately; a timer is not automatically the race organiser.

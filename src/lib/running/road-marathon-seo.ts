@@ -2,6 +2,7 @@ import type { MarathonCountryGuide, RoadMarathon } from "@/data/road-marathons/t
 import { halfMarathonCountry } from "@/data/road-half-marathons/countries";
 import { countryGuide } from "@/data/road-marathons/countries";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { roadGuideModifiedAt } from "./guide-modified";
 import { roadMarathonDate, upcomingRoadEditions } from "./road-marathon-calendar";
 
 export const roadRacePath = (race: RoadMarathon) => `/running/races/${race.slug}`;
@@ -47,10 +48,19 @@ export function countryMarathonQuestions(
   const location = ["uk", "usa"].includes(country.id) ? `the ${country.name}` : country.name;
   const upcoming = races
     .flatMap((race) =>
-      upcomingRoadEditions(race, now).map((edition) => ({ name: race.name, ...edition })),
+      upcomingRoadEditions(race, now, country.calendarYear).map((edition) => ({
+        name: race.name,
+        ...edition,
+      })),
     )
     .sort((a, b) => a.date.localeCompare(b.date))
     .slice(0, 3);
+  const awaiting = country.calendarYear
+    ? races.filter(
+        (race) =>
+          !race.editions.some((edition) => edition.date.startsWith(`${country.calendarYear}-`)),
+      )
+    : [];
   return [
     {
       question: `Which road ${distance}s are included in this ${country.name} guide?`,
@@ -60,9 +70,11 @@ export function countryMarathonQuestions(
         .join(", ")}. Open a race guide for its course, entry options, dates and previous results.`,
     },
     {
-      question: `When are the next road ${distance}s in ${location}?`,
+      question: country.calendarYear
+        ? `When are road ${distance}s in ${location} in ${country.calendarYear}?`
+        : `When are the next road ${distance}s in ${location}?`,
       answer: upcoming.length
-        ? `The next confirmed dates in this guide are ${upcoming.map((race) => `${race.name} on ${roadMarathonDate(race.date, race.endDate)}`).join("; ")}. All dates are local to the race.`
+        ? `The next confirmed dates in this guide are ${upcoming.map((race) => `${race.name} on ${roadMarathonDate(race.date, race.endDate)}`).join("; ")}. All dates are local to the race.${awaiting.length ? ` ${country.calendarYear} dates for ${awaiting.map((race) => race.name).join(" and ")} are TBC.` : ""}`
         : "Upcoming race dates are TBC (to be confirmed). Each race guide links to the organiser for the latest announcements.",
     },
     {
@@ -88,8 +100,8 @@ export function countryMarathonHead(
   const path = roadCountryPath(country);
   const url = `${SITE_URL}${path}`;
   const shortName = country.id === "uk" ? "UK" : country.id === "usa" ? "USA" : country.name;
-  const title = `${shortName} Road ${displayDistance}: Dates, Entry & Results | ATHRECS`;
-  const description = `Compare ${races.length} road ${distance}s in ${country.name}: confirmed dates through 2027, entry methods, course guides, field sizes and previous results.`;
+  const title = `${shortName} Road ${displayDistance}${country.calendarYear ? ` ${country.calendarYear}` : ""}: Dates, Entry & Results | ATHRECS`;
+  const description = `Compare ${races.length} road ${distance}s in ${country.name}: ${country.calendarYear ? `confirmed ${country.calendarYear} dates` : "confirmed dates through 2027"}, entry methods, course guides, field sizes and previous results.`;
   return head(title, description, path, [
     {
       "@type": "CollectionPage",
@@ -98,10 +110,7 @@ export function countryMarathonHead(
       url,
       description,
       inLanguage: "en-GB",
-      dateModified: [...races]
-        .map((race) => race.checkedAt)
-        .sort()
-        .at(-1),
+      dateModified: roadGuideModifiedAt(races.map((race) => race.checkedAt)),
       author: { "@type": "Organization", name: "AthRecs", url: SITE_URL },
       mainEntity: { "@id": `${url}#races` },
     },
@@ -124,13 +133,15 @@ export function countryMarathonHead(
     {
       "@type": "ItemList",
       "@id": `${url}#upcoming`,
-      name: `Confirmed upcoming ${distance} dates through 2027`,
+      name: country.calendarYear
+        ? `Confirmed ${country.calendarYear} road ${distance} dates`
+        : `Confirmed upcoming ${distance} dates through 2027`,
       numberOfItems: races.reduce(
-        (count, race) => count + upcomingRoadEditions(race, now).length,
+        (count, race) => count + upcomingRoadEditions(race, now, country.calendarYear).length,
         0,
       ),
       itemListElement: races.flatMap((race) =>
-        upcomingRoadEditions(race, now).map((edition) => ({
+        upcomingRoadEditions(race, now, country.calendarYear).map((edition) => ({
           "@type": "Thing",
           name: `${race.name}: ${roadMarathonDate(edition.date, edition.endDate)}`,
           url: `${SITE_URL}${roadRacePath(race)}#dates`,
@@ -194,7 +205,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
       name: title,
       description,
       inLanguage: "en-GB",
-      dateModified: race.checkedAt,
+      dateModified: roadGuideModifiedAt([race.checkedAt]),
       author: { "@type": "Organization", name: "AthRecs", url: SITE_URL },
       about: { "@type": "Thing", name: race.name, sameAs: race.officialUrl },
       citation: race.sources.map((source) => source.url),
@@ -209,6 +220,7 @@ export function roadRaceHead(race: RoadMarathon, now: string) {
       sport: "Running",
       description: race.description,
       sameAs: edition.sourceUrl,
+      eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       location: {
         "@type": "Place",

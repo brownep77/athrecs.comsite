@@ -52,6 +52,11 @@ try {
   for (const slug of ["link-only", "withdrawn", "broken-account"]) assert(!slugs.includes(slug));
   await db.exec("update athlete_public_shares set search_indexable=false");
   assert(!(await athleteSitemapSlugs(sql, 1)).includes("search-opt-in"));
+  assert.match(
+    sitemapXml([{ url: "https://example.test/race", lastmod: "2026-10-07" }]),
+    /<lastmod>2026-10-07<\/lastmod>/,
+  );
+  assert(!sitemapXml(["https://example.test/unchanged"]).includes("lastmod"));
   assert.match(sitemapXml(["https://example.test/a?x=1&y=2"]), /x=1&amp;y=2/);
   assert.match(sitemapXml(["https://example.test/sitemaps/athletes-1.xml"], true), /<sitemapindex/);
   console.log(

@@ -112,7 +112,9 @@ try {
     assert(markup.includes("4.04"));
     assert(markup.includes("Fixture meeting"));
     assert.equal(markup.includes('data-label="Source"'), showEvidence);
-    assert.equal(markup.includes("https://example.test/performance"), showEvidence);
+    assert(markup.includes("https://example.test/performance"), "Provider credit links stay visible in the normal profile view");
+    assert(markup.includes("Results: powerof10"));
+    assert.equal(markup.includes("Wind assisted"), showEvidence, "Internal evidence labels stay staff-only");
     assert.equal(markup.includes("Next source results"), showEvidence);
   }
   const { countryFlag } = await server.ssrLoadModule("/src/lib/athrecs/country-flags.ts");

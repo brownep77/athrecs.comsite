@@ -183,7 +183,7 @@ function EventsPage() {
         <div className="flex flex-wrap gap-2">
           {filters.sport === "Running" ? (
             <Link
-              to="/race-series"
+              to={IS_RUNRECS_SITE ? "/race-series" : "/running/race-series"}
               className="inline-flex h-10 items-center rounded-lg border border-border bg-surface px-3 text-sm font-medium text-fg no-underline hover:border-border-strong"
             >
               Running series
