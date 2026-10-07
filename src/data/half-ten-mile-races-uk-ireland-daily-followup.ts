@@ -26,6 +26,7 @@ const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
 const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
 const CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT = "2026-10-05";
 const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
+const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -56,6 +57,47 @@ type RaceSeed = {
 };
 
 const seeds: RaceSeed[] = [
+  {
+    slug: "trim-10-mile-road-race-2027",
+    name: "Nally's SuperValu Trim 10 Mile Road Race 2027",
+    date: "2027-01-31",
+    distance: "10mi",
+    startTime: "12:00",
+    country: "Ireland",
+    county: "County Meath",
+    city: "Trim",
+    area: "Eamonn Duggan Industrial Estate and roads around Trim",
+    surface: "Road",
+    organiser: "Trim AC / Eventmaster",
+    url: "https://eventmaster.ie/event/rZQofPmS9y",
+    entryUrl: "https://eventmaster.ie/event/rZQofPmS9y",
+    priceAmount: 42,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    notes:
+      "The direct official registration page now confirms approved Athletics Ireland permit 26/581, the 31 January 2027 date, 12:00 start and open €42 entry.",
+  },
+  {
+    slug: "abbeyknockmoy-5k-10k-half-marathon-2027",
+    name: "Abbeyknockmoy Hurling Club 5K, 10K & Half Marathon 2027",
+    date: "2027-09-12",
+    distance: "Half",
+    startTime: "10:00",
+    country: "Ireland",
+    county: "County Galway",
+    city: "Abbeyknockmoy",
+    area: "Abbeyknockmoy and surrounding certified road routes",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "Abbeyknockmoy Hurling Club / Eventmaster",
+    url: "https://eventmaster.ie/event/j9qbiE0TBz",
+    entryUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
+    priceAmount: 40,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    notes:
+      "The direct official registration page now confirms approved Athletics Ireland permit 26/583, the 12 September 2027 programme, 10:00 half-marathon start and open €40 half entry.",
+  },
   {
     slug: "looe-10-miler-2027",
     name: "Looe 10 Miler 2027",
@@ -1390,6 +1432,34 @@ type ExistingSeriesEditionSeed = {
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
   {
+    seriesSlug: "running-grand-prix-oulton-park-augut",
+    date: "2027-02-14",
+    startTime: "11:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/oulton-park-gp-5k-10k-half-marathon-marathon-20-mile-metric-marathon-february-2027",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/189561/race-selection?preferred=true&utm_source=runthrough&utm_medium=organiser_referral&utm_campaign=preferred&event_id=189561&origin=runthrough&lraces=21111465818&utm_organiser_id=69173",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 14 February 2027 multi-distance programme, 11:00 half-marathon start and open entry; the established Oulton Park card is enriched rather than duplicated.",
+  },
+  {
+    seriesSlug: "dorney-5k-10k-half-marathon-august-1",
+    date: "2027-04-03",
+    startTime: "09:10",
+    organiser: "RunThrough Events / Dorney Lake Events",
+    url: "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/189561/race-selection?preferred=true&utm_source=runthrough&utm_medium=organiser_referral&utm_campaign=preferred&event_id=189561&origin=runthrough&lraces=21111465449&utm_organiser_id=69173",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    notes:
+      "RunThrough has corrected the former stale date and midnight placeholder: the official page now consistently confirms 3 April 2027, a 09:10 all-distance start and open entry. The established Dorney Lake card is reused.",
+  },
+  {
     seriesSlug: "tatton-half-marathon-november",
     date: "2027-11-07",
     startTime: "09:00",
@@ -2049,7 +2119,6 @@ export const dailyHalfTenMileResearchQueue = [
     ["january", "2027-01-17"],
     ["february", "2027-02-06"],
     ["march", "2027-03-13"],
-    ["april", "2027-04-03"],
   ].map(([month, date]) => ({
     slug: `run-dorney-lake-half-marathon-10k-5k-${month}-2027`,
     date,
@@ -2121,14 +2190,6 @@ export const dailyHalfTenMileResearchQueue = [
     reason:
       "The official entry page markets a half marathon but specifies an actual route distance of 13.5 miles, so it is held for the non-standard-distance catalogue rather than mislabelled as a canonical half.",
     sourceUrl: "https://www.sientries.co.uk/event/lundy-island-race-2027",
-  },
-  {
-    slug: "abbeyknockmoy-half-marathon-2027",
-    date: "2027-09-12",
-    country: "Ireland",
-    reason:
-      "The direct registration page confirms the date and half-marathon distance but labels the Athletics Ireland permit as pending approval.",
-    sourceUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
   },
   {
     slug: "runclare-lisdoonvarna-10-mile-2027",
@@ -2227,14 +2288,6 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {
-    slug: "trim-10-mile-road-race-2027",
-    date: "2027-01-31",
-    country: "Ireland",
-    reason:
-      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval and registration as Open Soon.",
-    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
-  },
-  {
     slug: "noreen-mccarthy-memorial-10-mile-2027",
     date: "2027-02-14",
     country: "Ireland",
@@ -2295,6 +2348,43 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "running-grand-prix-oulton-park-augut": {
+    name: "Oulton Park Running Grand Prix",
+    country: "England",
+    county: "Cheshire",
+    city: "Tarporley",
+    area: "Oulton Park Race Circuit, Little Budworth",
+    surface: "Road",
+    distances: ["Half", "Marathon", "20M", "Metric Marathon", "10K", "5K"],
+    summary:
+      "Oulton Park Running Grand Prix — traffic-free races around the Oulton Park motor circuit.",
+    description:
+      "RunThrough's Oulton Park Running Grand Prix offers half-marathon, marathon, 20-mile, metric-marathon, 10K and 5K races on the closed motor circuit; the established card carries the verified 2027 edition.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/oulton-park-gp-5k-10k-half-marathon-marathon-20-mile-metric-marathon-february-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/oulton-park-gp-5k-10k-half-marathon-marathon-20-mile-metric-marathon-february-2027",
+    defaultStartTime: "11:00",
+  },
+  "dorney-5k-10k-half-marathon-august-1": {
+    name: "Dorney Lake 5K, 10K, Half Marathon & Marathon",
+    country: "England",
+    county: "Buckinghamshire",
+    city: "Windsor",
+    area: "Dorney Lake",
+    surface: "Road",
+    distances: ["Half", "Marathon", "10K", "5K"],
+    summary:
+      "Dorney Lake 5K, 10K, Half Marathon & Marathon — flat road races around the Olympic rowing lake.",
+    description:
+      "RunThrough and Dorney Lake Events stage flat multi-lap road races around the London 2012 rowing lake; the established card carries the verified April 2027 edition.",
+    organiser: "RunThrough Events / Dorney Lake Events",
+    website: "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027",
+    defaultStartTime: "09:10",
+  },
   "battersea-park-10k-half-marathon-august": {
     name: "Battersea Park 5K, 10K & Half Marathon",
     country: "England",

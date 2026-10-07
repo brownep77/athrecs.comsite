@@ -1,11 +1,11 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 4 October 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 7 October 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
-- Added 69 officially verified series: 55 half marathons and 14 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
-- Added 37 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
+- Added 71 officially verified series: 56 half marathons and 15 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
+- Added 39 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
 - Burnsall, Kettlewell and Malham now use the live official Due North series checkout.
@@ -20,7 +20,7 @@ Oxford Half Marathon is also retained on its established permanent card. The off
 
 ## Held candidates
 
-The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, Abbeyknockmoy, RunClare, RunCork, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs, Ennis and Glenmore races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
+The research queue holds permit-pending Ripon, Thirsk, Clowne, Chippenham, Borrowdale, RunClare, RunCork, Sonia O'Sullivan Cobh, Sixmilebridge, Limerick Runs, Ennis and Glenmore races, plus the provisional Tom Scott 10; date- or timetable-conflicted Salisbury, Achill, Carsington Water, Battersea Park, Finsbury Park, Derby, Victoria Park, Dorney Lake January–March, Brixton, Nantwich, Swindon, Othnesbery's Revenge and Delphi races; governing-status-pending Fastlane Summer; entry-state-conflicted Tarpley 10/20; and the World Half Marathon Festival, whose 2027 weekend conflicts with stale years in its ticket headings. The permitted Irish Runner 10M is also held until Athletics Ireland exposes an event-specific official URL, preserving normalized-source duplicate protection. Challenge-walk candidate Corvedale remains held pending confirmation that it is a timed running race. Lundy Island, Winter Wipeout, CBTE Charm Bracelet, Dales Dazzler, Walter Raleigh Round, Ranger Ultras Loop The Loop and Dartmoor Great Escape remain outside the canonical half catalogue because their official distances are non-standard, approximate or internally inconsistent.
 
 ## 29 August 2026 scan
 
@@ -159,3 +159,9 @@ Ripon 10 Mile remains held with licence `#Pending`, Thirsk 10 remains held with 
 RunThrough's live sitemap now includes Battersea Park 5K, 10K & Half Marathon on 8 August 2027. The official event page consistently confirms the date, the 10:30 half-marathon start and open entry from £38, so the edition is attached to the established `battersea-park-10k-half-marathon-august` card with its full same-day programme. The half-marathon entry button currently redirects to an unrelated Blackburn race; the verified event page is therefore retained as the safe entry destination until RunThrough corrects the downstream checkout.
 
 No other missing in-scope event survived canonical slug, yearless-name, normalized-source and series-date matching. Ripon, Thirsk, Clowne, Chippenham and Borrowdale remain held on their current official `Pending` or `TBC` licence evidence, while RunCork, Nenagh, Abbeyknockmoy, Glenmore and Waterford Viking remain held on pending or conflicting Athletics Ireland permit records.
+
+## 7 October 2026 scan
+
+Athletics Ireland permit updates promoted two formerly held Irish races. Nally's SuperValu Trim 10 Mile is published for 31 January 2027 at 12:00 with approved permit `26/581` and open €42 entry. Abbeyknockmoy Hurling Club's 5K, 10K and Half Marathon is published as one canonical card for 12 September 2027; its half starts at 10:00, open half entry is €40 and permit `26/583` is approved.
+
+RunThrough's refreshed official sitemap exposed the Oulton Park Running Grand Prix on 14 February 2027. Its half marathon starts at 11:00 and remains on the established Oulton Park card alongside the marathon, 20-mile, metric-marathon, 10K and 5K programme. RunThrough also corrected the previously held Dorney Lake April page: the 3 April 2027 date and 09:10 all-distance start are now internally consistent, so that edition is attached to the established Dorney Lake card rather than duplicated. Dorney Lake's January, February and March pages remain held while their official copy still conflicts.
