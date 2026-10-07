@@ -1,5 +1,7 @@
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
-import { ArrowRight, ArrowUpRight, CalendarDays, MapPin, Search, Trophy, Tv } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarDays, Search, Trophy, Tv } from "lucide-react";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
+import { compactFixtureLocation, formatFixtureStart } from "@/lib/athrecs/fixture-presentation";
 import { Button } from "@/components/ui/button";
 import { upcomingBroadcasts, type SportBroadcast } from "@/data/sport-broadcasts";
 import { getSportFixtures } from "@/lib/athrecs/sport-fixtures-api";
@@ -194,7 +196,7 @@ function SportPage() {
               <CalendarDays className="size-5 text-accent" aria-hidden="true" /> General fixtures
             </h2>
             <p className="mt-1 text-sm text-muted">
-              Upcoming events, earliest first. Race start times are local to the venue.
+              Upcoming events, earliest first. Starts use the venue’s time zone on race day.
             </p>
           </div>
         </div>
@@ -215,7 +217,7 @@ function SportPage() {
               type="search"
               maxLength={120}
               defaultValue={search.q}
-              placeholder="Search event, city or country"
+              placeholder="Event, town, city, county or state"
               className={filterControl}
             />
           </div>
@@ -380,7 +382,7 @@ function BroadcastCard({ broadcast }: { broadcast: SportBroadcast }) {
           rel="noopener noreferrer"
           className="text-xs text-muted underline underline-offset-2"
         >
-          Coverage checked {formatRaceDateShort(broadcast.checkedAt)}
+          Coverage details
         </a>
       </div>
     </article>
@@ -388,43 +390,92 @@ function BroadcastCard({ broadcast }: { broadcast: SportBroadcast }) {
 }
 
 function FixtureRow({ fixture, category }: { fixture: SportFixture; category: string }) {
+  const location = compactFixtureLocation(fixture);
+  const starts = fixture.starts.map((start) => ({
+    ...start,
+    label: formatFixtureStart(start.time, fixture.eventDate, fixture.timeZone),
+  }));
+  const zones = new Set(
+    starts
+      .filter((start) => /^\d{2}:\d{2} /.test(start.label))
+      .map((start) => start.label.slice(6)),
+  );
+  const sharedZone = zones.size === 1 && ![...zones][0].includes("TBC") ? [...zones][0] : null;
+  const notes = [
+    ...new Set(starts.map((start) => start.note).filter((note): note is string => !!note)),
+  ];
+  const compactLink =
+    "inline-flex min-h-8 items-center gap-1 text-xs font-medium text-accent underline-offset-2 hover:underline [@media(pointer:coarse)]:min-h-11";
   return (
-    <article className="grid gap-3 py-4 sm:grid-cols-[9rem_minmax(0,1fr)_auto] sm:items-start">
-      <time dateTime={fixture.eventDate} className="text-sm font-semibold text-accent">
-        {formatRaceDateShort(fixture.eventDate)}
-      </time>
-      <div className="min-w-0">
-        <h3 className="font-semibold leading-snug">{fixture.name}</h3>
-        <p className="mt-1 flex items-center gap-1 text-sm text-muted">
-          <MapPin className="size-3.5 shrink-0" aria-hidden="true" />
-          {[fixture.city, fixture.country].filter(Boolean).join(", ") || "Location to be confirmed"}
-        </p>
-        <ul
-          className="mt-2 flex flex-wrap gap-1.5"
-          aria-label="Distances and local race start times"
+    <article className="min-w-0 space-y-1 py-3">
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+        <time
+          dateTime={fixture.eventDate}
+          className="shrink-0 text-xs font-semibold tabular-nums text-accent"
         >
-          {fixture.starts.map((start, index) => (
-            <li
-              key={`${start.distance}-${index}`}
-              className="rounded-md bg-elevated px-2 py-1 text-xs text-muted"
-            >
-              {formatDistanceWithUnits(start.distance)} ·{" "}
-              {start.time
-                ? `${/^\d{2}:\d{2}/.test(start.time) ? start.time.slice(0, 5) : start.time} local`
-                : "Start time TBC"}
+          {formatRaceDateShort(fixture.eventDate)}
+        </time>
+        <h3 className="min-w-0 font-semibold leading-snug">{fixture.name}</h3>
+      </div>
+      <p className="text-[13px] leading-5 text-muted">
+        <span className="mr-1.5 inline-flex items-center align-middle">
+          {fixture.country ? <CountryFlag country={fixture.country} /> : null}
+        </span>
+        {location.text ? `${location.text}, ` : ""}
+        {location.countryCode ? (
+          <abbr title={location.countryName} className="no-underline">
+            {location.countryCode}
+          </abbr>
+        ) : !location.text ? (
+          "Location TBC"
+        ) : null}
+        <span aria-hidden="true"> · </span>
+        {fixture.summary}
+      </p>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs leading-5">
+        {sharedZone ? <span className="font-medium text-muted">Starts {sharedZone}:</span> : null}
+        <ul
+          className="contents"
+          aria-label={`Distances and race starts${sharedZone ? ` in ${sharedZone}` : ""}`}
+        >
+          {starts.map((start, index) => (
+            <li key={`${start.distance}-${index}`} className="text-muted">
+              <span className="font-medium text-fg">
+                {formatDistanceWithUnits(start.distance).replace(/^\d+(?:\.\d+)?K · /i, "")}
+              </span>
+              {" · "}
+              <span className="whitespace-nowrap">
+                {sharedZone ? start.label.replace(` ${sharedZone}`, "") : start.label}
+              </span>
             </li>
           ))}
         </ul>
-      </div>
-      <div className="flex flex-wrap gap-x-4 sm:flex-col sm:items-end">
-        {fixture.website ? (
-          <a href={fixture.website} target="_blank" rel="noopener noreferrer" className={textLink}>
-            Official event <ArrowUpRight className="size-3.5" aria-hidden="true" />
-          </a>
-        ) : null}
-        <Link to="/results" search={{ category, q: fixture.name }} className={textLink}>
-          Past results <ArrowRight className="size-3.5" aria-hidden="true" />
-        </Link>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-0.5 sm:ml-auto">
+          {fixture.website ? (
+            <a
+              href={fixture.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={compactLink}
+            >
+              Details <ArrowUpRight className="size-3" aria-hidden="true" />
+            </a>
+          ) : null}
+          <Link to="/results" search={{ category, q: fixture.name }} className={compactLink}>
+            Results <ArrowRight className="size-3" aria-hidden="true" />
+          </Link>
+        </div>
+        {notes.map((note) => (
+          <span key={note} className="text-muted">
+            {starts.every((start) => start.note === note)
+              ? ""
+              : `${starts
+                  .filter((start) => start.note === note)
+                  .map((start) => start.distance)
+                  .join(" / ")}: `}
+            {note}
+          </span>
+        ))}
       </div>
     </article>
   );
