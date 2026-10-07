@@ -133,8 +133,8 @@ function AdminResultClaimsPage() {
             Result claim review
           </h1>
           <p className="max-w-3xl text-sm text-muted">
-            Uncontested claims are approved automatically. This queue is only for genuine ownership
-            conflicts, where optional evidence links may help staff decide between claimants.
+            Check independent athlete identity evidence before approving any new ownership claim. A
+            matching name, verified email or self-supplied link alone does not establish identity.
           </p>
         </div>
         <Button asChild variant="secondary">
@@ -315,7 +315,8 @@ function ClaimReviewCard({
               </div>
             ) : (
               <p className="mt-2 text-sm text-muted">
-                No evidence was supplied. Evidence is not required for an uncontested claim.
+                No evidence was supplied. Request and check independent identity evidence before
+                approval.
               </p>
             )}
             {claim.evidenceText ? (
@@ -372,7 +373,7 @@ function ClaimReviewCard({
               disabled={!reviewable && !revokable}
               rows={6}
               maxLength={2000}
-              placeholder="Decision reason or information the athlete needs to provide…"
+              placeholder="Record the identity evidence checked, decision reason or information still needed…"
               className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm text-fg outline-none focus:ring-2 focus:ring-accent/30"
             />
           </label>
@@ -385,7 +386,11 @@ function ClaimReviewCard({
             <div className="grid gap-2 sm:grid-cols-3 md:grid-cols-1 lg:grid-cols-3">
               <Button
                 type="button"
-                disabled={busy || Boolean(claim.existingOwnerEmail && claim.status !== "approved")}
+                disabled={
+                  busy ||
+                  !note.trim() ||
+                  Boolean(claim.existingOwnerEmail && claim.status !== "approved")
+                }
                 onClick={() => onReview("approve")}
               >
                 <UserRoundCheck className="size-4" aria-hidden="true" />

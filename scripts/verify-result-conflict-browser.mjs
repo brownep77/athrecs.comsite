@@ -60,7 +60,10 @@ const server = await createServer({
   server: { host: "127.0.0.1", port: 8113, strictPort: true, fs: { allow: [process.cwd()] } },
 });
 await server.listen();
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
+});
 try {
   const page = await browser.newPage({ viewport: { width: 1365, height: 1100 } });
   const errors = [];
@@ -71,6 +74,11 @@ try {
   await page.goto("http://127.0.0.1:8113");
   await page.getByRole("heading", { name: "Result claim review" }).waitFor();
   await page.getByRole("heading", { name: "Jordan Test Athlete" }).waitFor();
+  const uncontested = page.locator("article").filter({ hasText: "Jordan Test Athlete" });
+  assert(await uncontested.getByRole("button", { name: "Approve", exact: true }).isDisabled());
+  await uncontested.getByLabel("Staff note").fill("Synthetic independent identity check recorded.");
+  assert(await uncontested.getByRole("button", { name: "Approve", exact: true }).isEnabled());
+  await page.getByText("Check independent athlete identity evidence", { exact: false }).waitFor();
   await page.getByLabel("Ownership conflicts only").check();
   assert.equal(await page.getByRole("heading", { name: "Jordan Test Athlete" }).count(), 0);
   await page.getByText("Existing owner: one@example.test").waitFor();
