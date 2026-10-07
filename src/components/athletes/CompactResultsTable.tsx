@@ -174,7 +174,7 @@ export function CompactResultsTable({
                         href={url}
                         target="_blank"
                         rel="noreferrer"
-                        className="mr-2 inline-flex min-h-7 items-center whitespace-nowrap text-xs text-accent hover:underline"
+                        className="mr-2 inline-block min-h-7 max-w-64 whitespace-normal break-words align-top text-xs text-accent hover:underline"
                         aria-label={`${result.resultSource?.trim() || "Source"}${result.sourceUrls.length > 1 ? ` ${index + 1}` : ""} result source for ${result.eventName}`}
                       >
                         {result.resultSource?.trim() || "Source"}

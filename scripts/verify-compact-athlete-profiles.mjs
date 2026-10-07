@@ -13,9 +13,7 @@ process.env.VITE_AUTH_ENABLED = "true";
 process.env.ATHRECS_STAFF_EMAILS = "compact-staff@example.test";
 const origin = "http://127.0.0.1:18192";
 process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
-const server = await createServer({
-  server: { host: "127.0.0.1", port: 18192, strictPort: true },
-});
+const server = await createServer({ server: { host: "127.0.0.1", port: 18192, strictPort: true } });
 let database;
 const cache = new Map();
 async function rpc(file, name, data, headers) {
@@ -98,6 +96,8 @@ try {
     creditedSource.accessibleName,
     "Example Timing & Results result source for Synthetic source credit race",
   );
+  const longProvider = "Example official timing and results provider with a long credit name";
+  assert.equal(renderSourceLinks(longProvider)[0].text, `${longProvider} ↗`);
   for (const absentProvider of [undefined, null, "", "   "]) {
     const [fallback] = renderSourceLinks(absentProvider);
     assert.equal(fallback.text, "Source ↗");
@@ -213,9 +213,7 @@ try {
   assert.equal((await rpc("athlete-upcoming-api", "getMyUpcoming", undefined, other)).length, 0);
   const share = await rpc("athlete-profile-share-api", "getMyProfileShare", undefined, owner);
   assert.equal(
-    await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
-      slug: share.slug,
-    }),
+    await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }),
     null,
   );
   await rpc(
@@ -265,11 +263,8 @@ try {
   let queue = await rpc("profile-edit-suggestions-api", "getProfileEdits", undefined, staff);
   assert(queue.some((row) => row.id === submitted.id && row.suggestion === suggestion.suggestion));
   assert.equal(
-    (
-      await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
-        slug: share.slug,
-      })
-    ).club,
+    (await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }))
+      .club,
     searchable.club,
     "A suggestion must not change the profile",
   );
@@ -296,11 +291,8 @@ try {
     owner,
   );
   assert.equal(
-    (
-      await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
-        slug: share.slug,
-      })
-    ).searchIndexable,
+    (await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }))
+      .searchIndexable,
     false,
   );
 
@@ -316,13 +308,7 @@ try {
     await rpc(
       "athlete-account-api",
       "saveMyAthleteAccount",
-      {
-        ...input,
-        profileDetails: {
-          ...input.profileDetails,
-          birthdayVisibility: visibility,
-        },
-      },
+      { ...input, profileDetails: { ...input.profileDetails, birthdayVisibility: visibility } },
       owner,
     );
     published = await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
@@ -333,11 +319,8 @@ try {
   }
   await rpc("athlete-upcoming-api", "saveMyUpcoming", { ...events[0], city: "Uppsala" }, owner);
   assert.equal(
-    (
-      await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
-        slug: share.slug,
-      })
-    ).upcoming[0].city,
+    (await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }))
+      .upcoming[0].city,
     "Uppsala",
   );
   const [source] =
@@ -413,10 +396,7 @@ try {
   await assert.rejects(() => getStaffProfile(privateId, owner));
   await assert.rejects(() => getStaffProfile(privateId, other));
   await assert.rejects(() =>
-    getStaffProfile(privateId, {
-      ...staff,
-      "x-forwarded-host": "www.athrecs.com",
-    }),
+    getStaffProfile(privateId, { ...staff, "x-forwarded-host": "www.athrecs.com" }),
   );
   await assert.rejects(() =>
     getStaffProfile(privateId, { ...staff, "sec-fetch-site": "cross-site" }),
@@ -473,20 +453,12 @@ try {
   await rpc(
     "athlete-upcoming-api",
     "saveStaffUpcoming",
-    {
-      ...fixture,
-      athleteId: source.id,
-      eventName: "Staff-added race",
-      sport: "Running",
-    },
+    { ...fixture, athleteId: source.id, eventName: "Staff-added race", sport: "Running" },
     staff,
   );
   assert.equal(
-    (
-      await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
-        slug: share.slug,
-      })
-    ).upcoming.length,
+    (await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }))
+      .upcoming.length,
     2,
   );
   const exported = await rpc(
@@ -600,9 +572,7 @@ try {
   await sql`update athletes set profile_visibility='public' where id=${privateSource.id}`;
   await rpc("athlete-profile-share-api", "saveMyProfileShare", { enabled: false }, owner);
   assert.equal(
-    await rpc("athlete-profile-share-api", "getPublishedSharedProfile", {
-      slug: share.slug,
-    }),
+    await rpc("athlete-profile-share-api", "getPublishedSharedProfile", { slug: share.slug }),
     null,
   );
   assert.equal(await rpc("api", "getAthleteBySlug", "compact-linked-athlete"), null);
@@ -612,11 +582,8 @@ try {
     "Owner opt-out must hide a formerly staff-published source profile too",
   );
   assert.equal(
-    (
-      await rpc("athlete-directory-api", "getAthleteDirectory", {
-        q: "Compact previous name",
-      })
-    ).total,
+    (await rpc("athlete-directory-api", "getAthleteDirectory", { q: "Compact previous name" }))
+      .total,
     0,
   );
   await rpc("athlete-upcoming-api", "deleteMyUpcoming", { id: events[0].id }, owner);
