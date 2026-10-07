@@ -104,7 +104,7 @@ const rows = parsed.slice(1).map((values, index) => {
   return Object.fromEntries(expectedHeaders.map((header, column) => [header, values[column]]));
 });
 
-assert.equal(rows.length, 288, "Source registry row count changed unexpectedly");
+assert.equal(rows.length, 295, "Source registry row count changed unexpectedly");
 assert.equal(
   new Set(rows.map((row) => row.source_id)).size,
   rows.length,
