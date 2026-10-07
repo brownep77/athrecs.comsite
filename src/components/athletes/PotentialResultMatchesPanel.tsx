@@ -109,7 +109,7 @@ function actionLabel(match: PotentialResultMatch): string {
     return "Claim again";
   }
   if (match.ownedByAnotherAccount) return "Submit ownership claim";
-  return "Add to my profile";
+  return "Claim this result";
 }
 
 export function PotentialResultMatchesPanel() {
@@ -221,10 +221,11 @@ export function PotentialResultMatchesPanel() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Add this result to your profile?</AlertDialogTitle>
+            <AlertDialogTitle>Claim this result?</AlertDialogTitle>
             <AlertDialogDescription>
               {confirmMatch?.athleteName} · {confirmMatch?.eventName}. Confirm this is your result.
-              Other results attached to the same athlete record will also appear in your profile.
+              ATHRECS will check your identity before adding this athlete record and its results to
+              your private profile.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -236,7 +237,7 @@ export function PotentialResultMatchesPanel() {
                 if (confirmMatch) addMatch.mutate(confirmMatch.resultId);
               }}
             >
-              {addMatch.isPending ? "Adding…" : "This is my result"}
+              {addMatch.isPending ? "Submitting…" : "Submit claim for review"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -251,7 +252,7 @@ export function PotentialResultMatchesPanel() {
           </div>
           <p className="mt-2 text-sm leading-6 text-muted">
             These are suggestions, not confirmed ownership. Confirm your result, or choose Not me to
-            dismiss that athlete. Competing ownership claims go to staff for review.
+            dismiss that athlete. All new ownership claims go to staff for an identity check.
           </p>
           {data.searchedNames.length ? (
             <p className="mt-2 text-xs text-subtle">Checked: {data.searchedNames.join(" · ")}</p>
@@ -374,7 +375,7 @@ export function PotentialResultMatchesPanel() {
                     }}
                   >
                     <Trophy className="size-4" aria-hidden="true" />
-                    Add to my profile
+                    {actionLabel(match)}
                   </Button>
                 )}
                 <Button

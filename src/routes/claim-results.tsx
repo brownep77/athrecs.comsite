@@ -45,7 +45,7 @@ export const Route = createFileRoute("/claim-results")({
       {
         name: "description",
         content:
-          "Confirm a matched ATHRECS result and add it to your private Athlete Profile immediately.",
+          "Request ownership of a matched ATHRECS result. Staff check athlete identity before adding results to your private profile.",
       },
       { name: "robots", content: "noindex, nofollow" },
     ],
@@ -54,8 +54,8 @@ export const Route = createFileRoute("/claim-results")({
 });
 
 const STATUS_LABELS: Record<ResultClaimStatus, string> = {
-  pending: "Conflict review",
-  needs_info: "Conflict clarification",
+  pending: "Awaiting review",
+  needs_info: "More information needed",
   approved: "Added to profile",
   rejected: "Not approved",
   withdrawn: "Withdrawn",
@@ -135,7 +135,7 @@ function ClaimResultsPage() {
           ? "This athlete identity is already linked to your private profile."
           : response.status === "approved"
             ? "Result added to your private Athlete Profile."
-            : "Another account has claimed this athlete identity, so ATHRECS will review the conflict.",
+            : "Your claim is awaiting an ATHRECS identity check. Results will be added after approval.",
       );
       setDeclaration(false);
       if (response.status === "approved" || response.alreadyOwned) setClaimCompleted(true);
@@ -183,8 +183,8 @@ function ClaimResultsPage() {
                 {resultId ? "Add this result to your profile" : "Claim your race results"}
               </h1>
               <p className="mt-2 text-sm leading-6 text-slate-300">
-                Confirm a matched result once and it is added immediately. Evidence is optional;
-                only genuine ownership conflicts are held for review.
+                Confirm a matched result to request ownership. ATHRECS checks your identity before
+                adding results to your private profile.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -231,7 +231,7 @@ function ClaimResultsPage() {
             </p>
           </div>
           <Button asChild>
-            <Link to="/athlete-account">
+            <Link to="/athlete-account" search={{ section: "potential" }}>
               Find my results <ArrowRight className="size-4" aria-hidden="true" />
             </Link>
           </Button>
@@ -317,7 +317,10 @@ function ClaimResultsPage() {
               <ClaimState
                 status={activeClaim.status}
                 title="This claim needs an identity check"
-                note="Another account has already claimed this athlete identity. The existing owner will not be changed while ATHRECS reviews the conflict."
+                note={
+                  activeClaim.conflictReason ??
+                  "ATHRECS will check your identity before linking these results to your private profile. Staff may ask you for more evidence."
+                }
               >
                 <Button
                   type="button"
@@ -397,8 +400,8 @@ function ClaimResultsPage() {
                   <span>
                     <strong className="block">This is my result</strong>
                     <span className="mt-1 block text-muted">
-                      Add it to my private Athlete Profile immediately unless another account has
-                      already claimed this athlete identity.
+                      I am requesting an identity check before these results are added to my private
+                      Athlete Profile.
                     </span>
                   </span>
                 </label>
@@ -432,11 +435,12 @@ function ClaimResultsPage() {
                   ) : (
                     <FileCheck2 className="size-4" aria-hidden="true" />
                   )}
-                  {submitClaim.isPending ? "Adding result…" : "Add this result to my profile"}
+                  {submitClaim.isPending ? "Submitting claim…" : "Submit claim for review"}
                 </Button>
 
                 <p className="text-center text-xs text-subtle">
-                  No evidence is needed. Your ordinary athlete profile remains private.
+                  Links are optional to submit. Staff may ask for identity evidence before approval.
+                  Your profile remains private.
                 </p>
               </form>
             )}
