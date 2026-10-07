@@ -12,12 +12,34 @@ export const Route = createFileRoute("/sitemaps/$file")({
           await import("@/lib/athrecs/athlete-sitemap.server");
         if (params.file === "pages.xml") {
           const runningPaths: string[] = [];
+          const modified = new Map<string, string>();
           if (!IS_RUNRECS_SITE) {
             const { MARATHON_COUNTRIES } = await import("@/data/road-marathons/countries");
             const { ROAD_MARATHONS } = await import("@/data/road-marathons");
             const { HALF_MARATHON_COUNTRIES } =
               await import("@/data/road-half-marathons/countries");
             const { ROAD_HALF_MARATHONS } = await import("@/data/road-half-marathons");
+            const { roadGuideModifiedAt } = await import("@/lib/running/guide-modified");
+            const { ROAD_ULTRAS, ULTRA_CHECKED, ULTRA_GUIDE_PATH, ultraPath } =
+              await import("@/lib/running/road-ultras");
+            for (const [countries, races] of [
+              [MARATHON_COUNTRIES, ROAD_MARATHONS],
+              [HALF_MARATHON_COUNTRIES, ROAD_HALF_MARATHONS],
+            ] as const) {
+              for (const country of countries)
+                modified.set(
+                  `/running/${country.guide}`,
+                  roadGuideModifiedAt(
+                    races
+                      .filter((race) => race.country === country.id)
+                      .map((race) => race.checkedAt),
+                  ),
+                );
+              for (const race of races)
+                modified.set(`/running/races/${race.slug}`, roadGuideModifiedAt([race.checkedAt]));
+            }
+            modified.set(ULTRA_GUIDE_PATH, ULTRA_CHECKED);
+            for (const race of ROAD_ULTRAS) modified.set(ultraPath(race.slug), ULTRA_CHECKED);
             runningPaths.push(
               "/running",
               ...HALF_MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
@@ -36,7 +58,9 @@ export const Route = createFileRoute("/sitemaps/$file")({
                     ),
                     ...runningPaths,
                   ]
-              ).map((path) => `${SITE_URL}${path}`),
+              )
+                .filter((path, index, paths) => paths.indexOf(path) === index)
+                .map((path) => ({ url: `${SITE_URL}${path}`, lastmod: modified.get(path) })),
             ),
           );
         }

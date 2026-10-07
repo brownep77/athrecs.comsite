@@ -167,6 +167,10 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
         date: "2026-11-01",
         sourceUrl: "https://testcache.nyrr.org/tcsnycmarathon",
       },
+      {
+        date: "2027-11-07",
+        sourceUrl: "https://testcache.nyrr.org/tcsnycmarathon/runners/marathon-time-qualifiers",
+      },
     ],
     media: [
       {
@@ -224,8 +228,7 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
         url: "https://testcache.nyrr.org/media-center/press-release/2025_1102_tcsnycmresults",
       },
     ],
-    checkedAt: "2026-09-26",
-    nextDateNote: "A 2027 marathon date has not yet been verified from the organiser.",
+    checkedAt: "2026-09-27",
     fieldSize: {
       display: "About 59,000",
       basis: "Finishers",
@@ -1070,7 +1073,7 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
     city: "Portland",
     region: "Oregon",
     timeZone: "America/Los_Angeles",
-    officialUrl: "https://www.portlandmarathon.com/info",
+    officialUrl: "https://www.portlandmarathon.com/home",
     description:
       "The Portland Marathon starts and finishes on SW Naito Parkway, with its own start time separate from the half marathon. The organiser provides course maps and a detailed pre-race programme, useful for planning the route and race morning together. General entry comes with published transfer and deferral rules. Bib collection is at the expo unless you arrange the optional shipping service. Past results list both chip and gun times, alongside gender and age-division positions.",
     course: {
@@ -1088,11 +1091,15 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
       {
         name: "General registration",
         description:
-          "Register via the official site; check the separate marathon entry and published transfer/deferral policy.",
-        url: "https://www.portlandmarathon.com/info",
+          "The organiser offers a 2027 early-access waitlist, with a separate early-access invitation for 2026 finishers. Check the official site for current marathon entry availability and terms.",
+        url: "https://www.portlandmarathon.com/home",
       },
     ],
     editions: [
+      {
+        date: "2027-10-03",
+        sourceUrl: "https://www.portlandmarathon.com/home",
+      },
       {
         date: "2026-10-04",
         sourceUrl: "https://www.portlandmarathon.com/info",
@@ -1169,6 +1176,10 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
     ],
     sources: [
       {
+        label: "2027 official date and entry",
+        url: "https://www.portlandmarathon.com/home",
+      },
+      {
         label: "Official race information",
         url: "https://www.portlandmarathon.com/info",
       },
@@ -1188,8 +1199,7 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
       sourceUrl: "https://www.portlandmarathon.com/results?race=167408&event=Marathon",
       note: "The organiser’s marathon table lists 3,012 ranked finishers, including wheelchair participants. Unranked and unfinished records and other distances are excluded.",
     },
-    checkedAt: "2026-09-26",
-    nextDateNote: "A 2027 marathon date has not yet been verified from the organiser.",
+    checkedAt: "2026-10-07",
     practical: [
       {
         label: "2026 marathon start",
@@ -1434,6 +1444,10 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
     ],
     editions: [
       {
+        date: "2027-10-17",
+        sourceUrl: "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/runningstartreg",
+      },
+      {
         date: "2026-10-04",
         sourceUrl:
           "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/medtronictwincitiesmarathon",
@@ -1500,6 +1514,10 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
     ],
     sources: [
       {
+        label: "2027 official date",
+        url: "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/runningstartreg",
+      },
+      {
         label: "Official race information",
         url: "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/medtronictwincitiesmarathon",
       },
@@ -1520,8 +1538,7 @@ export const USA_ROAD_MARATHONS: RoadMarathon[] = [
         url: "https://www.tcmevents.org/alleventsandraces/medtronictwincitiesmarathonweekend/marathonweekendprofessionalathletes",
       },
     ],
-    checkedAt: "2026-09-26",
-    nextDateNote: "A 2027 marathon date has not yet been verified from the organiser.",
+    checkedAt: "2026-10-07",
     fieldSize: {
       display: "About 7,000",
       basis: "Reported finishers",

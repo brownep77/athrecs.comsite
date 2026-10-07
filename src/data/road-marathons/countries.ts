@@ -5,10 +5,11 @@ export const MARATHON_COUNTRIES: readonly MarathonCountryGuide[] = [
     id: "uk",
     name: "United Kingdom",
     guide: "uk-marathons",
+    calendarYear: 2027,
     countryCode: "GB",
     regionLabel: "County / area",
     description:
-      "From London’s crowds to the roads beside Loch Ness, the UK offers plenty of ways to spend 26.2 miles. Compare road marathon dates, courses, entry options and recent field sizes across England, Scotland, Wales and Northern Ireland. A familiar name is a good starting point; the course profile deserves a look too.",
+      "Planning a UK road marathon in 2027? Compare confirmed race dates, counties, entry options and approximate field sizes across England, Scotland, Wales and Northern Ireland. From London’s crowds to the roads beside Loch Ness, there is plenty of choice for your next 26.2 miles. Pick a course that suits your legs as well as your diary; the hills rarely accept an apology. Open each race guide for routes, official entry links and past results. Dates awaiting an organiser’s announcement are marked TBC.",
   },
   {
     id: "australia",
