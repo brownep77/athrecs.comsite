@@ -277,7 +277,8 @@ try {
     assert(!html.includes("Directory Fixture Secret"));
     if (path === "/") {
       assert(html.includes("Your sporting life,"));
-      assert(html.includes('href="/running/events"'));
+      assert(html.includes('href="/races"'));
+      assert(html.includes('href="/sports/road-running"'));
       assert(!html.includes("https://www.runrecs.com/races"));
       assert(!html.includes("Upcoming athletics"));
     }
