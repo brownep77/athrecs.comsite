@@ -39,11 +39,16 @@ export function escapeXml(value: string): string {
   );
 }
 
-export function sitemapXml(urls: string[], index = false): string {
+export type SitemapEntry = string | { url: string; lastmod?: string };
+
+export function sitemapXml(urls: SitemapEntry[], index = false): string {
   const root = index ? "sitemapindex" : "urlset";
   const entry = index ? "sitemap" : "url";
   return `<?xml version="1.0" encoding="UTF-8"?>\n<${root} xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-    .map((url) => `  <${entry}><loc>${escapeXml(url)}</loc></${entry}>`)
+    .map((value) => {
+      const { url, lastmod } = typeof value === "string" ? { url: value } : value;
+      return `  <${entry}><loc>${escapeXml(url)}</loc>${lastmod ? `<lastmod>${escapeXml(lastmod)}</lastmod>` : ""}</${entry}>`;
+    })
     .join("\n")}\n</${root}>\n`;
 }
 

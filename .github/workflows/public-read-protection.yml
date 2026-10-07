@@ -1,0 +1,30 @@
+name: Public read protection
+
+on:
+  pull_request:
+    paths:
+      - "src/lib/athrecs/api.ts"
+      - "src/lib/athrecs/public-read-limits.ts"
+      - "src/routes/races/$slug.tsx"
+      - "scripts/verify-public-read-limits.mjs"
+      - ".github/workflows/public-read-protection.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  public-read-guards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Public read limits and privacy regression
+        run: node scripts/verify-public-read-limits.mjs
+      - name: Paginated public results remain accessible
+        run: node scripts/verify-public-results-section.mjs

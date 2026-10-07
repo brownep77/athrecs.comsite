@@ -1,3 +1,4 @@
+import { siteGraphMeta } from "@/lib/athrecs/seo";
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Flag, Medal, Timer, Trophy } from "lucide-react";
 import { listEvents } from "@/lib/athrecs/api";
@@ -45,13 +46,7 @@ export const Route = createFileRoute("/$language/$country/")({
     const country = displayCountryForLanguage(site, language);
     const canonical = `https://www.athrecs.com/${language}/${site.slug}`;
     return {
-      meta: [
-        { title: `${country} athletics events | ATHRECS` },
-        {
-          name: "description",
-          content: `Find athletics meetings, championships, athletes and clubs in ${country} on ATHRECS.`,
-        },
-      ],
+      meta: siteGraphMeta({ title: `${country} athletics events | ATHRECS`, description: `Find athletics meetings, championships, athletes and clubs in ${country} on AthRecs.`, url: canonical }),
       links: [
         { rel: "canonical", href: canonical },
         ...SITE_LANGUAGES.map((alternate) => ({

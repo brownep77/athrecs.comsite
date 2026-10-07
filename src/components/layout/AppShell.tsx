@@ -1,7 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { Home, SearchCheck, Users, UserRound, CalendarDays, Handshake } from "lucide-react";
+import { Home, SearchCheck, Users, UserRound, Footprints, Handshake, Trophy } from "lucide-react";
 import { AthleteAccountAccess } from "@/components/auth/AthleteAccountAccess";
 import { StaffMicrositeShell } from "@/components/staff/StaffMicrositeShell";
+import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 import { cn } from "@/lib/utils";
 
 const nav = [
@@ -11,6 +12,12 @@ const nav = [
     label: "Athletes",
     icon: Users,
     match: (p: string) => p.startsWith("/athletes"),
+  },
+  {
+    to: "/results",
+    label: "Results",
+    icon: Trophy,
+    match: (p: string) => p === "/results" || p.startsWith("/results/"),
   },
   {
     to: "/my-athlete-profile",
@@ -25,10 +32,10 @@ const nav = [
     match: (p: string) => p === "/athlete-account" || p === "/claim-results",
   },
   {
-    to: "/find-events",
-    label: "Find events",
-    icon: CalendarDays,
-    match: (p: string) => p === "/find-events",
+    to: "/running",
+    label: "Running",
+    icon: Footprints,
+    match: (p: string) => p === "/running" || p.startsWith("/running/"),
   },
   {
     to: "/brands",
@@ -87,11 +94,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                     : "text-muted hover:bg-elevated/60 hover:text-fg",
                 )}
               >
-                <item.icon
-                  className="hidden size-4 lg:block"
-                  strokeWidth={1.75}
-                  aria-hidden="true"
-                />
                 {item.label}
               </Link>
             ))}
@@ -105,10 +107,79 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <AthleteAccountAccess compact />
         </div>
       </header>
+      {pathname === "/" ||
+      pathname.startsWith("/sports/") ||
+      pathname.startsWith("/race-reports") ||
+      pathname.startsWith("/news") ? (
+        <nav
+          aria-label="Browse by sport"
+          className="border-b border-accent/20 bg-accent-soft px-4 md:px-6"
+        >
+          <ul className="flex flex-wrap items-center gap-x-1 py-1">
+            {SPORT_PAGES.map((item) => (
+              <li key={item.slug}>
+                <Link
+                  to="/sports/$sport"
+                  params={{ sport: item.slug }}
+                  search={{}}
+                  aria-current={pathname === `/sports/${item.slug}` ? "page" : undefined}
+                  className={cn(
+                    "inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold no-underline transition-colors hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3",
+                    pathname === `/sports/${item.slug}`
+                      ? "bg-primary text-primary-fg"
+                      : "text-accent",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            {(
+              [
+                { to: "/race-reports", label: "Race Reports" },
+                { to: "/news", label: "News" },
+              ] as const
+            ).map((item) => (
+              <li key={item.to}>
+                <Link
+                  to={item.to}
+                  search={{}}
+                  aria-current={
+                    pathname === item.to || pathname.startsWith(`${item.to}/`) ? "page" : undefined
+                  }
+                  className={cn(
+                    "inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold no-underline hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3",
+                    pathname === item.to || pathname.startsWith(`${item.to}/`)
+                      ? "bg-primary text-primary-fg"
+                      : "text-accent",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
       <main className="min-w-0 flex-1 px-4 pb-8 pt-4 md:px-6 md:pt-7">{children}</main>
       <footer className="mx-4 flex flex-wrap items-center justify-between gap-3 border-t border-border py-5 pb-24 text-xs text-muted md:mx-6 lg:pb-5">
         <p>ATHRECS · One athlete. Every sport.</p>
         <div className="flex flex-wrap gap-4">
+          <Link to="/running" className="hover:text-accent">
+            Running
+          </Link>
+          <Link to="/running/uk-marathons" className="hover:text-accent">
+            UK marathons
+          </Link>
+          <Link to="/results" className="hover:text-accent">
+            Results
+          </Link>
+          <Link to="/race-reports" search={{}} className="hover:text-accent">
+            Race Reports
+          </Link>
+          <Link to="/news" search={{}} className="hover:text-accent">
+            News
+          </Link>
           <Link to="/brands" className="hover:text-accent">
             Brands & Partners
           </Link>
@@ -121,6 +192,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <Link to="/sportsrecs" className="hover:text-accent">
             SportsRecs network
           </Link>
+          <Link to="/about-us" className="hover:text-accent">
+            About us
+          </Link>
+          <Link to="/site-map" className="hover:text-accent">
+            Browse AthRecs
+          </Link>
           <Link to="/privacy" className="hover:text-accent">
             Privacy
           </Link>
@@ -130,7 +207,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         className="safe-pb fixed inset-x-0 bottom-0 z-50 border-t border-border/80 bg-surface/95 backdrop-blur-md lg:hidden"
         aria-label="Primary"
       >
-        <ul className="mx-auto grid max-w-xl grid-cols-6 px-1 pt-1">
+        <ul className="mx-auto grid max-w-xl grid-cols-7 px-1 pt-1">
           {nav.map((item) => {
             const active = item.match(pathname);
             return (

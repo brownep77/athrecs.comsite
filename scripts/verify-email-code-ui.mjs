@@ -18,6 +18,7 @@ try {
   await server.listen();
   browser = await chromium.launch({
     headless: true,
+    executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
   });
   page = await browser.newPage({ viewport: { width: 390, height: 844 } });
@@ -43,11 +44,10 @@ try {
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle", timeout: 60000 });
   await page.getByRole("button", { name: "No thanks", exact: true }).click();
   await page.getByRole("button", { name: "Sign in or create account", exact: true }).click();
-  await page.getByRole("button", { name: "Continue with an email code" }).click();
-  const dialog = page.getByRole("dialog", { name: "Sign in with an email code" });
+  const dialog = page.getByRole("dialog");
   await dialog.getByLabel("Email address", { exact: true }).fill("runner@example.test");
   assert.equal(await dialog.getByLabel("Password", { exact: true }).count(), 0);
-  await dialog.getByRole("button", { name: "Send sign-in code" }).click();
+  await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
   const code = dialog.getByLabel("Six-digit code", { exact: true });
   await code.waitFor({ state: "visible" });
   assert.deepEqual(requests[0], { email: "runner@example.test", type: "sign-in" });
@@ -55,11 +55,11 @@ try {
   assert.equal(await dialog.getByLabel("Email address", { exact: true }).isDisabled(), true);
   assert.equal(await dialog.getByRole("button", { name: /Resend code in/ }).isDisabled(), true);
   await code.fill("111111");
-  await dialog.getByRole("button", { name: "Verify code and sign in" }).click();
+  await dialog.getByRole("button", { name: "Verify code and continue" }).click();
   await dialog.getByRole("alert").waitFor({ state: "visible" });
   assert.deepEqual(requests[1], { email: "runner@example.test", otp: "111111" });
   assert.equal(
-    await dialog.getByRole("button", { name: "Verify code and sign in" }).isDisabled(),
+    await dialog.getByRole("button", { name: "Verify code and continue" }).isDisabled(),
     false,
   );
   await mkdir("artifacts", { recursive: true });
@@ -67,7 +67,7 @@ try {
   await dialog.getByRole("button", { name: "Use another email" }).click();
   assert.equal(await dialog.getByLabel("Email address", { exact: true }).isDisabled(), false);
   assert.equal(await dialog.getByLabel("Six-digit code", { exact: true }).count(), 0);
-  await dialog.getByRole("button", { name: "Back to sign in" }).click();
+  await dialog.getByRole("button", { name: "Use a password instead" }).click();
   await page
     .getByRole("button", { name: "Sign in with email", exact: true })
     .waitFor({ state: "visible" });

@@ -11,6 +11,7 @@ const inputSchema = z.object({
   sport: z.string().trim().max(120).optional(),
   page: z.number().int().min(1).max(100000).optional(),
   pageSize: z.number().int().min(1).max(48).optional(),
+  includeFacets: z.boolean().optional(),
 });
 
 // AthRecs discovery only. Private accounts and unlisted shared profiles are
@@ -26,9 +27,13 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
     const sport = data.sport || null;
     const pageSize = data.pageSize ?? 24;
     const requestedPage = data.page ?? 1;
+    const includeFacets = data.includeFacets ?? true;
+    // Aggregate visible results once for the directory, rather than running a
+    // correlated result query for every athlete before pagination. Keep this
+    // request-local so publication and result-hiding changes apply immediately.
     const [directory] = await sql<AthleteDirectory>`
-      with public_profiles as materialized (
-        select a.id, a.slug, a.display_name, a.city, a.profile_roles,
+      with public_athletes as materialized (
+        select a.id, a.slug, a.display_name, a.city, a.profile_roles, a.profile_type,
           identifier.athlete_number::text as athlete_number,
           identifier.source_number::text as source_number,
           case
@@ -37,24 +42,30 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
             when lower(trim(a.country)) in ('ireland', 'republic of ireland', 'ie', 'irl') then 'Ireland'
             else trim(coalesce(a.country, ''))
           end as country,
-          nullif(c.name, 'Unattached') as club,
-          records.result_count, records.sports
+          nullif(c.name, 'Unattached') as club
         from athletes a
         join athlete_resolved_ids identifier on identifier.athlete_id = a.id
         left join clubs c on c.id = a.club_id
-        cross join lateral (
-          select count(*)::int as result_count,
-            coalesce(array_agg(distinct e.sport order by e.sport)
-              filter (where nullif(trim(e.sport), '') is not null), array[]::text[]) as sports
-          from results r
-          join editions ed on ed.id = r.edition_id
-          join events e on e.id = ed.event_id
-          where r.athlete_id = a.id
-            and (a.profile_type = 'Public figure' or r.result_visibility in ('public', 'public_figure'))
-            and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=a.id and hidden.result_id=r.id)
-            and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_results=false)
-        ) records
         where a.profile_type = 'Public figure' or (a.profile_visibility = 'public' and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.enabled=false))
+      ), result_summaries as materialized (
+        select r.athlete_id, count(*)::int as result_count,
+          coalesce(array_agg(distinct e.sport order by e.sport)
+            filter (where nullif(trim(e.sport), '') is not null), array[]::text[]) as sports
+        from results r
+        join public_athletes a on a.id = r.athlete_id
+        join editions ed on ed.id = r.edition_id
+        join events e on e.id = ed.event_id
+        where (a.profile_type = 'Public figure' or r.result_visibility in ('public', 'public_figure'))
+          and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=a.id and hidden.result_id=r.id)
+          and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_results=false)
+        group by r.athlete_id
+      ), public_profiles as materialized (
+        select a.id, a.slug, a.display_name, a.city, a.profile_roles,
+          a.athlete_number, a.source_number, a.country, a.club,
+          coalesce(records.result_count, 0)::int as result_count,
+          coalesce(records.sports, array[]::text[]) as sports
+        from public_athletes a
+        left join result_summaries records on records.athlete_id = a.id
       ), filtered as materialized (
         select * from public_profiles
         where (${q}::text is null or position(lower(${q}) in
@@ -76,8 +87,12 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
         total, page, ${pageSize}::int as "pageSize",
         (select count(*)::int from public_profiles) as "publicAthletes",
         (select coalesce(sum(result_count), 0)::int from public_profiles) as "publicResults",
-        array(select distinct country from public_profiles where country <> '' order by country) as countries,
-        array(select distinct unnest(sports) as sport from public_profiles order by sport) as sports
+        case when ${includeFacets}::boolean then
+          array(select distinct country from public_profiles where country <> '' order by country)
+          else array[]::text[] end as countries,
+        case when ${includeFacets}::boolean then
+          array(select distinct unnest(sports) as sport from public_profiles order by sport)
+          else array[]::text[] end as sports
       from totals
     `;
     return directory;

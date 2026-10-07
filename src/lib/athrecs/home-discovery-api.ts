@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import { profileSessionMiddleware } from "@/lib/auth/profile-access";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { getAthleteDirectory } from "./athlete-directory-api";
@@ -26,14 +27,15 @@ function publicEventUrl(event: { sport: string; slug: string; website: string })
 }
 
 export const getHomeDiscovery = createServerFn({ method: "GET" })
+  .middleware([profileSessionMiddleware])
   .validator((data: z.input<typeof input> | undefined) => input.parse(data ?? {}))
-  .handler(async ({ data }) => {
+  .handler(async ({ data, context }) => {
     await ensureAthrecsSeeded();
     const sql = await getSql();
     const sports = data.sport ? EVENT_SPORTS.filter((sport) => sport === data.sport) : EVENT_SPORTS;
     const [directory, slugs, eventGroups] = await Promise.all([
       getAthleteDirectory({ data: { sport: data.sport, pageSize: 3 } }),
-      homeProfileSlugs(sql, data.sport || null),
+      context.profileViewerId ? homeProfileSlugs(sql, data.sport || null) : [],
       Promise.all(
         sports.map((sport) =>
           listEvents({
@@ -124,7 +126,7 @@ export const getHomeDiscovery = createServerFn({ method: "GET" })
         ];
       }),
     );
-    return { directory, people, events };
+    return { directory, people, events, canViewProfiles: Boolean(context.profileViewerId) };
   });
 export type HomeDiscovery = Awaited<ReturnType<typeof getHomeDiscovery>>;
 export type HomePerson = HomeDiscovery["people"][number];
@@ -162,13 +164,11 @@ export const searchHomeDiscovery = createServerFn({ method: "GET" })
       // Existing club pages have an Athletics catalogue boundary. Preserve it.
       const { listClubs } = await import("../../athletics/api");
       const clubs = await listClubs({ data: { q: data.q } });
-      return clubs
-        .slice(0, 8)
-        .map((club) => ({
-          href: `/clubs/${encodeURIComponent(club.slug)}`,
-          label: club.name,
-          detail: [club.city, club.country].filter(Boolean).join(" · "),
-        }));
+      return clubs.slice(0, 8).map((club) => ({
+        href: `/clubs/${encodeURIComponent(club.slug)}`,
+        label: club.name,
+        detail: [club.city, club.country].filter(Boolean).join(" · "),
+      }));
     }
     const directory = await getAthleteDirectory({
       data: { q: data.q, sport: data.sport, pageSize: 8 },

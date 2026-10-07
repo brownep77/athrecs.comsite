@@ -34,11 +34,6 @@ export const Route = createRootRoute({
         content: "width=device-width, initial-scale=1, viewport-fit=cover",
       },
       { name: "theme-color", content: "#ffffff" },
-      {
-        name: "keywords",
-        content:
-          "athlete profiles, athlete records, personal bests, sporting results, athlete progress, ATHRECS",
-      },
       ...siteGraphMeta({
         title: `${SITE_NAME} — Athlete profiles for every sport`,
         description: DEFAULT_DESCRIPTION,

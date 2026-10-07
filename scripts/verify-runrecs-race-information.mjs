@@ -101,7 +101,7 @@ try {
       (900001, 'fixture', 'Fixture entry', 'https://example.com/5k', 'official', 'open', true, true),
       (900002, 'fixture', 'Fixture entry', 'https://example.com/10k', 'official', 'open', true, true);
   `);
-  const source = await readFile("src/runrecs/api.ts", "utf8");
+  const source = await readFile("src/lib/running/catalogue.server.ts", "utf8");
   const query = source.match(/const rows = await sql<RawEventRow>`([\s\S]*?)`;/)?.[1];
   assert(query, "Production listing query must be exercised");
   const defaults = {

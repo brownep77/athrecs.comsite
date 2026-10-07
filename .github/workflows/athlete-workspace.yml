@@ -1,0 +1,70 @@
+name: Athlete editing and result proposals
+on:
+  pull_request:
+    paths:
+      - 'src/lib/athlete-workspace/**'
+      - 'src/components/athletes/AthleteWorkspace.tsx'
+      - 'src/routes/admin/athlete-workspace.tsx'
+      - 'src/routes/athlete-results.tsx'
+      - 'src/routes/review-results.tsx'
+      - 'src/lib/athrecs/profile-records.ts'
+      - 'src/lib/athrecs/result-details.ts'
+      - 'migrations/20260926_athlete_result_workspace.sql'
+      - 'scripts/verify-athlete-workspace*.mjs'
+      - '.github/workflows/athlete-workspace.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: athlete-workspace-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify-workspace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: athrecs_workspace_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d athrecs_workspace_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: ''
+      VITE_SITE_BRAND: athrecs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Real PostgreSQL ownership, invitation, publication and removal tests
+        run: node scripts/verify-athlete-workspace.mjs
+      - name: Build without production publication hooks
+        run: npx vite build --mode development
+      - run: npm run typecheck
+      - name: Lint workspace code
+        run: npx eslint src/lib/athlete-workspace/ src/components/athletes/AthleteWorkspace.tsx src/routes/admin/athlete-workspace.tsx src/routes/athlete-results.tsx src/routes/review-results.tsx scripts/verify-athlete-workspace*.mjs
+      - name: Install isolated browser test dependency
+        run: npm install --prefix "$RUNNER_TEMP/workspace-browser" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
+      - name: Install browser
+        run: node "$RUNNER_TEMP/workspace-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Desktop and mobile workspace interactions
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/workspace-browser/node_modules/playwright
+        run: node scripts/verify-athlete-workspace-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: athlete-workspace-checks
+          path: artifacts/workspace-*.png
+          if-no-files-found: ignore
+          retention-days: 7

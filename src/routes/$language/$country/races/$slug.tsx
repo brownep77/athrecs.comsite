@@ -1,3 +1,4 @@
+import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { getEventBySlug } from "@/lib/athrecs/api";
 import { countryMatchesFilter, resolveCountry } from "@/lib/athrecs/countries";
@@ -47,21 +48,11 @@ export const Route = createFileRoute("/$language/$country/races/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) return {};
-    const { data, site, language } = loaderData;
+    const { data } = loaderData;
+    const url = `${SITE_URL}/races/${data.event.slug}`;
     return {
-      meta: [
-        { title: `${data.event.name} — ${site.localName} | ATHRECS` },
-        {
-          name: "description",
-          content: `${data.event.name}: date, venue, distances, entries and results on ATHRECS.`,
-        },
-      ],
-      links: [
-        {
-          rel: "canonical",
-          href: `https://www.athrecs.com/${language}/${site.slug}/races/${data.event.slug}`,
-        },
-      ],
+      meta: siteGraphMeta({ title: `${data.event.name} | ATHRECS`, description: `${data.event.name}: date, venue, distances, entries and results on AthRecs.`, url }),
+      links: [{ rel: "canonical", href: url }],
     };
   },
   component: LocalizedRacePage,

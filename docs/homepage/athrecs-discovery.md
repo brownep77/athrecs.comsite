@@ -29,3 +29,23 @@ Validation: `npm run typecheck`, targeted ESLint, `npm run verify:home-discovery
 and `npm run build`. The homepage verifier uses synthetic privacy fixtures;
 with `--http` it additionally uses the app's isolated PGLite database to exercise real HTTP server functions,
 search, sport filters, empty states and SSR. It never connects to production.
+
+## Reconciliation with main (7 October 2026)
+
+- Retains the Berlin Marathon 2026 results banner and main's HomeEventDiscovery
+  destinations: fixtures, road running, both calendars, marathon and half-marathon
+  guides, UK road ultras, every configured marathon country and Find Events.
+  The shared header retains main's broader sport navigation.
+- Main now requires sign-in for profile reads. The discovery loader uses the
+  existing session middleware and omits performances for anonymous/invalid
+  sessions, while preserving public event discovery. Signed-in readers still
+  pass through the original owner-sharing, hidden-result and eligibility rules.
+  Client feed caches are separated by viewer and hidden on logout.
+- The device-local shortlist and public-sharing controls are unchanged. RunRecs
+  routes, filters, event destinations and publication code are unchanged.
+- Git-triggered Vercel deployments are disabled for
+  `codex/athrecs-engaging-homepage` in `vercel.json` so this review update does not
+  deploy. This exact-branch setting does not change main's deployment behaviour.
+- The current main quality gate is retained, with homepage HTTP checks for
+  anonymous, invalid-token, member and client-context sessions, plus desktop and
+  mobile smoke assertions for both guest and member homepages.

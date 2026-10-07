@@ -27,7 +27,7 @@ export const Route = createFileRoute("/admin/")({
   component: AdminPage,
 });
 
-const GROK_PROMPT = `You are helping update ATHRECS.com (endurance race directory, UK and Ireland first).
+const IMPORT_PROMPT = `You are helping update ATHRECS.com (endurance race directory, UK and Ireland first).
 
 From the race page URL or pasted fixture text below, extract events and editions.
 
@@ -172,7 +172,7 @@ function AdminPage() {
     mutationFn: () => importFromJson({ data: { json } }),
     onSuccess: (r) => {
       setMessage(
-        `Grok JSON import: ${r.eventsUpserted} events, ${r.editionsUpserted} editions, ${r.entryOptionsUpserted} entry options` +
+        `ATHRECS JSON import: ${r.eventsUpserted} events, ${r.editionsUpserted} editions, ${r.entryOptionsUpserted} entry options` +
           (r.errors.length
             ? ` · ${r.errors.length} error(s): ${r.errors.slice(0, 3).join("; ")}`
             : ""),
@@ -277,7 +277,7 @@ function AdminPage() {
   const previewCards = useMemo(() => (preview.data ?? []).slice(0, 6), [preview.data]);
 
   async function copyPrompt() {
-    await navigator.clipboard.writeText(GROK_PROMPT);
+    await navigator.clipboard.writeText(IMPORT_PROMPT);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   }
@@ -287,7 +287,7 @@ function AdminPage() {
       <div className="space-y-2">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">Site tools</p>
         <h1 className="font-display text-2xl font-semibold text-fg md:text-3xl">
-          Update ATHRECS with Grok
+          Update ATHRECS
         </h1>
         <p className="max-w-2xl text-sm text-muted">
           Keep fixtures fresh through the staged Neon publishing flow. Proposed rows are stored,
@@ -387,14 +387,10 @@ function AdminPage() {
                     that string · Environment: <strong>Production</strong> (and Preview if you want)
                   </li>
                   <li>
-                    <strong>Redeploy</strong> (or Publish again from Grok), then refresh this page —
+                    <strong>Redeploy</strong>, then refresh this page —
                     Backend should say <em>Neon Postgres (persistent)</em>
                   </li>
                 </ol>
-                <p className="text-sm">
-                  Or paste the connection string in chat and ask me to walk you through the check —
-                  I cannot set Vercel env vars from here without your Vercel access.
-                </p>
               </div>
             )}
             {dbStatus.data.persistent && (
@@ -664,8 +660,7 @@ function AdminPage() {
         <h2 className="font-display text-lg font-semibold text-fg">1. Go live (publish)</h2>
         <ol className="list-decimal space-y-2 pl-5 text-sm text-muted">
           <li>
-            In this Grok chat, use <strong className="text-fg">Publish</strong> so the app deploys
-            to a public URL (Vercel).
+            Deploy the latest approved version of ATHRECS through Vercel.
           </li>
           <li>
             Optional: attach your domain (e.g. athrecs.com) in the host’s domain settings after the
@@ -683,15 +678,15 @@ function AdminPage() {
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h2 className="font-display text-lg font-semibold text-fg">
-            2. Grok extract → paste JSON
+            2. Import fixture JSON
           </h2>
           <Button type="button" variant="secondary" onClick={() => void copyPrompt()}>
-            {copied ? "Copied" : "Copy Grok prompt"}
+            {copied ? "Copied" : "Copy import instructions"}
           </Button>
         </div>
         <p className="text-sm text-muted">
-          Open a new Grok chat, paste the prompt, add a race URL or fixture list, then paste Grok’s
-          JSON below and import.
+          Use the import instructions to format race or fixture data from verified sources, then
+          paste the resulting JSON below and import.
         </p>
         <textarea
           value={json}
@@ -705,7 +700,7 @@ function AdminPage() {
           disabled={!json.trim() || jsonMut.isPending}
           onClick={() => jsonMut.mutate()}
         >
-          {jsonMut.isPending ? "Importing…" : "Import Grok JSON"}
+          {jsonMut.isPending ? "Importing…" : "Import JSON"}
         </Button>
       </section>
 

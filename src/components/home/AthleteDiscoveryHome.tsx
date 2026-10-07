@@ -1,6 +1,8 @@
 import { useState, type FormEvent, type ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
+import { openAthleteAuth } from "@/lib/auth/client";
+import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -24,6 +26,7 @@ import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { achievementColourClass, distanceColourClass } from "@/lib/athrecs/profile-colours";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
 import { useHomeShortlist, type ShortlistItem } from "./use-home-shortlist";
+import { HomeEventDiscovery } from "./HomeEventDiscovery";
 
 const primary =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-fg no-underline hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
@@ -43,6 +46,8 @@ const athleteItem = (person: HomePerson): ShortlistItem => ({
 });
 
 export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
+  const { user, isPending: sessionPending } = useCurrentUserState();
+  const viewerKey = sessionPending ? "initial" : (user?.id ?? "anonymous");
   const [sport, setSport] = useState("");
   const [kind, setKind] = useState<SearchKind>("Athletes");
   const [query, setQuery] = useState("");
@@ -56,9 +61,11 @@ export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
   const [spotlightIndex, setSpotlightIndex] = useState(0);
   const shortlist = useHomeShortlist();
   const feed = useQuery({
-    queryKey: ["athrecs-home", sport],
+    queryKey: ["athrecs-home", sport, viewerKey],
     queryFn: () => getHomeDiscovery({ data: { sport: sport || undefined } }),
-    initialData: sport ? undefined : initial,
+    enabled: !sessionPending,
+    initialData:
+      !sport && (sessionPending || Boolean(user) === initial.canViewProfiles) ? initial : undefined,
     staleTime: 60_000,
   });
   const search = useQuery({
@@ -68,7 +75,7 @@ export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
     staleTime: 30_000,
   });
   const data = feed.data;
-  const people = data?.people ?? [];
+  const people = sessionPending || user ? (data?.people ?? []) : [];
   const spotlight = people[spotlightIndex % Math.max(1, people.length)];
   const results = people
     .flatMap((person) => person.results.map((result) => ({ ...result, person })))
@@ -120,6 +127,13 @@ export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
 
   return (
     <div className="space-y-6 pb-3">
+      <a
+        href="/results/berlin-marathon-2026"
+        className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 font-semibold text-accent no-underline hover:bg-elevated"
+      >
+        <span>Berlin Marathon 2026 · Results</span>
+        <span className="text-sm">Men, women & age categories →</span>
+      </a>
       <nav
         aria-label="Explore sports"
         className="-mx-4 flex flex-wrap items-center gap-1 border-y border-border bg-elevated px-4 py-2 md:-mx-6 md:px-6"
@@ -347,6 +361,8 @@ export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
         </p>
       </section>
 
+      <HomeEventDiscovery />
+
       {feed.isPending ? (
         <p role="status" className="rounded-xl bg-elevated p-5 text-sm text-muted">
           Loading {sportLabel(sport)}…
@@ -414,8 +430,23 @@ export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
                   </ul>
                 ) : (
                   <Empty>
-                    No public performances for this sport yet. Search for an athlete or explore
-                    another sport.
+                    {data?.canViewProfiles ? (
+                      "No public performances for this sport yet. Search for an athlete or explore another sport."
+                    ) : (
+                      <button
+                        type="button"
+                        className={textLink}
+                        onClick={() =>
+                          openAthleteAuth({
+                            mode: "signin",
+                            callbackURL: "/",
+                            errorCallbackURL: "/",
+                          })
+                        }
+                      >
+                        Sign in to explore athlete performances
+                      </button>
+                    )}
                   </Empty>
                 )}
                 <p className="border-t border-border bg-elevated/60 px-4 py-2 text-[11px] leading-5 text-muted">

@@ -10,6 +10,7 @@ import {
 } from "./club-scanner-fixture.mjs";
 import { extract, discover, fetchSource } from "../src/lib/club-scanner/provider.server.ts";
 import { scopeSchema } from "../src/lib/club-scanner/core.ts";
+import { candidateProfileId, approvalProfileHref } from "../src/lib/club-scanner/profile-links.ts";
 const source = extract(sourceHtml(), sourceUrl, scope);
 assert.equal(source.rows.length, 6, "Exact club names exclude substrings");
 assert.equal(source.rows[0].performance.performance, "00:42:08.7");
@@ -58,6 +59,36 @@ try {
     known = named("Known Runner");
   assert.equal(fresh.status, "proposed");
   assert.equal(known.status, "proposed");
+  assert.equal(fresh.profile, null, "An unpublished new athlete has no profile link");
+  assert.equal(known.profile.id, known.matches[0].id);
+  assert.equal(
+    approvalProfileHref(known.profile),
+    `https://www.athrecs.com/athletes/${known.profile.slug}`,
+  );
+  assert.match(approvalProfileHref(named("Private Runner").profile), /^\/admin\//);
+  assert.equal(
+    named("Alex Variant").profile,
+    null,
+    "A variant-only suggestion is not a confirmed profile",
+  );
+  assert.equal(
+    candidateProfileId({ ...known, matches: [...known.matches, ...known.matches] }),
+    null,
+  );
+  assert.equal(candidateProfileId({ ...known, decision: { action: "create" } }), null);
+  assert.equal(candidateProfileId({ ...known, decision: { action: "link", athleteId: 3 } }), 3);
+  assert.equal(
+    candidateProfileId({ ...known, athlete_id: 2, decision: { action: "link", athleteId: 3 } }),
+    2,
+  );
+  assert.equal(
+    approvalProfileHref({ id: 3, slug: "private", visibility: "private", number: "3" }),
+    "/admin/athletes/ATH-000003",
+  );
+  assert.equal(
+    approvalProfileHref({ id: 3, slug: "private", visibility: "private" }),
+    "/admin/athlete-workspace?athleteId=3",
+  );
   assert.equal(named("Alex Variant").status, "held");
   assert.equal(named("A Initial").status, "held");
   const approve = (ids, extra = {}) =>
@@ -84,6 +115,12 @@ try {
   await assert.rejects(approve([named("A Initial").id], { action: "create" }), /Initial-only/);
   await assert.rejects(approve([known.id], { sourcesReviewed: false }), /Confirm source/);
   await approve([fresh.id, known.id]);
+  const approved = await service.dashboard(
+    { runId: id, status: "approved", q: "", page: 1 },
+    f.sql,
+  );
+  assert.equal(approved.candidates.find((c) => c.id === known.id).profile.id, known.profile.id);
+  assert.equal(approved.candidates.find((c) => c.id === fresh.id).profile, null);
   const altered = sampleRows.map((r) => r.slice());
   altered[0][11] = "00:40:00.0";
   await assert.rejects(
@@ -134,6 +171,16 @@ try {
   await service.runNext(run2.id, f.sql, f.fetcher);
   const repeat = await service.dashboard({ runId: run2.id, status: "all", q: "", page: 1 }, f.sql);
   assert.equal(repeat.total, 6);
+  const publishedFresh = repeat.candidates.find((c) => c.id === fresh.id);
+  assert.equal(
+    publishedFresh.profile.id,
+    publishedFresh.athlete_id,
+    "A newly published athlete links to the saved profile even without original matches",
+  );
+  assert.match(
+    approvalProfileHref(publishedFresh.profile),
+    /^https:\/\/www\.athrecs\.com\/athletes\//,
+  );
   assert.equal(
     repeat.candidates.find((c) => c.id === fresh.id).status,
     "published",

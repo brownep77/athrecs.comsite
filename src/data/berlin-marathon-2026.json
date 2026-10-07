@@ -1,0 +1,9 @@
+{
+  "event": "Berlin Marathon",
+  "eventDate": "2026-09-27",
+  "distanceKm": 42.195,
+  "status": "awaiting",
+  "coverage": "none",
+  "updatedAt": null,
+  "results": []
+}

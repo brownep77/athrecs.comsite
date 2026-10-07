@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
     meta: siteGraphMeta({
       title: "ATHRECS | Your sporting life, all in one place",
       description:
-        "Discover athletes, explore sporting performances and find your next event. Bring your results, personal bests and achievements together on AthRecs.",
+        "Discover athletes, preserve results and personal bests, browse upcoming fixtures, and compare marathon, half-marathon and ultra race guides on AthRecs.",
       url: SITE_URL,
     }),
     links: [{ rel: "canonical", href: SITE_URL }],

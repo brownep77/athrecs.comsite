@@ -147,20 +147,24 @@ export function EditorialRoadSplits({
         </p>
       ) : null}
       <div className="flex flex-wrap gap-2">
-        <a
-          href={moFarahTwoMileRoadBest.source}
-          target="_blank"
-          rel="noreferrer"
-          className="min-w-40 flex-1 rounded-lg border border-border bg-surface px-3 py-2 no-underline hover:bg-elevated"
-        >
+        <div className="min-w-40 flex-1 rounded-lg border border-border bg-surface px-3 py-2">
           <span className="block text-xs text-muted">Running · 2 miles road</span>
           <strong className="text-lg tabular-nums text-fg">{moFarahTwoMileRoadBest.time}</strong>
           <span className="block text-xs text-muted">
             {moFarahTwoMileRoadBest.year}
             {showEvidence ? " · Year confirmed; exact race date unconfirmed" : ""}
           </span>
-          {showEvidence ? <span className="block text-xs text-accent">Source ↗</span> : null}
-        </a>
+          {showEvidence ? (
+            <a
+              href={moFarahTwoMileRoadBest.source}
+              target="_blank"
+              rel="noreferrer"
+              className="block text-xs text-accent"
+            >
+              Source ↗
+            </a>
+          ) : null}
+        </div>
         {moFarahRoadSplits.map((split) => (
           <a
             key={split.distance}

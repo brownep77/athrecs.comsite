@@ -10,6 +10,8 @@ on:
       - "src/data/entry-options.ts"
       - "scripts/publish-remaining-uk-ireland-race-additions.mjs"
       - "scripts/verify-remaining-race-additions-publication.mjs"
+      - "scripts/lib/catalogue-publisher-redirects.mjs"
+      - "scripts/verify-catalogue-publisher-redirects.mjs"
       - ".github/workflows/verify-remaining-race-additions-publication.yml"
       - "package.json"
   workflow_dispatch:
@@ -46,3 +48,5 @@ jobs:
         run: npm ci
       - name: Execute both publication batches twice and verify database state
         run: node --experimental-strip-types scripts/verify-remaining-race-additions-publication.mjs
+      - name: Preserve canonical events when resolving historic URLs
+        run: node scripts/verify-catalogue-publisher-redirects.mjs

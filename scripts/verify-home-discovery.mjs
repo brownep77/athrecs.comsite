@@ -72,10 +72,18 @@ if (!process.argv.includes("--http")) process.exit(0);
 
 // Exercise the compiled server functions and SSR against the app's disposable
 // PGLite database, never a configured/production database.
-process.env.DATABASE_URL = "";
-process.env.RESEND_API_KEY = "";
-process.env.VITE_AUTH_ENABLED = "false";
+for (const key of [
+  "DATABASE_URL",
+  "DATABASE_URL_UNPOOLED",
+  "POSTGRES_URL_NON_POOLING",
+  "RESEND_API_KEY",
+  "ATHRECS_STAFF_EMAILS",
+])
+  process.env[key] = "";
+process.env.VITE_AUTH_ENABLED = "true";
 const origin = "http://127.0.0.1:18196";
+process.env.BETTER_AUTH_URL = origin;
+process.env.BETTER_AUTH_SECRET = "local-home-discovery-test-secret-at-least-32-characters";
 process.env.TSS_SERVER_FN_BASE = `${origin}/_serverFn/`;
 const { createServer } = await import("vite");
 const { createClientRpc } = await import("@tanstack/start-client-core/client-rpc");
@@ -84,9 +92,11 @@ const server = await createServer({ server: { host: "127.0.0.1", port: 18196, st
 let database;
 try {
   await server.listen();
+  console.log("Homepage HTTP server listening");
   database = await (await server.ssrLoadModule("/src/lib/db.ts")).getPglite();
+  console.log("Homepage test database ready");
   const compiled = await (await fetch(`${origin}/src/lib/athrecs/home-discovery-api.ts`)).text();
-  async function rpc(name, data) {
+  async function rpc(name, data, token, clientContext = false) {
     const start = compiled.indexOf(`const ${name} =`);
     assert(start >= 0);
     const section = compiled.slice(start, compiled.indexOf(";", start));
@@ -96,14 +106,42 @@ try {
       createClientRpc(id)({
         method: "GET",
         data,
-        headers: { origin, "sec-fetch-site": "same-origin" },
-        context: {},
+        headers: {
+          origin,
+          "sec-fetch-site": "same-origin",
+          ...(!clientContext && token ? { authorization: `Bearer ${token}` } : {}),
+        },
+        context: clientContext ? { bearerToken: token } : {},
       }),
     );
     if (response.error) throw response.error;
     return response.result;
   }
-  const home = await rpc("getHomeDiscovery", {});
+  console.log("Homepage RPC module compiled");
+  const anonymous = await rpc("getHomeDiscovery", {});
+  assert.equal(anonymous.canViewProfiles, false);
+  assert.deepEqual(anonymous.people, []);
+  const invalid = await rpc("getHomeDiscovery", {}, "invalid-token");
+  assert.equal(invalid.canViewProfiles, false);
+  assert.deepEqual(invalid.people, []);
+  console.log("Anonymous and invalid-token homepage feeds omit profile performances");
+  const signup = await fetch(`${origin}/api/auth/sign-up/email`, {
+    method: "POST",
+    headers: { origin, "content-type": "application/json" },
+    body: JSON.stringify({
+      name: "Home Discovery Viewer",
+      email: "home-viewer@example.test",
+      password: "Home-only-test-password-123!",
+    }),
+  });
+  assert.equal(signup.status, 200, await signup.clone().text());
+  const { token } = await signup.json();
+  assert(token);
+  const home = await rpc("getHomeDiscovery", {}, token);
+  assert.equal(home.canViewProfiles, true);
+  const clientHome = await rpc("getHomeDiscovery", {}, token, true);
+  assert.equal(clientHome.canViewProfiles, true);
+  assert.deepEqual(clientHome.people, home.people);
   assert(home.directory.publicAthletes > 0);
   assert(home.people.length > 0, "Seed catalogue should provide real public spotlights");
   for (const person of home.people) {
@@ -118,10 +156,10 @@ try {
       (event) => event.href.startsWith("/races/") || /^https?:\/\//.test(event.href),
     ),
   );
-  const swimming = await rpc("getHomeDiscovery", { sport: "Swimming" });
+  const swimming = await rpc("getHomeDiscovery", { sport: "Swimming" }, token);
   assert(swimming.people.every((person) => person.results.every((r) => r.sport === "Swimming")));
   assert(swimming.events.every((event) => event.sport === "Swimming"));
-  const empty = await rpc("getHomeDiscovery", { sport: "No such sport" });
+  const empty = await rpc("getHomeDiscovery", { sport: "No such sport" }, token);
   assert.equal(empty.people.length, 0);
   assert.equal(empty.events.length, 0);
   for (const kind of ["Athletes", "Results", "Events", "Clubs"]) {
@@ -143,8 +181,28 @@ try {
     "Find your next event",
     "Achievements worth sharing",
     "athrecs-logo-header.png",
+    "Berlin Marathon 2026",
+    "Your next event starts here",
+    "Sign in to explore athlete performances",
   ])
     assert(html.includes(text), text);
+  for (const href of [
+    "/results/berlin-marathon-2026",
+    "/races",
+    "/sports/road-running",
+    "/calendar",
+    "/running/calendar",
+    "/running",
+    "/running#countries-title",
+    "/running#half-marathons",
+    "/running/uk-road-ultramarathons",
+    "/find-events",
+  ]) {
+    assert(html.includes(`href="${href}"`), href);
+  }
+  const { MARATHON_COUNTRIES } = await import("../src/data/road-marathons/countries.ts");
+  for (const country of MARATHON_COUNTRIES)
+    assert(html.includes(`href="/running/${country.guide}"`), country.guide);
   assert(!html.includes("Illustrative athletes"));
   console.log(
     `PASS: homepage HTTP loader, four searches, sports, empty states and SSR (${home.people.length} public spotlights)`,
