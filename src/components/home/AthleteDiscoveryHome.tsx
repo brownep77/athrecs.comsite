@@ -65,7 +65,7 @@ export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
     queryFn: () => getHomeDiscovery({ data: { sport: sport || undefined } }),
     enabled: !sessionPending,
     initialData:
-      !sport && (sessionPending || Boolean(user) === initial.canViewProfiles) ? initial : undefined,
+      !sessionPending && !sport && Boolean(user) === initial.canViewProfiles ? initial : undefined,
     staleTime: 60_000,
   });
   const search = useQuery({
@@ -74,7 +74,9 @@ export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
     enabled: submitted !== null,
     staleTime: 30_000,
   });
-  const data = feed.data;
+  // SSR and the first client render must use the same loader snapshot. The
+  // application QueryClient can otherwise retain a previous visitor's feed.
+  const data = sessionPending ? initial : feed.data;
   const people = sessionPending || user ? (data?.people ?? []) : [];
   const spotlight = people[spotlightIndex % Math.max(1, people.length)];
   const results = people
@@ -363,7 +365,7 @@ export function AthleteDiscoveryHome({ initial }: { initial: HomeDiscovery }) {
 
       <HomeEventDiscovery />
 
-      {feed.isPending ? (
+      {!data && feed.isPending ? (
         <p role="status" className="rounded-xl bg-elevated p-5 text-sm text-muted">
           Loading {sportLabel(sport)}…
         </p>

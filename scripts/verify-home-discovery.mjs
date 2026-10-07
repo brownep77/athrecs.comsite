@@ -185,7 +185,18 @@ try {
   assert.match(memberResponse.headers.get("x-robots-tag"), /noindex/);
   assert.match(memberResponse.headers.get("cache-control"), /private.*no-store/);
   const memberHtml = await memberResponse.text();
-  assert(memberHtml.includes(home.people[0].name));
+  const { load } = await import("cheerio");
+  assert(
+    load(memberHtml)('[aria-labelledby="athlete-spotlight"]').text().includes(home.people[0].name),
+    "Member SSR must render its loader snapshot after a guest homepage request",
+  );
+  const guestAgain = await fetch(origin);
+  assert(!/noindex/i.test(guestAgain.headers.get("x-robots-tag") ?? ""));
+  const guestHtml = load(await guestAgain.text());
+  assert.equal(guestHtml('[aria-labelledby="recent-performances"] ul').length, 0);
+  assert(
+    guestHtml('[aria-labelledby="recent-performances"]').text().includes("Sign in to explore"),
+  );
   const html = await response.text();
   for (const text of [
     "Your sporting life",
