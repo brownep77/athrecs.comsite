@@ -49,7 +49,8 @@ function handlers(runrecs) {
   assert(source.includes("getEditionResults") && source.includes("listAthletes"));
   const createServerFn = ({ method }) => {
     assert.equal(method, "GET");
-    return {
+    const builder = {
+      middleware: () => builder,
       validator: (validate) => ({
         handler:
           (run) =>
@@ -57,8 +58,10 @@ function handlers(runrecs) {
             run({ data: validate(data) }),
       }),
     };
+    return builder;
   };
   return compile(source, {
+    profileReadMiddleware: {}, // Handler-only limits test; real authentication is tested over HTTP.
     createServerFn,
     IS_RUNRECS_SITE: runrecs,
     ...limits,

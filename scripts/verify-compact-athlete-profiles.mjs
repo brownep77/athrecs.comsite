@@ -14,6 +14,10 @@ const server = await createServer({ server: { host: "127.0.0.1", port: 18192, st
 let database;
 const cache = new Map();
 async function rpc(file, name, data, headers) {
+  // These are now member reads. Use an unrelated signed-in viewer, never staff.
+  if (headers === undefined && ["getAthleteBySlug", "getPublishedSharedProfile"].includes(name)) {
+    headers = { authorization: "Bearer compact-test-other" };
+  }
   if (!cache.has(file)) {
     const response = await fetch(`${origin}/src/lib/athrecs/${file}.ts`);
     assert.equal(response.status, 200);
@@ -398,7 +402,7 @@ try {
     workbook.getWorksheet("Athletes").getCell("A2").value,
     directory.athletes[0].athrecsId,
   );
-  // Publish through the authenticated HTTP endpoint, then read anonymously.
+  // Publish through the authenticated HTTP endpoint, then read as an unrelated signed-in member.
   // All fixtures and privacy transitions stay in this process's disposable DB.
   const publishSelection = (athleteNumbers, headers) =>
     rpc("staff-athlete-directory-api", "publishStaffAthleteProfiles", { athleteNumbers }, headers);
@@ -514,7 +518,7 @@ try {
   assert.equal(paul.athlete.details.nationality, "British");
   assert.equal(paul.athlete.details.birthday, "");
   assert(!JSON.stringify(paul).includes("1978-05-20"));
-  const html = await (await fetch(`${origin}/athletes/paul-browne`)).text();
+  const html = await (await fetch(`${origin}/athletes/paul-browne`, { headers: other })).text();
   assert(html.includes("Norfolk Gazelle"));
   assert(html.includes('data-country-code="GB"'));
   assert(html.includes('aria-label="United Kingdom"'));

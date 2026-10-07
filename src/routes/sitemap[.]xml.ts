@@ -8,13 +8,14 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const { getSql } = await import("@/lib/db");
         const { ensureAthrecsSeeded } = await import("@/lib/athrecs/seed.server");
-        const { athleteSitemapPageCount, sitemapXml, sitemapResponse } =
+        const { sitemapXml, sitemapResponse } =
           await import("@/lib/athrecs/athlete-sitemap.server");
         await ensureAthrecsSeeded();
         const sql = await getSql();
         const { contentSitemapPageCount } = await import("@/lib/athrecs/content-sitemap.server");
-        const pages = await athleteSitemapPageCount(sql);
-        const families: ("races" | "clubs" | "results")[] = IS_RUNRECS_SITE ? [] : ["races", "clubs", "results"];
+        const families: ("races" | "clubs" | "results")[] = IS_RUNRECS_SITE
+          ? []
+          : ["races", "clubs", "results"];
         const counts = await Promise.all(
           families.map((kind) => contentSitemapPageCount(sql, kind)),
         );
@@ -28,10 +29,6 @@ export const Route = createFileRoute("/sitemap.xml")({
                   { length: counts[index] },
                   (_, i) => `${SITE_URL}/sitemaps/${kind}-${i + 1}.xml`,
                 ),
-              ),
-              ...Array.from(
-                { length: pages },
-                (_, i) => `${SITE_URL}/sitemaps/athletes-${i + 1}.xml`,
               ),
             ],
             true,

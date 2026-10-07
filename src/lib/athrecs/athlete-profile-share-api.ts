@@ -1,3 +1,4 @@
+import { profileReadMiddleware } from "@/lib/auth/profile-access";
 import { readResultDetails } from "./result-details";
 import { publicProfileDetails, type PublicProfileDetails } from "./profile-details";
 import { loadUpcoming, type UpcomingEvent } from "./athlete-upcoming-api";
@@ -420,6 +421,7 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
   });
 
 export const getPublishedSharedProfile = createServerFn({ method: "GET" })
+  .middleware([profileReadMiddleware])
   .validator((input: { slug: string }) => ({
     slug: typeof input?.slug === "string" ? input.slug.trim().toLowerCase() : "",
   }))

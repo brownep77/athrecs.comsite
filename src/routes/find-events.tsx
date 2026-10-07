@@ -90,6 +90,21 @@ function FindEventsPage() {
           .
         </p>
       ) : null}
+      {!IS_RUNRECS_SITE ? (
+        <a
+          href="/races?sport=Triathlon"
+          className="block rounded-2xl border border-border bg-surface p-5 no-underline hover:border-accent"
+        >
+          <Activity className="size-6 text-accent" aria-hidden="true" />
+          <h2 className="mt-3 font-display text-2xl font-semibold text-fg">Triathlon</h2>
+          <p className="mt-2 text-sm leading-6 text-muted">
+            Find triathlon fixtures, distances, official entry links and previous results.
+          </p>
+          <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-accent">
+            Explore triathlon <ArrowRight className="size-4" aria-hidden="true" />
+          </span>
+        </a>
+      ) : null}
       <section className="space-y-4">
         <div>
           <h2 className="font-display text-2xl font-semibold">Event calendars for other sports</h2>

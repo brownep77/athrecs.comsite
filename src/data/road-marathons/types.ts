@@ -36,6 +36,7 @@ export type RoadRace = {
 };
 
 export type MarathonCountryGuide = {
+  calendarYear?: number;
   id: MarathonCountry;
   name: string;
   guide: string;

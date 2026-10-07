@@ -14,13 +14,18 @@ export function raceLocalDate(timeZone: string, now: Date | string = new Date())
   return `${part("year")}-${part("month")}-${part("day")}`;
 }
 
-export function upcomingRoadEditions(race: RoadMarathon, now: Date | string = new Date()) {
+export function upcomingRoadEditions(
+  race: RoadMarathon,
+  now: Date | string = new Date(),
+  year?: number,
+) {
   const today = raceLocalDate(race.timeZone, now);
   return race.editions
     .filter(
       (edition) =>
         edition.date >= ROAD_MARATHON_WINDOW_START &&
         edition.date <= ROAD_MARATHON_WINDOW_END &&
+        (year === undefined || edition.date.startsWith(`${year}-`)) &&
         (edition.endDate ?? edition.date) >= today,
     )
     .sort((a, b) => a.date.localeCompare(b.date));

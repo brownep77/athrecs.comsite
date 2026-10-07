@@ -9,7 +9,7 @@ import * as base from "../lib/athrecs/api";
 
 // Keep staff, import and shared-network functions available. The explicit
 // exports below replace only public catalogue functions that require the
-// Athletics, Running and Parkrun catalogue boundary.
+// Athletics, Running, Parkrun and Triathlon catalogue boundary.
 export * from "../lib/athrecs/api";
 
 const ATHLETICS_SPORT = "Athletics" as const;
@@ -35,6 +35,7 @@ export const listEventRegions = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     if (data.sport === "Running" || data.sport === "Parkrun" || data.sport === "All")
       return queryRunningRegions(data);
+    if (data.sport === "Triathlon") return base.listEventRegions({ data });
     if (data.sport && !isAthleticsSport(data.sport)) return [];
     return base.listEventRegions({ data: { ...data, sport: ATHLETICS_SPORT } });
   });
@@ -66,6 +67,7 @@ export const listEvents = createServerFn({ method: "GET" })
     if (data.sport === "Running" || data.sport === "Parkrun" || data.sport === "All") {
       return queryRunningEvents({ ...data, distance: data.distance === "All" ? undefined : data.distance });
     }
+    if (data.sport === "Triathlon") return base.listEvents({ data });
     if (data.sport && !isAthleticsSport(data.sport)) return [];
     return base.listEvents({
       data: {
@@ -80,16 +82,16 @@ export const getEventBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const result = await base.getEventBySlug({ data });
     if (!result) return null;
-    if (!["Athletics", "Running", "Parkrun"].includes(result.event.sport)) return null;
+    if (!["Athletics", "Running", "Parkrun", "Triathlon"].includes(result.event.sport)) return null;
     return {
       ...result,
       upcoming: result.upcoming.map((edition) => ({
         ...edition,
-        start_time: result.event.sport === "Athletics" ? edition.start_time : supplementedStart(
+        start_time: ["Athletics", "Triathlon"].includes(result.event.sport) ? edition.start_time : supplementedStart(
           result.event, edition.event_date, edition.distance_code, edition.start_time,
         ),
       })),
-      related: result.related.filter((event) => ["Athletics", "Running", "Parkrun"].includes(event.sport)),
+      related: result.related.filter((event) => ["Athletics", "Running", "Parkrun", "Triathlon"].includes(event.sport)),
     };
   });
 
@@ -102,7 +104,7 @@ export const getEditionResults = createServerFn({ method: "GET" })
       from editions edition
       join events event on event.id = edition.event_id
       where edition.id = ${data}
-        and event.sport in ('Athletics', 'Running', 'Parkrun')
+        and event.sport in ('Athletics', 'Running', 'Parkrun', 'Triathlon')
       limit 1
     `;
     if (!allowed.length) return [];
@@ -371,7 +373,7 @@ async function queryAthleticsCalendarPage(
   data: AthleticsCalendarPageInput = {},
 ): Promise<AthleticsCalendarPage> {
   const sql = await ready();
-  const calendarSport = data.sport === "Running" || data.sport === "Parkrun" ? data.sport : ATHLETICS_SPORT;
+  const calendarSport = data.sport === "Running" || data.sport === "Parkrun" || data.sport === "Triathlon" ? data.sport : ATHLETICS_SPORT;
   const rawQ = data.q?.trim() ?? "";
   const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
   const region = data.region?.trim() || null;
@@ -519,6 +521,7 @@ export const listAthleticsCalendarPage = createServerFn({ method: "GET" })
 export const listCalendarEditions = createServerFn({ method: "GET" })
   .validator((input: CalendarInput) => input ?? {})
   .handler(async ({ data }) => {
+    if (data.sport === "Triathlon") return base.listCalendarEditions({ data });
     if (data.sport && data.sport !== "All" && !isAthleticsSport(data.sport)) return [];
     return base.listCalendarEditions({
       data: {

@@ -113,10 +113,11 @@ function AthletePrivacyPage() {
           <p>
             ATHRECS may hold source-checked race results in a private archive so athletes can find
             and claim their own records after signing in. Ordinary participant lists, names and
-            finish times are not published as a browseable public directory. Public-figure results
-            are the exception, and an athlete may later choose to publish their own profile. Claim
-            evidence remains private, and claiming does not automatically publish your results or
-            the private contents of your Entry Passport.
+            finish times are not published as a browseable public directory. Published race results
+            remain available on event pages. Athlete profiles, including public-figure and shared
+            profiles, require viewers to log in. An athlete may choose to share their own profile
+            with signed-in members. Claim evidence remains private, and claiming does not
+            automatically publish your results or the private contents of your Entry Passport.
           </p>
         </NoticeSection>
 
@@ -130,10 +131,9 @@ function AthletePrivacyPage() {
             identifies the profile across sports. Nationality, country of birth, age category,
             coach, manager and contact preference can appear on the shared profile. Your birthday
             stays hidden unless you choose to display its day and month or full date in your
-            account. Search discovery is a separate choice: enabling it allows the selected public
-            fields to appear in Google and other search engines and includes the profile in our
-            sitemap. Turning it off removes that permission and the sitemap entry immediately;
-            search engines may take time to update their own listings.
+            account. Viewers must log in to open a shared profile. Athlete profile pages are
+            excluded from our search-engine sitemaps and marked not to be indexed. Search engines
+            may take time to remove older listings.
           </p>
         </NoticeSection>
 

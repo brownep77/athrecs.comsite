@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
+import { resultCredit } from "@/lib/athrecs/result-credit";
 
 export function SourcePerformanceHistory({
   histories,
@@ -20,6 +21,7 @@ export function SourcePerformanceHistory({
       history.performances.map((row, index) => ({
         ...row,
         key: `${history.provider}:${history.externalId}:${index}`,
+        credit: resultCredit(row.sourceUrls[0] || history.sourceUrl, history.provider),
       })),
     )
     .sort((a, b) => b.date.localeCompare(a.date));
@@ -170,6 +172,17 @@ export function SourcePerformanceHistory({
                     {row.performance}
                     {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
                     <ResultDisqualification decision={row.disqualification} />
+                    {row.credit ? (
+                      <a
+                        href={row.credit.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${row.credit.name}: original result for ${row.meeting}`}
+                        className="block text-xs font-normal text-accent hover:underline"
+                      >
+                        Results: {row.credit.name} ↗
+                      </a>
+                    ) : null}
                     {showEvidence && row.labels.length ? (
                       <span className="block text-xs font-normal text-muted">
                         Source: {row.labels.join(", ")}

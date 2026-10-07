@@ -2253,7 +2253,7 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
     timeZone: "Australia/Perth",
     officialUrl: "https://www.wamc.org.au/event/wadjemup-rottnest-running-festival",
     description:
-      "The Rottnest Island Marathon takes runners around Wadjemup on four laps of island roads and paved paths, passing salt lakes and northern bays. The 2026 course includes an extension towards Oliver’s Hill, adding to an undulating coastal route. Planning starts before the start line: check the event ferry service or arrange an overnight stay. Entry is through the West Australian Marathon Club, with member and non-member rates. A 2027 date is still to be confirmed here.",
+      "The Rottnest Island Marathon takes runners around Wadjemup on four laps of island roads and paved paths, passing salt lakes and northern bays. The 2026 course includes an extension towards Oliver’s Hill, adding to an undulating coastal route. Planning starts before the start line: check the event ferry service or arrange an overnight stay. Entry is through the West Australian Marathon Club, with member and non-member rates. The next marathon is scheduled for 13 June 2027.",
     course: {
       summary:
         "Four-lap island-road marathon. The 2026 guide starts at Heritage Common and visits salt lakes and the northern bays, with the Oliver's Hill extension used once.",
@@ -2274,8 +2274,12 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
         url: "https://www.wamc.org.au/event/wadjemup-rottnest-running-festival",
       },
     ],
-    editions: [],
-    nextDateNote: "The 2026 race took place on 14 June. A 2027 date has not been verified.",
+    editions: [
+      {
+        date: "2027-06-13",
+        sourceUrl: "https://www.wamc.org.au/event/wadjemup-rottnest-running-festival",
+      },
+    ],
     practical: [
       {
         label: "Travel planning",
@@ -2311,6 +2315,10 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
     ],
     sources: [
       {
+        label: "2027 official date",
+        url: "https://www.wamc.org.au/event/wadjemup-rottnest-running-festival",
+      },
+      {
         label: "Official event information",
         url: "https://www.wamc.org.au/event/wadjemup-rottnest-running-festival",
       },
@@ -2334,7 +2342,7 @@ export const AUSTRALIA_ROAD_MARATHONS: RoadMarathon[] = [
       sourceUrl: "https://ausrunning.net/marathon/rottnest-island-2026",
       note: "Ausrunning reports 275 full-marathon finishers in 2026.",
     },
-    checkedAt: "2026-09-26",
+    checkedAt: "2026-10-07",
   },
   {
     slug: "bunbury-three-waters-marathon",
