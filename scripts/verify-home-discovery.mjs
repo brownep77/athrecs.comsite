@@ -175,6 +175,17 @@ try {
   }
   const response = await fetch(origin);
   assert.equal(response.status, 200);
+  assert(
+    !/noindex/i.test(response.headers.get("x-robots-tag") ?? ""),
+    "Guest homepage must remain indexable",
+  );
+  assert.match(response.headers.get("cache-control"), /private.*no-store/);
+  const memberResponse = await fetch(origin, { headers: { authorization: `Bearer ${token}` } });
+  assert.equal(memberResponse.status, 200);
+  assert.match(memberResponse.headers.get("x-robots-tag"), /noindex/);
+  assert.match(memberResponse.headers.get("cache-control"), /private.*no-store/);
+  const memberHtml = await memberResponse.text();
+  assert(memberHtml.includes(home.people[0].name));
   const html = await response.text();
   for (const text of [
     "Your sporting life",

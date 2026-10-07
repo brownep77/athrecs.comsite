@@ -1,4 +1,4 @@
-import { createServerFn } from "@tanstack/react-start";
+import { createMiddleware, createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { profileSessionMiddleware } from "@/lib/auth/profile-access";
 import { getSql } from "@/lib/db";
@@ -26,8 +26,20 @@ function publicEventUrl(event: { sport: string; slug: string; website: string })
   }
 }
 
-export const getHomeDiscovery = createServerFn({ method: "GET" })
+// Guest homepages contain public discovery links, not profile performances.
+// Keep them indexable; authenticated responses retain the profile noindex header.
+const homeDiscoverySessionMiddleware = createMiddleware({ type: "function" })
   .middleware([profileSessionMiddleware])
+  .server(async ({ next, context }) => {
+    if (!context.profileViewerId) {
+      const { removeResponseHeader } = await import("@tanstack/react-start/server");
+      removeResponseHeader("X-Robots-Tag");
+    }
+    return next();
+  });
+
+export const getHomeDiscovery = createServerFn({ method: "GET" })
+  .middleware([homeDiscoverySessionMiddleware])
   .validator((data: z.input<typeof input> | undefined) => input.parse(data ?? {}))
   .handler(async ({ data, context }) => {
     await ensureAthrecsSeeded();
