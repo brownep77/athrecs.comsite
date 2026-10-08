@@ -93,7 +93,7 @@ const COUNTRY_ZONES: Record<string, string> = {
 };
 
 export function fixtureTimeZone(country?: string | null): string | null {
-  return COUNTRY_ZONES[country?.trim() ?? ""] ?? null;
+  return COUNTRY_ZONES[countryFlag(country).name] ?? null;
 }
 
 export function fixtureSummary(summary: string | null, sport: string, city: string | null): string {

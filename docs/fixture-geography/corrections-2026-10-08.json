@@ -1,0 +1,380 @@
+[
+  {
+    "slug": "longtown-10",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/longtown-10",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Carlisle; Area: Cumbria."
+  },
+  {
+    "slug": "alnwick-castle-half-marathon-10k",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Northumberland",
+    "sourceUrl": "https://runabc.co.uk/alnwick-castle-half-marathon-10k",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Alnwick; Area: Northumberland."
+  },
+  {
+    "slug": "great-north-run",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Tyne & Wear",
+    "sourceUrl": "https://runabc.co.uk/great-north-run",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Newcastle; Area: Tyne & Wear."
+  },
+  {
+    "slug": "benidorm-marathon-half-running-crazy-10k",
+    "beforeCountry": "Scotland",
+    "country": "Spain",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/benidorm-marathon-half-running-crazy-10k",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Benidorm, Spain; Area: ."
+  },
+  {
+    "slug": "bmaf-open-5km-road-championships-inc-northern-masters-champs",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "London",
+    "sourceUrl": "https://runabc.co.uk/bmaf-open-5km-road-championships-inc-northern-masters-champs",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Battersea Park; Area: London."
+  },
+  {
+    "slug": "capital-to-country",
+    "beforeCountry": "Scotland",
+    "country": "Nepal",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/capital-to-country",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Kathmandu, Nepal; Area: ."
+  },
+  {
+    "slug": "carlisle-remembrance-run",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/carlisle-remembrance-run",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Carlisle; Area: Cumbria."
+  },
+  {
+    "slug": "derwent-reservoir-trail-races",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Northumberland",
+    "sourceUrl": "https://runabc.co.uk/derwent-reservoir-trail-races",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Consett; Area: Northumberland."
+  },
+  {
+    "slug": "wild-deer-ultra",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "County Durham",
+    "sourceUrl": "https://runabc.co.uk/wild-deer-ultra",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: near Consett; Area: County Durham."
+  },
+  {
+    "slug": "disney-wine-dine-half-marathon",
+    "beforeCountry": "Scotland",
+    "country": "United States",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/disney-wine-dine-half-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Orlando, United States; Area: ."
+  },
+  {
+    "slug": "detroit-marathon",
+    "beforeCountry": "Scotland",
+    "country": "United States",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/detroit-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Detroit, United States; Area: ."
+  },
+  {
+    "slug": "great-wall-marathon",
+    "beforeCountry": "Scotland",
+    "country": "China",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/great-wall-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Tianjin, China; Area: ."
+  },
+  {
+    "slug": "gothenburg-marathon",
+    "beforeCountry": "Scotland",
+    "country": "Sweden",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/gothenburg-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Gothenburg, Sweden; Area: ."
+  },
+  {
+    "slug": "keswick-half-marathon",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/keswick-half-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Keswick; Area: Cumbria."
+  },
+  {
+    "slug": "kingdom-of-northumbria-coastal-ultra",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Northumberland",
+    "sourceUrl": "https://runabc.co.uk/kingdom-of-northumbria-coastal-ultra",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Bamburgh; Area: Northumberland."
+  },
+  {
+    "slug": "marine-corps-marathon-10k",
+    "beforeCountry": "Scotland",
+    "country": "United States",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/marine-corps-marathon-10k",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Virginia, United States; Area: ."
+  },
+  {
+    "slug": "helvellyn-trail-run-10k",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/helvellyn-trail-run-10k",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Glenridding; Area: Cumbria."
+  },
+  {
+    "slug": "langdale-horseshoe",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/langdale-horseshoe",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Great Langdale; Area: Cumbria."
+  },
+  {
+    "slug": "nepal-international-marathon",
+    "beforeCountry": "Scotland",
+    "country": "Nepal",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/nepal-international-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Batase, Nepal; Area: ."
+  },
+  {
+    "slug": "rat-race-the-wall-2019",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/rat-race-the-wall-2019",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Carlisle; Area: Cumbria."
+  },
+  {
+    "slug": "pilgrims-ultra",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Northumberland",
+    "sourceUrl": "https://runabc.co.uk/pilgrims-ultra",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Lindisfarne; Area: Northumberland."
+  },
+  {
+    "slug": "niagara-falls-marathon-half-marathon-relay-10k",
+    "beforeCountry": "Scotland",
+    "country": "Canada",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/niagara-falls-marathon-half-marathon-relay-10k",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Ontario, Canada; Area: ."
+  },
+  {
+    "slug": "rip-n-run-xl",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "West Yorkshire",
+    "sourceUrl": "https://runabc.co.uk/rip-n-run-xl",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Hebden Bridge; Area: West Yorkshire."
+  },
+  {
+    "slug": "san-sebastian-marathon",
+    "beforeCountry": "Scotland",
+    "country": "Spain",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/san-sebastian-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: San Sebastian, Spain; Area: ."
+  },
+  {
+    "slug": "run-the-raid-lindisfarne-half-marathon",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Northumberland",
+    "sourceUrl": "https://runabc.co.uk/run-the-raid-lindisfarne-half-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Holy Isle; Area: Northumberland."
+  },
+  {
+    "slug": "amica-insurance-seattle-marathon",
+    "beforeCountry": "Scotland",
+    "country": "United States",
+    "county": "",
+    "sourceUrl": "https://www.seattlemarathon.org/faq",
+    "checkedAt": "2026-10-08",
+    "evidence": "runABC incorrectly says United Kingdom; organiser confirms Seattle Center, Seattle, Washington."
+  },
+  {
+    "slug": "montane-cheviot-goat-winter-ultra-run",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Northumberland",
+    "sourceUrl": "https://runabc.co.uk/montane-cheviot-goat-winter-ultra-run",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Breamish Valley; Area: Northumberland."
+  },
+  {
+    "slug": "shanghai-marathon",
+    "beforeCountry": "Scotland",
+    "country": "China",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/shanghai-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Shanghai, China; Area: ."
+  },
+  {
+    "slug": "spar-budapest-international-marathon",
+    "beforeCountry": "Scotland",
+    "country": "Hungary",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/spar-budapest-international-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Budapest, Hungary; Area: ."
+  },
+  {
+    "slug": "sport-in-action-castle-5k-series-race-4",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/sport-in-action-castle-5k-series-race-4",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Carlisle; Area: Cumbria."
+  },
+  {
+    "slug": "the-priory-100k",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Northumberland",
+    "sourceUrl": "https://runabc.co.uk/the-priory-100k",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Bamburgh; Area: Northumberland."
+  },
+  {
+    "slug": "sport-in-action-castle-5k-series-race-5",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/sport-in-action-castle-5k-series-race-5",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Carlisle; Area: Cumbria."
+  },
+  {
+    "slug": "the-lap-windermere-ultra-anticlockwise",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/the-lap-windermere-ultra-anticlockwise",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Ambleside; Area: Cumbria."
+  },
+  {
+    "slug": "tromso-ultra",
+    "beforeCountry": "Scotland",
+    "country": "Norway",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/tromso-ultra",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Tromsø, Norway; Area: ."
+  },
+  {
+    "slug": "ullswater-trail-run-10k",
+    "beforeCountry": "Scotland",
+    "country": "England",
+    "county": "Cumbria",
+    "sourceUrl": "https://runabc.co.uk/ullswater-trail-run-10k",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Glenridding; Area: Cumbria."
+  },
+  {
+    "slug": "guernsey-june-half-marathon",
+    "beforeCountry": "England",
+    "country": "Guernsey",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/guernsey-june-half-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Guernsey; Area: Channel Islands."
+  },
+  {
+    "slug": "hospice-10k-run",
+    "beforeCountry": "England",
+    "country": "Jersey",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/hospice-10k-run",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: St Clement, Jersey; Area: Channel Islands."
+  },
+  {
+    "slug": "corporate-cup-august",
+    "beforeCountry": "England",
+    "country": "Jersey",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/corporate-cup-august",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: St Helier, Jersey; Area: Channel Islands."
+  },
+  {
+    "slug": "isle-of-man-marathon",
+    "beforeCountry": "England",
+    "country": "Isle of Man",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/isle-of-man-marathon",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Isle of Man; Area: Lancashire."
+  },
+  {
+    "slug": "jersey-spartan-half-marathon-relay-fun-run",
+    "beforeCountry": "England",
+    "country": "Jersey",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/jersey-spartan-half-marathon-relay-fun-run",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: St Clement, Jersey; Area: Channel Islands."
+  },
+  {
+    "slug": "western-10-road-run",
+    "beforeCountry": "England",
+    "country": "Isle of Man",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/western-10-road-run",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: Isle of Man; Area: Lancashire."
+  },
+  {
+    "slug": "round-the-rock-48-miles",
+    "beforeCountry": "England",
+    "country": "Jersey",
+    "county": "",
+    "sourceUrl": "https://runabc.co.uk/round-the-rock-48-miles",
+    "checkedAt": "2026-10-08",
+    "evidence": "Source Town/City: St Helier, Jersey; Area: Channel Islands."
+  }
+]

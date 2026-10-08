@@ -4,6 +4,7 @@ import { fixtureDistanceCode, publicHttpUrl, UK_FIXTURE_COUNTRIES } from "./spor
 import { kmFromDistanceCode } from "./distance.ts";
 import { FIXTURE_DETAILS } from "../../data/fixture-details.ts";
 import { fixtureSummary, fixtureTimeZone } from "./fixture-presentation.ts";
+import { filterCountryName, resolveCountry } from "./countries.ts";
 
 export const SPORT_FIXTURE_PAGE_SIZE = 24;
 
@@ -39,7 +40,7 @@ export async function readSportFixtures(
 ) {
   const q = input.q ? `%${input.q.replace(/[\\%_]/g, "\\$&")}%` : null;
   const page = input.page ?? 1;
-  const country =
+  let country =
     input.country === "United Kingdom"
       ? [...UK_FIXTURE_COUNTRIES]
       : input.country
@@ -55,6 +56,14 @@ export async function readSportFixtures(
   const distanceCodes = [
     ...new Set(options.map((row) => row.distance).filter((value): value is string => !!value)),
   ];
+  const canonicalCountry = (value: string | null) =>
+    value ? filterCountryName(resolveCountry({ country: value })) : null;
+  if (country) {
+    const wanted = new Set(country.map(canonicalCountry));
+    country = options
+      .map((row) => row.country)
+      .filter((value): value is string => !!value && wanted.has(canonicalCountry(value)));
+  }
   const distance = input.distance
     ? distanceCodes.filter(
         (code) => fixtureDistanceCode(code) === fixtureDistanceCode(input.distance!),
@@ -102,7 +111,7 @@ export async function readSportFixtures(
   // Options cover the whole upcoming sport catalogue, not just the current page
   // or selection, so changing one filter never traps the visitor in another.
   const countries = new Set(
-    options.map((row) => row.country).filter((value): value is string => !!value),
+    options.map((row) => canonicalCountry(row.country)).filter((value): value is string => !!value),
   );
   if (UK_FIXTURE_COUNTRIES.some((value) => countries.has(value))) countries.add("United Kingdom");
   const distances = [...new Set(distanceCodes.map(fixtureDistanceCode))];
@@ -129,7 +138,7 @@ export async function readSportFixtures(
         city: detail?.place?.city ?? row.city,
         county: detail?.place?.county ?? row.county,
         state: detail?.place?.state ?? null,
-        country: row.country,
+        country: canonicalCountry(row.country),
         website: publicHttpUrl(detail?.sourceUrl ?? row.website),
         summary: fixtureSummary(detail?.summary ?? row.summary, row.sport, row.city),
         timeZone: detail?.timeZone ?? fixtureTimeZone(row.country),

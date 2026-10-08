@@ -1,4 +1,5 @@
-/** ISO country codes, flags and place-name inference for race venues. */
+import { countryFlag, countryNames } from "./country-flags.ts";
+/** ISO country codes, flags and explicit source country labels for race venues. */
 
 export type CountryInfo = {
   iso: string;
@@ -198,7 +199,7 @@ const ALIAS: Record<string, string> = {
   uae: "AE",
   "the united arab emirates": "AE",
   turkiye: "TR",
-  "türkiye": "TR",
+  türkiye: "TR",
   egypt: "EG",
   ukraine: "UA",
   romania: "RO",
@@ -232,7 +233,7 @@ const ALIAS: Record<string, string> = {
   moldova: "MD",
   "republic of moldova": "MD",
   chisinau: "MD",
-  "chișinău": "MD",
+  chișinău: "MD",
   peru: "PE",
   algeria: "DZ",
   "saudi arabia": "SA",
@@ -311,91 +312,6 @@ const ALIAS: Record<string, string> = {
   indonesia: "ID",
   gibraltar: "GI",
 };
-
-type Hint = { iso: string; re: RegExp; ukNation?: CountryInfo["ukNation"] };
-
-const PLACE_HINTS: Hint[] = [
-  { iso: "FR", re: /\b(pauillac|m[eé]doc|m[eé]docain|bordeaux|paris|versailles|lyon|marseille|nice|toulouse|lille|nantes|strasbourg|chamonix|annecy|normandy|normandie|provence|brittany|bretagne|france)\b/i },
-  { iso: "DE", re: /\b(berlin|munich|m[uü]nchen|hamburg|cologne|k[oö]ln|frankfurt|d[uü]sseldorf|stuttgart|leipzig|dresden|nuremberg|germany|deutschland)\b/i },
-  { iso: "ES", re: /\b(valencia|barcelona|madrid|seville|sevilla|bilbao|malaga|m[aá]laga|palma|ibiza|tenerife|spain|espa[nñ]a)\b/i },
-  { iso: "IT", re: /\b(rome|roma|milan|milano|venice|venezia|florence|firenze|naples|napoli|turin|torino|verona|italy|italia)\b/i },
-  { iso: "NL", re: /\b(amsterdam|rotterdam|utrecht|hague|eindhoven|netherlands|holland)\b/i },
-  { iso: "BE", re: /\b(brussels|bruxelles|antwerp|brugge|bruges|ghent|gent|belgium)\b/i },
-  { iso: "PT", re: /\b(lisbon|lisboa|porto|portugal)\b/i },
-  { iso: "CH", re: /\b(zurich|z[uü]rich|geneva|lausanne|bern|basel|lucerne|switzerland)\b/i },
-  { iso: "AT", re: /\b(vienna|wien|salzburg|innsbruck|austria)\b/i },
-  { iso: "SE", re: /\b([oö]stersund|stockholm|gothenburg|g[oö]teborg|malm[oö]|sweden)\b/i },
-  { iso: "NO", re: /\b(oslo|bergen|stavanger|norway)\b/i },
-  { iso: "DK", re: /\b(copenhagen|k[oø]benhavn|aarhus|denmark)\b/i },
-  { iso: "FI", re: /\b(helsinki|finland)\b/i },
-  { iso: "IS", re: /\b(reykjav[ií]k|iceland)\b/i },
-  { iso: "PL", re: /\b(warsaw|krak[oó]w|gdansk|poland)\b/i },
-  { iso: "CZ", re: /\b(prague|praha|brno|czech)\b/i },
-  { iso: "HU", re: /\b(budapest|hungary)\b/i },
-  { iso: "GR", re: /\b(athens|athina|thessaloniki|greece)\b/i },
-  { iso: "CY", re: /\b(paphos|limassol|nicosia|larnaca|cyprus)\b/i },
-  { iso: "AL", re: /\b(albania|tirana|shkod[eë]r|vlor[eë]|durr[eë]s|kuk[eë]s|berat|elbasan)\b/i },
-  { iso: "XK", re: /\b(kosovo|kosova|prishtin[ae]|pristina|prizren|pej[eë]|gjilan|junik)\b/i },
-  {
-    iso: "MK",
-    re: /\b(north macedonia|severna makedonija|skopje|ohrid|kavadarci|bitola|gevgelija|strumica|ki[cč]evo|prilep)\b/i,
-  },
-  {
-    iso: "HR",
-    re: /\b(croatia|hrvatska|zagreb|dubrovnik|pula|rijeka|makarska|vinkovci|ston)\b/i,
-  },
-  {
-    iso: "BA",
-    re: /\b(bosnia(?: and | & |-)herzegovina|bosna i hercegovina|sarajevo|mostar|banja luka|bjela[sš]nica|viso[cč]ica)\b/i,
-  },
-  {
-    iso: "RS",
-    re: /\b(serbia|srbija|belgrade|beograd|novi sad|zemun|ni[sš]|kragujevac|zrenjanin|novi pazar|[sš]abac)\b/i,
-  },
-  {
-    iso: "ME",
-    re: /\b(montenegro|crna gora|podgorica|tivat|kotor|herceg novi|[zž]abljak|kola[sš]in|durmitor|bjelasica)\b/i,
-  },
-  { iso: "SI", re: /\b(slovenia|slovenija|ljubljana|radenci|bovec|koper|slovenske konjice)\b/i },
-  { iso: "US", re: /\b(hopkinton|new york|nyc|chicago|boston marathon|baa boston|united states|\busa\b|california|massachusetts|illinois)\b/i },
-  { iso: "CA", re: /\b(toronto|vancouver|montreal|ottawa|calgary|canada)\b/i },
-  { iso: "JP", re: /\b(tokyo|osaka|kyoto|sapporo|japan)\b/i },
-  { iso: "AU", re: /\b(sydney|melbourne|brisbane|perth|adelaide|australia)\b/i },
-  { iso: "NZ", re: /\b(auckland|wellington|christchurch|new zealand)\b/i },
-  { iso: "ZA", re: /\b(cape town|johannesburg|durban|south africa)\b/i },
-  { iso: "KE", re: /\b(nairobi|eldoret|kenya)\b/i },
-  { iso: "AE", re: /\b(dubai|abu dhabi|uae|united arab emirates)\b/i },
-  { iso: "IN", re: /\b(mumbai|delhi|bangalore|bengaluru|india)\b/i },
-  { iso: "SG", re: /\b(singapore)\b/i },
-  { iso: "HK", re: /\b(hong kong)\b/i },
-  { iso: "CN", re: /\b(beijing|shanghai|china)\b/i },
-  { iso: "BR", re: /\b(rio de janeiro|s[aã]o paulo|brazil)\b/i },
-  { iso: "MX", re: /\b(mexico city|cancun|mexico)\b/i },
-  { iso: "TR", re: /\b(istanbul|ankara|turkey|t[uü]rkiye)\b/i },
-  { iso: "MD", re: /\b(chi[sș]in[aă]u|moldova)\b/i },
-  { iso: "PE", re: /\b(lima|arequipa|cusco|peru)\b/i },
-  { iso: "DZ", re: /\b(algiers|oran|algeria)\b/i },
-  { iso: "SA", re: /\b(riyadh|jeddah|saudi arabia)\b/i },
-  { iso: "TN", re: /\b(tunis|sousse|tunisia)\b/i },
-  { iso: "SN", re: /\b(dakar|senegal)\b/i },
-  { iso: "MZ", re: /\b(maputo|mozambique)\b/i },
-  { iso: "IR", re: /\b(tehran|tabriz|iran)\b/i },
-  { iso: "JO", re: /\b(amman|jordan)\b/i },
-  { iso: "VE", re: /\b(caracas|venezuela)\b/i },
-  { iso: "CR", re: /\b(san jos[eé]|costa rica)\b/i },
-  { iso: "PF", re: /\b(tahiti|papeete|french polynesia)\b/i },
-  { iso: "BM", re: /\b(bermuda)\b/i },
-  { iso: "UY", re: /\b(montevideo|uruguay)\b/i },
-  { iso: "KG", re: /\b(bishkek|kyrgyzstan)\b/i },
-  { iso: "BJ", re: /\b(cotonou|porto-novo|benin)\b/i },
-  { iso: "IE", re: /\b(dublin|cork|galway|limerick|waterford|ireland|eire)\b/i },
-  { iso: "GB", re: /\b(belfast|antrim|lisburn|derry|londonderry|newry|omagh|enniskillen|coleraine|northern ireland|\bbt\d)/i, ukNation: "Northern Ireland" },
-  { iso: "GB", re: /\b(scotland|glasgow|edinburgh|aberdeen|dundee|inverness|perth|stirling|fife|highlands?|aberfeldy|kenmore|lossiemouth|moray)\b/i, ukNation: "Scotland" },
-  { iso: "GB", re: /\b(wales|cymru|cardiff|swansea|newport|wrexham|bangor|aberystwyth|gwynedd)\b/i, ukNation: "Wales" },
-];
-
-const UK_ENGLAND_HINT =
-  /\b(england|norfolk|suffolk|essex|kent|sussex|surrey|london|manchester|liverpool|leeds|birmingham|bristol|sheffield|nottingham|leicester|cambridge|oxford|york|newcastle|cumbria|carlisle|northumberland|lincolnshire|yorkshire|cornwall|devon|dorset|somerset|hampshire|wiltshire|cheshire|lancashire|derbyshire|staffordshire|warwickshire|shropshire|herefordshire|worcestershire|gloucestershire|northamptonshire|bedfordshire|hertfordshire|buckinghamshire|berkshire|oxfordshire|cambridgeshire|rutland|leicestershire|nottinghamshire|lincoln|norwich|ipswich)\b/i;
 
 const WORLD_HINT =
   /\b(world championships?|world athletics|world cup|olympic games|olympics|paralympic|world games)\b/i;
@@ -578,17 +494,16 @@ export const PARKRUN_COUNTRY_SHORTCUTS = [
 export function isoToFlagEmoji(iso: string): string {
   if (iso === "WORLD") return "🌐";
   const code = iso === "GB" ? "GB" : iso.toUpperCase();
-  if (!/^[A-Z]{2}$/.test(code)) return "🌐";
-  return String.fromCodePoint(
-    ...[...code].map((ch) => 127397 + ch.charCodeAt(0)),
-  );
+  if (!countryNames[code]) return "🌐";
+  return String.fromCodePoint(...[...code].map((ch) => 127397 + ch.charCodeAt(0)));
 }
 
 export function countryFromIso(iso: string, ukNation?: CountryInfo["ukNation"]): CountryInfo {
   if (iso === "WORLD") return { iso: "WORLD", name: "World", world: true };
   return {
     iso,
-    name: iso === "GB" ? ukNation || "United Kingdom" : NAME_BY_ISO[iso] || iso,
+    name:
+      iso === "GB" ? ukNation || "United Kingdom" : NAME_BY_ISO[iso] || countryNames[iso] || iso,
     ukNation: iso === "GB" ? ukNation : undefined,
     world: false,
   };
@@ -617,52 +532,26 @@ export function resolveCountry(input: {
   address?: string | null;
 }): CountryInfo {
   const countryKey = normCountryKey(input.country);
-  const alias = ALIAS[countryKey] || ALIAS[(input.country || "").trim().toLowerCase()];
-
-  // Stored country wins so Chișinău / Moldova is never guessed as the UK.
-  if (alias === "GB") {
-    const nation = /scotland/i.test(input.country || "")
-      ? "Scotland"
-      : /wales/i.test(input.country || "")
-        ? "Wales"
-        : /northern/i.test(input.country || "")
-          ? "Northern Ireland"
-          : "England";
-    return countryFromIso("GB", nation);
+  const flag = countryFlag(countryKey);
+  if (flag.emoji === "🌐") return countryFromIso("WORLD");
+  if (flag.code) {
+    const home = ["England", "Scotland", "Wales", "Northern Ireland"].includes(flag.name)
+      ? (flag.name as CountryInfo["ukNation"])
+      : undefined;
+    return countryFromIso(flag.code.startsWith("GB-") ? "GB" : flag.code, home);
   }
+  const alias = ALIAS[countryKey];
   if (alias) return countryFromIso(alias);
-
-  const rawCountry = (input.country || "").trim();
-  if (/^[A-Z]{2}$/.test(rawCountry) && rawCountry !== "GB") {
-    return countryFromIso(rawCountry);
+  // Never override an explicit unknown value using a race title or a city-name guess.
+  if (countryKey) return { iso: "UN", name: input.country!.trim(), world: false };
+  // Source venue labels often end in an explicit country/code, e.g. Doha (QAT).
+  // City names and source website regions are not country evidence.
+  for (const value of [input.city, input.area, input.address]) {
+    const suffix = value?.match(/(?:\(([A-Z]{2,3})\)|,\s*([^,]+))\s*$/);
+    const explicit = countryFlag(suffix?.[1] ?? suffix?.[2]);
+    if (explicit.code) return resolveCountry({ country: explicit.name });
   }
-
-  const blob = [input.name, input.area, input.city, input.county, input.country, input.address, input.slug]
-    .filter(Boolean)
-    .join(" ");
-
-  if (/\bboston\b/i.test(blob) && /\b(lincolnshire|santa run|terrier|uk boston)\b/i.test(blob)) {
-    return countryFromIso("GB", "England");
-  }
-
-  for (const hint of PLACE_HINTS) {
-    if (hint.re.test(blob)) {
-      if (hint.iso === "IE" && /northern/i.test(blob)) continue;
-      if (hint.iso === "GB" && hint.ukNation === "Scotland" && UK_ENGLAND_HINT.test(blob) && !/\bscotland\b/i.test(blob)) {
-        continue;
-      }
-      return countryFromIso(hint.iso, hint.ukNation);
-    }
-  }
-
-  if (UK_ENGLAND_HINT.test(blob)) return countryFromIso("GB", "England");
-  if (isWorldEvent(input.name)) return countryFromIso("WORLD");
-
-  if (countryKey && countryKey !== "england") {
-    const titled = rawCountry.replace(/^the\s+/i, "").replace(/\u00a0/g, " ").trim();
-    return { iso: "UN", name: titled || rawCountry, world: false };
-  }
-  return countryFromIso("GB", "England");
+  return { iso: "UN", name: "Country TBC", world: false };
 }
 
 export function displayCountryName(info: CountryInfo): string {
@@ -671,7 +560,7 @@ export function displayCountryName(info: CountryInfo): string {
 }
 
 export function filterCountryName(info: CountryInfo): string {
-  if (info.iso === "GB") return info.ukNation || "England";
+  if (info.iso === "GB") return info.ukNation || "United Kingdom";
   return info.name;
 }
 
@@ -679,10 +568,17 @@ export function countryMatchesFilter(info: CountryInfo, filter?: string | null):
   if (!filter || filter === "All") return true;
   if (filter === "United Kingdom" || filter === "Britain") return info.iso === "GB";
   if (filter === "World") return info.iso === "WORLD" || info.world === true;
-  if (filter === "England" || filter === "Scotland" || filter === "Wales" || filter === "Northern Ireland") {
+  if (
+    filter === "England" ||
+    filter === "Scotland" ||
+    filter === "Wales" ||
+    filter === "Northern Ireland"
+  ) {
     return info.iso === "GB" && info.ukNation === filter;
   }
-  return info.name === filter || info.iso === filter;
+  const expected = resolveCountry({ country: filter });
+  if (expected.ukNation) return info.iso === "GB" && info.ukNation === expected.ukNation;
+  return info.name === filter || (expected.iso !== "UN" && info.iso === expected.iso);
 }
 
 export function flagForCountryFilter(name: string): string {

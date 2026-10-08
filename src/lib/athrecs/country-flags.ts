@@ -1,5 +1,5 @@
 // Static names keep server rendering and browsers on different ICU versions identical.
-const countryNames: Record<string, string> = {
+export const countryNames: Readonly<Record<string, string>> = {
   AD: "Andorra",
   AE: "United Arab Emirates",
   AF: "Afghanistan",
@@ -249,6 +249,7 @@ const countryNames: Record<string, string> = {
   ZA: "South Africa",
   ZM: "Zambia",
   ZW: "Zimbabwe",
+  XK: "Kosovo",
 };
 const regions = new Map(
   Object.keys(countryNames).flatMap((code) => [
@@ -257,6 +258,109 @@ const regions = new Map(
   ]),
 );
 const aliases: Record<string, string> = {
+  // World Athletics / IOC codes used by imported event venues (BRN is Bahrain).
+  ang: "AO",
+  ben: "BJ",
+  bot: "BW",
+  brn: "BH",
+  cgo: "CG",
+  civ: "CI",
+  cro: "HR",
+  gab: "GA",
+  gha: "GH",
+  ina: "ID",
+  ind: "IN",
+  iri: "IR",
+  kuw: "KW",
+  lat: "LV",
+  lbn: "LB",
+  ltu: "LT",
+  lux: "LU",
+  mac: "MO",
+  mne: "ME",
+  mon: "MC",
+  mri: "MU",
+  ngr: "NG",
+  pyf: "PF",
+  sgp: "SG",
+  slo: "SI",
+  srb: "RS",
+  svk: "SK",
+  tan: "TZ",
+  tha: "TH",
+  tpe: "TW",
+  swe: "SE",
+  nor: "NO",
+  den: "DK",
+  fin: "FI",
+  isl: "IS",
+  fra: "FR",
+  ger: "DE",
+  deu: "DE",
+  esp: "ES",
+  ita: "IT",
+  ned: "NL",
+  nld: "NL",
+  bel: "BE",
+  por: "PT",
+  prt: "PT",
+  sui: "CH",
+  che: "CH",
+  aut: "AT",
+  pol: "PL",
+  cze: "CZ",
+  hun: "HU",
+  gre: "GR",
+  grc: "GR",
+  rou: "RO",
+  aus: "AU",
+  nzl: "NZ",
+  can: "CA",
+  rsa: "ZA",
+  zaf: "ZA",
+  nep: "NP",
+  npl: "NP",
+  chn: "CN",
+  jpn: "JP",
+  kor: "KR",
+  bra: "BR",
+  arg: "AR",
+  mex: "MX",
+  ken: "KE",
+  eth: "ET",
+  mar: "MA",
+  ukr: "UA",
+  tur: "TR",
+  rus: "RU",
+  est: "EE",
+  vie: "VN",
+  vnm: "VN",
+  per: "PE",
+  kos: "XK",
+  uae: "AE",
+  qat: "QA",
+  ksa: "SA",
+  irl: "IE",
+  hkg: "HK",
+  turkiye: "TR",
+  türkiye: "TR",
+  "antigua and barbuda": "AG",
+  "antigua & barbuda": "AG",
+  tahiti: "PF",
+  "west bank": "PS",
+  "saint helena": "SH",
+  "st helena": "SH",
+  "cote d'ivoire": "CI",
+  "côte d'ivoire": "CI",
+  "ivory coast": "CI",
+  "chinese taipei": "TW",
+  "hong kong china": "HK",
+  "republic of korea": "KR",
+  eire: "IE",
+  britain: "GB",
+  holland: "NL",
+  macao: "MO",
+  macau: "MO",
   uk: "GB",
   gbr: "GB",
   "great britain": "GB",
@@ -265,10 +369,8 @@ const aliases: Record<string, string> = {
   usa: "US",
   "united states of america": "US",
   "u.s.a.": "US",
-  uae: "AE",
   "republic of ireland": "IE",
   irish: "IE",
-  irl: "IE",
   american: "US",
   canadian: "CA",
   australian: "AU",
@@ -301,7 +403,9 @@ const aliases: Record<string, string> = {
 };
 export function countryFlag(value: string | null | undefined) {
   const original = value?.trim() ?? "";
-  const key = original.toLowerCase();
+  const key = original.normalize("NFKC").replace(/\s+/g, " ").toLowerCase();
+  if (["world", "international", "und", "eur", "nac"].includes(key))
+    return { code: "", name: "International", emoji: "🌐" };
   const home = (
     {
       england: "England",
@@ -319,6 +423,8 @@ export function countryFlag(value: string | null | undefined) {
       wls: "Wales",
       "gb-wls": "Wales",
       "northern ireland": "Northern Ireland",
+      nir: "Northern Ireland",
+      "gb-nir": "Northern Ireland",
     } as Record<string, string>
   )[key];
   if (home)
@@ -332,7 +438,14 @@ export function countryFlag(value: string | null | undefined) {
               ? "GB-WLS"
               : "GB",
       name: home,
-      emoji: "🇬🇧",
+      emoji:
+        home === "England"
+          ? "🏴\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}"
+          : home === "Scotland"
+            ? "🏴\u{E0067}\u{E0062}\u{E0073}\u{E0063}\u{E0074}\u{E007F}"
+            : home === "Wales"
+              ? "🏴\u{E0067}\u{E0062}\u{E0077}\u{E006C}\u{E0073}\u{E007F}"
+              : "🇬🇧",
     };
   const code = aliases[key] ?? regions.get(key);
   return {
