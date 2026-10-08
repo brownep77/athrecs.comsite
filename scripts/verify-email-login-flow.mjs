@@ -425,6 +425,25 @@ try {
       "Email login flow passed: delivery adapter, password verification, hashed one-time codes, expiry, attempts, stable profile IDs, DOB validation, scoped name writes, cross-site/unauthenticated rejection, pre-registration attack prevention, logout revocation, privacy and six OAuth redirects.",
     );
   }
+  const signupDb = await (await server.ssrLoadModule("/src/lib/db.ts")).getSql();
+  const [coverage] = await signupDb`
+    select (select count(*)::int from "user") as users,
+      (select count(*)::int from signup_email_events) as signup_events,
+      (select count(*)::int from signup_email_deliveries) as deliveries
+  `;
+  assert.equal(
+    coverage.signup_events,
+    coverage.users,
+    "Real auth creates one durable event per user, not per login",
+  );
+  assert.equal(
+    coverage.deliveries,
+    0,
+    "Local auth never prepares or sends production administrator mail",
+  );
+  const unauthorizedWorker = await fetch(`${origin}/api/signup-emails`);
+  assert.equal(unauthorizedWorker.status, 401);
+  assert.match(unauthorizedWorker.headers.get("cache-control"), /no-store/);
 } finally {
   await server.close();
   await database?.close();

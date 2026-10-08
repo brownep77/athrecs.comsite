@@ -549,6 +549,10 @@
     {
       "path": "/api/club-scanner-worker",
       "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/signup-emails",
+      "schedule": "*/10 * * * *"
     }
   ]
 }

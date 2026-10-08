@@ -10,6 +10,7 @@ import { authEmailConfigured, sendAthrecsAuthEmail } from "./email.server";
 import { emailAndPasswordEnabled } from "./email-password";
 import { GROK_PROVIDERS } from "./providers";
 import { pgliteDialect } from "./pglite-dialect";
+import { signupContext } from "./signup-context.server";
 import {
   GROK_ISSUER_DEFAULT,
   PREVIEW_ALLOWED_HOSTS,
@@ -331,6 +332,15 @@ export const auth = betterAuth({
   baseURL,
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          signupContext.getStore()?.add(user.id);
+        },
+      },
+    },
+  },
   trustedOrigins,
   ...(Object.keys(socialProviders).length ? { socialProviders } : {}),
   ...(emailVerification ? { emailVerification } : {}),
