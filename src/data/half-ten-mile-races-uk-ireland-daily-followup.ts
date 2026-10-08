@@ -27,6 +27,7 @@ const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
 const CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT = "2026-10-05";
 const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
 const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
+const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1431,6 +1432,28 @@ type ExistingSeriesEditionSeed = {
 };
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  ...[
+    ["2027-01-17", "january"],
+    ["2027-05-02", "may"],
+    ["2027-10-17", "october"],
+    ["2027-12-12", "december"],
+  ].map(([date, month]) => {
+    const url =
+      `https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-${month}-2027`;
+    return {
+      seriesSlug: "run-heaton-park-half-marathon-march-2027",
+      date,
+      startTime: "09:30",
+      organiser: "RunThrough Events",
+      url,
+      entryUrl: url,
+      publishAllDistances: true,
+      priceAmount: 30,
+      checkedAt: CURRENT_SERIES_REFRESH_CHECKED_AT,
+      notes:
+        "The official organiser page consistently confirms this 2027 half marathon, 10K, 5K and junior programme, the 09:30 half-marathon start and open entry. Its half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified event page is retained as the safe entry destination and the established Heaton Park card is reused.",
+    };
+  }),
   {
     seriesSlug: "running-grand-prix-oulton-park-augut",
     date: "2027-02-14",
@@ -2348,6 +2371,25 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "run-heaton-park-half-marathon-march-2027": {
+    name: "Run Heaton Park 5K, 10K, Half Marathon & Junior Race",
+    country: "England",
+    county: "Greater Manchester",
+    city: "Manchester",
+    area: "Heaton Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Run Heaton Park Half Marathon — year-round multi-distance race days in Manchester.",
+    description:
+      "RunThrough's Heaton Park race days offer a half marathon, 10K, 5K and junior race on the park's tarmac paths; the established card carries all verified 2027 editions.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-october-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-october-2027",
+    defaultStartTime: "09:30",
+  },
   "running-grand-prix-oulton-park-augut": {
     name: "Oulton Park Running Grand Prix",
     country: "England",

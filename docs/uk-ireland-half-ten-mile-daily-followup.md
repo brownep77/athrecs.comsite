@@ -1,11 +1,11 @@
 # UK and Ireland half-marathon and 10-mile daily follow-up
 
-Checked through 7 October 2026 for the catalogue horizon ending 31 December 2027.
+Checked through 8 October 2026 for the catalogue horizon ending 31 December 2027.
 
 ## Published coverage
 
 - Added 71 officially verified series: 56 half marathons and 15 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
-- Added 39 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
+- Added 43 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
 - Burnsall, Kettlewell and Malham now use the live official Due North series checkout.
@@ -165,3 +165,8 @@ No other missing in-scope event survived canonical slug, yearless-name, normaliz
 Athletics Ireland permit updates promoted two formerly held Irish races. Nally's SuperValu Trim 10 Mile is published for 31 January 2027 at 12:00 with approved permit `26/581` and open €42 entry. Abbeyknockmoy Hurling Club's 5K, 10K and Half Marathon is published as one canonical card for 12 September 2027; its half starts at 10:00, open half entry is €40 and permit `26/583` is approved.
 
 RunThrough's refreshed official sitemap exposed the Oulton Park Running Grand Prix on 14 February 2027. Its half marathon starts at 11:00 and remains on the established Oulton Park card alongside the marathon, 20-mile, metric-marathon, 10K and 5K programme. RunThrough also corrected the previously held Dorney Lake April page: the 3 April 2027 date and 09:10 all-distance start are now internally consistent, so that edition is attached to the established Dorney Lake card rather than duplicated. Dorney Lake's January, February and March pages remain held while their official copy still conflicts.
+
+
+## 8 October 2026 scan
+
+RunThrough's official Heaton Park pages consistently confirm four additional 2027 half-marathon editions on 17 January, 2 May, 17 October and 12 December, each starting at 09:30 with open £30 half-marathon entry. All four dates are attached to the established Heaton Park card alongside the existing 28 March edition, keeping the half marathon, 10K, 5K and junior programme on one canonical series. The downstream half-marathon checkout links currently redirect to an unrelated Blackburn race, so each verified organiser page is retained as the safe entry destination until RunThrough corrects them.

@@ -27,10 +27,11 @@ const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
 const CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT = "2026-10-05";
 const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
 const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
+const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
 const HORIZON = "2027-12-31";
 const NEW_SERIES_COUNT = 71;
 const NEW_EDITION_COUNT = 74;
-const EXISTING_SERIES_EDITION_COUNT = 42;
+const EXISTING_SERIES_EDITION_COUNT = 46;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -188,6 +189,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT,
         CURRENT_SITEMAP_REFRESH_CHECKED_AT,
         CURRENT_PERMIT_REFRESH_CHECKED_AT,
+        CURRENT_SERIES_REFRESH_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -627,6 +629,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT,
         CURRENT_SITEMAP_REFRESH_CHECKED_AT,
         CURRENT_PERMIT_REFRESH_CHECKED_AT,
+        CURRENT_SERIES_REFRESH_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -734,6 +737,63 @@ assert.equal(
   "https://www.entrycentral.com/kelpieshalfmarathon",
   "Kelpies does not expose the current official registration source",
 );
+
+const heatonSeriesSlug = "run-heaton-park-half-marathon-march-2027";
+const heatonSeries = catalogue.seriesList.find((series) => series.slug === heatonSeriesSlug);
+assert(heatonSeries, "The canonical Heaton Park card disappeared");
+assert.deepEqual(
+  heatonSeries.distances,
+  ["Half", "10K", "5K"],
+  "Heaton Park lost its verified race programme",
+);
+assert.equal(
+  heatonSeries.name,
+  "Run Heaton Park 5K, 10K, Half Marathon & Junior Race",
+  "Heaton Park must use a yearless multi-edition card name",
+);
+for (const [date, month] of [
+  ["2027-01-17", "january"],
+  ["2027-05-02", "may"],
+  ["2027-10-17", "october"],
+  ["2027-12-12", "december"],
+]) {
+  const source =
+    `https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-${month}-2027`;
+  const editions = catalogue.editions.filter(
+    (edition) =>
+      edition.seriesSlug === heatonSeriesSlug &&
+      edition.date === date &&
+      edition.distance === "Half",
+  );
+  assert.equal(editions.length, 1, `Heaton Park|${date} must remain one canonical half edition`);
+  assert.equal(editions[0].startTime, "09:30", `Heaton Park|${date} has the wrong start`);
+  assert.equal(editions[0].source, source, `Heaton Park|${date} lost official provenance`);
+  assert.equal(
+    editions[0].entryUrl,
+    source,
+    `Heaton Park|${date} must avoid the currently misdirected downstream checkout`,
+  );
+  assert.equal(
+    editions[0].entryOptions?.[0]?.checkedAt,
+    CURRENT_SERIES_REFRESH_CHECKED_AT,
+    `Heaton Park|${date} entry provenance is stale`,
+  );
+  assert.equal(
+    editions[0].entryOptions?.[0]?.priceAmount,
+    30,
+    `Heaton Park|${date} lost its official half-marathon entry price`,
+  );
+  assert.equal(
+    dailyHalfTenMileExistingSeriesEditions.filter(
+      (edition) =>
+        edition.seriesSlug === heatonSeriesSlug &&
+        edition.date === date &&
+        edition.distance === "Half",
+    ).length,
+    1,
+    `Heaton Park|${date} must enrich its established card exactly once`,
+  );
+}
 
 const haweswaterKey = "ea-runevents-haweswater-half-marathon-penrith|2027-03-07|Half";
 const haweswaterSeries = catalogue.seriesList.find(
