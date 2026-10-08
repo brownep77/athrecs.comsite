@@ -10,6 +10,7 @@ import {
 } from "../src/lib/athrecs/countries.ts";
 import { formatFixtureStart, fixtureTimeZone } from "../src/lib/athrecs/fixture-presentation.ts";
 import { runabcSeries, runabcEditions } from "../src/data/runabc.ts";
+import { worldAthleticsSeries, worldAthleticsEditions } from "../src/data/world-athletics.ts";
 import { venueDetails } from "../src/data/venue-details.ts";
 import { FIXTURE_DETAILS } from "../src/data/fixture-details.ts";
 import { readSportFixtures } from "../src/lib/athrecs/sport-fixtures.server.ts";
@@ -21,6 +22,28 @@ const corrections = JSON.parse(
 const repair = fs.readFileSync(
   new URL("../docs/fixture-geography/repair-2026-10-08.sql", import.meta.url),
   "utf8",
+);
+const worldCorrections = JSON.parse(
+  fs.readFileSync(
+    new URL(
+      "../docs/fixture-geography/world-athletics-corrections-2026-10-08.json",
+      import.meta.url,
+    ),
+  ),
+);
+const worldRepair = fs.readFileSync(
+  new URL("../docs/fixture-geography/repair-world-athletics-2026-10-08.sql", import.meta.url),
+  "utf8",
+);
+for (const c of worldCorrections)
+  assert.equal(worldAthleticsSeries.find((e) => e.slug === c.slug).country, c.country);
+assert.equal(
+  worldAthleticsSeries.find((e) => e.slug === "wa-cardiff-half-marathon-7240793").country,
+  "Wales",
+);
+assert.equal(
+  worldAthleticsEditions.find((e) => e.seriesSlug === worldCorrections[0].slug).date,
+  "2027-12-12",
 );
 for (const [iso, name] of Object.entries(countryNames))
   for (const value of [iso, iso.toLowerCase(), name, `  ${name.toUpperCase()}  `]) {
@@ -192,6 +215,30 @@ try {
     ).fixtures.length,
     0,
   );
+  // Source-confirmed Scottish athletics records and host-confirmed Glasgow date.
+  for (const [i, c] of worldCorrections.entries())
+    await db.query(
+      "insert into events(id,slug,name,country,summary,description) values($1,$2,$2,'England','Venue, England.','10 DEC 2027')",
+      [2000 + i, c.slug],
+    );
+  await db.exec(
+    "insert into editions(id,event_id,event_date,distance_code,notes) values(10,2000,'2027-12-10','Other','10 DEC 2027')",
+  );
+  await db.transaction((tx) => tx.exec(worldRepair));
+  for (const c of worldCorrections)
+    assert.equal(
+      (await db.query("select country from events where slug=$1", [c.slug])).rows[0].country,
+      "Scotland",
+    );
+  assert.equal(
+    (await db.query("select event_date from editions where id=10")).rows[0].event_date
+      .toISOString()
+      .slice(0, 10),
+    "2027-12-12",
+  );
+  const worldBefore = (await db.query("select * from app_meta order by key")).rows;
+  await db.transaction((tx) => tx.exec(worldRepair));
+  assert.deepEqual((await db.query("select * from app_meta order by key")).rows, worldBefore);
   // Unique-key conflict must roll back the entire repair rather than partly changing countries.
   await db.query("update events set country='Scotland',county='Scotland' where id=$1", [gid]);
   await db.exec(
@@ -234,5 +281,5 @@ if (path) {
   );
 }
 console.log(
-  `PASS: ${Object.keys(countryNames).length} country/territory mappings, aliases, home nations, ambiguous cities, unknowns, filters, Gothenburg date/time, ${corrections.length} bounded repairs, before-state backups, repeat safety and atomic rollback.`,
+  `PASS: ${Object.keys(countryNames).length} country/territory mappings, aliases, home nations, ambiguous cities, unknowns, filters, Gothenburg/Glasgow dates, ${corrections.length + worldCorrections.length} bounded country repairs, before-state backups, repeat safety and atomic rollback.`,
 );
