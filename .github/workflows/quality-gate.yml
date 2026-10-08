@@ -87,6 +87,9 @@ jobs:
       - name: Type-check, lint and verify
         run: npm run ci:verify
 
+      - name: Homepage session privacy and discovery destinations
+        run: npm run verify:home-discovery -- --http
+
       - name: Account results panel appears once on both sites
         run: |
           node scripts/verify-account-panel-ui.mjs
@@ -228,14 +231,26 @@ jobs:
               "$GITHUB_WORKSPACE/artifacts/sportsrecs-mobile.png"
 
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||in one profile.||Find an athlete||Your next event starts here' \
-          BROWSER_SMOKE_REJECT_TEXT='Upcoming athletics||Event calendar||Browse verified athletics fixtures' \
+          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||all in one place.||Athletes||Events||Results||Clubs||Recent performances||Athlete spotlight||Find your next event||Achievements worth sharing||Better together||My shortlist||Berlin Marathon 2026||Your next event starts here||Road running fixtures||Fixture calendar||Running calendar||Running race guides||Half marathons||UK road ultras' \
+          BROWSER_SMOKE_REJECT_TEXT='Upcoming athletics||Browse verified athletics fixtures' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home.png"
           BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
           BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||Find an athlete||Find events' \
+          BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||all in one place.||Athletes||Events||Results||Clubs||Recent performances||Athlete spotlight||Find your next event||Achievements worth sharing||Better together||My shortlist||Berlin Marathon 2026||Your next event starts here||Road running fixtures||Fixture calendar||Running calendar||Running race guides||Half marathons||UK road ultras' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-mobile.png"
+          BROWSER_SMOKE_MEMBER=1 \
+          BROWSER_SMOKE_FULL_PAGE=1 \
+          BROWSER_SMOKE_EXPECT_TEXT='Recent performances||Athlete spotlight||View profile||Berlin Marathon 2026||Running race guides' \
+          BROWSER_SMOKE_REJECT_TEXT='Sign in to explore athlete performances' \
+            node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-member.png"
+          BROWSER_SMOKE_MEMBER=1 \
+          BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
+          BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
+          BROWSER_SMOKE_FULL_PAGE=1 \
+          BROWSER_SMOKE_EXPECT_TEXT='Recent performances||Athlete spotlight||View profile||Berlin Marathon 2026||Running race guides' \
+          BROWSER_SMOKE_REJECT_TEXT='Sign in to explore athlete performances' \
+            node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-member-mobile.png"
           BROWSER_SMOKE_EXPECT_TEXT='Sign in to view athlete profiles' \
           BROWSER_SMOKE_REJECT_TEXT='Explore athlete profiles||Sport in results' \
             node scripts/browser-smoke.mjs 'http://127.0.0.1:8080/athletes?country=Ireland' "$GITHUB_WORKSPACE/artifacts/athletes.png"

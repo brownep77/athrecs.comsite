@@ -7,6 +7,10 @@ import { parseProfileRoles } from "../src/lib/athrecs/athlete-profile-roles.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const api = await readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8");
+const publicProfile = await readFile(
+  resolve(root, "src/lib/athrecs/public-athlete-profile.server.ts"),
+  "utf8",
+);
 const route = await readFile(resolve(root, "src/routes/athletes/$slug.tsx"), "utf8");
 const shareApi = await readFile(
   resolve(root, "src/lib/athrecs/athlete-profile-share-api.ts"),
@@ -33,7 +37,8 @@ assert.doesNotMatch(privateFn, /date_of_birth|postcode|bio|email|previous_names|
 assert.match(route, /kind: "private-athlete"/);
 assert.match(route, /This athlete profile is private/);
 assert.match(route, /noindex, nofollow, noarchive/);
-assert.match(api, /parseProfileRoles/);
+assert.match(api, /readPublishedAthleteProfile\(slug, context\.bearerToken\)/);
+assert.match(publicProfile, /parseProfileRoles/);
 assert.match(route, /getPrivateAthleteBySlug/);
 assert.match(route, /throw notFound\(\)/);
 assert.doesNotMatch(route, /profile_roles\s*\n\s*\?\.split/);

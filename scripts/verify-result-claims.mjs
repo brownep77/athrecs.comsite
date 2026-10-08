@@ -12,6 +12,10 @@ const evidenceLinksMigration = await readFile(
 );
 const api = await readFile(resolve(root, "src/lib/athrecs/result-claims-api.ts"), "utf8");
 const athleteApi = await readFile(resolve(root, "src/lib/athrecs/api.ts"), "utf8");
+const publicProfile = await readFile(
+  resolve(root, "src/lib/athrecs/public-athlete-profile.server.ts"),
+  "utf8",
+);
 const athleteRoute = await readFile(resolve(root, "src/routes/athletes/$slug.tsx"), "utf8");
 const raceRoute = await readFile(resolve(root, "src/routes/races/$slug.tsx"), "utf8");
 const homeRoute = await readFile(resolve(root, "src/routes/index.tsx"), "utf8");
@@ -146,7 +150,8 @@ assert.match(
   /claim\.status !== "pending" && claim\.status !== "needs_info"/,
   "Only active claims may be reviewed",
 );
-assert.match(athleteApi, /as is_claimed/);
+assert.match(athleteApi, /readPublishedAthleteProfile\(slug, context\.bearerToken\)/);
+assert.match(publicProfile, /as is_claimed/);
 assert.match(athleteRoute, /Verified athlete/);
 
 const claimSelectMatch = api.match(/const CLAIM_SELECT = `([\s\S]*?)`;/);
