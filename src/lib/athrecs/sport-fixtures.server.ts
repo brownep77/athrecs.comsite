@@ -5,6 +5,7 @@ import { kmFromDistanceCode } from "./distance.ts";
 import { FIXTURE_DETAILS } from "../../data/fixture-details.ts";
 import { fixtureSummary, fixtureTimeZone } from "./fixture-presentation.ts";
 import { filterCountryName, resolveCountry } from "./countries.ts";
+import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication.ts";
 
 export const SPORT_FIXTURE_PAGE_SIZE = 24;
 
@@ -50,8 +51,14 @@ export async function readSportFixtures(
     `select distinct btrim(e.country) as country, btrim(ed.distance_code) as distance
      from events e join editions ed on ed.event_id = e.id
      where e.sport = any($1::text[]) and ed.event_date >= $2::date
+       and not (coalesce(e.slug, '') = any($4::text[]))
        and ($3::text[] is null or e.surface = any($3::text[]))`,
-    [[...input.sports], today, input.surfaces ? [...input.surfaces] : null],
+    [
+      [...input.sports],
+      today,
+      input.surfaces ? [...input.surfaces] : null,
+      retainedFixtureAliasSlugs,
+    ],
   );
   const distanceCodes = [
     ...new Set(options.map((row) => row.distance).filter((value): value is string => !!value)),
@@ -89,6 +96,7 @@ export async function readSportFixtures(
         order by ed.start_time nulls last, ed.distance_code, ed.id)::text as starts_json
     from events e join editions ed on ed.event_id = e.id
     where e.sport = any($1::text[]) and ed.event_date >= $2::date
+      and not (coalesce(e.slug, '') = any($9::text[]))
       and ($3::text is null or e.name ilike $3 or e.city ilike $3 or e.county ilike $3 or e.country ilike $3)
       and ($6::text[] is null or e.surface = any($6::text[]))
       and ($7::text[] is null or btrim(e.country) = any($7::text[]))
@@ -106,6 +114,7 @@ export async function readSportFixtures(
       input.surfaces ? [...input.surfaces] : null,
       country,
       distance,
+      retainedFixtureAliasSlugs,
     ],
   );
   // Options cover the whole upcoming sport catalogue, not just the current page

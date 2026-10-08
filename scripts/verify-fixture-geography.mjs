@@ -219,6 +219,23 @@ try {
     ).fixtures.length,
     0,
   );
+  // Public duplicate suppression keeps the imported event and its references intact.
+  await db.exec(
+    "insert into events(id,slug,name,sport,country,city,surface) values(3001,'budapest-marathon','Budapest Marathon','Running','Hungary','Budapest','Road');insert into editions(id,event_id,event_date,distance_code) values(30,(select id from events where slug='spar-budapest-international-marathon'),'2026-10-10','Marathon'),(31,3001,'2026-10-11','Marathon')",
+  );
+  const budapest = await readSportFixtures(
+    sql,
+    { sports: ["Running"], surfaces: ["Road"], country: "Hungary" },
+    "2026-10-08",
+  );
+  assert.deepEqual(
+    budapest.fixtures.map((e) => e.eventId),
+    [3001],
+  );
+  assert.equal(
+    (await db.query("select count(*) from events where slug in ('spar-budapest-international-marathon','budapest-marathon')")).rows[0].count,
+    2,
+  );
   // Source-confirmed Scottish athletics records and host-confirmed Glasgow date.
   for (const [i, c] of worldCorrections.entries())
     await db.query(

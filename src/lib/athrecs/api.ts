@@ -17,6 +17,7 @@ import {
 import { getSql, dbSource } from "@/lib/db";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { canonicalEventSlug } from "@/data/entry-options";
+import { retainedFixtureAliasSlugs } from "@/data/fixture-deduplication";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { todayIso } from "./format";
 import { parseAthleteId } from "./athlete-id";
@@ -304,6 +305,7 @@ export const listEvents = createServerFn({ method: "GET" })
       from events e
       where
         (${sport}::text is null or e.sport = ${sport})
+        and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
         and (${shortRaces}::boolean is false or (
           e.sport = 'Running'
           and e.country in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland', 'Ireland')
@@ -744,6 +746,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         (select count(*)::int from editions ed where ed.event_id = e.id) as edition_count
       from events e
       where e.id <> ${event.id}
+        and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
         and e.sport = ${event.sport}
         and (
           lower(coalesce(e.city, '')) = lower(${event.city})
@@ -1260,6 +1263,7 @@ export const getHomeSportUpdates = createServerFn({ method: "GET" }).handler(asy
       from events event
       join editions edition on edition.event_id = event.id
       where edition.event_date >= ${today}::date
+        and not (event.slug = any(${retainedFixtureAliasSlugs}::text[]))
     ),
     fixture_updates as (
       select
@@ -1576,6 +1580,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       join events e on e.id = ed.event_id
       where
         (${upcomingOnly}::boolean is false or ed.event_date >= ${today}::date)
+        and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
         and (
           ${q}::text is null
           or lower(e.name) like ${q}

@@ -199,12 +199,23 @@ const vite = await createServer({
   server: { middlewareMode: true },
 });
 let assembledCatalogue;
+let aliasPolicy;
 try {
   assembledCatalogue = await vite.ssrLoadModule("/src/data/catalogue.ts");
+  aliasPolicy = await vite.ssrLoadModule("/src/data/entry-options.ts");
 } finally {
   await vite.close();
 }
 const assembledSlugs = new Set(assembledCatalogue.seriesList.map((series) => series.slug));
+assert.equal(
+  aliasPolicy.eventSlugAliases["spar-budapest-international-marathon"],
+  "budapest-marathon",
+);
+assert.equal(
+  aliasPolicy.catalogueSeedEventSlugAliases["spar-budapest-international-marathon"],
+  undefined,
+  "Retained public alias must never be deleted by catalogue seeding",
+);
 for (const [alias, canonical] of Object.entries(verifiedFixtureAliases)) {
   assert(!assembledSlugs.has(alias), `Retired duplicate remains in catalogue: ${alias}`);
   assert(assembledSlugs.has(canonical), `Duplicate alias has no canonical event: ${canonical}`);

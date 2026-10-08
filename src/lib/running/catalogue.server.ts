@@ -3,6 +3,7 @@ import { ensureAthrecsSeeded } from "../athrecs/seed.server";
 import { todayIso } from "../athrecs/format";
 import type { EntryStatus, EventListItem, RaceGroupInfo, Sport } from "../athrecs/types";
 import { supplementedStart } from "../../data/runrecs-race-guides";
+import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
 
 function isRunRecsSport(value: unknown): value is "Running" | "Parkrun" {
   return value === "Running" || value === "Parkrun";
@@ -42,6 +43,7 @@ export async function queryRunningRegions(data: NonNullable<EventRegionInput>) {
       select e.slug, e.name, e.country, e.region, e.county, e.city, e.area
       from events e
       where e.sport in ('Running', 'Parkrun')
+        and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
         and (${requestedSport}::text is null or e.sport = ${requestedSport})
         and (
           lower(coalesce(e.country, '')) = lower(${country})
@@ -246,6 +248,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         (select count(*)::int from editions ed where ed.event_id = e.id) as edition_count
       from events e
       where e.sport in ('Running', 'Parkrun')
+        and not (e.slug = any(${retainedFixtureAliasSlugs}::text[]))
         and (${requestedSport}::text is null or e.sport = ${requestedSport})
         and (
           (${upcomingOnly}::boolean is false and ${dateFrom}::date is null
