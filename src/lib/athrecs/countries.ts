@@ -547,8 +547,11 @@ export function resolveCountry(input: {
   // Source venue labels often end in an explicit country/code, e.g. Doha (QAT).
   // City names and source website regions are not country evidence.
   for (const value of [input.city, input.area, input.address]) {
-    const suffix = value?.match(/(?:\(([A-Z]{2,3})\)|,\s*([^,]+))\s*$/);
-    const explicit = countryFlag(suffix?.[1] ?? suffix?.[2]);
+    const suffix = value?.match(/(?:\(([A-Z]{3})\)|,\s*([^,]+))\s*$/);
+    const label = suffix?.[1] ?? suffix?.[2]?.trim();
+    // Two-letter suffixes may be US states (CA, IN, GA), not countries.
+    if (label && /^[A-Za-z]{2}$/.test(label)) continue;
+    const explicit = countryFlag(label);
     if (explicit.code) return resolveCountry({ country: explicit.name });
   }
   return { iso: "UN", name: "Country TBC", world: false };

@@ -107,6 +107,10 @@ for (const [city, country, iso] of [
   assert.equal(resolveCountry({ city, country }).iso, iso);
 assert.equal(resolveCountry({ city: "Doha (QAT)" }).iso, "QA");
 assert.equal(resolveCountry({ city: "Tasmania, AUS" }).iso, "AU");
+assert.equal(resolveCountry({ city: "San Francisco, CA" }).iso, "UN");
+assert.equal(resolveCountry({ city: "Indianapolis, IN" }).iso, "UN");
+assert.equal(resolveCountry({ city: "Atlanta (GA)" }).iso, "UN");
+assert.equal(resolveCountry({ city: "San José, Costa Rica" }).iso, "CR");
 assert.equal(resolveCountry({ name: "World Marathon", city: "Newport" }).iso, "UN");
 assert.equal(fixtureTimeZone("SWE"), "Europe/Stockholm");
 assert.equal(
