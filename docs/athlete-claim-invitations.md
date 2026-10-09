@@ -1,6 +1,11 @@
 # Match a signup and invite the athlete to claim
 
 On `/admin/athlete-accounts`, choose **Match & invite** beside a registered account.
+The same action is available on each row in `/admin/athlete-directory` and in
+**Add or update athletes → Find profiles**. A source-profile row preselects that
+exact profile and lets staff find a signup by name, email or ATH number, including
+unfinished accounts. An account row opens matching for that account. Neither a
+directory suggestion nor a selected recipient links ownership automatically.
 Suggestions use the saved name, previous names, club/location and existing source
 identifiers. A signup without a full name can be matched through staff name/slug
 search. An email local part is never treated as identity evidence.
@@ -9,8 +14,20 @@ Each candidate shows the club/location, stored result count, recent races and
 reason for the suggestion. Select the profile, record why it may belong to the
 recipient and check the confirmation. The email preview shows the actual recipient
 and copy before **Email claim invitation** sends from `support@athrecs.com`.
-**Create sharing link** creates no email. Copy the message or open WhatsApp using a
-saved phone number, then send it from the staff member's own WhatsApp account.
+**Create WhatsApp / Viber / Telegram invitation** creates no email. Copy the message
+or open a prepared message in the chosen app. WhatsApp uses a saved phone when
+available; Telegram uses a saved username or phone. Otherwise the app lets staff
+choose the recipient. Viber always uses its contact chooser; its message puts the
+complete claim URL first and stays within the documented 200-character limit.
+Use the staff member's +44 7581 764764 account and review the recipient before
+sending. Opening a messaging app does not record delivery. Copy-message fallback
+is available if the app is not installed. Phone and Telegram details can be saved
+privately inside the directory panel. Recipients need an existing ATHRECS signup;
+the invitation still requires that account's verified email when claiming.
+
+Channel link formats: [WhatsApp](https://faq.whatsapp.com/5913398998672934),
+[Telegram](https://core.telegram.org/api/links),
+[Viber](https://developers.viber.com/docs/tools/share-button/).
 
 The seven-day link opens the existing `/claim-results` journey with one stored
 result preselected. The recipient signs in using the same verified account/email,

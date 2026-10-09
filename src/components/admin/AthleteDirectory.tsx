@@ -1,5 +1,5 @@
 import { ProfileEditReviewQueue } from "@/components/athletes/ProfileEditReviewQueue";
-import { useState } from "react";
+import { Suspense, lazy, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
@@ -22,7 +22,9 @@ import {
   type DirectoryFilters,
   type StaffAthlete,
 } from "@/lib/athrecs/staff-athlete-directory-api";
-
+const DirectoryMatchInvite = lazy(() =>
+  import("./DirectoryMatchInvite").then((module) => ({ default: module.DirectoryMatchInvite })),
+);
 
 export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: number) => void } = {}) {
   const [filters, setFilters] = useState<DirectoryFilters>({
@@ -37,10 +39,12 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
   const [selectedNumbers, setSelectedNumbers] = useState<Set<string>>(new Set());
   const [confirmPublish, setConfirmPublish] = useState(false);
   const [publishError, setPublishError] = useState("");
+  const [inviting, setInviting] = useState<string | null>(null);
   const queryClient = useQueryClient();
   function changeFilters(next: DirectoryFilters) {
     setSelectedNumbers(new Set());
     setMessage("");
+    setInviting(null);
     setFilters(next);
   }
   const query = useQuery({
@@ -249,6 +253,25 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
               filters clears your selection.
             </p>
           </section>
+          {inviting && query.data.athletes.some((p) => p.athleteNumber === inviting) ? (
+            <div>
+              <Button
+                type="button"
+                variant="secondary"
+                className="mb-2"
+                onClick={() => setInviting(null)}
+              >
+                Close match & invite
+              </Button>
+              <Suspense fallback={<p role="status">Opening match and invite…</p>}>
+                <DirectoryMatchInvite
+                  key={inviting}
+                  athleteNumber={inviting}
+                  name={query.data.athletes.find((p) => p.athleteNumber === inviting)!.name}
+                />
+              </Suspense>
+            </div>
+          ) : null}
           <div className="overflow-x-auto rounded-lg border border-border">
             <table className="w-full text-left text-sm">
               <thead className="bg-elevated text-xs text-subtle">
@@ -329,7 +352,26 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
                     <td className="px-3 py-2 text-xs">{p.visibility}</td>
                     <td className="px-3 py-2 tabular-nums">{p.resultCount}</td>
                     <td className="px-3 py-2">
-                      {onEditAthlete && p.sources.length === 1 ? <button type="button" className="mr-3 min-h-11 text-xs font-semibold text-accent hover:underline" onClick={() => onEditAthlete(p.sources[0].id)}>Edit profile & results</button> : null}
+                      <button
+                        type="button"
+                        className="mr-3 inline-block min-h-11 whitespace-nowrap text-xs font-semibold text-accent hover:underline"
+                        aria-expanded={inviting === p.athleteNumber}
+                        aria-label={`Match and invite ${p.name} (${p.athrecsId})`}
+                        onClick={() =>
+                          setInviting(inviting === p.athleteNumber ? null : p.athleteNumber)
+                        }
+                      >
+                        {inviting === p.athleteNumber ? "Close invitation" : "Match & invite"}
+                      </button>
+                      {onEditAthlete && p.sources.length === 1 ? (
+                        <button
+                          type="button"
+                          className="mr-3 min-h-11 text-xs font-semibold text-accent hover:underline"
+                          onClick={() => onEditAthlete(p.sources[0].id)}
+                        >
+                          Edit profile & results
+                        </button>
+                      ) : null}
                       <Link
                         to="/admin/athletes/$athleteId"
                         params={{ athleteId: p.athrecsId }}
@@ -354,7 +396,10 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
           <div className="flex justify-end gap-4 text-sm">
             <button
               disabled={busy || query.isFetching || query.data.page <= 1}
-              onClick={() => setFilters({ ...filters, page: query.data!.page - 1 })}
+              onClick={() => {
+                setInviting(null);
+                setFilters({ ...filters, page: query.data!.page - 1 });
+              }}
               className="disabled:opacity-40"
             >
               Previous
@@ -364,7 +409,10 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
             </span>
             <button
               disabled={busy || query.isFetching || query.data.page >= query.data.pages}
-              onClick={() => setFilters({ ...filters, page: query.data!.page + 1 })}
+              onClick={() => {
+                setInviting(null);
+                setFilters({ ...filters, page: query.data!.page + 1 });
+              }}
               className="disabled:opacity-40"
             >
               Next

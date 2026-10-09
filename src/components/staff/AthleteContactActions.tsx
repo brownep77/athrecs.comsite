@@ -127,6 +127,7 @@ function ContactEditor({ account, onSaved }: { account: RegisteredAthlete; onSav
       }),
     onSuccess: async () => {
       await client.invalidateQueries({ queryKey: ["staff-registrations"] });
+      await client.invalidateQueries({ queryKey: ["directory-invitation-accounts"] });
       onSaved();
     },
   });

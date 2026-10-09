@@ -108,6 +108,7 @@ jobs:
           name: athlete-tools-preview
           path: |
             artifacts/athlete-tools-*.png
+            artifacts/athlete-directory-invites-*.png
             artifacts/result-conflicts-*.png
             artifacts/recruitment-*.png
             artifacts/funnel-audit/signup-ownership.json

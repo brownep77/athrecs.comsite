@@ -13,13 +13,22 @@ import {
   invitationStatusLabel,
 } from "@/lib/athrecs/claim-invitation";
 import type { RegisteredAthlete } from "@/lib/athrecs/registrations.server";
+import { ClaimInvitationSharing } from "./ClaimInvitationSharing";
 
 const inputClass = "w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-fg";
-export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) {
-  const [open, setOpen] = useState(false),
+export function AthleteMatchInvite({
+  account,
+  athleteId,
+  initiallyOpen = false,
+}: {
+  account: RegisteredAthlete;
+  athleteId?: number;
+  initiallyOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(initiallyOpen),
     [search, setSearch] = useState(""),
     [query, setQuery] = useState(""),
-    [selected, setSelected] = useState<number | null>(null),
+    [selected, setSelected] = useState<number | null>(athleteId ?? null),
     [note, setNote] = useState(""),
     [reviewed, setReviewed] = useState(false),
     [busy, setBusy] = useState(false),
@@ -27,8 +36,8 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
   const [link, setLink] = useState<{ id: string; url: string } | null>(null);
   const client = useQueryClient();
   const matches = useQuery({
-    queryKey: ["staff-claim-matches", account.userId, query],
-    queryFn: () => findStaffClaimMatches({ data: { userId: account.userId, q: query } }),
+    queryKey: ["staff-claim-matches", account.userId, query, athleteId],
+    queryFn: () => findStaffClaimMatches({ data: { userId: account.userId, q: query, athleteId } }),
     enabled: open,
     staleTime: 0,
     gcTime: 0,
@@ -38,6 +47,7 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
     await Promise.all([
       client.invalidateQueries({ queryKey: ["staff-claim-matches", account.userId] }),
       client.invalidateQueries({ queryKey: ["staff-registrations"] }),
+      client.invalidateQueries({ queryKey: ["directory-invitation-accounts"] }),
     ]);
   }
   function deliveryMessage(status: string) {
@@ -67,7 +77,7 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
         setMessage(
           saved.reused
             ? "Existing invitation ready to copy. No additional email was sent."
-            : "Private link created. Copy it or open WhatsApp to send it.",
+            : "Private link created. Copy it or open WhatsApp, Viber or Telegram to send it.",
         );
       await refresh();
     } catch (error) {
@@ -96,10 +106,6 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
       setBusy(false);
     }
   }
-  const phone = account.contact.phone?.replace(/\D/g, "");
-  const share = link
-    ? `ATHRECS found a profile that may be yours. Please check and claim it here: ${link.url} Sign in with the email address used for your ATHRECS account.`
-    : "";
   return (
     <section
       className="mt-4 border-t border-border pt-4"
@@ -129,45 +135,52 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
             1. Find the right profile. 2. Check the suggested match. 3. Send a private invitation.
             The athlete confirms and staff approve their identity.
           </p>
-          <form
-            className="flex flex-wrap items-end gap-2"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setQuery(search.trim());
-              setSelected(null);
-              setReviewed(false);
-              setLink(null);
-            }}
-          >
-            <label className="min-w-0 flex-1 space-y-1 text-sm font-medium">
-              Search existing athlete profiles
-              <input
-                className={inputClass}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                maxLength={120}
-                placeholder="Full name or exact profile slug"
-              />
-            </label>
-            <Button type="submit" disabled={busy}>
-              Find profiles
-            </Button>
-            <Button
-              type="button"
-              variant="secondary"
-              disabled={busy}
-              onClick={() => {
-                setSearch("");
-                setQuery("");
+          {!athleteId ? (
+            <form
+              className="flex flex-wrap items-end gap-2"
+              onSubmit={(e) => {
+                e.preventDefault();
+                setQuery(search.trim());
                 setSelected(null);
                 setReviewed(false);
                 setLink(null);
-                void matches.refetch();
               }}
             >
-              Suggested matches
-            </Button>
-          </form>
+              <label className="min-w-0 flex-1 space-y-1 text-sm font-medium">
+                Search existing athlete profiles
+                <input
+                  className={inputClass}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  maxLength={120}
+                  placeholder="Full name or exact profile slug"
+                />
+              </label>
+              <Button type="submit" disabled={busy}>
+                Find profiles
+              </Button>
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={busy}
+                onClick={() => {
+                  setSearch("");
+                  setQuery("");
+                  setSelected(null);
+                  setReviewed(false);
+                  setLink(null);
+                  void matches.refetch();
+                }}
+              >
+                Suggested matches
+              </Button>
+            </form>
+          ) : (
+            <p className="text-sm text-muted">
+              Profile selected from the athlete directory. Check the stored races below against the
+              recipient.
+            </p>
+          )}
           {matches.isPending ? (
             <p role="status">Finding profiles…</p>
           ) : matches.isError ? (
@@ -181,8 +194,8 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
             <>
               {!matches.data.hasSavedName ? (
                 <p className="rounded-lg bg-amber-50 p-3 text-sm text-amber-950">
-                  This account has no full name saved. Search for the athlete’s name above; an email
-                  address alone does not establish a match.
+                  This account has no full name saved. Check the athlete’s identity and stored
+                  races; an email address alone does not establish a match.
                 </p>
               ) : null}
               {matches.data.moreMatches ? (
@@ -245,7 +258,7 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
               ) : null}
               {candidate && !candidate.blocked ? (
                 <div className="space-y-3 rounded-xl border border-border p-4">
-                  <h3 className="font-semibold">
+                  <h3 className="break-words font-semibold">
                     Invite {account.email} to check {candidate.name}
                   </h3>
                   <label className="block space-y-1 text-sm font-medium">
@@ -296,10 +309,11 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
                     <Button
                       type="button"
                       variant="secondary"
+                      className="h-auto max-w-full whitespace-normal py-3"
                       disabled={busy || !reviewed || note.trim().length < 12}
                       onClick={() => void create(false)}
                     >
-                      Create sharing link
+                      Create WhatsApp / Viber / Telegram invitation
                     </Button>
                   </div>
                   {!matches.data.emailAvailable ? (
@@ -311,49 +325,12 @@ export function AthleteMatchInvite({ account }: { account: RegisteredAthlete }) 
                 </div>
               ) : null}
               {link ? (
-                <div className="space-y-2 rounded-lg border border-border p-3">
-                  <label className="block text-sm font-medium">
-                    Private claim link
-                    <input
-                      readOnly
-                      className={`${inputClass} mt-1`}
-                      value={link.url}
-                      onFocus={(e) => e.target.select()}
-                    />
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      onClick={() =>
-                        void navigator.clipboard
-                          .writeText(share)
-                          .then(() => setMessage("Invitation message copied."))
-                          .catch(() => setMessage("Select and copy the private link above."))
-                      }
-                    >
-                      Copy invitation message
-                    </Button>
-                    {phone ? (
-                      <a
-                        className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent"
-                        href={`https://wa.me/${phone}?text=${encodeURIComponent(share)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Open WhatsApp invitation
-                      </a>
-                    ) : (
-                      <span className="text-xs text-muted">
-                        Save a phone number in contact details to use WhatsApp.
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-muted">
-                    Only this athlete’s account can use the link. Opening WhatsApp does not send it;
-                    use your +44 7581 764764 account.
-                  </p>
-                </div>
+                <ClaimInvitationSharing
+                  key={link.id}
+                  url={link.url}
+                  email={account.email}
+                  contact={account.contact}
+                />
               ) : null}
               {matches.data.history.length ? (
                 <div className="space-y-2">

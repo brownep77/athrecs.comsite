@@ -35,7 +35,11 @@ export type RegisteredAthlete = {
   withdrawn: number;
 };
 
-export async function loadRegistrations(sql: Sql, filters: RegistrationFilters) {
+export async function loadRegistrations(
+  sql: Sql,
+  filters: RegistrationFilters,
+  onlyUserId?: string,
+) {
   const pageSize = 25;
   const term = `%${filters.q.replace(/[\\%_]/g, "\\$&")}%`;
   const number = parseAthleteId(filters.q);
@@ -52,7 +56,8 @@ export async function loadRegistrations(sql: Sql, filters: RegistrationFilters) 
       or ($4='pending' and exists (select 1 from result_claims c
         where c.claimant_user_id=u."id" and c.status in ('pending','needs_info'))))
     and ($5='' or u."createdAt">=(nullif($5,'')::date::timestamp at time zone 'Europe/London'))
-    and ($6='' or u."createdAt"<((nullif($6,'')::date + interval '1 day') at time zone 'Europe/London'))`;
+    and ($6='' or u."createdAt"<((nullif($6,'')::date + interval '1 day') at time zone 'Europe/London'))
+    and ($7::text is null or u."id"=$7)`;
   const parameters = [
     filters.q,
     term,
@@ -60,6 +65,7 @@ export async function loadRegistrations(sql: Sql, filters: RegistrationFilters) 
     filters.status,
     filters.joinedFrom,
     filters.joinedTo,
+    onlyUserId ?? null,
   ];
   const order = {
     newest: 'u."createdAt" desc, u."id"',
@@ -99,7 +105,7 @@ export async function loadRegistrations(sql: Sql, filters: RegistrationFilters) 
     const page = Math.min(filters.page, Math.max(1, Math.ceil(total / pageSize)));
     const accounts = await tx.query<RegisteredAthlete>(
       `with selected as materialized (
-        select u."id" ${from} ${where} order by ${order} limit $7 offset $8
+        select u."id" ${from} ${where} order by ${order} limit $8 offset $9
       ) select
         (select jsonb_build_object('id',i.id,'athleteName',a.display_name,'status',${INVITATION_STATUS_SQL},'createdAt',i.created_at::text,'expiresAt',i.expires_at::text,'sentAt',i.email_sent_at::text) from athlete_claim_invitations i join athletes a on a.id=i.athlete_id where i.user_id=u.id order by i.created_at desc limit 1) as invitation,
       jsonb_build_object('phone',contact.phone,'telegramUsername',contact.telegram_username,

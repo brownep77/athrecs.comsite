@@ -25,7 +25,49 @@ export const findStaffClaimMatches = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const { getSql } = await import("@/lib/db");
     const { findInvitationMatches } = await import("./claim-invitations.server");
-    return findInvitationMatches(await getSql(), data.userId, data.q);
+    return findInvitationMatches(await getSql(), data.userId, data.q, data.athleteId);
+  });
+
+export const findDirectoryInvitationAccounts = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .validator((input: unknown) =>
+    z
+      .object({
+        athleteNumber: z.string().regex(/^[1-9]\d{0,17}$/),
+        q: z.string().trim().max(120).optional(),
+        page: z.number().int().min(1).max(100000).default(1),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data }) => {
+    const { getSql } = await import("@/lib/db");
+    const { loadRegistrations } = await import("./registrations.server");
+    const { registrationFilters } = await import("./registration-filters");
+    const sql = await getSql();
+    const [account] = await sql<{
+      userId: string;
+    }>`select user_id as "userId" from athlete_identifiers where number=${data.athleteNumber}::bigint and user_id is not null`;
+    const profiles = await sql<{
+      id: number;
+      name: string;
+    }>`select a.id,a.display_name as name from athletes a join athlete_resolved_ids i on i.athlete_id=a.id where i.athlete_number=${data.athleteNumber}::bigint order by a.id`;
+    if (!account && !profiles.length) throw new Error("Directory profile not found.");
+    const registrations = await loadRegistrations(
+      sql,
+      registrationFilters.parse({
+        q: account ? "" : (data.q ?? profiles[0].name),
+        page: data.page,
+      }),
+      account?.userId,
+    );
+    return {
+      accounts: registrations.accounts,
+      total: registrations.total,
+      page: registrations.page,
+      pageSize: registrations.pageSize,
+      registered: !!account,
+      athleteId: account ? null : profiles[0].id,
+    };
   });
 export const createStaffClaimInvitation = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
