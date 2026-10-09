@@ -2418,6 +2418,12 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "edinburgh-running-festival": {
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
+    source_url: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
+    defaultStartTime: "10:00",
+  },
   "runthrough-gatwick-november-2027": {
     name: "Run Gatwick Half Marathon & 5K",
     country: "England",
