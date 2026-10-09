@@ -115,6 +115,25 @@ for (const country of MARATHON_COUNTRIES) {
   assert.equal(list.numberOfItems, races.length);
 }
 // The same instant can be the day after a race in Auckland but race day in Los Angeles.
+// The UK guide focuses on 2027 while individual race pages retain 2026 editions.
+const ukCountry = MARATHON_COUNTRIES.find((country) => country.id === "uk");
+const ukRaces = roadMarathonsForCountry("uk");
+const ukGraph = JSON.parse(
+  countryMarathonHead(ukCountry, ukRaces, "2026-10-07T12:00:00Z").scripts[0].children,
+)["@graph"];
+const ukCalendar = ukGraph.find((item) => item["@id"]?.endsWith("#upcoming"));
+assert.equal(ukCalendar.numberOfItems, 13);
+assert(ukCalendar.itemListElement.every((item) => item.name.includes("2027")));
+const ukDateAnswer = ukGraph.find((item) => item["@type"] === "FAQPage").mainEntity[1]
+  .acceptedAnswer.text;
+assert(ukDateAnswer.includes("Chester Marathon and Abingdon Marathon are TBC"));
+assert(!ukDateAnswer.includes("2026"));
+const chester = ukRaces.find((race) => race.slug === "chester-marathon");
+assert.equal(upcomingRoadEditions(chester, "2026-10-07T12:00:00Z").length, 1);
+assert.equal(upcomingRoadEditions(chester, "2026-10-07T12:00:00Z", 2027).length, 0);
+const london = ukRaces.find((race) => race.slug === "london-marathon");
+assert.equal(upcomingRoadEditions(london, "2027-04-25T22:59:59Z", 2027).length, 1);
+assert.equal(upcomingRoadEditions(london, "2027-04-25T23:00:00Z", 2027).length, 0);
 const sample = {
   ...ROAD_MARATHONS[0],
   editions: [{ date: "2027-01-01", sourceUrl: "https://example.test" }],

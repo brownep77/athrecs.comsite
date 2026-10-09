@@ -62,7 +62,7 @@ assert.match(
 assert.match(
   submitDefinition,
   /const previouslyReviewed =/,
-  "A past staff decision must be detected before automatic approval",
+  "A past staff decision must be retained on resubmission",
 );
 assert.match(
   submitDefinition,
@@ -74,27 +74,22 @@ assert.match(
   /existing\[0\]\?\.status === "rejected"/,
   "A rejected resubmission must not bypass staff review",
 );
-assert.match(
+assert.doesNotMatch(
   submitDefinition,
-  /const requiresReview = Boolean\(owner\) \|\| otherClaimCount > 0 \|\| previouslyReviewed/,
-  "Review must cover ownership conflicts, competing claimants and prior staff decisions",
+  /insert into athlete_account_links/,
+  "Only the staff review endpoint may create a new ownership link",
 );
 assert.match(
   submitDefinition,
-  /const nextStatus: ResultClaimStatus = requiresReview \? "pending" : "approved"/,
-  "A genuinely new uncontested claim must be approved automatically",
-);
-assert.match(
-  submitDefinition,
-  /staff_note = case when \$\{previouslyReviewed\} then staff_note else \$\{automaticNote\} end/,
+  /staff_note = case when \$\{previouslyReviewed\} then staff_note else null end/,
   "The prior staff note must survive a reviewed claim resubmission",
 );
 assert.match(
   submitDefinition,
   /select id from athletes\s+where id = \$\{result\.athlete_id\}\s+for update/,
-  "Automatic ownership decisions must be serialized per athlete profile",
+  "Submissions must be serialized per athlete profile",
 );
-assert.match(submitDefinition, /notifyResultClaimReviewed/);
+assert.doesNotMatch(submitDefinition, /notifyResultClaimReviewed/);
 assert.match(submitDefinition, /notifyResultClaimSubmitted/);
 
 assert.match(athleteRoute, /CompactResults/);
@@ -110,13 +105,7 @@ assert.match(homeRoute, /Claim race results/);
 assert.match(staffShell, /\/admin\/result-claims/);
 assert.match(claimRoute, /response\.status === "approved"/);
 assert.match(api, /for update/);
-assert.match(
-  api,
-  /const requiresReview = Boolean\(owner\) \|\| otherClaimCount > 0 \|\| previouslyReviewed/,
-);
-assert.match(api, /const nextStatus: ResultClaimStatus = requiresReview \? "pending" : "approved"/);
-assert.match(api, /Automatically approved as the first uncontested claim/);
-assert.match(api, /await syncAthleteAccountAfterClaim\(outcome\.claimantUserId\)/);
+assert.match(api, /Record the independent identity evidence checked before approving ownership/);
 assert.match(api, /notifyResultClaimReviewed/);
 assert.doesNotMatch(api, /Add a bib number, verification detail or evidence link/);
 assert.match(api, /evidenceUrl2: optionalHttpsUrl/);
@@ -125,12 +114,12 @@ assert.match(api, /evidence_url_2/);
 assert.match(api, /evidence_url_3/);
 assert.match(evidenceLinksMigration, /add column if not exists evidence_url_2/);
 assert.match(evidenceLinksMigration, /add column if not exists evidence_url_3/);
-assert.match(claimRoute, /Confirm a matched result once and it is added immediately/);
-assert.match(claimRoute, /No evidence is needed/);
+assert.match(claimRoute, /Confirm a matched result to request ownership/);
+assert.match(claimRoute, /Staff may ask for identity evidence before approval/);
 assert.match(claimRoute, /Not required · add up to three/);
 assert.doesNotMatch(claimRoute, /Supporting detail/);
 assert.doesNotMatch(claimRoute, /Supporting information type/);
-assert.match(claimRoute, /Add this result to my profile/);
+assert.match(claimRoute, /Submit claim for review/);
 assert.match(claimRoute, /Tick the confirmation box to confirm this is your result/);
 assert.match(claimRoute, /disabled=\{submitClaim\.isPending\}/);
 assert.doesNotMatch(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declaration\}/);
@@ -144,7 +133,7 @@ for (const source of ["/claim-results", "/athlete-account"]) {
   assert.match(cacheControl?.value ?? "", /no-store/);
 }
 assert.match(adminClaimRoute, /Optional evidence links/);
-assert.match(adminClaimRoute, /Evidence is not required for an uncontested claim/);
+assert.match(adminClaimRoute, /Request and check independent identity evidence before\s+approval/);
 assert.match(api, /Another verified account was approved/);
 assert.match(api, /Only an approved claim can have ownership revoked/);
 assert.doesNotMatch(

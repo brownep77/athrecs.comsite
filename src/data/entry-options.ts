@@ -24,6 +24,7 @@ import {
 } from "./uk-10k-release-64";
 import {
   allFixtureAliases,
+  retainedFixtureAliases,
   verifiedFixtureEditionOverrides,
   verifiedFixtureEditionReplacements,
   verifiedFixtureSeriesOverrides,
@@ -76,13 +77,16 @@ const SEATON_CLASSIC_SOURCE = "https://athleticsni.org/Fixtures/Road-Running";
 
 /** Duplicate catalogue slugs that resolve to one canonical race record. */
 export const catalogueSeedEventSlugAliases: Readonly<Record<string, string>> = {
-  ...allFixtureAliases,
+  ...Object.fromEntries(
+    Object.entries(allFixtureAliases).filter(([slug]) => !retainedFixtureAliases[slug]),
+  ),
   ...nonStandardDistanceSlugAliases,
   "dingle-marathon-half-2026": "dingle-marathon",
 };
 
 export const eventSlugAliases: Readonly<Record<string, string>> = {
   ...catalogueSeedEventSlugAliases,
+  ...retainedFixtureAliases,
   ...dailyHalfTenMileSlugAliases,
 };
 

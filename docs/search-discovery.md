@@ -13,7 +13,7 @@ Public pages are eligible for crawling; search engines independently decide whet
 
 ## Discovery
 
-`/sitemap.xml` lists static pages, countries and paginated athlete, race, club and result sitemaps. Each database page is limited to 5,000 entries. Public visibility and account opt-outs apply to results; existing athlete privacy controls are retained. Sitemap routes do not cache publication decisions.
+`/sitemap.xml` lists static pages, countries and paginated athlete, race, club and result sitemaps. Each database page is limited to 5,000 entries. Public visibility and account opt-outs apply to results; existing athlete privacy controls are retained. Country race directories default to Running, retain explicitly selected disciplines, and exclude empty responses from indexing. Only countries with upcoming running fixtures contribute race-directory URLs to the country sitemap. Sitemap routes do not cache publication decisions.
 
 `/site-map` and the footer provide crawlable HTML navigation. Public brand and opportunity listings are rendered on the server. `/about-us` supplies a concise product description, visible questions and answers, and matching AboutPage/FAQPage data. FAQ markup is descriptive, not a promise of a Google rich result.
 
@@ -30,3 +30,13 @@ Public pages are eligible for crawling; search engines independently decide whet
 After deployment, submit `https://www.athrecs.com/sitemap.xml` in the verified Google Search Console and Bing Webmaster Tools properties. Inspect representative URLs from every family and monitor indexing exclusions, redirects and crawl errors. Sitemap submission is a request for discovery, not evidence that all URLs have been indexed. Use Google's URL Inspection interface for priority pages; the general Google Indexing API does not apply to ordinary athlete or race pages.
 
 New database records enter the appropriate live sitemap automatically if their public route is available. Add future static pages to `PUBLIC_PAGES`, with route-specific metadata. Do not add account tools, filter combinations, redirect aliases or private records.
+
+## 7 October 2026 indexing notices
+
+Search Console reported two soft 404s and three race pages where Google selected another canonical. The Montenegro directory defaulted to Athletics and returned no upcoming events despite available running fixtures. The three archive race pairs shared the meeting name, date and distance but contained different performances; they must not be redirected together on name alone.
+
+Single-edition archives now render a bounded preview through the existing public-results API, with date, distance, athlete names and linked provider credits. Metadata describes those records, and obsolete entry/travel boilerplate is omitted. Result pages state their partial coverage. No event records, result values, source approvals or privacy settings are modified.
+
+The five noindex examples were filtered country searches; the robots exclusions were the claim form and an official-entry API route. Sample alternate canonicals were country/language race views pointing to the shared race page. These exclusions remain intentional.
+
+`node scripts/verify-indexing-recovery.mjs` exercises actual server-rendered routes with a disposable database, public/private synthetic results, explicit discipline selection, populated and empty country directories, and sitemap updates. Google recrawling and canonical selection remain external decisions; deployment alone does not prove validation has passed.

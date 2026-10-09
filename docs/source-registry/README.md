@@ -6,6 +6,9 @@ four worldwide timing and organiser discovery sources checked on 6 October 2026.
 The October additions are Yverá Crono, Chronoplace, SudChrono and Hyve Sports
 Philippines. All four remain disabled for manual rights and selector review;
 Hyve Sports is an organiser source, not a confirmed chip-timing company.
+TimingFP (Chile) and OrycronSport (Spain) were checked on 7 October 2026 and
+added as two more disabled discovery sources. Their fixture and result routes
+are recorded for manual rights and sport-specific selector review.
 The canonical machine-readable file is:
 
 - docs/source-registry/fixture-result-sources.csv
@@ -18,7 +21,7 @@ Each override is pinned to a source ID, edition ID, event name and date, retains
 exact public evidence URL and checked date, and clears only the named review fields.
 Unresolved review issues continue to block publication.
 
-The registry contains 286 unique sources. Only 36 are enabled; the other 250 remain
+The registry contains 288 unique sources. Only 36 are enabled; the other 252 remain
 disabled because their rights, crawl rules, selectors or technical behaviour still need
 review. A disabled row must never be treated as permission to crawl.
 
@@ -78,9 +81,9 @@ screen is read-only: viewing or filtering a held source cannot enable it or bypa
 
 The admin bulk-run control snapshots every registry row into a durable Neon run:
 
-- all 286 sources create exactly one source job;
+- all 288 sources create exactly one source job;
 - the 36 enabled and rights-approved sources are queued;
-- the other 250 sources are retained as blocked jobs with their reason;
+- the other 252 sources are retained as blocked jobs with their reason;
 - changing a reviewed CSV row to `enabled=1` makes it runnable in the next run without
   changing application code;
 - a unique `(run_id, source_id)` constraint prevents the same website source from being

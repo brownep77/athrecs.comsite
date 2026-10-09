@@ -19,6 +19,7 @@
     "verify:global-track-field-calendar": "node --experimental-strip-types scripts/verify-global-track-field-calendar.mjs",
     "verify:athletics-source-spectator": "node --experimental-strip-types scripts/verify-athletics-source-spectator-foundation.mjs",
     "verify:athrecs-catalogue-publication": "node scripts/verify-athrecs-catalogue-publication.mjs",
+    "verify:fixture-geography": "node scripts/verify-fixture-geography.mjs",
     "verify:fixture-duplicates": "node --experimental-strip-types scripts/verify-fixture-duplicates.mjs",
     "verify:mrd-marathons": "node --experimental-strip-types scripts/verify-mrd-marathons.mjs",
     "verify:aims-europe-road-races": "node --experimental-strip-types scripts/verify-aims-europe-road-races.mjs",

@@ -16,6 +16,7 @@ const { editionEntry, entryDeadlinePassed, raceLink, raceLocation } = await modu
   "src/lib/athrecs/race-information.ts",
 );
 const { supplementedStart } = await moduleFrom("src/data/runrecs-race-guides.ts");
+const { retainedFixtureAliasSlugs } = await moduleFrom("src/data/fixture-deduplication.ts");
 const today = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/London",
   year: "numeric",
@@ -102,9 +103,14 @@ try {
       (900002, 'fixture', 'Fixture entry', 'https://example.com/10k', 'official', 'open', true, true);
   `);
   const source = await readFile("src/lib/running/catalogue.server.ts", "utf8");
+  await db.exec(`insert into events(id,slug,name,sport,country,city) values
+    (900003,'spar-budapest-international-marathon','Imported Budapest Marathon','Running','Hungary','Budapest');
+    insert into editions(id,event_id,event_date,distance_code,status) values
+    (900005,900003,'2099-10-01','Marathon','Open');`);
   const query = source.match(/const rows = await sql<RawEventRow>`([\s\S]*?)`;/)?.[1];
   assert(query, "Production listing query must be exercised");
   const defaults = {
+    retainedFixtureAliasSlugs,
     today,
     requestedSport: null,
     q: null,
@@ -129,6 +135,11 @@ try {
   const list = (filters = {}) => runQuery(sql, ...Object.values({ ...defaults, ...filters }));
   const [race] = await list();
   assert.equal((await list()).length, 1, "RunRecs excludes other sports");
+  assert.equal(
+    (await db.query("select count(*) from events where id=900003")).rows[0].count,
+    1,
+    "Imported alias is suppressed from public listings without deleting its record",
+  );
   assert.equal(race.next_start_time, "09:00");
   assert.equal(race.next_entry_url, "https://example.com/5k");
   assert.deepEqual(JSON.parse(race.next_starts_json), [

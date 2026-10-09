@@ -15,6 +15,9 @@ export type VerifiedEditionReplacement = {
  * Database seeding refuses to retire an alias that already holds results.
  */
 export const verifiedFixtureAliases: Readonly<Record<string, string>> = {
+  // Same 28 February 2027 race at Queensway Stadium; runABC and RunThrough
+  // partner listing checked 8 October 2026 (see docs/fixture-geography).
+  "wrexham-half-marathon-february": "wrexham-half-marathon-2027",
   "runabc-west-acre-wild-10k": "west-acre-wild-10k",
   "rb-10th-anniversary-abp-humber-coastal-half-marathon-10k-family-fun-run":
     "abp-humber-coastal-half-marathon-5k",
@@ -103,9 +106,16 @@ export const legacyFixtureAliases: Readonly<Record<string, string>> = {
   "well-run-10k": "far-peak-10k-half-marathon",
 };
 
+/** Public aliases whose imported database rows and references must be retained. */
+export const retainedFixtureAliases: Readonly<Record<string, string>> = {
+  "spar-budapest-international-marathon": "budapest-marathon",
+};
+export const retainedFixtureAliasSlugs = Object.keys(retainedFixtureAliases);
+
 export const allFixtureAliases: Readonly<Record<string, string>> = {
   ...legacyFixtureAliases,
   ...verifiedFixtureAliases,
+  ...retainedFixtureAliases,
 };
 
 /** Incorrect second-day dates found during the all-sport duplicate audit. */

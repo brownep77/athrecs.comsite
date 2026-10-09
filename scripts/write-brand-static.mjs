@@ -44,7 +44,7 @@ Disallow: /athlete-account
 Disallow: /my-athlete-profile
 Disallow: /claim-results
 ${!isRunRecs ? "Disallow: /api/\nDisallow: /athlete-results\nDisallow: /review-results\nDisallow: /brands/manage\nDisallow: /brands/register\n" : ""}Sitemap: ${siteUrl}/sitemap.xml
-`;
+${!isRunRecs ? `Sitemap: ${siteUrl}/sitemaps/pages.xml\n` : ""}`;
 
 const outputDir = path.resolve(process.cwd(), ".vercel/output/static");
 await mkdir(outputDir, { recursive: true });

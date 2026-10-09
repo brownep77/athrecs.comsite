@@ -48,8 +48,14 @@ jobs:
       - name: Install locked dependencies
         run: npm ci
 
+      - name: Verify fixture geography, flag mappings and correction safety
+        run: npm run verify:fixture-geography
+
       - name: Verify search URLs and sitemap privacy
         run: npm run verify:search-discovery
+
+      - name: Verify indexing recovery and archive privacy
+        run: node scripts/verify-indexing-recovery.mjs
 
       - name: Verify race-page event structured data
         run: node scripts/verify-race-page-schema.mjs
@@ -126,6 +132,9 @@ jobs:
             fi
             sleep 2
           done
+
+      - name: Fixture geography on desktop and mobile
+        run: node scripts/verify-fixture-geography-ui.mjs
 
       - name: Catalogue automation authentication smoke test
         run: |

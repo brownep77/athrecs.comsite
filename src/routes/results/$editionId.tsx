@@ -76,7 +76,13 @@ function RaceResultsPage() {
         <div className="flex flex-wrap gap-2"><Badge variant="outline">{edition.sport}</Badge><Badge variant="outline">{edition.distance_code}</Badge></div>
         <h1 className="font-display text-3xl font-semibold leading-tight">{edition.event_name}</h1>
         <p className="text-sm text-muted">{formatRaceDateShort(edition.event_date)}{edition.city ? ` · ${edition.city}` : ""}{edition.country ? ` · ${edition.country}` : ""}</p>
-        <p className="text-sm font-medium text-accent">{edition.result_count.toLocaleString("en-GB")} results recorded on AthRecs</p>
+        <p className="text-sm font-medium text-accent">{edition.result_count.toLocaleString("en-GB")} {edition.result_count === 1 ? "performance" : "performances"} recorded on AthRecs</p>
+        <p className="max-w-3xl text-sm text-muted">
+          This archive contains {edition.distance_code} performances from {edition.event_name}, held on {formatRaceDateShort(edition.event_date)}
+          {edition.city ? ` in ${edition.city}` : ""}{edition.country ? `, ${edition.country}` : ""}.
+          It contains the public records currently held by AthRecs, which may cover only part of the field.
+          Follow the credited provider links for the original results. Placings are retained from the source.
+        </p>
         {credits.length ? <div className="space-y-1 text-sm text-muted" aria-label="Results provider credits">
           <p>Results credited to:</p>
           <ul className="flex flex-wrap gap-x-4 gap-y-2">{credits.map((credit) => <li key={credit.url}><a href={credit.url} target="_blank" rel="noreferrer" className="text-accent underline">{credit.name}</a></li>)}</ul>
