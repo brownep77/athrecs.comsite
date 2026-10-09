@@ -68,7 +68,9 @@ export function HistoricalResultRow({
         {row.performance || "Not recorded"}
         {numericMark && field ? " m" : numericMark && combined ? " pts" : ""}
         {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
-        <span className="block text-xs font-normal text-muted">Unverified</span>
+        {row.verificationStatus === "unverified" ? (
+          <span className="block text-xs font-normal text-muted">Unverified</span>
+        ) : null}
         {row.wind ? (
           <span className="block text-xs font-normal text-subtle">Wind {row.wind} m/s</span>
         ) : null}

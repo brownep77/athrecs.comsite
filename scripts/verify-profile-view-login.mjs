@@ -372,6 +372,41 @@ try {
     );
     assert($.text().includes("11 performances"));
   }
+  // Verification changes the label, not the record, its original precision or owner controls.
+  const confirmedPerformances = performances.map((row, index) => ({
+    ...row,
+    verificationStatus: index === 0 ? "source_verified" : "verified_by_administrator",
+  }));
+  await sql`update athlete_source_histories set performances=${JSON.stringify([
+    ...confirmedPerformances,
+    {
+      ...performance,
+      verificationStatus: "verified_by_administrator",
+      performance: "Hidden mark sentinel",
+      profileExcluded: true,
+    },
+  ])}::jsonb where athlete_id=${publishedAthlete.id}`;
+  const confirmedProfile = await publicRead("published-history-fixture");
+  assert.equal(confirmedProfile.sourceHistories[0].performances.length, 10);
+  assert.equal(
+    confirmedProfile.sourceHistories[0].performances[0].verificationStatus,
+    "source_verified",
+  );
+  assert.equal(
+    confirmedProfile.sourceHistories[0].performances[1].verificationStatus,
+    "verified_by_administrator",
+  );
+  const confirmedHtml = await (await fetch(origin + "/athletes/published-history-fixture")).text();
+  const confirmed = load(confirmedHtml);
+  assert.equal(confirmed("#results-history tbody tr").length, 11);
+  assert.equal(confirmed("#performance-history").length, 0);
+  assert(!confirmed("#results-history").text().includes("Unverified"));
+  assert(confirmed("#results-history").text().includes("29 Jan · 2011 / 2012"));
+  assert.equal(confirmed("#results-history a[href^='https://example.test']").length, 0);
+  assert.equal(
+    confirmed("#results-history tr[data-history-result] [aria-label='Personal best']").length,
+    0,
+  );
   if (process.env.ATHRECS_BROWSER_MODULE) {
     const { chromium } = createRequire(import.meta.url)(process.env.ATHRECS_BROWSER_MODULE);
     const browser = await chromium.launch({ headless: true });
@@ -396,6 +431,7 @@ try {
         );
         const history = page.locator("#results-history");
         assert.equal(await history.locator("tbody tr").count(), 11);
+        assert(!(await history.innerText()).includes("Unverified"));
         await page.getByText("Show all 11 results", { exact: true }).click();
         assert.equal(await history.locator("tbody tr:visible").count(), 11);
         assert.equal(await history.locator("a[href^='https://example.test']").count(), 0);

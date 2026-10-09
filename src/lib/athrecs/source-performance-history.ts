@@ -14,7 +14,10 @@ export const sourcePerformanceSchema = z.object({
   yearLabel: z.string().max(80).optional(),
   notes: z.string().max(6000).optional(),
   providerName: z.string().max(200).optional(),
-  verificationStatus: z.literal("unverified").optional(),
+  // Administrator confirmation and independent source checks are distinct audit bases.
+  verificationStatus: z
+    .enum(["unverified", "verified_by_administrator", "source_verified"])
+    .optional(),
   profileExcluded: z.boolean().optional(),
   sourceDate: z.string(),
   ageGroup: z.string(),

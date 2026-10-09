@@ -60,7 +60,7 @@ export function ManagedPerformanceHistory({
     <section className="min-w-0 space-y-4 rounded-xl border border-slate-200 bg-white p-5">
       <h2 className="text-xl font-semibold">Additional performance history ({rows.length})</h2>
       <p className="text-sm text-slate-600">
-        These entries were added by AthRecs and remain unverified.{" "}
+        These entries were added by AthRecs. Each entry's verification status is shown below.{" "}
         {staff
           ? "The linked athlete can remove or restore each entry."
           : "Remove any entry from your profile, or restore it later. The original source record is retained."}
@@ -95,6 +95,12 @@ export function ManagedPerformanceHistory({
               {row.notes ? <p className="text-xs text-slate-600">{row.notes}</p> : null}
               <p className="text-xs">
                 {row.profileExcluded ? "Removed from profile" : "Shown on profile"}
+                {" · "}
+                {row.verificationStatus === "verified_by_administrator"
+                  ? "Verified by administrator"
+                  : row.verificationStatus === "source_verified"
+                    ? "Verified against source records"
+                    : "Unverified"}
               </p>
               {!staff ? (
                 <button

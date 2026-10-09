@@ -10,11 +10,11 @@ export type HistoryResult = {
 export type ResultsHistoryEntry =
   { kind: "recorded"; result: ProfileResult } | { kind: "history"; result: HistoryResult };
 
-/** Additional, unverified marks have no integer-time race row. Keep their precision. */
+/** Additional marks retain their original precision and layout after verification. */
 export function additionalHistoryResults(histories: readonly SourceHistory[]): HistoryResult[] {
   return histories.flatMap((history) =>
     history.performances.flatMap((performance, index) =>
-      performance.verificationStatus === "unverified" && !performance.profileExcluded
+      performance.verificationStatus !== undefined && !performance.profileExcluded
         ? [
             {
               key: `${history.provider}:${history.externalId}:${index}`,
