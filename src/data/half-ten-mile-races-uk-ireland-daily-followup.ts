@@ -60,6 +60,26 @@ type RaceSeed = {
 
 const seeds: RaceSeed[] = [
   {
+    slug: "settle-saunter-2027",
+    name: "Settle Saunter 2027",
+    date: "2027-05-23",
+    distance: "Half",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Settle",
+    area: "Victoria Hall and Yorkshire Dales footpaths and bridleways",
+    surface: "Trail",
+    distances: ["Half", "23mi", "10K"],
+    organiser: "Rotary Club of Settle / SiEntries",
+    url: "https://www.sientries.co.uk/event/settle-saunter-2027",
+    status: "TBC",
+    hasEntry: false,
+    priceAmount: 28,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official direct-registration page confirms the 23 May 2027 date, timed walking/running format, 23-mile, half-marathon and 10K routes, and £28 half fee. Entries open on 2 December 2026 and the half uses a staggered 09:00–10:00 window, so no premature checkout or single start time is published.",
+  },
+  {
     slug: "trim-10-mile-road-race-2027",
     name: "Nally's SuperValu Trim 10 Mile Road Race 2027",
     date: "2027-01-31",
@@ -1433,6 +1453,19 @@ type ExistingSeriesEditionSeed = {
 };
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  {
+    seriesSlug: "edinburgh-running-festival",
+    date: "2027-08-01",
+    startTime: "10:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 1 August 2027 half marathon, 10K and 5K programme, 10:00 half start and open £36 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the existing Edinburgh card is enriched.",
+  },
   {
     seriesSlug: "runthrough-gatwick-november-2027",
     date: "2027-11-21",
