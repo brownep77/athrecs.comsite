@@ -280,6 +280,7 @@ export default defineConfig(({ command }) => ({
             vercel: {
               functionRules: {
                 "/api/race-collector-worker": { maxDuration: WORKER_MAX_DURATION_SECONDS },
+                "/api/signup-emails": { maxDuration: 300 },
               },
             },
           }),

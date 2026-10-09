@@ -53,6 +53,7 @@ import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalog
 import { Route as ApiClubScannerWorkerRouteImport } from './routes/api/club-scanner-worker'
 import { Route as ApiRaceCollectorWorkerRouteImport } from './routes/api/race-collector-worker'
 import { Route as ApiResultClaimAlertsRouteImport } from './routes/api/result-claim-alerts'
+import { Route as ApiSignupEmailsRouteImport } from './routes/api/signup-emails'
 import { Route as AthletesIndexRouteImport } from './routes/athletes/index'
 import { Route as AthletesSlugRouteImport } from './routes/athletes/$slug'
 import { Route as BrandsIndexRouteImport } from './routes/brands/index'
@@ -310,6 +311,11 @@ const ApiResultClaimAlertsRoute = ApiResultClaimAlertsRouteImport.update({
   path: '/api/result-claim-alerts',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiSignupEmailsRoute = ApiSignupEmailsRouteImport.update({
+  id: '/api/signup-emails',
+  path: '/api/signup-emails',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AthletesIndexRoute = AthletesIndexRouteImport.update({
   id: '/athletes/',
   path: '/athletes/',
@@ -531,6 +537,7 @@ export interface FileRoutesByFullPath {
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
+  '/api/signup-emails': typeof ApiSignupEmailsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -611,6 +618,7 @@ export interface FileRoutesByTo {
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
+  '/api/signup-emails': typeof ApiSignupEmailsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -692,6 +700,7 @@ export interface FileRoutesById {
   '/api/club-scanner-worker': typeof ApiClubScannerWorkerRoute
   '/api/race-collector-worker': typeof ApiRaceCollectorWorkerRoute
   '/api/result-claim-alerts': typeof ApiResultClaimAlertsRoute
+  '/api/signup-emails': typeof ApiSignupEmailsRoute
   '/athletes/$slug': typeof AthletesSlugRoute
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
@@ -774,6 +783,7 @@ export interface FileRouteTypes {
     | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
+    | '/api/signup-emails'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -854,6 +864,7 @@ export interface FileRouteTypes {
     | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
+    | '/api/signup-emails'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -934,6 +945,7 @@ export interface FileRouteTypes {
     | '/api/club-scanner-worker'
     | '/api/race-collector-worker'
     | '/api/result-claim-alerts'
+    | '/api/signup-emails'
     | '/athletes/$slug'
     | '/brands/manage'
     | '/brands/register'
@@ -1015,6 +1027,7 @@ export interface RootRouteChildren {
   ApiClubScannerWorkerRoute: typeof ApiClubScannerWorkerRoute
   ApiRaceCollectorWorkerRoute: typeof ApiRaceCollectorWorkerRoute
   ApiResultClaimAlertsRoute: typeof ApiResultClaimAlertsRoute
+  ApiSignupEmailsRoute: typeof ApiSignupEmailsRoute
   AthletesSlugRoute: typeof AthletesSlugRoute
   BrandsManageRoute: typeof BrandsManageRoute
   BrandsRegisterRoute: typeof BrandsRegisterRoute
@@ -1362,6 +1375,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiResultClaimAlertsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/signup-emails': {
+      id: '/api/signup-emails'
+      path: '/api/signup-emails'
+      fullPath: '/api/signup-emails'
+      preLoaderRoute: typeof ApiSignupEmailsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/athletes/': {
       id: '/athletes/'
       path: '/athletes'
@@ -1647,6 +1667,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiClubScannerWorkerRoute: ApiClubScannerWorkerRoute,
   ApiRaceCollectorWorkerRoute: ApiRaceCollectorWorkerRoute,
   ApiResultClaimAlertsRoute: ApiResultClaimAlertsRoute,
+  ApiSignupEmailsRoute: ApiSignupEmailsRoute,
   AthletesSlugRoute: AthletesSlugRoute,
   BrandsManageRoute: BrandsManageRoute,
   BrandsRegisterRoute: BrandsRegisterRoute,
