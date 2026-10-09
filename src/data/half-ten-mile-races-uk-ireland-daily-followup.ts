@@ -2419,6 +2419,12 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
   "edinburgh-running-festival": {
+    name: "Edinburgh Running Festival Half Marathon, 10K & 5K",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Edinburgh Running Festival Half Marathon, 10K & 5K — a multi-distance road event in Holyrood Park.",
+    description:
+      "RunThrough's Edinburgh Running Festival offers a half marathon, 10K and 5K from Holyrood Park on one canonical event card.",
     organiser: "RunThrough Events",
     website: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
     source_url: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
