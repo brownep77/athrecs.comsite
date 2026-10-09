@@ -27,6 +27,7 @@ const { MARATHON_COUNTRIES: FULL_COUNTRIES } =
   await import("../src/data/road-marathons/countries.ts");
 const { ROAD_HALF_MARATHONS } = await import("../src/data/road-half-marathons/index.ts");
 const { HALF_MARATHON_COUNTRIES } = await import("../src/data/road-half-marathons/countries.ts");
+const { FEATURED_ROAD_RACES } = await import("../src/data/featured-road-races.ts");
 const ROAD_MARATHONS = [...FULL_MARATHONS, ...ROAD_HALF_MARATHONS];
 const MARATHON_COUNTRIES = [...FULL_COUNTRIES, ...HALF_MARATHON_COUNTRIES];
 const { ROAD_ULTRAS, ULTRA_GUIDE_PATH, ultraPath } =
@@ -35,6 +36,8 @@ const base = process.env.RUNNING_VERIFY_BASE ?? "http://127.0.0.1:8097";
 const toolPaths = ["/running/events", "/running/calendar", "/running/race-series"];
 const paths = [
   "/running",
+  "/running/featured-races",
+  ...FEATURED_ROAD_RACES.map((race) => `/running/previews/${race.slug}`),
   ULTRA_GUIDE_PATH,
   ...ROAD_ULTRAS.map((race) => ultraPath(race.slug)),
   ...MARATHON_COUNTRIES.map((country) => `/running/${country.guide}`),
@@ -58,6 +61,24 @@ async function worker() {
     );
     for (const script of $('script[type="application/ld+json"]').toArray())
       JSON.parse($(script).html());
+    if (route === "/running") {
+      assert.equal($("title").text(), "Running Races, Calendars & Race Guides | ATHRECS");
+      assert.equal(
+        $('meta[name="description"]').attr("content"),
+        "Search running races and parkruns, browse race calendars, and explore marathon, half marathon and ultra guides on AthRecs.",
+      );
+      assert.match($("h1").text(), /running event/);
+      for (const tool of toolPaths)
+        assert.equal($(`nav[aria-label="Running tools"] a[href="${tool}"]`).length, 1, tool);
+      assert.equal($('main a[href="/running/featured-races"]').length, 1);
+      const collection = $('script[type="application/ld+json"]')
+        .toArray()
+        .map((element) => JSON.parse($(element).html()))
+        .find((item) => item["@type"] === "CollectionPage");
+      assert.equal(collection.mainEntity.numberOfItems, collection.mainEntity.itemListElement.length);
+      assert(collection.mainEntity.itemListElement.some((item) =>
+        item.url === "https://www.athrecs.com/running/featured-races"));
+    }
     $("main a[href]").each((i, element) => {
       const href = $(element).attr("href");
       if (href.startsWith("/running"))
@@ -124,7 +145,7 @@ const locations = sitemapDoc("url > loc")
 assert.equal(new Set(locations).size, locations.length, "Duplicate sitemap URLs");
 for (const route of paths) {
   assert(locations.includes(`https://www.athrecs.com${route}`), `Missing sitemap entry: ${route}`);
-  if (route !== "/running") {
+    if (route !== "/running") {
     const entry = sitemapDoc("url")
       .toArray()
       .find(
@@ -133,7 +154,7 @@ for (const route of paths) {
     assert.match(sitemapDoc(entry).find("lastmod").text(), /^\d{4}-\d{2}-\d{2}$/, route);
   }
 }
-for (const route of ["/running/unknown-country", "/running/races/not-a-real-marathon"])
+for (const route of ["/running/unknown-country", "/running/races/not-a-real-marathon", "/running/previews/not-a-real-race"])
   assert.equal((await fetch(`${base}${route}`)).status, 404, route);
 console.log(
   `Passed SSR: ${paths.length} routes, distance labels, metadata, JSON-LD, results links, internal links, sitemap and 404s.`,
