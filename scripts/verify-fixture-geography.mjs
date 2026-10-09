@@ -233,9 +233,57 @@ try {
     [3001],
   );
   assert.equal(
-    (await db.query("select count(*) from events where slug in ('spar-budapest-international-marathon','budapest-marathon')")).rows[0].count,
+    (
+      await db.query(
+        "select count(*) from events where slug in ('spar-budapest-international-marathon','budapest-marathon')",
+      )
+    ).rows[0].count,
     2,
   );
+  // UK aliases must include all home nations, while home-nation aliases stay distinct.
+  const ukCountries = ["England", "SCO", "Wales", "Northern Ireland", "GBR"];
+  for (const [i, country] of ukCountries.entries()) {
+    await db.query(
+      "insert into events(id,slug,name,sport,country,surface) values($1,$2,$2,'Running',$3,'Road')",
+      [4000 + i, `uk-fixture-${i}`, country],
+    );
+    await db.query(
+      "insert into editions(id,event_id,event_date,distance_code) values($1,$1,'2027-01-01','10K')",
+      [4000 + i],
+    );
+  }
+  for (const country of [
+    "United Kingdom",
+    "UK",
+    "GB",
+    "GBR",
+    "Great Britain",
+    "  united kingdom  ",
+  ]) {
+    const selected = await readSportFixtures(
+      sql,
+      { sports: ["Running"], surfaces: ["Road"], country },
+      "2026-10-08",
+    );
+    assert.deepEqual(
+      selected.fixtures.map((e) => e.eventId).sort(),
+      [4000, 4001, 4002, 4003, 4004],
+      country,
+    );
+  }
+  for (const country of ["Scotland", "SCO", "gb-sct"]) {
+    const selected = await readSportFixtures(
+      sql,
+      { sports: ["Running"], surfaces: ["Road"], country },
+      "2026-10-08",
+    );
+    assert.deepEqual(
+      selected.fixtures.map((e) => e.eventId),
+      [4001],
+      country,
+    );
+    assert.equal(selected.fixtures[0].country, "Scotland");
+  }
   // Source-confirmed Scottish athletics records and host-confirmed Glasgow date.
   for (const [i, c] of worldCorrections.entries())
     await db.query(

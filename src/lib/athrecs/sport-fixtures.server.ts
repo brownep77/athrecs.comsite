@@ -41,11 +41,14 @@ export async function readSportFixtures(
 ) {
   const q = input.q ? `%${input.q.replace(/[\\%_]/g, "\\$&")}%` : null;
   const page = input.page ?? 1;
+  const requestedCountry = input.country
+    ? filterCountryName(resolveCountry({ country: input.country }))
+    : null;
   let country =
-    input.country === "United Kingdom"
+    requestedCountry === "United Kingdom"
       ? [...UK_FIXTURE_COUNTRIES]
-      : input.country
-        ? [input.country]
+      : requestedCountry
+        ? [requestedCountry]
         : null;
   const options = await sql.query<{ country: string | null; distance: string | null }>(
     `select distinct btrim(e.country) as country, btrim(ed.distance_code) as distance

@@ -32,9 +32,35 @@ try {
           1,
         );
         assert.ok(!(await page.locator("body").innerText()).includes("Gothenburg · Scotland"));
+        const schedule = await page.locator("#race-schedule").innerText();
+        assert.match(schedule, /10 Oct 2026/);
+        assert.match(schedule, /10:00 CEST/);
+        assert.match(await page.locator("#race-location").innerText(), /Slottsskogsvallen/);
         await page.screenshot({ path: `artifacts/gothenburg-${width}.png` });
       }
     }
+    // The searchable race cards use a different country/venue rendering path.
+    const raceSearch = new URLSearchParams({
+      q: "Gothenburg Marathon",
+      dateFrom: "2026-10-01",
+      dateTo: "2026-10-31",
+      country: "Sweden",
+    });
+    await page.goto(`${base}/running/events?${raceSearch}`, { waitUntil: "networkidle" });
+    const gothenburgCard = page.locator("article").filter({ hasText: "Gothenburg Marathon" });
+    await gothenburgCard.waitFor();
+    assert.equal(await gothenburgCard.count(), 1);
+    assert.equal(
+      await gothenburgCard.locator("[data-country-code]").getAttribute("data-country-code"),
+      "SE",
+    );
+    await page.screenshot({ path: `artifacts/gothenburg-race-search-${width}.png` });
+    raceSearch.set("country", "Scotland");
+    await page.goto(`${base}/running/events?${raceSearch}`, { waitUntil: "networkidle" });
+    assert.equal(
+      await page.locator("article").filter({ hasText: "Gothenburg Marathon" }).count(),
+      0,
+    );
     // Exercise actual server filtering and the hydrated form on every sport fixture surface.
     for (const sport of ["road-running", "trail-running", "track-and-field"]) {
       await page.goto(`${base}/sports/${sport}`, { waitUntil: "networkidle" });
@@ -61,7 +87,7 @@ try {
     await page.close();
   }
   console.log(
-    "PASS: desktop/mobile race flags and hydrated country filters across road, trail and track fixtures.",
+    "PASS: desktop/mobile race details, searchable cards, Gothenburg dates/venue and hydrated country filters across road, trail and track fixtures.",
   );
 } finally {
   await browser.close();

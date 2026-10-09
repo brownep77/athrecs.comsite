@@ -8,12 +8,14 @@ The runABC source region had been stored as a venue country. Its Scotland listin
 - `corrections-2026-10-08.json` records 42 source-checked corrections with URLs and check dates. The Seattle listing itself contains a country error, so the organiser's Seattle Center, Washington venue takes precedence.
 - The Gothenburg organiser confirms Saturday 10 October 2026, marathon start 10:00 at Slottsskogsvallen, Gothenburg, Sweden. The previous 9 October / 23:00 imported values were wrong. The organiser's entry page says entries are closed. Sources: https://goteborgmarathon.se/information and https://goteborgmarathon.se/anmalan.
 - Another 38 Welsh seed records were aligned with their already-correct live country values. Venue overrides were aligned so later seeding cannot restore the known errors.
-- 311 historical records have no stored country; none has an upcoming edition. Five records use international/continental labels. These must not receive a guessed national flag. They remain explicit unknown/international values pending source evidence.
+- 311 historical records have no stored country; none has an upcoming edition. On 9 October, 13 of these could be resolved from an explicit country suffix in the venue label; the remaining 298 stay unknown. Five records use international/continental labels. None receives a national flag guessed from a city or race name.
 - Ambiguous and cross-border venues are not automatically reassigned from city-name matches.
 
 ## Behaviour
 
 Both flag paths recognise the full 250-entry country/territory dictionary, plus UK home nations and imported IOC aliases. Explicit stored countries win over race names and city names. Unknown labels do not become England or an unrelated flag. Country-filter options and SQL filtering canonicalise equivalent labels before pagination. World Athletics refresh uses the same country normalisation.
+
+Regression coverage also checks that UK, GB, GBR and Great Britain select the same fixtures as United Kingdom, including all four home nations; Scotland/SCO/GB-SCT remain restricted to Scotland. The new SQL regression reproduced a missing-home-nations failure for UK before the fix. A 9 October production readback reconfirmed all 45 country corrections and 48 retained before-state records.
 
 ## Repair and validation
 
