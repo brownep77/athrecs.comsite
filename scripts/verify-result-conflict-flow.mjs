@@ -162,7 +162,13 @@ const shared = {
   "./profile-connections": load("src/lib/athrecs/profile-connections.ts"),
 };
 const matches = load("src/lib/athrecs/result-match-api.ts", shared);
-const invitationCore = load("src/lib/athrecs/claim-invitation.ts", { zod: require("zod") });
+const invitationCore = load("src/lib/athrecs/claim-invitation.ts", {
+  zod: require("zod"),
+  "./athlete-contact": load("src/lib/athrecs/athlete-contact.ts", {
+    zod: require("zod"),
+    "./profile-connections": shared["./profile-connections"],
+  }),
+});
 const invitationSends = [];
 const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
   "node:crypto": crypto,
@@ -695,6 +701,86 @@ try {
     "Invitation acceptance never assigns ownership",
   );
   assert.equal((await invitations.invitationHistory(sql, "invite-target"))[0].status, "pending");
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(21,'synthetic-before-signup','Synthetic New Athlete','private'),(22,'synthetic-contact-only','Synthetic Contact Athlete','private')`;
+  await sql`insert into results(id,edition_id,athlete_id,status) values(21,1,21,'finished'),(22,1,22,'finished')`;
+  const newInput = {
+    athleteId: 21,
+    recipientName: "Synthetic New Athlete",
+    email: "late-signup@example.test",
+    phone: "",
+    telegramUsername: "",
+    socialLinks: [],
+    sourceNote: "Synthetic recipient confirmed contact",
+    matchNote: "Synthetic staff checked the profile and contact",
+    reviewed: true,
+  };
+  const newInvites = await Promise.all(
+    Array.from({ length: 6 }, () => invitations.createExternalInvitation(sql, "one", newInput)),
+  );
+  assert.equal(
+    new Set(newInvites.map((item) => item.id)).size,
+    1,
+    "Concurrent pre-registration invitations reuse one token",
+  );
+  const beforeNewEmail = invitationSends.length;
+  await Promise.all(
+    Array.from({ length: 6 }, () => invitations.sendInvitationEmail(sql, newInvites[0].id)),
+  );
+  assert.equal(
+    invitationSends.length - beforeNewEmail,
+    1,
+    "Concurrent pre-registration emails send once",
+  );
+  await sql`insert into "user"(id,name,email,"emailVerified") values('late-signup','','late-signup@example.test',true),('contact-one','','contact-one@example.test',true),('contact-two','','contact-two@example.test',true)`;
+  const lateToken = new URL(newInvites[0].url).searchParams.get("invitation");
+  const lateClaims = await Promise.all(
+    Array.from({ length: 6 }, () =>
+      claims.submitResultClaim(
+        { resultId: 21, invitation: lateToken, declarationAccepted: true },
+        user("late-signup"),
+      ),
+    ),
+  );
+  assert.equal(new Set(lateClaims.map((item) => item.claimId)).size, 1);
+  assert.equal(
+    (await sql`select user_id from athlete_claim_invitations where id=${newInvites[0].id}`)[0]
+      .user_id,
+    "late-signup",
+  );
+  const contactInvite = await invitations.createExternalInvitation(sql, "one", {
+    ...newInput,
+    athleteId: 22,
+    email: "",
+    phone: "+447700900125",
+  });
+  const contactToken = new URL(contactInvite.url).searchParams.get("invitation");
+  const competingInvites = await Promise.allSettled(
+    ["contact-one", "contact-two"].map((id) =>
+      claims.submitResultClaim(
+        { resultId: 22, invitation: contactToken, declarationAccepted: true },
+        user(id),
+      ),
+    ),
+  );
+  assert.equal(
+    competingInvites.filter((item) => item.status === "fulfilled").length,
+    1,
+    "One account can consume a contact-only token",
+  );
+  assert.match(
+    competingInvites.find((item) => item.status === "rejected").reason.message,
+    /invitation is unavailable/,
+  );
+  assert.equal(
+    (await sql`select count(*)::int as n from result_claims where athlete_id=22`)[0].n,
+    1,
+  );
+  assert.equal(
+    (await sql`select count(*)::int as n from athlete_account_links where athlete_id in (21,22)`)[0]
+      .n,
+    0,
+    "Concurrent external claims never assign ownership",
+  );
   console.log(
     "Invitation contention passed: concurrent creation, email reservation and claim submission.",
   );
