@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
 import { get as httpGet } from "node:http";
+import { load } from "cheerio";
+import { createRequire } from "node:module";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
@@ -96,7 +98,7 @@ try {
     password: "Test-only-password-123!",
   });
   assert.equal(signup.status, 200, await signup.clone().text());
-  const { token } = await signup.json();
+  const { token, user } = await signup.json();
   assert(token);
   assert.equal(await rpc("auth/profile-access", "canViewAthleteProfiles", undefined, token), true);
   const db = await server.ssrLoadModule("/src/lib/db.ts");
@@ -192,6 +194,136 @@ try {
   assert.equal((await fetch(origin + "/sitemaps/athletes-1.xml")).status, 404);
   assert(!(await (await fetch(origin + "/sitemaps/pages.xml")).text()).includes("/athletes</loc>"));
   assert(!(await (await fetch(origin + "/sitemap.xml")).text()).includes("/sitemaps/athletes-"));
+  // A deliberately published history is viewable without a session; a public
+  // database flag alone does not publish other members' profiles anonymously.
+  const publicRead = (slug) => rpc("athrecs/api", "getAdministratorPublishedAthlete", slug);
+  assert.equal(await publicRead("view-login-fixture"), null);
+  const [publishedAthlete] = await sql`insert into athletes
+    (slug,display_name,bio,profile_visibility,city,country,date_of_birth,profile_details)
+    values ('published-history-fixture','Published History Athlete','Private biography sentinel','public',
+      'Private city sentinel','United Kingdom','1980-01-02',
+      '{"coach":"Private coach sentinel","birthdayVisibility":"full"}'::jsonb) returning id`;
+  await sql`insert into athlete_account_links (athlete_id,user_id,user_email)
+    values (${publishedAthlete.id},${user.id},'profile-viewer@example.test')`;
+  const performance = {
+    year: 2025,
+    date: "2025-12-17",
+    sourceDate: "17 Dec",
+    ageGroup: "",
+    discipline: "5K",
+    performance: "19:34(19:38)",
+    wind: "",
+    place: "81",
+    venue: "Synthetic park",
+    meeting: "Synthetic race",
+    sourceUrls: ["https://example.test/result"],
+    labels: [],
+    verificationStatus: "unverified",
+    profileExcluded: false,
+  };
+  const historyKey = "AthRecs additions:public-history-test";
+  await sql`insert into athlete_source_histories
+    (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    values (${publishedAthlete.id},'AthRecs additions','public-history-test','https://example.test/result',
+      now(),true,array[2025],array[2025],${JSON.stringify([performance, { ...performance, performance: "Hidden mark sentinel", profileExcluded: true }])}::jsonb,now())`;
+  assert.equal(
+    await publicRead("published-history-fixture"),
+    null,
+    "A history without an approval is not public",
+  );
+  await sql`insert into network_audit_log(actor_user_id,action,entity_type,entity_id,after_value,note)
+    values (${user.id},'athlete.history_admin_published','athlete_source_history',${historyKey},
+      ${JSON.stringify({ athleteId: publishedAthlete.id, athleteConsentRecorded: false })}::jsonb,'Synthetic explicit publication approval')`;
+  const publicProfile = await publicRead("published-history-fixture");
+  assert.equal(publicProfile.athlete.display_name, "Published History Athlete");
+  assert.equal(publicProfile.sourceHistories[0].performances.length, 1);
+  for (const secret of [
+    "Private biography sentinel",
+    "Private city sentinel",
+    "Private coach sentinel",
+    "1980-01-02",
+    "Hidden mark sentinel",
+    "profile-viewer@example.test",
+  ])
+    assert(!JSON.stringify(publicProfile).includes(secret), `Do not disclose ${secret}`);
+  assert.deepEqual(publicProfile.upcoming, []);
+  for (const site of ["none", "cross-site", "same-site"]) {
+    const response = await fetch(origin + "/athletes/published-history-fixture", {
+      headers: { "sec-fetch-site": site, "sec-fetch-mode": "cors", "sec-fetch-dest": "empty" },
+    });
+    const html = await response.text();
+    assert.equal(response.status, 200);
+    assert.match(response.headers.get("cache-control"), /private.*no-store/);
+    const $ = load(html);
+    assert.equal($("h1").text(), "Published History Athlete");
+    assert(!html.includes("Sign in to view athlete profiles"));
+    assert(!html.includes("Forbidden: cross-site request blocked"));
+    assert(
+      $("details[open]").filter(
+        (_, e) => $(e).find("summary").first().text() === "Performance history",
+      ).length === 1,
+    );
+    assert($.text().includes("19:34(19:38)"));
+    assert($.text().includes("1 performance"));
+  }
+  if (process.env.ATHRECS_BROWSER_MODULE) {
+    const { chromium } = createRequire(import.meta.url)(process.env.ATHRECS_BROWSER_MODULE);
+    const browser = await chromium.launch({ headless: true });
+    try {
+      for (const viewport of [
+        { width: 1365, height: 900 },
+        { width: 390, height: 844 },
+      ]) {
+        const context = await browser.newContext({ viewport });
+        const page = await context.newPage();
+        await page.goto(origin + "/athletes/published-history-fixture", {
+          waitUntil: "networkidle",
+        });
+        await page
+          .getByRole("heading", { name: "Published History Athlete", exact: true })
+          .waitFor();
+        assert.equal(
+          await page
+            .getByRole("heading", { name: "Sign in to view athlete profiles", exact: true })
+            .count(),
+          0,
+        );
+        assert.equal(await page.locator("#performance-history").getAttribute("open"), "");
+        assert((await page.locator("#performance-history").innerText()).includes("19:34(19:38)"));
+        assert.equal(
+          (await context.cookies()).filter((cookie) => cookie.name.includes("session_token"))
+            .length,
+          0,
+        );
+        await context.close();
+      }
+      console.log(
+        "PASS: signed-out desktop and mobile browsers retain the visible, expanded history after hydration.",
+      );
+    } finally {
+      await browser.close();
+    }
+  }
+  await sql`update athletes set profile_visibility='private' where id=${publishedAthlete.id}`;
+  assert.equal(await publicRead("published-history-fixture"), null);
+  await sql`update athletes set profile_visibility='public' where id=${publishedAthlete.id}`;
+  await sql`insert into athlete_public_shares(user_id,slug,enabled,share_results,share_location,share_club)
+    values (${user.id},'published-history-sharing',false,true,false,false)`;
+  assert.equal(
+    await publicRead("published-history-fixture"),
+    null,
+    "Owner withdrawal takes precedence",
+  );
+  await sql`update athlete_public_shares set enabled=true,share_results=false where user_id=${user.id}`;
+  assert.equal(await publicRead("published-history-fixture"), null, "Owner can withdraw results");
+  await sql`update athlete_public_shares set share_results=true where user_id=${user.id}`;
+  const limitedProfile = await publicRead("published-history-fixture");
+  assert.equal(limitedProfile.athlete.country, "");
+  assert.equal(limitedProfile.athlete.club, null);
+  assert.equal(limitedProfile.athlete.club_slug, null);
+  console.log(
+    "PASS: approved history renders anonymously with expanded results; unapproved/private profiles, personal fields, owner withdrawals and removed marks remain protected.",
+  );
   await post("sign-out", {}, token);
   await assert.rejects(
     () => rpc("athrecs/api", "getAthleteBySlug", "view-login-fixture", token),
