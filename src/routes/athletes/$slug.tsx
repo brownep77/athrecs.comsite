@@ -33,6 +33,7 @@ import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-a
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
+import { formatAthleteId } from "@/lib/athrecs/athlete-id";
 import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
 import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 
@@ -409,6 +410,14 @@ function AthleteContent() {
           title={`${athlete.display_name} athlete profile`}
           compact
         />
+        {!athlete.is_claimed && athlete.athlete_number ? (
+          <a
+            href={`https://update.athrecs.com/admin/athletes/${formatAthleteId(athlete.athlete_number)}?invite=1`}
+            className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent"
+          >
+            Invite to claim <span className="ml-2 text-xs text-muted">Staff sign-in required</span>
+          </a>
+        ) : null}
         {aliases.length > 0 && (
           <div className="space-y-1.5 border-t border-border pt-3">
             <p className="text-xs font-medium uppercase tracking-wider text-subtle">

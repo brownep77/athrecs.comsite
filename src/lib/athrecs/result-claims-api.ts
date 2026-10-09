@@ -662,7 +662,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       }
 
       if (invitation)
-        await tx`update athlete_claim_invitations set claim_id=${claimId} where id=${invitation.id}`;
+        await tx`update athlete_claim_invitations set claim_id=${claimId},user_id=coalesce(user_id,${context.userId}) where id=${invitation.id}`;
       const isConflict = Boolean(owner) || otherClaimCount > 0;
       if (isConflict) await queueClaimConflict(tx, claimId);
       return {

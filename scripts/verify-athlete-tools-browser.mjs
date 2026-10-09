@@ -64,6 +64,8 @@ const account=()=>({userId:'synthetic-runner',athleteNumber:'456',name:'Name not
 export async function findDirectoryInvitationAccounts({data}){window.directorySearches.push(data);return {registered:false,athleteId:9,total:data.q==='missing@example.test'?0:1,page:1,pageSize:25,accounts:data.q==='missing@example.test'?[]:[account()]};}
 export async function findStaffClaimMatches({data}){window.matchSearches.push(data);return {candidates:[{id:9,name:'Avery Test Athlete',slug:'avery-test-athlete',clubName:'Example Club',resultCount:2,reasons:['Manual search result — check identity'],blocked:null,recentResults:[{race:'Synthetic Race',date:'2026-01-01',distance:'10K'}]}],hasSavedName:false,moreMatches:false,history:[],emailAvailable:true};}
 export async function createStaffClaimInvitation({data}){window.invitationCreates.push(data);return {id:'synthetic-invitation',url:'https://www.athrecs.com/claim-results?resultId=9&invitation='+ 'a'.repeat(64),reused:window.invitationCreates.length>1};}
+export async function getStaffInvitationProfile(){return {profile:{id:9,name:'Avery Test Athlete',owner:false,resultCount:2,recentResults:[{race:'Synthetic Race',date:'2026-01-01',distance:'10K'}]},history:[],emailAvailable:true};}
+export async function createStaffExternalInvitation({data}){window.invitationCreates.push(data);return {id:'synthetic-external-invitation',url:'https://www.athrecs.com/claim-results?resultId=9&invitation'+'='+ 'b'.repeat(64),reused:false,recipient:data.email||data.recipientName,emailBound:!!data.email,contact:{phone:data.phone||null,telegramUsername:data.telegramUsername||null,socialLinks:data.socialLinks,sourceNote:data.sourceNote}};}
 export async function emailStaffClaimInvitation({data}){window.invitationEmails.push(data);return {status:'sent'};}
 export async function revokeStaffClaimInvitation(){return {revoked:true};}
 export async function saveStaffAthleteContact({data}){contact={...data};return {saved:true};}
@@ -283,6 +285,90 @@ try {
     0,
     "Changing recipient clears the private invitation",
   );
+  await page.getByRole("button", { name: "Invite someone not signed up", exact: true }).click();
+  await page.getByRole("heading", { name: "Invite to claim · Avery Test Athlete" }).waitFor();
+  const externalEmail = page.getByRole("button", {
+    name: "Email invitation to claim",
+    exact: true,
+  });
+  const externalSocial = page.getByRole("button", {
+    name: "Create SMS or social invitation",
+    exact: true,
+  });
+  assert(await externalEmail.isDisabled());
+  assert(await externalSocial.isDisabled());
+  await page.getByLabel("Invitation email (optional)").fill("new-athlete@example.test");
+  await page.getByLabel("Phone for SMS, WhatsApp or Viber").fill("+447700900125");
+  await page.getByText("Instagram, Facebook, X / Twitter or LinkedIn", { exact: true }).click();
+  await page
+    .getByLabel("Instagram profile link", { exact: true })
+    .fill("https://untrusted.example/person");
+  await page
+    .getByLabel("Where these contact details came from")
+    .fill("Synthetic athlete supplied the details.");
+  await page
+    .getByLabel("Why this is the intended athlete’s profile")
+    .fill("Synthetic athlete confirmed this race and their club.");
+  const externalReview = page.getByLabel(
+    "I checked the contact details and selected profile. Invite this person to claim; do not approve ownership automatically.",
+  );
+  await externalReview.check();
+  await page.getByRole("alert").filter({ hasText: "valid Instagram profile link" }).waitFor();
+  assert(await externalSocial.isDisabled());
+  await page
+    .getByLabel("Instagram profile link", { exact: true })
+    .fill("https://www.instagram.com/synthetic_athlete/");
+  await page
+    .getByLabel("Facebook profile link", { exact: true })
+    .fill("https://www.facebook.com/synthetic.athlete");
+  await page
+    .getByLabel("X / Twitter profile link", { exact: true })
+    .fill("https://x.com/synthetic_athlete");
+  await page
+    .getByLabel("LinkedIn profile link", { exact: true })
+    .fill("https://www.linkedin.com/in/synthetic-athlete/");
+  await externalReview.check();
+  await externalSocial.click();
+  await page.getByRole("link", { name: "Open SMS invitation" }).waitFor();
+  const externalUrl = await page.getByLabel("Private claim link").inputValue();
+  const sms = new URL(
+    await page.getByRole("link", { name: "Open SMS invitation" }).getAttribute("href"),
+  );
+  assert(sms.searchParams.get("body").includes(externalUrl));
+  assert(sms.searchParams.get("body").includes("Create a free account"));
+  for (const channel of ["Instagram", "Facebook", "X / Twitter", "LinkedIn"])
+    assert(
+      await page.getByRole("link", { name: `Copy & open ${channel}`, exact: true }).isVisible(),
+    );
+  assert.equal(
+    (await page.evaluate(() => window.invitationEmails)).length,
+    1,
+    "No email on social preparation",
+  );
+  await page.screenshot({
+    path: "artifacts/athlete-directory-invites-new-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  await page.screenshot({
+    path: "artifacts/athlete-directory-invites-new-mobile.png",
+    fullPage: true,
+  });
+  await externalEmail.click();
+  await page.getByText(/Invitation sent from support@athrecs.com/).waitFor();
+  assert.equal((await page.evaluate(() => window.invitationEmails)).length, 2);
+  await page.getByLabel("Invitation email (optional)").fill("");
+  assert.equal(
+    await page.getByLabel("Private claim link").count(),
+    0,
+    "Editing a contact clears the old invitation",
+  );
+  assert(await externalEmail.isDisabled());
+  await externalReview.check();
+  await externalSocial.click();
+  await page.getByText(/They must verify an account; staff check identity/).waitFor();
+  assert.equal((await page.evaluate(() => window.invitationCreates)).at(-1).email, "");
   await nav.getByRole("button", { name: "Club scans", exact: true }).click();
   await page.getByRole("heading", { name: "Club athlete scanner" }).waitFor();
   await nav.getByRole("button", { name: "Single athlete", exact: true }).click();

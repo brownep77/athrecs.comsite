@@ -1,4 +1,7 @@
-import { declineClaimInvitation } from "@/lib/athrecs/claim-invitations-api";
+import {
+  declineClaimInvitation,
+  getClaimInvitationIntro,
+} from "@/lib/athrecs/claim-invitations-api";
 import { ProfileEventLink } from "@/components/athletes/ProfileEventLink";
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -88,6 +91,16 @@ function ClaimResultsPage() {
   const [declaration, setDeclaration] = useState(false);
   const [claimCompleted, setClaimCompleted] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
+  const intro = useQuery({
+    queryKey: ["claim-invitation-intro", invitation, resultId],
+    queryFn: () =>
+      getClaimInvitationIntro({
+        data: { token: invitation as string, resultId: resultId as number },
+      }),
+    enabled: Boolean(invitation && resultId),
+    retry: false,
+    gcTime: 0,
+  });
 
   const result = useQuery({
     queryKey: ["claimable-result", user?.id, resultId, invitation],
@@ -203,7 +216,9 @@ function ClaimResultsPage() {
               </div>
               <h1 className="mt-2 font-display text-2xl font-semibold md:text-3xl">
                 {invitation
-                  ? "Claim your athlete profile"
+                  ? intro.data
+                    ? `Claim ${intro.data.name}’s athlete profile`
+                    : "Claim your athlete profile"
                   : resultId
                     ? "Add this result to your profile"
                     : "Claim your race results"}
@@ -275,11 +290,15 @@ function ClaimResultsPage() {
           </div>
           <div>
             <h2 className="font-display text-xl font-semibold text-fg">
-              Sign in to view and claim this match
+              {invitation
+                ? "Create your account and claim this profile"
+                : "Sign in to view and claim this match"}
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
               {invitation
-                ? "Sign in using the email address that received the invitation. Your suggested profile is shown only to that account."
+                ? intro.data?.emailBound === false
+                  ? "Create a free account or sign in and verify your email. You will return directly to this selected profile to confirm it is yours. ATHRECS checks your identity before linking the results."
+                  : "Create a free account or sign in using the email address that received this invitation. Your selected profile will be waiting when you finish—there is no need to search again."
                 : "The athlete name and result are kept inside the secure claim journey."}
             </p>
           </div>
@@ -295,7 +314,7 @@ function ClaimResultsPage() {
           <h2 className="font-semibold">This match is no longer available</h2>
           <p className="mt-1">
             {invitation
-              ? "Check that you are signed in with the verified email address that received this invitation. Links expire after seven days; contact support@athrecs.com for help or a fresh link."
+              ? "Verify your email address. If the invitation was emailed, use the exact address it was sent to. Links expire after seven days and can be used only by the intended recipient; contact support@athrecs.com for help or a fresh link."
               : "Return to your private Athlete Account and choose one of the current suggested matches."}
           </p>
           <Button asChild variant="secondary" className="mt-4">

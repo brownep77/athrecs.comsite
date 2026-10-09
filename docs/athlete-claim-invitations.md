@@ -22,8 +22,46 @@ complete claim URL first and stays within the documented 200-character limit.
 Use the staff member's +44 7581 764764 account and review the recipient before
 sending. Opening a messaging app does not record delivery. Copy-message fallback
 is available if the app is not installed. Phone and Telegram details can be saved
-privately inside the directory panel. Recipients need an existing ATHRECS signup;
-the invitation still requires that account's verified email when claiming.
+privately inside the directory panel. Existing-signup invitations remain bound to
+that account and its verified email.
+
+## Invite someone before they sign up
+
+Choose **Invite to claim** on an unclaimed athlete's staff profile, or **Invite
+someone not signed up** inside the directory panel. The public unclaimed profile
+also links to this exact staff screen; staff authentication is still required.
+Enter the recipient's name and at least one contact, record the contact source and
+why this is their profile, then review the preview. The link selects this exact
+profile/result through signup. Creating an invitation never creates a placeholder
+account, changes signup statistics, changes marketing consent, publishes results
+or grants ownership.
+
+- Email sends explicitly from `support@athrecs.com`, using the existing frozen
+  payload, delivery reservation and provider idempotency key. A new recipient
+  creates their account using the exact invited email and verifies it. If the
+  email already belongs to an account, the invitation binds to that account.
+- SMS, WhatsApp, Telegram and Viber prepare a private message. SMS uses the
+  [standard SMS URI body field](https://www.rfc-editor.org/rfc/rfc5724), with copy
+  fallback where the device does not support prefilled text.
+- Instagram, Facebook, X / Twitter and LinkedIn copy the message and open the
+  saved, validated social profile. Staff start a private conversation and paste
+  the message there. There is no automatic social API send, public posting or
+  claim of delivery. Copy message also works with other messaging apps.
+- With an email supplied, every channel uses the same mailbox-bound invitation.
+  Without an email, the private token is a capability for the intended contact.
+  It reveals only the selected display name before login. Viewing results still
+  requires a verified account, and viewing does not consume the token. The first
+  explicit claim or decline binds the invitation to that account atomically.
+  Staff must confirm identity with the recorded contact before approval; a phone
+  or social address is not verified by possession of the link. Claims record
+  this limitation and the contact evidence for staff review.
+
+The staff profile shows recent invitation status, email retry and revocation.
+New invitations are serialised with account invitations and share recipient/staff
+daily limits. Tokens expire after seven days. Existing account-bound invitations
+keep their original account, verified mailbox and result binding; an invalid
+supplied token never falls back to a name match. Private contacts and tokens are
+never added to public profile payloads or anonymous invitation introductions.
 
 Channel link formats: [WhatsApp](https://faq.whatsapp.com/5913398998672934),
 [Telegram](https://core.telegram.org/api/links),
@@ -80,3 +118,13 @@ cascades. A separately mocked production environment exercises the actual email
 renderer/dispatcher with an intercepted Resend boundary, including uncertain retry
 and the expired retry window. It never sends an email or changes production data.
 The test is part of `ci:verify`.
+
+`npm run verify:external-invitations` exercises real email-code registration,
+pre-registration invitations, wrong-account/unverified denial, recipient binding
+only on explicit submission, review gates, contact-only invitations, SMS/social
+payloads and expiry/revocation against disposable PGlite. The invitation suite
+also verifies email dispatch before registration through an intercepted provider.
+The hosted `verify-external-invitation-browser.mjs` test walks the actual mobile
+claim page through email-code signup to the exact selected profile and a pending
+claim. Directory desktop/mobile tests cover new-contact forms and channel links.
+All test identities and deliveries are synthetic.

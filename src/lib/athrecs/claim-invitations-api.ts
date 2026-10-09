@@ -7,6 +7,7 @@ import {
   invitationInput,
   invitationId,
   invitationToken,
+  externalInvitationInput,
 } from "./claim-invitation";
 
 export const privateClaimMiddleware = createMiddleware({ type: "function" }).server(
@@ -78,6 +79,34 @@ export const createStaffClaimInvitation = createServerFn({ method: "POST" })
     assertInvitationWrites();
     return createInvitation(await getSql(), context.userId, data);
   });
+export const getStaffInvitationProfile = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .validator((input: unknown) => z.object({ athleteId: z.number().int().positive() }).parse(input))
+  .handler(async ({ data }) => {
+    const { getSql } = await import("@/lib/db");
+    const { externalInvitationProfile } = await import("./claim-invitations.server");
+    return externalInvitationProfile(await getSql(), data.athleteId);
+  });
+export const createStaffExternalInvitation = createServerFn({ method: "POST" })
+  .middleware([staffMiddleware])
+  .validator((input: unknown) => externalInvitationInput.parse(input))
+  .handler(async ({ data, context }) => {
+    const { getSql } = await import("@/lib/db");
+    const { createExternalInvitation, assertInvitationWrites } =
+      await import("./claim-invitations.server");
+    assertInvitationWrites();
+    return createExternalInvitation(await getSql(), context.userId, data);
+  });
+export const getClaimInvitationIntro = createServerFn({ method: "GET" })
+  .middleware([privateClaimMiddleware])
+  .validator((input: unknown) =>
+    z.object({ token: invitationToken, resultId: z.number().int().positive() }).parse(input),
+  )
+  .handler(async ({ data }) => {
+    const { getSql } = await import("@/lib/db");
+    const { invitationIntro } = await import("./claim-invitations.server");
+    return invitationIntro(await getSql(), data.token, data.resultId);
+  });
 export const emailStaffClaimInvitation = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: unknown) => invitationId.parse(input))
@@ -133,7 +162,7 @@ export const declineClaimInvitation = createServerFn({ method: "POST" })
         throw new Error(
           "A claim has already been submitted. Withdraw it from your claims if needed.",
         );
-      await tx`update athlete_claim_invitations set declined_at=now() where id=${invite.id}`;
+      await tx`update athlete_claim_invitations set declined_at=now(),user_id=coalesce(user_id,${context.userId}) where id=${invite.id}`;
       return { declined: true };
     });
   });
