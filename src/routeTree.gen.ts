@@ -39,6 +39,7 @@ import { Route as AdminCheckResultsUploadRouteImport } from './routes/admin/chec
 import { Route as AdminClubScannerRouteImport } from './routes/admin/club-scanner'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
+import { Route as AdminImportResultsRouteImport } from './routes/admin/import-results'
 import { Route as AdminNetworkRouteImport } from './routes/admin/network'
 import { Route as AdminPartnershipsRouteImport } from './routes/admin/partnerships'
 import { Route as AdminRaceCollectorRouteImport } from './routes/admin/race-collector'
@@ -238,6 +239,11 @@ const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
 const AdminFixtureReviewRoute = AdminFixtureReviewRouteImport.update({
   id: '/admin/fixture-review',
   path: '/admin/fixture-review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminImportResultsRoute = AdminImportResultsRouteImport.update({
+  id: '/admin/import-results',
+  path: '/admin/import-results',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminNetworkRoute = AdminNetworkRouteImport.update({
@@ -517,6 +523,7 @@ export interface FileRoutesByFullPath {
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/import-results': typeof AdminImportResultsRoute
   '/admin/network': typeof AdminNetworkRoute
   '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
@@ -597,6 +604,7 @@ export interface FileRoutesByTo {
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/import-results': typeof AdminImportResultsRoute
   '/admin/network': typeof AdminNetworkRoute
   '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
@@ -678,6 +686,7 @@ export interface FileRoutesById {
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
+  '/admin/import-results': typeof AdminImportResultsRoute
   '/admin/network': typeof AdminNetworkRoute
   '/admin/partnerships': typeof AdminPartnershipsRoute
   '/admin/race-collector': typeof AdminRaceCollectorRoute
@@ -760,6 +769,7 @@ export interface FileRouteTypes {
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/import-results'
     | '/admin/network'
     | '/admin/partnerships'
     | '/admin/race-collector'
@@ -840,6 +850,7 @@ export interface FileRouteTypes {
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/import-results'
     | '/admin/network'
     | '/admin/partnerships'
     | '/admin/race-collector'
@@ -920,6 +931,7 @@ export interface FileRouteTypes {
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/fixture-review'
+    | '/admin/import-results'
     | '/admin/network'
     | '/admin/partnerships'
     | '/admin/race-collector'
@@ -1001,6 +1013,7 @@ export interface RootRouteChildren {
   AdminClubScannerRoute: typeof AdminClubScannerRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
+  AdminImportResultsRoute: typeof AdminImportResultsRoute
   AdminNetworkRoute: typeof AdminNetworkRoute
   AdminPartnershipsRoute: typeof AdminPartnershipsRoute
   AdminRaceCollectorRoute: typeof AdminRaceCollectorRoute
@@ -1262,6 +1275,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/fixture-review'
       fullPath: '/admin/fixture-review'
       preLoaderRoute: typeof AdminFixtureReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/import-results': {
+      id: '/admin/import-results'
+      path: '/admin/import-results'
+      fullPath: '/admin/import-results'
+      preLoaderRoute: typeof AdminImportResultsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/network': {
@@ -1633,6 +1653,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminClubScannerRoute: AdminClubScannerRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
+  AdminImportResultsRoute: AdminImportResultsRoute,
   AdminNetworkRoute: AdminNetworkRoute,
   AdminPartnershipsRoute: AdminPartnershipsRoute,
   AdminRaceCollectorRoute: AdminRaceCollectorRoute,

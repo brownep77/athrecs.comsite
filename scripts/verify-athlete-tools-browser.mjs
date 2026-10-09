@@ -34,6 +34,15 @@ const upload = file(
   `export async function checkRaceUpload(){return {rows:[],summary:{total:0,new:0,review:0,duplicate:0,blocked:0,identitiesChecked:0},reviewHash:'a'.repeat(64)};}
 export async function importCheckedRaceUpload(){throw Error('No result imports in this isolated fixture');}export async function downloadResultsUploadTemplate(){throw Error('Not used in this fixture');}`,
 );
+const excel = file(
+  "excel-api.js",
+  `window.excelImports=[];
+export async function inspectResultsFile(){return {sheets:['Results'],sheet:'Results',headers:['Name','Bib','Chip Time'],mapping:{name:0,bib:1,chip:2},rows:1};}
+const preview={id:'11111111-1111-4111-8111-111111111111',meta:{eventName:'Synthetic Race',date:'2026-10-01',distance:'10K',sourceUrl:'https://totalracetiming.co.uk/raceresults/999999',basis:'chip',timingConfirmed:true},rows:[{row:{key:'test',name:'Fictional Runner',bib:'001',club:'',rawTime:'00:40:00'},status:'new',reason:'No likely match',candidates:[]}],counts:{new:1,review:0,duplicate:0,blocked:0},sourceApproved:false};
+export async function previewResultsFile(){return preview;}export async function getResultsUpload(){return preview;}
+export async function importReviewedResults({data}){window.excelImports.push(data);throw Error('No imports authorised in this fixture');}
+export async function downloadResultsTemplate(){throw Error('Not used');}`,
+);
 const directory = file(
   "directory-api.js",
   `export async function getStaffAthleteDirectory(){return {athletes:[{athleteNumber:'123',athrecsId:'ATH-000123',name:'Avery Test Athlete',sports:['Running'],club:'Example Club',city:'',country:'',visibility:'Private',resultCount:2,registered:false,canPublish:true,sources:[{id:9,slug:'avery-test-athlete'}],details:{}}],total:1,totalStored:1,page:1,pages:1,sports:['Running'],publishableTotal:1};}
@@ -53,7 +62,7 @@ const clubs = file(
 );
 const router = file(
   "router.tsx",
-  'import React from "react";export function Link({to,children,...props}){return <a href={to} {...props}>{children}</a>}',
+  'import React from "react";export function Link({to,children,...props}){return <a href={to} {...props}>{children}</a>}export function createFileRoute(){return options=>{const route={options,useSearch:()=>options.validateSearch?.(Object.fromEntries(new URLSearchParams(window.location.search)))??{}};return route;}}',
 );
 const invitation = file(
   "invitation-api.js",
@@ -78,9 +87,10 @@ file(
 );
 file(
   "main.tsx",
-  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{AthleteTools}from'/@fs/${resolve("src/components/admin/AthleteTools.tsx")}';import'./style.css';const client=new QueryClient({defaultOptions:{queries:{retry:false}}});createRoot(document.getElementById('root')!).render(<QueryClientProvider client={client}><main style={{maxWidth:1280,margin:'auto',padding:20}}><p style={{fontSize:12,marginBottom:16}}>DESIGN PREVIEW · FICTIONAL ATHLETE · NO LIVE SAVES</p><AthleteTools/></main></QueryClientProvider>);`,
+  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{Route as HubRoute}from'/@fs/${resolve("src/routes/admin/athlete-tools.tsx")}';import{Route as AliasRoute}from'/@fs/${resolve("src/routes/admin/import-results.tsx")}';const Screen=(window.location.pathname==='/admin/import-results'?AliasRoute:HubRoute).options.component;import'./style.css';const client=new QueryClient({defaultOptions:{queries:{retry:false}}});createRoot(document.getElementById('root')!).render(<QueryClientProvider client={client}><main style={{maxWidth:1280,margin:'auto',padding:20}}><p style={{fontSize:12,marginBottom:16}}>DESIGN PREVIEW · FICTIONAL ATHLETE · NO LIVE SAVES</p><Screen/></main></QueryClientProvider>);`,
 );
 const aliases = {
+  "@/lib/result-upload/api": excel,
   "@/lib/athlete-link/api": api,
   "@/lib/athlete-workspace/api": workspace,
   "@/lib/athlete-workspace/admin-history-api": file(
@@ -116,7 +126,10 @@ if (process.env.ATHRECS_HUB_PREVIEW === "1") {
   console.log("Synthetic athlete tools preview: http://127.0.0.1:8112");
   await new Promise(() => {});
 }
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({
+  headless: true,
+  executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined,
+});
 let page;
 try {
   page = await browser.newPage({ viewport: { width: 1365, height: 1000 } });
@@ -167,6 +180,57 @@ try {
     buffer: Buffer.from("Name,Time\nTest,00:40:00"),
   });
   await page.getByText("File ready: synthetic.csv", { exact: true }).waitFor();
+  const workflow = page.getByRole("navigation", { name: "Results file workflows" });
+  await workflow.getByRole("button", { name: "Excel/CSV grouped import" }).click();
+  await page.getByLabel("Choose Excel or CSV results", { exact: true }).setInputFiles({
+    name: "grouped.csv",
+    mimeType: "text/csv",
+    buffer: Buffer.from("Name,Bib,Chip Time\nFictional Runner,001,00:40:00"),
+  });
+  await page.getByText("grouped.csv", { exact: true }).waitFor();
+  assert.equal(
+    await page
+      .locator("#results-file-excel")
+      .getByLabel("What does the generic “Time” column mean?")
+      .inputValue(),
+    "unspecified",
+  );
+  await page
+    .locator("#results-file-excel")
+    .getByLabel("Race name", { exact: true })
+    .fill("Synthetic Race");
+  await page
+    .locator("#results-file-excel")
+    .getByLabel("Race date", { exact: true })
+    .fill("2026-10-01");
+  await page
+    .getByLabel("Official results URL", { exact: true })
+    .fill("https://totalracetiming.co.uk/raceresults/999999");
+  await page
+    .locator("#results-file-excel")
+    .getByLabel("I confirm the race details and timing basis.")
+    .check();
+  await page.getByRole("button", { name: "Preview & check for duplicates" }).click();
+  await page.getByText("Preview saved. No athletes or results have been created.").waitFor();
+  await page.getByRole("button", { name: "Select eligible rows in this group" }).click();
+  await page
+    .locator("#results-file-excel")
+    .getByLabel("I have reviewed this selection, including new-profile candidates")
+    .check();
+  assert(
+    await page.getByRole("button", { name: "Import 1 approved entries", exact: true }).isDisabled(),
+    "Unapproved sources cannot import",
+  );
+  await workflow.getByRole("button", { name: "Source-reviewed results" }).click();
+  await page.getByText("File ready: synthetic.csv", { exact: true }).waitFor();
+  await workflow.getByRole("button", { name: "Excel/CSV grouped import" }).click();
+  await page.getByText("grouped.csv", { exact: true }).waitFor();
+  await page.screenshot({ path: "artifacts/athlete-tools-excel-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  await page.screenshot({ path: "artifacts/athlete-tools-excel-mobile.png", fullPage: true });
+  assert.deepEqual(await page.evaluate(() => window.excelImports), []);
+  await workflow.getByRole("button", { name: "Source-reviewed results" }).click();
   await nav.getByRole("button", { name: "Single athlete", exact: true }).click();
   assert.equal(await name.inputValue(), "Avery Test Athlete");
   assert(await save.isEnabled());
@@ -378,6 +442,27 @@ try {
   assert.equal(
     await page.getByRole("button", { name: "Create private athlete profile" }).count(),
     0,
+  );
+  await page.goto(
+    "http://127.0.0.1:8112/admin/athlete-tools?section=upload&batch=11111111-1111-4111-8111-111111111111",
+  );
+  await page.getByRole("heading", { name: "3. Review a group and import" }).waitFor();
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Excel/CSV grouped import" })
+      .getAttribute("aria-pressed"),
+    "true",
+  );
+  await page.goto(
+    "http://127.0.0.1:8112/admin/import-results?batch=11111111-1111-4111-8111-111111111111",
+  );
+  await page.getByRole("heading", { name: "Add or update athletes" }).waitFor();
+  await page.getByRole("heading", { name: "3. Review a group and import" }).waitFor();
+  assert.equal(
+    await page
+      .getByRole("button", { name: "Results file", exact: true })
+      .getAttribute("aria-pressed"),
+    "true",
   );
   assert.deepEqual(errors, []);
   console.log(

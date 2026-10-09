@@ -9,6 +9,9 @@ const Directory = lazy(() =>
 const ImportResults = lazy(() =>
   import("./ImportRaceResults").then((m) => ({ default: m.ImportRaceResults })),
 );
+const ExcelResults = lazy(() =>
+  import("./ExcelResultsUpload").then((m) => ({ default: m.ExcelResultsUpload })),
+);
 const Workspace = lazy(() =>
   import("@/components/athletes/AthleteWorkspace").then((m) => ({ default: m.AthleteWorkspace })),
 );
@@ -46,10 +49,14 @@ const sections: { id: AthleteToolSection; label: string; description: string }[]
 export function AthleteTools({
   initialSection = "link",
   initialAthleteId = null,
+  initialUploadMode = "source",
 }: {
   initialSection?: AthleteToolSection;
   initialAthleteId?: number | null;
+  initialUploadMode?: "source" | "excel";
 }) {
+  const [uploadMode, setUploadMode] = useState<"source" | "excel">(initialUploadMode);
+  const [uploadVisited, setUploadVisited] = useState(() => new Set([initialUploadMode]));
   const [active, setActive] = useState<AthleteToolSection>(initialSection);
   const [visited, setVisited] = useState<Set<AthleteToolSection>>(() => new Set([initialSection]));
   const [athleteId, setAthleteId] = useState(initialAthleteId);
@@ -117,7 +124,33 @@ export function AthleteTools({
             <Suspense fallback={<p role="status">Loading {s.label.toLowerCase()}…</p>}>
               {s.id === "link" ? <SingleAthleteLink onOpenAthlete={openAthlete} /> : null}
               {s.id === "directory" ? <Directory onEditAthlete={openAthlete} /> : null}
-              {s.id === "upload" ? <ImportResults blankStart /> : null}
+              {s.id === "upload" ? (
+                <>
+                  <nav aria-label="Results file workflows" className="mb-4 flex flex-wrap gap-2">
+                    {(["source", "excel"] as const).map((mode) => (
+                      <button
+                        key={mode}
+                        type="button"
+                        aria-pressed={uploadMode === mode}
+                        aria-controls={`results-file-${mode}`}
+                        className="min-h-11 rounded-lg border px-4 py-2 text-sm font-semibold"
+                        onClick={() => {
+                          setUploadMode(mode);
+                          setUploadVisited((previous) => new Set([...previous, mode]));
+                        }}
+                      >
+                        {mode === "source" ? "Source-reviewed results" : "Excel/CSV grouped import"}
+                      </button>
+                    ))}
+                  </nav>
+                  <div id="results-file-source" hidden={uploadMode !== "source"}>
+                    {uploadVisited.has("source") ? <ImportResults blankStart /> : null}
+                  </div>
+                  <div id="results-file-excel" hidden={uploadMode !== "excel"}>
+                    {uploadVisited.has("excel") ? <ExcelResults /> : null}
+                  </div>
+                </>
+              ) : null}
               {s.id === "review" ? (
                 <Workspace key={athleteId ?? "all"} staff initialAthleteId={athleteId} />
               ) : null}

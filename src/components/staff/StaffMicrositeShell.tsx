@@ -39,7 +39,7 @@ const staffNav = [
     to: "/admin/athlete-tools",
     label: "Add or update athletes",
     icon: UserRoundCog,
-    match: (path: string) => ["/admin/athlete-tools", "/admin/athlete-workspace", "/admin/athlete-directory", "/admin/check-results-upload", "/admin/club-scanner"].includes(path) || path.startsWith("/admin/athletes/"),
+    match: (path: string) => ["/admin/athlete-tools", "/admin/import-results", "/admin/athlete-workspace", "/admin/athlete-directory", "/admin/check-results-upload", "/admin/club-scanner"].includes(path) || path.startsWith("/admin/athletes/"),
   },
   {
     to: "/admin/approvals",

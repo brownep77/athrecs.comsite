@@ -37,7 +37,7 @@ accent/alias-aware matching so a profile on a later search page cannot be missed
 No database migration, existing-source activation or scheduled-task change is needed.
 The review tools display their existing database queues. The separate timing-directory
 scan still saves file/PR proposals; this change does not claim to ingest those files
-into the UI automatically. PR #515's separate draft import path is not merged here.
+into the UI automatically. The Excel/CSV grouped importer from PR #515 is integrated as a second Results file workflow; its old URL opens this hub. The existing source-reviewed importer remains available.
 
 ## Add races with an approval note
 

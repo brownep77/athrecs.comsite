@@ -14,7 +14,7 @@ writeFileSync(resolve(root, "main.tsx"), `import React from 'react';import{creat
 writeFileSync(resolve(root, "index.html"), '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body><div id="root"></div><script type="module" src="/main.tsx"></script></body></html>');
 const server = await createServer({ configFile: false, root, plugins: [react(), tailwindcss()], resolve: { alias: { "@": resolve("src") } }, server: { host: "127.0.0.1", port: 8101, strictPort: true, fs: { allow: [process.cwd()] } } });
 await server.listen();
-const browser = await chromium.launch({ headless: true });
+const browser = await chromium.launch({ headless: true, executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined });
 let page;
 try {
   page = await browser.newPage({ viewport: { width: 1365, height: 1000 } });
@@ -35,6 +35,12 @@ try {
   const covered = new Set(paths.map(path => path.split("#")[0]));
   for (const name of readdirSync("src/routes/admin").filter(name => name.endsWith(".tsx") && !name.includes("$"))) {
     const route = name === "index.tsx" ? "/admin" : `/admin/${name.slice(0, -4)}`;
+    if (route === "/admin/import-results") {
+      const alias = readFileSync(`src/routes${route}.tsx`, "utf8");
+      assert.match(alias, /<AthleteTools initialSection="upload" initialUploadMode="excel"/);
+      assert(covered.has("/admin/athlete-tools"));
+      continue;
+    }
     assert(covered.has(route), `Top-level staff tool missing from panel: ${route}`);
   }
   assert.equal(await page.getByRole('link',{name:'Add or update athletes',exact:true}).getAttribute('href'),'/admin/athlete-tools');
