@@ -22,9 +22,13 @@ import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ClaimAlertStatus } from "@/components/staff/ClaimAlertStatus";
 
 export const Route = createFileRoute("/admin/result-claims")({
-  validateSearch: (search: Record<string, unknown>) => {
+  validateSearch: (search: Record<string, unknown>): { claimId?: number; claimant?: string } => {
     const id = Number(search.claimId);
-    return { claimId: Number.isSafeInteger(id) && id > 0 ? id : undefined };
+    return {
+      claimId: Number.isSafeInteger(id) && id > 0 ? id : undefined,
+      claimant:
+        typeof search.claimant === "string" ? search.claimant.trim().slice(0, 200) : undefined,
+    };
   },
   head: () => ({
     meta: [
@@ -53,21 +57,23 @@ function statusClass(status: ResultClaimStatus): string {
 }
 
 function AdminResultClaimsPage() {
-  const { claimId } = Route.useSearch();
+  const { claimId, claimant } = Route.useSearch();
   const queryClient = useQueryClient();
-  const [status, setStatus] = useState<ResultClaimStatus | "all">(claimId ? "all" : "pending");
+  const [status, setStatus] = useState<ResultClaimStatus | "all">(
+    claimId || claimant ? "all" : "pending",
+  );
   const [conflictsOnly, setConflictsOnly] = useState(false);
   const [notes, setNotes] = useState<Record<number, string>>({});
   const [message, setMessage] = useState<string | null>(null);
 
   const claims = useQuery({
-    queryKey: ["staff-result-claims", status],
-    queryFn: () => listStaffResultClaims({ data: { status } }),
+    queryKey: ["staff-result-claims", status, claimant],
+    queryFn: () => listStaffResultClaims({ data: { status, claimant } }),
     refetchInterval: 30_000,
   });
   const allClaims = useQuery({
-    queryKey: ["staff-result-claims", "all"],
-    queryFn: () => listStaffResultClaims({ data: { status: "all" } }),
+    queryKey: ["staff-result-claims", "all", claimant],
+    queryFn: () => listStaffResultClaims({ data: { status: "all", claimant } }),
     refetchInterval: 30_000,
   });
 
@@ -124,6 +130,18 @@ function AdminResultClaimsPage() {
 
   return (
     <div className="space-y-6">
+      {claimant ? (
+        <p className="rounded-lg border border-border p-3 text-sm">
+          Showing this account’s claims.{" "}
+          <Link to="/admin/athlete-accounts" className="text-accent">
+            Back to signed-up athletes
+          </Link>
+          {" · "}
+          <Link to="/admin/result-claims" search={{}} className="text-accent">
+            Show all accounts
+          </Link>
+        </p>
+      ) : null}
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="space-y-2">
           <p className="text-xs font-medium uppercase tracking-wider text-subtle">

@@ -75,6 +75,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Registered athletes staff dashboard
+        run: node scripts/verify-registrations.mjs --browser
+
       - name: Email-only sign-in form
         run: node scripts/verify-email-code-ui.mjs
 
