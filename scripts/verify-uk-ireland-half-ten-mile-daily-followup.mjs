@@ -30,9 +30,9 @@ const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
 const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
 const CURRENT_NEW_EVENT_SCAN_CHECKED_AT = "2026-10-09";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 71;
-const NEW_EDITION_COUNT = 74;
-const EXISTING_SERIES_EDITION_COUNT = 47;
+const NEW_SERIES_COUNT = 72;
+const NEW_EDITION_COUNT = 75;
+const EXISTING_SERIES_EDITION_COUNT = 48;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -64,7 +64,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  58,
+  59,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -739,6 +739,85 @@ assert.equal(
   dailyHalfTenMileSeriesOverrides["kelpies-half-marathon"].source_url,
   "https://www.entrycentral.com/kelpieshalfmarathon",
   "Kelpies does not expose the current official registration source",
+);
+
+const settleSeriesSlug = "settle-saunter-2027";
+const settleSource = "https://www.sientries.co.uk/event/settle-saunter-2027";
+const settleSeries = catalogue.seriesList.find((series) => series.slug === settleSeriesSlug);
+const settleHalfEditions = catalogue.editions.filter(
+  (edition) =>
+    edition.seriesSlug === settleSeriesSlug &&
+    edition.date === "2027-05-23" &&
+    edition.distance === "Half",
+);
+assert(settleSeries, "Settle Saunter is missing from the published catalogue");
+assert.equal(
+  dailyHalfTenMileSeries.filter((series) => series.slug === settleSeriesSlug).length,
+  1,
+  "Settle Saunter must be represented by one new canonical series",
+);
+assert.equal(settleSeries.name, "Settle Saunter 2027", "Settle Saunter has the wrong canonical name");
+assert.deepEqual(
+  settleSeries.distances,
+  ["Half", "23mi", "10K"],
+  "Settle Saunter lost its verified multi-distance programme",
+);
+assert.equal(
+  normalizeUrl(settleSeries.source_url),
+  normalizeUrl(settleSource),
+  "Settle Saunter lost official provenance",
+);
+assert.equal(settleHalfEditions.length, 1, "Settle Saunter must expose one canonical half edition");
+assert.equal(settleHalfEditions[0].status, "TBC", "Settle Saunter entry state must remain TBC");
+assert.equal(settleHalfEditions[0].entryUrl, undefined, "Settle Saunter must not expose entry before 2 December 2026");
+assert.equal(settleHalfEditions[0].entryOptions, undefined, "Settle Saunter must not expose premature entry options");
+assert.equal(settleHalfEditions[0].startTime, undefined, "Settle Saunter must not collapse its start window to one time");
+assert.equal(settleHalfEditions[0].source, settleSource, "Settle Saunter lost its official source");
+
+const edinburghSeriesSlug = "edinburgh-running-festival";
+const edinburghSource =
+  "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027";
+const edinburghSeries = catalogue.seriesList.find((series) => series.slug === edinburghSeriesSlug);
+const edinburghHalfEditions = catalogue.editions.filter(
+  (edition) =>
+    edition.seriesSlug === edinburghSeriesSlug &&
+    edition.date === "2027-08-01" &&
+    edition.distance === "Half",
+);
+assert(edinburghSeries, "The established Edinburgh Running Festival card disappeared");
+assert.equal(
+  dailyHalfTenMileSeries.some((series) => series.slug === edinburghSeriesSlug),
+  false,
+  "Edinburgh must enrich its established card rather than create a new series",
+);
+assert.deepEqual(
+  edinburghSeries.distances,
+  ["Half", "10K", "5K"],
+  "Edinburgh lost its verified multi-distance programme",
+);
+assert.equal(edinburghHalfEditions.length, 1, "Edinburgh must expose one canonical half edition");
+assert.equal(edinburghHalfEditions[0].startTime, "10:00", "Edinburgh has the wrong half start");
+assert.equal(edinburghHalfEditions[0].source, edinburghSource, "Edinburgh lost official provenance");
+assert.equal(edinburghHalfEditions[0].entryUrl, edinburghSource, "Edinburgh lost safe open entry");
+assert.equal(
+  edinburghHalfEditions[0].entryOptions?.[0]?.checkedAt,
+  CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+  "Edinburgh entry provenance is stale",
+);
+assert.equal(
+  edinburghHalfEditions[0].entryOptions?.[0]?.priceAmount,
+  36,
+  "Edinburgh lost its half-marathon price",
+);
+assert.equal(
+  dailyHalfTenMileExistingSeriesEditions.filter(
+    (edition) =>
+      edition.seriesSlug === edinburghSeriesSlug &&
+      edition.date === "2027-08-01" &&
+      edition.distance === "Half",
+  ).length,
+  1,
+  "Edinburgh must enrich its established card exactly once",
 );
 
 const gatwickSeriesSlug = "runthrough-gatwick-november-2027";
@@ -1844,5 +1923,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (56 half marathons and 15 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (57 half marathons and 15 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
 );
