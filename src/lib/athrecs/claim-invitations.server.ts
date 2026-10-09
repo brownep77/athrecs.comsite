@@ -47,7 +47,12 @@ export async function invitationHistory(sql: Sql, userId: string) {
     [userId],
   );
 }
-export async function findInvitationMatches(sql: Sql, userId: string, q: string) {
+export async function findInvitationMatches(
+  sql: Sql,
+  userId: string,
+  q: string,
+  athleteId?: number,
+) {
   const [u] = await sql<{
     name: string;
     full_name: string;
@@ -99,7 +104,7 @@ export async function findInvitationMatches(sql: Sql, userId: string, q: string)
       exists(select 1 from athlete_source_identities s where s.athlete_id=a.id and s.provider||':'||s.external_id=any(${keys}::text[])) as "sourceMatch",
       coalesce((select jsonb_agg(recent) from (select e.name as race,ed.event_date::text as date,ed.distance_code as distance from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id where r.athlete_id=a.id order by ed.event_date desc,r.id limit 3) recent),'[]'::jsonb) as "recentResults"
     from athletes a left join clubs c on c.id=a.club_id
-    where (${q}<>'' and (a.display_name ilike ${term} or a.slug=${q})) or (${q}='' and (a.display_name ilike any(${patterns}::text[]) or exists(select 1 from athlete_source_identities s where s.athlete_id=a.id and s.provider||':'||s.external_id=any(${keys}::text[]))))
+    where a.id=${athleteId ?? null}::int or (${athleteId ?? null}::int is null and ((${q}<>'' and (a.display_name ilike ${term} or a.slug=${q})) or (${q}='' and (a.display_name ilike any(${patterns}::text[]) or exists(select 1 from athlete_source_identities s where s.athlete_id=a.id and s.provider||':'||s.external_id=any(${keys}::text[]))))))
     order by "sourceMatch" desc,a.display_name,a.id limit 80`;
   const scored = candidates
     .map((a) => {
@@ -124,7 +129,7 @@ export async function findInvitationMatches(sql: Sql, userId: string, q: string)
               : null,
       };
     })
-    .filter((a) => q || a.score > 0)
+    .filter((a) => athleteId || q || a.score > 0)
     .sort((a, b) => b.score - a.score || a.id - b.id);
   return {
     candidates: scored.slice(0, 12),

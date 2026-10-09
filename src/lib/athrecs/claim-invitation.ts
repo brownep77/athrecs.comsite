@@ -3,6 +3,7 @@ export const invitationToken = z.string().regex(/^[a-f0-9]{64}$/);
 export const invitationSearch = z.object({
   userId: z.string().min(1).max(200),
   q: z.string().trim().max(120).default(""),
+  athleteId: z.number().int().positive().optional(),
 });
 export const invitationInput = z.object({
   userId: z.string().min(1).max(200),

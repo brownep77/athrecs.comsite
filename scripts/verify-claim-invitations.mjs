@@ -117,6 +117,10 @@ try {
   };
   for (const token of ["", other.token]) {
     await assert.rejects(
+      () => call("findDirectoryInvitationAccounts", { athleteNumber: "123" }, token),
+      /Unauthorized|Forbidden/,
+    );
+    await assert.rejects(
       () => call("findStaffClaimMatches", search, token),
       /Unauthorized|Forbidden/,
     );
@@ -151,6 +155,55 @@ try {
   assert.equal(matches.candidates[0].recentResults[0].race, "Synthetic Invitation Race");
   assert.equal(lastHeaders.get("cache-control"), "private, no-store");
   assert.equal((await call("findStaffClaimMatches", { ...search, q: "%" })).candidates.length, 0);
+  // Directory starts with the source profile, including blank-name signups found by email.
+  const [sourceIdentifier] =
+    await sql`select athlete_number::text as number from athlete_resolved_ids where athlete_id=991401`;
+  const directoryInput = { athleteNumber: sourceIdentifier.number, q: athlete.email };
+  const directory = await call("findDirectoryInvitationAccounts", directoryInput);
+  assert.equal(directory.athleteId, 991401);
+  assert.equal(directory.registered, false);
+  assert.equal(directory.accounts.length, 1);
+  assert.equal(directory.accounts[0].userId, athlete.id);
+  assert.equal(directory.accounts[0].name, "Name not supplied");
+  assert.equal(lastHeaders.get("cache-control"), "private, no-store");
+  assert.equal(
+    (await call("findDirectoryInvitationAccounts", { ...directoryInput, q: "%" })).accounts.length,
+    0,
+  );
+  await assert.rejects(
+    () =>
+      call("findDirectoryInvitationAccounts", {
+        ...directoryInput,
+        athleteNumber: "99999999999999999",
+      }),
+    /not found/,
+  );
+  await assert.rejects(
+    () =>
+      call("findDirectoryInvitationAccounts", directoryInput, staff.token, {
+        "x-forwarded-host": "www.athrecs.com",
+      }),
+    /staff host required/,
+  );
+  const exact = await call("findStaffClaimMatches", { userId: athlete.id, athleteId: 991401 });
+  assert.deepEqual(
+    exact.candidates.map((a) => a.id),
+    [991401],
+    "Exact directory profile survives an absent recipient name",
+  );
+  const [accountIdentifier] =
+    await sql`select number::text from athlete_identifiers where user_id=${athlete.id}`;
+  const accountDirectory = await call("findDirectoryInvitationAccounts", {
+    athleteNumber: accountIdentifier.number,
+    q: other.email,
+  });
+  assert.equal(accountDirectory.registered, true);
+  assert.equal(accountDirectory.athleteId, null);
+  assert.deepEqual(
+    accountDirectory.accounts.map((a) => a.userId),
+    [athlete.id],
+    "An account row cannot be redirected to another recipient by a search term",
+  );
   await sql`update "user" set name='Synthetic Runner' where id=${other.id}`;
   assert.equal(
     (await call("findStaffClaimMatches", { userId: other.id, q: "" })).candidates[0].id,
@@ -162,6 +215,41 @@ try {
   );
   const invite = await call("createStaffClaimInvitation", input);
   const token = new URL(invite.url).searchParams.get("invitation");
+  const { claimInvitationSharing } = await server.ssrLoadModule(
+    "/src/lib/athrecs/claim-invitation-sharing.ts",
+  );
+  const contact = {
+    phone: "+447700900123",
+    telegramUsername: "synthetic_athlete",
+    socialLinks: [],
+    sourceNote: "Synthetic",
+  };
+  const share = claimInvitationSharing(invite.url, contact);
+  assert.equal(new URL(share.whatsapp).pathname, "/447700900123");
+  assert.equal(new URL(share.whatsapp).searchParams.get("text"), share.message);
+  assert.equal(new URL(share.telegram).pathname, "/synthetic_athlete");
+  assert.equal(new URL(share.telegram).searchParams.get("text"), share.message);
+  const viber = new URL(share.viber).searchParams.get("text");
+  assert(
+    viber.startsWith(invite.url) && viber.length <= 200,
+    "Viber keeps the complete private token before its documented text limit",
+  );
+  const chooser = claimInvitationSharing(invite.url, {
+    ...contact,
+    phone: null,
+    telegramUsername: null,
+  });
+  assert.equal(new URL(chooser.whatsapp).pathname, "/");
+  assert.equal(new URL(chooser.telegram).searchParams.get("url"), invite.url);
+  assert.equal(
+    new URL(claimInvitationSharing(invite.url, { ...contact, telegramUsername: null }).telegram)
+      .pathname,
+    "/+447700900123",
+  );
+  assert.throws(
+    () => claimInvitationSharing("https://untrusted.example/claim-results", contact),
+    /Invalid/,
+  );
   assert.equal(new URL(invite.url).origin, "https://www.athrecs.com");
   const repeat = await call("createStaffClaimInvitation", input);
   assert.equal(repeat.id, invite.id);
