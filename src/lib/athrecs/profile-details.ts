@@ -5,6 +5,12 @@ export const profileDetailsSchema = z.object({
   birthCountry: z.string().trim().max(100).default(""),
   previousClub: z.string().trim().max(160).default(""),
   coach: z.string().trim().max(120).default(""),
+  coachProfileSlug: z
+    .string()
+    .trim()
+    .max(160)
+    .regex(/^(?:[a-z0-9]+(?:-[a-z0-9]+)*)?$/)
+    .optional(),
   manager: z.string().trim().max(120).default(""),
   runningAgeCategory: z.string().trim().max(40).default(""),
   birthdayVisibility: z.enum(["hidden", "day-month", "full"]).default("hidden"),

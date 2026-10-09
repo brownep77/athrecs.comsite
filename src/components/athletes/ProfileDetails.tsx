@@ -36,7 +36,18 @@ export function ProfileDetails({
         <div key={label} className="min-w-0 sm:flex sm:flex-wrap sm:items-baseline sm:gap-1.5">
           <dt className="text-xs text-subtle">{label}</dt>
           <dd className="break-words font-medium text-fg">
-            {label === "Country of birth" ? <CountryFlag country={value} showName /> : value}
+            {label === "Country of birth" ? (
+              <CountryFlag country={value} showName />
+            ) : label === "Coach" && details.coachProfileSlug ? (
+              <a
+                href={`/athletes/${encodeURIComponent(details.coachProfileSlug)}`}
+                className="text-accent underline underline-offset-2 hover:no-underline"
+              >
+                {value}
+              </a>
+            ) : (
+              value
+            )}
           </dd>
         </div>
       ))}
