@@ -50,8 +50,6 @@ try {
     assert.deepEqual(errors, []);
     console.log("PASS: RunRecs retains its long account form and one matching panel.");
   } else {
-    // A fresh account offers an optional first result before the full workspace.
-    await page.getByRole("link", { name: "Skip for now", exact: true }).click();
     const nav = page.getByRole("navigation", { name: "Athlete profile sections" });
     const go = async (name) => {
       await nav.getByRole("link", { name, exact: true }).click();
