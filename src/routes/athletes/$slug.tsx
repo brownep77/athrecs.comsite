@@ -18,7 +18,11 @@ import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
-import { getAthleteBySlug, getPrivateAthleteBySlug } from "@/lib/athrecs/api";
+import {
+  getAthleteBySlug,
+  getPrivateAthleteBySlug,
+  getAdministratorPublishedAthlete,
+} from "@/lib/athrecs/api";
 import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
@@ -39,6 +43,17 @@ export const Route = createFileRoute("/athletes/$slug")({
     "X-Robots-Tag": "noindex, nofollow, noarchive",
   }),
   loader: async ({ params }) => {
+    const published = await getAdministratorPublishedAthlete({ data: params.slug });
+    if (published) {
+      if (published.athlete.slug !== params.slug) {
+        throw redirect({
+          to: "/athletes/$slug",
+          params: { slug: published.athlete.slug },
+          statusCode: 301,
+        });
+      }
+      return { kind: "published-history" as const, ...published };
+    }
     if (!(await canViewAthleteProfiles())) return { kind: "sign-in" as const };
     const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
       () => null,
@@ -79,14 +94,22 @@ export const Route = createFileRoute("/athletes/$slug")({
     }
     throw notFound();
   },
-  head: ({ params }) => ({
+  head: ({ params, loaderData }) => ({
     links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
     meta: [
-      { title: `Athlete profile | ${SITE_NAME}` },
+      {
+        title:
+          loaderData?.kind === "published-history"
+            ? `${loaderData.athlete.display_name} | ${SITE_NAME}`
+            : `Athlete profile | ${SITE_NAME}`,
+      },
       { name: "robots", content: "noindex, nofollow, noarchive" },
       {
         name: "description",
-        content: "Sign in to view athlete profiles and published results on ATHRECS.",
+        content:
+          loaderData?.kind === "published-history"
+            ? `Published sporting performances for ${loaderData.athlete.display_name} on ATHRECS.`
+            : "Sign in to view athlete profiles and published results on ATHRECS.",
       },
     ],
   }),
@@ -186,6 +209,7 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
 function AthletePage() {
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
+  if (data.kind === "published-history") return <AthleteContent />;
   return (
     <ProfileViewer
       authenticated={data.kind !== "sign-in"}
@@ -209,8 +233,14 @@ function AthleteContent() {
   }
 
   const { athlete, results, profileResults, upcoming, sourceHistories } = data;
+  const historicalPerformanceCount = sourceHistories.reduce(
+    (total, history) => total + history.performances.length,
+    0,
+  );
   const reportedHistory = getReportedRaceHistory(athlete.slug);
   const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
+  const performanceCount =
+    results.length + (includedHistory?.records.length ?? 0) + historicalPerformanceCount;
   const aliases = athlete.aliases ?? [];
   const career = getEditorialAthleteCareer(athlete.slug);
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
@@ -318,8 +348,14 @@ function AthleteContent() {
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="accent">
-            {results.length + (includedHistory?.records.length ?? 0)}{" "}
-            {includedHistory ? "race and stage entries" : reportedHistory ? "results" : "results"}
+            {performanceCount}{" "}
+            {historicalPerformanceCount
+              ? performanceCount === 1
+                ? "performance"
+                : "performances"
+              : includedHistory
+                ? "race and stage entries"
+                : "results"}
           </Badge>
           {athlete.profile_roles
             ?.filter(
@@ -408,8 +444,9 @@ function AthleteContent() {
         <CompactResults results={profileResults} reportedHistory={includedHistory} claimable />
         {sourceHistories.length ? (
           <details
+            id="performance-history"
             className="rounded-lg border border-border bg-surface p-3"
-            open={!profileResults.length}
+            open
           >
             <summary className="cursor-pointer text-sm font-semibold">Performance history</summary>
             <div className="mt-3">
