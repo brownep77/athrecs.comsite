@@ -1,4 +1,4 @@
-import type { ProfileResult } from "./profile-records";
+import { isCompletedHistoryResult, type AchievementResult } from "./profile-history-results.ts";
 import { countryFlag } from "./country-flags.ts";
 import { eligiblePerformance, performanceGroup } from "./profile-records.ts";
 import { isDisqualified } from "./result-details.ts";
@@ -13,7 +13,13 @@ export function resultDay(value: string): number | null {
   return Number.isFinite(time) && new Date(time).toISOString().slice(0, 10) === value ? time : null;
 }
 
-export function isCompletedResult(result: ProfileResult, today = new Date()): boolean {
+export function isCompletedResult(result: AchievementResult, today = new Date()): boolean {
+  if (result.history)
+    return (
+      !result.conflicting &&
+      !isDisqualified(result) &&
+      isCompletedHistoryResult(result.history.performance, today)
+    );
   const day = resultDay(result.eventDate);
   const partialYear = /^\d{4}$/.test(result.eventDate) ? Number(result.eventDate) : null;
   return (
@@ -70,19 +76,21 @@ export type ProfileAchievement = {
   id: string;
   title: string;
   rule: string;
-  results: ProfileResult[];
+  results: AchievementResult[];
 };
 
-export function resultEvidenceLabel(result: ProfileResult): string {
+export function resultEvidenceLabel(result: AchievementResult): string {
   if (/athlete|self|manual|user/i.test(result.resultSource ?? "")) return "Athlete-submitted";
   return result.sourceUrls.length ? "Source-linked result" : "Recorded result";
 }
 
-function recordedSport(result: ProfileResult): string {
-  return RUNNING_SPORTS.has(result.sport.trim().toLowerCase()) ? "Running" : result.sport.trim();
+function recordedSport(result: AchievementResult): string {
+  const sport = result.sport.trim();
+  if (sport.toLowerCase() === "athletics" && result.surface !== "Road") return "Athletics";
+  return RUNNING_SPORTS.has(sport.toLowerCase()) ? "Running" : sport;
 }
 
-export function runningDistanceKind(result: ProfileResult): "marathon" | "ultra" | null {
+export function runningDistanceKind(result: AchievementResult): "marathon" | "ultra" | null {
   if (!RUNNING_SPORTS.has(result.sport.toLowerCase())) return null;
   const code = result.distanceCode.trim().toLowerCase();
   // A rounded marathon is not an ultra; a half/relay is not a full marathon.
@@ -96,18 +104,28 @@ export function runningDistanceKind(result: ProfileResult): "marathon" | "ultra"
   return null;
 }
 
-export function buildProfileAchievements(results: ProfileResult[], today = new Date()) {
-  const editions = new Map<string, ProfileResult[]>();
+export function buildProfileAchievements(results: AchievementResult[], today = new Date()) {
+  const editions = new Map<string, AchievementResult[]>();
   for (const result of results) {
-    const key =
-      result.editionId > 0
+    const row = result.history?.performance;
+    const key = row
+      ? JSON.stringify([
+          "history",
+          row.meeting.trim().toLowerCase(),
+          row.venue.trim().toLowerCase(),
+          row.date || `${row.yearLabel || row.year}:${row.sourceDate}`,
+          row.discipline.trim().toLowerCase(),
+          row.performance,
+          row.place,
+        ])
+      : result.editionId > 0
         ? `edition:${result.editionId}`
         : JSON.stringify([result.eventSlug, result.eventDate, result.sport, result.distanceCode]);
     const group = editions.get(key) ?? [];
     group.push(result);
     editions.set(key, group);
   }
-  const finishes: ProfileResult[] = [];
+  const finishes: AchievementResult[] = [];
   for (const group of editions.values()) {
     // Never hide a conflicting source by selecting whichever row looks like a finish.
     if (group.some((r) => r.conflicting || isDisqualified(r))) continue;
@@ -126,7 +144,7 @@ export function buildProfileAchievements(results: ProfileResult[], today = new D
   }
   const marathons = finishes.filter((r) => runningDistanceKind(r) === "marathon");
   const ultras = finishes.filter((r) => runningDistanceKind(r) === "ultra");
-  const countries = new Map<string, { code: string; name: string; results: ProfileResult[] }>();
+  const countries = new Map<string, { code: string; name: string; results: AchievementResult[] }>();
   for (const result of finishes) {
     const flag = countryFlag(result.country);
     if (!flag.code) continue;
@@ -137,7 +155,7 @@ export function buildProfileAchievements(results: ProfileResult[], today = new D
   }
   const dated = marathons
     .map((result) => ({ result, day: resultDay(result.eventDate) }))
-    .filter((r): r is { result: ProfileResult; day: number } => r.day != null)
+    .filter((r): r is { result: AchievementResult; day: number } => r.day != null)
     .sort((a, b) => a.day - b.day);
   // Seven consecutive calendar dates, inclusive; independent of week/year boundaries.
   let left = 0;
@@ -171,12 +189,12 @@ export function buildProfileAchievements(results: ProfileResult[], today = new D
   }));
   const completedMajors = majors.filter((major) => major.results.length);
   const milestones: ProfileAchievement[] = [];
-  const add = (id: string, title: string, rule: string, evidence: ProfileResult[]) => {
+  const add = (id: string, title: string, rule: string, evidence: AchievementResult[]) => {
     if (evidence.length) milestones.push({ id, title, rule, results: evidence });
   };
-  const byDate = (list: ProfileResult[]) =>
+  const byDate = (list: AchievementResult[]) =>
     [...list].sort((a, b) => a.eventDate.localeCompare(b.eventDate) || a.resultId - b.resultId);
-  const milestone = (id: string, list: ProfileResult[], label: string, levels: number[]) => {
+  const milestone = (id: string, list: AchievementResult[], label: string, levels: number[]) => {
     const target = levels.find((count) => list.length >= count);
     if (target)
       add(
@@ -262,10 +280,12 @@ export function buildProfileAchievements(results: ProfileResult[], today = new D
     add(
       "sports",
       `${sports.length} sports completed`,
-      "At least one completed result in each sport; running, athletics and parkrun are grouped together.",
+      "At least one completed result in each sport; track and field count as Athletics, while road running and parkrun count as Running.",
       sports.map((sport) => byDate(finishes).find((result) => recordedSport(result) === sport)!),
     );
-  const years = [...new Set(finishes.map((r) => r.eventDate.slice(0, 4)))].sort();
+  const years = [
+    ...new Set(finishes.map((r) => r.eventDate.slice(0, 4)).filter((year) => /^\d{4}$/.test(year))),
+  ].sort();
   if (years.length >= 3)
     add(
       "years",
@@ -273,8 +293,8 @@ export function buildProfileAchievements(results: ProfileResult[], today = new D
       "At least one recorded finish in each year; this does not imply an uninterrupted streak.",
       years.map((year) => byDate(finishes).find((r) => r.eventDate.startsWith(year))!),
     );
-  const priorBests = new Map<string, ProfileResult>();
-  const improvements: ProfileResult[] = [];
+  const priorBests = new Map<string, AchievementResult>();
+  const improvements: AchievementResult[] = [];
   for (const result of byDate(finishes).filter(
     (r) => resultDay(r.eventDate) != null && eligiblePerformance(r),
   )) {

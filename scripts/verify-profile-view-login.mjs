@@ -375,6 +375,7 @@ try {
   // Verification changes the label, not the record, its original precision or owner controls.
   const confirmedPerformances = performances.map((row, index) => ({
     ...row,
+    country: index === 0 ? "Spain" : "United Kingdom",
     verificationStatus: index === 0 ? "source_verified" : "verified_by_administrator",
   }));
   await sql`update athlete_source_histories set performances=${JSON.stringify([
@@ -401,6 +402,16 @@ try {
   assert.equal(confirmed("#results-history tbody tr").length, 11);
   assert.equal(confirmed("#performance-history").length, 0);
   assert(!confirmed("#results-history").text().includes("Unverified"));
+  assert(
+    confirmed("#results-history tr[data-history-result] [title='Completed event']").length > 0,
+  );
+  assert.equal(
+    confirmed("#results-history tr[data-history-result] [data-country-code='ES']").length,
+    1,
+  );
+  assert(confirmed("[aria-label='Achievements board']").text().includes("2Sports completed"));
+  assert(confirmed("[aria-label='Achievements board']").text().includes("2Marathons"));
+  assert(confirmed("[aria-label='Achievements board']").text().includes("Completed performances"));
   assert(confirmed("#results-history").text().includes("29 Jan · 2011 / 2012"));
   assert.equal(confirmed("#results-history a[href^='https://example.test']").length, 0);
   assert.equal(

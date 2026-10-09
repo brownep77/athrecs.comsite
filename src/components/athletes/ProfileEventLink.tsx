@@ -7,10 +7,11 @@ export function ProfileEventLink({
   children,
   className,
 }: {
-  result: { sport: string; eventSlug: string; sourceUrls?: string[] };
+  result: { sport: string; eventSlug: string; sourceUrls?: string[]; history?: { key: string } };
   children: ReactNode;
   className?: string;
 }) {
+  if (result.history) return <span className={className}>{children}</span>;
   const running = ["Running", "Parkrun"].includes(result.sport);
   if (result.sport === "Athletics" || running)
     return (
