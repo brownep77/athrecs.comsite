@@ -13,3 +13,24 @@ At the site owner's request, result source links are hidden on the public histor
 No participant data or publication payloads belong in this repository. Run `npm run verify:athlete-publication` for the synthetic database checks.
 
 Verification is separate from publication. An explicit administrator confirmation can be recorded as `verified_by_administrator`, with the confirming actor, original snapshot, reason and scope retained in a private audit event. Independent result-row verification uses `source_verified`; corroborating selected fields alone does not justify that status. New imports still start unverified. Verified entries stay in the same main Results history and no longer show the Unverified warning. Owner removal/restore and privacy settings still apply. Administrator confirmation does not manufacture missing dates or advance entries into independently evidenced race-win badges.
+
+# Completion badges and achievements
+
+Published additions marked `verified_by_administrator` or `source_verified` can
+contribute to completion medals and the achievements board. These medals mean
+completion, not podium placement or an independent source check. Source status
+and audit provenance remain unchanged. Removed, disqualified, unfinished,
+future and explicitly conflicting entries do not qualify.
+
+Track and field remain Athletics; road running remains Running. The board labels
+mixed historical totals as completed performances, preserving separate rounds
+while collapsing identical copies. Recorded results take precedence over matching
+history additions. Uncertain years do not establish calendar-year or date-window
+milestones. Historical marks retain their original precision and do not enter PB
+calculations through this completion projection.
+
+Optional `country` metadata supplies venue flags. An explicit recognised country
+suffix in a venue can also supply one; a city alone or the athlete's nationality
+cannot. Optional `eventSlug` metadata must be a reviewed catalogue match before it
+can establish a marathon-major identity. Public supporting lists show event, date,
+discipline and mark; backend source links remain hidden on the public profile.

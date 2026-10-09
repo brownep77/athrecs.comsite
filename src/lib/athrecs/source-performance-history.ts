@@ -14,6 +14,12 @@ export const sourcePerformanceSchema = z.object({
   yearLabel: z.string().max(80).optional(),
   notes: z.string().max(6000).optional(),
   providerName: z.string().max(200).optional(),
+  country: z.string().max(100).optional(),
+  // Only a reviewed catalogue match may establish an event/major identity.
+  eventSlug: z
+    .string()
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+    .optional(),
   // Administrator confirmation and independent source checks are distinct audit bases.
   verificationStatus: z
     .enum(["unverified", "verified_by_administrator", "source_verified"])

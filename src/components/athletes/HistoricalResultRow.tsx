@@ -1,4 +1,11 @@
-import type { HistoryResult } from "@/lib/athrecs/profile-history-results";
+import {
+  historyResultAnchor,
+  historyResultCountry,
+  isCompletedHistoryResult,
+  type HistoryResult,
+} from "@/lib/athrecs/profile-history-results";
+import { CountryFlag } from "./CountryFlag";
+import { CompletionMedal } from "./ProfileAchievements";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
 
@@ -18,7 +25,12 @@ export function HistoricalResultRow({
   const indoor = /i$/.test(row.performance);
   const numericMark = /^\d+(?:\.\d+)?$/.test(row.performance.trim());
   return (
-    <tr role="row" className="hover:bg-elevated/50" data-history-result={result.key}>
+    <tr
+      id={historyResultAnchor(result.key)}
+      role="row"
+      className="scroll-mt-20 hover:bg-elevated/50"
+      data-history-result={result.key}
+    >
       <td
         role="cell"
         data-label="Date"
@@ -28,7 +40,10 @@ export function HistoricalResultRow({
           (row.date ? formatRaceDateShort(row.date) : row.yearLabel || String(row.year))}
       </td>
       <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
-        {row.meeting}
+        <span className="inline-flex items-center gap-1.5">
+          {isCompletedHistoryResult(row) ? <CompletionMedal /> : null}
+          {row.meeting}
+        </span>
         {row.notes ? (
           <details className="mt-1 max-w-sm whitespace-normal text-xs font-normal text-muted">
             <summary className="cursor-pointer">Result details</summary>
@@ -58,7 +73,10 @@ export function HistoricalResultRow({
         </span>
       </td>
       <td role="cell" data-label="Location" className="px-3 py-2 text-xs">
-        {row.venue || "—"}
+        <span className="inline-flex items-center gap-1.5">
+          {row.venue || "—"}
+          <CountryFlag country={historyResultCountry(row)} />
+        </span>
       </td>
       <td
         role="cell"
