@@ -39,6 +39,22 @@ The review tools display their existing database queues. The separate timing-dir
 scan still saves file/PR proposals; this change does not claim to ingest those files
 into the UI automatically. PR #515's separate draft import path is not merged here.
 
+## Add races with an approval note
+
+Open **Add races & record approval** from a staff athlete profile, or use the
+**Review results** tab with the intended athlete selected. Open a saved proposal,
+select the races and enter **Why I approved these races** (at least 12 characters).
+Check the source, identity and publication authority, resolve any conflicting
+evidence, then choose **Add checked results to profile**. The same note applies
+to every selected race; review separately when different races need different notes.
+
+Each added result retains the note, any conflict resolution, reviewer, timestamp
+and request reference. Staff can expand **Approval note** under a stored race.
+Earlier workspace approvals are read from their original audit without modifying
+the result. Duplicate approvals retain the original result and approval note.
+Notes are absent from public result details, member workspaces and recipient review
+links. Existing visibility, owner-confirmation and source checks still apply.
+
 ## Validation
 
 - `node scripts/verify-athlete-link.mjs`: actual service transactions on the migrated,

@@ -11,6 +11,8 @@ const browser = await chromium.launch({ headless: true });
 try {
   for (const width of [1280, 390]) {
     const page = await browser.newPage({ viewport: { width, height: 844 } });
+    // The first browser load includes cold Vite dependency optimisation and reload.
+    page.setDefaultNavigationTimeout(90_000);
     const errors = [];
     page.on("pageerror", (error) => errors.push(error.message));
     for (const [slug, code] of [
