@@ -396,7 +396,10 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
           <div className="flex justify-end gap-4 text-sm">
             <button
               disabled={busy || query.isFetching || query.data.page <= 1}
-              onClick={() => changeFilters({ ...filters, page: query.data!.page - 1 })}
+              onClick={() => {
+                setInviting(null);
+                setFilters({ ...filters, page: query.data!.page - 1 });
+              }}
               className="disabled:opacity-40"
             >
               Previous
@@ -406,7 +409,10 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
             </span>
             <button
               disabled={busy || query.isFetching || query.data.page >= query.data.pages}
-              onClick={() => changeFilters({ ...filters, page: query.data!.page + 1 })}
+              onClick={() => {
+                setInviting(null);
+                setFilters({ ...filters, page: query.data!.page + 1 });
+              }}
               className="disabled:opacity-40"
             >
               Next
