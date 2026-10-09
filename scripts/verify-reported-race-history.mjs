@@ -112,8 +112,12 @@ try {
     assert(markup.includes("4.04"));
     assert(markup.includes("Fixture meeting"));
     assert.equal(markup.includes('data-label="Source"'), showEvidence);
-    assert(markup.includes("https://example.test/performance"), "Provider credit links stay visible in the normal profile view");
-    assert(markup.includes("Results: powerof10"));
+    assert.equal(
+      markup.includes("https://example.test/performance"),
+      showEvidence,
+      "Source links appear only in the evidence view",
+    );
+    assert.equal(markup.includes("Results: powerof10"), showEvidence);
     assert.equal(markup.includes("Wind assisted"), showEvidence, "Internal evidence labels stay staff-only");
     assert.equal(markup.includes("Next source results"), showEvidence);
   }
