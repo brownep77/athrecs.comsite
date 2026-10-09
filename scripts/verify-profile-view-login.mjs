@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { get as httpGet } from "node:http";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
@@ -85,9 +86,7 @@ try {
     assert(html.includes("Sign in to view athlete profiles"));
     assert(!html.includes("Explore athlete profiles</h1>"));
     assert(
-      !html.includes(
-        'application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage',
-      ),
+      !html.includes('application/ld+json">{"@context":"https://schema.org","@type":"ProfilePage'),
     );
   }
   console.log("Anonymous SSR blocked and uncached.");
@@ -107,6 +106,66 @@ try {
   await sql`insert into athletes (slug,display_name,bio,profile_visibility) values ('view-login-fixture','Login Test Athlete','Restricted Fixture Biography','public'),('view-login-private','Private Test Athlete','Owner-only biography','private')`;
   const profile = await rpc("athrecs/api", "getAthleteBySlug", "view-login-fixture", token);
   assert.equal(profile.athlete.display_name, "Login Test Athlete");
+  // A link reader must get a usable sign-in shell, never an error page or a
+  // session-backed profile. Browser hydration retries the probe same-origin.
+  for (const site of ["cross-site", "same-site"]) {
+    const readerHeaders = {
+      "sec-fetch-site": site,
+      "sec-fetch-mode": "cors",
+      "sec-fetch-dest": "empty",
+      authorization: `Bearer ${token}`,
+    };
+    assert.equal(
+      await rpc("auth/profile-access", "canViewAthleteProfiles", undefined, token, readerHeaders),
+      false,
+      "Blocked session probes must not inspect or disclose the signed-in session",
+    );
+    for (const path of ["/athletes", "/athletes/view-login-fixture"]) {
+      const response = await fetch(origin + path, { headers: readerHeaders });
+      const html = await response.text();
+      assert.equal(response.status, 200);
+      assert.match(response.headers.get("cache-control"), /private.*no-store/);
+      assert(html.includes("Sign in to view athlete profiles"));
+      assert(!html.includes("cross-site request blocked"));
+      assert(!html.includes("Something went wrong"));
+      assert(!html.includes("Login Test Athlete"));
+      assert(!html.includes("Restricted Fixture Biography"));
+    }
+    await assert.rejects(
+      () => rpc("athrecs/api", "getAthleteBySlug", "view-login-fixture", token, readerHeaders),
+      /cross-site/,
+    );
+  }
+  // Node fetch overwrites Sec-Fetch-Mode with cors; raw HTTP preserves the
+  // metadata that a browser sends for a real external-link navigation.
+  const externalNavigation = await new Promise((resolve, reject) => {
+    httpGet(
+      origin + "/athletes/view-login-fixture",
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+          "sec-fetch-site": "cross-site",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-dest": "document",
+        },
+      },
+      (response) => {
+        let body = "";
+        response.setEncoding("utf8");
+        response.on("data", (chunk) => {
+          body += chunk;
+        });
+        response.on("end", () => resolve({ status: response.statusCode, body }));
+        response.on("error", reject);
+      },
+    ).on("error", reject);
+  });
+  assert.equal(externalNavigation.status, 200);
+  assert(externalNavigation.body.includes("Login Test Athlete"));
+  assert.equal(await rpc("auth/profile-access", "canViewAthleteProfiles", undefined, token), true);
+  console.log(
+    "Cross-site readers receive a private sign-in shell; navigation and same-origin retry succeed; protected RPCs remain blocked.",
+  );
   assert.equal(
     await rpc("athrecs/api", "getAthleteBySlug", "view-login-private", token),
     null,
