@@ -30,9 +30,17 @@ export const staffContactInput = z.object({
   socialLinks: z
     .array(z.object({ platform: z.enum(SOCIAL_PLATFORMS), url: z.string().max(2048) }))
     .max(4)
-    .transform((links) =>
-      links.map((link) => validateProfileConnection({ ...link, sharePublicly: false })),
-    )
+    .transform((links, context) => {
+      try {
+        return links.map((link) => validateProfileConnection({ ...link, sharePublicly: false }));
+      } catch (error) {
+        context.addIssue({
+          code: "custom",
+          message: error instanceof Error ? error.message : "Enter a valid social profile link.",
+        });
+        return z.NEVER;
+      }
+    })
     .refine(
       (links) => new Set(links.map((link) => link.platform)).size === links.length,
       "Use one link per social network.",

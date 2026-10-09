@@ -5,17 +5,21 @@ import { findDirectoryInvitationAccounts } from "@/lib/athrecs/claim-invitations
 import { formatAthleteId } from "@/lib/athrecs/athlete-id";
 import { AthleteMatchInvite } from "@/components/staff/AthleteMatchInvite";
 import { AthleteContactActions } from "@/components/staff/AthleteContactActions";
+import { ExternalProfileInvite } from "@/components/staff/ExternalProfileInvite";
 
 export function DirectoryMatchInvite({
   athleteNumber,
   name,
+  initiallyNewContact = false,
 }: {
   athleteNumber: string;
   name: string;
+  initiallyNewContact?: boolean;
 }) {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<{ q?: string; page: number }>({ page: 1 });
   const [recipient, setRecipient] = useState<string | null>(null);
+  const [newContact, setNewContact] = useState(initiallyNewContact);
   const heading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     heading.current?.focus();
@@ -39,11 +43,37 @@ export function DirectoryMatchInvite({
           Match & invite · {name}
         </h2>
         <p className="mt-1 text-sm text-muted">
-          Match the profile to a signup, then invite by email, WhatsApp, Viber or Telegram. The
+          Invite someone new or match an existing signup. Use email, SMS or social messaging. The
           athlete confirms before staff approve the claim.
         </p>
       </div>
-      {!query.data?.registered ? (
+      {query.data && !query.data.registered ? (
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            variant={newContact ? "default" : "secondary"}
+            aria-pressed={newContact}
+            onClick={() => {
+              setNewContact(true);
+              setRecipient(null);
+            }}
+          >
+            Invite someone not signed up
+          </Button>
+          <Button
+            type="button"
+            variant={newContact ? "secondary" : "default"}
+            aria-pressed={!newContact}
+            onClick={() => {
+              setNewContact(false);
+              setRecipient(null);
+            }}
+          >
+            Match an existing signup
+          </Button>
+        </div>
+      ) : null}
+      {!query.data?.registered && !newContact ? (
         <form
           className="flex flex-wrap items-end gap-2"
           onSubmit={(event) => {
@@ -87,7 +117,7 @@ export function DirectoryMatchInvite({
         </p>
       ) : query.data ? (
         <>
-          {!query.data.registered ? (
+          {!query.data.registered && !newContact ? (
             <>
               <p className="text-xs text-muted">
                 {filters.q === undefined ? "Suggested signups by profile name. " : ""}
@@ -124,8 +154,8 @@ export function DirectoryMatchInvite({
               </div>
               {!query.data.accounts.length ? (
                 <p className="text-sm">
-                  No signup found. Try their email or show all signups. The athlete needs an ATHRECS
-                  account before you can create a private claim invitation.
+                  No signup found. Choose “Invite someone not signed up” to send a direct profile
+                  invitation, or try another search.
                 </p>
               ) : null}
               {query.data.total > query.data.pageSize ? (
@@ -161,7 +191,14 @@ export function DirectoryMatchInvite({
               ) : null}
             </>
           ) : null}
-          {account ? (
+          {newContact && !query.data.registered && query.data.athleteId ? (
+            <ExternalProfileInvite
+              key={query.data.athleteId}
+              athleteId={query.data.athleteId}
+              name={name}
+            />
+          ) : null}
+          {account && (!newContact || query.data.registered) ? (
             <div key={account.userId}>
               <p className="break-words text-sm font-medium">
                 Recipient: {account.name} · {account.email}

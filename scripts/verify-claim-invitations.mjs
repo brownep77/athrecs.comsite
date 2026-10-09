@@ -488,6 +488,45 @@ try {
     (await sql`select * from athlete_claim_invitations where user_id=${other.id}`).length,
     0,
   );
+  // The same frozen, repeat-safe dispatcher supports recipients who have not registered.
+  await sql`insert into athletes(id,slug,display_name) values(991404,'synthetic-new-email-athlete','Synthetic New Athlete')`;
+  await sql`insert into results(id,edition_id,athlete_id,status) values(991404,991401,991404,'finished')`;
+  const externalInput = {
+    athleteId: 991404,
+    recipientName: "Synthetic New Athlete",
+    email: "new-invite@example.test",
+    phone: "",
+    telegramUsername: "",
+    socialLinks: [],
+    sourceNote: "Synthetic contact supplied their email",
+    matchNote: "Synthetic staff checked this athlete's profile",
+    reviewed: true,
+  };
+  await assert.rejects(
+    () => module.namespace.createExternalInvitation(sql, staff.id, externalInput),
+    /live ATHRECS/,
+  );
+  context.process.env.VERCEL_ENV = "production";
+  process.env.RESEND_API_KEY = "synthetic-intercepted-key";
+  const external = await call("createStaffExternalInvitation", externalInput);
+  const beforeExternal = deliveries.length;
+  assert.equal((await module.namespace.sendInvitationEmail(sql, external.id)).status, "sent");
+  assert.equal(deliveries.length, beforeExternal + 1);
+  assert.deepEqual(deliveries.at(-1).payload.to, [externalInput.email]);
+  assert(deliveries.at(-1).payload.text.includes(external.url));
+  assert.match(deliveries.at(-1).payload.text, /create a free account or sign in/i);
+  assert.equal((await module.namespace.sendInvitationEmail(sql, external.id)).status, "sent");
+  assert.equal(deliveries.length, beforeExternal + 1);
+  const contactOnly = await call("createStaffExternalInvitation", {
+    ...externalInput,
+    email: "",
+    phone: "+447700900124",
+  });
+  await assert.rejects(
+    () => module.namespace.sendInvitationEmail(sql, contactOnly.id),
+    /no longer active/,
+  );
+  assert.equal(deliveries.length, beforeExternal + 1, "No email address means no dispatch");
   console.log(
     "PASS: private staff matching, blank-name invitation, recipient/verified-email/result binding, token expiry/revoke/decline, duplicate creation/send/claim, existing owner protection, identity-note approval, dashboard tracking, frozen support email retries and preview blocking. Synthetic accounts; no real email sent.",
   );
