@@ -30,8 +30,8 @@ const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
 const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
 const CURRENT_NEW_EVENT_SCAN_CHECKED_AT = "2026-10-09";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 75;
-const NEW_EDITION_COUNT = 78;
+const NEW_SERIES_COUNT = 74;
+const NEW_EDITION_COUNT = 77;
 const EXISTING_SERIES_EDITION_COUNT = 46;
 
 async function loadModule(input) {
@@ -64,7 +64,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  62,
+  61,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -742,15 +742,6 @@ assert.equal(
 );
 
 const newRunThroughRaces = [
-  {
-    slug: "media-city-half-marathon-february-2027",
-    name: "Media City Half Marathon 2027",
-    date: "2027-02-21",
-    startTime: "09:00",
-    source: "https://www.runthrough.co.uk/event/media-city-half-marathon-february-2027",
-    priceAmount: 42,
-    distances: ["Half"],
-  },
   {
     slug: "birmingham-running-festival-february-2027",
     name: "Birmingham Running Festival 5K, 10K, Half Marathon & Juniors 2027",
@@ -1874,5 +1865,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (60 half marathons and 15 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (59 half marathons and 15 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
 );

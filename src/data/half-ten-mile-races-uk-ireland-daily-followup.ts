@@ -60,25 +60,6 @@ type RaceSeed = {
 
 const seeds: RaceSeed[] = [
   {
-    slug: "media-city-half-marathon-february-2027",
-    name: "Media City Half Marathon 2027",
-    date: "2027-02-21",
-    distance: "Half",
-    startTime: "09:00",
-    country: "England",
-    county: "Greater Manchester",
-    city: "Salford",
-    area: "MediaCity Piazza, Salford Quays and Eccles",
-    surface: "Road",
-    organiser: "RunThrough Events",
-    url: "https://www.runthrough.co.uk/event/media-city-half-marathon-february-2027",
-    entryUrl: "https://www.runthrough.co.uk/event/media-city-half-marathon-february-2027",
-    priceAmount: 42,
-    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
-    notes:
-      "The official organiser page consistently confirms the road-closed half marathon on 21 February 2027, its 09:00 start and open £42 entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
-  },
-  {
     slug: "birmingham-running-festival-february-2027",
     name: "Birmingham Running Festival 5K, 10K, Half Marathon & Juniors 2027",
     date: "2027-02-07",

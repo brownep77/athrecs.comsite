@@ -4,7 +4,7 @@ Checked through 9 October 2026 for the catalogue horizon ending 31 December 2027
 
 ## Published coverage
 
-- Added 75 officially verified series: 60 half marathons and 15 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
+- Added 74 officially verified series: 59 half marathons and 15 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
 - Added 43 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
@@ -174,4 +174,4 @@ RunThrough's official Heaton Park pages consistently confirm four additional 202
 
 ## 9 October 2026 scan
 
-RunThrough's newly indexed official pages consistently confirm four missing 2027 half-marathon events with live entry: Birmingham Running Festival on 7 February at 09:30 (£34), Media City on 21 February at 09:00 (£42), Leeds Running Festival on 28 March at 09:00 (£34), and Run Gatwick on 21 November at 09:00 (£38). Birmingham and Leeds retain their same-day 10K, 5K and junior programmes on one card, while Gatwick retains its 5K alongside the half marathon. Each downstream half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is used as the safe entry destination until RunThrough corrects those links.
+RunThrough's newly indexed official pages consistently confirm three missing 2027 half-marathon events with live entry: Birmingham Running Festival on 7 February at 09:30 (£34), Leeds Running Festival on 28 March at 09:00 (£34), and Run Gatwick on 21 November at 09:00 (£38). Birmingham and Leeds retain their same-day 10K, 5K and junior programmes on one card, while Gatwick retains its 5K alongside the half marathon. Media City on 21 February was rejected as an addition because its canonical card and edition already exist. Each new event's downstream half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is used as the safe entry destination until RunThrough corrects those links.
