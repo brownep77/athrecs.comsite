@@ -9,6 +9,16 @@ const base = checkedUrl(process.argv[2] || "http://127.0.0.1:8080");
 mkdirSync("artifacts", { recursive: true });
 const browser = await chromium.launch({ headless: true });
 try {
+  // A cold --force Vite server can invalidate the first client module while it
+  // optimizes dependencies. Warm it separately, then test fresh pages with the
+  // full error assertion still enabled (persistent application errors fail).
+  const warmup = await browser.newPage();
+  await warmup.goto(`${base}/races/gothenburg-marathon`, {
+    waitUntil: "networkidle",
+    timeout: 90_000,
+  });
+  await warmup.reload({ waitUntil: "networkidle", timeout: 90_000 });
+  await warmup.close();
   for (const width of [1280, 390]) {
     const page = await browser.newPage({ viewport: { width, height: 844 } });
     // The first browser load includes cold Vite dependency optimisation and reload.
