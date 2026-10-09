@@ -28,9 +28,10 @@ const CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT = "2026-10-05";
 const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
 const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
 const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
+const CURRENT_NEW_EVENT_SCAN_CHECKED_AT = "2026-10-09";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 71;
-const NEW_EDITION_COUNT = 74;
+const NEW_SERIES_COUNT = 75;
+const NEW_EDITION_COUNT = 78;
 const EXISTING_SERIES_EDITION_COUNT = 46;
 
 async function loadModule(input) {
@@ -63,7 +64,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  58,
+  62,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -190,6 +191,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_SITEMAP_REFRESH_CHECKED_AT,
         CURRENT_PERMIT_REFRESH_CHECKED_AT,
         CURRENT_SERIES_REFRESH_CHECKED_AT,
+        CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -630,6 +632,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_SITEMAP_REFRESH_CHECKED_AT,
         CURRENT_PERMIT_REFRESH_CHECKED_AT,
         CURRENT_SERIES_REFRESH_CHECKED_AT,
+        CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -737,6 +740,75 @@ assert.equal(
   "https://www.entrycentral.com/kelpieshalfmarathon",
   "Kelpies does not expose the current official registration source",
 );
+
+const newRunThroughRaces = [
+  {
+    slug: "media-city-half-marathon-february-2027",
+    name: "Media City Half Marathon 2027",
+    date: "2027-02-21",
+    startTime: "09:00",
+    source: "https://www.runthrough.co.uk/event/media-city-half-marathon-february-2027",
+    priceAmount: 42,
+    distances: ["Half"],
+  },
+  {
+    slug: "birmingham-running-festival-february-2027",
+    name: "Birmingham Running Festival 5K, 10K, Half Marathon & Juniors 2027",
+    date: "2027-02-07",
+    startTime: "09:30",
+    source: "https://www.runthrough.co.uk/event/birmingham-running-festival-february-2027",
+    priceAmount: 34,
+    distances: ["Half", "10K", "5K"],
+  },
+  {
+    slug: "leeds-running-festival-march-2027",
+    name: "Leeds Running Festival 5K, 10K, Half Marathon & Juniors 2027",
+    date: "2027-03-28",
+    startTime: "09:00",
+    source: "https://www.runthrough.co.uk/event/leeds-running-festival-march-2027",
+    priceAmount: 34,
+    distances: ["Half", "10K", "5K"],
+  },
+  {
+    slug: "run-gatwick-half-marathon-5k-november-2027",
+    name: "Run Gatwick Half Marathon & 5K 2027",
+    date: "2027-11-21",
+    startTime: "09:00",
+    source: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    priceAmount: 38,
+    distances: ["Half", "5K"],
+  },
+];
+for (const expected of newRunThroughRaces) {
+  const series = dailyHalfTenMileSeries.find((item) => item.slug === expected.slug);
+  const editions = catalogue.editions.filter(
+    (edition) =>
+      edition.seriesSlug === expected.slug &&
+      edition.date === expected.date &&
+      edition.distance === "Half",
+  );
+  assert(series, `${expected.slug} is missing from the published series`);
+  assert.equal(series.name, expected.name, `${expected.slug} has the wrong canonical name`);
+  assert.deepEqual(series.distances, expected.distances, `${expected.slug} lost its race programme`);
+  assert.equal(
+    normalizeUrl(series.source_url),
+    normalizeUrl(expected.source),
+    `${expected.slug} lost official provenance`,
+  );
+  assert.equal(editions.length, 1, `${expected.slug}|${expected.date} must remain one edition`);
+  assert.equal(editions[0].startTime, expected.startTime, `${expected.slug} has the wrong start`);
+  assert.equal(editions[0].entryUrl, expected.source, `${expected.slug} lost safe open entry`);
+  assert.equal(
+    editions[0].entryOptions?.[0]?.checkedAt,
+    CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    `${expected.slug} entry provenance is stale`,
+  );
+  assert.equal(
+    editions[0].entryOptions?.[0]?.priceAmount,
+    expected.priceAmount,
+    `${expected.slug} lost its half-marathon price`,
+  );
+}
 
 const heatonSeriesSlug = "run-heaton-park-half-marathon-march-2027";
 const heatonSeries = catalogue.seriesList.find((series) => series.slug === heatonSeriesSlug);
@@ -1802,5 +1874,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (56 half marathons and 15 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (60 half marathons and 15 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
 );

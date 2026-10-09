@@ -28,6 +28,7 @@ const CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT = "2026-10-05";
 const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
 const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
 const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
+const CURRENT_NEW_EVENT_SCAN_CHECKED_AT = "2026-10-09";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -58,6 +59,85 @@ type RaceSeed = {
 };
 
 const seeds: RaceSeed[] = [
+  {
+    slug: "media-city-half-marathon-february-2027",
+    name: "Media City Half Marathon 2027",
+    date: "2027-02-21",
+    distance: "Half",
+    startTime: "09:00",
+    country: "England",
+    county: "Greater Manchester",
+    city: "Salford",
+    area: "MediaCity Piazza, Salford Quays and Eccles",
+    surface: "Road",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/media-city-half-marathon-february-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/media-city-half-marathon-february-2027",
+    priceAmount: 42,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the road-closed half marathon on 21 February 2027, its 09:00 start and open £42 entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
+  },
+  {
+    slug: "birmingham-running-festival-february-2027",
+    name: "Birmingham Running Festival 5K, 10K, Half Marathon & Juniors 2027",
+    date: "2027-02-07",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "West Midlands",
+    city: "Sutton Coldfield",
+    area: "Sutton Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/birmingham-running-festival-february-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/birmingham-running-festival-february-2027",
+    priceAmount: 34,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the half marathon, 10K, 5K and junior programme on 7 February 2027, its 09:30 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
+  },
+  {
+    slug: "leeds-running-festival-march-2027",
+    name: "Leeds Running Festival 5K, 10K, Half Marathon & Juniors 2027",
+    date: "2027-03-28",
+    distance: "Half",
+    startTime: "09:00",
+    country: "England",
+    county: "West Yorkshire",
+    city: "Leeds",
+    area: "Roundhay Park",
+    surface: "Mixed",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/leeds-running-festival-march-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/leeds-running-festival-march-2027",
+    priceAmount: 34,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the half marathon, 10K, 5K and junior programme on 28 March 2027, its 09:00 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
+  },
+  {
+    slug: "run-gatwick-half-marathon-5k-november-2027",
+    name: "Run Gatwick Half Marathon & 5K 2027",
+    date: "2027-11-21",
+    distance: "Half",
+    startTime: "09:00",
+    country: "England",
+    county: "West Sussex",
+    city: "Crawley",
+    area: "Southgate Park, Crawley and roads near Gatwick Airport",
+    surface: "Road",
+    distances: ["Half", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    priceAmount: 38,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the half marathon and 5K on 21 November 2027, its 09:00 half start and open £38 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
+  },
   {
     slug: "trim-10-mile-road-race-2027",
     name: "Nally's SuperValu Trim 10 Mile Road Race 2027",
