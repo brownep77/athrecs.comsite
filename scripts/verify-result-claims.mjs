@@ -30,7 +30,9 @@ for (const functionName of ["submitResultClaim", "listMyResultClaims", "withdraw
   const definition = api.slice(start, nextExport === -1 ? undefined : nextExport);
   assert.match(
     definition,
-    /middleware\(\[authMiddleware\]\)/,
+    functionName === "submitResultClaim"
+      ? /middleware\(\[privateClaimMiddleware, authMiddleware\]\)/
+      : /middleware\(\[authMiddleware\]\)/,
     `${functionName} must require a user`,
   );
 }
