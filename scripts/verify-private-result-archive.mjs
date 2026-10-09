@@ -69,7 +69,7 @@ const claimableStart = claimsApi.indexOf("export const getClaimableResult");
 assert.notEqual(claimableStart, -1);
 assert.match(
   claimsApi.slice(claimableStart, claimableStart + 400),
-  /middleware\(\[authMiddleware\]\)/,
+  /middleware\(\[privateClaimMiddleware, authMiddleware\]\)/,
 );
 assert.match(claimsApi, /canAccessClaimCandidate/);
 assert.match(claimsApi, /Result not available to this account/);
