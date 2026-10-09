@@ -21,10 +21,13 @@ export function SourcePerformanceHistory({
       history.performances.map((row, index) => ({
         ...row,
         key: `${history.provider}:${history.externalId}:${index}`,
-        credit: resultCredit(row.sourceUrls[0] || (row.verificationStatus ? null : history.sourceUrl), row.providerName || history.provider),
+        credit: resultCredit(
+          row.sourceUrls[0] || (row.verificationStatus ? null : history.sourceUrl),
+          row.providerName || history.provider,
+        ),
       })),
     )
-    .filter(row => !row.profileExcluded)
+    .filter((row) => !row.profileExcluded)
     .sort((a, b) => b.year - a.year || b.date.localeCompare(a.date));
   const years = [...new Set(rows.map((row) => row.yearLabel || String(row.year)))].sort().reverse();
   const disciplines = [...new Set(rows.map((row) => row.discipline))].sort();
@@ -161,7 +164,10 @@ export function SourcePerformanceHistory({
               (row) => (
                 <tr role="row" key={row.key} className="hover:bg-elevated/50">
                   <td role="cell" data-label="Date" className="whitespace-nowrap px-3 py-2 text-xs">
-                    {row.dateLabel || (row.date ? formatRaceDateShort(row.date) : row.yearLabel || String(row.year))}
+                    {row.dateLabel ||
+                      (row.date
+                        ? formatRaceDateShort(row.date)
+                        : row.yearLabel || String(row.year))}
                   </td>
                   <td role="cell" data-label="Discipline" className="whitespace-nowrap px-3 py-2">
                     {row.discipline}
@@ -171,10 +177,14 @@ export function SourcePerformanceHistory({
                     className="whitespace-pre-line px-3 py-2 font-semibold tabular-nums"
                   >
                     {row.performance || "Not recorded"}
-                    {row.verificationStatus === "unverified" ? <span className="block text-xs font-normal text-muted">Added by AthRecs · Unverified</span> : null}
+                    {row.verificationStatus === "unverified" ? (
+                      <span className="block text-xs font-normal text-muted">
+                        Added by AthRecs · Unverified
+                      </span>
+                    ) : null}
                     {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
                     <ResultDisqualification decision={row.disqualification} />
-                    {row.credit ? (
+                    {showEvidence && row.credit ? (
                       <a
                         href={row.credit.url}
                         target="_blank"
@@ -202,7 +212,11 @@ export function SourcePerformanceHistory({
                   </td>
                   <td role="cell" data-label="Meeting" className="min-w-52 px-3 py-2">
                     {row.meeting}
-                    {row.notes ? <p className="mt-1 max-w-prose whitespace-normal text-xs text-muted">{row.notes}</p> : null}
+                    {row.notes ? (
+                      <p className="mt-1 max-w-prose whitespace-normal text-xs text-muted">
+                        {row.notes}
+                      </p>
+                    ) : null}
                   </td>
                   <td role="cell" data-label="Venue" className="px-3 py-2">
                     {row.venue}

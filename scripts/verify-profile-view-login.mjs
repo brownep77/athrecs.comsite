@@ -221,11 +221,96 @@ try {
     verificationStatus: "unverified",
     profileExcluded: false,
   };
+  const performances = [
+    performance,
+    {
+      ...performance,
+      year: 2026,
+      date: "2026-04-26",
+      discipline: "Marathon",
+      performance: "3:20:14",
+      meeting: "Synthetic spring marathon",
+    },
+    {
+      ...performance,
+      year: 2010,
+      date: "2010-12-12",
+      discipline: "60m",
+      performance: "7.95i",
+      meeting: "Synthetic indoor games",
+    },
+    {
+      ...performance,
+      year: 2009,
+      date: "2009-09-19",
+      discipline: "Long Jump",
+      performance: "4.64",
+      meeting: "Synthetic field games",
+    },
+    {
+      ...performance,
+      year: 2010,
+      date: "2010-05-30",
+      discipline: "100m",
+      performance: "12.63w",
+      wind: "2.1",
+      meeting: "Synthetic wind-assisted sprint",
+    },
+    {
+      ...performance,
+      year: 2009,
+      date: "2009-09-19",
+      discipline: "Pentathlon U15W",
+      performance: "2290",
+      meeting: "Synthetic combined events",
+    },
+    {
+      ...performance,
+      year: 2012,
+      yearLabel: "2011 / 2012",
+      date: "",
+      dateLabel: "29 Jan · 2011 / 2012",
+      discipline: "60m",
+      performance: "8.04i",
+      meeting: "Synthetic uncertain-year games",
+    },
+    {
+      ...performance,
+      year: 2013,
+      date: "2013-05-18",
+      discipline: "Women 4x100m relay",
+      performance: "51.00",
+      meeting: "Synthetic relay",
+    },
+    {
+      ...performance,
+      year: 2013,
+      date: "2013-05-18",
+      discipline: "200m",
+      performance: "27.65",
+      meeting: "Synthetic track games",
+    },
+    {
+      ...performance,
+      year: 2007,
+      date: "2007-08-25",
+      discipline: "Shot 2.72K",
+      performance: "5.69",
+      meeting: "Synthetic shot put",
+    },
+  ];
+  const [recordedEvent] = await sql`insert into events(slug,name,sport,city,country,surface)
+    values ('published-history-marathon','Synthetic city marathon','Running','Synthetic city','United Kingdom','Road') returning id`;
+  const [recordedEdition] =
+    await sql`insert into editions(event_id,event_date,distance_code,distance_km)
+    values (${recordedEvent.id},'2026-09-27','Marathon',42.195) returning id`;
+  await sql`insert into results(athlete_id,edition_id,finish_time_seconds,chip_time_seconds,status,result_visibility,source_url)
+    values (${publishedAthlete.id},${recordedEdition.id},11166,11166,'finished','public','https://example.test/recorded-result')`;
   const historyKey = "AthRecs additions:public-history-test";
   await sql`insert into athlete_source_histories
     (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
     values (${publishedAthlete.id},'AthRecs additions','public-history-test','https://example.test/result',
-      now(),true,array[2025],array[2025],${JSON.stringify([performance, { ...performance, performance: "Hidden mark sentinel", profileExcluded: true }])}::jsonb,now())`;
+      now(),true,array[2025],array[2025],${JSON.stringify([...performances, { ...performance, performance: "Hidden mark sentinel", profileExcluded: true }])}::jsonb,now())`;
   assert.equal(
     await publicRead("published-history-fixture"),
     null,
@@ -236,7 +321,12 @@ try {
       ${JSON.stringify({ athleteId: publishedAthlete.id, athleteConsentRecorded: false })}::jsonb,'Synthetic explicit publication approval')`;
   const publicProfile = await publicRead("published-history-fixture");
   assert.equal(publicProfile.athlete.display_name, "Published History Athlete");
-  assert.equal(publicProfile.sourceHistories[0].performances.length, 1);
+  assert.equal(publicProfile.sourceHistories[0].performances.length, 10);
+  assert.deepEqual(
+    publicProfile.sourceHistories[0].performances[0].sourceUrls,
+    performance.sourceUrls,
+    "Original evidence is retained",
+  );
   for (const secret of [
     "Private biography sentinel",
     "Private city sentinel",
@@ -258,13 +348,29 @@ try {
     assert.equal($("h1").text(), "Published History Athlete");
     assert(!html.includes("Sign in to view athlete profiles"));
     assert(!html.includes("Forbidden: cross-site request blocked"));
-    assert(
-      $("details[open]").filter(
-        (_, e) => $(e).find("summary").first().text() === "Performance history",
-      ).length === 1,
+    assert.equal($("#performance-history").length, 0, "No separate section for additions");
+    assert.equal($("#results-history tbody tr").length, 11);
+    assert.equal($("#results-history tr[data-history-result]").length, 10);
+    assert($("#results-history h2").text().includes("Results history 11"));
+    assert($("#results-history tbody tr").first().text().includes("Synthetic city marathon"));
+    assert($("#results-history tbody tr").eq(1).text().includes("Synthetic spring marathon"));
+    assert($("#results-history").text().includes("19:34(19:38)"));
+    assert($("#results-history").text().includes("4.64 m"));
+    assert($("#results-history").text().includes("2290 pts"));
+    assert($("#results-history").text().includes("Wind 2.1 m/s"));
+    assert($("#results-history").text().includes("29 Jan · 2011 / 2012"));
+    assert.equal($("#results-history a[href^='https://example.test']").length, 0);
+    assert.equal(
+      $("#results-history tr[data-history-result] [aria-label='Personal best']").length,
+      0,
     );
-    assert($.text().includes("19:34(19:38)"));
-    assert($.text().includes("1 performance"));
+    assert.deepEqual(
+      $("select[aria-label=Sport] option")
+        .toArray()
+        .map((e) => $(e).text()),
+      ["All sports", "Athletics", "Running"],
+    );
+    assert($.text().includes("11 performances"));
   }
   if (process.env.ATHRECS_BROWSER_MODULE) {
     const { chromium } = createRequire(import.meta.url)(process.env.ATHRECS_BROWSER_MODULE);
@@ -288,8 +394,30 @@ try {
             .count(),
           0,
         );
-        assert.equal(await page.locator("#performance-history").getAttribute("open"), "");
-        assert((await page.locator("#performance-history").innerText()).includes("19:34(19:38)"));
+        const history = page.locator("#results-history");
+        assert.equal(await history.locator("tbody tr").count(), 11);
+        await page.getByText("Show all 11 results", { exact: true }).click();
+        assert.equal(await history.locator("tbody tr:visible").count(), 11);
+        assert.equal(await history.locator("a[href^='https://example.test']").count(), 0);
+        await page.getByRole("combobox", { name: "Sport", exact: true }).selectOption("Athletics");
+        assert.equal(await history.locator("tbody tr").count(), 8);
+        assert((await history.innerText()).includes("4.64 m"));
+        await page.getByRole("combobox", { name: "Year", exact: true }).selectOption("2011 / 2012");
+        assert.equal(await history.locator("tbody tr").count(), 1);
+        assert((await history.innerText()).includes("29 Jan · 2011 / 2012"));
+        await page.getByRole("combobox", { name: "Year", exact: true }).selectOption("");
+        await page.getByRole("combobox", { name: "Sport", exact: true }).selectOption("");
+        await page.getByRole("textbox", { name: "Search results", exact: true }).fill("Long Jump");
+        assert.equal(await history.locator("tbody tr").count(), 1);
+        assert((await history.innerText()).includes("4.64 m"));
+        await page.getByRole("textbox", { name: "Search results", exact: true }).fill("");
+        await page.getByRole("combobox", { name: "Sport", exact: true }).selectOption("Running");
+        assert.equal(await history.locator("tbody tr").count(), 3);
+        assert.equal(
+          await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),
+          false,
+          "No horizontal page overflow",
+        );
         assert.equal(
           (await context.cookies()).filter((cookie) => cookie.name.includes("session_token"))
             .length,
@@ -298,7 +426,7 @@ try {
         await context.close();
       }
       console.log(
-        "PASS: signed-out desktop and mobile browsers retain the visible, expanded history after hydration.",
+        "PASS: signed-out desktop and mobile browsers show one results history, working sport/year/search filters, all rows and no public source links.",
       );
     } finally {
       await browser.close();
@@ -322,7 +450,7 @@ try {
   assert.equal(limitedProfile.athlete.club, null);
   assert.equal(limitedProfile.athlete.club_slug, null);
   console.log(
-    "PASS: approved history renders anonymously with expanded results; unapproved/private profiles, personal fields, owner withdrawals and removed marks remain protected.",
+    "PASS: approved history renders anonymously in the main results table; unapproved/private profiles, personal fields, owner withdrawals and removed marks remain protected.",
   );
   await post("sign-out", {}, token);
   await assert.rejects(
