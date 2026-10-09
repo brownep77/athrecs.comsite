@@ -81,6 +81,10 @@ file(
 const aliases = {
   "@/lib/athlete-link/api": api,
   "@/lib/athlete-workspace/api": workspace,
+  "@/lib/athlete-workspace/admin-history-api": file(
+    "history-api.js",
+    "export async function getStaffPerformanceHistory(){return [];}export async function getOwnedPerformanceHistory(){return [];}export async function excludeOwnedPerformance(){throw Error('No history mutations in this fixture');}",
+  ),
   "@/lib/staff-results-upload/api": upload,
   "@/lib/athrecs/staff-athlete-directory-api": directory,
   "@/lib/athrecs/profile-edit-suggestions-api": suggestions,
