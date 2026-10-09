@@ -239,7 +239,7 @@ function AthleteContent() {
   const otherHistories = sourceHistories
     .map((history) => ({
       ...history,
-      performances: history.performances.filter((row) => row.verificationStatus !== "unverified"),
+      performances: history.performances.filter((row) => row.verificationStatus === undefined),
     }))
     .filter((history) => history.performances.length > 0);
   const profileSports = [

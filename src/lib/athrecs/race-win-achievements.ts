@@ -177,7 +177,12 @@ export function buildRaceWinAchievements(
   }
   for (const history of histories)
     for (const row of history.performances) {
-      if (row.profileExcluded || row.verificationStatus === "unverified") continue;
+      if (
+        row.profileExcluded ||
+        row.verificationStatus === "unverified" ||
+        row.verificationStatus === "verified_by_administrator"
+      )
+        continue;
       const distance = winDistance(row.discipline, 0, /^triathlon/i.test(row.discipline));
       if (!distance) continue;
       const sport = /^triathlon/i.test(row.discipline) ? "Triathlon" : "Running";
