@@ -93,7 +93,12 @@ try {
       { waitUntil: "networkidle" },
     );
     const dialog = page.getByRole("dialog");
-    await dialog.getByRole("button", { name: "Continue with Google", exact: true }).waitFor();
+    await dialog
+      .getByRole("button", {
+        name: delivery && !runrecs ? "Send me a code" : "Continue with Google",
+        exact: true,
+      })
+      .waitFor();
     return dialog;
   };
   let dialog = await open();
@@ -104,7 +109,7 @@ try {
       runrecs ? 2 : 1,
     );
     assert.equal(
-      await dialog.getByRole("button", { name: "Continue with email", exact: true }).count(),
+      await dialog.getByRole("button", { name: "Send me a code", exact: true }).count(),
       0,
     );
     assert.equal(await dialog.getByRole("button", { name: "Forgotten your password?" }).count(), 0);
@@ -123,12 +128,11 @@ try {
     await page.route("**/api/auth/sign-in/social", (route) =>
       route.fulfill({ status: 200, contentType: "application/json", body: "{}" }),
     );
+    await dialog.getByRole("button", { name: "Other ways to sign in" }).click();
     await dialog.getByRole("button", { name: "Continue with Google", exact: true }).click();
     await check("Malformed provider response leaves an actionable error", async () => {
       await dialog.getByRole("alert").waitFor({ timeout: 10000 });
-      assert(
-        await dialog.getByRole("button", { name: "Continue with email", exact: true }).isEnabled(),
-      );
+      assert(await dialog.getByRole("button", { name: "Send me a code", exact: true }).isEnabled());
     });
     await page.unroute("**/api/auth/sign-in/social");
     dialog = await open();
@@ -158,6 +162,7 @@ try {
       body: JSON.stringify({ email: legacyEmail, password: legacyPassword }),
     });
     assert.equal(legacyLogin.status, 200, "The server accepts the existing credential");
+    await dialog.getByRole("button", { name: "Other ways to sign in" }).click();
     await dialog.getByRole("button", { name: "Use a password instead" }).click();
     await dialog.getByLabel("Email address", { exact: true }).fill(legacyEmail);
     await dialog.getByLabel("Password", { exact: true }).fill(legacyPassword);
@@ -170,21 +175,18 @@ try {
     assert.equal(await dialog.getByRole("heading", { name: "Welcome to AthRecs" }).count(), 1);
     assert.equal(await dialog.getByRole("textbox").count(), 1);
     assert.equal(await dialog.locator('input[type="password"],input[type="date"]').count(), 0);
-    assert.equal(
-      await dialog.getByRole("checkbox", { name: /Find my race results/ }).isChecked(),
-      false,
-    );
+    assert.equal(await dialog.getByRole("checkbox").count(), 0);
+    assert.equal(await dialog.getByRole("button", { name: "Continue with Google" }).count(), 0);
     assert.equal(await dialog.getByRole("button", { name: "Continue with Microsoft" }).count(), 0);
-    await dialog.getByRole("button", { name: "More sign-in options" }).click();
+    await dialog.getByRole("button", { name: "Other ways to sign in" }).click();
     await dialog.getByRole("button", { name: "Continue with Microsoft" }).waitFor();
-    await dialog.getByRole("button", { name: "Fewer sign-in options" }).click();
+    await dialog.getByRole("button", { name: "Other ways to sign in" }).click();
     await page.screenshot({ path: "artifacts/quick-signin-desktop.png" });
     await page.setViewportSize({ width: 390, height: 844 });
-    assert(
-      await dialog.getByRole("button", { name: "Continue with email", exact: true }).isVisible(),
-    );
+    assert(await dialog.getByRole("button", { name: "Send me a code", exact: true }).isVisible());
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     await page.screenshot({ path: "artifacts/quick-signin-mobile.png" });
+    await dialog.getByRole("button", { name: "Other ways to sign in" }).click();
     await dialog.getByRole("button", { name: "Use a password instead" }).click();
     await dialog.getByRole("button", { name: "Forgotten your password?" }).click();
     await dialog.getByRole("button", { name: "Send password-reset link" }).waitFor();
@@ -192,14 +194,13 @@ try {
     await dialog.getByRole("tab", { name: "Create account", exact: true }).click();
     assert.equal(await dialog.locator('input[autocomplete="new-password"]').count(), 1);
     await dialog.getByRole("button", { name: "Continue with an email code" }).click();
-    await dialog.getByRole("button", { name: "Continue with email", exact: true }).waitFor();
+    await dialog.getByRole("button", { name: "Send me a code", exact: true }).waitFor();
 
     // Both code signup and an explicit signup link start with only an email.
     dialog = await open("signup");
     assert.equal(await dialog.getByRole("textbox").count(), 1);
-    await dialog.getByRole("checkbox", { name: /Find my race results/ }).check();
     await dialog.getByLabel("Email address", { exact: true }).fill("quick-runner@example.test");
-    await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
+    await dialog.getByRole("button", { name: "Send me a code", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
     assert(await dialog.getByRole("button", { name: /Resend code in/ }).isDisabled());
     const code = sent
@@ -212,9 +213,15 @@ try {
     await dialog.getByRole("alert").waitFor();
     await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
     await dialog.getByRole("button", { name: "Verify code and continue" }).click();
-    await page.waitForURL(`${origin}/athlete-account?section=potential`);
+    await page.waitForURL(`${origin}/athlete-account`);
+    await page.getByRole("heading", { name: "Your account is ready", exact: true }).waitFor();
+    assert.equal(await page.getByText(/Profile completion:/).count(), 0);
+    assert.equal(await page.locator('a[href="/athlete-account?section=privacy"]').count(), 0);
     await page.getByLabel("Name used in race results", { exact: false }).waitFor();
     await page.setViewportSize({ width: 1280, height: 900 });
+    // Optional setup can be skipped; the full account remains available.
+    await page.getByRole("link", { name: "Skip for now", exact: true }).click();
+    await page.getByRole("heading", { name: "My races", exact: true }).waitFor();
     // A draft consent choice must not be committed by the separate name form.
     await page.locator('a[href="/athlete-account?section=privacy"]').first().click();
     await page.getByRole("checkbox", { name: /Marketing emails/ }).check();
@@ -228,7 +235,7 @@ try {
     await page
       .getByLabel("Name used in race results", { exact: false })
       .fill("Quick Signup Runner");
-    await page.getByRole("button", { name: "Save name and find results", exact: true }).click();
+    await page.getByRole("button", { name: "Find my results", exact: true }).click();
     await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
     await page
       .getByRole("article")
@@ -283,12 +290,10 @@ try {
     );
     await context.clearCookies();
     dialog = await open("signup");
-    assert.equal(
-      await dialog.getByRole("checkbox", { name: /Find my race results/ }).isChecked(),
-      false,
-    );
+    assert.equal(await dialog.getByRole("checkbox").count(), 0);
+    assert.equal(await dialog.getByRole("button", { name: "Continue with Google" }).count(), 0);
     await dialog.getByLabel("Email address", { exact: true }).fill("skip-results@example.test");
-    await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
+    await dialog.getByRole("button", { name: "Send me a code", exact: true }).click();
     await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
     const skipCode = sent
       .findLast((mail) => mail.to.includes("skip-results@example.test"))
@@ -296,10 +301,12 @@ try {
     await dialog.getByLabel("Six-digit code", { exact: true }).fill(skipCode);
     await dialog.getByRole("button", { name: "Verify code and continue" }).click();
     await page.waitForURL(`${origin}/athlete-account`);
+    await page.getByRole("heading", { name: "Your account is ready", exact: true }).waitFor();
+    await page.getByRole("link", { name: "Skip for now", exact: true }).click();
     await page.getByRole("heading", { name: "My races", exact: true }).waitFor();
     assert.equal(await page.getByLabel("Name used in race results", { exact: false }).count(), 0);
     console.log(
-      "PASS: email-only signup, wrong/correct codes, mobile layout, optional result discovery, name capture, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
+      "PASS: two-step email-only signup, wrong/correct codes, mobile layout, optional result discovery, name capture, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
     );
   }
   assert.deepEqual(errors, []);

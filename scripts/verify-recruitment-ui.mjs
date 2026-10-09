@@ -56,7 +56,7 @@ try {
   await page.getByRole("button", { name: "Create my profile with email", exact: true }).click();
   const dialog = page.getByRole("dialog");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
-  await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
+  await dialog.getByRole("button", { name: "Send me a code", exact: true }).click();
   await dialog.getByLabel("Six-digit code", { exact: true }).waitFor();
   const code = sent.at(-1)?.text.match(/\b([0-9]{6})\b/)?.[1];
   assert(code, "The actual email adapter receives the sign-in code");

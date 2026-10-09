@@ -3,6 +3,7 @@ import { Loader2, LogIn, UserRound } from "lucide-react";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { cn } from "@/lib/utils";
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 
 export function AthleteAccountAccess({ compact = false }: { compact?: boolean }) {
   const { user, isPending } = useCurrentUserState();
@@ -53,7 +54,7 @@ export function AthleteAccountAccess({ compact = false }: { compact?: boolean })
       aria-label="Sign in or create an athlete account"
     >
       <LogIn className="size-4" aria-hidden="true" />
-      {compact ? null : <span>Sign in</span>}
+      {compact ? null : <span>{IS_ATHRECS_SITE ? "Join / sign in" : "Sign in"}</span>}
     </button>
   );
 }
