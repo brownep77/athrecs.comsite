@@ -4,8 +4,8 @@ Checked through 9 October 2026 for the catalogue horizon ending 31 December 2027
 
 ## Published coverage
 
-- Added 71 officially verified series: 56 half marathons and 15 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
-- Added 44 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
+- Added 72 officially verified series: 57 half marathons and 15 ten-mile races across England, Scotland, Wales, Northern Ireland and Ireland.
+- Added 45 verified editions to existing canonical cards rather than creating duplicate race series, and refreshed existing editions in place when their dates were already represented.
 - Used organiser, club or direct-registration pages for every published date and entry route.
 - Preserved Cambridge as `TBC` without a checkout because the organiser has announced the date but has not opened general entry.
 - Burnsall, Kettlewell and Malham now use the live official Due North series checkout.
@@ -175,3 +175,12 @@ RunThrough's official Heaton Park pages consistently confirm four additional 202
 ## 9 October 2026 scan
 
 RunThrough's newly indexed official pages consistently confirm four missing 2027 half-marathon events with live entry: Birmingham Running Festival on 7 February at 09:30 (£34), Media City on 21 February at 09:00 (£42), Leeds Running Festival on 28 March at 09:00 (£34), and Run Gatwick on 21 November at 09:00 (£38). Birmingham and Leeds retain their same-day 10K, 5K and junior programmes on one card, while Gatwick retains its 5K alongside the half marathon. Each downstream half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is used as the safe entry destination until RunThrough corrects those links.
+
+
+## 9 October 2026 second scan
+
+The official SiEntries page announced Settle Saunter for 23 May 2027, with timed walking or running over 23 miles, a half marathon and 10K. The half fee is £28; checkout and a single start time remain hidden until entries open on 2 December 2026 because the organiser publishes a staggered 09:00–10:00 window.
+
+The Edinburgh Running Festival half marathon on 1 August 2027 at 10:00 was added to the existing canonical card with open £36 entry. The organiser page is retained as the safe entry destination because its downstream checkout currently redirects to an unrelated Blackburn race.
+
+Victoria Park, North Lincolnshire, Newmarket and Chepstow were rejected as additions because their canonical cards or editions already exist.
