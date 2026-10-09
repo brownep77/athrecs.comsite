@@ -60,66 +60,6 @@ type RaceSeed = {
 
 const seeds: RaceSeed[] = [
   {
-    slug: "birmingham-running-festival-february-2027",
-    name: "Birmingham Running Festival 5K, 10K, Half Marathon & Juniors 2027",
-    date: "2027-02-07",
-    distance: "Half",
-    startTime: "09:30",
-    country: "England",
-    county: "West Midlands",
-    city: "Sutton Coldfield",
-    area: "Sutton Park",
-    surface: "Road",
-    distances: ["Half", "10K", "5K"],
-    organiser: "RunThrough Events",
-    url: "https://www.runthrough.co.uk/event/birmingham-running-festival-february-2027",
-    entryUrl: "https://www.runthrough.co.uk/event/birmingham-running-festival-february-2027",
-    priceAmount: 34,
-    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
-    notes:
-      "The official organiser page consistently confirms the half marathon, 10K, 5K and junior programme on 7 February 2027, its 09:30 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
-  },
-  {
-    slug: "leeds-running-festival-march-2027",
-    name: "Leeds Running Festival 5K, 10K, Half Marathon & Juniors 2027",
-    date: "2027-03-28",
-    distance: "Half",
-    startTime: "09:00",
-    country: "England",
-    county: "West Yorkshire",
-    city: "Leeds",
-    area: "Roundhay Park",
-    surface: "Mixed",
-    distances: ["Half", "10K", "5K"],
-    organiser: "RunThrough Events",
-    url: "https://www.runthrough.co.uk/event/leeds-running-festival-march-2027",
-    entryUrl: "https://www.runthrough.co.uk/event/leeds-running-festival-march-2027",
-    priceAmount: 34,
-    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
-    notes:
-      "The official organiser page consistently confirms the half marathon, 10K, 5K and junior programme on 28 March 2027, its 09:00 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
-  },
-  {
-    slug: "run-gatwick-half-marathon-5k-november-2027",
-    name: "Run Gatwick Half Marathon & 5K 2027",
-    date: "2027-11-21",
-    distance: "Half",
-    startTime: "09:00",
-    country: "England",
-    county: "West Sussex",
-    city: "Crawley",
-    area: "Southgate Park, Crawley and roads near Gatwick Airport",
-    surface: "Road",
-    distances: ["Half", "5K"],
-    organiser: "RunThrough Events",
-    url: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
-    entryUrl: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
-    priceAmount: 38,
-    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
-    notes:
-      "The official organiser page consistently confirms the half marathon and 5K on 21 November 2027, its 09:00 half start and open £38 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
-  },
-  {
     slug: "trim-10-mile-road-race-2027",
     name: "Nally's SuperValu Trim 10 Mile Road Race 2027",
     date: "2027-01-31",
@@ -1493,6 +1433,19 @@ type ExistingSeriesEditionSeed = {
 };
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  {
+    seriesSlug: "runthrough-gatwick-november-2027",
+    date: "2027-11-21",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    publishAllDistances: true,
+    priceAmount: 38,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the half marathon and 5K on 21 November 2027, its 09:00 half start and open £38 half entry. The downstream half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Run Gatwick 5K card is enriched.",
+  },
   ...[
     ["2027-01-17", "january"],
     ["2027-05-02", "may"],
@@ -2432,6 +2385,23 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "runthrough-gatwick-november-2027": {
+    name: "Run Gatwick Half Marathon & 5K",
+    country: "England",
+    county: "West Sussex",
+    city: "Crawley",
+    area: "Southgate Park, Crawley and roads near Gatwick Airport",
+    surface: "Road",
+    distances: ["Half", "5K"],
+    summary: "Run Gatwick Half Marathon & 5K — a road race from central Crawley towards Gatwick Airport.",
+    description:
+      "RunThrough's Run Gatwick event offers a road half marathon and 5K from Southgate Park through Crawley and roads near Gatwick Airport; the established 5K card now carries the verified half-marathon edition.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    defaultStartTime: "09:00",
+  },
   "run-heaton-park-half-marathon-march-2027": {
     name: "Run Heaton Park 5K, 10K, Half Marathon & Junior Race",
     country: "England",
