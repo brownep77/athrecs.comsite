@@ -1,3 +1,4 @@
+import { SourcePerformanceHistory } from "./SourcePerformanceHistory";
 import { CountryFlag } from "./CountryFlag";
 import { ProfileRecordHighlights } from "./ProfileAchievements";
 import { CompactResults } from "./CompactResultsTable";
@@ -89,6 +90,7 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
       </section>
       <ProfileRecordHighlights results={profile.results} />
       <CompactResults results={profile.results} />
+      {profile.sourceHistories?.length?<SourcePerformanceHistory histories={profile.sourceHistories}/>:null}
       <details className="rounded-lg border border-border bg-surface p-3">
         <summary className="cursor-pointer text-sm font-semibold">
           Upcoming ({profile.upcoming.length})
