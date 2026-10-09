@@ -6,4 +6,8 @@ This route preserves sprint precision, field marks, qualifiers, year-only record
 
 The linked athlete can remove or restore each entry in `/athlete-results`. Public reads filter excluded entries and honor profile/result sharing. Removal retains the original source record and writes an audit event. Ordinary staff cannot reverse an account owner's removal through that endpoint. Replaying a publication ID does not restore excluded entries.
 
+Additional performances appear in the main Results history alongside recorded race results, using the same desktop table and mobile cards. The sport and year filters include these entries; track, field, combined events and relays are labelled Athletics, while road distances are labelled Running. Original marks, wind readings, indoor annotations and uncertain date labels are retained. Field marks display metres and combined-event scores display points. Unverified additions remain separate from the numeric race-result model and from verified PB calculations.
+
+At the site owner's request, result source links are hidden on the public history display. Source URLs and provider names remain in the stored history and evidence views. This is a presentation change, not deletion of provenance, a verification decision or a change to athlete removal controls.
+
 No participant data or publication payloads belong in this repository. Run `npm run verify:athlete-publication` for the synthetic database checks.

@@ -11,6 +11,7 @@ import {
   EditorialAthleteOverview,
   EditorialRoadSplits,
 } from "@/components/athletes/EditorialAthleteOverview";
+import { additionalHistoryResults } from "@/lib/athrecs/profile-history-results";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
 import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
@@ -233,6 +234,20 @@ function AthleteContent() {
   }
 
   const { athlete, results, profileResults, upcoming, sourceHistories } = data;
+  const historyResults = additionalHistoryResults(sourceHistories);
+  const otherHistories = sourceHistories
+    .map((history) => ({
+      ...history,
+      performances: history.performances.filter((row) => row.verificationStatus !== "unverified"),
+    }))
+    .filter((history) => history.performances.length > 0);
+  const profileSports = [
+    ...new Set([
+      ...profileResults.map((r) => r.sport),
+      ...historyResults.map((r) => r.sport),
+      ...upcoming.map((r) => r.sport),
+    ]),
+  ];
   const historicalPerformanceCount = sourceHistories.reduce(
     (total, history) => total + history.performances.length,
     0,
@@ -248,7 +263,7 @@ function AthleteContent() {
   );
   const bio = publicAthleteBio({
     name: athlete.display_name,
-    sport: profileResults[0]?.sport,
+    sport: profileSports.includes("Athletics") ? "Athletics" : profileResults[0]?.sport,
     city: athlete.city,
     country: athlete.country,
     club: athlete.club,
@@ -300,9 +315,7 @@ function AthleteContent() {
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
-          {[
-            ...new Set([...profileResults.map((r) => r.sport), ...upcoming.map((r) => r.sport)]),
-          ].map((sport) => (
+          {profileSports.map((sport) => (
             <Badge key={sport} variant="outline">
               {sport}
             </Badge>
@@ -441,8 +454,13 @@ function AthleteContent() {
         )}
 
       <section id="results-history" className="space-y-3">
-        <CompactResults results={profileResults} reportedHistory={includedHistory} claimable />
-        {sourceHistories.length ? (
+        <CompactResults
+          results={profileResults}
+          historyResults={historyResults}
+          reportedHistory={includedHistory}
+          claimable
+        />
+        {otherHistories.length ? (
           <details
             id="performance-history"
             className="rounded-lg border border-border bg-surface p-3"
@@ -450,7 +468,7 @@ function AthleteContent() {
           >
             <summary className="cursor-pointer text-sm font-semibold">Performance history</summary>
             <div className="mt-3">
-              <SourcePerformanceHistory histories={sourceHistories} />
+              <SourcePerformanceHistory histories={otherHistories} />
             </div>
           </details>
         ) : null}
