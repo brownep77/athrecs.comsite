@@ -1,7 +1,7 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { getSql, dbSource, type Sql } from "../db";
 import { IS_RUNRECS_SITE } from "../site-scope";
-import { normal, profileSchema, type ProfileFields, type DraftResult, type CandidateResult, type Batch } from "./core";
+import { normal, profileSchema, staffApprovalSchema, type ProfileFields, type DraftResult, type CandidateResult, type Batch } from "./core";
 
 type Actor = { userId: string; staff: boolean };
 const hash = (value: unknown) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
@@ -51,13 +51,27 @@ export async function workspace(athleteId: number | null, actor: Actor) {
   if(athleteId && !actor.staff && !linked.some(p=>p.id===athleteId)) throw new Error("Choose one of your linked athlete profiles.");
   const p=athleteId ? await profile(sql,athleteId) : null;
   const links=athleteId ? await owners(sql,athleteId) : [];
-  const results=athleteId ? await sql<{id:number;race:string;date:string;distance:string;time:string;excluded:boolean}>`
+  const stored=athleteId ? await sql<{id:number;race:string;date:string;distance:string;time:string;excluded:boolean;staffApproval:unknown}>`
     select r.id,e.name as race,ed.event_date::text as date,ed.distance_code as distance,
       coalesce(r.result_details->'timing'->>'finishText',case when r.finish_time_seconds is not null then
         lpad((r.finish_time_seconds/3600)::text,2,'0')||':'||lpad(((r.finish_time_seconds%3600)/60)::text,2,'0')||':'||lpad((r.finish_time_seconds%60)::text,2,'0') end,'') as time,
-      coalesce((r.result_details->>'profileExcluded')::boolean,false) as excluded
+      coalesce((r.result_details->>'profileExcluded')::boolean,false) as excluded,
+      case when ${actor.staff} then coalesce(r.result_details->'staffApproval',
+        (select jsonb_build_object('note',trim(a.before_value->>'evidenceFor'),
+          'resolution',trim(coalesce(a.before_value->>'resolution','')),
+          'approvedBy',a.actor_user_id,
+          'approvedAt',to_char(a.created_at at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'),
+          'requestId',a.entity_id)
+         from network_audit_log a where a.action='athlete.candidates_reviewed'
+          and a.entity_id=r.ingestion_run_id and a.note='publish'
+          and a.after_value->'resultIds' @> to_jsonb(array[r.id]) limit 1))
+      else null end as "staffApproval"
     from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
     where r.athlete_id=${athleteId} order by ed.event_date desc,r.id desc limit 5000` : [];
+  const results=stored.map(({staffApproval,...result})=>{
+    const approval=actor.staff?staffApprovalSchema.safeParse(staffApproval):null;
+    return approval?.success?{...result,staffApproval:approval.data}:result;
+  });
   const batches=await sql<{id:string;athlete_id:number|null;revision:number;updated_at:string;entries:CandidateResult[]}>`
     select id::text,athlete_id,revision,updated_at::text,entries from athlete_result_proposals
     where (${actor.staff} or submitted_by=${actor.userId}) and (${athleteId}::integer is null or athlete_id=${athleteId}) order by updated_at desc limit 100`;

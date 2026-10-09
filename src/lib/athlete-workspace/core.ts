@@ -27,6 +27,15 @@ export type Batch = {
   original_text: string; input_hash: string; entries: CandidateResult[]; revision: number;
   evidence_for: string; evidence_against: string; updated_at: string;
 };
+// Staff review provenance is separate from publicly displayed result details.
+export const staffApprovalSchema = z.object({
+  note: z.string().min(12).max(4000),
+  resolution: z.string().max(4000).optional(),
+  approvedBy: z.string().min(1),
+  approvedAt: z.string().min(1),
+  requestId: z.string().uuid(),
+});
+export type StaffApproval = z.infer<typeof staffApprovalSchema>;
 export type ProfileFields = {
   display_name: string; given_name: string; family_name: string; gender: string;
   source_club_name: string; city: string; county: string; country: string; bio: string;
