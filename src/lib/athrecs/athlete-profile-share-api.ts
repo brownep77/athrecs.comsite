@@ -1,3 +1,5 @@
+import { loadPublishedSourceHistories } from "./athlete-publication.server";
+import type { SourceHistory } from "./source-performance-history";
 import { profileReadMiddleware } from "@/lib/auth/profile-access";
 import { readResultDetails } from "./result-details";
 import { publicProfileDetails, type PublicProfileDetails } from "./profile-details";
@@ -37,6 +39,7 @@ export type AthleteShareInput = {
 export type SharedProfileResult = Omit<ProfileResult, "athleteName">;
 
 export type SharedAthleteProfile = {
+  sourceHistories?: SourceHistory[];
   kind: "shared-account";
   searchIndexable: boolean;
   athleteNumber: string;
@@ -330,6 +333,7 @@ async function buildPublicProfile(
   }
 
   return {
+    sourceHistories: share.share_results ? (await Promise.all(linked.map(link=>loadPublishedSourceHistories(sql,link.athlete_id)))).flat() : [],
     kind: "shared-account",
     searchIndexable: share.search_indexable === true,
     athleteNumber: identity.athlete_number,

@@ -48,6 +48,13 @@ async function rpc(file, name, data, headers) {
 }
 try {
   await server.listen();
+  const { SourcePerformanceHistory } = await server.ssrLoadModule("/src/components/athletes/SourcePerformanceHistory.tsx");
+  const uncertainMarkup = renderToStaticMarkup(createElement(SourcePerformanceHistory, {histories:[{provider:"AthRecs additions",externalId:"synthetic",sourceUrl:"https://example.test/history",capturedAt:"2026-10-09",complete:false,yearsExpected:[2012],yearsCaptured:[2012],performances:[{year:2012,yearLabel:"2011 / 2012",date:"",dateLabel:"29 Jan · 2011 / 2012",sourceDate:"29 Jan",ageGroup:"",discipline:"60m",performance:"8.04i",wind:"",place:"3",venue:"Synthetic arena",meeting:"Synthetic games",sourceUrls:[],labels:[],verificationStatus:"unverified",notes:"Year unresolved."}]}]}));
+  assert(uncertainMarkup.includes("29 Jan · 2011 / 2012"));
+  assert(uncertainMarkup.includes("8.04i"));
+  assert(uncertainMarkup.includes("Added by AthRecs"));
+  assert(uncertainMarkup.includes("Unverified"));
+  assert(!uncertainMarkup.includes('href="https://example.test/history"'), "Do not imply a missing row source links to an unrelated result");
   // Render the actual source cell with synthetic evidence. Provider credit must
   // retain the exact result URL and its fragment without creating permissions.
   const { CompactResultsTable } = await server.ssrLoadModule(
