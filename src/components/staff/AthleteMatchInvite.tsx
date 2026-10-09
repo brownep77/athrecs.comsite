@@ -258,7 +258,7 @@ export function AthleteMatchInvite({
               ) : null}
               {candidate && !candidate.blocked ? (
                 <div className="space-y-3 rounded-xl border border-border p-4">
-                  <h3 className="font-semibold">
+                  <h3 className="break-words font-semibold">
                     Invite {account.email} to check {candidate.name}
                   </h3>
                   <label className="block space-y-1 text-sm font-medium">
@@ -309,6 +309,7 @@ export function AthleteMatchInvite({
                     <Button
                       type="button"
                       variant="secondary"
+                      className="h-auto max-w-full whitespace-normal py-3"
                       disabled={busy || !reviewed || note.trim().length < 12}
                       onClick={() => void create(false)}
                     >

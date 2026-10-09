@@ -20,7 +20,7 @@ export function ClaimInvitationSharing({
       aria-label="Share claim invitation"
       className="space-y-3 rounded-lg border border-border p-3"
     >
-      <p className="text-sm font-medium">Private invitation for {email}</p>
+      <p className="break-words text-sm font-medium">Private invitation for {email}</p>
       <label className="block text-sm font-medium">
         Private claim link
         <input

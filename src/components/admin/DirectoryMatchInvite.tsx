@@ -52,7 +52,7 @@ export function DirectoryMatchInvite({
             setFilters({ q: search.trim(), page: 1 });
           }}
         >
-          <label className="min-w-0 flex-1 text-sm font-medium">
+          <label className="min-w-0 flex-1 basis-full text-sm font-medium sm:basis-auto">
             Find the athlete’s signup
             <input
               className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2"
@@ -129,7 +129,7 @@ export function DirectoryMatchInvite({
                 </p>
               ) : null}
               {query.data.total > query.data.pageSize ? (
-                <div className="flex items-center gap-3 text-sm">
+                <div className="flex flex-wrap items-center gap-3 text-sm">
                   <Button
                     type="button"
                     variant="secondary"
@@ -163,7 +163,7 @@ export function DirectoryMatchInvite({
           ) : null}
           {account ? (
             <div key={account.userId}>
-              <p className="text-sm font-medium">
+              <p className="break-words text-sm font-medium">
                 Recipient: {account.name} · {account.email}
               </p>
               <AthleteMatchInvite
