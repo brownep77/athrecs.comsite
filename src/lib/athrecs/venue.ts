@@ -43,8 +43,7 @@ export function venueForEvent(input: {
   const stored = venueDetails[input.slug];
   const nation = resolveNation(input);
   const rawAddress =
-    stored?.address ||
-    [input.area, input.city, input.county].filter(Boolean).join(", ");
+    stored?.address || [input.area, input.city, input.county].filter(Boolean).join(", ");
   const parts = rawAddress
     .split(",")
     .map((p) => p.trim())
@@ -53,7 +52,10 @@ export function venueForEvent(input: {
       const lower = p.toLowerCase();
       if (REGION_LABELS.has(lower)) return false;
       if (lower === "united kingdom" || lower === "uk") return false;
-      if (nation !== "United Kingdom" && (lower === "scotland" || lower === "england" || lower === "wales")) {
+      if (
+        nation !== "United Kingdom" &&
+        (lower === "scotland" || lower === "england" || lower === "wales")
+      ) {
         return false;
       }
       return true;
@@ -63,10 +65,13 @@ export function venueForEvent(input: {
     nation,
     address: parts.join(", ") || input.city || "Venue TBC",
     postcode: stored?.postcode ?? null,
-    parking: stored?.parking ?? (input.city ? `Public parking in ${input.city} — confirm locally` : null),
+    parking:
+      stored?.parking ?? (input.city ? `Public parking in ${input.city} — confirm locally` : null),
     busStop:
       stored?.busStop ??
-      (input.city ? `Local buses serving ${input.city} — check Traveline` : null),
+      (input.city && nation === "United Kingdom"
+        ? `Local buses serving ${input.city} — check Traveline`
+        : null),
     trainStation: stored?.trainStation ?? null,
   };
 }

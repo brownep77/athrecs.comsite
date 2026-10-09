@@ -9,6 +9,14 @@ export type FixtureDetail = {
 };
 
 export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
+  "gothenburg-marathon|2026-10-10": {
+    place: { city: "Gothenburg" },
+    summary: "A flat coastal marathon from Slottsskogsvallen in Gothenburg, Sweden.",
+    timeZone: "Europe/Stockholm",
+    sourceUrl: "https://goteborgmarathon.se/information",
+    checkedAt: "2026-10-08",
+    starts: { Marathon: { time: "10:00" } },
+  },
   "cal-tri-charlotte-triathlon|2026-10-10": {
     place: { city: "Statesville", state: "North Carolina" },
     summary: "Sprint and Olympic triathlons with an open-water swim at Lake Norman State Park.",
@@ -27,14 +35,16 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   },
   "moris-ride-run-cycling|2026-10-11": {
     place: { town: "Cascavelle" },
-    summary: "Timed 69 km and 89 km road rides from SPARC, with coastal roads and climbs towards Chamarel.",
+    summary:
+      "Timed 69 km and 89 km road rides from SPARC, with coastal roads and climbs towards Chamarel.",
     timeZone: "Indian/Mauritius",
     sourceUrl: "https://mauritiusrace.com/journee/route/",
     checkedAt: "2026-10-07",
     starts: { "69K": { time: "07:00" }, "89K": { time: "07:00" } },
   },
   "la-grande-traversee-de-l-ouest|2026-11-01": {
-    summary: "A 10 km open-water swim between Le Morne and La Preneuse, with solo and relay formats.",
+    summary:
+      "A 10 km open-water swim between Le Morne and La Preneuse, with solo and relay formats.",
     timeZone: "Indian/Mauritius",
     sourceUrl: "https://ipn.sportevents.mu/en/events/72/la-grande-traversee-de-louest",
     checkedAt: "2026-10-07",
@@ -42,7 +52,8 @@ export const FIXTURE_DETAILS: Record<string, FixtureDetail> = {
   },
   "la-iguanera-maraton-mtb|2026-11-15": {
     place: { city: "San Pedro Pochutla", state: "Oaxaca" },
-    summary: "Mountain-bike racing in Pochutla, with competitive categories and a recreational 25 km ride.",
+    summary:
+      "Mountain-bike racing in Pochutla, with competitive categories and a recreational 25 km ride.",
     timeZone: "America/Mexico_City",
     sourceUrl: "https://www.chronostart.com.mx/registrate/categorias_disponibles/526",
     checkedAt: "2026-10-07",

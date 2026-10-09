@@ -4,6 +4,8 @@ import { fixtureDistanceCode, publicHttpUrl, UK_FIXTURE_COUNTRIES } from "./spor
 import { kmFromDistanceCode } from "./distance.ts";
 import { FIXTURE_DETAILS } from "../../data/fixture-details.ts";
 import { fixtureSummary, fixtureTimeZone } from "./fixture-presentation.ts";
+import { filterCountryName, resolveCountry } from "./countries.ts";
+import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication.ts";
 
 export const SPORT_FIXTURE_PAGE_SIZE = 24;
 
@@ -39,22 +41,39 @@ export async function readSportFixtures(
 ) {
   const q = input.q ? `%${input.q.replace(/[\\%_]/g, "\\$&")}%` : null;
   const page = input.page ?? 1;
-  const country =
-    input.country === "United Kingdom"
+  const requestedCountry = input.country
+    ? filterCountryName(resolveCountry({ country: input.country }))
+    : null;
+  let country =
+    requestedCountry === "United Kingdom"
       ? [...UK_FIXTURE_COUNTRIES]
-      : input.country
-        ? [input.country]
+      : requestedCountry
+        ? [requestedCountry]
         : null;
   const options = await sql.query<{ country: string | null; distance: string | null }>(
     `select distinct btrim(e.country) as country, btrim(ed.distance_code) as distance
      from events e join editions ed on ed.event_id = e.id
      where e.sport = any($1::text[]) and ed.event_date >= $2::date
+       and not (coalesce(e.slug, '') = any($4::text[]))
        and ($3::text[] is null or e.surface = any($3::text[]))`,
-    [[...input.sports], today, input.surfaces ? [...input.surfaces] : null],
+    [
+      [...input.sports],
+      today,
+      input.surfaces ? [...input.surfaces] : null,
+      retainedFixtureAliasSlugs,
+    ],
   );
   const distanceCodes = [
     ...new Set(options.map((row) => row.distance).filter((value): value is string => !!value)),
   ];
+  const canonicalCountry = (value: string | null) =>
+    value ? filterCountryName(resolveCountry({ country: value })) : null;
+  if (country) {
+    const wanted = new Set(country.map(canonicalCountry));
+    country = options
+      .map((row) => row.country)
+      .filter((value): value is string => !!value && wanted.has(canonicalCountry(value)));
+  }
   const distance = input.distance
     ? distanceCodes.filter(
         (code) => fixtureDistanceCode(code) === fixtureDistanceCode(input.distance!),
@@ -80,6 +99,7 @@ export async function readSportFixtures(
         order by ed.start_time nulls last, ed.distance_code, ed.id)::text as starts_json
     from events e join editions ed on ed.event_id = e.id
     where e.sport = any($1::text[]) and ed.event_date >= $2::date
+      and not (coalesce(e.slug, '') = any($9::text[]))
       and ($3::text is null or e.name ilike $3 or e.city ilike $3 or e.county ilike $3 or e.country ilike $3)
       and ($6::text[] is null or e.surface = any($6::text[]))
       and ($7::text[] is null or btrim(e.country) = any($7::text[]))
@@ -97,12 +117,13 @@ export async function readSportFixtures(
       input.surfaces ? [...input.surfaces] : null,
       country,
       distance,
+      retainedFixtureAliasSlugs,
     ],
   );
   // Options cover the whole upcoming sport catalogue, not just the current page
   // or selection, so changing one filter never traps the visitor in another.
   const countries = new Set(
-    options.map((row) => row.country).filter((value): value is string => !!value),
+    options.map((row) => canonicalCountry(row.country)).filter((value): value is string => !!value),
   );
   if (UK_FIXTURE_COUNTRIES.some((value) => countries.has(value))) countries.add("United Kingdom");
   const distances = [...new Set(distanceCodes.map(fixtureDistanceCode))];
@@ -129,7 +150,7 @@ export async function readSportFixtures(
         city: detail?.place?.city ?? row.city,
         county: detail?.place?.county ?? row.county,
         state: detail?.place?.state ?? null,
-        country: row.country,
+        country: canonicalCountry(row.country),
         website: publicHttpUrl(detail?.sourceUrl ?? row.website),
         summary: fixtureSummary(detail?.summary ?? row.summary, row.sport, row.city),
         timeZone: detail?.timeZone ?? fixtureTimeZone(row.country),

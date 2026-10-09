@@ -4,6 +4,7 @@ import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { countryFlag } from "../src/lib/athrecs/country-flags.ts";
 import {
   worldAthleticsEditions as existingEditions,
   worldAthleticsSeries as existingSeries,
@@ -147,7 +148,8 @@ function isFeatured(event) {
 function normalizeEvent(event, countries) {
   const venue = cleanVenue(event.venue);
   const code = countryCodeFromVenue(event.venue);
-  const country = countries.get(code) || code || "International";
+  const rawCountry = countries.get(code) || code || "International";
+  const country = countryFlag(rawCountry).code ? countryFlag(rawCountry).name : rawCountry;
   const label = competitionLabel(event);
   const officialUrl = `${CALENDAR_URL}/results/${event.id}`;
   const dateRange = event.dateRange || `${event.startDate}–${event.endDate}`;
