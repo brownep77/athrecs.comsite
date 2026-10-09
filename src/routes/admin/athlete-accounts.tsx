@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { RegisteredAthletes } from "@/components/staff/RegisteredAthletes";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -27,6 +29,31 @@ export const Route = createFileRoute("/admin/athlete-accounts")({
 });
 
 function AdminAthleteAccountsPage() {
+  const [details, setDetails] = useState(false);
+  return (
+    <div className="space-y-5">
+      <div className="flex flex-wrap gap-2" aria-label="Account views">
+        <Button
+          variant={details ? "secondary" : "default"}
+          aria-pressed={!details}
+          onClick={() => setDetails(false)}
+        >
+          All signups and activity
+        </Button>
+        <Button
+          variant={details ? "default" : "secondary"}
+          aria-pressed={details}
+          onClick={() => setDetails(true)}
+        >
+          Saved account details
+        </Button>
+      </div>
+      {details ? <SavedAthleteAccounts /> : <RegisteredAthletes />}
+    </div>
+  );
+}
+
+function SavedAthleteAccounts() {
   const accounts = useQuery({
     queryKey: ["staff-athlete-accounts"],
     queryFn: () => listStaffAthleteAccounts(),
@@ -126,7 +153,8 @@ function AthleteAccountCard({ account }: { account: StaffAthleteAccountItem }) {
           <div className="flex flex-wrap items-center gap-2">
             <h2 className="font-display text-lg font-semibold text-fg">{account.fullName}</h2>
             <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
-              <MailCheck className="mr-1 size-3.5" aria-hidden="true" /> Verified email
+              <MailCheck className="mr-1 size-3.5" aria-hidden="true" />{" "}
+              {account.emailVerified ? "Verified email" : "Email unverified"}
             </Badge>
           </div>
           <p className="mt-1 break-all text-sm text-muted">{account.verifiedEmail}</p>

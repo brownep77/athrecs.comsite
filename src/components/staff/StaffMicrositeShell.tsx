@@ -131,7 +131,7 @@ const staffNav = [
   },
   {
     to: "/admin/athlete-accounts",
-    label: "Athlete accounts",
+    label: "Signed-up athletes",
     icon: UserRoundCog,
     match: (path: string) => path.startsWith("/admin/athlete-accounts"),
   },
@@ -229,7 +229,7 @@ export function StaffMicrositeShell({ children }: { children: React.ReactNode })
       setSignInError(null);
       try {
         // Fixed first-party destination, never an arbitrary user-supplied redirect.
-        const returnTo = pathname === "/admin/athlete-tools" ? "/admin/athlete-tools" : pathname === "/admin/check-results-upload" ? "/admin/check-results-upload" : "/admin";
+        const returnTo = pathname === "/admin/athlete-accounts" ? "/admin/athlete-accounts" : pathname === "/admin/athlete-tools" ? "/admin/athlete-tools" : pathname === "/admin/check-results-upload" ? "/admin/check-results-upload" : "/admin";
         await signIn("grok-google", {
           callbackURL: returnTo,
           errorCallbackURL: returnTo,

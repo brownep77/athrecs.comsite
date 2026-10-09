@@ -10,6 +10,10 @@ export const staffMiddleware = createMiddleware({ type: "function" })
     return next({ sendContext: { bearerToken: getBearerToken() ?? undefined } });
   })
   .server(async ({ next, context }) => {
+    const { setResponseHeader } = await import("@tanstack/react-start/server");
+    setResponseHeader("Cache-Control", "private, no-store");
+    setResponseHeader("Vary", "Cookie, Authorization");
+    setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     const { assertSameSiteRequest } = await import("./isolation.server");
     const { requireStaffUser } = await import("./staff.server");
     assertSameSiteRequest();

@@ -722,7 +722,8 @@ export const withdrawResultClaim = createServerFn({ method: "POST" })
 
 export const listStaffResultClaims = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
-  .validator((input: { status?: ResultClaimStatus | "all" } | undefined) => ({
+  .validator((input: { status?: ResultClaimStatus | "all"; claimant?: string } | undefined) => ({
+    claimant: typeof input?.claimant === "string" ? input.claimant.trim().slice(0, 200) : "",
     status:
       input?.status === "pending" ||
       input?.status === "needs_info" ||
@@ -750,10 +751,11 @@ export const listStaffResultClaims = createServerFn({ method: "GET" })
        left join athlete_account_links owner
          on owner.athlete_id = claim_data.athlete_id and owner.status = 'active'
        where ($1::text = 'all' or claim.status = $1)
+         and ($2::text = '' or claim.claimant_user_id = $2)
        order by
          case claim.status when 'pending' then 0 when 'needs_info' then 1 else 2 end,
          claim.submitted_at desc`,
-      [data.status],
+      [data.status, data.claimant],
     );
     return rows.map(mapClaim);
   });
