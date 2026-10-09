@@ -1,3 +1,4 @@
+import { AthleteMatchInvite } from "./AthleteMatchInvite";
 import { RegistrationStats } from "./RegistrationStats";
 import { AthleteContactActions } from "./AthleteContactActions";
 import { useState } from "react";
@@ -282,6 +283,7 @@ function RegistrationCard({ account }: { account: RegisteredAthlete }) {
           {[account.club, account.location].filter(Boolean).join(" · ") || "None supplied"}
         </Detail>
       </dl>
+      <AthleteMatchInvite account={account} />
       <AthleteContactActions account={account} />
     </article>
   );

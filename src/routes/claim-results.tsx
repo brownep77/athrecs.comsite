@@ -1,3 +1,4 @@
+import { declineClaimInvitation } from "@/lib/athrecs/claim-invitations-api";
 import { ProfileEventLink } from "@/components/athletes/ProfileEventLink";
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -32,11 +33,15 @@ import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { sportIsInAthleteProfileScope } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/claim-results")({
-  validateSearch: (search: Record<string, unknown>) => {
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { resultId: number | undefined; invitation?: string } => {
     const raw = search.resultId;
     const resultId = typeof raw === "number" ? raw : Number(raw);
     return {
       resultId: Number.isInteger(resultId) && resultId > 0 ? resultId : undefined,
+      invitation:
+        typeof search.invitation === "string" ? search.invitation.slice(0, 128) : undefined,
     };
   },
   head: () => ({
@@ -47,7 +52,8 @@ export const Route = createFileRoute("/claim-results")({
         content:
           "Request ownership of a matched ATHRECS result. Staff check athlete identity before adding results to your private profile.",
       },
-      { name: "robots", content: "noindex, nofollow" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+      { name: "referrer", content: "no-referrer" },
     ],
   }),
   component: ClaimResultsPage,
@@ -72,7 +78,8 @@ function statusClass(status: ResultClaimStatus): string {
 }
 
 function ClaimResultsPage() {
-  const { resultId } = Route.useSearch();
+  const { resultId, invitation } = Route.useSearch();
+  const [declined, setDeclined] = useState(false);
   const { user, isPending: sessionPending } = useCurrentUserState();
   const queryClient = useQueryClient();
   const [evidenceUrl, setEvidenceUrl] = useState("");
@@ -83,8 +90,9 @@ function ClaimResultsPage() {
   const [message, setMessage] = useState<string | null>(null);
 
   const result = useQuery({
-    queryKey: ["claimable-result", resultId],
-    queryFn: () => getClaimableResult({ data: { resultId: resultId as number } }),
+    queryKey: ["claimable-result", user?.id, resultId, invitation],
+    gcTime: 0,
+    queryFn: () => getClaimableResult({ data: { resultId: resultId as number, invitation } }),
     enabled: Boolean(user && resultId !== undefined),
     retry: false,
   });
@@ -104,12 +112,13 @@ function ClaimResultsPage() {
 
   useEffect(() => {
     setClaimCompleted(false);
+    setDeclined(false);
     setDeclaration(false);
     setMessage(null);
     setEvidenceUrl("");
     setEvidenceUrl2("");
     setEvidenceUrl3("");
-  }, [resultId]);
+  }, [resultId, invitation, user?.id]);
 
   useEffect(() => {
     if (currentClaim?.status !== "needs_info") return;
@@ -123,6 +132,7 @@ function ClaimResultsPage() {
       submitResultClaim({
         data: {
           resultId: resultId as number,
+          invitation: currentClaim ? undefined : invitation,
           evidenceUrl,
           evidenceUrl2,
           evidenceUrl3,
@@ -141,6 +151,18 @@ function ClaimResultsPage() {
       if (response.status === "approved" || response.alreadyOwned) setClaimCompleted(true);
       void queryClient.invalidateQueries({ queryKey: ["my-result-claims"] });
       void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
+    },
+    onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
+  });
+
+  const decline = useMutation({
+    mutationFn: () =>
+      declineClaimInvitation({
+        data: { token: invitation as string, resultId: resultId as number },
+      }),
+    onSuccess: () => {
+      setDeclined(true);
+      setMessage("Thanks for letting us know. We have marked this suggestion as not yours.");
     },
     onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
   });
@@ -180,7 +202,11 @@ function ClaimResultsPage() {
                 Private and secure
               </div>
               <h1 className="mt-2 font-display text-2xl font-semibold md:text-3xl">
-                {resultId ? "Add this result to your profile" : "Claim your race results"}
+                {invitation
+                  ? "Claim your athlete profile"
+                  : resultId
+                    ? "Add this result to your profile"
+                    : "Claim your race results"}
               </h1>
               <p className="mt-2 text-sm leading-6 text-slate-300">
                 Confirm a matched result to request ownership. ATHRECS checks your identity before
@@ -216,7 +242,11 @@ function ClaimResultsPage() {
         </div>
       </section>
 
-      {!resultId ? (
+      {declined ? (
+        <p role="status" className="rounded-xl border border-border p-5">
+          Thanks for letting us know. This profile has been marked as not yours.
+        </p>
+      ) : !resultId ? (
         <section className="grid gap-5 rounded-2xl border border-border bg-surface p-5 shadow-card md:grid-cols-[auto_1fr_auto] md:items-center md:p-7">
           <div className="flex size-12 items-center justify-center rounded-full bg-accent-soft text-accent">
             <Search className="size-6" aria-hidden="true" />
@@ -248,7 +278,9 @@ function ClaimResultsPage() {
               Sign in to view and claim this match
             </h2>
             <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
-              The athlete name and result are kept inside the secure claim journey.
+              {invitation
+                ? "Sign in using the email address that received the invitation. Your suggested profile is shown only to that account."
+                : "The athlete name and result are kept inside the secure claim journey."}
             </p>
           </div>
           <Button type="button" onClick={startSignIn}>
@@ -262,7 +294,9 @@ function ClaimResultsPage() {
         <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
           <h2 className="font-semibold">This match is no longer available</h2>
           <p className="mt-1">
-            Return to your private Athlete Account and choose one of the current suggested matches.
+            {invitation
+              ? "Check that you are signed in with the verified email address that received this invitation. Links expire after seven days; contact support@athrecs.com for help or a fresh link."
+              : "Return to your private Athlete Account and choose one of the current suggested matches."}
           </p>
           <Button asChild variant="secondary" className="mt-4">
             <Link to="/athlete-account">
@@ -313,6 +347,27 @@ function ClaimResultsPage() {
           </div>
 
           <div className="space-y-4 p-5 md:p-7">
+            {invitation ? (
+              <div className="rounded-lg border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-950">
+                <strong>Suggested profile: {result.data.athleteName}</strong>
+                <p className="mt-1">
+                  Confirm the race below belongs to you. After an identity check, we can link this
+                  athlete profile and its stored results to your account. You do not need to claim
+                  every race separately.
+                </p>
+                {!currentClaim ? (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className="mt-3"
+                    disabled={decline.isPending || submitClaim.isPending}
+                    onClick={() => decline.mutate()}
+                  >
+                    Not my profile
+                  </Button>
+                ) : null}
+              </div>
+            ) : null}
             {activeClaim?.status === "pending" ? (
               <ClaimState
                 status={activeClaim.status}

@@ -1,3 +1,5 @@
+import { INVITATION_STATUS_SQL } from "./claim-invitations.server";
+import type { InvitationSummary } from "./claim-invitation";
 import type { Sql } from "@/lib/db";
 import type { RegistrationFilters } from "./registration-filters";
 import { loadRegistrationStats } from "./registration-stats.server";
@@ -6,6 +8,7 @@ import type { ProfileConnection } from "./profile-connections";
 import { parseAthleteId } from "./athlete-id";
 
 export type RegisteredAthlete = {
+  invitation: InvitationSummary | null;
   contact: StaffContact;
   profileConnections: ProfileConnection[];
   marketingConsent: boolean;
@@ -98,6 +101,7 @@ export async function loadRegistrations(sql: Sql, filters: RegistrationFilters) 
       `with selected as materialized (
         select u."id" ${from} ${where} order by ${order} limit $7 offset $8
       ) select
+        (select jsonb_build_object('id',i.id,'athleteName',a.display_name,'status',${INVITATION_STATUS_SQL},'createdAt',i.created_at::text,'expiresAt',i.expires_at::text,'sentAt',i.email_sent_at::text) from athlete_claim_invitations i join athletes a on a.id=i.athlete_id where i.user_id=u.id order by i.created_at desc limit 1) as invitation,
       jsonb_build_object('phone',contact.phone,'telegramUsername',contact.telegram_username,
         'socialLinks',coalesce(contact.social_links,'[]'::jsonb),'sourceNote',coalesce(contact.source_note,'')) as contact,
       coalesce((select jsonb_agg(jsonb_build_object('platform',pc.platform,'url',pc.url,'sharePublicly',pc.share_publicly) order by pc.platform)
