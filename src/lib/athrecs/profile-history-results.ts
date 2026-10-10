@@ -4,11 +4,14 @@ import { countryFlag } from "./country-flags.ts";
 
 export type HistoryResult = {
   key: string;
-  sport: "Running" | "Athletics";
+  sport: "Running" | "Athletics" | "Triathlon" | "Duathlon";
   performance: SourcePerformance;
 };
 
 function historySport(discipline: string): HistoryResult["sport"] {
+  // Explicit multisport labels take priority over distances within a race leg.
+  if (/\btriathlon\b/i.test(discipline)) return "Triathlon";
+  if (/\bduathlon\b/i.test(discipline)) return "Duathlon";
   return /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*k(?:m)?|\d+(?:\.\d+)?\s*(?:mi|mile|miles))$/i.test(
     discipline.trim(),
   )
@@ -112,9 +115,11 @@ export function profileAchievementResults(
         surface:
           entry.sport === "Running"
             ? "Road"
-            : /jump|shot|^sp\d|discus|javelin|hammer/i.test(code)
-              ? "Field"
-              : "Track",
+            : entry.sport === "Athletics"
+              ? /jump|shot|^sp\d|discus|javelin|hammer/i.test(code)
+                ? "Field"
+                : "Track"
+              : "",
         country: historyResultCountry(row),
         eventDate: row.date || (/^\d{4}$/.test(year) ? year : ""),
         distanceCode: code,

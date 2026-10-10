@@ -4,6 +4,7 @@ import {
   historyResultCountry,
   isCompletedHistoryResult,
   profileAchievementResults,
+  sourceHistorySports,
 } from "../src/lib/athrecs/profile-history-results.ts";
 import { historyPerformanceSchema } from "../src/lib/athrecs/source-performance-history.ts";
 
@@ -106,6 +107,16 @@ const roadAndTrack = board([
   row({ discipline: "Long Jump", performance: "4.64", meeting: "Synthetic athletics meet" }),
 ]);
 assert.deepEqual(roadAndTrack.sports, ["Athletics", "Running"]);
+const multisportRows = [
+  row({ discipline: "Triathlon — middle distance" }),
+  row({ discipline: "5 km run leg — sprint triathlon" }),
+  row({ discipline: "‘Brick’ Duathlon" }),
+];
+assert.deepEqual(sourceHistorySports(history(multisportRows)), ["Triathlon", "Duathlon"]);
+assert(
+  profileAchievementResults([], history(multisportRows)).every((r) => r.surface === ""),
+  "A multisport source label must not invent a track surface",
+);
 assert.equal(
   roadAndTrack.finishes[1].finishTimeSeconds,
   null,

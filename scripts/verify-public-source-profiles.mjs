@@ -208,6 +208,22 @@ try {
       !legacyHtml.includes("Sport not recorded"),
     "Legacy source histories also supply the profile's sport",
   );
+  const multisportPerformances = [
+    { ...legacyPerformance, discipline: "Triathlon — middle distance" },
+    { ...legacyPerformance, discipline: "5 km run leg — sprint triathlon" },
+    { ...legacyPerformance, discipline: "‘Brick’ Duathlon" },
+    { ...legacyPerformance, discipline: "Marathon", profileExcluded: true },
+  ];
+  await sql`update athlete_source_histories set performances=${JSON.stringify(multisportPerformances)}::jsonb where athlete_id=${a.id}`;
+  const multisportDirectory = await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
+    q: "Synthetic DUV Public",
+    sport: "Triathlon",
+  });
+  assert.equal(multisportDirectory.total, 1);
+  assert.deepEqual(multisportDirectory.athletes[0].sports, ["Duathlon", "Triathlon"]);
+  assert.equal(multisportDirectory.athletes[0].result_count, 3);
+  const multisportHtml = await (await fetch(origin + "/athletes/synthetic-duv-public")).text();
+  assert(multisportHtml.includes("Sports:") && multisportHtml.includes("Triathlon") && multisportHtml.includes("Duathlon"));
   await sql`delete from athlete_source_histories where athlete_id=${a.id}`;
   const nationalityDetails = {
     // ANT is the sporting code for Antigua & Barbuda, not the former ISO code.
