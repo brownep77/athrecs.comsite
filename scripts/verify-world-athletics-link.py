@@ -29,6 +29,16 @@ for field,value in [('gender','M'),('nation','IRL'),('date_of_birth','1984-01-01
 bad=copy.deepcopy(w);bad[0]['ageGroup']='50-54'
 assert not m.identity_matches(a,b,bad,r,aliases)['eligible']
 assert not m.race_matches('Example Marathon','Example City Half Marathon',aliases)
+alias_athlete={**a,'display_name':'Example Runner Extra'}
+alias_rows=copy.deepcopy(w);alias_rows[0]['archiveReference']={'original':{'bibnumber':'17'}}
+alias_evidence={'reviewed':True,'sourceName':'Example Runner Extra','officialName':'Example Middle RUNNER','nation':'GBR','gender':'F','discipline':'Marathon','date':'2025-04-20','performance':'2:31:02','bib':'17','providerName':'Example Timer','sourceUrl':'https://example.org/results','sourceLocator':'row 17','capturedEvidence':{'synthetic':True}}
+assert not m.identity_matches(alias_athlete,b,alias_rows,r,aliases)['eligible']
+assert m.identity_matches(alias_athlete,b,alias_rows,r,aliases,alias_evidence)['eligible']
+for field,value in [('sourceName','Wrong Person'),('officialName','Wrong Person'),('bib','18'),('performance','2:31:03'),('date','2024-04-20'),('nation','IRL'),('capturedEvidence',None)]:
+ bad={**alias_evidence,field:value}
+ assert not m.identity_matches(alias_athlete,b,alias_rows,r,aliases,bad)['eligible']
+bad=copy.deepcopy(r);bad[0]['performance']='2:31:03'
+assert not m.identity_matches(alias_athlete,b,alias_rows,bad,aliases,alias_evidence)['eligible']
 payload={'data':{'getSingleCompetitorResultsDiscipline':{'parameters':{'resultsByYear':2025},'resultsByEvent':[{'discipline':'5000 Metres','indoor':False,'results':[{'date':'20 APR 2025','competition':'Example Championships','venue':'Test Track (GBR)','country':'GBR','race':'H2','place':'3.','mark':'14:20.87','competitionId':'123','eventId':'456'}]}]}}}
 row=m.parse_year(99999,2025,payload,'https://worldathletics.org/athletes/example/example-99999')[0]
 assert row['performance']=='14:20.87' and row['place']=='3' and row['round']=='H2'

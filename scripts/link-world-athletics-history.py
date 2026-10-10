@@ -36,7 +36,7 @@ def race_matches(source_name, official_name, aliases):
     allowed = [source_name, *aliases.get(source_name, [])]
     return normalized(official_event) in {normalized(x) for x in allowed}
 
-def identity_matches(athlete, basic, source_rows, annual_rows, aliases):
+def identity_matches(athlete, basic, source_rows, annual_rows, aliases, reviewed_name=None):
     failures = []
     wa_name = basic['givenName']+' '+basic['familyName']
     incoming = normalized(athlete['display_name'])
@@ -46,7 +46,6 @@ def identity_matches(athlete, basic, source_rows, annual_rows, aliases):
         len(source_tokens)>=2 and len(wa_tokens)>=2 and
         normalized(source_tokens[0])==normalized(wa_tokens[0]) and
         normalized(source_tokens[-1])==normalized(wa_tokens[-1]))
-    if not name_agrees: failures.append('Name/alias needs manual identity evidence')
     if athlete['gender'] != ('M' if basic['male'] else 'F'): failures.append('Gender conflict')
     if not athlete.get('nation') or athlete['nation'] != basic['countryCode']: failures.append('Missing or conflicting source nationality')
     dob = dt.datetime.strptime(basic['birthDate'], '%d %b %Y').date()
@@ -74,7 +73,26 @@ def identity_matches(athlete, basic, source_rows, annual_rows, aliases):
                 'officialMarks':[r['performance'] for r in matching],'reason':'Performance mismatch or ambiguous edition'})
     if not overlaps: failures.append('No unique exact shared race/year/distance/mark')
     if conflicts: failures.append('Conflicting shared performance requires review')
-    return {'eligible':not failures,'failures':failures,'overlaps':overlaps,'conflicts':conflicts,'sourceName':wa_name,'dob':dob.isoformat()}
+    # An explicitly inspected organiser/timer row may bridge a longer alias.
+    # It is scoped to both names AND an already exact shared performance/bib;
+    # it cannot waive demographic, result-conflict or source-ownership checks.
+    alias_supported=False
+    if reviewed_name and not name_agrees:
+        e=reviewed_name
+        alias_supported=(e.get('reviewed') is True
+            and normalized(e.get('sourceName',''))==incoming
+            and normalized(e.get('officialName',''))==normalized(wa_name)
+            and e.get('nation')==athlete['nation'] and e.get('gender')==athlete['gender']
+            and e.get('discipline')=='Marathon' and bool(e.get('providerName'))
+            and bool(e.get('sourceLocator')) and bool(e.get('capturedEvidence'))
+            and bool(re.fullmatch(r'https://[^\s]+',e.get('sourceUrl','')))
+            and any(o['date']==e.get('date') and o['mark']==e.get('performance')
+                and str(source_rows[o['sourceIndex']].get('archiveReference',{}).get('original',{}).get('bibnumber',''))==e.get('bib')
+                and bool(e.get('bib')) for o in overlaps))
+    if not name_agrees and not alias_supported:failures.append('Name/alias needs manual identity evidence')
+    result={'eligible':not failures,'failures':failures,'overlaps':overlaps,'conflicts':conflicts,'sourceName':wa_name,'dob':dob.isoformat()}
+    if alias_supported:result['reviewedNameEvidence']=reviewed_name
+    return result
 
 def discipline_label(value):
     if value=='2 Miles':return '2 Miles Track'
@@ -172,7 +190,7 @@ def prepare(args,query):
             seen[key]=row
             if reason:held.append({'reason':reason,'row':row})
             else:accepted.append(row)
-        match=identity_matches(athlete,profile['basicData'],wmm[0]['performances'],accepted,manifest['raceAliases'])
+        match=identity_matches(athlete,profile['basicData'],wmm[0]['performances'],accepted,manifest['raceAliases'],target.get('reviewedNameEvidence'))
         identifiers=[str(wa_id),str(profile['basicData']['iaafId'])]
         mappings=database_snapshot[target_index*6+4]
         if any(x['athlete_id']!=aid for x in mappings):match['failures'].append('Official identity already belongs to another AthRecs profile');match['eligible']=False

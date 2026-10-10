@@ -18,6 +18,13 @@ automatically a chip/gun conversion. Existing source mappings, other matching
 directory profiles, account control or canonical results hold the candidate.
 No general athlete-account verification flag is changed.
 
+A longer name variant can use explicit `reviewedNameEvidence` in the private
+target manifest after inspecting an organiser/timer result. It must identify
+both exact names, the provider, URL, captured evidence, row locator, nationality,
+sex and the same date/mark/bib as an exact shared marathon. This does not waive
+age, birth-date, conflicting-performance or existing-profile checks. Preserve
+the inspected primary evidence in the private plan/audit, never in Git.
+
 Source histories preserve decimal precision, round, placing context, dates,
 non-finishes, annotations and the original source row with a deterministic
 locator. Road distance labels use the existing Running taxonomy; track marks
