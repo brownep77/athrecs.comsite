@@ -83,7 +83,8 @@ try {
   assert.equal(await read(), null, "A public flag alone does not grant anonymous profile access");
   await sql`insert into network_audit_log(action,entity_type,entity_id,after_value) values('athlete.profile_admin_published','athlete',${String(a.id)},${JSON.stringify({ athleteId: a.id, profile_visibility: "public" })}::jsonb)`;
   const nationalityDetails = {
-    duvSourceObservation: { nationality: "BRA", birthYear: 1980 },
+    // ANT is the sporting code for Antigua & Barbuda, not the former ISO code.
+    duvSourceObservation: { nationality: "ANT", birthYear: 1980 },
     sourceIdentities: [
       {
         externalId: "999999999",
@@ -102,7 +103,7 @@ try {
     false,
     "Profile publication does not grant search-indexing approval",
   );
-  assert.equal(p.athlete.nationality, "BRA");
+  assert.equal(p.athlete.nationality, "ANT");
   assert.equal(p.athlete.nationality_source.provider, "DUV");
   assert.equal(p.athlete.details.birthCountry, "");
   assert(!JSON.stringify(p).includes("birthYear"), "Only the nationality observation is exposed");
@@ -110,7 +111,7 @@ try {
     q: "Synthetic DUV Public",
   });
   assert.equal(directory.athletes.length, 1);
-  assert.equal(directory.athletes[0].nationality, "BRA");
+  assert.equal(directory.athletes[0].nationality, "ANT");
   assert(!JSON.stringify(directory).includes("duvSourceObservation"));
   const page = await fetch(origin + "/athletes/synthetic-duv-public");
   const html = await page.text();
@@ -118,7 +119,7 @@ try {
   assert.match(page.headers.get("x-robots-tag"), /noindex/);
   assert(html.includes("Synthetic DUV Public"));
   assert(!html.includes("Unpublished test biography"));
-  assert(html.includes("Brazil"));
+  assert(html.includes("Antigua &amp; Barbuda"));
   assert(html.includes("As listed by"));
   assert(html.includes("runner=999999999"));
   const index = await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public");
@@ -126,8 +127,8 @@ try {
   assert.equal(index.status, 200);
   assert(listing.includes("Synthetic DUV Public"));
   assert(!listing.includes("Sign in to view athlete profiles"));
-  assert(listing.includes('data-country-code="BR"'), "Directory renders the nationality flag");
-  assert(html.includes('data-country-code="BR"'), "Profile renders the nationality flag");
+  assert(listing.includes('data-country-code="AG"'), "Directory renders the sporting-code flag");
+  assert(html.includes('data-country-code="AG"'), "Profile renders the sporting-code flag");
   await sql`update athletes set profile_details=${JSON.stringify({ ...nationalityDetails, nationality: "Irish" })}::jsonb where id=${a.id}`;
   assert.equal(
     (await read()).athlete.nationality,
