@@ -40,11 +40,13 @@ function selectedFinding(row: CollectorFinding, choice: Choice): Selected {
 
 export function CollectorCandidateList({
   rows,
+  publicationName = "RunRecs",
   disabled = false,
   onDecide,
   onBulkAction,
 }: {
   rows: CollectorFinding[];
+  publicationName?: string;
   disabled?: boolean;
   onDecide: (id: string, action: Choice) => void;
   onBulkAction: (input: Omit<BulkFindingActionInput, "runId">) => Promise<BulkFindingResult>;
@@ -84,7 +86,7 @@ export function CollectorCandidateList({
       return;
     const outcome =
       action === "publish"
-        ? "These races will go live on RunRecs. Confirming also confirms that you checked their dates, distances and start venues against the linked primary programmes. Duplicate and alias checks run again; if any candidate fails, nothing in this selection is published."
+        ? `These races will go live on ${publicationName}. Confirming also confirms that you checked their dates, distances and start venues against the linked primary programmes. Duplicate and alias checks run again; if any candidate fails, nothing in this selection is published.`
         : action === "keep"
           ? "These candidates will be saved to Kept, with all information retained. This does not publish them."
           : "These candidates will move to Dismissed. All information is retained and they can be kept again. Published races and publication batches stay unchanged.";
@@ -114,7 +116,7 @@ export function CollectorCandidateList({
       forget(items.map((item) => item.id));
       setNotice(
         action === "publish"
-          ? `${result.published} candidates ${result.reused ? "already published" : "published"} to RunRecs.`
+          ? `${result.published} candidates ${result.reused ? "already published" : "published"} to ${publicationName}.`
           : `${items.length} candidates ${action === "keep" ? "saved to Kept" : "dismissed"}. All information is retained.`,
       );
     } catch (err) {
@@ -134,6 +136,27 @@ export function CollectorCandidateList({
           {keep.length} selected to keep · {dismiss.length} selected to dismiss
         </p>
         <div className="flex flex-wrap gap-2">
+          <Button
+            size="sm"
+            variant="secondary"
+            disabled={busy || !rows.some((r) => selectedFinding(r, "keep").publishable)}
+            onClick={() => {
+              setChoices(
+                Object.fromEntries(
+                  rows
+                    .filter((r) => selectedFinding(r, "keep").publishable)
+                    .slice(0, REVIEW_BATCH_LIMIT)
+                    .map((r) => [r.id, selectedFinding(r, "keep")]),
+                ),
+              );
+              setNotice(
+                "Ready races on this page selected. Review their primary sources before publishing.",
+              );
+              setError("");
+            }}
+          >
+            Select ready races on this page
+          </Button>
           <Button size="sm" disabled={busy || !keep.length} onClick={() => void act("keep")}>
             Keep selected ({keep.length})
           </Button>
@@ -163,7 +186,7 @@ export function CollectorCandidateList({
           </Button>
         </div>
         <p className="text-sm text-fg">
-          Keep saves candidates for later. Publish selected makes them live on RunRecs.
+          Keep saves candidates for later. Publish selected makes them live on {publicationName}.
         </p>
         <p
           id={publicationHelpId}

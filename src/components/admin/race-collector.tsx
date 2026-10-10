@@ -48,7 +48,15 @@ const dateFormatter = new Intl.DateTimeFormat("en-GB", {
   year: "numeric",
   timeZone: "UTC",
 });
-export function CollectorPage({ embedded = false }: { embedded?: boolean }) {
+export function CollectorPage({
+  embedded = false,
+  initialRunId,
+  publicationName = "RunRecs",
+}: {
+  embedded?: boolean;
+  initialRunId?: string;
+  publicationName?: string;
+}) {
   const client = useQueryClient();
   const [scope, setScope] = useState<Scope>({
     countries: COLLECTOR_COUNTRIES.map((c) => c.code),
@@ -64,7 +72,7 @@ export function CollectorPage({ embedded = false }: { embedded?: boolean }) {
   const [dateChoice, setDateChoice] = useState("2027-2028");
   const [countrySearch, setCountrySearch] = useState("");
   const [search, setSearch] = useState("");
-  const [runId, setRunId] = useState<string>();
+  const [runId, setRunId] = useState<string | undefined>(initialRunId);
   const [message, setMessage] = useState("");
   const [reviewQuery, setReviewQuery] = useState<ReviewQuery>({
     status: "pending",
@@ -670,7 +678,9 @@ export function CollectorPage({ embedded = false }: { embedded?: boolean }) {
                   ? run.status === "complete"
                     ? failed > 0
                       ? "Finished with failed searches"
-                      : "Scan finished"
+                      : run.scope.method === "fixture-upload"
+                        ? "Import ready for review"
+                        : "Scan finished"
                     : run.status === "paused"
                       ? "Scan paused"
                       : run.status === "cancelled"
@@ -699,6 +709,7 @@ export function CollectorPage({ embedded = false }: { embedded?: boolean }) {
             >
               {data.runs.map((r) => (
                 <option key={r.id} value={r.id}>
+                  {r.scope.label ? `${r.scope.label} · ` : ""}
                   {new Date(r.created_at).toLocaleString()} · {r.scope.countries.length} countries ·{" "}
                   {r.scope.regional ? "by region" : "national"} ·{" "}
                   {r.scope.passes === 1 ? "quick" : "thorough"} · {r.status}
@@ -931,8 +942,8 @@ export function CollectorPage({ embedded = false }: { embedded?: boolean }) {
               </p>
               <p className="mt-2 text-sm text-muted">
                 Keep or dismiss one candidate, or select several and confirm a bulk action. Publish
-                selected adds ready races to RunRecs. Every race retains its information, sources
-                and checks.
+                selected adds ready races to {publicationName}. Every race retains its information,
+                sources and checks.
               </p>
             </div>
           </div>
@@ -999,6 +1010,7 @@ export function CollectorPage({ embedded = false }: { embedded?: boolean }) {
           )}
           <div className="space-y-3">
             <CollectorCandidateList
+              publicationName={publicationName}
               key={run.id}
               rows={data?.candidates ?? []}
               disabled={reviewBusy || query.isPlaceholderData}

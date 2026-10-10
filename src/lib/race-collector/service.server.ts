@@ -71,13 +71,11 @@ export function authorizedWorker(request: Request) {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 export async function snapshot(sql: Sql, dates: string[]) {
-  const sorted = dates.slice().sort();
-  const from = sorted[0];
-  const to = sorted[sorted.length - 1];
+  if (!dates.length) throw new Error("At least one fixture date is required.");
   const events =
     await sql<Identity>`select id,slug,name,country,city,website from events where sport='Running'`;
   const editions =
-    await sql<Edition>`select id,event_id as "eventId",event_date::text as date,distance_code as distance,distance_km as "distanceKm",source_url as source,entry_url as "entryUrl" from editions where event_date between ${from}::date - interval '31 days' and ${to}::date + interval '31 days' and event_id in (select id from events where sport='Running')`;
+    await sql<Edition>`select id,event_id as "eventId",event_date::text as date,distance_code as distance,distance_km as "distanceKm",source_url as source,entry_url as "entryUrl" from editions where event_id in (select id from events where sport='Running')`;
   const pending =
     await sql<PendingEdition>`select x->>'eventSlug' as "eventSlug",x->>'date' as date,b.id as "batchId",coalesce(e.name,p->>'name') as name,coalesce(e.country,p->>'country') as country,coalesce(e.city,p->>'city') as city,x->>'source' as source,x->>'entryUrl' as "entryUrl",x->>'distance' as distance,(x->>'distanceKm')::float8 as "distanceKm" from catalogue_import_batches b cross join lateral jsonb_array_elements(coalesce(b.payload->'editions','[]'::jsonb)) x left join events e on e.slug=x->>'eventSlug' left join lateral jsonb_array_elements(coalesce(b.payload->'events','[]'::jsonb)) p on p->>'slug'=x->>'eventSlug' where b.status not in ('published','rolled_back')`;
   const redirects = await sql<{
@@ -98,7 +96,7 @@ export async function snapshot(sql: Sql, dates: string[]) {
   };
 }
 type Snapshot = Awaited<ReturnType<typeof snapshot>>;
-function checkFinding(
+export function checkFinding(
   c: Candidate,
   job: Window,
   scope: Scope,
@@ -360,6 +358,19 @@ export async function runWorkerBatch(db?: Sql, research = researchWindow) {
     errors: results.flatMap((r) => (r.error ? [r.error] : [])),
   };
 }
+export function repeatedFinding(c: Candidate, eventSlug: string, prior: CandidateRow[]) {
+  return prior.some(
+    (p) =>
+      p.candidate.date === c.date &&
+      ((normalizedName(p.candidate.name) === normalizedName(c.name) &&
+        p.candidate.countryCode === c.countryCode &&
+        normalizedName(p.candidate.city) === normalizedName(c.city)) ||
+        sharesProgramme(p.candidate, c) ||
+        (normalizedUrl(p.candidate.sourceUrl) === normalizedUrl(c.sourceUrl) &&
+          p.event_slug === eventSlug)) &&
+      Math.abs(p.candidate.distanceKm - c.distanceKm) <= 0.025,
+  );
+}
 export async function saveResult(sql: Sql, job: Job, run: Run, result: ResearchResult) {
   await sql.transaction(async (tx) => {
     const live =
@@ -387,21 +398,13 @@ export async function saveResult(sql: Sql, job: Job, run: Run, result: ResearchR
       )
         c.country = country.name;
       let decision = checkFinding(c, job.window, run.scope, snap, prior);
-      const seen = prior.some(
-        (p) =>
-          p.candidate.date === c.date &&
-          ((normalizedName(p.candidate.name) === normalizedName(c.name) &&
-            p.candidate.countryCode === c.countryCode &&
-            normalizedName(p.candidate.city) === normalizedName(c.city)) ||
-            sharesProgramme(p.candidate, c) ||
-            (normalizedUrl(p.candidate.sourceUrl) === normalizedUrl(c.sourceUrl) &&
-              p.event_slug === decision.eventSlug)) &&
-          Math.abs(p.candidate.distanceKm - c.distanceKm) <= 0.025,
-      );
+      const seen = repeatedFinding(c, decision.eventSlug, prior);
       if (seen) continue; // Repeated discovery is not another race or an inflated skip count.
       if (issues.length) decision = { ...decision, status: "held", reason: issues.join("; ") };
       const fingerprint = createHash("sha256")
-        .update(`${normalizedName(c.name)}|${c.date}|${c.distanceKm.toFixed(3)}|${c.countryCode}`)
+        .update(
+          `${normalizedName(c.name)}|${c.date}|${c.distanceKm.toFixed(3)}|${c.countryCode}|${normalizedName(c.city)}`,
+        )
         .digest("hex");
       const id = randomUUID();
       await tx`insert into race_collector_candidates(id,run_id,job_id,fingerprint,candidate,status,reason,event_slug,event_id) values(${id}::uuid,${run.id}::uuid,${job.id}::uuid,${fingerprint},${JSON.stringify(c)}::jsonb,${decision.status},${decision.reason},${decision.eventSlug},${decision.eventId}) on conflict(run_id,fingerprint) do nothing`;
@@ -427,7 +430,11 @@ export async function dashboard(
   const review = validateReviewQuery(reviewInput);
   const sql = sqlOverride ?? (await getSql());
   const runs = await sql<Run>`select * from race_collector_runs order by created_at desc limit 15`;
-  const run = runId ? runs.find((r) => r.id === runId) : runs[0];
+  const run = runId
+    ? (runs.find((r) => r.id === runId) ??
+      (await sql<Run>`select * from race_collector_runs where id=${runId}::uuid`)[0])
+    : runs[0];
+  if (run && !runs.some((r) => r.id === run.id)) runs.push(run);
   if (!run)
     return {
       readiness: readiness(),
@@ -723,7 +730,7 @@ export async function stageReviewed(ids: string[], email: string, sqlOverride?: 
         entryUrl: c.entryUrl || undefined,
         source: c.sourceUrl,
         notes:
-          `${c.notes} ${c.evidence}${c.entryStatus === "TBC" ? " Date confirmed; entry availability is unknown." : ""}`.trim(),
+          `${c.notes} ${c.evidence}${c.checkedAt ? ` Source checked ${c.checkedAt}.` : ""}${c.entryStatus === "TBC" ? " Date confirmed; entry availability is unknown." : ""}`.trim(),
       });
     }
     const digest = createHash("sha256")

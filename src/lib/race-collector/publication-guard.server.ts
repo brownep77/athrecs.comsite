@@ -1,7 +1,7 @@
 import type { Sql } from "../db";
 import type { ImportBundle } from "../athrecs/import.server";
 import { snapshot } from "./service.server";
-import { reconcile, type Candidate } from "./core";
+import { isRunAbcUrl, reconcile, type Candidate } from "./core";
 import { sharesProgramme } from "./matching";
 /** Invoked again under the normal publisher's revision lock, not just at collection time. */
 export async function assertCollectorPublication(sql: Sql, batchId: string, payload: ImportBundle) {
@@ -19,6 +19,8 @@ export async function assertCollectorPublication(sql: Sql, batchId: string, payl
   const otherPending = snap.pending.filter((p) => p.batchId !== batchId);
   for (const row of rows) {
     const c = row.candidate;
+    if (isRunAbcUrl(c.sourceUrl) || isRunAbcUrl(c.entryUrl))
+      throw new Error("RunABC cannot be published as primary race or entry evidence.");
     if (
       rows.some(
         (other) => other.event_slug !== row.event_slug && sharesProgramme(c, other.candidate),
