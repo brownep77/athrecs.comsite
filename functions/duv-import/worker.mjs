@@ -1,7 +1,8 @@
 import { gzipSync,gunzipSync } from 'node:zlib';
 import { randomUUID } from 'node:crypto';
 import { PROVIDER,parseEvent,combinePages,sha,eventId } from './parser.mjs';
-import { Directory,eventDirectory,nameKey } from './identity.mjs';
+import { eventDirectory,nameKey } from './identity.mjs';
+import { loadDirectory } from './directory-loader.mjs';
 import { profileVisibility } from './publication.mjs';
 import { markRollbackConfirmed,retryDeadlockedProfileChunk } from './deadlock-retry.mjs';
 const JOB='duv-2026-20261010';
@@ -10,22 +11,17 @@ const json=x=>JSON.stringify(x);
 const stable=x=>JSON.stringify(x,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
 let cache=null;
 
-async function directory(client){
+async function directory(client,deadline){
  const version=(await client.query('SELECT version::text FROM result_archive_identity_clock WHERE singleton')).rows[0].version;
  if(cache?.version===version)return cache;
- await client.query('BEGIN ISOLATION LEVEL REPEATABLE READ READ ONLY');
- try{
-  const v=(await client.query('SELECT version::text FROM result_archive_identity_clock WHERE singleton')).rows[0].version;
-  const athletes=(await client.query(`SELECT id,slug,display_name,given_name,family_name,gender,race_entry_name,parent_athlete_id,source_url,profile_visibility,
-   extract(year from date_of_birth)::int AS birth_year,
-   jsonb_build_object('aliases',profile_details->'aliases','nameAliases',profile_details->'nameAliases','previous_names',profile_details->'previous_names',
-    'research_name_variants',profile_details->'research_name_variants','canonicalName',profile_details->'canonicalName','sourceName',profile_details->'sourceName','requestedName',profile_details->'requestedName',
-    'duvSourceObservation',profile_details->'duvSourceObservation','sourceIdentities',profile_details->'sourceIdentities') AS profile_details
-   FROM athletes`)).rows;
-  const accounts=(await client.query(`SELECT u.name,p.full_name,p.display_name,p.previous_names FROM "user" u LEFT JOIN athlete_private_profiles p ON p.user_id=u.id`)).rows;
-  const histories=(await client.query(`SELECT athlete_id,provider,external_id,source_url FROM athlete_source_histories WHERE provider ILIKE '%duv%' OR source_url LIKE '%statistik.d-u-v.org/getresultperson%'`)).rows;
-  await client.query('COMMIT');cache=new Directory(athletes,accounts,histories,v);return cache;
- }catch(e){await client.query('ROLLBACK');throw e;}
+ // Release the obsolete directory before allocating its replacement.
+ cache=null;
+ const started=Date.now(),loaded=await loadDirectory(client,{deadline});
+ if(loaded){
+  cache=loaded;
+  console.info('duv_directory_loaded',json({athletes:loaded.athletes.size,version:loaded.version,elapsedMs:Date.now()-started,heapMiB:Math.round(process.memoryUsage().heapUsed/1048576)}));
+ }
+ return loaded;
 }
 async function requestSource(client,url,owner,deadline){
  if(!/^https:\/\/statistik\.d-u-v\.org\/getresultevent\.php\?event=\d+(?:&page=\d+)?$/.test(url))throw Error('unapproved_fetch_url');
@@ -116,10 +112,12 @@ function newProfile(row,capture,job){
   slug:((/^[a-z0-9-]+$/.test(name)?name:'duv-runner').slice(0,160))+'-duv-'+row.sourceAthleteId,displayName:row.name,givenName:row.givenName,familyName:row.familyName,gender:row.gender,sourceClubName:row.club,sourceUrl:row.sourceAthleteUrl,
   details:{archiveCreation:{batchId:JOB,candidateId:'DUV-'+row.sourceAthleteId,approvedBy:'Paul Browne',approvedAt:job.configuration.approvedAt,instruction:job.configuration.instruction,basis:'Stable source runner ID, independently compared row, conservative name/alias/account screening; provisional identity.',profileIdentityVerified:false,sourceRowsCompared:true,sourceKeys:[capture.sourceKey]},profilePublication:profileVisibility(job)==='public'?job.configuration.profilePublication:null,aliases:[row.name,row.sourceName],athlete_verified:false,identity_review_status:'provisional_source_profile',currentClubAssociationConfirmed:false,sourceIdentities:[{provider:PROVIDER,externalId:row.sourceAthleteId,sourceUrl:row.sourceAthleteUrl}],duvSourceObservation:{birthYear:row.sourceBirthYear,nationality:row.sourceNationality,clubDisplay:row.club,clubDisplayTruncated:row.clubDisplayTruncated,eventDate:row.date}}};
 }
-async function profileChunk(client,item,capture,job,owner){
- const dir=await directory(client),ed=eventDirectory(capture.rows);const chunk=capture.rows.slice(item.row_cursor,item.row_cursor+150);
+async function profileChunk(client,item,capture,job,owner,deadline){
+ const dir=await directory(client,deadline);if(!dir)return false;
+ const ed=eventDirectory(capture.rows);const chunk=capture.rows.slice(item.row_cursor,item.row_cursor+150);
  const decisions=chunk.map(row=>({row,...dir.decide(row,ed)}));
  const fresh=decisions.filter(x=>x.status==='created').map(x=>newProfile(x.row,capture,job));
+ if(Date.now()>=deadline-12000)return false;
  await client.query('BEGIN');
  try{
   await client.query("SET LOCAL lock_timeout='8s'");await client.query("SET LOCAL statement_timeout='50s'");
@@ -206,7 +204,7 @@ export async function run(pool,{maxMs=245000,maxEvents=20}={}){
     const capture=await captureEvent(client,item,job,owner,deadline);
     if(capture===null)break;if(capture==='existing'){processed++;continue;}
     while(item.row_cursor<capture.rows.length&&Date.now()<deadline-12000){
-     await retryDeadlockedProfileChunk(()=>profileChunk(client,item,capture,job,owner),{deadline,onRetry:({retry,delayMs})=>console.warn('duv_profile_deadlock_retry',json({sourceKey:item.source_key,cursor:item.row_cursor,attempt:retry,delayMs}))});
+     await retryDeadlockedProfileChunk(()=>profileChunk(client,item,capture,job,owner,deadline),{deadline,onRetry:({retry,delayMs})=>console.warn('duv_profile_deadlock_retry',json({sourceKey:item.source_key,cursor:item.row_cursor,attempt:retry,delayMs}))});
     }
     if(capture.rows.length===0)await client.query(`UPDATE result_archive_import_queue SET status='imported',row_cursor=0,rows_total=0 WHERE job_id=$1 AND source_key=$2`,[JOB,item.source_key]);
     if(item.row_cursor<capture.rows.length)break;processed++;

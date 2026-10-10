@@ -200,6 +200,19 @@ capture and cursor. Allow at most two retries with short backoff and a deadline
 guard. All other errors, uncertain rollback, and exhausted retries still block
 the job. Do not retry provider denials or relax the identity clock and triggers.
 
+### Large athlete directories
+
+Read athlete names and aliases in 5,000-row ID pages from one repeatable-read,
+read-only snapshot. Register every profile, account name and DUV association;
+never omit unrelated profiles from duplicate screening. Use singleton-optimized
+index sets and retain only the fields used by stable identity comparisons after
+indexing each original record. Clear an obsolete cache before loading its
+replacement. An incomplete or failed snapshot cannot become a usable cache.
+The identity revision must still match under the existing write lock before any
+profile/history transaction can commit. A deadline ends loading without writing
+profiles or advancing the source cursor. Memory logs contain only counts and
+revision numbers, never athlete names or source rows.
+
 The operational secret and connection files belong outside Git. Build with
 `npm ci --prefix functions/duv-import` followed by `npm --prefix functions/duv-import
 run build`; deploy a ZIP with `index.mjs` at its root. The function runs beside

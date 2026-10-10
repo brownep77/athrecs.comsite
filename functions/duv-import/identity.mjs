@@ -6,23 +6,43 @@ const compatible=(a,b)=>a===b||nicks.get(a)?.has(b)||(a[0]===b[0]&&(a.length===1
 const deletes=s=>[s,...[...s].map((_,i)=>s.slice(0,i)+s.slice(i+1))];
 function namesFrom(v){if(typeof v==='string')return v.includes('://')||v.length>200?[]:[v];if(Array.isArray(v))return v.flatMap(namesFrom);if(v&&typeof v==='object')return ['name','displayName','display_name','full_name','alias','value'].flatMap(k=>namesFrom(v[k]));return [];}
 function duvId(url){try{const u=new URL(url);return u.hostname==='statistik.d-u-v.org'&&u.pathname==='/getresultperson.php'&&/^\d+$/.test(u.searchParams.get('runner')??'')?u.searchParams.get('runner'):null;}catch{return null;}}
-const put=(map,key,value)=>{if(key){if(!map.has(key))map.set(key,new Set());map.get(key).add(value);}};
+const empty=Symbol('empty');
+const equal=(a,b)=>a===b||(a!==a&&b!==b);
+export class CompactSet {
+ constructor(values=[]){this.first=empty;this.multiple=null;for(const value of values)this.add(value);}
+ get size(){return this.multiple?this.multiple.size:this.first===empty?0:1;}
+ add(value){
+  if(value===0)value=0;
+  if(this.multiple)this.multiple.add(value);
+  else if(this.first===empty)this.first=value;
+  else if(!equal(this.first,value))this.multiple=new Set([this.first,value]);
+  return this;
+ }
+ has(value){return this.multiple?this.multiple.has(value):this.first!==empty&&equal(this.first,value);}
+ *[Symbol.iterator](){if(this.multiple)yield* this.multiple;else if(this.first!==empty)yield this.first;}
+}
+const put=(map,key,value)=>{if(key){if(!map.has(key))map.set(key,new CompactSet());map.get(key).add(value);}};
 export class Directory{
  constructor(athletes=[],accounts=[],histories=[],version='0'){
   this.version=String(version);this.athletes=new Map();this.names=new Map();this.exact=new Map();this.compact=new Map();this.tokens=new Map();this.surnames=new Map();this.deletions=new Map();this.sourceIds=new Map();
   for(const a of athletes)this.addAthlete(a);
+  this.addAccounts(accounts);this.addHistories(histories);
+ }
+ addAccounts(accounts){
   for(let i=0;i<accounts.length;i++){const a=accounts[i];this.register('account:'+i,[a.name,a.full_name,a.display_name,...namesFrom(a.previous_names)]);}
+ }
+ addHistories(histories){
   for(const h of histories){const id=duvId(h.source_url)||(/duv/i.test(h.provider)?/^(?:duv:runner-)?(\d+)(?::event[-:]\d+)?$/.exec(h.external_id)?.[1]:null);if(id)put(this.sourceIds,id,String(h.athlete_id));}
  }
  register(id,values){
-  const ns=this.names.get(String(id))??new Set();this.names.set(String(id),ns);
+  const ns=this.names.get(String(id))??new CompactSet();this.names.set(String(id),ns);
   for(const value of values){const n=nameKey(value);if(!n||ns.has(n))continue;ns.add(n);
    put(this.exact,n,String(id));put(this.compact,n.replaceAll(' ',''),String(id));const t=n.split(' ');put(this.tokens,[...t].sort().join(' '),String(id));
    if(t.length>=2){const surname=t.at(-1);put(this.surnames,surname,String(id));for(const v of deletes(surname))put(this.deletions,v,surname);}
   }
  }
  addAthlete(a){
-  this.athletes.set(String(a.id),a);const details=a.name_details??a.profile_details??{};
+  this.athletes.set(String(a.id),{parent_athlete_id:a.parent_athlete_id,gender:a.gender,birth_year:a.birth_year,profile_details:{duvSourceObservation:{birthYear:a.profile_details?.duvSourceObservation?.birthYear}}});const details=a.name_details??a.profile_details??{};
   const aliases=['aliases','nameAliases','previous_names','research_name_variants','canonicalName','sourceName','requestedName'].flatMap(k=>namesFrom(details[k]));
   this.register(String(a.id),[a.display_name,a.race_entry_name,[a.given_name,a.family_name].filter(Boolean).join(' '),...aliases]);
   const sid=duvId(a.source_url);if(sid)put(this.sourceIds,sid,String(a.id));
