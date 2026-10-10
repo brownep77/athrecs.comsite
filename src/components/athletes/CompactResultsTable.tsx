@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { HistoricalResultRow } from "./HistoricalResultRow";
+import { ResultEvidence } from "./ResultEvidence";
+import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
 import {
   combineResultsHistory,
   resultHistoryYear,
@@ -114,16 +116,13 @@ export function CompactResultsTable({
                     </ProfileEventLink>
                   </span>
                   <ResultDisqualification decision={result.details?.disqualification} />
-                  {showEvidence && result.details?.note ? (
-                    <span className="block text-xs text-muted">{result.details.note}</span>
-                  ) : null}
-                  {result.details?.splits?.length ? (
-                    <span className="block text-xs font-normal text-muted">
-                      {result.details.splits
-                        .map((split) => `${split.label} ${split.time}`)
-                        .join(" · ")}
-                    </span>
-                  ) : null}
+                  <ResultEvidence
+                    notes={result.details?.note}
+                    provider={result.resultSource}
+                    urls={result.sourceUrls}
+                    splits={result.details?.splits}
+                    showEvidence={showEvidence}
+                  />
                   {result.conflicting ? (
                     <span className="block text-xs text-amber-800">
                       Conflicting result · excluded from PBs
@@ -143,7 +142,7 @@ export function CompactResultsTable({
                   data-label={hasHistory ? "Distance / discipline" : "Distance"}
                   className="whitespace-nowrap px-3 py-2 text-xs"
                 >
-                  {result.distanceCode}
+                  {profileDisciplineLabel(result.distanceCode)}
                   <span className="block text-[10px] text-subtle">{result.surface}</span>
                 </td>
                 <td role="cell" data-label="Location" className="px-3 py-2">
@@ -260,6 +259,7 @@ export function CompactResults({
   const [sport, setSport] = useState("");
   const [year, setYear] = useState("");
   const [q, setQ] = useState("");
+  const [distance, setDistance] = useState("");
 
   const reportedRecords = reportedHistory?.records ?? NO_REPORTED_RECORDS;
   const reportYear = (record: ReportedRaceRecord) =>
@@ -276,6 +276,17 @@ export function CompactResults({
   ]
     .sort()
     .reverse();
+  const distances = [
+    ...new Set(
+      entries.map((entry) =>
+        profileDisciplineLabel(
+          entry.kind === "recorded"
+            ? entry.result.distanceCode
+            : entry.result.performance.discipline,
+        ),
+      ),
+    ),
+  ].sort();
   const filtered = entries.filter((entry) => {
     const search =
       entry.kind === "recorded"
@@ -289,6 +300,12 @@ export function CompactResults({
     return (
       (!sport || entry.result.sport === sport) &&
       (!year || resultHistoryYear(entry) === year) &&
+      (!distance ||
+        profileDisciplineLabel(
+          entry.kind === "recorded"
+            ? entry.result.distanceCode
+            : entry.result.performance.discipline,
+        ) === distance) &&
       (!q || search.join(" ").toLowerCase().includes(q.toLowerCase()))
     );
   });
@@ -297,6 +314,7 @@ export function CompactResults({
       (r) =>
         (!sport || sport === "Running") &&
         (!year || reportYear(r) === year) &&
+        !distance &&
         (!q || r.event.toLowerCase().includes(q.toLowerCase())),
     )
     .sort((a, b) =>
@@ -321,7 +339,7 @@ export function CompactResults({
     <section className="space-y-3" id={reportedHistory ? "race-results" : undefined}>
       <div className="profile-filters flex flex-wrap items-center gap-2">
         <h2 className="mr-auto font-display text-lg font-semibold">
-          Results history <span className="font-sans text-sm text-subtle">{total}</span>
+          Results <span className="font-sans text-sm text-subtle">{total}</span>
         </h2>
         <input
           aria-label="Search results"
@@ -335,6 +353,7 @@ export function CompactResults({
         {[
           { label: "Sport", value: sport, options: sports, set: setSport },
           { label: "Year", value: year, options: years, set: setYear },
+          { label: "Discipline", value: distance, options: distances, set: setDistance },
         ].map((filter) => (
           <select
             key={filter.label}
@@ -374,7 +393,7 @@ export function CompactResults({
       {total > previewSize ? (
         <details
           className="rounded-lg border border-border bg-surface p-3"
-          key={`${sport}:${year}:${q}`}
+          key={`${sport}:${year}:${distance}:${q}`}
         >
           <summary className="cursor-pointer text-sm font-semibold text-accent">
             Show all {total} results

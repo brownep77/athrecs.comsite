@@ -8,7 +8,8 @@ import { CountryFlag } from "./CountryFlag";
 import { CompletionMedal } from "./ProfileAchievements";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
-import { isWmmSource, publicProfileResultNotes } from "@/lib/athrecs/profile-source-presentation";
+import { ResultEvidence } from "./ResultEvidence";
+import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
 
 export function HistoricalResultRow({
   result,
@@ -20,9 +21,6 @@ export function HistoricalResultRow({
   showEvidence?: boolean;
 }) {
   const row = result.performance;
-  const notes = showEvidence
-    ? row.notes
-    : publicProfileResultNotes(row.notes, row.providerName, row.sourceUrls);
   const field = /jump|shot|^sp\d|discus|javelin|hammer/i.test(row.discipline);
   const combined = /pentathlon|heptathlon|decathlon/i.test(row.discipline);
   const discipline = /^\d+$/.test(row.discipline) ? `${row.discipline} m` : row.discipline;
@@ -48,25 +46,12 @@ export function HistoricalResultRow({
           {isCompletedHistoryResult(row) ? <CompletionMedal /> : null}
           {row.meeting}
         </span>
-        {!showEvidence &&
-        row.providerName &&
-        row.sourceUrls[0] &&
-        !isWmmSource(row.providerName, row.sourceUrls) ? (
-          <a
-            href={row.sourceUrls[0]}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-1 block text-xs font-normal text-accent"
-          >
-            Results: {row.providerName} ↗
-          </a>
-        ) : null}
-        {notes ? (
-          <details className="mt-1 max-w-sm whitespace-normal text-xs font-normal text-muted">
-            <summary className="cursor-pointer">Result details</summary>
-            <p className="mt-1">{notes}</p>
-          </details>
-        ) : null}
+        <ResultEvidence
+          notes={row.notes}
+          provider={row.providerName}
+          urls={row.sourceUrls}
+          showEvidence={showEvidence}
+        />
         <ResultDisqualification decision={row.disqualification} />
       </td>
       <td role="cell" data-label="Sport" className="px-3 py-2 text-xs">
@@ -77,15 +62,17 @@ export function HistoricalResultRow({
         data-label="Distance / discipline"
         className="whitespace-nowrap px-3 py-2 text-xs"
       >
-        {discipline}
+        {profileDisciplineLabel(discipline)}
         <span className="block text-[10px] text-subtle">
           {result.sport === "Running"
             ? "Road"
-            : combined
-              ? "Combined events"
-              : field
-                ? "Field"
-                : "Track"}
+            : /cross country/i.test(row.discipline)
+              ? "Cross country"
+              : combined
+                ? "Combined events"
+                : field
+                  ? "Field"
+                  : "Track"}
           {indoor ? " · Indoor" : ""}
         </span>
       </td>

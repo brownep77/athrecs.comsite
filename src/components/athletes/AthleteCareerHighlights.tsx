@@ -55,38 +55,40 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
           );
         })}
       </div>
-      <div className="space-y-3 border-t border-border pt-4">
-        <h3 className="font-display font-semibold">Reported major race results</h3>
-        <p className="text-xs text-muted">
-          These results remain outside verified achievements and personal-best calculations.
-        </p>
-        <div className="space-y-3">
-          {career.reportedHighlights.map((race) => (
-            <article key={race.id} className="space-y-1 border-l-2 border-border pl-3">
-              <h4 className="text-sm font-semibold">{race.title}</h4>
-              <p className="text-xs text-muted">{race.date}</p>
-              {race.outcomes.map((outcome) => (
-                <p key={outcome} className="text-sm text-muted">
-                  {outcome}
-                </p>
-              ))}
-              {race.sources
-                .filter((source) => isPublicProfileSource(source.url, source.label))
-                .map((source) => (
-                  <a
-                    key={source.url}
-                    href={source.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-xs text-accent underline underline-offset-2"
-                  >
-                    {source.label} ↗
-                  </a>
+      {career.reportedHighlights.length > 0 ? (
+        <div className="space-y-3 border-t border-border pt-4">
+          <h3 className="font-display font-semibold">Reported major race results</h3>
+          <p className="text-xs text-muted">
+            These results remain outside verified achievements and personal-best calculations.
+          </p>
+          <div className="space-y-3">
+            {career.reportedHighlights.map((race) => (
+              <article key={race.id} className="space-y-1 border-l-2 border-border pl-3">
+                <h4 className="text-sm font-semibold">{race.title}</h4>
+                <p className="text-xs text-muted">{race.date}</p>
+                {race.outcomes.map((outcome) => (
+                  <p key={outcome} className="text-sm text-muted">
+                    {outcome}
+                  </p>
                 ))}
-            </article>
-          ))}
+                {race.sources
+                  .filter((source) => isPublicProfileSource(source.url, source.label))
+                  .map((source) => (
+                    <a
+                      key={source.url}
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-xs text-accent underline underline-offset-2"
+                    >
+                      {source.label} ↗
+                    </a>
+                  ))}
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
     </section>
   );
 }
