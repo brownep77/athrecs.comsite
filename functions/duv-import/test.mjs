@@ -15,6 +15,20 @@ const parse=(raw,inventory=inv,page=url)=>parseEvent(raw,inventory,'2026-10-10T0
 test('timed performance preserves exact distance, never finish time',()=>{const r=parse(fixture()).rows[0];assert.equal(r.performance.achievedDistanceMetres,'45123.000');assert.equal(r.performance.finishTimeSeconds,null);assert.equal(r.original.Performance,'45.123 km');});
 test('all columns follow headings, even when reordered',()=>{const a=parse(fixture()).rows[0],b=parse(fixture({reorder:true})).rows[0];assert.notEqual(a.sourceDocumentHash,b.sourceDocumentHash);const {sourceDocumentHash:ah,...av}=a,{sourceDocumentHash:bh,...bv}=b;assert.deepEqual(av,bv);});
 test('explicit edition prefix is retained without index rejection',()=>assert.equal(parse(fixture({edition:'99th '})).index.name,'99th Synthetic race (GBR)'));
+test('international detail prefixes preserve the full original title',()=>{for(const edition of ['2^ ','9 ','12 ','14 . ']){const p=parse(fixture({edition}));assert.equal(p.index.name,edition+'Synthetic race (GBR)');assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');}});
+test('different titles, conflicting editions and changed dates remain held',()=>{
+ assert.throws(()=>parse(fixture({edition:'2^ '}),{...inv,index:{...inv.index,Event:'1^ Synthetic race (GBR)'}}),/index_metadata_changed/);
+ assert.throws(()=>parse(fixture(),{...inv,index:{...inv.index,Event:'Different race (GBR)'}}),/index_metadata_changed/);
+ assert.throws(()=>parse(fixture(),{...inv,index:{...inv.index,Date:'03.10.2026'}}),/index_metadata_changed/);
+});
+test('German index stage label compares exact distance and stage count',()=>{
+ const i={...inv,index:{...inv.index,Distance:'92km/2Etappen'}};
+ const p=parse(fixture({distance:'92km/2stages',performance:'12:13:14 h'}),i);
+ assert.equal(p.rows[0].distanceLabel,'92km/2Etappen');assert.equal(p.eventMetadata.Distance,'92km/2stages road race');
+ assert.equal(p.audit.metadataComparisons.distance,'Etappen_to_stages');
+ for(const distance of ['93km/2stages','92km/3stages'])assert.throws(()=>parse(fixture({distance,performance:'12:13:14 h'}),i),/index_distance_changed/);
+ assert.throws(()=>parse(fixture(),{...inv,index:{...inv.index,Distance:''}}),/index_distance_changed/);
+});
 test('unknown headings fail closed',()=>assert.throws(()=>parse(Buffer.from(fixture().toString().replace('<th>Rank</th>','<th>Unknown</th>'))),/unmapped/));
 test('bad time in timed race fails closed',()=>assert.throws(()=>parse(fixture({performance:'06:00:00 h'})),/time_in_timed/));
 test('source pagination cannot be treated as complete',()=>{const p=parse(fixture({total:2}),{...inv,index:{...inv.index,Finishers:'2'}});assert.throws(()=>combinePages([p]),/not_complete/);});

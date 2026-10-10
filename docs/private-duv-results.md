@@ -147,6 +147,24 @@ separately when reporting cumulative DUV totals. Report source rows and profiles
 as different counts. Previously captured races are recognized rather than copied.
 Source comparison is not independent identity verification.
 
+### Reviewing held source formats
+
+Read the original compressed documents before changing a parser rule. Detail
+titles may add a numeric edition/display prefix (including `2^`, `14 .` or a
+bare number); the entire remaining title and the date must still match the
+saved index exactly. The German index suffix `Etappen` may compare with the
+English detail suffix `stages` only when distance and stage count match exactly.
+Both original values and the comparison method remain in the capture audit.
+Missing distances, conflicting dates and inconsistent finisher counts stay held.
+
+Validate a parser update on an isolated database branch using stored documents.
+Disable its inherited trigger and move its provider request clock into the future
+so validation makes no provider requests. Explicitly requeue only the reviewed
+supported events. The worker reparses held documents from their original bytes,
+checks their hashes and preserves capture timestamps. Deploy to production only
+after the import and repeat checks pass; then requeue those specific events for
+the normal worker. Never delete original documents to force a refetch.
+
 The operational secret and connection files belong outside Git. Build with
 `npm ci --prefix functions/duv-import` followed by `npm --prefix functions/duv-import
 run build`; deploy a ZIP with `index.mjs` at its root. The function runs beside

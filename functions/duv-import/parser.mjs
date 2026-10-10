@@ -80,10 +80,14 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
   const candidates=alternatives.flatMap(t=>t.rows).filter(r=>r.length>=2&&r[0].text.replace(/:$/,'')===k);
   if(!candidates.some(r=>r[1].text===v&&same(r[1].links,links[k])))throw Error('independent_metadata_comparison_failed');
  }
- const withoutEdition=n=>n.replace(/^\d+(?:st|nd|rd|th|\.)\s+/i,'');
- if(withoutEdition(meta.Event??'')!==withoutEdition(inventory.index.Event??'')||meta.Date!==inventory.index.Date)throw Error('index_metadata_changed');
+ // DUV sometimes adds an edition/display prefix only on the detail page.
+ // Keep both originals; require the entire remaining title to match exactly.
+ const detailName=meta.Event??'',indexName=inventory.index.Event??'';
+ const withoutPrefix=detailName.replace(/^\d+(?:(?:st|nd|rd|th|\^|[ºª°])|\s*\.)?\s+/i,'');
+ if((detailName!==indexName&&withoutPrefix!==indexName)||meta.Date!==inventory.index.Date)throw Error('index_metadata_changed');
  const distance=inventory.index.Distance;
- if(!meta.Distance?.startsWith(distance+' '))throw Error('index_distance_changed');
+ const comparisonDistance=distance?.replace(/^(\d+(?:\.\d+)?km\/\d+)Etappen$/,'$1stages');
+ if(!distance||!meta.Distance?.startsWith(comparisonDistance+' '))throw Error('index_distance_changed');
  const range=dates(meta.Date);
  if(range.start>range.end||range.start.slice(0,4)!==String(year)||range.end>capturedAt.slice(0,10))throw Error('invalid_or_future_date_range');
  const count=/^(\d+)\s*\((\d+) M, (\d+) F\)$/.exec(meta.Finishers);
@@ -126,7 +130,8 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
   provenance:{indexUrl:inventory.indexUrl,indexHtmlSha256:inventory.indexHtmlSha256,originalResultUrls:links.Source??[],originalResultSourceInspected:false,sourceRole:'secondary_statistics_provider',organiser:null},
   pagination:{total,male:+count[2],female:+count[3],offset,pageUrl,pageLinks:[...new Set(pagination)]},
   coverage:{duvPageComplete:rows.length===total,organiserFieldComplete:'unknown',note:'Complete displayed DUV field; statistical thresholds may exclude other participants.'},
-  audit:{sourceCheck:'compared',parser:'parse5/cheerio',independentParser:'htmlparser2 streaming callbacks',version:2,comparedRows:rows.length,comparedCells:rows.length*headers.length,runnerLinksCompared:true,metadataCompared:true,identityVerified:false}};
+  audit:{sourceCheck:'compared',parser:'parse5/cheerio',independentParser:'htmlparser2 streaming callbacks',version:2,comparedRows:rows.length,comparedCells:rows.length*headers.length,runnerLinksCompared:true,metadataCompared:true,identityVerified:false,
+   metadataComparisons:{eventName:detailName===indexName?'exact':'detail_numeric_prefix',distance:comparisonDistance===distance?'exact':'Etappen_to_stages'}}};
 }
 
 export function combinePages(parts){

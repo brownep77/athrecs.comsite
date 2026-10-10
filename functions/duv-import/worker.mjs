@@ -68,7 +68,14 @@ async function captureEvent(client,item,job,owner,deadline){
  if(existing){
   await client.query(`UPDATE result_archive_import_queue SET status='imported',capture_id=$3,rows_total=$4,row_cursor=$4,receipt=$5::jsonb,updated_at=now() WHERE job_id=$1 AND source_key=$2`,[JOB,item.source_key,existing.id,existing.row_count,json({previouslyImported:true,sourceRows:existing.row_count})]);return 'existing';
  }
- let docs=(await client.query('SELECT source_url,status FROM result_archive_import_documents WHERE job_id=$1 AND source_key=$2',[JOB,item.source_key])).rows;
+ let docs=(await client.query('SELECT source_url,status,source_html_gzip,html_sha256,captured_at FROM result_archive_import_documents WHERE job_id=$1 AND source_key=$2',[JOB,item.source_key])).rows;
+ // Only explicitly requeued events reach this path. Recompare saved originals
+ // after a reviewed parser update without requesting the provider again.
+ for(const d of docs.filter(d=>d.status==='held'&&d.source_html_gzip)){
+  const raw=gunzipSync(d.source_html_gzip);
+  if(sha(raw)!==d.html_sha256)throw Error('stored_document_hash_conflict');
+  await document(client,item,d.source_url,raw,new Date(d.captured_at).toISOString());
+ }
  if(!docs.some(d=>d.source_url===item.source_url)){
   let fetched=item.source_html_gzip?{raw:gunzipSync(item.source_html_gzip),capturedAt:new Date(item.captured_at).toISOString()}:await requestSource(client,item.source_url,owner,deadline);
   if(!fetched)return null;
