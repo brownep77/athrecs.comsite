@@ -7,3 +7,13 @@ export function profileVisibility(job){
   throw Error('invalid_profile_publication_approval');
  return 'public';
 }
+
+// Publishing evidence never changes its verification status or account sharing.
+export function historyPublicationApproval(job){
+ const p=job.configuration?.historyPublication;
+ if(!p||p.revokedAt)return null;
+ if(p.visibility!=='public'||p.scope!=='duv_matched_unclaimed_public_profiles'||
+  !p.approvalId||!p.approvedBy||!p.instruction||!Number.isFinite(Date.parse(p.approvedAt)))
+  throw Error('invalid_history_publication_approval');
+ return p;
+}

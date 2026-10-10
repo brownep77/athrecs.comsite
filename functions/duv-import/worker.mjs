@@ -3,7 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { PROVIDER,parseEvent,combinePages,sha,eventId } from './parser.mjs';
 import { eventDirectory,nameKey } from './identity.mjs';
 import { loadDirectory } from './directory-loader.mjs';
-import { profileVisibility } from './publication.mjs';
+import { profileVisibility,historyPublicationApproval } from './publication.mjs';
 import { markRollbackConfirmed,retryAbortedProfileChunk } from './deadlock-retry.mjs';
 const JOB='duv-2026-20261010';
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
@@ -124,8 +124,9 @@ async function profileChunk(client,item,capture,job,owner,deadline){
   await client.query("SET LOCAL lock_timeout='8s'");await client.query("SET LOCAL statement_timeout='50s'");
   const clock=(await client.query('SELECT version::text FROM result_archive_identity_clock WHERE singleton FOR UPDATE')).rows[0].version;
   if(clock!==dir.version){await client.query('ROLLBACK');cache=null;return false;}
-  const valid=await client.query(`SELECT j.id FROM result_archive_import_jobs j JOIN result_archive_capture_approvals a ON a.id=j.approval_id WHERE j.id=$1 AND j.status='running' AND j.lease_owner=$2 AND j.lease_until>now() AND a.revoked_at IS NULL AND a.scope='staff_only'`,[JOB,owner]);
+  const valid=await client.query(`SELECT j.id,j.configuration->'historyPublication' AS publication FROM result_archive_import_jobs j JOIN result_archive_capture_approvals a ON a.id=j.approval_id WHERE j.id=$1 AND j.status='running' AND j.lease_owner=$2 AND j.lease_until>now() AND a.revoked_at IS NULL AND a.scope='staff_only' FOR SHARE OF j`,[JOB,owner]);
   if(!valid.rows.length)throw Error('approval_or_lease_lost');
+  const publication=historyPublicationApproval({configuration:{historyPublication:valid.rows[0].publication}});
   let created=[];
   if(fresh.length){
    created=(await client.query(`WITH incoming AS(SELECT value p FROM jsonb_array_elements($1::jsonb))
@@ -143,23 +144,29 @@ async function profileChunk(client,item,capture,job,owner,deadline){
   if(incoming.length){
    const existing=(await client.query(`SELECT h.athlete_id,h.external_id,h.performances FROM athlete_source_histories h WHERE h.provider=$1 AND h.external_id=ANY($2::text[])`,[PROVIDER,incoming.map(p=>p.externalId)])).rows;
    for(const e of existing){const v=incoming.find(x=>x.externalId===e.external_id);if(e.athlete_id!==v.athleteId||stable(e.performances)!==stable([v.performance]))throw Error('existing_source_history_conflict');}
-   await client.query(`WITH incoming AS(SELECT value p FROM jsonb_array_elements($1::jsonb))
+   const added=await client.query(`WITH incoming AS(SELECT value p FROM jsonb_array_elements($1::jsonb))
     INSERT INTO athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
-    SELECT (p->>'athleteId')::int,$2,p->>'externalId',p->>'sourceUrl',(p->>'capturedAt')::timestamptz,false,ARRAY[]::int[],ARRAY[2026],jsonb_build_array(p->'performance'),NULL FROM incoming ON CONFLICT(provider,external_id) DO NOTHING`,[json(incoming),PROVIDER]);
-   const checked=await client.query(`WITH incoming AS(SELECT value p FROM jsonb_array_elements($1::jsonb)) SELECT count(*)::int AS n FROM incoming JOIN athlete_source_histories h ON h.provider=$2 AND h.external_id=p->>'externalId' WHERE h.athlete_id=(p->>'athleteId')::int AND h.performances=jsonb_build_array(p->'performance') AND h.published_at IS NULL AND h.complete=false`,[json(incoming),PROVIDER]);
+    SELECT (p->>'athleteId')::int,$2,p->>'externalId',p->>'sourceUrl',(p->>'capturedAt')::timestamptz,false,ARRAY[]::int[],ARRAY[2026],jsonb_build_array(p->'performance'),
+     CASE WHEN $3::boolean AND EXISTS(SELECT 1 FROM athletes a WHERE a.id=(p->>'athleteId')::int AND a.profile_visibility='public' AND a.parent_athlete_id IS NULL AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=a.id)) THEN now() ELSE NULL END
+    FROM incoming ON CONFLICT(provider,external_id) DO NOTHING RETURNING athlete_id,external_id,published_at`,[json(incoming),PROVIDER,!!publication]);
+   const publicAdded=added.rows.filter(h=>h.published_at);
+   if(publicAdded.length)await client.query(`INSERT INTO network_audit_log(action,entity_type,entity_id,after_value,note)
+    SELECT 'athlete.history_admin_published','athlete_source_history',$2||':'||(p->>'external_id'),jsonb_build_object('athleteId',(p->>'athlete_id')::int,'approval',$3::jsonb,'identityVerified',false),
+     'Owner-authorized DUV source history publication; original evidence and unverified identity retained.' FROM jsonb_array_elements($1::jsonb) p`,[json(publicAdded),PROVIDER,json(publication)]);
+   const checked=await client.query(`WITH incoming AS(SELECT value p FROM jsonb_array_elements($1::jsonb)) SELECT count(*)::int AS n FROM incoming JOIN athlete_source_histories h ON h.provider=$2 AND h.external_id=p->>'externalId' WHERE h.athlete_id=(p->>'athleteId')::int AND h.performances=jsonb_build_array(p->'performance') AND h.complete=false AND (h.published_at IS NULL OR ($3::boolean AND EXISTS(SELECT 1 FROM athletes a WHERE a.id=h.athlete_id AND a.profile_visibility='public' AND a.parent_athlete_id IS NULL AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=a.id))))`,[json(incoming),PROVIDER,!!publication]);
    if(checked.rows[0].n!==incoming.length)throw Error('history_verification_failed');
   }
   if(created.length){
    await client.query(`INSERT INTO network_audit_log(action,entity_type,entity_id,after_value,note)
     SELECT CASE WHEN profile_visibility='public' THEN 'create_public_archive_profile' ELSE 'create_private_archive_profile' END,'athlete',id::text,
      (profile_details->'archiveCreation')||jsonb_build_object('profileVisibility',profile_visibility,'publicationApproval',profile_details->'profilePublication'),
-     'Owner-authorized DUV 2026 import: unclaimed, identity unverified; result histories remain unpublished.' FROM athletes WHERE id=ANY($1::int[])`,[created.map(a=>a.id)]);
+     'Owner-authorized DUV 2026 import: unclaimed, identity unverified; history publication requires its separate approval.' FROM athletes WHERE id=ANY($1::int[])`,[created.map(a=>a.id)]);
    const check=await client.query(`SELECT count(*)::int AS n FROM athletes a WHERE id=ANY($1::int[]) AND profile_visibility=$2 AND date_of_birth IS NULL AND club_id IS NULL AND parent_athlete_id IS NULL AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=a.id)`,[created.map(a=>a.id),profileVisibility(job)]);
    if(check.rows[0].n!==created.length)throw Error('profile_privacy_verification_failed');
    if(profileVisibility(job)==='public')await client.query(`INSERT INTO network_audit_log(action,entity_type,entity_id,after_value,note)
     SELECT 'athlete.profile_admin_published','athlete',id::text,
      jsonb_build_object('athleteId',id,'profile_visibility','public','profilePublication',profile_details->'profilePublication'),
-     'Owner-authorized public DUV source profile; source results remain unpublished and identity unverified.'
+     'Owner-authorized public DUV source profile; history publication separately approved and identity unverified.'
     FROM athletes WHERE id=ANY($1::int[])`,[created.map(a=>a.id)]);
   }
   const matches=decisions.map(d=>({sourceRow:d.row.sourceRow,sourceAthleteId:d.row.sourceAthleteId,athleteId:d.athleteId??null,status:d.status,reasons:[...d.reasons,...(d.possibleIds?[{possibleIds:d.possibleIds}]:[])]}));
