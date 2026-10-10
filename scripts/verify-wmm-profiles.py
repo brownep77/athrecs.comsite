@@ -13,6 +13,15 @@ assert not p.matching(idx,['Una Dissimilar'])
 p.add(idx,'source-one',['Una Dissimilar']);assert not p.matching(idx,['Una Dissimilar'],'source-one')
 p.add(idx,'source-two',['Una Dissimilar']);assert p.matching(idx,['Una Dissimilar'],'source-one')=={'source-two'}
 
+# Candidate-only storage must return the same matches as a full name index.
+queries=['Jose Oneill','Bob Smith','Sarah Williams','Wei Chan']
+allowed={key for name in queries for key in p.name_keys(name)}
+filtered=collections.defaultdict(set)
+p.add(filtered,'existing',['José O’Neill','Robert Smith','Sarah Willams','Chan Wei'],allowed)
+p.add(filtered,'irrelevant',['Completely Unrelated'],allowed)
+for candidate in queries:assert p.matching(filtered,[candidate])==p.matching(idx,[candidate])
+assert 'irrelevant' not in {v for values in filtered.values() for v in values}
+
 rank={'gender':'F','fastest_finish_time_secs':10921}
 def result(rid='r1',time='3:02:01',seconds=10921,bib='17'):
     return {'_id':rid,'_source':{'result_id':rid,'athlete_id':'a1','edition':8,'gender':'F','result_year':2026,'finish_time':time,'finish_time_secs':seconds,'event_title':'Synthetic Marathon','firstname':'Una','lastname':'Dissimilar','bibnumber':bib,'place':31,'age_group':'45-49'}}
@@ -24,6 +33,13 @@ assert 'same_athlete_race_year_conflicting_results' in p.normalize_results('a1',
 assert 'finish_time_conflict' in p.normalize_results('a1',rank,[result(seconds=999)])[1]
 assert 'source_identifier_conflict' in p.normalize_results('wrong',rank,[result()])[1]
 assert 'ranking_fastest_time_not_in_detailed_results' in p.normalize_results('a1',{'gender':'F','fastest_finish_time_secs':10000},[result()])[1]
+
+p.configure(7)
+historical=result();historical['_source'].update(edition=7,result_year=2025)
+assert not p.normalize_results('a1',rank,[historical])[1]
+assert 'source_identifier_conflict' in p.normalize_results('a1',rank,[result()])[1]
+assert p.SOURCE_PERIOD==[] and p.BATCH=='wmm-edition7-20261010'
+p.configure(8)
 
 # Ranking ties must not disappear at a page edge; numeric rank intervals are disjoint.
 called=[]
