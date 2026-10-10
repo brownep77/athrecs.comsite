@@ -2,6 +2,7 @@ import { gzipSync,gunzipSync } from 'node:zlib';
 import { randomUUID } from 'node:crypto';
 import { PROVIDER,parseEvent,combinePages,sha,eventId } from './parser.mjs';
 import { Directory,eventDirectory,nameKey } from './identity.mjs';
+import { profileVisibility } from './publication.mjs';
 const JOB='duv-2026-20261010';
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const json=x=>JSON.stringify(x);
@@ -110,8 +111,9 @@ function history(row,capture,captureId){return {year:2026,date:row.date,endDate:
  archiveReference:{captureId:String(captureId),sourceKey:capture.sourceKey,tableKey:row.tableKey,sourceRow:row.sourceRow,sourcePageUrl:row.sourcePageUrl,sourceAthleteId:row.sourceAthleteId,htmlSha256:row.sourceDocumentHash,status:row.status,original:row.original,originalLinks:row.originalLinks,originalResultUrls:capture.provenance.originalResultUrls}};}
 function newProfile(row,capture,job){
  const name=nameKey(row.name).replaceAll(' ','-');return {sourceAthleteId:row.sourceAthleteId,
+  profileVisibility:profileVisibility(job),
   slug:((/^[a-z0-9-]+$/.test(name)?name:'duv-runner').slice(0,160))+'-duv-'+row.sourceAthleteId,displayName:row.name,givenName:row.givenName,familyName:row.familyName,gender:row.gender,sourceClubName:row.club,sourceUrl:row.sourceAthleteUrl,
-  details:{archiveCreation:{batchId:JOB,candidateId:'DUV-'+row.sourceAthleteId,approvedBy:'Paul Browne',approvedAt:job.configuration.approvedAt,instruction:job.configuration.instruction,basis:'Stable source runner ID, independently compared row, conservative name/alias/account screening; provisional identity.',profileIdentityVerified:false,sourceRowsCompared:true,sourceKeys:[capture.sourceKey]},aliases:[row.name,row.sourceName],athlete_verified:false,identity_review_status:'provisional_source_profile',currentClubAssociationConfirmed:false,sourceIdentities:[{provider:PROVIDER,externalId:row.sourceAthleteId,sourceUrl:row.sourceAthleteUrl}],duvSourceObservation:{birthYear:row.sourceBirthYear,nationality:row.sourceNationality,clubDisplay:row.club,clubDisplayTruncated:row.clubDisplayTruncated,eventDate:row.date}}};
+  details:{archiveCreation:{batchId:JOB,candidateId:'DUV-'+row.sourceAthleteId,approvedBy:'Paul Browne',approvedAt:job.configuration.approvedAt,instruction:job.configuration.instruction,basis:'Stable source runner ID, independently compared row, conservative name/alias/account screening; provisional identity.',profileIdentityVerified:false,sourceRowsCompared:true,sourceKeys:[capture.sourceKey]},profilePublication:profileVisibility(job)==='public'?job.configuration.profilePublication:null,aliases:[row.name,row.sourceName],athlete_verified:false,identity_review_status:'provisional_source_profile',currentClubAssociationConfirmed:false,sourceIdentities:[{provider:PROVIDER,externalId:row.sourceAthleteId,sourceUrl:row.sourceAthleteUrl}],duvSourceObservation:{birthYear:row.sourceBirthYear,nationality:row.sourceNationality,clubDisplay:row.club,clubDisplayTruncated:row.clubDisplayTruncated,eventDate:row.date}}};
 }
 async function profileChunk(client,item,capture,job,owner){
  const dir=await directory(client),ed=eventDirectory(capture.rows);const chunk=capture.rows.slice(item.row_cursor,item.row_cursor+150);
@@ -128,7 +130,7 @@ async function profileChunk(client,item,capture,job,owner){
   if(fresh.length){
    created=(await client.query(`WITH incoming AS(SELECT value p FROM jsonb_array_elements($1::jsonb))
     INSERT INTO athletes(slug,display_name,given_name,family_name,gender,source_club_name,city,county,country,bio,source_url,profile_type,profile_visibility,profile_roles,profile_details,profile_source_checked_at)
-    SELECT p->>'slug',p->>'displayName',p->>'givenName',p->>'familyName',p->>'gender',p->>'sourceClubName',NULL,'','','',p->>'sourceUrl','Athlete','private','',p->'details',now() FROM incoming
+    SELECT p->>'slug',p->>'displayName',p->>'givenName',p->>'familyName',p->>'gender',p->>'sourceClubName',NULL,'','','',p->>'sourceUrl','Athlete',p->>'profileVisibility','',p->'details',now() FROM incoming
     RETURNING id,slug,display_name,given_name,family_name,gender,source_url,profile_details,profile_visibility,parent_athlete_id`,[json(fresh)])).rows;
    if(created.length!==fresh.length)throw Error('profile_insert_count_mismatch');
   }
@@ -149,9 +151,16 @@ async function profileChunk(client,item,capture,job,owner){
   }
   if(created.length){
    await client.query(`INSERT INTO network_audit_log(action,entity_type,entity_id,after_value,note)
-    SELECT 'create_private_archive_profile','athlete',id::text,profile_details->'archiveCreation','Owner-authorized DUV 2026 import: private, unclaimed, identity unverified.' FROM athletes WHERE id=ANY($1::int[])`,[created.map(a=>a.id)]);
-   const check=await client.query(`SELECT count(*)::int AS n FROM athletes a WHERE id=ANY($1::int[]) AND profile_visibility='private' AND date_of_birth IS NULL AND club_id IS NULL AND parent_athlete_id IS NULL AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=a.id)`,[created.map(a=>a.id)]);
+    SELECT CASE WHEN profile_visibility='public' THEN 'create_public_archive_profile' ELSE 'create_private_archive_profile' END,'athlete',id::text,
+     (profile_details->'archiveCreation')||jsonb_build_object('profileVisibility',profile_visibility,'publicationApproval',profile_details->'profilePublication'),
+     'Owner-authorized DUV 2026 import: unclaimed, identity unverified; result histories remain unpublished.' FROM athletes WHERE id=ANY($1::int[])`,[created.map(a=>a.id)]);
+   const check=await client.query(`SELECT count(*)::int AS n FROM athletes a WHERE id=ANY($1::int[]) AND profile_visibility=$2 AND date_of_birth IS NULL AND club_id IS NULL AND parent_athlete_id IS NULL AND NOT EXISTS(SELECT 1 FROM athlete_account_links l WHERE l.athlete_id=a.id)`,[created.map(a=>a.id),profileVisibility(job)]);
    if(check.rows[0].n!==created.length)throw Error('profile_privacy_verification_failed');
+   if(profileVisibility(job)==='public')await client.query(`INSERT INTO network_audit_log(action,entity_type,entity_id,after_value,note)
+    SELECT 'athlete.profile_admin_published','athlete',id::text,
+     jsonb_build_object('athleteId',id,'profile_visibility','public','profilePublication',profile_details->'profilePublication'),
+     'Owner-authorized public DUV source profile; source results remain unpublished and identity unverified.'
+    FROM athletes WHERE id=ANY($1::int[])`,[created.map(a=>a.id)]);
   }
   const matches=decisions.map(d=>({sourceRow:d.row.sourceRow,sourceAthleteId:d.row.sourceAthleteId,athleteId:d.athleteId??null,status:d.status,reasons:[...d.reasons,...(d.possibleIds?[{possibleIds:d.possibleIds}]:[])]}));
   await client.query(`INSERT INTO result_archive_import_matches(job_id,source_key,source_row,source_athlete_id,athlete_id,status,reasons)

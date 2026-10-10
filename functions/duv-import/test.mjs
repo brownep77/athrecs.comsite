@@ -1,6 +1,7 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {parseEvent,combinePages,dates,measurement} from './parser.mjs';
 import {Directory,eventDirectory} from './identity.mjs';
+import {profileVisibility} from './publication.mjs';
 const url='https://statistik.d-u-v.org/getresultevent.php?event=900001';
 const headings=['Rank','Performance','Surname, first name','Club','Nat.','YOB','M/F','Rank M/F','Cat','Cat. Rank'];
 function fixture({start=1,count=1,total=1,reorder=false,name='Example, Alice',runner='900001',performance='45.123 km',edition='',distance='6h'}={}){
@@ -40,3 +41,10 @@ test('names, aliases and account names prevent duplicate creation',()=>{const r=
 test('a repeated profile added in-memory prevents recreation',()=>{const r=parse(fixture()).rows[0],d=new Directory();assert.equal(d.decide(r,eventDirectory([r])).status,'created');d.addAthlete({id:3,display_name:r.name,gender:r.gender,source_url:r.sourceAthleteUrl});assert.equal(d.decide(r,eventDirectory([r])).status,'linked');});
 test('ambiguous multiple source ID associations are held',()=>{const r=parse(fixture()).rows[0];const d=new Directory([1,2].map(id=>({id,display_name:r.name,source_url:r.sourceAthleteUrl})));assert.equal(d.decide(r,eventDirectory([r])).status,'held');});
 test('multi-day dates and fractional times keep source precision',()=>{assert.deepEqual(dates('23.-24.05.2026'),{start:'2026-05-23',end:'2026-05-24'});assert.equal(measurement('4:16:26.12 h','45.6km').finishTimeSeconds,'15386.12');assert.throws(()=>dates('31.02.2026'),/invalid/);});
+test('public source profiles require a separate explicit scoped approval',()=>{
+ const p={visibility:'public',scope:'duv_created_unclaimed_profiles',approvalId:'synthetic-approval',approvedBy:'Test owner',approvedAt:'2026-10-10T10:06:37Z',instruction:'Publish imported source profiles'};
+ assert.equal(profileVisibility({configuration:{}}),'private');
+ assert.equal(profileVisibility({configuration:{profilePublication:p}}),'public');
+ assert.equal(profileVisibility({configuration:{profilePublication:{...p,revokedAt:'2026-10-10T11:00:00Z'}}}),'private');
+ for(const key of ['scope','approvedAt','instruction','approvalId','approvedBy'])assert.throws(()=>profileVisibility({configuration:{profilePublication:{...p,[key]:''}}}),/publication_approval/);
+});

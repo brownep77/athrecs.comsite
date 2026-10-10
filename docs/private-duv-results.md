@@ -1,5 +1,20 @@
 # Private DUV results and provisional athlete profiles
 
+**Profile publication update, 10 October 2026:** Paul subsequently authorised
+all profiles created by this DUV import to be public and listed in AthRecs'
+athlete directory. This supersedes the private-profile default for this job only.
+The source archive and result histories remain private and unverified. Existing
+account privacy choices, unrelated profiles and uncertain identity holds are
+outside this profile-only publication.
+
+`scripts/publish-duv-source-profiles.sql` records this separate approval, publishes
+unclaimed profiles from the current and first-event batches, and configures
+future profiles. Pause the job only after its lease ends; validate on an isolated
+branch, deploy the compatible worker, apply the SQL transaction, then resume.
+The worker creates a publication audit for each new public profile. Repeat
+publication changes zero profiles. Do not infer result verification from public
+profile visibility or publish histories as a side effect.
+
 Use the existing central `result_archive_source_captures` inbox and
 `athlete_source_histories`; no parallel database or schema migration is needed.
 This is a supervised, one-event-at-a-time workflow. The automated DUV fixture
