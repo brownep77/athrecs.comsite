@@ -11,7 +11,10 @@ import {
   EditorialAthleteOverview,
   EditorialRoadSplits,
 } from "@/components/athletes/EditorialAthleteOverview";
-import { additionalHistoryResults } from "@/lib/athrecs/profile-history-results";
+import {
+  additionalHistoryResults,
+  sourceHistorySports,
+} from "@/lib/athrecs/profile-history-results";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
 import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
@@ -259,7 +262,7 @@ function AthleteContent() {
   const profileSports = [
     ...new Set([
       ...profileResults.map((r) => r.sport),
-      ...historyResults.map((r) => r.sport),
+      ...sourceHistorySports(sourceHistories),
       ...upcoming.map((r) => r.sport),
     ]),
   ];

@@ -199,6 +199,15 @@ try {
       directoryHtml.includes("Running") &&
       directoryHtml.includes("1 recorded result"),
   );
+  const { verificationStatus: _status, ...legacyPerformance } = wmmPerformance;
+  await sql`update athlete_source_histories set performances=${JSON.stringify([legacyPerformance])}::jsonb where athlete_id=${a.id}`;
+  const legacyHtml = await (await fetch(origin + "/athletes/synthetic-duv-public")).text();
+  assert(
+    legacyHtml.includes("Sport:") &&
+      legacyHtml.includes("Running") &&
+      !legacyHtml.includes("Sport not recorded"),
+    "Legacy source histories also supply the profile's sport",
+  );
   await sql`delete from athlete_source_histories where athlete_id=${a.id}`;
   const nationalityDetails = {
     // ANT is the sporting code for Antigua & Barbuda, not the former ISO code.

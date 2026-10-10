@@ -8,6 +8,27 @@ export type HistoryResult = {
   performance: SourcePerformance;
 };
 
+function historySport(discipline: string): HistoryResult["sport"] {
+  return /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*k(?:m)?|\d+(?:\.\d+)?\s*(?:mi|mile|miles))$/i.test(
+    discipline.trim(),
+  )
+    ? "Running"
+    : "Athletics";
+}
+
+/** Sport labels include visible legacy histories as well as additional marks. */
+export function sourceHistorySports(histories: readonly SourceHistory[]): HistoryResult["sport"][] {
+  return [
+    ...new Set(
+      histories.flatMap((history) =>
+        history.performances
+          .filter((performance) => !performance.profileExcluded)
+          .map((performance) => historySport(performance.discipline)),
+      ),
+    ),
+  ];
+}
+
 export function historyResultAnchor(key: string): string {
   return `history-result-${encodeURIComponent(key)}`;
 }
@@ -123,12 +144,7 @@ export function additionalHistoryResults(histories: readonly SourceHistory[]): H
         ? [
             {
               key: `${history.provider}:${history.externalId}:${index}`,
-              sport:
-                /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*k(?:m)?|\d+(?:\.\d+)?\s*(?:mi|mile|miles))$/i.test(
-                  performance.discipline.trim(),
-                )
-                  ? ("Running" as const)
-                  : ("Athletics" as const),
+              sport: historySport(performance.discipline),
               performance,
             },
           ]

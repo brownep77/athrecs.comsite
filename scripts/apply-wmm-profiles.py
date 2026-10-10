@@ -90,9 +90,9 @@ created AS (
 ), audits AS (
  INSERT INTO network_audit_log(actor_email,action,entity_type,entity_id,after_value,note)
  SELECT 'paul@athrecs.com','athlete.history_admin_published','athlete_source_history',$2||':'||h.external_id,
- jsonb_build_object('athleteId',h.athlete_id,'batchId',$3::text,'sourceCompared',true,'identityVerified',false,'sourceCaptureId',$4::bigint),
+ jsonb_build_object('athleteId',h.athlete_id,'batchId',$3::text,'sourceCompared',true,'identityVerified',false,'sourceCaptureId',coalesce((p->>'sourceCaptureId')::bigint,$4::bigint)),
  'Owner requested WMM athlete profiles and source results with duplicate checks; retained source year only; unclaimed provisional identity; existing profiles unchanged.'
- FROM histories h RETURNING id
+ FROM histories h JOIN incoming ON h.external_id=p->>'externalId' RETURNING id
 ) SELECT (SELECT count(*) FROM created)::int profiles,(SELECT count(*) FROM histories)::int histories,(SELECT count(*) FROM audits)::int audits,
  (SELECT coalesce(jsonb_agg(jsonb_build_object('id',id,'slug',slug)),'[]'::jsonb) FROM created) created"""
 
@@ -150,7 +150,44 @@ def apply(args):
     directory=LiveDirectory(query,frozenset(allowed_keys));totals=collections.Counter();examples=[];fresh_holds=[]
     already=query([('SELECT external_id FROM athlete_source_histories WHERE provider=$1',[PROVIDER])],True)[0]
     known={r['external_id'] for r in already}
-    selected=0
+    def commit_batch(original):
+        for attempt in range(6):
+            with branch_lock(lock_path):
+                directory.refresh();batch=[];holds=[]
+                for p in original:
+                    matches=prep.matching(directory.index,p['details']['aliases'])
+                    for performance in p['performances']:
+                        for key in prep.result_keys(performance['archiveReference']['original']):matches.update(directory.result_index.get(key,()))
+                    if matches:holds.append({'sourceAthleteId':p['externalId'],'name':p['displayName'],'reason':'New or changed AthRecs name/alias since global screening','candidates':sorted(matches)[:20]});continue
+                    batch.append(p)
+                if not batch:fresh_holds.extend(holds);totals['newly_held']+=len(holds);break
+                data=json.dumps(batch,ensure_ascii=False,separators=(',',':'))
+                queries=[("SET LOCAL lock_timeout='8s'",[]),("SET LOCAL statement_timeout='55s'",[]),
+                  ('LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,results,editions,events IN SHARE ROW EXCLUSIVE MODE',[]),
+                  ('CREATE TEMP TABLE wmm_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
+                  ('CREATE TEMP TABLE wmm_approval_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
+                  ('CREATE TEMP TABLE wmm_result_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
+                  ('INSERT INTO wmm_guard SELECT fingerprint=$2 FROM ('+FP+') f',[0,directory.fingerprint]),
+                  ('INSERT INTO wmm_approval_guard SELECT EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)',[APPROVAL]),
+                  (INSERT,[data,PROVIDER,BATCH,original[0]['sourceCaptureId']]),
+                  ('INSERT INTO wmm_result_guard SELECT count=jsonb_array_length($4::jsonb) FROM ('+VERIFY+') v',[data,PROVIDER,BATCH,data]),
+                  (VERIFY,[data,PROVIDER,BATCH])]
+                try:r=query(queries)
+                except RuntimeError as e:
+                    # These errors abort the entire transaction. Refresh the
+                    # directory and re-run all guards before retrying the batch.
+                    if any(reason in str(e) for reason in ['wmm_guard','lock timeout','SQLSTATE 40P01','SQLSTATE 40001']) and attempt<5:
+                        time.sleep(min(attempt+1,5)+random.random());continue
+                    raise
+                receipt=r[-3][0]
+                if receipt['profiles']!=len(batch) or receipt['histories']!=len(batch) or receipt['audits']!=len(batch):raise ValueError('Unexpected replay/concurrency receipt; inspect before continuation')
+                known.update(p['externalId'] for p in batch);totals['created']+=len(batch);totals['results']+=sum(len(p['performances']) for p in batch);totals['newly_held']+=len(holds);fresh_holds.extend(holds)
+                if len(examples)<12:examples.extend(receipt['created'][:12-len(examples)])
+                save_receipt(args.receipt,{'branchId':cfg['branchId'],'batchId':BATCH,'counts':dict(totals),'examples':examples,'newHolds':fresh_holds})
+                print(json.dumps({'phase':'committed','branch':cfg['branchId'],**totals}),flush=True)
+                break
+
+    selected=0;pending=[]
     for path in files:
         planpath=args.plan/path.name.replace('.json.gz','.plan.json.gz')
         if manifest and hashlib.sha256(planpath.read_bytes()).hexdigest()!=manifest['sha256'].get(planpath.name):raise ValueError('Plan changed after independent source comparison')
@@ -162,43 +199,11 @@ def apply(args):
         selected+=len(selected_profiles)
         profiles=[p for p in selected_profiles if p['externalId'] not in known]
         totals['previously_imported']+=len(selected_profiles)-len(profiles)
-        for start in range(0,len(profiles),args.batch_size):
-            original=profiles[start:start+args.batch_size]
-            for attempt in range(6):
-                with branch_lock(lock_path):
-                    directory.refresh();batch=[];holds=[]
-                    for p in original:
-                        matches=prep.matching(directory.index,p['details']['aliases'])
-                        for performance in p['performances']:
-                            for key in prep.result_keys(performance['archiveReference']['original']):matches.update(directory.result_index.get(key,()))
-                        if matches:holds.append({'sourceAthleteId':p['externalId'],'name':p['displayName'],'reason':'New or changed AthRecs name/alias since global screening','candidates':sorted(matches)[:20]});continue
-                        batch.append(p)
-                    if not batch:fresh_holds.extend(holds);totals['newly_held']+=len(holds);break
-                    data=json.dumps(batch,ensure_ascii=False,separators=(',',':'))
-                    queries=[("SET LOCAL lock_timeout='8s'",[]),("SET LOCAL statement_timeout='55s'",[]),
-                      ('LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,results,editions,events IN SHARE ROW EXCLUSIVE MODE',[]),
-                      ('CREATE TEMP TABLE wmm_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
-                      ('CREATE TEMP TABLE wmm_approval_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
-                      ('CREATE TEMP TABLE wmm_result_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
-                      ('INSERT INTO wmm_guard SELECT fingerprint=$2 FROM ('+FP+') f',[0,directory.fingerprint]),
-                      ('INSERT INTO wmm_approval_guard SELECT EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)',[APPROVAL]),
-                      (INSERT,[data,PROVIDER,BATCH,capid]),
-                      ('INSERT INTO wmm_result_guard SELECT count=jsonb_array_length($4::jsonb) FROM ('+VERIFY+') v',[data,PROVIDER,BATCH,data]),
-                      (VERIFY,[data,PROVIDER,BATCH])]
-                    try:r=query(queries)
-                    except RuntimeError as e:
-                        # These errors abort the entire transaction. Refresh the
-                        # directory and re-run all guards before retrying the batch.
-                        if any(reason in str(e) for reason in ['wmm_guard','lock timeout','SQLSTATE 40P01','SQLSTATE 40001']) and attempt<5:
-                            time.sleep(min(attempt+1,5)+random.random());continue
-                        raise
-                    receipt=r[-3][0]
-                    if receipt['profiles']!=len(batch) or receipt['histories']!=len(batch) or receipt['audits']!=len(batch):raise ValueError('Unexpected replay/concurrency receipt; inspect before continuation')
-                    known.update(p['externalId'] for p in batch);totals['created']+=len(batch);totals['results']+=sum(len(p['performances']) for p in batch);totals['newly_held']+=len(holds);fresh_holds.extend(holds)
-                    if len(examples)<12:examples.extend(receipt['created'][:12-len(examples)])
-                    save_receipt(args.receipt,{'branchId':cfg['branchId'],'batchId':BATCH,'counts':dict(totals),'examples':examples,'newHolds':fresh_holds})
-                    print(json.dumps({'phase':'committed','branch':cfg['branchId'],**totals}),flush=True)
-                    break
+        # Buffer compared pages; every profile retains its own archived capture.
+        pending.extend({**p,'sourceCaptureId':capid} for p in profiles)
+        while len(pending)>=args.batch_size:
+            commit_batch(pending[:args.batch_size]);del pending[:args.batch_size]
+    if pending:commit_batch(pending)
     final={'branchId':cfg['branchId'],'batchId':BATCH,'counts':dict(totals),'examples':examples,'newHolds':fresh_holds,'reviewLimited':bool(args.limit)}
     save_receipt(args.receipt,final)
     if not args.limit and total==1:
