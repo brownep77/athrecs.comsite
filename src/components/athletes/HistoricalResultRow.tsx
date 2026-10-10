@@ -40,6 +40,9 @@ export function HistoricalResultRow({
       >
         {row.dateLabel ||
           (row.date ? formatRaceDateShort(row.date) : row.yearLabel || String(row.year))}
+        {row.endDate && row.endDate !== row.date ? (
+          <span className="block text-subtle">to {formatRaceDateShort(row.endDate)}</span>
+        ) : null}
       </td>
       <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
         <span className="inline-flex items-center gap-1.5">
@@ -63,18 +66,20 @@ export function HistoricalResultRow({
         className="whitespace-nowrap px-3 py-2 text-xs"
       >
         {profileDisciplineLabel(discipline)}
-        <span className="block text-[10px] text-subtle">
-          {result.sport === "Running"
-            ? "Road"
-            : /cross country/i.test(row.discipline)
-              ? "Cross country"
-              : combined
-                ? "Combined events"
-                : field
-                  ? "Field"
-                  : "Track"}
-          {indoor ? " · Indoor" : ""}
-        </span>
+        {row.providerName !== "DUV Ultra Marathon Statistics" ? (
+          <span className="block text-[10px] text-subtle">
+            {result.sport === "Running"
+              ? "Road"
+              : /cross country/i.test(row.discipline)
+                ? "Cross country"
+                : combined
+                  ? "Combined events"
+                  : field
+                    ? "Field"
+                    : "Track"}
+            {indoor ? " · Indoor" : ""}
+          </span>
+        ) : null}
       </td>
       <td role="cell" data-label="Location" className="px-3 py-2 text-xs">
         <span className="inline-flex items-center gap-1.5">
@@ -99,6 +104,12 @@ export function HistoricalResultRow({
       </td>
       <td role="cell" data-label="Place" className="px-3 py-2 tabular-nums">
         {row.place || "—"}
+        {row.places?.gender != null ? (
+          <span className="block text-xs text-muted">Gender: {row.places.gender}</span>
+        ) : null}
+        {row.places?.category != null ? (
+          <span className="block text-xs text-muted">Category: {row.places.category}</span>
+        ) : null}
       </td>
       <td role="cell" data-label="Category" className="px-3 py-2 text-xs">
         {row.ageGroup || "—"}

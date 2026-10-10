@@ -18,7 +18,9 @@ class Tests(unittest.TestCase):
         self.assertEqual((r['date'],r['performance'],r['place']),('2026-09-01','08:35:11','11'))
         self.assertEqual(r['archiveReference']['original']['rankGender'],3)
         self.assertEqual(r['ageGroup'],'');self.assertEqual(p['givenName'],'')
-        self.assertEqual(r['verificationStatus'],'unverified');self.assertNotIn('date_of_birth',p)
+        self.assertEqual(r['verificationStatus'],'source_verified');self.assertNotIn('date_of_birth',p)
+        self.assertFalse(r['verificationBasis']['identityVerified'])
+        self.assertEqual(r['places'],{'overall':11,'gender':3,'category':None})
     def test_dnf_never_becomes_finish(self):
         p=u.normalise(capture(isDnf=True,time=None,rank=None,rankGender=None),'999')
         self.assertEqual(p['performances'][0]['performance'],'DNF')

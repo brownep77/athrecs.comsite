@@ -41,6 +41,10 @@ publication and personal-best calculations in this repository.
 - Report the scope honestly: automated screening, source comparison and manual
   identity verification are different. Never call the whole catalogue verified
   because schema, row-count or code tests pass.
+- Owner instruction, 10 October 2026: results actually listed on UTMB's website
+  are an accepted verification source. Mark a matched, source-compared result
+  `source_verified`, preserving the original row and provenance. This does not
+  verify the athlete's identity or justify accepting a URL without its contents.
 - Keep private athlete audits and database exports out of source-control changes
   intended for external publication. Use synthetic examples in regression tests.
 - Always credit the chip-timing/results provider by name when publishing results

@@ -88,9 +88,11 @@ def normalise(c,aid):
         perfs.append({'year':date.year,'date':date.isoformat(),'sourceDate':row['date'],'ageGroup':'',
           'discipline':f'{distance:g} km','performance':performance,'wind':'','place':str(row['rank'] or ''),
           'venue':'','meeting':row['eventName']+' — '+row['raceName'],'country':row.get('country',''),
-          'sourceUrls':[c['url'],race_url],'providerName':'UTMB Index','verificationStatus':'unverified',
+          'sourceUrls':[c['url'],race_url],'providerName':'UTMB Index','verificationStatus':'source_verified',
+          'verificationBasis':{'type':'owner_accepted_utmb_source','approvedBy':'Paul Browne','approvedAt':'2026-10-10T20:57:30Z','sourceUrl':c['url'],'htmlSha256':c['sha256'],'identityVerified':False},
+          'places':{'overall':row['rank'],'gender':row['rankGender'],'category':None},
           'labels':['Trail running',('DNF' if row['isDnf'] else 'Finished'),'Source-reported result'],
-          'notes':f"UTMB runner {aid}; race edition {rid}; overall place {row['rank'] or 'not supplied'}; gender place {row['rankGender'] or 'not supplied'}; ascent {row.get('elevationGain')} m. Race time basis (chip/gun) not specified. Source observation; not independent identity or PB verification.",
+          'notes':f"UTMB runner {aid}; race edition {rid}; overall place {row['rank'] or 'not supplied'}; gender place {row['rankGender'] or 'not supplied'}; ascent {row.get('elevationGain')} m. Race time basis (chip/gun) not specified. Result verified against the accepted UTMB source; athlete identity is not independently verified.",
           'archiveReference':{'provider':PROVIDER,'sourceAthleteId':aid,'sourceRaceYearId':rid,'original':row}})
     slug=re.sub('[^a-z0-9]+','-',prep.norm(name)).strip('-')[:90]+'-utmb-'+aid
     details={'aliases':[name],'athlete_verified':False,'identity_review_status':'provisional_source_profile',

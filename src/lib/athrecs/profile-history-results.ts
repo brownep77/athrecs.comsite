@@ -8,7 +8,8 @@ export type HistoryResult = {
   performance: SourcePerformance;
 };
 
-function historySport(discipline: string): HistoryResult["sport"] {
+function historySport(discipline: string, provider?: string): HistoryResult["sport"] {
+  if (provider === "DUV Ultra Marathon Statistics") return "Running";
   // Explicit multisport labels take priority over distances within a race leg.
   if (/\btriathlon\b/i.test(discipline)) return "Triathlon";
   if (/\bduathlon\b/i.test(discipline)) return "Duathlon";
@@ -29,7 +30,7 @@ export function sourceHistorySports(histories: readonly SourceHistory[]): Histor
       histories.flatMap((history) =>
         history.performances
           .filter((performance) => !performance.profileExcluded)
-          .map((performance) => historySport(performance.discipline)),
+          .map((performance) => historySport(performance.discipline, history.provider)),
       ),
     ),
   ];
@@ -154,7 +155,7 @@ export function additionalHistoryResults(histories: readonly SourceHistory[]): H
         ? [
             {
               key: `${history.provider}:${history.externalId}:${index}`,
-              sport: historySport(performance.discipline),
+              sport: historySport(performance.discipline, history.provider),
               performance,
             },
           ]

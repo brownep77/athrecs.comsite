@@ -39,8 +39,13 @@ name match is held with supporting/opposing reasons. An existing stable UTMB
 source ID can extend its existing history; old observations and publication
 settings are retained. Same-day legacy rows lacking edition IDs and changed
 source performances are held, not overwritten or duplicated. Import audit rows
-retain before/after histories. Source histories remain explicitly unverified;
-this importer does not create verified PBs or change canonical results/claims.
+retain before/after histories. Under the owner's further instruction at 21:57
+BST on 10 October 2026, UTMB is an accepted verification source: supported rows
+compared against the captured runner page are `source_verified`. Athlete identity
+remains provisional; this importer does not change canonical results or claims.
+`scripts/verify-captured-utmb-histories.sql` applies that decision to exact matches
+in already retained, compared captures and records the previous history in audit.
+Legacy rows without comparable source evidence keep their existing status.
 
 `scripts/import-utmb-fixtures.py` reads individual race cards and reuses uniquely
 matched existing events. It preserves exact advertised kilometre distances,
