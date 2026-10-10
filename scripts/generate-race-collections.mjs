@@ -10,12 +10,23 @@
  *   edition-specific, so the checked edition is retained in the note.
  */
 
-import { writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const checkedAt = process.argv.find((arg) => arg.startsWith("--checked-at="))?.split("=")[1]
   ?? new Date().toISOString().slice(0, 10);
 const outputPath = resolve("src/data/race-collections.ts");
+// Keep individually checked race editions when refreshing the event switcher.
+// The switcher supplies a weekend, not individual distances or start dates.
+const priorSource = await readFile(outputPath, "utf8").catch((error) => {
+  if (error.code === "ENOENT") return "";
+  throw error;
+});
+const priorEditionBlock = priorSource.match(/export const raceCollectionEditions: Edition\[\] = (\[[\s\S]*?\n\]);/);
+if (priorSource && !priorEditionBlock) throw new Error("Cannot preserve existing race editions: unexpected file format");
+const checkedUtmbEditions = (priorEditionBlock ? JSON.parse(priorEditionBlock[1]) : []).filter(
+  (edition) => edition.distanceKm > 0 && /^https:\/\/[^/]+\.utmb\.world\/races\//.test(edition.source),
+);
 
 const WORLD_MARATHON_MAJORS = [
   ["tokyo-marathon", "Tokyo Marathon"],
@@ -242,6 +253,9 @@ const raceCollectionSeries = [
 const raceCollectionEditions = [
   ...utmbEvents
     .filter((event) => event.dateBegin)
+    .filter((event) => !checkedUtmbEditions.some((edition) =>
+      edition.seriesSlug === event.slug && edition.date >= event.dateBegin
+      && edition.date <= (event.dateEnd || event.dateBegin)))
     .map((event) => ({
       seriesSlug: event.slug,
       date: event.dateBegin,
@@ -254,6 +268,7 @@ const raceCollectionEditions = [
         ? `Event weekend ${event.dateBegin} to ${event.dateEnd}. See the official event for individual race dates.`
         : "See the official event for individual race dates.",
     })),
+  ...checkedUtmbEditions,
   ...UTMB_INDEX_RACES.map((event) => ({
     seriesSlug: event.slug,
     date: event.date,
