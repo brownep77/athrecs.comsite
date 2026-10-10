@@ -14,6 +14,22 @@ PROVIDER='utmb';BATCH='utmb-directory-20261010';APPROVAL=BATCH+'-owner'
 RUN=str(uuid.uuid5(uuid.NAMESPACE_URL,BATCH));PROD=wmm.PROD
 DIRECTORY_LOCK='LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,athlete_identifiers,athlete_source_histories,results,editions,events IN SHARE ROW EXCLUSIVE MODE'
 class LiveDirectory(wmm.LiveDirectory):
+    def __init__(self,query,allowed_keys,cache):
+        self.cache=cache;self.cache_key=hashlib.sha256(json.dumps(sorted(allowed_keys)).encode()).hexdigest()
+        if cache.exists():
+            saved=json.loads(cache.read_text())
+            if saved['key']==self.cache_key:
+                self.query=query;self.allowed_keys=allowed_keys
+                self.maxid=saved['maxid'];self.fingerprint=saved['fingerprint']
+                self.index=collections.defaultdict(set,{k:set(v) for k,v in saved['index'].items()})
+                self.entities=saved['entities'];self.result_index=collections.defaultdict(set)
+                self.refresh();return
+        super().__init__(query,allowed_keys)
+    def save(self):
+        wmm.save_receipt(self.cache,{'key':self.cache_key,'maxid':self.maxid,'fingerprint':self.fingerprint,
+            'index':{k:sorted(v) for k,v in self.index.items()},'entities':self.entities})
+    def reload(self):
+        super().reload();self.save()
     def refresh(self):
         # Concurrent bulk writers can otherwise advance the directory throughout
         # the fingerprint query. Take the short refresh under the same locks as
@@ -26,6 +42,7 @@ class LiveDirectory(wmm.LiveDirectory):
         for a in new:wmm.register(self.index,self.entities,a,self.allowed_keys)
         self.maxid=max([self.maxid,*[int(a['id']) for a in new]])
         self.fingerprint=fp[0]['fingerprint']
+        self.save()
 def directory_pages(query,maxid):
     # Fewer read-only round trips; keep the same complete name/alias scan and
     # before/after fingerprint guards as the established importer.
@@ -102,7 +119,14 @@ def existing_merge(old,new):
     return merged,added,held
 
 def apply(args):
-    cfg,query=base.connection(args.connection,args.confirm_branch)
+    cfg,raw_query=base.connection(args.connection,args.confirm_branch)
+    def query(statements,readonly=False):
+        for attempt in range(4):
+            try:return raw_query(statements,readonly)
+            except RuntimeError as exc:
+                if readonly and attempt<3 and any(v in str(exc) for v in ('HTTP 500','HTTP 502','HTTP 503','HTTP 504')):
+                    time.sleep(attempt+1);continue
+                raise
     if cfg['projectId']!=wmm.PROJECT:raise ValueError('Wrong project')
     if args.review==(cfg['branchId']==PROD):raise ValueError('Review/production branch mismatch')
     if not args.review and not args.publish:raise ValueError('Explicit publication flag required')
@@ -144,8 +168,10 @@ def apply(args):
         returned=query(statements) if statements else []
         for p,row in zip(pending,returned):p['sourceCaptureId']=row[0]['id']
     print(json.dumps({'phase':'archived','runnerPages':len(people),'sourceRows':sum(len(c['data']['results']['results']) for c in captures)}),flush=True)
-    directory=LiveDirectory(query,allowed);counts=collections.Counter();held=[];examples=[]
-    histories=query([("SELECT h.*,a.slug,a.display_name,a.gender,a.nation,a.profile_details,a.profile_visibility FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id WHERE lower(h.provider)=$1",[PROVIDER])],True)[0]
+    directory=LiveDirectory(query,allowed,args.receipt.with_name('.utmb-directory-'+cfg['branchId']+'.json'));counts=collections.Counter();held=[];examples=[]
+    histories=[]
+    for start in range(0,len(people),10):
+        histories.extend(query([("SELECT h.*,a.slug,a.display_name,a.gender,a.nation,a.profile_details,a.profile_visibility FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id WHERE lower(h.provider)=$1 AND h.external_id=ANY($2::text[])",[PROVIDER,[p['externalId'] for p in people[start:start+10]]])],True)[0])
     byid=collections.defaultdict(list)
     for h in histories:byid[h['external_id']].append(h)
     for i in range(0,len(people),25):
