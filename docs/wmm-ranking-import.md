@@ -29,6 +29,12 @@ snapshots, plans and receipts outside the repository.
 
 Every batch refreshes the live name/alias/account snapshot and checks its
 fingerprint under a short database lock before inserting. New conflicts are
+held. Local POSIX workers using the same connection-file directory share a
+branch-specific file lock around refresh and commit. This prevents the workers
+from repeatedly invalidating each other's fingerprints; database guards still
+protect against all other writers. A stopped worker releases its local lock.
+Rolled-back deadlocks, serialization conflicts and guard conflicts have bounded
+retries with a refreshed directory before every attempt. New conflicts are
 held. Source athlete IDs and unique slugs make repeat runs skip completed
 profiles. Profile, source history, publication audit and receipt checks are
 atomic. No existing athlete, canonical performance, ownership, account or

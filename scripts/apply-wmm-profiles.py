@@ -4,7 +4,7 @@ Requires --review for rehearsal or --publish for the owner-authorized production
 publication. No existing athlete, result, source history, account or claim is
 updated. Replays skip stable WMM athlete IDs. Source observations are archived.
 """
-import argparse, collections, gzip, hashlib, importlib.util, json, pathlib, random, time, uuid
+import argparse, collections, contextlib, fcntl, gzip, hashlib, importlib.util, json, pathlib, random, time, uuid
 ROOT=pathlib.Path(__file__).resolve().parent
 def load(name,file):
     s=importlib.util.spec_from_file_location(name,ROOT/file);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
@@ -41,6 +41,14 @@ def directory_pages(query,maxid):
 
 def save_receipt(path,value):
     temp=path.with_suffix('.writing');temp.write_text(json.dumps(value,ensure_ascii=False,indent=2));temp.replace(path)
+
+@contextlib.contextmanager
+def branch_lock(path):
+    """Coordinate local workers; database guards still protect other writers."""
+    with path.open('a') as handle:
+        fcntl.flock(handle,fcntl.LOCK_EX)
+        try:yield
+        finally:fcntl.flock(handle,fcntl.LOCK_UN)
 
 class LiveDirectory:
     def __init__(self,query,allowed_keys=None):self.query=query;self.allowed_keys=allowed_keys;self.maxid=0;self.fingerprint=None;self.reload()
@@ -138,6 +146,7 @@ def apply(args):
         with gzip.open(planpath,'rt') as f:page=json.load(f)
         for p in page['profiles']:
             for name in p['details']['aliases']:allowed_keys.update(prep.name_keys(name))
+    lock_path=args.connection.resolve().with_name('.wmm-'+cfg['branchId']+'.lock')
     directory=LiveDirectory(query,frozenset(allowed_keys));totals=collections.Counter();examples=[];fresh_holds=[]
     already=query([('SELECT external_id FROM athlete_source_histories WHERE provider=$1',[PROVIDER])],True)[0]
     known={r['external_id'] for r in already}
@@ -156,37 +165,38 @@ def apply(args):
         for start in range(0,len(profiles),args.batch_size):
             original=profiles[start:start+args.batch_size]
             for attempt in range(6):
-                directory.refresh();batch=[];holds=[]
-                for p in original:
-                    matches=prep.matching(directory.index,p['details']['aliases'])
-                    for performance in p['performances']:
-                        for key in prep.result_keys(performance['archiveReference']['original']):matches.update(directory.result_index.get(key,()))
-                    if matches:holds.append({'sourceAthleteId':p['externalId'],'name':p['displayName'],'reason':'New or changed AthRecs name/alias since global screening','candidates':sorted(matches)[:20]});continue
-                    batch.append(p)
-                if not batch:fresh_holds.extend(holds);totals['newly_held']+=len(holds);break
-                data=json.dumps(batch,ensure_ascii=False,separators=(',',':'))
-                queries=[("SET LOCAL lock_timeout='8s'",[]),("SET LOCAL statement_timeout='55s'",[]),
-                  ('LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,results,editions,events IN SHARE ROW EXCLUSIVE MODE',[]),
-                  ('CREATE TEMP TABLE wmm_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
-                  ('INSERT INTO wmm_guard SELECT fingerprint=$2 FROM ('+FP+') f',[0,directory.fingerprint]),
-                  ('INSERT INTO wmm_guard SELECT EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)',[APPROVAL]),
-                  (INSERT,[data,PROVIDER,BATCH,capid]),
-                  ('INSERT INTO wmm_guard SELECT count=jsonb_array_length($4::jsonb) FROM ('+VERIFY+') v',[data,PROVIDER,BATCH,data]),
-                  (VERIFY,[data,PROVIDER,BATCH])]
-                try:r=query(queries)
-                except RuntimeError as e:
-                    # These errors abort the entire transaction. Refresh the
-                    # directory and re-run all guards before retrying the batch.
-                    if any(reason in str(e) for reason in ['wmm_guard','lock timeout','SQLSTATE 40P01','SQLSTATE 40001']) and attempt<5:
-                        time.sleep(min(attempt+1,5)+random.random());continue
-                    raise
-                receipt=r[-3][0]
-                if receipt['profiles']!=len(batch) or receipt['histories']!=len(batch) or receipt['audits']!=len(batch):raise ValueError('Unexpected replay/concurrency receipt; inspect before continuation')
-                known.update(p['externalId'] for p in batch);totals['created']+=len(batch);totals['results']+=sum(len(p['performances']) for p in batch);totals['newly_held']+=len(holds);fresh_holds.extend(holds)
-                if len(examples)<12:examples.extend(receipt['created'][:12-len(examples)])
-                save_receipt(args.receipt,{'branchId':cfg['branchId'],'batchId':BATCH,'counts':dict(totals),'examples':examples,'newHolds':fresh_holds})
-                print(json.dumps({'phase':'committed','branch':cfg['branchId'],**totals}),flush=True)
-                break
+                with branch_lock(lock_path):
+                    directory.refresh();batch=[];holds=[]
+                    for p in original:
+                        matches=prep.matching(directory.index,p['details']['aliases'])
+                        for performance in p['performances']:
+                            for key in prep.result_keys(performance['archiveReference']['original']):matches.update(directory.result_index.get(key,()))
+                        if matches:holds.append({'sourceAthleteId':p['externalId'],'name':p['displayName'],'reason':'New or changed AthRecs name/alias since global screening','candidates':sorted(matches)[:20]});continue
+                        batch.append(p)
+                    if not batch:fresh_holds.extend(holds);totals['newly_held']+=len(holds);break
+                    data=json.dumps(batch,ensure_ascii=False,separators=(',',':'))
+                    queries=[("SET LOCAL lock_timeout='8s'",[]),("SET LOCAL statement_timeout='55s'",[]),
+                      ('LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,results,editions,events IN SHARE ROW EXCLUSIVE MODE',[]),
+                      ('CREATE TEMP TABLE wmm_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
+                      ('INSERT INTO wmm_guard SELECT fingerprint=$2 FROM ('+FP+') f',[0,directory.fingerprint]),
+                      ('INSERT INTO wmm_guard SELECT EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)',[APPROVAL]),
+                      (INSERT,[data,PROVIDER,BATCH,capid]),
+                      ('INSERT INTO wmm_guard SELECT count=jsonb_array_length($4::jsonb) FROM ('+VERIFY+') v',[data,PROVIDER,BATCH,data]),
+                      (VERIFY,[data,PROVIDER,BATCH])]
+                    try:r=query(queries)
+                    except RuntimeError as e:
+                        # These errors abort the entire transaction. Refresh the
+                        # directory and re-run all guards before retrying the batch.
+                        if any(reason in str(e) for reason in ['wmm_guard','lock timeout','SQLSTATE 40P01','SQLSTATE 40001']) and attempt<5:
+                            time.sleep(min(attempt+1,5)+random.random());continue
+                        raise
+                    receipt=r[-3][0]
+                    if receipt['profiles']!=len(batch) or receipt['histories']!=len(batch) or receipt['audits']!=len(batch):raise ValueError('Unexpected replay/concurrency receipt; inspect before continuation')
+                    known.update(p['externalId'] for p in batch);totals['created']+=len(batch);totals['results']+=sum(len(p['performances']) for p in batch);totals['newly_held']+=len(holds);fresh_holds.extend(holds)
+                    if len(examples)<12:examples.extend(receipt['created'][:12-len(examples)])
+                    save_receipt(args.receipt,{'branchId':cfg['branchId'],'batchId':BATCH,'counts':dict(totals),'examples':examples,'newHolds':fresh_holds})
+                    print(json.dumps({'phase':'committed','branch':cfg['branchId'],**totals}),flush=True)
+                    break
     final={'branchId':cfg['branchId'],'batchId':BATCH,'counts':dict(totals),'examples':examples,'newHolds':fresh_holds,'reviewLimited':bool(args.limit)}
     save_receipt(args.receipt,final)
     if not args.limit and total==1:

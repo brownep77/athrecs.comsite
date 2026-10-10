@@ -1,5 +1,5 @@
 """Synthetic WMM identity, duplicate-result and pagination safety checks."""
-import collections, importlib.util, pathlib, tempfile
+import collections, importlib.util, pathlib, subprocess, sys, tempfile
 ROOT=pathlib.Path(__file__).resolve().parent
 def load(name,path):
     s=importlib.util.spec_from_file_location(name,ROOT/path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
@@ -52,4 +52,21 @@ c.request=fake_request;c.results=lambda ids:[]
 with tempfile.TemporaryDirectory() as temp:
     assert c.collect_range(pathlib.Path(temp),'F','40-44',1,2)==(5001,0)
 assert called==[(1,2),(1,1),(2,2)]
+
+# Independent workers must not overwrite a shared read/update between guards.
+# Simulate the contention that exhausted production directory-guard retries.
+child = '''import importlib.util,pathlib,sys,time
+s=importlib.util.spec_from_file_location('apply',sys.argv[1]);w=importlib.util.module_from_spec(s);s.loader.exec_module(w)
+folder=pathlib.Path(sys.argv[2])
+for i in range(20):
+ with w.branch_lock(folder/'branch.lock'):
+  value=int((folder/'counter').read_text())
+  time.sleep(0.01)
+  (folder/'counter').write_text(str(value+1))
+'''
+with tempfile.TemporaryDirectory() as temp:
+    folder=pathlib.Path(temp);(folder/'counter').write_text('0')
+    workers=[subprocess.Popen([sys.executable,'-c',child,str(ROOT/'apply-wmm-profiles.py'),temp]) for _ in range(3)]
+    assert all(worker.wait(timeout=30)==0 for worker in workers)
+    assert (folder/'counter').read_text()=='60','Workers overlapped their guarded updates'
 print('PASS: accents, aliases, nicknames, spelling variations, token order, distinct source IDs, result dedupe/conflicts, source ID mismatch, exact-time validation, missing-date preservation and tied-rank pagination.')
