@@ -104,6 +104,9 @@ jobs:
       - name: Collector bulk publication browser check
         run: node scripts/verify-collector-bulk-ui.mjs
 
+      - name: Verified fixture file import browser check
+        run: node scripts/verify-fixture-upload-ui.mjs
+
       - name: Collector distance selection browser check
         run: node scripts/verify-collector-distance-ui.mjs
 

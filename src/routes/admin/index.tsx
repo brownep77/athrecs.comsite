@@ -11,7 +11,6 @@ import {
   importFromJson,
   importResults,
   listAdminEventCards,
-  queueBulkSourceRun,
   recoverCatalogueBatch,
   uploadScraperWorkbookNow,
 } from "@/lib/athrecs/api";
@@ -225,20 +224,6 @@ function AdminPage() {
     setMessage(`${file.name} loaded and ready to import`);
   }
 
-  const bulkRunMut = useMutation({
-    mutationFn: () => queueBulkSourceRun(),
-    onSuccess: (result) => {
-      const latest = result.latestRun;
-      setMessage(
-        latest
-          ? `${result.created ? "Bulk run created" : "Existing bulk run updated"}: ${latest.totalJobs} source jobs · ${latest.runnableSourceCount} runnable · ${latest.blockedSourceCount} held for approval`
-          : "Bulk run could not be loaded",
-      );
-      void qc.invalidateQueries({ queryKey: ["admin-bulk-source-run"] });
-    },
-    onError: (e) => setMessage(e instanceof Error ? e.message : String(e)),
-  });
-
   const workbookImportMut = useMutation({
     mutationFn: () => uploadScraperWorkbookNow(),
     onSuccess: (result) => {
@@ -286,9 +271,7 @@ function AdminPage() {
     <div className="space-y-8">
       <div className="space-y-2">
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">Site tools</p>
-        <h1 className="font-display text-2xl font-semibold text-fg md:text-3xl">
-          Update ATHRECS
-        </h1>
+        <h1 className="font-display text-2xl font-semibold text-fg md:text-3xl">Update ATHRECS</h1>
         <p className="max-w-2xl text-sm text-muted">
           Keep fixtures fresh through the staged Neon publishing flow. Proposed rows are stored,
           validated and published atomically before they appear on the public site.
@@ -387,8 +370,8 @@ function AdminPage() {
                     that string · Environment: <strong>Production</strong> (and Preview if you want)
                   </li>
                   <li>
-                    <strong>Redeploy</strong>, then refresh this page —
-                    Backend should say <em>Neon Postgres (persistent)</em>
+                    <strong>Redeploy</strong>, then refresh this page — Backend should say{" "}
+                    <em>Neon Postgres (persistent)</em>
                   </li>
                 </ol>
               </div>
@@ -503,13 +486,11 @@ function AdminPage() {
       <section className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="space-y-1">
-            <h2 className="font-display text-lg font-semibold text-fg">
-              All-source fixture bulk run
-            </h2>
+            <h2 className="font-display text-lg font-semibold text-fg">Import running fixtures</h2>
             <p className="max-w-2xl text-sm text-muted">
-              Add every registered website to one resumable run. Approved sources enter the crawler
-              queue; sources awaiting rights or technical review remain visible but cannot run or
-              publish.
+              Upload verified fixture files, preview duplicate checks and publish reviewed races in
+              batches. The source registry helps organise research; its legacy queue does not fetch
+              websites.
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
@@ -523,16 +504,12 @@ function AdminPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <Button
-            type="button"
-            disabled={dbStatus.data?.persistent !== true || bulkRunMut.isPending}
-            onClick={() => bulkRunMut.mutate()}
-          >
-            {bulkRunMut.isPending ? "Preparing run…" : "Add all websites to bulk run"}
+          <Button asChild>
+            <Link to="/admin/fixture-import">Import CSV or JSON fixtures</Link>
           </Button>
           <p className="text-xs text-subtle">
-            Review held sources before enabling them. Creating a run never bypasses rights or
-            technical checks.
+            Official-source checks, saved progress and duplicate protection. No research-provider
+            connection needed for file imports.
           </p>
         </div>
 
@@ -547,7 +524,7 @@ function AdminPage() {
                 </p>
               </div>
               <div className="rounded-lg border border-emerald-500/30 bg-emerald-50 p-3">
-                <p className="text-xs uppercase tracking-wide text-emerald-800">Runnable now</p>
+                <p className="text-xs uppercase tracking-wide text-emerald-800">Approved sources</p>
                 <p className="mt-1 text-2xl font-semibold tabular text-emerald-950">
                   {bulkRun.data.registry.runnable.toLocaleString()}
                 </p>
@@ -563,7 +540,7 @@ function AdminPage() {
             {bulkRun.data.latestRun && (
               <div className="rounded-lg border border-border bg-bg px-3 py-3 text-sm">
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <p className="font-medium text-fg">Latest run</p>
+                  <p className="font-medium text-fg">Legacy source queue (not processed)</p>
                   <Badge variant="accent">{bulkRun.data.latestRun.status}</Badge>
                 </div>
                 <p className="mt-1 text-muted">
@@ -587,7 +564,7 @@ function AdminPage() {
         )}
         {dbStatus.data && !dbStatus.data.persistent && (
           <p className="text-sm text-amber-900">
-            Connect Neon before creating a bulk run so its queue survives server restarts.
+            Connect Neon before saving fixture imports so their review survives server restarts.
           </p>
         )}
       </section>
@@ -659,9 +636,7 @@ function AdminPage() {
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
         <h2 className="font-display text-lg font-semibold text-fg">1. Go live (publish)</h2>
         <ol className="list-decimal space-y-2 pl-5 text-sm text-muted">
-          <li>
-            Deploy the latest approved version of ATHRECS through Vercel.
-          </li>
+          <li>Deploy the latest approved version of ATHRECS through Vercel.</li>
           <li>
             Optional: attach your domain (e.g. athrecs.com) in the host’s domain settings after the
             first successful publish.
@@ -677,9 +652,7 @@ function AdminPage() {
 
       <section className="space-y-3 rounded-xl border border-border bg-surface p-5 shadow-card">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h2 className="font-display text-lg font-semibold text-fg">
-            2. Import fixture JSON
-          </h2>
+          <h2 className="font-display text-lg font-semibold text-fg">2. Import fixture JSON</h2>
           <Button type="button" variant="secondary" onClick={() => void copyPrompt()}>
             {copied ? "Copied" : "Copy import instructions"}
           </Button>
