@@ -4,6 +4,10 @@ import importlib.util
 from pathlib import Path
 spec=importlib.util.spec_from_file_location('linker',Path(__file__).with_name('link-world-athletics-history.py'))
 m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+assert m.valid_profile_url('https://worldathletics.org/athletes/example/example-99999',99999)
+assert m.valid_profile_url('https://worldathletics.org/athletes/-/99999',99999)
+for url in ['https://worldathletics.org/athletes/-/99998','https://example.org/athletes/-/99999','https://worldathletics.org/athletes/-/99999?x=1']:
+ assert not m.valid_profile_url(url,99999)
 a={'display_name':'Example Runner','gender':'F','nation':'GBR','date_of_birth':None}
 b={'givenName':'Example Middle','familyName':'RUNNER','male':False,'countryCode':'GBR','birthDate':'01 JAN 1983'}
 w=[{'year':2025,'meeting':'Example Marathon','discipline':'Marathon','performance':'2:31:02','ageGroup':'40-44'}]
@@ -30,6 +34,10 @@ row=m.parse_year(99999,2025,payload,'https://worldathletics.org/athletes/example
 assert row['performance']=='14:20.87' and row['place']=='3' and row['round']=='H2'
 assert row['sourceEvidence']['row']['place']=='3.' and 'H2' in row['meeting']
 assert row['discipline']=='5000 Metres' and m.discipline_label('10 Kilometres Road')=='10 km'
+bad=copy.deepcopy(payload);bad['capture']={'athleteId':99998,'year':2025,'sourceUrl':'https://worldathletics.org/athletes/example/example-99999'}
+try:m.parse_year(99999,2025,bad,'https://worldathletics.org/athletes/example/example-99999')
+except ValueError:pass
+else:raise AssertionError('Wrong captured athlete accepted')
 payload['data']['getSingleCompetitorResultsDiscipline']['parameters']['resultsByYear']=2024
 try:m.parse_year(99999,2025,payload,'https://worldathletics.org/athletes/example/example-99999')
 except ValueError:pass

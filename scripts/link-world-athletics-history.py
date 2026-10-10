@@ -26,6 +26,10 @@ PROVIDER = 'World Athletics'
 def normalized(value):
     return re.sub('[^a-z0-9]', '', unicodedata.normalize('NFKD', value.lower()).encode('ascii','ignore').decode())
 
+def valid_profile_url(url, wa_id):
+    # WA also serves canonical profiles with a numeric final path component.
+    return bool(re.fullmatch(r'https://(?:www\.)?worldathletics\.org/athletes/[^/?#]+/(?:[^/?#]+-)?'+str(wa_id),url))
+
 def race_matches(source_name, official_name, aliases):
     # The manifest supplies reviewed event names, not inferred city matches.
     official_event = official_name.split(',')[0]
@@ -82,6 +86,9 @@ def discipline_label(value):
 
 def parse_year(wa_id,year,payload,source_url):
     if payload.get('errors'):raise ValueError('Source returned GraphQL errors')
+    capture=payload.get('capture')
+    if capture and (capture.get('athleteId')!=wa_id or capture.get('year')!=year or capture.get('sourceUrl')!=source_url):
+        raise ValueError('Captured source identity, year or URL differs from target')
     data=payload['data']['getSingleCompetitorResultsDiscipline']
     if data['parameters']['resultsByYear']!=year:raise ValueError('Unexpected source year')
     rows=[]
@@ -136,7 +143,7 @@ def prepare(args,query):
     database_snapshot=query(snapshots_sql,True)
     for target_index,target in enumerate(manifest['targets']):
         aid=target['athleteId'];wa_id=target['worldAthleticsId'];url=target['sourceUrl']
-        if not re.fullmatch(r'https://(?:www\.)?worldathletics\.org/athletes/[^?#]+-'+str(wa_id),url):raise ValueError('Unexpected official profile URL')
+        if not valid_profile_url(url,wa_id):raise ValueError('Unexpected official profile URL')
         profile=profiles[wa_id]
         if profile['_id']!=wa_id:raise ValueError('Wrong official identity')
         before=database_snapshot[target_index*6:target_index*6+4];athlete=before[0][0]['value'];histories=[x['value'] for x in before[1]]
