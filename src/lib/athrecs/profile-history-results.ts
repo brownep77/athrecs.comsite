@@ -8,6 +8,11 @@ export type HistoryResult = {
   performance: SourcePerformance;
 };
 
+/** Preserve an explicit source trail label instead of treating every distance as road. */
+export function isTrailHistoryResult(row: SourcePerformance): boolean {
+  return row.labels.some((label) => /^(?:trail|trail running)$/i.test(label.trim()));
+}
+
 function historySport(discipline: string, provider?: string): HistoryResult["sport"] {
   if (provider === "DUV Ultra Marathon Statistics") return "Running";
   // Explicit multisport labels take priority over distances within a race leg.
@@ -120,7 +125,9 @@ export function profileAchievementResults(
         sport: entry.sport,
         surface:
           entry.sport === "Running"
-            ? "Road"
+            ? isTrailHistoryResult(row)
+              ? "Trail"
+              : "Road"
             : entry.sport === "Athletics"
               ? /jump|shot|^sp\d|discus|javelin|hammer/i.test(code)
                 ? "Field"

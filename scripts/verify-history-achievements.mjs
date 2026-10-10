@@ -3,6 +3,7 @@ import { buildProfileAchievements } from "../src/lib/athrecs/profile-achievement
 import {
   historyResultCountry,
   isCompletedHistoryResult,
+  isTrailHistoryResult,
   profileAchievementResults,
   sourceHistorySports,
 } from "../src/lib/athrecs/profile-history-results.ts";
@@ -29,6 +30,11 @@ const row = (extra = {}) => ({
 const history = (rows) => [
   { provider: "Test additions", externalId: "synthetic", performances: rows },
 ];
+const trailRow = row({ labels: ["Trail running", "Finished"] });
+assert.equal(isTrailHistoryResult(trailRow), true);
+assert.equal(isTrailHistoryResult(row()), false);
+assert.equal(profileAchievementResults([], history([trailRow]))[0].surface, "Trail");
+assert.equal(profileAchievementResults([], history([row()]))[0].surface, "Road");
 const board = (rows, recorded = []) =>
   buildProfileAchievements(profileAchievementResults(recorded, history(rows)), today);
 assert.equal(historyResultCountry(row()), "United Kingdom");
