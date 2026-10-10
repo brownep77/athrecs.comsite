@@ -1,3 +1,6 @@
+import { ClaimRacingName, ProfileClaimSteps } from "@/components/athletes/ProfileClaimGuide";
+import { getMyAthleteAccount } from "@/lib/athrecs/athlete-account-api";
+import { rememberClaim } from "@/lib/athrecs/claim-resume";
 import {
   declineClaimInvitation,
   getClaimInvitationIntro,
@@ -102,11 +105,18 @@ function ClaimResultsPage() {
     gcTime: 0,
   });
 
+  const account = useQuery({
+    queryKey: ["my-athlete-account"],
+    queryFn: () => getMyAthleteAccount(),
+    enabled: Boolean(user),
+    retry: false,
+  });
+
   const result = useQuery({
-    queryKey: ["claimable-result", user?.id, resultId, invitation],
+    queryKey: ["claimable-result", user?.id, resultId, invitation, account.data?.fullName],
     gcTime: 0,
     queryFn: () => getClaimableResult({ data: { resultId: resultId as number, invitation } }),
-    enabled: Boolean(user && resultId !== undefined),
+    enabled: Boolean(user && resultId !== undefined && account.data?.emailVerified),
     retry: false,
   });
 
@@ -122,6 +132,14 @@ function ClaimResultsPage() {
   );
   const currentClaim = siteClaims.find((claim) => claim.resultId === resultId);
   const hasPrivateProfile = siteClaims.some((claim) => claim.status === "approved");
+  const claimSubmitted = Boolean(
+    currentClaim && ["pending", "needs_info", "approved"].includes(currentClaim.status),
+  );
+  useEffect(() => {
+    if (!user || !resultId || invitation || myClaims.isPending) return;
+    if (claimSubmitted || claimCompleted || declined) rememberClaim(user.id, null);
+    else rememberClaim(user.id, resultId);
+  }, [user, resultId, invitation, claimSubmitted, claimCompleted, declined, myClaims.isPending]);
 
   useEffect(() => {
     setClaimCompleted(false);
@@ -161,6 +179,8 @@ function ClaimResultsPage() {
             : "Your claim is awaiting an ATHRECS identity check. Results will be added after approval.",
       );
       setDeclaration(false);
+      if (user) rememberClaim(user.id, null);
+      void queryClient.invalidateQueries({ queryKey: ["my-open-claim-invitations"] });
       if (response.status === "approved" || response.alreadyOwned) setClaimCompleted(true);
       void queryClient.invalidateQueries({ queryKey: ["my-result-claims"] });
       void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
@@ -175,6 +195,8 @@ function ClaimResultsPage() {
       }),
     onSuccess: () => {
       setDeclined(true);
+      if (user) rememberClaim(user.id, null);
+      void queryClient.invalidateQueries({ queryKey: ["my-open-claim-invitations"] });
       setMessage("Thanks for letting us know. We have marked this suggestion as not yours.");
     },
     onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
@@ -220,15 +242,20 @@ function ClaimResultsPage() {
                     ? `Claim ${intro.data.name}’s athlete profile`
                     : "Claim your athlete profile"
                   : resultId
-                    ? "Add this result to your profile"
+                    ? "Finish claiming your athlete profile"
                     : "Claim your race results"}
               </h1>
               <p className="mt-2 text-sm leading-6 text-slate-300">
-                Confirm a matched result to request ownership. ATHRECS checks your identity before
-                adding results to your private profile.
+                Signing in is the first step. Confirm this profile is yours, then submit your claim
+                for an identity check.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
+              {user && result.data && !claimSubmitted && !declined ? (
+                <Button asChild>
+                  <a href="#confirm-profile-claim">Continue to confirmation</a>
+                </Button>
+              ) : null}
               {user && hasPrivateProfile ? (
                 <Button asChild variant="secondary">
                   <Link to="/my-athlete-profile">
@@ -256,6 +283,12 @@ function ClaimResultsPage() {
           </div>
         </div>
       </section>
+
+      {resultId ? (
+        <ProfileClaimSteps
+          step={claimSubmitted || claimCompleted ? 3 : account.data?.emailVerified ? 2 : 1}
+        />
+      ) : null}
 
       {declined ? (
         <p role="status" className="rounded-xl border border-border p-5">
@@ -307,18 +340,49 @@ function ClaimResultsPage() {
             Sign in or create account
           </Button>
         </section>
+      ) : account.isPending ? (
+        <LoadingCard label="Checking the next step for your profile claim…" />
+      ) : account.isError ? (
+        <section role="alert" className="space-y-3 rounded-xl border border-border p-5">
+          <p>Your account could not be checked. Your selected profile has been kept.</p>
+          <Button onClick={() => void account.refetch()}>Try again</Button>
+        </section>
+      ) : !account.data?.emailVerified ? (
+        <section className="space-y-3 rounded-xl border border-border p-5">
+          <h2 className="font-semibold">First, verify your email</h2>
+          <p>Then return to this link to confirm your profile and submit your claim.</p>
+          <Button onClick={startSignIn}>Verify with an email code</Button>
+        </section>
+      ) : !invitation && !account.data.fullName.trim() && !currentClaim && !result.data ? (
+        <section className="space-y-4 rounded-xl border border-accent/40 bg-surface p-5">
+          <h2 className="font-display text-xl font-semibold">Next, enter your racing name</h2>
+          <ClaimRacingName />
+        </section>
       ) : result.isLoading ? (
         <LoadingCard label="Loading your matched result…" />
-      ) : result.isError || !result.data || !sportIsInAthleteProfileScope(result.data.sport) ? (
+      ) : result.isError ? (
+        <section role="alert" className="space-y-3 rounded-xl border border-red-500/30 p-5">
+          <h2 className="font-semibold">We could not load your selected profile</h2>
+          <p>
+            {invitation
+              ? "Use the verified email address that received this invitation. If it has expired, ask support@athrecs.com for a fresh link."
+              : "Please try again. Your claim has not been submitted yet."}
+          </p>
+          <Button onClick={() => void result.refetch()}>Try again</Button>
+          <Link to="/athlete-account" search={{ section: "potential" }}>
+            Find my profile
+          </Link>
+        </section>
+      ) : !result.data || !sportIsInAthleteProfileScope(result.data.sport) ? (
         <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
-          <h2 className="font-semibold">This match is no longer available</h2>
+          <h2 className="font-semibold">We could not match this profile to your account</h2>
           <p className="mt-1">
             {invitation
               ? "Verify your email address. If the invitation was emailed, use the exact address it was sent to. Links expire after seven days and can be used only by the intended recipient; contact support@athrecs.com for help or a fresh link."
-              : "Return to your private Athlete Account and choose one of the current suggested matches."}
+              : "Check the racing name in your Athlete Account, including any previous names, then find your profile. If it still does not appear, reply to support@athrecs.com for help."}
           </p>
           <Button asChild variant="secondary" className="mt-4">
-            <Link to="/athlete-account">
+            <Link to="/athlete-account" search={{ section: "potential" }}>
               <ArrowLeft className="size-4" aria-hidden="true" />
               Back to my matches
             </Link>
@@ -330,7 +394,7 @@ function ClaimResultsPage() {
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <p className="text-xs font-medium uppercase tracking-wider text-subtle">
-                  Matched result
+                  A race from the profile you are claiming
                 </p>
                 <h2 className="mt-1 font-display text-2xl font-semibold text-fg">
                   {result.data.eventName}
@@ -390,10 +454,10 @@ function ClaimResultsPage() {
             {activeClaim?.status === "pending" ? (
               <ClaimState
                 status={activeClaim.status}
-                title="This claim needs an identity check"
+                title="Claim received — awaiting identity review"
                 note={
                   activeClaim.conflictReason ??
-                  "ATHRECS will check your identity before linking these results to your private profile. Staff may ask you for more evidence."
+                  "Your claim has been received. You do not need to submit it again. ATHRECS will check your identity before linking this athlete profile and its results to your account."
                 }
               >
                 <Button
@@ -428,7 +492,8 @@ function ClaimResultsPage() {
               </ClaimState>
             ) : (
               <form
-                className="space-y-4"
+                id="confirm-profile-claim"
+                className="scroll-mt-24 space-y-4"
                 onSubmit={(event) => {
                   event.preventDefault();
                   setMessage(null);
@@ -472,13 +537,29 @@ function ClaimResultsPage() {
                     className="mt-0.5 size-5 rounded border-border"
                   />
                   <span>
-                    <strong className="block">This is my result</strong>
+                    <strong className="block">This is my profile and the race shown is mine</strong>
                     <span className="mt-1 block text-muted">
-                      I am requesting an identity check before these results are added to my private
-                      Athlete Profile.
+                      I am asking ATHRECS to check my identity and link this profile and its stored
+                      results to my account. I do not need to claim each race separately.
                     </span>
                   </span>
                 </label>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="h-auto min-h-11 w-full whitespace-normal py-3"
+                  disabled={submitClaim.isPending}
+                >
+                  {submitClaim.isPending ? (
+                    <Loader2 className="size-4 animate-spin" aria-hidden="true" />
+                  ) : (
+                    <FileCheck2 className="size-4" aria-hidden="true" />
+                  )}
+                  {submitClaim.isPending
+                    ? "Submitting claim…"
+                    : "Yes, this is me — submit my profile claim"}
+                </Button>
 
                 <details className="rounded-xl border border-border bg-elevated">
                   <summary className="cursor-pointer list-none px-4 py-3 text-sm font-semibold text-fg">
@@ -502,15 +583,6 @@ function ClaimResultsPage() {
                     {message}
                   </p>
                 ) : null}
-
-                <Button type="submit" size="lg" className="w-full" disabled={submitClaim.isPending}>
-                  {submitClaim.isPending ? (
-                    <Loader2 className="size-4 animate-spin" aria-hidden="true" />
-                  ) : (
-                    <FileCheck2 className="size-4" aria-hidden="true" />
-                  )}
-                  {submitClaim.isPending ? "Submitting claim…" : "Submit claim for review"}
-                </Button>
 
                 <p className="text-center text-xs text-subtle">
                   Links are optional to submit. Staff may ask for identity evidence before approval.

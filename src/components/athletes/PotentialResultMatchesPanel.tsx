@@ -109,7 +109,7 @@ function actionLabel(match: PotentialResultMatch): string {
     return "Claim again";
   }
   if (match.ownedByAnotherAccount) return "Submit ownership claim";
-  return "Claim this result";
+  return "Claim this profile";
 }
 
 export function PotentialResultMatchesPanel() {
@@ -120,6 +120,8 @@ export function PotentialResultMatchesPanel() {
     Promise.all([
       queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] }),
       queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] }),
+      queryClient.invalidateQueries({ queryKey: ["my-result-claims"] }),
+      queryClient.invalidateQueries({ queryKey: ["my-open-claim-invitations"] }),
       queryClient.invalidateQueries({ queryKey: ["my-dismissed-athletes"] }),
       queryClient.invalidateQueries({ queryKey: ["my-athlete-bio"] }),
     ]);
@@ -221,23 +223,24 @@ export function PotentialResultMatchesPanel() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Claim this result?</AlertDialogTitle>
+            <AlertDialogTitle>Claim this profile?</AlertDialogTitle>
             <AlertDialogDescription>
               {confirmMatch?.athleteName} · {confirmMatch?.eventName}. Confirm this is your result.
               ATHRECS will check your identity before adding this athlete record and its results to
-              your private profile.
+              your private profile. You do not need to claim each race separately.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel disabled={addMatch.isPending}>Cancel</AlertDialogCancel>
             <AlertDialogAction
+              className="h-auto min-h-11 whitespace-normal py-3"
               disabled={addMatch.isPending}
               onClick={(event) => {
                 event.preventDefault();
                 if (confirmMatch) addMatch.mutate(confirmMatch.resultId);
               }}
             >
-              {addMatch.isPending ? "Submitting…" : "Submit claim for review"}
+              {addMatch.isPending ? "Submitting…" : "Yes, this is me — submit my profile claim"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -524,7 +527,7 @@ export function PotentialResultMatchesPanel() {
                         {match.resultId ? (
                           <Button asChild>
                             <Link to="/claim-results" search={{ resultId: match.resultId }}>
-                              <Trophy className="size-4" aria-hidden="true" /> Claim this result
+                              <Trophy className="size-4" aria-hidden="true" /> Claim this profile
                             </Link>
                           </Button>
                         ) : null}

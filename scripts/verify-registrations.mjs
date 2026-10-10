@@ -160,7 +160,7 @@ try {
   await assert.rejects(() => read({}, ordinary.body.token), /Forbidden/);
   assert.equal((await read({ q: "' OR 1=1 --" }, token)).total, 0);
   assert.equal((await read({ q: "%" }, token)).total, 0, "Search metacharacters are literal");
-  await sql`insert into "user"(id,name,email,"emailVerified","createdAt") select 'registration-'||n,'Synthetic Athlete '||n,'athlete-'||n||'@example.test',n%2=0,'2026-01-01'::timestamptz + n*interval '1 minute' from generate_series(1,30) n`;
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt") select 'registration-'||n,'Synthetic Athlete '||n,'athlete-'||n||'@example.test',n%2=0,'2026-01-01T00:00:00Z'::timestamptz + n*interval '1 minute' from generate_series(1,30) n`;
   await sql`insert into athlete_private_profiles(user_id,verified_email,full_name,club_or_team,privacy_notice_version,privacy_acknowledged_at) values ('registration-1','athlete-1@example.test','Synthetic Athlete One','Synthetic Club','test',now())`;
   await sql`insert into athlete_sport_profiles(user_id,sport_code) values('registration-1','Swimming')`;
   await sql`insert into events(id,slug,name,sport,surface,country) values(991201,'registration-running','Synthetic Running','Running','Road','United Kingdom'),(991202,'registration-triathlon','Synthetic Triathlon','Triathlon','Road','United Kingdom'),(991203,'registration-dns','Synthetic DNS','Cycling','Road','United Kingdom')`;

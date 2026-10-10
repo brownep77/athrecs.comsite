@@ -222,10 +222,10 @@ export function CompactResultsTable({
                       <Link
                         to="/claim-results"
                         search={{ resultId: result.resultId }}
-                        aria-label="Claim this result"
+                        aria-label="Claim this profile"
                         className="text-xs text-accent"
                       >
-                        Claim
+                        Claim profile
                       </Link>
                     ) : null}
                   </td>

@@ -1,3 +1,4 @@
+import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
 import { AccountNavigation } from "@/components/athletes/AccountNavigation";
 import { AccountRaces } from "@/components/athletes/AccountRaces";
 import { AccountPhotos } from "@/components/athletes/AccountPhotos";
@@ -46,7 +47,6 @@ import {
   ATHLETE_SPORTS,
   getMyAthleteAccount,
   saveMyAthleteAccount,
-  saveMyAthleteRacingName,
   type AthleteAccountData,
   type AthleteAccountInput,
   type AthleteExperienceLevel,
@@ -320,26 +320,6 @@ function SignedInAccount() {
     queryFn: () => getAvailableAuthMethods(),
     staleTime: 60_000,
   });
-  const saveRacingName = useMutation({
-    mutationFn: (fullName: string) =>
-      saveMyAthleteRacingName({ data: { fullName, privacyAcknowledged: true } }),
-    onSuccess: (updated) => {
-      lastLoadedForm.current = accountToForm(updated);
-      // Preserve unrelated edits as drafts; this action only commits the name.
-      setForm(
-        (current) =>
-          current && {
-            ...current,
-            fullName: updated.fullName,
-            privacyAcknowledged: updated.privacyAcknowledged,
-          },
-      );
-      setMessage("Your racing name has been saved.");
-      queryClient.setQueryData(["my-athlete-account"], updated);
-      void queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] });
-    },
-    onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
-  });
   const verifyEmail = useMutation({
     mutationFn: async () => {
       const result = await authClient.sendVerificationEmail({
@@ -392,13 +372,31 @@ function SignedInAccount() {
           <h1 className="font-display text-2xl font-semibold text-fg md:text-3xl">
             My Athlete Account
           </h1>
-          <Button asChild variant="secondary">
-            <Link to="/my-athlete-profile">View my profile</Link>
-          </Button>
+          {account.data.claimedProfiles.length ? (
+            <Button asChild variant="secondary">
+              <Link to="/my-athlete-profile">View my profile</Link>
+            </Button>
+          ) : null}
         </header>
       ) : (
         <AccountHero />
       )}
+      {IS_ATHRECS_SITE ? (
+        <ProfileClaimGuide
+          account={account.data}
+          onNameSaved={(updated) => {
+            lastLoadedForm.current = accountToForm(updated);
+            setForm(
+              (current) =>
+                current && {
+                  ...current,
+                  fullName: updated.fullName,
+                  privacyAcknowledged: updated.privacyAcknowledged,
+                },
+            );
+          }}
+        />
+      ) : null}
       <div
         className={cn(
           IS_ATHRECS_SITE && "grid items-start gap-5 lg:grid-cols-[15rem_minmax(0,1fr)]",
@@ -427,16 +425,23 @@ function SignedInAccount() {
                 </Badge>
                 <span className="text-sm font-medium text-fg">{account.data.verifiedEmail}</span>
               </div>
-              <p className="mt-2 text-sm text-muted">
-                Profile completion: <strong className="text-fg">{completion}%</strong>. Optional
-                sections improve your Entry Passport and any analytics you approve.
-              </p>
-              <div className="mt-3 h-2 overflow-hidden rounded-full bg-elevated" aria-hidden="true">
-                <div
-                  className="h-full rounded-full bg-accent"
-                  style={{ width: `${completion}%` }}
-                />
-              </div>
+              {account.data.claimedProfiles.length ? (
+                <>
+                  <p className="mt-2 text-sm text-muted">
+                    Profile completion: <strong className="text-fg">{completion}%</strong>. Optional
+                    sections improve your Entry Passport and any analytics you approve.
+                  </p>
+                  <div
+                    className="mt-3 h-2 overflow-hidden rounded-full bg-elevated"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="h-full rounded-full bg-accent"
+                      style={{ width: `${completion}%` }}
+                    />
+                  </div>
+                </>
+              ) : null}
             </div>
             <Button type="button" variant="secondary" onClick={() => void signOut("/")}>
               <LogOut className="size-4" aria-hidden="true" /> Sign out
@@ -464,61 +469,7 @@ function SignedInAccount() {
           ) : null}
 
           {show("potential") ? (
-            IS_ATHRECS_SITE && !account.data.fullName.trim() ? (
-              <section className="rounded-xl border border-border bg-surface p-5 shadow-card">
-                <h2 className="font-display text-xl font-semibold text-fg">Find my race results</h2>
-                <p className="mt-2 text-sm text-muted">
-                  What name do you race under? We’ll look for possible matches already on AthRecs.
-                  You decide which results belong to you. Nothing is published automatically.
-                </p>
-                <form
-                  className="mt-4 max-w-md space-y-4"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    saveRacingName.mutate(form.fullName);
-                  }}
-                >
-                  <TextField
-                    label="Name used in race results"
-                    required
-                    autoComplete="name"
-                    value={form.fullName}
-                    onChange={(fullName) => setForm({ ...form, fullName })}
-                  />
-                  <p className="text-xs text-muted">
-                    By saving your name, you acknowledge our{" "}
-                    <Link to="/privacy" className="font-semibold text-accent underline">
-                      privacy notice
-                    </Link>
-                    . No date of birth or address needed.
-                  </p>
-                  <div className="flex flex-wrap items-center gap-3">
-                    <Button
-                      type="submit"
-                      disabled={
-                        saveRacingName.isPending ||
-                        !account.data.emailVerified ||
-                        form.fullName.trim().length < 2
-                      }
-                    >
-                      {saveRacingName.isPending ? "Finding results…" : "Save name and find results"}
-                    </Button>
-                    <Link
-                      to="/athlete-account"
-                      search={{ section: "races" }}
-                      className="text-sm font-semibold text-accent"
-                    >
-                      Skip for now
-                    </Link>
-                  </div>
-                  {message ? (
-                    <p role={save.isError ? "alert" : "status"} className="text-sm text-muted">
-                      {message}
-                    </p>
-                  ) : null}
-                </form>
-              </section>
-            ) : (
+            IS_ATHRECS_SITE && !account.data.fullName.trim() ? null : (
               <PotentialResultMatchesPanel />
             )
           ) : null}

@@ -20,6 +20,48 @@ export const privateClaimMiddleware = createMiddleware({ type: "function" }).ser
     return next();
   },
 );
+
+/** Only return resumable invitations addressed to this verified account. */
+export const getMyOpenClaimInvitations = createServerFn({ method: "GET" })
+  .middleware([privateClaimMiddleware, authMiddleware])
+  .handler(async ({ context }) => {
+    const { getSql } = await import("@/lib/db");
+    const { IS_RUNRECS_SITE } = await import("@/lib/site-scope");
+    if (IS_RUNRECS_SITE || process.env.VERCEL_ENV === "preview") return [];
+    const sql = await getSql();
+    const rows = await sql<{ athleteName: string; resultId: number; claim_url: string }>`
+      select a.display_name as "athleteName", i.result_id as "resultId", i.claim_url
+      from athlete_claim_invitations i
+      join athletes a on a.id=i.athlete_id
+      join "user" u on u.id=${context.userId}
+      where u."emailVerified"=true
+        and (i.user_id=u.id or (i.user_id is null and i.invitation_kind='email'))
+        and (i.recipient_email=lower(trim(u.email)) or (i.user_id=u.id and i.invitation_kind='contact'))
+        and i.revoked_at is null and i.declined_at is null and i.claim_id is null
+        and i.expires_at>now()
+        and not exists (select 1 from result_claims c where c.result_id=i.result_id
+          and c.claimant_user_id=u.id and c.status in ('pending','needs_info','approved'))
+        and not exists (select 1 from athlete_account_links l where l.athlete_id=i.athlete_id
+          and l.user_id=u.id and l.status='active')
+      order by i.created_at desc limit 5
+    `;
+    return rows.flatMap((row) => {
+      try {
+        const url = new URL(row.claim_url);
+        const token = invitationToken.safeParse(url.searchParams.get("invitation"));
+        return url.protocol === "https:" &&
+          url.hostname === "www.athrecs.com" &&
+          url.pathname === "/claim-results" &&
+          Number(url.searchParams.get("resultId")) === row.resultId &&
+          token.success
+          ? [{ athleteName: row.athleteName, resultId: row.resultId, token: token.data }]
+          : [];
+      } catch {
+        return [];
+      }
+    });
+  });
+
 export const findStaffClaimMatches = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .validator((input: unknown) => invitationSearch.parse(input))
