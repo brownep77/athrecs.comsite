@@ -45,6 +45,7 @@ def collect_range(output,gender,age,lo,hi):
     path=output/f'{gender}-{age}-{lo}-{hi}.json.gz'
     if path.exists():
         with gzip.open(path,'rt') as f:obj=json.load(f)
+        if obj['edition'] != EDITION:raise ValueError('Capture directory contains another edition')
         return len(obj['rankings']),len(obj['results'])
     query=ranks_query(gender,age)
     query['bool']['filter'].append({'range':{'overall_ranking':{'gte':lo,'lte':hi}}})
@@ -74,8 +75,8 @@ def cohort(output,gender,age):
     return result
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--workers',type=int,default=3);p.add_argument('--ages',nargs='+',default=AGES)
-    a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
+    p=argparse.ArgumentParser();p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--workers',type=int,default=3);p.add_argument('--ages',nargs='+',default=AGES);p.add_argument('--edition',type=int,choices=[7,8],default=8)
+    a=p.parse_args();EDITION=a.edition;a.output.mkdir(parents=True,exist_ok=True)
     with concurrent.futures.ThreadPoolExecutor(max_workers=a.workers) as pool:
         fs=[pool.submit(cohort,a.output,g,age) for age in a.ages for g in ['F','M']]
         coverage=[f.result() for f in fs]

@@ -54,7 +54,14 @@ export function AthleteDirectoryCard({ athlete }: { athlete: DirectoryAthlete })
         {athlete.club || roles.join(" · ") || "Athlete profile"}
       </p>
       <div className="mt-auto flex flex-wrap items-center gap-2 pt-4 text-xs">
-        {athlete.sports.slice(0, 2).map((sport) => (
+        <span className="text-muted">
+          {athlete.sports.length
+            ? athlete.sports.length === 1
+              ? "Sport:"
+              : "Sports:"
+            : "Sport not recorded"}
+        </span>
+        {athlete.sports.map((sport) => (
           <span key={sport} className="rounded-md bg-elevated px-2 py-1 text-accent">
             {sport}
           </span>

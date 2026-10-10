@@ -12,6 +12,17 @@ PROVIDER='Abbott World Marathon Majors'
 SOURCE='https://www.worldmarathonmajors.com/rankings/world-rankings'
 RESULT_SOURCE='https://www.worldmarathonmajors.com/rankings/claim-results'
 BATCH='wmm-edition8-20261010'
+EDITION=8
+RESULT_YEARS=(2025,2026)
+SOURCE_PERIOD=['2025-10-01','2026-09-30']
+
+def configure(edition):
+    global EDITION,RESULT_YEARS,SOURCE_PERIOD,BATCH
+    if edition not in (7,8):raise ValueError('Unsupported ranking edition')
+    EDITION=edition;BATCH=f'wmm-edition{edition}-20261010'
+    RESULT_YEARS=(2025,) if edition==7 else (2025,2026)
+    # Retained edition-7 observations do not establish a complete past ranking.
+    SOURCE_PERIOD=[] if edition==7 else ['2025-10-01','2026-09-30']
 
 def norm(value):
     value=''.join(c for c in unicodedata.normalize('NFKD',str(value or '')).casefold() if not unicodedata.combining(c))
@@ -41,9 +52,12 @@ def name_keys(value):
             keys.extend('given-spelling:'+v+' '+ts[-1] for v in finder.variants(first))
     return keys
 
-def add(index,identifier,names):
+def add(index,identifier,names,allowed_keys=None):
+    added=False
     for n in names:
-        for key in name_keys(n):index[key].add(identifier)
+        for key in name_keys(n):
+            if allowed_keys is None or key in allowed_keys:index[key].add(identifier);added=True
+    return added
 
 def source_names(row,results):
     return sorted({str(x.get('firstname') or '')+' '+str(x.get('lastname') or '') for x in [row,*results]})
@@ -54,16 +68,16 @@ def result_keys(s):
     if not bib or bib.lower() in {'0','none','nan','n/a','na'}:return []
     return [(norm(title),s.get('result_year'),bib) for title in {s.get('event_title'),s.get('race_title')} if title]
 
-def directory(snapshot):
+def directory(snapshot,allowed_keys=None):
     index=collections.defaultdict(set);entities={}
     for a in json.loads((snapshot/'athletes.json').read_text()):
         ident='athrecs:'+str(a['id']);entities[ident]={'id':a['id'],'name':a['display_name'],'slug':a['slug'],'gender':a['gender']}
         names=[a['display_name'],a.get('race_entry_name'),' '.join([a.get('given_name') or '',a.get('family_name') or ''])]
         for val in (a.get('name_details') or {}).values():names.extend(finder.names_from(val))
-        add(index,ident,names)
+        add(index,ident,names,allowed_keys)
     for i,a in enumerate(json.loads((snapshot/'accounts.json').read_text())):
         ident='account:'+str(a.get('athlete_number') or i);entities[ident]={'name':a.get('name') or a.get('display_name'),'kind':'account'}
-        add(index,ident,[a.get('name'),a.get('full_name'),a.get('display_name'),*finder.names_from(a.get('previous_names'))])
+        add(index,ident,[a.get('name'),a.get('full_name'),a.get('display_name'),*finder.names_from(a.get('previous_names'))],allowed_keys)
     return index,entities
 
 def matching(index,names,own=None):
@@ -77,14 +91,14 @@ def normalize_results(aid,rank,rows):
     unique={};issues=[];duplicate_count=0
     for hit in rows:
         s=hit['_source'];rid=s.get('result_id');name=(str(s.get('firstname') or '')+' '+str(s.get('lastname') or '')).strip()
-        if rid!=hit['_id'] or s.get('athlete_id')!=aid or s.get('edition')!=8:issues.append('source_identifier_conflict');continue
+        if rid!=hit['_id'] or s.get('athlete_id')!=aid or s.get('edition')!=EDITION:issues.append('source_identifier_conflict');continue
         if s.get('gender')!=rank['gender']:issues.append('source_gender_conflict')
         year=s.get('result_year');perf=str(s.get('finish_time') or '')
         parts=perf.split(':')
         if len(parts)!=3 or not all(x.isdigit() for x in parts):issues.append('invalid_finish_time');continue
         h,m,sec=map(int,parts);seconds=h*3600+m*60+sec
         if not (0<=m<60 and 0<=sec<60 and seconds>0 and seconds==s.get('finish_time_secs')):issues.append('finish_time_conflict');continue
-        if year not in (2025,2026) or not s.get('event_title'):issues.append('missing_or_unexpected_edition');continue
+        if year not in RESULT_YEARS or not s.get('event_title'):issues.append('missing_or_unexpected_edition');continue
         key=(norm(s['event_title']),year)
         evidence=(perf,str(s.get('bibnumber') or ''),s.get('place'))
         if key in unique:
@@ -106,13 +120,14 @@ def normalize_results(aid,rank,rows):
           'archiveReference':{'provider':PROVIDER,'sourceAthleteId':aid,'sourceResultIds':v['sourceResultIds'],'original':s}})
     return performances,sorted(set(issues)),duplicate_count
 
-def prepare(captures,snapshot,out,repair_files=None):
+def prepare(captures,snapshot,out,repair_files=None,comparison_captures=None):
     coverage=json.loads((captures/'coverage.json').read_text())
     if len(coverage)!=18:raise ValueError('Require both genders and every current age group before global duplicate screening')
     out.mkdir(parents=True,exist_ok=True);source_index=collections.defaultdict(set);result_index=collections.defaultdict(set);metadata={};files=sorted(captures.glob('*.json.gz'))
     total_rows=0
     for path in files:
         with gzip.open(path,'rt') as f:c=json.load(f)
+        if c['edition']!=EDITION:raise ValueError('Unexpected capture edition')
         byid=collections.defaultdict(list)
         for h in c['results']:
             s=h['_source'];byid[s['athlete_id']].append(s)
@@ -125,8 +140,22 @@ def prepare(captures,snapshot,out,repair_files=None):
         total_rows+=len(c['results'])
     expected=sum(x['expected'] for x in coverage)
     if len(metadata)!=expected:raise ValueError('Full source coverage count mismatch')
+    allowed_keys=frozenset(source_index);allowed_results=frozenset(result_index)
+    for folder in comparison_captures or []:
+        for path in sorted(folder.glob('*.json.gz')):
+            with gzip.open(path,'rt') as f:c=json.load(f)
+            byid=collections.defaultdict(list);bib_matches=set()
+            for h in c['results']:
+                s=h['_source'];byid[s['athlete_id']].append(s)
+                for k in result_keys(s):
+                    if k in allowed_results:result_index[k].add(s['athlete_id']);bib_matches.add(s['athlete_id'])
+            for h in c['rankings']:
+                aid=h['_id'];s=h['_source'];names=source_names(s,byid[aid])
+                matched=add(source_index,aid,names,allowed_keys)
+                if (matched or aid in bib_matches) and aid not in metadata:
+                    metadata[aid]={'name':(str(s.get('firstname') or '')+' '+str(s.get('lastname') or '')).strip(),'gender':s['gender'],'nationality':s.get('nationality'),'names':names,'comparisonEdition':c['edition']}
     print(json.dumps({'phase':'source_indexed','athletes':len(metadata),'detailedRows':total_rows,'nameKeys':len(source_index)}),flush=True)
-    existing,entities=directory(snapshot);existing_result_index=collections.defaultdict(set)
+    existing,entities=directory(snapshot,allowed_keys);existing_result_index=collections.defaultdict(set)
     for r in json.loads((snapshot/'existing-results.json').read_text()):
         for k in result_keys(r):existing_result_index[k].add('athrecs:'+str(r['athlete_id']))
     summary=collections.Counter();reasons=collections.Counter();eligible=[];held=[]
@@ -166,8 +195,10 @@ def prepare(captures,snapshot,out,repair_files=None):
                 'instruction':'Add all World Marathon Majors ranking athletes and results for both genders and age categories; check for duplicates.',
                 'basis':'Stable official source athlete ID; full-category source/directory duplicate screening; source rows compared. Identity remains provisional.',
                 'sourceRowsCompared':True,'profileIdentityVerified':False},
-              'worldMarathonMajors':{'athleteId':aid,'rankingEdition':8,'ageGroup':s['age_group'],'genderAgeGroupRank':s['overall_ranking'],
+              'worldMarathonMajors':{'athleteId':aid,'rankingEdition':EDITION,'ageGroup':s['age_group'],'genderAgeGroupRank':s['overall_ranking'],
                 'nationalityRank':s.get('country_ranking'),'nationality':s.get('nationality'),'sourceUrl':SOURCE}}
+            if s.get('nationality'):
+                details['sourceNationalityObservation']={'value':s['nationality'],'provider':PROVIDER,'sourceUrl':SOURCE,'capturedAt':c['capturedAt']}
             planned.append({'externalId':aid,'slug':slug,'displayName':meta['name'],'givenName':s['firstname'],'familyName':s['lastname'],'gender':s['gender'],
               'nation':s.get('nationality'),'sourceUrl':SOURCE,'capturedAt':c['capturedAt'],'years':sorted({p['year'] for p in perfs}),'performances':perfs,'details':details,
               'sourceFile':path.name,'sourceRow':ordinal})
@@ -177,10 +208,10 @@ def prepare(captures,snapshot,out,repair_files=None):
         with gzip.open(temp,'wt',encoding='utf-8',compresslevel=1) as f:json.dump({'profiles':planned,'held':review},f,ensure_ascii=False,separators=(',',':'))
         temp.replace(dest)
         print(json.dumps({'phase':'planned','file':path.name,'eligible':len(planned),'held':len(review)}),flush=True)
-    result={'batchId':BATCH,'sourcePeriod':['2025-10-01','2026-09-30'],'coverage':coverage,'summary':dict(summary),'holdReasons':dict(reasons),'directoryEntities':len(entities)}
+    result={'batchId':BATCH,'edition':EDITION,'sourcePeriod':SOURCE_PERIOD,'observedResultYears':list(RESULT_YEARS),'comparisonSources':[str(p) for p in comparison_captures or []],'coverage':coverage,'summary':dict(summary),'holdReasons':dict(reasons),'directoryEntities':len(entities)}
     summary_path=out/('repair-summary.json' if repair_files else 'summary.json')
     temp=summary_path.with_suffix('.writing');temp.write_text(json.dumps(result,indent=2));temp.replace(summary_path)
     print(json.dumps(result['summary']),flush=True)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--captures',type=pathlib.Path,required=True);p.add_argument('--snapshot',type=pathlib.Path,required=True);p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--repair-files',nargs='+');a=p.parse_args();prepare(a.captures,a.snapshot,a.output,a.repair_files)
+    p=argparse.ArgumentParser();p.add_argument('--captures',type=pathlib.Path,required=True);p.add_argument('--snapshot',type=pathlib.Path,required=True);p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--repair-files',nargs='+');p.add_argument('--comparison-captures',type=pathlib.Path,nargs='*');p.add_argument('--edition',type=int,choices=[7,8],default=8);a=p.parse_args();configure(a.edition);prepare(a.captures,a.snapshot,a.output,a.repair_files,a.comparison_captures)

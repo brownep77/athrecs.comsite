@@ -35,6 +35,18 @@ export function readSourceNationality(value: unknown): SourceNationality | null 
   const supplied = record(details.sourceNationalityObservation);
   if (Object.keys(supplied).length)
     return observation(supplied.value, supplied.provider, supplied.sourceUrl);
+  // Earlier reviewed WMM imports keep the observation in the ranking metadata.
+  const wmm = record(details.worldMarathonMajors);
+  const archive = record(details.archiveCreation);
+  if (
+    archive.sourceRowsCompared === true &&
+    archive.candidateId === wmm.athleteId &&
+    typeof wmm.athleteId === "string" &&
+    /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(wmm.athleteId) &&
+    wmm.sourceUrl === "https://www.worldmarathonmajors.com/rankings/world-rankings"
+  ) {
+    return observation(wmm.nationality, "Abbott World Marathon Majors", wmm.sourceUrl);
+  }
   const duv = record(details.duvSourceObservation);
   const identities = Array.isArray(details.sourceIdentities) ? details.sourceIdentities : [];
   for (const identity of identities) {

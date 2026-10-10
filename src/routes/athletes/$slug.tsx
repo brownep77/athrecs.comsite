@@ -11,7 +11,10 @@ import {
   EditorialAthleteOverview,
   EditorialRoadSplits,
 } from "@/components/athletes/EditorialAthleteOverview";
-import { additionalHistoryResults } from "@/lib/athrecs/profile-history-results";
+import {
+  additionalHistoryResults,
+  sourceHistorySports,
+} from "@/lib/athrecs/profile-history-results";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
 import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
@@ -259,7 +262,7 @@ function AthleteContent() {
   const profileSports = [
     ...new Set([
       ...profileResults.map((r) => r.sport),
-      ...historyResults.map((r) => r.sport),
+      ...sourceHistorySports(sourceHistories),
       ...upcoming.map((r) => r.sport),
     ]),
   ];
@@ -278,7 +281,7 @@ function AthleteContent() {
   );
   const bio = publicAthleteBio({
     name: athlete.display_name,
-    sport: profileSports.includes("Athletics") ? "Athletics" : profileResults[0]?.sport,
+    sport: profileSports.includes("Athletics") ? "Athletics" : profileSports[0],
     city: athlete.city,
     country: athlete.country,
     club: athlete.club,
@@ -330,6 +333,13 @@ function AthleteContent() {
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
+          <span className="text-xs text-muted">
+            {profileSports.length
+              ? profileSports.length === 1
+                ? "Sport:"
+                : "Sports:"
+              : "Sport not recorded"}
+          </span>
           {profileSports.map((sport) => (
             <Badge key={sport} variant="outline">
               {sport}

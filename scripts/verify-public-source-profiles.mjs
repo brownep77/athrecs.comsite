@@ -44,6 +44,29 @@ try {
   const { readSourceNationality } = await server.ssrLoadModule(
     "/src/lib/athrecs/source-nationality.ts",
   );
+  const { countryFlag } = await server.ssrLoadModule("/src/lib/athrecs/country-flags.ts");
+  for (const [value, code] of Object.entries({
+    MNT: "MS",
+    NFI: "NF",
+    NMI: "MP",
+    TKS: "TC",
+    BGD: "BD",
+    COG: "CG",
+    LIB: "LB",
+    SIN: "SG",
+    ROM: "RO",
+    "Great Britain & N.I.": "GB",
+    "Trinidad and Tobago": "TT",
+  })) {
+    assert.equal(countryFlag(value).code, code);
+  }
+  for (const value of ["GRB", "GB-", "NMA", "GTA", "SCG", "AIN", "NEU"]) {
+    assert.equal(
+      countryFlag(value).code,
+      "",
+      "Ambiguous or neutral source values must not acquire a guessed flag",
+    );
+  }
   assert.equal(readSourceNationality({ country: "Brazil" }), null, "Residence is not nationality");
   assert.equal(readSourceNationality({ duvSourceObservation: { nationality: "BRA" } }), null);
   assert.equal(
@@ -82,6 +105,110 @@ try {
   const read = () => rpc("athrecs/api", "getAdministratorPublishedAthlete", "synthetic-duv-public");
   assert.equal(await read(), null, "A public flag alone does not grant anonymous profile access");
   await sql`insert into network_audit_log(action,entity_type,entity_id,after_value) values('athlete.profile_admin_published','athlete',${String(a.id)},${JSON.stringify({ athleteId: a.id, profile_visibility: "public" })}::jsonb)`;
+  const wmmId = "11111111-2222-3333-4444-555555555555";
+  const wmmDetails = {
+    archiveCreation: { candidateId: wmmId, sourceRowsCompared: true },
+    worldMarathonMajors: {
+      athleteId: wmmId,
+      nationality: "KEN",
+      sourceUrl: "https://www.worldmarathonmajors.com/rankings/world-rankings",
+    },
+  };
+  assert.equal(readSourceNationality(wmmDetails).value, "KEN");
+  assert.equal(readSourceNationality({ ...wmmDetails, nationality: "Irish" }), null);
+  assert.equal(
+    readSourceNationality({
+      ...wmmDetails,
+      archiveCreation: { candidateId: "different", sourceRowsCompared: true },
+    }),
+    null,
+  );
+  assert.equal(
+    readSourceNationality({
+      ...wmmDetails,
+      archiveCreation: { candidateId: wmmId, sourceRowsCompared: false },
+    }),
+    null,
+  );
+  await sql`update athletes set profile_details=${JSON.stringify(wmmDetails)}::jsonb where id=${a.id}`;
+  assert.equal(
+    (await read()).athlete.nationality,
+    "KEN",
+    "Older WMM nationality observations are displayed with source credit",
+  );
+  const wmmPerformance = {
+    year: 2025,
+    date: "",
+    sourceDate: "",
+    ageGroup: "40-44",
+    discipline: "Marathon",
+    performance: "3:12:34",
+    wind: "",
+    place: "12",
+    venue: "",
+    meeting: "Synthetic Marathon",
+    sourceUrls: ["https://www.worldmarathonmajors.com/rankings/claim-results"],
+    labels: [],
+    verificationStatus: "unverified",
+  };
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    values(${a.id},'Abbott World Marathon Majors',${wmmId},'https://www.worldmarathonmajors.com/rankings/world-rankings',now(),false,array[]::integer[],array[2025],${JSON.stringify([wmmPerformance, { ...wmmPerformance, profileExcluded: true }])}::jsonb,now())`;
+  const withSource = await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
+    q: "Synthetic DUV Public",
+  });
+  assert.equal(
+    withSource.athletes[0].result_count,
+    1,
+    "Public directory includes visible source-only results",
+  );
+  assert.equal(
+    withSource.publicResults,
+    1,
+    "Homepage result total includes published source history",
+  );
+  assert.equal(withSource.athletes[0].nationality, "KEN");
+  assert.deepEqual(withSource.athletes[0].sports, ["Running"]);
+  assert.equal(
+    (
+      await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
+        q: "Synthetic DUV Public",
+        sport: "Running",
+      })
+    ).total,
+    1,
+  );
+  await sql`update athlete_source_histories set published_at=null where athlete_id=${a.id}`;
+  assert.equal(
+    (
+      await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
+        q: "Synthetic DUV Public",
+      })
+    ).athletes[0].result_count,
+    0,
+  );
+  await sql`update athlete_source_histories set published_at=now() where athlete_id=${a.id}`;
+  const wmmHtml = await (await fetch(origin + "/athletes/synthetic-duv-public")).text();
+  assert(wmmHtml.includes('data-country-code="KE"'));
+  assert(wmmHtml.includes("Abbott World Marathon Majors"));
+  assert(wmmHtml.includes("Sport:") && wmmHtml.includes("Running") && wmmHtml.includes("Marathon"));
+  const directoryHtml = await (
+    await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public&sport=Running")
+  ).text();
+  assert(
+    directoryHtml.includes("Sport:") &&
+      directoryHtml.includes("Running") &&
+      directoryHtml.includes("1 recorded result"),
+  );
+  const { verificationStatus: _status, ...legacyPerformance } = wmmPerformance;
+  await sql`update athlete_source_histories set performances=${JSON.stringify([legacyPerformance])}::jsonb where athlete_id=${a.id}`;
+  const legacyHtml = await (await fetch(origin + "/athletes/synthetic-duv-public")).text();
+  assert(
+    legacyHtml.includes("Sport:") &&
+      legacyHtml.includes("Running") &&
+      !legacyHtml.includes("Sport not recorded"),
+    "Legacy source histories also supply the profile's sport",
+  );
+  await sql`delete from athlete_source_histories where athlete_id=${a.id}`;
   const nationalityDetails = {
     // ANT is the sporting code for Antigua & Barbuda, not the former ISO code.
     duvSourceObservation: { nationality: "ANT", birthYear: 1980 },

@@ -29,6 +29,12 @@ snapshots, plans and receipts outside the repository.
 
 Every batch refreshes the live name/alias/account snapshot and checks its
 fingerprint under a short database lock before inserting. New conflicts are
+held. Local POSIX workers using the same connection-file directory share a
+branch-specific file lock around refresh and commit. This prevents the workers
+from repeatedly invalidating each other's fingerprints; database guards still
+protect against all other writers. A stopped worker releases its local lock.
+Rolled-back deadlocks, serialization conflicts and guard conflicts have bounded
+retries with a refreshed directory before every attempt. New conflicts are
 held. Source athlete IDs and unique slugs make repeat runs skip completed
 profiles. Profile, source history, publication audit and receipt checks are
 atomic. No existing athlete, canonical performance, ownership, account or
@@ -64,3 +70,28 @@ The public historical-result row now includes the named provider link when the
 staff evidence columns are hidden. This display change must be deployed before
 the live public page can show that credit; storing provider URLs in the history
 alone does not make the existing public layout display them.
+
+## Retained earlier observations
+
+The public feed also retains edition-7 ranking documents and 2025 result rows.
+Use `--edition 7` and a separate capture/plan directory. These documents are not
+asserted to reconstruct the entire historical ranking season. Source years stay
+as supplied; no qualification-window dates are inferred for this snapshot.
+
+Preparation accepts `--comparison-captures <earlier-capture-directory>` so a
+follow-up is checked against both imported and held source identities from an
+earlier pass. Directory keys are retained only when a candidate can query them;
+this reduces memory without changing the matching rules. Large directory reads
+are paginated and their identity-input fingerprint is checked before and after
+the read. All profiles, including profiles added by this run, are checked again
+before each transaction. Repeated changes cause a stop, not an unchecked insert.
+
+Run `check-wmm-plan.py` against the captured rows before publication. It checks
+every proposed field and result identifier without using the preparer's
+normalizer, reconciles every held/cleared source identity and writes the SHA-256
+manifest required by the importer. Source-supplied nationality is retained with
+provider and URL provenance for public source-profile display.
+
+Final reconciliation accepts `--edition`, `--partitions` and `--connection` for
+the follow-up run. It exports a separate review queue and audit, with the same
+public/unclaimed, missing-date, source-value and repeat-safety requirements.

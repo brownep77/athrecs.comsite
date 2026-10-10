@@ -12,10 +12,12 @@ wmm = importlib.util.module_from_spec(spec); spec.loader.exec_module(wmm)
 def dump(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2))
 
-def main(work, output):
-    receipts = [json.loads((work/f'production-{n}.json').read_text()) for n in range(3)]
+def main(work, output, edition=8, partitions=3, connection=None):
+    wmm.configure(edition)
+    prefix='WMM' if edition==8 else f'WMM-edition{edition}'
+    receipts = [json.loads((work/f'production-{n}.json').read_text()) for n in range(partitions)]
     if not all(r.get('reviewLimited') is False and r['branchId'] == wmm.PROD and r['batchId'] == wmm.BATCH for r in receipts):
-        raise ValueError('All three production partitions must finish first')
+        raise ValueError('All production partitions must finish first')
     plan = json.loads((work/'plans/summary.json').read_text())
     manifest = json.loads((work/'validated-plan-manifest.json').read_text())
     counts = collections.Counter()
@@ -26,7 +28,7 @@ def main(work, output):
     if counts['captured_pages'] != len(manifest['sha256']): raise ValueError('Incomplete captured pages')
     if counts['created'] + counts['previously_imported'] + len(fresh) != plan['summary']['eligible_profiles']:
         raise ValueError('Eligible source IDs are not fully accounted for')
-    cfg, query = wmm.base.connection(work/'connection.json', wmm.PROD)
+    cfg, query = wmm.base.connection(connection or work/'connection.json', wmm.PROD)
     if cfg['projectId'] != wmm.PROJECT: raise ValueError('Wrong project')
     scope = "FROM athletes a JOIN athlete_source_histories h ON h.athlete_id=a.id WHERE a.profile_details#>>'{archiveCreation,batchId}'=$1 AND h.provider=$2"
     aggregate = """SELECT count(*)::int profiles, count(distinct h.external_id)::int unique_source_ids,
@@ -59,7 +61,7 @@ def main(work, output):
         raise ValueError('Published results failed source or duplicate checks')
 
     # Export every held source ID, retaining both supporting and opposing evidence.
-    queue = output/'WMM-review-queue-2026-10-10.jsonl.gz'
+    queue = output/f'{prefix}-review-queue-2026-10-10.jsonl.gz'
     temp = queue.with_suffix('.writing'); seen=set(); initial=0; fresh_ids={h['sourceAthleteId'] for h in fresh}; fresh_details={}
     with gzip.open(temp,'wt',encoding='utf-8',compresslevel=6) as out:
         for path in sorted((work/'plans').glob('*.plan.json.gz')):
@@ -109,12 +111,13 @@ def main(work, output):
         body.append('<tr><th>'+age+'</th>'+''.join(f'<td>{v:,}</td>' for v in values)+'</tr>')
     links=''.join('<li><a href="https://www.athrecs.com/athletes/'+esc(e['slug'])+'">'+esc(e['slug'].split('-wmm-')[0].replace('-',' ').title())+'</a></li>' for e in final['examples'])
     reasons=''.join('<tr><th>'+esc(k.replace('_',' '))+'</th><td>'+format(v,',')+'</td></tr>' for k,v in sorted(final['holdReasons'].items(),key=lambda item:-item[1]))
-    report=output/'WMM-import-report-2026-10-10.html'
+    report=output/f'{prefix}-import-report-2026-10-10.html'
+    scope='The ranking period is 1 October 2025–30 September 2026.' if edition==8 else 'These are retained edition-7 observations with source result year 2025. This snapshot is not asserted to reconstruct the entire historical ranking season.'
     report.write_text(f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WMM athlete import — 10 October 2026</title>
     <style>body{{font:16px/1.55 system-ui,sans-serif;color:#182635;margin:40px auto;max-width:1050px;padding:0 20px}}h1{{font-size:32px}}h2{{margin-top:32px}}a{{color:#075f8c}}table{{width:100%;border-collapse:collapse;font-size:14px}}th,td{{padding:9px;border-bottom:1px solid #dce3e8;text-align:right}}th:first-child,td:first-child{{text-align:left}}thead{{background:#eff4f7}}.totals{{font-size:20px;background:#edf7f3;padding:20px;border-radius:12px}}.note{{background:#fff6df;padding:15px}}small{{color:#556575}}@media print{{body{{margin:0;max-width:none}}tr{{break-inside:avoid}}}}</style>
-    <h1>World Marathon Majors athlete import</h1><p>Completed 10 October 2026 · AthRecs · Ranking edition 8</p>
+    <h1>World Marathon Majors athlete import</h1><p>Completed 10 October 2026 · AthRecs · Ranking edition {edition}</p>
     <p class="totals"><strong>{agg['profiles']:,} public profiles</strong> with <strong>{agg['results']:,} results</strong>.<br>{len(seen):,} source identities held for possible duplicates or source conflicts.</p>
-    <p>Checked all {final['rankingsScreened']:,} ranking entries across both genders and all nine age groups. The <a href="{wmm.prep.SOURCE}">official WMM ranking period</a> is 1 October 2025–30 September 2026. Captured {caps['results']:,} detailed source result rows across {caps['pages']} pages.</p>
+    <p>Checked all {final['rankingsScreened']:,} captured ranking entries across both genders and all nine age groups from the <a href="{wmm.prep.SOURCE}">official WMM feed</a>. {scope} Captured {caps['results']:,} detailed source result rows across {caps['pages']} pages.</p>
     <h2>Coverage</h2><table><thead><tr><th>Age</th><th>Women screened</th><th>Profiles added</th><th>Results added</th><th>Men screened</th><th>Profiles added</th><th>Results added</th></tr></thead><tbody>{''.join(body)}</tbody></table>
     <h2>Duplicate checks</h2><p>Compared official source IDs, names and aliases, accents and punctuation, token order, nickname variants, spelling similarities, and shared race-year bibs. Checked existing AthRecs profiles and accounts, then refreshed those checks before every insert. Collapsed {final['duplicateSourceRowsCollapsed']:,} repeated source result rows during screening while retaining the original IDs and observations.</p>
     <p>{initial:,} source identities were held during initial screening and {len(fresh):,} more during live checks. These are possible matches or source problems, not confirmed duplicate people. Matching names did not authorize a merge. Existing profiles, ownership, claims, privacy settings and canonical result records were not overwritten by this importer.</p>
@@ -123,12 +126,13 @@ def main(work, output):
     <p>Database checks found zero duplicate source athlete IDs, zero duplicate source result IDs across the published WMM histories, and zero rows failing the publication/source checks. The branch rehearsal also passed repeat-import and concurrent-batch checks.</p>
     <p class="note">Provider names and source links are stored with every result. This version of the public historical-results table displays the named source link. Deployment and live-page visibility should be checked separately from the database reconciliation.</p>
     <h2>Sample public profiles</h2><ul>{links}</ul><p>Provider: <a href="https://www.worldmarathonmajors.com/rankings/claim-results">Abbott World Marathon Majors</a>. Original source observations and complete review records are preserved in the accompanying audit files.</p><small>Batch {wmm.BATCH} · Checked {esc(final['verifiedAt'])}</small></html>''',encoding='utf-8')
-    archive=output/'WMM-import-audit-2026-10-10.zip'
+    archive=output/f'{prefix}-import-audit-2026-10-10.zip'
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as z:
-        for p in [report,queue,work/'final-verification.json',work/'validated-plan-manifest.json',work/'plans/summary.json',work/'captures/coverage.json',work/'live-page-verification.json',work/'source-credit-check.json',*[work/f'production-{n}.json' for n in range(3)],*sorted(work.glob('review*-receipt.json')),*sorted(work.glob('review-concurrent-*.json'))]:
+        evidence=[work/name for name in ['live-page-verification.json','source-credit-check.json','cross-edition-result-id-check.json'] if (work/name).exists()]
+        for p in [report,queue,work/'final-verification.json',work/'validated-plan-manifest.json',work/'plans/summary.json',work/'captures/coverage.json',*evidence,*[work/f'production-{n}.json' for n in range(partitions)],*sorted(work.glob('review*-receipt.json')),*sorted(work.glob('review-concurrent-*.json'))]:
             z.write(p,p.name)
     print(json.dumps({k:final[k] for k in ['publishedProfiles','publishedResults','heldProfiles','freshHeld','rankingsScreened']},indent=2))
     print(report); print(archive)
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--work',type=pathlib.Path,required=True);p.add_argument('--output',type=pathlib.Path,required=True);a=p.parse_args();main(a.work,a.output)
+    p=argparse.ArgumentParser();p.add_argument('--work',type=pathlib.Path,required=True);p.add_argument('--output',type=pathlib.Path,required=True);p.add_argument('--edition',type=int,choices=[7,8],default=8);p.add_argument('--partitions',type=int,default=3);p.add_argument('--connection',type=pathlib.Path);a=p.parse_args();main(a.work,a.output,a.edition,a.partitions,a.connection)
