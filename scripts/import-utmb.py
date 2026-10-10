@@ -103,8 +103,11 @@ def apply(args):
       'sourceUrl':'https://utmb.world/utmb-index/runner-search','providerPermissionClaimed':False,'completeDirectory':False}
     query([("INSERT INTO result_archive_capture_approvals(id,provider,approved_by,approval_basis,scope,evidence) VALUES($1,$2,'Paul Browne','owner_private_import','staff_only',$3::jsonb) ON CONFLICT(id) DO NOTHING",[APPROVAL,PROVIDER,json.dumps(evidence)]),
       ("INSERT INTO result_archive_capture_runs(id,approval_id,provider,inventory,status) VALUES($1::uuid,$2,$3,$4::jsonb,'processing') ON CONFLICT(id) DO UPDATE SET inventory=excluded.inventory,status='processing',updated_at=now()",[RUN,APPROVAL,PROVIDER,json.dumps([{'sourceKey':'runner-'+p['externalId'],'sourceUrl':p['sourceUrl']} for p in people])])])
+    archived=query([('SELECT id,source_key,payload_hash FROM result_archive_source_captures WHERE provider=$1',[PROVIDER])],True)[0]
+    archived_ids={(r['source_key'],r['payload_hash']):r['id'] for r in archived}
     for i in range(0,len(people),10):
         statements=[]
+        pending=[]
         for c,p in zip(captures[i:i+10],people[i:i+10]):
             archive_rows=[{'name':p['displayName'],'gender':p['gender'],'nationality':p['nation'],'date':r['dateIso'],
               'distanceLabel':r['distance']+' km','status':'DNF' if r['isDnf'] else 'Finished' if r['time'] else 'Unknown',
@@ -114,13 +117,18 @@ def apply(args):
               'index':{'name':'UTMB runner history — '+p['displayName'],'date':'','location':'Multiple race editions; partial race fields'},
               'rows':archive_rows,'performances':p['performances'],'heldRows':p['heldRows']}
             encoded=json.dumps(payload,ensure_ascii=False,separators=(',',':'));digest=hashlib.sha256(encoded.encode()).hexdigest()
+            saved=archived_ids.get(('runner-'+p['externalId'],digest))
+            if saved is not None:
+                p['sourceCaptureId']=saved
+                continue
+            pending.append(p)
             statements.append(("""INSERT INTO result_archive_source_captures(run_id,approval_id,provider,source_key,source_url,payload_hash,html_sha256,source_html_gzip,payload,row_count,source_check,audit,captured_at)
               VALUES($1::uuid,$2,$3,$4,$5,$6,$7,decode($8,'hex'),$9::jsonb,$10,'compared',$11::jsonb,$12::timestamptz)
               ON CONFLICT(provider,source_key,payload_hash) DO UPDATE SET last_seen_at=now() RETURNING id""",
               [RUN,APPROVAL,PROVIDER,'runner-'+p['externalId'],c['url'],digest,c['sha256'],gzip.compress(c['raw'].encode(),mtime=0).hex(),encoded,len(payload['rows']),
                json.dumps({'sourceRowsCompared':True,'identityVerified':False,'wholeRaceField':False,'rawPageRetained':True}),c['capturedAt']]))
-        returned=query(statements)
-        for p,row in zip(people[i:i+10],returned):p['sourceCaptureId']=row[0]['id']
+        returned=query(statements) if statements else []
+        for p,row in zip(pending,returned):p['sourceCaptureId']=row[0]['id']
     print(json.dumps({'phase':'archived','runnerPages':len(people),'sourceRows':sum(len(c['data']['results']['results']) for c in captures)}),flush=True)
     directory=wmm.LiveDirectory(query,allowed);counts=collections.Counter();held=[];examples=[]
     histories=query([("SELECT h.*,a.slug,a.display_name,a.gender,a.nation,a.profile_details,a.profile_visibility FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id WHERE lower(h.provider)=$1",[PROVIDER])],True)[0]
@@ -156,19 +164,20 @@ def apply(args):
              'Owner requested UTMB athlete profiles and source histories; exact source dates and distances retained; identity provisional; canonical performances unchanged.')
             statements=[("SET LOCAL lock_timeout='5s'",[]),("SET LOCAL statement_timeout='55s'",[]),
               ('LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,athlete_source_histories,results,editions,events IN SHARE ROW EXCLUSIVE MODE',[]),
-              ('CREATE TEMP TABLE utmb_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
-              ('INSERT INTO utmb_guard SELECT fingerprint=$2 FROM ('+wmm.FP+') f',[0,directory.fingerprint]),
-              ('INSERT INTO utmb_guard SELECT EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)',[APPROVAL]),
+              ("CREATE TEMP TABLE utmb_guard(kind text,ok boolean,CONSTRAINT utmb_directory_guard CHECK(kind<>'directory' OR ok IS TRUE),CONSTRAINT utmb_approval_guard CHECK(kind<>'approval' OR ok IS TRUE),CONSTRAINT utmb_history_guard CHECK(kind<>'history' OR ok IS TRUE)) ON COMMIT DROP",[]),
+              ("INSERT INTO utmb_guard SELECT 'directory',fingerprint=$2 FROM ("+wmm.FP+') f',[0,directory.fingerprint]),
+              ("INSERT INTO utmb_guard SELECT 'approval',EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)",[APPROVAL]),
               (insert,[data,PROVIDER,BATCH,0])]
             for p,h,merged in updates:
                 statements.extend([
-                  ('INSERT INTO utmb_guard SELECT performances=$4::jsonb FROM athlete_source_histories WHERE athlete_id=$1 AND provider=$2 AND external_id=$3',[h['athlete_id'],h['provider'],p['externalId'],json.dumps(h['performances'])]),
+                  ("INSERT INTO utmb_guard SELECT 'history',count(*)=1 AND bool_and(performances=$4::jsonb) FROM athlete_source_histories WHERE athlete_id=$1 AND provider=$2 AND external_id=$3",[h['athlete_id'],h['provider'],p['externalId'],json.dumps(h['performances'])]),
                   ("INSERT INTO network_audit_log(actor_email,action,entity_type,entity_id,before_value,after_value,note) VALUES('paul@athrecs.com','athlete.utmb_history_extended','athlete_source_history',$1,$2::jsonb,$3::jsonb,'Missing UTMB source observations appended by stable provider athlete ID; existing publication and evidence retained.')",
                    [PROVIDER+':'+p['externalId'],json.dumps({'performances':h['performances'],'publishedAt':h['published_at']}),json.dumps({'performances':merged,'sourceCaptureId':p['sourceCaptureId']})]),
                   ('UPDATE athlete_source_histories SET performances=$4::jsonb,captured_at=$5::timestamptz,complete=false,years_captured=ARRAY(SELECT DISTINCT (r->>\'year\')::int FROM jsonb_array_elements($4::jsonb) r ORDER BY 1) WHERE athlete_id=$1 AND provider=$2 AND external_id=$3',[h['athlete_id'],h['provider'],p['externalId'],json.dumps(merged),p['capturedAt']])])
             try:returned=query(statements)
             except RuntimeError as exc:
-                if attempt<3 and any(v in str(exc) for v in ('utmb_guard','lock timeout','40P01','40001')):time.sleep(attempt+1);continue
+                print(json.dumps({'phase':'retry','attempt':attempt+1,'reason':str(exc)}),flush=True)
+                if attempt<3 and any(v in str(exc) for v in ('utmb_directory_guard','lock timeout','40P01','40001')):time.sleep(attempt+1);continue
                 raise
             inserted=returned[6][0];counts.update(batch_counts);counts['profilesCreated']+=inserted['profiles'];counts['resultsAdded']+=sum(len(p['performances']) for p in new);held.extend(batch_holds);examples.extend(inserted['created'])
             for p,h,merged in updates:h['performances']=merged
