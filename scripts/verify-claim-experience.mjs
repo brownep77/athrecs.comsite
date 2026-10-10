@@ -25,8 +25,8 @@ const resultClaimVerifier = await readFile(
 const accountApi = await readFile(resolve(root, "src/lib/athrecs/athlete-account-api.ts"), "utf8");
 const vercelConfig = JSON.parse(await readFile(resolve(root, "vercel.json"), "utf8"));
 
-assert.match(claimRoute, /Add this result to your profile/);
-assert.match(claimRoute, /Submit claim for review/);
+assert.match(claimRoute, /Finish claiming your athlete profile/);
+assert.match(claimRoute, /Yes, this is me — submit my profile claim/);
 assert.match(claimRoute, /Optional evidence links/);
 assert.match(claimRoute, /Not required · add up to three/);
 assert.match(claimRoute, /View my private profile/);
@@ -58,8 +58,8 @@ assert.match(routeTree, /'\/my-athlete-profile': typeof MyAthleteProfileRoute/);
 assert.match(routeTree, /preLoaderRoute: typeof MyAthleteProfileRouteImport/);
 assert.match(routeTree, /MyAthleteProfileRoute: MyAthleteProfileRoute/);
 
-assert.match(resultClaimVerifier, /Confirm a matched result to request ownership/);
-assert.match(resultClaimVerifier, /Submit claim for review/);
+assert.match(resultClaimVerifier, /Signing in is the first step/);
+assert.match(resultClaimVerifier, /Yes, this is me — submit my profile claim/);
 assert.doesNotMatch(
   resultClaimVerifier,
   /Matched claims are linked to your Athlete Account immediately/,

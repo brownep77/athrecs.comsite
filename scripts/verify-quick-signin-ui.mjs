@@ -213,7 +213,7 @@ try {
     await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
     await dialog.getByRole("button", { name: "Verify code and continue" }).click();
     await page.waitForURL(`${origin}/athlete-account?section=potential`);
-    await page.getByLabel("Name used in race results", { exact: false }).waitFor();
+    await page.getByLabel("Full racing name", { exact: false }).waitFor();
     await page.setViewportSize({ width: 1280, height: 900 });
     // A draft consent choice must not be committed by the separate name form.
     await page.locator('a[href="/athlete-account?section=privacy"]').first().click();
@@ -226,14 +226,14 @@ try {
       insert into results (id, edition_id, athlete_id, finish_time_seconds) values (990021, 990021, 990021, 2400);
     `);
     await page
-      .getByLabel("Name used in race results", { exact: false })
+      .getByLabel("Full racing name", { exact: false })
       .fill("Quick Signup Runner");
-    await page.getByRole("button", { name: "Save name and find results", exact: true }).click();
+    await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
     await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
     await page
       .getByRole("article")
       .filter({ hasText: "Quick Signin Test 10K" })
-      .getByRole("button", { name: "Claim this result", exact: true })
+      .getByRole("button", { name: "Claim this profile", exact: true })
       .waitFor();
     const userId = (
       await database.query('select id from "user" where email = $1', ["quick-runner@example.test"])
@@ -297,7 +297,7 @@ try {
     await dialog.getByRole("button", { name: "Verify code and continue" }).click();
     await page.waitForURL(`${origin}/athlete-account`);
     await page.getByRole("heading", { name: "My races", exact: true }).waitFor();
-    assert.equal(await page.getByLabel("Name used in race results", { exact: false }).count(), 0);
+    assert.equal(await page.getByLabel("Full racing name", { exact: false }).count(), 1);
     console.log(
       "PASS: email-only signup, wrong/correct codes, mobile layout, optional result discovery, name capture, real matching, no automatic claims or consent, password/recovery alternatives and skip path.",
     );

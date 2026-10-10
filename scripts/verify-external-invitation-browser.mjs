@@ -109,9 +109,9 @@ try {
     0,
     "Claim does not require a completed private profile",
   );
-  await page.getByRole("checkbox", { name: /This is my result/ }).check();
-  await page.getByRole("button", { name: "Submit claim for review", exact: true }).click();
-  await page.getByText("This claim needs an identity check", { exact: true }).waitFor();
+  await page.getByRole("checkbox", { name: /This is my profile and the race shown is mine/ }).check();
+  await page.getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true }).click();
+  await page.getByText("Claim received — awaiting identity review", { exact: true }).waitFor();
   const claims =
     await sql`select status,claimant_user_id from result_claims where result_id=993401`;
   assert.deepEqual(claims, [{ status: "pending", claimant_user_id: user.id }]);

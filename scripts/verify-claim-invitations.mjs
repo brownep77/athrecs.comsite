@@ -215,6 +215,32 @@ try {
   );
   const invite = await call("createStaffClaimInvitation", input);
   const token = new URL(invite.url).searchParams.get("invitation");
+  // Resume is private, requires the verified recipient, and never links ownership.
+  const openInvites = () => call("getMyOpenClaimInvitations", undefined, athlete.token);
+  await assert.rejects(() => call("getMyOpenClaimInvitations", undefined, ""), /Unauthorized/);
+  assert.deepEqual(await call("getMyOpenClaimInvitations", undefined, other.token), []);
+  assert.deepEqual(await openInvites(), [
+    { athleteName: "Synthetic Runner", resultId: 991401, token },
+  ]);
+  assert.equal(lastHeaders.get("cache-control"), "private, no-store");
+  await sql`update "user" set "emailVerified"=false where id=${athlete.id}`;
+  assert.deepEqual(await openInvites(), []);
+  await sql`update "user" set "emailVerified"=true where id=${athlete.id}`;
+  await sql`update athlete_claim_invitations set expires_at=now()-interval '1 minute' where id=${invite.id}`;
+  assert.deepEqual(await openInvites(), []);
+  await sql`update athlete_claim_invitations set expires_at=now()+interval '7 days',revoked_at=now() where id=${invite.id}`;
+  assert.deepEqual(await openInvites(), []);
+  await sql`update athlete_claim_invitations set revoked_at=null,declined_at=now() where id=${invite.id}`;
+  assert.deepEqual(await openInvites(), []);
+  await sql`update athlete_claim_invitations set declined_at=null,user_id=null,invitation_kind='email',recipient_key='email:runner@example.test' where id=${invite.id}`;
+  assert.equal(
+    (await openInvites()).length,
+    1,
+    "An invitation prepared before signup resumes for its verified email",
+  );
+  assert.deepEqual(await call("getMyOpenClaimInvitations", undefined, other.token), []);
+  await sql`update athlete_claim_invitations set user_id=${athlete.id},invitation_kind='account',recipient_key=null where id=${invite.id}`;
+
   const { claimInvitationSharing } = await server.ssrLoadModule(
     "/src/lib/athrecs/claim-invitation-sharing.ts",
   );

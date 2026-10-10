@@ -108,9 +108,9 @@ try {
     await page.getByLabel("Display name", { exact: false }).fill("Unsaved sidebar draft");
     await go("Potential races");
     const match = page.getByRole("article").filter({ hasText: "Sidebar Synthetic 10K" });
-    await match.getByRole("button", { name: "Claim this result", exact: true }).click();
+    await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
     const dialog = page.getByRole("alertdialog");
-    await dialog.getByRole("button", { name: "Submit claim for review", exact: true }).click();
+    await dialog.getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true }).click();
     await page
       .getByText("Your claim is with staff for an ownership check.", { exact: true })
       .waitFor();
