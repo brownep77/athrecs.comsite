@@ -16,7 +16,7 @@ const parse=(raw,inventory=inv,page=url)=>parseEvent(raw,inventory,'2026-10-10T0
 test('timed performance preserves exact distance, never finish time',()=>{const r=parse(fixture()).rows[0];assert.equal(r.performance.achievedDistanceMetres,'45123.000');assert.equal(r.performance.finishTimeSeconds,null);assert.equal(r.original.Performance,'45.123 km');});
 test('all columns follow headings, even when reordered',()=>{const a=parse(fixture()).rows[0],b=parse(fixture({reorder:true})).rows[0];assert.notEqual(a.sourceDocumentHash,b.sourceDocumentHash);const {sourceDocumentHash:ah,...av}=a,{sourceDocumentHash:bh,...bv}=b;assert.deepEqual(av,bv);});
 test('explicit edition prefix is retained without index rejection',()=>assert.equal(parse(fixture({edition:'99th '})).index.name,'99th Synthetic race (GBR)'));
-test('international detail prefixes preserve the full original title',()=>{for(const edition of ['2^ ','9 ','12 ','14 . ']){const p=parse(fixture({edition}));assert.equal(p.index.name,edition+'Synthetic race (GBR)');assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');}});
+test('international detail prefixes preserve the full original title',()=>{for(const edition of ['2^ ','9 ','12 ','14 . ','9a ']){const p=parse(fixture({edition}));assert.equal(p.index.name,edition+'Synthetic race (GBR)');assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');}});
 test('different titles, conflicting editions and changed dates remain held',()=>{
  assert.throws(()=>parse(fixture({edition:'2^ '}),{...inv,index:{...inv.index,Event:'1^ Synthetic race (GBR)'}}),/index_metadata_changed/);
  assert.throws(()=>parse(fixture(),{...inv,index:{...inv.index,Event:'Different race (GBR)'}}),/index_metadata_changed/);
@@ -35,6 +35,34 @@ test('bad time in timed race fails closed',()=>assert.throws(()=>parse(fixture({
 test('source pagination cannot be treated as complete',()=>{const p=parse(fixture({total:2}),{...inv,index:{...inv.index,Finishers:'2'}});assert.throws(()=>combinePages([p]),/not_complete/);});
 test('all pages combine with original row locators and raw document hashes',()=>{const i={...inv,index:{...inv.index,Finishers:'2'}};const a=parse(fixture({total:2}),i),b=parse(fixture({start:2,total:2,runner:'900002',name:'Sample, Beatrice'}),i,url+'&page=2');const c=combinePages([b,a]);assert.equal(c.rows.length,2);assert.equal(c.rows[1].sourceRow,2);assert.equal(c.audit.comparedPages,2);assert.equal(c.coverage.duvPageComplete,true);});
 test('duplicate source athlete across pages fails closed',()=>{const i={...inv,index:{...inv.index,Finishers:'2'}};assert.throws(()=>combinePages([parse(fixture({total:2}),i),parse(fixture({start:2,total:2}),i,url+'&page=2')]),/duplicate_runner/);});
+function withExtraCategory(category='X'){
+ const base=fixture().toString(),row=/<tbody>(<tr>.*?<\/tr>)<\/tbody>/.exec(base)[1];
+ const extra=row.replace('runner=900001','runner=900002').replace('Example, Alice','Sample, Casey').replace('<td>F</td>',`<td>${category}</td>`);
+ return Buffer.from(base.replace('</tbody>',extra+'</tbody>'));
+}
+test('complete explicit X rows outside the M/F subtotal retain all evidence',()=>{
+ const p=parse(withExtraCategory()),c=combinePages([p]);
+ assert.equal(c.rows.length,2);assert.equal(c.rows[1].gender,'X');assert.equal(c.rows[1].original['M/F'],'X');
+ assert.equal(c.eventMetadata.Finishers,'1 (0 M, 1 F)');assert.equal(c.index.raw.Finishers,'1');
+ assert.deepEqual(c.audit.metadataComparisons.finisherCount,{method:'listed_MF_plus_explicit_X',listedTotal:1,displayedRows:2,explicitX:1});
+ assert.equal(c.coverage.duvPageComplete,true);assert.equal(c.audit.identityVerified,false);
+});
+test('count discrepancies without exact explicit X evidence remain held',()=>{
+ for(const category of ['','?','M','F'])assert.throws(()=>parse(withExtraCategory(category)),/partial_page_without_range/);
+ assert.throws(()=>parse(Buffer.from(withExtraCategory().toString().replace('<td>F</td>','<td>M</td>'))),/partial_page_without_range/);
+ assert.throws(()=>parse(withExtraCategory(),{...inv,index:{...inv.index,Finishers:'2'}}),/index_finisher_count_changed/);
+});
+test('X subtotal exception never admits pagination or duplicate source identities',()=>{
+ const raw=withExtraCategory().toString();
+ assert.throws(()=>parse(Buffer.from(raw+`<a href="${url}&page=2">Next</a>`)),/partial_page_without_range/);
+ assert.throws(()=>parse(Buffer.from(raw+'1 to 2 of 2 search results')),/source_page_range_mismatch/);
+ assert.throws(()=>parse(Buffer.from(raw.replace('runner=900002','runner=900001'))),/repeated_source_runner/);
+});
+test('known X source identity cannot silently link a changed category',()=>{
+ const r=parse(withExtraCategory()).rows[1];const d=new Directory([{id:42,display_name:r.name,gender:'X',source_url:r.sourceAthleteUrl}]);
+ assert.equal(d.decide(r,eventDirectory([r])).status,'linked');
+ assert.equal(d.decide({...r,gender:'F'},eventDirectory([r])).status,'held');
+});
 test('same source ID on another event links to existing athlete',()=>{const r=parse(fixture()).rows[0];const d=new Directory([{id:42,display_name:r.name,given_name:r.givenName,family_name:r.familyName,gender:'F',source_url:r.sourceAthleteUrl}]);assert.equal(d.decide(r,eventDirectory([r])).athleteId,42);});
 test('source ID with conflicting identity details stays held',()=>{const r=parse(fixture()).rows[0];const d=new Directory([{id:42,display_name:r.name,gender:'M',source_url:r.sourceAthleteUrl}]);assert.equal(d.decide(r,eventDirectory([r])).status,'held');});
 test('names, aliases and account names prevent duplicate creation',()=>{const r=parse(fixture()).rows[0];for(const d of [new Directory([{id:42,display_name:r.name}]),new Directory([{id:42,display_name:'Different Name',profile_details:{aliases:[r.name]}}]),new Directory([],[{full_name:r.name}])])assert.equal(d.decide(r,eventDirectory([r])).status,'held');});

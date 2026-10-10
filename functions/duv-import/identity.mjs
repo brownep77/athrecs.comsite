@@ -41,7 +41,7 @@ export class Directory{
   if(ids.length===1){
    const a=this.athletes.get(ids[0]);const names=this.names.get(ids[0]);
    const observation=a?.profile_details?.duvSourceObservation;
-   if(!a||a.parent_athlete_id||!names?.has(nameKey(row.name))||(a.gender&&['M','F'].includes(a.gender)&&a.gender!==row.gender)||((observation?.birthYear||a.birth_year)&&row.sourceBirthYear&&(observation?.birthYear||a.birth_year)!==row.sourceBirthYear))return {status:'held',reasons:['source_id_identity_details_differ'],possibleIds:ids};
+   if(!a||a.parent_athlete_id||!names?.has(nameKey(row.name))||(a.gender&&['M','F','X'].includes(a.gender)&&a.gender!==row.gender)||((observation?.birthYear||a.birth_year)&&row.sourceBirthYear&&(observation?.birthYear||a.birth_year)!==row.sourceBirthYear))return {status:'held',reasons:['source_id_identity_details_differ'],possibleIds:ids};
    return {status:'linked',athleteId:Number(ids[0]),reasons:[]};
   }
   const matches=this.matches(row.name);if(matches.length)return {status:'held',reasons:['possible_existing_name_or_alias'],possibleIds:matches};

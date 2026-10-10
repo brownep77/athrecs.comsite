@@ -83,7 +83,7 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
  // DUV sometimes adds an edition/display prefix only on the detail page.
  // Keep both originals; require the entire remaining title to match exactly.
  const detailName=meta.Event??'',indexName=inventory.index.Event??'';
- const withoutPrefix=detailName.replace(/^\d+(?:(?:st|nd|rd|th|\^|[ºª°])|\s*\.)?\s+/i,'');
+ const withoutPrefix=detailName.replace(/^\d+(?:(?:st|nd|rd|th|a|\^|[ºª°])|\s*\.)?\s+/i,'');
  if((detailName!==indexName&&withoutPrefix!==indexName)||meta.Date!==inventory.index.Date)throw Error('index_metadata_changed');
  const distance=inventory.index.Distance;
  const comparisonDistance=distance?.replace(/^(\d+(?:\.\d+)?km\/\d+)Etappen$/,'$1stages');
@@ -92,17 +92,24 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
  if(range.start>range.end||range.start.slice(0,4)!==String(year)||range.end>capturedAt.slice(0,10))throw Error('invalid_or_future_date_range');
  const count=/^(\d+)\s*\((\d+) M, (\d+) F\)$/.exec(meta.Finishers);
  if(!count)throw Error('unrecognized_source_finisher_count');
- const total=+count[1];
+ const listedTotal=+count[1];let total=listedTotal;
  const pagination=$('a[href]').toArray().map(a=>new URL($(a).attr('href'),sourceUrl).href).filter(u=>{
   const p=new URL(u);return p.origin==='https://statistik.d-u-v.org'&&p.pathname==='/getresultevent.php'&&p.searchParams.get('event')===id&&p.searchParams.has('page');
  });
  const fullText=clean($.root().text());
  const span=/(\d+) to (\d+) of (\d+) search results/.exec(fullText);
  const offset=span?+span[1]-1:0;
+ // Some complete, unpaginated tables list explicit X-category performances
+ // outside the displayed M/F subtotal. Keep every row and both original totals;
+ // never use this exception for missing/unknown categories or incomplete pages.
+ const sourceGenders=primary.map(cells=>cells[headers.indexOf('M/F')].text);
+ const male=sourceGenders.filter(g=>g==='M').length,female=sourceGenders.filter(g=>g==='F').length,explicitX=sourceGenders.filter(g=>g==='X').length;
+ const extraX=!span&&!pagination.length&&explicitX>0&&listedTotal===+count[2]+ +count[3]&&male===+count[2]&&female===+count[3]&&primary.length===listedTotal+explicitX;
+ if(extraX)total=primary.length;
  if(span&&(+span[3]!==total||+span[2]-offset!==primary.length))throw Error('source_page_range_mismatch');
  if(!span&&total!==primary.length)throw Error('partial_page_without_range');
  const indexCount=Number(inventory.index.Finishers);
- if(indexCount!==total)throw Error('index_finisher_count_changed');
+ if(indexCount!==listedTotal)throw Error('index_finisher_count_changed');
  const seen=new Set(),rows=primary.map((cells,n)=>{
   const original=Object.fromEntries(headers.map((h,i)=>[h,cells[i].text]));
   const originalLinks=Object.fromEntries(headers.map((h,i)=>[h,cells[i].links]));
@@ -128,10 +135,10 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
   index:{name:meta.Event,date:range.start,endDate:range.end,location:'',distance,raw:inventory.index},
   eventMetadata:meta,eventMetadataLinks:links,rows,
   provenance:{indexUrl:inventory.indexUrl,indexHtmlSha256:inventory.indexHtmlSha256,originalResultUrls:links.Source??[],originalResultSourceInspected:false,sourceRole:'secondary_statistics_provider',organiser:null},
-  pagination:{total,male:+count[2],female:+count[3],offset,pageUrl,pageLinks:[...new Set(pagination)]},
+  pagination:{total,listedTotal,male:+count[2],female:+count[3],offset,pageUrl,pageLinks:[...new Set(pagination)]},
   coverage:{duvPageComplete:rows.length===total,organiserFieldComplete:'unknown',note:'Complete displayed DUV field; statistical thresholds may exclude other participants.'},
   audit:{sourceCheck:'compared',parser:'parse5/cheerio',independentParser:'htmlparser2 streaming callbacks',version:2,comparedRows:rows.length,comparedCells:rows.length*headers.length,runnerLinksCompared:true,metadataCompared:true,identityVerified:false,
-   metadataComparisons:{eventName:detailName===indexName?'exact':'detail_numeric_prefix',distance:comparisonDistance===distance?'exact':'Etappen_to_stages'}}};
+   metadataComparisons:{eventName:detailName===indexName?'exact':'detail_numeric_prefix',distance:comparisonDistance===distance?'exact':'Etappen_to_stages',finisherCount:{method:extraX?'listed_MF_plus_explicit_X':'exact',listedTotal,displayedRows:total,explicitX:extraX?explicitX:null}}}};
 }
 
 export function combinePages(parts){

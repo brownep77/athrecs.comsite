@@ -172,6 +172,15 @@ English detail suffix `stages` only when distance and stage count match exactly.
 Both original values and the comparison method remain in the capture audit.
 Missing distances, conflicting dates and inconsistent finisher counts stay held.
 
+The Italian detail ordinal suffix `a` (for example `9a`) follows the same exact
+remaining-title comparison. A complete unpaginated table can also contain explicit
+`X` category rows outside DUV's displayed male/female subtotal. Accept that format
+only when index and metadata totals agree, every male and female subtotal matches,
+and the entire difference consists of explicit `X` rows. Preserve the raw totals,
+categories and row count in the capture audit. Unknown/blank categories, pagination,
+other count differences and repeated runner IDs remain held. A known `X` identity
+whose later source category differs requires review, just like known `M` or `F`.
+
 Validate a parser update on an isolated database branch using stored documents.
 Disable its inherited trigger and move its provider request clock into the future
 so validation makes no provider requests. Explicitly requeue only the reviewed
