@@ -62,7 +62,10 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
         group by r.athlete_id
       ), source_summaries as materialized (
         select h.athlete_id, count(*)::int as result_count,
-          array_agg(distinct case when trim(performance->>'discipline') ~* '^(marathon|half( marathon)?|[0-9]+([.][0-9]+)?[[:space:]]*k(m)?|[0-9]+([.][0-9]+)?[[:space:]]*(mi|mile|miles))$'
+          array_agg(distinct case
+            when performance->>'discipline' ~* '(^|[^[:alnum:]_])triathlon([^[:alnum:]_]|$)' then 'Triathlon'
+            when performance->>'discipline' ~* '(^|[^[:alnum:]_])duathlon([^[:alnum:]_]|$)' then 'Duathlon'
+            when trim(performance->>'discipline') ~* '^(marathon|half( marathon)?|[0-9]+([.][0-9]+)?[[:space:]]*k(m)?|[0-9]+([.][0-9]+)?[[:space:]]*(mi|mile|miles))$'
             then 'Running' else 'Athletics' end) as sports
         from athlete_source_histories h join public_athletes a on a.id=h.athlete_id
         cross join lateral jsonb_array_elements(h.performances) performance
