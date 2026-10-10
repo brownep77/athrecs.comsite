@@ -278,7 +278,7 @@ function AthleteContent() {
   );
   const bio = publicAthleteBio({
     name: athlete.display_name,
-    sport: profileSports.includes("Athletics") ? "Athletics" : profileResults[0]?.sport,
+    sport: profileSports.includes("Athletics") ? "Athletics" : profileSports[0],
     city: athlete.city,
     country: athlete.country,
     club: athlete.club,
@@ -330,6 +330,13 @@ function AthleteContent() {
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
+          <span className="text-xs text-muted">
+            {profileSports.length
+              ? profileSports.length === 1
+                ? "Sport:"
+                : "Sports:"
+              : "Sport not recorded"}
+          </span>
           {profileSports.map((sport) => (
             <Badge key={sport} variant="outline">
               {sport}

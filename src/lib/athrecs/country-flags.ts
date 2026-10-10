@@ -258,6 +258,18 @@ const regions = new Map(
   ]),
 );
 const aliases: Record<string, string> = {
+  // WMM's own nationality dictionary uses these additional territory codes:
+  // https://dfsqrpugige0x.cloudfront.net/prod/config_nationality.json
+  mnt: "MS",
+  nfi: "NF",
+  nmi: "MP",
+  tks: "TC",
+  // ISO alpha-3 values also occur in source rows (UN M49 country table).
+  // https://unstats.un.org/unsd/methodology/m49/overview/
+  bgd: "BD",
+  cog: "CG",
+  "great britain & n.i.": "GB",
+  "trinidad and tobago": "TT",
   // Current country/territory sporting codes from the IOC Olympic Data Feed.
   // https://odf.olympictech.org/2024-Paris/codes/HTML/og_cc/Country.htm
   // Display aliases only: preserve the exact source nationality and provenance.

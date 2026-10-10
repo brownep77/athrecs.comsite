@@ -178,10 +178,12 @@ def apply(args):
                     queries=[("SET LOCAL lock_timeout='8s'",[]),("SET LOCAL statement_timeout='55s'",[]),
                       ('LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,results,editions,events IN SHARE ROW EXCLUSIVE MODE',[]),
                       ('CREATE TEMP TABLE wmm_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
+                      ('CREATE TEMP TABLE wmm_approval_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
+                      ('CREATE TEMP TABLE wmm_result_guard(ok boolean CHECK(ok IS TRUE)) ON COMMIT DROP',[]),
                       ('INSERT INTO wmm_guard SELECT fingerprint=$2 FROM ('+FP+') f',[0,directory.fingerprint]),
-                      ('INSERT INTO wmm_guard SELECT EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)',[APPROVAL]),
+                      ('INSERT INTO wmm_approval_guard SELECT EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)',[APPROVAL]),
                       (INSERT,[data,PROVIDER,BATCH,capid]),
-                      ('INSERT INTO wmm_guard SELECT count=jsonb_array_length($4::jsonb) FROM ('+VERIFY+') v',[data,PROVIDER,BATCH,data]),
+                      ('INSERT INTO wmm_result_guard SELECT count=jsonb_array_length($4::jsonb) FROM ('+VERIFY+') v',[data,PROVIDER,BATCH,data]),
                       (VERIFY,[data,PROVIDER,BATCH])]
                     try:r=query(queries)
                     except RuntimeError as e:

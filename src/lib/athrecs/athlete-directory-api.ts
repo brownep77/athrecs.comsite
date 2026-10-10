@@ -60,13 +60,30 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
           and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=a.id and hidden.result_id=r.id)
           and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_results=false)
         group by r.athlete_id
+      ), source_summaries as materialized (
+        select h.athlete_id, count(*)::int as result_count,
+          array_agg(distinct case when trim(performance->>'discipline') ~* '^(marathon|half( marathon)?|[0-9]+([.][0-9]+)?[[:space:]]*k(m)?|[0-9]+([.][0-9]+)?[[:space:]]*(mi|mile|miles))$'
+            then 'Running' else 'Athletics' end) as sports
+        from athlete_source_histories h join public_athletes a on a.id=h.athlete_id
+        cross join lateral jsonb_array_elements(h.performances) performance
+        where h.published_at is not null
+          and (not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
+            or exists (select 1 from network_audit_log approval
+              where approval.action='athlete.history_admin_published'
+                and approval.entity_id=h.provider||':'||h.external_id
+                and approval.after_value->>'athleteId'=a.id::text))
+          and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+            where l.athlete_id=a.id and l.status='active' and (s.enabled=false or s.share_results=false))
+          and coalesce(performance->>'profileExcluded','false') <> 'true'
+        group by h.athlete_id
       ), public_profiles as materialized (
         select a.id, a.slug, a.display_name, a.city, a.profile_roles,
           a.athlete_number, a.source_number, a.country, a.club,
-          coalesce(records.result_count, 0)::int as result_count,
-          coalesce(records.sports, array[]::text[]) as sports
+          (coalesce(records.result_count, 0) + coalesce(source_records.result_count, 0))::int as result_count,
+          array(select distinct sport from unnest(coalesce(records.sports, array[]::text[]) || coalesce(source_records.sports, array[]::text[])) sport order by sport) as sports
         from public_athletes a
         left join result_summaries records on records.athlete_id = a.id
+        left join source_summaries source_records on source_records.athlete_id = a.id
       ), filtered as materialized (
         select * from public_profiles
         where (${q}::text is null or position(lower(${q}) in
