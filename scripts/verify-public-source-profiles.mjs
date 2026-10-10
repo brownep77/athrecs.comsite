@@ -41,31 +41,94 @@ try {
   db = await module.getPglite();
   const sql = await module.getSql();
   globalThis.__athrecsFullSeedPromise__ = Promise.resolve();
+  const { readSourceNationality } = await server.ssrLoadModule(
+    "/src/lib/athrecs/source-nationality.ts",
+  );
+  assert.equal(readSourceNationality({ country: "Brazil" }), null, "Residence is not nationality");
+  assert.equal(readSourceNationality({ duvSourceObservation: { nationality: "BRA" } }), null);
+  assert.equal(
+    readSourceNationality({
+      sourceNationalityObservation: {
+        value: "Unknown",
+        provider: "Timer",
+        sourceUrl: "https://example.test/results",
+      },
+    }),
+    null,
+  );
+  assert.equal(
+    readSourceNationality({
+      sourceNationalityObservation: {
+        value: "BRA",
+        provider: "Timer",
+        sourceUrl: "javascript:alert(1)",
+      },
+    }),
+    null,
+  );
+  assert.equal(
+    readSourceNationality({
+      sourceNationalityObservation: {
+        value: "Irish",
+        provider: "Timer",
+        sourceUrl: "https://example.test/results",
+      },
+    }).value,
+    "Irish",
+  );
   console.log("Checking anonymous profile and directory access");
   const [a] =
     await sql`insert into athletes(slug,display_name,profile_visibility,bio,date_of_birth) values('synthetic-duv-public','Synthetic DUV Public','public','Unpublished test biography','1980-01-01') returning id`;
   const read = () => rpc("athrecs/api", "getAdministratorPublishedAthlete", "synthetic-duv-public");
   assert.equal(await read(), null, "A public flag alone does not grant anonymous profile access");
   await sql`insert into network_audit_log(action,entity_type,entity_id,after_value) values('athlete.profile_admin_published','athlete',${String(a.id)},${JSON.stringify({ athleteId: a.id, profile_visibility: "public" })}::jsonb)`;
+  const nationalityDetails = {
+    duvSourceObservation: { nationality: "BRA", birthYear: 1980 },
+    sourceIdentities: [
+      {
+        externalId: "999999999",
+        sourceUrl: "https://statistik.d-u-v.org/getresultperson.php?runner=999999999",
+      },
+    ],
+  };
+  await sql`update athletes set profile_details=${JSON.stringify(nationalityDetails)}::jsonb where id=${a.id}`;
   const p = await read();
   assert.equal(p.athlete.display_name, "Synthetic DUV Public");
   assert.equal(p.athlete.bio, "");
   assert.equal(p.athlete.date_of_birth, null);
   assert.equal(p.sourceHistories.length, 0);
+  assert.equal(p.athlete.nationality, "BRA");
+  assert.equal(p.athlete.nationality_source.provider, "DUV");
+  assert.equal(p.athlete.details.birthCountry, "");
+  assert(!JSON.stringify(p).includes("birthYear"), "Only the nationality observation is exposed");
   const directory = await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
     q: "Synthetic DUV Public",
   });
   assert.equal(directory.athletes.length, 1);
+  assert.equal(directory.athletes[0].nationality, "BRA");
+  assert(!JSON.stringify(directory).includes("duvSourceObservation"));
   const page = await fetch(origin + "/athletes/synthetic-duv-public");
   const html = await page.text();
   assert.equal(page.status, 200);
   assert(html.includes("Synthetic DUV Public"));
   assert(!html.includes("Unpublished test biography"));
+  assert(html.includes("Brazil"));
+  assert(html.includes("As listed by"));
+  assert(html.includes("runner=999999999"));
   const index = await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public");
   const listing = await index.text();
   assert.equal(index.status, 200);
   assert(listing.includes("Synthetic DUV Public"));
   assert(!listing.includes("Sign in to view athlete profiles"));
+  assert(listing.includes('data-country-code="BR"'), "Directory renders the nationality flag");
+  assert(html.includes('data-country-code="BR"'), "Profile renders the nationality flag");
+  await sql`update athletes set profile_details=${JSON.stringify({ ...nationalityDetails, nationality: "Irish" })}::jsonb where id=${a.id}`;
+  assert.equal(
+    (await read()).athlete.nationality,
+    null,
+    "A source import must not expose or override a separately stated private nationality",
+  );
+  await sql`update athletes set profile_details=${JSON.stringify(nationalityDetails)}::jsonb where id=${a.id}`;
   await sql`update athletes set profile_visibility='private' where id=${a.id}`;
   assert.equal(await read(), null);
   assert.equal(

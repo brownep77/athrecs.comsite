@@ -344,6 +344,7 @@ function AthleteContent() {
           <ProfileDetails
             details={athlete.details}
             nationality={athlete.nationality ?? undefined}
+            nationalitySource={athlete.nationality_source}
           />
         ) : null}
         <div className="flex flex-wrap gap-2">

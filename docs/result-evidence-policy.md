@@ -10,6 +10,25 @@ the repeatable comparison added for Total Race Timing. It is a pre-import review
 tool; it does not change the production database or claim that every existing
 result is verified.
 
+## Nationality on all future imports
+
+Paul requested on 10 October 2026 that explicitly supplied nationality be retained
+for every future import and checked on the profiles already imported. Preserve
+the original nationality column and row locator in the source capture. Map only
+an explicitly labelled nationality field, never race country, residence or club.
+Unknown or conflicting values remain empty or held; never guess from names.
+
+For an unclaimed source profile, store `profile_details.sourceNationalityObservation`
+with `value`, `provider`, `sourceUrl`, `observedAt` and the capture/row reference.
+The profile reader displays the value with provider attribution on an approved
+public profile. Existing DUV `duvSourceObservation.nationality` and matching
+`sourceIdentities` are supported directly, so old and future DUV profiles require
+no destructive backfill. Keep their original code, such as `BRA`, in storage.
+Athlete-supplied profile nationality takes precedence. Account-linked profiles
+retain their own privacy/sharing controls. Nationality does not establish identity,
+residence, birthplace or result verification. Do not replace a conflicting value
+silently; retain the observations for review.
+
 ## Run a source comparison
 
 Capture the organiser's rendered result table independently from the proposed

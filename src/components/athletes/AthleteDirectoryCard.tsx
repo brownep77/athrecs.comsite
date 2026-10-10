@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, MapPin } from "lucide-react";
 import type { DirectoryAthlete } from "@/lib/athrecs/athlete-directory";
 import { formatAthleteId } from "@/lib/athrecs/athlete-id";
+import { CountryFlag } from "./CountryFlag";
 
 export function AthleteDirectoryCard({ athlete }: { athlete: DirectoryAthlete }) {
   const initials = athlete.display_name
@@ -29,6 +30,12 @@ export function AthleteDirectoryCard({ athlete }: { athlete: DirectoryAthlete })
         </span>
         <div className="min-w-0 flex-1">
           <h3 className="font-semibold text-fg">{athlete.display_name}</h3>
+          {athlete.nationality ? (
+            <p className="mt-1 flex items-center gap-1.5 text-xs text-muted">
+              <span>Nationality</span>
+              <CountryFlag country={athlete.nationality} showName />
+            </p>
+          ) : null}
           <p className="mt-1 font-mono text-xs text-muted">
             <span className="sr-only">Athlete ID </span>
             {formatAthleteId(athlete.athlete_number)}

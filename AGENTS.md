@@ -22,6 +22,11 @@ publication and personal-best calculations in this repository.
   Preserve source precision and document conversion to integer storage.
 - Do not infer an exact birth date or age from an age category. Do not manufacture
   dates to turn year-only biographical accounts into dated race results.
+- For all future imports, preserve nationality explicitly supplied by the athlete
+  or the source, with its original value and provenance. Show source-reported
+  nationality on approved public, unclaimed source profiles. Never infer it from
+  a name, club, language, residence or race location; leave absent values empty.
+  Do not overwrite athlete-supplied nationality or treat it as identity verification.
 - Keep unsupported accounts explicitly unverified and out of verified personal
   bests, medals and rankings. An absent name is a review flag, not proof that the
   athlete did not participate; check aliases, pagination, DNS/DNF and identity.
