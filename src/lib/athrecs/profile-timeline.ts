@@ -6,8 +6,11 @@ import { isWmmSource, publicProfileResultNotes } from "./profile-source-presenta
 const normal = (value: string) => value.trim().toLowerCase().replace(/\s+/g, " ");
 
 export function profileDisciplineLabel(value: string): string {
+  if (/^mile$/i.test(value.trim())) return "Mile";
+  if (/^2 miles$/i.test(value.trim())) return "2 miles";
   return value
     .trim()
+    .replace(/^mile road$/i, "1mi")
     .replace(/^Half$/i, "Half marathon")
     .replace(/^Half Marathon$/i, "Half marathon")
     .replace(/\s*(?:kilometres|kilometers|km)(?: road)?$/i, "K")
@@ -17,6 +20,7 @@ export function profileDisciplineLabel(value: string): string {
 
 /** Road and track distances must never collapse into the same performance. */
 function discipline(value: string, mark = ""): string {
+  if (/^(?:mile|2 miles)$/i.test(value.trim())) return `track:${normal(value)}`;
   const short = /short course|\(sc\)/i.test(`${value} ${mark}`);
   const code = normal(value)
     .replace(/\s*\(short course\)/g, "")
