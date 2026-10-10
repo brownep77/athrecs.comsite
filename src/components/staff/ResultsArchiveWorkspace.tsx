@@ -13,7 +13,7 @@ import {
 import { getStaffArchiveRequests } from "@/lib/results-archive/member-api";
 import type { ArchiveState } from "@/lib/results-archive/core";
 
-const inputClass = "rounded-lg border border-border bg-bg p-2 text-sm";
+const inputClass = "min-w-0 max-w-full rounded-lg border border-border bg-bg p-2 text-sm";
 function time(seconds: number | null) {
   if (seconds === null) return "—";
   return `${Math.floor(seconds / 3600)}:${String(Math.floor(seconds / 60) % 60).padStart(2, "0")}:${(seconds % 60).toFixed(2).padStart(5, "0")}`;
@@ -164,7 +164,7 @@ export function ResultsArchiveWorkspace() {
               Search {tab === "source" ? "athlete, bib or club" : "athlete, race or bib"}
               <input className={inputClass} value={q} onChange={(e) => setQ(e.target.value)} />
             </label>
-            <label className="flex flex-1 flex-col text-xs">
+            <label className="flex min-w-0 basis-full flex-col text-xs sm:flex-1">
               Race source (50 most recent)
               <select
                 className={inputClass}
