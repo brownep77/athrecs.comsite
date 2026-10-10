@@ -3,7 +3,7 @@
  * recurrence never establishes historical occurrences before the review date.
  */
 import type { Edition, Series } from "./types";
-import facts from "./parkrun-fixtures-reviewed.json";
+import facts from "./parkrun-fixtures-reviewed.json" with { type: "json" };
 
 export const reviewedParkrunSeries: Series[] = [
   {
