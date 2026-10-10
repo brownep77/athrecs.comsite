@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
@@ -150,6 +152,9 @@ try {
     sourceUrls: ["https://www.worldmarathonmajors.com/rankings/claim-results"],
     labels: [],
     verificationStatus: "unverified",
+    providerName: "Abbott World Marathon Majors",
+    notes:
+      "WMM result synthetic-result; athlete synthetic-athlete; bib 17. Year and finish time copied from WMM. Exact race date and chip/gun classification are not supplied. Athlete identity is provisional; this is not independently verified personal-best evidence.",
   };
   await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
     values(${a.id},'Abbott World Marathon Majors',${wmmId},'https://www.worldmarathonmajors.com/rankings/world-rankings',now(),false,array[]::integer[],array[2025],${JSON.stringify([wmmPerformance, { ...wmmPerformance, profileExcluded: true }])}::jsonb,now())`;
@@ -189,7 +194,64 @@ try {
   await sql`update athlete_source_histories set published_at=now() where athlete_id=${a.id}`;
   const wmmHtml = await (await fetch(origin + "/athletes/synthetic-duv-public")).text();
   assert(wmmHtml.includes('data-country-code="KE"'));
-  assert(wmmHtml.includes("Abbott World Marathon Majors"));
+  const publicMarkup = wmmHtml.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+  const publicText = publicMarkup.replace(/<[^>]*>/g, " ");
+  assert.doesNotMatch(publicText, /Abbott World Marathon Majors|\bWMM\b/);
+  assert.doesNotMatch(publicMarkup, /href="https:\/\/[^"\s]*worldmarathonmajors\.com/);
+  assert(publicText.includes("Unverified") && publicText.includes("3:12:34"));
+  assert(publicText.includes("Athlete identity is provisional"));
+  const preservedHistory = (await read()).sourceHistories[0];
+  assert.equal(preservedHistory.provider, "Abbott World Marathon Majors");
+  assert.deepEqual(
+    preservedHistory.performances[0],
+    wmmPerformance,
+    "Public presentation must not alter the stored evidence or verification status",
+  );
+  const { HistoricalResultRow } = await server.ssrLoadModule(
+    "/src/components/athletes/HistoricalResultRow.tsx",
+  );
+  const { SourcePerformanceHistory } = await server.ssrLoadModule(
+    "/src/components/athletes/SourcePerformanceHistory.tsx",
+  );
+  for (const showEvidence of [false, true]) {
+    for (const markup of [
+      renderToStaticMarkup(
+        createElement(HistoricalResultRow, {
+          result: { key: "synthetic-result", sport: "Running", performance: wmmPerformance },
+          hasActions: false,
+          showEvidence,
+        }),
+      ),
+      renderToStaticMarkup(
+        createElement(SourcePerformanceHistory, {
+          histories: [preservedHistory],
+          showEvidence,
+        }),
+      ),
+    ]) {
+      const visibleText = markup.replace(/<[^>]*>/g, " ");
+      assert.equal(/Abbott World Marathon Majors|\bWMM\b/.test(visibleText), showEvidence);
+      assert.equal(/href="https:\/\/[^"\s]*worldmarathonmajors\.com/.test(markup), showEvidence);
+      assert(visibleText.includes("3:12:34") && visibleText.includes("Unverified"));
+      assert(visibleText.includes("Exact race date and chip/gun classification are not supplied"));
+    }
+  }
+  const otherCredit = renderToStaticMarkup(
+    createElement(HistoricalResultRow, {
+      result: {
+        key: "other-provider",
+        sport: "Running",
+        performance: {
+          ...wmmPerformance,
+          providerName: "Synthetic Race Timing",
+          notes: "Independent timer note",
+          sourceUrls: ["https://example.test/results"],
+        },
+      },
+      hasActions: false,
+    }),
+  );
+  assert(otherCredit.includes("Results: Synthetic Race Timing"));
   assert(wmmHtml.includes("Sport:") && wmmHtml.includes("Running") && wmmHtml.includes("Marathon"));
   const directoryHtml = await (
     await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public&sport=Running")
@@ -223,7 +285,11 @@ try {
   assert.deepEqual(multisportDirectory.athletes[0].sports, ["Duathlon", "Triathlon"]);
   assert.equal(multisportDirectory.athletes[0].result_count, 3);
   const multisportHtml = await (await fetch(origin + "/athletes/synthetic-duv-public")).text();
-  assert(multisportHtml.includes("Sports:") && multisportHtml.includes("Triathlon") && multisportHtml.includes("Duathlon"));
+  assert(
+    multisportHtml.includes("Sports:") &&
+      multisportHtml.includes("Triathlon") &&
+      multisportHtml.includes("Duathlon"),
+  );
   await sql`delete from athlete_source_histories where athlete_id=${a.id}`;
   const nationalityDetails = {
     // ANT is the sporting code for Antigua & Barbuda, not the former ISO code.
