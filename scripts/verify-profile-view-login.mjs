@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { get as httpGet } from "node:http";
 import { load } from "cheerio";
 import { createRequire } from "node:module";
@@ -321,6 +322,11 @@ try {
       ${JSON.stringify({ athleteId: publishedAthlete.id, athleteConsentRecorded: false })}::jsonb,'Synthetic explicit publication approval')`;
   const publicProfile = await publicRead("published-history-fixture");
   assert.equal(publicProfile.athlete.display_name, "Published History Athlete");
+  assert.equal(
+    publicProfile.searchIndexable,
+    false,
+    "An active owner without a sharing choice stays out of search",
+  );
   assert.equal(publicProfile.sourceHistories[0].performances.length, 10);
   assert.deepEqual(
     publicProfile.sourceHistories[0].performances[0].sourceUrls,
@@ -496,6 +502,128 @@ try {
   assert.equal(limitedProfile.athlete.country, "");
   assert.equal(limitedProfile.athlete.club, null);
   assert.equal(limitedProfile.athlete.club_slug, null);
+  const deployment = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
+  assert(
+    !deployment.headers
+      .find((rule) => rule.source === "/athletes/:path*")
+      ?.headers.some((header) => header.key.toLowerCase() === "x-robots-tag"),
+    "The hosting configuration must defer athlete indexing to the validated page response",
+  );
+  const expectSearch = async (slug, indexable, extraHeaders = {}) => {
+    const response = await fetch(`${origin}/athletes/${slug}`, { headers: extraHeaders });
+    const html = await response.text();
+    const $ = load(html);
+    assert.equal(response.status, 200);
+    assert.equal(
+      response.headers.get("x-robots-tag"),
+      indexable ? "index, follow" : "noindex, nofollow, noarchive",
+    );
+    assert.equal(
+      $("meta[name=robots]").attr("content"),
+      indexable ? "index, follow" : "noindex, nofollow, noarchive",
+    );
+    assert.equal(
+      response.headers.get("x-athrecs-profile-indexable"),
+      null,
+      "Internal eligibility marker is stripped",
+    );
+    assert.match(response.headers.get("cache-control"), /private.*no-store/);
+    assert.equal($("link[rel=canonical]").attr("href"), `https://www.athrecs.com/athletes/${slug}`);
+    for (const secret of [
+      "Private biography sentinel",
+      "Private city sentinel",
+      "Private coach sentinel",
+      "1980-01-02",
+      "Hidden mark sentinel",
+      "profile-viewer@example.test",
+    ])
+      assert(!html.includes(secret), `Indexing must not disclose ${secret}`);
+  };
+  const expectSitemap = async (present) => {
+    const index = await (await fetch(origin + "/sitemap.xml")).text();
+    assert.equal(index.includes("/sitemaps/athletes-1.xml"), present);
+    const response = await fetch(origin + "/sitemaps/athletes-1.xml");
+    assert.equal(response.status, present ? 200 : 404);
+    assert.equal(response.headers.get("cache-control"), "no-store");
+    const xml = await response.text();
+    if (present)
+      assert(xml.includes("https://www.athrecs.com/athletes/published-history-fixture</loc>"));
+    for (const excluded of [
+      "view-login-fixture",
+      "view-login-private",
+      "published-history-sharing",
+    ])
+      assert(!xml.includes(excluded), `Do not advertise ${excluded}`);
+  };
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set search_indexable=true where user_id=${user.id}`;
+  assert.equal((await publicRead("published-history-fixture")).searchIndexable, true);
+  await expectSearch("published-history-fixture", true, { "sec-fetch-site": "cross-site" });
+  await expectSitemap(true);
+  await expectSearch("view-login-fixture", false, { "X-Athrecs-Profile-Indexable": "1" });
+  await expectSearch("view-login-private", false, { "X-Athrecs-Profile-Indexable": "1" });
+  await expectSearch("nonexistent-test-profile", false, { "X-Athrecs-Profile-Indexable": "1" });
+  const directory = await fetch(origin + "/athletes", {
+    headers: { "X-Athrecs-Profile-Indexable": "1" },
+  });
+  assert.match(directory.headers.get("x-robots-tag"), /noindex/);
+  await sql`update athlete_public_shares set search_indexable=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set search_indexable=true, enabled=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set enabled=true, share_results=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set share_results=true where user_id=${user.id}`;
+  await sql`update athletes set profile_visibility='private' where id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athletes set profile_visibility='public' where id=${publishedAthlete.id}`;
+  await sql`update athlete_account_links set status='revoked' where athlete_id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", true);
+  await expectSitemap(true);
+  await sql`update athlete_source_histories set published_at=null where athlete_id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  // The older staff-publication path and existing owner consent are equally
+  // valid approvals. Neither depends on adding a newer manual source history.
+  await sql`insert into network_audit_log(actor_user_id,action,entity_type,entity_id,after_value,note)
+    values (${user.id},'athlete.bulk_publish','athlete',${String(publishedAthlete.id)},
+      '{"profile_visibility":"public"}'::jsonb,'Synthetic existing staff publication')`;
+  await expectSearch("published-history-fixture", true);
+  await expectSitemap(true);
+  assert.equal(
+    (await publicRead("published-history-fixture")).sourceHistories.length,
+    0,
+    "Unpublished source history is not exposed by a profile approval",
+  );
+  await sql`delete from network_audit_log where action='athlete.bulk_publish' and entity_id=${String(publishedAthlete.id)}`;
+  await expectSearch("published-history-fixture", false);
+  await sql`update athlete_account_links set status='active' where athlete_id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", true);
+  await expectSitemap(true);
+  await sql`update athletes set profile_type='Public figure' where id=${publishedAthlete.id}`;
+  await sql`update results set result_visibility='private' where athlete_id=${publishedAthlete.id}`;
+  assert.equal(
+    (await publicRead("published-history-fixture")).results.length,
+    0,
+    "Even a public-figure label cannot expose private result rows anonymously",
+  );
+  await sql`update athlete_public_shares set search_indexable=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set enabled=false where user_id=${user.id}`;
+  assert.equal(
+    await publicRead("published-history-fixture"),
+    null,
+    "Owner withdrawal also blocks the existing-sharing publication path",
+  );
+  console.log(
+    "PASS: approved public profiles opt into search with matching HTML/header robots and sitemap; owner choices, withdrawal, unpublished histories and forged request headers remain protected.",
+  );
   console.log(
     "PASS: approved history renders anonymously in the main results table; unapproved/private profiles, personal fields, owner withdrawals and removed marks remain protected.",
   );
@@ -505,7 +633,7 @@ try {
     /Unauthorized/,
   );
   console.log(
-    "PASS: anonymous/invalid/revoked sessions denied; authenticated reads; privacy retained; cross-site denial; SSR and sequential-request isolation; no profile sitemaps.",
+    "PASS: anonymous/invalid/revoked sessions denied; authenticated reads; privacy retained; cross-site denial; SSR and sequential-request isolation; no private or member-only profile sitemaps.",
   );
 } finally {
   await server.close();
