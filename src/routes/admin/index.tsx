@@ -91,7 +91,7 @@ Return ONLY valid JSON (no markdown) in this shape:
 
 Rules:
 - sport must be one of: Running, Athletics, Parkrun, Cycling, Swimming, Triathlon, Duathlon, Aquathlon, Aquabike, Rowing, OCR
-- status one of: Open, ClosingSoon, Closed, Finished, TBC
+- status one of: Open, ClosingSoon, Closed, Finished, Cancelled, TBC
 - entryType one of: official, third_party, charity, tour_operator
 - entry option status one of: open, closing_soon, ballot, waitlist, sold_out, closed, unknown
 - dates must be YYYY-MM-DD

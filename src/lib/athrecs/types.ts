@@ -14,7 +14,7 @@ export type Sport =
   | "Functional Fitness"
   | "Walking";
 
-export type EntryStatus = "Open" | "ClosingSoon" | "Closed" | "Finished" | "TBC";
+export type EntryStatus = "Open" | "ClosingSoon" | "Closed" | "Finished" | "Cancelled" | "TBC";
 
 export type EntryOptionType = "official" | "third_party" | "charity" | "tour_operator";
 

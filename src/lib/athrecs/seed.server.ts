@@ -17,10 +17,7 @@ import {
   publicFigureResults,
   publicFigureSeries,
 } from "@/data/public-figures";
-import {
-  featuredRaceAthletes,
-  featuredRaceResults,
-} from "@/data/featured-race-results-2026-09-27";
+import { featuredRaceAthletes, featuredRaceResults } from "@/data/featured-race-results-2026-09-27";
 import { featuredWaHistories } from "@/data/featured-wa-histories-2026-09-30";
 import { nationalAgeAthletes, nationalAgeResults } from "@/data/featured-gbr-irl-age-2026-10-01";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
@@ -745,7 +742,8 @@ async function ensureParkrunCalendar(sql: Sql): Promise<void> {
 }
 
 async function expandParkrunEditions(sql: Sql): Promise<void> {
-  // Weekly 5K Saturdays and junior 2K Sundays through the end of 2027.
+  // UK fixtures are published from reviewed official venue schedules.
+  // Do not recreate them using this legacy international recurrence seed.
   await sql`
     insert into editions (
       event_id, event_date, distance_code, distance_km, status,
@@ -770,6 +768,7 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
     from events e
     cross join generate_series(date '2026-08-15', date '2027-12-25', interval '7 days') as d
     where e.sport = 'Parkrun'
+      and e.country not in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland')
       and e.name not ilike '%junior%'
     on conflict (event_id, event_date, distance_code) do nothing
   `;
@@ -791,6 +790,7 @@ async function expandParkrunEditions(sql: Sql): Promise<void> {
     from events e
     cross join generate_series(date '2026-08-16', date '2027-12-26', interval '7 days') as d
     where e.sport = 'Parkrun'
+      and e.country not in ('United Kingdom', 'England', 'Scotland', 'Wales', 'Northern Ireland')
       and e.name ilike '%junior%'
     on conflict (event_id, event_date, distance_code) do nothing
   `;
@@ -1558,7 +1558,9 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
             ? ("open" as const)
             : edition.status === "ClosingSoon"
               ? ("closing_soon" as const)
-              : edition.status === "Closed" || edition.status === "Finished"
+              : edition.status === "Closed" ||
+                  edition.status === "Finished" ||
+                  edition.status === "Cancelled"
                 ? ("closed" as const)
                 : ("unknown" as const),
         checkedAt: new Date().toISOString(),
@@ -1941,7 +1943,10 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
     const result = resultBySlug.get(athlete.slug);
     if (!result) throw new Error(`Featured athlete has no result: ${athlete.slug}`);
     const raceTag = result.eventSlug === "berlin-marathon" ? "berlin-2026" : "london-10000-2026";
-    candidateSlugs.push(athlete.slug, `${athlete.slug}-${raceTag}`.slice(0, 80).replace(/-+$/g, ""));
+    candidateSlugs.push(
+      athlete.slug,
+      `${athlete.slug}-${raceTag}`.slice(0, 80).replace(/-+$/g, ""),
+    );
   }
   const takenRows = await rowsForSlugs<{ slug: string }>(
     (placeholders) =>
@@ -1955,8 +1960,11 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
     candidateSlugs,
   );
   const taken = new Set(takenRows.map((row) => row.slug));
-  const choices: { sourceSlug: string; slug: string; athlete: (typeof featuredRaceAthletes)[number] }[] =
-    [];
+  const choices: {
+    sourceSlug: string;
+    slug: string;
+    athlete: (typeof featuredRaceAthletes)[number];
+  }[] = [];
   for (const athlete of featuredRaceAthletes) {
     const result = resultBySlug.get(athlete.slug)!;
     const raceTag = result.eventSlug === "berlin-marathon" ? "berlin-2026" : "london-10000-2026";
@@ -2019,7 +2027,8 @@ async function upsertFeaturedRaceResults(sql: Sql): Promise<void> {
       .map((row) => {
         const result = resultBySlug.get(sourceByInserted.get(row.slug) ?? "");
         if (!result) throw new Error(`Inserted featured athlete lost its result: ${row.slug}`);
-        const editionId = result.eventSlug === "berlin-marathon" ? berlinEditionId : londonEditionId;
+        const editionId =
+          result.eventSlug === "berlin-marathon" ? berlinEditionId : londonEditionId;
         const valuesRow = [
           editionId,
           row.id,
@@ -2069,7 +2078,8 @@ async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
   if (meta[0]?.value === FEATURED_WA_HISTORIES_VERSION) return;
   // The 27 September card result is already stored on the catalogue event.
   const histories = featuredWaHistories.filter(
-    (row) => !(row.date === "2026-09-27" && (row.distance === "Marathon" || row.distance === "10K")),
+    (row) =>
+      !(row.date === "2026-09-27" && (row.distance === "Marathon" || row.distance === "10K")),
   );
 
   async function rowsForSlugs<T>(
@@ -2112,8 +2122,7 @@ async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
   for (const [source, fallback] of lookup) {
     const suffix = athleteBySlug.get(fallback);
     const clean = athleteBySlug.get(source);
-    const chosen =
-      suffix?.profile_visibility === "public" ? suffix : clean ?? suffix;
+    const chosen = suffix?.profile_visibility === "public" ? suffix : (clean ?? suffix);
     if (chosen) athleteId.set(source, chosen.id);
   }
 
@@ -2180,7 +2189,10 @@ async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
 
   const editionKey = (eventId: number, date: string, distance: string) =>
     `${eventId}|${date}|${distance}`;
-  const editionRows = new Map<string, { eventId: number; date: string; distance: string; km: number; sourceUrl: string }>();
+  const editionRows = new Map<
+    string,
+    { eventId: number; date: string; distance: string; km: number; sourceUrl: string }
+  >();
   for (const row of histories) {
     const id = eventIdBySlug.get(row.eventSlug);
     const linked = athleteId.get(row.athleteSlug);
@@ -2202,7 +2214,15 @@ async function upsertFeaturedWorldAthleticsHistories(sql: Sql): Promise<void> {
     const params: unknown[] = [];
     const values = batch
       .map((row) => {
-        const fields = [row.eventId, row.date, row.distance, row.km, "Finished", row.sourceUrl, row.sourceUrl];
+        const fields = [
+          row.eventId,
+          row.date,
+          row.distance,
+          row.km,
+          "Finished",
+          row.sourceUrl,
+          row.sourceUrl,
+        ];
         const placeholders = fields.map((value, field) => {
           params.push(value);
           const token = `$${params.length}`;
@@ -2330,7 +2350,9 @@ async function upsertNationalAgeResults(sql: Sql): Promise<void> {
   const resultBySlug = new Map(nationalAgeResults.map((result) => [result.athleteSlug, result]));
   for (const athlete of nationalAgeAthletes) {
     if (!resultBySlug.get(athlete.slug)) {
-      throw new Error(`British and Irish Berlin profiles were not saved: ${athlete.slug} has no result`);
+      throw new Error(
+        `British and Irish Berlin profiles were not saved: ${athlete.slug} has no result`,
+      );
     }
   }
 
@@ -2356,7 +2378,10 @@ async function upsertNationalAgeResults(sql: Sql): Promise<void> {
     );
   }
 
-  async function rowsForSlugs<T>(build: (placeholders: string) => string, slugs: string[]): Promise<T[]> {
+  async function rowsForSlugs<T>(
+    build: (placeholders: string) => string,
+    slugs: string[],
+  ): Promise<T[]> {
     const found: T[] = [];
     for (let index = 0; index < slugs.length; index += 80) {
       const part = slugs.slice(index, index + 80);
@@ -2416,7 +2441,10 @@ async function upsertNationalAgeResults(sql: Sql): Promise<void> {
   }
 
   const fallbackFor = (slug: string) => `${slug}-berlin-2026`.slice(0, 80).replace(/-+$/g, "");
-  const candidateSlugs = nationalAgeAthletes.flatMap((athlete) => [athlete.slug, fallbackFor(athlete.slug)]);
+  const candidateSlugs = nationalAgeAthletes.flatMap((athlete) => [
+    athlete.slug,
+    fallbackFor(athlete.slug),
+  ]);
   const takenRows = await rowsForSlugs<{ slug: string }>(
     (placeholders) =>
       `select slug from athletes where slug in (${placeholders})

@@ -87,10 +87,19 @@ export const Route = createFileRoute("/races/$slug")({
           statusCode: 301,
         });
       }
-      const archiveResults = !IS_RUNRECS_SITE && !data.upcoming.length && data.past.length === 1 && data.past[0].result_count > 0
-        ? await getPublicRaceResults({ data: { editionId: String(data.past[0].id) } })
-        : null;
-      return { ...data, archiveResults: archiveResults ? { ...archiveResults, results: archiveResults.results.slice(0, 5) } : null };
+      const archiveResults =
+        !IS_RUNRECS_SITE &&
+        !data.upcoming.length &&
+        data.past.length === 1 &&
+        data.past[0].result_count > 0
+          ? await getPublicRaceResults({ data: { editionId: String(data.past[0].id) } })
+          : null;
+      return {
+        ...data,
+        archiveResults: archiveResults
+          ? { ...archiveResults, results: archiveResults.results.slice(0, 5) }
+          : null,
+      };
     }
 
     const currentSlug = await resolveSlugRedirect({
@@ -109,14 +118,25 @@ export const Route = createFileRoute("/races/$slug")({
     if (!loaderData) return {};
     const { event, upcoming, archiveResults } = loaderData;
     const canonical = `${SITE_URL}/races/${event.slug}`;
-    const archiveLabel = archiveResults ? `${archiveResults.edition.event_date} · ${archiveResults.edition.distance_code} · ${archiveResults.results.slice(0, 3).map((result) => result.athlete_name).join(", ")}` : null;
-    const title = archiveLabel ? `${event.name} — ${archiveLabel} | ${SITE_NAME}` : event.city
-      ? `${event.name} — ${event.city} | ${SITE_NAME}`
-      : `${event.name} | ${SITE_NAME}`;
-    const description =
-      archiveResults ? `Recorded ${archiveResults.edition.distance_code} performances at ${event.name}, ${archiveResults.edition.event_date}, ${[event.city, event.country].filter(Boolean).join(", ")}. ${archiveResults.results.slice(0, 3).map((result) => result.athlete_name).join(", ")}. View recorded results and original provider links.` : event.summary ||
-      `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`;
-    const next = upcoming[0];
+    const archiveLabel = archiveResults
+      ? `${archiveResults.edition.event_date} · ${archiveResults.edition.distance_code} · ${archiveResults.results
+          .slice(0, 3)
+          .map((result) => result.athlete_name)
+          .join(", ")}`
+      : null;
+    const title = archiveLabel
+      ? `${event.name} — ${archiveLabel} | ${SITE_NAME}`
+      : event.city
+        ? `${event.name} — ${event.city} | ${SITE_NAME}`
+        : `${event.name} | ${SITE_NAME}`;
+    const description = archiveResults
+      ? `Recorded ${archiveResults.edition.distance_code} performances at ${event.name}, ${archiveResults.edition.event_date}, ${[event.city, event.country].filter(Boolean).join(", ")}. ${archiveResults.results
+          .slice(0, 3)
+          .map((result) => result.athlete_name)
+          .join(", ")}. View recorded results and original provider links.`
+      : event.summary ||
+        `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`;
+    const next = upcoming.find((edition) => edition.status !== "Cancelled");
 
     return {
       meta: siteGraphMeta({
@@ -202,7 +222,10 @@ export function RacePageContent({
   const { event, groups, distances, upcoming, past, related } = data;
   const isRunningEvent = event.sport === "Running" || event.sport === "Parkrun";
   const qualification = raceQualifications[event.slug];
-  const shownDistances = sanitizeDistances(event.name, distances.length ? distances : [...new Set(past.map((edition) => edition.distance_code))]);
+  const shownDistances = sanitizeDistances(
+    event.name,
+    distances.length ? distances : [...new Set(past.map((edition) => edition.distance_code))],
+  );
   const country = resolveCountry({
     slug: event.slug,
     name: event.name,
@@ -219,7 +242,7 @@ export function RacePageContent({
     country: event.country,
     area: event.area,
   });
-  const next = upcoming[0];
+  const next = upcoming.find((edition) => edition.status !== "Cancelled");
   const archived = !next && past.length > 0;
   const place = {
     country: event.country,
@@ -413,26 +436,59 @@ export function RacePageContent({
       </header>
 
       {archiveResults ? (
-        <section aria-labelledby="archive-results-heading" className="space-y-3 rounded-xl border border-border bg-surface p-5">
+        <section
+          aria-labelledby="archive-results-heading"
+          className="space-y-3 rounded-xl border border-border bg-surface p-5"
+        >
           <h2 id="archive-results-heading" className="font-display text-xl font-semibold">
-            {archiveResults.edition.distance_code} results · {formatRaceDateShort(archiveResults.edition.event_date)}
+            {archiveResults.edition.distance_code} results ·{" "}
+            {formatRaceDateShort(archiveResults.edition.event_date)}
           </h2>
           <p className="text-sm text-muted">
-            Recorded performances from {event.name} in {[event.city, event.country].filter(Boolean).join(", ")}.
-            This is a partial results archive; it does not represent the full field.
+            Recorded performances from {event.name} in{" "}
+            {[event.city, event.country].filter(Boolean).join(", ")}. This is a partial results
+            archive; it does not represent the full field.
           </p>
           <ul className="space-y-2">
             {archiveResults.results.slice(0, 5).map((result) => {
               const credit = resultCredit(result.source_url, result.result_source);
-              const finished = ["finished", "fin"].includes(result.status.trim().toLowerCase()) && !result.disqualified;
-              return <li key={result.id} className="text-sm">
-                <span className="font-semibold">{result.athlete_name}</span>{" · "}
-                {finished ? formatDuration(result.finish_time_seconds) : result.disqualified ? "Disqualified" : result.status}
-                {credit ? <> · <a href={credit.url} className="text-accent underline" rel="noreferrer" target="_blank">Results: {credit.name}</a></> : null}
-              </li>;
+              const finished =
+                ["finished", "fin"].includes(result.status.trim().toLowerCase()) &&
+                !result.disqualified;
+              return (
+                <li key={result.id} className="text-sm">
+                  <span className="font-semibold">{result.athlete_name}</span>
+                  {" · "}
+                  {finished
+                    ? formatDuration(result.finish_time_seconds)
+                    : result.disqualified
+                      ? "Disqualified"
+                      : result.status}
+                  {credit ? (
+                    <>
+                      {" "}
+                      ·{" "}
+                      <a
+                        href={credit.url}
+                        className="text-accent underline"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        Results: {credit.name}
+                      </a>
+                    </>
+                  ) : null}
+                </li>
+              );
             })}
           </ul>
-          <Link to="/results/$editionId" params={{ editionId: resultSlug(archiveResults.edition) }} className="text-sm text-accent underline">View recorded results</Link>
+          <Link
+            to="/results/$editionId"
+            params={{ editionId: resultSlug(archiveResults.edition) }}
+            className="text-sm text-accent underline"
+          >
+            View recorded results
+          </Link>
         </section>
       ) : null}
 
@@ -467,15 +523,16 @@ export function RacePageContent({
 
       {qualification && <QualificationDetails qualification={qualification} />}
 
-      {!archived && (isRunningEvent ? (
-        <RaceEntryOptions data={data} />
-      ) : (
-        <EntryOptions
-          options={next?.entry_options ?? []}
-          editionDate={next?.event_date}
-          officialWebsite={event.website}
-        />
-      ))}
+      {!archived &&
+        (isRunningEvent ? (
+          <RaceEntryOptions data={data} />
+        ) : (
+          <EntryOptions
+            options={next?.entry_options ?? []}
+            editionDate={next?.event_date}
+            officialWebsite={event.website}
+          />
+        ))}
 
       {spectatorAccess && spectatorLabel ? (
         <section className="flex flex-wrap items-start justify-between gap-4 rounded-xl border border-border bg-surface p-5 shadow-card">
@@ -513,7 +570,13 @@ export function RacePageContent({
           <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
             <Fact
               label={archived ? "Latest recorded race" : "Date"}
-              value={next ? formatRaceDateShort(next.event_date) : past[0] ? formatRaceDateShort(past[0].event_date) : "No future date"}
+              value={
+                next
+                  ? formatRaceDateShort(next.event_date)
+                  : past[0]
+                    ? formatRaceDateShort(past[0].event_date)
+                    : "No future date"
+              }
             />
             <Fact
               label="Local start"
@@ -726,7 +789,7 @@ export function RacePageContent({
               </p>
               {!IS_RUNRECS_SITE && results.length >= PUBLIC_EDITION_PREVIEW_LIMIT ? (
                 <p className="text-sm text-muted">
-                  Showing the first {PUBLIC_EDITION_PREVIEW_LIMIT} results.{' '}
+                  Showing the first {PUBLIC_EDITION_PREVIEW_LIMIT} results.{" "}
                   <Link
                     to="/results/$editionId"
                     params={{ editionId: String(resultsEditionId) }}
@@ -1215,6 +1278,7 @@ function EditionList({
                     </button>
                   )}
                   {st !== "Finished" &&
+                    st !== "Cancelled" &&
                     ed.entry_options.slice(0, 3).map((option) => (
                       <a
                         key={`${ed.id}-${option.provider_code}`}

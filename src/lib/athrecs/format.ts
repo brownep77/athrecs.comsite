@@ -41,6 +41,7 @@ export function effectiveStatus(
   status: EntryStatus,
   from = todayIso(),
 ): EntryStatus {
+  if (status === "Cancelled") return "Cancelled";
   if (eventDate < from) return "Finished";
   if (status === "Finished") return "Closed";
   return status;
@@ -56,6 +57,8 @@ export function statusLabel(status: EntryStatus): string {
       return "Entries closed";
     case "Finished":
       return "Finished";
+    case "Cancelled":
+      return "Cancelled";
     case "TBC":
       return "Date TBC";
   }
