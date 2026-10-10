@@ -60,6 +60,16 @@ for (const [iso, name] of Object.entries(countryNames))
     );
   }
 for (const [value, iso] of Object.entries({
+  ALB: "AL",
+  CHI: "CL",
+  ECU: "EC",
+  GEO: "GE",
+  ISR: "IL",
+  MAS: "MY",
+  PAN: "PA",
+  PAR: "PY",
+  URU: "UY",
+  VEN: "VE",
   BRN: "BH",
   BIH: "BA",
   BOL: "BO",
