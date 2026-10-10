@@ -904,10 +904,11 @@ export const listAthletes = createServerFn({ method: "GET" })
     });
   });
 
-async function readAthleteBySlug(slug: string, administratorPublishedOnly = false) {
+async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
   const sql = await ready();
   const athleteNumber = parseAthleteId(slug);
-  const rows = await sql<{
+  const { approvedPublicAthleteSql } = await import("./athlete-search-policy.server");
+  const rows = await sql.query<{
     profile_details: unknown;
     date_of_birth: string | null;
     id: number;
@@ -925,7 +926,7 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
     is_claimed: boolean;
     club: string | null;
     club_slug: string | null;
-  }>`
+  }>(`
       select
         a.id, a.slug, a.display_name, a.gender, a.city, a.county, a.country, a.bio,
         a.profile_type, a.profile_roles, a.profile_source_checked_at::text as profile_source_checked_at,
@@ -941,33 +942,17 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
       from athletes a
       join athlete_resolved_ids identifier on identifier.athlete_id = a.id
       left join clubs c on c.id = a.club_id
-      where (a.slug = ${slug}
-        or identifier.athlete_number::text = ${athleteNumber}
-        or identifier.source_number::text = ${athleteNumber})
+      where (a.slug = $1
+        or identifier.athlete_number::text = $2
+        or identifier.source_number::text = $2)
         and (a.profile_type = 'Public figure' or (a.profile_visibility = 'public' and not exists (
           select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
           where l.athlete_id=a.id and l.status='active' and s.enabled=false
         )))
-        and (${!administratorPublishedOnly} or (
-          a.profile_visibility = 'public'
-          and exists (
-            select 1 from athlete_source_histories h
-            join network_audit_log approval
-              on approval.entity_id = h.provider || ':' || h.external_id
-              and approval.action = 'athlete.history_admin_published'
-              and approval.after_value->>'athleteId' = a.id::text
-            where h.athlete_id = a.id and h.published_at is not null
-          )
-          and not exists (
-            select 1 from athlete_account_links l
-            join athlete_public_shares s on s.user_id = l.user_id
-            where l.athlete_id = a.id and l.status = 'active'
-              and (s.enabled = false or s.share_results = false)
-          )
-        ))
-      order by (a.slug = ${slug}) desc, a.id
+        and ($3 or (${approvedPublicAthleteSql}))
+      order by (a.slug = $1) desc, a.id
       limit 1
-    `;
+    `, [slug, athleteNumber, !approvedPublicOnly]);
   const athlete = rows[0];
   if (!athlete) return null;
   const results = await sql<{
@@ -1011,7 +996,7 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
       join events e on e.id = ed.event_id
       where r.athlete_id = ${athlete.id}
         and (
-          ${athlete.profile_type} = 'Public figure'
+          (${!approvedPublicOnly} and ${athlete.profile_type} = 'Public figure')
           or r.result_visibility in ('public', 'public_figure')
         )
         and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=r.athlete_id and hidden.result_id=r.id)
@@ -1088,7 +1073,7 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
   .handler(({ data: slug }) => readAthleteBySlug(slug));
 
-/** Only an explicitly audited publication can be viewed without a member session. */
+/** Only recorded staff publication or enabled owner sharing allows anonymous viewing. */
 export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
   .handler(async ({ data: slug }) => {

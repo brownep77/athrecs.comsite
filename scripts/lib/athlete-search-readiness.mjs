@@ -106,7 +106,27 @@ export async function checkAthleteSearchReadiness(fetchImpl = fetch) {
   const urls = await collectAthleteSearchUrls(fetchImpl);
   // No publication is inferred from database visibility, a named athlete, or a
   // UI element. The live sitemap remains the only source of candidate URLs.
-  for (const url of urls) await assertAthleteSearchReady(url, fetchImpl);
+  // Bound production load while allowing the full, paginated catalogue to be
+  // validated. Every candidate must still pass before any submission is made.
+  let next = 0;
+  let completed = 0;
+  let failed;
+  await Promise.all(
+    Array.from({ length: Math.min(12, urls.length) }, async () => {
+      while (!failed && next < urls.length) {
+        const url = urls[next++];
+        try {
+          await assertAthleteSearchReady(url, fetchImpl);
+          completed++;
+          if (completed % 500 === 0)
+            console.log(`Validated ${completed}/${urls.length} athlete URLs.`);
+        } catch (error) {
+          failed ??= error;
+        }
+      }
+    }),
+  );
+  if (failed) throw failed;
   return {
     ready: urls.length > 0,
     urls,

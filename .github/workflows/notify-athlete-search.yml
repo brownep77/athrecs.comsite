@@ -39,7 +39,7 @@ jobs:
   eligibility:
     name: Validate athlete search eligibility
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 60
     outputs:
       ready: ${{ steps.live.outputs.ready }}
     steps:
@@ -61,7 +61,7 @@ jobs:
     needs: eligibility
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.eligibility.outputs.ready == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

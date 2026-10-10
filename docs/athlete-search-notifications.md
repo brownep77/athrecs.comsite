@@ -52,11 +52,18 @@ A real IndexNow HTTP 200/202 receipt is not a guarantee of crawling or indexing.
 
 ## Approved public athlete indexing
 
-Paul approved removing the indexing restriction on 10 October 2026. Only the
-existing anonymous, administrator-published performance-history projection is
-eligible. Public visibility, a published source history, its matching publication
-audit and a resolvable athlete identifier are all required. A public database
-flag or public-figure label alone is insufficient.
+Paul approved removing the indexing restriction on 10 October 2026. The
+anonymous profile check previously recognized only the newer history-editor
+publication action, excluding existing staff bulk publications and owner-approved
+sharing. Paul's existing public/results/search settings were enabled, but he
+had no record in that newer history table, so his page still required login.
+
+The public profile and sitemap now recognize all three recorded approval paths:
+a published history with its matching administrative audit, a staff bulk-publication
+audit, or enabled results sharing by an active account owner. Public visibility
+and a resolvable athlete identifier remain required. A public database flag or
+public-figure label alone is insufficient. The anonymous projection still excludes
+private result rows, personal fields, hidden results and unpublished histories.
 
 For active account owners, sharing and results sharing must be enabled and
 `search_indexable` must be explicitly true. A missing sharing record or any owner
@@ -64,7 +71,7 @@ opt-out excludes the page from search. Unmanaged approved public histories are
 eligible. Member-only shared-account routes and the member directory remain
 excluded. No database privacy setting, history approval or profile data is changed.
 
-The page and sitemap use the same SQL eligibility predicate. HTML metadata and
+The page and sitemap share the publication and indexing SQL predicates. HTML metadata and
 HTTP robots headers agree; request middleware accepts only a successful profile
 response marked by the validated route loader, and removes that internal marker.
 Incoming request headers cannot enable indexing. Responses remain uncached so
@@ -75,3 +82,8 @@ After the approved release is live, run the read-only check, then rerun the
 notification workflow to validate and submit its live eligible URLs. A push
 check can precede the Vercel deployment, so its result alone is not proof that
 the new release has been checked.
+
+The complete catalogue is checked with at most 12 concurrent anonymous requests,
+with progress every 500 profiles. All URLs must pass before any submission, and
+all URLs are revalidated after the ownership check. The workflow allows enough
+time for the full catalogue; these limits do not weaken any eligibility checks.

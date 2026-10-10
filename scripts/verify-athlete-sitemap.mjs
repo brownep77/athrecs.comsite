@@ -92,11 +92,39 @@ try {
   await db.exec("update athlete_source_histories set published_at=null where athlete_id=5011");
   assert.equal(
     await isApprovedAthleteIndexable(sql, 5011),
+    true,
+    "Owner-approved profile remains public while an individual history is withdrawn",
+  );
+  await db.exec("update athlete_account_links set status='revoked' where athlete_id=5011");
+  assert.equal(
+    await isApprovedAthleteIndexable(sql, 5011),
     false,
-    "Unpublished history is removed immediately",
+    "An unpublished history without another publication approval is excluded",
   );
   await db.exec("delete from network_audit_log where entity_id='synthetic:5006'");
   assert.equal(await isApprovedAthleteIndexable(sql, 5006), false, "Missing approval fails closed");
+  await db.exec(`
+    insert into network_audit_log values ('5007', 'athlete.bulk_publish', '{"profile_visibility":"public"}');
+  `);
+  assert.equal(
+    await isApprovedAthleteIndexable(sql, 5007),
+    true,
+    "Existing audited bulk publications do not require a separate history-editor approval",
+  );
+  await db.exec("update athletes set profile_visibility='private' where id=5007");
+  assert.equal(
+    await isApprovedAthleteIndexable(sql, 5007),
+    false,
+    "A historical bulk approval never overrides current private visibility",
+  );
+  await db.exec(`
+    insert into network_audit_log values ('5008', 'athlete.bulk_publish', '{"profile_visibility":"private"}');
+  `);
+  assert.equal(
+    await isApprovedAthleteIndexable(sql, 5008),
+    false,
+    "A non-public audit is not publication permission",
+  );
   assert.match(
     sitemapXml([{ url: "https://example.test/race", lastmod: "2026-10-07" }]),
     /<lastmod>2026-10-07<\/lastmod>/,

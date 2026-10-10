@@ -580,6 +580,39 @@ try {
   await sql`update athlete_source_histories set published_at=null where athlete_id=${publishedAthlete.id}`;
   await expectSearch("published-history-fixture", false);
   await expectSitemap(false);
+  // The older staff-publication path and existing owner consent are equally
+  // valid approvals. Neither depends on adding a newer manual source history.
+  await sql`insert into network_audit_log(actor_user_id,action,entity_type,entity_id,after_value,note)
+    values (${user.id},'athlete.bulk_publish','athlete',${String(publishedAthlete.id)},
+      '{"profile_visibility":"public"}'::jsonb,'Synthetic existing staff publication')`;
+  await expectSearch("published-history-fixture", true);
+  await expectSitemap(true);
+  assert.equal(
+    (await publicRead("published-history-fixture")).sourceHistories.length,
+    0,
+    "Unpublished source history is not exposed by a profile approval",
+  );
+  await sql`delete from network_audit_log where action='athlete.bulk_publish' and entity_id=${String(publishedAthlete.id)}`;
+  await expectSearch("published-history-fixture", false);
+  await sql`update athlete_account_links set status='active' where athlete_id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", true);
+  await expectSitemap(true);
+  await sql`update athletes set profile_type='Public figure' where id=${publishedAthlete.id}`;
+  await sql`update results set result_visibility='private' where athlete_id=${publishedAthlete.id}`;
+  assert.equal(
+    (await publicRead("published-history-fixture")).results.length,
+    0,
+    "Even a public-figure label cannot expose private result rows anonymously",
+  );
+  await sql`update athlete_public_shares set search_indexable=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set enabled=false where user_id=${user.id}`;
+  assert.equal(
+    await publicRead("published-history-fixture"),
+    null,
+    "Owner withdrawal also blocks the existing-sharing publication path",
+  );
   console.log(
     "PASS: approved public profiles opt into search with matching HTML/header robots and sitemap; owner choices, withdrawal, unpublished histories and forged request headers remain protected.",
   );
