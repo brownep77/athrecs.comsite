@@ -199,6 +199,30 @@ checks their hashes and preserves capture timestamps. Deploy to production only
 after the import and repeat checks pass; then requeue those specific events for
 the normal worker. Never delete original documents to force a refetch.
 
+### Recovering saved day-form finish times
+
+`scripts/snapshot-duv-day-recovery.py` and `prepare-duv-day-recovery.mjs`
+review rows held solely for an unparsed performance such as `2d 04:09:11 h`.
+The snapshot includes every athlete, name alias, account and DUV association;
+its identity revision must remain unchanged throughout acquisition. Original
+compressed documents are hash-checked and re-parsed with both HTML parsers.
+Only explicit fixed-distance races and valid day/hour/minute/second components
+are eligible. JavaScript BigInt and a separate Python Decimal calculation must
+agree, and the displayed value and precision remain intact.
+
+The recovery plan reruns conservative duplicate and youth screening. New
+profiles require the job's existing public-profile approval; uncertain matches
+remain held with the new reasons recorded alongside the original hold.
+Histories remain unpublished and unverified. Original captures are never edited.
+
+Validate `apply-duv-day-recovery.py` on an isolated, paused copy first, including
+an exact replay and a stale-revision rejection. The production job must be idle
+and paused for application, and its identity revision must match the screened
+snapshot. Apply uses one guarded transaction with bound private plan data,
+publication/approval checks, source comparisons, history verification and audit
+records. Resume the existing job after verification. Private snapshots, plans,
+connection files and receipts stay outside Git; remove temporary credentials.
+
 ### Rolled-back database contention
 
 PostgreSQL SQLSTATE `40P01` or `55P03` with the exact server message

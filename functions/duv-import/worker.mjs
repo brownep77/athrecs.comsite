@@ -10,6 +10,7 @@ const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const json=x=>JSON.stringify(x);
 const stable=x=>JSON.stringify(x,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v);
 let cache=null;
+export {history,newProfile};
 
 async function directory(client,deadline){
  const version=(await client.query('SELECT version::text FROM result_archive_identity_clock WHERE singleton')).rows[0].version;
