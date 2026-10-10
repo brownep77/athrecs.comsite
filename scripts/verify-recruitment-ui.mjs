@@ -181,7 +181,7 @@ try {
     assert.equal(await page.getByRole("link", { name: /^Source(?: \d+)?(?: ↗)?$/ }).count(), 0);
     assert.equal(await page.getByLabel(/^Result source /).count(), 0);
     const resultsTable = page
-      .getByRole("table", { name: "Athlete race and stage results", exact: true })
+      .getByRole("table", { name: "Athlete results history", exact: true })
       .first();
     for (const width of [390, 320]) {
       await page.setViewportSize({ width, height: 844 });
