@@ -5,6 +5,11 @@ on:
       - 'package.json'
       - 'package-lock.json'
       - 'src/routes/athlete-account.tsx'
+      - 'src/routes/claim-results.tsx'
+      - 'src/components/athletes/ProfileClaimGuide.tsx'
+      - 'src/lib/athrecs/claim-invitations-api.ts'
+      - 'src/lib/athrecs/claim-resume.ts'
+      - 'scripts/verify-profile-claim-journey.mjs'
       - 'src/components/athletes/Account*.tsx'
       - 'src/components/athletes/AthleteResultsSection.tsx'
       - 'src/components/athletes/PotentialResultMatchesPanel.tsx'
@@ -41,6 +46,10 @@ jobs:
         run: npm install --prefix "$RUNNER_TEMP/account-browser" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
       - name: Install browser
         run: node "$RUNNER_TEMP/account-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Profile claim completion and returning users
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
+        run: node scripts/verify-profile-claim-journey.mjs
       - name: Account navigation, race controls and mobile layout
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright

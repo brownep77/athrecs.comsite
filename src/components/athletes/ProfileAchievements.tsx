@@ -1,4 +1,8 @@
 import { useMemo } from "react";
+import {
+  profileAchievementResults,
+  type AchievementResult,
+} from "@/lib/athrecs/profile-history-results";
 import { Medal, Trophy, Globe2, Mountain, Flag, Layers } from "lucide-react";
 import {
   buildProfileAchievements,
@@ -21,6 +25,10 @@ import { achievementColourClass } from "@/lib/athrecs/profile-colours";
 
 export function ResultMedal({ result }: { result: ProfileResult }) {
   if (!isCompletedResult(result)) return null;
+  return <CompletionMedal />;
+}
+
+export function CompletionMedal() {
   return (
     <span
       className="inline-flex shrink-0 text-amber-700 dark:text-amber-300"
@@ -120,17 +128,27 @@ function AchievementEvidence({
   results,
   showEvidence,
 }: {
-  results: ProfileResult[];
+  results: AchievementResult[];
   showEvidence: boolean;
 }) {
   return (
     <ul className="mt-3 space-y-2 border-t border-current/20 pt-3 text-xs">
       {results.map((result) => (
         <li key={result.resultId} className="flex flex-wrap items-center gap-x-2 gap-y-1">
-          <span className="tabular-nums text-muted">{formatRaceDateShort(result.eventDate)}</span>
+          <span className="tabular-nums text-muted">
+            {result.history?.performance.dateLabel ||
+              (result.eventDate.length === 10
+                ? formatRaceDateShort(result.eventDate)
+                : result.history?.performance.yearLabel || result.eventDate)}
+          </span>
           <ProfileEventLink result={result} className="font-medium underline underline-offset-2">
             {result.eventName}
           </ProfileEventLink>
+          {result.history ? (
+            <span>
+              {result.distanceCode} · {result.history.performance.performance || "Recorded finish"}
+            </span>
+          ) : null}
 
           {showEvidence && result.sourceUrls[0] ? (
             <a
@@ -159,19 +177,25 @@ export function AchievementsBoard({
   sourceHistories?: readonly SourceHistory[];
   sourceGender?: string;
 }) {
-  const record = useMemo(() => buildProfileAchievements(results), [results]);
+  const achievementResults = useMemo(
+    () => profileAchievementResults(results, sourceHistories),
+    [results, sourceHistories],
+  );
+  const record = useMemo(() => buildProfileAchievements(achievementResults), [achievementResults]);
   const wins = useMemo(
     () => buildRaceWinAchievements(results, sourceHistories, sourceGender),
     [results, sourceHistories, sourceGender],
   );
   const showCompletionProgress = record.finishes.length > 0 || wins.length === 0;
-  const hasRunning = results.some((result) =>
+  const hasRunning = achievementResults.some((result) =>
     ["running", "athletics", "parkrun"].includes(result.sport.trim().toLowerCase()),
   );
   const metrics = [
     {
       id: "finishes",
-      label: "Completed events",
+      label: record.finishes.some((result) => result.history?.sport === "Athletics")
+        ? "Completed performances"
+        : "Completed events",
       value: record.finishes.length,
       icon: Medal,
       results: record.finishes,

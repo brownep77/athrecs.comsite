@@ -112,13 +112,13 @@ try {
   await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("section"), "potential");
   const match = page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" });
-  await match.getByRole("button", { name: "Claim this result", exact: true }).click();
+  await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
   const confirmation = page.getByRole("alertdialog");
   await confirmation.getByText(/ATHRECS will check your identity/).waitFor();
   await confirmation.getByRole("button", { name: "Cancel", exact: true }).click();
   assert.equal((await sql`select id from result_claims where result_id=991601`).length, 0);
-  await match.getByRole("button", { name: "Claim this result", exact: true }).click();
-  await confirmation.getByRole("button", { name: "Submit claim for review", exact: true }).click();
+  await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
+  await confirmation.getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true }).click();
   await page
     .getByText("Your claim is with staff for an ownership check.", { exact: true })
     .waitFor();
@@ -130,7 +130,7 @@ try {
     0,
   );
   await match.getByRole("link", { name: "View claim", exact: true }).click();
-  await page.getByText("This claim needs an identity check", { exact: true }).waitFor();
+  await page.getByText("Claim received — awaiting identity review", { exact: true }).waitFor();
   assert.equal(await page.getByText(/Another account has already claimed/).count(), 0);
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
@@ -181,7 +181,7 @@ try {
     assert.equal(await page.getByRole("link", { name: /^Source(?: \d+)?(?: ↗)?$/ }).count(), 0);
     assert.equal(await page.getByLabel(/^Result source /).count(), 0);
     const resultsTable = page
-      .getByRole("table", { name: "Athlete race and stage results", exact: true })
+      .getByRole("table", { name: "Athlete results history", exact: true })
       .first();
     for (const width of [390, 320]) {
       await page.setViewportSize({ width, height: 844 });

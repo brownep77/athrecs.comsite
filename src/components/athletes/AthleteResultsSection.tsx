@@ -289,7 +289,7 @@ export function AthleteResultsSection({
             <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
               {hiddenResults.length
                 ? "The records remain safely stored in ATHRECS. Restore any result from the section below."
-                : "Find a matched result in your Athlete Account, confirm it, and it will appear here immediately."}
+                : "Find your profile in your Athlete Account and submit a claim. After the identity check, its linked results will appear here."}
             </p>
             {!hiddenResults.length ? (
               <Button asChild className="mt-5">

@@ -78,6 +78,17 @@ assert(
   ),
 );
 assert.equal(readTimingTable({ headers: ["Rank", "Name"], rows: [] }), null);
+const unclassifiedSource = {
+  ...source,
+  tables: [{ headers: ["Position", "Forename", "Surname", "Club", "Tag", "Time"],
+    rows: [["210", "Example", "Runner", "Club", "484", "00:37:37.1"]] }],
+};
+const unclassifiedResult = { ...result, chip_time_seconds: null, gun_time_seconds: null,
+  finish_time_seconds: 2257.1, gender_place: null, category_place: null };
+assert.deepEqual(compareResult(unclassifiedResult, unclassifiedSource).flags, []);
+assert.equal(readTimingTable(unclassifiedSource.tables[0])[0].categoryPlace, null);
+assert.deepEqual(compareResult({ ...unclassifiedResult, gender_place: 1 }, unclassifiedSource).flags,
+  ["gender_place_not_supplied_by_source"]);
 const candidate = {
   ...result,
   source_url: source.url,
@@ -100,4 +111,11 @@ assert(
     "2026-09-20",
   ).issues[0].flags.includes("future_finished_result"),
 );
+const sameNameRow = [...row];
+sameNameRow[headers.indexOf("Tag")] = "999";
+const sameNameSource = { ...source, rowCount: 2, tables: [{ headers, rows: [row, sameNameRow] }] };
+assert.deepEqual(compareResult({ ...result, source_bib: "484" }, sameNameSource).flags, []);
+assert(compareResult({ ...result, source_bib: "000" }, sameNameSource).flags.includes("bib_not_found_for_name"));
+assert(compareResult(result, sameNameSource).flags.includes("multiple_matching_names_or_distances"));
+assert.deepEqual(auditResults([{ ...candidate, source_bib: "484" }], [sameNameSource]).comparisons[0].flags, []);
 console.log("Result evidence audit regression checks passed.");

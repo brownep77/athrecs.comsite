@@ -11,6 +11,7 @@ import {
   EditorialAthleteOverview,
   EditorialRoadSplits,
 } from "@/components/athletes/EditorialAthleteOverview";
+import { additionalHistoryResults } from "@/lib/athrecs/profile-history-results";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
 import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
@@ -18,7 +19,11 @@ import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { ArrowLeft, BadgeCheck, LockKeyhole, LogIn, MapPin } from "lucide-react";
-import { getAthleteBySlug, getPrivateAthleteBySlug } from "@/lib/athrecs/api";
+import {
+  getAthleteBySlug,
+  getPrivateAthleteBySlug,
+  getAdministratorPublishedAthlete,
+} from "@/lib/athrecs/api";
 import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
@@ -29,6 +34,7 @@ import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-a
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
+import { formatAthleteId } from "@/lib/athrecs/athlete-id";
 import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
 import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 
@@ -39,6 +45,17 @@ export const Route = createFileRoute("/athletes/$slug")({
     "X-Robots-Tag": "noindex, nofollow, noarchive",
   }),
   loader: async ({ params }) => {
+    const published = await getAdministratorPublishedAthlete({ data: params.slug });
+    if (published) {
+      if (published.athlete.slug !== params.slug) {
+        throw redirect({
+          to: "/athletes/$slug",
+          params: { slug: published.athlete.slug },
+          statusCode: 301,
+        });
+      }
+      return { kind: "published-history" as const, ...published };
+    }
     if (!(await canViewAthleteProfiles())) return { kind: "sign-in" as const };
     const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
       () => null,
@@ -79,14 +96,22 @@ export const Route = createFileRoute("/athletes/$slug")({
     }
     throw notFound();
   },
-  head: ({ params }) => ({
+  head: ({ params, loaderData }) => ({
     links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
     meta: [
-      { title: `Athlete profile | ${SITE_NAME}` },
+      {
+        title:
+          loaderData?.kind === "published-history"
+            ? `${loaderData.athlete.display_name} | ${SITE_NAME}`
+            : `Athlete profile | ${SITE_NAME}`,
+      },
       { name: "robots", content: "noindex, nofollow, noarchive" },
       {
         name: "description",
-        content: "Sign in to view athlete profiles and published results on ATHRECS.",
+        content:
+          loaderData?.kind === "published-history"
+            ? `Published sporting performances for ${loaderData.athlete.display_name} on ATHRECS.`
+            : "Sign in to view athlete profiles and published results on ATHRECS.",
       },
     ],
   }),
@@ -186,6 +211,7 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
 function AthletePage() {
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
+  if (data.kind === "published-history") return <AthleteContent />;
   return (
     <ProfileViewer
       authenticated={data.kind !== "sign-in"}
@@ -209,8 +235,28 @@ function AthleteContent() {
   }
 
   const { athlete, results, profileResults, upcoming, sourceHistories } = data;
+  const historyResults = additionalHistoryResults(sourceHistories);
+  const otherHistories = sourceHistories
+    .map((history) => ({
+      ...history,
+      performances: history.performances.filter((row) => row.verificationStatus === undefined),
+    }))
+    .filter((history) => history.performances.length > 0);
+  const profileSports = [
+    ...new Set([
+      ...profileResults.map((r) => r.sport),
+      ...historyResults.map((r) => r.sport),
+      ...upcoming.map((r) => r.sport),
+    ]),
+  ];
+  const historicalPerformanceCount = sourceHistories.reduce(
+    (total, history) => total + history.performances.length,
+    0,
+  );
   const reportedHistory = getReportedRaceHistory(athlete.slug);
   const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
+  const performanceCount =
+    results.length + (includedHistory?.records.length ?? 0) + historicalPerformanceCount;
   const aliases = athlete.aliases ?? [];
   const career = getEditorialAthleteCareer(athlete.slug);
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
@@ -218,7 +264,7 @@ function AthleteContent() {
   );
   const bio = publicAthleteBio({
     name: athlete.display_name,
-    sport: profileResults[0]?.sport,
+    sport: profileSports.includes("Athletics") ? "Athletics" : profileResults[0]?.sport,
     city: athlete.city,
     country: athlete.country,
     club: athlete.club,
@@ -270,9 +316,7 @@ function AthleteContent() {
         <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
-          {[
-            ...new Set([...profileResults.map((r) => r.sport), ...upcoming.map((r) => r.sport)]),
-          ].map((sport) => (
+          {profileSports.map((sport) => (
             <Badge key={sport} variant="outline">
               {sport}
             </Badge>
@@ -318,8 +362,14 @@ function AthleteContent() {
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="accent">
-            {results.length + (includedHistory?.records.length ?? 0)}{" "}
-            {includedHistory ? "race and stage entries" : reportedHistory ? "results" : "results"}
+            {performanceCount}{" "}
+            {historicalPerformanceCount
+              ? performanceCount === 1
+                ? "performance"
+                : "performances"
+              : includedHistory
+                ? "race and stage entries"
+                : "results"}
           </Badge>
           {athlete.profile_roles
             ?.filter(
@@ -373,6 +423,14 @@ function AthleteContent() {
           title={`${athlete.display_name} athlete profile`}
           compact
         />
+        {!athlete.is_claimed && athlete.athlete_number ? (
+          <a
+            href={`https://update.athrecs.com/admin/athletes/${formatAthleteId(athlete.athlete_number)}?invite=1`}
+            className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent"
+          >
+            Invite to claim <span className="ml-2 text-xs text-muted">Staff sign-in required</span>
+          </a>
+        ) : null}
         {aliases.length > 0 && (
           <div className="space-y-1.5 border-t border-border pt-3">
             <p className="text-xs font-medium uppercase tracking-wider text-subtle">
@@ -405,15 +463,21 @@ function AthleteContent() {
         )}
 
       <section id="results-history" className="space-y-3">
-        <CompactResults results={profileResults} reportedHistory={includedHistory} claimable />
-        {sourceHistories.length ? (
+        <CompactResults
+          results={profileResults}
+          historyResults={historyResults}
+          reportedHistory={includedHistory}
+          claimable
+        />
+        {otherHistories.length ? (
           <details
+            id="performance-history"
             className="rounded-lg border border-border bg-surface p-3"
-            open={!profileResults.length}
+            open
           >
             <summary className="cursor-pointer text-sm font-semibold">Performance history</summary>
             <div className="mt-3">
-              <SourcePerformanceHistory histories={sourceHistories} />
+              <SourcePerformanceHistory histories={otherHistories} />
             </div>
           </details>
         ) : null}

@@ -184,3 +184,12 @@ The official SiEntries page announced Settle Saunter for 23 May 2027, with timed
 The Edinburgh Running Festival half marathon on 1 August 2027 at 10:00 was added to the existing canonical card with open £36 entry. The organiser page is retained as the safe entry destination because its downstream checkout currently redirects to an unrelated Blackburn race.
 
 Victoria Park, North Lincolnshire, Newmarket and Chepstow were rejected as additions because their canonical cards or editions already exist.
+
+
+## 10 October 2026 scan
+
+RunThrough's live official calendar confirms seven missing half-marathon editions on established canonical cards: Leeds on 30 May, Southampton on 8 August, Oulton Park on 15 August and 28 November, Warrington on 26 September, Run Kent Tonbridge on 3 October, and Croft Motor Circuit on 21 November. Croft also includes a verified 10-mile race at 10:00 with £30 entry; its half starts at 09:45 and costs £32. The other verified half starts and prices are retained with their full same-day programmes.
+
+Nottingham Running Festival on 29 August 2027 is a verified new canonical card, with a 09:30 half marathon alongside 10K and 5K races and open half entry at £26.
+
+Every downstream half-marathon checkout tested on these pages currently redirects to an unrelated Blackburn race. The official organiser pages remain the safe open-entry destinations until RunThrough corrects those links. Current official licence evidence still leaves Thirsk and Clowne at TBC, Ripon at Pending and Chippenham at TBC, so those races remain unpublished in research.

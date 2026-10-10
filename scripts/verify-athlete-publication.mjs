@@ -33,6 +33,7 @@ try {
     insert into athlete_identifiers values (999, null, 'owner');
     create table athlete_account_links (athlete_id integer, user_id text, status text);
     insert into athlete_account_links values (5,'owner','active');
+    create table athlete_public_shares (user_id text, enabled boolean, share_results boolean);
     create table results (id integer primary key, athlete_id integer, result_visibility text);
     insert into results select id, id, 'private' from athletes;
     insert into results values (1000,1,'public_figure');

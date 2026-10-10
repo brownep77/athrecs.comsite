@@ -36,7 +36,7 @@ export async function importCheckedRaceUpload(){throw Error('No result imports i
 );
 const directory = file(
   "directory-api.js",
-  `export async function getStaffAthleteDirectory(){return {athletes:[],total:0,totalStored:0,page:1,pages:1,sports:[],publishableTotal:0};}
+  `export async function getStaffAthleteDirectory(){return {athletes:[{athleteNumber:'123',athrecsId:'ATH-000123',name:'Avery Test Athlete',sports:['Running'],club:'Example Club',city:'',country:'',visibility:'Private',resultCount:2,registered:false,canPublish:true,sources:[{id:9,slug:'avery-test-athlete'}],details:{}}],total:1,totalStored:1,page:1,pages:1,sports:['Running'],publishableTotal:1};}
 export async function exportStaffAthleteDirectory(){throw Error('No private export in this test');}export async function selectAllStaffAthleteProfiles(){return [];}export async function publishStaffAthleteProfiles(){throw Error('No publication in this test');}`,
 );
 const suggestions = file(
@@ -55,6 +55,22 @@ const router = file(
   "router.tsx",
   'import React from "react";export function Link({to,children,...props}){return <a href={to} {...props}>{children}</a>}',
 );
+const invitation = file(
+  "invitation-api.js",
+  `
+window.invitationCreates=[];window.invitationEmails=[];window.directorySearches=[];window.matchSearches=[];
+let contact={phone:null,telegramUsername:null,socialLinks:[],sourceNote:''};
+const account=()=>({userId:'synthetic-runner',athleteNumber:'456',name:'Name not supplied',email:'runner@example.test',emailVerified:true,linkedProfiles:0,invitation:null,profileConnections:[],marketingConsent:false,contact});
+export async function findDirectoryInvitationAccounts({data}){window.directorySearches.push(data);return {registered:false,athleteId:9,total:data.q==='missing@example.test'?0:1,page:1,pageSize:25,accounts:data.q==='missing@example.test'?[]:[account()]};}
+export async function findStaffClaimMatches({data}){window.matchSearches.push(data);return {candidates:[{id:9,name:'Avery Test Athlete',slug:'avery-test-athlete',clubName:'Example Club',resultCount:2,reasons:['Manual search result — check identity'],blocked:null,recentResults:[{race:'Synthetic Race',date:'2026-01-01',distance:'10K'}]}],hasSavedName:false,moreMatches:false,history:[],emailAvailable:true};}
+export async function createStaffClaimInvitation({data}){window.invitationCreates.push(data);return {id:'synthetic-invitation',url:'https://www.athrecs.com/claim-results?resultId=9&invitation='+ 'a'.repeat(64),reused:window.invitationCreates.length>1};}
+export async function getStaffInvitationProfile(){return {profile:{id:9,name:'Avery Test Athlete',owner:false,resultCount:2,recentResults:[{race:'Synthetic Race',date:'2026-01-01',distance:'10K'}]},history:[],emailAvailable:true};}
+export async function createStaffExternalInvitation({data}){window.invitationCreates.push(data);return {id:'synthetic-external-invitation',url:'https://www.athrecs.com/claim-results?resultId=9&invitation'+'='+ 'b'.repeat(64),reused:false,recipient:data.email||data.recipientName,emailBound:!!data.email,contact:{phone:data.phone||null,telegramUsername:data.telegramUsername||null,socialLinks:data.socialLinks,sourceNote:data.sourceNote}};}
+export async function emailStaffClaimInvitation({data}){window.invitationEmails.push(data);return {status:'sent'};}
+export async function revokeStaffClaimInvitation(){return {revoked:true};}
+export async function saveStaffAthleteContact({data}){contact={...data};return {saved:true};}
+`,
+);
 file("style.css", `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);
 file(
   "index.html",
@@ -67,11 +83,17 @@ file(
 const aliases = {
   "@/lib/athlete-link/api": api,
   "@/lib/athlete-workspace/api": workspace,
+  "@/lib/athlete-workspace/admin-history-api": file(
+    "history-api.js",
+    "export async function getStaffPerformanceHistory(){return [];}export async function getOwnedPerformanceHistory(){return [];}export async function excludeOwnedPerformance(){throw Error('No history mutations in this fixture');}",
+  ),
   "@/lib/staff-results-upload/api": upload,
   "@/lib/athrecs/staff-athlete-directory-api": directory,
   "@/lib/athrecs/profile-edit-suggestions-api": suggestions,
   "@/lib/athrecs/athlete-upcoming-api": upcoming,
   "@/lib/athrecs/athlete-account-api": file("sports.js", "export const ATHLETE_SPORTS=[];"),
+  "@/lib/athrecs/claim-invitations-api": invitation,
+  "@/lib/athrecs/athlete-contact-api": invitation,
   "@/lib/club-scanner/api": clubs,
   "@tanstack/react-router": router,
 };
@@ -99,7 +121,10 @@ let page;
 try {
   page = await browser.newPage({ viewport: { width: 1365, height: 1000 } });
   const errors = [];
-  page.on("pageerror", (e) => { errors.push(e.message); console.error("Browser error:",e.message); });
+  page.on("pageerror", (e) => {
+    errors.push(e.message);
+    console.error("Browser error:", e.message);
+  });
   await page.route("**/*", (route) =>
     new URL(route.request().url()).hostname === "127.0.0.1" ? route.continue() : route.abort(),
   );
@@ -136,13 +161,11 @@ try {
   await page.getByRole("heading", { name: "Import athletes & race results" }).waitFor();
   assert.equal(await page.getByLabel("Race name", { exact: true }).inputValue(), "");
   assert.equal(await page.getByLabel("The file’s “Time” column means").inputValue(), "unspecified");
-  await page
-    .getByLabel("Choose Excel or CSV race results")
-    .setInputFiles({
-      name: "synthetic.csv",
-      mimeType: "text/csv",
-      buffer: Buffer.from("Name,Time\nTest,00:40:00"),
-    });
+  await page.getByLabel("Choose Excel or CSV race results").setInputFiles({
+    name: "synthetic.csv",
+    mimeType: "text/csv",
+    buffer: Buffer.from("Name,Time\nTest,00:40:00"),
+  });
   await page.getByText("File ready: synthetic.csv", { exact: true }).waitFor();
   await nav.getByRole("button", { name: "Single athlete", exact: true }).click();
   assert.equal(await name.inputValue(), "Avery Test Athlete");
@@ -170,7 +193,182 @@ try {
   await nav.getByRole("button", { name: "Results file", exact: true }).click();
   await page.getByText("File ready: synthetic.csv", { exact: true }).waitFor();
   await nav.getByRole("button", { name: "Find profiles", exact: true }).click();
-  await page.getByText("No athletes match these filters.").waitFor();
+  await page
+    .getByRole("button", { name: "Match and invite Avery Test Athlete (ATH-000123)" })
+    .click();
+  await page.getByRole("heading", { name: "Match & invite · Avery Test Athlete" }).waitFor();
+  await page.getByLabel("Find the athlete’s signup").fill("missing@example.test");
+  await page.getByRole("button", { name: "Find signup", exact: true }).click();
+  await page.getByText(/No signup found/).waitFor();
+  await page.getByLabel("Find the athlete’s signup").fill("runner@example.test");
+  await page.getByRole("button", { name: "Find signup", exact: true }).click();
+  await page.getByRole("button", { name: "Choose recipient", exact: true }).click();
+  const shareInvite = page.getByRole("button", {
+    name: "Create WhatsApp / Viber / Telegram invitation",
+    exact: true,
+  });
+  await shareInvite.waitFor();
+  assert(await shareInvite.isDisabled());
+  assert.equal(
+    await page.getByLabel("Search existing athlete profiles").count(),
+    0,
+    "Directory keeps the exact source profile selected",
+  );
+  assert.equal((await page.evaluate(() => window.matchSearches)).at(-1).athleteId, 9);
+  await page
+    .getByLabel("Why this may be their profile")
+    .fill("Synthetic athlete confirmed the race and club.");
+  await page
+    .getByLabel(
+      "I checked the recipient and selected profile. This is an invitation to confirm, not an ownership approval.",
+    )
+    .check();
+  await shareInvite.click();
+  await page.getByRole("link", { name: "Open Viber invitation" }).waitFor();
+  assert.equal((await page.evaluate(() => window.invitationCreates)).length, 1);
+  assert.equal(
+    (await page.evaluate(() => window.invitationEmails)).length,
+    0,
+    "Creating a social invitation does not send email",
+  );
+  const privateUrl = await page.getByLabel("Private claim link").inputValue();
+  assert.equal(
+    new URL(
+      await page.getByRole("link", { name: "Open Telegram invitation" }).getAttribute("href"),
+    ).searchParams.get("url"),
+    privateUrl,
+  );
+  assert(
+    new URL(
+      await page.getByRole("link", { name: "Open WhatsApp invitation" }).getAttribute("href"),
+    ).searchParams
+      .get("text")
+      .includes(privateUrl),
+  );
+  assert(
+    new URL(
+      await page.getByRole("link", { name: "Open Viber invitation" }).getAttribute("href"),
+    ).searchParams
+      .get("text")
+      .startsWith(privateUrl),
+  );
+  // Contact changes refresh the selected account inside the directory, without a reload.
+  await page.getByRole("button", { name: "Edit contact details" }).click();
+  await page.getByLabel("Phone (international format)").fill("+447700900123");
+  await page.getByLabel("Telegram username (optional)").fill("synthetic_athlete");
+  await page.getByLabel("Contact details source").fill("Synthetic athlete confirmed the details.");
+  await page.getByRole("button", { name: "Save private contact details" }).click();
+  await page.getByText(/WhatsApp: \+447700900123/).waitFor();
+  assert.equal(
+    new URL(await page.getByRole("link", { name: "Open Telegram invitation" }).getAttribute("href"))
+      .pathname,
+    "/synthetic_athlete",
+  );
+  assert.equal(
+    new URL(await page.getByRole("link", { name: "Open WhatsApp invitation" }).getAttribute("href"))
+      .pathname,
+    "/447700900123",
+  );
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  await page.screenshot({ path: "artifacts/athlete-directory-invites-mobile.png", fullPage: true });
+  await page.setViewportSize({ width: 1365, height: 1000 });
+  await page.screenshot({
+    path: "artifacts/athlete-directory-invites-desktop.png",
+    fullPage: true,
+  });
+  await page.getByRole("button", { name: "Email claim invitation", exact: true }).click();
+  await page.getByText(/Invitation sent from support@athrecs.com/).waitFor();
+  assert.equal((await page.evaluate(() => window.invitationEmails)).length, 1);
+  await page.getByRole("button", { name: "Show all signups" }).click();
+  assert.equal(
+    await page.getByLabel("Private claim link").count(),
+    0,
+    "Changing recipient clears the private invitation",
+  );
+  await page.getByRole("button", { name: "Invite someone not signed up", exact: true }).click();
+  await page.getByRole("heading", { name: "Invite to claim · Avery Test Athlete" }).waitFor();
+  const externalEmail = page.getByRole("button", {
+    name: "Email invitation to claim",
+    exact: true,
+  });
+  const externalSocial = page.getByRole("button", {
+    name: "Create SMS or social invitation",
+    exact: true,
+  });
+  assert(await externalEmail.isDisabled());
+  assert(await externalSocial.isDisabled());
+  await page.getByLabel("Invitation email (optional)").fill("new-athlete@example.test");
+  await page.getByLabel("Phone for SMS, WhatsApp or Viber").fill("+447700900125");
+  await page.getByText("Instagram, Facebook, X / Twitter or LinkedIn", { exact: true }).click();
+  await page
+    .getByLabel("Instagram profile link", { exact: true })
+    .fill("https://untrusted.example/person");
+  await page
+    .getByLabel("Where these contact details came from")
+    .fill("Synthetic athlete supplied the details.");
+  await page
+    .getByLabel("Why this is the intended athlete’s profile")
+    .fill("Synthetic athlete confirmed this race and their club.");
+  const externalReview = page.getByLabel(
+    "I checked the contact details and selected profile. Invite this person to claim; do not approve ownership automatically.",
+  );
+  await externalReview.check();
+  await page.getByRole("alert").filter({ hasText: "valid Instagram profile link" }).waitFor();
+  assert(await externalSocial.isDisabled());
+  await page
+    .getByLabel("Instagram profile link", { exact: true })
+    .fill("https://www.instagram.com/synthetic_athlete/");
+  await page
+    .getByLabel("Facebook profile link", { exact: true })
+    .fill("https://www.facebook.com/synthetic.athlete");
+  await page
+    .getByLabel("X / Twitter profile link", { exact: true })
+    .fill("https://x.com/synthetic_athlete");
+  await page
+    .getByLabel("LinkedIn profile link", { exact: true })
+    .fill("https://www.linkedin.com/in/synthetic-athlete/");
+  await externalReview.check();
+  await externalSocial.click();
+  await page.getByRole("link", { name: "Open SMS invitation" }).waitFor();
+  const externalUrl = await page.getByLabel("Private claim link").inputValue();
+  const sms = new URL(
+    await page.getByRole("link", { name: "Open SMS invitation" }).getAttribute("href"),
+  );
+  assert(sms.searchParams.get("body").includes(externalUrl));
+  assert(sms.searchParams.get("body").includes("Create a free account"));
+  for (const channel of ["Instagram", "Facebook", "X / Twitter", "LinkedIn"])
+    assert(
+      await page.getByRole("link", { name: `Copy & open ${channel}`, exact: true }).isVisible(),
+    );
+  assert.equal(
+    (await page.evaluate(() => window.invitationEmails)).length,
+    1,
+    "No email on social preparation",
+  );
+  await page.screenshot({
+    path: "artifacts/athlete-directory-invites-new-desktop.png",
+    fullPage: true,
+  });
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  await page.screenshot({
+    path: "artifacts/athlete-directory-invites-new-mobile.png",
+    fullPage: true,
+  });
+  await externalEmail.click();
+  await page.getByText(/Invitation sent from support@athrecs.com/).waitFor();
+  assert.equal((await page.evaluate(() => window.invitationEmails)).length, 2);
+  await page.getByLabel("Invitation email (optional)").fill("");
+  assert.equal(
+    await page.getByLabel("Private claim link").count(),
+    0,
+    "Editing a contact clears the old invitation",
+  );
+  assert(await externalEmail.isDisabled());
+  await externalReview.check();
+  await externalSocial.click();
+  await page.getByText(/They must verify an account; staff check identity/).waitFor();
+  assert.equal((await page.evaluate(() => window.invitationCreates)).at(-1).email, "");
   await nav.getByRole("button", { name: "Club scans", exact: true }).click();
   await page.getByRole("heading", { name: "Club athlete scanner" }).waitFor();
   await nav.getByRole("button", { name: "Single athlete", exact: true }).click();
@@ -183,7 +381,7 @@ try {
   );
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: actual combined React screen, provider error recovery, name confirmation, duplicate route, private-save gates/retry, profile handoff, empty upload defaults and tab/file retention; desktop/mobile. API responses are synthetic.",
+    "PASS: actual combined React screen, directory profile-to-signup matching, email and three social invitation links, contact refresh, private-save gates/retry, profile handoff, empty upload defaults and tab/file retention; desktop/mobile. API responses are synthetic.",
   );
 } catch (e) {
   if (page) await page.screenshot({ path: "artifacts/athlete-tools-failure.png", fullPage: true });

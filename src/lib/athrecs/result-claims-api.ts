@@ -1,3 +1,6 @@
+import { privateClaimMiddleware } from "./claim-invitations-api";
+import { invitationToken } from "./claim-invitation";
+import { validateInvitation, assertInvitationWrites } from "./claim-invitations.server";
 import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
@@ -340,9 +343,10 @@ async function canAccessClaimCandidate(
 }
 
 export const getClaimableResult = createServerFn({ method: "GET" })
-  .middleware([authMiddleware])
-  .validator((input: { resultId: number }) => ({
+  .middleware([privateClaimMiddleware, authMiddleware])
+  .validator((input: { resultId: number; invitation?: string }) => ({
     resultId: positiveInteger(input?.resultId, "Result"),
+    invitation: invitationToken.optional().parse(input?.invitation),
   }))
   .handler(async ({ data, context }) => {
     const sql = await ready();
@@ -395,15 +399,25 @@ export const getClaimableResult = createServerFn({ method: "GET" })
     `;
     const row = rows[0];
     if (!row) return null;
-    const allowed = await canAccessClaimCandidate(sql, context.userId, {
-      resultId: row.result_id,
-      athleteId: row.athlete_id,
-      athleteName: row.athlete_name,
-      city: row.athlete_city,
-      region: row.athlete_region,
-      country: row.athlete_country,
-      clubName: row.club_name,
-    });
+    const allowed = data.invitation
+      ? Boolean(
+          await validateInvitation(
+            sql,
+            data.invitation,
+            context.userId,
+            row.result_id,
+            row.athlete_id,
+          ),
+        )
+      : await canAccessClaimCandidate(sql, context.userId, {
+          resultId: row.result_id,
+          athleteId: row.athlete_id,
+          athleteName: row.athlete_name,
+          city: row.athlete_city,
+          region: row.athlete_region,
+          country: row.athlete_country,
+          clubName: row.club_name,
+        });
     if (!allowed) return null;
     return {
       resultId: row.result_id,
@@ -424,16 +438,18 @@ export const getClaimableResult = createServerFn({ method: "GET" })
   });
 
 export const submitResultClaim = createServerFn({ method: "POST" })
-  .middleware([authMiddleware])
+  .middleware([privateClaimMiddleware, authMiddleware])
   .validator(
     (input: {
       resultId: number;
+      invitation?: string;
       evidenceUrl?: string;
       evidenceUrl2?: string;
       evidenceUrl3?: string;
       declarationAccepted: boolean;
     }) => ({
       resultId: positiveInteger(input?.resultId, "Result"),
+      invitation: invitationToken.optional().parse(input?.invitation),
       verificationMethod: "other" as ResultClaimVerificationMethod,
       evidenceText: "",
       evidenceUrl: optionalHttpsUrl(input?.evidenceUrl),
@@ -444,6 +460,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
   )
   .handler(async ({ data, context }) => {
     if (!data.declarationAccepted) throw new Error("Confirm that this is your result");
+    if (data.invitation) assertInvitationWrites();
 
     const sql = await ready();
     const outcome = await sql.transaction(async (tx) => {
@@ -488,15 +505,43 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       `;
       const result = results[0];
       if (!result) throw new Error("Result not found");
-      const allowed = await canAccessClaimCandidate(tx, context.userId, {
-        resultId: result.result_id,
-        athleteId: result.athlete_id,
-        athleteName: result.athlete_name,
-        city: result.athlete_city,
-        region: result.athlete_region,
-        country: result.athlete_country,
-        clubName: result.club_name,
-      });
+      // Keep athlete-before-invitation lock order consistent with staff review.
+      await tx`select id from athletes where id=${result.athlete_id} for update`;
+      const invitation = data.invitation
+        ? await validateInvitation(
+            tx,
+            data.invitation,
+            context.userId,
+            result.result_id,
+            result.athlete_id,
+            true,
+          )
+        : null;
+      if (invitation?.claim_id) {
+        const [claim] = await tx<{
+          status: ResultClaimStatus;
+        }>`select status from result_claims where id=${invitation.claim_id} and claimant_user_id=${context.userId}`;
+        if (!claim) throw new Error("This invitation has already been used. Check your claims.");
+        return {
+          status: claim.status,
+          alreadyOwned: false,
+          claimId: invitation.claim_id,
+          claimantUserId: context.userId,
+          email: null,
+          isConflict: false,
+        };
+      }
+      const allowed =
+        invitation ||
+        (await canAccessClaimCandidate(tx, context.userId, {
+          resultId: result.result_id,
+          athleteId: result.athlete_id,
+          athleteName: result.athlete_name,
+          city: result.athlete_city,
+          region: result.athlete_region,
+          country: result.athlete_country,
+          clubName: result.club_name,
+        }));
       if (!allowed) throw new Error("Result not available to this account");
 
       // Serialise submissions for this athlete so simultaneous claims retain
@@ -583,7 +628,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             claimant_email = ${claimantEmail},
             status = ${nextStatus},
             verification_method = ${data.verificationMethod},
-            evidence_text = ${data.evidenceText},
+            evidence_text = ${invitation ? `Staff invitation suggestion (not identity verification): ${invitation.match_note}` : data.evidenceText},
             evidence_url = ${data.evidenceUrl},
             evidence_url_2 = ${data.evidenceUrl2},
             evidence_url_3 = ${data.evidenceUrl3},
@@ -607,7 +652,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             declaration_accepted, conflict_reason, staff_note, reviewed_at
           ) values (
             ${result.result_id}, ${result.athlete_id}, ${context.userId}, ${claimantEmail},
-            ${nextStatus}, ${data.verificationMethod}, ${data.evidenceText},
+            ${nextStatus}, ${data.verificationMethod}, ${invitation ? `Staff invitation suggestion (not identity verification): ${invitation.match_note}` : data.evidenceText},
             ${data.evidenceUrl}, ${data.evidenceUrl2}, ${data.evidenceUrl3},
             true, ${conflictReason}, null, null
           )
@@ -616,6 +661,8 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         claimId = inserted[0].id;
       }
 
+      if (invitation)
+        await tx`update athlete_claim_invitations set claim_id=${claimId},user_id=coalesce(user_id,${context.userId}) where id=${invitation.id}`;
       const isConflict = Boolean(owner) || otherClaimCount > 0;
       if (isConflict) await queueClaimConflict(tx, claimId);
       return {
@@ -722,7 +769,8 @@ export const withdrawResultClaim = createServerFn({ method: "POST" })
 
 export const listStaffResultClaims = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
-  .validator((input: { status?: ResultClaimStatus | "all" } | undefined) => ({
+  .validator((input: { status?: ResultClaimStatus | "all"; claimant?: string } | undefined) => ({
+    claimant: typeof input?.claimant === "string" ? input.claimant.trim().slice(0, 200) : "",
     status:
       input?.status === "pending" ||
       input?.status === "needs_info" ||
@@ -750,10 +798,11 @@ export const listStaffResultClaims = createServerFn({ method: "GET" })
        left join athlete_account_links owner
          on owner.athlete_id = claim_data.athlete_id and owner.status = 'active'
        where ($1::text = 'all' or claim.status = $1)
+         and ($2::text = '' or claim.claimant_user_id = $2)
        order by
          case claim.status when 'pending' then 0 when 'needs_info' then 1 else 2 end,
          claim.submitted_at desc`,
-      [data.status],
+      [data.status, data.claimant],
     );
     return rows.map(mapClaim);
   });

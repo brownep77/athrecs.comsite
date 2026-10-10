@@ -162,7 +162,39 @@ const shared = {
   "./profile-connections": load("src/lib/athrecs/profile-connections.ts"),
 };
 const matches = load("src/lib/athrecs/result-match-api.ts", shared);
+const invitationCore = load("src/lib/athrecs/claim-invitation.ts", {
+  zod: require("zod"),
+  "./athlete-contact": load("src/lib/athrecs/athlete-contact.ts", {
+    zod: require("zod"),
+    "./profile-connections": shared["./profile-connections"],
+  }),
+});
+const invitationSends = [];
+const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
+  "node:crypto": crypto,
+  "@/lib/db": connection,
+  "@/lib/site-scope": scope,
+  "@/lib/auth/email.server": {
+    authEmailConfigured: () => true,
+    sendAthrecsAuthEmail: async (email, options) => {
+      const id = options.idempotencyKey.split("/").at(-1);
+      const [marker] =
+        await sql`select first_attempt_at,reserved_until from athlete_claim_invitations where id=${id}`;
+      assert(
+        marker.first_attempt_at && marker.reserved_until,
+        "Invitation reservation is committed before provider call",
+      );
+      invitationSends.push({ email, options });
+    },
+  },
+  "./result-match": shared["./result-match"],
+  "./profile-connections": shared["./profile-connections"],
+  "./claim-invitation": invitationCore,
+});
 const claims = load("src/lib/athrecs/result-claims-api.ts", {
+  "./claim-invitations-api": { privateClaimMiddleware: "private" },
+  "./claim-invitation": invitationCore,
+  "./claim-invitations.server": invitations,
   ...shared,
   "./athlete-account-api": { syncAthleteAccountAfterClaim: async () => {} },
   "./result-claim-alerts.server": alerts,
@@ -199,7 +231,7 @@ try {
   await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,result_visibility)
     values (1,1,1,2400,'private'),(2,2,1,2390,'private')`;
   const originalResults = JSON.stringify(await sql`select * from results order by id`);
-  assert.deepEqual(claims.submitResultClaim.middleware, ["authenticated"]);
+  assert.deepEqual(claims.submitResultClaim.middleware, ["private", "authenticated"]);
   assert.deepEqual(claims.listStaffResultClaims.middleware, ["staff"]);
   assert.deepEqual(matches.listMyPotentialResultMatches.middleware, ["authenticated"]);
   assert.equal(
@@ -615,6 +647,143 @@ try {
   assert.equal(sends.length, beforeUnauthorized, "Denied and preview HTTP calls cannot send mail");
   process.env.VERCEL_ENV = "production";
   assert.equal((await worker({ request: requestFor("Bearer synthetic-worker-key") })).status, 200);
+  // Exercise invitation contention against independent PostgreSQL connections
+  // in CI (or the serial disposable PGlite adapter locally).
+  await sql`insert into "user"(id,name,email,"emailVerified") values('invite-target','','invite-target@example.test',true)`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility,country,county) values(20,'synthetic-invite-target','Synthetic Invited Athlete','private','','')`;
+  await sql`insert into results(id,edition_id,athlete_id,status) values(20,1,20,'finished')`;
+  const inviteInput = {
+    userId: "invite-target",
+    athleteId: 20,
+    matchNote: "Synthetic club identity checked for invitation",
+  };
+  const created = await Promise.all(
+    Array.from({ length: 6 }, () => invitations.createInvitation(sql, "one", inviteInput)),
+  );
+  assert.equal(
+    new Set(created.map((i) => i.id)).size,
+    1,
+    "Concurrent creation returns one invitation",
+  );
+  assert.equal(
+    (
+      await sql`select count(*)::int as n from athlete_claim_invitations where user_id='invite-target'`
+    )[0].n,
+    1,
+  );
+  await Promise.all(
+    Array.from({ length: 6 }, () => invitations.sendInvitationEmail(sql, created[0].id)),
+  );
+  assert.equal(invitationSends.length, 1, "Concurrent email attempts invoke the provider once");
+  const invitation = new URL(created[0].url).searchParams.get("invitation");
+  const beforeReceipts = receipts.length;
+  const accepted = await Promise.all(
+    Array.from({ length: 6 }, () =>
+      claims.submitResultClaim(
+        { resultId: 20, invitation, declarationAccepted: true },
+        user("invite-target"),
+      ),
+    ),
+  );
+  assert.equal(
+    new Set(accepted.map((c) => c.claimId)).size,
+    1,
+    "Concurrent submissions keep one claim",
+  );
+  assert.equal(
+    receipts.length - beforeReceipts,
+    1,
+    "Concurrent acceptance sends one claim receipt",
+  );
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=20`).length,
+    0,
+    "Invitation acceptance never assigns ownership",
+  );
+  assert.equal((await invitations.invitationHistory(sql, "invite-target"))[0].status, "pending");
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(21,'synthetic-before-signup','Synthetic New Athlete','private'),(22,'synthetic-contact-only','Synthetic Contact Athlete','private')`;
+  await sql`insert into results(id,edition_id,athlete_id,status) values(21,1,21,'finished'),(22,1,22,'finished')`;
+  const newInput = {
+    athleteId: 21,
+    recipientName: "Synthetic New Athlete",
+    email: "late-signup@example.test",
+    phone: "",
+    telegramUsername: "",
+    socialLinks: [],
+    sourceNote: "Synthetic recipient confirmed contact",
+    matchNote: "Synthetic staff checked the profile and contact",
+    reviewed: true,
+  };
+  const newInvites = await Promise.all(
+    Array.from({ length: 6 }, () => invitations.createExternalInvitation(sql, "one", newInput)),
+  );
+  assert.equal(
+    new Set(newInvites.map((item) => item.id)).size,
+    1,
+    "Concurrent pre-registration invitations reuse one token",
+  );
+  const beforeNewEmail = invitationSends.length;
+  await Promise.all(
+    Array.from({ length: 6 }, () => invitations.sendInvitationEmail(sql, newInvites[0].id)),
+  );
+  assert.equal(
+    invitationSends.length - beforeNewEmail,
+    1,
+    "Concurrent pre-registration emails send once",
+  );
+  await sql`insert into "user"(id,name,email,"emailVerified") values('late-signup','','late-signup@example.test',true),('contact-one','','contact-one@example.test',true),('contact-two','','contact-two@example.test',true)`;
+  const lateToken = new URL(newInvites[0].url).searchParams.get("invitation");
+  const lateClaims = await Promise.all(
+    Array.from({ length: 6 }, () =>
+      claims.submitResultClaim(
+        { resultId: 21, invitation: lateToken, declarationAccepted: true },
+        user("late-signup"),
+      ),
+    ),
+  );
+  assert.equal(new Set(lateClaims.map((item) => item.claimId)).size, 1);
+  assert.equal(
+    (await sql`select user_id from athlete_claim_invitations where id=${newInvites[0].id}`)[0]
+      .user_id,
+    "late-signup",
+  );
+  const contactInvite = await invitations.createExternalInvitation(sql, "one", {
+    ...newInput,
+    athleteId: 22,
+    email: "",
+    phone: "+447700900125",
+  });
+  const contactToken = new URL(contactInvite.url).searchParams.get("invitation");
+  const competingInvites = await Promise.allSettled(
+    ["contact-one", "contact-two"].map((id) =>
+      claims.submitResultClaim(
+        { resultId: 22, invitation: contactToken, declarationAccepted: true },
+        user(id),
+      ),
+    ),
+  );
+  assert.equal(
+    competingInvites.filter((item) => item.status === "fulfilled").length,
+    1,
+    "One account can consume a contact-only token",
+  );
+  assert.match(
+    competingInvites.find((item) => item.status === "rejected").reason.message,
+    /invitation is unavailable/,
+  );
+  assert.equal(
+    (await sql`select count(*)::int as n from result_claims where athlete_id=22`)[0].n,
+    1,
+  );
+  assert.equal(
+    (await sql`select count(*)::int as n from athlete_account_links where athlete_id in (21,22)`)[0]
+      .n,
+    0,
+    "Concurrent external claims never assign ownership",
+  );
+  console.log(
+    "Invitation contention passed: concurrent creation, email reservation and claim submission.",
+  );
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");
   const savedFetch = globalThis.fetch;

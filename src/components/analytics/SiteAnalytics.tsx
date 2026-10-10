@@ -40,6 +40,7 @@ export function SiteAnalytics() {
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const analyticsDisabled =
     pathname.startsWith("/admin") ||
+    pathname === "/claim-results" ||
     pathname === "/sportsrecs" ||
     pathname.startsWith("/sportsrecs/") ||
     isSportsRecsHostname();

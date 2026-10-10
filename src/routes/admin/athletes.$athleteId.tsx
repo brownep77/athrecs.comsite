@@ -13,8 +13,18 @@ import { CompactResults } from "@/components/athletes/CompactResultsTable";
 import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
 import { getStaffAthleteProfile } from "@/lib/athrecs/staff-athlete-directory-api";
 import { publicProfileDetails } from "@/lib/athrecs/profile-details";
+import { lazy, Suspense, useState } from "react";
+import { Button } from "@/components/ui/button";
+const DirectoryMatchInvite = lazy(() =>
+  import("@/components/admin/DirectoryMatchInvite").then((module) => ({
+    default: module.DirectoryMatchInvite,
+  })),
+);
 
 export const Route = createFileRoute("/admin/athletes/$athleteId")({
+  validateSearch: (search: Record<string, unknown>): { invite?: string } => ({
+    invite: search.invite === "1" || search.invite === 1 ? "1" : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Athlete profile — ATHRECS Staff" },
@@ -26,6 +36,8 @@ export const Route = createFileRoute("/admin/athletes/$athleteId")({
 
 function StaffAthleteProfile() {
   const { athleteId } = Route.useParams();
+  const { invite } = Route.useSearch();
+  const [inviting, setInviting] = useState(invite === "1");
   const query = useQuery({
     queryKey: ["staff-athlete-profile", athleteId],
     queryFn: () => getStaffAthleteProfile({ data: { athleteId } }),
@@ -74,8 +86,33 @@ function StaffAthleteProfile() {
               coaches={profile.athlete.coaches}
             />
             <div className="flex flex-wrap gap-3">
-              {profile.athlete.sources.map(source => <a key={source.id} href={`/admin/athlete-tools?section=review&athleteId=${source.id}`} className="inline-flex min-h-11 items-center rounded-lg bg-cyan-800 px-4 py-2 text-sm font-semibold text-white">Add races & record approval{profile.athlete.sources.length > 1 ? ` · ${source.slug}` : ''}</a>)}
-              {!profile.athlete.sources.length ? <a href="/admin/athlete-workspace" className="inline-flex min-h-11 items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold">Open athlete editing workspace</a> : null}
+              {!profile.athlete.registered && profile.athlete.sources.length ? (
+                <Button
+                  type="button"
+                  aria-expanded={inviting}
+                  onClick={() => setInviting(!inviting)}
+                >
+                  {inviting ? "Close invitation" : "Invite to claim"}
+                </Button>
+              ) : null}
+              {profile.athlete.sources.map((source) => (
+                <a
+                  key={source.id}
+                  href={`/admin/athlete-tools?section=review&athleteId=${source.id}`}
+                  className="inline-flex min-h-11 items-center rounded-lg bg-cyan-800 px-4 py-2 text-sm font-semibold text-white"
+                >
+                  Add races & record approval
+                  {profile.athlete.sources.length > 1 ? ` · ${source.slug}` : ""}
+                </a>
+              ))}
+              {!profile.athlete.sources.length ? (
+                <a
+                  href="/admin/athlete-workspace"
+                  className="inline-flex min-h-11 items-center rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold"
+                >
+                  Open athlete editing workspace
+                </a>
+              ) : null}
             </div>
             {profile.athlete.profilePath ? (
               <a
@@ -88,6 +125,16 @@ function StaffAthleteProfile() {
               </a>
             ) : null}
           </section>
+          {inviting && !profile.athlete.registered && profile.athlete.sources.length ? (
+            <Suspense fallback={<p role="status">Opening invitations…</p>}>
+              <DirectoryMatchInvite
+                key={athleteId}
+                athleteNumber={profile.athlete.athleteNumber}
+                name={profile.athlete.name}
+                initiallyNewContact
+              />
+            </Suspense>
+          ) : null}
           {profile.bioNotes.length ? (
             <details className="rounded-xl border border-border bg-surface p-4">
               <summary className="cursor-pointer font-semibold">

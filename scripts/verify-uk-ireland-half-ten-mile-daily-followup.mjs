@@ -29,10 +29,11 @@ const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
 const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
 const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
 const CURRENT_NEW_EVENT_SCAN_CHECKED_AT = "2026-10-09";
+const CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT = "2026-10-10";
 const HORIZON = "2027-12-31";
-const NEW_SERIES_COUNT = 72;
-const NEW_EDITION_COUNT = 75;
-const EXISTING_SERIES_EDITION_COUNT = 48;
+const NEW_SERIES_COUNT = 73;
+const NEW_EDITION_COUNT = 76;
+const EXISTING_SERIES_EDITION_COUNT = 55;
 
 async function loadModule(input) {
   const bundle = await rolldown({ input });
@@ -64,7 +65,7 @@ assert.equal(
 );
 assert.equal(
   dailyHalfTenMileEditions.filter((edition) => edition.distance === "Half").length,
-  59,
+  60,
   "The half-marathon total changed unexpectedly",
 );
 assert.equal(
@@ -560,6 +561,60 @@ assert.equal(
   EXISTING_SERIES_EDITION_COUNT,
   "The existing-card edition enrichment total changed unexpectedly",
 );
+const liveCalendarCandidates = [
+  ["tonbridge-half-marathon", "2027-10-03", "09:00", 38, /run-kent-october-2027/],
+  ["leeds-running-festival-march-2027", "2027-05-30", "09:00", 34, /leeds-running-festival-may-2027/],
+  ["southampton-running-festival-may-2027", "2027-08-08", "09:30", 36, /southampton-running-festival-august-2027/],
+  ["running-grand-prix-oulton-park-augut", "2027-08-15", "11:00", 34, /oulton-august-2027/],
+  ["warrington-running-festival", "2027-09-26", "09:00", 29, /warrington-running-festival-september-2027/],
+  ["croft-running-festival-november-2026", "2027-11-21", "09:45", 32, /running-gp-croft-motor-circuit-november-2027/],
+  ["running-grand-prix-oulton-park-augut", "2027-11-28", "11:00", 34, /oulton-november-2027/],
+];
+for (const [seriesSlug, date, startTime, priceAmount, sourcePattern] of liveCalendarCandidates) {
+  const matches = catalogue.editions.filter(
+    (edition) =>
+      edition.seriesSlug === seriesSlug && edition.date === date && edition.distance === "Half",
+  );
+  assert.equal(matches.length, 1, `${seriesSlug}|${date} must remain one canonical half edition`);
+  assert.equal(matches[0].startTime, startTime, `${seriesSlug}|${date} has the wrong start`);
+  assert.match(matches[0].source, sourcePattern, `${seriesSlug}|${date} lost official provenance`);
+  assert.equal(matches[0].entryUrl, matches[0].source, `${seriesSlug}|${date} lost its safe entry destination`);
+  assert.equal(
+    matches[0].entryOptions?.[0]?.checkedAt,
+    CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    `${seriesSlug}|${date} entry provenance is stale`,
+  );
+  assert.equal(
+    matches[0].entryOptions?.[0]?.priceAmount,
+    priceAmount,
+    `${seriesSlug}|${date} has the wrong half price`,
+  );
+  assert.equal(matches[0].publishAllDistances, true, `${seriesSlug}|${date} lost its full programme`);
+}
+
+const nottinghamSeriesSlug = "nottingham-running-festival-august-2027";
+const nottinghamSource =
+  "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2027";
+const nottinghamSeries = catalogue.seriesList.filter((series) => series.slug === nottinghamSeriesSlug);
+const nottinghamEditions = catalogue.editions.filter(
+  (edition) =>
+    edition.seriesSlug === nottinghamSeriesSlug &&
+    edition.date === "2027-08-29" &&
+    edition.distance === "Half",
+);
+assert.equal(nottinghamSeries.length, 1, "Nottingham must expose one canonical series");
+assert.equal(nottinghamEditions.length, 1, "Nottingham must expose one canonical half edition");
+assert.equal(nottinghamEditions[0].startTime, "09:30", "Nottingham has the wrong half start");
+assert.equal(nottinghamEditions[0].source, nottinghamSource, "Nottingham lost official provenance");
+assert.equal(nottinghamEditions[0].entryUrl, nottinghamSource, "Nottingham lost its safe entry destination");
+assert.equal(
+  nottinghamEditions[0].entryOptions?.[0]?.checkedAt,
+  CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+  "Nottingham entry provenance is stale",
+);
+assert.equal(nottinghamEditions[0].entryOptions?.[0]?.priceAmount, 26, "Nottingham has the wrong half price");
+assert.deepEqual(nottinghamSeries[0].distances, ["Half", "10K", "5K"], "Nottingham lost its full programme");
+
 const longfordEdition = dailyHalfTenMileExistingSeriesEditions.find(
   (edition) =>
     edition.seriesSlug === "abbott-longford-marathon-2026" && edition.date === "2027-08-29",
@@ -578,6 +633,10 @@ assert.equal(
   true,
   "Longford must retain the festival's published distances on one card",
 );
+const currentMainSeriesSlugsMaintainedInThisModule = new Set([
+  "croft-running-festival-november-2026",
+  "southampton-running-festival-may-2027",
+]);
 const existingEditionKeys = new Set();
 const existingEditionSourceUrls = new Set();
 for (const edition of dailyHalfTenMileExistingSeriesEditions) {
@@ -586,7 +645,8 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
   assert(!existingEditionKeys.has(key), `Duplicate existing-card edition: ${key}`);
   existingEditionKeys.add(key);
   assert(
-    priorSlugs.has(edition.seriesSlug),
+    priorSlugs.has(edition.seriesSlug) ||
+      currentMainSeriesSlugsMaintainedInThisModule.has(edition.seriesSlug),
     `${key} should enrich an existing series instead of creating a second card`,
   );
   assert(edition.date >= CHECKED_AT && edition.date <= HORIZON, `${key} is outside the horizon`);

@@ -29,6 +29,7 @@ const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
 const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
 const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
 const CURRENT_NEW_EVENT_SCAN_CHECKED_AT = "2026-10-09";
+const CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT = "2026-10-10";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -1360,6 +1361,26 @@ const seeds: RaceSeed[] = [
       "The official organiser page consistently confirms the marathon, half marathon and 10K on 2 May 2027, the 09:25 half-marathon start and open direct entry.",
   },
   {
+    slug: "nottingham-running-festival-august-2027",
+    name: "Nottingham Running Festival — August 2027",
+    date: "2027-08-29",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Nottinghamshire",
+    city: "Nottingham",
+    area: "Nottingham Racecourse",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2027",
+    priceAmount: 26,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 29 August 2027 half marathon, 10K and 5K programme, the 09:30 half start and open £26 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
+  },
+  {
     slug: "crystal-palace-5k-10k-half-marathon-juniors-may-2027",
     name: "Crystal Palace 5K, 10K, Half Marathon & Juniors — May 2027",
     date: "2027-05-02",
@@ -1453,6 +1474,97 @@ type ExistingSeriesEditionSeed = {
 };
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  {
+    seriesSlug: "tonbridge-half-marathon",
+    date: "2027-10-03",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/run-kent-october-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/run-kent-october-2027",
+    publishAllDistances: true,
+    priceAmount: 38,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 3 October 2027 half marathon, 10K and 5K programme, the 09:00 half start and open £38 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Tonbridge card is enriched.",
+  },
+  {
+    seriesSlug: "leeds-running-festival-march-2027",
+    date: "2027-05-30",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/leeds-running-festival-may-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/leeds-running-festival-may-2027",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 30 May 2027 half marathon, 10K, 5K and junior programme, the 09:00 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Leeds card is enriched.",
+  },
+  {
+    seriesSlug: "southampton-running-festival-may-2027",
+    date: "2027-08-08",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/southampton-running-festival-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/southampton-running-festival-august-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 8 August 2027 half marathon, 10K, 5K and junior programme, the 09:30 half start and open £36 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Southampton card is enriched.",
+  },
+  {
+    seriesSlug: "running-grand-prix-oulton-park-augut",
+    date: "2027-08-15",
+    startTime: "11:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/oulton-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/oulton-august-2027",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 15 August 2027 multi-distance programme, the 11:00 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Oulton Park card is enriched.",
+  },
+  {
+    seriesSlug: "warrington-running-festival",
+    date: "2027-09-26",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/warrington-running-festival-september-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/warrington-running-festival-september-2027",
+    publishAllDistances: true,
+    priceAmount: 29,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 26 September 2027 half marathon, 10K and 5K programme, the 09:00 half start and open £29 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Warrington card is enriched.",
+  },
+  {
+    seriesSlug: "croft-running-festival-november-2026",
+    date: "2027-11-21",
+    startTime: "09:45",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/running-gp-croft-motor-circuit-november-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/running-gp-croft-motor-circuit-november-2027",
+    publishAllDistances: true,
+    priceAmount: 32,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 21 November 2027 half marathon, 10-mile, marathon, metric-marathon, 20-mile, 10K and 5K programme, the 09:45 half start and open £32 half entry. The 10-mile starts at 10:00 and costs £30. Downstream checkouts currently redirect to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Croft card is enriched.",
+  },
+  {
+    seriesSlug: "running-grand-prix-oulton-park-augut",
+    date: "2027-11-28",
+    startTime: "11:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/oulton-november-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/oulton-november-2027",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 28 November 2027 multi-distance programme, the 11:00 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Oulton Park card is enriched.",
+  },
   {
     seriesSlug: "edinburgh-running-festival",
     date: "2027-08-01",

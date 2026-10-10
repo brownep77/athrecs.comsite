@@ -30,7 +30,9 @@ for (const functionName of ["submitResultClaim", "listMyResultClaims", "withdraw
   const definition = api.slice(start, nextExport === -1 ? undefined : nextExport);
   assert.match(
     definition,
-    /middleware\(\[authMiddleware\]\)/,
+    functionName === "submitResultClaim"
+      ? /middleware\(\[privateClaimMiddleware, authMiddleware\]\)/
+      : /middleware\(\[authMiddleware\]\)/,
     `${functionName} must require a user`,
   );
 }
@@ -98,7 +100,7 @@ assert.match(
     new URL("../src/components/athletes/CompactResultsTable.tsx", import.meta.url),
     "utf8",
   ),
-  /Claim this result/,
+  /Claim this profile/,
 );
 assert.match(raceRoute, /to="\/claim-results"/);
 assert.match(homeRoute, /Claim race results/);
@@ -114,12 +116,12 @@ assert.match(api, /evidence_url_2/);
 assert.match(api, /evidence_url_3/);
 assert.match(evidenceLinksMigration, /add column if not exists evidence_url_2/);
 assert.match(evidenceLinksMigration, /add column if not exists evidence_url_3/);
-assert.match(claimRoute, /Confirm a matched result to request ownership/);
+assert.match(claimRoute, /Signing in is the first step/);
 assert.match(claimRoute, /Staff may ask for identity evidence before approval/);
 assert.match(claimRoute, /Not required · add up to three/);
 assert.doesNotMatch(claimRoute, /Supporting detail/);
 assert.doesNotMatch(claimRoute, /Supporting information type/);
-assert.match(claimRoute, /Submit claim for review/);
+assert.match(claimRoute, /Yes, this is me — submit my profile claim/);
 assert.match(claimRoute, /Tick the confirmation box to confirm this is your result/);
 assert.match(claimRoute, /disabled=\{submitClaim\.isPending\}/);
 assert.doesNotMatch(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declaration\}/);

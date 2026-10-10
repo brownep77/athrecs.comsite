@@ -9,10 +9,19 @@ export async function loadPublishedSourceHistories(sql: Sql, athleteId: number) 
     from athlete_source_histories h join athletes a on a.id=h.athlete_id
     where h.athlete_id=${athleteId} and h.published_at is not null
       and (a.profile_visibility='public' or a.profile_type='Public figure')
-      and not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
+      and (not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
+        or exists (select 1 from network_audit_log approval
+          where approval.action='athlete.history_admin_published'
+            and approval.entity_id=h.provider||':'||h.external_id
+            and approval.after_value->>'athleteId'=a.id::text))
+      and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+        where l.athlete_id=a.id and l.status='active' and (s.enabled=false or s.share_results=false))
     order by h.provider, h.external_id
   `;
-  return histories.map((history) => sourceHistorySchema.parse(history));
+  return histories.map((history) => {
+    const parsed = sourceHistorySchema.parse(history);
+    return {...parsed, performances: parsed.performances.filter(row => !row.profileExcluded)};
+  });
 }
 
 /** Publish an explicit snapshot of source profiles; account sharing remains owner-managed. */

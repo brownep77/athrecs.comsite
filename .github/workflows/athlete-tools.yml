@@ -6,6 +6,13 @@ on:
       - 'src/components/admin/AthleteTools.tsx'
       - 'src/components/admin/SingleAthleteLink.tsx'
       - 'src/components/admin/AthleteDirectory.tsx'
+      - 'src/components/admin/DirectoryMatchInvite.tsx'
+      - 'src/components/staff/*Invite*.tsx'
+      - 'src/components/staff/ClaimInvitationSharing.tsx'
+      - 'src/lib/athrecs/claim-invit*'
+      - 'src/routes/admin/athletes.$athleteId.tsx'
+      - 'scripts/verify-external-invit*.mjs'
+      - 'migrations/*claim_invitations.sql'
       - 'src/components/admin/ImportRaceResults.tsx'
       - 'src/routes/admin/athlete-tools.tsx'
       - 'src/lib/athrecs/result-claim*'
@@ -94,6 +101,10 @@ jobs:
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
         run: node scripts/verify-athlete-tools-browser.mjs
+      - name: New athlete invitation through real email signup and claim
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
+        run: node scripts/verify-external-invitation-browser.mjs
       - name: Conflict review and email retry interface
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
@@ -108,6 +119,8 @@ jobs:
           name: athlete-tools-preview
           path: |
             artifacts/athlete-tools-*.png
+            artifacts/athlete-directory-invites-*.png
+            artifacts/external-invitation-*.png
             artifacts/result-conflicts-*.png
             artifacts/recruitment-*.png
             artifacts/funnel-audit/signup-ownership.json

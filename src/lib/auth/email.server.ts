@@ -40,13 +40,13 @@ function escapeHtml(value: string): string {
 
 export async function sendAthrecsAuthEmail(
   email: AuthEmail,
-  options: { idempotencyKey?: string } = {},
+  options: { idempotencyKey?: string; from?: string; replyTo?: string } = {},
 ): Promise<void> {
   const apiKey = text(process.env.RESEND_API_KEY);
   if (!apiKey) {
     throw new Error("ATHRECS authentication email is not configured");
   }
-  const from = authEmailFrom();
+  const from = options.from ?? authEmailFrom();
 
   const safeHeading = escapeHtml(email.heading);
   const safeMessage = escapeHtml(email.message);
@@ -93,6 +93,7 @@ export async function sendAthrecsAuthEmail(
     signal: AbortSignal.timeout(8_000),
     body: JSON.stringify({
       from,
+      ...(options.replyTo ? { reply_to: options.replyTo } : {}),
       to: [email.to],
       subject: email.subject,
       html,

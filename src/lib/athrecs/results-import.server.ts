@@ -625,13 +625,13 @@ export async function applyResultsImport(
             else results.result_visibility
           end,
             ingestion_run_id = excluded.ingestion_run_id
-          where (
-            results.finish_time_seconds is not distinct from excluded.finish_time_seconds
+          where not (results.result_details ? 'archive') and (
+            (results.finish_time_seconds is not distinct from excluded.finish_time_seconds
             and (results.chip_time_seconds is null or excluded.chip_time_seconds is null
               or results.chip_time_seconds = excluded.chip_time_seconds)
             and (results.gun_time_seconds is null or excluded.gun_time_seconds is null
               or results.gun_time_seconds = excluded.gun_time_seconds)
-          ) or (results.source_url is not null and results.source_url = excluded.source_url)
+          ) or (results.source_url is not null and results.source_url = excluded.source_url))
           returning id
         `;
         if (!savedResults.length) {

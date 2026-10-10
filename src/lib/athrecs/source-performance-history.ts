@@ -10,6 +10,21 @@ const sourceUrl = z
 export const sourcePerformanceSchema = z.object({
   year: z.number().int().min(1800).max(2200),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  dateLabel: z.string().max(200).optional(),
+  yearLabel: z.string().max(80).optional(),
+  notes: z.string().max(6000).optional(),
+  providerName: z.string().max(200).optional(),
+  country: z.string().max(100).optional(),
+  // Only a reviewed catalogue match may establish an event/major identity.
+  eventSlug: z
+    .string()
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+    .optional(),
+  // Administrator confirmation and independent source checks are distinct audit bases.
+  verificationStatus: z
+    .enum(["unverified", "verified_by_administrator", "source_verified"])
+    .optional(),
+  profileExcluded: z.boolean().optional(),
   sourceDate: z.string(),
   ageGroup: z.string(),
   discipline: z.string(),
@@ -22,6 +37,9 @@ export const sourcePerformanceSchema = z.object({
   labels: z.array(z.string()),
   disqualification: disqualificationSchema.optional(),
 });
+export const historyPerformanceSchema = sourcePerformanceSchema.extend({
+  date: z.string().regex(/^(?:\d{4}-\d{2}-\d{2})?$/),
+});
 export type SourcePerformance = z.infer<typeof sourcePerformanceSchema>;
 export const sourceHistorySchema = z.object({
   provider: z.string(),
@@ -31,6 +49,6 @@ export const sourceHistorySchema = z.object({
   complete: z.boolean(),
   yearsExpected: z.array(z.number().int()),
   yearsCaptured: z.array(z.number().int()),
-  performances: z.array(sourcePerformanceSchema),
+  performances: z.array(historyPerformanceSchema),
 });
 export type SourceHistory = z.infer<typeof sourceHistorySchema>;
