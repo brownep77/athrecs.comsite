@@ -21,25 +21,25 @@ export type EventRegionInput =
   | undefined;
 
 export async function queryRunningRegions(data: NonNullable<EventRegionInput>) {
-    if (data.sport && data.sport !== "All" && !isRunRecsSport(data.sport)) return [];
-    const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
-    if (!country) return [];
+  if (data.sport && data.sport !== "All" && !isRunRecsSport(data.sport)) return [];
+  const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
+  if (!country) return [];
 
-    // Query here instead of invoking the shared createServerFn from another
-    // createServerFn. Nested RPC wrappers return an empty payload in the
-    // deployed specialist runtime, while a direct query preserves the exact
-    // Running/Parkrun public boundary and supplies the catalogue choices.
-    const sql = await ready();
-    const requestedSport = isRunRecsSport(data.sport) ? data.sport : null;
-    const rows = await sql<{
-      slug: string;
-      name: string;
-      country: string;
-      region: string | null;
-      county: string;
-      city: string;
-      area: string;
-    }>`
+  // Query here instead of invoking the shared createServerFn from another
+  // createServerFn. Nested RPC wrappers return an empty payload in the
+  // deployed specialist runtime, while a direct query preserves the exact
+  // Running/Parkrun public boundary and supplies the catalogue choices.
+  const sql = await ready();
+  const requestedSport = isRunRecsSport(data.sport) ? data.sport : null;
+  const rows = await sql<{
+    slug: string;
+    name: string;
+    country: string;
+    region: string | null;
+    county: string;
+    city: string;
+    area: string;
+  }>`
       select e.slug, e.name, e.country, e.region, e.county, e.city, e.area
       from events e
       where e.sport in ('Running', 'Parkrun')
@@ -57,26 +57,26 @@ export async function queryRunningRegions(data: NonNullable<EventRegionInput>) {
         )
       order by e.region nulls last, e.county, e.city
     `;
-    const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const choices = rows
-      .filter((row) =>
-        countryMatchesFilter(
-          resolveCountry({
-            slug: row.slug,
-            name: row.name,
-            country: row.country,
-            county: row.county,
-            city: row.city,
-            area: row.area,
-          }),
-          country,
-        ),
-      )
-      .map((row) => row.region?.trim() || row.county?.trim())
-      .filter((value): value is string => Boolean(value))
-      .filter((value) => value.toLowerCase() !== country.toLowerCase());
+  const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
+  const choices = rows
+    .filter((row) =>
+      countryMatchesFilter(
+        resolveCountry({
+          slug: row.slug,
+          name: row.name,
+          country: row.country,
+          county: row.county,
+          city: row.city,
+          area: row.area,
+        }),
+        country,
+      ),
+    )
+    .map((row) => row.region?.trim() || row.county?.trim())
+    .filter((value): value is string => Boolean(value))
+    .filter((value) => value.toLowerCase() !== country.toLowerCase());
 
-    return [...new Set(choices)].sort((left, right) => left.localeCompare(right, "en"));
+  return [...new Set(choices)].sort((left, right) => left.localeCompare(right, "en"));
 }
 
 function parseRaceGroups(value: unknown): RaceGroupInfo[] {
@@ -139,36 +139,36 @@ type RawEventRow = {
 };
 
 export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
-    if (data.sport && data.sport !== "All" && !isRunRecsSport(data.sport)) return [];
+  if (data.sport && data.sport !== "All" && !isRunRecsSport(data.sport)) return [];
 
-    const sql = await ready();
-    const requestedSport = data.sport && data.sport !== "All" ? data.sport : null;
-    const rawQ = data.q?.trim() ?? "";
-    const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
-    const today = todayIso();
-    const upcomingOnly = data.upcomingOnly === true;
-    const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
-    const offset = Math.min(Math.max(Math.floor(data.offset ?? 0), 0), 10_000);
-    const fetchLimit = Math.min(limit * 3, 160);
-    const distance = data.distance?.trim() || null;
-    const surface = data.surface?.trim() || null;
-    const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
-    const county = data.county?.trim() ? `%${data.county.trim().toLowerCase()}%` : null;
-    const city = data.city?.trim() ? `%${data.city.trim().toLowerCase()}%` : null;
-    const postcode = data.postcode?.trim() || null;
-    const format = data.format?.trim() || null;
-    const group = data.group?.trim() || null;
-    const { monthToRange } = await import("../athrecs/filters");
-    const monthRange = data.month ? monthToRange(data.month) : null;
-    const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
-    const dateTo = data.dateTo?.trim() || monthRange?.to || null;
+  const sql = await ready();
+  const requestedSport = data.sport && data.sport !== "All" ? data.sport : null;
+  const rawQ = data.q?.trim() ?? "";
+  const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
+  const today = todayIso();
+  const upcomingOnly = data.upcomingOnly === true;
+  const limit = Math.min(Math.max(data.limit ?? 40, 1), 80);
+  const offset = Math.min(Math.max(Math.floor(data.offset ?? 0), 0), 10_000);
+  const fetchLimit = Math.min(limit * 3, 160);
+  const distance = data.distance?.trim() || null;
+  const surface = data.surface?.trim() || null;
+  const country = data.country?.trim() && data.country !== "All" ? data.country.trim() : null;
+  const county = data.county?.trim() ? `%${data.county.trim().toLowerCase()}%` : null;
+  const city = data.city?.trim() ? `%${data.city.trim().toLowerCase()}%` : null;
+  const postcode = data.postcode?.trim() || null;
+  const format = data.format?.trim() || null;
+  const group = data.group?.trim() || null;
+  const { monthToRange } = await import("../athrecs/filters");
+  const monthRange = data.month ? monthToRange(data.month) : null;
+  const dateFrom = data.dateFrom?.trim() || monthRange?.from || null;
+  const dateTo = data.dateTo?.trim() || monthRange?.to || null;
 
-    // Inline the filtered set so repeated event lookups retain the editions
-    // index instead of scanning a materialized copy of the whole catalogue.
-    const rows = await sql<RawEventRow>`
+  // Inline the filtered set so repeated event lookups retain the editions
+  // index instead of scanning a materialized copy of the whole catalogue.
+  const rows = await sql<RawEventRow>`
       with display_editions as not materialized (
         select ed.* from editions ed
-        where (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
+        where ed.status <> 'Cancelled' and (${dateFrom}::date is null or ed.event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or ed.event_date <= ${dateTo}::date)
           and ((${dateFrom}::date is not null or ${dateTo}::date is not null) or ed.event_date >= ${today}::date)
           and (${upcomingOnly}::boolean is false or ed.event_date >= ${today}::date)
@@ -220,7 +220,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
           from display_editions ed
           join edition_entry_options option on option.edition_id = ed.id
           where ed.event_id = e.id
-            and ed.status not in ('Closed', 'Finished')
+            and ed.status not in ('Closed', 'Finished', 'Cancelled')
             and option.entry_type = 'official' and option.is_verified
             and option.status in ('open', 'closing_soon', 'ballot', 'waitlist', 'unknown')
             and (option.closes_at is null or option.closes_at >= ${today}::date)
@@ -239,7 +239,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         ) as next_starts_json,
         (
           select count(*)::int from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) as upcoming_count,
         (
           select count(*)::int from editions ed
@@ -253,7 +253,6 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         and (
           (${upcomingOnly}::boolean is false and ${dateFrom}::date is null
             and ${dateTo}::date is null and ${distance}::text is null)
-          or e.sport = 'Parkrun'
           or exists (select 1 from display_editions ed where ed.event_id = e.id)
         )
         and (
@@ -277,7 +276,7 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
             where g.event_id = e.id and g.group_code = ${group}
           )
         )
-        and (${country}::text is null or e.country = ${country} or e.county = ${country})
+        and (${country}::text is null or e.country = ${country} or e.county = ${country} or (${country} = 'United Kingdom' and e.country in ('England','Scotland','Wales','Northern Ireland')))
         and (
           ${county}::text is null
           or lower(coalesce(e.region, '')) like ${county}
@@ -299,7 +298,6 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         )
         and (
           (${dateFrom}::date is null and ${dateTo}::date is null)
-          or e.sport = 'Parkrun'
           or exists (
             select 1 from editions ed
             where ed.event_id = e.id
@@ -309,10 +307,9 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
         )
         and (
           ${upcomingOnly}::boolean is false
-          or e.sport = 'Parkrun'
           or exists (
             select 1 from editions ed
-            where ed.event_id = e.id and ed.event_date >= ${today}::date
+            where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           )
         )
       order by
@@ -329,95 +326,72 @@ export async function queryRunningEvents(data: NonNullable<ListEventsInput>) {
       offset ${offset}
     `;
 
-    const { collapseSameNameDate } = await import("../athrecs/dedupe");
-    const {
-      matchesDistanceFilter,
-      matchesFormatFilter,
-      nameHasFullMarathon,
-      sanitizeDistances,
-      searchLooksLikeMarathon,
-    } = await import("../athrecs/filters");
-    const { matchesPostcodeQuery } = await import("../athrecs/venue");
-    const { countryMatchesFilter, resolveCountry } = await import("../athrecs/countries");
-    const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } =
-      await import("../athrecs/parkrun-dates");
+  const { collapseSameNameDate } = await import("../athrecs/dedupe");
+  const {
+    matchesDistanceFilter,
+    matchesFormatFilter,
+    nameHasFullMarathon,
+    sanitizeDistances,
+    searchLooksLikeMarathon,
+  } = await import("../athrecs/filters");
+  const { matchesPostcodeQuery } = await import("../athrecs/venue");
+  const { countryMatchesFilter, resolveCountry } = await import("../athrecs/countries");
 
-    const mapped: EventListItem[] = rows
-      .map((rawRow): EventListItem | null => {
-        const { groups_json, distances_csv, next_starts_json, ...row } = rawRow;
-        const nextStarts =
-          typeof next_starts_json === "string"
-            ? (JSON.parse(next_starts_json) as Array<{ distance: string; time: string | null }>)
-            : (next_starts_json ?? []);
-        const distances = sanitizeDistances(
-          row.name,
-          distances_csv ? distances_csv.split(",") : [],
-        );
-        if (row.sport === "Parkrun" && (dateFrom || dateTo)) {
-          if (parkrunDates(row.name, dateFrom ?? today, dateTo ?? "2027-12-26").length === 0) {
-            return null;
-          }
-        }
-        const nextDate =
+  const mapped: EventListItem[] = rows
+    .map((rawRow): EventListItem | null => {
+      const { groups_json, distances_csv, next_starts_json, ...row } = rawRow;
+      const nextStarts =
+        typeof next_starts_json === "string"
+          ? (JSON.parse(next_starts_json) as Array<{ distance: string; time: string | null }>)
+          : (next_starts_json ?? []);
+      const distances = sanitizeDistances(row.name, distances_csv ? distances_csv.split(",") : []);
+      return {
+        ...row,
+        distances,
+        groups: parseRaceGroups(groups_json),
+        next_start_time:
           row.sport === "Parkrun"
-            ? nextParkrunDate(row.name, dateFrom && dateFrom > today ? dateFrom : today)
-            : row.next_date;
-        return {
-          ...row,
-          distances,
-          groups: parseRaceGroups(groups_json),
-          next_date: nextDate,
-          upcoming_count:
-            row.sport === "Parkrun" ? remainingParkrunCount(row.name, today) : row.upcoming_count,
-          next_start_time:
+            ? row.next_start_time
+            : supplementedStart(row, row.next_date, row.next_distance, row.next_start_time),
+        next_starts: nextStarts.map((start) => ({
+          distance: start.distance,
+          time:
             row.sport === "Parkrun"
-              ? parkrunStartTime(row.country, /junior/i.test(row.name))
-              : supplementedStart(row, nextDate, row.next_distance, row.next_start_time),
-          next_starts:
-            row.sport === "Parkrun"
-              ? []
-              : nextStarts.map((start) => ({
-                  distance: start.distance,
-                  time: supplementedStart(row, nextDate, start.distance, start.time),
-                })),
-          next_status:
-            (row.next_status as EntryStatus) ?? (row.sport === "Parkrun" ? "Open" : null),
-          next_distance:
-            row.sport === "Parkrun"
-              ? /junior/i.test(row.name)
-                ? "2K"
-                : "5K"
-              : row.next_distance === "Marathon" && !distances.includes("Marathon")
-                ? (distances[0] ?? row.next_distance)
-                : row.next_distance,
-        } satisfies EventListItem;
-      })
-      .filter((row): row is EventListItem => row !== null);
+              ? start.time
+              : supplementedStart(row, row.next_date, start.distance, start.time),
+        })),
+        next_status: row.next_status as EntryStatus | null,
+        next_distance:
+          row.next_distance === "Marathon" && !distances.includes("Marathon")
+            ? (distances[0] ?? row.next_distance)
+            : row.next_distance,
+      } satisfies EventListItem;
+    })
+    .filter((row): row is EventListItem => row !== null);
 
-    return collapseSameNameDate(mapped)
-      .filter((row) => matchesDistanceFilter(row.name, row.distances, distance))
-      .filter((row) => matchesFormatFilter(row.name, format))
-      .filter((row) =>
-        matchesPostcodeQuery(postcode, {
+  return collapseSameNameDate(mapped)
+    .filter((row) => matchesDistanceFilter(row.name, row.distances, distance))
+    .filter((row) => matchesFormatFilter(row.name, format))
+    .filter((row) =>
+      matchesPostcodeQuery(postcode, {
+        slug: row.slug,
+        area: row.area,
+        city: row.city,
+      }),
+    )
+    .filter((row) =>
+      countryMatchesFilter(
+        resolveCountry({
           slug: row.slug,
-          area: row.area,
+          name: row.name,
+          country: row.country,
+          county: row.county,
           city: row.city,
+          area: row.area,
         }),
-      )
-      .filter((row) =>
-        countryMatchesFilter(
-          resolveCountry({
-            slug: row.slug,
-            name: row.name,
-            country: row.country,
-            county: row.county,
-            city: row.city,
-            area: row.area,
-          }),
-          country,
-        ),
-      )
-      .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.name))
-      .slice(0, limit);
+        country,
+      ),
+    )
+    .filter((row) => !searchLooksLikeMarathon(rawQ) || nameHasFullMarathon(row.name))
+    .slice(0, limit);
 }
-

@@ -26,7 +26,7 @@ const SPORTS: Sport[] = [
   "Walking",
 ];
 
-const STATUSES: EntryStatus[] = ["Open", "ClosingSoon", "Closed", "Finished", "TBC"];
+const STATUSES: EntryStatus[] = ["Open", "ClosingSoon", "Closed", "Finished", "Cancelled", "TBC"];
 
 const ENTRY_OPTION_TYPES: EntryOptionType[] = [
   "official",
@@ -106,6 +106,7 @@ function entryOptionStatusForEdition(raw: string | undefined): EntryOptionStatus
       return "closing_soon";
     case "Closed":
     case "Finished":
+    case "Cancelled":
       return "closed";
     default:
       return "unknown";

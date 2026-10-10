@@ -243,10 +243,10 @@ export const listEvents = createServerFn({ method: "GET" })
           event_date between '2026-09-10'::date and '2027-01-31'::date
           and distance_code in ('5K', '10K')
           and not (id = any(${excludedEditionIds}::int[]))
+        ))
           and (${dateFrom}::date is null or event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or event_date <= ${dateTo}::date)
           and (${distance}::text is null or distance_code = ${distance})
-        ))
       )
       select
         e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
@@ -275,27 +275,27 @@ export const listEvents = createServerFn({ method: "GET" })
         ) as groups_json,
         (
           select ed.event_date::text from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_date,
         (
           select ed.distance_code from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
           select ed.status from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_status,
         (
           select ed.start_time from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
           select count(*)::int from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) as upcoming_count,
         (
           select count(*)::int from scoped_editions ed
@@ -332,7 +332,7 @@ export const listEvents = createServerFn({ method: "GET" })
             where g.event_id = e.id and g.group_code = ${group}
           )
         )
-        and (${country}::text is null or e.country = ${country} or e.county = ${country} or (${shortRaces}::boolean and ${country} = 'United Kingdom' and e.country in ('England','Scotland','Wales','Northern Ireland')))
+        and (${country}::text is null or e.country = ${country} or e.county = ${country} or (${country} = 'United Kingdom' and e.country in ('England','Scotland','Wales','Northern Ireland')))
         and (
           ${county}::text is null
           or lower(coalesce(e.region, '')) like ${county}
@@ -354,7 +354,6 @@ export const listEvents = createServerFn({ method: "GET" })
         )
         and (
           ${dateFrom}::date is null and ${dateTo}::date is null
-          or e.sport = 'Parkrun'
           or exists (
             select 1 from scoped_editions ed
             where ed.event_id = e.id
@@ -364,20 +363,19 @@ export const listEvents = createServerFn({ method: "GET" })
         )
         and (
           ${upcomingOnly}::boolean is false
-          or e.sport = 'Parkrun'
           or exists (
             select 1 from scoped_editions ed
-            where ed.event_id = e.id and ed.event_date >= ${today}::date
+            where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           )
         )
       order by
         case when (
           select min(ed.event_date) from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) is null then 1 else 0 end,
         (
           select min(ed.event_date) from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) asc nulls last,
         e.name asc
       limit ${fetchLimit}
@@ -394,8 +392,6 @@ export const listEvents = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
     const mapped = rows
       .map((rawRow) => {
         const { groups_json, ...r } = rawRow;
@@ -403,35 +399,15 @@ export const listEvents = createServerFn({ method: "GET" })
           r.name,
           r.distances_csv ? r.distances_csv.split(",") : [],
         );
-        if (r.sport === "Parkrun" && (dateFrom || dateTo)) {
-          if (parkrunDates(r.name, dateFrom ?? today, dateTo ?? "2027-12-26").length === 0) {
-            return null;
-          }
-        }
-        const nextDate =
-          r.sport === "Parkrun"
-            ? nextParkrunDate(r.name, dateFrom && dateFrom > today ? dateFrom : today)
-            : r.next_date;
         return {
           ...r,
           distances: shortRaces ? distances.filter((d) => d === "5K" || d === "10K") : distances,
           groups: parseRaceGroups(groups_json),
-          next_date: nextDate,
-          upcoming_count:
-            r.sport === "Parkrun" ? remainingParkrunCount(r.name, today) : r.upcoming_count,
-          next_start_time:
-            r.sport === "Parkrun"
-              ? parkrunStartTime(r.country, /junior/i.test(r.name))
-              : r.next_start_time,
-          next_status: (r.next_status as EntryStatus) ?? (r.sport === "Parkrun" ? "Open" : null),
+          next_status: r.next_status as EntryStatus | null,
           next_distance:
-            r.sport === "Parkrun"
-              ? /junior/i.test(r.name)
-                ? "2K"
-                : "5K"
-              : r.next_distance === "Marathon" && !distances.includes("Marathon")
-                ? (distances[0] ?? r.next_distance)
-                : r.next_distance,
+            r.next_distance === "Marathon" && !distances.includes("Marathon")
+              ? (distances[0] ?? r.next_distance)
+              : r.next_distance,
         };
       })
       .filter((row): row is NonNullable<typeof row> => row !== null);
@@ -489,9 +465,6 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         }
       | undefined;
     if (!event) return null;
-
-    const { parkrunDates, parkrunDistance, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
 
     const distances = await sql<{ distance_code: string }>`
       select distance_code from event_distances where event_id = ${event.id}
@@ -640,53 +613,11 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       }),
     );
 
-    const storedUpcoming = editions.filter((e) => e.event_date >= today);
-    const storedDates = new Set(storedUpcoming.map((e) => e.event_date));
-    const generated =
-      event.sport === "Parkrun"
-        ? parkrunDates(event.name, today).map((event_date, index) => {
-            const dist = parkrunDistance(event.name);
-            return {
-              id: -1000 - index,
-              event_date,
-              distance_code: dist.code,
-              distance_km: dist.km,
-              status: "Open",
-              entry_url: event.website,
-              source_url: event.website,
-              results_official_url: null,
-              start_time: parkrunStartTime(event.country, /junior/i.test(event.name)),
-              notes: null,
-              result_count: 0,
-              result_links: [],
-              spectator_access: null,
-              entry_options: event.website
-                ? [
-                    {
-                      id: -1000 - index,
-                      provider_code: "official",
-                      provider_name: "Official parkrun page",
-                      entry_url: event.website,
-                      entry_type: "official" as const,
-                      status: "open" as const,
-                      price_amount: null,
-                      price_currency: null,
-                      opens_at: null,
-                      closes_at: null,
-                      checked_at: today,
-                      source_url: event.website,
-                      is_verified: true,
-                      is_primary: true,
-                    },
-                  ]
-                : [],
-            };
-          })
-        : [];
-    const upcoming = [
-      ...storedUpcoming,
-      ...generated.filter((row) => !storedDates.has(row.event_date)),
-    ].sort((a, b) => a.event_date.localeCompare(b.event_date));
+    // Stored editions include official holiday dates and cancellations. Never
+    // fabricate a missing weekly occurrence or replace its venue start time.
+    const upcoming = editions
+      .filter((edition) => edition.event_date >= today)
+      .sort((a, b) => a.event_date.localeCompare(b.event_date));
 
     const relatedRows = await sql<
       Omit<EventListItem, "groups"> & {
@@ -717,27 +648,27 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ) as groups_json,
         (
           select ed.event_date::text from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_date,
         (
           select ed.distance_code from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
           select ed.status from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_status,
         (
           select ed.start_time from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
           select count(*)::int from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) as upcoming_count,
         (
           select count(*)::int from editions ed
@@ -756,7 +687,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         case when lower(coalesce(e.city, '')) = lower(${event.city}) then 0 else 1 end,
         (
           select min(ed.event_date) from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) asc nulls last
       limit 8
     `;
@@ -1675,7 +1606,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             where g.event_id = e.id and g.group_code = ${group}
           )
         )
-        and (${country}::text is null or e.country = ${country} or e.county = ${country})
+        and (${country}::text is null or e.country = ${country} or e.county = ${country} or (${country} = 'United Kingdom' and e.country in ('England','Scotland','Wales','Northern Ireland')))
         and (
           ${county}::text is null
           or lower(coalesce(e.region, '')) like ${county}
@@ -1701,76 +1632,6 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       order by ed.event_date asc, e.name
       limit ${fetchLimit}
     `;
-    const { parkrunDates, parkrunDistance, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
-    const wantParkrun = !sport || sport === "Parkrun";
-    const generatedRows: typeof rows = [];
-    if (wantParkrun) {
-      const windowFrom = dateFrom && dateFrom > today ? dateFrom : today;
-      const windowTo = dateTo || (dateFrom ? "2027-12-26" : null);
-      const venues = await sql<{
-        id: number;
-        slug: string;
-        name: string;
-        sport: string;
-        city: string;
-        county: string;
-        country: string;
-        area: string;
-        surface: string;
-        website: string | null;
-      }>`
-        select e.id, e.slug, e.name, e.sport, e.city, e.county, e.country, e.area, e.surface, e.website
-        from events e
-        where e.sport = 'Parkrun'
-          and ${group}::text is null
-          and (${q}::text is null
-            or lower(e.name) like ${q}
-            or lower(e.city) like ${q}
-            or lower(e.county) like ${q}
-            or lower(e.country) like ${q}
-            or lower(e.area) like ${q})
-          and (${country}::text is null or e.country = ${country} or e.county = ${country})
-          and (
-            ${county}::text is null
-            or lower(coalesce(e.region, '')) like ${county}
-            or lower(e.county) like ${county}
-            or lower(e.city) like ${county}
-          )
-          and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city})
-          and (${surface}::text is null or e.surface = ${surface})
-        order by e.name
-        limit 400
-      `;
-      const seen = new Set(rows.map((row) => `${row.event_slug}|${row.event_date}`));
-      for (const venue of venues) {
-        const dates = parkrunDates(venue.name, windowFrom, windowTo ?? undefined);
-        const cap = windowTo ? dates : dates.slice(0, 4);
-        const dist = parkrunDistance(venue.name);
-        for (const eventDate of cap) {
-          const key = `${venue.slug}|${eventDate}`;
-          if (seen.has(key)) continue;
-          seen.add(key);
-          generatedRows.push({
-            id: -venue.id,
-            event_date: eventDate,
-            distance_code: dist.code,
-            status: "Open",
-            start_time: parkrunStartTime(venue.country, /junior/i.test(venue.name)),
-            event_slug: venue.slug,
-            event_name: venue.name,
-            sport: venue.sport,
-            city: venue.city,
-            county: venue.county,
-            country: venue.country,
-            area: venue.area,
-            surface: venue.surface,
-            groups_json: "[]",
-          });
-        }
-      }
-    }
-    const combined = [...rows, ...generatedRows];
     const { venueForEvent } = await import("@/lib/athrecs/venue");
     const { collapseSameEventDate } = await import("@/lib/athrecs/dedupe");
     const {
@@ -1783,7 +1644,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const cleaned = combined.map((row) => {
+    const cleaned = rows.map((row) => {
       const { groups_json, ...edition } = row;
       const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
       const distanceCode = labels[0] ?? row.distance_code;

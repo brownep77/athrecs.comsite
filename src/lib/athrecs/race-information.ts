@@ -43,7 +43,7 @@ export function editionEntry(edition: {
   entry_options: EditionEntryOption[];
 }) {
   const status = effectiveStatus(edition.event_date, edition.status as EntryStatus);
-  if (status === "Finished" || status === "Closed") return null;
+  if (status === "Finished" || status === "Closed" || status === "Cancelled") return null;
   const available = edition.entry_options.filter(
     (option) =>
       !["closed", "sold_out"].includes(option.status) &&

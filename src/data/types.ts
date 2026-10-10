@@ -89,7 +89,7 @@ export type Edition = {
   date: string;
   distance: string;
   distanceKm: number;
-  status: "Open" | "ClosingSoon" | "Closed" | "Finished" | "TBC";
+  status: "Open" | "ClosingSoon" | "Closed" | "Finished" | "Cancelled" | "TBC";
   entryUrl?: string;
   entryOptions?: EntryOptionSeed[];
   startTime?: string;
