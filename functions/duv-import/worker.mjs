@@ -4,7 +4,7 @@ import { PROVIDER,parseEvent,combinePages,sha,eventId } from './parser.mjs';
 import { eventDirectory,nameKey } from './identity.mjs';
 import { loadDirectory } from './directory-loader.mjs';
 import { profileVisibility } from './publication.mjs';
-import { markRollbackConfirmed,retryDeadlockedProfileChunk } from './deadlock-retry.mjs';
+import { markRollbackConfirmed,retryAbortedProfileChunk } from './deadlock-retry.mjs';
 const JOB='duv-2026-20261010';
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const json=x=>JSON.stringify(x);
@@ -204,7 +204,7 @@ export async function run(pool,{maxMs=245000,maxEvents=20}={}){
     const capture=await captureEvent(client,item,job,owner,deadline);
     if(capture===null)break;if(capture==='existing'){processed++;continue;}
     while(item.row_cursor<capture.rows.length&&Date.now()<deadline-12000){
-     await retryDeadlockedProfileChunk(()=>profileChunk(client,item,capture,job,owner,deadline),{deadline,onRetry:({retry,delayMs})=>console.warn('duv_profile_deadlock_retry',json({sourceKey:item.source_key,cursor:item.row_cursor,attempt:retry,delayMs}))});
+     await retryAbortedProfileChunk(()=>profileChunk(client,item,capture,job,owner,deadline),{deadline,onRetry:({error,retry,delayMs})=>console.warn('duv_profile_transaction_retry',json({sourceKey:item.source_key,cursor:item.row_cursor,sqlState:error.code,attempt:retry,delayMs}))});
     }
     if(capture.rows.length===0)await client.query(`UPDATE result_archive_import_queue SET status='imported',row_cursor=0,rows_total=0 WHERE job_id=$1 AND source_key=$2`,[JOB,item.source_key]);
     if(item.row_cursor<capture.rows.length)break;processed++;

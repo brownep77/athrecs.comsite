@@ -2,6 +2,10 @@ const confirmedRollbacks=new WeakSet();
 const reserveMs=12000;
 const backoffMs=[250,750];
 const defaultSleep=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+// 55P03 also covers NOWAIT failures. Only the server's explicit lock-timeout
+// message is eligible; other lock/identity/approval failures still stop work.
+const retryableAbort=error=>error?.code==='40P01'||
+ (error?.code==='55P03'&&error.message==='canceling statement due to lock timeout');
 
 // Call only after the transaction's awaited ROLLBACK has succeeded. A private
 // WeakSet prevents a database error's public properties from enabling retries.
@@ -10,7 +14,7 @@ export function markRollbackConfirmed(error){
  return error;
 }
 
-export async function retryDeadlockedProfileChunk(operation,{
+export async function retryAbortedProfileChunk(operation,{
  deadline,maxRetries=2,onRetry,sleep=defaultSleep,now=Date.now,
 }={}){
  if(!Number.isFinite(deadline))throw new TypeError('A finite worker deadline is required');
@@ -18,7 +22,7 @@ export async function retryDeadlockedProfileChunk(operation,{
  let retries=0;
  for(;;){
   try{return await operation();}catch(error){
-   if(error?.code!=='40P01'||!confirmedRollbacks.has(error)||retries>=maxRetries)throw error;
+   if(!retryableAbort(error)||!confirmedRollbacks.has(error)||retries>=maxRetries)throw error;
    const delayMs=backoffMs[retries];
    if(now()+delayMs>=deadline-reserveMs)throw error;
    const retry=retries+1;

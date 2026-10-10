@@ -199,15 +199,19 @@ checks their hashes and preserves capture timestamps. Deploy to production only
 after the import and repeat checks pass; then requeue those specific events for
 the normal worker. Never delete original documents to force a refetch.
 
-### Rolled-back database deadlocks
+### Rolled-back database contention
 
-PostgreSQL SQLSTATE `40P01` may abort a profile transaction when another approved
-import writes concurrently. Retry only a profile chunk whose `ROLLBACK` has
+PostgreSQL SQLSTATE `40P01` or `55P03` with the exact server message
+`canceling statement due to lock timeout` may abort a profile transaction when
+another approved import writes concurrently. Retry only a profile chunk whose `ROLLBACK` has
 explicitly completed. The directory cache is cleared, then identity screening,
 revision locking, approval and privacy checks run again from the unchanged
 capture and cursor. Allow at most two retries with short backoff and a deadline
 guard. All other errors, uncertain rollback, and exhausted retries still block
-the job. Do not retry provider denials or relax the identity clock and triggers.
+the job. Other `55P03` errors (including NOWAIT), changed/localized messages and
+unconfirmed rollbacks remain blocked. Do not retry provider denials or relax
+the identity clock, eight-second lock timeout, lease checks or triggers.
+The retry log records only source key, row cursor, SQLSTATE, attempt and delay.
 
 ### Large athlete directories
 
