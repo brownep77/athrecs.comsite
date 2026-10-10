@@ -1519,19 +1519,23 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
   );
   if (!targetEditions.length) return;
 
-  const params: unknown[] = [];
-  const values = targetEditions.map((edition) => {
-    const key = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
-    const valuesForRow = [eventIds.get(edition.seriesSlug), edition.date, edition.distance, key];
-    const placeholders = valuesForRow.map((value, index) => {
-      params.push(value);
-      const position = params.length;
-      return `$${position}${index === 0 ? "::int" : index === 1 ? "::date" : "::text"}`;
+  const editionIds = new Map<string, number>();
+  // Four parameters per edition must stay below PostgreSQL's bind limit as
+  // reviewed weekly fixtures grow. Keep each lookup bounded as well as inserts.
+  for (const batch of chunks(targetEditions, 1_000)) {
+    const params: unknown[] = [];
+    const values = batch.map((edition) => {
+      const key = `${edition.seriesSlug}|${edition.date}|${edition.distance}`;
+      const valuesForRow = [eventIds.get(edition.seriesSlug), edition.date, edition.distance, key];
+      const placeholders = valuesForRow.map((value, index) => {
+        params.push(value);
+        const position = params.length;
+        return `$${position}${index === 0 ? "::int" : index === 1 ? "::date" : "::text"}`;
+      });
+      return `(${placeholders.join(", ")})`;
     });
-    return `(${placeholders.join(", ")})`;
-  });
-  const editionRows = await sql.query<{ id: number; edition_key: string }>(
-    `select ed.id, target.edition_key
+    const editionRows = await sql.query<{ id: number; edition_key: string }>(
+      `select ed.id, target.edition_key
      from (values ${values.join(", ")}) as target (
        event_id, event_date, distance_code, edition_key
      )
@@ -1539,9 +1543,10 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
        on ed.event_id = target.event_id
       and ed.event_date = target.event_date
       and ed.distance_code = target.distance_code`,
-    params,
-  );
-  const editionIds = new Map(editionRows.map((row) => [row.edition_key, row.id]));
+      params,
+    );
+    for (const row of editionRows) editionIds.set(row.edition_key, row.id);
+  }
 
   const explicitOptionsWithoutOfficialIds = targetEditions
     .filter(
@@ -1551,8 +1556,8 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
     )
     .map((edition) => editionIds.get(`${edition.seriesSlug}|${edition.date}|${edition.distance}`))
     .filter((editionId): editionId is number => editionId != null);
-  if (explicitOptionsWithoutOfficialIds.length) {
-    const placeholders = explicitOptionsWithoutOfficialIds
+  for (const batch of chunks(explicitOptionsWithoutOfficialIds, 1_000)) {
+    const placeholders = batch
       .map((_, index) => `$${index + 1}`)
       .join(", ");
     await sql.query(
@@ -1560,7 +1565,7 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
        where edition_id in (${placeholders})
          and provider_code = 'official'
          and not is_verified`,
-      explicitOptionsWithoutOfficialIds,
+      batch,
     );
   }
 
@@ -1620,12 +1625,12 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
     .filter((row) => row[13])
     .map((row) => [row[0] as number, row[1] as string] as const);
   const primaryEditionIds = [...new Set(primaryRows.map((row) => row[0]))];
-  if (primaryEditionIds.length) {
-    const placeholders = primaryEditionIds.map((_, index) => `$${index + 1}`).join(", ");
+  for (const batch of chunks(primaryEditionIds, 1_000)) {
+    const placeholders = batch.map((_, index) => `$${index + 1}`).join(", ");
     await sql.query(
       `update edition_entry_options set is_primary = false, updated_at = now()
        where edition_id in (${placeholders}) and is_primary`,
-      primaryEditionIds,
+      batch,
     );
   }
   const nonPrimaryRows = rows.map((row) => [...row.slice(0, 13), false, row[14]]);
@@ -1667,9 +1672,9 @@ async function upsertCatalogueEntryOptions(sql: Sql, eventIds: Map<string, numbe
       updated_at = now()`,
     75,
   );
-  if (primaryRows.length) {
+  for (const batch of chunks(primaryRows, 1_000)) {
     const params: unknown[] = [];
-    const values = primaryRows.map(([editionId, providerCode]) => {
+    const values = batch.map(([editionId, providerCode]) => {
       params.push(editionId, providerCode);
       return `($${params.length - 1}::int, $${params.length}::text)`;
     });

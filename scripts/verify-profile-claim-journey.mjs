@@ -32,6 +32,10 @@ try {
   const db = await server.ssrLoadModule("/src/lib/db.ts");
   database = await db.getPglite();
   const sql = await db.getSql();
+  // Complete disposable catalogue setup before timing the account navigation.
+  // This matches the other account browser fixtures and keeps seed failures
+  // explicit instead of surfacing as a first-page browser timeout.
+  await (await server.ssrLoadModule("/src/lib/athrecs/seed.server.ts")).ensureAthrecsSeeded();
   browser = await chromium.launch({
     executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],

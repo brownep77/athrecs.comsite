@@ -57,6 +57,12 @@ import { runabcEditions, runabcSeries } from "./runabc";
 import { ironman703Editions, ironman703Series } from "./ironman-703-calendar";
 import { multiSportEditions, multiSportSeries } from "./multisport";
 import { parkrunSeries } from "./parkrun-uk";
+import {
+  reviewedParkrunSeries,
+  reviewedParkrunSeriesOverrides,
+  reviewedParkrunEditions,
+  reviewParkrunEdition,
+} from "./parkrun-fixtures-reviewed";
 import { worldAthleticsEditions, worldAthleticsSeries } from "./world-athletics";
 import { worldTriathlonEditions, worldTriathlonSeries } from "./world-triathlon";
 import { mrdMarathonEditions, mrdMarathonSeries } from "./mrd-marathons";
@@ -422,6 +428,7 @@ for (const series of [
   ...(ironman703Series as Series[]),
   ...(multiSportSeries as Series[]),
   ...(parkrunSeries as Series[]),
+  ...reviewedParkrunSeries,
   ...(worldAthleticsSeries as Series[]),
   ...(worldTriathlonSeries as Series[]),
   ...(mrdMarathonSeries as Series[]),
@@ -447,6 +454,7 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
   ...seriesOverrides[series.slug],
   ...aimsEuropeSeriesOverrides[series.slug],
   ...dailyHalfTenMileSeriesOverrides[series.slug],
+  ...reviewedParkrunSeriesOverrides[series.slug],
 }));
 
 const mergedEditions = [
@@ -568,6 +576,7 @@ const mergedEditions = [
   ...(comradesEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(twoOceansEditions as Edition[]).filter((edition) => extraSlugs.has(edition.seriesSlug)),
   ...(publicFigureEditions as Edition[]),
+  ...reviewedParkrunEditions,
 ];
 
 const retainedResultEditionKeys = new Set(
@@ -623,7 +632,7 @@ export const editions: Edition[] = (() => {
     pushEdition(edition);
   }
 
-  return unique;
+  return unique.map(reviewParkrunEdition);
 })();
 
 export { raceGroupDefinitions, raceGroupMemberships };

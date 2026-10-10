@@ -72,7 +72,7 @@
     "verify:catalogue-publishing": "node --experimental-strip-types scripts/verify-catalogue-publishing.mjs",
     "verify:multisport-taxonomy": "node scripts/verify-multisport-taxonomy.mjs",
     "verify:sportsrecs-network": "node scripts/verify-sportsrecs-network-foundation.mjs",
-    "verify:runrecs-race-information": "node scripts/verify-runrecs-race-information.mjs",
+    "verify:runrecs-race-information": "node scripts/verify-runrecs-race-information.mjs && node scripts/verify-parkrun-fixture-seed.mjs",
     "verify:runrecs-calendar-controls": "node scripts/verify-runrecs-calendar-controls.mjs",
     "verify:runrecs-editorial-home": "node scripts/verify-runrecs-editorial-home.mjs",
     "verify:ironman-703-calendar": "node --experimental-strip-types scripts/verify-ironman-703-calendar.mjs",
