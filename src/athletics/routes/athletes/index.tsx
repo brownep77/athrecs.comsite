@@ -1,5 +1,3 @@
-import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
-import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import type { FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Search, UserRound } from "lucide-react";
@@ -14,15 +12,15 @@ import {
 export const Route = createFileRoute("/athletes/")({
   validateSearch: parseAthleteDirectorySearch,
   loaderDeps: ({ search }) => search,
-  loader: async ({ deps }) =>
-    (await canViewAthleteProfiles()) ? getAthleteDirectory({ data: deps }) : null,
+  loader: ({ deps }) => getAthleteDirectory({ data: deps }),
+  headers: () => ({ "Cache-Control": "no-store" }),
   head: () => ({
     meta: [
       { title: "Explore athlete profiles | ATHRECS" },
       { name: "robots", content: "noindex, nofollow, noarchive" },
       {
         name: "description",
-        content: "Sign in to explore athlete profiles and published results.",
+        content: "Explore public athlete profiles and published results.",
       },
     ],
   }),
@@ -30,19 +28,11 @@ export const Route = createFileRoute("/athletes/")({
 });
 
 function AthleteDirectoryPage() {
-  const directory = Route.useLoaderData() as unknown as AthleteDirectory | null;
-  return (
-    <ProfileViewer authenticated={directory !== null} returnTo="/athletes">
-      {directory ? (
-        <MemberDirectory directory={directory} />
-      ) : (
-        <ProfileSignIn returnTo="/athletes" />
-      )}
-    </ProfileViewer>
-  );
+  const directory = Route.useLoaderData() as unknown as AthleteDirectory;
+  return <PublicDirectory directory={directory} />;
 }
 
-function MemberDirectory({ directory }: { directory: AthleteDirectory }) {
+function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
   const search = Route.useSearch();
   const navigate = useNavigate();
   const pending = useRouterState({ select: (s) => s.isLoading });

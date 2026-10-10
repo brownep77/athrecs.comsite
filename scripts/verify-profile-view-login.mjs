@@ -78,7 +78,9 @@ try {
     await assert.rejects(() => rpc(file, name, data, "invalid-token"), /Unauthorized/);
   }
   console.log("Anonymous and invalid-token RPCs denied.");
-  for (const path of ["/athletes", "/athletes/view-login-fixture", "/athletes/ATH-000001"]) {
+  // The public discovery directory is covered by verify-public-source-profiles.
+  // Profiles without explicit publication still require a member session.
+  for (const path of ["/athletes/view-login-fixture", "/athletes/ATH-000001"]) {
     const response = await fetch(origin + path);
     const html = await response.text();
     assert.equal(response.status, 200);
@@ -122,7 +124,7 @@ try {
       false,
       "Blocked session probes must not inspect or disclose the signed-in session",
     );
-    for (const path of ["/athletes", "/athletes/view-login-fixture"]) {
+    for (const path of ["/athletes/view-login-fixture"]) {
       const response = await fetch(origin + path, { headers: readerHeaders });
       const html = await response.text();
       assert.equal(response.status, 200);
