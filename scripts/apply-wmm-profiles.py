@@ -4,7 +4,7 @@ Requires --review for rehearsal or --publish for the owner-authorized production
 publication. No existing athlete, result, source history, account or claim is
 updated. Replays skip stable WMM athlete IDs. Source observations are archived.
 """
-import argparse, collections, gzip, hashlib, importlib.util, json, pathlib, time, uuid
+import argparse, collections, gzip, hashlib, importlib.util, json, pathlib, random, time, uuid
 ROOT=pathlib.Path(__file__).resolve().parent
 def load(name,file):
     s=importlib.util.spec_from_file_location(name,ROOT/file);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
@@ -175,7 +175,10 @@ def apply(args):
                   (VERIFY,[data,PROVIDER,BATCH])]
                 try:r=query(queries)
                 except RuntimeError as e:
-                    if ('wmm_guard' in str(e) or 'lock timeout' in str(e)) and attempt<5:time.sleep(1);continue
+                    # These errors abort the entire transaction. Refresh the
+                    # directory and re-run all guards before retrying the batch.
+                    if any(reason in str(e) for reason in ['wmm_guard','lock timeout','SQLSTATE 40P01','SQLSTATE 40001']) and attempt<5:
+                        time.sleep(min(attempt+1,5)+random.random());continue
                     raise
                 receipt=r[-3][0]
                 if receipt['profiles']!=len(batch) or receipt['histories']!=len(batch) or receipt['audits']!=len(batch):raise ValueError('Unexpected replay/concurrency receipt; inspect before continuation')
