@@ -171,7 +171,7 @@ def apply(args):
     directory=LiveDirectory(query,allowed,args.receipt.with_name('.utmb-directory-'+cfg['branchId']+'.json'));counts=collections.Counter();held=[];examples=[]
     histories=[]
     for start in range(0,len(people),10):
-        histories.extend(query([("SELECT h.*,a.slug,a.display_name,a.gender,a.nation,a.profile_details,a.profile_visibility FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id WHERE lower(h.provider)=$1 AND h.external_id=ANY($2::text[])",[PROVIDER,[p['externalId'] for p in people[start:start+10]]])],True)[0])
+        histories.extend(query([("SELECT h.athlete_id,h.provider,h.external_id,h.performances,h.published_at,a.slug,a.display_name,a.gender,a.nation,a.profile_details,a.profile_visibility FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id WHERE lower(h.provider)=$1 AND h.external_id IN(SELECT jsonb_array_elements_text($2::jsonb))",[PROVIDER,json.dumps([p['externalId'] for p in people[start:start+10]])])],True)[0])
     byid=collections.defaultdict(list)
     for h in histories:byid[h['external_id']].append(h)
     for i in range(0,len(people),25):
