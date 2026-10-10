@@ -24,8 +24,9 @@ export function ProfileDetails({
       .filter((coach) => coach.name && coach.name !== details.coach)
       .map((coach) => [`${coach.sport} coach`, coach.name]),
     ["Manager", details.manager],
-    ["Contact", details.acceptContact ? "Open to contact" : "Not accepting contact"],
+    ["Contact", details.acceptContact ? "Open to contact" : ""],
   ].filter((row) => row[1]);
+  if (!rows.length && !nationality && !details.nationality) return null;
   return (
     <dl className="grid grid-cols-2 gap-x-4 gap-y-3 border-t border-border pt-2 text-sm sm:flex sm:flex-wrap sm:gap-x-6">
       {nationality || details.nationality ? (

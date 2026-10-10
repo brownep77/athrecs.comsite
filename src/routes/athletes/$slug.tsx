@@ -11,12 +11,9 @@ import {
   EditorialAthleteOverview,
   EditorialRoadSplits,
 } from "@/components/athletes/EditorialAthleteOverview";
-import {
-  additionalHistoryResults,
-  sourceHistorySports,
-} from "@/lib/athrecs/profile-history-results";
+import { sourceHistorySports } from "@/lib/athrecs/profile-history-results";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
-import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
+import { buildProfileTimeline } from "@/lib/athrecs/profile-timeline";
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
@@ -251,14 +248,9 @@ function AthleteContent() {
     return <PrivateAthleteProfile athlete={data.athlete} />;
   }
 
-  const { athlete, results, profileResults, upcoming, sourceHistories } = data;
-  const historyResults = additionalHistoryResults(sourceHistories);
-  const otherHistories = sourceHistories
-    .map((history) => ({
-      ...history,
-      performances: history.performances.filter((row) => row.verificationStatus === undefined),
-    }))
-    .filter((history) => history.performances.length > 0);
+  const { athlete, profileResults, upcoming, sourceHistories } = data;
+  const timeline = buildProfileTimeline(profileResults, sourceHistories);
+  const historyResults = timeline.history;
   const profileSports = [
     ...new Set([
       ...profileResults.map((r) => r.sport),
@@ -266,14 +258,9 @@ function AthleteContent() {
       ...upcoming.map((r) => r.sport),
     ]),
   ];
-  const historicalPerformanceCount = sourceHistories.reduce(
-    (total, history) => total + history.performances.length,
-    0,
-  );
   const reportedHistory = getReportedRaceHistory(athlete.slug);
   const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
-  const performanceCount =
-    results.length + (includedHistory?.records.length ?? 0) + historicalPerformanceCount;
+  const performanceCount = timeline.count + (includedHistory?.records.length ?? 0);
   const aliases = athlete.aliases ?? [];
   const career = getEditorialAthleteCareer(athlete.slug);
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
@@ -313,7 +300,7 @@ function AthleteContent() {
   if (athlete.notes) detailRows.push({ label: "Notes", value: athlete.notes });
 
   return (
-    <div className="public-athlete-profile space-y-3">
+    <div className="public-athlete-profile space-y-6">
       <Link
         to="/athletes"
         className="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-muted no-underline hover:text-fg"
@@ -322,7 +309,10 @@ function AthleteContent() {
         Athletes
       </Link>
 
-      <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
+      <section
+        id="profile-overview"
+        className="profile-overview space-y-4 rounded-xl border border-border bg-surface p-5 sm:p-6"
+      >
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">
           {isProfessionalAthlete
             ? "Professional athlete profile"
@@ -330,7 +320,9 @@ function AthleteContent() {
               ? "Public figure athlete profile"
               : "Athlete profile"}
         </p>
-        <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
+        <h1 className="font-display text-3xl font-semibold text-fg sm:text-4xl">
+          {athlete.display_name}
+        </h1>
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
           <span className="text-xs text-muted">
@@ -356,21 +348,15 @@ function AthleteContent() {
               {athlete.club}
             </Link>
           </p>
-        ) : (
-          <p className="text-sm text-muted">Unattached</p>
-        )}
+        ) : athlete.club ? (
+          <p className="text-sm text-muted">{athlete.club}</p>
+        ) : null}
         <p className="flex flex-wrap items-center gap-1.5 text-xs text-subtle">
           <MapPin className="h-3.5 w-3.5" />
           {locationLabel}
           {locationCountry ? <CountryFlag country={locationCountry} showName /> : null}
         </p>
-        {!isPublicFigure ? (
-          <ProfileDetails
-            details={athlete.details}
-            nationality={athlete.nationality ?? undefined}
-            nationalitySource={athlete.nationality_source}
-          />
-        ) : null}
+
         <div className="flex flex-wrap gap-2">
           {athlete.is_claimed ? (
             <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
@@ -386,16 +372,7 @@ function AthleteContent() {
           <Badge variant="outline">
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
-          <Badge variant="accent">
-            {performanceCount}{" "}
-            {historicalPerformanceCount
-              ? performanceCount === 1
-                ? "performance"
-                : "performances"
-              : includedHistory
-                ? "race and stage entries"
-                : "results"}
-          </Badge>
+          <Badge variant="outline">{performanceCount} recorded performances</Badge>
           {athlete.profile_roles
             ?.filter(
               (role: string) =>
@@ -443,19 +420,22 @@ function AthleteContent() {
             Independent ATHRECS profile. Not athlete-claimed; no endorsement is implied.
           </p>
         ) : null}
-        <ShareProfileButton
-          path={`/athletes/${athlete.slug}`}
-          title={`${athlete.display_name} athlete profile`}
-          compact
-        />
-        {!athlete.is_claimed && athlete.athlete_number ? (
-          <a
-            href={`https://update.athrecs.com/admin/athletes/${formatAthleteId(athlete.athlete_number)}?invite=1`}
-            className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent"
-          >
-            Invite to claim <span className="ml-2 text-xs text-muted">Staff sign-in required</span>
-          </a>
-        ) : null}
+        <div className="flex flex-wrap items-center gap-3 border-t border-border pt-4">
+          <ShareProfileButton
+            path={`/athletes/${athlete.slug}`}
+            title={`${athlete.display_name} athlete profile`}
+            compact
+          />
+          {!athlete.is_claimed ? (
+            <Link
+              to="/claim-results"
+              search={{ resultId: profileResults[0]?.resultId }}
+              className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 text-sm font-medium text-accent"
+            >
+              Is this you? Claim profile
+            </Link>
+          ) : null}
+        </div>
         {aliases.length > 0 && (
           <div className="space-y-1.5 border-t border-border pt-3">
             <p className="text-xs font-medium uppercase tracking-wider text-subtle">
@@ -472,56 +452,68 @@ function AthleteContent() {
         )}
       </section>
 
-      <AthleteCareerHighlights slug={athlete.slug} />
+      <nav
+        aria-label="Profile sections"
+        className="profile-section-nav flex flex-wrap gap-1 border-b border-border pb-2"
+      >
+        <a href="#profile-overview">Overview</a>
+        <a href="#profile-achievements">Achievements</a>
+        <a href="#results-history">Results</a>
+        <a href="#profile-about">About & links</a>
+      </nav>
+      <section id="profile-achievements" className="scroll-mt-24 space-y-5">
+        <AthleteCareerHighlights slug={athlete.slug} />
 
-      {(!career || profileResults.length > 0 || includedHistory) &&
-        (!isPublicFigure ||
-          profileResults.length > 0 ||
-          sourceHistories.length > 0 ||
-          includedHistory) && (
-          <ProfileRecordHighlights
-            results={profileResults}
-            reportedBests={includedHistory?.personalBests}
-            sourceHistories={sourceHistories}
-            sourceGender={athlete.gender}
-          />
-        )}
-
-      <section id="results-history" className="space-y-3">
+        {(!career || profileResults.length > 0 || includedHistory) &&
+          (!isPublicFigure ||
+            profileResults.length > 0 ||
+            sourceHistories.length > 0 ||
+            includedHistory) && (
+            <ProfileRecordHighlights
+              compact
+              results={profileResults}
+              reportedBests={includedHistory?.personalBests}
+              sourceHistories={sourceHistories}
+              sourceGender={athlete.gender}
+            />
+          )}
+      </section>
+      <section
+        id="results-history"
+        className="scroll-mt-24 space-y-3 rounded-xl border border-border bg-surface p-4 sm:p-5"
+      >
         <CompactResults
-          results={profileResults}
+          results={timeline.results}
           historyResults={historyResults}
           reportedHistory={includedHistory}
-          claimable
         />
-        {otherHistories.length ? (
-          <details
-            id="performance-history"
-            className="rounded-lg border border-border bg-surface p-3"
-            open
-          >
-            <summary className="cursor-pointer text-sm font-semibold">Performance history</summary>
-            <div className="mt-3">
-              <SourcePerformanceHistory histories={otherHistories} />
-            </div>
-          </details>
-        ) : null}
         <UnverifiedRaceHistory slug={athlete.slug} />
       </section>
-      <details className="rounded-lg border border-border bg-surface p-3">
-        <summary className="cursor-pointer text-sm font-semibold">
-          Upcoming ({upcoming.length})
-        </summary>
-        <div className="mt-3">
-          <UpcomingTable events={upcoming} />
-        </div>
-      </details>
-      <SuggestProfileEdit slug={athlete.slug} />
-      <details className="rounded-lg border border-border bg-surface p-3">
+      {upcoming.length > 0 ? (
+        <details className="rounded-lg border border-border bg-surface p-4">
+          <summary className="cursor-pointer text-sm font-semibold">
+            Upcoming ({upcoming.length})
+          </summary>
+          <div className="mt-3">
+            <UpcomingTable events={upcoming} />
+          </div>
+        </details>
+      ) : null}
+      <details
+        id="profile-about"
+        className="scroll-mt-24 rounded-xl border border-border bg-surface p-4 sm:p-5"
+      >
         <summary className="cursor-pointer text-sm font-semibold">
           More about {athlete.display_name}
         </summary>
-        <div className="mt-3 space-y-3">
+        <div className="mt-4 space-y-4">
+          {!isPublicFigure ? (
+            <ProfileDetails
+              details={athlete.details}
+              nationality={athlete.nationality ?? undefined}
+              nationalitySource={athlete.nationality_source}
+            />
+          ) : null}
           <EditorialAthleteOverview slug={athlete.slug} />
           <EditorialRoadSplits slug={athlete.slug} />
           <AthleteMediaCoverage slug={athlete.slug} />
@@ -597,6 +589,15 @@ function AthleteContent() {
             </section>
           )}
         </div>
+        <SuggestProfileEdit slug={athlete.slug} />
+        {!athlete.is_claimed && athlete.athlete_number ? (
+          <a
+            href={`https://update.athrecs.com/admin/athletes/${formatAthleteId(athlete.athlete_number)}?invite=1`}
+            className="mt-3 inline-flex min-h-11 items-center text-sm text-muted underline"
+          >
+            Staff: invite to claim
+          </a>
+        ) : null}
       </details>
     </div>
   );

@@ -12,8 +12,8 @@ function historySport(discipline: string): HistoryResult["sport"] {
   // Explicit multisport labels take priority over distances within a race leg.
   if (/\btriathlon\b/i.test(discipline)) return "Triathlon";
   if (/\bduathlon\b/i.test(discipline)) return "Duathlon";
-  return /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*k(?:m)?|\d+(?:\.\d+)?\s*(?:mi|mile|miles))$/i.test(
-    discipline.trim(),
+  return /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*(?:k(?:m)?|kilometres|kilometers)|\d+(?:\.\d+)?\s*(?:mi|mile|miles))(?: road)?$/i.test(
+    discipline.trim().replace(/\s*\(short course\)$/i, ""),
   )
     ? "Running"
     : "Athletics";
@@ -39,6 +39,8 @@ export function historyResultAnchor(key: string): string {
 /** Use supplied geography, never the athlete's nationality or a guessed city match. */
 export function historyResultCountry(row: SourcePerformance): string {
   if (row.country) return countryFlag(row.country).name;
+  const direct = countryFlag(row.venue);
+  if (direct.code) return direct.name;
   const suffix = row.venue.includes(",") ? row.venue.split(",").at(-1)?.trim() : "";
   const flag = countryFlag(suffix);
   return flag.code ? flag.name : "";

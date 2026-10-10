@@ -1,5 +1,6 @@
 import { getBritishMarathonCareer } from "./british-marathon-careers";
 import { getSanSebastian2026Career } from "./san-sebastian-2026-careers";
+import { paulEvansCareer } from "./paul-evans-career";
 
 // Public editorial content checked on 28 September 2026. These highlights do
 // not create result rows, personal bests, rankings or automatic medal totals.
@@ -237,6 +238,7 @@ export const freddyRichardsonCareer = {
 } as const;
 
 export function getEditorialAthleteCareer(slug: string) {
+  if (slug === paulEvansCareer.slug) return paulEvansCareer;
   return slug === freddyRichardsonCareer.slug
     ? freddyRichardsonCareer
     : (getBritishMarathonCareer(slug) ?? getSanSebastian2026Career(slug));

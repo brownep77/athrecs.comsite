@@ -359,7 +359,7 @@ try {
     assert.equal($("#performance-history").length, 0, "No separate section for additions");
     assert.equal($("#results-history tbody tr").length, 11);
     assert.equal($("#results-history tr[data-history-result]").length, 10);
-    assert($("#results-history h2").text().includes("Results history 11"));
+    assert($("#results-history h2").text().includes("Results 11"));
     assert($("#results-history tbody tr").first().text().includes("Synthetic city marathon"));
     assert($("#results-history tbody tr").eq(1).text().includes("Synthetic spring marathon"));
     assert($("#results-history").text().includes("19:34(19:38)"));
@@ -367,7 +367,8 @@ try {
     assert($("#results-history").text().includes("2290 pts"));
     assert($("#results-history").text().includes("Wind 2.1 m/s"));
     assert($("#results-history").text().includes("29 Jan · 2011 / 2012"));
-    assert.equal($("#results-history a[href^='https://example.test']").length, 0);
+    assert.equal($("#results-history .result-evidence a[href^='https://example.test']").length, 11);
+    assert.equal($("#results-history .result-evidence[open]").length, 0, "Source details start collapsed");
     assert.equal(
       $("#results-history tr[data-history-result] [aria-label='Personal best']").length,
       0,
@@ -378,7 +379,7 @@ try {
         .map((e) => $(e).text()),
       ["All sports", "Athletics", "Running"],
     );
-    assert($.text().includes("11 performances"));
+    assert($.text().includes("11 recorded performances"));
   }
   // Verification changes the label, not the record, its original precision or owner controls.
   const confirmedPerformances = performances.map((row, index) => ({
@@ -421,7 +422,8 @@ try {
   assert(confirmed("[aria-label='Achievements board']").text().includes("2Marathons"));
   assert(confirmed("[aria-label='Achievements board']").text().includes("Completed performances"));
   assert(confirmed("#results-history").text().includes("29 Jan · 2011 / 2012"));
-  assert.equal(confirmed("#results-history a[href^='https://example.test']").length, 0);
+  assert.equal(confirmed("#results-history .result-evidence a[href^='https://example.test']").length, 11);
+  assert.equal(confirmed("#results-history .result-evidence[open]").length, 0);
   assert.equal(
     confirmed("#results-history tr[data-history-result] [aria-label='Personal best']").length,
     0,
@@ -453,7 +455,8 @@ try {
         assert(!(await history.innerText()).includes("Unverified"));
         await page.getByText("Show all 11 results", { exact: true }).click();
         assert.equal(await history.locator("tbody tr:visible").count(), 11);
-        assert.equal(await history.locator("a[href^='https://example.test']").count(), 0);
+        assert.equal(await history.locator(".result-evidence a[href^='https://example.test']").count(), 11);
+        assert.equal(await history.locator(".result-evidence[open]").count(), 0);
         await page.getByRole("combobox", { name: "Sport", exact: true }).selectOption("Athletics");
         assert.equal(await history.locator("tbody tr").count(), 8);
         assert((await history.innerText()).includes("4.64 m"));
@@ -481,7 +484,7 @@ try {
         await context.close();
       }
       console.log(
-        "PASS: signed-out desktop and mobile browsers show one results history, working sport/year/search filters, all rows and no public source links.",
+        "PASS: signed-out desktop and mobile browsers show one results history, working sport/year/search filters, all rows and collapsed source details.",
       );
     } finally {
       await browser.close();

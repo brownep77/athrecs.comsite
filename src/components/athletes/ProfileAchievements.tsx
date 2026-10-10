@@ -369,12 +369,14 @@ export function ProfileRecordHighlights({
   sourceHistories = NO_SOURCE_HISTORIES,
   sourceGender = "",
   showEvidence = false,
+  compact = false,
 }: {
   results: ProfileResult[];
   reportedBests?: readonly ReportedPersonalBest[];
   sourceHistories?: readonly SourceHistory[];
   sourceGender?: string;
   showEvidence?: boolean;
+  compact?: boolean;
 }) {
   return (
     <div className="space-y-4">
@@ -384,12 +386,29 @@ export function ProfileRecordHighlights({
         showEvidence={showEvidence}
       />
       {results.length > 0 || sourceHistories.length > 0 || !reportedBests.length ? (
-        <AchievementsBoard
-          results={results}
-          sourceHistories={sourceHistories}
-          sourceGender={sourceGender}
-          showEvidence={showEvidence}
-        />
+        compact ? (
+          <details className="rounded-xl border border-border bg-surface p-4">
+            <summary className="cursor-pointer text-sm font-semibold">
+              Achievements & milestones
+            </summary>
+            <p className="my-3 text-xs text-muted">
+              Based on the eligible results linked to this profile.
+            </p>
+            <AchievementsBoard
+              results={results}
+              sourceHistories={sourceHistories}
+              sourceGender={sourceGender}
+              showEvidence={showEvidence}
+            />
+          </details>
+        ) : (
+          <AchievementsBoard
+            results={results}
+            sourceHistories={sourceHistories}
+            sourceGender={sourceGender}
+            showEvidence={showEvidence}
+          />
+        )
       ) : null}
     </div>
   );
