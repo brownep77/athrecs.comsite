@@ -172,7 +172,8 @@ English detail suffix `stages` only when distance and stage count match exactly.
 Both original values and the comparison method remain in the capture audit.
 Missing distances, conflicting dates and inconsistent finisher counts stay held.
 
-The Italian detail ordinal suffix `a` (for example `9a`) follows the same exact
+The Italian detail ordinal suffix `a` (for example `9a`) and French `ème`
+(for example `2ème`) follow the same exact
 remaining-title comparison. A complete unpaginated table can also contain explicit
 `X` category rows outside DUV's displayed male/female subtotal. Accept that format
 only when index and metadata totals agree, every male and female subtotal matches,
@@ -188,6 +189,16 @@ supported events. The worker reparses held documents from their original bytes,
 checks their hashes and preserves capture timestamps. Deploy to production only
 after the import and repeat checks pass; then requeue those specific events for
 the normal worker. Never delete original documents to force a refetch.
+
+### Rolled-back database deadlocks
+
+PostgreSQL SQLSTATE `40P01` may abort a profile transaction when another approved
+import writes concurrently. Retry only a profile chunk whose `ROLLBACK` has
+explicitly completed. The directory cache is cleared, then identity screening,
+revision locking, approval and privacy checks run again from the unchanged
+capture and cursor. Allow at most two retries with short backoff and a deadline
+guard. All other errors, uncertain rollback, and exhausted retries still block
+the job. Do not retry provider denials or relax the identity clock and triggers.
 
 The operational secret and connection files belong outside Git. Build with
 `npm ci --prefix functions/duv-import` followed by `npm --prefix functions/duv-import

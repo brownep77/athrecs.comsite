@@ -3,6 +3,7 @@ import { randomUUID } from 'node:crypto';
 import { PROVIDER,parseEvent,combinePages,sha,eventId } from './parser.mjs';
 import { Directory,eventDirectory,nameKey } from './identity.mjs';
 import { profileVisibility } from './publication.mjs';
+import { markRollbackConfirmed,retryDeadlockedProfileChunk } from './deadlock-retry.mjs';
 const JOB='duv-2026-20261010';
 const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 const json=x=>JSON.stringify(x);
@@ -173,7 +174,7 @@ async function profileChunk(client,item,capture,job,owner){
   const newVersion=(await client.query('SELECT version::text FROM result_archive_identity_clock WHERE singleton')).rows[0].version;
   await client.query('COMMIT');
   for(const a of created)dir.addAthlete(a);dir.version=newVersion;item.row_cursor=cursor;item.status=done?'imported':'processing';return true;
- }catch(e){await client.query('ROLLBACK');cache=null;throw e;}
+ }catch(e){cache=null;await client.query('ROLLBACK');markRollbackConfirmed(e);throw e;}
 }
 export async function status(pool){
  const c=await pool.connect();try{
@@ -204,7 +205,9 @@ export async function run(pool,{maxMs=245000,maxEvents=20}={}){
    try{
     const capture=await captureEvent(client,item,job,owner,deadline);
     if(capture===null)break;if(capture==='existing'){processed++;continue;}
-    while(item.row_cursor<capture.rows.length&&Date.now()<deadline-12000){await profileChunk(client,item,capture,job,owner);}
+    while(item.row_cursor<capture.rows.length&&Date.now()<deadline-12000){
+     await retryDeadlockedProfileChunk(()=>profileChunk(client,item,capture,job,owner),{deadline,onRetry:({retry,delayMs})=>console.warn('duv_profile_deadlock_retry',json({sourceKey:item.source_key,cursor:item.row_cursor,attempt:retry,delayMs}))});
+    }
     if(capture.rows.length===0)await client.query(`UPDATE result_archive_import_queue SET status='imported',row_cursor=0,rows_total=0 WHERE job_id=$1 AND source_key=$2`,[JOB,item.source_key]);
     if(item.row_cursor<capture.rows.length)break;processed++;
    }catch(e){

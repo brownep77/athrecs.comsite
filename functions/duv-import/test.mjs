@@ -16,11 +16,12 @@ const parse=(raw,inventory=inv,page=url)=>parseEvent(raw,inventory,'2026-10-10T0
 test('timed performance preserves exact distance, never finish time',()=>{const r=parse(fixture()).rows[0];assert.equal(r.performance.achievedDistanceMetres,'45123.000');assert.equal(r.performance.finishTimeSeconds,null);assert.equal(r.original.Performance,'45.123 km');});
 test('all columns follow headings, even when reordered',()=>{const a=parse(fixture()).rows[0],b=parse(fixture({reorder:true})).rows[0];assert.notEqual(a.sourceDocumentHash,b.sourceDocumentHash);const {sourceDocumentHash:ah,...av}=a,{sourceDocumentHash:bh,...bv}=b;assert.deepEqual(av,bv);});
 test('explicit edition prefix is retained without index rejection',()=>assert.equal(parse(fixture({edition:'99th '})).index.name,'99th Synthetic race (GBR)'));
-test('international detail prefixes preserve the full original title',()=>{for(const edition of ['2^ ','9 ','12 ','14 . ','9a ']){const p=parse(fixture({edition}));assert.equal(p.index.name,edition+'Synthetic race (GBR)');assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');}});
+test('international detail prefixes preserve the full original title',()=>{for(const edition of ['2^ ','9 ','12 ','14 . ','9a ','2ème ']){const p=parse(fixture({edition}));assert.equal(p.index.name,edition+'Synthetic race (GBR)');assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');}});
 test('different titles, conflicting editions and changed dates remain held',()=>{
  assert.throws(()=>parse(fixture({edition:'2^ '}),{...inv,index:{...inv.index,Event:'1^ Synthetic race (GBR)'}}),/index_metadata_changed/);
  assert.throws(()=>parse(fixture(),{...inv,index:{...inv.index,Event:'Different race (GBR)'}}),/index_metadata_changed/);
  assert.throws(()=>parse(fixture(),{...inv,index:{...inv.index,Date:'03.10.2026'}}),/index_metadata_changed/);
+ assert.throws(()=>parse(fixture({edition:'2ème '}),{...inv,index:{...inv.index,Event:'1ème Synthetic race (GBR)'}}),/index_metadata_changed/);
 });
 test('German index stage label compares exact distance and stage count',()=>{
  const i={...inv,index:{...inv.index,Distance:'92km/2Etappen'}};

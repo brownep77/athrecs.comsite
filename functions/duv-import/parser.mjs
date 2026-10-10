@@ -83,7 +83,7 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
  // DUV sometimes adds an edition/display prefix only on the detail page.
  // Keep both originals; require the entire remaining title to match exactly.
  const detailName=meta.Event??'',indexName=inventory.index.Event??'';
- const withoutPrefix=detailName.replace(/^\d+(?:(?:st|nd|rd|th|a|\^|[ºª°])|\s*\.)?\s+/i,'');
+ const withoutPrefix=detailName.replace(/^\d+(?:(?:st|nd|rd|th|a|ème|\^|[ºª°])|\s*\.)?\s+/i,'');
  if((detailName!==indexName&&withoutPrefix!==indexName)||meta.Date!==inventory.index.Date)throw Error('index_metadata_changed');
  const distance=inventory.index.Distance;
  const comparisonDistance=distance?.replace(/^(\d+(?:\.\d+)?km\/\d+)Etappen$/,'$1stages');
