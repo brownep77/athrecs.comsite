@@ -17,6 +17,40 @@ test('timed performance preserves exact distance, never finish time',()=>{const 
 test('all columns follow headings, even when reordered',()=>{const a=parse(fixture()).rows[0],b=parse(fixture({reorder:true})).rows[0];assert.notEqual(a.sourceDocumentHash,b.sourceDocumentHash);const {sourceDocumentHash:ah,...av}=a,{sourceDocumentHash:bh,...bv}=b;assert.deepEqual(av,bv);});
 test('explicit edition prefix is retained without index rejection',()=>assert.equal(parse(fixture({edition:'99th '})).index.name,'99th Synthetic race (GBR)'));
 test('international detail prefixes preserve the full original title',()=>{for(const edition of ['2^ ','9 ','12 ','14 . ','9a ','2ème ']){const p=parse(fixture({edition}));assert.equal(p.index.name,edition+'Synthetic race (GBR)');assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');}});
+test('canonical Roman detail ordinals retain both titles and the source comparison audit',()=>{
+ for(const numeral of ['I','IV','IX','XIII','XXIX','XL','XC','CD','CM','MCMXCIX','MMMCMXCIX']){
+  const detail=numeral+'. Synthetic race (GBR)',p=parse(fixture({edition:numeral+'. '}));
+  assert.equal(p.index.name,detail);assert.equal(p.eventMetadata.Event,detail);
+  assert.equal(p.index.raw.Event,'Synthetic race (GBR)');
+  assert.equal(p.audit.metadataComparisons.eventName,'detail_roman_ordinal_prefix');
+  assert.equal(p.audit.parser,'parse5/cheerio');assert.equal(p.audit.independentParser,'htmlparser2 streaming callbacks');
+  assert.equal(p.audit.metadataCompared,true);assert.equal(p.audit.identityVerified,false);
+  assert.equal(p.publication,'staff_only');assert.equal(p.rows[0].verificationStatus,'unverified');
+ }
+});
+test('invalid Roman numerals and arbitrary alphabetic prefixes remain held',()=>{
+ for(const edition of ['IIII. ','IVV. ','IIX. ','VX. ','IC. ','IM. ','MCMC. ','MMMM. ','xiii. ','XIII ','XIII.Synthetic ','MIXED. ','ROAD. ','N. ','XIII: ','. ','XIII. 2nd ']){
+  assert.throws(()=>parse(fixture({edition})),/index_metadata_changed/,edition);
+ }
+});
+test('Roman ordinals never bypass the remaining title, date, distance or count checks',()=>{
+ const raw=fixture({edition:'XIII. '});
+ for(const Event of ['XII. Synthetic race (GBR)','Different race (GBR)','Synthetic race (HUN)','Synthetic race (GBR) extra']){
+  assert.throws(()=>parse(raw,{...inv,index:{...inv.index,Event}}),/index_metadata_changed/);
+ }
+ assert.throws(()=>parse(raw,{...inv,index:{...inv.index,Date:'03.10.2026'}}),/index_metadata_changed/);
+ assert.throws(()=>parse(raw,{...inv,index:{...inv.index,Distance:'12h'}}),/index_distance_changed/);
+ assert.throws(()=>parse(raw,{...inv,index:{...inv.index,Finishers:'2'}}),/index_finisher_count_changed/);
+ const changedDate=raw.toString().replace('<td>04.10.2026</td>','<td>05.10.2026</td>');
+ assert.throws(()=>parse(Buffer.from(changedDate)),/index_metadata_changed/);
+});
+test('a Roman-prefixed event with conflicting performances for one runner remains held',()=>{
+ const raw=fixture({edition:'XIII. ',distance:'50km',performance:'6:12:34 h',count:2,total:2}).toString();
+ const first=/<tbody>(<tr>.*?<\/tr>)<\/tbody>/.exec(raw)[1];
+ const second=first.replace('<tr><td>1</td>','<tr><td>2</td>').replace('6:12:34 h','7:34:56 h');
+ const repeated=Buffer.from(raw.replace('</tbody>',second+'</tbody>'));
+ assert.throws(()=>parse(repeated,{...inv,index:{...inv.index,Distance:'50km',Finishers:'2'}}),/repeated_source_runner/);
+});
 test('different titles, conflicting editions and changed dates remain held',()=>{
  assert.throws(()=>parse(fixture({edition:'2^ '}),{...inv,index:{...inv.index,Event:'1^ Synthetic race (GBR)'}}),/index_metadata_changed/);
  assert.throws(()=>parse(fixture(),{...inv,index:{...inv.index,Event:'Different race (GBR)'}}),/index_metadata_changed/);

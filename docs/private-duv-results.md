@@ -172,6 +172,15 @@ English detail suffix `stages` only when distance and stage count match exactly.
 Both original values and the comparison method remain in the capture audit.
 Missing distances, conflicting dates and inconsistent finisher counts stay held.
 
+Detail titles may also add a canonical uppercase Roman ordinal followed by a
+period and whitespace, such as `XIII.`. Accept only standard numerals from `I`
+through `MMMCMXCIX`; the entire remaining title and saved index date must match
+exactly. Record `detail_roman_ordinal_prefix` in the comparison audit and retain
+both original titles. Invalid numerals, lowercase forms, missing periods,
+arbitrary alphabetic words and conflicting editions remain held. This title
+comparison does not relax distance, count, repeated-runner or identity guards,
+and does not verify identities or publish any result history.
+
 The Italian detail ordinal suffix `a` (for example `9a`) and French `ème`
 (for example `2ème`) follow the same exact
 remaining-title comparison. A complete unpaginated table can also contain explicit

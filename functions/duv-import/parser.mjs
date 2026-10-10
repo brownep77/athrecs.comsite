@@ -83,8 +83,12 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
  // DUV sometimes adds an edition/display prefix only on the detail page.
  // Keep both originals; require the entire remaining title to match exactly.
  const detailName=meta.Event??'',indexName=inventory.index.Event??'';
- const withoutPrefix=detailName.replace(/^\d+(?:(?:st|nd|rd|th|a|ème|\^|[ºª°])|\s*\.)?\s+/i,'');
- if((detailName!==indexName&&withoutPrefix!==indexName)||meta.Date!==inventory.index.Date)throw Error('index_metadata_changed');
+ const withoutNumericPrefix=detailName.replace(/^\d+(?:(?:st|nd|rd|th|a|ème|\^|[ºª°])|\s*\.)?\s+/i,'');
+ // A canonical uppercase Roman edition must end in a period and whitespace.
+ // Do not strip arbitrary words, invalid numerals or another part of the title.
+ const withoutRomanPrefix=detailName.replace(/^(?=[MDCLXVI])M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})\.\s+/,'');
+ const eventNameComparison=detailName===indexName?'exact':withoutNumericPrefix===indexName?'detail_numeric_prefix':withoutRomanPrefix===indexName?'detail_roman_ordinal_prefix':null;
+ if(!eventNameComparison||meta.Date!==inventory.index.Date)throw Error('index_metadata_changed');
  const distance=inventory.index.Distance;
  const comparisonDistance=distance?.replace(/^(\d+(?:\.\d+)?km\/\d+)Etappen$/,'$1stages');
  if(!distance||!meta.Distance?.startsWith(comparisonDistance+' '))throw Error('index_distance_changed');
@@ -138,7 +142,7 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
   pagination:{total,listedTotal,male:+count[2],female:+count[3],offset,pageUrl,pageLinks:[...new Set(pagination)]},
   coverage:{duvPageComplete:rows.length===total,organiserFieldComplete:'unknown',note:'Complete displayed DUV field; statistical thresholds may exclude other participants.'},
   audit:{sourceCheck:'compared',parser:'parse5/cheerio',independentParser:'htmlparser2 streaming callbacks',version:2,comparedRows:rows.length,comparedCells:rows.length*headers.length,runnerLinksCompared:true,metadataCompared:true,identityVerified:false,
-   metadataComparisons:{eventName:detailName===indexName?'exact':'detail_numeric_prefix',distance:comparisonDistance===distance?'exact':'Etappen_to_stages',finisherCount:{method:extraX?'listed_MF_plus_explicit_X':'exact',listedTotal,displayedRows:total,explicitX:extraX?explicitX:null}}}};
+   metadataComparisons:{eventName:eventNameComparison,distance:comparisonDistance===distance?'exact':'Etappen_to_stages',finisherCount:{method:extraX?'listed_MF_plus_explicit_X':'exact',listedTotal,displayedRows:total,explicitX:extraX?explicitX:null}}}};
 }
 
 export function combinePages(parts){
