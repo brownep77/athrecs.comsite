@@ -1479,7 +1479,8 @@ async function upsertPublicFigureProfiles(sql: Sql): Promise<void> {
         then coalesce(excluded.category_place, results.category_place) else null end,
       age_on_day = excluded.age_on_day,
       result_source = excluded.result_source,
-      source_url = excluded.source_url`,
+      source_url = excluded.source_url
+      where not (results.result_details ? 'archive')`,
   );
   await sql`
     insert into app_meta (key, value)
@@ -3041,7 +3042,8 @@ async function seedCatalogue(sql: Sql): Promise<void> {
       open_rating = excluded.open_rating,
       age_grade_rating = excluded.age_grade_rating,
       result_source = excluded.result_source,
-      source_url = excluded.source_url`,
+      source_url = excluded.source_url
+      where not (results.result_details ? 'archive')`,
     100,
   );
 

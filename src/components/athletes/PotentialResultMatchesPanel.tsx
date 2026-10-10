@@ -1,3 +1,4 @@
+import { ArchivedResultSuggestions } from "./ArchivedResultSuggestions";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
@@ -210,6 +211,7 @@ export function PotentialResultMatchesPanel() {
 
   return (
     <section className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
+      <ArchivedResultSuggestions userId={user.id} />
       {feedback ? (
         <p role="status" className="border-b border-border bg-accent-soft p-4 text-sm text-fg">
           {feedback}

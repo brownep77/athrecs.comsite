@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ResultsArchiveWorkspace } from "@/components/staff/ResultsArchiveWorkspace";
+import { CapturedResultsBrowser } from "@/components/staff/CapturedResultsBrowser";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Archive, Database, ExternalLink, FileUp, RefreshCw, ShieldCheck } from "lucide-react";
@@ -86,8 +88,8 @@ function ResultArchivePage() {
           <h1 className="font-display text-3xl font-semibold text-fg">Collected results</h1>
           <p className="text-sm leading-6 text-muted">
             Track scanned, uploaded and API-supplied results by sport, event and race edition.
-            Participant names and finish times stay out of this staff index and remain available
-            only to the secure athlete matching and claim workflow.
+            Use the central archive below to search stored participants, retain whole race fields
+            and review source revisions before linking them to athlete profiles.
           </p>
           <p className="text-sm leading-6 text-muted">
             Saved results are checked when existing athletes or new registrations open their
@@ -143,6 +145,10 @@ function ResultArchivePage() {
         />
       </section>
 
+      <CapturedResultsBrowser />
+
+      <ResultsArchiveWorkspace />
+
       <ResultReconciliationPanel />
 
       <section className="rounded-xl border border-border bg-surface p-4 shadow-card">
@@ -197,7 +203,7 @@ function ResultArchivePage() {
               Coverage by event edition
             </h2>
             <p className="mt-1 text-xs text-muted">
-              Event-level tracking only — no participant directory is exposed here.
+              Event-level tracking only in this ledger. Source fields and participants are in the central archive above.
             </p>
           </div>
           <Badge variant="outline">{formatNumber(data.editions.length)} shown</Badge>
