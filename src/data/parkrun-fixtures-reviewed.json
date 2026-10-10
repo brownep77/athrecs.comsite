@@ -3560,9 +3560,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/greatnotley/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/greatnotley/",
+      "timeCheckedAt": "2026-10-10T10:06:07.627539+00:00"
     },
     {
       "slug": "greatnotley-parkrun",
@@ -3570,9 +3572,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/greatnotley/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/greatnotley/",
+      "timeCheckedAt": "2026-10-10T10:06:07.627539+00:00"
     },
     {
       "slug": "gunpowder-parkrun",
@@ -3580,9 +3584,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/gunpowder/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/gunpowder/",
+      "timeCheckedAt": "2026-10-10T10:06:17.627647+00:00"
     },
     {
       "slug": "gunpowder-parkrun",
@@ -3590,9 +3596,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/gunpowder/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/gunpowder/",
+      "timeCheckedAt": "2026-10-10T10:06:17.627647+00:00"
     },
     {
       "slug": "hazlehead-parkrun",
@@ -3620,9 +3628,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/highwoods/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/highwoods/",
+      "timeCheckedAt": "2026-10-10T10:06:27.627753+00:00"
     },
     {
       "slug": "highwoods-parkrun",
@@ -3630,9 +3640,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/highwoods/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/highwoods/",
+      "timeCheckedAt": "2026-10-10T10:06:27.627753+00:00"
     },
     {
       "slug": "huddersfield-parkrun",
@@ -3640,9 +3652,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/huddersfield/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/huddersfield/",
+      "timeCheckedAt": "2026-10-10T10:06:37.628082+00:00"
     },
     {
       "slug": "huddersfield-parkrun",
@@ -3650,9 +3664,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/huddersfield/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/huddersfield/",
+      "timeCheckedAt": "2026-10-10T10:06:37.628082+00:00"
     },
     {
       "slug": "huntingdon-parkrun",
@@ -3660,9 +3676,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/huntingdon/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/huntingdon/",
+      "timeCheckedAt": "2026-10-10T10:06:47.628206+00:00"
     },
     {
       "slug": "huntingdon-parkrun",
@@ -3670,9 +3688,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/huntingdon/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/huntingdon/",
+      "timeCheckedAt": "2026-10-10T10:06:47.628206+00:00"
     },
     {
       "slug": "itchenvalleycountry-parkrun",
@@ -3680,9 +3700,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/itchenvalleycountry/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/itchenvalleycountry/",
+      "timeCheckedAt": "2026-10-10T10:06:57.628318+00:00"
     },
     {
       "slug": "itchenvalleycountry-parkrun",
@@ -3690,9 +3712,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/itchenvalleycountry/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/itchenvalleycountry/",
+      "timeCheckedAt": "2026-10-10T10:06:57.628318+00:00"
     },
     {
       "slug": "jubilee-parkrun",
@@ -3700,9 +3724,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/jubilee/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/jubilee/",
+      "timeCheckedAt": "2026-10-10T10:07:07.628460+00:00"
     },
     {
       "slug": "kingsburywater-parkrun",
@@ -3710,9 +3736,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/kingsburywater/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/kingsburywater/",
+      "timeCheckedAt": "2026-10-10T10:07:19.452813+00:00"
     },
     {
       "slug": "kings-lynn-parkrun",
@@ -3720,9 +3748,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/kingslynn/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/kingslynn/",
+      "timeCheckedAt": "2026-10-10T10:07:29.452953+00:00"
     },
     {
       "slug": "kings-lynn-parkrun",
@@ -3730,9 +3760,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/kingslynn/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/kingslynn/",
+      "timeCheckedAt": "2026-10-10T10:07:29.452953+00:00"
     },
     {
       "slug": "kirkcaldy-parkrun",
@@ -3760,9 +3792,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/leeonthesolent/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/leeonthesolent/",
+      "timeCheckedAt": "2026-10-10T10:07:41.055881+00:00"
     },
     {
       "slug": "leeonthesolent-parkrun",
@@ -3770,9 +3804,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/leeonthesolent/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/leeonthesolent/",
+      "timeCheckedAt": "2026-10-10T10:07:41.055881+00:00"
     },
     {
       "slug": "lincoln-parkrun",
@@ -3780,9 +3816,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/lincoln/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/lincoln/",
+      "timeCheckedAt": "2026-10-10T10:07:51.599496+00:00"
     },
     {
       "slug": "lincoln-parkrun",
@@ -3790,9 +3828,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/lincoln/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/lincoln/",
+      "timeCheckedAt": "2026-10-10T10:07:51.599496+00:00"
     },
     {
       "slug": "linwood-parkrun",
@@ -3830,9 +3870,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/lowestoft/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/lowestoft/",
+      "timeCheckedAt": "2026-10-10T10:08:01.599689+00:00"
     },
     {
       "slug": "maidstoneriverpark-parkrun",
@@ -3840,9 +3882,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/maidstoneriverpark/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/maidstoneriverpark/",
+      "timeCheckedAt": "2026-10-10T10:08:11.599822+00:00"
     },
     {
       "slug": "maidstoneriverpark-parkrun",
@@ -3850,9 +3894,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/maidstoneriverpark/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/maidstoneriverpark/",
+      "timeCheckedAt": "2026-10-10T10:08:11.599822+00:00"
     },
     {
       "slug": "maldonprom-parkrun",
@@ -3860,9 +3906,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/maldonprom/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/maldonprom/",
+      "timeCheckedAt": "2026-10-10T10:08:21.599952+00:00"
     },
     {
       "slug": "maldonprom-parkrun",
@@ -3870,9 +3918,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/maldonprom/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/maldonprom/",
+      "timeCheckedAt": "2026-10-10T10:08:21.599952+00:00"
     },
     {
       "slug": "marlboroughcommon-parkrun",
@@ -3880,9 +3930,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/marlboroughcommon/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/marlboroughcommon/",
+      "timeCheckedAt": "2026-10-10T10:08:44.953128+00:00"
     },
     {
       "slug": "marlboroughcommon-parkrun",
@@ -3890,9 +3942,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/marlboroughcommon/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/marlboroughcommon/",
+      "timeCheckedAt": "2026-10-10T10:08:44.953128+00:00"
     },
     {
       "slug": "middletonwoods-parkrun",
@@ -3900,9 +3954,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/middletonwoods/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/middletonwoods/",
+      "timeCheckedAt": "2026-10-10T10:08:56.482962+00:00"
     },
     {
       "slug": "millfield-parkrun",
@@ -3910,9 +3966,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/millfield/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/millfield/",
+      "timeCheckedAt": "2026-10-10T10:09:06.483086+00:00"
     },
     {
       "slug": "millfield-parkrun",
@@ -3920,9 +3978,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/millfield/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/millfield/",
+      "timeCheckedAt": "2026-10-10T10:09:06.483086+00:00"
     },
     {
       "slug": "monsaltrail-parkrun",
@@ -3930,9 +3990,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/monsaltrail/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/monsaltrail/",
+      "timeCheckedAt": "2026-10-10T10:09:16.483243+00:00"
     },
     {
       "slug": "monsaltrail-parkrun",
@@ -3940,9 +4002,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/monsaltrail/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/monsaltrail/",
+      "timeCheckedAt": "2026-10-10T10:09:16.483243+00:00"
     },
     {
       "slug": "mortimerforest-parkrun",
@@ -3950,9 +4014,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/mortimerforest/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/mortimerforest/",
+      "timeCheckedAt": "2026-10-10T10:09:27.506386+00:00"
     },
     {
       "slug": "northalafields-parkrun",
@@ -3960,9 +4026,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/northalafields/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/northalafields/",
+      "timeCheckedAt": "2026-10-10T10:09:37.506517+00:00"
     },
     {
       "slug": "northwich-parkrun",
@@ -3970,9 +4038,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/northwich/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/northwich/",
+      "timeCheckedAt": "2026-10-10T10:09:47.506632+00:00"
     },
     {
       "slug": "northwich-parkrun",
@@ -3980,9 +4050,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/northwich/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/northwich/",
+      "timeCheckedAt": "2026-10-10T10:09:47.506632+00:00"
     },
     {
       "slug": "novaprestatyn-parkrun",
@@ -3990,9 +4062,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/novaprestatyn/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/novaprestatyn/",
+      "timeCheckedAt": "2026-10-10T10:09:57.506754+00:00"
     },
     {
       "slug": "paviliongardens-parkrun",
@@ -4000,9 +4074,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/paviliongardens/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/paviliongardens/",
+      "timeCheckedAt": "2026-10-10T10:10:07.506880+00:00"
     },
     {
       "slug": "paviliongardens-parkrun",
@@ -4010,9 +4086,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/paviliongardens/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/paviliongardens/",
+      "timeCheckedAt": "2026-10-10T10:10:07.506880+00:00"
     },
     {
       "slug": "pomphreyhill-parkrun",
@@ -4020,9 +4098,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/pomphreyhill/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/pomphreyhill/",
+      "timeCheckedAt": "2026-10-10T10:10:17.506979+00:00"
     },
     {
       "slug": "pomphreyhill-parkrun",
@@ -4030,9 +4110,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/pomphreyhill/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/pomphreyhill/",
+      "timeCheckedAt": "2026-10-10T10:10:17.506979+00:00"
     },
     {
       "slug": "pontypridd-parkrun",
@@ -4040,9 +4122,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/pontypridd/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/pontypridd/",
+      "timeCheckedAt": "2026-10-10T10:10:27.507085+00:00"
     },
     {
       "slug": "pontypridd-parkrun",
@@ -4050,9 +4134,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/pontypridd/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/pontypridd/",
+      "timeCheckedAt": "2026-10-10T10:10:27.507085+00:00"
     },
     {
       "slug": "poolsbrook-parkrun",
@@ -4060,9 +4146,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/poolsbrook/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/poolsbrook/",
+      "timeCheckedAt": "2026-10-10T10:10:37.507187+00:00"
     },
     {
       "slug": "poolsbrook-parkrun",
@@ -4070,9 +4158,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/poolsbrook/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/poolsbrook/",
+      "timeCheckedAt": "2026-10-10T10:10:37.507187+00:00"
     },
     {
       "slug": "prospect-parkrun",
@@ -4080,9 +4170,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/prospect/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/prospect/",
+      "timeCheckedAt": "2026-10-10T10:10:47.507433+00:00"
     },
     {
       "slug": "prospect-parkrun",
@@ -4090,9 +4182,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/prospect/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/prospect/",
+      "timeCheckedAt": "2026-10-10T10:10:47.507433+00:00"
     },
     {
       "slug": "raphael-parkrun",
@@ -4100,9 +4194,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/raphael/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/raphael/",
+      "timeCheckedAt": "2026-10-10T10:10:57.507459+00:00"
     },
     {
       "slug": "redcar-parkrun",
@@ -4110,9 +4206,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/redcar/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/redcar/",
+      "timeCheckedAt": "2026-10-10T10:11:07.507582+00:00"
     },
     {
       "slug": "redcar-parkrun",
@@ -4120,9 +4218,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/redcar/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/redcar/",
+      "timeCheckedAt": "2026-10-10T10:11:07.507582+00:00"
     },
     {
       "slug": "rendleshamforest-parkrun",
@@ -4130,9 +4230,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/rendleshamforest/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/rendleshamforest/",
+      "timeCheckedAt": "2026-10-10T10:11:17.507932+00:00"
     },
     {
       "slug": "rendleshamforest-parkrun",
@@ -4140,9 +4242,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/rendleshamforest/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/rendleshamforest/",
+      "timeCheckedAt": "2026-10-10T10:11:17.507932+00:00"
     },
     {
       "slug": "rugby-parkrun",
@@ -4150,9 +4254,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/rugby/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/rugby/",
+      "timeCheckedAt": "2026-10-10T10:11:27.508058+00:00"
     },
     {
       "slug": "rugby-parkrun",
@@ -4160,9 +4266,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/rugby/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/rugby/",
+      "timeCheckedAt": "2026-10-10T10:11:27.508058+00:00"
     },
     {
       "slug": "rushmoor-parkrun",
@@ -4170,9 +4278,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/rushmoor/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/rushmoor/",
+      "timeCheckedAt": "2026-10-10T10:11:37.508155+00:00"
     },
     {
       "slug": "rushmoor-parkrun",
@@ -4180,9 +4290,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/rushmoor/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/rushmoor/",
+      "timeCheckedAt": "2026-10-10T10:11:37.508155+00:00"
     },
     {
       "slug": "scunthorpe-parkrun",
@@ -4190,9 +4302,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/scunthorpe/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/scunthorpe/",
+      "timeCheckedAt": "2026-10-10T10:11:47.508299+00:00"
     },
     {
       "slug": "scunthorpe-parkrun",
@@ -4200,9 +4314,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/scunthorpe/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/scunthorpe/",
+      "timeCheckedAt": "2026-10-10T10:11:47.508299+00:00"
     },
     {
       "slug": "southport-parkrun",
@@ -4210,9 +4326,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/southport/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/southport/",
+      "timeCheckedAt": "2026-10-10T10:11:57.508441+00:00"
     },
     {
       "slug": "southport-parkrun",
@@ -4220,9 +4338,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/southport/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/southport/",
+      "timeCheckedAt": "2026-10-10T10:11:57.508441+00:00"
     },
     {
       "slug": "southwickcountrypark-parkrun",
@@ -4230,9 +4350,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/southwickcountrypark/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/southwickcountrypark/",
+      "timeCheckedAt": "2026-10-10T10:12:07.508547+00:00"
     },
     {
       "slug": "stevenage-parkrun",
@@ -4240,9 +4362,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/stevenage/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/stevenage/",
+      "timeCheckedAt": "2026-10-10T10:12:17.508678+00:00"
     },
     {
       "slug": "stevenage-parkrun",
@@ -4250,9 +4374,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/stevenage/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/stevenage/",
+      "timeCheckedAt": "2026-10-10T10:12:17.508678+00:00"
     },
     {
       "slug": "sthelens-parkrun",
@@ -4260,9 +4386,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/sthelens/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/sthelens/",
+      "timeCheckedAt": "2026-10-10T10:12:27.508813+00:00"
     },
     {
       "slug": "sthelens-parkrun",
@@ -4270,9 +4398,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/sthelens/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/sthelens/",
+      "timeCheckedAt": "2026-10-10T10:12:27.508813+00:00"
     },
     {
       "slug": "stonehaven-parkrun",
@@ -4300,9 +4430,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/suttonpark/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/suttonpark/",
+      "timeCheckedAt": "2026-10-10T10:12:37.508935+00:00"
     },
     {
       "slug": "suttonpark-parkrun",
@@ -4310,9 +4442,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/suttonpark/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/suttonpark/",
+      "timeCheckedAt": "2026-10-10T10:12:37.508935+00:00"
     },
     {
       "slug": "telford-parkrun",
@@ -4320,9 +4454,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/telford/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/telford/",
+      "timeCheckedAt": "2026-10-10T10:12:47.509055+00:00"
     },
     {
       "slug": "telford-parkrun",
@@ -4330,9 +4466,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/telford/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/telford/",
+      "timeCheckedAt": "2026-10-10T10:12:47.509055+00:00"
     },
     {
       "slug": "thamespathwoolwich-parkrun",
@@ -4340,9 +4478,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/thamespathwoolwich/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/thamespathwoolwich/",
+      "timeCheckedAt": "2026-10-10T10:12:57.509194+00:00"
     },
     {
       "slug": "thegreatfield-parkrun",
@@ -4350,9 +4490,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/thegreatfield/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/thegreatfield/",
+      "timeCheckedAt": "2026-10-10T10:13:07.509311+00:00"
     },
     {
       "slug": "thegreatfield-parkrun",
@@ -4360,9 +4502,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/thegreatfield/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/thegreatfield/",
+      "timeCheckedAt": "2026-10-10T10:13:07.509311+00:00"
     },
     {
       "slug": "threebrooks-parkrun",
@@ -4370,9 +4514,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/threebrooks/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/threebrooks/",
+      "timeCheckedAt": "2026-10-10T10:13:17.509427+00:00"
     },
     {
       "slug": "vicarwatercountrypark-parkrun",
@@ -4380,9 +4526,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/vicarwatercountrypark/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/vicarwatercountrypark/",
+      "timeCheckedAt": "2026-10-10T10:13:27.509537+00:00"
     },
     {
       "slug": "wallace-parkrun",
@@ -4400,9 +4548,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/warrington/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/warrington/",
+      "timeCheckedAt": "2026-10-10T10:13:37.509674+00:00"
     },
     {
       "slug": "warrington-parkrun",
@@ -4410,9 +4560,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/warrington/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/warrington/",
+      "timeCheckedAt": "2026-10-10T10:13:37.509674+00:00"
     },
     {
       "slug": "watermeadcountrypark-parkrun",
@@ -4420,9 +4572,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/watermeadcountrypark/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/watermeadcountrypark/",
+      "timeCheckedAt": "2026-10-10T10:13:47.509784+00:00"
     },
     {
       "slug": "watermeadows-parkrun",
@@ -4430,9 +4584,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/watermeadows/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/watermeadows/",
+      "timeCheckedAt": "2026-10-10T10:13:57.509930+00:00"
     },
     {
       "slug": "watermeadows-parkrun",
@@ -4440,9 +4596,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/watermeadows/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/watermeadows/",
+      "timeCheckedAt": "2026-10-10T10:13:57.509930+00:00"
     },
     {
       "slug": "westlinks-parkrun",
@@ -4470,9 +4628,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/whitstable/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/whitstable/",
+      "timeCheckedAt": "2026-10-10T10:14:07.510052+00:00"
     },
     {
       "slug": "whitstable-parkrun",
@@ -4480,9 +4640,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/whitstable/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/whitstable/",
+      "timeCheckedAt": "2026-10-10T10:14:07.510052+00:00"
     },
     {
       "slug": "wickfordmemorial-parkrun",
@@ -4490,9 +4652,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/wickfordmemorial/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/wickfordmemorial/",
+      "timeCheckedAt": "2026-10-10T10:14:17.510182+00:00"
     },
     {
       "slug": "wickfordmemorial-parkrun",
@@ -4500,9 +4664,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/wickfordmemorial/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/wickfordmemorial/",
+      "timeCheckedAt": "2026-10-10T10:14:17.510182+00:00"
     },
     {
       "slug": "widnes-parkrun",
@@ -4510,9 +4676,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/widnes/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/widnes/",
+      "timeCheckedAt": "2026-10-10T10:14:27.510316+00:00"
     },
     {
       "slug": "widnes-parkrun",
@@ -4520,9 +4688,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/widnes/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/widnes/",
+      "timeCheckedAt": "2026-10-10T10:14:27.510316+00:00"
     },
     {
       "slug": "wyreforest-parkrun",
@@ -4530,9 +4700,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/wyreforest/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/wyreforest/",
+      "timeCheckedAt": "2026-10-10T10:14:37.510484+00:00"
     },
     {
       "slug": "ypromenadllandrilloynrhos-parkrun",
@@ -4540,9 +4712,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/ypromenadllandrilloynrhos/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/ypromenadllandrilloynrhos/",
+      "timeCheckedAt": "2026-10-10T10:14:47.510600+00:00"
     },
     {
       "slug": "ypromenadllandrilloynrhos-parkrun",
@@ -4550,9 +4724,11 @@
       "distance": "5K",
       "distanceKm": 5,
       "url": "https://www.parkrun.org.uk/ypromenadllandrilloynrhos/",
-      "startTime": null,
+      "startTime": "09:00",
       "source": "https://www.parkrun.org.uk/special-events/",
-      "checkedAt": "2026-10-10T09:14:24.994540+00:00"
+      "checkedAt": "2026-10-10T09:14:24.994540+00:00",
+      "timeSource": "https://www.parkrun.org.uk/ypromenadllandrilloynrhos/",
+      "timeCheckedAt": "2026-10-10T10:14:47.510600+00:00"
     }
   ],
   "cancellations": [
