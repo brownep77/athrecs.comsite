@@ -109,6 +109,12 @@ export const legacyFixtureAliases: Readonly<Record<string, string>> = {
 /** Public aliases whose imported database rows and references must be retained. */
 export const retainedFixtureAliases: Readonly<Record<string, string>> = {
   "spar-budapest-international-marathon": "budapest-marathon",
+  // Official venue URLs and locations checked 10 October 2026. Keep both
+  // database identities and dependencies; public links resolve to the older
+  // canonical page, which also retains the earlier 2026 calendar records.
+  "lochneaton-parkrun": "loch-neaton-parkrun",
+  "hunstantonpromenade-parkrun": "hunstanton-parkrun",
+  "eaton-juniors-parkrun": "norwich-junior-parkrun",
 };
 export const retainedFixtureAliasSlugs = Object.keys(retainedFixtureAliases);
 
