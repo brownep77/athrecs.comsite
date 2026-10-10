@@ -21,6 +21,7 @@ import { featuredRaceAthletes, featuredRaceResults } from "@/data/featured-race-
 import { featuredWaHistories } from "@/data/featured-wa-histories-2026-09-30";
 import { nationalAgeAthletes, nationalAgeResults } from "@/data/featured-gbr-irl-age-2026-10-01";
 import { ensureAthleticsTaxonomy } from "./athletics-taxonomy.server";
+import { parkrunDates, parkrunDistance } from "./parkrun-dates";
 
 // prettier-ignore
 const SEED_VERSION = "athrecs-runrecs-uk-ireland-five-mile-five-k-2026-08-31-v276-world-athletics-track-field-2026-09-01-365ad5fbb8-runrecs-gap-fill-2026-09-03-v99-uk-ireland-half-ten-mile-2026-10-04-v3";
@@ -29,7 +30,28 @@ const PUBLIC_FIGURE_SEED_VERSION = "athrecs-rich-roll-additional-records-2026-09
 const FEATURED_RACE_RESULTS_VERSION = "berlin-london-2026-09-27-v1";
 const FEATURED_WA_HISTORIES_VERSION = "featured-wa-histories-2026-09-30-v1";
 const FEATURED_GBR_IRL_AGE_VERSION = "gbr-irl-age-berlin-2026-10-01-v1";
-const EXPECTED = catalogueMetadata.merged_counts;
+// The historical export count includes unchecked generated UK occurrences.
+// Keep a complete seed gate derived from the actual seed keys, including every
+// international recurrence still owned by the legacy seed. Reviewed UK fixture
+// imports are additional production data, not a reason to invent seed rows.
+const EXPECTED = {
+  ...catalogueMetadata.merged_counts,
+  editions: expectedFixtureSeedEditionCount(),
+};
+
+function expectedFixtureSeedEditionCount(): number {
+  const keys = new Set(
+    editionSeeds.map((edition) => `${edition.seriesSlug}|${edition.date}|${edition.distance}`),
+  );
+  const uk = new Set(["United Kingdom", "England", "Scotland", "Wales", "Northern Ireland"]);
+  for (const series of seriesList) {
+    if (series.sport !== "Parkrun" || uk.has(series.country)) continue;
+    for (const date of parkrunDates(series.name, "2026-08-15", "2027-12-26")) {
+      keys.add(`${series.slug}|${date}|${parkrunDistance(series.name).code}`);
+    }
+  }
+  return keys.size;
+}
 const CATALOGUE_SEED_LOCK_ID = 1_095_527_506;
 const DEV_PREVIEW_USER_ID = "dev-user";
 const DEV_PREVIEW_EMAIL = "dev@example.com";
