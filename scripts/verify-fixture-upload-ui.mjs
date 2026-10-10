@@ -127,17 +127,18 @@ try {
   browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   const errors = [];
-  page.on("pageerror", (e) => errors.push(e.message));
+  page.on("pageerror", (e) => {
+    errors.push(e.message);
+    console.error("Import UI error:", e.message);
+  });
   await page.goto("http://127.0.0.1:8098/");
   await page.getByRole("heading", { name: "Import running fixtures", exact: true }).waitFor();
   const upload = async (rows) =>
-    page
-      .getByLabel("Fixture file", { exact: true })
-      .setInputFiles({
-        name: "reviewed-fixtures.json",
-        mimeType: "application/json",
-        buffer: Buffer.from(JSON.stringify(rows)),
-      });
+    page.getByLabel("Fixture file", { exact: true }).setInputFiles({
+      name: "reviewed-fixtures.json",
+      mimeType: "application/json",
+      buffer: Buffer.from(JSON.stringify(rows)),
+    });
   await upload([{ ...candidate, sourceUrl: "https://runabc.co.uk/synthetic" }]);
   await page.getByRole("button", { name: "Preview and check duplicates", exact: true }).click();
   await page.getByText(/0 ready for review.*1 invalid/).waitFor();

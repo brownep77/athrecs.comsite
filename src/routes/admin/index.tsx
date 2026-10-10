@@ -280,12 +280,12 @@ function AdminPage() {
           <div className="min-w-0 flex-1">
             <p className="font-semibold text-fg">Recommended update route</p>
             <p className="mt-1 text-sm text-muted">
-              Use staged catalogue publishing for new races, editions and entry links. The legacy
-              direct import forms below remain available temporarily for compatibility.
+              Upload verified running fixtures, preview duplicate checks and publish reviewed
+              batches. The legacy direct import forms below remain available for compatibility.
             </p>
           </div>
           <Button asChild>
-            <Link to="/admin/catalogue-publishing">Open staged publishing</Link>
+            <Link to="/admin/fixture-import">Import running fixtures</Link>
           </Button>
         </div>
         <Button asChild variant="secondary">
