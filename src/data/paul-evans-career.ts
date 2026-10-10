@@ -28,7 +28,8 @@ export const paulEvansCareer = {
     },
     {
       id: "olympic-10000",
-      title: "Two Olympic Games",
+      title: "Competed in 2 Olympic Games",
+      showOnBoard: true,
       date: "Barcelona 1992 · Atlanta 1996",
       outcomes: ["Great Britain · 10,000m"],
       sources: [worldAthletics, coaching],

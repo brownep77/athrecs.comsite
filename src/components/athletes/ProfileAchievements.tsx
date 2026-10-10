@@ -3,7 +3,7 @@ import {
   profileAchievementResults,
   type AchievementResult,
 } from "@/lib/athrecs/profile-history-results";
-import { Medal, Trophy, Globe2, Mountain, Flag, Layers } from "lucide-react";
+import { Award, Medal, Trophy, Globe2, Mountain, Flag, Layers } from "lucide-react";
 import {
   buildProfileAchievements,
   isCompletedResult,
@@ -22,6 +22,17 @@ import { RaceWinAchievements } from "./RaceWinAchievements";
 import { buildRaceWinAchievements } from "@/lib/athrecs/race-win-achievements";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { achievementColourClass } from "@/lib/athrecs/profile-colours";
+import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
+
+type BoardHighlight = {
+  id: string;
+  title: string;
+  date: string;
+  outcomes: readonly string[];
+  sources: readonly { label: string; url: string }[];
+};
+
+const NO_BOARD_HIGHLIGHTS: readonly BoardHighlight[] = [];
 
 export function ResultMedal({ result }: { result: ProfileResult }) {
   if (!isCompletedResult(result)) return null;
@@ -168,11 +179,13 @@ function AchievementEvidence({
 
 export function AchievementsBoard({
   results,
+  highlights = NO_BOARD_HIGHLIGHTS,
   showEvidence = false,
   sourceHistories = NO_SOURCE_HISTORIES,
   sourceGender = "",
 }: {
   results: ProfileResult[];
+  highlights?: readonly BoardHighlight[];
   showEvidence?: boolean;
   sourceHistories?: readonly SourceHistory[];
   sourceGender?: string;
@@ -241,6 +254,47 @@ export function AchievementsBoard({
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h2 className="font-display text-lg font-semibold">Achievements board</h2>
       </div>
+      {highlights.length > 0 ? (
+        <div className="grid gap-3 sm:grid-cols-2">
+          {highlights.map((highlight) => (
+            <article
+              key={highlight.id}
+              data-achievement={highlight.id}
+              className="space-y-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-amber-950"
+            >
+              <h3 className="flex items-center gap-2 font-semibold">
+                <Award className="size-5 shrink-0" aria-hidden="true" />
+                {highlight.title}
+              </h3>
+              <p className="text-sm">{highlight.date}</p>
+              {highlight.outcomes.map((outcome) => (
+                <p key={outcome} className="text-sm">
+                  {outcome}
+                </p>
+              ))}
+              <details className="text-xs">
+                <summary className="cursor-pointer">Sources</summary>
+                <ul className="mt-2 space-y-1">
+                  {highlight.sources
+                    .filter((source) => isPublicProfileSource(source.url, source.label))
+                    .map((source) => (
+                      <li key={source.url}>
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline underline-offset-2"
+                        >
+                          {source.label}
+                        </a>
+                      </li>
+                    ))}
+                </ul>
+              </details>
+            </article>
+          ))}
+        </div>
+      ) : null}
       <RaceWinAchievements wins={wins} showEvidence={showEvidence} />
       {showCompletionProgress ? (
         <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
@@ -365,6 +419,7 @@ export function AchievementsBoard({
 
 export function ProfileRecordHighlights({
   results,
+  highlights = NO_BOARD_HIGHLIGHTS,
   reportedBests = NO_REPORTED_BESTS,
   sourceHistories = NO_SOURCE_HISTORIES,
   sourceGender = "",
@@ -372,6 +427,7 @@ export function ProfileRecordHighlights({
   compact = false,
 }: {
   results: ProfileResult[];
+  highlights?: readonly BoardHighlight[];
   reportedBests?: readonly ReportedPersonalBest[];
   sourceHistories?: readonly SourceHistory[];
   sourceGender?: string;
@@ -396,6 +452,7 @@ export function ProfileRecordHighlights({
             </p>
             <AchievementsBoard
               results={results}
+              highlights={highlights}
               sourceHistories={sourceHistories}
               sourceGender={sourceGender}
               showEvidence={showEvidence}
@@ -404,6 +461,7 @@ export function ProfileRecordHighlights({
         ) : (
           <AchievementsBoard
             results={results}
+            highlights={highlights}
             sourceHistories={sourceHistories}
             sourceGender={sourceGender}
             showEvidence={showEvidence}
