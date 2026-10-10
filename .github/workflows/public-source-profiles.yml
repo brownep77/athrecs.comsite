@@ -4,6 +4,9 @@ on:
     paths:
       - 'src/lib/athrecs/api.ts'
       - 'src/lib/athrecs/source-nationality.ts'
+      - 'src/lib/athrecs/profile-source-presentation.ts'
+      - 'src/components/athletes/HistoricalResultRow.tsx'
+      - 'src/components/athletes/SourcePerformanceHistory.tsx'
       - 'src/lib/athrecs/country-flags.ts'
       - 'src/lib/athrecs/athlete-directory-api.ts'
       - 'src/lib/athrecs/athlete-directory.ts'
@@ -19,6 +22,9 @@ on:
     paths:
       - 'src/lib/athrecs/api.ts'
       - 'src/lib/athrecs/source-nationality.ts'
+      - 'src/lib/athrecs/profile-source-presentation.ts'
+      - 'src/components/athletes/HistoricalResultRow.tsx'
+      - 'src/components/athletes/SourcePerformanceHistory.tsx'
       - 'src/lib/athrecs/country-flags.ts'
       - 'src/lib/athrecs/athlete-directory-api.ts'
       - 'src/lib/athrecs/athlete-directory.ts'

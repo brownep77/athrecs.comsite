@@ -8,6 +8,7 @@ import { CountryFlag } from "./CountryFlag";
 import { CompletionMedal } from "./ProfileAchievements";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
+import { isWmmSource, publicProfileResultNotes } from "@/lib/athrecs/profile-source-presentation";
 
 export function HistoricalResultRow({
   result,
@@ -19,6 +20,9 @@ export function HistoricalResultRow({
   showEvidence?: boolean;
 }) {
   const row = result.performance;
+  const notes = showEvidence
+    ? row.notes
+    : publicProfileResultNotes(row.notes, row.providerName, row.sourceUrls);
   const field = /jump|shot|^sp\d|discus|javelin|hammer/i.test(row.discipline);
   const combined = /pentathlon|heptathlon|decathlon/i.test(row.discipline);
   const discipline = /^\d+$/.test(row.discipline) ? `${row.discipline} m` : row.discipline;
@@ -44,7 +48,10 @@ export function HistoricalResultRow({
           {isCompletedHistoryResult(row) ? <CompletionMedal /> : null}
           {row.meeting}
         </span>
-        {!showEvidence && row.providerName && row.sourceUrls[0] ? (
+        {!showEvidence &&
+        row.providerName &&
+        row.sourceUrls[0] &&
+        !isWmmSource(row.providerName, row.sourceUrls) ? (
           <a
             href={row.sourceUrls[0]}
             target="_blank"
@@ -54,10 +61,10 @@ export function HistoricalResultRow({
             Results: {row.providerName} ↗
           </a>
         ) : null}
-        {row.notes ? (
+        {notes ? (
           <details className="mt-1 max-w-sm whitespace-normal text-xs font-normal text-muted">
             <summary className="cursor-pointer">Result details</summary>
-            <p className="mt-1">{row.notes}</p>
+            <p className="mt-1">{notes}</p>
           </details>
         ) : null}
         <ResultDisqualification decision={row.disqualification} />

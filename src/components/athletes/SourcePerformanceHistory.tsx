@@ -3,6 +3,7 @@ import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
 import { resultCredit } from "@/lib/athrecs/result-credit";
+import { publicProfileResultNotes } from "@/lib/athrecs/profile-source-presentation";
 
 export function SourcePerformanceHistory({
   histories,
@@ -20,6 +21,13 @@ export function SourcePerformanceHistory({
     .flatMap((history) =>
       history.performances.map((row, index) => ({
         ...row,
+        notes: showEvidence
+          ? row.notes
+          : publicProfileResultNotes(
+              row.notes,
+              row.providerName || history.provider,
+              row.sourceUrls,
+            ),
         key: `${history.provider}:${history.externalId}:${index}`,
         credit: resultCredit(
           row.sourceUrls[0] || (row.verificationStatus ? null : history.sourceUrl),

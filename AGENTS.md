@@ -47,3 +47,8 @@ publication and personal-best calculations in this repository.
   on AthRecs, with a link to the original result page. Preserve provider credit in
   imports, athlete histories, club results and editorial coverage. Record the
   organiser separately; a timer is not automatically the race organiser.
+  Owner exception, 10 October 2026: public athlete profiles omit World Marathon
+  Majors provider branding and attribution links, including nationality credits
+  and import-note wording. Retain original provider names, links and notes in
+  stored evidence and staff evidence views. This presentation choice does not
+  verify an athlete or result or remove the evidence requirements above.

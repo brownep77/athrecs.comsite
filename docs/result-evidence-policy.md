@@ -29,6 +29,14 @@ retain their own privacy/sharing controls. Nationality does not establish identi
 residence, birthplace or result verification. Do not replace a conflicting value
 silently; retain the observations for review.
 
+On 10 October 2026, Paul requested that public athlete profiles omit World
+Marathon Majors branding and attribution links. Nationality values and results
+remain visible; original provider names, URLs, row identifiers and notes remain
+in the source records and staff evidence views. Public note wording preserves
+missing-date, timing-basis and identity limitations. This is a display choice,
+not a verification decision. A source-row comparison alone must not promote
+these provisional histories into verified results or personal bests.
+
 ## Run a source comparison
 
 Capture the organiser's rendered result table independently from the proposed
