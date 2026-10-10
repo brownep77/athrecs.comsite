@@ -526,10 +526,6 @@
         {
           "key": "Vary",
           "value": "Cookie, Authorization"
-        },
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
         }
       ]
     }

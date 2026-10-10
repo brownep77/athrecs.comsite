@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
+      - "vercel.json"
       - "src/start.ts"
       - "src/routes/athletes/**"
       - "src/routes/sitemap*.ts"
@@ -17,6 +18,7 @@ on:
   push:
     branches: [main]
     paths:
+      - "vercel.json"
       - "src/start.ts"
       - "src/lib/athrecs/api.ts"
       - "src/lib/athrecs/athlete-search-policy*"

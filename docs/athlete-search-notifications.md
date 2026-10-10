@@ -74,6 +74,8 @@ excluded. No database privacy setting, history approval or profile data is chang
 The page and sitemap share the publication and indexing SQL predicates. HTML metadata and
 HTTP robots headers agree; request middleware accepts only a successful profile
 response marked by the validated route loader, and removes that internal marker.
+The hosting configuration also defers athlete robots headers to that decision,
+instead of adding another blanket `noindex` header after the application responds.
 Incoming request headers cannot enable indexing. Responses remain uncached so
 withdrawals and privacy choices take effect on the next request. Existing hidden
 results and personal-field exclusions stay in the public projection.

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { get as httpGet } from "node:http";
 import { load } from "cheerio";
 import { createRequire } from "node:module";
@@ -501,6 +502,13 @@ try {
   assert.equal(limitedProfile.athlete.country, "");
   assert.equal(limitedProfile.athlete.club, null);
   assert.equal(limitedProfile.athlete.club_slug, null);
+  const deployment = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
+  assert(
+    !deployment.headers
+      .find((rule) => rule.source === "/athletes/:path*")
+      ?.headers.some((header) => header.key.toLowerCase() === "x-robots-tag"),
+    "The hosting configuration must defer athlete indexing to the validated page response",
+  );
   const expectSearch = async (slug, indexable, extraHeaders = {}) => {
     const response = await fetch(`${origin}/athletes/${slug}`, { headers: extraHeaders });
     const html = await response.text();
