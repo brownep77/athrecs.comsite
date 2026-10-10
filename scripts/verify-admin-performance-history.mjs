@@ -7,7 +7,7 @@ import {
   readManagedHistory,
   excludeHistoryPerformance,
 } from "../src/lib/athlete-workspace/admin-history.server.ts";
-import { loadPublishedSourceHistories } from "../src/lib/athrecs/athlete-publication.server.ts";
+import { loadPublishedSourceHistories, countPublishedSourceResults } from "../src/lib/athrecs/athlete-publication.server.ts";
 import { buildRaceWinAchievements } from "../src/lib/athrecs/race-win-achievements.ts";
 const db = new PGlite();
 const sqlFor = (c) => {
@@ -84,6 +84,8 @@ try {
     /different data/,
   );
   const [published] = await loadPublishedSourceHistories(sql, 1);
+  assert.equal((await countPublishedSourceResults(sql, [1, 2])).get(1), 1);
+  assert.equal((await countPublishedSourceResults(sql, [1, 2])).get(2), undefined);
   assert.equal(published.performances[0].performance, "8.04i");
   assert.equal(published.performances[0].date, "");
   assert.equal(published.performances[0].verificationStatus, "unverified");
@@ -104,19 +106,23 @@ try {
   await assert.rejects(() => excludeHistoryPerformance(sql, removal, staff), /linked athlete/);
   await excludeHistoryPerformance(sql, removal, owner);
   assert.equal((await loadPublishedSourceHistories(sql, 1))[0].performances.length, 0);
+  assert.equal((await countPublishedSourceResults(sql, [1])).get(1), undefined);
   assert.equal((await readManagedHistory(sql, 1, owner))[0].performances[0].profileExcluded, true);
   await excludeHistoryPerformance(sql, { ...removal, excluded: false }, owner);
   assert.equal((await loadPublishedSourceHistories(sql, 1))[0].performances.length, 1);
+  assert.equal((await countPublishedSourceResults(sql, [1])).get(1), 1);
   await assert.rejects(
     () => excludeHistoryPerformance(sql, { ...removal, athleteId: 2 }, owner),
     /linked athlete/,
   );
   await db.exec(`insert into athlete_public_shares values('owner',true,false)`);
   assert.deepEqual(await loadPublishedSourceHistories(sql, 1), []);
+  assert.equal((await countPublishedSourceResults(sql, [1])).get(1), undefined);
   await db.exec(
     `delete from athlete_public_shares;update athletes set profile_visibility='private' where id=1`,
   );
   assert.deepEqual(await loadPublishedSourceHistories(sql, 1), []);
+  assert.equal((await countPublishedSourceResults(sql, [1])).get(1), undefined);
   await db.exec(`update athletes set profile_visibility='public' where id=1`);
   assert.deepEqual(
     buildRaceWinAchievements(

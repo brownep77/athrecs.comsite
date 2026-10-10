@@ -1,6 +1,28 @@
 import type { Sql } from "../db";
 import { sourceHistorySchema } from "./source-performance-history.ts";
 
+/** Count the same published rows a public profile can display, including unverified ones. */
+export async function countPublishedSourceResults(sql: Sql, athleteIds: readonly number[]) {
+  if (!athleteIds.length) return new Map<number, number>();
+  const rows = await sql<{ athlete_id: number; result_count: number }>`
+    select h.athlete_id, count(*)::int as result_count
+    from athlete_source_histories h join athletes a on a.id=h.athlete_id
+    cross join lateral jsonb_array_elements(h.performances) performance
+    where h.athlete_id=any(${[...athleteIds]}::int[]) and h.published_at is not null
+      and (a.profile_visibility='public' or a.profile_type='Public figure')
+      and (not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
+        or exists (select 1 from network_audit_log approval
+          where approval.action='athlete.history_admin_published'
+            and approval.entity_id=h.provider||':'||h.external_id
+            and approval.after_value->>'athleteId'=a.id::text))
+      and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+        where l.athlete_id=a.id and l.status='active' and (s.enabled=false or s.share_results=false))
+      and coalesce(performance->>'profileExcluded','false') <> 'true'
+    group by h.athlete_id
+  `;
+  return new Map(rows.map((row) => [row.athlete_id, row.result_count]));
+}
+
 export async function loadPublishedSourceHistories(sql: Sql, athleteId: number) {
   const histories = await sql`
     select h.provider, h.external_id as "externalId", h.source_url as "sourceUrl",

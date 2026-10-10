@@ -7,6 +7,7 @@ import { publicProfileDetails } from "./profile-details";
 import { readSourceNationality } from "./source-nationality";
 import { loadUpcoming } from "./athlete-upcoming-api";
 import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
+import { countPublishedSourceResults } from "./athlete-publication.server";
 import { createServerFn } from "@tanstack/react-start";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import {
@@ -828,11 +829,14 @@ export const listAthletes = createServerFn({ method: "GET" })
       limit ${IS_RUNRECS_SITE ? null : PUBLIC_ATHLETE_LIST_LIMIT}
       offset ${IS_RUNRECS_SITE ? 0 : (data.offset ?? 0)}
     `;
+    const sourceCounts = await countPublishedSourceResults(sql, athletes.map((athlete) => athlete.id));
     return athletes.map((athlete) => {
       const reported = getReportedRaceHistory(athlete.slug);
-      return reported?.includeInResults
-        ? { ...athlete, result_count: athlete.result_count + reported.records.length }
-        : athlete;
+      return {
+        ...athlete,
+        result_count: athlete.result_count + (sourceCounts.get(athlete.id) ?? 0)
+          + (reported?.includeInResults ? reported.records.length : 0),
+      };
     });
   });
 
