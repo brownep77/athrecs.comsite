@@ -147,7 +147,8 @@ try {
     assert.equal(await personalBests.getByText("59:07", { exact: true }).count(), 0);
     await personalBests.getByText("27:44", { exact: true }).waitFor();
     await personalBests.getByText("2:05:11", { exact: true }).waitFor();
-    await page.getByRole("heading", { name: "Results history 52", exact: true }).waitFor();
+    await page.getByRole("heading", { name: "Results 52", exact: true }).waitFor();
+    await page.getByText("Achievements & milestones", { exact: true }).click();
     await page
       .getByRole("region", { name: "Achievements board" })
       .getByText("50", { exact: true })

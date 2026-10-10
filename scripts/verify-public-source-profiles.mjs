@@ -251,7 +251,9 @@ try {
       hasActions: false,
     }),
   );
-  assert(otherCredit.includes("Results: Synthetic Race Timing"));
+  assert(otherCredit.includes("Synthetic Race Timing"));
+  assert(otherCredit.includes('href="https://example.test/results"'));
+  assert(otherCredit.includes("Details &amp; sources"));
   assert(wmmHtml.includes("Sport:") && wmmHtml.includes("Running") && wmmHtml.includes("Marathon"));
   const directoryHtml = await (
     await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public&sport=Running")
