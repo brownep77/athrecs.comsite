@@ -75,6 +75,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Verified fixture file import browser check
+        run: node scripts/verify-fixture-upload-ui.mjs
+
       - name: Registered athletes staff dashboard
         run: node scripts/verify-registrations.mjs --browser
 
@@ -103,9 +106,6 @@ jobs:
 
       - name: Collector bulk publication browser check
         run: node scripts/verify-collector-bulk-ui.mjs
-
-      - name: Verified fixture file import browser check
-        run: node scripts/verify-fixture-upload-ui.mjs
 
       - name: Collector distance selection browser check
         run: node scripts/verify-collector-distance-ui.mjs
