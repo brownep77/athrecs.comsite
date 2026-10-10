@@ -3,6 +3,14 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
+      - "vercel.json"
+      - "src/start.ts"
+      - "src/routes/athletes/**"
+      - "src/routes/sitemap*.ts"
+      - "src/routes/sitemaps/**"
+      - "src/lib/athrecs/api.ts"
+      - "src/lib/athrecs/athlete-search-policy*"
+      - "src/lib/athrecs/athlete-sitemap.server.ts"
       - "scripts/submit-athlete-indexnow.mjs"
       - "scripts/lib/athlete-search-readiness.mjs"
       - "scripts/verify-athlete-search-notification.mjs"
@@ -10,6 +18,10 @@ on:
   push:
     branches: [main]
     paths:
+      - "vercel.json"
+      - "src/start.ts"
+      - "src/lib/athrecs/api.ts"
+      - "src/lib/athrecs/athlete-search-policy*"
       - "src/components/athletes/**"
       - "src/routes/athletes/**"
       - "src/routes/sitemap*.ts"
@@ -29,7 +41,7 @@ jobs:
   eligibility:
     name: Validate athlete search eligibility
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 60
     outputs:
       ready: ${{ steps.live.outputs.ready }}
     steps:
@@ -51,7 +63,7 @@ jobs:
     needs: eligibility
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.eligibility.outputs.ready == 'true'
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

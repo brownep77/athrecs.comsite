@@ -8,7 +8,7 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const { getSql } = await import("@/lib/db");
         const { ensureAthrecsSeeded } = await import("@/lib/athrecs/seed.server");
-        const { sitemapXml, sitemapResponse } =
+        const { sitemapXml, sitemapResponse, athleteSitemapPageCount } =
           await import("@/lib/athrecs/athlete-sitemap.server");
         await ensureAthrecsSeeded();
         const sql = await getSql();
@@ -19,11 +19,16 @@ export const Route = createFileRoute("/sitemap.xml")({
         const counts = await Promise.all(
           families.map((kind) => contentSitemapPageCount(sql, kind)),
         );
+        const athletePages = IS_RUNRECS_SITE ? 0 : await athleteSitemapPageCount(sql);
         return sitemapResponse(
           sitemapXml(
             [
               `${SITE_URL}/sitemaps/pages.xml`,
               ...(!IS_RUNRECS_SITE ? [`${SITE_URL}/sitemaps/countries.xml`] : []),
+              ...Array.from(
+                { length: athletePages },
+                (_, i) => `${SITE_URL}/sitemaps/athletes-${i + 1}.xml`,
+              ),
               ...families.flatMap((kind, index) =>
                 Array.from(
                   { length: counts[index] },

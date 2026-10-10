@@ -162,6 +162,33 @@ await assert.rejects(
   /changed during validation/,
 );
 assert.equal(withdrawn.posts().length, 0);
+const catalogue = Array.from({ length: 37 }, (_, i) => `${origin}/athletes/synthetic-${i}`);
+let active = 0;
+let peak = 0;
+let checked = 0;
+const paginated = fixture({
+  [shard]: () => response(xml(catalogue)),
+  ...Object.fromEntries(
+    catalogue.map((url) => [
+      url,
+      async () => {
+        active++;
+        peak = Math.max(peak, active);
+        await new Promise((resolve) => setTimeout(resolve, 1));
+        active--;
+        checked++;
+        return response(html(url), "text/html");
+      },
+    ]),
+  ),
+});
+assert.equal(
+  (await notifyAthleteSearch({ ...paginated, keyFile, key })).submitted,
+  catalogue.length,
+);
+assert.equal(checked, catalogue.length * 2, "Every URL is checked and revalidated");
+assert(peak > 1 && peak <= 12, "Validation concurrency is bounded");
+assert.deepEqual(JSON.parse(paginated.posts()[0].body).urlList, catalogue);
 console.log(
   `Athlete search notification passed: deliberate no-submission, read-only checks, ${blocked.length} fail-closed cases, withdrawal, deduplication, and validated submission.`,
 );

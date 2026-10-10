@@ -97,6 +97,11 @@ try {
   assert.equal(p.athlete.bio, "");
   assert.equal(p.athlete.date_of_birth, null);
   assert.equal(p.sourceHistories.length, 0);
+  assert.equal(
+    p.searchIndexable,
+    false,
+    "Profile publication does not grant search-indexing approval",
+  );
   assert.equal(p.athlete.nationality, "BRA");
   assert.equal(p.athlete.nationality_source.provider, "DUV");
   assert.equal(p.athlete.details.birthCountry, "");
@@ -110,6 +115,7 @@ try {
   const page = await fetch(origin + "/athletes/synthetic-duv-public");
   const html = await page.text();
   assert.equal(page.status, 200);
+  assert.match(page.headers.get("x-robots-tag"), /noindex/);
   assert(html.includes("Synthetic DUV Public"));
   assert(!html.includes("Unpublished test biography"));
   assert(html.includes("Brazil"));
