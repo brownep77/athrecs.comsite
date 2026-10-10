@@ -1,18 +1,11 @@
 import type { Sql } from "../db";
+import { indexableApprovedAthleteSql } from "./athlete-search-policy.server.ts";
 
 // Keep well below the 50,000 URL limit and bound each database read.
 export const ATHLETE_SITEMAP_PAGE_SIZE = 5000;
 
-const publicSourceProfile = `(a.profile_type = 'Public figure' or a.profile_visibility = 'public')
-  and not exists (select 1 from athlete_account_links l
-    where l.athlete_id = a.id and l.status = 'active')`;
-
 const indexableProfiles = `select a.slug, 'source-' || lpad(a.id::text, 20, '0') as sort_key
-  from athletes a where ${publicSourceProfile}
-  union all
-  select s.slug, 'shared-' || s.slug as sort_key from athlete_public_shares s
-  join athlete_identifiers i on i.user_id=s.user_id
-  where s.enabled and s.search_indexable`;
+  from athletes a where ${indexableApprovedAthleteSql}`;
 
 export async function athleteSitemapPageCount(sql: Sql): Promise<number> {
   const [row] = await sql.query<{ count: number }>(

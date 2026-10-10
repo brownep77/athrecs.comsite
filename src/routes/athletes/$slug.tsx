@@ -37,13 +37,14 @@ import { AthleteId } from "@/components/athletes/AthleteId";
 import { formatAthleteId } from "@/lib/athrecs/athlete-id";
 import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
 import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
+import {
+  ATHLETE_INDEXING_HEADER,
+  INDEXABLE_ATHLETE_ROBOTS,
+  PRIVATE_ATHLETE_ROBOTS,
+  isIndexableAthletePage,
+} from "@/lib/athrecs/athlete-search-policy";
 
 export const Route = createFileRoute("/athletes/$slug")({
-  headers: () => ({
-    "Cache-Control": "private, no-store",
-    Vary: "Cookie, Authorization",
-    "X-Robots-Tag": "noindex, nofollow, noarchive",
-  }),
   loader: async ({ params }) => {
     const published = await getAdministratorPublishedAthlete({ data: params.slug });
     if (published) {
@@ -96,6 +97,14 @@ export const Route = createFileRoute("/athletes/$slug")({
     }
     throw notFound();
   },
+  headers: ({ loaderData }) => ({
+    "Cache-Control": "private, no-store",
+    Vary: "Cookie, Authorization",
+    "X-Robots-Tag": isIndexableAthletePage(loaderData)
+      ? INDEXABLE_ATHLETE_ROBOTS
+      : PRIVATE_ATHLETE_ROBOTS,
+    [ATHLETE_INDEXING_HEADER]: isIndexableAthletePage(loaderData) ? "1" : "0",
+  }),
   head: ({ params, loaderData }) => ({
     links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
     meta: [
@@ -105,7 +114,12 @@ export const Route = createFileRoute("/athletes/$slug")({
             ? `${loaderData.athlete.display_name} | ${SITE_NAME}`
             : `Athlete profile | ${SITE_NAME}`,
       },
-      { name: "robots", content: "noindex, nofollow, noarchive" },
+      {
+        name: "robots",
+        content: isIndexableAthletePage(loaderData)
+          ? INDEXABLE_ATHLETE_ROBOTS
+          : PRIVATE_ATHLETE_ROBOTS,
+      },
       {
         name: "description",
         content:

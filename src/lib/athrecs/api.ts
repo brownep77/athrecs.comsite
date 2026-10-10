@@ -1110,10 +1110,12 @@ export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" }
       where l.athlete_id=${profile.athlete.id} and l.status='active' limit 1
     `;
     if (sharing && (!sharing.enabled || !sharing.share_results)) return null;
+    const { isApprovedAthleteIndexable } = await import("./athlete-search-policy.server");
     // The publication covers sporting results and basic athlete identity only.
     // Account details, contact preferences and future plans remain member-only.
     return {
       ...profile,
+      searchIndexable: await isApprovedAthleteIndexable(sql, profile.athlete.id),
       athlete: {
         ...profile.athlete,
         bio: "",
