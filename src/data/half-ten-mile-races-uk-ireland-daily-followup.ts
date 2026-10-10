@@ -24,6 +24,12 @@ const LATEST_REGISTRATION_SCAN_CHECKED_AT = "2026-09-27";
 const CURRENT_DISCOVERY_SCAN_CHECKED_AT = "2026-09-28";
 const CURRENT_OPEN_ENTRY_SCAN_CHECKED_AT = "2026-10-02";
 const CURRENT_CHALLENGE_SCAN_CHECKED_AT = "2026-10-04";
+const CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT = "2026-10-05";
+const CURRENT_SITEMAP_REFRESH_CHECKED_AT = "2026-10-06";
+const CURRENT_PERMIT_REFRESH_CHECKED_AT = "2026-10-07";
+const CURRENT_SERIES_REFRESH_CHECKED_AT = "2026-10-08";
+const CURRENT_NEW_EVENT_SCAN_CHECKED_AT = "2026-10-09";
+const CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT = "2026-10-10";
 
 type RaceDistance = "Half" | "10mi";
 type RaceCountry = "England" | "Scotland" | "Wales" | "Northern Ireland" | "Ireland";
@@ -54,6 +60,67 @@ type RaceSeed = {
 };
 
 const seeds: RaceSeed[] = [
+  {
+    slug: "settle-saunter-2027",
+    name: "Settle Saunter 2027",
+    date: "2027-05-23",
+    distance: "Half",
+    country: "England",
+    county: "North Yorkshire",
+    city: "Settle",
+    area: "Victoria Hall and Yorkshire Dales footpaths and bridleways",
+    surface: "Trail",
+    distances: ["Half", "23mi", "10K"],
+    organiser: "Rotary Club of Settle / SiEntries",
+    url: "https://www.sientries.co.uk/event/settle-saunter-2027",
+    status: "TBC",
+    hasEntry: false,
+    priceAmount: 28,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official direct-registration page confirms the 23 May 2027 date, timed walking/running format, 23-mile, half-marathon and 10K routes, and £28 half fee. Entries open on 2 December 2026 and the half uses a staggered 09:00–10:00 window, so no premature checkout or single start time is published.",
+  },
+  {
+    slug: "trim-10-mile-road-race-2027",
+    name: "Nally's SuperValu Trim 10 Mile Road Race 2027",
+    date: "2027-01-31",
+    distance: "10mi",
+    startTime: "12:00",
+    country: "Ireland",
+    county: "County Meath",
+    city: "Trim",
+    area: "Eamonn Duggan Industrial Estate and roads around Trim",
+    surface: "Road",
+    organiser: "Trim AC / Eventmaster",
+    url: "https://eventmaster.ie/event/rZQofPmS9y",
+    entryUrl: "https://eventmaster.ie/event/rZQofPmS9y",
+    priceAmount: 42,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    notes:
+      "The direct official registration page now confirms approved Athletics Ireland permit 26/581, the 31 January 2027 date, 12:00 start and open €42 entry.",
+  },
+  {
+    slug: "abbeyknockmoy-5k-10k-half-marathon-2027",
+    name: "Abbeyknockmoy Hurling Club 5K, 10K & Half Marathon 2027",
+    date: "2027-09-12",
+    distance: "Half",
+    startTime: "10:00",
+    country: "Ireland",
+    county: "County Galway",
+    city: "Abbeyknockmoy",
+    area: "Abbeyknockmoy and surrounding certified road routes",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "Abbeyknockmoy Hurling Club / Eventmaster",
+    url: "https://eventmaster.ie/event/j9qbiE0TBz",
+    entryUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
+    priceAmount: 40,
+    priceCurrency: "EUR",
+    checkedAt: CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    notes:
+      "The direct official registration page now confirms approved Athletics Ireland permit 26/583, the 12 September 2027 programme, 10:00 half-marathon start and open €40 half entry.",
+  },
   {
     slug: "looe-10-miler-2027",
     name: "Looe 10 Miler 2027",
@@ -1294,6 +1361,26 @@ const seeds: RaceSeed[] = [
       "The official organiser page consistently confirms the marathon, half marathon and 10K on 2 May 2027, the 09:25 half-marathon start and open direct entry.",
   },
   {
+    slug: "nottingham-running-festival-august-2027",
+    name: "Nottingham Running Festival — August 2027",
+    date: "2027-08-29",
+    distance: "Half",
+    startTime: "09:30",
+    country: "England",
+    county: "Nottinghamshire",
+    city: "Nottingham",
+    area: "Nottingham Racecourse",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/nottingham-running-festival-august-2027",
+    priceAmount: 26,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 29 August 2027 half marathon, 10K and 5K programme, the 09:30 half start and open £26 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination.",
+  },
+  {
     slug: "crystal-palace-5k-10k-half-marathon-juniors-may-2027",
     name: "Crystal Palace 5K, 10K, Half Marathon & Juniors — May 2027",
     date: "2027-05-02",
@@ -1387,6 +1474,173 @@ type ExistingSeriesEditionSeed = {
 };
 
 const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
+  {
+    seriesSlug: "tonbridge-half-marathon",
+    date: "2027-10-03",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/run-kent-october-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/run-kent-october-2027",
+    publishAllDistances: true,
+    priceAmount: 38,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 3 October 2027 half marathon, 10K and 5K programme, the 09:00 half start and open £38 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Tonbridge card is enriched.",
+  },
+  {
+    seriesSlug: "leeds-running-festival-march-2027",
+    date: "2027-05-30",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/leeds-running-festival-may-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/leeds-running-festival-may-2027",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 30 May 2027 half marathon, 10K, 5K and junior programme, the 09:00 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Leeds card is enriched.",
+  },
+  {
+    seriesSlug: "southampton-running-festival-may-2027",
+    date: "2027-08-08",
+    startTime: "09:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/southampton-running-festival-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/southampton-running-festival-august-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 8 August 2027 half marathon, 10K, 5K and junior programme, the 09:30 half start and open £36 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Southampton card is enriched.",
+  },
+  {
+    seriesSlug: "running-grand-prix-oulton-park-augut",
+    date: "2027-08-15",
+    startTime: "11:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/oulton-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/oulton-august-2027",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 15 August 2027 multi-distance programme, the 11:00 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Oulton Park card is enriched.",
+  },
+  {
+    seriesSlug: "warrington-running-festival",
+    date: "2027-09-26",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/warrington-running-festival-september-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/warrington-running-festival-september-2027",
+    publishAllDistances: true,
+    priceAmount: 29,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 26 September 2027 half marathon, 10K and 5K programme, the 09:00 half start and open £29 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Warrington card is enriched.",
+  },
+  {
+    seriesSlug: "croft-running-festival-november-2026",
+    date: "2027-11-21",
+    startTime: "09:45",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/running-gp-croft-motor-circuit-november-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/running-gp-croft-motor-circuit-november-2027",
+    publishAllDistances: true,
+    priceAmount: 32,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 21 November 2027 half marathon, 10-mile, marathon, metric-marathon, 20-mile, 10K and 5K programme, the 09:45 half start and open £32 half entry. The 10-mile starts at 10:00 and costs £30. Downstream checkouts currently redirect to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Croft card is enriched.",
+  },
+  {
+    seriesSlug: "running-grand-prix-oulton-park-augut",
+    date: "2027-11-28",
+    startTime: "11:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/oulton-november-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/oulton-november-2027",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 28 November 2027 multi-distance programme, the 11:00 half start and open £34 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Oulton Park card is enriched.",
+  },
+  {
+    seriesSlug: "edinburgh-running-festival",
+    date: "2027-08-01",
+    startTime: "10:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
+    publishAllDistances: true,
+    priceAmount: 36,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 1 August 2027 half marathon, 10K and 5K programme, 10:00 half start and open £36 half entry. The downstream checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the existing Edinburgh card is enriched.",
+  },
+  {
+    seriesSlug: "runthrough-gatwick-november-2027",
+    date: "2027-11-21",
+    startTime: "09:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    publishAllDistances: true,
+    priceAmount: 38,
+    checkedAt: CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the half marathon and 5K on 21 November 2027, its 09:00 half start and open £38 half entry. The downstream half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified organiser page is retained as the safe entry destination and the established Run Gatwick 5K card is enriched.",
+  },
+  ...[
+    ["2027-01-17", "january"],
+    ["2027-05-02", "may"],
+    ["2027-10-17", "october"],
+    ["2027-12-12", "december"],
+  ].map(([date, month]) => {
+    const url =
+      `https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-${month}-2027`;
+    return {
+      seriesSlug: "run-heaton-park-half-marathon-march-2027",
+      date,
+      startTime: "09:30",
+      organiser: "RunThrough Events",
+      url,
+      entryUrl: url,
+      publishAllDistances: true,
+      priceAmount: 30,
+      checkedAt: CURRENT_SERIES_REFRESH_CHECKED_AT,
+      notes:
+        "The official organiser page consistently confirms this 2027 half marathon, 10K, 5K and junior programme, the 09:30 half-marathon start and open entry. Its half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified event page is retained as the safe entry destination and the established Heaton Park card is reused.",
+    };
+  }),
+  {
+    seriesSlug: "running-grand-prix-oulton-park-augut",
+    date: "2027-02-14",
+    startTime: "11:00",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/oulton-park-gp-5k-10k-half-marathon-marathon-20-mile-metric-marathon-february-2027",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/189561/race-selection?preferred=true&utm_source=runthrough&utm_medium=organiser_referral&utm_campaign=preferred&event_id=189561&origin=runthrough&lraces=21111465818&utm_organiser_id=69173",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 14 February 2027 multi-distance programme, 11:00 half-marathon start and open entry; the established Oulton Park card is enriched rather than duplicated.",
+  },
+  {
+    seriesSlug: "dorney-5k-10k-half-marathon-august-1",
+    date: "2027-04-03",
+    startTime: "09:10",
+    organiser: "RunThrough Events / Dorney Lake Events",
+    url: "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027",
+    entryUrl:
+      "https://www.letsdothis.com/gb/e/189561/race-selection?preferred=true&utm_source=runthrough&utm_medium=organiser_referral&utm_campaign=preferred&event_id=189561&origin=runthrough&lraces=21111465449&utm_organiser_id=69173",
+    publishAllDistances: true,
+    priceAmount: 34,
+    checkedAt: CURRENT_PERMIT_REFRESH_CHECKED_AT,
+    notes:
+      "RunThrough has corrected the former stale date and midnight placeholder: the official page now consistently confirms 3 April 2027, a 09:10 all-distance start and open entry. The established Dorney Lake card is reused.",
+  },
   {
     seriesSlug: "tatton-half-marathon-november",
     date: "2027-11-07",
@@ -1835,6 +2089,19 @@ const existingSeriesEditionSeeds: ExistingSeriesEditionSeed[] = [
     notes:
       "The direct official registration page confirms the half marathon and marathon on 4 September 2027 at 09:00. Both distances are sold out and only a waiting list is available, so the permanent Dingle card is enriched without advertising checkout.",
   },
+  {
+    seriesSlug: "battersea-park-10k-half-marathon-august",
+    date: "2027-08-08",
+    startTime: "10:30",
+    organiser: "RunThrough Events",
+    url: "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-august-2027",
+    entryUrl: "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-august-2027",
+    publishAllDistances: true,
+    priceAmount: 38,
+    checkedAt: CURRENT_SITEMAP_REFRESH_CHECKED_AT,
+    notes:
+      "The official organiser page consistently confirms the 8 August 2027 half marathon, 10K and 5K, the 10:30 half-marathon start and open entry. Its half-marathon checkout currently redirects to an unrelated Blackburn race, so the verified event page is retained as the safe entry destination and the established August card is reused.",
+  },
 ];
 
 /** New verified dates attached to existing catalogue cards rather than creating duplicate series. */
@@ -2034,7 +2301,6 @@ export const dailyHalfTenMileResearchQueue = [
     ["january", "2027-01-17"],
     ["february", "2027-02-06"],
     ["march", "2027-03-13"],
-    ["april", "2027-04-03"],
   ].map(([month, date]) => ({
     slug: `run-dorney-lake-half-marathon-10k-5k-${month}-2027`,
     date,
@@ -2106,14 +2372,6 @@ export const dailyHalfTenMileResearchQueue = [
     reason:
       "The official entry page markets a half marathon but specifies an actual route distance of 13.5 miles, so it is held for the non-standard-distance catalogue rather than mislabelled as a canonical half.",
     sourceUrl: "https://www.sientries.co.uk/event/lundy-island-race-2027",
-  },
-  {
-    slug: "abbeyknockmoy-half-marathon-2027",
-    date: "2027-09-12",
-    country: "Ireland",
-    reason:
-      "The direct registration page confirms the date and half-marathon distance but labels the Athletics Ireland permit as pending approval.",
-    sourceUrl: "https://eventmaster.ie/event/j9qbiE0TBz",
   },
   {
     slug: "runclare-lisdoonvarna-10-mile-2027",
@@ -2212,14 +2470,6 @@ export const dailyHalfTenMileResearchQueue = [
     sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
   },
   {
-    slug: "trim-10-mile-road-race-2027",
-    date: "2027-01-31",
-    country: "Ireland",
-    reason:
-      "Checked 2026-10-01: the official Athletics Ireland calendar confirms the 10-mile date but still labels the permit as pending approval and registration as Open Soon.",
-    sourceUrl: "https://athleticsireland.eventmaster.ie/event-calendar/",
-  },
-  {
     slug: "noreen-mccarthy-memorial-10-mile-2027",
     date: "2027-02-14",
     country: "Ireland",
@@ -2268,6 +2518,10 @@ const BRIGHTEN_MARINA_URL =
   "https://www.ukrunningevents.co.uk/events/trail-runs/brighten-brighton-marina-run-2027";
 const TADCASTER_10_URL = "https://racebest.com/races/e6z7h";
 const TADCASTER_10_ENTRY_URL = "https://racebest.com/races/e6z7h/enter";
+const HAWESWATER_HALF_URL = "https://www.sientries.co.uk/event/haweswater-half-marathon-2027";
+const HAWESWATER_HALF_ENTRY_URL = "https://www.sientries.co.uk/enter.php?event_id=18793";
+const BATTERSEA_AUGUST_2027_URL =
+  "https://www.runthrough.co.uk/event/battersea-park-5k-10k-half-marathon-august-2027";
 
 /** A newly published year-suffixed card that resolves to the established permanent race URL. */
 export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
@@ -2276,6 +2530,150 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "tonbridge-half-marathon": {
+    website: "https://www.runthrough.co.uk/event/run-kent-october-2027",
+    source_url: "https://www.runthrough.co.uk/event/run-kent-october-2027",
+  },
+  "leeds-running-festival-march-2027": {
+    website: "https://www.runthrough.co.uk/event/leeds-running-festival-may-2027",
+    source_url: "https://www.runthrough.co.uk/event/leeds-running-festival-may-2027",
+  },
+  "southampton-running-festival-may-2027": {
+    website: "https://www.runthrough.co.uk/event/southampton-running-festival-august-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/southampton-running-festival-august-2027",
+  },
+  "warrington-running-festival": {
+    website:
+      "https://www.runthrough.co.uk/event/warrington-running-festival-september-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/warrington-running-festival-september-2027",
+  },
+  "croft-running-festival-november-2026": {
+    website:
+      "https://www.runthrough.co.uk/event/running-gp-croft-motor-circuit-november-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/running-gp-croft-motor-circuit-november-2027",
+  },
+  "edinburgh-running-festival": {
+    name: "Edinburgh Running Festival Half Marathon, 10K & 5K",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Edinburgh Running Festival Half Marathon, 10K & 5K — a multi-distance road event in Holyrood Park.",
+    description:
+      "RunThrough's Edinburgh Running Festival offers a half marathon, 10K and 5K from Holyrood Park on one canonical event card.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
+    source_url: "https://www.runthrough.co.uk/event/edinburgh-running-festival-august-2027",
+    defaultStartTime: "10:00",
+  },
+  "runthrough-gatwick-november-2027": {
+    name: "Run Gatwick Half Marathon & 5K",
+    country: "England",
+    county: "West Sussex",
+    city: "Crawley",
+    area: "Southgate Park, Crawley and roads near Gatwick Airport",
+    surface: "Road",
+    distances: ["Half", "5K"],
+    summary: "Run Gatwick Half Marathon & 5K — a road race from central Crawley towards Gatwick Airport.",
+    description:
+      "RunThrough's Run Gatwick event offers a road half marathon and 5K from Southgate Park through Crawley and roads near Gatwick Airport; the established 5K card now carries the verified half-marathon edition.",
+    organiser: "RunThrough Events",
+    website: "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/run-gatwick-half-marathon-5k-november-2027",
+    defaultStartTime: "09:00",
+  },
+  "run-heaton-park-half-marathon-march-2027": {
+    name: "Run Heaton Park 5K, 10K, Half Marathon & Junior Race",
+    country: "England",
+    county: "Greater Manchester",
+    city: "Manchester",
+    area: "Heaton Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Run Heaton Park Half Marathon — year-round multi-distance race days in Manchester.",
+    description:
+      "RunThrough's Heaton Park race days offer a half marathon, 10K, 5K and junior race on the park's tarmac paths; the established card carries all verified 2027 editions.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-october-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/run-heaton-park-5k-10k-half-marathon-junior-race-october-2027",
+    defaultStartTime: "09:30",
+  },
+  "running-grand-prix-oulton-park-augut": {
+    name: "Oulton Park Running Grand Prix",
+    country: "England",
+    county: "Cheshire",
+    city: "Tarporley",
+    area: "Oulton Park Race Circuit, Little Budworth",
+    surface: "Road",
+    distances: ["Half", "Marathon", "20M", "Metric Marathon", "10K", "5K"],
+    summary:
+      "Oulton Park Running Grand Prix — traffic-free races around the Oulton Park motor circuit.",
+    description:
+      "RunThrough's Oulton Park Running Grand Prix offers half-marathon, marathon, 20-mile, metric-marathon, 10K and 5K races on the closed motor circuit; the established card carries the verified 2027 edition.",
+    organiser: "RunThrough Events",
+    website:
+      "https://www.runthrough.co.uk/event/oulton-park-gp-5k-10k-half-marathon-marathon-20-mile-metric-marathon-february-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/oulton-park-gp-5k-10k-half-marathon-marathon-20-mile-metric-marathon-february-2027",
+    defaultStartTime: "11:00",
+  },
+  "dorney-5k-10k-half-marathon-august-1": {
+    name: "Dorney Lake 5K, 10K, Half Marathon & Marathon",
+    country: "England",
+    county: "Buckinghamshire",
+    city: "Windsor",
+    area: "Dorney Lake",
+    surface: "Road",
+    distances: ["Half", "Marathon", "10K", "5K"],
+    summary:
+      "Dorney Lake 5K, 10K, Half Marathon & Marathon — flat road races around the Olympic rowing lake.",
+    description:
+      "RunThrough and Dorney Lake Events stage flat multi-lap road races around the London 2012 rowing lake; the established card carries the verified April 2027 edition.",
+    organiser: "RunThrough Events / Dorney Lake Events",
+    website: "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/run-dorney-lake-half-marathon-10k-5k-april-2027",
+    defaultStartTime: "09:10",
+  },
+  "battersea-park-10k-half-marathon-august": {
+    name: "Battersea Park 5K, 10K & Half Marathon",
+    country: "England",
+    county: "Greater London",
+    city: "London",
+    area: "Battersea Park",
+    surface: "Road",
+    distances: ["Half", "10K", "5K"],
+    summary:
+      "Battersea Park 5K, 10K & Half Marathon — flat road races on the park's traffic-free paths.",
+    description:
+      "RunThrough's Battersea Park race day offers a half marathon, 10K and 5K on flat, traffic-free park paths; the established August card carries the verified 2027 edition.",
+    organiser: "RunThrough Events",
+    website: BATTERSEA_AUGUST_2027_URL,
+    source_url: BATTERSEA_AUGUST_2027_URL,
+    defaultStartTime: "10:30",
+  },
+  "ea-runevents-haweswater-half-marathon-penrith": {
+    name: "Haweswater Half Marathon",
+    country: "England",
+    county: "Cumbria",
+    city: "Bampton",
+    area: "Bampton Village Hall and the Haweswater valley",
+    surface: "Road",
+    distances: ["Half"],
+    summary:
+      "Haweswater Half Marathon — a licensed road half marathon from Bampton into the Haweswater valley.",
+    description:
+      "Eden Runners' Haweswater Half Marathon follows an out-and-back road route from Bampton into the Haweswater valley; the established card carries the verified 2027 edition and event-specific SiEntries checkout.",
+    organiser: "Eden Runners",
+    website: "https://edenrunners.co.uk/haweswater-half-marathon/",
+    source_url: HAWESWATER_HALF_URL,
+    defaultStartTime: "11:30",
+  },
   "dingle-marathon": {
     name: "Dingle Marathon & Half Marathon",
     country: "Ireland",
@@ -2704,6 +3102,14 @@ export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = 
 };
 
 export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> = {
+  "ea-runevents-haweswater-half-marathon-penrith|2027-03-07|Half": {
+    status: "Open",
+    entryUrl: HAWESWATER_HALF_ENTRY_URL,
+    startTime: "11:30",
+    source: HAWESWATER_HALF_URL,
+    notes:
+      "The current authorised SiEntries page confirms the 7 March 2027 road half marathon, 11:30 start, open event-specific checkout and race licence 31512.",
+  },
   "ott-trail-marathon-10-mile-2027|2027-05-15|10mi": {
     status: "Open",
     entryUrl: "https://www.sientries.co.uk/enter.php?event_id=18393",
@@ -2762,6 +3168,22 @@ export const dailyHalfTenMileEditionOverrides: Record<string, Partial<Edition>> 
 };
 
 export const dailyHalfTenMileEntryOptions: Record<string, EntryOptionSeed[]> = {
+  "ea-runevents-haweswater-half-marathon-penrith|2027-03-07|Half": [
+    {
+      providerCode: "official-haweswater-half-marathon-2027",
+      providerName: "Eden Runners / SiEntries",
+      entryUrl: HAWESWATER_HALF_ENTRY_URL,
+      entryType: "official",
+      status: "open",
+      priceAmount: 25,
+      priceCurrency: "GBP",
+      checkedAt: CURRENT_DIRECT_ENTRY_SCAN_CHECKED_AT,
+      sourceUrl: HAWESWATER_HALF_URL,
+      isVerified: true,
+      isPrimary: true,
+      notes: "Direct official event-specific registration checkout; affiliated entry price.",
+    },
+  ],
   "blarney-stone-mad-half-marathon-2027|2027-03-14|Half": [
     {
       providerCode: "official-blarney-stone-mad-half-marathon-2027",
