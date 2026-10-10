@@ -15,7 +15,9 @@ export function seconds(value) {
 export function readTimingTable(table) {
   const headings = table.headers.map((h) => h.replace(/\s+/g, " ").trim());
   const column = (label) => headings.findIndex((h) => h === label);
-  const required = ["Position", "Forename", "Surname", "Gender Pos", "Cat Pos"];
+  // Some official individual fields do not publish classification positions.
+  // Missing optional columns stay null; never invent a placing for them.
+  const required = ["Position", "Forename", "Surname"];
   if (required.some((label) => column(label) < 0)) return null;
   const value = (row, label) => (column(label) < 0 ? null : row[column(label)]);
   const rank = (v) => (/^\d+$/.test(v ?? "") ? Number(v) : null);
@@ -34,14 +36,31 @@ export function readTimingTable(table) {
   }));
 }
 
-export function compareResult(result, source) {
-  const flags = [];
+function prepareSource(source) {
   const officialDates = source.startTimes.map((s) => s.slice(0, 10).split("/").reverse().join("-"));
   const tables = source.tables.map(readTimingTable);
-  const matches = tables
-    .filter(Boolean)
-    .flat()
-    .filter((row) => normalizeName(row.name) === normalizeName(result.display_name));
+  const byName = new Map();
+  for (const row of tables.filter(Boolean).flat()) {
+    const key = normalizeName(row.name);
+    const matches = byName.get(key) ?? [];
+    matches.push(row);
+    byName.set(key, matches);
+  }
+  return { officialDates, tables, byName };
+}
+
+export function compareResult(result, source, preparedSource) {
+  const flags = [];
+  const { officialDates, tables, byName } = preparedSource ?? prepareSource(source);
+  const nameMatches = byName.get(normalizeName(result.display_name)) ?? [];
+  // Optional source-row evidence disambiguates two entrants with the same name.
+  // It is a race-entry locator, never proof that this is a claimed athlete.
+  const sourceBib = String(result.source_bib ?? "").trim();
+  const matches = sourceBib
+    ? nameMatches.filter((row) => String(row.bib ?? "").trim() === sourceBib)
+    : nameMatches;
+  if (sourceBib && nameMatches.length && !matches.length)
+    flags.push("bib_not_found_for_name");
   if (!officialDates.length) flags.push("source_date_not_captured");
   else if (!officialDates.includes(result.event_date.slice(0, 10)))
     flags.push("cited_race_date_mismatch");
@@ -77,7 +96,9 @@ export function compareResult(result, source) {
       [result.gender_place, match.gender, "gender_place"],
       [result.category_place, match.categoryPlace, "category_place"],
     ])
-      if (stored != null && official != null && stored !== official)
+      if (stored != null && official == null)
+        flags.push(`${label}_not_supplied_by_source`);
+      else if (stored != null && official != null && stored !== official)
         flags.push(`${label}_mismatch`);
     if (flags.includes("gender_place_mismatch") && result.gender_place === match.categoryPlace)
       flags.push("gender_place_equals_official_category_place");
@@ -111,10 +132,13 @@ export function compareResult(result, source) {
 
 export function auditResults(results, sources, asOf = new Date().toISOString().slice(0, 10)) {
   const sourceByUrl = new Map(sources.map((s) => [s.url, s]));
+  // Compile each original timing table once per audit. Full race fields can have
+  // thousands of rows; reparsing all rows for every runner made this quadratic.
+  const preparedByUrl = new Map([...sourceByUrl].map(([url, source]) => [url, prepareSource(source)]));
   const comparisons = results.flatMap((result) =>
     [...new Set([result.source_url, result.edition_source_url])]
       .filter((url) => sourceByUrl.has(url))
-      .map((url) => compareResult(result, sourceByUrl.get(url))),
+      .map((url) => compareResult(result, sourceByUrl.get(url), preparedByUrl.get(url))),
   );
   const covered = new Set(comparisons.map((c) => c.result_id));
   const issues = results.flatMap((r) => {
