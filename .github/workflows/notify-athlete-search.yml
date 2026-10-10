@@ -1,43 +1,63 @@
 name: Notify search engines of public athlete profiles
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - "scripts/submit-athlete-indexnow.mjs"
+      - "scripts/lib/athlete-search-readiness.mjs"
+      - "scripts/verify-athlete-search-notification.mjs"
+      - ".github/workflows/notify-athlete-search.yml"
   push:
     branches: [main]
     paths:
-      - 'src/components/athletes/**'
-      - 'src/routes/athletes/**'
-      - 'src/lib/athrecs/athlete-sitemap.server.ts'
-      - 'migrations/20260923_profile_search_and_edits.sql'
-      - '.github/workflows/notify-athlete-search.yml'
+      - "src/components/athletes/**"
+      - "src/routes/athletes/**"
+      - "src/routes/sitemap*.ts"
+      - "src/routes/sitemaps/**"
+      - "src/lib/athrecs/athlete-sitemap.server.ts"
+      - "migrations/20260923_profile_search_and_edits.sql"
+      - "scripts/submit-athlete-indexnow.mjs"
+      - "scripts/lib/athlete-search-readiness.mjs"
+      - "scripts/verify-athlete-search-notification.mjs"
+      - ".github/workflows/notify-athlete-search.yml"
 permissions:
   contents: read
 concurrency:
-  group: notify-athlete-search
+  group: notify-athlete-search-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  eligibility:
+    name: Validate athlete search eligibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    outputs:
+      ready: ${{ steps.live.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Verify notification safeguards with synthetic responses
+        run: node scripts/verify-athlete-search-notification.mjs
+      # A healthy sitemap with no athlete URLs is a deliberate no-submission
+      # outcome. Network/HTTP/metadata failures still fail this job closed.
+      - name: Check live public sitemap and anonymous indexing permissions
+        id: live
+        run: node scripts/submit-athlete-indexnow.mjs --check
   notify:
+    name: Submit eligible public athlete URLs
+    needs: eligibility
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.eligibility.outputs.ready == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'
-      - name: Wait for the public profile release
-        run: |
-          node --input-type=module <<'JS'
-          const origin = 'https://www.athrecs.com';
-          let ready = false;
-          for (let attempt = 0; attempt < 30; attempt++) {
-            try {
-              const response = await fetch(`${origin}/athletes/paul-browne`, { signal: AbortSignal.timeout(10000) });
-              const html = await response.text();
-              ready = response.ok && html.includes('id="suggest-edit"') && /<meta[^>]*name="robots"[^>]*content="index, follow/.test(html);
-              if (ready) break;
-            } catch { /* Deployment may still be replacing the previous version. */ }
-            await new Promise(resolve => setTimeout(resolve, 15000));
-          }
-          if (!ready) throw new Error('The indexable profile release is not live; no URLs submitted.');
-          JS
-      - name: Submit live sitemap URLs to IndexNow
+          node-version: "24"
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Revalidate live URLs and submit to IndexNow
         run: node scripts/submit-athlete-indexnow.mjs
