@@ -126,6 +126,20 @@ assert.equal(
 );
 assert.equal(profileDisciplineLabel("10 Kilometres Road"), profileDisciplineLabel("10K"));
 assert.equal(profileDisciplineLabel("10 Miles Road"), profileDisciplineLabel("10mi"));
+assert.equal(profileDisciplineLabel("Mile"), "Mile");
+assert.equal(profileDisciplineLabel("Mile Road"), "1mi");
+const miles = buildProfileTimeline(
+  [],
+  history([
+    row({ discipline: "2 Miles", performance: "8:30.00" }),
+    row({ discipline: "2 Miles Road", performance: "8:30.00" }),
+  ]),
+);
+assert.equal(miles.count, 2, "Track and road mile races must not collapse");
+assert.deepEqual(
+  miles.history.map((r) => r.sport),
+  ["Athletics", "Running"],
+);
 console.log(
   "Profile timeline: deduplication, source precedence, precision, year-only dates, rounds and eligibility checks passed.",
 );

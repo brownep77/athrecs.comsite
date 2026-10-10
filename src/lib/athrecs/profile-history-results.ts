@@ -12,6 +12,9 @@ function historySport(discipline: string): HistoryResult["sport"] {
   // Explicit multisport labels take priority over distances within a race leg.
   if (/\btriathlon\b/i.test(discipline)) return "Triathlon";
   if (/\bduathlon\b/i.test(discipline)) return "Duathlon";
+  // World Athletics uses these unqualified names for track events.
+  if (/^(?:mile|2 miles)$/i.test(discipline.trim())) return "Athletics";
+  if (/^mile road$/i.test(discipline.trim())) return "Running";
   return /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*(?:k(?:m)?|kilometres|kilometers)|\d+(?:\.\d+)?\s*(?:mi|mile|miles))(?: road)?$/i.test(
     discipline.trim().replace(/\s*\(short course\)$/i, ""),
   )
