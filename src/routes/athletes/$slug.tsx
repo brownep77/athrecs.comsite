@@ -471,6 +471,9 @@ function AthleteContent() {
             includedHistory) && (
             <ProfileRecordHighlights
               compact
+              highlights={career?.achievements.filter(
+                (achievement) => "showOnBoard" in achievement && achievement.showOnBoard === true,
+              )}
               results={profileResults}
               reportedBests={includedHistory?.personalBests}
               sourceHistories={sourceHistories}
