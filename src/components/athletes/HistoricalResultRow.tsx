@@ -44,6 +44,16 @@ export function HistoricalResultRow({
           {isCompletedHistoryResult(row) ? <CompletionMedal /> : null}
           {row.meeting}
         </span>
+        {!showEvidence && row.providerName && row.sourceUrls[0] ? (
+          <a
+            href={row.sourceUrls[0]}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-1 block text-xs font-normal text-accent"
+          >
+            Results: {row.providerName} ↗
+          </a>
+        ) : null}
         {row.notes ? (
           <details className="mt-1 max-w-sm whitespace-normal text-xs font-normal text-muted">
             <summary className="cursor-pointer">Result details</summary>
