@@ -10,6 +10,18 @@ const sourceUrl = z
 export const sourcePerformanceSchema = z.object({
   year: z.number().int().min(1800).max(2200),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  endDate: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/)
+    .nullable()
+    .optional(),
+  places: z
+    .object({
+      overall: z.number().int().positive().nullable(),
+      gender: z.number().int().positive().nullable(),
+      category: z.number().int().positive().nullable(),
+    })
+    .optional(),
   dateLabel: z.string().max(200).optional(),
   yearLabel: z.string().max(80).optional(),
   notes: z.string().max(6000).optional(),
