@@ -193,6 +193,7 @@ for (const edition of dailyHalfTenMileEditions) {
         CURRENT_PERMIT_REFRESH_CHECKED_AT,
         CURRENT_SERIES_REFRESH_CHECKED_AT,
         CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+        CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );
@@ -693,6 +694,7 @@ for (const edition of dailyHalfTenMileExistingSeriesEditions) {
         CURRENT_PERMIT_REFRESH_CHECKED_AT,
         CURRENT_SERIES_REFRESH_CHECKED_AT,
         CURRENT_NEW_EVENT_SCAN_CHECKED_AT,
+        CURRENT_LIVE_CALENDAR_SCAN_CHECKED_AT,
       ].includes(option.checkedAt),
       `${key} has a stale entry check date`,
     );

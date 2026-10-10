@@ -2530,6 +2530,31 @@ export const dailyHalfTenMileSlugAliases: Readonly<Record<string, string>> = {
 
 /** Existing runABC card enriched from the organiser rather than duplicated. */
 export const dailyHalfTenMileSeriesOverrides: Record<string, Partial<Series>> = {
+  "tonbridge-half-marathon": {
+    website: "https://www.runthrough.co.uk/event/run-kent-october-2027",
+    source_url: "https://www.runthrough.co.uk/event/run-kent-october-2027",
+  },
+  "leeds-running-festival-march-2027": {
+    website: "https://www.runthrough.co.uk/event/leeds-running-festival-may-2027",
+    source_url: "https://www.runthrough.co.uk/event/leeds-running-festival-may-2027",
+  },
+  "southampton-running-festival-may-2027": {
+    website: "https://www.runthrough.co.uk/event/southampton-running-festival-august-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/southampton-running-festival-august-2027",
+  },
+  "warrington-running-festival": {
+    website:
+      "https://www.runthrough.co.uk/event/warrington-running-festival-september-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/warrington-running-festival-september-2027",
+  },
+  "croft-running-festival-november-2026": {
+    website:
+      "https://www.runthrough.co.uk/event/running-gp-croft-motor-circuit-november-2027",
+    source_url:
+      "https://www.runthrough.co.uk/event/running-gp-croft-motor-circuit-november-2027",
+  },
   "edinburgh-running-festival": {
     name: "Edinburgh Running Festival Half Marathon, 10K & 5K",
     distances: ["Half", "10K", "5K"],
