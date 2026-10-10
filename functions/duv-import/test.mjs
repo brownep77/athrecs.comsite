@@ -1,0 +1,28 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {parseEvent,combinePages,dates,measurement} from './parser.mjs';
+import {Directory,eventDirectory} from './identity.mjs';
+const url='https://statistik.d-u-v.org/getresultevent.php?event=900001';
+const headings=['Rank','Performance','Surname, first name','Club','Nat.','YOB','M/F','Rank M/F','Cat','Cat. Rank'];
+function fixture({start=1,count=1,total=1,reorder=false,name='Example, Alice',runner='900001',performance='45.123 km',edition='',distance='6h'}={}){
+ const cells=[String(start),performance,`<a href="getresultperson.php?runner=${runner}">${name}</a>`,'Example AC','GBR','1980','F',String(start),'W45',String(start)];
+ const order=headings.map((_,i)=>i);if(reorder)order.reverse();
+ const meta=[['Date','04.10.2026'],['Event',edition+'Synthetic race (GBR)'],['Distance',distance+' road race'],['Finishers',`${total} (0 M, ${total} F)`]];
+ return Buffer.from('<table>'+meta.map(([k,v])=>`<tr><td><b>${k}:</b></td><td>${v}</td></tr>`).join('')+'</table>'+ (total>count?`${start} to ${start+count-1} of ${total} search results`:'')+
+ '<table id="Resultlist"><thead><tr>'+order.map(i=>'<th>'+headings[i]+'</th>').join('')+'</tr></thead><tbody><tr>'+order.map(i=>'<td>'+cells[i]+'</td>').join('')+'</tr></tbody></table>');
+}
+const inv={sourceUrl:url,index:{Date:'04.10.2026',Event:'Synthetic race (GBR)',Distance:'6h',Finishers:'1'}};
+const parse=(raw,inventory=inv,page=url)=>parseEvent(raw,inventory,'2026-10-10T08:00:00Z',2026,page);
+test('timed performance preserves exact distance, never finish time',()=>{const r=parse(fixture()).rows[0];assert.equal(r.performance.achievedDistanceMetres,'45123.000');assert.equal(r.performance.finishTimeSeconds,null);assert.equal(r.original.Performance,'45.123 km');});
+test('all columns follow headings, even when reordered',()=>{const a=parse(fixture()).rows[0],b=parse(fixture({reorder:true})).rows[0];assert.notEqual(a.sourceDocumentHash,b.sourceDocumentHash);const {sourceDocumentHash:ah,...av}=a,{sourceDocumentHash:bh,...bv}=b;assert.deepEqual(av,bv);});
+test('explicit edition prefix is retained without index rejection',()=>assert.equal(parse(fixture({edition:'99th '})).index.name,'99th Synthetic race (GBR)'));
+test('unknown headings fail closed',()=>assert.throws(()=>parse(Buffer.from(fixture().toString().replace('<th>Rank</th>','<th>Unknown</th>'))),/unmapped/));
+test('bad time in timed race fails closed',()=>assert.throws(()=>parse(fixture({performance:'06:00:00 h'})),/time_in_timed/));
+test('source pagination cannot be treated as complete',()=>{const p=parse(fixture({total:2}),{...inv,index:{...inv.index,Finishers:'2'}});assert.throws(()=>combinePages([p]),/not_complete/);});
+test('all pages combine with original row locators and raw document hashes',()=>{const i={...inv,index:{...inv.index,Finishers:'2'}};const a=parse(fixture({total:2}),i),b=parse(fixture({start:2,total:2,runner:'900002',name:'Sample, Beatrice'}),i,url+'&page=2');const c=combinePages([b,a]);assert.equal(c.rows.length,2);assert.equal(c.rows[1].sourceRow,2);assert.equal(c.audit.comparedPages,2);assert.equal(c.coverage.duvPageComplete,true);});
+test('duplicate source athlete across pages fails closed',()=>{const i={...inv,index:{...inv.index,Finishers:'2'}};assert.throws(()=>combinePages([parse(fixture({total:2}),i),parse(fixture({start:2,total:2}),i,url+'&page=2')]),/duplicate_runner/);});
+test('same source ID on another event links to existing athlete',()=>{const r=parse(fixture()).rows[0];const d=new Directory([{id:42,display_name:r.name,given_name:r.givenName,family_name:r.familyName,gender:'F',source_url:r.sourceAthleteUrl}]);assert.equal(d.decide(r,eventDirectory([r])).athleteId,42);});
+test('source ID with conflicting identity details stays held',()=>{const r=parse(fixture()).rows[0];const d=new Directory([{id:42,display_name:r.name,gender:'M',source_url:r.sourceAthleteUrl}]);assert.equal(d.decide(r,eventDirectory([r])).status,'held');});
+test('names, aliases and account names prevent duplicate creation',()=>{const r=parse(fixture()).rows[0];for(const d of [new Directory([{id:42,display_name:r.name}]),new Directory([{id:42,display_name:'Different Name',profile_details:{aliases:[r.name]}}]),new Directory([],[{full_name:r.name}])])assert.equal(d.decide(r,eventDirectory([r])).status,'held');});
+test('a repeated profile added in-memory prevents recreation',()=>{const r=parse(fixture()).rows[0],d=new Directory();assert.equal(d.decide(r,eventDirectory([r])).status,'created');d.addAthlete({id:3,display_name:r.name,gender:r.gender,source_url:r.sourceAthleteUrl});assert.equal(d.decide(r,eventDirectory([r])).status,'linked');});
+test('ambiguous multiple source ID associations are held',()=>{const r=parse(fixture()).rows[0];const d=new Directory([1,2].map(id=>({id,display_name:r.name,source_url:r.sourceAthleteUrl})));assert.equal(d.decide(r,eventDirectory([r])).status,'held');});
+test('multi-day dates and fractional times keep source precision',()=>{assert.deepEqual(dates('23.-24.05.2026'),{start:'2026-05-23',end:'2026-05-24'});assert.equal(measurement('4:16:26.12 h','45.6km').finishTimeSeconds,'15386.12');assert.throws(()=>dates('31.02.2026'),/invalid/);});

@@ -94,3 +94,61 @@ credentials outside source control. Preserve source evidence in the database;
 remove temporary connection files after the supervised session. Store only
 synthetic fixtures in tests. Report the exact number of events, source rows,
 profiles and holds actually committed; a first event is not a full-year import.
+
+## Full 2026 background import
+
+The bounded worker in `functions/duv-import/` extends the single-event workflow.
+It is deployed as the `duv2026` Neon Function on the existing AthRecs database.
+It requires the expected branch name, an administrator secret for manual control,
+and an approved, unrevoked staff-only job. The cron route accepts only genuine
+Neon schedule deliveries named `duv-2026-import`. Anonymous requests cannot start
+work or read job progress. No secret is embedded in the code or browser.
+
+`20261010_duv_year_import.sql` adds owner-only job, queue, original-document and
+matching-receipt tables. Original documents remain available when a row or event
+is held. An identity revision counter invalidates the in-memory directory when
+profiles, aliases, accounts or external identity associations change. Each write
+chunk checks that revision under a lock, writes private profiles and unpublished
+histories atomically, verifies its privacy/content invariants and records a cursor.
+The next invocation can resume after eviction without repeating finished rows.
+
+All seven index pages were compared with independent HTML parsers before seeding.
+The initial inventory contains 6,363 event IDs and 596,374 listed DUV performances.
+This is a snapshot of results available on 10 October, not an assertion that the
+calendar year has finished or that DUV contains every organiser's finisher.
+
+- Use `scripts/seed-private-duv-year.py` with an explicit connection, approved
+  evidence JSON, compared source directory and target branch. It starts paused.
+- Test on a current copied production branch, including authentication, a repeated
+  run, profile linking and independent original-source comparisons.
+- Activate the production job only after validation. The trigger is `*/5 * * * *`
+  UTC. A job lease allows only one worker; database-backed request reservations
+  enforce at least 21 seconds between source requests. Each invocation is bounded
+  to about four minutes and returns before the platform timeout.
+- Use actual observed pagination URLs. Every page is independently compared;
+  all rows, source IDs, page ranges and gender totals must reconcile before a
+  multi-page event becomes an imported capture. Per-page HTML and hashes remain
+  stored independently and each athlete history retains its source page/row.
+- Existing stable DUV IDs link further private history to the same profile only
+  when the recorded name and available sex/birth-year observations are consistent.
+  New results use a unique runner/event history key. Ambiguous names, conflicting
+  identities, possible minors and unparsed new-athlete performances stay held.
+- A source 401, 403 or 429 blocks the job. Database/identity invariants also block
+  it. Do not route around those failures. Malformed dates, changed source counts
+  and unfamiliar formats retain their evidence and become event-specific holds.
+- The job stops when its finite inventory is processed, and refuses work after
+  its configured expiry. Disable the trigger once completed (including completion
+  with review holds). A monitoring task may inspect the job and notify the owner
+  of a block or completion; it must not publish profiles or contact athletes.
+
+Read progress from `result_archive_import_jobs`, grouped queue states and grouped
+`result_archive_import_matches.status`; include the prior first-race import
+separately when reporting cumulative DUV totals. Report source rows and profiles
+as different counts. Previously captured races are recognized rather than copied.
+Source comparison is not independent identity verification.
+
+The operational secret and connection files belong outside Git. Build with
+`npm ci --prefix functions/duv-import` followed by `npm --prefix functions/duv-import
+run build`; deploy a ZIP with `index.mjs` at its root. The function runs beside
+Postgres and uses a small persistent `pg` pool. Run the worker regression tests
+with `npm --prefix functions/duv-import test`.
