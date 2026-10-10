@@ -270,6 +270,12 @@ const aliases: Record<string, string> = {
   cog: "CG",
   "great britain & n.i.": "GB",
   "trinidad and tobago": "TT",
+  // Unambiguous legacy codes from the IOC 2014 and IAAF 2016 country lists.
+  // https://odf.olympictech.org/2014-Sochi/2014_Sochi_Codes/htmlPG/15_country.htm
+  // https://iaaf-ebooks.s3.amazonaws.com/2016/World-Indoors-Portland/projet/IAAF-World-Indoor-Championships-2016.pdf
+  lib: "LB",
+  sin: "SG",
+  rom: "RO",
   // Current country/territory sporting codes from the IOC Olympic Data Feed.
   // https://odf.olympictech.org/2024-Paris/codes/HTML/og_cc/Country.htm
   // Display aliases only: preserve the exact source nationality and provenance.

@@ -52,6 +52,9 @@ try {
     TKS: "TC",
     BGD: "BD",
     COG: "CG",
+    LIB: "LB",
+    SIN: "SG",
+    ROM: "RO",
     "Great Britain & N.I.": "GB",
     "Trinidad and Tobago": "TT",
   })) {
