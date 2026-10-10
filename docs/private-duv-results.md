@@ -1,9 +1,20 @@
 # Private DUV results and provisional athlete profiles
 
+**Result publication update, 10 October 2026, 21:52 BST:** Paul explicitly
+requested all imported results public. This supersedes the earlier private-history
+default for matched DUV evidence on unclaimed public profiles. A separate
+`historyPublication` approval with scope `duv_matched_unclaimed_public_profiles`
+now controls publication. Raw captures remain staff-only and identity/result
+verification stays unchanged. Private/claimed profiles and unresolved matches
+remain excluded. The public-results SQL in main verified each historical row
+against its retained compared capture and published 59,266 histories; replay
+changed zero. Worker deployment 9 applies the same publication choice to newly
+matched rows, checks account/profile privacy, and records publication audits.
+
 **Profile publication update, 10 October 2026:** Paul subsequently authorised
 all profiles created by this DUV import to be public and listed in AthRecs'
 athlete directory. This supersedes the private-profile default for this job only.
-The source archive and result histories remain private and unverified. Existing
+At that earlier step, the source archive and histories remained private. Existing
 account privacy choices, unrelated profiles and uncertain identity holds are
 outside this profile-only publication.
 
