@@ -4,9 +4,11 @@ on:
     paths:
       - 'src/lib/athrecs/api.ts'
       - 'src/lib/athrecs/source-nationality.ts'
+      - 'src/lib/athrecs/country-flags.ts'
       - 'src/lib/athrecs/athlete-directory-api.ts'
       - 'src/lib/athrecs/athlete-directory.ts'
       - 'src/components/athletes/AthleteDirectoryCard.tsx'
+      - 'src/components/athletes/CountryFlag.tsx'
       - 'src/components/athletes/ProfileDetails.tsx'
       - 'src/routes/athletes/$slug.tsx'
       - 'src/athletics/routes/athletes/index.tsx'
@@ -17,9 +19,11 @@ on:
     paths:
       - 'src/lib/athrecs/api.ts'
       - 'src/lib/athrecs/source-nationality.ts'
+      - 'src/lib/athrecs/country-flags.ts'
       - 'src/lib/athrecs/athlete-directory-api.ts'
       - 'src/lib/athrecs/athlete-directory.ts'
       - 'src/components/athletes/AthleteDirectoryCard.tsx'
+      - 'src/components/athletes/CountryFlag.tsx'
       - 'src/components/athletes/ProfileDetails.tsx'
       - 'src/routes/athletes/$slug.tsx'
       - 'src/athletics/routes/athletes/index.tsx'
