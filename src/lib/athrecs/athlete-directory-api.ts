@@ -4,6 +4,7 @@ import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import type { AthleteDirectory } from "./athlete-directory";
 import { parseAthleteId } from "./athlete-id";
+import { readSourceNationality } from "./source-nationality";
 
 const inputSchema = z.object({
   q: z.string().trim().max(120).optional(),
@@ -95,5 +96,23 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
           else array[]::text[] end as sports
       from totals
     `;
-    return directory;
+    if (!directory.athletes.length) return directory;
+    // Fetch only this page's evidence, and expose only the nationality value.
+    // Full source metadata and account-owned details never enter the public list.
+    const observations = await sql<{ id: number; profile_details: unknown }>`
+      select a.id, a.profile_details from athletes a
+      where a.id=any(${directory.athletes.map((athlete) => athlete.id)}::int[])
+        and a.profile_visibility='public'
+        and not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
+    `;
+    const nationalities = new Map(
+      observations.map((row) => [row.id, readSourceNationality(row.profile_details)]),
+    );
+    return {
+      ...directory,
+      athletes: directory.athletes.map((athlete) => ({
+        ...athlete,
+        nationality: nationalities.get(athlete.id)?.value ?? null,
+      })),
+    };
   });

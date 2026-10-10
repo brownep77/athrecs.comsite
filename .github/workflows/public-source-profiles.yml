@@ -1,0 +1,41 @@
+name: Verify public source profiles
+on:
+  pull_request:
+    paths:
+      - 'src/lib/athrecs/api.ts'
+      - 'src/lib/athrecs/source-nationality.ts'
+      - 'src/lib/athrecs/athlete-directory-api.ts'
+      - 'src/lib/athrecs/athlete-directory.ts'
+      - 'src/components/athletes/AthleteDirectoryCard.tsx'
+      - 'src/components/athletes/ProfileDetails.tsx'
+      - 'src/routes/athletes/$slug.tsx'
+      - 'src/athletics/routes/athletes/index.tsx'
+      - 'scripts/verify-public-source-profiles.mjs'
+      - '.github/workflows/public-source-profiles.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/lib/athrecs/api.ts'
+      - 'src/lib/athrecs/source-nationality.ts'
+      - 'src/lib/athrecs/athlete-directory-api.ts'
+      - 'src/lib/athrecs/athlete-directory.ts'
+      - 'src/components/athletes/AthleteDirectoryCard.tsx'
+      - 'src/components/athletes/ProfileDetails.tsx'
+      - 'src/routes/athletes/$slug.tsx'
+      - 'src/athletics/routes/athletes/index.tsx'
+      - 'scripts/verify-public-source-profiles.mjs'
+      - '.github/workflows/public-source-profiles.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: node scripts/verify-public-source-profiles.mjs

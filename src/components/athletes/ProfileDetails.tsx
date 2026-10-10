@@ -1,13 +1,16 @@
 import type { PublicProfileDetails } from "@/lib/athrecs/profile-details";
+import type { SourceNationality } from "@/lib/athrecs/source-nationality";
 import { CountryFlag } from "./CountryFlag";
 
 export function ProfileDetails({
   details,
   nationality,
+  nationalitySource,
   coaches = [],
 }: {
   details: PublicProfileDetails;
   nationality?: string;
+  nationalitySource?: SourceNationality | null;
   coaches?: { sport: string; name: string }[];
 }) {
   const rows = [
@@ -29,6 +32,14 @@ export function ProfileDetails({
           <dt className="text-xs text-subtle">Nationality</dt>
           <dd>
             <CountryFlag country={nationality || details.nationality} showName />
+            {nationalitySource ? (
+              <a
+                href={nationalitySource.sourceUrl}
+                className="ml-1.5 text-xs text-accent underline"
+              >
+                As listed by {nationalitySource.provider}
+              </a>
+            ) : null}
           </dd>
         </div>
       ) : null}

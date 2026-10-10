@@ -25,6 +25,7 @@ export type DirectoryAthlete = {
   slug: string;
   display_name: string;
   country: string;
+  nationality?: string | null;
   city: string | null;
   club: string | null;
   profile_roles: string;

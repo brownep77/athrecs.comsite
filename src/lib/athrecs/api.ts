@@ -4,6 +4,7 @@ import { readResultDetails } from "./result-details";
 import { parseProfileRoles } from "./athlete-profile-roles";
 import { combineProfileResults } from "./profile-records";
 import { publicProfileDetails } from "./profile-details";
+import { readSourceNationality } from "./source-nationality";
 import { loadUpcoming } from "./athlete-upcoming-api";
 import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
 import { createServerFn } from "@tanstack/react-start";
@@ -855,9 +856,11 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
     profile_roles: string;
     profile_source_checked_at: string | null;
     is_claimed: boolean;
+    has_account_link: boolean;
     club: string | null;
     club_slug: string | null;
-  }>(`
+  }>(
+    `
       select
         a.id, a.slug, a.display_name, a.gender, a.city, a.county, a.country, a.bio,
         a.profile_type, a.profile_roles, a.profile_source_checked_at::text as profile_source_checked_at,
@@ -870,6 +873,7 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
           from athlete_account_links account_link
           where account_link.athlete_id = a.id and account_link.status = 'active'
         ) as is_claimed
+        , exists (select 1 from athlete_account_links l where l.athlete_id=a.id) as has_account_link
       from athletes a
       join athlete_resolved_ids identifier on identifier.athlete_id = a.id
       left join clubs c on c.id = a.club_id
@@ -880,10 +884,24 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
           select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
           where l.athlete_id=a.id and l.status='active' and s.enabled=false
         )))
-        and ($3 or (${approvedPublicAthleteSql}))
+        and ($3 or (${approvedPublicAthleteSql}) or (
+          a.profile_visibility = 'public'
+          and (
+            not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
+            and exists (
+              select 1 from network_audit_log approval
+              where approval.action='athlete.profile_admin_published'
+                and approval.entity_type='athlete' and approval.entity_id=a.id::text
+                and approval.after_value->>'athleteId'=a.id::text
+                and approval.after_value->>'profile_visibility'='public'
+            )
+          )
+        ))
       order by (a.slug = $1) desc, a.id
       limit 1
-    `, [slug, athleteNumber, !approvedPublicOnly]);
+    `,
+    [slug, athleteNumber, !approvedPublicOnly],
+  );
   const athlete = rows[0];
   if (!athlete) return null;
   const results = await sql<{
@@ -937,7 +955,7 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
   const links = await sql<{
     user_id: string;
   }>`select l.user_id from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id and s.enabled=true where l.athlete_id=${athlete.id} and l.status='active' limit 1`;
-  const { date_of_birth, profile_details, ...safeAthlete } = athlete;
+  const { date_of_birth, profile_details, has_account_link, ...safeAthlete } = athlete;
   const [{ athletes: athleteCatalogue }, { publicFigureAthletes }] = await Promise.all([
     import("@/data/athletes"),
     import("@/data/public-figures"),
@@ -946,6 +964,9 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
     (item) => item.slug === athlete.slug,
   );
   const details = publicProfileDetails(profile_details, date_of_birth);
+  // Source observations fill an unknown field, never overwrite an athlete's own details.
+  const sourceNationality = has_account_link ? null : readSourceNationality(profile_details);
+  const statedNationality = details.nationality || seed?.nationality || null;
   const { loadPublishedSourceHistories } = await import("./athlete-publication.server");
   return {
     sourceHistories: await loadPublishedSourceHistories(sql, athlete.id),
@@ -958,7 +979,8 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
       place_of_birth: seed?.place_of_birth ?? null,
       country_of_birth: details.birthCountry || seed?.country_of_birth || null,
       address: athlete.profile_type === "Public figure" ? (seed?.address ?? null) : null,
-      nationality: details.nationality || seed?.nationality || null,
+      nationality: statedNationality || sourceNationality?.value || null,
+      nationality_source: statedNationality ? null : sourceNationality,
       notes: seed?.notes ?? null,
       profile_roles: parseProfileRoles(seed?.profile_roles, athlete.profile_roles),
       profile_links: seed?.profile_links ?? [],
@@ -1046,7 +1068,7 @@ export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" }
         place_of_birth: null,
         country_of_birth: null,
         address: null,
-        nationality: null,
+        nationality: profile.athlete.nationality_source?.value ?? null,
         notes: null,
         profile_links: [],
         notable_achievements: [],
