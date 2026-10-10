@@ -1985,5 +1985,5 @@ assert(
 );
 
 console.log(
-  `Verified ${NEW_SERIES_COUNT} new race series (57 half marathons and 15 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
+  `Verified ${NEW_SERIES_COUNT} new race series (58 half marathons and 15 ten-milers), ${NEW_EDITION_COUNT} new-series editions, ${EXISTING_SERIES_EDITION_COUNT} verified editions on existing cards, ${dailyHalfTenMileResearchQueue.length} held candidates, ${dailyHalfTenMileRetiredSeriesSlugs.length} retired invalid card and catalogue-level duplicate protection.`,
 );
