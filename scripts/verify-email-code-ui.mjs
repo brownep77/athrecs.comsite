@@ -47,7 +47,7 @@ try {
   const dialog = page.getByRole("dialog");
   await dialog.getByLabel("Email address", { exact: true }).fill("runner@example.test");
   assert.equal(await dialog.getByLabel("Password", { exact: true }).count(), 0);
-  await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
+  await dialog.getByRole("button", { name: "Send me a code", exact: true }).click();
   const code = dialog.getByLabel("Six-digit code", { exact: true });
   await code.waitFor({ state: "visible" });
   assert.deepEqual(requests[0], { email: "runner@example.test", type: "sign-in" });
@@ -67,6 +67,7 @@ try {
   await dialog.getByRole("button", { name: "Use another email" }).click();
   assert.equal(await dialog.getByLabel("Email address", { exact: true }).isDisabled(), false);
   assert.equal(await dialog.getByLabel("Six-digit code", { exact: true }).count(), 0);
+  await dialog.getByRole("button", { name: "Other ways to sign in" }).click();
   await dialog.getByRole("button", { name: "Use a password instead" }).click();
   await page
     .getByRole("button", { name: "Sign in with email", exact: true })

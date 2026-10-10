@@ -279,9 +279,8 @@ function AthleteAccountPage() {
 
 function SignedInAccount() {
   const { section } = Route.useSearch();
+  const navigate = Route.useNavigate();
   const hash = useLocation({ select: (location) => location.hash });
-  const activeSection = section ?? (hash === "profile-visibility" ? "sharing" : "races");
-  const show = (id: AccountSectionId) => !IS_ATHRECS_SITE || activeSection === id;
   const lastLoadedForm = useRef<AthleteAccountInput | null>(null);
   const queryClient = useQueryClient();
   const [form, setForm] = useState<AthleteAccountInput | null>(null);
@@ -291,6 +290,22 @@ function SignedInAccount() {
     queryFn: () => getMyAthleteAccount(),
     retry: false,
   });
+
+  const needsFirstResultSetup = Boolean(
+    account.data &&
+    !account.data.exists &&
+    !account.data.claimCount &&
+    !account.data.claimedProfiles.length,
+  );
+  const activeSection =
+    section ??
+    (hash === "profile-visibility"
+      ? "sharing"
+      : IS_ATHRECS_SITE && needsFirstResultSetup
+        ? "potential"
+        : "races");
+  const simpleStart = IS_ATHRECS_SITE && needsFirstResultSetup && activeSection === "potential";
+  const show = (id: AccountSectionId) => !IS_ATHRECS_SITE || activeSection === id;
 
   useEffect(() => {
     if (!account.data) return;
@@ -335,6 +350,7 @@ function SignedInAccount() {
           },
       );
       setMessage("Your racing name has been saved.");
+      void navigate({ search: { section: "potential" }, replace: true });
       queryClient.setQueryData(["my-athlete-account"], updated);
       void queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] });
     },
@@ -357,7 +373,7 @@ function SignedInAccount() {
       setMessage(error instanceof Error ? error.message : "Verification email could not be sent."),
   });
 
-  if (account.isLoading) return <LoadingCard label="Loading your Entry Passport…" />;
+  if (account.isLoading) return <LoadingCard label="Loading your athlete account…" />;
   if (account.isError || !account.data) {
     return (
       <p className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
@@ -365,7 +381,7 @@ function SignedInAccount() {
       </p>
     );
   }
-  if (!form) return <LoadingCard label="Preparing your Entry Passport…" />;
+  if (!form) return <LoadingCard label="Preparing your athlete account…" />;
 
   const visibleSports = form.sports.filter((sport) => ACCOUNT_SPORT_SET.has(sport.sportCode));
   const visibleClaimedResults = account.data.claimedResults.filter((result) =>
@@ -386,25 +402,36 @@ function SignedInAccount() {
   const showForm = !IS_ATHRECS_SITE || isAccountFormSection(activeSection);
 
   return (
-    <div className={cn("mx-auto space-y-5", IS_ATHRECS_SITE ? "max-w-7xl" : "max-w-5xl")}>
+    <div
+      className={cn(
+        "mx-auto space-y-5",
+        IS_ATHRECS_SITE ? (simpleStart ? "max-w-2xl" : "max-w-7xl") : "max-w-5xl",
+      )}
+    >
       {IS_ATHRECS_SITE ? (
         <header className="flex flex-wrap items-center justify-between gap-3">
           <h1 className="font-display text-2xl font-semibold text-fg md:text-3xl">
-            My Athlete Account
+            {simpleStart && account.data.emailVerified
+              ? "Your account is ready"
+              : "My Athlete Account"}
           </h1>
-          <Button asChild variant="secondary">
-            <Link to="/my-athlete-profile">View my profile</Link>
-          </Button>
+          {!simpleStart ? (
+            <Button asChild variant="secondary">
+              <Link to="/my-athlete-profile">View my profile</Link>
+            </Button>
+          ) : null}
         </header>
       ) : (
         <AccountHero />
       )}
       <div
         className={cn(
-          IS_ATHRECS_SITE && "grid items-start gap-5 lg:grid-cols-[15rem_minmax(0,1fr)]",
+          IS_ATHRECS_SITE &&
+            !simpleStart &&
+            "grid items-start gap-5 lg:grid-cols-[15rem_minmax(0,1fr)]",
         )}
       >
-        {IS_ATHRECS_SITE ? (
+        {IS_ATHRECS_SITE && !simpleStart ? (
           <AccountNavigation
             active={activeSection}
             name={profileName}
@@ -427,16 +454,23 @@ function SignedInAccount() {
                 </Badge>
                 <span className="text-sm font-medium text-fg">{account.data.verifiedEmail}</span>
               </div>
-              <p className="mt-2 text-sm text-muted">
-                Profile completion: <strong className="text-fg">{completion}%</strong>. Optional
-                sections improve your Entry Passport and any analytics you approve.
-              </p>
-              <div className="mt-3 h-2 overflow-hidden rounded-full bg-elevated" aria-hidden="true">
-                <div
-                  className="h-full rounded-full bg-accent"
-                  style={{ width: `${completion}%` }}
-                />
-              </div>
+              {!simpleStart ? (
+                <>
+                  <p className="mt-2 text-sm text-muted">
+                    Profile completion: <strong className="text-fg">{completion}%</strong>. Optional
+                    sections improve your Entry Passport and any analytics you approve.
+                  </p>
+                  <div
+                    className="mt-3 h-2 overflow-hidden rounded-full bg-elevated"
+                    aria-hidden="true"
+                  >
+                    <div
+                      className="h-full rounded-full bg-accent"
+                      style={{ width: `${completion}%` }}
+                    />
+                  </div>
+                </>
+              ) : null}
             </div>
             <Button type="button" variant="secondary" onClick={() => void signOut("/")}>
               <LogOut className="size-4" aria-hidden="true" /> Sign out
@@ -464,12 +498,15 @@ function SignedInAccount() {
           ) : null}
 
           {show("potential") ? (
-            IS_ATHRECS_SITE && !account.data.fullName.trim() ? (
+            IS_ATHRECS_SITE && (needsFirstResultSetup || !account.data.fullName.trim()) ? (
               <section className="rounded-xl border border-border bg-surface p-5 shadow-card">
-                <h2 className="font-display text-xl font-semibold text-fg">Find my race results</h2>
+                <p className="mb-2 text-sm font-medium text-accent">Optional next step</p>
+                <h2 className="font-display text-xl font-semibold text-fg">
+                  Find your race results
+                </h2>
                 <p className="mt-2 text-sm text-muted">
-                  What name do you race under? We’ll look for possible matches already on AthRecs.
-                  You decide which results belong to you. Nothing is published automatically.
+                  What name do you race under? We’ll look for results that might be yours. You
+                  choose which ones to send for checking.
                 </p>
                 <form
                   className="mt-4 max-w-md space-y-4"
@@ -501,7 +538,7 @@ function SignedInAccount() {
                         form.fullName.trim().length < 2
                       }
                     >
-                      {saveRacingName.isPending ? "Finding results…" : "Save name and find results"}
+                      {saveRacingName.isPending ? "Finding results…" : "Find my results"}
                     </Button>
                     <Link
                       to="/athlete-account"
@@ -512,7 +549,10 @@ function SignedInAccount() {
                     </Link>
                   </div>
                   {message ? (
-                    <p role={save.isError ? "alert" : "status"} className="text-sm text-muted">
+                    <p
+                      role={saveRacingName.isError ? "alert" : "status"}
+                      className="text-sm text-muted"
+                    >
                       {message}
                     </p>
                   ) : null}
@@ -1322,12 +1362,14 @@ function AccountHero() {
     <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
       <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-cyan-950 px-5 py-7 text-white md:px-8 md:py-9">
         <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-cyan-300">
-          <ShieldCheck className="size-4" aria-hidden="true" /> Private Entry Passport
+          <ShieldCheck className="size-4" aria-hidden="true" />{" "}
+          {IS_ATHRECS_SITE ? "Private athlete account" : "Private Entry Passport"}
         </div>
         <h1 className="mt-2 font-display text-3xl font-semibold">My Athlete Account</h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
-          Keep your identity, claimed results, athletics training, kit and preferences together.
-          Private account data is not added to your public athlete profile automatically.
+          {IS_ATHRECS_SITE
+            ? "Find your race results and keep them together. Start with your email; add profile details whenever you’re ready."
+            : "Keep your identity, claimed results, athletics training, kit and preferences together. Private account data is not added to your public athlete profile automatically."}
         </p>
       </div>
     </section>
