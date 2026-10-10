@@ -12,6 +12,20 @@ base=module('utmb_base','create-private-archive-profiles.py')
 wmm=module('utmb_matching','apply-wmm-profiles.py');prep=wmm.prep
 PROVIDER='utmb';BATCH='utmb-directory-20261010';APPROVAL=BATCH+'-owner'
 RUN=str(uuid.uuid5(uuid.NAMESPACE_URL,BATCH));PROD=wmm.PROD
+DIRECTORY_LOCK='LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,athlete_identifiers,athlete_source_histories,results,editions,events IN SHARE ROW EXCLUSIVE MODE'
+class LiveDirectory(wmm.LiveDirectory):
+    def refresh(self):
+        # Concurrent bulk writers can otherwise advance the directory throughout
+        # the fingerprint query. Take the short refresh under the same locks as
+        # publication; the publication transaction still rechecks the fingerprint.
+        delta=wmm.ATH.replace('($1::bigint=0 OR a.id<=$1)','a.id>$1')
+        old,new,fp=self.query([("SET LOCAL lock_timeout='5s'",[]),
+            ("SET LOCAL statement_timeout='55s'",[]),(DIRECTORY_LOCK,[]),
+            (wmm.FP,[self.maxid]),(delta,[self.maxid]),(wmm.FP,[0])])[3:]
+        if old[0]['fingerprint']!=self.fingerprint:self.reload();return
+        for a in new:wmm.register(self.index,self.entities,a,self.allowed_keys)
+        self.maxid=max([self.maxid,*[int(a['id']) for a in new]])
+        self.fingerprint=fp[0]['fingerprint']
 def directory_pages(query,maxid):
     # Fewer read-only round trips; keep the same complete name/alias scan and
     # before/after fingerprint guards as the established importer.
@@ -130,14 +144,18 @@ def apply(args):
         returned=query(statements) if statements else []
         for p,row in zip(pending,returned):p['sourceCaptureId']=row[0]['id']
     print(json.dumps({'phase':'archived','runnerPages':len(people),'sourceRows':sum(len(c['data']['results']['results']) for c in captures)}),flush=True)
-    directory=wmm.LiveDirectory(query,allowed);counts=collections.Counter();held=[];examples=[]
+    directory=LiveDirectory(query,allowed);counts=collections.Counter();held=[];examples=[]
     histories=query([("SELECT h.*,a.slug,a.display_name,a.gender,a.nation,a.profile_details,a.profile_visibility FROM athlete_source_histories h JOIN athletes a ON a.id=h.athlete_id WHERE lower(h.provider)=$1",[PROVIDER])],True)[0]
     byid=collections.defaultdict(list)
     for h in histories:byid[h['external_id']].append(h)
     for i in range(0,len(people),25):
         original=people[i:i+25]
-        for attempt in range(4):
-            directory.refresh();new=[];updates=[];batch_holds=[];batch_counts=collections.Counter()
+        for attempt in range(12):
+            try:directory.refresh()
+            except RuntimeError as exc:
+                if attempt<11 and any(v in str(exc) for v in ('lock timeout','40P01','40001')):time.sleep(attempt+1);continue
+                raise
+            new=[];updates=[];batch_holds=[];batch_counts=collections.Counter()
             for p in original:
                 known=byid.get(p['externalId'],[])
                 if len(known)>1:batch_holds.append({'sourceAthleteId':p['externalId'],'reason':'multiple_existing_source_identity_links'});continue
@@ -150,6 +168,7 @@ def apply(args):
                     merged,added,conflicts=existing_merge(h['performances'],p['performances'])
                     batch_holds.extend({'sourceAthleteId':p['externalId'],**conflict} for conflict in conflicts)
                     if added:updates.append((p,h,merged));batch_counts['existingProfilesExpanded']+=1;batch_counts['resultsAdded']+=len(added)
+                    elif h['profile_details'].get('archiveCreation',{}).get('batchId')==BATCH:batch_counts['previouslyImportedInBatch']+=1
                     else:batch_counts['existingProfilesUnchanged']+=1
                     continue
                 matches=prep.matching(directory.index,[p['displayName']]);source_matches=prep.matching(source_index,[p['displayName']],p['externalId'])
@@ -159,11 +178,16 @@ def apply(args):
                 if len(prep.norm(p['displayName']).split())<2 or not p['performances']:
                     batch_holds.append({'sourceAthleteId':p['externalId'],'reason':'incomplete_name_or_no_supported_results'});continue
                 new.append(p)
+            if not new and not updates:
+                counts.update(batch_counts);held.extend(batch_holds)
+                wmm.save_receipt(args.receipt,{'branchId':cfg['branchId'],'inProgress':True,'processed':min(i+25,len(people)),'summary':dict(counts),'examples':examples,'held':held})
+                print(json.dumps({'phase':'preserved','processed':min(i+25,len(people)),**counts}),flush=True)
+                break
             data=json.dumps(new,ensure_ascii=False,separators=(',',':'))
             insert=wmm.INSERT.replace('Owner requested WMM athlete profiles and source results with duplicate checks; retained source year only; unclaimed provisional identity; existing profiles unchanged.',
              'Owner requested UTMB athlete profiles and source histories; exact source dates and distances retained; identity provisional; canonical performances unchanged.')
             statements=[("SET LOCAL lock_timeout='5s'",[]),("SET LOCAL statement_timeout='55s'",[]),
-              ('LOCK TABLE athletes,"user",athlete_private_profiles,athlete_account_links,athlete_source_histories,results,editions,events IN SHARE ROW EXCLUSIVE MODE',[]),
+              (DIRECTORY_LOCK,[]),
               ("CREATE TEMP TABLE utmb_guard(kind text,ok boolean,CONSTRAINT utmb_directory_guard CHECK(kind<>'directory' OR ok IS TRUE),CONSTRAINT utmb_approval_guard CHECK(kind<>'approval' OR ok IS TRUE),CONSTRAINT utmb_history_guard CHECK(kind<>'history' OR ok IS TRUE)) ON COMMIT DROP",[]),
               ("INSERT INTO utmb_guard SELECT 'directory',fingerprint=$2 FROM ("+wmm.FP+') f',[0,directory.fingerprint]),
               ("INSERT INTO utmb_guard SELECT 'approval',EXISTS(SELECT 1 FROM result_archive_capture_approvals WHERE id=$1 AND revoked_at IS NULL)",[APPROVAL]),
@@ -177,12 +201,18 @@ def apply(args):
             try:returned=query(statements)
             except RuntimeError as exc:
                 print(json.dumps({'phase':'retry','attempt':attempt+1,'reason':str(exc)}),flush=True)
-                if attempt<3 and any(v in str(exc) for v in ('utmb_directory_guard','lock timeout','40P01','40001')):time.sleep(attempt+1);continue
+                if attempt<11 and any(v in str(exc) for v in ('utmb_directory_guard','lock timeout','40P01','40001')):time.sleep(attempt+1);continue
                 raise
             inserted=returned[6][0];counts.update(batch_counts);counts['profilesCreated']+=inserted['profiles'];counts['resultsAdded']+=sum(len(p['performances']) for p in new);held.extend(batch_holds);examples.extend(inserted['created'])
             for p,h,merged in updates:h['performances']=merged
+            wmm.save_receipt(args.receipt,{'branchId':cfg['branchId'],'inProgress':True,'processed':min(i+25,len(people)),'summary':dict(counts),'examples':examples,'held':held})
             print(json.dumps({'phase':'applied','processed':min(i+25,len(people)),**counts}),flush=True);break
+    totals,extensions=query([("SELECT count(*)::int profiles,coalesce(sum(jsonb_array_length(h.performances)),0)::int results,coalesce(jsonb_agg(jsonb_build_object('id',a.id,'slug',a.slug)),'[]'::jsonb) examples FROM athletes a JOIN athlete_source_histories h ON h.athlete_id=a.id AND h.provider=$1 WHERE a.profile_details#>>'{archiveCreation,batchId}'=$2",[PROVIDER,BATCH]),
+      ("SELECT count(DISTINCT l.entity_id)::int profiles,coalesce(sum(jsonb_array_length(l.after_value->'performances')-jsonb_array_length(l.before_value->'performances')),0)::int results FROM network_audit_log l JOIN result_archive_source_captures c ON c.id=(l.after_value->>'sourceCaptureId')::bigint WHERE l.action='athlete.utmb_history_extended' AND c.approval_id=$1",[APPROVAL])],True)
+    examples=totals[0]['examples']
     summary={'sourceAthletes':len(people),'sourceRowsArchived':sum(len(c['data']['results']['results']) for c in captures),**counts,
+      'newProfilesCreatedThisRun':counts['profilesCreated'],'profilesCreated':totals[0]['profiles'],
+      'existingProfilesExpanded':extensions[0]['profiles'],'resultsAdded':totals[0]['results']+extensions[0]['results'],
       'heldDecisions':len(held),'completeDirectory':False,'canonicalResultsChanged':False,'resultsIndependentlyVerified':False}
     query([("UPDATE result_archive_capture_runs SET status='completed',summary=$2::jsonb,updated_at=now() WHERE id=$1::uuid",[RUN,json.dumps({'scope':'bounded runner captures','counts':summary,'held':held})])])
     receipt={'branchId':cfg['branchId'],'summary':summary,'examples':examples,'held':held};args.receipt.write_text(json.dumps(receipt,ensure_ascii=False,indent=2));print(json.dumps(summary),flush=True)
