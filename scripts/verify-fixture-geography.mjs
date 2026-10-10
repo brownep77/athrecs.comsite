@@ -61,6 +61,18 @@ for (const [iso, name] of Object.entries(countryNames))
   }
 for (const [value, iso] of Object.entries({
   BRN: "BH",
+  BIH: "BA",
+  BOL: "BO",
+  BUL: "BG",
+  COL: "CO",
+  CRC: "CR",
+  CYP: "CY",
+  ESA: "SV",
+  GUA: "GT",
+  MDA: "MD",
+  PHI: "PH",
+  SMR: "SM",
+  TKM: "TM",
   CRO: "HR",
   TAN: "TZ",
   TPE: "TW",
@@ -76,7 +88,7 @@ for (const [value, iso] of Object.entries({
   "Northern Ireland": "GB",
 }))
   assert.equal(countryFlag(value).code, iso);
-for (const value of ["", null, "ZZ", "ZZZ", "Atlantis", "Unknown"]) {
+for (const value of ["", null, "ZZ", "ZZZ", "Atlantis", "Unknown", "AIN"]) {
   assert.equal(countryFlag(value).code, "");
   assert.equal(
     resolveCountry({ country: value, city: "Perth", name: "London Marathon" }).iso,
