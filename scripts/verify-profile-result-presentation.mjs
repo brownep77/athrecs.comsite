@@ -78,6 +78,15 @@ try {
   const { CompactResults } = await server.ssrLoadModule(
     "/src/components/athletes/CompactResultsTable.tsx",
   );
+  const { ResultTiming, HistoricalTiming } = await server.ssrLoadModule(
+    "/src/components/athletes/ResultTiming.tsx",
+  );
+  const { withoutProfileEvidence } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-evidence.ts",
+  );
+  const { historyPerformanceSchema } = await server.ssrLoadModule(
+    "/src/lib/athrecs/source-performance-history.ts",
+  );
   const historyResults = Array.from({ length: 12 }, (_, index) => ({
     key: `synthetic:${index}`,
     sport: "Athletics",
@@ -134,6 +143,57 @@ try {
     uncertainty: "Exact placing unverified",
     sources: [],
   };
+  const timingText = (changes) =>
+    load(
+      renderToStaticMarkup(
+        createElement(ResultTiming, {
+          result: { ...recorded, ...changes },
+        }),
+      ),
+    ).text();
+  assert.equal(timingText({}), "Timing unknown");
+  assert.equal(timingText({ chipTimeSeconds: 72, gunTimeSeconds: 75 }), "Chip time · Gun 1:15");
+  assert.equal(timingText({ chipTimeSeconds: 70, gunTimeSeconds: 72 }), "Gun time · Chip 1:10");
+  assert.equal(timingText({ chipTimeSeconds: 72, gunTimeSeconds: 72 }), "Chip / gun time");
+  assert.equal(
+    timingText({ chipTimeSeconds: 70, gunTimeSeconds: 75 }),
+    "Timing unknown · Chip 1:10 · Gun 1:15",
+  );
+  assert.equal(timingText({ finishTimeSeconds: null }), "");
+  const historicalTimingText = (performance, discipline, timing) =>
+    load(
+      renderToStaticMarkup(createElement(HistoricalTiming, { performance, discipline, timing })),
+    ).text();
+  assert.equal(historicalTimingText("2:30:00(2:32:00)", "Half Marathon"), "Timing unknown");
+  assert.equal(historicalTimingText("61:18a", "Half Marathon"), "Timing unknown");
+  assert.equal(historicalTimingText("3:57.18", "1500 Metres"), "Timing unknown");
+  for (const [performance, discipline] of [
+    ["DNF", "5000 Metres"],
+    ["7.90", "LJ"],
+    ["18.2", "Shot Put"],
+    ["8100", "Decathlon"],
+    ["210.5", "24 Hours"],
+  ])
+    assert.equal(historicalTimingText(performance, discipline), "");
+  const sourceWithTiming = historyPerformanceSchema.parse({
+    ...historyResults[4].performance,
+    performance: "1:02.34",
+    timing: { basis: "chip", chip: "1:02.34", gun: "1:05.67" },
+    notes: "Private source-row audit",
+    sourceUrls: ["https://example.org/private-evidence"],
+  });
+  const publicTimingRow = withoutProfileEvidence(sourceWithTiming);
+  assert.deepEqual(publicTimingRow.timing, sourceWithTiming.timing);
+  assert.equal(publicTimingRow.notes, "");
+  assert.deepEqual(publicTimingRow.sourceUrls, []);
+  assert.equal(
+    historicalTimingText(
+      publicTimingRow.performance,
+      publicTimingRow.discipline,
+      publicTimingRow.timing,
+    ),
+    "Chip time · Gun 1:05.67",
+  );
   const $ = load(
     renderToStaticMarkup(
       createElement(CompactResults, {
@@ -150,6 +210,11 @@ try {
   );
   assert.equal($("table").length, 1, "All result types share one table");
   assert.equal($("tbody tr").length, 14, "Every row is rendered, including rows beyond eight");
+  assert.equal(
+    $("[data-result-timing]").length,
+    11,
+    "Public timelines show timing for timed finishes only",
+  );
   assert.equal($("tbody tr").closest("details").length, 0, "Results are not hidden in a dropdown");
   assert(!$.text().includes("Show all"));
   const rows = $("tbody tr")
@@ -248,9 +313,6 @@ try {
     "Olympic participation must not be presented as an Olympic medal",
   );
   assert.equal(career('[data-award-tier="olympic"][data-profile-award="participation"]').length, 1);
-  const { withoutProfileEvidence } = await server.ssrLoadModule(
-    "/src/lib/athrecs/profile-evidence.ts",
-  );
   const { profileEditorial } = await server.ssrLoadModule(
     "/src/lib/athrecs/profile-editorial.server.ts",
   );

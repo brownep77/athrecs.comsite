@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
+import { HistoricalTiming } from "./ResultTiming";
 import { resultCredit } from "@/lib/athrecs/result-credit";
 import { publicProfileResultNotes } from "@/lib/athrecs/profile-source-presentation";
 
@@ -185,6 +186,11 @@ export function SourcePerformanceHistory({
                     className="whitespace-pre-line px-3 py-2 font-semibold tabular-nums"
                   >
                     {row.performance || "Not recorded"}
+                    <HistoricalTiming
+                      performance={row.performance}
+                      discipline={row.discipline}
+                      timing={row.timing}
+                    />
                     {row.verificationStatus === "unverified" ? (
                       <span className="block text-xs font-normal text-muted">
                         Added by AthRecs · Unverified

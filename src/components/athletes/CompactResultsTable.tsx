@@ -10,7 +10,8 @@ import {
 } from "@/lib/athrecs/profile-history-results";
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { type ProfileResult, findPersonalBests, timingBasis } from "@/lib/athrecs/profile-records";
+import { type ProfileResult, findPersonalBests } from "@/lib/athrecs/profile-records";
+import { ResultTiming } from "./ResultTiming";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
@@ -212,18 +213,8 @@ export function CompactResultsTable({
                     provider={result.resultSource}
                     conflicting={result.conflicting}
                   />
-                  {showEvidence ? (
-                    <span className="block text-xs font-normal text-subtle">
-                      {isDisqualified(result)
-                        ? "Original time · disqualified"
-                        : timingBasis(result)}
-                      {result.chipTimeSeconds != null
-                        ? ` · Chip ${formatDuration(result.chipTimeSeconds)}`
-                        : ""}
-                      {result.gunTimeSeconds != null
-                        ? ` · Gun ${formatDuration(result.gunTimeSeconds)}`
-                        : ""}
-                    </span>
+                  {isDisqualified(result) || ["finished", "FIN", ""].includes(result.status) ? (
+                    <ResultTiming result={result} />
                   ) : null}
                 </td>
                 <td role="cell" data-label="Place" className="px-3 py-2 tabular-nums">

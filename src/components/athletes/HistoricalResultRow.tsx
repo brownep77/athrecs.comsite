@@ -13,6 +13,7 @@ import { ResultEvidence } from "./ResultEvidence";
 import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
 import { historyAwards, historyCompetition } from "@/lib/athrecs/competition-awards";
 import { ResultVerificationBadge } from "./ResultVerificationBadge";
+import { HistoricalTiming } from "./ResultTiming";
 
 export function HistoricalResultRow({
   result,
@@ -103,6 +104,11 @@ export function HistoricalResultRow({
         {numericMark && field ? " m" : numericMark && combined ? " pts" : ""}
         {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
         <ResultVerificationBadge status={row.verificationStatus} provider={row.providerName} />
+        <HistoricalTiming
+          performance={row.performance}
+          discipline={row.discipline}
+          timing={row.timing}
+        />
         {row.wind ? (
           <span className="block text-xs font-normal text-subtle">Wind {row.wind} m/s</span>
         ) : null}
