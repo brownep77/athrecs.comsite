@@ -14,6 +14,7 @@ export type {
   EntryOptionStatus,
   EntryOptionType,
 } from "./types";
+import { legacyRaceGeography } from "./legacy-race-geography";
 import { clubs as rawClubs } from "./clubs";
 import { athleticsIrelandClubs } from "./clubs-athletics-ireland";
 import { belfastClubs } from "./clubs-belfast";
@@ -455,6 +456,7 @@ export const seriesList: Series[] = [...coreSeries, ...extraSeries].map((series)
   ...aimsEuropeSeriesOverrides[series.slug],
   ...dailyHalfTenMileSeriesOverrides[series.slug],
   ...reviewedParkrunSeriesOverrides[series.slug],
+  ...legacyRaceGeography[series.slug],
 }));
 
 const mergedEditions = [
