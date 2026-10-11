@@ -13,6 +13,18 @@ function fixture({start=1,count=1,total=1,reorder=false,name='Example, Alice',ru
 }
 const inv={sourceUrl:url,index:{Date:'04.10.2026',Event:'Synthetic race (GBR)',Distance:'6h',Finishers:'1'}};
 const parse=(raw,inventory=inv,page=url)=>parseEvent(raw,inventory,'2026-10-10T08:00:00Z',2026,page);
+test('French ere ordinal preserves originals and requires the complete remaining title and date',()=>{
+ for(const edition of ['1ère ','6ère ']){
+  const p=parse(fixture({edition}));
+  assert.equal(p.eventMetadata.Event,edition+'Synthetic race (GBR)');
+  assert.equal(p.index.raw.Event,'Synthetic race (GBR)');
+  assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');
+  assert.equal(p.audit.identityVerified,false);
+  assert.throws(()=>parse(fixture({edition}),{...inv,index:{...inv.index,Event:'Different race (GBR)'}}),/index_metadata_changed/);
+  assert.throws(()=>parse(fixture({edition}),{...inv,index:{...inv.index,Date:'03.10.2026'}}),/index_metadata_changed/);
+ }
+ for(const edition of ['ère ','1ère','1ère extra ','1ere '])assert.throws(()=>parse(fixture({edition})),/index_metadata_changed/);
+});
 test('timed performance preserves exact distance, never finish time',()=>{const r=parse(fixture()).rows[0];assert.equal(r.performance.achievedDistanceMetres,'45123.000');assert.equal(r.performance.finishTimeSeconds,null);assert.equal(r.original.Performance,'45.123 km');});
 test('all columns follow headings, even when reordered',()=>{const a=parse(fixture()).rows[0],b=parse(fixture({reorder:true})).rows[0];assert.notEqual(a.sourceDocumentHash,b.sourceDocumentHash);const {sourceDocumentHash:ah,...av}=a,{sourceDocumentHash:bh,...bv}=b;assert.deepEqual(av,bv);});
 test('explicit edition prefix is retained without index rejection',()=>assert.equal(parse(fixture({edition:'99th '})).index.name,'99th Synthetic race (GBR)'));
@@ -111,3 +123,4 @@ test('public source profiles require a separate explicit scoped approval',()=>{
  assert.equal(profileVisibility({configuration:{profilePublication:{...p,revokedAt:'2026-10-10T11:00:00Z'}}}),'private');
  for(const key of ['scope','approvedAt','instruction','approvalId','approvedBy'])assert.throws(()=>profileVisibility({configuration:{profilePublication:{...p,[key]:''}}}),/publication_approval/);
 });
+
