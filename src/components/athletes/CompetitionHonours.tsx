@@ -5,6 +5,7 @@ import { isWmmSource } from "@/lib/athrecs/profile-source-presentation";
 import { resultCredit } from "@/lib/athrecs/result-credit";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
+import { achievementPalette } from "@/lib/athrecs/achievement-colours";
 
 export function CompetitionHonours({
   honours,
@@ -14,6 +15,7 @@ export function CompetitionHonours({
   showEvidence?: boolean;
 }) {
   if (!honours.length) return null;
+  const colours = achievementPalette(honours.map((honour) => `honour:${honour.id}`));
   return (
     <section aria-label="Competition honours" className="space-y-3">
       <h3 className="text-sm font-semibold">Competition honours</h3>
@@ -22,7 +24,8 @@ export function CompetitionHonours({
           <details
             key={honour.id}
             data-competition-honour={honour.id}
-            className="rounded-lg border border-border bg-surface p-3"
+            className="achievement-label rounded-lg border border-border bg-surface p-3"
+            style={colours.get(`honour:${honour.id}`)}
           >
             <summary className="flex cursor-pointer list-none items-start gap-2">
               <ProfileAward kind={honour.kind} tier={honour.tier} label={honour.title} decorative />

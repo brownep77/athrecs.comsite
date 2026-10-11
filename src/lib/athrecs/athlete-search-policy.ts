@@ -8,5 +8,8 @@ export const ATHLETE_INDEXING_HEADER = "X-Athrecs-Profile-Indexable";
 export function isIndexableAthletePage(
   data: { kind: string; searchIndexable?: boolean } | undefined,
 ): boolean {
-  return data?.kind === "published-history" && data.searchIndexable === true;
+  return (
+    (data?.kind === "public-preview" || data?.kind === "published-history") &&
+    data.searchIndexable === true
+  );
 }

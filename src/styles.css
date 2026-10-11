@@ -205,3 +205,10 @@
     align-items: center;
   }
 }
+
+/* Pastel achievement labels keep readable text in both site themes. */
+.achievement-label .text-muted,
+.achievement-label .text-fg,
+.achievement-label .text-accent {
+  color: inherit;
+}

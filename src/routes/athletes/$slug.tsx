@@ -1,6 +1,7 @@
 import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOverview";
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
+import { PublicAthletePreview } from "@/components/athletes/PublicAthletePreview";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
@@ -24,6 +25,7 @@ import {
   getAthleteBySlug,
   getPrivateAthleteBySlug,
   getAdministratorPublishedAthlete,
+  getPublicAthletePreview,
 } from "@/lib/athrecs/api";
 import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +33,10 @@ import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
 import { SharedAccountProfile } from "@/components/athletes/SharedAccountProfile";
-import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-api";
+import {
+  getPublishedSharedProfile,
+  getPublicSharedProfilePreview,
+} from "@/lib/athrecs/athlete-profile-share-api";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
@@ -46,6 +51,17 @@ import {
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
+    const preview =
+      (await getPublicAthletePreview({ data: params.slug })) ??
+      (await getPublicSharedProfilePreview({ data: { slug: params.slug } }));
+    if (preview && preview.slug !== params.slug && preview.searchIndexable) {
+      throw redirect({ to: "/athletes/$slug", params: { slug: preview.slug }, statusCode: 301 });
+    }
+    if (!(await canViewAthleteProfiles())) {
+      return preview
+        ? { kind: "public-preview" as const, preview, searchIndexable: preview.searchIndexable }
+        : { kind: "sign-in" as const };
+    }
     const published = await getAdministratorPublishedAthlete({ data: params.slug });
     if (published) {
       if (published.athlete.slug !== params.slug) {
@@ -55,9 +71,8 @@ export const Route = createFileRoute("/athletes/$slug")({
           statusCode: 301,
         });
       }
-      return { kind: "published-history" as const, ...published };
+      return { kind: "published-history" as const, ...published, preview };
     }
-    if (!(await canViewAthleteProfiles())) return { kind: "sign-in" as const };
     const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
       () => null,
     );
@@ -65,7 +80,7 @@ export const Route = createFileRoute("/athletes/$slug")({
       if (shared.searchIndexable && shared.slug !== params.slug) {
         throw redirect({ to: "/athletes/$slug", params: { slug: shared.slug }, statusCode: 301 });
       }
-      return { kind: "shared-account" as const, profile: shared };
+      return { kind: "shared-account" as const, profile: shared, preview };
     }
 
     const data = await getAthleteBySlug({ data: params.slug });
@@ -77,7 +92,7 @@ export const Route = createFileRoute("/athletes/$slug")({
           statusCode: 301,
         });
       }
-      return { kind: "catalogue" as const, ...data };
+      return { kind: "catalogue" as const, ...data, preview };
     }
 
     const privateAthlete = await getPrivateAthleteBySlug({ data: params.slug });
@@ -106,14 +121,44 @@ export const Route = createFileRoute("/athletes/$slug")({
     [ATHLETE_INDEXING_HEADER]: isIndexableAthletePage(loaderData) ? "1" : "0",
   }),
   head: ({ params, loaderData }) => {
-    const searchContent =
-      loaderData?.kind === "published-history" ? athleteSearchContent(loaderData) : null;
+    const preview = loaderData?.kind === "public-preview" ? loaderData.preview : null;
+    const previewTitle = preview
+      ? `${preview.displayName} — ${preview.sports.length ? `${preview.sports.join(" & ")} results & biography` : "Biography & latest results"} | ${SITE_NAME}`
+      : "";
+    const previewBio = preview?.biography.join(" ") ?? "";
+    const previewUrl = preview ? absoluteUrl(`/athletes/${preview.slug}`) : "";
+    const searchContent = preview
+      ? {
+          title: previewTitle,
+          description:
+            previewBio.slice(0, 175) ||
+            `Latest results for ${preview.displayName}. Sign in to view the full profile.`,
+          jsonLd: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": `${previewUrl}#webpage`,
+            url: previewUrl,
+            name: previewTitle,
+            description: previewBio,
+            inLanguage: "en-GB",
+            mainEntity: {
+              "@type": "Person",
+              "@id": `${previewUrl}#athlete`,
+              name: preview.displayName,
+              url: previewUrl,
+              description: previewBio,
+            },
+          },
+        }
+      : loaderData?.kind === "published-history"
+        ? athleteSearchContent(loaderData)
+        : null;
     return {
       links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
       meta: [
         {
           title:
-            loaderData?.kind === "published-history"
+            preview || loaderData?.kind === "published-history"
               ? searchContent!.title
               : `Athlete profile | ${SITE_NAME}`,
         },
@@ -126,7 +171,7 @@ export const Route = createFileRoute("/athletes/$slug")({
         {
           name: "description",
           content:
-            loaderData?.kind === "published-history"
+            preview || loaderData?.kind === "published-history"
               ? searchContent!.description
               : "Sign in to view athlete profiles and published results on ATHRECS.",
         },
@@ -248,13 +293,15 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
 function AthletePage() {
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
-  if (data.kind === "published-history") return <AthleteContent />;
+  const preview =
+    "preview" in data && data.preview ? <PublicAthletePreview profile={data.preview} /> : undefined;
   return (
     <ProfileViewer
-      authenticated={data.kind !== "sign-in"}
+      authenticated={data.kind !== "sign-in" && data.kind !== "public-preview"}
       returnTo={`/athletes/${encodeURIComponent(slug)}`}
+      signedOut={preview}
     >
-      <AthleteContent />
+      {data.kind === "public-preview" ? preview : <AthleteContent />}
     </ProfileViewer>
   );
 }
@@ -262,6 +309,7 @@ function AthletePage() {
 function AthleteContent() {
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
+  if (data.kind === "public-preview") return <PublicAthletePreview profile={data.preview} />;
   if (data.kind === "sign-in")
     return <ProfileSignIn returnTo={`/athletes/${encodeURIComponent(slug)}`} />;
   if (data.kind === "shared-account") {

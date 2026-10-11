@@ -4,10 +4,12 @@ import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { careerAward, careerTier } from "@/lib/athrecs/profile-awards";
 import { COMPETITION_TIERS } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
+import { achievementPalette } from "@/lib/athrecs/achievement-colours";
 
 export function AthleteCareerHighlights({ slug }: { slug: string }) {
   const career = getEditorialAthleteCareer(slug);
   if (!career) return null;
+  const colours = achievementPalette(career.achievements.map(({ id }) => `career:${id}`));
 
   return (
     <section
@@ -27,7 +29,11 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
             isPublicProfileSource(source.url, source.label),
           );
           return (
-            <article key={achievement.id} className="space-y-2 rounded-lg border border-border p-3">
+            <article
+              key={achievement.id}
+              style={colours.get(`career:${achievement.id}`)}
+              className="achievement-label space-y-2 rounded-lg border p-3"
+            >
               <h3 className="flex items-center gap-2 text-sm font-semibold">
                 <ProfileAward
                   kind={careerAward(achievement)}
