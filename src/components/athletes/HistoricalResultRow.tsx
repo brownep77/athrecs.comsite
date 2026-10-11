@@ -5,12 +5,12 @@ import {
   type HistoryResult,
 } from "@/lib/athrecs/profile-history-results";
 import { CountryFlag } from "./CountryFlag";
-import { CompletionMedal } from "./ProfileAward";
+import { PerformanceAwardIcon, ClassificationAwards, CompetitionTierBadge } from "./ProfileAward";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
 import { ResultEvidence } from "./ResultEvidence";
 import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
-import { hasHistoryFinish } from "@/lib/athrecs/profile-result-presentation";
+import { historyAwards, historyCompetition } from "@/lib/athrecs/competition-awards";
 import { ResultVerificationBadge } from "./ResultVerificationBadge";
 
 export function HistoricalResultRow({
@@ -23,6 +23,7 @@ export function HistoricalResultRow({
   showEvidence?: boolean;
 }) {
   const row = result.performance;
+  const awards = historyAwards(row);
   const field = /jump|shot|^sp\d|discus|javelin|hammer/i.test(row.discipline);
   const combined = /pentathlon|heptathlon|decathlon/i.test(row.discipline);
   const discipline = /^\d+$/.test(row.discipline) ? `${row.discipline} m` : row.discipline;
@@ -48,11 +49,10 @@ export function HistoricalResultRow({
       </td>
       <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
         <span className="inline-flex items-center gap-1.5">
-          {hasHistoryFinish(row) ? (
-            <CompletionMedal place={row.places ? row.places.overall : row.place} />
-          ) : null}
+          {awards[0] ? <PerformanceAwardIcon award={awards[0]} /> : null}
           {row.meeting || "Meeting not recorded"}
         </span>
+        <CompetitionTierBadge context={historyCompetition(row)} />
         <ResultEvidence
           notes={row.notes}
           provider={row.providerName}
@@ -108,6 +108,7 @@ export function HistoricalResultRow({
       </td>
       <td role="cell" data-label="Place" className="px-3 py-2 tabular-nums">
         {row.place || "—"}
+        <ClassificationAwards awards={awards} />
         {row.places?.gender != null ? (
           <span className="block text-xs text-muted">Gender: {row.places.gender}</span>
         ) : null}

@@ -91,6 +91,12 @@ export function buildProfileTimeline(
       );
       if (known) {
         known.details ??= {};
+        const sourceRound = row.labels
+          .find((label) => /^round:/i.test(label))
+          ?.replace(/^round:\s*/i, "");
+        if (sourceRound && resultVerification(row.verificationStatus, row.providerName).verified)
+          known.displayRound =
+            known.displayRound && known.displayRound !== sourceRound ? "conflicting" : sourceRound;
         known.sourceUrls = [
           ...new Set([
             ...known.sourceUrls,

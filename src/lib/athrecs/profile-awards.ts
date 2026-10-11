@@ -1,3 +1,5 @@
+import type { CompetitionTier } from "./competition-awards";
+
 export type ProfileAwardKind =
   | "gold"
   | "silver"
@@ -24,7 +26,9 @@ export function placingAward(place?: string | number | null): ProfileAwardKind {
 export function careerAward(highlight: {
   title: string;
   outcomes: readonly string[];
+  awardKind?: ProfileAwardKind;
 }): ProfileAwardKind {
+  if (highlight.awardKind) return highlight.awardKind;
   if (/\b(?:competed|appearances?|participation|olympian)\b/i.test(highlight.title))
     return "participation";
   if (highlight.outcomes.length === 1) {
@@ -34,4 +38,15 @@ export function careerAward(highlight: {
     if (award === "silver" || award === "bronze") return award;
   }
   return "milestone";
+}
+
+export function careerTier(highlight: {
+  title: string;
+  competitionTier?: CompetitionTier;
+}): CompetitionTier {
+  if (highlight.competitionTier) return highlight.competitionTier;
+  if (/\bParalympic\b/i.test(highlight.title)) return "paralympic";
+  if (/\bOlympic\b/i.test(highlight.title)) return "olympic";
+  if (/\bWorld Championships?\b/i.test(highlight.title)) return "world";
+  return "race";
 }

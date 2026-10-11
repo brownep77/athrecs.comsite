@@ -240,6 +240,36 @@ try {
     1,
     "Olympic participation must not be presented as an Olympic medal",
   );
+  assert.equal(career('[data-award-tier="olympic"][data-profile-award="participation"]').length, 1);
+  const { ProfileAward, ClassificationAwards } = await server.ssrLoadModule(
+    "/src/components/athletes/ProfileAward.tsx",
+  );
+  const olympic = renderToStaticMarkup(
+    createElement(ProfileAward, { kind: "gold", tier: "olympic" }),
+  );
+  const world = renderToStaticMarkup(createElement(ProfileAward, { kind: "gold", tier: "world" }));
+  assert(olympic.includes('viewBox="0 0 36 40"') && world.includes('viewBox="0 0 36 40"'));
+  assert.notEqual(olympic, world, "Olympic and World Championship medals have distinct artwork");
+  assert.match(
+    renderToStaticMarkup(createElement(ProfileAward, { kind: "trophy", tier: "major" })),
+    /lucide-crown/,
+  );
+  assert.match(
+    renderToStaticMarkup(createElement(ProfileAward, { kind: "trophy", tier: "national" })),
+    /lucide-shield/,
+  );
+  const { historyAwards } = await server.ssrLoadModule("/src/lib/athrecs/competition-awards.ts");
+  const classification = renderToStaticMarkup(
+    createElement(ClassificationAwards, {
+      awards: historyAwards({
+        ...historyResults[4].performance,
+        ageGroup: "M50",
+        places: { overall: 8, gender: 5, category: 1 },
+      }),
+    }),
+  );
+  assert.match(classification, /data-award-scope="category"/);
+  assert.match(classification, /M50/);
   console.log(
     "Unified results verified: distinct podium and finisher medals, career trophies and participation badges, explicit verification, non-finish exclusions and venue flags.",
   );

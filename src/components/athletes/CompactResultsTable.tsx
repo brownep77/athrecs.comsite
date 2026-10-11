@@ -14,7 +14,13 @@ import { type ProfileResult, findPersonalBests, timingBasis } from "@/lib/athrec
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
-import { ResultMedal, ResultMedalKey } from "./ProfileAward";
+import {
+  ResultMedal,
+  ResultMedalKey,
+  CompetitionTierBadge,
+  ClassificationAwards,
+} from "./ProfileAward";
+import { recordedAwards, recordedCompetition } from "@/lib/athrecs/competition-awards";
 import { roadPerformanceCondition } from "@/lib/athrecs/road-performance-conditions";
 import { isDisqualified } from "@/lib/athrecs/result-details";
 import { ResultDisqualification } from "./ResultDisqualification";
@@ -142,6 +148,7 @@ export function CompactResultsTable({
                       {result.eventName}
                     </ProfileEventLink>
                   </span>
+                  <CompetitionTierBadge context={recordedCompetition(result)} />
                   <ResultDisqualification decision={result.details?.disqualification} />
                   <ResultEvidence
                     notes={result.details?.note}
@@ -218,6 +225,7 @@ export function CompactResultsTable({
                 </td>
                 <td role="cell" data-label="Place" className="px-3 py-2 tabular-nums">
                   {result.overallPlace ?? result.displayOverallPlace ?? "—"}
+                  <ClassificationAwards awards={recordedAwards(result)} />
                   {isDisqualified(result) ? (
                     <span className="block text-[10px] text-subtle">Original · void</span>
                   ) : null}

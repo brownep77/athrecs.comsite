@@ -22,6 +22,8 @@ export type ProfileResult = {
   overallPlace: number | null;
   /** Source-matched timeline display only; never used for rankings or achievement totals. */
   displayOverallPlace?: string;
+  /** Explicit source round retained by timeline deduplication for championship awards. */
+  displayRound?: string;
   genderPlace?: number | null;
   categoryPlace?: number | null;
   resultGender?: string | null;
