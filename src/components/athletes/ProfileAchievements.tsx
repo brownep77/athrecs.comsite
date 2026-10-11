@@ -18,7 +18,6 @@ import { CompetitionHonours } from "./CompetitionHonours";
 import { buildCompetitionHonours } from "@/lib/athrecs/competition-honours";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { achievementPalette } from "@/lib/athrecs/achievement-colours";
-import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { careerAward, careerTier, type ProfileAwardKind } from "@/lib/athrecs/profile-awards";
 import type { CompetitionTier } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
@@ -288,20 +287,18 @@ export function AchievementsBoard({
                 <details className="text-xs">
                   <summary className="cursor-pointer">Sources</summary>
                   <ul className="mt-2 space-y-1">
-                    {highlight.sources
-                      .filter((source) => isPublicProfileSource(source.url, source.label))
-                      .map((source) => (
-                        <li key={source.url}>
-                          <a
-                            href={source.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="underline underline-offset-2"
-                          >
-                            {source.label}
-                          </a>
-                        </li>
-                      ))}
+                    {highlight.sources.map((source) => (
+                      <li key={source.url}>
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline underline-offset-2"
+                        >
+                          {source.label}
+                        </a>
+                      </li>
+                    ))}
                   </ul>
                 </details>
               ) : null}

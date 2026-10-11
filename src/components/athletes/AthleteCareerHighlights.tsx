@@ -1,6 +1,5 @@
 import { Award } from "lucide-react";
 import type { ProfileEditorial } from "@/lib/athrecs/profile-editorial.server";
-import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { careerAward, careerTier } from "@/lib/athrecs/profile-awards";
 import { COMPETITION_TIERS } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
@@ -30,9 +29,7 @@ export function AthleteCareerHighlights({
       </h2>
       <div className="grid gap-3 sm:grid-cols-2">
         {career.achievements.map((achievement) => {
-          const sources = achievement.sources.filter((source) =>
-            isPublicProfileSource(source.url, source.label),
-          );
+          const sources = achievement.sources;
           return (
             <article
               key={achievement.id}
@@ -99,19 +96,17 @@ export function AthleteCareerHighlights({
                   </p>
                 ))}
                 {showEvidence &&
-                  race.sources
-                    .filter((source) => isPublicProfileSource(source.url, source.label))
-                    .map((source) => (
-                      <a
-                        key={source.url}
-                        href={source.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block text-xs text-accent underline underline-offset-2"
-                      >
-                        {source.label} ↗
-                      </a>
-                    ))}
+                  race.sources.map((source) => (
+                    <a
+                      key={source.url}
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-xs text-accent underline underline-offset-2"
+                    >
+                      {source.label} ↗
+                    </a>
+                  ))}
               </article>
             ))}
           </div>
