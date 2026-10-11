@@ -83,7 +83,7 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
  // DUV sometimes adds an edition/display prefix only on the detail page.
  // Keep both originals; require the entire remaining title to match exactly.
  const detailName=meta.Event??'',indexName=inventory.index.Event??'';
- const withoutNumericPrefix=detailName.replace(/^\d+(?:(?:st|nd|rd|th|a|ème|ère|\^|[ºª°])|\s*\.)?\s+/i,'');
+ const withoutNumericPrefix=detailName.replace(/^1er\s+|^\d+(?:(?:st|nd|rd|th|a|ème|ère|\^|[ºª°])|\s*\.)?\s+/i,'');
  // A canonical uppercase Roman edition must end in a period and whitespace.
  // Do not strip arbitrary words, invalid numerals or another part of the title.
  const withoutRomanPrefix=detailName.replace(/^(?=[MDCLXVI])M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})\.\s+/,'');
