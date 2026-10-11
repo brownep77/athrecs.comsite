@@ -184,6 +184,15 @@ try {
     "Reported rows interleave by their explicit date",
   );
   const { ResultMedal } = await server.ssrLoadModule("/src/components/athletes/ProfileAward.tsx");
+  const mergedPlaceIcon = renderToStaticMarkup(
+    createElement(ResultMedal, {
+      result: { ...recorded, overallPlace: null, displayOverallPlace: "1" },
+    }),
+  );
+  assert(
+    mergedPlaceIcon.includes('data-profile-award="gold"'),
+    "A matched official source placing decorates a merged result",
+  );
   for (const status of ["DNF", "DNS", "DQ", "DSQ"]) {
     assert.equal(
       renderToStaticMarkup(createElement(ResultMedal, { result: { ...recorded, status } })),
