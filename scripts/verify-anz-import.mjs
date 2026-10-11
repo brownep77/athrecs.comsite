@@ -189,6 +189,12 @@ await assert.rejects(
 );
 failAudit = false;
 assert.equal((await anzTarget(sql, 1, capture)).version, target.version);
+await sql`insert into athletes values(2,'Another Athlete','another-athlete','private',${url},'{}')`;
+await assert.rejects(() => anzTarget(sql, 1, capture), /duplicate/);
+await sql`delete from athletes where id=2`;
+await sql`update athletes set display_name='李明' where id=1`;
+await assert.rejects(() => anzTarget(sql, 1, { ...capture, name: "王芳" }), /name/);
+await sql`update athletes set display_name='Avery Example' where id=1`;
 await sql`insert into athlete_account_links values(1,'active')`;
 await assert.rejects(() => anzTarget(sql, 1, capture), /owner/);
 await db.close();

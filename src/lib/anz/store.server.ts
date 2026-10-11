@@ -8,7 +8,7 @@ const normalName = (s: string) =>
     .normalize("NFD")
     .replace(/\p{M}/gu, "")
     .toLowerCase()
-    .replace(/[^a-z0-9]/g, "");
+    .replace(/[^\p{L}\p{N}]/gu, "");
 export async function anzTarget(sql: Sql, athleteId: number, capture: AnzCapture) {
   const [athlete] = await sql<{
     id: number;
@@ -22,6 +22,13 @@ export async function anzTarget(sql: Sql, athleteId: number, capture: AnzCapture
     select a.id,a.display_name,a.slug,a.profile_visibility,a.source_url,a.profile_details,
     exists(select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active') as managed
     from athletes a where a.id=${athleteId}`;
+  const duplicates = await sql<{
+    id: number;
+  }>`select id from athletes where id<>${athleteId} and source_url=${capture.sourceUrl}`;
+  if (duplicates.length)
+    throw new Error(
+      "Another athlete already uses this ANZ profile. Resolve duplicate identities before importing.",
+    );
   if (!athlete || athlete.managed)
     throw new Error(
       "Choose an existing, unclaimed athlete profile. Account-managed profiles require owner review.",
