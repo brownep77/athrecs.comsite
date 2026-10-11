@@ -91,7 +91,7 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
  if(!eventNameComparison||meta.Date!==inventory.index.Date)throw Error('index_metadata_changed');
  const distance=inventory.index.Distance;
  const comparisonDistance=distance?.replace(/^(\d+(?:\.\d+)?km\/\d+)Etappen$/,'$1stages');
- if(!distance||!meta.Distance?.startsWith(comparisonDistance+' '))throw Error('index_distance_changed');
+ if(!distance||(meta.Distance!==comparisonDistance&&!meta.Distance?.startsWith(comparisonDistance+' ')))throw Error('index_distance_changed');
  const range=dates(meta.Date);
  if(range.start>range.end||range.start.slice(0,4)!==String(year)||range.end>capturedAt.slice(0,10))throw Error('invalid_or_future_date_range');
  const count=/^(\d+)\s*\((\d+) M, (\d+) F\)$/.exec(meta.Finishers);
