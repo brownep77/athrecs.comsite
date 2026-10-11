@@ -149,7 +149,10 @@ export function CompactResultsTable({
                     </ProfileEventLink>
                   </span>
                   <CompetitionTierBadge context={recordedCompetition(result)} />
-                  <ResultDisqualification decision={result.details?.disqualification} />
+                  <ResultDisqualification
+                    showEvidence={showEvidence}
+                    decision={result.details?.disqualification}
+                  />
                   <ResultEvidence
                     notes={result.details?.note}
                     provider={result.resultSource}

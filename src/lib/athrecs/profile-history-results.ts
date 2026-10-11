@@ -110,7 +110,9 @@ export function profileAchievementResults(
           distance(r.distanceCode) === distance(row.discipline) &&
           ((row.eventSlug && r.eventSlug === row.eventSlug) ||
             normal(r.eventName) === normal(row.meeting) ||
-            r.sourceUrls.some((url) => row.sourceUrls.includes(url))),
+            (r.sourceKeys ?? r.sourceUrls).some((key) =>
+              (row.sourceKeys ?? row.sourceUrls).includes(key),
+            )),
       ),
   );
   return [

@@ -24,16 +24,6 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
           <AthleteId number={profile.athleteNumber} />
           {profile.club ? <span className="text-sm text-muted">{profile.club}</span> : null}
           {profile.nationality ? <CountryFlag country={profile.nationality} showName /> : null}
-          {profile.nationalitySource ? (
-            <a
-              href={profile.nationalitySource.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs text-accent underline"
-            >
-              As listed by {profile.nationalitySource.provider}
-            </a>
-          ) : null}
           <span className="text-xs text-muted">
             {profile.sports.length > 1 ? "Sports:" : "Sport:"}
           </span>
@@ -51,25 +41,6 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
                 {paragraph}
               </p>
             ))}
-            {profile.biographySources.length ? (
-              <details className="text-xs">
-                <summary className="cursor-pointer text-accent">Biography sources</summary>
-                <ul className="mt-2 space-y-2">
-                  {profile.biographySources.map((source) => (
-                    <li key={source.url}>
-                      <a
-                        href={source.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent underline"
-                      >
-                        {source.label} ↗
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </details>
-            ) : null}
           </div>
         ) : null}
       </section>

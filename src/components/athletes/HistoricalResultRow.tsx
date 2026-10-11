@@ -60,7 +60,7 @@ export function HistoricalResultRow({
           urls={row.sourceUrls}
           showEvidence={showEvidence}
         />
-        <ResultDisqualification decision={row.disqualification} />
+        <ResultDisqualification showEvidence={showEvidence} decision={row.disqualification} />
       </td>
       <td role="cell" data-label="Sport" className="px-3 py-2 text-xs">
         {result.sport}

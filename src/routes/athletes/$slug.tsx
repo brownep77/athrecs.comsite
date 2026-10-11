@@ -6,7 +6,6 @@ import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
-import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
 import {
@@ -41,7 +40,6 @@ import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
 import { formatAthleteId } from "@/lib/athrecs/athlete-id";
-import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 import {
   ATHLETE_INDEXING_HEADER,
   INDEXABLE_ATHLETE_ROBOTS,
@@ -329,11 +327,11 @@ function AthleteContent() {
       ...upcoming.map((r) => r.sport),
     ]),
   ];
-  const reportedHistory = getReportedRaceHistory(athlete.slug);
+  const reportedHistory = data.editorial.reportedHistory;
   const includedHistory = reportedHistory ?? undefined;
   const performanceCount = timeline.count + (includedHistory?.records.length ?? 0);
   const aliases = athlete.aliases ?? [];
-  const career = getEditorialAthleteCareer(athlete.slug);
+  const career = data.editorial.career;
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
     isPublicProfileSource(link.url, link.label),
   );
@@ -456,25 +454,6 @@ function AthleteContent() {
                 {paragraph}
               </p>
             ))}
-            <details className="text-xs">
-              <summary className="cursor-pointer text-accent">Biography sources</summary>
-              <ul className="mt-2 space-y-2">
-                {career.biographySources
-                  .filter((source) => isPublicProfileSource(source.url, source.label))
-                  .map((source) => (
-                    <li key={source.url}>
-                      <a
-                        href={source.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent underline underline-offset-2"
-                      >
-                        {source.label} ↗
-                      </a>
-                    </li>
-                  ))}
-              </ul>
-            </details>
           </div>
         ) : (
           <p className="text-sm leading-relaxed text-muted">{bio}</p>
@@ -526,7 +505,7 @@ function AthleteContent() {
         <a href="#profile-about">About & links</a>
       </nav>
       <section id="profile-achievements" className="scroll-mt-24 space-y-5">
-        <AthleteCareerHighlights slug={athlete.slug} />
+        <AthleteCareerHighlights career={career} />
         <AnzPerformanceOverview
           histories={sourceHistories}
           medals={data.anzMedals}
@@ -585,8 +564,8 @@ function AthleteContent() {
               nationalitySource={athlete.nationality_source}
             />
           ) : null}
-          <EditorialAthleteOverview slug={athlete.slug} />
-          <EditorialRoadSplits slug={athlete.slug} />
+          <EditorialAthleteOverview overview={data.editorial.overview} />
+          <EditorialRoadSplits overview={data.editorial.overview} />
           <AthleteMediaCoverage slug={athlete.slug} />
           {profileLinks.length > 0 && (
             <section className="space-y-2 rounded-xl border border-border bg-surface p-4">

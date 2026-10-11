@@ -46,6 +46,7 @@ export const sourcePerformanceSchema = z.object({
   venue: z.string(),
   meeting: z.string(),
   sourceUrls: z.array(sourceUrl),
+  sourceKeys: z.array(z.string()).optional(),
   labels: z.array(z.string()),
   disqualification: disqualificationSchema.optional(),
 });

@@ -1,20 +1,19 @@
-import { davidGogginsTimedPerformances } from "@/data/david-goggins";
-import {
-  moFarahCareerBests,
-  moFarahPhoto,
-  moFarahRoadSplits,
-  moFarahTwoMileRoadBest,
-} from "@/data/mo-farah";
+import type { ProfileEditorial } from "@/lib/athrecs/profile-editorial.server";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 
 export function EditorialAthleteOverview({
-  slug,
+  overview,
   showEvidence = false,
 }: {
-  slug: string;
+  overview: ProfileEditorial["overview"];
   showEvidence?: boolean;
 }) {
-  if (slug === "david-goggins") {
+  const {
+    timed: davidGogginsTimedPerformances,
+    bests: moFarahCareerBests,
+    photo: moFarahPhoto,
+  } = overview;
+  if (davidGogginsTimedPerformances.length) {
     return (
       <section
         aria-labelledby="timed-distance-performances"
@@ -31,11 +30,8 @@ export function EditorialAthleteOverview({
         ) : null}
         <div className="grid gap-3 sm:grid-cols-2">
           {davidGogginsTimedPerformances.map((performance) => (
-            <a
+            <div
               key={performance.event}
-              href={performance.source}
-              target="_blank"
-              rel="noreferrer"
               className="rounded-lg border border-border px-3 py-2 no-underline hover:bg-elevated"
             >
               <span className="block text-sm font-medium text-fg">{performance.event}</span>
@@ -46,15 +42,22 @@ export function EditorialAthleteOverview({
                 {performance.year} · Overall place {performance.place}
               </span>
               {showEvidence ? (
-                <span className="block text-xs text-accent">UltraSignup results ↗</span>
+                <a
+                  href={performance.source}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block text-xs text-accent"
+                >
+                  UltraSignup results ↗
+                </a>
               ) : null}
-            </a>
+            </div>
           ))}
         </div>
       </section>
     );
   }
-  if (slug !== "mo-farah") return null;
+  if (!overview.photo) return null;
   return (
     <section
       aria-labelledby="career-bests"
@@ -62,8 +65,8 @@ export function EditorialAthleteOverview({
     >
       <figure>
         <img
-          src={moFarahPhoto.src}
-          alt={moFarahPhoto.alt}
+          src={moFarahPhoto!.src}
+          alt={moFarahPhoto!.alt}
           width={1600}
           height={1600}
           className="aspect-square w-full rounded-xl object-cover"
@@ -73,16 +76,16 @@ export function EditorialAthleteOverview({
           <br />
           Photo:{" "}
           <a
-            href={moFarahPhoto.source}
+            href={moFarahPhoto!.creditUrl}
             target="_blank"
             rel="noreferrer"
             className="text-accent underline"
           >
-            {moFarahPhoto.credit}
+            {moFarahPhoto!.credit}
           </a>
           {" · "}
           <a
-            href={moFarahPhoto.licence}
+            href={moFarahPhoto!.licence}
             target="_blank"
             rel="noreferrer"
             className="text-accent underline"
@@ -113,7 +116,7 @@ export function EditorialAthleteOverview({
             Road results, PBs and achievements appear below. His fastest assisted half marathon was
             59:07 at the 2019 Great North Run; his record-eligible best is 59:32 in Lisbon.{" "}
             <a
-              href="https://worldathletics.org/athletes/-/14189197"
+              href={overview.sourceUrl}
               target="_blank"
               rel="noreferrer"
               className="text-accent underline"
@@ -129,13 +132,14 @@ export function EditorialAthleteOverview({
 }
 
 export function EditorialRoadSplits({
-  slug,
+  overview,
   showEvidence = false,
 }: {
-  slug: string;
+  overview: ProfileEditorial["overview"];
   showEvidence?: boolean;
 }) {
-  if (slug !== "mo-farah") return null;
+  const { splits: moFarahRoadSplits, twoMile: moFarahTwoMileRoadBest } = overview;
+  if (!moFarahTwoMileRoadBest) return null;
   return (
     <section aria-label="Additional road bests" className="space-y-2">
       <h2 className="font-display text-lg font-semibold">Additional road bests</h2>
@@ -166,11 +170,8 @@ export function EditorialRoadSplits({
           ) : null}
         </div>
         {moFarahRoadSplits.map((split) => (
-          <a
+          <div
             key={split.distance}
-            href={split.source}
-            target="_blank"
-            rel="noreferrer"
             className="min-w-40 flex-1 rounded-lg border border-border bg-surface px-3 py-2 no-underline hover:bg-elevated"
           >
             <span className="block text-xs text-muted">Running · {split.distance} split</span>
@@ -178,8 +179,17 @@ export function EditorialRoadSplits({
             <span className="block text-xs text-muted">
               {split.event} · {formatRaceDateShort(split.date)}
             </span>
-            {showEvidence ? <span className="block text-xs text-accent">Source ↗</span> : null}
-          </a>
+            {showEvidence ? (
+              <a
+                href={split.source}
+                target="_blank"
+                rel="noreferrer"
+                className="block text-xs text-accent"
+              >
+                Source ↗
+              </a>
+            ) : null}
+          </div>
         ))}
       </div>
       {showEvidence ? (

@@ -18,7 +18,6 @@ import { CompetitionHonours } from "./CompetitionHonours";
 import { buildCompetitionHonours } from "@/lib/athrecs/competition-honours";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { achievementPalette } from "@/lib/athrecs/achievement-colours";
-import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { careerAward, careerTier, type ProfileAwardKind } from "@/lib/athrecs/profile-awards";
 import type { CompetitionTier } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
@@ -72,7 +71,13 @@ export function PersonalBestStrip({
               <a
                 key={`reported-${best.id}`}
                 style={bestColours.get(`pb:${best.sport}:${best.surface}:${best.distanceCode}`)}
-                href={best.recordId ? `#reported-result-${best.recordId}` : best.sources[0].url}
+                href={
+                  best.recordId
+                    ? `#reported-result-${best.recordId}`
+                    : showEvidence
+                      ? best.sources[0]?.url
+                      : undefined
+                }
                 className="achievement-label min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
                 title={best.note}
               >
@@ -278,12 +283,11 @@ export function AchievementsBoard({
                   {outcome}
                 </p>
               ))}
-              <details className="text-xs">
-                <summary className="cursor-pointer">Sources</summary>
-                <ul className="mt-2 space-y-1">
-                  {highlight.sources
-                    .filter((source) => isPublicProfileSource(source.url, source.label))
-                    .map((source) => (
+              {showEvidence ? (
+                <details className="text-xs">
+                  <summary className="cursor-pointer">Sources</summary>
+                  <ul className="mt-2 space-y-1">
+                    {highlight.sources.map((source) => (
                       <li key={source.url}>
                         <a
                           href={source.url}
@@ -295,8 +299,9 @@ export function AchievementsBoard({
                         </a>
                       </li>
                     ))}
-                </ul>
-              </details>
+                  </ul>
+                </details>
+              ) : null}
             </article>
           ))}
         </div>

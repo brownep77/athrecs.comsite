@@ -38,17 +38,9 @@ export function AnzPerformanceOverview({
             Personal bests
           </h2>
           <p className="mt-1 text-sm text-muted">
-            Best eligible performances in the imported ANZ record.
+            Best eligible performances in the recorded ranking history.
           </p>
         </div>
-        <a
-          href={source.sourceUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="text-sm text-accent underline underline-offset-4"
-        >
-          Athletics New Zealand ↗
-        </a>
       </div>
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
         {events.map((item) => (
@@ -134,7 +126,7 @@ export function AnzPerformanceOverview({
               ))}
             </svg>
             <p className="text-xs text-muted">
-              Faster times appear higher. Gaps mean no ANZ performance was returned for that year.
+              Faster times appear higher. Gaps mean no performance is recorded for that year.
             </p>
           </>
         ) : (
@@ -180,11 +172,8 @@ export function AnzPerformanceOverview({
           </h3>
           <div className="grid gap-3 sm:grid-cols-2">
             {medals.map((m) => (
-              <a
+              <article
                 key={`${m.year}-${m.event}-${m.medal}`}
-                href={m.sourceUrl}
-                target="_blank"
-                rel="noreferrer"
                 className="rounded-xl border border-border bg-surface p-4 no-underline hover:bg-elevated"
               >
                 <span className="text-xs font-semibold uppercase tracking-wide text-muted">
@@ -194,7 +183,7 @@ export function AnzPerformanceOverview({
                   {m.event} · {m.performance}
                 </strong>
                 <span className="text-sm text-muted">{m.ageGroup}</span>
-              </a>
+              </article>
             ))}
           </div>
         </div>
@@ -210,23 +199,19 @@ export function AnzPerformanceOverview({
             ) : (
               coach.name
             )}{" "}
-            · Listed by ANZ
           </p>
         ) : null}
         <p>
-          {source.performances.length} ANZ performances · Updated{" "}
-          {formatRaceDateShort(source.capturedAt.slice(0, 10))}.{" "}
-          {source.complete
-            ? "ANZ’s listed event searches have been imported. This covers ranking records, not a complete race history."
-            : "This is a partial ANZ import."}
+          {source.performances.length} ranking performances. This may not be a complete race
+          history.
         </p>
         <p>
-          Club races, cross-country and relay results can come from additional sources in the
-          race history below.
+          Club races, cross-country and relay results can come from additional sources in the race
+          history below.
         </p>
         <p>
-          Original time precision is retained. Road and track events are separate; ANZ does not
-          specify chip or gun timing here.
+          Original time precision is retained. Road and track events are separate; Chip or gun
+          timing is unspecified here.
         </p>
       </div>
     </section>

@@ -6,12 +6,11 @@ import {
 } from "./profile-history-results";
 import { reportedResultSortDate } from "./profile-result-presentation";
 import { publicAthleteBio } from "./public-athlete-bio";
-import { isPublicProfileSource } from "./public-profile-sources";
+import { withoutProfileEvidence } from "./profile-evidence";
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
 import type { ReportedRaceRecord } from "./reported-race-history";
 import type { SourceNationality } from "./source-nationality";
-import { isWmmSource } from "./profile-source-presentation";
 
 export const PUBLIC_PROFILE_RESULT_LIMIT = 5;
 
@@ -69,18 +68,13 @@ export function buildPublicAthletePreview(input: {
   const recent = combined
     .sort((a, b) => date(b).localeCompare(date(a)))
     .slice(0, PUBLIC_PROFILE_RESULT_LIMIT);
-  return {
+  return withoutProfileEvidence({
     slug: input.slug,
     displayName: input.displayName,
     athleteNumber: input.athleteNumber,
     club: input.club ?? null,
     nationality: input.nationality ?? null,
-    nationalitySource:
-      input.nationalitySource &&
-      !isWmmSource(input.nationalitySource.provider, [input.nationalitySource.sourceUrl]) &&
-      isPublicProfileSource(input.nationalitySource.sourceUrl, input.nationalitySource.provider)
-        ? input.nationalitySource
-        : null,
+    nationalitySource: null,
     sports,
     biography: input.biography
       ? [...input.biography]
@@ -92,12 +86,10 @@ export function buildPublicAthletePreview(input: {
             club: input.club,
           }),
         ],
-    biographySources: (input.biographySources ?? []).filter((source) =>
-      isPublicProfileSource(source.url, source.label),
-    ),
+    biographySources: [],
     entries: recent.filter((entry): entry is ResultsHistoryEntry => entry.kind !== "reported"),
     reportedRecords: recent.flatMap((entry) => (entry.kind === "reported" ? [entry.result] : [])),
     totalResults: combined.length,
     searchIndexable: input.searchIndexable,
-  };
+  });
 }

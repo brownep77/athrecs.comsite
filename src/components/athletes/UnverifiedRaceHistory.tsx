@@ -1,14 +1,13 @@
-import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
+import type { ReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 import { Badge } from "@/components/ui/badge";
 
 export function UnverifiedRaceHistory({
-  slug,
+  history,
   showEvidence = false,
 }: {
-  slug: string;
+  history: ReportedRaceHistory | null;
   showEvidence?: boolean;
 }) {
-  const history = getReportedRaceHistory(slug);
   if (!history || history.includeInResults) return null;
 
   return (

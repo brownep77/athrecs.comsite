@@ -191,7 +191,10 @@ export function SourcePerformanceHistory({
                       </span>
                     ) : null}
                     {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
-                    <ResultDisqualification decision={row.disqualification} />
+                    <ResultDisqualification
+                      showEvidence={showEvidence}
+                      decision={row.disqualification}
+                    />
                     {showEvidence && row.credit ? (
                       <a
                         href={row.credit.url}
@@ -220,7 +223,7 @@ export function SourcePerformanceHistory({
                   </td>
                   <td role="cell" data-label="Meeting" className="min-w-52 px-3 py-2">
                     {row.meeting}
-                    {row.notes ? (
+                    {showEvidence && row.notes ? (
                       <p className="mt-1 max-w-prose whitespace-normal text-xs text-muted">
                         {row.notes}
                       </p>
