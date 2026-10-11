@@ -191,7 +191,25 @@ const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
   "./profile-connections": shared["./profile-connections"],
   "./claim-invitation": invitationCore,
 });
+const reviewCore = load("src/lib/athlete-workspace/core.ts", { zod: require("zod") });
+const resultReview = load("src/lib/athrecs/profile-result-review.server.ts", {
+  "node:crypto": crypto,
+  "../athlete-workspace/core": reviewCore,
+});
+const summarySends = [];
+const summaryReceipts = load("src/lib/athrecs/profile-result-receipts.server.ts", {
+  "./result-claim-alerts.server": alerts,
+  "./result-claim-email.server": {
+    notifyProfileResultsConfirmed: async (payload) => summarySends.push(payload),
+  },
+});
 const claims = load("src/lib/athrecs/result-claims-api.ts", {
+  "./profile-result-receipts.server": summaryReceipts,
+  "./profile-result-review": load("src/lib/athrecs/profile-result-review.ts", {
+    zod: require("zod"),
+    "../athlete-workspace/core": reviewCore,
+  }),
+  "./profile-result-review.server": resultReview,
   "./claim-invitations-api": { privateClaimMiddleware: "private" },
   "./claim-invitation": invitationCore,
   "./claim-invitations.server": invitations,
@@ -199,7 +217,9 @@ const claims = load("src/lib/athrecs/result-claims-api.ts", {
   "./athlete-account-api": { syncAthleteAccountAfterClaim: async () => {} },
   "./result-claim-alerts.server": alerts,
   "./result-claim-email.server": {
-    notifyResultClaimSubmitted: async (email, notifyStaff) => receipts.push({ email, notifyStaff }),
+    notifyProfileResultsConfirmed: async (email) => receipts.push({ summary: email }),
+    notifyResultClaimSubmitted: async (email, notifyStaff, notifyAthlete = true) =>
+      receipts.push({ email, notifyStaff, notifyAthlete }),
     notifyResultClaimReviewed: async () => {},
     notifyResultClaimWithdrawn: async () => {},
   },
@@ -629,6 +649,7 @@ try {
   const worker = load("src/routes/api/result-claim-alerts.ts", {
     "@tanstack/react-router": { createFileRoute: () => (config) => config },
     "@/lib/athrecs/result-claim-alerts.server": alerts,
+    "@/lib/athrecs/profile-result-receipts.server": summaryReceipts,
     "@/lib/db": connection,
   }).Route.server.handlers.GET;
   process.env.CRON_SECRET = "synthetic-worker-key";
@@ -934,6 +955,251 @@ try {
   console.log(
     "Source-history claims passed: dates/windows, club/age/placings, minute precision, authorization, stable IDs, evidence snapshot, invitations, conflict review and no canonical duplicates.",
   );
+  // Whole-profile review uses one declaration and one receipt, not one claim per row.
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values('batch-user','Batch Test Athlete','batch@example.test',true,now(),now()),('batch-staff','Batch Reviewer','batch-reviewer@example.test',true,now(),now())`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(8200,'batch-test-athlete','Batch Test Athlete','public')`;
+  await sql`insert into editions(id,event_id,event_date,distance_code) values(8203,1,'2024-05-04','10K')`;
+  await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,status) values(8201,1,8200,2345,'finished'),(8202,2,8200,2378,'finished'),(8203,8203,8200,null,'dnf')`;
+  const historyRow = {
+    year: 2025,
+    date: "2025-03-01",
+    sourceDate: "1 Mar 2025",
+    ageGroup: "",
+    discipline: "5K",
+    performance: "18:20",
+    wind: "",
+    place: "12",
+    venue: "Test Venue",
+    meeting: "Synthetic History Race",
+    sourceUrls: ["https://example.test/history"],
+    labels: [],
+    verificationStatus: "source_verified",
+  };
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    values(8200,'Synthetic timing','batch-history','https://example.test/history',now(),true,array[2025],array[2025],${JSON.stringify([historyRow])}::jsonb,now())`;
+  const originalBatchResults = JSON.stringify(
+    await sql`select * from results where athlete_id=8200 order by id`,
+  );
+  const originalHistory = JSON.stringify(
+    await sql`select * from athlete_source_histories where athlete_id=8200`,
+  );
+  const detail = await claims.getClaimableResult(
+    { resultId: 8201, includeReview: true },
+    user("batch-user"),
+  );
+  assert.equal(
+    detail.review.rows.length,
+    4,
+    "Finished, non-finish and source-history rows are all reviewable",
+  );
+  assert.equal(detail.sourceUrl, null, "Stored evidence is not sent to the claim UI");
+  assert(
+    !JSON.stringify(detail.review).includes("example.test"),
+    "Review response omits private source URLs",
+  );
+  assert.equal(
+    await claims.getClaimableResult({ resultId: 8201, includeReview: true }, user("unrelated")),
+    null,
+  );
+  assert.equal(
+    await claims.getClaimableResult({ resultId: 8201, includeReview: true }, user("unverified")),
+    null,
+  );
+  const batchInput = {
+    resultId: 8201,
+    declarationAccepted: true,
+    review: {
+      requestId: crypto.randomUUID(),
+      snapshot: detail.review.snapshot,
+      includedKeys: ["r:8201", "r:8203"],
+      additions: [
+        {
+          index: 1,
+          race: "Synthetic Missing 10K",
+          date: "2025-02-02",
+          distance: "10K",
+          time: "42:34",
+          timingBasis: "gun",
+          sourceUrl: "https://example.test/missing",
+          bib: "42",
+          place: "",
+        },
+      ],
+    },
+  };
+  await assert.rejects(
+    () =>
+      claims.submitResultClaim(
+        { ...batchInput, review: { ...batchInput.review, includedKeys: ["r:8201", "r:1"] } },
+        user("batch-user"),
+      ),
+    /does not belong/,
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_result_confirmations where user_id='batch-user'`)
+      .length,
+    0,
+    "Invalid selection rolls back without a claim or confirmation",
+  );
+  const receiptBefore = summarySends.length;
+  const submitted = await claims.submitResultClaim(batchInput, user("batch-user"));
+  assert.equal(
+    submitted.status,
+    "pending",
+    "Batch confirmation does not bypass current ownership review",
+  );
+  assert.deepEqual(submitted.confirmation, { included: 2, excluded: 2, added: 1, reused: false });
+  assert.equal(
+    (await sql`select * from result_claims where claimant_user_id='batch-user'`).length,
+    1,
+  );
+  assert.equal(
+    summarySends.length,
+    receiptBefore + 1,
+    "Exactly one athlete summary for all results",
+  );
+  assert.equal(summarySends.at(-1).resultId, 8201);
+  assert.equal(
+    receipts.at(-1).notifyAthlete,
+    false,
+    "Generic per-result receipt is suppressed for batch submissions",
+  );
+  assert.equal(
+    (
+      await sql`select entries from athlete_result_proposals where id=${batchInput.review.requestId}::uuid`
+    )[0].entries[0].timingBasis,
+    "gun",
+  );
+  const replay = await claims.submitResultClaim(batchInput, user("batch-user"));
+  assert.equal(replay.confirmation.reused, true);
+  assert.equal(summarySends.length, receiptBefore + 1, "Retry sends no extra athlete email");
+  const replayNewId = await claims.submitResultClaim(
+    { ...batchInput, review: { ...batchInput.review, requestId: crypto.randomUUID() } },
+    user("batch-user"),
+  );
+  assert.equal(
+    replayNewId.confirmation.reused,
+    true,
+    "Duplicate payload with a new request ID is also idempotent",
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_results where user_id='batch-user'`)[0]
+      .result_id,
+    8202,
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_history_choices where user_id='batch-user'`)[0]
+      .excluded,
+    true,
+  );
+  assert.equal(
+    JSON.stringify(await sql`select * from results where athlete_id=8200 order by id`),
+    originalBatchResults,
+  );
+  assert.equal(
+    JSON.stringify(await sql`select * from athlete_source_histories where athlete_id=8200`),
+    originalHistory,
+    "Original source rows are never edited",
+  );
+  // A source edit while a review is open must fail atomically.
+  const current = await claims.getClaimableResult(
+    { resultId: 8201, includeReview: true },
+    user("batch-user"),
+  );
+  await sql`update results set gun_time_seconds=2400 where id=8201`;
+  await assert.rejects(
+    () =>
+      claims.submitResultClaim(
+        {
+          ...batchInput,
+          review: {
+            requestId: crypto.randomUUID(),
+            snapshot: current.review.snapshot,
+            includedKeys: current.review.rows.map((r) => r.key),
+            additions: [],
+          },
+        },
+        user("batch-user"),
+      ),
+    /results have changed/,
+  );
+  await sql`update results set gun_time_seconds=null where id=8201`;
+  await claims.reviewResultClaim(
+    {
+      claimId: submitted.claimId,
+      action: "approve",
+      staffNote: "Independent synthetic identity evidence checked for batch test",
+    },
+    { userId: "batch-staff", staffEmail: "batch-reviewer@example.test" },
+  );
+  const owned = await claims.getClaimableResult(
+    { resultId: 8201, includeReview: true },
+    user("batch-user"),
+  );
+  const restored = await claims.submitResultClaim(
+    {
+      resultId: 8201,
+      declarationAccepted: true,
+      review: {
+        requestId: crypto.randomUUID(),
+        snapshot: owned.review.snapshot,
+        includedKeys: owned.review.rows.map((r) => r.key),
+        additions: [],
+      },
+    },
+    user("batch-user"),
+  );
+  assert.equal(restored.alreadyOwned, true);
+  assert.equal(restored.confirmation.included, 4);
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_results where user_id='batch-user'`).length,
+    0,
+    "Restoring selections removes only this account’s exclusions",
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_history_choices where user_id='batch-user'`)[0]
+      .excluded,
+    false,
+  );
+  assert.equal(
+    (await sql`select * from result_claims where claimant_user_id='batch-user'`).length,
+    1,
+    "Owned re-review creates no new claim",
+  );
+  // A competing account may save its proposal; it cannot alter the active owner’s selection.
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values('batch-other','Batch Test Athlete','batch-other@example.test',true,now(),now())`;
+  const competitor = await claims.getClaimableResult(
+    { resultId: 8201, includeReview: true },
+    user("batch-other"),
+  );
+  const competingBatch = await claims.submitResultClaim(
+    {
+      resultId: 8201,
+      declarationAccepted: true,
+      review: {
+        requestId: crypto.randomUUID(),
+        snapshot: competitor.review.snapshot,
+        includedKeys: ["r:8201"],
+        additions: [],
+      },
+    },
+    user("batch-other"),
+  );
+  assert.equal(competingBatch.status, "pending");
+  assert.equal(
+    (
+      await sql`select user_id from athlete_account_links where athlete_id=8200 and status='active'`
+    )[0].user_id,
+    "batch-user",
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_results where user_id='batch-user'`).length,
+    0,
+  );
+  console.log(
+    "Whole-profile confirmation passed: complete result list, additions/removals/restores, one email, replay, changed snapshots, source preservation and competing-owner isolation.",
+  );
+
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");
   const savedFetch = globalThis.fetch;

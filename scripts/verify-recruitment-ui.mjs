@@ -112,16 +112,20 @@ try {
   await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("section"), "potential");
   const match = page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" });
-  await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
-  const confirmation = page.getByRole("alertdialog");
-  await confirmation.getByText(/ATHRECS will check your identity/).waitFor();
-  await confirmation.getByRole("button", { name: "Cancel", exact: true }).click();
+  await match
+    .getByRole("button", { name: "Claim profile & review all results", exact: true })
+    .click();
+  const confirmation = page.getByRole("dialog");
+  await confirmation.getByText(/Registration creates your account/).waitFor();
+  await confirmation.getByRole("button", { name: "Close", exact: true }).click();
   assert.equal((await sql`select id from result_claims where result_id=991601`).length, 0);
-  await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
-  await confirmation.getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true }).click();
-  await page
-    .getByText("Your claim is with staff for an ownership check.", { exact: true })
-    .waitFor();
+  await match
+    .getByRole("button", { name: "Claim profile & review all results", exact: true })
+    .click();
+  await confirmation
+    .getByRole("button", { name: "Confirm all results are mine", exact: true })
+    .click();
+  await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
   assert.deepEqual(await sql`select status from result_claims where result_id=991601`, [
     { status: "pending" },
   ]);
@@ -129,8 +133,9 @@ try {
     (await sql`select athlete_id from athlete_account_links where athlete_id=991601`).length,
     0,
   );
+  await confirmation.getByRole("button", { name: "Close", exact: true }).click();
   await match.getByRole("link", { name: "View claim", exact: true }).click();
-  await page.getByText("Claim received — awaiting identity review", { exact: true }).waitFor();
+  await page.getByText(/Previous review saved/).waitFor();
   assert.equal(await page.getByText(/Another account has already claimed/).count(), 0);
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));

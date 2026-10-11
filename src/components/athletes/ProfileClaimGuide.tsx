@@ -13,7 +13,7 @@ import { unfinishedClaim } from "@/lib/athrecs/claim-resume";
 export function ProfileClaimSteps({ step }: { step: 1 | 2 | 3 }) {
   return (
     <ol aria-label="Profile claim progress" className="grid grid-cols-3 gap-2 text-xs sm:text-sm">
-      {["Verify email", "Confirm profile", "Claim received"].map((label, index) => (
+      {["Register", "Claim profile & results", "Confirmation saved"].map((label, index) => (
         <li
           key={label}
           aria-current={step === index + 1 ? "step" : undefined}
@@ -118,7 +118,7 @@ export function ProfileClaimGuide({
   return (
     <section
       aria-label="Finish your profile claim"
-      className="space-y-4 rounded-xl border border-accent/40 bg-surface p-5 shadow-card"
+      className="space-y-4 rounded-xl border-2 border-accent bg-accent-soft p-5 shadow-card"
     >
       <ProfileClaimSteps step={pending ? 3 : 2} />
       <h2 className="font-display text-xl font-semibold">
@@ -183,12 +183,13 @@ export function ProfileClaimGuide({
       ) : (
         <>
           <p className="text-sm text-muted">
-            Find your profile using your racing name, {account.fullName}. Confirm a result is yours
-            and submit the profile claim. Optional account details can wait.
+            You must claim your profile to manage your results. Find it using your racing name,{" "}
+            {account.fullName}, review all its results and confirm them together. Optional account
+            details can wait.
           </p>
           <Button asChild className="h-auto min-h-11 max-w-full whitespace-normal py-3">
             <Link to="/athlete-account" search={{ section: "potential" }}>
-              Find my profile to claim
+              Claim my athlete profile
             </Link>
           </Button>
         </>

@@ -18,6 +18,11 @@ export async function countPublishedSourceResults(sql: Sql, athleteIds: readonly
       and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
         where l.athlete_id=a.id and l.status='active' and (s.enabled=false or s.share_results=false))
       and coalesce(performance->>'profileExcluded','false') <> 'true'
+      and not exists (select 1 from athlete_profile_history_choices choice
+        join athlete_account_links choice_owner on choice_owner.user_id=choice.user_id
+          and choice_owner.athlete_id=h.athlete_id and choice_owner.status='active'
+        where choice.athlete_id=h.athlete_id and choice.provider=h.provider and choice.external_id=h.external_id
+          and choice.performance_hash=md5(source_row.performance::text) and choice.excluded)
       and not exists (
         select 1 from source_history_claim_results source_claim
         join athlete_profile_hidden_source_results hidden on hidden.source_result_id=source_claim.id
@@ -38,7 +43,11 @@ export async function loadPublishedSourceHistories(sql: Sql, athleteId: number) 
       h.years_expected as "yearsExpected", h.years_captured as "yearsCaptured",
       coalesce((select jsonb_agg(performance order by ordinal)
         from jsonb_array_elements(h.performances) with ordinality as source_row(performance,ordinal)
-        where true and not exists (
+        where not exists (select 1 from athlete_profile_history_choices choice
+        join athlete_account_links choice_owner on choice_owner.user_id=choice.user_id
+          and choice_owner.athlete_id=h.athlete_id and choice_owner.status='active'
+        where choice.athlete_id=h.athlete_id and choice.provider=h.provider and choice.external_id=h.external_id
+          and choice.performance_hash=md5(source_row.performance::text) and choice.excluded) and not exists (
         select 1 from source_history_claim_results source_claim
         join athlete_profile_hidden_source_results hidden on hidden.source_result_id=source_claim.id
         join athlete_account_links owner_link on owner_link.user_id=hidden.user_id

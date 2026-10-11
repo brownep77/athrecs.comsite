@@ -18,6 +18,7 @@ export function AccountRaces({
   account: AthleteAccountData;
   view: "races" | "achievements" | "progress";
 }) {
+  const reviewAnchor = account.claimedResults.find((result) => result.status === "finished");
   const visibility = useQuery({
     queryKey: ["my-profile-result-visibility"],
     queryFn: () => getMyProfileResultVisibility(),
@@ -68,6 +69,13 @@ export function AccountRaces({
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
+          {reviewAnchor ? (
+            <Button asChild>
+              <Link to="/claim-results" search={{ resultId: reviewAnchor.resultId }}>
+                Review & confirm my results
+              </Link>
+            </Button>
+          ) : null}
           <Button asChild>
             <Link to="/athlete-account" search={{ section: "potential" }}>
               <Plus className="size-4" aria-hidden="true" />

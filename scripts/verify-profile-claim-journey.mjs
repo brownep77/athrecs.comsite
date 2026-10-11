@@ -103,13 +103,15 @@ try {
   assert.equal(await page.getByText("This match is no longer available").count(), 0);
   await page.getByLabel("Full racing name").fill("Journey Test Runner");
   await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
+  await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).waitFor();
   await page
-    .getByRole("checkbox", { name: /This is my profile and the race shown is mine/ })
+    .getByRole("listitem")
+    .filter({ hasText: "Synthetic Run Norwich 2026" })
+    .getByText(/Recorded club: Journey Harriers/)
     .waitFor();
-  await page.getByText(/Recorded club: Journey Harriers/).waitFor();
   await page.getByText(/Age at race: 42/).waitFor();
   await page.goto(`${origin}/athlete-account?section=potential`, { waitUntil: "networkidle" });
-  await page.getByRole("heading", { name: "Synthetic Run Norwich 2026", exact: true }).waitFor();
+  await page.getByText("Synthetic Run Norwich 2026", { exact: true }).waitFor();
   await page
     .getByText("18–24 October 2020 (individual run date not supplied)", { exact: false })
     .waitFor();
@@ -120,13 +122,28 @@ try {
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
   await page.getByRole("link", { name: "Finish my profile claim", exact: true }).click();
   assert(new URL(page.url()).searchParams.get("resultId") === String(sourceId));
-  await page
-    .getByRole("checkbox", { name: /This is my profile and the race shown is mine/ })
-    .check();
-  await page
-    .getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true })
-    .click();
-  await page.getByText("Claim received — awaiting identity review", { exact: true }).waitFor();
+  await page.getByRole("button", { name: /Remove Synthetic Run Norwich 2020 Virtual/ }).click();
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_source_results where user_id=${plain.user.id}`)
+      .length,
+    0,
+    "Removal stays in the draft until confirmation",
+  );
+  await page.getByRole("button", { name: "Add a missing result", exact: true }).click();
+  await page.getByLabel("Race name", { exact: true }).fill("Synthetic Added 10K");
+  await page.getByLabel("Race date", { exact: true }).fill("2025-05-04");
+  await page.getByLabel("Distance (e.g. 10K)", { exact: true }).fill("10K");
+  await page.getByLabel("Finish time (HH:MM:SS or MM:SS)", { exact: true }).fill("42:12");
+  await page.getByLabel("Results page link", { exact: true }).fill("https://example.test/added");
+  await page.getByLabel("Time type", { exact: true }).selectOption("chip");
+  await page.getByRole("button", { name: "Add to my confirmation", exact: true }).click();
+  assert.equal(
+    (await sql`select * from athlete_result_proposals where submitted_by=${plain.user.id}`).length,
+    0,
+    "Adding stays in the draft until confirmation",
+  );
+  await page.getByRole("button", { name: "Confirm my 2 selected results", exact: true }).click();
+  await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
   const [claim] =
     await sql`select status from result_claims where claimant_user_id=${plain.user.id}`;
   assert.equal(claim.status, "pending");
@@ -135,12 +152,25 @@ try {
     0,
   );
   await page.reload({ waitUntil: "networkidle" });
-  await page.getByText("Claim received — awaiting identity review", { exact: true }).waitFor();
+  await page.getByText(/Previous review saved/).waitFor();
+  await page.getByRole("button", { name: /Restore Synthetic Run Norwich 2020 Virtual/ }).waitFor();
   assert.equal(
-    await page
-      .getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true })
-      .count(),
-    0,
+    (await sql`select * from athlete_profile_hidden_source_results where user_id=${plain.user.id}`)
+      .length,
+    1,
+  );
+  assert.equal(
+    (await sql`select * from athlete_result_proposals where submitted_by=${plain.user.id}`).length,
+    1,
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_result_confirmations where user_id=${plain.user.id}`)
+      .length,
+    1,
+  );
+  assert.equal(
+    await page.getByRole("button", { name: "Confirm my 1 selected results", exact: true }).count(),
+    1,
   );
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
   await page.getByRole("link", { name: "View my submitted claim" }).waitFor();
@@ -174,19 +204,14 @@ try {
   );
   await resume.click();
   await invited.page
-    .getByRole("checkbox", { name: /This is my profile and the race shown is mine/ })
+    .getByRole("button", { name: "Confirm all results are mine", exact: true })
     .waitFor();
   assert.equal(await invited.page.getByLabel("Full racing name").count(), 0);
   await invited.page.screenshot({ path: "artifacts/claim-confirm-mobile.png", fullPage: true });
   await invited.page
-    .getByRole("checkbox", { name: /This is my profile and the race shown is mine/ })
-    .check();
-  await invited.page
-    .getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true })
+    .getByRole("button", { name: "Confirm all results are mine", exact: true })
     .click();
-  await invited.page
-    .getByText("Claim received — awaiting identity review", { exact: true })
-    .waitFor();
+  await invited.page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
   await invited.page.screenshot({ path: "artifacts/claim-received-mobile.png", fullPage: true });
   assert.equal(
     (await sql`select * from result_claims where claimant_user_id=${invited.user.id}`).length,

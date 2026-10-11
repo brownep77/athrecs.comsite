@@ -30,6 +30,9 @@ try {
  create table athletes(id int primary key,profile_visibility text,profile_type text);insert into athletes values(1,'public','Athlete'),(2,'private','Athlete');
  create table athlete_account_links(athlete_id int,user_id text,status text);insert into athlete_account_links values(1,'owner','active');
  create table athlete_public_shares(user_id text,enabled boolean,share_results boolean);
+ create table athlete_profile_history_choices(user_id text,athlete_id int,provider text,external_id text,performance_hash text,excluded boolean);
+ create table source_history_claim_results(id int,provider text,external_id text,source_key text);
+ create table athlete_profile_hidden_source_results(user_id text,source_result_id int);
  create table network_audit_log(id serial,actor_user_id text,action text,entity_type text,entity_id text,before_value jsonb,after_value jsonb,note text);
  create table athlete_result_proposals(id uuid primary key,athlete_id int,revision int,entries jsonb,updated_at timestamptz);
  create table athlete_result_review_invitations(batch_id uuid,revoked_at timestamptz,responded_at timestamptz);`);
