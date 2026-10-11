@@ -78,7 +78,14 @@ try {
   assert(await uncontested.getByRole("button", { name: "Approve", exact: true }).isDisabled());
   await uncontested.getByLabel("Staff note").fill("Synthetic independent identity check recorded.");
   assert(await uncontested.getByRole("button", { name: "Approve", exact: true }).isEnabled());
-  await page.getByText("Check independent athlete identity evidence", { exact: false }).waitFor();
+  await page
+    .getByText("record the evidence resolving the issue before approval", { exact: false })
+    .first()
+    .waitFor();
+  await page
+    .getByText("responsible adult’s authority and consent", { exact: false })
+    .first()
+    .waitFor();
   await page.getByLabel("Ownership conflicts only").check();
   assert.equal(await page.getByRole("heading", { name: "Jordan Test Athlete" }).count(), 0);
   await page.getByText("Existing owner: one@example.test").waitFor();
