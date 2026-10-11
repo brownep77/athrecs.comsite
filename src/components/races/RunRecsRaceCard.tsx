@@ -10,7 +10,8 @@ import {
 } from "@/lib/athrecs/format";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { venueForEvent } from "@/lib/athrecs/venue";
-import { raceLink, raceLocation } from "@/lib/athrecs/race-information";
+import { raceLink } from "@/lib/athrecs/race-information";
+import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { RaceGroupBadges } from "./RaceGroupBadges";
 
@@ -24,7 +25,7 @@ export function RunRecsRaceCard({
   const date = race.next_date;
   const status = date && race.next_status ? effectiveStatus(date, race.next_status) : null;
   const venue = venueForEvent(race);
-  const location = raceLocation([race.city, race.county, venue.nation]);
+  const location = compactFixtureLocation({ ...race, area: null, country: venue.nation }).text;
   const start = formatStartTime(race.next_start_time, { ...race, date });
   const distances = sanitizeDistances(race.name, race.distances);
   const website = raceLink(race.website);
@@ -75,10 +76,10 @@ export function RunRecsRaceCard({
               {race.name}
             </Link>
           </h2>
-          <p className="flex items-start gap-1.5 text-sm text-muted">
+          <p className="flex flex-wrap items-start gap-1.5 text-sm text-muted">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" aria-hidden="true" />
             <span>{location || "Location to be confirmed"}</span>
-            <CountryFlag country={venue.nation} />
+            <CountryFlag country={venue.nation} showCode />
           </p>
           {race.area && !location.toLowerCase().includes(race.area.toLowerCase()) ? (
             <p className="text-sm text-subtle">{race.area}</p>

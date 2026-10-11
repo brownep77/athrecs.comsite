@@ -1,6 +1,6 @@
 import { ResultDisqualification } from "@/components/athletes/ResultDisqualification";
 import { isDisqualified } from "@/lib/athrecs/result-details";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { createFileRoute, Link, notFound, redirect } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -46,7 +46,7 @@ import { RaceGroupBadges, RaceGroupDetails } from "@/components/races/RaceGroupB
 import { venueForEvent } from "@/lib/athrecs/venue";
 import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
-import { resolveCountry, displayCountryName } from "@/lib/athrecs/countries";
+import { resolveCountry, filterCountryName } from "@/lib/athrecs/countries";
 import { timeZoneAbbr, timeZoneForPlace } from "@/lib/athrecs/timezone";
 import { buildRaceBriefing, sportLabel } from "@/lib/athrecs/race-briefing";
 import { raceFormatGuideFor } from "@/data/race-format-guides";
@@ -57,6 +57,7 @@ import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { PUBLIC_EDITION_PREVIEW_LIMIT } from "@/lib/athrecs/public-read-limits";
 import { RacePracticalInformation } from "@/components/races/RacePracticalInformation";
 import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
+import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { editionEntry } from "@/lib/athrecs/race-information";
 
 type EditionRow = {
@@ -244,6 +245,7 @@ export function RacePageContent({
     country: event.country,
     area: event.area,
   });
+  const location = compactFixtureLocation({ ...event, country: filterCountryName(country) });
   const next = upcoming.find((edition) => edition.status !== "Cancelled");
   const archived = !next && past.length > 0;
   const place = {
@@ -264,7 +266,7 @@ export function RacePageContent({
         sport: event.sport,
         slug: event.slug,
         city: event.city,
-        country: displayCountryName(country),
+        country: filterCountryName(country),
         surface: event.surface,
         organiser: event.organiser,
         website: event.website,
@@ -327,7 +329,7 @@ export function RacePageContent({
         <div className="h-1.5 bg-primary" />
         <div className="space-y-5 p-5 md:p-8">
           <div className="flex flex-wrap items-center gap-2">
-            <CountryFlag country={displayCountryName(country)} />
+            <CountryFlag country={filterCountryName(country)} showCode />
             <Badge variant="accent">{sportLabel(event.sport)}</Badge>
             {event.surface && event.surface !== "Other" && (
               <Badge variant="outline">{event.surface}</Badge>
@@ -349,22 +351,9 @@ export function RacePageContent({
               <p className="flex items-start gap-2 text-sm text-muted">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-subtle" />
                 <span>
-                  {[event.area, event.city, event.county]
-                    .map((part) => part?.trim())
-                    .filter((part): part is string => Boolean(part))
-                    .filter((part, i, arr) => {
-                      const key = part.toLowerCase();
-                      if (arr.findIndex((p) => p.toLowerCase() === key) !== i) return false;
-                      if (
-                        key === "united kingdom" &&
-                        arr.some((p) => /^(england|scotland|wales|northern ireland)$/i.test(p))
-                      ) {
-                        return false;
-                      }
-                      return true;
-                    })
-                    .join(" · ")}{" "}
-                  <CountryFlag country={displayCountryName(country)} />
+                  {location.text || "Location to be confirmed"}
+                  {" · "}
+                  <CountryFlag country={filterCountryName(country)} showCode />
                 </span>
               </p>
             </div>
@@ -585,8 +574,11 @@ export function RacePageContent({
               value={nextStart ?? "Confirm officially"}
               hint={zoneAbbr ? `Venue zone ${zoneAbbr}` : undefined}
             />
-            <Fact label="Country" value={displayCountryName(country)} />
-            <Fact label="City" value={event.city || "TBC"} />
+            <Fact
+              label="Country"
+              value={<CountryFlag country={filterCountryName(country)} showCode />}
+            />
+            <Fact label="Location" value={location.text || "TBC"} />
             <Fact
               label="Distances"
               value={
@@ -1199,7 +1191,7 @@ function EditionResultsLinks({
   );
 }
 
-function Fact({ label, value, hint }: { label: string; value: string; hint?: string }) {
+function Fact({ label, value, hint }: { label: string; value: ReactNode; hint?: string }) {
   return (
     <div className="bg-surface px-4 py-3">
       <dt className="text-[11px] font-semibold uppercase tracking-wider text-subtle">{label}</dt>
