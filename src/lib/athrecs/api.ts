@@ -1053,10 +1053,14 @@ export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" }
     `;
     if (sharing && (!sharing.enabled || !sharing.share_results)) return null;
     const { isApprovedAthleteIndexable } = await import("./athlete-search-policy.server");
+    // The public page consumes profileResults. Do not serialize a second copy
+    // of every result in the legacy database-row shape as well.
+    const { results: legacyResults, ...publicProfile } = profile;
+    void legacyResults;
     // The publication covers sporting results and basic athlete identity only.
     // Account details, contact preferences and future plans remain member-only.
     return {
-      ...profile,
+      ...publicProfile,
       searchIndexable: await isApprovedAthleteIndexable(sql, profile.athlete.id),
       athlete: {
         ...profile.athlete,

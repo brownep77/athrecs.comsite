@@ -2,7 +2,7 @@ import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
-import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
+import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
@@ -104,30 +104,53 @@ export const Route = createFileRoute("/athletes/$slug")({
       : PRIVATE_ATHLETE_ROBOTS,
     [ATHLETE_INDEXING_HEADER]: isIndexableAthletePage(loaderData) ? "1" : "0",
   }),
-  head: ({ params, loaderData }) => ({
-    links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
-    meta: [
-      {
-        title:
-          loaderData?.kind === "published-history"
-            ? `${loaderData.athlete.display_name} | ${SITE_NAME}`
-            : `Athlete profile | ${SITE_NAME}`,
-      },
-      {
-        name: "robots",
-        content: isIndexableAthletePage(loaderData)
-          ? INDEXABLE_ATHLETE_ROBOTS
-          : PRIVATE_ATHLETE_ROBOTS,
-      },
-      {
-        name: "description",
-        content:
-          loaderData?.kind === "published-history"
-            ? `Published sporting performances for ${loaderData.athlete.display_name} on ATHRECS.`
-            : "Sign in to view athlete profiles and published results on ATHRECS.",
-      },
-    ],
-  }),
+  head: ({ params, loaderData }) => {
+    const searchContent =
+      loaderData?.kind === "published-history" ? athleteSearchContent(loaderData) : null;
+    return {
+      links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
+      meta: [
+        {
+          title:
+            loaderData?.kind === "published-history"
+              ? searchContent!.title
+              : `Athlete profile | ${SITE_NAME}`,
+        },
+        {
+          name: "robots",
+          content: isIndexableAthletePage(loaderData)
+            ? INDEXABLE_ATHLETE_ROBOTS
+            : PRIVATE_ATHLETE_ROBOTS,
+        },
+        {
+          name: "description",
+          content:
+            loaderData?.kind === "published-history"
+              ? searchContent!.description
+              : "Sign in to view athlete profiles and published results on ATHRECS.",
+        },
+        ...(searchContent
+          ? [
+              { property: "og:title", content: searchContent.title },
+              { property: "og:description", content: searchContent.description },
+              { property: "og:url", content: absoluteUrl(`/athletes/${params.slug}`) },
+              { name: "twitter:card", content: "summary" },
+              { name: "twitter:title", content: searchContent.title },
+              { name: "twitter:description", content: searchContent.description },
+            ]
+          : []),
+      ],
+      scripts:
+        searchContent && isIndexableAthletePage(loaderData)
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify(searchContent.jsonLd).replace(/</g, "\\u003c"),
+              },
+            ]
+          : [],
+    };
+  },
   component: AthletePage,
   notFoundComponent: () => (
     <div className="space-y-4 py-10 text-center">
@@ -265,14 +288,7 @@ function AthleteContent() {
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
     isPublicProfileSource(link.url, link.label),
   );
-  const bio = publicAthleteBio({
-    name: athlete.display_name,
-    sport: profileSports.includes("Athletics") ? "Athletics" : profileSports[0],
-    city: athlete.city,
-    country: athlete.country,
-    club: athlete.club,
-    coach: athlete.details.coach,
-  });
+  const bio = athleteSearchContent({ athlete, profileResults, sourceHistories }).bio;
   const dob = formatDob(athlete.date_of_birth);
 
   const isPublicFigure = athlete.profile_type === "Public figure";

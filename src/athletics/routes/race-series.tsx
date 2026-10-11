@@ -9,7 +9,8 @@ const COLLECTIONS = [
   {
     key: "track-field",
     title: "Track & field",
-    description: "Outdoor and indoor meetings covering track races, jumps, throws and combined events.",
+    description:
+      "Outdoor and indoor meetings covering track races, jumps, throws and combined events.",
     icon: Medal,
     filter: { surface: "Track" },
   },
@@ -53,12 +54,17 @@ export const Route = createFileRoute("/race-series")({
       ),
     );
     return COLLECTIONS.map((collection, index) => ({
-      ...collection,
+      key: collection.key,
       events: results[index] ?? [],
     }));
   },
   head: () => ({
-    meta: siteGraphMeta({ title: "Athletics disciplines and championships | ATHRECS", description: "Browse track and field, cross-country, road athletics and championship fixtures on AthRecs.", url: `${SITE_URL}/race-series` }),
+    meta: siteGraphMeta({
+      title: "Athletics disciplines and championships | ATHRECS",
+      description:
+        "Browse track and field, cross-country, road athletics and championship fixtures on AthRecs.",
+      url: `${SITE_URL}/race-series`,
+    }),
     links: [{ rel: "canonical", href: `${SITE_URL}/race-series` }],
   }),
   component: AthleticsCollectionsPage,
@@ -67,7 +73,12 @@ export const Route = createFileRoute("/race-series")({
 function AthleticsCollectionsPage() {
   // The generated route tree retains the original running-series loader
   // type during standalone type-checking; Vite supplies Athletics collections.
-  const collections = Route.useLoaderData() as unknown as AthleticsCollection[];
+  const loaded = Route.useLoaderData() as unknown as Pick<AthleticsCollection, "key" | "events">[];
+  // React icons stay in the component; loader data must survive SSR serialization.
+  const collections = COLLECTIONS.map((collection) => ({
+    ...collection,
+    events: loaded.find((item) => item.key === collection.key)?.events ?? [],
+  }));
 
   return (
     <div className="space-y-8 pb-10">
@@ -81,8 +92,8 @@ function AthleticsCollectionsPage() {
             Disciplines and championships
           </h1>
           <p className="max-w-3xl text-sm leading-relaxed text-muted">
-            Explore the athletics calendar by competition setting, from track and field meetings
-            to cross-country and road championships.
+            Explore the athletics calendar by competition setting, from track and field meetings to
+            cross-country and road championships.
           </p>
           <div className="flex flex-wrap gap-2">
             {collections.map((collection) => (

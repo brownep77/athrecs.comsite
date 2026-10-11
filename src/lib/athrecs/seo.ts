@@ -28,7 +28,10 @@ export function siteGraphMeta(opts?: {
   return [
     { title },
     { name: "description", content: description },
-    { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+    {
+      name: "robots",
+      content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+    },
     { property: "og:type", content: type },
     { property: "og:site_name", content: SITE_NAME },
     { property: "og:title", content: title },
@@ -81,6 +84,16 @@ export function sportsEventJsonLd(input: {
   startTime?: string | null;
   sport?: string | null;
   website?: string | null;
+  organiser?: string | null;
+  endDate?: string | null;
+  entryOptions?: {
+    is_verified: boolean;
+    entry_type: string;
+    entry_url: string;
+    price_amount: number | string | null;
+    price_currency: string | null;
+    status: string;
+  }[];
 }) {
   const url = absoluteUrl(`/races/${input.slug}`);
   const description =
@@ -119,6 +132,14 @@ export function sportsEventJsonLd(input: {
     url,
     image: DEFAULT_OG_IMAGE,
     startDate: start,
+    endDate:
+      input.endDate &&
+      /^\d{4}-\d{2}-\d{2}$/.test(input.endDate) &&
+      input.endDate >= date! &&
+      !Number.isNaN(Date.parse(input.endDate)) &&
+      new Date(input.endDate).toISOString().slice(0, 10) === input.endDate
+        ? input.endDate
+        : undefined,
     eventStatus: start ? "https://schema.org/EventScheduled" : undefined,
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     location: {
@@ -131,7 +152,33 @@ export function sportsEventJsonLd(input: {
       },
     },
     sport: input.sport || "Athletics",
-    organizer: input.website ? { "@type": "Organization", url: input.website } : undefined,
+    organizer:
+      input.organiser?.trim() && !/^(unknown|tbc|n\/a)$/i.test(input.organiser.trim())
+        ? { "@type": "Organization", name: input.organiser.trim(), url: input.website || undefined }
+        : undefined,
+    offers: input.entryOptions
+      ?.filter(
+        (option) =>
+          option.is_verified &&
+          option.entry_type === "official" &&
+          /^https:\/\//.test(option.entry_url) &&
+          option.price_amount != null &&
+          Number.isFinite(Number(option.price_amount)) &&
+          Number(option.price_amount) >= 0 &&
+          /^[A-Z]{3}$/.test(option.price_currency ?? ""),
+      )
+      .map((option) => ({
+        "@type": "Offer",
+        url: option.entry_url,
+        price: Number(option.price_amount),
+        priceCurrency: option.price_currency,
+        availability:
+          option.status === "sold_out"
+            ? "https://schema.org/SoldOut"
+            : ["open", "closing_soon"].includes(option.status)
+              ? "https://schema.org/InStock"
+              : undefined,
+      })),
   };
 }
 

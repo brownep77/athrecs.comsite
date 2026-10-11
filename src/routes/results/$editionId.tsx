@@ -36,7 +36,7 @@ export const Route = createFileRoute("/results/$editionId")({
       meta: [
         ...siteGraphMeta({
           title: `${edition.event_name} ${edition.distance_code} results — ${edition.event_date.slice(0, 10)} | ATHRECS.com`,
-          description: `Recorded results for ${edition.event_name}, ${edition.distance_code}, ${formatRaceDateShort(edition.event_date)}. Explore performances and athlete profiles on AthRecs.`,
+          description: `${edition.result_count.toLocaleString("en-GB")} recorded ${edition.distance_code} performance${edition.result_count === 1 ? "" : "s"} from ${edition.event_name}, ${formatRaceDateShort(edition.event_date)}${edition.city ? `, ${edition.city}` : ""}. Search athlete times and source results; coverage may be partial.`,
           url,
         }),
         ...(match.search.q || match.search.page ? [{ name: "robots", content: "noindex, follow" }] : []),
