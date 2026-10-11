@@ -268,6 +268,7 @@ export function ProfileResultConfirmation({
               <label className="space-y-1 text-sm">
                 <span className="block">Time type</span>
                 <select
+                  aria-label="Time type"
                   value={draft.timingBasis}
                   onChange={(event) =>
                     setDraft({
