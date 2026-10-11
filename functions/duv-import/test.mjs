@@ -105,6 +105,11 @@ test('German index stage label compares exact distance and stage count',()=>{
 test('unknown headings fail closed',()=>assert.throws(()=>parse(Buffer.from(fixture().toString().replace('<th>Rank</th>','<th>Unknown</th>'))),/unmapped/));
 test('bad time in timed race fails closed',()=>assert.throws(()=>parse(fixture({performance:'06:00:00 h'})),/time_in_timed/));
 test('source pagination cannot be treated as complete',()=>{const p=parse(fixture({total:2}),{...inv,index:{...inv.index,Finishers:'2'}});assert.throws(()=>combinePages([p]),/not_complete/);});
+test('page-specific language links are not pagination requests',()=>{
+ const raw=Buffer.from(fixture({total:2}).toString()+`<a href="${url}&page=2&language=DE">Deutsch</a><a href="${url}&page=2">2</a>`);
+ const p=parse(raw,{...inv,index:{...inv.index,Finishers:'2'}});
+ assert.deepEqual(p.pagination.pageLinks,[url+'&page=2']);
+});
 test('all pages combine with original row locators and raw document hashes',()=>{const i={...inv,index:{...inv.index,Finishers:'2'}};const a=parse(fixture({total:2}),i),b=parse(fixture({start:2,total:2,runner:'900002',name:'Sample, Beatrice'}),i,url+'&page=2');const c=combinePages([b,a]);assert.equal(c.rows.length,2);assert.equal(c.rows[1].sourceRow,2);assert.equal(c.audit.comparedPages,2);assert.equal(c.coverage.duvPageComplete,true);});
 test('duplicate source athlete across pages fails closed',()=>{const i={...inv,index:{...inv.index,Finishers:'2'}};assert.throws(()=>combinePages([parse(fixture({total:2}),i),parse(fixture({start:2,total:2}),i,url+'&page=2')]),/duplicate_runner/);});
 function withExtraCategory(category='X'){
