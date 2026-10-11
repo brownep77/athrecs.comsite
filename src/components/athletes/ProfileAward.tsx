@@ -84,7 +84,11 @@ export function CompletionMedal({ place }: { place?: string | number | null }) {
 
 export function ResultMedal({ result }: { result: ProfileResult }) {
   if (!hasRecordedFinish(result)) return null;
-  return <CompletionMedal place={result.conflicting ? null : result.overallPlace} />;
+  return (
+    <CompletionMedal
+      place={result.conflicting ? null : (result.overallPlace ?? result.displayOverallPlace)}
+    />
+  );
 }
 
 export function ResultMedalKey() {

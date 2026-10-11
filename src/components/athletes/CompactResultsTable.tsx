@@ -217,7 +217,7 @@ export function CompactResultsTable({
                   ) : null}
                 </td>
                 <td role="cell" data-label="Place" className="px-3 py-2 tabular-nums">
-                  {result.overallPlace ?? "—"}
+                  {result.overallPlace ?? result.displayOverallPlace ?? "—"}
                   {isDisqualified(result) ? (
                     <span className="block text-[10px] text-subtle">Original · void</span>
                   ) : null}

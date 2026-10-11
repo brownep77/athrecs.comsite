@@ -20,6 +20,8 @@ export type ProfileResult = {
   chipTimeSeconds: number | null;
   gunTimeSeconds: number | null;
   overallPlace: number | null;
+  /** Source-matched timeline display only; never used for rankings or achievement totals. */
+  displayOverallPlace?: string;
   genderPlace?: number | null;
   categoryPlace?: number | null;
   resultGender?: string | null;
