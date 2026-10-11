@@ -13,7 +13,7 @@ import { unfinishedClaim } from "@/lib/athrecs/claim-resume";
 export function ProfileClaimSteps({ step }: { step: 1 | 2 | 3 }) {
   return (
     <ol aria-label="Profile claim progress" className="grid grid-cols-3 gap-2 text-xs sm:text-sm">
-      {["Verify email", "Confirm profile", "Claim received"].map((label, index) => (
+      {["Verify email", "Confirm profile", "Claim status"].map((label, index) => (
         <li
           key={label}
           aria-current={step === index + 1 ? "step" : undefined}
@@ -125,7 +125,9 @@ export function ProfileClaimGuide({
         {pending
           ? pending.status === "needs_info"
             ? "Your claim needs more information"
-            : "Claim received — awaiting identity review"
+            : pending.conflictReason || pending.staffNote
+              ? "Claim received — staff check needed"
+              : "Complete your earlier claim"
           : "Your account is ready. Finish claiming your athlete profile."}
       </h2>
       {pending ? (
@@ -134,11 +136,13 @@ export function ProfileClaimGuide({
             Your claim for {pending.athleteName} has been received.{" "}
             {pending.status === "needs_info"
               ? "Open it to read what our team needs."
-              : "Our team will check your identity before linking the profile. You do not need to submit it again."}
+              : pending.conflictReason || pending.staffNote
+                ? "Open it to see why a staff check is needed."
+                : "Open it and confirm to complete it under the simplified claim process."}
           </p>
           <Button asChild className="h-auto min-h-11 max-w-full whitespace-normal py-3">
             <Link to="/claim-results" search={{ resultId: pending.resultId }}>
-              View my submitted claim
+              Continue my claim
             </Link>
           </Button>
         </>

@@ -224,20 +224,31 @@ try {
     { fullName: "Synthetic Same Name", privacyAcknowledged: true },
     a.token,
   );
-  await check("Name alone must not establish ownership of an existing athlete", async () => {
-    const outcome = await rpc(
-      "athrecs/result-claims-api",
-      "submitResultClaim",
-      { resultId: 991501, declarationAccepted: true },
-      a.token,
-    );
-    const links =
-      await sql`select count(*)::int as n from athlete_account_links where athlete_id=991501 and status='active'`;
-    assert.equal(outcome.status, "pending");
-    assert.equal(links[0].n, 0, "No active ownership without an independent identity check");
-    return { status: outcome.status, ownerLinks: links[0].n };
-  });
-  await check("Neither same-name account gains ownership without staff approval", async () => {
+  await check(
+    "Verified-email athlete can explicitly self-confirm an uncontested matching profile",
+    async () => {
+      const outcome = await rpc(
+        "athrecs/result-claims-api",
+        "submitResultClaim",
+        { resultId: 991501, declarationAccepted: true },
+        a.token,
+      );
+      const links =
+        await sql`select count(*)::int as n from athlete_account_links where athlete_id=991501 and status='active'`;
+      assert.equal(outcome.status, "approved");
+      assert.equal(links[0].n, 1, "Self-confirmation links the existing profile");
+      const [basis] =
+        await sql`select confirmation_method,reviewed_at from result_claims where id=${outcome.claimId}`;
+      assert.equal(basis.confirmation_method, "athlete");
+      assert.equal(
+        basis.reviewed_at,
+        null,
+        "Self-confirmation does not invent a staff identity check",
+      );
+      return { status: outcome.status, ownerLinks: links[0].n };
+    },
+  );
+  await check("A second same-name account cannot replace the self-confirmed owner", async () => {
     await rpc(
       "athrecs/athlete-account-api",
       "saveMyAthleteRacingName",
@@ -253,7 +264,8 @@ try {
     assert.equal(outcome.status, "pending");
     const links =
       await sql`select user_id from athlete_account_links where athlete_id=991501 and status='active'`;
-    assert.equal(links.length, 0);
+    assert.equal(links.length, 1);
+    assert.equal(links[0].user_id, a.user.id);
     return { status: outcome.status, ownerLinks: links.length };
   });
   await check("A normal athlete cannot approve their own claim through the staff API", async () => {
@@ -274,7 +286,8 @@ try {
         ),
       /Forbidden|Staff access/,
     );
-    const links = await sql`select id from result_claims where id=${claimId} and status='approved'`;
+    const links =
+      await sql`select id from result_claims where id=${claimId} and confirmation_method='staff'`;
     assert.equal(links.length, 0);
     return { denied: true };
   });

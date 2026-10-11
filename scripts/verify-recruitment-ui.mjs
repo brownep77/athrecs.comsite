@@ -114,23 +114,27 @@ try {
   const match = page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" });
   await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
   const confirmation = page.getByRole("alertdialog");
-  await confirmation.getByText(/ATHRECS will check your identity/).waitFor();
+  await confirmation.getByText(/Straightforward claims link/).waitFor();
   await confirmation.getByRole("button", { name: "Cancel", exact: true }).click();
   assert.equal((await sql`select id from result_claims where result_id=991601`).length, 0);
   await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
-  await confirmation.getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true }).click();
+  await confirmation
+    .getByRole("button", { name: "Yes, this is me — complete my claim", exact: true })
+    .click();
   await page
-    .getByText("Your claim is with staff for an ownership check.", { exact: true })
+    .getByText("Claim complete — athlete confirmed. All results on this profile are now linked.", {
+      exact: true,
+    })
     .waitFor();
   assert.deepEqual(await sql`select status from result_claims where result_id=991601`, [
-    { status: "pending" },
+    { status: "approved" },
   ]);
   assert.equal(
     (await sql`select athlete_id from athlete_account_links where athlete_id=991601`).length,
-    0,
+    1,
   );
-  await match.getByRole("link", { name: "View claim", exact: true }).click();
-  await page.getByText("Claim received — awaiting identity review", { exact: true }).waitFor();
+  await page.goto(`${origin}/claim-results?resultId=991601`);
+  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
   assert.equal(await page.getByText(/Another account has already claimed/).count(), 0);
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));

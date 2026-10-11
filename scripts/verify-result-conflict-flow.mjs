@@ -199,7 +199,8 @@ const claims = load("src/lib/athrecs/result-claims-api.ts", {
   "./athlete-account-api": { syncAthleteAccountAfterClaim: async () => {} },
   "./result-claim-alerts.server": alerts,
   "./result-claim-email.server": {
-    notifyResultClaimSubmitted: async (email, notifyStaff) => receipts.push({ email, notifyStaff }),
+    notifyResultClaimSubmitted: async (email, notifyStaff, selfConfirmed) =>
+      receipts.push({ email, notifyStaff, selfConfirmed }),
     notifyResultClaimReviewed: async () => {},
     notifyResultClaimWithdrawn: async () => {},
   },
@@ -223,8 +224,8 @@ try {
     ('two','Avery Test Athlete','two@example.test',true,now(),now()),
     ('unrelated','Unrelated Person','unrelated@example.test',true,now(),now()),
     ('unverified','Avery Test Athlete','unverified@example.test',false,now(),now())`;
-  await sql`insert into athletes(id,slug,display_name,profile_visibility,country,county)
-    values (1,'synthetic-avery','Avery Test Athlete','private','','')`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility,country,county,profile_type)
+    values (1,'synthetic-avery','Avery Test Athlete','private','','','Public figure')`;
   await sql`insert into events(id,slug,name,sport) values (1,'synthetic-race','Synthetic Race','Running')`;
   await sql`insert into editions(id,event_id,event_date,distance_code) values
     (1,1,'2025-05-04','10K'),(2,1,'2026-05-04','10K')`;
@@ -282,12 +283,12 @@ try {
   assert.equal(
     initialClaim.status,
     "pending",
-    "A matching name and verified mailbox do not prove ownership",
+    "A protected public-figure profile requires staff review",
   );
   assert.equal(
     await count("athlete_account_links"),
     0,
-    "Submitting a claim must not grant control of the athlete",
+    "A held claim must not grant control of the athlete",
   );
   assert.equal(
     (await claim("one")).status,
@@ -310,7 +311,7 @@ try {
     "Another result, a supplied URL and forged review fields cannot establish ownership",
   );
   assert.equal(await count("athlete_account_links"), 0);
-  assert.equal(receipts.at(-1).notifyStaff, true, "Uncontested claims reach the staff queue");
+  assert.equal(receipts.at(-1).notifyStaff, true, "Held claims reach the staff queue");
   await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt")
     values ('initial-reviewer','Synthetic Reviewer','initial-reviewer@example.test',true,now(),now())`;
   await assert.rejects(
@@ -328,6 +329,17 @@ try {
       staffNote: "Synthetic independent identity check completed.",
     },
     { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
+  );
+  assert.equal(
+    (await sql`select status from result_claims where id=${otherResultClaim.claimId}`)[0].status,
+    "approved",
+    "Same-claimant sibling claims complete together rather than being rejected",
+  );
+  assert.equal(
+    (
+      await sql`select confirmation_method from result_claims where id=${otherResultClaim.claimId}`
+    )[0].confirmation_method,
+    "staff",
   );
   assert.equal(await count("result_claim_alerts"), 0);
   assert.equal(
@@ -426,8 +438,8 @@ try {
   await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values
     ('staff','Synthetic Staff','reviewer@example.test',true,now(),now()),
     ('revoked','Jordan Revocation Test','revoked@example.test',true,now(),now())`;
-  await sql`insert into athletes(id,slug,display_name,profile_visibility)
-    values (2,'synthetic-revocation','Jordan Revocation Test','private')`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility,profile_type)
+    values (2,'synthetic-revocation','Jordan Revocation Test','private','Public figure')`;
   await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,result_visibility)
     values (3,1,2,2500,'private'), (4,2,2,2480,'private')`;
   const first = await claim("revoked", 3);
@@ -472,8 +484,8 @@ try {
   if (postgres) {
     // Real independent PostgreSQL transactions, not PGlite's single session.
     configured = false;
-    await sql`insert into athletes(id,slug,display_name,profile_visibility)
-      values (10,'synthetic-racing','Concurrent Synthetic Athlete','private')`;
+    await sql`insert into athletes(id,slug,display_name,profile_visibility,profile_type)
+      values (10,'synthetic-racing','Concurrent Synthetic Athlete','private','Public figure')`;
     await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,result_visibility)
       values (10,1,10,2500,'private'),(11,2,10,2490,'private')`;
     for (let i = 0; i < 6; i++)
@@ -485,7 +497,7 @@ try {
     assert.equal(
       contested.filter((c) => c.status === "approved").length,
       0,
-      "No simultaneous first claimant gets ownership without staff review",
+      "Simultaneous claims on a protected public-figure profile all require review",
     );
     assert.equal(contested.filter((c) => c.status === "pending").length, 6);
     assert.equal(
@@ -783,6 +795,135 @@ try {
   );
   console.log(
     "Invitation contention passed: concurrent creation, email reservation and claim submission.",
+  );
+  // New self-confirmation policy: completion is distinct from verified evidence.
+  configured = false;
+  const beforeAthletes = await count("athletes");
+  await sql`insert into "user"(id,name,email,"emailVerified") values
+    ('self','Morgan Claim Test','self@example.test',true),
+    ('child','Casey Child Test','child@example.test',true),
+    ('guardian','Robin Guardian Test','guardian@example.test',true)`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility,date_of_birth) values
+    (100,'synthetic-self','Morgan Claim Test','private',null),
+    (101,'synthetic-child','Casey Child Test','private',current_date - interval '10 years'),
+    (102,'synthetic-guardian','Robin Guardian Test','private',null)`;
+  await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,result_visibility) values
+    (100,1,100,2500,'private'),(103,2,100,2490,'private'),
+    (101,1,101,2000,'private'),(102,1,102,2000,'private')`;
+  // An older untouched pending claim is completed without inserting a duplicate.
+  await sql`insert into result_claims(result_id,athlete_id,claimant_user_id,claimant_email,status,verification_method,declaration_accepted)
+    values (100,100,'self','self@example.test','pending','other',true),
+      (103,100,'self','self@example.test','pending','other',true)`;
+  const beforeSources = JSON.stringify(
+    await sql`select * from results where athlete_id=100 order by id`,
+  );
+  const self = await claim("self", 100);
+  assert.equal(self.status, "approved");
+  assert.equal(receipts.at(-1).selfConfirmed, true);
+  assert.equal(
+    receipts.at(-1).notifyStaff,
+    false,
+    "Straightforward completion does not create a staff review email",
+  );
+  const selfClaims = await claims.listMyResultClaims(undefined, user("self"));
+  assert.equal(selfClaims.length, 2);
+  assert(
+    selfClaims.every(
+      (c) =>
+        c.status === "approved" &&
+        c.confirmationMethod === "athlete" &&
+        c.confirmedAt &&
+        !c.reviewedAt &&
+        !c.staffNote,
+    ),
+  );
+  assert.equal(
+    (await sql`select confirmation_method from athlete_account_links where athlete_id=100`)[0]
+      .confirmation_method,
+    "athlete",
+  );
+  assert.equal(
+    JSON.stringify(await sql`select * from results where athlete_id=100 order by id`),
+    beforeSources,
+    "Claiming cannot upgrade timing, source evidence or publication",
+  );
+  assert.equal(
+    await count("athletes"),
+    beforeAthletes + 3,
+    "Claims do not create duplicate athlete profiles",
+  );
+  const beforeRepeat = receipts.length;
+  const replay = await Promise.all(Array.from({ length: 6 }, () => claim("self", 103)));
+  assert(replay.every((c) => c.status === "approved" && c.alreadyOwned));
+  assert.equal(
+    receipts.length,
+    beforeRepeat,
+    "Completed claims are idempotent without repeated receipts",
+  );
+  const child = await claim("child", 101);
+  assert.equal(child.status, "pending");
+  assert.match(
+    (await claims.listMyResultClaims(undefined, user("child")))[0].conflictReason,
+    /responsible adult/,
+  );
+  const guardian = await claims.submitResultClaim(
+    { resultId: 102, declarationAccepted: true, claimantRole: "guardian" },
+    user("guardian"),
+  );
+  assert.equal(guardian.status, "pending");
+  assert.equal(
+    (await claim("guardian", 102)).status,
+    "pending",
+    "Removing guardian flag cannot skip the authority check",
+  );
+  await sql`update athletes set date_of_birth=null where id=101`;
+  await sql`insert into editions(id,event_id,event_date,distance_code) values(101,1,current_date,'5K')`;
+  await sql`update results set edition_id=101,category='JW11-14' where id=101`;
+  assert.equal(
+    (await claim("child", 101)).status,
+    "pending",
+    "Recent junior results protect children even with no stored birth date",
+  );
+  await sql`update results set category=null where id=101`;
+  await sql`update "user" set name='Different Name' where id='child'`;
+  assert.equal(
+    (await claim("child", 101)).status,
+    "pending",
+    "An existing submission does not bypass current name discrepancy checks",
+  );
+  // Self-confirmed ownership can be revoked, and all sibling claims reflect it.
+  await claims.revokeAthleteOwnership(
+    { claimId: self.claimId, staffNote: "Synthetic dispute requires review" },
+    { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
+  );
+  assert(
+    (await claims.listMyResultClaims(undefined, user("self"))).every(
+      (c) => c.status === "rejected",
+    ),
+  );
+  assert.equal((await claim("self", 103)).status, "pending");
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=100 and status='active'`)
+      .length,
+    0,
+  );
+  // Concurrency test also runs with independent PostgreSQL connections in CI.
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(104,'synthetic-auto-race','Concurrent Self Test','private')`;
+  await sql`insert into results(id,edition_id,athlete_id,status) values(104,1,104,'finished')`;
+  for (let i = 0; i < 6; i++)
+    await sql`insert into "user"(id,name,email,"emailVerified") values(${"self-race-" + i},'Concurrent Self Test',${"self-race-" + i + "@example.test"},true)`;
+  const concurrentSelf = await Promise.all(
+    Array.from({ length: 6 }, (_, i) => claim("self-race-" + i, 104)),
+  );
+  assert.equal(concurrentSelf.filter((c) => c.status === "approved").length, 1);
+  assert.equal(concurrentSelf.filter((c) => c.status === "pending").length, 5);
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=104 and status='active'`)
+      .length,
+    1,
+  );
+  console.log(
+    "Self-confirmed claims passed: immediate completion, sibling claims, child/guardian review, revocation, concurrency and source preservation.",
   );
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");

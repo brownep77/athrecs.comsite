@@ -76,10 +76,15 @@ assert.match(
   /existing\[0\]\?\.status === "rejected"/,
   "A rejected resubmission must not bypass staff review",
 );
-assert.doesNotMatch(
+assert.match(
   submitDefinition,
-  /insert into athlete_account_links/,
-  "Only the staff review endpoint may create a new ownership link",
+  /selfConfirmationReviewReason/,
+  "Self-confirmation must check review safeguards",
+);
+assert.match(
+  submitDefinition,
+  /const nextStatus = conflictReason/,
+  "A flagged claim remains pending",
 );
 assert.match(
   submitDefinition,
@@ -117,11 +122,11 @@ assert.match(api, /evidence_url_3/);
 assert.match(evidenceLinksMigration, /add column if not exists evidence_url_2/);
 assert.match(evidenceLinksMigration, /add column if not exists evidence_url_3/);
 assert.match(claimRoute, /Signing in is the first step/);
-assert.match(claimRoute, /Staff may ask for identity evidence before approval/);
+assert.match(claimRoute, /Straightforward claims complete immediately/);
 assert.match(claimRoute, /Not required · add up to three/);
 assert.doesNotMatch(claimRoute, /Supporting detail/);
 assert.doesNotMatch(claimRoute, /Supporting information type/);
-assert.match(claimRoute, /Yes, this is me — submit my profile claim/);
+assert.match(claimRoute, /Yes, this is me — complete my claim/);
 assert.match(claimRoute, /Tick the confirmation box to confirm this is your result/);
 assert.match(claimRoute, /disabled=\{submitClaim\.isPending\}/);
 assert.doesNotMatch(claimRoute, /disabled=\{submitClaim\.isPending \|\| !declaration\}/);
@@ -135,8 +140,8 @@ for (const source of ["/claim-results", "/athlete-account"]) {
   assert.match(cacheControl?.value ?? "", /no-store/);
 }
 assert.match(adminClaimRoute, /Optional evidence links/);
-assert.match(adminClaimRoute, /Request and check independent identity evidence before\s+approval/);
-assert.match(api, /Another verified account was approved/);
+assert.match(adminClaimRoute, /confirm the responsible adult’s authority and consent privately/);
+assert.match(api, /Another account was approved/);
 assert.match(api, /Only an approved claim can have ownership revoked/);
 assert.doesNotMatch(
   api,
@@ -149,7 +154,7 @@ assert.match(
   "Only active claims may be reviewed",
 );
 assert.match(athleteApi, /as is_claimed/);
-assert.match(athleteRoute, /Verified athlete/);
+assert.match(athleteRoute, /Claimed profile/);
 
 const claimSelectMatch = api.match(/const CLAIM_SELECT = `([\s\S]*?)`;/);
 assert.ok(claimSelectMatch, "The shared claim query must be readable by the verification");
@@ -192,6 +197,9 @@ await db.exec(`
 `);
 await db.exec(migration);
 await db.exec(evidenceLinksMigration);
+await db.exec(
+  await readFile(resolve(root, "migrations/20261011_result_claim_confirmation.sql"), "utf8"),
+);
 await db.exec(`
   insert into "user" ("id", "email") values
     ('user-one', 'runner@example.com'),

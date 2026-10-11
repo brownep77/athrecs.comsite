@@ -361,7 +361,7 @@ function AthleteContent() {
           {athlete.is_claimed ? (
             <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
               <BadgeCheck className="mr-1 size-3.5" aria-hidden="true" />
-              Verified athlete
+              Claimed profile
             </Badge>
           ) : null}
           {isProfessionalAthlete ? (

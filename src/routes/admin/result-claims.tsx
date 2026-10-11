@@ -43,7 +43,7 @@ const STATUS_LABELS: Record<ResultClaimStatus | "all", string> = {
   all: "All claims",
   pending: "Pending",
   needs_info: "Needs information",
-  approved: "Approved",
+  approved: "Complete",
   rejected: "Rejected",
   withdrawn: "Withdrawn",
 };
@@ -151,8 +151,9 @@ function AdminResultClaimsPage() {
             Result claim review
           </h1>
           <p className="max-w-3xl text-sm text-muted">
-            Check independent athlete identity evidence before approving any new ownership claim. A
-            matching name, verified email or self-supplied link alone does not establish identity.
+            Straightforward claims complete through athlete self-confirmation. Review conflicts,
+            discrepancies and child or guardian claims here. Record the evidence used to resolve
+            each case; a completed claim does not certify timing data or imply a photo or ID check.
           </p>
         </div>
         <Button asChild variant="secondary">
@@ -163,7 +164,7 @@ function AdminResultClaimsPage() {
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         <SummaryCard label="Pending" value={counts.pending} tone="sky" />
         <SummaryCard label="Needs info" value={counts.needs_info} tone="amber" />
-        <SummaryCard label="Approved" value={counts.approved} tone="green" />
+        <SummaryCard label="Complete" value={counts.approved} tone="green" />
         <SummaryCard label="Rejected" value={counts.rejected} tone="red" />
         <SummaryCard label="Withdrawn" value={counts.withdrawn} />
       </div>
@@ -308,7 +309,20 @@ function ClaimReviewCard({
           <dl className="grid gap-3 text-sm sm:grid-cols-2">
             <Info label="Claim ID" value={String(claim.claimId)} />
             <Info label="Claimant email" value={claim.claimantEmail} />
-            <Info label="Claim basis" value="Athlete self-confirmation" />
+            <Info
+              label="Claimant role"
+              value={claim.claimantRole === "guardian" ? "Parent or guardian" : "Athlete"}
+            />
+            <Info
+              label="Completion basis"
+              value={
+                claim.confirmationMethod === "athlete"
+                  ? "Athlete self-confirmation"
+                  : claim.confirmationMethod === "staff"
+                    ? "Staff review"
+                    : "Not recorded"
+              }
+            />
             <Info label="Submitted" value={new Date(claim.submittedAt).toLocaleString("en-GB")} />
           </dl>
 
@@ -333,8 +347,9 @@ function ClaimReviewCard({
               </div>
             ) : (
               <p className="mt-2 text-sm text-muted">
-                No evidence was supplied. Request and check independent identity evidence before
-                approval.
+                No evidence links were supplied. Self-confirmation does not require them. For a
+                claim held for review, record the evidence resolving the issue before approval. For
+                a child, confirm the responsible adult’s authority and consent privately.
               </p>
             )}
             {claim.evidenceText ? (
@@ -407,7 +422,9 @@ function ClaimReviewCard({
                 disabled={
                   busy ||
                   !note.trim() ||
-                  Boolean(claim.existingOwnerEmail && claim.status !== "approved")
+                  Boolean(
+                    claim.existingOwnerEmail && claim.existingOwnerEmail !== claim.claimantEmail,
+                  )
                 }
                 onClick={() => onReview("approve")}
               >

@@ -51,7 +51,7 @@ const INITIAL_MATCH_COUNT = 8;
 const CLAIM_STATUS_LABELS: Record<PotentialResultClaimStatus, string> = {
   pending: "Claim pending",
   needs_info: "More information needed",
-  approved: "Claim approved",
+  approved: "Claim complete",
   rejected: "Previous claim not approved",
   withdrawn: "Previous claim withdrawn",
 };
@@ -133,7 +133,7 @@ export function PotentialResultMatchesPanel() {
       setConfirmMatch(null);
       setFeedback(
         outcome.status === "approved"
-          ? "Results added to your profile."
+          ? "Claim complete — athlete confirmed. All results on this profile are now linked."
           : "Your claim is with staff for an ownership check.",
       );
       await refresh();
@@ -228,8 +228,9 @@ export function PotentialResultMatchesPanel() {
             <AlertDialogTitle>Claim this profile?</AlertDialogTitle>
             <AlertDialogDescription>
               {confirmMatch?.athleteName} · {confirmMatch?.eventName}. Confirm this is your result.
-              ATHRECS will check your identity before adding this athlete record and its results to
-              your private profile. You do not need to claim each race separately.
+              Straightforward claims link this athlete record and its stored results immediately.
+              Staff review conflicts, discrepancies and child claims. This records your
+              self-confirmation, not a photo or ID check. You only need to claim once.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -242,7 +243,7 @@ export function PotentialResultMatchesPanel() {
                 if (confirmMatch) addMatch.mutate(confirmMatch.resultId);
               }}
             >
-              {addMatch.isPending ? "Submitting…" : "Yes, this is me — submit my profile claim"}
+              {addMatch.isPending ? "Submitting…" : "Yes, this is me — complete my claim"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -257,7 +258,8 @@ export function PotentialResultMatchesPanel() {
           </div>
           <p className="mt-2 text-sm leading-6 text-muted">
             These are suggestions, not confirmed ownership. Confirm your result, or choose Not me to
-            dismiss that athlete. All new ownership claims go to staff for an identity check.
+            dismiss that athlete. Straightforward claims complete immediately; claims needing
+            clarification go to staff.
           </p>
           {data.searchedNames.length ? (
             <p className="mt-2 text-xs text-subtle">Checked: {data.searchedNames.join(" · ")}</p>

@@ -73,6 +73,7 @@ async function deliver(
 export async function notifyResultClaimSubmitted(
   context: ClaimEmailContext,
   notifyStaff = true,
+  selfConfirmed = false,
 ): Promise<void> {
   if (!authEmailConfigured()) return;
   const claimUrl = `${publicOrigin()}/claim-results?resultId=${context.resultId}`;
@@ -82,13 +83,17 @@ export async function notifyResultClaimSubmitted(
   await Promise.all([
     deliver("claim-submitted-athlete", {
       to: context.claimantEmail,
-      subject: "ATHRECS received your result claim",
-      heading: "Your result claim is in review",
-      message: `We received your claim for ${summary}. ATHRECS staff will check the result, evidence and any ownership conflicts before linking the athlete profile to your account.`,
+      subject: selfConfirmed
+        ? "Your ATHRECS profile claim is complete"
+        : "ATHRECS received your result claim",
+      heading: selfConfirmed ? "Your results are now linked" : "Your result claim is in review",
+      message: selfConfirmed
+        ? `You confirmed that ${summary} belongs to you. This athlete profile and its stored results are now linked to your Athlete Account. You do not need to claim each race separately. This records your self-confirmation; source checks and photo or ID verification are separate.`
+        : `We received your claim for ${summary}. This claim needs a staff ownership check before linking the athlete profile. Open your claim to see the reason and any requested information.`,
       actionLabel: "View my claim",
       actionUrl: claimUrl,
     }),
-    ...(notifyStaff ? staffRecipients() : []).map((to) =>
+    ...(notifyStaff && !selfConfirmed ? staffRecipients() : []).map((to) =>
       deliver("claim-submitted-staff", {
         to,
         subject: `New ATHRECS result claim #${context.claimId}`,
