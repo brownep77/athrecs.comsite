@@ -82,6 +82,10 @@ file(
 );
 const aliases = {
   "@/lib/athlete-link/api": api,
+  "@/lib/anz/api": file(
+    "anz-api.js",
+    "export async function previewAnzImport(){throw Error('No ANZ imports in this synthetic fixture');} export async function saveAnzImport(){throw Error('No ANZ imports in this synthetic fixture');}",
+  ),
   "@/lib/athlete-workspace/api": workspace,
   "@/lib/athlete-workspace/admin-history-api": file(
     "history-api.js",

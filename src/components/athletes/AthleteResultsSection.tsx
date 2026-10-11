@@ -54,7 +54,10 @@ export function AthleteResultsSection({
   const [surface, setSurface] = useState("All surfaces");
   const [country, setCountry] = useState("All countries");
   const [page, setPage] = useState(0);
-  const years = [...new Set(results.map((result) => result.eventDate.slice(0, 4)))]
+  const years = [
+    ...new Set(results.map((result) => result.eventDate.match(/\b(?:19|20)\d{2}\b/)?.[0] ?? "")),
+  ]
+    .filter(Boolean)
     .sort()
     .reverse();
   const distances = [...new Set(results.map((result) => result.distanceCode))].sort();
@@ -64,7 +67,7 @@ export function AthleteResultsSection({
     (result) =>
       (!query ||
         `${result.eventName} ${result.athleteName}`.toLowerCase().includes(query.toLowerCase())) &&
-      (year === "All years" || result.eventDate.startsWith(year)) &&
+      (year === "All years" || result.eventDate.match(/\b(?:19|20)\d{2}\b/)?.[0] === year) &&
       (distance === "All distances" || result.distanceCode === distance) &&
       (surface === "All surfaces" || result.surface === surface) &&
       (country === "All countries" || result.country === country),

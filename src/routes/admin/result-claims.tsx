@@ -1,3 +1,4 @@
+import { ClaimResultDetails } from "@/components/athletes/ClaimResultDetails";
 import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -372,6 +373,7 @@ function ClaimReviewCard({
                 Event page
               </Link>
             </Button>
+            <ClaimResultDetails result={claim} />
             {claim.sourceUrl ? (
               <Button asChild variant="secondary">
                 <a href={claim.sourceUrl} target="_blank" rel="noreferrer">

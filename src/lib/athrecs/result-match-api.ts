@@ -31,6 +31,7 @@ export type PotentialResultMatch = {
   overallPlace: number | null;
   bib: string | null;
   category: string | null;
+  ageAtRace?: string | null;
   confidence: PotentialResultMatchConfidence;
   score: number;
   reasons: string[];
@@ -79,6 +80,7 @@ type CandidateRow = {
   overall_place: number | null;
   bib: string | null;
   category: string | null;
+  age_at_race: string | null;
   claim_status: PotentialResultClaimStatus | null;
   owner_user_id: string | null;
   source_identifier_matches: boolean;
@@ -162,16 +164,16 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
         athlete.city as athlete_city,
         athlete.county as athlete_region,
         athlete.country as athlete_country,
-        club.name as club_name,
-        event.name as event_name,
-        event.slug as event_slug,
-        event.sport as event_sport,
-        edition.event_date::text as event_date,
-        edition.distance_code,
+        result.club_name as club_name,
+        result.event_name as event_name,
+        result.event_slug as event_slug,
+        result.event_sport as event_sport,
+        result.event_date as event_date,
+        result.distance_code,
         result.finish_time_seconds,
         result.overall_place,
         result.bib,
-        result.category,
+        result.category, result.age_at_race,
         my_claim.status as claim_status,
         owner.user_id as owner_user_id,
         exists (
@@ -179,18 +181,16 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           where source_identity.athlete_id = athlete.id
             and (source_identity.provider || ':' || source_identity.external_id) = any(${sourceKeys}::text[])
         ) as source_identifier_matches
-      from results result
+      from athlete_claimable_results result
       join athletes athlete on athlete.id = result.athlete_id
-      join editions edition on edition.id = result.edition_id
-      join events event on event.id = edition.event_id
       left join clubs club on club.id = athlete.club_id
       left join result_claims my_claim
-        on my_claim.result_id = result.id
+        on my_claim.claim_key = result.id
        and my_claim.claimant_user_id = ${context.userId}
       left join athlete_account_links owner
         on owner.athlete_id = athlete.id
        and owner.status = 'active'
-      where result.status = 'finished'
+      where result.status = 'finished' and result.available
         and coalesce(owner.user_id, '') <> ${context.userId}
         and not exists (
           select 1 from athlete_match_dismissals dismissal
@@ -206,7 +206,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
               and (source_identity.provider || ':' || source_identity.external_id) = any(${sourceKeys}::text[])
           )
         )
-      order by source_identifier_matches desc, edition.event_date desc, result.id desc
+      order by source_identifier_matches desc, result.event_date desc, result.id desc
       limit ${MAX_CANDIDATE_ROWS}
     `;
 
@@ -251,6 +251,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           overallPlace: row.overall_place,
           bib: row.bib,
           category: row.category,
+          ageAtRace: row.age_at_race,
           confidence: match.confidence,
           score: match.score,
           reasons: match.reasons,

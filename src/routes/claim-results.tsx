@@ -1,3 +1,4 @@
+import { ClaimResultDetails } from "@/components/athletes/ClaimResultDetails";
 import { ClaimRacingName, ProfileClaimSteps } from "@/components/athletes/ProfileClaimGuide";
 import { getMyAthleteAccount } from "@/lib/athrecs/athlete-account-api";
 import { rememberClaim } from "@/lib/athrecs/claim-resume";
@@ -45,7 +46,7 @@ export const Route = createFileRoute("/claim-results")({
     const raw = search.resultId;
     const resultId = typeof raw === "number" ? raw : Number(raw);
     return {
-      resultId: Number.isInteger(resultId) && resultId > 0 ? resultId : undefined,
+      resultId: Number.isSafeInteger(resultId) && resultId !== 0 ? resultId : undefined,
       invitation:
         typeof search.invitation === "string" ? search.invitation.slice(0, 128) : undefined,
     };
@@ -421,12 +422,15 @@ function ClaimResultsPage() {
                 </p>
               </div>
             </div>
-            <ProfileEventLink
-              result={result.data}
-              className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-accent no-underline hover:underline"
-            >
-              View event page <ArrowRight className="ml-1 size-4" aria-hidden="true" />
-            </ProfileEventLink>
+            <ClaimResultDetails result={result.data} />
+            {result.data.eventSlug ? (
+              <ProfileEventLink
+                result={result.data}
+                className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-accent no-underline hover:underline"
+              >
+                View event page <ArrowRight className="ml-1 size-4" aria-hidden="true" />
+              </ProfileEventLink>
+            ) : null}
           </div>
 
           <div className="space-y-4 p-5 md:p-7">

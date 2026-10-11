@@ -13,7 +13,7 @@ export function ProfileEventLink({
   className?: string;
   style?: CSSProperties;
 }) {
-  if (result.history)
+  if (result.history || !result.eventSlug)
     return (
       <span className={className} style={style}>
         {children}
