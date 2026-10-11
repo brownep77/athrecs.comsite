@@ -3,7 +3,7 @@
   "checked_at": "2026-10-05",
   "base_repository": "brownep77/athrecs.comsite",
   "base_commit": "ef8715ece2026b1b41811792ea51386ef5cff022",
-  "scope": "Review data only; not a publication/import execution. Reconcile with current main and live database before writing.",
+  "scope": "Review data only; not a publication/import execution. Rechecked against official sources and the live production catalogue on 11 October 2026. Reconcile with current main before applying.",
   "changes": [
     {
       "entity": "series",
@@ -29,7 +29,9 @@
       "checkedAt": "2026-10-05",
       "timezone": "Europe/London",
       "reviewStatus": "source_checked; publication_pending",
-      "liveApplied": false
+      "liveApplied": false,
+      "recheckedAt": "2026-10-11",
+      "productionState": "Half edition start/provenance corrected; series distances still omit Half and no 5K edition is present."
     },
     {
       "entity": "edition",
@@ -66,7 +68,9 @@
       "checkedAt": "2026-10-05",
       "timezone": "Europe/London",
       "reviewStatus": "source_checked; publication_pending",
-      "liveApplied": false
+      "liveApplied": false,
+      "recheckedAt": "2026-10-11",
+      "productionState": "Series surface is Trail; 2026-10-18 edition still lacks 10:30 start and sold-out/waitlist status."
     },
     {
       "entity": "series",
@@ -91,7 +95,9 @@
       "checkedAt": "2026-10-05",
       "timezone": "Europe/London",
       "reviewStatus": "source_checked; publication_pending",
-      "liveApplied": false
+      "liveApplied": false,
+      "recheckedAt": "2026-10-11",
+      "productionState": "Unapplied; duplicate runABC card also remains live with an incorrect 08:00 start."
     },
     {
       "entity": "edition",
@@ -129,7 +135,9 @@
       "checkedAt": "2026-10-05",
       "timezone": "Europe/London",
       "reviewStatus": "source_checked; publication_pending",
-      "liveApplied": false
+      "liveApplied": false,
+      "recheckedAt": "2026-10-11",
+      "productionState": "Unapplied; duplicate runABC card also remains live with an incorrect 08:00 start."
     },
     {
       "entity": "edition",
@@ -147,11 +155,13 @@
       "evidenceUrls": [
         "https://totalracetiming.co.uk/race/713"
       ],
-      "evidenceSummary": "Authorised entry page confirms 1 January 2027 and 10:00, with a distinct 07:45 number-collection time.",
+      "evidenceSummary": "Authorised timing page confirms 1 January 2027, 10:00, licence 31605, open entry and a corrected transfer deadline of 16 December 2026.",
       "checkedAt": "2026-10-05",
       "timezone": "Europe/London",
       "reviewStatus": "source_checked; publication_pending",
-      "liveApplied": false
+      "liveApplied": false,
+      "recheckedAt": "2026-10-11",
+      "productionState": "Unapplied start time; official transfer deadline is now internally consistent at 2026-12-16."
     },
     {
       "entity": "edition",
@@ -175,7 +185,9 @@
       "checkedAt": "2026-10-05",
       "timezone": "Europe/London",
       "reviewStatus": "source_checked; publication_pending",
-      "liveApplied": false
+      "liveApplied": false,
+      "recheckedAt": "2026-10-11",
+      "productionState": "Unapplied; live edition still has a current-entry status and no official results URL."
     },
     {
       "entity": "edition",
@@ -199,7 +211,9 @@
       "checkedAt": "2026-10-05",
       "timezone": "Europe/London",
       "reviewStatus": "source_checked; publication_pending",
-      "liveApplied": false
+      "liveApplied": false,
+      "recheckedAt": "2026-10-11",
+      "productionState": "Unapplied; live edition still has a current-entry status and no official results URL."
     },
     {
       "entity": "edition",
@@ -223,7 +237,9 @@
       "checkedAt": "2026-10-05",
       "timezone": "Europe/London",
       "reviewStatus": "source_checked; publication_pending",
-      "liveApplied": false
+      "liveApplied": false,
+      "recheckedAt": "2026-10-11",
+      "productionState": "Unapplied; live edition still has a current-entry status and no official results URL."
     }
   ],
   "held_findings": [
@@ -256,20 +272,6 @@
       ]
     },
     {
-      "item": "Wymondham entry-transfer deadline",
-      "reason": "Entry page states a December 2027 transfer cutoff after the January 2027 race. Omit that deadline until organiser correction; do not guess December 2026.",
-      "sources": [
-        "https://totalracetiming.co.uk/race/713"
-      ]
-    },
-    {
-      "item": "West Acre automatic surface classification",
-      "reason": "Scraper labelled the event Track after reading woodland tracks. Source-checked surface is Trail. Raw extraction remains unverified.",
-      "sources": [
-        "https://totalracetiming.co.uk/race/668"
-      ]
-    },
-    {
       "item": "Great Eastern automatic price/end time",
       "reason": "Extracted price and end-time fields conflict with visible race options and multiple-distance starts. Use distance-specific visible evidence and omit unsupported end times.",
       "sources": [
@@ -289,6 +291,51 @@
       "sources": [
         "https://github.com/brownep77/athrecs-holding/blob/main/config/result_sources.json"
       ]
+    }
+  ],
+  "rechecked_at": "2026-10-11",
+  "production_recheck": {
+    "checked_at": "2026-10-11",
+    "findings": [
+      {
+        "item": "AEPG Great Eastern Run",
+        "status": "partially_resolved",
+        "note": "The live edition now has the official 10:30 half-marathon start and official organiser/timing provenance, but the series distance list still exposes only 5K and no separate 09:00 5K edition."
+      },
+      {
+        "item": "West Acre Wild 10K",
+        "status": "partially_resolved",
+        "note": "The event surface is now Trail. The 18 October edition still lacks the official 10:30 start and remains ClosingSoon instead of sold out with a waiting list."
+      },
+      {
+        "item": "Autumn Blickling Half Marathon",
+        "status": "unresolved",
+        "note": "The canonical EPIC card remains Mixed with no start and ClosingSoon; the runABC duplicate remains live with an incorrect 08:00 start. Official evidence says Road, 09:00, sold out with waiting list."
+      },
+      {
+        "item": "Wymondham New Year's Day 10K",
+        "status": "unresolved",
+        "note": "The 1 January 2027 edition still lacks its verified 10:00 start. The timing page has corrected the transfer deadline to 16 December 2026, removing the earlier source conflict."
+      },
+      {
+        "item": "Completed Norfolk editions",
+        "status": "unresolved",
+        "note": "Marriott's Way 10K, Norfolk Coastal Half and Run Sandringham Half remain Open/ClosingSoon without their official results links."
+      }
+    ]
+  },
+  "resolved_findings": [
+    {
+      "item": "West Acre surface classification",
+      "resolution": "Live production now classifies the event as Trail, matching the off-road bridle-path and woodland-track description.",
+      "source": "https://totalracetiming.co.uk/race/668",
+      "recheckedAt": "2026-10-11"
+    },
+    {
+      "item": "Wymondham transfer deadline conflict",
+      "resolution": "The authorised timing page now states 16 December 2026, so the earlier post-race 2027 deadline conflict is resolved.",
+      "source": "https://totalracetiming.co.uk/race/713",
+      "recheckedAt": "2026-10-11"
     }
   ]
 }
