@@ -1,6 +1,8 @@
 name: Notify search engines of public athlete profiles
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "17 * * * *"
   pull_request:
     paths:
       - "vercel.json"
@@ -35,15 +37,14 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: notify-athlete-search-${{ github.ref }}
-  cancel-in-progress: true
+  group: notify-athlete-search-batches-${{ github.ref }}
+  # A new deployment must not discard already validated progress.
+  cancel-in-progress: false
 jobs:
   eligibility:
-    name: Validate athlete search eligibility
+    name: Verify notification safeguards
     runs-on: ubuntu-latest
-    timeout-minutes: 60
-    outputs:
-      ready: ${{ steps.live.outputs.ready }}
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -53,17 +54,17 @@ jobs:
       - run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Verify notification safeguards with synthetic responses
         run: node scripts/verify-athlete-search-notification.mjs
-      # A healthy sitemap with no athlete URLs is a deliberate no-submission
-      # outcome. Network/HTTP/metadata failures still fail this job closed.
-      - name: Check live public sitemap and anonymous indexing permissions
-        id: live
-        run: node scripts/submit-athlete-indexnow.mjs --check
+      # PRs make a small, explicitly partial read-only probe. Main revalidates
+      # every URL in each batch below; this is not a whole-catalogue assertion.
+      - name: Check one live public batch without submitting
+        if: github.event_name == 'pull_request'
+        run: node scripts/submit-athlete-indexnow.mjs --check --batch-size=100
   notify:
     name: Submit eligible public athlete URLs
     needs: eligibility
-    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.eligibility.outputs.ready == 'true'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -71,5 +72,19 @@ jobs:
           node-version: "24"
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Revalidate live URLs and submit to IndexNow
-        run: node scripts/submit-athlete-indexnow.mjs
+      - name: Restore last accepted batch checkpoint
+        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: artifacts/athlete-search-cursor.json
+          key: athlete-indexnow-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: athlete-indexnow-v1-
+      - name: Validate and submit up to ten batches
+        run: node scripts/submit-athlete-indexnow.mjs --batch-size=500 --max-batches=10 --state-file=artifacts/athlete-search-cursor.json
+      # Preserve accepted earlier batches even if a later batch fails. A failed
+      # batch never advances this file. Only trusted main runs write this cache.
+      - name: Save accepted progress for the next run
+        if: always() && hashFiles('artifacts/athlete-search-cursor.json') != ''
+        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: artifacts/athlete-search-cursor.json
+          key: athlete-indexnow-v1-${{ github.run_id }}-${{ github.run_attempt }}

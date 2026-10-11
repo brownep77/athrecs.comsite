@@ -34,16 +34,17 @@ not evidence of an undeployed public-profile release.
   mismatch fails validation and prevents submission.
 - Every candidate must be anonymously available at its exact production URL,
   explicitly permit `index` and `follow`, and contain no conflicting robots
-  meta tag or HTTP header. The complete set is checked before any submission.
+  meta tag or HTTP header. The complete selected batch is checked before its submission.
 - Submission requires the deployed ownership file and rechecks live candidates
-  and their indexing permissions. A publication-set change stops submission.
-  Only main/manual-main runs can submit; pull requests perform read-only checks.
+  and their indexing permissions. A change to the selected batch stops submission.
+  Only main pushes, manual-main runs and scheduled main runs can submit; pull
+  requests perform a bounded read-only check of up to 100 profiles.
 
 Run the synthetic regression and the live read-only check:
 
 ```sh
 node scripts/verify-athlete-search-notification.mjs
-node scripts/submit-athlete-indexnow.mjs --check
+node scripts/submit-athlete-indexnow.mjs --check --batch-size=100
 ```
 
 The test suite intercepts all network calls, including the example IndexNow
@@ -85,7 +86,44 @@ notification workflow to validate and submit its live eligible URLs. A push
 check can precede the Vercel deployment, so its result alone is not proof that
 the new release has been checked.
 
-The complete catalogue is checked with at most 12 concurrent anonymous requests,
-with progress every 500 profiles. All URLs must pass before any submission, and
-all URLs are revalidated after the ownership check. The workflow allows enough
-time for the full catalogue; these limits do not weaken any eligibility checks.
+## Resumable notifications for a large catalogue
+
+The 11 October run found 626,727 eligible sitemap URLs. It checked only 6,500
+before a later deployment cancelled it, without submitting any. Repeating the
+entire catalogue before the first notification cannot fit the previous timeouts.
+
+The workflow now selects one live sitemap shard at a time, in batches of up to
+500 profiles, using at most 12 concurrent anonymous requests. Every selected URL
+must pass all checks twice, including freshly read sitemap membership, before its
+batch is submitted. Unrelated shards are not fetched. No database record, stored
+checkpoint or previously successful check grants indexing permission.
+
+After IndexNow accepts a complete batch (HTTP 200/202), an atomic local checkpoint
+records the shard and last URL. A failed validation or receipt leaves that batch
+pending. Earlier successful batches survive later failures. Main runs restore and
+save only this small cursor through GitHub Actions cache, including after errors.
+Pull requests neither read nor write the production checkpoint and never submit.
+
+New deployments queue behind an active notification run rather than cancelling
+it. Hourly runs at minute 17 continue even without deployments, processing at most
+ten batches (5,000 URLs) with a 25-minute request budget and a 35-minute job limit.
+Each run logs exactly which batches were checked and how many URLs IndexNow
+received. A completed sitemap pass stops the run; the next run begins another
+pass to discover additions and publication changes. The public sitemap remains
+available to search engines throughout; notifications do not guarantee indexing.
+
+The cache is a best-effort progress aid, not a durable publication ledger. Cache
+eviction or an interrupted save can cause safe repeat submissions. A removed
+cursor anchor replays its shard; a removed shard restarts at the first current
+shard. Changes to sitemap pagination can cause repeats or defer a URL until the
+next pass. This is not an exactly-once full-catalogue audit.
+
+To run a bounded submission manually, with the same safeguards:
+
+```sh
+node scripts/submit-athlete-indexnow.mjs --batch-size=500 --max-batches=10 --state-file=artifacts/athlete-search-cursor.json
+```
+
+Use the existing GitHub Actions workflow's **Run workflow** action on `main` to
+resume its shared checkpoint. A local run has its own cursor. Do not delete a
+checkpoint to hide a failing batch; investigate the profile or receipt first.
