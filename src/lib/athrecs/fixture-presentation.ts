@@ -1,36 +1,37 @@
-import { countryFlag } from "./country-flags.ts";
+import { countryAbbreviation, countryFlag } from "./country-flags.ts";
 
 /** Preserve every supplied place without inferring missing administrative levels. */
 export function compactFixtureLocation(place: {
   town?: string | null;
+  area?: string | null;
   city?: string | null;
   county?: string | null;
   state?: string | null;
   country?: string | null;
 }) {
   const country = countryFlag(place.country);
-  const abbreviations: Record<string, string> = {
-    "GB-ENG": "ENG",
-    "GB-SCT": "SCO",
-    "GB-WLS": "WAL",
-    GB: "UK",
-    US: "USA",
-  };
-  const countryCode =
-    country.name === "Northern Ireland"
-      ? "NIR"
-      : (abbreviations[country.code ?? ""] ?? country.code) || country.name;
+  const countryCode = countryAbbreviation(place.country);
   const seen = new Set(
     [place.country, country.name, countryCode]
       .filter((part): part is string => !!part)
       .map((part) => part.trim().toLocaleLowerCase("en")),
   );
   const parts: string[] = [];
-  for (const value of [place.town, place.city, place.county, place.state]) {
+  for (const value of [place.town, place.city, place.county, place.state, place.area]) {
     for (const part of (value ?? "")
       .split(",")
       .map((item) => item.trim())
       .filter(Boolean)) {
+      if (/^(tbc|unknown|other|venue tbc)$/i.test(part)) continue;
+      const partCountry = countryFlag(part);
+      // Remove repeated country aliases, including the UK parent of a home nation.
+      if (
+        partCountry.code &&
+        (partCountry.name === country.name ||
+          ((country.code.startsWith("GB-") || country.name === "Northern Ireland") &&
+            partCountry.name === "United Kingdom"))
+      )
+        continue;
       const key = part.toLocaleLowerCase("en");
       if (!seen.has(key)) {
         parts.push(part);

@@ -257,25 +257,7 @@ const regions = new Map(
     [countryNames[code].toLowerCase(), code],
   ]),
 );
-const aliases: Record<string, string> = {
-  // WMM's own nationality dictionary uses these additional territory codes:
-  // https://dfsqrpugige0x.cloudfront.net/prod/config_nationality.json
-  mnt: "MS",
-  nfi: "NF",
-  nmi: "MP",
-  tks: "TC",
-  // ISO alpha-3 values also occur in source rows (UN M49 country table).
-  // https://unstats.un.org/unsd/methodology/m49/overview/
-  bgd: "BD",
-  cog: "CG",
-  "great britain & n.i.": "GB",
-  "trinidad and tobago": "TT",
-  // Unambiguous legacy codes from the IOC 2014 and IAAF 2016 country lists.
-  // https://odf.olympictech.org/2014-Sochi/2014_Sochi_Codes/htmlPG/15_country.htm
-  // https://iaaf-ebooks.s3.amazonaws.com/2016/World-Indoors-Portland/projet/IAAF-World-Indoor-Championships-2016.pdf
-  lib: "LB",
-  sin: "SG",
-  rom: "RO",
+const sportingCodes: Record<string, string> = {
   // Current country/territory sporting codes from the IOC Olympic Data Feed.
   // https://odf.olympictech.org/2024-Paris/codes/HTML/og_cc/Country.htm
   // Display aliases only: preserve the exact source nationality and provenance.
@@ -531,6 +513,28 @@ const aliases: Record<string, string> = {
   yem: "YE",
   zam: "ZM",
   zim: "ZW",
+};
+
+const aliases: Record<string, string> = {
+  // WMM's own nationality dictionary uses these additional territory codes:
+  // https://dfsqrpugige0x.cloudfront.net/prod/config_nationality.json
+  mnt: "MS",
+  nfi: "NF",
+  nmi: "MP",
+  tks: "TC",
+  // ISO alpha-3 values also occur in source rows (UN M49 country table).
+  // https://unstats.un.org/unsd/methodology/m49/overview/
+  bgd: "BD",
+  cog: "CG",
+  "great britain & n.i.": "GB",
+  "trinidad and tobago": "TT",
+  // Unambiguous legacy codes from the IOC 2014 and IAAF 2016 country lists.
+  // https://odf.olympictech.org/2014-Sochi/2014_Sochi_Codes/htmlPG/15_country.htm
+  // https://iaaf-ebooks.s3.amazonaws.com/2016/World-Indoors-Portland/projet/IAAF-World-Indoor-Championships-2016.pdf
+  lib: "LB",
+  sin: "SG",
+  rom: "RO",
+  ...sportingCodes,
   // Additional ISO codes retained alongside the IOC sporting codes.
   deu: "DE",
   nld: "NL",
@@ -651,4 +655,20 @@ export function countryFlag(value: string | null | undefined) {
       ? String.fromCodePoint(...[...code].map((letter) => letter.charCodeAt(0) + 127397))
       : "",
   };
+}
+
+const abbreviations: Readonly<Record<string, string>> = {
+  ...Object.fromEntries(
+    Object.entries(sportingCodes).map(([short, iso]) => [iso, short.toUpperCase()]),
+  ),
+  "GB-ENG": "ENG",
+  "GB-SCT": "SCO",
+  "GB-WLS": "WAL",
+};
+
+/** Stable sporting abbreviations, independent of the source spelling or alias. */
+export function countryAbbreviation(value: string | null | undefined): string {
+  const flag = countryFlag(value);
+  if (flag.name === "Northern Ireland") return "NIR";
+  return abbreviations[flag.code] || flag.code || flag.name;
 }
