@@ -47,6 +47,9 @@ for (const extra of [
 }
 assert.deepEqual(sourceHistorySports(history([row({ discipline: "5km XC" })])), ["Running"]);
 assert.equal(isCrossCountryHistoryResult(row({ discipline: "5000m" })), false);
+assert.deepEqual(sourceHistorySports(history([row({ discipline: "5km road relay leg" })])), [
+  "Running",
+]);
 const board = (rows, recorded = []) =>
   buildProfileAchievements(profileAchievementResults(recorded, history(rows)), today);
 assert.equal(historyResultCountry(row()), "United Kingdom");
