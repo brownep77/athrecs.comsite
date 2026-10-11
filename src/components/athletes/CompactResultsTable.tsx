@@ -14,7 +14,7 @@ import { type ProfileResult, findPersonalBests, timingBasis } from "@/lib/athrec
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
-import { ResultMedal } from "./ProfileAchievements";
+import { ResultMedal, ResultMedalKey } from "./ProfileAward";
 import { roadPerformanceCondition } from "@/lib/athrecs/road-performance-conditions";
 import { isDisqualified } from "@/lib/athrecs/result-details";
 import { ResultDisqualification } from "./ResultDisqualification";
@@ -398,6 +398,7 @@ export function CompactResults({
       {showEvidence && reportedHistory ? (
         <p className="text-sm text-muted">{reportedHistory.description}</p>
       ) : null}
+      {total > 0 ? <ResultMedalKey /> : null}
       {total ? (
         <CompactResultsTable
           results={results}

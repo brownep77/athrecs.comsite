@@ -5,7 +5,7 @@ import {
   type HistoryResult,
 } from "@/lib/athrecs/profile-history-results";
 import { CountryFlag } from "./CountryFlag";
-import { CompletionMedal } from "./ProfileAchievements";
+import { CompletionMedal } from "./ProfileAward";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
 import { ResultEvidence } from "./ResultEvidence";
@@ -48,7 +48,9 @@ export function HistoricalResultRow({
       </td>
       <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
         <span className="inline-flex items-center gap-1.5">
-          {hasHistoryFinish(row) ? <CompletionMedal /> : null}
+          {hasHistoryFinish(row) ? (
+            <CompletionMedal place={row.places ? row.places.overall : row.place} />
+          ) : null}
           {row.meeting || "Meeting not recorded"}
         </span>
         <ResultEvidence

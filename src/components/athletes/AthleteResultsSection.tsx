@@ -1,4 +1,4 @@
-import { ResultMedal } from "./ProfileAchievements";
+import { ResultMedal } from "./ProfileAward";
 import { buildProfileAchievements } from "@/lib/athrecs/profile-achievements";
 import { CountryFlag } from "./CountryFlag";
 import { CompactResultsTable } from "./CompactResultsTable";
