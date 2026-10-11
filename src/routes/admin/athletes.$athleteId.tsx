@@ -1,3 +1,4 @@
+import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import {
   EditorialAthleteOverview,
   EditorialRoadSplits,
@@ -148,17 +149,40 @@ function StaffAthleteProfile() {
               ))}
             </details>
           ) : null}
-          <ProfileRecordHighlights results={profile.results} showEvidence />
-          {profile.athlete.sources.map((source) => (
-            <div key={`editorial-${source.slug}`} className="space-y-3">
-              <EditorialAthleteOverview slug={source.slug} showEvidence />
-              <EditorialRoadSplits slug={source.slug} showEvidence />
+          <ProfileRecordHighlights
+            results={profile.results}
+            sourceHistories={profile.sourceHistories}
+            showEvidence
+          />
+          {profile.editorial.map((entry) => (
+            <div key={`editorial-${entry.slug}`} className="space-y-3">
+              {entry.career?.biographySources.length ? (
+                <details className="rounded-xl border border-border p-4">
+                  <summary className="cursor-pointer font-semibold">Biography sources</summary>
+                  <ul>
+                    {entry.career.biographySources.map((source) => (
+                      <li key={source.url}>
+                        <a
+                          href={source.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-accent underline"
+                        >
+                          {source.label}
+                        </a>
+                        <p>{source.locator}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              ) : null}
+              <AthleteCareerHighlights career={entry.career} showEvidence />
+              <EditorialAthleteOverview overview={entry.overview} showEvidence />
+              <EditorialRoadSplits overview={entry.overview} showEvidence />
+              <UnverifiedRaceHistory history={entry.reportedHistory} showEvidence />
             </div>
           ))}
           <CompactResults showEvidence key={athleteId} results={profile.results} />
-          {profile.athlete.sources.map((source) => (
-            <UnverifiedRaceHistory key={source.slug} slug={source.slug} showEvidence />
-          ))}
           <SourcePerformanceHistory
             showEvidence
             key={`source-${athleteId}`}

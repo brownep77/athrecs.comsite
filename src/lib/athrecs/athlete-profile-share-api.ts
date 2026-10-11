@@ -476,7 +476,11 @@ const shareSlugInput = (input: { slug: string }) => ({
 export const getPublishedSharedProfile = createServerFn({ method: "GET" })
   .middleware([profileReadMiddleware])
   .validator(shareSlugInput)
-  .handler(({ data }) => readPublishedSharedProfile(data.slug));
+  .handler(async ({ data }) => {
+    const profile = await readPublishedSharedProfile(data.slug);
+    const { withoutProfileEvidence } = await import("./profile-evidence");
+    return profile ? withoutProfileEvidence(profile) : null;
+  });
 
 export const getPublicSharedProfilePreview = createServerFn({ method: "GET" })
   .validator(shareSlugInput)

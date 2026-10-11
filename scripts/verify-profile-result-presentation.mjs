@@ -229,8 +229,15 @@ try {
   const { AthleteCareerHighlights } = await server.ssrLoadModule(
     "/src/components/athletes/AthleteCareerHighlights.tsx",
   );
+  const { getEditorialAthleteCareer } = await server.ssrLoadModule(
+    "/src/data/freddy-richardson.ts",
+  );
   const career = load(
-    renderToStaticMarkup(createElement(AthleteCareerHighlights, { slug: "paul-william-evans" })),
+    renderToStaticMarkup(
+      createElement(AthleteCareerHighlights, {
+        career: getEditorialAthleteCareer("paul-william-evans"),
+      }),
+    ),
   );
   assert.equal(career('[data-profile-award="trophy"]').length, 1);
   assert.equal(career('[data-profile-award="silver"]').length, 1);
@@ -241,6 +248,207 @@ try {
     "Olympic participation must not be presented as an Olympic medal",
   );
   assert.equal(career('[data-award-tier="olympic"][data-profile-award="participation"]').length, 1);
+  const { withoutProfileEvidence } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-evidence.ts",
+  );
+  const { profileEditorial } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-editorial.server.ts",
+  );
+  const { ResultEvidence } = await server.ssrLoadModule(
+    "/src/components/athletes/ResultEvidence.tsx",
+  );
+  const { buildProfileTimeline } = await server.ssrLoadModule(
+    "/src/lib/athrecs/profile-timeline.ts",
+  );
+  const { buildCompetitionHonours } = await server.ssrLoadModule(
+    "/src/lib/athrecs/competition-honours.ts",
+  );
+  const { selectProfilePersonalBests } = await server.ssrLoadModule(
+    "/src/lib/athrecs/reported-personal-bests.ts",
+  );
+  const { eligiblePerformance } = await server.ssrLoadModule("/src/lib/athrecs/profile-records.ts");
+  const evidenceUrl = "https://evidence.example/private-result";
+  const fixtureResult = {
+    resultId: 999,
+    editionId: 999,
+    eventName: "Olympic Games",
+    eventSlug: "olympic-games",
+    sport: "Athletics",
+    surface: "Track",
+    country: "France",
+    eventDate: "2024-08-01",
+    distanceCode: "10000 Metres",
+    distanceKm: 10,
+    status: "finished",
+    finishTimeSeconds: 1680,
+    chipTimeSeconds: null,
+    gunTimeSeconds: null,
+    overallPlace: null,
+    category: null,
+    resultSource: "World Athletics",
+    sourceUrls: [evidenceUrl],
+    details: { verificationStatus: "source_verified", note: "Private review sentinel" },
+  };
+  const fixturePerformance = {
+    year: 2024,
+    date: "2024-08-01",
+    sourceDate: "original date sentinel",
+    ageGroup: "",
+    discipline: "10000 Metres",
+    performance: "28:00.00",
+    wind: "",
+    place: "1",
+    venue: "Paris, FRA",
+    meeting: "Olympic final alternative source title",
+    sourceUrls: [evidenceUrl],
+    labels: ["Round: F"],
+    providerName: "World Athletics",
+    verificationStatus: "source_verified",
+    notes: "Private disagreement sentinel",
+  };
+  const fixtureHistory = {
+    provider: "World Athletics",
+    externalId: "private-athlete-id",
+    sourceUrl: evidenceUrl,
+    capturedAt: "2026-01-01",
+    complete: false,
+    yearsExpected: [],
+    yearsCaptured: [],
+    performances: [fixturePerformance],
+  };
+  const fixture = {
+    results: [fixtureResult],
+    histories: [fixtureHistory],
+    editorial: profileEditorial("paul-william-evans"),
+    nationalitySource: { value: "GBR", provider: "Example", sourceUrl: evidenceUrl },
+  };
+  const original = JSON.stringify(fixture);
+  const safe = withoutProfileEvidence(fixture);
+  assert.equal(JSON.stringify(fixture), original, "Redaction never mutates stored/staff evidence");
+  for (const secret of [
+    evidenceUrl,
+    "Private review sentinel",
+    "Private disagreement sentinel",
+    "private-athlete-id",
+    "worldathletics.org",
+    "paulevanscoaching.com",
+  ])
+    assert(!JSON.stringify(safe).includes(secret), `Do not serialize ${secret}`);
+  const bridge = {
+    results: [],
+    histories: [
+      {
+        ...fixtureHistory,
+        performances: [
+          fixturePerformance,
+          { ...fixturePerformance, sourceUrls: ["https://evidence.example/bridge"] },
+          {
+            ...fixturePerformance,
+            meeting: "Another source title",
+            sourceUrls: ["https://evidence.example/bridge"],
+          },
+        ],
+      },
+    ],
+  };
+  const privateBridge = withoutProfileEvidence(bridge);
+  assert.equal(
+    buildProfileTimeline(privateBridge.results, privateBridge.histories).count,
+    buildProfileTimeline(bridge.results, bridge.histories).count,
+    "Transitive duplicate matches retain all opaque source keys",
+  );
+  const decisions = {
+    results: [],
+    histories: [
+      {
+        ...fixtureHistory,
+        performances: [
+          {
+            ...fixturePerformance,
+            disqualification: {
+              reason: "other",
+              decisionDate: "2024-08-02",
+              sourceUrl: evidenceUrl,
+              note: "Original decision",
+            },
+          },
+          {
+            ...fixturePerformance,
+            disqualification: {
+              reason: "other",
+              decisionDate: "2024-08-02",
+              sourceUrl: evidenceUrl,
+              note: "Conflicting decision",
+            },
+          },
+        ],
+      },
+    ],
+  };
+  const privateDecisions = withoutProfileEvidence(decisions);
+  assert.equal(
+    buildProfileTimeline(privateDecisions.results, privateDecisions.histories).count,
+    buildProfileTimeline(decisions.results, decisions.histories).count,
+    "Different decisions cannot collapse after redaction",
+  );
+  assert.equal(safe.nationalitySource, null);
+  assert.equal(safe.results[0].details.verificationStatus, "source_verified");
+  const originalTimeline = buildProfileTimeline(fixture.results, fixture.histories);
+  const safeTimeline = buildProfileTimeline(safe.results, safe.histories);
+  assert.equal(
+    safeTimeline.count,
+    originalTimeline.count,
+    "Source-key matching preserves deduplication",
+  );
+  assert.equal(
+    safeTimeline.results[0].displayOverallPlace,
+    originalTimeline.results[0].displayOverallPlace,
+  );
+  const honourSummary = (input) =>
+    buildCompetitionHonours(input.results, input.histories, "M").map(
+      ({ id, title, kind, tier, evidence }) => ({ id, title, kind, tier, count: evidence.length }),
+    );
+  assert.deepEqual(
+    honourSummary(safe),
+    honourSummary(fixture),
+    "Evidence privacy does not change championship awards",
+  );
+  const excluded = { ...fixtureResult, details: { note: "Not legal; private source details" } };
+  assert.equal(
+    eligiblePerformance(withoutProfileEvidence(excluded)),
+    eligiblePerformance(excluded),
+  );
+  for (const slug of ["neil-featherby", "paul-william-evans", "mo-farah", "david-goggins"]) {
+    const editorial = profileEditorial(slug);
+    const projected = withoutProfileEvidence(editorial);
+    assert.equal(
+      selectProfilePersonalBests([], projected.reportedHistory?.personalBests ?? []).length,
+      selectProfilePersonalBests([], editorial.reportedHistory?.personalBests ?? []).length,
+      `${slug} PB eligibility retained`,
+    );
+  }
+  assert.equal(
+    renderToStaticMarkup(
+      createElement(ResultEvidence, { urls: [evidenceUrl], notes: "Private review sentinel" }),
+    ),
+    "",
+  );
+  const staffEvidence = renderToStaticMarkup(
+    createElement(ResultEvidence, {
+      urls: [evidenceUrl],
+      notes: "Private review sentinel",
+      showEvidence: true,
+    }),
+  );
+  assert(staffEvidence.includes(evidenceUrl) && staffEvidence.includes("Private review sentinel"));
+  assert.equal(career("summary").filter((_, node) => career(node).text() === "Sources").length, 0);
+  const staffCareer = renderToStaticMarkup(
+    createElement(AthleteCareerHighlights, {
+      career: getEditorialAthleteCareer("paul-william-evans"),
+      showEvidence: true,
+    }),
+  );
+  assert(staffCareer.includes("worldathletics.org"));
   const { ProfileAward, ClassificationAwards } = await server.ssrLoadModule(
     "/src/components/athletes/ProfileAward.tsx",
   );

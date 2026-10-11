@@ -72,7 +72,13 @@ export function PersonalBestStrip({
               <a
                 key={`reported-${best.id}`}
                 style={bestColours.get(`pb:${best.sport}:${best.surface}:${best.distanceCode}`)}
-                href={best.recordId ? `#reported-result-${best.recordId}` : best.sources[0].url}
+                href={
+                  best.recordId
+                    ? `#reported-result-${best.recordId}`
+                    : showEvidence
+                      ? best.sources[0]?.url
+                      : undefined
+                }
                 className="achievement-label min-w-28 flex-1 rounded-lg border border-border bg-accent-soft px-3 py-2 no-underline hover:bg-elevated"
                 title={best.note}
               >
@@ -278,25 +284,27 @@ export function AchievementsBoard({
                   {outcome}
                 </p>
               ))}
-              <details className="text-xs">
-                <summary className="cursor-pointer">Sources</summary>
-                <ul className="mt-2 space-y-1">
-                  {highlight.sources
-                    .filter((source) => isPublicProfileSource(source.url, source.label))
-                    .map((source) => (
-                      <li key={source.url}>
-                        <a
-                          href={source.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="underline underline-offset-2"
-                        >
-                          {source.label}
-                        </a>
-                      </li>
-                    ))}
-                </ul>
-              </details>
+              {showEvidence ? (
+                <details className="text-xs">
+                  <summary className="cursor-pointer">Sources</summary>
+                  <ul className="mt-2 space-y-1">
+                    {highlight.sources
+                      .filter((source) => isPublicProfileSource(source.url, source.label))
+                      .map((source) => (
+                        <li key={source.url}>
+                          <a
+                            href={source.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline underline-offset-2"
+                          >
+                            {source.label}
+                          </a>
+                        </li>
+                      ))}
+                  </ul>
+                </details>
+              ) : null}
             </article>
           ))}
         </div>

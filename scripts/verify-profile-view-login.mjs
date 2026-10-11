@@ -340,8 +340,8 @@ try {
   assert.equal(publicProfile.sourceHistories[0].performances.length, 10);
   assert.deepEqual(
     publicProfile.sourceHistories[0].performances[0].sourceUrls,
-    performance.sourceUrls,
-    "Original evidence is retained",
+    [],
+    "Member-facing payload omits private evidence",
   );
   for (const secret of [
     "Private biography sentinel",
@@ -353,9 +353,51 @@ try {
   ])
     assert(!JSON.stringify(publicProfile).includes(secret), `Do not disclose ${secret}`);
   assert.deepEqual(publicProfile.upcoming, []);
+  assert(!JSON.stringify(publicProfile).includes("https://example.test/result"));
+  const [storedHistory] =
+    await sql`select performances from athlete_source_histories where athlete_id=${publishedAthlete.id}`;
+  assert.deepEqual(
+    storedHistory.performances[0].sourceUrls,
+    performance.sourceUrls,
+    "Original evidence remains stored",
+  );
+  process.env.ATHRECS_STAFF_EMAILS = "separate-staff@example.test";
+  await assert.rejects(
+    () =>
+      rpc("athrecs/staff-athlete-directory-api", "getStaffAthleteProfile", {
+        athleteId: "ATH-000001",
+      }),
+    /Unauthorized/,
+  );
+  await assert.rejects(
+    () =>
+      rpc(
+        "athrecs/staff-athlete-directory-api",
+        "getStaffAthleteProfile",
+        { athleteId: "ATH-000001" },
+        token,
+      ),
+    /Forbidden/,
+  );
+  process.env.ATHRECS_STAFF_EMAILS = user.email;
+  await sql`insert into account(id,"accountId","providerId","userId","createdAt","updatedAt") values('evidence-google','evidence-google','google',${user.id},now(),now())`;
+  const staffProfile = await rpc(
+    "athrecs/staff-athlete-directory-api",
+    "getStaffAthleteProfile",
+    { athleteId: `ATH-${String(publicProfile.athlete.athlete_number).padStart(6, "0")}` },
+    token,
+  );
+  assert(staffProfile, "Staff can open the same athlete");
+  assert.deepEqual(
+    staffProfile.sourceHistories[0].performances[0].sourceUrls,
+    performance.sourceUrls,
+    "Authorised staff retain original evidence",
+  );
+  process.env.ATHRECS_STAFF_EMAILS = "";
   const preview = await previewRead("published-history-fixture");
   assert.equal(preview.entries.length + preview.reportedRecords.length, 5);
   assert.equal(preview.totalResults, 11);
+  assert(!JSON.stringify(preview).includes("https://example.test/result"));
   const { buildPublicAthletePreview } = await server.ssrLoadModule(
     "/src/lib/athrecs/public-athlete-preview.ts",
   );
@@ -443,7 +485,7 @@ try {
     assert(!html.includes("Synthetic shot put"));
     assert(html.includes("View the full athlete profile"));
     assert($.text().includes("Showing 5 of 11 recorded performances"));
-    assert.equal($("#results-history .result-evidence a[href^='https://example.test']").length, 5);
+    assert.equal($("#results-history .result-evidence a[href^='https://example.test']").length, 0);
     assert.equal(
       $("#results-history [aria-label='Personal best']").length,
       0,
@@ -501,7 +543,7 @@ try {
   assert(confirmed("#results-history").text().includes("29 Jan · 2011 / 2012"));
   assert.equal(
     confirmed("#results-history .result-evidence a[href^='https://example.test']").length,
-    11,
+    0,
   );
   assert.equal(confirmed("#results-history .result-evidence[open]").length, 0);
   assert.equal(
@@ -560,7 +602,7 @@ try {
         assert.equal(await history.locator("tbody tr:visible").count(), 11);
         assert.equal(
           await history.locator(".result-evidence a[href^='https://example.test']").count(),
-          11,
+          0,
         );
         assert.equal(await history.locator(".result-evidence[open]").count(), 0);
         await page.getByRole("combobox", { name: "Sport", exact: true }).selectOption("Athletics");

@@ -1,5 +1,3 @@
-import { isWmmSource, publicProfileResultNotes } from "@/lib/athrecs/profile-source-presentation";
-
 function sourceLabel(url: string, provider?: string | null): string {
   try {
     const host = new URL(url).hostname.replace(/^www\./, "");
@@ -13,7 +11,7 @@ function sourceLabel(url: string, provider?: string | null): string {
   return provider?.trim() || "Result source";
 }
 
-/** Compact public access to the original evidence, including source disagreements. */
+/** Staff-only access to the original evidence, including source disagreements. */
 export function ResultEvidence({
   notes,
   provider,
@@ -29,9 +27,10 @@ export function ResultEvidence({
   showEvidence?: boolean;
   sourceLabels?: readonly { label: string; url: string }[];
 }) {
-  const visibleNotes = showEvidence ? notes : publicProfileResultNotes(notes, provider, urls);
-  const visibleUrls = showEvidence ? urls : urls.filter((url) => !isWmmSource(null, [url]));
-  const visibleProvider = !showEvidence && isWmmSource(provider) ? null : provider;
+  if (!showEvidence) return null;
+  const visibleNotes = notes;
+  const visibleUrls = urls;
+  const visibleProvider = provider;
   if (!visibleNotes && !visibleUrls.length && !splits.length) return null;
   return (
     <details className="result-evidence mt-1 max-w-lg whitespace-normal text-xs font-normal text-muted">

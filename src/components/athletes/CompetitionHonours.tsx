@@ -1,7 +1,5 @@
 import type { CompetitionHonour } from "@/lib/athrecs/competition-honours";
 import { ProfileAward } from "./ProfileAward";
-import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
-import { isWmmSource } from "@/lib/athrecs/profile-source-presentation";
 import { resultCredit } from "@/lib/athrecs/result-credit";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
@@ -41,7 +39,7 @@ export function CompetitionHonours({
                     : honour.evidence.length === 1
                       ? "result"
                       : "results"}{" "}
-                  · View evidence
+                  · {showEvidence ? "View evidence" : "View results"}
                 </span>
               </span>
             </summary>
@@ -52,13 +50,8 @@ export function CompetitionHonours({
                   <span>
                     {formatRaceDateShort(row.date)} · {profileDisciplineLabel(row.discipline)}
                   </span>
-                  {row.sources
-                    .filter(
-                      ({ url, provider }) =>
-                        showEvidence ||
-                        (isPublicProfileSource(url, provider) && !isWmmSource(provider, [url])),
-                    )
-                    .map(({ url, provider }) => (
+                  {showEvidence &&
+                    row.sources.map(({ url, provider }) => (
                       <a
                         key={url}
                         href={url}

@@ -1054,7 +1054,14 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
 export const getAthleteBySlug = createServerFn({ method: "GET" })
   .middleware([profileReadMiddleware])
   .validator((slug: string) => slug)
-  .handler(({ data: slug }) => readAthleteBySlug(slug));
+  .handler(async ({ data: slug }) => {
+    const profile = await readAthleteBySlug(slug);
+    const { withoutProfileEvidence } = await import("./profile-evidence");
+    const { profileEditorial } = await import("./profile-editorial.server");
+    return profile
+      ? withoutProfileEvidence({ ...profile, editorial: profileEditorial(slug) })
+      : null;
+  });
 
 /** Only recorded staff publication or enabled owner sharing permits a public preview. */
 async function readAdministratorPublishedAthlete(slug: string) {
@@ -1113,7 +1120,14 @@ async function readAdministratorPublishedAthlete(slug: string) {
 export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" })
   .middleware([profileReadMiddleware])
   .validator((slug: string) => slug)
-  .handler(({ data }) => readAdministratorPublishedAthlete(data));
+  .handler(async ({ data }) => {
+    const profile = await readAdministratorPublishedAthlete(data);
+    const { withoutProfileEvidence } = await import("./profile-evidence");
+    const { profileEditorial } = await import("./profile-editorial.server");
+    return profile
+      ? withoutProfileEvidence({ ...profile, editorial: profileEditorial(data) })
+      : null;
+  });
 
 export const getPublicAthletePreview = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)

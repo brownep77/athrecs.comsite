@@ -88,7 +88,7 @@ export function buildProfileTimeline(
             (r.finishTimeSeconds === null && normal(r.status) === normal(row.performance))) &&
           ((row.eventSlug === r.eventSlug && Boolean(row.eventSlug)) ||
             normal(row.meeting) === normal(r.eventName) ||
-            sameSource(row.sourceUrls, r.sourceUrls)),
+            sameSource(row.sourceKeys ?? row.sourceUrls, r.sourceKeys ?? r.sourceUrls)),
       );
       if (known) {
         known.details ??= {};
@@ -104,6 +104,8 @@ export function buildProfileTimeline(
             ...row.sourceUrls.filter((url) => !isWmmSource(null, [url])),
           ]),
         ];
+        if (known.sourceKeys || row.sourceKeys)
+          known.sourceKeys = [...new Set([...(known.sourceKeys ?? []), ...(row.sourceKeys ?? [])])];
         known.details.note = notes(
           known.details.note,
           publicProfileResultNotes(row.notes, row.providerName, row.sourceUrls),
@@ -142,12 +144,23 @@ export function buildProfileTimeline(
           p.place === row.place &&
           sameRound(p, row) &&
           JSON.stringify(p.disqualification) === JSON.stringify(row.disqualification) &&
-          (normal(p.meeting) === normal(row.meeting) || sameSource(p.sourceUrls, row.sourceUrls)),
+          (normal(p.meeting) === normal(row.meeting) ||
+            sameSource(p.sourceKeys ?? p.sourceUrls, row.sourceKeys ?? row.sourceUrls)),
       );
       if (duplicate) {
         duplicate.performance = {
           ...duplicate.performance,
           sourceUrls: [...new Set([...duplicate.performance.sourceUrls, ...row.sourceUrls])],
+          ...(duplicate.performance.sourceKeys || row.sourceKeys
+            ? {
+                sourceKeys: [
+                  ...new Set([
+                    ...(duplicate.performance.sourceKeys ?? []),
+                    ...(row.sourceKeys ?? []),
+                  ]),
+                ],
+              }
+            : {}),
           notes: notes(duplicate.performance.notes, row.notes),
         };
       } else {

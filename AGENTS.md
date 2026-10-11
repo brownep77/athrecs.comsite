@@ -56,3 +56,12 @@ publication and personal-best calculations in this repository.
   and import-note wording. Retain original provider names, links and notes in
   stored evidence and staff evidence views. This presentation choice does not
   verify an athlete or result or remove the evidence requirements above.
+
+- Owner instruction, 11 October 2026: athlete profile verification evidence belongs
+  in the staff backend. Do not expose source URLs, biography citations or research
+  notes in anonymous or member-facing profile HTML, response payloads or browser
+  data modules. Preserve original evidence in storage and staff-only views. Keep
+  public verification labels, result qualifications and award eligibility intact.
+  This profile presentation exception supersedes the general public provider-credit
+  rule above; it does not establish reuse permission or override required licence
+  attribution (including photo credits).

@@ -1,13 +1,18 @@
 import { Award } from "lucide-react";
-import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
+import type { ProfileEditorial } from "@/lib/athrecs/profile-editorial.server";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { careerAward, careerTier } from "@/lib/athrecs/profile-awards";
 import { COMPETITION_TIERS } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
 import { achievementPalette } from "@/lib/athrecs/achievement-colours";
 
-export function AthleteCareerHighlights({ slug }: { slug: string }) {
-  const career = getEditorialAthleteCareer(slug);
+export function AthleteCareerHighlights({
+  career,
+  showEvidence = false,
+}: {
+  career: ProfileEditorial["career"];
+  showEvidence?: boolean;
+}) {
   if (!career) return null;
   const colours = achievementPalette(career.achievements.map(({ id }) => `career:${id}`));
 
@@ -54,7 +59,7 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
                   <li key={outcome}>{outcome}</li>
                 ))}
               </ul>
-              {sources.length > 0 && (
+              {showEvidence && sources.length > 0 && (
                 <details className="text-xs">
                   <summary className="cursor-pointer text-accent">Sources</summary>
                   <ul className="mt-2 space-y-2">
@@ -93,19 +98,20 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
                     {outcome}
                   </p>
                 ))}
-                {race.sources
-                  .filter((source) => isPublicProfileSource(source.url, source.label))
-                  .map((source) => (
-                    <a
-                      key={source.url}
-                      href={source.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block text-xs text-accent underline underline-offset-2"
-                    >
-                      {source.label} ↗
-                    </a>
-                  ))}
+                {showEvidence &&
+                  race.sources
+                    .filter((source) => isPublicProfileSource(source.url, source.label))
+                    .map((source) => (
+                      <a
+                        key={source.url}
+                        href={source.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block text-xs text-accent underline underline-offset-2"
+                      >
+                        {source.label} ↗
+                      </a>
+                    ))}
               </article>
             ))}
           </div>

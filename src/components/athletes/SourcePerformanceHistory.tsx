@@ -191,7 +191,10 @@ export function SourcePerformanceHistory({
                       </span>
                     ) : null}
                     {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
-                    <ResultDisqualification decision={row.disqualification} />
+                    <ResultDisqualification
+                      showEvidence={showEvidence}
+                      decision={row.disqualification}
+                    />
                     {showEvidence && row.credit ? (
                       <a
                         href={row.credit.url}

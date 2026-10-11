@@ -29,6 +29,7 @@ export type ProfileResult = {
   resultGender?: string | null;
   category: string | null;
   sourceUrls: string[];
+  sourceKeys?: string[];
   resultSource?: string | null;
   sourceResultIds?: number[];
   conflicting?: boolean;
@@ -125,6 +126,10 @@ export function combineProfileResults<T extends ProfileResult>(
       existing.categoryPlace ??= result.categoryPlace;
       existing.resultGender ||= result.resultGender;
       existing.sourceUrls = [...new Set([...existing.sourceUrls, ...result.sourceUrls])];
+      if (existing.sourceKeys || result.sourceKeys)
+        existing.sourceKeys = [
+          ...new Set([...(existing.sourceKeys ?? []), ...(result.sourceKeys ?? [])]),
+        ];
       existing.sourceResultIds = [
         ...new Set([
           ...(existing.sourceResultIds ?? [existing.resultId]),

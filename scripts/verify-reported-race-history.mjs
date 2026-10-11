@@ -41,7 +41,9 @@ try {
   );
   assert.equal(neil.includeInResults, true);
   assert.equal(
-    renderToStaticMarkup(createElement(UnverifiedRaceHistory, { slug: "neil-featherby" })),
+    renderToStaticMarkup(
+      createElement(UnverifiedRaceHistory, { history: getReportedRaceHistory("neil-featherby") }),
+    ),
     "",
   );
   const html = renderToStaticMarkup(
@@ -198,7 +200,11 @@ try {
   assert.equal(result.chipTimeSeconds, 4000);
   assert.equal(getReportedRaceHistory("unrelated-athlete"), null);
   assert.equal(
-    renderToStaticMarkup(createElement(UnverifiedRaceHistory, { slug: "unrelated-athlete" })),
+    renderToStaticMarkup(
+      createElement(UnverifiedRaceHistory, {
+        history: getReportedRaceHistory("unrelated-athlete"),
+      }),
+    ),
     "",
   );
   const goggins = getReportedRaceHistory("david-goggins");
@@ -208,7 +214,10 @@ try {
   assert.equal(murakami.records.length, 9);
   assert.equal(new Set(murakami.records.map((row) => row.id)).size, 9);
   const murakamiHtml = renderToStaticMarkup(
-    createElement(UnverifiedRaceHistory, { slug: "haruki-murakami", showEvidence: true }),
+    createElement(UnverifiedRaceHistory, {
+      history: getReportedRaceHistory("haruki-murakami"),
+      showEvidence: true,
+    }),
   );
   assert.equal((murakamiHtml.match(/<article/g) ?? []).length, 9);
   assert.match(murakamiHtml, /\* Unverified/);
