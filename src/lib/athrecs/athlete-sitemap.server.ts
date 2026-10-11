@@ -4,7 +4,7 @@ import { indexableApprovedAthleteSql } from "./athlete-search-policy.server.ts";
 // Keep well below the 50,000 URL limit and bound each database read.
 export const ATHLETE_SITEMAP_PAGE_SIZE = 5000;
 
-const indexableProfiles = `select a.slug, 'source-' || lpad(a.id::text, 20, '0') as sort_key
+const indexableProfiles = `select a.slug, a.id as sort_key
   from athletes a where ${indexableApprovedAthleteSql}`;
 
 export async function athleteSitemapPageCount(sql: Sql): Promise<number> {
@@ -45,12 +45,14 @@ export function sitemapXml(urls: SitemapEntry[], index = false): string {
     .join("\n")}\n</${root}>\n`;
 }
 
-export function sitemapResponse(xml: string): Response {
+export function sitemapResponse(xml: string, index = false): Response {
   return new Response(xml, {
     headers: {
       "Content-Type": "application/xml; charset=utf-8",
       // Publication and privacy changes must be reflected on the next crawl.
-      "Cache-Control": "no-store",
+      // The index contains only child sitemap filenames, never athlete URLs.
+      // Membership in every child sitemap remains freshly privacy-checked.
+      "Cache-Control": index ? "public, max-age=60, s-maxage=300" : "no-store",
       "X-Content-Type-Options": "nosniff",
     },
   });

@@ -53,7 +53,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
               (IS_RUNRECS_SITE
                 ? ["/", "/races", "/calendar", "/race-series", "/clubs", "/privacy"]
                 : [
-                    ...PUBLIC_PAGES.filter((page) => page.path !== "/athletes").map(
+                    ...PUBLIC_PAGES.map(
                       (page) => page.path,
                     ),
                     ...runningPaths,
@@ -72,12 +72,10 @@ export const Route = createFileRoute("/sitemaps/$file")({
           const populated = await populatedRunningCountries(await getSql(), COUNTRY_SITES.map((site) => site.country));
           return sitemapResponse(
             sitemapXml(
-              COUNTRY_SITES.flatMap((site) =>
-                SITE_LANGUAGES.flatMap((language) => [
-                  `${SITE_URL}/${language}/${site.slug}`,
-                  ...(populated.has(site.country) ? [`${SITE_URL}/${language}/${site.slug}/races`] : []),
-                ]),
-              ),
+              COUNTRY_SITES.flatMap((site) => [
+                `${SITE_URL}/en/${site.slug}`,
+                ...(populated.has(site.country) ? SITE_LANGUAGES.map((language) => `${SITE_URL}/${language}/${site.slug}/races`) : []),
+              ]),
             ),
           );
         }

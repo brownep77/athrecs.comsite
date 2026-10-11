@@ -125,7 +125,7 @@ export const Route = createFileRoute("/races/$slug")({
           .join(", ")}`
       : null;
     const title = archiveLabel
-      ? `${event.name} — ${archiveLabel} | ${SITE_NAME}`
+      ? `${event.name} results — ${archiveLabel} | ${SITE_NAME}`
       : event.city
         ? `${event.name} — ${event.city} | ${SITE_NAME}`
         : `${event.name} | ${SITE_NAME}`;
@@ -160,6 +160,8 @@ export const Route = createFileRoute("/races/$slug")({
               startTime: next?.start_time,
               sport: event.sport,
               website: event.website,
+              organiser: event.organiser,
+              entryOptions: next?.entry_options,
             }),
           ),
         },

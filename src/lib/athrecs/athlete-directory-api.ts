@@ -1,10 +1,23 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { getSql } from "@/lib/db";
+import { getSql, type Sql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import type { AthleteDirectory } from "./athlete-directory";
 import { parseAthleteId } from "./athlete-id";
 import { readSourceNationality } from "./source-nationality";
+
+export const getFeaturedAthletes = createServerFn({ method: "GET" }).handler(async () => {
+  const started = performance.now();
+  await ensureAthrecsSeeded();
+  const { readFeaturedAthletes } = await import("./featured-athletes.server");
+  const athletes = await readFeaturedAthletes(await getSql());
+  const { setResponseHeader } = await import("@tanstack/react-start/server");
+  setResponseHeader(
+    "Server-Timing",
+    `athlete_discovery;dur=${(performance.now() - started).toFixed(1)}`,
+  );
+  return { athletes };
+});
 
 const inputSchema = z.object({
   q: z.string().trim().max(120).optional(),
@@ -13,6 +26,11 @@ const inputSchema = z.object({
   page: z.number().int().min(1).max(100000).optional(),
   pageSize: z.number().int().min(1).max(48).optional(),
   includeFacets: z.boolean().optional(),
+  letter: z
+    .string()
+    .regex(/^[A-Z]$/)
+    .optional(),
+  fastBrowse: z.boolean().optional(),
 });
 
 // AthRecs discovery only. Private accounts and unlisted shared profiles are
@@ -22,10 +40,15 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
   .handler(async ({ data }): Promise<AthleteDirectory> => {
     await ensureAthrecsSeeded();
     const sql = await getSql();
+    if (data.fastBrowse && !data.sport) {
+      const { readAthleteDirectoryPage } = await import("./athlete-directory-page.server");
+      return withNationalities(sql, await readAthleteDirectoryPage(sql, data));
+    }
     const q = data.q || null;
     const athleteNumber = parseAthleteId(q);
     const country = data.country || null;
     const sport = data.sport || null;
+    const letter = data.letter || null;
     const pageSize = data.pageSize ?? 24;
     const requestedPage = data.page ?? 1;
     const includeFacets = data.includeFacets ?? true;
@@ -94,6 +117,7 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
           or athlete_number = ${athleteNumber} or source_number = ${athleteNumber})
           and (${country}::text is null or country = ${country})
           and (${sport}::text is null or ${sport} = any(sports))
+          and (${letter}::text is null or upper(left(display_name, 1)) = ${letter})
       ), totals as (
         select count(*)::int as total,
           least(${requestedPage}, greatest(1, ceil(count(*)::numeric / ${pageSize})::int)) as page
@@ -116,23 +140,27 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
           else array[]::text[] end as sports
       from totals
     `;
-    if (!directory.athletes.length) return directory;
-    // Fetch only this page's evidence, and expose only the nationality value.
-    // Full source metadata and account-owned details never enter the public list.
-    const observations = await sql<{ id: number; profile_details: unknown }>`
+    return withNationalities(sql, directory);
+  });
+
+async function withNationalities(sql: Sql, directory: AthleteDirectory): Promise<AthleteDirectory> {
+  if (!directory.athletes.length) return directory;
+  // Fetch only this page's evidence, and expose only the nationality value.
+  // Full source metadata and account-owned details never enter the public list.
+  const observations = await sql<{ id: number; profile_details: unknown }>`
       select a.id, a.profile_details from athletes a
       where a.id=any(${directory.athletes.map((athlete) => athlete.id)}::int[])
         and a.profile_visibility='public'
         and not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
     `;
-    const nationalities = new Map(
-      observations.map((row) => [row.id, readSourceNationality(row.profile_details)]),
-    );
-    return {
-      ...directory,
-      athletes: directory.athletes.map((athlete) => ({
-        ...athlete,
-        nationality: nationalities.get(athlete.id)?.value ?? null,
-      })),
-    };
-  });
+  const nationalities = new Map(
+    observations.map((row) => [row.id, readSourceNationality(row.profile_details)]),
+  );
+  return {
+    ...directory,
+    athletes: directory.athletes.map((athlete) => ({
+      ...athlete,
+      nationality: nationalities.get(athlete.id)?.value ?? null,
+    })),
+  };
+}

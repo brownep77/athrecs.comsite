@@ -45,8 +45,20 @@ try {
         );
         assert.ok(!(await page.locator("body").innerText()).includes("Gothenburg · Scotland"));
         const schedule = await page.locator("#race-schedule").innerText();
-        assert.match(schedule, /10 Oct 2026/);
-        assert.match(schedule, /10:00 CEST/);
+        // Keep checking the source date and local start after this fixture
+        // moves from the upcoming schedule into the past-race archive.
+        if (new Date().toISOString().slice(0, 10) <= "2026-10-10") {
+          assert.match(schedule, /10 Oct 2026/);
+          assert.match(schedule, /10:00 CEST/);
+        } else {
+          assert.doesNotMatch(schedule, /10 Oct 2026/);
+          const past = await page.locator("section").filter({
+            has: page.getByRole("heading", { name: "Past races", exact: true }),
+          }).innerText();
+          assert.match(past, /10 Oct 2026/);
+          assert.match(past, /10:00 CEST/);
+          assert.match(past, /Finished/);
+        }
         assert.match(await page.locator("#race-location").innerText(), /Slottsskogsvallen/);
         await page.screenshot({ path: `artifacts/gothenburg-${width}.png` });
       }

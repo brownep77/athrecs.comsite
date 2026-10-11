@@ -195,7 +195,7 @@ try {
     "Authenticated response must not leak to next anonymous request",
   );
   assert.equal((await fetch(origin + "/sitemaps/athletes-1.xml")).status, 404);
-  assert(!(await (await fetch(origin + "/sitemaps/pages.xml")).text()).includes("/athletes</loc>"));
+  assert((await (await fetch(origin + "/sitemaps/pages.xml")).text()).includes("/athletes</loc>"));
   assert(!(await (await fetch(origin + "/sitemap.xml")).text()).includes("/sitemaps/athletes-"));
   // A deliberately published history is viewable without a session; a public
   // database flag alone does not publish other members' profiles anonymously.
@@ -323,6 +323,7 @@ try {
     values (${user.id},'athlete.history_admin_published','athlete_source_history',${historyKey},
       ${JSON.stringify({ athleteId: publishedAthlete.id, athleteConsentRecorded: false })}::jsonb,'Synthetic explicit publication approval')`;
   const publicProfile = await publicRead("published-history-fixture");
+  assert(!("results" in publicProfile), "Public payload must not duplicate profileResults in legacy row form");
   assert.equal(publicProfile.athlete.display_name, "Published History Athlete");
   assert.equal(
     publicProfile.searchIndexable,
@@ -575,7 +576,11 @@ try {
   const directory = await fetch(origin + "/athletes", {
     headers: { "X-Athrecs-Profile-Indexable": "1" },
   });
-  assert.match(directory.headers.get("x-robots-tag"), /noindex/);
+  assert.equal(directory.headers.get("x-robots-tag"), "index, follow");
+  const filteredDirectory = await fetch(origin + "/athletes?q=published", {
+    headers: { "X-Athrecs-Profile-Indexable": "1" },
+  });
+  assert.equal(filteredDirectory.headers.get("x-robots-tag"), "noindex, follow", "Request headers cannot make search filters indexable");
   await sql`update athlete_public_shares set search_indexable=false where user_id=${user.id}`;
   await expectSearch("published-history-fixture", false);
   await expectSitemap(false);
@@ -616,7 +621,7 @@ try {
   await sql`update athletes set profile_type='Public figure' where id=${publishedAthlete.id}`;
   await sql`update results set result_visibility='private' where athlete_id=${publishedAthlete.id}`;
   assert.equal(
-    (await publicRead("published-history-fixture")).results.length,
+    (await publicRead("published-history-fixture")).profileResults.length,
     0,
     "Even a public-figure label cannot expose private result rows anonymously",
   );
