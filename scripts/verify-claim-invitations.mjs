@@ -424,7 +424,7 @@ try {
   );
 
   // Imported source profiles complete the same real HTTP/auth/approval/account flow.
-  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(991404,'synthetic-source-runner','Synthetic Source Runner','public')`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(991490,'synthetic-source-runner','Synthetic Source Runner','public')`;
   const sourcePerformances = [
     {
       year: 2026,
@@ -463,12 +463,12 @@ try {
       labels: p.labels ?? [],
       sourceUrls: ["https://example.test/norwich.pdf"],
     });
-  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at) values(991404,'Run Norwich official results','synthetic-http-source','https://example.test/norwich.pdf',now(),true,array[2020,2026],array[2020,2026],${JSON.stringify(sourcePerformances)}::jsonb,now())`;
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at) values(991490,'Run Norwich official results','synthetic-http-source','https://example.test/norwich.pdf',now(),true,array[2020,2026],array[2020,2026],${JSON.stringify(sourcePerformances)}::jsonb,now())`;
   const [sourceRef] =
-    await sql`select id from athlete_claimable_results where athlete_id=991404 and event_name='Run Norwich 2026'`;
+    await sql`select id from athlete_claimable_results where athlete_id=991490 and event_name='Run Norwich 2026'`;
   const sourceInvitation = await call("createStaffClaimInvitation", {
     ...input,
-    athleteId: 991404,
+    athleteId: 991490,
   });
   const sourceInput = {
     resultId: sourceRef.id,
@@ -513,22 +513,22 @@ try {
     () => visibility("hideResultFromMyProfile", { resultId: sourceRef.id }, other.token),
     /not linked/,
   );
-  await sql`insert into network_audit_log(action,entity_type,entity_id,after_value) values('athlete.history_admin_published','athlete','Run Norwich official results:synthetic-http-source','{"athleteId":991404}'::jsonb)`;
+  await sql`insert into network_audit_log(action,entity_type,entity_id,after_value) values('athlete.history_admin_published','athlete','Run Norwich official results:synthetic-http-source','{"athleteId":991490}'::jsonb)`;
   const publication = await server.ssrLoadModule("/src/lib/athrecs/athlete-publication.server.ts");
   assert.equal(
-    (await publication.loadPublishedSourceHistories(sql, 991404))[0].performances.length,
+    (await publication.loadPublishedSourceHistories(sql, 991490))[0].performances.length,
     2,
   );
   await visibility("hideResultFromMyProfile", { resultId: sourceRef.id });
   assert.equal(
-    (await publication.loadPublishedSourceHistories(sql, 991404))[0].performances.length,
+    (await publication.loadPublishedSourceHistories(sql, 991490))[0].performances.length,
     1,
   );
-  assert.equal((await publication.countPublishedSourceResults(sql, [991404])).get(991404), 1);
+  assert.equal((await publication.countPublishedSourceResults(sql, [991490])).get(991490), 1);
   assert((await visibility("getMyProfileResultVisibility")).hiddenResultIds.includes(sourceRef.id));
   await visibility("restoreResultToMyProfile", { resultId: sourceRef.id });
   assert.equal(
-    (await publication.loadPublishedSourceHistories(sql, 991404))[0].performances.length,
+    (await publication.loadPublishedSourceHistories(sql, 991490))[0].performances.length,
     2,
   );
   assert(
