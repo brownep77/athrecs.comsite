@@ -171,6 +171,7 @@ try {
     ["DNF", "5000 Metres"],
     ["7.90", "LJ"],
     ["18.2", "Shot Put"],
+    ["20.10", "Weight Throw"],
     ["8100", "Decathlon"],
     ["210.5", "24 Hours"],
   ])

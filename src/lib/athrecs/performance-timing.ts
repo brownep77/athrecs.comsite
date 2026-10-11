@@ -12,7 +12,7 @@ export type PerformanceTiming = z.infer<typeof performanceTimingSchema>;
 
 export function hasTimedMark(performance: string, discipline = ""): boolean {
   if (
-    /jump|vault|shot|^(?:LJ|TJ|HJ|PV|SP|DT|JT|HT|WT)(?:\d.*)?$|discus|javelin|hammer|points|pentathlon|heptathlon|decathlon|(?:6|12|24|48)\s*(?:h|hours)/i.test(
+    /jump|vault|shot|throw|^(?:LJ|TJ|HJ|PV|SP|DT|JT|HT|WT)(?:\d.*)?$|discus|javelin|hammer|points|pentathlon|heptathlon|decathlon|(?:6|12|24|48)\s*(?:h|hours)/i.test(
       discipline,
     )
   )
