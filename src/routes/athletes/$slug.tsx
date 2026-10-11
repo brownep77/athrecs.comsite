@@ -123,7 +123,7 @@ export const Route = createFileRoute("/athletes/$slug")({
   head: ({ params, loaderData }) => {
     const preview = loaderData?.kind === "public-preview" ? loaderData.preview : null;
     const previewTitle = preview
-      ? `${preview.displayName} — Biography & latest results | ${SITE_NAME}`
+      ? `${preview.displayName} — ${preview.sports.length ? `${preview.sports.join(" & ")} results & biography` : "Biography & latest results"} | ${SITE_NAME}`
       : "";
     const previewBio = preview?.biography.join(" ") ?? "";
     const previewUrl = preview ? absoluteUrl(`/athletes/${preview.slug}`) : "";
