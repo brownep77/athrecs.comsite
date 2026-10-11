@@ -192,6 +192,11 @@ arbitrary alphabetic words and conflicting editions remain held. This title
 comparison does not relax distance, count, repeated-runner or identity guards,
 and does not verify identities or publish any result history.
 
+French masculine `1er` detail prefixes are accepted only as that exact numeric
+ordinal followed by whitespace. The full remaining title, date, distance, counts
+and unique runner links must still agree; preserve both original titles. Other
+`er` forms, absent whitespace and contradictory event metadata remain held.
+
 French `ère` detail prefixes (including DUV's displayed `1ère` and `6ère`)
 follow the same numeric-prefix rule: require the entire remaining title and
 all date, distance, count and runner-link checks, preserving both source titles.
