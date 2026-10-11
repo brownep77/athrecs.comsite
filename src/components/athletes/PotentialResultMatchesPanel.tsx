@@ -43,7 +43,7 @@ const INITIAL_MATCH_COUNT = 8;
 const CLAIM_STATUS_LABELS: Record<PotentialResultClaimStatus, string> = {
   pending: "Claim pending",
   needs_info: "More information needed",
-  approved: "Claim approved",
+  approved: "Claim complete",
   rejected: "Previous claim not approved",
   withdrawn: "Previous claim withdrawn",
 };
@@ -247,7 +247,8 @@ export function PotentialResultMatchesPanel() {
           </div>
           <p className="mt-2 text-sm leading-6 text-muted">
             These are suggestions, not confirmed ownership. Confirm your result, or choose Not me to
-            dismiss that athlete. All new ownership claims go to staff for an identity check.
+            dismiss that athlete. Straightforward claims complete immediately; claims needing
+            clarification go to staff.
           </p>
           {data.searchedNames.length ? (
             <p className="mt-2 text-xs text-subtle">Checked: {data.searchedNames.join(" · ")}</p>

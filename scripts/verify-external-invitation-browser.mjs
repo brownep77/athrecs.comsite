@@ -89,6 +89,8 @@ try {
   assert(code, "Real email-code signup delivery is intercepted");
   await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
   await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
+  await page.getByLabel("Full racing name").fill("Avery Invitation Athlete");
+  await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
   await page.getByText("Synthetic Invitation 10K", { exact: true }).waitFor();
   assert.equal(
     new URL(page.url()).searchParams.get("invitation"),
@@ -111,22 +113,22 @@ try {
   assert.equal(user.emailVerified, true);
   assert.equal(
     (await sql`select user_id from athlete_private_profiles where user_id=${user.id}`).length,
-    0,
-    "Claim does not require a completed private profile",
+    1,
+    "Only the racing name is saved; other profile details remain optional",
   );
   await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
-  await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
   const claims =
     await sql`select status,claimant_user_id from result_claims where result_id=993401`;
-  assert.deepEqual(claims, [{ status: "pending", claimant_user_id: user.id }]);
+  assert.deepEqual(claims, [{ status: "approved", claimant_user_id: user.id }]);
   assert.equal(
     (await sql`select user_id from athlete_claim_invitations where id=${invitation.id}`)[0].user_id,
     user.id,
   );
   assert.equal(
     (await sql`select athlete_id from athlete_account_links where athlete_id=993401`).length,
-    0,
-    "Only staff review grants ownership",
+    1,
+    "Matching invitation recipient self-confirms the existing profile",
   );
   for (const width of [390, 1280]) {
     await page.setViewportSize({ width, height: 900 });
@@ -138,7 +140,7 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    "PASS: real browser private invitation → email-code signup → exact selected profile → pending claim, with mobile/desktop layout and no automatic ownership. Synthetic data only.",
+    "PASS: real browser private invitation → email-code signup → exact selected profile → completed self-confirmed claim, with mobile/desktop layout. Synthetic data only.",
   );
 } catch (error) {
   await mkdir("artifacts", { recursive: true });

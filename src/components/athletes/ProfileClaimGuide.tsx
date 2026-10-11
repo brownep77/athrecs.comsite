@@ -125,7 +125,9 @@ export function ProfileClaimGuide({
         {pending
           ? pending.status === "needs_info"
             ? "Your claim needs more information"
-            : "Claim received — awaiting identity review"
+            : pending.conflictReason || pending.staffNote
+              ? "Claim received — staff check needed"
+              : "Complete your earlier claim"
           : "Your account is ready. Finish claiming your athlete profile."}
       </h2>
       {pending ? (
@@ -134,11 +136,13 @@ export function ProfileClaimGuide({
             Your claim for {pending.athleteName} has been received.{" "}
             {pending.status === "needs_info"
               ? "Open it to read what our team needs."
-              : "Our team will check your identity before linking the profile. You do not need to submit it again."}
+              : pending.conflictReason || pending.staffNote
+                ? "Open it to see why a staff check is needed."
+                : "Open it and confirm to complete it under the simplified claim process."}
           </p>
           <Button asChild className="h-auto min-h-11 max-w-full whitespace-normal py-3">
             <Link to="/claim-results" search={{ resultId: pending.resultId }}>
-              View my submitted claim
+              Continue my claim
             </Link>
           </Button>
         </>

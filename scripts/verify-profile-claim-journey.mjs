@@ -143,13 +143,13 @@ try {
     "Adding stays in the draft until confirmation",
   );
   await page.getByRole("button", { name: "Confirm my 2 selected results", exact: true }).click();
-  await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
   const [claim] =
     await sql`select status from result_claims where claimant_user_id=${plain.user.id}`;
-  assert.equal(claim.status, "pending");
+  assert.equal(claim.status, "approved");
   assert.equal(
     (await sql`select * from athlete_account_links where user_id=${plain.user.id}`).length,
-    0,
+    1,
   );
   await page.reload({ waitUntil: "networkidle" });
   await page.getByText(/Previous review saved/).waitFor();
@@ -173,13 +173,13 @@ try {
     1,
   );
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
-  await page.getByRole("link", { name: "View my submitted claim" }).waitFor();
+  assert.equal(await page.getByRole("link", { name: "Continue my claim" }).count(), 0);
   assert.equal(
     await page.getByRole("link", { name: "Finish my profile claim", exact: true }).count(),
     0,
   );
   console.log(
-    "PASS: Missing name -> same selected profile -> remembered navigation -> one pending claim -> clear receipt after reload.",
+    "PASS: Missing name -> same selected profile -> remembered navigation -> one completed claim -> clear receipt after reload.",
   );
 
   const invited = await account("invited-claim@example.test");
@@ -203,6 +203,10 @@ try {
     ),
   );
   await resume.click();
+  await invited.page.getByLabel("Full racing name").fill("Invited Test Runner");
+  await invited.page
+    .getByRole("button", { name: "Continue to my profile claim", exact: true })
+    .click();
   await invited.page
     .getByRole("button", { name: "Confirm all results are mine", exact: true })
     .waitFor();
@@ -211,7 +215,7 @@ try {
   await invited.page
     .getByRole("button", { name: "Confirm all results are mine", exact: true })
     .click();
-  await invited.page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
+  await invited.page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
   await invited.page.screenshot({ path: "artifacts/claim-received-mobile.png", fullPage: true });
   assert.equal(
     (await sql`select * from result_claims where claimant_user_id=${invited.user.id}`).length,
@@ -222,7 +226,7 @@ try {
   assert.equal(bound.user_id, invited.user.id);
   assert(bound.claim_id);
   console.log(
-    "PASS: Verified blank-name account resumes its email invitation on mobile and submits exactly one claim without granting ownership.",
+    "PASS: Verified blank-name account resumes its email invitation on mobile and completes exactly one self-confirmed profile claim.",
   );
   assert.deepEqual(errors, []);
 } finally {

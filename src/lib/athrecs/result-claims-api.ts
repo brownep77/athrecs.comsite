@@ -24,6 +24,7 @@ import { ensureAthrecsSeeded } from "./seed.server";
 import { queueClaimConflict, deliverClaimConflictAlerts } from "./result-claim-alerts.server";
 
 export type ResultClaimStatus = "pending" | "needs_info" | "approved" | "rejected" | "withdrawn";
+export type ClaimConfirmationMethod = "unrecorded" | "athlete" | "staff";
 
 export type ResultClaimVerificationMethod =
   "bib" | "official_email" | "club_confirmation" | "other";
@@ -55,6 +56,9 @@ export type ResultClaimListItem = ClaimableResult & {
   claimId: number;
   claimantEmail: string;
   status: ResultClaimStatus;
+  confirmationMethod: ClaimConfirmationMethod;
+  confirmedAt: string | null;
+  claimantRole: "athlete" | "guardian";
   verificationMethod: ResultClaimVerificationMethod;
   evidenceText: string;
   evidenceUrl: string | null;
@@ -72,6 +76,9 @@ type ClaimRow = {
   claim_id: number;
   claimant_email: string;
   claim_status: ResultClaimStatus;
+  confirmation_method: ClaimConfirmationMethod;
+  confirmed_at: string | null;
+  claimant_role: "athlete" | "guardian";
   verification_method: ResultClaimVerificationMethod;
   evidence_text: string;
   evidence_url: string | null;
@@ -202,6 +209,9 @@ function mapClaim(row: ClaimRow): ResultClaimListItem {
     categoryPlace: row.category_place,
     claimantEmail: row.claimant_email,
     status: row.claim_status,
+    confirmationMethod: row.confirmation_method,
+    confirmedAt: row.confirmed_at,
+    claimantRole: row.claimant_role,
     verificationMethod: row.verification_method,
     evidenceText: row.evidence_text,
     evidenceUrl: row.evidence_url,
@@ -221,6 +231,9 @@ const CLAIM_SELECT = `
     claim.id as claim_id,
     claim.claimant_email,
     claim.status as claim_status,
+    claim.confirmation_method,
+    claim.confirmed_at::text as confirmed_at,
+    claim.claimant_role,
     claim.verification_method,
     claim.evidence_text,
     claim.evidence_url,
@@ -486,6 +499,86 @@ export const getClaimableResult = createServerFn({ method: "GET" })
     };
   });
 
+// This checks eligibility for self-confirmation, not proof of identity. Run
+// under the athlete lock; client-supplied names, status or URLs cannot skip it.
+async function selfConfirmationReviewReason(
+  sql: Awaited<ReturnType<typeof getSql>>,
+  userId: string,
+  athleteId: number,
+  athleteName: string,
+  claimantRole: "athlete" | "guardian",
+): Promise<string | null> {
+  const [identity] = await sql<{
+    name: string;
+    full_name: string | null;
+    display_name: string | null;
+    previous_names: string[] | null;
+    child_review: boolean;
+    protected_profile: boolean;
+    revoked: boolean;
+    guardian_claim: boolean;
+    dob_mismatch: boolean;
+  }>`
+    select account_user.name, profile.full_name, profile.display_name, profile.previous_names,
+      (
+        athlete.date_of_birth > current_date - interval '18 years'
+        or profile.date_of_birth > current_date - interval '18 years'
+        or exists (
+          select 1 from athlete_claimable_results r
+          where r.athlete_id = athlete.id and r.available
+            and r.event_date ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+            and r.event_date >= to_char(current_date - interval '18 months', 'YYYY-MM-DD')
+            and upper(regexp_replace(coalesce(r.category, ''), '[^A-Za-z0-9]', '', 'g'))
+              ~ '^(J[MWF]|JU|[MWF]?U[0-9]|UNDER[0-9]|JUNIOR|JUVENILE)'
+        )
+        or exists (
+          select 1 from athlete_source_histories h
+          cross join lateral jsonb_array_elements(h.performances) p
+          where h.athlete_id = athlete.id
+            and coalesce(p->>'year', '') ~ '^[0-9]{4}$'
+            and coalesce(p->>'year', '') >= to_char(current_date - interval '2 years', 'YYYY')
+            and upper(regexp_replace(coalesce(p->>'ageGroup', ''), '[^A-Za-z0-9]', '', 'g'))
+              ~ '^(J[MWF]|JU|[MWF]?U[0-9]|UNDER[0-9]|JUNIOR|JUVENILE)'
+        )
+      ) as child_review,
+      athlete.profile_type = 'Public figure' as protected_profile,
+      exists (select 1 from athlete_account_links link
+        where link.athlete_id = athlete.id and link.status = 'revoked') as revoked,
+      exists (select 1 from result_claims claim where claim.athlete_id = athlete.id
+        and claim.claimant_user_id = ${userId} and claim.claimant_role = 'guardian') as guardian_claim,
+      (athlete.date_of_birth is not null and profile.date_of_birth is not null
+        and athlete.date_of_birth <> profile.date_of_birth) as dob_mismatch
+    from "user" account_user
+    cross join athletes athlete
+    left join athlete_private_profiles profile on profile.user_id = account_user.id
+    where account_user.id = ${userId} and athlete.id = ${athleteId}
+  `;
+  if (claimantRole === "guardian" || identity?.child_review || identity?.guardian_claim)
+    return "Child or guardian claim: staff must confirm the responsible adult's authority and consent privately before linking this profile. Do not post a child's ID or personal documents in public links.";
+  if (identity?.revoked)
+    return "This profile has a revoked ownership link. Staff must review before it can be linked again.";
+  if (identity?.protected_profile)
+    return "This public-figure profile requires a staff ownership check.";
+  if (identity?.dob_mismatch)
+    return "Account and athlete details differ. Staff must resolve the discrepancy before linking this profile.";
+  const nameMatch =
+    identity &&
+    scorePotentialResultNameMatch(
+      uniquePotentialMatchNames([
+        identity.name,
+        identity.full_name,
+        identity.display_name,
+        ...(identity.previous_names ?? []),
+      ]),
+      athleteName,
+      {},
+      {},
+    );
+  if (!nameMatch || nameMatch.confidence === "possible")
+    return "The account and athlete names need clarification. Staff must check the connection before linking this profile.";
+  return null;
+}
+
 export const submitResultClaim = createServerFn({ method: "POST" })
   .middleware([privateClaimMiddleware, authMiddleware])
   .validator(
@@ -496,6 +589,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       evidenceUrl2?: string;
       evidenceUrl3?: string;
       declarationAccepted: boolean;
+      claimantRole?: "athlete" | "guardian";
       review?: ProfileResultReviewInput;
     }) => ({
       resultId: resultIdentifier(input?.resultId),
@@ -506,6 +600,8 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       evidenceUrl2: optionalHttpsUrl(input?.evidenceUrl2),
       evidenceUrl3: optionalHttpsUrl(input?.evidenceUrl3),
       declarationAccepted: input?.declarationAccepted === true,
+      claimantRole:
+        input?.claimantRole === "guardian" ? ("guardian" as const) : ("athlete" as const),
       review:
         input?.review === undefined ? undefined : profileResultReviewInput.parse(input.review),
     }),
@@ -603,15 +699,25 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         for update
       `;
 
-      const owners = await tx<{ user_id: string; user_email: string }>`
-        select user_id, user_email
+      const owners = await tx<{
+        user_id: string;
+        user_email: string;
+        source_claim_id: number | null;
+      }>`
+        select user_id, user_email, source_claim_id
         from athlete_account_links
         where athlete_id = ${result.athlete_id} and status = 'active'
         limit 1
       `;
       const owner = owners[0];
       const summary = data.review
-        ? await saveProfileResultReview(tx, context.userId, result.athlete_id, data.review)
+        ? await saveProfileResultReview(
+            tx,
+            context.userId,
+            result.athlete_id,
+            data.review,
+            data.claimantRole,
+          )
         : null;
       if (summary && !summary.reused)
         await tx`update athlete_profile_result_confirmations
@@ -622,11 +728,13 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         athleteName: result.athlete_name,
       };
       if (owner?.user_id === context.userId) {
+        if (summary && !summary.reused)
+          await tx`update athlete_profile_result_confirmations set claim_id=${owner.source_claim_id} where id=${summary.id}::uuid`;
         return {
           status: "approved" as const,
           alreadyOwned: true,
           summary: summary ? { ...summary, ...summaryEmail } : null,
-          claimId: null,
+          claimId: owner.source_claim_id,
           claimantUserId: context.userId,
           email: null,
           isConflict: false,
@@ -687,16 +795,23 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         existing[0]?.status === "needs_info" ||
         existing[0]?.status === "rejected" ||
         Boolean(reviewedIdentity[0]?.reviewed);
+      const reviewReason = await selfConfirmationReviewReason(
+        tx,
+        context.userId,
+        result.athlete_id,
+        result.athlete_name,
+        data.claimantRole,
+      );
       const conflictReason = owner
         ? "This athlete profile is already linked to another account. Staff identity checks are required."
         : otherClaimCount > 0
           ? "Another account has claimed this athlete profile. Staff identity checks are required."
           : previouslyReviewed
             ? "This claim was previously reviewed by ATHRECS staff. A new submission requires another staff review."
-            : null;
-      // A verified mailbox, matching name and self-supplied URL are not proof
-      // of athlete identity. Only staff review can create a new ownership link.
-      const nextStatus = "pending" as const;
+            : reviewReason;
+      // Completion records the athlete's declaration. It never verifies a
+      // performance, upgrades source evidence, or implies a photo/ID check.
+      const nextStatus = conflictReason ? ("pending" as const) : ("approved" as const);
 
       let claimId: number;
       if (existing[0]) {
@@ -706,11 +821,15 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             athlete_id = ${result.athlete_id},
             claimant_email = ${claimantEmail},
             status = ${nextStatus},
-            verification_method = ${data.verificationMethod},
-            evidence_text = ${invitation ? `Staff invitation suggestion (not identity verification): ${invitation.match_note}` : data.evidenceText},
-            evidence_url = ${data.evidenceUrl},
-            evidence_url_2 = ${data.evidenceUrl2},
-            evidence_url_3 = ${data.evidenceUrl3},
+            claimant_role = case when claimant_role = 'guardian' then 'guardian' else ${data.claimantRole} end,
+            confirmation_method = case when ${nextStatus === "approved"} then 'athlete' else confirmation_method end,
+            confirmed_at = case when ${nextStatus === "approved"} then now() else confirmed_at end,
+            evidence_text = case when ${Boolean(invitation)} then concat_ws(E'\n', nullif(evidence_text, ''),
+              ${invitation ? `Staff invitation suggestion (not identity verification): ${invitation.match_note}` : null}::text)
+              else evidence_text end,
+            evidence_url = coalesce(${data.evidenceUrl}, evidence_url),
+            evidence_url_2 = coalesce(${data.evidenceUrl2}, evidence_url_2),
+            evidence_url_3 = coalesce(${data.evidenceUrl3}, evidence_url_3),
             declaration_accepted = true,
             conflict_reason = ${conflictReason},
             staff_note = case when ${previouslyReviewed} then staff_note else null end,
@@ -728,20 +847,44 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           insert into result_claims (
             result_id, source_result_id, source_evidence, athlete_id, claimant_user_id, claimant_email, status,
             verification_method, evidence_text, evidence_url, evidence_url_2, evidence_url_3,
-            declaration_accepted, conflict_reason, staff_note, reviewed_at
+            declaration_accepted, conflict_reason, staff_note, reviewed_at,
+            claimant_role, confirmation_method, confirmed_at
           ) values (
             ${result.result_id > 0 ? result.result_id : null}, ${result.result_id < 0 ? -result.result_id : null}, (select performance from source_history_claim_results where id=${result.result_id < 0 ? -result.result_id : null}), ${result.athlete_id}, ${context.userId}, ${claimantEmail},
             ${nextStatus}, ${data.verificationMethod}, ${invitation ? `Staff invitation suggestion (not identity verification): ${invitation.match_note}` : data.evidenceText},
             ${data.evidenceUrl}, ${data.evidenceUrl2}, ${data.evidenceUrl3},
-            true, ${conflictReason}, null, null
+            true, ${conflictReason}, null, null,
+            ${data.claimantRole}, ${nextStatus === "approved" ? "athlete" : "unrecorded"},
+            case when ${nextStatus === "approved"} then now() else null end
           )
           returning id
         `;
         claimId = inserted[0].id;
       }
 
+      if (nextStatus === "approved") {
+        await tx`
+          insert into athlete_account_links (
+            athlete_id, user_id, user_email, source_claim_id, confirmation_method
+          ) values (
+            ${result.athlete_id}, ${context.userId}, ${claimantEmail}, ${claimId}, 'athlete'
+          )
+        `;
+        // One confirmation links the existing profile and completes its other
+        // unreviewed submissions from this account. Never create an athlete.
+        await tx`
+          update result_claims set status = 'approved', confirmation_method = 'athlete',
+            confirmed_at = now(), conflict_reason = null, updated_at = now()
+          where athlete_id = ${result.athlete_id} and claimant_user_id = ${context.userId}
+            and status = 'pending' and reviewed_by_user_id is null
+            and reviewed_by_email is null and claimant_role = 'athlete'
+        `;
+      }
+
       if (summary)
-        await tx`update athlete_profile_result_confirmations set claim_id=${claimId} where id=${summary.id}::uuid`;
+        await tx`update athlete_profile_result_confirmations set claim_id=${claimId},
+          email_payload=jsonb_set(email_payload,'{status}',to_jsonb(${nextStatus}::text))
+          where id=${summary.id}::uuid`;
       if (invitation)
         await tx`update athlete_claim_invitations set claim_id=${claimId},user_id=coalesce(user_id,${context.userId}) where id=${invitation.id}`;
       const isConflict = Boolean(owner) || otherClaimCount > 0;
@@ -782,10 +925,23 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           console.error("[claim-alerts] immediate delivery deferred to the worker");
         }
       }
-      await notifyResultClaimSubmitted(outcome.email, !outcome.isConflict);
+      await notifyResultClaimSubmitted(outcome.email, { notifyStaff: !outcome.isConflict });
+    }
+    if (outcome.status === "approved" && !outcome.alreadyOwned) {
+      await syncAthleteAccountAfterClaim(outcome.claimantUserId);
+      if (outcome.email && !outcome.summary)
+        await notifyResultClaimSubmitted(outcome.email, {
+          notifyStaff: false,
+          selfConfirmed: true,
+        });
     }
 
-    if (outcome.summary && !outcome.summary.reused && outcome.email) {
+    if (
+      outcome.status === "pending" &&
+      outcome.summary &&
+      !outcome.summary.reused &&
+      outcome.email
+    ) {
       if (outcome.isConflict) {
         try {
           await deliverClaimConflictAlerts(sql, outcome.claimId);
@@ -793,7 +949,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           console.error("[claim-alerts] immediate delivery deferred to the worker");
         }
       } else {
-        await notifyResultClaimSubmitted(outcome.email, true, false);
+        await notifyResultClaimSubmitted(outcome.email, { notifyAthlete: false });
       }
     }
     return {
@@ -989,15 +1145,17 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
 
         await tx`
           insert into athlete_account_links (
-            athlete_id, user_id, user_email, source_claim_id, status, linked_at, updated_at
+            athlete_id, user_id, user_email, source_claim_id, status, linked_at, updated_at,
+            confirmation_method
           ) values (
             ${claim.athlete_id}, ${claim.claimant_user_id}, ${claim.claimant_email},
-            ${claim.id}, 'active', now(), now()
+            ${claim.id}, 'active', now(), now(), 'staff'
           )
           on conflict (athlete_id) do update set
             user_id = excluded.user_id,
             user_email = excluded.user_email,
             source_claim_id = excluded.source_claim_id,
+            confirmation_method = 'staff',
             status = 'active',
             updated_at = now()
         `;
@@ -1013,6 +1171,9 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
         update result_claims
         set
           status = ${nextStatus},
+          confirmation_method = case when ${nextStatus === "approved"} then 'staff' else confirmation_method end,
+          confirmed_at = case when ${nextStatus === "approved"} then now() else confirmed_at end,
+          conflict_reason = case when ${nextStatus === "approved"} then null else conflict_reason end,
           staff_note = ${data.staffNote || null},
           reviewed_by_user_id = ${context.userId},
           reviewed_by_email = ${context.staffEmail},
@@ -1024,15 +1185,28 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
       if (nextStatus === "approved") {
         await tx`
           update result_claims
+          set status = 'approved', confirmation_method = 'staff', confirmed_at = now(),
+            conflict_reason = null,
+            staff_note = concat_ws(E'\n', staff_note,
+              ${`Profile ownership approved with claim #${claim.id}: ${data.staffNote}`}::text),
+            reviewed_by_user_id = ${context.userId},
+            reviewed_by_email = ${context.staffEmail}, reviewed_at = now(), updated_at = now()
+          where athlete_id = ${claim.athlete_id}
+            and claimant_user_id = ${claim.claimant_user_id}
+            and id <> ${claim.id} and status in ('pending', 'needs_info')
+        `;
+        await tx`
+          update result_claims
           set
             status = 'rejected',
-            conflict_reason = 'Another verified account was approved for this athlete profile.',
+            conflict_reason = 'Another account was approved for this athlete profile after staff review.',
             staff_note = coalesce(staff_note, 'Automatically closed after an ownership approval.'),
             reviewed_by_user_id = ${context.userId},
             reviewed_by_email = ${context.staffEmail},
             reviewed_at = now(),
             updated_at = now()
           where athlete_id = ${claim.athlete_id}
+            and claimant_user_id <> ${claim.claimant_user_id}
             and id <> ${claim.id}
             and status in ('pending', 'needs_info')
         `;
@@ -1130,7 +1304,9 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
           reviewed_by_email = ${context.staffEmail},
           reviewed_at = now(),
           updated_at = now()
-        where id = ${claim.id}
+        where athlete_id = ${claim.athlete_id}
+          and claimant_user_id = ${claim.claimant_user_id}
+          and status = 'approved'
       `;
 
       return {

@@ -229,27 +229,30 @@ try {
       declarationAccepted: false,
     }),
   );
+  // A supplied source ID finds suggestions but does not bypass a name discrepancy.
+  const unmatchedNameClaim = await rpc("result-claims-api", "submitResultClaim", {
+    resultId: knownResult,
+    declarationAccepted: true,
+  });
+  assert.equal(unmatchedNameClaim.status, "pending");
+  await rpc("athlete-account-api", "saveMyAthleteRacingName", {
+    fullName: "Fixture Known Runner",
+    privacyAcknowledged: true,
+  });
   const claim = await rpc("result-claims-api", "submitResultClaim", {
     resultId: knownResult,
     declarationAccepted: true,
   });
-  assert.equal(claim.status, "pending");
+  assert.equal(claim.status, "approved");
   assert.equal(
     (await sql`select * from athlete_account_links where athlete_id=${known}`).length,
-    0,
+    1,
   );
-  // The real staff review service is exercised in verify-result-conflict-flow.
-  // This downstream identity/profile test supplies an explicitly reviewed fixture.
-  await sql`insert into athlete_account_links (athlete_id,user_id,user_email,source_claim_id)
-    select athlete_id,claimant_user_id,claimant_email,id from result_claims where id=${claim.claimId}`;
-  await sql`update result_claims set status='approved', reviewed_at=now(),
-    reviewed_by_email='synthetic-reviewer@example.test', staff_note='Synthetic reviewed identity fixture'
-    where id=${claim.claimId}`;
-  const { syncAthleteAccountAfterClaim } = await server.ssrLoadModule(
-    "/src/lib/athrecs/athlete-account-api.ts",
-  );
-  await syncAthleteAccountAfterClaim(account.userId);
-  console.log("Imports, source matching, dismissals and staff-reviewed ownership fixture passed.");
+  const [claimAudit] =
+    await sql`select confirmation_method, reviewed_at from result_claims where id=${claim.claimId}`;
+  assert.equal(claimAudit.confirmation_method, "athlete");
+  assert.equal(claimAudit.reviewed_at, null);
+  console.log("Imports, source matching, dismissals and real self-confirmed ownership passed.");
   const after = await rpc("athlete-account-api", "getMyAthleteAccount");
   assert.equal(after.athleteProfileId, account.athleteProfileId);
   assert.equal(after.athleteNumber, account.athleteNumber);

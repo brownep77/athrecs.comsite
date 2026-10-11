@@ -31,7 +31,7 @@ export function ProfileSignIn({
         Sign in or create an account
       </Button>
       <p className="text-sm text-muted">
-        Claiming and editing a profile requires verified ownership.
+        Confirm ownership through the claim process before editing a profile.
       </p>
     </section>
   );

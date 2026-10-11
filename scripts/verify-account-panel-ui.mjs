@@ -113,15 +113,15 @@ try {
       .click();
     const dialog = page.getByRole("dialog");
     await dialog.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
-    await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
+    await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
     assert.deepEqual(
       (await database.query("select status from result_claims where result_id=990001")).rows,
-      [{ status: "pending" }],
+      [{ status: "approved" }],
     );
     assert.equal(
       (await database.query("select athlete_id from athlete_account_links where athlete_id=990001"))
         .rows.length,
-      0,
+      1,
     );
     await dialog.getByRole("button", { name: "Close", exact: true }).click();
     await go("Personal details");
@@ -129,15 +129,7 @@ try {
       await page.getByLabel("Display name", { exact: false }).inputValue(),
       "Unsaved sidebar draft",
     );
-    // The staff approval service is tested in verify-result-conflict-flow.
-    // Supply an explicitly reviewed fixture for the downstream race controls.
-    await database.exec(`
-      insert into athlete_account_links (athlete_id,user_id,user_email,source_claim_id)
-        select athlete_id,claimant_user_id,claimant_email,id from result_claims where result_id=990001;
-      update result_claims set status='approved', reviewed_at=now(),
-        reviewed_by_email='synthetic-reviewer@example.test', staff_note='Synthetic reviewed identity fixture'
-        where result_id=990001;
-    `);
+    // Use the ownership created by the real batch confirmation for downstream controls.
     await page.reload({ waitUntil: "networkidle" });
     await go("My races");
     await page.getByRole("searchbox", { name: "Search your results" }).fill("Sidebar Synthetic");

@@ -58,7 +58,7 @@ export const Route = createFileRoute("/claim-results")({
       {
         name: "description",
         content:
-          "Request ownership of a matched ATHRECS result. Staff check athlete identity before adding results to your private profile.",
+          "Confirm your matched ATHRECS profile and add its results to your account. Claims needing clarification go to staff review.",
       },
       { name: "robots", content: "noindex, nofollow, noarchive" },
       { name: "referrer", content: "no-referrer" },
@@ -70,7 +70,7 @@ export const Route = createFileRoute("/claim-results")({
 const STATUS_LABELS: Record<ResultClaimStatus, string> = {
   pending: "Awaiting review",
   needs_info: "More information needed",
-  approved: "Added to profile",
+  approved: "Claim complete",
   rejected: "Not approved",
   withdrawn: "Withdrawn",
 };
@@ -95,6 +95,7 @@ function ClaimResultsPage() {
   const [evidenceUrl2, setEvidenceUrl2] = useState("");
   const [evidenceUrl3, setEvidenceUrl3] = useState("");
   const [declaration, setDeclaration] = useState(false);
+  const [guardian, setGuardian] = useState(false);
   const [claimCompleted, setClaimCompleted] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const intro = useQuery({
@@ -152,6 +153,7 @@ function ClaimResultsPage() {
     setClaimCompleted(false);
     setDeclined(false);
     setDeclaration(false);
+    setGuardian(false);
     setMessage(null);
     setEvidenceUrl("");
     setEvidenceUrl2("");
@@ -159,6 +161,7 @@ function ClaimResultsPage() {
   }, [resultId, invitation, user?.id]);
 
   useEffect(() => {
+    setGuardian(currentClaim?.claimantRole === "guardian");
     if (currentClaim?.status !== "needs_info") return;
     setEvidenceUrl(currentClaim.evidenceUrl ?? "");
     setEvidenceUrl2(currentClaim.evidenceUrl2 ?? "");
@@ -175,6 +178,7 @@ function ClaimResultsPage() {
           evidenceUrl2,
           evidenceUrl3,
           declarationAccepted: declaration,
+          claimantRole: guardian ? "guardian" : "athlete",
         },
       }),
     onSuccess: (response) => {
@@ -182,8 +186,8 @@ function ClaimResultsPage() {
         response.alreadyOwned
           ? "This athlete identity is already linked to your private profile."
           : response.status === "approved"
-            ? "Result added to your private Athlete Profile."
-            : "Your claim is awaiting an ATHRECS identity check. Results will be added after approval.",
+            ? "Claim complete — athlete confirmed. Your profile and its results are now linked."
+            : "This claim needs a staff ownership check. See the reason below.",
       );
       setDeclaration(false);
       if (user) rememberClaim(user.id, null);
@@ -337,7 +341,7 @@ function ClaimResultsPage() {
             <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
               {invitation
                 ? intro.data?.emailBound === false
-                  ? "Create a free account or sign in and verify your email. You will return directly to this selected profile to confirm it is yours. ATHRECS checks your identity before linking the results."
+                  ? "Create a free account or sign in and verify your email. You will return directly to this selected profile to confirm it is yours. Claims needing clarification go to staff review."
                   : "Create a free account or sign in using the email address that received this invitation. Your selected profile will be waiting when you finish—there is no need to search again."
                 : "The athlete name and result are kept inside the secure claim journey."}
             </p>
@@ -360,7 +364,7 @@ function ClaimResultsPage() {
           <p>Then return to this link to confirm your profile and submit your claim.</p>
           <Button onClick={startSignIn}>Verify with an email code</Button>
         </section>
-      ) : !invitation && !account.data.fullName.trim() && !currentClaim && !result.data ? (
+      ) : !account.data.fullName.trim() && !currentClaim && (invitation || !result.data) ? (
         <section className="space-y-4 rounded-xl border border-accent/40 bg-surface p-5">
           <h2 className="font-display text-xl font-semibold">Next, enter your racing name</h2>
           <ClaimRacingName />
@@ -457,9 +461,9 @@ function ClaimResultsPage() {
               <div className="rounded-lg border border-cyan-200 bg-cyan-50 p-4 text-sm text-cyan-950">
                 <strong>Suggested profile: {result.data.athleteName}</strong>
                 <p className="mt-1">
-                  Confirm the race below belongs to you. After an identity check, we can link this
-                  athlete profile and its stored results to your account. You do not need to claim
-                  every race separately.
+                  Confirm the race below belongs to you to link this athlete profile and its stored
+                  results. Claims needing clarification go to staff. You do not need to claim every
+                  race separately.
                 </p>
                 {!currentClaim ? (
                   <Button
@@ -474,13 +478,15 @@ function ClaimResultsPage() {
                 ) : null}
               </div>
             ) : null}
-            {activeClaim?.status === "pending" ? (
+            {activeClaim?.status === "pending" &&
+            (activeClaim.conflictReason || activeClaim.staffNote) ? (
               <ClaimState
                 status={activeClaim.status}
-                title="Claim received — awaiting identity review"
+                title="Claim received — staff check needed"
                 note={
                   activeClaim.conflictReason ??
-                  "Your claim has been received. You do not need to submit it again. ATHRECS will check your identity before linking this athlete profile and its results to your account."
+                  activeClaim.staffNote ??
+                  "Staff will review this claim before linking your profile."
                 }
               >
                 <Button
@@ -498,8 +504,8 @@ function ClaimResultsPage() {
             ) : currentClaim?.status === "approved" || claimCompleted ? (
               <ClaimState
                 status="approved"
-                title="Result added"
-                note="This result and the linked athlete identity are now part of your private Athlete Profile."
+                title="Claim complete"
+                note="Your athlete profile and its stored results are linked. Claiming records your confirmation; timing-source checks and photo or ID verification are separate."
               >
                 <div className="flex flex-wrap gap-2">
                   <Button asChild>
@@ -527,13 +533,20 @@ function ClaimResultsPage() {
                   submitClaim.mutate();
                 }}
               >
+                {currentClaim?.status === "pending" ? (
+                  <p className="text-sm text-muted">
+                    You can now complete this earlier claim by confirming below. Your existing claim
+                    will be updated.
+                  </p>
+                ) : null}
                 {currentClaim?.status === "needs_info" ? (
                   <ClaimState
                     status="needs_info"
-                    title="A competing claim needs clarification"
+                    title="Your claim needs clarification"
                     note={
                       currentClaim.staffNote ||
-                      "ATHRECS needs to resolve another account's claim to this athlete identity."
+                      currentClaim.conflictReason ||
+                      "ATHRECS needs more information before linking this profile."
                     }
                   />
                 ) : currentClaim?.status === "rejected" ? (
@@ -547,6 +560,18 @@ function ClaimResultsPage() {
                   />
                 ) : null}
 
+                <label className="flex items-start gap-2 text-sm text-muted">
+                  <input
+                    type="checkbox"
+                    checked={guardian}
+                    onChange={(event) => {
+                      setGuardian(event.target.checked);
+                      setDeclaration(false);
+                    }}
+                  />
+                  I am claiming for a child as their parent or guardian. Staff will check my
+                  authority privately.
+                </label>
                 <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-accent/30 bg-accent-soft p-4 text-sm text-fg">
                   <input
                     type="checkbox"
@@ -560,10 +585,14 @@ function ClaimResultsPage() {
                     className="mt-0.5 size-5 rounded border-border"
                   />
                   <span>
-                    <strong className="block">This is my profile and the race shown is mine</strong>
+                    <strong className="block">
+                      {guardian
+                        ? "I am authorised to act for this child and this is their result"
+                        : "This is my profile and the race shown is mine"}
+                    </strong>
                     <span className="mt-1 block text-muted">
-                      I am asking ATHRECS to check my identity and link this profile and its stored
-                      results to my account. I do not need to claim each race separately.
+                      I confirm the profile and its stored results belong to the athlete shown. This
+                      is a self-confirmation, not a photo or ID check. I only need to claim once.
                     </span>
                   </span>
                 </label>
@@ -581,7 +610,9 @@ function ClaimResultsPage() {
                   )}
                   {submitClaim.isPending
                     ? "Submitting claim…"
-                    : "Yes, this is me — submit my profile claim"}
+                    : guardian
+                      ? "Submit guardian claim for review"
+                      : "Yes, this is me — complete my claim"}
                 </Button>
 
                 <details className="rounded-xl border border-border bg-elevated">
@@ -608,8 +639,8 @@ function ClaimResultsPage() {
                 ) : null}
 
                 <p className="text-center text-xs text-subtle">
-                  Links are optional to submit. Staff may ask for identity evidence before approval.
-                  Your profile remains private.
+                  Straightforward claims complete immediately. Staff review conflicts, discrepancies
+                  and child or guardian claims. Do not put personal ID documents in public links.
                 </p>
               </form>
             )}
@@ -683,14 +714,14 @@ function ClaimState({
 }) {
   return (
     <div className={`space-y-3 rounded-xl border p-4 ${statusClass(status)}`}>
-      <div className="flex items-center gap-2 font-semibold">
+      <h3 className="flex items-center gap-2 font-semibold">
         {status === "approved" ? (
           <CheckCircle2 className="size-5" aria-hidden="true" />
         ) : (
           <CircleAlert className="size-5" aria-hidden="true" />
         )}
         {title}
-      </div>
+      </h3>
       <p className="text-sm">{note}</p>
       {children ? <div>{children}</div> : null}
     </div>
@@ -738,6 +769,15 @@ function ClaimHistory({
                   </div>
                   <Badge className={statusClass(claim.status)}>{STATUS_LABELS[claim.status]}</Badge>
                 </div>
+                {claim.status === "approved" ? (
+                  <p className="mt-2 text-xs text-muted">
+                    {claim.confirmationMethod === "athlete"
+                      ? "Athlete confirmed · self-confirmation"
+                      : claim.confirmationMethod === "staff"
+                        ? "Staff reviewed"
+                        : "Linked profile · verification basis not recorded"}
+                  </p>
+                ) : null}
                 <div className="mt-3 flex items-end justify-between gap-3">
                   <div>
                     <p className="font-semibold tabular-nums text-fg">

@@ -94,8 +94,13 @@ export async function saveProfileResultReview(
   userId: string,
   athleteId: number,
   input: ProfileResultReviewInput,
+  claimantRole: "athlete" | "guardian" = "athlete",
 ) {
   const inputHash = hash({
+    // A fresh explicit confirmation can complete a pre-policy pending review.
+    // Its old audit/receipt stays immutable; retries of this policy are idempotent.
+    policy: "self-confirmation-v1",
+    claimantRole,
     athleteId,
     snapshot: input.snapshot,
     includedKeys: [...input.includedKeys].sort(),

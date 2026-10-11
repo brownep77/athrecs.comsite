@@ -125,17 +125,23 @@ try {
   await confirmation
     .getByRole("button", { name: "Confirm all results are mine", exact: true })
     .click();
-  await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
   assert.deepEqual(await sql`select status from result_claims where result_id=991601`, [
-    { status: "pending" },
+    { status: "approved" },
   ]);
   assert.equal(
     (await sql`select athlete_id from athlete_account_links where athlete_id=991601`).length,
-    0,
+    1,
   );
   await confirmation.getByRole("button", { name: "Close", exact: true }).click();
-  await match.getByRole("link", { name: "View claim", exact: true }).click();
+  assert.equal(
+    await match.count(),
+    0,
+    "Completed ownership removes the athlete from potential matches",
+  );
+  await page.goto(`${origin}/claim-results?resultId=991601`, { waitUntil: "networkidle" });
   await page.getByText(/Previous review saved/).waitFor();
+  await page.getByText(/Claim complete — your profile is linked/).waitFor();
   assert.equal(await page.getByText(/Another account has already claimed/).count(), 0);
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));

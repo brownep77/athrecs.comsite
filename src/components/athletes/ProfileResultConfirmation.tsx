@@ -48,6 +48,7 @@ export function ProfileResultConfirmation({
   const [requestId] = useState(() => crypto.randomUUID());
   const [limit, setLimit] = useState(50);
   const [query, setQuery] = useState("");
+  const [guardian, setGuardian] = useState(claim?.claimantRole === "guardian");
   const submit = useMutation({
     mutationFn: () =>
       submitResultClaim({
@@ -55,6 +56,7 @@ export function ProfileResultConfirmation({
           resultId,
           invitation: claim ? undefined : invitation,
           declarationAccepted: true,
+          claimantRole: guardian ? "guardian" : "athlete",
           evidenceUrl: evidence,
           evidenceUrl2: claim?.evidenceUrl2 ?? undefined,
           evidenceUrl3: claim?.evidenceUrl3 ?? undefined,
@@ -95,7 +97,11 @@ export function ProfileResultConfirmation({
         className="space-y-4 rounded-2xl border border-emerald-300 bg-emerald-50 p-6 text-emerald-950"
       >
         <CheckCircle2 className="size-8" aria-hidden="true" />
-        <h2 className="text-2xl font-semibold">Profile and results confirmation saved</h2>
+        <h2 className="text-2xl font-semibold">
+          {submit.data.status === "approved"
+            ? "Claim complete"
+            : "Profile and results confirmation saved"}
+        </h2>
         <p>
           {submit.data.confirmation?.included} existing results confirmed ·{" "}
           {submit.data.confirmation?.excluded} removed · {submit.data.confirmation?.added} missing
@@ -103,7 +109,7 @@ export function ProfileResultConfirmation({
         </p>
         <p>
           {submit.data.status === "approved"
-            ? "Your profile is linked to your account."
+            ? "Your profile is linked to your account. Your confirmation is separate from independent result verification and photo or ID checks."
             : "Your profile claim is awaiting an ownership check. You do not need to claim each result separately."}{" "}
           You’ll receive one summary email for this confirmation.
         </p>
@@ -131,8 +137,14 @@ export function ProfileResultConfirmation({
         <p className="mt-2 text-sm text-muted">
           Registration creates your account. You must also claim your athlete profile to manage its
           results. Review the list, remove anything that is not yours and add any missing results
-          before confirming.
+          before confirming. Straightforward, uncontested matches link immediately; staff check
+          conflicts, discrepancies, protected profiles and child or guardian claims.
         </p>
+        {claim?.status === "approved" ? (
+          <p role="status" className="mt-2 font-semibold text-emerald-800">
+            Claim complete — your profile is linked. You can review your result selection below.
+          </p>
+        ) : null}
         {review.lastConfirmedAt ? (
           <p className="mt-2 text-sm">
             Previous review saved {new Date(review.lastConfirmedAt).toLocaleDateString("en-GB")}.
@@ -141,8 +153,8 @@ export function ProfileResultConfirmation({
         ) : null}
         {claim?.status === "pending" ? (
           <p className="mt-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-950">
-            Your profile claim is awaiting review. You can still check your selection here; it will
-            apply when the profile is linked.
+            Your earlier claim is saved. Confirm the reviewed selection below to complete an
+            eligible claim. Claims with a review flag stay with staff.
           </p>
         ) : null}
         {claim?.staffNote ? (
@@ -165,9 +177,22 @@ export function ProfileResultConfirmation({
           <p className="font-semibold">
             {included.size} selected · {removed} removed · {additions.length} to add
           </p>
-          <p className="mt-1 text-sm">
-            By pressing confirm, I declare that this is my athlete profile and the selected results
-            are mine. One summary email covers this confirmation.
+          <label className="mt-3 flex items-start gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={guardian}
+              onChange={(event) => setGuardian(event.target.checked)}
+              className="mt-1"
+            />
+            I am claiming for a child as their parent or guardian. Staff will check my authority and
+            consent privately.
+          </label>
+          <p className="mt-3 text-sm">
+            {guardian
+              ? "By pressing confirm, I declare that I am authorised to claim this child's profile and selected results."
+              : "By pressing confirm, I declare that this is my athlete profile and the selected results are mine."}{" "}
+            One summary email covers this confirmation. This does not verify timing, source evidence
+            or identity documents.
           </p>
           <Button
             className="mt-3 h-auto min-h-12 w-full whitespace-normal py-3"
@@ -177,7 +202,11 @@ export function ProfileResultConfirmation({
             {submit.isPending ? "Saving your confirmation…" : buttonLabel}
           </Button>
           {adding ? (
-            <p className="mt-2 text-sm">Add or cancel the open result before confirming.</p>
+            <p className="mt-2 text-sm">
+              Add or cancel the open result before confirming. Straightforward, uncontested matches
+              link immediately; staff check conflicts, discrepancies, protected profiles and child
+              or guardian claims.
+            </p>
           ) : null}
           {!included.size && !additions.length ? (
             <p className="mt-2 text-sm">
