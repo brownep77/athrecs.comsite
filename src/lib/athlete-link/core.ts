@@ -24,7 +24,7 @@ export const saveLinkSchema = checkLinkSchema
 export type CheckLinkInput = z.infer<typeof checkLinkSchema>;
 export type SaveLinkInput = z.infer<typeof saveLinkSchema>;
 export type AthleteSource = {
-  provider: "worldathletics" | "powerof10" | "parkrun";
+  provider: "worldathletics" | "powerof10" | "parkrun" | "anzrankings";
   label: string;
   externalId: string;
   url: string;
@@ -43,6 +43,16 @@ export function athleteSource(value: string): AthleteSource {
       "Use an HTTPS profile link without credentials, encoded paths or a custom port.",
     );
   const host = u.hostname.toLowerCase().replace(/^www\./, "");
+  if (host === "anzrankings.org.nz") {
+    const externalId = u.pathname.match(/^\/site\/profiles_con\/athlete\/([1-9]\d{0,10})\/?$/)?.[1];
+    if (externalId)
+      return {
+        provider: "anzrankings",
+        label: "Athletics New Zealand",
+        externalId,
+        url: `https://www.anzrankings.org.nz/site/profiles_con/athlete/${externalId}`,
+      };
+  }
   let id: string | undefined;
   if (host === "worldathletics.org") {
     id = u.pathname.match(/^\/athletes\/(?:[a-z0-9-]+\/[a-z0-9-]+-|-\/)([1-9]\d{0,17})\/?$/i)?.[1];
@@ -91,7 +101,7 @@ export function athleteSource(value: string): AthleteSource {
       };
   }
   throw new Error(
-    "Use an individual World Athletics, Power of 10 or UK Parkrun profile link. For a race results page, choose Results file or Review results.",
+    "Use an individual World Athletics, Power of 10, Athletics New Zealand or UK Parkrun profile link. For a race results page, choose Results file or Review results.",
   );
 }
 export function sourceMatches(value: string | null, source: AthleteSource): boolean {
