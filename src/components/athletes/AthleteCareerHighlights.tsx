@@ -1,6 +1,8 @@
 import { Award } from "lucide-react";
 import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
+import { careerAward } from "@/lib/athrecs/profile-awards";
+import { ProfileAward } from "./ProfileAward";
 
 export function AthleteCareerHighlights({ slug }: { slug: string }) {
   const career = getEditorialAthleteCareer(slug);
@@ -25,7 +27,10 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
           );
           return (
             <article key={achievement.id} className="space-y-2 rounded-lg border border-border p-3">
-              <h3 className="text-sm font-semibold">{achievement.title}</h3>
+              <h3 className="flex items-center gap-2 text-sm font-semibold">
+                <ProfileAward kind={careerAward(achievement)} />
+                {achievement.title}
+              </h3>
               <p className="text-xs text-muted">{achievement.date}</p>
               <ul className="space-y-1 text-sm tabular-nums">
                 {achievement.outcomes.map((outcome) => (

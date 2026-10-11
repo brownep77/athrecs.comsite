@@ -1,4 +1,4 @@
-import { Trophy } from "lucide-react";
+import { ProfileAward } from "./ProfileAward";
 import type { RaceWinAchievement } from "@/lib/athrecs/race-win-achievements";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
@@ -25,10 +25,7 @@ export function RaceWinAchievements({
             className={`rounded-lg border p-3 ${distanceColourClass(win.distance)}`}
           >
             <summary className="flex cursor-pointer list-none items-start gap-2">
-              <Trophy
-                className="mt-0.5 size-5 shrink-0 rounded bg-amber-100 p-0.5 text-amber-800"
-                aria-hidden="true"
-              />
+              <ProfileAward kind="trophy" />
               <span>
                 <strong className="block text-sm">{win.distance} winner</strong>
                 <span className="block text-xs">

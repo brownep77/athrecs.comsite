@@ -3,7 +3,7 @@ import {
   profileAchievementResults,
   type AchievementResult,
 } from "@/lib/athrecs/profile-history-results";
-import { Award, Medal, Trophy, Globe2, Mountain, Flag, Layers } from "lucide-react";
+import { Medal, Globe2, Mountain, Flag, Layers } from "lucide-react";
 import { buildProfileAchievements, resultEvidenceLabel } from "@/lib/athrecs/profile-achievements";
 import { type ProfileResult } from "@/lib/athrecs/profile-records";
 import {
@@ -19,7 +19,8 @@ import { buildRaceWinAchievements } from "@/lib/athrecs/race-win-achievements";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { achievementColourClass } from "@/lib/athrecs/profile-colours";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
-import { hasRecordedFinish } from "@/lib/athrecs/profile-result-presentation";
+import { careerAward } from "@/lib/athrecs/profile-awards";
+import { ProfileAward } from "./ProfileAward";
 
 type BoardHighlight = {
   id: string;
@@ -30,23 +31,6 @@ type BoardHighlight = {
 };
 
 const NO_BOARD_HIGHLIGHTS: readonly BoardHighlight[] = [];
-
-export function ResultMedal({ result }: { result: ProfileResult }) {
-  if (!hasRecordedFinish(result)) return null;
-  return <CompletionMedal />;
-}
-
-export function CompletionMedal() {
-  return (
-    <span
-      className="inline-flex shrink-0 text-amber-700 dark:text-amber-300"
-      title="Completed event — result verification is shown separately"
-    >
-      <Medal className="size-4" aria-hidden="true" />
-      <span className="sr-only">Completed event · </span>
-    </span>
-  );
-}
 
 const NO_REPORTED_BESTS: readonly ReportedPersonalBest[] = [];
 const NO_SOURCE_HISTORIES: readonly SourceHistory[] = [];
@@ -68,7 +52,7 @@ export function PersonalBestStrip({
   return (
     <section aria-label="Personal bests" className="space-y-2">
       <h2 className="flex items-center gap-2 font-display text-lg font-semibold">
-        <Trophy className="size-4 text-accent" aria-hidden="true" />
+        <ProfileAward kind="personal-best" decorative />
         Personal bests
       </h2>
       <div className="flex flex-wrap gap-2">
@@ -257,10 +241,10 @@ export function AchievementsBoard({
             <article
               key={highlight.id}
               data-achievement={highlight.id}
-              className="space-y-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-amber-950"
+              className="space-y-2 rounded-lg border border-border p-3"
             >
               <h3 className="flex items-center gap-2 font-semibold">
-                <Award className="size-5 shrink-0" aria-hidden="true" />
+                <ProfileAward kind={careerAward(highlight)} />
                 {highlight.title}
               </h3>
               <p className="text-sm">{highlight.date}</p>
@@ -347,7 +331,7 @@ export function AchievementsBoard({
                   data-achievement={achievement.id}
                 >
                   <summary className="flex cursor-pointer list-none items-start gap-2">
-                    <Medal className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+                    <ProfileAward kind="milestone" />
                     <span>
                       <strong className="block text-sm font-medium">{achievement.title}</strong>
                       <span className="text-xs">View supporting results</span>

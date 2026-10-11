@@ -1,7 +1,7 @@
 import { CHIP_TIME_CAVEAT } from "@/lib/athrecs/reported-personal-bests";
 import type { ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 import { hasReportedFinish, reportedResultSport } from "@/lib/athrecs/profile-result-presentation";
-import { CompletionMedal } from "./ProfileAchievements";
+import { CompletionMedal } from "./ProfileAward";
 import { CountryFlag } from "./CountryFlag";
 import { ResultVerificationBadge } from "./ResultVerificationBadge";
 import { ResultEvidence } from "./ResultEvidence";
@@ -30,7 +30,7 @@ export function ReportedRaceResultRows({
       </td>
       <td role="cell" data-label="Event" className="min-w-64 px-3 py-2">
         <span className="inline-flex items-center gap-1.5 font-medium">
-          {hasReportedFinish(record) ? <CompletionMedal /> : null}
+          {hasReportedFinish(record) ? <CompletionMedal place={record.reportedPlace} /> : null}
           {record.event}
         </span>
         <ResultEvidence
