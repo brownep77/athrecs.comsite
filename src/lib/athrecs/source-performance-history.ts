@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { disqualificationSchema } from "./result-details.ts";
+import { performanceTimingSchema } from "./performance-timing.ts";
 
 // Text fields deliberately retain decimal precision, field marks, heat positions,
 // non-finishes and source annotations; never coerce these into integer seconds.
@@ -41,6 +42,7 @@ export const sourcePerformanceSchema = z.object({
   ageGroup: z.string(),
   discipline: z.string(),
   performance: z.string(),
+  timing: performanceTimingSchema.optional(),
   wind: z.string(),
   place: z.string(),
   venue: z.string(),

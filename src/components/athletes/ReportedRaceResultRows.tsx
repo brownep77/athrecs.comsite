@@ -6,6 +6,7 @@ import { CountryFlag } from "./CountryFlag";
 import { ResultVerificationBadge } from "./ResultVerificationBadge";
 import { ResultEvidence } from "./ResultEvidence";
 import { countryFlag } from "@/lib/athrecs/country-flags";
+import { HistoricalTiming } from "./ResultTiming";
 
 export function ReportedRaceResultRows({
   records,
@@ -65,6 +66,7 @@ export function ReportedRaceResultRows({
           </span>
         ) : null}
         <ResultVerificationBadge status="unverified" />
+        <HistoricalTiming performance={record.reportedTime} discipline={record.distance} />
         {showEvidence ? <span className="block text-xs text-muted">{CHIP_TIME_CAVEAT}</span> : null}
       </td>
       <td role="cell" data-label="Place" className="px-3 py-2 text-xs">

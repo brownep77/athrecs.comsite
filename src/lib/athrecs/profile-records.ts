@@ -36,11 +36,17 @@ export type ProfileResult = {
 };
 
 export function timingBasis(result: ProfileResult): string {
+  if (result.finishTimeSeconds == null) return "Unknown";
+  if (
+    result.finishTimeSeconds === result.chipTimeSeconds &&
+    result.finishTimeSeconds === result.gunTimeSeconds
+  )
+    return "Chip / gun";
   if (result.chipTimeSeconds != null && result.finishTimeSeconds === result.chipTimeSeconds)
     return "Chip";
   if (result.gunTimeSeconds != null && result.finishTimeSeconds === result.gunTimeSeconds)
     return "Gun";
-  return "Recorded";
+  return "Unknown";
 }
 
 type PerformanceCategory = Pick<ProfileResult, "sport" | "distanceCode" | "distanceKm" | "surface">;
