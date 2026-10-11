@@ -1,3 +1,4 @@
+import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOverview";
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
@@ -478,6 +479,11 @@ function AthleteContent() {
       </nav>
       <section id="profile-achievements" className="scroll-mt-24 space-y-5">
         <AthleteCareerHighlights slug={athlete.slug} />
+        <AnzPerformanceOverview
+          histories={sourceHistories}
+          medals={data.anzMedals}
+          coach={data.anzCoach}
+        />
 
         {(!career || profileResults.length > 0 || includedHistory) &&
           (!isPublicFigure ||

@@ -1,3 +1,4 @@
+import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
 import { profileReadMiddleware } from "@/lib/auth/profile-access";
 import { getReportedRaceHistory } from "./reported-race-history";
 import { readResultDetails } from "./result-details";
@@ -972,8 +973,28 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
   const sourceNationality = has_account_link ? null : readSourceNationality(profile_details);
   const statedNationality = details.nationality || seed?.nationality || null;
   const { loadPublishedSourceHistories } = await import("./athlete-publication.server");
+  const sourceHistories = await loadPublishedSourceHistories(sql, athlete.id);
+  const anzMetadata = (
+    profile_details as {
+      anzImport?: { coach?: string; sourceUrl?: string; verificationStatus?: string };
+    } | null
+  )?.anzImport;
+  const anzCoach =
+    !has_account_link &&
+    anzMetadata?.verificationStatus === "source_verified" &&
+    typeof anzMetadata.coach === "string" &&
+    sourceHistories.some(
+      (h) => h.provider === ANZ_PROVIDER && h.sourceUrl === anzMetadata.sourceUrl,
+    )
+      ? {
+          name: anzMetadata.coach,
+          slug: details.coach === anzMetadata.coach ? (details.coachProfileSlug ?? "") : "",
+        }
+      : null;
   return {
-    sourceHistories: await loadPublishedSourceHistories(sql, athlete.id),
+    sourceHistories,
+    anzMedals: publicAnzMedals(profile_details, sourceHistories),
+    anzCoach,
     athlete: {
       ...safeAthlete,
       details,
