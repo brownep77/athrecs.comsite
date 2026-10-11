@@ -21,8 +21,10 @@ for (const mark of [
   "Time not found",
 ])
   assert.equal(hasFinishMark(mark), false, `No completion for ${mark}`);
-for (const mark of ["3:57.18", "61:18a", "2:18:34(2:18:35)", "9.67w", "Finished"])
+for (const mark of ["3:57.18", "61:18a", "2:18:34(2:18:35)", "9.67w", "27:59.8h", "Finished"])
   assert.equal(hasFinishMark(mark), true, `Completion for ${mark}`);
+assert.equal(hasFinishMark("NT", "17"), true, "A recorded placing establishes a finish even without a time");
+assert.equal(hasFinishMark("NT"), false, "No time or placing does not establish a finish");
 assert.equal(resultVerification(undefined, "A provider with a link").verified, false);
 assert.equal(resultVerification("unverified", "World Athletics").verified, false);
 assert.equal(resultVerification("source_verified").verified, true);
