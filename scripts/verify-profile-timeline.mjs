@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import "./verify-competition-awards.mjs";
 import {
   buildProfileTimeline,
   profileDisciplineLabel,

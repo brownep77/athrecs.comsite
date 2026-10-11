@@ -21,6 +21,7 @@ export const paulEvansCareer = {
   achievements: [
     {
       id: "chicago-1996",
+      competitionTier: "major" as const,
       title: "Chicago Marathon winner",
       date: "20 October 1996",
       outcomes: ["1st · 2:08:52"],
@@ -28,6 +29,7 @@ export const paulEvansCareer = {
     },
     {
       id: "olympic-10000",
+      competitionTier: "olympic" as const,
       title: "Competed in 2 Olympic Games",
       showOnBoard: true,
       date: "Barcelona 1992 · Atlanta 1996",
@@ -36,6 +38,7 @@ export const paulEvansCareer = {
     },
     {
       id: "new-york-1995",
+      competitionTier: "major" as const,
       title: "New York City Marathon",
       date: "12 November 1995",
       outcomes: ["2nd · 2:11:05"],
@@ -43,6 +46,7 @@ export const paulEvansCareer = {
     },
     {
       id: "london-1996",
+      competitionTier: "major" as const,
       title: "London Marathon",
       date: "21 April 1996",
       outcomes: ["3rd · 2:10:40"],

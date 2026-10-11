@@ -14,12 +14,13 @@ import {
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
-import { RaceWinAchievements } from "./RaceWinAchievements";
-import { buildRaceWinAchievements } from "@/lib/athrecs/race-win-achievements";
+import { CompetitionHonours } from "./CompetitionHonours";
+import { buildCompetitionHonours } from "@/lib/athrecs/competition-honours";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { achievementColourClass } from "@/lib/athrecs/profile-colours";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
-import { careerAward } from "@/lib/athrecs/profile-awards";
+import { careerAward, careerTier, type ProfileAwardKind } from "@/lib/athrecs/profile-awards";
+import type { CompetitionTier } from "@/lib/athrecs/competition-awards";
 import { ProfileAward } from "./ProfileAward";
 
 type BoardHighlight = {
@@ -28,6 +29,8 @@ type BoardHighlight = {
   date: string;
   outcomes: readonly string[];
   sources: readonly { label: string; url: string }[];
+  competitionTier?: CompetitionTier;
+  awardKind?: ProfileAwardKind;
 };
 
 const NO_BOARD_HIGHLIGHTS: readonly BoardHighlight[] = [];
@@ -176,11 +179,11 @@ export function AchievementsBoard({
     [results, sourceHistories],
   );
   const record = useMemo(() => buildProfileAchievements(achievementResults), [achievementResults]);
-  const wins = useMemo(
-    () => buildRaceWinAchievements(results, sourceHistories, sourceGender),
+  const honours = useMemo(
+    () => buildCompetitionHonours(results, sourceHistories, sourceGender),
     [results, sourceHistories, sourceGender],
   );
-  const showCompletionProgress = record.finishes.length > 0 || wins.length === 0;
+  const showCompletionProgress = record.finishes.length > 0 || honours.length === 0;
   const hasRunning = achievementResults.some((result) =>
     ["running", "athletics", "parkrun"].includes(result.sport.trim().toLowerCase()),
   );
@@ -244,7 +247,12 @@ export function AchievementsBoard({
               className="space-y-2 rounded-lg border border-border p-3"
             >
               <h3 className="flex items-center gap-2 font-semibold">
-                <ProfileAward kind={careerAward(highlight)} />
+                <ProfileAward
+                  kind={careerAward(highlight)}
+                  tier={careerTier(highlight)}
+                  label={highlight.title}
+                  decorative
+                />
                 {highlight.title}
               </h3>
               <p className="text-sm">{highlight.date}</p>
@@ -276,7 +284,7 @@ export function AchievementsBoard({
           ))}
         </div>
       ) : null}
-      <RaceWinAchievements wins={wins} showEvidence={showEvidence} />
+      <CompetitionHonours honours={honours} showEvidence={showEvidence} />
       {showCompletionProgress ? (
         <div className="grid grid-cols-2 items-start gap-2 sm:grid-cols-3 lg:grid-cols-6">
           {metrics.map(({ id, label, value, icon: Icon, results: evidence }) => (

@@ -110,7 +110,7 @@ try {
   )[0].id;
   // A women's and category win must survive all three profile read paths.
   await sql`update athletes set gender='F',profile_visibility='public' where id=${known}`;
-  await sql`update results set overall_place=8,gender_place=1,category_place=1,category='F40-44',result_visibility='public' where id=${knownResult}`;
+  await sql`update results set overall_place=8,gender_place=1,category_place=1,category='F40-44',result_visibility='public',result_details=result_details || '{"verificationStatus":"source_verified"}'::jsonb where id=${knownResult}`;
   const knownSlug = (await sql`select slug from athletes where id=${known}`)[0].slug;
   const publicResult = (await rpc("api", "getAthleteBySlug", knownSlug)).profileResults.find(
     (r) => r.resultId === knownResult,
@@ -131,11 +131,13 @@ try {
   const renderedProfile = await fetch(`${origin}/athletes/${knownSlug}`);
   assert.equal(renderedProfile.status, 200);
   const html = await renderedProfile.text();
-  assert.equal((html.match(/data-achievement="race-win"/g) ?? []).length, 2);
-  assert.match(html, /data-achievement="race-win"[^>]*class="[^"]*bg-sky-100/);
-  assert.match(html, /class="[^"]*lucide-trophy[^"]*bg-amber-100/);
+  assert.equal((html.match(/data-competition-honour=/g) ?? []).length, 2);
+  assert.match(html, /data-competition-honour="race:gold:gender:/);
+  assert.match(html, /data-competition-honour="race:gold:category:/);
+  assert.match(html, /data-profile-award="trophy"/);
   const visibleHtml = html.replace(/<!--[^]*?-->/g, "");
-  assert.match(visibleHtml, /10K winner/);
+  assert.match(visibleHtml, /Race wins/);
+  assert.match(visibleHtml, /Category · F40-44/);
   assert.match(visibleHtml, /Women’s race/);
   await sql`update athletes set profile_visibility='private' where id=${known}`;
   await sql`update results set result_visibility='private' where id=${knownResult}`;
