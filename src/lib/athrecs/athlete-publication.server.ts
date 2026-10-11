@@ -7,7 +7,7 @@ export async function countPublishedSourceResults(sql: Sql, athleteIds: readonly
   const rows = await sql<{ athlete_id: number; result_count: number }>`
     select h.athlete_id, count(*)::int as result_count
     from athlete_source_histories h join athletes a on a.id=h.athlete_id
-    cross join lateral jsonb_array_elements(h.performances) performance
+    cross join lateral jsonb_array_elements(h.performances) as source_row(performance)
     where h.athlete_id=any(${[...athleteIds]}::int[]) and h.published_at is not null
       and (a.profile_visibility='public' or a.profile_type='Public figure')
       and (not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
@@ -24,7 +24,7 @@ export async function countPublishedSourceResults(sql: Sql, athleteIds: readonly
         join athlete_account_links owner_link on owner_link.user_id=hidden.user_id
           and owner_link.athlete_id=h.athlete_id and owner_link.status='active'
         where source_claim.provider=h.provider and source_claim.external_id=h.external_id
-          and source_claim.source_key=performance#>>'{archiveReference,sourceRow}'
+          and source_claim.source_key=source_row.performance#>>'{archiveReference,sourceRow}'
       )
     group by h.athlete_id
   `;
@@ -44,7 +44,7 @@ export async function loadPublishedSourceHistories(sql: Sql, athleteId: number) 
         join athlete_account_links owner_link on owner_link.user_id=hidden.user_id
           and owner_link.athlete_id=h.athlete_id and owner_link.status='active'
         where source_claim.provider=h.provider and source_claim.external_id=h.external_id
-          and source_claim.source_key=performance#>>'{archiveReference,sourceRow}'
+          and source_claim.source_key=source_row.performance#>>'{archiveReference,sourceRow}'
       )), '[]'::jsonb) as performances
     from athlete_source_histories h join athletes a on a.id=h.athlete_id
     where h.athlete_id=${athleteId} and h.published_at is not null
