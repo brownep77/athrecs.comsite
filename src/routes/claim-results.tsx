@@ -691,14 +691,14 @@ function ClaimState({
 }) {
   return (
     <div className={`space-y-3 rounded-xl border p-4 ${statusClass(status)}`}>
-      <div className="flex items-center gap-2 font-semibold">
+      <h3 className="flex items-center gap-2 font-semibold">
         {status === "approved" ? (
           <CheckCircle2 className="size-5" aria-hidden="true" />
         ) : (
           <CircleAlert className="size-5" aria-hidden="true" />
         )}
         {title}
-      </div>
+      </h3>
       <p className="text-sm">{note}</p>
       {children ? <div>{children}</div> : null}
     </div>
