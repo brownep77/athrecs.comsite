@@ -410,9 +410,11 @@ try {
   const confirmed = load(confirmedHtml);
   assert.equal(confirmed("#results-history tbody tr").length, 11);
   assert.equal(confirmed("#performance-history").length, 0);
-  assert(!confirmed("#results-history").text().includes("Unverified"));
+  assert(!confirmed("#results-history tr[data-history-result]").text().includes("Unverified"));
+  assert(confirmed("#results-history tbody tr").first().text().includes("Unverified"),
+    "A recorded result without a verification basis keeps its own Unverified label");
   assert(
-    confirmed("#results-history tr[data-history-result] [title='Completed event']").length > 0,
+    confirmed("#results-history tr[data-history-result] [title^='Completed event']").length > 0,
   );
   assert.equal(
     confirmed("#results-history tr[data-history-result] [data-country-code='ES']").length,
@@ -452,8 +454,9 @@ try {
         );
         const history = page.locator("#results-history");
         assert.equal(await history.locator("tbody tr").count(), 11);
-        assert(!(await history.innerText()).includes("Unverified"));
-        await page.getByText("Show all 11 results", { exact: true }).click();
+        assert(!(await history.locator("tr[data-history-result]").allTextContents()).join(" ").includes("Unverified"));
+        assert.equal(await page.getByText("Show all 11 results", { exact: true }).count(), 0);
+        assert.equal(await history.locator("table").count(), 1);
         assert.equal(await history.locator("tbody tr:visible").count(), 11);
         assert.equal(await history.locator(".result-evidence a[href^='https://example.test']").count(), 11);
         assert.equal(await history.locator(".result-evidence[open]").count(), 0);

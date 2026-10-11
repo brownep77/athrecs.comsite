@@ -96,10 +96,10 @@ try{
   const historyPanel=page.getByRole('heading',{name:'Additional performance history (1)',exact:true}).locator('..');
   await historyPanel.getByText('8.04i',{exact:false}).waitFor();
   await historyPanel.getByRole('button',{name:'Remove from profile',exact:true}).click();
-  await historyPanel.getByText('Removed from profile',{exact:true}).waitFor();
+  await historyPanel.getByText('Removed from profile · Unverified',{exact:true}).waitFor();
   assert.equal(await page.evaluate(()=>window.historyRow.profileExcluded),true);
   await historyPanel.getByRole('button',{name:'Restore to profile',exact:true}).click();
-  await historyPanel.getByText('Shown on profile',{exact:true}).waitFor();
+  await historyPanel.getByText('Shown on profile · Unverified',{exact:true}).waitFor();
   assert.equal(await page.evaluate(()=>window.historyRow.profileExcluded),false);
   assert.equal(await page.evaluate(()=>window.calls.filter(c=>c.kind==='history-exclude').length),2);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
