@@ -15,3 +15,18 @@ Validation:
 - Existing profile timeline, achievement and athlete-link checks cover integration behaviour.
 
 Do not commit real source captures, database snapshots, connection strings or private audit exports. ANZ retrieval is staff-triggered; no scheduled scraping or automatic publication is enabled.
+
+## Results beyond ANZ
+
+An exhausted ANZ event search is not a complete racing career. For New Zealand profiles,
+also inspect the athlete's club archives, regional governing-body result sheets, national
+championship results and the original timing provider. Keep these in separate source
+histories so an ANZ refresh cannot remove them. Every additional row needs a source-row
+comparison and identity evidence; a same-name search hit alone is insufficient.
+
+Retain cross-country disciplines explicitly (for example `5km XC`) and label relay-leg
+marks separately from team totals and individual races. Record pacing roles, original
+time precision and the exact placing classification. Do not count mirrored results or
+rounded versions as additional races. Conflicting dates, unidentified abbreviated names
+and source disagreements require review before publication. Scope each history as partial
+unless its own defined coverage has actually been checked.

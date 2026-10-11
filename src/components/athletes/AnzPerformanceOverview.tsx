@@ -217,8 +217,12 @@ export function AnzPerformanceOverview({
           {source.performances.length} ANZ performances · Updated{" "}
           {formatRaceDateShort(source.capturedAt.slice(0, 10))}.{" "}
           {source.complete
-            ? "All results returned by ANZ’s listed event searches are included; other races may be missing."
+            ? "ANZ’s listed event searches have been imported. This covers ranking records, not a complete race history."
             : "This is a partial ANZ import."}
+        </p>
+        <p>
+          Club races, cross-country and relay results can come from additional sources in the
+          race history below.
         </p>
         <p>
           Original time precision is retained. Road and track events are separate; ANZ does not
