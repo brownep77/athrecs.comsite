@@ -20,22 +20,33 @@ export type ProfileResult = {
   chipTimeSeconds: number | null;
   gunTimeSeconds: number | null;
   overallPlace: number | null;
+  /** Source-matched timeline display only; never used for rankings or achievement totals. */
+  displayOverallPlace?: string;
+  /** Explicit source round retained by timeline deduplication for championship awards. */
+  displayRound?: string;
   genderPlace?: number | null;
   categoryPlace?: number | null;
   resultGender?: string | null;
   category: string | null;
   sourceUrls: string[];
+  sourceKeys?: string[];
   resultSource?: string | null;
   sourceResultIds?: number[];
   conflicting?: boolean;
 };
 
 export function timingBasis(result: ProfileResult): string {
+  if (result.finishTimeSeconds == null) return "Unknown";
+  if (
+    result.finishTimeSeconds === result.chipTimeSeconds &&
+    result.finishTimeSeconds === result.gunTimeSeconds
+  )
+    return "Chip / gun";
   if (result.chipTimeSeconds != null && result.finishTimeSeconds === result.chipTimeSeconds)
     return "Chip";
   if (result.gunTimeSeconds != null && result.finishTimeSeconds === result.gunTimeSeconds)
     return "Gun";
-  return "Recorded";
+  return "Unknown";
 }
 
 type PerformanceCategory = Pick<ProfileResult, "sport" | "distanceCode" | "distanceKm" | "surface">;
@@ -121,6 +132,10 @@ export function combineProfileResults<T extends ProfileResult>(
       existing.categoryPlace ??= result.categoryPlace;
       existing.resultGender ||= result.resultGender;
       existing.sourceUrls = [...new Set([...existing.sourceUrls, ...result.sourceUrls])];
+      if (existing.sourceKeys || result.sourceKeys)
+        existing.sourceKeys = [
+          ...new Set([...(existing.sourceKeys ?? []), ...(result.sourceKeys ?? [])]),
+        ];
       existing.sourceResultIds = [
         ...new Set([
           ...(existing.sourceResultIds ?? [existing.resultId]),

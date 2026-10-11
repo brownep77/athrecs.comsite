@@ -33,6 +33,9 @@ try {
     insert into athlete_identifiers values (999, null, 'owner');
     create table athlete_account_links (athlete_id integer, user_id text, status text);
     insert into athlete_account_links values (5,'owner','active');
+    create table source_history_claim_results (id integer primary key, provider text, external_id text, source_key text);
+    create table athlete_profile_hidden_source_results (user_id text, source_result_id integer);
+    create table athlete_profile_history_choices(user_id text,athlete_id integer,provider text,external_id text,performance_hash text,excluded boolean);
     create table athlete_public_shares (user_id text, enabled boolean, share_results boolean);
     create table results (id integer primary key, athlete_id integer, result_visibility text);
     insert into results select id, id, 'private' from athletes;
@@ -115,6 +118,44 @@ try {
     await loadPublishedSourceHistories(sql, 1),
     [],
     "Claiming a profile stops staff archive sharing",
+  );
+  const reviewedRow = {
+    year: 2026,
+    date: "2026-04-05",
+    sourceDate: "5 Apr 2026",
+    ageGroup: "",
+    discipline: "10K",
+    performance: "40:00",
+    wind: "",
+    place: "10",
+    venue: "Synthetic Park",
+    meeting: "Synthetic History Race",
+    sourceUrls: ["https://example.test/results"],
+    labels: [],
+    verificationStatus: "source_verified",
+  };
+  await sql`update athlete_source_histories set performances=${JSON.stringify([reviewedRow])}::jsonb where athlete_id=1`;
+  await sql`insert into network_audit_log(actor_user_id,action,entity_type,entity_id,after_value)
+    values('staff','athlete.history_admin_published','history','powerof10:1','{"athleteId":1}'::jsonb)`;
+  await sql`insert into athlete_profile_history_choices
+    select 'staff',1,provider,external_id,md5(p::text),true from athlete_source_histories cross join lateral jsonb_array_elements(performances)p where athlete_id=1`;
+  assert.equal(
+    (await loadPublishedSourceHistories(sql, 1))[0].performances.length,
+    1,
+    "Non-owner choices never hide public source results",
+  );
+  await sql`insert into athlete_profile_history_choices
+    select 'owner',1,provider,external_id,md5(p::text),true from athlete_source_histories cross join lateral jsonb_array_elements(performances)p where athlete_id=1`;
+  assert.equal(
+    (await loadPublishedSourceHistories(sql, 1))[0].performances.length,
+    0,
+    "Active owner removal applies to source histories",
+  );
+  await sql`update athlete_profile_history_choices set excluded=false where user_id='owner'`;
+  assert.deepEqual(
+    (await loadPublishedSourceHistories(sql, 1))[0].performances,
+    [reviewedRow],
+    "Restoring an exact row preserves its evidence and performance",
   );
   await db.exec(`update athletes set profile_visibility='private' where id=2`);
   assert.deepEqual(

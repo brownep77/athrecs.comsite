@@ -44,17 +44,16 @@ export const Route = createFileRoute("/$language/$country/")({
     if (!loaderData) return {};
     const { site, language } = loaderData;
     const country = displayCountryForLanguage(site, language);
-    const canonical = `https://www.athrecs.com/${language}/${site.slug}`;
+    // Main editorial content is English; a translated language selector does
+    // not make eight distinct translations of this landing page.
+    const canonical = `https://www.athrecs.com/en/${site.slug}`;
     return {
-      meta: siteGraphMeta({ title: `${country} athletics events | ATHRECS`, description: `Find athletics meetings, championships, athletes and clubs in ${country} on AthRecs.`, url: canonical }),
-      links: [
-        { rel: "canonical", href: canonical },
-        ...SITE_LANGUAGES.map((alternate) => ({
-          rel: "alternate",
-          hrefLang: alternate,
-          href: `https://www.athrecs.com/${alternate}/${site.slug}`,
-        })),
-      ],
+      meta: siteGraphMeta({
+        title: `${country} athletics events | ATHRECS`,
+        description: `Find athletics meetings, championships, athletes and clubs in ${country} on AthRecs.`,
+        url: canonical,
+      }),
+      links: [{ rel: "canonical", href: canonical }],
     };
   },
   component: AthleticsCountryHomePage,
@@ -116,15 +115,12 @@ function AthleticsCountryHomePage() {
               {country} athletics
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-              Find track and field meetings, cross-country fixtures, road athletics,
-              championships, athletes and clubs in {country}.
+              Find track and field meetings, cross-country fixtures, road athletics, championships,
+              athletes and clubs in {country}.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg">
-                <Link
-                  to="/$language/$country/races"
-                  params={{ language, country: site.slug }}
-                >
+                <Link to="/$language/$country/races" params={{ language, country: site.slug }}>
                   {translateCountryText(copy.racesIn, country)}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -198,7 +194,11 @@ function AthleticsCountryHomePage() {
             events
               .slice(0, 8)
               .map((event) => (
-                <RaceCard key={event.id} race={event} localized={{ language, country: site.slug }} />
+                <RaceCard
+                  key={event.id}
+                  race={event}
+                  localized={{ language, country: site.slug }}
+                />
               ))
           ) : (
             <p className="rounded-xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted">

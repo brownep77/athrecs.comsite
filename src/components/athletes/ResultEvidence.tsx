@@ -1,5 +1,3 @@
-import { isWmmSource, publicProfileResultNotes } from "@/lib/athrecs/profile-source-presentation";
-
 function sourceLabel(url: string, provider?: string | null): string {
   try {
     const host = new URL(url).hostname.replace(/^www\./, "");
@@ -13,23 +11,26 @@ function sourceLabel(url: string, provider?: string | null): string {
   return provider?.trim() || "Result source";
 }
 
-/** Compact public access to the original evidence, including source disagreements. */
+/** Staff-only access to the original evidence, including source disagreements. */
 export function ResultEvidence({
   notes,
   provider,
   urls,
   splits = [],
   showEvidence = false,
+  sourceLabels = [],
 }: {
   notes?: string;
   provider?: string | null;
   urls: readonly string[];
   splits?: readonly { label: string; time: string }[];
   showEvidence?: boolean;
+  sourceLabels?: readonly { label: string; url: string }[];
 }) {
-  const visibleNotes = showEvidence ? notes : publicProfileResultNotes(notes, provider, urls);
-  const visibleUrls = showEvidence ? urls : urls.filter((url) => !isWmmSource(null, [url]));
-  const visibleProvider = !showEvidence && isWmmSource(provider) ? null : provider;
+  if (!showEvidence) return null;
+  const visibleNotes = notes;
+  const visibleUrls = urls;
+  const visibleProvider = provider;
   if (!visibleNotes && !visibleUrls.length && !splits.length) return null;
   return (
     <details className="result-evidence mt-1 max-w-lg whitespace-normal text-xs font-normal text-muted">
@@ -51,7 +52,8 @@ export function ResultEvidence({
                   rel="noreferrer"
                   className="inline-flex min-h-8 items-center text-accent underline underline-offset-2"
                 >
-                  {sourceLabel(url, visibleProvider)}
+                  {sourceLabels.find((source) => source.url === url)?.label ||
+                    sourceLabel(url, visibleProvider)}
                   {visibleUrls.length > 1 ? ` · source ${i + 1}` : ""} ↗
                 </a>
               </li>

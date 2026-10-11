@@ -13,11 +13,21 @@ export function isTrailHistoryResult(row: SourcePerformance): boolean {
   return row.labels.some((label) => /^(?:trail|trail running)$/i.test(label.trim()));
 }
 
+const crossCountryDiscipline = /\b(?:cross[ -]country|xc)\b/i;
+export function isCrossCountryHistoryResult(row: SourcePerformance): boolean {
+  return (
+    crossCountryDiscipline.test(row.discipline) ||
+    row.labels.some((label) => /^(?:cross[ -]country|xc)$/i.test(label.trim()))
+  );
+}
+
 function historySport(discipline: string, provider?: string): HistoryResult["sport"] {
   if (provider === "DUV Ultra Marathon Statistics") return "Running";
   // Explicit multisport labels take priority over distances within a race leg.
   if (/\btriathlon\b/i.test(discipline)) return "Triathlon";
   if (/\bduathlon\b/i.test(discipline)) return "Duathlon";
+  if (crossCountryDiscipline.test(discipline) || /\broad relay\b/i.test(discipline))
+    return "Running";
   // World Athletics uses these unqualified names for track events.
   if (/^(?:mile|2 miles)$/i.test(discipline.trim())) return "Athletics";
   if (/^mile road$/i.test(discipline.trim())) return "Running";
@@ -100,7 +110,9 @@ export function profileAchievementResults(
           distance(r.distanceCode) === distance(row.discipline) &&
           ((row.eventSlug && r.eventSlug === row.eventSlug) ||
             normal(r.eventName) === normal(row.meeting) ||
-            r.sourceUrls.some((url) => row.sourceUrls.includes(url))),
+            (r.sourceKeys ?? r.sourceUrls).some((key) =>
+              (row.sourceKeys ?? row.sourceUrls).includes(key),
+            )),
       ),
   );
   return [
@@ -123,8 +135,9 @@ export function profileAchievementResults(
         eventName: row.meeting,
         eventSlug: row.eventSlug ?? "",
         sport: entry.sport,
-        surface:
-          entry.sport === "Running"
+        surface: isCrossCountryHistoryResult(row)
+          ? "Cross Country"
+          : entry.sport === "Running"
             ? isTrailHistoryResult(row)
               ? "Trail"
               : "Road"

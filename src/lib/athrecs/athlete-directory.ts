@@ -3,6 +3,7 @@ export type AthleteDirectorySearch = {
   country?: string;
   sport?: string;
   page?: number;
+  letter?: string;
 };
 
 export function parseAthleteDirectorySearch(
@@ -15,6 +16,10 @@ export function parseAthleteDirectorySearch(
     q: text(search.q),
     country: text(search.country),
     sport: text(search.sport),
+    letter:
+      typeof search.letter === "string" && /^[A-Z]$/i.test(search.letter)
+        ? search.letter.toUpperCase()
+        : undefined,
     page: Number.isSafeInteger(page) && page > 1 && page <= 100000 ? page : undefined,
   };
 }
@@ -39,7 +44,8 @@ export type AthleteDirectory = {
   page: number;
   pageSize: number;
   publicAthletes: number;
-  publicResults: number;
+  /** Full-catalogue total is omitted by the bounded public browse query. */
+  publicResults: number | null;
   countries: string[];
   sports: string[];
 };

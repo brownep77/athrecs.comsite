@@ -1,3 +1,5 @@
+import { ProfileResultConfirmation } from "@/components/athletes/ProfileResultConfirmation";
+import { ClaimResultDetails } from "@/components/athletes/ClaimResultDetails";
 import { ClaimRacingName, ProfileClaimSteps } from "@/components/athletes/ProfileClaimGuide";
 import { getMyAthleteAccount } from "@/lib/athrecs/athlete-account-api";
 import { rememberClaim } from "@/lib/athrecs/claim-resume";
@@ -45,7 +47,7 @@ export const Route = createFileRoute("/claim-results")({
     const raw = search.resultId;
     const resultId = typeof raw === "number" ? raw : Number(raw);
     return {
-      resultId: Number.isInteger(resultId) && resultId > 0 ? resultId : undefined,
+      resultId: Number.isSafeInteger(resultId) && resultId !== 0 ? resultId : undefined,
       invitation:
         typeof search.invitation === "string" ? search.invitation.slice(0, 128) : undefined,
     };
@@ -86,6 +88,7 @@ function statusClass(status: ResultClaimStatus): string {
 function ClaimResultsPage() {
   const { resultId, invitation } = Route.useSearch();
   const [declined, setDeclined] = useState(false);
+  const [reviewRevision, setReviewRevision] = useState(0);
   const { user, isPending: sessionPending } = useCurrentUserState();
   const queryClient = useQueryClient();
   const [evidenceUrl, setEvidenceUrl] = useState("");
@@ -115,8 +118,12 @@ function ClaimResultsPage() {
 
   const result = useQuery({
     queryKey: ["claimable-result", user?.id, resultId, invitation, account.data?.fullName],
+    refetchOnWindowFocus: false,
     gcTime: 0,
-    queryFn: () => getClaimableResult({ data: { resultId: resultId as number, invitation } }),
+    queryFn: () =>
+      getClaimableResult({
+        data: { resultId: resultId as number, invitation, includeReview: true },
+      }),
     enabled: Boolean(user && resultId !== undefined && account.data?.emailVerified),
     retry: false,
   });
@@ -247,11 +254,11 @@ function ClaimResultsPage() {
                     : "Claim your athlete profile"
                   : resultId
                     ? "Finish claiming your athlete profile"
-                    : "Claim your race results"}
+                    : "Claim your athlete profile"}
               </h1>
               <p className="mt-2 text-sm leading-6 text-slate-300">
-                Signing in is the first step. Confirm this profile is yours to link its results. You
-                only need to claim the profile once.
+                Signing in is the first step. You must claim your athlete profile next. Review all
+                your results, then confirm them together with one button.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -392,6 +399,19 @@ function ClaimResultsPage() {
             </Link>
           </Button>
         </section>
+      ) : result.data.review ? (
+        <ProfileResultConfirmation
+          key={`${user.id}:${resultId}:${reviewRevision}`}
+          resultId={resultId}
+          invitation={invitation}
+          athleteName={result.data.athleteName}
+          review={result.data.review}
+          claim={currentClaim}
+          onDecline={invitation && !currentClaim ? () => decline.mutate() : undefined}
+          onReload={() => {
+            void result.refetch().then(() => setReviewRevision((n) => n + 1));
+          }}
+        />
       ) : (
         <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
           <div className="border-b border-border bg-elevated p-5 md:p-7">
@@ -425,12 +445,15 @@ function ClaimResultsPage() {
                 </p>
               </div>
             </div>
-            <ProfileEventLink
-              result={result.data}
-              className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-accent no-underline hover:underline"
-            >
-              View event page <ArrowRight className="ml-1 size-4" aria-hidden="true" />
-            </ProfileEventLink>
+            <ClaimResultDetails result={result.data} />
+            {result.data.eventSlug ? (
+              <ProfileEventLink
+                result={result.data}
+                className="mt-4 inline-flex min-h-11 items-center text-sm font-medium text-accent no-underline hover:underline"
+              >
+                View event page <ArrowRight className="ml-1 size-4" aria-hidden="true" />
+              </ProfileEventLink>
+            ) : null}
           </div>
 
           <div className="space-y-4 p-5 md:p-7">

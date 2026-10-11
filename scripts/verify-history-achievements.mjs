@@ -4,6 +4,7 @@ import {
   historyResultCountry,
   isCompletedHistoryResult,
   isTrailHistoryResult,
+  isCrossCountryHistoryResult,
   profileAchievementResults,
   sourceHistorySports,
 } from "../src/lib/athrecs/profile-history-results.ts";
@@ -35,6 +36,20 @@ assert.equal(isTrailHistoryResult(trailRow), true);
 assert.equal(isTrailHistoryResult(row()), false);
 assert.equal(profileAchievementResults([], history([trailRow]))[0].surface, "Trail");
 assert.equal(profileAchievementResults([], history([row()]))[0].surface, "Road");
+for (const extra of [
+  { discipline: "5km XC" },
+  { discipline: "Cross-country relay leg" },
+  { discipline: "10km", labels: ["Cross country"] },
+]) {
+  const xc = row(extra);
+  assert.equal(isCrossCountryHistoryResult(xc), true);
+  assert.equal(profileAchievementResults([], history([xc]))[0].surface, "Cross Country");
+}
+assert.deepEqual(sourceHistorySports(history([row({ discipline: "5km XC" })])), ["Running"]);
+assert.equal(isCrossCountryHistoryResult(row({ discipline: "5000m" })), false);
+assert.deepEqual(sourceHistorySports(history([row({ discipline: "5km road relay leg" })])), [
+  "Running",
+]);
 const board = (rows, recorded = []) =>
   buildProfileAchievements(profileAchievementResults(recorded, history(rows)), today);
 assert.equal(historyResultCountry(row()), "United Kingdom");

@@ -1,3 +1,4 @@
+import { AnzImport } from "./AnzImport";
 import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { checkAthleteLink, saveAthleteLink } from "@/lib/athlete-link/api";
@@ -135,8 +136,8 @@ export function SingleAthleteLink({ onOpenAthlete }: { onOpenAthlete: (id: numbe
             />
           </label>
           <p className="text-sm text-muted">
-            World Athletics, Power of 10 and UK Parkrun athlete profiles are supported. Race results
-            pages belong in the results tools.
+            World Athletics, Power of 10, Athletics New Zealand and UK Parkrun athlete profiles are
+            supported. Race results pages belong in the results tools.
           </p>
           <label className="block text-sm font-semibold">
             Name shown on the source{" "}
@@ -198,6 +199,13 @@ export function SingleAthleteLink({ onOpenAthlete }: { onOpenAthlete: (id: numbe
               : "The existing profile’s details and visibility have been kept."}{" "}
             Race results are reviewed separately.
           </p>
+          {review?.source.provider === "anzrankings" ? (
+            <AnzImport
+              key={receipt.athleteId}
+              url={review.source.url}
+              athleteId={receipt.athleteId}
+            />
+          ) : null}
           <button className={button} onClick={() => onOpenAthlete(receipt.athleteId)}>
             Open profile & review results
           </button>
@@ -279,6 +287,18 @@ export function SingleAthleteLink({ onOpenAthlete }: { onOpenAthlete: (id: numbe
                       </a>
                     )}
                   </div>
+                  {review.state === "existing" &&
+                  review.source.provider === "anzrankings" &&
+                  c.exact &&
+                  c.id &&
+                  !c.managed &&
+                  !c.conflictingSource ? (
+                    <AnzImport
+                      key={`${c.id}:${review.source.externalId}`}
+                      url={review.source.url}
+                      athleteId={c.id}
+                    />
+                  ) : null}
                   {c.conflictingSource ? (
                     <p className="text-sm text-amber-900">
                       This athlete already has a different ID from the same provider. Resolve that

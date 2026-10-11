@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import "./verify-competition-awards.mjs";
 import {
   buildProfileTimeline,
   profileDisciplineLabel,
@@ -65,6 +66,52 @@ const before = JSON.stringify([result, sourceRows]);
 const timeline = buildProfileTimeline([result], sourceRows);
 assert.equal(timeline.count, 1, "Catalogue, career record and toplist show one performance");
 assert.equal(timeline.results[0].finishTimeSeconds, 8315, "Official time is unchanged");
+assert.equal(
+  timeline.results[0].displayOverallPlace,
+  "23",
+  "Merged World Athletics place is visible",
+);
+assert.equal(
+  timeline.results[0].overallPlace,
+  null,
+  "Display enrichment never rewrites the classification",
+);
+assert.equal(
+  buildProfileTimeline([result], history([row({ place: "1" })])).results[0].displayOverallPlace,
+  "1",
+);
+assert.equal(
+  buildProfileTimeline([result], history([row({ place: "1", verificationStatus: "unverified" })]))
+    .results[0].displayOverallPlace,
+  undefined,
+);
+assert.equal(
+  buildProfileTimeline(
+    [result],
+    history([row({ place: "1", places: { overall: null, gender: 1, category: 1 } })]),
+  ).results[0].displayOverallPlace,
+  undefined,
+);
+assert.equal(
+  buildProfileTimeline([result], history([row({ place: "1" }), row({ place: "2" })])).results[0]
+    .displayOverallPlace,
+  undefined,
+  "Disputed official placings remain unresolved",
+);
+const officialAndClub = [
+  ...history([row({ place: "3" })]),
+  {
+    ...history([])[0],
+    provider: "Club archive",
+    performances: [row({ place: "2", verificationStatus: "source_verified" })],
+  },
+];
+for (const sources of [officialAndClub, [...officialAndClub].reverse()])
+  assert.equal(
+    buildProfileTimeline([result], sources).results[0].displayOverallPlace,
+    "3",
+    "World Athletics takes precedence independently of source order",
+  );
 assert.match(timeline.results[0].details.note, /differs by one second/);
 assert.equal(JSON.stringify([result, sourceRows]), before, "Stored input is never mutated");
 assert.equal(

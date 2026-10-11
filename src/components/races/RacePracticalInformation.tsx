@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowUpRight, CalendarDays, MapPin, Ticket } from "lucide-react";
 import type { getEventBySlug } from "@/lib/athrecs/api";
-import { editionEntry, raceLink, raceLocation } from "@/lib/athrecs/race-information";
+import { editionEntry, raceLink } from "@/lib/athrecs/race-information";
 import {
   effectiveStatus,
   formatRaceDateShort,
@@ -11,6 +11,8 @@ import {
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import type { EntryStatus } from "@/lib/athrecs/types";
 import { venueForEvent } from "@/lib/athrecs/venue";
+import { CountryFlag } from "@/components/athletes/CountryFlag";
+import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { raceGuideFor, supplementedStart } from "@/data/runrecs-race-guides";
 
 export function RacePracticalInformation({
@@ -25,14 +27,18 @@ export function RacePracticalInformation({
   const guide = raceGuideFor(event, upcoming[0]?.event_date);
   const address = guide?.venue || venue.address;
   const postcode = guide?.postcode || venue.postcode;
-  const location = raceLocation([
-    address,
-    postcode && !address.includes(postcode) ? postcode : null,
-    venue.nation,
-  ]);
+  const place = compactFixtureLocation({
+    town: address,
+    city: event.city,
+    county: event.county,
+    country: venue.nation,
+  });
+  const location = [place.text, postcode && !place.text.includes(postcode) ? postcode : null]
+    .filter(Boolean)
+    .join(", ");
   const mapUrl =
     address !== "Venue TBC"
-      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`
+      ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${location}, ${venue.nation}`)}`
       : null;
   const website = raceLink(event.website);
   const description = event.description?.trim() || event.summary?.trim();
@@ -168,7 +174,10 @@ export function RacePracticalInformation({
             <p className="text-sm font-semibold">
               {guide ? "Venue / race HQ" : "Listed venue / area"}
             </p>
-            <p className="mt-1 text-sm leading-relaxed text-muted">{location}</p>
+            <p className="mt-1 flex flex-wrap items-center gap-1.5 text-sm leading-relaxed text-muted">
+              <span>{location || "Location to be confirmed"}</span>
+              <CountryFlag country={venue.nation} showCode />
+            </p>
           </div>
           {mapUrl ? (
             <a

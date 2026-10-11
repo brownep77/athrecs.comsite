@@ -191,7 +191,25 @@ const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
   "./profile-connections": shared["./profile-connections"],
   "./claim-invitation": invitationCore,
 });
+const reviewCore = load("src/lib/athlete-workspace/core.ts", { zod: require("zod") });
+const resultReview = load("src/lib/athrecs/profile-result-review.server.ts", {
+  "node:crypto": crypto,
+  "../athlete-workspace/core": reviewCore,
+});
+const summarySends = [];
+const summaryReceipts = load("src/lib/athrecs/profile-result-receipts.server.ts", {
+  "./result-claim-alerts.server": alerts,
+  "./result-claim-email.server": {
+    notifyProfileResultsConfirmed: async (payload) => summarySends.push(payload),
+  },
+});
 const claims = load("src/lib/athrecs/result-claims-api.ts", {
+  "./profile-result-receipts.server": summaryReceipts,
+  "./profile-result-review": load("src/lib/athrecs/profile-result-review.ts", {
+    zod: require("zod"),
+    "../athlete-workspace/core": reviewCore,
+  }),
+  "./profile-result-review.server": resultReview,
   "./claim-invitations-api": { privateClaimMiddleware: "private" },
   "./claim-invitation": invitationCore,
   "./claim-invitations.server": invitations,
@@ -199,8 +217,11 @@ const claims = load("src/lib/athrecs/result-claims-api.ts", {
   "./athlete-account-api": { syncAthleteAccountAfterClaim: async () => {} },
   "./result-claim-alerts.server": alerts,
   "./result-claim-email.server": {
-    notifyResultClaimSubmitted: async (email, notifyStaff, selfConfirmed) =>
-      receipts.push({ email, notifyStaff, selfConfirmed }),
+    notifyProfileResultsConfirmed: async (email) => receipts.push({ summary: email }),
+    notifyResultClaimSubmitted: async (
+      email,
+      { notifyStaff = true, notifyAthlete = true, selfConfirmed = false } = {},
+    ) => receipts.push({ email, notifyStaff, notifyAthlete, selfConfirmed }),
     notifyResultClaimReviewed: async () => {},
     notifyResultClaimWithdrawn: async () => {},
   },
@@ -641,6 +662,7 @@ try {
   const worker = load("src/routes/api/result-claim-alerts.ts", {
     "@tanstack/react-router": { createFileRoute: () => (config) => config },
     "@/lib/athrecs/result-claim-alerts.server": alerts,
+    "@/lib/athrecs/profile-result-receipts.server": summaryReceipts,
     "@/lib/db": connection,
   }).Route.server.handlers.GET;
   process.env.CRON_SECRET = "synthetic-worker-key";
@@ -853,8 +875,8 @@ try {
     "Claims do not create duplicate athlete profiles",
   );
   const beforeRepeat = receipts.length;
-  const replay = await Promise.all(Array.from({ length: 6 }, () => claim("self", 103)));
-  assert(replay.every((c) => c.status === "approved" && c.alreadyOwned));
+  const selfReplay = await Promise.all(Array.from({ length: 6 }, () => claim("self", 103)));
+  assert(selfReplay.every((c) => c.status === "approved" && c.alreadyOwned));
   assert.equal(
     receipts.length,
     beforeRepeat,
@@ -875,6 +897,15 @@ try {
     (await claim("guardian", 102)).status,
     "pending",
     "Removing guardian flag cannot skip the authority check",
+  );
+  assert.equal(
+    (await claim("guardian", 102)).status,
+    "pending",
+    "Repeated omission cannot erase the guardian safeguard",
+  );
+  assert.equal(
+    (await claims.listMyResultClaims(undefined, user("guardian")))[0].claimantRole,
+    "guardian",
   );
   await sql`update athletes set date_of_birth=null where id=101`;
   await sql`insert into editions(id,event_id,event_date,distance_code) values(101,1,current_date,'5K')`;
@@ -925,6 +956,538 @@ try {
   console.log(
     "Self-confirmed claims passed: immediate completion, sibling claims, child/guardian review, revocation, concurrency and source preservation.",
   );
+  // Source-only Run Norwich profiles use stable foreign-keyed claims, with no
+  // fabricated canonical edition/date and no duplicate public performance.
+  await sql`insert into athletes(id,slug,display_name,profile_visibility,country,county) values
+    (8001,'source-claim-runner','Source Claim Runner','public','',''),
+    (8002,'virtual-claim-runner','Virtual Claim Runner','public','','')`;
+  const sourceRow = {
+    year: 2026,
+    date: "2026-09-06",
+    meeting: "Run Norwich 2026",
+    discipline: "10K",
+    performance: "40:05",
+    place: "25",
+    ageGroup: "M40",
+    labels: ["Club at race: Synthetic Harriers"],
+    places: { overall: 25, gender: 20, category: 3 },
+    verificationStatus: "source_verified",
+    sourceUrls: ["https://example.test/norwich.pdf"],
+    archiveReference: {
+      sourceRow: "RN2026:9001",
+      captureId: 1,
+      original: { Bib: "9001", Age: "42", "Gun Time": "41:01" },
+    },
+  };
+  const virtualRow = {
+    ...sourceRow,
+    year: 2020,
+    date: "",
+    meeting: "Run Norwich 2020 (Virtual)",
+    discipline: "10K Virtual",
+    performance: "00:42:05",
+    verificationStatus: "unverified",
+    dateLabel: "18–24 October 2020 (individual run date not supplied)",
+    archiveReference: { sourceRow: "RN2020:p1:r1", captureId: 2, original: { Age: "36" } },
+  };
+  for (const [athlete, p] of [
+    [8001, sourceRow],
+    [8002, virtualRow],
+  ]) {
+    await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+      values(${athlete},'Run Norwich official results',${String(athlete)},'https://example.test/norwich.pdf',now(),false,${[p.year]},${[p.year]},${JSON.stringify([p])}::jsonb,now())`;
+  }
+  await sql`insert into "user"(id,name,email,"emailVerified") values
+    ('source-claim','Source Claim Runner','source-claim@example.test',true),
+    ('source-rival','Source Claim Runner','source-rival@example.test',true),
+    ('virtual-claim','Virtual Claim Runner','virtual-claim@example.test',true)`;
+  const sourceMatches = (
+    await matches.listMyPotentialResultMatches(undefined, user("source-claim"))
+  ).matches;
+  assert.equal(sourceMatches.length, 1);
+  const sourceId = sourceMatches[0].resultId;
+  assert(sourceId < 0);
+  assert.equal(sourceMatches[0].finishTimeSeconds, 2405, "mm:ss stays minutes, never hours");
+  assert.equal(sourceMatches[0].clubName, "Synthetic Harriers");
+  assert.equal(sourceMatches[0].ageAtRace, "42");
+  const sourceDetail = await claims.getClaimableResult(
+    { resultId: sourceId },
+    user("source-claim"),
+  );
+  assert.equal(sourceDetail.gunTimeSeconds, 2461);
+  assert.equal(sourceDetail.categoryPlace, 3);
+  assert.equal(await claims.getClaimableResult({ resultId: sourceId }, user("unrelated")), null);
+  await assert.rejects(claim("unrelated", sourceId), /not available/);
+  const sourceClaim = await claim("source-claim", sourceId);
+  assert.equal(sourceClaim.status, "approved");
+  assert.equal((await claim("source-claim", sourceId)).claimId, sourceClaim.claimId);
+  const [savedSourceClaim] =
+    await sql`select result_id,source_result_id,source_evidence from result_claims where id=${sourceClaim.claimId}`;
+  assert.equal(savedSourceClaim.result_id, null);
+  assert.equal(savedSourceClaim.source_result_id, -sourceId);
+  assert.deepEqual(savedSourceClaim.source_evidence, sourceRow);
+  const rivalSourceClaim = await claim("source-rival", sourceId);
+  assert.equal(rivalSourceClaim.status, "pending");
+  assert(
+    (await sql`select 1 from result_claim_alerts where claim_id=${rivalSourceClaim.claimId}`)
+      .length,
+  );
+  assert.equal(
+    (await sql`select user_id from athlete_account_links where athlete_id=8001`)[0].user_id,
+    "source-claim",
+  );
+  assert.equal(
+    (await claims.listMyResultClaims(undefined, user("source-claim")))[0].resultId,
+    sourceId,
+  );
+  const virtualMatches = (
+    await matches.listMyPotentialResultMatches(undefined, user("virtual-claim"))
+  ).matches;
+  assert.equal(virtualMatches.length, 1);
+  assert.equal(virtualMatches[0].eventDate, virtualRow.dateLabel);
+  const virtualId = virtualMatches[0].resultId;
+  const virtualDetail = await claims.getClaimableResult(
+    { resultId: virtualId },
+    user("virtual-claim"),
+  );
+  assert.equal(virtualDetail.chipTimeSeconds, null);
+  const sourceInvite = await invitations.createExternalInvitation(sql, "one", {
+    athleteId: 8002,
+    recipientName: "Virtual Claim Runner",
+    email: "virtual-claim@example.test",
+    phone: "",
+    telegramUsername: "",
+    socialLinks: [],
+    sourceNote: "Synthetic source profile invitation",
+    matchNote: "Synthetic source profile invitation",
+    reviewed: true,
+  });
+  assert.equal(Number(new URL(sourceInvite.url).searchParams.get("resultId")), virtualId);
+  await claims.submitResultClaim(
+    {
+      resultId: virtualId,
+      invitation: new URL(sourceInvite.url).searchParams.get("invitation"),
+      declarationAccepted: true,
+    },
+    user("virtual-claim"),
+  );
+  await sql`update athlete_source_histories set published_at=published_at where athlete_id in (8001,8002)`;
+  assert.equal(
+    (
+      await sql`select count(*)::int n from source_history_claim_results where athlete_id in (8001,8002)`
+    )[0].n,
+    2,
+    "repeat projection preserves IDs",
+  );
+  assert.equal(
+    (await sql`select count(*)::int n from results where athlete_id in (8001,8002)`)[0].n,
+    0,
+    "claim integration never duplicates canonical results",
+  );
+  assert.deepEqual(
+    (await sql`select performances from athlete_source_histories where athlete_id=8002`)[0]
+      .performances,
+    [virtualRow],
+  );
+  await sql`update athlete_source_histories set published_at=null where athlete_id=8002`;
+  assert.equal(
+    (await matches.listMyPotentialResultMatches(undefined, user("virtual-claim"))).matches.length,
+    0,
+    "unpublished history is not discoverable",
+  );
+  console.log(
+    "Source-history claims passed: dates/windows, club/age/placings, minute precision, authorization, stable IDs, evidence snapshot, invitations, conflict review and no canonical duplicates.",
+  );
+  // Whole-profile review uses one declaration and one receipt, not one claim per row.
+  configured = true;
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values('batch-user','Batch Test Athlete','batch@example.test',true,now(),now()),('batch-staff','Batch Reviewer','batch-reviewer@example.test',true,now(),now())`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(8200,'batch-test-athlete','Batch Test Athlete','public')`;
+  await sql`insert into editions(id,event_id,event_date,distance_code) values(8203,1,'2024-05-04','10K')`;
+  await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,status) values(8201,1,8200,2345,'finished'),(8202,2,8200,2378,'finished'),(8203,8203,8200,null,'dnf')`;
+  const historyRow = {
+    year: 2025,
+    date: "2025-03-01",
+    sourceDate: "1 Mar 2025",
+    ageGroup: "",
+    discipline: "5K",
+    performance: "18:20",
+    wind: "",
+    place: "12",
+    venue: "Test Venue",
+    meeting: "Synthetic History Race",
+    sourceUrls: ["https://example.test/history"],
+    labels: [],
+    verificationStatus: "source_verified",
+  };
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    values(8200,'Synthetic timing','batch-history','https://example.test/history',now(),true,array[2025],array[2025],${JSON.stringify([historyRow])}::jsonb,now())`;
+  const originalBatchResults = JSON.stringify(
+    await sql`select * from results where athlete_id=8200 order by id`,
+  );
+  const originalHistory = JSON.stringify(
+    await sql`select * from athlete_source_histories where athlete_id=8200`,
+  );
+  const detail = await claims.getClaimableResult(
+    { resultId: 8201, includeReview: true },
+    user("batch-user"),
+  );
+  assert.equal(
+    detail.review.rows.length,
+    4,
+    "Finished, non-finish and source-history rows are all reviewable",
+  );
+  assert.equal(detail.sourceUrl, null, "Stored evidence is not sent to the claim UI");
+  assert(
+    !JSON.stringify(detail.review).includes("example.test"),
+    "Review response omits private source URLs",
+  );
+  assert.equal(
+    await claims.getClaimableResult({ resultId: 8201, includeReview: true }, user("unrelated")),
+    null,
+  );
+  assert.equal(
+    await claims.getClaimableResult({ resultId: 8201, includeReview: true }, user("unverified")),
+    null,
+  );
+  const batchInput = {
+    resultId: 8201,
+    declarationAccepted: true,
+    review: {
+      requestId: crypto.randomUUID(),
+      snapshot: detail.review.snapshot,
+      includedKeys: ["r:8201", "r:8203"],
+      additions: [
+        {
+          index: 1,
+          race: "Synthetic Missing 10K",
+          date: "2025-02-02",
+          distance: "10K",
+          time: "42:34",
+          timingBasis: "gun",
+          sourceUrl: "https://example.test/missing",
+          bib: "42",
+          place: "",
+        },
+      ],
+    },
+  };
+  await assert.rejects(
+    () =>
+      claims.submitResultClaim(
+        { ...batchInput, review: { ...batchInput.review, includedKeys: ["r:8201", "r:1"] } },
+        user("batch-user"),
+      ),
+    /does not belong/,
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_result_confirmations where user_id='batch-user'`)
+      .length,
+    0,
+    "Invalid selection rolls back without a claim or confirmation",
+  );
+  const receiptBefore = summarySends.length;
+  const genericBefore = receipts.length;
+  const submitted = await claims.submitResultClaim(batchInput, user("batch-user"));
+  assert.equal(
+    submitted.status,
+    "approved",
+    "An eligible batch claim completes with the same ownership safeguards",
+  );
+  assert.deepEqual(submitted.confirmation, { included: 2, excluded: 2, added: 1, reused: false });
+  assert.equal(
+    (await sql`select * from result_claims where claimant_user_id='batch-user'`).length,
+    1,
+  );
+  assert.equal(
+    summarySends.length,
+    receiptBefore + 1,
+    "Exactly one athlete summary for all results",
+  );
+  assert.equal(summarySends.at(-1).resultId, 8201);
+  assert.equal(
+    summarySends.at(-1).status,
+    "approved",
+    "Frozen receipt reflects completed ownership",
+  );
+  assert.equal(
+    receipts.length,
+    genericBefore,
+    "No generic athlete or staff email is generated for immediate batch completion",
+  );
+  assert.equal(
+    (
+      await sql`select entries from athlete_result_proposals where id=${batchInput.review.requestId}::uuid`
+    )[0].entries[0].timingBasis,
+    "gun",
+  );
+  const replay = await claims.submitResultClaim(batchInput, user("batch-user"));
+  assert.equal(replay.confirmation.reused, true);
+  assert.equal(summarySends.length, receiptBefore + 1, "Retry sends no extra athlete email");
+  const replayNewId = await claims.submitResultClaim(
+    { ...batchInput, review: { ...batchInput.review, requestId: crypto.randomUUID() } },
+    user("batch-user"),
+  );
+  assert.equal(
+    replayNewId.confirmation.reused,
+    true,
+    "Duplicate payload with a new request ID is also idempotent",
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_results where user_id='batch-user'`)[0]
+      .result_id,
+    8202,
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_history_choices where user_id='batch-user'`)[0]
+      .excluded,
+    true,
+  );
+  assert.equal(
+    JSON.stringify(await sql`select * from results where athlete_id=8200 order by id`),
+    originalBatchResults,
+  );
+  assert.equal(
+    JSON.stringify(await sql`select * from athlete_source_histories where athlete_id=8200`),
+    originalHistory,
+    "Original source rows are never edited",
+  );
+  // A source edit while a review is open must fail atomically.
+  const current = await claims.getClaimableResult(
+    { resultId: 8201, includeReview: true },
+    user("batch-user"),
+  );
+  await sql`update results set gun_time_seconds=2400 where id=8201`;
+  await assert.rejects(
+    () =>
+      claims.submitResultClaim(
+        {
+          ...batchInput,
+          review: {
+            requestId: crypto.randomUUID(),
+            snapshot: current.review.snapshot,
+            includedKeys: current.review.rows.map((r) => r.key),
+            additions: [],
+          },
+        },
+        user("batch-user"),
+      ),
+    /results have changed/,
+  );
+  await sql`update results set gun_time_seconds=null where id=8201`;
+  const owned = await claims.getClaimableResult(
+    { resultId: 8201, includeReview: true },
+    user("batch-user"),
+  );
+  const restored = await claims.submitResultClaim(
+    {
+      resultId: 8201,
+      declarationAccepted: true,
+      review: {
+        requestId: crypto.randomUUID(),
+        snapshot: owned.review.snapshot,
+        includedKeys: owned.review.rows.map((r) => r.key),
+        additions: [],
+      },
+    },
+    user("batch-user"),
+  );
+  assert.equal(restored.alreadyOwned, true);
+  assert.equal(restored.confirmation.included, 4);
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_results where user_id='batch-user'`).length,
+    0,
+    "Restoring selections removes only this account’s exclusions",
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_history_choices where user_id='batch-user'`)[0]
+      .excluded,
+    false,
+  );
+  assert.equal(
+    (await sql`select * from result_claims where claimant_user_id='batch-user'`).length,
+    1,
+    "Owned re-review creates no new claim",
+  );
+  // Imported junior categories need the same protection as canonical results.
+  // Excluding a junior row from the selection cannot remove the identity safeguard.
+  await sql`insert into "user"(id,name,email,"emailVerified") values('source-child','Imported Child Runner','source-child@example.test',true)`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(8300,'imported-child-runner','Imported Child Runner','public')`;
+  await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,status) values(8300,1,8300,2000,'finished')`;
+  const juniorRow = {
+    ...historyRow,
+    year: new Date().getUTCFullYear(),
+    date: "",
+    ageGroup: "JW11-14",
+  };
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    values(8300,'Synthetic junior source','junior-history','https://example.test/junior',now(),true,array[2026],array[2026],${JSON.stringify([juniorRow])}::jsonb,now())`;
+  const juniorDetail = await claims.getClaimableResult(
+    { resultId: 8300, includeReview: true },
+    user("source-child"),
+  );
+  const juniorInput = {
+    resultId: 8300,
+    declarationAccepted: true,
+    review: {
+      requestId: crypto.randomUUID(),
+      snapshot: juniorDetail.review.snapshot,
+      includedKeys: ["r:8300"],
+      additions: [],
+    },
+  };
+  const juniorReceiptBefore = summarySends.length;
+  const juniorClaim = await claims.submitResultClaim(juniorInput, user("source-child"));
+  assert.equal(juniorClaim.status, "pending");
+  assert.match(
+    (await claims.listMyResultClaims(undefined, user("source-child")))[0].conflictReason,
+    /responsible adult/,
+  );
+  assert.equal(summarySends.length, juniorReceiptBefore + 1);
+  assert.equal(summarySends.at(-1).status, "pending");
+  assert.equal(
+    receipts.at(-1).notifyAthlete,
+    false,
+    "Review exceptions still receive only their consolidated athlete receipt",
+  );
+  await claims.submitResultClaim(juniorInput, user("source-child"));
+  assert.equal(summarySends.length, juniorReceiptBefore + 1);
+  assert.equal((await sql`select * from athlete_account_links where athlete_id=8300`).length, 0);
+  // Even without a junior result, the batch UI/API guardian declaration is sticky.
+  await sql`update athlete_source_histories set performances='[]'::jsonb where athlete_id=8300`;
+  const guardianDetail = await claims.getClaimableResult(
+    { resultId: 8300, includeReview: true },
+    user("source-child"),
+  );
+  const guardianInput = {
+    ...juniorInput,
+    claimantRole: "guardian",
+    review: {
+      ...juniorInput.review,
+      requestId: crypto.randomUUID(),
+      snapshot: guardianDetail.review.snapshot,
+    },
+  };
+  assert.equal(
+    (await claims.submitResultClaim(guardianInput, user("source-child"))).status,
+    "pending",
+  );
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const detail = await claims.getClaimableResult(
+      { resultId: 8300, includeReview: true },
+      user("source-child"),
+    );
+    assert.equal(
+      (
+        await claims.submitResultClaim(
+          {
+            ...guardianInput,
+            claimantRole: "athlete",
+            review: {
+              ...guardianInput.review,
+              requestId: crypto.randomUUID(),
+              snapshot: detail.review.snapshot,
+            },
+          },
+          user("source-child"),
+        )
+      ).status,
+      "pending",
+    );
+  }
+  // A PR #635 review already saved before this policy must not trap an eligible
+  // athlete in pending forever, or rewrite that earlier audit/email on upgrade.
+  await sql`insert into "user"(id,name,email,"emailVerified") values('legacy-batch','Legacy Batch Runner','legacy-batch@example.test',true)`;
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(8400,'legacy-batch-runner','Legacy Batch Runner','public')`;
+  await sql`insert into results(id,edition_id,athlete_id,finish_time_seconds,status) values(8400,1,8400,2100,'finished')`;
+  const [legacyClaim] =
+    await sql`insert into result_claims(result_id,athlete_id,claimant_user_id,claimant_email,status,verification_method,declaration_accepted)
+    values(8400,8400,'legacy-batch','legacy-batch@example.test','pending','other',true) returning id`;
+  const legacyDetail = await claims.getClaimableResult(
+    { resultId: 8400, includeReview: true },
+    user("legacy-batch"),
+  );
+  const oldId = crypto.randomUUID();
+  const oldPayload = { id: oldId, status: "pending", resultId: 8400 };
+  const oldHash = crypto
+    .createHash("sha256")
+    .update(
+      JSON.stringify({
+        athleteId: 8400,
+        snapshot: legacyDetail.review.snapshot,
+        includedKeys: ["r:8400"],
+        additions: [],
+      }),
+    )
+    .digest("hex");
+  await sql`insert into athlete_profile_result_confirmations(id,user_id,athlete_id,claim_id,input_hash,snapshot,included_keys,excluded_keys,email_payload,email_sent_at)
+    values(${oldId}::uuid,'legacy-batch',8400,${legacyClaim.id},${oldHash},${legacyDetail.review.snapshot},'["r:8400"]'::jsonb,'[]'::jsonb,${JSON.stringify(oldPayload)}::jsonb,now())`;
+  const resumedInput = {
+    resultId: 8400,
+    declarationAccepted: true,
+    review: {
+      requestId: crypto.randomUUID(),
+      snapshot: legacyDetail.review.snapshot,
+      includedKeys: ["r:8400"],
+      additions: [],
+    },
+  };
+  assert.equal(
+    (await sql`select * from athlete_account_links where athlete_id=8400`).length,
+    0,
+    "Reading does not complete an existing claim",
+  );
+  const legacyReceiptBefore = summarySends.length;
+  const resumed = await claims.submitResultClaim(resumedInput, user("legacy-batch"));
+  assert.equal(resumed.status, "approved");
+  assert.equal(resumed.claimId, legacyClaim.id, "Reuse the earlier claim");
+  assert.deepEqual(
+    (
+      await sql`select email_payload from athlete_profile_result_confirmations where id=${oldId}::uuid`
+    )[0].email_payload,
+    oldPayload,
+  );
+  assert.equal(summarySends.length, legacyReceiptBefore + 1);
+  assert.equal(summarySends.at(-1).status, "approved");
+  await claims.submitResultClaim(resumedInput, user("legacy-batch"));
+  assert.equal(
+    summarySends.length,
+    legacyReceiptBefore + 1,
+    "Retry of resumed claim sends no extra email",
+  );
+  // A competing account may save its proposal; it cannot alter the active owner’s selection.
+  await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values('batch-other','Batch Test Athlete','batch-other@example.test',true,now(),now())`;
+  const competitor = await claims.getClaimableResult(
+    { resultId: 8201, includeReview: true },
+    user("batch-other"),
+  );
+  const competingBatch = await claims.submitResultClaim(
+    {
+      resultId: 8201,
+      declarationAccepted: true,
+      review: {
+        requestId: crypto.randomUUID(),
+        snapshot: competitor.review.snapshot,
+        includedKeys: ["r:8201"],
+        additions: [],
+      },
+    },
+    user("batch-other"),
+  );
+  assert.equal(competingBatch.status, "pending");
+  assert.equal(
+    (
+      await sql`select user_id from athlete_account_links where athlete_id=8200 and status='active'`
+    )[0].user_id,
+    "batch-user",
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_results where user_id='batch-user'`).length,
+    0,
+  );
+  console.log(
+    "Whole-profile confirmation passed: complete result list, additions/removals/restores, one email, replay, changed snapshots, source preservation and competing-owner isolation.",
+  );
+
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");
   const savedFetch = globalThis.fetch;

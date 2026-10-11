@@ -1,5 +1,12 @@
 import { CHIP_TIME_CAVEAT } from "@/lib/athrecs/reported-personal-bests";
 import type { ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
+import { hasReportedFinish, reportedResultSport } from "@/lib/athrecs/profile-result-presentation";
+import { CompletionMedal } from "./ProfileAward";
+import { CountryFlag } from "./CountryFlag";
+import { ResultVerificationBadge } from "./ResultVerificationBadge";
+import { ResultEvidence } from "./ResultEvidence";
+import { countryFlag } from "@/lib/athrecs/country-flags";
+import { HistoricalTiming } from "./ResultTiming";
 
 export function ReportedRaceResultRows({
   records,
@@ -23,19 +30,30 @@ export function ReportedRaceResultRows({
         {record.reportedDate}
       </td>
       <td role="cell" data-label="Event" className="min-w-64 px-3 py-2">
-        <span className="font-medium">{record.event}</span>
-        {showEvidence ? (
-          <span className="block text-xs text-muted">{record.uncertainty}</span>
-        ) : null}
+        <span className="inline-flex items-center gap-1.5 font-medium">
+          {hasReportedFinish(record) ? <CompletionMedal place={record.reportedPlace} /> : null}
+          {record.event}
+        </span>
+        <ResultEvidence
+          notes={record.uncertainty}
+          urls={record.sources.map((source) => source.url)}
+          sourceLabels={record.sources}
+          showEvidence={showEvidence}
+        />
       </td>
       <td role="cell" data-label="Sport" className="px-3 py-2 text-xs">
-        Running
+        {reportedResultSport(record)}
       </td>
       <td role="cell" data-label="Distance" className="whitespace-nowrap px-3 py-2 text-xs">
         {record.distance}
       </td>
       <td role="cell" data-label="Location" className="min-w-32 px-3 py-2 text-xs">
-        {record.location}
+        <span className="inline-flex flex-wrap items-center gap-1.5">
+          {record.location}
+          <CountryFlag
+            country={countryFlag(record.location.split(",").at(-1)?.trim()).code || ""}
+          />
+        </span>
       </td>
       <td role="cell" data-label="Time" className="min-w-40 px-3 py-2">
         <span className="font-semibold tabular-nums">{record.reportedTime}</span>
@@ -47,9 +65,9 @@ export function ReportedRaceResultRows({
             PB*
           </span>
         ) : null}
-        <span className="block text-xs text-muted">
-          {showEvidence ? CHIP_TIME_CAVEAT : "Reported"}
-        </span>
+        <ResultVerificationBadge status="unverified" />
+        <HistoricalTiming performance={record.reportedTime} discipline={record.distance} />
+        {showEvidence ? <span className="block text-xs text-muted">{CHIP_TIME_CAVEAT}</span> : null}
       </td>
       <td role="cell" data-label="Place" className="px-3 py-2 text-xs">
         {record.reportedPlace}

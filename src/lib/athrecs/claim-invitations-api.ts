@@ -30,7 +30,7 @@ export const getMyOpenClaimInvitations = createServerFn({ method: "GET" })
     if (IS_RUNRECS_SITE || process.env.VERCEL_ENV === "preview") return [];
     const sql = await getSql();
     const rows = await sql<{ athleteName: string; resultId: number; claim_url: string }>`
-      select a.display_name as "athleteName", i.result_id as "resultId", i.claim_url
+      select a.display_name as "athleteName", i.claim_key as "resultId", i.claim_url
       from athlete_claim_invitations i
       join athletes a on a.id=i.athlete_id
       join "user" u on u.id=${context.userId}
@@ -39,7 +39,7 @@ export const getMyOpenClaimInvitations = createServerFn({ method: "GET" })
         and (i.recipient_email=lower(trim(u.email)) or (i.user_id=u.id and i.invitation_kind='contact'))
         and i.revoked_at is null and i.declined_at is null and i.claim_id is null
         and i.expires_at>now()
-        and not exists (select 1 from result_claims c where c.result_id=i.result_id
+        and not exists (select 1 from result_claims c where c.claim_key=i.claim_key
           and c.claimant_user_id=u.id and c.status in ('pending','needs_info','approved'))
         and not exists (select 1 from athlete_account_links l where l.athlete_id=i.athlete_id
           and l.user_id=u.id and l.status='active')
@@ -142,7 +142,15 @@ export const createStaffExternalInvitation = createServerFn({ method: "POST" })
 export const getClaimInvitationIntro = createServerFn({ method: "GET" })
   .middleware([privateClaimMiddleware])
   .validator((input: unknown) =>
-    z.object({ token: invitationToken, resultId: z.number().int().positive() }).parse(input),
+    z
+      .object({
+        token: invitationToken,
+        resultId: z
+          .number()
+          .int()
+          .refine((id) => id !== 0 && Math.abs(id) <= 2147483647),
+      })
+      .parse(input),
   )
   .handler(async ({ data }) => {
     const { getSql } = await import("@/lib/db");
@@ -178,7 +186,15 @@ export const revokeStaffClaimInvitation = createServerFn({ method: "POST" })
 export const declineClaimInvitation = createServerFn({ method: "POST" })
   .middleware([privateClaimMiddleware, authMiddleware])
   .validator((input: unknown) =>
-    z.object({ token: invitationToken, resultId: z.number().int().positive() }).parse(input),
+    z
+      .object({
+        token: invitationToken,
+        resultId: z
+          .number()
+          .int()
+          .refine((id) => id !== 0 && Math.abs(id) <= 2147483647),
+      })
+      .parse(input),
   )
   .handler(async ({ data, context }) => {
     const { getSql } = await import("@/lib/db");
@@ -189,7 +205,7 @@ export const declineClaimInvitation = createServerFn({ method: "POST" })
     return sql.transaction(async (tx) => {
       const [result] = await tx<{
         athlete_id: number;
-      }>`select athlete_id from results where id=${data.resultId}`;
+      }>`select athlete_id from athlete_claimable_results where id=${data.resultId} and available`;
       if (!result) throw new Error("Invitation unavailable.");
       await tx`select id from athletes where id=${result.athlete_id} for update`;
       const invite = await validateInvitation(

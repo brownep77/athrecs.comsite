@@ -72,8 +72,15 @@ async function deliver(
 /** Confirm receipt to the athlete and alert the private staff review inbox. */
 export async function notifyResultClaimSubmitted(
   context: ClaimEmailContext,
-  notifyStaff = true,
-  selfConfirmed = false,
+  {
+    notifyStaff = true,
+    notifyAthlete = true,
+    selfConfirmed = false,
+  }: {
+    notifyStaff?: boolean;
+    notifyAthlete?: boolean;
+    selfConfirmed?: boolean;
+  } = {},
 ): Promise<void> {
   if (!authEmailConfigured()) return;
   const claimUrl = `${publicOrigin()}/claim-results?resultId=${context.resultId}`;
@@ -81,18 +88,24 @@ export async function notifyResultClaimSubmitted(
   const summary = claimSummary(context);
 
   await Promise.all([
-    deliver("claim-submitted-athlete", {
-      to: context.claimantEmail,
-      subject: selfConfirmed
-        ? "Your ATHRECS profile claim is complete"
-        : "ATHRECS received your result claim",
-      heading: selfConfirmed ? "Your results are now linked" : "Your result claim is in review",
-      message: selfConfirmed
-        ? `You confirmed that ${summary} belongs to you. This athlete profile and its stored results are now linked to your Athlete Account. You do not need to claim each race separately. This records your self-confirmation; source checks and photo or ID verification are separate.`
-        : `We received your claim for ${summary}. This claim needs a staff ownership check before linking the athlete profile. Open your claim to see the reason and any requested information.`,
-      actionLabel: "View my claim",
-      actionUrl: claimUrl,
-    }),
+    ...(notifyAthlete
+      ? [
+          deliver("claim-submitted-athlete", {
+            to: context.claimantEmail,
+            subject: selfConfirmed
+              ? "Your ATHRECS profile claim is complete"
+              : "ATHRECS received your result claim",
+            heading: selfConfirmed
+              ? "Your results are now linked"
+              : "Your result claim is in review",
+            message: selfConfirmed
+              ? `You confirmed that ${summary} belongs to you. Your athlete profile and its stored results are now linked. This records your self-confirmation; independent result checks and photo or ID verification are separate.`
+              : `We received your claim for ${summary}. This claim needs a staff ownership check before linking the athlete profile. Open your claim to see the reason and any requested information.`,
+            actionLabel: "View my claim",
+            actionUrl: claimUrl,
+          }),
+        ]
+      : []),
     ...(notifyStaff && !selfConfirmed ? staffRecipients() : []).map((to) =>
       deliver("claim-submitted-staff", {
         to,
@@ -164,4 +177,32 @@ export async function notifyResultClaimWithdrawn(context: ClaimEmailContext): Pr
     actionLabel: "View my claims",
     actionUrl: `${publicOrigin()}/claim-results`,
   });
+}
+
+/** One athlete receipt for the whole explicitly reviewed snapshot. */
+export async function notifyProfileResultsConfirmed(context: {
+  id: string;
+  resultId: number;
+  claimantEmail: string;
+  athleteName: string;
+  included: number;
+  excluded: number;
+  added: number;
+  status: ClaimEmailStatus;
+}) {
+  if (!authEmailConfigured()) return;
+  await sendAthrecsAuthEmail(
+    {
+      to: context.claimantEmail,
+      subject: "Your ATHRECS profile and results confirmation",
+      heading:
+        context.status === "approved"
+          ? "Your profile claim is complete"
+          : "Your results review is saved",
+      message: `${context.athleteName}: you confirmed ${context.included} results, removed ${context.excluded} from your selection and submitted ${context.added} missing results for review. ${context.status === "approved" ? "Your profile is linked to your account." : "Your profile claim is awaiting an ownership check. You do not need to claim each result separately."} Your declaration is separate from independent result verification and photo or ID checks. Newly submitted results remain unverified until checked. This is one summary for your whole confirmation.`,
+      actionLabel: "View my profile claim",
+      actionUrl: `${publicOrigin()}/claim-results?resultId=${context.resultId}`,
+    },
+    { idempotencyKey: `profile-results-confirmation/${context.id}` },
+  );
 }

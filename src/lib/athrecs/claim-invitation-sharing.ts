@@ -11,7 +11,7 @@ export function claimInvitationSharing(
     parsed.origin !== "https://www.athrecs.com" ||
     parsed.pathname !== "/claim-results" ||
     !/^[a-f0-9]{64}$/.test(parsed.searchParams.get("invitation") ?? "") ||
-    !/^[1-9]\d*$/.test(parsed.searchParams.get("resultId") ?? "")
+    !/^-?[1-9]\d*$/.test(parsed.searchParams.get("resultId") ?? "")
   ) {
     throw new Error("Invalid private claim link.");
   }

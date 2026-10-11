@@ -2,6 +2,8 @@ import type { ProfileResult } from "./profile-records";
 import type { SourceHistory, SourcePerformance } from "./source-performance-history";
 import { sourceHistorySports, type HistoryResult } from "./profile-history-results.ts";
 import { isWmmSource, publicProfileResultNotes } from "./profile-source-presentation.ts";
+import { hasHistoryFinish, resultVerification } from "./profile-result-presentation.ts";
+import { competitionRound } from "./competition-awards.ts";
 
 const normal = (value: string) => value.trim().toLowerCase().replace(/\s+/g, " ");
 
@@ -63,7 +65,7 @@ export function buildProfileTimeline(
   recorded: readonly ProfileResult[],
   histories: readonly SourceHistory[],
 ): { results: ProfileResult[]; history: HistoryResult[]; count: number } {
-  const results = recorded
+  const results: ProfileResult[] = recorded
     .filter((r) => !r.details?.profileExcluded)
     .map((r) => ({
       ...r,
@@ -71,6 +73,7 @@ export function buildProfileTimeline(
       details: { ...r.details },
     }));
   const history: HistoryResult[] = [];
+  const sourcePlaces = new Map<ProfileResult, { priority: number; places: Set<string> }>();
   for (const source of histories) {
     for (const [index, original] of source.performances.entries()) {
       if (original.profileExcluded) continue;
@@ -80,31 +83,55 @@ export function buildProfileTimeline(
           row.date &&
           r.eventDate === row.date &&
           discipline(r.distanceCode) === discipline(row.discipline, row.performance) &&
-          JSON.stringify(r.details.disqualification) === JSON.stringify(row.disqualification) &&
+          JSON.stringify(r.details?.disqualification) === JSON.stringify(row.disqualification) &&
           ((seconds(row.performance) === r.finishTimeSeconds && r.finishTimeSeconds !== null) ||
             (r.finishTimeSeconds === null && normal(r.status) === normal(row.performance))) &&
           ((row.eventSlug === r.eventSlug && Boolean(row.eventSlug)) ||
             normal(row.meeting) === normal(r.eventName) ||
-            sameSource(row.sourceUrls, r.sourceUrls)),
+            sameSource(row.sourceKeys ?? row.sourceUrls, r.sourceKeys ?? r.sourceUrls)),
       );
       if (known) {
+        known.details ??= {};
+        const sourceRound = row.labels.some((label) => /^round:/i.test(label))
+          ? competitionRound(row.labels)
+          : undefined;
+        if (sourceRound && resultVerification(row.verificationStatus, row.providerName).verified)
+          known.displayRound =
+            known.displayRound && known.displayRound !== sourceRound ? "conflicting" : sourceRound;
         known.sourceUrls = [
           ...new Set([
             ...known.sourceUrls,
             ...row.sourceUrls.filter((url) => !isWmmSource(null, [url])),
           ]),
         ];
+        if (known.sourceKeys || row.sourceKeys)
+          known.sourceKeys = [...new Set([...(known.sourceKeys ?? []), ...(row.sourceKeys ?? [])])];
         known.details.note = notes(
           known.details.note,
           publicProfileResultNotes(row.notes, row.providerName, row.sourceUrls),
         );
-        // A source placing is shown in the evidence, without changing the result's
-        // stored classification or feeding a new placing into achievement totals.
+        // Keep the original classification untouched. An accepted source's explicit
+        // overall place may decorate this merged row, with its provenance in evidence.
         if (known.overallPlace === null && row.place)
           known.details.note = notes(
             known.details.note,
             `${isWmmSource(row.providerName, row.sourceUrls) ? "Source result" : row.providerName}: place ${row.place}.`,
           );
+        const supplied = row.places ? String(row.places.overall ?? "") : row.place;
+        const place = supplied.match(/^([1-9]\d*(?:=|[AB])?)(?:\/(?:[1-9]\d*)?){0,2}$/)?.[1];
+        if (
+          known.overallPlace === null &&
+          !known.conflicting &&
+          place &&
+          hasHistoryFinish(row) &&
+          resultVerification(row.verificationStatus, row.providerName).verified
+        ) {
+          const priority = /^world\s*athletics$/i.test(row.providerName.trim()) ? 2 : 1;
+          const existing = sourcePlaces.get(known);
+          if (!existing || priority > existing.priority)
+            sourcePlaces.set(known, { priority, places: new Set([place]) });
+          else if (priority === existing.priority) existing.places.add(place);
+        }
         continue;
       }
       const duplicate = history.find(
@@ -117,12 +144,23 @@ export function buildProfileTimeline(
           p.place === row.place &&
           sameRound(p, row) &&
           JSON.stringify(p.disqualification) === JSON.stringify(row.disqualification) &&
-          (normal(p.meeting) === normal(row.meeting) || sameSource(p.sourceUrls, row.sourceUrls)),
+          (normal(p.meeting) === normal(row.meeting) ||
+            sameSource(p.sourceKeys ?? p.sourceUrls, row.sourceKeys ?? row.sourceUrls)),
       );
       if (duplicate) {
         duplicate.performance = {
           ...duplicate.performance,
           sourceUrls: [...new Set([...duplicate.performance.sourceUrls, ...row.sourceUrls])],
+          ...(duplicate.performance.sourceKeys || row.sourceKeys
+            ? {
+                sourceKeys: [
+                  ...new Set([
+                    ...(duplicate.performance.sourceKeys ?? []),
+                    ...(row.sourceKeys ?? []),
+                  ]),
+                ],
+              }
+            : {}),
           notes: notes(duplicate.performance.notes, row.notes),
         };
       } else {
@@ -133,6 +171,9 @@ export function buildProfileTimeline(
         });
       }
     }
+  }
+  for (const [result, candidates] of sourcePlaces) {
+    if (candidates.places.size === 1) result.displayOverallPlace = [...candidates.places][0];
   }
   return { results, history, count: results.length + history.length };
 }

@@ -1,3 +1,6 @@
+import { ProfileResultConfirmation } from "./ProfileResultConfirmation";
+import { getClaimableResult } from "@/lib/athrecs/result-claims-api";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArchivedResultSuggestions } from "./ArchivedResultSuggestions";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { useState } from "react";
@@ -30,21 +33,10 @@ import {
 } from "@/lib/athrecs/grok-runner-search-api";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { IS_ATHRECS_SITE, sportIsInAthleteProfileScope } from "@/lib/site-scope";
-import { submitResultClaim } from "@/lib/athrecs/result-claims-api";
 import {
   dismissMyAthleteMatch,
   getMyDismissedAthletes,
 } from "@/lib/athrecs/profile-connections-api";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@/components/ui/alert-dialog";
 
 const INITIAL_MATCH_COUNT = 8;
 
@@ -115,8 +107,18 @@ function actionLabel(match: PotentialResultMatch): string {
 
 export function PotentialResultMatchesPanel() {
   const queryClient = useQueryClient();
-  const [confirmMatch, setConfirmMatch] = useState<PotentialResultMatch | null>(null);
   const [feedback, setFeedback] = useState("");
+  const [confirmMatch, setConfirmMatch] = useState<PotentialResultMatch | null>(null);
+  const [reviewRevision, setReviewRevision] = useState(0);
+  const review = useQuery({
+    queryKey: ["claim-review-dialog", confirmMatch?.resultId],
+    queryFn: () =>
+      getClaimableResult({ data: { resultId: confirmMatch!.resultId, includeReview: true } }),
+    enabled: Boolean(confirmMatch),
+    refetchOnWindowFocus: false,
+    gcTime: 0,
+    retry: false,
+  });
   const refresh = () =>
     Promise.all([
       queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] }),
@@ -126,20 +128,7 @@ export function PotentialResultMatchesPanel() {
       queryClient.invalidateQueries({ queryKey: ["my-dismissed-athletes"] }),
       queryClient.invalidateQueries({ queryKey: ["my-athlete-bio"] }),
     ]);
-  const addMatch = useMutation({
-    mutationFn: (resultId: number) =>
-      submitResultClaim({ data: { resultId, declarationAccepted: true } }),
-    onSuccess: async (outcome) => {
-      setConfirmMatch(null);
-      setFeedback(
-        outcome.status === "approved"
-          ? "Claim complete — athlete confirmed. All results on this profile are now linked."
-          : "Your claim is with staff for an ownership check.",
-      );
-      await refresh();
-    },
-    onError: (error) => setFeedback(error.message),
-  });
+
   const dismiss = useMutation({
     mutationFn: (data: { athleteId: number; dismissed: boolean }) =>
       dismissMyAthleteMatch({ data }),
@@ -217,37 +206,37 @@ export function PotentialResultMatchesPanel() {
           {feedback}
         </p>
       ) : null}
-      <AlertDialog
+
+      <Dialog
         open={Boolean(confirmMatch)}
         onOpenChange={(open) => {
-          if (!open && !addMatch.isPending) setConfirmMatch(null);
+          if (!open) setConfirmMatch(null);
         }}
       >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Claim this profile?</AlertDialogTitle>
-            <AlertDialogDescription>
-              {confirmMatch?.athleteName} · {confirmMatch?.eventName}. Confirm this is your result.
-              Straightforward claims link this athlete record and its stored results immediately.
-              Staff review conflicts, discrepancies and child claims. This records your
-              self-confirmation, not a photo or ID check. You only need to claim once.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={addMatch.isPending}>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              className="h-auto min-h-11 whitespace-normal py-3"
-              disabled={addMatch.isPending}
-              onClick={(event) => {
-                event.preventDefault();
-                if (confirmMatch) addMatch.mutate(confirmMatch.resultId);
+        <DialogContent className="max-h-[90dvh] overflow-y-auto sm:max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Claim your profile and review all results</DialogTitle>
+          </DialogHeader>
+          {review.isPending ? (
+            <p role="status">Loading your results…</p>
+          ) : review.isError || !review.data?.review ? (
+            <div role="alert">
+              <p>Your results could not be loaded.</p>
+              <Button onClick={() => void review.refetch()}>Try again</Button>
+            </div>
+          ) : (
+            <ProfileResultConfirmation
+              key={`${confirmMatch?.resultId}:${reviewRevision}`}
+              resultId={confirmMatch!.resultId}
+              athleteName={review.data.athleteName}
+              review={review.data.review}
+              onReload={() => {
+                void review.refetch().then(() => setReviewRevision((n) => n + 1));
               }}
-            >
-              {addMatch.isPending ? "Submitting…" : "Yes, this is me — complete my claim"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            />
+          )}
+        </DialogContent>
+      </Dialog>
       <div className="flex flex-wrap items-start justify-between gap-4 border-b border-border bg-elevated/50 p-5">
         <div className="max-w-2xl">
           <div className="flex items-center gap-2">
@@ -340,6 +329,7 @@ export function PotentialResultMatchesPanel() {
                     {[
                       placeText(match.overallPlace),
                       match.category,
+                      match.ageAtRace ? `Age at race ${match.ageAtRace}` : "",
                       match.bib ? `Bib ${match.bib}` : "",
                     ]
                       .filter(Boolean)
@@ -382,7 +372,7 @@ export function PotentialResultMatchesPanel() {
                     }}
                   >
                     <Trophy className="size-4" aria-hidden="true" />
-                    {actionLabel(match)}
+                    Claim profile &amp; review all results
                   </Button>
                 )}
                 <Button

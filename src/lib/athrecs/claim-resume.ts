@@ -7,7 +7,7 @@ export function rememberClaim(userId: string, resultId: number | null) {
   try {
     const key = `athrecs:unfinished-claim:${userId}`;
     if (resultId === null) window.localStorage.removeItem(key);
-    else if (Number.isSafeInteger(resultId) && resultId > 0)
+    else if (Number.isSafeInteger(resultId) && resultId !== 0)
       window.localStorage.setItem(key, JSON.stringify({ resultId, savedAt: Date.now() }));
   } catch {
     // A blocked storage preference must not prevent claiming.
@@ -22,7 +22,7 @@ export function unfinishedClaim(userId: string): number | null {
     );
     if (
       Number.isSafeInteger(value?.resultId) &&
-      value.resultId > 0 &&
+      value.resultId !== 0 &&
       Number.isFinite(value.savedAt) &&
       Date.now() - value.savedAt >= 0 &&
       Date.now() - value.savedAt < MAX_AGE

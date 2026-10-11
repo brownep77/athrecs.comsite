@@ -104,7 +104,7 @@ try {
   console.log("Checking anonymous profile and directory access");
   const [a] =
     await sql`insert into athletes(slug,display_name,profile_visibility,bio,date_of_birth) values('synthetic-duv-public','Synthetic DUV Public','public','Unpublished test biography','1980-01-01') returning id`;
-  const read = () => rpc("athrecs/api", "getAdministratorPublishedAthlete", "synthetic-duv-public");
+  const read = () => rpc("athrecs/api", "getPublicAthletePreview", "synthetic-duv-public");
   assert.equal(await read(), null, "A public flag alone does not grant anonymous profile access");
   await sql`insert into network_audit_log(action,entity_type,entity_id,after_value) values('athlete.profile_admin_published','athlete',${String(a.id)},${JSON.stringify({ athleteId: a.id, profile_visibility: "public" })}::jsonb)`;
   const wmmId = "11111111-2222-3333-4444-555555555555";
@@ -134,7 +134,7 @@ try {
   );
   await sql`update athletes set profile_details=${JSON.stringify(wmmDetails)}::jsonb where id=${a.id}`;
   assert.equal(
-    (await read()).athlete.nationality,
+    (await read()).nationality,
     "KEN",
     "Older WMM nationality observations are displayed with source credit",
   );
@@ -199,8 +199,15 @@ try {
   assert.doesNotMatch(publicText, /Abbott World Marathon Majors|\bWMM\b/);
   assert.doesNotMatch(publicMarkup, /href="https:\/\/[^"\s]*worldmarathonmajors\.com/);
   assert(publicText.includes("Unverified") && publicText.includes("3:12:34"));
-  assert(publicText.includes("Athlete identity is provisional"));
-  const preservedHistory = (await read()).sourceHistories[0];
+  assert(
+    !publicText.includes("Athlete identity is provisional"),
+    "Research notes stay in the staff backend",
+  );
+  assert(!wmmHtml.includes("synthetic-result; athlete synthetic-athlete; bib 17"));
+  const { loadPublishedSourceHistories } = await server.ssrLoadModule(
+    "/src/lib/athrecs/athlete-publication.server.ts",
+  );
+  const preservedHistory = (await loadPublishedSourceHistories(sql, a.id))[0];
   assert.equal(preservedHistory.provider, "Abbott World Marathon Majors");
   assert.deepEqual(
     preservedHistory.performances[0],
@@ -233,7 +240,10 @@ try {
       assert.equal(/Abbott World Marathon Majors|\bWMM\b/.test(visibleText), showEvidence);
       assert.equal(/href="https:\/\/[^"\s]*worldmarathonmajors\.com/.test(markup), showEvidence);
       assert(visibleText.includes("3:12:34") && visibleText.includes("Unverified"));
-      assert(visibleText.includes("Exact race date and chip/gun classification are not supplied"));
+      assert.equal(
+        visibleText.includes("Exact race date and chip/gun classification are not supplied"),
+        showEvidence,
+      );
     }
   }
   const otherCredit = renderToStaticMarkup(
@@ -251,9 +261,9 @@ try {
       hasActions: false,
     }),
   );
-  assert(otherCredit.includes("Synthetic Race Timing"));
-  assert(otherCredit.includes('href="https://example.test/results"'));
-  assert(otherCredit.includes("Details &amp; sources"));
+  assert(!otherCredit.includes("Synthetic Race Timing"));
+  assert(!otherCredit.includes('href="https://example.test/results"'));
+  assert(!otherCredit.includes("Details &amp; sources"));
   assert(wmmHtml.includes("Sport:") && wmmHtml.includes("Running") && wmmHtml.includes("Marathon"));
   const directoryHtml = await (
     await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public&sport=Running")
@@ -305,18 +315,18 @@ try {
   };
   await sql`update athletes set profile_details=${JSON.stringify(nationalityDetails)}::jsonb where id=${a.id}`;
   const p = await read();
-  assert.equal(p.athlete.display_name, "Synthetic DUV Public");
-  assert.equal(p.athlete.bio, "");
-  assert.equal(p.athlete.date_of_birth, null);
-  assert.equal(p.sourceHistories.length, 0);
+  assert.equal(p.displayName, "Synthetic DUV Public");
+  assert(!JSON.stringify(p).includes("Unpublished test biography"));
+  assert(!JSON.stringify(p).includes("1980-01-01"));
+  assert.equal(p.entries.length, 0);
   assert.equal(
     p.searchIndexable,
     false,
     "Profile publication does not grant search-indexing approval",
   );
-  assert.equal(p.athlete.nationality, "ANT");
-  assert.equal(p.athlete.nationality_source.provider, "DUV");
-  assert.equal(p.athlete.details.birthCountry, "");
+  assert.equal(p.nationality, "ANT");
+  assert.equal(readSourceNationality(nationalityDetails).provider, "DUV");
+  assert(!("details" in p));
   assert(!JSON.stringify(p).includes("birthYear"), "Only the nationality observation is exposed");
   const directory = await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
     q: "Synthetic DUV Public",
@@ -331,8 +341,11 @@ try {
   assert(html.includes("Synthetic DUV Public"));
   assert(!html.includes("Unpublished test biography"));
   assert(html.includes("Antigua &amp; Barbuda"));
-  assert(html.includes("As listed by"));
-  assert(html.includes("runner=999999999"));
+  assert(!html.includes("As listed by"), "Nationality credits remain in staff evidence");
+  assert(
+    !html.includes("runner=999999999"),
+    "Private source URLs are absent from HTML and hydration data",
+  );
   const index = await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public");
   const listing = await index.text();
   assert.equal(index.status, 200);
@@ -342,7 +355,7 @@ try {
   assert(html.includes('data-country-code="AG"'), "Profile renders the sporting-code flag");
   await sql`update athletes set profile_details=${JSON.stringify({ ...nationalityDetails, nationality: "Irish" })}::jsonb where id=${a.id}`;
   assert.equal(
-    (await read()).athlete.nationality,
+    (await read()).nationality,
     null,
     "A source import must not expose or override a separately stated private nationality",
   );

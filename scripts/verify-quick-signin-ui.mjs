@@ -225,15 +225,13 @@ try {
       insert into athletes (id, slug, display_name, profile_visibility) values (990021, 'quick-signin-runner', 'Quick Signup Runner', 'private');
       insert into results (id, edition_id, athlete_id, finish_time_seconds) values (990021, 990021, 990021, 2400);
     `);
-    await page
-      .getByLabel("Full racing name", { exact: false })
-      .fill("Quick Signup Runner");
+    await page.getByLabel("Full racing name", { exact: false }).fill("Quick Signup Runner");
     await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
     await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
     await page
       .getByRole("article")
       .filter({ hasText: "Quick Signin Test 10K" })
-      .getByRole("button", { name: "Claim this profile", exact: true })
+      .getByRole("button", { name: "Claim profile & review all results", exact: true })
       .waitFor();
     const userId = (
       await database.query('select id from "user" where email = $1', ["quick-runner@example.test"])

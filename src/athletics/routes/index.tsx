@@ -13,7 +13,7 @@ import {
   UserRound,
 } from "lucide-react";
 import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard";
-import { getAthleteDirectory } from "@/lib/athrecs/athlete-directory-api";
+import { getFeaturedAthletes } from "@/lib/athrecs/athlete-directory-api";
 import type { AthleteDirectory } from "@/lib/athrecs/athlete-directory";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
     }),
     links: [{ rel: "canonical", href: SITE_URL }],
   }),
-  loader: () => getAthleteDirectory({ data: { pageSize: 6, includeFacets: false } }),
+  loader: () => getFeaturedAthletes(),
   component: AthleteHomePage,
 });
 
@@ -48,7 +48,7 @@ const profileSections = [
 
 function AthleteHomePage() {
   // Vite replaces the base homepage; the generated route tree retains its loader type.
-  const directory = Route.useLoaderData() as unknown as AthleteDirectory;
+  const directory = Route.useLoaderData() as unknown as Pick<AthleteDirectory, "athletes">;
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   function search(event: FormEvent<HTMLFormElement>) {
@@ -145,10 +145,7 @@ function AthleteHomePage() {
               Find an athlete
             </h2>
           </div>
-          <p className="text-xs text-muted">
-            {directory.publicAthletes.toLocaleString("en-GB")} public profiles ·{" "}
-            {directory.publicResults.toLocaleString("en-GB")} recorded results
-          </p>
+          <p className="text-xs text-muted">Public profiles, race results and sporting histories</p>
         </div>
         <form onSubmit={search} role="search" className="flex gap-2">
           <label htmlFor="athlete-search" className="sr-only">

@@ -14,13 +14,17 @@ const memberProfileResponses = createMiddleware().server(async ({ pathname, next
   ) {
     const headers = new Headers(result.response.headers);
     const indexable =
-      /^\/athletes\/[^/]+$/.test(pathname) &&
+      (/^\/athletes\/[^/]+$/.test(pathname) || /^\/athletes\/?$/.test(pathname)) &&
       result.response.status === 200 &&
       headers.get(ATHLETE_INDEXING_HEADER) === "1";
     headers.delete(ATHLETE_INDEXING_HEADER);
     headers.set("Cache-Control", "private, no-store");
     headers.set("Vary", "Cookie, Authorization");
-    const robots = indexable ? INDEXABLE_ATHLETE_ROBOTS : PRIVATE_ATHLETE_ROBOTS;
+    const robots = indexable
+      ? INDEXABLE_ATHLETE_ROBOTS
+      : /^\/athletes\/?$/.test(pathname) && result.response.status === 200
+        ? "noindex, follow"
+        : PRIVATE_ATHLETE_ROBOTS;
     headers.set("X-Robots-Tag", robots);
     // Server-function response headers are also held in the request context.
     // Keep that final header aligned with the rendered page decision, including

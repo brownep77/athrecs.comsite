@@ -71,7 +71,7 @@ try {
     .getByRole("heading", { name: "Claim Avery Invitation Athlete’s athlete profile", exact: true })
     .waitFor();
   assert.equal(
-    await page.getByRole("heading", { name: "Synthetic Invitation 10K", exact: true }).count(),
+    await page.getByText("Synthetic Invitation 10K", { exact: true }).count(),
     0,
     "Race details require the invited verified account",
   );
@@ -91,7 +91,7 @@ try {
   await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
   await page.getByLabel("Full racing name").fill("Avery Invitation Athlete");
   await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
-  await page.getByRole("heading", { name: "Synthetic Invitation 10K", exact: true }).waitFor();
+  await page.getByText("Synthetic Invitation 10K", { exact: true }).waitFor();
   assert.equal(
     new URL(page.url()).searchParams.get("invitation"),
     new URL(invitation.url).searchParams.get("invitation"),
@@ -102,7 +102,12 @@ try {
     "993401",
     "Signup preserves the exact profile/result",
   );
-  await page.getByText("Suggested profile: Avery Invitation Athlete", { exact: true }).waitFor();
+  await page
+    .getByRole("heading", {
+      name: "Are these your results, Avery Invitation Athlete?",
+      exact: true,
+    })
+    .waitFor();
   const [user] =
     await sql`select id,"emailVerified" from "user" where email='onboarding-runner@example.test'`;
   assert.equal(user.emailVerified, true);
@@ -111,12 +116,7 @@ try {
     1,
     "Only the racing name is saved; other profile details remain optional",
   );
-  await page
-    .getByRole("checkbox", { name: /This is my profile and the race shown is mine/ })
-    .check();
-  await page
-    .getByRole("button", { name: "Yes, this is me — complete my claim", exact: true })
-    .click();
+  await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
   await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
   const claims =
     await sql`select status,claimant_user_id from result_claims where result_id=993401`;

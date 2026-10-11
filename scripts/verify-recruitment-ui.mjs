@@ -112,20 +112,20 @@ try {
   await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("section"), "potential");
   const match = page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" });
-  await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
-  const confirmation = page.getByRole("alertdialog");
-  await confirmation.getByText(/Straightforward claims link/).waitFor();
-  await confirmation.getByRole("button", { name: "Cancel", exact: true }).click();
-  assert.equal((await sql`select id from result_claims where result_id=991601`).length, 0);
-  await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
-  await confirmation
-    .getByRole("button", { name: "Yes, this is me — complete my claim", exact: true })
+  await match
+    .getByRole("button", { name: "Claim profile & review all results", exact: true })
     .click();
-  await page
-    .getByText("Claim complete — athlete confirmed. All results on this profile are now linked.", {
-      exact: true,
-    })
-    .waitFor();
+  const confirmation = page.getByRole("dialog");
+  await confirmation.getByText(/Registration creates your account/).waitFor();
+  await confirmation.getByRole("button", { name: "Close", exact: true }).click();
+  assert.equal((await sql`select id from result_claims where result_id=991601`).length, 0);
+  await match
+    .getByRole("button", { name: "Claim profile & review all results", exact: true })
+    .click();
+  await confirmation
+    .getByRole("button", { name: "Confirm all results are mine", exact: true })
+    .click();
+  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
   assert.deepEqual(await sql`select status from result_claims where result_id=991601`, [
     { status: "approved" },
   ]);
@@ -133,8 +133,9 @@ try {
     (await sql`select athlete_id from athlete_account_links where athlete_id=991601`).length,
     1,
   );
-  await page.goto(`${origin}/claim-results?resultId=991601`);
-  await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();
+  await confirmation.getByRole("button", { name: "Close", exact: true }).click();
+  await match.getByRole("link", { name: "View claim", exact: true }).click();
+  await page.getByText(/Previous review saved/).waitFor();
   assert.equal(await page.getByText(/Another account has already claimed/).count(), 0);
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
@@ -165,9 +166,10 @@ try {
     );
     assert.equal(await assistedRow.getByLabel("Personal best", { exact: true }).count(), 0);
     await page.getByLabel("Year", { exact: true }).selectOption("");
-    await page.getByText("Show all 52 results", { exact: true }).click();
+    assert.equal(await page.getByText("Show all 52 results", { exact: true }).count(), 0);
+    assert.equal(await page.locator("#results-history table").count(), 1);
+    assert.equal(await page.locator("#results-history tbody tr:visible").count(), 52);
     await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
-    await page.getByText("Show all 52 results", { exact: true }).click();
     await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
     assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
     assert.equal(

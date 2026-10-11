@@ -1,10 +1,11 @@
+import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOverview";
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
+import { PublicAthletePreview } from "@/components/athletes/PublicAthletePreview";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
-import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
+import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
-import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
 import {
@@ -23,6 +24,7 @@ import {
   getAthleteBySlug,
   getPrivateAthleteBySlug,
   getAdministratorPublishedAthlete,
+  getPublicAthletePreview,
 } from "@/lib/athrecs/api";
 import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
@@ -30,13 +32,14 @@ import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
 import { SharedAccountProfile } from "@/components/athletes/SharedAccountProfile";
-import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-api";
+import {
+  getPublishedSharedProfile,
+  getPublicSharedProfilePreview,
+} from "@/lib/athrecs/athlete-profile-share-api";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
 import { formatAthleteId } from "@/lib/athrecs/athlete-id";
-import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
-import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 import {
   ATHLETE_INDEXING_HEADER,
   INDEXABLE_ATHLETE_ROBOTS,
@@ -46,6 +49,17 @@ import {
 
 export const Route = createFileRoute("/athletes/$slug")({
   loader: async ({ params }) => {
+    const preview =
+      (await getPublicAthletePreview({ data: params.slug })) ??
+      (await getPublicSharedProfilePreview({ data: { slug: params.slug } }));
+    if (preview && preview.slug !== params.slug && preview.searchIndexable) {
+      throw redirect({ to: "/athletes/$slug", params: { slug: preview.slug }, statusCode: 301 });
+    }
+    if (!(await canViewAthleteProfiles())) {
+      return preview
+        ? { kind: "public-preview" as const, preview, searchIndexable: preview.searchIndexable }
+        : { kind: "sign-in" as const };
+    }
     const published = await getAdministratorPublishedAthlete({ data: params.slug });
     if (published) {
       if (published.athlete.slug !== params.slug) {
@@ -55,9 +69,8 @@ export const Route = createFileRoute("/athletes/$slug")({
           statusCode: 301,
         });
       }
-      return { kind: "published-history" as const, ...published };
+      return { kind: "published-history" as const, ...published, preview };
     }
-    if (!(await canViewAthleteProfiles())) return { kind: "sign-in" as const };
     const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
       () => null,
     );
@@ -65,7 +78,7 @@ export const Route = createFileRoute("/athletes/$slug")({
       if (shared.searchIndexable && shared.slug !== params.slug) {
         throw redirect({ to: "/athletes/$slug", params: { slug: shared.slug }, statusCode: 301 });
       }
-      return { kind: "shared-account" as const, profile: shared };
+      return { kind: "shared-account" as const, profile: shared, preview };
     }
 
     const data = await getAthleteBySlug({ data: params.slug });
@@ -77,7 +90,7 @@ export const Route = createFileRoute("/athletes/$slug")({
           statusCode: 301,
         });
       }
-      return { kind: "catalogue" as const, ...data };
+      return { kind: "catalogue" as const, ...data, preview };
     }
 
     const privateAthlete = await getPrivateAthleteBySlug({ data: params.slug });
@@ -105,30 +118,83 @@ export const Route = createFileRoute("/athletes/$slug")({
       : PRIVATE_ATHLETE_ROBOTS,
     [ATHLETE_INDEXING_HEADER]: isIndexableAthletePage(loaderData) ? "1" : "0",
   }),
-  head: ({ params, loaderData }) => ({
-    links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
-    meta: [
-      {
-        title:
-          loaderData?.kind === "published-history"
-            ? `${loaderData.athlete.display_name} | ${SITE_NAME}`
-            : `Athlete profile | ${SITE_NAME}`,
-      },
-      {
-        name: "robots",
-        content: isIndexableAthletePage(loaderData)
-          ? INDEXABLE_ATHLETE_ROBOTS
-          : PRIVATE_ATHLETE_ROBOTS,
-      },
-      {
-        name: "description",
-        content:
-          loaderData?.kind === "published-history"
-            ? `Published sporting performances for ${loaderData.athlete.display_name} on ATHRECS.`
-            : "Sign in to view athlete profiles and published results on ATHRECS.",
-      },
-    ],
-  }),
+  head: ({ params, loaderData }) => {
+    const preview = loaderData?.kind === "public-preview" ? loaderData.preview : null;
+    const previewTitle = preview
+      ? `${preview.displayName} — ${preview.sports.length ? `${preview.sports.join(" & ")} results & biography` : "Biography & latest results"} | ${SITE_NAME}`
+      : "";
+    const previewBio = preview?.biography.join(" ") ?? "";
+    const previewUrl = preview ? absoluteUrl(`/athletes/${preview.slug}`) : "";
+    const searchContent = preview
+      ? {
+          title: previewTitle,
+          description:
+            previewBio.slice(0, 175) ||
+            `Latest results for ${preview.displayName}. Sign in to view the full profile.`,
+          jsonLd: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": `${previewUrl}#webpage`,
+            url: previewUrl,
+            name: previewTitle,
+            description: previewBio,
+            inLanguage: "en-GB",
+            mainEntity: {
+              "@type": "Person",
+              "@id": `${previewUrl}#athlete`,
+              name: preview.displayName,
+              url: previewUrl,
+              description: previewBio,
+            },
+          },
+        }
+      : loaderData?.kind === "published-history"
+        ? athleteSearchContent(loaderData)
+        : null;
+    return {
+      links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
+      meta: [
+        {
+          title:
+            preview || loaderData?.kind === "published-history"
+              ? searchContent!.title
+              : `Athlete profile | ${SITE_NAME}`,
+        },
+        {
+          name: "robots",
+          content: isIndexableAthletePage(loaderData)
+            ? INDEXABLE_ATHLETE_ROBOTS
+            : PRIVATE_ATHLETE_ROBOTS,
+        },
+        {
+          name: "description",
+          content:
+            preview || loaderData?.kind === "published-history"
+              ? searchContent!.description
+              : "Sign in to view athlete profiles and published results on ATHRECS.",
+        },
+        ...(searchContent
+          ? [
+              { property: "og:title", content: searchContent.title },
+              { property: "og:description", content: searchContent.description },
+              { property: "og:url", content: absoluteUrl(`/athletes/${params.slug}`) },
+              { name: "twitter:card", content: "summary" },
+              { name: "twitter:title", content: searchContent.title },
+              { name: "twitter:description", content: searchContent.description },
+            ]
+          : []),
+      ],
+      scripts:
+        searchContent && isIndexableAthletePage(loaderData)
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify(searchContent.jsonLd).replace(/</g, "\\u003c"),
+              },
+            ]
+          : [],
+    };
+  },
   component: AthletePage,
   notFoundComponent: () => (
     <div className="space-y-4 py-10 text-center">
@@ -225,13 +291,15 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
 function AthletePage() {
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
-  if (data.kind === "published-history") return <AthleteContent />;
+  const preview =
+    "preview" in data && data.preview ? <PublicAthletePreview profile={data.preview} /> : undefined;
   return (
     <ProfileViewer
-      authenticated={data.kind !== "sign-in"}
+      authenticated={data.kind !== "sign-in" && data.kind !== "public-preview"}
       returnTo={`/athletes/${encodeURIComponent(slug)}`}
+      signedOut={preview}
     >
-      <AthleteContent />
+      {data.kind === "public-preview" ? preview : <AthleteContent />}
     </ProfileViewer>
   );
 }
@@ -239,6 +307,7 @@ function AthletePage() {
 function AthleteContent() {
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
+  if (data.kind === "public-preview") return <PublicAthletePreview profile={data.preview} />;
   if (data.kind === "sign-in")
     return <ProfileSignIn returnTo={`/athletes/${encodeURIComponent(slug)}`} />;
   if (data.kind === "shared-account") {
@@ -258,22 +327,15 @@ function AthleteContent() {
       ...upcoming.map((r) => r.sport),
     ]),
   ];
-  const reportedHistory = getReportedRaceHistory(athlete.slug);
-  const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
+  const reportedHistory = data.editorial.reportedHistory;
+  const includedHistory = reportedHistory ?? undefined;
   const performanceCount = timeline.count + (includedHistory?.records.length ?? 0);
   const aliases = athlete.aliases ?? [];
-  const career = getEditorialAthleteCareer(athlete.slug);
+  const career = data.editorial.career;
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
     isPublicProfileSource(link.url, link.label),
   );
-  const bio = publicAthleteBio({
-    name: athlete.display_name,
-    sport: profileSports.includes("Athletics") ? "Athletics" : profileSports[0],
-    city: athlete.city,
-    country: athlete.country,
-    club: athlete.club,
-    coach: athlete.details.coach,
-  });
+  const bio = athleteSearchContent({ athlete, profileResults, sourceHistories }).bio;
   const dob = formatDob(athlete.date_of_birth);
 
   const isPublicFigure = athlete.profile_type === "Public figure";
@@ -392,25 +454,6 @@ function AthleteContent() {
                 {paragraph}
               </p>
             ))}
-            <details className="text-xs">
-              <summary className="cursor-pointer text-accent">Biography sources</summary>
-              <ul className="mt-2 space-y-2">
-                {career.biographySources
-                  .filter((source) => isPublicProfileSource(source.url, source.label))
-                  .map((source) => (
-                    <li key={source.url}>
-                      <a
-                        href={source.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent underline underline-offset-2"
-                      >
-                        {source.label} ↗
-                      </a>
-                    </li>
-                  ))}
-              </ul>
-            </details>
           </div>
         ) : (
           <p className="text-sm leading-relaxed text-muted">{bio}</p>
@@ -462,7 +505,12 @@ function AthleteContent() {
         <a href="#profile-about">About & links</a>
       </nav>
       <section id="profile-achievements" className="scroll-mt-24 space-y-5">
-        <AthleteCareerHighlights slug={athlete.slug} />
+        <AthleteCareerHighlights career={career} />
+        <AnzPerformanceOverview
+          histories={sourceHistories}
+          medals={data.anzMedals}
+          coach={data.anzCoach}
+        />
 
         {(!career || profileResults.length > 0 || includedHistory) &&
           (!isPublicFigure ||
@@ -490,7 +538,6 @@ function AthleteContent() {
           historyResults={historyResults}
           reportedHistory={includedHistory}
         />
-        <UnverifiedRaceHistory slug={athlete.slug} />
       </section>
       {upcoming.length > 0 ? (
         <details className="rounded-lg border border-border bg-surface p-4">
@@ -517,8 +564,8 @@ function AthleteContent() {
               nationalitySource={athlete.nationality_source}
             />
           ) : null}
-          <EditorialAthleteOverview slug={athlete.slug} />
-          <EditorialRoadSplits slug={athlete.slug} />
+          <EditorialAthleteOverview overview={data.editorial.overview} />
+          <EditorialRoadSplits overview={data.editorial.overview} />
           <AthleteMediaCoverage slug={athlete.slug} />
           {profileLinks.length > 0 && (
             <section className="space-y-2 rounded-xl border border-border bg-surface p-4">

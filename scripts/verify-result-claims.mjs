@@ -1,11 +1,10 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const migration = await readFile(resolve(root, "migrations/0013_result_claims.sql"), "utf8");
 const evidenceLinksMigration = await readFile(
   resolve(root, "migrations/0020_result_claim_evidence_links.sql"),
   "utf8",
@@ -162,52 +161,18 @@ const claimSelect = claimSelectMatch[1];
 
 const db = new PGlite();
 await db.waitReady;
+for (const name of (await readdir(resolve(root, "migrations")))
+  .filter((name) => name.endsWith(".sql"))
+  .sort())
+  await db.exec(await readFile(resolve(root, "migrations", name), "utf8"));
 await db.exec(`
-  create table "user" (
-    "id" text primary key,
-    "email" text not null unique
-  );
-  create table athletes (
-    id serial primary key,
-    slug text not null unique,
-    display_name text not null
-  );
-  create table events (
-    id serial primary key,
-    slug text not null unique,
-    name text not null,
-    sport text not null default 'Running'
-  );
-  create table editions (
-    id serial primary key,
-    event_id int not null references events (id) on delete cascade,
-    event_date date not null,
-    distance_code text not null
-  );
-  create table results (
-    id serial primary key,
-    edition_id int not null references editions (id) on delete cascade,
-    athlete_id int not null references athletes (id) on delete cascade
-    ,finish_time_seconds int
-    ,overall_place int
-    ,bib text
-    ,category text
-    ,source_url text
-  );
-`);
-await db.exec(migration);
-await db.exec(evidenceLinksMigration);
-await db.exec(
-  await readFile(resolve(root, "migrations/20261011_result_claim_confirmation.sql"), "utf8"),
-);
-await db.exec(`
-  insert into "user" ("id", "email") values
-    ('user-one', 'runner@example.com'),
-    ('user-two', 'second-runner@example.com'),
-    ('staff-one', 'staff@example.com');
+  insert into "user" ("id", "name", "email", "emailVerified") values
+    ('user-one', 'Runner', 'runner@example.com', true),
+    ('user-two', 'Second Runner', 'second-runner@example.com', true),
+    ('staff-one', 'Staff', 'staff@example.com', true);
   insert into athletes (id, slug, display_name)
     values (1, 'verification-runner', 'Verification Runner');
-  insert into events (id, slug, name) values (1, 'verification-race', 'Verification Race');
+  insert into events (id, slug, name, sport) values (1, 'verification-race', 'Verification Race', 'Running');
   insert into editions (id, event_id, event_date, distance_code)
     values (1, 1, '2026-08-22', '5K');
   insert into results (

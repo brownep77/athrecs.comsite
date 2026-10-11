@@ -53,7 +53,7 @@ function locations(xml, root, entry) {
   });
 }
 
-export async function collectAthleteSearchUrls(fetchImpl = fetch) {
+async function athleteSitemaps(fetchImpl) {
   const { text } = await getText(`${ATHLETE_SEARCH_ORIGIN}/sitemap.xml`, fetchImpl, /\bxml\b/i);
   const sitemaps = locations(text, "sitemapindex", "sitemap");
   assert(sitemaps.length > 0, "Empty sitemap index; release readiness is unknown");
@@ -63,15 +63,51 @@ export async function collectAthleteSearchUrls(fetchImpl = fetch) {
     assert.match(path, /^\/sitemaps\/athletes-[1-9]\d*\.xml$/, "Unexpected athlete sitemap path");
     return true;
   });
-  const urls = new Set();
-  for (const sitemap of new Set(athleteSitemaps)) {
-    const { text } = await getText(sitemap, fetchImpl, /\bxml\b/i);
-    for (const url of locations(text, "urlset", "url")) {
-      assert.match(siteUrl(url).pathname, /^\/athletes\/[^/]+$/, "Unexpected athlete profile URL");
-      urls.add(url);
-    }
-  }
-  return [...urls];
+  return [...new Set(athleteSitemaps)].sort(
+    (a, b) => Number(a.match(/athletes-(\d+)/)[1]) - Number(b.match(/athletes-(\d+)/)[1]),
+  );
+}
+
+export function validateSearchCursor(cursor) {
+  if (cursor == null) return;
+  assert.equal(cursor.version, 1, "Unknown search checkpoint version");
+  assert(Number.isSafeInteger(cursor.cycle) && cursor.cycle >= 1, "Invalid search cycle");
+  assert.match(siteUrl(cursor.sitemap).pathname, /^\/sitemaps\/athletes-[1-9]\d*\.xml$/);
+  if (cursor.afterUrl !== null)
+    assert.match(siteUrl(cursor.afterUrl).pathname, /^\/athletes\/[^/]+$/);
+}
+
+/** Checkpoints choose a position, never authorize a URL or cache eligibility. */
+export async function collectAthleteSearchBatch(
+  fetchImpl = fetch,
+  { cursor, batchSize = 500 } = {},
+) {
+  validateSearchCursor(cursor);
+  assert(
+    Number.isSafeInteger(batchSize) && batchSize >= 1 && batchSize <= 1000,
+    "Invalid batch size",
+  );
+  const sitemaps = await athleteSitemaps(fetchImpl);
+  if (!sitemaps.length) return { urls: [], nextCursor: null, cycleComplete: true };
+  const index = Math.max(0, sitemaps.indexOf(cursor?.sitemap));
+  const sitemap = sitemaps[index];
+  const { text } = await getText(sitemap, fetchImpl, /\bxml\b/i);
+  const urls = [...new Set(locations(text, "urlset", "url"))];
+  for (const url of urls)
+    assert.match(siteUrl(url).pathname, /^\/athletes\/[^/]+$/, "Unexpected athlete profile URL");
+  // If publication changes remove the anchor, replay this shard rather than
+  // trusting an offset that could silently skip newly eligible profiles.
+  const offset = cursor?.sitemap === sitemap ? urls.indexOf(cursor.afterUrl) + 1 : 0;
+  const batch = urls.slice(offset, offset + batchSize);
+  const shardComplete = offset + batch.length >= urls.length;
+  const cycleComplete = shardComplete && index === sitemaps.length - 1;
+  const nextCursor = {
+    version: 1,
+    cycle: (cursor?.cycle ?? 1) + Number(cycleComplete),
+    sitemap: shardComplete ? sitemaps[(index + 1) % sitemaps.length] : sitemap,
+    afterUrl: shardComplete ? null : batch.at(-1),
+  };
+  return { urls: batch, sitemap, nextCursor, cycleComplete };
 }
 
 export async function assertAthleteSearchReady(url, fetchImpl = fetch) {
@@ -102,12 +138,13 @@ export async function assertAthleteSearchReady(url, fetchImpl = fetch) {
   assert.equal($(canonical[0]).attr("href"), url, `Canonical mismatch: ${url}`);
 }
 
-export async function checkAthleteSearchReadiness(fetchImpl = fetch) {
-  const urls = await collectAthleteSearchUrls(fetchImpl);
+export async function checkAthleteSearchReadiness(fetchImpl = fetch, options = {}) {
+  const batch = await collectAthleteSearchBatch(fetchImpl, options);
+  const { urls } = batch;
   // No publication is inferred from database visibility, a named athlete, or a
   // UI element. The live sitemap remains the only source of candidate URLs.
-  // Bound production load while allowing the full, paginated catalogue to be
-  // validated. Every candidate must still pass before any submission is made.
+  // Bound production load. Every candidate in this batch must pass before any
+  // submission; remaining shards are visited by subsequent checkpointed runs.
   let next = 0;
   let completed = 0;
   let failed;
@@ -128,10 +165,10 @@ export async function checkAthleteSearchReadiness(fetchImpl = fetch) {
   );
   if (failed) throw failed;
   return {
+    ...batch,
     ready: urls.length > 0,
-    urls,
     reason: urls.length
-      ? `${urls.length} live sitemap athlete URLs passed anonymous indexing checks.`
-      : "No eligible athlete URLs in the live sitemap. Submission skipped; publication/indexing policy is unchanged.",
+      ? `${urls.length} athlete URLs in this batch passed anonymous indexing checks.`
+      : "No eligible URLs in this sitemap batch. No URLs submitted; publication/indexing policy is unchanged.",
   };
 }

@@ -1,5 +1,5 @@
 import { venueDetails, type VenueDetails } from "@/data/venue-details";
-import { displayCountryName, resolveCountry } from "@/lib/athrecs/countries";
+import { filterCountryName, resolveCountry } from "@/lib/athrecs/countries";
 
 const REGION_LABELS = new Set([
   "scotland",
@@ -29,7 +29,7 @@ export function resolveNation(input: {
     area: input.area,
     address: input.address || stored?.address,
   });
-  return displayCountryName(info);
+  return filterCountryName(info);
 }
 
 export function venueForEvent(input: {
@@ -69,7 +69,7 @@ export function venueForEvent(input: {
       stored?.parking ?? (input.city ? `Public parking in ${input.city} — confirm locally` : null),
     busStop:
       stored?.busStop ??
-      (input.city && nation === "United Kingdom"
+      (input.city && resolveCountry({ country: nation }).iso === "GB"
         ? `Local buses serving ${input.city} — check Traveline`
         : null),
     trainStation: stored?.trainStation ?? null,

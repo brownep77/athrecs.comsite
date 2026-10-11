@@ -191,10 +191,18 @@ const [accountApi, resultMatchApi, resultClaimsApi] = await Promise.all([
 ]);
 for (const source of [accountApi, resultMatchApi, resultClaimsApi]) {
   assert(
-    source.includes("event.sport as event_sport") && source.includes("sport: row.event_sport"),
+    source.includes("result.event_sport as event_sport") &&
+      source.includes("sport: row.event_sport") &&
+      source.includes("athlete_claimable_results result"),
     "Signed-in result payloads must carry sport for specialist-site filtering",
   );
 }
+const claimableResultsView = await readFile("migrations/20261011_source_history_claims.sql", "utf8");
+assert(
+  claimableResultsView.includes("e.sport event_sport") &&
+    claimableResultsView.includes("coalesce(s.performance->>'eventSlug',''),'Running'"),
+  "Result claims must retain the event sport through the canonical/source-history claimable view",
+);
 
 const potentialMatches = await readFile(
   "src/components/athletes/PotentialResultMatchesPanel.tsx",

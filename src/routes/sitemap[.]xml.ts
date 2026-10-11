@@ -16,10 +16,10 @@ export const Route = createFileRoute("/sitemap.xml")({
         const families: ("races" | "clubs" | "results")[] = IS_RUNRECS_SITE
           ? []
           : ["races", "clubs", "results"];
-        const counts = await Promise.all(
-          families.map((kind) => contentSitemapPageCount(sql, kind)),
-        );
-        const athletePages = IS_RUNRECS_SITE ? 0 : await athleteSitemapPageCount(sql);
+        const [counts, athletePages] = await Promise.all([
+          Promise.all(families.map((kind) => contentSitemapPageCount(sql, kind))),
+          IS_RUNRECS_SITE ? Promise.resolve(0) : athleteSitemapPageCount(sql),
+        ]);
         return sitemapResponse(
           sitemapXml(
             [
@@ -38,6 +38,7 @@ export const Route = createFileRoute("/sitemap.xml")({
             ],
             true,
           ),
+          true,
         );
       },
     },

@@ -16,6 +16,10 @@ on:
       - 'src/routes/athletes/$slug.tsx'
       - 'src/athletics/routes/athletes/index.tsx'
       - 'scripts/verify-public-source-profiles.mjs'
+      - 'scripts/verify-profile-view-login.mjs'
+      - 'src/components/athletes/PublicAthletePreview.tsx'
+      - 'src/lib/athrecs/public-athlete-preview.ts'
+      - 'src/lib/athrecs/athlete-profile-share-api.ts'
       - '.github/workflows/public-source-profiles.yml'
   push:
     branches: [main]
@@ -34,6 +38,10 @@ on:
       - 'src/routes/athletes/$slug.tsx'
       - 'src/athletics/routes/athletes/index.tsx'
       - 'scripts/verify-public-source-profiles.mjs'
+      - 'scripts/verify-profile-view-login.mjs'
+      - 'src/components/athletes/PublicAthletePreview.tsx'
+      - 'src/lib/athrecs/public-athlete-preview.ts'
+      - 'src/lib/athrecs/athlete-profile-share-api.ts'
       - '.github/workflows/public-source-profiles.yml'
 permissions:
   contents: read
@@ -49,3 +57,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: node scripts/verify-public-source-profiles.mjs
+      - name: Install browser for anonymous and member profile checks
+        run: npx playwright install --with-deps chromium
+      - name: Verify public preview and member profile in desktop and mobile browsers
+        env:
+          ATHRECS_BROWSER_MODULE: playwright
+        run: npm run verify:profile-view-login

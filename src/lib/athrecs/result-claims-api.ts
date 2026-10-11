@@ -1,3 +1,10 @@
+import { deliverProfileResultReceipts } from "./profile-result-receipts.server";
+import { profileResultReviewInput, type ProfileResultReviewInput } from "./profile-result-review";
+import {
+  loadProfileResultReview,
+  publicReview,
+  saveProfileResultReview,
+} from "./profile-result-review.server";
 import { privateClaimMiddleware } from "./claim-invitations-api";
 import { invitationToken } from "./claim-invitation";
 import { validateInvitation, assertInvitationWrites } from "./claim-invitations.server";
@@ -37,6 +44,12 @@ export type ClaimableResult = {
   bib: string | null;
   category: string | null;
   sourceUrl: string | null;
+  clubName?: string | null;
+  ageAtRace?: string | null;
+  chipTimeSeconds?: number | null;
+  gunTimeSeconds?: number | null;
+  genderPlace?: number | null;
+  categoryPlace?: number | null;
 };
 
 export type ResultClaimListItem = ClaimableResult & {
@@ -89,6 +102,12 @@ type ClaimRow = {
   bib: string | null;
   category: string | null;
   source_url: string | null;
+  age_at_race: string | null;
+  chip_time_seconds: number | null;
+  gun_time_seconds: number | null;
+  gender_place: number | null;
+  category_place: number | null;
+  club_name: string | null;
   existing_owner_email?: string | null;
   competing_claim_count?: number;
 };
@@ -133,6 +152,13 @@ function positiveInteger(value: unknown, label: string): number {
   return parsed;
 }
 
+function resultIdentifier(value: unknown): number {
+  const id = Number(value);
+  if (!Number.isSafeInteger(id) || id === 0 || Math.abs(id) > 2147483647)
+    throw new Error("Result is invalid");
+  return id;
+}
+
 function optionalHttpsUrl(value: unknown): string | null {
   const text = typeof value === "string" ? value.trim() : "";
   if (!text) return null;
@@ -175,6 +201,12 @@ function mapClaim(row: ClaimRow): ResultClaimListItem {
     bib: row.bib,
     category: row.category,
     sourceUrl: row.source_url,
+    clubName: row.club_name,
+    ageAtRace: row.age_at_race,
+    chipTimeSeconds: row.chip_time_seconds,
+    gunTimeSeconds: row.gun_time_seconds,
+    genderPlace: row.gender_place,
+    categoryPlace: row.category_place,
     claimantEmail: row.claimant_email,
     status: row.claim_status,
     confirmationMethod: row.confirmation_method,
@@ -215,21 +247,20 @@ const CLAIM_SELECT = `
     athlete.id as athlete_id,
     athlete.slug as athlete_slug,
     athlete.display_name as athlete_name,
-    event.name as event_name,
-    event.slug as event_slug,
-    event.sport as event_sport,
-    edition.event_date::text as event_date,
-    edition.distance_code,
+    result.event_name as event_name,
+    result.event_slug as event_slug,
+    result.event_sport as event_sport,
+    result.event_date as event_date,
+    result.distance_code,
     result.finish_time_seconds,
     result.overall_place,
     result.bib,
     result.category,
-    result.source_url
+    result.source_url, result.club_name, result.age_at_race,
+    result.chip_time_seconds, result.gun_time_seconds, result.gender_place, result.category_place
   from result_claims claim
-  join results result on result.id = claim.result_id
+  join athlete_claimable_results result on result.id = claim.claim_key
   join athletes athlete on athlete.id = claim.athlete_id
-  join editions edition on edition.id = result.edition_id
-  join events event on event.id = edition.event_id
 `;
 
 type ClaimCandidateIdentity = {
@@ -257,7 +288,7 @@ async function canAccessClaimCandidate(
       )
       or exists (
         select 1 from result_claims claim
-        where claim.result_id = ${candidate.resultId}
+        where claim.claim_key = ${candidate.resultId}
           and claim.claimant_user_id = ${userId}
       )
     ) as allowed
@@ -357,8 +388,9 @@ async function canAccessClaimCandidate(
 
 export const getClaimableResult = createServerFn({ method: "GET" })
   .middleware([privateClaimMiddleware, authMiddleware])
-  .validator((input: { resultId: number; invitation?: string }) => ({
-    resultId: positiveInteger(input?.resultId, "Result"),
+  .validator((input: { resultId: number; invitation?: string; includeReview?: boolean }) => ({
+    resultId: resultIdentifier(input?.resultId),
+    includeReview: input?.includeReview === true,
     invitation: invitationToken.optional().parse(input?.invitation),
   }))
   .handler(async ({ data, context }) => {
@@ -378,6 +410,11 @@ export const getClaimableResult = createServerFn({ method: "GET" })
       bib: string | null;
       category: string | null;
       source_url: string | null;
+      age_at_race: string | null;
+      chip_time_seconds: number | null;
+      gun_time_seconds: number | null;
+      gender_place: number | null;
+      category_place: number | null;
       athlete_city: string | null;
       athlete_region: string | null;
       athlete_country: string | null;
@@ -388,26 +425,25 @@ export const getClaimableResult = createServerFn({ method: "GET" })
         athlete.id as athlete_id,
         athlete.slug as athlete_slug,
         athlete.display_name as athlete_name,
-        event.name as event_name,
-        event.slug as event_slug,
-        event.sport as event_sport,
-        edition.event_date::text as event_date,
-        edition.distance_code,
+        result.event_name as event_name,
+        result.event_slug as event_slug,
+        result.event_sport as event_sport,
+        result.event_date as event_date,
+        result.distance_code,
         result.finish_time_seconds,
         result.overall_place,
         result.bib,
         result.category,
-        result.source_url,
+        result.source_url, result.age_at_race,
+        result.chip_time_seconds, result.gun_time_seconds, result.gender_place, result.category_place,
         athlete.city as athlete_city,
         athlete.county as athlete_region,
         athlete.country as athlete_country,
-        club.name as club_name
-      from results result
+        result.club_name as club_name
+      from athlete_claimable_results result
       join athletes athlete on athlete.id = result.athlete_id
-      join editions edition on edition.id = result.edition_id
-      join events event on event.id = edition.event_id
       left join clubs club on club.id = athlete.club_id
-      where result.id = ${data.resultId}
+      where result.id = ${data.resultId} and result.available
       limit 1
     `;
     const row = rows[0];
@@ -432,7 +468,14 @@ export const getClaimableResult = createServerFn({ method: "GET" })
           clubName: row.club_name,
         });
     if (!allowed) return null;
+    const [account] = await sql<{
+      verified: boolean;
+    }>`select "emailVerified" as verified from "user" where id=${context.userId}`;
+    if (!account?.verified) return null;
     return {
+      review: data.includeReview
+        ? publicReview(await loadProfileResultReview(sql, context.userId, row.athlete_id))
+        : null,
       resultId: row.result_id,
       athleteId: row.athlete_id,
       athleteSlug: row.athlete_slug,
@@ -446,8 +489,14 @@ export const getClaimableResult = createServerFn({ method: "GET" })
       overallPlace: row.overall_place,
       bib: row.bib,
       category: row.category,
-      sourceUrl: row.source_url,
-    } satisfies ClaimableResult;
+      sourceUrl: null,
+      clubName: row.club_name,
+      ageAtRace: row.age_at_race,
+      chipTimeSeconds: row.chip_time_seconds,
+      gunTimeSeconds: row.gun_time_seconds,
+      genderPlace: row.gender_place,
+      categoryPlace: row.category_place,
+    };
   });
 
 // This checks eligibility for self-confirmation, not proof of identity. Run
@@ -475,10 +524,20 @@ async function selfConfirmationReviewReason(
         athlete.date_of_birth > current_date - interval '18 years'
         or profile.date_of_birth > current_date - interval '18 years'
         or exists (
-          select 1 from results r join editions e on e.id = r.edition_id
-          where r.athlete_id = athlete.id
-            and e.event_date >= current_date - interval '18 months'
+          select 1 from athlete_claimable_results r
+          where r.athlete_id = athlete.id and r.available
+            and r.event_date ~ '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'
+            and r.event_date >= to_char(current_date - interval '18 months', 'YYYY-MM-DD')
             and upper(regexp_replace(coalesce(r.category, ''), '[^A-Za-z0-9]', '', 'g'))
+              ~ '^(J[MWF]|JU|[MWF]?U[0-9]|UNDER[0-9]|JUNIOR|JUVENILE)'
+        )
+        or exists (
+          select 1 from athlete_source_histories h
+          cross join lateral jsonb_array_elements(h.performances) p
+          where h.athlete_id = athlete.id
+            and coalesce(p->>'year', '') ~ '^[0-9]{4}$'
+            and coalesce(p->>'year', '') >= to_char(current_date - interval '2 years', 'YYYY')
+            and upper(regexp_replace(coalesce(p->>'ageGroup', ''), '[^A-Za-z0-9]', '', 'g'))
               ~ '^(J[MWF]|JU|[MWF]?U[0-9]|UNDER[0-9]|JUNIOR|JUVENILE)'
         )
       ) as child_review,
@@ -531,8 +590,9 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       evidenceUrl3?: string;
       declarationAccepted: boolean;
       claimantRole?: "athlete" | "guardian";
+      review?: ProfileResultReviewInput;
     }) => ({
-      resultId: positiveInteger(input?.resultId, "Result"),
+      resultId: resultIdentifier(input?.resultId),
       invitation: invitationToken.optional().parse(input?.invitation),
       verificationMethod: "other" as ResultClaimVerificationMethod,
       evidenceText: "",
@@ -542,6 +602,8 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       declarationAccepted: input?.declarationAccepted === true,
       claimantRole:
         input?.claimantRole === "guardian" ? ("guardian" as const) : ("athlete" as const),
+      review:
+        input?.review === undefined ? undefined : profileResultReviewInput.parse(input.review),
     }),
   )
   .handler(async ({ data, context }) => {
@@ -574,19 +636,17 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           result.id as result_id,
           result.athlete_id,
           athlete.display_name as athlete_name,
-          event.name as event_name,
-          edition.event_date::text as event_date,
-          edition.distance_code,
+          result.event_name as event_name,
+          result.event_date as event_date,
+          result.distance_code,
           athlete.city as athlete_city,
           athlete.county as athlete_region,
           athlete.country as athlete_country,
-          club.name as club_name
-        from results result
+          result.club_name as club_name
+        from athlete_claimable_results result
         join athletes athlete on athlete.id = result.athlete_id
-        join editions edition on edition.id = result.edition_id
-        join events event on event.id = edition.event_id
         left join clubs club on club.id = athlete.club_id
-        where result.id = ${data.resultId}
+        where result.id = ${data.resultId} and result.available
         limit 1
       `;
       const result = results[0];
@@ -603,7 +663,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             true,
           )
         : null;
-      if (invitation?.claim_id) {
+      if (invitation?.claim_id && !data.review) {
         const [claim] = await tx<{
           status: ResultClaimStatus;
         }>`select status from result_claims where id=${invitation.claim_id} and claimant_user_id=${context.userId}`;
@@ -615,6 +675,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           claimantUserId: context.userId,
           email: null,
           isConflict: false,
+          summary: null,
         };
       }
       const allowed =
@@ -638,18 +699,42 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         for update
       `;
 
-      const owners = await tx<{ user_id: string; user_email: string }>`
-        select user_id, user_email
+      const owners = await tx<{
+        user_id: string;
+        user_email: string;
+        source_claim_id: number | null;
+      }>`
+        select user_id, user_email, source_claim_id
         from athlete_account_links
         where athlete_id = ${result.athlete_id} and status = 'active'
         limit 1
       `;
       const owner = owners[0];
+      const summary = data.review
+        ? await saveProfileResultReview(
+            tx,
+            context.userId,
+            result.athlete_id,
+            data.review,
+            data.claimantRole,
+          )
+        : null;
+      if (summary && !summary.reused)
+        await tx`update athlete_profile_result_confirmations
+        set email_payload=jsonb_set(email_payload,'{resultId}',to_jsonb(${result.result_id}::integer)) where id=${summary.id}::uuid`;
+      const summaryEmail = {
+        resultId: result.result_id,
+        claimantEmail,
+        athleteName: result.athlete_name,
+      };
       if (owner?.user_id === context.userId) {
+        if (summary && !summary.reused)
+          await tx`update athlete_profile_result_confirmations set claim_id=${owner.source_claim_id} where id=${summary.id}::uuid`;
         return {
           status: "approved" as const,
           alreadyOwned: true,
-          claimId: null,
+          summary: summary ? { ...summary, ...summaryEmail } : null,
+          claimId: owner.source_claim_id,
           claimantUserId: context.userId,
           email: null,
           isConflict: false,
@@ -663,11 +748,27 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       }>`
         select id, status, reviewed_by_user_id
         from result_claims
-        where result_id = ${result.result_id} and claimant_user_id = ${context.userId}
+        where (claim_key = ${result.result_id} or (${Boolean(data.review)} and athlete_id=${result.athlete_id} and status in ('pending','needs_info')))
+          and claimant_user_id = ${context.userId}
+        order by (claim_key=${result.result_id}) desc,id
         limit 1
         for update
       `;
 
+      if (summary?.reused) {
+        const [saved] = await tx<{
+          status: ResultClaimStatus;
+        }>`select status from result_claims where id=${summary.claimId} and claimant_user_id=${context.userId}`;
+        return {
+          status: saved?.status ?? existing[0]?.status ?? ("pending" as const),
+          alreadyOwned: false,
+          claimId: summary.claimId,
+          claimantUserId: context.userId,
+          email: null,
+          isConflict: false,
+          summary: { ...summary, ...summaryEmail },
+        };
+      }
       const competing = await tx<{ other_claim_count: number }>`
         select count(distinct claimant_user_id)::int as other_claim_count
         from result_claims
@@ -720,7 +821,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             athlete_id = ${result.athlete_id},
             claimant_email = ${claimantEmail},
             status = ${nextStatus},
-            claimant_role = ${data.claimantRole},
+            claimant_role = case when claimant_role = 'guardian' then 'guardian' else ${data.claimantRole} end,
             confirmation_method = case when ${nextStatus === "approved"} then 'athlete' else confirmation_method end,
             confirmed_at = case when ${nextStatus === "approved"} then now() else confirmed_at end,
             evidence_text = case when ${Boolean(invitation)} then concat_ws(E'\n', nullif(evidence_text, ''),
@@ -744,12 +845,12 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       } else {
         const inserted = await tx<{ id: number }>`
           insert into result_claims (
-            result_id, athlete_id, claimant_user_id, claimant_email, status,
+            result_id, source_result_id, source_evidence, athlete_id, claimant_user_id, claimant_email, status,
             verification_method, evidence_text, evidence_url, evidence_url_2, evidence_url_3,
             declaration_accepted, conflict_reason, staff_note, reviewed_at,
             claimant_role, confirmation_method, confirmed_at
           ) values (
-            ${result.result_id}, ${result.athlete_id}, ${context.userId}, ${claimantEmail},
+            ${result.result_id > 0 ? result.result_id : null}, ${result.result_id < 0 ? -result.result_id : null}, (select performance from source_history_claim_results where id=${result.result_id < 0 ? -result.result_id : null}), ${result.athlete_id}, ${context.userId}, ${claimantEmail},
             ${nextStatus}, ${data.verificationMethod}, ${invitation ? `Staff invitation suggestion (not identity verification): ${invitation.match_note}` : data.evidenceText},
             ${data.evidenceUrl}, ${data.evidenceUrl2}, ${data.evidenceUrl3},
             true, ${conflictReason}, null, null,
@@ -780,12 +881,17 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         `;
       }
 
+      if (summary)
+        await tx`update athlete_profile_result_confirmations set claim_id=${claimId},
+          email_payload=jsonb_set(email_payload,'{status}',to_jsonb(${nextStatus}::text))
+          where id=${summary.id}::uuid`;
       if (invitation)
         await tx`update athlete_claim_invitations set claim_id=${claimId},user_id=coalesce(user_id,${context.userId}) where id=${invitation.id}`;
       const isConflict = Boolean(owner) || otherClaimCount > 0;
       if (isConflict) await queueClaimConflict(tx, claimId);
       return {
         status: nextStatus,
+        summary: summary ? { ...summary, ...summaryEmail } : null,
         isConflict,
         alreadyOwned: false,
         claimId,
@@ -802,7 +908,14 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       };
     });
 
-    if (outcome.status === "pending" && outcome.email) {
+    if (outcome.summary) {
+      try {
+        await deliverProfileResultReceipts(sql, outcome.summary.id);
+      } catch {
+        console.error("[claim-email] summary receipt deferred to worker");
+      }
+    }
+    if (outcome.status === "pending" && outcome.email && !outcome.summary) {
       // The durable outbox owns staff conflict emails. Keep the athlete receipt
       // separate and avoid sending a second generic staff notification.
       if (outcome.isConflict) {
@@ -812,14 +925,42 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           console.error("[claim-alerts] immediate delivery deferred to the worker");
         }
       }
-      await notifyResultClaimSubmitted(outcome.email, !outcome.isConflict);
+      await notifyResultClaimSubmitted(outcome.email, { notifyStaff: !outcome.isConflict });
     }
     if (outcome.status === "approved" && !outcome.alreadyOwned) {
       await syncAthleteAccountAfterClaim(outcome.claimantUserId);
-      if (outcome.email) await notifyResultClaimSubmitted(outcome.email, false, true);
+      if (outcome.email && !outcome.summary)
+        await notifyResultClaimSubmitted(outcome.email, {
+          notifyStaff: false,
+          selfConfirmed: true,
+        });
     }
 
+    if (
+      outcome.status === "pending" &&
+      outcome.summary &&
+      !outcome.summary.reused &&
+      outcome.email
+    ) {
+      if (outcome.isConflict) {
+        try {
+          await deliverClaimConflictAlerts(sql, outcome.claimId);
+        } catch {
+          console.error("[claim-alerts] immediate delivery deferred to the worker");
+        }
+      } else {
+        await notifyResultClaimSubmitted(outcome.email, { notifyAthlete: false });
+      }
+    }
     return {
+      confirmation: outcome.summary
+        ? {
+            included: outcome.summary.included,
+            excluded: outcome.summary.excluded,
+            added: outcome.summary.added,
+            reused: outcome.summary.reused,
+          }
+        : null,
       status: outcome.status,
       alreadyOwned: outcome.alreadyOwned,
       claimId: outcome.claimId,
@@ -851,17 +992,15 @@ export const withdrawResultClaim = createServerFn({ method: "POST" })
       const rows = await tx<ClaimEmailRow>`
         select
           claim.id as claim_id,
-          claim.result_id,
+          claim.claim_key as result_id,
           claim.claimant_email,
           athlete.display_name as athlete_name,
-          event.name as event_name,
-          edition.event_date::text as event_date,
-          edition.distance_code
+          result.event_name as event_name,
+          result.event_date as event_date,
+          result.distance_code
         from result_claims claim
-        join results result on result.id = claim.result_id
+        join athlete_claimable_results result on result.id = claim.claim_key
         join athletes athlete on athlete.id = claim.athlete_id
-        join editions edition on edition.id = result.edition_id
-        join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
           and claim.athlete_id = ${lockedAthleteId}
           and claim.claimant_user_id = ${context.userId}
@@ -970,19 +1109,17 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
         select
           claim.id,
           claim.status,
-          claim.result_id,
+          claim.claim_key as result_id,
           claim.athlete_id,
           claim.claimant_user_id,
           claim.claimant_email,
           athlete.display_name as athlete_name,
-          event.name as event_name,
-          edition.event_date::text as event_date,
-          edition.distance_code
+          result.event_name as event_name,
+          result.event_date as event_date,
+          result.distance_code
         from result_claims claim
-        join results result on result.id = claim.result_id
+        join athlete_claimable_results result on result.id = claim.claim_key
         join athletes athlete on athlete.id = claim.athlete_id
-        join editions edition on edition.id = result.edition_id
-        join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
           and claim.athlete_id = ${lockedAthleteId}
         limit 1
@@ -1126,19 +1263,17 @@ export const revokeAthleteOwnership = createServerFn({ method: "POST" })
         select
           claim.id,
           claim.status,
-          claim.result_id,
+          claim.claim_key as result_id,
           claim.athlete_id,
           claim.claimant_user_id,
           claim.claimant_email,
           athlete.display_name as athlete_name,
-          event.name as event_name,
-          edition.event_date::text as event_date,
-          edition.distance_code
+          result.event_name as event_name,
+          result.event_date as event_date,
+          result.distance_code
         from result_claims claim
-        join results result on result.id = claim.result_id
+        join athlete_claimable_results result on result.id = claim.claim_key
         join athletes athlete on athlete.id = claim.athlete_id
-        join editions edition on edition.id = result.edition_id
-        join events event on event.id = edition.event_id
         where claim.id = ${data.claimId}
           and claim.athlete_id = ${lockedAthleteId}
         limit 1

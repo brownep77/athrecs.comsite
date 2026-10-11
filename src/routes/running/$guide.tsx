@@ -1,9 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { halfMarathonCountryFromPath } from "@/data/road-half-marathons/countries";
-import { roadHalfMarathonsForCountry } from "@/data/road-half-marathons";
 import { countryGuideFromPath } from "@/data/road-marathons/countries";
-import { roadMarathonsForCountry } from "@/data/road-marathons";
 import { CountryMarathonPage } from "@/components/running/RoadMarathonPages";
 import { countryMarathonHead } from "@/lib/running/road-marathon-seo";
 
@@ -11,15 +9,16 @@ export const Route = createFileRoute("/running/$guide")({
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
     const halfCountry = halfMarathonCountryFromPath(params.guide);
     const country = halfCountry ?? countryGuideFromPath(params.guide);
     if (!country) throw notFound();
+    const races = halfCountry
+      ? (await import("@/data/road-half-marathons")).roadHalfMarathonsForCountry(country.id)
+      : (await import("@/data/road-marathons")).roadMarathonsForCountry(country.id);
     return {
       country,
-      races: halfCountry
-        ? roadHalfMarathonsForCountry(country.id)
-        : roadMarathonsForCountry(country.id),
+      races,
       now: new Date().toISOString(),
     };
   },

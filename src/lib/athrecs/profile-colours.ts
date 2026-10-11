@@ -80,6 +80,8 @@ export const distanceColourClass = (code: string, distanceKm = 0) =>
 export function achievementTone(id: string): ProfileTone {
   if (id.startsWith("first-")) return distanceTone(id.slice(6));
   switch (id) {
+    case "finishes":
+      return "teal";
     case "marathons":
     case "marathon-week":
     case "consecutive-marathons":

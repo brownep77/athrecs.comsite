@@ -41,10 +41,15 @@ export function ClaimAlertStatus() {
         {data.sent} accepted by the email service · {data.pending} waiting · {data.awaiting_setup}{" "}
         awaiting recipients
       </p>
-      {data.needs_review > 0 ? (
+      <p className="text-sm">
+        Profile confirmation emails: {data.profile_pending} waiting · {data.profile_needs_review}{" "}
+        need delivery review.
+      </p>
+      {data.needs_review > 0 || data.profile_needs_review > 0 ? (
         <p role="alert" className="text-sm text-red-800">
-          {data.needs_review} delivery status{data.needs_review === 1 ? "" : "es"} could not be
-          confirmed. Check the email provider before sending again.
+          {data.needs_review + data.profile_needs_review} delivery status
+          {data.needs_review === 1 ? "" : "es"} could not be confirmed. Check the email provider
+          before sending again.
         </p>
       ) : null}
       <Button

@@ -24,6 +24,7 @@ import { sanitizeDistances } from "@/lib/athrecs/filters";
 import { formatDistanceWithUnits } from "@/lib/athrecs/distance";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { TravelFacts } from "@/components/races/TravelFacts";
 import { RaceGroupBadges } from "@/components/races/RaceGroupBadges";
@@ -52,7 +53,8 @@ export function RaceCard({
   race: EventListItem;
   localized?: { language: string; country: string };
 }) {
-  if (IS_RUNRECS_SITE || race.sport === "Running" || race.sport === "Parkrun") return <RunRecsRaceCard race={race} localized={localized} />;
+  if (IS_RUNRECS_SITE || race.sport === "Running" || race.sport === "Parkrun")
+    return <RunRecsRaceCard race={race} localized={localized} />;
   const focusDate = race.next_date;
   const focusStatus =
     race.next_date && race.next_status ? effectiveStatus(race.next_date, race.next_status) : null;
@@ -71,6 +73,7 @@ export function RaceCard({
     country: race.country,
     area: race.area,
   });
+  const location = compactFixtureLocation({ ...race, country: venue.nation });
   const entryUrl =
     focusDate && focusStatus !== "Finished" && focusStatus !== "Closed"
       ? `/api/events/${encodeURIComponent(race.slug)}/official-entry`
@@ -103,7 +106,7 @@ export function RaceCard({
         </div>
         <div className="min-w-0 flex-1">
           <div className="mb-1 flex flex-wrap items-center gap-1">
-            <CountryFlag country={venue.nation} />
+            <CountryFlag country={venue.nation} showCode />
             <Badge variant="accent" className="gap-1">
               <SportIcon sport={race.sport} />
               {race.sport}
@@ -142,6 +145,7 @@ export function RaceCard({
               {race.name}
             </Link>
           )}
+          {location.text ? <p className="mt-1 text-xs text-muted">{location.text}</p> : null}
           {!focusDate && (
             <p className="mt-0.5 text-xs text-subtle">
               {race.past_count > 0
