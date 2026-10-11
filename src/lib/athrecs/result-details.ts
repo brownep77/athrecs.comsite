@@ -11,6 +11,9 @@ export const disqualificationSchema = z.object({
 });
 export type Disqualification = z.infer<typeof disqualificationSchema>;
 export const resultDetailsSchema = z.object({
+  verificationStatus: z
+    .enum(["unverified", "source_verified", "verified_by_administrator"])
+    .optional(),
   disqualification: disqualificationSchema.optional(),
   splits: z.array(z.object({ label: z.string(), time: z.string() })).optional(),
   note: z.string().max(2000).optional(),

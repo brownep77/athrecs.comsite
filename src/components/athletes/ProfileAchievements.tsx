@@ -4,11 +4,7 @@ import {
   type AchievementResult,
 } from "@/lib/athrecs/profile-history-results";
 import { Award, Medal, Trophy, Globe2, Mountain, Flag, Layers } from "lucide-react";
-import {
-  buildProfileAchievements,
-  isCompletedResult,
-  resultEvidenceLabel,
-} from "@/lib/athrecs/profile-achievements";
+import { buildProfileAchievements, resultEvidenceLabel } from "@/lib/athrecs/profile-achievements";
 import { type ProfileResult } from "@/lib/athrecs/profile-records";
 import {
   CHIP_TIME_CAVEAT,
@@ -23,6 +19,7 @@ import { buildRaceWinAchievements } from "@/lib/athrecs/race-win-achievements";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { achievementColourClass } from "@/lib/athrecs/profile-colours";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
+import { hasRecordedFinish } from "@/lib/athrecs/profile-result-presentation";
 
 type BoardHighlight = {
   id: string;
@@ -35,7 +32,7 @@ type BoardHighlight = {
 const NO_BOARD_HIGHLIGHTS: readonly BoardHighlight[] = [];
 
 export function ResultMedal({ result }: { result: ProfileResult }) {
-  if (!isCompletedResult(result)) return null;
+  if (!hasRecordedFinish(result)) return null;
   return <CompletionMedal />;
 }
 
@@ -43,7 +40,7 @@ export function CompletionMedal() {
   return (
     <span
       className="inline-flex shrink-0 text-amber-700 dark:text-amber-300"
-      title="Completed event"
+      title="Completed event — result verification is shown separately"
     >
       <Medal className="size-4" aria-hidden="true" />
       <span className="sr-only">Completed event · </span>

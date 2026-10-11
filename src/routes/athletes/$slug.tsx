@@ -35,7 +35,6 @@ import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
 import { formatAthleteId } from "@/lib/athrecs/athlete-id";
-import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
 import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
 import {
   ATHLETE_INDEXING_HEADER,
@@ -259,7 +258,7 @@ function AthleteContent() {
     ]),
   ];
   const reportedHistory = getReportedRaceHistory(athlete.slug);
-  const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
+  const includedHistory = reportedHistory ?? undefined;
   const performanceCount = timeline.count + (includedHistory?.records.length ?? 0);
   const aliases = athlete.aliases ?? [];
   const career = getEditorialAthleteCareer(athlete.slug);
@@ -490,7 +489,6 @@ function AthleteContent() {
           historyResults={historyResults}
           reportedHistory={includedHistory}
         />
-        <UnverifiedRaceHistory slug={athlete.slug} />
       </section>
       {upcoming.length > 0 ? (
         <details className="rounded-lg border border-border bg-surface p-4">

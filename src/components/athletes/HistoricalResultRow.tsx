@@ -1,7 +1,6 @@
 import {
   historyResultAnchor,
   historyResultCountry,
-  isCompletedHistoryResult,
   isTrailHistoryResult,
   type HistoryResult,
 } from "@/lib/athrecs/profile-history-results";
@@ -11,6 +10,8 @@ import { formatRaceDateShort } from "@/lib/athrecs/format";
 import { ResultDisqualification } from "./ResultDisqualification";
 import { ResultEvidence } from "./ResultEvidence";
 import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
+import { hasHistoryFinish } from "@/lib/athrecs/profile-result-presentation";
+import { ResultVerificationBadge } from "./ResultVerificationBadge";
 
 export function HistoricalResultRow({
   result,
@@ -47,8 +48,8 @@ export function HistoricalResultRow({
       </td>
       <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
         <span className="inline-flex items-center gap-1.5">
-          {isCompletedHistoryResult(row) ? <CompletionMedal /> : null}
-          {row.meeting}
+          {hasHistoryFinish(row) ? <CompletionMedal /> : null}
+          {row.meeting || "Meeting not recorded"}
         </span>
         <ResultEvidence
           notes={row.notes}
@@ -98,9 +99,7 @@ export function HistoricalResultRow({
         {row.performance || "Not recorded"}
         {numericMark && field ? " m" : numericMark && combined ? " pts" : ""}
         {row.disqualification ? <span aria-label="Disqualified result">*</span> : null}
-        {row.verificationStatus === "unverified" ? (
-          <span className="block text-xs font-normal text-muted">Unverified</span>
-        ) : null}
+        <ResultVerificationBadge status={row.verificationStatus} provider={row.providerName} />
         {row.wind ? (
           <span className="block text-xs font-normal text-subtle">Wind {row.wind} m/s</span>
         ) : null}

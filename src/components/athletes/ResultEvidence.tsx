@@ -20,12 +20,14 @@ export function ResultEvidence({
   urls,
   splits = [],
   showEvidence = false,
+  sourceLabels = [],
 }: {
   notes?: string;
   provider?: string | null;
   urls: readonly string[];
   splits?: readonly { label: string; time: string }[];
   showEvidence?: boolean;
+  sourceLabels?: readonly { label: string; url: string }[];
 }) {
   const visibleNotes = showEvidence ? notes : publicProfileResultNotes(notes, provider, urls);
   const visibleUrls = showEvidence ? urls : urls.filter((url) => !isWmmSource(null, [url]));
@@ -51,7 +53,8 @@ export function ResultEvidence({
                   rel="noreferrer"
                   className="inline-flex min-h-8 items-center text-accent underline underline-offset-2"
                 >
-                  {sourceLabel(url, visibleProvider)}
+                  {sourceLabels.find((source) => source.url === url)?.label ||
+                    sourceLabel(url, visibleProvider)}
                   {visibleUrls.length > 1 ? ` · source ${i + 1}` : ""} ↗
                 </a>
               </li>
