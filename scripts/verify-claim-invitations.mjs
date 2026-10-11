@@ -497,6 +497,19 @@ try {
   const sourceDashboard = (await read({ q: athlete.email }, staff.token)).accounts[0];
   assert.equal(sourceDashboard.linkedResults, 4);
   assert.equal(sourceDashboard.racesClaimed, 2);
+  await sql`update results set status='dnf' where id=991402`;
+  const withDnf = await rpc(
+    "athrecs/athlete-account-api",
+    "getMyAthleteAccount",
+    undefined,
+    athlete.token,
+  );
+  assert.equal(
+    withDnf.claimedResults.find((r) => r.resultId === 991402)?.status,
+    "dnf",
+    "Canonical non-finishes remain in the owned account",
+  );
+  await sql`update results set status='finished' where id=991402`;
   const sourceAccountResults = account.claimedResults.filter((r) => r.resultId < 0);
   assert.equal(sourceAccountResults.length, 2);
   assert.equal(

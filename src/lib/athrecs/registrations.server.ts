@@ -140,7 +140,7 @@ export async function loadRegistrations(
       cross join lateral (select count(*)::int as total,
         coalesce(array_agg(distinct r.event_sport order by r.event_sport),array[]::text[]) as sports
         from athlete_account_links l join athlete_claimable_results r on r.athlete_id=l.athlete_id
-        where l.user_id=u."id" and l.status='active'
+        where l.user_id=u."id" and l.status='active' and (r.id > 0 or r.available)
           and lower(r.status) not in ('dns','did not start')) records
       order by ${order}`,
       [...parameters, pageSize, (page - 1) * pageSize],

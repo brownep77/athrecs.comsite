@@ -652,7 +652,7 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
         join athletes athlete on athlete.id = account_link.athlete_id
         join athlete_claimable_results result on result.athlete_id = athlete.id
         where account_link.user_id = ${userId}
-          and account_link.status = 'active' and result.available
+          and account_link.status = 'active' and (result.id > 0 or result.available)
         order by result.event_date desc, result.event_name, result.id desc
       `,
     sql<{ claim_count: number }>`
