@@ -1,6 +1,7 @@
 import { loadPublishedSourceHistories } from "./athlete-publication.server";
 import type { SourceHistory } from "./source-performance-history";
 import { profileReadMiddleware } from "@/lib/auth/profile-access";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { readResultDetails } from "./result-details";
 import { publicProfileDetails, type PublicProfileDetails } from "./profile-details";
 import { loadUpcoming, type UpcomingEvent } from "./athlete-upcoming-api";
@@ -194,6 +195,7 @@ async function ensureShareRow(
 async function loadVisibleResults(
   sql: Awaited<ReturnType<typeof getSql>>,
   userId: string,
+  publicPreview = false,
 ): Promise<SharedProfileResult[]> {
   const rows = await sql<{
     result_id: number;
@@ -247,6 +249,10 @@ async function loadVisibleResults(
     join events event on event.id = edition.event_id
     where account_link.user_id = ${userId}
       and account_link.status = 'active'
+      and (${!publicPreview} or (
+        athlete.profile_visibility = 'public'
+        and result.result_visibility in ('public', 'public_figure')
+      ))
     order by edition.event_date desc, result.id desc
   `;
   const hiddenIds = new Set(rows.filter((row) => row.hidden).map((row) => row.result_id));
@@ -282,6 +288,7 @@ async function loadVisibleResults(
 async function buildPublicProfile(
   sql: Awaited<ReturnType<typeof getSql>>,
   share: ShareRow,
+  publicPreview = false,
 ): Promise<SharedAthleteProfile> {
   const [identity, sportRows, bioRows, results, connectionRows, upcoming] = await Promise.all([
     loadIdentity(sql, share.user_id),
@@ -297,7 +304,9 @@ async function buildPublicProfile(
       where user_id = ${share.user_id}
       limit 1
     `,
-    share.share_results ? loadVisibleResults(sql, share.user_id) : Promise.resolve([]),
+    share.share_results
+      ? loadVisibleResults(sql, share.user_id, publicPreview)
+      : Promise.resolve([]),
     sql<{ platform: SocialPlatform; url: string }>`
       select platform, url from athlete_profile_connections
       where user_id = ${share.user_id} and share_publicly = true
@@ -308,7 +317,9 @@ async function buildPublicProfile(
 
   const linked = await sql<{
     athlete_id: number;
-  }>`select athlete_id from athlete_account_links where user_id=${share.user_id} and status='active'`;
+  }>`select l.athlete_id from athlete_account_links l join athletes a on a.id=l.athlete_id
+    where l.user_id=${share.user_id} and l.status='active'
+      and (${!publicPreview} or a.profile_visibility='public')`;
   const sourceFixtures = await Promise.all(
     linked.map((link) => loadUpcoming(null, link.athlete_id, true)),
   );
@@ -333,7 +344,13 @@ async function buildPublicProfile(
   }
 
   return {
-    sourceHistories: share.share_results ? (await Promise.all(linked.map(link=>loadPublishedSourceHistories(sql,link.athlete_id)))).flat() : [],
+    sourceHistories: share.share_results
+      ? (
+          await Promise.all(
+            linked.map((link) => loadPublishedSourceHistories(sql, link.athlete_id)),
+          )
+        ).flat()
+      : [],
     kind: "shared-account",
     searchIndexable: share.search_indexable === true,
     athleteNumber: identity.athlete_number,
@@ -424,34 +441,63 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
     return mapSettings(rows[0]);
   });
 
-export const getPublishedSharedProfile = createServerFn({ method: "GET" })
-  .middleware([profileReadMiddleware])
-  .validator((input: { slug: string }) => ({
-    slug: typeof input?.slug === "string" ? input.slug.trim().toLowerCase() : "",
-  }))
-  .handler(async ({ data }) => {
-    if (!isValidShareSlug(data.slug)) return null;
-    try {
-      const sql = await ready();
-      const rows = await sql<ShareRow>`
+async function readPublishedSharedProfile(slug: string, publicPreview = false) {
+  if (!isValidShareSlug(slug)) return null;
+  try {
+    const sql = await ready();
+    const rows = await sql<ShareRow>`
         select
           user_id, slug, enabled, share_bio, share_results, share_club, share_location,
           search_indexable, acknowledged_at::text as acknowledged_at,
           published_at::text as published_at
         from athlete_public_shares
-        where (slug = ${data.slug} or exists (
+        where (slug = ${slug} or exists (
           select 1 from athlete_account_links link join athletes a on a.id=link.athlete_id
           where link.user_id=athlete_public_shares.user_id and link.status='active'
-            and a.slug=${data.slug} and a.profile_visibility='public' and a.profile_type <> 'Public figure'
+            and a.slug=${slug} and a.profile_visibility='public' and a.profile_type <> 'Public figure'
         ))
           and enabled = true
+          and (${!publicPreview} or share_results = true)
         limit 1
       `;
-      const share = rows[0];
-      if (!share) return null;
-      return buildPublicProfile(sql, share);
-    } catch {
-      // Missing table or lookup failure must 404, never 500 a public athlete URL.
-      return null;
-    }
+    const share = rows[0];
+    if (!share) return null;
+    return buildPublicProfile(sql, share, publicPreview);
+  } catch {
+    // Missing table or lookup failure must 404, never 500 a public athlete URL.
+    return null;
+  }
+}
+
+const shareSlugInput = (input: { slug: string }) => ({
+  slug: typeof input?.slug === "string" ? input.slug.trim().toLowerCase() : "",
+});
+
+export const getPublishedSharedProfile = createServerFn({ method: "GET" })
+  .middleware([profileReadMiddleware])
+  .validator(shareSlugInput)
+  .handler(({ data }) => readPublishedSharedProfile(data.slug));
+
+export const getPublicSharedProfilePreview = createServerFn({ method: "GET" })
+  .validator(shareSlugInput)
+  .handler(async ({ data }) => {
+    if (IS_RUNRECS_SITE) return null;
+    const { setResponseHeader } = await import("@tanstack/react-start/server");
+    setResponseHeader("Cache-Control", "private, no-store");
+    setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+    const profile = await readPublishedSharedProfile(data.slug, true);
+    if (!profile) return null;
+    const { buildPublicAthletePreview } = await import("./public-athlete-preview");
+    return buildPublicAthletePreview({
+      slug: profile.slug,
+      displayName: profile.displayName,
+      athleteNumber: profile.athleteNumber,
+      club: profile.club,
+      nationality: profile.nationality,
+      sports: profile.sports,
+      biography: profile.bio ? [profile.bio] : [],
+      results: profile.results,
+      histories: profile.sourceHistories ?? [],
+      searchIndexable: profile.searchIndexable,
+    });
   });

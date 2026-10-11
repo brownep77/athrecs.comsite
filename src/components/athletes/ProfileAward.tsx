@@ -72,7 +72,7 @@ const awards = {
   trophy: {
     icon: Trophy,
     label: "Winner's trophy",
-    colour: "text-yellow-700 dark:text-yellow-300",
+    colour: "text-amber-700 dark:text-amber-300",
   },
   "personal-best": {
     icon: Star,
@@ -82,7 +82,7 @@ const awards = {
   milestone: {
     icon: Award,
     label: "Career milestone",
-    colour: "text-violet-700 dark:text-violet-300",
+    colour: "text-fuchsia-700 dark:text-fuchsia-300",
   },
   participation: {
     icon: Flag,

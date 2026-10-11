@@ -2,7 +2,7 @@ import { ProfileAward } from "./ProfileAward";
 import type { RaceWinAchievement } from "@/lib/athrecs/race-win-achievements";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
-import { distanceColourClass } from "@/lib/athrecs/profile-colours";
+import { achievementPalette } from "@/lib/athrecs/achievement-colours";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 
 export function RaceWinAchievements({
@@ -13,6 +13,7 @@ export function RaceWinAchievements({
   showEvidence?: boolean;
 }) {
   if (!wins.length) return null;
+  const colours = achievementPalette(wins.map((win) => `win:${win.id}`));
   return (
     <div className="space-y-2" aria-label="Race wins by distance">
       <h3 className="text-sm font-semibold">Race wins by distance</h3>
@@ -22,12 +23,20 @@ export function RaceWinAchievements({
             key={win.id}
             data-achievement="race-win"
             data-win-kind={win.kind}
-            className={`rounded-lg border p-3 ${distanceColourClass(win.distance)}`}
+            className="achievement-label rounded-lg border p-3"
+            style={colours.get(`win:${win.id}`)}
           >
             <summary className="flex cursor-pointer list-none items-start gap-2">
               <ProfileAward kind="trophy" />
               <span>
-                <strong className="block text-sm">{win.distance} winner</strong>
+                <strong className="block text-sm">
+                  {win.distance} ·{" "}
+                  {win.kind === "category"
+                    ? "Category winner"
+                    : win.kind === "gender"
+                      ? `${win.label} winner`
+                      : "Overall winner"}
+                </strong>
                 <span className="block text-xs">
                   {win.sport} · {win.label}
                 </span>
