@@ -3,6 +3,7 @@ import type { SourceHistory, SourcePerformance } from "./source-performance-hist
 import { sourceHistorySports, type HistoryResult } from "./profile-history-results.ts";
 import { isWmmSource, publicProfileResultNotes } from "./profile-source-presentation.ts";
 import { hasHistoryFinish, resultVerification } from "./profile-result-presentation.ts";
+import { competitionRound } from "./competition-awards.ts";
 
 const normal = (value: string) => value.trim().toLowerCase().replace(/\s+/g, " ");
 
@@ -91,9 +92,9 @@ export function buildProfileTimeline(
       );
       if (known) {
         known.details ??= {};
-        const sourceRound = row.labels
-          .find((label) => /^round:/i.test(label))
-          ?.replace(/^round:\s*/i, "");
+        const sourceRound = row.labels.some((label) => /^round:/i.test(label))
+          ? competitionRound(row.labels)
+          : undefined;
         if (sourceRound && resultVerification(row.verificationStatus, row.providerName).verified)
           known.displayRound =
             known.displayRound && known.displayRound !== sourceRound ? "conflicting" : sourceRound;

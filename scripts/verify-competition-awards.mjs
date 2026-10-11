@@ -204,6 +204,13 @@ assert.equal(
   1,
   "Matched final evidence decorates a canonical row once",
 );
+assert(
+  !buildCompetitionHonours(
+    [recorded],
+    histories([row({ labels: ["Round: F", "Round: H1"] })]),
+  ).some((award) => award.kind === "gold"),
+  "Merging source evidence must not discard a contradictory round",
+);
 console.log(
   "Competition tiers, final medals, category scope, verified honours and edition deduplication passed.",
 );

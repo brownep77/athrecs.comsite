@@ -48,14 +48,8 @@ const majorMarathons = [
   { name: "Sydney", since: 2025, slugs: ["sydney-marathon"] },
 ] as const;
 
-/** Anchored championship identities only. An overseas venue, a fast time or a
- * provider's brand never establishes the prestige of an otherwise unknown race. */
-export function competitionContext(input: CompetitionInput): CompetitionContext {
-  const event = input.event
-    .trim()
-    .replace(/^The\s+/i, "")
-    .replace(/^\d+(?:st|nd|rd|th)?\s+/i, "");
-  const roundLabels = (input.labels ?? []).filter((label) => /^round:/i.test(label));
+export function competitionRound(labels: readonly string[]): CompetitionRound {
+  const roundLabels = labels.filter((label) => /^round:/i.test(label));
   const parseRound = (roundText: string): CompetitionRound =>
     /^(?:sf\d*|semi[- ]?final(?:\s*\d+)?)$/i.test(roundText)
       ? "semi-final"
@@ -67,7 +61,18 @@ export function competitionContext(input: CompetitionInput): CompetitionContext 
             ? "final"
             : "unknown";
   const rounds = new Set(roundLabels.map((label) => parseRound(label.replace(/^round:\s*/i, ""))));
-  const round: CompetitionRound = rounds.size === 1 ? [...rounds][0] : "unknown";
+  return rounds.size === 1 ? [...rounds][0] : "unknown";
+}
+
+/** Anchored championship identities only. An overseas venue, a fast time or a
+ * provider's brand never establishes the prestige of an otherwise unknown race. */
+export function competitionContext(input: CompetitionInput): CompetitionContext {
+  const event = input.event
+    .trim()
+    .replace(/^The\s+/i, "")
+    .replace(/^\d+(?:st|nd|rd|th)?\s+/i, "");
+  const roundLabels = (input.labels ?? []).filter((label) => /^round:/i.test(label));
+  const round = competitionRound(roundLabels);
   let tier: CompetitionTier = "race";
   if (input.verified) {
     if (/^(?:[IVXLCDM]+\s+)?Olympic Games(?:\s*[,–—-]|$)/i.test(event)) tier = "olympic";
