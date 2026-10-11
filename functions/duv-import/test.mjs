@@ -13,6 +13,22 @@ function fixture({start=1,count=1,total=1,reorder=false,name='Example, Alice',ru
 }
 const inv={sourceUrl:url,index:{Date:'04.10.2026',Event:'Synthetic race (GBR)',Distance:'6h',Finishers:'1'}};
 const parse=(raw,inventory=inv,page=url)=>parseEvent(raw,inventory,'2026-10-10T08:00:00Z',2026,page);
+test('French 1er edition retains originals and never relaxes other guards',()=>{
+ const raw=fixture({edition:'1er '});
+ const p=parse(raw);
+ assert.equal(p.eventMetadata.Event,'1er Synthetic race (GBR)');
+ assert.equal(p.index.raw.Event,'Synthetic race (GBR)');
+ assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');
+ assert.equal(p.audit.identityVerified,false);
+ for(const edition of ['er ','1er','2er ','11er ','1er extra ','1er 2nd '])assert.throws(()=>parse(fixture({edition})),/index_metadata_changed/);
+ for(const Event of ['Different race (GBR)','Synthetic race (FRA)','2er Synthetic race (GBR)'])assert.throws(()=>parse(raw,{...inv,index:{...inv.index,Event}}),/index_metadata_changed/);
+ assert.throws(()=>parse(raw,{...inv,index:{...inv.index,Date:'03.10.2026'}}),/index_metadata_changed/);
+ assert.throws(()=>parse(raw,{...inv,index:{...inv.index,Distance:'12h'}}),/index_distance_changed/);
+ assert.throws(()=>parse(raw,{...inv,index:{...inv.index,Finishers:'2'}}),/index_finisher_count_changed/);
+ const repeated=raw.toString().replace('1 (0 M, 1 F)','2 (0 M, 2 F)').replace('</tbody>',/<tbody>(<tr>.*?<\/tr>)<\/tbody>/.exec(raw.toString())[1]+'</tbody>');
+ assert.throws(()=>parse(Buffer.from(repeated),{...inv,index:{...inv.index,Finishers:'2'}}),/repeated_source_runner/);
+});
+
 test('French ere ordinal preserves originals and requires the complete remaining title and date',()=>{
  for(const edition of ['1ère ','6ère ']){
   const p=parse(fixture({edition}));
