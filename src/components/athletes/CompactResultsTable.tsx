@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { HistoricalResultRow } from "./HistoricalResultRow";
+import { ResultEvidence } from "./ResultEvidence";
+import { profileDisciplineLabel } from "@/lib/athrecs/profile-timeline";
 import {
   combineResultsHistory,
   resultHistoryYear,
@@ -8,11 +10,18 @@ import {
 } from "@/lib/athrecs/profile-history-results";
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
-import { type ProfileResult, findPersonalBests, timingBasis } from "@/lib/athrecs/profile-records";
+import { type ProfileResult, findPersonalBests } from "@/lib/athrecs/profile-records";
+import { ResultTiming } from "./ResultTiming";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { ProfileEventLink } from "./ProfileEventLink";
 import { CountryFlag } from "./CountryFlag";
-import { ResultMedal } from "./ProfileAchievements";
+import {
+  ResultMedal,
+  ResultMedalKey,
+  CompetitionTierBadge,
+  ClassificationAwards,
+} from "./ProfileAward";
+import { recordedAwards, recordedCompetition } from "@/lib/athrecs/competition-awards";
 import { roadPerformanceCondition } from "@/lib/athrecs/road-performance-conditions";
 import { isDisqualified } from "@/lib/athrecs/result-details";
 import { ResultDisqualification } from "./ResultDisqualification";
@@ -20,6 +29,12 @@ import { ResultDisqualification } from "./ResultDisqualification";
 import { ReportedRaceResultRows } from "./ReportedRaceResultRows";
 import type { ReportedRaceHistory, ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 import { selectProfilePersonalBests } from "@/lib/athrecs/reported-personal-bests";
+import {
+  reportedResultYear,
+  reportedResultSport,
+  reportedResultSortDate,
+} from "@/lib/athrecs/profile-result-presentation";
+import { ResultVerificationBadge } from "./ResultVerificationBadge";
 
 const NO_HISTORY_RESULTS: readonly HistoryResult[] = [];
 const NO_REPORTED_RECORDS: readonly ReportedRaceRecord[] = [];
@@ -48,6 +63,17 @@ export function CompactResultsTable({
   claimable?: boolean;
 }) {
   const bestIds = personalBestIds ?? new Set(findPersonalBests(results).map((r) => r.resultId));
+  const rows: (ResultsHistoryEntry | { kind: "reported"; result: ReportedRaceRecord })[] = [
+    ...(entries ?? combineResultsHistory(results, [])),
+    ...reportedRecords.map((result) => ({ kind: "reported" as const, result })),
+  ];
+  const sortDate = (entry: (typeof rows)[number]) =>
+    entry.kind === "reported"
+      ? reportedResultSortDate(entry.result)
+      : entry.kind === "recorded"
+        ? entry.result.eventDate
+        : entry.result.performance.date || String(entry.result.performance.year);
+  rows.sort((a, b) => sortDate(b).localeCompare(sortDate(a)));
   return (
     <div
       className={`${showEvidence ? "" : "profile-table-wrap"} overflow-x-auto rounded-lg border border-border bg-surface`}
@@ -83,7 +109,17 @@ export function CompactResultsTable({
           </tr>
         </thead>
         <tbody role="rowgroup" className="divide-y divide-border">
-          {(entries ?? combineResultsHistory(results, [])).map((entry) => {
+          {rows.map((entry) => {
+            if (entry.kind === "reported")
+              return (
+                <ReportedRaceResultRows
+                  key={entry.result.id}
+                  records={[entry.result]}
+                  bestIds={reportedBestIds}
+                  hasActions={Boolean(action || claimable)}
+                  showEvidence={showEvidence}
+                />
+              );
             if (entry.kind === "history")
               return (
                 <HistoricalResultRow
@@ -113,17 +149,18 @@ export function CompactResultsTable({
                       {result.eventName}
                     </ProfileEventLink>
                   </span>
-                  <ResultDisqualification decision={result.details?.disqualification} />
-                  {showEvidence && result.details?.note ? (
-                    <span className="block text-xs text-muted">{result.details.note}</span>
-                  ) : null}
-                  {result.details?.splits?.length ? (
-                    <span className="block text-xs font-normal text-muted">
-                      {result.details.splits
-                        .map((split) => `${split.label} ${split.time}`)
-                        .join(" · ")}
-                    </span>
-                  ) : null}
+                  <CompetitionTierBadge context={recordedCompetition(result)} />
+                  <ResultDisqualification
+                    showEvidence={showEvidence}
+                    decision={result.details?.disqualification}
+                  />
+                  <ResultEvidence
+                    notes={result.details?.note}
+                    provider={result.resultSource}
+                    urls={result.sourceUrls}
+                    splits={result.details?.splits}
+                    showEvidence={showEvidence}
+                  />
                   {result.conflicting ? (
                     <span className="block text-xs text-amber-800">
                       Conflicting result · excluded from PBs
@@ -143,7 +180,7 @@ export function CompactResultsTable({
                   data-label={hasHistory ? "Distance / discipline" : "Distance"}
                   className="whitespace-nowrap px-3 py-2 text-xs"
                 >
-                  {result.distanceCode}
+                  {profileDisciplineLabel(result.distanceCode)}
                   <span className="block text-[10px] text-subtle">{result.surface}</span>
                 </td>
                 <td role="cell" data-label="Location" className="px-3 py-2">
@@ -171,22 +208,18 @@ export function CompactResultsTable({
                       PB
                     </span>
                   ) : null}
-                  {showEvidence ? (
-                    <span className="block text-xs font-normal text-subtle">
-                      {isDisqualified(result)
-                        ? "Original time · disqualified"
-                        : timingBasis(result)}
-                      {result.chipTimeSeconds != null
-                        ? ` · Chip ${formatDuration(result.chipTimeSeconds)}`
-                        : ""}
-                      {result.gunTimeSeconds != null
-                        ? ` · Gun ${formatDuration(result.gunTimeSeconds)}`
-                        : ""}
-                    </span>
+                  <ResultVerificationBadge
+                    status={result.details?.verificationStatus}
+                    provider={result.resultSource}
+                    conflicting={result.conflicting}
+                  />
+                  {isDisqualified(result) || ["finished", "FIN", ""].includes(result.status) ? (
+                    <ResultTiming result={result} />
                   ) : null}
                 </td>
                 <td role="cell" data-label="Place" className="px-3 py-2 tabular-nums">
-                  {result.overallPlace ?? "—"}
+                  {result.overallPlace ?? result.displayOverallPlace ?? "—"}
+                  <ClassificationAwards awards={recordedAwards(result)} />
                   {isDisqualified(result) ? (
                     <span className="block text-[10px] text-subtle">Original · void</span>
                   ) : null}
@@ -233,12 +266,6 @@ export function CompactResultsTable({
               </tr>
             );
           })}
-          <ReportedRaceResultRows
-            records={reportedRecords}
-            bestIds={reportedBestIds}
-            hasActions={Boolean(action || claimable)}
-            showEvidence={showEvidence}
-          />
         </tbody>
       </table>
     </div>
@@ -260,15 +287,15 @@ export function CompactResults({
   const [sport, setSport] = useState("");
   const [year, setYear] = useState("");
   const [q, setQ] = useState("");
+  const [distance, setDistance] = useState("");
 
   const reportedRecords = reportedHistory?.records ?? NO_REPORTED_RECORDS;
-  const reportYear = (record: ReportedRaceRecord) =>
-    record.reportedDate.match(/^\d{4}\b/)?.[0] ?? "Unknown";
+  const reportYear = reportedResultYear;
   const entries = combineResultsHistory(results, historyResults);
   const sports = [
     ...new Set([
       ...entries.map((r) => r.result.sport),
-      ...(reportedRecords.length ? ["Running"] : []),
+      ...reportedRecords.map(reportedResultSport),
     ]),
   ].sort();
   const years = [
@@ -276,6 +303,18 @@ export function CompactResults({
   ]
     .sort()
     .reverse();
+  const distances = [
+    ...new Set([
+      ...entries.map((entry) =>
+        profileDisciplineLabel(
+          entry.kind === "recorded"
+            ? entry.result.distanceCode
+            : entry.result.performance.discipline,
+        ),
+      ),
+      ...reportedRecords.map((record) => profileDisciplineLabel(record.distance)),
+    ]),
+  ].sort();
   const filtered = entries.filter((entry) => {
     const search =
       entry.kind === "recorded"
@@ -289,14 +328,21 @@ export function CompactResults({
     return (
       (!sport || entry.result.sport === sport) &&
       (!year || resultHistoryYear(entry) === year) &&
+      (!distance ||
+        profileDisciplineLabel(
+          entry.kind === "recorded"
+            ? entry.result.distanceCode
+            : entry.result.performance.discipline,
+        ) === distance) &&
       (!q || search.join(" ").toLowerCase().includes(q.toLowerCase()))
     );
   });
   const filteredReports = reportedRecords
     .filter(
       (r) =>
-        (!sport || sport === "Running") &&
+        (!sport || sport === reportedResultSport(r)) &&
         (!year || reportYear(r) === year) &&
+        (!distance || profileDisciplineLabel(r.distance) === distance) &&
         (!q || r.event.toLowerCase().includes(q.toLowerCase())),
     )
     .sort((a, b) =>
@@ -315,13 +361,11 @@ export function CompactResults({
       best.kind === "reported" && best.value.recordId ? [best.value.recordId] : [],
     ),
   );
-  const previewSize = 8;
-  const previewReports = Math.max(0, previewSize - filtered.length);
   return (
     <section className="space-y-3" id={reportedHistory ? "race-results" : undefined}>
       <div className="profile-filters flex flex-wrap items-center gap-2">
         <h2 className="mr-auto font-display text-lg font-semibold">
-          Results history <span className="font-sans text-sm text-subtle">{total}</span>
+          Results <span className="font-sans text-sm text-subtle">{total}</span>
         </h2>
         <input
           aria-label="Search results"
@@ -335,6 +379,7 @@ export function CompactResults({
         {[
           { label: "Sport", value: sport, options: sports, set: setSport },
           { label: "Year", value: year, options: years, set: setYear },
+          { label: "Discipline", value: distance, options: distances, set: setDistance },
         ].map((filter) => (
           <select
             key={filter.label}
@@ -355,15 +400,16 @@ export function CompactResults({
       {showEvidence && reportedHistory ? (
         <p className="text-sm text-muted">{reportedHistory.description}</p>
       ) : null}
+      {total > 0 ? <ResultMedalKey /> : null}
       {total ? (
         <CompactResultsTable
           results={results}
-          entries={filtered.slice(0, previewSize)}
+          entries={filtered}
           hasHistory={historyResults.length > 0}
           showEvidence={showEvidence}
           claimable={claimable}
           personalBestIds={bestIds}
-          reportedRecords={filteredReports.slice(0, previewReports)}
+          reportedRecords={filteredReports}
           reportedBestIds={reportedBestIds}
         />
       ) : (
@@ -371,28 +417,6 @@ export function CompactResults({
           No results in this selection.
         </p>
       )}
-      {total > previewSize ? (
-        <details
-          className="rounded-lg border border-border bg-surface p-3"
-          key={`${sport}:${year}:${q}`}
-        >
-          <summary className="cursor-pointer text-sm font-semibold text-accent">
-            Show all {total} results
-          </summary>
-          <div className="mt-3">
-            <CompactResultsTable
-              results={results}
-              entries={filtered.slice(previewSize)}
-              hasHistory={historyResults.length > 0}
-              claimable={claimable}
-              showEvidence={showEvidence}
-              personalBestIds={bestIds}
-              reportedRecords={filteredReports.slice(previewReports)}
-              reportedBestIds={reportedBestIds}
-            />
-          </div>
-        </details>
-      ) : null}
     </section>
   );
 }

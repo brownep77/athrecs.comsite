@@ -32,6 +32,10 @@ try {
   const db = await server.ssrLoadModule("/src/lib/db.ts");
   database = await db.getPglite();
   const sql = await db.getSql();
+  // Complete disposable catalogue setup before timing the account navigation.
+  // This matches the other account browser fixtures and keeps seed failures
+  // explicit instead of surfacing as a first-page browser timeout.
+  await (await server.ssrLoadModule("/src/lib/athrecs/seed.server.ts")).ensureAthrecsSeeded();
   browser = await chromium.launch({
     executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
     args: ["--no-sandbox", "--disable-dev-shm-usage"],
@@ -59,9 +63,42 @@ try {
   await sql`insert into events (id,slug,name,sport,surface,country) values (992101,'claim-journey-test','Synthetic Claim Journey 10K','Running','Road','United Kingdom')`;
   await sql`insert into editions (id,event_id,event_date,distance_code,distance_km) values (992101,992101,'2026-09-01','10K',10)`;
   await sql`insert into athletes (id,slug,display_name,profile_visibility) values (992101,'claim-journey-runner','Journey Test Runner','private'),(992102,'claim-journey-invited','Invited Test Runner','private')`;
-  await sql`insert into results (id,edition_id,athlete_id,finish_time_seconds,status) values (992101,992101,992101,2400,'finished'),(992102,992101,992102,2500,'finished')`;
+  await sql`insert into results (id,edition_id,athlete_id,finish_time_seconds,status) values (992102,992101,992102,2500,'finished')`;
+  const sourcePerformance = {
+    year: 2026,
+    date: "2026-09-06",
+    meeting: "Synthetic Run Norwich 2026",
+    discipline: "10K",
+    performance: "40:00",
+    place: "25",
+    ageGroup: "M40",
+    labels: ["Club at race: Journey Harriers"],
+    verificationStatus: "source_verified",
+    places: { overall: 25, gender: 20, category: 3 },
+    sourceUrls: ["https://example.test/norwich.pdf"],
+    archiveReference: {
+      sourceRow: "RN2026:journey",
+      original: { Bib: "1234", Age: "42", "Gun Time": "40:30" },
+    },
+  };
+  const virtualPerformance = {
+    ...sourcePerformance,
+    year: 2020,
+    date: "",
+    meeting: "Synthetic Run Norwich 2020 Virtual",
+    discipline: "10K Virtual",
+    verificationStatus: "unverified",
+    dateLabel: "18–24 October 2020 (individual run date not supplied)",
+    archiveReference: { sourceRow: "RN2020:journey", original: { Age: "36" } },
+  };
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at) values(992101,'Run Norwich official results','claim-journey','https://example.test/norwich.pdf',now(),false,array[2020,2026],array[2020,2026],${JSON.stringify([sourcePerformance, virtualPerformance])}::jsonb,now())`;
+  const [source] =
+    await sql`select -id id from source_history_claim_results where source_key='RN2026:journey'`;
+  const [virtual] =
+    await sql`select -id id from source_history_claim_results where source_key='RN2020:journey'`;
+  const sourceId = source.id;
   const { page } = plain;
-  await page.goto(`${origin}/claim-results?resultId=992101`, { waitUntil: "networkidle" });
+  await page.goto(`${origin}/claim-results?resultId=${sourceId}`, { waitUntil: "networkidle" });
   await page.getByRole("heading", { name: "Next, enter your racing name" }).waitFor();
   assert.equal(await page.getByText("This match is no longer available").count(), 0);
   await page.getByLabel("Full racing name").fill("Journey Test Runner");
@@ -69,9 +106,20 @@ try {
   await page
     .getByRole("checkbox", { name: /This is my profile and the race shown is mine/ })
     .waitFor();
+  await page.getByText(/Recorded club: Journey Harriers/).waitFor();
+  await page.getByText(/Age at race: 42/).waitFor();
+  await page.goto(`${origin}/athlete-account?section=potential`, { waitUntil: "networkidle" });
+  await page.getByRole("heading", { name: "Synthetic Run Norwich 2026", exact: true }).waitFor();
+  await page
+    .getByText("18–24 October 2020 (individual run date not supplied)", { exact: false })
+    .waitFor();
+  await page.goto(`${origin}/claim-results?resultId=${virtual.id}`, { waitUntil: "networkidle" });
+  await page.getByText(/individual run date not supplied/).waitFor();
+  assert.equal(await page.getByText("Invalid Date", { exact: false }).count(), 0);
+  await page.goto(`${origin}/claim-results?resultId=${sourceId}`, { waitUntil: "networkidle" });
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
   await page.getByRole("link", { name: "Finish my profile claim", exact: true }).click();
-  assert(new URL(page.url()).searchParams.get("resultId") === "992101");
+  assert(new URL(page.url()).searchParams.get("resultId") === String(sourceId));
   await page
     .getByRole("checkbox", { name: /This is my profile and the race shown is mine/ })
     .check();

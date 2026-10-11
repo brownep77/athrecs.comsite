@@ -188,6 +188,8 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
         ed.distance_km as "distanceKm", r.status,
         r.finish_time_seconds as "finishTimeSeconds", r.chip_time_seconds as "chipTimeSeconds",
         r.gun_time_seconds as "gunTimeSeconds", r.overall_place as "overallPlace", r.category,
+        r.gender_place as "genderPlace", r.category_place as "categoryPlace",
+        (select gender from athletes where id=r.athlete_id) as "resultGender",
         r.result_source as "resultSource", r.result_details as details,
         array(select distinct url from (
           select r.source_url as url union all
@@ -212,7 +214,14 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
       select 'Account biography' as label, b.custom_bio as bio
       from athlete_profile_bios b join athlete_identifiers i on i.user_id=b.user_id
       where i.number=${number}::bigint and b.custom_bio <> ''`;
+    const { profileEditorial } = await import("./profile-editorial.server");
+    const { setResponseHeader } = await import("@tanstack/react-start/server");
+    setResponseHeader("Cache-Control", "private, no-store");
     return {
+      editorial: athlete.sources.map((source) => ({
+        slug: source.slug,
+        ...profileEditorial(source.slug),
+      })),
       athlete,
       bioNotes,
       results: combineProfileResults(

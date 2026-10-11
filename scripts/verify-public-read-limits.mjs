@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import ts from "typescript";
 import { z } from "zod";
 import { PGlite } from "@electric-sql/pglite";
+import { countPublishedSourceResults } from "../src/lib/athrecs/athlete-publication.server.ts";
 
 // Run the real public handlers and SQL against synthetic data only.
 function compile(source, bindings) {
@@ -68,6 +69,7 @@ function handlers(runrecs) {
     ready: async () => sql,
     readResultDetails: (value) => value,
     getReportedRaceHistory: () => null,
+    countPublishedSourceResults,
   });
 }
 try {
@@ -82,6 +84,9 @@ try {
     create table athlete_account_links(user_id text, athlete_id integer, status text);
     create table athlete_public_shares(user_id text, enabled boolean, share_results boolean);
     create table athlete_profile_hidden_results(user_id text, result_id integer);
+    create table athlete_source_histories(athlete_id integer, provider text, external_id text,
+      performances jsonb, published_at timestamptz);
+    create table network_audit_log(action text, entity_id text, after_value jsonb);
     insert into clubs values (1, 'Example Club', 'example-club');
     insert into athletes
       select n, 'synthetic-' || n, 'Synthetic ' || lpad(n::text, 3, '0'), 'M',
@@ -118,6 +123,17 @@ try {
     [130],
     "Profiles beyond the first page remain searchable",
   );
+  await db.exec(`insert into athlete_source_histories values
+    (130,'Synthetic WMM','wmm-130','[{"verificationStatus":"unverified","date":"","year":2025,"performance":"3:01:02"},{"profileExcluded":true}]',now()),
+    (6,'Synthetic WMM','wmm-6','[{"verificationStatus":"unverified","date":"","year":2025,"performance":"3:12:34"}]',now()),
+    (130,'Private archive','private-130','[{}]',null),
+    (4,'Synthetic WMM','wmm-4','[{}]',now());`);
+  const sourced = await athrecs.listAthletes({ data: { q: "Synthetic 130" } });
+  assert.equal(sourced[0].result_count, 2, "The athlete list counts visible source results as well as canonical records");
+  assert.equal((await athrecs.listAthletes({ data: { q: "Synthetic 006" } }))[0].result_count, 1,
+    "A source-only athlete must not display zero results");
+  assert.equal((await athrecs.listAthletes({ data: { q: "Synthetic 004" } }))[0].result_count, 0,
+    "Source counts must respect account result-sharing choices");
   const results = await athrecs.getEditionResults({ data: 1 });
   assert.equal(results.length, 100, "Race previews cannot return unbounded results");
   for (const id of [1, 2, 3, 4, 6]) assert(!results.some((r) => r.id === id));

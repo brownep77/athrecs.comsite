@@ -36,6 +36,12 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
   {
+    to: "/admin/fixture-import",
+    label: "Import running fixtures",
+    icon: CalendarCheck,
+    match: (path: string) => path.startsWith("/admin/fixture-import"),
+  },
+  {
     to: "/admin/athlete-tools",
     label: "Add or update athletes",
     icon: UserRoundCog,

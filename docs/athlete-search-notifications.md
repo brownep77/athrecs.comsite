@@ -1,0 +1,129 @@
+# Athlete search notifications
+
+The notification workflow submits only athlete URLs from the live production
+sitemap. It does not publish profiles, read private database records, or change
+search-indexing permission. It is independent of the PostgreSQL quality gate.
+
+## Why the old check failed
+
+On 10 October 2026, production `www.athrecs.com` served commit
+`2f559b7e79547b455968b9515a758cd305994313` from the READY Vercel deployment
+`dpl_3tJV8L529tPqHyB3pGtSKhTMTQMo`. There was no pending deployment of that commit.
+
+[PR #567](https://github.com/brownep77/athrecs.comsite/pull/567), merged on
+5 October, deliberately required login for profiles, set `noindex`, and removed
+athlete URLs and athlete sitemap shards from the public sitemap routes.
+[PR #590](https://github.com/brownep77/athrecs.comsite/pull/590) later allowed a
+restricted, audited public performance-history projection, retaining `noindex`.
+Public viewing is therefore not equivalent to permission for search indexing.
+
+The old workflow continued waiting for `id="suggest-edit"` and an `index, follow`
+meta tag on one named profile. The live profile returned 200 with `noindex,
+nofollow, noarchive` in both its HTTP header and HTML. The live sitemap index
+contained pages, countries, races, clubs and results, with no athlete shards;
+`/sitemaps/athletes-1.xml` returned 404. This was a stale readiness assumption,
+not evidence of an undeployed public-profile release.
+
+## Outcomes
+
+- A valid, nonempty production sitemap index with no athlete candidates records
+  `ready=false`. The submission job is **skipped**, with an explicit summary.
+  This does not claim that any URL was submitted or indexed.
+- An unavailable or invalid sitemap, a missing advertised shard, a foreign URL,
+  a redirected/failed profile, conflicting robots permission, or a canonical
+  mismatch fails validation and prevents submission.
+- Every candidate must be anonymously available at its exact production URL,
+  explicitly permit `index` and `follow`, and contain no conflicting robots
+  meta tag or HTTP header. The complete selected batch is checked before its submission.
+- Submission requires the deployed ownership file and rechecks live candidates
+  and their indexing permissions. A change to the selected batch stops submission.
+  Only main pushes, manual-main runs and scheduled main runs can submit; pull
+  requests perform a bounded read-only check of up to 100 profiles.
+
+Run the synthetic regression and the live read-only check:
+
+```sh
+node scripts/verify-athlete-search-notification.mjs
+node scripts/submit-athlete-indexnow.mjs --check --batch-size=100
+```
+
+The test suite intercepts all network calls, including the example IndexNow
+receipt. It sends no real notifications. The live `--check` command never posts.
+A real IndexNow HTTP 200/202 receipt is not a guarantee of crawling or indexing.
+
+## Approved public athlete indexing
+
+Paul approved removing the indexing restriction on 10 October 2026. The
+anonymous profile check previously recognized only the newer history-editor
+publication action, excluding existing staff bulk publications and owner-approved
+sharing. Paul's existing public/results/search settings were enabled, but he
+had no record in that newer history table, so his page still required login.
+
+The public profile and sitemap now recognize all three recorded approval paths:
+a published history with its matching administrative audit, a staff bulk-publication
+audit, or enabled results sharing by an active account owner. Public visibility
+and a resolvable athlete identifier remain required. A public database flag or
+public-figure label alone is insufficient. The anonymous projection still excludes
+private result rows, personal fields, hidden results and unpublished histories.
+
+For active account owners, sharing and results sharing must be enabled and
+`search_indexable` must be explicitly true. A missing sharing record or any owner
+opt-out excludes the page from search. Unmanaged approved public histories are
+eligible. Member-only shared-account routes and the member directory remain
+excluded. No database privacy setting, history approval or profile data is changed.
+
+The page and sitemap share the publication and indexing SQL predicates. HTML metadata and
+HTTP robots headers agree; request middleware accepts only a successful profile
+response marked by the validated route loader, and removes that internal marker.
+The hosting configuration also defers athlete robots headers to that decision,
+instead of adding another blanket `noindex` header after the application responds.
+Incoming request headers cannot enable indexing. Responses remain uncached so
+withdrawals and privacy choices take effect on the next request. Existing hidden
+results and personal-field exclusions stay in the public projection.
+
+After the approved release is live, run the read-only check, then rerun the
+notification workflow to validate and submit its live eligible URLs. A push
+check can precede the Vercel deployment, so its result alone is not proof that
+the new release has been checked.
+
+## Resumable notifications for a large catalogue
+
+The 11 October run found 626,727 eligible sitemap URLs. It checked only 6,500
+before a later deployment cancelled it, without submitting any. Repeating the
+entire catalogue before the first notification cannot fit the previous timeouts.
+
+The workflow now selects one live sitemap shard at a time, in batches of up to
+500 profiles, using at most 12 concurrent anonymous requests. Every selected URL
+must pass all checks twice, including freshly read sitemap membership, before its
+batch is submitted. Unrelated shards are not fetched. No database record, stored
+checkpoint or previously successful check grants indexing permission.
+
+After IndexNow accepts a complete batch (HTTP 200/202), an atomic local checkpoint
+records the shard and last URL. A failed validation or receipt leaves that batch
+pending. Earlier successful batches survive later failures. Main runs restore and
+save only this small cursor through GitHub Actions cache, including after errors.
+Pull requests neither read nor write the production checkpoint and never submit.
+
+New deployments queue behind an active notification run rather than cancelling
+it. Hourly runs at minute 17 continue even without deployments, processing at most
+ten batches (5,000 URLs) with a 25-minute request budget and a 35-minute job limit.
+Each run logs exactly which batches were checked and how many URLs IndexNow
+received. A completed sitemap pass stops the run; the next run begins another
+pass to discover additions and publication changes. The public sitemap remains
+available to search engines throughout; notifications do not guarantee indexing.
+
+The cache is a best-effort progress aid, not a durable publication ledger. Cache
+eviction or an interrupted save can cause safe repeat submissions. A removed
+cursor anchor replays its shard; a removed shard restarts at the first current
+shard. Changes to sitemap pagination can cause repeats or defer a URL until the
+next pass. This is not an exactly-once full-catalogue audit.
+
+To run a bounded submission manually, with the same safeguards:
+
+```sh
+node scripts/submit-athlete-indexnow.mjs --batch-size=500 --max-batches=10 --state-file=artifacts/athlete-search-cursor.json
+```
+
+Use the existing GitHub Actions workflow's **Run workflow** action on `main` to
+resume its shared checkpoint. A local run has its own cursor. Do not delete a
+checkpoint to hide a failing batch; investigate the profile or receipt first.

@@ -1,11 +1,14 @@
+import { publicAnzMedals, ANZ_PROVIDER } from "../anz/core";
 import { profileReadMiddleware } from "@/lib/auth/profile-access";
 import { getReportedRaceHistory } from "./reported-race-history";
 import { readResultDetails } from "./result-details";
 import { parseProfileRoles } from "./athlete-profile-roles";
 import { combineProfileResults } from "./profile-records";
 import { publicProfileDetails } from "./profile-details";
+import { readSourceNationality } from "./source-nationality";
 import { loadUpcoming } from "./athlete-upcoming-api";
 import { getRunrecsOnlyEditionIds } from "./runrecs-publication.server";
+import { countPublishedSourceResults } from "./athlete-publication.server";
 import { createServerFn } from "@tanstack/react-start";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import {
@@ -243,10 +246,10 @@ export const listEvents = createServerFn({ method: "GET" })
           event_date between '2026-09-10'::date and '2027-01-31'::date
           and distance_code in ('5K', '10K')
           and not (id = any(${excludedEditionIds}::int[]))
+        ))
           and (${dateFrom}::date is null or event_date >= ${dateFrom}::date)
           and (${dateTo}::date is null or event_date <= ${dateTo}::date)
           and (${distance}::text is null or distance_code = ${distance})
-        ))
       )
       select
         e.id, e.slug, e.name, e.sport, e.country, e.county, e.city, e.area,
@@ -275,27 +278,27 @@ export const listEvents = createServerFn({ method: "GET" })
         ) as groups_json,
         (
           select ed.event_date::text from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_date,
         (
           select ed.distance_code from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
           select ed.status from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_status,
         (
           select ed.start_time from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
           select count(*)::int from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) as upcoming_count,
         (
           select count(*)::int from scoped_editions ed
@@ -332,7 +335,7 @@ export const listEvents = createServerFn({ method: "GET" })
             where g.event_id = e.id and g.group_code = ${group}
           )
         )
-        and (${country}::text is null or e.country = ${country} or e.county = ${country} or (${shortRaces}::boolean and ${country} = 'United Kingdom' and e.country in ('England','Scotland','Wales','Northern Ireland')))
+        and (${country}::text is null or e.country = ${country} or e.county = ${country} or (${country} = 'United Kingdom' and e.country in ('England','Scotland','Wales','Northern Ireland')))
         and (
           ${county}::text is null
           or lower(coalesce(e.region, '')) like ${county}
@@ -354,7 +357,6 @@ export const listEvents = createServerFn({ method: "GET" })
         )
         and (
           ${dateFrom}::date is null and ${dateTo}::date is null
-          or e.sport = 'Parkrun'
           or exists (
             select 1 from scoped_editions ed
             where ed.event_id = e.id
@@ -364,20 +366,19 @@ export const listEvents = createServerFn({ method: "GET" })
         )
         and (
           ${upcomingOnly}::boolean is false
-          or e.sport = 'Parkrun'
           or exists (
             select 1 from scoped_editions ed
-            where ed.event_id = e.id and ed.event_date >= ${today}::date
+            where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           )
         )
       order by
         case when (
           select min(ed.event_date) from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) is null then 1 else 0 end,
         (
           select min(ed.event_date) from scoped_editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) asc nulls last,
         e.name asc
       limit ${fetchLimit}
@@ -394,8 +395,6 @@ export const listEvents = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const { nextParkrunDate, remainingParkrunCount, parkrunDates, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
     const mapped = rows
       .map((rawRow) => {
         const { groups_json, ...r } = rawRow;
@@ -403,35 +402,15 @@ export const listEvents = createServerFn({ method: "GET" })
           r.name,
           r.distances_csv ? r.distances_csv.split(",") : [],
         );
-        if (r.sport === "Parkrun" && (dateFrom || dateTo)) {
-          if (parkrunDates(r.name, dateFrom ?? today, dateTo ?? "2027-12-26").length === 0) {
-            return null;
-          }
-        }
-        const nextDate =
-          r.sport === "Parkrun"
-            ? nextParkrunDate(r.name, dateFrom && dateFrom > today ? dateFrom : today)
-            : r.next_date;
         return {
           ...r,
           distances: shortRaces ? distances.filter((d) => d === "5K" || d === "10K") : distances,
           groups: parseRaceGroups(groups_json),
-          next_date: nextDate,
-          upcoming_count:
-            r.sport === "Parkrun" ? remainingParkrunCount(r.name, today) : r.upcoming_count,
-          next_start_time:
-            r.sport === "Parkrun"
-              ? parkrunStartTime(r.country, /junior/i.test(r.name))
-              : r.next_start_time,
-          next_status: (r.next_status as EntryStatus) ?? (r.sport === "Parkrun" ? "Open" : null),
+          next_status: r.next_status as EntryStatus | null,
           next_distance:
-            r.sport === "Parkrun"
-              ? /junior/i.test(r.name)
-                ? "2K"
-                : "5K"
-              : r.next_distance === "Marathon" && !distances.includes("Marathon")
-                ? (distances[0] ?? r.next_distance)
-                : r.next_distance,
+            r.next_distance === "Marathon" && !distances.includes("Marathon")
+              ? (distances[0] ?? r.next_distance)
+              : r.next_distance,
         };
       })
       .filter((row): row is NonNullable<typeof row> => row !== null);
@@ -489,9 +468,6 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         }
       | undefined;
     if (!event) return null;
-
-    const { parkrunDates, parkrunDistance, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
 
     const distances = await sql<{ distance_code: string }>`
       select distance_code from event_distances where event_id = ${event.id}
@@ -640,53 +616,11 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       }),
     );
 
-    const storedUpcoming = editions.filter((e) => e.event_date >= today);
-    const storedDates = new Set(storedUpcoming.map((e) => e.event_date));
-    const generated =
-      event.sport === "Parkrun"
-        ? parkrunDates(event.name, today).map((event_date, index) => {
-            const dist = parkrunDistance(event.name);
-            return {
-              id: -1000 - index,
-              event_date,
-              distance_code: dist.code,
-              distance_km: dist.km,
-              status: "Open",
-              entry_url: event.website,
-              source_url: event.website,
-              results_official_url: null,
-              start_time: parkrunStartTime(event.country, /junior/i.test(event.name)),
-              notes: null,
-              result_count: 0,
-              result_links: [],
-              spectator_access: null,
-              entry_options: event.website
-                ? [
-                    {
-                      id: -1000 - index,
-                      provider_code: "official",
-                      provider_name: "Official parkrun page",
-                      entry_url: event.website,
-                      entry_type: "official" as const,
-                      status: "open" as const,
-                      price_amount: null,
-                      price_currency: null,
-                      opens_at: null,
-                      closes_at: null,
-                      checked_at: today,
-                      source_url: event.website,
-                      is_verified: true,
-                      is_primary: true,
-                    },
-                  ]
-                : [],
-            };
-          })
-        : [];
-    const upcoming = [
-      ...storedUpcoming,
-      ...generated.filter((row) => !storedDates.has(row.event_date)),
-    ].sort((a, b) => a.event_date.localeCompare(b.event_date));
+    // Stored editions include official holiday dates and cancellations. Never
+    // fabricate a missing weekly occurrence or replace its venue start time.
+    const upcoming = editions
+      .filter((edition) => edition.event_date >= today)
+      .sort((a, b) => a.event_date.localeCompare(b.event_date));
 
     const relatedRows = await sql<
       Omit<EventListItem, "groups"> & {
@@ -717,27 +651,27 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         ) as groups_json,
         (
           select ed.event_date::text from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_date,
         (
           select ed.distance_code from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_distance,
         (
           select ed.status from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_status,
         (
           select ed.start_time from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
           order by ed.event_date asc limit 1
         ) as next_start_time,
         (
           select count(*)::int from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) as upcoming_count,
         (
           select count(*)::int from editions ed
@@ -756,7 +690,7 @@ export const getEventBySlug = createServerFn({ method: "GET" })
         case when lower(coalesce(e.city, '')) = lower(${event.city}) then 0 else 1 end,
         (
           select min(ed.event_date) from editions ed
-          where ed.event_id = e.id and ed.event_date >= ${today}::date
+          where ed.event_id = e.id and ed.event_date >= ${today}::date and ed.status <> 'Cancelled'
         ) asc nulls last
       limit 8
     `;
@@ -896,18 +830,27 @@ export const listAthletes = createServerFn({ method: "GET" })
       limit ${IS_RUNRECS_SITE ? null : PUBLIC_ATHLETE_LIST_LIMIT}
       offset ${IS_RUNRECS_SITE ? 0 : (data.offset ?? 0)}
     `;
+    const sourceCounts = await countPublishedSourceResults(
+      sql,
+      athletes.map((athlete) => athlete.id),
+    );
     return athletes.map((athlete) => {
       const reported = getReportedRaceHistory(athlete.slug);
-      return reported?.includeInResults
-        ? { ...athlete, result_count: athlete.result_count + reported.records.length }
-        : athlete;
+      return {
+        ...athlete,
+        result_count:
+          athlete.result_count +
+          (sourceCounts.get(athlete.id) ?? 0) +
+          (reported?.includeInResults ? reported.records.length : 0),
+      };
     });
   });
 
-async function readAthleteBySlug(slug: string, administratorPublishedOnly = false) {
+async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
   const sql = await ready();
   const athleteNumber = parseAthleteId(slug);
-  const rows = await sql<{
+  const { approvedPublicAthleteSql } = await import("./athlete-search-policy.server");
+  const rows = await sql.query<{
     profile_details: unknown;
     date_of_birth: string | null;
     id: number;
@@ -923,9 +866,11 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
     profile_roles: string;
     profile_source_checked_at: string | null;
     is_claimed: boolean;
+    has_account_link: boolean;
     club: string | null;
     club_slug: string | null;
-  }>`
+  }>(
+    `
       select
         a.id, a.slug, a.display_name, a.gender, a.city, a.county, a.country, a.bio,
         a.profile_type, a.profile_roles, a.profile_source_checked_at::text as profile_source_checked_at,
@@ -938,36 +883,35 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
           from athlete_account_links account_link
           where account_link.athlete_id = a.id and account_link.status = 'active'
         ) as is_claimed
+        , exists (select 1 from athlete_account_links l where l.athlete_id=a.id) as has_account_link
       from athletes a
       join athlete_resolved_ids identifier on identifier.athlete_id = a.id
       left join clubs c on c.id = a.club_id
-      where (a.slug = ${slug}
-        or identifier.athlete_number::text = ${athleteNumber}
-        or identifier.source_number::text = ${athleteNumber})
+      where (a.slug = $1
+        or identifier.athlete_number::text = $2
+        or identifier.source_number::text = $2)
         and (a.profile_type = 'Public figure' or (a.profile_visibility = 'public' and not exists (
           select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
           where l.athlete_id=a.id and l.status='active' and s.enabled=false
         )))
-        and (${!administratorPublishedOnly} or (
+        and ($3 or (${approvedPublicAthleteSql}) or (
           a.profile_visibility = 'public'
-          and exists (
-            select 1 from athlete_source_histories h
-            join network_audit_log approval
-              on approval.entity_id = h.provider || ':' || h.external_id
-              and approval.action = 'athlete.history_admin_published'
-              and approval.after_value->>'athleteId' = a.id::text
-            where h.athlete_id = a.id and h.published_at is not null
-          )
-          and not exists (
-            select 1 from athlete_account_links l
-            join athlete_public_shares s on s.user_id = l.user_id
-            where l.athlete_id = a.id and l.status = 'active'
-              and (s.enabled = false or s.share_results = false)
+          and (
+            not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
+            and exists (
+              select 1 from network_audit_log approval
+              where approval.action='athlete.profile_admin_published'
+                and approval.entity_type='athlete' and approval.entity_id=a.id::text
+                and approval.after_value->>'athleteId'=a.id::text
+                and approval.after_value->>'profile_visibility'='public'
+            )
           )
         ))
-      order by (a.slug = ${slug}) desc, a.id
+      order by (a.slug = $1) desc, a.id
       limit 1
-    `;
+    `,
+    [slug, athleteNumber, !approvedPublicOnly],
+  );
   const athlete = rows[0];
   if (!athlete) return null;
   const results = await sql<{
@@ -1011,7 +955,7 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
       join events e on e.id = ed.event_id
       where r.athlete_id = ${athlete.id}
         and (
-          ${athlete.profile_type} = 'Public figure'
+          (${!approvedPublicOnly} and ${athlete.profile_type} = 'Public figure')
           or r.result_visibility in ('public', 'public_figure')
         )
         and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=r.athlete_id and hidden.result_id=r.id)
@@ -1021,7 +965,7 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
   const links = await sql<{
     user_id: string;
   }>`select l.user_id from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id and s.enabled=true where l.athlete_id=${athlete.id} and l.status='active' limit 1`;
-  const { date_of_birth, profile_details, ...safeAthlete } = athlete;
+  const { date_of_birth, profile_details, has_account_link, ...safeAthlete } = athlete;
   const [{ athletes: athleteCatalogue }, { publicFigureAthletes }] = await Promise.all([
     import("@/data/athletes"),
     import("@/data/public-figures"),
@@ -1030,9 +974,32 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
     (item) => item.slug === athlete.slug,
   );
   const details = publicProfileDetails(profile_details, date_of_birth);
+  // Source observations fill an unknown field, never overwrite an athlete's own details.
+  const sourceNationality = has_account_link ? null : readSourceNationality(profile_details);
+  const statedNationality = details.nationality || seed?.nationality || null;
   const { loadPublishedSourceHistories } = await import("./athlete-publication.server");
+  const sourceHistories = await loadPublishedSourceHistories(sql, athlete.id);
+  const anzMetadata = (
+    profile_details as {
+      anzImport?: { coach?: string; sourceUrl?: string; verificationStatus?: string };
+    } | null
+  )?.anzImport;
+  const anzCoach =
+    !has_account_link &&
+    anzMetadata?.verificationStatus === "source_verified" &&
+    typeof anzMetadata.coach === "string" &&
+    sourceHistories.some(
+      (h) => h.provider === ANZ_PROVIDER && h.sourceUrl === anzMetadata.sourceUrl,
+    )
+      ? {
+          name: anzMetadata.coach,
+          slug: details.coach === anzMetadata.coach ? (details.coachProfileSlug ?? "") : "",
+        }
+      : null;
   return {
-    sourceHistories: await loadPublishedSourceHistories(sql, athlete.id),
+    sourceHistories,
+    anzMedals: publicAnzMedals(profile_details, sourceHistories),
+    anzCoach,
     athlete: {
       ...safeAthlete,
       details,
@@ -1042,7 +1009,8 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
       place_of_birth: seed?.place_of_birth ?? null,
       country_of_birth: details.birthCountry || seed?.country_of_birth || null,
       address: athlete.profile_type === "Public figure" ? (seed?.address ?? null) : null,
-      nationality: details.nationality || seed?.nationality || null,
+      nationality: statedNationality || sourceNationality?.value || null,
+      nationality_source: statedNationality ? null : sourceNationality,
       notes: seed?.notes ?? null,
       profile_roles: parseProfileRoles(seed?.profile_roles, athlete.profile_roles),
       profile_links: seed?.profile_links ?? [],
@@ -1086,55 +1054,113 @@ async function readAthleteBySlug(slug: string, administratorPublishedOnly = fals
 export const getAthleteBySlug = createServerFn({ method: "GET" })
   .middleware([profileReadMiddleware])
   .validator((slug: string) => slug)
-  .handler(({ data: slug }) => readAthleteBySlug(slug));
-
-/** Only an explicitly audited publication can be viewed without a member session. */
-export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" })
-  .validator((slug: string) => slug)
   .handler(async ({ data: slug }) => {
-    const { setResponseHeader } = await import("@tanstack/react-start/server");
-    setResponseHeader("Cache-Control", "private, no-store");
-    setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
-    if (IS_RUNRECS_SITE) return null;
-    const profile = await readAthleteBySlug(slug, true);
-    if (!profile) return null;
-    const sql = await ready();
-    const [sharing] = await sql<{
-      enabled: boolean;
-      share_results: boolean;
-      share_club: boolean;
-      share_location: boolean;
-    }>`
-      select s.enabled, s.share_results, s.share_club, s.share_location
+    const profile = await readAthleteBySlug(slug);
+    const { withoutProfileEvidence } = await import("./profile-evidence");
+    const { profileEditorial } = await import("./profile-editorial.server");
+    return profile
+      ? withoutProfileEvidence({ ...profile, editorial: profileEditorial(slug) })
+      : null;
+  });
+
+/** Only recorded staff publication or enabled owner sharing permits a public preview. */
+async function readAdministratorPublishedAthlete(slug: string) {
+  const { setResponseHeader } = await import("@tanstack/react-start/server");
+  setResponseHeader("Cache-Control", "private, no-store");
+  setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+  if (IS_RUNRECS_SITE) return null;
+  const profile = await readAthleteBySlug(slug, true);
+  if (!profile) return null;
+  const sql = await ready();
+  const [sharing] = await sql<{
+    enabled: boolean;
+    share_results: boolean;
+    share_bio: boolean;
+    share_club: boolean;
+    share_location: boolean;
+  }>`
+      select s.enabled, s.share_results, s.share_bio, s.share_club, s.share_location
       from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
       where l.athlete_id=${profile.athlete.id} and l.status='active' limit 1
     `;
-    if (sharing && (!sharing.enabled || !sharing.share_results)) return null;
-    // The publication covers sporting results and basic athlete identity only.
-    // Account details, contact preferences and future plans remain member-only.
-    return {
-      ...profile,
-      athlete: {
-        ...profile.athlete,
-        bio: "",
-        city: null,
-        county: "",
-        country: sharing?.share_location === false ? "" : profile.athlete.country,
-        club: sharing?.share_club === false ? null : profile.athlete.club,
-        club_slug: sharing?.share_club === false ? null : profile.athlete.club_slug,
-        details: publicProfileDetails({}),
-        aliases: [],
-        date_of_birth: null,
-        place_of_birth: null,
-        country_of_birth: null,
-        address: null,
-        nationality: null,
-        notes: null,
-        profile_links: [],
-        notable_achievements: [],
-      },
-      upcoming: [],
-    };
+  if (sharing && (!sharing.enabled || !sharing.share_results)) return null;
+  const { isApprovedAthleteIndexable } = await import("./athlete-search-policy.server");
+  const { results: legacyResults, ...publicProfile } = profile;
+  void legacyResults;
+  // The publication covers sporting results and basic athlete identity only.
+  // Account details, contact preferences and future plans remain member-only.
+  return {
+    ...publicProfile,
+    shareBiography: sharing?.share_bio !== false,
+    searchIndexable: await isApprovedAthleteIndexable(sql, profile.athlete.id),
+    athlete: {
+      ...profile.athlete,
+      bio: "",
+      city: null,
+      county: "",
+      country: sharing?.share_location === false ? "" : profile.athlete.country,
+      club: sharing?.share_club === false ? null : profile.athlete.club,
+      club_slug: sharing?.share_club === false ? null : profile.athlete.club_slug,
+      details: publicProfileDetails({}),
+      aliases: [],
+      date_of_birth: null,
+      place_of_birth: null,
+      country_of_birth: null,
+      address: null,
+      nationality: profile.athlete.nationality_source?.value ?? null,
+      notes: null,
+      profile_links: [],
+      notable_achievements: [],
+    },
+    upcoming: [],
+  };
+}
+
+/** Full history is a member read, including direct server-function requests. */
+export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" })
+  .middleware([profileReadMiddleware])
+  .validator((slug: string) => slug)
+  .handler(async ({ data }) => {
+    const profile = await readAdministratorPublishedAthlete(data);
+    const { withoutProfileEvidence } = await import("./profile-evidence");
+    const { profileEditorial } = await import("./profile-editorial.server");
+    return profile
+      ? withoutProfileEvidence({ ...profile, editorial: profileEditorial(data) })
+      : null;
+  });
+
+export const getPublicAthletePreview = createServerFn({ method: "GET" })
+  .validator((slug: string) => slug)
+  .handler(async ({ data }) => {
+    const profile = await readAdministratorPublishedAthlete(data);
+    if (!profile) return null;
+    if (profile.athlete.is_claimed) {
+      const { getPublicSharedProfilePreview } = await import("./athlete-profile-share-api");
+      const shared = await getPublicSharedProfilePreview({ data: { slug: profile.athlete.slug } });
+      if (shared)
+        return { ...shared, slug: profile.athlete.slug, searchIndexable: profile.searchIndexable };
+    }
+    const { buildPublicAthletePreview } = await import("./public-athlete-preview");
+    const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
+    const career = getEditorialAthleteCareer(profile.athlete.slug);
+    const { athleteSearchContent } = await import("./athlete-search-content");
+    return buildPublicAthletePreview({
+      slug: profile.athlete.slug,
+      displayName: profile.athlete.display_name,
+      athleteNumber: profile.athlete.athlete_number,
+      club: profile.athlete.club,
+      country: profile.athlete.country,
+      nationality: profile.athlete.nationality,
+      nationalitySource: profile.athlete.nationality_source,
+      biography: profile.shareBiography
+        ? (career?.biography ?? [athleteSearchContent(profile).bio])
+        : [],
+      biographySources: profile.shareBiography ? career?.biographySources : [],
+      results: profile.profileResults,
+      histories: profile.sourceHistories,
+      reportedRecords: getReportedRaceHistory(profile.athlete.slug)?.records,
+      searchIndexable: profile.searchIndexable,
+    });
   });
 
 export type PrivateAthleteStub = {
@@ -1675,7 +1701,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
             where g.event_id = e.id and g.group_code = ${group}
           )
         )
-        and (${country}::text is null or e.country = ${country} or e.county = ${country})
+        and (${country}::text is null or e.country = ${country} or e.county = ${country} or (${country} = 'United Kingdom' and e.country in ('England','Scotland','Wales','Northern Ireland')))
         and (
           ${county}::text is null
           or lower(coalesce(e.region, '')) like ${county}
@@ -1701,76 +1727,6 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
       order by ed.event_date asc, e.name
       limit ${fetchLimit}
     `;
-    const { parkrunDates, parkrunDistance, parkrunStartTime } =
-      await import("@/lib/athrecs/parkrun-dates");
-    const wantParkrun = !sport || sport === "Parkrun";
-    const generatedRows: typeof rows = [];
-    if (wantParkrun) {
-      const windowFrom = dateFrom && dateFrom > today ? dateFrom : today;
-      const windowTo = dateTo || (dateFrom ? "2027-12-26" : null);
-      const venues = await sql<{
-        id: number;
-        slug: string;
-        name: string;
-        sport: string;
-        city: string;
-        county: string;
-        country: string;
-        area: string;
-        surface: string;
-        website: string | null;
-      }>`
-        select e.id, e.slug, e.name, e.sport, e.city, e.county, e.country, e.area, e.surface, e.website
-        from events e
-        where e.sport = 'Parkrun'
-          and ${group}::text is null
-          and (${q}::text is null
-            or lower(e.name) like ${q}
-            or lower(e.city) like ${q}
-            or lower(e.county) like ${q}
-            or lower(e.country) like ${q}
-            or lower(e.area) like ${q})
-          and (${country}::text is null or e.country = ${country} or e.county = ${country})
-          and (
-            ${county}::text is null
-            or lower(coalesce(e.region, '')) like ${county}
-            or lower(e.county) like ${county}
-            or lower(e.city) like ${county}
-          )
-          and (${city}::text is null or lower(e.city) like ${city} or lower(e.area) like ${city})
-          and (${surface}::text is null or e.surface = ${surface})
-        order by e.name
-        limit 400
-      `;
-      const seen = new Set(rows.map((row) => `${row.event_slug}|${row.event_date}`));
-      for (const venue of venues) {
-        const dates = parkrunDates(venue.name, windowFrom, windowTo ?? undefined);
-        const cap = windowTo ? dates : dates.slice(0, 4);
-        const dist = parkrunDistance(venue.name);
-        for (const eventDate of cap) {
-          const key = `${venue.slug}|${eventDate}`;
-          if (seen.has(key)) continue;
-          seen.add(key);
-          generatedRows.push({
-            id: -venue.id,
-            event_date: eventDate,
-            distance_code: dist.code,
-            status: "Open",
-            start_time: parkrunStartTime(venue.country, /junior/i.test(venue.name)),
-            event_slug: venue.slug,
-            event_name: venue.name,
-            sport: venue.sport,
-            city: venue.city,
-            county: venue.county,
-            country: venue.country,
-            area: venue.area,
-            surface: venue.surface,
-            groups_json: "[]",
-          });
-        }
-      }
-    }
-    const combined = [...rows, ...generatedRows];
     const { venueForEvent } = await import("@/lib/athrecs/venue");
     const { collapseSameEventDate } = await import("@/lib/athrecs/dedupe");
     const {
@@ -1783,7 +1739,7 @@ export const listCalendarEditions = createServerFn({ method: "GET" })
     } = await import("@/lib/athrecs/filters");
     const { matchesPostcodeQuery } = await import("@/lib/athrecs/venue");
     const { countryMatchesFilter, resolveCountry } = await import("@/lib/athrecs/countries");
-    const cleaned = combined.map((row) => {
+    const cleaned = rows.map((row) => {
       const { groups_json, ...edition } = row;
       const labels = sanitizeDistances(row.event_name, splitDistanceLabels(row.distance_code));
       const distanceCode = labels[0] ?? row.distance_code;

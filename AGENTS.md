@@ -22,6 +22,11 @@ publication and personal-best calculations in this repository.
   Preserve source precision and document conversion to integer storage.
 - Do not infer an exact birth date or age from an age category. Do not manufacture
   dates to turn year-only biographical accounts into dated race results.
+- For all future imports, preserve nationality explicitly supplied by the athlete
+  or the source, with its original value and provenance. Show source-reported
+  nationality on approved public, unclaimed source profiles. Never infer it from
+  a name, club, language, residence or race location; leave absent values empty.
+  Do not overwrite athlete-supplied nationality or treat it as identity verification.
 - Keep unsupported accounts explicitly unverified and out of verified personal
   bests, medals and rankings. An absent name is a review flag, not proof that the
   athlete did not participate; check aliases, pagination, DNS/DNF and identity.
@@ -36,9 +41,27 @@ publication and personal-best calculations in this repository.
 - Report the scope honestly: automated screening, source comparison and manual
   identity verification are different. Never call the whole catalogue verified
   because schema, row-count or code tests pass.
+- Owner instruction, 10 October 2026: results actually listed on UTMB's website
+  are an accepted verification source. Mark a matched, source-compared result
+  `source_verified`, preserving the original row and provenance. This does not
+  verify the athlete's identity or justify accepting a URL without its contents.
 - Keep private athlete audits and database exports out of source-control changes
   intended for external publication. Use synthetic examples in regression tests.
 - Always credit the chip-timing/results provider by name when publishing results
   on AthRecs, with a link to the original result page. Preserve provider credit in
   imports, athlete histories, club results and editorial coverage. Record the
   organiser separately; a timer is not automatically the race organiser.
+  Owner exception, 10 October 2026: public athlete profiles omit World Marathon
+  Majors provider branding and attribution links, including nationality credits
+  and import-note wording. Retain original provider names, links and notes in
+  stored evidence and staff evidence views. This presentation choice does not
+  verify an athlete or result or remove the evidence requirements above.
+
+- Owner instruction, 11 October 2026: athlete profile verification evidence belongs
+  in the staff backend. Do not expose source URLs, biography citations or research
+  notes in anonymous or member-facing profile HTML, response payloads or browser
+  data modules. Preserve original evidence in storage and staff-only views. Keep
+  public verification labels, result qualifications and award eligibility intact.
+  This profile presentation exception supersedes the general public provider-credit
+  rule above; it does not establish reuse permission or override required licence
+  attribution (including photo credits).

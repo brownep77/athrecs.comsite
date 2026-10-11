@@ -1,13 +1,17 @@
 import type { PublicProfileDetails } from "@/lib/athrecs/profile-details";
+import type { SourceNationality } from "@/lib/athrecs/source-nationality";
 import { CountryFlag } from "./CountryFlag";
+import { isWmmSource } from "@/lib/athrecs/profile-source-presentation";
 
 export function ProfileDetails({
   details,
   nationality,
+  nationalitySource,
   coaches = [],
 }: {
   details: PublicProfileDetails;
   nationality?: string;
+  nationalitySource?: SourceNationality | null;
   coaches?: { sport: string; name: string }[];
 }) {
   const rows = [
@@ -20,8 +24,9 @@ export function ProfileDetails({
       .filter((coach) => coach.name && coach.name !== details.coach)
       .map((coach) => [`${coach.sport} coach`, coach.name]),
     ["Manager", details.manager],
-    ["Contact", details.acceptContact ? "Open to contact" : "Not accepting contact"],
+    ["Contact", details.acceptContact ? "Open to contact" : ""],
   ].filter((row) => row[1]);
+  if (!rows.length && !nationality && !details.nationality) return null;
   return (
     <dl className="grid grid-cols-2 gap-x-4 gap-y-3 border-t border-border pt-2 text-sm sm:flex sm:flex-wrap sm:gap-x-6">
       {nationality || details.nationality ? (
@@ -29,6 +34,15 @@ export function ProfileDetails({
           <dt className="text-xs text-subtle">Nationality</dt>
           <dd>
             <CountryFlag country={nationality || details.nationality} showName />
+            {nationalitySource &&
+            !isWmmSource(nationalitySource.provider, [nationalitySource.sourceUrl]) ? (
+              <a
+                href={nationalitySource.sourceUrl}
+                className="ml-1.5 text-xs text-accent underline"
+              >
+                As listed by {nationalitySource.provider}
+              </a>
+            ) : null}
           </dd>
         </div>
       ) : null}

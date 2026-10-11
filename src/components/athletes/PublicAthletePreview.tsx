@@ -1,0 +1,72 @@
+import { Link } from "@tanstack/react-router";
+import type { PublicAthletePreview as Preview } from "@/lib/athrecs/public-athlete-preview";
+import { CompactResultsTable } from "./CompactResultsTable";
+import { ProfileSignIn } from "./ProfileSignIn";
+import { AthleteId } from "./AthleteId";
+import { CountryFlag } from "./CountryFlag";
+import { Badge } from "@/components/ui/badge";
+
+const NO_PERSONAL_BESTS = new Set<number>();
+
+export function PublicAthletePreview({ profile }: { profile: Preview }) {
+  const visibleCount = profile.entries.length + profile.reportedRecords.length;
+  return (
+    <div className="public-athlete-profile space-y-6" data-profile-access="preview">
+      <Link to="/athletes" className="inline-flex min-h-11 items-center text-sm text-accent">
+        ← Athletes
+      </Link>
+      <section
+        id="profile-overview"
+        className="space-y-4 rounded-xl border border-border bg-surface p-5 sm:p-6"
+      >
+        <h1 className="font-display text-3xl font-semibold sm:text-4xl">{profile.displayName}</h1>
+        <div className="flex flex-wrap items-center gap-3">
+          <AthleteId number={profile.athleteNumber} />
+          {profile.club ? <span className="text-sm text-muted">{profile.club}</span> : null}
+          {profile.nationality ? <CountryFlag country={profile.nationality} showName /> : null}
+          <span className="text-xs text-muted">
+            {profile.sports.length > 1 ? "Sports:" : "Sport:"}
+          </span>
+          {profile.sports.map((sport) => (
+            <Badge key={sport} variant="outline">
+              {sport}
+            </Badge>
+          ))}
+        </div>
+        {profile.biography.length ? (
+          <div className="space-y-2">
+            <h2 className="text-sm font-semibold">Biography</h2>
+            {profile.biography.map((paragraph, index) => (
+              <p key={index} className="text-sm leading-relaxed text-muted">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        ) : null}
+      </section>
+      <section
+        id="results-history"
+        className="space-y-3 rounded-xl border border-border bg-surface p-4 sm:p-5"
+      >
+        <h2 className="font-display text-lg font-semibold">Latest results</h2>
+        {visibleCount ? (
+          <>
+            <p className="text-sm text-muted">
+              Showing {visibleCount} of {profile.totalResults} recorded performances.
+            </p>
+            <CompactResultsTable
+              results={[]}
+              entries={profile.entries}
+              hasHistory
+              reportedRecords={profile.reportedRecords}
+              personalBestIds={NO_PERSONAL_BESTS}
+            />
+          </>
+        ) : (
+          <p className="text-sm text-muted">No published results yet.</p>
+        )}
+      </section>
+      <ProfileSignIn returnTo={`/athletes/${encodeURIComponent(profile.slug)}`} preview />
+    </div>
+  );
+}

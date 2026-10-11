@@ -53,7 +53,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
               (IS_RUNRECS_SITE
                 ? ["/", "/races", "/calendar", "/race-series", "/clubs", "/privacy"]
                 : [
-                    ...PUBLIC_PAGES.filter((page) => page.path !== "/athletes").map(
+                    ...PUBLIC_PAGES.map(
                       (page) => page.path,
                     ),
                     ...runningPaths,
@@ -72,14 +72,25 @@ export const Route = createFileRoute("/sitemaps/$file")({
           const populated = await populatedRunningCountries(await getSql(), COUNTRY_SITES.map((site) => site.country));
           return sitemapResponse(
             sitemapXml(
-              COUNTRY_SITES.flatMap((site) =>
-                SITE_LANGUAGES.flatMap((language) => [
-                  `${SITE_URL}/${language}/${site.slug}`,
-                  ...(populated.has(site.country) ? [`${SITE_URL}/${language}/${site.slug}/races`] : []),
-                ]),
-              ),
+              COUNTRY_SITES.flatMap((site) => [
+                `${SITE_URL}/en/${site.slug}`,
+                ...(populated.has(site.country) ? SITE_LANGUAGES.map((language) => `${SITE_URL}/${language}/${site.slug}/races`) : []),
+              ]),
             ),
           );
+        }
+        const athleteMatch = /^athletes-([1-9]\d{0,5})\.xml$/.exec(params.file);
+        if (!IS_RUNRECS_SITE && athleteMatch) {
+          const { getSql } = await import("@/lib/db");
+          const { ensureAthrecsSeeded } = await import("@/lib/athrecs/seed.server");
+          const { athleteSitemapSlugs } = await import("@/lib/athrecs/athlete-sitemap.server");
+          await ensureAthrecsSeeded();
+          const slugs = await athleteSitemapSlugs(await getSql(), Number(athleteMatch[1]));
+          if (!slugs.length) return new Response("Sitemap not found", {
+            status: 404,
+            headers: { "Cache-Control": "no-store" },
+          });
+          return sitemapResponse(sitemapXml(slugs.map((slug) => `${SITE_URL}/athletes/${slug}`)));
         }
         const contentMatch = /^(races|clubs|results)-([1-9]\d{0,5})\.xml$/.exec(params.file);
         if (!IS_RUNRECS_SITE && contentMatch) {
@@ -95,7 +106,7 @@ export const Route = createFileRoute("/sitemaps/$file")({
           if (!paths.length) return new Response("Sitemap not found", { status: 404 });
           return sitemapResponse(sitemapXml(paths.map((path) => `${SITE_URL}${path}`)));
         }
-        // Previously indexed profile URLs are now member-only.
+        // Unpublished, member-only and unknown sitemap pages stay unavailable.
         return new Response("Sitemap not found", {
           status: 404,
           headers: { "Cache-Control": "no-store" },

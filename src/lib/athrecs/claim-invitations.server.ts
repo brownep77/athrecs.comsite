@@ -101,11 +101,11 @@ export async function findInvitationMatches(
     recentResults: { race: string; date: string; distance: string }[];
   }>`
     select a.id,a.display_name as name,a.slug,a.city,a.county as region,a.country,coalesce(c.name,a.source_club_name) as "clubName",
-      (select count(*)::int from results r where r.athlete_id=a.id) as "resultCount",
+      (select count(*)::int from athlete_claimable_results r where r.available and r.athlete_id=a.id) as "resultCount",
       exists(select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active') as owner,
       exists(select 1 from result_claims r where r.athlete_id=a.id and r.claimant_user_id=${userId} and r.status<>'withdrawn') as "hasClaim",
       exists(select 1 from athlete_source_identities s where s.athlete_id=a.id and s.provider||':'||s.external_id=any(${keys}::text[])) as "sourceMatch",
-      coalesce((select jsonb_agg(recent) from (select e.name as race,ed.event_date::text as date,ed.distance_code as distance from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id where r.athlete_id=a.id order by ed.event_date desc,r.id limit 3) recent),'[]'::jsonb) as "recentResults"
+      coalesce((select jsonb_agg(recent) from (select r.event_name as race,r.event_date as date,r.distance_code as distance from athlete_claimable_results r where r.available and r.athlete_id=a.id order by r.event_date desc,r.id limit 3) recent),'[]'::jsonb) as "recentResults"
     from athletes a left join clubs c on c.id=a.club_id
     where a.id=${athleteId ?? null}::int or (${athleteId ?? null}::int is null and ((${q}<>'' and (a.display_name ilike ${term} or a.slug=${q})) or (${q}='' and (a.display_name ilike any(${patterns}::text[]) or exists(select 1 from athlete_source_identities s where s.athlete_id=a.id and s.provider||':'||s.external_id=any(${keys}::text[]))))))
     order by "sourceMatch" desc,a.display_name,a.id limit 80`;
@@ -192,7 +192,7 @@ export async function createInvitation(
       throw new Error("Invitation limit reached. Try again tomorrow.");
     const [r] = await tx<{
       id: number;
-    }>`select r.id from results r join editions e on e.id=r.edition_id where r.athlete_id=${input.athleteId} and lower(r.status) not in ('dns','dnf','dsq','dq') and coalesce(r.result_details->>'profileExcluded','false')<>'true' order by e.event_date desc,r.id limit 1`;
+    }>`select r.id from athlete_claimable_results r where r.available and r.athlete_id=${input.athleteId} and lower(r.status) not in ('dns','dnf','dsq','dq') and coalesce(r.result_details->>'profileExcluded','false')<>'true' order by r.event_date desc,r.id limit 1`;
     if (!r) throw new Error("This profile needs an eligible stored result before inviting.");
     const id = randomUUID(),
       token = randomBytes(32).toString("hex");
@@ -205,7 +205,7 @@ export async function createInvitation(
       actionLabel: "Check and claim my profile",
       actionUrl: url,
     };
-    await tx`insert into athlete_claim_invitations(id,user_id,recipient_email,athlete_id,result_id,token_hash,claim_url,match_note,created_by,email_payload) values(${id},${input.userId},${email.to},${input.athleteId},${r.id},${hashToken(token)},${url},${input.matchNote},${actor},${JSON.stringify(email)}::jsonb)`;
+    await tx`insert into athlete_claim_invitations(id,user_id,recipient_email,athlete_id,result_id,source_result_id,token_hash,claim_url,match_note,created_by,email_payload) values(${id},${input.userId},${email.to},${input.athleteId},${r.id > 0 ? r.id : null},${r.id < 0 ? -r.id : null},${hashToken(token)},${url},${input.matchNote},${actor},${JSON.stringify(email)}::jsonb)`;
     return { id, url, reused: false };
   });
 }
@@ -219,8 +219,8 @@ export async function externalInvitationProfile(sql: Sql, athleteId: number) {
     recentResults: { race: string; date: string; distance: string }[];
   }>`select a.id,a.display_name as name,
     exists(select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active') as owner,
-    (select count(*)::int from results r where r.athlete_id=a.id and lower(r.status) not in ('dns','dnf','dsq','dq') and coalesce(r.result_details->>'profileExcluded','false')<>'true') as "resultCount",
-    coalesce((select jsonb_agg(recent) from (select e.name as race,ed.event_date::text as date,ed.distance_code as distance from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id where r.athlete_id=a.id order by ed.event_date desc,r.id limit 3) recent),'[]'::jsonb) as "recentResults"
+    (select count(*)::int from athlete_claimable_results r where r.available and r.athlete_id=a.id and lower(r.status) not in ('dns','dnf','dsq','dq') and coalesce(r.result_details->>'profileExcluded','false')<>'true') as "resultCount",
+    coalesce((select jsonb_agg(recent) from (select r.event_name as race,r.event_date as date,r.distance_code as distance from athlete_claimable_results r where r.available and r.athlete_id=a.id order by r.event_date desc,r.id limit 3) recent),'[]'::jsonb) as "recentResults"
     from athletes a where a.id=${athleteId}`;
   if (!profile) throw new Error("Athlete profile not found.");
   const history = await sql.query<InvitationSummary & { recipient: string; canEmail: boolean }>(
@@ -303,7 +303,7 @@ export async function createExternalInvitation(
       throw new Error("Invitation limit reached. Try again tomorrow.");
     const [result] = await tx<{
       id: number;
-    }>`select r.id from results r join editions e on e.id=r.edition_id where r.athlete_id=${input.athleteId} and lower(r.status) not in ('dns','dnf','dsq','dq') and coalesce(r.result_details->>'profileExcluded','false')<>'true' order by e.event_date desc,r.id limit 1`;
+    }>`select r.id from athlete_claimable_results r where r.available and r.athlete_id=${input.athleteId} and lower(r.status) not in ('dns','dnf','dsq','dq') and coalesce(r.result_details->>'profileExcluded','false')<>'true' order by r.event_date desc,r.id limit 1`;
     if (!result) throw new Error("This profile needs an eligible stored result before inviting.");
     const id = randomUUID(),
       token = randomBytes(32).toString("hex");
@@ -319,7 +319,7 @@ export async function createExternalInvitation(
         }
       : null;
     const note = `${input.matchNote}\nInvited contact: ${input.recipientName}. Contact source: ${input.sourceNote}. Contact: ${emailAddress ?? [contact.phone, contact.telegramUsername, ...contact.socialLinks.map((link) => link.url)].filter(Boolean).join(", ")}.${emailAddress ? " Verify the recipient’s athlete identity independently." : " Contact-only invitation: the link does not verify control of the phone or social account. Confirm the claimant with the recorded contact before approval."}`;
-    await tx`insert into athlete_claim_invitations(id,user_id,recipient_email,athlete_id,result_id,token_hash,claim_url,match_note,created_by,email_payload,invitation_kind,recipient_name,recipient_contact,recipient_key) values(${id},${user?.id ?? null},${emailAddress},${input.athleteId},${result.id},${hashToken(token)},${url},${note},${actor},${email ? JSON.stringify(email) : null}::jsonb,${emailAddress ? "email" : "contact"},${input.recipientName},${JSON.stringify(contact)}::jsonb,${recipientKey})`;
+    await tx`insert into athlete_claim_invitations(id,user_id,recipient_email,athlete_id,result_id,source_result_id,token_hash,claim_url,match_note,created_by,email_payload,invitation_kind,recipient_name,recipient_contact,recipient_key) values(${id},${user?.id ?? null},${emailAddress},${input.athleteId},${result.id > 0 ? result.id : null},${result.id < 0 ? -result.id : null},${hashToken(token)},${url},${note},${actor},${email ? JSON.stringify(email) : null}::jsonb,${emailAddress ? "email" : "contact"},${input.recipientName},${JSON.stringify(contact)}::jsonb,${recipientKey})`;
     return {
       id,
       url,
@@ -338,7 +338,7 @@ export async function invitationIntro(sql: Sql, token: string, resultId: number)
   const [intro] = await sql<{
     name: string;
     emailBound: boolean;
-  }>`select a.display_name as name,(i.recipient_email is not null) as "emailBound" from athlete_claim_invitations i join athletes a on a.id=i.athlete_id where i.token_hash=${hashToken(token)} and i.result_id=${resultId} and i.revoked_at is null and i.declined_at is null and i.expires_at>now()`;
+  }>`select a.display_name as name,(i.recipient_email is not null) as "emailBound" from athlete_claim_invitations i join athletes a on a.id=i.athlete_id where i.token_hash=${hashToken(token)} and i.claim_key=${resultId} and i.revoked_at is null and i.declined_at is null and i.expires_at>now()`;
   return intro ?? null;
 }
 
@@ -356,7 +356,7 @@ export async function validateInvitation(
   if (IS_RUNRECS_SITE || process.env.VERCEL_ENV === "preview")
     throw new Error("Open your invitation on www.athrecs.com.");
   const rows = await sql.query<{ id: string; claim_id: number | null; match_note: string }>(
-    `select i.id,i.claim_id,i.match_note from athlete_claim_invitations i join "user" u on u.id=$2 where i.token_hash=$1 and (i.user_id=$2 or (i.user_id is null and i.invitation_kind in ('email','contact'))) and i.result_id=$3 and i.athlete_id=$4 and (lower(trim(u.email))=i.recipient_email or i.invitation_kind='contact') and u."emailVerified"=true and i.revoked_at is null and i.declined_at is null and i.expires_at>now() ${lock ? "for update of i" : ""}`,
+    `select i.id,i.claim_id,i.match_note from athlete_claim_invitations i join "user" u on u.id=$2 where i.token_hash=$1 and (i.user_id=$2 or (i.user_id is null and i.invitation_kind in ('email','contact'))) and i.claim_key=$3 and i.athlete_id=$4 and (lower(trim(u.email))=i.recipient_email or i.invitation_kind='contact') and u."emailVerified"=true and i.revoked_at is null and i.declined_at is null and i.expires_at>now() ${lock ? "for update of i" : ""}`,
     [hashToken(token), userId, resultId, athleteId],
   );
   if (!rows[0])

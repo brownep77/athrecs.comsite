@@ -1,4 +1,5 @@
-import { SourcePerformanceHistory } from "./SourcePerformanceHistory";
+import { buildProfileTimeline } from "@/lib/athrecs/profile-timeline";
+import { sourceHistorySports } from "@/lib/athrecs/profile-history-results";
 import { CountryFlag } from "./CountryFlag";
 import { ProfileRecordHighlights } from "./ProfileAchievements";
 import { CompactResults } from "./CompactResultsTable";
@@ -18,7 +19,14 @@ import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 
 export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfile }) {
-  const sports = [...new Set([...profile.sports, ...profile.results.map((r) => r.sport)])];
+  const timeline = buildProfileTimeline(profile.results, profile.sourceHistories ?? []);
+  const sports = [
+    ...new Set([
+      ...profile.sports,
+      ...profile.results.map((r) => r.sport),
+      ...sourceHistorySports(profile.sourceHistories ?? []),
+    ]),
+  ];
   const connections = profile.connections.filter((connection) =>
     isPublicProfileSource(connection.url),
   );
@@ -33,15 +41,20 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
       })
     : "";
   return (
-    <div className="public-athlete-profile space-y-3">
+    <div className="public-athlete-profile space-y-6">
       <Link to="/athletes" className="inline-flex items-center gap-1.5 py-2 text-sm text-muted">
         <ArrowLeft className="size-4" />
         Athletes
       </Link>
-      <section className="space-y-3 rounded-xl border border-border bg-surface p-4">
+      <section
+        id="profile-overview"
+        className="profile-overview space-y-4 rounded-xl border border-border bg-surface p-5 sm:p-6"
+      >
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0">
-            <h1 className="font-display text-2xl font-semibold">{profile.displayName}</h1>
+            <h1 className="font-display text-3xl font-semibold sm:text-4xl">
+              {profile.displayName}
+            </h1>
             <div className="mt-1 flex flex-wrap items-center gap-3 text-sm text-muted">
               <AthleteId number={profile.athleteNumber} />
               {profile.club}
@@ -64,7 +77,7 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
               {sport}
             </Badge>
           ))}
-          <Badge variant="outline">{profile.results.length} results</Badge>
+          <Badge variant="outline">{timeline.count} recorded performances</Badge>
         </div>
         {bio ? <p className="text-sm leading-relaxed text-muted">{bio}</p> : null}
         <ProfileDetails
@@ -88,17 +101,37 @@ export function SharedAccountProfile({ profile }: { profile: SharedAthleteProfil
           </div>
         ) : null}
       </section>
-      <ProfileRecordHighlights results={profile.results} />
-      <CompactResults results={profile.results} />
-      {profile.sourceHistories?.length?<SourcePerformanceHistory histories={profile.sourceHistories}/>:null}
-      <details className="rounded-lg border border-border bg-surface p-3">
-        <summary className="cursor-pointer text-sm font-semibold">
-          Upcoming ({profile.upcoming.length})
-        </summary>
-        <div className="mt-3">
-          <UpcomingTable events={profile.upcoming} />
-        </div>
-      </details>
+      <nav
+        aria-label="Profile sections"
+        className="profile-section-nav flex flex-wrap gap-1 border-b border-border pb-2"
+      >
+        <a href="#profile-overview">Overview</a>
+        <a href="#profile-achievements">Achievements</a>
+        <a href="#results-history">Results</a>
+      </nav>
+      <section id="profile-achievements" className="scroll-mt-24">
+        <ProfileRecordHighlights
+          results={profile.results}
+          sourceHistories={profile.sourceHistories}
+          compact
+        />
+      </section>
+      <section
+        id="results-history"
+        className="scroll-mt-24 rounded-xl border border-border bg-surface p-4 sm:p-5"
+      >
+        <CompactResults results={timeline.results} historyResults={timeline.history} />
+      </section>
+      {profile.upcoming.length > 0 ? (
+        <details className="rounded-lg border border-border bg-surface p-3">
+          <summary className="cursor-pointer text-sm font-semibold">
+            Upcoming ({profile.upcoming.length})
+          </summary>
+          <div className="mt-3">
+            <UpcomingTable events={profile.upcoming} />
+          </div>
+        </details>
+      ) : null}
       <details className="rounded-lg border border-border bg-surface p-3">
         <summary className="cursor-pointer text-sm font-semibold">Progress</summary>
         <div className="mt-3">

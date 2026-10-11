@@ -75,6 +75,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Verified fixture file import browser check
+        run: node scripts/verify-fixture-upload-ui.mjs
+
       - name: Registered athletes staff dashboard
         run: node scripts/verify-registrations.mjs --browser
 
@@ -208,14 +211,14 @@ jobs:
         env:
           BROWSER_SMOKE_MEMBER: "1"
         run: |
-          BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Personal bests||Achievements board||Paul Evans||Results history' \
+          BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Personal bests||Achievements & milestones||Results||About & links' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/paul-browne "$GITHUB_WORKSPACE/artifacts/paul-compact.png"
           BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
           BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \
           BROWSER_SMOKE_FULL_PAGE=1 \
-          BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Achievements board||Results history' \
+          BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Achievements & milestones||Results||About & links' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/paul-browne "$GITHUB_WORKSPACE/artifacts/paul-compact-mobile.png"
-          BROWSER_SMOKE_EXPECT_TEXT='Harry Styles||Achievements board||Milestones||Results history' \
+          BROWSER_SMOKE_EXPECT_TEXT='Harry Styles||Achievements & milestones||Results||About & links' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/harry-styles "$GITHUB_WORKSPACE/artifacts/harry-compact.png"
 
       - name: Browser smoke tests
@@ -245,8 +248,8 @@ jobs:
           BROWSER_SMOKE_FULL_PAGE=1 \
           BROWSER_SMOKE_EXPECT_TEXT='Your sporting life,||Find an athlete||Find events' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/ "$GITHUB_WORKSPACE/artifacts/home-mobile.png"
-          BROWSER_SMOKE_EXPECT_TEXT='Sign in to view athlete profiles' \
-          BROWSER_SMOKE_REJECT_TEXT='Explore athlete profiles||Sport in results' \
+          BROWSER_SMOKE_EXPECT_TEXT='Explore athlete profiles||Sport in results' \
+          BROWSER_SMOKE_REJECT_TEXT='Sign in to view athlete profiles' \
             node scripts/browser-smoke.mjs 'http://127.0.0.1:8080/athletes?country=Ireland' "$GITHUB_WORKSPACE/artifacts/athletes.png"
           BROWSER_SMOKE_MEMBER=1 \
           BROWSER_SMOKE_EXPECT_TEXT='Explore athlete profiles||Sport in results' \

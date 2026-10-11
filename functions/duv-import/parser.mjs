@@ -34,11 +34,14 @@ function ymd(y,m,d){
  return s;
 }
 export function dates(value){
- let m;
- if(m=/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value))return {start:ymd(m[3],m[2],m[1]),end:ymd(m[3],m[2],m[1])};
- if(m=/^(\d{1,2})\.-(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value))return {start:ymd(m[4],m[3],m[1]),end:ymd(m[4],m[3],m[2])};
- if(m=/^(\d{1,2})\.(\d{1,2})\.-(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value))return {start:ymd(m[5],m[2],m[1]),end:ymd(m[5],m[4],m[3])};
- if(m=/^(\d{1,2})\.(\d{1,2})\.(\d{4})\s*-\s*(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value))return {start:ymd(m[3],m[2],m[1]),end:ymd(m[6],m[5],m[4])};
+ let m=/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value);
+ if(m)return {start:ymd(m[3],m[2],m[1]),end:ymd(m[3],m[2],m[1])};
+ m=/^(\d{1,2})\.-(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value);
+ if(m)return {start:ymd(m[4],m[3],m[1]),end:ymd(m[4],m[3],m[2])};
+ m=/^(\d{1,2})\.(\d{1,2})\.-(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value);
+ if(m)return {start:ymd(m[5],m[2],m[1]),end:ymd(m[5],m[4],m[3])};
+ m=/^(\d{1,2})\.(\d{1,2})\.(\d{4})\s*-\s*(\d{1,2})\.(\d{1,2})\.(\d{4})$/.exec(value);
+ if(m)return {start:ymd(m[3],m[2],m[1]),end:ymd(m[6],m[5],m[4])};
  throw Error('unsupported_source_date');
 }
 function decimalScale(value,multiplier){
@@ -46,10 +49,12 @@ function decimalScale(value,multiplier){
  return frac?n.slice(0,-frac.length)+'.'+n.slice(-frac.length):n;
 }
 export function measurement(display,distance){
- let m;const duration=/^(\d+(?:\.\d+)?)(h|d)$/.exec(distance);
+ const duration=/^(\d+(?:\.\d+)?)(h|d)$/.exec(distance);
  const eventDurationSeconds=duration?decimalScale(duration[1],duration[2]==='h'?3600:86400):null;
- if(m=/^(\d+(?:\.\d+)?) km$/.exec(display))return {kind:'distance',display,value:m[1],unit:'km',achievedDistanceMetres:decimalScale(m[1],1000),finishTimeSeconds:null,eventDurationSeconds,timeBasis:'not_applicable'};
- if(m=/^(\d+):(\d{2}):(\d{2})(?:\.(\d+))?(?: h)?$/.exec(display)){
+ let m=/^(\d+(?:\.\d+)?) km$/.exec(display);
+ if(m)return {kind:'distance',display,value:m[1],unit:'km',achievedDistanceMetres:decimalScale(m[1],1000),finishTimeSeconds:null,eventDurationSeconds,timeBasis:'not_applicable'};
+ m=/^(\d+):(\d{2}):(\d{2})(?:\.(\d+))?(?: h)?$/.exec(display);
+ if(m){
   if(+m[2]>=60||+m[3]>=60)throw Error('invalid_time_component');
   const seconds=String(BigInt(m[1])*3600n+BigInt(m[2])*60n+BigInt(m[3]))+(m[4]?'.'+m[4]:'');
   if(duration)throw Error('time_in_timed_distance_race');

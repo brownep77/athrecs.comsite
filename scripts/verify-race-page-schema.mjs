@@ -53,7 +53,26 @@ assert.equal(
 // The route must use the shared guard and the displayed upcoming edition.
 const route = readFileSync(new URL("../src/routes/races/$slug.tsx", import.meta.url), "utf8");
 assert.match(route, /sportsEventJsonLd\(\{/);
-assert.match(route, /const next = upcoming\[0\]/);
+const nextSelectors = [...route.matchAll(/const next = (upcoming\.find\([^;]+\));/g)];
+assert.equal(
+  nextSelectors.length,
+  2,
+  "The page and its structured data select a scheduled edition",
+);
+for (const [, expression] of nextSelectors) {
+  const selectNext = new Function("upcoming", `return ${expression};`);
+  const selected = selectNext([
+    { event_date: "2026-12-26", status: "Cancelled", start_time: "09:00" },
+    { event_date: "2027-01-01", status: "Open", start_time: "09:30" },
+  ]);
+  assert.equal(selected.event_date, "2027-01-01");
+  assert.equal(
+    serialized({ ...race, startDate: selected.event_date, startTime: selected.start_time })
+      .startDate,
+    "2027-01-01T09:30",
+  );
+  assert.equal(selectNext([{ event_date: "2026-12-26", status: "Cancelled" }]), undefined);
+}
 assert.match(route, /startDate: next\?\.event_date/);
 assert.match(route, /startTime: next\?\.start_time/);
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowRight, Search, LayoutGrid } from "lucide-react";
 
 const backendTasks = [
+  { title: "Import running fixtures", group: "Races & sources", path: "/admin/fixture-import", description: "Upload verified CSV or JSON fixtures, preview duplicates, then review and publish ready races in batches.", keywords: "race fixture file import csv json duplicates dates distances source timing" },
   { title: "Add or update athletes", group: "Athletes & results", path: "/admin/athlete-tools", description: "Add one person from a source link, find profiles, import a file and review saved results in one workspace.", keywords: "single person profile link world athletics powerof10 parkrun combined tools" },
   { title: "All approvals", group: "Approvals", path: "/admin/approvals", description: "Review athlete records, collected races and pending fixtures together. Switch between the three queues without leaving the page.", keywords: "approval approve athlete race fixture review records pending" },
   { title: "Edit profiles, races & confirmations", group: "Athletes & results", path: "/admin/athlete-workspace", description: "Edit an athlete, remove or restore stored races, paste result tables, review evidence and create private confirm-or-deny links.", keywords: "edit paste copy evidence for against confirm deny invitation remove restore profile" },

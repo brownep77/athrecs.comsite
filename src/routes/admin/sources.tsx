@@ -97,9 +97,9 @@ function AdminSourcesPage() {
             Fixture and result sources
           </h1>
           <p className="max-w-3xl text-sm text-muted">
-            Inspect every registered website, see why a source is held and narrow the review queue
-            by country or region. Held sources cannot run or publish until their rights and
-            technical checks are completed.
+            Inspect registered websites, prepare verified fixture files and narrow the source list
+            by country or region. Registry approval is not a completed crawl. Held sources need
+            their rights and technical checks completed before automated collection.
           </p>
         </div>
         <Button asChild variant="secondary">
@@ -109,6 +109,10 @@ function AdminSourcesPage() {
           </Link>
         </Button>
       </div>
+
+      <Button asChild>
+        <Link to="/admin/fixture-import">Import verified fixture file</Link>
+      </Button>
 
       {registry.isLoading && <p className="text-sm text-muted">Loading source registry…</p>}
       {registry.isError && (
@@ -142,7 +146,9 @@ function AdminSourcesPage() {
                 : "border-emerald-500/30 bg-surface hover:border-emerald-500"
             }`}
           >
-            <span className="text-xs uppercase tracking-wide text-emerald-800">Runnable now</span>
+            <span className="text-xs uppercase tracking-wide text-emerald-800">
+              Approved sources
+            </span>
             <span className="mt-1 block text-2xl font-semibold tabular text-emerald-950">
               {summary.runnable.toLocaleString()}
             </span>

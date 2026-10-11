@@ -1,7 +1,5 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
-import { roadHalfMarathonBySlug, roadHalfMarathonsForCountry } from "@/data/road-half-marathons";
-import { roadMarathonBySlug, roadMarathonsForCountry } from "@/data/road-marathons";
 import { RoadMarathonPage } from "@/components/running/RoadMarathonPages";
 import { roadRaceHead } from "@/lib/running/road-marathon-seo";
 
@@ -9,7 +7,11 @@ export const Route = createFileRoute("/running/races/$slug")({
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
-  loader: ({ params }) => {
+  loader: async ({ params }) => {
+    const [
+      { roadHalfMarathonBySlug, roadHalfMarathonsForCountry },
+      { roadMarathonBySlug, roadMarathonsForCountry },
+    ] = await Promise.all([import("@/data/road-half-marathons"), import("@/data/road-marathons")]);
     const race = roadHalfMarathonBySlug(params.slug) ?? roadMarathonBySlug(params.slug);
     if (!race) throw notFound();
     const candidates =

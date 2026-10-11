@@ -133,6 +133,7 @@ export function CollectorCandidateCard({
           <p>
             <strong>Source evidence: </strong>
             {c.evidence}
+            {c.checkedAt && <span> · Source checked {c.checkedAt}</span>}
           </p>
           {safeUrl(c.entryUrl) && (
             <a

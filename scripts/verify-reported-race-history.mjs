@@ -41,7 +41,9 @@ try {
   );
   assert.equal(neil.includeInResults, true);
   assert.equal(
-    renderToStaticMarkup(createElement(UnverifiedRaceHistory, { slug: "neil-featherby" })),
+    renderToStaticMarkup(
+      createElement(UnverifiedRaceHistory, { history: getReportedRaceHistory("neil-featherby") }),
+    ),
     "",
   );
   const html = renderToStaticMarkup(
@@ -73,7 +75,7 @@ try {
   );
   assert.equal((publicRows.match(/id="reported-result-/g) ?? []).length, 28);
   assert(!publicRows.includes("Not verified by chip time"));
-  assert.equal((publicRows.match(/>Reported</g) ?? []).length, 28);
+  assert.equal((publicRows.match(/>Unverified</g) ?? []).length, 28);
   assert(!publicRows.includes('data-label="Source"'));
   assert(!publicRows.includes("Organiser archive"));
   assert(html.includes('data-label="Source"'), "Staff retain the source field");
@@ -118,7 +120,11 @@ try {
       "Source links appear only in the evidence view",
     );
     assert.equal(markup.includes("Results: powerof10"), showEvidence);
-    assert.equal(markup.includes("Wind assisted"), showEvidence, "Internal evidence labels stay staff-only");
+    assert.equal(
+      markup.includes("Wind assisted"),
+      showEvidence,
+      "Internal evidence labels stay staff-only",
+    );
     assert.equal(markup.includes("Next source results"), showEvidence);
   }
   const { countryFlag } = await server.ssrLoadModule("/src/lib/athrecs/country-flags.ts");
@@ -136,7 +142,7 @@ try {
   assert.match(pbHtml, /49:47/);
   assert.match(pbHtml, /1:07:37/);
   assert.match(pbHtml, /2:17:35/);
-  assert.equal((pbHtml.match(/>PB\*</g) ?? []).length, 4);
+  assert.equal((pbHtml.match(/>Personal best\*</g) ?? []).length, 4);
   assert.equal((pbHtml.match(/>Not verified by chip time</g) ?? []).length, 4);
   assert.equal(
     neil.personalBests.filter((best) => best.recordId?.startsWith("great-race-")).length,
@@ -194,7 +200,11 @@ try {
   assert.equal(result.chipTimeSeconds, 4000);
   assert.equal(getReportedRaceHistory("unrelated-athlete"), null);
   assert.equal(
-    renderToStaticMarkup(createElement(UnverifiedRaceHistory, { slug: "unrelated-athlete" })),
+    renderToStaticMarkup(
+      createElement(UnverifiedRaceHistory, {
+        history: getReportedRaceHistory("unrelated-athlete"),
+      }),
+    ),
     "",
   );
   const goggins = getReportedRaceHistory("david-goggins");
@@ -204,7 +214,10 @@ try {
   assert.equal(murakami.records.length, 9);
   assert.equal(new Set(murakami.records.map((row) => row.id)).size, 9);
   const murakamiHtml = renderToStaticMarkup(
-    createElement(UnverifiedRaceHistory, { slug: "haruki-murakami", showEvidence: true }),
+    createElement(UnverifiedRaceHistory, {
+      history: getReportedRaceHistory("haruki-murakami"),
+      showEvidence: true,
+    }),
   );
   assert.equal((murakamiHtml.match(/<article/g) ?? []).length, 9);
   assert.match(murakamiHtml, /\* Unverified/);

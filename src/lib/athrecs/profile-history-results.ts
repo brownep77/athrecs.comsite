@@ -4,9 +4,52 @@ import { countryFlag } from "./country-flags.ts";
 
 export type HistoryResult = {
   key: string;
-  sport: "Running" | "Athletics";
+  sport: "Running" | "Athletics" | "Triathlon" | "Duathlon";
   performance: SourcePerformance;
 };
+
+/** Preserve an explicit source trail label instead of treating every distance as road. */
+export function isTrailHistoryResult(row: SourcePerformance): boolean {
+  return row.labels.some((label) => /^(?:trail|trail running)$/i.test(label.trim()));
+}
+
+const crossCountryDiscipline = /\b(?:cross[ -]country|xc)\b/i;
+export function isCrossCountryHistoryResult(row: SourcePerformance): boolean {
+  return (
+    crossCountryDiscipline.test(row.discipline) ||
+    row.labels.some((label) => /^(?:cross[ -]country|xc)$/i.test(label.trim()))
+  );
+}
+
+function historySport(discipline: string, provider?: string): HistoryResult["sport"] {
+  if (provider === "DUV Ultra Marathon Statistics") return "Running";
+  // Explicit multisport labels take priority over distances within a race leg.
+  if (/\btriathlon\b/i.test(discipline)) return "Triathlon";
+  if (/\bduathlon\b/i.test(discipline)) return "Duathlon";
+  if (crossCountryDiscipline.test(discipline) || /\broad relay\b/i.test(discipline))
+    return "Running";
+  // World Athletics uses these unqualified names for track events.
+  if (/^(?:mile|2 miles)$/i.test(discipline.trim())) return "Athletics";
+  if (/^mile road$/i.test(discipline.trim())) return "Running";
+  return /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*(?:k(?:m)?|kilometres|kilometers)|\d+(?:\.\d+)?\s*(?:mi|mile|miles))(?: road)?$/i.test(
+    discipline.trim().replace(/\s*\(short course\)$/i, ""),
+  )
+    ? "Running"
+    : "Athletics";
+}
+
+/** Sport labels include visible legacy histories as well as additional marks. */
+export function sourceHistorySports(histories: readonly SourceHistory[]): HistoryResult["sport"][] {
+  return [
+    ...new Set(
+      histories.flatMap((history) =>
+        history.performances
+          .filter((performance) => !performance.profileExcluded)
+          .map((performance) => historySport(performance.discipline, history.provider)),
+      ),
+    ),
+  ];
+}
 
 export function historyResultAnchor(key: string): string {
   return `history-result-${encodeURIComponent(key)}`;
@@ -15,6 +58,8 @@ export function historyResultAnchor(key: string): string {
 /** Use supplied geography, never the athlete's nationality or a guessed city match. */
 export function historyResultCountry(row: SourcePerformance): string {
   if (row.country) return countryFlag(row.country).name;
+  const direct = countryFlag(row.venue);
+  if (direct.code) return direct.name;
   const suffix = row.venue.includes(",") ? row.venue.split(",").at(-1)?.trim() : "";
   const flag = countryFlag(suffix);
   return flag.code ? flag.name : "";
@@ -65,7 +110,9 @@ export function profileAchievementResults(
           distance(r.distanceCode) === distance(row.discipline) &&
           ((row.eventSlug && r.eventSlug === row.eventSlug) ||
             normal(r.eventName) === normal(row.meeting) ||
-            r.sourceUrls.some((url) => row.sourceUrls.includes(url))),
+            (r.sourceKeys ?? r.sourceUrls).some((key) =>
+              (row.sourceKeys ?? row.sourceUrls).includes(key),
+            )),
       ),
   );
   return [
@@ -88,12 +135,17 @@ export function profileAchievementResults(
         eventName: row.meeting,
         eventSlug: row.eventSlug ?? "",
         sport: entry.sport,
-        surface:
-          entry.sport === "Running"
-            ? "Road"
-            : /jump|shot|^sp\d|discus|javelin|hammer/i.test(code)
-              ? "Field"
-              : "Track",
+        surface: isCrossCountryHistoryResult(row)
+          ? "Cross Country"
+          : entry.sport === "Running"
+            ? isTrailHistoryResult(row)
+              ? "Trail"
+              : "Road"
+            : entry.sport === "Athletics"
+              ? /jump|shot|^sp\d|discus|javelin|hammer/i.test(code)
+                ? "Field"
+                : "Track"
+              : "",
         country: historyResultCountry(row),
         eventDate: row.date || (/^\d{4}$/.test(year) ? year : ""),
         distanceCode: code,
@@ -123,12 +175,7 @@ export function additionalHistoryResults(histories: readonly SourceHistory[]): H
         ? [
             {
               key: `${history.provider}:${history.externalId}:${index}`,
-              sport:
-                /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*k(?:m)?|\d+(?:\.\d+)?\s*(?:mi|mile|miles))$/i.test(
-                  performance.discipline.trim(),
-                )
-                  ? ("Running" as const)
-                  : ("Athletics" as const),
+              sport: historySport(performance.discipline, history.provider),
               performance,
             },
           ]

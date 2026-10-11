@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { get as httpGet } from "node:http";
 import { load } from "cheerio";
 import { createRequire } from "node:module";
@@ -62,10 +63,13 @@ async function post(path, body, token) {
 }
 try {
   await server.listen();
+  // These access tests use synthetic profiles, not the production catalogue.
+  globalThis.__athrecsFullSeedPromise__ = Promise.resolve();
   assert.equal(await rpc("auth/profile-access", "canViewAthleteProfiles"), false);
   const calls = [
     ["athrecs/api", "listAthletes", {}],
     ["athrecs/api", "getAthleteBySlug", "view-login-fixture"],
+    ["athrecs/api", "getAdministratorPublishedAthlete", "view-login-fixture"],
     ["athrecs/api", "getPrivateAthleteBySlug", "view-login-private"],
     [
       "athrecs/athlete-profile-share-api",
@@ -78,7 +82,9 @@ try {
     await assert.rejects(() => rpc(file, name, data, "invalid-token"), /Unauthorized/);
   }
   console.log("Anonymous and invalid-token RPCs denied.");
-  for (const path of ["/athletes", "/athletes/view-login-fixture", "/athletes/ATH-000001"]) {
+  // The public discovery directory is covered by verify-public-source-profiles.
+  // Profiles without explicit publication still require a member session.
+  for (const path of ["/athletes/view-login-fixture", "/athletes/ATH-000001"]) {
     const response = await fetch(origin + path);
     const html = await response.text();
     assert.equal(response.status, 200);
@@ -122,7 +128,7 @@ try {
       false,
       "Blocked session probes must not inspect or disclose the signed-in session",
     );
-    for (const path of ["/athletes", "/athletes/view-login-fixture"]) {
+    for (const path of ["/athletes/view-login-fixture"]) {
       const response = await fetch(origin + path, { headers: readerHeaders });
       const html = await response.text();
       assert.equal(response.status, 200);
@@ -192,11 +198,12 @@ try {
     "Authenticated response must not leak to next anonymous request",
   );
   assert.equal((await fetch(origin + "/sitemaps/athletes-1.xml")).status, 404);
-  assert(!(await (await fetch(origin + "/sitemaps/pages.xml")).text()).includes("/athletes</loc>"));
+  assert((await (await fetch(origin + "/sitemaps/pages.xml")).text()).includes("/athletes</loc>"));
   assert(!(await (await fetch(origin + "/sitemap.xml")).text()).includes("/sitemaps/athletes-"));
   // A deliberately published history is viewable without a session; a public
   // database flag alone does not publish other members' profiles anonymously.
-  const publicRead = (slug) => rpc("athrecs/api", "getAdministratorPublishedAthlete", slug);
+  const publicRead = (slug) => rpc("athrecs/api", "getAdministratorPublishedAthlete", slug, token);
+  const previewRead = (slug) => rpc("athrecs/api", "getPublicAthletePreview", slug);
   assert.equal(await publicRead("view-login-fixture"), null);
   const [publishedAthlete] = await sql`insert into athletes
     (slug,display_name,bio,profile_visibility,city,country,date_of_birth,profile_details)
@@ -320,12 +327,21 @@ try {
     values (${user.id},'athlete.history_admin_published','athlete_source_history',${historyKey},
       ${JSON.stringify({ athleteId: publishedAthlete.id, athleteConsentRecorded: false })}::jsonb,'Synthetic explicit publication approval')`;
   const publicProfile = await publicRead("published-history-fixture");
+  assert(
+    !("results" in publicProfile),
+    "Public payload must not duplicate profileResults in legacy row form",
+  );
   assert.equal(publicProfile.athlete.display_name, "Published History Athlete");
+  assert.equal(
+    publicProfile.searchIndexable,
+    false,
+    "An active owner without a sharing choice stays out of search",
+  );
   assert.equal(publicProfile.sourceHistories[0].performances.length, 10);
   assert.deepEqual(
     publicProfile.sourceHistories[0].performances[0].sourceUrls,
-    performance.sourceUrls,
-    "Original evidence is retained",
+    [],
+    "Member-facing payload omits private evidence",
   );
   for (const secret of [
     "Private biography sentinel",
@@ -337,6 +353,113 @@ try {
   ])
     assert(!JSON.stringify(publicProfile).includes(secret), `Do not disclose ${secret}`);
   assert.deepEqual(publicProfile.upcoming, []);
+  assert(!JSON.stringify(publicProfile).includes("https://example.test/result"));
+  const [storedHistory] =
+    await sql`select performances from athlete_source_histories where athlete_id=${publishedAthlete.id}`;
+  assert.deepEqual(
+    storedHistory.performances[0].sourceUrls,
+    performance.sourceUrls,
+    "Original evidence remains stored",
+  );
+  process.env.ATHRECS_STAFF_EMAILS = "separate-staff@example.test";
+  await assert.rejects(
+    () =>
+      rpc("athrecs/staff-athlete-directory-api", "getStaffAthleteProfile", {
+        athleteId: "ATH-000001",
+      }),
+    /Unauthorized/,
+  );
+  await assert.rejects(
+    () =>
+      rpc(
+        "athrecs/staff-athlete-directory-api",
+        "getStaffAthleteProfile",
+        { athleteId: "ATH-000001" },
+        token,
+      ),
+    /Forbidden/,
+  );
+  process.env.ATHRECS_STAFF_EMAILS = user.email;
+  await sql`insert into account(id,"accountId","providerId","userId","createdAt","updatedAt") values('evidence-google','evidence-google','google',${user.id},now(),now())`;
+  const staffProfile = await rpc(
+    "athrecs/staff-athlete-directory-api",
+    "getStaffAthleteProfile",
+    { athleteId: `ATH-${String(publicProfile.athlete.athlete_number).padStart(6, "0")}` },
+    token,
+  );
+  assert(staffProfile, "Staff can open the same athlete");
+  assert.deepEqual(
+    staffProfile.sourceHistories[0].performances[0].sourceUrls,
+    performance.sourceUrls,
+    "Authorised staff retain original evidence",
+  );
+  process.env.ATHRECS_STAFF_EMAILS = "";
+  const preview = await previewRead("published-history-fixture");
+  assert.equal(preview.entries.length + preview.reportedRecords.length, 5);
+  assert.equal(preview.totalResults, 11);
+  assert(!JSON.stringify(preview).includes("https://example.test/result"));
+  const { buildPublicAthletePreview } = await server.ssrLoadModule(
+    "/src/lib/athrecs/public-athlete-preview.ts",
+  );
+  const previewInput = {
+    slug: "synthetic",
+    displayName: "Synthetic",
+    athleteNumber: "1",
+    searchIndexable: true,
+    results: publicProfile.profileResults,
+    histories: publicProfile.sourceHistories,
+  };
+  assert.equal(
+    buildPublicAthletePreview({ ...previewInput, results: [], histories: [] }).entries.length,
+    0,
+  );
+  assert.equal(buildPublicAthletePreview({ ...previewInput, histories: [] }).entries.length, 1);
+  const reported = {
+    id: "reported-latest",
+    event: "Reported latest",
+    distance: "5K",
+    location: "",
+    reportedDate: "2026-10-01",
+    reportedTime: "20:00",
+    reportedPlace: "",
+    uncertainty: "Unverified",
+    sources: [],
+  };
+  const mixed = buildPublicAthletePreview({ ...previewInput, reportedRecords: [reported] });
+  assert.equal(
+    mixed.entries.length + mixed.reportedRecords.length,
+    5,
+    "One cap across every source",
+  );
+  assert.equal(mixed.totalResults, 12);
+  assert.equal(mixed.reportedRecords[0].id, "reported-latest");
+  const { achievementPalette, ACHIEVEMENT_HUES } = await server.ssrLoadModule(
+    "/src/lib/athrecs/achievement-colours.ts",
+  );
+  const colourKeys = [
+    ...Object.keys(ACHIEVEMENT_HUES).flatMap((key) => [`metric:${key}`, `milestone:${key}`]),
+    ...Array.from({ length: 300 }, (_, index) => `career:synthetic-${index}`),
+  ];
+  const colours = achievementPalette(colourKeys);
+  assert.equal(
+    new Set([...colours.values()].map((value) => value.backgroundColor)).size,
+    colourKeys.length,
+  );
+  assert.deepEqual(
+    achievementPalette([...colourKeys].reverse()),
+    colours,
+    "Colour assignment is independent of card order",
+  );
+
+  assert.equal(preview.biography.length, 1);
+  assert(!JSON.stringify(preview).includes("Synthetic shot put"));
+  for (const auth of [undefined, "invalid-token"])
+    await assert.rejects(
+      () =>
+        rpc("athrecs/api", "getAdministratorPublishedAthlete", "published-history-fixture", auth),
+      /Unauthorized/,
+    );
+
   for (const site of ["none", "cross-site", "same-site"]) {
     const response = await fetch(origin + "/athletes/published-history-fixture", {
       headers: { "sec-fetch-site": site, "sec-fetch-mode": "cors", "sec-fetch-dest": "empty" },
@@ -349,28 +472,25 @@ try {
     assert(!html.includes("Sign in to view athlete profiles"));
     assert(!html.includes("Forbidden: cross-site request blocked"));
     assert.equal($("#performance-history").length, 0, "No separate section for additions");
-    assert.equal($("#results-history tbody tr").length, 11);
-    assert.equal($("#results-history tr[data-history-result]").length, 10);
-    assert($("#results-history h2").text().includes("Results history 11"));
+    assert.equal($("#results-history tbody tr").length, 5);
+    assert.equal($("#results-history tr[data-history-result]").length, 4);
+    assert($("#results-history h2").text().includes("Latest results"));
     assert($("#results-history tbody tr").first().text().includes("Synthetic city marathon"));
     assert($("#results-history tbody tr").eq(1).text().includes("Synthetic spring marathon"));
     assert($("#results-history").text().includes("19:34(19:38)"));
-    assert($("#results-history").text().includes("4.64 m"));
-    assert($("#results-history").text().includes("2290 pts"));
-    assert($("#results-history").text().includes("Wind 2.1 m/s"));
-    assert($("#results-history").text().includes("29 Jan · 2011 / 2012"));
-    assert.equal($("#results-history a[href^='https://example.test']").length, 0);
+    assert(
+      !html.includes("Synthetic field games"),
+      "Older results must not be serialized into HTML",
+    );
+    assert(!html.includes("Synthetic shot put"));
+    assert(html.includes("View the full athlete profile"));
+    assert($.text().includes("Showing 5 of 11 recorded performances"));
+    assert.equal($("#results-history .result-evidence a[href^='https://example.test']").length, 0);
     assert.equal(
-      $("#results-history tr[data-history-result] [aria-label='Personal best']").length,
+      $("#results-history [aria-label='Personal best']").length,
       0,
+      "A preview must not calculate a PB from five rows",
     );
-    assert.deepEqual(
-      $("select[aria-label=Sport] option")
-        .toArray()
-        .map((e) => $(e).text()),
-      ["All sports", "Athletics", "Running"],
-    );
-    assert($.text().includes("11 performances"));
   }
   // Verification changes the label, not the record, its original precision or owner controls.
   const confirmedPerformances = performances.map((row, index) => ({
@@ -397,13 +517,21 @@ try {
     confirmedProfile.sourceHistories[0].performances[1].verificationStatus,
     "verified_by_administrator",
   );
-  const confirmedHtml = await (await fetch(origin + "/athletes/published-history-fixture")).text();
+  const confirmedHtml = await (
+    await fetch(origin + "/athletes/published-history-fixture", {
+      headers: { authorization: `Bearer ${token}` },
+    })
+  ).text();
   const confirmed = load(confirmedHtml);
   assert.equal(confirmed("#results-history tbody tr").length, 11);
   assert.equal(confirmed("#performance-history").length, 0);
-  assert(!confirmed("#results-history").text().includes("Unverified"));
+  assert(!confirmed("#results-history tr[data-history-result]").text().includes("Unverified"));
   assert(
-    confirmed("#results-history tr[data-history-result] [title='Completed event']").length > 0,
+    confirmed("#results-history tbody tr").first().text().includes("Unverified"),
+    "A recorded result without a verification basis keeps its own Unverified label",
+  );
+  assert(
+    confirmed("#results-history tr[data-history-result] [title^='Completed event']").length > 0,
   );
   assert.equal(
     confirmed("#results-history tr[data-history-result] [data-country-code='ES']").length,
@@ -413,20 +541,42 @@ try {
   assert(confirmed("[aria-label='Achievements board']").text().includes("2Marathons"));
   assert(confirmed("[aria-label='Achievements board']").text().includes("Completed performances"));
   assert(confirmed("#results-history").text().includes("29 Jan · 2011 / 2012"));
-  assert.equal(confirmed("#results-history a[href^='https://example.test']").length, 0);
+  assert.equal(
+    confirmed("#results-history .result-evidence a[href^='https://example.test']").length,
+    0,
+  );
+  assert.equal(confirmed("#results-history .result-evidence[open]").length, 0);
   assert.equal(
     confirmed("#results-history tr[data-history-result] [aria-label='Personal best']").length,
     0,
   );
   if (process.env.ATHRECS_BROWSER_MODULE) {
     const { chromium } = createRequire(import.meta.url)(process.env.ATHRECS_BROWSER_MODULE);
-    const browser = await chromium.launch({ headless: true });
+    const browser = await chromium.launch({
+      headless: true,
+      executablePath: process.env.ATHRECS_BROWSER_EXECUTABLE || undefined,
+    });
     try {
+      const anonymous = await browser.newContext({ viewport: { width: 390, height: 844 } });
+      const guest = await anonymous.newPage();
+      await guest.goto(origin + "/athletes/published-history-fixture", {
+        waitUntil: "networkidle",
+      });
+      assert.equal(await guest.locator("#results-history tbody tr").count(), 5);
+      await guest
+        .getByRole("button", { name: "Sign in or create an account", exact: true })
+        .click();
+      await guest.getByRole("dialog").waitFor();
+      assert.equal(await guest.getByRole("dialog").count(), 1);
+      await anonymous.close();
       for (const viewport of [
         { width: 1365, height: 900 },
         { width: 390, height: 844 },
       ]) {
-        const context = await browser.newContext({ viewport });
+        const context = await browser.newContext({
+          viewport,
+          extraHTTPHeaders: { authorization: `Bearer ${token}` },
+        });
         const page = await context.newPage();
         await page.goto(origin + "/athletes/published-history-fixture", {
           waitUntil: "networkidle",
@@ -442,10 +592,19 @@ try {
         );
         const history = page.locator("#results-history");
         assert.equal(await history.locator("tbody tr").count(), 11);
-        assert(!(await history.innerText()).includes("Unverified"));
-        await page.getByText("Show all 11 results", { exact: true }).click();
+        assert(
+          !(await history.locator("tr[data-history-result]").allTextContents())
+            .join(" ")
+            .includes("Unverified"),
+        );
+        assert.equal(await page.getByText("Show all 11 results", { exact: true }).count(), 0);
+        assert.equal(await history.locator("table").count(), 1);
         assert.equal(await history.locator("tbody tr:visible").count(), 11);
-        assert.equal(await history.locator("a[href^='https://example.test']").count(), 0);
+        assert.equal(
+          await history.locator(".result-evidence a[href^='https://example.test']").count(),
+          0,
+        );
+        assert.equal(await history.locator(".result-evidence[open]").count(), 0);
         await page.getByRole("combobox", { name: "Sport", exact: true }).selectOption("Athletics");
         assert.equal(await history.locator("tbody tr").count(), 8);
         assert((await history.innerText()).includes("4.64 m"));
@@ -473,7 +632,7 @@ try {
         await context.close();
       }
       console.log(
-        "PASS: signed-out desktop and mobile browsers show one results history, working sport/year/search filters, all rows and no public source links.",
+        "PASS: signed-in desktop and mobile browsers show one results history, working sport/year/search filters, all rows and collapsed source details.",
       );
     } finally {
       await browser.close();
@@ -496,6 +655,146 @@ try {
   assert.equal(limitedProfile.athlete.country, "");
   assert.equal(limitedProfile.athlete.club, null);
   assert.equal(limitedProfile.athlete.club_slug, null);
+  const deployment = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
+  assert(
+    !deployment.headers
+      .find((rule) => rule.source === "/athletes/:path*")
+      ?.headers.some((header) => header.key.toLowerCase() === "x-robots-tag"),
+    "The hosting configuration must defer athlete indexing to the validated page response",
+  );
+  const expectSearch = async (slug, indexable, extraHeaders = {}) => {
+    const response = await fetch(`${origin}/athletes/${slug}`, { headers: extraHeaders });
+    const html = await response.text();
+    const $ = load(html);
+    assert.equal(response.status, 200);
+    assert.equal(
+      response.headers.get("x-robots-tag"),
+      indexable ? "index, follow" : "noindex, nofollow, noarchive",
+    );
+    assert.equal(
+      $("meta[name=robots]").attr("content"),
+      indexable ? "index, follow" : "noindex, nofollow, noarchive",
+    );
+    assert.equal(
+      response.headers.get("x-athrecs-profile-indexable"),
+      null,
+      "Internal eligibility marker is stripped",
+    );
+    assert.match(response.headers.get("cache-control"), /private.*no-store/);
+    assert.equal($("link[rel=canonical]").attr("href"), `https://www.athrecs.com/athletes/${slug}`);
+    for (const secret of [
+      "Private biography sentinel",
+      "Private city sentinel",
+      "Private coach sentinel",
+      "1980-01-02",
+      "Hidden mark sentinel",
+      "profile-viewer@example.test",
+    ])
+      assert(!html.includes(secret), `Indexing must not disclose ${secret}`);
+  };
+  const expectSitemap = async (present) => {
+    const index = await (await fetch(origin + "/sitemap.xml")).text();
+    assert.equal(index.includes("/sitemaps/athletes-1.xml"), present);
+    const response = await fetch(origin + "/sitemaps/athletes-1.xml");
+    assert.equal(response.status, present ? 200 : 404);
+    assert.equal(response.headers.get("cache-control"), "no-store");
+    const xml = await response.text();
+    if (present)
+      assert(xml.includes("https://www.athrecs.com/athletes/published-history-fixture</loc>"));
+    for (const excluded of [
+      "view-login-fixture",
+      "view-login-private",
+      "published-history-sharing",
+    ])
+      assert(!xml.includes(excluded), `Do not advertise ${excluded}`);
+  };
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set search_indexable=true where user_id=${user.id}`;
+  assert.equal((await publicRead("published-history-fixture")).searchIndexable, true);
+  await expectSearch("published-history-fixture", true, { "sec-fetch-site": "cross-site" });
+  await expectSitemap(true);
+  await expectSearch("view-login-fixture", false, { "X-Athrecs-Profile-Indexable": "1" });
+  await expectSearch("view-login-private", false, { "X-Athrecs-Profile-Indexable": "1" });
+  await expectSearch("nonexistent-test-profile", false, { "X-Athrecs-Profile-Indexable": "1" });
+  const directory = await fetch(origin + "/athletes", {
+    headers: { "X-Athrecs-Profile-Indexable": "1" },
+  });
+  assert.equal(directory.headers.get("x-robots-tag"), "index, follow");
+  const filteredDirectory = await fetch(origin + "/athletes?q=published", {
+    headers: { "X-Athrecs-Profile-Indexable": "1" },
+  });
+  assert.equal(
+    filteredDirectory.headers.get("x-robots-tag"),
+    "noindex, follow",
+    "Request headers cannot make search filters indexable",
+  );
+  await sql`update athlete_public_shares set search_indexable=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set search_indexable=true, enabled=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set enabled=true, share_results=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set share_results=true where user_id=${user.id}`;
+  await sql`update athletes set profile_visibility='private' where id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athletes set profile_visibility='public' where id=${publishedAthlete.id}`;
+  await sql`update athlete_account_links set status='revoked' where athlete_id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", true);
+  await expectSitemap(true);
+  await sql`update athlete_source_histories set published_at=null where athlete_id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  // The older staff-publication path and existing owner consent are equally
+  // valid approvals. Neither depends on adding a newer manual source history.
+  await sql`insert into network_audit_log(actor_user_id,action,entity_type,entity_id,after_value,note)
+    values (${user.id},'athlete.bulk_publish','athlete',${String(publishedAthlete.id)},
+      '{"profile_visibility":"public"}'::jsonb,'Synthetic existing staff publication')`;
+  await expectSearch("published-history-fixture", true);
+  await expectSitemap(true);
+  assert.equal(
+    (await publicRead("published-history-fixture")).sourceHistories.length,
+    0,
+    "Unpublished source history is not exposed by a profile approval",
+  );
+  await sql`delete from network_audit_log where action='athlete.bulk_publish' and entity_id=${String(publishedAthlete.id)}`;
+  await expectSearch("published-history-fixture", false);
+  await sql`update athlete_account_links set status='active' where athlete_id=${publishedAthlete.id}`;
+  await expectSearch("published-history-fixture", true);
+  await expectSitemap(true);
+  await sql`update athletes set profile_type='Public figure' where id=${publishedAthlete.id}`;
+  await sql`update results set result_visibility='private' where athlete_id=${publishedAthlete.id}`;
+  const privateRowsPreview = await rpc(
+    "athrecs/athlete-profile-share-api",
+    "getPublicSharedProfilePreview",
+    { slug: "published-history-sharing" },
+  );
+  assert.equal(
+    privateRowsPreview.entries.filter((entry) => entry.kind === "recorded").length,
+    0,
+    "Anonymous shared previews must also exclude private result rows",
+  );
+  assert.equal(
+    (await publicRead("published-history-fixture")).profileResults.length,
+    0,
+    "Even a public-figure label cannot expose private result rows anonymously",
+  );
+  await sql`update athlete_public_shares set search_indexable=false where user_id=${user.id}`;
+  await expectSearch("published-history-fixture", false);
+  await expectSitemap(false);
+  await sql`update athlete_public_shares set enabled=false where user_id=${user.id}`;
+  assert.equal(
+    await publicRead("published-history-fixture"),
+    null,
+    "Owner withdrawal also blocks the existing-sharing publication path",
+  );
+  console.log(
+    "PASS: approved public profiles opt into search with matching HTML/header robots and sitemap; owner choices, withdrawal, unpublished histories and forged request headers remain protected.",
+  );
   console.log(
     "PASS: approved history renders anonymously in the main results table; unapproved/private profiles, personal fields, owner withdrawals and removed marks remain protected.",
   );
@@ -505,7 +804,7 @@ try {
     /Unauthorized/,
   );
   console.log(
-    "PASS: anonymous/invalid/revoked sessions denied; authenticated reads; privacy retained; cross-site denial; SSR and sequential-request isolation; no profile sitemaps.",
+    "PASS: anonymous/invalid/revoked sessions denied; authenticated reads; privacy retained; cross-site denial; SSR and sequential-request isolation; no private or member-only profile sitemaps.",
   );
 } finally {
   await server.close();

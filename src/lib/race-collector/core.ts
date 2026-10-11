@@ -44,6 +44,9 @@ export type Scope = {
   regional?: boolean;
   /** Missing country entry means every supported region in that country. */
   regions?: Record<string, string[]>;
+  method?: "fixture-upload";
+  label?: string;
+  importHash?: string;
 };
 export type Window = {
   dateFrom: string;
@@ -70,7 +73,8 @@ export type Candidate = {
   startTime: string;
   entryStatus: "Open" | "Closed" | "TBC";
   evidence: string;
-  sourceKind: "organiser" | "entry" | "governing-body";
+  sourceKind: "organiser" | "entry" | "governing-body" | "timing-provider";
+  checkedAt?: string;
   notes: string;
 };
 export type Identity = {
@@ -237,15 +241,30 @@ export function candidateProblems(c: Candidate, job: Window, scope: Scope): stri
     !c.name ||
     !c.distanceLabel ||
     !safeUrl(c.sourceUrl) ||
-    !["organiser", "entry", "governing-body"].includes(c.sourceKind) ||
+    !["organiser", "entry", "governing-body", "timing-provider"].includes(c.sourceKind) ||
     c.evidence.trim().length < 20
   )
     issues.push("Primary date/distance evidence missing");
+  if ([c.sourceUrl, c.entryUrl].some(isRunAbcUrl))
+    issues.push("RunABC is a discovery calendar, not primary race or entry evidence");
   if (c.entryUrl && !safeUrl(c.entryUrl)) issues.push("Invalid entry URL");
   if (c.startTime && !/^([01]\d|2[0-3]):[0-5]\d$/.test(c.startTime))
     issues.push("Invalid start time");
   if (!["Open", "Closed", "TBC"].includes(c.entryStatus)) issues.push("Invalid entry availability");
   return issues;
+}
+export function isRunAbcUrl(value: string) {
+  try {
+    const host = new URL(value).hostname.toLowerCase();
+    return (
+      host === "runabc.co.uk" ||
+      host.endsWith(".runabc.co.uk") ||
+      host === "runabc.com" ||
+      host.endsWith(".runabc.com")
+    );
+  } catch {
+    return false;
+  }
 }
 function nameHash(name: string) {
   let hash = 2166136261;

@@ -1,10 +1,11 @@
-import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
-import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import type { FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Search, UserRound } from "lucide-react";
 import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard";
 import { getAthleteDirectory } from "@/lib/athrecs/athlete-directory-api";
+import { ATHLETE_INDEXING_HEADER } from "@/lib/athrecs/athlete-search-policy";
+import { absoluteUrl } from "@/lib/athrecs/seo";
+import { SPORTS } from "@/lib/athrecs/filters";
 import {
   parseAthleteDirectorySearch,
   type AthleteDirectory,
@@ -14,35 +15,48 @@ import {
 export const Route = createFileRoute("/athletes/")({
   validateSearch: parseAthleteDirectorySearch,
   loaderDeps: ({ search }) => search,
-  loader: async ({ deps }) =>
-    (await canViewAthleteProfiles()) ? getAthleteDirectory({ data: deps }) : null,
-  head: () => ({
-    meta: [
-      { title: "Explore athlete profiles | ATHRECS" },
-      { name: "robots", content: "noindex, nofollow, noarchive" },
-      {
-        name: "description",
-        content: "Sign in to explore athlete profiles and published results.",
-      },
-    ],
+  loader: async ({ deps }) => {
+    const directory = await getAthleteDirectory({ data: { ...deps, fastBrowse: true } });
+    return {
+      ...directory,
+      indexable: !deps.q && !deps.country && !deps.sport && directory.total > 0,
+    };
+  },
+  headers: ({ loaderData }) => ({
+    "Cache-Control": "no-store",
+    [ATHLETE_INDEXING_HEADER]: (loaderData as AthleteDirectory & { indexable?: boolean })?.indexable
+      ? "1"
+      : "0",
   }),
+  head: ({ loaderData, matches }) => {
+    const search = matches.at(-1)?.search as AthleteDirectorySearch | undefined;
+    const indexable = (loaderData as AthleteDirectory & { indexable?: boolean })?.indexable;
+    const query = new URLSearchParams();
+    if (search?.letter) query.set("letter", search.letter);
+    if (search?.page) query.set("page", String(search.page));
+    return {
+      links: [{ rel: "canonical", href: absoluteUrl(`/athletes${query.size ? `?${query}` : ""}`) }],
+      meta: [
+        {
+          title: `Athlete profiles, sports and results${search?.letter ? ` — ${search.letter}` : ""}${search?.page ? ` — page ${search.page}` : ""} | ATHRECS`,
+        },
+        { name: "robots", content: indexable ? "index, follow" : "noindex, follow" },
+        {
+          name: "description",
+          content: "Explore public athlete profiles and published results.",
+        },
+      ],
+    };
+  },
   component: AthleteDirectoryPage,
 });
 
 function AthleteDirectoryPage() {
-  const directory = Route.useLoaderData() as unknown as AthleteDirectory | null;
-  return (
-    <ProfileViewer authenticated={directory !== null} returnTo="/athletes">
-      {directory ? (
-        <MemberDirectory directory={directory} />
-      ) : (
-        <ProfileSignIn returnTo="/athletes" />
-      )}
-    </ProfileViewer>
-  );
+  const directory = Route.useLoaderData() as unknown as AthleteDirectory;
+  return <PublicDirectory directory={directory} />;
 }
 
-function MemberDirectory({ directory }: { directory: AthleteDirectory }) {
+function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
   const search = Route.useSearch();
   const navigate = useNavigate();
   const pending = useRouterState({ select: (s) => s.isLoading });
@@ -78,12 +92,29 @@ function MemberDirectory({ directory }: { directory: AthleteDirectory }) {
           Build my profile
         </Link>
       </header>
+      <nav aria-label="Browse athletes alphabetically" className="flex flex-wrap gap-2">
+        <Link to="/athletes" search={{}} className="rounded border border-border px-3 py-2">
+          All
+        </Link>
+        {"ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").map((letter) => (
+          <Link
+            key={letter}
+            to="/athletes"
+            search={{ letter }}
+            aria-current={search.letter === letter ? "page" : undefined}
+            className="rounded border border-border px-3 py-2 text-accent"
+          >
+            {letter}
+          </Link>
+        ))}
+      </nav>
       <form
         key={JSON.stringify(search)}
         onSubmit={submit}
         role="search"
         className="grid gap-3 rounded-2xl border border-border bg-elevated/40 p-4 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_auto]"
       >
+        {search.letter ? <input type="hidden" name="letter" value={search.letter} /> : null}
         <label className="space-y-1.5 text-xs font-medium text-muted">
           Name, athlete ID, club or place
           <input
@@ -118,7 +149,13 @@ function MemberDirectory({ directory }: { directory: AthleteDirectory }) {
             className="h-11 w-full rounded-lg border border-border bg-surface px-3 text-sm text-fg"
           >
             <option value="">All sports</option>
-            {[...new Set([...directory.sports, ...(search.sport ? [search.sport] : [])])]
+            {[
+              ...new Set([
+                ...SPORTS.filter((sport) => sport !== "All"),
+                ...directory.sports,
+                ...(search.sport ? [search.sport] : []),
+              ]),
+            ]
               .sort()
               .map((sport) => (
                 <option key={sport}>{sport}</option>

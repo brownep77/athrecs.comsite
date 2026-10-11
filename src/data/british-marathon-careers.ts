@@ -303,6 +303,8 @@ export const britishMarathonCareers = [
       {
         "id": "paris-2024",
         "title": "Olympic triathlon champion",
+        "competitionTier": "olympic" as const,
+        "awardKind": "gold" as const,
         "date": "31 July 2024",
         "outcomes": [
           "Individual gold at Paris 2024"

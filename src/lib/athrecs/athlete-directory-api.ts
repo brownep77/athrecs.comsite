@@ -1,9 +1,23 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { getSql } from "@/lib/db";
+import { getSql, type Sql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import type { AthleteDirectory } from "./athlete-directory";
 import { parseAthleteId } from "./athlete-id";
+import { readSourceNationality } from "./source-nationality";
+
+export const getFeaturedAthletes = createServerFn({ method: "GET" }).handler(async () => {
+  const started = performance.now();
+  await ensureAthrecsSeeded();
+  const { readFeaturedAthletes } = await import("./featured-athletes.server");
+  const athletes = await readFeaturedAthletes(await getSql());
+  const { setResponseHeader } = await import("@tanstack/react-start/server");
+  setResponseHeader(
+    "Server-Timing",
+    `athlete_discovery;dur=${(performance.now() - started).toFixed(1)}`,
+  );
+  return { athletes };
+});
 
 const inputSchema = z.object({
   q: z.string().trim().max(120).optional(),
@@ -12,6 +26,11 @@ const inputSchema = z.object({
   page: z.number().int().min(1).max(100000).optional(),
   pageSize: z.number().int().min(1).max(48).optional(),
   includeFacets: z.boolean().optional(),
+  letter: z
+    .string()
+    .regex(/^[A-Z]$/)
+    .optional(),
+  fastBrowse: z.boolean().optional(),
 });
 
 // AthRecs discovery only. Private accounts and unlisted shared profiles are
@@ -21,10 +40,15 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
   .handler(async ({ data }): Promise<AthleteDirectory> => {
     await ensureAthrecsSeeded();
     const sql = await getSql();
+    if (data.fastBrowse && !data.sport) {
+      const { readAthleteDirectoryPage } = await import("./athlete-directory-page.server");
+      return withNationalities(sql, await readAthleteDirectoryPage(sql, data));
+    }
     const q = data.q || null;
     const athleteNumber = parseAthleteId(q);
     const country = data.country || null;
     const sport = data.sport || null;
+    const letter = data.letter || null;
     const pageSize = data.pageSize ?? 24;
     const requestedPage = data.page ?? 1;
     const includeFacets = data.includeFacets ?? true;
@@ -59,13 +83,33 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
           and not exists (select 1 from athlete_profile_hidden_results hidden join athlete_account_links l on l.user_id=hidden.user_id and l.status='active' where l.athlete_id=a.id and hidden.result_id=r.id)
           and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=a.id and l.status='active' and s.share_results=false)
         group by r.athlete_id
+      ), source_summaries as materialized (
+        select h.athlete_id, count(*)::int as result_count,
+          array_agg(distinct case
+            when performance->>'discipline' ~* '(^|[^[:alnum:]_])triathlon([^[:alnum:]_]|$)' then 'Triathlon'
+            when performance->>'discipline' ~* '(^|[^[:alnum:]_])duathlon([^[:alnum:]_]|$)' then 'Duathlon'
+            when trim(performance->>'discipline') ~* '^(marathon|half( marathon)?|[0-9]+([.][0-9]+)?[[:space:]]*k(m)?|[0-9]+([.][0-9]+)?[[:space:]]*(mi|mile|miles))$'
+            then 'Running' else 'Athletics' end) as sports
+        from athlete_source_histories h join public_athletes a on a.id=h.athlete_id
+        cross join lateral jsonb_array_elements(h.performances) performance
+        where h.published_at is not null
+          and (not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
+            or exists (select 1 from network_audit_log approval
+              where approval.action='athlete.history_admin_published'
+                and approval.entity_id=h.provider||':'||h.external_id
+                and approval.after_value->>'athleteId'=a.id::text))
+          and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+            where l.athlete_id=a.id and l.status='active' and (s.enabled=false or s.share_results=false))
+          and coalesce(performance->>'profileExcluded','false') <> 'true'
+        group by h.athlete_id
       ), public_profiles as materialized (
         select a.id, a.slug, a.display_name, a.city, a.profile_roles,
           a.athlete_number, a.source_number, a.country, a.club,
-          coalesce(records.result_count, 0)::int as result_count,
-          coalesce(records.sports, array[]::text[]) as sports
+          (coalesce(records.result_count, 0) + coalesce(source_records.result_count, 0))::int as result_count,
+          array(select distinct sport from unnest(coalesce(records.sports, array[]::text[]) || coalesce(source_records.sports, array[]::text[])) sport order by sport) as sports
         from public_athletes a
         left join result_summaries records on records.athlete_id = a.id
+        left join source_summaries source_records on source_records.athlete_id = a.id
       ), filtered as materialized (
         select * from public_profiles
         where (${q}::text is null or position(lower(${q}) in
@@ -73,6 +117,7 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
           or athlete_number = ${athleteNumber} or source_number = ${athleteNumber})
           and (${country}::text is null or country = ${country})
           and (${sport}::text is null or ${sport} = any(sports))
+          and (${letter}::text is null or upper(left(display_name, 1)) = ${letter})
       ), totals as (
         select count(*)::int as total,
           least(${requestedPage}, greatest(1, ceil(count(*)::numeric / ${pageSize})::int)) as page
@@ -95,5 +140,27 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
           else array[]::text[] end as sports
       from totals
     `;
-    return directory;
+    return withNationalities(sql, directory);
   });
+
+async function withNationalities(sql: Sql, directory: AthleteDirectory): Promise<AthleteDirectory> {
+  if (!directory.athletes.length) return directory;
+  // Fetch only this page's evidence, and expose only the nationality value.
+  // Full source metadata and account-owned details never enter the public list.
+  const observations = await sql<{ id: number; profile_details: unknown }>`
+      select a.id, a.profile_details from athletes a
+      where a.id=any(${directory.athletes.map((athlete) => athlete.id)}::int[])
+        and a.profile_visibility='public'
+        and not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
+    `;
+  const nationalities = new Map(
+    observations.map((row) => [row.id, readSourceNationality(row.profile_details)]),
+  );
+  return {
+    ...directory,
+    athletes: directory.athletes.map((athlete) => ({
+      ...athlete,
+      nationality: nationalities.get(athlete.id)?.value ?? null,
+    })),
+  };
+}

@@ -16,6 +16,7 @@ const { editionEntry, entryDeadlinePassed, raceLink, raceLocation } = await modu
   "src/lib/athrecs/race-information.ts",
 );
 const { supplementedStart } = await moduleFrom("src/data/runrecs-race-guides.ts");
+const { effectiveStatus, statusLabel } = await moduleFrom("src/lib/athrecs/format.ts");
 const { retainedFixtureAliasSlugs } = await moduleFrom("src/data/fixture-deduplication.ts");
 const today = new Intl.DateTimeFormat("en-CA", {
   timeZone: "Europe/London",
@@ -52,6 +53,9 @@ assert.equal(
   null,
 );
 assert.equal(editionEntry({ ...edition, status: "Closed" }), null);
+assert.equal(editionEntry({ ...edition, status: "Cancelled" }), null);
+assert.equal(effectiveStatus("2000-01-01", "Cancelled"), "Cancelled");
+assert.equal(statusLabel("Cancelled"), "Cancelled");
 assert.equal(editionEntry({ ...edition, event_date: "2000-01-01" }), null);
 assert.equal(
   editionEntry({ ...edition, entry_options: [{ ...option, closes_at: "2000-01-01" }] }),
@@ -167,6 +171,44 @@ try {
   assert.equal((await list())[0].next_entry_url, "https://example.com/5k");
   await db.exec("update edition_entry_options set status = 'sold_out' where edition_id = 900001");
   assert.equal((await list())[0].next_entry_url, null, "Sold-out entries cannot appear open");
+  // Exercise actual catalogue SQL: stored holiday dates and local venue times
+  // must survive the UK filter; cancelled and absent dates cannot become open.
+  await db.exec(`
+    insert into events(id,slug,name,sport,country,city) values
+      (900010,'fixture-parkrun-scotland','Scottish fixture parkrun','Parkrun','Scotland','Fixture'),
+      (900011,'fixture-parkrun-england','English fixture parkrun','Parkrun','England','Fixture'),
+      (900012,'fixture-parkrun-wales','Welsh fixture parkrun','Parkrun','Wales','Fixture'),
+      (900013,'fixture-parkrun-ni','Northern Irish fixture junior parkrun','Parkrun','Northern Ireland','Fixture');
+    insert into event_distances(event_id,distance_code) values
+      (900010,'5K'),(900011,'5K'),(900012,'5K'),(900013,'2K');
+    insert into editions(event_id,event_date,distance_code,distance_km,start_time,status) values
+      (900010,'2099-12-25','5K',5,'09:30','Open'),
+      (900010,'2099-12-26','5K',5,'09:30','Cancelled'),
+      (900010,'2100-01-02','5K',5,'09:30','Open'),
+      (900011,'2099-12-25','5K',5,'09:00','Open'),
+      (900012,'2099-12-25','5K',5,'09:00','Open'),
+      (900013,'2099-12-27','2K',2,'09:30','Open');
+  `);
+  const ukFilters = { requestedSport: "Parkrun", country: "United Kingdom" };
+  const ukVenues = await list(ukFilters);
+  assert.equal(ukVenues.length, 4, "UK includes all four home nations");
+  const scottish = ukVenues.find((row) => row.country === "Scotland");
+  assert.equal(scottish.next_date, "2099-12-25", "A Friday holiday can be the next parkrun");
+  assert.equal(scottish.next_start_time, "09:30", "Use the stored venue time");
+  assert.equal(scottish.upcoming_count, 2, "Cancelled occurrences are not upcoming runs");
+  assert.equal(
+    (await list({ ...ukFilters, dateFrom: "2099-12-26", dateTo: "2099-12-26" })).length,
+    0,
+  );
+  assert.equal(
+    (await list({ ...ukFilters, dateFrom: "2100-01-09", dateTo: "2100-01-09" })).length,
+    0,
+    "Do not invent a weekly occurrence where the database has none",
+  );
+  assert.equal((await list({ ...ukFilters, country: "Scotland" })).length, 1);
+  await db.exec(
+    "delete from editions where event_id between 900010 and 900013; delete from event_distances where event_id between 900010 and 900013; delete from events where id between 900010 and 900013;",
+  );
   // A shared materialized edition set turns each per-event lookup into a full
   // catalogue scan. Exercise enough rows to inspect the actual indexed plan.
   await db.exec(`

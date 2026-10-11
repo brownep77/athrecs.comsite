@@ -1,3 +1,7 @@
+import {
+  isIndexableAthletePage,
+  PRIVATE_ATHLETE_ROBOTS,
+} from "../src/lib/athrecs/athlete-search-policy.ts";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -73,7 +77,9 @@ assert.match(card.replace(/\s+/g, " "), /never includes your email, postcode, ph
 assert.match(profileRoute, /ShareProfileCard/);
 assert.match(athleteRoute, /getPublishedSharedProfile/);
 assert.match(athleteRoute, /ShareProfileButton/);
-assert.match(athleteRoute, /noindex, nofollow, noarchive/);
+assert.match(athleteRoute, /PRIVATE_ATHLETE_ROBOTS/);
+assert.equal(PRIVATE_ATHLETE_ROBOTS, "noindex, nofollow, noarchive");
+assert.equal(isIndexableAthletePage({ kind: "shared-account", searchIndexable: true }), false);
 assert.match(privacy, /shareable profile/);
 
 assert.equal(

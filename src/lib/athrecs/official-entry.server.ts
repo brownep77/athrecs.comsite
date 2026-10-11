@@ -54,7 +54,7 @@ export async function getVerifiedOfficialEntryUrl(
             and not (next_edition.id = any(${excludedEditionIds}::int[]))
           ))
       )
-      and edition.status not in ('Closed', 'Finished')
+      and edition.status not in ('Closed', 'Finished', 'Cancelled')
       and option.entry_type = 'official'
       and option.is_verified
       and option.status in ('open', 'closing_soon', 'ballot', 'waitlist', 'unknown')

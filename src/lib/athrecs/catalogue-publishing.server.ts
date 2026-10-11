@@ -25,7 +25,7 @@ const SPORTS = new Set([
   "Walking",
 ]);
 
-const EDITION_STATUSES = new Set(["Open", "ClosingSoon", "Closed", "Finished", "TBC"]);
+const EDITION_STATUSES = new Set(["Open", "ClosingSoon", "Closed", "Finished", "Cancelled", "TBC"]);
 const ENTRY_TYPES = new Set(["official", "third_party", "charity", "tour_operator"]);
 const ENTRY_STATUSES = new Set([
   "open",

@@ -1,7 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { countryGuide } from "@/data/road-marathons/countries";
-import { roadMarathonsForCountry } from "@/data/road-marathons";
 import { CountryMarathonPage } from "@/components/running/RoadMarathonPages";
 import { countryMarathonHead } from "@/lib/running/road-marathon-seo";
 
@@ -9,9 +8,9 @@ export const Route = createFileRoute("/running/uk-marathons")({
   beforeLoad: () => {
     if (IS_RUNRECS_SITE) throw notFound();
   },
-  loader: () => ({
+  loader: async () => ({
     country: countryGuide("uk")!,
-    races: roadMarathonsForCountry("uk"),
+    races: (await import("@/data/road-marathons")).roadMarathonsForCountry("uk"),
     now: new Date().toISOString(),
   }),
   staleTime: 0,

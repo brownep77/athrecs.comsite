@@ -147,7 +147,9 @@ function optionsForEdition(edition: EditionWithEntryOptions): CatalogueEntryOpti
           ? "open"
           : edition.status === "ClosingSoon"
             ? "closing_soon"
-            : edition.status === "Closed" || edition.status === "Finished"
+            : edition.status === "Closed" ||
+                edition.status === "Finished" ||
+                edition.status === "Cancelled"
               ? "closed"
               : "unknown",
       checkedAt: new Date(0).toISOString(),

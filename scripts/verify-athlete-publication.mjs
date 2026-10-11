@@ -33,6 +33,8 @@ try {
     insert into athlete_identifiers values (999, null, 'owner');
     create table athlete_account_links (athlete_id integer, user_id text, status text);
     insert into athlete_account_links values (5,'owner','active');
+    create table source_history_claim_results (id integer primary key, provider text, external_id text, source_key text);
+    create table athlete_profile_hidden_source_results (user_id text, source_result_id integer);
     create table athlete_public_shares (user_id text, enabled boolean, share_results boolean);
     create table results (id integer primary key, athlete_id integer, result_visibility text);
     insert into results select id, id, 'private' from athletes;

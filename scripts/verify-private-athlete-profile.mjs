@@ -1,3 +1,7 @@
+import {
+  isIndexableAthletePage,
+  PRIVATE_ATHLETE_ROBOTS,
+} from "../src/lib/athrecs/athlete-search-policy.ts";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
@@ -32,7 +36,9 @@ assert.doesNotMatch(privateFn, /date_of_birth|postcode|bio|email|previous_names|
 
 assert.match(route, /kind: "private-athlete"/);
 assert.match(route, /This athlete profile is private/);
-assert.match(route, /noindex, nofollow, noarchive/);
+assert.match(route, /PRIVATE_ATHLETE_ROBOTS/);
+assert.equal(PRIVATE_ATHLETE_ROBOTS, "noindex, nofollow, noarchive");
+assert.equal(isIndexableAthletePage({ kind: "private-athlete", searchIndexable: true }), false);
 assert.match(api, /parseProfileRoles/);
 assert.match(route, /getPrivateAthleteBySlug/);
 assert.match(route, /throw notFound\(\)/);

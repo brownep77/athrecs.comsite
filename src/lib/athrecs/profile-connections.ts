@@ -48,7 +48,7 @@ export function validateProfileConnection(value: ProfileConnection): ProfileConn
 }
 
 export type SourceIdentity = {
-  provider: "worldathletics" | "powerof10" | "parkrun" | "athleticsurn";
+  provider: "worldathletics" | "powerof10" | "parkrun" | "athleticsurn" | "anzrankings";
   externalId: string;
 };
 
@@ -58,6 +58,10 @@ export function sourceIdentityFromUrl(value: string | null | undefined): SourceI
     const url = new URL(value);
     if (!["https:", "http:"].includes(url.protocol) || url.username || url.password) return null;
     const host = url.hostname.toLowerCase().replace(/^www\./, "");
+    if (host === "anzrankings.org.nz" && !url.port && !/[%\\]/.test(url.pathname)) {
+      const id = url.pathname.match(/^\/site\/profiles_con\/athlete\/([1-9]\d{0,10})\/?$/)?.[1];
+      return id ? { provider: "anzrankings", externalId: id } : null;
+    }
     if (host === "worldathletics.org" && url.pathname.startsWith("/athletes/")) {
       const id = url.pathname.match(/-(\d+)\/?$/)?.[1];
       return id ? { provider: "worldathletics", externalId: id } : null;

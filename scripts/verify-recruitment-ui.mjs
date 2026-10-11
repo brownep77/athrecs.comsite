@@ -147,7 +147,8 @@ try {
     assert.equal(await personalBests.getByText("59:07", { exact: true }).count(), 0);
     await personalBests.getByText("27:44", { exact: true }).waitFor();
     await personalBests.getByText("2:05:11", { exact: true }).waitFor();
-    await page.getByRole("heading", { name: "Results history 52", exact: true }).waitFor();
+    await page.getByRole("heading", { name: "Results 52", exact: true }).waitFor();
+    await page.getByText("Achievements & milestones", { exact: true }).click();
     await page
       .getByRole("region", { name: "Achievements board" })
       .getByText("50", { exact: true })
@@ -160,9 +161,10 @@ try {
     );
     assert.equal(await assistedRow.getByLabel("Personal best", { exact: true }).count(), 0);
     await page.getByLabel("Year", { exact: true }).selectOption("");
-    await page.getByText("Show all 52 results", { exact: true }).click();
+    assert.equal(await page.getByText("Show all 52 results", { exact: true }).count(), 0);
+    assert.equal(await page.locator("#results-history table").count(), 1);
+    assert.equal(await page.locator("#results-history tbody tr:visible").count(), 52);
     await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
-    await page.getByText("Show all 52 results", { exact: true }).click();
     await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
     assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
     assert.equal(

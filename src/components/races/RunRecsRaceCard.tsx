@@ -28,7 +28,10 @@ export function RunRecsRaceCard({
   const start = formatStartTime(race.next_start_time, { ...race, date });
   const distances = sanitizeDistances(race.name, race.distances);
   const website = raceLink(race.website);
-  const entry = status !== "Closed" && status !== "Finished" ? raceLink(race.next_entry_url) : null;
+  const entry =
+    status !== "Closed" && status !== "Finished" && status !== "Cancelled"
+      ? raceLink(race.next_entry_url)
+      : null;
   const starts = (race.next_starts ?? []).filter(
     (item, index, all) =>
       all.findIndex((other) => other.distance === item.distance && other.time === item.time) ===

@@ -1,19 +1,20 @@
+import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOverview";
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
+import { PublicAthletePreview } from "@/components/athletes/PublicAthletePreview";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
-import { publicAthleteBio } from "@/lib/athrecs/public-athlete-bio";
+import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
-import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
 import {
   EditorialAthleteOverview,
   EditorialRoadSplits,
 } from "@/components/athletes/EditorialAthleteOverview";
-import { additionalHistoryResults } from "@/lib/athrecs/profile-history-results";
+import { sourceHistorySports } from "@/lib/athrecs/profile-history-results";
 import { CompactResults } from "@/components/athletes/CompactResultsTable";
-import { SourcePerformanceHistory } from "@/components/athletes/SourcePerformanceHistory";
+import { buildProfileTimeline } from "@/lib/athrecs/profile-timeline";
 import { AthleteMediaCoverage } from "@/components/athletes/AthleteMediaCoverage";
 import { UpcomingTable } from "@/components/athletes/UpcomingEvents";
 import { ProfileDetails } from "@/components/athletes/ProfileDetails";
@@ -23,6 +24,7 @@ import {
   getAthleteBySlug,
   getPrivateAthleteBySlug,
   getAdministratorPublishedAthlete,
+  getPublicAthletePreview,
 } from "@/lib/athrecs/api";
 import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
 import { Badge } from "@/components/ui/badge";
@@ -30,21 +32,34 @@ import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
 import { SharedAccountProfile } from "@/components/athletes/SharedAccountProfile";
-import { getPublishedSharedProfile } from "@/lib/athrecs/athlete-profile-share-api";
+import {
+  getPublishedSharedProfile,
+  getPublicSharedProfilePreview,
+} from "@/lib/athrecs/athlete-profile-share-api";
 import { openAthleteAuth } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AthleteId } from "@/components/athletes/AthleteId";
 import { formatAthleteId } from "@/lib/athrecs/athlete-id";
-import { UnverifiedRaceHistory } from "@/components/athletes/UnverifiedRaceHistory";
-import { getReportedRaceHistory } from "@/lib/athrecs/reported-race-history";
+import {
+  ATHLETE_INDEXING_HEADER,
+  INDEXABLE_ATHLETE_ROBOTS,
+  PRIVATE_ATHLETE_ROBOTS,
+  isIndexableAthletePage,
+} from "@/lib/athrecs/athlete-search-policy";
 
 export const Route = createFileRoute("/athletes/$slug")({
-  headers: () => ({
-    "Cache-Control": "private, no-store",
-    Vary: "Cookie, Authorization",
-    "X-Robots-Tag": "noindex, nofollow, noarchive",
-  }),
   loader: async ({ params }) => {
+    const preview =
+      (await getPublicAthletePreview({ data: params.slug })) ??
+      (await getPublicSharedProfilePreview({ data: { slug: params.slug } }));
+    if (preview && preview.slug !== params.slug && preview.searchIndexable) {
+      throw redirect({ to: "/athletes/$slug", params: { slug: preview.slug }, statusCode: 301 });
+    }
+    if (!(await canViewAthleteProfiles())) {
+      return preview
+        ? { kind: "public-preview" as const, preview, searchIndexable: preview.searchIndexable }
+        : { kind: "sign-in" as const };
+    }
     const published = await getAdministratorPublishedAthlete({ data: params.slug });
     if (published) {
       if (published.athlete.slug !== params.slug) {
@@ -54,9 +69,8 @@ export const Route = createFileRoute("/athletes/$slug")({
           statusCode: 301,
         });
       }
-      return { kind: "published-history" as const, ...published };
+      return { kind: "published-history" as const, ...published, preview };
     }
-    if (!(await canViewAthleteProfiles())) return { kind: "sign-in" as const };
     const shared = await getPublishedSharedProfile({ data: { slug: params.slug } }).catch(
       () => null,
     );
@@ -64,7 +78,7 @@ export const Route = createFileRoute("/athletes/$slug")({
       if (shared.searchIndexable && shared.slug !== params.slug) {
         throw redirect({ to: "/athletes/$slug", params: { slug: shared.slug }, statusCode: 301 });
       }
-      return { kind: "shared-account" as const, profile: shared };
+      return { kind: "shared-account" as const, profile: shared, preview };
     }
 
     const data = await getAthleteBySlug({ data: params.slug });
@@ -76,7 +90,7 @@ export const Route = createFileRoute("/athletes/$slug")({
           statusCode: 301,
         });
       }
-      return { kind: "catalogue" as const, ...data };
+      return { kind: "catalogue" as const, ...data, preview };
     }
 
     const privateAthlete = await getPrivateAthleteBySlug({ data: params.slug });
@@ -96,25 +110,91 @@ export const Route = createFileRoute("/athletes/$slug")({
     }
     throw notFound();
   },
-  head: ({ params, loaderData }) => ({
-    links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
-    meta: [
-      {
-        title:
-          loaderData?.kind === "published-history"
-            ? `${loaderData.athlete.display_name} | ${SITE_NAME}`
-            : `Athlete profile | ${SITE_NAME}`,
-      },
-      { name: "robots", content: "noindex, nofollow, noarchive" },
-      {
-        name: "description",
-        content:
-          loaderData?.kind === "published-history"
-            ? `Published sporting performances for ${loaderData.athlete.display_name} on ATHRECS.`
-            : "Sign in to view athlete profiles and published results on ATHRECS.",
-      },
-    ],
+  headers: ({ loaderData }) => ({
+    "Cache-Control": "private, no-store",
+    Vary: "Cookie, Authorization",
+    "X-Robots-Tag": isIndexableAthletePage(loaderData)
+      ? INDEXABLE_ATHLETE_ROBOTS
+      : PRIVATE_ATHLETE_ROBOTS,
+    [ATHLETE_INDEXING_HEADER]: isIndexableAthletePage(loaderData) ? "1" : "0",
   }),
+  head: ({ params, loaderData }) => {
+    const preview = loaderData?.kind === "public-preview" ? loaderData.preview : null;
+    const previewTitle = preview
+      ? `${preview.displayName} — ${preview.sports.length ? `${preview.sports.join(" & ")} results & biography` : "Biography & latest results"} | ${SITE_NAME}`
+      : "";
+    const previewBio = preview?.biography.join(" ") ?? "";
+    const previewUrl = preview ? absoluteUrl(`/athletes/${preview.slug}`) : "";
+    const searchContent = preview
+      ? {
+          title: previewTitle,
+          description:
+            previewBio.slice(0, 175) ||
+            `Latest results for ${preview.displayName}. Sign in to view the full profile.`,
+          jsonLd: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": `${previewUrl}#webpage`,
+            url: previewUrl,
+            name: previewTitle,
+            description: previewBio,
+            inLanguage: "en-GB",
+            mainEntity: {
+              "@type": "Person",
+              "@id": `${previewUrl}#athlete`,
+              name: preview.displayName,
+              url: previewUrl,
+              description: previewBio,
+            },
+          },
+        }
+      : loaderData?.kind === "published-history"
+        ? athleteSearchContent(loaderData)
+        : null;
+    return {
+      links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
+      meta: [
+        {
+          title:
+            preview || loaderData?.kind === "published-history"
+              ? searchContent!.title
+              : `Athlete profile | ${SITE_NAME}`,
+        },
+        {
+          name: "robots",
+          content: isIndexableAthletePage(loaderData)
+            ? INDEXABLE_ATHLETE_ROBOTS
+            : PRIVATE_ATHLETE_ROBOTS,
+        },
+        {
+          name: "description",
+          content:
+            preview || loaderData?.kind === "published-history"
+              ? searchContent!.description
+              : "Sign in to view athlete profiles and published results on ATHRECS.",
+        },
+        ...(searchContent
+          ? [
+              { property: "og:title", content: searchContent.title },
+              { property: "og:description", content: searchContent.description },
+              { property: "og:url", content: absoluteUrl(`/athletes/${params.slug}`) },
+              { name: "twitter:card", content: "summary" },
+              { name: "twitter:title", content: searchContent.title },
+              { name: "twitter:description", content: searchContent.description },
+            ]
+          : []),
+      ],
+      scripts:
+        searchContent && isIndexableAthletePage(loaderData)
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify(searchContent.jsonLd).replace(/</g, "\\u003c"),
+              },
+            ]
+          : [],
+    };
+  },
   component: AthletePage,
   notFoundComponent: () => (
     <div className="space-y-4 py-10 text-center">
@@ -211,13 +291,15 @@ function PrivateAthleteProfile({ athlete }: { athlete: { slug: string; displayNa
 function AthletePage() {
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
-  if (data.kind === "published-history") return <AthleteContent />;
+  const preview =
+    "preview" in data && data.preview ? <PublicAthletePreview profile={data.preview} /> : undefined;
   return (
     <ProfileViewer
-      authenticated={data.kind !== "sign-in"}
+      authenticated={data.kind !== "sign-in" && data.kind !== "public-preview"}
       returnTo={`/athletes/${encodeURIComponent(slug)}`}
+      signedOut={preview}
     >
-      <AthleteContent />
+      {data.kind === "public-preview" ? preview : <AthleteContent />}
     </ProfileViewer>
   );
 }
@@ -225,6 +307,7 @@ function AthletePage() {
 function AthleteContent() {
   const data = Route.useLoaderData();
   const { slug } = Route.useParams();
+  if (data.kind === "public-preview") return <PublicAthletePreview profile={data.preview} />;
   if (data.kind === "sign-in")
     return <ProfileSignIn returnTo={`/athletes/${encodeURIComponent(slug)}`} />;
   if (data.kind === "shared-account") {
@@ -234,42 +317,25 @@ function AthleteContent() {
     return <PrivateAthleteProfile athlete={data.athlete} />;
   }
 
-  const { athlete, results, profileResults, upcoming, sourceHistories } = data;
-  const historyResults = additionalHistoryResults(sourceHistories);
-  const otherHistories = sourceHistories
-    .map((history) => ({
-      ...history,
-      performances: history.performances.filter((row) => row.verificationStatus === undefined),
-    }))
-    .filter((history) => history.performances.length > 0);
+  const { athlete, profileResults, upcoming, sourceHistories } = data;
+  const timeline = buildProfileTimeline(profileResults, sourceHistories);
+  const historyResults = timeline.history;
   const profileSports = [
     ...new Set([
       ...profileResults.map((r) => r.sport),
-      ...historyResults.map((r) => r.sport),
+      ...sourceHistorySports(sourceHistories),
       ...upcoming.map((r) => r.sport),
     ]),
   ];
-  const historicalPerformanceCount = sourceHistories.reduce(
-    (total, history) => total + history.performances.length,
-    0,
-  );
-  const reportedHistory = getReportedRaceHistory(athlete.slug);
-  const includedHistory = reportedHistory?.includeInResults ? reportedHistory : undefined;
-  const performanceCount =
-    results.length + (includedHistory?.records.length ?? 0) + historicalPerformanceCount;
+  const reportedHistory = data.editorial.reportedHistory;
+  const includedHistory = reportedHistory ?? undefined;
+  const performanceCount = timeline.count + (includedHistory?.records.length ?? 0);
   const aliases = athlete.aliases ?? [];
-  const career = getEditorialAthleteCareer(athlete.slug);
+  const career = data.editorial.career;
   const profileLinks = athlete.profile_links.filter((link: { label: string; url: string }) =>
     isPublicProfileSource(link.url, link.label),
   );
-  const bio = publicAthleteBio({
-    name: athlete.display_name,
-    sport: profileSports.includes("Athletics") ? "Athletics" : profileResults[0]?.sport,
-    city: athlete.city,
-    country: athlete.country,
-    club: athlete.club,
-    coach: athlete.details.coach,
-  });
+  const bio = athleteSearchContent({ athlete, profileResults, sourceHistories }).bio;
   const dob = formatDob(athlete.date_of_birth);
 
   const isPublicFigure = athlete.profile_type === "Public figure";
@@ -296,7 +362,7 @@ function AthleteContent() {
   if (athlete.notes) detailRows.push({ label: "Notes", value: athlete.notes });
 
   return (
-    <div className="public-athlete-profile space-y-3">
+    <div className="public-athlete-profile space-y-6">
       <Link
         to="/athletes"
         className="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-muted no-underline hover:text-fg"
@@ -305,7 +371,10 @@ function AthleteContent() {
         Athletes
       </Link>
 
-      <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
+      <section
+        id="profile-overview"
+        className="profile-overview space-y-4 rounded-xl border border-border bg-surface p-5 sm:p-6"
+      >
         <p className="text-xs font-medium uppercase tracking-wider text-subtle">
           {isProfessionalAthlete
             ? "Professional athlete profile"
@@ -313,9 +382,18 @@ function AthleteContent() {
               ? "Public figure athlete profile"
               : "Athlete profile"}
         </p>
-        <h1 className="font-display text-2xl font-semibold text-fg">{athlete.display_name}</h1>
+        <h1 className="font-display text-3xl font-semibold text-fg sm:text-4xl">
+          {athlete.display_name}
+        </h1>
         <div className="flex flex-wrap items-center gap-3">
           <AthleteId number={athlete.athlete_number} />
+          <span className="text-xs text-muted">
+            {profileSports.length
+              ? profileSports.length === 1
+                ? "Sport:"
+                : "Sports:"
+              : "Sport not recorded"}
+          </span>
           {profileSports.map((sport) => (
             <Badge key={sport} variant="outline">
               {sport}
@@ -332,20 +410,15 @@ function AthleteContent() {
               {athlete.club}
             </Link>
           </p>
-        ) : (
-          <p className="text-sm text-muted">Unattached</p>
-        )}
+        ) : athlete.club ? (
+          <p className="text-sm text-muted">{athlete.club}</p>
+        ) : null}
         <p className="flex flex-wrap items-center gap-1.5 text-xs text-subtle">
           <MapPin className="h-3.5 w-3.5" />
           {locationLabel}
           {locationCountry ? <CountryFlag country={locationCountry} showName /> : null}
         </p>
-        {!isPublicFigure ? (
-          <ProfileDetails
-            details={athlete.details}
-            nationality={athlete.nationality ?? undefined}
-          />
-        ) : null}
+
         <div className="flex flex-wrap gap-2">
           {athlete.is_claimed ? (
             <Badge className="border-emerald-500/30 bg-emerald-50 text-emerald-900">
@@ -361,16 +434,7 @@ function AthleteContent() {
           <Badge variant="outline">
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
-          <Badge variant="accent">
-            {performanceCount}{" "}
-            {historicalPerformanceCount
-              ? performanceCount === 1
-                ? "performance"
-                : "performances"
-              : includedHistory
-                ? "race and stage entries"
-                : "results"}
-          </Badge>
+          <Badge variant="outline">{performanceCount} recorded performances</Badge>
           {athlete.profile_roles
             ?.filter(
               (role: string) =>
@@ -390,25 +454,6 @@ function AthleteContent() {
                 {paragraph}
               </p>
             ))}
-            <details className="text-xs">
-              <summary className="cursor-pointer text-accent">Biography sources</summary>
-              <ul className="mt-2 space-y-2">
-                {career.biographySources
-                  .filter((source) => isPublicProfileSource(source.url, source.label))
-                  .map((source) => (
-                    <li key={source.url}>
-                      <a
-                        href={source.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent underline underline-offset-2"
-                      >
-                        {source.label} ↗
-                      </a>
-                    </li>
-                  ))}
-              </ul>
-            </details>
           </div>
         ) : (
           <p className="text-sm leading-relaxed text-muted">{bio}</p>
@@ -418,19 +463,22 @@ function AthleteContent() {
             Independent ATHRECS profile. Not athlete-claimed; no endorsement is implied.
           </p>
         ) : null}
-        <ShareProfileButton
-          path={`/athletes/${athlete.slug}`}
-          title={`${athlete.display_name} athlete profile`}
-          compact
-        />
-        {!athlete.is_claimed && athlete.athlete_number ? (
-          <a
-            href={`https://update.athrecs.com/admin/athletes/${formatAthleteId(athlete.athlete_number)}?invite=1`}
-            className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-accent"
-          >
-            Invite to claim <span className="ml-2 text-xs text-muted">Staff sign-in required</span>
-          </a>
-        ) : null}
+        <div className="flex flex-wrap items-center gap-3 border-t border-border pt-4">
+          <ShareProfileButton
+            path={`/athletes/${athlete.slug}`}
+            title={`${athlete.display_name} athlete profile`}
+            compact
+          />
+          {!athlete.is_claimed ? (
+            <Link
+              to="/claim-results"
+              search={{ resultId: profileResults[0]?.resultId }}
+              className="inline-flex min-h-11 items-center rounded-lg border border-border px-3 text-sm font-medium text-accent"
+            >
+              Is this you? Claim profile
+            </Link>
+          ) : null}
+        </div>
         {aliases.length > 0 && (
           <div className="space-y-1.5 border-t border-border pt-3">
             <p className="text-xs font-medium uppercase tracking-wider text-subtle">
@@ -447,58 +495,77 @@ function AthleteContent() {
         )}
       </section>
 
-      <AthleteCareerHighlights slug={athlete.slug} />
+      <nav
+        aria-label="Profile sections"
+        className="profile-section-nav flex flex-wrap gap-1 border-b border-border pb-2"
+      >
+        <a href="#profile-overview">Overview</a>
+        <a href="#profile-achievements">Achievements</a>
+        <a href="#results-history">Results</a>
+        <a href="#profile-about">About & links</a>
+      </nav>
+      <section id="profile-achievements" className="scroll-mt-24 space-y-5">
+        <AthleteCareerHighlights career={career} />
+        <AnzPerformanceOverview
+          histories={sourceHistories}
+          medals={data.anzMedals}
+          coach={data.anzCoach}
+        />
 
-      {(!career || profileResults.length > 0 || includedHistory) &&
-        (!isPublicFigure ||
-          profileResults.length > 0 ||
-          sourceHistories.length > 0 ||
-          includedHistory) && (
-          <ProfileRecordHighlights
-            results={profileResults}
-            reportedBests={includedHistory?.personalBests}
-            sourceHistories={sourceHistories}
-            sourceGender={athlete.gender}
-          />
-        )}
-
-      <section id="results-history" className="space-y-3">
+        {(!career || profileResults.length > 0 || includedHistory) &&
+          (!isPublicFigure ||
+            profileResults.length > 0 ||
+            sourceHistories.length > 0 ||
+            includedHistory) && (
+            <ProfileRecordHighlights
+              compact
+              highlights={career?.achievements.filter(
+                (achievement) => "showOnBoard" in achievement && achievement.showOnBoard === true,
+              )}
+              results={profileResults}
+              reportedBests={includedHistory?.personalBests}
+              sourceHistories={sourceHistories}
+              sourceGender={athlete.gender}
+            />
+          )}
+      </section>
+      <section
+        id="results-history"
+        className="scroll-mt-24 space-y-3 rounded-xl border border-border bg-surface p-4 sm:p-5"
+      >
         <CompactResults
-          results={profileResults}
+          results={timeline.results}
           historyResults={historyResults}
           reportedHistory={includedHistory}
-          claimable
         />
-        {otherHistories.length ? (
-          <details
-            id="performance-history"
-            className="rounded-lg border border-border bg-surface p-3"
-            open
-          >
-            <summary className="cursor-pointer text-sm font-semibold">Performance history</summary>
-            <div className="mt-3">
-              <SourcePerformanceHistory histories={otherHistories} />
-            </div>
-          </details>
-        ) : null}
-        <UnverifiedRaceHistory slug={athlete.slug} />
       </section>
-      <details className="rounded-lg border border-border bg-surface p-3">
-        <summary className="cursor-pointer text-sm font-semibold">
-          Upcoming ({upcoming.length})
-        </summary>
-        <div className="mt-3">
-          <UpcomingTable events={upcoming} />
-        </div>
-      </details>
-      <SuggestProfileEdit slug={athlete.slug} />
-      <details className="rounded-lg border border-border bg-surface p-3">
+      {upcoming.length > 0 ? (
+        <details className="rounded-lg border border-border bg-surface p-4">
+          <summary className="cursor-pointer text-sm font-semibold">
+            Upcoming ({upcoming.length})
+          </summary>
+          <div className="mt-3">
+            <UpcomingTable events={upcoming} />
+          </div>
+        </details>
+      ) : null}
+      <details
+        id="profile-about"
+        className="scroll-mt-24 rounded-xl border border-border bg-surface p-4 sm:p-5"
+      >
         <summary className="cursor-pointer text-sm font-semibold">
           More about {athlete.display_name}
         </summary>
-        <div className="mt-3 space-y-3">
-          <EditorialAthleteOverview slug={athlete.slug} />
-          <EditorialRoadSplits slug={athlete.slug} />
+        <div className="mt-4 space-y-4">
+          {!isPublicFigure ? (
+            <ProfileDetails
+              details={athlete.details}
+              nationality={athlete.nationality ?? undefined}
+              nationalitySource={athlete.nationality_source}
+            />
+          ) : null}
+          <EditorialAthleteOverview overview={data.editorial.overview} />
+          <EditorialRoadSplits overview={data.editorial.overview} />
           <AthleteMediaCoverage slug={athlete.slug} />
           {profileLinks.length > 0 && (
             <section className="space-y-2 rounded-xl border border-border bg-surface p-4">
@@ -572,6 +639,15 @@ function AthleteContent() {
             </section>
           )}
         </div>
+        <SuggestProfileEdit slug={athlete.slug} />
+        {!athlete.is_claimed && athlete.athlete_number ? (
+          <a
+            href={`https://update.athrecs.com/admin/athletes/${formatAthleteId(athlete.athlete_number)}?invite=1`}
+            className="mt-3 inline-flex min-h-11 items-center text-sm text-muted underline"
+          >
+            Staff: invite to claim
+          </a>
+        ) : null}
       </details>
     </div>
   );

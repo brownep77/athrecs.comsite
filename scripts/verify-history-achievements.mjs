@@ -3,7 +3,10 @@ import { buildProfileAchievements } from "../src/lib/athrecs/profile-achievement
 import {
   historyResultCountry,
   isCompletedHistoryResult,
+  isTrailHistoryResult,
+  isCrossCountryHistoryResult,
   profileAchievementResults,
+  sourceHistorySports,
 } from "../src/lib/athrecs/profile-history-results.ts";
 import { historyPerformanceSchema } from "../src/lib/athrecs/source-performance-history.ts";
 
@@ -28,6 +31,25 @@ const row = (extra = {}) => ({
 const history = (rows) => [
   { provider: "Test additions", externalId: "synthetic", performances: rows },
 ];
+const trailRow = row({ labels: ["Trail running", "Finished"] });
+assert.equal(isTrailHistoryResult(trailRow), true);
+assert.equal(isTrailHistoryResult(row()), false);
+assert.equal(profileAchievementResults([], history([trailRow]))[0].surface, "Trail");
+assert.equal(profileAchievementResults([], history([row()]))[0].surface, "Road");
+for (const extra of [
+  { discipline: "5km XC" },
+  { discipline: "Cross-country relay leg" },
+  { discipline: "10km", labels: ["Cross country"] },
+]) {
+  const xc = row(extra);
+  assert.equal(isCrossCountryHistoryResult(xc), true);
+  assert.equal(profileAchievementResults([], history([xc]))[0].surface, "Cross Country");
+}
+assert.deepEqual(sourceHistorySports(history([row({ discipline: "5km XC" })])), ["Running"]);
+assert.equal(isCrossCountryHistoryResult(row({ discipline: "5000m" })), false);
+assert.deepEqual(sourceHistorySports(history([row({ discipline: "5km road relay leg" })])), [
+  "Running",
+]);
 const board = (rows, recorded = []) =>
   buildProfileAchievements(profileAchievementResults(recorded, history(rows)), today);
 assert.equal(historyResultCountry(row()), "United Kingdom");
@@ -106,6 +128,16 @@ const roadAndTrack = board([
   row({ discipline: "Long Jump", performance: "4.64", meeting: "Synthetic athletics meet" }),
 ]);
 assert.deepEqual(roadAndTrack.sports, ["Athletics", "Running"]);
+const multisportRows = [
+  row({ discipline: "Triathlon — middle distance" }),
+  row({ discipline: "5 km run leg — sprint triathlon" }),
+  row({ discipline: "‘Brick’ Duathlon" }),
+];
+assert.deepEqual(sourceHistorySports(history(multisportRows)), ["Triathlon", "Duathlon"]);
+assert(
+  profileAchievementResults([], history(multisportRows)).every((r) => r.surface === ""),
+  "A multisport source label must not invent a track surface",
+);
 assert.equal(
   roadAndTrack.finishes[1].finishTimeSeconds,
   null,

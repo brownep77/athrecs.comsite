@@ -14,6 +14,7 @@ export type ReportedPersonalBest = {
   date: string;
   note: string;
   sources: readonly { label: string; url: string }[];
+  hasSourceEvidence?: boolean;
 };
 
 /** Explicitly opted-in reported PBs compete with recorded PBs; verification is not implied. */
@@ -32,7 +33,7 @@ export function selectProfilePersonalBests(
       !Number.isFinite(value.finishTimeSeconds) ||
       value.finishTimeSeconds <= 0 ||
       value.distanceKm <= 0 ||
-      !value.sources.length
+      !(value.sources.length || value.hasSourceEvidence)
     )
       continue;
     const key = personalBestGroup(value);

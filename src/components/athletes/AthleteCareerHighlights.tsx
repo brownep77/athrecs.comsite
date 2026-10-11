@@ -1,10 +1,19 @@
 import { Award } from "lucide-react";
-import { getEditorialAthleteCareer } from "@/data/freddy-richardson";
-import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
+import type { ProfileEditorial } from "@/lib/athrecs/profile-editorial.server";
+import { careerAward, careerTier } from "@/lib/athrecs/profile-awards";
+import { COMPETITION_TIERS } from "@/lib/athrecs/competition-awards";
+import { ProfileAward } from "./ProfileAward";
+import { achievementPalette } from "@/lib/athrecs/achievement-colours";
 
-export function AthleteCareerHighlights({ slug }: { slug: string }) {
-  const career = getEditorialAthleteCareer(slug);
+export function AthleteCareerHighlights({
+  career,
+  showEvidence = false,
+}: {
+  career: ProfileEditorial["career"];
+  showEvidence?: boolean;
+}) {
   if (!career) return null;
+  const colours = achievementPalette(career.achievements.map(({ id }) => `career:${id}`));
 
   return (
     <section
@@ -20,19 +29,34 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
       </h2>
       <div className="grid gap-3 sm:grid-cols-2">
         {career.achievements.map((achievement) => {
-          const sources = achievement.sources.filter((source) =>
-            isPublicProfileSource(source.url, source.label),
-          );
+          const sources = achievement.sources;
           return (
-            <article key={achievement.id} className="space-y-2 rounded-lg border border-border p-3">
-              <h3 className="text-sm font-semibold">{achievement.title}</h3>
+            <article
+              key={achievement.id}
+              style={colours.get(`career:${achievement.id}`)}
+              className="achievement-label space-y-2 rounded-lg border p-3"
+            >
+              <h3 className="flex items-center gap-2 text-sm font-semibold">
+                <ProfileAward
+                  kind={careerAward(achievement)}
+                  tier={careerTier(achievement)}
+                  label={achievement.title}
+                  decorative
+                />
+                {achievement.title}
+              </h3>
+              {careerTier(achievement) !== "race" ? (
+                <p className="text-[10px] font-semibold uppercase tracking-wide text-muted">
+                  {COMPETITION_TIERS[careerTier(achievement)].label}
+                </p>
+              ) : null}
               <p className="text-xs text-muted">{achievement.date}</p>
               <ul className="space-y-1 text-sm tabular-nums">
                 {achievement.outcomes.map((outcome) => (
                   <li key={outcome}>{outcome}</li>
                 ))}
               </ul>
-              {sources.length > 0 && (
+              {showEvidence && sources.length > 0 && (
                 <details className="text-xs">
                   <summary className="cursor-pointer text-accent">Sources</summary>
                   <ul className="mt-2 space-y-2">
@@ -55,38 +79,39 @@ export function AthleteCareerHighlights({ slug }: { slug: string }) {
           );
         })}
       </div>
-      <div className="space-y-3 border-t border-border pt-4">
-        <h3 className="font-display font-semibold">Reported major race results</h3>
-        <p className="text-xs text-muted">
-          These results remain outside verified achievements and personal-best calculations.
-        </p>
-        <div className="space-y-3">
-          {career.reportedHighlights.map((race) => (
-            <article key={race.id} className="space-y-1 border-l-2 border-border pl-3">
-              <h4 className="text-sm font-semibold">{race.title}</h4>
-              <p className="text-xs text-muted">{race.date}</p>
-              {race.outcomes.map((outcome) => (
-                <p key={outcome} className="text-sm text-muted">
-                  {outcome}
-                </p>
-              ))}
-              {race.sources
-                .filter((source) => isPublicProfileSource(source.url, source.label))
-                .map((source) => (
-                  <a
-                    key={source.url}
-                    href={source.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block text-xs text-accent underline underline-offset-2"
-                  >
-                    {source.label} ↗
-                  </a>
+      {career.reportedHighlights.length > 0 ? (
+        <div className="space-y-3 border-t border-border pt-4">
+          <h3 className="font-display font-semibold">Reported major race results</h3>
+          <p className="text-xs text-muted">
+            These results remain outside verified achievements and personal-best calculations.
+          </p>
+          <div className="space-y-3">
+            {career.reportedHighlights.map((race) => (
+              <article key={race.id} className="space-y-1 border-l-2 border-border pl-3">
+                <h4 className="text-sm font-semibold">{race.title}</h4>
+                <p className="text-xs text-muted">{race.date}</p>
+                {race.outcomes.map((outcome) => (
+                  <p key={outcome} className="text-sm text-muted">
+                    {outcome}
+                  </p>
                 ))}
-            </article>
-          ))}
+                {showEvidence &&
+                  race.sources.map((source) => (
+                    <a
+                      key={source.url}
+                      href={source.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-xs text-accent underline underline-offset-2"
+                    >
+                      {source.label} ↗
+                    </a>
+                  ))}
+              </article>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
     </section>
   );
 }
