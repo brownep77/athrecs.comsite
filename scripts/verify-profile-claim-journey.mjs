@@ -104,7 +104,11 @@ try {
   await page.getByLabel("Full racing name").fill("Journey Test Runner");
   await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
   await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).waitFor();
-  await page.getByText(/Recorded club: Journey Harriers/).waitFor();
+  await page
+    .getByRole("listitem")
+    .filter({ hasText: "Synthetic Run Norwich 2026" })
+    .getByText(/Recorded club: Journey Harriers/)
+    .waitFor();
   await page.getByText(/Age at race: 42/).waitFor();
   await page.goto(`${origin}/athlete-account?section=potential`, { waitUntil: "networkidle" });
   await page.getByText("Synthetic Run Norwich 2026", { exact: true }).waitFor();
@@ -118,18 +122,27 @@ try {
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
   await page.getByRole("link", { name: "Finish my profile claim", exact: true }).click();
   assert(new URL(page.url()).searchParams.get("resultId") === String(sourceId));
-  await page.getByRole("button",{name:/Remove Synthetic Run Norwich 2020 Virtual/}).click();
-  assert.equal((await sql`select * from athlete_profile_hidden_source_results where user_id=${plain.user.id}`).length,0,"Removal stays in the draft until confirmation");
-  await page.getByRole("button",{name:"Add a missing result",exact:true}).click();
-  await page.getByLabel("Race name",{exact:true}).fill("Synthetic Added 10K");
-  await page.getByLabel("Race date",{exact:true}).fill("2025-05-04");
-  await page.getByLabel("Distance (e.g. 10K)",{exact:true}).fill("10K");
-  await page.getByLabel("Finish time (HH:MM:SS or MM:SS)",{exact:true}).fill("42:12");
-  await page.getByLabel("Results page link",{exact:true}).fill("https://example.test/added");
-  await page.getByLabel("Time type",{exact:true}).selectOption("chip");
-  await page.getByRole("button",{name:"Add to my confirmation",exact:true}).click();
-  assert.equal((await sql`select * from athlete_result_proposals where submitted_by=${plain.user.id}`).length,0,"Adding stays in the draft until confirmation");
-  await page.getByRole("button", {name:"Confirm my 2 selected results",exact:true}).click();
+  await page.getByRole("button", { name: /Remove Synthetic Run Norwich 2020 Virtual/ }).click();
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_source_results where user_id=${plain.user.id}`)
+      .length,
+    0,
+    "Removal stays in the draft until confirmation",
+  );
+  await page.getByRole("button", { name: "Add a missing result", exact: true }).click();
+  await page.getByLabel("Race name", { exact: true }).fill("Synthetic Added 10K");
+  await page.getByLabel("Race date", { exact: true }).fill("2025-05-04");
+  await page.getByLabel("Distance (e.g. 10K)", { exact: true }).fill("10K");
+  await page.getByLabel("Finish time (HH:MM:SS or MM:SS)", { exact: true }).fill("42:12");
+  await page.getByLabel("Results page link", { exact: true }).fill("https://example.test/added");
+  await page.getByLabel("Time type", { exact: true }).selectOption("chip");
+  await page.getByRole("button", { name: "Add to my confirmation", exact: true }).click();
+  assert.equal(
+    (await sql`select * from athlete_result_proposals where submitted_by=${plain.user.id}`).length,
+    0,
+    "Adding stays in the draft until confirmation",
+  );
+  await page.getByRole("button", { name: "Confirm my 2 selected results", exact: true }).click();
   await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
   const [claim] =
     await sql`select status from result_claims where claimant_user_id=${plain.user.id}`;
@@ -140,10 +153,21 @@ try {
   );
   await page.reload({ waitUntil: "networkidle" });
   await page.getByText(/Previous review saved/).waitFor();
-  await page.getByRole("button",{name:/Restore Synthetic Run Norwich 2020 Virtual/}).waitFor();
-  assert.equal((await sql`select * from athlete_profile_hidden_source_results where user_id=${plain.user.id}`).length,1);
-  assert.equal((await sql`select * from athlete_result_proposals where submitted_by=${plain.user.id}`).length,1);
-  assert.equal((await sql`select * from athlete_profile_result_confirmations where user_id=${plain.user.id}`).length,1);
+  await page.getByRole("button", { name: /Restore Synthetic Run Norwich 2020 Virtual/ }).waitFor();
+  assert.equal(
+    (await sql`select * from athlete_profile_hidden_source_results where user_id=${plain.user.id}`)
+      .length,
+    1,
+  );
+  assert.equal(
+    (await sql`select * from athlete_result_proposals where submitted_by=${plain.user.id}`).length,
+    1,
+  );
+  assert.equal(
+    (await sql`select * from athlete_profile_result_confirmations where user_id=${plain.user.id}`)
+      .length,
+    1,
+  );
   assert.equal(
     await page.getByRole("button", { name: "Confirm my 1 selected results", exact: true }).count(),
     1,
