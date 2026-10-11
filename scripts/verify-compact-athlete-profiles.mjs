@@ -377,6 +377,8 @@ try {
       meeting: "Test meeting",
       sourceUrls: ["https://example.test/track"],
       labels: ["Personal Best"],
+      verificationStatus: "unverified",
+      notes: "Synthetic staff-only research note for the track mark.",
     },
     {
       year: 2025,
@@ -391,6 +393,8 @@ try {
       meeting: "Test meeting",
       sourceUrls: ["https://example.test/track"],
       labels: [],
+      verificationStatus: "source_verified",
+      notes: "Synthetic staff-only research note for the field mark.",
     },
   ];
   await sql`insert into athlete_source_histories
@@ -431,6 +435,11 @@ try {
     "Track precision, field marks, annotations and heat positions survive the database and HTTP transport exactly",
   );
   assert.equal(privateProfile.sourceHistories[0].complete, true);
+  assert(Number.isFinite(Date.parse(privateProfile.sourceHistories[0].capturedAt)));
+  const readStoredArchive = () => sql`select to_jsonb(h) - 'published_at' as evidence
+    from athlete_source_histories h where athlete_id=${privateSource.id}
+    order by provider, external_id`;
+  const storedArchiveBeforePublication = await readStoredArchive();
   assert.deepEqual(privateProfile.results[0].sourceUrls.sort(), [
     "https://example.test/corroboration",
     "https://example.test/result",
@@ -522,10 +531,48 @@ try {
     },
   );
   const publishedSource = await readPrivateSource();
+  // Publication changes visibility, never stored evidence. Browser responses
+  // deliberately redact that evidence under the staff-only profile policy.
+  assert.deepEqual(
+    await readStoredArchive(),
+    storedArchiveBeforePublication,
+    "Publication preserves every stored archive field except its publication timestamp",
+  );
+  assert.deepEqual(
+    (await getStaffProfile(privateId, staff)).sourceHistories,
+    privateProfile.sourceHistories,
+    "Staff HTTP reads retain the exact capture timestamp, source IDs, URLs, notes and performances after publication",
+  );
+  assert.equal(publishedSource.sourceHistories.length, 1);
+  const publicHistory = publishedSource.sourceHistories[0];
+  assert.match(publicHistory.externalId, /^record-\d+$/);
+  const publicTrackKey = publicHistory.performances[0].sourceKeys[0];
+  assert.match(publicTrackKey, /^record-\d+$/);
+  assert.notEqual(publicHistory.externalId, publicTrackKey);
+  // Define the expected boundary independently of withoutProfileEvidence so a
+  // broken sanitizer cannot generate both the actual and expected values.
+  const expectedPublicHistories = [{
+    ...privateProfile.sourceHistories[0],
+    externalId: publicHistory.externalId,
+    sourceUrl: "",
+    capturedAt: "",
+    performances: sourcePerformances.map((performance) => ({
+      ...performance,
+      sourceDate: "",
+      sourceUrls: [],
+      sourceKeys: [publicTrackKey],
+      notes: "",
+    })),
+  }];
   assert.deepEqual(
     publishedSource.sourceHistories,
-    privateProfile.sourceHistories,
-    "Explicit publication preserves the selected archive exactly through the public API",
+    expectedPublicHistories,
+    "Member HTTP reads retain exact sporting values, coverage and verification labels while redacting staff evidence",
+  );
+  assert.deepEqual(
+    (await rpc("api", "getAdministratorPublishedAthlete", "compact-private-directory", other)).sourceHistories,
+    expectedPublicHistories,
+    "The alternative published-profile endpoint applies the same evidence boundary",
   );
   assert.equal(publishedSource.results.length, 1);
   assert.equal(publishedSource.results[0].id, privateResult.id);
@@ -542,6 +589,12 @@ try {
   const [audit] = await sql`select count(*)::int as count from network_audit_log
     where action='athlete.bulk_publish' and entity_id=${String(privateSource.id)}`;
   assert.equal(audit.count, 1, "Repeated publication must not duplicate audit entries");
+  assert.deepEqual(await readStoredArchive(), storedArchiveBeforePublication);
+  assert.deepEqual(
+    (await getStaffProfile(privateId, staff)).sourceHistories,
+    privateProfile.sourceHistories,
+    "Repeated publication and browser reads must not mutate the staff archive",
+  );
 
   await sql`update athletes set profile_visibility='private' where id=${privateSource.id}`;
   assert.equal(

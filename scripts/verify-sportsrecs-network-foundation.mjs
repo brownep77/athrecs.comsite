@@ -189,9 +189,17 @@ const [accountApi, resultMatchApi, resultClaimsApi] = await Promise.all([
   readFile("src/lib/athrecs/result-match-api.ts", "utf8"),
   readFile("src/lib/athrecs/result-claims-api.ts", "utf8"),
 ]);
+const claimSourceMigration = await readFile("migrations/20261011_source_history_claims.sql", "utf8");
+assert(
+  claimSourceMigration.includes("create view athlete_claimable_results as") &&
+    claimSourceMigration.includes("e.sport event_sport"),
+  "The shared claimable-results view must retain the canonical event sport",
+);
 for (const source of [accountApi, resultMatchApi, resultClaimsApi]) {
   assert(
-    source.includes("event.sport as event_sport") && source.includes("sport: row.event_sport"),
+    source.includes("athlete_claimable_results result") &&
+      source.includes("result.event_sport as event_sport") &&
+      source.includes("sport: row.event_sport"),
     "Signed-in result payloads must carry sport for specialist-site filtering",
   );
 }

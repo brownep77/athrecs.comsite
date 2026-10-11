@@ -29,6 +29,8 @@ try {
   await db.exec(`create table "user"(id text primary key,"emailVerified" boolean);insert into "user" values ('staff',true),('owner',true),('stranger',true);
  create table athletes(id int primary key,profile_visibility text,profile_type text);insert into athletes values(1,'public','Athlete'),(2,'private','Athlete');
  create table athlete_account_links(athlete_id int,user_id text,status text);insert into athlete_account_links values(1,'owner','active');
+ create table source_history_claim_results(id integer primary key,provider text,external_id text,source_key text);
+ create table athlete_profile_hidden_source_results(user_id text,source_result_id integer);
  create table athlete_public_shares(user_id text,enabled boolean,share_results boolean);
  create table network_audit_log(id serial,actor_user_id text,action text,entity_type text,entity_id text,before_value jsonb,after_value jsonb,note text);
  create table athlete_result_proposals(id uuid primary key,athlete_id int,revision int,entries jsonb,updated_at timestamptz);
