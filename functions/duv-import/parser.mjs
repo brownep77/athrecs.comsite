@@ -103,7 +103,8 @@ export function parseEvent(rawBuffer,inventory,capturedAt,year=2026,pageUrl=inve
  if(!count)throw Error('unrecognized_source_finisher_count');
  const listedTotal=+count[1];let total=listedTotal;
  const pagination=$('a[href]').toArray().map(a=>new URL($(a).attr('href'),sourceUrl).href).filter(u=>{
-  const p=new URL(u);return p.origin==='https://statistik.d-u-v.org'&&p.pathname==='/getresultevent.php'&&p.searchParams.get('event')===id&&p.searchParams.has('page');
+  const p=new URL(u),page=p.searchParams.get('page');
+  return p.origin==='https://statistik.d-u-v.org'&&p.pathname==='/getresultevent.php'&&p.searchParams.size===2&&p.searchParams.get('event')===id&&/^[1-9]\\d*$/.test(page??'');
  });
  const fullText=clean($.root().text());
  const span=/(\d+) to (\d+) of (\d+) search results/.exec(fullText);
