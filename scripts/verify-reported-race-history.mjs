@@ -73,7 +73,7 @@ try {
   );
   assert.equal((publicRows.match(/id="reported-result-/g) ?? []).length, 28);
   assert(!publicRows.includes("Not verified by chip time"));
-  assert.equal((publicRows.match(/>Reported</g) ?? []).length, 28);
+  assert.equal((publicRows.match(/>Unverified</g) ?? []).length, 28);
   assert(!publicRows.includes('data-label="Source"'));
   assert(!publicRows.includes("Organiser archive"));
   assert(html.includes('data-label="Source"'), "Staff retain the source field");
@@ -118,7 +118,11 @@ try {
       "Source links appear only in the evidence view",
     );
     assert.equal(markup.includes("Results: powerof10"), showEvidence);
-    assert.equal(markup.includes("Wind assisted"), showEvidence, "Internal evidence labels stay staff-only");
+    assert.equal(
+      markup.includes("Wind assisted"),
+      showEvidence,
+      "Internal evidence labels stay staff-only",
+    );
     assert.equal(markup.includes("Next source results"), showEvidence);
   }
   const { countryFlag } = await server.ssrLoadModule("/src/lib/athrecs/country-flags.ts");

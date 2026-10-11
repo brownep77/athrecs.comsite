@@ -22,6 +22,12 @@ import { ResultDisqualification } from "./ResultDisqualification";
 import { ReportedRaceResultRows } from "./ReportedRaceResultRows";
 import type { ReportedRaceHistory, ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 import { selectProfilePersonalBests } from "@/lib/athrecs/reported-personal-bests";
+import {
+  reportedResultYear,
+  reportedResultSport,
+  reportedResultSortDate,
+} from "@/lib/athrecs/profile-result-presentation";
+import { ResultVerificationBadge } from "./ResultVerificationBadge";
 
 const NO_HISTORY_RESULTS: readonly HistoryResult[] = [];
 const NO_REPORTED_RECORDS: readonly ReportedRaceRecord[] = [];
@@ -50,6 +56,17 @@ export function CompactResultsTable({
   claimable?: boolean;
 }) {
   const bestIds = personalBestIds ?? new Set(findPersonalBests(results).map((r) => r.resultId));
+  const rows: (ResultsHistoryEntry | { kind: "reported"; result: ReportedRaceRecord })[] = [
+    ...(entries ?? combineResultsHistory(results, [])),
+    ...reportedRecords.map((result) => ({ kind: "reported" as const, result })),
+  ];
+  const sortDate = (entry: (typeof rows)[number]) =>
+    entry.kind === "reported"
+      ? reportedResultSortDate(entry.result)
+      : entry.kind === "recorded"
+        ? entry.result.eventDate
+        : entry.result.performance.date || String(entry.result.performance.year);
+  rows.sort((a, b) => sortDate(b).localeCompare(sortDate(a)));
   return (
     <div
       className={`${showEvidence ? "" : "profile-table-wrap"} overflow-x-auto rounded-lg border border-border bg-surface`}
@@ -85,7 +102,17 @@ export function CompactResultsTable({
           </tr>
         </thead>
         <tbody role="rowgroup" className="divide-y divide-border">
-          {(entries ?? combineResultsHistory(results, [])).map((entry) => {
+          {rows.map((entry) => {
+            if (entry.kind === "reported")
+              return (
+                <ReportedRaceResultRows
+                  key={entry.result.id}
+                  records={[entry.result]}
+                  bestIds={reportedBestIds}
+                  hasActions={Boolean(action || claimable)}
+                  showEvidence={showEvidence}
+                />
+              );
             if (entry.kind === "history")
               return (
                 <HistoricalResultRow
@@ -170,6 +197,11 @@ export function CompactResultsTable({
                       PB
                     </span>
                   ) : null}
+                  <ResultVerificationBadge
+                    status={result.details?.verificationStatus}
+                    provider={result.resultSource}
+                    conflicting={result.conflicting}
+                  />
                   {showEvidence ? (
                     <span className="block text-xs font-normal text-subtle">
                       {isDisqualified(result)
@@ -232,12 +264,6 @@ export function CompactResultsTable({
               </tr>
             );
           })}
-          <ReportedRaceResultRows
-            records={reportedRecords}
-            bestIds={reportedBestIds}
-            hasActions={Boolean(action || claimable)}
-            showEvidence={showEvidence}
-          />
         </tbody>
       </table>
     </div>
@@ -262,13 +288,12 @@ export function CompactResults({
   const [distance, setDistance] = useState("");
 
   const reportedRecords = reportedHistory?.records ?? NO_REPORTED_RECORDS;
-  const reportYear = (record: ReportedRaceRecord) =>
-    record.reportedDate.match(/^\d{4}\b/)?.[0] ?? "Unknown";
+  const reportYear = reportedResultYear;
   const entries = combineResultsHistory(results, historyResults);
   const sports = [
     ...new Set([
       ...entries.map((r) => r.result.sport),
-      ...(reportedRecords.length ? ["Running"] : []),
+      ...reportedRecords.map(reportedResultSport),
     ]),
   ].sort();
   const years = [
@@ -277,15 +302,16 @@ export function CompactResults({
     .sort()
     .reverse();
   const distances = [
-    ...new Set(
-      entries.map((entry) =>
+    ...new Set([
+      ...entries.map((entry) =>
         profileDisciplineLabel(
           entry.kind === "recorded"
             ? entry.result.distanceCode
             : entry.result.performance.discipline,
         ),
       ),
-    ),
+      ...reportedRecords.map((record) => profileDisciplineLabel(record.distance)),
+    ]),
   ].sort();
   const filtered = entries.filter((entry) => {
     const search =
@@ -312,9 +338,9 @@ export function CompactResults({
   const filteredReports = reportedRecords
     .filter(
       (r) =>
-        (!sport || sport === "Running") &&
+        (!sport || sport === reportedResultSport(r)) &&
         (!year || reportYear(r) === year) &&
-        !distance &&
+        (!distance || profileDisciplineLabel(r.distance) === distance) &&
         (!q || r.event.toLowerCase().includes(q.toLowerCase())),
     )
     .sort((a, b) =>
@@ -333,8 +359,6 @@ export function CompactResults({
       best.kind === "reported" && best.value.recordId ? [best.value.recordId] : [],
     ),
   );
-  const previewSize = 8;
-  const previewReports = Math.max(0, previewSize - filtered.length);
   return (
     <section className="space-y-3" id={reportedHistory ? "race-results" : undefined}>
       <div className="profile-filters flex flex-wrap items-center gap-2">
@@ -377,12 +401,12 @@ export function CompactResults({
       {total ? (
         <CompactResultsTable
           results={results}
-          entries={filtered.slice(0, previewSize)}
+          entries={filtered}
           hasHistory={historyResults.length > 0}
           showEvidence={showEvidence}
           claimable={claimable}
           personalBestIds={bestIds}
-          reportedRecords={filteredReports.slice(0, previewReports)}
+          reportedRecords={filteredReports}
           reportedBestIds={reportedBestIds}
         />
       ) : (
@@ -390,28 +414,6 @@ export function CompactResults({
           No results in this selection.
         </p>
       )}
-      {total > previewSize ? (
-        <details
-          className="rounded-lg border border-border bg-surface p-3"
-          key={`${sport}:${year}:${distance}:${q}`}
-        >
-          <summary className="cursor-pointer text-sm font-semibold text-accent">
-            Show all {total} results
-          </summary>
-          <div className="mt-3">
-            <CompactResultsTable
-              results={results}
-              entries={filtered.slice(previewSize)}
-              hasHistory={historyResults.length > 0}
-              claimable={claimable}
-              showEvidence={showEvidence}
-              personalBestIds={bestIds}
-              reportedRecords={filteredReports.slice(previewReports)}
-              reportedBestIds={reportedBestIds}
-            />
-          </div>
-        </details>
-      ) : null}
     </section>
   );
 }

@@ -161,9 +161,10 @@ try {
     );
     assert.equal(await assistedRow.getByLabel("Personal best", { exact: true }).count(), 0);
     await page.getByLabel("Year", { exact: true }).selectOption("");
-    await page.getByText("Show all 52 results", { exact: true }).click();
+    assert.equal(await page.getByText("Show all 52 results", { exact: true }).count(), 0);
+    assert.equal(await page.locator("#results-history table").count(), 1);
+    assert.equal(await page.locator("#results-history tbody tr:visible").count(), 52);
     await page.getByRole("row").filter({ hasText: "13:30" }).waitFor();
-    await page.getByText("Show all 52 results", { exact: true }).click();
     await page.getByRole("link", { name: "CC0 public-domain dedication", exact: true }).waitFor();
     assert.equal(await page.getByText("Verified athlete", { exact: true }).count(), 0);
     assert.equal(
