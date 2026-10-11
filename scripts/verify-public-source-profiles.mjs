@@ -199,7 +199,11 @@ try {
   assert.doesNotMatch(publicText, /Abbott World Marathon Majors|\bWMM\b/);
   assert.doesNotMatch(publicMarkup, /href="https:\/\/[^"\s]*worldmarathonmajors\.com/);
   assert(publicText.includes("Unverified") && publicText.includes("3:12:34"));
-  assert(publicText.includes("Athlete identity is provisional"));
+  assert(
+    !publicText.includes("Athlete identity is provisional"),
+    "Research notes stay in the staff backend",
+  );
+  assert(!wmmHtml.includes("synthetic-result; athlete synthetic-athlete; bib 17"));
   const { loadPublishedSourceHistories } = await server.ssrLoadModule(
     "/src/lib/athrecs/athlete-publication.server.ts",
   );
@@ -236,7 +240,10 @@ try {
       assert.equal(/Abbott World Marathon Majors|\bWMM\b/.test(visibleText), showEvidence);
       assert.equal(/href="https:\/\/[^"\s]*worldmarathonmajors\.com/.test(markup), showEvidence);
       assert(visibleText.includes("3:12:34") && visibleText.includes("Unverified"));
-      assert(visibleText.includes("Exact race date and chip/gun classification are not supplied"));
+      assert.equal(
+        visibleText.includes("Exact race date and chip/gun classification are not supplied"),
+        showEvidence,
+      );
     }
   }
   const otherCredit = renderToStaticMarkup(
@@ -254,9 +261,9 @@ try {
       hasActions: false,
     }),
   );
-  assert(otherCredit.includes("Synthetic Race Timing"));
-  assert(otherCredit.includes('href="https://example.test/results"'));
-  assert(otherCredit.includes("Details &amp; sources"));
+  assert(!otherCredit.includes("Synthetic Race Timing"));
+  assert(!otherCredit.includes('href="https://example.test/results"'));
+  assert(!otherCredit.includes("Details &amp; sources"));
   assert(wmmHtml.includes("Sport:") && wmmHtml.includes("Running") && wmmHtml.includes("Marathon"));
   const directoryHtml = await (
     await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public&sport=Running")

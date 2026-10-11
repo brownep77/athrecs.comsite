@@ -223,7 +223,7 @@ export function SourcePerformanceHistory({
                   </td>
                   <td role="cell" data-label="Meeting" className="min-w-52 px-3 py-2">
                     {row.meeting}
-                    {row.notes ? (
+                    {showEvidence && row.notes ? (
                       <p className="mt-1 max-w-prose whitespace-normal text-xs text-muted">
                         {row.notes}
                       </p>
