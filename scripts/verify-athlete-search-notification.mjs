@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
-import { notifyAthleteSearch } from "./submit-athlete-indexnow.mjs";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { notifyAthleteSearch, runAthleteSearchBatches } from "./submit-athlete-indexnow.mjs";
 import { ATHLETE_SEARCH_ORIGIN as origin } from "./lib/athlete-search-readiness.mjs";
 
 const profile = `${origin}/athletes/search-test`;
@@ -30,7 +33,8 @@ function fixture(overrides = {}) {
   const fetchImpl = async (url, options = {}) => {
     calls.push({ url, ...options });
     assert(!options.headers?.authorization && !options.headers?.cookie, "No authenticated reads");
-    if (url === "https://api.indexnow.org/indexnow") return response("", "text/plain", 202);
+    if (url === "https://api.indexnow.org/indexnow")
+      return routes[url]?.() ?? response("", "text/plain", 202);
     assert.equal(
       options.redirect,
       "error",
@@ -189,6 +193,145 @@ assert.equal(
 assert.equal(checked, catalogue.length * 2, "Every URL is checked and revalidated");
 assert(peak > 1 && peak <= 12, "Validation concurrency is bounded");
 assert.deepEqual(JSON.parse(paginated.posts()[0].body).urlList, catalogue);
+
+const temporary = await mkdtemp(join(tmpdir(), "athrecs-search-checkpoint-"));
+try {
+  const stateFile = join(temporary, "cursor.json");
+  const secondShard = `${origin}/sitemaps/athletes-2.xml`;
+  const urls = catalogue.slice(0, 7);
+  const batchFixture = (overrides = {}) =>
+    fixture({
+      [`${origin}/sitemap.xml`]: () => response(xml([shard, secondShard], true)),
+      [shard]: () => response(xml(urls.slice(0, 4))),
+      [secondShard]: () => response(xml(urls.slice(4))),
+      ...Object.fromEntries(urls.map((url) => [url, () => response(html(url), "text/html")])),
+      ...overrides,
+    });
+  const options = { key, keyFile, stateFile, batchSize: 2 };
+  const first = batchFixture();
+  assert.equal((await runAthleteSearchBatches({ ...first, ...options })).submitted, 2);
+  assert.deepEqual(JSON.parse(first.posts()[0].body).urlList, urls.slice(0, 2));
+  assert(
+    !first.calls.some((call) => call.url === secondShard),
+    "Do not fetch unselected sitemap shards",
+  );
+  const checkpoint = await readFile(stateFile, "utf8");
+  assert.equal(JSON.parse(checkpoint).afterUrl, urls[1]);
+
+  const preview = batchFixture();
+  const checked = await runAthleteSearchBatches({
+    ...preview,
+    ...options,
+    checkOnly: true,
+    maxBatches: 10,
+  });
+  assert.equal(checked.checked, 2);
+  assert.equal(checked.batches, 1, "Read-only probes stay bounded");
+  assert.equal(preview.posts().length, 0);
+  assert.equal(
+    await readFile(stateFile, "utf8"),
+    checkpoint,
+    "Read-only checks cannot advance state",
+  );
+
+  const failed = batchFixture({
+    "https://api.indexnow.org/indexnow": () => response("Retry", "text/plain", 429),
+  });
+  await assert.rejects(() => runAthleteSearchBatches({ ...failed, ...options }), /HTTP 429/);
+  assert.equal(
+    await readFile(stateFile, "utf8"),
+    checkpoint,
+    "Rejected receipts do not advance state",
+  );
+
+  const privateNow = batchFixture({
+    [urls[2]]: () => response(html(urls[2], "noindex"), "text/html"),
+  });
+  await assert.rejects(
+    () => runAthleteSearchBatches({ ...privateNow, ...options }),
+    /Indexing blocked/,
+  );
+  assert.equal(privateNow.posts().length, 0);
+  assert.equal(
+    await readFile(stateFile, "utf8"),
+    checkpoint,
+    "A restored cursor never grants publication permission",
+  );
+
+  const resumed = batchFixture();
+  const rest = await runAthleteSearchBatches({ ...resumed, ...options, maxBatches: 10 });
+  assert.equal(rest.submitted, 5);
+  assert.equal(rest.cycleComplete, true);
+  assert.deepEqual(
+    resumed.posts().flatMap((call) => JSON.parse(call.body).urlList),
+    urls.slice(2),
+  );
+  const nextPass = JSON.parse(await readFile(stateFile, "utf8"));
+  assert.equal(nextPass.cycle, 2);
+  assert.equal(nextPass.sitemap, shard);
+  assert.equal(
+    nextPass.afterUrl,
+    null,
+    "A completed pass stops instead of repeatedly notifying the first batch",
+  );
+
+  await writeFile(stateFile, checkpoint);
+  const changed = batchFixture({ [shard]: () => response(xml([urls[0], ...urls.slice(2, 4)])) });
+  await runAthleteSearchBatches({ ...changed, ...options });
+  assert.deepEqual(
+    JSON.parse(changed.posts()[0].body).urlList,
+    [urls[0], urls[2]],
+    "A removed anchor safely replays the shard",
+  );
+
+  await rm(stateFile);
+  let receipts = 0;
+  const interrupted = batchFixture({
+    "https://api.indexnow.org/indexnow": () =>
+      response("", "text/plain", ++receipts === 1 ? 202 : 503),
+  });
+  await assert.rejects(
+    () => runAthleteSearchBatches({ ...interrupted, ...options, maxBatches: 10 }),
+    /HTTP 503/,
+  );
+  assert.equal(
+    await readFile(stateFile, "utf8"),
+    checkpoint,
+    "Earlier accepted progress survives a later failure",
+  );
+
+  const timed = batchFixture();
+  const paused = await runAthleteSearchBatches({
+    ...options,
+    maxDurationMs: 5,
+    fetchImpl: async (url, settings) => {
+      await new Promise((resolve) => setTimeout(resolve, 15));
+      settings.signal.throwIfAborted();
+      return timed.fetchImpl(url, settings);
+    },
+  });
+  assert.equal(paused.paused, true);
+  assert.equal(paused.submitted, 0);
+  assert.equal(
+    await readFile(stateFile, "utf8"),
+    checkpoint,
+    "A time budget pause preserves the last accepted batch",
+  );
+  assert.equal(timed.posts().length, 0);
+
+  await writeFile(
+    stateFile,
+    JSON.stringify({ ...nextPass, sitemap: "https://example.test/private.xml" }),
+  );
+  const corrupt = batchFixture();
+  await assert.rejects(
+    () => runAthleteSearchBatches({ ...corrupt, ...options }),
+    /production AthRecs origin/,
+  );
+  assert.equal(corrupt.calls.length, 0, "Invalid checkpoints fail before network access");
+} finally {
+  await rm(temporary, { recursive: true, force: true });
+}
 console.log(
-  `Athlete search notification passed: deliberate no-submission, read-only checks, ${blocked.length} fail-closed cases, withdrawal, deduplication, and validated submission.`,
+  `Athlete search notification passed: ${blocked.length} fail-closed cases, withdrawal, deduplication, bounded shards, resumable batches, failed-receipt recovery and read-only checkpoints.`,
 );
