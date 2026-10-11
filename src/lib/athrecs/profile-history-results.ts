@@ -26,7 +26,8 @@ function historySport(discipline: string, provider?: string): HistoryResult["spo
   // Explicit multisport labels take priority over distances within a race leg.
   if (/\btriathlon\b/i.test(discipline)) return "Triathlon";
   if (/\bduathlon\b/i.test(discipline)) return "Duathlon";
-  if (crossCountryDiscipline.test(discipline)) return "Running";
+  if (crossCountryDiscipline.test(discipline) || /\broad relay\b/i.test(discipline))
+    return "Running";
   // World Athletics uses these unqualified names for track events.
   if (/^(?:mile|2 miles)$/i.test(discipline.trim())) return "Athletics";
   if (/^mile road$/i.test(discipline.trim())) return "Running";
@@ -132,10 +133,9 @@ export function profileAchievementResults(
         eventName: row.meeting,
         eventSlug: row.eventSlug ?? "",
         sport: entry.sport,
-        surface:
-          isCrossCountryHistoryResult(row)
-            ? "Cross Country"
-            : entry.sport === "Running"
+        surface: isCrossCountryHistoryResult(row)
+          ? "Cross Country"
+          : entry.sport === "Running"
             ? isTrailHistoryResult(row)
               ? "Trail"
               : "Road"

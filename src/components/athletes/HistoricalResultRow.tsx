@@ -2,6 +2,7 @@ import {
   historyResultAnchor,
   historyResultCountry,
   isTrailHistoryResult,
+  isCrossCountryHistoryResult,
   type HistoryResult,
 } from "@/lib/athrecs/profile-history-results";
 import { CountryFlag } from "./CountryFlag";
@@ -72,12 +73,12 @@ export function HistoricalResultRow({
         {profileDisciplineLabel(discipline)}
         {row.providerName !== "DUV Ultra Marathon Statistics" ? (
           <span className="block text-[10px] text-subtle">
-            {result.sport === "Running"
-              ? isTrailHistoryResult(row)
-                ? "Trail"
-                : "Road"
-              : /cross country/i.test(row.discipline)
-                ? "Cross country"
+            {isCrossCountryHistoryResult(row)
+              ? "Cross country"
+              : result.sport === "Running"
+                ? isTrailHistoryResult(row)
+                  ? "Trail"
+                  : "Road"
                 : combined
                   ? "Combined events"
                   : field
