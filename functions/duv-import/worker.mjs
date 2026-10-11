@@ -12,6 +12,16 @@ const stable=x=>JSON.stringify(x,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v
 let cache=null;
 export {history,newProfile};
 
+export function classifyWorkerFailure(error){
+ const rawCode=typeof error?.code==='string'?error.code:'';
+ const sqlState=/^[0-9A-Z]{5}$/.test(rawCode)?rawCode:'';
+ const name=String(error?.name??'');
+ const message=String(error?.message??'unknown_error').slice(0,300);
+ const guard=Boolean(sqlState)||/verification|conflict|approval|lease|privacy|insert_count/.test(message);
+ const retry=name==='TimeoutError'||name==='AbortError'||/source_http_5|timeout|fetch failed/i.test(message);
+ return {sqlState,message,guard,retry};
+}
+
 async function directory(client,deadline){
  const version=(await client.query('SELECT version::text FROM result_archive_identity_clock WHERE singleton')).rows[0].version;
  if(cache?.version===version)return cache;
@@ -217,13 +227,12 @@ export async function run(pool,{maxMs=245000,maxEvents=20}={}){
     if(capture.rows.length===0)await client.query(`UPDATE result_archive_import_queue SET status='imported',row_cursor=0,rows_total=0 WHERE job_id=$1 AND source_key=$2`,[JOB,item.source_key]);
     if(item.row_cursor<capture.rows.length)break;processed++;
    }catch(e){
-    const code=String(e.code??''),message=String(e.message??'unknown_error').slice(0,300);
+    const {sqlState,message,guard,retry}=classifyWorkerFailure(e);
     if(message.startsWith('source_access_or_rate_limit_'))break;
     // Never continue after a database or identity-write invariant failure.
-    if(code||/verification|conflict|approval|lease|privacy|insert_count/.test(message)){
-     await client.query(`UPDATE result_archive_import_jobs SET status='blocked',last_error=$2,updated_at=now() WHERE id=$1`,[JOB,'database_or_identity_guard: '+(code||message)]);break;
+    if(guard){
+     await client.query(`UPDATE result_archive_import_jobs SET status='blocked',last_error=$2,updated_at=now() WHERE id=$1`,[JOB,'database_or_identity_guard: '+(sqlState||message)]);break;
     }
-    const retry=/source_http_5|timeout|fetch failed/i.test(message);
     await client.query(`UPDATE result_archive_import_queue SET status=$3,error=$4,attempts=attempts+1,updated_at=now() WHERE job_id=$1 AND source_key=$2`,[JOB,item.source_key,retry?'error':'held',message]);
     if(retry){await client.query(`UPDATE result_archive_import_jobs SET next_request_at=now()+interval '5 minutes' WHERE id=$1`,[JOB]);break;}
     processed++;
