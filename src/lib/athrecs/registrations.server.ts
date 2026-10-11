@@ -130,17 +130,16 @@ export async function loadRegistrations(
       join selected on selected."id"=u."id"
       left join athlete_staff_contacts contact on contact.user_id=u."id"
       cross join lateral (select
-        count(distinct r.edition_id) filter (where c.status not in ('rejected','withdrawn'))::int as races,
+        count(distinct case when r.edition_id > 0 then r.edition_id::text else concat(r.event_name,'|',r.event_date,'|',r.distance_code) end) filter (where c.status not in ('rejected','withdrawn'))::int as races,
         count(*) filter (where c.status='approved')::int as approved,
         count(*) filter (where c.status='pending')::int as pending,
         count(*) filter (where c.status='needs_info')::int as needs_info,
         count(*) filter (where c.status='rejected')::int as rejected,
         count(*) filter (where c.status='withdrawn')::int as withdrawn
-        from result_claims c join results r on r.id=c.result_id where c.claimant_user_id=u."id") claims
+        from result_claims c join athlete_claimable_results r on r.id=c.claim_key where c.claimant_user_id=u."id") claims
       cross join lateral (select count(*)::int as total,
-        coalesce(array_agg(distinct e.sport order by e.sport),array[]::text[]) as sports
-        from athlete_account_links l join results r on r.athlete_id=l.athlete_id
-        join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
+        coalesce(array_agg(distinct r.event_sport order by r.event_sport),array[]::text[]) as sports
+        from athlete_account_links l join athlete_claimable_results r on r.athlete_id=l.athlete_id
         where l.user_id=u."id" and l.status='active'
           and lower(r.status) not in ('dns','did not start')) records
       order by ${order}`,

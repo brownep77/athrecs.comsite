@@ -338,6 +338,7 @@ export function PotentialResultMatchesPanel() {
                     {[
                       placeText(match.overallPlace),
                       match.category,
+                      match.ageAtRace ? `Age at race ${match.ageAtRace}` : "",
                       match.bib ? `Bib ${match.bib}` : "",
                     ]
                       .filter(Boolean)

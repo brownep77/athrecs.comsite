@@ -624,11 +624,11 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
     }>`
         select
           result.id as result_id,
-          edition.id as edition_id,
-          event.surface,
-          event.country as event_country,
-          event.city as event_city,
-          edition.distance_km,
+          result.edition_id as edition_id,
+          result.surface,
+          result.event_country as event_country,
+          result.event_city as event_city,
+          result.distance_km,
           result.status as result_status,
           result.result_details,
           result.result_source,
@@ -636,26 +636,24 @@ async function loadAccount(sql: Awaited<ReturnType<typeof getSql>>, userId: stri
           result.gun_time_seconds,
           array(select distinct link from (
             select result.source_url as link
-            union all select edition.results_official_url
+            union all select edition.results_official_url from editions edition where edition.id = result.edition_id
             union all select reference.source_url from result_source_references reference where reference.result_id = result.id
           ) sources where link like 'https://%') as source_urls,
           athlete.display_name as athlete_name,
-          event.name as event_name,
-          event.slug as event_slug,
-          event.sport as event_sport,
-          edition.event_date::text as event_date,
-          edition.distance_code,
+          result.event_name as event_name,
+          result.event_slug as event_slug,
+          result.event_sport as event_sport,
+          result.event_date as event_date,
+          result.distance_code,
           result.finish_time_seconds,
           result.overall_place, result.gender_place, result.category_place, athlete.gender as result_gender,
           result.category
         from athlete_account_links account_link
         join athletes athlete on athlete.id = account_link.athlete_id
-        join results result on result.athlete_id = athlete.id
-        join editions edition on edition.id = result.edition_id
-        join events event on event.id = edition.event_id
+        join athlete_claimable_results result on result.athlete_id = athlete.id
         where account_link.user_id = ${userId}
-          and account_link.status = 'active'
-        order by edition.event_date desc, event.name, result.id desc
+          and account_link.status = 'active' and result.available
+        order by result.event_date desc, result.event_name, result.id desc
       `,
     sql<{ claim_count: number }>`
         select count(*)::int as claim_count

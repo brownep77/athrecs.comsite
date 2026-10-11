@@ -784,6 +784,156 @@ try {
   console.log(
     "Invitation contention passed: concurrent creation, email reservation and claim submission.",
   );
+  // Source-only Run Norwich profiles use stable foreign-keyed claims, with no
+  // fabricated canonical edition/date and no duplicate public performance.
+  await sql`insert into athletes(id,slug,display_name,profile_visibility,country,county) values
+    (8001,'source-claim-runner','Source Claim Runner','public','',''),
+    (8002,'virtual-claim-runner','Virtual Claim Runner','public','','')`;
+  const sourceRow = {
+    year: 2026,
+    date: "2026-09-06",
+    meeting: "Run Norwich 2026",
+    discipline: "10K",
+    performance: "40:05",
+    place: "25",
+    ageGroup: "M40",
+    labels: ["Club at race: Synthetic Harriers"],
+    places: { overall: 25, gender: 20, category: 3 },
+    verificationStatus: "source_verified",
+    sourceUrls: ["https://example.test/norwich.pdf"],
+    archiveReference: {
+      sourceRow: "RN2026:9001",
+      captureId: 1,
+      original: { Bib: "9001", Age: "42", "Gun Time": "41:01" },
+    },
+  };
+  const virtualRow = {
+    ...sourceRow,
+    year: 2020,
+    date: "",
+    meeting: "Run Norwich 2020 (Virtual)",
+    discipline: "10K Virtual",
+    performance: "00:42:05",
+    verificationStatus: "unverified",
+    dateLabel: "18–24 October 2020 (individual run date not supplied)",
+    archiveReference: { sourceRow: "RN2020:p1:r1", captureId: 2, original: { Age: "36" } },
+  };
+  for (const [athlete, p] of [
+    [8001, sourceRow],
+    [8002, virtualRow],
+  ]) {
+    await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+      values(${athlete},'Run Norwich official results',${String(athlete)},'https://example.test/norwich.pdf',now(),false,${[p.year]},${[p.year]},${JSON.stringify([p])}::jsonb,now())`;
+  }
+  await sql`insert into "user"(id,name,email,"emailVerified") values
+    ('source-claim','Source Claim Runner','source-claim@example.test',true),
+    ('source-rival','Source Claim Runner','source-rival@example.test',true),
+    ('virtual-claim','Virtual Claim Runner','virtual-claim@example.test',true)`;
+  const sourceMatches = (
+    await matches.listMyPotentialResultMatches(undefined, user("source-claim"))
+  ).matches;
+  assert.equal(sourceMatches.length, 1);
+  const sourceId = sourceMatches[0].resultId;
+  assert(sourceId < 0);
+  assert.equal(sourceMatches[0].finishTimeSeconds, 2405, "mm:ss stays minutes, never hours");
+  assert.equal(sourceMatches[0].clubName, "Synthetic Harriers");
+  assert.equal(sourceMatches[0].ageAtRace, "42");
+  const sourceDetail = await claims.getClaimableResult(
+    { resultId: sourceId },
+    user("source-claim"),
+  );
+  assert.equal(sourceDetail.gunTimeSeconds, 2461);
+  assert.equal(sourceDetail.categoryPlace, 3);
+  assert.equal(await claims.getClaimableResult({ resultId: sourceId }, user("unrelated")), null);
+  await assert.rejects(claim("unrelated", sourceId), /not available/);
+  const sourceClaim = await claim("source-claim", sourceId);
+  assert.equal(sourceClaim.status, "pending");
+  assert.equal((await claim("source-claim", sourceId)).claimId, sourceClaim.claimId);
+  const [savedSourceClaim] =
+    await sql`select result_id,source_result_id,source_evidence from result_claims where id=${sourceClaim.claimId}`;
+  assert.equal(savedSourceClaim.result_id, null);
+  assert.equal(savedSourceClaim.source_result_id, -sourceId);
+  assert.deepEqual(savedSourceClaim.source_evidence, sourceRow);
+  const rivalSourceClaim = await claim("source-rival", sourceId);
+  assert.equal(rivalSourceClaim.status, "pending");
+  assert(
+    (await sql`select 1 from result_claim_alerts where claim_id=${rivalSourceClaim.claimId}`)
+      .length,
+  );
+  await claims.reviewResultClaim(
+    {
+      claimId: sourceClaim.claimId,
+      action: "approve",
+      staffNote: "Synthetic independent identity check",
+    },
+    user("one"),
+  );
+  assert.equal(
+    (await sql`select user_id from athlete_account_links where athlete_id=8001`)[0].user_id,
+    "source-claim",
+  );
+  assert.equal(
+    (await claims.listMyResultClaims(undefined, user("source-claim")))[0].resultId,
+    sourceId,
+  );
+  const virtualMatches = (
+    await matches.listMyPotentialResultMatches(undefined, user("virtual-claim"))
+  ).matches;
+  assert.equal(virtualMatches.length, 1);
+  assert.equal(virtualMatches[0].eventDate, virtualRow.dateLabel);
+  const virtualId = virtualMatches[0].resultId;
+  const virtualDetail = await claims.getClaimableResult(
+    { resultId: virtualId },
+    user("virtual-claim"),
+  );
+  assert.equal(virtualDetail.chipTimeSeconds, null);
+  const sourceInvite = await invitations.createExternalInvitation(sql, "one", {
+    athleteId: 8002,
+    recipientName: "Virtual Claim Runner",
+    email: "virtual-claim@example.test",
+    phone: "",
+    telegramUsername: "",
+    socialLinks: [],
+    sourceNote: "Synthetic source profile invitation",
+    matchNote: "Synthetic source profile invitation",
+    reviewed: true,
+  });
+  assert.equal(Number(new URL(sourceInvite.url).searchParams.get("resultId")), virtualId);
+  await claims.submitResultClaim(
+    {
+      resultId: virtualId,
+      invitation: new URL(sourceInvite.url).searchParams.get("invitation"),
+      declarationAccepted: true,
+    },
+    user("virtual-claim"),
+  );
+  await sql`update athlete_source_histories set published_at=published_at where athlete_id in (8001,8002)`;
+  assert.equal(
+    (
+      await sql`select count(*)::int n from source_history_claim_results where athlete_id in (8001,8002)`
+    )[0].n,
+    2,
+    "repeat projection preserves IDs",
+  );
+  assert.equal(
+    (await sql`select count(*)::int n from results where athlete_id in (8001,8002)`)[0].n,
+    0,
+    "claim integration never duplicates canonical results",
+  );
+  assert.deepEqual(
+    (await sql`select performances from athlete_source_histories where athlete_id=8002`)[0]
+      .performances,
+    [virtualRow],
+  );
+  await sql`update athlete_source_histories set published_at=null where athlete_id=8002`;
+  assert.equal(
+    (await matches.listMyPotentialResultMatches(undefined, user("virtual-claim"))).matches.length,
+    0,
+    "unpublished history is not discoverable",
+  );
+  console.log(
+    "Source-history claims passed: dates/windows, club/age/placings, minute precision, authorization, stable IDs, evidence snapshot, invitations, conflict review and no canonical duplicates.",
+  );
   // Validate the real email transport header without network access.
   const transport = load("src/lib/auth/email.server.ts");
   const savedFetch = globalThis.fetch;

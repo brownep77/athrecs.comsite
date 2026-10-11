@@ -423,6 +423,121 @@ try {
     /already linked/,
   );
 
+  // Imported source profiles complete the same real HTTP/auth/approval/account flow.
+  await sql`insert into athletes(id,slug,display_name,profile_visibility) values(991404,'synthetic-source-runner','Synthetic Source Runner','public')`;
+  const sourcePerformances = [
+    {
+      year: 2026,
+      date: "2026-09-06",
+      meeting: "Run Norwich 2026",
+      discipline: "10K",
+      performance: "40:05",
+      place: "25",
+      ageGroup: "M40",
+      labels: ["Club at race: Synthetic Harriers"],
+      places: { overall: 25, gender: 20, category: 3 },
+      verificationStatus: "source_verified",
+      archiveReference: {
+        sourceRow: "RN2026:9001",
+        original: { Bib: "9001", Age: "42", "Gun Time": "41:01" },
+      },
+    },
+    {
+      year: 2020,
+      date: "",
+      dateLabel: "18–24 October 2020",
+      meeting: "Run Norwich 2020 (Virtual)",
+      discipline: "10K Virtual",
+      performance: "41:05",
+      place: "30",
+      verificationStatus: "unverified",
+      archiveReference: { sourceRow: "RN2020:p1:r1", original: { Age: "36" } },
+    },
+  ];
+  for (const p of sourcePerformances)
+    Object.assign(p, {
+      sourceDate: p.date,
+      ageGroup: p.ageGroup ?? "",
+      wind: "",
+      venue: "",
+      labels: p.labels ?? [],
+      sourceUrls: ["https://example.test/norwich.pdf"],
+    });
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at) values(991404,'Run Norwich official results','synthetic-http-source','https://example.test/norwich.pdf',now(),true,array[2020,2026],array[2020,2026],${JSON.stringify(sourcePerformances)}::jsonb,now())`;
+  const [sourceRef] =
+    await sql`select id from athlete_claimable_results where athlete_id=991404 and event_name='Run Norwich 2026'`;
+  const sourceInvitation = await call("createStaffClaimInvitation", {
+    ...input,
+    athleteId: 991404,
+  });
+  const sourceInput = {
+    resultId: sourceRef.id,
+    invitation: new URL(sourceInvitation.url).searchParams.get("invitation"),
+    declarationAccepted: true,
+  };
+  const sourceDetail = await claim("getClaimableResult", sourceInput);
+  assert.equal(sourceDetail.clubName, "Synthetic Harriers");
+  assert.equal(sourceDetail.ageAtRace, "42");
+  const sourceSubmission = await claim("submitResultClaim", sourceInput);
+  await claim(
+    "reviewResultClaim",
+    {
+      claimId: sourceSubmission.claimId,
+      action: "approve",
+      staffNote: "Synthetic independent identity evidence confirmed",
+    },
+    staff.token,
+  );
+  const account = await rpc(
+    "athrecs/athlete-account-api",
+    "getMyAthleteAccount",
+    undefined,
+    athlete.token,
+  );
+  const sourceDashboard = (await read({ q: athlete.email }, staff.token)).accounts[0];
+  assert.equal(sourceDashboard.linkedResults, 4);
+  assert.equal(sourceDashboard.racesClaimed, 2);
+  const sourceAccountResults = account.claimedResults.filter((r) => r.resultId < 0);
+  assert.equal(sourceAccountResults.length, 2);
+  assert.equal(
+    sourceAccountResults.find((r) => r.resultId === sourceRef.id).finishTimeSeconds,
+    2405,
+  );
+  const virtualAccountResult = sourceAccountResults.find((r) => r.eventName.includes("Virtual"));
+  assert.equal(virtualAccountResult.eventDate, "18–24 October 2020");
+  assert.equal(virtualAccountResult.chipTimeSeconds, null);
+  assert.equal(virtualAccountResult.details.verificationStatus, "unverified");
+  const visibility = (name, data, auth = athlete.token) =>
+    rpc("athrecs/athlete-profile-results-api", name, data, auth);
+  await assert.rejects(
+    () => visibility("hideResultFromMyProfile", { resultId: sourceRef.id }, other.token),
+    /not linked/,
+  );
+  await sql`insert into network_audit_log(action,entity_type,entity_id,after_value) values('athlete.history_admin_published','athlete','Run Norwich official results:synthetic-http-source','{"athleteId":991404}'::jsonb)`;
+  const publication = await server.ssrLoadModule("/src/lib/athrecs/athlete-publication.server.ts");
+  assert.equal(
+    (await publication.loadPublishedSourceHistories(sql, 991404))[0].performances.length,
+    2,
+  );
+  await visibility("hideResultFromMyProfile", { resultId: sourceRef.id });
+  assert.equal(
+    (await publication.loadPublishedSourceHistories(sql, 991404))[0].performances.length,
+    1,
+  );
+  assert.equal((await publication.countPublishedSourceResults(sql, [991404])).get(991404), 1);
+  assert((await visibility("getMyProfileResultVisibility")).hiddenResultIds.includes(sourceRef.id));
+  await visibility("restoreResultToMyProfile", { resultId: sourceRef.id });
+  assert.equal(
+    (await publication.loadPublishedSourceHistories(sql, 991404))[0].performances.length,
+    2,
+  );
+  assert(
+    !(await visibility("getMyProfileResultVisibility")).hiddenResultIds.includes(sourceRef.id),
+  );
+  console.log(
+    "Source claim HTTP flow passed: invitation, approval, account results, virtual precision and owner-only hide/restore.",
+  );
+
   const second = await call("createStaffClaimInvitation", {
     ...input,
     userId: other.id,

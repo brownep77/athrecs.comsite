@@ -28,13 +28,11 @@ export function authorizedClaimAlertWorker(request: Request): boolean {
 export async function queueClaimConflict(sql: Sql, claimId?: number): Promise<void> {
   await sql`
     insert into result_claim_alerts (claim_id, summary)
-    select claim.id, athlete.display_name || ' — ' || event.name || ', ' ||
-      edition.event_date::text || ', ' || edition.distance_code
+    select claim.id, athlete.display_name || ' — ' || result.event_name || ', ' ||
+      result.event_date || ', ' || result.distance_code
     from result_claims claim
     join athletes athlete on athlete.id = claim.athlete_id
-    join results result on result.id = claim.result_id
-    join editions edition on edition.id = result.edition_id
-    join events event on event.id = edition.event_id
+    join athlete_claimable_results result on result.id = claim.claim_key
     where (${claimId ?? null}::bigint is null or claim.id = ${claimId ?? null})
       and claim.status in ('pending', 'needs_info')
       and not exists (select 1 from result_claim_alerts alert where alert.claim_id = claim.id)
