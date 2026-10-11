@@ -1,3 +1,4 @@
+import { ProfileResultConfirmation } from "@/components/athletes/ProfileResultConfirmation";
 import { ClaimResultDetails } from "@/components/athletes/ClaimResultDetails";
 import { ClaimRacingName, ProfileClaimSteps } from "@/components/athletes/ProfileClaimGuide";
 import { getMyAthleteAccount } from "@/lib/athrecs/athlete-account-api";
@@ -87,6 +88,7 @@ function statusClass(status: ResultClaimStatus): string {
 function ClaimResultsPage() {
   const { resultId, invitation } = Route.useSearch();
   const [declined, setDeclined] = useState(false);
+  const [reviewRevision, setReviewRevision] = useState(0);
   const { user, isPending: sessionPending } = useCurrentUserState();
   const queryClient = useQueryClient();
   const [evidenceUrl, setEvidenceUrl] = useState("");
@@ -115,8 +117,12 @@ function ClaimResultsPage() {
 
   const result = useQuery({
     queryKey: ["claimable-result", user?.id, resultId, invitation, account.data?.fullName],
+    refetchOnWindowFocus: false,
     gcTime: 0,
-    queryFn: () => getClaimableResult({ data: { resultId: resultId as number, invitation } }),
+    queryFn: () =>
+      getClaimableResult({
+        data: { resultId: resultId as number, invitation, includeReview: true },
+      }),
     enabled: Boolean(user && resultId !== undefined && account.data?.emailVerified),
     retry: false,
   });
@@ -244,11 +250,11 @@ function ClaimResultsPage() {
                     : "Claim your athlete profile"
                   : resultId
                     ? "Finish claiming your athlete profile"
-                    : "Claim your race results"}
+                    : "Claim your athlete profile"}
               </h1>
               <p className="mt-2 text-sm leading-6 text-slate-300">
-                Signing in is the first step. Confirm this profile is yours, then submit your claim
-                for an identity check.
+                Signing in is the first step. You must claim your athlete profile next. Review all
+                your results, then confirm them together with one button.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -389,6 +395,19 @@ function ClaimResultsPage() {
             </Link>
           </Button>
         </section>
+      ) : result.data.review ? (
+        <ProfileResultConfirmation
+          key={`${user.id}:${resultId}:${reviewRevision}`}
+          resultId={resultId}
+          invitation={invitation}
+          athleteName={result.data.athleteName}
+          review={result.data.review}
+          claim={currentClaim}
+          onDecline={invitation && !currentClaim ? () => decline.mutate() : undefined}
+          onReload={() => {
+            void result.refetch().then(() => setReviewRevision((n) => n + 1));
+          }}
+        />
       ) : (
         <section className="overflow-hidden rounded-2xl border border-border bg-surface shadow-card">
           <div className="border-b border-border bg-elevated p-5 md:p-7">

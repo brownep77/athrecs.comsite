@@ -1,3 +1,10 @@
+import { deliverProfileResultReceipts } from "./profile-result-receipts.server";
+import { profileResultReviewInput, type ProfileResultReviewInput } from "./profile-result-review";
+import {
+  loadProfileResultReview,
+  publicReview,
+  saveProfileResultReview,
+} from "./profile-result-review.server";
 import { privateClaimMiddleware } from "./claim-invitations-api";
 import { invitationToken } from "./claim-invitation";
 import { validateInvitation, assertInvitationWrites } from "./claim-invitations.server";
@@ -368,8 +375,9 @@ async function canAccessClaimCandidate(
 
 export const getClaimableResult = createServerFn({ method: "GET" })
   .middleware([privateClaimMiddleware, authMiddleware])
-  .validator((input: { resultId: number; invitation?: string }) => ({
+  .validator((input: { resultId: number; invitation?: string; includeReview?: boolean }) => ({
     resultId: resultIdentifier(input?.resultId),
+    includeReview: input?.includeReview === true,
     invitation: invitationToken.optional().parse(input?.invitation),
   }))
   .handler(async ({ data, context }) => {
@@ -447,7 +455,14 @@ export const getClaimableResult = createServerFn({ method: "GET" })
           clubName: row.club_name,
         });
     if (!allowed) return null;
+    const [account] = await sql<{
+      verified: boolean;
+    }>`select "emailVerified" as verified from "user" where id=${context.userId}`;
+    if (!account?.verified) return null;
     return {
+      review: data.includeReview
+        ? publicReview(await loadProfileResultReview(sql, context.userId, row.athlete_id))
+        : null,
       resultId: row.result_id,
       athleteId: row.athlete_id,
       athleteSlug: row.athlete_slug,
@@ -461,14 +476,14 @@ export const getClaimableResult = createServerFn({ method: "GET" })
       overallPlace: row.overall_place,
       bib: row.bib,
       category: row.category,
-      sourceUrl: row.source_url,
+      sourceUrl: null,
       clubName: row.club_name,
       ageAtRace: row.age_at_race,
       chipTimeSeconds: row.chip_time_seconds,
       gunTimeSeconds: row.gun_time_seconds,
       genderPlace: row.gender_place,
       categoryPlace: row.category_place,
-    } satisfies ClaimableResult;
+    };
   });
 
 export const submitResultClaim = createServerFn({ method: "POST" })
@@ -481,6 +496,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       evidenceUrl2?: string;
       evidenceUrl3?: string;
       declarationAccepted: boolean;
+      review?: ProfileResultReviewInput;
     }) => ({
       resultId: resultIdentifier(input?.resultId),
       invitation: invitationToken.optional().parse(input?.invitation),
@@ -490,6 +506,8 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       evidenceUrl2: optionalHttpsUrl(input?.evidenceUrl2),
       evidenceUrl3: optionalHttpsUrl(input?.evidenceUrl3),
       declarationAccepted: input?.declarationAccepted === true,
+      review:
+        input?.review === undefined ? undefined : profileResultReviewInput.parse(input.review),
     }),
   )
   .handler(async ({ data, context }) => {
@@ -549,7 +567,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
             true,
           )
         : null;
-      if (invitation?.claim_id) {
+      if (invitation?.claim_id && !data.review) {
         const [claim] = await tx<{
           status: ResultClaimStatus;
         }>`select status from result_claims where id=${invitation.claim_id} and claimant_user_id=${context.userId}`;
@@ -561,6 +579,7 @@ export const submitResultClaim = createServerFn({ method: "POST" })
           claimantUserId: context.userId,
           email: null,
           isConflict: false,
+          summary: null,
         };
       }
       const allowed =
@@ -591,10 +610,22 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         limit 1
       `;
       const owner = owners[0];
+      const summary = data.review
+        ? await saveProfileResultReview(tx, context.userId, result.athlete_id, data.review)
+        : null;
+      if (summary && !summary.reused)
+        await tx`update athlete_profile_result_confirmations
+        set email_payload=jsonb_set(email_payload,'{resultId}',to_jsonb(${result.result_id}::integer)) where id=${summary.id}::uuid`;
+      const summaryEmail = {
+        resultId: result.result_id,
+        claimantEmail,
+        athleteName: result.athlete_name,
+      };
       if (owner?.user_id === context.userId) {
         return {
           status: "approved" as const,
           alreadyOwned: true,
+          summary: summary ? { ...summary, ...summaryEmail } : null,
           claimId: null,
           claimantUserId: context.userId,
           email: null,
@@ -609,11 +640,27 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       }>`
         select id, status, reviewed_by_user_id
         from result_claims
-        where claim_key = ${result.result_id} and claimant_user_id = ${context.userId}
+        where (claim_key = ${result.result_id} or (${Boolean(data.review)} and athlete_id=${result.athlete_id} and status in ('pending','needs_info')))
+          and claimant_user_id = ${context.userId}
+        order by (claim_key=${result.result_id}) desc,id
         limit 1
         for update
       `;
 
+      if (summary?.reused) {
+        const [saved] = await tx<{
+          status: ResultClaimStatus;
+        }>`select status from result_claims where id=${summary.claimId} and claimant_user_id=${context.userId}`;
+        return {
+          status: saved?.status ?? existing[0]?.status ?? ("pending" as const),
+          alreadyOwned: false,
+          claimId: summary.claimId,
+          claimantUserId: context.userId,
+          email: null,
+          isConflict: false,
+          summary: { ...summary, ...summaryEmail },
+        };
+      }
       const competing = await tx<{ other_claim_count: number }>`
         select count(distinct claimant_user_id)::int as other_claim_count
         from result_claims
@@ -693,12 +740,15 @@ export const submitResultClaim = createServerFn({ method: "POST" })
         claimId = inserted[0].id;
       }
 
+      if (summary)
+        await tx`update athlete_profile_result_confirmations set claim_id=${claimId} where id=${summary.id}::uuid`;
       if (invitation)
         await tx`update athlete_claim_invitations set claim_id=${claimId},user_id=coalesce(user_id,${context.userId}) where id=${invitation.id}`;
       const isConflict = Boolean(owner) || otherClaimCount > 0;
       if (isConflict) await queueClaimConflict(tx, claimId);
       return {
         status: nextStatus,
+        summary: summary ? { ...summary, ...summaryEmail } : null,
         isConflict,
         alreadyOwned: false,
         claimId,
@@ -715,7 +765,14 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       };
     });
 
-    if (outcome.status === "pending" && outcome.email) {
+    if (outcome.summary) {
+      try {
+        await deliverProfileResultReceipts(sql, outcome.summary.id);
+      } catch {
+        console.error("[claim-email] summary receipt deferred to worker");
+      }
+    }
+    if (outcome.status === "pending" && outcome.email && !outcome.summary) {
       // The durable outbox owns staff conflict emails. Keep the athlete receipt
       // separate and avoid sending a second generic staff notification.
       if (outcome.isConflict) {
@@ -728,7 +785,26 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       await notifyResultClaimSubmitted(outcome.email, !outcome.isConflict);
     }
 
+    if (outcome.summary && !outcome.summary.reused && outcome.email) {
+      if (outcome.isConflict) {
+        try {
+          await deliverClaimConflictAlerts(sql, outcome.claimId);
+        } catch {
+          console.error("[claim-alerts] immediate delivery deferred to the worker");
+        }
+      } else {
+        await notifyResultClaimSubmitted(outcome.email, true, false);
+      }
+    }
     return {
+      confirmation: outcome.summary
+        ? {
+            included: outcome.summary.included,
+            excluded: outcome.summary.excluded,
+            added: outcome.summary.added,
+            reused: outcome.summary.reused,
+          }
+        : null,
       status: outcome.status,
       alreadyOwned: outcome.alreadyOwned,
       claimId: outcome.claimId,

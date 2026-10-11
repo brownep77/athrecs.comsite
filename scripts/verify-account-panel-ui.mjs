@@ -108,12 +108,12 @@ try {
     await page.getByLabel("Display name", { exact: false }).fill("Unsaved sidebar draft");
     await go("Potential races");
     const match = page.getByRole("article").filter({ hasText: "Sidebar Synthetic 10K" });
-    await match.getByRole("button", { name: "Claim this profile", exact: true }).click();
-    const dialog = page.getByRole("alertdialog");
-    await dialog.getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true }).click();
-    await page
-      .getByText("Your claim is with staff for an ownership check.", { exact: true })
-      .waitFor();
+    await match
+      .getByRole("button", { name: "Claim profile & review all results", exact: true })
+      .click();
+    const dialog = page.getByRole("dialog");
+    await dialog.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
+    await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
     assert.deepEqual(
       (await database.query("select status from result_claims where result_id=990001")).rows,
       [{ status: "pending" }],
@@ -123,6 +123,7 @@ try {
         .rows.length,
       0,
     );
+    await dialog.getByRole("button", { name: "Close", exact: true }).click();
     await go("Personal details");
     assert.equal(
       await page.getByLabel("Display name", { exact: false }).inputValue(),

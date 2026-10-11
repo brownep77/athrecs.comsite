@@ -71,7 +71,7 @@ try {
     .getByRole("heading", { name: "Claim Avery Invitation Athlete’s athlete profile", exact: true })
     .waitFor();
   assert.equal(
-    await page.getByRole("heading", { name: "Synthetic Invitation 10K", exact: true }).count(),
+    await page.getByText("Synthetic Invitation 10K", { exact: true }).count(),
     0,
     "Race details require the invited verified account",
   );
@@ -89,7 +89,7 @@ try {
   assert(code, "Real email-code signup delivery is intercepted");
   await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
   await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
-  await page.getByRole("heading", { name: "Synthetic Invitation 10K", exact: true }).waitFor();
+  await page.getByText("Synthetic Invitation 10K", { exact: true }).waitFor();
   assert.equal(
     new URL(page.url()).searchParams.get("invitation"),
     new URL(invitation.url).searchParams.get("invitation"),
@@ -100,7 +100,12 @@ try {
     "993401",
     "Signup preserves the exact profile/result",
   );
-  await page.getByText("Suggested profile: Avery Invitation Athlete", { exact: true }).waitFor();
+  await page
+    .getByRole("heading", {
+      name: "Are these your results, Avery Invitation Athlete?",
+      exact: true,
+    })
+    .waitFor();
   const [user] =
     await sql`select id,"emailVerified" from "user" where email='onboarding-runner@example.test'`;
   assert.equal(user.emailVerified, true);
@@ -109,9 +114,8 @@ try {
     0,
     "Claim does not require a completed private profile",
   );
-  await page.getByRole("checkbox", { name: /This is my profile and the race shown is mine/ }).check();
-  await page.getByRole("button", { name: "Yes, this is me — submit my profile claim", exact: true }).click();
-  await page.getByText("Claim received — awaiting identity review", { exact: true }).waitFor();
+  await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
+  await page.getByText("Profile and results confirmation saved", { exact: true }).waitFor();
   const claims =
     await sql`select status,claimant_user_id from result_claims where result_id=993401`;
   assert.deepEqual(claims, [{ status: "pending", claimant_user_id: user.id }]);
