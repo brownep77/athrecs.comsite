@@ -42,6 +42,15 @@ test('French ere ordinal preserves originals and requires the complete remaining
  for(const edition of ['ère ','1ère','1ère extra ','1ere '])assert.throws(()=>parse(fixture({edition})),/index_metadata_changed/);
 });
 test('timed performance preserves exact distance, never finish time',()=>{const r=parse(fixture()).rows[0];assert.equal(r.performance.achievedDistanceMetres,'45123.000');assert.equal(r.performance.finishTimeSeconds,null);assert.equal(r.original.Performance,'45.123 km');});
+test('an exact detail distance is accepted without weakening distance comparison',()=>{
+ const i={...inv,index:{...inv.index,Distance:'12h'}};
+ const raw=Buffer.from(fixture({distance:'12h'}).toString().replace('<td>12h road race</td>','<td>12h</td>'));
+ const p=parse(raw,i);
+ assert.equal(p.eventMetadata.Distance,'12h');
+ assert.equal(p.index.raw.Distance,'12h');
+ assert.equal(p.audit.metadataComparisons.distance,'exact');
+ for(const distance of ['6h','12km','12h extra'])assert.throws(()=>parse(raw,{...i,index:{...i.index,Distance:distance}}),/index_distance_changed/);
+});
 test('all columns follow headings, even when reordered',()=>{const a=parse(fixture()).rows[0],b=parse(fixture({reorder:true})).rows[0];assert.notEqual(a.sourceDocumentHash,b.sourceDocumentHash);const {sourceDocumentHash:ah,...av}=a,{sourceDocumentHash:bh,...bv}=b;assert.deepEqual(av,bv);});
 test('explicit edition prefix is retained without index rejection',()=>assert.equal(parse(fixture({edition:'99th '})).index.name,'99th Synthetic race (GBR)'));
 test('international detail prefixes preserve the full original title',()=>{for(const edition of ['2^ ','9 ','12 ','14 . ','9a ','2ème ']){const p=parse(fixture({edition}));assert.equal(p.index.name,edition+'Synthetic race (GBR)');assert.equal(p.audit.metadataComparisons.eventName,'detail_numeric_prefix');}});
