@@ -341,8 +341,11 @@ try {
   assert(html.includes("Synthetic DUV Public"));
   assert(!html.includes("Unpublished test biography"));
   assert(html.includes("Antigua &amp; Barbuda"));
-  assert(html.includes("As listed by"));
-  assert(html.includes("runner=999999999"));
+  assert(!html.includes("As listed by"), "Nationality credits remain in staff evidence");
+  assert(
+    !html.includes("runner=999999999"),
+    "Private source URLs are absent from HTML and hydration data",
+  );
   const index = await fetch(origin + "/athletes?q=Synthetic%20DUV%20Public");
   const listing = await index.text();
   assert.equal(index.status, 200);
