@@ -522,10 +522,38 @@ try {
     },
   );
   const publishedSource = await readPrivateSource();
+  assert.equal(publishedSource.sourceHistories.length, privateProfile.sourceHistories.length);
+  const [publishedHistory] = publishedSource.sourceHistories;
+  assert.match(publishedHistory.externalId, /^record-\d+$/);
+  for (const row of publishedHistory.performances) {
+    assert.equal(row.sourceKeys.length, 1);
+    assert.match(row.sourceKeys[0], /^record-\d+$/);
+  }
+  assert.deepEqual(
+    publishedHistory.performances[0].sourceKeys,
+    publishedHistory.performances[1].sourceKeys,
+    "Rows from the same evidence retain a shared opaque key for duplicate matching",
+  );
   assert.deepEqual(
     publishedSource.sourceHistories,
+    privateProfile.sourceHistories.map((history) => ({
+      ...history,
+      externalId: publishedHistory.externalId,
+      sourceUrl: "",
+      capturedAt: "",
+      performances: history.performances.map((row, index) => ({
+        ...row,
+        sourceDate: "",
+        sourceUrls: [],
+        sourceKeys: publishedHistory.performances[index].sourceKeys,
+      })),
+    })),
+    "Explicit publication preserves performance facts while keeping source evidence private",
+  );
+  assert.deepEqual(
+    (await getStaffProfile(privateId, staff)).sourceHistories,
     privateProfile.sourceHistories,
-    "Explicit publication preserves the selected archive exactly through the public API",
+    "Publication must preserve the original evidence in the authenticated staff view",
   );
   assert.equal(publishedSource.results.length, 1);
   assert.equal(publishedSource.results[0].id, privateResult.id);
