@@ -192,6 +192,11 @@ arbitrary alphabetic words and conflicting editions remain held. This title
 comparison does not relax distance, count, repeated-runner or identity guards,
 and does not verify identities or publish any result history.
 
+French `ère` detail prefixes (including DUV's displayed `1ère` and `6ère`)
+follow the same numeric-prefix rule: require the entire remaining title and
+all date, distance, count and runner-link checks, preserving both source titles.
+An edition-format comparison is not identity verification.
+
 The Italian detail ordinal suffix `a` (for example `9a`) and French `ème`
 (for example `2ème`) follow the same exact
 remaining-title comparison. A complete unpaginated table can also contain explicit
