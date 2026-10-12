@@ -321,8 +321,8 @@ try {
   assert.equal(p.entries.length, 0);
   assert.equal(
     p.searchIndexable,
-    false,
-    "Profile publication does not grant search-indexing approval",
+    true,
+    "Owner-authorised discovery includes staff-approved unclaimed public profiles",
   );
   assert.equal(p.nationality, "ANT");
   assert.equal(readSourceNationality(nationalityDetails).provider, "DUV");
@@ -337,7 +337,7 @@ try {
   const page = await fetch(origin + "/athletes/synthetic-duv-public");
   const html = await page.text();
   assert.equal(page.status, 200);
-  assert.match(page.headers.get("x-robots-tag"), /noindex/);
+  assert.equal(page.headers.get("x-robots-tag"), "index, follow");
   assert(html.includes("Synthetic DUV Public"));
   assert(!html.includes("Unpublished test biography"));
   assert(html.includes("Antigua &amp; Barbuda"));
