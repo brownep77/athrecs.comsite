@@ -170,13 +170,16 @@ const invitationCore = load("src/lib/athrecs/claim-invitation.ts", {
   }),
 });
 const invitationSends = [];
+process.env.ATHRECS_INVITATION_RESEND_API_KEY = "synthetic-invitation-only-key";
 const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
   "node:crypto": crypto,
   "@/lib/db": connection,
   "@/lib/site-scope": scope,
   "@/lib/auth/email.server": {
-    authEmailConfigured: () => true,
     sendAthrecsAuthEmail: async (email, options) => {
+      assert.equal(options.apiKey, "synthetic-invitation-only-key");
+      assert.equal(options.from, "Paul at ATHRECS <paul@athrecs.com>");
+      assert.equal(options.replyTo, "paul@athrecs.com");
       const id = options.idempotencyKey.split("/").at(-1);
       const [marker] =
         await sql`select first_attempt_at,reserved_until from athlete_claim_invitations where id=${id}`;
