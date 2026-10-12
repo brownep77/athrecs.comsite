@@ -2,37 +2,41 @@ name: Athlete tools and single-profile links
 on:
   pull_request:
     paths:
-      - 'src/lib/athlete-link/**'
-      - 'src/components/admin/AthleteTools.tsx'
-      - 'src/components/admin/SingleAthleteLink.tsx'
-      - 'src/components/admin/AthleteDirectory.tsx'
-      - 'src/components/admin/DirectoryMatchInvite.tsx'
-      - 'src/components/staff/*Invite*.tsx'
-      - 'src/components/staff/ClaimInvitationSharing.tsx'
-      - 'src/lib/athrecs/claim-invit*'
-      - 'src/routes/admin/athletes.$athleteId.tsx'
-      - 'scripts/verify-external-invit*.mjs'
-      - 'migrations/*claim_invitations.sql'
-      - 'src/components/admin/ImportRaceResults.tsx'
-      - 'src/routes/admin/athlete-tools.tsx'
-      - 'src/lib/athrecs/result-claim*'
-      - 'src/lib/auth/email.server.ts'
-      - 'src/components/staff/ClaimAlertStatus.tsx'
-      - 'src/components/athletes/PotentialResultMatchesPanel.tsx'
-      - 'src/routes/admin/result-claims.tsx'
-      - 'src/routes/claim-results.tsx'
-      - 'src/routes/join.tsx'
-      - 'src/routes/admin/result-archive.tsx'
-      - 'src/routes/my-athlete-profile.tsx'
-      - 'src/routes/api/result-claim-alerts.ts'
-      - 'migrations/20261005_result_claim_alerts.sql'
-      - 'scripts/verify-result-conflict-*.mjs'
-      - 'scripts/verify-signup-ownership.mjs'
-      - 'scripts/verify-recruitment-ui.mjs'
-      - 'vercel.json'
-      - 'scripts/verify-athlete-link.mjs'
-      - 'scripts/verify-athlete-tools-browser.mjs'
-      - '.github/workflows/athlete-tools.yml'
+      - "src/lib/athlete-link/**"
+      - "src/components/admin/AthleteTools.tsx"
+      - "src/components/admin/SingleAthleteLink.tsx"
+      - "src/components/admin/AthleteDirectory.tsx"
+      - "src/components/admin/DirectoryMatchInvite.tsx"
+      - "src/components/staff/*Invite*.tsx"
+      - "src/components/staff/ClaimInvitationSharing.tsx"
+      - "src/lib/athrecs/claim-invit*"
+      - "src/lib/athrecs/invitation-welcome*"
+      - "src/components/staff/InvitationWelcomeEmail.tsx"
+      - "migrations/*invitation_welcome_codes.sql"
+      - "scripts/verify-invitation-welcome.mjs"
+      - "src/routes/admin/athletes.$athleteId.tsx"
+      - "scripts/verify-external-invit*.mjs"
+      - "migrations/*claim_invitations.sql"
+      - "src/components/admin/ImportRaceResults.tsx"
+      - "src/routes/admin/athlete-tools.tsx"
+      - "src/lib/athrecs/result-claim*"
+      - "src/lib/auth/email.server.ts"
+      - "src/components/staff/ClaimAlertStatus.tsx"
+      - "src/components/athletes/PotentialResultMatchesPanel.tsx"
+      - "src/routes/admin/result-claims.tsx"
+      - "src/routes/claim-results.tsx"
+      - "src/routes/join.tsx"
+      - "src/routes/admin/result-archive.tsx"
+      - "src/routes/my-athlete-profile.tsx"
+      - "src/routes/api/result-claim-alerts.ts"
+      - "migrations/20261005_result_claim_alerts.sql"
+      - "scripts/verify-result-conflict-*.mjs"
+      - "scripts/verify-signup-ownership.mjs"
+      - "scripts/verify-recruitment-ui.mjs"
+      - "vercel.json"
+      - "scripts/verify-athlete-link.mjs"
+      - "scripts/verify-athlete-tools-browser.mjs"
+      - ".github/workflows/athlete-tools.yml"
   workflow_dispatch:
 permissions:
   contents: read
@@ -58,8 +62,8 @@ jobs:
           --health-timeout 5s
           --health-retries 10
     env:
-      DATABASE_URL: ''
-      ATHRECS_CLAIM_TEST_POSTGRES: '1'
+      DATABASE_URL: ""
+      ATHRECS_CLAIM_TEST_POSTGRES: "1"
       VITE_SITE_BRAND: athrecs
     steps:
       - uses: actions/checkout@v4
@@ -74,7 +78,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:
-      DATABASE_URL: ''
+      DATABASE_URL: ""
       VITE_SITE_BRAND: athrecs
     steps:
       - uses: actions/checkout@v4
@@ -87,6 +91,8 @@ jobs:
         run: node scripts/verify-athlete-link.mjs
       - name: Collected results, registration matching and durable conflict alerts
         run: node scripts/verify-result-conflict-flow.mjs
+      - name: Welcome invitation, real OTP authentication and delivery failures
+        run: node scripts/verify-invitation-welcome.mjs
       - name: Signup abuse cases and ownership authorization
         run: node scripts/verify-signup-ownership.mjs
       - name: Build without database migration or publication hooks

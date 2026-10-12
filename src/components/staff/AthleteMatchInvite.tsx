@@ -14,6 +14,7 @@ import {
 } from "@/lib/athrecs/claim-invitation";
 import type { RegisteredAthlete } from "@/lib/athrecs/registrations.server";
 import { ClaimInvitationSharing } from "./ClaimInvitationSharing";
+import { InvitationWelcomeEmail } from "./InvitationWelcomeEmail";
 
 const inputClass = "w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-fg";
 export function AthleteMatchInvite({
@@ -379,6 +380,13 @@ export function AthleteMatchInvite({
                           </Button>
                         ) : null}
                       </div>
+                      {["prepared", "invited", "failed", "held"].includes(i.status) ? (
+                        <InvitationWelcomeEmail
+                          id={i.id}
+                          disabled={busy || !matches.data.emailAvailable}
+                          onSent={refresh}
+                        />
+                      ) : null}
                     </div>
                   ))}
                 </div>

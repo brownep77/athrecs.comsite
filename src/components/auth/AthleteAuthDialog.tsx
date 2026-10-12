@@ -263,6 +263,20 @@ export function AthleteAuthDialog() {
     }
   }
 
+  function useExistingCode() {
+    clearStatus();
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!/^\S+@\S+\.\S+$/.test(normalizedEmail)) {
+      setError("Enter the email address that received your code.");
+      emailInput.current?.focus();
+      return;
+    }
+    setCodeSentTo(normalizedEmail);
+    setCode("");
+    setResendAfter(0);
+    setMessage("Enter the six-digit code from your email. If it has expired, choose Resend code.");
+  }
+
   function cleanBrowserUrl() {
     const url = new URL(window.location.href);
     for (const key of AUTH_QUERY_KEYS) url.searchParams.delete(key);
@@ -697,6 +711,16 @@ export function AthleteAuthDialog() {
                           ? "Continue with email"
                           : "Send sign-in code"}
                     </Button>
+                    {!codeSentTo ? (
+                      <button
+                        type="button"
+                        disabled={Boolean(busy)}
+                        onClick={useExistingCode}
+                        className="w-full text-sm font-semibold text-accent disabled:text-subtle"
+                      >
+                        I already have a code
+                      </button>
+                    ) : null}
                     {codeSentTo ? (
                       <div className="flex flex-wrap justify-between gap-3 text-sm">
                         <button

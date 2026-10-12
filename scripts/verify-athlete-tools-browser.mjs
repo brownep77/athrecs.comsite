@@ -58,14 +58,15 @@ const router = file(
 const invitation = file(
   "invitation-api.js",
   `
-window.invitationCreates=[];window.invitationEmails=[];window.directorySearches=[];window.matchSearches=[];
+window.welcomeEmails=[];window.invitationCreates=[];window.invitationEmails=[];window.directorySearches=[];window.matchSearches=[];
 let contact={phone:null,telegramUsername:null,socialLinks:[],sourceNote:''};
 const account=()=>({userId:'synthetic-runner',athleteNumber:'456',name:'Name not supplied',email:'runner@example.test',emailVerified:true,linkedProfiles:0,invitation:null,profileConnections:[],marketingConsent:false,contact});
 export async function findDirectoryInvitationAccounts({data}){window.directorySearches.push(data);return {registered:false,athleteId:9,total:data.q==='missing@example.test'?0:1,page:1,pageSize:25,accounts:data.q==='missing@example.test'?[]:[account()]};}
-export async function findStaffClaimMatches({data}){window.matchSearches.push(data);return {candidates:[{id:9,name:'Avery Test Athlete',slug:'avery-test-athlete',clubName:'Example Club',resultCount:2,reasons:['Manual search result — check identity'],blocked:null,recentResults:[{race:'Synthetic Race',date:'2026-01-01',distance:'10K'}]}],hasSavedName:false,moreMatches:false,history:[],emailAvailable:true};}
+export async function findStaffClaimMatches({data}){window.matchSearches.push(data);return {candidates:[{id:9,name:'Avery Test Athlete',slug:'avery-test-athlete',clubName:'Example Club',resultCount:2,reasons:['Manual search result — check identity'],blocked:null,recentResults:[{race:'Synthetic Race',date:'2026-01-01',distance:'10K'}]}],hasSavedName:false,moreMatches:false,history:window.invitationCreates.some(i=>i.userId)?[{id:'synthetic-invitation',athleteName:'Avery Test Athlete',status:'prepared',createdAt:'2026-10-12T12:00:00Z',expiresAt:'2026-10-19T12:00:00Z',sentAt:null}]:[],emailAvailable:true};}
 export async function createStaffClaimInvitation({data}){window.invitationCreates.push(data);return {id:'synthetic-invitation',url:'https://www.athrecs.com/claim-results?resultId=9&invitation='+ 'a'.repeat(64),reused:window.invitationCreates.length>1};}
 export async function getStaffInvitationProfile(){return {profile:{id:9,name:'Avery Test Athlete',owner:false,resultCount:2,recentResults:[{race:'Synthetic Race',date:'2026-01-01',distance:'10K'}]},history:[],emailAvailable:true};}
 export async function createStaffExternalInvitation({data}){window.invitationCreates.push(data);return {id:'synthetic-external-invitation',url:'https://www.athrecs.com/claim-results?resultId=9&invitation'+'='+ 'b'.repeat(64),reused:false,recipient:data.email||data.recipientName,emailBound:!!data.email,contact:{phone:data.phone||null,telegramUsername:data.telegramUsername||null,socialLinks:data.socialLinks,sourceNote:data.sourceNote}};}
+export async function emailStaffWelcomeInvitation({data}){window.welcomeEmails.push(data);return {status:"sent"};}
 export async function emailStaffClaimInvitation({data}){window.invitationEmails.push(data);return {status:'sent'};}
 export async function revokeStaffClaimInvitation(){return {revoked:true};}
 export async function saveStaffAthleteContact({data}){contact={...data};return {saved:true};}
@@ -283,6 +284,13 @@ try {
   await page.getByRole("button", { name: "Email claim invitation", exact: true }).click();
   await page.getByText(/Invitation sent from paul@athrecs\.com/).waitFor();
   assert.equal((await page.evaluate(() => window.invitationEmails)).length, 1);
+  const welcome = page.getByRole("region", { name: "Welcome email and sign-in code" });
+  await welcome.getByText("Welcome email preview", { exact: true }).click();
+  await welcome.getByText(/Thanks for joining AthRecs/).waitFor();
+  assert.equal((await page.evaluate(() => window.welcomeEmails)).length, 0, "Preview does not generate or send a code");
+  await welcome.getByRole("button", { name: "Send welcome + sign-in code", exact: true }).click();
+  await welcome.getByRole("status").filter({hasText: /fresh five-minute sign-in code sent/}).waitFor();
+  assert.deepEqual(await page.evaluate(() => window.welcomeEmails), [{id: "synthetic-invitation"}]);
   await page.getByRole("button", { name: "Show all signups" }).click();
   assert.equal(
     await page.getByLabel("Private claim link").count(),

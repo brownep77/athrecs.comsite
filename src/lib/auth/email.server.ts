@@ -65,8 +65,8 @@ export async function sendAthrecsAuthEmail(
           </td></tr>
           <tr><td style="padding:28px">
             <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25">${safeHeading}</h1>
-            <p style="margin:0 0 24px;color:#52606d;font-size:15px;line-height:1.6">${safeMessage}</p>
             ${email.code ? `<p style="margin:0 0 24px;padding:18px;background:#ecfeff;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px">${safeCode}</p>` : ""}
+            <p style="margin:0 0 24px;color:#52606d;font-size:15px;line-height:1.6;white-space:pre-line">${safeMessage}</p>
             ${
               email.actionUrl
                 ? `<p style="margin:0 0 24px">
@@ -97,7 +97,15 @@ export async function sendAthrecsAuthEmail(
       to: [email.to],
       subject: email.subject,
       html,
-      text: `${email.heading}\n\n${email.message}\n\n${email.code ?? `${email.actionLabel}: ${email.actionUrl}`}\n\nIf you did not request this, you can ignore this email.`,
+      text: [
+        email.heading,
+        email.code ? `Your one-time code: ${email.code}` : null,
+        email.message,
+        email.actionUrl ? `${email.actionLabel}: ${email.actionUrl}` : null,
+        "If you did not request this, you can ignore this email.",
+      ]
+        .filter(Boolean)
+        .join("\n\n"),
     }),
   });
 
