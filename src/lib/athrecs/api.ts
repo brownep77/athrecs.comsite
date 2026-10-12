@@ -17,7 +17,7 @@ import {
   publicAthleteListSchema,
   publicEditionIdSchema,
 } from "./public-read-limits";
-import { getSql, dbSource } from "@/lib/db";
+import { getSql, dbSource, type Sql } from "@/lib/db";
 import { staffMiddleware } from "@/lib/auth/staff-middleware";
 import { canonicalEventSlug } from "@/data/entry-options";
 import { retainedFixtureAliasSlugs } from "@/data/fixture-deduplication";
@@ -846,10 +846,10 @@ export const listAthletes = createServerFn({ method: "GET" })
     });
   });
 
-async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
-  const sql = await ready();
+async function readAthleteIdentity(sql: Sql, slug: string, approvedPublicOnly: boolean) {
   const athleteNumber = parseAthleteId(slug);
-  const { approvedPublicAthleteSql } = await import("./athlete-search-policy.server");
+  const { approvedPublicAthleteSql, indexableApprovedAthleteSql } =
+    await import("./athlete-search-policy.server");
   const rows = await sql.query<{
     profile_details: unknown;
     date_of_birth: string | null;
@@ -867,6 +867,14 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
     profile_source_checked_at: string | null;
     is_claimed: boolean;
     has_account_link: boolean;
+    sharing: {
+      enabled: boolean;
+      share_results: boolean;
+      share_bio: boolean;
+      share_club: boolean;
+      share_location: boolean;
+    } | null;
+    search_indexable: boolean;
     club: string | null;
     club_slug: string | null;
   }>(
@@ -878,6 +886,15 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
         identifier.athlete_number::text as athlete_number,
         c.name as club,
         c.slug as club_slug,
+        ${
+          approvedPublicOnly
+            ? `(select jsonb_build_object('enabled',s.enabled,'share_results',s.share_results,
+          'share_bio',s.share_bio,'share_club',s.share_club,'share_location',s.share_location)
+          from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+          where l.athlete_id=a.id and l.status='active' limit 1)`
+            : "null::jsonb"
+        } as sharing,
+        ${approvedPublicOnly ? `(${indexableApprovedAthleteSql})` : "false"} as search_indexable,
         exists (
           select 1
           from athlete_account_links account_link
@@ -900,8 +917,18 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
     `,
     [slug, athleteNumber, !approvedPublicOnly],
   );
-  const athlete = rows[0];
-  if (!athlete) return null;
+  return rows[0] ?? null;
+}
+
+type AthleteIdentity = NonNullable<Awaited<ReturnType<typeof readAthleteIdentity>>>;
+
+async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
+  const sql = await ready();
+  const athlete = await readAthleteIdentity(sql, slug, approvedPublicOnly);
+  return athlete ? readAthleteProfile(sql, athlete, approvedPublicOnly) : null;
+}
+
+async function readAthleteProfile(sql: Sql, athlete: AthleteIdentity, approvedPublicOnly: boolean) {
   const { loadPublishedSourceHistories } = await import("./athlete-publication.server");
   const sourceHistoriesPromise = loadPublishedSourceHistories(sql, athlete.id);
   const resultsPromise = sql<{
@@ -957,7 +984,17 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
     : sql<{
         user_id: string;
       }>`select l.user_id from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id and s.enabled=true where l.athlete_id=${athlete.id} and l.status='active' limit 1`;
-  const { date_of_birth, profile_details, has_account_link, ...safeAthlete } = athlete;
+  const {
+    date_of_birth,
+    profile_details,
+    has_account_link,
+    sharing,
+    search_indexable,
+    ...safeAthlete
+  } = athlete;
+  // Internal publication decisions never enter the returned athlete payload.
+  void sharing;
+  void search_indexable;
   const [
     { athletes: athleteCatalogue },
     { publicFigureAthletes },
@@ -1065,34 +1102,17 @@ export const getAthleteBySlug = createServerFn({ method: "GET" })
   });
 
 /** Only recorded staff publication or enabled owner sharing permits a public preview. */
-async function readAdministratorPublishedAthlete(slug: string) {
+async function readAdministratorPublishedAthlete(slug: string, identity?: AthleteIdentity) {
   const { setResponseHeader } = await import("@tanstack/react-start/server");
   setResponseHeader("Cache-Control", "private, no-store");
   setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
   if (IS_RUNRECS_SITE) return null;
-  const profile = await readAthleteBySlug(slug, true);
-  if (!profile) return null;
   const sql = await ready();
-  const { indexableApprovedAthleteSql } = await import("./athlete-search-policy.server");
-  const [publication] = await sql.query<{
-    sharing: {
-      enabled: boolean;
-      share_results: boolean;
-      share_bio: boolean;
-      share_club: boolean;
-      share_location: boolean;
-    } | null;
-    indexable: boolean;
-  }>(
-    `select (select jsonb_build_object('enabled',s.enabled,'share_results',s.share_results,
-      'share_bio',s.share_bio,'share_club',s.share_club,'share_location',s.share_location)
-      from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
-      where l.athlete_id=$1 and l.status='active' limit 1) as sharing,
-      exists (select 1 from athletes a where a.id=$1 and ${indexableApprovedAthleteSql}) as indexable`,
-    [profile.athlete.id],
-  );
-  const sharing = publication.sharing;
+  const athlete = identity ?? (await readAthleteIdentity(sql, slug, true));
+  if (!athlete) return null;
+  const sharing = athlete.sharing;
   if (sharing && (!sharing.enabled || !sharing.share_results)) return null;
+  const profile = await readAthleteProfile(sql, athlete, true);
   const { results: legacyResults, ...publicProfile } = profile;
   void legacyResults;
   // The publication covers sporting results and basic athlete identity only.
@@ -1100,7 +1120,7 @@ async function readAdministratorPublishedAthlete(slug: string) {
   return {
     ...publicProfile,
     shareBiography: sharing?.share_bio !== false,
-    searchIndexable: publication.indexable,
+    searchIndexable: athlete.search_indexable,
     athlete: {
       ...profile.athlete,
       bio: "",
@@ -1140,42 +1160,60 @@ export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" }
 export const getPublicAthletePreview = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
   .handler(async ({ data }) => {
-    const profile = await readAdministratorPublishedAthlete(data);
-    if (!profile) return null;
-    if (profile.athlete.is_claimed) {
-      const { getPublicSharedProfilePreview } = await import("./athlete-profile-share-api");
-      const shared = await getPublicSharedProfilePreview({ data: { slug: profile.athlete.slug } });
-      if (shared)
-        return {
-          ...shared,
-          slug: profile.athlete.slug,
-          searchIndexable: profile.searchIndexable,
-          clubSlug:
-            shared.club && shared.club === profile.athlete.club ? profile.athlete.club_slug : null,
-        };
+    const started = performance.now();
+    const { setResponseHeader } = await import("@tanstack/react-start/server");
+    setResponseHeader("Cache-Control", "private, no-store");
+    setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
+    try {
+      if (IS_RUNRECS_SITE) return null;
+      const identity = await readAthleteIdentity(await ready(), data, true);
+      if (!identity) return null;
+      // Choose the owner-shared path before hydrating a catalogue history that
+      // would immediately be discarded. Approval and indexability are live reads.
+      if (identity.is_claimed) {
+        const { getPublicSharedProfilePreview } = await import("./athlete-profile-share-api");
+        const shared = await getPublicSharedProfilePreview({ data: { slug: identity.slug } });
+        if (shared)
+          return {
+            ...shared,
+            slug: identity.slug,
+            searchIndexable: identity.search_indexable,
+            clubSlug:
+              identity.sharing?.share_club !== false && shared.club && shared.club === identity.club
+                ? identity.club_slug
+                : null,
+          };
+      }
+      const profile = await readAdministratorPublishedAthlete(data, identity);
+      if (!profile) return null;
+      const { buildPublicAthletePreview } = await import("./public-athlete-preview");
+      const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
+      const career = getEditorialAthleteCareer(profile.athlete.slug);
+      const { athleteSearchContent } = await import("./athlete-search-content");
+      return buildPublicAthletePreview({
+        slug: profile.athlete.slug,
+        displayName: profile.athlete.display_name,
+        athleteNumber: profile.athlete.athlete_number,
+        club: profile.athlete.club,
+        clubSlug: profile.athlete.club_slug,
+        country: profile.athlete.country,
+        nationality: profile.athlete.nationality,
+        nationalitySource: profile.athlete.nationality_source,
+        biography: profile.shareBiography
+          ? (career?.biography ?? [athleteSearchContent(profile).bio])
+          : [],
+        biographySources: profile.shareBiography ? career?.biographySources : [],
+        results: profile.profileResults,
+        histories: profile.sourceHistories,
+        reportedRecords: getReportedRaceHistory(profile.athlete.slug)?.records,
+        searchIndexable: profile.searchIndexable,
+      });
+    } finally {
+      setResponseHeader(
+        "Server-Timing",
+        `athlete_profile;dur=${(performance.now() - started).toFixed(1)}`,
+      );
     }
-    const { buildPublicAthletePreview } = await import("./public-athlete-preview");
-    const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
-    const career = getEditorialAthleteCareer(profile.athlete.slug);
-    const { athleteSearchContent } = await import("./athlete-search-content");
-    return buildPublicAthletePreview({
-      slug: profile.athlete.slug,
-      displayName: profile.athlete.display_name,
-      athleteNumber: profile.athlete.athlete_number,
-      club: profile.athlete.club,
-      clubSlug: profile.athlete.club_slug,
-      country: profile.athlete.country,
-      nationality: profile.athlete.nationality,
-      nationalitySource: profile.athlete.nationality_source,
-      biography: profile.shareBiography
-        ? (career?.biography ?? [athleteSearchContent(profile).bio])
-        : [],
-      biographySources: profile.shareBiography ? career?.biographySources : [],
-      results: profile.profileResults,
-      histories: profile.sourceHistories,
-      reportedRecords: getReportedRaceHistory(profile.athlete.slug)?.records,
-      searchIndexable: profile.searchIndexable,
-    });
   });
 
 export type PrivateAthleteStub = {

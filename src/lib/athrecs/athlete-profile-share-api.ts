@@ -290,7 +290,22 @@ async function buildPublicProfile(
   share: ShareRow,
   publicPreview = false,
 ): Promise<SharedAthleteProfile> {
-  const [identity, sportRows, bioRows, results, connectionRows, upcoming] = await Promise.all([
+  // Resolve linked histories alongside identity/results, and do not fetch
+  // member-only future plans or connections for the five-result public preview.
+  const linked = sql<{ athlete_id: number }>`
+    select l.athlete_id from athlete_account_links l join athletes a on a.id=l.athlete_id
+    where l.user_id=${share.user_id} and l.status='active'
+      and (${!publicPreview} or a.profile_visibility='public')`;
+  const [
+    identity,
+    sportRows,
+    bioRows,
+    results,
+    connectionRows,
+    upcoming,
+    sourceHistories,
+    sourceFixtures,
+  ] = await Promise.all([
     loadIdentity(sql, share.user_id),
     sql<{ sport_code: string; coach_name: string }>`
       select sport_code, coach_name
@@ -307,22 +322,29 @@ async function buildPublicProfile(
     share.share_results
       ? loadVisibleResults(sql, share.user_id, publicPreview)
       : Promise.resolve([]),
-    sql<{ platform: SocialPlatform; url: string }>`
+    publicPreview
+      ? Promise.resolve([])
+      : sql<{ platform: SocialPlatform; url: string }>`
       select platform, url from athlete_profile_connections
       where user_id = ${share.user_id} and share_publicly = true
       order by platform
     `,
-    loadUpcoming(share.user_id, null, true),
+    publicPreview ? Promise.resolve([]) : loadUpcoming(share.user_id, null, true),
+    share.share_results
+      ? linked
+          .then((links) =>
+            Promise.all(links.map((link) => loadPublishedSourceHistories(sql, link.athlete_id))),
+          )
+          .then((histories) => histories.flat())
+      : Promise.resolve([]),
+    publicPreview
+      ? Promise.resolve([])
+      : linked
+          .then((links) =>
+            Promise.all(links.map((link) => loadUpcoming(null, link.athlete_id, true))),
+          )
+          .then((fixtures) => fixtures.flat()),
   ]);
-
-  const linked = await sql<{
-    athlete_id: number;
-  }>`select l.athlete_id from athlete_account_links l join athletes a on a.id=l.athlete_id
-    where l.user_id=${share.user_id} and l.status='active'
-      and (${!publicPreview} or a.profile_visibility='public')`;
-  const sourceFixtures = await Promise.all(
-    linked.map((link) => loadUpcoming(null, link.athlete_id, true)),
-  );
   const displayName = displayNameOf(identity);
   const primarySport = sportRows[0]?.sport_code ?? "";
   const bioMode = bioRows[0]?.mode ?? "automatic";
@@ -344,13 +366,7 @@ async function buildPublicProfile(
   }
 
   return {
-    sourceHistories: share.share_results
-      ? (
-          await Promise.all(
-            linked.map((link) => loadPublishedSourceHistories(sql, link.athlete_id)),
-          )
-        ).flat()
-      : [],
+    sourceHistories,
     kind: "shared-account",
     searchIndexable: share.search_indexable === true,
     athleteNumber: identity.athlete_number,
@@ -367,7 +383,7 @@ async function buildPublicProfile(
     },
     nationality: identity.nationality ?? "",
     coaches: sportRows.map((row) => ({ sport: row.sport_code, name: row.coach_name ?? "" })),
-    upcoming: [...upcoming, ...sourceFixtures.flat()].sort((a, b) =>
+    upcoming: [...upcoming, ...sourceFixtures].sort((a, b) =>
       a.eventDate.localeCompare(b.eventDate),
     ),
     primarySport,
