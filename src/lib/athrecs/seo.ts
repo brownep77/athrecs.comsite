@@ -161,6 +161,14 @@ export function sportsEventJsonLd(
     input.startDate && input.startTime
       ? `${input.startDate}T${input.startTime}`
       : (input.startDate ?? undefined);
+  // Match todayIso() and visible entry deadlines: the site's calendar day is
+  // Europe/London, including daylight saving, rather than the server's UTC day.
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Europe/London",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(now);
 
   return {
     "@context": "https://schema.org",
@@ -207,7 +215,6 @@ export function sportsEventJsonLd(
       )
         return [];
 
-      const today = now.toISOString().slice(0, 10);
       const closes = calendarDate(option.closes_at);
       const opens = calendarDate(option.opens_at);
       // opens_at is an evidence-backed DATE in storage. Keep that precision;
