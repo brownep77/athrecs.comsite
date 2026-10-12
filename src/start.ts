@@ -1,6 +1,7 @@
 import { createMiddleware, createStart } from "@tanstack/react-start";
 import {
   ATHLETE_INDEXING_HEADER,
+  ATHLETE_UNAVAILABLE_HEADER,
   INDEXABLE_ATHLETE_ROBOTS,
   PRIVATE_ATHLETE_ROBOTS,
 } from "./lib/athrecs/athlete-search-policy";
@@ -13,11 +14,17 @@ const memberProfileResponses = createMiddleware().server(async ({ pathname, next
     pathname === "/claim-results"
   ) {
     const headers = new Headers(result.response.headers);
+    const unavailable =
+      /^\/athletes\/[^/]+$/.test(pathname) &&
+      result.response.status === 200 &&
+      headers.get(ATHLETE_UNAVAILABLE_HEADER) === "1";
+    const status = unavailable ? 404 : result.response.status;
     const indexable =
       (/^\/athletes\/[^/]+$/.test(pathname) || /^\/athletes\/?$/.test(pathname)) &&
-      result.response.status === 200 &&
+      status === 200 &&
       headers.get(ATHLETE_INDEXING_HEADER) === "1";
     headers.delete(ATHLETE_INDEXING_HEADER);
+    headers.delete(ATHLETE_UNAVAILABLE_HEADER);
     headers.set("Cache-Control", "private, no-store");
     headers.set("Vary", "Cookie, Authorization");
     const robots = indexable
@@ -33,8 +40,8 @@ const memberProfileResponses = createMiddleware().server(async ({ pathname, next
     setResponseHeader("X-Robots-Tag", robots);
     if (pathname === "/claim-results") headers.set("Referrer-Policy", "no-referrer");
     return new Response(result.response.body, {
-      status: result.response.status,
-      statusText: result.response.statusText,
+      status,
+      statusText: unavailable ? "Not Found" : result.response.statusText,
       headers,
     });
   }

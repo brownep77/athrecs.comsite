@@ -57,6 +57,14 @@ for (const event of summary.events)
     "year",
   ]);
 assert.equal(publicAthleteCareer("Empty", []), null);
+const mixedLabels = publicAthleteCareer("Distances", [
+  recorded("First 10K", "2020-01-01", { distanceCode: "10k" }),
+  recorded("Second 10K", "2021-01-01", { distanceCode: "10 km" }),
+  recorded("Five miles", "2022-01-01", { distanceCode: "5 miles" }),
+  recorded("Recent 10K", "2023-01-01", { distanceCode: "10K" }),
+]);
+assert.match(mixedLabels.text, /in 10K, 5mi\.$/);
+assert.equal(new Set(mixedLabels.events.map((event) => event.discipline)).size, 2);
 const history = (overrides = {}) => ({
   kind: "history",
   result: {

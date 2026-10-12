@@ -87,7 +87,7 @@ try {
   for (const path of ["/athletes/view-login-fixture", "/athletes/ATH-000001"]) {
     const response = await fetch(origin + path);
     const html = await response.text();
-    assert.equal(response.status, 200);
+    assert.equal(response.status, 404, "Unavailable anonymous profiles must not be soft 404s");
     assert.match(response.headers.get("cache-control"), /private.*no-store/);
     assert.match(response.headers.get("x-robots-tag"), /noindex/);
     assert(!html.includes("Restricted Fixture Biography"));
@@ -131,7 +131,7 @@ try {
     for (const path of ["/athletes/view-login-fixture"]) {
       const response = await fetch(origin + path, { headers: readerHeaders });
       const html = await response.text();
-      assert.equal(response.status, 200);
+      assert.equal(response.status, 404);
       assert.match(response.headers.get("cache-control"), /private.*no-store/);
       assert(html.includes("Sign in to view athlete profiles"));
       assert(!html.includes("cross-site request blocked"));
@@ -671,11 +671,12 @@ try {
       ?.headers.some((header) => header.key.toLowerCase() === "x-robots-tag"),
     "The hosting configuration must defer athlete indexing to the validated page response",
   );
-  const expectSearch = async (slug, indexable, extraHeaders = {}) => {
+  const expectSearch = async (slug, indexable, extraHeaders = {}, status = 200) => {
     const response = await fetch(`${origin}/athletes/${slug}`, { headers: extraHeaders });
     const html = await response.text();
     const $ = load(html);
-    assert.equal(response.status, 200);
+    assert.equal(response.status, status);
+    assert.equal(response.headers.get("x-athrecs-profile-unavailable"), null);
     assert.equal(
       response.headers.get("x-robots-tag"),
       indexable ? "index, follow" : "noindex, nofollow, noarchive",
@@ -721,11 +722,17 @@ try {
   await expectSitemap(false);
   await sql`update athlete_public_shares set search_indexable=true where user_id=${user.id}`;
   assert.equal((await publicRead("published-history-fixture")).searchIndexable, true);
-  await expectSearch("published-history-fixture", true, { "sec-fetch-site": "cross-site" });
+  await expectSearch("published-history-fixture", true, {
+    "sec-fetch-site": "cross-site",
+    "X-Athrecs-Profile-Unavailable": "1",
+  });
   await expectSitemap(true);
-  await expectSearch("view-login-fixture", false, { "X-Athrecs-Profile-Indexable": "1" });
-  await expectSearch("view-login-private", false, { "X-Athrecs-Profile-Indexable": "1" });
-  await expectSearch("nonexistent-test-profile", false, { "X-Athrecs-Profile-Indexable": "1" });
+  for (const slug of ["view-login-fixture", "view-login-private", "nonexistent-test-profile"]) {
+    await expectSearch(slug, false, {
+      "X-Athrecs-Profile-Indexable": "1",
+      "X-Athrecs-Profile-Unavailable": "0",
+    }, 404);
+  }
   const directory = await fetch(origin + "/athletes", {
     headers: { "X-Athrecs-Profile-Indexable": "1" },
   });
@@ -742,21 +749,21 @@ try {
   await expectSearch("published-history-fixture", false);
   await expectSitemap(false);
   await sql`update athlete_public_shares set search_indexable=true, enabled=false where user_id=${user.id}`;
-  await expectSearch("published-history-fixture", false);
+  await expectSearch("published-history-fixture", false, {}, 404);
   await expectSitemap(false);
   await sql`update athlete_public_shares set enabled=true, share_results=false where user_id=${user.id}`;
-  await expectSearch("published-history-fixture", false);
+  await expectSearch("published-history-fixture", false, {}, 404);
   await expectSitemap(false);
   await sql`update athlete_public_shares set share_results=true where user_id=${user.id}`;
   await sql`update athletes set profile_visibility='private' where id=${publishedAthlete.id}`;
-  await expectSearch("published-history-fixture", false);
+  await expectSearch("published-history-fixture", false, {}, 404);
   await expectSitemap(false);
   await sql`update athletes set profile_visibility='public' where id=${publishedAthlete.id}`;
   await sql`update athlete_account_links set status='revoked' where athlete_id=${publishedAthlete.id}`;
   await expectSearch("published-history-fixture", true);
   await expectSitemap(true);
   await sql`update athlete_source_histories set published_at=null where athlete_id=${publishedAthlete.id}`;
-  await expectSearch("published-history-fixture", false);
+  await expectSearch("published-history-fixture", false, {}, 404);
   await expectSitemap(false);
   // The older staff-publication path and existing owner consent are equally
   // valid approvals. Neither depends on adding a newer manual source history.
@@ -771,7 +778,7 @@ try {
     "Unpublished source history is not exposed by a profile approval",
   );
   await sql`delete from network_audit_log where action='athlete.bulk_publish' and entity_id=${String(publishedAthlete.id)}`;
-  await expectSearch("published-history-fixture", false);
+  await expectSearch("published-history-fixture", false, {}, 404);
   await sql`update athlete_account_links set status='active' where athlete_id=${publishedAthlete.id}`;
   await expectSearch("published-history-fixture", true);
   await expectSitemap(true);
