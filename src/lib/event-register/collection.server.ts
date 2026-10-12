@@ -39,6 +39,19 @@ export type SourceRow = {
   catalogue_records: number;
   result_records: number;
   provenance_count: number;
+  known_items: number;
+  extracted_items: number;
+  partial_items: number;
+  held_items: number;
+  failed_items: number;
+  pending_items: number;
+  unclassified_items: number;
+  extraction_percent: number | null;
+  progress_checked_at: string | null;
+  fixture_items: number;
+  fixture_extracted: number;
+  results_items: number;
+  results_extracted: number;
 };
 export function collectionQuery(input: unknown) {
   const f = collectionFilters.parse(input);
@@ -92,11 +105,34 @@ export async function listCollection(input: unknown, connection?: Sql) {
       count(*) filter(where origin='catalogue')::int catalogue_records,
       count(*) filter(where result_observations>0)::int result_records
       from event_register_source_records group by source_host
+    ), progress as (
+      select source_host,
+      count(*) filter(where kind<>'unclassified' and state<>'excluded')::int known_items,
+      count(*) filter(where kind='fixture' and state<>'excluded')::int fixture_items,
+      count(*) filter(where kind='fixture' and state='extracted')::int fixture_extracted,
+      count(*) filter(where kind='results' and state<>'excluded')::int results_items,
+      count(*) filter(where kind='results' and state='extracted')::int results_extracted,
+      count(*) filter(where kind<>'unclassified' and state='extracted')::int extracted_items,
+      count(*) filter(where kind<>'unclassified' and state='partial')::int partial_items,
+      count(*) filter(where kind<>'unclassified' and state='held')::int held_items,
+      count(*) filter(where kind<>'unclassified' and state='failed')::int failed_items,
+      count(*) filter(where kind<>'unclassified' and state='pending')::int pending_items,
+      count(*) filter(where kind='unclassified' and state<>'excluded')::int unclassified_items,
+      max(checked_at)::text progress_checked_at
+      from event_register_extraction_items group by source_host
     ), filtered as materialized (
       select s.source_key,s.name,s.url,s.host,s.country,s.source_type,s.sports,s.collection_status,s.rights_status,s.checked_on,
       jsonb_array_length(s.cursors) pending_urls,jsonb_array_length(s.provenance) provenance_count,
-      coalesce(c.records,0) records,coalesce(c.catalogue_records,0) catalogue_records,coalesce(c.result_records,0) result_records
+      coalesce(c.records,0) records,coalesce(c.catalogue_records,0) catalogue_records,coalesce(c.result_records,0) result_records,
+      coalesce(p.known_items,0) known_items,coalesce(p.extracted_items,0) extracted_items,
+      coalesce(p.fixture_items,0) fixture_items,coalesce(p.fixture_extracted,0) fixture_extracted,
+      coalesce(p.results_items,0) results_items,coalesce(p.results_extracted,0) results_extracted,
+      coalesce(p.partial_items,0) partial_items,coalesce(p.held_items,0) held_items,
+      coalesce(p.failed_items,0) failed_items,coalesce(p.pending_items,0) pending_items,
+      coalesce(p.unclassified_items,0) unclassified_items,p.progress_checked_at,
+      round(100.0*p.extracted_items/nullif(p.known_items,0),1)::float8 extraction_percent
       from event_register_sources s left join coverage c on c.source_host=s.host
+      left join progress p on p.source_host=s.host
       where ($1::text is null or concat_ws(' ',s.name,s.host,s.url,s.country,s.sports,s.collection_status) ilike $1)
       and ($2::text is null or s.host=$2)
       and ($3::text[] is null or lower(trim(s.country))=any($3::text[]))

@@ -73,10 +73,27 @@ try {
   assert.equal(result.total, 2);
   assert.equal(result.sources[0].records, 3);
   assert.equal(result.sources[1].records, 3);
+  // Progress is website-scoped. Unknown totals remain null; partial and held
+  // items cannot round up to completion, and navigation is not a race item.
+  assert.equal(result.sources[0].extraction_percent, null);
+  await db.exec(`insert into event_register_extraction_items(source_host,item_key,source_url,kind,state) values
+    ('example.test','a','https://example.test/a','results','extracted'),
+    ('example.test','b','https://example.test/b','results','partial'),
+    ('example.test','c','https://example.test/c','results','held'),
+    ('example.test','d','https://example.test/d','fixture','pending'),
+    ('example.test','nav','https://example.test/nav','unclassified','pending'),
+    ('example.test','report','https://example.test/report','results','excluded');`);
+  result = await listCollection({ view: "sources", host: "example.test" }, sql);
+  assert.equal(result.sources[0].known_items, 4);
+  assert.equal(result.sources[0].extraction_percent, 25);
+  assert.equal(result.sources[0].partial_items, 1);
+  assert.equal(result.sources[1].extraction_percent, 25);
+  await db.exec(readFileSync("scripts/event-register/refresh-extraction-progress.sql", "utf8"));
+  await db.exec(readFileSync("scripts/event-register/refresh-extraction-progress.sql", "utf8"));
   const guards = await sql.query(
-    `select relname,relrowsecurity from pg_class where relname in ('event_register_sources','event_register_source_records')`,
+    `select relname,relrowsecurity from pg_class where relname in ('event_register_sources','event_register_source_records','event_register_extraction_items')`,
   );
-  assert.equal(guards.length, 2);
+  assert.equal(guards.length, 3);
   assert(guards.every((r) => r.relrowsecurity));
   await db.exec("create role collection_reader; set role collection_reader");
   await assert.rejects(
