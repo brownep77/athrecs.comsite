@@ -6,6 +6,12 @@ The first release reads the current catalogue directly. It does not duplicate
 event identities, replay imports, publish results or manufacture historical years.
 Database views make future catalogue additions available automatically.
 
+The **United Kingdom (all home nations)** country filter includes England,
+Scotland, Wales and Northern Ireland as well as records labelled United Kingdom
+or a UK country alias. Each home nation remains separately selectable, and stored
+country labels are unchanged. Ireland and the Crown Dependencies stay separate.
+The table displays 50 events per page, with the full matching total above it.
+
 ## Scope and grain
 
 - Running, Parkrun and OCR events, including events with no dated editions.

@@ -35,6 +35,29 @@ export const registerFilters = z.object({
   page: z.number().int().min(0).max(1000000).default(0),
 });
 export type RegisterFilters = z.infer<typeof registerFilters>;
+
+const ukCountryAliases = ["united kingdom", "uk", "gb", "gbr", "great britain", "britain"];
+const ukHomeNations = ["england", "scotland", "wales", "northern ireland"];
+
+// UK is an aggregate filter; catalogue country labels remain unchanged.
+export function registerCountryValues(country: string): string[] | null {
+  const value = country.trim().toLowerCase();
+  if (!value) return null;
+  return ukCountryAliases.includes(value) ? [...ukCountryAliases, ...ukHomeNations] : [value];
+}
+
+export function registerCountryOptions(countries: string[]): string[] {
+  const options = new Set<string>();
+  for (const country of countries) {
+    const value = country.trim();
+    const normalized = value.toLowerCase();
+    if (ukCountryAliases.includes(normalized)) options.add("United Kingdom");
+    else if (value) options.add(value);
+    if (ukHomeNations.includes(normalized)) options.add("United Kingdom");
+  }
+  return [...options].sort((a, b) => a.localeCompare(b));
+}
+
 export const eventInput = z.object({
   eventId: z.number().int().positive(),
   page: z.number().int().min(0).max(100000).default(0),
