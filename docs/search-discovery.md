@@ -33,18 +33,48 @@ New database records enter the appropriate live sitemap automatically if their p
 
 ## Athlete name and event searches
 
-Public profile metadata is built from the anonymous biography and latest-five-results
-preview. Names, visible event names and verification qualifications remain consistent
+Public profile metadata is built from the anonymous biography, bounded career summary
+and latest-five-results preview. Names, visible event names and verification qualifications remain consistent
 with the page. Running, parkrun, trail and ultra categories share a concise Running
 title; biographies and the visible tables retain their detail. A custom biography can
 mention an older race, with its existing evidence qualification, without publishing
-the gated results history. Search opt-outs and publication approval are unchanged.
+the gated results history. Search opt-outs remain authoritative. The shared approval predicate now also recognises
+`athlete.profile_admin_published`, matching the existing anonymous preview rule: the
+profile must be public, have a resolved identity and the matching publication audit,
+and have no account-link history. Linked accounts continue through their existing
+sharing/publication gates. A public flag by itself never grants search eligibility.
 
 The public A–Z directory has crawlable previous/next links and a native GET search
 form. Out-of-range pages redirect to the last available page, and previous links to
 page one use its canonical URL. Run `npm run verify:athlete-search-content` for the
 public metadata regression checks and `npm run verify:profile-view-login` for the
 anonymous preview and member-history boundary.
+
+## Public career highlights and profile links
+
+Each eligible anonymous preview can show up to six distinct events selected from its
+already privacy-filtered published records: the earliest and latest event, then a
+spread of recorded disciplines. Each event contains only its name, a known year,
+discipline, optional catalogue link and explicit verification label. Missing
+verification remains “Unverified record”. Non-finishes, future events, excluded or
+conflicting results and ambiguous year ranges do not become highlights. No times,
+placings, source URLs, research notes or full result objects enter the summary.
+The latest-results table remains capped at five across all sources; full history
+still requires authentication. Hiding the biography also hides career highlights.
+Custom biographies remain intact; summaries are generated on read, not bulk-written.
+
+The same approved/indexable predicate controls sitemap membership, page robots,
+unfiltered A–Z discovery and new race/club links. Race pages show at most 12 eligible
+profile links from published canonical results. Club pages show at most 100 eligible
+profiles, with a browse link when more exist; owner club-sharing opt-outs are honoured.
+Public previews link to the club when that association is shared and offer the
+existing Share / Copy link controls. No invitations or messages are sent automatically.
+
+`node scripts/verify-public-career-discovery.mjs` exercises actual anonymous HTML,
+sitemap and directory output plus race/club links in a disposable synthetic database.
+`npm run verify:athlete-search-content` covers summary selection, metadata and
+verification qualifications. `npm run verify:profile-view-login` retains the complete
+anonymous/member boundary regression, allowing only the new bounded event summary.
 
 ## 7 October 2026 indexing notices
 

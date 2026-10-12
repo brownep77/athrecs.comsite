@@ -13,7 +13,7 @@ export function searchSnippet(value: string, limit = 175): string {
     .trimEnd()}…`;
 }
 
-/** Only the anonymous, five-result DTO may supply public search metadata. */
+/** Only the anonymous preview and its bounded public career summary supply metadata. */
 export function publicAthleteSearchContent(profile: PublicAthletePreview) {
   const sports = [
     ...new Set(
@@ -25,15 +25,25 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
   const sportLabel = sports.length <= 2 ? sports.join(" & ") : "Sport";
   const title = `${profile.displayName} — ${sportLabel ? `${sportLabel} results & biography` : "Biography & latest results"} | ${SITE_NAME}`;
   const biography = clean(profile.biography.join(" "));
+  const career = profile.careerSummary;
+  const careerText = career
+    ? `${career.text} Selected recorded events: ${career.events
+        .map((event) => `${event.name} (${event.year}; ${event.verification.toLowerCase()})`)
+        .join("; ")}.`
+    : "";
   const events = [
     ...new Set(
-      profile.entries
-        .map((entry) =>
-          clean(
-            entry.kind === "recorded" ? entry.result.eventName : entry.result.performance.meeting,
-          ),
-        )
-        .filter(Boolean),
+      career?.events.length
+        ? career.events.map((event) => event.name)
+        : profile.entries
+            .map((entry) =>
+              clean(
+                entry.kind === "recorded"
+                  ? entry.result.eventName
+                  : entry.result.performance.meeting,
+              ),
+            )
+            .filter(Boolean),
     ),
   ].slice(0, 2);
   // "Recorded" describes the table, without upgrading unverified results to verified finishes.
@@ -61,7 +71,9 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
         "@id": `${url}#athlete`,
         name: profile.displayName,
         url,
-        ...(biography ? { description: biography } : {}),
+        ...(biography || careerText
+          ? { description: [biography, careerText].filter(Boolean).join(" ") }
+          : {}),
       },
     },
   };

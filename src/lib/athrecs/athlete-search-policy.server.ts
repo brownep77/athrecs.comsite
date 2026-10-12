@@ -17,6 +17,13 @@ export const approvedPublicAthleteSql = `a.profile_visibility = 'public'
       and approval.entity_id = a.id::text
       and approval.after_value->>'profile_visibility' = 'public'
   ) or exists (
+    select 1 from network_audit_log approval
+    where approval.action = 'athlete.profile_admin_published'
+      and approval.entity_type = 'athlete' and approval.entity_id = a.id::text
+      and approval.after_value->>'athleteId' = a.id::text
+      and approval.after_value->>'profile_visibility' = 'public'
+      and not exists (select 1 from athlete_account_links l where l.athlete_id = a.id)
+  ) or exists (
     select 1 from athlete_account_links l
     join athlete_public_shares s on s.user_id = l.user_id
     where l.athlete_id = a.id and l.status = 'active'

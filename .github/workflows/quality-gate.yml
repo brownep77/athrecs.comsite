@@ -58,6 +58,7 @@ jobs:
         run: |
           npm run verify:athlete-search-content
           node scripts/verify-athlete-discovery-pagination.mjs
+          node scripts/verify-public-career-discovery.mjs
 
       - name: Verify indexing recovery and archive privacy
         run: node scripts/verify-indexing-recovery.mjs
