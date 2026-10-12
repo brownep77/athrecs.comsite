@@ -21,7 +21,10 @@ export async function athleteSitemapSlugs(sql: Sql, page: number): Promise<strin
   if (!Number.isSafeInteger(page) || page < 1) return [];
   const rows = await withDiscoveryRead(sql, (read) =>
     read.query<{ slug: string }>(
-      `select slug from (${indexableProfiles}) profiles
+      // Build the eligible set before LIMIT influences the join plan. Otherwise
+      // underestimated approval joins can rescan the entire set for each slug.
+      `with profiles as materialized (${indexableProfiles})
+     select slug from profiles
      order by sort_key limit $1 offset $2`,
       [ATHLETE_SITEMAP_PAGE_SIZE, (page - 1) * ATHLETE_SITEMAP_PAGE_SIZE],
     ),
