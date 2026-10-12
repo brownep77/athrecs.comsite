@@ -281,7 +281,7 @@ try {
     fullPage: true,
   });
   await page.getByRole("button", { name: "Email claim invitation", exact: true }).click();
-  await page.getByText(/Invitation sent from support@athrecs.com/).waitFor();
+  await page.getByText(/Invitation sent from Paul at ATHRECS <paul@athrecs\.com>/).waitFor();
   assert.equal((await page.evaluate(() => window.invitationEmails)).length, 1);
   await page.getByRole("button", { name: "Show all signups" }).click();
   assert.equal(
@@ -360,7 +360,7 @@ try {
     fullPage: true,
   });
   await externalEmail.click();
-  await page.getByText(/Invitation sent from support@athrecs.com/).waitFor();
+  await page.getByText(/Invitation sent from Paul at ATHRECS <paul@athrecs\.com>/).waitFor();
   assert.equal((await page.evaluate(() => window.invitationEmails)).length, 2);
   await page.getByLabel("Invitation email (optional)").fill("");
   assert.equal(
