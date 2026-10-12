@@ -185,7 +185,7 @@ function CollectedRegister({ view }: { view: "records" | "sources" }) {
       )}
       <p className="rounded-lg bg-cyan-50 p-4 text-sm leading-6 text-cyan-950">
         {view === "sources"
-          ? "Feeds can share a website. Coverage below counts records from that website and is repeated for its feeds; it does not mean every page has been collected. Mixed-sport and unclassified sources remain research leads. Event records here are running and parkrun only."
+          ? "Percentages measure fully extracted pages or documents in the known backlog, not the entire archive. Partial, held and failed items stay in the denominator; unclassified links and non-race material are excluded. Feeds on the same website share these counts. Mixed-sport and unclassified sources remain research leads. Event records here are running and parkrun only."
           : "These are source observations, not a count of unique races. Different sources can describe the same event. A year without a date is retained as year only. Result observations can be partial or overlapping; they are not verified finishers."}
       </p>
       <form onSubmit={apply} className={`${box} space-y-4`} aria-label="Filter collected sources">
@@ -246,6 +246,7 @@ function CollectedRegister({ view }: { view: "records" | "sources" }) {
                     ["athlete-histories", "Saved athlete histories"],
                     ["fixture-candidates", "Fixture review queue"],
                     ["saved-fixtures", "Saved fixture sheets"],
+                    ["source-index", "Collected fixture and results indexes"],
                     ["catalogue", "Existing catalogue"],
                   ].map(([v, l]) => (
                     <option key={v} value={v}>
@@ -327,7 +328,7 @@ function CollectedRegister({ view }: { view: "records" | "sources" }) {
                         "Coverage and scope",
                         "Collection status",
                         "Records from website",
-                        "Saved links to check",
+                        "Extraction progress",
                       ].map((x) => (
                         <th key={x} className="p-4">
                           {x}
@@ -362,9 +363,43 @@ function CollectedRegister({ view }: { view: "records" | "sources" }) {
                           <p>{number(r.result_records)} with results</p>
                         </td>
                         <td className="p-4">
-                          <p>{number(r.pending_urls)} cursor URLs</p>
+                          <p className="font-semibold tabular-nums">
+                            {r.extraction_percent === null
+                              ? "Not measured"
+                              : `${r.extraction_percent}% extracted`}
+                          </p>
+                          {r.known_items > 0 && (
+                            <>
+                              <progress
+                                className="mt-2 h-2 w-36"
+                                max={r.known_items}
+                                value={r.extracted_items}
+                                aria-label={`${r.extracted_items} of ${r.known_items} known items extracted`}
+                              />
+                              <p className="mt-1 text-xs">
+                                {number(r.extracted_items)} / {number(r.known_items)} known pages or
+                                documents
+                              </p>
+                              <p className="mt-1 text-xs">
+                                {number(r.pending_items)} pending · {number(r.partial_items)}{" "}
+                                partial · {number(r.held_items)} held · {number(r.failed_items)}{" "}
+                                failed
+                              </p>
+                            </>
+                          )}
+                          <p className="mt-1 text-xs">
+                            Fixture/index pages: {number(r.fixture_extracted)} /{" "}
+                            {number(r.fixture_items)}
+                          </p>
+                          <p className="mt-1 text-xs">
+                            Results pages: {number(r.results_extracted)} / {number(r.results_items)}
+                          </p>
+                          <p className="mt-1 text-xs text-slate-500">Full archive total: unknown</p>
                           <p className="mt-1 text-xs text-slate-500">
-                            May include navigation links
+                            {number(r.unclassified_items)} links need classification
+                          </p>
+                          <p className="mt-1 text-xs text-slate-500">
+                            Updated: {r.progress_checked_at?.slice(0, 10) || "Not checked"}
                           </p>
                         </td>
                       </tr>

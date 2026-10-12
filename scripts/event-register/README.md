@@ -47,3 +47,28 @@ npm run typecheck
 All collection API calls use staff middleware. Both new tables enable RLS and
 revoke public privileges. No source evidence is included in anonymous catalogue
 feeds. Source refreshes do not change the public catalogue revision.
+
+## Extraction progress
+
+`refresh-extraction-progress.sql` maintains staff-only, resumable work items in
+`event_register_extraction_items`. Run it after source-record refresh. The source
+coverage view reports fully extracted / known classified pages or documents,
+with separate fixture/index and results counts. Partial, held, failed and pending
+items remain in the denominator. Navigation links awaiting classification and
+confirmed non-race documents do not enter the denominator. No full archive total
+is inferred; even 100% of known work is not proof that the whole archive is done.
+Feeds sharing a host share progress. CDN documents use their discovery website.
+
+`extract-saved-result-documents.py` accepts an inventory and local original bytes.
+It checks the saved SHA-256, preserves printed headers and page/line locations,
+and separates explicitly labelled day columns. It emits raw observations only:
+all nonempty extractions remain partial until column mapping and remaining
+layouts have been reviewed. It neither creates athlete performances nor marks
+identity verified. Cumulative standings and non-running documents are classified
+separately. Unknown dates remain unknown; a year is not turned into 1 January.
+Keep the input/output, source originals and database import receipts private.
+
+New index observations use `origin='source-index'`. An index listing and a
+results table are different work items: finding a results link never means its
+finishers have been extracted. Reconcile known source URL/date/programme matches
+before adding more catalogue editions. Registry reuse holds remain unchanged.

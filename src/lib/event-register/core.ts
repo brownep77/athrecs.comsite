@@ -149,6 +149,7 @@ export const collectionFilters = z.object({
       "athlete-histories",
       "fixture-candidates",
       "saved-fixtures",
+      "source-index",
       "catalogue",
     ])
     .default("collected"),
