@@ -59,10 +59,10 @@ try {
     await db.exec(readFileSync(`migrations/${name}`, "utf8"));
   console.log("Adding synthetic catalogue");
   await sql`insert into "user"(id,name,email,"emailVerified") values(${actor},'Synthetic Staff','staff@example.test',true)`;
-  async function event(slug, sport, surface = "Road") {
+  async function event(slug, sport, surface = "Road", country = "England") {
     return (
       await sql`insert into events(slug,name,sport,country,county,surface,organiser,website)
-      values(${slug},${slug},${sport},'England','Norfolk',${surface},'Synthetic Organiser','https://example.test') returning id`
+      values(${slug},${slug},${sport},${country},'Norfolk',${surface},'Synthetic Organiser','https://example.test') returning id`
     )[0].id;
   }
   async function edition(id, date, distance) {
@@ -111,6 +111,10 @@ try {
     "Same-year weekly runs and festival distances remain distinct; mixed athletics excluded",
   );
   assert.equal(all.summary.parkruns, 1);
+  assert.ok(
+    all.facets.countries.includes("United Kingdom"),
+    "UK aggregate is selectable even when the catalogue only has home-nation labels",
+  );
   assert.equal(all.summary.result_editions, 2);
   assert.equal(all.summary.archive_editions, 1);
   assert.equal(
@@ -242,8 +246,59 @@ try {
     4,
     "All reads and writes staff-only",
   );
+  console.log("Testing UK fixture coverage and pagination");
+  const ukIds = [road, park, track, empty];
+  for (const country of ["United Kingdom", "Scotland", "Wales", "Northern Ireland", " UK ", "GB"]) {
+    const id = await event(
+      `synthetic-country-${country.trim().toLowerCase().replaceAll(" ", "-")}`,
+      "Running",
+      "Road",
+      country,
+    );
+    ukIds.push(id);
+    await edition(id, "2026-10-12", "5K");
+  }
+  for (const country of ["Ireland", "Jersey", "Guernsey", "Isle of Man"]) {
+    await event(
+      `synthetic-country-${country.toLowerCase().replaceAll(" ", "-")}`,
+      "Running",
+      "Road",
+      country,
+    );
+  }
+  for (const country of ["United Kingdom", " uk ", "Great Britain"]) {
+    const uk = await service.listRegister({ country }, sql);
+    assert.deepEqual(
+      new Set(uk.rows.map((r) => r.id)),
+      new Set(ukIds),
+      "UK includes every home nation and UK-labelled fixtures, without aliases or neighbouring countries",
+    );
+    assert.equal(uk.summary.editions, 12);
+    assert.equal(uk.summary.parkruns, 1);
+  }
+  assert.equal((await service.listRegister({ country: "England" }, sql)).summary.events, 4);
+  assert.equal((await service.listRegister({ country: "Scotland" }, sql)).summary.events, 1);
+  assert.equal((await service.listRegister({ country: "Ireland" }, sql)).summary.events, 1);
+  assert.equal(
+    (await service.listRegister({ country: "United Kingdom", sport: "Parkrun" }, sql)).rows[0].id,
+    park,
+  );
+  const historicalUk = await service.listRegister({ country: "United Kingdom", year: 2025 }, sql);
+  assert.equal(historicalUk.summary.events, 1);
+  assert.equal(historicalUk.rows[0].id, road);
+  for (let i = 0; i < 45; i++) ukIds.push(await event(`synthetic-page-${i}`, "Running"));
+  const firstPage = await service.listRegister({ country: "United Kingdom" }, sql);
+  const secondPage = await service.listRegister({ country: "United Kingdom", page: 1 }, sql);
+  assert.equal(firstPage.rows.length, 50);
+  assert.equal(secondPage.rows.length, 5);
+  assert.equal(firstPage.summary.events, 55);
+  assert.equal(secondPage.summary.events, 55);
+  assert.deepEqual(
+    new Set([...firstPage.rows, ...secondPage.rows].map((r) => r.id)),
+    new Set(ukIds),
+  );
   console.log(
-    "Event register checks passed: scope, editions, coverage, history evidence, contact history, concurrent edits, safe exports and staff guards.",
+    "Event register checks passed: scope, editions, UK/home-nation filters, pagination, coverage, history evidence, contact history, concurrent edits, safe exports and staff guards.",
   );
 } catch (error) {
   console.error("Verification failed", error);

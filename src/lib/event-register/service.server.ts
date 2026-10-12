@@ -1,6 +1,13 @@
 import { getSql, type Sql } from "../db";
 import { retainedFixtureAliasSlugs } from "../../data/fixture-deduplication";
-import { registerFilters, eventInput, historyInput, contactInput } from "./core";
+import {
+  registerFilters,
+  registerCountryValues,
+  registerCountryOptions,
+  eventInput,
+  historyInput,
+  contactInput,
+} from "./core";
 
 type ScalarRow = Record<string, string | number | boolean | null>;
 type EditionRow = Record<
@@ -74,7 +81,7 @@ export function registerQuery(
     aliases,
     f.q ? `%${f.q.replace(/[\\%_]/g, "\\$&")}%` : null,
     f.sport === "All" ? null : f.sport,
-    f.country || null,
+    registerCountryValues(f.country),
     f.surface || null,
     f.year,
     f.gap,
@@ -83,7 +90,8 @@ export function registerQuery(
     select e.* from running_register_events e
     where not(e.slug = any($1::text[]))
       and ($2::text is null or concat_ws(' ',e.name,e.organiser,e.city,e.county,e.slug) ilike $2)
-      and ($3::text is null or e.sport=$3) and ($4::text is null or e.country=$4)
+      and ($3::text is null or e.sport=$3)
+      and ($4::text[] is null or lower(trim(e.country))=any($4::text[]))
       and ($5::text is null or e.surface=$5)
   ), result_counts as (
     select edition_id,count(*)::int n from results group by edition_id
@@ -160,7 +168,10 @@ export async function listRegister(input: unknown, connection?: Sql) {
   return {
     rows,
     summary: summaries[0],
-    facets: facets[0],
+    facets: {
+      countries: registerCountryOptions(facets[0]?.countries ?? []),
+      surfaces: facets[0]?.surfaces ?? [],
+    },
     page: f.page,
     checkedAt: new Date().toISOString(),
   };

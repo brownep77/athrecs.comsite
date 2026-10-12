@@ -129,6 +129,7 @@ function EventRegister() {
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
             Running, parkrun, obstacle running and identifiable running disciplines within
             athletics. Explore the editions we hold, what has been collected and what to find next.
+            All running fixtures already in the catalogue are included automatically.
           </p>
         </div>
         <Button
@@ -187,7 +188,9 @@ function EventRegister() {
             >
               <option value="">All countries</option>
               {data?.facets.countries.filter(Boolean).map((x) => (
-                <option key={x}>{x}</option>
+                <option key={x} value={x}>
+                  {x === "United Kingdom" ? "United Kingdom (all home nations)" : x}
+                </option>
               ))}
             </select>
           </Field>
@@ -270,6 +273,8 @@ function EventRegister() {
         <>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p aria-live="polite" className="text-sm text-slate-600">
+              Showing {number(data.rows.length ? data.page * 50 + 1 : 0)}–
+              {number(data.rows.length ? data.page * 50 + data.rows.length : 0)} of{" "}
               {number(data.summary.events)} matching events · {number(data.summary.no_contacts)}{" "}
               without contact details · {number(data.summary.history_missing)} needing history
               research
