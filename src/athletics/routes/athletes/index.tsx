@@ -32,7 +32,7 @@ export const Route = createFileRoute("/athletes/")({
     }
     return {
       ...directory,
-      indexable: !deps.q && !deps.country && !deps.sport && directory.total > 0,
+      indexable: !deps.q && !deps.country && !deps.sport && directory.athletes.length > 0,
     };
   },
   headers: ({ loaderData }) => ({
@@ -73,7 +73,9 @@ function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
   const search = Route.useSearch();
   const navigate = useNavigate();
   const pending = useRouterState({ select: (s) => s.isLoading });
-  const pages = Math.max(1, Math.ceil(directory.total / directory.pageSize));
+  const pages =
+    directory.total === null ? null : Math.max(1, Math.ceil(directory.total / directory.pageSize));
+  const hasMore = directory.hasMore ?? (pages !== null && directory.page < pages);
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const fields = new FormData(event.currentTarget);
@@ -188,10 +190,9 @@ function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
       </form>
       <div className="flex flex-wrap items-center justify-between gap-2 text-sm">
         <p role="status" className="text-muted">
-          {directory.total.toLocaleString("en-GB")} public profile{directory.total === 1 ? "" : "s"}
-          {directory.total > 0
-            ? ` · Showing ${(directory.page - 1) * directory.pageSize + 1}–${Math.min(directory.page * directory.pageSize, directory.total)}`
-            : ""}
+          {directory.athletes.length
+            ? `Showing ${(directory.page - 1) * directory.pageSize + 1}–${(directory.page - 1) * directory.pageSize + directory.athletes.length}${directory.total === null ? " public profiles" : ` of ${directory.total.toLocaleString("en-GB")} public profiles`}`
+            : "No public profiles"}
         </p>
         {search.q || search.country || search.sport ? (
           <Link to="/athletes" search={{}} className="font-semibold text-accent">
@@ -221,7 +222,7 @@ function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
           </Link>
         </section>
       )}
-      {pages > 1 ? (
+      {directory.page > 1 || hasMore ? (
         <nav
           aria-label="Athlete directory pages"
           className="flex items-center justify-between gap-3"
@@ -230,9 +231,10 @@ function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
             Previous
           </PageLink>
           <p className="text-xs text-muted">
-            Page {directory.page} of {pages}
+            Page {directory.page}
+            {pages === null ? "" : ` of ${pages}`}
           </p>
-          <PageLink search={search} page={directory.page + 1} disabled={directory.page >= pages}>
+          <PageLink search={search} page={directory.page + 1} disabled={!hasMore}>
             Next
           </PageLink>
         </nav>

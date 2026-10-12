@@ -40,10 +40,12 @@ export type DirectoryAthlete = {
 
 export type AthleteDirectory = {
   athletes: DirectoryAthlete[];
-  total: number;
+  /** Exact only when the last page is reached; normal browsing avoids a recount. */
+  total: number | null;
+  hasMore?: boolean;
   page: number;
   pageSize: number;
-  publicAthletes: number;
+  publicAthletes: number | null;
   /** Full-catalogue total is omitted by the bounded public browse query. */
   publicResults: number | null;
   countries: string[];
