@@ -40,9 +40,9 @@ function escapeHtml(value: string): string {
 
 export async function sendAthrecsAuthEmail(
   email: AuthEmail,
-  options: { idempotencyKey?: string; from?: string; replyTo?: string } = {},
+  options: { idempotencyKey?: string; from?: string; replyTo?: string; apiKey?: string } = {},
 ): Promise<void> {
-  const apiKey = text(process.env.RESEND_API_KEY);
+  const apiKey = text(options.apiKey) ?? text(process.env.RESEND_API_KEY);
   if (!apiKey) {
     throw new Error("ATHRECS authentication email is not configured");
   }

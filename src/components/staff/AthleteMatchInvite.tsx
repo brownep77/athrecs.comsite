@@ -53,10 +53,10 @@ export function AthleteMatchInvite({
   function deliveryMessage(status: string) {
     return (
       {
-        sent: "Invitation sent from support@athrecs.com. Delivery to the inbox has not been confirmed.",
+        sent: `Invitation sent from ${CLAIM_INVITATION_FROM}. Delivery to the inbox has not been confirmed.`,
         sending: "An email send is already in progress. Refresh shortly.",
         failed:
-          "The email could not be confirmed. Use Retry email; the same invitation is retained.",
+          "The invitation email could not be sent or its delivery confirmed. Use Retry email; the same invitation is retained.",
         held: "Delivery needs checking before another email is sent. The previous attempt may have been accepted.",
       }[status] ?? status
     );

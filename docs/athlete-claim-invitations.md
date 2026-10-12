@@ -13,7 +13,7 @@ search. An email local part is never treated as identity evidence.
 Each candidate shows the club/location, stored result count, recent races and
 reason for the suggestion. Select the profile, record why it may belong to the
 recipient and check the confirmation. The email preview shows the actual recipient
-and copy before **Email claim invitation** sends from `support@athrecs.com`.
+and copy before **Email claim invitation** sends from `paul@athrecs.com`.
 **Create WhatsApp / Viber / Telegram invitation** creates no email. Copy the message
 or open a prepared message in the chosen app. WhatsApp uses a saved phone when
 available; Telegram uses a saved username or phone. Otherwise the app lets staff
@@ -36,7 +36,7 @@ profile/result through signup. Creating an invitation never creates a placeholde
 account, changes signup statistics, changes marketing consent, publishes results
 or grants ownership.
 
-- Email sends explicitly from `support@athrecs.com`, using the existing frozen
+- Email sends explicitly from `paul@athrecs.com`, using the existing frozen
   payload, delivery reservation and provider idempotency key. A new recipient
   creates their account using the exact invited email and verifies it. If the
   email already belongs to an account, the invitation binds to that account.
@@ -96,7 +96,16 @@ instead of risking another send outside the provider's 24-hour deduplication
 window. There is no automatic bulk mailing, cron reminder or invitation on signup.
 
 The endpoint rechecks recipient email, expiry, response and ownership before
-sending. Resend uses the existing verified AthRecs domain/key. Email is disabled
+sending. Resend sends invitations as `paul@athrecs.com` with
+`Reply-To: paul@athrecs.com`. Production requires a separate sending-only key
+restricted to the verified `athrecs.com` domain, stored as the sensitive variable
+`ATHRECS_INVITATION_RESEND_API_KEY`. Invitations stay disabled until this key is
+configured; they never fall back to the login key. `RESEND_API_KEY` and
+`AUTH_EMAIL_FROM` configure login and other account emails independently. Production
+now uses a sending-only `athrecs.com` key and the bare `paul@athrecs.com` sender.
+The older `auth.athrecs.com` key has not been revoked.
+Verifying a domain alone does not add it to a domain-restricted API key.
+Existing invitation content and links remain frozen for safe retries. Email is disabled
 outside AthRecs production with a persistent database. Vercel preview/RunRecs
 invitation mutations are blocked before accessing the database. Local disposable
 PGlite can exercise invitation records but cannot send email.
