@@ -127,3 +127,13 @@ node scripts/submit-athlete-indexnow.mjs --batch-size=500 --max-batches=10 --sta
 Use the existing GitHub Actions workflow's **Run workflow** action on `main` to
 resume its shared checkpoint. A local run has its own cursor. Do not delete a
 checkpoint to hide a failing batch; investigate the profile or receipt first.
+# Sitemap read reliability
+
+Live sitemap reads have a 90-second timeout and one retry only when the read times
+out. Individual profile checks retain their 30-second limit. A retry never permits
+a failed HTTP status, redirected page, changed sitemap membership, search opt-out
+or missing canonical to pass. Persistent errors still prevent submission and do
+not advance the batch checkpoint. Errors identify the failing URL, and the overall
+batch time budget remains in force. This addresses intermittent sitemap timeouts;
+it does not assert that every profile has been indexed.
+
