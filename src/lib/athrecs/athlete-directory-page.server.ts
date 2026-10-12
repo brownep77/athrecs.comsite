@@ -1,64 +1,90 @@
 import type { Sql } from "../db";
 import type { AthleteDirectory, AthleteDirectorySearch } from "./athlete-directory";
-import { indexableApprovedAthleteSetSql } from "./athlete-search-policy.server.ts";
+import {
+  indexableApprovedAthleteSql,
+  indexableApprovedAthleteSetSql,
+} from "./athlete-search-policy.server.ts";
 import { parseAthleteId } from "./athlete-id.ts";
+import { countryNames } from "./country-flags.ts";
 import { withDiscoveryRead } from "./discovery-read.server.ts";
 
-/** Public alphabetical browsing: paginate identities before reading histories. */
+// Keep this expression aligned with the public_athlete_search_trgm index.
+const countrySql = `case
+  when lower(trim(a.country)) in ('england','scotland','wales','northern ireland','united kingdom','uk','gb','gbr','great britain') then 'United Kingdom'
+  when lower(trim(a.country)) in ('ireland','republic of ireland','ie','irl') then 'Ireland'
+  else trim(coalesce(a.country,'')) end`;
+const documentSql = `lower(coalesce(a.display_name,'')||' '||coalesce(a.city,'')||' '||(${countrySql})||' '||coalesce(a.profile_roles,''))`;
+const citySql = `case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+  where l.athlete_id=a.id and l.status='active' and s.share_location=false) then a.city end`;
+const publicCountrySql = `case when exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+  where l.athlete_id=a.id and l.status='active' and s.share_location=false) then '' else (${countrySql}) end`;
+const clubSql = `case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+  where l.athlete_id=a.id and l.status='active' and s.share_club=false) then nullif(c.name,'Unattached') end`;
+
+/** Read one page plus a look-ahead row, checking current permissions in SQL. */
 export async function readAthleteDirectoryPage(
   sql: Sql,
   search: AthleteDirectorySearch,
 ): Promise<AthleteDirectory> {
-  // Filtered searches remain noindex and preserve public directory discovery;
-  // indexable A–Z pages contain only profiles eligible for search themselves.
-  const eligible =
-    search.q || search.country
-      ? `(a.profile_type='Public figure' or a.profile_visibility='public')
-        and exists (select 1 from athlete_identifiers i where i.athlete_id=a.id)
-        and not exists (
-        select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
+  const page = search.page ?? 1;
+  const filteredSearch = Boolean(search.q || search.country);
+  // Filtered searches remain noindex and retain their existing audience.
+  const eligible = filteredSearch
+    ? `(a.profile_type='Public figure' or a.profile_visibility='public')
+      and exists (select 1 from athlete_identifiers i where i.athlete_id=a.id)
+      and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
         where l.athlete_id=a.id and l.status='active' and (s.enabled=false or s.share_results=false))`
-      : indexableApprovedAthleteSetSql;
+    : indexableApprovedAthleteSql;
+  // A literal match of the full query must contain its longest word. This
+  // index prefilter preserves substring/cross-field matching; the final match
+  // below uses only currently visible fields, so hidden attributes cannot leak.
+  const token = search.q?.split(/\s+/).sort((a, b) => b.length - a.length)[0];
+  const pattern = token && token.length >= 3 ? `%${token.replace(/[\\%_]/g, "\\$&")}%` : null;
+  const parsedNumber = parseAthleteId(search.q);
+  const athleteNumber =
+    parsedNumber && BigInt(parsedNumber) <= 9223372036854775807n ? parsedNumber : null;
   const values = [
     search.q || null,
-    parseAthleteId(search.q),
+    athleteNumber,
     search.country || null,
     search.letter || null,
-    search.page ?? 1,
+    page,
+    pattern,
   ];
-  const [directory] = await withDiscoveryRead(sql, (read) =>
-    read.query<AthleteDirectory>(
-      `
-    with public_athletes as materialized (
-      select a.id, a.slug, a.display_name, a.profile_roles,
-        case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
-          where l.athlete_id=a.id and l.status='active' and s.share_location=false) then a.city end as city,
-        case when exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
-          where l.athlete_id=a.id and l.status='active' and s.share_location=false) then ''
-          when lower(trim(a.country)) in ('england','scotland','wales','northern ireland','united kingdom','uk','gb','gbr','great britain') then 'United Kingdom'
-          when lower(trim(a.country)) in ('ireland','republic of ireland','ie','irl') then 'Ireland'
-          else trim(coalesce(a.country,'')) end as country,
-        case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
-          where l.athlete_id=a.id and l.status='active' and s.share_club=false) then nullif(c.name,'Unattached') end as club
-      from athletes a
+  const candidateCte = `search_candidates as materialized (
+    select a.id from athletes a where $6::text is not null
+      and (a.profile_visibility='public' or a.profile_type='Public figure')
+      and ${documentSql} like lower($6)
+    union
+    select a.id from athletes a join clubs c on c.id=a.club_id
+      where $6::text is not null and lower(c.name) like lower($6)
+        and (a.profile_visibility='public' or a.profile_type='Public figure')
+    union
+    select i.athlete_id from athlete_identifiers i where i.number=($2::text)::bigint and i.athlete_id is not null
+    union
+    select l.athlete_id from athlete_identifiers i join athlete_account_links l on l.user_id=i.user_id
+      where i.number=($2::text)::bigint and l.status='active'
+  )`;
+  const matches = `($1::text is null or (
+      (position(lower($1) in lower(concat_ws(' ',a.display_name,${clubSql},${citySql},${publicCountrySql},a.profile_roles)))>0
+        or ($2::text is not null and exists (select 1 from athlete_resolved_ids i where i.athlete_id=a.id
+          and (i.athlete_number::text=$2 or i.source_number::text=$2))))))
+    and ($3::text is null or ((${countrySql})=$3 and (${publicCountrySql})=$3))
+    and ($4::text is null or upper(left(a.display_name,1))=$4)`;
+  const [directory] = await sql.query<AthleteDirectory>(
+    `
+    with ${candidateCte}, candidates as materialized (
+      select a.id,a.slug,a.display_name,a.profile_roles,
+        ${citySql} as city,${publicCountrySql} as country,${clubSql} as club
+      from athletes a ${pattern ? "join search_candidates selected on selected.id=a.id" : ""}
       left join clubs c on c.id=a.club_id
-      where ${eligible}
-    ), filtered as materialized (
-      select * from public_athletes where
-        ($1::text is null or position(lower($1) in lower(concat_ws(' ',display_name,club,city,country,profile_roles)))>0
-          or ($2::text is not null and exists (
-            select 1 from athlete_resolved_ids i where i.athlete_id=public_athletes.id
-              and (i.athlete_number::text=$2 or i.source_number::text=$2))))
-        and ($3::text is null or country=$3)
-        and ($4::text is null or upper(left(display_name,1))=$4)
-    ), totals as (
-      select count(*)::int as total, least($5::int,greatest(1,ceil(count(*)::numeric/24)::int)) as page from filtered
-    ), page_identities as materialized (
-      select * from filtered order by lower(display_name), id
-      limit 24 offset (select (page-1)*24 from totals)
+      where ${eligible} and ${matches}
+      order by lower(a.display_name),a.id
+      limit 25 offset ($5::int-1)*24
     ), paged as materialized (
-      select a.*, i.athlete_number::text as athlete_number, i.source_number::text as source_number
-      from page_identities a join athlete_resolved_ids i on i.athlete_id=a.id
+      select a.*, i.athlete_number::text as athlete_number
+      from (select * from candidates order by lower(display_name),id limit 24) a
+      join athlete_resolved_ids i on i.athlete_id=a.id
     ), records as (
       select r.athlete_id, count(*)::int as n, array_agg(distinct e.sport) as sports
       from paged a join results r on r.athlete_id=a.id
@@ -88,12 +114,41 @@ export async function readAthleteDirectoryPage(
         array(select distinct sport from unnest(coalesce(r.sports,array[]::text[])||coalesce(h.sports,array[]::text[])) sport order by sport) as sports
       from paged a left join records r on r.athlete_id=a.id left join histories h on h.athlete_id=a.id
     ) select coalesce((select jsonb_agg(cards order by lower(display_name),id) from cards),'[]'::jsonb) as athletes,
-      total,page,24 as "pageSize",(select count(*)::int from public_athletes) as "publicAthletes",
-      null::int as "publicResults", array(select distinct country from public_athletes where country<>'' order by country) as countries,
-      array[]::text[] as sports from totals
+      case when (select count(*) from candidates)<25
+        then (($5::int-1)*24+(select count(*)::int from candidates)) else null end as total,
+      $5::int as page,24 as "pageSize",null::int as "publicAthletes",null::int as "publicResults",
+      (select count(*)>24 from candidates) as "hasMore",array[]::text[] as countries,array[]::text[] as sports
   `,
-      values,
-    ),
+    values,
   );
-  return directory;
+  // Only an invalid/deleted page needs a full count to find its canonical last
+  // page. Ordinary browsing and searching never wait for catalogue totals.
+  if (!directory.athletes.length && page > 1) {
+    const [row] = await withDiscoveryRead(sql, (read) =>
+      read.query<{ total: number }>(
+        `
+      with ${candidateCte} select count(*)::int as total,$5::int as requested_page
+      from athletes a ${pattern ? "join search_candidates selected on selected.id=a.id" : ""}
+      left join clubs c on c.id=a.club_id
+      where ${filteredSearch ? eligible : indexableApprovedAthleteSetSql} and ${matches}
+    `,
+        values,
+      ),
+    );
+    const lastPage = Math.max(1, Math.ceil(row.total / 24));
+    if (lastPage < page) return readAthleteDirectoryPage(sql, { ...search, page: lastPage });
+  }
+  // Country choices are a static vocabulary plus this page's visible values,
+  // rather than a second catalogue scan or a cached list of private attributes.
+  return {
+    ...directory,
+    countries: [
+      ...new Set([
+        ...Object.values(countryNames),
+        ...directory.athletes.map((athlete) => athlete.country),
+      ]),
+    ]
+      .filter(Boolean)
+      .sort(),
+  };
 }

@@ -52,24 +52,34 @@ anonymous preview and member-history boundary.
 
 ## Catalogue query performance
 
-Directory and athlete-sitemap reads join publication approvals as a set. The
-single-profile eligibility predicate stays available for individual requests;
-the sitemap regression test compares both after privacy and approval changes.
-The generated `publication_athlete_key` is derived from the original audit JSON
-on every write and lets the bulk read use a covering index without reading full
-audit payloads. It is never an independent publication permission.
+Normal directory pages read 24 currently eligible identities plus one look-ahead
+row. Exact totals are omitted until the last page is reached; Previous/Next links
+and stable page URLs remain crawlable. Only an out-of-range request runs the bulk
+count needed to redirect to the last valid page. Country choices use the standard
+country vocabulary plus the visible values on the current page, not a catalogue
+scan or a cached audience. Sport-filtered requests retain the existing reader.
 
-Directory athlete-number hydration happens only after the 24 identities have
-been selected; number searches still inspect both source and resolved IDs.
-Bulk reads use transaction-local 32 MB work memory with parallel workers disabled
-to reduce disk spills without multiplying memory per worker or changing later
-pooled requests. No profile audience, approval decision or country facet is cached.
-The database migration is required before deploying this query version. It uses
-a five-second lock-acquisition timeout and remains transactional.
+Ordered name, letter and country indexes support browsing. A trigram index selects
+name/place/role search candidates, with a separate indexed club lookup. The final
+substring match uses only currently visible fields, and every card still passes
+its live publication and ownership checks. Numeric athlete IDs retain both source
+and account aliases. No athlete cards or permission decisions are cached.
 
-Run `node scripts/verify-athlete-sitemap.mjs` and
-`node scripts/verify-athlete-discovery-pagination.mjs` to verify eligibility,
-privacy withdrawal, identifier search, pagination and connection-setting cleanup.
+Sitemap reads join publication approvals as a set and materialize eligibility
+before applying pagination. The generated `publication_athlete_key` is derived
+from the original audit JSON on every write; it is never an independent permission.
+Bulk reads use transaction-local 32 MB work memory with parallel workers disabled.
+Normal directory pages do not need that transaction or its extra round trips.
+
+The deployment migrations install the lookup indexes; PostgreSQL uses `pg_trgm`
+for substring search. Minimal embedded databases may omit the optional trigram
+index while retaining the same query semantics. The directory response exposes
+`Server-Timing: athlete_directory` for the full server-side data read.
+
+Run `node scripts/verify-athlete-discovery-pagination.mjs` and
+`node scripts/verify-indexing-recovery.mjs` for pagination, identifier search,
+hidden-field search, withdrawal, public metadata and canonical URL checks.
+`node scripts/verify-athlete-sitemap.mjs` covers sitemap eligibility and privacy.
 
 ## Public career highlights and profile links
 

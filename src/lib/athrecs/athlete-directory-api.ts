@@ -38,11 +38,18 @@ const inputSchema = z.object({
 export const getAthleteDirectory = createServerFn({ method: "GET" })
   .validator((input: z.input<typeof inputSchema> | undefined) => inputSchema.parse(input ?? {}))
   .handler(async ({ data }): Promise<AthleteDirectory> => {
+    const started = performance.now();
     await ensureAthrecsSeeded();
     const sql = await getSql();
     if (data.fastBrowse && !data.sport) {
       const { readAthleteDirectoryPage } = await import("./athlete-directory-page.server");
-      return withNationalities(sql, await readAthleteDirectoryPage(sql, data));
+      const directory = await withNationalities(sql, await readAthleteDirectoryPage(sql, data));
+      const { setResponseHeader } = await import("@tanstack/react-start/server");
+      setResponseHeader(
+        "Server-Timing",
+        `athlete_directory;dur=${(performance.now() - started).toFixed(1)}`,
+      );
+      return directory;
     }
     const q = data.q || null;
     const athleteNumber = parseAthleteId(q);
