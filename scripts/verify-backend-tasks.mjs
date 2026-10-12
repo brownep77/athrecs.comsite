@@ -38,7 +38,7 @@ try {
     assert(covered.has(route), `Top-level staff tool missing from panel: ${route}`);
   }
   assert.equal(await page.getByRole('link',{name:'Add or update athletes',exact:true}).getAttribute('href'),'/admin/athlete-tools');
-  assert.equal(await page.getByRole('link',{name:'Running event register',exact:true}).getAttribute('href'),'/admin/event-register');
+  assert.equal(await page.getByRole('link',{name:'Open Running event register',exact:true}).getAttribute('href'),'/admin/event-register');
   const linksCard = cards.filter({ has: page.getByRole("heading", { name: "Import official results-page links", exact: true }) });
   assert.match(await linksCard.innerText(), /adds links, not runners or finish times/);
   assert.equal(await linksCard.getByRole("link").getAttribute("href"), "/admin/result-links");
