@@ -14,18 +14,34 @@ function siteUrl(value) {
 
 async function getText(url, fetchImpl, contentType) {
   siteUrl(url);
-  const response = await fetchImpl(url, {
-    redirect: "error",
-    headers: { "Cache-Control": "no-cache" },
-    signal: AbortSignal.timeout(30000),
-  });
-  assert.equal(response.status, 200, `HTTP ${response.status} for ${url}`);
-  assert(!response.redirected, `Redirected response for ${url}`);
-  assert(!response.url || response.url === url, `Unexpected response URL for ${url}`);
-  assert.match(response.headers.get("content-type") ?? "", contentType, `Content type for ${url}`);
-  const text = await response.text();
-  assert(text.length <= 10_000_000, `Response too large for ${url}`);
-  return { response, text };
+  // Large live sitemaps can exceed the profile timeout while checking publication.
+  // Retry only a timed-out sitemap read, never a failed eligibility check or POST.
+  const sitemap = new URL(url).pathname.endsWith(".xml");
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const response = await fetchImpl(url, {
+        redirect: "error",
+        headers: { "Cache-Control": "no-cache" },
+        signal: AbortSignal.timeout(sitemap ? 90000 : 30000),
+      });
+      assert.equal(response.status, 200, `HTTP ${response.status} for ${url}`);
+      assert(!response.redirected, `Redirected response for ${url}`);
+      assert(!response.url || response.url === url, `Unexpected response URL for ${url}`);
+      assert.match(
+        response.headers.get("content-type") ?? "",
+        contentType,
+        `Content type for ${url}`,
+      );
+      const text = await response.text();
+      assert(text.length <= 10_000_000, `Response too large for ${url}`);
+      return { response, text };
+    } catch (error) {
+      if (sitemap && attempt === 0 && error.name === "TimeoutError") continue;
+      const failure = new Error(`Unable to validate ${url}: ${error.message}`, { cause: error });
+      failure.name = error.name;
+      throw failure;
+    }
+  }
 }
 
 function locations(xml, root, entry) {

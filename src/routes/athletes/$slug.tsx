@@ -5,6 +5,7 @@ import { PublicAthletePreview } from "@/components/athletes/PublicAthletePreview
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
+import { publicAthleteSearchContent } from "@/lib/athrecs/public-athlete-search-content";
 import { isPublicProfileSource } from "@/lib/athrecs/public-profile-sources";
 import { AthleteCareerHighlights } from "@/components/athletes/AthleteCareerHighlights";
 import { ProfileRecordHighlights } from "@/components/athletes/ProfileAchievements";
@@ -120,34 +121,8 @@ export const Route = createFileRoute("/athletes/$slug")({
   }),
   head: ({ params, loaderData }) => {
     const preview = loaderData?.kind === "public-preview" ? loaderData.preview : null;
-    const previewTitle = preview
-      ? `${preview.displayName} — ${preview.sports.length ? `${preview.sports.join(" & ")} results & biography` : "Biography & latest results"} | ${SITE_NAME}`
-      : "";
-    const previewBio = preview?.biography.join(" ") ?? "";
-    const previewUrl = preview ? absoluteUrl(`/athletes/${preview.slug}`) : "";
     const searchContent = preview
-      ? {
-          title: previewTitle,
-          description:
-            previewBio.slice(0, 175) ||
-            `Latest results for ${preview.displayName}. Sign in to view the full profile.`,
-          jsonLd: {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "@id": `${previewUrl}#webpage`,
-            url: previewUrl,
-            name: previewTitle,
-            description: previewBio,
-            inLanguage: "en-GB",
-            mainEntity: {
-              "@type": "Person",
-              "@id": `${previewUrl}#athlete`,
-              name: preview.displayName,
-              url: previewUrl,
-              description: previewBio,
-            },
-          },
-        }
+      ? publicAthleteSearchContent(preview)
       : loaderData?.kind === "published-history"
         ? athleteSearchContent(loaderData)
         : null;

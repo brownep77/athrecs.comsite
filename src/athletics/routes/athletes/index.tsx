@@ -1,4 +1,10 @@
-import { createFileRoute, Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  redirect,
+  useNavigate,
+  useRouterState,
+} from "@tanstack/react-router";
 import type { FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Search, UserRound } from "lucide-react";
 import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard";
@@ -17,6 +23,13 @@ export const Route = createFileRoute("/athletes/")({
   loaderDeps: ({ search }) => search,
   loader: async ({ deps }) => {
     const directory = await getAthleteDirectory({ data: { ...deps, fastBrowse: true } });
+    if (deps.page && deps.page !== directory.page) {
+      throw redirect({
+        to: "/athletes",
+        search: { ...deps, page: directory.page > 1 ? directory.page : undefined },
+        statusCode: 301,
+      });
+    }
     return {
       ...directory,
       indexable: !deps.q && !deps.country && !deps.sport && directory.total > 0,
@@ -109,6 +122,8 @@ function PublicDirectory({ directory }: { directory: AthleteDirectory }) {
         ))}
       </nav>
       <form
+        action="/athletes"
+        method="get"
         key={JSON.stringify(search)}
         onSubmit={submit}
         role="search"
@@ -255,7 +270,12 @@ function PageLink({
       {content}
     </span>
   ) : (
-    <Link to="/athletes" search={{ ...search, page }} className={`${className} text-accent`}>
+    <Link
+      to="/athletes"
+      search={{ ...search, page: page > 1 ? page : undefined }}
+      rel={children === "Previous" ? "prev" : "next"}
+      className={`${className} text-accent`}
+    >
       {content}
     </Link>
   );

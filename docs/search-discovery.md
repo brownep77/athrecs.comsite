@@ -31,6 +31,21 @@ After deployment, submit `https://www.athrecs.com/sitemap.xml` in the verified G
 
 New database records enter the appropriate live sitemap automatically if their public route is available. Add future static pages to `PUBLIC_PAGES`, with route-specific metadata. Do not add account tools, filter combinations, redirect aliases or private records.
 
+## Athlete name and event searches
+
+Public profile metadata is built from the anonymous biography and latest-five-results
+preview. Names, visible event names and verification qualifications remain consistent
+with the page. Running, parkrun, trail and ultra categories share a concise Running
+title; biographies and the visible tables retain their detail. A custom biography can
+mention an older race, with its existing evidence qualification, without publishing
+the gated results history. Search opt-outs and publication approval are unchanged.
+
+The public A–Z directory has crawlable previous/next links and a native GET search
+form. Out-of-range pages redirect to the last available page, and previous links to
+page one use its canonical URL. Run `npm run verify:athlete-search-content` for the
+public metadata regression checks and `npm run verify:profile-view-login` for the
+anonymous preview and member-history boundary.
+
 ## 7 October 2026 indexing notices
 
 Search Console reported two soft 404s and three race pages where Google selected another canonical. The Montenegro directory defaulted to Athletics and returned no upcoming events despite available running fixtures. The three archive race pairs shared the meeting name, date and distance but contained different performances; they must not be redirected together on name alone.

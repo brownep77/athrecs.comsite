@@ -65,6 +65,39 @@ const dry = fixture();
 assert.equal((await notifyAthleteSearch({ ...dry, checkOnly: true })).ready, true);
 assert.equal(dry.posts().length, 0);
 assert(!dry.calls.some((call) => call.url.endsWith(keyFile)));
+let timeoutReads = 0;
+const recoveredSitemap = fixture({
+  [`${origin}/sitemap.xml`]: () => {
+    if (++timeoutReads === 1) throw new DOMException("Slow sitemap", "TimeoutError");
+    return response(xml([shard], true));
+  },
+});
+assert.equal((await notifyAthleteSearch({ ...recoveredSitemap, checkOnly: true })).ready, true);
+assert.equal(timeoutReads, 2, "One bounded retry recovers a timed-out sitemap");
+assert.equal(recoveredSitemap.posts().length, 0);
+const unavailableSitemap = fixture({
+  [shard]: () => {
+    throw new DOMException("Slow shard", "TimeoutError");
+  },
+});
+await assert.rejects(
+  () => notifyAthleteSearch({ ...unavailableSitemap, keyFile, key }),
+  (error) => error.name === "TimeoutError" && error.message.includes(shard),
+);
+assert.equal(unavailableSitemap.calls.filter((call) => call.url === shard).length, 2);
+assert.equal(
+  unavailableSitemap.posts().length,
+  0,
+  "A persistent timeout still prevents submission",
+);
+const slowProfile = fixture({
+  [profile]: () => {
+    throw new DOMException("Slow profile", "TimeoutError");
+  },
+});
+await assert.rejects(() => notifyAthleteSearch({ ...slowProfile, keyFile, key }), /search-test/);
+assert.equal(slowProfile.calls.filter((call) => call.url === profile).length, 1);
+assert.equal(slowProfile.posts().length, 0);
 const good = fixture();
 const sent = await notifyAthleteSearch({ ...good, keyFile, key });
 assert.equal(sent.submitted, 1);
