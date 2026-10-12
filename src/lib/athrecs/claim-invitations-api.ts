@@ -167,6 +167,15 @@ export const emailStaffClaimInvitation = createServerFn({ method: "POST" })
     assertInvitationWrites();
     return sendInvitationEmail(await getSql(), data.id);
   });
+export const emailStaffWelcomeInvitation = createServerFn({ method: "POST" })
+  .middleware([privateClaimMiddleware, staffMiddleware])
+  .validator((input: unknown) => invitationId.parse(input))
+  .handler(async ({ data }) => {
+    const { getSql } = await import("@/lib/db");
+    const { sendWelcomeInvitationEmail } = await import("./invitation-welcome.server");
+    return sendWelcomeInvitationEmail(await getSql(), data.id);
+  });
+
 export const revokeStaffClaimInvitation = createServerFn({ method: "POST" })
   .middleware([staffMiddleware])
   .validator((input: unknown) => invitationId.parse(input))

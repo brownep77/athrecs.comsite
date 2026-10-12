@@ -152,6 +152,27 @@ try {
       }),
     /staff host required/,
   );
+  for (const token of ["", other.token]) {
+    await assert.rejects(
+      () => call("emailStaffWelcomeInvitation", { id: "synthetic" }, token),
+      /Unauthorized|Forbidden/,
+    );
+  }
+  await assert.rejects(
+    () =>
+      call("emailStaffWelcomeInvitation", { id: "synthetic" }, staff.token, {
+        origin: "https://untrusted.example",
+        "sec-fetch-site": "cross-site",
+      }),
+    /Forbidden|Cross/,
+  );
+  await assert.rejects(
+    () =>
+      call("emailStaffWelcomeInvitation", { id: "synthetic" }, staff.token, {
+        "x-forwarded-host": "www.athrecs.com",
+      }),
+    /staff host required/,
+  );
   await assert.rejects(() => call("createStaffClaimInvitation", { ...input, reviewed: false }));
   await assert.rejects(() => call("createStaffClaimInvitation", { ...input, matchNote: "" }));
   const noName = await call("findStaffClaimMatches", { userId: athlete.id, q: "" });

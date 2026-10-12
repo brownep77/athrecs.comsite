@@ -67,6 +67,26 @@ try {
   await dialog.getByRole("button", { name: "Use another email" }).click();
   assert.equal(await dialog.getByLabel("Email address", { exact: true }).isDisabled(), false);
   assert.equal(await dialog.getByLabel("Six-digit code", { exact: true }).count(), 0);
+  const beforeExisting = requests.length;
+  await dialog.getByRole("button", { name: "I already have a code", exact: true }).click();
+  await code.waitFor({ state: "visible" });
+  assert.equal(
+    requests.length,
+    beforeExisting,
+    "Entering an existing welcome code does not replace it",
+  );
+  assert.equal(
+    await dialog.getByRole("button", { name: "Resend code", exact: true }).isEnabled(),
+    true,
+  );
+  await code.fill("222222");
+  await dialog.getByRole("button", { name: "Verify code and continue" }).click();
+  await dialog.getByRole("alert").waitFor({ state: "visible" });
+  assert.deepEqual(requests.at(-1), { email: "runner@example.test", otp: "222222" });
+  await dialog.getByRole("button", { name: "Resend code", exact: true }).click();
+  await dialog.getByRole("button", { name: /Resend code in/ }).waitFor();
+  assert.deepEqual(requests.at(-1), { email: "runner@example.test", type: "sign-in" });
+  await dialog.getByRole("button", { name: "Use another email" }).click();
   await dialog.getByRole("button", { name: "Use a password instead" }).click();
   await page
     .getByRole("button", { name: "Sign in with email", exact: true })

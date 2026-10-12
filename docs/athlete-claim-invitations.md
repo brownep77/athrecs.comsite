@@ -137,3 +137,32 @@ The hosted `verify-external-invitation-browser.mjs` test walks the actual mobile
 claim page through email-code signup to the exact selected profile and a pending
 claim. Directory desktop/mobile tests cover new-contact forms and channel links.
 All test identities and deliveries are synthetic.
+
+## Combined welcome and sign-in code
+
+An active email-bound invitation has a separate **Send welcome + sign-in code**
+action and a read-only welcome preview. It uses Paul's approved welcome wording,
+from and reply-to `paul@athrecs.com`, and retains the existing private claim URL.
+The preview does not generate a code or send email.
+
+The staff-only action generates a fresh six-digit Better Auth sign-in code at
+send time and delivers one combined email using the dedicated invitation
+credential. Better Auth stores the code hashed for five minutes and enforces
+its normal three-guess and single-use checks. Previous sign-in codes for that
+mailbox are invalidated. No code is returned to staff or saved in the invitation
+payload. The sign-in dialog's **I already have a code** option enters the code
+without sending a replacement; **Resend code** uses the ordinary auth flow.
+
+The original frozen invitation payload and retry key are preserved. Combined
+welcome sends are explicit new attempts, limited to one per minute and five
+per invitation per London calendar day, with a shared reservation preventing
+concurrent invitation sends. An ambiguous provider response is not automatically
+retried. Revoked, declined, expired, claimed, reassigned-mailbox and already-owned
+profiles cannot receive a new welcome code through this action. No send grants
+profile ownership or publishes athlete information.
+
+`verify:invitation-welcome` uses a disposable database, real authentication and
+intercepted email delivery to check the combined body, unchanged link, hashed
+storage, correct recipient, expiry, replay, guessing limits, delivery failures,
+cooldown, inactive invitations and new-account sign-in. The staff RPC guards and
+browser fixtures also cover the new action and existing-code entry.

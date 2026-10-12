@@ -19,6 +19,7 @@ import {
   type SocialPlatform,
 } from "@/lib/athrecs/profile-connections";
 import { ClaimInvitationSharing } from "./ClaimInvitationSharing";
+import { InvitationWelcomeEmail } from "./InvitationWelcomeEmail";
 
 const inputClass = "mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm";
 type SavedInvitation = Awaited<ReturnType<typeof createStaffExternalInvitation>>;
@@ -382,6 +383,14 @@ export function ExternalProfileInvite({ athleteId, name }: { athleteId: number; 
                       </Button>
                     ) : null}
                   </div>
+                  {item.canEmail &&
+                  ["prepared", "invited", "failed", "held"].includes(item.status) ? (
+                    <InvitationWelcomeEmail
+                      id={item.id}
+                      disabled={busy || !query.data?.emailAvailable}
+                      onSent={() => query.refetch()}
+                    />
+                  ) : null}
                 </div>
               ))}
             </div>
