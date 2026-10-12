@@ -65,8 +65,9 @@ export function ExternalProfileInvite({ athleteId, name }: { athleteId: number; 
     return (
       (
         {
-          sent: "Invitation sent from support@athrecs.com. Inbox delivery has not been confirmed.",
-          failed: "Email could not be confirmed. Retry the same invitation below.",
+          sent: `Invitation sent from ${CLAIM_INVITATION_FROM}. Inbox delivery has not been confirmed.`,
+          failed:
+            "The invitation email could not be sent or its delivery confirmed. Retry the same invitation below.",
           sending: "Email is already being sent. Refresh shortly.",
           held: "Email delivery needs checking before retrying; the earlier attempt may have been accepted.",
         } as Record<string, string>

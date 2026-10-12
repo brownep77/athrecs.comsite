@@ -1,7 +1,7 @@
 import { createHash, randomBytes, randomUUID } from "node:crypto";
 import { dbSource, type Sql } from "@/lib/db";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
-import { authEmailConfigured, sendAthrecsAuthEmail } from "@/lib/auth/email.server";
+import { sendAthrecsAuthEmail } from "@/lib/auth/email.server";
 import {
   buildPotentialMatchSearchPatterns,
   scorePotentialResultNameMatch,
@@ -10,6 +10,7 @@ import {
 import { sourceIdentityFromUrl } from "./profile-connections";
 import {
   CLAIM_INVITATION_FROM,
+  CLAIM_INVITATION_REPLY_TO,
   claimInvitationMessage,
   newAthleteInvitationMessage,
   externalInvitationInput,
@@ -30,7 +31,7 @@ export function invitationEmailAvailable() {
     !IS_RUNRECS_SITE &&
     process.env.VERCEL_ENV === "production" &&
     dbSource === "neon" &&
-    authEmailConfigured()
+    Boolean(process.env.ATHRECS_INVITATION_RESEND_API_KEY?.trim())
   );
 }
 export const INVITATION_STATUS_SQL = `case
@@ -396,7 +397,8 @@ export async function sendInvitationEmail(sql: Sql, id: string) {
     await sendAthrecsAuthEmail(reserved.payload, {
       idempotencyKey: `profile-claim-invitation/${id}`,
       from: CLAIM_INVITATION_FROM,
-      replyTo: "support@athrecs.com",
+      replyTo: CLAIM_INVITATION_REPLY_TO,
+      apiKey: process.env.ATHRECS_INVITATION_RESEND_API_KEY,
     });
     await sql`update athlete_claim_invitations set email_sent_at=now(),reserved_until=null,delivery_error=false where id=${id}`;
     return { status: "sent" as const };

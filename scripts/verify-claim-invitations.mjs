@@ -13,11 +13,13 @@ for (const key of [
   "DATABASE_URL_UNPOOLED",
   "POSTGRES_URL_NON_POOLING",
   "RESEND_API_KEY",
+  "ATHRECS_INVITATION_RESEND_API_KEY",
   "ATHRECS_CLAIMS_EMAILS",
 ])
   process.env[key] = "";
 process.env.VITE_AUTH_ENABLED = "true";
 process.env.VITE_SITE_BRAND = "athrecs";
+process.env.AUTH_EMAIL_FROM = "ATHRECS Accounts <accounts@auth.athrecs.com>";
 process.env.ATHRECS_STAFF_EMAILS = "staff@example.test";
 process.env.BETTER_AUTH_SECRET = "registration-test-only-secret-at-least-32-chars";
 const origin = "http://127.0.0.1:18241";
@@ -27,6 +29,7 @@ const server = await createServer({ server: { host: "127.0.0.1", port: 18241, st
 let database;
 const deliveries = [];
 let deliveryFailure = false;
+let deliveryStatus = 200;
 let lastHeaders;
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (input, init) => {
@@ -35,6 +38,11 @@ globalThis.fetch = async (input, init) => {
     deliveries.push({ headers: init.headers, payload: JSON.parse(init.body) });
     if (deliveryFailure)
       throw new Error("Synthetic network interruption after provider acceptance");
+    if (deliveryStatus !== 200)
+      return Response.json(
+        { name: "validation_error", message: "Synthetic sender domain rejection" },
+        { status: deliveryStatus },
+      );
     return new Response(JSON.stringify({ id: "synthetic-email" }), { status: 200 });
   }
   assert(url.startsWith(origin), `No external calls in this test: ${new URL(url).origin}`);
@@ -361,22 +369,52 @@ try {
   });
   await module.evaluate();
   process.env.RESEND_API_KEY = "synthetic-intercepted-key";
+  assert.equal(
+    module.namespace.invitationEmailAvailable(),
+    false,
+    "A login-only key does not enable invitation sending",
+  );
+  await assert.rejects(
+    () => module.namespace.sendInvitationEmail(sql, invite.id),
+    /email delivery configured/,
+  );
+  assert.equal(deliveries.length, 0, "Missing invitation credentials do not call the provider");
+  context.process.env.ATHRECS_INVITATION_RESEND_API_KEY = "synthetic-invitation-only-key";
   deliveryFailure = true;
   assert.equal((await module.namespace.sendInvitationEmail(sql, invite.id)).status, "failed");
   deliveryFailure = false;
+  deliveryStatus = 403;
+  assert.equal((await module.namespace.sendInvitationEmail(sql, invite.id)).status, "failed");
+  const [rejectedDelivery] =
+    await sql`select email_sent_at,delivery_error from athlete_claim_invitations where id=${invite.id}`;
+  assert.equal(rejectedDelivery.email_sent_at, null, "Provider rejection is not marked sent");
+  assert.equal(rejectedDelivery.delivery_error, true);
+  assert.equal(
+    (await sql`select "emailVerified" from "user" where id=${athlete.id}`)[0].emailVerified,
+    true,
+    "A sender failure does not invalidate the athlete's verified email",
+  );
+  deliveryStatus = 200;
   assert.equal((await module.namespace.sendInvitationEmail(sql, invite.id)).status, "sent");
-  assert.equal(deliveries.length, 2);
+  assert.equal(deliveries.length, 3);
   assert.deepEqual(
     deliveries[0],
-    deliveries[1],
+    deliveries[2],
     "Interrupted send retries identical payload and provider idempotency key",
   );
-  assert.equal(deliveries[1].payload.from, "ATHRECS Support <support@athrecs.com>");
-  assert.equal(deliveries[1].payload.reply_to, "support@athrecs.com");
+  assert.deepEqual(deliveries[1], deliveries[2], "Provider rejection retries the frozen payload");
+  assert.equal(deliveries[1].payload.from, "Paul at ATHRECS <paul@athrecs.com>");
+  assert.equal(deliveries[1].payload.reply_to, "paul@athrecs.com");
+  assert.equal(deliveries[1].headers.Authorization, "Bearer synthetic-invitation-only-key");
+  assert.match(core.claimInvitationMessage("Synthetic Runner"), /Reply to paul@athrecs\.com/);
+  assert.match(
+    core.newAthleteInvitationMessage("Synthetic Runner", true),
+    /Reply to paul@athrecs\.com/,
+  );
   assert.deepEqual(deliveries[1].payload.to, [athlete.email]);
   assert(deliveries[1].payload.text.includes(invite.url));
   assert.equal((await module.namespace.sendInvitationEmail(sql, invite.id)).status, "sent");
-  assert.equal(deliveries.length, 2, "Repeated send does not call provider again");
+  assert.equal(deliveries.length, 3, "Repeated send does not call provider again");
   const history = (await call("findStaffClaimMatches", search)).history;
   assert.equal(history[0].status, "invited");
   assert(!JSON.stringify(history).includes(token), "History does not expose claim tokens");
@@ -594,7 +632,7 @@ try {
   process.env.RESEND_API_KEY = "synthetic-intercepted-key";
   await sql`update athlete_claim_invitations set first_attempt_at=now()-interval '24 hours' where id=${fourth.id}`;
   assert.equal((await module.namespace.sendInvitationEmail(sql, fourth.id)).status, "held");
-  assert.equal(deliveries.length, 2, "Ambiguous sends outside provider retry window are held");
+  assert.equal(deliveries.length, 3, "Ambiguous sends outside provider retry window are held");
   context.process.env.VERCEL_ENV = "preview";
   await assert.rejects(() => module.namespace.sendInvitationEmail(sql, fourth.id), /live ATHRECS/);
   await assert.rejects(
@@ -667,6 +705,8 @@ try {
   assert.equal((await module.namespace.sendInvitationEmail(sql, external.id)).status, "sent");
   assert.equal(deliveries.length, beforeExternal + 1);
   assert.deepEqual(deliveries.at(-1).payload.to, [externalInput.email]);
+  assert.equal(deliveries.at(-1).payload.from, "Paul at ATHRECS <paul@athrecs.com>");
+  assert.equal(deliveries.at(-1).payload.reply_to, "paul@athrecs.com");
   assert(deliveries.at(-1).payload.text.includes(external.url));
   assert.match(deliveries.at(-1).payload.text, /create a free account or sign in/i);
   assert.equal((await module.namespace.sendInvitationEmail(sql, external.id)).status, "sent");
@@ -681,8 +721,25 @@ try {
     /no longer active/,
   );
   assert.equal(deliveries.length, beforeExternal + 1, "No email address means no dispatch");
+  await authEmail.sendAthrecsAuthEmail({
+    to: "runner@example.test",
+    subject: "Synthetic sign-in",
+    heading: "Synthetic sign-in code",
+    message: "Synthetic sender regression check",
+    code: "123456",
+  });
+  assert.equal(
+    deliveries.at(-1).payload.from,
+    "ATHRECS Accounts <accounts@auth.athrecs.com>",
+    "Login emails retain their separately configured sender",
+  );
+  assert.equal(
+    deliveries.at(-1).headers.Authorization,
+    "Bearer synthetic-intercepted-key",
+    "Login keeps its original key",
+  );
   console.log(
-    "PASS: private staff matching, blank-name invitation, recipient/verified-email/result binding, token expiry/revoke/decline, duplicate creation/send/claim, existing owner protection, identity-note approval, dashboard tracking, frozen support email retries and preview blocking. Synthetic accounts; no real email sent.",
+    "PASS: private staff matching, blank-name invitation, recipient/verified-email/result binding, token expiry/revoke/decline, duplicate creation/send/claim, existing owner protection, identity-note approval, dashboard tracking, Paul invitation sender, separate login sender, provider rejection and frozen retries and preview blocking. Synthetic accounts; no real email sent.",
   );
 } finally {
   process.env.RESEND_API_KEY = "";
