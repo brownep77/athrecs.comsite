@@ -133,3 +133,26 @@ export function csvCell(value: unknown) {
   if (/^[\s]*[=+@-]/.test(text)) text = `'${text}`;
   return `"${text.replaceAll('"', '""')}"`;
 }
+
+export const collectionFilters = z.object({
+  view: z.enum(["records", "sources"]).default("records"),
+  q: z.string().trim().max(160).default(""),
+  provider: z.string().trim().max(300).default(""),
+  host: z.string().trim().max(300).default(""),
+  country: z.string().trim().max(100).default(""),
+  year: year.default(null),
+  origin: z
+    .enum([
+      "collected",
+      "all",
+      "captured-results",
+      "athlete-histories",
+      "fixture-candidates",
+      "saved-fixtures",
+      "catalogue",
+    ])
+    .default("collected"),
+  gap: z.enum(["all", "unlinked", "year-only", "results", "no-records"]).default("all"),
+  page: z.number().int().min(0).max(100000).default(0),
+});
+export type CollectionFilters = z.infer<typeof collectionFilters>;

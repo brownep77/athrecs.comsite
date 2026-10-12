@@ -240,10 +240,10 @@ try {
   assert.equal(core.safeExternalUrl("javascript:alert(1)"), undefined);
   assert.match(core.csvCell('=HYPERLINK("bad")'), /^"'/);
   const api = readFileSync("src/lib/event-register/api.ts", "utf8");
-  assert.equal((api.match(/createServerFn\(/g) || []).length, 4);
+  assert.equal((api.match(/createServerFn\(/g) || []).length, 5);
   assert.equal(
     (api.match(/middleware\(\[staffMiddleware\]\)/g) || []).length,
-    4,
+    5,
     "All reads and writes staff-only",
   );
   console.log("Testing UK fixture coverage and pagination");
