@@ -109,6 +109,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </header>
       {pathname === "/" ||
       pathname.startsWith("/sports/") ||
+      pathname === "/running" ||
+      pathname.startsWith("/running/") ||
       pathname.startsWith("/race-reports") ||
       pathname.startsWith("/news") ? (
         <nav
@@ -136,28 +138,32 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             ))}
             {(
               [
+                { to: "/running/featured-races", label: "Featured Races" },
                 { to: "/race-reports", label: "Race Reports" },
                 { to: "/news", label: "News" },
               ] as const
-            ).map((item) => (
-              <li key={item.to}>
-                <Link
-                  to={item.to}
-                  search={{}}
-                  aria-current={
-                    pathname === item.to || pathname.startsWith(`${item.to}/`) ? "page" : undefined
-                  }
-                  className={cn(
-                    "inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold no-underline hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3",
-                    pathname === item.to || pathname.startsWith(`${item.to}/`)
-                      ? "bg-primary text-primary-fg"
-                      : "text-accent",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            ).map((item) => {
+              const active =
+                pathname === item.to ||
+                pathname.startsWith(`${item.to}/`) ||
+                (item.to === "/running/featured-races" &&
+                  pathname.startsWith("/running/previews/"));
+              return (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
+                    search={{}}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "inline-flex min-h-11 items-center justify-center rounded-md px-2 text-sm font-semibold no-underline hover:bg-primary hover:text-primary-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:px-3",
+                      active ? "bg-primary text-primary-fg" : "text-accent",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       ) : null}
@@ -167,6 +173,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <div className="flex flex-wrap gap-4">
           <Link to="/running" className="hover:text-accent">
             Running
+          </Link>
+          <Link to="/running/featured-races" className="hover:text-accent">
+            Featured races
           </Link>
           <Link to="/running/uk-marathons" className="hover:text-accent">
             UK marathons

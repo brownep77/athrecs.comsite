@@ -1,0 +1,52 @@
+name: Featured road races and running landing
+on:
+  pull_request:
+    paths:
+      - 'src/routes/running/**'
+      - 'src/routes/sitemaps/**'
+      - 'src/components/running/**'
+      - 'src/components/layout/AppShell.tsx'
+      - 'src/data/featured-road-races.ts'
+      - 'src/data/road-marathons/**'
+      - 'src/data/road-half-marathons/**'
+      - 'src/lib/running/**'
+      - 'src/lib/athrecs/public-pages.ts'
+      - 'public/featured-races/**'
+      - 'scripts/verify-featured-road-races.mjs'
+      - 'scripts/verify-running-guides-ssr.mjs'
+      - 'scripts/preview-road-marathon-guides.mjs'
+      - '.github/workflows/featured-road-races.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: featured-road-races-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install isolated browser test dependency
+        run: npm install --prefix "$RUNNER_TEMP/featured-browser" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
+      - name: Install browser
+        run: node "$RUNNER_TEMP/featured-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Running landing, 20 previews, sitemap and desktop/mobile browser
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/featured-browser/node_modules/playwright
+        run: node scripts/verify-featured-road-races.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: running-featured-race-screenshots
+          path: |
+            artifacts/running-landing-*.png
+            artifacts/featured-preview-*.png
+          if-no-files-found: ignore
+          retention-days: 7

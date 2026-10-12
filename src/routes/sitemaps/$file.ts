@@ -19,6 +19,13 @@ export const Route = createFileRoute("/sitemaps/$file")({
             const { HALF_MARATHON_COUNTRIES } =
               await import("@/data/road-half-marathons/countries");
             const { ROAD_HALF_MARATHONS } = await import("@/data/road-half-marathons");
+            const { FEATURED_ROAD_RACES } = await import("@/data/featured-road-races");
+            modified.set(
+              "/running/featured-races",
+              FEATURED_ROAD_RACES.map((race) => race.checkedAt).sort().at(-1)!,
+            );
+            for (const race of FEATURED_ROAD_RACES)
+              modified.set(`/running/previews/${race.slug}`, race.checkedAt);
             const { roadGuideModifiedAt } = await import("@/lib/running/guide-modified");
             const { ROAD_ULTRAS, ULTRA_CHECKED, ULTRA_GUIDE_PATH, ultraPath } =
               await import("@/lib/running/road-ultras");
