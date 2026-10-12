@@ -57,7 +57,15 @@ row. Exact totals are omitted until the last page is reached; Previous/Next link
 and stable page URLs remain crawlable. Only an out-of-range request runs the bulk
 count needed to redirect to the last valid page. Country choices use the standard
 country vocabulary plus the visible values on the current page, not a catalogue
-scan or a cached audience. Sport-filtered requests retain the existing reader.
+scan or a cached audience. All directory requests, including sport filters, use
+this reader. Sport searches probe at most 4,097 indexed candidate rows, then
+either read a small candidate set or walk the ordered athlete index until the
+page is full. Full result and history details are hydrated only for that page.
+The sport index contains source classifications, not publication decisions;
+publication, account sharing and individually hidden results are checked live.
+Owner-excluded source performances cannot contribute sport membership or counts.
+Public profile reads also load independent data together and omit member-only
+upcoming plans that the anonymous response never uses.
 
 Ordered name, letter and country indexes support browsing. A trigram index selects
 name/place/role search candidates, with a separate indexed club lookup. The final

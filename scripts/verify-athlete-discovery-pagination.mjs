@@ -121,6 +121,98 @@ try {
     0,
     "Withdrawal takes effect on the next uncached query",
   );
+  await sql.query(`insert into athlete_source_histories
+    (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    select id,'Synthetic sport source',slug,'https://example.test/sports',now(),false,array[]::int[],array[]::int[],
+      '[{"discipline":"10K"}]'::jsonb,now() from athletes where slug like 'search-example-%'`);
+  const running = await readAthleteDirectoryPage(sql, { sport: "Running" });
+  assert.equal(running.athletes.length, 24);
+  assert.equal(running.hasMore, true);
+  assert.equal(running.total, null);
+  assert(running.athletes.every((a) => a.sports.includes("Running")));
+  const runningPage = await get("/athletes?sport=Running&page=2");
+  assert.equal(runningPage.response.status, 200);
+  assert.equal(runningPage.$("meta[name=robots]").attr("content"), "noindex, follow");
+  assert.equal(runningPage.$("a[rel=prev]").attr("href"), "/athletes?sport=Running");
+  assert.match(runningPage.response.headers.get("server-timing"), /athlete_directory/);
+  assert.equal((await readAthleteDirectoryPage(sql, { sport: "Swimming" })).total, 0);
+  for (const sport of ["Triathlon", "Duathlon", "Athletics"]) {
+    const discipline = sport === "Athletics" ? "Long jump" : sport;
+    await sql.query(
+      `update athlete_source_histories set performances=jsonb_build_array(jsonb_build_object('discipline',$1::text))
+      where external_id='search-example-1'`,
+      [discipline],
+    );
+    const match = await readAthleteDirectoryPage(sql, { sport, q: "Search Example 01" });
+    assert.equal(match.total, 1);
+    assert.deepEqual(match.athletes[0].sports, [sport]);
+  }
+  await sql.query(
+    `update athlete_source_histories set published_at=null where external_id='search-example-1'`,
+  );
+  assert.equal((await readAthleteDirectoryPage(sql, { sport: "Athletics" })).total, 0);
+  const outOfRangeSport = await get("/athletes?sport=Running&page=999");
+  assert.equal(outOfRangeSport.response.status, 301);
+  assert.equal(outOfRangeSport.response.headers.get("location"), "/athletes?sport=Running&page=2");
+
+  await sql.query(
+    `update athlete_public_shares set enabled=true where user_id='directory-private-fields'`,
+  );
+  await sql.query(
+    `insert into athlete_source_histories
+    (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    values ($1,'Synthetic private sport source','owned-sports','https://example.test/sports',now(),false,array[]::int[],array[]::int[],
+      '[{"discipline":"Triathlon"},{"discipline":"10K","archiveReference":{"sourceRow":"one"}}]'::jsonb,now())`,
+    [athleteId],
+  );
+  await sql.query(
+    `insert into network_audit_log(action,entity_type,entity_id,after_value)
+    values ('athlete.history_admin_published','athlete','Synthetic private sport source:owned-sports',jsonb_build_object('athleteId',$1::text))`,
+    [String(athleteId)],
+  );
+  assert.equal((await readAthleteDirectoryPage(sql, { sport: "Triathlon", q: "100%_" })).total, 1);
+  await sql.query(`insert into athlete_profile_history_choices(user_id,athlete_id,provider,external_id,performance_hash,excluded)
+    select 'directory-private-fields',athlete_id,provider,external_id,md5((performances->0)::text),true
+    from athlete_source_histories where external_id='owned-sports'`);
+  assert.equal(
+    (await readAthleteDirectoryPage(sql, { sport: "Triathlon", q: "100%_" })).total,
+    0,
+    "An owner-excluded history cannot make a sport discoverable",
+  );
+  const [{ id: sourceId }] = await sql.query(
+    `insert into source_history_claim_results
+    (athlete_id,provider,external_id,source_key,source_url,performance)
+    values ($1,'Synthetic private sport source','owned-sports','one','https://example.test/sports','{}') returning id`,
+    [athleteId],
+  );
+  await sql.query(
+    `insert into athlete_profile_hidden_source_results(user_id,source_result_id)
+    values ('directory-private-fields',$1)`,
+    [sourceId],
+  );
+  assert.equal((await readAthleteDirectoryPage(sql, { sport: "Running", q: "100%_" })).total, 0);
+  const hiddenSports = await readAthleteDirectoryPage(sql, { q: "100%_" });
+  assert.equal(hiddenSports.athletes[0].result_count, 0);
+  assert.deepEqual(hiddenSports.athletes[0].sports, []);
+  const [{ id: eventId }] =
+    await sql.query(`insert into events(slug,name,sport,country,city,surface)
+    values ('synthetic-directory-cycle','Synthetic cycle','Cycling','','','Road') returning id`);
+  const [{ id: editionId }] = await sql.query(
+    `insert into editions(event_id,event_date,distance_code,distance_km,status)
+    values ($1,'2026-01-01','10K',10,'Finished') returning id`,
+    [eventId],
+  );
+  const [{ id: resultId }] = await sql.query(
+    `insert into results(athlete_id,edition_id,status,result_visibility)
+    values ($1,$2,'finished','public') returning id`,
+    [athleteId, editionId],
+  );
+  assert.equal((await readAthleteDirectoryPage(sql, { sport: "Cycling" })).total, 1);
+  await sql.query(
+    `insert into athlete_profile_hidden_results(user_id,result_id) values ('directory-private-fields',$1)`,
+    [resultId],
+  );
+  assert.equal((await readAthleteDirectoryPage(sql, { sport: "Cycling" })).total, 0);
   console.log(
     "PASS: anonymous A–Z discovery, native GET search, canonical paging, out-of-range redirects and private identity exclusion.",
   );
