@@ -107,7 +107,9 @@ with observations as (
  min(coalesce(p->'sourceUrls'->>0,source_url,'')) url,
  min(coalesce(p->>'venue','')) location,count(*)::int n,max(captured_at) captured_at
  from observations where nullif(name,'') is not null and yr between 1800 and 2200
- and programme ~* '(marathon|parkrun|cross.country|trail|road|mile|^[0-9]+(\.[0-9]+)?\s*(m|km|k|h|hr)(\s|$)|^[0-9]+mh$|steeple|hurdle)'
+ and (programme ~* '(marathon|parkrun|cross.country|trail|road|mile|^[0-9]+(\.[0-9]+)?\s*(m|km|k|h|hr)(\s|$)|^[0-9]+mh$|steeple|hurdle)'
+ or programme ~* '^((50|60|75|80|100|150|200|300|400|600|800|1000|1500|2000|3000|5000|10000)(h|sc)?|[0-9.,]+[ ]*(metres|meters|kilometres|kilometers)|[0-9.,]+k(xc|xcl|l)?|[0-9]+[ ]*x[ ]*[0-9]+[ ]*m?)$'
+ or programme ~* '^(women|men|girls|boys)[ ]+[0-9.,]+[ ]*(k|km|m)$')
  and programme !~* '(walk|swim|triathlon|duathlon|jump|throw|shot|discus|hammer|javelin|vault)'
  group by 1,2,3,4,5
 )
