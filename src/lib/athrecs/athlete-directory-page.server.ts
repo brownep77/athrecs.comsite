@@ -1,7 +1,8 @@
 import type { Sql } from "../db";
 import type { AthleteDirectory, AthleteDirectorySearch } from "./athlete-directory";
-import { indexableApprovedAthleteSql } from "./athlete-search-policy.server.ts";
+import { indexableApprovedAthleteSetSql } from "./athlete-search-policy.server.ts";
 import { parseAthleteId } from "./athlete-id.ts";
+import { withDiscoveryRead } from "./discovery-read.server.ts";
 
 /** Public alphabetical browsing: paginate identities before reading histories. */
 export async function readAthleteDirectoryPage(
@@ -12,10 +13,12 @@ export async function readAthleteDirectoryPage(
   // indexable A–Z pages contain only profiles eligible for search themselves.
   const eligible =
     search.q || search.country
-      ? `(a.profile_type='Public figure' or a.profile_visibility='public') and not exists (
+      ? `(a.profile_type='Public figure' or a.profile_visibility='public')
+        and exists (select 1 from athlete_identifiers i where i.athlete_id=a.id)
+        and not exists (
         select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
         where l.athlete_id=a.id and l.status='active' and (s.enabled=false or s.share_results=false))`
-      : indexableApprovedAthleteSql;
+      : indexableApprovedAthleteSetSql;
   const values = [
     search.q || null,
     parseAthleteId(search.q),
@@ -23,11 +26,11 @@ export async function readAthleteDirectoryPage(
     search.letter || null,
     search.page ?? 1,
   ];
-  const [directory] = await sql.query<AthleteDirectory>(
-    `
+  const [directory] = await withDiscoveryRead(sql, (read) =>
+    read.query<AthleteDirectory>(
+      `
     with public_athletes as materialized (
       select a.id, a.slug, a.display_name, a.profile_roles,
-        i.athlete_number::text as athlete_number, i.source_number::text as source_number,
         case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
           where l.athlete_id=a.id and l.status='active' and s.share_location=false) then a.city end as city,
         case when exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
@@ -37,20 +40,25 @@ export async function readAthleteDirectoryPage(
           else trim(coalesce(a.country,'')) end as country,
         case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
           where l.athlete_id=a.id and l.status='active' and s.share_club=false) then nullif(c.name,'Unattached') end as club
-      from athletes a join athlete_resolved_ids i on i.athlete_id=a.id
+      from athletes a
       left join clubs c on c.id=a.club_id
       where ${eligible}
     ), filtered as materialized (
       select * from public_athletes where
         ($1::text is null or position(lower($1) in lower(concat_ws(' ',display_name,club,city,country,profile_roles)))>0
-          or athlete_number=$2 or source_number=$2)
+          or ($2::text is not null and exists (
+            select 1 from athlete_resolved_ids i where i.athlete_id=public_athletes.id
+              and (i.athlete_number::text=$2 or i.source_number::text=$2))))
         and ($3::text is null or country=$3)
         and ($4::text is null or upper(left(display_name,1))=$4)
     ), totals as (
       select count(*)::int as total, least($5::int,greatest(1,ceil(count(*)::numeric/24)::int)) as page from filtered
-    ), paged as materialized (
+    ), page_identities as materialized (
       select * from filtered order by lower(display_name), id
       limit 24 offset (select (page-1)*24 from totals)
+    ), paged as materialized (
+      select a.*, i.athlete_number::text as athlete_number, i.source_number::text as source_number
+      from page_identities a join athlete_resolved_ids i on i.athlete_id=a.id
     ), records as (
       select r.athlete_id, count(*)::int as n, array_agg(distinct e.sport) as sports
       from paged a join results r on r.athlete_id=a.id
@@ -84,7 +92,8 @@ export async function readAthleteDirectoryPage(
       null::int as "publicResults", array(select distinct country from public_athletes where country<>'' order by country) as countries,
       array[]::text[] as sports from totals
   `,
-    values,
+      values,
+    ),
   );
   return directory;
 }
