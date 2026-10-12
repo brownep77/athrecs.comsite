@@ -902,7 +902,9 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
   );
   const athlete = rows[0];
   if (!athlete) return null;
-  const results = await sql<{
+  const { loadPublishedSourceHistories } = await import("./athlete-publication.server");
+  const sourceHistoriesPromise = loadPublishedSourceHistories(sql, athlete.id);
+  const resultsPromise = sql<{
     edition_id: number;
     surface: string;
     country: string;
@@ -950,13 +952,24 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
         and not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id where l.athlete_id=r.athlete_id and l.status='active' and s.share_results=false)
       order by ed.event_date desc
     `;
-  const links = await sql<{
-    user_id: string;
-  }>`select l.user_id from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id and s.enabled=true where l.athlete_id=${athlete.id} and l.status='active' limit 1`;
+  const linksPromise = approvedPublicOnly
+    ? Promise.resolve([])
+    : sql<{
+        user_id: string;
+      }>`select l.user_id from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id and s.enabled=true where l.athlete_id=${athlete.id} and l.status='active' limit 1`;
   const { date_of_birth, profile_details, has_account_link, ...safeAthlete } = athlete;
-  const [{ athletes: athleteCatalogue }, { publicFigureAthletes }] = await Promise.all([
+  const [
+    { athletes: athleteCatalogue },
+    { publicFigureAthletes },
+    results,
+    links,
+    sourceHistories,
+  ] = await Promise.all([
     import("@/data/athletes"),
     import("@/data/public-figures"),
+    resultsPromise,
+    linksPromise,
+    sourceHistoriesPromise,
   ]);
   const seed = [...athleteCatalogue, ...publicFigureAthletes].find(
     (item) => item.slug === athlete.slug,
@@ -965,8 +978,6 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
   // Source observations fill an unknown field, never overwrite an athlete's own details.
   const sourceNationality = has_account_link ? null : readSourceNationality(profile_details);
   const statedNationality = details.nationality || seed?.nationality || null;
-  const { loadPublishedSourceHistories } = await import("./athlete-publication.server");
-  const sourceHistories = await loadPublishedSourceHistories(sql, athlete.id);
   const anzMetadata = (
     profile_details as {
       anzImport?: { coach?: string; sourceUrl?: string; verificationStatus?: string };
@@ -1008,7 +1019,9 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
       ...row,
       details: readResultDetails(result_details),
     })),
-    upcoming: await loadUpcoming(links[0]?.user_id ?? null, athlete.id, true),
+    upcoming: approvedPublicOnly
+      ? []
+      : await loadUpcoming(links[0]?.user_id ?? null, athlete.id, true),
     profileResults: combineProfileResults(
       results.map((r) => ({
         resultId: r.id,
@@ -1060,19 +1073,26 @@ async function readAdministratorPublishedAthlete(slug: string) {
   const profile = await readAthleteBySlug(slug, true);
   if (!profile) return null;
   const sql = await ready();
-  const [sharing] = await sql<{
-    enabled: boolean;
-    share_results: boolean;
-    share_bio: boolean;
-    share_club: boolean;
-    share_location: boolean;
-  }>`
-      select s.enabled, s.share_results, s.share_bio, s.share_club, s.share_location
+  const { indexableApprovedAthleteSql } = await import("./athlete-search-policy.server");
+  const [publication] = await sql.query<{
+    sharing: {
+      enabled: boolean;
+      share_results: boolean;
+      share_bio: boolean;
+      share_club: boolean;
+      share_location: boolean;
+    } | null;
+    indexable: boolean;
+  }>(
+    `select (select jsonb_build_object('enabled',s.enabled,'share_results',s.share_results,
+      'share_bio',s.share_bio,'share_club',s.share_club,'share_location',s.share_location)
       from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
-      where l.athlete_id=${profile.athlete.id} and l.status='active' limit 1
-    `;
+      where l.athlete_id=$1 and l.status='active' limit 1) as sharing,
+      exists (select 1 from athletes a where a.id=$1 and ${indexableApprovedAthleteSql}) as indexable`,
+    [profile.athlete.id],
+  );
+  const sharing = publication.sharing;
   if (sharing && (!sharing.enabled || !sharing.share_results)) return null;
-  const { isApprovedAthleteIndexable } = await import("./athlete-search-policy.server");
   const { results: legacyResults, ...publicProfile } = profile;
   void legacyResults;
   // The publication covers sporting results and basic athlete identity only.
@@ -1080,7 +1100,7 @@ async function readAdministratorPublishedAthlete(slug: string) {
   return {
     ...publicProfile,
     shareBiography: sharing?.share_bio !== false,
-    searchIndexable: await isApprovedAthleteIndexable(sql, profile.athlete.id),
+    searchIndexable: publication.indexable,
     athlete: {
       ...profile.athlete,
       bio: "",

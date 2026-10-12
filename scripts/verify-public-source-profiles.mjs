@@ -168,8 +168,8 @@ try {
   );
   assert.equal(
     withSource.publicResults,
-    1,
-    "Homepage result total includes published source history",
+    null,
+    "Directory omits catalogue totals rather than scanning every profile",
   );
   assert.equal(withSource.athletes[0].nationality, "KEN");
   assert.deepEqual(withSource.athletes[0].sports, ["Running"]);

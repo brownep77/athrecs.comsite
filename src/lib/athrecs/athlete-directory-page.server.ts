@@ -20,6 +20,23 @@ const publicCountrySql = `case when exists (select 1 from athlete_account_links 
   where l.athlete_id=a.id and l.status='active' and s.share_location=false) then '' else (${countrySql}) end`;
 const clubSql = `case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
   where l.athlete_id=a.id and l.status='active' and s.share_club=false) then nullif(c.name,'Unattached') end`;
+const sourceSportSql = `case
+  when p->>'discipline' ~* '(^|[^[:alnum:]_])triathlon([^[:alnum:]_]|$)' then 'Triathlon'
+  when p->>'discipline' ~* '(^|[^[:alnum:]_])duathlon([^[:alnum:]_]|$)' then 'Duathlon'
+  when h.provider='DUV Ultra Marathon Statistics' or trim(p->>'discipline') ~* '^(marathon|half( marathon)?|[0-9]+([.][0-9]+)?[[:space:]]*k(m)?|[0-9]+([.][0-9]+)?[[:space:]]*(mi|mile|miles))$' then 'Running'
+  else 'Athletics' end`;
+const visibleSourcePerformanceSql = `coalesce(p->>'profileExcluded','false')<>'true'
+  and not exists (select 1 from athlete_profile_history_choices choice
+    join athlete_account_links owner_link on owner_link.user_id=choice.user_id
+      and owner_link.athlete_id=h.athlete_id and owner_link.status='active'
+    where choice.athlete_id=h.athlete_id and choice.provider=h.provider and choice.external_id=h.external_id
+      and choice.performance_hash=md5(p::text) and choice.excluded)
+  and not exists (select 1 from source_history_claim_results source_claim
+    join athlete_profile_hidden_source_results hidden on hidden.source_result_id=source_claim.id
+    join athlete_account_links owner_link on owner_link.user_id=hidden.user_id
+      and owner_link.athlete_id=h.athlete_id and owner_link.status='active'
+    where source_claim.provider=h.provider and source_claim.external_id=h.external_id
+      and source_claim.source_key=p#>>'{archiveReference,sourceRow}')`;
 
 /** Read one page plus a look-ahead row, checking current permissions in SQL. */
 export async function readAthleteDirectoryPage(
@@ -27,7 +44,7 @@ export async function readAthleteDirectoryPage(
   search: AthleteDirectorySearch,
 ): Promise<AthleteDirectory> {
   const page = search.page ?? 1;
-  const filteredSearch = Boolean(search.q || search.country);
+  const filteredSearch = Boolean(search.q || search.country || search.sport);
   // Filtered searches remain noindex and retain their existing audience.
   const eligible = filteredSearch
     ? `(a.profile_type='Public figure' or a.profile_visibility='public')
@@ -43,6 +60,26 @@ export async function readAthleteDirectoryPage(
   const parsedNumber = parseAthleteId(search.q);
   const athleteNumber =
     parsedNumber && BigInt(parsedNumber) <= 9223372036854775807n ? parsedNumber : null;
+  // Small sports start from indexed members; common sports walk the ordered
+  // athlete index and stop after one page. Never aggregate the whole catalogue.
+  // Permissions are rechecked below, even for these candidate IDs.
+  let sportCandidates: number[] | null = null;
+  if (search.sport && !pattern) {
+    const probeLimit = 4097;
+    const probe = await sql.query<{ id: number }>(
+      `select id from (
+        (select r.athlete_id as id from events e join editions ed on ed.event_id=e.id
+          join results r on r.edition_id=ed.id
+          where e.sport=$1 and r.result_visibility in ('public','public_figure') limit $2)
+        union all
+        (select h.athlete_id as id from athlete_source_histories h
+          where h.published_at is not null
+            and athlete_history_sports(h.provider,h.performances) @> array[$1]::text[] limit $2)
+      ) members limit $2`,
+      [search.sport, probeLimit],
+    );
+    if (probe.length < probeLimit) sportCandidates = [...new Set(probe.map((row) => row.id))];
+  }
   const values = [
     search.q || null,
     athleteNumber,
@@ -50,7 +87,27 @@ export async function readAthleteDirectoryPage(
     search.letter || null,
     page,
     pattern,
+    search.sport || null,
+    sportCandidates,
   ];
+  const sourcePermission = `(not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
+    or exists (select 1 from network_audit_log approval where approval.action='athlete.history_admin_published'
+      and approval.entity_id=h.provider||':'||h.external_id and approval.after_value->>'athleteId'=a.id::text))`;
+  const sportMatch = `(exists (
+      select 1 from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
+      where r.athlete_id=a.id and e.sport=$7 and r.result_visibility in ('public','public_figure')
+        and not exists (select 1 from athlete_profile_hidden_results hidden
+          join athlete_account_links l on l.user_id=hidden.user_id and l.status='active'
+          where l.athlete_id=a.id and hidden.result_id=r.id)
+    ) or exists (
+      select 1 from athlete_source_histories h where h.athlete_id=a.id and h.published_at is not null
+        and athlete_history_sports(h.provider,h.performances) @> array[$7]::text[]
+        and ${sourcePermission}
+        and exists (select 1 from jsonb_array_elements(h.performances) p
+          where (${sourceSportSql})=$7 and ${visibleSourcePerformanceSql})
+    ))`;
+  const selectedJoin = `${pattern ? "join search_candidates selected on selected.id=a.id" : ""}
+    ${sportCandidates !== null ? "join unnest($8::int[]) sport_member(id) on sport_member.id=a.id" : ""}`;
   const candidateCte = `search_candidates as materialized (
     select a.id from athletes a where $6::text is not null
       and (a.profile_visibility='public' or a.profile_type='Public figure')
@@ -70,13 +127,14 @@ export async function readAthleteDirectoryPage(
         or ($2::text is not null and exists (select 1 from athlete_resolved_ids i where i.athlete_id=a.id
           and (i.athlete_number::text=$2 or i.source_number::text=$2))))))
     and ($3::text is null or ((${countrySql})=$3 and (${publicCountrySql})=$3))
-    and ($4::text is null or upper(left(a.display_name,1))=$4)`;
+    and ($4::text is null or upper(left(a.display_name,1))=$4)
+    and ($7::text is null or ${sportMatch}) and ($8::int[] is null or a.id=any($8::int[]))`;
   const [directory] = await sql.query<AthleteDirectory>(
     `
     with ${candidateCte}, candidates as materialized (
       select a.id,a.slug,a.display_name,a.profile_roles,
         ${citySql} as city,${publicCountrySql} as country,${clubSql} as club
-      from athletes a ${pattern ? "join search_candidates selected on selected.id=a.id" : ""}
+      from athletes a ${selectedJoin}
       left join clubs c on c.id=a.club_id
       where ${eligible} and ${matches}
       order by lower(a.display_name),a.id
@@ -96,14 +154,10 @@ export async function readAthleteDirectoryPage(
       group by r.athlete_id
     ), histories as (
       select h.athlete_id, count(*)::int as n,
-        array_agg(distinct case
-          when p->>'discipline' ~* '(^|[^[:alnum:]_])triathlon([^[:alnum:]_]|$)' then 'Triathlon'
-          when p->>'discipline' ~* '(^|[^[:alnum:]_])duathlon([^[:alnum:]_]|$)' then 'Duathlon'
-          when h.provider='DUV Ultra Marathon Statistics' or trim(p->>'discipline') ~* '^(marathon|half( marathon)?|[0-9]+([.][0-9]+)?[[:space:]]*k(m)?|[0-9]+([.][0-9]+)?[[:space:]]*(mi|mile|miles))$' then 'Running'
-          else 'Athletics' end) as sports
+        array_agg(distinct ${sourceSportSql}) as sports
       from paged a join athlete_source_histories h on h.athlete_id=a.id
       cross join lateral jsonb_array_elements(h.performances) p
-      where h.published_at is not null and coalesce(p->>'profileExcluded','false')<>'true'
+      where h.published_at is not null and ${visibleSourcePerformanceSql}
         and (not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
           or exists (select 1 from network_audit_log approval where approval.action='athlete.history_admin_published'
             and approval.entity_id=h.provider||':'||h.external_id and approval.after_value->>'athleteId'=a.id::text))
@@ -128,7 +182,7 @@ export async function readAthleteDirectoryPage(
       read.query<{ total: number }>(
         `
       with ${candidateCte} select count(*)::int as total,$5::int as requested_page
-      from athletes a ${pattern ? "join search_candidates selected on selected.id=a.id" : ""}
+      from athletes a ${selectedJoin}
       left join clubs c on c.id=a.club_id
       where ${filteredSearch ? eligible : indexableApprovedAthleteSetSql} and ${matches}
     `,
