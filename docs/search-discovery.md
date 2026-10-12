@@ -76,6 +76,23 @@ sitemap and directory output plus race/club links in a disposable synthetic data
 verification qualifications. `npm run verify:profile-view-login` retains the complete
 anonymous/member boundary regression, allowing only the new bounded event summary.
 
+## Unavailable and renamed athlete URLs
+
+Anonymous requests without an approved public preview retain the usable sign-in
+screen but return HTTP 404, noindex and private/no-store headers. Missing, private
+and unpublished profiles receive the same response so this does not reveal whether
+a private athlete exists. Signed-in access and directly shared unlisted previews
+retain their existing behaviour. Internal response markers are stripped and cannot
+be supplied through request headers. This change applies to AthRecs, not RunRecs.
+
+Recorded old athlete slugs now return a 301 to the current approved, indexable public
+profile before the sign-in gate. The redirect checks both athlete identity and the
+current slug; withdrawn or unlisted profiles are not advertised through old links.
+The anonymous SSR test covers redirects, withdrawals and unavailable responses;
+the session-boundary test covers sign-in recovery and forged headers. Career
+summaries also standardise equivalent distance labels such as `10k` and `10 km`
+to `10K`, without changing stored results or verification.
+
 ## 7 October 2026 indexing notices
 
 Search Console reported two soft 404s and three race pages where Google selected another canonical. The Montenegro directory defaulted to Athletics and returned no upcoming events despite available running fixtures. The three archive race pairs shared the meeting name, date and distance but contained different performances; they must not be redirected together on name alone.

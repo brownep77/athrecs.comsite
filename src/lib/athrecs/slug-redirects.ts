@@ -38,3 +38,25 @@ export const resolveSlugRedirect = createServerFn({ method: "GET" })
     `;
     return rows[0]?.current_slug ?? null;
   });
+
+/** Old public links may redirect only to a currently indexable public athlete. */
+export const resolvePublicAthleteSlugRedirect = createServerFn({ method: "GET" })
+  .validator((input: string) => {
+    const slug = typeof input === "string" ? input.trim().toLowerCase() : "";
+    return slug.length <= 300 && PUBLIC_SLUG_PATTERN.test(slug) ? slug : "";
+  })
+  .handler(async ({ data }) => {
+    const { setResponseHeader } = await import("@tanstack/react-start/server");
+    setResponseHeader("Cache-Control", "private, no-store");
+    if (!data) return null;
+    await ensureAthrecsSeeded();
+    const sql = await getSql();
+    const { indexableApprovedAthleteSql } = await import("./athlete-search-policy.server");
+    const [athlete] = await sql.query<{ slug: string }>(
+      `select a.slug from slug_redirects r join athletes a on a.id=r.entity_id and a.slug=r.current_slug
+       where r.entity_type='athlete' and r.old_slug=$1 and a.slug<>$1
+         and ${indexableApprovedAthleteSql} limit 1`,
+      [data],
+    );
+    return athlete?.slug ?? null;
+  });

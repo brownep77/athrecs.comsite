@@ -17,7 +17,7 @@ try {
     create table athlete_account_links (athlete_id int, user_id text, status text);
     create table athlete_resolved_ids (athlete_id int);
     create table athlete_source_histories (athlete_id int, provider text, external_id text, published_at timestamptz);
-    create table network_audit_log (entity_id text, action text, after_value jsonb);
+    create table network_audit_log (entity_id text, action text, after_value jsonb, entity_type text);
     insert into athletes select i, 'athlete-' || i, 'Athlete', 'public' from generate_series(1, 5001) i;
     insert into athletes values
       (5002, 'private-source', 'Athlete', 'private'),
@@ -37,7 +37,7 @@ try {
     insert into athlete_source_histories
       select id, 'synthetic', id::text, case when id=5010 then null else now() end
       from athletes where id <> 5007;
-    insert into network_audit_log
+    insert into network_audit_log(entity_id,action,after_value)
       select 'synthetic:' || id, 'athlete.history_admin_published',
         jsonb_build_object('athleteId', case when id=5009 then 9999 else id end)
       from athletes where id <> 5008;
@@ -104,7 +104,7 @@ try {
   await db.exec("delete from network_audit_log where entity_id='synthetic:5006'");
   assert.equal(await isApprovedAthleteIndexable(sql, 5006), false, "Missing approval fails closed");
   await db.exec(`
-    insert into network_audit_log values ('5007', 'athlete.bulk_publish', '{"profile_visibility":"public"}');
+    insert into network_audit_log(entity_id,action,after_value) values ('5007', 'athlete.bulk_publish', '{"profile_visibility":"public"}');
   `);
   assert.equal(
     await isApprovedAthleteIndexable(sql, 5007),
@@ -118,7 +118,7 @@ try {
     "A historical bulk approval never overrides current private visibility",
   );
   await db.exec(`
-    insert into network_audit_log values ('5008', 'athlete.bulk_publish', '{"profile_visibility":"private"}');
+    insert into network_audit_log(entity_id,action,after_value) values ('5008', 'athlete.bulk_publish', '{"profile_visibility":"private"}');
   `);
   assert.equal(
     await isApprovedAthleteIndexable(sql, 5008),
