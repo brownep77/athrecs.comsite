@@ -1,9 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { getSql, type Sql } from "@/lib/db";
+import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import type { AthleteDirectory } from "./athlete-directory";
-import { readSourceNationality } from "./source-nationality";
 
 export const getFeaturedAthletes = createServerFn({ method: "GET" }).handler(async () => {
   const started = performance.now();
@@ -41,7 +40,7 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
     await ensureAthrecsSeeded();
     const sql = await getSql();
     const { readAthleteDirectoryPage } = await import("./athlete-directory-page.server");
-    const directory = await withNationalities(sql, await readAthleteDirectoryPage(sql, data));
+    const directory = await readAthleteDirectoryPage(sql, data);
     const { setResponseHeader } = await import("@tanstack/react-start/server");
     setResponseHeader(
       "Server-Timing",
@@ -49,25 +48,3 @@ export const getAthleteDirectory = createServerFn({ method: "GET" })
     );
     return directory;
   });
-
-async function withNationalities(sql: Sql, directory: AthleteDirectory): Promise<AthleteDirectory> {
-  if (!directory.athletes.length) return directory;
-  // Fetch only this page's evidence, and expose only the nationality value.
-  // Full source metadata and account-owned details never enter the public list.
-  const observations = await sql<{ id: number; profile_details: unknown }>`
-      select a.id, a.profile_details from athletes a
-      where a.id=any(${directory.athletes.map((athlete) => athlete.id)}::int[])
-        and a.profile_visibility='public'
-        and not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
-    `;
-  const nationalities = new Map(
-    observations.map((row) => [row.id, readSourceNationality(row.profile_details)]),
-  );
-  return {
-    ...directory,
-    athletes: directory.athletes.map((athlete) => ({
-      ...athlete,
-      nationality: nationalities.get(athlete.id)?.value ?? null,
-    })),
-  };
-}

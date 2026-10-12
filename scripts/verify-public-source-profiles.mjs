@@ -374,6 +374,67 @@ try {
   await sql`insert into "user"(id,name,email,"emailVerified","createdAt","updatedAt") values('synthetic-duv-owner','Test Owner','duv-owner@example.test',true,now(),now())`;
   await sql`insert into athlete_account_links(athlete_id,user_id,user_email,status) values(${a.id},'synthetic-duv-owner','duv-owner@example.test','active')`;
   assert.equal(await read(), null, "A profile-only publication must not override a linked account");
+  // An owner-shared profile must use the same bounded public presentation,
+  // without loading (or disclosing) unused member-only plans or duplicate history.
+  await sql`insert into athlete_private_profiles(user_id,verified_email,full_name,privacy_notice_version,privacy_acknowledged_at)
+    values('synthetic-duv-owner','duv-owner@example.test','Synthetic Shared Owner','test',now())`;
+  await sql`insert into athlete_public_shares(user_id,slug,enabled,search_indexable,share_bio,share_results,share_club,share_location)
+    values('synthetic-duv-owner','synthetic-owner-share',true,true,true,true,false,false)`;
+  await sql`insert into athlete_profile_bios(user_id,mode,custom_bio)
+    values('synthetic-duv-owner','custom','Owner-approved shared biography')`;
+  const sharedPerformances = Array.from({ length: 6 }, (_, i) => ({
+    ...wmmPerformance,
+    meeting: `Synthetic Shared Marathon ${i}`,
+    year: 2020 + i,
+  }));
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    values(${a.id},'Abbott World Marathon Majors',${wmmId},'https://example.test/private-evidence',now(),false,array[]::integer[],array[]::integer[],${JSON.stringify(sharedPerformances)}::jsonb,now())`;
+  await sql`insert into network_audit_log(action,entity_type,entity_id,after_value)
+    values('athlete.history_admin_published','athlete',${"Abbott World Marathon Majors:" + wmmId},${JSON.stringify({ athleteId: a.id })}::jsonb)`;
+  const queries = [];
+  const originalQuery = db.query.bind(db);
+  db.query = (text, ...args) => {
+    queries.push(text);
+    return originalQuery(text, ...args);
+  };
+  let shared;
+  try {
+    shared = await read();
+  } finally {
+    db.query = originalQuery;
+  }
+  assert.equal(shared.displayName, "Synthetic Shared Owner");
+  assert.equal(shared.slug, "synthetic-duv-public", "The approved canonical slug is retained");
+  assert.equal(shared.searchIndexable, true);
+  assert.equal(shared.entries.length, 5, "Anonymous owner profiles retain the five-result limit");
+  assert(JSON.stringify(shared.biography).includes("Owner-approved shared biography"));
+  assert(!JSON.stringify(shared).includes("private-evidence"));
+  assert(!JSON.stringify(shared).includes("source_details"));
+  assert.equal(
+    queries.filter((q) => q.includes('as "externalId"')).length,
+    1,
+    "Hydrate shared history once",
+  );
+  assert(
+    !queries.some((q) => /athlete_upcoming_events|athlete_profile_connections/.test(q)),
+    "Preview must not fetch unused member-only sections",
+  );
+  const claimedDirectory = await rpc("athrecs/athlete-directory-api", "getAthleteDirectory", {
+    q: "Synthetic DUV Public",
+  });
+  assert.equal(
+    claimedDirectory.athletes[0].nationality,
+    null,
+    "Source nationality must disappear after an account link",
+  );
+  await sql`update athlete_public_shares set search_indexable=false,share_bio=false where user_id='synthetic-duv-owner'`;
+  const unlisted = await read();
+  assert.equal(unlisted.searchIndexable, false);
+  assert.deepEqual(unlisted.biography, []);
+  await sql`update athlete_public_shares set share_results=false where user_id='synthetic-duv-owner'`;
+  assert.equal(await read(), null, "Owner result withdrawal applies on the next request");
+  await sql`update athlete_public_shares set share_results=true,enabled=false where user_id='synthetic-duv-owner'`;
+  assert.equal(await read(), null, "Disabled sharing cannot use a staff publication fallback");
   console.log(
     "PASS: anonymous directory/profile access, explicit publication audit, private and account-linked exclusions, unpublished history and biography/DOB protection. Isolated local database only.",
   );

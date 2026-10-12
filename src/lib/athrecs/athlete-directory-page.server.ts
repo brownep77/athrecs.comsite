@@ -6,6 +6,7 @@ import {
 } from "./athlete-search-policy.server.ts";
 import { parseAthleteId } from "./athlete-id.ts";
 import { countryNames } from "./country-flags.ts";
+import { readSourceNationality } from "./source-nationality.ts";
 import { withDiscoveryRead } from "./discovery-read.server.ts";
 
 // Keep this expression aligned with the public_athlete_search_trgm index.
@@ -131,7 +132,11 @@ export async function readAthleteDirectoryPage(
     and ($3::text is null or ((${countrySql})=$3 and (${publicCountrySql})=$3))
     and ($4::text is null or upper(left(a.display_name,1))=$4)
     and ($7::text is null or ${sportMatch}) and ($8::int[] is null or a.id=any($8::int[]))`;
-  const [directory] = await sql.query<AthleteDirectory>(
+  const [directory] = await sql.query<
+    Omit<AthleteDirectory, "athletes"> & {
+      athletes: (AthleteDirectory["athletes"][number] & { source_details: unknown })[];
+    }
+  >(
     `
     with ${candidateCte}, candidates as materialized (
       select a.id,a.slug,a.display_name,a.profile_roles,
@@ -142,9 +147,13 @@ export async function readAthleteDirectoryPage(
       order by lower(a.display_name),a.id
       limit ($9::int+1) offset ($5::int-1)*$9::int
     ), paged as materialized (
-      select a.*, i.athlete_number::text as athlete_number
+      select a.*, i.athlete_number::text as athlete_number,
+        case when source.profile_visibility='public'
+          and not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
+          then source.profile_details end as source_details
       from (select * from candidates order by lower(display_name),id limit $9::int) a
       join athlete_resolved_ids i on i.athlete_id=a.id
+      join athletes source on source.id=a.id
     ), records as (
       select r.athlete_id, count(*)::int as n, array_agg(distinct e.sport) as sports
       from paged a join results r on r.athlete_id=a.id
@@ -165,7 +174,7 @@ export async function readAthleteDirectoryPage(
             and approval.entity_id=h.provider||':'||h.external_id and approval.after_value->>'athleteId'=a.id::text))
       group by h.athlete_id
     ), cards as (
-      select a.id,a.slug,a.display_name,a.profile_roles,a.athlete_number,a.country,a.city,a.club,
+      select a.id,a.slug,a.display_name,a.profile_roles,a.athlete_number,a.country,a.city,a.club,a.source_details,
         (coalesce(r.n,0)+coalesce(h.n,0))::int as result_count,
         array(select distinct sport from unnest(coalesce(r.sports,array[]::text[])||coalesce(h.sports,array[]::text[])) sport order by sport) as sports
       from paged a left join records r on r.athlete_id=a.id left join histories h on h.athlete_id=a.id
@@ -198,6 +207,11 @@ export async function readAthleteDirectoryPage(
   // rather than a second catalogue scan or a cached list of private attributes.
   return {
     ...directory,
+    // Only the validated value crosses the public API boundary; never evidence.
+    athletes: directory.athletes.map(({ source_details, ...athlete }) => ({
+      ...athlete,
+      nationality: readSourceNationality(source_details)?.value ?? null,
+    })),
     countries:
       search.includeFacets === false
         ? []
