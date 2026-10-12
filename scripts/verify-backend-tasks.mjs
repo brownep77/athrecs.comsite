@@ -24,7 +24,7 @@ try {
   await page.goto("http://127.0.0.1:8101");
   await page.getByRole("heading", { name: "What would you like to do?" }).waitFor();
   const cards = page.locator('[aria-label="Backend tasks"] article');
-  assert.equal(await cards.count(), 21);
+  assert.equal(await cards.count(), 22);
   const paths = await cards.locator("a").evaluateAll(anchors => anchors.map(anchor => anchor.getAttribute("href")));
   assert.equal(new Set(paths).size, paths.length);
   for (const path of paths) {
@@ -38,6 +38,7 @@ try {
     assert(covered.has(route), `Top-level staff tool missing from panel: ${route}`);
   }
   assert.equal(await page.getByRole('link',{name:'Add or update athletes',exact:true}).getAttribute('href'),'/admin/athlete-tools');
+  assert.equal(await page.getByRole('link',{name:'Running event register',exact:true}).getAttribute('href'),'/admin/event-register');
   const linksCard = cards.filter({ has: page.getByRole("heading", { name: "Import official results-page links", exact: true }) });
   assert.match(await linksCard.innerText(), /adds links, not runners or finish times/);
   assert.equal(await linksCard.getByRole("link").getAttribute("href"), "/admin/result-links");
@@ -51,11 +52,11 @@ try {
   await page.getByLabel("Find a backend task").fill("does-not-exist-xyz");
   assert.equal(await cards.count(), 0);
   await page.getByRole("button", { name: "Show all tasks", exact: true }).click();
-  assert.equal(await cards.count(), 21);
+  assert.equal(await cards.count(), 22);
   await page.getByRole("button", { name: "Maintenance & data", exact: true }).click();
   assert.equal(await cards.count(), 3);
   await page.getByRole("button", { name: "All tasks", exact: true }).click();
-  assert.equal(await cards.count(), 21);
+  assert.equal(await cards.count(), 22);
   assert.equal(await page.getByRole("link", { name: "Add or update athletes", exact: true }).getAttribute("href"), "/admin/athlete-tools");
   await page.setViewportSize({ width: 390, height: 844 });
   assert(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1));
@@ -66,7 +67,7 @@ try {
   assert.match(shell, /id="legacy-admin-tools"/);
   assert.doesNotMatch(readFileSync("src/components/staff/BackendTaskPanel.tsx", "utf8"), /createServerFn|getSql|fetch\(|localStorage/);
   assert.deepEqual(errors, []);
-  console.log("PASS: all top-level staff routes covered, 21 distinct tool links, editing/confirmation route, accurate results-link purpose, duplicate searches, preserved authentication/brand gate and desktop/mobile navigation.");
+  console.log("PASS: all top-level staff routes covered, 22 distinct tool links including the running event register, editing/confirmation route, accurate results-link purpose, duplicate searches, preserved authentication/brand gate and desktop/mobile navigation.");
 } catch (error) {
   if (page) await page.screenshot({ path: "artifacts/import-backend-tasks-failure.png", fullPage: true });
   throw error;
