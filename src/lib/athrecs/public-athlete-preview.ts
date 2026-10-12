@@ -11,6 +11,7 @@ import type { ProfileResult } from "./profile-records";
 import type { SourceHistory } from "./source-performance-history";
 import type { ReportedRaceRecord } from "./reported-race-history";
 import type { SourceNationality } from "./source-nationality";
+import { publicAthleteCareer, type PublicCareerSummary } from "./public-athlete-career";
 
 export const PUBLIC_PROFILE_RESULT_LIMIT = 5;
 
@@ -19,11 +20,13 @@ export type PublicAthletePreview = {
   displayName: string;
   athleteNumber: string;
   club: string | null;
+  clubSlug?: string | null;
   nationality: string | null;
   nationalitySource: SourceNationality | null;
   sports: string[];
   biography: string[];
   biographySources: { label: string; url: string }[];
+  careerSummary: PublicCareerSummary | null;
   entries: ResultsHistoryEntry[];
   reportedRecords: ReportedRaceRecord[];
   totalResults: number;
@@ -36,6 +39,7 @@ export function buildPublicAthletePreview(input: {
   displayName: string;
   athleteNumber: string;
   club?: string | null;
+  clubSlug?: string | null;
   country?: string | null;
   nationality?: string | null;
   nationalitySource?: SourceNationality | null;
@@ -73,6 +77,7 @@ export function buildPublicAthletePreview(input: {
     displayName: input.displayName,
     athleteNumber: input.athleteNumber,
     club: input.club ?? null,
+    clubSlug: input.club ? (input.clubSlug ?? null) : null,
     nationality: input.nationality ?? null,
     nationalitySource: null,
     sports,
@@ -87,6 +92,13 @@ export function buildPublicAthletePreview(input: {
           }),
         ],
     biographySources: [],
+    careerSummary:
+      input.biography?.length === 0
+        ? null
+        : publicAthleteCareer(
+            input.displayName,
+            combined.filter((entry): entry is ResultsHistoryEntry => entry.kind !== "reported"),
+          ),
     entries: recent.filter((entry): entry is ResultsHistoryEntry => entry.kind !== "reported"),
     reportedRecords: recent.flatMap((entry) => (entry.kind === "reported" ? [entry.result] : [])),
     totalResults: combined.length,

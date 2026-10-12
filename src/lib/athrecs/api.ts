@@ -894,19 +894,7 @@ async function readAthleteBySlug(slug: string, approvedPublicOnly = false) {
           select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
           where l.athlete_id=a.id and l.status='active' and s.enabled=false
         )))
-        and ($3 or (${approvedPublicAthleteSql}) or (
-          a.profile_visibility = 'public'
-          and (
-            not exists (select 1 from athlete_account_links l where l.athlete_id=a.id)
-            and exists (
-              select 1 from network_audit_log approval
-              where approval.action='athlete.profile_admin_published'
-                and approval.entity_type='athlete' and approval.entity_id=a.id::text
-                and approval.after_value->>'athleteId'=a.id::text
-                and approval.after_value->>'profile_visibility'='public'
-            )
-          )
-        ))
+        and ($3 or (${approvedPublicAthleteSql}))
       order by (a.slug = $1) desc, a.id
       limit 1
     `,
@@ -1138,7 +1126,13 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
       const { getPublicSharedProfilePreview } = await import("./athlete-profile-share-api");
       const shared = await getPublicSharedProfilePreview({ data: { slug: profile.athlete.slug } });
       if (shared)
-        return { ...shared, slug: profile.athlete.slug, searchIndexable: profile.searchIndexable };
+        return {
+          ...shared,
+          slug: profile.athlete.slug,
+          searchIndexable: profile.searchIndexable,
+          clubSlug:
+            shared.club && shared.club === profile.athlete.club ? profile.athlete.club_slug : null,
+        };
     }
     const { buildPublicAthletePreview } = await import("./public-athlete-preview");
     const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
@@ -1149,6 +1143,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
       displayName: profile.athlete.display_name,
       athleteNumber: profile.athlete.athlete_number,
       club: profile.athlete.club,
+      clubSlug: profile.athlete.club_slug,
       country: profile.athlete.country,
       nationality: profile.athlete.nationality,
       nationalitySource: profile.athlete.nationality_source,
@@ -1247,30 +1242,30 @@ export const getClubBySlug = createServerFn({ method: "GET" })
     `;
     const club = rows[0];
     if (!club) return null;
-    const members = await sql<{
+    const { indexableApprovedAthleteSql } = await import("./athlete-search-policy.server");
+    const members = await sql.query<{
       id: number;
       slug: string;
       display_name: string;
-      gender: string;
-      city: string | null;
       result_count: number;
-    }>`
-      select
-        a.id, a.slug, a.display_name, a.gender, a.city,
-        (
-          select count(*)::int
-          from results r
-          where r.athlete_id = a.id
-            and (
-              a.profile_type = 'Public figure'
-                  or r.result_visibility in ('public', 'public_figure')
-            )
-        ) as result_count
+    }>(
+      `
+      select a.id, a.slug, a.display_name,
+        (select count(*)::int from results r where r.athlete_id = a.id
+          and r.result_visibility in ('public', 'public_figure')
+          and coalesce(r.result_details->>'profileExcluded','false') <> 'true'
+          and not exists (select 1 from athlete_profile_hidden_results h
+            join athlete_account_links l on l.user_id=h.user_id and l.status='active'
+            where l.athlete_id=a.id and h.result_id=r.id)) as result_count
       from athletes a
-      where a.club_id = ${club.id}
-        and (a.profile_type = 'Public figure' or a.profile_visibility = 'public')
-      order by a.display_name
-    `;
+      where a.club_id = $1 and ${indexableApprovedAthleteSql}
+        and not exists (select 1 from athlete_account_links l
+          join athlete_public_shares s on s.user_id=l.user_id
+          where l.athlete_id=a.id and l.status='active' and s.share_club=false)
+      order by a.display_name, a.id limit 101
+    `,
+      [club.id],
+    );
     return {
       club: {
         ...club,
@@ -1278,7 +1273,8 @@ export const getClubBySlug = createServerFn({ method: "GET" })
         contacts: JSON.parse(club.contacts_json || "[]") as ClubContactInfo[],
         socials: JSON.parse(club.socials_json || "[]") as ClubSocialInfo[],
       },
-      members,
+      members: members.slice(0, 100),
+      moreMembers: members.length > 100,
     };
   });
 

@@ -84,6 +84,11 @@ try {
     create table athlete_account_links(user_id text, athlete_id integer, status text);
     create table athlete_public_shares(user_id text, enabled boolean, share_results boolean);
     create table athlete_profile_hidden_results(user_id text, result_id integer);
+    create table athlete_profile_history_choices(user_id text, athlete_id integer,
+      provider text, external_id text, performance_hash text, excluded boolean);
+    create table source_history_claim_results(id integer primary key, provider text,
+      external_id text, source_key text);
+    create table athlete_profile_hidden_source_results(user_id text, source_result_id integer);
     create table athlete_source_histories(athlete_id integer, provider text, external_id text,
       performances jsonb, published_at timestamptz);
     create table network_audit_log(action text, entity_id text, after_value jsonb);

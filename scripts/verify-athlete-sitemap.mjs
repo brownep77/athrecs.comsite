@@ -37,7 +37,7 @@ try {
     create table network_audit_log (entity_id text, action text, after_value jsonb,
       publication_athlete_key text generated always as (
         case when action='athlete.history_admin_published' then after_value->>'athleteId' end
-      ) stored);
+      ) stored, entity_type text);
     insert into athletes select i, 'athlete-' || i, 'Athlete', 'public' from generate_series(1, 5001) i;
     insert into athletes values
       (5002, 'private-source', 'Athlete', 'private'),
@@ -166,6 +166,19 @@ try {
     /<lastmod>2026-10-07<\/lastmod>/,
   );
   assert(!sitemapXml(["https://example.test/unchanged"]).includes("lastmod"));
+  await db.exec(`
+    insert into athletes values (5015,'admin-profile','Athlete','public'),
+      (5016,'formerly-linked-admin-profile','Athlete','public');
+    insert into athlete_resolved_ids values (5015),(5016);
+    insert into network_audit_log(entity_id,action,after_value,entity_type)
+      select id::text,'athlete.profile_admin_published',
+        jsonb_build_object('athleteId',id,'profile_visibility','public'),'athlete'
+      from athletes where id in (5015,5016);
+    insert into athlete_account_links values (5016,'previous-owner','revoked');
+  `);
+  await assertSameEligibility();
+  assert((await athleteSitemapSlugs(sql, 2)).includes("admin-profile"));
+  assert(!(await athleteSitemapSlugs(sql, 2)).includes("formerly-linked-admin-profile"));
   await assertSameEligibility();
   await db.exec(
     `update network_audit_log set after_value='{"athleteId":9999}' where entity_id='synthetic:1'`,

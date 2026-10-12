@@ -19,6 +19,7 @@ import {
   Ticket,
 } from "lucide-react";
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
+import { getEventAthleteLinks } from "@/lib/athrecs/event-athlete-discovery-api";
 import { resultSlug } from "@/lib/athrecs/result-slug";
 import { resultCredit } from "@/lib/athrecs/result-credit";
 import { getEditionResults, getEventBySlug } from "@/lib/athrecs/api";
@@ -88,15 +89,20 @@ export const Route = createFileRoute("/races/$slug")({
           statusCode: 301,
         });
       }
-      const archiveResults =
+      const [archiveResults, athleteLinks] = await Promise.all([
         !IS_RUNRECS_SITE &&
         !data.upcoming.length &&
         data.past.length === 1 &&
         data.past[0].result_count > 0
-          ? await getPublicRaceResults({ data: { editionId: String(data.past[0].id) } })
-          : null;
+          ? getPublicRaceResults({ data: { editionId: String(data.past[0].id) } })
+          : Promise.resolve(null),
+        !IS_RUNRECS_SITE && data.past.some((edition) => edition.result_count > 0)
+          ? getEventAthleteLinks({ data: data.event.slug })
+          : Promise.resolve([]),
+      ]);
       return {
         ...data,
+        athleteLinks,
         archiveResults: archiveResults
           ? { ...archiveResults, results: archiveResults.results.slice(0, 5) }
           : null,
@@ -182,7 +188,13 @@ export const Route = createFileRoute("/races/$slug")({
 
 function RacePage() {
   const data = Route.useLoaderData();
-  return <RacePageContent data={data} archiveResults={data.archiveResults} />;
+  return (
+    <RacePageContent
+      data={data}
+      archiveResults={data.archiveResults}
+      athleteLinks={data.athleteLinks}
+    />
+  );
 }
 
 function spectatorAccessLabel(access: EditionSpectatorAccess | null): string | null {
@@ -217,10 +229,12 @@ export function RacePageContent({
   data,
   localized,
   archiveResults,
+  athleteLinks = [],
 }: {
   data: NonNullable<Awaited<ReturnType<typeof getEventBySlug>>>;
   localized?: { language: string; country: string };
   archiveResults?: Awaited<ReturnType<typeof getPublicRaceResults>>;
+  athleteLinks?: Awaited<ReturnType<typeof getEventAthleteLinks>>;
 }) {
   const { event, groups, distances, upcoming, past, related } = data;
   const isRunningEvent = event.sport === "Running" || event.sport === "Parkrun";
@@ -480,6 +494,33 @@ export function RacePageContent({
           >
             View recorded results
           </Link>
+        </section>
+      ) : null}
+
+      {athleteLinks.length ? (
+        <section
+          aria-labelledby="event-athletes-heading"
+          className="space-y-3 rounded-xl border border-border bg-surface p-5"
+        >
+          <h2 id="event-athletes-heading" className="font-display text-lg font-semibold">
+            Athlete profiles
+          </h2>
+          <p className="text-sm text-muted">
+            Explore some of the athletes with recorded results at {event.name}.
+          </p>
+          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {athleteLinks.map((athlete) => (
+              <li key={athlete.slug}>
+                <Link
+                  to="/athletes/$slug"
+                  params={{ slug: athlete.slug }}
+                  className="inline-flex min-h-11 items-center text-sm text-accent hover:underline"
+                >
+                  {athlete.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       ) : null}
 

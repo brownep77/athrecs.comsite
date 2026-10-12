@@ -88,7 +88,7 @@ export const Route = createFileRoute("/clubs/$slug")({
 });
 
 function ClubPage() {
-  const { club, members } = Route.useLoaderData();
+  const { club, members, moreMembers } = Route.useLoaderData();
   const location = [...new Set([club.city, club.county, club.country].map((part) => part.trim()))]
     .filter(Boolean)
     .join(" · ");
@@ -121,7 +121,8 @@ function ClubPage() {
           ))}
           <Badge variant="outline" className="gap-1">
             <Users className="h-3 w-3" />
-            {members.length} on Athrecs
+            {members.length}
+            {moreMembers ? "+" : ""} public profiles
           </Badge>
           <ClubVerificationBadge
             slug={club.slug}
@@ -311,17 +312,21 @@ function ClubPage() {
               >
                 <div>
                   <p className="font-semibold text-fg">{m.display_name}</p>
-                  <p className="text-xs text-muted">
-                    {m.city ?? club.city}
-                    {" · "}
-                    {m.gender === "F" ? "Female" : "Male"}
-                  </p>
                 </div>
                 <Badge variant="outline">{m.result_count} results</Badge>
               </Link>
             ))}
           </div>
         )}
+        {moreMembers ? (
+          <Link
+            to="/athletes"
+            search={{ q: club.name }}
+            className="inline-flex min-h-11 items-center text-sm text-accent hover:underline"
+          >
+            Browse more club athletes
+          </Link>
+        ) : null}
       </section>
     </div>
   );

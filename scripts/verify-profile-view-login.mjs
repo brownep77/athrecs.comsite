@@ -452,7 +452,8 @@ try {
   );
 
   assert.equal(preview.biography.length, 1);
-  assert(!JSON.stringify(preview).includes("Synthetic shot put"));
+  assert(!JSON.stringify(preview.entries).includes("Synthetic shot put"));
+  assert(!JSON.stringify(preview.careerSummary).includes("5.69"), "Historical marks remain gated");
   for (const auth of [undefined, "invalid-token"])
     await assert.rejects(
       () =>
@@ -479,10 +480,18 @@ try {
     assert($("#results-history tbody tr").eq(1).text().includes("Synthetic spring marathon"));
     assert($("#results-history").text().includes("19:34(19:38)"));
     assert(
-      !html.includes("Synthetic field games"),
-      "Older results must not be serialized into HTML",
+      !JSON.stringify(preview.entries).includes("Synthetic field games"),
+      "Older full result rows stay outside the five-result preview",
     );
-    assert(!html.includes("Synthetic shot put"));
+    assert(!JSON.stringify(preview.entries).includes("Synthetic shot put"));
+    assert(preview.careerSummary.events.length <= 6);
+    for (const event of preview.careerSummary.events) {
+      assert.deepEqual(
+        Object.keys(event).sort(),
+        ["discipline", "eventSlug", "name", "verification", "year"],
+        "Career highlights disclose only selected event facts, not result rows or evidence",
+      );
+    }
     assert(html.includes("View the full athlete profile"));
     assert($.text().includes("Showing 5 of 11 recorded performances"));
     assert.equal($("#results-history .result-evidence a[href^='https://example.test']").length, 0);
