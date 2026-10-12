@@ -39,6 +39,22 @@ try {
   assert.equal(first.$("form[role=search]").attr("action"), "/athletes");
   assert.equal(first.$("a[rel=next]").attr("href"), "/athletes?letter=S&page=2");
   assert(!first.html.includes("Search Private Identity"));
+  const { readAthleteDirectoryPage } = await server.ssrLoadModule(
+    "/src/lib/athrecs/athlete-directory-page.server.ts",
+  );
+  const [identified] = await sql.query(`select a.id, i.athlete_number from athletes a
+    join athlete_resolved_ids i on i.athlete_id=a.id where a.slug='search-example-1'`);
+  const byNumber = await readAthleteDirectoryPage(sql, {
+    q: `ATH-${String(identified.athlete_number).padStart(6, "0")}`,
+  });
+  assert.equal(
+    byNumber.total,
+    1,
+    "Moving identifier hydration after pagination preserves athlete-number search",
+  );
+  assert.equal(byNumber.athletes[0].id, identified.id);
+  assert.equal((await readAthleteDirectoryPage(sql, { q: "Search Example" })).total, 26);
+  assert.equal((await readAthleteDirectoryPage(sql, { q: "Search Private" })).total, 0);
   const second = await get("/athletes?letter=S&page=2");
   assert.equal(second.response.status, 200);
   assert.equal(second.$("a[rel=prev]").attr("href"), "/athletes?letter=S");

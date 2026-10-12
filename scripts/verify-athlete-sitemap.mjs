@@ -6,18 +6,38 @@ import {
   sitemapXml,
 } from "../src/lib/athrecs/athlete-sitemap.server.ts";
 
-import { isApprovedAthleteIndexable } from "../src/lib/athrecs/athlete-search-policy.server.ts";
+import {
+  isApprovedAthleteIndexable,
+  indexableApprovedAthleteSql,
+  indexableApprovedAthleteSetSql,
+} from "../src/lib/athrecs/athlete-search-policy.server.ts";
 
 const db = new PGlite();
-const sql = { query: async (query, values) => (await db.query(query, values)).rows };
+const adapter = (database) => ({
+  query: async (query, values) => (await database.query(query, values)).rows,
+  transaction: (read) => database.transaction((transaction) => read(adapter(transaction))),
+});
+const sql = adapter(db);
+async function assertSameEligibility() {
+  const read = (predicate) =>
+    sql.query(`select a.id from athletes a where ${predicate} order by a.id`);
+  assert.deepEqual(
+    await read(indexableApprovedAthleteSetSql),
+    await read(indexableApprovedAthleteSql),
+  );
+}
 try {
   await db.exec(`
     create table athletes (id int primary key, slug text, profile_type text, profile_visibility text);
     create table athlete_public_shares (user_id text, enabled boolean, share_results boolean, search_indexable boolean);
     create table athlete_account_links (athlete_id int, user_id text, status text);
-    create table athlete_resolved_ids (athlete_id int);
+    create table athlete_identifiers (athlete_id int);
+    create view athlete_resolved_ids as select athlete_id from athlete_identifiers;
     create table athlete_source_histories (athlete_id int, provider text, external_id text, published_at timestamptz);
-    create table network_audit_log (entity_id text, action text, after_value jsonb);
+    create table network_audit_log (entity_id text, action text, after_value jsonb,
+      publication_athlete_key text generated always as (
+        case when action='athlete.history_admin_published' then after_value->>'athleteId' end
+      ) stored);
     insert into athletes select i, 'athlete-' || i, 'Athlete', 'public' from generate_series(1, 5001) i;
     insert into athletes values
       (5002, 'private-source', 'Athlete', 'private'),
@@ -37,11 +57,12 @@ try {
     insert into athlete_source_histories
       select id, 'synthetic', id::text, case when id=5010 then null else now() end
       from athletes where id <> 5007;
-    insert into network_audit_log
+    insert into network_audit_log (entity_id, action, after_value)
       select 'synthetic:' || id, 'athlete.history_admin_published',
         jsonb_build_object('athleteId', case when id=5009 then 9999 else id end)
       from athletes where id <> 5008;
-    insert into network_audit_log select * from network_audit_log where entity_id='synthetic:1';
+    insert into network_audit_log (entity_id, action, after_value)
+      select entity_id, action, after_value from network_audit_log where entity_id='synthetic:1';
     insert into athlete_account_links values
       (5004, 'missing-choice', 'active'), (5005, 'unlisted', 'active'),
       (5006, 'withdrawn', 'revoked'), (5011, 'opt-in', 'active'),
@@ -50,7 +71,18 @@ try {
       ('unlisted', true, true, false), ('opt-in', true, true, true),
       ('withdrawn', false, true, true), ('results-withdrawn', true, false, true);
   `);
+  const settings = () =>
+    sql.query(
+      "select current_setting('work_mem') as memory, current_setting('max_parallel_workers_per_gather') as workers",
+    );
+  const settingsBefore = await settings();
   assert.equal(await athleteSitemapPageCount(sql), 2);
+  assert.deepEqual(
+    await settings(),
+    settingsBefore,
+    "Discovery memory settings never leak into the next pooled request",
+  );
+  await assertSameEligibility();
   const first = await athleteSitemapSlugs(sql, 1);
   const second = await athleteSitemapSlugs(sql, 2);
   assert.equal(first.length, 5000);
@@ -66,6 +98,7 @@ try {
     );
   }
   await db.exec("update athletes set profile_visibility='private' where id=5001");
+  await assertSameEligibility();
   assert(
     !(await athleteSitemapSlugs(sql, 2)).includes("athlete-5001"),
     "Privacy changes apply immediately",
@@ -76,10 +109,12 @@ try {
     "Approved publications need no rebuild",
   );
   await db.exec("update athlete_public_shares set search_indexable=false where user_id='opt-in'");
+  await assertSameEligibility();
   assert.equal(await isApprovedAthleteIndexable(sql, 5011), false);
   assert(!(await athleteSitemapSlugs(sql, 2)).includes("search-opt-in"));
   await db.exec("update athlete_public_shares set search_indexable=true where user_id='opt-in'");
   await db.exec("insert into athlete_account_links values (5011, 'missing-choice', 'active')");
+  await assertSameEligibility();
   assert.equal(
     await isApprovedAthleteIndexable(sql, 5011),
     false,
@@ -102,6 +137,7 @@ try {
     "An unpublished history without another publication approval is excluded",
   );
   await db.exec("delete from network_audit_log where entity_id='synthetic:5006'");
+  await assertSameEligibility();
   assert.equal(await isApprovedAthleteIndexable(sql, 5006), false, "Missing approval fails closed");
   await db.exec(`
     insert into network_audit_log values ('5007', 'athlete.bulk_publish', '{"profile_visibility":"public"}');
@@ -130,6 +166,15 @@ try {
     /<lastmod>2026-10-07<\/lastmod>/,
   );
   assert(!sitemapXml(["https://example.test/unchanged"]).includes("lastmod"));
+  await assertSameEligibility();
+  await db.exec(
+    `update network_audit_log set after_value='{"athleteId":9999}' where entity_id='synthetic:1'`,
+  );
+  await assertSameEligibility();
+  assert(
+    !(await athleteSitemapSlugs(sql, 1)).includes("athlete-1"),
+    "Changed audit identity revokes eligibility immediately",
+  );
   assert.match(sitemapXml(["https://example.test/a?x=1&y=2"]), /x=1&amp;y=2/);
   assert.match(sitemapXml(["https://example.test/sitemaps/athletes-1.xml"], true), /<sitemapindex/);
   console.log(

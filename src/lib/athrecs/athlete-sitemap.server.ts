@@ -1,25 +1,30 @@
 import type { Sql } from "../db";
-import { indexableApprovedAthleteSql } from "./athlete-search-policy.server.ts";
+import { indexableApprovedAthleteSetSql } from "./athlete-search-policy.server.ts";
+import { withDiscoveryRead } from "./discovery-read.server.ts";
 
 // Keep well below the 50,000 URL limit and bound each database read.
 export const ATHLETE_SITEMAP_PAGE_SIZE = 5000;
 
 const indexableProfiles = `select a.slug, a.id as sort_key
-  from athletes a where ${indexableApprovedAthleteSql}`;
+  from athletes a where ${indexableApprovedAthleteSetSql}`;
 
 export async function athleteSitemapPageCount(sql: Sql): Promise<number> {
-  const [row] = await sql.query<{ count: number }>(
-    `select count(*)::int as count from (${indexableProfiles}) profiles`,
+  const [row] = await withDiscoveryRead(sql, (read) =>
+    read.query<{ count: number }>(
+      `select count(*)::int as count from (${indexableProfiles}) profiles`,
+    ),
   );
   return Math.ceil(row.count / ATHLETE_SITEMAP_PAGE_SIZE);
 }
 
 export async function athleteSitemapSlugs(sql: Sql, page: number): Promise<string[]> {
   if (!Number.isSafeInteger(page) || page < 1) return [];
-  const rows = await sql.query<{ slug: string }>(
-    `select slug from (${indexableProfiles}) profiles
+  const rows = await withDiscoveryRead(sql, (read) =>
+    read.query<{ slug: string }>(
+      `select slug from (${indexableProfiles}) profiles
      order by sort_key limit $1 offset $2`,
-    [ATHLETE_SITEMAP_PAGE_SIZE, (page - 1) * ATHLETE_SITEMAP_PAGE_SIZE],
+      [ATHLETE_SITEMAP_PAGE_SIZE, (page - 1) * ATHLETE_SITEMAP_PAGE_SIZE],
+    ),
   );
   return rows.map((row) => row.slug);
 }

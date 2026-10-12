@@ -33,6 +33,27 @@ New database records enter the appropriate live sitemap automatically if their p
 
 ## Athlete name and event searches
 
+### Catalogue query performance
+
+Directory and athlete-sitemap reads join publication approvals as a set. The
+single-profile eligibility predicate stays available for individual requests;
+the sitemap regression test compares both after privacy and approval changes.
+The generated `publication_athlete_key` is derived from the original audit JSON
+on every write and lets the bulk read use a covering index without reading full
+audit payloads. It is never an independent publication permission.
+
+Directory athlete-number hydration happens only after the 24 identities have
+been selected; number searches still inspect both source and resolved IDs.
+Bulk reads use transaction-local 32 MB work memory with parallel workers disabled
+to reduce disk spills without multiplying memory per worker or changing later
+pooled requests. No profile audience, approval decision or country facet is cached.
+The database migration is required before deploying this query version. It uses
+a five-second lock-acquisition timeout and remains transactional.
+
+Run `node scripts/verify-athlete-sitemap.mjs` and
+`node scripts/verify-athlete-discovery-pagination.mjs` to verify eligibility,
+privacy withdrawal, identifier search, pagination and connection-setting cleanup.
+
 Public profile metadata is built from the anonymous biography and latest-five-results
 preview. Names, visible event names and verification qualifications remain consistent
 with the page. Running, parkrun, trail and ultra categories share a concise Running
