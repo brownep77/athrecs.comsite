@@ -54,6 +54,11 @@ jobs:
       - name: Verify search URLs and sitemap privacy
         run: npm run verify:search-discovery
 
+      - name: Verify athlete search metadata and crawlable directory pages
+        run: |
+          npm run verify:athlete-search-content
+          node scripts/verify-athlete-discovery-pagination.mjs
+
       - name: Verify indexing recovery and archive privacy
         run: node scripts/verify-indexing-recovery.mjs
 
