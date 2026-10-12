@@ -14,7 +14,14 @@ export type PublicCareerEvent = {
 export type PublicCareerSummary = { text: string; events: PublicCareerEvent[] };
 
 const clean = (value: string) => value.replace(/\s+/g, " ").trim();
-const disciplineLabel = (value: string) => (/^half$/i.test(value) ? "Half marathon" : clean(value));
+const disciplineLabel = (value: string) => {
+  const label = clean(value);
+  if (/^half(?: marathon)?$/i.test(label)) return "Half marathon";
+  if (/^marathon$/i.test(label)) return "Marathon";
+  return label
+    .replace(/^(\d+(?:\.\d+)?)\s*k(?:m)?$/i, "$1K")
+    .replace(/^(\d+(?:\.\d+)?)\s*(?:mi|miles?)$/i, "$1mi");
+};
 const verification = (value?: string): PublicCareerEvent["verification"] =>
   value === "source_verified"
     ? "Source checked"

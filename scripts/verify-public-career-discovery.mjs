@@ -63,6 +63,21 @@ try {
     const html = await response.text();
     return { response, html, $: load(html) };
   };
+  await sql`insert into slug_redirects(entity_type,entity_id,old_slug,current_slug)
+    values('athlete',${athlete},'career-old-name','career-test-runner'),
+      ('athlete',${unapproved},'unapproved-old-name','career-unapproved')`;
+  const oldProfile = await fetch(origin + "/athletes/career-old-name", { redirect: "manual" });
+  assert.equal(oldProfile.status, 301);
+  assert.equal(oldProfile.headers.get("location"), "/athletes/career-test-runner");
+  assert.match(oldProfile.headers.get("cache-control"), /private.*no-store/);
+  for (const slug of ["career-unapproved", "unapproved-old-name", "missing-test-athlete"]) {
+    const unavailable = await fetch(origin + `/athletes/${slug}`, { redirect: "manual" });
+    assert.equal(unavailable.status, 404);
+    assert.equal(unavailable.headers.get("location"), null);
+    const html = await unavailable.text();
+    assert(!html.includes("Unapproved Sentinel"));
+    assert(html.includes("Sign in to view athlete profiles"));
+  }
   const profile = await get("/athletes/career-test-runner");
   assert.equal(profile.response.status, 200);
   assert.equal(profile.$("meta[name=robots]").attr("content"), "index, follow");
@@ -114,6 +129,11 @@ try {
   assert.deepEqual(await readEventAthleteLinks(sql, "career-early-marathon"), []);
   await sql`insert into athlete_public_shares(user_id,slug,enabled,share_results,share_bio,share_club,share_location,search_indexable) values('career-owner','career-test-runner',true,true,true,true,true,false)`;
   assert.equal(await isApprovedAthleteIndexable(sql, athlete), false, "Search opt-out wins");
+  const optedOutRedirect = await fetch(origin + "/athletes/career-old-name", { redirect: "manual" });
+  assert.equal(optedOutRedirect.status, 404);
+  assert.equal(optedOutRedirect.headers.get("location"), null);
+  assert.equal((await get("/athletes/career-test-runner")).response.status, 200,
+    "An unlisted shared profile remains usable at its direct URL");
   await sql`update athlete_public_shares set search_indexable=true where user_id='career-owner'`;
   assert.equal(await isApprovedAthleteIndexable(sql, athlete), true);
   await sql`update athlete_public_shares set share_bio=false,share_club=false where user_id='career-owner'`;

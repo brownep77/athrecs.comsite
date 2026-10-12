@@ -28,8 +28,12 @@ import {
   getPublicAthletePreview,
 } from "@/lib/athrecs/api";
 import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
+import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { Badge } from "@/components/ui/badge";
-import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
+import {
+  resolveSlugRedirect,
+  resolvePublicAthleteSlugRedirect,
+} from "@/lib/athrecs/slug-redirects";
 import { Button } from "@/components/ui/button";
 import { ShareProfileButton } from "@/components/athletes/ShareProfileButton";
 import { SharedAccountProfile } from "@/components/athletes/SharedAccountProfile";
@@ -43,6 +47,7 @@ import { AthleteId } from "@/components/athletes/AthleteId";
 import { formatAthleteId } from "@/lib/athrecs/athlete-id";
 import {
   ATHLETE_INDEXING_HEADER,
+  ATHLETE_UNAVAILABLE_HEADER,
   INDEXABLE_ATHLETE_ROBOTS,
   PRIVATE_ATHLETE_ROBOTS,
   isIndexableAthletePage,
@@ -55,6 +60,10 @@ export const Route = createFileRoute("/athletes/$slug")({
       (await getPublicSharedProfilePreview({ data: { slug: params.slug } }));
     if (preview && preview.slug !== params.slug && preview.searchIndexable) {
       throw redirect({ to: "/athletes/$slug", params: { slug: preview.slug }, statusCode: 301 });
+    }
+    if (!preview && !IS_RUNRECS_SITE) {
+      const slug = await resolvePublicAthleteSlugRedirect({ data: params.slug });
+      if (slug) throw redirect({ to: "/athletes/$slug", params: { slug }, statusCode: 301 });
     }
     if (!(await canViewAthleteProfiles())) {
       return preview
@@ -118,6 +127,10 @@ export const Route = createFileRoute("/athletes/$slug")({
       ? INDEXABLE_ATHLETE_ROBOTS
       : PRIVATE_ATHLETE_ROBOTS,
     [ATHLETE_INDEXING_HEADER]: isIndexableAthletePage(loaderData) ? "1" : "0",
+    // Private and nonexistent profiles get the same sign-in shell and status.
+    // Never expose profile existence through an anonymous lookup.
+    [ATHLETE_UNAVAILABLE_HEADER]:
+      !IS_RUNRECS_SITE && loaderData?.kind === "sign-in" ? "1" : "0",
   }),
   head: ({ params, loaderData }) => {
     const preview = loaderData?.kind === "public-preview" ? loaderData.preview : null;

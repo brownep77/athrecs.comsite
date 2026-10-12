@@ -140,7 +140,7 @@ try {
   await assertSameEligibility();
   assert.equal(await isApprovedAthleteIndexable(sql, 5006), false, "Missing approval fails closed");
   await db.exec(`
-    insert into network_audit_log values ('5007', 'athlete.bulk_publish', '{"profile_visibility":"public"}');
+    insert into network_audit_log(entity_id,action,after_value) values ('5007', 'athlete.bulk_publish', '{"profile_visibility":"public"}');
   `);
   assert.equal(
     await isApprovedAthleteIndexable(sql, 5007),
@@ -154,7 +154,7 @@ try {
     "A historical bulk approval never overrides current private visibility",
   );
   await db.exec(`
-    insert into network_audit_log values ('5008', 'athlete.bulk_publish', '{"profile_visibility":"private"}');
+    insert into network_audit_log(entity_id,action,after_value) values ('5008', 'athlete.bulk_publish', '{"profile_visibility":"private"}');
   `);
   assert.equal(
     await isApprovedAthleteIndexable(sql, 5008),

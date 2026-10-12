@@ -4,6 +4,7 @@ export const PRIVATE_ATHLETE_ROBOTS = "noindex, nofollow, noarchive";
 // Internal response marker, set only from the server-validated route loader.
 // Request middleware consumes it and removes it before sending the response.
 export const ATHLETE_INDEXING_HEADER = "X-Athrecs-Profile-Indexable";
+export const ATHLETE_UNAVAILABLE_HEADER = "X-Athrecs-Profile-Unavailable";
 
 export function isIndexableAthletePage(
   data: { kind: string; searchIndexable?: boolean } | undefined,
