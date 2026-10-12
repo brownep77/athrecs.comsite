@@ -1,4 +1,5 @@
 import type { Edition, EntryOptionSeed, Series } from "./types";
+import { eventOfferCorrections } from "./event-offer-corrections";
 import {
   ukMarathonEditionOverrides,
   ukMarathonEditionReplacements,
@@ -179,3 +180,17 @@ export const entryOptions: Record<string, EntryOptionSeed[]> = {
     },
   ],
 };
+
+// Keep future catalogue seeds consistent with the bounded, audited correction.
+for (const correction of eventOfferCorrections) {
+  entryOptions[correction.key] = entryOptions[correction.key]?.map((option) =>
+    option.providerCode === correction.providerCode && option.checkedAt < correction.patch.checkedAt
+      ? {
+          ...option,
+          ...correction.patch,
+          sourceUrl: correction.sourceUrl,
+          notes: [option.notes, correction.patch.notes].filter(Boolean).join("\n"),
+        }
+      : option,
+  );
+}

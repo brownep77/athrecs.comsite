@@ -73,28 +73,66 @@ export function organizationJsonLd() {
   };
 }
 
+function calendarDate(value: string | null | undefined): string | undefined {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return undefined;
+  const date = new Date(value);
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value
+    ? value
+    : undefined;
+}
+
+function httpsUrl(value: string): boolean {
+  try {
+    const url = new URL(value);
+    return url.protocol === "https:" && !url.username && !url.password;
+  } catch {
+    return false;
+  }
+}
+
+/** Only these stored statuses establish Google's supported ticket availability. */
+function offerAvailability(status: string): string | undefined {
+  switch (status) {
+    case "open":
+    case "closing_soon":
+      return "https://schema.org/InStock";
+    case "sold_out":
+      return "https://schema.org/SoldOut";
+    default:
+      // A ballot, waiting list, closed entry or unknown status is not a preorder
+      // and does not independently establish that an event has sold out.
+      return undefined;
+  }
+}
+
 /** Archive and undated race pages are not upcoming event listings. */
-export function sportsEventJsonLd(input: {
-  name: string;
-  slug: string;
-  description?: string;
-  city?: string | null;
-  country?: string | null;
-  startDate?: string | null;
-  startTime?: string | null;
-  sport?: string | null;
-  website?: string | null;
-  organiser?: string | null;
-  endDate?: string | null;
-  entryOptions?: {
-    is_verified: boolean;
-    entry_type: string;
-    entry_url: string;
-    price_amount: number | string | null;
-    price_currency: string | null;
-    status: string;
-  }[];
-}) {
+export function sportsEventJsonLd(
+  input: {
+    name: string;
+    slug: string;
+    description?: string;
+    city?: string | null;
+    country?: string | null;
+    startDate?: string | null;
+    startTime?: string | null;
+    sport?: string | null;
+    website?: string | null;
+    organiser?: string | null;
+    endDate?: string | null;
+    entryOptions?: {
+      is_verified: boolean;
+      entry_type: string;
+      entry_url: string;
+      price_amount: number | string | null;
+      price_currency: string | null;
+      status: string;
+      opens_at?: string | null;
+      closes_at?: string | null;
+      source_url?: string | null;
+    }[];
+  },
+  now = new Date(),
+) {
   const url = absoluteUrl(`/races/${input.slug}`);
   const description =
     input.description ??
@@ -156,29 +194,55 @@ export function sportsEventJsonLd(input: {
       input.organiser?.trim() && !/^(unknown|tbc|n\/a)$/i.test(input.organiser.trim())
         ? { "@type": "Organization", name: input.organiser.trim(), url: input.website || undefined }
         : undefined,
-    offers: input.entryOptions
-      ?.filter(
-        (option) =>
-          option.is_verified &&
-          option.entry_type === "official" &&
-          /^https:\/\//.test(option.entry_url) &&
-          option.price_amount != null &&
-          Number.isFinite(Number(option.price_amount)) &&
-          Number(option.price_amount) >= 0 &&
-          /^[A-Z]{3}$/.test(option.price_currency ?? ""),
+    offers: input.entryOptions?.flatMap((option) => {
+      if (
+        option.is_verified !== true ||
+        option.entry_type !== "official" ||
+        !httpsUrl(option.entry_url) ||
+        option.price_amount == null ||
+        String(option.price_amount).trim() === "" ||
+        !Number.isFinite(Number(option.price_amount)) ||
+        Number(option.price_amount) < 0 ||
+        !/^[A-Z]{3}$/.test(option.price_currency ?? "")
       )
-      .map((option) => ({
-        "@type": "Offer",
-        url: option.entry_url,
-        price: Number(option.price_amount),
-        priceCurrency: option.price_currency,
-        availability:
-          option.status === "sold_out"
-            ? "https://schema.org/SoldOut"
-            : ["open", "closing_soon"].includes(option.status)
-              ? "https://schema.org/InStock"
-              : undefined,
-      })),
+        return [];
+
+      const today = now.toISOString().slice(0, 10);
+      const closes = calendarDate(option.closes_at);
+      const opens = calendarDate(option.opens_at);
+      // opens_at is an evidence-backed DATE in storage. Keep that precision;
+      // never substitute checked_at, created_at, the race date or midnight.
+      const validFrom =
+        option.source_url &&
+        httpsUrl(option.source_url) &&
+        opens &&
+        opens <= date! &&
+        (!closes || opens <= closes)
+          ? opens
+          : undefined;
+      const notYetOnSale = Boolean(validFrom && validFrom > today);
+
+      // Waiting-list/ballot applications and expired sales are not purchasable
+      // event tickets. Preserve them in the visible entry information. Explicit
+      // sold-out tickets remain supported; closed future sales need a real date.
+      if (
+        ["ballot", "waitlist"].includes(option.status) ||
+        (option.status === "closed" && !notYetOnSale) ||
+        (closes && closes < today && option.status !== "sold_out")
+      )
+        return [];
+
+      return [
+        {
+          "@type": "Offer",
+          url: option.entry_url,
+          price: Number(option.price_amount),
+          priceCurrency: option.price_currency,
+          availability: notYetOnSale ? undefined : offerAvailability(option.status),
+          validFrom,
+        },
+      ];
+    }),
   };
 }
 

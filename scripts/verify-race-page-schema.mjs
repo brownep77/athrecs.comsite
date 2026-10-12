@@ -14,6 +14,108 @@ const race = {
 };
 const serialized = (input) => JSON.parse(JSON.stringify(sportsEventJsonLd(input)));
 
+const now = new Date("2026-10-12T17:00:00Z");
+const option = {
+  is_verified: true,
+  entry_type: "official",
+  entry_url: "https://example.org/entry",
+  price_amount: "25.00",
+  price_currency: "GBP",
+  status: "open",
+  source_url: "https://example.org/race-information",
+};
+const offerFor = (overrides = {}) =>
+  JSON.parse(
+    JSON.stringify(
+      sportsEventJsonLd(
+        {
+          ...race,
+          startDate: "2027-04-25",
+          entryOptions: [{ ...option, ...overrides }],
+        },
+        now,
+      ),
+    ),
+  ).offers;
+for (const [status, availability] of [
+  ["open", "InStock"],
+  ["closing_soon", "InStock"],
+  ["sold_out", "SoldOut"],
+]) {
+  const [offer] = offerFor({ status });
+  assert.equal(offer.availability, `https://schema.org/${availability}`);
+  assert.equal(offer.price, 25);
+  assert.equal("validFrom" in offer, false, "No invented sale-start date");
+}
+for (const status of ["closed", "waitlist", "ballot"]) {
+  assert.deepEqual(offerFor({ status }), [], `${status} is not a purchasable ticket`);
+}
+for (const status of ["unknown", "unrecognised"]) {
+  assert.equal("availability" in offerFor({ status })[0], false);
+}
+for (const overrides of [
+  { is_verified: false },
+  { entry_type: "third_party" },
+  { entry_type: "charity" },
+  { entry_type: "tour_operator" },
+  { entry_url: "https://" },
+  { entry_url: "http://example.org/entry" },
+  { entry_url: "https://user:password@example.org" },
+  { price_amount: null },
+  { price_amount: "" },
+  { price_amount: "   " },
+  { price_amount: "TBC" },
+  { price_amount: -1 },
+  { price_amount: Infinity },
+  { price_currency: null },
+  { price_currency: "gbp" },
+  { price_currency: "£" },
+])
+  assert.deepEqual(offerFor(overrides), [], JSON.stringify(overrides));
+assert.equal(offerFor({ price_amount: 0 })[0].price, 0, "Explicit free entry remains valid");
+assert.equal(offerFor({ opens_at: "2026-01-03" })[0].validFrom, "2026-01-03");
+assert.equal(offerFor({ opens_at: "2024-02-29" })[0].validFrom, "2024-02-29");
+for (const opens_at of [
+  null,
+  "",
+  "mid-February",
+  "2026",
+  "2026-02-29",
+  "2026-04-31",
+  "2027-04-26",
+  "2026-01-03T18:00:00Z",
+]) {
+  assert.equal("validFrom" in offerFor({ opens_at })[0], false, String(opens_at));
+}
+assert.equal("validFrom" in offerFor({ opens_at: "2026-01-03", source_url: null })[0], false);
+assert.equal("validFrom" in offerFor({ opens_at: "2026-01-03", source_url: "invalid" })[0], false);
+assert.equal(
+  "validFrom" in offerFor({ checked_at: "2026-01-03", created_at: "2026-01-03" })[0],
+  false,
+);
+const futureSale = offerFor({ status: "closed", opens_at: "2026-12-01" })[0];
+assert.equal(futureSale.validFrom, "2026-12-01");
+assert.equal("availability" in futureSale, false, "Not yet on sale is not PreOrder");
+assert.equal(
+  "availability" in offerFor({ opens_at: "2026-12-01" })[0],
+  false,
+  "Future sale does not claim InStock",
+);
+assert.equal(
+  offerFor({ closes_at: "2026-10-11" }).length,
+  0,
+  "Do not advertise expired tickets as in stock",
+);
+assert.equal(offerFor({ closes_at: "2026-10-12" }).length, 1, "Keep date-only deadlines inclusive");
+assert.equal(
+  offerFor({ status: "sold_out", closes_at: "2026-10-11" })[0].availability,
+  "https://schema.org/SoldOut",
+);
+assert.equal(
+  "validFrom" in offerFor({ opens_at: "2026-12-01", closes_at: "2026-11-01" })[0],
+  false,
+);
+
 // Historical pages and undated listings must not emit incomplete event items.
 // Invalid calendar dates must not become made-up race dates through JS rollover.
 for (const startDate of [
@@ -75,6 +177,12 @@ for (const [, expression] of nextSelectors) {
 }
 assert.match(route, /startDate: next\?\.event_date/);
 assert.match(route, /startTime: next\?\.start_time/);
+assert.match(route, /entryOptions: next\?\.entry_options/);
+assert.equal(
+  serialized({ ...race, entryOptions: [option] }).offers,
+  undefined,
+  "Archive and undated pages never advertise current tickets",
+);
 
 // Vite substitutes the RunRecs SEO module in specialist builds. Every shared
 // route import must retain a matching export in that module.
@@ -85,5 +193,5 @@ for (const name of seoImports[1].split(",").map((value) => value.trim())) {
 }
 
 console.log(
-  "Race-page schema verified: archive/undated fallback, valid event dates and local start times.",
+  "Race-page schema verified: archive/undated fallback, sourced offers, explicit availability, real opening dates and expired/ballot/waitlist safeguards.",
 );
