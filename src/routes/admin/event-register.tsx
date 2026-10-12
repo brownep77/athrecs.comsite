@@ -5,12 +5,15 @@ import { Database, Download, Search, RefreshCw, ChevronLeft, ChevronRight, X } f
 import { Button } from "@/components/ui/button";
 import {
   getEventRegister,
+  getRegisterCollection,
   getEventRegisterDetail,
   saveEventHistory,
   addEventContact,
 } from "@/lib/event-register/api";
 import {
   registerFilters,
+  collectionFilters,
+  type CollectionFilters,
   csvCell,
   safeExternalUrl,
   type RegisterFilters,
@@ -102,6 +105,379 @@ function exportPage(rows: RegisterRow[]) {
   URL.revokeObjectURL(url);
 }
 function EventRegister() {
+  const [view, setView] = useState<"records" | "sources" | "catalogue">("records");
+  return (
+    <div className="space-y-6">
+      <nav className="flex flex-wrap gap-2" aria-label="Register views">
+        {(
+          [
+            ["records", "Collected records"],
+            ["sources", "Source coverage"],
+            ["catalogue", "Catalogue and contacts"],
+          ] as const
+        ).map(([key, label]) => (
+          <Button
+            key={key}
+            variant={view === key ? "default" : "secondary"}
+            onClick={() => setView(key)}
+            aria-pressed={view === key}
+          >
+            {label}
+          </Button>
+        ))}
+      </nav>
+      {view === "catalogue" ? <CatalogueRegister /> : <CollectedRegister key={view} view={view} />}
+    </div>
+  );
+}
+function CollectedRegister({ view }: { view: "records" | "sources" }) {
+  const [filters, setFilters] = useState<CollectionFilters>(() =>
+    collectionFilters.parse({ view }),
+  );
+  const [draft, setDraft] = useState(filters);
+  const [selected, setSelected] = useState<number | null>(null);
+  const query = useQuery({
+    queryKey: ["register-collection", filters],
+    queryFn: () => getRegisterCollection({ data: filters }),
+    staleTime: 60000,
+  });
+  const data = query.data;
+  const change = (key: keyof CollectionFilters, value: string | number | null) =>
+    setDraft({ ...draft, [key]: value });
+  const apply = (e: FormEvent) => {
+    e.preventDefault();
+    setFilters({ ...draft, page: 0 });
+  };
+  return (
+    <div className="space-y-5 text-slate-900">
+      <header className="flex flex-wrap justify-between gap-4">
+        <div>
+          <h1 className="font-display text-3xl font-semibold">Running event register</h1>
+          <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600">
+            Running and parkrun fixtures, event years and results found across the saved sources.
+            Collected records stay visible while dates, catalogue links and publication are
+            reviewed.
+          </p>
+        </div>
+        <Button
+          variant="secondary"
+          onClick={() => void query.refetch()}
+          disabled={query.isFetching}
+        >
+          <RefreshCw className="size-4" />
+          Refresh
+        </Button>
+      </header>
+      {data && (
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          {[
+            ["Indexed source URLs", data.inventory.sources],
+            ["Source websites", data.inventory.hosts],
+            ["Collected source records", data.inventory.collected],
+            ["Records including catalogue", data.inventory.records],
+          ].map(([label, n]) => (
+            <div key={label} className={box}>
+              <p className="text-xs text-slate-600">{label}</p>
+              <p className="mt-2 text-2xl font-semibold tabular-nums">{number(Number(n))}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      <p className="rounded-lg bg-cyan-50 p-4 text-sm leading-6 text-cyan-950">
+        {view === "sources"
+          ? "Feeds can share a website. Coverage below counts records from that website and is repeated for its feeds; it does not mean every page has been collected. Mixed-sport and unclassified sources remain research leads. Event records here are running and parkrun only."
+          : "These are source observations, not a count of unique races. Different sources can describe the same event. A year without a date is retained as year only. Result observations can be partial or overlapping; they are not verified finishers."}
+      </p>
+      <form onSubmit={apply} className={`${box} space-y-4`} aria-label="Filter collected sources">
+        <div className="grid gap-3 md:grid-cols-3">
+          <Field
+            label={view === "sources" ? "Source, website or coverage" : "Event, provider or place"}
+          >
+            <input
+              className={control}
+              type="search"
+              value={draft.q}
+              onChange={(e) => change("q", e.target.value)}
+            />
+          </Field>
+          <Field label="Country (as recorded)">
+            <input
+              className={control}
+              value={draft.country}
+              onChange={(e) => change("country", e.target.value)}
+              placeholder="All countries; UK includes home nations"
+            />
+          </Field>
+          {view === "records" && (
+            <>
+              <Field label="Provider">
+                <select
+                  className={control}
+                  value={draft.provider}
+                  onChange={(e) => change("provider", e.target.value)}
+                >
+                  <option value="">All providers</option>
+                  {data?.providers.map((p) => (
+                    <option key={p}>{p}</option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Edition year">
+                <input
+                  className={control}
+                  type="number"
+                  min="1800"
+                  max="2200"
+                  value={draft.year ?? ""}
+                  onChange={(e) => change("year", e.target.value ? Number(e.target.value) : null)}
+                  placeholder="All years"
+                />
+              </Field>
+              <Field label="Record collection">
+                <select
+                  className={control}
+                  value={draft.origin}
+                  onChange={(e) => change("origin", e.target.value)}
+                >
+                  {[
+                    ["collected", "Collected source records"],
+                    ["all", "All including catalogue"],
+                    ["captured-results", "Captured result archives"],
+                    ["athlete-histories", "Saved athlete histories"],
+                    ["fixture-candidates", "Fixture review queue"],
+                    ["saved-fixtures", "Saved fixture sheets"],
+                    ["catalogue", "Existing catalogue"],
+                  ].map(([v, l]) => (
+                    <option key={v} value={v}>
+                      {l}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            </>
+          )}
+          <Field label="Coverage gap">
+            <select
+              className={control}
+              value={draft.gap}
+              onChange={(e) => change("gap", e.target.value)}
+            >
+              <option value="all">All records</option>
+              {(view === "sources"
+                ? [["no-records", "No imported records from website"]]
+                : [
+                    ["unlinked", "No catalogue event link"],
+                    ["year-only", "Year known, exact date missing"],
+                    ["results", "Has result observations"],
+                  ]
+              ).map(([v, l]) => (
+                <option key={v} value={v}>
+                  {l}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
+        <div className="flex gap-2">
+          <Button type="submit">
+            <Search className="size-4" />
+            Apply filters
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              const next = collectionFilters.parse({ view });
+              setDraft(next);
+              setFilters(next);
+            }}
+          >
+            Reset
+          </Button>
+        </div>
+      </form>
+      {query.isPending && <p role="status">Loading saved records…</p>}
+      {query.isError && (
+        <p role="alert" className="text-red-700">
+          Could not load records: {query.error.message}
+        </p>
+      )}
+      {data && (
+        <>
+          <div className="flex flex-wrap justify-between gap-3 text-sm">
+            <p>
+              {number(data.total)} matching {view === "sources" ? "feeds" : "source records"}
+              {data.summary
+                ? ` · ${number(data.summary.year_only)} year only · ${number(data.summary.linked)} linked to a catalogue event · ${number(data.summary.results)} with result observations`
+                : ""}
+            </p>
+            <p>
+              Indexed {data.inventory.indexed_at?.slice(0, 10) || "date not recorded"} · Page{" "}
+              {filters.page + 1} of {Math.max(1, Math.ceil(data.total / 50))}
+            </p>
+          </div>
+          <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+            <table className="w-full min-w-[900px] text-left text-sm">
+              {view === "sources" ? (
+                <>
+                  <thead className="bg-slate-100">
+                    <tr>
+                      {[
+                        "Source feed",
+                        "Coverage and scope",
+                        "Collection status",
+                        "Records from website",
+                        "Saved links to check",
+                      ].map((x) => (
+                        <th key={x} className="p-4">
+                          {x}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.sources.map((r) => (
+                      <tr key={r.source_key} className="border-t border-slate-100 align-top">
+                        <td className="max-w-sm p-4">
+                          <p className="font-semibold">{r.name}</p>
+                          <External url={r.url}>{r.host}</External>
+                          <p className="mt-1 break-all text-xs text-slate-500">{r.url}</p>
+                        </td>
+                        <td className="max-w-xs p-4">
+                          <p>{r.country || "Country unrecorded"}</p>
+                          <p className="mt-1 text-slate-500">
+                            {r.sports || "Sport scope needs review"}
+                          </p>
+                        </td>
+                        <td className="max-w-sm p-4">
+                          <p>{r.collection_status}</p>
+                          <p className="mt-1 text-xs text-slate-500">Reuse: {r.rights_status}</p>
+                          <p className="mt-1 text-xs">
+                            Checked: {r.checked_on?.slice(0, 10) || "Not recorded"}
+                          </p>
+                        </td>
+                        <td className="p-4 tabular-nums">
+                          <p>{number(r.records)} records</p>
+                          <p>{number(r.catalogue_records)} catalogue</p>
+                          <p>{number(r.result_records)} with results</p>
+                        </td>
+                        <td className="p-4">
+                          <p>{number(r.pending_urls)} cursor URLs</p>
+                          <p className="mt-1 text-xs text-slate-500">
+                            May include navigation links
+                          </p>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </>
+              ) : (
+                <>
+                  <thead className="bg-slate-100">
+                    <tr>
+                      {[
+                        "Event / programme",
+                        "Edition",
+                        "Location",
+                        "Source / status",
+                        "Results and catalogue",
+                      ].map((x) => (
+                        <th key={x} className="p-4">
+                          {x}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.rows.map((r) => (
+                      <tr key={r.record_key} className="border-t border-slate-100 align-top">
+                        <td className="max-w-sm p-4">
+                          <p className="font-semibold">{r.event_name}</p>
+                          <p className="mt-1">
+                            {r.programme || "Programme not recorded"}
+                            {r.distance_km !== null ? ` · ${r.distance_km} km` : ""}
+                          </p>
+                          <details className="mt-2 text-xs text-slate-500">
+                            <summary className="cursor-pointer">Information held</summary>
+                            <p className="mt-2">Surface: {r.surface || "Not recorded"}</p>
+                            <p>Organiser: {r.organiser || "Not recorded"}</p>
+                            <p>Captured: {r.captured_at?.slice(0, 10) || "See saved source"}</p>
+                            <p>
+                              First/final year and contacts:{" "}
+                              {r.catalogue_event_id
+                                ? "See catalogue event history."
+                                : "Await event matching and source evidence."}
+                            </p>
+                          </details>
+                        </td>
+                        <td className="whitespace-nowrap p-4">
+                          <p>{r.edition_year ?? "Year unknown"}</p>
+                          <p className="mt-1 text-xs text-slate-500">
+                            {r.event_date || "Exact date not recorded"}
+                          </p>
+                        </td>
+                        <td className="max-w-xs p-4">
+                          <p>{r.country || "Country not recorded"}</p>
+                          <p className="mt-1 text-slate-500">{r.location}</p>
+                        </td>
+                        <td className="max-w-sm p-4">
+                          <External url={r.source_url}>{r.provider}</External>
+                          <p className="mt-1 text-xs text-slate-500">{r.origin}</p>
+                          <p className="mt-2">{r.record_status}</p>
+                        </td>
+                        <td className="p-4">
+                          <p>
+                            {r.result_observations
+                              ? `${number(r.result_observations)} saved observations`
+                              : "No result rows in this record"}
+                          </p>
+                          {r.catalogue_event_id ? (
+                            <Button
+                              className="mt-2"
+                              variant="secondary"
+                              onClick={() => setSelected(r.catalogue_event_id)}
+                            >
+                              Catalogue event
+                            </Button>
+                          ) : (
+                            <p className="mt-2 text-xs text-slate-500">Catalogue match pending</p>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </>
+              )}
+            </table>
+            {data.total === 0 && <p className="p-6">No records match these filters.</p>}
+          </div>
+          <div className="flex justify-end gap-2">
+            <Button
+              variant="secondary"
+              disabled={filters.page === 0 || query.isFetching}
+              onClick={() => setFilters({ ...filters, page: filters.page - 1 })}
+            >
+              <ChevronLeft className="size-4" />
+              Previous
+            </Button>
+            <Button
+              variant="secondary"
+              disabled={(filters.page + 1) * 50 >= data.total || query.isFetching}
+              onClick={() => setFilters({ ...filters, page: filters.page + 1 })}
+            >
+              Next
+              <ChevronRight className="size-4" />
+            </Button>
+          </div>
+        </>
+      )}
+      {selected !== null && (
+        <EventDetail key={selected} eventId={selected} close={() => setSelected(null)} />
+      )}
+    </div>
+  );
+}
+function CatalogueRegister() {
   const [filters, setFilters] = useState<RegisterFilters>(registerFilters.parse({}));
   const [draft, setDraft] = useState(filters);
   const [selected, setSelected] = useState<number | null>(null);

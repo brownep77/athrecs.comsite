@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { staffMiddleware } from "../auth/staff-middleware";
-import { registerFilters, eventInput, historyInput, contactInput } from "./core";
+import { registerFilters, eventInput, historyInput, contactInput, collectionFilters } from "./core";
 
 export const getEventRegister = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
@@ -29,4 +29,12 @@ export const addEventContact = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { saveContact } = await import("./service.server");
     return saveContact(data, context.userId);
+  });
+
+export const getRegisterCollection = createServerFn({ method: "GET" })
+  .middleware([staffMiddleware])
+  .validator((input: unknown) => collectionFilters.parse(input))
+  .handler(async ({ data }) => {
+    const { listCollection } = await import("./collection.server");
+    return listCollection(data);
   });
