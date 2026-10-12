@@ -48,6 +48,8 @@ try {
   database = await dbModule.getPglite();
   const sql = await dbModule.getSql();
   const before = await rpc("athlete-directory-api", "getAthleteDirectory", {});
+  assert.equal(before.publicAthletes, null);
+  assert.equal(before.publicResults, null);
   console.log("[athlete-directory] Catalogue ready; checking discovery and privacy");
   const fields = [
     ["alpha", "Directory Fixture Alpha", "England", "public"],
@@ -73,7 +75,8 @@ try {
     q: "Directory Fixture",
     pageSize: 2,
   });
-  assert.equal(first.total, 4);
+  assert.equal(first.total, null, "A look-ahead row replaces full-catalogue counting");
+  assert.equal(first.hasMore, true);
   assert.equal(first.athletes.length, 2);
   const withoutFacets = await rpc("athlete-directory-api", "getAthleteDirectory", {
     q: "Directory Fixture",
@@ -91,8 +94,8 @@ try {
     first.athletes.map((a) => a.display_name),
     ["Directory Fixture Alpha", "Directory Fixture Beta"],
   );
-  assert.equal(first.publicAthletes, before.publicAthletes + 4);
-  assert.equal(first.publicResults, before.publicResults + 3);
+  assert.equal(first.publicAthletes, null);
+  assert.equal(first.publicResults, null);
   assert(
     !first.countries.includes("Secret country"),
     "Private profiles cannot leak through facets",
@@ -108,6 +111,8 @@ try {
     pageSize: 2,
     page: 2,
   });
+  assert.equal(second.total, 4, "The final page has an exact total");
+  assert.equal(second.hasMore, false);
   assert.deepEqual(
     second.athletes.map((a) => a.display_name),
     ["Directory Fixture Delta", "Directory Fixture Gamma"],
@@ -224,31 +229,34 @@ try {
   const readFixture = () =>
     rpc("athlete-directory-api", "getAthleteDirectory", { q: "Directory Fixture" });
   const visible = await readFixture();
+  const resultCount = (directory) => directory.athletes.reduce((sum, a) => sum + a.result_count, 0);
   const [alphaResult] = await sql`select id from results where athlete_id=${alpha.id}`;
   await sql`insert into athlete_public_shares (user_id, slug, enabled, share_results)
     values ('directory-owner', 'directory-owner-fixture', true, true)`;
   await sql`insert into athlete_profile_hidden_results (user_id, result_id)
     values ('directory-owner', ${alphaResult.id})`;
   const hidden = await readFixture();
-  assert.equal(hidden.publicResults, visible.publicResults - 1);
-  assert.equal(hidden.publicAthletes, visible.publicAthletes);
+  assert.equal(resultCount(hidden), resultCount(visible) - 1);
+  assert.equal(hidden.total, visible.total);
   assert.equal(hidden.athletes.find((a) => a.id === alpha.id).result_count, 0);
   assert.deepEqual(hidden.athletes.find((a) => a.id === alpha.id).sports, []);
   await sql`delete from athlete_profile_hidden_results where user_id='directory-owner'`;
   await sql`update athlete_public_shares set share_results=false where user_id='directory-owner'`;
   const resultsOptOut = await readFixture();
-  assert.equal(resultsOptOut.publicResults, visible.publicResults - 1);
-  assert.equal(resultsOptOut.athletes.find((a) => a.id === alpha.id).result_count, 0);
-  assert.deepEqual(resultsOptOut.athletes.find((a) => a.id === alpha.id).sports, []);
+  assert.equal(resultCount(resultsOptOut), resultCount(visible) - 1);
+  assert(
+    !resultsOptOut.athletes.some((a) => a.id === alpha.id),
+    "Result-sharing opt-outs leave discovery immediately",
+  );
   await sql`update athlete_public_shares set enabled=false where user_id='directory-owner'`;
   const unpublished = await readFixture();
   assert.equal(unpublished.total, visible.total - 1);
-  assert.equal(unpublished.publicAthletes, visible.publicAthletes - 1);
+  assert.equal(unpublished.athletes.length, visible.athletes.length - 1);
   assert(!unpublished.athletes.some((a) => a.id === alpha.id));
   await sql`update athlete_account_links set status='revoked' where athlete_id=${alpha.id}`;
   const revoked = await readFixture();
-  assert.equal(revoked.publicResults, visible.publicResults);
-  assert.equal(revoked.publicAthletes, visible.publicAthletes);
+  assert.equal(resultCount(revoked), resultCount(visible));
+  assert.equal(revoked.total, visible.total);
   assert.equal(revoked.athletes.find((a) => a.id === alpha.id).result_count, 1);
   await sql`update athlete_account_links set status='active' where athlete_id=${alpha.id}`;
   await sql`update athlete_public_shares set enabled=true, share_results=true
@@ -257,15 +265,20 @@ try {
   await sql`update athletes set profile_type='Public figure' where id=${secret.id}`;
   await sql`update results set result_visibility='private' where athlete_id=${secret.id}`;
   const publicFigure = await readFixture();
-  assert.equal(publicFigure.publicAthletes, visible.publicAthletes + 1);
-  assert.equal(publicFigure.publicResults, visible.publicResults + 1);
-  assert.equal(publicFigure.athletes.find((a) => a.id === secret.id).result_count, 1);
+  assert.equal(publicFigure.total, visible.total + 1);
+  assert.equal(resultCount(publicFigure), resultCount(visible));
+  assert.equal(
+    publicFigure.athletes.find((a) => a.id === secret.id).result_count,
+    0,
+    "A public-figure label does not publish a private performance",
+  );
   await sql`update athlete_public_shares set enabled=false, share_results=false
     where user_id='directory-owner'`;
   const figureOptOut = await readFixture();
-  assert(figureOptOut.athletes.some((a) => a.id === secret.id));
-  assert.equal(figureOptOut.athletes.find((a) => a.id === secret.id).result_count, 0);
-  assert.deepEqual(figureOptOut.athletes.find((a) => a.id === secret.id).sports, []);
+  assert(
+    !figureOptOut.athletes.some((a) => a.id === secret.id),
+    "A public-figure label does not override an owner's publication veto",
+  );
   await sql`update athletes set profile_type='Athlete' where id=${secret.id}`;
   await sql`update athlete_public_shares set enabled=true, share_results=true
     where user_id='directory-owner'`;

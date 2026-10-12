@@ -41,9 +41,10 @@ const visibleSourcePerformanceSql = `coalesce(p->>'profileExcluded','false')<>'t
 /** Read one page plus a look-ahead row, checking current permissions in SQL. */
 export async function readAthleteDirectoryPage(
   sql: Sql,
-  search: AthleteDirectorySearch,
+  search: AthleteDirectorySearch & { pageSize?: number; includeFacets?: boolean },
 ): Promise<AthleteDirectory> {
   const page = search.page ?? 1;
+  const pageSize = search.pageSize ?? 24;
   const filteredSearch = Boolean(search.q || search.country || search.sport);
   // Filtered searches remain noindex and retain their existing audience.
   const eligible = filteredSearch
@@ -89,6 +90,7 @@ export async function readAthleteDirectoryPage(
     pattern,
     search.sport || null,
     sportCandidates,
+    pageSize,
   ];
   const sourcePermission = `(not exists (select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active')
     or exists (select 1 from network_audit_log approval where approval.action='athlete.history_admin_published'
@@ -138,10 +140,10 @@ export async function readAthleteDirectoryPage(
       left join clubs c on c.id=a.club_id
       where ${eligible} and ${matches}
       order by lower(a.display_name),a.id
-      limit 25 offset ($5::int-1)*24
+      limit ($9::int+1) offset ($5::int-1)*$9::int
     ), paged as materialized (
       select a.*, i.athlete_number::text as athlete_number
-      from (select * from candidates order by lower(display_name),id limit 24) a
+      from (select * from candidates order by lower(display_name),id limit $9::int) a
       join athlete_resolved_ids i on i.athlete_id=a.id
     ), records as (
       select r.athlete_id, count(*)::int as n, array_agg(distinct e.sport) as sports
@@ -168,10 +170,10 @@ export async function readAthleteDirectoryPage(
         array(select distinct sport from unnest(coalesce(r.sports,array[]::text[])||coalesce(h.sports,array[]::text[])) sport order by sport) as sports
       from paged a left join records r on r.athlete_id=a.id left join histories h on h.athlete_id=a.id
     ) select coalesce((select jsonb_agg(cards order by lower(display_name),id) from cards),'[]'::jsonb) as athletes,
-      case when (select count(*) from candidates)<25
-        then (($5::int-1)*24+(select count(*)::int from candidates)) else null end as total,
-      $5::int as page,24 as "pageSize",null::int as "publicAthletes",null::int as "publicResults",
-      (select count(*)>24 from candidates) as "hasMore",array[]::text[] as countries,array[]::text[] as sports
+      case when (select count(*) from candidates)<($9::int+1)
+        then (($5::int-1)*$9::int+(select count(*)::int from candidates)) else null end as total,
+      $5::int as page,$9::int as "pageSize",null::int as "publicAthletes",null::int as "publicResults",
+      (select count(*)>$9::int from candidates) as "hasMore",array[]::text[] as countries,array[]::text[] as sports
   `,
     values,
   );
@@ -181,7 +183,7 @@ export async function readAthleteDirectoryPage(
     const [row] = await withDiscoveryRead(sql, (read) =>
       read.query<{ total: number }>(
         `
-      with ${candidateCte} select count(*)::int as total,$5::int as requested_page
+      with ${candidateCte} select count(*)::int as total,$5::int as requested_page,$9::int as page_size
       from athletes a ${selectedJoin}
       left join clubs c on c.id=a.club_id
       where ${filteredSearch ? eligible : indexableApprovedAthleteSetSql} and ${matches}
@@ -189,20 +191,23 @@ export async function readAthleteDirectoryPage(
         values,
       ),
     );
-    const lastPage = Math.max(1, Math.ceil(row.total / 24));
+    const lastPage = Math.max(1, Math.ceil(row.total / pageSize));
     if (lastPage < page) return readAthleteDirectoryPage(sql, { ...search, page: lastPage });
   }
   // Country choices are a static vocabulary plus this page's visible values,
   // rather than a second catalogue scan or a cached list of private attributes.
   return {
     ...directory,
-    countries: [
-      ...new Set([
-        ...Object.values(countryNames),
-        ...directory.athletes.map((athlete) => athlete.country),
-      ]),
-    ]
-      .filter(Boolean)
-      .sort(),
+    countries:
+      search.includeFacets === false
+        ? []
+        : [
+            ...new Set([
+              ...Object.values(countryNames),
+              ...directory.athletes.map((athlete) => athlete.country),
+            ]),
+          ]
+            .filter(Boolean)
+            .sort(),
   };
 }
