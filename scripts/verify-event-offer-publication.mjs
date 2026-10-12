@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import { bulkFixture } from "./collector-bulk-fixture.mjs";
 import { publishEventOfferCorrections } from "./lib/event-offer-corrections.mjs";
 import { sportsEventJsonLd } from "../src/lib/athrecs/seo.ts";
@@ -6,7 +7,12 @@ import { sportsEventJsonLd } from "../src/lib/athrecs/seo.ts";
 const publishing = await import("../src/lib/athrecs/catalogue-publishing.server.ts");
 const { pg, sql } = await bulkFixture();
 try {
-  await sql.query("alter table edition_entry_options add column if not exists notes text");
+  const notesMigration = await readFile(
+    new URL("../migrations/20261012_entry_option_evidence_notes.sql", import.meta.url),
+    "utf8",
+  );
+  await pg.exec(notesMigration);
+  await pg.exec(notesMigration); // Existing seeded databases and repeat runs are safe.
   await sql.query("alter table editions add column if not exists start_time text");
   await sql.query(
     `insert into events(id,slug,name,sport) values (901001,'synthetic-offer-race','Synthetic Offer Race','Running')`,
@@ -36,6 +42,9 @@ try {
     correction("synthetic-sold-out", "waitlist", { status: "sold_out" }),
     correction("synthetic-opening", "open", { opensAt: "2026-01-03" }),
   ];
+  const originalOptions = await sql.query(
+    "select * from edition_entry_options where edition_id=901001 order by provider_code",
+  );
   await publishEventOfferCorrections(sql, publishing, corrections);
   const options = await sql.query(
     "select * from edition_entry_options where edition_id=901001 order by provider_code",
@@ -105,8 +114,54 @@ try {
     ]),
     /verification changed/,
   );
+  await assert.rejects(
+    publishEventOfferCorrections(
+      sql,
+      { ...publishing, validateCatalogueBatch: async () => ({ status: "invalid" }) },
+      [correction("synthetic-newer", "open", { checkedAt: "2026-10-14", status: "sold_out" })],
+    ),
+    /Correction validation failed/,
+  );
+  assert.equal(
+    (await sql.query("select count(*)::int as n from catalogue_import_batches"))[0].n,
+    2,
+    "A validation failure rolls back staging together with the correction",
+  );
+  await assert.rejects(
+    publishing.rollbackCatalogueRevision(1, "fixture@example.org", sql),
+    /Only the latest/,
+  );
+  await sql.query(
+    "update edition_entry_options set notes='Later evidence' where provider_code='synthetic-opening'",
+  );
+  await assert.rejects(
+    publishing.rollbackCatalogueRevision(2, "fixture@example.org", sql),
+    /changed after publication/,
+  );
+  await sql.query(
+    "update edition_entry_options set notes='Original evidence' where provider_code='synthetic-opening'",
+  );
+  await publishing.rollbackCatalogueRevision(2, "fixture@example.org", sql);
+  await publishing.rollbackCatalogueRevision(1, "fixture@example.org", sql);
+  assert.deepEqual(
+    await sql.query(
+      "select * from edition_entry_options where edition_id=901001 order by provider_code",
+    ),
+    originalOptions,
+    "Real rollback restores every original option field, including source notes",
+  );
+  assert.equal(
+    (await sql.query("select notes from editions where id=901001"))[0].notes,
+    "Preserve edition notes",
+  );
+  await publishEventOfferCorrections(sql, publishing, corrections);
+  assert.equal(
+    (await sql.query("select count(*)::int as n from catalogue_revisions"))[0].n,
+    2,
+    "A deployment never replays a rolled-back correction",
+  );
   console.log(
-    "PASS: real staged validation/publication, stored opening dates, retained evidence, reversible snapshots, idempotency and newer/unverified source safeguards.",
+    "PASS: atomic staged publication, real rollback with full evidence, stored dates, idempotency, and newer/unverified/concurrent-change safeguards.",
   );
 } finally {
   await pg.close();

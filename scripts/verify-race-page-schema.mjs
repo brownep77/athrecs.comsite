@@ -24,7 +24,7 @@ const option = {
   status: "open",
   source_url: "https://example.org/race-information",
 };
-const offerFor = (overrides = {}) =>
+const offerFor = (overrides = {}, at = now) =>
   JSON.parse(
     JSON.stringify(
       sportsEventJsonLd(
@@ -33,7 +33,7 @@ const offerFor = (overrides = {}) =>
           startDate: "2027-04-25",
           entryOptions: [{ ...option, ...overrides }],
         },
-        now,
+        at,
       ),
     ),
   ).offers;
@@ -107,6 +107,26 @@ assert.equal(
   "Do not advertise expired tickets as in stock",
 );
 assert.equal(offerFor({ closes_at: "2026-10-12" }).length, 1, "Keep date-only deadlines inclusive");
+assert.equal(
+  offerFor({ closes_at: "2026-10-12" }, new Date("2026-10-12T23:30:00Z")).length,
+  0,
+  "After UK midnight a ticket must not remain InStock until UTC midnight",
+);
+assert.equal(
+  offerFor({ closes_at: "2026-10-12" }, new Date("2026-10-12T22:59:59Z")).length,
+  1,
+  "The UK closing day remains inclusive until midnight",
+);
+assert.equal(
+  offerFor({ closes_at: "2026-12-01" }, new Date("2026-12-01T23:30:00Z")).length,
+  1,
+  "Winter deadlines follow GMT without a fixed summer offset",
+);
+assert.equal(
+  offerFor({ opens_at: "2026-10-13" }, new Date("2026-10-12T23:30:00Z"))[0].availability,
+  "https://schema.org/InStock",
+  "A verified open status on its opening day uses the same UK date as the page",
+);
 assert.equal(
   offerFor({ status: "sold_out", closes_at: "2026-10-11" })[0].availability,
   "https://schema.org/SoldOut",

@@ -1,4 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
+import { isDeepStrictEqual } from "node:util";
 import { dbSource, getSql, type Sql } from "@/lib/db";
 import {
   applyImportBundle,
@@ -293,7 +294,9 @@ async function insertChange(
 }
 
 function assertSnapshotUnchanged<T>(current: T | null, expected: T, entityKey: string): void {
-  if (current == null || JSON.stringify(current) !== JSON.stringify(expected)) {
+  // JSONB normalizes object-key order. Compare values while still preserving
+  // array order and types, so real later edits continue to block rollback.
+  if (current == null || !isDeepStrictEqual(current, expected)) {
     throw new Error(
       `Revision cannot be rolled back because ${entityKey} changed after publication`,
     );
@@ -710,11 +713,12 @@ async function restoreEntryOptions(
          is_verified,
          is_primary,
          created_at,
-         updated_at
+         updated_at,
+         notes
        ) values (
          $1, $2, $3, $4, $5, $6, $7, $8, $9,
          $10::date, $11::date, $12::timestamptz, $13,
-         $14, $15, $16::timestamptz, $17::timestamptz
+         $14, $15, $16::timestamptz, $17::timestamptz, $18
        )`,
       [
         option.id,
@@ -734,6 +738,7 @@ async function restoreEntryOptions(
         option.is_primary ?? false,
         option.created_at,
         option.updated_at,
+        option.notes ?? null,
       ],
     );
   }
@@ -852,13 +857,17 @@ async function rollbackEvent(sql: Sql, change: ChangeRow): Promise<void> {
   }
 }
 
-export async function rollbackCatalogueRevision(revisionId: number, rolledBackBy: string) {
+export async function rollbackCatalogueRevision(
+  revisionId: number,
+  rolledBackBy: string,
+  sqlOverride?: Sql,
+) {
   if (dbSource !== "neon") {
     throw new Error(
       "Persistent Neon Postgres is required before rolling back a catalogue revision",
     );
   }
-  const sql = await getSql();
+  const sql = sqlOverride ?? (await getSql());
   return sql.transaction(async (tx) => {
     const stateRows = await tx<{ current_revision_id: number | null }>`
       select current_revision_id
