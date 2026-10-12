@@ -65,6 +65,9 @@ jobs:
       - name: Verify race-page event structured data
         run: node scripts/verify-race-page-schema.mjs
 
+      - name: Verify running event register and contact history
+        run: node scripts/verify-event-register.mjs
+
       - name: Verify historical result source safeguards
         run: node scripts/verify-result-source-sync.mjs
 

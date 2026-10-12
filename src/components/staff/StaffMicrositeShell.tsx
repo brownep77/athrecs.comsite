@@ -36,6 +36,12 @@ const configuredStaffHost = normalizeHostname(staffSiteUrl);
 
 const staffNav = [
   {
+    to: "/admin/event-register",
+    label: "Running event register",
+    icon: Database,
+    match: (path: string) => path.startsWith("/admin/event-register"),
+  },
+  {
     to: "/admin/fixture-import",
     label: "Import running fixtures",
     icon: CalendarCheck,

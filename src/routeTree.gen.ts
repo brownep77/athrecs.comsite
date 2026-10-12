@@ -38,6 +38,7 @@ import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/ad
 import { Route as AdminCheckResultsUploadRouteImport } from './routes/admin/check-results-upload'
 import { Route as AdminClubScannerRouteImport } from './routes/admin/club-scanner'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
+import { Route as AdminEventRegisterRouteImport } from './routes/admin/event-register'
 import { Route as AdminFixtureImportRouteImport } from './routes/admin/fixture-import'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
 import { Route as AdminNetworkRouteImport } from './routes/admin/network'
@@ -234,6 +235,11 @@ const AdminClubScannerRoute = AdminClubScannerRouteImport.update({
 const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
   id: '/admin/data-intelligence',
   path: '/admin/data-intelligence',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEventRegisterRoute = AdminEventRegisterRouteImport.update({
+  id: '/admin/event-register',
+  path: '/admin/event-register',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminFixtureImportRoute = AdminFixtureImportRouteImport.update({
@@ -522,6 +528,7 @@ export interface FileRoutesByFullPath {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
+  '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -603,6 +610,7 @@ export interface FileRoutesByTo {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
+  '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -685,6 +693,7 @@ export interface FileRoutesById {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
+  '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
   '/admin/network': typeof AdminNetworkRoute
@@ -768,6 +777,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
+    | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -849,6 +859,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
+    | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -930,6 +941,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
+    | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
     | '/admin/network'
@@ -1012,6 +1024,7 @@ export interface RootRouteChildren {
   AdminCheckResultsUploadRoute: typeof AdminCheckResultsUploadRoute
   AdminClubScannerRoute: typeof AdminClubScannerRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
+  AdminEventRegisterRoute: typeof AdminEventRegisterRoute
   AdminFixtureImportRoute: typeof AdminFixtureImportRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
   AdminNetworkRoute: typeof AdminNetworkRoute
@@ -1268,6 +1281,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/data-intelligence'
       fullPath: '/admin/data-intelligence'
       preLoaderRoute: typeof AdminDataIntelligenceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/event-register': {
+      id: '/admin/event-register'
+      path: '/admin/event-register'
+      fullPath: '/admin/event-register'
+      preLoaderRoute: typeof AdminEventRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/fixture-import': {
@@ -1652,6 +1672,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCheckResultsUploadRoute: AdminCheckResultsUploadRoute,
   AdminClubScannerRoute: AdminClubScannerRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
+  AdminEventRegisterRoute: AdminEventRegisterRoute,
   AdminFixtureImportRoute: AdminFixtureImportRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
   AdminNetworkRoute: AdminNetworkRoute,
