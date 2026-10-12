@@ -20,6 +20,7 @@ const publishers = [
   "scripts/publish-uk-ireland-five-k-release.mjs",
   "scripts/publish-uk-home-nation-championships.mjs",
   "scripts/publish-uk-10k-release-64.mjs",
+  "scripts/publish-event-offer-corrections.mjs",
 ];
 
 for (const publisher of publishers) {
