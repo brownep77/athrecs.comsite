@@ -39,7 +39,7 @@ export const externalInvitationInput = z
   );
 export type ExternalInvitationInput = z.infer<typeof externalInvitationInput>;
 export const CLAIM_INVITATION_REPLY_TO = "paul@athrecs.com";
-export const CLAIM_INVITATION_FROM = `Paul at ATHRECS <${CLAIM_INVITATION_REPLY_TO}>`;
+export const CLAIM_INVITATION_FROM = CLAIM_INVITATION_REPLY_TO;
 export function claimInvitationMessage(name: string) {
   return `Thanks for joining ATHRECS. We found an athlete profile named ${name} that may be yours. Please check the race shown, then confirm if it belongs to you. You do not need to search again or finish your account details first. Sign in using the email address that received this invitation. Straightforward claims link the profile and its stored results immediately as athlete-confirmed. Claims needing clarification, including child or guardian claims, go to staff review. Source verification and photo or ID checks are separate. If this is not you, choose “Not my profile”. The private link expires after seven days. Reply to ${CLAIM_INVITATION_REPLY_TO} if you need help.`;
 }

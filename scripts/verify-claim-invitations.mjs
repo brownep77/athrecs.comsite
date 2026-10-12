@@ -403,7 +403,7 @@ try {
     "Interrupted send retries identical payload and provider idempotency key",
   );
   assert.deepEqual(deliveries[1], deliveries[2], "Provider rejection retries the frozen payload");
-  assert.equal(deliveries[1].payload.from, "Paul at ATHRECS <paul@athrecs.com>");
+  assert.equal(deliveries[1].payload.from, "paul@athrecs.com");
   assert.equal(deliveries[1].payload.reply_to, "paul@athrecs.com");
   assert.equal(deliveries[1].headers.Authorization, "Bearer synthetic-invitation-only-key");
   assert.match(core.claimInvitationMessage("Synthetic Runner"), /Reply to paul@athrecs\.com/);
@@ -705,7 +705,7 @@ try {
   assert.equal((await module.namespace.sendInvitationEmail(sql, external.id)).status, "sent");
   assert.equal(deliveries.length, beforeExternal + 1);
   assert.deepEqual(deliveries.at(-1).payload.to, [externalInput.email]);
-  assert.equal(deliveries.at(-1).payload.from, "Paul at ATHRECS <paul@athrecs.com>");
+  assert.equal(deliveries.at(-1).payload.from, "paul@athrecs.com");
   assert.equal(deliveries.at(-1).payload.reply_to, "paul@athrecs.com");
   assert(deliveries.at(-1).payload.text.includes(external.url));
   assert.match(deliveries.at(-1).payload.text, /create a free account or sign in/i);

@@ -96,12 +96,14 @@ instead of risking another send outside the provider's 24-hour deduplication
 window. There is no automatic bulk mailing, cron reminder or invitation on signup.
 
 The endpoint rechecks recipient email, expiry, response and ownership before
-sending. Resend sends invitations as `Paul at ATHRECS <paul@athrecs.com>` with
+sending. Resend sends invitations as `paul@athrecs.com` with
 `Reply-To: paul@athrecs.com`. Production requires a separate sending-only key
 restricted to the verified `athrecs.com` domain, stored as the sensitive variable
 `ATHRECS_INVITATION_RESEND_API_KEY`. Invitations stay disabled until this key is
 configured; they never fall back to the login key. `RESEND_API_KEY` and
-`AUTH_EMAIL_FROM` retain the existing `auth.athrecs.com` login configuration.
+`AUTH_EMAIL_FROM` configure login and other account emails independently. Production
+now uses a sending-only `athrecs.com` key and the bare `paul@athrecs.com` sender.
+The older `auth.athrecs.com` key has not been revoked.
 Verifying a domain alone does not add it to a domain-restricted API key.
 Existing invitation content and links remain frozen for safe retries. Email is disabled
 outside AthRecs production with a persistent database. Vercel preview/RunRecs

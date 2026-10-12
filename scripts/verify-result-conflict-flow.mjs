@@ -178,7 +178,7 @@ const invitations = load("src/lib/athrecs/claim-invitations.server.ts", {
   "@/lib/auth/email.server": {
     sendAthrecsAuthEmail: async (email, options) => {
       assert.equal(options.apiKey, "synthetic-invitation-only-key");
-      assert.equal(options.from, "Paul at ATHRECS <paul@athrecs.com>");
+      assert.equal(options.from, "paul@athrecs.com");
       assert.equal(options.replyTo, "paul@athrecs.com");
       const id = options.idempotencyKey.split("/").at(-1);
       const [marker] =
