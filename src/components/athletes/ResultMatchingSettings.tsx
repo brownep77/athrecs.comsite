@@ -149,9 +149,10 @@ function MatchingSettingsForm({ initial }: { initial: MatchingSettings }) {
           results, share my racing names, saved links, sporting IDs, club and general location with
           xAI to find possible results. Never send my birth date, street address, phone or email. I
           can turn this off and save to stop searches and clear cached suggestions. This is separate
-          from marketing and performance insights. Adult accounts only; the provider must report
-          zero data retention. Any known-race details are also shared. Nationality and postcode are
-          not sent.
+          from marketing and performance insights. This adult-only search checks my saved birth
+          date. Without one, I can still claim profiles, search stored results or ask staff for
+          assistance. The provider must report zero data retention. Any known-race details are also
+          shared. Nationality and postcode are not sent.
         </span>
       </label>
       <details className="rounded-lg border border-border p-3">

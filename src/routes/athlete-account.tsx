@@ -622,7 +622,7 @@ function SignedInAccount() {
                     ? "Help ATHRECS find your previous results. These details stay private."
                     : activeSection === "location" && IS_ATHRECS_SITE
                       ? "Your location, nationality and club or team."
-                      : "A name, date of birth, nationality and verified email are required before claiming a profile. You can save unfinished details. Your profile stays private until you enable sharing."
+                      : "A name and verified email are required before claiming a profile. Date of birth and nationality are optional and help match your results when supplied. Your profile stays private until you enable sharing."
                 }
               >
                 {show("identity") ? (
@@ -650,14 +650,13 @@ function SignedInAccount() {
                       />
                       <TextField
                         label="Date of birth"
-                        claimRequired
                         type="date"
                         value={form.dateOfBirth ?? ""}
                         onChange={(value) => setForm({ ...form, dateOfBirth: value })}
                         autoComplete="bday"
                         help={
                           IS_ATHRECS_SITE
-                            ? "Required before claiming. Used privately to compare your age at each race and flag possible mismatches. Hidden unless you separately choose to share your birthday below."
+                            ? "Optional for profile claims and stored-result matching. If supplied, used privately to compare your age at each race and flag possible mismatches. Hidden unless you separately choose to share your birthday below."
                             : undefined
                         }
                       />
@@ -703,8 +702,7 @@ function SignedInAccount() {
                       />
                       <TextField
                         label="Nationality"
-                        claimRequired
-                        help="Used to compare nationality recorded in results. Include both if dual nationality, or enter Stateless."
+                        help="Optional. Helps compare nationality recorded in results when supplied. Include both if dual nationality, or enter Stateless."
                         value={form.nationality ?? ""}
                         onChange={(value) => setForm({ ...form, nationality: value })}
                       />
@@ -1588,7 +1586,6 @@ function TextField({
   value,
   onChange,
   required = false,
-  claimRequired = false,
   disabled = false,
   type = "text",
   help,
@@ -1600,7 +1597,6 @@ function TextField({
   value: string;
   onChange?: (value: string) => void;
   required?: boolean;
-  claimRequired?: boolean;
   disabled?: boolean;
   type?: string;
   help?: string;
@@ -1614,8 +1610,6 @@ function TextField({
       {label}{" "}
       {required ? (
         <span className="text-red-700">*</span>
-      ) : claimRequired ? (
-        <span className="font-normal text-subtle">(required before claiming)</span>
       ) : (
         <span className="font-normal text-subtle">(optional)</span>
       )}
