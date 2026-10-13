@@ -11,8 +11,13 @@ on:
       - "src/components/staff/ClaimInvitationSharing.tsx"
       - "src/lib/athrecs/claim-invit*"
       - "src/lib/athrecs/athlete-messages*"
+      - "src/lib/athrecs/athlete-inbox*"
+      - "src/components/staff/AthleteInboxConnection.tsx"
+      - "src/routes/admin/email-inbox.tsx"
+      - "src/routes/api/athlete-inbox-sync.ts"
+      - "scripts/verify-athlete-inbox*.mjs"
       - "src/components/staff/AthleteMessages.tsx"
-      - "migrations/*athlete_messages.sql"
+      - "migrations/*athlete_messages*.sql"
       - "scripts/verify-athlete-messages*.mjs"
       - "src/lib/athrecs/invitation-welcome*"
       - "src/components/staff/InvitationWelcomeEmail.tsx"
@@ -101,6 +106,8 @@ jobs:
         run: node scripts/verify-signup-ownership.mjs
       - name: Private athlete correspondence and message tracking
         run: npm run verify:athlete-messages
+      - name: Private inbox matching and read-only sync
+        run: npm run verify:athlete-inbox
       - name: Build without database migration or publication hooks
         run: npx vite build --mode development
       - run: npm run typecheck
@@ -113,6 +120,10 @@ jobs:
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
         run: node scripts/verify-athlete-messages-browser.mjs
+      - name: Inbox connection on desktop and mobile
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
+        run: node scripts/verify-athlete-inbox-browser.mjs
       - name: Desktop and mobile interactions
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
@@ -137,6 +148,7 @@ jobs:
             artifacts/athlete-tools-*.png
             artifacts/invitation-welcome-template-*.png
             artifacts/athlete-messages-*.png
+            artifacts/athlete-inbox-*.png
             artifacts/athlete-directory-invites-*.png
             artifacts/external-invitation-*.png
             artifacts/result-conflicts-*.png

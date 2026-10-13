@@ -545,6 +545,10 @@
     {
       "path": "/api/club-scanner-worker",
       "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/athlete-inbox-sync",
+      "schedule": "*/5 * * * *"
     }
   ]
 }

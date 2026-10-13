@@ -64,13 +64,17 @@ function MessageHistory({ target }: { target: MessageTarget }) {
     queryKey: ["staff-athlete-messages", target, direction, page],
     queryFn: () => getStaffAthleteMessages({ data: { target, direction, page } }),
     gcTime: 0,
+    refetchInterval: 60000,
   });
   const data = query.isError ? undefined : query.data;
   return (
     <div className="space-y-4 pt-3">
       <p className="text-sm text-muted">
-        Private correspondence for staff. Site emails appear automatically. Add replies from your
-        inbox or messaging apps using Record a message.
+        Private correspondence for staff. Site emails appear automatically.{" "}
+        <a href="/admin/email-inbox" className="text-accent underline">
+          Connect your inbox
+        </a>{" "}
+        to add athlete replies automatically. Use Record a message for other conversations.
       </p>
       <div className="flex flex-wrap items-center gap-2">
         <div className="flex flex-wrap gap-1" aria-label="Message filters">
@@ -176,7 +180,7 @@ function MessageHistory({ target }: { target: MessageTarget }) {
                 </p>
                 <p className="mt-1 text-xs text-muted">
                   {messageStatusLabels[message.status] ?? message.status}
-                  {message.source === "site" ? " · Automatic record" : " · Manual record"}
+                  {message.source === "manual" ? " · Manual record" : " · Automatic record"}
                 </p>
               </li>
             ))}
@@ -207,7 +211,7 @@ function MessageHistory({ target }: { target: MessageTarget }) {
       <p className="text-xs leading-5 text-muted">
         Dates use UK time. Earlier invitation emails are included where a send was recorded. Other
         site email tracking starts with this feature. Provider acceptance does not confirm delivery
-        or reading. External inboxes are not synced.
+        or reading. Athlete replies sync after you connect paul@athrecs.com.
       </p>
     </div>
   );

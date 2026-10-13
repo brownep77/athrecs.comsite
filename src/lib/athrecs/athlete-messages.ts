@@ -39,6 +39,7 @@ export const messageStatusLabels: Record<string, string> = {
   failed: "Send failed",
   unknown: "Delivery unconfirmed",
   recorded: "Recorded by staff",
+  received: "Received email",
 };
 
 /** Never retain the separate OTP or action URL in correspondence history. */

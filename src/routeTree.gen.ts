@@ -38,6 +38,7 @@ import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/ad
 import { Route as AdminCheckResultsUploadRouteImport } from './routes/admin/check-results-upload'
 import { Route as AdminClubScannerRouteImport } from './routes/admin/club-scanner'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
+import { Route as AdminEmailInboxRouteImport } from './routes/admin/email-inbox'
 import { Route as AdminEventRegisterRouteImport } from './routes/admin/event-register'
 import { Route as AdminFixtureImportRouteImport } from './routes/admin/fixture-import'
 import { Route as AdminFixtureReviewRouteImport } from './routes/admin/fixture-review'
@@ -49,6 +50,7 @@ import { Route as AdminResultClaimsRouteImport } from './routes/admin/result-cla
 import { Route as AdminResultLinksRouteImport } from './routes/admin/result-links'
 import { Route as AdminSourcesRouteImport } from './routes/admin/sources'
 import { Route as AdminSponsorshipRouteImport } from './routes/admin/sponsorship'
+import { Route as ApiAthleteInboxSyncRouteImport } from './routes/api/athlete-inbox-sync'
 import { Route as ApiAthletePhotosRouteImport } from './routes/api/athlete-photos'
 import { Route as ApiAthleteProfilePhotoRouteImport } from './routes/api/athlete-profile-photo'
 import { Route as ApiCatalogueAutomationRouteImport } from './routes/api/catalogue-automation'
@@ -237,6 +239,11 @@ const AdminDataIntelligenceRoute = AdminDataIntelligenceRouteImport.update({
   path: '/admin/data-intelligence',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminEmailInboxRoute = AdminEmailInboxRouteImport.update({
+  id: '/admin/email-inbox',
+  path: '/admin/email-inbox',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminEventRegisterRoute = AdminEventRegisterRouteImport.update({
   id: '/admin/event-register',
   path: '/admin/event-register',
@@ -290,6 +297,11 @@ const AdminSourcesRoute = AdminSourcesRouteImport.update({
 const AdminSponsorshipRoute = AdminSponsorshipRouteImport.update({
   id: '/admin/sponsorship',
   path: '/admin/sponsorship',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAthleteInboxSyncRoute = ApiAthleteInboxSyncRouteImport.update({
+  id: '/api/athlete-inbox-sync',
+  path: '/api/athlete-inbox-sync',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAthletePhotosRoute = ApiAthletePhotosRouteImport.update({
@@ -528,6 +540,7 @@ export interface FileRoutesByFullPath {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
+  '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
@@ -539,6 +552,7 @@ export interface FileRoutesByFullPath {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-inbox-sync': typeof ApiAthleteInboxSyncRoute
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
@@ -610,6 +624,7 @@ export interface FileRoutesByTo {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
+  '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
@@ -621,6 +636,7 @@ export interface FileRoutesByTo {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-inbox-sync': typeof ApiAthleteInboxSyncRoute
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
@@ -693,6 +709,7 @@ export interface FileRoutesById {
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
+  '/admin/email-inbox': typeof AdminEmailInboxRoute
   '/admin/event-register': typeof AdminEventRegisterRoute
   '/admin/fixture-import': typeof AdminFixtureImportRoute
   '/admin/fixture-review': typeof AdminFixtureReviewRoute
@@ -704,6 +721,7 @@ export interface FileRoutesById {
   '/admin/result-links': typeof AdminResultLinksRoute
   '/admin/sources': typeof AdminSourcesRoute
   '/admin/sponsorship': typeof AdminSponsorshipRoute
+  '/api/athlete-inbox-sync': typeof ApiAthleteInboxSyncRoute
   '/api/athlete-photos': typeof ApiAthletePhotosRoute
   '/api/athlete-profile-photo': typeof ApiAthleteProfilePhotoRoute
   '/api/catalogue-automation': typeof ApiCatalogueAutomationRoute
@@ -777,6 +795,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
+    | '/admin/email-inbox'
     | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
@@ -788,6 +807,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-inbox-sync'
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
@@ -859,6 +879,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
+    | '/admin/email-inbox'
     | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
@@ -870,6 +891,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-inbox-sync'
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
@@ -941,6 +963,7 @@ export interface FileRouteTypes {
     | '/admin/check-results-upload'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
+    | '/admin/email-inbox'
     | '/admin/event-register'
     | '/admin/fixture-import'
     | '/admin/fixture-review'
@@ -952,6 +975,7 @@ export interface FileRouteTypes {
     | '/admin/result-links'
     | '/admin/sources'
     | '/admin/sponsorship'
+    | '/api/athlete-inbox-sync'
     | '/api/athlete-photos'
     | '/api/athlete-profile-photo'
     | '/api/catalogue-automation'
@@ -1024,6 +1048,7 @@ export interface RootRouteChildren {
   AdminCheckResultsUploadRoute: typeof AdminCheckResultsUploadRoute
   AdminClubScannerRoute: typeof AdminClubScannerRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
+  AdminEmailInboxRoute: typeof AdminEmailInboxRoute
   AdminEventRegisterRoute: typeof AdminEventRegisterRoute
   AdminFixtureImportRoute: typeof AdminFixtureImportRoute
   AdminFixtureReviewRoute: typeof AdminFixtureReviewRoute
@@ -1035,6 +1060,7 @@ export interface RootRouteChildren {
   AdminResultLinksRoute: typeof AdminResultLinksRoute
   AdminSourcesRoute: typeof AdminSourcesRoute
   AdminSponsorshipRoute: typeof AdminSponsorshipRoute
+  ApiAthleteInboxSyncRoute: typeof ApiAthleteInboxSyncRoute
   ApiAthletePhotosRoute: typeof ApiAthletePhotosRoute
   ApiAthleteProfilePhotoRoute: typeof ApiAthleteProfilePhotoRoute
   ApiCatalogueAutomationRoute: typeof ApiCatalogueAutomationRoute
@@ -1283,6 +1309,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminDataIntelligenceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/email-inbox': {
+      id: '/admin/email-inbox'
+      path: '/admin/email-inbox'
+      fullPath: '/admin/email-inbox'
+      preLoaderRoute: typeof AdminEmailInboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/event-register': {
       id: '/admin/event-register'
       path: '/admin/event-register'
@@ -1358,6 +1391,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/sponsorship'
       fullPath: '/admin/sponsorship'
       preLoaderRoute: typeof AdminSponsorshipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/athlete-inbox-sync': {
+      id: '/api/athlete-inbox-sync'
+      path: '/api/athlete-inbox-sync'
+      fullPath: '/api/athlete-inbox-sync'
+      preLoaderRoute: typeof ApiAthleteInboxSyncRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/athlete-photos': {
@@ -1672,6 +1712,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCheckResultsUploadRoute: AdminCheckResultsUploadRoute,
   AdminClubScannerRoute: AdminClubScannerRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
+  AdminEmailInboxRoute: AdminEmailInboxRoute,
   AdminEventRegisterRoute: AdminEventRegisterRoute,
   AdminFixtureImportRoute: AdminFixtureImportRoute,
   AdminFixtureReviewRoute: AdminFixtureReviewRoute,
@@ -1683,6 +1724,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminResultLinksRoute: AdminResultLinksRoute,
   AdminSourcesRoute: AdminSourcesRoute,
   AdminSponsorshipRoute: AdminSponsorshipRoute,
+  ApiAthleteInboxSyncRoute: ApiAthleteInboxSyncRoute,
   ApiAthletePhotosRoute: ApiAthletePhotosRoute,
   ApiAthleteProfilePhotoRoute: ApiAthleteProfilePhotoRoute,
   ApiCatalogueAutomationRoute: ApiCatalogueAutomationRoute,
