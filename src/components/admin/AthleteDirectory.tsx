@@ -50,6 +50,7 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
   const query = useQuery({
     queryKey: ["staff-athlete-directory", filters],
     queryFn: () => getStaffAthleteDirectory({ data: filters }),
+    retry: 1,
   });
   const selectAll = useMutation({
     mutationFn: () => selectAllStaffAthleteProfiles({ data: filters }),

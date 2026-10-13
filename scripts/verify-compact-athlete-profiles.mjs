@@ -632,6 +632,52 @@ try {
   assert(html.includes('data-country-code="GB"'));
   assert(html.includes('aria-label="United Kingdom"'));
   assert(!html.includes("1978-05-20"));
+  // The storage directory must paginate canonical identities before hydrating
+  // results. Include private records and an account with links but no saved profile.
+  await sql`insert into athletes (slug,display_name,profile_visibility,city)
+    select 'storage-page-' || n, 'Storage Fixture ' || lpad(n::text,2,'0'),
+      case when n<=10 then 'public' else 'private' end,
+      case when n=26 then 'Literal % Place' else '' end
+    from generate_series(1,57) n`;
+  const fixtureRows = await sql`select a.id,a.display_name,i.number::text
+    from athletes a join athlete_identifiers i on i.athlete_id=a.id
+    where a.slug like 'storage-page-%' order by a.display_name`;
+  for (const row of fixtureRows.slice(55)) {
+    await sql`insert into athlete_account_links(athlete_id,user_id,user_email)
+      values(${row.id},'compact-other','compact-other@example.test')`;
+  }
+  await sql`insert into results(athlete_id,edition_id,finish_time_seconds,result_visibility)
+    values(${fixtureRows[50].id},${profileEdition.id},3000,'private')`;
+  await sql`insert into athlete_upcoming_events(athlete_id,event_name,event_date,sport)
+    values(${fixtureRows[51].id},'Storage upcoming fixture','2099-01-01','Cycling')`;
+  const storage = (filters={}) => rpc('staff-athlete-directory-api',
+    'getStaffAthleteDirectory', {q:'Storage Fixture',...filters}, staff);
+  const firstPage = await storage();
+  const secondPage = await storage({page:2});
+  assert.equal(firstPage.total,56);
+  assert.equal(firstPage.athletes.length,50);
+  assert.equal(firstPage.pages,2);
+  assert.equal(firstPage.publishableTotal,45);
+  assert.equal(secondPage.athletes.length,6);
+  assert.equal(secondPage.athletes[0].name,'Storage Fixture 51');
+  assert.equal(secondPage.athletes[0].resultCount,1);
+  assert.equal(secondPage.athletes[5].sources.length,2);
+  assert.equal(secondPage.athletes[5].canPublish,false);
+  assert.equal(new Set([...firstPage.athletes,...secondPage.athletes].map(p=>p.athleteNumber)).size,56);
+  assert.deepEqual(await storage({page:999}),secondPage);
+  assert.equal((await storage({visibility:'Public'})).total,10);
+  assert.equal((await storage({visibility:'Private'})).total,46);
+  assert.equal((await storage({sport:'Running'})).athletes[0].name,'Storage Fixture 51');
+  assert.equal((await storage({sport:'Cycling'})).athletes[0].name,'Storage Fixture 52');
+  assert.equal((await storage({q:'Literal % Place'})).total,1);
+  assert.equal((await storage({q:'%Storage Fixture%'})).total,0);
+  assert.equal((await storage({q:'no such storage athlete'})).page,1);
+  assert.equal((await storage({q:firstPage.athletes[0].athrecsId.toLowerCase()})).total,1);
+  const selection = await rpc('staff-athlete-directory-api','selectAllStaffAthleteProfiles',
+    {q:'Storage Fixture'},staff);
+  assert.equal(selection.length,45);
+  assert(!selection.includes(secondPage.athletes[5].athleteNumber));
+  console.log('Storage pagination verified: 50-row pages, totals, canonical links, results, literal search, sport/privacy filters and safe bulk selection.');
   console.log(
     "Compact profiles verified: real authenticated account saves, birthday choices, multi-sport IDs, fixture persistence/ownership, staff-only directory and XLSX export, publication and privacy.",
   );
