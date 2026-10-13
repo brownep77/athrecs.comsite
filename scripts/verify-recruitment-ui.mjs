@@ -125,12 +125,6 @@ try {
     .getByRole("button", { name: "Claim profile & review all results", exact: true })
     .click();
   const confirmation = page.getByRole("dialog");
-  await confirmation.getByLabel("Date of birth").fill("1984-01-01");
-  await confirmation.getByLabel("Nationality", { exact: false }).fill("British");
-  await confirmation.getByRole("checkbox", { name: /I have read/ }).check();
-  await confirmation
-    .getByRole("button", { name: "Save details and continue", exact: true })
-    .click();
   await confirmation.getByText(/Registration creates your account/).waitFor();
   await confirmation.getByRole("button", { name: "Close", exact: true }).click();
   assert.equal((await sql`select id from result_claims where result_id=991601`).length, 0);

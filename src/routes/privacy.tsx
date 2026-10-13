@@ -64,23 +64,23 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <NoticeSection title="Identity details required before a profile claim">
+        <NoticeSection title="Required and optional details for a profile claim">
           <p>
-            A profile claim requires your full name, a verified email, date of birth and
-            nationality. These are not required simply to browse or sign in with an email code. Your
-            birth date lets us compare your age on historical race dates with recorded age
-            categories and route child claims for staff review. Nationality helps distinguish
-            similar records only when the source explicitly reports it; we never infer it from your
-            address, club or name. You can enter multiple nationalities or Stateless. These details
-            are supporting clues, not proof of identity. Uncertain or conflicting claims receive
-            human review.
+            A profile claim requires your full name and verified email. Date of birth and
+            nationality are optional: you can leave either blank, add them later or remove them
+            without losing access to profile claims or stored-result suggestions. If supplied, birth
+            date helps compare your age on historical race dates with recorded age categories and
+            route child claims for staff review. Nationality helps distinguish similar records only
+            when the source explicitly reports it; we never infer it from your address, club or
+            name. You can enter multiple nationalities or Stateless. These details are supporting
+            clues, not proof of identity. Uncertain or conflicting claims receive human review.
           </p>
           <p className="mt-3">
             Birth date is hidden unless you explicitly choose to share it in profile settings. Email
-            stays private. You can correct or clear your private details in My Athlete Account;
-            incomplete identity details prevent further claims. Existing ownership is not
-            automatically removed when you correct a field. Contact us to dispute ownership or
-            request deletion.
+            stays private. You can correct or clear your private details in My Athlete Account; only
+            a missing name or unverified email prevents a claim for incomplete account details.
+            Existing ownership is not automatically removed when you correct a field. Contact us to
+            dispute ownership or request deletion.
           </p>
         </NoticeSection>
 
@@ -106,7 +106,9 @@ function AthletePrivacyPage() {
             using xAI (the provider of Grok). On your request we send saved racing names, public
             source links, sporting IDs, club, general location and any known-race details you
             supplied. We do not send birth date, nationality, postcode, street address, phone or
-            email fields. Under-18 and guardian searches need staff assistance. Internal matching
+            email fields. This separate adult-only feature checks a saved birth date; if you prefer
+            not to provide one, you can still use stored-result matching and ask staff for search
+            assistance. Under-18 and guardian searches also need staff assistance. Internal matching
             does not require external-search consent. Saved links are searched only when you request
             it; access to third-party sites and complete coverage cannot be guaranteed.
           </p>

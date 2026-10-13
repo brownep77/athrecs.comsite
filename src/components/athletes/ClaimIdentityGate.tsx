@@ -47,9 +47,10 @@ function ClaimIdentityForm({ account }: { account: AthleteAccountData }) {
         Complete your details to claim your profile
       </h2>
       <p className="text-sm text-muted">
-        Your name, date of birth, nationality and verified email are required before claiming. Your
-        selected profile is kept while you complete this step. We compare your age at the race and
-        recorded nationality to help distinguish athletes with similar names.
+        Your name and verified email are required before claiming. Date of birth and nationality are
+        optional and can be added later. If supplied, they help compare your age at the race and
+        recorded nationality to distinguish athletes with similar names. Your selected profile is
+        kept while you complete this step.
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="text-sm">
@@ -64,9 +65,8 @@ function ClaimIdentityForm({ account }: { account: AthleteAccountData }) {
           />
         </label>
         <label className="text-sm">
-          Date of birth <span aria-hidden="true">*</span>
+          Date of birth (optional)
           <input
-            required
             type="date"
             autoComplete="bday"
             max={new Date().toISOString().slice(0, 10)}
@@ -76,9 +76,8 @@ function ClaimIdentityForm({ account }: { account: AthleteAccountData }) {
           />
         </label>
         <label className="text-sm">
-          Nationality <span aria-hidden="true">*</span>
+          Nationality (optional)
           <input
-            required
             maxLength={100}
             value={nationality}
             onChange={(e) => setNationality(e.target.value)}
@@ -131,12 +130,7 @@ function ClaimIdentityForm({ account }: { account: AthleteAccountData }) {
       ) : null}
       <Button
         disabled={
-          save.isPending ||
-          !privacyAcknowledged ||
-          !fullName.trim() ||
-          !dateOfBirth ||
-          !nationality.trim() ||
-          !account.emailVerified
+          save.isPending || !privacyAcknowledged || !fullName.trim() || !account.emailVerified
         }
         onClick={() => save.mutate()}
       >

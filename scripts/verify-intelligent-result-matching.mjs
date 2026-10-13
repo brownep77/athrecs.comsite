@@ -4,6 +4,7 @@ import { createServer } from "vite";
 import { createClientRpc } from "@tanstack/start-client-core/client-rpc";
 import { runWithStartContext } from "@tanstack/start-storage-context";
 import {
+  claimIdentitySchema,
   matchingNames,
   matchingSettingsSchema,
   missingClaimIdentity,
@@ -111,7 +112,7 @@ assert.equal(
   0,
   "Residence never supplies nationality",
 );
-for (const key of ["fullName", "dateOfBirth", "nationality", "verifiedEmail"])
+for (const key of ["fullName", "verifiedEmail"])
   assert(
     missingClaimIdentity({
       ...{
@@ -124,6 +125,32 @@ for (const key of ["fullName", "dateOfBirth", "nationality", "verifiedEmail"])
       [key]: "",
     }).length,
   );
+const minimalIdentity = { fullName: "Synthetic Runner", privacyAcknowledged: true };
+assert.deepEqual(claimIdentitySchema.parse(minimalIdentity), {
+  ...minimalIdentity,
+  dateOfBirth: "",
+  nationality: "",
+});
+assert.deepEqual(
+  claimIdentitySchema.parse({ ...minimalIdentity, dateOfBirth: "", nationality: "" }),
+  { ...minimalIdentity, dateOfBirth: "", nationality: "" },
+);
+assert.deepEqual(
+  missingClaimIdentity({
+    fullName: minimalIdentity.fullName,
+    verifiedEmail: "test@example.test",
+    emailVerified: true,
+  }),
+  [],
+);
+assert.deepEqual(
+  missingClaimIdentity({
+    fullName: minimalIdentity.fullName,
+    verifiedEmail: "test@example.test",
+    emailVerified: false,
+  }),
+  ["verified email"],
+);
 const modules = new Map();
 async function rpc(file, name, data, token) {
   if (!modules.has(file))
@@ -187,6 +214,7 @@ try {
       },
       a.token,
     );
+  await sql`update athlete_private_profiles set full_name='123' where user_id=${a.user.id}`;
   await assert.rejects(claim, /Before claiming/);
   const identity = {
     fullName: "Synthetic Runner",
@@ -249,23 +277,9 @@ try {
       ),
     /Save this racing name/,
   );
-  for (const column of ["full_name", "date_of_birth", "nationality"]) {
-    const original =
-      column === "full_name"
-        ? identity.fullName
-        : column === "date_of_birth"
-          ? identity.dateOfBirth
-          : identity.nationality;
-    await sql.query(
-      `update athlete_private_profiles set ${column}=${column === "full_name" ? "'123'" : "null"} where user_id=$1`,
-      [a.user.id],
-    );
-    await assert.rejects(claim, /Before claiming/);
-    await sql.query(`update athlete_private_profiles set ${column}=$1 where user_id=$2`, [
-      original,
-      a.user.id,
-    ]);
-  }
+  await sql`update athlete_private_profiles set full_name='123' where user_id=${a.user.id}`;
+  await assert.rejects(claim, /Before claiming/);
+  await sql`update athlete_private_profiles set full_name=${identity.fullName} where user_id=${a.user.id}`;
   assert.equal(
     (await sql`select count(*)::int n from athlete_account_links where user_id=${a.user.id}`)[0].n,
     0,
@@ -350,11 +364,31 @@ try {
     a.token,
   );
   assert.equal(conflict.status, "pending", "Age conflict needs staff review");
+  await rpc(
+    "athrecs/result-matching-settings-api",
+    "saveMyClaimIdentity",
+    minimalIdentity,
+    a.token,
+  );
+  const [optionalIdentity] =
+    await sql`select date_of_birth,nationality from athlete_private_profiles where user_id=${a.user.id}`;
+  assert.equal(optionalIdentity.date_of_birth, null);
+  assert.equal(optionalIdentity.nationality, null);
+  matches = await rpc(
+    "athrecs/result-match-api",
+    "listMyPotentialResultMatches",
+    { name: "Synthetic Former", year: "2026", distance: "10 km" },
+    a.token,
+  );
+  assert(
+    matches.matches.some((match) => match.resultId === 992491),
+    "Stored suggestions work without birth date and nationality",
+  );
   const approved = await claim();
   assert.equal(
     approved.status,
     "approved",
-    "Saved surname may explicitly confirm an uncontested profile",
+    "Saved surname may explicitly confirm an uncontested profile without birth date or nationality",
   );
   assert.equal(
     (
@@ -363,7 +397,7 @@ try {
     1,
   );
   console.log(
-    "PASS: required identity enforced in authenticated claims; alias/distance/year matches; age conflict review; private settings isolation; consent, adult and ZDR gates; external payload minimisation; withdrawal clears contact and cache.",
+    "PASS: name and verified email enforced; claims and stored suggestions work without birth date or nationality; alias/distance/year matches; age conflict review; private settings isolation; consent, adult and ZDR gates; external payload minimisation; withdrawal clears contact and cache.",
   );
 } finally {
   await server.close();

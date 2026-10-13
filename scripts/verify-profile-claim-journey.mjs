@@ -225,8 +225,6 @@ try {
   );
   await resume.click();
   await invited.page.getByLabel("Full name").fill("Invited Test Runner");
-  await invited.page.getByLabel("Date of birth").fill("1984-01-01");
-  await invited.page.getByLabel("Nationality", { exact: false }).fill("British");
   await invited.page.getByRole("checkbox", { name: /I have read/ }).check();
   await invited.page
     .getByRole("button", { name: "Save details and continue", exact: true })
@@ -247,6 +245,14 @@ try {
   );
   const [bound] =
     await sql`select user_id,claim_id from athlete_claim_invitations where token_hash=${hash}`;
+  const [optionalIdentity] =
+    await sql`select date_of_birth,nationality from athlete_private_profiles where user_id=${invited.user.id}`;
+  assert.equal(
+    optionalIdentity.date_of_birth,
+    null,
+    "Invitation claim succeeds without birth date",
+  );
+  assert.equal(optionalIdentity.nationality, null, "Invitation claim succeeds without nationality");
   assert.equal(bound.user_id, invited.user.id);
   assert(bound.claim_id);
   console.log(

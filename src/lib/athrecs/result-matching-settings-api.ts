@@ -41,8 +41,8 @@ export const saveMyClaimIdentity = createServerFn({ method: "POST" })
   .validator(
     (input: {
       fullName: string;
-      dateOfBirth: string;
-      nationality: string;
+      dateOfBirth?: string;
+      nationality?: string;
       privacyAcknowledged: boolean;
     }) => claimIdentitySchema.parse(input),
   )
@@ -56,7 +56,7 @@ export const saveMyClaimIdentity = createServerFn({ method: "POST" })
     if (!user?.email || !user.verified)
       throw new Error("Verify your email before completing your profile.");
     await sql`insert into athlete_private_profiles(user_id,verified_email,full_name,date_of_birth,nationality,privacy_notice_version,privacy_acknowledged_at)
-    values(${context.userId},${user.email},${data.fullName},${data.dateOfBirth}::date,${data.nationality},${MATCHING_NOTICE_VERSION},now())
+    values(${context.userId},${user.email},${data.fullName},${data.dateOfBirth || null}::date,${data.nationality || null},${MATCHING_NOTICE_VERSION},now())
     on conflict(user_id) do update set verified_email=excluded.verified_email,full_name=excluded.full_name,date_of_birth=excluded.date_of_birth,
       nationality=excluded.nationality,privacy_notice_version=excluded.privacy_notice_version,privacy_acknowledged_at=now(),updated_at=now()`;
     return { saved: true };

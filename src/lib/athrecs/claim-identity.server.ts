@@ -4,12 +4,10 @@ import { missingClaimIdentity } from "./result-matching-settings";
 export async function requireClaimIdentity(sql: Sql, userId: string) {
   const [identity] = await sql<{
     fullName: string;
-    dateOfBirth: string;
-    nationality: string;
     verifiedEmail: string;
     emailVerified: boolean;
   }>`
-    select p.full_name as "fullName",p.date_of_birth::text as "dateOfBirth",p.nationality,
+    select p.full_name as "fullName",
       u.email as "verifiedEmail",u."emailVerified" as "emailVerified"
     from "user" u left join athlete_private_profiles p on p.user_id=u.id where u.id=${userId}`;
   const missing = missingClaimIdentity(identity);

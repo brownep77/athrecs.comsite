@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { personNameTokens, uniquePotentialMatchNames } from "./result-match.ts";
 
-export const MATCHING_NOTICE_VERSION = "result-matching-2026-10-13";
+export const MATCHING_NOTICE_VERSION = "result-matching-optional-2026-10-13";
 const names = z.array(z.string().trim().min(1).max(120)).max(8).default([]);
 export function publicResultUrl(value: string): string {
   let url: URL;
@@ -82,8 +82,6 @@ export function missingClaimIdentity(
 ): string[] {
   return [
     !/\p{L}/u.test(value?.fullName?.trim() ?? "") ? "name" : "",
-    !validBirthDate(value?.dateOfBirth ?? "") ? "date of birth" : "",
-    !/\p{L}/u.test(value?.nationality?.trim() ?? "") ? "nationality" : "",
     !value?.verifiedEmail?.trim() || !value.emailVerified ? "verified email" : "",
   ].filter(Boolean);
 }
@@ -94,13 +92,20 @@ export const claimIdentitySchema = z.object({
     .min(1)
     .max(120)
     .refine((v) => /\p{L}/u.test(v), "Enter your name."),
-  dateOfBirth: z.string().refine((v) => validBirthDate(v), "Enter a valid date of birth."),
+  dateOfBirth: z
+    .string()
+    .trim()
+    .refine((v) => !v || validBirthDate(v), "Enter a valid date of birth or leave it blank.")
+    .default(""),
   nationality: z
     .string()
     .trim()
-    .min(2)
     .max(100)
-    .refine((v) => /\p{L}/u.test(v), "Enter your nationality."),
+    .refine(
+      (v) => !v || (v.length >= 2 && /\p{L}/u.test(v)),
+      "Enter your nationality or leave it blank.",
+    )
+    .default(""),
   privacyAcknowledged: z.literal(true, { message: "Please read the privacy notice." }),
 });
 export const resultSearchSchema = z
