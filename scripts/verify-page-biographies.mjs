@@ -165,6 +165,11 @@ const empty = raceSearchContent({
 assert(!empty.biography.join(" ").includes("Unknown"));
 assert.match(empty.biography.join(" "), /No future date/);
 assert(!empty.biography.join(" ").includes("archive includes"));
+assert(
+  !raceSearchContent({ ...race, event: { ...race.event, organiser: "See official site" } })
+    .biography.join(" ")
+    .includes("listed organiser"),
+);
 assert.deepEqual(race.upcoming, [
   { event_date: "2027-04-04", distance_code: "Half", status: "Open" },
 ]);

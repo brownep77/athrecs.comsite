@@ -14,6 +14,11 @@ const race = {
 };
 const serialized = (input) => JSON.parse(JSON.stringify(sportsEventJsonLd(input)));
 
+assert.equal(
+  sportsEventJsonLd({ ...race, startDate: "2027-04-25", organiser: "See official site" }).organizer,
+  undefined,
+);
+
 const now = new Date("2026-10-12T17:00:00Z");
 const option = {
   is_verified: true,
