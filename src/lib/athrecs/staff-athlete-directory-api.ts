@@ -8,6 +8,10 @@ import { readProfileDetails, type AthleteProfileDetails } from "./profile-detail
 import { combineProfileResults, type ProfileResult } from "./profile-records";
 import { sourceHistorySchema } from "./source-performance-history";
 import { readResultDetails } from "./result-details";
+import {
+  loadStaffDirectoryPage,
+  selectStaffDirectoryNumbers,
+} from "./staff-athlete-directory-page.server";
 
 const filterSchema = z.object({
   q: z.string().trim().max(120).default(""),
@@ -55,10 +59,23 @@ export type StaffAthlete = {
   sources: { id: number; slug: string }[];
   profilePath: string | null;
 };
-async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumber?: string) {
+async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumbers?: string[]) {
   await ensureAthrecsSeeded();
   const sql = await getSql();
   const rows = await sql<RawProfile>`
+    with selected_sources as materialized (
+      select i.athlete_id, i.number as athlete_number from athlete_identifiers i
+      where ${athleteNumbers ?? null}::bigint[] is not null
+        and i.number=any(${athleteNumbers ?? null}::bigint[]) and i.athlete_id is not null
+        and not exists(select 1 from athlete_account_links l where l.athlete_id=i.athlete_id and l.status='active')
+      union all
+      select l.athlete_id,i.number from athlete_identifiers i
+      join athlete_account_links l on l.user_id=i.user_id and l.status='active'
+      where ${athleteNumbers ?? null}::bigint[] is not null and i.number=any(${athleteNumbers ?? null}::bigint[])
+      union all
+      select athlete_id,athlete_number from athlete_resolved_ids
+      where ${athleteNumbers ?? null}::bigint[] is null
+    )
     select i.athlete_number::text as number, a.id as source_id, a.slug, a.display_name as name,
       coalesce(a.country,'') as country, coalesce(a.city,'') as city, coalesce(a.profile_details->>'nationality','') as nationality,
       coalesce(c.name,'') as club, a.profile_details as details, false as is_account,
@@ -66,9 +83,8 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumbe
       (a.profile_visibility='public' or a.profile_type='Public figure') as public,
       (coalesce(records.sports,array[]::text[]) || array(select distinct sport from athlete_upcoming_events where athlete_id=a.id)) as sports, '[]'::jsonb as coaches, records.count as results,
       coalesce(a.date_of_birth::text,'') as birthday, '' as email
-    from athletes a join athlete_resolved_ids i on i.athlete_id=a.id left join clubs c on c.id=a.club_id
+    from selected_sources i join athletes a on a.id=i.athlete_id left join clubs c on c.id=a.club_id
     cross join lateral (select array_agg(distinct e.sport) as sports,count(*)::int as count from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id where r.athlete_id=a.id) records
-    where (${athleteNumber ?? null}::bigint is null or i.athlete_number=${athleteNumber ?? null}::bigint)
     union all
     select i.number::text, null::integer, s.slug, coalesce(nullif(p.display_name,''),p.full_name,u."name",'Athlete'),
       coalesce(p.country,''), coalesce(p.city,''), coalesce(p.nationality,''), coalesce(p.club_or_team,''),
@@ -79,8 +95,8 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumbe
     left join athlete_public_shares s on s.user_id=p.user_id
     cross join lateral (select array_agg(sport_code order by is_primary desc,sport_code) as names,
       jsonb_agg(jsonb_build_object('sport',sport_code,'name',coalesce(coach_name,''))) as coaches from athlete_sport_profiles where user_id=p.user_id) sports
-    where (${athleteNumber ?? null}::bigint is null or i.number=${athleteNumber ?? null}::bigint)
-    order by is_account desc, name
+    where (${athleteNumbers ?? null}::bigint[] is null or i.number=any(${athleteNumbers ?? null}::bigint[]))
+    order by is_account desc, name, source_id
   `;
   const profiles = new Map<string, StaffAthlete>();
   for (const row of rows) {
@@ -128,25 +144,19 @@ export const getStaffAthleteDirectory = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .validator((input: DirectoryFilters) => filterSchema.parse(input))
   .handler(async ({ data }) => {
-    const { all, filtered, sports } = await loadDirectory(data);
-    const page = Math.min(data.page, Math.max(1, Math.ceil(filtered.length / 50)));
-    return {
-      athletes: filtered.slice((page - 1) * 50, page * 50),
-      total: filtered.length,
-      totalStored: all.length,
-      page,
-      pages: Math.max(1, Math.ceil(filtered.length / 50)),
-      sports,
-      publishableTotal: filtered.filter((p) => p.canPublish).length,
-    };
+    await ensureAthrecsSeeded();
+    const { numbers, ...page } = await loadStaffDirectoryPage(await getSql(), data);
+    const { all } = await loadDirectory(filterSchema.parse({}), numbers);
+    const profiles = new Map(all.map((profile) => [profile.athleteNumber, profile]));
+    return { ...page, athletes: numbers.flatMap((number) => profiles.get(number) ?? []) };
   });
 
 export const selectAllStaffAthleteProfiles = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .validator((input: DirectoryFilters) => filterSchema.parse(input))
   .handler(async ({ data }) => {
-    const { filtered } = await loadDirectory(data);
-    return filtered.filter((p) => p.canPublish).map((p) => p.athleteNumber);
+    await ensureAthrecsSeeded();
+    return selectStaffDirectoryNumbers(await getSql(), data);
   });
 
 export const publishStaffAthleteProfiles = createServerFn({ method: "POST" })
@@ -176,7 +186,7 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const number = parseAthleteId(data.athleteId);
     if (!number) return null;
-    const { all } = await loadDirectory(filterSchema.parse({}), number);
+    const { all } = await loadDirectory(filterSchema.parse({}), [number]);
     const athlete = all.find((profile) => profile.athleteNumber === number);
     if (!athlete) return null;
     const sql = await getSql();
