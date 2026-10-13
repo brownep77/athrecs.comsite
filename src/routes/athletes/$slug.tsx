@@ -451,7 +451,16 @@ function AthleteContent() {
           ) : isPublicFigure ? (
             <Badge variant="accent">Public figure</Badge>
           ) : null}
-          <Badge variant="outline">
+          <Badge
+            variant="outline"
+            className={
+              athlete.gender === "M"
+                ? "border-blue-200 bg-blue-50 text-blue-900"
+                : athlete.gender === "F"
+                  ? "border-pink-200 bg-pink-50 text-pink-900"
+                  : undefined
+            }
+          >
             {athlete.gender === "F" ? "Female" : athlete.gender === "M" ? "Male" : athlete.gender}
           </Badge>
           <Badge variant="outline">{performanceCount} recorded performances</Badge>
