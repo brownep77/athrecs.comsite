@@ -30,6 +30,34 @@ export function publicAthleteNarrative(profile: PublicAthletePreview): string[] 
       .slice(0, 3)
       .map((event) => `${event.name} (${event.year}; ${event.verification.toLowerCase()})`);
     paragraphs.push(`${career.text} Selected recorded events include ${events.join("; ")}.`);
+  } else {
+    // A public record can describe a non-finish or an unclassified distance.
+    // Give it event context without claiming a finish, PB or achievement.
+    const events = profile.entries.flatMap((entry) => {
+      const recorded = entry.kind === "recorded" ? entry.result : null;
+      const history = entry.kind === "history" ? entry.result.performance : null;
+      const name = clean(recorded?.eventName ?? history?.meeting ?? "");
+      if (!name || /^(?:unknown|tbc|n\/?a|[-—])$/i.test(name)) return [];
+      const date =
+        recorded?.eventDate || history?.date || history?.yearLabel || String(history?.year ?? "");
+      const year = /^(\d{4})(?:-\d{2}-\d{2})?$/.exec(date)?.[1];
+      const status = recorded?.details?.verificationStatus ?? history?.verificationStatus;
+      const verification = recorded?.conflicting
+        ? "conflicting record"
+        : status === "source_verified"
+          ? "source checked"
+          : status === "verified_by_administrator"
+            ? "administrator confirmed"
+            : "unverified record";
+      const nonFinish = /^(?:DNF|DNS|DQ|DSQ|NM|NH)$/i
+        .exec(recorded?.status ?? history?.performance ?? "")?.[0]
+        .toUpperCase();
+      return [`${name} (${[year, nonFinish, verification].filter(Boolean).join("; ")})`];
+    });
+    if (events.length)
+      paragraphs.push(
+        `Public recorded entries include ${[...new Set(events)].slice(0, 3).join("; ")}.`,
+      );
   }
   const highlights = profile.entries.flatMap((entry) => {
     const recorded = entry.kind === "recorded" ? entry.result : null;

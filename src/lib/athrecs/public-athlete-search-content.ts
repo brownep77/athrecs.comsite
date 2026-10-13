@@ -45,7 +45,13 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
   const resultsSummary = events.length
     ? `Recorded results include ${events.join(" and ")}.`
     : "View the public biography and latest recorded results.";
-  const intro = biography.match(/^.*?[.!?](?:\s|$)/)?.[0]?.trim() || biography;
+  // Initials belong to the name, not the end of the first biography sentence.
+  const namePrefix = biography.startsWith(clean(profile.displayName))
+    ? clean(profile.displayName)
+    : "";
+  const remainder = biography.slice(namePrefix.length).trimStart();
+  const sentence = remainder.match(/^.*?[.!?](?:\s|$)/)?.[0]?.trim() || remainder;
+  const intro = [namePrefix, sentence].filter(Boolean).join(" ");
   const generatedIntro =
     /with (?:.+ results recorded on ATHRECS|a public profile on ATHRECS)\./.test(intro);
   const identity = generatedIntro

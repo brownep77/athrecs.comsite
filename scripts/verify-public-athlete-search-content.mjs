@@ -29,7 +29,8 @@ assert.match(
 );
 assert.match(content.description, /Recorded results include Example 10K/);
 assert.equal(content.jsonLd.mainEntity.name, preview.displayName);
-assert.equal(content.jsonLd.mainEntity.description, preview.biography[0]);
+assert(content.jsonLd.mainEntity.description.startsWith(preview.biography[0]));
+assert.match(content.jsonLd.mainEntity.description, /Example 10K \(unverified record\)/);
 assert.equal(content.jsonLd.url, "https://www.athrecs.com/athletes/alex-example");
 assert(content.description.length <= 175);
 assert(!JSON.stringify(content).includes("67"), "Full history is not pulled into search metadata");
