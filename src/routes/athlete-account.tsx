@@ -311,6 +311,9 @@ function SignedInAccount() {
       setMessage("Your Athlete Account has been saved.");
       queryClient.setQueryData(["my-athlete-account"], updated);
       void queryClient.invalidateQueries({ queryKey: ["my-potential-result-matches"] });
+      void queryClient.invalidateQueries({ queryKey: ["my-archive-suggestions"] });
+      void queryClient.invalidateQueries({ queryKey: ["my-athlete-bio"] });
+      void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
     },
     onError: (error) => setMessage(error instanceof Error ? error.message : String(error)),
   });

@@ -15,6 +15,7 @@ export type AthleteBioSource = {
   country: string;
   clubOrTeam: string;
   results: AthleteBioResult[];
+  achievements?: string[];
 };
 
 export function buildGeneratedAthleteBio(source: AthleteBioSource): string {
@@ -39,12 +40,19 @@ export function buildGeneratedAthleteBio(source: AthleteBioSource): string {
     return sentences.join(" ");
   }
 
-  const eventCount = new Set(results.map((result) => `${result.eventName}|${result.eventDate}`)).size;
+  const eventCount = new Set(results.map((result) => `${result.eventName}|${result.eventDate}`))
+    .size;
   const distances = uniqueDistances(results);
   const distanceSummary = summarizeList(distances, 5);
   sentences.push(
     `Their private ATHRECS record currently contains ${results.length} claimed ${plural("result", results.length)} from ${eventCount} ${plural("event", eventCount)}${distanceSummary ? `, covering ${distanceSummary}` : ""}.`,
   );
+
+  if (source.achievements?.length) {
+    sentences.push(
+      `Recorded achievements include ${joinNatural(source.achievements.slice(0, 4))}.`,
+    );
+  }
 
   const latest = results[0];
   let latestSentence = `Their latest recorded performance is at ${latest.eventName} on ${formatDate(latest.eventDate)}`;
@@ -60,9 +68,7 @@ export function buildGeneratedAthleteBio(source: AthleteBioSource): string {
       (result) =>
         `${displayDistance(result.distanceCode)} in ${formatDuration(result.finishTimeSeconds as number)}`,
     );
-    sentences.push(
-      `Fastest claimed performances currently include ${joinNatural(performances)}.`,
-    );
+    sentences.push(`Fastest claimed performances currently include ${joinNatural(performances)}.`);
   }
 
   return sentences.join(" ");
@@ -123,7 +129,7 @@ function displayDistance(value: string): string {
     "10km": "10K",
     "10mile": "10 miles",
     "10miles": "10 miles",
-    "halfmarathon": "Half Marathon",
+    halfmarathon: "Half Marathon",
     "21.1k": "Half Marathon",
     "21.1km": "Half Marathon",
     marathon: "Marathon",
@@ -143,7 +149,7 @@ function distanceRank(value: string): number {
     "10km": 4,
     "10mile": 5,
     "10miles": 5,
-    "halfmarathon": 6,
+    halfmarathon: 6,
     "21.1k": 6,
     "21.1km": 6,
     marathon: 7,

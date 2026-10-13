@@ -71,6 +71,7 @@ export function ProfileResultConfirmation({
           "my-open-claim-invitations",
           "my-profile-result-visibility",
           "my-potential-result-matches",
+          "my-athlete-bio",
         ].map((key) => client.invalidateQueries({ queryKey: [key] })),
       );
     },
@@ -113,12 +114,23 @@ export function ProfileResultConfirmation({
             : "Your profile claim is awaiting an ownership check. You do not need to claim each result separately."}{" "}
           You’ll receive one summary email for this confirmation.
         </p>
+        {submit.data.status === "approved" ? (
+          <p>
+            Your automatic biography, achievements and medals now reflect your saved results. Awards
+            and PBs follow the existing result checks. Your own biography stays unchanged.
+          </p>
+        ) : null}
         <div className="flex flex-wrap gap-3">
           <Button asChild>
             <Link to="/my-athlete-profile">View my private profile</Link>
           </Button>
           <Button variant="secondary" onClick={onReload}>
             Review results again
+          </Button>
+          <Button asChild variant="secondary">
+            <Link to="/athlete-account" search={{ section: "potential" }}>
+              Find more of my results
+            </Link>
           </Button>
         </div>
       </section>
@@ -237,6 +249,16 @@ export function ProfileResultConfirmation({
           >
             Select all {review.rows.length} results
           </Button>
+          {query.trim() ? (
+            <Button
+              variant="secondary"
+              onClick={() =>
+                setIncluded((previous) => new Set([...previous, ...filtered.map((row) => row.key)]))
+              }
+            >
+              Select all {filtered.length} matching results
+            </Button>
+          ) : null}
           <Button variant="secondary" onClick={() => setIncluded(new Set())}>
             Clear selection
           </Button>
@@ -391,6 +413,13 @@ export function ProfileResultConfirmation({
               key={row.key}
               className={`flex flex-wrap items-center justify-between gap-3 p-4 ${included.has(row.key) ? "" : "bg-elevated"}`}
             >
+              <input
+                type="checkbox"
+                checked={included.has(row.key)}
+                onChange={() => toggle(row.key)}
+                aria-label={`Select ${row.race || "Recorded performance"} ${row.date}`}
+                className="size-5 shrink-0 accent-primary"
+              />
               <div className="min-w-0 flex-1">
                 <p className="break-words font-semibold">{row.race || "Recorded performance"}</p>
                 <p className="text-sm">

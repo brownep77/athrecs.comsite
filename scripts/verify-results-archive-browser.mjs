@@ -96,8 +96,8 @@ const methods = {
   ...api,
   getStaffArchiveRequests: () => member.staffArchiveRequests(sql),
   getMyArchiveMatches: () => member.memberArchiveMatches(sql, "archive-browser-member"),
-  requestMyArchiveMatch: (input) =>
-    member.requestArchiveMatch(sql, "archive-browser-member", input),
+  requestMyArchiveMatches: (input) =>
+    member.requestArchiveMatches(sql, "archive-browser-member", input),
 };
 const root = resolve("artifacts/results-archive-browser");
 mkdirSync(root, { recursive: true });
@@ -210,11 +210,11 @@ try {
   assert.equal((await sql`select count(*)::int n from result_archive_batches`)[0].n, 1);
   const memberPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await memberPage.goto("http://127.0.0.1:8139?member");
-  await memberPage.getByRole("button", { name: "This could be mine" }).click();
+  await memberPage.getByRole("checkbox", { name: /Select saved result/ }).check();
   await memberPage
     .getByLabel("What helps us confirm")
     .fill("My synthetic bib is 1; this is my synthetic race.");
-  await memberPage.getByRole("button", { name: "Request a match review" }).click();
+  await memberPage.getByRole("button", { name: "Request review of 1 selected result" }).click();
   await memberPage.getByText("Requested — awaiting staff review.").waitFor();
   await page.getByRole("button", { name: "Athlete requests", exact: true }).click();
   await page.getByRole("button", { name: /Review entry/ }).click();
@@ -239,6 +239,49 @@ try {
   assert(
     await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
     "No mobile page overflow",
+  );
+  const [dataset] = await sql`select id from result_archive_datasets limit 1`;
+  await service.ingestArchiveBatch(
+    sql,
+    {
+      requestId: crypto.randomUUID(),
+      datasetId: dataset.id,
+      rows: [3, 4].map((bib) =>
+        core.archiveRowSchema.parse({
+          sourceKey: `bulk-${bib}`,
+          name: "Morgan Browser Synthetic",
+          bib: String(bib),
+          status: "finished",
+          finishSeconds: 2200 + bib,
+          club: "Synthetic AC",
+          original: {},
+        }),
+      ),
+    },
+    actor,
+  );
+  await memberPage.reload();
+  await memberPage.getByRole("button", { name: "Select all 2 results", exact: true }).click();
+  const selectedBoxes = memberPage.getByRole("checkbox", { name: /Select saved result/ });
+  assert.equal(await selectedBoxes.count(), 2);
+  await selectedBoxes.first().uncheck();
+  await memberPage.getByText("1 selected", { exact: true }).waitFor();
+  await selectedBoxes.first().check();
+  await memberPage
+    .getByLabel("What helps us confirm")
+    .fill("Both synthetic bibs 3 and 4 belong to my synthetic test results.");
+  await memberPage.getByRole("button", { name: "Request review of 2 selected results" }).click();
+  await memberPage.getByText(/2 selected results have been submitted together/).waitFor();
+  assert.equal(
+    (
+      await sql`select count(*)::int n from result_archive_match_requests where user_id='archive-browser-member'`
+    )[0].n,
+    3,
+  );
+  assert.equal((await sql`select count(*)::int n from athlete_account_links`)[0].n, 0);
+  await memberPage.screenshot({ path: resolve(root, "bulk-results-mobile.png"), fullPage: true });
+  assert(
+    await memberPage.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1),
   );
   assert.deepEqual(errors, []);
   console.log(

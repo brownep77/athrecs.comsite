@@ -122,6 +122,14 @@ try {
   await page.goto(`${origin}/athlete-account`, { waitUntil: "networkidle" });
   await page.getByRole("link", { name: "Finish my profile claim", exact: true }).click();
   assert(new URL(page.url()).searchParams.get("resultId") === String(sourceId));
+  // Clear, select one by checkbox, then select a filtered group without claiming unrelated rows.
+  await page.getByRole("button", { name: "Clear selection", exact: true }).click();
+  await page
+    .getByRole("checkbox", { name: "Select Synthetic Run Norwich 2026 2026-09-06", exact: true })
+    .check();
+  await page.getByLabel("Search this result list").fill("Virtual");
+  await page.getByRole("button", { name: "Select all 1 matching results", exact: true }).click();
+  await page.getByLabel("Search this result list").fill("");
   await page.getByRole("button", { name: /Remove Synthetic Run Norwich 2020 Virtual/ }).click();
   assert.equal(
     (await sql`select * from athlete_profile_hidden_source_results where user_id=${plain.user.id}`)
@@ -151,7 +159,14 @@ try {
     (await sql`select * from athlete_account_links where user_id=${plain.user.id}`).length,
     1,
   );
-  await page.reload({ waitUntil: "networkidle" });
+  await page.getByRole("link", { name: "View my private profile", exact: true }).click();
+  await page
+    .getByText(/Their private ATHRECS record currently contains 1 claimed result/)
+    .waitFor();
+  await page
+    .getByText(/Their latest recorded performance is at Synthetic Run Norwich 2026/)
+    .waitFor();
+  await page.goto(`${origin}/claim-results?resultId=${sourceId}`, { waitUntil: "networkidle" });
   await page.getByText(/Previous review saved/).waitFor();
   await page.getByRole("button", { name: /Restore Synthetic Run Norwich 2020 Virtual/ }).waitFor();
   assert.equal(
