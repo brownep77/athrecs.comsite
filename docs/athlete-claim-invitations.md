@@ -147,7 +147,7 @@ The preview does not generate a code or send email.
 
 The staff-only action generates a fresh six-digit Better Auth sign-in code at
 send time and delivers one combined email using the dedicated invitation
-credential. Better Auth stores the code hashed for five minutes and enforces
+credential. Better Auth stores the code hashed for 24 hours and enforces
 its normal three-guess and single-use checks. Previous sign-in codes for that
 mailbox are invalidated. No code is returned to staff or saved in the invitation
 payload. The sign-in dialog's **I already have a code** option enters the code
@@ -163,6 +163,12 @@ profile ownership or publishes athlete information.
 
 `verify:invitation-welcome` uses a disposable database, real authentication and
 intercepted email delivery to check the combined body, unchanged link, hashed
-storage, correct recipient, expiry, replay, guessing limits, delivery failures,
+storage, correct recipient, 24-hour expiry, single use, guessing limits, delivery failures,
 cooldown, inactive invitations and new-account sign-in. The staff RPC guards and
 browser fixtures also cover the new action and existing-code entry.
+
+The greeting uses the supplied account or invitation recipient name (for example,
+“Hi Avery,”), falling back to “Hi,” when no usable name is supplied. Both preview
+and delivery use the same greeting function. Only the exact new invitation code
+is extended to 24 hours; normal login and password-reset code settings remain
+unchanged. A requested replacement follows the expiry stated in its own email.

@@ -62,6 +62,7 @@ export const invitationStatusLabel: Record<string, string> = {
   held: "Check email delivery before retrying",
 };
 export type InvitationSummary = {
+  recipientName?: string | null;
   id: string;
   athleteName: string;
   status: string;

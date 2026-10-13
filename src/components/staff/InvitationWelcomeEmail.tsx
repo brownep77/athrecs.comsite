@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { emailStaffWelcomeInvitation } from "@/lib/athrecs/claim-invitations-api";
 import { CLAIM_INVITATION_FROM } from "@/lib/athrecs/claim-invitation";
 import {
-  INVITATION_WELCOME_MESSAGE,
+  invitationWelcomeMessage,
   INVITATION_CODE_INSTRUCTIONS,
   welcomeInvitationStatus,
 } from "@/lib/athrecs/invitation-welcome";
@@ -11,10 +11,12 @@ import {
 export function InvitationWelcomeEmail({
   id,
   disabled,
+  recipientName,
   onSent,
 }: {
   id: string;
   disabled: boolean;
+  recipientName?: string | null;
   onSent: () => Promise<unknown>;
 }) {
   const [busy, setBusy] = useState(false);
@@ -45,10 +47,9 @@ export function InvitationWelcomeEmail({
             Welcome to AthRecs — your sign-in code and profile invitation
           </p>
           <p>
-            A fresh six-digit code is generated securely when you send. It expires after five
-            minutes.
+            A fresh six-digit code is generated securely when you send. It expires after 24 hours.
           </p>
-          <p className="whitespace-pre-line">{INVITATION_WELCOME_MESSAGE}</p>
+          <p className="whitespace-pre-line">{invitationWelcomeMessage(recipientName)}</p>
           <p>{INVITATION_CODE_INSTRUCTIONS}</p>
           <p className="font-medium">
             Sign in and claim my profile → this existing private invitation
@@ -56,7 +57,7 @@ export function InvitationWelcomeEmail({
         </div>
       </details>
       <p className="text-xs text-muted">
-        One email with Paul’s welcome, a fresh five-minute code and this invitation’s existing claim
+        One email with Paul’s welcome, a fresh 24-hour code and this invitation’s existing claim
         link.
       </p>
       <Button

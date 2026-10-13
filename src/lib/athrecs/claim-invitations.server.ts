@@ -47,7 +47,7 @@ export const INVITATION_STATUS_SQL = `case
   else 'prepared' end`;
 export async function invitationHistory(sql: Sql, userId: string) {
   return sql.query<InvitationSummary>(
-    `select i.id,a.display_name as "athleteName",${INVITATION_STATUS_SQL} as status,i.created_at::text as "createdAt",i.expires_at::text as "expiresAt",i.email_sent_at::text as "sentAt" from athlete_claim_invitations i join athletes a on a.id=i.athlete_id where i.user_id=$1 order by i.created_at desc limit 10`,
+    `select i.id,coalesce(nullif(trim(u.name),''),i.recipient_name) as "recipientName",a.display_name as "athleteName",${INVITATION_STATUS_SQL} as status,i.created_at::text as "createdAt",i.expires_at::text as "expiresAt",i.email_sent_at::text as "sentAt" from athlete_claim_invitations i join athletes a on a.id=i.athlete_id left join "user" u on u.id=i.user_id where i.user_id=$1 order by i.created_at desc limit 10`,
     [userId],
   );
 }
@@ -225,7 +225,7 @@ export async function externalInvitationProfile(sql: Sql, athleteId: number) {
     from athletes a where a.id=${athleteId}`;
   if (!profile) throw new Error("Athlete profile not found.");
   const history = await sql.query<InvitationSummary & { recipient: string; canEmail: boolean }>(
-    `select i.id,a.display_name as "athleteName",${INVITATION_STATUS_SQL} as status,i.created_at::text as "createdAt",i.expires_at::text as "expiresAt",i.email_sent_at::text as "sentAt",coalesce(i.recipient_email,i.recipient_name,'Contact invitation') as recipient,(i.email_payload is not null) as "canEmail" from athlete_claim_invitations i join athletes a on a.id=i.athlete_id where i.athlete_id=$1 order by i.created_at desc limit 20`,
+    `select i.id,coalesce(nullif(trim(u.name),''),i.recipient_name) as "recipientName",a.display_name as "athleteName",${INVITATION_STATUS_SQL} as status,i.created_at::text as "createdAt",i.expires_at::text as "expiresAt",i.email_sent_at::text as "sentAt",coalesce(i.recipient_email,i.recipient_name,'Contact invitation') as recipient,(i.email_payload is not null) as "canEmail" from athlete_claim_invitations i join athletes a on a.id=i.athlete_id left join "user" u on u.id=i.user_id where i.athlete_id=$1 order by i.created_at desc limit 20`,
     [athleteId],
   );
   return { profile, history, emailAvailable: invitationEmailAvailable() };

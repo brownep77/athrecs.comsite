@@ -3,7 +3,11 @@ import type { Sql } from "@/lib/db";
 import { sendAthrecsAuthEmail } from "@/lib/auth/email.server";
 import { assertInvitationWrites, invitationEmailAvailable } from "./claim-invitations.server";
 import { CLAIM_INVITATION_FROM, CLAIM_INVITATION_REPLY_TO } from "./claim-invitation";
-import { INVITATION_WELCOME_MESSAGE, INVITATION_CODE_INSTRUCTIONS } from "./invitation-welcome";
+import {
+  invitationWelcomeMessage,
+  INVITATION_CODE_INSTRUCTIONS,
+  INVITATION_CODE_TTL_SECONDS,
+} from "./invitation-welcome";
 
 /** An explicit fresh-code send, separate from replaying a frozen invitation email. */
 export async function sendWelcomeInvitationEmail(sql: Sql, id: string) {
@@ -13,6 +17,7 @@ export async function sendWelcomeInvitationEmail(sql: Sql, id: string) {
   const reservation = await sql.transaction(async (tx) => {
     const [i] = await tx<{
       recipient_email: string;
+      recipient_name: string | null;
       claim_url: string;
       claim_key: number;
       token_hash: string;
@@ -20,7 +25,7 @@ export async function sendWelcomeInvitationEmail(sql: Sql, id: string) {
       recent: boolean;
       limited: boolean;
       active: boolean;
-    }>`select i.recipient_email,i.claim_url,i.claim_key,i.token_hash,
+    }>`select i.recipient_email,coalesce(nullif(trim(u.name),''),i.recipient_name) as recipient_name,i.claim_url,i.claim_key,i.token_hash,
       i.reserved_until>now() as reserved,
       i.welcome_attempted_at>now()-interval '1 minute' as recent,
       ((i.welcome_attempted_at at time zone 'Europe/London')::date=(now() at time zone 'Europe/London')::date and i.welcome_attempts_today>=5) as limited,
@@ -58,7 +63,12 @@ export async function sendWelcomeInvitationEmail(sql: Sql, id: string) {
         then welcome_attempts_today+1 else 1 end,
       welcome_attempted_at=now(),reserved_until=now()+interval '2 minutes'
       where id=${id}`;
-    return { status: "ready" as const, email: i.recipient_email, url: i.claim_url };
+    return {
+      status: "ready" as const,
+      email: i.recipient_email,
+      name: i.recipient_name,
+      url: i.claim_url,
+    };
   });
   if (reservation.status !== "ready") return { status: reservation.status };
   try {
@@ -72,12 +82,23 @@ export async function sendWelcomeInvitationEmail(sql: Sql, id: string) {
     const code = await auth.api.createVerificationOTP({
       body: { email: reservation.email, type: "sign-in" },
     });
+    // Only this exact hashed invitation code gets 24 hours. A concurrent ordinary
+    // login code must retain its normal expiry. Fail closed if storage ever changes.
+    const extended = await context.adapter.update({
+      model: "verification",
+      where: [
+        { field: "identifier", value: `sign-in-otp-${reservation.email}` },
+        { field: "value", value: `${createHash("sha256").update(code).digest("base64url")}:0` },
+      ],
+      update: { expiresAt: new Date(Date.now() + INVITATION_CODE_TTL_SECONDS * 1000) },
+    });
+    if (!extended) throw new Error("Invitation code expiry could not be set.");
     await sendAthrecsAuthEmail(
       {
         to: reservation.email,
         subject: "Welcome to AthRecs — your sign-in code and profile invitation",
         heading: "Welcome to AthRecs",
-        message: `${INVITATION_WELCOME_MESSAGE}\n\n${INVITATION_CODE_INSTRUCTIONS}`,
+        message: `${invitationWelcomeMessage(reservation.name)}\n\n${INVITATION_CODE_INSTRUCTIONS}`,
         code,
         actionLabel: "Sign in and claim my profile",
         actionUrl: reservation.url,
