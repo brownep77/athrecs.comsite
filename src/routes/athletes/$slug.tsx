@@ -542,22 +542,16 @@ function AthleteContent() {
           coach={data.anzCoach}
         />
 
-        {(!career || profileResults.length > 0 || includedHistory) &&
-          (!isPublicFigure ||
-            profileResults.length > 0 ||
-            sourceHistories.length > 0 ||
-            includedHistory) && (
-            <ProfileRecordHighlights
-              compact
-              highlights={career?.achievements.filter(
-                (achievement) => "showOnBoard" in achievement && achievement.showOnBoard === true,
-              )}
-              results={profileResults}
-              reportedBests={includedHistory?.personalBests}
-              sourceHistories={sourceHistories}
-              sourceGender={athlete.gender}
-            />
+        <ProfileRecordHighlights
+          compact
+          highlights={career?.achievements.filter(
+            (achievement) => "showOnBoard" in achievement && achievement.showOnBoard === true,
           )}
+          results={profileResults}
+          reportedBests={includedHistory?.personalBests}
+          sourceHistories={sourceHistories}
+          sourceGender={athlete.gender}
+        />
       </section>
       <section
         id="results-history"
