@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { ShareProfileButton } from "./ShareProfileButton";
 import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
 import { AthleteBusinessLink } from "./AthleteBusinessLink";
+import { AchievementSummary } from "./AchievementSummary";
+import { buildProfileAchievementSummary } from "@/lib/athrecs/profile-achievement-summary";
 import {
   publicAthleteResultPath,
   PUBLIC_PROFILE_RESULT_LIMIT,
@@ -73,6 +75,9 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
           compact
         />
       </section>
+      <div id="profile-achievements" className="scroll-mt-24">
+        <AchievementSummary summary={profile.achievements ?? buildProfileAchievementSummary([])} />
+      </div>
       {profile.careerSummary ? (
         <section
           id="career-summary"

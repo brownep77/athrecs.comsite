@@ -1,5 +1,9 @@
 import { buildProfileTimeline } from "./profile-timeline";
 import {
+  buildProfileAchievementSummary,
+  type ProfileAchievementSummary,
+} from "./profile-achievement-summary";
+import {
   combineResultsHistory,
   sourceHistorySports,
   type ResultsHistoryEntry,
@@ -30,6 +34,7 @@ export type PublicAthletePreview = {
   biography: string[];
   biographySources: { label: string; url: string }[];
   careerSummary: PublicCareerSummary | null;
+  achievements?: ProfileAchievementSummary;
   entries: ResultsHistoryEntry[];
   reportedRecords: ReportedRaceRecord[];
   totalResults: number;
@@ -95,6 +100,7 @@ export function buildPublicAthletePreview(input: {
     nationality: input.nationality ?? null,
     nationalitySource: null,
     sports,
+    achievements: buildProfileAchievementSummary(timeline.results, input.histories),
     biography: input.biography
       ? [...input.biography]
       : [
