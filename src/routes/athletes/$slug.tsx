@@ -2,6 +2,7 @@ import { AnzPerformanceOverview } from "@/components/athletes/AnzPerformanceOver
 import { canViewAthleteProfiles } from "@/lib/auth/profile-access";
 import { ProfileSignIn, ProfileViewer } from "@/components/athletes/ProfileSignIn";
 import { PublicAthletePreview } from "@/components/athletes/PublicAthletePreview";
+import { AthleteBusinessLink } from "@/components/athletes/AthleteBusinessLink";
 import { CountryFlag } from "@/components/athletes/CountryFlag";
 import { SuggestProfileEdit } from "@/components/athletes/SuggestProfileEdit";
 import { athleteSearchContent } from "@/lib/athrecs/athlete-search-content";
@@ -449,6 +450,7 @@ function AthleteContent() {
                 {paragraph}
               </p>
             ))}
+            <AthleteBusinessLink slug={athlete.slug} />
           </div>
         ) : (
           <p className="text-sm leading-relaxed text-muted">{bio}</p>

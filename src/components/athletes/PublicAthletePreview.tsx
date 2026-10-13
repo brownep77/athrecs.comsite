@@ -7,6 +7,7 @@ import { CountryFlag } from "./CountryFlag";
 import { Badge } from "@/components/ui/badge";
 import { ShareProfileButton } from "./ShareProfileButton";
 import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
+import { AthleteBusinessLink } from "./AthleteBusinessLink";
 
 const NO_PERSONAL_BESTS = new Set<number>();
 
@@ -56,6 +57,7 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
                 {paragraph}
               </p>
             ))}
+            <AthleteBusinessLink slug={profile.slug} />
           </div>
         ) : null}
         <ShareProfileButton
