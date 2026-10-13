@@ -37,6 +37,7 @@ export function athleteSearchContent(
       slug: string;
       club?: string | null;
       nationality?: string | null;
+      sports?: readonly string[];
     };
     profileResults: readonly ProfileResult[];
     sourceHistories: readonly SourceHistory[];
@@ -44,7 +45,7 @@ export function athleteSearchContent(
   today = new Date(),
 ) {
   const { athlete, profileResults, sourceHistories } = input;
-  const sports = [
+  const resultSports = [
     ...new Set([
       ...profileResults.filter((r) => !r.details?.profileExcluded).map((r) => r.sport),
       ...sourceHistorySports(sourceHistories),
@@ -52,6 +53,7 @@ export function athleteSearchContent(
   ]
     .filter(Boolean)
     .sort();
+  const sports = [...new Set([...resultSports, ...(athlete.sports ?? [])])].sort();
   const role =
     sports.every((s) => ["Running", "Parkrun"].includes(s)) && sports.length
       ? "runner"
@@ -63,7 +65,7 @@ export function athleteSearchContent(
             ? "swimmer"
             : "athlete";
   const sentences = [
-    `${athlete.display_name} is ${role === "athlete" ? "an" : "a"} ${role}${sports.length ? ` with ${naturalList(sports.map((s) => s.toLowerCase()))} results recorded on ATHRECS` : " with a public profile on ATHRECS"}.`,
+    `${athlete.display_name} is ${role === "athlete" ? "an" : "a"} ${role}${resultSports.length ? ` with ${naturalList(resultSports.map((s) => s.toLowerCase()))} results recorded on ATHRECS` : sports.length ? ` with ${naturalList(sports.map((s) => s.toLowerCase()))} listed on the ATHRECS profile` : " with a public profile on ATHRECS"}.`,
   ];
   if (athlete.club && !/^(unattached|unknown|tbc)$/i.test(athlete.club.trim()))
     sentences.push(`The club listed on this profile is ${athlete.club}.`);

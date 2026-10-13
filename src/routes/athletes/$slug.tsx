@@ -316,6 +316,7 @@ function AthleteContent() {
   const historyResults = timeline.history;
   const profileSports = [
     ...new Set([
+      ...athlete.sports,
       ...profileResults.map((r) => r.sport),
       ...sourceHistorySports(sourceHistories),
       ...upcoming.map((r) => r.sport),
