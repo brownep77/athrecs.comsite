@@ -42,7 +42,7 @@ def dump(path, value):
 def sha(value):
  return hashlib.sha256(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
 
-def connection(path, branch):
+def connection(path, branch, timeout=60):
  cfg=json.loads(path.read_text())
  if cfg['branchId']!=branch:raise ValueError('Explicit target branch differs from connection')
  uri=cfg['databaseUrl'];host=urllib.parse.urlsplit(uri).hostname
@@ -54,7 +54,7 @@ def connection(path, branch):
    'Neon-Batch-Isolation-Level':'RepeatableRead' if readonly else 'ReadCommitted',
    'Neon-Batch-Read-Only':'true' if readonly else 'false'})
   try:
-   with urllib.request.urlopen(req,timeout=60) as resp:result=json.loads(resp.read())
+   with urllib.request.urlopen(req,timeout=timeout) as resp:result=json.loads(resp.read())
   except urllib.error.HTTPError as exc:
    # Do not echo SQL params, private rows or connection strings.
    try:details=json.loads(exc.read());message=details.get('message','');code=details.get('code','')
