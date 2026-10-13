@@ -7,6 +7,7 @@ import {
 } from "../athrecs/result-matching-settings";
 import {
   buildPotentialMatchSearchPatterns,
+  normalizePersonName,
   scorePotentialResultNameMatch,
 } from "../athrecs/result-match";
 import type { Sql } from "../db";
@@ -65,12 +66,13 @@ export async function memberArchiveMatches(
       a.payload->>'nationality' as nationality,a.payload->>'age' as age,
       exists(select 1 from result_archive_match_requests r where r.entry_id=a.id and r.user_id=${userId}) as requested
     from result_archive_entries a join result_archive_datasets d on d.id=a.dataset_id join editions ed on ed.id=d.edition_id join events e on e.id=ed.event_id
+    cross join lateral (select trim(regexp_replace(regexp_replace(translate(lower(normalize(a.payload->>'name', NFKD)), ${"’'`"}, ''), ${"[\u0300-\u036f]"}, '', 'g'), '[^[:alnum:]]+', ' ', 'g')) as name) search_name
     where a.canonical_result_id is null and a.review_state='unmatched'
-      and (lower(a.payload->>'name') like any(${rawPatterns}::text[]) or regexp_replace(lower(a.payload->>'name'),'[^a-z0-9]+',' ','g') like any(${normalizedPatterns}::text[]))
+      and (lower(a.payload->>'name') like any(${rawPatterns}::text[]) or search_name.name like any(${normalizedPatterns}::text[]))
       and (${filters?.year ?? ""}='' or left(ed.event_date::text,4)=${filters?.year ?? ""})
       and (${distances.length}=0 or regexp_replace(lower(ed.distance_code),'[^a-z0-9.]','','g')=any(${distances}::text[]))
       and (${!entryIds} or a.id=any(${entryIds ?? []}::integer[]))
-    order by ed.event_date desc,a.id desc limit 200`;
+    order by (search_name.name=any(${names.map(normalizePersonName)}::text[])) desc,ed.event_date desc,a.id desc limit 200`;
   return rows
     .flatMap((row) => {
       const match = scorePotentialResultNameMatch(

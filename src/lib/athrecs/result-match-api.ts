@@ -12,6 +12,7 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
 import {
   buildPotentialMatchSearchPatterns,
+  normalizePersonName,
   scorePotentialResultNameMatch,
   type PotentialResultMatchConfidence,
 } from "./result-match";
@@ -206,6 +207,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
         ) as source_identifier_matches
       from athlete_claimable_results result
       join athletes athlete on athlete.id = result.athlete_id
+      cross join lateral (select trim(regexp_replace(regexp_replace(translate(lower(normalize(athlete.display_name, NFKD)), ${"’'`"}, ''), ${"[\u0300-\u036f]"}, '', 'g'), '[^[:alnum:]]+', ' ', 'g')) as name) search_name
       left join clubs club on club.id = athlete.club_id
       left join result_claims my_claim
         on my_claim.claim_key = result.id
@@ -222,16 +224,17 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           where dismissal.user_id = ${context.userId} and dismissal.athlete_id = athlete.id
         )
         and (
-          trim(regexp_replace(lower(athlete.display_name), '[^a-z0-9]+', ' ', 'g'))
+          search_name.name
             like any(${normalizedPatterns}::text[])
           or lower(athlete.display_name) like any(${rawPatterns}::text[])
-          or exists (
+          or (${data.name}='' and exists (
             select 1 from athlete_source_identities source_identity
             where source_identity.athlete_id = athlete.id
               and (source_identity.provider || ':' || source_identity.external_id) = any(${sourceKeys}::text[])
-          )
+          ))
         )
-      order by source_identifier_matches desc, result.event_date desc, result.id desc
+      order by (search_name.name=any(${searchedNames.map(normalizePersonName)}::text[])) desc,
+        source_identifier_matches desc, result.event_date desc, result.id desc
       limit ${MAX_CANDIDATE_ROWS}
     `;
 
@@ -257,6 +260,13 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           nationality: row.nationality,
         };
         const evidence = resultIdentityEvidence(accountContext, candidateContext);
+        const nameMatch = scorePotentialResultNameMatch(
+          searchedNames,
+          row.athlete_name,
+          accountContext,
+          candidateContext,
+        );
+        if (data.name && !nameMatch) return null;
         const match = row.source_identifier_matches
           ? {
               score: 100 + evidence.boost,
@@ -267,12 +277,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
                 ...evidence.reasons,
               ],
             }
-          : scorePotentialResultNameMatch(
-              searchedNames,
-              row.athlete_name,
-              accountContext,
-              candidateContext,
-            );
+          : nameMatch;
         if (!match) return null;
         return {
           resultId: row.result_id,
