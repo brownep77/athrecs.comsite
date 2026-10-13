@@ -58,3 +58,11 @@ transactional fingerprint and source-capture guards apply before publication.
 Run `python3 scripts/verify-tlm-followup.py` and validate every planned history
 against `sourceHistorySchema`. Retain the original hold audit and append the
 follow-up outcome, including source keys that were released and those still held.
+
+Public profile result pages retain five performances per response and link older
+approved, unclaimed records with `?resultsPage=2` and subsequent page numbers.
+Each page is server rendered, uses its own canonical URL, and carries the same
+evidence-stripped fields and verification labels. Existing account-linked preview
+limits and owner opt-outs are unchanged. Page counts are computed after the
+existing visibility and hidden-result filters; out-of-range pages redirect to a
+real page rather than generating an empty indexable URL.

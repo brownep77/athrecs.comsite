@@ -1168,7 +1168,10 @@ export const getAdministratorPublishedAthlete = createServerFn({ method: "GET" }
   });
 
 export const getPublicAthletePreview = createServerFn({ method: "GET" })
-  .validator((slug: string) => slug)
+  .validator(async (input: string | { slug: string; resultPage?: number }) => {
+    const { parsePublicAthletePreviewInput } = await import("./public-athlete-result-pages");
+    return parsePublicAthletePreviewInput(input);
+  })
   .handler(async ({ data }) => {
     const started = performance.now();
     const { setResponseHeader } = await import("@tanstack/react-start/server");
@@ -1176,7 +1179,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
     setResponseHeader("X-Robots-Tag", "noindex, nofollow, noarchive");
     try {
       if (IS_RUNRECS_SITE) return null;
-      const identity = await readAthleteIdentity(await ready(), data, true);
+      const identity = await readAthleteIdentity(await ready(), data.slug, true);
       if (!identity) return null;
       // Choose the owner-shared path before hydrating a catalogue history that
       // would immediately be discarded. Approval and indexability are live reads.
@@ -1194,7 +1197,7 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
                 : null,
           };
       }
-      const profile = await readAdministratorPublishedAthlete(data, identity);
+      const profile = await readAdministratorPublishedAthlete(data.slug, identity);
       if (!profile) return null;
       const { buildPublicAthletePreview } = await import("./public-athlete-preview");
       const { getEditorialAthleteCareer } = await import("@/data/freddy-richardson");
@@ -1218,6 +1221,10 @@ export const getPublicAthletePreview = createServerFn({ method: "GET" })
         histories: profile.sourceHistories,
         reportedRecords: getReportedRaceHistory(profile.athlete.slug)?.records,
         searchIndexable: profile.searchIndexable,
+        // Pagination exposes only this same evidence-stripped projection of
+        // approved unclaimed records. Owner-shared profiles retain their limit.
+        allowResultPagination: !identity.has_account_link,
+        resultPage: data.resultPage,
       });
     } finally {
       setResponseHeader(
