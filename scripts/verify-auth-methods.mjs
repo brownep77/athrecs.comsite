@@ -97,7 +97,7 @@ assert.match(dialog, /Resend verification email/);
 assert.doesNotMatch(header, /AthleteAuthDialog/);
 assert.match(rootRoute, /AthleteAuthDialog/);
 assert.match(email, /https:\/\/api\.resend\.com\/emails/);
-assert.match(email, /ATHRECS\.com/);
+assert.match(email, /<img\s+src="https:\/\/www\.athrecs\.com\/athrecs-logo\.png"\s+alt="AthRecs\.com"/);
 assert.match(deploymentGuard, /Email\/password sign-in will remain available/);
 assert.doesNotMatch(
   deploymentGuard,
