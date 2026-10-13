@@ -1,4 +1,7 @@
-import type { ResultSearchFilters } from "@/lib/athrecs/result-matching-settings";
+import {
+  resultSearchSchema,
+  type ResultSearchFilters,
+} from "@/lib/athrecs/result-matching-settings";
 import { ProfileResultConfirmation } from "./ProfileResultConfirmation";
 import { getClaimableResult } from "@/lib/athrecs/result-claims-api";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -109,6 +112,7 @@ function actionLabel(match: PotentialResultMatch): string {
 export function PotentialResultMatchesPanel() {
   const [draft, setDraft] = useState<ResultSearchFilters>({ name: "", distance: "", year: "" });
   const [filters, setFilters] = useState(draft);
+  const [filterError, setFilterError] = useState("");
   const { user } = useCurrentUserState();
   if (!user) return null;
   return (
@@ -155,7 +159,18 @@ export function PotentialResultMatchesPanel() {
           ))}
         </div>
         <div className="flex gap-3">
-          <Button type="button" onClick={() => setFilters({ ...draft })}>
+          <Button
+            type="button"
+            onClick={() => {
+              const parsed = resultSearchSchema.safeParse(draft);
+              if (!parsed.success) {
+                setFilterError(parsed.error.issues[0]?.message || "Check your search filters.");
+                return;
+              }
+              setFilterError("");
+              setFilters(parsed.data);
+            }}
+          >
             Search stored results
           </Button>
           <Button
@@ -165,11 +180,17 @@ export function PotentialResultMatchesPanel() {
               const empty = { name: "", distance: "", year: "" };
               setDraft(empty);
               setFilters(empty);
+              setFilterError("");
             }}
           >
             Clear filters
           </Button>
         </div>
+        {filterError ? (
+          <p role="alert" className="text-sm text-red-700">
+            {filterError} These filters have not been applied.
+          </p>
+        ) : null}
       </section>
       <PotentialResultMatchesResults key={JSON.stringify(filters)} filters={filters} />
     </div>

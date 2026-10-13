@@ -132,7 +132,7 @@ export const resultSearchSchema = z
     year: z
       .string()
       .trim()
-      .regex(/^(?:\d{4})?$/)
+      .regex(/^(?:\d{4})?$/, "Enter a four-digit race year, or leave it blank.")
       .default(""),
     distance: z
       .string()
