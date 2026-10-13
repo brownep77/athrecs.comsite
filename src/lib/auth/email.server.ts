@@ -75,18 +75,18 @@ export async function sendAthrecsAuthEmail(
     <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="padding:32px 16px">
       <tr><td align="center">
         <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:560px;background:#ffffff;border:1px solid #d9e2e4;border-radius:16px;overflow:hidden">
-          <tr><td style="padding:24px 28px;background:#0f172a;color:#ffffff">
-            <div style="font-size:22px;font-weight:700;letter-spacing:.04em">ATHRECS.com</div>
-            <div style="margin-top:4px;color:#a5f3fc;font-size:12px;text-transform:uppercase;letter-spacing:.14em">Athlete Account</div>
+          <tr><td style="padding:24px 28px;background:#ffffff;border-bottom:4px solid #00a88f">
+            <img src="https://www.athrecs.com/athrecs-logo.png" alt="AthRecs.com" width="315" height="64" style="display:block;width:100%;max-width:315px;height:auto;border:0" />
+            <div style="margin-top:12px;color:#52606d;font-size:12px;text-transform:uppercase;letter-spacing:.14em">Athlete Account</div>
           </td></tr>
           <tr><td style="padding:28px">
             <h1 style="margin:0 0 12px;font-size:24px;line-height:1.25">${safeHeading}</h1>
-            ${email.code ? `<p style="margin:0 0 24px;padding:18px;background:#ecfeff;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px">${safeCode}</p>` : ""}
+            ${email.code ? `<p style="margin:0 0 24px;padding:18px;background:#e7f7f3;text-align:center;font-size:32px;font-weight:700;letter-spacing:8px">${safeCode}</p>` : ""}
             <p style="margin:0 0 24px;color:#52606d;font-size:15px;line-height:1.6;white-space:pre-line">${safeMessage}</p>
             ${
               email.actionUrl
                 ? `<p style="margin:0 0 24px">
-              <a href="${safeUrl}" style="display:inline-block;border-radius:9px;background:#0891b2;color:#ffffff;padding:12px 18px;text-decoration:none;font-weight:700">${safeLabel}</a>
+              <a href="${safeUrl}" style="display:inline-block;border-radius:9px;background:#007f70;color:#ffffff;padding:12px 18px;text-decoration:none;font-weight:700">${safeLabel}</a>
             </p>
             <p style="margin:0;color:#7b8794;font-size:12px;line-height:1.5">If the button does not work, copy this address into your browser:<br><span style="word-break:break-all">${safeUrl}</span></p>`
                 : ""

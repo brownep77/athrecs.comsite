@@ -135,6 +135,7 @@ jobs:
           name: athlete-tools-preview
           path: |
             artifacts/athlete-tools-*.png
+            artifacts/invitation-welcome-template-*.png
             artifacts/athlete-messages-*.png
             artifacts/athlete-directory-invites-*.png
             artifacts/external-invitation-*.png

@@ -387,6 +387,7 @@ export function ExternalProfileInvite({ athleteId, name }: { athleteId: number; 
                   ["prepared", "invited", "failed", "held"].includes(item.status) ? (
                     <InvitationWelcomeEmail
                       id={item.id}
+                      recipientName={item.recipientName}
                       disabled={busy || !query.data?.emailAvailable}
                       onSent={() => query.refetch()}
                     />

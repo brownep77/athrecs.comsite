@@ -1,7 +1,7 @@
 /** Paul's welcome wording, from the approved Resend template (13 October 2026). */
-export const INVITATION_WELCOME_MESSAGE = `Hi,
+export const INVITATION_CODE_TTL_SECONDS = 24 * 60 * 60;
 
-Thanks for joining AthRecs. It’s really nice to have you involved.
+export const INVITATION_WELCOME_MESSAGE = `Thanks for joining AthRecs. It’s really nice to have you involved.
 
 As a runner myself, I know how much goes into these results. I’m passionate about preserving everyone’s achievements so you can look back, share them with your family and leave something for future generations to see if you want to.
 
@@ -19,13 +19,26 @@ Thanks again,
 
 Paul`;
 
+/** Use only a supplied recipient name; never infer it from an email or profile match. */
+export function invitationWelcomeMessage(name?: string | null): string {
+  const supplied = name?.trim() ?? "";
+  const words = supplied.split(/\s+/);
+  const first = /^(mr|mrs|ms|miss|mx|dr|prof)\.?$/i.test(words[0]) ? words[1] : words[0];
+  const known =
+    supplied.length <= 200 &&
+    !/^(name not supplied|unknown|athlete|runner|user)$/i.test(supplied) &&
+    !/[@<>\r\n]/.test(supplied) &&
+    /^[\p{L}\p{M}]+(?:[-'’][\p{L}\p{M}]+)*$/u.test(first ?? "");
+  return `${known ? `Hi ${first},` : "Hi,"}\n\n${INVITATION_WELCOME_MESSAGE}`;
+}
+
 export const INVITATION_CODE_INSTRUCTIONS =
-  "Your one-time sign-in code expires after five minutes. Open your private claim link below, choose Sign in, enter this email address and choose “I already have a code”. If the code has expired, request a new one there. Never share your code or private link.";
+  "Your one-time sign-in code is valid for 24 hours and can be used once. Open your private claim link below, choose Sign in, enter this email address and choose “I already have a code”. If it has expired, request a new code there. If you request another code, use the newest one and the expiry shown in that email. Never share your code or private link.";
 
 export function welcomeInvitationStatus(status: string): string {
   return (
     {
-      sent: "Welcome email and a fresh five-minute sign-in code sent from paul@athrecs.com with the existing claim link. Inbox delivery has not been confirmed.",
+      sent: "Welcome email and a fresh 24-hour sign-in code sent from paul@athrecs.com with the existing claim link. Inbox delivery has not been confirmed.",
       sending: "An invitation email is already being sent. Refresh shortly.",
       recent:
         "A code was requested less than a minute ago. Wait a minute before requesting another.",

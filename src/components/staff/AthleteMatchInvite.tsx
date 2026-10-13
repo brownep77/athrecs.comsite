@@ -383,6 +383,7 @@ export function AthleteMatchInvite({
                       {["prepared", "invited", "failed", "held"].includes(i.status) ? (
                         <InvitationWelcomeEmail
                           id={i.id}
+                          recipientName={i.recipientName}
                           disabled={busy || !matches.data.emailAvailable}
                           onSent={refresh}
                         />

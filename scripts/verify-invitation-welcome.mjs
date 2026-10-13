@@ -36,6 +36,24 @@ globalThis.fetch = async (input, init) => {
   assert(url.startsWith(origin), "External network is forbidden in this test");
   return realFetch(input, init);
 };
+const NativeDate = globalThis.Date;
+async function afterHours(hours, run) {
+  // Advance the auth clock without waiting or editing the verification expiry.
+  const offset = hours * 60 * 60 * 1000;
+  globalThis.Date = class extends NativeDate {
+    constructor(...args) {
+      super(...(args.length ? args : [NativeDate.now() + offset]));
+    }
+    static now() {
+      return NativeDate.now() + offset;
+    }
+  };
+  try {
+    return await run();
+  } finally {
+    globalThis.Date = NativeDate;
+  }
+}
 let ip = 1;
 async function login(email, otp) {
   return fetch(`${origin}/api/auth/sign-in/email-otp`, {
@@ -63,6 +81,18 @@ try {
     "./claim-invitation": await server.ssrLoadModule("/src/lib/athrecs/claim-invitation.ts"),
     "./invitation-welcome": await server.ssrLoadModule("/src/lib/athrecs/invitation-welcome.ts"),
   };
+  const welcomeText = deps["./invitation-welcome"];
+  for (const [name, greeting] of [
+    ["Avery Test", "Hi Avery,"],
+    ["Dr. Élodie Test", "Hi Élodie,"],
+    ["Mary-Jane Test", "Hi Mary-Jane,"],
+    ["", "Hi,"],
+    ["Name not supplied", "Hi,"],
+    ["person@example.test", "Hi,"],
+    ["Avery\n<script>", "Hi,"],
+  ]) {
+    assert(welcomeText.invitationWelcomeMessage(name).startsWith(`${greeting}\n\n`));
+  }
   const compiled = ts.transpileModule(
     await readFile("src/lib/athrecs/invitation-welcome.server.ts", "utf8"),
     {
@@ -113,14 +143,26 @@ try {
   assert.equal(mail.from, "paul@athrecs.com");
   assert.equal(mail.reply_to, "paul@athrecs.com");
   assert.equal(sent[0].headers.Authorization, "Bearer synthetic-invitation-key");
-  assert(mail.text.includes(deps["./invitation-welcome"].INVITATION_WELCOME_MESSAGE));
+  assert(mail.text.includes(welcomeText.invitationWelcomeMessage("Synthetic Welcome")));
+  assert(mail.html.includes("Hi Synthetic,"));
+  assert(mail.html.includes('src="https://www.athrecs.com/athrecs-logo.png"'));
+  assert(mail.html.includes('alt="AthRecs.com"'));
+  assert(mail.text.includes("valid for 24 hours and can be used once"));
+  assert.equal(
+    (await core.invitationHistory(sql, "welcome-user"))[0].recipientName,
+    "Synthetic Welcome",
+  );
+  assert.equal(
+    (await core.externalInvitationProfile(sql, 992401)).history[0].recipientName,
+    "Synthetic Welcome",
+  );
   assert(mail.text.includes(url) && mail.html.includes(url.replaceAll("&", "&amp;")));
   assert(mail.html.includes(firstCode) && mail.html.includes("white-space:pre-line"));
   const stored = await sql`select * from verification where identifier=${`sign-in-otp-${email}`}`;
   assert.equal(stored.length, 1, "Fresh code replaces previous codes");
   assert(!JSON.stringify(stored).includes(firstCode), "Code is stored hashed");
   const ttl = new Date(stored[0].expiresAt).getTime() - Date.now();
-  assert(ttl > 240000 && ttl <= 300000, "Five-minute expiry");
+  assert(ttl > 86340000 && ttl <= 86400000, "Invitation code has a full 24-hour expiry");
   const invitation = await row();
   assert.deepEqual(invitation.email_payload, frozen, "Frozen retry payload is untouched");
   assert.equal(invitation.claim_url, url, "Existing private link is retained");
@@ -129,8 +171,8 @@ try {
   assert.equal(sent.length, 1);
   if (oldCode !== firstCode) assert.equal((await login(email, oldCode)).status, 400);
   assert.equal((await login("different@example.test", firstCode)).status, 400);
-  const success = await login(email, firstCode);
-  assert.equal(success.status, 200);
+  const success = await afterHours(23.9, () => login(email, firstCode));
+  assert.equal(success.status, 200, "Invitation code still works almost 24 hours later");
   const signedIn = await success.json();
   assert.equal(signedIn.user.id, "welcome-user");
   assert.equal(
@@ -147,8 +189,11 @@ try {
   await allowAgain();
   await send();
   const expiredCode = code();
-  await sql`update verification set "expiresAt"=now()-interval '1 second' where identifier=${`sign-in-otp-${email}`}`;
-  assert.equal((await login(email, expiredCode)).status, 400);
+  assert.equal(
+    (await afterHours(24.1, () => login(email, expiredCode))).status,
+    400,
+    "Invitation code expires after 24 hours",
+  );
   await allowAgain();
   await send();
   const limitedCode = code();
@@ -200,18 +245,28 @@ try {
   await allowAgain();
   await sql`update athlete_claim_invitations set claim_url=${url.replace("resultId=992401", "resultId=992402")} where id='synthetic-welcome'`;
   await assert.rejects(send, /link is invalid/);
-  await sql`update athlete_claim_invitations set claim_url=${url},user_id=null,invitation_kind='email',recipient_key='email:new-welcome@example.test',recipient_email='new-welcome@example.test' where id='synthetic-welcome'`;
+  await sql`update athlete_claim_invitations set claim_url=${url},user_id=null,invitation_kind='email',recipient_key='email:new-welcome@example.test',recipient_email='new-welcome@example.test',recipient_name='Avery Example' where id='synthetic-welcome'`;
   assert.deepEqual(await send(), { status: "sent" });
+  assert(sent.at(-1).payload.text.includes("Hi Avery,"));
   assert.equal(
     (await login("new-welcome@example.test", code())).status,
     200,
     "Email-bound invitation also supports a new account",
   );
+  const normalEmail = "ordinary-login@example.test";
+  await authModule.auth.api.createVerificationOTP({
+    body: { email: normalEmail, type: "sign-in" },
+  });
+  const [normal] =
+    await sql`select "expiresAt" from verification where identifier=${`sign-in-otp-${normalEmail}`}`;
+  const normalTtl = new Date(normal.expiresAt).getTime() - Date.now();
+  assert(normalTtl > 240000 && normalTtl <= 300000, "Ordinary login still uses five minutes");
   console.log(
-    "PASS: combined welcome + hashed five-minute OTP + existing link; real recipient-bound sign-in, expiry, replay, guessing limit, safe failures, cooldown, inactive guards and no ownership grant. All delivery intercepted.",
+    "PASS: personalised welcome + hashed 24-hour OTP + existing link; real recipient-bound sign-in, expiry, replay, guessing limit, safe failures, cooldown, inactive guards and no ownership grant. All delivery intercepted.",
   );
 } finally {
   await server.close();
   await database?.close();
   globalThis.fetch = realFetch;
+  globalThis.Date = NativeDate;
 }
