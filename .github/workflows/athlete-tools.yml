@@ -32,6 +32,12 @@ on:
       - "src/lib/auth/email.server.ts"
       - "src/lib/auth/server.ts"
       - "src/lib/auth/signup-alerts.server.ts"
+      - "src/lib/auth/signup-welcome.server.ts"
+      - "src/lib/athrecs/registrations.server.ts"
+      - "src/components/staff/RegisteredAthletes.tsx"
+      - "src/components/athletes/ProfileClaimGuide.tsx"
+      - "migrations/*signup_welcome.sql"
+      - "scripts/verify-signup-welcome.mjs"
       - "src/routes/api/signup-alerts.ts"
       - "migrations/*signup_alerts.sql"
       - "scripts/verify-signup-alerts.mjs"
@@ -115,6 +121,8 @@ jobs:
         run: npm run verify:athlete-inbox
       - name: Immediate signup notification and retry safety
         run: npm run verify:signup-alerts
+      - name: Automatic welcome and signup funnel
+        run: npm run verify:signup-welcome
       - name: Build without database migration or publication hooks
         run: npx vite build --mode development
       - run: npm run typecheck

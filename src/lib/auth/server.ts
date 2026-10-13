@@ -337,6 +337,15 @@ export const auth = betterAuth({
         after: async (user) => {
           const { notifyNewSignup } = await import("./signup-alerts.server");
           await notifyNewSignup(user.id);
+          const { welcomeNewSignup } = await import("./signup-welcome.server");
+          await welcomeNewSignup(user.id);
+        },
+      },
+      update: {
+        after: async (user) => {
+          if (!user.emailVerified) return;
+          const { welcomeNewSignup } = await import("./signup-welcome.server");
+          await welcomeNewSignup(user.id);
         },
       },
     },

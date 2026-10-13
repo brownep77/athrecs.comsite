@@ -52,6 +52,37 @@ export function RegisteredAthletes() {
           <RefreshCw className="size-4" aria-hidden="true" /> Refresh
         </Button>
       </header>
+      {data?.funnel && !accounts.isError ? (
+        <section
+          aria-label="New signup progress"
+          className="space-y-3 rounded-xl border border-border bg-surface p-4"
+        >
+          <h2 className="font-semibold">New signup progress</h2>
+          <p className="text-xs text-muted">
+            Accounts created since automatic welcome emails were enabled. Each count is unique
+            athletes. Adding missing results is optional.
+          </p>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-6">
+            {[
+              ["Signed up", data.funnel.signedUp],
+              ["Email verified", data.funnel.verified],
+              ["Welcome sent", data.funnel.welcomed],
+              ["Profile claimed", data.funnel.claimed],
+              ["Results confirmed", data.funnel.confirmed],
+              ["Missing results submitted", data.funnel.submitted],
+            ].map(([label, count]) => (
+              <div key={label}>
+                <p className="text-2xl font-semibold">{Number(count).toLocaleString("en-GB")}</p>
+                <p className="text-xs text-muted">{label}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-muted">
+            Welcome sent includes an earlier welcome invitation and means the email provider
+            accepted it. Stages can be completed in a different order.
+          </p>
+        </section>
+      ) : null}
       {data && !accounts.isError ? (
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {[
@@ -259,6 +290,22 @@ function RegistrationCard({ account }: { account: RegisteredAthlete }) {
         </Link>
       </div>
       <dl className="mt-4 grid gap-x-6 gap-y-3 text-sm sm:grid-cols-2 xl:grid-cols-4">
+        <Detail label="Next step">
+          {!account.emailVerified
+            ? "Verify email"
+            : account.needsInfo
+              ? "Provide claim information"
+              : account.pending
+                ? "Complete or review claim"
+                : !account.linkedProfiles
+                  ? "Claim athlete profile"
+                  : !account.resultsConfirmed
+                    ? "Confirm results"
+                    : "Add missing results if needed"}
+        </Detail>
+        {account.welcomeStatus ? (
+          <Detail label="Welcome email">{account.welcomeStatus}</Detail>
+        ) : null}
         <Detail label="Signed up">{formatTimestamp(account.signedUpAt)}</Detail>
         <Detail label="Last recorded sign-in">
           {account.lastSignInAt

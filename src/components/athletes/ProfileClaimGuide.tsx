@@ -88,9 +88,11 @@ export function ClaimRacingName({ onSaved }: { onSaved?: (account: AthleteAccoun
 export function ProfileClaimGuide({
   account,
   onNameSaved,
+  showSteps = true,
 }: {
   account: AthleteAccountData;
   onNameSaved: (account: AthleteAccountData) => void;
+  showSteps?: boolean;
 }) {
   const navigate = useNavigate();
   const [resume, setResume] = useState<number | null>(null);
@@ -114,13 +116,44 @@ export function ProfileClaimGuide({
   const invitation = invitations.data?.[0];
   const resumable =
     resume && !claims.data?.some((claim) => claim.resultId === resume) ? resume : null;
-  if (account.claimedProfiles.length && !pending && !invitation && !resumable) return null;
+  const linked = account.claimedProfiles.length > 0;
+  const confirmed = claims.data?.some(
+    (claim) => claim.confirmedAt && claim.confirmationMethod === "athlete",
+  );
+  const reviewAnchor = account.claimedResults[0]?.resultId;
+  if (linked && !pending && !invitation && !resumable)
+    return (
+      <section
+        aria-label="Your next step"
+        className="space-y-3 rounded-xl border border-accent/40 bg-accent-soft p-5"
+      >
+        <h2 className="font-display text-xl font-semibold">
+          {confirmed
+            ? "Your results are part of your story"
+            : "Your profile is linked. Check your results next."}
+        </h2>
+        <p className="text-sm text-muted">
+          {confirmed
+            ? "Add any missing performances so your family and future generations can see what you achieved. You choose what to share."
+            : "Check the results, remove anything that is not yours and confirm the rest together."}
+        </p>
+        <Button asChild>
+          {confirmed || !reviewAnchor ? (
+            <Link to="/athlete-results">Add a missing result</Link>
+          ) : (
+            <Link to="/claim-results" search={{ resultId: reviewAnchor }}>
+              Review and confirm my results
+            </Link>
+          )}
+        </Button>
+      </section>
+    );
   return (
     <section
       aria-label="Finish your profile claim"
       className="space-y-4 rounded-xl border-2 border-accent bg-accent-soft p-5 shadow-card"
     >
-      <ProfileClaimSteps step={pending ? 3 : 2} />
+      {showSteps ? <ProfileClaimSteps step={pending ? 3 : 2} /> : null}
       <h2 className="font-display text-xl font-semibold">
         {pending
           ? pending.status === "needs_info"
@@ -211,6 +244,19 @@ export function ProfileClaimGuide({
             Try again
           </button>{" "}
           or use your original invitation link.
+        </p>
+      ) : null}
+      {!pending && !invitation && !resumable ? (
+        <p className="text-sm text-muted">
+          Can’t find your profile?{" "}
+          <Link to="/athlete-results" className="font-semibold underline">
+            Submit a missing result
+          </Link>{" "}
+          or{" "}
+          <a href="mailto:paul@athrecs.com" className="underline">
+            ask Paul for help
+          </a>
+          .
         </p>
       ) : null}
     </section>
