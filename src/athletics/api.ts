@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "../lib/athrecs/seed.server";
 import { todayIso } from "../lib/athrecs/format";
-import type { ClubListItem, SpectatorAccessType, Sport } from "../lib/athrecs/types";
+import type { SpectatorAccessType, Sport } from "../lib/athrecs/types";
 import { queryRunningEvents, queryRunningRegions } from "../lib/running/catalogue.server";
 import { supplementedStart } from "../data/runrecs-race-guides";
 import * as base from "../lib/athrecs/api";
@@ -65,7 +65,10 @@ export const listEvents = createServerFn({ method: "GET" })
   .validator((input: ListEventsInput) => input ?? {})
   .handler(async ({ data }) => {
     if (data.sport === "Running" || data.sport === "Parkrun" || data.sport === "All") {
-      return queryRunningEvents({ ...data, distance: data.distance === "All" ? undefined : data.distance });
+      return queryRunningEvents({
+        ...data,
+        distance: data.distance === "All" ? undefined : data.distance,
+      });
     }
     if (data.sport === "Triathlon") return base.listEvents({ data });
     if (data.sport && !isAthleticsSport(data.sport)) return [];
@@ -87,11 +90,18 @@ export const getEventBySlug = createServerFn({ method: "GET" })
       ...result,
       upcoming: result.upcoming.map((edition) => ({
         ...edition,
-        start_time: ["Athletics", "Triathlon"].includes(result.event.sport) ? edition.start_time : supplementedStart(
-          result.event, edition.event_date, edition.distance_code, edition.start_time,
-        ),
+        start_time: ["Athletics", "Triathlon"].includes(result.event.sport)
+          ? edition.start_time
+          : supplementedStart(
+              result.event,
+              edition.event_date,
+              edition.distance_code,
+              edition.start_time,
+            ),
       })),
-      related: result.related.filter((event) => ["Athletics", "Running", "Parkrun", "Triathlon"].includes(event.sport)),
+      related: result.related.filter((event) =>
+        ["Athletics", "Running", "Parkrun", "Triathlon"].includes(event.sport),
+      ),
     };
   });
 
@@ -136,94 +146,15 @@ export const getPrivateAthleteBySlug = createServerFn({ method: "GET" })
     return allowed.length ? stub : null;
   });
 
+// Club discovery and representation span sports. Keep the event catalogue's
+// specialist boundary separate from public club listings and athlete privacy.
 export const listClubs = createServerFn({ method: "GET" })
   .validator((input: { q?: string } | undefined) => input ?? {})
-  .handler(async ({ data }) => {
-    const sql = await ready();
-    const q = data.q?.trim() ? `%${data.q.trim().toLowerCase()}%` : null;
-    const rows = await sql<ClubListItem & { sports_csv: string }>`
-      select
-        club.id,
-        club.slug,
-        club.name,
-        club.city,
-        club.county,
-        club.country,
-        club.sports as sports_csv,
-        club.website,
-        club.official_source,
-        club.summary,
-        (
-          select count(distinct athlete.id)::int
-          from athletes athlete
-          where athlete.club_id = club.id
-            and (athlete.profile_type = 'Public figure' or athlete.profile_visibility = 'public')
-            and exists (
-              select 1
-              from results result
-              join editions edition on edition.id = result.edition_id
-              join events event on event.id = edition.event_id
-              where result.athlete_id = athlete.id
-                and event.sport in ('Athletics', 'Running', 'Parkrun')
-            )
-        ) as member_count
-      from clubs club
-      where (
-          lower(coalesce(club.sports, '')) ~ '(athletics|running|parkrun)'
-          or exists (
-            select 1
-            from athletes athlete
-            join results result on result.athlete_id = athlete.id
-            join editions edition on edition.id = result.edition_id
-            join events event on event.id = edition.event_id
-            where athlete.club_id = club.id
-              and event.sport in ('Athletics', 'Running', 'Parkrun')
-          )
-        )
-        and (
-          ${q}::text is null
-          or lower(club.name) like ${q}
-          or lower(club.city) like ${q}
-          or lower(club.sports) like ${q}
-        )
-      order by club.name
-    `;
-
-    return rows.map((row) => ({
-      ...row,
-      sports: row.sports_csv.split(",").map((sport) => sport.trim()).filter(Boolean),
-    }));
-  });
+  .handler(async ({ data }) => base.listClubs({ data }));
 
 export const getClubBySlug = createServerFn({ method: "GET" })
   .validator((slug: string) => slug)
-  .handler(async ({ data }) => {
-    const result = await base.getClubBySlug({ data });
-    if (!result) return null;
-
-    const sql = await ready();
-    const clubId = (result.club as { id: number }).id;
-    const allowedRows = await sql<{ id: number }>`
-      select distinct athlete.id
-      from athletes athlete
-      join results result on result.athlete_id = athlete.id
-      join editions edition on edition.id = result.edition_id
-      join events event on event.id = edition.event_id
-      where athlete.club_id = ${clubId}
-        and event.sport in ('Athletics', 'Running', 'Parkrun')
-    `;
-    const allowed = new Set(allowedRows.map((row) => row.id));
-    const members = result.members.filter((member) => allowed.has(member.id));
-    const isCatalogueClub = result.club.sports.some((sport) =>
-      /athletics|running|parkrun/i.test(sport),
-    );
-    if (!members.length && !isCatalogueClub) return null;
-
-    return {
-      ...result,
-      members,
-    };
-  });
+  .handler(async ({ data }) => base.getClubBySlug({ data }));
 
 export const getHomeStats = createServerFn({ method: "GET" }).handler(async () => {
   const sql = await ready();
@@ -373,7 +304,10 @@ async function queryAthleticsCalendarPage(
   data: AthleticsCalendarPageInput = {},
 ): Promise<AthleticsCalendarPage> {
   const sql = await ready();
-  const calendarSport = data.sport === "Running" || data.sport === "Parkrun" || data.sport === "Triathlon" ? data.sport : ATHLETICS_SPORT;
+  const calendarSport =
+    data.sport === "Running" || data.sport === "Parkrun" || data.sport === "Triathlon"
+      ? data.sport
+      : ATHLETICS_SPORT;
   const rawQ = data.q?.trim() ?? "";
   const q = rawQ ? `%${rawQ.toLowerCase()}%` : null;
   const region = data.region?.trim() || null;

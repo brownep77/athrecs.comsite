@@ -37,6 +37,7 @@ import { Route as AdminAthleteWorkspaceRouteImport } from './routes/admin/athlet
 import { Route as AdminCataloguePublishingRouteImport } from './routes/admin/catalogue-publishing'
 import { Route as AdminCatalogueRecoveryEmergencyRouteImport } from './routes/admin/catalogue-recovery-emergency'
 import { Route as AdminCheckResultsUploadRouteImport } from './routes/admin/check-results-upload'
+import { Route as AdminClubRegistrationsRouteImport } from './routes/admin/club-registrations'
 import { Route as AdminClubScannerRouteImport } from './routes/admin/club-scanner'
 import { Route as AdminDataIntelligenceRouteImport } from './routes/admin/data-intelligence'
 import { Route as AdminEmailInboxRouteImport } from './routes/admin/email-inbox'
@@ -66,6 +67,8 @@ import { Route as BrandsManageRouteImport } from './routes/brands/manage'
 import { Route as BrandsRegisterRouteImport } from './routes/brands/register'
 import { Route as ClubsIndexRouteImport } from './routes/clubs/index'
 import { Route as ClubsSlugRouteImport } from './routes/clubs/$slug'
+import { Route as ClubsAccountRouteImport } from './routes/clubs/account'
+import { Route as ClubsRegisterRouteImport } from './routes/clubs/register'
 import { Route as NewsIndexRouteImport } from './routes/news/index'
 import { Route as NewsSlugRouteImport } from './routes/news/$slug'
 import { Route as RaceReportsIndexRouteImport } from './routes/race-reports/index'
@@ -236,6 +239,11 @@ const AdminCheckResultsUploadRoute = AdminCheckResultsUploadRouteImport.update({
   path: '/admin/check-results-upload',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminClubRegistrationsRoute = AdminClubRegistrationsRouteImport.update({
+  id: '/admin/club-registrations',
+  path: '/admin/club-registrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminClubScannerRoute = AdminClubScannerRouteImport.update({
   id: '/admin/club-scanner',
   path: '/admin/club-scanner',
@@ -379,6 +387,16 @@ const ClubsIndexRoute = ClubsIndexRouteImport.update({
 const ClubsSlugRoute = ClubsSlugRouteImport.update({
   id: '/clubs/$slug',
   path: '/clubs/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubsAccountRoute = ClubsAccountRouteImport.update({
+  id: '/clubs/account',
+  path: '/clubs/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClubsRegisterRoute = ClubsRegisterRouteImport.update({
+  id: '/clubs/register',
+  path: '/clubs/register',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NewsIndexRoute = NewsIndexRouteImport.update({
@@ -551,6 +569,7 @@ export interface FileRoutesByFullPath {
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
+  '/admin/club-registrations': typeof AdminClubRegistrationsRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
@@ -577,6 +596,8 @@ export interface FileRoutesByFullPath {
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
+  '/clubs/account': typeof ClubsAccountRoute
+  '/clubs/register': typeof ClubsRegisterRoute
   '/news/$slug': typeof NewsSlugRoute
   '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -637,6 +658,7 @@ export interface FileRoutesByTo {
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
+  '/admin/club-registrations': typeof AdminClubRegistrationsRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
@@ -663,6 +685,8 @@ export interface FileRoutesByTo {
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
+  '/clubs/account': typeof ClubsAccountRoute
+  '/clubs/register': typeof ClubsRegisterRoute
   '/news/$slug': typeof NewsSlugRoute
   '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -724,6 +748,7 @@ export interface FileRoutesById {
   '/admin/catalogue-publishing': typeof AdminCataloguePublishingRoute
   '/admin/catalogue-recovery-emergency': typeof AdminCatalogueRecoveryEmergencyRoute
   '/admin/check-results-upload': typeof AdminCheckResultsUploadRoute
+  '/admin/club-registrations': typeof AdminClubRegistrationsRoute
   '/admin/club-scanner': typeof AdminClubScannerRoute
   '/admin/data-intelligence': typeof AdminDataIntelligenceRoute
   '/admin/email-inbox': typeof AdminEmailInboxRoute
@@ -750,6 +775,8 @@ export interface FileRoutesById {
   '/brands/manage': typeof BrandsManageRoute
   '/brands/register': typeof BrandsRegisterRoute
   '/clubs/$slug': typeof ClubsSlugRoute
+  '/clubs/account': typeof ClubsAccountRoute
+  '/clubs/register': typeof ClubsRegisterRoute
   '/news/$slug': typeof NewsSlugRoute
   '/race-reports/$slug': typeof RaceReportsSlugRoute
   '/races/$slug': typeof RacesSlugRoute
@@ -812,6 +839,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
     | '/admin/check-results-upload'
+    | '/admin/club-registrations'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
@@ -838,6 +866,8 @@ export interface FileRouteTypes {
     | '/brands/manage'
     | '/brands/register'
     | '/clubs/$slug'
+    | '/clubs/account'
+    | '/clubs/register'
     | '/news/$slug'
     | '/race-reports/$slug'
     | '/races/$slug'
@@ -898,6 +928,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
     | '/admin/check-results-upload'
+    | '/admin/club-registrations'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
@@ -924,6 +955,8 @@ export interface FileRouteTypes {
     | '/brands/manage'
     | '/brands/register'
     | '/clubs/$slug'
+    | '/clubs/account'
+    | '/clubs/register'
     | '/news/$slug'
     | '/race-reports/$slug'
     | '/races/$slug'
@@ -984,6 +1017,7 @@ export interface FileRouteTypes {
     | '/admin/catalogue-publishing'
     | '/admin/catalogue-recovery-emergency'
     | '/admin/check-results-upload'
+    | '/admin/club-registrations'
     | '/admin/club-scanner'
     | '/admin/data-intelligence'
     | '/admin/email-inbox'
@@ -1010,6 +1044,8 @@ export interface FileRouteTypes {
     | '/brands/manage'
     | '/brands/register'
     | '/clubs/$slug'
+    | '/clubs/account'
+    | '/clubs/register'
     | '/news/$slug'
     | '/race-reports/$slug'
     | '/races/$slug'
@@ -1071,6 +1107,7 @@ export interface RootRouteChildren {
   AdminCataloguePublishingRoute: typeof AdminCataloguePublishingRoute
   AdminCatalogueRecoveryEmergencyRoute: typeof AdminCatalogueRecoveryEmergencyRoute
   AdminCheckResultsUploadRoute: typeof AdminCheckResultsUploadRoute
+  AdminClubRegistrationsRoute: typeof AdminClubRegistrationsRoute
   AdminClubScannerRoute: typeof AdminClubScannerRoute
   AdminDataIntelligenceRoute: typeof AdminDataIntelligenceRoute
   AdminEmailInboxRoute: typeof AdminEmailInboxRoute
@@ -1097,6 +1134,8 @@ export interface RootRouteChildren {
   BrandsManageRoute: typeof BrandsManageRoute
   BrandsRegisterRoute: typeof BrandsRegisterRoute
   ClubsSlugRoute: typeof ClubsSlugRoute
+  ClubsAccountRoute: typeof ClubsAccountRoute
+  ClubsRegisterRoute: typeof ClubsRegisterRoute
   NewsSlugRoute: typeof NewsSlugRoute
   RaceReportsSlugRoute: typeof RaceReportsSlugRoute
   RacesSlugRoute: typeof RacesSlugRoute
@@ -1328,6 +1367,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCheckResultsUploadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/club-registrations': {
+      id: '/admin/club-registrations'
+      path: '/admin/club-registrations'
+      fullPath: '/admin/club-registrations'
+      preLoaderRoute: typeof AdminClubRegistrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/club-scanner': {
       id: '/admin/club-scanner'
       path: '/admin/club-scanner'
@@ -1529,6 +1575,20 @@ declare module '@tanstack/react-router' {
       path: '/clubs/$slug'
       fullPath: '/clubs/$slug'
       preLoaderRoute: typeof ClubsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clubs/account': {
+      id: '/clubs/account'
+      path: '/clubs/account'
+      fullPath: '/clubs/account'
+      preLoaderRoute: typeof ClubsAccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clubs/register': {
+      id: '/clubs/register'
+      path: '/clubs/register'
+      fullPath: '/clubs/register'
+      preLoaderRoute: typeof ClubsRegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/news/': {
@@ -1751,6 +1811,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminCataloguePublishingRoute: AdminCataloguePublishingRoute,
   AdminCatalogueRecoveryEmergencyRoute: AdminCatalogueRecoveryEmergencyRoute,
   AdminCheckResultsUploadRoute: AdminCheckResultsUploadRoute,
+  AdminClubRegistrationsRoute: AdminClubRegistrationsRoute,
   AdminClubScannerRoute: AdminClubScannerRoute,
   AdminDataIntelligenceRoute: AdminDataIntelligenceRoute,
   AdminEmailInboxRoute: AdminEmailInboxRoute,
@@ -1777,6 +1838,8 @@ const rootRouteChildren: RootRouteChildren = {
   BrandsManageRoute: BrandsManageRoute,
   BrandsRegisterRoute: BrandsRegisterRoute,
   ClubsSlugRoute: ClubsSlugRoute,
+  ClubsAccountRoute: ClubsAccountRoute,
+  ClubsRegisterRoute: ClubsRegisterRoute,
   NewsSlugRoute: NewsSlugRoute,
   RaceReportsSlugRoute: RaceReportsSlugRoute,
   RacesSlugRoute: RacesSlugRoute,

@@ -89,6 +89,9 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      - name: Club directory and representative registration
+        run: npm run verify:club-registration && npm run verify:club-registration-browser && npm run verify:club-registration-flow
+
       - name: Verified fixture file import browser check
         run: node scripts/verify-fixture-upload-ui.mjs
 
@@ -225,7 +228,7 @@ jobs:
         env:
           BROWSER_SMOKE_MEMBER: "1"
         run: |
-          BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||Personal bests||Achievements & milestones||Results||About & links' \
+          BROWSER_SMOKE_EXPECT_TEXT='Paul Browne||PBs||Achievements & milestones||Results||About & links' \
             node scripts/browser-smoke.mjs http://127.0.0.1:8080/athletes/paul-browne "$GITHUB_WORKSPACE/artifacts/paul-compact.png"
           BROWSER_SMOKE_VIEWPORT_WIDTH=390 \
           BROWSER_SMOKE_VIEWPORT_HEIGHT=844 \

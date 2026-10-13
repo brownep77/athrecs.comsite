@@ -18,6 +18,7 @@ import { NationFlag } from "@/components/flags/NationFlag";
 import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 
 export const Route = createFileRoute("/clubs/$slug")({
   loader: async ({ params }) => {
@@ -114,6 +115,13 @@ function ClubPage() {
 
       <section className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card md:p-7">
         <div className="flex flex-wrap gap-2">
+          {IS_ATHRECS_SITE && (
+            <Button asChild>
+              <Link to="/clubs/register" search={{ club: club.slug }}>
+                Register this club
+              </Link>
+            </Button>
+          )}
           {club.sports.map((s) => (
             <Badge key={s} variant="accent">
               {s}
@@ -166,6 +174,13 @@ function ClubPage() {
           </Button>
         </div>
       </section>
+
+      {IS_ATHRECS_SITE && (
+        <p className="text-sm text-muted">
+          Represent this club? Registration checks your identity and authority before club access is
+          approved. Being listed here does not mean the club has registered.
+        </p>
+      )}
 
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
         <div className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">

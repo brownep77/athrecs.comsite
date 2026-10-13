@@ -96,6 +96,10 @@ try {
   const signInDialog = page.getByRole("dialog", { name: "Sign in to ATHRECS" });
   const close = signInDialog.getByRole("button", { name: "Close sign-in" });
   const privacy = signInDialog.getByRole("link", { name: "privacy notice", exact: true });
+  // Let the password form finish its initial autofocus before testing the focus loop.
+  await page.waitForFunction(
+    () => document.activeElement instanceof HTMLInputElement && document.activeElement.type === "email",
+  );
   await close.focus();
   await page.keyboard.press("Shift+Tab");
   assert.equal(await privacy.evaluate((element) => element === document.activeElement), true);
