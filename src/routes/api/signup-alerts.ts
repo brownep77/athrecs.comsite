@@ -14,7 +14,11 @@ export const Route = createFileRoute("/api/signup-alerts")({
         if (!signupAlertsReady())
           return Response.json({ skipped: "Not configured on this deployment" }, { headers });
         const { getSql } = await import("@/lib/db");
-        return Response.json(await deliverSignupAlerts(await getSql()), { headers });
+        const sql = await getSql();
+        const { deliverSignupWelcomes } = await import("@/lib/auth/signup-welcome.server");
+        const alerts = await deliverSignupAlerts(sql);
+        const welcomes = await deliverSignupWelcomes(sql);
+        return Response.json({ ...alerts, welcomes }, { headers });
       },
     },
   },

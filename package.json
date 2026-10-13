@@ -123,7 +123,8 @@
     "verify:fixture-upload": "node scripts/verify-fixture-upload.mjs",
     "verify:athlete-messages": "node scripts/verify-athlete-messages.mjs",
     "verify:athlete-inbox": "node scripts/verify-athlete-inbox.mjs",
-    "verify:signup-alerts": "node scripts/verify-signup-alerts.mjs"
+    "verify:signup-alerts": "node scripts/verify-signup-alerts.mjs",
+    "verify:signup-welcome": "node scripts/verify-signup-welcome.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",

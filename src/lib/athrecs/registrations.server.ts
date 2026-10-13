@@ -33,6 +33,8 @@ export type RegisteredAthlete = {
   needsInfo: number;
   rejected: number;
   withdrawn: number;
+  welcomeStatus?: string;
+  resultsConfirmed?: boolean;
 };
 
 export async function loadRegistrations(
@@ -116,6 +118,12 @@ export async function loadRegistrations(
       u."id" as "userId", i.number::text as "athleteNumber",
       coalesce(nullif(p.full_name,''),nullif(u."name",''),'Name not supplied') as name,
       u."email" as email, u."emailVerified" as "emailVerified",
+      (select case when w.sent_at is not null then 'Welcome sent'
+        when w.skipped_reason='invitation_welcome_sent' then 'Welcomed by invitation'
+        when w.needs_review or w.skipped_reason='email_changed' then 'Welcome needs review'
+        when not u."emailVerified" then 'Welcome awaiting email verification'
+        else 'Welcome queued' end from signup_welcome_deliveries w where w.user_id=u.id) as "welcomeStatus",
+      exists(select 1 from athlete_profile_result_confirmations c where c.user_id=u.id) as "resultsConfirmed",
       u."createdAt"::text as "signedUpAt", p.updated_at::text as "profileSavedAt",
       p.club_or_team as club, concat_ws(', ',p.city,p.region,p.country) as location,
       coalesce(activity.sign_in_count,0)::int as "signInCount",
@@ -146,6 +154,27 @@ export async function loadRegistrations(
       [...parameters, pageSize, (page - 1) * pageSize],
     );
     const stats = await loadRegistrationStats(tx, filters.month);
-    return { accounts, total, page, pageSize, summary, stats };
+    const funnel = await loadSignupFunnel(tx);
+    return { accounts, total, page, pageSize, summary, stats, funnel };
   });
+}
+
+export async function loadSignupFunnel(sql: Sql) {
+  const [funnel] = await sql<{
+    signedUp: number;
+    verified: number;
+    welcomed: number;
+    claimed: number;
+    confirmed: number;
+    submitted: number;
+  }>`
+    select count(*)::int as "signedUp",
+      count(*) filter(where u."emailVerified")::int as verified,
+      count(*) filter(where w.sent_at is not null or w.skipped_reason='invitation_welcome_sent')::int as welcomed,
+      count(*) filter(where exists(select 1 from athlete_account_links l where l.user_id=u.id and l.status='active'))::int as claimed,
+      count(*) filter(where exists(select 1 from athlete_profile_result_confirmations c where c.user_id=u.id))::int as confirmed,
+      count(*) filter(where exists(select 1 from athlete_result_proposals p where p.submitted_by=u.id)
+        or exists(select 1 from athlete_profile_result_confirmations c where c.user_id=u.id and c.added_count>0))::int as submitted
+    from signup_welcome_deliveries w join "user" u on u.id=w.user_id`;
+  return funnel;
 }

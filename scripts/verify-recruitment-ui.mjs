@@ -15,7 +15,6 @@ process.env.BETTER_AUTH_SECRET = "recruitment-test-only-secret-at-least-32-chara
 const origin = "http://127.0.0.1:18228";
 const signupOnly = process.argv.includes("--signup-only");
 const source = process.argv.includes("--linkedin") ? "linkedin" : "instagram";
-const platform = source === "linkedin" ? "LinkedIn" : "Instagram";
 process.env.BETTER_AUTH_URL = origin;
 const sent = [];
 const realFetch = globalThis.fetch;
@@ -49,11 +48,8 @@ try {
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(`${origin}/join?from=${source}`, { waitUntil: "networkidle", timeout: 60000 });
   await page.getByRole("button", { name: "No thanks", exact: true }).click();
-  await page.getByRole("heading", { name: `Follow along on ${platform}`, exact: true }).waitFor();
-  await page
-    .getByRole("button", { name: "Skip for now and create my profile", exact: true })
-    .click();
-  await page.getByRole("button", { name: "Create my profile with email", exact: true }).click();
+  assert.equal(await page.getByText("Follow along", { exact: false }).count(), 0);
+  await page.getByRole("button", { name: "Create my account with email", exact: true }).click();
   const dialog = page.getByRole("dialog");
   await dialog.getByLabel("Email address", { exact: true }).fill("onboarding-runner@example.test");
   await dialog.getByRole("button", { name: "Continue with email", exact: true }).click();
@@ -70,7 +66,12 @@ try {
   assert.equal(await save.isDisabled(), true, "Privacy acknowledgement is explicit");
   await page.getByRole("checkbox").check();
   await save.click();
-  await page.getByRole("heading", { name: "Your profile is ready", exact: true }).waitFor();
+  await page
+    .getByRole("heading", {
+      name: "Your account is ready. Finish claiming your athlete profile.",
+      exact: true,
+    })
+    .waitFor();
   const rows =
     await sql`select u.id, u."emailVerified", p.full_name from "user" u join athlete_private_profiles p on p.user_id=u.id where u.email='onboarding-runner@example.test'`;
   assert.equal(rows.length, 1);
@@ -94,7 +95,12 @@ try {
   await sql`insert into results (id,edition_id,athlete_id,finish_time_seconds,result_visibility)
     values (991601,991601,991601,2400,'private')`;
   await page.reload({ waitUntil: "networkidle" });
-  await page.getByRole("heading", { name: "Your profile is ready", exact: true }).waitFor();
+  await page
+    .getByRole("heading", {
+      name: "Your account is ready. Finish claiming your athlete profile.",
+      exact: true,
+    })
+    .waitFor();
   assert.equal(
     await page.getByLabel("Your name", { exact: true }).count(),
     0,
@@ -104,11 +110,11 @@ try {
   await page.screenshot({ path: "artifacts/recruitment-mobile.png", fullPage: true });
   for (const width of [390, 1280]) {
     await page.setViewportSize({ width, height: 900 });
-    const resultsLink = page.getByRole("link", { name: "Find and add my results" });
+    const resultsLink = page.getByRole("link", { name: "Claim my athlete profile" });
     assert.equal(await resultsLink.getAttribute("href"), "/athlete-account?section=potential");
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
   }
-  await page.getByRole("link", { name: "Find and add my results" }).click();
+  await page.getByRole("link", { name: "Claim my athlete profile" }).click();
   await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("section"), "potential");
   const match = page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" });
@@ -138,6 +144,15 @@ try {
     await match.count(),
     0,
     "Completed ownership removes the athlete from potential matches",
+  );
+  await page
+    .getByRole("heading", { name: "Your results are part of your story", exact: true })
+    .waitFor();
+  assert.equal(
+    await page
+      .getByRole("link", { name: "Add a missing result", exact: true })
+      .getAttribute("href"),
+    "/athlete-results",
   );
   await page.goto(`${origin}/claim-results?resultId=991601`, { waitUntil: "networkidle" });
   await page.getByText(/Previous review saved/).waitFor();
@@ -241,7 +256,7 @@ try {
   }
   assert.deepEqual(errors, []);
   console.log(
-    `Recruitment journey passed (${source}): optional follow, real email code, verified private profile save, unchanged marketing consent, return visit and results destination.${signupOnly ? "" : " Public athlete layout also checked."}`,
+    `Recruitment journey passed (${source}): direct signup, real email code, verified private profile save, unchanged marketing consent, return visit, profile claim, results confirmation and missing-result next step.${signupOnly ? "" : " Public athlete layout also checked."}`,
   );
 } catch (error) {
   await mkdir("artifacts", { recursive: true });

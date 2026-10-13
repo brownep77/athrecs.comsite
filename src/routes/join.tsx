@@ -1,11 +1,11 @@
+import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
 import { useState, type FormEvent } from "react";
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ArrowRight,
   Check,
   CheckCircle2,
-  Heart,
   Loader2,
   LockKeyhole,
   Mail,
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/join")({
     meta: siteGraphMeta({
       title: "Join ATHRECS | Every athlete has a story",
       description:
-        "Follow ATHRECS, create your athlete profile and bring your sports, results and achievements together. Your profile starts private.",
+        "Create your account, claim your athlete profile and preserve your results and achievements. You choose what to share.",
       url: `${SITE_URL}/join`,
     }),
     links: [{ rel: "canonical", href: `${SITE_URL}/join` }],
@@ -56,8 +56,7 @@ export const Route = createFileRoute("/join")({
 });
 
 function JoinPage() {
-  const { from, step } = Route.useSearch();
-  const navigate = useNavigate();
+  const { from } = Route.useSearch();
   const { user, isPending } = useCurrentUserState();
   const account = useQuery({
     queryKey: ["my-athlete-account", user?.id],
@@ -66,12 +65,8 @@ function JoinPage() {
     retry: false,
   });
   const ready = Boolean(account.data?.exists);
-  const stage = ready ? 3 : user || step === "profile" ? 2 : 1;
+  const stage = account.data?.claimedProfiles.length ? 3 : user ? 2 : 1;
   const callbackURL = `/join?step=profile${from ? `&from=${from}` : ""}`;
-
-  function continueToAccount() {
-    void navigate({ to: "/join", search: { from, step: "profile" }, resetScroll: false });
-  }
 
   return (
     <div className="mx-auto max-w-5xl space-y-6 py-2 sm:py-5">
@@ -85,22 +80,24 @@ function JoinPage() {
           <span className="text-accent">Start yours here.</span>
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-6 text-muted sm:text-base">
-          Your first 5K, your fastest marathon, your next sport. Bring your results, PBs
-          and achievements together in one athlete profile.
+          Your first 5K, your fastest marathon, your next sport. Bring your results, PBs and
+          achievements together in one athlete profile.
         </p>
         <ol aria-label="Your next steps" className="mt-6 grid gap-2 sm:grid-cols-3">
-          {["Follow ATHRECS", "Create your profile", "Make it yours"].map((label, index) => (
-            <li
-              key={label}
-              aria-current={stage === index + 1 ? "step" : undefined}
-              className={`flex items-center gap-3 rounded-xl border p-3 text-sm font-semibold ${stage === index + 1 ? "border-accent/40 bg-accent-soft" : "border-border bg-surface"}`}
-            >
-              <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs text-primary-fg">
-                {index + 1}
-              </span>
-              {label}
-            </li>
-          ))}
+          {["Create your account", "Claim your profile", "Confirm your results"].map(
+            (label, index) => (
+              <li
+                key={label}
+                aria-current={stage === index + 1 ? "step" : undefined}
+                className={`flex items-center gap-3 rounded-xl border p-3 text-sm font-semibold ${stage === index + 1 ? "border-accent/40 bg-accent-soft" : "border-border bg-surface"}`}
+              >
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-xs text-primary-fg">
+                  {index + 1}
+                </span>
+                {label}
+              </li>
+            ),
+          )}
         </ol>
       </section>
 
@@ -121,8 +118,8 @@ function JoinPage() {
                 Try again
               </Button>
             </div>
-          ) : ready ? (
-            <ProfileReady />
+          ) : ready && account.data?.emailVerified ? (
+            <ProfileReady account={account.data} />
           ) : user && account.data ? (
             account.data.emailVerified ? (
               <QuickProfileForm key={user.id} account={account.data} />
@@ -142,31 +139,6 @@ function JoinPage() {
                 </Button>
               </div>
             )
-          ) : stage === 1 ? (
-            <div>
-              <Heart className="size-7 text-accent" aria-hidden="true" />
-              <h2 className="mt-3 font-display text-2xl font-semibold">
-                Follow along{from ? ` on ${platforms[from]}` : ""}
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-muted">
-                Follow the ATHRECS account on the post or social profile that brought you here for
-                athlete stories, achievements and updates. Then come back to create your own
-                profile.
-              </p>
-              <Button className="mt-5 w-full sm:w-auto" onClick={continueToAccount}>
-                I’m following — continue <ArrowRight className="size-4" aria-hidden="true" />
-              </Button>
-              <button
-                type="button"
-                onClick={continueToAccount}
-                className="mt-3 block min-h-11 text-sm font-medium text-muted underline underline-offset-4"
-              >
-                Skip for now and create my profile
-              </button>
-              <p className="mt-2 text-xs text-subtle">
-                Already following? Continue above. Following is optional.
-              </p>
-            </div>
           ) : (
             <div>
               <Mail className="size-7 text-accent" aria-hidden="true" />
@@ -183,7 +155,7 @@ function JoinPage() {
                   openAthleteAuth({ mode: "code", callbackURL, errorCallbackURL: callbackURL })
                 }
               >
-                Create my profile with email <ArrowRight className="size-4" aria-hidden="true" />
+                Create my account with email <ArrowRight className="size-4" aria-hidden="true" />
               </Button>
               <button
                 type="button"
@@ -361,19 +333,30 @@ function QuickProfileForm({ account }: { account: AthleteAccountData }) {
   );
 }
 
-function ProfileReady() {
+function ProfileReady({ account }: { account: AthleteAccountData }) {
+  const queryClient = useQueryClient();
+  if (!account.claimedProfiles.length)
+    return (
+      <ProfileClaimGuide
+        account={account}
+        showSteps={false}
+        onNameSaved={() => {
+          void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
+        }}
+      />
+    );
   return (
     <div>
       <CheckCircle2 className="size-8 text-accent" aria-hidden="true" />
-      <h2 className="mt-3 font-display text-2xl font-semibold">Your profile is ready</h2>
+      <h2 className="mt-3 font-display text-2xl font-semibold">Your profile is linked</h2>
       <p className="mt-3 text-sm leading-6 text-muted">
-        Start with your results, then add the details that make this profile yours. You control your
-        sharing settings.
+        Review your results, add anything missing and keep your achievements together. You choose
+        what to share.
       </p>
       <div className="mt-5 flex flex-wrap gap-3">
         <Button asChild>
-          <Link to="/athlete-account" search={{ section: "potential" }}>
-            Find and add my results <ArrowRight className="size-4" aria-hidden="true" />
+          <Link to="/athlete-account" search={{ section: "races" }}>
+            Review my results <ArrowRight className="size-4" aria-hidden="true" />
           </Link>
         </Button>
         <Button asChild variant="secondary">
