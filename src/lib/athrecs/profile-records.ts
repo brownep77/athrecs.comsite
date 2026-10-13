@@ -101,19 +101,34 @@ export function combineProfileResults<T extends ProfileResult>(
   results: T[],
 ): Array<T & { sourceResultIds: number[]; conflicting: boolean }> {
   const groups = new Map<string, T>();
-  const editionKeys = new Map<number, Set<string>>();
-  const classificationPlaces = new Map<number, { gender: Set<number>; category: Set<number> }>();
+  const editionKeys = new Map<string, Set<string>>();
+  const classificationPlaces = new Map<string, { gender: Set<number>; category: Set<number> }>();
+  // Source-history claims have no canonical edition ID (the view returns 0).
+  // Group those by recorded race details, never by that shared placeholder.
+  const editionKey = (result: T) =>
+    result.editionId > 0
+      ? `edition:${result.editionId}`
+      : JSON.stringify([
+          "source",
+          result.eventSlug || result.eventName || `result:${result.resultId}`,
+          result.eventDate || `result:${result.resultId}`,
+          result.sport,
+          result.distanceCode,
+          result.distanceKm,
+          result.surface,
+        ]);
   for (const result of results) {
     if (result.details?.profileExcluded) continue;
-    const placings = classificationPlaces.get(result.editionId) ?? {
+    const edition = editionKey(result);
+    const placings = classificationPlaces.get(edition) ?? {
       gender: new Set<number>(),
       category: new Set<number>(),
     };
     if (result.genderPlace != null) placings.gender.add(result.genderPlace);
     if (result.categoryPlace != null) placings.category.add(result.categoryPlace);
-    classificationPlaces.set(result.editionId, placings);
+    classificationPlaces.set(edition, placings);
     const key = JSON.stringify([
-      result.editionId,
+      edition,
       result.status,
       result.finishTimeSeconds,
       result.chipTimeSeconds,
@@ -122,9 +137,9 @@ export function combineProfileResults<T extends ProfileResult>(
       result.category,
       result.details?.disqualification ?? null,
     ]);
-    const keys = editionKeys.get(result.editionId) ?? new Set<string>();
+    const keys = editionKeys.get(edition) ?? new Set<string>();
     keys.add(key);
-    editionKeys.set(result.editionId, keys);
+    editionKeys.set(edition, keys);
     const existing = groups.get(key);
     if (existing) {
       // Missing classifications are not disagreements; retain the supplied placing.
@@ -154,9 +169,9 @@ export function combineProfileResults<T extends ProfileResult>(
     ...result,
     sourceResultIds: result.sourceResultIds ?? [result.resultId],
     conflicting:
-      (editionKeys.get(result.editionId)?.size ?? 0) > 1 ||
-      (classificationPlaces.get(result.editionId)?.gender.size ?? 0) > 1 ||
-      (classificationPlaces.get(result.editionId)?.category.size ?? 0) > 1,
+      (editionKeys.get(editionKey(result))?.size ?? 0) > 1 ||
+      (classificationPlaces.get(editionKey(result))?.gender.size ?? 0) > 1 ||
+      (classificationPlaces.get(editionKey(result))?.category.size ?? 0) > 1,
   }));
 }
 

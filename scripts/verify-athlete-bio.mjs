@@ -141,7 +141,7 @@ assert.match(emptyBio, /update automatically as results are uploaded and linked/
 // Biography facts use the same canonical/source-history rows and exclusions as the profile.
 const profileRow = {
   resultId: -11,
-  editionId: -11,
+  editionId: 0,
   eventName: "Synthetic Source 10K",
   eventSlug: "synthetic-source",
   eventDate: "2026-01-01",
@@ -162,6 +162,30 @@ const profileRow = {
 assert.equal(visibleBioResults([profileRow, { ...profileRow, resultId: 12 }], []).length, 1);
 assert.equal(visibleBioResults([profileRow, { ...profileRow, resultId: 12 }], [-11]).length, 0);
 assert.equal(visibleBioResults([profileRow], [-11]).length, 0);
+const earlierSourceRow = {
+  ...profileRow,
+  resultId: -12,
+  eventDate: "2025-01-01",
+  finishTimeSeconds: 2600,
+};
+assert.equal(
+  visibleBioResults([profileRow, earlierSourceRow], []).length,
+  2,
+  "Different source editions must not conflict just because their canonical edition ID is 0",
+);
+assert.deepEqual(
+  visibleBioResults([profileRow, earlierSourceRow], [-12]).map((row) => row.resultId),
+  [-11],
+  "Hiding one source race must preserve the other race in the automatic biography",
+);
+assert.equal(
+  visibleBioResults([
+    { ...profileRow, eventSlug: "" },
+    { ...profileRow, resultId: -13, eventSlug: "", eventName: "Another Synthetic 10K" },
+  ], []).length,
+  2,
+  "Identical times at different source races are distinct results",
+);
 assert.equal(
   visibleBioResults([{ ...profileRow, details: { profileExcluded: true } }], []).length,
   0,
