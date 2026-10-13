@@ -2,9 +2,6 @@ import { useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Search } from "lucide-react";
 import { RunningLanding, runningGuidesJsonLd } from "@/components/running/RunningLanding";
-import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard";
-import { getFeaturedAthletes } from "@/lib/athrecs/athlete-directory-api";
-import type { AthleteDirectory } from "@/lib/athrecs/athlete-directory";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
 
 export const Route = createFileRoute("/")({
@@ -20,13 +17,10 @@ export const Route = createFileRoute("/")({
       { type: "application/ld+json", children: JSON.stringify(runningGuidesJsonLd(SITE_URL)) },
     ],
   }),
-  loader: () => getFeaturedAthletes(),
   component: AthleteHomePage,
 });
 
 function AthleteHomePage() {
-  // Vite replaces the base homepage; the generated route tree retains its loader type.
-  const directory = Route.useLoaderData() as unknown as Pick<AthleteDirectory, "athletes">;
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   function search(event: FormEvent<HTMLFormElement>) {
@@ -87,17 +81,6 @@ function AthleteHomePage() {
             </Link>
           ))}
         </div>
-        {directory.athletes.length ? (
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {directory.athletes.map((athlete) => (
-              <AthleteDirectoryCard key={athlete.id} athlete={athlete} />
-            ))}
-          </div>
-        ) : (
-          <p className="rounded-xl border border-border p-5 text-sm text-muted">
-            Public athlete profiles will appear here as they are added.
-          </p>
-        )}
         <Link
           to="/athletes"
           className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-accent no-underline"
