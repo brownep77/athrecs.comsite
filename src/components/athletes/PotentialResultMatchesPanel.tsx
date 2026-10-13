@@ -228,7 +228,8 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
   const external = useQuery({
     queryKey: ["my-external-runner-matches", user?.id],
     queryFn: () => findExternalRunnerMatches(),
-    enabled: Boolean(user) && searchPublic,
+    // External processing runs only after an explicit button press.
+    enabled: false,
     retry: false,
     staleTime: 5 * 60_000,
   });
@@ -524,7 +525,10 @@ function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilte
               type="button"
               variant="secondary"
               disabled={external.isFetching}
-              onClick={() => (searchPublic ? void external.refetch() : setSearchPublic(true))}
+              onClick={() => {
+                setSearchPublic(true);
+                void external.refetch();
+              }}
             >
               {external.isFetching ? (
                 <Loader2 className="size-4 animate-spin" aria-hidden="true" />

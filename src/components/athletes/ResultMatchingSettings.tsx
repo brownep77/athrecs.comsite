@@ -47,6 +47,18 @@ function MatchingSettingsForm({ initial }: { initial: MatchingSettings }) {
       }),
     onSuccess: async () => {
       setSaved(true);
+      client.setQueriesData(
+        { queryKey: ["my-external-runner-matches"] },
+        {
+          available: false,
+          consentRequired: false,
+          cached: false,
+          searchedNames: [],
+          matches: [],
+          message:
+            "Matching options changed. Choose Search saved links and public results to run a new search.",
+        },
+      );
       await Promise.all(
         [
           "my-matching-settings",

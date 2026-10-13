@@ -21,6 +21,11 @@ assert.match(api, /Never invent/);
 assert.doesNotMatch(api, /postcode|verifiedEmail|equipmentBrands/);
 assert.match(panel, /Search saved links and public results/);
 assert.match(panel, /findExternalRunnerMatches/);
+assert.match(
+  panel,
+  /queryFn: \(\) => findExternalRunnerMatches\(\),[\s\S]{0,160}enabled: false/,
+  "External searches must never restart on focus, reconnect or cache invalidation",
+);
 assert.match(panel, /suggestions, not confirmed ownership/i);
 assert.match(account, /Previous or known-as names/);
 assert.match(account, /parkrun barcode/);
