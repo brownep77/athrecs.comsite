@@ -1,5 +1,6 @@
 import type { Sql } from "../db";
 import { withDiscoveryRead } from "./discovery-read.server";
+import { sourceHistorySportNames } from "./source-history-sport";
 
 export type StaffDirectoryFilters = {
   q: string;
@@ -56,6 +57,11 @@ function directoryCtes(filters: StaffDirectoryFilters) {
       join athlete_identifiers i on i.athlete_id=r.athlete_id
       left join linked l on l.athlete_id=r.athlete_id where e.sport=$2
       union
+      select coalesce(l.number,i.number) from athlete_source_histories h
+      join athlete_identifiers i on i.athlete_id=h.athlete_id
+      left join linked l on l.athlete_id=h.athlete_id
+      where athlete_history_sports_v2(h.provider,h.performances) @> array[$2]::text[]
+      union
       select coalesce(l.number,i.number) from athlete_upcoming_events e
       join athlete_identifiers i on i.athlete_id=e.athlete_id
       left join linked l on l.athlete_id=e.athlete_id where e.sport=$2
@@ -106,6 +112,9 @@ export async function loadStaffDirectoryPage(sql: Sql, filters: StaffDirectoryFi
           or user_id in (select user_id from athlete_private_profiles)
         union all select sport_code from athlete_sport_profiles
           where user_id in (select user_id from athlete_private_profiles)
+        union all select sport from (values ${sourceHistorySportNames.map((sport) => `('${sport}')`).join(",")}) candidate(sport)
+          where exists (select 1 from athlete_source_histories h
+            where athlete_history_sports_v2(h.provider,h.performances) @> array[candidate.sport]::text[])
       ) sports where sport<>'' order by sport`);
     return { ...row, sports: sports.map((row) => row.sport) };
   });

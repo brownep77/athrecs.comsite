@@ -166,7 +166,7 @@ export function buildProfileTimeline(
       } else {
         history.push({
           key: `${source.provider}:${source.externalId}:${index}`,
-          sport: sourceHistorySports([{ ...source, performances: [row] }])[0] ?? "Athletics",
+          sport: sourceHistorySports([{ ...source, performances: [row] }])[0] ?? "Unclassified",
           performance: row,
         });
       }
