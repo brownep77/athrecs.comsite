@@ -44,6 +44,29 @@ const profile = {
   },
 };
 const narrative = publicAthleteNarrative(profile).join(" ");
+const initials = {
+  ...profile,
+  displayName: "A.J. Example",
+  biography: ["A.J. Example is a runner with running results recorded on ATHRECS."],
+  careerSummary: null,
+};
+assert.match(publicAthleteSearchContent(initials).description, /^A\.J\. Example — Running results/);
+const nonFinishProfile = {
+  ...initials,
+  entries: [
+    {
+      kind: "recorded",
+      result: { ...result, status: "DNF", details: { verificationStatus: "unverified" } },
+    },
+  ],
+};
+const nonFinishBio = publicAthleteNarrative(nonFinishProfile).join(" ");
+assert.match(
+  nonFinishBio,
+  /Public recorded entries include Example Road 10K \(2025; DNF; unverified record\)/,
+);
+assert(!nonFinishBio.includes("1st"));
+assert.deepEqual(publicAthleteNarrative({ ...nonFinishProfile, biography: [] }), []);
 assert(narrative.startsWith(profile.biography[0]), "Preserve the athlete's biography");
 assert.match(narrative, /nationality is New Zealand/);
 assert.match(narrative, /Earlier Marathon \(2006; unverified record\)/);
