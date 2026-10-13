@@ -3,6 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, Search } from "lucide-react";
 import { RunningLanding, runningGuidesJsonLd } from "@/components/running/RunningLanding";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { countryCardStyle, neutralPastelCardStyle } from "@/lib/running/country-card-palette";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -67,15 +68,16 @@ function AthleteHomePage() {
         <div className="flex flex-wrap items-center gap-2 text-xs">
           <span className="mr-1 text-muted">Explore:</span>
           {[
-            { label: "All athletes", country: undefined },
-            { label: "United Kingdom", country: "United Kingdom" },
-            { label: "Ireland", country: "Ireland" },
-          ].map(({ label, country }) => (
+            { label: "All athletes", country: undefined, palette: undefined },
+            { label: "United Kingdom", country: "United Kingdom", palette: "uk" as const },
+            { label: "Ireland", country: "Ireland", palette: "ireland" as const },
+          ].map(({ label, country, palette }) => (
             <Link
               key={label}
               to="/athletes"
               search={{ country }}
-              className="rounded-full border border-border px-3 py-1.5 font-medium text-fg no-underline hover:border-accent hover:text-accent"
+              className="rounded-full border px-3 py-1.5 font-medium no-underline transition-shadow hover:shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600"
+              style={palette ? countryCardStyle(palette) : neutralPastelCardStyle}
             >
               {label}
             </Link>
@@ -90,7 +92,8 @@ function AthleteHomePage() {
       </section>
       <section
         id="how-it-works"
-        className="scroll-mt-24 rounded-2xl border border-border bg-elevated/40 p-5 sm:p-6"
+        className="scroll-mt-24 rounded-2xl border p-5 text-slate-900 sm:p-6"
+        style={{ ...neutralPastelCardStyle, color: "#0f172a" }}
       >
         <h2 className="font-display text-2xl font-semibold">Your records, brought together</h2>
         <div className="mt-5 grid gap-5 md:grid-cols-3">
@@ -113,7 +116,7 @@ function AthleteHomePage() {
                 0{index + 1}
               </span>
               <h3 className="mt-3 text-sm font-semibold">{step.title}</h3>
-              <p className="mt-2 text-xs leading-5 text-muted">{step.text}</p>
+              <p className="mt-2 text-xs leading-5 text-slate-700">{step.text}</p>
             </div>
           ))}
         </div>
