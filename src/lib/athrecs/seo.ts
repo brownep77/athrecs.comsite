@@ -112,6 +112,7 @@ export function sportsEventJsonLd(
     slug: string;
     description?: string;
     city?: string | null;
+    region?: string | null;
     country?: string | null;
     startDate?: string | null;
     startTime?: string | null;
@@ -194,6 +195,7 @@ export function sportsEventJsonLd(
       address: {
         "@type": "PostalAddress",
         addressLocality: input.city || undefined,
+        addressRegion: input.region || undefined,
         addressCountry: input.country || undefined,
       },
     },

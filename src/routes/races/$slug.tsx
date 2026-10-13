@@ -54,12 +54,14 @@ import { raceFormatGuideFor } from "@/data/race-format-guides";
 import { raceQualifications, type RaceQualification } from "@/data/race-qualifications";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { SITE_NAME, SITE_URL, siteGraphMeta, sportsEventJsonLd } from "@/lib/athrecs/seo";
+import { breadcrumbJsonLd } from "@/lib/athrecs/breadcrumbs";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { PUBLIC_EDITION_PREVIEW_LIMIT } from "@/lib/athrecs/public-read-limits";
 import { RacePracticalInformation } from "@/components/races/RacePracticalInformation";
 import { RaceEntryOptions } from "@/components/races/RaceEntryOptions";
 import { compactFixtureLocation } from "@/lib/athrecs/fixture-presentation";
 import { editionEntry } from "@/lib/athrecs/race-information";
+import { raceSearchContent } from "@/lib/athrecs/race-search-content";
 
 type EditionRow = {
   id: number;
@@ -124,6 +126,7 @@ export const Route = createFileRoute("/races/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) return {};
     const { event, upcoming, archiveResults } = loaderData;
+    const searchContent = raceSearchContent(loaderData);
     const canonical = `${SITE_URL}/races/${event.slug}`;
     const archiveLabel = archiveResults
       ? `${archiveResults.edition.event_date} · ${archiveResults.edition.distance_code} · ${archiveResults.results
@@ -133,16 +136,18 @@ export const Route = createFileRoute("/races/$slug")({
       : null;
     const title = archiveLabel
       ? `${event.name} results — ${archiveLabel} | ${SITE_NAME}`
-      : event.city
-        ? `${event.name} — ${event.city} | ${SITE_NAME}`
-        : `${event.name} | ${SITE_NAME}`;
+      : IS_RUNRECS_SITE
+        ? `${event.name}${event.city ? ` — ${event.city}` : ""} | ${SITE_NAME}`
+        : searchContent.title;
     const description = archiveResults
       ? `Recorded ${archiveResults.edition.distance_code} performances at ${event.name}, ${archiveResults.edition.event_date}, ${[event.city, event.country].filter(Boolean).join(", ")}. ${archiveResults.results
           .slice(0, 3)
           .map((result) => result.athlete_name)
           .join(", ")}. View recorded results and original provider links.`
-      : event.summary ||
-        `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`;
+      : IS_RUNRECS_SITE
+        ? event.summary ||
+          `${SITE_NAME} event page for ${event.name}: date, local start, venue, distances and past races. Confirm entry on the official site.`
+        : searchContent.description;
     const next = upcoming.find((edition) => edition.status !== "Cancelled");
 
     return {
@@ -160,8 +165,9 @@ export const Route = createFileRoute("/races/$slug")({
             sportsEventJsonLd({
               name: event.name,
               slug: event.slug,
-              description,
+              description: IS_RUNRECS_SITE ? description : searchContent.biography.join(" "),
               city: event.city,
+              region: event.county,
               country: event.country,
               startDate: next?.event_date,
               startTime: next?.start_time,
@@ -170,8 +176,21 @@ export const Route = createFileRoute("/races/$slug")({
               organiser: event.organiser,
               entryOptions: next?.entry_options,
             }),
-          ),
+          ).replace(/</g, "\\u003c"),
         },
+        ...(!IS_RUNRECS_SITE
+          ? [
+              {
+                type: "application/ld+json",
+                children: JSON.stringify(
+                  breadcrumbJsonLd([
+                    { name: "Events", path: "/races" },
+                    { name: event.name, path: `/races/${encodeURIComponent(event.slug)}` },
+                  ]),
+                ).replace(/</g, "\\u003c"),
+              },
+            ]
+          : []),
       ],
     };
   },
@@ -237,6 +256,7 @@ export function RacePageContent({
   athleteLinks?: Awaited<ReturnType<typeof getEventAthleteLinks>>;
 }) {
   const { event, groups, distances, upcoming, past, related } = data;
+  const raceBiography = raceSearchContent(data).biography;
   const isRunningEvent = event.sport === "Running" || event.sport === "Parkrun";
   const qualification = raceQualifications[event.slug];
   const shownDistances = sanitizeDistances(
@@ -439,6 +459,18 @@ export function RacePageContent({
           </div>
         </div>
       </header>
+
+      {!IS_RUNRECS_SITE ? (
+        <section
+          aria-labelledby="race-biography-heading"
+          className="space-y-3 rounded-xl border border-border bg-surface p-5"
+        >
+          <h2 id="race-biography-heading" className="font-display text-xl font-semibold">
+            About {event.name}
+          </h2>
+          <p className="text-sm leading-relaxed text-muted">{raceBiography.join(" ")}</p>
+        </section>
+      ) : null}
 
       {archiveResults ? (
         <section

@@ -3,6 +3,9 @@ import type { SourceHistory } from "./source-performance-history";
 import { sourceHistorySports, isCompletedHistoryResult } from "./profile-history-results.ts";
 import { isDisqualified } from "./result-details.ts";
 import { countryFlag } from "./country-flags.ts";
+import { hasHistoryFinish } from "./profile-result-presentation.ts";
+import { timingBasis } from "./profile-records.ts";
+import { hasTimedMark, timingLabel } from "./performance-timing.ts";
 
 const accepted = new Set(["source_verified", "verified_by_administrator"]);
 const naturalList = (values: string[]) =>
@@ -95,13 +98,15 @@ export function athleteSearchContent(
         discipline: disciplineName(r.distanceCode),
         event: r.eventName,
         mark: spokenTime(r.finishTimeSeconds!),
-        spoken: true,
+        timing:
+          timingBasis(r) === "Unknown" ? "timing unknown" : `${timingBasis(r).toLowerCase()} time`,
       })),
     ...sourceHistories.flatMap((h) =>
       h.performances
         .filter(
           (r) =>
             isCompletedHistoryResult(r, today) &&
+            hasHistoryFinish(r) &&
             dated(r.date) &&
             r.meeting.trim() &&
             r.performance.trim(),
@@ -111,7 +116,9 @@ export function athleteSearchContent(
           discipline: disciplineName(r.discipline),
           event: r.meeting,
           mark: r.performance,
-          spoken: false,
+          timing: hasTimedMark(r.performance, r.discipline)
+            ? timingLabel(r.timing?.basis ?? "unknown").toLowerCase()
+            : "",
         })),
     ),
   ].sort((a, b) => b.date.localeCompare(a.date) || a.event.localeCompare(b.event));
@@ -127,7 +134,7 @@ export function athleteSearchContent(
       timeZone: "UTC",
     }).format(new Date(`${latest.date}T00:00:00Z`));
     sentences.push(
-      `A recorded ${latest.discipline} performance is ${latest.mark} at ${latest.event} on ${date}.`,
+      `A recorded ${latest.discipline} performance is ${latest.mark}${latest.timing ? ` (${latest.timing})` : ""} at ${latest.event} on ${date}.`,
     );
   }
   const bio = sentences.join(" ");
