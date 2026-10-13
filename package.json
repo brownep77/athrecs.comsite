@@ -126,7 +126,8 @@
     "verify:signup-alerts": "node scripts/verify-signup-alerts.mjs",
     "verify:signup-welcome": "node scripts/verify-signup-welcome.mjs",
     "verify:search-adversarial": "node --experimental-strip-types scripts/verify-search-adversarial.mjs",
-    "verify:intelligent-result-matching": "node --experimental-strip-types scripts/verify-intelligent-result-matching.mjs"
+    "verify:intelligent-result-matching": "node --experimental-strip-types scripts/verify-intelligent-result-matching.mjs",
+    "verify:test-account": "node scripts/verify-test-account.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",

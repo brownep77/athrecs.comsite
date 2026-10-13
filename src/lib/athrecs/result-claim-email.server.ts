@@ -92,6 +92,7 @@ export async function notifyResultClaimSubmitted(
       ? [
           deliver("claim-submitted-athlete", {
             to: context.claimantEmail,
+            testOnly: context.claimantEmail.toLowerCase() === "paul@athrecs.com",
             subject: selfConfirmed
               ? "Your ATHRECS profile claim is complete"
               : "ATHRECS received your result claim",
@@ -106,7 +107,10 @@ export async function notifyResultClaimSubmitted(
           }),
         ]
       : []),
-    ...(notifyStaff && !selfConfirmed ? staffRecipients() : []).map((to) =>
+    ...(notifyStaff && !selfConfirmed && context.claimantEmail.toLowerCase() !== "paul@athrecs.com"
+      ? staffRecipients()
+      : []
+    ).map((to) =>
       deliver("claim-submitted-staff", {
         to,
         subject: `New ATHRECS result claim #${context.claimId}`,
@@ -159,6 +163,7 @@ export async function notifyResultClaimReviewed(context: ClaimReviewEmailContext
   const selected = copy[context.status];
   await deliver(`claim-${context.status}-athlete`, {
     to: context.claimantEmail,
+    testOnly: context.claimantEmail.toLowerCase() === "paul@athrecs.com",
     subject: selected.subject,
     heading: selected.heading,
     message: selected.message,
@@ -171,6 +176,7 @@ export async function notifyResultClaimWithdrawn(context: ClaimEmailContext): Pr
   if (!authEmailConfigured()) return;
   await deliver("claim-withdrawn-athlete", {
     to: context.claimantEmail,
+    testOnly: context.claimantEmail.toLowerCase() === "paul@athrecs.com",
     subject: "Your ATHRECS result claim was withdrawn",
     heading: "Result claim withdrawn",
     message: `Your claim for ${claimSummary(context)} has been withdrawn. You can submit it again later from the athlete profile.`,
@@ -194,6 +200,7 @@ export async function notifyProfileResultsConfirmed(context: {
   await sendAthrecsAuthEmail(
     {
       to: context.claimantEmail,
+      testOnly: context.claimantEmail.toLowerCase() === "paul@athrecs.com",
       subject: "Your ATHRECS profile and results confirmation",
       heading:
         context.status === "approved"

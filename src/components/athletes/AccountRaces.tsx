@@ -49,6 +49,17 @@ export function AccountRaces({
         </Button>
       </div>
     );
+  const synthetic = account.claimedResults.some((result) => result.details?.syntheticTest);
+  if (synthetic && view !== "races")
+    return (
+      <p className="rounded-xl border border-amber-400 bg-amber-50 p-5 text-slate-900">
+        Fictional test results do not generate PBs, medals, progress records or achievements.{" "}
+        <Link to="/test-account" className="underline">
+          Return to the test hub
+        </Link>
+        .
+      </p>
+    );
   if (view === "progress") return <ProfileProgress results={visible} />;
   if (view === "achievements")
     return visible.length ? (
@@ -61,6 +72,18 @@ export function AccountRaces({
 
   return (
     <div className="space-y-5 md:[&_td[data-label=Actions]]:sticky md:[&_td[data-label=Actions]]:right-0 md:[&_td[data-label=Actions]]:bg-surface md:[&_th:last-child]:sticky md:[&_th:last-child]:right-0 md:[&_th:last-child]:bg-elevated">
+      {synthetic ? (
+        <p
+          role="note"
+          className="rounded-xl border border-amber-400 bg-amber-50 p-4 text-slate-900"
+        >
+          FICTIONAL TEST RESULTS — private practice data. These are not sporting achievements.{" "}
+          <Link to="/test-account" className="underline">
+            Open test hub
+          </Link>
+          .
+        </p>
+      ) : null}
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface p-4">
         <div>
           <h2 className="font-display text-xl font-semibold">My races</h2>

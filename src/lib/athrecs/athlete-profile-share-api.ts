@@ -417,6 +417,13 @@ export const saveMyProfileShare = createServerFn({ method: "POST" })
   .validator((input: AthleteShareInput) => validateShareInput(input))
   .handler(async ({ data, context }) => {
     const sql = await ready();
+    const [test] = await sql<{
+      test: boolean;
+    }>`select athrecs_is_test_user(${context.userId}) as test`;
+    if (test?.test && data.enabled)
+      throw new Error(
+        "Fictional test profiles stay private. Use the test hub to review your results.",
+      );
     const current = await ensureShareRow(sql, context.userId);
     const identity = await loadIdentity(sql, context.userId);
     const slug = current.slug || buildShareSlug(displayNameOf(identity), context.userId);

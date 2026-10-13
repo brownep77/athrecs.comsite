@@ -14,6 +14,7 @@ export function resultDay(value: string): number | null {
 }
 
 export function isCompletedResult(result: AchievementResult, today = new Date()): boolean {
+  if (result.details?.syntheticTest) return false;
   if (result.history)
     return (
       !result.conflicting &&

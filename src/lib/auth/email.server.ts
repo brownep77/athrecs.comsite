@@ -1,4 +1,5 @@
 type AuthEmail = {
+  testOnly?: boolean;
   to: string;
   subject: string;
   heading: string;
@@ -45,6 +46,30 @@ export async function sendAthrecsAuthEmail(
   const apiKey = text(options.apiKey) ?? text(process.env.RESEND_API_KEY);
   if (!apiKey) {
     throw new Error("ATHRECS authentication email is not configured");
+  }
+  // Resolve a result invitation at the final transport boundary too, so an
+  // older caller cannot send a fictional invitation to a real athlete.
+  let testOnly = email.testOnly === true;
+  if (email.actionUrl) {
+    const resultId = Number(new URL(email.actionUrl).searchParams.get("resultId"));
+    if (Number.isSafeInteger(resultId) && resultId < 0) {
+      const { getSql } = await import("@/lib/db");
+      const sql = await getSql();
+      const [row] = await sql<{
+        test: boolean;
+      }>`select exists(select 1 from source_history_claim_results s join athrecs_test_athletes t on t.athlete_id=s.athlete_id where s.id=${-resultId}) as test`;
+      testOnly ||= row?.test === true;
+    }
+  }
+  if (testOnly) {
+    if (email.to.trim().toLowerCase() !== "paul@athrecs.com")
+      throw new Error("Test emails are restricted to the approved test address");
+    email = {
+      ...email,
+      subject: `[FICTIONAL TEST] ${email.subject}`,
+      heading: `FICTIONAL TEST — ${email.heading}`,
+      message: `Private test information. No real race or achievement.\n\n${email.message}`,
+    };
   }
   const from = options.from ?? authEmailFrom();
 

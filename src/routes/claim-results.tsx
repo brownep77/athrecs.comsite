@@ -297,6 +297,19 @@ function ClaimResultsPage() {
         </div>
       </section>
 
+      {result.data?.syntheticTest ? (
+        <p
+          role="note"
+          className="rounded-xl border-2 border-amber-400 bg-amber-50 p-4 text-slate-900"
+        >
+          <strong>FICTIONAL TEST PROFILE</strong> — Test Test and these races are invented practice
+          data. This confirmation stays private and cannot create real PBs or achievements.{" "}
+          <Link to="/test-account" className="underline">
+            Return to test hub
+          </Link>
+          .
+        </p>
+      ) : null}
       {resultId ? (
         <ProfileClaimSteps
           step={claimSubmitted || claimCompleted ? 3 : account.data?.emailVerified ? 2 : 1}

@@ -13,11 +13,11 @@ export async function loadRegistrationStats(sql: Sql, selectedMonth: string) {
       ${monthStart}::date + interval '1 month' - interval '1 day',interval '1 day') as day
   ), counts as (
     select ("createdAt" at time zone 'Europe/London')::date as day,count(*)::int as signups
-    from "user" where "createdAt">=(${monthStart}::date::timestamp at time zone 'Europe/London')
+    from "user" where not athrecs_is_test_user(id) and "createdAt">=(${monthStart}::date::timestamp at time zone 'Europe/London')
       and "createdAt"<((${monthStart}::date + interval '1 month') at time zone 'Europe/London')
     group by 1
   ) select days.day::date::text as date,coalesce(counts.signups,0)::int as signups,
-    ((select count(*) from "user" where "createdAt"<(${monthStart}::date::timestamp at time zone 'Europe/London'))
+    ((select count(*) from "user" where not athrecs_is_test_user(id) and "createdAt"<(${monthStart}::date::timestamp at time zone 'Europe/London'))
       + sum(coalesce(counts.signups,0)) over(order by days.day))::int as total
     from days left join counts on counts.day=days.day order by days.day`;
   const monthly = await sql<SignupBucket>`with months as (
@@ -25,11 +25,11 @@ export async function loadRegistrationStats(sql: Sql, selectedMonth: string) {
       ${yearStart}::date + interval '11 months',interval '1 month') as month
   ), counts as (
     select date_trunc('month',"createdAt" at time zone 'Europe/London') as month,count(*)::int as signups
-    from "user" where "createdAt">=(${yearStart}::date::timestamp at time zone 'Europe/London')
+    from "user" where not athrecs_is_test_user(id) and "createdAt">=(${yearStart}::date::timestamp at time zone 'Europe/London')
       and "createdAt"<((${yearStart}::date + interval '1 year') at time zone 'Europe/London')
     group by 1
   ) select months.month::date::text as date,coalesce(counts.signups,0)::int as signups,
-    ((select count(*) from "user" where "createdAt"<(${yearStart}::date::timestamp at time zone 'Europe/London'))
+    ((select count(*) from "user" where not athrecs_is_test_user(id) and "createdAt"<(${yearStart}::date::timestamp at time zone 'Europe/London'))
       + sum(coalesce(counts.signups,0)) over(order by months.month))::int as total
     from months left join counts on counts.month=months.month order by months.month`;
   return { month: period.month, daily, monthly, timeZone: "Europe/London" };

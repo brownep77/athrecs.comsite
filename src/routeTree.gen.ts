@@ -27,6 +27,7 @@ import { Route as SiteMapRouteImport } from './routes/site-map'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SponsorshipRouteImport } from './routes/sponsorship'
 import { Route as SportsrecsRouteImport } from './routes/sportsrecs'
+import { Route as TestAccountRouteImport } from './routes/test-account'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
 import { Route as AdminApprovalsRouteImport } from './routes/admin/approvals'
 import { Route as AdminAthleteAccountsRouteImport } from './routes/admin/athlete-accounts'
@@ -181,6 +182,11 @@ const SponsorshipRoute = SponsorshipRouteImport.update({
 const SportsrecsRoute = SportsrecsRouteImport.update({
   id: '/sportsrecs',
   path: '/sportsrecs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestAccountRoute = TestAccountRouteImport.update({
+  id: '/test-account',
+  path: '/test-account',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -536,6 +542,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
@@ -621,6 +628,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
@@ -707,6 +715,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/sponsorship': typeof SponsorshipRoute
   '/sportsrecs': typeof SportsrecsRoute
+  '/test-account': typeof TestAccountRoute
   '/admin/approvals': typeof AdminApprovalsRoute
   '/admin/athlete-accounts': typeof AdminAthleteAccountsRoute
   '/admin/athlete-directory': typeof AdminAthleteDirectoryRoute
@@ -794,6 +803,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/test-account'
     | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
@@ -879,6 +889,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/test-account'
     | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
@@ -964,6 +975,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/sponsorship'
     | '/sportsrecs'
+    | '/test-account'
     | '/admin/approvals'
     | '/admin/athlete-accounts'
     | '/admin/athlete-directory'
@@ -1050,6 +1062,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SponsorshipRoute: typeof SponsorshipRoute
   SportsrecsRoute: typeof SportsrecsRoute
+  TestAccountRoute: typeof TestAccountRoute
   AdminApprovalsRoute: typeof AdminApprovalsRoute
   AdminAthleteAccountsRoute: typeof AdminAthleteAccountsRoute
   AdminAthleteDirectoryRoute: typeof AdminAthleteDirectoryRoute
@@ -1243,6 +1256,13 @@ declare module '@tanstack/react-router' {
       path: '/sportsrecs'
       fullPath: '/sportsrecs'
       preLoaderRoute: typeof SportsrecsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/test-account': {
+      id: '/test-account'
+      path: '/test-account'
+      fullPath: '/test-account'
+      preLoaderRoute: typeof TestAccountRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -1722,6 +1742,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SponsorshipRoute: SponsorshipRoute,
   SportsrecsRoute: SportsrecsRoute,
+  TestAccountRoute: TestAccountRoute,
   AdminApprovalsRoute: AdminApprovalsRoute,
   AdminAthleteAccountsRoute: AdminAthleteAccountsRoute,
   AdminAthleteDirectoryRoute: AdminAthleteDirectoryRoute,

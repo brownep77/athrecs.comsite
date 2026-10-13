@@ -189,7 +189,10 @@ const [accountApi, resultMatchApi, resultClaimsApi] = await Promise.all([
   readFile("src/lib/athrecs/result-match-api.ts", "utf8"),
   readFile("src/lib/athrecs/result-claims-api.ts", "utf8"),
 ]);
-for (const source of [accountApi, resultMatchApi, resultClaimsApi]) {
+assert(accountApi.includes("loadLinkedProfileResults(sql, userId)"),
+  "Signed-in accounts must use the shared linked-result loader");
+const linkedResults = await readFile("src/lib/athrecs/linked-profile-results.server.ts", "utf8");
+for (const source of [linkedResults, resultMatchApi, resultClaimsApi]) {
   assert(
     source.includes("result.event_sport as event_sport") &&
       source.includes("sport: row.event_sport") &&
