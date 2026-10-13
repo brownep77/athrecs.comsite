@@ -677,6 +677,40 @@ try {
     {q:'Storage Fixture'},staff);
   assert.equal(selection.length,45);
   assert(!selection.includes(secondPage.athletes[5].athleteNumber));
+  // A history-only athlete has results even without canonical race-edition rows.
+  // Keep year-only source dates and unverified status exactly as supplied.
+  const historyOnly = {
+    ...sourcePerformances[0], date:'', sourceDate:'2025', year:2025,
+    discipline:'Marathon', performance:'3:10:00', meeting:'Synthetic year-only race',
+    verificationStatus:'unverified', labels:[], sourceUrls:['https://example.test/storage-results'],
+  };
+  const historyRows = [historyOnly,
+    {...historyOnly,date:'2025-09-01',sourceDate:'1 Sep',performance:'DNF'},
+    {...historyOnly,date:'2025-08-01',sourceDate:'1 Aug',profileExcluded:true},
+  ];
+  await sql`insert into athlete_source_histories
+    (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances)
+    values(${fixtureRows[52].id},'Storage synthetic source','storage-history-only',
+      'https://example.test/storage-results',now(),false,array[2025],array[2025],${JSON.stringify(historyRows)}::jsonb)`;
+  const canonicalDuplicate = {...historyOnly,date:'2025-01-01',sourceDate:'1 Jan',
+    discipline:'10K',performance:'50:00',meeting:'Compact profile race'};
+  await sql`insert into athlete_source_histories
+    (athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances)
+    values(${fixtureRows[50].id},'Storage synthetic source','storage-duplicate',
+      'https://example.test/storage-results',now(),false,array[2025],array[2025],${JSON.stringify([canonicalDuplicate])}::jsonb)`;
+  const countedPage = await storage({page:2});
+  assert.equal(countedPage.athletes[0].resultCount,1,'A saved copy of the same dated result is not counted twice');
+  assert.equal(countedPage.athletes[2].resultCount,2,'Saved histories count, including DNF and unknown dates; excluded rows do not');
+  const historyProfile = await getStaffProfile(countedPage.athletes[2].athrecsId,staff);
+  assert.equal(historyProfile.athlete.resultCount,2);
+  assert.equal(historyProfile.results.length,0);
+  assert.deepEqual(historyProfile.sourceHistories[0].performances,historyRows);
+  const historyExport = await rpc('staff-athlete-directory-api','exportStaffAthleteDirectory',
+    {q:'Storage Fixture 53'},staff);
+  const historyWorkbook = new ExcelJS.Workbook();
+  await historyWorkbook.xlsx.load(Buffer.from(historyExport.base64,'base64'));
+  assert.equal(historyWorkbook.getWorksheet('Athletes').getCell('S2').value,2);
+  console.log('Stored result counts verified across directory, profile and export, including source-only, duplicate, excluded and unfinished performances.');
   console.log('Storage pagination verified: 50-row pages, totals, canonical links, results, literal search, sport/privacy filters and safe bulk selection.');
   console.log(
     "Compact profiles verified: real authenticated account saves, birthday choices, multi-sport IDs, fixture persistence/ownership, staff-only directory and XLSX export, publication and privacy.",
