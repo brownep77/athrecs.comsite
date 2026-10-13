@@ -10,6 +10,17 @@ export function publicResultUrl(value: string): string {
   } catch {
     throw new Error("Enter a full HTTPS results or athlete profile link.");
   }
+  // Check fragments and nested/encoded redirect URLs as well as top-level keys.
+  let decoded = url.toString();
+  for (let i = 0; i < 4; i++) {
+    try {
+      const next = decodeURIComponent(decoded);
+      if (next === decoded) break;
+      decoded = next;
+    } catch {
+      break;
+    }
+  }
   if (
     url.protocol !== "https:" ||
     url.username ||
@@ -17,6 +28,9 @@ export function publicResultUrl(value: string): string {
     url.port ||
     !/^[a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,}$/i.test(url.hostname) ||
     /(?:^|\.)(?:localhost|local|internal|test|example|invalid)$/i.test(url.hostname) ||
+    /(?:[?#&;]|^)[^=?#&;]*(?:token|password|secret|auth|session|signature|api.?key|\bcode)\s*=/i.test(
+      decoded,
+    ) ||
     [...url.searchParams.keys()].some((key) =>
       /token|password|secret|auth|session|signature|^code$|api.?key/i.test(key),
     )
@@ -52,7 +66,11 @@ export function matchingNames(
   settings?: Partial<MatchingSettings> | null,
   otherNames: Array<string | null | undefined> = [],
 ): string[] {
-  const first = fullName?.trim().split(/\s+/)[0] || "";
+  const first =
+    fullName
+      ?.trim()
+      .split(/\s+/)
+      .find((token) => personNameTokens(token).length) || "";
   const surnames = [...(settings?.otherSurnames ?? []), settings?.maidenName ?? ""].filter(Boolean);
   return uniquePotentialMatchNames([
     fullName,
@@ -116,7 +134,15 @@ export const resultSearchSchema = z
       .trim()
       .regex(/^(?:\d{4})?$/)
       .default(""),
-    distance: z.string().trim().max(40).default(""),
+    distance: z
+      .string()
+      .trim()
+      .max(40)
+      .refine(
+        (v) => !v || /[a-z0-9]/i.test(v),
+        "Enter a distance such as 5K, 10 miles or Marathon, or leave it blank.",
+      )
+      .default(""),
   })
   .default({ name: "", year: "", distance: "" });
 export type ResultSearchFilters = z.infer<typeof resultSearchSchema>;
@@ -128,7 +154,7 @@ export function distanceSearchAliases(value: string): string[] {
     return ["half", "halfmarathon", "hm", "21.0975k", "21.1k"];
   if (["marathon", "fullmarathon", "42.195k", "42.2k"].includes(code))
     return ["marathon", "fullmarathon", "42.195k", "42.2k"];
-  const miles = value.trim().match(/^(\d+(?:\.\d+)?)\s*(?:M|mi|miles?)$/);
+  const miles = value.trim().match(/^(\d+(?:\.\d+)?)\s*(?:M|mi|miles?)$/i);
   if (miles) return [`${miles[1]}m`, `${miles[1]}mi`, `${miles[1]}mile`, `${miles[1]}miles`];
   const km = code.match(/^(\d+(?:\.\d+)?)(?:k|km|kilometres?|kilometers?)$/);
   if (km) return ["k", "km", "kilometres", "kilometers"].map((unit) => km[1] + unit);

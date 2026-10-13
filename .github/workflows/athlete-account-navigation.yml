@@ -10,6 +10,10 @@ on:
       - 'src/lib/athrecs/claim-invitations-api.ts'
       - 'src/lib/athrecs/claim-resume.ts'
       - 'scripts/verify-profile-claim-journey.mjs'
+      - 'scripts/verify-search-adversarial.mjs'
+      - 'scripts/verify-recruitment-ui.mjs'
+      - 'src/lib/athrecs/result-match*'
+      - 'src/lib/athrecs/grok-runner-search-api.ts'
       - 'src/components/athletes/Account*.tsx'
       - 'src/components/athletes/AthleteResultsSection.tsx'
       - 'src/components/athletes/PotentialResultMatchesPanel.tsx'
@@ -42,6 +46,8 @@ jobs:
       - run: npm run typecheck
       - name: Lint changed account files
         run: npx eslint src/routes/athlete-account.tsx src/routes/api/athlete-photos.ts src/components/athletes/Account*.tsx src/components/athletes/AthleteResultsSection.tsx src/components/athletes/PotentialResultMatchesPanel.tsx src/components/athletes/ProfileConnectionsPanel.tsx src/lib/athrecs/account-sections.ts src/lib/athrecs/gallery-photo.server.ts scripts/verify-account-panel-ui.mjs scripts/verify-photo-gallery.mjs
+      - name: Adversarial search and privacy boundaries
+        run: npm run verify:search-adversarial
       - name: Install isolated browser test dependency
         run: npm install --prefix "$RUNNER_TEMP/account-browser" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
       - name: Install browser
@@ -50,6 +56,10 @@ jobs:
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
         run: node scripts/verify-profile-claim-journey.mjs
+      - name: Signup, search filters and claim confirmation
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright
+        run: node scripts/verify-recruitment-ui.mjs
       - name: Account navigation, race controls and mobile layout
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/account-browser/node_modules/playwright

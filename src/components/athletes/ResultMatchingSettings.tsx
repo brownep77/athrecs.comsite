@@ -47,6 +47,7 @@ function MatchingSettingsForm({ initial }: { initial: MatchingSettings }) {
       }),
     onSuccess: async () => {
       setSaved(true);
+      await client.cancelQueries({ queryKey: ["my-external-runner-matches"] });
       client.setQueriesData(
         { queryKey: ["my-external-runner-matches"] },
         {
