@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 /** Shared presentation palette: colours depend on the category, never the athlete or card order. */
 const tones = {
   coral: "border-red-200 bg-red-100 text-red-950",
@@ -29,6 +31,7 @@ const standardDistances: readonly (readonly [number, ProfileTone])[] = [
   [0.2, "gold"],
   [0.4, "lime"],
   [0.8, "green"],
+  [1, "gold"],
   [1.5, "teal"],
   [1.609344, "cyan"],
   [3, "blue"],
@@ -52,14 +55,24 @@ export function distanceTone(code: string, distanceKm = 0): ProfileTone {
   const label = code.trim().toLowerCase().replaceAll(",", "").replace(/\s+/g, " ");
   if (/^(?:half|half marathon|hm)$/.test(label)) return "rose";
   if (/^(?:full )?marathon$/.test(label)) return "periwinkle";
-  let km = Number.isFinite(distanceKm) && distanceKm > 0 ? distanceKm : 0;
+  // Road result codes use uppercase M for miles; lowercase m remains metres.
+  const miles = code.trim().match(/^(\d+(?:\.\d+)?)\s*M$/);
+  let km =
+    Number.isFinite(distanceKm) && distanceKm > 0
+      ? distanceKm
+      : miles
+        ? Number(miles[1]) * 1.609344
+        : 0;
   if (!km) {
     if (/^(?:one |1 )?mile$/.test(label)) km = 1.609344;
     else {
-      const match = label.match(/^(\d+(?:\.\d+)?)\s*(k|km|m|mi|miles?)$/);
+      const match = label.match(
+        /^(\d+(?:\.\d+)?)\s*(k|km|kilometres?|kilometers?|m|metres?|meters?|mi|miles?)$/,
+      );
       if (match) {
         const unit = match[2];
-        km = Number(match[1]) * (unit.startsWith("mi") ? 1.609344 : unit === "m" ? 0.001 : 1);
+        km =
+          Number(match[1]) * (unit.startsWith("mi") ? 1.609344 : unit.startsWith("m") ? 0.001 : 1);
       }
     }
   }
@@ -105,3 +118,29 @@ export function achievementTone(id: string): ProfileTone {
 }
 
 export const achievementColourClass = (id: string) => profileToneClass(achievementTone(id));
+
+const hues: Record<ProfileTone, string> = {
+  coral: "red",
+  gold: "amber",
+  lime: "lime",
+  green: "green",
+  teal: "teal",
+  cyan: "cyan",
+  blue: "blue",
+  mint: "emerald",
+  peach: "orange",
+  sky: "sky",
+  lilac: "violet",
+  orchid: "fuchsia",
+  rose: "rose",
+  lemon: "yellow",
+  periwinkle: "indigo",
+  lavender: "purple",
+  sand: "stone",
+  slate: "slate",
+  pink: "pink",
+};
+
+export function distanceResultStyle(distance: string): CSSProperties {
+  return { "--result-colour": `var(--color-${hues[distanceTone(distance)]}-100)` } as CSSProperties;
+}

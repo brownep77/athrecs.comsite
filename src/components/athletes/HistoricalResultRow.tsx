@@ -1,3 +1,5 @@
+import { ResultDistance } from "./ResultDistance";
+import { distanceResultStyle } from "@/lib/athrecs/profile-colours";
 import {
   historyResultAnchor,
   historyResultCountry,
@@ -35,12 +37,13 @@ export function HistoricalResultRow({
     <tr
       id={historyResultAnchor(result.key)}
       role="row"
-      className="scroll-mt-20 hover:bg-elevated/50"
+      className="distance-result scroll-mt-20"
+      style={distanceResultStyle(discipline)}
       data-history-result={result.key}
     >
       <td
         role="cell"
-        data-label="Date"
+        data-label="Race date"
         className="whitespace-nowrap px-3 py-2 text-xs tabular-nums"
       >
         {row.dateLabel ||
@@ -49,7 +52,7 @@ export function HistoricalResultRow({
           <span className="block text-subtle">to {formatRaceDateShort(row.endDate)}</span>
         ) : null}
       </td>
-      <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
+      <td role="cell" data-label="Race name" className="min-w-44 px-3 py-2 font-medium">
         <span className="inline-flex items-center gap-1.5">
           {awards[0] ? <PerformanceAwardIcon award={awards[0]} /> : null}
           {row.meeting || "Meeting not recorded"}
@@ -71,7 +74,7 @@ export function HistoricalResultRow({
         data-label="Distance / discipline"
         className="whitespace-nowrap px-3 py-2 text-xs"
       >
-        {profileDisciplineLabel(discipline)}
+        <ResultDistance distance={profileDisciplineLabel(discipline)} />
         {row.providerName !== "DUV Ultra Marathon Statistics" ? (
           <span className="block text-[10px] text-subtle">
             {isCrossCountryHistoryResult(row)

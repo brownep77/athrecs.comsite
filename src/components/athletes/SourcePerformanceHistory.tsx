@@ -1,3 +1,5 @@
+import { ResultDistance } from "./ResultDistance";
+import { distanceResultStyle } from "@/lib/athrecs/profile-colours";
 import { useState } from "react";
 import type { SourceHistory } from "@/lib/athrecs/source-performance-history";
 import { formatRaceDateShort } from "@/lib/athrecs/format";
@@ -65,8 +67,8 @@ export function SourcePerformanceHistory({
         <>
           <p className="text-sm text-muted">
             Original source performances, including decimal times, field marks and annotations.
-            These may also appear in Results above and are not added again to PBs or
-            achievement totals.
+            These may also appear in Results above and are not added again to PBs or achievement
+            totals.
           </p>
           {histories.map((history) => (
             <p key={`${history.provider}:${history.externalId}`} className="text-xs text-muted">
@@ -147,12 +149,12 @@ export function SourcePerformanceHistory({
           <thead role="rowgroup" className="bg-elevated text-xs text-subtle">
             <tr role="row">
               {[
-                "Date",
-                "Discipline",
+                "Race name",
+                "Race date",
+                "Distance / discipline",
                 "Performance",
                 "Wind",
                 "Place",
-                "Meeting",
                 "Venue",
                 "Age group",
                 ...(showEvidence ? ["Source"] : []),
@@ -171,15 +173,36 @@ export function SourcePerformanceHistory({
           <tbody role="rowgroup" className="divide-y divide-border">
             {(showEvidence ? filtered.slice(active * 30, (active + 1) * 30) : filtered).map(
               (row) => (
-                <tr role="row" key={row.key} className="hover:bg-elevated/50">
-                  <td role="cell" data-label="Date" className="whitespace-nowrap px-3 py-2 text-xs">
+                <tr
+                  role="row"
+                  key={row.key}
+                  className="distance-result"
+                  style={distanceResultStyle(row.discipline)}
+                >
+                  <td role="cell" data-label="Race name" className="min-w-52 px-3 py-2">
+                    {row.meeting}
+                    {showEvidence && row.notes ? (
+                      <p className="mt-1 max-w-prose whitespace-normal text-xs text-muted">
+                        {row.notes}
+                      </p>
+                    ) : null}
+                  </td>
+                  <td
+                    role="cell"
+                    data-label="Race date"
+                    className="whitespace-nowrap px-3 py-2 text-xs"
+                  >
                     {row.dateLabel ||
                       (row.date
                         ? formatRaceDateShort(row.date)
                         : row.yearLabel || String(row.year))}
                   </td>
-                  <td role="cell" data-label="Discipline" className="whitespace-nowrap px-3 py-2">
-                    {row.discipline}
+                  <td
+                    role="cell"
+                    data-label="Distance / discipline"
+                    className="whitespace-nowrap px-3 py-2"
+                  >
+                    <ResultDistance distance={row.discipline} />
                   </td>
                   <td
                     data-label="Performance"
@@ -225,14 +248,6 @@ export function SourcePerformanceHistory({
                     {row.place || "—"}
                     {row.disqualification ? (
                       <span className="block text-xs text-muted">Original · void</span>
-                    ) : null}
-                  </td>
-                  <td role="cell" data-label="Meeting" className="min-w-52 px-3 py-2">
-                    {row.meeting}
-                    {showEvidence && row.notes ? (
-                      <p className="mt-1 max-w-prose whitespace-normal text-xs text-muted">
-                        {row.notes}
-                      </p>
                     ) : null}
                   </td>
                   <td role="cell" data-label="Venue" className="px-3 py-2">

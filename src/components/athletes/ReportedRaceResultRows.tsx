@@ -1,3 +1,5 @@
+import { ResultDistance } from "./ResultDistance";
+import { distanceResultStyle } from "@/lib/athrecs/profile-colours";
 import { CHIP_TIME_CAVEAT } from "@/lib/athrecs/reported-personal-bests";
 import type { ReportedRaceRecord } from "@/lib/athrecs/reported-race-history";
 import { hasReportedFinish, reportedResultSport } from "@/lib/athrecs/profile-result-presentation";
@@ -24,12 +26,13 @@ export function ReportedRaceResultRows({
       role="row"
       key={record.id}
       id={`reported-result-${record.id}`}
-      className="scroll-mt-6 hover:bg-elevated/50"
+      className="distance-result scroll-mt-6"
+      style={distanceResultStyle(record.distance)}
     >
-      <td role="cell" data-label="Date" className="min-w-36 px-3 py-2 text-xs">
+      <td role="cell" data-label="Race date" className="min-w-36 px-3 py-2 text-xs">
         {record.reportedDate}
       </td>
-      <td role="cell" data-label="Event" className="min-w-64 px-3 py-2">
+      <td role="cell" data-label="Race name" className="min-w-64 px-3 py-2">
         <span className="inline-flex items-center gap-1.5 font-medium">
           {hasReportedFinish(record) ? <CompletionMedal place={record.reportedPlace} /> : null}
           {record.event}
@@ -45,7 +48,7 @@ export function ReportedRaceResultRows({
         {reportedResultSport(record)}
       </td>
       <td role="cell" data-label="Distance" className="whitespace-nowrap px-3 py-2 text-xs">
-        {record.distance}
+        <ResultDistance distance={record.distance} />
       </td>
       <td role="cell" data-label="Location" className="min-w-32 px-3 py-2 text-xs">
         <span className="inline-flex flex-wrap items-center gap-1.5">

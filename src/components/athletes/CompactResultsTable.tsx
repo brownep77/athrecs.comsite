@@ -1,3 +1,5 @@
+import { ResultDistance } from "./ResultDistance";
+import { distanceResultStyle } from "@/lib/athrecs/profile-colours";
 import { useState } from "react";
 import { HistoricalResultRow } from "./HistoricalResultRow";
 import { ResultEvidence } from "./ResultEvidence";
@@ -86,8 +88,8 @@ export function CompactResultsTable({
         <thead role="rowgroup" className="bg-elevated text-xs text-subtle">
           <tr role="row">
             {[
-              "Date",
-              "Event",
+              "Race date",
+              "Race name",
               "Sport",
               hasHistory ? "Distance / discipline" : "Distance",
               "Location",
@@ -131,15 +133,20 @@ export function CompactResultsTable({
               );
             const result = entry.result;
             return (
-              <tr role="row" key={result.resultId} className="hover:bg-elevated/50">
+              <tr
+                role="row"
+                key={result.resultId}
+                className="distance-result"
+                style={distanceResultStyle(result.distanceCode)}
+              >
                 <td
                   role="cell"
-                  data-label="Date"
+                  data-label="Race date"
                   className="whitespace-nowrap px-3 py-2 text-xs tabular-nums"
                 >
                   {formatRaceDateShort(result.eventDate)}
                 </td>
-                <td role="cell" data-label="Event" className="min-w-44 px-3 py-2 font-medium">
+                <td role="cell" data-label="Race name" className="min-w-44 px-3 py-2 font-medium">
                   <span className="flex items-center gap-1.5">
                     <ResultMedal result={result} />
                     <ProfileEventLink
@@ -180,7 +187,7 @@ export function CompactResultsTable({
                   data-label={hasHistory ? "Distance / discipline" : "Distance"}
                   className="whitespace-nowrap px-3 py-2 text-xs"
                 >
-                  {profileDisciplineLabel(result.distanceCode)}
+                  <ResultDistance distance={profileDisciplineLabel(result.distanceCode)} />
                   <span className="block text-[10px] text-subtle">{result.surface}</span>
                 </td>
                 <td role="cell" data-label="Location" className="px-3 py-2">
