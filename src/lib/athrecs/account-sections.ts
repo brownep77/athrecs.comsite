@@ -5,7 +5,7 @@ export const ACCOUNT_SECTION_GROUPS = [
       { id: "potential", label: "Potential races" },
       { id: "races", label: "My races" },
       { id: "upcoming", label: "Upcoming races" },
-      { id: "achievements", label: "Personal bests & achievements" },
+      { id: "achievements", label: "PBs & achievements" },
       { id: "progress", label: "Progress" },
     ],
   },

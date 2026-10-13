@@ -97,7 +97,7 @@ export function EditorialAthleteOverview({
       </figure>
       <div>
         <h2 id="career-bests" className="font-display text-lg font-semibold">
-          Track personal bests
+          Track PBs
         </h2>
         <dl className="mt-3 flex flex-wrap gap-2">
           {moFarahCareerBests.map((best) => (
@@ -121,7 +121,7 @@ export function EditorialAthleteOverview({
               rel="noreferrer"
               className="text-accent underline"
             >
-              Personal-best sources
+              PB sources
             </a>
             .
           </p>

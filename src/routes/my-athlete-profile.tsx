@@ -42,7 +42,7 @@ export const Route = createFileRoute("/my-athlete-profile")({
       { title: "My private Athlete Profile | ATHRECS.com" },
       {
         name: "description",
-        content: "View your private claimed results and personal bests on ATHRECS.",
+        content: "View your private claimed results and PBs on ATHRECS.",
       },
       { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
@@ -228,7 +228,7 @@ function MyAthleteProfilePage() {
               </div>
 
               <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300">
-                Your results, personal bests and sporting progress together. Choose a sport to focus
+                Your results, PBs and sporting progress together. Choose a sport to focus
                 your profile, or view your complete history.
               </p>
 
@@ -307,7 +307,7 @@ function MyAthleteProfilePage() {
       <Tabs defaultValue="results" className="space-y-5">
         <TabsList className="h-auto w-full flex-wrap justify-start gap-1 bg-elevated p-1.5">
           <TabsTrigger value="results" className="min-h-10 text-sm">
-            Results & personal bests
+            Results & PBs
           </TabsTrigger>
           <TabsTrigger value="upcoming">Upcoming</TabsTrigger>
           <TabsTrigger value="progress" className="min-h-10 text-sm">
@@ -438,7 +438,7 @@ function ProfileHero() {
         </div>
         <h1 className="mt-2 font-display text-3xl font-semibold">Private Athlete Profile</h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">
-          Bring your results, personal bests, sporting progress and social profiles together.
+          Bring your results, PBs, sporting progress and social profiles together.
         </p>
       </div>
     </section>

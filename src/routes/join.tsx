@@ -85,7 +85,7 @@ function JoinPage() {
           <span className="text-accent">Start yours here.</span>
         </h1>
         <p className="mt-4 max-w-xl text-sm leading-6 text-muted sm:text-base">
-          Your first 5K, your fastest marathon, your next sport. Bring your results, personal bests
+          Your first 5K, your fastest marathon, your next sport. Bring your results, PBs
           and achievements together in one athlete profile.
         </p>
         <ol aria-label="Your next steps" className="mt-6 grid gap-2 sm:grid-cols-3">
@@ -206,7 +206,7 @@ function JoinPage() {
             </li>
             <li className="flex gap-3">
               <Medal className="size-5 shrink-0 text-accent" aria-hidden="true" />
-              <span>Your results, personal bests and achievements.</span>
+              <span>Your results, PBs and achievements.</span>
             </li>
             <li className="flex gap-3">
               <LockKeyhole className="size-5 shrink-0 text-accent" aria-hidden="true" />

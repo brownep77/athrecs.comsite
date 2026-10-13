@@ -206,7 +206,7 @@ function RunningPage() {
         <div>
           <h2 className="font-display text-2xl font-semibold">Your running record</h2>
           <p className="mt-3 text-sm leading-7 text-muted">
-            Bring your race results, personal bests and progress into one athlete profile.
+            Bring your race results, PBs and progress into one athlete profile.
           </p>
           <div className="mt-3 flex flex-wrap gap-5">
             <Link

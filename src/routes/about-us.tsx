@@ -5,17 +5,17 @@ import { SPORT_PAGES } from "@/lib/athrecs/sport-pages";
 
 const title = "About AthRecs | Athlete Profiles, Race Results & Fixtures";
 const description =
-  "AthRecs brings athlete profiles, race results, personal bests, clubs and sports fixtures together. Discover our purpose, coverage and approach to sporting records.";
+  "AthRecs brings athlete profiles, race results, PBs, clubs and sports fixtures together. Discover our purpose, coverage and approach to sporting records.";
 const questions = [
   {
     question: "What is AthRecs?",
     answer:
-      "AthRecs is a sports discovery and athlete profile website. It brings public athlete records, race results, personal bests, club information and sporting fixtures together so you can explore a performance and the person behind it.",
+      "AthRecs is a sports discovery and athlete profile website. It brings public athlete records, race results, PBs, club information and sporting fixtures together so you can explore a performance and the person behind it.",
   },
   {
     question: "Who is AthRecs for?",
     answer:
-      "AthRecs is for everyday runners, club athletes, competitors across sports and the people who follow them. A first finish, a season of steady progress and a new personal best all deserve a place in your sporting story.",
+      "AthRecs is for everyday runners, club athletes, competitors across sports and the people who follow them. A first finish, a season of steady progress and a new PB all deserve a place in your sporting story.",
   },
   {
     question: "Which sports does AthRecs cover?",
@@ -138,7 +138,7 @@ function AboutPage() {
         </h1>
         <p className="text-lg leading-8 text-muted">
           AthRecs is a sports discovery and athlete profile website bringing together race results,
-          personal bests, clubs and sports fixtures. It helps everyday competitors and sports fans
+          PBs, clubs and sports fixtures. It helps everyday competitors and sports fans
           find an athlete’s sporting history and explore their next event.
         </p>
       </header>
@@ -152,7 +152,7 @@ function AboutPage() {
         <p>
           AthRecs is built around a simple idea: make those records easier to explore. Start with an
           athlete, a race or a club, then follow the connections. Whether you are chasing a marathon
-          personal best, checking a track result or looking back at your first finish, the details
+          PB, checking a track result or looking back at your first finish, the details
           matter.
         </p>
         <p>
@@ -166,7 +166,7 @@ function AboutPage() {
           From your first 5K to your next marathon
         </h2>
         <p>
-          A personal best is more useful when you can see the race, distance and date behind it. Our{" "}
+          A PB is more useful when you can see the race, distance and date behind it. Our{" "}
           <Link to="/athletes" className="text-accent underline">
             athlete profiles
           </Link>{" "}

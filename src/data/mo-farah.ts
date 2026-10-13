@@ -34,7 +34,7 @@ export const moFarahAthlete: AthleteSeed = {
       url: "https://worldathletics.org/athletes/-/14189197",
     },
     { label: "Official website", url: "https://www.mofarah.com/" },
-    { label: "Career biography and personal bests", url: BIOGRAPHY },
+    { label: "Career biography and PBs", url: BIOGRAPHY },
   ],
   notable_achievements: [
     {
@@ -74,7 +74,7 @@ export const moFarahAthlete: AthleteSeed = {
     {
       year: 2018,
       title: "Chicago Marathon champion",
-      detail: "Won in 2:05:11, his marathon personal best.",
+      detail: "Won in 2:05:11, his marathon PB.",
       source_url:
         "https://worldathletics.org/competition/calendar-results/results/7122980?eventId=10229634",
     },

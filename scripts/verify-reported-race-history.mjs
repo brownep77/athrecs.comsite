@@ -142,7 +142,7 @@ try {
   assert.match(pbHtml, /49:47/);
   assert.match(pbHtml, /1:07:37/);
   assert.match(pbHtml, /2:17:35/);
-  assert.equal((pbHtml.match(/>Personal best\*</g) ?? []).length, 4);
+  assert.equal((pbHtml.match(/>PB\*</g) ?? []).length, 4);
   assert.equal((pbHtml.match(/>Not verified by chip time</g) ?? []).length, 4);
   assert.equal(
     neil.personalBests.filter((best) => best.recordId?.startsWith("great-race-")).length,

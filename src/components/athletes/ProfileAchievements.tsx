@@ -58,10 +58,10 @@ export function PersonalBestStrip({
   );
   if (!bests.length) return null;
   return (
-    <section aria-label="Personal bests" className="space-y-2">
+    <section aria-label="PBs" className="space-y-2">
       <h2 className="flex items-center gap-2 font-display text-lg font-semibold">
         <ProfileAward kind="personal-best" decorative />
-        Personal bests
+        PBs
       </h2>
       <div className="flex flex-wrap gap-2">
         {bests.map((candidate) => {
@@ -87,7 +87,7 @@ export function PersonalBestStrip({
                 <strong className="text-lg tabular-nums text-fg">
                   {formatDuration(best.finishTimeSeconds)}
                 </strong>
-                <span className="ml-2 text-xs font-semibold text-accent">Personal best*</span>
+                <span className="ml-2 text-xs font-semibold text-accent">PB*</span>
                 <span className="block text-xs text-muted">{best.surface} · Reported time</span>
                 <span className="block text-xs text-muted">
                   {showEvidence ? CHIP_TIME_CAVEAT : "Reported"}
@@ -112,7 +112,7 @@ export function PersonalBestStrip({
               <strong className="text-lg tabular-nums text-fg">
                 {formatDuration(best.finishTimeSeconds)}
               </strong>
-              <span className="ml-2 text-xs font-semibold text-accent">Personal best</span>
+              <span className="ml-2 text-xs font-semibold text-accent">PB</span>
               <span className="block text-xs text-muted">{best.surface}</span>
               {showEvidence || resultEvidenceLabel(best) === "Athlete-submitted" ? (
                 <span className="block text-xs text-muted">

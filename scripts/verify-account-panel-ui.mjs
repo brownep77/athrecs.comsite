@@ -195,8 +195,8 @@ try {
       await go(label);
       await page.getByRole("heading", { name: heading, exact: true }).waitFor();
     }
-    await go("Personal bests & achievements");
-    await page.getByRole("heading", { name: "Personal bests", exact: true }).waitFor();
+    await go("PBs & achievements");
+    await page.getByRole("heading", { name: "PBs", exact: true }).waitFor();
     await go("Upcoming races");
     await page.getByRole("button", { name: "Add event", exact: true }).click();
     await page.getByLabel("Event name", { exact: true }).fill("Unsaved upcoming race");

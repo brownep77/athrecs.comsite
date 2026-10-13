@@ -5,7 +5,7 @@ export const SITE_NAME = "ATHRECS.com";
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/athrecs-logo.png`;
 
 export const DEFAULT_DESCRIPTION =
-  "Your sporting life, in one profile. Find athletes and bring your results, personal bests, progress and social links together across every sport on ATHRECS.com.";
+  "Your sporting life, in one profile. Find athletes and bring your results, PBs, progress and social links together across every sport on ATHRECS.com.";
 
 export function absoluteUrl(path: string): string {
   if (path.startsWith("http")) return path;

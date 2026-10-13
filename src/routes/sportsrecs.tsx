@@ -79,7 +79,7 @@ const networkSites: NetworkSite[] = [
     domain: "athrecs.com",
     sport: "Athlete profiles · Every sport",
     description:
-      "One athlete profile for results, personal bests, progress and sporting identity across every sport.",
+      "One athlete profile for results, PBs, progress and sporting identity across every sport.",
     coverage:
       "Bring your records together and find athletics meetings, running races and parkrun on AthRecs.",
     status: "live",

@@ -76,7 +76,7 @@ const awards = {
   },
   "personal-best": {
     icon: Star,
-    label: "Personal best",
+    label: "PB",
     colour: "text-violet-700 dark:text-violet-300",
   },
   milestone: {

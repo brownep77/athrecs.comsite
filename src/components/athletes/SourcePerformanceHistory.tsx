@@ -65,7 +65,7 @@ export function SourcePerformanceHistory({
         <>
           <p className="text-sm text-muted">
             Original source performances, including decimal times, field marks and annotations.
-            These may also appear in Results above and are not added again to personal bests or
+            These may also appear in Results above and are not added again to PBs or
             achievement totals.
           </p>
           {histories.map((history) => (

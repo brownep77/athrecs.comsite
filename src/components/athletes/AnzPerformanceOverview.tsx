@@ -35,7 +35,7 @@ export function AnzPerformanceOverview({
         <div>
           <h2 className="flex items-center gap-2 font-display text-xl font-semibold">
             <Trophy className="size-5 text-accent" aria-hidden="true" />
-            Personal bests
+            PBs
           </h2>
           <p className="mt-1 text-sm text-muted">
             Best eligible performances in the recorded ranking history.

@@ -562,7 +562,7 @@ export const neilFeatherbyReportedPersonalBests: readonly ReportedPersonalBest[]
     finishTimeSeconds: 1768,
     event: "Sportlink biography",
     date: "Race and date not established",
-    note: "Biography-reported personal best; no race edition has been assigned.",
+    note: "Biography-reported PB; no race edition has been assigned.",
     sources: [
       { label: "Sportlink biography", url: "https://www.sportlink.co.uk/pages/neil-featherby" },
     ],
@@ -576,7 +576,7 @@ export const neilFeatherbyReportedPersonalBests: readonly ReportedPersonalBest[]
     finishTimeSeconds: 2987,
     event: "Sportlink biography",
     date: "Race and date not established",
-    note: "Biography-reported personal best; no race edition has been assigned.",
+    note: "Biography-reported PB; no race edition has been assigned.",
     sources: [
       { label: "Sportlink biography", url: "https://www.sportlink.co.uk/pages/neil-featherby" },
     ],

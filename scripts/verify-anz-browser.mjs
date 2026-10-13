@@ -100,7 +100,7 @@ try {
     new URL(route.request().url()).hostname === "127.0.0.1" ? route.continue() : route.abort(),
   );
   await page.goto("http://127.0.0.1:8117");
-  await page.getByRole("heading", { name: "Personal bests", exact: true }).waitFor();
+  await page.getByRole("heading", { name: "PBs", exact: true }).waitFor();
   await page.getByRole("combobox", { name: "Event" }).selectOption("10km");
   assert.equal(
     await page.getByRole("button", { name: /10km Road/ }).getAttribute("aria-pressed"),

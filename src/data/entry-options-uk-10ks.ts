@@ -9274,7 +9274,7 @@ export const ukTenKSeriesOverrides: Record<string, Partial<Series>> = {
     distances: ["10K"],
     summary: "Windsor Dorney Lakeside 10K — a flat, traffic-free race at the London 2012 venue.",
     description:
-      "RunUK's chip-timed 10K follows smooth, traffic-free tarmac around Dorney Lake, the London 2012 Olympic rowing venue. The flat course is suited to first-time runners and personal-best attempts and includes a medal, finish refreshments, baggage drop and free event parking.",
+      "RunUK's chip-timed 10K follows smooth, traffic-free tarmac around Dorney Lake, the London 2012 Olympic rowing venue. The flat course is suited to first-time runners and PB attempts and includes a medal, finish refreshments, baggage drop and free event parking.",
     organiser: "RunUK",
     website: "https://www.runuk.co.uk/e/windsor-dorney-lakeside-10k-2852",
   },
