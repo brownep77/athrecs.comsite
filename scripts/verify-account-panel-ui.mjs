@@ -58,7 +58,7 @@ try {
     const analyticsChoice = page.getByRole("button", { name: "No thanks", exact: true });
     if (await analyticsChoice.isVisible()) await analyticsChoice.click();
     const labels = await nav.getByRole("link").allTextContents();
-    assert.deepEqual(labels.slice(0, 2), ["Potential races", "My races"]);
+    assert.deepEqual(labels.slice(0, 2), ["Find and claim results", "My races"]);
     assert.equal(labels.length, 21);
     await go("Personal details");
     await page.getByLabel("Full name", { exact: false }).fill("Sidebar Test Runner");
@@ -106,7 +106,7 @@ try {
     `);
     // Leave an unsaved account edit while a result claim refreshes the account query.
     await page.getByLabel("Display name", { exact: false }).fill("Unsaved sidebar draft");
-    await go("Potential races");
+    await go("Find and claim results");
     const match = page.getByRole("article").filter({ hasText: "Sidebar Synthetic 10K" });
     await match
       .getByRole("button", { name: "Claim profile & review all results", exact: true })

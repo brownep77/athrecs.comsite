@@ -1,3 +1,4 @@
+import { PotentialResultMatchesPanel } from "@/components/athletes/PotentialResultMatchesPanel";
 import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -84,7 +85,7 @@ function JoinPage() {
           achievements together in one athlete profile.
         </p>
         <ol aria-label="Your next steps" className="mt-6 grid gap-2 sm:grid-cols-3">
-          {["Create your account", "Claim your profile", "Confirm your results"].map(
+          {["Create your account", "Find and claim results", "View your profile"].map(
             (label, index) => (
               <li
                 key={label}
@@ -337,13 +338,16 @@ function ProfileReady({ account }: { account: AthleteAccountData }) {
   const queryClient = useQueryClient();
   if (!account.claimedProfiles.length)
     return (
-      <ProfileClaimGuide
-        account={account}
-        showSteps={false}
-        onNameSaved={() => {
-          void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
-        }}
-      />
+      <div className="space-y-5">
+        <ProfileClaimGuide
+          account={account}
+          showSteps={false}
+          onNameSaved={() => {
+            void queryClient.invalidateQueries({ queryKey: ["my-athlete-account"] });
+          }}
+        />
+        {account.fullName.trim() ? <PotentialResultMatchesPanel /> : null}
+      </div>
     );
   return (
     <div>

@@ -9,6 +9,9 @@ import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
+import { bioAchievements } from "./profile-bio-results";
+import { profileAchievementResults } from "./profile-history-results";
+import { isCompletedResult } from "./profile-achievements";
 import { buildGeneratedAthleteBio } from "./athlete-bio";
 import { combineProfileResults, type ProfileResult } from "./profile-records";
 import type { ProfileConnection, SocialPlatform } from "./profile-connections";
@@ -360,7 +363,10 @@ async function buildPublicProfile(
         region: share.share_location ? (identity.region ?? "") : "",
         country: share.share_location ? (identity.country ?? "") : "",
         clubOrTeam: share.share_club ? (identity.club_or_team ?? "") : "",
-        results,
+        results: profileAchievementResults(results, sourceHistories).filter((result) =>
+          isCompletedResult(result),
+        ),
+        achievements: bioAchievements(results, sourceHistories),
       }).replace(/\bprivate ATHRECS record\b/g, "ATHRECS record");
     }
   }

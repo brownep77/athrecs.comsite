@@ -1,7 +1,10 @@
 import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
-import { buildGeneratedAthleteBio, type AthleteBioResult } from "./athlete-bio";
+import { buildGeneratedAthleteBio } from "./athlete-bio";
+import { sportIsInAthleteProfileScope } from "../site-scope";
+import { loadLinkedProfileResults } from "./linked-profile-results.server";
+import { visibleBioResults, bioAchievements } from "./profile-bio-results";
 import { ensureAthrecsSeeded } from "./seed.server";
 
 export type AthleteBioMode = "automatic" | "custom" | "hidden";
@@ -62,7 +65,7 @@ async function loadBio(
   sql: Awaited<ReturnType<typeof getSql>>,
   userId: string,
 ): Promise<AthleteBioData> {
-  const [identityRows, preferenceRows, sportRows, resultRows] = await Promise.all([
+  const [identityRows, preferenceRows, sportRows, linkedResults, hiddenRows] = await Promise.all([
     sql<IdentityRow>`
       select
         account_user."name" as auth_name,
@@ -90,29 +93,11 @@ async function loadBio(
       order by is_primary desc, sport_code
       limit 1
     `,
-    sql<AthleteBioResult>`
-      select
-        result.id as "resultId",
-        event.name as "eventName",
-        edition.event_date::text as "eventDate",
-        edition.distance_code as "distanceCode",
-        result.finish_time_seconds as "finishTimeSeconds",
-        result.overall_place as "overallPlace"
-      from athlete_account_links account_link
-      join results result on result.athlete_id = account_link.athlete_id
-      join editions edition on edition.id = result.edition_id
-      join events event on event.id = edition.event_id
-      where account_link.user_id = ${userId}
-        and account_link.status = 'active'
-        and lower(result.status) in ('finished', 'fin')
-        and not exists (
-          select 1
-          from athlete_profile_hidden_results hidden
-          where hidden.user_id = ${userId}
-            and hidden.result_id = result.id
-        )
-      order by edition.event_date desc, result.id desc
-      limit 500
+    loadLinkedProfileResults(sql, userId),
+    sql<{ result_id: number }>`
+      select result_id from athlete_profile_hidden_results where user_id=${userId}
+      union all
+      select -source_result_id from athlete_profile_hidden_source_results where user_id=${userId}
     `,
   ]);
 
@@ -126,6 +111,10 @@ async function loadBio(
     identity.full_name?.trim() ||
     identity.auth_name?.trim() ||
     "This athlete";
+  const resultRows = visibleBioResults(
+    linkedResults.filter((result) => sportIsInAthleteProfileScope(result.sport)),
+    hiddenRows.map((row) => row.result_id),
+  );
   const generatedBio = buildGeneratedAthleteBio({
     displayName,
     primarySport: sportRows[0]?.sport_code ?? "",
@@ -134,6 +123,7 @@ async function loadBio(
     country: identity.country ?? "",
     clubOrTeam: identity.club_or_team ?? "",
     results: resultRows,
+    achievements: bioAchievements(resultRows),
   });
 
   return {

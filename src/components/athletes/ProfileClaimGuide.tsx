@@ -139,7 +139,9 @@ export function ProfileClaimGuide({
         </p>
         <Button asChild>
           {confirmed || !reviewAnchor ? (
-            <Link to="/athlete-results">Add a missing result</Link>
+            <Link to="/athlete-account" search={{ section: "potential" }}>
+              Find more of my results
+            </Link>
           ) : (
             <Link to="/claim-results" search={{ resultId: reviewAnchor }}>
               Review and confirm my results

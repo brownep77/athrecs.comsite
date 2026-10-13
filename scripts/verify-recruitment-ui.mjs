@@ -114,7 +114,10 @@ try {
     assert.equal(await resultsLink.getAttribute("href"), "/athlete-account?section=potential");
     assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
   }
+  await page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" }).waitFor();
   await page.getByRole("link", { name: "Claim my athlete profile" }).click();
+  // Matches are now visible on signup too; wait for the account route before opening its dialog.
+  await page.getByRole("heading", { name: "My Athlete Account", exact: true }).waitFor();
   await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("section"), "potential");
   const match = page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" });
@@ -150,9 +153,9 @@ try {
     .waitFor();
   assert.equal(
     await page
-      .getByRole("link", { name: "Add a missing result", exact: true })
+      .getByRole("link", { name: "Find more of my results", exact: true })
       .getAttribute("href"),
-    "/athlete-results",
+    "/athlete-account?section=potential",
   );
   await page.goto(`${origin}/claim-results?resultId=991601`, { waitUntil: "networkidle" });
   await page.getByText(/Previous review saved/).waitFor();

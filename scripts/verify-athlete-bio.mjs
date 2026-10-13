@@ -3,30 +3,33 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
+import { visibleBioResults, bioAchievements } from "../src/lib/athrecs/profile-bio-results.ts";
 import { buildGeneratedAthleteBio } from "../src/lib/athrecs/athlete-bio.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const migration = await readFile(
-  resolve(root, "migrations/0023_athlete_profile_bios.sql"),
-  "utf8",
-);
+const migration = await readFile(resolve(root, "migrations/0023_athlete_profile_bios.sql"), "utf8");
 const generator = await readFile(resolve(root, "src/lib/athrecs/athlete-bio.ts"), "utf8");
 const api = await readFile(resolve(root, "src/lib/athrecs/athlete-bio-api.ts"), "utf8");
+const linkedResults = await readFile(
+  resolve(root, "src/lib/athrecs/linked-profile-results.server.ts"),
+  "utf8",
+);
 const component = await readFile(
   resolve(root, "src/components/athletes/AthleteBioCard.tsx"),
   "utf8",
 );
-const profileRoute = await readFile(
-  resolve(root, "src/routes/my-athlete-profile.tsx"),
-  "utf8",
-);
+const profileRoute = await readFile(resolve(root, "src/routes/my-athlete-profile.tsx"), "utf8");
 const packageJson = JSON.parse(await readFile(resolve(root, "package.json"), "utf8"));
 
 assert.match(migration, /create table if not exists athlete_profile_bios/);
 assert.match(migration, /mode in \('automatic', 'custom', 'hidden'\)/);
 assert.match(migration, /length\(trim\(custom_bio\)\) between 1 and 1200/);
 assert.match(migration, /references "user" \("id"\) on delete cascade/);
-assert.doesNotMatch(migration, /generated_bio text/i, "Automatic prose must not become stale stored text");
+assert.doesNotMatch(
+  migration,
+  /generated_bio text/i,
+  "Automatic prose must not become stale stored text",
+);
 
 assert.match(generator, /buildGeneratedAthleteBio/);
 assert.match(generator, /Fastest claimed performances currently include/);
@@ -34,9 +37,9 @@ assert.match(generator, /update automatically as results are uploaded and linked
 assert.doesNotMatch(generator, /openai|anthropic|gemini|fetch\(/i);
 
 assert.match(api, /middleware\(\[authMiddleware\]\)/);
-assert.match(api, /from athlete_account_links/);
-assert.match(api, /join results result/);
-assert.match(api, /order by edition\.event_date desc/);
+assert.match(linkedResults, /from athlete_account_links/);
+assert.match(linkedResults, /join athlete_claimable_results result/);
+assert.match(linkedResults, /order by result\.event_date desc/);
 assert.match(api, /mode === "hidden"/);
 assert.match(api, /mode === "custom"/);
 assert.match(api, /insert into athlete_profile_bios/);
@@ -134,6 +137,83 @@ const emptyBio = buildGeneratedAthleteBio({
   results: [],
 });
 assert.match(emptyBio, /update automatically as results are uploaded and linked/);
+
+// Biography facts use the same canonical/source-history rows and exclusions as the profile.
+const profileRow = {
+  resultId: -11,
+  editionId: 0,
+  eventName: "Synthetic Source 10K",
+  eventSlug: "synthetic-source",
+  eventDate: "2026-01-01",
+  distanceCode: "10K",
+  distanceKm: 10,
+  sport: "Running",
+  surface: "Road",
+  country: "GB",
+  status: "finished",
+  finishTimeSeconds: 2400,
+  chipTimeSeconds: 2400,
+  gunTimeSeconds: null,
+  overallPlace: 1,
+  category: null,
+  sourceUrls: [],
+  details: { verificationStatus: "source_verified" },
+};
+assert.equal(visibleBioResults([profileRow, { ...profileRow, resultId: 12 }], []).length, 1);
+assert.equal(visibleBioResults([profileRow, { ...profileRow, resultId: 12 }], [-11]).length, 0);
+assert.equal(visibleBioResults([profileRow], [-11]).length, 0);
+const earlierSourceRow = {
+  ...profileRow,
+  resultId: -12,
+  eventDate: "2025-01-01",
+  finishTimeSeconds: 2600,
+};
+assert.equal(
+  visibleBioResults([profileRow, earlierSourceRow], []).length,
+  2,
+  "Different source editions must not conflict just because their canonical edition ID is 0",
+);
+assert.deepEqual(
+  visibleBioResults([profileRow, earlierSourceRow], [-12]).map((row) => row.resultId),
+  [-11],
+  "Hiding one source race must preserve the other race in the automatic biography",
+);
+assert.equal(
+  visibleBioResults([
+    { ...profileRow, eventSlug: "" },
+    { ...profileRow, resultId: -13, eventSlug: "", eventName: "Another Synthetic 10K" },
+  ], []).length,
+  2,
+  "Identical times at different source races are distinct results",
+);
+assert.equal(
+  visibleBioResults([{ ...profileRow, details: { profileExcluded: true } }], []).length,
+  0,
+);
+assert.equal(visibleBioResults([{ ...profileRow, status: "DNF" }], []).length, 0);
+assert.equal(visibleBioResults([{ ...profileRow, eventDate: "2999-01-01" }], []).length, 0);
+assert.equal(
+  visibleBioResults([profileRow, { ...profileRow, resultId: 12, finishTimeSeconds: 2000 }], [])
+    .length,
+  0,
+);
+assert(bioAchievements([profileRow]).some((title) => title.includes("wins")));
+assert.deepEqual(
+  bioAchievements([{ ...profileRow, details: { verificationStatus: "unverified" } }]),
+  [],
+);
+const sourcedBio = buildGeneratedAthleteBio({
+  displayName: "Synthetic Runner",
+  primarySport: "Running",
+  city: "",
+  region: "",
+  country: "",
+  clubOrTeam: "",
+  results: visibleBioResults([profileRow], []),
+  achievements: bioAchievements([profileRow]),
+});
+assert.match(sourcedBio, /Synthetic Source 10K/);
+assert.match(sourcedBio, /Recorded achievements include/);
 
 const db = new PGlite();
 await db.waitReady;

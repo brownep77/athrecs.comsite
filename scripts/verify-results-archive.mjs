@@ -504,6 +504,7 @@ try {
   });
   assert.deepEqual(memberApi.requestMyArchiveMatch.middleware, ["authenticated"]);
   assert.deepEqual(memberApi.getStaffArchiveRequests.middleware, ["staff"]);
+  assert.deepEqual(memberApi.requestMyArchiveMatches.middleware, ["authenticated"]);
   process.env.VERCEL_ENV = "preview";
   await assert.rejects(
     () =>
@@ -526,6 +527,74 @@ try {
     /disabled in deployment previews/,
   );
   delete process.env.VERCEL_ENV;
+  // Bulk review is atomic, authenticated, revision-bound and idempotent.
+  await sql`insert into "user"(id,name,email,"emailVerified") values('archive-bulk','Bulk Claim Synthetic','bulk@example.test',true)`;
+  await upload(
+    dataset.id,
+    Array.from({ length: 31 }, (_, i) => row(`claim-bulk-${i}`, "Bulk Claim Synthetic")),
+  );
+  const bulkRows = await member.memberArchiveMatches(sql, "archive-bulk");
+  assert.equal(bulkRows.length, 31);
+  const selected = bulkRows.map((r) => ({ entryId: r.id, revision: r.revision }));
+  await assert.rejects(
+    () =>
+      member.requestArchiveMatches(sql, "archive-bulk", {
+        entries: [selected[0], { ...selected[1], revision: 999 }],
+        note,
+      }),
+    /changed/,
+  );
+  assert.equal(
+    (
+      await sql`select count(*)::int n from result_archive_match_requests where user_id='archive-bulk'`
+    )[0].n,
+    0,
+    "Stale selection saves no partial claims",
+  );
+  await assert.rejects(
+    () =>
+      member.requestArchiveMatches(sql, "archive-other", { entries: selected.slice(0, 2), note }),
+    /no longer available/,
+  );
+  await assert.rejects(
+    () =>
+      member.requestArchiveMatches(sql, "archive-bulk", {
+        entries: [selected[0], selected[0]],
+        note,
+      }),
+    /once/,
+  );
+  assert.deepEqual(
+    await member.requestArchiveMatches(sql, "archive-bulk", {
+      entries: selected.slice(0, 2),
+      note,
+    }),
+    { requested: 2, created: 2 },
+  );
+  assert.deepEqual(
+    await member.requestArchiveMatches(sql, "archive-bulk", {
+      entries: selected.slice(0, 2),
+      note,
+    }),
+    { requested: 2, created: 0 },
+  );
+  await assert.rejects(
+    () => member.requestArchiveMatches(sql, "archive-bulk", { entries: selected.slice(2), note }),
+    /30 archive reviews/,
+  );
+  assert.equal(
+    (
+      await sql`select count(*)::int n from result_archive_match_requests where user_id='archive-bulk'`
+    )[0].n,
+    2,
+    "Daily limit rejects the whole batch",
+  );
+  assert.equal(
+    (await sql`select count(*)::int n from athlete_account_links where user_id='archive-bulk'`)[0]
+      .n,
+    0,
+    "Review request never grants ownership",
+  );
   if (postgres) {
     const race = await createDataset(edition2.id, "Concurrent Synthetic", "concurrent");
     const req = crypto.randomUUID();
