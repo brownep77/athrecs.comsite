@@ -43,7 +43,7 @@ export function clubSearchMetadata(club: ClubSearchProfile, siteUrl: string, sit
         };
   const officialWebsite =
     club.website &&
-    !/englandathletics\.org|welshathletics\.org|membership\.athleticsireland\.ie|app\.triathlonireland\.com/.test(
+    !/englandathletics\.org|welshathletics\.org|membership\.athleticsireland\.ie|app\.triathlonireland\.com|athleticsni\.org|belfastrunning\.com|specialolympics\.ie/.test(
       club.website,
     )
       ? club.website

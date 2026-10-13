@@ -224,7 +224,7 @@ function ClubPage() {
             <p className="text-sm leading-relaxed text-muted">{club.profile.contact_note}</p>
           )}
           {club.contacts.length > 0 ? (
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className={`grid gap-3 ${club.contacts.length > 1 ? "sm:grid-cols-2" : ""}`}>
               {club.contacts.map((contact, index) => (
                 <article
                   key={`${contact.role}-${contact.name ?? contact.email ?? contact.phone ?? index}`}

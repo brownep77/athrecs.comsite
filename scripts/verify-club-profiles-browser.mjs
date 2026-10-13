@@ -101,6 +101,9 @@ try {
   await page.goto(origin);
   await page.getByRole("heading", { name: "Fictional Harriers", exact: true }).waitFor();
   assert.equal(await page.getByRole("img", { name: "Wales", exact: true }).count(), 1);
+  await page.waitForFunction(() =>
+    [...document.querySelectorAll("[data-country-code] img")].every((image) => image.complete),
+  );
   await page.getByRole("heading", { name: "Notable members, past and present" }).waitFor();
   assert.equal(
     await page.getByRole("link", { name: "membership@club.example.test" }).getAttribute("href"),
