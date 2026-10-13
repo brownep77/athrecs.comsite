@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { getPublicRaceResults } from "@/lib/athrecs/public-results-api";
 import { normalizeResultsSearch, parseResultsEditionId } from "@/lib/athrecs/public-results-search";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
-import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
+import { publicResultsHead } from "@/lib/athrecs/public-results-seo";
 import { resultSlug } from "@/lib/athrecs/result-slug";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { resultCredit } from "@/lib/athrecs/result-credit";
@@ -22,7 +22,7 @@ export const Route = createFileRoute("/results/$editionId")({
   loaderDeps: ({ search }) => normalizeResultsSearch(search),
   loader: async ({ params, deps }) => {
     const data = await getPublicRaceResults({ data: { editionId: params.editionId, q: deps.q, page: deps.page } });
-    if (!data) throw notFound();
+    if (!data || (!deps.q && deps.page > 1 && !data.results.length)) throw notFound();
     const canonicalSlug = resultSlug(data.edition);
     if (params.editionId !== canonicalSlug) throw redirect({ to: "/results/$editionId", params: { editionId: canonicalSlug }, search: { q: deps.q || undefined, page: deps.page > 1 ? deps.page : undefined }, statusCode: 301 });
     return data;
@@ -30,19 +30,7 @@ export const Route = createFileRoute("/results/$editionId")({
   staleTime: 60_000,
   head: ({ loaderData, match }) => {
     if (!loaderData) return {};
-    const edition = loaderData.edition;
-    const url = `${SITE_URL}/results/${resultSlug(edition)}`;
-    return {
-      meta: [
-        ...siteGraphMeta({
-          title: `${edition.event_name} ${edition.distance_code} results — ${edition.event_date.slice(0, 10)} | ATHRECS.com`,
-          description: `${edition.result_count.toLocaleString("en-GB")} recorded ${edition.distance_code} performance${edition.result_count === 1 ? "" : "s"} from ${edition.event_name}, ${formatRaceDateShort(edition.event_date)}${edition.city ? `, ${edition.city}` : ""}. Search athlete times and source results; coverage may be partial.`,
-          url,
-        }),
-        ...(match.search.q || match.search.page ? [{ name: "robots", content: "noindex, follow" }] : []),
-      ],
-      links: [{ rel: "canonical", href: url }],
-    };
+    return publicResultsHead(loaderData.edition, loaderData.results, normalizeResultsSearch(match.search));
   },
   pendingComponent: () => <p role="status" className="py-12 text-center text-muted">Loading race results…</p>,
   notFoundComponent: () => (
@@ -109,7 +97,7 @@ function RaceResultsPage() {
                 const finished = ["finished", "fin"].includes(result.status.trim().toLowerCase()) && !result.disqualified;
                 const credit = resultCredit(result.source_url, result.result_source);
                 return (
-                  <tr key={result.id} className="border-b border-border/70 last:border-0 hover:bg-elevated/40">
+                  <tr id={`result-${result.id}`} key={result.id} className="border-b border-border/70 last:border-0 hover:bg-elevated/40">
                     <td className="px-3 py-4 align-top font-semibold tabular-nums">{result.disqualified ? "—" : result.overall_place ?? "—"}</td>
                     <td className="px-3 py-4 align-top">
                       <Link to="/athletes/$slug" params={{ slug: result.athlete_slug }} className="font-semibold text-fg no-underline hover:text-accent">{result.athlete_name}</Link>
@@ -136,6 +124,7 @@ function RaceResultsPage() {
         <span className="text-xs text-muted">Page {search.page}</span>
         {hasMore && search.page < 1000 ? <Button asChild variant="secondary"><Link to="/results/$editionId" params={params} search={{ q: search.q || undefined, page: search.page + 1 }}>Next</Link></Button> : <span />}
       </nav>
+      {search.page > 1 && !search.q ? <Link to="/results/$editionId" params={params} search={{}} className="inline-block text-sm text-accent underline">First page of results</Link> : null}
     </div>
   );
 }

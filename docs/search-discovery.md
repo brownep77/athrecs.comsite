@@ -10,6 +10,29 @@ Public pages are eligible for crawling; search engines independently decide whet
 - Regional race views canonicalise to the main `/races/{slug}` because their race content is shared. Country landing pages and country directories retain their own URLs.
 - Syndicated news retains its RunRecs canonical source. SportsRecs retains its own canonical domain.
 - Search/filter variants are not independent index targets. Unfiltered race directory pagination has its own canonical URL.
+- Public race-result pagination also uses a canonical URL for each non-empty page
+  (`?page=2`, etc.), so performances beyond the first 100 rows remain indexable.
+  Search variants stay `noindex`; out-of-range unfiltered pages return 404.
+  Each result row has a stable fragment, and later pages link back to page one.
+
+Result pages provide `CollectionPage`, `SportsEvent` and `ItemList` structured
+data from the same public rows visible in the table. Recorded chip/gun times,
+source placings and non-finish statuses stay distinct. The page describes its
+partial coverage; display order is never labelled as official placing. Private
+archive rows and original evidence are not inputs to this metadata. Athlete
+identity or performance verification is not inferred from search eligibility.
+
+These public HTML, link and metadata improvements also help systems answer
+natural-language and spoken searches. Google's AI features need normal indexing
+and snippet eligibility, not special AI files. Google's `speakable` feature is
+for topical news, so it is not added to these sporting-result pages. Inclusion
+in Google, Bing, ChatGPT search or a voice assistant remains their decision.
+
+References checked 13 October 2026:
+- https://developers.google.com/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading
+- https://developers.google.com/search/docs/appearance/ai-features
+- https://developers.openai.com/api/docs/bots
+- https://developers.google.com/search/docs/appearance/structured-data/speakable
 
 ## Discovery
 
