@@ -1267,6 +1267,8 @@ export const listClubs = createServerFn({ method: "GET" })
         ${q}::text is null
         or lower(c.name) like ${q}
         or lower(c.city) like ${q}
+        or lower(c.county) like ${q}
+        or lower(c.country) like ${q}
         or lower(c.sports) like ${q}
       order by c.name
     `;

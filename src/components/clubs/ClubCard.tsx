@@ -4,6 +4,7 @@ import type { ClubListItem } from "@/lib/athrecs/types";
 import { Badge } from "@/components/ui/badge";
 import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge";
 import { NationFlag } from "@/components/flags/NationFlag";
+import { IS_ATHRECS_SITE } from "@/lib/site-scope";
 
 export function ClubCard({ club }: { club: ClubListItem }) {
   const location = [...new Set([club.city, club.county].map((part) => part.trim()))]
@@ -44,6 +45,15 @@ export function ClubCard({ club }: { club: ClubListItem }) {
         {location}
       </p>
       <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-subtle">{club.summary}</p>
+      {IS_ATHRECS_SITE && (
+        <Link
+          to="/clubs/register"
+          search={{ club: club.slug }}
+          className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-accent underline"
+        >
+          Register this club
+        </Link>
+      )}
     </article>
   );
 }

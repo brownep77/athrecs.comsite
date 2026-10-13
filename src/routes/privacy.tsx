@@ -54,6 +54,36 @@ function AthletePrivacyPage() {
       </div>
 
       <section className="space-y-6 rounded-xl border border-border bg-surface p-5 shadow-card md:p-8">
+        <div id="club-registration">
+          <NoticeSection title="Club registration and representative verification">
+            <p>
+              A public club listing does not establish that a person is authorised to manage it.
+              When you apply, we keep your account email, name, club role, optional contact details,
+              evidence references and authority statement private to you and authorised AthRecs
+              reviewers. We use these details to assess the club and your authority, communicate
+              review decisions, prevent impersonation and record approved access. Your account email
+              must be verified. Club contact details you enter are not automatically verified.
+            </p>
+            <p className="mt-3">
+              We process an application to provide the registration service you request and use
+              verification and decision records for our legitimate interests in preventing
+              unauthorised access. A reviewer may check your role through an independently sourced
+              club contact. Do not upload membership lists, government identity documents, passwords
+              or private access links in this form. If further evidence is necessary, a reviewer
+              will explain what is needed. Your declaration does not authorise marketing, member
+              invitations or publication of athletes’ private information.
+            </p>
+            <p className="mt-3">
+              You can save and update drafts, view decisions and withdraw open applications in My
+              club registrations. We retain application and review records while needed to resolve
+              the application, administer representative access or handle a dispute, and review
+              their continued necessity. Withdrawn applications are not automatically erased.
+              Contact paul@athrecs.com to request access, correction, deletion, object to processing
+              or report an unauthorised club representative. Club affiliation and profile ownership
+              remain separate from representative approval.
+            </p>
+          </NoticeSection>
+        </div>
         <NoticeSection title="Information required to operate the account">
           <p>
             When email codes are available, you can sign in or create an account with just your
