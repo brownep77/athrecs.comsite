@@ -28,6 +28,7 @@ import {
   getPublicAthletePreview,
 } from "@/lib/athrecs/api";
 import { absoluteUrl, SITE_NAME } from "@/lib/athrecs/seo";
+import { breadcrumbJsonLd } from "@/lib/athrecs/breadcrumbs";
 import { IS_RUNRECS_SITE } from "@/lib/site-scope";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -129,24 +130,18 @@ export const Route = createFileRoute("/athletes/$slug")({
     [ATHLETE_INDEXING_HEADER]: isIndexableAthletePage(loaderData) ? "1" : "0",
     // Private and nonexistent profiles get the same sign-in shell and status.
     // Never expose profile existence through an anonymous lookup.
-    [ATHLETE_UNAVAILABLE_HEADER]:
-      !IS_RUNRECS_SITE && loaderData?.kind === "sign-in" ? "1" : "0",
+    [ATHLETE_UNAVAILABLE_HEADER]: !IS_RUNRECS_SITE && loaderData?.kind === "sign-in" ? "1" : "0",
   }),
   head: ({ params, loaderData }) => {
-    const preview = loaderData?.kind === "public-preview" ? loaderData.preview : null;
-    const searchContent = preview
-      ? publicAthleteSearchContent(preview)
-      : loaderData?.kind === "published-history"
-        ? athleteSearchContent(loaderData)
-        : null;
+    // Metadata is identical for anonymous visitors and signed-in members. Never
+    // use the member-only history to fill a crawler's description or JSON-LD.
+    const preview = loaderData && "preview" in loaderData ? loaderData.preview : null;
+    const searchContent = preview ? publicAthleteSearchContent(preview) : null;
     return {
       links: [{ rel: "canonical", href: absoluteUrl(`/athletes/${params.slug}`) }],
       meta: [
         {
-          title:
-            preview || loaderData?.kind === "published-history"
-              ? searchContent!.title
-              : `Athlete profile | ${SITE_NAME}`,
+          title: searchContent ? searchContent.title : `Athlete profile | ${SITE_NAME}`,
         },
         {
           name: "robots",
@@ -156,10 +151,9 @@ export const Route = createFileRoute("/athletes/$slug")({
         },
         {
           name: "description",
-          content:
-            preview || loaderData?.kind === "published-history"
-              ? searchContent!.description
-              : "Sign in to view athlete profiles and published results on ATHRECS.",
+          content: searchContent
+            ? searchContent.description
+            : "Sign in to view athlete profiles and published results on ATHRECS.",
         },
         ...(searchContent
           ? [
@@ -178,6 +172,18 @@ export const Route = createFileRoute("/athletes/$slug")({
               {
                 type: "application/ld+json",
                 children: JSON.stringify(searchContent.jsonLd).replace(/</g, "\\u003c"),
+              },
+              {
+                type: "application/ld+json",
+                children: JSON.stringify(
+                  breadcrumbJsonLd([
+                    { name: "Athletes", path: "/athletes" },
+                    {
+                      name: preview!.displayName,
+                      path: `/athletes/${encodeURIComponent(preview!.slug)}`,
+                    },
+                  ]),
+                ).replace(/</g, "\\u003c"),
               },
             ]
           : [],

@@ -6,11 +6,13 @@ import { AthleteId } from "./AthleteId";
 import { CountryFlag } from "./CountryFlag";
 import { Badge } from "@/components/ui/badge";
 import { ShareProfileButton } from "./ShareProfileButton";
+import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
 
 const NO_PERSONAL_BESTS = new Set<number>();
 
 export function PublicAthletePreview({ profile }: { profile: Preview }) {
   const visibleCount = profile.entries.length + profile.reportedRecords.length;
+  const biography = publicAthleteNarrative(profile);
   return (
     <div className="public-athlete-profile space-y-6" data-profile-access="preview">
       <Link to="/athletes" className="inline-flex min-h-11 items-center text-sm text-accent">
@@ -46,10 +48,10 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
             </Badge>
           ))}
         </div>
-        {profile.biography.length ? (
+        {biography.length ? (
           <div className="space-y-2">
             <h2 className="text-sm font-semibold">Biography</h2>
-            {profile.biography.map((paragraph, index) => (
+            {biography.map((paragraph, index) => (
               <p key={index} className="text-sm leading-relaxed text-muted">
                 {paragraph}
               </p>

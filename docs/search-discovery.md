@@ -115,6 +115,34 @@ sitemap and directory output plus race/club links in a disposable synthetic data
 verification qualifications. `npm run verify:profile-view-login` retains the complete
 anonymous/member boundary regression, allowing only the new bounded event summary.
 
+## Athlete and race biographies
+
+Public athlete biographies retain their existing text and add a bounded narrative
+from the public career summary, known nationality and up to three explicitly
+source-checked or administrator-confirmed podium performances in the latest-five
+preview. Category and gender placings retain their classification; ambiguous source
+placings, heats, splits, non-finishes and unverified rows cannot become achievements.
+Existing biography-sharing opt-outs suppress this extension. Countries are never
+inferred from race location, residence, club or a person's name.
+
+The rendered biography and Person structured data use the same public input.
+Person data includes an explicitly recognised nationality and shared club where
+available. Anonymous and signed-in profile heads now use the same preview, so
+member-only results cannot extend metadata. Timed generated biographies identify
+chip, gun or unknown timing. No stored biography or athlete result is overwritten.
+
+Every AthRecs race page has an About paragraph generated from its recorded sport,
+location including county/country, disciplines, surface, organiser and edition
+dates. Archive ranges describe recorded editions, not the race's founding year or
+uninterrupted history. Titles and snippets include location and edition context;
+the structured description matches the visible paragraph. Athlete and race pages
+also emit canonical breadcrumb data. Existing slugs, redirects, public eligibility
+and live sitemap inclusion remain in place; new records use the same generators.
+
+`node scripts/verify-page-biographies.mjs` covers the content boundaries.
+`node scripts/verify-public-career-discovery.mjs` checks the actual anonymous HTML,
+metadata, JSON-LD, club/race links, sitemap and owner opt-outs in a disposable database.
+
 ## Unavailable and renamed athlete URLs
 
 Anonymous requests without an approved public preview retain the usable sign-in

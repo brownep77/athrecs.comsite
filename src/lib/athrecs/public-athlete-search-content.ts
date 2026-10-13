@@ -1,17 +1,11 @@
 import type { PublicAthletePreview } from "./public-athlete-preview";
 import { absoluteUrl, SITE_NAME } from "./seo.ts";
+import { publicAthleteNarrative, publicNationality } from "./public-athlete-narrative.ts";
+
+import { searchSnippet } from "./search-text.ts";
+export { searchSnippet } from "./search-text.ts";
 
 const clean = (value: string) => value.replace(/\s+/g, " ").trim();
-
-/** Keep snippets readable without changing the meaning or publishing extra records. */
-export function searchSnippet(value: string, limit = 175): string {
-  const text = clean(value);
-  if (text.length <= limit) return text;
-  return `${text
-    .slice(0, limit - 1)
-    .replace(/\s+\S*$/, "")
-    .trimEnd()}…`;
-}
 
 /** Only the anonymous preview and its bounded public career summary supply metadata. */
 export function publicAthleteSearchContent(profile: PublicAthletePreview) {
@@ -23,8 +17,9 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
     ),
   ];
   const sportLabel = sports.length <= 2 ? sports.join(" & ") : "Sport";
-  const title = `${profile.displayName} — ${sportLabel ? `${sportLabel} results & biography` : "Biography & latest results"} | ${SITE_NAME}`;
-  const biography = clean(profile.biography.join(" "));
+  const nationality = publicNationality(profile.nationality);
+  const title = `${profile.displayName} — ${sportLabel ? `${sportLabel} results & biography` : "Biography & latest results"}${nationality ? ` · ${nationality}` : ""} | ${SITE_NAME}`;
+  const biography = clean(publicAthleteNarrative(profile).join(" "));
   const career = profile.careerSummary;
   const careerText = career
     ? `${career.text} Selected recorded events: ${career.events
@@ -51,8 +46,13 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
     ? `Recorded results include ${events.join(" and ")}.`
     : "View the public biography and latest recorded results.";
   const intro = biography.match(/^.*?[.!?](?:\s|$)/)?.[0]?.trim() || biography;
+  const generatedIntro =
+    /with (?:.+ results recorded on ATHRECS|a public profile on ATHRECS)\./.test(intro);
+  const identity = generatedIntro
+    ? `${profile.displayName} — ${sportLabel || "Sport"} results${nationality ? `; recorded nationality: ${nationality}` : ""}.`
+    : intro;
   const description = searchSnippet(
-    `${intro || `${profile.displayName}'s athlete profile.`} ${resultsSummary}`,
+    `${identity || `${profile.displayName}'s athlete profile.`} ${resultsSummary}`,
   );
   const url = absoluteUrl(`/athletes/${encodeURIComponent(profile.slug)}`);
   return {
@@ -71,6 +71,18 @@ export function publicAthleteSearchContent(profile: PublicAthletePreview) {
         "@id": `${url}#athlete`,
         name: profile.displayName,
         url,
+        ...(nationality ? { nationality: { "@type": "Country", name: nationality } } : {}),
+        ...(profile.club && !/^(?:unattached|unknown|tbc|n\/?a)$/i.test(profile.club.trim())
+          ? {
+              memberOf: {
+                "@type": "SportsOrganization",
+                name: profile.club,
+                ...(profile.clubSlug
+                  ? { url: absoluteUrl(`/clubs/${encodeURIComponent(profile.clubSlug)}`) }
+                  : {}),
+              },
+            }
+          : {}),
         ...(biography || careerText
           ? { description: [biography, careerText].filter(Boolean).join(" ") }
           : {}),

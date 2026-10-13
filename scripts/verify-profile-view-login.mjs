@@ -532,6 +532,28 @@ try {
     })
   ).text();
   const confirmed = load(confirmedHtml);
+  const anonymousConfirmed = load(
+    await (await fetch(origin + "/athletes/published-history-fixture")).text(),
+  );
+  assert.equal(
+    confirmed("title").text(),
+    anonymousConfirmed("title").text(),
+    "Member and public metadata use the same approved preview",
+  );
+  assert.equal(
+    confirmed('meta[name="description"]').attr("content"),
+    anonymousConfirmed('meta[name="description"]').attr("content"),
+  );
+  const personSchema = ($) =>
+    $('script[type="application/ld+json"]')
+      .toArray()
+      .map((element) => JSON.parse($(element).text()))
+      .find((entity) => entity.mainEntity?.["@type"] === "Person");
+  assert.deepEqual(
+    personSchema(confirmed),
+    personSchema(anonymousConfirmed),
+    "Member-only history cannot enter structured data",
+  );
   assert.equal(confirmed("#results-history tbody tr").length, 11);
   assert.equal(confirmed("#performance-history").length, 0);
   assert(!confirmed("#results-history tr[data-history-result]").text().includes("Unverified"));
@@ -728,10 +750,15 @@ try {
   });
   await expectSitemap(true);
   for (const slug of ["view-login-fixture", "view-login-private", "nonexistent-test-profile"]) {
-    await expectSearch(slug, false, {
-      "X-Athrecs-Profile-Indexable": "1",
-      "X-Athrecs-Profile-Unavailable": "0",
-    }, 404);
+    await expectSearch(
+      slug,
+      false,
+      {
+        "X-Athrecs-Profile-Indexable": "1",
+        "X-Athrecs-Profile-Unavailable": "0",
+      },
+      404,
+    );
   }
   const directory = await fetch(origin + "/athletes", {
     headers: { "X-Athrecs-Profile-Indexable": "1" },
