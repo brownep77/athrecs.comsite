@@ -65,6 +65,11 @@ export async function saveClubApplication(sql: Sql, userId: string, input: ClubS
       if (!club) throw new Error("Choose an existing club from the directory.");
     }
     const key = registrationKey(data.clubId, data.details);
+    // Hold the same row lock as review/withdrawal before reading its revision.
+    // Otherwise an in-flight draft save could overwrite a staff approval.
+    if (data.id)
+      await tx`select id from club_registration_applications
+      where id = ${data.id} and user_id = ${userId} for update`;
     const existing = data.id ? await ownApplication(tx, userId, data.id) : null;
     const status = data.submit ? "pending" : "draft";
     if (existing) {
