@@ -5,9 +5,7 @@ import { getSql } from "@/lib/db";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { formatAthleteId, parseAthleteId } from "./athlete-id";
 import { readProfileDetails, type AthleteProfileDetails } from "./profile-details";
-import { combineProfileResults, type ProfileResult } from "./profile-records";
-import { sourceHistorySchema } from "./source-performance-history";
-import { readResultDetails } from "./result-details";
+import { loadStaffResultGroups } from "./staff-profile-results.server";
 import {
   loadStaffDirectoryPage,
   selectStaffDirectoryNumbers,
@@ -140,6 +138,19 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumbe
   );
   return { all, filtered, sports };
 }
+async function updateStoredResultCounts(profiles: StaffAthlete[]) {
+  const records = await loadStaffResultGroups(
+    await getSql(),
+    profiles.map((profile) => ({
+      key: profile.athleteNumber,
+      sourceIds: profile.sources.map((source) => source.id),
+    })),
+  );
+  for (const profile of profiles) {
+    profile.resultCount = records.get(profile.athleteNumber)?.resultCount ?? 0;
+  }
+}
+
 export const getStaffAthleteDirectory = createServerFn({ method: "GET" })
   .middleware([staffMiddleware])
   .validator((input: DirectoryFilters) => filterSchema.parse(input))
@@ -147,6 +158,7 @@ export const getStaffAthleteDirectory = createServerFn({ method: "GET" })
     await ensureAthrecsSeeded();
     const { numbers, ...page } = await loadStaffDirectoryPage(await getSql(), data);
     const { all } = await loadDirectory(filterSchema.parse({}), numbers);
+    await updateStoredResultCounts(all);
     const profiles = new Map(all.map((profile) => [profile.athleteNumber, profile]));
     return { ...page, athletes: numbers.flatMap((number) => profiles.get(number) ?? []) };
   });
@@ -191,32 +203,8 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
     if (!athlete) return null;
     const sql = await getSql();
     const sourceIds = athlete.sources.map((source) => source.id);
-    const results = await sql<ProfileResult>`
-      select r.id as "resultId", r.edition_id as "editionId",
-        e.name as "eventName", e.slug as "eventSlug", e.sport, e.surface, e.country, e.city,
-        ed.event_date::text as "eventDate", ed.distance_code as "distanceCode",
-        ed.distance_km as "distanceKm", r.status,
-        r.finish_time_seconds as "finishTimeSeconds", r.chip_time_seconds as "chipTimeSeconds",
-        r.gun_time_seconds as "gunTimeSeconds", r.overall_place as "overallPlace", r.category,
-        r.gender_place as "genderPlace", r.category_place as "categoryPlace",
-        (select gender from athletes where id=r.athlete_id) as "resultGender",
-        r.result_source as "resultSource", r.result_details as details,
-        array(select distinct url from (
-          select r.source_url as url union all
-          select ref.source_url from result_source_references ref where ref.result_id=r.id
-        ) sources where url like 'https://%') as "sourceUrls"
-      from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id
-      where r.athlete_id=any(${sourceIds}::int[])
-      order by ed.event_date desc,r.id desc
-    `;
-    const histories = await sql`
-      select provider, external_id as "externalId", source_url as "sourceUrl",
-        captured_at::text as "capturedAt", complete,
-        years_expected as "yearsExpected", years_captured as "yearsCaptured", performances
-      from athlete_source_histories
-      where athlete_id=any(${sourceIds}::int[])
-      order by provider, external_id
-    `;
+    const records = (await loadStaffResultGroups(sql, [{ key: number, sourceIds }])).get(number)!;
+    athlete.resultCount = records.resultCount;
     const bioNotes = await sql<{ label: string; bio: string }>`
       select a.display_name as label, a.bio from athletes a
       where a.id=any(${sourceIds}::int[]) and a.bio <> ''
@@ -234,10 +222,8 @@ export const getStaffAthleteProfile = createServerFn({ method: "GET" })
       })),
       athlete,
       bioNotes,
-      results: combineProfileResults(
-        results.map((result) => ({ ...result, details: readResultDetails(result.details) })),
-      ),
-      sourceHistories: histories.map((history) => sourceHistorySchema.parse(history)),
+      results: records.results,
+      sourceHistories: records.sourceHistories,
     };
   });
 
@@ -275,36 +261,40 @@ export const exportStaffAthleteDirectory = createServerFn({ method: "POST" })
       "Profile URL",
     ]);
     sports.addRow(["AthRecs ID", "Name", "Sport", "Coach"]);
-    for (const p of filtered) {
-      athletes.addRow([
-        p.athrecsId,
-        p.name,
-        p.sports.join("; "),
-        p.visibility,
-        p.registered ? "Yes" : "No",
-        p.nationality || p.details.nationality,
-        p.details.birthCountry,
-        p.birthday,
-        p.details.birthdayVisibility,
-        p.details.runningAgeCategory,
-        p.club,
-        p.details.previousClub,
-        p.details.coach,
-        p.details.manager,
-        p.details.acceptContact ? "Yes" : "No",
-        p.city,
-        p.country,
-        p.email,
-        p.resultCount,
-        p.profilePath ? `https://www.athrecs.com${p.profilePath}` : "",
-      ]);
-      for (const sport of p.sports)
-        sports.addRow([
+    for (let offset = 0; offset < filtered.length; offset += 50) {
+      const batch = filtered.slice(offset, offset + 50);
+      await updateStoredResultCounts(batch);
+      for (const p of batch) {
+        athletes.addRow([
           p.athrecsId,
           p.name,
-          sport,
-          p.coaches.find((c) => c.sport === sport)?.name || p.details.coach,
+          p.sports.join("; "),
+          p.visibility,
+          p.registered ? "Yes" : "No",
+          p.nationality || p.details.nationality,
+          p.details.birthCountry,
+          p.birthday,
+          p.details.birthdayVisibility,
+          p.details.runningAgeCategory,
+          p.club,
+          p.details.previousClub,
+          p.details.coach,
+          p.details.manager,
+          p.details.acceptContact ? "Yes" : "No",
+          p.city,
+          p.country,
+          p.email,
+          p.resultCount,
+          p.profilePath ? `https://www.athrecs.com${p.profilePath}` : "",
         ]);
+        for (const sport of p.sports)
+          sports.addRow([
+            p.athrecsId,
+            p.name,
+            sport,
+            p.coaches.find((c) => c.sport === sport)?.name || p.details.coach,
+          ]);
+      }
     }
     for (const sheet of [athletes, sports]) {
       sheet.views = [{ state: "frozen", ySplit: 1 }];
