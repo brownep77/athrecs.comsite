@@ -49,7 +49,10 @@ function emailFor(row: Delivery): SignupEmail {
   return {
     from: "paul@athrecs.com",
     to: [row.recipient],
-    subject: "New AthRecs signup",
+    subject:
+      row.signup_email.toLowerCase() === "paul@athrecs.com"
+        ? "[FICTIONAL TEST] New AthRecs signup"
+        : "New AthRecs signup",
     text,
     html: `<div style="font-family:Arial,sans-serif;color:#17212b;max-width:560px"><img src="https://www.athrecs.com/athrecs-logo.png" alt="AthRecs.com" width="252" /><h1 style="font-size:24px">New AthRecs signup</h1><p style="white-space:pre-line;line-height:1.6">${escapeHtml(text)}</p><a href="${SIGNUPS_URL}">View signed-up athletes</a></div>`,
   };

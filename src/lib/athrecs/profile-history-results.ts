@@ -70,6 +70,7 @@ export function historyResultCountry(row: SourcePerformance): string {
 export function isCompletedHistoryResult(row: SourcePerformance, today = new Date()): boolean {
   if (
     !["source_verified", "verified_by_administrator"].includes(row.verificationStatus ?? "") ||
+    row.syntheticTest ||
     row.profileExcluded ||
     row.disqualification ||
     /\b(?:DNF|DNS|DQ|DSQ|NM|NH|retired|withdrawn)\b/i.test(row.performance) ||

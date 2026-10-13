@@ -216,6 +216,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
         on owner.athlete_id = athlete.id
        and owner.status = 'active'
       where result.available
+        and athrecs_test_access(${context.userId},athlete.id)
         and (${data.year}='' or left(result.event_date,4)=${data.year})
         and (${distances.length}=0 or regexp_replace(lower(result.distance_code),'[^a-z0-9.]','','g')=any(${distances}::text[]))
         and coalesce(owner.user_id, '') <> ${context.userId}

@@ -385,6 +385,15 @@ function SignedInAccount() {
       ) : (
         <AccountHero />
       )}
+      {account.data.verifiedEmail.toLowerCase() === "paul@athrecs.com" ? (
+        <p className="rounded-xl border border-amber-400 bg-amber-50 p-4 text-slate-900">
+          <strong>Fictional test account.</strong> Your practice data stays private.{" "}
+          <Link to="/test-account" className="underline">
+            Open Test 1–10 and repeat the journey
+          </Link>
+          .
+        </p>
+      ) : null}
       {IS_ATHRECS_SITE ? (
         <ProfileClaimGuide
           account={account.data}

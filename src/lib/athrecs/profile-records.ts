@@ -177,6 +177,7 @@ export function combineProfileResults<T extends ProfileResult>(
 
 export function eligiblePerformance(result: ProfileResult): boolean {
   return (
+    !result.details?.syntheticTest &&
     !result.details?.profileExcluded &&
     !/not legal/i.test(result.details?.note ?? "") &&
     roadPerformanceCondition(result)?.eligible !== false &&

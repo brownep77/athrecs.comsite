@@ -1346,7 +1346,7 @@ export const getHomeStats = createServerFn({ method: "GET" }).handler(async () =
   const today = todayIso();
   const events = await sql<{ n: number }>`select count(*)::int as n from events`;
   const clubs = await sql<{ n: number }>`select count(*)::int as n from clubs`;
-  const athletes = await sql<{ n: number }>`select count(*)::int as n from athletes`;
+  const athletes = await sql<{ n: number }>`select count(*)::int as n from athletes where coalesce(profile_details->>'syntheticTest','false')<>'true'`;
   const upcoming = await sql<{ n: number }>`
       select count(*)::int as n from editions where event_date >= ${today}::date
     `;

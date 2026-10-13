@@ -11,6 +11,7 @@ export const disqualificationSchema = z.object({
 });
 export type Disqualification = z.infer<typeof disqualificationSchema>;
 export const resultDetailsSchema = z.object({
+  syntheticTest: z.boolean().optional(),
   verificationStatus: z
     .enum(["unverified", "source_verified", "verified_by_administrator"])
     .optional(),

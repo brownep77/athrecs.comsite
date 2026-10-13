@@ -1,0 +1,28 @@
+name: Private fictional test account
+on:
+  pull_request:
+    paths:
+      - 'src/lib/athrecs/**'
+      - 'src/lib/auth/email.server.ts'
+      - 'src/routes/test-account.tsx'
+      - 'migrations/**'
+      - 'scripts/verify-test-account.mjs'
+      - '.github/workflows/test-account.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: fictional-test-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run verify:test-account

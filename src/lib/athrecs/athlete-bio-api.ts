@@ -115,16 +115,19 @@ async function loadBio(
     linkedResults.filter((result) => sportIsInAthleteProfileScope(result.sport)),
     hiddenRows.map((row) => row.result_id),
   );
-  const generatedBio = buildGeneratedAthleteBio({
-    displayName,
-    primarySport: sportRows[0]?.sport_code ?? "",
-    city: identity.city ?? "",
-    region: identity.region ?? "",
-    country: identity.country ?? "",
-    clubOrTeam: identity.club_or_team ?? "",
-    results: resultRows,
-    achievements: bioAchievements(resultRows),
-  });
+  const [test] = await sql<{ test: boolean }>`select athrecs_is_test_user(${userId}) as test`;
+  const generatedBio = test?.test
+    ? `FICTIONAL TEST ATHLETE. ${displayName} is a male test runner. This private walkthrough has ${linkedResults.filter((r) => r.details?.syntheticTest && !hiddenRows.some((h) => h.result_id === r.resultId)).length} selected fictional results. These are practice records, not sporting achievements.`
+    : buildGeneratedAthleteBio({
+        displayName,
+        primarySport: sportRows[0]?.sport_code ?? "",
+        city: identity.city ?? "",
+        region: identity.region ?? "",
+        country: identity.country ?? "",
+        clubOrTeam: identity.club_or_team ?? "",
+        results: resultRows,
+        achievements: bioAchievements(resultRows),
+      });
 
   return {
     mode,
