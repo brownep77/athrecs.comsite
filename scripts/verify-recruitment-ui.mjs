@@ -121,6 +121,15 @@ try {
   await page.getByRole("heading", { name: "Potential results matching your name" }).waitFor();
   assert.equal(new URL(page.url()).searchParams.get("section"), "potential");
   const match = page.getByRole("article").filter({ hasText: "Synthetic Recruitment 10K" });
+  await page.getByLabel("Distance", { exact: true }).fill("%%%");
+  await page.getByRole("button", { name: "Search stored results", exact: true }).click();
+  const filterAlert = page.getByRole("alert");
+  await filterAlert.waitFor();
+  assert.match(await filterAlert.textContent(), /Enter a distance such as 5K/);
+  assert(
+    !/"code"|"path"|"custom"/.test(await filterAlert.textContent()),
+    "Validation is readable, without schema JSON",
+  );
   await page.getByLabel("Distance", { exact: true }).fill("5K");
   await page.getByRole("button", { name: "Search stored results", exact: true }).click();
   await page.getByText("No conservative name matches were found yet.", { exact: true }).waitFor();
