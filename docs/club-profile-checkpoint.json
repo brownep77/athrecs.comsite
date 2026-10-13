@@ -1,66 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-13-batch04",
+  "lastEditorialBatch": "2026-10-13-batch05",
   "reviewedAt": "2026-10-13",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "birmingham-running-athletics-and-triathlon-club-brat",
-    "chester-triathlon-club",
-    "fairwater-runners-cwmbran",
-    "gog-triathlon-club",
-    "leeds-and-bradford-triathlon-club",
-    "manchester-triathlon-club",
-    "manx-fell-runners",
-    "manx-harriers",
-    "northern-isle-of-man-ac",
-    "thames-turbo-triathlon-club",
-    "3d-triathlon-club",
-    "athy-triathlon-club",
-    "belpark-tc",
-    "cork-triathlon-club",
-    "limerick-tc",
-    "midleton-cycling-and-triathlon-club",
-    "naas-t-c",
-    "welsh-athletics-brecon-athletic-club",
-    "welsh-athletics-bridgend-athletics",
-    "welsh-athletics-carmarthen-and-district-harriers",
-    "welsh-athletics-celtic-tri",
-    "welsh-athletics-clwb-run-wales",
-    "welsh-athletics-deeside-aac",
-    "welsh-athletics-eryri-harriers",
-    "welsh-athletics-menai-track-and-field",
-    "welsh-athletics-penarth-and-dinas-runners",
-    "welsh-athletics-wrexham-amateur-athletic-club"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 112,
-    "notableMemberEntries": 63,
-    "clubsWithContacts": 488,
-    "contactEntries": 824,
-    "clubsWithEmail": 475,
-    "clubsWithPhone": 54,
-    "clubsWithSocials": 896,
-    "socialLinks": 1807,
-    "websiteContactRecords": 645
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 27,
-    "notableMemberEntriesAdded": 11,
-    "contactOrSocialRecordsChanged": 23,
-    "trainingOrClubhouseVenuesClarified": 9,
-    "ambiguousCombinedVenueRemoved": "gog-triathlon-club"
-  },
-  "validationBeforeCommit": [
-    "actual-catalogue profile and metadata checks",
-    "targeted ESLint",
-    "TypeScript typecheck",
-    "production build"
-  ],
-  "nextCandidateSlugs": [
     "4life-triathlon-club",
     "altrincham-and-district-athletic-club-limited",
     "blackburn-harriers-and-ac",
@@ -83,10 +29,68 @@
     "welsh-athletics-trots",
     "welsh-athletics-wrecsam-tri"
   ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 133,
+    "notableMemberEntries": 75,
+    "clubsWithContacts": 494,
+    "contactEntries": 835,
+    "clubsWithEmail": 481,
+    "clubsWithPhone": 55,
+    "clubsWithSocials": 904,
+    "socialLinks": 1825,
+    "websiteContactRecords": 659
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 21,
+    "notableMemberEntriesAdded": 12,
+    "contactOrSocialRecordsChanged": 17,
+    "trainingOrClubhouseVenuesClarified": 16,
+    "combinedAddressesReplacedByNotes": [
+      "athletics-ireland-ardee-and-district-a-c",
+      "welsh-athletics-sarn-helen"
+    ],
+    "sportsCorrected": [
+      "altrincham-and-district-athletic-club-limited",
+      "welsh-athletics-sarn-helen",
+      "welsh-athletics-wrecsam-tri"
+    ]
+  },
+  "validationBeforeCommit": [
+    "actual-catalogue profile and metadata checks",
+    "directory audit checks",
+    "targeted ESLint",
+    "TypeScript typecheck",
+    "production build"
+  ],
+  "nextCandidateSlugs": [
+    "charnwood-a-c",
+    "coventry-triathletes",
+    "leamington-athletics-academy",
+    "leamington-cycling-and-athletics-club",
+    "nuneaton-harriers",
+    "rugby-and-northampton-ac",
+    "tipton-harriers",
+    "athletics-ni-barf-ni",
+    "athletics-ni-belfast-running-club",
+    "athletics-ni-dub-running-club",
+    "athletics-ni-mallusk-harriers",
+    "athletics-ni-victoria-park-and-connswater-ac",
+    "athletics-ireland-abbey-striders-a-c",
+    "athletics-ireland-adamstown-a-c",
+    "athletics-ireland-aghada-running-club-a-c",
+    "athletics-ireland-athlone-a-c",
+    "athletics-ireland-balbriggan-and-district-a-c",
+    "athletics-ireland-ballinasloe-and-district-a-c",
+    "clonmel-triathlon-club",
+    "kilkenny-triathlon-club",
+    "waterford-triathlon-club",
+    "west-clare-triathlon-club"
+  ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate Irish running clubs, north-west English athletics, Welsh running and multisport, and the listed swimming-club candidate.",
+    "Rotate Midlands English athletics and cycling, Northern Irish running, Irish regional athletics and triathlon. These are unresearched candidate slugs, not completed checks.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -107,6 +111,30 @@
       "url": "https://irun.wales/about-us/contact-us/",
       "status": "contact-form-and-supported-email-retained",
       "reason": "The page contains differing office postcodes/phone numbers and one mismatched mailto label. No new office street address or telephone was promoted as a training venue or verified club phone."
+    },
+    {
+      "slug": "athletics-ireland-bandon-a-c",
+      "url": "https://www.bandonac.org/wordpress/?page_id=6338",
+      "status": "biography-added-from-governing-body-sources",
+      "reason": "Club pages returned a certificate-related 502 error. Athletics Ireland’s 16 April 2026 report establishes the new Clancoolbeg track and historical member connections. Confirm new venue Eircode and current club-site joining details when readable."
+    },
+    {
+      "slug": "athletics-ireland-ballina-a-c",
+      "url": "https://ballinaathletics.wordpress.com/about/",
+      "status": "biography-added-without-founded-year",
+      "reason": "Older club page states 1975; a Mayo Council search result references an earlier revival, but the Council page could not be opened. No exact founded_year or old committee telephone details were promoted. Current training location and enquiry email use Athletics Ireland."
+    },
+    {
+      "slug": "athletics-ireland-ardee-and-district-a-c",
+      "url": "https://ardeedistrictac.com/",
+      "status": "seasonal-venue-follow-up",
+      "reason": "The homepage’s October 2026 notice supersedes the general contact page for winter juvenile training during St Mary’s GFC pitch maintenance. Revisit for the end of the temporary arrangements."
+    },
+    {
+      "slug": "athletics-ireland-blackrock-dublin-a-c",
+      "url": "https://blackrockac.ie/about/",
+      "status": "additional-social-platform-deferred",
+      "reason": "The official page links https://bsky.app/profile/blackrockac.bsky.social. The current typed social-link model does not support Bluesky; no schema/UI expansion was made in this editorial batch."
     }
   ],
   "coverageReviewNotes": [
