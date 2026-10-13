@@ -90,7 +90,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Club directory and representative registration
-        run: npm run verify:club-registration && npm run verify:club-registration-browser
+        run: npm run verify:club-registration && npm run verify:club-registration-browser && npm run verify:club-registration-flow
 
       - name: Verified fixture file import browser check
         run: node scripts/verify-fixture-upload-ui.mjs

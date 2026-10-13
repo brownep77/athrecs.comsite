@@ -140,6 +140,15 @@ export function AthleteResultsSection({
 
   return (
     <div className="space-y-6">
+      {[...results, ...hiddenResults].some((result) => result.details?.syntheticTest) ? (
+        <p
+          role="note"
+          className="rounded-xl border border-amber-400 bg-amber-50 p-4 text-slate-900"
+        >
+          <strong>FICTIONAL TEST RESULTS</strong> — invented practice records, excluded from PBs,
+          medals, achievements and public statistics.
+        </p>
+      ) : null}
       <section className="space-y-4">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>

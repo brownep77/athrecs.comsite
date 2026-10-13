@@ -14,9 +14,9 @@ export const Route = createFileRoute("/clubs/")({
       ? {}
       : {
           meta: siteGraphMeta({
-            title: "Running and athletics clubs | ATHRECS",
+            title: "Running, swimming, cycling and triathlon clubs | ATHRECS",
             description:
-              "Find running, athletics and multi-sport clubs. Browse club profiles, locations, official websites and athlete records on AthRecs.",
+              "Find running, swimming, cycling, triathlon and athletics clubs. Browse club profiles, locations, official websites and athlete records on AthRecs.",
             url: `${SITE_URL}/clubs`,
           }),
           links: [{ rel: "canonical", href: `${SITE_URL}/clubs` }],

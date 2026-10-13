@@ -9,6 +9,7 @@ const sourceUrl = z
   .url()
   .refine((value) => new URL(value).protocol === "https:");
 export const sourcePerformanceSchema = z.object({
+  syntheticTest: z.boolean().optional(),
   year: z.number().int().min(1800).max(2200),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   endDate: z

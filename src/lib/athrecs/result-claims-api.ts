@@ -280,6 +280,10 @@ async function canAccessClaimCandidate(
   userId: string,
   candidate: ClaimCandidateIdentity,
 ): Promise<boolean> {
+  const [testAccess] = await sql<{
+    allowed: boolean;
+  }>`select athrecs_test_access(${userId},${candidate.athleteId}) as allowed`;
+  if (!testAccess?.allowed) return false;
   const accessRows = await sql<{ allowed: boolean }>`
     select (
       exists (
@@ -404,6 +408,7 @@ export const getClaimableResult = createServerFn({ method: "GET" })
   .handler(async ({ data, context }) => {
     const sql = await ready();
     const rows = await sql<{
+      synthetic_test: boolean;
       result_id: number;
       athlete_id: number;
       athlete_slug: string;
@@ -429,6 +434,7 @@ export const getClaimableResult = createServerFn({ method: "GET" })
       club_name: string | null;
     }>`
       select
+        result.result_details->>'syntheticTest'='true' as synthetic_test,
         result.id as result_id,
         athlete.id as athlete_id,
         athlete.slug as athlete_slug,
@@ -481,6 +487,7 @@ export const getClaimableResult = createServerFn({ method: "GET" })
     }>`select "emailVerified" as verified from "user" where id=${context.userId}`;
     if (!account?.verified) return null;
     return {
+      syntheticTest: row.synthetic_test === true,
       review: data.includeReview
         ? publicReview(await loadProfileResultReview(sql, context.userId, row.athlete_id))
         : null,

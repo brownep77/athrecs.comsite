@@ -57,6 +57,7 @@ function hasPastYear(date: string, today = new Date()): boolean {
 
 export function hasRecordedFinish(result: ProfileResult): boolean {
   return (
+    !result.details?.syntheticTest &&
     !result.details?.profileExcluded &&
     !isDisqualified(result) &&
     hasPastYear(result.eventDate) &&
@@ -67,6 +68,7 @@ export function hasRecordedFinish(result: ProfileResult): boolean {
 
 export function hasHistoryFinish(row: SourcePerformance): boolean {
   return (
+    !row.syntheticTest &&
     !row.profileExcluded &&
     !row.disqualification &&
     !row.labels.some((label) => /^(?:split|intermediate)(?:\b|:)/i.test(label)) &&

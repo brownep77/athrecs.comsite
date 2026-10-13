@@ -4,6 +4,10 @@ The public `/clubs` directory is the entry point. Listings remain available befo
 any representative registers. Country/sport filters and 48-card pages make the
 directory browsable. Each listing and profile links to **Register this club**.
 Existing directory evidence badges are not representative-approval badges.
+The AthRecs facade uses the shared public club readers for every sport, including
+swimming, cycling and triathlon-only clubs with no linked athlete results. Event
+catalogue sport restrictions remain separate; member publication checks still
+apply to club profiles.
 
 `/clubs/register` provides four stages: club selection, representative details,
 authority evidence, and review/declarations. Officers use their own AthRecs login.
@@ -67,6 +71,22 @@ validation, retry, submission, email gates, mobile layout and review controls.
 It makes no live accounts, sends no emails, and writes screenshots only to ignored
 test artifacts. `ATHRECS_BROWSER_EXECUTABLE` may select an installed test browser.
 Service and browser tests run together in the quality gate.
+`npm run verify:club-registration-flow` additionally exercises real TanStack
+RPCs and authenticated screens against disposable PGlite: all four club sports,
+unverified-email rejection, account isolation, same-site and staff-host gates,
+mobile draft/resume/submission, independent staff approval and applicant receipt.
+It checks that private review evidence stays private and that club approval does
+not change athlete/result counts, ownership links or result claims.
+
+The release-blocking client-entry error was reproduced as a cold Vite dependency
+rebundle: late imports invalidated in-flight modules with stale-dependency 504s.
+`vite.config.ts` now includes those framework/auth dependencies in initial
+optimization. The browser checks still fail on every page error, including the
+first navigation. No retries, error filters or import-protection exceptions were
+added. Athlete readers have explicit `createServerOnlyFn` boundaries, with a
+regression assertion that their policy imports and SQL are absent from the
+transformed browser module. Production builds do not use this dev optimizer.
+
 PGlite does not simulate concurrent production database connections. A production
 officer/independent-staff acceptance check remains separate from these tests.
 

@@ -175,6 +175,6 @@ export async function loadSignupFunnel(sql: Sql) {
       count(*) filter(where exists(select 1 from athlete_profile_result_confirmations c where c.user_id=u.id))::int as confirmed,
       count(*) filter(where exists(select 1 from athlete_result_proposals p where p.submitted_by=u.id)
         or exists(select 1 from athlete_profile_result_confirmations c where c.user_id=u.id and c.added_count>0))::int as submitted
-    from signup_welcome_deliveries w join "user" u on u.id=w.user_id`;
+    from signup_welcome_deliveries w join "user" u on u.id=w.user_id where not athrecs_is_test_user(u.id)`;
   return funnel;
 }
