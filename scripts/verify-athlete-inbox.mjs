@@ -48,6 +48,12 @@ try {
   const svc = await server.ssrLoadModule("/src/lib/athrecs/athlete-inbox.server.ts");
   const crypt = await server.ssrLoadModule("/src/lib/athrecs/athlete-inbox-crypto.server.ts");
   const imap = await server.ssrLoadModule("/src/lib/athrecs/athlete-inbox-imap.server.ts");
+  await sql`insert into "user"(id,name,email,"emailVerified") values('mailbox-owner','Synthetic Owner','paul@athrecs.com',true)`;
+  assert.equal(
+    await svc.matchInboxSender(sql, "paul@athrecs.com"),
+    null,
+    "Internal messages to our own mailbox must not become athlete replies",
+  );
   for (const id of ["staff", "athlete", "other", "unverified"]) {
     await sql`insert into "user"(id,name,email,"emailVerified") values(${id},'Synthetic Athlete',${`inbox-${id}@example.test`},${id !== "unverified"})`;
     await sql`insert into "session"(id,token,"expiresAt","updatedAt","userId") values(${id},${`inbox-${id}`},now()+interval '1 hour',now(),${id})`;

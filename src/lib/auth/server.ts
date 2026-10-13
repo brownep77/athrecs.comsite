@@ -331,6 +331,16 @@ export const auth = betterAuth({
   baseURL,
   secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
   database,
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          const { notifyNewSignup } = await import("./signup-alerts.server");
+          await notifyNewSignup(user.id);
+        },
+      },
+    },
+  },
   trustedOrigins,
   ...(Object.keys(socialProviders).length ? { socialProviders } : {}),
   ...(emailVerification ? { emailVerification } : {}),

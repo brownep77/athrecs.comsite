@@ -122,7 +122,8 @@
     "verify:private-archive-profiles": "python scripts/verify-private-archive-profiles.py",
     "verify:fixture-upload": "node scripts/verify-fixture-upload.mjs",
     "verify:athlete-messages": "node scripts/verify-athlete-messages.mjs",
-    "verify:athlete-inbox": "node scripts/verify-athlete-inbox.mjs"
+    "verify:athlete-inbox": "node scripts/verify-athlete-inbox.mjs",
+    "verify:signup-alerts": "node scripts/verify-signup-alerts.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
