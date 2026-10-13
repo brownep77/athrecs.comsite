@@ -105,6 +105,8 @@ export async function disconnectAthleteInbox(sql: Sql) {
 }
 
 export async function syncAthleteInbox(sql: Sql, open: Opener = openPrivateInbox) {
+  // Other sites share this repository; only the configured host may claim the worker lease.
+  if (!inboxEncryptionReady()) return { imported: 0, skipped: "not-configured" };
   const lease = randomUUID();
   const [connection] = await sql<{
     password_ciphertext: string;

@@ -184,6 +184,11 @@ try {
   );
   failBody = false;
   assert.equal((await svc.syncAthleteInbox(sql, open)).imported, 1);
+  const key = process.env.ATHRECS_INBOX_ENCRYPTION_KEY;
+  delete process.env.ATHRECS_INBOX_ENCRYPTION_KEY;
+  assert.equal((await svc.syncAthleteInbox(sql, open)).skipped, "not-configured");
+  assert.equal((await sql`select lease_token from athlete_inbox_connection`)[0].lease_token, null);
+  process.env.ATHRECS_INBOX_ENCRYPTION_KEY = key;
   await sql`update athlete_inbox_connection set lease_token='busy',lease_until=now()+interval '1 minute'`;
   assert.equal((await svc.syncAthleteInbox(sql, open)).skipped, "not-connected-or-busy");
   await sql`update athlete_inbox_connection set lease_token=null,lease_until=null`;
