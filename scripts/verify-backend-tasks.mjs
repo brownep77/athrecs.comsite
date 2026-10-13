@@ -42,7 +42,7 @@ try {
   const linksCard = cards.filter({ has: page.getByRole("heading", { name: "Import official results-page links", exact: true }) });
   assert.match(await linksCard.innerText(), /adds links, not runners or finish times/);
   assert.equal(await linksCard.getByRole("link").getAttribute("href"), "/admin/result-links");
-  assert.equal(await page.getByRole("link", { name: "Review club registrations", exact: true }).getAttribute("href"), "/admin/club-registrations");
+  assert.equal(await page.getByRole("link", { name: "Open Review club registrations", exact: true }).getAttribute("href"), "/admin/club-registrations");
   assert.match(readFileSync("src/routes/admin/result-links.tsx", "utf8"), /Upload result-page links for existing editions/);
   await page.screenshot({ path: "artifacts/import-backend-tasks-desktop.png", fullPage: true });
   await page.getByLabel("Find a backend task").fill("duplicates");
