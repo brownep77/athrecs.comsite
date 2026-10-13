@@ -3,51 +3,16 @@ import { ArrowRight, Footprints } from "lucide-react";
 import { HALF_MARATHON_COUNTRIES } from "@/data/road-half-marathons/countries";
 import { ROAD_HALF_MARATHONS, roadHalfMarathonsForCountry } from "@/data/road-half-marathons";
 import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
-import type { MarathonCountry } from "@/data/road-marathons/types";
 import { ROAD_MARATHONS, roadMarathonsForCountry } from "@/data/road-marathons";
 import { ROAD_ULTRAS } from "@/lib/running/road-ultras";
 
 import { SITE_URL } from "@/lib/athrecs/seo";
-
-// Pastel flag colours keep country cards distinct without competing with the text.
-const marathonCountryPalettes = {
-  uk: {
-    background: "linear-gradient(135deg, #dfeafa 0%, #fff9f8 50%, #f6dce1 100%)",
-    border: "#cfccdf",
-    accent: "#334e7d",
-  },
-  australia: {
-    background: "linear-gradient(150deg, #dce7f6 0%, #e7effb 48%, #fff9f8 72%, #f3dfe5 100%)",
-    border: "#c4d3e8",
-    accent: "#334e7d",
-  },
-  "new-zealand": {
-    background: "linear-gradient(135deg, #e1e8f7 0%, #f4f7fd 55%, #f3dce2 100%)",
-    border: "#ccd1e5",
-    accent: "#5b415f",
-  },
-  usa: {
-    background: "linear-gradient(135deg, #f8dfe4 0%, #fffbfb 45%, #e0eafb 100%)",
-    border: "#ddcbd7",
-    accent: "#8c3745",
-  },
-  canada: {
-    background: "linear-gradient(90deg, #f5d9df 0%, #fff8f8 38%, #fff8f8 62%, #f5d9df 100%)",
-    border: "#e8bdc7",
-    accent: "#933c4b",
-  },
-  ireland: {
-    background: "linear-gradient(110deg, #dbeee0 0%, #fcfdf7 48%, #f9e1c9 100%)",
-    border: "#c9d9bb",
-    accent: "#285c49",
-  },
-  "south-africa": {
-    background:
-      "linear-gradient(135deg, #dee3e7 0%, #f6e7b7 18%, #deede1 38%, #fcfbf6 54%, #f2dddd 76%, #dce6f5 100%)",
-    border: "#c8d6b9",
-    accent: "#275548",
-  },
-} satisfies Record<MarathonCountry, { background: string; border: string; accent: string }>;
+import {
+  countryCardStyle,
+  neutralPastelCardStyle,
+  pastelCardClassName,
+  runningCountryPalettes,
+} from "@/lib/running/country-card-palette";
 
 export function runningGuidesJsonLd(url: string) {
   return {
@@ -99,11 +64,12 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
         <Link
           key={item.to}
           to={item.to}
-          className="rounded-xl border border-accent/30 bg-accent-soft/20 p-5 hover:border-accent"
+          className={pastelCardClassName}
+          style={neutralPastelCardStyle}
         >
-          <h2 className="font-display text-xl font-semibold">{item.title}</h2>
-          <p className="mt-2 text-sm leading-6 text-muted">{item.detail}</p>
-          <span className="mt-3 inline-flex min-h-10 items-center gap-2 font-semibold text-accent">
+          <h2 className="font-display text-xl font-semibold text-slate-900">{item.title}</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-700">{item.detail}</p>
+          <span className="mt-3 inline-flex min-h-10 items-center gap-2 font-semibold">
             Explore <ArrowRight className="size-4" aria-hidden="true" />
           </span>
         </Link>
@@ -128,7 +94,10 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
   );
   const halves = (
     <section aria-labelledby="half-marathons">
-      <h2 id="half-marathons" className="scroll-mt-24 font-display text-2xl font-semibold">
+      <h2
+        id="half-marathons"
+        className="scroll-mt-24 font-display text-2xl font-semibold text-slate-900"
+      >
         Road half marathons by country
       </h2>
       <p className="mt-3 max-w-3xl text-base leading-7 text-muted">
@@ -141,14 +110,17 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
             key={country.id}
             to="/running/$guide"
             params={{ guide: country.guide }}
-            className="flex flex-col rounded-xl border border-accent/25 bg-accent-soft/20 p-5 hover:border-accent sm:p-6"
+            className={pastelCardClassName}
+            style={countryCardStyle(country.id)}
           >
-            <p className="text-sm font-semibold text-accent">
+            <p className="text-sm font-semibold">
               {roadHalfMarathonsForCountry(country.id).length} half marathon guides
             </p>
-            <h3 className="mt-3 font-display text-2xl font-semibold">{country.name}</h3>
-            <p className="mt-3 flex-1 text-sm leading-6 text-muted">{country.description}</p>
-            <span className="mt-4 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-accent">
+            <h3 className="mt-3 font-display text-2xl font-semibold text-slate-900">
+              {country.name}
+            </h3>
+            <p className="mt-3 flex-1 text-sm leading-6 text-slate-700">{country.description}</p>
+            <span className="mt-4 inline-flex min-h-10 items-center gap-2 text-sm font-semibold">
               Explore road half marathons <ArrowRight className="size-4" aria-hidden="true" />
             </span>
           </Link>
@@ -163,8 +135,8 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
       </h2>
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {MARATHON_COUNTRIES.map((country) => {
-          const palette = marathonCountryPalettes[country.id];
-          const style = { background: palette.background, borderColor: palette.border };
+          const palette = runningCountryPalettes[country.id];
+          const style = countryCardStyle(country.id);
           const content = (
             <>
               <div className="flex items-center justify-between" style={{ color: palette.accent }}>
@@ -185,8 +157,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
               </span>
             </>
           );
-          const className =
-            "flex flex-col rounded-xl border p-5 no-underline transition-shadow hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-slate-600 sm:p-6";
+          const className = pastelCardClassName;
           return country.id === "uk" ? (
             <Link key={country.id} to="/running/uk-marathons" className={className} style={style}>
               {content}
@@ -275,22 +246,23 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
         </>
       )}
       <section aria-labelledby="ultras">
-        <h2 id="ultras" className="scroll-mt-24 font-display text-2xl font-semibold">
+        <h2 id="ultras" className="scroll-mt-24 font-display text-2xl font-semibold text-slate-900">
           UK road ultramarathons
         </h2>
         <Link
           to="/running/uk-road-ultramarathons"
-          className="mt-5 flex max-w-3xl flex-col rounded-xl border border-accent/25 bg-accent-soft/20 p-5 hover:border-accent sm:p-6"
+          className={`mt-5 max-w-3xl ${pastelCardClassName}`}
+          style={countryCardStyle("uk")}
         >
-          <p className="text-sm font-semibold text-accent">
-            {ROAD_ULTRAS.length} events and event series
-          </p>
-          <h3 className="mt-3 font-display text-2xl font-semibold">Go beyond 26.2 miles</h3>
-          <p className="mt-3 text-sm leading-6 text-muted">
+          <p className="text-sm font-semibold">{ROAD_ULTRAS.length} events and event series</p>
+          <h3 className="mt-3 font-display text-2xl font-semibold text-slate-900">
+            Go beyond 26.2 miles
+          </h3>
+          <p className="mt-3 text-sm leading-6 text-slate-700">
             Road races, paved-path ultras, timed challenges and longer journeys. Compare distances
             and surfaces, with provisional dates and historical editions clearly labelled.
           </p>
-          <span className="mt-4 inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-accent">
+          <span className="mt-4 inline-flex min-h-10 items-center gap-2 text-sm font-semibold">
             Explore UK road ultras <ArrowRight className="size-4" aria-hidden="true" />
           </span>
         </Link>
