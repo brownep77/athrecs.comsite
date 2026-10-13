@@ -441,6 +441,22 @@ try {
   assert(!JSON.stringify(history).includes(token), "History does not expose claim tokens");
   process.env.RESEND_API_KEY = "";
 
+  for (const [account, name] of [
+    [athlete, "Temporary Name"],
+    [other, "Synthetic Other"],
+  ]) {
+    await rpc(
+      "athrecs/result-matching-settings-api",
+      "saveMyClaimIdentity",
+      {
+        fullName: name,
+        dateOfBirth: "1984-01-01",
+        nationality: "Irish",
+        privacyAcknowledged: true,
+      },
+      account.token,
+    );
+  }
   const accepted = await claim("submitResultClaim", { ...data, declarationAccepted: true });
   assert.equal(accepted.status, "pending");
   assert.equal(

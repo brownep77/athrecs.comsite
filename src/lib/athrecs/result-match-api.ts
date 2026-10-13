@@ -1,10 +1,18 @@
+import {
+  matchingNames,
+  selectedMatchingNames,
+  resultSearchSchema,
+  distanceSearchAliases,
+  type MatchingSettings,
+  type ResultSearchFilters,
+} from "./result-matching-settings";
+import { resultIdentityEvidence } from "./result-match";
 import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
 import {
   buildPotentialMatchSearchPatterns,
   scorePotentialResultNameMatch,
-  uniquePotentialMatchNames,
   type PotentialResultMatchConfidence,
 } from "./result-match";
 import { ensureAthrecsSeeded } from "./seed.server";
@@ -52,6 +60,9 @@ type IdentityRow = {
   full_name: string | null;
   display_name: string | null;
   previous_names: string[] | null;
+  matching_settings: MatchingSettings | null;
+  date_of_birth: string | null;
+  nationality: string | null;
   city: string | null;
   region: string | null;
   country: string | null;
@@ -81,6 +92,7 @@ type CandidateRow = {
   bib: string | null;
   category: string | null;
   age_at_race: string | null;
+  nationality: string | null;
   claim_status: PotentialResultClaimStatus | null;
   owner_user_id: string | null;
   source_identifier_matches: boolean;
@@ -96,7 +108,10 @@ async function ready() {
 
 export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
-  .handler(async ({ context }): Promise<PotentialResultMatchesResponse> => {
+  .validator((input?: Partial<ResultSearchFilters>) => resultSearchSchema.parse(input))
+  .handler(async ({ context, data }): Promise<PotentialResultMatchesResponse> => {
+    const { setResponseHeader } = await import("@tanstack/react-start/server");
+    setResponseHeader("Cache-Control", "private, no-store");
     const sql = await ready();
     const [identities, linkedNames] = await Promise.all([
       sql<IdentityRow>`
@@ -105,6 +120,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           profile.full_name,
           profile.display_name,
           profile.previous_names,
+          settings.settings as matching_settings, profile.date_of_birth::text as date_of_birth, profile.nationality,
           profile.power_of_10_url,
           profile.world_athletics_url,
           profile.parkrun_id,
@@ -115,6 +131,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
           profile.club_or_team
         from "user" account_user
         left join athlete_private_profiles profile on profile.user_id = account_user."id"
+        left join athlete_result_matching_settings settings on settings.user_id=account_user."id"
         where account_user."id" = ${context.userId}
         limit 1
       `,
@@ -132,15 +149,20 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
       return { searchedNames: [], matches: [], totalMatches: 0, truncated: false };
     }
 
-    const searchedNames = uniquePotentialMatchNames([
+    const savedNames = matchingNames(
       identity.full_name,
-      identity.display_name,
-      identity.auth_name,
-      ...(identity.previous_names ?? []),
-      ...linkedNames.map((row) => row.athlete_name),
-    ]);
+      identity.previous_names ?? [],
+      identity.matching_settings,
+      [identity.display_name, identity.auth_name, ...linkedNames.map((row) => row.athlete_name)],
+    );
+    const searchedNames = selectedMatchingNames(savedNames, data.name);
+    const distances = distanceSearchAliases(data.distance);
     const { normalizedPatterns, rawPatterns } = buildPotentialMatchSearchPatterns(searchedNames);
-    const sourceKeys = [identity.power_of_10_url, identity.world_athletics_url]
+    const sourceKeys = [
+      identity.power_of_10_url,
+      identity.world_athletics_url,
+      ...(identity.matching_settings?.sourceUrls ?? []),
+    ]
       .map(sourceIdentityFromUrl)
       .filter((value) => value !== null)
       .map((value) => `${value.provider}:${value.externalId}`);
@@ -174,6 +196,7 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
         result.overall_place,
         result.bib,
         result.category, result.age_at_race,
+        athlete.profile_details->>'nationality' as nationality,
         my_claim.status as claim_status,
         owner.user_id as owner_user_id,
         exists (
@@ -190,7 +213,9 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
       left join athlete_account_links owner
         on owner.athlete_id = athlete.id
        and owner.status = 'active'
-      where result.status = 'finished' and result.available
+      where result.available
+        and (${data.year}='' or left(result.event_date,4)=${data.year})
+        and (${distances.length}=0 or regexp_replace(lower(result.distance_code),'[^a-z0-9.]','','g')=any(${distances}::text[]))
         and coalesce(owner.user_id, '') <> ${context.userId}
         and not exists (
           select 1 from athlete_match_dismissals dismissal
@@ -215,23 +240,39 @@ export const listMyPotentialResultMatches = createServerFn({ method: "GET" })
       region: identity.region,
       country: identity.country,
       clubOrTeam: identity.club_or_team,
+      dateOfBirth: identity.date_of_birth,
+      nationality: identity.nationality,
     };
 
     const matches = rows
       .map((row): PotentialResultMatch | null => {
+        const candidateContext = {
+          city: row.athlete_city,
+          region: row.athlete_region,
+          country: row.athlete_country,
+          clubName: row.club_name,
+          eventDate: row.event_date,
+          ageAtRace: row.age_at_race,
+          category: row.category,
+          nationality: row.nationality,
+        };
+        const evidence = resultIdentityEvidence(accountContext, candidateContext);
         const match = row.source_identifier_matches
           ? {
-              score: 100,
-              confidence: "strong" as const,
+              score: 100 + evidence.boost,
+              confidence: evidence.conflict ? ("possible" as const) : ("strong" as const),
               matchedName: row.athlete_name,
-              reasons: ["Matches a source athlete identifier saved in your account"],
+              reasons: [
+                "Matches a source athlete identifier saved in your account",
+                ...evidence.reasons,
+              ],
             }
-          : scorePotentialResultNameMatch(searchedNames, row.athlete_name, accountContext, {
-              city: row.athlete_city,
-              region: row.athlete_region,
-              country: row.athlete_country,
-              clubName: row.club_name,
-            });
+          : scorePotentialResultNameMatch(
+              searchedNames,
+              row.athlete_name,
+              accountContext,
+              candidateContext,
+            );
         if (!match) return null;
         return {
           resultId: row.result_id,

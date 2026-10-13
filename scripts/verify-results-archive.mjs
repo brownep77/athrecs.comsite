@@ -6,6 +6,8 @@ import crypto from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
 import { Pool, types } from "pg";
 import { z } from "zod";
+import * as matchingSettings from "../src/lib/athrecs/result-matching-settings.ts";
+import * as resultMatch from "../src/lib/athrecs/result-match.ts";
 const require = createRequire(import.meta.url),
   ts = require("typescript");
 function load(path, deps = {}) {
@@ -92,7 +94,10 @@ const service = load("src/lib/results-archive/service.server.ts", {
   "node:crypto": crypto,
   "./core": core,
 });
-const member = load("src/lib/results-archive/member.server.ts");
+const member = load("src/lib/results-archive/member.server.ts", {
+  "../athrecs/result-matching-settings": matchingSettings,
+  "../athrecs/result-match": resultMatch,
+});
 const actor = { userId: "archive-staff-synthetic", staffEmail: "staff@example.test" };
 const note = "Synthetic source row, race edition and independent athlete identity reviewed.";
 const row = (sourceKey, name, seconds = 2000.25) =>
@@ -494,6 +499,7 @@ try {
   });
   for (const fn of Object.values(api)) assert.deepEqual(fn.middleware, ["staff"]);
   const memberApi = load("src/lib/results-archive/member-api.ts", {
+    "../athrecs/result-matching-settings": matchingSettings,
     "@tanstack/react-start": server,
     zod: { z },
     "../auth/middleware": { authMiddleware: "authenticated" },

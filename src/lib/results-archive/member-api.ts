@@ -1,3 +1,4 @@
+import { resultSearchSchema, type ResultSearchFilters } from "../athrecs/result-matching-settings";
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { authMiddleware } from "../auth/middleware";
@@ -13,10 +14,11 @@ import {
 
 export const getMyArchiveMatches = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
-  .handler(async ({ context }) => {
+  .validator((input?: Partial<ResultSearchFilters>) => resultSearchSchema.parse(input))
+  .handler(async ({ context, data }) => {
     const { setResponseHeader } = await import("@tanstack/react-start/server");
     setResponseHeader("Cache-Control", "private, no-store");
-    return memberArchiveMatches(await getSql(), context.userId);
+    return memberArchiveMatches(await getSql(), context.userId, data);
   });
 export const requestMyArchiveMatch = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
