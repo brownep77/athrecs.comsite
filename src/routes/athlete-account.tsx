@@ -650,6 +650,7 @@ function SignedInAccount() {
                       />
                       <TextField
                         label="Date of birth"
+                        claimRequired
                         type="date"
                         value={form.dateOfBirth ?? ""}
                         onChange={(value) => setForm({ ...form, dateOfBirth: value })}
@@ -701,7 +702,8 @@ function SignedInAccount() {
                         }
                       />
                       <TextField
-                        label="Nationality (required before claiming)"
+                        label="Nationality"
+                        claimRequired
                         help="Used to compare nationality recorded in results. Include both if dual nationality, or enter Stateless."
                         value={form.nationality ?? ""}
                         onChange={(value) => setForm({ ...form, nationality: value })}
@@ -1586,6 +1588,7 @@ function TextField({
   value,
   onChange,
   required = false,
+  claimRequired = false,
   disabled = false,
   type = "text",
   help,
@@ -1597,6 +1600,7 @@ function TextField({
   value: string;
   onChange?: (value: string) => void;
   required?: boolean;
+  claimRequired?: boolean;
   disabled?: boolean;
   type?: string;
   help?: string;
@@ -1610,6 +1614,8 @@ function TextField({
       {label}{" "}
       {required ? (
         <span className="text-red-700">*</span>
+      ) : claimRequired ? (
+        <span className="font-normal text-subtle">(required before claiming)</span>
       ) : (
         <span className="font-normal text-subtle">(optional)</span>
       )}
