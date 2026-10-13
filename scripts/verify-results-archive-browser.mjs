@@ -7,6 +7,8 @@ import { createRequire } from "node:module";
 import crypto from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
 import { z } from "zod";
+import * as matchingSettings from "../src/lib/athrecs/result-matching-settings.ts";
+import * as resultMatch from "../src/lib/athrecs/result-match.ts";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
@@ -60,7 +62,10 @@ const service = load("src/lib/results-archive/service.server.ts", {
   "node:crypto": crypto,
   "./core": core,
 });
-const member = load("src/lib/results-archive/member.server.ts");
+const member = load("src/lib/results-archive/member.server.ts", {
+  "../athrecs/result-matching-settings": matchingSettings,
+  "../athrecs/result-match": resultMatch,
+});
 const start = {
   createServerFn: () => {
     let middleware = [],

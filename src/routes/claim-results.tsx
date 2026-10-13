@@ -1,6 +1,8 @@
+import { ClaimIdentityGate } from "@/components/athletes/ClaimIdentityGate";
+import { missingClaimIdentity } from "@/lib/athrecs/result-matching-settings";
 import { ProfileResultConfirmation } from "@/components/athletes/ProfileResultConfirmation";
 import { ClaimResultDetails } from "@/components/athletes/ClaimResultDetails";
-import { ClaimRacingName, ProfileClaimSteps } from "@/components/athletes/ProfileClaimGuide";
+import { ProfileClaimSteps } from "@/components/athletes/ProfileClaimGuide";
 import { getMyAthleteAccount } from "@/lib/athrecs/athlete-account-api";
 import { rememberClaim } from "@/lib/athrecs/claim-resume";
 import {
@@ -364,11 +366,10 @@ function ClaimResultsPage() {
           <p>Then return to this link to confirm your profile and submit your claim.</p>
           <Button onClick={startSignIn}>Verify with an email code</Button>
         </section>
-      ) : !account.data.fullName.trim() && !currentClaim && (invitation || !result.data) ? (
-        <section className="space-y-4 rounded-xl border border-accent/40 bg-surface p-5">
-          <h2 className="font-display text-xl font-semibold">Next, enter your racing name</h2>
-          <ClaimRacingName />
-        </section>
+      ) : missingClaimIdentity(account.data).length && !claimCompleted ? (
+        <ClaimIdentityGate>
+          <p>Your details are ready. Continue with your selected profile.</p>
+        </ClaimIdentityGate>
       ) : result.isLoading ? (
         <LoadingCard label="Loading your matched result…" />
       ) : result.isError ? (

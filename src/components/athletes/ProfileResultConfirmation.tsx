@@ -1,3 +1,4 @@
+import { ClaimIdentityGate } from "./ClaimIdentityGate";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -21,7 +22,16 @@ const emptyResult = (): DraftResult => ({
   bib: "",
   place: "",
 });
-export function ProfileResultConfirmation({
+export function ProfileResultConfirmation(
+  props: Parameters<typeof ProfileResultConfirmationBody>[0],
+) {
+  return (
+    <ClaimIdentityGate>
+      <ProfileResultConfirmationBody {...props} />
+    </ClaimIdentityGate>
+  );
+}
+function ProfileResultConfirmationBody({
   resultId,
   invitation,
   athleteName,

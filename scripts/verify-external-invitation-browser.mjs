@@ -89,8 +89,11 @@ try {
   assert(code, "Real email-code signup delivery is intercepted");
   await dialog.getByLabel("Six-digit code", { exact: true }).fill(code);
   await dialog.getByRole("button", { name: "Verify code and continue", exact: true }).click();
-  await page.getByLabel("Full racing name").fill("Avery Invitation Athlete");
-  await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
+  await page.getByLabel("Full name").fill("Avery Invitation Athlete");
+  await page.getByLabel("Date of birth").fill("1984-01-01");
+  await page.getByLabel("Nationality", { exact: false }).fill("British");
+  await page.getByRole("checkbox", { name: /I have read/ }).check();
+  await page.getByRole("button", { name: "Save details and continue", exact: true }).click();
   await page.getByText("Synthetic Invitation 10K", { exact: true }).waitFor();
   assert.equal(
     new URL(page.url()).searchParams.get("invitation"),
@@ -114,7 +117,7 @@ try {
   assert.equal(
     (await sql`select user_id from athlete_private_profiles where user_id=${user.id}`).length,
     1,
-    "Only the racing name is saved; other profile details remain optional",
+    "Required claim identity is saved; contact details remain optional",
   );
   await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).click();
   await page.getByRole("heading", { name: "Claim complete", exact: true }).waitFor();

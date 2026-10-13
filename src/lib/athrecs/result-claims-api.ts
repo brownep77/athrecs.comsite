@@ -1,3 +1,5 @@
+import { requireClaimIdentity } from "./claim-identity.server";
+import { matchingNames, type MatchingSettings } from "./result-matching-settings";
 import { deliverProfileResultReceipts } from "./profile-result-receipts.server";
 import { profileResultReviewInput, type ProfileResultReviewInput } from "./profile-result-review";
 import {
@@ -18,7 +20,7 @@ import {
   notifyResultClaimSubmitted,
   notifyResultClaimWithdrawn,
 } from "./result-claim-email.server";
-import { scorePotentialResultNameMatch, uniquePotentialMatchNames } from "./result-match";
+import { resultIdentityEvidence, scorePotentialResultNameMatch } from "./result-match";
 import { sourceIdentityFromUrl } from "./profile-connections";
 import { ensureAthrecsSeeded } from "./seed.server";
 import { queueClaimConflict, deliverClaimConflictAlerts } from "./result-claim-alerts.server";
@@ -301,6 +303,7 @@ async function canAccessClaimCandidate(
       full_name: string | null;
       display_name: string | null;
       previous_names: string[] | null;
+      matching_settings: MatchingSettings | null;
       power_of_10_url: string | null;
       world_athletics_url: string | null;
       parkrun_id: string | null;
@@ -315,6 +318,7 @@ async function canAccessClaimCandidate(
         profile.full_name,
         profile.display_name,
         profile.previous_names,
+        settings.settings as matching_settings,
         profile.power_of_10_url,
         profile.world_athletics_url,
         profile.parkrun_id,
@@ -325,6 +329,7 @@ async function canAccessClaimCandidate(
         profile.club_or_team
       from "user" account_user
       left join athlete_private_profiles profile on profile.user_id = account_user."id"
+      left join athlete_result_matching_settings settings on settings.user_id=account_user."id"
       where account_user."id" = ${userId}
       limit 1
     `,
@@ -341,7 +346,11 @@ async function canAccessClaimCandidate(
   if (!identity) return false;
   // Use the same source-identity evidence as the suggestion list. A result
   // still requires an explicit claim, and competing owners still require review.
-  const sourceKeys = [identity.power_of_10_url, identity.world_athletics_url]
+  const sourceKeys = [
+    identity.power_of_10_url,
+    identity.world_athletics_url,
+    ...(identity.matching_settings?.sourceUrls ?? []),
+  ]
     .map(sourceIdentityFromUrl)
     .filter((value) => value !== null)
     .map((value) => `${value.provider}:${value.externalId}`);
@@ -359,13 +368,12 @@ async function canAccessClaimCandidate(
     `;
     if (sourceMatches[0]?.allowed) return true;
   }
-  const names = uniquePotentialMatchNames([
+  const names = matchingNames(
     identity.full_name,
-    identity.display_name,
-    identity.auth_name,
-    ...(identity.previous_names ?? []),
-    ...linkedNames.map((row) => row.athlete_name),
-  ]);
+    identity.previous_names ?? [],
+    identity.matching_settings,
+    [identity.display_name, identity.auth_name, ...linkedNames.map((row) => row.athlete_name)],
+  );
   return Boolean(
     scorePotentialResultNameMatch(
       names,
@@ -513,6 +521,8 @@ async function selfConfirmationReviewReason(
     full_name: string | null;
     display_name: string | null;
     previous_names: string[] | null;
+    matching_settings: MatchingSettings | null;
+    date_of_birth: string | null;
     child_review: boolean;
     protected_profile: boolean;
     revoked: boolean;
@@ -520,6 +530,7 @@ async function selfConfirmationReviewReason(
     dob_mismatch: boolean;
   }>`
     select account_user.name, profile.full_name, profile.display_name, profile.previous_names,
+      settings.settings as matching_settings, profile.date_of_birth::text as date_of_birth,
       (
         athlete.date_of_birth > current_date - interval '18 years'
         or profile.date_of_birth > current_date - interval '18 years'
@@ -551,6 +562,7 @@ async function selfConfirmationReviewReason(
     from "user" account_user
     cross join athletes athlete
     left join athlete_private_profiles profile on profile.user_id = account_user.id
+    left join athlete_result_matching_settings settings on settings.user_id=account_user.id
     where account_user.id = ${userId} and athlete.id = ${athleteId}
   `;
   if (claimantRole === "guardian" || identity?.child_review || identity?.guardian_claim)
@@ -561,14 +573,25 @@ async function selfConfirmationReviewReason(
     return "This public-figure profile requires a staff ownership check.";
   if (identity?.dob_mismatch)
     return "Account and athlete details differ. Staff must resolve the discrepancy before linking this profile.";
+  const raceAges = await sql<{ event_date: string; category: string; age_at_race: string }>`
+    select event_date,category,age_at_race from athlete_claimable_results
+    where athlete_id=${athleteId} and available`;
+  if (
+    raceAges.some(
+      (race) =>
+        resultIdentityEvidence(
+          { dateOfBirth: identity?.date_of_birth },
+          { eventDate: race.event_date, category: race.category, ageAtRace: race.age_at_race },
+        ).conflict,
+    )
+  )
+    return "Saved birth date and a recorded race age/category differ. Staff must check the source and organiser's age rules before linking this profile.";
   const nameMatch =
     identity &&
     scorePotentialResultNameMatch(
-      uniquePotentialMatchNames([
+      matchingNames(identity.full_name, identity.previous_names ?? [], identity.matching_settings, [
         identity.name,
-        identity.full_name,
         identity.display_name,
-        ...(identity.previous_names ?? []),
       ]),
       athleteName,
       {},
@@ -619,6 +642,8 @@ export const submitResultClaim = createServerFn({ method: "POST" })
       if (!claimantEmail) throw new Error("Your signed-in account has no email address");
       if (!users[0].email_verified)
         throw new Error("Verify your email before claiming athlete results");
+
+      await requireClaimIdentity(tx, context.userId);
 
       const results = await tx<{
         result_id: number;
@@ -1132,6 +1157,7 @@ export const reviewResultClaim = createServerFn({ method: "POST" })
       }
 
       if (data.action === "approve") {
+        await requireClaimIdentity(tx, claim.claimant_user_id);
         const owners = await tx<{ user_id: string }>`
           select user_id
           from athlete_account_links

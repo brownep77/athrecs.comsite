@@ -13,13 +13,19 @@ const [api, panel, account, envExample, migration] = await Promise.all([
 ]);
 
 assert.match(api, /middleware\(\[authMiddleware\]\)/);
-assert.match(api, /performance_insights/);
+assert.match(api, /externalSearchConsent/);
+assert.match(api, /x-zero-data-retention/);
 assert.match(api, /XAI_API_KEY/);
 assert.match(api, /web_search/);
 assert.match(api, /Never invent/);
 assert.doesNotMatch(api, /postcode|verifiedEmail|equipmentBrands/);
-assert.match(panel, /Search Power of 10 and parkrun/);
+assert.match(panel, /Search saved links and public results/);
 assert.match(panel, /findExternalRunnerMatches/);
+assert.match(
+  panel,
+  /queryFn: \(\) => findExternalRunnerMatches\(\),[\s\S]{0,160}enabled: false/,
+  "External searches must never restart on focus, reconnect or cache invalidation",
+);
 assert.match(panel, /suggestions, not confirmed ownership/i);
 assert.match(account, /Previous or known-as names/);
 assert.match(account, /parkrun barcode/);

@@ -197,7 +197,7 @@ try {
     concurrent.reduce((count, report) => count + report.skipped, 0),
     1,
   );
-  await sql`update athlete_private_profiles set world_athletics_url='https://worldathletics.org/athletes/test/fixture-76543210' where user_id='dev-user'`;
+  await sql`update athlete_private_profiles set full_name='Synthetic Development Runner', date_of_birth='1982-01-01',nationality='Irish',world_athletics_url='https://worldathletics.org/athletes/test/fixture-76543210' where user_id='dev-user'`;
   let matches = await rpc("result-match-api", "listMyPotentialResultMatches");
   assert(
     matches.matches.some((match) => match.athleteId === known),

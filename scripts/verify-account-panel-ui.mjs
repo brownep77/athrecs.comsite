@@ -63,9 +63,11 @@ try {
     await go("Personal details");
     await page.getByLabel("Full name", { exact: false }).fill("Sidebar Test Runner");
     await page.getByLabel("Display name", { exact: false }).fill("Sidebar Test Runner");
+    await page.getByLabel(/^Date of birth/).fill("1984-01-01");
     await go("Location & clubs");
     assert.equal(await page.getByLabel("Full name", { exact: false }).count(), 0);
     await page.getByLabel("City / town", { exact: false }).fill("Test City");
+    await page.getByLabel("Nationality", { exact: false }).fill("British");
     await go("Equipment");
     await page.getByRole("button", { name: "GPS watch", exact: true }).click();
     await go("Personal details");

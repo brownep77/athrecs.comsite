@@ -99,10 +99,15 @@ try {
   const sourceId = source.id;
   const { page } = plain;
   await page.goto(`${origin}/claim-results?resultId=${sourceId}`, { waitUntil: "networkidle" });
-  await page.getByRole("heading", { name: "Next, enter your racing name" }).waitFor();
+  await page
+    .getByRole("heading", { name: "Complete your details to claim your profile" })
+    .waitFor();
   assert.equal(await page.getByText("This match is no longer available").count(), 0);
-  await page.getByLabel("Full racing name").fill("Journey Test Runner");
-  await page.getByRole("button", { name: "Continue to my profile claim", exact: true }).click();
+  await page.getByLabel("Full name").fill("Journey Test Runner");
+  await page.getByLabel("Date of birth").fill("1984-01-01");
+  await page.getByLabel("Nationality", { exact: false }).fill("British");
+  await page.getByRole("checkbox", { name: /I have read/ }).check();
+  await page.getByRole("button", { name: "Save details and continue", exact: true }).click();
   await page.getByRole("button", { name: "Confirm all results are mine", exact: true }).waitFor();
   await page
     .getByRole("listitem")
@@ -195,7 +200,7 @@ try {
     0,
   );
   console.log(
-    "PASS: Missing name -> same selected profile -> remembered navigation -> one completed claim -> clear receipt after reload.",
+    "PASS: Required identity -> same selected profile -> remembered navigation -> one completed claim -> clear receipt after reload.",
   );
 
   const invited = await account("invited-claim@example.test");
@@ -219,9 +224,12 @@ try {
     ),
   );
   await resume.click();
-  await invited.page.getByLabel("Full racing name").fill("Invited Test Runner");
+  await invited.page.getByLabel("Full name").fill("Invited Test Runner");
+  await invited.page.getByLabel("Date of birth").fill("1984-01-01");
+  await invited.page.getByLabel("Nationality", { exact: false }).fill("British");
+  await invited.page.getByRole("checkbox", { name: /I have read/ }).check();
   await invited.page
-    .getByRole("button", { name: "Continue to my profile claim", exact: true })
+    .getByRole("button", { name: "Save details and continue", exact: true })
     .click();
   await invited.page
     .getByRole("button", { name: "Confirm all results are mine", exact: true })

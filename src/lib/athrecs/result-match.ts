@@ -1,3 +1,5 @@
+import { countryFlag } from "./country-flags.ts";
+
 export type PotentialResultMatchConfidence = "exact" | "strong" | "possible";
 
 export type PotentialResultMatchContext = {
@@ -5,6 +7,8 @@ export type PotentialResultMatchContext = {
   region?: string | null;
   country?: string | null;
   clubOrTeam?: string | null;
+  dateOfBirth?: string | null;
+  nationality?: string | null;
 };
 
 export type PotentialResultCandidateContext = {
@@ -12,6 +16,10 @@ export type PotentialResultCandidateContext = {
   region?: string | null;
   country?: string | null;
   clubName?: string | null;
+  eventDate?: string | null;
+  ageAtRace?: string | null;
+  category?: string | null;
+  nationality?: string | null;
 };
 
 export type PotentialNameMatch = {
@@ -33,7 +41,7 @@ function comparableText(value: string | null | undefined): string {
     .toLowerCase()
     .replace(/[’'`]/g, "")
     .replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/[^\p{L}\p{N}]+/gu, " ")
     .trim()
     .replace(/\s+/g, " ");
 }
@@ -63,11 +71,13 @@ export function uniquePotentialMatchNames(values: Array<string | null | undefine
 }
 
 function rawNameTokens(value: string): string[] {
-  return value
-    .normalize("NFKC")
-    .toLocaleLowerCase("en")
-    .match(/[\p{L}\p{N}]+/gu)
-    ?.filter(Boolean) ?? [];
+  return (
+    value
+      .normalize("NFKC")
+      .toLocaleLowerCase("en")
+      .match(/[\p{L}\p{N}]+/gu)
+      ?.filter(Boolean) ?? []
+  );
 }
 
 /**
@@ -118,7 +128,10 @@ function middleInitials(tokens: string[]): string {
     .join("");
 }
 
-function nameScore(accountName: string, candidateName: string): {
+function nameScore(
+  accountName: string,
+  candidateName: string,
+): {
   score: number;
   reason: string;
 } | null {
@@ -220,16 +233,116 @@ export function scorePotentialResultNameMatch(
   if (!best) return null;
 
   const context = contextualBoost(accountContext, candidateContext);
+  const identity = resultIdentityEvidence(accountContext, candidateContext);
   if (best.score < 90 && context.boost < 8) return null;
 
-  const score = Math.min(100, best.score + context.boost);
-  const confidence: PotentialResultMatchConfidence =
-    best.score >= 98 ? "exact" : score >= 90 ? "strong" : "possible";
+  const score = best.score + context.boost + identity.boost;
+  const confidence: PotentialResultMatchConfidence = identity.conflict
+    ? "possible"
+    : best.score >= 98
+      ? "exact"
+      : score >= 90
+        ? "strong"
+        : "possible";
 
   return {
     score,
     confidence,
     matchedName: best.matchedName,
-    reasons: [best.reason, ...context.reasons],
+    reasons: [best.reason, ...context.reasons, ...identity.reasons],
   };
+}
+
+/** Soft corroboration only: category rules and nationality can change. Never infer a DOB. */
+export function resultIdentityEvidence(
+  account: PotentialResultMatchContext,
+  candidate: PotentialResultCandidateContext,
+) {
+  let boost = 0;
+  let conflict = false;
+  const reasons: string[] = [];
+  const birth = account.dateOfBirth ?? "";
+  const race = candidate.eventDate ?? "";
+  if (/^\d{4}-\d{2}-\d{2}$/.test(birth) && /^\d{4}-\d{2}-\d{2}$/.test(race)) {
+    const age = +race.slice(0, 4) - +birth.slice(0, 4) - (race.slice(5) < birth.slice(5) ? 1 : 0);
+    const exactAge = /^\d{1,3}$/.test(candidate.ageAtRace ?? "")
+      ? Number(candidate.ageAtRace)
+      : null;
+    const category = (candidate.category ?? "").toUpperCase().replace(/\s/g, "");
+    const range = category.match(/^(?:[MWFVJ]|MV|FV|VM|VW)?(\d{1,2})[-–](\d{1,2})$/);
+    const lower = category.match(/^(?:M|W|F|V|MV|FV|VM|VW)(\d{2})(?:\+)?$/);
+    const upper = category.match(/^(?:[MWF]?U|UNDER)(\d{1,2})$/);
+    if (age < 0) {
+      conflict = true;
+      boost -= 40;
+      reasons.push("Race date is before your saved birth date — check this match");
+    } else if (exactAge !== null || range) {
+      const min = exactAge ?? Number(range![1]);
+      const max = exactAge ?? Number(range![2]);
+      if (age >= min - 1 && age <= max + 1) {
+        boost += 8;
+        reasons.push("Age at the race fits your birth date (season rules may vary)");
+      } else {
+        conflict = true;
+        boost -= 25;
+        reasons.push("Recorded age/category does not fit your birth date — check this match");
+      }
+    } else if (upper) {
+      const cutoff = Number(upper[1]);
+      if (age > cutoff) {
+        conflict = true;
+        boost -= 25;
+        reasons.push("Recorded under-age category does not fit your birth date — check this match");
+      } else {
+        boost += 3;
+        reasons.push("Age may fit the under-age category; season rules still need checking");
+      }
+    } else if (lower) {
+      const min = Number(lower[1]);
+      if (age < min - 1) {
+        conflict = true;
+        boost -= 25;
+        reasons.push(
+          "Recorded age category appears too old for your birth date — check this match",
+        );
+      } else if (age <= min + 9) {
+        boost += 3;
+        reasons.push("Age category may fit; the organiser’s category rules still need checking");
+      }
+    }
+  }
+  const aliases: Record<string, string> = {
+    british: "GB",
+    english: "GB-ENG",
+    scottish: "GB-SCT",
+    welsh: "GB-WLS",
+    irish: "IE",
+    french: "FR",
+    german: "DE",
+    american: "US",
+    australian: "AU",
+    canadian: "CA",
+    spanish: "ES",
+    italian: "IT",
+    dutch: "NL",
+    kenyan: "KE",
+    ethiopian: "ET",
+    "new zealander": "NZ",
+  };
+  const codes = (value?: string | null) =>
+    (value ?? "")
+      .split(/[,;/]/)
+      .map((v) => aliases[comparableText(v)] || countryFlag(v.trim()).code)
+      .filter(Boolean);
+  const accountCodes = codes(account.nationality);
+  const candidateCodes = codes(candidate.nationality);
+  if (accountCodes.length && candidateCodes.length) {
+    if (accountCodes.some((code) => candidateCodes.includes(code))) {
+      boost += 6;
+      reasons.push("Recorded nationality matches");
+    } else {
+      reasons.push("Recorded nationality differs — check dual nationality or historical changes");
+    }
+  }
+  return { boost, conflict, reasons };
 }

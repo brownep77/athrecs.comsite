@@ -6,6 +6,8 @@ import { createRequire } from "node:module";
 import crypto from "node:crypto";
 import { PGlite } from "@electric-sql/pglite";
 import { Pool, types } from "pg";
+import * as resultMatch from "../src/lib/athrecs/result-match.ts";
+import * as matchingSettings from "../src/lib/athrecs/result-matching-settings.ts";
 const require = createRequire(import.meta.url);
 const ts = require("typescript");
 function load(path, deps = {}) {
@@ -158,7 +160,12 @@ const shared = {
   "@/lib/auth/staff-middleware": staff,
   "@/lib/db": connection,
   "./seed.server": { ensureAthrecsSeeded: async () => {} },
-  "./result-match": load("src/lib/athrecs/result-match.ts"),
+  "./result-match": resultMatch,
+  "./result-matching-settings": matchingSettings,
+  "@tanstack/react-start/server": { setResponseHeader() {} },
+  "./claim-identity.server": load("src/lib/athrecs/claim-identity.server.ts", {
+    "./result-matching-settings": matchingSettings,
+  }),
   "./profile-connections": load("src/lib/athrecs/profile-connections.ts"),
 };
 const matches = load("src/lib/athrecs/result-match-api.ts", shared);
@@ -229,9 +236,26 @@ const claims = load("src/lib/athrecs/result-claims-api.ts", {
     notifyResultClaimWithdrawn: async () => {},
   },
 });
+// These tests exercise conflicts after the claimant completes required identity.
+// Missing/forged identity and verified-email enforcement are tested through real
+// authenticated HTTP in verify-intelligent-result-matching.mjs.
+async function completeSyntheticIdentity(userId) {
+  await sql`insert into athlete_private_profiles(user_id,verified_email,full_name,date_of_birth,nationality,privacy_notice_version,privacy_acknowledged_at)
+    select id,email,coalesce(nullif(trim(name),''),'Synthetic Unnamed'),date '1984-01-01','Irish','synthetic-test',now() from "user" where id=${userId}
+    on conflict(user_id) do update set date_of_birth=coalesce(athlete_private_profiles.date_of_birth,excluded.date_of_birth),nationality=coalesce(nullif(athlete_private_profiles.nationality,''),excluded.nationality)`;
+}
+async function submitWithIdentity(data, context) {
+  await completeSyntheticIdentity(context.userId);
+  return claims.submitResultClaim(data, context);
+}
+async function reviewWithIdentity(data, context) {
+  const [row] = await sql`select claimant_user_id from result_claims where id=${data.claimId}`;
+  if (row) await completeSyntheticIdentity(row.claimant_user_id);
+  return claims.reviewResultClaim(data, context);
+}
 const user = (id) => ({ userId: id });
 const claim = (id, resultId = 1) =>
-  claims.submitResultClaim({ resultId, declarationAccepted: true }, user(id));
+  submitWithIdentity({ resultId, declarationAccepted: true }, user(id));
 const count = async (table) => Number((await sql.query(`select count(*) as n from ${table}`))[0].n);
 const savedEnv = { ...process.env };
 try {
@@ -300,7 +324,7 @@ try {
   );
   await assert.rejects(() => claim("unverified"), /Verify your email/);
   await assert.rejects(
-    () => claims.submitResultClaim({ resultId: 1, declarationAccepted: false }, user("one")),
+    () => submitWithIdentity({ resultId: 1, declarationAccepted: false }, user("one")),
     /Confirm/,
   );
   const initialClaim = await claim("one");
@@ -319,7 +343,7 @@ try {
     "pending",
     "Replaying an uncontested claim cannot bypass review",
   );
-  const otherResultClaim = await claims.submitResultClaim(
+  const otherResultClaim = await submitWithIdentity(
     {
       resultId: 2,
       declarationAccepted: true,
@@ -340,13 +364,13 @@ try {
     values ('initial-reviewer','Synthetic Reviewer','initial-reviewer@example.test',true,now(),now())`;
   await assert.rejects(
     () =>
-      claims.reviewResultClaim(
+      reviewWithIdentity(
         { claimId: initialClaim.claimId, action: "approve" },
         { userId: "initial-reviewer", staffEmail: "initial-reviewer@example.test" },
       ),
     /independent identity evidence/,
   );
-  await claims.reviewResultClaim(
+  await reviewWithIdentity(
     {
       claimId: initialClaim.claimId,
       action: "approve",
@@ -468,7 +492,7 @@ try {
     values (3,1,2,2500,'private'), (4,2,2,2480,'private')`;
   const first = await claim("revoked", 3);
   assert.equal(first.status, "pending");
-  await claims.reviewResultClaim(
+  await reviewWithIdentity(
     {
       claimId: first.claimId,
       action: "approve",
@@ -580,7 +604,7 @@ try {
       contested
         .filter((c) => c.status === "pending")
         .map((c) =>
-          claims.reviewResultClaim(
+          reviewWithIdentity(
             {
               claimId: c.claimId,
               action: "approve",
@@ -716,7 +740,7 @@ try {
   const beforeReceipts = receipts.length;
   const accepted = await Promise.all(
     Array.from({ length: 6 }, () =>
-      claims.submitResultClaim(
+      submitWithIdentity(
         { resultId: 20, invitation, declarationAccepted: true },
         user("invite-target"),
       ),
@@ -772,7 +796,7 @@ try {
   const lateToken = new URL(newInvites[0].url).searchParams.get("invitation");
   const lateClaims = await Promise.all(
     Array.from({ length: 6 }, () =>
-      claims.submitResultClaim(
+      submitWithIdentity(
         { resultId: 21, invitation: lateToken, declarationAccepted: true },
         user("late-signup"),
       ),
@@ -793,7 +817,7 @@ try {
   const contactToken = new URL(contactInvite.url).searchParams.get("invitation");
   const competingInvites = await Promise.allSettled(
     ["contact-one", "contact-two"].map((id) =>
-      claims.submitResultClaim(
+      submitWithIdentity(
         { resultId: 22, invitation: contactToken, declarationAccepted: true },
         user(id),
       ),
@@ -891,7 +915,7 @@ try {
     (await claims.listMyResultClaims(undefined, user("child")))[0].conflictReason,
     /responsible adult/,
   );
-  const guardian = await claims.submitResultClaim(
+  const guardian = await submitWithIdentity(
     { resultId: 102, declarationAccepted: true, claimantRole: "guardian" },
     user("guardian"),
   );
@@ -920,6 +944,7 @@ try {
   );
   await sql`update results set category=null where id=101`;
   await sql`update "user" set name='Different Name' where id='child'`;
+  await sql`update athlete_private_profiles set full_name='Different Name' where user_id='child'`;
   assert.equal(
     (await claim("child", 101)).status,
     "pending",
@@ -1066,7 +1091,7 @@ try {
     reviewed: true,
   });
   assert.equal(Number(new URL(sourceInvite.url).searchParams.get("resultId")), virtualId);
-  await claims.submitResultClaim(
+  await submitWithIdentity(
     {
       resultId: virtualId,
       invitation: new URL(sourceInvite.url).searchParams.get("invitation"),
@@ -1176,7 +1201,7 @@ try {
   };
   await assert.rejects(
     () =>
-      claims.submitResultClaim(
+      submitWithIdentity(
         { ...batchInput, review: { ...batchInput.review, includedKeys: ["r:8201", "r:1"] } },
         user("batch-user"),
       ),
@@ -1190,7 +1215,7 @@ try {
   );
   const receiptBefore = summarySends.length;
   const genericBefore = receipts.length;
-  const submitted = await claims.submitResultClaim(batchInput, user("batch-user"));
+  const submitted = await submitWithIdentity(batchInput, user("batch-user"));
   assert.equal(
     submitted.status,
     "approved",
@@ -1223,10 +1248,10 @@ try {
     )[0].entries[0].timingBasis,
     "gun",
   );
-  const replay = await claims.submitResultClaim(batchInput, user("batch-user"));
+  const replay = await submitWithIdentity(batchInput, user("batch-user"));
   assert.equal(replay.confirmation.reused, true);
   assert.equal(summarySends.length, receiptBefore + 1, "Retry sends no extra athlete email");
-  const replayNewId = await claims.submitResultClaim(
+  const replayNewId = await submitWithIdentity(
     { ...batchInput, review: { ...batchInput.review, requestId: crypto.randomUUID() } },
     user("batch-user"),
   );
@@ -1262,7 +1287,7 @@ try {
   await sql`update results set gun_time_seconds=2400 where id=8201`;
   await assert.rejects(
     () =>
-      claims.submitResultClaim(
+      submitWithIdentity(
         {
           ...batchInput,
           review: {
@@ -1281,7 +1306,7 @@ try {
     { resultId: 8201, includeReview: true },
     user("batch-user"),
   );
-  const restored = await claims.submitResultClaim(
+  const restored = await submitWithIdentity(
     {
       resultId: 8201,
       declarationAccepted: true,
@@ -1339,7 +1364,7 @@ try {
     },
   };
   const juniorReceiptBefore = summarySends.length;
-  const juniorClaim = await claims.submitResultClaim(juniorInput, user("source-child"));
+  const juniorClaim = await submitWithIdentity(juniorInput, user("source-child"));
   assert.equal(juniorClaim.status, "pending");
   assert.match(
     (await claims.listMyResultClaims(undefined, user("source-child")))[0].conflictReason,
@@ -1352,7 +1377,7 @@ try {
     false,
     "Review exceptions still receive only their consolidated athlete receipt",
   );
-  await claims.submitResultClaim(juniorInput, user("source-child"));
+  await submitWithIdentity(juniorInput, user("source-child"));
   assert.equal(summarySends.length, juniorReceiptBefore + 1);
   assert.equal((await sql`select * from athlete_account_links where athlete_id=8300`).length, 0);
   // Even without a junior result, the batch UI/API guardian declaration is sticky.
@@ -1370,10 +1395,7 @@ try {
       snapshot: guardianDetail.review.snapshot,
     },
   };
-  assert.equal(
-    (await claims.submitResultClaim(guardianInput, user("source-child"))).status,
-    "pending",
-  );
+  assert.equal((await submitWithIdentity(guardianInput, user("source-child"))).status, "pending");
   for (let attempt = 0; attempt < 3; attempt++) {
     const detail = await claims.getClaimableResult(
       { resultId: 8300, includeReview: true },
@@ -1381,7 +1403,7 @@ try {
     );
     assert.equal(
       (
-        await claims.submitResultClaim(
+        await submitWithIdentity(
           {
             ...guardianInput,
             claimantRole: "athlete",
@@ -1440,7 +1462,7 @@ try {
     "Reading does not complete an existing claim",
   );
   const legacyReceiptBefore = summarySends.length;
-  const resumed = await claims.submitResultClaim(resumedInput, user("legacy-batch"));
+  const resumed = await submitWithIdentity(resumedInput, user("legacy-batch"));
   assert.equal(resumed.status, "approved");
   assert.equal(resumed.claimId, legacyClaim.id, "Reuse the earlier claim");
   assert.deepEqual(
@@ -1451,7 +1473,7 @@ try {
   );
   assert.equal(summarySends.length, legacyReceiptBefore + 1);
   assert.equal(summarySends.at(-1).status, "approved");
-  await claims.submitResultClaim(resumedInput, user("legacy-batch"));
+  await submitWithIdentity(resumedInput, user("legacy-batch"));
   assert.equal(
     summarySends.length,
     legacyReceiptBefore + 1,
@@ -1463,7 +1485,7 @@ try {
     { resultId: 8201, includeReview: true },
     user("batch-other"),
   );
-  const competingBatch = await claims.submitResultClaim(
+  const competingBatch = await submitWithIdentity(
     {
       resultId: 8201,
       declarationAccepted: true,

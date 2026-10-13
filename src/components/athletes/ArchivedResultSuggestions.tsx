@@ -1,17 +1,24 @@
+import type { ResultSearchFilters } from "@/lib/athrecs/result-matching-settings";
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { formatDuration, formatRaceDateShort } from "@/lib/athrecs/format";
 import { getMyArchiveMatches, requestMyArchiveMatches } from "@/lib/results-archive/member-api";
 
-export function ArchivedResultSuggestions({ userId }: { userId: string }) {
+export function ArchivedResultSuggestions({
+  userId,
+  filters,
+}: {
+  userId: string;
+  filters?: ResultSearchFilters;
+}) {
   // Preserve the selected revision across background refreshes; the server rejects stale selections.
   const [selected, setSelected] = useState<Map<number, number>>(() => new Map());
   const [note, setNote] = useState("");
   const [message, setMessage] = useState("");
   const matches = useQuery({
-    queryKey: ["my-archive-suggestions", userId],
-    queryFn: () => getMyArchiveMatches(),
+    queryKey: ["my-archive-suggestions", userId, filters],
+    queryFn: () => getMyArchiveMatches({ data: filters }),
     staleTime: 60000,
     refetchInterval: 60000,
   });
@@ -114,6 +121,9 @@ export function ArchivedResultSuggestions({ userId }: { userId: string }) {
                     .filter(Boolean)
                     .join(" · ")}
                 </span>
+                {row.reasons?.length ? (
+                  <span className="block text-xs text-muted">{row.reasons.join(" · ")}</span>
+                ) : null}
                 {row.requested ? (
                   <span className="block text-sm">Requested — awaiting staff review.</span>
                 ) : null}

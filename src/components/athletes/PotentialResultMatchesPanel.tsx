@@ -1,3 +1,4 @@
+import type { ResultSearchFilters } from "@/lib/athrecs/result-matching-settings";
 import { ProfileResultConfirmation } from "./ProfileResultConfirmation";
 import { getClaimableResult } from "@/lib/athrecs/result-claims-api";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -106,6 +107,75 @@ function actionLabel(match: PotentialResultMatch): string {
 }
 
 export function PotentialResultMatchesPanel() {
+  const [draft, setDraft] = useState<ResultSearchFilters>({ name: "", distance: "", year: "" });
+  const [filters, setFilters] = useState(draft);
+  const { user } = useCurrentUserState();
+  if (!user) return null;
+  return (
+    <div className="space-y-4">
+      <section className="space-y-3 rounded-xl border border-border bg-surface p-5">
+        <h2 className="font-display text-xl font-semibold">Search your race results</h2>
+        <p className="text-sm text-muted">
+          Search stored results using one of your saved racing names, a distance and a year. Leave
+          fields blank to check all your saved names and races.{" "}
+          <Link
+            to="/athlete-account"
+            search={{ section: "matching" }}
+            className="text-accent underline"
+          >
+            Add another full name, surname or source link
+          </Link>
+          .
+        </p>
+        <div className="grid gap-3 sm:grid-cols-3">
+          {(
+            [
+              ["name", "Racing name"],
+              ["distance", "Distance"],
+              ["year", "Year"],
+            ] as const
+          ).map(([key, label]) => (
+            <label key={key} className="text-sm">
+              {label}
+              <input
+                className="mt-1 h-11 w-full rounded-lg border border-border bg-bg px-3"
+                value={draft[key]}
+                maxLength={key === "name" ? 120 : key === "year" ? 4 : 40}
+                inputMode={key === "year" ? "numeric" : undefined}
+                placeholder={
+                  key === "distance"
+                    ? "For example 5K or Marathon"
+                    : key === "year"
+                      ? "For example 2024"
+                      : "All my saved names"
+                }
+                onChange={(e) => setDraft((v) => ({ ...v, [key]: e.target.value }))}
+              />
+            </label>
+          ))}
+        </div>
+        <div className="flex gap-3">
+          <Button type="button" onClick={() => setFilters({ ...draft })}>
+            Search stored results
+          </Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              const empty = { name: "", distance: "", year: "" };
+              setDraft(empty);
+              setFilters(empty);
+            }}
+          >
+            Clear filters
+          </Button>
+        </div>
+      </section>
+      <PotentialResultMatchesResults key={JSON.stringify(filters)} filters={filters} />
+    </div>
+  );
+}
+function PotentialResultMatchesResults({ filters }: { filters: ResultSearchFilters }) {
   const queryClient = useQueryClient();
   const [feedback, setFeedback] = useState("");
   const [confirmMatch, setConfirmMatch] = useState<PotentialResultMatch | null>(null);
@@ -148,8 +218,8 @@ export function PotentialResultMatchesPanel() {
     retry: false,
   });
   const matches = useQuery({
-    queryKey: ["my-potential-result-matches", user?.id],
-    queryFn: () => listMyPotentialResultMatches(),
+    queryKey: ["my-potential-result-matches", user?.id, filters],
+    queryFn: () => listMyPotentialResultMatches({ data: filters }),
     enabled: Boolean(user),
     retry: false,
     staleTime: 60_000,
@@ -158,7 +228,8 @@ export function PotentialResultMatchesPanel() {
   const external = useQuery({
     queryKey: ["my-external-runner-matches", user?.id],
     queryFn: () => findExternalRunnerMatches(),
-    enabled: Boolean(user) && searchPublic,
+    // External processing runs only after an explicit button press.
+    enabled: false,
     retry: false,
     staleTime: 5 * 60_000,
   });
@@ -179,8 +250,8 @@ export function PotentialResultMatchesPanel() {
   if (matches.isError || !matches.data) {
     return (
       <section className="rounded-xl border border-red-500/30 bg-red-50 p-5 text-sm text-red-900">
-        Potential result matches could not be loaded. Your Athlete Account and existing claims are
-        unaffected.{" "}
+        {matches.error?.message ||
+          "Potential result matches could not be loaded. Your existing claims are unaffected."}{" "}
         <button type="button" className="underline" onClick={() => void matches.refetch()}>
           Try again
         </button>
@@ -200,7 +271,7 @@ export function PotentialResultMatchesPanel() {
 
   return (
     <section className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
-      <ArchivedResultSuggestions userId={user.id} />
+      <ArchivedResultSuggestions userId={user.id} filters={filters} />
       {feedback ? (
         <p role="status" className="border-b border-border bg-accent-soft p-4 text-sm text-fg">
           {feedback}
@@ -454,21 +525,25 @@ export function PotentialResultMatchesPanel() {
               type="button"
               variant="secondary"
               disabled={external.isFetching}
-              onClick={() => setSearchPublic(true)}
+              onClick={() => {
+                setSearchPublic(true);
+                void external.refetch();
+              }}
             >
               {external.isFetching ? (
                 <Loader2 className="size-4 animate-spin" aria-hidden="true" />
               ) : (
                 <SearchCheck className="size-4" aria-hidden="true" />
               )}
-              Search Power of 10 and parkrun
+              Search saved links and public results
             </Button>
           </div>
 
           {!searchPublic ? (
             <p className="mt-3 text-xs text-subtle">
-              Save your name first. Turn on Performance and habit insights if you want ATHRECS to
-              search public result sites for more of your races.
+              Save your names and source links in Names and result sources, then enable the separate
+              public-results search consent there. Birth date, private address, phone and email are
+              never sent to the search provider.
             </p>
           ) : external.isFetching ? (
             <p className="mt-4 flex items-center gap-2 text-sm text-muted">

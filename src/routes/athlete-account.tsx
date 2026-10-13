@@ -1,3 +1,4 @@
+import { ResultMatchingSettings } from "@/components/athletes/ResultMatchingSettings";
 import { ProfileClaimGuide } from "@/components/athletes/ProfileClaimGuide";
 import { AccountNavigation } from "@/components/athletes/AccountNavigation";
 import { AccountRaces } from "@/components/athletes/AccountRaces";
@@ -621,7 +622,7 @@ function SignedInAccount() {
                     ? "Help ATHRECS find your previous results. These details stay private."
                     : activeSection === "location" && IS_ATHRECS_SITE
                       ? "Your location, nationality and club or team."
-                      : "Full name and verified email are required. Other fields are optional. Your profile stays private until you enable sharing."
+                      : "A name, date of birth, nationality and verified email are required before claiming a profile. You can save unfinished details. Your profile stays private until you enable sharing."
                 }
               >
                 {show("identity") ? (
@@ -649,13 +650,14 @@ function SignedInAccount() {
                       />
                       <TextField
                         label="Date of birth"
+                        claimRequired
                         type="date"
                         value={form.dateOfBirth ?? ""}
                         onChange={(value) => setForm({ ...form, dateOfBirth: value })}
                         autoComplete="bday"
                         help={
                           IS_ATHRECS_SITE
-                            ? "Optional. Add only if needed to help distinguish your results from another athlete’s. Hidden unless you choose to share your birthday below."
+                            ? "Required before claiming. Used privately to compare your age at each race and flag possible mismatches. Hidden unless you separately choose to share your birthday below."
                             : undefined
                         }
                       />
@@ -701,6 +703,8 @@ function SignedInAccount() {
                       />
                       <TextField
                         label="Nationality"
+                        claimRequired
+                        help="Used to compare nationality recorded in results. Include both if dual nationality, or enter Stateless."
                         value={form.nationality ?? ""}
                         onChange={(value) => setForm({ ...form, nationality: value })}
                       />
@@ -803,16 +807,16 @@ function SignedInAccount() {
                       <OptionalLabel />
                     </div>
                     <p className="mt-2 text-sm leading-6 text-muted">
-                      These fields stay private. ATHRECS uses them only to suggest possible Power of
-                      10, World Athletics or official athletics result pages. Nothing is linked
-                      until you claim it.
+                      These fields stay private. ATHRECS checks its stored results using your names,
+                      source IDs, club, age at the race and nationality. External searching has a
+                      separate optional consent below. Nothing is linked until you claim it.
                     </p>
                     <div className="mt-3 grid gap-4 md:grid-cols-2">
                       <CsvField
                         label="Previous or known-as names"
                         values={form.previousNames ?? []}
                         onChange={(previousNames) => setForm({ ...form, previousNames })}
-                        placeholder="Maiden name, nickname, previous racing name"
+                        placeholder="Up to 8 full names, separated by commas"
                       />
                       {
                         <TextField
@@ -841,6 +845,7 @@ function SignedInAccount() {
                         placeholder="https://worldathletics.org/athletes/"
                       />
                     </div>
+                    <ResultMatchingSettings />
                     <p className="mt-5 text-sm font-semibold text-fg">A race you know you ran</p>
                     <p className="mt-1 text-xs text-subtle">
                       One distinctive race helps ATHRECS tell you apart from other athletes with the
@@ -1583,6 +1588,7 @@ function TextField({
   value,
   onChange,
   required = false,
+  claimRequired = false,
   disabled = false,
   type = "text",
   help,
@@ -1594,6 +1600,7 @@ function TextField({
   value: string;
   onChange?: (value: string) => void;
   required?: boolean;
+  claimRequired?: boolean;
   disabled?: boolean;
   type?: string;
   help?: string;
@@ -1607,6 +1614,8 @@ function TextField({
       {label}{" "}
       {required ? (
         <span className="text-red-700">*</span>
+      ) : claimRequired ? (
+        <span className="font-normal text-subtle">(required before claiming)</span>
       ) : (
         <span className="font-normal text-subtle">(optional)</span>
       )}

@@ -7,6 +7,7 @@ import {
   buildPotentialMatchSearchPatterns,
   normalizePersonName,
   scorePotentialResultNameMatch,
+  resultIdentityEvidence,
   uniquePotentialMatchNames,
 } from "../src/lib/athrecs/result-match.ts";
 
@@ -23,30 +24,15 @@ assert.deepEqual(
   ["Paul Browne", "P. Browne"],
 );
 
-const exact = scorePotentialResultNameMatch(
-  ["Paul Browne"],
-  "Paul Browne",
-  {},
-  {},
-);
+const exact = scorePotentialResultNameMatch(["Paul Browne"], "Paul Browne", {}, {});
 assert.equal(exact?.confidence, "exact");
 assert.equal(exact?.score, 100);
 
-const strong = scorePotentialResultNameMatch(
-  ["Paul T Browne"],
-  "Paul Browne",
-  {},
-  {},
-);
+const strong = scorePotentialResultNameMatch(["Paul T Browne"], "Paul Browne", {}, {});
 assert.equal(strong?.confidence, "strong");
 assert.ok((strong?.score ?? 0) >= 90);
 
-const unsupportedInitial = scorePotentialResultNameMatch(
-  ["Paul Browne"],
-  "P Browne",
-  {},
-  {},
-);
+const unsupportedInitial = scorePotentialResultNameMatch(["Paul Browne"], "P Browne", {}, {});
 assert.equal(unsupportedInitial, null, "An initial-only match needs corroborating context");
 
 const supportedInitial = scorePotentialResultNameMatch(
@@ -62,6 +48,21 @@ assert.equal(
   scorePotentialResultNameMatch(["Paul Browne"], "Paul Brown", {}, {}),
   null,
   "A different surname must not be suggested",
+);
+
+assert.equal(
+  resultIdentityEvidence(
+    { dateOfBirth: "1990-01-01" },
+    { eventDate: "2026-01-01", category: "U20" },
+  ).conflict,
+  true,
+);
+assert.equal(
+  resultIdentityEvidence(
+    { dateOfBirth: "1990-01-01" },
+    { eventDate: "2008-01-01", category: "U20" },
+  ).conflict,
+  false,
 );
 
 const patterns = buildPotentialMatchSearchPatterns(["Paul T Browne"]);

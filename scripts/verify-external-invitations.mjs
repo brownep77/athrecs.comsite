@@ -206,6 +206,18 @@ try {
     () => claim("submitResultClaim", { ...selected, declarationAccepted: false }, athlete.token),
     /Confirm/,
   );
+  for (const account of [athlete, wrong])
+    await rpc(
+      "athrecs/result-matching-settings-api",
+      "saveMyClaimIdentity",
+      {
+        fullName: "Synthetic Unmatched Account",
+        dateOfBirth: "1984-01-01",
+        nationality: "British",
+        privacyAcknowledged: true,
+      },
+      account.token,
+    );
   const submitted = await claim(
     "submitResultClaim",
     { ...selected, declarationAccepted: true },
@@ -275,6 +287,17 @@ try {
     /invitation is unavailable/,
   );
   await sql`update "user" set "emailVerified"=true where id=${wrong.id}`;
+  await rpc(
+    "athrecs/result-matching-settings-api",
+    "saveMyClaimIdentity",
+    {
+      fullName: "Synthetic Unmatched Account",
+      dateOfBirth: "1984-01-01",
+      nationality: "British",
+      privacyAcknowledged: true,
+    },
+    socialAthlete.token,
+  );
   const socialClaim = await claim(
     "submitResultClaim",
     { ...socialSelected, declarationAccepted: true },

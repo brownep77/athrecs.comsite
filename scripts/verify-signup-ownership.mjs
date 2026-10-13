@@ -200,6 +200,18 @@ try {
     return { statuses };
   });
 
+  for (const account of [a, b])
+    await rpc(
+      "athrecs/result-matching-settings-api",
+      "saveMyClaimIdentity",
+      {
+        fullName: account === a ? "Synthetic Same Name" : "Synthetic Other Person",
+        dateOfBirth: "1984-01-01",
+        nationality: "Irish",
+        privacyAcknowledged: true,
+      },
+      account.token,
+    );
   // All race and athlete records below are synthetic fixtures in disposable storage.
   await sql`insert into events (id, slug, name, sport, surface, country) values (991501, 'audit-fictional-race', 'Synthetic Audit 10K', 'Athletics', 'Road', 'United Kingdom')`;
   await sql`insert into editions (id, event_id, event_date, distance_code, distance_km) values (991501, 991501, '2026-09-01', '10K', 10)`;

@@ -64,23 +64,99 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <NoticeSection title="Optional details for identity checks">
+        <NoticeSection title="Identity details required before a profile claim">
           <p>
-            Date of birth and postcode are not needed to sign in or create an account. Only add them
-            if needed for a specific athlete or result identity check. Date of birth is hidden
-            unless you choose to share it; postcode stays private to you and authorised ATHRECS
-            staff. You can clear either field in My Athlete Account and save the change. We do not
-            ask for a street address. These details can support a review but do not, by themselves,
-            verify an athlete or a race result.
+            A profile claim requires your full name, a verified email, date of birth and
+            nationality. These are not required simply to browse or sign in with an email code. Your
+            birth date lets us compare your age on historical race dates with recorded age
+            categories and route child claims for staff review. Nationality helps distinguish
+            similar records only when the source explicitly reports it; we never infer it from your
+            address, club or name. You can enter multiple nationalities or Stateless. These details
+            are supporting clues, not proof of identity. Uncertain or conflicting claims receive
+            human review.
+          </p>
+          <p className="mt-3">
+            Birth date is hidden unless you explicitly choose to share it in profile settings. Email
+            stays private. You can correct or clear your private details in My Athlete Account;
+            incomplete identity details prevent further claims. Existing ownership is not
+            automatically removed when you correct a field. Contact us to dispute ownership or
+            request deletion.
+          </p>
+        </NoticeSection>
+
+        <NoticeSection title="Other names, result sources and optional contact details">
+          <p>
+            You may save up to eight other full names, eight other surnames, a maiden surname,
+            sporting identifiers and up to ten additional public result/profile links. These help
+            find your records under the names used at the time. They stay in your private account.
+            Manual searches use your saved names and can be narrowed by distance and year.
+            Suggestions never claim, merge or publish results automatically.
+          </p>
+          <p className="mt-3">
+            Address, postcode and phone are optional and are not needed to claim or match results.
+            Address and phone are used only for account-support contact if you choose that option.
+            Turning that option off and saving clears them. Clear any other optional field and save
+            to remove it. Do not provide another person's contact details or private sign-in links.
+          </p>
+        </NoticeSection>
+
+        <NoticeSection title="Optional external result searches">
+          <p>
+            A separate choice, off by default, allows adults to request a public-results search
+            using xAI (the provider of Grok). On your request we send saved racing names, public
+            source links, sporting IDs, club, general location and any known-race details you
+            supplied. We do not send birth date, nationality, postcode, street address, phone or
+            email fields. Under-18 and guardian searches need staff assistance. Internal matching
+            does not require external-search consent. Saved links are searched only when you request
+            it; access to third-party sites and complete coverage cannot be guaranteed.
+          </p>
+          <p className="mt-3">
+            Before sending athlete details we check that the provider reports zero data retention.
+            External processing may take place outside the UK/EEA under the provider's{" "}
+            <a
+              className="text-accent underline"
+              href="https://x.ai/legal/data-processing-addendum"
+              target="_blank"
+              rel="noreferrer"
+            >
+              data processing terms
+            </a>
+            , including its international-transfer safeguards. These searches return unverified
+            suggestions with source links for you to check. They are not an ownership decision. Turn
+            off the choice and save to stop future searches and delete cached external suggestions.
+            Withdrawal does not undo processing already carried out.
+          </p>
+        </NoticeSection>
+
+        <NoticeSection title="Purposes, access and retention">
+          <p>
+            AthRecs controls the account and matching information described here. We use account
+            information to provide the service you request, and identity and claim information for
+            our legitimate interests in accurate records, preventing disputed ownership and
+            protecting children. Optional contact use and external searches rely on your separate
+            consent. Acknowledging this notice is not consent to marketing. Private data is
+            accessible to you and authorised staff, and is processed by our hosting, database and
+            email service providers to operate the service. It is not supplied to sponsors through
+            this form.
+          </p>
+          <p className="mt-3">
+            Saved account details remain while your account needs them, until you clear them or
+            request deletion. Claim decisions and evidence may be retained where needed to resolve
+            ownership disputes, prevent repeat fraudulent claims or meet legal obligations; we
+            assess that need when handling a deletion request. External suggestions are reused for
+            at most seven days, and old cache rows are cleared when you next search; saving matching
+            choices clears all your cached suggestions. No automatic deletion period is claimed for
+            inactive accounts. Contact us for an assessment of the information still needed for your
+            account.
           </p>
         </NoticeSection>
 
         <NoticeSection title="Optional Entry Passport information">
           <p>
-            You can add location, date of birth, nationality, club, sports, disciplines, training
-            patterns, goals and coach name. You can also record equipment, nutrition, technology,
-            clothing, recovery and purchasing preferences. These questions are optional. Do not add
-            medical diagnoses or other information you do not want ATHRECS to hold.
+            You can add location, club, sports, disciplines, training patterns, goals and coach
+            name. You can also record equipment, nutrition, technology, clothing, recovery and
+            purchasing preferences. These questions are optional. Do not add medical diagnoses or
+            other information you do not want ATHRECS to hold.
           </p>
         </NoticeSection>
 
@@ -187,15 +263,30 @@ function AthletePrivacyPage() {
         <NoticeSection title="Access, correction and withdrawal">
           <p>
             Use My Athlete Account to review and correct your details or change consent choices.
-            ATHRECS records consent changes so its systems can respect a withdrawal. Account
-            deletion and formal data-access requests will be handled through ATHRECS support once
-            the relevant support channel is published on the site.
+            ATHRECS records consent changes so its systems can respect a withdrawal. Account access,
+            portability, restriction, objections, deletion and questions about international
+            transfers can be requested from{" "}
+            <a href="mailto:paul@athrecs.com" className="text-accent underline">
+              paul@athrecs.com
+            </a>
+            . We may need to verify your identity before responding. You may also complain to the{" "}
+            <a
+              href="https://ico.org.uk/make-a-complaint/"
+              className="text-accent underline"
+              target="_blank"
+              rel="noreferrer"
+            >
+              UK Information Commissioner's Office
+            </a>{" "}
+            or your local data protection authority. You can ask for human review of a disputed
+            match; nationality and name similarity do not prove ownership.
           </p>
         </NoticeSection>
 
         <p className="text-xs text-subtle">
           Athlete Account notice: 23 August 2026. Partnerships addition: 16 September 2026. Sign-in
-          and optional identity details clarified: 2 October 2026.
+          and optional identity details clarified: 2 October 2026. Claim identity, matching and
+          external-search notice: 13 October 2026.
         </p>
       </section>
 
