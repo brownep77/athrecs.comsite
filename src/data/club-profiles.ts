@@ -3,6 +3,7 @@ import { additionalClubProfiles } from "./club-profiles-b.ts";
 import { furtherClubProfiles } from "./club-profiles-c.ts";
 import { regionalClubProfiles } from "./club-profiles-d.ts";
 import { communityClubProfiles } from "./club-profiles-e.ts";
+import { midlandsAndIrelandClubProfiles } from "./club-profiles-f.ts";
 
 export type ClubProfile = {
   summary: string;
@@ -20,6 +21,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...midlandsAndIrelandClubProfiles,
   ...communityClubProfiles,
   ...regionalClubProfiles,
   ...furtherClubProfiles,
@@ -747,4 +749,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-13-v5";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-13-v6";

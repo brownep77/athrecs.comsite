@@ -1,59 +1,59 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-13-batch05",
+  "lastEditorialBatch": "2026-10-13-batch06",
   "reviewedAt": "2026-10-13",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "4life-triathlon-club",
-    "altrincham-and-district-athletic-club-limited",
-    "blackburn-harriers-and-ac",
-    "bolton-united-harriers-and-ac",
-    "stockport-harriers-and-ac",
-    "warrington-a-c",
-    "warrington-road-runners",
-    "warrington-running-club",
-    "athletics-ireland-an-riocht-a-c",
-    "athletics-ireland-ardee-and-district-a-c",
-    "athletics-ireland-athenry-a-c",
-    "athletics-ireland-ballina-a-c",
-    "athletics-ireland-bandon-a-c",
-    "athletics-ireland-bantry-a-c",
-    "athletics-ireland-blackrock-dublin-a-c",
-    "athletics-ireland-bohermeen-a-c",
-    "welsh-athletics-afan-valley-swimming-club",
-    "welsh-athletics-rhayader-rc",
-    "welsh-athletics-sarn-helen",
-    "welsh-athletics-trots",
-    "welsh-athletics-wrecsam-tri"
+    "charnwood-a-c",
+    "coventry-triathletes",
+    "leamington-athletics-academy",
+    "leamington-cycling-and-athletics-club",
+    "nuneaton-harriers",
+    "rugby-and-northampton-ac",
+    "tipton-harriers",
+    "athletics-ni-barf-ni",
+    "athletics-ni-belfast-running-club",
+    "athletics-ni-mallusk-harriers",
+    "athletics-ni-victoria-park-and-connswater-ac",
+    "athletics-ireland-abbey-striders-a-c",
+    "athletics-ireland-adamstown-a-c",
+    "athletics-ireland-aghada-running-club-a-c",
+    "athletics-ireland-balbriggan-and-district-a-c",
+    "athletics-ireland-ballinasloe-and-district-a-c",
+    "clonmel-triathlon-club",
+    "kilkenny-triathlon-club",
+    "waterford-triathlon-club",
+    "west-clare-triathlon-club"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 133,
-    "notableMemberEntries": 75,
-    "clubsWithContacts": 494,
-    "contactEntries": 835,
-    "clubsWithEmail": 481,
-    "clubsWithPhone": 55,
-    "clubsWithSocials": 904,
-    "socialLinks": 1825,
-    "websiteContactRecords": 659
+    "extendedProfiles": 153,
+    "notableMemberEntries": 84,
+    "clubsWithContacts": 498,
+    "contactEntries": 843,
+    "clubsWithEmail": 485,
+    "clubsWithPhone": 57,
+    "clubsWithSocials": 912,
+    "socialLinks": 1844,
+    "websiteContactRecords": 669
   },
   "batchChanges": {
-    "extendedProfilesAdded": 21,
-    "notableMemberEntriesAdded": 12,
-    "contactOrSocialRecordsChanged": 17,
-    "trainingOrClubhouseVenuesClarified": 16,
-    "combinedAddressesReplacedByNotes": [
-      "athletics-ireland-ardee-and-district-a-c",
-      "welsh-athletics-sarn-helen"
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 9,
+    "contactOrSocialRecordsChanged": 13,
+    "trainingOrClubhouseVenuesClarified": 9,
+    "combinedOrUnconfirmedAddressesReplacedByNotes": [
+      "coventry-triathletes",
+      "athletics-ireland-balbriggan-and-district-a-c"
     ],
-    "sportsCorrected": [
-      "altrincham-and-district-athletic-club-limited",
-      "welsh-athletics-sarn-helen",
-      "welsh-athletics-wrecsam-tri"
+    "sportsCorrected": ["coventry-triathletes"],
+    "adultOnlyClarified": [
+      "athletics-ireland-aghada-running-club-a-c",
+      "kilkenny-triathlon-club",
+      "west-clare-triathlon-club"
     ]
   },
   "validationBeforeCommit": [
@@ -64,33 +64,34 @@
     "production build"
   ],
   "nextCandidateSlugs": [
-    "charnwood-a-c",
-    "coventry-triathletes",
-    "leamington-athletics-academy",
-    "leamington-cycling-and-athletics-club",
-    "nuneaton-harriers",
-    "rugby-and-northampton-ac",
-    "tipton-harriers",
-    "athletics-ni-barf-ni",
-    "athletics-ni-belfast-running-club",
-    "athletics-ni-dub-running-club",
-    "athletics-ni-mallusk-harriers",
-    "athletics-ni-victoria-park-and-connswater-ac",
-    "athletics-ireland-abbey-striders-a-c",
-    "athletics-ireland-adamstown-a-c",
-    "athletics-ireland-aghada-running-club-a-c",
-    "athletics-ireland-athlone-a-c",
-    "athletics-ireland-balbriggan-and-district-a-c",
-    "athletics-ireland-ballinasloe-and-district-a-c",
-    "clonmel-triathlon-club",
-    "kilkenny-triathlon-club",
-    "waterford-triathlon-club",
-    "west-clare-triathlon-club"
+    "axe-valley-runners",
+    "bideford-aac",
+    "exeter-harriers",
+    "erme-valley-harriers",
+    "exmouth-harriers",
+    "bude-rats-run-and-tri",
+    "cornwall-ac",
+    "newquay-and-par-ac",
+    "beverley-athletic-club",
+    "harrogate-harriers-and-ac",
+    "keighley-and-craven-ac",
+    "fitmums-and-friends",
+    "athletics-ni-queens-university-ac",
+    "athletics-ni-st-annes-ac",
+    "athletics-ni-st-malachys-ac",
+    "athletics-ni-west-belfast-coolers",
+    "athletics-ireland-carraig-mhor-a-c",
+    "athletics-ireland-carraig-na-bhfear-a-c",
+    "athletics-ireland-carrick-aces-a-c",
+    "athletics-ireland-carrick-on-shannon-a-c",
+    "athletics-ireland-carrick-on-suir-a-c",
+    "athletics-ireland-carrigaline-a-c",
+    "athletics-ireland-carrigtwohill-a-c"
   ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate Midlands English athletics and cycling, Northern Irish running, Irish regional athletics and triathlon. These are unresearched candidate slugs, not completed checks.",
+    "Rotate South West England, Yorkshire, the remaining Belfast listings and regional Irish athletics. Revisit Dub Runners and Athlone only when stronger primary content is available. Queued candidates are not completed source checks.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -135,6 +136,54 @@
       "url": "https://blackrockac.ie/about/",
       "status": "additional-social-platform-deferred",
       "reason": "The official page links https://bsky.app/profile/blackrockac.bsky.social. The current typed social-link model does not support Bluesky; no schema/UI expansion was made in this editorial batch."
+    },
+    {
+      "slug": "athletics-ni-dub-running-club",
+      "url": "http://www.dubrunners.club/",
+      "status": "deferred",
+      "reason": "The listed homepage returned an empty body; dubrunners.org.uk returned 502. Existing directory fields retained, with no new biography or current training claim."
+    },
+    {
+      "slug": "athletics-ireland-athlone-a-c",
+      "url": "https://athloneac.clubforce.com/",
+      "status": "deferred",
+      "reason": "The club page exposed only a cookie notice to the reader. Athletics Ireland confirms TUS training and contacts but the available material was too thin for a useful full biography. No exact origin or alumni inferred."
+    },
+    {
+      "slug": "tipton-harriers",
+      "url": "https://www.tiptonharriers.co.uk/",
+      "status": "biography-added-from-primary-fallbacks",
+      "reason": "Club homepage returned 403. Venue uses Sandwell’s club directory; history uses the related Dudley & Stourbridge club archive and World Athletics’ Jack Holden tribute. Current joining details and direct role contacts need a readable club source."
+    },
+    {
+      "slug": "athletics-ireland-balbriggan-and-district-a-c",
+      "url": "https://balbrigganathclub.com/training/kids-training/",
+      "status": "conflicting-venue-postcode",
+      "reason": "Club pages give K32 HE19 for the sports centre while Athletics Ireland gives K32 D252. Adult runs use Flemington Community Centre, K32 HD28. Multiple venues are described separately and the exact address/postcode fields are empty. Bremore track is described as proposed, not open."
+    },
+    {
+      "slug": "athletics-ireland-ballinasloe-and-district-a-c",
+      "url": "https://www.ballinasloeathletics.ie/",
+      "status": "contact-conflict-and-subpage-timeouts",
+      "reason": "Header and Athletics Ireland agree on info@ballinasloeathletics.ie; footer gives info@ballinasloeathleticsclub.ie. Retained the corroborated address only. About, training and contact subpages timed out; homepage and official directory were read. Two different published Instagram handles are preserved with separate provenance pending clarification."
+    },
+    {
+      "slug": "waterford-triathlon-club",
+      "url": "https://www.waterfordtriclub.com/copy-of-tramore-medical-duathlon",
+      "status": "stale-event-copy",
+      "reason": "Race heading says 13 June 2026 but body still describes 7 June 2025. The 2025 twentieth-anniversary claim is explicitly historical; no future race date, current price or exact founding year added."
+    },
+    {
+      "slug": "west-clare-triathlon-club",
+      "url": "http://www.westclaretri.com/",
+      "status": "biography-added-from-directory-and-local-club-listing",
+      "reason": "Club homepage returned an empty body. Triathlon Ireland and Kilrush’s club listing support adult multisport activities, Kilrush and the enquiry email, but no exact training venue or schedule."
+    },
+    {
+      "slug": "athletics-ni-belfast-running-club",
+      "url": "http://www.belfastrunningclub.co.uk/contact-us-2/",
+      "status": "broken-contact-link",
+      "reason": "Homepage-linked contact page returned 404. Use the readable homepage and its public Facebook link, retaining the earlier Athletics NI email with its original provenance."
     }
   ],
   "coverageReviewNotes": [
