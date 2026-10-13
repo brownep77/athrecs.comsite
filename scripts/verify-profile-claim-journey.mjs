@@ -160,6 +160,7 @@ try {
     1,
   );
   await page.getByRole("link", { name: "View my private profile", exact: true }).click();
+  await page.getByRole("tab", { name: "About & sports", exact: true }).click();
   await page
     .getByText(/Their private ATHRECS record currently contains 1 claimed result/)
     .waitFor();
