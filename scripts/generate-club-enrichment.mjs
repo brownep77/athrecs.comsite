@@ -1,6 +1,21 @@
 import fs from "node:fs/promises";
 
 const CHECKED_AT = "2026-08-16";
+// This is the historical directory generator. It must not erase later source
+// checks, reviewed club biographies or website contact provenance.
+const currentData = await fs.readFile(
+  new URL("../src/data/club-enrichment-a.ts", import.meta.url),
+  "utf8",
+);
+if (
+  [...currentData.matchAll(/"checked_at"\s*:\s*"(\d{4}-\d{2}-\d{2})"/g)].some(
+    (m) => m[1] > CHECKED_AT,
+  )
+) {
+  throw new Error(
+    "Historical club generator refused to overwrite newer reviewed data. Stage a source comparison first; see docs/club-profile-audit.md.",
+  );
+}
 const EA_API =
   "https://www.englandathletics.org/wp-admin/admin-ajax.php?action=data_api_search&types[]=club&order=asc&order_by=name";
 const EA_FINDER = "https://www.englandathletics.org/find-a-club/";

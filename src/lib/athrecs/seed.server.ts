@@ -1,4 +1,5 @@
 import { dbSource, getSql } from "@/lib/db";
+import { CLUB_PROFILE_VERSION } from "@/data/club-profiles";
 import {
   athletes as athleteSeeds,
   catalogueMetadata,
@@ -652,7 +653,7 @@ async function upsertCatalogueClubs(sql: Sql): Promise<void> {
     select value from app_meta where key = 'clubs_catalogue_version' limit 1
   `;
   const count = await sql<{ n: number }>`select count(*)::int as n from clubs`;
-  const targetVersion = SEED_VERSION;
+  const targetVersion = `${SEED_VERSION}:${CLUB_PROFILE_VERSION}`;
   if (meta[0]?.value === targetVersion && (count[0]?.n ?? 0) >= EXPECTED.clubs) {
     return;
   }

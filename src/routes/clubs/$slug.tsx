@@ -14,7 +14,8 @@ import {
 import { getClubBySlug } from "@/lib/athrecs/api";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { NationFlag } from "@/components/flags/NationFlag";
+import { ClubIdentityFlag } from "@/components/clubs/ClubIdentityFlag";
+import { clubSearchMetadata, safeClubJsonLd } from "@/lib/clubs/profile-seo";
 import { ClubVerificationBadge } from "@/components/clubs/ClubVerificationBadge";
 import { resolveSlugRedirect } from "@/lib/athrecs/slug-redirects";
 import { SITE_NAME, SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
@@ -48,31 +49,18 @@ export const Route = createFileRoute("/clubs/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) return {};
     const { club } = loaderData;
-    const canonical = `${SITE_URL}/clubs/${club.slug}`;
-    const title = `${club.name} club profile | ${SITE_NAME}`;
-    const description =
-      club.summary || `${club.name} club profile, location, official links and ATHRECS athletes.`;
+    const { canonical, title, description, organization, breadcrumbs } = clubSearchMetadata(
+      club,
+      SITE_URL,
+      SITE_NAME,
+    );
     return {
       meta: siteGraphMeta({ title, description, url: canonical }),
       links: [{ rel: "canonical", href: canonical }],
       scripts: [
         {
           type: "application/ld+json",
-          children: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SportsOrganization",
-            name: club.name,
-            url: canonical,
-            description,
-            sport: club.sports,
-            sameAs: club.website ? [club.website] : undefined,
-            address: {
-              "@type": "PostalAddress",
-              addressLocality: club.city || undefined,
-              addressRegion: club.county || undefined,
-              addressCountry: club.country || undefined,
-            },
-          }),
+          children: safeClubJsonLd([organization, breadcrumbs].filter(Boolean)),
         },
       ],
     };
@@ -96,7 +84,7 @@ function ClubPage() {
   const checkedDate = club.checked_at?.slice(0, 10);
   const locationNote =
     club.location_precision === "postcode"
-      ? "Location checked from the published postcode"
+      ? "Directory location matched to the published postcode"
       : club.location_precision === "official-directory"
         ? "Location checked in the official directory"
         : club.location_precision === "area-only"
@@ -104,7 +92,7 @@ function ClubPage() {
           : "Location has not yet been independently verified";
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <Link
         to="/clubs"
         className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-muted no-underline hover:text-fg"
@@ -141,7 +129,7 @@ function ClubPage() {
           />
         </div>
         <div className="flex items-center gap-3">
-          <NationFlag nation={club.country} />
+          <ClubIdentityFlag country={club.country} scope={club.profile?.scope} />
           <h1 className="font-display text-2xl font-semibold tracking-tight text-fg md:text-3xl">
             {club.name}
           </h1>
@@ -182,6 +170,47 @@ function ClubPage() {
         </p>
       )}
 
+      {club.profile && (
+        <section
+          className={`grid gap-6 rounded-xl border border-border bg-surface p-5 md:p-7 ${club.profile.founded_year || club.profile.notable_members.length ? "lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.65fr)]" : ""}`}
+        >
+          <div className="space-y-4">
+            <h2 className="font-display text-xl font-semibold text-fg">About {club.name}</h2>
+            {club.profile.biography.map((paragraph) => (
+              <p key={paragraph} className="max-w-prose text-sm leading-7 text-muted">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+          {(club.profile.founded_year || club.profile.notable_members.length > 0) && (
+            <div className="space-y-4 lg:border-l lg:border-border lg:pl-6">
+              {club.profile.founded_year && (
+                <p className="text-sm text-muted">
+                  Established{" "}
+                  <strong className="font-display text-2xl text-fg">
+                    {club.profile.founded_year}
+                  </strong>
+                </p>
+              )}
+              {club.profile.notable_members.length > 0 && (
+                <div className="space-y-3">
+                  <h3 className="font-display text-lg font-semibold text-fg">
+                    Notable members, past and present
+                  </h3>
+                  {club.profile.notable_members.map((person) => (
+                    <div key={person.name} className="border-b border-border pb-3 last:border-0">
+                      <p className="font-semibold text-fg">{person.name}</p>
+                      <p className="mt-0.5 text-xs text-accent">{person.connection}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-muted">{person.detail}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </section>
+      )}
+
       <section className="grid gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
         <div className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">
           <div>
@@ -191,6 +220,9 @@ function ClubPage() {
             </p>
           </div>
 
+          {club.profile?.contact_note && (
+            <p className="text-sm leading-relaxed text-muted">{club.profile.contact_note}</p>
+          )}
           {club.contacts.length > 0 ? (
             <div className="grid gap-3 sm:grid-cols-2">
               {club.contacts.map((contact, index) => (
@@ -230,14 +262,15 @@ function ClubPage() {
             </div>
           ) : (
             <p className="rounded-lg border border-dashed border-border px-4 py-5 text-sm text-muted">
-              No public email, telephone number or named club officer was available from the checked
-              sources. Use the official contact or website link above.
+              {club.website || club.contact_url
+                ? "Use the club website or contact page for enquiries. A direct club email or phone number has not yet been confirmed."
+                : "Club contact details have not yet been confirmed."}
             </p>
           )}
 
           {club.socials.length > 0 && (
             <div>
-              <h3 className="mb-2 text-sm font-semibold text-fg">Official social profiles</h3>
+              <h3 className="mb-2 text-sm font-semibold text-fg">Club social links</h3>
               <div className="flex flex-wrap gap-2">
                 {club.socials.map((social) => (
                   <Button
@@ -258,13 +291,39 @@ function ClubPage() {
         </div>
 
         <aside className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card">
-          <h2 className="font-display text-lg font-semibold text-fg">Checked club information</h2>
+          <h2 className="font-display text-lg font-semibold text-fg">Location and club details</h2>
+          {club.profile?.location_note && (
+            <p className="text-sm leading-relaxed text-muted">{club.profile.location_note}</p>
+          )}
           {club.address && (
             <div className="flex items-start gap-2.5 text-sm">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <div>
-                <p className="font-medium text-fg">Published venue or address</p>
+                <p className="font-medium text-fg">
+                  {club.address_kind === "training"
+                    ? "Training venue"
+                    : club.address_kind === "clubhouse"
+                      ? "Clubhouse"
+                      : club.address_kind === "correspondence"
+                        ? "Correspondence address"
+                        : "Directory address"}
+                </p>
                 <p className="mt-0.5 leading-relaxed text-muted">{club.address}</p>
+                {["training", "clubhouse"].includes(club.address_kind) ? (
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(club.address)}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-2 inline-flex min-h-11 items-center gap-1 text-accent"
+                  >
+                    View on map <ExternalLink className="h-3 w-3" />
+                  </a>
+                ) : (
+                  <p className="mt-1 text-xs leading-relaxed text-subtle">
+                    This may be a postal contact address. Confirm the training venue with the club
+                    before visiting.
+                  </p>
+                )}
               </div>
             </div>
           )}
@@ -302,13 +361,39 @@ function ClubPage() {
             <div className="flex items-start gap-2.5 text-sm">
               <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <div>
-                <p className="font-medium text-fg">Last checked</p>
+                <p className="font-medium text-fg">Directory checked</p>
                 <p className="mt-0.5 text-muted">{checkedDate}</p>
               </div>
             </div>
           )}
         </aside>
       </section>
+
+      {club.profile && (
+        <details className="rounded-xl border border-border bg-surface p-4 text-sm">
+          <summary className="cursor-pointer font-medium text-muted">
+            Club history and information sources
+          </summary>
+          <p className="mt-3 text-xs text-subtle">
+            Profile reviewed {club.profile.reviewed_at}. Training arrangements can change; check
+            with the club before attending.
+          </p>
+          <ul className="mt-3 space-y-2">
+            {club.profile.sources.map((source) => (
+              <li key={source.url}>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-accent hover:underline"
+                >
+                  {source.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
+      )}
 
       <section className="space-y-3">
         <h2 className="font-display text-lg font-semibold text-fg">Athletes at this club</h2>
