@@ -1800,6 +1800,19 @@ export function reviewParkrunEdition(edition: Edition): Edition {
     reviewed = {
       ...reviewed,
       startTime: rule.startTime,
+      // Use a replacement callback: SQL/Python backreference escapes previously
+      // left a control character in the weekday position of stored notes.
+      notes: rule.weekday
+        ? reviewed.notes
+            ?.replace(
+              `Weekly junior parkrun 2K — ${String.fromCharCode(1)} `,
+              "Weekly junior parkrun 2K — Sunday ",
+            )
+            .replace(
+              /^(Weekly (?:junior )?parkrun [25]K — )(?:Saturday|Sunday) \d{2}:\d{2}/,
+              (_match, prefix: string) => `${prefix}${rule.weekday} ${rule.startTime}`,
+            )
+        : reviewed.notes,
       entryUrl:
         !edition.entryUrl || edition.entryUrl === rule.oldSource ? rule.source : edition.entryUrl,
       source:

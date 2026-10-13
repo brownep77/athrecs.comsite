@@ -12,6 +12,20 @@ const {
 const get = (slug, date) => editions.find((row) => row.seriesSlug === slug && row.date === date);
 assert.equal(series.length, 16, "Only the 16 independently matched missing venues are added");
 assert.equal(get("pollok-parkrun", "2026-10-17").startTime, "09:30");
+const repaired = reviewParkrunEdition({
+  seriesSlug: "cambuslangpark-juniors-parkrun",
+  date: "2026-10-18",
+  distance: "2K",
+  distanceKm: 2,
+  status: "Open",
+  source: "https://example.test/venue",
+  notes:
+    "Weekly junior parkrun 2K — \u0001 09:00. Confirm cancellations on the parkrun event page.",
+});
+assert.equal(
+  repaired.notes,
+  "Weekly junior parkrun 2K — Sunday 09:30. Confirm cancellations on the parkrun event page.",
+);
 assert.equal(get("cambuslangpark-juniors-parkrun", "2026-10-11"), undefined);
 assert.equal(get("cambuslangpark-juniors-parkrun", "2026-10-18").startTime, "09:30");
 assert.equal(get("chesterfordresearchpark-parkrun", "2026-10-17").status, "Cancelled");

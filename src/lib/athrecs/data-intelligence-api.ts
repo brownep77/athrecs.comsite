@@ -202,7 +202,7 @@ export async function buildDataIntelligenceDashboard(sql: Awaited<ReturnType<typ
     }>`select
         (select count(*)::int from events) as events,
         (select count(*)::int from editions) as editions,
-        (select count(*)::int from editions where event_date >= current_date) as upcoming_editions,
+        (select count(*)::int from editions where event_date >= current_date and status <> 'Cancelled') as upcoming_editions,
         (select count(distinct nullif(trim(country), ''))::int from events) as countries,
         (select count(distinct coalesce(nullif(trim(region), ''), nullif(trim(county), '')))::int from events) as regions,
         (select count(distinct nullif(trim(city), ''))::int from events) as cities,
@@ -239,12 +239,12 @@ export async function buildDataIntelligenceDashboard(sql: Awaited<ReturnType<typ
         union all
         select 'no_upcoming_edition', 'Events with no upcoming edition', 'info', count(*)::int
         from events e where not exists (
-          select 1 from editions ed where ed.event_id = e.id and ed.event_date >= current_date
+          select 1 from editions ed where ed.event_id = e.id and ed.event_date >= current_date and ed.status <> 'Cancelled'
         )
         union all
         select 'missing_entry', 'Upcoming editions missing an entry route', 'critical', count(*)::int
         from editions ed
-        where ed.event_date >= current_date
+        where ed.event_date >= current_date and ed.status <> 'Cancelled'
           and nullif(trim(coalesce(ed.entry_url, '')), '') is null
           and not exists (
             select 1 from edition_entry_options option
@@ -254,7 +254,7 @@ export async function buildDataIntelligenceDashboard(sql: Awaited<ReturnType<typ
         select 'unverified_entry', 'Upcoming entry routes not verified', 'warning', count(*)::int
         from edition_entry_options option
         join editions ed on ed.id = option.edition_id
-        where ed.event_date >= current_date and option.is_verified = false
+        where ed.event_date >= current_date and ed.status <> 'Cancelled' and option.is_verified = false
         union all
         select 'missing_results_link', 'Past editions missing a results link', 'info', count(*)::int
         from editions ed
@@ -307,7 +307,7 @@ export async function buildDataIntelligenceDashboard(sql: Awaited<ReturnType<typ
         select 'no_upcoming_edition', 'info', e.slug, e.name, e.country, e.city,
           'No future edition is recorded'
         from events e where not exists (
-          select 1 from editions ed where ed.event_id = e.id and ed.event_date >= current_date
+          select 1 from editions ed where ed.event_id = e.id and ed.event_date >= current_date and ed.status <> 'Cancelled'
         )
       )
       select issue_code, severity, event_slug, event_name, country, city, detail
@@ -324,14 +324,14 @@ export async function buildDataIntelligenceDashboard(sql: Awaited<ReturnType<typ
     }>`select
         coalesce(nullif(trim(e.country), ''), 'Unknown') as label,
         count(distinct e.id)::int as count,
-        count(distinct ed.id) filter (where ed.event_date >= current_date)::int as upcoming,
+        count(distinct ed.id) filter (where ed.event_date >= current_date and ed.status <> 'Cancelled')::int as upcoming,
         count(distinct e.id) filter (
           where nullif(trim(e.city), '') is null
             or nullif(trim(coalesce(e.region, '')), '') is null
             or nullif(trim(coalesce(e.postcode, '')), '') is null
         )::int as missing_location,
         count(distinct ed.id) filter (
-          where ed.event_date >= current_date
+          where ed.event_date >= current_date and ed.status <> 'Cancelled'
             and nullif(trim(coalesce(ed.entry_url, '')), '') is null
             and not exists (
               select 1 from edition_entry_options option

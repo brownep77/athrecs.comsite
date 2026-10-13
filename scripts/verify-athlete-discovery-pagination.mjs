@@ -244,6 +244,47 @@ try {
     [resultId],
   );
   assert.equal((await readAthleteDirectoryPage(sql, { sport: "Cycling" })).total, 0);
+  await sql.query(`insert into athletes(slug,display_name,profile_visibility,profile_details)
+    values ('evidence-example','Evidence Example','public',
+      '{"powerOf10Ranking20260917":{"provider":"powerof10","rankingTitle":"10K Overall Men 2026","sourceUrl":"https://www.powerof10.uk/Home/Athlete/private-evidence-token"}}'),
+      ('evidence-private','Evidence Private','private',
+      '{"publication_approved":true,"user_supplied_sports":["Swimming"]}')`);
+  const evidence = await readAthleteDirectoryPage(sql, { sport: "Running", q: "Evidence Example" });
+  assert.equal(evidence.total, 1);
+  assert.deepEqual(evidence.athletes[0].sports, ["Running"]);
+  assert.equal(evidence.athletes[0].result_count, 0, "Ranking evidence is not an invented result");
+  assert(
+    !JSON.stringify(evidence).includes("private-evidence-token"),
+    "Classification never exposes its source evidence",
+  );
+  const evidenceWithoutQuery = await readAthleteDirectoryPage(sql, {
+    sport: "Running",
+    pageSize: 100,
+  });
+  assert(
+    evidenceWithoutQuery.athletes.some((a) => a.slug === "evidence-example"),
+    "Sport candidate index includes metadata-only evidence",
+  );
+  assert.equal(
+    (await readAthleteDirectoryPage(sql, { sport: "Swimming", q: "Evidence Private" })).total,
+    0,
+  );
+  await sql.query(
+    `update athletes set profile_details='{"publication_approved":true,"user_supplied_sports":["Swimming"]}' where id=$1`,
+    [athleteId],
+  );
+  assert.equal(
+    (await readAthleteDirectoryPage(sql, { sport: "Swimming", q: "100%_" })).total,
+    0,
+    "Source metadata cannot override a linked owner's sport controls",
+  );
+  const staffEvidence = await loadStaffDirectoryPage(sql, {
+    q: "Evidence Example",
+    sport: "Running",
+    visibility: "",
+    page: 1,
+  });
+  assert.equal(staffEvidence.total, 1);
   console.log(
     "PASS: anonymous A–Z discovery, native GET search, canonical paging, out-of-range redirects and private identity exclusion.",
   );

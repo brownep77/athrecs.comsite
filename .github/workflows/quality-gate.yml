@@ -57,6 +57,7 @@ jobs:
       - name: Verify athlete search metadata and crawlable directory pages
         run: |
           node scripts/verify-source-history-sport.mjs
+          node scripts/verify-fixture-note-repair.mjs
           npm run verify:athlete-search-content
           node scripts/verify-page-biographies.mjs
           node scripts/verify-athlete-discovery-pagination.mjs

@@ -1,6 +1,11 @@
 import type { Sport } from "./types";
 
-type SportRule = { field: "discipline" | "provider" | "meeting"; pattern: string; sport: Sport };
+type SportRule = {
+  field: "discipline" | "provider" | "meeting";
+  pattern: string;
+  sport: Sport;
+  providerPattern?: string;
+};
 const word = (value: string) => `(^|[^a-z0-9_])(${value})([^a-z0-9_]|$)`;
 
 /** Ordered evidence rules shared by profile display and generated PostgreSQL.
@@ -32,6 +37,19 @@ export const sourceHistorySportRules: readonly SportRule[] = [
     sport: "Athletics",
   },
   { field: "discipline", pattern: "^(mile|2 miles)$", sport: "Athletics" },
+  // Provider codes distinguish track combined events from swim/bike/run triathlon.
+  {
+    field: "discipline",
+    pattern: "^(tri|pen)u[0-9]+[mw](ns)?$",
+    providerPattern: "^powerof10$",
+    sport: "Athletics",
+  },
+  {
+    field: "discipline",
+    pattern: "^one hour$",
+    providerPattern: "^world ?athletics$",
+    sport: "Athletics",
+  },
   {
     field: "discipline",
     pattern: String.raw`^([0-9]+(,[0-9]{3})*\s+met(re|er)s|[0-9]+\s*(x|×)\s*[0-9]+m)([^a-z0-9_]|$)`,
@@ -62,6 +80,20 @@ export const sourceHistorySportRules: readonly SportRule[] = [
     pattern: "^(DUV Ultra Marathon Statistics|utmb|UTMB Index|Abbott World Marathon Majors)$",
     sport: "Running",
   },
+  // Power of 10 uses M for miles here; the explicit metre/track rules above win.
+  {
+    field: "discipline",
+    pattern: String.raw`^[0-9]+([.][0-9]+)?m( relay leg|lt|t)?$`,
+    providerPattern: "^powerof10$",
+    sport: "Running",
+  },
+  {
+    field: "discipline",
+    pattern: String.raw`^[0-9]+([.][0-9]+)?k(xl|dh)$`,
+    providerPattern: "^powerof10$",
+    sport: "Running",
+  },
+  { field: "discipline", pattern: "^virtual run$", sport: "Running" },
   {
     field: "discipline",
     pattern: word(
@@ -103,7 +135,7 @@ export const sourceHistorySportRules: readonly SportRule[] = [
   {
     field: "meeting",
     pattern: word(
-      String.raw`cross[ -]country|xc|trail running|fun run|running|marathon|half marathon|[0-9]+([.][0-9]+)?\s*k(m)?`,
+      String.raw`cross[ -]country|xc|trail running|fun run|running|road relays?|road race|marathon|half marathon|[0-9]+([.][0-9]+)?\s*k(m)?`,
     ),
     sport: "Running",
   },
@@ -121,6 +153,7 @@ export const sourceHistorySportRules: readonly SportRule[] = [
 const compiledRules = sourceHistorySportRules.map((rule) => ({
   ...rule,
   regex: new RegExp(rule.pattern, "i"),
+  providerRegex: rule.providerPattern ? new RegExp(rule.providerPattern, "i") : null,
 }));
 
 export function sourceHistorySport(discipline: string, provider = "", meeting = ""): Sport | null {
@@ -129,7 +162,13 @@ export function sourceHistorySport(discipline: string, provider = "", meeting = 
     provider: provider.trim(),
     meeting: meeting.trim(),
   };
-  return compiledRules.find((rule) => rule.regex.test(fields[rule.field]))?.sport ?? null;
+  return (
+    compiledRules.find(
+      (rule) =>
+        rule.regex.test(fields[rule.field]) &&
+        (!rule.providerRegex || rule.providerRegex.test(fields.provider)),
+    )?.sport ?? null
+  );
 }
 
 export const sourceHistorySportNames = [
@@ -150,7 +189,7 @@ export function sourceHistorySportSql(
   return `case\n${sourceHistorySportRules
     .map(
       (rule) =>
-        `    when ${fields[rule.field]} ~* '${rule.pattern.replaceAll("'", "''")}' then '${rule.sport}'`,
+        `    when ${fields[rule.field]} ~* '${rule.pattern.replaceAll("'", "''")}'${rule.providerPattern ? ` and ${fields.provider} ~* '${rule.providerPattern.replaceAll("'", "''")}'` : ""} then '${rule.sport}'`,
     )
     .join("\n")}\n    else null end`;
 }
@@ -159,23 +198,23 @@ export function sourceHistorySportSql(
 export function sourceHistorySportMigration(): string {
   return `-- Generated from source-history-sport.ts; checked by verify-source-history-sport.mjs.
 -- Derived classification only: original performances, identity and visibility stay intact.
-create or replace function athlete_source_sport_v2(provider text, discipline text, meeting text default '')
+create or replace function athlete_source_sport_v3(provider text, discipline text, meeting text default '')
 returns text language sql immutable parallel safe as $function$
   select ${sourceHistorySportSql()}
 $function$;
 
-create or replace function athlete_history_sports_v2(provider text, performances jsonb)
+create or replace function athlete_history_sports_v3(provider text, performances jsonb)
 returns text[] language sql immutable parallel safe as $function$
   select coalesce(array_agg(distinct sport order by sport) filter (where sport is not null),array[]::text[])
   from (
-    select public.athlete_source_sport_v2(provider,p->>'discipline',p->>'meeting') as sport
+    select public.athlete_source_sport_v3(provider,p->>'discipline',p->>'meeting') as sport
     from jsonb_array_elements(case when jsonb_typeof(performances)='array' then performances else '[]'::jsonb end) p
     where coalesce(p->>'profileExcluded','false')<>'true'
   ) classified
 $function$;
 
 -- Full index supports staff review of unpublished histories as well as public discovery.
-create index if not exists source_history_sports_v2_lookup
-  on athlete_source_histories using gin (athlete_history_sports_v2(provider,performances));
+create index if not exists source_history_sports_v3_lookup
+  on athlete_source_histories using gin (athlete_history_sports_v3(provider,performances));
 `;
 }
