@@ -112,6 +112,7 @@ export function sportsEventJsonLd(
     slug: string;
     description?: string;
     city?: string | null;
+    region?: string | null;
     country?: string | null;
     startDate?: string | null;
     startTime?: string | null;
@@ -194,12 +195,16 @@ export function sportsEventJsonLd(
       address: {
         "@type": "PostalAddress",
         addressLocality: input.city || undefined,
+        addressRegion: input.region || undefined,
         addressCountry: input.country || undefined,
       },
     },
     sport: input.sport || "Athletics",
     organizer:
-      input.organiser?.trim() && !/^(unknown|tbc|n\/a)$/i.test(input.organiser.trim())
+      input.organiser?.trim() &&
+      !/^(unknown|tbc|n\/a|see official (?:site|website)|not recorded)$/i.test(
+        input.organiser.trim(),
+      )
         ? { "@type": "Organization", name: input.organiser.trim(), url: input.website || undefined }
         : undefined,
     offers: input.entryOptions?.flatMap((option) => {

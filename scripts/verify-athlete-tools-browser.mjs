@@ -105,6 +105,7 @@ const aliases = {
 const server = await createServer({
   configFile: false,
   root,
+  publicDir: resolve("public"),
   cacheDir: resolve(root, ".vite"),
   plugins: [react(), tailwindcss()],
   define: { "import.meta.env.VITE_SITE_BRAND": JSON.stringify("athrecs") },
@@ -287,7 +288,24 @@ try {
   const welcome = page.getByRole("region", { name: "Welcome email and sign-in code" });
   await welcome.getByText("Welcome email preview", { exact: true }).click();
   await welcome.getByText(/Hi Avery,/).waitFor();
-  await welcome.getByText(/valid for 24 hours/).waitFor();
+  await welcome.getByText(/Your one-time sign-in code is valid for 24 hours/).waitFor();
+  const logo = welcome.getByRole("img", { name: "AthRecs.com", exact: true });
+  await logo.waitFor({ state: "visible" });
+  await page.waitForFunction(
+    () =>
+      document.querySelector('section[aria-label="Welcome email and sign-in code"] img')
+        ?.naturalWidth > 0,
+  );
+  assert.equal(await logo.getAttribute("src"), "/athrecs-logo.png");
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+  await welcome
+    .getByRole("article", { name: "Branded welcome email template" })
+    .screenshot({ path: "artifacts/invitation-welcome-template-mobile.png" });
+  await page.setViewportSize({ width: 1365, height: 1000 });
+  await welcome
+    .getByRole("article", { name: "Branded welcome email template" })
+    .screenshot({ path: "artifacts/invitation-welcome-template-desktop.png" });
   assert.equal(
     (await page.evaluate(() => window.welcomeEmails)).length,
     0,

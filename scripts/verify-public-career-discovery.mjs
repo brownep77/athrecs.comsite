@@ -44,7 +44,7 @@ try {
     "Existing staff publication qualifies without result verification or account ownership",
   );
   const [{ id: event }] =
-    await sql`insert into events(slug,name,sport,country,city,surface) values('career-early-marathon','Career Early Marathon','Running','England','Test Town','Road') returning id`;
+    await sql`insert into events(slug,name,sport,country,city,county,surface) values('career-early-marathon','Career Early Marathon','Running','England','Test Town','Test County','Road') returning id`;
   for (let n = 0; n < 8; n++) {
     const [{ id: edition }] =
       await sql`insert into editions(event_id,event_date,distance_code,distance_km) values(${event},${`${2006 + n}-04-01`},'Marathon',42.195) returning id`;
@@ -85,6 +85,19 @@ try {
   assert.match(profile.$("#career-summary").text(), /Career Early Marathon/);
   assert.match(profile.$("#career-summary").text(), /2006/);
   assert.match(profile.$("#career-summary").text(), /Unverified record/);
+  assert.match(
+    profile.$("#profile-overview").text(),
+    /Career Early Marathon \(2006; unverified record\)/,
+  );
+  const profileEntities = profile
+    .$('script[type="application/ld+json"]')
+    .toArray()
+    .map((element) => JSON.parse(profile.$(element).text()));
+  const person = profileEntities.find(
+    (entity) => entity.mainEntity?.["@type"] === "Person",
+  ).mainEntity;
+  assert.equal(person.memberOf.name, "Career Test Club");
+  assert(profileEntities.some((entity) => entity["@type"] === "BreadcrumbList"));
   assert.equal(profile.$('a[href="/clubs/career-test-club"]').length, 1);
   assert(
     profile
@@ -114,6 +127,21 @@ try {
   assert.deepEqual(await readEventAthleteLinks(sql, "career-hidden-race"), []);
   const race = await get("/races/career-early-marathon");
   assert.equal(race.response.status, 200, race.$("main").text().slice(0, 200));
+  const raceBio = race.$('section[aria-labelledby="race-biography-heading"]').text();
+  assert.match(
+    raceBio,
+    /Career Early Marathon is a running event in Test Town, Test County, England/,
+  );
+  assert.match(raceBio, /editions from 2006 to 2013/);
+  assert.match(
+    race.$('meta[name="description"]').attr("content"),
+    /Test Town, Test County, England/,
+  );
+  const raceEntities = race
+    .$('script[type="application/ld+json"]')
+    .toArray()
+    .map((element) => JSON.parse(race.$(element).text()));
+  assert(raceEntities.some((entity) => entity["@type"] === "BreadcrumbList"));
   assert(
     race.$(
       'section[aria-labelledby="event-athletes-heading"] a[href="/athletes/career-test-runner"]',
@@ -129,15 +157,21 @@ try {
   assert.deepEqual(await readEventAthleteLinks(sql, "career-early-marathon"), []);
   await sql`insert into athlete_public_shares(user_id,slug,enabled,share_results,share_bio,share_club,share_location,search_indexable) values('career-owner','career-test-runner',true,true,true,true,true,false)`;
   assert.equal(await isApprovedAthleteIndexable(sql, athlete), false, "Search opt-out wins");
-  const optedOutRedirect = await fetch(origin + "/athletes/career-old-name", { redirect: "manual" });
+  const optedOutRedirect = await fetch(origin + "/athletes/career-old-name", {
+    redirect: "manual",
+  });
   assert.equal(optedOutRedirect.status, 404);
   assert.equal(optedOutRedirect.headers.get("location"), null);
-  assert.equal((await get("/athletes/career-test-runner")).response.status, 200,
-    "An unlisted shared profile remains usable at its direct URL");
+  assert.equal(
+    (await get("/athletes/career-test-runner")).response.status,
+    200,
+    "An unlisted shared profile remains usable at its direct URL",
+  );
   await sql`update athlete_public_shares set search_indexable=true where user_id='career-owner'`;
   assert.equal(await isApprovedAthleteIndexable(sql, athlete), true);
   await sql`update athlete_public_shares set share_bio=false,share_club=false where user_id='career-owner'`;
   const noBio = await get("/athletes/career-test-runner");
+  assert(!noBio.$("#profile-overview").text().includes("Selected recorded events"));
   assert.equal(
     noBio.$("#career-summary").length,
     0,

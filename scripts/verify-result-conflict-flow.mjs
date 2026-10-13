@@ -1498,7 +1498,7 @@ try {
   process.env.RESEND_API_KEY = "synthetic-key";
   globalThis.fetch = async (...args) => {
     request = args;
-    return { ok: true };
+    return Response.json({ id: "synthetic-transport-receipt" });
   };
   try {
     await transport.sendAthrecsAuthEmail(sends[0].email, sends[0].options);

@@ -145,6 +145,8 @@ try {
   assert.equal(sent[0].headers.Authorization, "Bearer synthetic-invitation-key");
   assert(mail.text.includes(welcomeText.invitationWelcomeMessage("Synthetic Welcome")));
   assert(mail.html.includes("Hi Synthetic,"));
+  assert(mail.html.includes('src="https://www.athrecs.com/athrecs-logo.png"'));
+  assert(mail.html.includes('alt="AthRecs.com"'));
   assert(mail.text.includes("valid for 24 hours and can be used once"));
   assert.equal(
     (await core.invitationHistory(sql, "welcome-user"))[0].recipientName,

@@ -380,6 +380,15 @@ export function AthleteDirectory({ onEditAthlete }: { onEditAthlete?: (id: numbe
                       >
                         View profile
                       </Link>
+                      <Link
+                        to="/admin/athletes/$athleteId"
+                        params={{ athleteId: p.athrecsId }}
+                        hash="messages"
+                        aria-label={`Messages for ${p.name}`}
+                        className="mr-3 inline-flex min-h-11 items-center text-xs font-semibold text-accent hover:underline"
+                      >
+                        Messages
+                      </Link>
                       <button
                         className="text-xs text-accent hover:underline"
                         onClick={() => setSelected(p)}

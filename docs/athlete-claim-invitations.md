@@ -172,3 +172,8 @@ The greeting uses the supplied account or invitation recipient name (for example
 and delivery use the same greeting function. Only the exact new invitation code
 is extended to 24 hours; normal login and password-reset code settings remain
 unchanged. A requested replacement follows the expiry stated in its own email.
+
+The reusable email layout and on-site welcome preview use the existing public
+AthRecs.com PNG logo, a white card and the brand teal. The email uses an absolute
+first-party image URL and alt text for mail clients that block images. No code
+or private link is exposed by the preview.
