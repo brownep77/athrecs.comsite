@@ -48,6 +48,22 @@ export async function sendAthrecsAuthEmail(
   }
   const from = options.from ?? authEmailFrom();
 
+  const record = async (status: "accepted" | "failed" | "unknown", providerId?: string) => {
+    try {
+      const { getSql } = await import("@/lib/db");
+      const { recordSiteEmail } = await import("@/lib/athrecs/athlete-messages.server");
+      await recordSiteEmail(await getSql(), email, {
+        from,
+        idempotencyKey: options.idempotencyKey,
+        status,
+        providerId,
+      });
+    } catch {
+      // Do not retry an accepted send because correspondence logging failed.
+      console.error("[athlete-messages] email history could not be recorded");
+    }
+  };
+
   const safeHeading = escapeHtml(email.heading);
   const safeMessage = escapeHtml(email.message);
   const safeLabel = escapeHtml(email.actionLabel ?? "");
@@ -83,36 +99,45 @@ export async function sendAthrecsAuthEmail(
   </body>
 </html>`;
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-      ...(options.idempotencyKey ? { "Idempotency-Key": options.idempotencyKey } : {}),
-    },
-    signal: AbortSignal.timeout(8_000),
-    body: JSON.stringify({
-      from,
-      ...(options.replyTo ? { reply_to: options.replyTo } : {}),
-      to: [email.to],
-      subject: email.subject,
-      html,
-      text: [
-        email.heading,
-        email.code ? `Your one-time code: ${email.code}` : null,
-        email.message,
-        email.actionUrl ? `${email.actionLabel}: ${email.actionUrl}` : null,
-        "If you did not request this, you can ignore this email.",
-      ]
-        .filter(Boolean)
-        .join("\n\n"),
-    }),
-  });
+  let response: Response;
+  try {
+    response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        ...(options.idempotencyKey ? { "Idempotency-Key": options.idempotencyKey } : {}),
+      },
+      signal: AbortSignal.timeout(8_000),
+      body: JSON.stringify({
+        from,
+        ...(options.replyTo ? { reply_to: options.replyTo } : {}),
+        to: [email.to],
+        subject: email.subject,
+        html,
+        text: [
+          email.heading,
+          email.code ? `Your one-time code: ${email.code}` : null,
+          email.message,
+          email.actionUrl ? `${email.actionLabel}: ${email.actionUrl}` : null,
+          "If you did not request this, you can ignore this email.",
+        ]
+          .filter(Boolean)
+          .join("\n\n"),
+      }),
+    });
+  } catch (error) {
+    await record("unknown");
+    throw error;
+  }
 
   if (!response.ok) {
+    await record("failed");
     console.error("[auth-email] delivery failed", {
       status: response.status,
     });
     throw new Error("ATHRECS could not send the account email");
   }
+  const receipt = await response.json().catch(() => null);
+  await record("accepted", typeof receipt?.id === "string" ? receipt.id : undefined);
 }

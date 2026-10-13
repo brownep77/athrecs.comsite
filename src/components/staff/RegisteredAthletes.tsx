@@ -1,4 +1,5 @@
 import { AthleteMatchInvite } from "./AthleteMatchInvite";
+import { AthleteMessages } from "./AthleteMessages";
 import { RegistrationStats } from "./RegistrationStats";
 import { AthleteContactActions } from "./AthleteContactActions";
 import { useState } from "react";
@@ -284,6 +285,7 @@ function RegistrationCard({ account }: { account: RegisteredAthlete }) {
         </Detail>
       </dl>
       <AthleteMatchInvite account={account} />
+      <AthleteMessages target={{ userId: account.userId }} />
       <AthleteContactActions account={account} />
     </article>
   );
