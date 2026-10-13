@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "lastEditorialBatch": "2026-10-13-batch04",
+  "reviewedAt": "2026-10-13",
+  "repository": "brownep77/athrecs.comsite",
+  "branch": "codex/club-profiles-contact-audit",
+  "pullRequest": 680,
+  "publication": "draft-preview-only",
+  "completedProfileSlugs": [
+    "birmingham-running-athletics-and-triathlon-club-brat",
+    "chester-triathlon-club",
+    "fairwater-runners-cwmbran",
+    "gog-triathlon-club",
+    "leeds-and-bradford-triathlon-club",
+    "manchester-triathlon-club",
+    "manx-fell-runners",
+    "manx-harriers",
+    "northern-isle-of-man-ac",
+    "thames-turbo-triathlon-club",
+    "3d-triathlon-club",
+    "athy-triathlon-club",
+    "belpark-tc",
+    "cork-triathlon-club",
+    "limerick-tc",
+    "midleton-cycling-and-triathlon-club",
+    "naas-t-c",
+    "welsh-athletics-brecon-athletic-club",
+    "welsh-athletics-bridgend-athletics",
+    "welsh-athletics-carmarthen-and-district-harriers",
+    "welsh-athletics-celtic-tri",
+    "welsh-athletics-clwb-run-wales",
+    "welsh-athletics-deeside-aac",
+    "welsh-athletics-eryri-harriers",
+    "welsh-athletics-menai-track-and-field",
+    "welsh-athletics-penarth-and-dinas-runners",
+    "welsh-athletics-wrexham-amateur-athletic-club"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 112,
+    "notableMemberEntries": 63,
+    "clubsWithContacts": 488,
+    "contactEntries": 824,
+    "clubsWithEmail": 475,
+    "clubsWithPhone": 54,
+    "clubsWithSocials": 896,
+    "socialLinks": 1807,
+    "websiteContactRecords": 645
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 27,
+    "notableMemberEntriesAdded": 11,
+    "contactOrSocialRecordsChanged": 23,
+    "trainingOrClubhouseVenuesClarified": 9,
+    "ambiguousCombinedVenueRemoved": "gog-triathlon-club"
+  },
+  "validationBeforeCommit": [
+    "actual-catalogue profile and metadata checks",
+    "targeted ESLint",
+    "TypeScript typecheck",
+    "production build"
+  ],
+  "nextCandidateSlugs": [
+    "4life-triathlon-club",
+    "altrincham-and-district-athletic-club-limited",
+    "blackburn-harriers-and-ac",
+    "bolton-united-harriers-and-ac",
+    "stockport-harriers-and-ac",
+    "warrington-a-c",
+    "warrington-road-runners",
+    "warrington-running-club",
+    "athletics-ireland-an-riocht-a-c",
+    "athletics-ireland-ardee-and-district-a-c",
+    "athletics-ireland-athenry-a-c",
+    "athletics-ireland-ballina-a-c",
+    "athletics-ireland-bandon-a-c",
+    "athletics-ireland-bantry-a-c",
+    "athletics-ireland-blackrock-dublin-a-c",
+    "athletics-ireland-bohermeen-a-c",
+    "welsh-athletics-afan-valley-swimming-club",
+    "welsh-athletics-rhayader-rc",
+    "welsh-athletics-sarn-helen",
+    "welsh-athletics-trots",
+    "welsh-athletics-wrecsam-tri"
+  ],
+  "resumeInstructions": [
+    "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
+    "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
+    "Rotate Irish running clubs, north-west English athletics, Welsh running and multisport, and the listed swimming-club candidate.",
+    "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
+  ],
+  "sourceGaps": [
+    {
+      "slug": "guernsey-ac",
+      "url": "http://www.guernseyathletics.org.gg/",
+      "status": "deferred",
+      "reason": "The listed homepage returned HTTP 200 with no readable body. No new biography was added. Locate a usable official source before proceeding."
+    },
+    {
+      "slug": "cork-triathlon-club",
+      "url": "https://www.corktri.com/this-is-ctc/",
+      "status": "biography-added-with-date-qualified",
+      "reason": "The club history describes a November 1998 revival and a twentieth anniversary in 2019 but prints January 2019 as its formation date. No exact founded_year was assigned."
+    },
+    {
+      "slug": "welsh-athletics-clwb-run-wales",
+      "url": "https://irun.wales/about-us/contact-us/",
+      "status": "contact-form-and-supported-email-retained",
+      "reason": "The page contains differing office postcodes/phone numbers and one mismatched mailto label. No new office street address or telephone was promoted as a training venue or verified club phone."
+    }
+  ],
+  "coverageReviewNotes": [
+    "The current catalogue has very limited Scottish coverage; check actual club geography before treating a correspondence address as evidence of a Scottish club. A Scottish directory expansion requires its own sourced catalogue review.",
+    "Some unreviewed Striders/District listings have Triathlon tags. Check official disciplines when those clubs reach the queue; no blanket classification correction was made in this batch.",
+    "Some official sites mask public email text. Contact forms and previously sourced directory contacts were retained where no readable new email was available."
+  ]
+}
