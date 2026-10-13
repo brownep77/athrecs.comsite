@@ -9,7 +9,7 @@ function loadTypeScript(path, dependencies = {}) {
   const module = { exports: {} };
   const compiled = ts.transpileModule(readFileSync(path, "utf8"), {
     fileName: path,
-    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX },
   });
   const require = (name) => {
     if (!(name in dependencies)) throw new Error(`Unexpected test import: ${name}`);
@@ -27,6 +27,12 @@ assert.equal(resultCredit("javascript:alert(1)", "Unsafe"), null);
 assert.equal(resultCredit(null, "No source"), null);
 assert.equal(resultCredit("https://totalracetiming.co.uk.example.org/results", "import").name, "totalracetiming.co.uk.example.org");
 const search = loadTypeScript("src/lib/athrecs/public-results-search.ts", { "./sport-pages": sportPages, "./result-slug.ts": loadTypeScript("src/lib/athrecs/result-slug.ts") });
+const format = loadTypeScript("src/lib/athrecs/format.ts", { "./timezone": {} });
+const { publicResultsHead } = loadTypeScript("src/lib/athrecs/public-results-seo.ts", {
+  "./format": format,
+  "./result-slug": loadTypeScript("src/lib/athrecs/result-slug.ts"),
+  "./seo": loadTypeScript("src/lib/athrecs/seo.ts"),
+});
 assert.equal(search.normalizeResultsSearch({ category: "trail-running" }).category, "trail-running");
 assert.equal(search.normalizeResultsSearch({ category: "unknown" }).category, "");
 assert.equal(search.normalizeResultsSearch(undefined).page, 1);
@@ -193,6 +199,49 @@ try {
   assert.equal(resultPage2.hasMore, false);
   assert.equal(new Set([...resultPage1.results, ...resultPage2.results].map((row) => row.id)).size, 108);
 
+  const head1 = publicResultsHead(resultPage1.edition, resultPage1.results, { q: "", page: 1 });
+  const head2 = publicResultsHead(resultPage2.edition, resultPage2.results, { q: "", page: 2 });
+  assert.equal(head2.links[0].href, head1.links[0].href + "?page=2", "Later result pages must have their own canonical URL");
+  assert.match(head2.meta.find((meta) => meta.name === "robots").content, /^index, follow/);
+  const structured1 = JSON.parse(head1.scripts[0].children);
+  const structured2 = JSON.parse(head2.scripts[0].children);
+  assert.equal(structured2["@type"], "CollectionPage");
+  assert.equal(structured2.mainEntity.numberOfItems, 8, "Describe exactly the rendered public page");
+  assert.deepEqual(structured2.mainEntity.itemListElement.map((row) => row.item.name), resultPage2.results.map((row) => row.athlete_name));
+  assert.equal(structured1.about.startDate, "2026-09-20");
+  assert.match(structured1.description, /coverage may be partial/);
+  assert.match(structured1.mainEntity.itemListElement[0].description, /source position 7/);
+  assert.match(structured1.mainEntity.itemListElement[0].description, /chip time 31:31; gun time 31:41/);
+  assert.equal(structured2.mainEntity.itemListElement.at(-1).description, "Disqualified", "Do not publish a DQ time as a finish in structured data");
+  assert(structured2.mainEntity.itemListElement.every((row) => !('position' in row)), "Page order must not be presented as official placing");
+  assert.doesNotMatch(JSON.stringify([structured1, structured2]), /Private Athlete|Hidden Result|Disabled Profile|No Results Share|Private Performance|raceresults\/123/);
+  const filtered = publicResultsHead(resultPage2.edition, resultPage2.results, { q: "Alex", page: 2 });
+  assert.equal(filtered.meta.find((meta) => meta.name === "robots").content, "noindex, follow");
+  assert.equal(filtered.links[0].href, head1.links[0].href);
+  assert.deepEqual(filtered.scripts, []);
+  const injection = publicResultsHead(resultPage1.edition, [{ ...resultPage1.results[0], athlete_name: "</script><script>alert(1)</script>" }], { q: "", page: 1 });
+  assert(!injection.scripts[0].children.includes("<"), "Escape user text before embedding JSON-LD");
+  assert.equal(JSON.parse(injection.scripts[0].children).mainEntity.itemListElement[0].item.name, "</script><script>alert(1)</script>");
+
+  // Exercise the real route loader and head contract, including empty-page handling.
+  const route = loadTypeScript("src/routes/results/$editionId.tsx", {
+    "react/jsx-runtime": {},
+    "@tanstack/react-router": { createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: () => new Error("redirect") },
+    "lucide-react": {}, "@/components/ui/badge": {}, "@/components/ui/button": {},
+    "@/lib/athrecs/public-results-api": api,
+    "@/lib/athrecs/public-results-search": search,
+    "@/lib/athrecs/format": format,
+    "@/lib/athrecs/public-results-seo": { publicResultsHead },
+    "@/lib/athrecs/result-slug": loadTypeScript("src/lib/athrecs/result-slug.ts"),
+    "@/lib/site-scope": scope,
+    "@/lib/athrecs/result-credit": { resultCredit },
+  }).Route;
+  const params = { editionId: "synthetic-10k-2026-09-20-10k-10" };
+  const loaded = await route.loader({ params, deps: search.normalizeResultsSearch({ page: 2 }) });
+  assert.equal(route.head({ loaderData: loaded, match: { search: { page: 2 } } }).links[0].href, head2.links[0].href);
+  await assert.rejects(route.loader({ params, deps: search.normalizeResultsSearch({ page: 3 }) }), /notFound/);
+  assert.equal((await route.loader({ params, deps: search.normalizeResultsSearch({ q: "no-match" }) })).results.length, 0);
+
   scope.IS_RUNRECS_SITE = true;
   const previousQueryCount = queryCount;
   assert.equal((await api.listPublicResultEditions({ data: {} })).editions.length, 0);
@@ -203,7 +252,7 @@ try {
   assert.match(pageSource, /to="\/claim-results" search=\{\{ resultId: result.id \}\}/);
   assert.match(pageSource, /slug: result.athlete_slug/);
   assert.doesNotMatch(pageSource, /submitResultClaim|applyResultsImport|applyImportBundle/);
-  console.log("PASS: public results SQL, privacy exclusions, same-name identity separation, recorded placings, distinct chip/gun times, query escaping, pagination and RunRecs isolation.");
+  console.log("PASS: public results privacy, page-specific canonicals, indexable pagination, filtered/empty pages, qualified structured data, script escaping, recorded placings, distinct chip/gun times and RunRecs isolation.");
 } finally {
   await db.close();
 }
