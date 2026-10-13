@@ -178,6 +178,7 @@
     font-weight: 400;
     color: var(--color-muted);
   }
+  .profile-card-table td[data-label="Race name"],
   .profile-card-table td[data-label="Event"],
   .profile-card-table td[data-label="Meeting"] {
     grid-column: 1 / -1;
@@ -190,6 +191,7 @@
     grid-column: 2;
     grid-row: 2;
   }
+  .profile-card-table td[data-label="Race date"],
   .profile-card-table td[data-label="Date"] {
     grid-column: 1;
     grid-row: 2;
@@ -204,6 +206,13 @@
     min-height: 44px;
     align-items: center;
   }
+}
+
+/* The same distance tint follows a result from claiming to profile history. */
+.distance-result,
+.profile-card-table tbody tr.distance-result {
+  background: color-mix(in srgb, var(--result-colour) 28%, var(--color-surface));
+  box-shadow: inset 4px 0 0 var(--result-colour);
 }
 
 /* Pastel achievement labels keep readable text in both site themes. */

@@ -7,6 +7,8 @@ import { submitResultClaim, type ResultClaimListItem } from "@/lib/athrecs/resul
 import type { ProfileResultReview } from "@/lib/athrecs/profile-result-review";
 import { resultIssues, type DraftResult } from "@/lib/athlete-workspace/core";
 import { formatDuration } from "@/lib/athrecs/format";
+import { distanceResultStyle } from "@/lib/athrecs/profile-colours";
+import { ResultRaceHeading } from "./ResultRaceHeading";
 
 const emptyResult = (): DraftResult => ({
   index: 1,
@@ -339,13 +341,17 @@ export function ProfileResultConfirmation({
             {additions.map((row, index) => (
               <li
                 key={index}
-                className="flex items-center justify-between gap-3 rounded-lg border border-border p-3"
+                className="distance-result flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border p-4"
+                style={distanceResultStyle(row.distance)}
               >
-                <div>
-                  <strong>{row.race}</strong>
-                  <p className="text-sm">
-                    {row.date} · {row.distance} · {row.time} · Added for review
-                  </p>
+                <div className="min-w-0 flex-1">
+                  <ResultRaceHeading
+                    race={row.race}
+                    distance={row.distance}
+                    date={row.date}
+                    performance={row.time}
+                  />
+                  <p className="text-sm">Added for review</p>
                 </div>
                 <Button
                   variant="secondary"
@@ -382,20 +388,20 @@ export function ProfileResultConfirmation({
           Confirmation includes your selection across the whole list, including results outside this
           view. Removal is reversible and keeps the original race record.
         </p>
-        <ul
-          className="divide-y divide-border rounded-xl border border-border"
-          aria-label="Stored results to confirm"
-        >
+        <ul className="space-y-3" aria-label="Stored results to confirm">
           {filtered.slice(0, limit).map((row) => (
             <li
               key={row.key}
-              className={`flex flex-wrap items-center justify-between gap-3 p-4 ${included.has(row.key) ? "" : "bg-elevated"}`}
+              className="distance-result flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border p-4"
+              style={distanceResultStyle(row.distance)}
             >
               <div className="min-w-0 flex-1">
-                <p className="break-words font-semibold">{row.race || "Recorded performance"}</p>
-                <p className="text-sm">
-                  {row.date} · {row.distance} · {row.performance || row.status}
-                </p>
+                <ResultRaceHeading
+                  race={row.race}
+                  distance={row.distance}
+                  date={row.date}
+                  performance={row.performance || row.status}
+                />
                 <p className="text-xs text-muted">
                   {row.chip !== null ? `Chip ${formatDuration(row.chip)} · ` : ""}
                   {row.gun !== null
