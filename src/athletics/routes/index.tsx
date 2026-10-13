@@ -1,50 +1,28 @@
 import { useState, type FormEvent } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import {
-  ArrowRight,
-  CalendarDays,
-  Check,
-  Footprints,
-  Link2,
-  LockKeyhole,
-  Medal,
-  Search,
-  TrendingUp,
-  UserRound,
-} from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
+import { RunningLanding, runningGuidesJsonLd } from "@/components/running/RunningLanding";
 import { AthleteDirectoryCard } from "@/components/athletes/AthleteDirectoryCard";
 import { getFeaturedAthletes } from "@/lib/athrecs/athlete-directory-api";
 import type { AthleteDirectory } from "@/lib/athrecs/athlete-directory";
 import { SITE_URL, siteGraphMeta } from "@/lib/athrecs/seo";
-import { MARATHON_COUNTRIES } from "@/data/road-marathons/countries";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: siteGraphMeta({
-      title: "ATHRECS | Your sporting life, in one profile",
+      title: "ATHRECS | Running races, results & athlete profiles",
       description:
-        "Find athletes, preserve your results and PBs, browse upcoming fixtures, and compare marathon, half-marathon and ultra race guides on AthRecs.",
+        "Find your next running event. Explore marathons and half marathons by country, browse race results, and bring your results and PBs into one athlete profile.",
       url: SITE_URL,
     }),
     links: [{ rel: "canonical", href: SITE_URL }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(runningGuidesJsonLd(SITE_URL)) },
+    ],
   }),
   loader: () => getFeaturedAthletes(),
   component: AthleteHomePage,
 });
-
-const profileSections = [
-  {
-    icon: Medal,
-    title: "Results & PBs",
-    detail: "Your performances, with their sources",
-  },
-  { icon: TrendingUp, title: "Progress over time", detail: "Follow your results across seasons" },
-  {
-    icon: Link2,
-    title: "Your sporting identity",
-    detail: "Sports, previous names and social links",
-  },
-] as const;
 
 function AthleteHomePage() {
   // Vite replaces the base homepage; the generated route tree retains its loader type.
@@ -57,84 +35,7 @@ function AthleteHomePage() {
   }
   return (
     <div className="space-y-7 pb-2">
-      <a
-        href="/results/berlin-marathon-2026"
-        className="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 font-semibold text-accent no-underline hover:bg-elevated"
-      >
-        <span>Berlin Marathon 2026 · Results</span>
-        <span className="text-sm">Men, women & age categories →</span>
-      </a>
-      <section className="overflow-hidden rounded-3xl border border-border bg-elevated/50">
-        <div className="grid gap-7 p-5 sm:p-7 lg:grid-cols-[1.2fr_1fr] lg:items-center lg:p-8">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.17em] text-accent">
-              For the athlete in you
-            </p>
-            <h1 className="mt-3 max-w-xl font-display text-4xl font-semibold leading-[1.1] tracking-tight text-fg sm:text-5xl">
-              Your sporting life,
-              <br />
-              <span className="text-accent">in one profile.</span>
-            </h1>
-            <p className="mt-4 max-w-lg text-sm leading-6 text-muted sm:text-base">
-              Every athlete has a story. Bring your results, PBs and progress together,
-              across the sports you love.
-            </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link
-                to="/join"
-                className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-primary-fg no-underline hover:bg-primary/90"
-              >
-                Build my profile <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-              <Link
-                to="/athlete-account"
-                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-border bg-surface px-4 py-3 text-sm font-semibold text-fg no-underline hover:border-accent"
-              >
-                Find my results
-              </Link>
-            </div>
-            <p className="mt-4 flex items-center gap-1.5 text-xs text-muted">
-              <LockKeyhole className="size-3.5" aria-hidden="true" />
-              Your profile starts private. You choose what to share.
-            </p>
-          </div>
-          <div className="rounded-2xl border border-border bg-surface p-5 shadow-card">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
-              Inside your athlete profile
-            </p>
-            <div className="mt-4 flex items-center gap-3 border-b border-border pb-4">
-              <span className="flex size-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
-                <UserRound className="size-6" aria-hidden="true" />
-              </span>
-              <div>
-                <p className="font-display text-xl font-semibold">One sporting identity</p>
-                <p className="text-xs text-muted">All your sports. All your seasons.</p>
-              </div>
-            </div>
-            <div className="divide-y divide-border">
-              {profileSections.map(({ icon: Icon, title, detail }) => (
-                <div key={title} className="flex items-center gap-3 py-3">
-                  <Icon className="size-5 shrink-0 text-accent" aria-hidden="true" />
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold">{title}</p>
-                    <p className="mt-0.5 text-xs text-muted">{detail}</p>
-                  </div>
-                  <Check className="size-4 text-accent" aria-hidden="true" />
-                </div>
-              ))}
-            </div>
-            <Link
-              to="/"
-              hash="how-it-works"
-              className="mt-1 inline-flex min-h-9 items-center gap-1 text-xs font-semibold text-accent"
-            >
-              See how your records come together{" "}
-              <ArrowRight className="size-3.5" aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </section>
-      <HomeEventDiscovery />
+      <RunningLanding homepage />
       <section className="space-y-4" aria-labelledby="discover-athletes">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
@@ -235,102 +136,5 @@ function AthleteHomePage() {
         </div>
       </section>
     </div>
-  );
-}
-
-function HomeEventDiscovery() {
-  const quickLink =
-    "inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-accent underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent";
-  return (
-    <section aria-labelledby="next-event" className="space-y-4">
-      <div>
-        <h2 id="next-event" className="font-display text-2xl font-semibold">
-          Your next event starts here
-        </h2>
-        <p className="mt-1 text-sm text-muted">
-          Find a fixture, choose a date or get to know the course before you enter.
-        </p>
-      </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-border bg-surface p-4 sm:p-5">
-          <Link
-            to="/races"
-            className="flex min-h-11 items-center gap-3 text-fg no-underline hover:text-accent"
-          >
-            <CalendarDays className="size-6 shrink-0 text-accent" aria-hidden="true" />
-            <h3 className="flex-1 font-display text-xl font-semibold">Fixtures & events</h3>
-            <ArrowRight className="size-5" aria-hidden="true" />
-          </Link>
-          <p className="mt-2 text-sm leading-6 text-muted">
-            Browse running, track and field, Parkrun and triathlon fixtures by place, date and
-            distance.
-          </p>
-          <nav aria-label="Fixture shortcuts" className="mt-2 flex flex-wrap gap-x-5">
-            <Link to="/sports/$sport" params={{ sport: "road-running" }} className={quickLink}>
-              Road running fixtures
-            </Link>
-            <Link to="/calendar" className={quickLink}>
-              Fixture calendar
-            </Link>
-            <Link to="/running/calendar" className={quickLink}>
-              Running calendar
-            </Link>
-          </nav>
-        </div>
-        <div className="rounded-2xl border border-accent/30 bg-accent-soft/30 p-4 sm:p-5">
-          <Link
-            to="/running"
-            className="flex min-h-11 items-center gap-3 text-fg no-underline hover:text-accent"
-          >
-            <Footprints className="size-6 shrink-0 text-accent" aria-hidden="true" />
-            <h3 className="flex-1 font-display text-xl font-semibold">Running race guides</h3>
-            <ArrowRight className="size-5" aria-hidden="true" />
-          </Link>
-          <p className="mt-2 text-sm leading-6 text-muted">
-            Compare dates, entry options, routes and past results for your next longer-distance
-            race.
-          </p>
-          <nav aria-label="Race guide distances" className="mt-2 flex flex-wrap gap-x-5">
-            <Link to="/running" hash="countries-title" className={quickLink}>
-              Marathons
-            </Link>
-            <Link to="/running" hash="half-marathons" className={quickLink}>
-              Half marathons
-            </Link>
-            <Link to="/running/uk-road-ultramarathons" className={quickLink}>
-              UK road ultras
-            </Link>
-          </nav>
-        </div>
-      </div>
-      <nav
-        aria-label="Marathon guides by country"
-        className="rounded-xl border border-border px-4 py-3"
-      >
-        <p className="text-xs font-semibold uppercase tracking-wider text-muted">
-          Marathon guides by country
-        </p>
-        <div className="mt-1 flex flex-wrap gap-x-5">
-          {MARATHON_COUNTRIES.map((country) => (
-            <Link
-              key={country.id}
-              to="/running/$guide"
-              params={{ guide: country.guide }}
-              className={quickLink}
-            >
-              {country.id === "uk"
-                ? `UK marathons${country.calendarYear ? ` ${country.calendarYear}` : ""}`
-                : country.id === "usa"
-                  ? "USA marathons"
-                  : `${country.name} marathons`}
-            </Link>
-          ))}
-        </div>
-      </nav>
-      <Link to="/find-events" className={quickLink}>
-        Find events through other sporting organisations{" "}
-        <ArrowRight className="size-4" aria-hidden="true" />
-      </Link>
-    </section>
   );
 }

@@ -289,7 +289,7 @@ try {
     const html = await response.text();
     assert(!html.includes("Directory Fixture Secret"));
     if (path === "/") {
-      assert(html.includes("Your sporting life,"));
+      assert(html.includes("Road marathons by country"));
       assert(html.includes('href="/races"'), "Homepage must link to AthRecs fixtures");
       assert(html.includes('href="/sports/road-running"'));
       assert(!html.includes("https://www.runrecs.com/races"));
