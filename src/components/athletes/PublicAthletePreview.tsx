@@ -8,12 +8,19 @@ import { Badge } from "@/components/ui/badge";
 import { ShareProfileButton } from "./ShareProfileButton";
 import { publicAthleteNarrative } from "@/lib/athrecs/public-athlete-narrative";
 import { AthleteBusinessLink } from "./AthleteBusinessLink";
+import {
+  publicAthleteResultPath,
+  PUBLIC_PROFILE_RESULT_LIMIT,
+} from "@/lib/athrecs/public-athlete-result-pages";
 
 const NO_PERSONAL_BESTS = new Set<number>();
 
 export function PublicAthletePreview({ profile }: { profile: Preview }) {
   const visibleCount = profile.entries.length + profile.reportedRecords.length;
   const biography = publicAthleteNarrative(profile);
+  const page = profile.resultPage ?? 1;
+  const pages = profile.resultPages ?? 1;
+  const firstResult = (page - 1) * PUBLIC_PROFILE_RESULT_LIMIT + 1;
   return (
     <div className="public-athlete-profile space-y-6" data-profile-access="preview">
       <Link to="/athletes" className="inline-flex min-h-11 items-center text-sm text-accent">
@@ -107,11 +114,15 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
         id="results-history"
         className="space-y-3 rounded-xl border border-border bg-surface p-4 sm:p-5"
       >
-        <h2 className="font-display text-lg font-semibold">Latest results</h2>
+        <h2 className="font-display text-lg font-semibold">
+          {page > 1 ? "Earlier results" : "Latest results"}
+        </h2>
         {visibleCount ? (
           <>
             <p className="text-sm text-muted">
-              Showing {visibleCount} of {profile.totalResults} recorded performances.
+              Showing{" "}
+              {pages > 1 ? `${firstResult}–${firstResult + visibleCount - 1}` : visibleCount} of{" "}
+              {profile.totalResults} recorded performances.
             </p>
             <CompactResultsTable
               results={[]}
@@ -124,6 +135,44 @@ export function PublicAthletePreview({ profile }: { profile: Preview }) {
         ) : (
           <p className="text-sm text-muted">No published results yet.</p>
         )}
+        {pages > 1 ? (
+          <nav
+            aria-label="Athlete result pages"
+            className="flex flex-wrap items-center gap-4 text-sm"
+          >
+            {page > 1 ? (
+              <>
+                <a
+                  href={publicAthleteResultPath(profile.slug)}
+                  className="inline-flex min-h-11 items-center text-accent hover:underline"
+                >
+                  Latest results
+                </a>
+                {page > 2 ? (
+                  <a
+                    rel="prev"
+                    href={publicAthleteResultPath(profile.slug, page - 1)}
+                    className="inline-flex min-h-11 items-center text-accent hover:underline"
+                  >
+                    Newer results
+                  </a>
+                ) : null}
+              </>
+            ) : null}
+            <span className="text-muted">
+              Page {page} of {pages}
+            </span>
+            {page < pages ? (
+              <a
+                rel="next"
+                href={publicAthleteResultPath(profile.slug, page + 1)}
+                className="inline-flex min-h-11 items-center text-accent hover:underline"
+              >
+                Older results
+              </a>
+            ) : null}
+          </nav>
+        ) : null}
       </section>
       <ProfileSignIn returnTo={`/athletes/${encodeURIComponent(profile.slug)}`} preview />
     </div>

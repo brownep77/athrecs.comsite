@@ -398,6 +398,45 @@ try {
   assert.equal(preview.entries.length + preview.reportedRecords.length, 5);
   assert.equal(preview.totalResults, 11);
   assert(!JSON.stringify(preview).includes("https://example.test/result"));
+  const ownedLaterPage = await rpc("athrecs/api", "getPublicAthletePreview", {
+    slug: "published-history-fixture",
+    resultPage: 2,
+  });
+  assert.equal(ownedLaterPage.resultPage, 1, "An existing account link keeps the preview limit");
+  const [unclaimed] = await sql`insert into athletes(slug,display_name,profile_visibility)
+    values('unclaimed-paged-history','Unclaimed Page Fixture','public') returning id`;
+  await sql`insert into athlete_source_histories(athlete_id,provider,external_id,source_url,captured_at,complete,years_expected,years_captured,performances,published_at)
+    select ${unclaimed.id},provider,external_id||'-unclaimed',source_url,captured_at,complete,years_expected,years_captured,performances,published_at
+    from athlete_source_histories where athlete_id=${publishedAthlete.id}`;
+  await sql`insert into network_audit_log(action,entity_type,entity_id,after_value)
+    values('athlete.history_admin_published','athlete_source_history',${historyKey + "-unclaimed"},${JSON.stringify({ athleteId: unclaimed.id })}::jsonb)`;
+  await sql`insert into results(athlete_id,edition_id,finish_time_seconds,status,result_visibility)
+    values(${unclaimed.id},${recordedEdition.id},11166,'finished','public')`;
+  const secondPage = await rpc("athrecs/api", "getPublicAthletePreview", {
+    slug: "unclaimed-paged-history",
+    resultPage: 2,
+  });
+  const lastPage = await rpc("athrecs/api", "getPublicAthletePreview", {
+    slug: "unclaimed-paged-history",
+    resultPage: 3,
+  });
+  assert.equal(secondPage.resultPage, 2);
+  assert.equal(secondPage.resultPages, 3);
+  assert.equal(secondPage.entries.length + secondPage.reportedRecords.length, 5);
+  assert.equal(lastPage.entries.length + lastPage.reportedRecords.length, 1);
+  for (const page of [secondPage, lastPage]) {
+    assert(!JSON.stringify(page).includes("https://example.test/result"));
+    assert(!JSON.stringify(page).includes("archiveReference"));
+  }
+  await sql`update athletes set profile_visibility='private' where id=${unclaimed.id}`;
+  assert.equal(
+    await rpc("athrecs/api", "getPublicAthletePreview", {
+      slug: "unclaimed-paged-history",
+      resultPage: 2,
+    }),
+    null,
+    "Withdrawing the profile also withdraws every later result page",
+  );
   const { buildPublicAthletePreview } = await server.ssrLoadModule(
     "/src/lib/athrecs/public-athlete-preview.ts",
   );
@@ -577,10 +616,7 @@ try {
     0,
   );
   assert.equal(confirmed("#results-history .result-evidence[open]").length, 0);
-  assert.equal(
-    confirmed("#results-history tr[data-history-result] [aria-label='PB']").length,
-    0,
-  );
+  assert.equal(confirmed("#results-history tr[data-history-result] [aria-label='PB']").length, 0);
   if (process.env.ATHRECS_BROWSER_MODULE) {
     const { chromium } = createRequire(import.meta.url)(process.env.ATHRECS_BROWSER_MODULE);
     const browser = await chromium.launch({
