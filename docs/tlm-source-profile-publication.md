@@ -41,3 +41,20 @@ previews separately from unlisted shared account profiles and private archives.
 Public availability is not, by itself, proof of unrestricted reuse: factual
 records, database rights and personal-data processing are distinct questions.
 This workflow records the owner's instruction without asserting legal clearance.
+
+## Continuing the club-only hold queue
+
+`scripts/continue-tlm-source-profiles.py` reviews only groups whose original
+hold was a missing consistent club. It rechecks all 41,691 source rows against
+the retained original CSV bytes and compares the previously published histories
+with those rows. Repeated records must have identical source name components,
+gender and recorded city/state, compatible exact reported-age intervals and
+distinct race dates, with no conflicting clubs. Location and age evidence stays
+private; no nationality or birthday is inferred. The current directory and
+canonical event/year/bib observations are screened again. Existing people are
+never automatically merged or linked. The same immutable-plan, isolated-rehearsal,
+transactional fingerprint and source-capture guards apply before publication.
+
+Run `python3 scripts/verify-tlm-followup.py` and validate every planned history
+against `sourceHistorySchema`. Retain the original hold audit and append the
+follow-up outcome, including source keys that were released and those still held.
