@@ -16,6 +16,7 @@ import { getStaffAthleteProfile } from "@/lib/athrecs/staff-athlete-directory-ap
 import { publicProfileDetails } from "@/lib/athrecs/profile-details";
 import { lazy, Suspense, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { AthleteMessages } from "@/components/staff/AthleteMessages";
 const DirectoryMatchInvite = lazy(() =>
   import("@/components/admin/DirectoryMatchInvite").then((module) => ({
     default: module.DirectoryMatchInvite,
@@ -136,6 +137,13 @@ function StaffAthleteProfile() {
               />
             </Suspense>
           ) : null}
+          <div id="messages" className="scroll-mt-20">
+            <AthleteMessages
+              key={athleteId}
+              target={{ athleteNumber: profile.athlete.athleteNumber }}
+              initiallyOpen
+            />
+          </div>
           {profile.bioNotes.length ? (
             <details className="rounded-xl border border-border bg-surface p-4">
               <summary className="cursor-pointer font-semibold">

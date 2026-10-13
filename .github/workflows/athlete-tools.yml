@@ -10,6 +10,10 @@ on:
       - "src/components/staff/*Invite*.tsx"
       - "src/components/staff/ClaimInvitationSharing.tsx"
       - "src/lib/athrecs/claim-invit*"
+      - "src/lib/athrecs/athlete-messages*"
+      - "src/components/staff/AthleteMessages.tsx"
+      - "migrations/*athlete_messages.sql"
+      - "scripts/verify-athlete-messages*.mjs"
       - "src/lib/athrecs/invitation-welcome*"
       - "src/components/staff/InvitationWelcomeEmail.tsx"
       - "migrations/*invitation_welcome_codes.sql"
@@ -95,6 +99,8 @@ jobs:
         run: node scripts/verify-invitation-welcome.mjs
       - name: Signup abuse cases and ownership authorization
         run: node scripts/verify-signup-ownership.mjs
+      - name: Private athlete correspondence and message tracking
+        run: npm run verify:athlete-messages
       - name: Build without database migration or publication hooks
         run: npx vite build --mode development
       - run: npm run typecheck
@@ -103,6 +109,10 @@ jobs:
         run: npm install --prefix "$RUNNER_TEMP/athlete-tools-browser" --no-save --package-lock=false --ignore-scripts playwright@1.56.1
       - name: Install browser
         run: node "$RUNNER_TEMP/athlete-tools-browser/node_modules/playwright/cli.js" install --with-deps chromium
+      - name: Athlete messages on desktop and mobile
+        env:
+          ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
+        run: node scripts/verify-athlete-messages-browser.mjs
       - name: Desktop and mobile interactions
         env:
           ATHRECS_BROWSER_MODULE: ${{ runner.temp }}/athlete-tools-browser/node_modules/playwright
@@ -125,6 +135,7 @@ jobs:
           name: athlete-tools-preview
           path: |
             artifacts/athlete-tools-*.png
+            artifacts/athlete-messages-*.png
             artifacts/athlete-directory-invites-*.png
             artifacts/external-invitation-*.png
             artifacts/result-conflicts-*.png
