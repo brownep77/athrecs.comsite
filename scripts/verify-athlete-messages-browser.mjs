@@ -20,7 +20,7 @@ const api = file(
   `
 window.savedMessages=[];window.failLoad=false;window.failSave=false;
 const rows=[{id:'sent-1',direction:'sent',channel:'email',subject:'Welcome to AthRecs',body:'Thanks for joining AthRecs. Your achievements are part of sporting history.',contact:'avery@example.test',sender:'paul@athrecs.com',status:'accepted',source:'site',occurredAt:'2026-10-12T10:30:00Z'},
-{id:'received-1',direction:'received',channel:'email',subject:'My missing result',body:'<script>window.executedMessage=true</script> Please add my result.',contact:'avery@example.test',sender:null,status:'recorded',source:'manual',occurredAt:'2026-10-12T11:00:00Z'}];
+{id:'received-1',direction:'received',channel:'email',subject:'My missing result',body:'<script>window.executedMessage=true</script> Please add my result.',contact:'avery@example.test',sender:'avery@example.test',status:'received',source:'inbox',occurredAt:'2026-10-12T11:00:00Z'}];
 export async function getStaffAthleteMessages({data}){if(window.failLoad)throw Error('Synthetic read failure');const filtered=rows.filter(r=>data.direction==='all'||r.direction===data.direction).sort((a,b)=>b.occurredAt.localeCompare(a.occurredAt));return{messages:filtered.slice((data.page-1)*20,data.page*20),sent:rows.filter(r=>r.direction==='sent').length,received:rows.filter(r=>r.direction==='received').length,total:filtered.length,page:data.page,pageSize:20};}
 export async function saveStaffAthleteMessage({data}){if(window.failSave)throw Error('Synthetic save failure');window.savedMessages.push(data);rows.push({...data,id:data.entryId,status:'recorded',source:'manual',sender:null});return{saved:true};}
 `,
@@ -61,6 +61,11 @@ try {
   await page.getByRole("button", { name: "All (2)", exact: true }).waitFor();
   await page.getByRole("button", { name: "Received (1)", exact: true }).click();
   await page.getByText("My missing result", { exact: true }).click();
+  assert(await page.getByText("Received email · Automatic record", { exact: true }).isVisible());
+  assert.equal(
+    await page.getByRole("link", { name: "Connect your inbox" }).getAttribute("href"),
+    "/admin/email-inbox",
+  );
   assert(
     await page
       .getByText("<script>window.executedMessage=true</script> Please add my result.", {

@@ -121,7 +121,8 @@
     "verify:captured-results": "node scripts/verify-captured-results.mjs",
     "verify:private-archive-profiles": "python scripts/verify-private-archive-profiles.py",
     "verify:fixture-upload": "node scripts/verify-fixture-upload.mjs",
-    "verify:athlete-messages": "node scripts/verify-athlete-messages.mjs"
+    "verify:athlete-messages": "node scripts/verify-athlete-messages.mjs",
+    "verify:athlete-inbox": "node scripts/verify-athlete-inbox.mjs"
   },
   "dependencies": {
     "@electric-sql/pglite": "^0.5.3",
@@ -166,9 +167,11 @@
     "cmdk": "^1.1.1",
     "date-fns": "^4.0.0",
     "exceljs": "^4.4.0",
+    "imapflow": "^2.4.0",
     "kysely": "^0.28.5",
     "lightningcss": "^1.28.0",
     "lucide-react": "^0.510.0",
+    "mailparser": "^3.9.38",
     "nitro": "3.0.260603-beta",
     "pg": "^8.16.3",
     "react": "^19.1.0",
@@ -189,6 +192,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@types/mailparser": "^3.9.0",
     "eslint": "^9.20.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.2.6",
