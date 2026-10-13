@@ -6,12 +6,14 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,681 canonical directory records were compared with current source content. The remaining 56 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Reviewed website extraction contributes contact pages or contact/social details for 624 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 478 clubs: 465 publish an email address and 54 a telephone number. There are 778 contact entries in total, including named directory contacts with no direct email or telephone.
-- 893 clubs have social links, with 1,792 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 55 clubs have extended, individually written profiles. These contain 39 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 630 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 484 clubs: 471 publish an email address and 54 a telephone number. There are 793 contact entries in total, including named directory contacts with no direct email or telephone.
+- 893 clubs have social links, with 1,794 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 85 clubs have extended, individually written profiles. These contain 52 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
-The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. This batch extends biographies; the contact and social totals above are unchanged.
+The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
+
+The third editorial batch adds another 30 profiles across England and Northern Ireland, including Dereham Runners, Wymondham AC, Ipswich Harriers, Ipswich JAFFA, Morpeth Harriers, Leicester Coritanian AC and North Belfast Harriers. It adds 13 sourced notable-member entries, updates contact or social records for 12 clubs and clarifies 11 venues. The net additions are 15 contact entries, six more clubs with email addresses and two social links. Morpeth's listed town is corrected from Cramlington to Morpeth; Diss is described as an adult road-running group in line with its current website. These targeted checks do not constitute a fresh review of every catalogue entry.
 
 Founding dates distinguish current clubs from their predecessors. Woodford Green AC with Essex Ladies uses the 1998 merger date and explains Woodford Green's 1908 origins; City of Portsmouth uses its 1993 merger date. Norwich Road Runners' history gives a naming period around 1983–84, so no exact founding year is fabricated. Cambridge Harriers is explicitly identified as a South East London club, distinct from Cambridge's university clubs.
 
@@ -35,7 +37,7 @@ Notable-member text does not create athlete accounts, link unclaimed identities,
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts`, `club-profiles-b.ts` and `club-profiles-c.ts`: manually reviewed prose, sources and explicit corrections.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 
 Stage future directory comparisons, inspect changed fields, retain original values in the review evidence, and merge only supported changes. Never replace a missing source response with fabricated data or mark a fallback row newly checked. The historical August generator now refuses to overwrite newer reviewed data; its fixed-date output must not be used as a current refresh.
