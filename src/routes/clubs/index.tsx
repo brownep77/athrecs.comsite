@@ -92,6 +92,7 @@ function ClubsPage() {
         <label className="text-sm">
           Country
           <select
+            aria-label="Country"
             value={country}
             onChange={(e) => {
               setCountry(e.target.value);
@@ -108,6 +109,7 @@ function ClubsPage() {
         <label className="text-sm">
           Sport
           <select
+            aria-label="Sport"
             value={sport}
             onChange={(e) => {
               setSport(e.target.value);

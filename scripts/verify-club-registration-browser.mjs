@@ -206,6 +206,15 @@ try {
   console.log(
     "Club browser flow passed: directory-first links, filters/pagination, sign-in gate, draft/resume, validation, failed-save retry, submission, unverified-email gate, mobile layout and reviewer checks. APIs used isolated synthetic fixtures.",
   );
+} catch (error) {
+  const failedPage = browser.contexts()[0]?.pages()[0];
+  if (failedPage) {
+    await failedPage
+      .screenshot({ path: resolve("artifacts/club-registration-failure.png"), fullPage: true })
+      .catch(() => {});
+    writeFileSync(resolve("artifacts/club-registration-failure.html"), await failedPage.content());
+  }
+  throw error;
 } finally {
   await browser.close();
   await server.close();

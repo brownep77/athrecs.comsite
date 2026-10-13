@@ -66,7 +66,7 @@ synthetic API fixtures: directory/filter/pagination, sign-in, draft/resume,
 validation, retry, submission, email gates, mobile layout and review controls.
 It makes no live accounts, sends no emails, and writes screenshots only to ignored
 test artifacts. `ATHRECS_BROWSER_EXECUTABLE` may select an installed test browser.
-Service tests are part of `ci:verify`; browser tests run in the quality gate.
+Service and browser tests run together in the quality gate.
 PGlite does not simulate concurrent production database connections. A production
 officer/independent-staff acceptance check remains separate from these tests.
 
