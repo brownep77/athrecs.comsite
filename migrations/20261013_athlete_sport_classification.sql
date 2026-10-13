@@ -35,6 +35,7 @@ returns text language sql immutable parallel safe as $function$
     when trim(coalesce(meeting,'')) ~* '(^|[^a-z0-9_])(Swimming)([^a-z0-9_]|$)' then 'Swimming'
     when trim(coalesce(meeting,'')) ~* '(^|[^a-z0-9_])(Rowing)([^a-z0-9_]|$)' then 'Rowing'
     when trim(coalesce(meeting,'')) ~* '(^|[^a-z0-9_])(cross[ -]country|xc|trail running|fun run|running|marathon|half marathon|[0-9]+([.][0-9]+)?\s*k(m)?)([^a-z0-9_]|$)' then 'Running'
+    when trim(coalesce(meeting,'')) ~* '^(Lowestoft Scores( Race)?|Norfolk Gazelles [''‘]Big Stampede[''’]|Rag-it-Round Repps|The Nelson Knee-Knobbler( \(race [0-9]+\))?)$' then 'Running'
     else null end
 $function$;
 

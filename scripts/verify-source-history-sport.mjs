@@ -65,6 +65,11 @@ const examples = [
   ["Senior", "timer", null, "Example club meeting"],
   ["Fun Run", "timer", "Running"],
   ["Canicross Powered", "timer", "Running"],
+  ["Senior", "timer", "Running", "Lowestoft Scores Race"],
+  ["Championship Relay", "timer", "Running", "Norfolk Gazelles 'Big Stampede'"],
+  ["Human Powered", "timer", "Running", "Rag-it-Round Repps"],
+  ["Human Powered - Go Short", "timer", "Running", "The Nelson Knee-Knobbler (race 3)"],
+  ["Human Powered", "timer", null, "Another event"],
 ];
 const db = new PGlite();
 try {

@@ -107,6 +107,15 @@ export const sourceHistorySportRules: readonly SportRule[] = [
     ),
     sport: "Running",
   },
+  // Reviewed race-title aliases for sources that supply only category labels.
+  // https://www.waveneyvalley.org/lowestoft-scores-race/
+  // https://www2.norfolkgazelles.co.uk/alex-moore-relay.php
+  // https://totalracetiming.co.uk/raceresults/109 and /108 (Dunerunner trail events).
+  {
+    field: "meeting",
+    pattern: String.raw`^(Lowestoft Scores( Race)?|Norfolk Gazelles ['‘]Big Stampede['’]|Rag-it-Round Repps|The Nelson Knee-Knobbler( \(race [0-9]+\))?)$`,
+    sport: "Running",
+  },
 ];
 
 const compiledRules = sourceHistorySportRules.map((rule) => ({
