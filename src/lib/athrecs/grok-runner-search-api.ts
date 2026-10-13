@@ -6,7 +6,7 @@ import {
 } from "./result-matching-settings";
 import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
-import { getSql } from "@/lib/db";
+import { getSql, type Sql } from "@/lib/db";
 import { scorePotentialResultNameMatch } from "./result-match";
 import { ensureAthrecsSeeded } from "./seed.server";
 
@@ -44,6 +44,8 @@ type IdentityRow = {
   display_name: string | null;
   previous_names: string[] | null;
   matching_settings: MatchingSettings | null;
+  settings_revision: string | null;
+  profile_revision: string | null;
   city: string | null;
   region: string | null;
   country: string | null;
@@ -77,16 +79,28 @@ function text(value: string | null | undefined): string {
 }
 
 function sourceFromUrl(url: string): ExternalRunnerMatchSource {
-  const value = url.toLowerCase();
-  if (value.includes("powerof10") || value.includes("thepowerof10")) return "powerof10";
-  if (value.includes("parkrun")) return "parkrun";
-  if (value.includes("worldathletics")) return "worldathletics";
+  const host = new URL(url).hostname.toLowerCase().replace(/^www\./, "");
+  if (["thepowerof10.info", "powerof10.uk"].includes(host)) return "powerof10";
+  if (
+    [
+      "parkrun.org.uk",
+      "parkrun.com",
+      "parkrun.ie",
+      "parkrun.com.au",
+      "parkrun.co.nz",
+      "parkrun.co.za",
+    ].includes(host)
+  )
+    return "parkrun";
+  if (host === "worldathletics.org") return "worldathletics";
 
   return "other";
 }
 
 function cacheKey(identity: IdentityRow): string {
   return [
+    "validated-search-v2",
+    text(identity.profile_revision),
     text(identity.full_name).toLowerCase(),
     text(identity.auth_name).toLowerCase(),
     text(identity.display_name).toLowerCase(),
@@ -123,23 +137,24 @@ function extractJsonObject(raw: string): unknown {
 }
 
 function asMatches(value: unknown): ExternalRunnerMatch[] {
-  if (!value || typeof value !== "object") return [];
+  if (!value || typeof value !== "object") throw new Error("Malformed external search response");
   const candidates = Array.isArray(value)
     ? value
     : Array.isArray((value as { candidates?: unknown }).candidates)
       ? (value as { candidates: unknown[] }).candidates
       : Array.isArray((value as { matches?: unknown }).matches)
         ? (value as { matches: unknown[] }).matches
-        : [];
+        : null;
+  if (!candidates) throw new Error("Malformed external search response");
   const matches: ExternalRunnerMatch[] = [];
-  for (const item of candidates) {
+  for (const item of candidates.slice(0, 200)) {
     if (!item || typeof item !== "object") continue;
     const row = item as Record<string, unknown>;
-    const sourceUrl = text(
+    let sourceUrl = text(
       typeof row.sourceUrl === "string" ? row.sourceUrl : String(row.source_url ?? ""),
     );
     try {
-      publicResultUrl(sourceUrl);
+      sourceUrl = publicResultUrl(sourceUrl);
     } catch {
       continue;
     }
@@ -166,7 +181,7 @@ function asMatches(value: unknown): ExternalRunnerMatch[] {
       eventSlug: null,
     });
   }
-  return matches.slice(0, 20);
+  return matches;
 }
 
 function responseText(payload: unknown): string {
@@ -202,6 +217,7 @@ function responseText(payload: unknown): string {
 
 async function callXai(
   prompt: string,
+  maySend: () => Promise<boolean>,
 ): Promise<{ ok: boolean; text: string; model: string; error?: string }> {
   const apiKey = process.env.XAI_API_KEY?.trim();
   if (!apiKey) {
@@ -221,6 +237,8 @@ async function callXai(
     return { ok: false, text: "", model, error: "privacy-configuration" };
   }
   await probe.body?.cancel();
+  // Consent or identity may change while the provider probe is in flight.
+  if (!(await maySend())) return { ok: false, text: "", model, error: "settings-changed" };
   const body = {
     model,
     store: false,
@@ -252,7 +270,7 @@ async function callXai(
   return { ok: true, text: responseText(payload), model };
 }
 
-export const findExternalRunnerMatches = createServerFn({ method: "GET" })
+export const findExternalRunnerMatches = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
   .handler(async ({ context }): Promise<ExternalRunnerSearchResponse> => {
     const { setResponseHeader } = await import("@tanstack/react-start/server");
@@ -265,6 +283,8 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
         profile.display_name,
         profile.previous_names,
         settings.settings as matching_settings,
+        settings.updated_at::text as settings_revision,
+        profile.updated_at::text as profile_revision,
         profile.city,
         profile.region,
         profile.country,
@@ -332,6 +352,24 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
       };
     }
     const key = cacheKey(identity);
+    const settingsChanged: ExternalRunnerSearchResponse = {
+      available: false,
+      consentRequired: false,
+      searchedNames: [],
+      matches: [],
+      cached: false,
+      message:
+        "Your details or search choices changed while this search was running. No results were saved. Check your choices before starting a new search.",
+    };
+    const stillCurrent = async (connection: Sql) => {
+      const [row] = await connection<{ current: boolean }>`
+        select (s.settings->>'externalSearchConsent'='true'
+          and s.updated_at::text=${identity.settings_revision}
+          and p.updated_at::text=${identity.profile_revision}) as current
+        from athlete_result_matching_settings s join athlete_private_profiles p on p.user_id=s.user_id
+        where s.user_id=${context.userId} for share of s,p`;
+      return row?.current === true;
+    };
     await sql`delete from athlete_external_match_searches where user_id=${context.userId} and created_at < now()-interval '7 days'`;
     const cached = await sql<CacheRow>`
       select status, payload, created_at::text as created_at
@@ -349,22 +387,32 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
         typeof cachedRow.payload === "string"
           ? (JSON.parse(cachedRow.payload) as ExternalRunnerSearchResponse)
           : cachedRow.payload;
-      return { ...payload, cached: true };
+      return (await stillCurrent(sql)) ? { ...payload, cached: true } : settingsChanged;
     }
 
+    const safeLink = (value: string | null | undefined): string | null => {
+      if (!value) return null;
+      try {
+        return publicResultUrl(value);
+      } catch {
+        return null;
+      }
+    };
     const prompt = JSON.stringify(
       {
         fullName: identity.full_name,
         alsoKnownAs: searchedNames,
-        resultProfileUrls: identity.matching_settings?.sourceUrls ?? [],
+        resultProfileUrls: (identity.matching_settings?.sourceUrls ?? [])
+          .map(safeLink)
+          .filter(Boolean),
         club: identity.club_or_team,
         city: identity.city,
         region: identity.region,
         country: identity.country,
         parkrunId: identity.parkrun_id,
         athleticsUrn: identity.athletics_urn,
-        powerOf10Url: identity.power_of_10_url,
-        worldAthleticsUrl: identity.world_athletics_url,
+        powerOf10Url: safeLink(identity.power_of_10_url),
+        worldAthleticsUrl: safeLink(identity.world_athletics_url),
         fingerprintRace: {
           event: identity.fingerprint_event,
           year: identity.fingerprint_year,
@@ -383,8 +431,9 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
     let model = process.env.XAI_MODEL?.trim() || "grok-4.6";
 
     try {
-      const result = await callXai(prompt);
+      const result = await callXai(prompt, () => stillCurrent(sql));
       model = result.model || model;
+      if (!result.ok && result.error === "settings-changed") return settingsChanged;
       if (!result.ok && result.error === "missing-key") {
         available = false;
         status = "unavailable";
@@ -401,14 +450,35 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
         message =
           "Public result search is temporarily unavailable. ATHRECS name matches are unaffected.";
       } else {
-        matches = asMatches(extractJsonObject(result.text)).filter((match) =>
-          scorePotentialResultNameMatch(
-            searchedNames,
-            match.athleteName,
-            { clubOrTeam: identity.club_or_team, city: identity.city },
-            { clubName: match.club, city: match.location },
-          ),
-        );
+        const seen = new Set<string>();
+        matches = asMatches(extractJsonObject(result.text))
+          .flatMap((match) => {
+            const evidence = scorePotentialResultNameMatch(
+              searchedNames,
+              match.athleteName,
+              {
+                clubOrTeam: identity.club_or_team,
+                city: identity.city,
+                dateOfBirth: identity.date_of_birth,
+              },
+              { clubName: match.club, city: match.location, eventDate: match.eventDate },
+            );
+            if (!evidence) return [];
+            const key = JSON.stringify([
+              match.sourceUrl,
+              match.athleteName,
+              match.eventName,
+              match.eventDate,
+              match.distance,
+              match.finishTime,
+            ]);
+            if (seen.has(key)) return [];
+            seen.add(key);
+            return [
+              { ...match, confidence: evidence.confidence, why: evidence.reasons.join("; ") },
+            ];
+          })
+          .slice(0, 20);
 
         if (!matches.length) {
           message =
@@ -430,7 +500,11 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
       cached: false,
     };
 
-    await sql`
+    return sql.transaction(async (tx) => {
+      // The same settings row is locked by a consent update, which then clears cache.
+      // A late provider response must never restore withdrawn or superseded results.
+      if (!(await stillCurrent(tx))) return settingsChanged;
+      await tx`
       insert into athlete_external_match_searches (
         user_id, cache_key, status, model, payload, created_at
       ) values (
@@ -443,5 +517,6 @@ export const findExternalRunnerMatches = createServerFn({ method: "GET" })
         created_at = now()
     `;
 
-    return payload;
+      return payload;
+    });
   });

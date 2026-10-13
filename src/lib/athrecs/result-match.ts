@@ -155,6 +155,23 @@ function nameScore(
   if (accountLast !== candidateLast) return null;
 
   if (accountFirst === candidateFirst) {
+    const accountMiddleNames = account.slice(1, -1);
+    const candidateMiddleNames = candidate.slice(1, -1);
+    if (
+      accountMiddleNames.length &&
+      candidateMiddleNames.length &&
+      accountMiddleNames.some((name, index) => {
+        const other = candidateMiddleNames[index];
+        return (
+          other && (name[0] !== other[0] || (name.length > 1 && other.length > 1 && name !== other))
+        );
+      })
+    ) {
+      return {
+        score: 78,
+        reason: "First name and surname match, but middle names differ — check this match",
+      };
+    }
     const accountMiddle = middleInitials(account);
     const candidateMiddle = middleInitials(candidate);
     if (accountMiddle && candidateMiddle && accountMiddle === candidateMiddle) {
@@ -163,7 +180,10 @@ function nameScore(
     return { score: 92, reason: "First name and surname match" };
   }
 
-  if (accountFirst.charAt(0) === candidateFirst.charAt(0)) {
+  if (
+    (accountFirst.length === 1 || candidateFirst.length === 1) &&
+    accountFirst.charAt(0) === candidateFirst.charAt(0)
+  ) {
     return { score: 72, reason: "First initial and surname match" };
   }
 
@@ -239,11 +259,13 @@ export function scorePotentialResultNameMatch(
   const score = best.score + context.boost + identity.boost;
   const confidence: PotentialResultMatchConfidence = identity.conflict
     ? "possible"
-    : best.score >= 98
-      ? "exact"
-      : score >= 90
-        ? "strong"
-        : "possible";
+    : best.score < 90
+      ? "possible"
+      : best.score >= 98
+        ? "exact"
+        : score >= 90
+          ? "strong"
+          : "possible";
 
   return {
     score,

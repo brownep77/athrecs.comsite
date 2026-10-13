@@ -211,7 +211,7 @@ function AthletePrivacyPage() {
           </p>
         </NoticeSection>
 
-        <NoticeSection title="Private result archive and claims">
+        <NoticeSection title="Public sporting records, private archive and claims">
           <p className="mb-3">
             The optional “Find my race results” choice at sign-up opens suggestions from the AthRecs
             results database. You can add your racing name after signing in. The choice does not
@@ -219,13 +219,21 @@ function AthletePrivacyPage() {
             marketing consent.
           </p>
           <p>
-            ATHRECS may hold source-checked race results in a private archive so athletes can find
-            and claim their own records after signing in. Ordinary participant lists, names and
-            finish times are not published as a browseable public directory. Published race results
-            remain available on event pages. Athlete profiles, including public-figure and shared
-            profiles, require viewers to log in. An athlete may choose to share their own profile
-            with signed-in members. Claim evidence remains private, and claiming does not
-            automatically publish your results or the private contents of your Entry Passport.
+            ATHRECS preserves factual sporting records from published results and athlete
+            submissions. Reviewed records may appear on public race pages and approved public
+            athlete previews, including unclaimed source profiles. These public pages can appear
+            in our athlete directory and search engines. An unclaimed profile does not mean that
+            the athlete has joined or endorsed ATHRECS; uncertain identities and results retain
+            their qualifications. Other profile information and shared account profiles may
+            require sign-in.
+          </p>
+          <p className="mt-3">
+            Original source captures, identity-review evidence and account contact details remain
+            private. We use legitimate interests to preserve accurate sporting history and help
+            athletes find and claim their records, with checks for mistaken identities and
+            existing privacy choices. You can ask us to correct a result, object to publication
+            or review a profile using the contact details below. Claiming does not automatically
+            publish private account information or the contents of your Entry Passport.
           </p>
         </NoticeSection>
 
@@ -239,9 +247,10 @@ function AthletePrivacyPage() {
             identifies the profile across sports. Nationality, country of birth, age category,
             coach, manager and contact preference can appear on the shared profile. Your birthday
             stays hidden unless you choose to display its day and month or full date in your
-            account. Viewers must log in to open a shared profile. Athlete profile pages are
-            excluded from our search-engine sitemaps and marked not to be indexed. Search engines
-            may take time to remove older listings.
+            account. Viewers must log in to open an unlisted shared account profile. These unlisted
+            pages are excluded from our search-engine sitemaps and marked not to be indexed. This
+            is separate from approved public sporting-record previews. Search engines may take
+            time to remove older listings.
           </p>
         </NoticeSection>
 
