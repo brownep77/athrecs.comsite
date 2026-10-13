@@ -1,69 +1,12 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-13-batch06",
+  "lastEditorialBatch": "2026-10-13-batch07",
   "reviewedAt": "2026-10-13",
   "repository": "brownep77/athrecs.comsite",
   "branch": "codex/club-profiles-contact-audit",
   "pullRequest": 680,
   "publication": "draft-preview-only",
   "completedProfileSlugs": [
-    "charnwood-a-c",
-    "coventry-triathletes",
-    "leamington-athletics-academy",
-    "leamington-cycling-and-athletics-club",
-    "nuneaton-harriers",
-    "rugby-and-northampton-ac",
-    "tipton-harriers",
-    "athletics-ni-barf-ni",
-    "athletics-ni-belfast-running-club",
-    "athletics-ni-mallusk-harriers",
-    "athletics-ni-victoria-park-and-connswater-ac",
-    "athletics-ireland-abbey-striders-a-c",
-    "athletics-ireland-adamstown-a-c",
-    "athletics-ireland-aghada-running-club-a-c",
-    "athletics-ireland-balbriggan-and-district-a-c",
-    "athletics-ireland-ballinasloe-and-district-a-c",
-    "clonmel-triathlon-club",
-    "kilkenny-triathlon-club",
-    "waterford-triathlon-club",
-    "west-clare-triathlon-club"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 153,
-    "notableMemberEntries": 84,
-    "clubsWithContacts": 498,
-    "contactEntries": 843,
-    "clubsWithEmail": 485,
-    "clubsWithPhone": 57,
-    "clubsWithSocials": 912,
-    "socialLinks": 1844,
-    "websiteContactRecords": 669
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 9,
-    "contactOrSocialRecordsChanged": 13,
-    "trainingOrClubhouseVenuesClarified": 9,
-    "combinedOrUnconfirmedAddressesReplacedByNotes": [
-      "coventry-triathletes",
-      "athletics-ireland-balbriggan-and-district-a-c"
-    ],
-    "sportsCorrected": ["coventry-triathletes"],
-    "adultOnlyClarified": [
-      "athletics-ireland-aghada-running-club-a-c",
-      "kilkenny-triathlon-club",
-      "west-clare-triathlon-club"
-    ]
-  },
-  "validationBeforeCommit": [
-    "actual-catalogue profile and metadata checks",
-    "directory audit checks",
-    "targeted ESLint",
-    "TypeScript typecheck",
-    "production build"
-  ],
-  "nextCandidateSlugs": [
     "axe-valley-runners",
     "bideford-aac",
     "exeter-harriers",
@@ -77,10 +20,7 @@
     "keighley-and-craven-ac",
     "fitmums-and-friends",
     "athletics-ni-queens-university-ac",
-    "athletics-ni-st-annes-ac",
     "athletics-ni-st-malachys-ac",
-    "athletics-ni-west-belfast-coolers",
-    "athletics-ireland-carraig-mhor-a-c",
     "athletics-ireland-carraig-na-bhfear-a-c",
     "athletics-ireland-carrick-aces-a-c",
     "athletics-ireland-carrick-on-shannon-a-c",
@@ -88,10 +28,66 @@
     "athletics-ireland-carrigaline-a-c",
     "athletics-ireland-carrigtwohill-a-c"
   ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 173,
+    "notableMemberEntries": 93,
+    "clubsWithContacts": 508,
+    "contactEntries": 861,
+    "clubsWithEmail": 494,
+    "clubsWithPhone": 62,
+    "clubsWithSocials": 917,
+    "socialLinks": 1857,
+    "websiteContactRecords": 685
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 20,
+    "notableMemberEntriesAdded": 9,
+    "contactOrSocialRecordsChanged": 19,
+    "trainingOrClubhouseVenuesClarified": 8,
+    "combinedOrUnconfirmedAddressesReplacedByNotes": [
+      "bude-rats-run-and-tri",
+      "beverley-athletic-club"
+    ],
+    "sportsCorrected": ["bideford-aac", "fitmums-and-friends"],
+    "adultOnlyClarified": ["athletics-ireland-carrigtwohill-a-c"],
+    "contactOnlyAddition": ["athletics-ireland-carraig-mhor-a-c"]
+  },
+  "validationBeforeCommit": [
+    "actual-catalogue profile and metadata checks",
+    "directory audit checks",
+    "targeted ESLint",
+    "TypeScript typecheck",
+    "production build"
+  ],
+  "nextCandidateSlugs": [
+    "alton-runners",
+    "andover-ac",
+    "ashford-ac",
+    "bexhill-runners-and-triathletes",
+    "bognor-regis-tone-zone-runners",
+    "canterbury-harriers",
+    "chichester-runners-and-ac",
+    "crawley-ac",
+    "eastbourne-rovers-ac",
+    "fleet-and-crookham-ac",
+    "gosport-road-runners",
+    "maidstone-harriers-run-and-tri-club",
+    "welsh-athletics-aberdare-valley-aac",
+    "welsh-athletics-amman-valley-harriers",
+    "welsh-athletics-barry-and-vale-harriers",
+    "welsh-athletics-colwyn-bay-ac",
+    "athlone-triathlon-club",
+    "carlow-tc",
+    "castlebar-tri-club",
+    "cobh-triathlon-club",
+    "drogheda-triathlon-club",
+    "lough-key-triathlon-club"
+  ],
   "resumeInstructions": [
     "Read current main, PR state, audit and all club-profiles modules before selecting candidates; later commits supersede these counts.",
     "Skip completed profiles and active overlapping edits. Keep source dates and existing provenance; do not count queued candidates as researched.",
-    "Rotate South West England, Yorkshire, the remaining Belfast listings and regional Irish athletics. Revisit Dub Runners and Athlone only when stronger primary content is available. Queued candidates are not completed source checks.",
+    "Rotate Hampshire/Kent/Sussex, Welsh regional athletics and Irish triathlon. Avoid repeating the completed South West/Yorkshire batch. Revisit source-limited Belfast and Cork listings only when stronger club material becomes readable. Queued candidates are not completed research.",
     "Check the exact-commit Club profiles workflow and preview recorded in the PR body before describing changes as preview-verified. No production publication is authorised by this checkpoint."
   ],
   "sourceGaps": [
@@ -184,6 +180,78 @@
       "url": "http://www.belfastrunningclub.co.uk/contact-us-2/",
       "status": "broken-contact-link",
       "reason": "Homepage-linked contact page returned 404. Use the readable homepage and its public Facebook link, retaining the earlier Athletics NI email with its original provenance."
+    },
+    {
+      "slug": "cornwall-ac",
+      "url": "https://www.cornwallac.org.uk/content/JoinUs.asp",
+      "status": "conflicting-foundation-date-and-facility-follow-up",
+      "reason": "Official homepage says January 1982; joining page says 1 January 1984. September 2026 England Athletics feature quotes chairman saying 1982. Merger described without exact founded_year. Feature reports track without competition licence and resurfacing funding sought; do not imply restored licence. Club pages timed out in direct reader but were opened through web search reader."
+    },
+    {
+      "slug": "beverley-athletic-club",
+      "url": "https://www.beverleyathleticclub.co.uk/",
+      "status": "mixed-age-and-secretary-copy",
+      "reason": "Homepage has older and newer junior minimum ages and different secretary email variants. Bio avoids exact junior age; use Spond waiting list. Added unambiguous membership and junior role emails, not conflicting secretary variants. Correct town to Beverley; North Newbald/York directory address is not training base."
+    },
+    {
+      "slug": "exmouth-harriers",
+      "url": "https://exmouthharriers.co.uk/training",
+      "status": "seasonal-timetable",
+      "reason": "Training feed last specific updates are 2025, with different Tuesday/Thursday and summer meeting arrangements. Describe pattern and require current club confirmation; retain directory-address label, not a verified exact training venue."
+    },
+    {
+      "slug": "harrogate-harriers-and-ac",
+      "url": "https://www.harrogate-harriers.co.uk/new-members",
+      "status": "mixed-membership-years",
+      "reason": "Page links 2026/27 renewal but body still quotes 2024/25 fees. No price copied. Junior sessions are invitation/availability based. Senior base supported independently by training page."
+    },
+    {
+      "slug": "athletics-ireland-carraig-na-bhfear-a-c",
+      "url": "https://www.carraignabhfearac.com/about/training",
+      "status": "stale-and-conflicting-times",
+      "reason": "Club timetable labelled spring 2025 differs from Cork Athletics times. Venues described; current times need confirmation. Generic Facebook/Instagram navigation and famous-athlete educational articles are not evidence of official club accounts or alumni."
+    },
+    {
+      "slug": "athletics-ireland-carrick-on-shannon-a-c",
+      "url": "https://carrickac.blogspot.com/",
+      "status": "training-postcode-unconfirmed",
+      "reason": "October 3, 2026 training update uses Sports Complex and supersedes January timetable. Replaced Glen Carrick directory field with named Sports Complex; exact postcode left empty. No open trial promised: fully registered paid membership is required."
+    },
+    {
+      "slug": "athletics-ireland-carrigtwohill-a-c",
+      "url": "https://www.corkathletics.org/clubs/115-carrigtohill-athletic-club.html",
+      "status": "conflicting-training-times",
+      "reason": "AI says Tuesday 7pm, Cork Athletics Tuesday/Thursday 7.15pm. Same Community Centre venue corroborated, but current times unresolved. Senior-only explicit. Keep separate from Carraig Mhor, a distinct directory record at the same venue."
+    },
+    {
+      "slug": "athletics-ireland-carraig-mhor-a-c",
+      "url": "https://www.corkathletics.org/clubs/172-carraig-mhor-a-c.html",
+      "status": "social-added-biography-deferred",
+      "reason": "Opened county and national pages provide venue and official Facebook link but little substantive club history/programme. Added the source-linked public social page only. No founding date inferred from search snippets; masked email not recovered."
+    },
+    {
+      "slug": "athletics-ni-st-annes-ac",
+      "url": "https://athleticsni.org/Clubs/Find-A-Club",
+      "status": "biography-deferred",
+      "reason": "Current directory contact read, but no sufficiently detailed primary history/joining page located. Track booking snippets alone do not establish a full club profile or stable timetable."
+    },
+    {
+      "slug": "athletics-ni-west-belfast-coolers",
+      "url": "https://athleticsni.org/Clubs/Find-A-Club",
+      "status": "biography-deferred",
+      "reason": "Current directory email retained. Social mirrors and commercial kit pages are not primary evidence for training or origins; no extended biography added."
+    },
+    {
+      "slug": "athletics-ni-st-malachys-ac",
+      "url": "https://marypeterstrust.org/michael-mckillop-running/",
+      "status": "history-supported-current-venue-unconfirmed",
+      "reason": "2024 firsthand interview supports founder Paddy McKillop and Michael McKillop association. Do not repeat its erroneous implication of Tokyo gold. Current ANI secretary retained; no precise founding date, training venue or open school-site session established."
+    },
+    {
+      "slug": "athletics-ni-queens-university-ac",
+      "url": "https://home.q-su.org/clubssocieties/athletics/",
+      "status": "student-union-primary-page-used",
+      "reason": "Queen’s Sport directory returned 403; readable Students’ Union athletics page supports programme, email and club-only socials. Excluded generic SU address/telephone/socials and did not turn over-100-years claim into an exact foundation date."
     }
   ],
   "coverageReviewNotes": [

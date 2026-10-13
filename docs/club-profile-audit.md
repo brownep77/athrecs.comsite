@@ -6,10 +6,10 @@ The catalogue contains 1,737 clubs after resolving 11 duplicate aliases. This up
 
 - 1,681 canonical directory records were compared with current source content. The remaining 56 retain earlier check dates. Unavailable pages do not receive a new date.
 - Website screening attempted all 1,737 listings and retrieved usable pages from 743 club websites. The others had no standalone website, an unavailable page, a redirect requiring review or a blocked request.
-- Website research contributes contact pages or contact/social details for 669 listings. A retrieved website is not a claim that every field on that site was manually verified.
-- The merged catalogue has contact entries for 498 clubs: 485 publish an email address and 57 a telephone number. There are 843 contact entries in total, including named directory contacts with no direct email or telephone.
-- 912 clubs have social links, with 1,844 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
-- 153 clubs have extended, individually written profiles (8.8% of the catalogue). These contain 84 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
+- Website research contributes contact pages or contact/social details for 685 listings. A retrieved website is not a claim that every field on that site was manually verified.
+- The merged catalogue has contact entries for 508 clubs: 494 publish an email address and 62 a telephone number. There are 861 contact entries in total, including named directory contacts with no direct email or telephone.
+- 917 clubs have social links, with 1,857 distinct links after normalising duplicate URLs. Links are attributed to the publishing club website or governing-body directory; this does not establish the present ownership of a social account.
+- 173 clubs have extended, individually written profiles (10.0% of the catalogue). These contain 93 notable-member entries, each supported by the club's history, honours list or another opened primary source. Other clubs retain brief factual introductions; missing histories and alumni are not invented.
 
 The second editorial batch adds 30 profiles across England, Wales and Ireland, including City of Norwich AC, Norwich Road Runners, Norfolk Gazelles, Ryston Runners, Swansea Harriers, Bristol & West AC and Galway Triathlon Club. It adds 14 sourced notable-member entries and clarifies five training venues plus Ryston's correspondence address. That batch did not change contact or social coverage.
 
@@ -35,6 +35,16 @@ Dub Runners and Athlone remain without extended biographies after empty/unusable
 
 Founding dates distinguish current clubs from their predecessors. Woodford Green AC with Essex Ladies uses the 1998 merger date and explains Woodford Green's 1908 origins; City of Portsmouth uses its 1993 merger date. Norwich Road Runners' history gives a naming period around 1983–84, so no exact founding year is fabricated. Cambridge Harriers is explicitly identified as a South East London club, distinct from Cambridge's university clubs.
 
+The seventh editorial batch adds 20 profiles: eight South West England clubs, four Yorkshire clubs, two Belfast clubs and six Irish athletics clubs. These are Axe Valley, Bideford, Exeter, Erme Valley, Exmouth, Bude RATs, Cornwall, Newquay & Par, Beverley, Harrogate, Keighley & Craven, Fitmums and Friends, Queen's University, St Malachys, Carraig na bhFear, Carrick Aces, Carrick-on-Shannon, Carrick-on-Suir, Carrigaline and Carrigtwohill. It adds nine sourced notable-member entries and changes 19 contact/social records, including a contact-only social addition for Carraig Mhór. Net additions are 18 contact entries, nine clubs with email, five with telephone, 13 social links and five clubs with social coverage. Eight training or clubhouse venues are clarified.
+
+Beverley's town is corrected from York and its North Newbald postal address is removed as an exact club location; adult and junior meeting points vary. Bude gains its town name while an incomplete directory address is removed. Keighley gains its supported Carlton Keighley base. Carrick-on-Shannon's October 2026 Sports Complex meeting point replaces the directory's Glen Carrick address, with the unconfirmed postcode left empty. Bideford's rowing section and Fitmums' cycling activities are represented without changing registration or verification behaviour. Queen's Students' Union office address and generic contacts are not copied into its athletics club profile.
+
+The batch distinguishes Bideford's 1980 running-section origins from the older club, Keighley's 1998 merger from its 1984 and 1986 predecessors, Harrogate's 2000 merger, and Carrick-on-Suir's 2006 adult Road Runners committee from its earlier juvenile club. Cornwall's homepage and joining page disagree between 1982 and 1984; no exact founding year is set. England Athletics' 30 September 2026 feature supports Molly Caudery's club development and reports the track's lack of a competition licence while resurfacing funding is sought. No restoration is assumed.
+
+Fitmums' Jo Pavey entry is explicitly a patron association, not competitive membership. Keighley's Jimmy Ashworth entry belongs to its predecessor club. St Malachys' Michael McKillop association comes from his firsthand Mary Peters Trust interview; an erroneous Tokyo-gold implication in that source is not repeated. Carraig na bhFear's educational pages about famous athletes are not mistaken for an alumni list.
+
+Current exact training times remain unresolved for Carrigtwohill and Carraig na bhFear; source disagreements are explained. Exmouth's seasonal feed and Harrogate's mixed membership-year copy do not supply current prices or guaranteed weekly times. Beverley's conflicting secretary email variants and minimum junior ages are omitted in favour of clear membership/junior enquiry routes. St Annes, West Belfast Coolers and Carraig Mhór remain without extended biographies where substantive primary evidence is limited. Carraig Mhór and Carrigtwohill remain separate catalogue entries despite sharing a listed community-centre venue. Source gaps and the next Hampshire/Kent/Sussex, Wales and Irish triathlon queue are saved in the checkpoint. Club-only seed version is v7.
+
 The contact counts describe the complete merged catalogue, including retained earlier directory contacts. They are not counts of newly discovered contacts or independent verification of every retained field.
 
 ## Sources and editorial decisions
@@ -55,7 +65,7 @@ Notable-member text does not create athlete accounts, link unclaimed identities,
 
 - `src/data/club-enrichment-a.ts` and `-b.ts`: directory fields and actual source comparison dates.
 - `src/data/club-website-contacts.ts`: accepted public contact/social discoveries and per-field provenance.
-- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-f.ts`: manually reviewed prose, sources and explicit corrections.
+- `src/data/club-profiles.ts` and `club-profiles-b.ts` through `club-profiles-g.ts`: manually reviewed prose, sources and explicit corrections.
 - `docs/club-profile-checkpoint.json`: completed batch slugs, source gaps and next candidates. Check the live branch and profile map before resuming; the queue is not evidence that a club has been researched.
 - `scripts/audit-club-websites.mjs /absolute/scratch/output.json`: resumable read-only screening into a review queue. It never writes the catalogue.
 
