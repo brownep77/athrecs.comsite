@@ -45,7 +45,7 @@ assert.match(privateProfileRoute, /enabled: Boolean\(user\)/);
 assert.match(privateProfileRoute, /Private profile/);
 assert.match(privateProfileRoute, /<ProfileRecordHighlights/);
 assert.match(profileHighlights, /<PersonalBestStrip\s+results=\{results\}/);
-assert.match(profileHighlights, /Personal bests/);
+assert.match(profileHighlights, /PBs/);
 assert.match(privateProfileResults, /Remove from profile/);
 assert.match(privateProfileResults, /Removed from my profile/);
 assert.match(privateProfileRoute, /Only you and authorised ATHRECS staff can view this profile/);

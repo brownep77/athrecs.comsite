@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
     meta: siteGraphMeta({
       title: "ATHRECS | Your sporting life, in one profile",
       description:
-        "Find athletes, preserve your results and personal bests, browse upcoming fixtures, and compare marathon, half-marathon and ultra race guides on AthRecs.",
+        "Find athletes, preserve your results and PBs, browse upcoming fixtures, and compare marathon, half-marathon and ultra race guides on AthRecs.",
       url: SITE_URL,
     }),
     links: [{ rel: "canonical", href: SITE_URL }],
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
 const profileSections = [
   {
     icon: Medal,
-    title: "Results & personal bests",
+    title: "Results & PBs",
     detail: "Your performances, with their sources",
   },
   { icon: TrendingUp, title: "Progress over time", detail: "Follow your results across seasons" },
@@ -76,7 +76,7 @@ function AthleteHomePage() {
               <span className="text-accent">in one profile.</span>
             </h1>
             <p className="mt-4 max-w-lg text-sm leading-6 text-muted sm:text-base">
-              Every athlete has a story. Bring your results, personal bests and progress together,
+              Every athlete has a story. Bring your results, PBs and progress together,
               across the sports you love.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">

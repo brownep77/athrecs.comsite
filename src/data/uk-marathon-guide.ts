@@ -168,7 +168,7 @@ export const UK_MARATHONS: readonly UkMarathonGuideEntry[] = [
     surface: "Almost entirely road",
     character: "Flat club-runner favourite",
     description:
-      "An established marathon with a flat course, often chosen by club runners working towards a personal best.",
+      "An established marathon with a flat course, often chosen by club runners working towards a PB.",
     consideration: "Review the current time limit and race conditions before entering.",
     officialUrl: "https://www.abingdonmarathon.org.uk/",
   },

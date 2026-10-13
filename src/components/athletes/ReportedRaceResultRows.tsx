@@ -60,7 +60,7 @@ export function ReportedRaceResultRows({
         {bestIds.has(record.id) ? (
           <span
             className="ml-2 text-xs font-semibold text-accent"
-            aria-label="Personal best, not verified by chip time"
+            aria-label="PB, not verified by chip time"
           >
             PB*
           </span>

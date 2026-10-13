@@ -113,7 +113,7 @@ export const RACES: readonly RoadHalfMarathon[] = [
     timeZone: "Pacific/Auckland",
     officialUrl: "https://www.christchurchmarathon.co.nz/21km-half-marathon",
     description:
-      "Christchurch’s half marathon pairs a flat city course with landmarks around Hagley Park and the Avon River. It is an appealing setting for a steady effort or a personal-best attempt. Check the final route before race day: even a flat course benefits from knowing where you are going.",
+      "Christchurch’s half marathon pairs a flat city course with landmarks around Hagley Park and the Avon River. It is an appealing setting for a steady effort or a PB attempt. Check the final route before race day: even a flat course benefits from knowing where you are going.",
     course: {
       summary:
         "A flat road half marathon starting on Park Terrace and finishing in Hagley Park. Use the latest approved map; the organiser’s page currently contains differing lap descriptions.",

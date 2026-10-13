@@ -311,7 +311,7 @@ export function buildProfileAchievements(results: AchievementResult[], today = n
   if (improvements.length)
     add(
       "personal-improvement",
-      "Personal best improved",
+      "PB improved",
       "A faster result after an earlier performance in the same sport, distance, surface and timing category.",
       [...new Map(improvements.map((r) => [r.resultId, r])).values()],
     );

@@ -1004,7 +1004,7 @@ export const britishMarathonCareers = [
     "slug": "mara-yamauchi",
     "name": "Mara Yamauchi",
     "gender": "F",
-    "bio": "Mara Yamauchi competed at the Beijing 2008 and London 2012 Olympics and retired from elite racing in 2013. Her career highlights include sixth in the Beijing marathon, victory at Osaka in 2008 and second at London in 2009 in a personal best of 2:23:12. She also won Commonwealth 10,000m bronze in 2006. A former diplomat, she now works as a coach and speaker.",
+    "bio": "Mara Yamauchi competed at the Beijing 2008 and London 2012 Olympics and retired from elite racing in 2013. Her career highlights include sixth in the Beijing marathon, victory at Osaka in 2008 and second at London in 2009 in a PB of 2:23:12. She also won Commonwealth 10,000m bronze in 2006. A former diplomat, she now works as a coach and speaker.",
     "sources": [
       {
         "label": "Mara Yamauchi official biography",
@@ -1070,7 +1070,7 @@ export const britishMarathonCareers = [
       }
     ],
     "biography": [
-      "Mara Yamauchi competed at the Beijing 2008 and London 2012 Olympics and retired from elite racing in 2013. Her career highlights include sixth in the Beijing marathon, victory at Osaka in 2008 and second at London in 2009 in a personal best of 2:23:12. She also won Commonwealth 10,000m bronze in 2006. A former diplomat, she now works as a coach and speaker."
+      "Mara Yamauchi competed at the Beijing 2008 and London 2012 Olympics and retired from elite racing in 2013. Her career highlights include sixth in the Beijing marathon, victory at Osaka in 2008 and second at London in 2009 in a PB of 2:23:12. She also won Commonwealth 10,000m bronze in 2006. A former diplomat, she now works as a coach and speaker."
     ],
     "biographySources": [
       {
@@ -1091,7 +1091,7 @@ export const britishMarathonCareers = [
     "name": "Charlotte Purdue",
     "gender": "F",
     "dob": "1991-06-10",
-    "bio": "Charlotte Purdue is a British marathon runner whose personal best is 2:22:17 from Berlin in 2023. Her 2:23:26 London performance in 2021 was an earlier best. She has finished in the top ten at London, Berlin and Boston. Selected for Paris 2024, she withdrew before the Olympic marathon. Her 2024 selection listed Aldershot, Farnham & District and coach Nic Bideau.",
+    "bio": "Charlotte Purdue is a British marathon runner whose PB is 2:22:17 from Berlin in 2023. Her 2:23:26 London performance in 2021 was an earlier best. She has finished in the top ten at London, Berlin and Boston. Selected for Paris 2024, she withdrew before the Olympic marathon. Her 2024 selection listed Aldershot, Farnham & District and coach Nic Bideau.",
     "sources": [
       {
         "label": "London Marathon elite biographies",
@@ -1120,7 +1120,7 @@ export const britishMarathonCareers = [
         "title": "Berlin Marathon",
         "date": "24 September 2023",
         "outcomes": [
-          "9th · 2:22:17; organiser-listed personal best"
+          "9th · 2:22:17; organiser-listed PB"
         ],
         "sources": [
           {
@@ -1147,7 +1147,7 @@ export const britishMarathonCareers = [
       }
     ],
     "biography": [
-      "Charlotte Purdue is a British marathon runner whose personal best is 2:22:17 from Berlin in 2023. Her 2:23:26 London performance in 2021 was an earlier best. She has finished in the top ten at London, Berlin and Boston. Selected for Paris 2024, she withdrew before the Olympic marathon. Her 2024 selection listed Aldershot, Farnham & District and coach Nic Bideau."
+      "Charlotte Purdue is a British marathon runner whose PB is 2:22:17 from Berlin in 2023. Her 2:23:26 London performance in 2021 was an earlier best. She has finished in the top ten at London, Berlin and Boston. Selected for Paris 2024, she withdrew before the Olympic marathon. Her 2024 selection listed Aldershot, Farnham & District and coach Nic Bideau."
     ],
     "biographySources": [
       {

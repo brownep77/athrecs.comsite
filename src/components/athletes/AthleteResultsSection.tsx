@@ -248,7 +248,7 @@ export function AthleteResultsSection({
         {results.some((result) => result.conflicting) ? (
           <p className="rounded-lg border border-amber-300 bg-amber-50 p-3 text-sm text-amber-950">
             Some sources report different details for the same event. Those entries remain visible
-            and are excluded from personal bests until checked.
+            and are excluded from PBs until checked.
           </p>
         ) : null}
         {results.length > 0 && filtered.length === 0 ? (

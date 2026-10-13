@@ -83,7 +83,7 @@ export function AthleteCareerHighlights({
         <div className="space-y-3 border-t border-border pt-4">
           <h3 className="font-display font-semibold">Reported major race results</h3>
           <p className="text-xs text-muted">
-            These results remain outside verified achievements and personal-best calculations.
+            These results remain outside verified achievements and PB calculations.
           </p>
           <div className="space-y-3">
             {career.reportedHighlights.map((race) => (

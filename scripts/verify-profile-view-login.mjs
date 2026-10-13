@@ -496,7 +496,7 @@ try {
     assert($.text().includes("Showing 5 of 11 recorded performances"));
     assert.equal($("#results-history .result-evidence a[href^='https://example.test']").length, 0);
     assert.equal(
-      $("#results-history [aria-label='Personal best']").length,
+      $("#results-history [aria-label='PB']").length,
       0,
       "A preview must not calculate a PB from five rows",
     );
@@ -578,7 +578,7 @@ try {
   );
   assert.equal(confirmed("#results-history .result-evidence[open]").length, 0);
   assert.equal(
-    confirmed("#results-history tr[data-history-result] [aria-label='Personal best']").length,
+    confirmed("#results-history tr[data-history-result] [aria-label='PB']").length,
     0,
   );
   if (process.env.ATHRECS_BROWSER_MODULE) {

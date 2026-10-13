@@ -153,7 +153,7 @@ try {
     const photo = page.getByRole("img", { name: /Mo Farah, wearing/ });
     assert.equal(await photo.evaluate((image) => image.complete && image.naturalWidth > 0), true);
     await page.getByText("12:53.11", { exact: true }).waitFor();
-    const personalBests = page.getByRole("region", { name: "Personal bests", exact: true });
+    const personalBests = page.getByRole("region", { name: "PBs", exact: true });
     await personalBests.getByText("59:32", { exact: true }).waitFor();
     assert.equal(await personalBests.getByText("59:07", { exact: true }).count(), 0);
     await personalBests.getByText("27:44", { exact: true }).waitFor();
@@ -170,7 +170,7 @@ try {
       await assistedRow.getByText("Assisted course · excluded from PBs", { exact: true }).count(),
       0,
     );
-    assert.equal(await assistedRow.getByLabel("Personal best", { exact: true }).count(), 0);
+    assert.equal(await assistedRow.getByLabel("PB", { exact: true }).count(), 0);
     await page.getByLabel("Year", { exact: true }).selectOption("");
     assert.equal(await page.getByText("Show all 52 results", { exact: true }).count(), 0);
     assert.equal(await page.locator("#results-history table").count(), 1);

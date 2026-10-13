@@ -55,7 +55,7 @@ export function AccountRaces({
       <ProfileRecordHighlights results={visible} />
     ) : (
       <p className="rounded-xl border border-border bg-surface p-5 text-muted">
-        Add your race results to see your personal bests and achievements.
+        Add your race results to see your PBs and achievements.
       </p>
     );
 

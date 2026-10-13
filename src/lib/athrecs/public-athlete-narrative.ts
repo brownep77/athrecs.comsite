@@ -1,6 +1,7 @@
 import type { PublicAthletePreview } from "./public-athlete-preview";
 import { countryFlag } from "./country-flags.ts";
 import { recordedAwards, historyAwards } from "./competition-awards.ts";
+import { pbWording } from "./pb-wording.ts";
 
 const clean = (value: string) => value.replace(/\s+/g, " ").trim();
 const accepted = new Set(["source_verified", "verified_by_administrator"]);
@@ -14,7 +15,9 @@ export function publicNationality(value: string | null | undefined): string | nu
 /** Use only the public DTO: never reach back into a member's full result history. */
 export function publicAthleteNarrative(profile: PublicAthletePreview): string[] {
   if (!profile.biography.length) return [];
-  const paragraphs = profile.biography.map(clean).filter(Boolean);
+  const paragraphs = profile.biography
+    .map((paragraph) => pbWording(clean(paragraph)))
+    .filter(Boolean);
   const original = paragraphs.join(" ");
   const nationality = publicNationality(profile.nationality);
   if (

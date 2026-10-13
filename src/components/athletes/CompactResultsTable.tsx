@@ -203,7 +203,7 @@ export function CompactResultsTable({
                   {!isDisqualified(result) && bestIds.has(result.resultId) ? (
                     <span
                       className="ml-2 rounded bg-accent-soft px-1.5 py-0.5 text-xs font-semibold text-accent"
-                      aria-label="Personal best"
+                      aria-label="PB"
                     >
                       PB
                     </span>

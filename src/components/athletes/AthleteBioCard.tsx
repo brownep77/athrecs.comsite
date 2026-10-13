@@ -1,3 +1,4 @@
+import { pbWording } from "@/lib/athrecs/pb-wording";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -123,7 +124,7 @@ export function AthleteBioCard() {
             </div>
           ) : (
             <p className="mt-4 max-w-4xl whitespace-pre-line text-sm leading-7 text-fg">
-              {data.displayBio}
+              {pbWording(data.displayBio)}
             </p>
           )}
 

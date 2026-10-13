@@ -27,7 +27,7 @@ export function getReportedRaceHistory(slug: string): ReportedRaceHistory | null
       title: "Unverified results",
       countLabel: "unverified entries",
       description:
-        "* Unverified: source-reported entries with unresolved details, explained alongside each account. Participation may be documented even when the official race name or result is unknown. These entries do not count towards verified finishes, personal bests or achievements.",
+        "* Unverified: source-reported entries with unresolved details, explained alongside each account. Participation may be documented even when the official race name or result is unknown. These entries do not count towards verified finishes, PBs or achievements.",
       records: harukiMurakamiUnverifiedRecords.map((record) => ({
         ...record,
         evidenceLabel: "* Unverified",
@@ -39,7 +39,7 @@ export function getReportedRaceHistory(slug: string): ReportedRaceHistory | null
       title: "Unverified results",
       countLabel: "unverified entries",
       description:
-        "Source-reported entries with unresolved details. Times and places below are as reported by UltraSignup; known differences are shown alongside them. These entries do not count towards verified finishes, personal bests or achievements.",
+        "Source-reported entries with unresolved details. Times and places below are as reported by UltraSignup; known differences are shown alongside them. These entries do not count towards verified finishes, PBs or achievements.",
       records: davidGogginsUnverifiedRecords as readonly ReportedRaceRecord[],
     };
   }
