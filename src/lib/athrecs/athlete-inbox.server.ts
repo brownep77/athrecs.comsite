@@ -35,6 +35,8 @@ export async function matchInboxSender(
   sql: Sql,
   sender: string,
 ): Promise<InboxTarget | "ambiguous" | null> {
+  // Staff notifications sent to our own mailbox are not incoming athlete replies.
+  if (sender === ATHLETE_INBOX) return null;
   const rows = await sql<InboxTarget>`
     with candidates as (
       select id as user_id,null::integer as athlete_id from "user"
