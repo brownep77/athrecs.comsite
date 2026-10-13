@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
 import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
@@ -59,7 +59,7 @@ file(
 file("style.css", `@import "${resolve("src/styles.css")}";\n@source "${resolve("src")}";`);
 file(
   "main.tsx",
-  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{ClubRegistration,MyClubRegistrations}from'/@fs/${resolve("src/components/clubs/ClubRegistration.tsx")}';import{Route as Directory}from'/@fs/${resolve("src/routes/clubs/index.tsx")}';import{Route as Review}from'/@fs/${resolve("src/routes/admin/club-registrations.tsx")}';import'./style.css';window.fixtureClubs=${JSON.stringify(clubs)};const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});let Component=location.pathname.includes('/admin')?Review.component:location.pathname==='/clubs'?Directory.component:location.pathname.endsWith('/account')?MyClubRegistrations:()=> <ClubRegistration club={window.fixtureClubs[0]} missing={false}/>;createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1000,margin:'auto',padding:20}}><p style={{fontSize:12,marginBottom:16}}>FICTIONAL TEST DATA · NO LIVE ACCOUNTS OR EMAILS</p><Component/></main></QueryClientProvider>);`,
+  `import React from 'react';import{createRoot}from'react-dom/client';import{QueryClient,QueryClientProvider}from'@tanstack/react-query';import{ClubRegistration,MyClubRegistrations}from'/@fs/${resolve("src/components/clubs/ClubRegistration.tsx")}';import{Route as Directory}from'/@fs/${resolve("src/routes/clubs/index.tsx")}';import{Route as Review}from'/@fs/${resolve("src/routes/admin/club-registrations.tsx")}';import'./style.css';window.fixtureClubs=${JSON.stringify(clubs)};const client=new QueryClient({defaultOptions:{queries:{retry:false},mutations:{retry:false}}});const Component=location.pathname.includes('/admin')?Review.component:location.pathname==='/clubs'?Directory.component:location.pathname.endsWith('/account')?MyClubRegistrations:()=> <ClubRegistration club={window.fixtureClubs[0]} missing={false}/>;createRoot(document.getElementById('root')).render(<QueryClientProvider client={client}><main style={{maxWidth:1000,margin:'auto',padding:20}}><p style={{fontSize:12,marginBottom:16}}>FICTIONAL TEST DATA · NO LIVE ACCOUNTS OR EMAILS</p><Component/></main></QueryClientProvider>);`,
 );
 const server = await createServer({
   configFile: false,
@@ -218,4 +218,5 @@ try {
 } finally {
   await browser.close();
   await server.close();
+  rmSync(root, { recursive: true, force: true });
 }
