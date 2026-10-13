@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { PGlite } from "@electric-sql/pglite";
+import { visibleBioResults } from "../src/lib/athrecs/profile-bio-results.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const migration = await readFile(
@@ -56,7 +57,22 @@ assert.match(profileRoute, /hiddenResults=\{hiddenResults\}/);
 assert.doesNotMatch(profileRoute, /function ResultCard/);
 
 assert.match(bioApi, /athlete_profile_hidden_results/);
-assert.match(bioApi, /not exists/i);
+assert.match(bioApi, /visibleBioResults\(/);
+const bioResult = (resultId, details = {}) => ({
+  resultId, editionId: resultId, eventName: `Fictional verifier ${resultId}`,
+  eventSlug: `fictional-verifier-${resultId}`, sport: "Running", surface: "Road",
+  country: "", eventDate: "2020-01-01", distanceCode: "5K", distanceKm: 5,
+  status: "finished", finishTimeSeconds: 1500, chipTimeSeconds: null,
+  gunTimeSeconds: 1500, overallPlace: null, category: null, sourceUrls: [], details,
+});
+assert.deepEqual(
+  visibleBioResults([
+    bioResult(101), bioResult(102), bioResult(-5),
+    bioResult(-6, { syntheticTest: true, verificationStatus: "source_verified" }),
+  ], [101, -5]).map((result) => result.resultId),
+  [102],
+  "Biographies must omit hidden canonical/source results and fictional performances",
+);
 
 assert.equal(
   packageJson.scripts["verify:athlete-profile-results"],
