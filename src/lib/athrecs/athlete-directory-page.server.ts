@@ -21,11 +21,7 @@ const publicCountrySql = `case when exists (select 1 from athlete_account_links 
   where l.athlete_id=a.id and l.status='active' and s.share_location=false) then '' else (${countrySql}) end`;
 const clubSql = `case when not exists (select 1 from athlete_account_links l join athlete_public_shares s on s.user_id=l.user_id
   where l.athlete_id=a.id and l.status='active' and s.share_club=false) then nullif(c.name,'Unattached') end`;
-const sourceSportSql = `case
-  when p->>'discipline' ~* '(^|[^[:alnum:]_])triathlon([^[:alnum:]_]|$)' then 'Triathlon'
-  when p->>'discipline' ~* '(^|[^[:alnum:]_])duathlon([^[:alnum:]_]|$)' then 'Duathlon'
-  when h.provider='DUV Ultra Marathon Statistics' or trim(p->>'discipline') ~* '^(marathon|half( marathon)?|[0-9]+([.][0-9]+)?[[:space:]]*k(m)?|[0-9]+([.][0-9]+)?[[:space:]]*(mi|mile|miles))$' then 'Running'
-  else 'Athletics' end`;
+const sourceSportSql = `athlete_source_sport_v2(h.provider,p->>'discipline',p->>'meeting')`;
 const visibleSourcePerformanceSql = `coalesce(p->>'profileExcluded','false')<>'true'
   and not exists (select 1 from athlete_profile_history_choices choice
     join athlete_account_links owner_link on owner_link.user_id=choice.user_id
@@ -76,7 +72,7 @@ export async function readAthleteDirectoryPage(
         union all
         (select h.athlete_id as id from athlete_source_histories h
           where h.published_at is not null
-            and athlete_history_sports(h.provider,h.performances) @> array[$1]::text[] limit $2)
+            and athlete_history_sports_v2(h.provider,h.performances) @> array[$1]::text[] limit $2)
       ) members limit $2`,
       [search.sport, probeLimit],
     );
@@ -104,7 +100,7 @@ export async function readAthleteDirectoryPage(
           where l.athlete_id=a.id and hidden.result_id=r.id)
     ) or exists (
       select 1 from athlete_source_histories h where h.athlete_id=a.id and h.published_at is not null
-        and athlete_history_sports(h.provider,h.performances) @> array[$7]::text[]
+        and athlete_history_sports_v2(h.provider,h.performances) @> array[$7]::text[]
         and ${sourcePermission}
         and exists (select 1 from jsonb_array_elements(h.performances) p
           where (${sourceSportSql})=$7 and ${visibleSourcePerformanceSql})
@@ -176,7 +172,7 @@ export async function readAthleteDirectoryPage(
     ), cards as (
       select a.id,a.slug,a.display_name,a.profile_roles,a.athlete_number,a.country,a.city,a.club,a.source_details,
         (coalesce(r.n,0)+coalesce(h.n,0))::int as result_count,
-        array(select distinct sport from unnest(coalesce(r.sports,array[]::text[])||coalesce(h.sports,array[]::text[])) sport order by sport) as sports
+        array(select distinct sport from unnest(coalesce(r.sports,array[]::text[])||coalesce(h.sports,array[]::text[])) sport where sport is not null order by sport) as sports
       from paged a left join records r on r.athlete_id=a.id left join histories h on h.athlete_id=a.id
     ) select coalesce((select jsonb_agg(cards order by lower(display_name),id) from cards),'[]'::jsonb) as athletes,
       case when (select count(*) from candidates)<($9::int+1)

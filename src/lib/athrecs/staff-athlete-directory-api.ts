@@ -79,7 +79,10 @@ async function loadDirectory(filters: z.infer<typeof filterSchema>, athleteNumbe
       coalesce(c.name,'') as club, a.profile_details as details, false as is_account,
       exists(select 1 from athlete_account_links l where l.athlete_id=a.id and l.status='active') as account_managed,
       (a.profile_visibility='public' or a.profile_type='Public figure') as public,
-      (coalesce(records.sports,array[]::text[]) || array(select distinct sport from athlete_upcoming_events where athlete_id=a.id)) as sports, '[]'::jsonb as coaches, records.count as results,
+      (coalesce(records.sports,array[]::text[]) || array(select distinct sport from athlete_upcoming_events where athlete_id=a.id)
+        || array(select distinct sport from athlete_source_histories h
+          cross join lateral unnest(athlete_history_sports_v2(h.provider,h.performances)) sport where h.athlete_id=a.id)) as sports,
+      '[]'::jsonb as coaches, records.count as results,
       coalesce(a.date_of_birth::text,'') as birthday, '' as email
     from selected_sources i join athletes a on a.id=i.athlete_id left join clubs c on c.id=a.club_id
     cross join lateral (select array_agg(distinct e.sport) as sports,count(*)::int as count from results r join editions ed on ed.id=r.edition_id join events e on e.id=ed.event_id where r.athlete_id=a.id) records

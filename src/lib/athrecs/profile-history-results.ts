@@ -1,51 +1,52 @@
 import type { ProfileResult } from "./profile-records";
 import type { SourceHistory, SourcePerformance } from "./source-performance-history";
 import { countryFlag } from "./country-flags.ts";
+import { sourceHistorySport } from "./source-history-sport.ts";
+import type { Sport } from "./types";
 
 export type HistoryResult = {
   key: string;
-  sport: "Running" | "Athletics" | "Triathlon" | "Duathlon";
+  sport: Sport | "Unclassified";
   performance: SourcePerformance;
 };
 
 /** Preserve an explicit source trail label instead of treating every distance as road. */
 export function isTrailHistoryResult(row: SourcePerformance): boolean {
-  return row.labels.some((label) => /^(?:trail|trail running)$/i.test(label.trim()));
+  return (
+    /\btrail\b/i.test(row.discipline) ||
+    row.labels.some((label) => /^(?:trail|trail running)$/i.test(label.trim()))
+  );
 }
 
 const crossCountryDiscipline = /\b(?:cross[ -]country|xc)\b/i;
 export function isCrossCountryHistoryResult(row: SourcePerformance): boolean {
   return (
     crossCountryDiscipline.test(row.discipline) ||
+    crossCountryDiscipline.test(row.meeting ?? "") ||
+    /^(?:Z|\d+(?:\.\d+)?[KM]?)XCL?$/i.test(row.discipline.trim()) ||
     row.labels.some((label) => /^(?:cross[ -]country|xc)$/i.test(label.trim()))
   );
 }
 
-function historySport(discipline: string, provider?: string): HistoryResult["sport"] {
-  if (provider === "DUV Ultra Marathon Statistics") return "Running";
-  // Explicit multisport labels take priority over distances within a race leg.
-  if (/\btriathlon\b/i.test(discipline)) return "Triathlon";
-  if (/\bduathlon\b/i.test(discipline)) return "Duathlon";
-  if (crossCountryDiscipline.test(discipline) || /\broad relay\b/i.test(discipline))
-    return "Running";
-  // World Athletics uses these unqualified names for track events.
-  if (/^(?:mile|2 miles)$/i.test(discipline.trim())) return "Athletics";
-  if (/^mile road$/i.test(discipline.trim())) return "Running";
-  return /^(?:marathon|half(?: marathon)?|\d+(?:\.\d+)?\s*(?:k(?:m)?|kilometres|kilometers)|\d+(?:\.\d+)?\s*(?:mi|mile|miles))(?: road)?$/i.test(
-    discipline.trim().replace(/\s*\(short course\)$/i, ""),
-  )
-    ? "Running"
-    : "Athletics";
+function historySport(
+  discipline: string,
+  provider?: string,
+  meeting?: string,
+): HistoryResult["sport"] {
+  return sourceHistorySport(discipline, provider, meeting) ?? "Unclassified";
 }
 
 /** Sport labels include visible legacy histories as well as additional marks. */
-export function sourceHistorySports(histories: readonly SourceHistory[]): HistoryResult["sport"][] {
+export function sourceHistorySports(histories: readonly SourceHistory[]): Sport[] {
   return [
     ...new Set(
       histories.flatMap((history) =>
         history.performances
           .filter((performance) => !performance.profileExcluded)
-          .map((performance) => historySport(performance.discipline, history.provider)),
+          .map((performance) =>
+            sourceHistorySport(performance.discipline, history.provider, performance.meeting),
+          )
+          .filter((sport): sport is Sport => sport !== null),
       ),
     ),
   ];
@@ -175,7 +176,7 @@ export function additionalHistoryResults(histories: readonly SourceHistory[]): H
         ? [
             {
               key: `${history.provider}:${history.externalId}:${index}`,
-              sport: historySport(performance.discipline, history.provider),
+              sport: historySport(performance.discipline, history.provider, performance.meeting),
               performance,
             },
           ]

@@ -136,8 +136,16 @@ try {
   assert.equal(runningPage.$("a[rel=prev]").attr("href"), "/athletes?sport=Running");
   assert.match(runningPage.response.headers.get("server-timing"), /athlete_directory/);
   assert.equal((await readAthleteDirectoryPage(sql, { sport: "Swimming" })).total, 0);
-  for (const sport of ["Triathlon", "Duathlon", "Athletics"]) {
-    const discipline = sport === "Athletics" ? "Long jump" : sport;
+  for (const [sport, discipline] of [
+    ["Triathlon", "Triathlon"],
+    ["Duathlon", "Duathlon"],
+    ["Athletics", "Long jump"],
+    ["Parkrun", "5 km parkrun"],
+    ["Running", "10KXC"],
+    ["Running", "10 Kilometres Road"],
+    ["Swimming", "Swimming"],
+    ["Cycling", "Cycling"],
+  ]) {
     await sql.query(
       `update athlete_source_histories set performances=jsonb_build_array(jsonb_build_object('discipline',$1::text))
       where external_id='search-example-1'`,
@@ -147,10 +155,33 @@ try {
     assert.equal(match.total, 1);
     assert.deepEqual(match.athletes[0].sports, [sport]);
   }
+  await sql.query(`update athlete_source_histories set performances='[{"discipline":"Senior"}]'::jsonb
+    where external_id='search-example-1'`);
+  const unclassified = await readAthleteDirectoryPage(sql, { q: "Search Example 01" });
+  assert.deepEqual(unclassified.athletes[0].sports, [], "An unknown category is not Athletics");
+  assert.equal(unclassified.athletes[0].result_count, 1, "Classification must preserve the result");
   await sql.query(
     `update athlete_source_histories set published_at=null where external_id='search-example-1'`,
   );
   assert.equal((await readAthleteDirectoryPage(sql, { sport: "Athletics" })).total, 0);
+  await sql.query(`update athlete_source_histories set performances='[{"discipline":"10KXC"}]'::jsonb
+    where external_id='search-example-1'`);
+  const { loadStaffDirectoryPage } = await server.ssrLoadModule(
+    "/src/lib/athrecs/staff-athlete-directory-page.server.ts",
+  );
+  const staffHistory = await loadStaffDirectoryPage(sql, {
+    q: "Search Example 01",
+    sport: "Running",
+    visibility: "",
+    page: 1,
+  });
+  assert.equal(staffHistory.total, 1, "Staff can classify unpublished source histories");
+  assert(staffHistory.sports.includes("Running"));
+  assert.equal(
+    (await readAthleteDirectoryPage(sql, { sport: "Running", q: "Search Example 01" })).total,
+    0,
+    "Using unpublished history in staff search must not publish it",
+  );
   const outOfRangeSport = await get("/athletes?sport=Running&page=999");
   assert.equal(outOfRangeSport.response.status, 301);
   assert.equal(outOfRangeSport.response.headers.get("location"), "/athletes?sport=Running&page=2");
