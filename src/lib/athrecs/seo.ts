@@ -201,7 +201,10 @@ export function sportsEventJsonLd(
     },
     sport: input.sport || "Athletics",
     organizer:
-      input.organiser?.trim() && !/^(unknown|tbc|n\/a)$/i.test(input.organiser.trim())
+      input.organiser?.trim() &&
+      !/^(unknown|tbc|n\/a|see official (?:site|website)|not recorded)$/i.test(
+        input.organiser.trim(),
+      )
         ? { "@type": "Organization", name: input.organiser.trim(), url: input.website || undefined }
         : undefined,
     offers: input.entryOptions?.flatMap((option) => {
