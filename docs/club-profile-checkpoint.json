@@ -1,86 +1,85 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch32",
+  "lastEditorialBatch": "2026-10-14-batch33",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch32",
+  "branch": "codex/club-profiles-batch33",
   "pullRequest": null,
-  "publication": "Batch32 adds 20 profiles and six historical founder/coaching associations:626/1,737 assembled biographies and266 notable entries. PR731 is confirmed live at606 profiles/260 notable entries. Batch32 awaits exact-head workflow and deployment confirmation; release evidence belongs in its PR body.",
+  "publication": "Batch33 adds 20 profiles and seven historical founder/athlete associations: 646/1,737 assembled biographies and 273 notable entries. PR737 is confirmed live at 626 profiles/266 notable entries. Batch33 awaits exact-head workflow and deployment confirmation; release evidence belongs in its PR body.",
   "completedProfileSlugs": [
-    "exeter-university-athletic-club",
-    "eye-community-runners",
-    "eynsham-road-runners",
-    "fairlands-valley-spartans",
-    "falmouth-running-club",
-    "far-runners-faringdon",
-    "fareham-running-club",
-    "farnham-common-joggers-and-wheelers-sports-club-jaws",
-    "farnham-town-running-club",
-    "farsley-flyers",
-    "faversham-running-club",
-    "felixstowe-rrc",
-    "finch-coasters",
-    "fit-2-run",
-    "fleckney-and-kibworth-athletics-club",
-    "folkestone-running-and-athletics-club",
-    "forest-of-dean-ac",
-    "frome-running-club",
-    "ful-on-tri-club",
-    "fulham-running-club"
+    "guernsey-ac",
+    "girls-that-jeff",
+    "goodgym-race-team",
+    "gnosall-globetrotters-running-club",
+    "garden-city-runners",
+    "gloucester-ac",
+    "gosforth-harriers-and-ac",
+    "grantham-running-club",
+    "goole-viking-striders",
+    "grange-farm-and-dunmow-runners",
+    "great-western-runners",
+    "gade-valley-harriers",
+    "garstang-running-club",
+    "glossopdale-harriers",
+    "grantham-ac",
+    "goyt-valley-striders",
+    "welsh-athletics-lliswerry-runners",
+    "gainsborough-and-morton-striders",
+    "halesowen-acc",
+    "hambleton-athletics-and-running-club-ltd"
   ],
   "cumulativeCounts": {
     "canonicalClubs": 1737,
-    "extendedProfiles": 626,
-    "notableMemberEntries": 266,
-    "clubsWithContacts": 689,
-    "contactEntries": 1198,
-    "clubsWithEmail": 669,
-    "clubsWithPhone": 103,
-    "clubsWithSocials": 1035,
-    "socialLinks": 2142,
-    "websiteContactRecords": 963
+    "extendedProfiles": 646,
+    "notableMemberEntries": 273,
+    "clubsWithContacts": 703,
+    "contactEntries": 1221,
+    "clubsWithEmail": 682,
+    "clubsWithPhone": 105,
+    "clubsWithSocials": 1039,
+    "socialLinks": 2153,
+    "websiteContactRecords": 971
   },
   "batchChanges": {
     "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 6,
+    "notableMemberEntriesAdded": 7,
     "contactOrSocialRecordsChanged": 20,
-    "newWebsiteContactRecords": 10,
+    "newWebsiteContactRecords": 8,
     "directoryRecordsRefreshed": 0,
-    "netContactEntries": 13,
-    "netSocialLinks": 14
+    "netContactEntries": 23,
+    "netSocialLinks": 11
   },
   "validationBeforeCommit": {
-    "status": "Official-source retrieval and contact/social provenance assertions passed, together with canonical catalogue/profile checks, club audit, targeted ESLint, TypeScript and application build. Actual rendered-page verification and exact-head remote desktop/mobile workflows are recorded in the PR body. Main1776147853ea2af32f1853c206324e836bb5507b incorporated before editing; unrelated homepage colour controls preserved. No access controls or publication gates bypassed."
+    "status": "Official-source retrieval and contact/social provenance assertions passed. Catalogue/profile checks, club audit, targeted ESLint, TypeScript and application build are checked before commit; exact rendered-page and remote desktop/mobile evidence belongs in the PR body. Main 02e6427686d62b657882f6e7aa5fd83357ad024b incorporated before editing; unrelated work preserved. No access controls or publication gates bypassed."
   },
   "nextCandidateSlugs": [
-    "gade-valley-harriers",
-    "gainsborough-and-morton-striders",
-    "garden-city-runners",
-    "garstang-running-club",
-    "gator-athletics-club",
-    "gipsy-hill-run-club",
-    "girls-that-jeff",
-    "glossopdale-harriers",
-    "gloucester-ac",
-    "gnosall-globetrotters-running-club",
-    "goodgym-race-team",
-    "goole-viking-striders",
-    "goole-youth-ac",
-    "gosforth-harriers-and-ac",
-    "goyt-valley-striders",
-    "grange-farm-and-dunmow-runners",
-    "grantham-ac",
-    "grantham-running-club",
-    "gravesend-road-runners",
     "great-bentley-running-club",
     "great-milton-athletics-club",
-    "great-western-runners",
     "greenwich-tritons-triathlon-club",
-    "guernsey-ac"
+    "guildford-and-godalming-ac",
+    "halmer-harriers",
+    "halstead-rrc",
+    "halton-and-frodsham-harriers",
+    "hamwic-harriers-running-club",
+    "hamworthy-harriers",
+    "handforth-wilmslow-alderley",
+    "handsworth-roadhogs",
+    "handy-cross-runners",
+    "harborough-ac",
+    "hardley-runners",
+    "harlow-ac",
+    "harlow-running-and-tri-club",
+    "harold-wood-running-club",
+    "harpenden-arrows",
+    "harrogate-tri-club",
+    "harrow-ac",
+    "hart-road-runners",
+    "hartlepool-athletics-club",
+    "hartlepool-burn-road-harriers"
   ],
   "resumeInstructions": [
-    "Read current main, PR731 and the batch32 PR, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Do not repeat completed clubs.",
-    "Batch32 includes main1776147853ea2af32f1853c206324e836bb5507b and its homepage appearance changes. Check remote heads and active work before editing; do not redeploy an older commit over newer production.",
+    "Read current main, PR737 and the batch33 PR, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Do not repeat completed clubs.",
+    "Batch33 includes main 02e6427686d62b657882f6e7aa5fd83357ad024b. Check remote heads and active work before editing; do not redeploy an older commit over newer production.",
     "Standing publication authority applies after exact-head dedicated Club profiles and wider quality gates pass. Verify matching AthRecs production and changed public pages before claiming new coverage live.",
     "Keep deployment/workflow evidence in PR descriptions to avoid checkpoint-only rebuild loops. No identities, result imports, verified status, privacy or outreach changes."
   ],
@@ -2260,6 +2259,78 @@
       "url": "https://www.fordyruns.com/",
       "status": "deferred",
       "reason": "Local canonical branches need branch-specific evidence; a shared parent homepage does not justify repeating a generic biography for each local group."
+    },
+    {
+      "slug": "gnosall-globetrotters-running-club",
+      "url": "https://gnosallglobetrotters.co.uk/about/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "History refers inconsistently to Covid in2019. No founding year inferred; worldwide membership is explicit."
+    },
+    {
+      "slug": "gloucester-ac",
+      "url": "https://www.gloucesterac.co.uk/contact/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Some general emails are masked in source text. Only clear youth enquiry email added; track-hire/operator contacts excluded."
+    },
+    {
+      "slug": "gosforth-harriers-and-ac",
+      "url": "https://gosforthharriers.com/contact",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Joining and contact pages differ on hyphenated email domains; use clear contact-page admin@gosforth-harriers.org. Junior capacity and exact fees vary; no guaranteed availability or fees copied."
+    },
+    {
+      "slug": "goyt-valley-striders",
+      "url": "https://goytvalleystriders.org.uk/runs/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official Bluesky https://bsky.app/profile/goytvalleystriders.bsky.social and Flickr https://www.flickr.com/people/134412575@N07/ verified but existing social platform type does not support them; preserve these source links here for a separate UI/schema enhancement."
+    },
+    {
+      "slug": "garstang-running-club",
+      "url": "https://www.garstangrc.co.uk/contact-us.html",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Contact form available; emails masked. No exact founding date or famous alumni established."
+    },
+    {
+      "slug": "welsh-athletics-lliswerry-runners",
+      "url": "https://run.vozot.co.uk/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "New club website returned403; use opened Welsh Athletics history/directory and current2026/27 membermojo service. The 2022 history is not evidence of present membership totals or current John Hill membership."
+    },
+    {
+      "slug": "halesowen-acc",
+      "url": "https://www.halesowen-athleticclub.co.uk/contacts-2-2/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "General enquiry text is clear but mailto has a trailing@; store displayed valid email. Some officer display labels and hrefs differ; prefer consistent membership email and public clubhouse telephone. History is in linked PDFs not read in this batch; no founding year/alumni invented."
+    },
+    {
+      "slug": "hambleton-athletics-and-running-club-ltd",
+      "url": "https://harc.uk/",
+      "status": "source-recovered",
+      "reason": "www host fails TLS hostname validation; non-www official host opens normally. No TLS protections bypassed."
+    },
+    {
+      "slug": "island-triathlon-club",
+      "url": "",
+      "status": "deferred",
+      "reason": "Revisit found503/expired hosting account; no current programme inferred."
+    },
+    {
+      "slug": "newry-triathlon-club",
+      "url": "",
+      "status": "deferred",
+      "reason": "Revisit returned502; no new biography without substantive primary pages."
+    },
+    {
+      "slug": "hi-elbow-triathlon-club",
+      "url": "",
+      "status": "deferred",
+      "reason": "Accessible page contains little beyond contact form and swim/bike/run; insufficient substance for full biography."
+    },
+    {
+      "slug": "narrows-triathlon-club",
+      "url": "",
+      "status": "deferred",
+      "reason": "Accessible pages retain2021 cancellation and2022 navigation; current training programme remains unconfirmed."
     }
   ],
   "coverageReviewNotes": [
@@ -2291,26 +2362,27 @@
     "Remaining non-English website candidates are eight Welsh school-district listings, requiring an entity-type review before describing them as joinable clubs. The next ordinary-club batch therefore rotates English regions and includes fell, university and sprint clubs.",
     "Batch30:20 English profiles rotating Yorkshire, the North East, Midlands, London and South West, spanning road/fell running, track/field, university sport, sprint coaching and triathlon.12 historical/founding/coaching associations,18 contact/social records changed(12 new). Websites recovered for DK and Chambers; addresses and postcodes corrected without renewing unrelated directory dates. Ordinary non-English candidates remain completed or source-blocked; eight Welsh school-district entities need an entity-type review. No athlete identity, result, privacy, verification, registration or metadata implementation changed.",
     "Batch31 rotates21 English clubs across East Anglia, the North West, North East, London, Surrey, Dorset, Midlands and Bristol: masters, women’s running, fell running, juniors and triathlon.8 historical associations;21 contact/social records changed,11 new;18 net contacts and20 net social links. Other national candidates remain completed/source-blocked or require school-district entity review. Existing directory comparison dates are not renewed.",
-    "Batch32:20 English regional profiles including university, women’s running, juniors, community groups and triathlon. Six historical founder/coach associations;20 contact/social records updated(10new),13 net contacts and14 net social links. Other nations remain completed/source-blocked or school-district entities requiring review; next queue includes Guernsey. Directory comparison dates unchanged."
+    "Batch32:20 English regional profiles including university, women’s running, juniors, community groups and triathlon. Six historical founder/coach associations;20 contact/social records updated(10new),13 net contacts and14 net social links. Other nations remain completed/source-blocked or school-district entities requiring review; next queue includes Guernsey. Directory comparison dates unchanged.",
+    "Batch33:20 profiles spanning Guernsey, Wales, nationwide GoodGym Race Team, two explicitly global clubs, and English regional running/athletics. Seven historical founder/athlete associations;20 contact/social records updated(8new),23 net contacts and11 net social links. Source dates retained for unchanged directory fields. More NI clubs revisited without padding thin/unavailable evidence."
   ],
-  "previousPullRequest": 731,
+  "previousPullRequest": 737,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 731,
-    "mergeCommit": "3ca8f42c9642591a73f35facae9182abad62d432",
+    "previousPullRequest": 737,
+    "mergeCommit": "a66da8db6fa3c065cfc369fd9b44cd0496d69fee",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
     "team": "athrecs-holding-page-set-up",
-    "status": "PR731 exact production deployment READY; all21 changed live pages passed full biography, contacts/socials, flag, registration and metadata checks on14October2026.",
-    "lastConfirmedLiveCommit": "3ca8f42c9642591a73f35facae9182abad62d432",
-    "lastConfirmedLiveDeployment": "dpl_EyEf6sqyyAyfPLcXH4BUAR9saspz",
-    "lastConfirmedLiveProfiles": 606,
-    "lastConfirmedLiveNotableEntries": 260,
-    "mainProfilesAtStart": 606,
-    "clubProfilesWorkflow": 38611655943,
-    "qualityGateWorkflow": 38611655646
+    "status": "PR737 exact production deployment READY; all20 changed live pages passed full biography, contacts/socials, flag, registration and metadata checks on14October2026.",
+    "lastConfirmedLiveCommit": "a66da8db6fa3c065cfc369fd9b44cd0496d69fee",
+    "lastConfirmedLiveDeployment": "dpl_GcJXPfwvMeSPVbUj36Xyme1yr3CJ",
+    "lastConfirmedLiveProfiles": 626,
+    "lastConfirmedLiveNotableEntries": 266,
+    "mainProfilesAtStart": 626,
+    "clubProfilesWorkflow": 38618739617,
+    "qualityGateWorkflow": 38618739706
   }
 }
