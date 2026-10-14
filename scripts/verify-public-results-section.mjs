@@ -226,7 +226,7 @@ try {
   // Exercise the real route loader and head contract, including empty-page handling.
   const route = loadTypeScript("src/routes/results/$editionId.tsx", {
     "react/jsx-runtime": {},
-    "@tanstack/react-router": { createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: () => new Error("redirect") },
+    "@tanstack/react-router": { createFileRoute: () => (options) => options, notFound: () => new Error("notFound"), redirect: (options) => Object.assign(new Error("redirect"), options) },
     "lucide-react": {}, "@/components/ui/badge": {}, "@/components/ui/button": {},
     "@/lib/athrecs/public-results-api": api,
     "@/lib/athrecs/public-results-search": search,
@@ -237,6 +237,21 @@ try {
     "@/lib/athrecs/result-credit": { resultCredit },
   }).Route;
   const params = { editionId: "synthetic-10k-2026-09-20-10k-10" };
+  // Bookmarked numeric URLs and older race names retain filters and pagination
+  // while redirecting directly to the same current public edition.
+  for (const oldSlug of ["10", "old-race-name-10"]) {
+    await assert.rejects(
+      route.loader({ params: { editionId: oldSlug }, deps: search.normalizeResultsSearch({ q: "Alex", page: 2 }) }),
+      (error) => {
+        assert.equal(error.statusCode, 301);
+        assert.equal(error.to, "/results/$editionId");
+        assert.deepEqual(error.params, params);
+        assert.deepEqual(error.search, { q: "Alex", page: 2 });
+        return true;
+      },
+    );
+  }
+  await assert.rejects(route.loader({ params: { editionId: "unpublished-race-11" }, deps: search.normalizeResultsSearch({}) }), /notFound/);
   const loaded = await route.loader({ params, deps: search.normalizeResultsSearch({ page: 2 }) });
   assert.equal(route.head({ loaderData: loaded, match: { search: { page: 2 } } }).links[0].href, head2.links[0].href);
   await assert.rejects(route.loader({ params, deps: search.normalizeResultsSearch({ page: 3 }) }), /notFound/);

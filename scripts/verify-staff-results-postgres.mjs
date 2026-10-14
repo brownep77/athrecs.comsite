@@ -44,7 +44,7 @@ let eventName = "Synthetic PostgreSQL 10K", photoText = "View Photos";
 const escape = text => String(text).replaceAll("&", "&amp;").replaceAll("<", "&lt;");
 const source = { fetchSource: async () => `<h2>${eventName}</h2><h3>10k</h3><p>Start: 20/09/2026 10:00</p><table><thead><tr>${headings.map(h => `<th>${h}</th>`).join("")}<th></th></tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${escape(c)}</td>`).join("")}<td><a>${escape(photoText)}</a></td></tr>`).join("")}</tbody></table>` };
 const service = loadTs("src/lib/staff-results-upload/service.server.ts", { "node:crypto": crypto, cheerio, "../db": db, "../site-scope": { IS_RUNRECS_SITE: false }, "../club-scanner/provider.server": source, "../../../scripts/lib/result-evidence-audit.mjs": audit, "./core": core, exceljs: require("exceljs") });
-const commit = loadTs("src/lib/staff-results-upload/commit.server.ts", { "node:crypto": crypto, "../db": db, "./core": core, "./service.server": service });
+const commit = loadTs("src/lib/staff-results-upload/commit.server.ts", { "node:crypto": crypto, "../db": db, "../athrecs/result-slug": loadTs("src/lib/athrecs/result-slug.ts"), "./core": core, "./service.server": service });
 const actor = { userId: "synthetic-postgres-staff", staffEmail: "synthetic-staff@example.test" };
 const input = () => ({ filename: "synthetic.csv", content: [headings, ...rows].map(r => r.join(",")).join("\n"), eventName, date: "2026-09-20", distance: "10K", distanceKm: 10, sourceUrl: "https://totalracetiming.co.uk/raceresults/1", timingBasis: "chip" });
 const decision = (index, athleteId) => ({ index, mode: athleteId ? "link" : "new", ...(athleteId ? { athleteId } : {}), identityNote: "Synthetic staff checked source identity evidence for this entry." });
