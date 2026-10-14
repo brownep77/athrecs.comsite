@@ -1,0 +1,511 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowLeft, Download, RefreshCw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { getCollectionOperations } from "@/lib/collection-stats/operations-api";
+import {
+  operationInput,
+  operationPageSize,
+  operationSections,
+  type OperationInput,
+  type OperationSection,
+} from "@/lib/collection-stats/operations";
+import { getVercelStats } from "@/lib/web-stats/api";
+import { statsCsv } from "@/lib/collection-stats/core";
+
+const number = (n: number) => n.toLocaleString("en-GB", { maximumFractionDigits: 1 });
+function displayCell(value: string | number | null | undefined, key: string): string {
+  if (value == null) return "—";
+  if (typeof value === "number") return number(value);
+  if (
+    ["oldest", "since", "checked", "status"].includes(key) &&
+    /^\d{4}-\d{2}-\d{2}[ T]/.test(value)
+  ) {
+    const date = new Date(value);
+    if (Number.isFinite(date.getTime()))
+      return date.toLocaleString("en-GB", {
+        timeZone: "Europe/London",
+        dateStyle: "medium",
+        timeStyle: "short",
+      });
+  }
+  return ["label", "status"].includes(key) ? value.replaceAll("_", " ") : value;
+}
+
+const workflows: Partial<Record<OperationSection, { label: string; href: string }[]>> = {
+  results: [{ label: "Collected results", href: "/admin/result-archive" }],
+  sources: [
+    { label: "Source register", href: "/admin/event-register" },
+    { label: "Import runs", href: "/admin/result-archive" },
+  ],
+  matching: [
+    { label: "Review claims", href: "/admin/result-claims" },
+    { label: "Match archive rows", href: "/admin/result-archive" },
+  ],
+  verification: [{ label: "Athlete review tools", href: "/admin/athlete-tools" }],
+  gaps: [
+    { label: "Athlete directory", href: "/admin/athlete-directory" },
+    { label: "Event register", href: "/admin/event-register" },
+  ],
+  duplicates: [{ label: "Race collector", href: "/admin/race-collector" }],
+  clubs: [
+    { label: "Club registrations", href: "/admin/club-registrations" },
+    { label: "Club scanner", href: "/admin/club-scanner" },
+  ],
+  backlog: [
+    { label: "Fixture review", href: "/admin/fixture-review" },
+    { label: "Club review", href: "/admin/club-registrations" },
+  ],
+  activity: [
+    { label: "Website traffic & Google", href: "/admin/collection-stats?section=website" },
+    { label: "Registered accounts", href: "/admin/athlete-accounts" },
+  ],
+};
+const control = "mt-1 block w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm";
+
+export function CollectionOperations() {
+  const [filters, setFilters] = useState<OperationInput>(() => operationInput.parse({}));
+  const [search, setSearch] = useState("");
+  const report = useQuery({
+    queryKey: ["collection-operations", filters],
+    queryFn: () => getCollectionOperations({ data: filters }),
+    staleTime: 60_000,
+    retry: false,
+  });
+  const trafficDays = filters.days === 30 ? 28 : filters.days;
+  const traffic = useQuery({
+    queryKey: ["operations-traffic", trafficDays],
+    queryFn: () => getVercelStats({ data: { days: trafficDays } }),
+    enabled: filters.section === "activity",
+    staleTime: 300_000,
+    retry: false,
+  });
+  const data = report.data;
+  function changeSection(section: OperationSection) {
+    setSearch("");
+    setFilters(
+      operationInput.parse({
+        section,
+        days: filters.days,
+        group: section === "sources" ? "inventory" : "sport",
+      }),
+    );
+  }
+  function resetDetail() {
+    setSearch("");
+    setFilters((f) => ({ ...f, mode: "summary", key: "", page: 0, q: "" }));
+  }
+  function download() {
+    if (!data) return;
+    const content = statsCsv([
+      data.columns.map((c) => c.label),
+      ...data.rows.map((r) => data.columns.map((c) => r[c.key] ?? null)),
+    ]);
+    const url = URL.createObjectURL(new Blob([content], { type: "text/csv;charset=utf-8" }));
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `athrecs-${filters.section}-${filters.mode}-page-${filters.page + 1}.csv`;
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
+  const groups =
+    filters.section === "results"
+      ? [
+          ["sport", "Sport"],
+          ["distance", "Distance"],
+          ["country", "Country"],
+          ["year", "Race year"],
+        ]
+      : filters.section === "sources"
+        ? [
+            ["inventory", "Known source pages"],
+            ["imports", "Import runs"],
+            ["datasets", "Result datasets"],
+          ]
+        : filters.section === "growth"
+          ? [
+              ["sport", "Record types"],
+              ["daily", "Daily trend"],
+            ]
+          : [];
+  return (
+    <section className="space-y-5" aria-label="Collection operations">
+      <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-4">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h2 className="font-display text-2xl font-semibold">Collection operations</h2>
+            <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600">
+              See where the catalogue is growing and where work is waiting. Open any table group to
+              inspect its records.
+            </p>
+          </div>
+          <Button
+            variant="secondary"
+            disabled={report.isFetching || (filters.section === "activity" && traffic.isFetching)}
+            onClick={() => {
+              void report.refetch();
+              if (filters.section === "activity") void traffic.refetch();
+            }}
+          >
+            <RefreshCw className="size-4" aria-hidden="true" />
+            Refresh report
+          </Button>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <label className="text-sm font-medium">
+            Operations report
+            <select
+              className={control}
+              aria-label="Operations report"
+              value={filters.section}
+              onChange={(e) => changeSection(e.target.value as OperationSection)}
+            >
+              {Object.entries(operationSections).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </label>
+          {groups.length > 0 ? (
+            <label className="text-sm font-medium">
+              Report breakdown
+              <select
+                className={control}
+                aria-label="Report breakdown"
+                value={filters.group}
+                onChange={(e) => {
+                  setSearch("");
+                  setFilters((f) => ({
+                    ...f,
+                    group: e.target.value as OperationInput["group"],
+                    page: 0,
+                    key: "",
+                    mode: "summary",
+                    q: "",
+                  }));
+                }}
+              >
+                {groups.map(([v, label]) => (
+                  <option key={v} value={v}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : null}
+          {["growth", "activity"].includes(filters.section) ? (
+            <label className="text-sm font-medium">
+              Reporting period
+              <select
+                className={control}
+                aria-label="Reporting period"
+                value={filters.days}
+                onChange={(e) =>
+                  setFilters((f) => ({
+                    ...f,
+                    days: Number(e.target.value) as OperationInput["days"],
+                    page: 0,
+                  }))
+                }
+              >
+                <option value={7}>Last 7 days, including today</option>
+                <option value={30}>Last 30 days, including today</option>
+                <option value={90}>Last 90 days, including today</option>
+              </select>
+            </label>
+          ) : null}
+        </div>
+        <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm" aria-label="Related staff tools">
+          {(workflows[filters.section] ?? []).map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="font-medium text-cyan-800 underline underline-offset-4"
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+      {filters.section === "activity" ? (
+        <div className="rounded-xl border bg-white p-5 space-y-2" aria-label="Website visits">
+          <h3 className="font-semibold">Website visits</h3>
+          {traffic.isError ? (
+            <p role="alert" className="text-sm text-red-800">
+              Visitor figures could not refresh. Any previously loaded figures are shown below.
+            </p>
+          ) : null}
+          {traffic.isPending ? (
+            <p role="status">Loading visitor report…</p>
+          ) : traffic.data?.status === "ready" ? (
+            <>
+              <p className="text-xl font-bold">
+                {number(traffic.data.report.visitors)} visitors ·{" "}
+                {number(traffic.data.report.pageviews)} page views
+              </p>
+              <p className="text-xs text-slate-600">
+                Vercel report:{" "}
+                {new Date(traffic.data.report.since).toLocaleString("en-GB", {
+                  timeZone: "Europe/London",
+                })}{" "}
+                to{" "}
+                {new Date(traffic.data.report.until).toLocaleString("en-GB", {
+                  timeZone: "Europe/London",
+                })}{" "}
+                (UK time). Visitors use a rolling {trafficDays}-day window including today; account
+                activity below uses {filters.days} UK calendar days.
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-slate-600">
+              {traffic.data
+                ? traffic.data.message
+                : "The visitor report is unavailable. This does not mean zero visits."}
+            </p>
+          )}
+          <a
+            className="text-sm text-cyan-800 underline"
+            href="/admin/collection-stats?section=website"
+          >
+            Open website reporting and connections
+          </a>
+          <p className="text-xs text-slate-600">
+            Visits and account actions are separate totals. A visitor-to-registration conversion
+            rate cannot be established from these records.
+          </p>
+        </div>
+      ) : null}
+      {report.isPending ? (
+        <p role="status" className="rounded-xl border bg-white p-5">
+          Loading operations report…
+        </p>
+      ) : null}
+      {report.isError ? (
+        <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-5 text-red-900">
+          <p>
+            This report could not be refreshed.{" "}
+            {data ? "The last successful snapshot is shown." : "Unavailable does not mean zero."}
+          </p>
+          <Button variant="secondary" className="mt-3" onClick={() => void report.refetch()}>
+            Retry operations report
+          </Button>
+        </div>
+      ) : null}
+      {data ? (
+        <>
+          {data.metrics.length > 0 ? (
+            <div
+              className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4"
+              aria-label="Operations totals"
+            >
+              {data.metrics.map((metric) => (
+                <div key={metric.label} className="rounded-xl border bg-white p-4">
+                  <p className="text-sm text-slate-600">{metric.label}</p>
+                  <p className="my-2 text-2xl font-bold">
+                    {metric.value == null ? "Not recorded" : number(metric.value)}
+                  </p>
+                  {metric.detail ? (
+                    <p className="text-xs leading-5 text-slate-600">{metric.detail}</p>
+                  ) : null}
+                  {metric.drill ? (
+                    <button
+                      className="mt-2 text-sm text-cyan-800 underline"
+                      onClick={() => {
+                        setSearch("");
+                        setFilters((f) => ({
+                          ...f,
+                          mode: "records",
+                          key: metric.drill!,
+                          page: 0,
+                          q: "",
+                        }));
+                      }}
+                    >
+                      View records
+                    </button>
+                  ) : metric.href ? (
+                    <a
+                      className="mt-2 inline-block text-sm text-cyan-800 underline"
+                      href={metric.href}
+                    >
+                      Open records
+                    </a>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          ) : null}
+          <div className="space-y-4 rounded-xl border border-slate-200 bg-white p-4 sm:p-5">
+            <div>
+              <h3 className="font-display text-xl font-semibold">
+                {data.title}
+                {filters.mode === "records" ? " — records" : ""}
+              </h3>
+              <p className="mt-1 text-sm leading-6 text-slate-600">{data.description}</p>
+            </div>
+            {filters.mode === "records" ? (
+              <div className="flex flex-wrap items-center gap-3">
+                <Button variant="secondary" onClick={resetDetail}>
+                  <ArrowLeft className="size-4" aria-hidden="true" />
+                  Back to report
+                </Button>
+                <p className="break-all text-sm text-slate-600">Selection: {filters.key}</p>
+              </div>
+            ) : null}
+            <div className="flex flex-wrap items-end justify-between gap-3">
+              <form
+                className="flex flex-wrap items-end gap-2"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setFilters((f) => ({ ...f, q: search, page: 0 }));
+                }}
+              >
+                <label className="text-sm font-medium">
+                  Search this report
+                  <input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    maxLength={120}
+                    className={control}
+                    type="search"
+                  />
+                </label>
+                <Button variant="secondary" type="submit">
+                  Search report
+                </Button>
+                {filters.q ? (
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    onClick={() => {
+                      setSearch("");
+                      setFilters((f) => ({ ...f, q: "", page: 0 }));
+                    }}
+                  >
+                    Clear search
+                  </Button>
+                ) : null}
+              </form>
+              <Button variant="secondary" disabled={!data.rows.length} onClick={download}>
+                <Download className="size-4" aria-hidden="true" />
+                CSV (this page)
+              </Button>
+            </div>
+            <p className="text-xs text-slate-500">
+              {number(data.total)} {filters.mode === "records" ? "records" : "rows"} ·{" "}
+              {data.total
+                ? `${number(filters.page * operationPageSize + 1)}–${number(Math.min((filters.page + 1) * operationPageSize, data.total))}`
+                : "0"}{" "}
+              shown · Snapshot{" "}
+              {new Date(data.generatedAt).toLocaleString("en-GB", { timeZone: "Europe/London" })}{" "}
+              (UK time)
+            </p>
+            <div
+              className="max-w-full overflow-x-auto rounded-lg border border-slate-200"
+              tabIndex={0}
+              role="region"
+              aria-label="Scrollable operations table"
+            >
+              <table className="w-full text-left text-sm" aria-label="Operations report table">
+                <thead className="bg-slate-100">
+                  <tr>
+                    {data.columns.map((c) => (
+                      <th
+                        key={c.key}
+                        scope="col"
+                        className={`px-3 py-3 ${c.numeric ? "text-right" : ""}`}
+                      >
+                        {c.label}
+                      </th>
+                    ))}
+                    <th scope="col" className="px-3 py-3">
+                      Review
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.rows.length ? (
+                    data.rows.map((row) => (
+                      <tr key={row.key} className="border-t odd:bg-white even:bg-slate-50">
+                        {data.columns.map((c) => (
+                          <td
+                            key={c.key}
+                            className={`px-3 py-3 ${c.numeric ? "text-right tabular-nums" : "min-w-28 max-w-sm break-words"}`}
+                          >
+                            {displayCell(row[c.key], c.key)}
+                          </td>
+                        ))}
+                        <td className="px-3 py-3">
+                          {row.drill ? (
+                            <button
+                              className="font-medium text-cyan-800 underline underline-offset-4 whitespace-nowrap"
+                              aria-label={`View records: ${row.label}`}
+                              onClick={() => {
+                                setSearch("");
+                                setFilters((f) => ({
+                                  ...f,
+                                  mode: "records",
+                                  key: row.drill!,
+                                  page: 0,
+                                  q: "",
+                                }));
+                              }}
+                            >
+                              View records
+                            </button>
+                          ) : row.href ? (
+                            <a
+                              className="font-medium text-cyan-800 underline underline-offset-4 whitespace-nowrap"
+                              href={row.href}
+                            >
+                              Open review
+                            </a>
+                          ) : (
+                            "—"
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={data.columns.length + 1} className="p-5 text-slate-600">
+                        No records match this report.
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+            {data.total > operationPageSize || filters.page > 0 ? (
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Button
+                  variant="secondary"
+                  disabled={filters.page === 0 || report.isFetching}
+                  onClick={() => setFilters((f) => ({ ...f, page: f.page - 1 }))}
+                >
+                  Previous page
+                </Button>
+                <span className="text-sm">Page {filters.page + 1}</span>
+                <Button
+                  variant="secondary"
+                  disabled={
+                    (filters.page + 1) * operationPageSize >= data.total || report.isFetching
+                  }
+                  onClick={() => setFilters((f) => ({ ...f, page: f.page + 1 }))}
+                >
+                  Next page
+                </Button>
+              </div>
+            ) : null}
+            <div className="space-y-2 border-t pt-3 text-xs leading-5 text-slate-600">
+              {data.notes.map((note) => (
+                <p key={note}>{note}</p>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : null}
+    </section>
+  );
+}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CollectionOperations } from "@/components/staff/CollectionOperations";
 import { WebsiteStats } from "@/components/staff/WebsiteStats";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
@@ -8,8 +9,15 @@ import { getCollectionStats } from "@/lib/collection-stats/api";
 import { defaultStatsFilters, statsCsv, type StatsFilters } from "@/lib/collection-stats/core";
 
 export const Route = createFileRoute("/admin/collection-stats")({
-  validateSearch: (search: Record<string, unknown>): { section: "collection" | "website" } => ({
-    section: search.section === "website" ? "website" : "collection",
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { section: "collection" | "website" | "operations" } => ({
+    section:
+      search.section === "website"
+        ? "website"
+        : search.section === "operations"
+          ? "operations"
+          : "collection",
   }),
   head: () => ({
     meta: [
@@ -134,9 +142,18 @@ function CollectionStatsPage() {
         >
           Website traffic & Google
         </Button>
+        <Button
+          variant={section === "operations" ? "default" : "secondary"}
+          aria-current={section === "operations" ? "page" : undefined}
+          onClick={() => void navigate({ search: { section: "operations" } })}
+        >
+          Collection operations
+        </Button>
       </nav>
       {section === "website" ? (
         <WebsiteStats />
+      ) : section === "operations" ? (
+        <CollectionOperations />
       ) : (
         <>
           {report.isPending ? (
