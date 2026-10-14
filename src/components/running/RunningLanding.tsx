@@ -180,6 +180,7 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
 
   return (
     <div className="space-y-8 pb-8">
+      {homepage ? tools : null}
       <header className="max-w-4xl">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">
           {homepage ? "AthRecs · Races, results and athletes" : "AthRecs · Running"}
@@ -234,7 +235,6 @@ export function RunningLanding({ homepage = false }: { homepage?: boolean }) {
         <>
           {distances}
           {marathons}
-          {tools}
           {halves}
         </>
       ) : (
