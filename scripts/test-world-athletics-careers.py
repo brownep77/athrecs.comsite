@@ -107,6 +107,24 @@ class ExistingResultTests(unittest.TestCase):
         self.assertTrue(reconciler.reconcile(self.candidate,[self.record])['conflicts'])
         self.assertNotIn('eventSlug',self.performance)
 
+    def test_fifteen_kilometre_overlap_keeps_one_event_and_restrictions(self):
+        self.performance['discipline']='15 Kilometres Road'
+        self.candidate['originalRows'][0]['discipline']='15 Kilometres Road'
+        self.record.update(distance_code='15K',event_slug='synthetic-15k')
+        review=reconciler.reconcile(self.candidate,[self.record])
+        self.assertFalse(review['conflicts'])
+        self.assertEqual(len(review['links']),1)
+        self.assertEqual(self.performance['eventSlug'],'synthetic-15k')
+        self.assertTrue(self.performance['profileExcluded'])
+        self.assertEqual(self.performance['verificationStatus'],'unverified')
+
+    def test_distance_conflict_blocks_even_when_ids_date_mark_and_place_match(self):
+        self.record['distance_code']='15K'
+        review=reconciler.reconcile(self.candidate,[self.record])
+        self.assertTrue(review['conflicts'])
+        self.assertFalse(review['links'])
+        self.assertNotIn('eventSlug',self.performance)
+
     def test_wrong_source_identity_cannot_link(self):
         self.record['result_details']['sourceRow']['sourceAthleteId']='124'
         self.assertFalse(reconciler.reconcile(self.candidate,[self.record])['links'])
