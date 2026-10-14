@@ -87,9 +87,9 @@ function ResultArchivePage() {
           </p>
           <h1 className="font-display text-3xl font-semibold text-fg">Collected results</h1>
           <p className="text-sm leading-6 text-muted">
-            Track scanned, uploaded and API-supplied results by sport, event and race edition.
-            Use the central archive below to search stored participants, retain whole race fields
-            and review source revisions before linking them to athlete profiles.
+            Track scanned, uploaded and API-supplied results by sport, event and race edition. Use
+            the central archive below to search stored participants, retain whole race fields and
+            review source revisions before linking them to athlete profiles.
           </p>
           <p className="text-sm leading-6 text-muted">
             Saved results are checked when existing athletes or new registrations open their
@@ -111,9 +111,12 @@ function ResultArchivePage() {
             Refresh
           </Button>
           <Button asChild>
-            <Link to="/admin/athlete-tools" search={{ section: "upload", athleteId: undefined }}>
+            <a
+              href="#import"
+              onClick={() => window.dispatchEvent(new Event("athrecs-open-import"))}
+            >
               <FileUp className="size-4" aria-hidden="true" /> Import results
-            </Link>
+            </a>
           </Button>
         </div>
       </header>
@@ -203,7 +206,8 @@ function ResultArchivePage() {
               Coverage by event edition
             </h2>
             <p className="mt-1 text-xs text-muted">
-              Event-level tracking only in this ledger. Source fields and participants are in the central archive above.
+              Event-level tracking only in this ledger. Source fields and participants are in the
+              central archive above.
             </p>
           </div>
           <Badge variant="outline">{formatNumber(data.editions.length)} shown</Badge>

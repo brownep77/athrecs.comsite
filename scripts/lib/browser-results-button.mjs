@@ -1,4 +1,4 @@
-/** Self-contained functions: embedded in a bookmark, with no remote code or network calls. */
+/** Self-contained functions: embedded in a bookmark, with no remote scripts; handoff is an explicit click. */
 export function collectBrowserResults(doc = document) {
   const win = doc.defaultView;
   const visible = (el) => Boolean(el.getClientRects().length) &&
@@ -130,7 +130,7 @@ export function showBrowserResults(collect) {
   const panel = document.createElement('section'); panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Save results for AthRecs'); root.append(panel);
   const close = make('button', 'Close'); close.className = 'close'; close.onclick = () => host.remove();
   make('h2', 'Save results for AthRecs');
-  make('p', 'This saves the rows loaded on this page. It does not collect other pages, verify an athlete or publish results.');
+  make('p', 'Send the rows loaded on this page to the AthRecs import screen. Check the sample before sending.');
   const source = make('p', capture.page.title + ' · ' + capture.page.url); source.style.overflowWrap = 'anywhere';
   const summary = make('p'); summary.className = 'note'; summary.setAttribute('role', 'status');
   if (!capture.tables.length) {
@@ -148,11 +148,40 @@ export function showBrowserResults(collect) {
       table.headers.forEach(h => make('th', h, head));
       const body = make('tbody', '', grid);
       table.rows.slice(0, 5).forEach(values => { const row = make('tr', '', body); values.forEach(v => make('td', v, row)); });
-      make('p', 'Preview: first five captured rows. Original column values are kept in the downloaded file.', preview);
+      make('p', 'Preview: first five captured rows. Original column values are kept with the import.', preview);
     };
     select.onchange = render; render();
     const actions = make('div'); actions.className = 'actions';
-    const save = make('button', 'Save this page', actions); save.className = 'primary';
+    const selectedJson = () => {
+      const { tables, ...metadata } = capture;
+      const json = JSON.stringify({ ...metadata, table: tables[Number(select.value)] });
+      if (new Blob([json]).size > 25 * 1024 * 1024) throw new Error('Capture exceeds 25 MB. Choose a smaller results page.');
+      return json;
+    };
+    const send = make('button', 'Send to AthRecs', actions); send.className = 'primary';
+    send.onclick = () => {
+      let json;
+      try { json = selectedJson(); } catch (error) { summary.textContent = error.message; return; }
+      const origin = 'https://update.athrecs.com';
+      const token = crypto.randomUUID();
+      const target = window.open(origin + '/tools/import-results.html#' + token, '_blank');
+      if (!target) { summary.textContent = 'Allow the AthRecs tab to open, or use Download a file instead.'; return; }
+      send.disabled = true;
+      summary.textContent = 'Opening AthRecs. Keep this page open while the selected rows transfer…';
+      const finish = (message) => {
+        window.removeEventListener('message', receive); clearTimeout(timeout);
+        send.disabled = false; summary.textContent = message;
+      };
+      const receive = (event) => {
+        if (event.source !== target || event.origin !== origin || event.data?.token !== token) return;
+        if (event.data.type === 'athrecs-import-ready') target.postMessage({ type: 'athrecs-import-capture', token, json }, origin);
+        if (event.data.type === 'athrecs-import-received') finish('Rows received. In the AthRecs tab, click Continue to import. Review the race and preview, then save.');
+        if (event.data.type === 'athrecs-import-error') finish('AthRecs could not keep this capture. See the message in its tab, or use Download a file instead.');
+      };
+      window.addEventListener('message', receive);
+      const timeout = setTimeout(() => finish('The transfer could not be confirmed. Check the AthRecs tab. If it has no capture, use Download a file instead.'), 35000);
+    };
+    const save = make('button', 'Download a file instead', actions);
     save.onclick = () => {
       const { tables, ...metadata } = capture;
       const selected = { ...metadata, table: tables[Number(select.value)] };
@@ -167,7 +196,7 @@ export function showBrowserResults(collect) {
     const link = make('a', 'Open AthRecs collected results', actions); link.href = 'https://update.athrecs.com/admin/result-archive'; link.target = '_blank'; link.rel = 'noopener noreferrer';
   }
   if (capture.warnings.length) make('p', capture.warnings.join(' '));
-  make('p', 'Use results you are authorised to retain. The file contains only the selected table, its visible row links and capture details.');
+  make('p', 'Use results you are authorised to retain. Only the selected table, its visible row links and capture details are sent. Other pages are not collected. Athlete identity and publication still need review.');
   document.documentElement.append(host); close.focus();
 }
 
