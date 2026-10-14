@@ -48,7 +48,7 @@ try {
   assert.equal(await page.getByRole('dialog').count(), 1);
   assert.match(await page.getByRole('status').innerText(), /2 loaded rows/);
   const downloadPromise = page.waitForEvent('download');
-  await page.getByRole('button', { name: 'Save this page', exact: true }).click();
+  await page.getByRole('button', { name: 'Download a file instead', exact: true }).click();
   const download = await downloadPromise;
   assert.match(download.suggestedFilename(), /\.athrecs\.json$/);
   const json = readFileSync(await download.path(), 'utf8');
@@ -94,7 +94,7 @@ try {
   await page.setContent('<table><tr><th>Name</th><th>Bib</th></tr><tr><td colspan="2">Unsupported</td></tr></table>');
   await page.evaluate(decodeURIComponent(browserResultsBookmark().slice('javascript:'.length)));
   assert.match(await page.getByRole('status').innerText(), /No supported results table/);
-  assert.equal(await page.getByRole('button', { name: 'Save this page' }).count(), 0);
+  assert.equal(await page.getByRole('button', { name: 'Download a file instead' }).count(), 0);
 
   // London/Mika list structure, reproduced with synthetic values only.
   const londonHeadings = ['Place <small>(Overall)</small>', 'Place <small>(Gender)</small>', 'Place <small>(Category)</small>', 'Name', 'Club', 'Runner Number', 'Category', 'Event', 'Half', 'Finish'];
@@ -102,6 +102,7 @@ try {
   const londonValues = ['215', '1', '1', '<a href="?idp=synthetic-london">Example, Synthetic (IRL)</a>', 'Test club', '501', '18-39', 'Mass', '01:30:00', '03:04:05'];
   const fields = (values, body = false) => values.map((value, i) => `<div class="list-field ${londonTypes[i]}">${body && i > 3 ? `<div class="list-label">${londonHeadings[i]}</div>` : ''}${value}</div>`).join('');
   const londonFixture = `<style>.list-label{display:none}</style><ul class="list-group list-group-multicolumn"><li class="list-group-header"><div class="list-field-wrap">${fields(londonHeadings)}</div></li><li class="list-group-item"><div class="list-field-wrap">${fields(londonValues, true)}<div class="list-field type-favorite"><a href="?favorite_add=synthetic">Favourite</a></div></div></li></ul>`;
+  await page.goto('https://results.tcslondonmarathon.com/2026/?pid=list');
   await page.setContent(londonFixture);
   const london = await page.evaluate('(' + collectBrowserResults.toString() + ')(document)');
   assert.equal(london.tables.length, 1);
@@ -110,9 +111,26 @@ try {
   assert.equal(london.tables[0].rowLinks[0].length, 1);
   await page.evaluate(decodeURIComponent(browserResultsBookmark().slice('javascript:'.length)));
   const londonDownload = page.waitForEvent('download');
-  await page.getByRole('button', { name: 'Save this page', exact: true }).click();
+  await page.getByRole('button', { name: 'Download a file instead', exact: true }).click();
   const londonParsed = parseBrowserCapture(readFileSync(await (await londonDownload).path(), 'utf8'));
   assert.equal(londonParsed.table.rows[0][9], '03:04:05');
+  const londonMapped = core.mapArchiveRows(londonParsed.table, londonParsed.mapping)[0];
+  assert.equal(londonMapped.name, 'Synthetic Example');
+  assert.equal(londonMapped.country, 'IRL');
+  assert.equal(londonMapped.original.Name, 'Example, Synthetic (IRL)');
+  assert.equal(londonMapped.sourceKey, 'bib:501');
+  assert.equal(londonMapped.finishSeconds, 11045);
+  assert.equal(londonMapped.chipSeconds, null);
+  assert.equal(londonMapped.gunSeconds, null);
+  assert.equal(londonMapped.overallPlace, 215);
+  assert.equal(londonMapped.genderPlace, 1);
+  assert.equal(londonMapped.categoryPlace, 1);
+  // A different provider's comma names/tags are not interpreted as London's format.
+  const unknown = JSON.parse(json); unknown.page.url = 'https://unknown.example.test/results';
+  unknown.table.headers = ['Name', 'Runner Number', 'Finish'];
+  unknown.table.rows = [['Example, Synthetic (IRL)', '501', '03:04:05']]; unknown.table.rowLinks = [[]];
+  const unknownParsed = parseBrowserCapture(JSON.stringify(unknown));
+  assert.equal(core.mapArchiveRows(unknownParsed.table, unknownParsed.mapping)[0].name, 'Example, Synthetic (IRL)');
   assert.ok(await page.getByRole('button', { name: 'Close', exact: true }).isVisible());
   await page.getByRole('button', { name: 'Close', exact: true }).click();
   // Visible inline labels must never contaminate cell values.

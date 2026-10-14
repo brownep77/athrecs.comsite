@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import {
+  pendingBrowserCaptures,
+  discardBrowserCapture,
+  type PendingBrowserCapture,
+} from "@/lib/results-archive/browser-handoff";
 import { ArchiveRaceUpload } from "./ArchiveRaceUpload";
 import {
   findArchiveAthletes,
@@ -21,6 +26,39 @@ function time(seconds: number | null) {
 export function ResultsArchiveWorkspace() {
   const client = useQueryClient();
   const [tab, setTab] = useState("source");
+  const [pending, setPending] = useState<PendingBrowserCapture[]>([]);
+  const [incoming, setIncoming] = useState<PendingBrowserCapture | null>(null);
+  const [handoffError, setHandoffError] = useState("");
+  useEffect(() => {
+    let active = true;
+    const openImport = () => {
+      if (location.hash === "#import") setTab("upload");
+    };
+    openImport();
+    const openRequestedImport = () => setTab("upload");
+    window.addEventListener("hashchange", openImport);
+    window.addEventListener("athrecs-open-import", openRequestedImport);
+    void pendingBrowserCaptures()
+      .then((captures) => {
+        if (!active) return;
+        setPending(captures);
+        if (captures.length) {
+          setIncoming(captures[0]);
+          setTab("upload");
+        }
+      })
+      .catch(() => {
+        if (active && location.hash === "#import")
+          setHandoffError(
+            "Could not open browser storage. You can still upload a downloaded results file below.",
+          );
+      });
+    return () => {
+      active = false;
+      window.removeEventListener("hashchange", openImport);
+      window.removeEventListener("athrecs-open-import", openRequestedImport);
+    };
+  }, []);
   const [q, setQ] = useState("");
   const [query, setQuery] = useState("");
   const [datasetId, setDatasetId] = useState("");
@@ -101,6 +139,48 @@ export function ResultsArchiveWorkspace() {
         Source observations can refer to canonical results, so these totals are not additive. Stored
         does not mean source-verified or publicly displayed.
       </p>
+      {handoffError && <p role="alert">{handoffError}</p>}
+      {pending.length > 0 && (
+        <div className="space-y-2 rounded-lg border border-cyan-200 bg-cyan-50 p-3 text-cyan-950">
+          <p className="font-medium">
+            Received from your browser · {pending.length} pending{" "}
+            {pending.length === 1 ? "page" : "pages"}
+          </p>
+          <p className="text-xs">
+            These pages have not been saved to the results database. Pending browser copies expire
+            after 24 hours.
+          </p>
+          {pending.map((capture) => (
+            <div key={capture.id} className="flex flex-wrap items-center gap-2">
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setIncoming(capture);
+                  setTab("upload");
+                }}
+              >
+                Review {capture.rows.toLocaleString()} received rows
+              </Button>
+              <span className="min-w-0 flex-1 break-words text-xs">{capture.title}</span>
+              <button
+                className="text-xs underline"
+                onClick={() => {
+                  void discardBrowserCapture(capture.id)
+                    .then(() => {
+                      setPending((all) => all.filter((c) => c.id !== capture.id));
+                      if (incoming?.id === capture.id) setIncoming(null);
+                    })
+                    .catch(() =>
+                      setHandoffError("Could not discard this browser copy. Try again."),
+                    );
+                }}
+              >
+                Discard pending page
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
       <div className="flex flex-wrap gap-2" aria-label="Archive sections">
         {[
           ["source", "Source results"],
@@ -123,7 +203,22 @@ export function ResultsArchiveWorkspace() {
         ))}
       </div>
       {tab === "upload" ? (
-        <ArchiveRaceUpload onSaved={refresh} />
+        <ArchiveRaceUpload
+          key={incoming?.id ?? "file"}
+          onSaved={refresh}
+          initialCapture={pending.some((c) => c.id === incoming?.id) ? incoming : null}
+          savedRaces={overview.data?.datasets ?? []}
+          onCaptureConsumed={(id) => setPending((all) => all.filter((c) => c.id !== id))}
+          onReview={(id) => {
+            setDatasetId(id);
+            setState("unmatched");
+            setQuery("");
+            setQ("");
+            setPages([0]);
+            setSelected(null);
+            setTab("source");
+          }}
+        />
       ) : tab === "requests" ? (
         <div className="space-y-3">
           <p className="text-xs text-muted">

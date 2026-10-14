@@ -13,6 +13,7 @@ import { createServer } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { chromium } from "playwright";
+import { browserResultsBookmark } from "./lib/browser-results-button.mjs";
 const require = createRequire(import.meta.url),
   ts = require("typescript");
 function load(path, deps = {}) {
@@ -187,26 +188,22 @@ try {
   await page.goto("http://127.0.0.1:8139");
   await page.getByRole("heading", { name: "Central results archive" }).waitFor();
   await page.getByRole("button", { name: "Import a race", exact: true }).click();
+  await page.getByLabel("Results CSV, TSV or browser capture").setInputFiles({
+    name: "synthetic.csv", mimeType: "text/csv",
+    buffer: Buffer.from("Bib,Name,Chip Time,Gun Time\n1,Morgan Browser Synthetic,00:35:00.25,00:35:02.25\n2,Casey Browser Synthetic,00:36:00.15,00:36:02.15"),
+  });
+  await page.getByRole("button", { name: "Continue to race" }).click();
   await page.getByLabel("Find race edition").fill("Synthetic Browser");
-  await page
-    .getByLabel("Race, date and distance")
-    .selectOption({ label: "Synthetic Browser Race · 2026-10-01 · 10K" });
+  await page.getByLabel("Race, date and distance").selectOption({ label: "Synthetic Browser Race · 2026-10-01 · 10K" });
   await page.getByLabel("Timing/results provider").fill("Synthetic Timing");
   await page.getByLabel("Official results URL").fill("https://example.test/browser-results");
   await page.getByLabel("Provider’s race ID").fill("synthetic-browser");
   await page.getByLabel("Expected entries").fill("2");
-  await page
-    .getByLabel("Authority to retain")
-    .fill("Synthetic file authority for disposable tests only.");
-  await page.getByLabel("Results CSV, TSV or browser capture").setInputFiles({
-    name: "synthetic.csv",
-    mimeType: "text/csv",
-    buffer: Buffer.from(
-      "Bib,Name,Chip Time,Gun Time\n1,Morgan Browser Synthetic,00:35:00.25,00:35:02.25\n2,Casey Browser Synthetic,00:36:00.15,00:36:02.15",
-    ),
-  });
-  await page.getByRole("button", { name: "Check all rows" }).click();
+  await page.getByLabel("Authority to retain").fill("Synthetic file authority for disposable tests only.");
+  await page.getByRole("button", { name: "Continue to preview" }).click();
   await page.getByText("Checked 2 rows.", { exact: false }).waitFor();
+  await page.getByRole("button", { name: "Back", exact: true }).click();
+  await page.getByRole("button", { name: "Back", exact: true }).click();
   // Exercise the real browser-file handler before the existing API/database flow.
   await page.getByLabel("Results CSV, TSV or browser capture").setInputFiles({
     name: "synthetic.athrecs.json",
@@ -224,17 +221,69 @@ try {
     })),
   });
   await page.getByText("Loaded 2 captured rows", { exact: false }).waitFor();
+  await page.getByRole("button", { name: "Continue to race" }).click();
+  assert.equal(await page.getByLabel("Race, date and distance").inputValue(), "0", "Replacing a file needs a new edition confirmation");
+  await page.getByLabel("Race, date and distance").selectOption({ label: "Synthetic Browser Race · 2026-10-01 · 10K" });
   assert.equal(await page.getByLabel("Expected entries").inputValue(), "");
   assert.equal(await page.getByLabel("Official results URL").inputValue(), "https://example.test/browser-results");
   assert.equal((await sql`select count(*)::int n from result_archive_entries`)[0].n, 0);
-  await page.getByRole("button", { name: "Check all rows" }).click();
+  await page.getByLabel("Timing/results provider").fill("Synthetic Timing");
+  await page.getByLabel("Provider’s race ID").fill("synthetic-browser");
+  await page.getByRole("button", { name: "Continue to preview" }).click();
   await page.getByText("Checked 2 rows.", { exact: false }).waitFor();
-  await page.getByRole("button", { name: "Save private race field" }).click();
+  assert(await page.getByRole("button", { name: "Save results for athlete matching" }).isDisabled());
+  await page.getByLabel("I checked the race").check();
+  await page.screenshot({ path: resolve(root, "guided-preview.png"), fullPage: true });
+  await page.getByRole("button", { name: "Save results for athlete matching" }).click();
   await page.getByText("Synthetic lost response", { exact: false }).waitFor();
   await page.getByRole("button", { name: "Resume remaining batches" }).click();
   await page.getByText("Saved: 2 new source rows", { exact: false }).waitFor();
   assert.equal((await sql`select count(*)::int n from result_archive_entries`)[0].n, 2);
   assert.equal((await sql`select count(*)::int n from result_archive_batches`)[0].n, 1);
+  await page.getByRole("heading", { name: "Saved — ready for athlete matching" }).waitFor();
+  await page.getByRole("button", { name: "Review athlete matches" }).click();
+  await page.getByRole("cell", { name: /Morgan Browser Synthetic/ }).waitFor();
+  // Actual cross-origin bookmark handoff, durable pending capture, wizard and repeat import.
+  // Every HTTPS request is intercepted and served locally; no external site is contacted.
+  const handoff = await browser.newContext();
+  await handoff.route("**/*", async (route) => {
+    const url = new URL(route.request().url());
+    if (url.origin === "https://example.test") return route.fulfill({ contentType: "text/html", body: '<title>Synthetic Browser Race</title><table><tr><th>Bib</th><th>Name</th><th>Chip Time</th><th>Gun Time</th></tr><tr><td>1</td><td>Morgan Browser Synthetic</td><td>00:35:00.25</td><td>00:35:02.25</td></tr><tr><td>2</td><td>Casey Browser Synthetic</td><td>00:36:00.15</td><td>00:36:02.15</td></tr></table>' });
+    if (url.origin !== "https://update.athrecs.com") return route.abort();
+    if (["/tools/import-results.html", "/tools/import-results.js"].includes(url.pathname)) return route.fulfill({ contentType: url.pathname.endsWith(".js") ? "text/javascript" : "text/html", body: readFileSync(`public${url.pathname}`) });
+    const response = await route.fetch({ url: `http://127.0.0.1:8139${url.pathname}${url.search}` });
+    return route.fulfill({ response });
+  });
+  const sourcePage = await handoff.newPage();
+  await sourcePage.goto("https://example.test/browser-results");
+  await sourcePage.evaluate(decodeURIComponent(browserResultsBookmark().slice("javascript:".length)));
+  const popupPromise = sourcePage.waitForEvent("popup");
+  await sourcePage.getByRole("button", { name: "Send to AthRecs", exact: true }).click();
+  const receiver = await popupPromise;
+  receiver.on("pageerror", (e) => errors.push(e.message));
+  await receiver.getByRole("link", { name: "Continue to import" }).waitFor();
+  await sourcePage.getByText("Rows received.", { exact: false }).waitFor();
+  assert.equal((await sql`select count(*)::int n from result_archive_batches`)[0].n, 1, "Handoff has not written the database");
+  await receiver.getByRole("link", { name: "Continue to import" }).click();
+  await receiver.getByText("Loaded 2 captured rows", { exact: false }).waitFor();
+  // A reload (including a sign-in round trip) must not lose the pending page.
+  await receiver.reload();
+  await receiver.getByText("Loaded 2 captured rows", { exact: false }).waitFor();
+  await receiver.getByRole("button", { name: "Continue to race" }).click();
+  const [savedDataset] = await sql`select id from result_archive_datasets limit 1`;
+  await receiver.getByLabel("Add to a saved race").selectOption(savedDataset.id);
+  assert.equal(await receiver.getByLabel("Provider’s race ID").inputValue(), "synthetic-browser");
+  assert.equal(await receiver.getByLabel("Timing/results provider").inputValue(), "Synthetic Timing");
+  assert.equal(await receiver.getByLabel("Expected entries").inputValue(), "");
+  await receiver.getByRole("button", { name: "Continue to preview" }).click();
+  await receiver.getByLabel("I checked the race").check();
+  await receiver.getByRole("button", { name: "Save results for athlete matching" }).click();
+  await receiver.getByText("Saved: 0 new source rows, 0 changed, 2 unchanged.", { exact: false }).waitFor();
+  assert.equal((await sql`select count(*)::int n from result_archive_entries`)[0].n, 2);
+  assert.equal((await sql`select count(*)::int n from results`)[0].n, 0);
+  await receiver.reload();
+  assert.equal(await receiver.getByRole("button", { name: "Review 2 received rows" }).count(), 0, "Saved pending capture was removed");
+  await handoff.close();
   const memberPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
   await memberPage.goto("http://127.0.0.1:8139?member");
   await memberPage.getByRole("checkbox", { name: /Select saved result/ }).check();

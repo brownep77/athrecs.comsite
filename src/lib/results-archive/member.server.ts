@@ -63,7 +63,7 @@ export async function memberArchiveMatches(
     select a.id,a.revision,a.payload->>'name' as name,e.name as event,ed.event_date::text as date,ed.distance_code as distance,
       a.payload->>'status' as status,(a.payload->>'finishSeconds')::double precision as seconds,
       a.payload->>'club' as club,a.payload->>'bib' as bib,a.payload->>'category' as category,
-      a.payload->>'nationality' as nationality,a.payload->>'age' as age,
+      coalesce(nullif(a.payload->>'country',''),a.payload->>'nationality') as nationality,a.payload->>'age' as age,
       exists(select 1 from result_archive_match_requests r where r.entry_id=a.id and r.user_id=${userId}) as requested
     from result_archive_entries a join result_archive_datasets d on d.id=a.dataset_id join editions ed on ed.id=d.edition_id join events e on e.id=ed.event_id
     cross join lateral (select trim(regexp_replace(regexp_replace(translate(lower(normalize(a.payload->>'name', NFKD)), ${"’'`"}, ''), ${"[\u0300-\u036f]"}, '', 'g'), '[^[:alnum:]]+', ' ', 'g')) as name) search_name

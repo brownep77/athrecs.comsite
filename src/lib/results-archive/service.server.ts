@@ -31,6 +31,17 @@ export const fingerprint = (value: unknown) =>
   createHash("sha256")
     .update(JSON.stringify(stable(value)))
     .digest("hex");
+function rowFingerprint(row: ArchiveRow) {
+  // Reopening the same page is not a changed performance. Keep the first capture's
+  // provenance until a source value or row link changes and warrants a revision.
+  const original = Object.fromEntries(
+    Object.entries(row.original).filter(
+      ([key]) =>
+        !["_capture_checked_at", "_capture_source_url", "_capture_page_title"].includes(key),
+    ),
+  );
+  return fingerprint({ ...row, original });
+}
 function actorRequired(actor: ArchiveActor) {
   if (!actor.userId || !actor.staffEmail) throw new Error("Authenticated staff required");
 }
@@ -96,7 +107,7 @@ export async function ingestArchiveBatch(
     const payload = input.rows.map((row) => ({
       source_key: row.sourceKey,
       payload: row,
-      payload_hash: fingerprint(row),
+      payload_hash: rowFingerprint(row),
     }));
     const changed = await tx<{
       id: number;
@@ -153,6 +164,8 @@ export async function archiveOverview(sql: Sql) {
     editionId: number;
     provider: string;
     sourceUrl: string;
+    sourceRaceKey: string;
+    permissionNote: string;
     eventName: string;
     date: string;
     distance: string;
@@ -160,12 +173,12 @@ export async function archiveOverview(sql: Sql) {
     stored: number;
     linked: number;
   }>`
-    select d.id,d.edition_id as "editionId",d.provider,d.source_url as "sourceUrl",e.name as "eventName",ed.event_date::text as date,ed.distance_code as distance,d.expected_rows as expected,
+    select d.id,d.edition_id as "editionId",d.provider,d.source_url as "sourceUrl",d.source_race_key as "sourceRaceKey",d.permission_note as "permissionNote",e.name as "eventName",ed.event_date::text as date,ed.distance_code as distance,d.expected_rows as expected,
       count(a.id)::bigint as stored,count(a.id) filter(where a.canonical_result_id is not null)::bigint as linked
     from (select * from result_archive_datasets order by updated_at desc,id limit 50) d
     join editions ed on ed.id=d.edition_id join events e on e.id=ed.event_id
     left join result_archive_entries a on a.dataset_id=d.id
-    group by d.id,d.edition_id,d.provider,d.source_url,e.name,ed.event_date,ed.distance_code,d.expected_rows,d.updated_at order by d.updated_at desc,d.id`;
+    group by d.id,d.edition_id,d.provider,d.source_url,d.source_race_key,d.permission_note,e.name,ed.event_date,ed.distance_code,d.expected_rows,d.updated_at order by d.updated_at desc,d.id`;
   return { summary, datasets };
 }
 
