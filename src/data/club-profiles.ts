@@ -1,3 +1,4 @@
+import { regionalTrainingContinuationProfiles } from "./club-profiles-ah.ts";
 import type { ClubSeed } from "./types";
 import { additionalClubProfiles } from "./club-profiles-b.ts";
 import { furtherClubProfiles } from "./club-profiles-c.ts";
@@ -60,6 +61,7 @@ export type ClubProfile = {
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
   ...islandAndCommunityContinuationProfiles,
+  ...regionalTrainingContinuationProfiles,
   ...communityAndUniversityProfiles,
   ...fenlandAndFellProfiles,
   ...trainingAndCommunityProfiles,
@@ -814,4 +816,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v33";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v34";

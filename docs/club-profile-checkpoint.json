@@ -1,94 +1,93 @@
 {
   "schemaVersion": 1,
-  "lastEditorialBatch": "2026-10-14-batch33",
+  "lastEditorialBatch": "2026-10-14-batch34",
   "reviewedAt": "2026-10-14",
   "repository": "brownep77/athrecs.comsite",
-  "branch": "codex/club-profiles-batch33",
+  "branch": "codex/club-profiles-batch34",
   "pullRequest": null,
-  "publication": "Batch33 adds 20 profiles and seven historical founder/athlete associations: 646/1,737 assembled biographies and 273 notable entries. PR737 is confirmed live at 626 profiles/266 notable entries. Batch33 awaits exact-head workflow and deployment confirmation; release evidence belongs in its PR body.",
+  "publication": "Batch34 adds 19 profiles and seven historical connections:665/1,737 assembled biographies and280 notable entries. PR742 is confirmed live at646 profiles/273 notable entries. Batch34 awaits exact-head workflow and deployment confirmation; release evidence belongs in its PR body.",
   "completedProfileSlugs": [
-    "guernsey-ac",
-    "girls-that-jeff",
-    "goodgym-race-team",
-    "gnosall-globetrotters-running-club",
-    "garden-city-runners",
-    "gloucester-ac",
-    "gosforth-harriers-and-ac",
-    "grantham-running-club",
-    "goole-viking-striders",
-    "grange-farm-and-dunmow-runners",
-    "great-western-runners",
-    "gade-valley-harriers",
-    "garstang-running-club",
-    "glossopdale-harriers",
-    "grantham-ac",
-    "goyt-valley-striders",
-    "welsh-athletics-lliswerry-runners",
-    "gainsborough-and-morton-striders",
-    "halesowen-acc",
-    "hambleton-athletics-and-running-club-ltd"
-  ],
-  "cumulativeCounts": {
-    "canonicalClubs": 1737,
-    "extendedProfiles": 646,
-    "notableMemberEntries": 273,
-    "clubsWithContacts": 703,
-    "contactEntries": 1221,
-    "clubsWithEmail": 682,
-    "clubsWithPhone": 105,
-    "clubsWithSocials": 1039,
-    "socialLinks": 2153,
-    "websiteContactRecords": 971
-  },
-  "batchChanges": {
-    "extendedProfilesAdded": 20,
-    "notableMemberEntriesAdded": 7,
-    "contactOrSocialRecordsChanged": 20,
-    "newWebsiteContactRecords": 8,
-    "directoryRecordsRefreshed": 0,
-    "netContactEntries": 23,
-    "netSocialLinks": 11
-  },
-  "validationBeforeCommit": {
-    "status": "Official-source retrieval and contact/social provenance assertions passed. Catalogue/profile checks, club audit, targeted ESLint, TypeScript and application build are checked before commit; exact rendered-page and remote desktop/mobile evidence belongs in the PR body. Main 02e6427686d62b657882f6e7aa5fd83357ad024b incorporated before editing; unrelated work preserved. No access controls or publication gates bypassed."
-  },
-  "nextCandidateSlugs": [
-    "great-bentley-running-club",
-    "great-milton-athletics-club",
-    "greenwich-tritons-triathlon-club",
     "guildford-and-godalming-ac",
-    "halmer-harriers",
-    "halstead-rrc",
-    "halton-and-frodsham-harriers",
-    "hamwic-harriers-running-club",
-    "hamworthy-harriers",
     "handforth-wilmslow-alderley",
-    "handsworth-roadhogs",
-    "handy-cross-runners",
-    "harborough-ac",
+    "hamwic-harriers-running-club",
     "hardley-runners",
-    "harlow-ac",
+    "harborough-ac",
+    "handy-cross-runners",
     "harlow-running-and-tri-club",
+    "harlow-ac",
     "harold-wood-running-club",
     "harpenden-arrows",
     "harrogate-tri-club",
     "harrow-ac",
     "hart-road-runners",
     "hartlepool-athletics-club",
-    "hartlepool-burn-road-harriers"
+    "great-bentley-running-club",
+    "halstead-rrc",
+    "mallow-tc",
+    "ennis-triathlon-club",
+    "belfast-ormeau-runners"
+  ],
+  "cumulativeCounts": {
+    "canonicalClubs": 1737,
+    "extendedProfiles": 665,
+    "notableMemberEntries": 280,
+    "clubsWithContacts": 711,
+    "contactEntries": 1235,
+    "clubsWithEmail": 690,
+    "clubsWithPhone": 106,
+    "clubsWithSocials": 1042,
+    "socialLinks": 2166,
+    "websiteContactRecords": 980
+  },
+  "batchChanges": {
+    "extendedProfilesAdded": 19,
+    "notableMemberEntriesAdded": 7,
+    "contactOrSocialRecordsChanged": 17,
+    "newWebsiteContactRecords": 9,
+    "directoryRecordsRefreshed": 0,
+    "netContactEntries": 14,
+    "netSocialLinks": 13
+  },
+  "validationBeforeCommit": {
+    "status": "Official primary pages opened and contact/social provenance assertions passed. Catalogue/profile checks, club audit, targeted ESLint, TypeScript and application build passed. Exact rendered-page and remote desktop/mobile evidence belongs in the PR body. Main b7dd262c086e182ccac460a5b58c821da2c76b2e incorporated before editing. No access controls, publication gates, athlete identities or privacy safeguards changed."
+  },
+  "nextCandidateSlugs": [
+    "abbey-runners",
+    "abingdon-ac",
+    "ackworth-road-runners",
+    "adderbury-running-club",
+    "airecentre-pacers-rc",
+    "alchester-running-club",
+    "aldridge-rc",
+    "ampthill-and-flitwick-flyers-rc",
+    "arena-80-ac",
+    "arunners-rc",
+    "baildon-runners",
+    "balsall-common-run-club",
+    "banbury-harriers-ac",
+    "barking-road-runners",
+    "barnes-runners",
+    "barnsley-athletic-club",
+    "barnsley-harriers",
+    "barrow-runners",
+    "welsh-athletics-white-rock-runners",
+    "welsh-athletics-refail-runners",
+    "tinahely-tri-club",
+    "tullamore-triathlon-club",
+    "athletics-ni-dub-running-club"
   ],
   "resumeInstructions": [
-    "Read current main, PR737 and the batch33 PR, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Do not repeat completed clubs.",
-    "Batch33 includes main 02e6427686d62b657882f6e7aa5fd83357ad024b. Check remote heads and active work before editing; do not redeploy an older commit over newer production.",
+    "Read current main, PR742 and the batch34 PR, AGENTS.md, audit, checkpoint and actual catalogue before selecting another batch. Do not repeat completed clubs. Hastings Runners already has a batch13 profile and was excluded from this batch.",
+    "Batch34 includes main b7dd262c086e182ccac460a5b58c821da2c76b2e. Fetch main explicitly: the origin fetch refspec only tracks the original audit branch, so FETCH_HEAD or an explicit main refspec is required; origin/main may be stale. Check active work and remote heads before editing.",
     "Standing publication authority applies after exact-head dedicated Club profiles and wider quality gates pass. Verify matching AthRecs production and changed public pages before claiming new coverage live.",
-    "Keep deployment/workflow evidence in PR descriptions to avoid checkpoint-only rebuild loops. No identities, result imports, verified status, privacy or outreach changes."
+    "Keep deployment/workflow evidence in PR descriptions to avoid checkpoint-only rebuild loops. No identities, result imports, verified status, privacy or outreach changes. Rotate through source-recovery candidates and regional clubs; remaining Welsh school districts need district-specific descriptions, not invented conventional club programmes."
   ],
   "sourceGaps": [
     {
       "slug": "guernsey-ac",
       "url": "http://www.guernseyathletics.org.gg/",
-      "status": "deferred",
-      "reason": "The listed homepage returned HTTP 200 with no readable body. No new biography was added. Locate a usable official source before proceeding."
+      "status": "resolved-in-batch33",
+      "reason": "Official history, membership and contact pages recovered in batch33; biography and training address are published. See PR742."
     },
     {
       "slug": "cork-triathlon-club",
@@ -597,8 +596,8 @@
     {
       "slug": "belfast-ormeau-runners",
       "url": "https://www.ormeaurunners.co.uk",
-      "status": "club-site-502",
-      "reason": "Club site unavailable. Opened organiser Eventbrite listing supports an August 2026 Fleadh Run but not a full history or current joining programme. Deferred."
+      "status": "superseded-by-batch34-review",
+      "reason": "Club site unavailable. Opened organiser Eventbrite listing supports an August 2026 Fleadh Run but not a full history or current joining programme. Deferred. See batch34 profile and latest qualified source-gap entry; this earlier retrieval failure is not the current biography status."
     },
     {
       "slug": "athletics-ireland-annalee-a-c",
@@ -1478,9 +1477,10 @@
     {
       "slug": "ennis-triathlon-club",
       "url": "https://www.ennistriclub.com/",
-      "status": "unavailable-source",
+      "status": "superseded-by-batch34-review",
       "note": "HTTP timed out and HTTPS returned 502. Historical search results not opened/read and therefore not used.",
-      "checkedAt": "2026-10-14"
+      "checkedAt": "2026-10-14",
+      "reason": " See batch34 profile and latest qualified source-gap entry; this earlier retrieval failure is not the current biography status."
     },
     {
       "slug": "city-of-preston-triathlon-club-for-juniors",
@@ -1639,9 +1639,10 @@
     {
       "slug": "mallow-tc",
       "url": "https://www.mallowtriclub.ie/",
-      "status": "unavailable-source",
+      "status": "superseded-by-batch34-review",
       "note": "Homepage and non-www retry timed out.",
-      "checkedAt": "2026-10-14"
+      "checkedAt": "2026-10-14",
+      "reason": " See batch34 profile and latest qualified source-gap entry; this earlier retrieval failure is not the current biography status."
     },
     {
       "slug": "new-ross-triathlon-club",
@@ -2309,7 +2310,7 @@
       "reason": "www host fails TLS hostname validation; non-www official host opens normally. No TLS protections bypassed."
     },
     {
-      "slug": "island-triathlon-club",
+      "slug": "island-tc",
       "url": "",
       "status": "deferred",
       "reason": "Revisit found503/expired hosting account; no current programme inferred."
@@ -2321,7 +2322,7 @@
       "reason": "Revisit returned502; no new biography without substantive primary pages."
     },
     {
-      "slug": "hi-elbow-triathlon-club",
+      "slug": "hi-elbow-tc",
       "url": "",
       "status": "deferred",
       "reason": "Accessible page contains little beyond contact form and swim/bike/run; insufficient substance for full biography."
@@ -2331,6 +2332,66 @@
       "url": "",
       "status": "deferred",
       "reason": "Accessible pages retain2021 cancellation and2022 navigation; current training programme remains unconfirmed."
+    },
+    {
+      "slug": "guildford-and-godalming-ac",
+      "url": "https://ggac.co.uk/guildford-godalming-athletic-club/about-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club history has inconsistent arithmetic between1924 and1950, speculative pre1924 continuity and an inaccurate Adelle Tracey birth-country statement; these claims are omitted. Current club merger is1952. Secretary page has split/mismatched mailto links; consistent displayed secretary@ggac.co.uk is used."
+    },
+    {
+      "slug": "handforth-wilmslow-alderley",
+      "url": "https://hwaaclub.wixsite.com/wilmslow-athletics/training",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Detailed timetable is dated2019; current homepage supports Thursday venue/age range, but exact group times are not republished."
+    },
+    {
+      "slug": "harpenden-arrows",
+      "url": "https://www.harpendenarrows.co.uk/web/index.php/437-club-info-2025",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Venue move from St George’s School to Harpenden Leisure Centre has ambiguous year. Exact address cleared pending confirmation; membership form remains available."
+    },
+    {
+      "slug": "halstead-rrc",
+      "url": "https://halsteadroadrunners.org.uk/contact-us/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official .org.uk website recovered. CO9 2ET and CO9 2EN both appear; postcode unresolved. Emails are masked and not guessed. No junior section currently according to About page."
+    },
+    {
+      "slug": "great-bentley-running-club",
+      "url": "https://gbrc.org.uk/about/joining-the-club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Current joining page excludes under18 membership; it takes precedence over generic all-ages welcome copy."
+    },
+    {
+      "slug": "mallow-tc",
+      "url": "https://www.mallowtriclub.ie/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official site recovered; pool renovation wording says until next May without a year. No current pool reopening or exact weekly timetable inferred."
+    },
+    {
+      "slug": "ennis-triathlon-club",
+      "url": "https://www.triathlonireland.com/Get-Involved/Find-a-Club/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Club website unavailable; governing-body directory and primary2016/2019 club reports support profile. Current venue/timetable and exact founding year remain unconfirmed."
+    },
+    {
+      "slug": "belfast-ormeau-runners",
+      "url": "https://yoursay.belfastcity.gov.uk/south-belfast-mmew-2024/widgets/86588/faqs",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official website unavailable. Club’s2024 council-project submission and member’s2021 parkrun account support historically qualified profile. Current contacts, timetable and affiliation not inferred; project funding request is not evidence of an award."
+    },
+    {
+      "slug": "hartlepool-burn-road-harriers",
+      "url": "https://www.hartlepoolburnroad.co.uk",
+      "status": "deferred",
+      "reason": "Website retrieval again502; remains deferred and separate from Hartlepool Athletics Club."
+    },
+    {
+      "slug": "hamwic-harriers-running-club",
+      "url": "https://hamwicharriers.co.uk/contact/",
+      "status": "profile-added-with-qualified-gap",
+      "reason": "Official pages disagree between15 and16 as minimum age. Exact age omitted; contact form and official social links available."
     }
   ],
   "coverageReviewNotes": [
@@ -2363,26 +2424,27 @@
     "Batch30:20 English profiles rotating Yorkshire, the North East, Midlands, London and South West, spanning road/fell running, track/field, university sport, sprint coaching and triathlon.12 historical/founding/coaching associations,18 contact/social records changed(12 new). Websites recovered for DK and Chambers; addresses and postcodes corrected without renewing unrelated directory dates. Ordinary non-English candidates remain completed or source-blocked; eight Welsh school-district entities need an entity-type review. No athlete identity, result, privacy, verification, registration or metadata implementation changed.",
     "Batch31 rotates21 English clubs across East Anglia, the North West, North East, London, Surrey, Dorset, Midlands and Bristol: masters, women’s running, fell running, juniors and triathlon.8 historical associations;21 contact/social records changed,11 new;18 net contacts and20 net social links. Other national candidates remain completed/source-blocked or require school-district entity review. Existing directory comparison dates are not renewed.",
     "Batch32:20 English regional profiles including university, women’s running, juniors, community groups and triathlon. Six historical founder/coach associations;20 contact/social records updated(10new),13 net contacts and14 net social links. Other nations remain completed/source-blocked or school-district entities requiring review; next queue includes Guernsey. Directory comparison dates unchanged.",
-    "Batch33:20 profiles spanning Guernsey, Wales, nationwide GoodGym Race Team, two explicitly global clubs, and English regional running/athletics. Seven historical founder/athlete associations;20 contact/social records updated(8new),23 net contacts and11 net social links. Source dates retained for unchanged directory fields. More NI clubs revisited without padding thin/unavailable evidence."
+    "Batch33:20 profiles spanning Guernsey, Wales, nationwide GoodGym Race Team, two explicitly global clubs, and English regional running/athletics. Seven historical founder/athlete associations;20 contact/social records updated(8new),23 net contacts and11 net social links. Source dates retained for unchanged directory fields. More NI clubs revisited without padding thin/unavailable evidence.",
+    "Batch34:19 new profiles across16 English clubs, Mallow and Ennis in Ireland, and Ormeau in Northern Ireland. Seven historical connections;17 website-contact records changed(9new),14 net contacts and13 social links. Hastings was already complete and excluded. No full-directory manual review or athlete identity claims."
   ],
-  "previousPullRequest": 737,
+  "previousPullRequest": 742,
   "productionAuthorization": {
     "date": "2026-10-14",
     "instruction": "can you publish all and continue please",
     "releasePullRequest": 680
   },
   "release": {
-    "previousPullRequest": 737,
-    "mergeCommit": "a66da8db6fa3c065cfc369fd9b44cd0496d69fee",
+    "previousPullRequest": 742,
+    "mergeCommit": "e2667633e037d242fe5692ad86feea7ea3f56ddc",
     "projectId": "prj_lbw3shClq8n6SThzl8i825UPBp6I",
     "team": "athrecs-holding-page-set-up",
-    "status": "PR737 exact production deployment READY; all20 changed live pages passed full biography, contacts/socials, flag, registration and metadata checks on14October2026.",
-    "lastConfirmedLiveCommit": "a66da8db6fa3c065cfc369fd9b44cd0496d69fee",
-    "lastConfirmedLiveDeployment": "dpl_GcJXPfwvMeSPVbUj36Xyme1yr3CJ",
-    "lastConfirmedLiveProfiles": 626,
-    "lastConfirmedLiveNotableEntries": 266,
-    "mainProfilesAtStart": 626,
-    "clubProfilesWorkflow": 38618739617,
-    "qualityGateWorkflow": 38618739706
+    "status": "PR742 exact production READY; all20 changed live pages passed biography/contact/location/flag/registration/metadata checks on14October2026.",
+    "lastConfirmedLiveCommit": "e2667633e037d242fe5692ad86feea7ea3f56ddc",
+    "lastConfirmedLiveDeployment": "dpl_A9jS9K3PeX6zsLHMJYExaM3ZaM6N",
+    "lastConfirmedLiveProfiles": 646,
+    "lastConfirmedLiveNotableEntries": 273,
+    "mainProfilesAtStart": 646,
+    "clubProfilesWorkflow": 38628413159,
+    "qualityGateWorkflow": 38628413512
   }
 }
