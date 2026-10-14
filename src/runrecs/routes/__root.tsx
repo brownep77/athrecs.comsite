@@ -6,6 +6,7 @@ import {
   useRouterState,
 } from "@tanstack/react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { SiteAnalytics } from "@/components/analytics/SiteAnalytics";
 import { AthleteAuthDialog } from "@/components/auth/AthleteAuthDialog";
 import { isSiteLanguage } from "@/lib/athrecs/country-sites";
@@ -83,6 +84,7 @@ function RootComponent() {
           <AthleteAuthDialog />
           <SiteAnalytics />
         </QueryClientProvider>
+        <SpeedInsights />
         <Scripts />
       </body>
     </html>
