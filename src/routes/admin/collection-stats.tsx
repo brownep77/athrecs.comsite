@@ -1,11 +1,11 @@
 import { useState } from "react";
+import { WebsiteStats } from "@/components/staff/WebsiteStats";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { BarChart3, Download, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCollectionStats } from "@/lib/collection-stats/api";
 import { defaultStatsFilters, statsCsv, type StatsFilters } from "@/lib/collection-stats/core";
-import { WebsiteStats } from "@/components/staff/WebsiteStats";
 
 export const Route = createFileRoute("/admin/collection-stats")({
   validateSearch: (search: Record<string, unknown>): { section: "collection" | "website" } => ({
@@ -29,10 +29,13 @@ const raceGroups = {
   detail: "Sport, distance, country and county",
 };
 const profileGroups = {
+  sport: "Sport",
   gender: "Gender",
+  nationality: "Nationality",
+  sportGenderNationality: "Sport, gender and nationality",
   country: "Country",
   county: "Country and county",
-  detail: "Gender, country and county",
+  detail: "Sport, gender, nationality and location",
 };
 
 function CollectionStatsPage() {
@@ -63,10 +66,12 @@ function CollectionStatsPage() {
         : [raceGroups[filters.raceGroup]];
   const profileColumns =
     filters.profileGroup === "detail"
-      ? ["Gender", "Country", "County"]
-      : filters.profileGroup === "county"
-        ? ["Country", "County"]
-        : [profileGroups[filters.profileGroup]];
+      ? ["Sport", "Gender", "Nationality", "Country", "County"]
+      : filters.profileGroup === "sportGenderNationality"
+        ? ["Sport", "Gender", "Nationality"]
+        : filters.profileGroup === "county"
+          ? ["Country", "County"]
+          : [profileGroups[filters.profileGroup]];
   const raceRows =
     data?.races.rows.map((row) => [
       ...raceColumns.map(
@@ -78,7 +83,8 @@ function CollectionStatsPage() {
   const profileRows =
     data?.profiles.rows.map((row) => [
       ...profileColumns.map(
-        (column) => row[column.toLowerCase() as "gender" | "country" | "county"],
+        (column) =>
+          row[column.toLowerCase() as "sport" | "gender" | "nationality" | "country" | "county"],
       ),
       row.profiles,
       row.publicProfiles,
@@ -129,7 +135,6 @@ function CollectionStatsPage() {
           Website traffic & Google
         </Button>
       </nav>
-
       {section === "website" ? (
         <WebsiteStats />
       ) : (
@@ -290,16 +295,28 @@ function CollectionStatsPage() {
                     Athlete profiles
                   </h2>
                   <p className="mt-1 text-sm text-slate-600">
-                    Count each stored athlete profile once, regardless of how many results or sports
-                    it has.
+                    Explore athletes by sport, gender and nationality, or by their recorded
+                    location. The matching total counts each athlete profile once.
                   </p>
                 </div>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  <Select
+                    label="Profile sport"
+                    value={filters.profileSport}
+                    values={data.options.profileSports}
+                    onChange={(v) => change("profileSport", v)}
+                  />
                   <Select
                     label="Profile gender"
                     value={filters.gender}
                     values={data.options.genders}
                     onChange={(v) => change("gender", v)}
+                  />
+                  <Select
+                    label="Profile nationality"
+                    value={filters.nationality}
+                    values={data.options.nationalities}
+                    onChange={(v) => change("nationality", v)}
                   />
                   <Select
                     label="Profile country"
@@ -326,6 +343,8 @@ function CollectionStatsPage() {
                     setFilters((f) => ({
                       ...f,
                       gender: "",
+                      profileSport: "",
+                      nationality: "",
                       profileCountry: "",
                       profileCounty: "",
                       profileGroup: "gender",
@@ -339,6 +358,12 @@ function CollectionStatsPage() {
                   {number(data.profiles.totals.publicProfiles)} marked public ·{" "}
                   {number(data.profiles.totals.added7d)} added in 7 days
                 </p>
+                <p className="text-xs leading-5 text-slate-600">
+                  Athletes with several recorded sports appear once in each relevant sport row.
+                  Those rows overlap; the matching total stays distinct. Sport uses saved results,
+                  source histories and declared or evidenced profile sports, including unpublished
+                  histories. This classification does not verify a result or an athlete’s identity.
+                </p>
                 <StatsTable
                   key={`profiles-${JSON.stringify(filters)}`}
                   title="Profile collection breakdown"
@@ -350,10 +375,13 @@ function CollectionStatsPage() {
                 />
                 <Gaps title="Missing profile details in this selection" gaps={data.profiles.gaps} />
                 <p className="text-xs leading-5 text-slate-600">
-                  Country and county are the profile’s recorded location, not nationality or club
-                  location. Counts include existing imported values; they do not certify those
-                  locations. “Marked public” describes the stored visibility, not search indexing or
-                  account ownership. Profiles without a saved location or gender remain in Unknown.
+                  Nationality uses the linked athlete’s declaration first, then the profile
+                  declaration, recorded source observation or stored nation. Equivalent codes and
+                  names share a display label (for example, GBR and British → United Kingdom);
+                  original values stay unchanged. Nationality is never inferred from residence or
+                  club. Country and county remain location fields. Missing details stay in Unknown.
+                  “Marked public” describes stored visibility, not search indexing or account
+                  ownership.
                 </p>
               </section>
               <p className="text-xs leading-5 text-slate-600">

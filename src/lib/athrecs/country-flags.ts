@@ -666,6 +666,32 @@ const abbreviations: Readonly<Record<string, string>> = {
   "GB-WLS": "WAL",
 };
 
+/** Display-only alias map for aggregate reports; never changes stored nationality. */
+export function countryNameAliases(): Record<string, string> {
+  const keys = new Set([
+    ...regions.keys(),
+    ...Object.keys(aliases),
+    "england",
+    "english",
+    "eng",
+    "gb-eng",
+    "scotland",
+    "scottish",
+    "sco",
+    "sct",
+    "gb-sct",
+    "wales",
+    "welsh",
+    "wal",
+    "wls",
+    "gb-wls",
+    "northern ireland",
+    "nir",
+    "gb-nir",
+  ]);
+  return Object.fromEntries([...keys].map((key) => [key, countryFlag(key).name]));
+}
+
 /** Stable sporting abbreviations, independent of the source spelling or alias. */
 export function countryAbbreviation(value: string | null | undefined): string {
   const flag = countryFlag(value);
