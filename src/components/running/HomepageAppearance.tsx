@@ -134,7 +134,7 @@ export function HomepageColourPicker() {
         <span className="sr-only">Page colours</span>
         <ChevronDown className="size-3 group-open:rotate-180" aria-hidden="true" />
       </summary>
-      <fieldset className="absolute right-0 top-full z-50 mt-2 max-h-[calc(100dvh-7rem)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-border bg-surface p-3 shadow-xl">
+      <fieldset className="absolute right-0 top-full z-50 mt-2 max-h-[calc(100dvh-12rem)] w-[min(20rem,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-border bg-surface p-3 shadow-xl sm:max-h-[calc(100dvh-8rem)] lg:max-h-[calc(100dvh-6rem)]">
         <legend className="px-2 text-sm font-semibold text-fg">Choose your colour scheme</legend>
         <div className="grid gap-2">
           {HOMEPAGE_THEME_IDS.map((id) => {
