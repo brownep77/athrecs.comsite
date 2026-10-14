@@ -39,6 +39,8 @@ import { trainingAndCommunityProfiles } from "./club-profiles-ad.ts";
 
 import { fenlandAndFellProfiles } from "./club-profiles-ae.ts";
 
+import { communityAndUniversityProfiles } from "./club-profiles-af.ts";
+
 export type ClubProfile = {
   summary: string;
   biography: string[];
@@ -55,6 +57,7 @@ export type ClubProfile = {
 // Editorial club facts only. These associations do not create or claim athlete accounts.
 // Sources were opened and read; unknown dates, venues and membership periods stay empty.
 export const clubProfiles: Record<string, ClubProfile> = {
+  ...communityAndUniversityProfiles,
   ...fenlandAndFellProfiles,
   ...trainingAndCommunityProfiles,
   ...regionalRunningCommunityProfiles,
@@ -808,4 +811,4 @@ export const clubProfiles: Record<string, ClubProfile> = {
   },
 };
 
-export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v31";
+export const CLUB_PROFILE_VERSION = "club-address-contact-editorial-2026-10-14-v32";
