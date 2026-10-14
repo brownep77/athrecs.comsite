@@ -107,16 +107,21 @@ class ExistingResultTests(unittest.TestCase):
         self.assertTrue(reconciler.reconcile(self.candidate,[self.record])['conflicts'])
         self.assertNotIn('eventSlug',self.performance)
 
-    def test_fifteen_kilometre_overlap_keeps_one_event_and_restrictions(self):
-        self.performance['discipline']='15 Kilometres Road'
-        self.candidate['originalRows'][0]['discipline']='15 Kilometres Road'
-        self.record.update(distance_code='15K',event_slug='synthetic-15k')
-        review=reconciler.reconcile(self.candidate,[self.record])
-        self.assertFalse(review['conflicts'])
-        self.assertEqual(len(review['links']),1)
-        self.assertEqual(self.performance['eventSlug'],'synthetic-15k')
-        self.assertTrue(self.performance['profileExcluded'])
-        self.assertEqual(self.performance['verificationStatus'],'unverified')
+    def test_long_road_overlap_keeps_one_event_and_restrictions(self):
+        for km in [15,20]:
+            with self.subTest(kilometres=km):
+                candidate=copy.deepcopy(self.candidate)
+                performance=candidate['history']['performances'][0]
+                performance['discipline']=f'{km} Kilometres Road'
+                candidate['originalRows'][0]['discipline']=f'{km} Kilometres Road'
+                record=copy.deepcopy(self.record)
+                record.update(distance_code=f'{km}K',event_slug=f'synthetic-{km}k')
+                review=reconciler.reconcile(candidate,[record])
+                self.assertFalse(review['conflicts'])
+                self.assertEqual(len(review['links']),1)
+                self.assertEqual(performance['eventSlug'],f'synthetic-{km}k')
+                self.assertTrue(performance['profileExcluded'])
+                self.assertEqual(performance['verificationStatus'],'unverified')
 
     def test_distance_conflict_blocks_even_when_ids_date_mark_and_place_match(self):
         self.record['distance_code']='15K'

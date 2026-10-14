@@ -15,6 +15,7 @@ import urllib.parse
 ROAD = {'Half': 'Half Marathon', 'Marathon': 'Marathon',
         '10K': '10 Kilometres Road', '5K': '5 Kilometres Road',
         '15K': '15 Kilometres Road',
+        '20K': '20 Kilometres Road',
         '10 Miles': '10 Miles Road'}
 
 
